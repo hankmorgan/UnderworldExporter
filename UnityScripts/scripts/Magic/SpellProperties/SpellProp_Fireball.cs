@@ -30,12 +30,7 @@ public class SpellProp_Fireball : SpellProp {
 		//A big old explosion
 		for (int i=0;i<3;i++)
 		{//The flames
-			Vector3 pos = tf.position+(Random.insideUnitSphere*0.5f);
-			GameObject hitimpact = new GameObject("_impact");
-			hitimpact.transform.position=pos;//ray.GetPoint(weaponRange/0.7f);
-			hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-			Impact imp= hitimpact.AddComponent<Impact>();
-			imp.go(SecondaryStartFrame, SecondaryEndFrame);
+			Impact.SpawnHitImpact(tf.name+ "_impact",tf.position+(Random.insideUnitSphere*0.5f),SecondaryStartFrame, SecondaryEndFrame);	
 		}
 		foreach (Collider Col in Physics.OverlapSphere(tf.position,splashDistance))
 		{

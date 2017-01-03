@@ -340,7 +340,7 @@ public class UWCharacter : Character {
 	{//Casts a spell on right click.
 		if(
 			(Input.GetMouseButtonDown(1)) 
-			 && (WindowDetectUW.CursorInMainWindow==true)
+			&& ((WindowDetectUW.CursorInMainWindow==true) || (MouseLookEnabled==true))
 			 && (UWHUD.instance.window.JustClicked==false)
 			&& ((PlayerCombat.AttackCharging==false)&&(PlayerCombat.AttackExecuting==false))
 		 )

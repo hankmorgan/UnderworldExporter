@@ -41,7 +41,7 @@ public class MagicProjectile : MonoBehaviour {
 
 			ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
 
-			if (objInt!=null)//Has the proje
+			if (objInt!=null)//Has the projectile hit anything
 			{
 				//Special code for magic spell direct hits.
 				spellprop.onHit(objInt);
@@ -52,11 +52,7 @@ public class MagicProjectile : MonoBehaviour {
 				//Create a impact animation to illustrate the collision
 				if(objInt.GetHitFrameStart()>=0)
 				{
-					GameObject myObj = new GameObject();
-					myObj.transform.position=this.transform.position;
-					myObj.transform.parent = GameWorldController.instance.LevelMarker();
-					Impact imp= myObj.gameObject.AddComponent<Impact>();
-					imp.go(objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());													
+					Impact.SpawnHitImpact(this.transform.name + "_impact",objInt.GetImpactPoint(),objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());	
 				}
 			}
 			else
@@ -70,11 +66,8 @@ public class MagicProjectile : MonoBehaviour {
 				else
 				{
 					//Do a miss impact 
-					GameObject myObj = new GameObject();
-					myObj.transform.position=this.transform.position;
-					myObj.transform.parent = GameWorldController.instance.LevelMarker();
-					Impact imp= myObj.gameObject.AddComponent<Impact>();
-					imp.go(spellprop.impactFrameStart, spellprop.impactFrameEnd);					
+					Impact.SpawnHitImpact(this.transform.name + "_impact",this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);	
+				
 				}
 			}			
 			DestroyObject(this.gameObject);

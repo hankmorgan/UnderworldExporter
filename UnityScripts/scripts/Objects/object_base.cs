@@ -622,4 +622,9 @@ public class object_base : UWEBase {
 				return "examine";
 		}
 
+		public virtual Vector3 GetImpactPoint()
+		{
+			return this.gameObject.transform.position;
+		}
+
 }

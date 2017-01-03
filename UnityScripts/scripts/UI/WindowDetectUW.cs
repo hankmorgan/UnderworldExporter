@@ -461,7 +461,8 @@ public class WindowDetectUW : WindowDetect {
 
 								//Added due to unity bug where mouse is offscreen!!!!
 								//UGH!!!
-								if (UWCharacter.InteractionMode!=UWCharacter.InteractionModeAttack)
+								//WHen not in combat or with a readied spell.
+								if ((UWCharacter.InteractionMode!=UWCharacter.InteractionModeAttack) && (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell==""))
 								{
 										if (JustClicked==false)
 										{

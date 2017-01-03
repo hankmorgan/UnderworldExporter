@@ -38,11 +38,9 @@ public class ShrineLava : UWEBase {
 								return;								
 						}
 
-						GameObject hitimpact = new GameObject(objInt.transform.name + "_impact");
-						hitimpact.transform.position=objInt.transform.position;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(40,4);	
+						Impact.SpawnHitImpact(objInt.transform.name + "_impact",objInt.GetImpactPoint(),40,44);		
+
+
 						objInt.consumeObject();
 
 						for (int i=0;i<7;i++)

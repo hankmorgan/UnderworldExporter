@@ -64,4 +64,16 @@ public class Impact : UWEBase {
 			}
 		}		
 	}
+
+	public static void SpawnHitImpact(string ImpactName, Vector3 ImpactPosition, int StartFrame, int EndFrame)
+	{
+		GameObject hitimpact = new GameObject(ImpactName);
+		hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
+		hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
+		Impact imp= hitimpact.AddComponent<Impact>();
+		imp.go(StartFrame,EndFrame);
+		//StartCoroutine( imp.Animate(StartFrame,EndFrame));		
+	}
+
+
 }

@@ -11,7 +11,7 @@ public class Critters : Props {
 
 
 		public int[] Level = new int[64];
-		public int[] AvgHit = new int[64];
+		public int[] AvgHit = new int[64];//Is this defence?????
 		public int[] AttackPower = new int[64];
 		public int[] Remains = new int[64];
 		public int[] Blood = new int[64];

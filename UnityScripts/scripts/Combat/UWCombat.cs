@@ -82,7 +82,7 @@ public class UWCombat : Combat {
 	/// Casts a ray from the centre of the screen in mouselook mode or from the cursor position
 	/// Waits a period of time after the release before casting the ray.
 	/// </summary>
-		public override IEnumerator ExecuteMelee(string StrikeType)
+	public override IEnumerator ExecuteMelee(string StrikeType, float StrikeCharge)
 	{		
 		yield return new WaitForSeconds(0.4f);
 		
@@ -108,56 +108,64 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-										
-					int StrikeBaseDamage=0;
-					if (currWeapon==null)
-					{//Fist 
-							//2	4	3	
-							switch (StrikeType.ToUpper())
-							{
-							case "SLASH":
-								WeaponMelee.getMeleeSlash();break;
-							case "BASH":
-								WeaponMelee.getMeleeBash();break;
-							case "STAB":
-							default:	
-								WeaponMelee.getMeleeStab();break;
-							}
+						int StrikeBaseDamage=0;
+						int HitRollResult=RollForAHitMelee(GameWorldController.instance.playerUW,objInt,currWeapon);
+						if (currWeapon==null)
+						{//Fist 
+								//2	4	3	
+								switch (StrikeType.ToUpper())
+								{
+								case "SLASH":
+									StrikeBaseDamage=WeaponMelee.getMeleeSlash();break;
+								case "BASH":
+									StrikeBaseDamage=WeaponMelee.getMeleeBash();break;
+								case "STAB":
+								default:	
+									StrikeBaseDamage=WeaponMelee.getMeleeStab();break;
+								}
+						}
+						else
+						{
+								switch (StrikeType.ToUpper())
+								{
+								case "SLASH":
+										StrikeBaseDamage=currWeapon.GetSlash();break;
+								case "BASH":
+										StrikeBaseDamage=currWeapon.GetBash();break;
+								case "STAB":
+								default:	
+									StrikeBaseDamage=currWeapon.GetStab();break;
+								}	
+						}
+						//Depending on the hit type the damage will be multiplied by 0(miss), 1 (hit) or 2 (crit) and charge percentage
+						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((int)(StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)),GameWorldController.instance.playerUW.gameObject);
+						
+						///Creates a blood splatter at the point of impact
+						switch (HitRollResult)
+						{
+						case 0: //Miss
+								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),46,50);
+								break;
+						case 1://Hit
+								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
+								break;
+						case 2://Crit
+								Impact.SpawnHitImpact(hit.transform.name + "_impact1",objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
+								Impact.SpawnHitImpact(hit.transform.name + "_impact2", objInt.GetImpactPoint()+Vector3.up*0.1f,objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
+								break;
+						}
+						
+						if (currWeapon!=null)
+						{///Performs the onHit action of the melee weapon.
+							currWeapon.onHit (hit.transform.gameObject);
+						}
 					}
-					else
-					{
-							switch (StrikeType.ToUpper())
-							{
-							case "SLASH":
-									StrikeBaseDamage=currWeapon.GetSlash();break;
-							case "BASH":
-									StrikeBaseDamage=currWeapon.GetBash();break;
-							case "STAB":
-							default:	
-								StrikeBaseDamage=currWeapon.GetStab();break;
-							}	
-					}
-
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(StrikeBaseDamage+ (Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack)/2),GameWorldController.instance.playerUW.gameObject);
-					///Creates a blood splatter at the point of impact
-					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
-					hitimpact.transform.position=hit.point;
-					hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-					Impact imp= hitimpact.AddComponent<Impact>();
-					imp.go(objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());	
-					if (currWeapon!=null)
-					{///Performs the onHit action of the melee weapon.
-						currWeapon.onHit (hit.transform.gameObject);
-					}
-				}
 				else
 				{
 					///If a miss does a miss impact and potentially damages the weapon.
-					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
-					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
-					hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-					Impact imp= hitimpact.AddComponent<Impact>();
-					StartCoroutine( imp.Animate(46,50));
+
+					Impact.SpawnHitImpact(hit.transform.name + "_impact", hit.point,46,50);
+
 					if (currWeapon!=null)
 					{
 						currWeapon.onHit (null);
@@ -173,6 +181,7 @@ public class UWCombat : Combat {
 				currWeapon.onHit (null);
 			}
 		}
+
 		///Ends the attack and wait for a period before allowing another action.
 		AttackExecuting=false;
 		UWHUD.instance.window.UWWindowWait(1.0f);
@@ -208,7 +217,7 @@ public class UWCombat : Combat {
 				string StrikeType=GetStrikeType();
 				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + StrikeType +"_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
-				StartCoroutine(ExecuteMelee(StrikeType));
+				StartCoroutine(ExecuteMelee(StrikeType,Charge));
 			}
 			else
 			{//Ranged attack
@@ -393,4 +402,52 @@ public class UWCombat : Combat {
 			return false;
 		}
 	}
+
+
+	static int RollForAHitMelee(UWCharacter Origin, ObjectInteraction Target, WeaponMelee weap)
+		{
+				//0 =Miss
+				//1 = hit
+				//2 = Crit eventually.
+				int HitScore;
+				int DefenseScore;
+				int WeaponSkill;
+
+				if (weap!=null)
+				{
+						WeaponSkill= Origin.PlayerSkills.GetSkill(weap.GetSkill());		
+				}
+				else
+				{
+						WeaponSkill= Origin.PlayerSkills.GetSkill(Skills.SkillUnarmed);
+				}
+				HitScore=Origin.PlayerSkills.Attack/2+WeaponSkill+ Random.Range(1,5);
+				if (Target.GetComponent<NPC>()!=null)
+				{//Target is an NPC
+						DefenseScore=-1;	//Until I figure out what values drive this, always hit.
+				}
+				else
+				{
+						DefenseScore=-1;//Will always hit an non-npc;
+				}
+
+				if (DefenseScore<=HitScore)
+				{
+						return 1;		
+				}
+				else
+				{
+						return 0;//A Miss
+				}
+
+		}
+
+		static int RollForAHitMelee(NPC Origin, ObjectInteraction Target)
+		{
+				return 1;//Temp NPC will always hit.	
+		}
+
+
+
+
 }

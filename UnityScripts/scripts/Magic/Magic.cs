@@ -1077,13 +1077,9 @@ public class Magic : UWEBase {
 						SpellProp_Poison poison = new SpellProp_Poison();
 						poison.init (EffectID,caster);						
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(poison.impactFrameStart,poison.impactFrameEnd);	
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),poison.impactFrameStart,poison.impactFrameEnd);		
+
+
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 						if (EffectSlot!=-1)
 						{
@@ -1111,13 +1107,8 @@ public class Magic : UWEBase {
 						SpellProp_Curse curse = new SpellProp_Curse();
 						curse.init (EffectID,caster);				
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(curse.impactFrameStart,curse.impactFrameEnd);	
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),curse.impactFrameStart,curse.impactFrameEnd);		
+
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 						if (EffectSlot!=-1)
 						{
@@ -1142,13 +1133,9 @@ public class Magic : UWEBase {
 						SpellProp_Mind mindspell = new SpellProp_Mind();
 						mindspell.init (EffectID,caster);
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+
+
 						if (npc.gameObject.GetComponent<SpellEffectAlly>()!=null)
 						{//Npc already has this effect. Only allow one cast.
 								npc.gameObject.GetComponent<SpellEffectAlly>().counter=mindspell.counter;//Restart the counter
@@ -1182,13 +1169,8 @@ public class Magic : UWEBase {
 						SpellProp_Mind mindspell = new SpellProp_Mind();
 						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
-						GameObject hitimpact ;
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+
 						if (npc.gameObject.GetComponent<SpellEffectConfusion>()!=null)
 						{//Npc already has this effect. Only allow one cast.
 								npc.gameObject.GetComponent<SpellEffectConfusion>().counter=5;//Restart the counter
@@ -1220,13 +1202,8 @@ public class Magic : UWEBase {
 						SpellProp_Mind mindspell = new SpellProp_Mind();
 						mindspell.init (EffectID,caster);							
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+
 						if (npc.gameObject.GetComponent<SpellEffectFear>()!=null)
 						{//Npc already has this effect. Only allow one cast.
 								npc.gameObject.GetComponent<SpellEffectFear>().counter=5;//Restart the counter
@@ -1259,13 +1236,8 @@ public class Magic : UWEBase {
 						SpellProp_Mind mindspell = new SpellProp_Mind();
 						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 						if (EffectSlot!=-1)
 						{
@@ -1293,13 +1265,8 @@ public class Magic : UWEBase {
 						SpellProp_Mind mindspell = new SpellProp_Mind();
 						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
-						GameObject hitimpact ; 
-						hitimpact= new GameObject(npc.transform.name + "_impact");
-						hitimpact.transform.position= npc.transform.position;
-						hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
-						hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);
+						Impact.SpawnHitImpact(npc.transform.name + "_impact",npc.GetImpactPoint(),mindspell.impactFrameStart,mindspell.impactFrameEnd);		
+
 						SpellProp_DirectDamage damage = new SpellProp_DirectDamage();
 						damage.init (EffectID,caster);
 						npc.ApplyAttack(damage.BaseDamage,caster);			

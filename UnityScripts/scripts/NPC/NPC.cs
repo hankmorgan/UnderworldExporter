@@ -902,4 +902,9 @@ public class NPC : object_base {
 	{
 		return "talk";
 	}
+
+	public override Vector3 GetImpactPoint ()
+	{
+		return NPC_Launcher.transform.position;
+	}
 }

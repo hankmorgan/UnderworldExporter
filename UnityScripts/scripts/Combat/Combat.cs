@@ -65,7 +65,7 @@ public class Combat : MonoBehaviour {
 	/// <summary>
 	/// Executes the melee attack after the attack has been released.
 	/// </summary>
-	public virtual IEnumerator ExecuteMelee(string StrikeType)
+	public virtual IEnumerator ExecuteMelee(string StrikeType, float StrikeCharge)
 	{
 		yield break;
 	}
