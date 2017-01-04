@@ -21,8 +21,13 @@ public class Critters : Props {
 		public int[] Poison = new int[64];
 		public int[] Category = new int[64];
 		public int[] EquipDamage = new int[64];
-		public int[] ProbValue = new int[64];
-		public int[] ProbPercent = new int[64];
+		public int[] ProbValue1 = new int[64];
+		public int[] ProbPercent1 = new int[64];
+		public int[] ProbValue2 = new int[64];
+		public int[] ProbPercent2 = new int[64];
+		public int[] ProbValue3 = new int[64];
+		public int[] ProbPercent3 = new int[64];
+
 		public int[] Exp=new int[64];
 
 		/// <summary>
@@ -47,7 +52,7 @@ public class Critters : Props {
 										string[] entries = line.Split(' ');
 										if (entries.Length > 0)
 										{
-												Level[i] = int.Parse(entries[0]);
+												Level[i] = int.Parse(entries[0]);//This affects how hard they are to kill
 												AvgHit[i] = int.Parse(entries[1]);
 												AttackPower[i] = int.Parse(entries[2]);
 												Remains[i] = int.Parse(entries[3]);
@@ -58,9 +63,13 @@ public class Critters : Props {
 												Poison[i] = int.Parse(entries[8]);
 												Category[i] = int.Parse(entries[9]);
 												EquipDamage[i] = int.Parse(entries[10]);
-												ProbValue[i] = int.Parse(entries[11]);
-												ProbPercent[i] = int.Parse(entries[12]);
-												Exp[i] = int.Parse(entries[13]);
+												ProbValue1[i] = int.Parse(entries[11]);
+												ProbPercent1[i] = int.Parse(entries[12]);
+												ProbValue1[i] = int.Parse(entries[13]);
+												ProbPercent1[i] = int.Parse(entries[14]);
+												ProbValue1[i] = int.Parse(entries[15]);
+												ProbPercent1[i] = int.Parse(entries[16]);
+												Exp[i] = int.Parse(entries[17]);
 												i++;
 										}
 								}

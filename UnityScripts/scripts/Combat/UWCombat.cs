@@ -424,6 +424,8 @@ public class UWCombat : Combat {
 				HitScore=Origin.PlayerSkills.Attack/2+WeaponSkill+ Random.Range(1,5);
 				if (Target.GetComponent<NPC>()!=null)
 				{//Target is an NPC
+						//Need to calculate this based on npc level
+
 						DefenseScore=-1;	//Until I figure out what values drive this, always hit.
 				}
 				else

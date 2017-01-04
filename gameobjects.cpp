@@ -2395,10 +2395,10 @@ fprintf(LOGFILE, "\n\tName\tAmmo\tDurability");
 */
 j=64;
 	fprintf(LOGFILE, "\nAddress is %d\nCritters\n", addressPtr);
-	fprintf(LOGFILE, "\nLevel\tAvgHit\tAttackPower\tRemains Body\tRemains Blood\tGeneralType\tPassive\tSpeed\tPoison\tCategory\tEquipDamage\tProb Value\tProb Percent\tExp\t73");
+	fprintf(LOGFILE, "\nName\tLevel\tAvgHit\tAttackPower\tRemainsBody\tRemainsBlood\tGeneralType\tPassive\tSpeed\tPoison\tCategory\tEquipDamage\tProbValue1\tProbPercent1\tProbValue2\tProbPercent2\tProbValue3\tProbPercent3\tExp\t73");
 	for (int i = 0; i < 64; i++)
 		{//Critters
-		//fprintf(LOGFILE, "\n%s", objectMasters[j].desc);
+	//	fprintf(LOGFILE, "\n%s", objectMasters[j].desc);
 		fprintf(LOGFILE, "\n%d", getValAtAddress(obj_dat, addressPtr + 0, 8));//Level
 		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 1, 8));
 		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 2, 8));
@@ -2417,8 +2417,16 @@ j=64;
 		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x10, 8));//Category
 		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x11, 8));//Equipment damage
 		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x12, 8));//?
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x13, 16));//Probability
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x15, 8));//Probab
+
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x13, 16));//Probability1
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x15, 8));//Probab1
+
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x16, 16));//Probability2
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x18, 8));//Probab2
+
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x19, 16));//Probability3
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x1B, 8));//Probab3
+
 		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x28, 16));//Exp
 		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x2F, 8));
 		addressPtr = addressPtr + 48;

@@ -18,11 +18,11 @@ public class NPC : object_base {
   	 //Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
 	public const int AI_RANGE_MOVE = 10 ;
-	public const int AI_RANGE_DEATH = 100 ;
-	public const int AI_RANGE_ATTACK_BASH = 1000 ;
-	public const int AI_RANGE_ATTACK_SLASH = 2000 ;
-	public const int AI_RANGE_ATTACK_THRUST = 3000 ;
-	public const int AI_RANGE_COMBAT_IDLE = 4000 ;
+	//public const int AI_RANGE_DEATH = 100 ;
+	//public const int AI_RANGE_ATTACK_BASH = 1000 ;
+	//public const int AI_RANGE_ATTACK_SLASH = 2000 ;
+	//public const int AI_RANGE_ATTACK_THRUST = 3000 ;
+	//public const int AI_RANGE_COMBAT_IDLE = 4000 ;
 	
 	public const int AI_ANIM_IDLE_FRONT = 1;
 	public const int AI_ANIM_IDLE_FRONT_RIGHT = 2;
@@ -47,12 +47,14 @@ public class NPC : object_base {
 	public const int AI_ANIM_ATTACK_SLASH =2000;
 	public const int AI_ANIM_ATTACK_THRUST =3000;
 	public const int AI_ANIM_COMBAT_IDLE =4000;
-
+	public const int AI_ANIM_ATTACK_SECONDARY =5000;
 	///Anim range defines which animation set to play.
 	///Multiple of 10 for dividing animations
 	///Angle index * Anim Range give AI_ANIM_X value to pick animation
 	public int AnimRange=1;
 	
+		public int CalcFacingForDebug;
+
 	/// Object ID for the NPC
 	public string NPC_ID;
 	
@@ -66,7 +68,7 @@ public class NPC : object_base {
 	public int currentState=-1;
 
 	/// Thinks this has to do with changing the NPC on the fly
-	private string oldNPC_ID;
+	//private string oldNPC_ID;
 	
 	/// The animation index the NPC is facing
 	private int facingIndex;
@@ -154,7 +156,7 @@ public class NPC : object_base {
 	public int SpellIndex; 	
 
 	void Awake () {
-		oldNPC_ID=NPC_ID;
+		//oldNPC_ID=NPC_ID;
 		anim=GetComponentInChildren<Animator>();
 	}
 
@@ -369,9 +371,9 @@ public class NPC : object_base {
 					case 5://Attack target
 					case 9:
 							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-							Vector3 AB = GameWorldController.instance.playerUW.transform.position-this.transform.position;
+							Vector3 AB = gtarg.transform.position -this.transform.position;
 							//Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-							Vector3 Movepos = gtarg.transform.position + (0.31f * AB.normalized) ;
+							Vector3 Movepos = gtarg.transform.position + (0.5f * AB.normalized) ;
 							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 							break;
 
@@ -384,7 +386,7 @@ public class NPC : object_base {
 								if (gtarg!=null)
 								{
 									Vector3 ABf = gtarg.transform.position-this.transform.position;
-									Vector3 MoveposF = gtarg.transform.position + (0.31f * ABf.normalized) ;
+									Vector3 MoveposF = gtarg.transform.position + (0.5f * ABf.normalized) ;
 									ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
 									ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
 								
@@ -600,11 +602,11 @@ public class NPC : object_base {
 		{
 			anim = GetComponentInChildren<Animator>();
 		}
-		if (NPC_ID!=oldNPC_ID)
-		{
-			currentState=-1;
-			oldNPC_ID=NPC_ID;
-		}
+		//if (NPC_ID!=oldNPC_ID)
+		//{
+		//	currentState=-1;
+		//	oldNPC_ID=NPC_ID;
+		//}
 		//Get the relative vector between the player and the npc.
 		direction = GameWorldController.instance.playerUW.gameObject.transform.position - this.gameObject.transform.position;
 		//Convert the direction into an angle.
@@ -640,9 +642,30 @@ public class NPC : object_base {
 		{
 			CalcedFacing=8-CalcedFacing;
 		}
-		
+	
 		//Calculate an animation index from the facing and the animation range.
-		CalcedFacing=(CalcedFacing+1)*AnimRange;
+				//0=front
+				//1=frontright
+				//7=frontleft
+
+				CalcFacingForDebug=CalcedFacing;
+				if (
+						((AnimRange== AI_ANIM_ATTACK_BASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+						||
+						((AnimRange== AI_ANIM_ATTACK_SLASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+						||
+						((AnimRange== AI_ANIM_ATTACK_THRUST) &&  (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+						||
+						((AnimRange== AI_ANIM_COMBAT_IDLE) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+				)
+				{
+					CalcedFacing=(CalcedFacing+1)*1;//Use an idle animation if we can't see the attack
+				}
+				else
+				{
+					CalcedFacing=(CalcedFacing+1)*AnimRange;				
+				}
+		
 		
 		//play the calculated animation.
 		switch (CalcedFacing)
@@ -741,6 +764,8 @@ public class NPC : object_base {
 				playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
 			case AI_ANIM_COMBAT_IDLE:
 				playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
+			case AI_ANIM_ATTACK_SECONDARY:
+				playAnimation (NPC_ID +"_secondary",AI_ANIM_ATTACK_SECONDARY);break;
 			}
 		}
 			break;
@@ -843,10 +868,20 @@ public class NPC : object_base {
 		{
 			return;
 		}
-		float weaponRange=1.0f;
+		float weaponRange=1.5f;
 
-		//NPC tries to raycast at the player.
-		Ray ray= new Ray(NPC_Launcher.transform.position,gtarg.transform.position-NPC_Launcher.transform.position);
+		//NPC tries to raycast at the player or object
+		
+		Vector3 TargetingPoint;
+		if (gtarg.name=="_Gronk")
+		{//Try and hit the player
+			TargetingPoint=GameWorldController.instance.playerUW.transform.position;
+		}
+		else
+		{//Trying to hit an object						
+			TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
+		}
+		Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
