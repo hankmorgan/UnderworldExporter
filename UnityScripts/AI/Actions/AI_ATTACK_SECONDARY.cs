@@ -5,7 +5,7 @@ using RAIN.Action;
 using RAIN.Core;
 
 [RAINAction]
-public class AI_ATTACK_SLASH : RAINAction
+public class AI_ATTACK_SECONDARY : RAINAction
 {
     public override void Start(RAIN.Core.AI ai)
     {
@@ -14,8 +14,26 @@ public class AI_ATTACK_SLASH : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
+				
 		NPC npc=  ai.Body.GetComponent<NPC>();
-		npc.AnimRange=NPC.AI_ANIM_ATTACK_SLASH;
+
+				if (
+						(npc.NPC_ID=="70")
+						||
+						(npc.NPC_ID=="76")
+						||
+						(npc.NPC_ID=="77")
+						||
+						(npc.NPC_ID=="78")
+				)//Only some NPCs have a secondary animation
+				{
+						npc.AnimRange=NPC.AI_ANIM_ATTACK_SECONDARY;				
+				}
+				else
+				{//Default if not an npc with a secondary
+					npc.AnimRange=NPC.AI_ANIM_ATTACK_BASH;
+				}
+		
         return ActionResult.SUCCESS;
     }
 

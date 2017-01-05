@@ -16,7 +16,7 @@ public class AI_COMBAT_IDLE : RAINAction
     {
 		ai.WorkingMemory.SetItem<bool>("isMovingRandom",false);
 		NPC npc=  ai.Body.GetComponent<NPC>();
-		npc.AnimRange=NPC.AI_RANGE_COMBAT_IDLE;
+		npc.AnimRange=NPC.AI_ANIM_COMBAT_IDLE;
 
         return ActionResult.SUCCESS;
     }

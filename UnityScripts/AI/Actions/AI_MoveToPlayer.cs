@@ -36,14 +36,18 @@ public class AI_MoveToPlayer : RAINAction
 			Debug.Log (point + " goes to " + ClosestPoint + " on graph " + graph.GraphName);
 			ai.WorkingMemory.SetItem<Vector3>("MoveTarget",ClosestPoint);*/
 
-			//AB between player and npc
-			Vector3 AB = GameWorldController.instance.playerUW.transform.position-ai.Body.gameObject.transform.position;
+			NPC npc = ai.Body.GetComponent<NPC>();
+			if (npc!=null)
+			{
+				if (npc.gtarg!=null)
+				{
+					//AB between player and npc
+					Vector3 AB = npc.gtarg.transform.position-ai.Body.gameObject.transform.position;
+					Vector3 Movepos = npc.gtarg.transform.position + (0.31f * AB.normalized) ;
+					ai.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);	
+				}	
+			}
 
-			Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-			//Debug.Log("Movepos=" + Movepos);
-
-			//ai.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.transform.position);
-			ai.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 			return ActionResult.SUCCESS;
 		}
 		else

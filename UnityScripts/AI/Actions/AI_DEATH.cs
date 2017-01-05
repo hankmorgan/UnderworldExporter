@@ -15,14 +15,14 @@ public class AI_DEATH : RAINAction
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
 		NPC npc =  ai.Body.GetComponent<NPC>();
-		npc.AnimRange=NPC.AI_RANGE_DEATH;
-		GameObject mus = GameObject.Find ("MusicController");
-		if (mus!=null)
-		{
-			MusicController.LastAttackCounter=0.0f;
-			mus.GetComponent<MusicController>().PlaySpecialClip(mus.GetComponent<MusicController>().VictoryTracks);
+		npc.AnimRange=NPC.AI_ANIM_DEATH;
+		//GameObject mus = GameWorldController.instance.mus;//GameObject.Find ("MusicController");
+		//if (mus!=null)
+		//{
+		MusicController.LastAttackCounter=0.0f;
+		GameWorldController.instance.mus.PlaySpecialClip(GameWorldController.instance.mus.VictoryTracks);
 
-		}
+		//}
         return ActionResult.SUCCESS;
     }
 

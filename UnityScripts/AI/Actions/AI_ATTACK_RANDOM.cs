@@ -18,7 +18,7 @@ public class AI_ATTACK_RANDOM : RAINAction
 		switch (Random.Range(0,3))
 		{
 		case 0:
-			npc.AnimRange=NPC.AI_RANGE_ATTACK_BASH;break;
+			npc.AnimRange=NPC.AI_ANIM_ATTACK_BASH;break;
 		case 1:
 			npc.AnimRange=NPC.AI_ANIM_ATTACK_SLASH;break;
 		case 2:

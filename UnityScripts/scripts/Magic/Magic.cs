@@ -2403,7 +2403,7 @@ public class Magic : UWEBase {
 						//float force = 200.0f;
 						for (int i=0;i<spellprop.noOfCasts;i++)
 						{
-								GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
+								GameObject projectile = CreateMagicProjectile(caster.GetComponent<ObjectInteraction>().GetImpactPoint(), caster,spellprop);
 								LaunchProjectile(projectile,spellprop.Force);
 						}
 						return true;

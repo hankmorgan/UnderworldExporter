@@ -15,7 +15,7 @@ public class AI_ATTACK_BASH : RAINAction
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
 		NPC npc=  ai.Body.GetComponent<NPC>();
-		npc.AnimRange=NPC.AI_RANGE_ATTACK_BASH;
+		npc.AnimRange=NPC.AI_ANIM_ATTACK_BASH;
 		//gob.executeAttack();
         return ActionResult.SUCCESS;
     }

@@ -155,6 +155,8 @@ public class NPC : object_base {
 	///What spell the NPC should cast if they have magicAttack==true
 	public int SpellIndex; 	
 
+	public int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+
 	void Awake () {
 		//oldNPC_ID=NPC_ID;
 		anim=GetComponentInChildren<Animator>();
@@ -187,7 +189,7 @@ public class NPC : object_base {
 			aiR.AI.Body = this.gameObject;
 			ai = aiR;
 			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", GameWorldController.instance.playerUW.gameObject);
-			ai.AI.WorkingMemory.SetItem<bool> ("magicAttack", MagicAttack);
+			ai.AI.WorkingMemory.SetItem<int> ("attackMode", 0);//Default to melee combat
 			ai.AI.Body = this.gameObject;
 			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critter.Speed [objInt ().item_id - 64] / 12.0f));
 			ai.AI.WorkingMemory.SetItem<float> ("Speed", ai.AI.Motor.DefaultSpeed);
@@ -272,6 +274,48 @@ public class NPC : object_base {
 				anim.enabled=false;
 				return;
 			}
+
+				//Decide what attack modes to use
+				switch (NPC_ID)
+				{
+				//Uses ranged weapons
+				case "70":
+				case "76":
+				case "77":
+				case "78":
+						if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=4) && (Ammo>0))
+						{//Ranged attack if far away
+								ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
+						}
+						else
+						{
+								ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+						}
+						break;
+				//Uses magic attacks when not very near
+				case "81":
+				case "106":
+				case "107":
+				case "108":
+				case "109":
+				case "115":
+				case "120":
+				case "122":
+				case "123":						
+						if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
+						{//Ranged attack if far away
+								ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
+								SpellIndex= 81;//Magic arrow for the moment..
+						}
+						else
+						{
+								ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+						}
+						break;
+				default:
+						ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
+						break;
+				}
 
 			//Update the appearance of the NPC
 			UpdateSprite();
@@ -765,7 +809,7 @@ public class NPC : object_base {
 			case AI_ANIM_COMBAT_IDLE:
 				playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
 			case AI_ANIM_ATTACK_SECONDARY:
-				playAnimation (NPC_ID +"_secondary",AI_ANIM_ATTACK_SECONDARY);break;
+				playAnimation (NPC_ID +"_attack_secondary",AI_ANIM_ATTACK_SECONDARY);break;
 			}
 		}
 			break;
@@ -913,6 +957,55 @@ public class NPC : object_base {
 	public void ExecuteMagicAttack()
 	{
 		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex,Magic.SpellRule_TargetVector);
+	}
+
+	/// <summary>
+	/// Executes the ranged attack.
+	/// </summary>
+	public void ExecuteRangedAttack()
+	{
+		Vector3 TargetingPoint;
+		if (gtarg.name=="_Gronk")
+		{//Try and hit the player
+				TargetingPoint=GameWorldController.instance.playerUW.playerCam.transform.position;
+		}
+		else
+		{//Trying to hit an object						
+				TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
+		}
+		Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
+
+				RaycastHit hit = new RaycastHit(); 
+				float dropRange=0.5f;
+				if (!Physics.Raycast(ray,out hit,dropRange))
+				{///Checks No object interferes with the launch
+						float force = 500.0f;
+						GameObject launchedItem ;
+						launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
+
+						//launchedItem = Instantiate(currentAmmo.gameObject);
+						launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
+						launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+
+						launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+						launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+
+						launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
+						GameWorldController.UnFreezeMovement(launchedItem);
+						Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
+						///Apply the force along the direction of the ray that the player has targetted along.
+						launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+						GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
+						myObjChild.transform.position =launchedItem.transform.position;
+						myObjChild.transform.parent =launchedItem.transform;
+						///Appends ProjectileDamage to the projectile to act as the damage delivery method.
+						ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
+						pd.Source=this.gameObject;
+						pd.Damage=10;
+						Ammo--;
+
+				}
+
 	}
 
 	public override string ContextMenuDesc (int item_id)
