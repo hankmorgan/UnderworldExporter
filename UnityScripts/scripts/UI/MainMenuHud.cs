@@ -526,7 +526,7 @@ public class MainMenuHud : GuiBase {
 		public void JourneyOnwards()
 		{
 			GameWorldController.instance.SwitchLevel(0);
-			GameWorldController.instance.playerUW.transform.position= new Vector3(38f, 4f, 2.7f);
+			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			GameWorldController.instance.playerUW.playerController.enabled=true;
 			GameWorldController.instance.playerUW.playerMotor.enabled=false;

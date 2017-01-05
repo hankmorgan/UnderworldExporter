@@ -15,6 +15,9 @@ public class NPC : object_base {
 	public const int AI_ATTITUDE_MELLOW = 2 ;
 	public const int AI_ATTITUDE_FRIENDLY = 3 ;
 
+
+		public float adj=8.0f;
+		public float testforce=500.0f;
   	 //Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
 	public const int AI_RANGE_MOVE = 10 ;
@@ -283,7 +286,7 @@ public class NPC : object_base {
 				case "76":
 				case "77":
 				case "78":
-						if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=4) && (Ammo>0))
+						if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) && (Ammo>0))
 						{//Ranged attack if far away
 								ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
 						}
@@ -925,7 +928,9 @@ public class NPC : object_base {
 		{//Trying to hit an object						
 			TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
 		}
+			
 		Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
+
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
@@ -967,19 +972,20 @@ public class NPC : object_base {
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player
-				TargetingPoint=GameWorldController.instance.playerUW.playerCam.transform.position;
+			TargetingPoint=GameWorldController.instance.playerUW.playerCam.transform.position;
 		}
 		else
 		{//Trying to hit an object						
 				TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
 		}
-		Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
-
+				Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized*adj;
+		//Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
+				Ray ray= new Ray(NPC_Launcher.transform.position,TargetingVector);
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{///Checks No object interferes with the launch
-						float force = 500.0f;
+						float force = testforce;
 						GameObject launchedItem ;
 						launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
 
@@ -992,7 +998,7 @@ public class NPC : object_base {
 
 						launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
 						GameWorldController.UnFreezeMovement(launchedItem);
-						Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
+						Vector3 ThrowDir = TargetingVector;//ray.GetPoint(dropRange) - ray.origin;
 						///Apply the force along the direction of the ray that the player has targetted along.
 						launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 						GameObject myObjChild = new GameObject(launchedItem.name + "_damage");

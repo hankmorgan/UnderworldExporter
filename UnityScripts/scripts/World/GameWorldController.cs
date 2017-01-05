@@ -38,7 +38,7 @@ public class GameWorldController : UWEBase {
 
 	public int LevelNo;
 
-
+		public Vector3 StartPos=new Vector3(38f, 4f, 2.7f);
 
 
 	/// <summary>

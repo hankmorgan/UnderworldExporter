@@ -21,7 +21,7 @@ public class ProjectileDamage : MonoBehaviour {
 
 	void Start()
 	{
-		this.gameObject.layer=LayerMask.NameToLayer ("MapMesh");
+		this.gameObject.layer=LayerMask.NameToLayer ("MagicProjectile");
 		BoxCollider box = this.gameObject.AddComponent<BoxCollider>();
 		box.size = new Vector3(0.3f,0.3f,0.3f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
@@ -35,31 +35,47 @@ public class ProjectileDamage : MonoBehaviour {
 	/// </summary>
 	void OnTriggerEnter(Collider other)
 	{
-		if (hasHit==false)
-		{
-			hasHit=true;
-			StartCoroutine(EndProjectile());
-		}
-		if (LastTarget != other.gameObject.name)
-		{//only get hit once.
-			LastTarget=other.gameObject.name;
-			if (other.gameObject.GetComponent<object_base>()!=null)
-			{
-				other.gameObject.GetComponent<object_base>().ApplyAttack(Damage,Source);
-			}
-			else
-			{
-				if (other.gameObject.GetComponent<UWCharacter>())
-				{
-					other.gameObject.GetComponent<UWCharacter>().ApplyDamage(Damage,Source);
-				}
-				else
-				{//reduce damage on ricochets
-					Damage=Damage/2;
-				}
-			}
-		}
+		HandleImpact(other.gameObject);
 	}
+
+		void OnCollisionEnter(Collision collision) {
+		
+			HandleImpact(collision.gameObject);
+		}
+
+
+		void HandleImpact(GameObject other)
+		{			
+				if ((hasHit==false) && (other.name==Source.name))
+				{//prevent the first hit suiciding the character
+						return;
+				}
+				if (hasHit==false)
+				{
+						hasHit=true;
+						StartCoroutine(EndProjectile());
+				}
+				if (LastTarget != other.name)
+				{//only get hit once.
+						LastTarget=other.name;
+						if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
+								other.gameObject.GetComponent<ObjectInteraction>().Attack(Damage,Source);
+						}
+						else
+						{
+							if (other.GetComponent<UWCharacter>())
+								{
+										other.GetComponent<UWCharacter>().ApplyDamage(Damage,Source);
+								}
+								else
+								{//reduce damage on ricochets
+										Damage=Damage/2;
+								}
+						}
+				}
+
+		}
 	
 	/// <summary>
 	/// The projectile will only damage anything for a short period after it hits something
