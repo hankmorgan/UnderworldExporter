@@ -50,4 +50,20 @@ public class Lantern : LightSource {
 		}
 		return false;
 	}
+
+
+		public override string UseObjectOnVerb_Inv ()
+		{
+				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+				if (ObjIntInHand!=null)
+				{
+						switch (ObjIntInHand.GetItemType())	
+						{
+						case ObjectInteraction.OIL:
+								return "refill lantern";
+						}
+				}
+
+				return base.UseObjectOnVerb_Inv();
+		}
 }

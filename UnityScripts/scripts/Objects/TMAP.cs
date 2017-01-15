@@ -109,4 +109,24 @@ public class TMAP : object_base {
 		{
 			return "";	
 		}
+
+
+		public override string UseObjectOnVerb_World ()
+		{
+				if (TextureIndex==47)//The door to the base of the abyss.
+				{
+						ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+						if (ObjIntInHand!=null)
+						{
+								switch (ObjIntInHand.item_id)	
+								{
+								case 231:
+										return "unlock the shrine";
+								}
+						}	
+				}
+
+
+				return base.UseObjectOnVerb_Inv();
+		}
 }

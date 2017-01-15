@@ -406,7 +406,7 @@ public class ObjectInteraction : UWEBase {
 			if(item!=null)
 			{
 				//return (StringController.instance.GetSimpleObjectNameUW(item_id));
-						return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp&& WindowDetect.ContextUIUse);
+				return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp&& WindowDetect.ContextUIUse, ( (GameWorldController.instance.playerUW.playerInventory.ObjectInHand ) !="" && (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)));
 			}
 			else
 			{
@@ -427,6 +427,16 @@ public class ObjectInteraction : UWEBase {
 		public string ExamineVerb()
 		{
 				return this.GetComponent<object_base>().ExamineVerb();
+		}
+
+		public string UseObjectOnVerb_World()
+		{
+			return this.GetComponent<object_base>().UseObjectOnVerb_World();
+		}
+
+		public string UseObjectOnVerb_Inv()
+		{
+			return this.GetComponent<object_base>().UseObjectOnVerb_Inv();
 		}
 
 		public bool LookDescription()

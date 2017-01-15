@@ -203,5 +203,23 @@ public class ButtonHandler : object_base {
 		}
 		return false;
 	}
+
+
+		public override string UseObjectOnVerb_World ()
+		{
+			ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+			if (ObjIntInHand!=null)
+			{
+				switch (ObjIntInHand.GetItemType())	
+					{
+						case ObjectInteraction.POLE:
+							return "trigger with pole";
+					}
+			}
+
+			return base.UseObjectOnVerb_Inv();
+		}
+
+
 }
 

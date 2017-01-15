@@ -94,4 +94,20 @@ public class Grave : object_base {
 			}
 		}
 	}
+
+
+		public override string UseObjectOnVerb_World ()
+		{
+				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+				if (ObjIntInHand!=null)
+				{
+						switch (ObjIntInHand.item_id)	
+						{
+						case 198://Bones
+								return "bury remains";
+						}
+				}
+
+				return base.UseObjectOnVerb_Inv();
+		}
 }

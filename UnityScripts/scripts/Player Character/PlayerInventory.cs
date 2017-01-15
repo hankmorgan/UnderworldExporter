@@ -837,6 +837,19 @@ public class PlayerInventory : UWEBase {
 
 	}
 
+		public ObjectInteraction GetObjIntInHand()
+		{
+				if (ObjectInHand!="")
+				{
+						GameObject obj = GetGameObjectInHand();
+						if (obj!=null)
+						{
+							return obj.GetComponent<ObjectInteraction>();
+						}
+				}
+				return null;
+		}
+
 	public void SetObjectInHand(GameObject obj)
 	{
 		ObjectInHand=obj.name;

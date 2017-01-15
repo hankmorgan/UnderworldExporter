@@ -223,7 +223,7 @@ public class WindowDetectUW : WindowDetect {
 					return;
 			}
 
-			if ((ContextUIEnabled) && (ContextUIUse))
+		if ((ContextUIEnabled) && (ContextUIUse) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==""))
 			{//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
 				if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
 				{
@@ -238,7 +238,7 @@ public class WindowDetectUW : WindowDetect {
 					UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
 				}
 			}
-
+			InteractionModeControl.UpdateNow=true;
 			switch (UWCharacter.InteractionMode)
 			{
 			case UWCharacter.InteractionModeOptions://Options mode

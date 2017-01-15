@@ -340,6 +340,11 @@ public class DoorControl : object_base {
 		door.position = EndPos;
 	}
 
+	public override bool ApplyAttack (int damage, GameObject source)
+	{
+		return ApplyAttack (damage);
+	}
+
 	public override bool ApplyAttack(int damage)
 	{//TODO:Find out how massive doors resist damage
 		if (DR<3)
@@ -421,4 +426,24 @@ public class DoorControl : object_base {
 				return "close";		
 			}
 	}
+
+		public override string UseObjectOnVerb_World ()
+		{
+				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+				if (ObjIntInHand!=null)
+				{
+						switch (ObjIntInHand.GetItemType())	
+						{
+						case ObjectInteraction.KEY:
+							return "turn key in lock";
+						case ObjectInteraction.SPIKE:
+							return "spike door";
+						case ObjectInteraction.LOCKPICK:
+							return "attempt lockpicking";
+						}
+				}
+
+				return base.UseObjectOnVerb_Inv();
+		}
+
 }

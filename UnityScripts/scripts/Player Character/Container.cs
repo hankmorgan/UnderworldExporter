@@ -626,4 +626,9 @@ public class Container : object_base {
 		return "open";
 	}
 
+		public override string UseObjectOnVerb_Inv ()
+		{
+			return "place object in bag";
+		}
+
 }

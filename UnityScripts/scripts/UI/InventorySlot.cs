@@ -94,6 +94,20 @@ public class InventorySlot : GuiBase {
 		}
 		if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell=="")
 			{				
+						/*if ((WindowDetect.ContextUIEnabled) && (WindowDetect.ContextUIUse))
+						{
+								switch (UWCharacter.InteractionMode)
+								{
+								case UWCharacter.InteractionModeUse:
+										//Do nothing
+										if (!leftClick)
+										{//Pickup
+												
+										}
+								case UWCharacter.InteractionModePickup:
+								}
+						}*/
+
 				switch (UWCharacter.InteractionMode)
 				{
 				case UWCharacter.InteractionModeTalk://talk
@@ -137,7 +151,24 @@ public class InventorySlot : GuiBase {
 						}
 					break;
 				case UWCharacter.InteractionModeUse://use
-					UseFromSlot ();
+							if	((WindowDetect.ContextUIEnabled) && (WindowDetect.ContextUIUse))
+								{
+								if ((leftClick) || (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!=""))
+									{
+											UseFromSlot();
+									}
+									else
+									{
+										RightClickPickup();
+										UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+										InteractionModeControl.UpdateNow=true;
+									}
+								}
+								else
+								{
+										UseFromSlot ();					
+								}
+					
 					break;
 				case UWCharacter.InteractionModeInConversation:
 					ConversationClick(leftClick);
@@ -556,10 +587,10 @@ public class InventorySlot : GuiBase {
 		/// </summary>
 		public void OnHoverEnter()
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
-			{
-				return;
-			}
+			//if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+			//{
+			//	return;
+			//}
 			Hovering=true;
 			UWHUD.instance.ContextMenu.text="";	
 			GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);	
@@ -571,18 +602,25 @@ public class InventorySlot : GuiBase {
 								string ObjectName="";
 								string UseString="";
 								ObjectName=StringController.instance.GetSimpleObjectNameUW(objInt.item_id);
-								switch (UWCharacter.InteractionMode)
+								if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 								{
-								case UWCharacter.InteractionModeUse:
-										UseString = "L-Click to " + objInt.UseVerb();
-										break;
-								case UWCharacter.InteractionModeLook:
-										UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.ExamineVerb();
-										break;
-								case UWCharacter.InteractionModePickup:
-										UseString = "L-Click to " + objInt.UseVerb()+" R-Click to " + objInt.PickupVerb() ;
-										break;
+									switch (UWCharacter.InteractionMode)
+										{
+										case UWCharacter.InteractionModeUse:
+												UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.PickupVerb() ;
+												break;
+										case UWCharacter.InteractionModeLook:
+												UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.ExamineVerb();
+												break;
+										case UWCharacter.InteractionModePickup:
+												UseString = "L-Click to " + objInt.UseVerb()+" R-Click to " + objInt.PickupVerb() ;
+												break;
 
+										}
+								}
+								else
+								{
+									UseString = "L-Click to " + objInt.UseObjectOnVerb_Inv()  ;
 								}
 								UWHUD.instance.ContextMenu.text=ObjectName +"\n"+UseString;
 						}	

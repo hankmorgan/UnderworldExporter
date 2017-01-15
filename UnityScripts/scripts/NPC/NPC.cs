@@ -443,10 +443,14 @@ public class NPC : object_base {
 										{
 										GameWorldController.instance.playerUW.HelpMeMyFriends=false;
 										//If I'm not already busy with another NPC
-										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
-										npc_goal=5;
-										npc_gtarg=999;
-										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;
+														if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
+														{
+																gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
+																npc_goal=5;
+																npc_gtarg=999;
+																gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
+														}
+
 										}
 									}
 								}

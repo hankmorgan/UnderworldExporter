@@ -16,6 +16,7 @@ public class object_base : UWEBase {
 	public static string ItemDesc;
 	public static string UseableDesc;
 	public static string PickableDesc;
+	public static string UseObjectOnDesc;
 
 	public static bool UseAvail;
 	public static bool PickAvail;
@@ -563,7 +564,7 @@ public class object_base : UWEBase {
 		/// <summary>
 		/// Gets the context menu text.
 		/// </summary>
-		public string GetContextMenuText(int item_id, bool isUseable, bool isPickable)
+		public string GetContextMenuText(int item_id, bool isUseable, bool isPickable , bool ObjectInHand)
 		{				
 			ItemDesc= ContextMenuDesc(item_id);
 			TalkAvail=false;
@@ -577,18 +578,47 @@ public class object_base : UWEBase {
 				UseableDesc="";
 				UseAvail=false;
 			}
+				if (ObjectInHand)
+				{
+					UseObjectOnDesc=ContextMenuUseObjectOn_World();
+				}
+				else
+				{
+					if (isPickable)
+					{
+							PickableDesc=ContextMenuUsedPickup();
+							PickAvail=true;
+					}
+					else
+					{
+							PickableDesc="";
+							PickAvail=false;
+					}	
+				}
+				if((UWCharacter.InteractionMode==UWCharacter.InteractionModePickup) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!=""))
+				{//I'm actually throwing something.
+						UseAvail=false;		
+						UseableDesc="";
+						PickableDesc="";
+				}
 
-			if (isPickable)
-			{
-				PickableDesc=ContextMenuUsedPickup();
-				PickAvail=true;
-			}
-			else
-			{
-				PickableDesc="";
-				PickAvail=false;
-			}
-			return ItemDesc + "\n" + UseableDesc + " " + PickableDesc;
+				if (ObjectInHand)
+				{
+						if(UseAvail==true)
+						{
+								return ItemDesc + "\n" + UseObjectOnDesc;// + " " + UseObjectOnDesc;			
+						}
+						else
+						{//I'm throwing an object.
+								return ItemDesc;
+						}
+					
+				}
+				else
+				{
+					return ItemDesc + "\n" + UseableDesc + " " + PickableDesc;			
+				}
+			
 		}
 
 		public virtual string ContextMenuDesc(int item_id)
@@ -607,6 +637,16 @@ public class object_base : UWEBase {
 			return "R-Click to " + PickupVerb();	
 		}
 
+		public virtual string ContextMenuUseObjectOn_World()
+		{
+			return "L-Click to " + UseObjectOnVerb_World();
+		}
+
+		public virtual string ContextMenuUseObjectOn_Inv()
+		{
+			return "R-Click to " + UseObjectOnVerb_Inv();
+		}
+
 		public virtual string UseVerb()
 		{
 				return "use";
@@ -621,6 +661,17 @@ public class object_base : UWEBase {
 		{
 				return "examine";
 		}
+
+		public virtual string UseObjectOnVerb_World()
+		{
+				return "use object on";
+		}
+
+		public virtual string UseObjectOnVerb_Inv()
+		{
+				return "swap/combine";	
+		}
+
 
 		public virtual Vector3 GetImpactPoint()
 		{
