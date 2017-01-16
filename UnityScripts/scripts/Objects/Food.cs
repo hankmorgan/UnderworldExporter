@@ -8,8 +8,8 @@ public class Food : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
-		{
+		if ((GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="") || (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==this.name))
+		{//Eat if no object in hand or if the object in hand is this item.
 			switch(objInt().item_id)
 			{
 			case 191://Wine of compassion.

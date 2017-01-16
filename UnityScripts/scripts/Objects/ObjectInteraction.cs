@@ -689,7 +689,12 @@ public class ObjectInteraction : UWEBase {
 						//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
 						if (!cn.RemoveItemFromContainer(this.name))
 						{//Try and remove from the paperdoll if not found in the current container.
-								GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(this.name);
+							GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(this.name);
+						}
+						if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==this.name)
+						{
+							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";//Make sure there is not instance of this object in the players hand	
+							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						}
 						GameWorldController.instance.playerUW.playerInventory.Refresh();
 						Destroy (this.gameObject);

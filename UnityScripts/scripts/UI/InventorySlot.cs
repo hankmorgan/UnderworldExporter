@@ -227,32 +227,35 @@ public class InventorySlot : GuiBase {
 		bool DoNotPickup=false;
 		if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 			{ 
-			ObjectInteraction objInt =GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+			ObjectInteraction objInt =GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+			//Eating food dropped in helm slot
+			if (SlotCategory==HELM)
+			{
+				if (objInt.GetItemType()==ObjectInteraction.FOOD)
+				{
+					objInt.Use();
+					DoNotPickup=true;
+					return;
+				}
+			}
+
 			if ((SlotCategory != objInt.GetItemType()) && (SlotCategory!=-1))
 				{//Slot is not a general use one andThis item type does not go in this slot.
 					Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory + " at " + this.name);
 					DoNotPickup=true;
 				}
-				
-				//if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
+
 				if (objInt.IsStackable())
 					{
 					ObjectUsedOn = GameObject.Find (GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex));
 					if (ObjectUsedOn !=null)
 						{
 						if (ObjectInteraction.CanMerge(ObjectUsedOn.GetComponent<ObjectInteraction>(), objInt))
-					//if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
 							{
 							ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(), objInt);
 							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 							GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
-
-								//merge the items
-								/*ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
-								UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-								GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-								Destroy(objInt.gameObject);*/
 								return;
 							}
 						}
@@ -270,7 +273,6 @@ public class InventorySlot : GuiBase {
 						GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");
 					}
 				}
-			//PickupFromSlot();
 			}
 		else
 			{
@@ -321,6 +323,17 @@ public class InventorySlot : GuiBase {
 			//	Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory);
 				DoNotPickup=true;
 			}
+			//Eating food dropped in helm slot
+			if (SlotCategory==HELM)
+			{
+				if (objInt.GetItemType()==ObjectInteraction.FOOD)
+				{
+					objInt.Use();
+					DoNotPickup=true;
+					return;
+				}
+			}
+
 			//if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
 			if (objInt.IsStackable())
 			{

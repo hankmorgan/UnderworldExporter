@@ -418,9 +418,9 @@ public class NPC : object_base {
 					case 5://Attack target
 					case 9:
 							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-							Vector3 AB = gtarg.transform.position -this.transform.position;
+							Vector3 AB = this.transform.position - gtarg.transform.position;
 							//Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-							Vector3 Movepos = gtarg.transform.position + (0.5f * AB.normalized) ;
+							Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
 							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 							break;
 
@@ -432,8 +432,8 @@ public class NPC : object_base {
 							state=AI_STATE_FOLLOW;
 								if (gtarg!=null)
 								{
-									Vector3 ABf = gtarg.transform.position-this.transform.position;
-									Vector3 MoveposF = gtarg.transform.position + (0.5f * ABf.normalized) ;
+									Vector3 ABf =this.transform.position - gtarg.transform.position;
+									Vector3 MoveposF = gtarg.transform.position + (0.9f * ABf.normalized) ;
 									ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
 									ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
 								
@@ -443,13 +443,13 @@ public class NPC : object_base {
 										{
 										GameWorldController.instance.playerUW.HelpMeMyFriends=false;
 										//If I'm not already busy with another NPC
-														if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
-														{
-																gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
-																npc_goal=5;
-																npc_gtarg=999;
-																gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
-														}
+											if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
+											{
+												gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
+												npc_goal=5;
+												npc_gtarg=999;
+												gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
+											}
 
 										}
 									}
