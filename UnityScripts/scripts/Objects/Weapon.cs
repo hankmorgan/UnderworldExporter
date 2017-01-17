@@ -6,6 +6,27 @@ public class Weapon : Equipment {
 	public int AccuracyBonus;
 	public int DamageBonus;
 
+	public override bool use ()
+	{
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
+		{
+			if (((this.objInt().inventorySlot==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((this.objInt().inventorySlot==8) && (GameWorldController.instance.playerUW.isLefty==true)))
+			{
+				if(UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
+				{
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;		
+				}
+				else
+				{
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeAttack;				
+				}
+			}
+			InteractionModeControl.UpdateNow=true;
+						return true;
+		}
+		return false;
+	}
+
 	public virtual void WeaponSelfDamage()
 	{//Damage caused to the weapon when it hits something with heavy resistance.
 		objInt().Quality-=1;

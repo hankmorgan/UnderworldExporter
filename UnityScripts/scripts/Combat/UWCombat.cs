@@ -10,6 +10,8 @@ public class UWCombat : Combat {
 	/// The inventory object that is to be launched in the next ranged attack. 
 	public ObjectInteraction currentAmmo; 
 
+		public string CurrentStrike;//What animation to play for this weapon swing.
+
 	public override void PlayerCombatIdle ()
 	{
 		base.PlayerCombatIdle ();
@@ -36,7 +38,8 @@ public class UWCombat : Combat {
 	{ 
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
-			UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
+			CurrentStrike=GetStrikeType();
+			UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Charge";
 		}
 		else
 		{
@@ -113,7 +116,8 @@ public class UWCombat : Combat {
 						if (currWeapon==null)
 						{//Fist 
 								//2	4	3	
-								switch (StrikeType.ToUpper())
+								//switch (StrikeType.ToUpper())
+								switch(CurrentStrike)
 								{
 								case "SLASH":
 									StrikeBaseDamage=WeaponMelee.getMeleeSlash();break;
@@ -126,7 +130,8 @@ public class UWCombat : Combat {
 						}
 						else
 						{
-								switch (StrikeType.ToUpper())
+								//switch (StrikeType.ToUpper())
+								switch(CurrentStrike)
 								{
 								case "SLASH":
 										StrikeBaseDamage=currWeapon.GetSlash();break;
@@ -214,10 +219,13 @@ public class UWCombat : Combat {
 		{
 			if (IsMelee())
 			{///Sets the weapon, race and handedness animation.
-				string StrikeType=GetStrikeType();
-				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + StrikeType +"_" + GetRace () + "_" + GetHand() + "_Execute";
+				if (CurrentStrike=="")
+				{
+						CurrentStrike=GetStrikeType();		
+				}
+				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
-				StartCoroutine(ExecuteMelee(StrikeType,Charge));
+				StartCoroutine(ExecuteMelee(CurrentStrike,Charge));
 			}
 			else
 			{//Ranged attack
@@ -322,18 +330,35 @@ public class UWCombat : Combat {
 	/// <returns>The strike type.</returns>
 	public string GetStrikeType()
 	{
-		if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
+		if (!GameWorldController.instance.playerUW.MouseLookEnabled)
 		{
-			return "Bash";
-		}
-		else if(Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.333f)
-		{
-			return "Slash";
+				if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
+				{
+						return "Bash";
+				}
+				else if(Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.333f)
+				{
+						return "Slash";
+				}
+				else
+				{
+						return "Stab";
+				}	
 		}
 		else
 		{
-			return "Stab";
+				switch (Random.Range(1,4))
+				{
+				case 1:
+						return "Bash";
+				case 2:
+						return "Slash";
+				case 3:
+				default:
+						return "Stab";
+				}
 		}
+
 	}
 
 		/// <summary>
