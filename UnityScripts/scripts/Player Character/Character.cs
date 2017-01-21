@@ -96,6 +96,8 @@ public class Character : UWEBase {
 	/// </summary>
 	public bool LightActive;
 
+		public GameObject TargetPoint;
+
 	//public UILabel GetMessageLog()
 	//{
 		/*Returns the message log for various functions*/

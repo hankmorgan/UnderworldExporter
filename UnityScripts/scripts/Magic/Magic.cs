@@ -3164,7 +3164,7 @@ public class Magic : UWEBase {
 						{
 								SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
 								spVOG.init (EffectID,caster);
-								CastProjectile(caster,caster.transform.forward,(SpellProp)spVOG);
+								CastProjectile(caster,GetBestSpellVector(caster),(SpellProp)spVOG);
 						}
 						SpellResultType=SpellResultNone;
 						break;
@@ -3193,7 +3193,7 @@ public class Magic : UWEBase {
 						{
 								SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
 								spOJ.init (EffectID,caster);
-								CastProjectile(caster,caster.transform.forward, (SpellProp)spOJ);
+								CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spOJ);
 						}
 						SpellResultType=SpellResultNone;
 						break;
@@ -3209,7 +3209,7 @@ public class Magic : UWEBase {
 								{
 										SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
 										spOG.init (EffectID,caster);
-										CastProjectile(caster,caster.transform.forward, (SpellProp)spOG);
+										CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spOG);
 								}
 								SpellResultType=SpellResultNone;
 								break;
@@ -3226,7 +3226,7 @@ public class Magic : UWEBase {
 										SpellProp_Fireball spPF =new SpellProp_Fireball();
 										spPF.init (EffectID,caster);
 										spPF.caster=caster;
-										CastProjectile(caster,caster.transform.forward, (SpellProp)spPF);
+										CastProjectile(caster,GetBestSpellVector(caster),(SpellProp)spPF);
 								}
 								SpellResultType=SpellResultNone;
 								break;
@@ -3243,7 +3243,7 @@ public class Magic : UWEBase {
 								{
 										SpellProp_FlameWind spFH =new SpellProp_FlameWind();
 										spFH.init (EffectID,caster);
-										CastProjectile(caster,caster.transform.forward, (SpellProp)spFH);
+										CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spFH);
 								}
 								SpellResultType=SpellResultNone;
 								break;
@@ -3448,6 +3448,43 @@ public class Magic : UWEBase {
 						return playerUW.ActiveSpell[ActiveArrayIndex];
 				default:
 						return null;
+				}
+		}
+
+		/// <summary>
+		/// Gets the best spell vector to use depending on type of caster
+		/// </summary>
+		/// <returns>The best spell vector.</returns>
+		/// <param name="caster">Caster.</param>
+		/// If npc target the gtarg
+		/// If other object target the forward direction
+		Vector3 GetBestSpellVector(GameObject casterToEval)
+		{
+				GameObject caster;
+				if (casterToEval.name.Contains("NPC_Launcher"))
+				{
+						caster=casterToEval.transform.parent.gameObject;
+				}
+				else
+				{
+						caster=casterToEval;
+				}
+				if (caster.GetComponent<NPC>()!=null)	
+				{
+						if (caster.GetComponent<NPC>().gtargName=="_Gronk")
+						{
+							return (GameWorldController.instance.playerUW.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+						}
+						else
+						{
+							return (caster.GetComponent<NPC>().getGtarg().transform.position - caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+						}
+						//Get a vector between the npcs launcher and the player cam
+
+				}
+				else
+				{
+					return caster.transform.forward;
 				}
 		}
 }

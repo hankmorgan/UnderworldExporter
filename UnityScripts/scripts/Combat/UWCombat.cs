@@ -143,7 +143,8 @@ public class UWCombat : Combat {
 								}	
 						}
 						//Depending on the hit type the damage will be multiplied by 0(miss), 1 (hit) or 2 (crit) and charge percentage
-						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((int)(StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)),GameWorldController.instance.playerUW.gameObject);
+							//For any kind of hit it will damage at the very least the min damage of the weapon.
+						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((int)((StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)) + Mathf.Min(1,HitRollResult)*StrikeBaseDamage),GameWorldController.instance.playerUW.gameObject);
 						
 						///Creates a blood splatter at the point of impact
 						switch (HitRollResult)

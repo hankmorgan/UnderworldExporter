@@ -338,7 +338,7 @@ public class NPC : object_base {
 				//Update GTarg
 				if (npc_gtarg<=1)//PC
 				{
-					gtargName="";
+					gtargName="_Gronk";
 					if (gtarg==null)
 					{
 						gtarg=GameWorldController.instance.playerUW.transform.gameObject;				
@@ -988,19 +988,21 @@ public class NPC : object_base {
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player
-			TargetingPoint=GameWorldController.instance.playerUW.playerCam.transform.position;
+			TargetingPoint=GameWorldController.instance.playerUW.TargetPoint.transform.position;
 		}
 		else
 		{//Trying to hit an object						
 				TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
 		}
-				Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized*adj;
+				Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized;
+				TargetingVector=TargetingVector + new Vector3(0.0f,0.3f,0.0f);//Try and give the vector an arc
 		//Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
 				Ray ray= new Ray(NPC_Launcher.transform.position,TargetingVector);
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{///Checks No object interferes with the launch
+						testforce=100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
 						float force = testforce;
 						GameObject launchedItem ;
 						launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;

@@ -385,6 +385,7 @@ public class ObjectInteraction : UWEBase {
 
 		public bool Attack (int damage, GameObject source)
 		{
+				Debug.Log ("hitting for " + damage);
 			this.GetComponent<object_base>().ApplyAttack(damage,source);
 			return true;	
 		}
