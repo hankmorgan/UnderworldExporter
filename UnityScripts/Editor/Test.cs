@@ -16,9 +16,6 @@ public class MyTools
 	[MenuItem("MyTools/CreateGameObjects")]
 	static void Create()
 	{
-
-
-
 		_RES= "UW1";//Set the game
 				Create_UW1_Lvl_0();
 				Create_UW1_Lvl_1();
@@ -54,6 +51,166 @@ public class MyTools
 	}
 
 
+		[MenuItem("MyTools/CreateLevel1Objects")]
+		static void CreateLvl1()
+		{
+				_RES= "UW1";//Set the game
+				Create_UW1_Lvl_0();
+		}
+
+
+		[MenuItem("MyTools/SaveUniqueTileInfo")]
+		static void SaveUniqueTileInfo()
+		{
+				_RES= "UW1";//Set the game
+				StoreTileInformation(0, 43, 44);
+				StoreTileInformation(0, 45, 44);
+				StoreTileInformation(0, 47, 44);
+				StoreTileInformation(0, 49, 44);
+
+				StoreTileInformation(1, 7, 34);
+
+				StoreTileInformation(2, 48, 54);
+				StoreTileInformation(2, 57, 53);
+				StoreTileInformation(2, 52, 13);
+				StoreTileInformation(2, 44, 12);
+				StoreTileInformation(2, 45, 12);
+				StoreTileInformation(2, 46, 12);
+				StoreTileInformation(2, 47, 12);
+				StoreTileInformation(2, 48, 12);
+				StoreTileInformation(2, 49, 12);
+				StoreTileInformation(2, 44, 11);
+				StoreTileInformation(2, 45, 11);
+				StoreTileInformation(2, 46, 11);
+				StoreTileInformation(2, 47, 11);
+				StoreTileInformation(2, 48, 11);
+				StoreTileInformation(2, 49, 11);
+				StoreTileInformation(2, 37, 10);
+				StoreTileInformation(2, 44, 10);
+				StoreTileInformation(2, 45, 10);
+				StoreTileInformation(2, 46, 10);
+				StoreTileInformation(2, 47, 10);
+				StoreTileInformation(2, 48, 10);
+				StoreTileInformation(2, 49, 10);
+				StoreTileInformation(2, 44, 9);
+				StoreTileInformation(2, 45, 9);
+				StoreTileInformation(2, 46, 9);
+				StoreTileInformation(2, 47, 9);
+				StoreTileInformation(2, 48, 9);
+				StoreTileInformation(2, 49, 9);
+				StoreTileInformation(2, 44, 8);
+				StoreTileInformation(2, 45, 8);
+				StoreTileInformation(2, 46, 8);
+				StoreTileInformation(2, 47, 8);
+				StoreTileInformation(2, 48, 8);
+				StoreTileInformation(2, 49, 8);
+				StoreTileInformation(2, 46, 7);
+
+				StoreTileInformation(3, 48, 55);
+				StoreTileInformation(3, 49, 55);
+				StoreTileInformation(3, 50, 55);
+				StoreTileInformation(3, 51, 55);
+				StoreTileInformation(3, 52, 55);
+				StoreTileInformation(3, 53, 55);
+				StoreTileInformation(3, 54, 55);
+				StoreTileInformation(3, 55, 55);
+				StoreTileInformation(3, 48, 54);
+				StoreTileInformation(3, 49, 54);
+				StoreTileInformation(3, 50, 54);
+				StoreTileInformation(3, 51, 54);
+				StoreTileInformation(3, 52, 54);
+				StoreTileInformation(3, 53, 54);
+				StoreTileInformation(3, 54, 54);
+				StoreTileInformation(3, 55, 54);
+				StoreTileInformation(3, 48, 53);
+				StoreTileInformation(3, 49, 53);
+				StoreTileInformation(3, 50, 53);
+				StoreTileInformation(3, 51, 53);
+				StoreTileInformation(3, 52, 53);
+				StoreTileInformation(3, 53, 53);
+				StoreTileInformation(3, 54, 53);
+				StoreTileInformation(3, 55, 53);
+				StoreTileInformation(3, 48, 52);
+				StoreTileInformation(3, 49, 52);
+				StoreTileInformation(3, 50, 52);
+				StoreTileInformation(3, 51, 52);
+				StoreTileInformation(3, 52, 52);
+				StoreTileInformation(3, 53, 52);
+				StoreTileInformation(3, 54, 52);
+				StoreTileInformation(3, 55, 52);
+				StoreTileInformation(3, 48, 51);
+				StoreTileInformation(3, 49, 51);
+				StoreTileInformation(3, 50, 51);
+				StoreTileInformation(3, 51, 51);
+				StoreTileInformation(3, 52, 51);
+				StoreTileInformation(3, 53, 51);
+				StoreTileInformation(3, 54, 51);
+				StoreTileInformation(3, 55, 51);
+				StoreTileInformation(3, 48, 50);
+				StoreTileInformation(3, 49, 50);
+				StoreTileInformation(3, 50, 50);
+				StoreTileInformation(3, 51, 50);
+				StoreTileInformation(3, 52, 50);
+				StoreTileInformation(3, 53, 50);
+				StoreTileInformation(3, 54, 50);
+				StoreTileInformation(3, 55, 50);
+				StoreTileInformation(3, 48, 49);
+				StoreTileInformation(3, 49, 49);
+				StoreTileInformation(3, 50, 49);
+				StoreTileInformation(3, 51, 49);
+				StoreTileInformation(3, 52, 49);
+				StoreTileInformation(3, 53, 49);
+				StoreTileInformation(3, 54, 49);
+				StoreTileInformation(3, 55, 49);
+				StoreTileInformation(3, 48, 48);
+				StoreTileInformation(3, 49, 48);
+				StoreTileInformation(3, 50, 48);
+				StoreTileInformation(3, 51, 48);
+				StoreTileInformation(3, 52, 48);
+				StoreTileInformation(3, 53, 48);
+				StoreTileInformation(3, 54, 48);
+				StoreTileInformation(3, 55, 48);
+				StoreTileInformation(3, 18, 47);
+				StoreTileInformation(3, 56, 36);
+				StoreTileInformation(3, 58, 33);
+				StoreTileInformation(3, 60, 33);
+				StoreTileInformation(3, 57, 31);
+				StoreTileInformation(3, 58, 31);
+				StoreTileInformation(3, 60, 31);
+				StoreTileInformation(3, 57, 30);
+				StoreTileInformation(3, 58, 30);
+				StoreTileInformation(3, 57, 29);
+				StoreTileInformation(3, 58, 29);
+				StoreTileInformation(3, 57, 28);
+				StoreTileInformation(3, 58, 28);
+				StoreTileInformation(3, 21, 19);
+
+				StoreTileInformation(4, 54, 61);
+				StoreTileInformation(4, 60, 33);
+
+
+				StoreTileInformation(5, 11, 45);
+				StoreTileInformation(5, 17, 41);
+				StoreTileInformation(5, 14, 11);
+
+				StoreTileInformation(6, 8, 58);
+				StoreTileInformation(6, 60, 55);
+				StoreTileInformation(6, 2, 43);
+				StoreTileInformation(6, 3, 43);
+				StoreTileInformation(6, 15, 43);
+				StoreTileInformation(6, 2, 42);
+				StoreTileInformation(6, 3, 42);
+				StoreTileInformation(6, 11, 41);
+				StoreTileInformation(6, 20, 41);
+				StoreTileInformation(6, 26, 41);
+				StoreTileInformation(6, 26, 35);
+				StoreTileInformation(6, 36, 35);
+				StoreTileInformation(6, 18, 29);
+				StoreTileInformation(6, 42, 10);
+
+				StoreTileInformation(7, 32, 28);
+
+		}
 
 	/*[MenuItem("MyTools/RenameBrushes")]
 	static void BrushRenamer()
@@ -7987,7 +8144,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 
 		//Probably only need to add this when an NPC supports ranged attacks?
-		GameObject NpcLauncher = new GameObject("NPC_Launcher");
+		GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
 		NpcLauncher.transform.position=Vector3.zero; 
 		//NpcLauncher.transform.rotation=Vector3.zero; 
 		NpcLauncher.transform.parent=myObj.transform;
@@ -8013,7 +8170,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		newObj.name=myObj.name + "_Sprite";
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.position = myObj.transform.position;
-		newObj.AddComponent<StoreInformation>();
+		newObj.AddComponent<StoreAnimator>();
 		SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
 		Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
 
@@ -8124,6 +8281,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			break;
 		}
 
+				cap.stepOffset=0.1f;//Stop npcs from climbing over each other
 		//BoxCollider mybox = myObj.AddComponent<BoxCollider>();
 		//mybox.isTrigger=false;
 		//mybox.center = new Vector3(0.0f, 0.5f, 0.0f);
@@ -9317,12 +9475,36 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		}
 	}
 
+
+
+		static void SetNPCProps(GameObject myObj, 
+				int npc_whoami, int npc_xhome, int npc_yhome,
+				int npc_hunger, int npc_health,
+				int npc_hp, int npc_arms, int npc_power ,
+				int npc_goal, int npc_attitude, int npc_gtarg,
+				int npc_talkedto, int npc_level,int npc_name,
+				string NavMeshRegion
+		)
+		{
+				SetNPCProps(myObj, 
+						npc_whoami, npc_xhome, npc_yhome,
+						npc_hunger, npc_health,
+						npc_hp, npc_arms, npc_power ,
+						npc_goal, npc_attitude, npc_gtarg,
+						npc_talkedto, npc_level,npc_name,
+						"",
+						NavMeshRegion
+				)	;
+		}
+
+
 	static void SetNPCProps(GameObject myObj, 
 	                        int npc_whoami, int npc_xhome, int npc_yhome,
 	                        int npc_hunger, int npc_health,
 	                        int npc_hp, int npc_arms, int npc_power ,
 	                        int npc_goal, int npc_attitude, int npc_gtarg,
 	                        int npc_talkedto, int npc_level,int npc_name,
+							string gtargName,
 	                        string NavMeshRegion
 	                        )
 	{
@@ -9350,6 +9532,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			//npc.npc_deathvariable=npc_deathVariable;
 			npc.NavMeshRegion=NavMeshRegion;
 
+				npc.gtargName=gtargName;
 			//if (npc_attitude!=0)
 			//{
 			Conversation cnv ;//= myObj.AddComponent<Conversation>();
@@ -9769,10 +9952,10 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 	static void AddInstrument(GameObject myObj)
 	{
 		myObj.AddComponent<Instrument>();
-		AudioSource audio = myObj.AddComponent<AudioSource>();
-		audio.loop=false;
-		audio.playOnAwake=false;
-		audio.clip=Resources.Load <AudioClip>(_RES+ "/SFX/instrument");
+		//AudioSource audio = myObj.AddComponent<AudioSource>();
+		//audio.loop=false;
+		//audio.playOnAwake=false;
+		//audio.clip=Resources.Load <AudioClip>(_RES+ "/SFX/instrument");
 	}
 
 
@@ -9932,6 +10115,22 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 		}
 
+
+
+		static void StoreTileInformation(int levelNo, int tileX, int tileY)
+		{
+			//Find the level model
+				GameObject LevelModel =GameObject.Find("Level" + levelNo +"_model");
+				GameObject TileModel = LevelModel.transform.FindChild("Tile_" + tileX.ToString("D2") + "_"+tileY.ToString("D2")).gameObject;
+				if (TileModel!=null)
+				{
+						if (TileModel.GetComponent<StoreInformation>()==null)
+						{
+								TileModel.AddComponent<StoreInformation>();				
+						}
+				}
+
+		}
 
 
 

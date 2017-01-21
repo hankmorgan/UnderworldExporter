@@ -113,7 +113,8 @@ public class UWCharacter : Character {
 
 	void PlayerDeath()
 	{//CHeck if the player has planted the seed and if so send them to that position.
-		mus.Death=true;
+		//mus.Death=true;
+		GameWorldController.instance.getMus().Death=true;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
 			if (ResurrectPosition!=Vector3.zero)
@@ -206,13 +207,13 @@ public class UWCharacter : Character {
 			//UWHUD.instance.InputControl.selected=true;
 			UWHUD.instance.InputControl.Select();
 		}
-		if ((CurVIT<=0) && (mus.Death==false))
+		if ((CurVIT<=0) && (GameWorldController.instance.getMus().Death==false))
 		{
 
 			PlayerDeath();
 			return;
 		}
-		if(mus.Death==true)
+		if(GameWorldController.instance.getMus().Death==true)
 		{
 			//Still processing death.
 			return;
@@ -290,7 +291,7 @@ public class UWCharacter : Character {
 			playerMotor.movement.maxFallSpeed=0.0f;	
 		}
 
-		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
+		GameWorldController.instance.getMus().WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
 
 		if (PlayerMagic.ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.

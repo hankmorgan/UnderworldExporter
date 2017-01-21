@@ -52,7 +52,7 @@ public class Instrument : object_base {
 		GameWorldController.instance.playerUW.playerMotor.enabled=false;
 		PlayingInstrument=true;
 		CurrentInstrument=this.name;
-		GameWorldController.instance.playerUW.mus.Stop ();
+		GameWorldController.instance.getMus().Stop ();
 		NoteRecord="";
 		//000~001~250~You play the instrument.  (Use 0-9 to play, or ESC to return to game)
 		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
@@ -88,7 +88,7 @@ public class Instrument : object_base {
 						WindowDetectUW.WaitingForInput=false;
 						GameWorldController.instance.playerUW.playerMotor.enabled=true;
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
-						GameWorldController.instance.playerUW.mus.Resume();
+						GameWorldController.instance.getMus().Resume();
 						//354237875
 						if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
 						{
@@ -150,8 +150,10 @@ public class Instrument : object_base {
 		//From
 		//http://answers.unity3d.com/questions/141771/whats-a-good-way-to-do-dynamically-generated-music.html
 
-		this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
-		this.GetComponent<AudioSource>().Play();
+				GameWorldController.instance.getMus().MusicalInstruments.pitch=Mathf.Pow(2.0f, ((float)note)/12.0f);
+				GameWorldController.instance.getMus().MusicalInstruments.Play();
+				//this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
+		//this.GetComponent<AudioSource>().Play();
 	}
 
 

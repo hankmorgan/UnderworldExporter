@@ -28,11 +28,11 @@ public class SpellEffectParalyze : SpellEffect {
 				}
 				this.GetComponent<NPC>().Frozen=true;
 				state = this.GetComponent<NPC>().state;
-				anim = this.GetComponent<NPC>().anim;
-				if (anim!=null)
-				{
-						anim.enabled=false;
-				}
+				//anim = this.GetComponent<NPC>().anim;
+				//if (anim!=null)
+				//{
+				//		anim.enabled=false;
+				//}
 			}
 			base.ApplyEffect();
 		}

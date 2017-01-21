@@ -99,9 +99,10 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		public GameObject QuitYes;
 		public GameObject QuitNo;
 
-		private bool SaveNow;
-		private bool RestoreNow;
-		private int slot;
+		//private bool SaveNow;
+		//private bool RestoreNow;
+		//private int slot;
+		private bool isLoadingOrSaving;
 
 	public void ButtonClickOptionsMenu(int index)
 	{
@@ -373,9 +374,24 @@ public class OptionsMenuControl : GuiBase_Draggable {
 				//
 				//ser.Serialize(GameWorldController.instance.LevelMarker().gameObject,"mesh.xml");
 				LevelSerializer.useCompression=false;
-				UWHUD.instance.LoadingProgress.text="Saving";
-				slot=slotNo;
-				SaveNow=true;
+				//UWHUD.instance.LoadingProgress.text="Saving";
+				//slot=slotNo;
+				//SaveNow=true;
+				foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+						if (sgX.Name=="save_"+slotNo)
+						{					
+								sgX.Delete();
+								break;
+						}
+				}
+
+				isLoadingOrSaving=true;
+				//StartCoroutine(LoadScreen(false));
+				LevelSerializer.SaveGame("save_"+slotNo);
+				isLoadingOrSaving=false;
+				//UWHUD.instance.LoadingProgress.text="";
+				//SaveNow=false;
+				ReturnToGame();
 	}
 
 		/// <summary>
@@ -387,12 +403,20 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
 						if (sg.Name=="save_"+slotNo)
 						{
-							RestoreNow=true;
-							slot=slotNo;
-							UWHUD.instance.LoadingProgress.text="Restoring Save";
+							//RestoreNow=true;
+							//slot=slotNo;
+							//UWHUD.instance.LoadingProgress.text="Restoring Save";
+							isLoadingOrSaving=true;
+							//StartCoroutine(LoadScreen(false));
+							LevelSerializer.LoadSavedLevel(sg.Data,false);
+							isLoadingOrSaving=false;
+							UWHUD.instance.LoadingProgress.text="";
+							GameWorldController.instance.playerUW.playerInventory.Refresh();
+							ReturnToGame();
+
 						}
 				}
-			Debug.Log("Restoring Save " + slotNo);
+			Debug.Log("Restored Save " + slotNo);
 	}
 
 	/// <summary>
@@ -404,12 +428,12 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		if (state==true)
 		{
 			MusicState.texture=MusicStateOn;
-			GameWorldController.instance.mus.ResumeAll();
+			GameWorldController.instance.getMus().ResumeAll();
 		}
 		else
 		{
 			MusicState.texture=MusicStateOff;	
-			GameWorldController.instance.mus.StopAll();
+			GameWorldController.instance.getMus().StopAll();
 		}
 	}
 
@@ -465,35 +489,21 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		}
 */
 
-		private void OnGUI() {
-			if (SaveNow)
+		IEnumerator LoadScreen (bool mode)
+		{
+			while (isLoadingOrSaving)
 			{
-						foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
-								if (sgX.Name=="save_"+slot)
-								{					
-										sgX.Delete();
-										break;
-								}
-						}
-
-						LevelSerializer.SaveGame("save_"+slot);
-						UWHUD.instance.LoadingProgress.text="";
-						SaveNow=false;
-						ReturnToGame();
-			}
-			else if (RestoreNow)
-			{
-			RestoreNow=false;
-			foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
-					if (sg.Name=="save_"+slot)
-					{					
-					LevelSerializer.LoadSavedLevel(sg.Data,false);
-					UWHUD.instance.LoadingProgress.text="";
-					GameWorldController.instance.playerUW.playerInventory.Refresh();
-					ReturnToGame();
-					}
+				if (mode==true)//Loading
+				{
+					UWHUD.instance.LoadingProgress.text="LOADING";
+				}
+				else
+				{
+					UWHUD.instance.LoadingProgress.text="SAVING" ;
+				}
+				yield return new WaitForSeconds(1);
 			}
 		}
-		}
+	
 }
 

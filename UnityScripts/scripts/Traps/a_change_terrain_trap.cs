@@ -38,8 +38,7 @@ The path to the sword hilt on Level3
 				ReplacementTile.transform.parent=CTTile.transform.parent;
 				ReplacementTile.name = ExistingTile.name;
 				if (ExistingTile != null)
-				{
-					//Debug.Log ("Destroying " + ExistingTile.name );
+				{					
 					Destroy(ExistingTile);
 				}
 				if (ReplacementTile!=null)

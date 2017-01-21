@@ -127,22 +127,22 @@ public class LightSource : object_base {
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{						
 			//invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
-			invSlot=GameWorldController.instance.playerUW.playerInventory.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=UWHUD.instance.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))
 		{
 			//invSlot=GameObject.Find ("LeftShoulder_Slot").GetComponent<InventorySlot>();
-			invSlot=GameWorldController.instance.playerUW.playerInventory.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=UWHUD.instance.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sRightHand=="") || (pInv.sRightHand==this.name))
 		{
 			//invSlot=GameObject.Find ("RightHand_Slot").GetComponent<InventorySlot>();
-		invSlot=GameWorldController.instance.playerUW.playerInventory.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=UWHUD.instance.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftHand=="") || (pInv.sLeftHand==this.name))
 		{
 			//invSlot=GameObject.Find ("LeftHand_Slot").GetComponent<InventorySlot>();
-				invSlot=GameWorldController.instance.playerUW.playerInventory.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=UWHUD.instance.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		if (invSlot != null)
 			{

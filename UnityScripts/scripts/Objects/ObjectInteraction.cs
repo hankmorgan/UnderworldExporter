@@ -1535,15 +1535,22 @@ public class ObjectInteraction : UWEBase {
 		}			
 	}
 
-		/// <summary>
-		/// Gets the impact point location that will spawn when this object is hit.
-		/// </summary>
-		/// <returns>The impact point.</returns>
-		public virtual Vector3 GetImpactPoint()
-		{
-				object_base item;
-				item= this.GetComponent<object_base>();
-				return item.GetImpactPoint();
-		}
+	/// <summary>
+	/// Gets the impact point location that will spawn when this object is hit.
+	/// </summary>
+	/// <returns>The impact point.</returns>
+	public virtual Vector3 GetImpactPoint()
+	{
+			object_base item;
+			item= this.GetComponent<object_base>();
+			return item.GetImpactPoint();
+	}
+
+	public virtual GameObject GetImpactGameObject()
+	{
+		object_base item;
+		item= this.GetComponent<object_base>();
+		return item.GetImpactGameObject();	
+	}
 
 }

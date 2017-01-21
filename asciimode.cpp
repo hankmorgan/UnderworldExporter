@@ -360,6 +360,8 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 		}
 
 	PrintObjectsByTile(LevelInfo, objList, LevelNo);
+
+	printNonStaticTiles(LevelInfo, LevelNo);
 	}
 
 void printTileMap(tile LevelInfo[64][64], int LevelNo)
@@ -956,6 +958,23 @@ void printCeilOrientations(tile LevelInfo[64][64], int LevelNo)
 		for (x = 0; x<64; x++)
 			{
 			fprintf(LOGFILE,"%d|", LevelInfo[x][y].shockCeilOrientation);
+			}
+		}
+	}
+
+
+void printNonStaticTiles(tile LevelInfo[64][64], int LevelNo)
+	{
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing tiles that will change : %d.", LevelNo);
+	for (y = 63; y >= 0; y--)
+		{
+		for (x = 0; x<64; x++)
+			{//if ((t1.tileType >1) || (t1.hasElevator == 1) || (t1.TerrainChange == 1) || (t2.hasElevator == 1)
+			if ((LevelInfo[x][y].hasElevator == 1) || (LevelInfo[x][y].TerrainChange == 1) || (LevelInfo[x][y].BullFrog == 1))
+				{
+				fprintf(LOGFILE, "\nStoreTileInformation(%d, %d, %d);", LevelNo, x, y);
+				}			
 			}
 		}
 	}

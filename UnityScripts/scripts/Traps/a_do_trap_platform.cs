@@ -15,7 +15,6 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 	GameObject platformTile= GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);//Var.FindTile (Var.triggerX,Var.triggerY,1);
-		
 		if (State==7)
 		{
 			//Move the tile to the bottom

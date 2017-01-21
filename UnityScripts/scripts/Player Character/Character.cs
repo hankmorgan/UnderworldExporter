@@ -76,7 +76,7 @@ public class Character : UWEBase {
 	public Vector3 CameraPos;
 
 	//The music system
-	public MusicController mus;
+	//public MusicController mus;
 
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;

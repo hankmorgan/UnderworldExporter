@@ -22,6 +22,7 @@ public class ButtonHandler : object_base {
 	private SpriteRenderer ButtonSprite;
 
 	public bool SpriteSet;
+		private string currentSpriteName;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -48,6 +49,28 @@ public class ButtonHandler : object_base {
 			setRotarySprite(state);
 		}
 	}
+
+		void Update()
+		{
+				if (isRotarySwitch==false)
+				{
+						if ((isOn) && (currentSpriteName!=spriteOn) && (spriteOn!=""))
+						{
+								setSprite(spriteOn);	
+						}
+						if ((!isOn) && (currentSpriteName!=spriteOff) && (spriteOff!=""))
+						{
+								setSprite(spriteOff);	
+						}
+				}
+				else
+				{
+						if(currentSpriteName!=RotarySprites[state])
+						{
+								setSprite(RotarySprites[state]);
+						}
+				}
+		}
 
 
 	public override bool use ()
@@ -171,6 +194,7 @@ public class ButtonHandler : object_base {
 		if (SpriteName!="")
 		{
 			ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
+			currentSpriteName=SpriteName;
 			objInt().animationStarted=true;
 		}
 

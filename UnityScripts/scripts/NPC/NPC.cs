@@ -65,7 +65,7 @@ public class NPC : object_base {
 	public string CurrentAnim;
 	
 	/// The animator that the NPC is using for it's animations
-	public Animator anim;
+	private Animator anim;
 	
 	/// For tracking the state of the NPC
 	public int currentState=-1;
@@ -117,7 +117,7 @@ public class NPC : object_base {
 	public int npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 	public int npc_gtarg;         //goal target; 1:player
 	
-	public GameObject gtarg;
+	private GameObject gtarg;
 	public string gtargName;
 
 	public int npc_talkedto;      // is 1 when player already talked to npc
@@ -152,7 +152,7 @@ public class NPC : object_base {
 	private AIRig ai;	
 	
 	///Can the NPC fire off magic attacks.
-	public bool MagicAttack;	
+	//public bool MagicAttack;	
 	///Transform position to launch projectiles from
 	public GameObject NPC_Launcher; 
 	///What spell the NPC should cast if they have magicAttack==true
@@ -196,6 +196,10 @@ public class NPC : object_base {
 			ai.AI.Body = this.gameObject;
 			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critter.Speed [objInt ().item_id - 64] / 12.0f));
 			ai.AI.WorkingMemory.SetItem<float> ("Speed", ai.AI.Motor.DefaultSpeed);
+			if (this.GetComponent<Animation>()!=null)
+			{
+				Destroy(this.GetComponent<Animation>()) ;
+			}
 		}
 	}
 
@@ -274,7 +278,14 @@ public class NPC : object_base {
 			}
 			else
 			{
-				anim.enabled=false;
+				if (ai!=null)
+				{
+					ai.AI.IsActive=false;
+				}
+				if (anim!=null)
+				{
+					anim.enabled=false;				
+				}				
 				return;
 			}
 
@@ -296,6 +307,7 @@ public class NPC : object_base {
 						}
 						break;
 				//Uses magic attacks when not very near
+				case "75":
 				case "81":
 				case "106":
 				case "107":
@@ -307,8 +319,8 @@ public class NPC : object_base {
 				case "123":						
 						if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
 						{//Ranged attack if far away
-								ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
-								SpellIndex= 81;//Magic arrow for the moment..
+							ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
+							SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
 						}
 						else
 						{
@@ -1044,5 +1056,15 @@ public class NPC : object_base {
 	public override Vector3 GetImpactPoint ()
 	{
 		return NPC_Launcher.transform.position;
+	}
+
+	public override GameObject GetImpactGameObject ()
+	{
+		return NPC_Launcher;
+	}
+
+	public GameObject getGtarg()
+	{
+		return gtarg;
 	}
 }

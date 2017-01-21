@@ -19,9 +19,9 @@ public class MapInteraction : GuiBase {
 		{
 			WindowDetect.InMap=false;
 
-			if  (GameWorldController.instance.mus!=null)
+			if  (GameWorldController.instance.getMus()!=null)
 			{
-					GameWorldController.instance.mus.InMap=false;
+			GameWorldController.instance.getMus().InMap=false;
 			}
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;

@@ -84,6 +84,36 @@ public class UWHUD : HUD {
 		public Text NPCName;
 
 
+		//Player inventory slots
+		//Links to the slots where the object will be displayed
+		public RawImage Helm_f_Slot;
+		public RawImage Chest_f_Slot;
+		public RawImage Legs_f_Slot;
+		public RawImage Boots_f_Slot;
+		public RawImage Gloves_f_Slot;
+		public RawImage Helm_m_Slot;
+		public RawImage Chest_m_Slot;
+		public RawImage Legs_m_Slot;
+		public RawImage Boots_m_Slot;
+		public RawImage Gloves_m_Slot;
+		public RawImage LeftHand_Slot;
+		public RawImage RightHand_Slot;
+		public RawImage LeftRing_Slot;
+		public RawImage RightRing_Slot;
+		public RawImage LeftShoulder_Slot;
+		public RawImage RightShoulder_Slot;
+		public RawImage[] BackPack_Slot=new RawImage[8];
+
+		public Text LeftHand_Qty;
+		public Text RightHand_Qty;
+		public Text LeftShoulder_Qty;
+		public Text RightShoulder_Qty;
+		public Text[] Backpack_Slot_Qty= new Text[8];
+
+
+
+
+
 		public Text ContextMenu;
 
 
@@ -237,8 +267,8 @@ public class UWHUD : HUD {
 					Quaternion fromQ= fromPanel.GetComponent<RectTransform>().rotation;;
 					Quaternion toQ = toPanel.GetComponent<RectTransform>().rotation; 
 
-					fromPanel.GetComponent<RectTransform>().SetSiblingIndex(4);
-					toPanel.GetComponent<RectTransform>().SetSiblingIndex(5);
+					fromPanel.GetComponent<RectTransform>().SetSiblingIndex(5);
+					toPanel.GetComponent<RectTransform>().SetSiblingIndex(6);
 
 					float rate = 1.0f/0.5f;
 					float index = 0.0f;

@@ -36,9 +36,9 @@ public class Map : object_base {
 		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
 		UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
 		UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
-		if  (GameWorldController.instance.mus!=null)
+		if  (GameWorldController.instance.getMus()!=null)
 		{
-			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
+			GameWorldController.instance.getMus().InMap=true;
 		}
 		UWHUD.instance.MessageScroll.Clear();
 

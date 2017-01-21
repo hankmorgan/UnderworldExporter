@@ -125,6 +125,8 @@ public class MusicController : UWEBase {
 	private bool StopProcessing;
 	private AudioSource Aud;
 
+	public AudioSource MusicalInstruments;
+
 
 	void Start () {
 		Aud= this.GetComponent<AudioSource>();

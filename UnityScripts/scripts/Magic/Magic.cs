@@ -2403,8 +2403,8 @@ public class Magic : UWEBase {
 						//float force = 200.0f;
 						for (int i=0;i<spellprop.noOfCasts;i++)
 						{
-								GameObject projectile = CreateMagicProjectile(caster.GetComponent<ObjectInteraction>().GetImpactPoint(), caster,spellprop);
-								LaunchProjectile(projectile,spellprop.Force);
+							GameObject projectile = CreateMagicProjectile(caster.GetComponent<ObjectInteraction>().GetImpactPoint(), caster.GetComponent<ObjectInteraction>().GetImpactGameObject(),spellprop);
+							LaunchProjectile(projectile,spellprop.Force);
 						}
 						return true;
 				}
@@ -2491,9 +2491,9 @@ public class Magic : UWEBase {
 				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 				mgp.spellprop=spellprop;
 
-				if (Caster.name=="NPC_Launcher")
+				if (Caster.name.Contains("NPC_Launcher"))
 				{
-						mgp.caster=Caster.transform.gameObject;
+						mgp.caster=Caster.transform.parent.gameObject;
 				}
 				else
 				{

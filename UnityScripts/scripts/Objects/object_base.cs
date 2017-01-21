@@ -678,4 +678,9 @@ public class object_base : UWEBase {
 			return this.gameObject.transform.position;
 		}
 
+		public virtual GameObject GetImpactGameObject()
+		{
+			return this.gameObject;
+		}
+
 }

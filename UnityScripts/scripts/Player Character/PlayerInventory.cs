@@ -38,30 +38,7 @@ public class PlayerInventory : UWEBase {
 	public bool bRightShoulder=true;
 	public bool[] bBackPack= new bool[8];
 
-	//Links to the slots where the object will be displayed
-	public RawImage Helm_f_Slot;
-	public RawImage Chest_f_Slot;
-	public RawImage Legs_f_Slot;
-	public RawImage Boots_f_Slot;
-	public RawImage Gloves_f_Slot;
-	public RawImage Helm_m_Slot;
-	public RawImage Chest_m_Slot;
-	public RawImage Legs_m_Slot;
-	public RawImage Boots_m_Slot;
-	public RawImage Gloves_m_Slot;
-	public RawImage LeftHand_Slot;
-	public RawImage RightHand_Slot;
-	public RawImage LeftRing_Slot;
-	public RawImage RightRing_Slot;
-	public RawImage LeftShoulder_Slot;
-	public RawImage RightShoulder_Slot;
-	public RawImage[] BackPack_Slot=new RawImage[8];
 
-	public Text LeftHand_Qty;
-	public Text RightHand_Qty;
-	public Text LeftShoulder_Qty;
-	public Text RightShoulder_Qty;
-	public Text[] Backpack_Slot_Qty= new Text[8];
 
 	public GameObject InventoryMarker;
 	private GameObject[] LightGameObjects=new GameObject[4];
@@ -136,32 +113,32 @@ public class PlayerInventory : UWEBase {
 
 		if (playerUW.isFemale==true)
 		{//female
-			DisplayGameObject (sHelm,Helm_f_Slot,null,true,ref bHelm);
-			DisplayGameObject (sChest,Chest_f_Slot,null,true,ref bChest);
-			DisplayGameObject (sLegs,Legs_f_Slot,null,true,ref bLegs);
-			DisplayGameObject (sBoots,Boots_f_Slot,null,true,ref bBoots);
-			DisplayGameObject (sGloves,Gloves_f_Slot,null,true,ref bGloves);
+			DisplayGameObject (sHelm,UWHUD.instance.Helm_f_Slot,null,true,ref bHelm);
+			DisplayGameObject (sChest,UWHUD.instance.Chest_f_Slot,null,true,ref bChest);
+			DisplayGameObject (sLegs,UWHUD.instance.Legs_f_Slot,null,true,ref bLegs);
+			DisplayGameObject (sBoots,UWHUD.instance.Boots_f_Slot,null,true,ref bBoots);
+			DisplayGameObject (sGloves,UWHUD.instance.Gloves_f_Slot,null,true,ref bGloves);
 		}
 		else
 		{//male
-			DisplayGameObject (sHelm,Helm_m_Slot,null,true,ref bHelm);
-			DisplayGameObject (sChest,Chest_m_Slot,null,true,ref bChest);
-			DisplayGameObject (sLegs,Legs_m_Slot,null,true,ref bLegs);
-			DisplayGameObject (sBoots,Boots_m_Slot,null,true,ref bBoots);
-			DisplayGameObject (sGloves,Gloves_m_Slot,null,true,ref bGloves);
+			DisplayGameObject (sHelm,UWHUD.instance.Helm_m_Slot,null,true,ref bHelm);
+			DisplayGameObject (sChest,UWHUD.instance.Chest_m_Slot,null,true,ref bChest);
+			DisplayGameObject (sLegs,UWHUD.instance.Legs_m_Slot,null,true,ref bLegs);
+			DisplayGameObject (sBoots,UWHUD.instance.Boots_m_Slot,null,true,ref bBoots);
+			DisplayGameObject (sGloves,UWHUD.instance.Gloves_m_Slot,null,true,ref bGloves);
 		}
 		
-		DisplayGameObject(sLeftShoulder,LeftShoulder_Slot,LeftShoulder_Qty,false,ref bLeftShoulder);
-		DisplayGameObject(sRightShoulder,RightShoulder_Slot,RightShoulder_Qty,false,ref bRightShoulder);
-		DisplayGameObject(sLeftRing,LeftRing_Slot,null,false,ref bLeftRing);
-		DisplayGameObject(sRightRing,RightRing_Slot,null,false,ref bRightRing);
-		
-		DisplayGameObject(sLeftHand,LeftHand_Slot,LeftHand_Qty,false,ref bLeftHand);
-		DisplayGameObject(sRightHand,RightHand_Slot,RightHand_Qty,false,ref bRightHand);
+		DisplayGameObject(sLeftShoulder,UWHUD.instance.LeftShoulder_Slot,UWHUD.instance.LeftShoulder_Qty,false,ref bLeftShoulder);
+		DisplayGameObject(sRightShoulder,UWHUD.instance.RightShoulder_Slot,UWHUD.instance.RightShoulder_Qty,false,ref bRightShoulder);
+		DisplayGameObject(sLeftRing,UWHUD.instance.LeftRing_Slot,null,false,ref bLeftRing);
+		DisplayGameObject(sRightRing,UWHUD.instance.RightRing_Slot,null,false,ref bRightRing);
+
+		DisplayGameObject(sLeftHand,UWHUD.instance.LeftHand_Slot,UWHUD.instance.LeftHand_Qty,false,ref bLeftHand);
+		DisplayGameObject(sRightHand,UWHUD.instance.RightHand_Slot,UWHUD.instance.RightHand_Qty,false,ref bRightHand);
 		
 		for (int i = 0 ; i < 8; i++)
 		{
-			DisplayGameObject (sBackPack[i],BackPack_Slot[i],Backpack_Slot_Qty[i],false,ref bBackPack[i]);
+			DisplayGameObject (sBackPack[i],UWHUD.instance.BackPack_Slot[i],UWHUD.instance.Backpack_Slot_Qty[i],false,ref bBackPack[i]);
 		}
 		return;
 	}

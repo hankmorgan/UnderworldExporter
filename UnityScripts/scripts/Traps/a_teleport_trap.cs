@@ -16,10 +16,10 @@ public class a_teleport_trap : trap_base {
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		//CheckReferences();
-		if (levelNo==0)//At the moment ignore the level teleport.
+		if (levelNo==0)
 		{
 			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
-		}
+								}
 		else
 		{
 			float TileHeight = (float)GameWorldController.instance.Tilemap.GetFloorHeight(levelNo-1,objInt().Quality,objInt().Owner);
@@ -28,6 +28,8 @@ public class a_teleport_trap : trap_base {
 			//GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
 			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,posNewTile,targetY);
 			GameWorldController.instance.SwitchLevel(levelNo-1);
+						//Move to the level height
+
 			//Debug.Log ("teleporting to level " + (levelNo-1));
 			//RoomManager.LoadRoom(levelNo.ToString());
 		}

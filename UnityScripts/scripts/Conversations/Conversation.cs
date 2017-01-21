@@ -206,9 +206,9 @@ public class Conversation : GuiBase {
 
 
 		///Sets the music to the conversation theme
-		if  (GameWorldController.instance.mus!=null)
+		if  (GameWorldController.instance.getMus()!=null)
 		{
-			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
+			GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
 		}
 
 		///Slows the world down so no other npc will attack or interupt the conversation
@@ -259,9 +259,9 @@ public class Conversation : GuiBase {
 		tl_input.Clear ();
 
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-		if  (GameWorldController.instance.mus!=null)
+		if  (GameWorldController.instance.getMus()!=null)
 		{
-			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=false;
+			GameWorldController.instance.getMus().InMap=false;
 		}
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
 		{

@@ -40,6 +40,7 @@ public class GameWorldController : UWEBase {
 
 		public Vector3 StartPos=new Vector3(38f, 4f, 2.7f);
 
+		private static bool UpdateLevel;
 
 	/// <summary>
 	/// Array of cycled game palettes for animatione effects.
@@ -76,7 +77,7 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// The music controller for the game
 	/// </summary>
-	public MusicController mus;
+	private MusicController mus;
 
 
 	/// <summary>
@@ -147,6 +148,14 @@ public class GameWorldController : UWEBase {
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
+		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
+		{
+			if(WorldModel[i]==null)
+			{
+				WorldModel[i]=GameObject.Find("_Level" + i);
+			}
+		}
+
 		if ((AtMainMenu) && (!LevelSerializer.IsDeserializing))
 		{
 			SwitchLevel(-1);//Turn off all level maps
@@ -156,16 +165,50 @@ public class GameWorldController : UWEBase {
 			playerUW.playerController.enabled=false;
 			playerUW.playerMotor.enabled=false;
 			playerUW.transform.position=Vector3.zero;
-			mus.InIntro=true;
+
+			getMus().InIntro=true;
 		}
 		else
 		{
 			AtMainMenu=false;
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);	
 			UWHUD.instance.mainmenu.gameObject.SetActive(false);
+
+
 		}
 		return;
 	}
+
+		void Update()
+		{			
+				//return;
+				//Make sure I don't lose any references
+				for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
+				{
+						if(WorldModel[i]==null)
+						{
+								WorldModel[i]=GameObject.Find("_Level" + i);
+						}
+				}
+
+				for (int i=0; i <=LevelObjects.GetUpperBound(0);i++)
+				{
+						if(LevelObjects[i]==null)
+						{
+								LevelObjects[i]=GameObject.Find("Level" + i + "Objects");
+						}
+				}
+				//return;
+				if(LevelNo>=0)
+				{
+					if (WorldModel[LevelNo].activeSelf==false)
+					{//Force the current level to become active
+						WorldModel[LevelNo].SetActive(true);	
+						LevelObjects[LevelNo].SetActive(true);
+					}					
+				}
+
+		}
 
 		/// <summary>
 		/// Gets the current level model.
@@ -173,7 +216,7 @@ public class GameWorldController : UWEBase {
 		/// <returns>The current level model gameobject</returns>
 	public GameObject getCurrentLevelModel()
 	{
-		return GameWorldController.instance.WorldModel[LevelNo];
+		return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
 	}
 
 	/// <summary>
@@ -299,7 +342,11 @@ public class GameWorldController : UWEBase {
 	{
 		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
 		{
-			WorldModel[i].transform.parent.gameObject.SetActive(i==newLevelNo);
+			if(WorldModel[i]==null)
+			{
+				WorldModel[i]=GameObject.Find("_Level" + i);
+			}
+			WorldModel[i].SetActive(i==newLevelNo);
 			LevelObjects[i].SetActive(i==newLevelNo);
 		}	
 		LevelNo=newLevelNo;
@@ -342,4 +389,15 @@ public class GameWorldController : UWEBase {
 
 				}
 		}
+
+		public MusicController getMus()
+		{
+			if (mus==null)	
+			{
+				mus=GameObject.Find("_MusicController").GetComponent<MusicController>();
+			}
+			return mus;
+		}
+
+
 }

@@ -31,12 +31,12 @@ public class CutsceneAnimation : HudAnimation {
 			break;
 		case "Death_With_Sapling"://Resurrection
 		//	MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
-			if (GameWorldController.instance.mus!=null)
+			if (GameWorldController.instance.getMus()!=null)
 			{
 				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
-				GameWorldController.instance.mus.Death=false;
-				GameWorldController.instance.mus.Combat=false;
-				GameWorldController.instance.mus.Fleeing=false;
+				GameWorldController.instance.getMus().Death=false;
+				GameWorldController.instance.getMus().Combat=false;
+				GameWorldController.instance.getMus().Fleeing=false;
 				MusicController.LastAttackCounter=0.0f;
 			}
 			//maincam.enabled=true;
