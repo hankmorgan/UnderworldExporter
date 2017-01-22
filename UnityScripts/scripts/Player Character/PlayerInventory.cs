@@ -5,7 +5,7 @@ public class PlayerInventory : UWEBase {
 
 	//The game objects at the various slots. (not in use?)
 
-	public int game;
+	//public int game;
 	//TODO:make object in hand private so I can update code usages to use api instead.
 	public string ObjectInHand; //What is the current active object held by the player
 	public bool JustPickedup; //Has the player just picked something up.
@@ -83,11 +83,10 @@ public class PlayerInventory : UWEBase {
 	
 	// Update is called once per frame
 	void Update () {
-
-		switch (game)
+		
+		switch(_RES)		
 		{
-
-		case 2:
+		case "SS1":
 			{
 			UpdateShock();
 				break;
@@ -108,9 +107,6 @@ public class PlayerInventory : UWEBase {
 
 	void UpdateUW()
 	{
-				
-
-
 		if (playerUW.isFemale==true)
 		{//female
 			DisplayGameObject (sHelm,UWHUD.instance.Helm_f_Slot,null,true,ref bHelm);
@@ -827,10 +823,10 @@ public class PlayerInventory : UWEBase {
 				return null;
 		}
 
-	public void SetObjectInHand(GameObject obj)
-	{
-		ObjectInHand=obj.name;
-	}
+	//public void SetObjectInHand(GameObject obj)
+	//{
+	//	ObjectInHand=obj.name;
+	//}
 
 	public void SetObjectInHand(string obj)
 	{
@@ -847,18 +843,18 @@ public class PlayerInventory : UWEBase {
 		return GameObject.Find (name);
 	}
 
-		public void PutItemAwayEvent(int slotNo)
+	public void PutItemAwayEvent(int slotNo)
+	{
+		GameObject obj = GetGameObjectAtSlot(slotNo);
+		if (obj !=null)
 		{
-				GameObject obj = GetGameObjectAtSlot(slotNo);
-				if (obj !=null)
-				{
-						ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
-						if (objInt!=null)
-						{
-								objInt.PutItemAway(slotNo);
-						}
-				}	
-		}
+			ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+			if (objInt!=null)
+			{
+					objInt.PutItemAway(slotNo);
+			}
+		}	
+	}
 
 	public void EquipItemEvent(int slotNo)
 	{//This must be called after the item is finally set.
@@ -902,18 +898,14 @@ public class PlayerInventory : UWEBase {
 		//Get the weight of the gronk container as that is alway the top level of the inventory
 		for (int i = 0; i<=playerContainer.MaxCapacity();i++)
 		{
-			if (playerContainer.GetItemAt(i)!="")
+			GameObject objItem = playerContainer.GetGameObjectAt(i); //GameObject.Find (playerContainer.GetItemAt(i));
+			if (objItem!=null)
 			{
-				GameObject objItem =GameObject.Find (playerContainer.GetItemAt(i));
-				if (objItem!=null)
-				{
-					answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
-				}
-				else
-				{
-					answer+=0;
-				}
-
+				answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
+			}
+			else
+			{
+				answer+=0;
 			}
 		}
 		return answer;
@@ -926,8 +918,6 @@ public class PlayerInventory : UWEBase {
 
 		float InventoryWeight=getInventoryWeight();
 		float CarryWeight = playerUW.PlayerSkills.STR*2.0f;
-		//Debug.Log ("carry weight = " + CarryWeight);
-		//Debug.Log ("inventory weight = " + InventoryWeight);
 		return CarryWeight-InventoryWeight;
 	}
 

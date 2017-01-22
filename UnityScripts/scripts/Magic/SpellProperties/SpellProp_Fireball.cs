@@ -7,7 +7,7 @@ public class SpellProp_Fireball : SpellProp {
 	protected float splashDistance;
 	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;
-	public GameObject caster; //who casted the spell
+	//public GameObject caster; //who casted the spell
 
 	public override void init(int effectId, GameObject SpellCaster)
 	{

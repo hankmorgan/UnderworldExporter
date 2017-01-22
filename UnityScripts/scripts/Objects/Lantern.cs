@@ -6,18 +6,18 @@ using System.Collections;
 /// Special variant of light sources that uses fuel to burn rather
 public class Lantern : LightSource {
 
-		/// <summary>
-		/// Activation of this object by another. EG key on door
-		/// </summary>
-		/// <returns>true</returns>
-		/// <c>false</c>
-		/// <param name="ObjectUsed">Object used.</param>
-		/// Using oil on the lantern increases it's quality.
+	/// <summary>
+	/// Activation of this object by another. EG key on door
+	/// </summary>
+	/// <returns>true</returns>
+	/// <c>false</c>
+	/// <param name="ObjectUsed">Object used.</param>
+	/// Using oil on the lantern increases it's quality.
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
-				//000~001~178~You think it is a bad idea to add oil to the lit lantern. \n
-				//000~001~179~Adding oil, you refuel the lantern. \n
-				//000~001~180~The lantern is already full. \n
+		//000~001~178~You think it is a bad idea to add oil to the lit lantern. \n
+		//000~001~179~Adding oil, you refuel the lantern. \n
+		//000~001~180~The lantern is already full. \n
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
@@ -52,18 +52,18 @@ public class Lantern : LightSource {
 	}
 
 
-		public override string UseObjectOnVerb_Inv ()
+	public override string UseObjectOnVerb_Inv ()
+	{
+		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		if (ObjIntInHand!=null)
 		{
-				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
-				if (ObjIntInHand!=null)
-				{
-						switch (ObjIntInHand.GetItemType())	
-						{
-						case ObjectInteraction.OIL:
-								return "refill lantern";
-						}
-				}
-
-				return base.UseObjectOnVerb_Inv();
+			switch (ObjIntInHand.GetItemType())	
+			{
+			case ObjectInteraction.OIL:
+				return "refill lantern";
+			}
 		}
+
+		return base.UseObjectOnVerb_Inv();
+	}
 }

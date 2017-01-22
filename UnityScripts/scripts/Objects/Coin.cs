@@ -12,7 +12,6 @@ public class Coin : object_base {
 
 	}
 
-
 	public override void Split ()
 	{
 		base.Split ();
@@ -54,20 +53,12 @@ public class Coin : object_base {
 			if (objInt().GetQty ()>1)
 			{
 				ChangeType(160,objInt().GetItemType());
-				//objInt().item_id=160;
-				////objInt().WorldDisplayIndex=160;
-				//objInt().InvDisplayIndex=160;
-				//objInt().UpdateAnimation();
 			}
 			break;
 		case 160://A stack of coins.
 			if (objInt().GetQty ()==1)
 			{
 				ChangeType(161,objInt().GetItemType());
-				//objInt().item_id=161;
-				//objInt().WorldDisplayIndex=161;
-				//objInt().InvDisplayIndex=161;
-				//objInt().UpdateAnimation();
 			}
 			break;
 		}

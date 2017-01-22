@@ -41,12 +41,6 @@ public class ObjectMasters {
 		public string[] EquippedIconMaleBestQuality= new string[500];
 		public int[] ShouldSave=new int[500];
 
-
-	// Use this for initialization
-	//void Start () {
-	//	Load(PathToConfig);
-	//}
-
 	public bool Load(string fileName)
 	{
 		int i=0;

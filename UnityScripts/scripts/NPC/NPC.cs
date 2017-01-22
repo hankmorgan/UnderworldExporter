@@ -9,23 +9,26 @@ using RAIN.Minds;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
 	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
+
+	//TODO: these need to match the UW npc_goals
+	//The behaviour trees need to be updated too.
+	public const int AI_STATE_IDLERANDOM = 0;
+	public const int AI_STATE_COMBAT = 1;
+	public const int AI_STATE_DYING = 2;
+	public const int AI_STATE_STANDING = 3;
+	public const int AI_STATE_WALKING = 4 ;
+	public const int AI_STATE_FLEE = 5 ;
+	public const int AI_STATE_FOLLOW = 6 ;
+
 	//attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 	public const int AI_ATTITUDE_HOSTILE = 0 ;
 	public const int AI_ATTITUDE_UPSET = 1 ;
 	public const int AI_ATTITUDE_MELLOW = 2 ;
 	public const int AI_ATTITUDE_FRIENDLY = 3 ;
 
-
-		public float adj=8.0f;
-		public float testforce=500.0f;
-  	 //Animations are clasified by number
+ 	//Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
 	public const int AI_RANGE_MOVE = 10 ;
-	//public const int AI_RANGE_DEATH = 100 ;
-	//public const int AI_RANGE_ATTACK_BASH = 1000 ;
-	//public const int AI_RANGE_ATTACK_SLASH = 2000 ;
-	//public const int AI_RANGE_ATTACK_THRUST = 3000 ;
-	//public const int AI_RANGE_COMBAT_IDLE = 4000 ;
 	
 	public const int AI_ANIM_IDLE_FRONT = 1;
 	public const int AI_ANIM_IDLE_FRONT_RIGHT = 2;
@@ -51,24 +54,25 @@ public class NPC : object_base {
 	public const int AI_ANIM_ATTACK_THRUST =3000;
 	public const int AI_ANIM_COMBAT_IDLE =4000;
 	public const int AI_ANIM_ATTACK_SECONDARY =5000;
+	
 	///Anim range defines which animation set to play.
 	///Multiple of 10 for dividing animations
 	///Angle index * Anim Range give AI_ANIM_X value to pick animation
 	public int AnimRange=1;
 	
-		public int CalcFacingForDebug;
+	//public int CalcFacingForDebug;
 
 	/// Object ID for the NPC
-	public string NPC_ID;
+	private string NPC_ID;
 	
 	/// The animation that is currently set
-	public string CurrentAnim;
+	//private string CurrentAnim="";
 	
 	/// The animator that the NPC is using for it's animations
 	private Animator anim;
 	
 	/// For tracking the state of the NPC
-	public int currentState=-1;
+//	public int currentState=-1;
 
 	/// Thinks this has to do with changing the NPC on the fly
 	//private string oldNPC_ID;
@@ -88,17 +92,6 @@ public class NPC : object_base {
 	private Vector3 direction;	//vector between the player and the ai.
 	/// The angle to the character from the player.
 	private float angle;
-
-
-	//TODO: these need to match the UW npc_goals
-	//The behaviour trees need to be updated too.
-	public const int AI_STATE_IDLERANDOM = 0;
-	public const int AI_STATE_COMBAT = 1;
-	public const int AI_STATE_DYING = 2;
-	public const int AI_STATE_STANDING = 3;
-	public const int AI_STATE_WALKING = 4 ;
-	public const int AI_STATE_FLEE = 5 ;
-	public const int AI_STATE_FOLLOW = 6 ;
 
 	/// The Navmesh region the NPC is in
 	public string NavMeshRegion;
@@ -141,13 +134,13 @@ public class NPC : object_base {
 
 	///Set state when not in combat or dying.
 	///TODO: The state should be replaced with a combination of the above variables and match what UW does.
-	public int state=0; 
+	//private int state=0; 
 
 	///For storing spell effects applied to NPCs
 	public SpellEffect[] NPCStatusEffects=new SpellEffect[3];
 
 	///To flag initiation of the player into the AI modules
-	private static bool playerUWReady;
+	//private static bool playerUWReady;
 	///AI module for the character.
 	private AIRig ai;	
 	
@@ -156,25 +149,20 @@ public class NPC : object_base {
 	///Transform position to launch projectiles from
 	public GameObject NPC_Launcher; 
 	///What spell the NPC should cast if they have magicAttack==true
-	public int SpellIndex; 	
+	private int SpellIndex; 	
 
-	public int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+	private int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 
 	void Awake () {
-		//oldNPC_ID=NPC_ID;
 		anim=GetComponentInChildren<Animator>();
 	}
 
 
-		/// <summary>
-		/// Initialise some basic info for the NPC ai.
-		/// </summary>
+	/// <summary>
+	/// Initialise some basic info for the NPC ai.
+	/// </summary>
 	protected override void Start () {
 		base.Start();
-		//this.gameObject.tag="NPCs";
-		//Gob = this.GetComponent<GoblinAI>();
-		//ai = this.GetComponentInChildren<AIRig>();
-		//AI_INIT ();
 	}
 
 	void AI_INIT ()
@@ -182,12 +170,11 @@ public class NPC : object_base {
 		if (ai == null) {
 			GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
 			GameObject newObj = (GameObject)GameObject.Instantiate (myInstance);
+			NPC_ID=objInt().item_id.ToString();
 			newObj.name = this.gameObject.name + "_AI";
 			newObj.transform.position = Vector3.zero;
-			//new Vector3(0,0,0);
 			newObj.transform.parent = this.gameObject.transform;
 			newObj.transform.localPosition = Vector3.zero;
-			//new Vector3(0,0,0);
 			AIRig aiR = newObj.GetComponent<AIRig> ();
 			aiR.AI.Body = this.gameObject;
 			ai = aiR;
@@ -203,11 +190,11 @@ public class NPC : object_base {
 		}
 	}
 
-		/// <summary>
-		/// Raises the death events for the player.
-		/// </summary>
-		/// Uses the conversation for special npcs like Tybal, the Golem and the Beholder.
-		/// Dumps out their inventory.
+	/// <summary>
+	/// Raises the death events for the player.
+	/// </summary>
+	/// Uses the conversation for special npcs like Tybal, the Golem and the Beholder.
+	/// Dumps out their inventory.
 	void OnDeath()
 	{
 		//If the NPC has a conversation module check it to see if it has any special onDeath code. Eg Tybal, the Gazer on lvl2 and the Golem on Level 6
@@ -227,15 +214,13 @@ public class NPC : object_base {
 		{
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
-
-		//GameWorldController.instance.playerUW.AddXP(npc_power*5);//TODO:Is this set somewhere. Common obj props?
 		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.critter.Exp[objInt().item_id-64]);
 	}
 
-		/// <summary>
-		/// Update the NPC state, AI and animations
-		/// </summary>
-		/// AI is only active when the player is close.
+	/// <summary>
+	/// Update the NPC state, AI and animations
+	/// </summary>
+	/// AI is only active when the player is close.
 	protected virtual void  Update () {
 		if (Frozen)
 		{//NPC will not move until timer is complete.
@@ -247,7 +232,6 @@ public class NPC : object_base {
 			{
 				FrozenUpdate--;
 			}
-			state = AI_STATE_STANDING;
 		}
 
 
@@ -261,19 +245,17 @@ public class NPC : object_base {
 		}
 		if (anim==null)
 		{
-				anim=GetComponentInChildren<Animator>();
+			anim=GetComponentInChildren<Animator>();
 		}
 
-		//else
-		//{//The AI is only active when the player is within a certain distance to the player camera.
+		//The AI is only active when the player is within a certain distance to the player camera.
 		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
 			{
 				if (objInt()!=null)
 				{
-						AI_INIT ();
-						ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
-
-						anim.enabled=true;		
+					AI_INIT ();
+					ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
+					anim.enabled=true;		
 				}							
 			}
 			else
@@ -289,48 +271,48 @@ public class NPC : object_base {
 				return;
 			}
 
-				//Decide what attack modes to use
-				switch (NPC_ID)
-				{
-				//Uses ranged weapons
-				case "70":
-				case "76":
-				case "77":
-				case "78":
-						if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) && (Ammo>0))
-						{//Ranged attack if far away
-								ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
-						}
-						else
-						{
-								ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
-						}
-						break;
-				//Uses magic attacks when not very near
-				case "75":
-				case "81":
-				case "106":
-				case "107":
-				case "108":
-				case "109":
-				case "115":
-				case "120":
-				case "122":
-				case "123":						
-						if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
-						{//Ranged attack if far away
-							ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
-							SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
-						}
-						else
-						{
-								ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
-						}
-						break;
-				default:
-						ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
-						break;
+			//Decide what attack modes to use
+			switch (NPC_ID)
+			{
+			//Uses ranged weapons
+			case "70":
+			case "76":
+			case "77":
+			case "78":
+				if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) && (Ammo>0))
+				{//Ranged attack if far away
+					ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
 				}
+				else
+				{
+					ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+				}
+				break;
+			//Uses magic attacks when not very near
+			case "75":
+			case "81":
+			case "106":
+			case "107":
+			case "108":
+			case "109":
+			case "115":
+			case "120":
+			case "122":
+			case "123":						
+				if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
+				{//Ranged attack if far away
+					ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
+					SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
+				}
+				else
+				{
+					ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+				}
+				break;
+			default:
+				ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
+				break;
+			}
 
 			//Update the appearance of the NPC
 			UpdateSprite();
@@ -429,83 +411,67 @@ public class NPC : object_base {
 
 					case 5://Attack target
 					case 9:
-							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-							Vector3 AB = this.transform.position - gtarg.transform.position;
-							//Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-							Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
-							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
-							break;
+						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
+						Vector3 AB = this.transform.position - gtarg.transform.position;
+						Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
+						ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
+						break;
 
 					case 6://Run away (morale failure)
-							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FLEE);//Set to idle
-							break;
+						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FLEE);//Set to idle
+						break;
 
 					case 3://Follow target
-							state=AI_STATE_FOLLOW;
-								if (gtarg!=null)
+					
+						if (gtarg!=null)
+						{
+							Vector3 ABf =this.transform.position - gtarg.transform.position;
+							Vector3 MoveposF = gtarg.transform.position + (0.9f * ABf.normalized) ;
+							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
+							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
+						
+							if (gtarg.name=="_Gronk")
+							{//Help out the player dynamically
+								if (GameWorldController.instance.playerUW.HelpMeMyFriends==true)
 								{
-									Vector3 ABf =this.transform.position - gtarg.transform.position;
-									Vector3 MoveposF = gtarg.transform.position + (0.9f * ABf.normalized) ;
-									ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
-									ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
-								
-									if (gtarg.name=="_Gronk")
-									{//Help out the player dynamically
-										if (GameWorldController.instance.playerUW.HelpMeMyFriends==true)
-										{
-										GameWorldController.instance.playerUW.HelpMeMyFriends=false;
-										//If I'm not already busy with another NPC
-											if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
-											{
-												gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
-												npc_goal=5;
-												npc_gtarg=999;
-												gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
-											}
-
-										}
+								GameWorldController.instance.playerUW.HelpMeMyFriends=false;
+								//If I'm not already busy with another NPC
+									if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
+									{
+										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
+										npc_goal=5;
+										npc_gtarg=999;
+										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
 									}
+
 								}
-							break;
+							}
+						}
+					break;
 								
 				}
-
-				/*if (npc_attitude==0)
-					{//Combat begin
-					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-					Vector3 AB = GameWorldController.instance.playerUW.transform.position-this.transform.position;
-					//Set this to gtarg
-					Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-					ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
-					}
-				else
-					{//Friendly states
-						ai.AI.WorkingMemory.SetItem<int>("state",state);//Set to idle
-					}*/
 			}
 		}
-	//}
 
-
-		/// <summary>
-		/// Applies the attack to the NPC
-		/// </summary>
-		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
-		/// <param name="damage">Damage.</param>
-		/// NPC becomes hostile on attack. 
+	/// <summary>
+	/// Applies the attack to the NPC
+	/// </summary>
+	/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
+	/// <param name="damage">Damage.</param>
+	/// NPC becomes hostile on attack. 
 	public override bool ApplyAttack(int damage)
 	{
 		npc_hp=npc_hp-damage;
 		return true;
 	}
 
-		/// <summary>
-		/// Applies the attack from a known source
-		/// </summary>
-		/// <returns>true</returns>
-		/// <c>false</c>
-		/// <param name="damage">Damage.</param>
-		/// <param name="source">Source.</param>
+	/// <summary>
+	/// Applies the attack from a known source
+	/// </summary>
+	/// <returns>true</returns>
+	/// <c>false</c>
+	/// <param name="damage">Damage.</param>
+	/// <param name="source">Source.</param>
 	public override bool ApplyAttack (int damage, GameObject source)
 	{
 		if (source!=null)
@@ -544,10 +510,10 @@ public class NPC : object_base {
 		return true;
 	}
 
-		/// <summary>
-		/// Begins a conversation if possible
-		/// </summary>
-		/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
+	/// <summary>
+	/// Begins a conversation if possible
+	/// </summary>
+	/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 	public override bool TalkTo()
 	{//Begin a conversation.
 		string npcname="";
@@ -597,10 +563,10 @@ public class NPC : object_base {
 		return true;
 	}
 
-		/// <summary>
-		/// Looks at the NPC
-		/// </summary>
-		/// <returns>The <see cref="System.Boolean"/>.</returns>
+	/// <summary>
+	/// Looks at the NPC
+	/// </summary>
+	/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public override bool LookAt ()
 	{//TODO:For specific characters that don't follow the standard naming convention use their conversation for the lookat.
 		string output="";
@@ -622,7 +588,7 @@ public class NPC : object_base {
 			{
 				if(objInt().isIdentified==true)
 				{
-						output=output+" named " + StringController.instance.GetString (7,npc_whoami+16);
+					output=output+" named " + StringController.instance.GetString (7,npc_whoami+16);
 				}				
 			}
 
@@ -632,10 +598,10 @@ public class NPC : object_base {
 	}
 
 
-		/// <summary>
-		/// Gives a mood string for NPCs
-		/// </summary>
-		/// <returns>The mood desc.</returns>
+	/// <summary>
+	/// Gives a mood string for NPCs
+	/// </summary>
+	/// <returns>The mood desc.</returns>
 	private string NPCMoodDesc()
 	{	//004€005€096€hostile
 		//004€005€097€upset
@@ -656,20 +622,15 @@ public class NPC : object_base {
 	}
 
 
-		/// <summary>
-		///Updates the appearance of the NPC
-		/// </summary>
-		/// Calculates the relative angle to the NPC
+	/// <summary>
+	///Updates the appearance of the NPC
+	/// </summary>
+	/// Calculates the relative angle to the NPC
 	void UpdateSprite () {
 		if (anim == null)
 		{
 			anim = GetComponentInChildren<Animator>();
 		}
-		//if (NPC_ID!=oldNPC_ID)
-		//{
-		//	currentState=-1;
-		//	oldNPC_ID=NPC_ID;
-		//}
 		//Get the relative vector between the player and the npc.
 		direction = GameWorldController.instance.playerUW.gameObject.transform.position - this.gameObject.transform.position;
 		//Convert the direction into an angle.
@@ -711,23 +672,23 @@ public class NPC : object_base {
 				//1=frontright
 				//7=frontleft
 
-				CalcFacingForDebug=CalcedFacing;
-				if (
-						((AnimRange== AI_ANIM_ATTACK_BASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
-						||
-						((AnimRange== AI_ANIM_ATTACK_SLASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
-						||
-						((AnimRange== AI_ANIM_ATTACK_THRUST) &&  (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
-						||
-						((AnimRange== AI_ANIM_COMBAT_IDLE) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
-				)
-				{
-					CalcedFacing=(CalcedFacing+1)*1;//Use an idle animation if we can't see the attack
-				}
-				else
-				{
-					CalcedFacing=(CalcedFacing+1)*AnimRange;				
-				}
+		//CalcFacingForDebug=CalcedFacing;
+		if (
+				((AnimRange== AI_ANIM_ATTACK_BASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+				||
+				((AnimRange== AI_ANIM_ATTACK_SLASH) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+				||
+				((AnimRange== AI_ANIM_ATTACK_THRUST) &&  (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+				||
+				((AnimRange== AI_ANIM_COMBAT_IDLE) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
+		)
+		{
+			CalcedFacing=(CalcedFacing+1)*1;//Use an idle animation if we can't see the attack
+		}
+		else
+		{
+			CalcedFacing=(CalcedFacing+1)*AnimRange;				
+		}
 		
 		
 		//play the calculated animation.
@@ -836,10 +797,10 @@ public class NPC : object_base {
 	}
 
 
-		/// <summary>
-		/// Breaks down the angle in the the facing sector. Clockwise from 0)
-		/// </summary>
-		/// <param name="angle">Angle.</param>
+	/// <summary>
+	/// Breaks down the angle in the the facing sector. Clockwise from 0)
+	/// </summary>
+	/// <param name="angle">Angle.</param>
 	int facing(float angle)
 	{
 		if ((angle >= -22.5) && (angle <= 22.5)) 
@@ -901,26 +862,22 @@ public class NPC : object_base {
 		}
 	}
 
-		/// <summary>
-		/// Checks if a new animation is needed and if so run it.
-		/// </summary>
-		/// <param name="pAnim">P animation.</param>
-		/// <param name="newState">New state.</param>
+	/// <summary>
+	/// Checks if a new animation is needed and if so run it.
+	/// </summary>
+	/// <param name="pAnim">P animation.</param>
+	/// <param name="newState">New state.</param>
 	void playAnimation(string pAnim, int newState)
 	{
-		if (newState!=currentState)
+		if (Frozen)
 		{
-			if (Frozen)
-			{
-				anim.enabled=true;
-				FrozenUpdate=2;
-			}
-			currentState=newState;
-			CurrentAnim=pAnim;
-			anim.Play(pAnim);
+			anim.enabled=true;
+			FrozenUpdate=2;
 		}
-	}
-
+		//currentState=newState;
+		//CurrentAnim=pAnim;
+		anim.Play(pAnim);
+		}
 
 	/// <summary>
 	/// NPC tries to hit the player.
@@ -938,7 +895,7 @@ public class NPC : object_base {
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player
-			TargetingPoint=GameWorldController.instance.playerUW.transform.position;
+			TargetingPoint=GameWorldController.instance.playerUW.TargetPoint.transform.position;
 		}
 		else
 		{//Trying to hit an object						
@@ -973,7 +930,7 @@ public class NPC : object_base {
 		}
 	}
 	/// <summary>
-		/// NPC casts a spell.
+	/// NPC casts a spell.
 	/// </summary>
 	public void ExecuteMagicAttack()
 	{
@@ -994,42 +951,38 @@ public class NPC : object_base {
 		{//Trying to hit an object						
 				TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
 		}
-				Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized;
-				TargetingVector=TargetingVector + new Vector3(0.0f,0.3f,0.0f);//Try and give the vector an arc
-		//Ray ray= new Ray(NPC_Launcher.transform.position,TargetingPoint-NPC_Launcher.transform.position);
-				Ray ray= new Ray(NPC_Launcher.transform.position,TargetingVector);
-				RaycastHit hit = new RaycastHit(); 
-				float dropRange=0.5f;
-				if (!Physics.Raycast(ray,out hit,dropRange))
-				{///Checks No object interferes with the launch
-						testforce=100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
-						float force = testforce;
-						GameObject launchedItem ;
-						launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
+		Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized;
+		TargetingVector=TargetingVector + new Vector3(0.0f,0.3f,0.0f);//Try and give the vector an arc
+		Ray ray= new Ray(NPC_Launcher.transform.position,TargetingVector);
+		RaycastHit hit = new RaycastHit(); 
+		float dropRange=0.5f;
+		if (!Physics.Raycast(ray,out hit,dropRange))
+		{///Checks No object interferes with the launch
+			float force =100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
+			GameObject launchedItem ;
+			launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
 
-						//launchedItem = Instantiate(currentAmmo.gameObject);
-						launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-						launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+			//launchedItem = Instantiate(currentAmmo.gameObject);
+			launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
+			launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
 
-						launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
-						launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+			launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+			launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 
-						launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
-						GameWorldController.UnFreezeMovement(launchedItem);
-						Vector3 ThrowDir = TargetingVector;//ray.GetPoint(dropRange) - ray.origin;
-						///Apply the force along the direction of the ray that the player has targetted along.
-						launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
-						GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
-						myObjChild.transform.position =launchedItem.transform.position;
-						myObjChild.transform.parent =launchedItem.transform;
-						///Appends ProjectileDamage to the projectile to act as the damage delivery method.
-						ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
-						pd.Source=this.gameObject;
-						pd.Damage=10;
-						Ammo--;
-
-				}
-
+			launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
+			GameWorldController.UnFreezeMovement(launchedItem);
+			Vector3 ThrowDir = TargetingVector;
+			///Apply the force along the direction of the ray that the player has targetted along.
+			launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+			GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
+			myObjChild.transform.position =launchedItem.transform.position;
+			myObjChild.transform.parent =launchedItem.transform;
+			///Appends ProjectileDamage to the projectile to act as the damage delivery method.
+			ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
+			pd.Source=this.gameObject;
+			pd.Damage=10;
+			Ammo--;
+		}
 	}
 
 	public override string ContextMenuDesc (int item_id)
@@ -1065,6 +1018,10 @@ public class NPC : object_base {
 		return NPC_Launcher;
 	}
 
+	/// <summary>
+	/// Returns the object that this NPC is targeting
+	/// </summary>
+	/// <returns>The gtarg.</returns>
 	public GameObject getGtarg()
 	{
 		return gtarg;

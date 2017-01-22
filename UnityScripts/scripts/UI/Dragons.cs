@@ -77,7 +77,6 @@ public class Dragons : GuiBase {
 						{
 								return "DragonLeftIdle";
 						}
-						break;
 
 			case "HANDS":
 						if(CurrentSide)
@@ -88,8 +87,7 @@ public class Dragons : GuiBase {
 						{
 								return "DragonLeftHands";
 						}
-					break;
-
+	
 			case "SHAKE":
 						if(CurrentSide)
 						{
@@ -99,8 +97,6 @@ public class Dragons : GuiBase {
 						{
 								return "DragonLeftTailShake";
 						}
-						break;
-					break;
 
 			case "DUCK":
 						if(CurrentSide)
@@ -111,8 +107,6 @@ public class Dragons : GuiBase {
 						{
 								return "DragonLeftDuck";
 						}
-						break;
-					break;
 				default:
 						if(CurrentSide)
 						{
@@ -122,7 +116,6 @@ public class Dragons : GuiBase {
 						{
 								return "DragonLeftIdle";
 						}
-						break;
 			}
 		}
 

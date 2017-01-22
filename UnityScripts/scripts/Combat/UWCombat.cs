@@ -8,9 +8,10 @@ public class UWCombat : Combat {
 	/// The current ranged weapon held by the player
 	public WeaponRanged currWeaponRanged; 
 	/// The inventory object that is to be launched in the next ranged attack. 
-	public ObjectInteraction currentAmmo; 
-
-		public string CurrentStrike;//What animation to play for this weapon swing.
+	private ObjectInteraction currentAmmo; 
+	
+	///What animation to play for this weapon swing
+	private string CurrentStrike;
 
 	public override void PlayerCombatIdle ()
 	{
@@ -102,11 +103,7 @@ public class UWCombat : Combat {
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
-			if (hit.transform.Equals(this.transform))
-			{
-				//Debug.Log ("you've hit yourself ? " + hit.transform.name);
-			}
-			else
+			if (!hit.transform.Equals(this.transform))
 			{
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
@@ -222,7 +219,7 @@ public class UWCombat : Combat {
 			{///Sets the weapon, race and handedness animation.
 				if (CurrentStrike=="")
 				{
-						CurrentStrike=GetStrikeType();		
+					CurrentStrike=GetStrikeType();		
 				}
 				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
@@ -431,51 +428,46 @@ public class UWCombat : Combat {
 
 
 	static int RollForAHitMelee(UWCharacter Origin, ObjectInteraction Target, WeaponMelee weap)
+	{
+		//0 =Miss
+		//1 = hit
+		//2 = Crit eventually.
+		int HitScore;
+		int DefenseScore;
+		int WeaponSkill;
+
+		if (weap!=null)
 		{
-				//0 =Miss
-				//1 = hit
-				//2 = Crit eventually.
-				int HitScore;
-				int DefenseScore;
-				int WeaponSkill;
+			WeaponSkill= Origin.PlayerSkills.GetSkill(weap.GetSkill());		
+		}
+		else
+		{
+			WeaponSkill= Origin.PlayerSkills.GetSkill(Skills.SkillUnarmed);
+		}
+		HitScore=Origin.PlayerSkills.Attack/2+WeaponSkill+ Random.Range(1,5);
+		if (Target.GetComponent<NPC>()!=null)
+		{//Target is an NPC
+				//Need to calculate this based on npc level
 
-				if (weap!=null)
-				{
-						WeaponSkill= Origin.PlayerSkills.GetSkill(weap.GetSkill());		
-				}
-				else
-				{
-						WeaponSkill= Origin.PlayerSkills.GetSkill(Skills.SkillUnarmed);
-				}
-				HitScore=Origin.PlayerSkills.Attack/2+WeaponSkill+ Random.Range(1,5);
-				if (Target.GetComponent<NPC>()!=null)
-				{//Target is an NPC
-						//Need to calculate this based on npc level
-
-						DefenseScore=-1;	//Until I figure out what values drive this, always hit.
-				}
-				else
-				{
-						DefenseScore=-1;//Will always hit an non-npc;
-				}
-
-				if (DefenseScore<=HitScore)
-				{
-						return 1;		
-				}
-				else
-				{
-						return 0;//A Miss
-				}
-
+			DefenseScore=-1;	//Until I figure out what values drive this, always hit.
+		}
+		else
+		{
+			DefenseScore=-1;//Will always hit an non-npc;
 		}
 
-		static int RollForAHitMelee(NPC Origin, ObjectInteraction Target)
+		if (DefenseScore<=HitScore)
 		{
-				return 1;//Temp NPC will always hit.	
+			return 1;		
 		}
+		else
+		{
+			return 0;//A Miss
+		}
+	}
 
-
-
-
+	static int RollForAHitMelee(NPC Origin, ObjectInteraction Target)
+	{
+			return 1;//Temp NPC will always hit.	
+	}
 }

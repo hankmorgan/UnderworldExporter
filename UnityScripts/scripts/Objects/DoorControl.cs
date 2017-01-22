@@ -5,11 +5,11 @@ using System.Collections;
 /// </summary>
 public class DoorControl : object_base {
 	///The damage resistance of the door.
-	public int DR;
+	//public int DR;
 		///Is the door locked
 	public bool locked;
 		///What keys can open this
-	public int KeyIndex;
+	//public int KeyIndex; THis is the same as objInt.link
 		///True for open, false for closed.
 	public bool state;	
 		///Special cases. Sets direction of opening
@@ -47,7 +47,6 @@ public class DoorControl : object_base {
 	public override bool ActivateByObject(GameObject ObjectUsed)
 	{//Code for handling otherobjects used on this object
 	//Doors can be used by keys, picks and spikes.
-		//ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
@@ -64,7 +63,7 @@ public class DoorControl : object_base {
 						return true;
 					}
 						
-						if(KeyIndex==dk.KeyId)//This is a valid key for the door.
+						if(objInt().Link==dk.objInt().Owner)//This is a valid key for the door.
 						{
 							ToggleLock();
 							if (locked==true)
@@ -79,7 +78,7 @@ public class DoorControl : object_base {
 						}
 					else
 						{
-						if (KeyIndex==53)
+						if (objInt().Link==53)
 							{//There is no lock
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 							}
@@ -347,11 +346,11 @@ public class DoorControl : object_base {
 
 	public override bool ApplyAttack(int damage)
 	{//TODO:Find out how massive doors resist damage
-		if (DR<3)
+		if (DR()<3)
 		{
-		if (DR!=0)
+			if (DR()!=0)
 			{
-			damage= damage/DR;
+			damage= damage/DR();
 			}
 		objInt().Quality=objInt().Quality-damage;
 		if ((objInt().Quality<=0))
@@ -363,6 +362,32 @@ public class DoorControl : object_base {
 		return true;		
 	}
 
+	/// <summary>
+	/// Gets the Damage resistance of this door
+	/// </summary>
+	private int DR()
+	{
+		switch (objInt().item_id)
+		{
+		case 320://0
+		case 327:
+				return 0;
+		case 321://1
+		case 328:
+		case 322:
+		case 329:
+				return 1;
+		case 323://2
+		case 330:
+		case 324://2
+		case 331:
+				return 2;
+		case 325://3
+		case 333:
+		default:
+				return 3;
+		}
+	}
 
 
 	public override bool LookAt()
@@ -427,23 +452,23 @@ public class DoorControl : object_base {
 			}
 	}
 
-		public override string UseObjectOnVerb_World ()
+	public override string UseObjectOnVerb_World ()
+	{
+		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		if (ObjIntInHand!=null)
 		{
-				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
-				if (ObjIntInHand!=null)
-				{
-						switch (ObjIntInHand.GetItemType())	
-						{
-						case ObjectInteraction.KEY:
-							return "turn key in lock";
-						case ObjectInteraction.SPIKE:
-							return "spike door";
-						case ObjectInteraction.LOCKPICK:
-							return "attempt lockpicking";
-						}
-				}
-
-				return base.UseObjectOnVerb_Inv();
+			switch (ObjIntInHand.GetItemType())	
+			{
+			case ObjectInteraction.KEY:
+				return "turn key in lock";
+			case ObjectInteraction.SPIKE:
+				return "spike door";
+			case ObjectInteraction.LOCKPICK:
+				return "attempt lockpicking";
+			}
 		}
+
+		return base.UseObjectOnVerb_Inv();
+	}
 
 }

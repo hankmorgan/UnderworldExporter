@@ -72,24 +72,11 @@ public class Shrine : object_base {
 					inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
 				}
 				UWHUD.instance.MessageScroll.Set("Chant the mantra");
-				//inputctrl.text=UWHUD.instance.MessageScroll.text;
-				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
-								//inputctrl.onEndEdit.RemoveAllListeners();
-								//inputctrl.onEndEdit.AddListener(delegate {
-								//		this.OnSubmitPickup();	
-								//} );
-								//inputctrl.inputType=InputField.InputType.Standard;
-								inputctrl.gameObject.SetActive(true);
-								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
-								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
-
-
-								inputctrl.contentType= InputField.ContentType.Standard;
-								//TODO:Fix me inputctrl.selected=true;
-								inputctrl.Select();
-								//TODO:Fix me inputctrl.useLabelTextAtStart=true;
-				//Debug.Log ("Input ctrl type is" + inputctrl.type);
-								//TODO:Fix me inputctrl.type=UIInput.KeyboardType.Default;
+				inputctrl.gameObject.SetActive(true);
+				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
+				inputctrl.contentType= InputField.ContentType.Standard;
+				inputctrl.Select();
 				Time.timeScale=0.0f;
 				WindowDetect.WaitingForInput=true;
 			}
@@ -102,30 +89,23 @@ public class Shrine : object_base {
 	}
 
 	public void OnSubmitPickup(string Mantra)
-	{//TODO: set this name of the event receiver whereever it is called so that this can make more sense.
-		/*if (inputctrl==null)
-		{
-			inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
-		}*/
+	{
 		SubmitMantra (Mantra);
 		WaitingForInput=false;
 		Time.timeScale=1.0f;
 		inputctrl.text="";
 		WindowDetectUW.WaitingForInput=false;
 		inputctrl.gameObject.SetActive(false);
-		//Debug.Log ("Value summited");
-
 	}
 
-
+		/// <summary>
+		/// Submits the mantra and checks if it is valid
+		/// </summary>
+		/// <param name="Mantra">Mantra.</param>
 	private void SubmitMantra(string Mantra)
 	{
 		int SkillPointsToAdd=2;
 		Skills playerSkills= GameWorldController.instance.playerUW.PlayerSkills;
-		////if (inputctrl==null)
-		//{
-		//	inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
-		//}
 		if (GameWorldController.instance.playerUW.TrainingPoints==0)
 		{
 			//000~001~024~You are not ready to advance. \n
@@ -266,9 +246,6 @@ public class Shrine : object_base {
 			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 			InteractionModeControl.UpdateNow=true;
-
-
-
 		}
 	}
 

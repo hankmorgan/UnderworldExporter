@@ -4,20 +4,41 @@ using UnityEngine.UI;
 public class Container : object_base {
 
 	public string[] items=new string[40];
-	public int start=0;
 
+	/// <summary>
+	/// The capacity of the container
+	/// </summary>
 	public int Capacity;
-	//public int NoOfSlots;
-	public int ObjectsAccepted;
 
-	public bool isOpenOnPanel;//Is the container open on the players inventory.
-	public string ContainerParent; //What container is above this one. For passing objects out of the container.
-	
+	/// <summary>
+	/// What objects the container accepts
+	/// </summary>
+	public int ObjectsAccepted;//TODO:Make this work off of common obj
+
+	/// <summary>
+	/// Is the container open on the players inventory.
+	/// </summary>
+	public bool isOpenOnPanel;//
+
+	/// <summary>
+	/// What container is above this one. For passing objects out of the container in the inventory
+	/// </summary>
+	public string ContainerParent; 
+
+	/// <summary>
+	/// Gets the max capacity of the container.
+	/// </summary>
+	/// <returns>The capacity.</returns>
 	public int MaxCapacity()
 	{
 		return items.GetUpperBound (0);
 	}
 
+	/// <summary>
+	/// Gets the item name at index.
+	/// </summary>
+	/// <returns>The <see cref="System.String"/>.</returns>
+	/// <param name="index">Index.</param>
 	public string GetItemAt(int index)
 	{
 		if ((index >=0) && (index<=MaxCapacity()))
@@ -30,6 +51,11 @@ public class Container : object_base {
 		}
 	}
 
+	/// <summary>
+	/// Gets the game object at index.
+	/// </summary>
+	/// <returns>The <see cref="UnityEngine.GameObject"/>.</returns>
+	/// <param name="index">Index.</param>
 	public GameObject GetGameObjectAt(int index)
 	{
 		if (GetItemAt(index)!="")
@@ -49,13 +75,8 @@ public class Container : object_base {
 			if (items[i]!="")
 			{
 				GameObject founditem = GameObject.Find (items[i]);
-				//if ((founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id) && (founditem.GetComponent<ObjectInteraction>().Quality==item.GetComponent<ObjectInteraction>().Quality))
 				if (ObjectInteraction.CanMerge(founditem.GetComponent<ObjectInteraction>(),item.GetComponent<ObjectInteraction>()))
 				{
-					//merge
-					//Debug.Log ("Merging");
-					//founditem.GetComponent<ObjectInteraction>().Link =founditem.GetComponent<ObjectInteraction>().Link+ item.GetComponent<ObjectInteraction>().Link;
-					//GameObject.Destroy (item);
 					ObjectInteraction.Merge(founditem.GetComponent<ObjectInteraction>(),item.GetComponent<ObjectInteraction>());
 					return true;
 				}
@@ -75,9 +96,7 @@ public class Container : object_base {
 			}
 		if (i<=MaxCapacity())
 			{
-				//items[i] = item;
 				return AddItemToContainer(item,i);
-				//return true;
 			}
 		else
 			{
@@ -157,27 +176,6 @@ public class Container : object_base {
 		return false;
 	}
 
-
-
-   /*static public bool xAddObjectToContainer(GameObject objInHand, GameObject objUseOn)
-	{
-		Container subContainer = objUseOn.GetComponent<Container>();
-		if (subContainer.AddItemToContainer(objInHand.name))
-		{
-			Container ObjInHandContainer=objInHand.GetComponent<Container>();
-			if (ObjInHandContainer!=null)
-			{
-				subContainer=objInHand.GetComponent<Container>();
-				subContainer.ContainerParent=objUseOn.name;
-			}
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}*/
-
 	public void OpenContainer()
 	{
 		GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
@@ -185,13 +183,11 @@ public class Container : object_base {
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
 			{//The requested container is open in the game world. This can cause problems!
-			//Debug.Log ("Opening a container in the real world");
 			SpillContents();
 			return;
 			}
 		//Sort the container
 		Container.SortContainer(this);
-		//GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
 		UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture=currObjInt.GetEquipDisplay().texture;
 		if (this.isOpenOnPanel==false)
 		{
@@ -220,7 +216,6 @@ public class Container : object_base {
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);						
 		}
-
 	}
 
 	public void SpillContents()
@@ -232,38 +227,35 @@ public class Container : object_base {
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
 		for (int i=0; i<=MaxCapacity ();i++)
 		{
-			if (GetItemAt (i)!="")
-			{
-				GameObject Spilled = GameObject.Find (GetItemAt (i));
-				if (Spilled!=null)
-				{	
-					bool flag=false;
-					Vector3 randomPoint=this.transform.position;
-					counter=0;
-					while ((flag==false) && (counter<25))
+			GameObject Spilled = GetGameObjectAt(i);//GameObject.Find (GetItemAt (i));
+			if (Spilled!=null)
+			{	
+				bool flag=false;
+				Vector3 randomPoint=this.transform.position;
+				counter=0;
+				while ((flag==false) && (counter<25))
+				{
+					randomPoint = this.transform.position+Random.insideUnitSphere;
+					if(randomPoint.y<this.transform.position.y)
 					{
-						randomPoint = this.transform.position+Random.insideUnitSphere;
-						if(randomPoint.y<this.transform.position.y)
-						{
-							randomPoint.y=this.transform.position.y+0.1f;
-						}
-						flag = ((!Physics.CheckSphere(randomPoint,0.5f)) && (tm.ValidTile(randomPoint)));
-						counter++;
+						randomPoint.y=this.transform.position.y+0.1f;
 					}
-					if (flag==true)
-					{//No object interferes with the spill
-						RemoveItemFromContainer(i);
-						Spilled.transform.position=randomPoint;
-						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-						GameWorldController.UnFreezeMovement(Spilled);
-					}
-					else
-					{//No where to put the item. Put it at the containers position.
-						RemoveItemFromContainer(i);
-						Spilled.transform.position=this.transform.position;
-						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-						GameWorldController.UnFreezeMovement(Spilled);
-					}
+					flag = ((!Physics.CheckSphere(randomPoint,0.5f)) && (tm.ValidTile(randomPoint)));
+					counter++;
+				}
+				if (flag==true)
+				{//No object interferes with the spill
+					RemoveItemFromContainer(i);
+					Spilled.transform.position=randomPoint;
+					Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
+					GameWorldController.UnFreezeMovement(Spilled);
+				}
+				else
+				{//No where to put the item. Put it at the containers position.
+					RemoveItemFromContainer(i);
+					Spilled.transform.position=this.transform.position;
+					Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
+					GameWorldController.UnFreezeMovement(Spilled);
 				}
 			}
 		}
@@ -275,27 +267,20 @@ public class Container : object_base {
 	{//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
 		for (int i =0; i<=cn.MaxCapacity();i++)
 		{
-			string ItemName=cn.GetItemAt(i);
-			if (ItemName != "")
+			GameObject item =cn.GetGameObjectAt(i); // GameObject.Find (cn.GetItemAt(i));
+			if (item !=null)
 			{
-				GameObject item = GameObject.Find (cn.GetItemAt(i));
-				if (item !=null)
+				if (item.GetComponent<ObjectInteraction>()!=null)
 				{
-					if (item.GetComponent<ObjectInteraction>()!=null)
+					item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
+					if (item.GetComponent<ObjectInteraction>().GetItemType()==ObjectInteraction.A_PICK_UP_TRIGGER)
+					{//Special case
+						item.GetComponent<a_pick_up_trigger>().Activate();
+						cn.RemoveItemFromContainer(i);
+					}
+					else if (item.GetComponent<Container>()!=null)
 					{
-						item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
-						if (item.GetComponent<ObjectInteraction>().GetItemType()==ObjectInteraction.A_PICK_UP_TRIGGER)
-						{//Special case
-							item.GetComponent<a_pick_up_trigger>().Activate();
-							//if (item==null)
-							//{//Use trigger is no more.
-							cn.RemoveItemFromContainer(i);
-							//}
-						}
-						else if (item.GetComponent<Container>()!=null)
-						{
-							Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
-						}
+						Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
 					}
 				}
 			}
@@ -309,7 +294,7 @@ public class Container : object_base {
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
 			{
-				GameObject item = GameObject.Find (cn.GetItemAt(i));
+				GameObject item = cn.GetGameObjectAt(i);//GameObject.Find (cn.GetItemAt(i));
 				if (item!=null)
 				{
 					item.transform.position=Position;
@@ -329,7 +314,7 @@ public class Container : object_base {
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
 			{
-				GameObject item = GameObject.Find (cn.GetItemAt(i));
+				GameObject item = cn.GetGameObjectAt(i); //GameObject.Find (cn.GetItemAt(i));
 				if (item != null)
 				{
 					item.transform.parent=Parent;
@@ -414,14 +399,12 @@ public class Container : object_base {
 					Debug.Log ("Attempt to add a container to itself");
 				}
 			}
-			//TODO:Do a test for Container capacity  here.
-			//TODO:Do a test for item types accepted.
+
 			if (Container.TestContainerRules(this,11)==false)
 			{
 				Valid=false;
 				return true;
 			}
-
 
 			if (Valid)
 			{
@@ -457,7 +440,7 @@ public class Container : object_base {
 		{
 			if (GetItemAt(i)!="")
 			{
-				GameObject ItemAt = GameObject.Find (GetItemAt(i));
+				GameObject ItemAt = GetGameObjectAt(i); //GameObject.Find (GetItemAt(i));
 				if (ItemAt!=null)
 				{
 					ObjectInteraction objContainerItem = ItemAt.GetComponent<ObjectInteraction>();
@@ -531,8 +514,6 @@ public class Container : object_base {
 		default:
 			TypeTest=true;break;
 		}
-		
-		
 		
 		if (TypeTest==true)
 		{
@@ -617,7 +598,7 @@ public class Container : object_base {
 		}
 
 	public override string getEquipString ()
-	{//Assumes no container is generated as an opened on.
+	{//Assumes no container is generated as an opened one.
 		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
 	}
 
@@ -626,9 +607,9 @@ public class Container : object_base {
 		return "open";
 	}
 
-		public override string UseObjectOnVerb_Inv ()
-		{
-			return "place object in bag";
-		}
+	public override string UseObjectOnVerb_Inv ()
+	{
+		return "place object in bag";
+	}
 
 }

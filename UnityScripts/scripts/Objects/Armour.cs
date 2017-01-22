@@ -9,24 +9,13 @@ public class Armour : Equipment {
 	public int Protection;
 	public string ArmourEquipString;
 	
-	//Paperdoll graphics
-	//TODO:Use Object Masters for these
-	//public string EquipFemaleLowest; 
-	//public string EquipFemaleLow;
-	//public string EquipFemaleMedium;
-	//public string EquipFemaleBest;
-	//public string EquipMaleLowest; 
-	//public string EquipMaleLow;
-	//public string EquipMaleMedium;
-	//public string EquipMaleBest;
-
-		/// ProtectionBonus of magic armour
+	/// ProtectionBonus of magic armour
 	public int ProtectionBonus;
-		/// Toughness Bonus for magic durability 
+	/// Toughness Bonus for magic durability 
 	public int ToughnessBonus;
 	
-		/// The image to display when worn.
-		/// Takes the image from the Equip[Gender][Quality] strings
+	/// The image to display when worn.
+	/// Takes the image from the Equip[Gender][Quality] strings
 	//public Texture2D EquipDisplay;
 
 	/// Permanent spell effect applied by the spell

@@ -8,7 +8,7 @@ using System.Collections;
 public class Combat : MonoBehaviour {
 
 	/// How far a melee attack is raycast from the player.
-	public float weaponRange=1.0f;
+	protected float weaponRange=1.0f;
 	/// Is the player charging an attack.
 	public bool AttackCharging; 
 	/// Is the player currently releasing an attack. IE playing their animation.
@@ -16,7 +16,7 @@ public class Combat : MonoBehaviour {
 	/// The current charge of the attack.
 	public float Charge;  
 	/// The rate per second that the attack charge increases by. Needs to be changed to reflect player combat skills.
-	public float chargeRate=33.0f;
+	protected float chargeRate=33.0f;
 
 
 
@@ -69,12 +69,4 @@ public class Combat : MonoBehaviour {
 	{
 		yield break;
 	}
-
-	//public virtual void AttackModeMelee()
-	//{
-	//	return;
-	//}
 }
-
-
-

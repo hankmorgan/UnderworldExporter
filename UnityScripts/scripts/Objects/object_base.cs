@@ -10,7 +10,7 @@ public class object_base : UWEBase {
 	
 	
 	//The Object interaction that is on this object.
-	private ObjectInteraction _objInt;
+	protected ObjectInteraction _objInt;
 	
 		//For the context menu
 	public static string ItemDesc;
@@ -621,11 +621,15 @@ public class object_base : UWEBase {
 			
 		}
 
+		/// <summary>
+		/// Item description for the context menu
+		/// </summary>
+		/// <returns>The menu desc.</returns>
+		/// <param name="item_id">Item identifier.</param>
 		public virtual string ContextMenuDesc(int item_id)
 		{
 			return StringController.instance.GetSimpleObjectNameUW(item_id);	
 		}
-
 
 		public virtual string ContextMenuUsedDesc()
 		{

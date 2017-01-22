@@ -75,24 +75,13 @@ public override bool use ()
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,101));
 	}
 
-
+	/// <summary>
+	/// Creates the fish that the player has caught.
+	/// </summary>
+	/// <returns>The fish.</returns>
 	GameObject CreateFish()
-	{//Create food
-
-		//int ObjectNo = 182;
-	/*	GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-		myObj.layer=LayerMask.NameToLayer("UWObjects");
-		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-		myObj.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
-		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_"+ObjectNo, _RES +"/Sprites/Objects/Objects_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-
-		Food fd = myObj.AddComponent<Food>();
-		fd.Nutrition=5;//TODO:determine values to use here.*/
-
+	{
 		return ObjectInteraction.CreateNewObject(182).gameObject;
-		//return myObj;
 	}
 
 }

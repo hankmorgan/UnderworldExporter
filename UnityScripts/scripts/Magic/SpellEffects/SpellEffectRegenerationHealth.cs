@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 public class SpellEffectRegenerationHealth : SpellEffect {
 	///The amount of health per counter tick.
-	private int DOT; 
+	public int DOT; 
 
 	public override void ApplyEffect ()
 	{

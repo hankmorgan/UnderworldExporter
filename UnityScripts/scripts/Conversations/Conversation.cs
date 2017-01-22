@@ -923,10 +923,10 @@ public class Conversation : GuiBase {
 			
 			for (int i = 0; i<= cn.MaxCapacity ();i++)
 			{
-				string itemName=cn.GetItemAt (i);
-				if (itemName!="")
+				//string itemName=cn.GetItemAt (i);				
+				if (cn.GetItemAt (i)!="")
 				{
-					ObjectInteraction objInt = GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
 					if (
 						((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
 					||
@@ -934,7 +934,8 @@ public class Conversation : GuiBase {
 					)
 					{
 						//Give to PC
-					GameObject demanded = GameObject.Find (itemName);
+						GameObject demanded =cn.GetGameObjectAt(i);// GameObject.Find (itemName);
+						string itemName=cn.GetItemAt (i);
 						if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
 						{
 							demanded.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
@@ -979,7 +980,7 @@ public class Conversation : GuiBase {
 			{
 				if (itemCount <=3)
 				{//Just take the first four items
-					ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
+					ObjectInteraction itemToTrade = cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
 					TradeSlot ts = UWHUD.instance.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
 					ts.SlotImage.texture=itemToTrade.GetInventoryDisplay().texture;

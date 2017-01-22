@@ -226,10 +226,10 @@ public class SpellEffect : UWEBase {
 	//Eg the poison potion in Ironwit's maze
 	public const int UW1_Spell_Effect_PoisonHidden = 491;
 
-		/// <summary>
-		/// Spell Icons for the spell effect ids
-		/// </summary>
-		/// From a spreadsheet I created. The Icons that match up with the above effects constants
+	/// <summary>
+	/// Spell Icons for the spell effect ids
+	/// </summary>
+	/// From a spreadsheet I created. The Icons that match up with the above effects constants
 	private static int[] UW1_Spell_Icons=
 	{-1,
 		17,

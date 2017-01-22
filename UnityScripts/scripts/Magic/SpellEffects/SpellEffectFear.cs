@@ -8,14 +8,13 @@ using System.Collections;
 public class SpellEffectFear : SpellEffect {
 
 	/// Backup the original state of the Npc
-	public int OriginalState;
-	/// Backup the original attitude of the npc
+	//public int OriginalState;
+	/// Backup the original attitude and goals of the npc
 	public int OriginalAttitude;
+	public int OriginalGtarg;
+	public int OriginalGoal;
 
-		public int OriginalGtarg;
-		public int OriginalGoal;
-
-	public NPC npc;
+	private NPC npc;
 	public bool WasActive;
 
 		/// <summary>
@@ -30,13 +29,13 @@ public class SpellEffectFear : SpellEffect {
 			npc=this.GetComponent<NPC>();
 			if (npc!=null)
 			{
-				OriginalState= npc.state;
+				//OriginalState= npc.state;
 				OriginalAttitude=npc.npc_attitude;
 				OriginalGoal=npc.npc_goal;
 				OriginalGtarg=npc.npc_gtarg;
 
 
-				npc.state=NPC.AI_STATE_IDLERANDOM;	//Temporarily just wander around
+				//npc.state=NPC.AI_STATE_IDLERANDOM;	//Temporarily just wander around
 				npc.npc_attitude=NPC.AI_ATTITUDE_UPSET;
 
 				//Makes the NPC Run away
@@ -53,11 +52,10 @@ public class SpellEffectFear : SpellEffect {
 	{
 		if(WasActive==true)
 		{
-			npc.state=OriginalState;
+			//npc.state=OriginalState;
 			npc.npc_attitude=OriginalAttitude;	
-
-						npc.npc_goal=OriginalGoal;
-						npc.npc_gtarg=OriginalGtarg;
+			npc.npc_goal=OriginalGoal;
+			npc.npc_gtarg=OriginalGtarg;
 		}
 		base.CancelEffect ();
 	}

@@ -75,9 +75,6 @@ public class Character : UWEBase {
 
 	public Vector3 CameraPos;
 
-	//The music system
-	//public MusicController mus;
-
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
 
@@ -96,50 +93,32 @@ public class Character : UWEBase {
 	/// </summary>
 	public bool LightActive;
 
-		public GameObject TargetPoint;
-
-	//public UILabel GetMessageLog()
-	//{
-		/*Returns the message log for various functions*/
-	//	if (MessageLog==null)
-	//	{
-	//		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-	//	}
-	//	return MessageLog;
-	//}
-
-
+	/// <summary>
+	/// The point enemies will aim at when trying to hit the player.
+	/// </summary>
+	public GameObject TargetPoint;
 
 	public void ApplyDamage(int damage)
 	{
 		//Applies damage to the player.
 		CurVIT=CurVIT-damage;
-		//TODO:Check the players armour and apply damage on a crit
-			
+		//TODO:Check the players armour and apply damage on a crit			
 	}
 
-		//Damage from a known source
-		public void ApplyDamage(int damage, GameObject src)
-		{
-			ApplyDamage(damage);
-			HelpMeMyFriends=true;
-			LastEnemyToHitMe=src;			
-		}
+	//Damage from a known source
+	public void ApplyDamage(int damage, GameObject src)
+	{
+		ApplyDamage(damage);
+		HelpMeMyFriends=true;
+		LastEnemyToHitMe=src;			
+	}
 
 	// Use this for initialization
 	public virtual void Start () {
-
-	//	MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-
-		//tell other objects about this object.
-		//TileMap.gronk=this.gameObject;
-		//NPC.player=this.gameObject;
-
 		if (GameWorldController.instance.game=="SS1")
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;
 		}
-
 	}
 
 
@@ -254,45 +233,39 @@ public class Character : UWEBase {
 		}
 		UWHUD.instance.CursorIcon=objPicked.GetInventoryDisplay().texture;
 		pInv.ObjectInHand=objPicked.transform.name;
-		//////pInv.JustPickedup=true;//To stop me throwing it away immediately.
 		if (objPicked.GetComponent<Rigidbody>() !=null)
 		{								
 			GameWorldController.FreezeMovement(objPicked.gameObject);
 		}
 		//Clone the object into the inventory
-				if (WindowDetectUW.UsingRoomManager==true)
-				{
-						GameObject objClone = Instantiate(objPicked.gameObject);
-						objClone.name=objPicked.name;
-						objPicked.name=objPicked.name+ "_destroyed";
-						//objPicked.transform.DestroyChildren();
-						DestroyImmediate(objPicked.gameObject);
+		if (WindowDetectUW.UsingRoomManager==true)
+		{
+			GameObject objClone = Instantiate(objPicked.gameObject);
+			objClone.name=objPicked.name;
+			objPicked.name=objPicked.name+ "_destroyed";
+			//objPicked.transform.DestroyChildren();
+			DestroyImmediate(objPicked.gameObject);
 
-						objClone.transform.position = InvMarker.transform.position;
-						objClone.transform.parent=InvMarker.transform;
-						objClone.GetComponent<ObjectInteraction>().Pickup();
-						/*
-						UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
-						if (uid!=null)
-						{
-								//uid.Id=uid.GetInstanceID().ToString();		
-						}
-						*/
-						objClone.GetComponent<ObjectInteraction>().Pickup();
-						return objClone.GetComponent<ObjectInteraction>();	
-				}
-				else
-				{
-						objPicked.transform.position=InvMarker.transform.position;
-						objPicked.transform.parent=InvMarker.transform;
-						objPicked.Pickup();
-						return objPicked;
-				}
-
-		//objPicked.transform.position = InvMarker.transform.position;
-		//objPicked.transform.parent=InvMarker.transform;
-
-		//objPicked.Pickup();//Call pickup event for this object.
+			objClone.transform.position = InvMarker.transform.position;
+			objClone.transform.parent=InvMarker.transform;
+			objClone.GetComponent<ObjectInteraction>().Pickup();
+			/*
+			UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
+			if (uid!=null)
+			{
+					//uid.Id=uid.GetInstanceID().ToString();		
+			}
+			*/
+			objClone.GetComponent<ObjectInteraction>().Pickup();
+			return objClone.GetComponent<ObjectInteraction>();	
+		}
+		else
+		{
+			objPicked.transform.position=InvMarker.transform.position;
+			objPicked.transform.parent=InvMarker.transform;
+			objPicked.Pickup();
+			return objPicked;
+		}
 	}
 
 

@@ -6,7 +6,7 @@ using System.Collections;
 /// Guess
 public class DoorKey : object_base {
 	///This should match the doors it is opening. Also index into look descriptions
-	public int KeyId;
+	//public int KeyId;
 
 	public override bool use ()
 	{
@@ -34,7 +34,7 @@ public class DoorKey : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,KeyId+100));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,objInt().Owner+100));
 		}
 		else
 		{

@@ -40,8 +40,8 @@ public class Grave : object_base {
 		/// Special case here for Garamon's grave. Activates a hard coded trigger
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
-	ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-	if (GraveID==6)
+		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (GraveID==6)
 			{//Garamon's grave
 			//Activates a trigger a_move_trigger_54_52_04_0495 (selected by unknown means)
 			if (objIntUsed.item_id==198)//Bones
@@ -64,11 +64,11 @@ public class Grave : object_base {
 					}
 					else
 					{//Regular bones
-					//000~001~259~The bones do not seem at rest in the grave, and you take them back.
-					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
-					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-					return true;
+						//000~001~259~The bones do not seem at rest in the grave, and you take them back.
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
+						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+						return true;
 					}
 				}
 			else
@@ -96,18 +96,18 @@ public class Grave : object_base {
 	}
 
 
-		public override string UseObjectOnVerb_World ()
+	public override string UseObjectOnVerb_World ()
+	{
+		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		if (ObjIntInHand!=null)
 		{
-				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
-				if (ObjIntInHand!=null)
-				{
-						switch (ObjIntInHand.item_id)	
-						{
-						case 198://Bones
-								return "bury remains";
-						}
-				}
-
-				return base.UseObjectOnVerb_Inv();
+			switch (ObjIntInHand.item_id)	
+			{
+			case 198://Bones
+				return "bury remains";
+			}
 		}
+
+		return base.UseObjectOnVerb_Inv();
+	}
 }

@@ -16,15 +16,16 @@ public class RuneBag : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Opens the rune bag display panel
+		/// </summary>
 	void OpenRuneBag()
 	{
-		//chains.ActiveControl=2;
 		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_RUNES);
 	}
 
 	public override bool Activate()
 	{
-		//Open the rune bag in the UI
 		OpenRuneBag();
 		return true;
 	}
@@ -37,7 +38,6 @@ public class RuneBag : object_base {
 		{
 			GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
 			//Add rune to rune bag and destroy the original object.
-			//GameObject.Destroy(ObjectUsed);
 			ObjectUsed.GetComponent<ObjectInteraction>().consumeObject();
 			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
@@ -63,17 +63,15 @@ public class RuneBag : object_base {
 
 	public override string UseObjectOnVerb_Inv ()
 	{
-				ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
-				if (ObjIntInHand!=null)
-				{
-						switch (ObjIntInHand.GetItemType())	
-						{
-						case ObjectInteraction.RUNE:
-							return "place rune in bag";
-						}
-				}
-		
+		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		if (ObjIntInHand!=null)
+		{
+			switch (ObjIntInHand.GetItemType())	
+			{
+			case ObjectInteraction.RUNE:
+				return "place rune in bag";
+			}
+		}		
 		return base.UseObjectOnVerb_Inv();
 	}
-
 }

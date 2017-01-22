@@ -42,7 +42,7 @@ public class UWCharacter : Character {
 	public float SwimDamageTimer; //For timing out drowning damage.
 	public bool isFloating;
 	public bool isWaterWalking;
-	public bool onGround;//Not currently used.
+	//public bool onGround;//Not currently used.
 	public bool isTelekinetic;
 	public bool isLeaping;
 	public int StealthLevel; //The level of stealth the character has.
@@ -224,7 +224,7 @@ public class UWCharacter : Character {
 			{
 				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,-0.8f,playerCam.transform.localPosition.z);
 				swimSpeedMultiplier= Mathf.Max((float)(PlayerSkills.Swimming/30.0f),0.1f);
-				SwimTimer = SwimTimer += Time.deltaTime;
+				SwimTimer = SwimTimer + Time.deltaTime;
 				//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
 				if (SwimTimer>=05.0f + PlayerSkills.Swimming*15.0f)
 				{
@@ -353,19 +353,11 @@ public class UWCharacter : Character {
 	}
 
 
-		public void OnSubmitPickup(int quant)
+	public void OnSubmitPickup(int quant)
 	{
 
-		//Debug.Log ("Value summited");
-
 		InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
-		//Debug.Log (inputctrl.text);
-				/*
-				int quant=0;
-		if (int.TryParse(inputctrl.text,out quant)==false)
-		{
-			quant=0;
-		}*/
+
 		Time.timeScale=1.0f;
 		inputctrl.gameObject.SetActive(false);
 		WindowDetectUW.WaitingForInput=false;

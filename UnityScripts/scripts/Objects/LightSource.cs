@@ -42,12 +42,12 @@ public class LightSource : object_base {
 					LightTimer-=Time.deltaTime;
 					if (LightTimer<=0)
 					{
-							objInt().Quality--;
-							LightTimer=LightTimerMax;
-							if (objInt().Quality==0)
-							{
-									SetOff();
-							}
+						objInt().Quality--;
+						LightTimer=LightTimerMax;
+						if (objInt().Quality==0)
+						{
+							SetOff();
+						}
 					}	
 				}
 
@@ -57,7 +57,6 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		//CheckReferences();
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
 			if (objInt().PickedUp==false)
@@ -92,16 +91,16 @@ public class LightSource : object_base {
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
-				switch (objIntUsed.GetItemType())
+			switch (objIntUsed.GetItemType())
+			{
+			case ObjectInteraction.OIL:
+				if (objInt().item_id==149)//Lit torch
 				{
-				case ObjectInteraction.OIL:
-						if (objInt().item_id==149)//Lit torch
-						{
-							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,182));	
-							return true ;
-						}
-						break;
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,182));	
+					return true ;
 				}
+				break;
+			}
 		}
 		return base.ActivateByObject (ObjectUsed);
 	}
@@ -126,22 +125,18 @@ public class LightSource : object_base {
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{						
-			//invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
 			invSlot=UWHUD.instance.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))
 		{
-			//invSlot=GameObject.Find ("LeftShoulder_Slot").GetComponent<InventorySlot>();
 			invSlot=UWHUD.instance.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sRightHand=="") || (pInv.sRightHand==this.name))
 		{
-			//invSlot=GameObject.Find ("RightHand_Slot").GetComponent<InventorySlot>();
 			invSlot=UWHUD.instance.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftHand=="") || (pInv.sLeftHand==this.name))
 		{
-			//invSlot=GameObject.Find ("LeftHand_Slot").GetComponent<InventorySlot>();
 			invSlot=UWHUD.instance.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		if (invSlot != null)
@@ -169,7 +164,6 @@ public class LightSource : object_base {
 		}
 		else
 		{
-			//Debug.Log ("No free hand");
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,258));
 		}
 		objInt().RefreshAnim();

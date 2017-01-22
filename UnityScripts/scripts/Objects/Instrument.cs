@@ -58,63 +58,62 @@ public class Instrument : object_base {
 		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
 	}
 
-		private void MusicInstrumentInteaction()
+	private void MusicInstrumentInteaction()
+	{
+		if (Input.GetKeyDown("1"))
+		{PlayNote (1);}
+		if (Input.GetKeyDown("2"))
+		{PlayNote (2);}
+		if (Input.GetKeyDown("3"))
+		{PlayNote (3);}
+		if (Input.GetKeyDown("4"))
+		{PlayNote (4);}
+		if (Input.GetKeyDown("5"))
+		{PlayNote (5);}
+		if (Input.GetKeyDown("6"))
+		{PlayNote (6);}
+		if (Input.GetKeyDown("7"))
+		{PlayNote (7);}
+		if (Input.GetKeyDown("8"))
+		{PlayNote (8);}
+		if (Input.GetKeyDown("9"))
+		{PlayNote (9);}
+		if (Input.GetKeyDown("0"))
+		{PlayNote (10);}
+		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-				if (Input.GetKeyDown("1"))
-				{PlayNote (1);}
-				if (Input.GetKeyDown("2"))
-				{PlayNote (2);}
-				if (Input.GetKeyDown("3"))
-				{PlayNote (3);}
-				if (Input.GetKeyDown("4"))
-				{PlayNote (4);}
-				if (Input.GetKeyDown("5"))
-				{PlayNote (5);}
-				if (Input.GetKeyDown("6"))
-				{PlayNote (6);}
-				if (Input.GetKeyDown("7"))
-				{PlayNote (7);}
-				if (Input.GetKeyDown("8"))
-				{PlayNote (8);}
-				if (Input.GetKeyDown("9"))
-				{PlayNote (9);}
-				if (Input.GetKeyDown("0"))
-				{PlayNote (10);}
-				if (Input.GetKeyDown(KeyCode.Escape))
+			//000~001~251~You put the instrument down.
+			PlayingInstrument=false;
+			CurrentInstrument="";
+			WindowDetectUW.WaitingForInput=false;
+			GameWorldController.instance.playerUW.playerMotor.enabled=true;
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
+			GameWorldController.instance.getMus().Resume();
+			//354237875
+			if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
+			{
+				//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
+				if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
 				{
-						//000~001~251~You put the instrument down.
-						PlayingInstrument=false;
-						CurrentInstrument="";
-						WindowDetectUW.WaitingForInput=false;
-						GameWorldController.instance.playerUW.playerMotor.enabled=true;
-						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
-						GameWorldController.instance.getMus().Resume();
-						//354237875
-						if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
-						{
-								//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-								if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
-								{
-										int tileX=GameWorldController.instance.Tilemap.visitTileX;
-										int tileY=GameWorldController.instance.Tilemap.visitTileY;
-										if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
-										{
-												
-												//create the cup of wonder.
-												ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
-												myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
-												GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
-												UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
-												UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
-												InteractionModeControl.UpdateNow=true;
-												CreatedCup=true;
-												//An object appears in the air and falls into your hands
-												UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
-										}
-								}
-						}
-				}		
-		}
+					int tileX=GameWorldController.instance.Tilemap.visitTileX;
+					int tileY=GameWorldController.instance.Tilemap.visitTileY;
+					if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
+					{							
+						//create the cup of wonder.
+						ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
+						myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+						GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
+						UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+						InteractionModeControl.UpdateNow=true;
+						CreatedCup=true;
+						//An object appears in the air and falls into your hands
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
+					}
+				}
+			}
+		}		
+	}
 
 		/// <summary>
 		/// Plays the notes to match the keys pressed

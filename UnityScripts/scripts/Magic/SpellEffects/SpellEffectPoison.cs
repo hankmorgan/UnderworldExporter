@@ -12,7 +12,7 @@ public class SpellEffectPoison : SpellEffect {
 	public bool isNPC;
 	
 	///The NPC the spell is applied to.
-	public NPC npc;
+	private NPC npc;
 
 
 	public override void ApplyEffect ()

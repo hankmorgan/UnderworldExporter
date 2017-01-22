@@ -220,9 +220,9 @@ public class Bedroll : object_base {
 	}
 
 
-		public override string UseVerb ()
-		{
-			return "sleep";
-		}
+	public override string UseVerb ()
+	{
+		return "sleep";
+	}
 
 }

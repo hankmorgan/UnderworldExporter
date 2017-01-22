@@ -12,16 +12,12 @@ public class SpellEffectRoamingSight : SpellEffect {
 		/// </summary>
 		public override void ApplyEffect ()
 		{
-				if (GameWorldController.instance.playerUW==null)
-				{
-					GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
-				}
-				GameWorldController.instance.playerUW.isRoaming=true;
-				OldMana=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
-				GameWorldController.instance.playerUW.PlayerMagic.CurMana=0;
-				OldPosition = GameWorldController.instance.playerUW.transform.position;
-				GameWorldController.instance.playerUW.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
-				base.ApplyEffect();
+			GameWorldController.instance.playerUW.isRoaming=true;
+			OldMana=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
+			GameWorldController.instance.playerUW.PlayerMagic.CurMana=0;
+			OldPosition = GameWorldController.instance.playerUW.transform.position;
+			GameWorldController.instance.playerUW.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
+			base.ApplyEffect();
 		}
 
 		/// <summary>

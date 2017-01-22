@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 public class SpellEffectRegenerationMana : SpellEffect {
 		///The amount of man per counter tick.
-		private int DOT; 
+		public int DOT; 
 
 		public override void ApplyEffect ()
 		{

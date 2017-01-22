@@ -7,7 +7,7 @@ public class SpellEffectParalyze : SpellEffect {
 		public bool isNPC;//The effect is applied to an npc
 		public NPC npc;//THe NPC the spell is applied to.
 		///The state the npc was in before the spell was cast at them
-		public int state;
+		//public int state;
 		public Animator anim;
 
 		public override void ApplyEffect ()
@@ -27,7 +27,7 @@ public class SpellEffectParalyze : SpellEffect {
 						npc=this.GetComponent<NPC>();
 				}
 				this.GetComponent<NPC>().Frozen=true;
-				state = this.GetComponent<NPC>().state;
+				//state = this.GetComponent<NPC>().state;
 				//anim = this.GetComponent<NPC>().anim;
 				//if (anim!=null)
 				//{
@@ -47,9 +47,9 @@ public class SpellEffectParalyze : SpellEffect {
 			else
 			{
 				npc.Frozen=false;
-				npc.CurrentAnim="";
-				npc.currentState=-1;
-				npc.state=state;
+				//npc.CurrentAnim="";
+				//npc.currentState=-1;
+				//npc.state=state;
 				if (anim!=null)
 				{
 					anim.enabled=true;

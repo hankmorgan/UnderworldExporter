@@ -3,11 +3,8 @@ using System.Collections;
 
 public class TMAP : object_base {
 
-
-	//public static TextureController tc;
 	public string trigger;
 	public int TextureIndex;
-	private SpriteRenderer sr;
 
 	public override bool LookAt()
 	{

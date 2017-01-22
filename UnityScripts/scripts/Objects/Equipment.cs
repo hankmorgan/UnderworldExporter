@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Equipment : object_base {
 	///Not sure if this is needed.	
-	public int Durability;	
+	//public int Durability;	
 
 	public virtual int GetActualSpellIndex()
 	{

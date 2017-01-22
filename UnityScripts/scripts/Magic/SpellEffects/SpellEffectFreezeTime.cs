@@ -9,7 +9,7 @@ public class SpellEffectFreezeTime : SpellEffect {
 	///To pause the npc animations.
 	public Animator anim;
 	///The state the npc was in before the spell was cast at them
-	public int state;
+	//public int state;
 	///To associated the spell effect on the NPC with the spell effect on the player
 	public long Key;
 	public bool isNPC;
@@ -17,13 +17,7 @@ public class SpellEffectFreezeTime : SpellEffect {
 	{
 			if (isNPC)
 			{
-					this.GetComponent<NPC>().Frozen=true;
-					state = this.GetComponent<NPC>().state;
-					//anim = this.GetComponent<NPC>().anim;
-					//if (anim!=null)
-					//{
-					//		anim.enabled=false;
-					//}	
+				this.GetComponent<NPC>().Frozen=true;
 			}
 			else
 				{//Player applies the effect to other npcs?
@@ -48,9 +42,9 @@ public class SpellEffectFreezeTime : SpellEffect {
 				if (isNPC==true)
 				{
 						this.GetComponent<NPC>().Frozen=false;
-						this.GetComponent<NPC>().CurrentAnim="";
-						this.GetComponent<NPC>().currentState=-1;
-						this.GetComponent<NPC>().state=state;
+						//this.GetComponent<NPC>().CurrentAnim="";
+						//this.GetComponent<NPC>().currentState=-1;
+						//this.GetComponent<NPC>().state=state;
 						if (anim!=null)
 						{
 								anim.enabled=true;

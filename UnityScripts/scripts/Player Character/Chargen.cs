@@ -191,15 +191,5 @@ public class Chargen : Props {
 		public static int getBaseDEX(int charClass)
 		{
 				return BaseDex[charClass];
-		}
-
-		//static int [] getArrayDimension(int[,] array, int dimension)
-		//{
-			//	int[] newArray =  new int[array.GetUpperBound(dimension)];
-			//	for (int i=0; i<a;i++)
-			//	{
-			//			newArray[i] = array[dimension].;	
-			//	}
-			//	return newArray;	
-		//}
+		}	
 }

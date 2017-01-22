@@ -154,7 +154,11 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		case DETAIL_DONE:
 			initMenu();break;	
 		case RETURN:
-			ReturnToGame();break;
+			if(!isLoadingOrSaving)
+			{
+				ReturnToGame();	
+			}	
+			break;
 		case QUIT:
 			OptionQuit();break;
 		case QUIT_YES:
@@ -366,33 +370,21 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="slotNo">Slot no.</param>
 	private void BeginSaveToSlot(int slotNo)
 	{
-		Debug.Log("Begin Save to Slot " + slotNo);
-
-				//SharpSerializer ser = new SharpSerializer();
-				//ser.PropertyProvider.AttributesToIgnore.Clear();
-				//ser.Serialize(GameWorldController.instance.gameObject,"test.xml");
-				//
-				//ser.Serialize(GameWorldController.instance.LevelMarker().gameObject,"mesh.xml");
-				LevelSerializer.useCompression=false;
-				//UWHUD.instance.LoadingProgress.text="Saving";
-				//slot=slotNo;
-				//SaveNow=true;
-				foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
-						if (sgX.Name=="save_"+slotNo)
-						{					
-								sgX.Delete();
-								break;
-						}
-				}
-
-				isLoadingOrSaving=true;
-				//StartCoroutine(LoadScreen(false));
-				LevelSerializer.SaveGame("save_"+slotNo);
-				isLoadingOrSaving=false;
-				//UWHUD.instance.LoadingProgress.text="";
-				//SaveNow=false;
-				ReturnToGame();
+		LevelSerializer.useCompression=false;
+		foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+			if (sgX.Name=="save_"+slotNo)
+			{					
+				sgX.Delete();
+				break;
+			}
+		}	
+		isLoadingOrSaving=true;
+		LevelSerializer.SaveGame("save_"+slotNo);
+		isLoadingOrSaving=false;
+		ReturnToGame();	
 	}
+
+
 
 		/// <summary>
 		/// Restores save game from slot.
@@ -403,11 +395,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
 						if (sg.Name=="save_"+slotNo)
 						{
-							//RestoreNow=true;
-							//slot=slotNo;
-							//UWHUD.instance.LoadingProgress.text="Restoring Save";
 							isLoadingOrSaving=true;
-							//StartCoroutine(LoadScreen(false));
 							LevelSerializer.LoadSavedLevel(sg.Data,false);
 							isLoadingOrSaving=false;
 							UWHUD.instance.LoadingProgress.text="";

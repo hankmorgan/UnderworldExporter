@@ -4,7 +4,7 @@ using System.Collections;
 public class Feet : UWEBase {
 	//For a game object attached to the player. Detects if the player is in contact with the ground.
 
-	public TileMap tm;
+	//public TileMap tm;
 	public float currY;
 	public float fallSpeed;
 	int waterLayer;
@@ -83,10 +83,9 @@ public class Feet : UWEBase {
 		else
 		{			
 			if (fallSpeed>0.0f)
-			{
+			{							
 				//Check fall damage.
-				tm.PositionDetect();//check where I am.
-				//Debug.Log ("Fall @" + fallSpeed);
+				GameWorldController.instance.Tilemap.PositionDetect();//check where I am.
 				UWCharacter.Instance.onLanding(fallSpeed);
 				fallSpeed=0.0f;
 			}
