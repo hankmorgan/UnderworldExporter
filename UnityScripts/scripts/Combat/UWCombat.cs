@@ -194,9 +194,9 @@ public class UWCombat : Combat {
 	/// <summary>
 	/// Execution of ranged attacks
 	/// </summary>
-	public override void ExecuteRanged ()
+		public override void ExecuteRanged (float charge)
 	{
-		base.ExecuteRanged ();
+		base.ExecuteRanged (charge);
 
 		///Removes the cursor
 		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
@@ -204,7 +204,7 @@ public class UWCombat : Combat {
 		if (currentAmmo!=null)
 		{
 			//currentAmmo.consumeObject ();
-			LaunchAmmo();
+			LaunchAmmo(charge);
 		}
 	}
 
@@ -227,7 +227,7 @@ public class UWCombat : Combat {
 			}
 			else
 			{//Ranged attack
-				ExecuteRanged();
+				ExecuteRanged(Charge);
 			}
 			///Ends the attack.
 			Charge=0.0f;
@@ -363,7 +363,7 @@ public class UWCombat : Combat {
 		/// Launchs the ammo.
 		/// </summary>
 		/// <returns><c>true</c>, if ammo was launched, <c>false</c> otherwise.</returns>
-	bool LaunchAmmo ()
+	bool LaunchAmmo (float charge)
 	{
 		if (currentAmmo!=null)
 		{
@@ -381,7 +381,7 @@ public class UWCombat : Combat {
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{///Checks No object interferes with the launch
-				float force = 500.0f;
+				float force = 1000.0f*(charge/100.0f);
 				GameObject launchedItem ;
 
 				if (currentAmmo.GetQty()==1)
@@ -411,7 +411,7 @@ public class UWCombat : Combat {
 				///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 				pd.Source=GameWorldController.instance.playerUW.gameObject;
-				pd.Damage=10;
+				pd.Damage=(int)(10.0f*(Charge/100.0f));
 				return true;
 			}
 			else

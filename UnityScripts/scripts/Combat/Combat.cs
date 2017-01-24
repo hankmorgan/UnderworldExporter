@@ -49,7 +49,7 @@ public class Combat : MonoBehaviour {
 	/// <summary>
 	/// Execution of ranged attacks
 	/// </summary>
-	public virtual void ExecuteRanged()
+	public virtual void ExecuteRanged(float charge)
 	{
 		return;
 	}
