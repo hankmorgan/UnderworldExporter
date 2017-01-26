@@ -416,10 +416,18 @@ public class Container : object_base {
 				{
 					AddItemMergedItemToContainer(ObjectInHand.gameObject);
 				}
-				
+				//If the item is already in the current player container then remove it's reference
+				//if(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer())
+				//	{}
+
 				if (isOpenOnPanel == true)
 				{//Container is open for display force a refresh.
 					OpenContainer();
+				}
+				else
+				{
+					//Remove to prevent item duplication
+					removeFromContainer(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 				}
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= "";
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
@@ -610,6 +618,18 @@ public class Container : object_base {
 	public override string UseObjectOnVerb_Inv ()
 	{
 		return "place object in bag";
+	}
+
+	public static void removeFromContainer(Container cn, string objectName)
+		{	//Only removes from the top level container cn	
+				for (int i =0; i<=cn.MaxCapacity ();i++)
+				{
+						if (cn.items[i] == objectName)
+						{
+								cn.RemoveItemFromContainer(i);
+								return;
+						}
+				}
 	}
 
 }

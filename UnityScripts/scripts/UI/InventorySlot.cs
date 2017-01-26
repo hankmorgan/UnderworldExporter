@@ -65,7 +65,7 @@ public class InventorySlot : GuiBase {
 		{
 			if(objLookedAt.GetComponent<Readable>()!= null)
 			{
-				objLookedAt.GetComponent<ObjectInteraction>().Use();
+				objLookedAt.GetComponent<Readable>().Read();
 			}
 			else
 			{
