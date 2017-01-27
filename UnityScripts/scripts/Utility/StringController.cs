@@ -13,6 +13,27 @@ public class StringController : UWEBase {
 	/// </summary>
 	/// Hash is in format [block number]_[string number]
 	private Hashtable GameStrings;
+
+		/// <summary>
+		/// Huffman node structure for decoding strings.pak
+		/// </summary>
+		struct huffman_node
+		{
+				public char symbol; // symbol in node
+				public int parent; //
+				public int left;   // -1 when no node
+				public int right;  // 
+		};
+
+		struct block_dir
+		{
+				public long block_no;
+				public long address;
+				public long NoOfEntries;
+				//public long blockEnd;
+		} ;
+
+		public string Path;
 	
 
 		/// <summary>
@@ -288,7 +309,15 @@ public class StringController : UWEBase {
 		void Awake()
 		{
 			instance=this;
-			InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
+				if(UWEBase._RES!="UW1")
+				{					
+					InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
+				}
+				else
+				{
+					//use the new method
+					LoadStringsPak(Path);
+				}
 		}
 
 
@@ -303,6 +332,134 @@ public class StringController : UWEBase {
 		GameStrings=new Hashtable();
 		return Load(StringFilePath);
 	}
+
+
+
+
+		/// <summary>
+		/// Loads and decodes the strings.pak file as specificed by the Path.
+		/// </summary>
+		/// <param name="path">Path.</param>
+		void LoadStringsPak(string path)
+		{
+				string Result="";
+				long address_pointer=0;
+				huffman_node[] hman;
+				block_dir[] blocks;
+				char[] Buffer;
+				string Key="";
+				GameStrings=new Hashtable();
+
+
+				if (DataLoader.ReadStreamFile(path,out Buffer))
+				{
+						long NoOfNodes=DataLoader.getValAtAddress(Buffer,address_pointer,16);
+						int i=0;
+						hman = new huffman_node [NoOfNodes];
+						address_pointer=address_pointer+2;
+						while (i<NoOfNodes)
+						{
+								hman[i].symbol= System.Convert.ToChar(Buffer[address_pointer+0]);
+								hman[i].parent=Buffer[address_pointer+1];
+								hman[i].left= Buffer[address_pointer+2];
+								hman[i].right= Buffer[address_pointer+3];
+								i++;
+								address_pointer=address_pointer+4;
+						}
+
+						long NoOfStringBlocks=DataLoader.getValAtAddress(Buffer,address_pointer,16);
+						blocks=new block_dir[NoOfStringBlocks];
+						address_pointer=address_pointer+2;
+						i=0;
+						while (i<NoOfStringBlocks)
+						{
+								blocks[i].block_no = DataLoader.getValAtAddress(Buffer,address_pointer,16);
+								address_pointer=address_pointer+2;
+								blocks[i].address = DataLoader.getValAtAddress(Buffer,address_pointer,32);	
+								address_pointer=address_pointer+4;
+								blocks[i].NoOfEntries = DataLoader.getValAtAddress(Buffer,blocks[i].address,16);	//look ahead and get no of entries.
+								i++;
+						}
+						i=0;
+						//
+						int Iteration=0;
+						while (i<NoOfStringBlocks)
+						{
+								address_pointer=2 + blocks[i].address + blocks[i].NoOfEntries *2;
+								int blnFnd;
+								for (int j=0;j< blocks[i].NoOfEntries;j++)
+								{
+										//Based on abysmal /uwadv implementations.
+										blnFnd=0;
+										//char c;
+
+										int bit = 0;
+										int raw = 0;
+										long node=0;
+
+										do {
+												node = NoOfNodes - 1; // starting node
+
+												// huffman tree decode loop
+												//This was -1 in the original code!
+												while (hman[node].left != 255
+														&& hman[node].right != 255)
+												{
+
+														if (bit == 0) {
+																bit = 8;
+																raw = Buffer[address_pointer++];	//stream.get<uint8_t>();
+														}
+														Iteration++;
+														//Debug.Log("raw=" + raw + "=" + (raw & 0x80));
+														// decide which node is next
+														//node = raw & 0x80 ? hman[node].right
+														//	: hman[node].left;
+														if ((raw & 0x80) ==128)
+														{
+																node=hman[node].right;
+														}
+														else
+														{
+																node=hman[node].left;
+														}
+
+														raw <<= 1;
+														bit--;
+												}
+
+												// have a new symbol
+												if ((hman[node].symbol !='|')){
+														if (blnFnd==0)
+														{
+																Key= blocks[i].block_no.ToString("000")+"_"+j.ToString("000") ;
+														}						
+														Result+=hman[node].symbol;	
+														blnFnd = 1;
+												}
+												else
+												{
+														if ((Result.Length>0) && (Key.Length>0))
+														{
+																GameStrings[Key]=Result;
+																Result="";
+																Key="";
+														}
+												}
+										} while (hman[node].symbol != '|');		
+								}
+								i++;
+						}
+						if ((Result.Length>0) && (Key.Length>0))
+						{//I still have the very last value to keep.
+								GameStrings[Key]=Result;
+								Result="";
+						}
+				}	
+
+		}
+
+
 
 	/// <summary>
 	/// Gets the string at the specified numbers

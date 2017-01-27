@@ -57,7 +57,7 @@ short FirstLine=0;
 			hman[i].parent= Buffer[address_pointer+1];
 			hman[i].left= Buffer[address_pointer+2];
 			hman[i].right= Buffer[address_pointer+3];
-			//fprintf(LOGFILE, "Node:%d parent=%d, left=%d, right=%d, symbol=%c\n", i, hman[i].parent, hman[i].left, hman[i].right, hman[i].symbol);
+			fprintf(LOGFILE, "Node:%d parent=%d, left=%d, right=%d, symbol=%c\n", i, hman[i].parent, hman[i].left, hman[i].right, hman[i].symbol);
 			i++;
 			address_pointer=address_pointer+4;
 			}
@@ -88,6 +88,7 @@ short FirstLine=0;
 			long strAdd;
 			int blnFnd;
 			strAdd= address_pointer;
+			int iteration = 0;
 			for (int j=0;j< blocks[i].NoOfEntries;j++)
 			{
 				//Based on abysmal /uwadv implementations.
@@ -104,15 +105,23 @@ short FirstLine=0;
 					while (char(hman[node].left) != -1
 						&& char(hman[node].right) != -1)
 					{
-
+					iteration++;
 						if (bit == 0) {
 							bit = 8;
 							raw = Buffer[address_pointer++];	//stream.get<uint8_t>();
 						}
-
 						// decide which node is next
-						node = raw & 0x80 ? short (hman[node].right)
-							   : short (hman[node].left);
+						//node = raw & 0x80 ? short (hman[node].right)
+						//	   : short (hman[node].left);
+						//printf("\nRaw = %d = %d", raw, raw & 0x80);
+						if (raw & 0x80)
+							{
+							node = short(hman[node].right);
+							}
+						else
+							{
+							node = short(hman[node].left);
+							}
 
 						raw <<= 1;
 						bit--;
@@ -134,6 +143,7 @@ short FirstLine=0;
 						else
 							{
 							fprintf(LOGFILE, "%c", hman[node].symbol);
+						//	printf("%c", hman[node].symbol);
 							}						
 						blnFnd = 1;
 					}
