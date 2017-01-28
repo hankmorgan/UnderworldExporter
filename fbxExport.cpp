@@ -4037,6 +4037,7 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 			}
 		}
 
+
 	FbxString lCubeName = TileName;
 	//lCubeName += FbxString(gCubeNumber);
 	// create a new cube
