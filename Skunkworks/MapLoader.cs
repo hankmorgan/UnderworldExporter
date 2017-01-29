@@ -557,6 +557,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				LevelInfo[x,y]=new TileInfo();
 				}
 			}
+
+		//Clear out the children in the transform
+			foreach (Transform child in this.gameObject.transform) {
+				GameObject.Destroy(child.gameObject);
+			}
+		
 		BuildTileMapUW(Path,1,LevelToRetrieve);
 		CleanUp(1);
 
@@ -1267,10 +1273,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vNORTH:
 						{
 						//north wall vertices
-						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-						verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight +AdjustLowerNorth+AdjustLowerEast);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperWest);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerNorth+AdjustLowerWest);
 
 						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
 						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
@@ -1284,10 +1290,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vWEST:
 						{
 						//west wall vertices
-						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-						verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerWest+AdjustLowerNorth);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperWest+AdjustUpperSouth);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerWest+AdjustLowerSouth);
 						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
 						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
 						uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
@@ -1299,10 +1305,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vEAST:
 						{
 						//east wall vertices
-						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerEast+AdjustLowerSouth);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperEast+AdjustUpperSouth);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperEast+AdjustUpperNorth);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerEast+AdjustLowerNorth);
 						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
 						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
 						uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
@@ -1314,10 +1320,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vSOUTH:
 						{
 						//south wall vertices
-						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerSouth+AdjustLowerWest);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouth+AdjustUpperWest);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerSouth+AdjustLowerEast);
 						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
 						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
 						uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
@@ -1328,6 +1334,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vBOTTOM:
 						{
 						//bottom wall vertices
+						//TODO:Get the lower face adjustments for this (shock only)
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
@@ -1831,28 +1838,547 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 	void RenderDiagSEPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 		//Does a thing.
+		//Draws 3 meshes. Outward diagonal wall. Back and side if visible.
 
+
+		int NumberOfVisibleFaces=1;//Will always have the diag.
+		//Get the number of faces
+		for (int i=0; i<6;i++)
+			{
+			if ((i==vNORTH) || (i==vWEST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					NumberOfVisibleFaces++;
+					}
+				}
+			}
+		//Allocate enough verticea and UVs for the faces
+		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
+		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
+		float floorHeight=(float)(Top*0.15f);
+		float baseHeight=(float)(Bottom*0.15f);
+		float dimX = t.DimX;
+		float dimY = t.DimY;
+
+		//Now create the mesh
+		GameObject Tile = new GameObject(TileName);
+		Tile.transform.parent=parent.transform;
+		Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
+
+		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+		MeshFilter mf = Tile.AddComponent<MeshFilter>();
+		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		Mesh mesh = new Mesh();
+		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+		//Now allocate the visible faces to triangles.
+		int FaceCounter=0;//Tracks which number face we are now on.
+		float PolySize= Top-Bottom;
+		float uv0= (float)(Bottom*0.125f);
+		float uv1=(PolySize / 8.0f) + (uv0);
+		//Set the diagonal face first
+		verts[0]=  new Vector3(0f,0f, baseHeight);
+		verts[1]=  new Vector3(0f,0f, floorHeight);
+		verts[2]=  new Vector3(-1.2f,1.2f, floorHeight);
+		verts[3]=  new Vector3(-1.2f,1.2f, baseHeight);
+
+		uvs[0]=new Vector2(0.0f,uv0);
+		uvs[1]=new Vector2(0.0f,uv1);
+		uvs[2]=new Vector2(1,uv1);
+		uvs[3]=new Vector2(1,uv0);
+		FaceCounter++;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+				{//Will only render north or west if needed.
+				switch(i)
+				{
+				case vNORTH:
+						{
+						//north wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
+
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(1,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(1,uv0);
+
+						break;
+						}
+
+				case vWEST:
+						{
+						//west wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(1,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(1,uv0);
+
+						break;
+						}
+
+				}
+				FaceCounter++;
+				}
+			}
+
+		//Apply the uvs and create my tris
+		mesh.vertices = verts;
+		mesh.uv = uvs;
+		int [] tris = new int[6];
+		//Tris for diagonal.
+
+		tris[0]=0;
+		tris[1]=1;
+		tris[2]=2;
+		tris[3]=0;
+		tris[4]=2;
+		tris[5]=3;
+		mesh.SetTriangles(tris,0);
+		FaceCounter=1;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((i==vNORTH) || (i==vWEST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					tris[0]=0+(4*FaceCounter);
+					tris[1]=1+(4*FaceCounter);
+					tris[2]=2+(4*FaceCounter);
+					tris[3]=0+(4*FaceCounter);
+					tris[4]=2+(4*FaceCounter);
+					tris[5]=3+(4*FaceCounter);
+					mesh.SetTriangles(tris,FaceCounter);
+					FaceCounter++;
+					}
+				}
+			}
+
+		mr.materials=mats;
+		mesh.RecalculateNormals();
+		mf.mesh=mesh;
 		return;
 		}
 
 	void RenderDiagSWPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 		//Does a thing.
+		//Does a thing.
+		//Draws 3 meshes. Outward diagonal wall. Back and side if visible.
+		if ((t.tileX==29) && (t.tileY==24) )
+			{
+			Debug.Log("HERE");
+			}
 
+		int NumberOfVisibleFaces=1;//Will always have the diag.
+		//Get the number of faces
+		for (int i=0; i<6;i++)
+			{
+			if ((i==vNORTH) || (i==vEAST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					NumberOfVisibleFaces++;
+					}
+				}
+			}
+		//Allocate enough verticea and UVs for the faces
+		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
+		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
+		float floorHeight=(float)(Top*0.15f);
+		float baseHeight=(float)(Bottom*0.15f);
+		float dimX = t.DimX;
+		float dimY = t.DimY;
+
+		//Now create the mesh
+		GameObject Tile = new GameObject(TileName);
+		Tile.transform.parent=parent.transform;
+		Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
+
+		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+		MeshFilter mf = Tile.AddComponent<MeshFilter>();
+		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		Mesh mesh = new Mesh();
+		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+		//Now allocate the visible faces to triangles.
+		int FaceCounter=0;//Tracks which number face we are now on.
+		float PolySize= Top-Bottom;
+		float uv0= (float)(Bottom*0.125f);
+		float uv1=(PolySize / 8.0f) + (uv0);
+		//Set the diagonal face first
+		verts[0]=  new Vector3(0f,1.2f, baseHeight);
+		verts[1]=  new Vector3(0f,1.2f, floorHeight);
+		verts[2]=  new Vector3(-1.2f,0f, floorHeight);
+		verts[3]=  new Vector3(-1.2f,0f, baseHeight);
+
+		uvs[0]=new Vector2(0.0f,uv0);
+		uvs[1]=new Vector2(0.0f,uv1);
+		uvs[2]=new Vector2(1,uv1);
+		uvs[3]=new Vector2(1,uv0);
+		FaceCounter++;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vEAST)))
+				{//Will only render north or west if needed.
+				switch(i)
+				{
+				case vNORTH:
+						{
+						//north wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
+
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(1,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(1,uv0);
+
+						break;
+						}
+
+				case vEAST:
+						{
+						//east wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
+
+						break;
+						}
+
+				}
+				FaceCounter++;
+				}
+			}
+
+		//Apply the uvs and create my tris
+		mesh.vertices = verts;
+		mesh.uv = uvs;
+		int [] tris = new int[6];
+		//Tris for diagonal.
+
+		tris[0]=0;
+		tris[1]=1;
+		tris[2]=2;
+		tris[3]=0;
+		tris[4]=2;
+		tris[5]=3;
+		mesh.SetTriangles(tris,0);
+		FaceCounter=1;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((i==vNORTH) || (i==vEAST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					tris[0]=0+(4*FaceCounter);
+					tris[1]=1+(4*FaceCounter);
+					tris[2]=2+(4*FaceCounter);
+					tris[3]=0+(4*FaceCounter);
+					tris[4]=2+(4*FaceCounter);
+					tris[5]=3+(4*FaceCounter);
+					mesh.SetTriangles(tris,FaceCounter);
+					FaceCounter++;
+					}
+				}
+			}
+
+		mr.materials=mats;
+		mesh.RecalculateNormals();
+		mf.mesh=mesh;
+		return;
 		return;
 		}
 
 	void RenderDiagNWPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 		//Does a thing.
+		//Does a thing.
+		//Draws 3 meshes. Outward diagonal wall. Back and side if visible.
 
+
+		int NumberOfVisibleFaces=1;//Will always have the diag.
+		//Get the number of faces
+		for (int i=0; i<6;i++)
+			{
+			if ((i==vSOUTH) || (i==vEAST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					NumberOfVisibleFaces++;
+					}
+				}
+			}
+		//Allocate enough verticea and UVs for the faces
+		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
+		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
+		float floorHeight=(float)(Top*0.15f);
+		float baseHeight=(float)(Bottom*0.15f);
+		float dimX = t.DimX;
+		float dimY = t.DimY;
+
+		//Now create the mesh
+		GameObject Tile = new GameObject(TileName);
+		Tile.transform.parent=parent.transform;
+		Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
+
+		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+		MeshFilter mf = Tile.AddComponent<MeshFilter>();
+		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		Mesh mesh = new Mesh();
+		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+		//Now allocate the visible faces to triangles.
+		int FaceCounter=0;//Tracks which number face we are now on.
+		float PolySize= Top-Bottom;
+		float uv0= (float)(Bottom*0.125f);
+		float uv1=(PolySize / 8.0f) + (uv0);
+		//Set the diagonal face first
+		verts[0]=  new Vector3(-1.2f,1.2f, baseHeight);
+		verts[1]=  new Vector3(-1.2f,1.2f, floorHeight);
+		verts[2]=  new Vector3(0f,0f, floorHeight);
+		verts[3]=  new Vector3(0f,0f, baseHeight);
+
+		uvs[0]=new Vector2(0.0f,uv0);
+		uvs[1]=new Vector2(0.0f,uv1);
+		uvs[2]=new Vector2(1,uv1);
+		uvs[3]=new Vector2(1,uv0);
+		FaceCounter++;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+				{//Will only render north or west if needed.
+				switch(i)
+				{
+				case vEAST:
+						{
+						//east wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
+
+						break;
+						}
+
+				case vSOUTH:
+						{
+						//south wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
+
+						break;
+						}
+
+				}
+				FaceCounter++;
+				}
+			}
+
+		//Apply the uvs and create my tris
+		mesh.vertices = verts;
+		mesh.uv = uvs;
+		int [] tris = new int[6];
+		//Tris for diagonal.
+
+		tris[0]=0;
+		tris[1]=1;
+		tris[2]=2;
+		tris[3]=0;
+		tris[4]=2;
+		tris[5]=3;
+		mesh.SetTriangles(tris,0);
+		FaceCounter=1;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((i==vSOUTH) || (i==vEAST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					tris[0]=0+(4*FaceCounter);
+					tris[1]=1+(4*FaceCounter);
+					tris[2]=2+(4*FaceCounter);
+					tris[3]=0+(4*FaceCounter);
+					tris[4]=2+(4*FaceCounter);
+					tris[5]=3+(4*FaceCounter);
+					mesh.SetTriangles(tris,FaceCounter);
+					FaceCounter++;
+					}
+				}
+			}
+
+		mr.materials=mats;
+		mesh.RecalculateNormals();
+		mf.mesh=mesh;
+		return;
 		return;
 		}
 
 	void RenderDiagNEPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 		//Does a thing.
+		//Does a thing.
+		//Draws 3 meshes. Outward diagonal wall. Back and side if visible.
 
+
+		int NumberOfVisibleFaces=1;//Will always have the diag.
+		//Get the number of faces
+		for (int i=0; i<6;i++)
+			{
+			if ((i==vSOUTH) || (i==vWEST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					NumberOfVisibleFaces++;
+					}
+				}
+			}
+		//Allocate enough verticea and UVs for the faces
+		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
+		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
+		float floorHeight=(float)(Top*0.15f);
+		float baseHeight=(float)(Bottom*0.15f);
+		float dimX = t.DimX;
+		float dimY = t.DimY;
+
+		//Now create the mesh
+		GameObject Tile = new GameObject(TileName);
+		Tile.transform.parent=parent.transform;
+		Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
+
+		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+		MeshFilter mf = Tile.AddComponent<MeshFilter>();
+		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		Mesh mesh = new Mesh();
+		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+		//Now allocate the visible faces to triangles.
+		int FaceCounter=0;//Tracks which number face we are now on.
+		float PolySize= Top-Bottom;
+		float uv0= (float)(Bottom*0.125f);
+		float uv1=(PolySize / 8.0f) + (uv0);
+		//Set the diagonal face first
+		verts[0]=  new Vector3(-1.2f,0f, baseHeight);
+		verts[1]=  new Vector3(-1.2f,0f, floorHeight);
+		verts[2]=  new Vector3(0f,1.2f, floorHeight);
+		verts[3]=  new Vector3(0f,1.2f, baseHeight);
+
+		uvs[0]=new Vector2(0.0f,uv0);
+		uvs[1]=new Vector2(0.0f,uv1);
+		uvs[2]=new Vector2(1,uv1);
+		uvs[3]=new Vector2(1,uv0);
+		FaceCounter++;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+				{//Will only render north or west if needed.
+				switch(i)
+				{
+				case vSOUTH:
+						{
+						//south wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
+
+						break;
+						}
+
+				case vWEST:
+						{
+						//west wall vertices
+						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
+						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
+						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+						verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+						uvs[2+ (4*FaceCounter)]=new Vector2(1,uv1);
+						uvs[3+ (4*FaceCounter)]=new Vector2(1,uv0);
+
+						break;
+						}
+
+				}
+				FaceCounter++;
+				}
+			}
+
+		//Apply the uvs and create my tris
+		mesh.vertices = verts;
+		mesh.uv = uvs;
+		int [] tris = new int[6];
+		//Tris for diagonal.
+
+		tris[0]=0;
+		tris[1]=1;
+		tris[2]=2;
+		tris[3]=0;
+		tris[4]=2;
+		tris[5]=3;
+		mesh.SetTriangles(tris,0);
+		FaceCounter=1;
+
+		for (int i=0;i<6;i++)
+			{
+			if ((i==vSOUTH) || (i==vWEST))
+				{
+				if (t.VisibleFaces[i]==1)
+					{
+					tris[0]=0+(4*FaceCounter);
+					tris[1]=1+(4*FaceCounter);
+					tris[2]=2+(4*FaceCounter);
+					tris[3]=0+(4*FaceCounter);
+					tris[4]=2+(4*FaceCounter);
+					tris[5]=3+(4*FaceCounter);
+					mesh.SetTriangles(tris,FaceCounter);
+					FaceCounter++;
+					}
+				}
+			}
+
+		mr.materials=mats;
+		mesh.RecalculateNormals();
+		mf.mesh=mesh;
+		return;
 		return;
 		}
 
@@ -1948,8 +2474,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		//if (game == SHOCK) {return;}
 		int j=1 ;
 		//Now lets combine the solids along particular axis
-			for (x=0;x<64;x++){
-				for (y=0;y<64;y++){
+			for (x=0;x<63;x++){
+				for (y=0;y<63;y++){
 				if  ((LevelInfo[x,y].Grouped ==0))
 					{
 					j=1;
@@ -1977,8 +2503,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		j=1;
 
 		////Now lets combine solids along the other axis
-			for (y=0;y<64;y++){
-				for (x=0;x<64;x++){
+			for (y=0;y<63;y++){
+				for (x=0;x<63;x++){
 				if  ((LevelInfo[x,y].Grouped ==0))
 					{
 					j=1;
