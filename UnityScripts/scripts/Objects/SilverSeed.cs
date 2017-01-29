@@ -61,7 +61,7 @@ public class SilverSeed : object_base {
 				//int tileY= GameWorldController.instance.Tilemap.visitTileY;
 				objInt().gameObject.transform.parent=GameWorldController.instance.LevelMarker();
 
-				objInt().gameObject.transform.position=GameWorldController.instance.Tilemap.getTileVector(GameWorldController.instance.Tilemap.visitTileX,GameWorldController.instance.Tilemap.visitTileY);
+				objInt().gameObject.transform.position=GameWorldController.instance.currentTileMap().getTileVector(TileMap.visitTileX,TileMap.visitTileY);
 				GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);
 				GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt().gameObject.name);
 				GameWorldController.instance.playerUW.playerInventory.Refresh ();

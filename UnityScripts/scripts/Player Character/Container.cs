@@ -221,7 +221,7 @@ public class Container : object_base {
 	public void SpillContents()
 	{//Removes the contents of a container out in the real world.
 		int counter;
-		TileMap tm =GameWorldController.instance.Tilemap; //GameObject.Find("Tilemap").GetComponent<TileMap>();
+		TileMap tm =GameWorldController.instance.currentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
 		GameWorldController.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());

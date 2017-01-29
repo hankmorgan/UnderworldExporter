@@ -19,15 +19,17 @@ public class GameWorldController : UWEBase {
 	public bool EnableTextureAnimation;
 
 		/// <summary>
-		/// Array of game objects containing the level meshes
+		/// Array of game objects containing the nav meshes
 		/// </summary>
-	public GameObject[] WorldModel =new GameObject[9];
+	public GameObject[] NavMeshes=new GameObject[9];
 		/// <summary>
 		/// Array of game objects containing the level objects
 		/// </summary>
 	public GameObject[] LevelObjects =new GameObject[9];
 	//public static TextureController tc;
 
+	public GameObject LevelModel;
+	
 		/// <summary>
 		/// The instance of this class
 		/// </summary>
@@ -62,7 +64,7 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// The tilemap class for the game
 	/// </summary>
-	public TileMap Tilemap;
+	public TileMap[] Tilemaps = new TileMap[9];
 	/// <summary>
 	/// The player character.
 	/// </summary>
@@ -125,6 +127,11 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public bool AtMainMenu;
 
+	public string Lev_Ark_File;
+	
+	public Material[] MaterialMasterList=new Material[260];
+
+
 	void Awake()
 	{
 		//if(LevelSerializer.IsDeserializing)	return;
@@ -143,17 +150,25 @@ public class GameWorldController : UWEBase {
 	void Start () {
 		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
+
+				//Load up my map materials
+				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
+				{
+					MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+				}
+				//Load up my tile maps
+				//First read in my lev_ark file.
+				for (int i=0; i<=Tilemaps.GetUpperBound(0);i++)
+				{
+						Tilemaps[i]=new TileMap();
+						Tilemaps[i].thisLevelNo=i+1;
+						Tilemaps[i].BuildTileMapUW(Lev_Ark_File,1,i);
+				}
+
 		if (EnableTextureAnimation==true)
 		{
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
-		}
-		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
-		{
-			if(WorldModel[i]==null)
-			{
-				WorldModel[i]=GameObject.Find("_Level" + i);
-			}
 		}
 
 		if ((AtMainMenu) && (!LevelSerializer.IsDeserializing))
@@ -176,39 +191,9 @@ public class GameWorldController : UWEBase {
 
 
 		}
+		InvokeRepeating("PositionDetect",0.0f,0.02f);
 		return;
 	}
-
-		void Update()
-		{			
-				//return;
-				//Make sure I don't lose any references
-				for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
-				{
-						if(WorldModel[i]==null)
-						{
-								WorldModel[i]=GameObject.Find("_Level" + i);
-						}
-				}
-
-				for (int i=0; i <=LevelObjects.GetUpperBound(0);i++)
-				{
-						if(LevelObjects[i]==null)
-						{
-								LevelObjects[i]=GameObject.Find("Level" + i + "Objects");
-						}
-				}
-				//return;
-				if(LevelNo>=0)
-				{
-					if (WorldModel[LevelNo].activeSelf==false)
-					{//Force the current level to become active
-						WorldModel[LevelNo].SetActive(true);	
-						LevelObjects[LevelNo].SetActive(true);
-					}					
-				}
-
-		}
 
 		/// <summary>
 		/// Gets the current level model.
@@ -216,7 +201,8 @@ public class GameWorldController : UWEBase {
 		/// <returns>The current level model gameobject</returns>
 	public GameObject getCurrentLevelModel()
 	{
-		return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
+		//return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
+		return LevelModel;
 	}
 
 	/// <summary>
@@ -338,6 +324,23 @@ public class GameWorldController : UWEBase {
 	/// Switches the level to another one. Disables the map and level objects of the old one.
 	/// </summary>
 	/// <param name="newLevelNo">New level no.</param>
+		/// 
+		public void SwitchLevel(int newLevelNo)
+		{
+			if (newLevelNo!=-1)
+			{
+				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo]);
+				LevelNo=newLevelNo;
+				//Make the nav meshes and gameobjects active
+				for (int i=0; i <=NavMeshes.GetUpperBound(0);i++)
+				{
+						NavMeshes[i].SetActive(i==newLevelNo);
+						LevelObjects[i].SetActive(i==newLevelNo);
+				}	
+			}
+
+		}
+	/*
 	public void SwitchLevel(int newLevelNo)
 	{
 		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
@@ -350,7 +353,7 @@ public class GameWorldController : UWEBase {
 			LevelObjects[i].SetActive(i==newLevelNo);
 		}	
 		LevelNo=newLevelNo;
-	}
+	}*/
 
 	/// <summary>
 	/// Freezes the movement of the specified object if it has a rigid body attached.
@@ -398,6 +401,29 @@ public class GameWorldController : UWEBase {
 			}
 			return mus;
 		}
+
+
+		public TileMap currentTileMap()
+		{
+			return Tilemaps[LevelNo];	
+		}
+
+		/// <summary>
+		/// Detects where the player currently is an updates their swimming state and auto map as needed.
+		/// </summary>
+		public void PositionDetect()
+		{
+				if (AtMainMenu==true)
+				{
+						return;
+				}
+				TileMap.visitTileX =(int)(playerUW.transform.position.x/1.2f);
+				TileMap.visitTileY =(int)(playerUW.transform.position.z/1.2f);
+				currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
+				GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
+
+		}
+
 
 
 }

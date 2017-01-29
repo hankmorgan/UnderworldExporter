@@ -48,7 +48,7 @@ public class MapInteraction : GuiBase {
 		private void UpdateMap(int LevelNo)
 		{
 			WindowDetect.InMap=true;//turns on blocking collider.
-			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage(LevelNo);
+			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemaps[LevelNo].TileMapImage();
 		}
 
 		public void ClickEraser()
@@ -115,7 +115,7 @@ public class MapInteraction : GuiBase {
 					newmapnote.guid=guid;
 					mapNoteCurrent.GetComponent<ContentSizeFitter>().horizontalFit= ContentSizeFitter.FitMode.PreferredSize;
 					//mapNoteCurrent.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
-					GameWorldController.instance.Tilemap.MapNotes[MapNo].Add(newmapnote);
+					GameWorldController.instance.Tilemaps[MapNo].MapNotes.Add(newmapnote);
 					mapNoteCurrent.GetComponent<MapNoteId>().guid= guid;								
 				}
 				InteractionMode=MapInteractionNormal;

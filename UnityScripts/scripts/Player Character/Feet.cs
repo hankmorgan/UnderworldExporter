@@ -85,7 +85,7 @@ public class Feet : UWEBase {
 			if (fallSpeed>0.0f)
 			{							
 				//Check fall damage.
-				GameWorldController.instance.Tilemap.PositionDetect();//check where I am.
+				GameWorldController.instance.PositionDetect();//check where I am.
 				UWCharacter.Instance.onLanding(fallSpeed);
 				fallSpeed=0.0f;
 			}

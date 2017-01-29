@@ -35,7 +35,7 @@ public class Map : object_base {
 		WindowDetect.InMap=true;//turns on blocking collider.
 		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
 		UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
-		UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
+		UWHUD.instance.MapDisplay.texture=GameWorldController.instance.currentTileMap().TileMapImage();
 		if  (GameWorldController.instance.getMus()!=null)
 		{
 			GameWorldController.instance.getMus().InMap=true;

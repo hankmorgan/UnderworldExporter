@@ -9,9 +9,6 @@ public class MapLoader : MonoBehaviour {
 	public int LevelToRetrieve;
 	const int TILE_SOLID= 0;
 	const int TILE_OPEN= 1;
-	public Material[] mats = new Material[6];
-
-
 	/*
 Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
 */
@@ -39,7 +36,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 	const int SLOPE_FLOOR_ONLY =2;
 	const int  SLOPE_CEILING_ONLY= 3;
 
-
+	//Visible faces indices
 	const int vTOP =0;
 	const int vEAST =1;
 	const int vBOTTOM= 2;
@@ -48,12 +45,25 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 	const int vSOUTH= 5;
 
 
+	//BrushFaces
+	const int fSELF =128;
+	const int fCEIL= 64;
+	const int fNORTH =32;
+	const int fSOUTH =16;
+	const int fEAST= 8;
+	const int fWEST= 4;
+	const int fTOP =2;
+	const int fBOTTOM= 1;
+
+
 	//**********************
 
 
 
 	TileInfo[,] LevelInfo=new TileInfo[64,64];
-	int[] texture_map = new int[256];
+	public int[] texture_map = new int[256];
+	public Material[] MaterialMasterList=new Material[260];
+
 	//**********************
 
 	public string Path;
@@ -61,6 +71,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 	public int CEILING_HEIGHT;
 
 
+	void Start()
+		{
+		//Load all my materials
+		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
+			{
+			MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+			}
+		}
 
 
 	//************************
@@ -210,7 +228,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 					}					
 				//UW only has a single ceiling texture so this is ignored.
 				//LevelInfo[x,y].shockCeilingTexture = LevelInfo[x,y].floorTexture;					
-				///LevelInfo[x,y].shockCeilingTexture=CeilingTexture;
+				LevelInfo[x,y].shockCeilingTexture=CeilingTexture;
 				//There is only one possible steepness in UW so I set it's properties to match a similar tile in shock.
 				if (LevelInfo[x,y].tileType >=2)
 					{
@@ -385,7 +403,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Output.text=result;
 		}
 
-
+	/*
 	public void GenerateMesh()
 		{
 		for (int y=0; y<64;y++)
@@ -527,7 +545,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 					mesh.RecalculateNormals();
 					//mr.materials=new Material[2];
 
-					mr.materials=mats;
+					mr.materials= MatsToUse;
 
 					//mr.material=mat;
 
@@ -539,7 +557,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			}
 
 
-		}
+		}*/
 
 	//*************Export Tile Map ***********************//
 
@@ -574,6 +592,37 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				RenderTile(this.gameObject, game, x, y, LevelInfo[x,y], 1, 0, 0, skipCeil);
 				}
 			}
+
+		//Do a ceiling
+
+		if (game != 2)
+			{
+			TileInfo tmp=new TileInfo();
+			//Ceiling
+			tmp.tileType = 1;
+			tmp.Render = 1;
+			tmp.isWater = 0;
+			tmp.tileX = 0;
+			tmp.tileY = 0;
+			tmp.DimX = 64;
+			tmp.DimY = 64;
+			tmp.ceilingHeight = 0;
+			tmp.floorTexture = LevelInfo[0,0].shockCeilingTexture;
+			tmp.shockCeilingTexture = LevelInfo[0,0].shockCeilingTexture;
+			tmp.East = LevelInfo[0,0].shockCeilingTexture;//CAULK;
+			tmp.West = LevelInfo[0,0].shockCeilingTexture;//CAULK;
+			tmp.North = LevelInfo[0,0].shockCeilingTexture;//CAULK;
+			tmp.South = LevelInfo[0,0].shockCeilingTexture;//CAULK;
+			tmp.VisibleFaces[vTOP] = 0;
+			tmp.VisibleFaces[vEAST] = 0;
+			tmp.VisibleFaces[vBOTTOM] = 1;
+			tmp.VisibleFaces[vWEST] = 0;
+			tmp.VisibleFaces[vNORTH] = 0;
+			tmp.VisibleFaces[vSOUTH] = 0;
+			// top,east,bottom,west,north,south
+			RenderTile(this.gameObject, game, tmp.tileX, tmp.tileX, tmp, 0, 0, 1, 0);
+			}
+
 		}
 
 
@@ -1025,9 +1074,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 			MeshFilter mf = Tile.AddComponent<MeshFilter>();
 			MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+			MeshCollider mc = Tile.AddComponent<MeshCollider>();
+			mc.sharedMesh=null;
 			Mesh mesh = new Mesh();
 			mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
 
+			Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 			//Now allocate the visible faces to triangles.
 			int FaceCounter=0;//Tracks which number face we are now on.
 		float PolySize= Top-Bottom;
@@ -1041,7 +1093,9 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						{
 						case vTOP:
 								{
-								//Set the verts								
+								//Set the verts	
+								
+						MatsToUse[FaceCounter]=MaterialMasterList[FloorTexture(fSELF, t)];
 							verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
 							verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
 							verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
@@ -1059,6 +1113,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						case vNORTH:
 								{
 								//north wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fNORTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
@@ -1076,6 +1131,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						case vWEST:
 								{
 								//west wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fWEST, t)];
 								verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 								verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
 								verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
@@ -1091,6 +1147,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						case vEAST:
 								{
 								//east wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fEAST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
@@ -1105,6 +1162,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 						case vSOUTH:
 							{
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSOUTH, t)];
 							//south wall vertices
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
@@ -1120,6 +1178,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vBOTTOM:
 						{
 						//bottom wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[FloorTexture(fCEIL, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
@@ -1157,9 +1216,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		
-		mr.materials=mats;
+		mr.materials= MatsToUse;//mats;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
+		mc.sharedMesh=mesh;
 		}
 
 	void RenderSlopedCuboid(GameObject parent, int x, int y, TileInfo t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, string TileName)
@@ -1224,6 +1285,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		//Allocate enough verticea and UVs for the faces
+		Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
 		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
 		float floorHeight=(float)(Top*0.15f);
@@ -1239,9 +1301,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 		MeshFilter mf = Tile.AddComponent<MeshFilter>();
 		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+
 		Mesh mesh = new Mesh();
 		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
-
 		//Now allocate the visible faces to triangles.
 		int FaceCounter=0;//Tracks which number face we are now on.
 		float PolySize= Top-Bottom;
@@ -1255,17 +1319,19 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 				case vTOP:
 						{
-						//Set the verts								
+						//Set the verts	
+						MatsToUse[FaceCounter]=MaterialMasterList[FloorTexture(fSELF, t)];
+
 						verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
 						verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
 
 						//Allocate UVs
-						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
-						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-						uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
-						uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+						uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+						uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+						uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+						uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
 
 						break;
 						}
@@ -1273,6 +1339,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vNORTH:
 						{
 						//north wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fNORTH, t)];
+
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight +AdjustLowerNorth+AdjustLowerEast);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperWest);
@@ -1290,6 +1358,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vWEST:
 						{
 						//west wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fWEST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerWest+AdjustLowerNorth);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperWest+AdjustUpperSouth);
@@ -1305,6 +1374,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vEAST:
 						{
 						//east wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fEAST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerEast+AdjustLowerSouth);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperEast+AdjustUpperSouth);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperEast+AdjustUpperNorth);
@@ -1320,6 +1390,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vSOUTH:
 						{
 						//south wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSOUTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerSouth+AdjustLowerWest);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouth+AdjustUpperWest);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
@@ -1334,6 +1405,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vBOTTOM:
 						{
 						//bottom wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[FloorTexture(fCEIL, t)];
 						//TODO:Get the lower face adjustments for this (shock only)
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
@@ -1372,10 +1444,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 
-		mr.materials=mats;
+		mr.materials=MatsToUse;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
-
+		mc.sharedMesh=mesh;
 
 		}
 	
@@ -1854,6 +1927,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		//Allocate enough verticea and UVs for the faces
+		Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
 		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
 		float floorHeight=(float)(Top*0.15f);
@@ -1869,15 +1943,20 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 		MeshFilter mf = Tile.AddComponent<MeshFilter>();
 		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+
 		Mesh mesh = new Mesh();
 		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
 
 		//Now allocate the visible faces to triangles.
 		int FaceCounter=0;//Tracks which number face we are now on.
+		MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSELF, t)];
 		float PolySize= Top-Bottom;
 		float uv0= (float)(Bottom*0.125f);
 		float uv1=(PolySize / 8.0f) + (uv0);
 		//Set the diagonal face first
+
 		verts[0]=  new Vector3(0f,0f, baseHeight);
 		verts[1]=  new Vector3(0f,0f, floorHeight);
 		verts[2]=  new Vector3(-1.2f,1.2f, floorHeight);
@@ -1898,6 +1977,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vNORTH:
 						{
 						//north wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fNORTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
@@ -1914,6 +1994,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vWEST:
 						{
 						//west wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fWEST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
@@ -1964,9 +2045,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 
-		mr.materials=mats;
+		mr.materials= MatsToUse;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
+		mc.sharedMesh=mesh;
 		return;
 		}
 
@@ -1975,11 +2058,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		//Does a thing.
 		//Does a thing.
 		//Draws 3 meshes. Outward diagonal wall. Back and side if visible.
-		if ((t.tileX==29) && (t.tileY==24) )
-			{
-			Debug.Log("HERE");
-			}
-
 		int NumberOfVisibleFaces=1;//Will always have the diag.
 		//Get the number of faces
 		for (int i=0; i<6;i++)
@@ -1993,6 +2071,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		//Allocate enough verticea and UVs for the faces
+		Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
 		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
 		float floorHeight=(float)(Top*0.15f);
@@ -2008,11 +2087,17 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 		MeshFilter mf = Tile.AddComponent<MeshFilter>();
 		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+
 		Mesh mesh = new Mesh();
 		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
 
 		//Now allocate the visible faces to triangles.
 		int FaceCounter=0;//Tracks which number face we are now on.
+
+		MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSELF, t)];
+
 		float PolySize= Top-Bottom;
 		float uv0= (float)(Bottom*0.125f);
 		float uv1=(PolySize / 8.0f) + (uv0);
@@ -2037,6 +2122,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vNORTH:
 						{
 						//north wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fNORTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f,1.2f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
@@ -2053,6 +2139,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vEAST:
 						{
 						//east wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fEAST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
@@ -2103,10 +2190,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 
-		mr.materials=mats;
+		mr.materials= MatsToUse;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
-		return;
+		mc.sharedMesh=mesh;
 		return;
 		}
 
@@ -2130,6 +2218,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		//Allocate enough verticea and UVs for the faces
+		Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
 		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
 		float floorHeight=(float)(Top*0.15f);
@@ -2145,15 +2234,19 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 		MeshFilter mf = Tile.AddComponent<MeshFilter>();
 		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+
 		Mesh mesh = new Mesh();
 		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
-
 		//Now allocate the visible faces to triangles.
 		int FaceCounter=0;//Tracks which number face we are now on.
 		float PolySize= Top-Bottom;
 		float uv0= (float)(Bottom*0.125f);
 		float uv1=(PolySize / 8.0f) + (uv0);
 		//Set the diagonal face first
+		MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSELF, t)];
+
 		verts[0]=  new Vector3(-1.2f,1.2f, baseHeight);
 		verts[1]=  new Vector3(-1.2f,1.2f, floorHeight);
 		verts[2]=  new Vector3(0f,0f, floorHeight);
@@ -2174,6 +2267,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vEAST:
 						{
 						//east wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fEAST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
@@ -2189,6 +2283,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vSOUTH:
 						{
 						//south wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSOUTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
@@ -2239,10 +2334,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 
-		mr.materials=mats;
+		mr.materials= MatsToUse;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
-		return;
+		mc.sharedMesh=mesh;
 		return;
 		}
 
@@ -2266,8 +2362,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		//Allocate enough verticea and UVs for the faces
+		Material[] MatsToUse=new Material[NumberOfVisibleFaces];
 		Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
 		Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
+
 		float floorHeight=(float)(Top*0.15f);
 		float baseHeight=(float)(Bottom*0.15f);
 		float dimX = t.DimX;
@@ -2281,6 +2379,9 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 		MeshFilter mf = Tile.AddComponent<MeshFilter>();
 		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+
 		Mesh mesh = new Mesh();
 		mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
 
@@ -2290,6 +2391,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		float uv0= (float)(Bottom*0.125f);
 		float uv1=(PolySize / 8.0f) + (uv0);
 		//Set the diagonal face first
+		MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSELF, t)];
 		verts[0]=  new Vector3(-1.2f,0f, baseHeight);
 		verts[1]=  new Vector3(-1.2f,0f, floorHeight);
 		verts[2]=  new Vector3(0f,1.2f, floorHeight);
@@ -2310,6 +2412,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vSOUTH:
 						{
 						//south wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fSOUTH, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
@@ -2325,6 +2428,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case vWEST:
 						{
 						//west wall vertices
+						MatsToUse[FaceCounter]=MaterialMasterList[WallTexture(fWEST, t)];
 						verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f, baseHeight);
 						verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f, floorHeight);
 						verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
@@ -2375,10 +2479,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 
-		mr.materials=mats;
+		mr.materials= MatsToUse;
 		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
 		mf.mesh=mesh;
-		return;
+		mc.sharedMesh=mesh;
 		return;
 		}
 
@@ -2769,4 +2874,51 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		}
 
 
+
+	int WallTexture(int face, TileInfo t)
+		{
+		int wallTexture;
+		int ceilOffset = 0;
+		wallTexture = t.wallTexture;
+		switch (face)
+		{
+		case fSOUTH:
+			wallTexture = t.South;
+			break;
+		case fNORTH:
+			wallTexture = t.North;
+			break;
+		case fEAST:
+			wallTexture = t.East;
+			break;
+		case fWEST:
+			wallTexture = t.West;
+			break;
+		}
+		if ((wallTexture<0) || (wallTexture >512))
+			{
+			wallTexture = 0;
+			}
+		return wallTexture;
+		}
+
+	int FloorTexture(int face, TileInfo t)
+		{
+		int floorTexture;
+
+		if (face == fCEIL)
+			{
+			floorTexture = t.shockCeilingTexture;
+			}
+		else
+			{
+			floorTexture = t.floorTexture;
+			}
+
+		if ((floorTexture<0) || (floorTexture >512))
+			{
+			floorTexture = 0;
+			}
+		return floorTexture;
+		}
 }

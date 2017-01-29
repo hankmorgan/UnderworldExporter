@@ -94,9 +94,9 @@ public class Instrument : object_base {
 			{
 				//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
 				if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
-				{
-					int tileX=GameWorldController.instance.Tilemap.visitTileX;
-					int tileY=GameWorldController.instance.Tilemap.visitTileY;
+				{									
+					int tileX=TileMap.visitTileX;
+					int tileY=TileMap.visitTileY;
 					if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
 					{							
 						//create the cup of wonder.

@@ -2112,7 +2112,7 @@ public class Conversation : GuiBase {
 			//									(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
 			//									(((float)tileY) *1.2f) +0.6f
 			//                                     );
-			obj.transform.position=GameWorldController.instance.Tilemap.getTileVector(tileX,tileY);
+			obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
 			obj.transform.parent=GameWorldController.instance.LevelMarker();
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
 			UWHUD.instance.npcTrade[invSlot].clear();

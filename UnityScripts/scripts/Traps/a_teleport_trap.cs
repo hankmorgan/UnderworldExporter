@@ -22,7 +22,7 @@ public class a_teleport_trap : trap_base {
 								}
 		else
 		{
-			float TileHeight = (float)GameWorldController.instance.Tilemap.GetFloorHeight(levelNo-1,objInt().Quality,objInt().Owner);
+			float TileHeight = (float)GameWorldController.instance.Tilemaps[levelNo-1].GetFloorHeight(objInt().Quality,objInt().Owner);
 			float posNewTile =(TileHeight+1) * 0.15f ;
 
 			//GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
