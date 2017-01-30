@@ -209,7 +209,7 @@ public class TileMap  {
 
 
 		///Sets the map no display
-		UWHUD.instance.LevelNoDisplay.text=(thisLevelNo).ToString();
+		UWHUD.instance.LevelNoDisplay.text=(thisLevelNo+1).ToString();
 		///Uses a cursor icon to display the player.
 		Texture2D playerPosIcon = (Texture2D)Resources.Load (UWEBase._RES +"/HUD/CURSORS/CURSORS_0018");
 
@@ -222,7 +222,7 @@ public class TileMap  {
 		{
 			for (int j = 63; j>0; j--)
 			{
-				DrawSolidTile(ref output,i,j,TileSize,TileSize,Background);
+				DrawSolidTile(output,i,j,TileSize,TileSize,Background);
 			}
 		}
 
@@ -234,7 +234,7 @@ public class TileMap  {
 				if ((GetTileRender(i,j)==1) && (GetTileVisited(i,j)))
 				{
 					//fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
-					fillTile(ref output,i,j,TileSize,TileSize,OpenTileColour,WaterTileColour,LavaTileColour,BridgeTileColour);
+					fillTile(output,i,j,TileSize,TileSize,OpenTileColour,WaterTileColour,LavaTileColour,BridgeTileColour);
 				}
 			}
 		}
@@ -249,7 +249,7 @@ public class TileMap  {
 					{
 					case TILE_SOLID://Solid
 					{
-						//DrawSolidTile(ref output,i,j,TileSize,TileSize,Color.clear);
+						//DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
 						//output.SetPixel(i, j, Color.blackblack);
 						break;
 					}
@@ -259,35 +259,35 @@ public class TileMap  {
 					case TILE_SLOPE_S:
 					case TILE_SLOPE_N:
 					{
-						DrawOpenTile(ref output,i,j,TileSize,TileSize,BorderColour);
+						DrawOpenTile(output,i,j,TileSize,TileSize,BorderColour);
 						//output.SetPixel(i, j, Color.white);
 						break;
 					}
 					case TILE_DIAG_NE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,NORTHEAST);
-						DrawDiagNE(ref output,i,j,TileSize,TileSize,BorderColour);
+						DrawDiagNE(output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_SE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,SOUTHEAST);
-						DrawDiagSE(ref output,i,j,TileSize,TileSize,BorderColour);
+						DrawDiagSE(output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_NW:
 					{
-						DrawDiagNW (ref output,i,j,TileSize,TileSize,BorderColour);
+						DrawDiagNW (output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_SW:
 					{
-						DrawDiagSW(ref output,i,j,TileSize,TileSize,BorderColour);
+						DrawDiagSW(output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					default:
 					{
-						//DrawSolidTile(ref output,i,j,TileSize,TileSize,Color.clear);
+						//DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
 						//	output.SetPixel(i, j, Color.red);
 						break;
 					}
@@ -295,7 +295,7 @@ public class TileMap  {
 				}
 				else
 				{
-					DrawSolidTile(ref output,i,j,TileSize,TileSize,Background);
+					DrawSolidTile(output,i,j,TileSize,TileSize,Background);
 					//output.SetPixel(i, j, Color.clear);
 				}
 			}
@@ -309,7 +309,7 @@ public class TileMap  {
 				{
 					if (GetTileVisited(i,j)==true)
 					{
-						DrawDoor(ref output,i,j,TileSize,TileSize,BorderColour);							
+						DrawDoor(output,i,j,TileSize,TileSize,BorderColour);							
 					}
 					
 				}
@@ -367,7 +367,7 @@ public class TileMap  {
 		/// <param name="WaterColour">Water colour.</param>
 		/// <param name="LavaColour">Lava colour.</param>
 		/// <param name="BridgeColour">Bridge colour.</param>
-	private void fillTile(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour,Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour )
+	private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour,Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour )
 	{
 		Color[] TileColorPrimary;
 		Color TileColorSecondary;
@@ -476,12 +476,12 @@ public class TileMap  {
 			case TILE_SLOPE_S:
 			case TILE_SLOPE_W:
 				{//Fills an open tile.
-				DrawSolidTile(ref OutputTile,TileX,TileY,TileWidth,TileHeight,TileColorPrimary);
+				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,TileColorPrimary);
 				break;
 				}
 			default:
 				{//Does not draw anything.
-				DrawSolidTile(ref OutputTile,TileX,TileY,TileWidth,TileHeight,Background);
+				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Background);
 				break;
 				}
 			}
@@ -498,7 +498,7 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	private void DrawSolidTile(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	private void DrawSolidTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		for (int i = 0; i<TileWidth; i++)
 		{
@@ -520,14 +520,14 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	private void DrawOpenTile(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	private void DrawOpenTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		//Check the tile to the north
 		if (TileY<63)
 			{
 			if ((GetTileType( TileX,TileY+1)==TILE_SOLID) && (GetTileRender( TileX,TileY+1)==1))
 				{//Solid tile to the north.
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 				}
 			}
 		//Check the tile to the south
@@ -535,7 +535,7 @@ public class TileMap  {
 			{
 			if ((GetTileType( TileX,TileY-1)==TILE_SOLID) && (GetTileRender(TileX,TileY-1)==1))
 				{//Solid tile to the south.
-					DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 				}
 			}
 		//Check the tile to the east
@@ -543,7 +543,7 @@ public class TileMap  {
 			{
 			if ((GetTileType( TileX+1,TileY)==TILE_SOLID) && (GetTileRender( TileX+1,TileY)==1))
 				{
-					DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
+					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 				}
 			}
 		//Check the tile to the west
@@ -551,7 +551,7 @@ public class TileMap  {
 		{
 		if ((GetTileType( TileX-1,TileY)==TILE_SOLID) && (GetTileRender( TileX-1,TileY)==1))
 			{
-			DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 	}
@@ -566,7 +566,7 @@ public class TileMap  {
 	/// <param name="TileWidth">Tile width.</param>
 	/// <param name="TileHeight">Tile height.</param>
 	/// <param name="InputColour">Input colour.</param>
-	private void DrawDoor(ref Texture2D OutputTile,  int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	private void DrawDoor(Texture2D OutputTile,  int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		bool TileTypeNorth = isTileOpen(GetTileType(TileX,TileY+1));
 		bool TileTypeSouth = isTileOpen(GetTileType(TileX,TileY-1));
@@ -602,7 +602,7 @@ public class TileMap  {
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
 		/// <param name="Direction">The position on the tile where the border has to be drawn.</param>
-	private void DrawLine(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour, int Direction)
+	private void DrawLine(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour, int Direction)
 	{
 		switch (Direction)
 		{
@@ -683,9 +683,9 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagSW(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	void DrawDiagSW(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
-		DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
+		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
 
 		//Check the tiles to the north and east of this tile to see what needs to be drawn for borders
 		if (TileY <63)
@@ -693,7 +693,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
 				{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 				}
 			}
 		if (TileX <63)
@@ -701,7 +701,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
 				{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 				}
 			}
 
@@ -710,7 +710,7 @@ public class TileMap  {
 		{//South
 			if (GetTileType (TileX,TileY-1)== TILE_SOLID)
 			{
-			DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
 		}
 		
@@ -718,7 +718,7 @@ public class TileMap  {
 		{//West
 			if (GetTileType (TileX-1,TileY)== TILE_SOLID)
 			{
-			DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 
@@ -734,9 +734,9 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagNE(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	void DrawDiagNE(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
-		DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHEAST);
+		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHEAST);
 
 		//Check the tiles to the south and west of this tile to see what needs to be drawn.
 		if (TileY >0)
@@ -744,7 +744,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX,TileY-1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NE))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
 		}
 		if (TileX >0)
@@ -752,7 +752,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX-1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NE))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 
@@ -761,7 +761,7 @@ public class TileMap  {
 		{//North
 		if (GetTileType (TileX,TileY+1)== TILE_SOLID)
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 			}
 		}
 		
@@ -769,7 +769,7 @@ public class TileMap  {
 		{//East
 			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 			}
 		}
 
@@ -785,9 +785,9 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagNW(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	void DrawDiagNW(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
-		DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHWEST);
+		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHWEST);
 		
 		//Check the tiles to the south and east of this tile
 		if (TileY >0)
@@ -795,7 +795,7 @@ public class TileMap  {
 		int TileToTest = GetTileType(TileX,TileY-1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NW))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
 		}
 		if (TileX <63)
@@ -803,7 +803,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NW))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 			}
 		}
 
@@ -812,7 +812,7 @@ public class TileMap  {
 		{//North
 			if (GetTileType (TileX,TileY+1)== TILE_SOLID)
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 			}
 		}
 		
@@ -820,7 +820,7 @@ public class TileMap  {
 		{//West
 			if (GetTileType (TileX-1,TileY)== TILE_SOLID)
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 	}
@@ -835,9 +835,9 @@ public class TileMap  {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagSE(ref Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	void DrawDiagSE(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
-		DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
+		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
 	
 		//Check the tiles to the north and west of this tile
 		if (TileY <63)
@@ -845,7 +845,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SE))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 			}
 		}
 
@@ -854,7 +854,7 @@ public class TileMap  {
 			int TileToTest = GetTileType(TileX-1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SE))
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 
@@ -863,7 +863,7 @@ public class TileMap  {
 			{//South
 			if (GetTileType (TileX,TileY-1)== TILE_SOLID)
 				{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 				}
 			}
 
@@ -871,7 +871,7 @@ public class TileMap  {
 		{//East
 			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
 			{
-				DrawLine (ref OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 			}
 		}
 	}
@@ -1262,17 +1262,17 @@ public class TileMap  {
 		/// 
 
 
-		public bool BuildTileMapUW(string filePath, int game, int LevelNo)
+		public bool BuildTileMapUW(char[] lev_ark, int game, int LevelNo)
 		{
 				// File pointer
-				char[] lev_ark; 
+
 				//char[] tmp_ark; 
 				char[] tex_ark; 
 				int NoOfBlocks;
 				long AddressOfBlockStart;
 				long address_pointer;
 				long textureAddress;
-				long fileSize;
+				//long fileSize;
 				short x;	
 				short y;
 				int i;
@@ -1296,11 +1296,6 @@ public class TileMap  {
 				case 1:	//UW1
 						{
 								CEILING_HEIGHT=UW_CEILING_HEIGHT;
-								if (!DataLoader.ReadStreamFile(filePath, out lev_ark))
-								{
-										return false;
-								}
-
 								// 0x7a;
 								//Get the number of blocks in this file.
 								NoOfBlocks =  (int)DataLoader.getValAtAddress(lev_ark,0,32);
@@ -1519,7 +1514,7 @@ public class TileMap  {
 				}
 
 				//Perform a cleanup of the data
-				CleanUp(1);
+				//CleanUp(1);
 
 				return true;
 		}
@@ -1568,7 +1563,7 @@ public class TileMap  {
 
 		///Cleanup
 		/// 
-		void CleanUp(int game)
+		public void CleanUp(int game)
 		{
 				int x; int y;
 

@@ -65,6 +65,7 @@ public class GameWorldController : UWEBase {
 	/// The tilemap class for the game
 	/// </summary>
 	public TileMap[] Tilemaps = new TileMap[9];
+
 	/// <summary>
 	/// The player character.
 	/// </summary>
@@ -128,8 +129,13 @@ public class GameWorldController : UWEBase {
 	public bool AtMainMenu;
 
 	public string Lev_Ark_File;
+	public string Graves_File;	
 	
 	public Material[] MaterialMasterList=new Material[260];
+
+	public GameObject ObjectMarker;
+
+	public ObjectLoader[] objectList= new ObjectLoader[9];
 
 
 	void Awake()
@@ -148,22 +154,32 @@ public class GameWorldController : UWEBase {
 	}
 
 	void Start () {
+		char[] lev_ark;
 		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
 
-				//Load up my map materials
-				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
-				{
-					MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
-				}
-				//Load up my tile maps
-				//First read in my lev_ark file.
-				for (int i=0; i<=Tilemaps.GetUpperBound(0);i++)
-				{
-						Tilemaps[i]=new TileMap();
-						Tilemaps[i].thisLevelNo=i+1;
-						Tilemaps[i].BuildTileMapUW(Lev_Ark_File,1,i);
-				}
+		//Load up my map materials
+		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
+		{
+			MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+		}
+		//Load up my tile maps
+		//First read in my lev_ark file.
+		if (DataLoader.ReadStreamFile(Lev_Ark_File, out lev_ark))
+		{			
+			for (int i=0; i<=Tilemaps.GetUpperBound(0);i++)
+			{
+				Tilemaps[i]=new TileMap();
+				Tilemaps[i].thisLevelNo=i;
+				Tilemaps[i].BuildTileMapUW(lev_ark,1,i);
+				objectList[i]=new ObjectLoader();
+				objectList[i].LoadObjectList( Tilemaps[i],lev_ark,1);
+				Tilemaps[i].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects
+			}		
+		}
+
+
+
 
 		if (EnableTextureAnimation==true)
 		{
@@ -329,13 +345,16 @@ public class GameWorldController : UWEBase {
 		{
 			if (newLevelNo!=-1)
 			{
+				//Get my object info into the tile map.
+
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo]);
+				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],ObjectMarker);
 				LevelNo=newLevelNo;
 				//Make the nav meshes and gameobjects active
 				for (int i=0; i <=NavMeshes.GetUpperBound(0);i++)
 				{
-						NavMeshes[i].SetActive(i==newLevelNo);
-						LevelObjects[i].SetActive(i==newLevelNo);
+					NavMeshes[i].SetActive(i==newLevelNo);
+					//LevelObjects[i].SetActive(i==newLevelNo);
 				}	
 			}
 

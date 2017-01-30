@@ -331,6 +331,8 @@ public class UWPalette : UWEBase {
 		/// <param name="SrcImage">Source image.</param>
 		public Texture2D ApplyPaletteDefault(Texture2D SrcImage)
 		{
+				if (SrcImage==null)
+				{return null;}
 				Texture2D DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
 				int ColourIndex;
 				for (int i =0; i<=SrcImage.width;i++)

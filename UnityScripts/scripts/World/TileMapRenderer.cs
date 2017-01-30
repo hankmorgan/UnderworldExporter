@@ -997,7 +997,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		static void RenderDiagSETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
-				int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
+				//int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
 
 				if (t.Render == 1)
 				{
@@ -1420,8 +1420,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
 				float floorHeight=(float)(Top*0.15f);
 				float baseHeight=(float)(Bottom*0.15f);
-				float dimX = t.DimX;
-				float dimY = t.DimY;
+				//float dimX = t.DimX;
+				//float dimY = t.DimY;
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);

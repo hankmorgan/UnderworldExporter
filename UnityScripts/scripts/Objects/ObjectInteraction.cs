@@ -130,16 +130,6 @@ public class ObjectInteraction : UWEBase {
 		public bool ignoreSprite;//For button handlers that do their own sprite work.
 
 		/// <summary>
-		/// The item Id. Uses the constants from above.
-		/// </summary>
-		public int item_id;
-
-		/// <summary>
-		/// The flags from UW on this object.
-		/// </summary>
-		public int flags;
-
-		/// <summary>
 		/// Indicates if the object can be picked up.
 		/// </summary>
 		public bool CanBePickedUp;
@@ -160,6 +150,8 @@ public class ObjectInteraction : UWEBase {
 		public int inventorySlot=-1;
 
 		//UW specific info.
+		//public int index;
+
 		public int Owner;	//Used for keys
 		public int Link;	//Also quantity
 		public int Quality;
@@ -172,6 +164,43 @@ public class ObjectInteraction : UWEBase {
 		private SpriteRenderer sr =null;
 		public bool isAnimated;
 		public bool animationStarted;
+
+		public short InUseFlag;
+		public short levelno;
+		public short tileX;	//Position of the object on the tilemap
+		public short tileY;
+		public long address;
+		public short AlreadyRendered;
+		public short DeathWatched;
+
+		//UW Props
+
+		public int index;	//it's own index in case I need to find myself.
+		public int item_id;	//0-8
+		public int flags;	//9-12
+		public short enchantment;	//12
+		public short doordir;	//13
+		public short invis;		//14
+		public short is_quant;	//15
+
+		public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
+		//(gravestone, picture, lever, switch, shelf, bridge, ..)
+
+		public int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+		public int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+		public int x; //   10-12   3   "ypos"      Object Y position (0-7)
+		public int y; //  13-15   3   "xpos"      Object X position (0-7)
+		//0004 quality / chain
+		public 		int quality;	//;     0- 5   6   "quality"   Quality
+		public long next; //    6-15   10  "next"      Index of next object in chain
+
+		//0006 link / special
+		//     0- 5   6   "owner"     Owner / special
+
+		public int owner;	//Also special
+		//     6-15   10  (*)         Quantity / special link / special property
+
+		public int link	;	//also quantity
 
 		void Start () {
 			isAnimated=false;
@@ -658,6 +687,36 @@ public class ObjectInteraction : UWEBase {
 				SpriteObj.AddComponent<StoreInformation>();
 				return objInt;//myObj.GetComponent<ObjectInteraction> ();
 		}
+
+
+		public static ObjectInteraction CreateNewObject (ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
+		{
+			
+			GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
+
+				myObj.layer = LayerMask.NameToLayer ("UWObjects");
+				myObj.transform.localPosition = position;
+				myObj.transform.parent = parent.transform;
+				GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, true);
+				ObjectMasters objM = GameWorldController.instance.objectMaster;
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable [currObj.item_id], 1, 0, 1, currObj.is_quant, 0, currObj.flags, currObj.InUseFlag);
+				objInt.next=currObj.next;
+				objInt.link=currObj.link;
+				objInt.enchantment=currObj.enchantment;
+				objInt.doordir=currObj.doordir;
+				objInt.invis=currObj.invis;
+				objInt.texture=currObj.texture;
+				objInt.zpos=currObj.zpos;
+				objInt.x=currObj.x;
+				objInt.y=currObj.y;
+				objInt.owner=currObj.owner;
+				//For now just generic.
+				myObj.AddComponent<object_base> ();
+
+
+				return objInt;
+		}
+
 
 		/// <summary>
 		/// What image frames does an weapon hit on this object create.
