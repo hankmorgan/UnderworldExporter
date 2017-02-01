@@ -170,7 +170,7 @@ public class PlayerInventory : UWEBase {
 				if (LightGameObjects [i - 5] != null) {
 					ls = LightGameObjects [i - 5].GetComponent<LightSource> ();
 					if (ls != null) {
-						if (ls.IsOn == true) {
+						if (ls.IsOn() == true) {
 							if (MaxBrightness < ls.Brightness) {
 								MaxBrightness = ls.Brightness;
 							}

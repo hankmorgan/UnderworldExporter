@@ -110,6 +110,53 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						tmp.VisibleFaces[vSOUTH] = 0;
 						// top,east,bottom,west,north,south
 						RenderTile(parent, game, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
+
+
+						//Now add a room to store objects objects
+						tmp.DimX = 1;
+						tmp.DimY = 1;
+						tmp.floorHeight = 0;
+						for (int i = 0; i < 6; i++)
+						{
+								tmp.VisibleFaces[i] = 1;
+						}
+						for (short x = 65; x < 68; x++)
+						{
+								for (short y = 65; y < 68; y++)
+								{
+										tmp.tileX = x;
+										tmp.tileY = y;
+										if ((x != 66) || (y != 66))
+										{
+												tmp.tileType = 0;
+										}
+										else
+										{
+												tmp.tileType = 1;
+										}
+										RenderTile(parent, game, x, y, tmp, false, false, false, false);
+								}
+						}
+						//And at 99,99 for special stuff.
+						for (short x = 98; x < 101; x++)
+						{
+								for (short y = 98; y < 101; y++)
+								{
+										tmp.tileX = x;
+										tmp.tileY = y;
+										if ((x != 99) || (y != 99))
+										{
+												tmp.tileType = 0;
+										}
+										else
+										{
+												tmp.tileType = 1;
+										}
+										RenderTile(parent, game, x, y, tmp, false, false, false, false);
+								}
+						}
+
+
 				}
 		}
 
@@ -791,7 +838,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
-				Tile.layer=LayerMask.NameToLayer("MapMesh");
+				if (t.isWater==false)
+				{
+						Tile.layer=LayerMask.NameToLayer("MapMesh");
+				}
+				else
+				{
+						Tile.layer=LayerMask.NameToLayer("Water");
+				}
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
 
@@ -1757,7 +1811,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+						if ((t.VisibleFaces[i]==1) && ((i==vSOUTH) || (i==vEAST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{
@@ -1902,7 +1956,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+						if ((t.VisibleFaces[i]==1) && ((i==vSOUTH) || (i==vWEST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{

@@ -5,15 +5,32 @@ using System.Collections;
 /// </summary>
 public class LightSource : object_base {
 	/// How bright the light is. Light radius
-	public int Brightness;
+	public int Brightness=4;//Default for the moment until we can get commonobj props imported.
 
 	/// Sprite index for the light on image
-	public int ItemIdOn;
+	//public int ItemIdOn;
 	/// Sprite index for the light off image
-	public int ItemIdOff;
+	//public int ItemIdOff;
 	
+
 	/// Is the light active
-	public bool IsOn;
+	public bool IsOn()
+		{
+			switch (objInt().item_id)
+			{
+				case 144:
+				case 145:
+				case 146:
+				case 147:
+						return false;
+				case 148:
+				case 149:
+				case 150:
+				case 151:
+						return true;
+			}
+		return false;
+		}
 
 		/// Basic brightness around the player.
 	public const int BaseBrightness = 8;
@@ -29,7 +46,7 @@ public class LightSource : object_base {
 	/// Ticks down the light source
 	/// </summary>
 	void Update () {
-		if (IsOn==true)
+		if (IsOn()==true)
 		{
 			if (objInt().PickedUp==false)
 			{
@@ -61,14 +78,14 @@ public class LightSource : object_base {
 		{
 			if (objInt().PickedUp==false)
 			{
-				if (IsOn==true)
+				if (IsOn()==true)
 				{
 					SetOff ();
 				}
 				return true;
 			}
 			
-			if (IsOn == true)
+			if (IsOn() == true)
 			{
 				SetOff ();
 			}
@@ -146,9 +163,9 @@ public class LightSource : object_base {
 				pInv.RemoveItem(this.name);
 				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
 				objInt().inventorySlot=invSlot.slotIndex;
-				IsOn=true;
-				objInt().item_id=ItemIdOn;
-				objInt().InvDisplayIndex=ItemIdOn;
+				//IsOn=true;
+				objInt().item_id=objInt().item_id+4;
+				objInt().InvDisplayIndex=objInt().item_id;
 			}
 			else
 			{//Clone the item and move it's clone to the inventory slot
@@ -175,9 +192,11 @@ public class LightSource : object_base {
 	/// </summary>
 	public void SetOff()
 	{
-		IsOn=false;
-		objInt().item_id=ItemIdOff;
-		objInt().InvDisplayIndex=ItemIdOff;
+		//IsOn=false;
+		//objInt().item_id=ItemIdOff;
+		//objInt().InvDisplayIndex=ItemIdOff;
+		objInt().item_id=objInt().item_id-4;
+		objInt().InvDisplayIndex=objInt().item_id;
 		objInt().isQuant=true;
 		objInt().RefreshAnim();
 		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
@@ -225,7 +244,7 @@ public class LightSource : object_base {
 
 	public override bool PutItemAwayEvent (int slotNo)
 	{
-			if (IsOn)
+			if (IsOn())
 			{
 				SetOff();		
 			}
@@ -234,7 +253,7 @@ public class LightSource : object_base {
 
 		public override string UseVerb()
 		{
-			if (IsOn)
+			if (IsOn())
 			{
 				return "douse";
 			}

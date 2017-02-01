@@ -106,7 +106,7 @@ public class ObjectInteraction : UWEBase {
 		public const int SPIKE = 87;
 		public const int REFILLABLE_LANTERN =88;
 		public const int OIL =89;
-		public const int MOONSTONE =89;
+		public const int MOONSTONE =90;
 		public const int LEECH= 91;
 		public const int FISHING_POLE= 92;
 		public const int  ZANIUM= 93;
@@ -114,6 +114,14 @@ public class ObjectInteraction : UWEBase {
 		public const int  FORCEFIELD= 95;
 		public const int  MOONGATE= 96;
 		public const int  BOULDER= 97;
+
+
+
+		public const int HEADINGNORTH =180;
+		public const int HEADINGSOUTH= 0;
+		public const int HEADINGEAST =270;
+		public const int HEADINGWEST= 90;
+
 		/// <summary>
 		/// The sprite index number to use when displaying this object in the game world.
 		/// </summary>
@@ -687,112 +695,6 @@ public class ObjectInteraction : UWEBase {
 				SpriteObj.AddComponent<StoreInformation>();
 				return objInt;//myObj.GetComponent<ObjectInteraction> ();
 		}
-
-
-		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
-		{
-			
-				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
-				bool CreateSprite=true;
-				bool RemoveBillboard=false;
-				myObj.transform.localPosition = position;
-				myObj.transform.Rotate(0.0f,0.0f,0.0f);//Initial rotation.
-				myObj.transform.parent = parent.transform;
-				myObj.layer = LayerMask.NameToLayer ("UWObjects");
-				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
-				objInt.next=currObj.next;
-				objInt.link=currObj.link;
-				objInt.enchantment=currObj.enchantment;
-				objInt.doordir=currObj.doordir;
-				objInt.invis=currObj.invis;
-				objInt.texture=currObj.texture;
-				objInt.zpos=currObj.zpos;
-				objInt.x=currObj.x;
-				objInt.y=currObj.y;
-				objInt.owner=currObj.owner;
-				//For now just generic.
-				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
-				{
-					case NPC_TYPE:
-						CreateSprite=false;
-						CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
-						SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
-						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
-						break;
-				//case HIDDENDOOR:
-				//case DOOR:
-				//case PORTCULLIS:
-				case CONTAINER:						
-						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
-						break;
-					case KEY:
-						myObj.AddComponent<DoorKey>();
-						break;
-				//case ACTIVATOR:
-				//case BUTTON:
-						//case A_DO_TRAP:
-				case BOOK:
-				case SCROLL:
-						myObj.AddComponent<Readable>();
-						break;
-				case SIGN:
-						RemoveBillboard=true;
-						myObj.AddComponent<Sign>();
-						break;
-				case RUNE:
-						myObj.AddComponent<RuneStone>();
-						break;
-				case RUNEBAG:
-						myObj.AddComponent<RuneBag>();
-						break;
-				case FOOD:
-						myObj.AddComponent<Food>();
-						break;
-				case MAP:
-						myObj.AddComponent<Map>();
-						break;
-				case HELM:
-						myObj.AddComponent<Helm>();
-						break;
-				case ARMOUR:
-						myObj.AddComponent<Armour>();
-						break;
-				case GLOVES:
-						myObj.AddComponent<Gloves>();
-						break;
-				case BOOT:
-						myObj.AddComponent<Boots>();
-						break;
-				case LEGGINGS:
-						myObj.AddComponent<Leggings>();
-						break;
-				case SHIELD:
-						myObj.AddComponent<Shield>();
-						break;
-				case WEAPON:
-						myObj.AddComponent<WeaponMelee>();
-						break;
-					
-					default:
-						myObj.AddComponent<object_base> ();
-						break;
-				}
-
-
-
-				if(CreateSprite)
-				{
-					GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
-				}
-
-
-				myObj.transform.Rotate(0.0f,currObj.heading*45f,0.0f);//final rotation
-				return objInt;
-		}
-
-
-
 
 
 		/// <summary>
@@ -1685,6 +1587,193 @@ public class ObjectInteraction : UWEBase {
 		item= this.GetComponent<object_base>();
 		return item.GetImpactGameObject();	
 	}
+
+
+
+
+
+
+		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
+		{
+
+				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
+				bool CreateSprite=true;
+				bool skipRotate=true;
+				bool RemoveBillboard=false;
+				myObj.transform.localPosition = position;
+				myObj.transform.Rotate(0.0f,0.0f,0.0f);//Initial rotation.
+				myObj.transform.parent = parent.transform;
+				myObj.layer = LayerMask.NameToLayer ("UWObjects");
+				ObjectMasters objM = GameWorldController.instance.objectMaster;
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
+				objInt.next=currObj.next;
+				objInt.link=currObj.link;
+				objInt.enchantment=currObj.enchantment;
+				objInt.doordir=currObj.doordir;
+				objInt.invis=currObj.invis;
+				objInt.texture=currObj.texture;
+				objInt.zpos=currObj.zpos;
+				objInt.x=currObj.x;
+				objInt.y=currObj.y;
+				objInt.heading=currObj.heading;
+				objInt.zpos=currObj.zpos;
+				objInt.owner=currObj.owner;
+				objInt.tileX=currObj.tileX;
+				objInt.tileY=currObj.tileY;
+
+				//For now just generic.
+				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
+				{
+				case NPC_TYPE:
+						CreateSprite=false;
+						CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
+						SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						break;
+				case HIDDENDOOR:
+				case DOOR:
+				case PORTCULLIS:
+						myObj.AddComponent<DoorControl>();
+						DoorControl.CreateDoor(myObj, objInt);
+						myObj.transform.Rotate(-90f,(objInt.heading*45f)- 180f,0f,Space.World);//I rotate here since my modelling is crap!
+
+						//UnityRotation(game, -90, currobj.heading - 180 + OpenAdju, 0);
+						skipRotate=true;
+						CreateSprite=false;
+						break;
+				case CONTAINER:						
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						break;
+				case KEY:
+						myObj.AddComponent<DoorKey>();
+						break;
+						//case ACTIVATOR:
+						//case BUTTON:
+						//case A_DO_TRAP:
+				case BOOK:
+				case SCROLL:
+						myObj.AddComponent<Readable>();
+						break;
+				case SIGN:
+						RemoveBillboard=true;
+						myObj.AddComponent<Sign>();
+						break;
+				case RUNE:
+						myObj.AddComponent<RuneStone>();
+						break;
+				case RUNEBAG:
+						myObj.AddComponent<RuneBag>();
+						break;
+				case FOOD:
+						myObj.AddComponent<Food>();
+						break;
+				case MAP:
+						myObj.AddComponent<Map>();
+						break;
+				case HELM:
+						myObj.AddComponent<Helm>();
+						break;
+				case ARMOUR:
+						myObj.AddComponent<Armour>();
+						break;
+				case GLOVES:
+						myObj.AddComponent<Gloves>();
+						break;
+				case BOOT:
+						myObj.AddComponent<Boots>();
+						break;
+				case LEGGINGS:
+						myObj.AddComponent<Leggings>();
+						break;
+				case SHIELD:
+						myObj.AddComponent<Shield>();
+						break;
+				case WEAPON:
+						myObj.AddComponent<WeaponMelee>();
+						break;
+				case TORCH:
+						myObj.AddComponent<LightSource>();
+						break;
+				case REFILLABLE_LANTERN:
+						myObj.AddComponent<Lantern>();
+						break;
+				case RING:
+						myObj.AddComponent<Ring>();
+						break;
+				case POTIONS:
+						myObj.AddComponent<Potion>();
+						break;
+				case LOCKPICK:
+						myObj.AddComponent<LockPick>();
+						break;
+				case SILVERSEED:
+						myObj.AddComponent<SilverSeed>();
+						break;
+				case SHRINE:
+						myObj.AddComponent<Shrine>();
+						break;
+				case ANVIL:
+						myObj.AddComponent<Anvil>();
+						break;
+				case POLE:
+						myObj.AddComponent<Pole>();
+						break;
+				case SPIKE:
+						myObj.AddComponent<Spike>();
+						break;
+				case OIL:
+						myObj.AddComponent<Oil>();
+						break;
+				case WAND:
+						myObj.AddComponent<Wand>();
+						break;
+				case MOONSTONE:
+						myObj.AddComponent<MoonStone>();
+						break;
+				case LEECH:
+						myObj.AddComponent<Leech>();
+						break;
+				case FISHING_POLE:
+						myObj.AddComponent<FishingPole>();
+						break;
+				case ZANIUM:
+						myObj.AddComponent<Zanium>();
+						break;
+				case INSTRUMENT:
+						myObj.AddComponent<Instrument>();
+						break;
+				case BEDROLL:
+						myObj.AddComponent<Bedroll>();
+						break;
+				case TREASURE://or gold
+						myObj.AddComponent<Coin>();
+						break;
+				case BOULDER:
+						myObj.AddComponent<Boulder>();
+						break;
+				default:
+						myObj.AddComponent<object_base> ();
+						break;
+				}
+
+
+
+				if(CreateSprite)
+				{
+						GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
+				}
+
+
+				if (!skipRotate)
+				{
+					myObj.transform.Rotate(0.0f,currObj.heading*45f,0.0f);//final rotation		
+				}
+				return objInt;
+		}
+
+
+
+
 
 
 

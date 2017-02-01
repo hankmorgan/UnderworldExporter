@@ -39,6 +39,8 @@ public class TileMap  {
 		const int SOUTHWEST=6;
 		const int SOUTHEAST=7;
 
+
+
 		public const int SURFACE_FLOOR =1;
 		public const int SURFACE_CEIL = 2;
 		public const int SURFACE_WALL = 3;

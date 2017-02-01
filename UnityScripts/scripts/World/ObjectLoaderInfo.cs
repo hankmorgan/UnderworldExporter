@@ -74,4 +74,5 @@ public class ObjectLoaderInfo {
 
 
 		public ObjectInteraction instance;
+
 }

@@ -24,7 +24,7 @@ public class Lantern : LightSource {
 			switch (objIntUsed.GetItemType())
 			{
 			case ObjectInteraction.OIL:
-				if (IsOn==true)
+				if (IsOn()==true)
 				{
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,178));
 				}

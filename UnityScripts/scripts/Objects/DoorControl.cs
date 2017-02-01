@@ -7,23 +7,110 @@ public class DoorControl : object_base {
 	///The damage resistance of the door.
 	//public int DR;
 		///Is the door locked
-	public bool locked;
+	//public bool locked;
+
 		///What keys can open this
 	//public int KeyIndex; THis is the same as objInt.link
 		///True for open, false for closed.
-	public bool state;	
+	//public bool state;	
+
+
 		///Special cases. Sets direction of opening
-	public bool isPortcullis;
+	//public bool isPortcullis;
 		///Is the door opening or closing. Used to keep if flying off it's hinges!
 	public bool DoorBusy;
 		///Sets if the lock can be picked.
 	public bool Pickable;
 		///Is the door spiked
-	public bool Spiked;
+	public bool Spiked;//Probably on the lock object?
 		///Is it the player using the object or a trigger/trap.
 	private bool PlayerUse=false;
 		///A trigger to activate when opened.
 	public string UseLink;
+
+
+
+		public bool isPortcullis()
+		{
+			switch (objInt().item_id)	
+			{
+				case 326:
+				case 334:
+					return true;	
+			default:
+					return false;
+			}
+		}
+
+		/// <summary>
+		/// Gets the lock object interaction.
+		/// </summary>
+		/// <returns>The lock object int.</returns>
+		ObjectInteraction getLockObjInt()
+		{
+			if(objInt().link==0)
+			{
+					return null;
+			}
+			else
+			{
+				if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.LOCK)
+				{
+					return ObjectLoader.getObjectIntAt(objInt().link);	
+				}
+				else
+				{
+						return null;
+				}					
+			}
+		}
+
+		/// <summary>
+		/// Is the door opened or closed. Determined by item id
+		/// </summary>
+		public bool state()
+		{
+				switch (objInt().item_id)	
+				{
+				case 320:
+				case 321:
+				case 322:
+				case 323:
+				case 324:
+				case 325:
+				case 326:
+				case 327:
+						return false;//closed
+
+				case 328:
+				case 329:
+				case 330:
+				case 331:
+				case 332:
+				case 333:
+				case 334:
+				case 335:
+				default:
+						return true; //open
+				}
+		}
+
+		/// <summary>
+		/// Checks against the link on this door to tell if the door is locked.
+		/// </summary>
+		public bool locked()
+		{
+			ObjectInteraction LockObject = getLockObjInt();
+			if (LockObject!=null)
+			{
+				//Check bit 9 of the flags (bit 1 of the variable)
+				return ((LockObject.flags & 0x01)==1);
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 	public override bool use ()
 	{
@@ -56,17 +143,22 @@ public class DoorControl : object_base {
 				DoorKey dk = ObjectUsed.GetComponent<DoorKey>();
 				if (dk !=null)
 					{
-					if (state==true)
+					if (state()==true)
 					{
 						//Door is already open
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,6));
 						return true;
 					}
-						
-						if(objInt().Link==dk.objInt().Owner)//This is a valid key for the door.
+						ObjectInteraction doorlock = getLockObjInt();
+						if (doorlock==null)
+						{
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
+								return false;
+						}
+						if((doorlock.Link & 0x3F)==dk.objInt().Owner)//This is a valid key for the door.
 						{
 							ToggleLock();
-							if (locked==true)
+								if (locked()==true)
 								{//Locked message
 								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,4));
 								}
@@ -143,7 +235,7 @@ public class DoorControl : object_base {
 			//000~001~129~The door is now spiked closed.
 			//000~001~130~Please select door to spike...
 			//000~001~131~The door is spiked.
-			if (state==false)
+			if (state()==false)
 			{//Closed door
 					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
 					Spiked=true;
@@ -164,9 +256,9 @@ public class DoorControl : object_base {
 
 	public override bool Activate()
 	{
-		if (locked==false)
+		if (locked()==false)
 		{//Toggle Open and closed
-			if (state==false)
+			if (state()==false)
 				{//Door is closed
 				OpenDoor ();
 				}
@@ -190,11 +282,11 @@ public class DoorControl : object_base {
 	/// </summary>
 	public void OpenDoor()
 	{
-		if (state==false)
+		if (state()	==false)
 			{
 			if(!DoorBusy)
 			{
-				if (isPortcullis==false)
+				if (isPortcullis()==false)
 				{
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
 				}
@@ -203,8 +295,21 @@ public class DoorControl : object_base {
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
 				}
 				objInt().item_id+=8;
-				state=true;
-				if (UseLink!="")
+				//state=true;
+				if(objInt().link!=0)
+					{	//If it's link is to something that is not a lock then it is likely to be a trigger
+						if (ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+						{
+							trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+							if (tb!=null)
+							{
+									tb.Activate();
+							}
+						}		
+					}
+
+
+				/*if (UseLink!="")
 				{
 					GameObject trigObj = GameObject.Find (UseLink);
 					if (trigObj!=null)
@@ -217,6 +322,7 @@ public class DoorControl : object_base {
 						
 					}
 				}
+				*/
 			}
 		}
 	}
@@ -226,11 +332,11 @@ public class DoorControl : object_base {
 	/// </summary>
 	public void CloseDoor()
 	{
-		if (state==true)
+		if (state()==true)
 		{
 			if(!DoorBusy)
 			{
-				if (isPortcullis==false)
+				if (isPortcullis()==false)
 				{
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
 				}
@@ -239,7 +345,7 @@ public class DoorControl : object_base {
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
 				}
 				objInt().item_id-=8;
-				state=false;
+				//state=false;
 			}
 		}
 	}
@@ -249,8 +355,13 @@ public class DoorControl : object_base {
 		/// Locks the door.
 		/// </summary>
 	public void LockDoor()
-	{
-		locked=true;
+	{		
+		ObjectInteraction LockObject = getLockObjInt();
+		if (LockObject!=null)
+		{
+			//To lock set bit 8 of the flags
+			LockObject.flags = LockObject.flags | 0x1;
+		}
 	}
 
 		/// <summary>
@@ -258,7 +369,12 @@ public class DoorControl : object_base {
 		/// </summary>
 	public void UnlockDoor()
 	{
-		locked=false;
+		ObjectInteraction LockObject = getLockObjInt();
+		if (LockObject!=null)
+		{
+			//To unlock unset bit 8 of the flags
+			LockObject.flags = LockObject.flags & 0xE;
+		}
 	}
 
 		/// <summary>
@@ -266,13 +382,13 @@ public class DoorControl : object_base {
 		/// </summary>
 	public void ToggleLock()
 	{
-		if (locked==false)
+		if (locked()==false)
 		{
-			locked=true;	
+			LockDoor();
 		}
 		else
 		{
-			locked=false;	
+			UnlockDoor();
 		}
 	}
 
@@ -281,7 +397,7 @@ public class DoorControl : object_base {
 		/// </summary>
 	public void ToggleDoor()
 	{
-		if (state==false)//Closed
+		if (state()==false)//Closed
 		{
 			UnlockDoor();
 			OpenDoor();	
@@ -355,7 +471,8 @@ public class DoorControl : object_base {
 		objInt().Quality=objInt().Quality-damage;
 		if ((objInt().Quality<=0))
 			{
-				locked=false;
+				//locked=false;
+				UnlockDoor();
 				OpenDoor();
 			}
 		}
@@ -392,7 +509,7 @@ public class DoorControl : object_base {
 
 	public override bool LookAt()
 	{
-		if (isPortcullis==false)
+		if (isPortcullis()==false)
 		{
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),DoorQuality()));
 		}
@@ -442,7 +559,7 @@ public class DoorControl : object_base {
 
 	public override string UseVerb ()
 	{
-		if (state==false)//Closed
+		if (state()==false)//Closed
 			{
 				return "open";		
 			}
@@ -471,4 +588,77 @@ public class DoorControl : object_base {
 		return base.UseObjectOnVerb_Inv();
 	}
 
+
+	/// <summary>
+	/// Creates the door model
+	/// </summary>
+	/// <param name="myObj">My object.</param>
+	/// <param name="DoorTexturePath">Door texture path.</param>
+	/// <param name="DoorKey">Door key.</param>
+	/// <param name="Locked">Locked.</param>
+	/// <param name="isOpen">Is open.</param>
+		public static void CreateDoor(GameObject myObj, ObjectInteraction objInt)
+		{
+			int doorIndex=0;
+				int textureIndex=0;
+				string DoorTexturePath="";
+			//Try and match up the door item id with a texture.
+			if ((objInt.item_id>=320) && (objInt.item_id<=325))
+				{//320>>58
+						doorIndex=objInt.item_id-262;
+				}
+				else
+				{//328>>58
+						doorIndex= objInt.item_id-270;
+				}
+
+			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
+				{
+				case ObjectInteraction.HIDDENDOOR:
+						{
+							textureIndex = GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+							DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
+							break;	
+						}
+				case ObjectInteraction.DOOR:
+				default:
+					{
+						textureIndex= GameWorldController.instance.currentTileMap().texture_map[doorIndex];
+						DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
+						break;
+					}					
+				}
+
+			myObj.layer=LayerMask.NameToLayer("Doors");
+			GameObject newObj;
+			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
+				{
+				case ObjectInteraction.PORTCULLIS:
+						{
+						newObj = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("Models/Portcullis"));
+						newObj.name=myObj.name + "_Model";
+						newObj.transform.parent=myObj.transform;
+						newObj.transform.position = myObj.transform.position;
+						break;		
+						}
+
+
+				case ObjectInteraction.DOOR:
+				case ObjectInteraction.HIDDENDOOR:
+				default:
+						{
+							GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
+							newObj = (GameObject)GameObject.Instantiate(myInstance);
+							newObj.name=myObj.name + "_Model";
+							newObj.transform.parent=myObj.transform;
+							newObj.transform.position = myObj.transform.position;
+							newObj.GetComponent<Renderer>().material=(Material)Resources.Load(DoorTexturePath);
+							newObj.GetComponent<MeshCollider>().enabled=false;
+							MeshCollider mc = myObj.AddComponent<MeshCollider>();
+							mc.isTrigger=false;
+							mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+							break;	
+						}
+				}			
+		}
 }

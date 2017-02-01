@@ -102,6 +102,7 @@ public class ObjectLoader  {
 						objList[x].zpos = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F;	//bits 0-6 
 						//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
 						objList[x].heading = (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+
 						objList[x].y = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07;	//bits 10-12
 						objList[x].x = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07;	//bits 13-15
 
@@ -290,8 +291,16 @@ public class ObjectLoader  {
 		{//returns a unique name for the object
 
 				//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+				{
+				case ObjectInteraction.DOOR:
+				case ObjectInteraction.HIDDENDOOR:
+				case ObjectInteraction.PORTCULLIS:
+						return "DOOR_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
+				default:
+						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno+"_"+currObj.index.ToString("d4");
+				}
 
-				return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX+"_"+currObj.tileY+"_"+currObj.levelno+"_"+currObj.index;
 		}
 
 
@@ -561,6 +570,18 @@ public class ObjectLoader  {
 														//	{
 														LevelInfo[x,y].isDoor = true;
 														LevelInfo[x,y].DoorIndex = currObj.index;
+														//Put it's lock into use if it exists.
+														//I'm ignoring for the moment but it is here for compatability to vanilla.
+														if (currObj.link!=0)
+														{
+																if (objList[currObj.link].InUseFlag==0)
+																{
+																		objList[currObj.link].InUseFlag=1;	
+																		objList[currObj.link].tileX=99;
+																		objList[currObj.link].tileY=99;	
+																}
+
+														}
 														//	}
 														break;
 												}
@@ -637,47 +658,65 @@ public class ObjectLoader  {
 						}
 				}
 
-				if (WallAdjust == 1)
-				{//Adjust the object x,y to avoid clipping into walls.
-						switch (game)
+				switch (GameWorldController.instance.objectMaster.type[objList[index].item_id])
+				{
+				case ObjectInteraction.DOOR:
+				case ObjectInteraction.HIDDENDOOR:
+				case ObjectInteraction.PORTCULLIS:
 						{
-						case SHOCK:
-								if (objList[index].x == 0)
-								{
-										offX = offX + 2.0f;
-								}
-								if (objList[index].x == 128)
-								{
-										offX = offX - 2.0f;
-								}
-								if (objList[index].y == 0)
-								{
-										offY = offY + 2.0f;
-								}
-								if (objList[index].y == 128)
-								{
-										offY = offY - 2.0f;
-								}
-								break;
-						default:
-								if (objList[index].x == 0)
-								{
-										offX = offX + 2.0f;
-								}
-								if (objList[index].x == 7)
-								{
-										offX =offX - 2.0f;
-								}
-								if (objList[index].y == 0)
-								{
-										offY = offY + 2.0f;
-								}
-								if (objList[index].y == 7)
-								{
-										offY = offY - 2.0f;
-								}
-								break;
+							float DOORWIDTH=80f;
+							switch (objList[index].heading*45)
+							{//Move the object position so it can located in the right position in the centre of the frame.
+							case ObjectInteraction.HEADINGWEST:
+									{
+									offY = (objList[index].tileY*BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
+									//offY = (((float)(objList[index].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
+									break;
+									}
+							case ObjectInteraction.HEADINGEAST:
+									{
+									offY = (objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;			
+									//offY = ((float)objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
+									break;
+										}
+							case ObjectInteraction.HEADINGNORTH:
+									{
+									offX = (objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));												
+									//offX = ((float)objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
+									break;
+									}
+							case ObjectInteraction.HEADINGSOUTH:
+									{
+									offX = (objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
+									//offX = ((float)objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
+									break;
+									}
+							}	
+							break;
 						}
+				default:
+						{
+								if (WallAdjust == 1)
+								{//Adjust the object x,y to avoid clipping into walls.
+										switch (game)
+										{
+										case SHOCK:
+												if (objList[index].x == 0){	offX = offX + 2.0f;	}
+												if (objList[index].x == 128){offX = offX - 2.0f;}
+												if (objList[index].y == 0){offY = offY + 2.0f;}
+												if (objList[index].y == 128){offY = offY - 2.0f;}
+												break;
+										default:
+												if (objList[index].x == 0){offX = offX + 2.0f;}
+												if (objList[index].x == 7){offX = offX - 2.0f;}
+												if (objList[index].y == 0){offY = offY + 2.0f;}
+												if (objList[index].y == 7){offY = offY - 2.0f;}
+												break;
+										}
+								}					
+								break;		
+						}
+
 				}
 
 				return new Vector3(offX/100.0f,offZ/100.0f,offY/100.0f);

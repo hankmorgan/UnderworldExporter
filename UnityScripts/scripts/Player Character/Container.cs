@@ -639,7 +639,13 @@ public class Container : object_base {
 		/// <param name="objInt">Object int.</param>
 		public static void PopulateContainer(Container cn, ObjectInteraction objInt)
 		{
-				
+				cn.ObjectsAccepted=-1;//For now default to accept all
+				cn.Capacity=40;
+				for (int i =0; i<cn.MaxCapacity();i++)
+				{//init the variables.
+						if (cn.items[i]==null)
+						{cn.items[i]="";}
+				}
 				if (objInt.link != 0)	//Container has objects
 				{
 						ObjectLoaderInfo tmpobj = ObjectLoader.getObjectInfoAt(objInt.link);
