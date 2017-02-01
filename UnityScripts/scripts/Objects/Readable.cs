@@ -24,7 +24,7 @@ public class Readable : object_base {
 		return Read ();
 	}
 
-	public bool Read()
+	public virtual bool Read()
 	{//Returns the text of this readable.
 		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		//StringController SC = objInt().getStringController();
@@ -32,11 +32,6 @@ public class Readable : object_base {
 
 		switch (objInt().GetItemType())
 		{
-		case ObjectInteraction.SIGN: //Sign
-			{
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().Link - 0x200));
-			return true;
-			}
 		case ObjectInteraction.BOOK://Book
 		case ObjectInteraction.SCROLL://Scroll
 			{

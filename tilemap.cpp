@@ -1976,7 +1976,6 @@ void ResetTileTests(tile LevelInfo[64][64])
 			LevelInfo[x][y].tileTested=0;
 		}
 	}
-
 }
 
 int isMergeableRoom(tile LevelInfo[64][64], int x, int y)

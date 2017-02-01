@@ -21,11 +21,11 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// Array of game objects containing the nav meshes
 		/// </summary>
-	public GameObject[] NavMeshes=new GameObject[9];
+	//public GameObject[] NavMeshes=new GameObject[9];
 		/// <summary>
 		/// Array of game objects containing the level objects
 		/// </summary>
-	public GameObject[] LevelObjects =new GameObject[9];
+	//public GameObject[] LevelObjects =new GameObject[9];
 	//public static TextureController tc;
 
 	public GameObject LevelModel;
@@ -137,6 +137,8 @@ public class GameWorldController : UWEBase {
 
 	public ObjectLoader[] objectList= new ObjectLoader[9];
 
+	public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
+	public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
 
 	void Awake()
 	{
@@ -174,6 +176,9 @@ public class GameWorldController : UWEBase {
 				Tilemaps[i].BuildTileMapUW(lev_ark,1,i);
 				objectList[i]=new ObjectLoader();
 				objectList[i].LoadObjectList( Tilemaps[i],lev_ark,1);
+								//Tilemaps[i].setRooms();
+								//Tilemaps[i].MergeWaterRegions();
+								//Tilemaps[i].MergeLavaRegions();
 				Tilemaps[i].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects
 			}		
 		}
@@ -333,7 +338,8 @@ public class GameWorldController : UWEBase {
 	/// <returns>The marker.</returns>
 	public Transform LevelMarker()
 	{
-		return LevelObjects[LevelNo].transform;
+		return ObjectMarker.transform;
+		//return LevelObjects[LevelNo].transform;
 	}
 
 	/// <summary>
@@ -351,14 +357,38 @@ public class GameWorldController : UWEBase {
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],ObjectMarker);
 				LevelNo=newLevelNo;
 				//Make the nav meshes and gameobjects active
-				for (int i=0; i <=NavMeshes.GetUpperBound(0);i++)
-				{
-					NavMeshes[i].SetActive(i==newLevelNo);
+				//for (int i=0; i <=NavMeshes.GetUpperBound(0);i++)
+				//{
+				///	NavMeshes[i].SetActive(i==newLevelNo);
 					//LevelObjects[i].SetActive(i==newLevelNo);
-				}	
+				//}	
+			
+						GenerateNavmesh(NavRigLand);
+						GenerateNavmesh(NavRigWater);
+						//TODO Lava
 			}
 
 		}
+
+
+		// This will regenerate the navigation mesh when called
+		void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)
+		{//From Legacy.rivaltheory.com/forums/topics/runtime-navmesh-generation-and-path-finding-tutorial
+				int _threadcount=4;
+				// Unregister any navigation mesh we may already have (probably none if you are using this)
+				NavRig.NavMesh.UnregisterNavigationGraph();
+				NavRig.NavMesh.Size = 20;
+				float startTime = Time.time;
+				NavRig.NavMesh.StartCreatingContours(_threadcount);
+				NavRig.NavMesh.CreateAllContours();
+				float endTime = Time.time;
+				Debug.Log("NavMesh generated in " + (endTime - startTime) + "s");
+				NavRig.NavMesh.RegisterNavigationGraph();
+				NavRig.Awake();
+
+		}
+
+
 	/*
 	public void SwitchLevel(int newLevelNo)
 	{
@@ -443,6 +473,9 @@ public class GameWorldController : UWEBase {
 
 		}
 
-
+		public ObjectLoader CurrentObjectList()
+		{
+				return objectList[LevelNo];
+		}
 
 }

@@ -90,7 +90,7 @@ public class Container : object_base {
 	public bool AddItemToContainer(string item)
 	{
 		int i =0;
-		while ((items[i] !="") && (i <=MaxCapacity()))
+		while (((items[i] != null) && (items[i] !="")) && (i <=MaxCapacity()))
 			{
 				i++;
 			}
@@ -112,7 +112,7 @@ public class Container : object_base {
 		{
 			return false;
 		}
-		if (index<=39)
+		if (index<=MaxCapacity())
 		{
 			items[index]=item;
 			return true;
@@ -632,4 +632,30 @@ public class Container : object_base {
 				}
 	}
 
+		/// <summary>
+		/// Populates the container based on what is linked to the objInt
+		/// </summary>
+		/// <param name="cn">Cn.</param>
+		/// <param name="objInt">Object int.</param>
+		public static void PopulateContainer(Container cn, ObjectInteraction objInt)
+		{
+				
+				if (objInt.link != 0)	//Container has objects
+				{
+						ObjectLoaderInfo tmpobj = ObjectLoader.getObjectInfoAt(objInt.link);
+						int count = 0;
+						if (ObjectLoader.GetItemTypeAt(objInt.link) !=ObjectInteraction.LOCK)
+						{
+							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
+							//fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
+						}
+						while (tmpobj.next != 0)
+						{
+							tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next);//objList[tmpobj.next];
+							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
+								//fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
+						}
+				}
+
+		}
 }

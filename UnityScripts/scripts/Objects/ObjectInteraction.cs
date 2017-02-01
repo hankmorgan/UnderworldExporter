@@ -689,17 +689,18 @@ public class ObjectInteraction : UWEBase {
 		}
 
 
-		public static ObjectInteraction CreateNewObject (ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
+		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
 		{
 			
-			GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
-
-				myObj.layer = LayerMask.NameToLayer ("UWObjects");
+				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
+				bool CreateSprite=true;
+				bool RemoveBillboard=false;
 				myObj.transform.localPosition = position;
+				myObj.transform.Rotate(0.0f,0.0f,0.0f);//Initial rotation.
 				myObj.transform.parent = parent.transform;
-				GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, true);
+				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable [currObj.item_id], 1, 0, 1, currObj.is_quant, 0, currObj.flags, currObj.InUseFlag);
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
 				objInt.next=currObj.next;
 				objInt.link=currObj.link;
 				objInt.enchantment=currObj.enchantment;
@@ -711,11 +712,87 @@ public class ObjectInteraction : UWEBase {
 				objInt.y=currObj.y;
 				objInt.owner=currObj.owner;
 				//For now just generic.
-				myObj.AddComponent<object_base> ();
+				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
+				{
+					case NPC_TYPE:
+						CreateSprite=false;
+						CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
+						SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						break;
+				//case HIDDENDOOR:
+				//case DOOR:
+				//case PORTCULLIS:
+				case CONTAINER:						
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						break;
+					case KEY:
+						myObj.AddComponent<DoorKey>();
+						break;
+				//case ACTIVATOR:
+				//case BUTTON:
+						//case A_DO_TRAP:
+				case BOOK:
+				case SCROLL:
+						myObj.AddComponent<Readable>();
+						break;
+				case SIGN:
+						RemoveBillboard=true;
+						myObj.AddComponent<Sign>();
+						break;
+				case RUNE:
+						myObj.AddComponent<RuneStone>();
+						break;
+				case RUNEBAG:
+						myObj.AddComponent<RuneBag>();
+						break;
+				case FOOD:
+						myObj.AddComponent<Food>();
+						break;
+				case MAP:
+						myObj.AddComponent<Map>();
+						break;
+				case HELM:
+						myObj.AddComponent<Helm>();
+						break;
+				case ARMOUR:
+						myObj.AddComponent<Armour>();
+						break;
+				case GLOVES:
+						myObj.AddComponent<Gloves>();
+						break;
+				case BOOT:
+						myObj.AddComponent<Boots>();
+						break;
+				case LEGGINGS:
+						myObj.AddComponent<Leggings>();
+						break;
+				case SHIELD:
+						myObj.AddComponent<Shield>();
+						break;
+				case WEAPON:
+						myObj.AddComponent<WeaponMelee>();
+						break;
+					
+					default:
+						myObj.AddComponent<object_base> ();
+						break;
+				}
 
 
+
+				if(CreateSprite)
+				{
+					GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
+				}
+
+
+				myObj.transform.Rotate(0.0f,currObj.heading*45f,0.0f);//final rotation
 				return objInt;
 		}
+
+
+
 
 
 		/// <summary>
@@ -776,7 +853,7 @@ public class ObjectInteraction : UWEBase {
 		/// <returns>The qty.</returns>
 		public int GetQty()
 		{//Gets the true quantity of this object
-			if (isEnchanted==true)
+			if ((isEnchanted==true) || (this.GetComponent<Readable>()!=null))
 			{
 				return 1;
 			}
@@ -819,6 +896,7 @@ public class ObjectInteraction : UWEBase {
 			Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
 			mysprite.sprite = image;//Assigns the sprite to the object.
 			SpriteController.transform.parent = myObj.transform;
+			SpriteController.transform.Rotate(0f,0f,0f);
 			SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
 			mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 			//Create a billboard script for display
@@ -1136,185 +1214,177 @@ public class ObjectInteraction : UWEBase {
 			UpdateAnimation();
 			return true;		
 		}
-		/// <summary>
-		/// Creates an NPC.
-		/// </summary>
-		/// <param name="myObj">The gameobject containing the npc.</param>
-		/// <param name="NPC_ID">NP c I.</param>
-		/// <param name="EditorSprite">Editor sprite.</param>
-		/// <param name="npc_whoami">Npc whoami.</param>
+
+
+
 		public static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
 		{
-			myObj.layer=LayerMask.NameToLayer("NPCs");
-			myObj.tag="NPCs";
-			GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
-			GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
-			newObj.name = myObj.name + "_AI";
-			newObj.transform.position=Vector3.zero; //new Vector3(0,0,0);
-			newObj.transform.parent=myObj.transform;
-			newObj.transform.localPosition=Vector3.zero; //new Vector3(0,0,0);
-			AIRig ai = newObj.GetComponent<AIRig>();
-			ai.AI.Body=myObj;
+				myObj.layer=LayerMask.NameToLayer("NPCs");
+				myObj.tag="NPCs";
+				NPC npc = myObj.AddComponent<NPC>();
 
-			NPC npc = myObj.AddComponent<NPC>();
-			if (npc_whoami == 0)
-			{
-				npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
-			}
+				if (npc_whoami == 0)
+				{
+						npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
+				}
 
-			//Probably only need to add this when an NPC supports ranged attacks?
-			GameObject NpcLauncher = new GameObject("NPC_Launcher");
-			NpcLauncher.transform.position=Vector3.zero; 
-			NpcLauncher.transform.parent=myObj.transform;
-			NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
-			npc.NPC_Launcher=NpcLauncher;
+				//Probably only need to add this when an NPC supports ranged attacks?
+				GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
+				NpcLauncher.transform.position=Vector3.zero; 
+				//NpcLauncher.transform.rotation=Vector3.zero; 
+				NpcLauncher.transform.parent=myObj.transform;
+				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
+				npc.NPC_Launcher=NpcLauncher;
+				//npc.ai=ai;
+				NpcLauncher.AddComponent<StoreInformation>();
 
-			myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
-			newObj = (GameObject)GameObject.Instantiate(myInstance);
-			newObj.name=myObj.name + "_Sprite";
-			newObj.transform.parent=myObj.transform;
-			newObj.transform.position = myObj.transform.position;
+				GameObject myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
+				GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+				newObj.name=myObj.name + "_Sprite";
+				newObj.transform.parent=myObj.transform;
+				newObj.transform.position = myObj.transform.position;
+				newObj.AddComponent<StoreAnimator>();
+				SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
+				Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
 
-			SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
-			Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
+				mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
+				mysprite.sprite = image;//Assigns the sprite to the object.
+				//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
 
-			mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
-			mysprite.sprite = image;//Assigns the sprite to the object.
+				CharacterController cap  = myObj.AddComponent<CharacterController>();
+				cap = myObj.GetComponent<CharacterController>();
+				switch(int.Parse(NPC_ID))
+				{
+				case 97: //a_ghost
+				case 99: //a_ghoul
+				case 100: //a_ghost
+				case 101: //a_ghost
+				case 105: //a_dark_ghoul
+				case 110: //a_ghoul	
+				case 113: //a_dire_ghost
+						npc.isUndead=true;
+						break;
+				}
 
-			CharacterController cap  = myObj.GetComponent<CharacterController>();
-			if (cap==null)
-			{
-					cap=myObj.GetComponent<CharacterController>();
-			}
+				switch (int.Parse(NPC_ID))
+				{
 
-			switch(int.Parse(NPC_ID))
-			{
-			case 97: //a_ghost
-			case 99: //a_ghoul
-			case 100: //a_ghost
-			case 101: //a_ghost
-			case 105: //a_dark_ghoul
-			case 110: //a_ghoul	
-			case 113: //a_dire_ghost
-					npc.isUndead=true;
-					break;
-			}
+				//Big
+				case 70: //a_goblin
+				case 71: //a_goblin
+				case 74: //a_skeleton
+				case 76: //a_goblin
+				case 77: //a_goblin
+				case 78: //a_goblin
+				case 79: //etherealvoidcreatures
+				case 80: //a_goblin
+				case 84: //a_mountainman_mountainmen
+				case 85: //a_green_lizardman_green_lizardmen
+				case 86: //a_mountainman_mountainmen
+				case 88: //a_red_lizardman_red_lizardmen
+				case 89: //a_gray_lizardman_red_lizardmen
+				case 90: //an_outcast
+				case 91: //a_headless_headlesses
+				case 93: //a_fighter
+				case 94: //a_fighter
+				case 95: //a_fighter
+				case 96: //a_troll
+				case 97: //a_ghost
+				case 98: //a_fighter
+				case 99: //a_ghoul
+				case 100: //a_ghost
+				case 101: //a_ghost
+				case 103: //a_mage
+				case 104: //a_fighter
+				case 105: //a_dark_ghoul
+				case 106: //a_mage
+				case 107: //a_mage
+				case 108: //a_mage
+				case 109: //a_mage
+				case 110: //a_ghoul
+				case 111: //a_feral_troll
+				case 112: //a_great_troll
+				case 113: //a_dire_ghost
+				case 114: //an_earth_golem
+				case 115: //a_mage
+				case 116: //a_deep_lurker
+				case 117: //a_shadow_beast
+				case 118: //a_reaper
+				case 119: //a_stone_golem
+				case 120: //a_fire_elemental
+				case 121: //a_metal_golem
+				case 123: //tybal
+				case 124: //slasher_of_veils
+				case 125: //unknown
+				case 126: //unknown
+						cap.isTrigger=false;
+						cap.center = new Vector3(0.0f, 0.4f, 0.0f);
+						cap.radius=0.2f;
+						cap.height=0.7f;
+						break;
 
-			switch (int.Parse(NPC_ID))
-			{
-			//Big
-			case 70: //a_goblin
-			case 71: //a_goblin
-			case 74: //a_skeleton
-			case 76: //a_goblin
-			case 77: //a_goblin
-			case 78: //a_goblin
-			case 79: //etherealvoidcreatures
-			case 80: //a_goblin
-			case 84: //a_mountainman_mountainmen
-			case 85: //a_green_lizardman_green_lizardmen
-			case 86: //a_mountainman_mountainmen
-			case 88: //a_red_lizardman_red_lizardmen
-			case 89: //a_gray_lizardman_red_lizardmen
-			case 90: //an_outcast
-			case 91: //a_headless_headlesses
-			case 93: //a_fighter
-			case 94: //a_fighter
-			case 95: //a_fighter
-			case 96: //a_troll
-			case 97: //a_ghost
-			case 98: //a_fighter
-			case 99: //a_ghoul
-			case 100: //a_ghost
-			case 101: //a_ghost
-			case 103: //a_mage
-			case 104: //a_fighter
-			case 105: //a_dark_ghoul
-			case 106: //a_mage
-			case 107: //a_mage
-			case 108: //a_mage
-			case 109: //a_mage
-			case 110: //a_ghoul
-			case 111: //a_feral_troll
-			case 112: //a_great_troll
-			case 113: //a_dire_ghost
-			case 114: //an_earth_golem
-			case 115: //a_mage
-			case 116: //a_deep_lurker
-			case 117: //a_shadow_beast
-			case 118: //a_reaper
-			case 119: //a_stone_golem
-			case 120: //a_fire_elemental
-			case 121: //a_metal_golem
-			case 123: //tybal
-			case 124: //slasher_of_veils
-			case 125: //unknown
-			case 126: //unknown
-					cap.isTrigger=false;
-					cap.center = new Vector3(0.0f, 0.4f, 0.0f);
-					cap.radius=0.2f;
-					cap.height=0.8f;
-					break;
+						//Medium
+				case 68: //a_giant_spider
+				case 67: //a_giant_rat
+				case 72: //a_giant_rat
+				case 75: //an_imp
+				case 81: //a_mongbat
+				case 83: //a_wolf_spider
+				case 92: //a_dread_spider
+				case 102: //a_gazer
+						cap.isTrigger=false;
+						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
+						cap.radius=0.3f;
+						cap.height=0.3f;
+						cap.skinWidth=0.05f;
+						break;
+						//Small
+				case 64: //a_rotworm
+				case 65: //a_flesh_slug
+				case 66: //a_cave_bat
+				case 69: //a_acid_slug
+				case 73: //a_vampire_bat
+				case 82: //a_bloodworm
+				case 87: //a_lurker
+				case 122: //a_wisp
+						cap.isTrigger=false;
+						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
+						cap.radius=0.3f;
+						cap.height=0.3f;
+						break;
+				}
 
-					//Medium
-			case 68: //a_giant_spider
-			case 67: //a_giant_rat
-			case 72: //a_giant_rat
-			case 75: //an_imp
-			case 81: //a_mongbat
-			case 83: //a_wolf_spider
-			case 92: //a_dread_spider
-			case 102: //a_gazer
-					cap.isTrigger=false;
-					cap.center = new Vector3(0.0f, 0.5f, 0.0f);
-					cap.radius=0.5f;
-					cap.height=0.5f;
-					break;
-					//Small
-			case 64: //a_rotworm
-			case 65: //a_flesh_slug
-			case 66: //a_cave_bat
-			case 69: //a_acid_slug
-			case 73: //a_vampire_bat
-			case 82: //a_bloodworm
-			case 87: //a_lurker
-			case 122: //a_wisp
-					cap.isTrigger=false;
-					cap.center = new Vector3(0.0f, 0.3f, 0.0f);
-					cap.radius=0.3f;
-					cap.height=0.3f;
-					break;
-			}
+				cap.stepOffset=0.1f;//Stop npcs from climbing over each other
 		}
 
-
-		/// <summary>
-		/// Sets the NPC properties.
-		/// </summary>
-		/// <param name="myObj">My object.</param>
-		/// <param name="npc_whoami">Npc whoami.</param>
-		/// <param name="npc_xhome">Npc xhome.</param>
-		/// <param name="npc_yhome">Npc yhome.</param>
-		/// <param name="npc_hunger">Npc hunger.</param>
-		/// <param name="npc_health">Npc health.</param>
-		/// <param name="npc_hp">Npc hp.</param>
-		/// <param name="npc_arms">Npc arms.</param>
-		/// <param name="npc_power">Npc power.</param>
-		/// <param name="npc_goal">Npc goal.</param>
-		/// <param name="npc_attitude">Npc attitude.</param>
-		/// <param name="npc_gtarg">Npc gtarg.</param>
-		/// <param name="npc_talkedto">Npc talkedto.</param>
-		/// <param name="npc_level">Npc level.</param>
-		/// <param name="npc_name">Npc name.</param>
-		/// <param name="gtarg_name">Gtarg name.</param>
-		/// <param name="NavMeshRegion">Nav mesh region.</param>
 		public static void SetNPCProps(GameObject myObj, 
 				int npc_whoami, int npc_xhome, int npc_yhome,
 				int npc_hunger, int npc_health,
 				int npc_hp, int npc_arms, int npc_power ,
 				int npc_goal, int npc_attitude, int npc_gtarg,
 				int npc_talkedto, int npc_level,int npc_name,
-				string gtarg_name,
+				string NavMeshRegion
+		)
+		{
+				SetNPCProps(myObj, 
+						npc_whoami, npc_xhome, npc_yhome,
+						npc_hunger, npc_health,
+						npc_hp, npc_arms, npc_power ,
+						npc_goal, npc_attitude, npc_gtarg,
+						npc_talkedto, npc_level,npc_name,
+						"",
+						NavMeshRegion
+				)	;
+		}
+
+
+		public static void SetNPCProps(GameObject myObj, 
+				int npc_whoami, int npc_xhome, int npc_yhome,
+				int npc_hunger, int npc_health,
+				int npc_hp, int npc_arms, int npc_power ,
+				int npc_goal, int npc_attitude, int npc_gtarg,
+				int npc_talkedto, int npc_level,int npc_name,
+				string gtargName,
 				string NavMeshRegion
 		)
 		{
@@ -1340,11 +1410,11 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_level=npc_level;
 						npc.npc_name=npc_name;       //    (not used in uw1)
 						npc.NavMeshRegion=NavMeshRegion;
-						npc.gtargName=gtarg_name;
 
+						npc.gtargName=gtargName;
 						Conversation cnv ;//= myObj.AddComponent<Conversation>();
 						cnv=null;
-						//TODO:Make sure all conversations are added here as implemented.
+
 						switch (myObj.GetComponent<NPC>().npc_whoami)
 						{
 						case 0:
@@ -1451,6 +1521,8 @@ public class ObjectInteraction : UWEBase {
 								cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
 						case 90://Ironwit
 								cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
+						case 110://Gazer
+								cnv=(Conversation)myObj.AddComponent<Conversation_110>();break;
 						case 112://bandit
 								cnv=(Conversation)myObj.AddComponent<Conversation_112>();break;
 						case 113://bandit
@@ -1565,7 +1637,7 @@ public class ObjectInteraction : UWEBase {
 								cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
 						default:
 								cnv=myObj.AddComponent<Conversation>();
-								Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
+								//Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
 								break;
 						}			
 						if (cnv!=null)
@@ -1574,6 +1646,8 @@ public class ObjectInteraction : UWEBase {
 						}					
 				}
 		}
+
+
 
 		/// <summary>
 		/// Bouncing sound when object is thrown.
@@ -1611,4 +1685,8 @@ public class ObjectInteraction : UWEBase {
 		item= this.GetComponent<object_base>();
 		return item.GetImpactGameObject();	
 	}
+
+
+
+
 }

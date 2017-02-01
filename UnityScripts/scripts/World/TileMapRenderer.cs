@@ -556,6 +556,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				if (t.isWater==false)
+				{
+					Tile.layer=LayerMask.NameToLayer("MapMesh");
+				}
+				else
+				{
+					Tile.layer=LayerMask.NameToLayer("Water");
+				}
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
 
@@ -783,6 +791,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
 

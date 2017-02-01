@@ -27,7 +27,7 @@ public class ObjectMasters {
 		public int[] hasParticle= new int[500];
 		public int[] hasSound= new int[500];
 		public string[] baseModel= new string[500];
-		public int[] isSolid= new int[500];
+		public int[] isUseable= new int[500];
 		public int[] isMoveable= new int[500];
 		public int[] isInventory= new int[500];
 		public string[] InvIcon= new string[500];
@@ -39,6 +39,8 @@ public class ObjectMasters {
 		public string[] EquippedIconMaleLowQuality	= new string[500];
 		public string[] EquippedIconMaleMediumQuality	= new string[500];
 		public string[] EquippedIconMaleBestQuality= new string[500];
+		public int[] isAnimated= new int[500];
+		public int[] useSprite= new int[500];
 		public int[] ShouldSave=new int[500];
 
 	public bool Load(string fileName)
@@ -75,7 +77,7 @@ public class ObjectMasters {
 						//isEntity[i]= int.Parse(entries[12]); // 1 for entity. 0 for model. -1 for ignored entries
 						//isSet[i]= int.Parse(entries[13]);
 						baseModel[i]= entries[12];
-						isSolid[i]= int.Parse(entries[13]);
+						isUseable[i]= int.Parse(entries[13]);
 						isMoveable[i]= int.Parse(entries[14]);
 						isInventory[i]= int.Parse(entries[15]);
 						InvIcon[i]= entries[16];
@@ -88,7 +90,8 @@ public class ObjectMasters {
 						EquippedIconMaleLowQuality[i]= entries[22];
 						EquippedIconMaleMediumQuality[i]= entries[23];
 						EquippedIconMaleBestQuality[i]= entries[24];
-
+						isAnimated[i]= int.Parse(entries[25]);
+						useSprite[i]= int.Parse(entries[26]);
 
 
 						/*extraInfo[i]= int.Parse(entries[11]);

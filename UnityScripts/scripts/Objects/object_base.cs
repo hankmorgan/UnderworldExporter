@@ -687,4 +687,21 @@ public class object_base : UWEBase {
 			return this.gameObject;
 		}
 
+
+		public bool setSprite(SpriteRenderer sprt, string SpriteName)
+		{
+				if (sprt==null)
+				{
+						return false;
+				}
+				if (SpriteName!="")
+				{
+						sprt.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
+						//currentSpriteName=SpriteName;
+						objInt().animationStarted=true;
+						return true;
+				}
+				return false;
+		}
+
 }

@@ -100,7 +100,8 @@ public class ObjectLoader  {
 
 						//position at +2
 						objList[x].zpos = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F;	//bits 0-6 
-						objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+						//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+						objList[x].heading = (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
 						objList[x].y = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07;	//bits 10-12
 						objList[x].x = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07;	//bits 13-15
 
@@ -704,14 +705,42 @@ public class ObjectLoader  {
 			{
 			if (instance.objInfo[i]!=null)
 				{
-				//if (instance.objInfo[i].InUseFlag==1)
-				//	{
+				if (instance.objInfo[i].InUseFlag==1)
+					{
 					Vector3 position = instance.CalcObjectXYZ(1,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
-					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(instance.objInfo[i],parent,position);
-				//	}
+					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i],parent,position);
+					}
 				}
 			}
 		}
 
 
+		/// <summary>
+		/// Gets the object at index on the current level
+		/// </summary>
+		/// <returns>The <see cref="ObjectLoaderInfo"/>.</returns>
+		/// <param name="index">Index.</param>
+		public static ObjectLoaderInfo getObjectInfoAt (int index)
+		{
+			return GameWorldController.instance.CurrentObjectList().objInfo[index];
+		}
+
+		/// <summary>
+		/// Gets the object int at index.
+		/// </summary>
+		/// <returns>The <see cref="ObjectLoaderInfo"/>.</returns>
+		/// <param name="index">Index.</param>
+		public static  ObjectInteraction getObjectIntAt (int index)
+		{
+			return GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+		}
+
+		/// <summary>
+		/// Gets the object masters item type for the index.
+		/// </summary>
+		/// <param name="index">Index.</param>
+		public static int GetItemTypeAt(int index)
+		{
+			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index).item_id];
+		}
 }

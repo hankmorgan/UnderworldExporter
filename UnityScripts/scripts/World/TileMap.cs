@@ -76,6 +76,7 @@ public class TileMap  {
 		public int CEILING_HEIGHT;
 		public int[] texture_map = new int[256];
 
+		private int currRoomIndex;//Used in merging regions together.
 
 		/// <summary>
 		/// Tile info storage class
@@ -1097,7 +1098,7 @@ public class TileMap  {
 		/// <param name="tileY">Tile y.</param>
 		/// <param name="iIsWater">1 is water, 0 is not.</param>
 	private void SetIsWater(int tileX, int tileY,int iIsWater)
-	{
+		{return;
 		if (iIsWater==1)
 			{
 				Tiles[tileX,tileY].isWater=true;	
@@ -1220,6 +1221,7 @@ public class TileMap  {
 		/// <param name="iIsLava">is lava.</param>
 		private void SetTileProp( int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava, int iIsBridge)
 			{
+				return;
 				SetTileType (tileX,tileY,itileType);
 				Tiles[tileX,tileY].Render=(short)iRender;
 				SetFloorHeight ( tileX,tileY,FloorHeight);
@@ -1409,7 +1411,10 @@ public class TileMap  {
 								if (Tiles[x,y].wallTexture>=256)
 								{
 										Tiles[x,y].wallTexture =0;
-								}					
+								}	
+								Tiles[x,y].isWater=isTextureWater(Tiles[x,y].floorTexture);
+								Tiles[x,y].isLava=isTextureLava(Tiles[x,y].floorTexture);
+
 								//UW only has a single ceiling texture so this is ignored.
 								//Tiles[x,y].shockCeilingTexture = Tiles[x,y].floorTexture;					
 								Tiles[x,y].shockCeilingTexture=CeilingTexture;
@@ -1515,6 +1520,8 @@ public class TileMap  {
 
 				//Perform a cleanup of the data
 				//CleanUp(1);
+
+
 
 				return true;
 		}
@@ -1943,10 +1950,108 @@ public class TileMap  {
 				}
 		}
 
+		/// <summary>
+		/// Merges the room tile list so that each ground tile is part of a "room" or continous connected region. This defines where an NPC can travel to.
+		/// </summary>
+		/// <param name="">.</param>
+		public void setRooms()
+		{			
+				int RoomIndex=1;
+				ResetTileTests();
+				for (int x = 0; x<64; x++)
+				{
+						for (int y = 0; y<64; y++)
+						{
+								currRoomIndex = RoomIndex;
+								if (isMergeableRoom(x,y))
+								{//Start Merging
+										Tiles[x,y].landRegion = (short)RoomIndex;
+										MergeCurrentRoomRegion((short)RoomIndex, x, y);
+										RoomIndex = RoomIndex+1;
+								}
+						}
+				}
+		}
+		/// <summary>
+		/// Resets the tile tests state
+		/// </summary>
+		/// <param name="">.</param>
+		void ResetTileTests()
+		{
+				for (int x = 0; x<64; x++)
+				{
+						for (int y = 0; y<64; y++)
+						{
+								Tiles[x,y].tileTested=0;
+						}
+				}
+		}
+
+
+		void MergeCurrentRoomRegion(short currRegion, int x, int y)
+		{
+				//north
+				if (isMergeableRoom(x, y + 1))
+				{
+						Tiles[x,y+1].landRegion = currRegion;
+						MergeCurrentRoomRegion( currRegion, x, y + 1);
+				}
+				//south
+				if (isMergeableRoom( x, y - 1))
+				{
+						Tiles[x,y-1].landRegion = currRegion;
+						MergeCurrentRoomRegion(currRegion, x, y - 1);
+				}
+				//east
+				if (isMergeableRoom( x + 1, y))
+				{
+						Tiles[x+1,y].landRegion = currRegion;
+						MergeCurrentRoomRegion( currRegion, x + 1, y);
+				}
+				//west
+				if (isMergeableRoom( x - 1, y))
+				{
+						Tiles[x-1,y].landRegion = currRegion;
+						MergeCurrentRoomRegion( currRegion, x - 1, y);
+				}
+		}
 
 
 
 
+
+		bool isMergeableRoom(int x, int y)
+		{
+				if (
+						(Tiles[x,y].isWater == false)
+						&&
+						(Tiles[x,y].isLava == false)
+						&&
+						(Tiles[x,y].tileType != TILE_SOLID)
+						&&
+						(Tiles[x,y].landRegion == 0)
+				)
+				{
+						return true;
+				}
+				else
+				{
+						if ((Tiles[x,y].hasBridge) && (Tiles[x,y].bridgeRegion == 0))
+						{
+								Tiles[x,y].bridgeRegion = (short)currRoomIndex;
+								return true;
+						}
+						else
+						{
+								return false;
+						}	
+				}
+		}
+
+
+		/// <summary>
+		/// Inits the colours for the players map ui
+		/// </summary>
 		void InitColours()
 		{
 		
@@ -2009,6 +2114,164 @@ public class TileMap  {
 
 
 
+		}
+
+
+		//Get land region of the tile
+		public string GetTileRegionName(int tileX, int tileY)
+		{
+		if ((tileX != 99) && (tileY != 99))
+		{
+			if (Tiles[tileX,tileY].isLava)
+				{
+					return "_LavaMesh_" + thisLevelNo + "_" + Tiles[tileX,tileY].lavaRegion;
+				}
+				else if (Tiles[tileX,tileY].isWater)
+				{
+					return "_WaterMesh_" + thisLevelNo+ "_" + Tiles[tileX,tileY].waterRegion;
+				}
+				else
+				{
+					return "_GroundMesh_" + thisLevelNo + "_" + Tiles[tileX,tileY].landRegion;
+
+				}
+
+		}
+			else
+			{
+				return "_GroundMesh_" + thisLevelNo + "_0";
+			}
+
+		}
+
+		//Temp
+		bool isTextureWater(int textureNo)
+		{
+				switch (textureNo)
+				{
+				case 226:
+				case 227:
+				case 242:
+				case 243:
+				case 244:
+						return true;
+				}
+				return false;
+		}
+
+		bool isTextureLava(int textureNo)
+		{
+				switch (textureNo)
+				{
+
+				case 233:
+				case 234:
+				case 235:
+				case 251:
+						return true;
+				}
+				return false;	
+		}
+
+
+		public void MergeWaterRegions()
+		{
+				int currRegion;
+				currRegion =1;
+				for (int x = 0; x<64; x++)
+				{
+						for (int y = 0; y<64; y++)
+						{
+								if (Tiles[x,y].hasBridge != true)
+								{
+										if ((Tiles[x,y].isWater == true) && (Tiles[x,y].waterRegion == 0))//Unset water region.
+										{
+												Tiles[x,y].waterRegion = (short)currRegion;
+												MergeCurrentWaterRegion(currRegion, x, y);
+												currRegion++;
+										}
+								}
+						}
+				}
+		}
+
+		void MergeCurrentWaterRegion(int currRegion, int x, int y)
+		{
+				//north
+				if ((Tiles[x,y+1].isWater==true) && (Tiles[x,y+1].waterRegion == 0))
+				{
+						Tiles[x,y + 1].waterRegion = (short)currRegion;
+						MergeCurrentWaterRegion(currRegion, x, y+1);
+				}
+				//south
+				if ((Tiles[x,y - 1].isWater == true) && (Tiles[x,y - 1].waterRegion == 0))
+				{
+						Tiles[x,y - 1].waterRegion = (short)currRegion;
+						MergeCurrentWaterRegion(currRegion, x , y-1);
+				}
+				//east
+				if ((Tiles[x + 1,y].isWater == true) && (Tiles[x + 1,y].waterRegion == 0))
+				{
+						Tiles[x + 1,y].waterRegion = (short)currRegion;
+						MergeCurrentWaterRegion(currRegion, x+1, y);
+				}
+				//west
+				if ((Tiles[x - 1,y].isWater == true) && (Tiles[x - 1,y].waterRegion == 0))
+				{
+						Tiles[x - 1,y].waterRegion = (short)currRegion;
+						MergeCurrentWaterRegion(currRegion, x-1, y);
+				}
+		}
+
+
+
+		public void MergeLavaRegions()
+		{
+				int currRegion;
+				currRegion = 1;
+				for (int x = 0; x<64; x++)
+				{
+						for (int y = 0; y<64; y++)
+						{
+								if (Tiles[x,y].hasBridge != true)
+								{
+										if ((Tiles[x,y].isLava == true) && (Tiles[x,y].lavaRegion == 0))//Unset lava region.
+										{
+												Tiles[x,y].lavaRegion = (short)currRegion;
+												MergeCurrentLavaRegion(currRegion, x, y);
+												currRegion++;
+										}
+								}
+						}
+				}
+		}
+
+		void MergeCurrentLavaRegion( int currRegion, int x, int y)
+		{
+				//north
+				if ((Tiles[x,y + 1].isLava == true) && (Tiles[x,y + 1].lavaRegion == 0))
+				{
+						Tiles[x,y + 1].lavaRegion = (short)currRegion;
+						MergeCurrentLavaRegion(currRegion, x, y + 1);
+				}
+				//south
+				if ((Tiles[x,y - 1].isLava == true) && (Tiles[x,y - 1].lavaRegion == 0))
+				{
+						Tiles[x,y - 1].lavaRegion =(short) currRegion;
+						MergeCurrentLavaRegion( currRegion, x, y - 1);
+				}
+				//east
+				if ((Tiles[x + 1,y].isLava == true) && (Tiles[x + 1,y].lavaRegion == 0))
+				{
+						Tiles[x + 1,y].lavaRegion =(short) currRegion;
+						MergeCurrentLavaRegion( currRegion, x + 1, y);
+				}
+				//west
+				if ((Tiles[x - 1,y].isLava == true) && (Tiles[x - 1,y].lavaRegion == 0))
+				{
+						Tiles[x - 1,y].lavaRegion = (short)currRegion;
+						MergeCurrentLavaRegion(currRegion, x - 1, y);
+				}
 		}
 
 
