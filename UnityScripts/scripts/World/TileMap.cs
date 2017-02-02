@@ -1381,6 +1381,7 @@ public class TileMap  {
 
 								Tiles[x,y].tileType = getTile(FirstTileInt) ;
 								Tiles[x,y].floorHeight = getHeight(FirstTileInt) ;
+								Tiles[x,y].trueHeight=Tiles[x,y].floorHeight;//Save this value before shifting.
 								Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 
 								Tiles[x,y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				

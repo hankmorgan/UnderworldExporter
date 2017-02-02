@@ -8,30 +8,24 @@ public class a_teleport_trap : trap_base {
 	given by "zpos" (0 means current level), tile x/y coordinates
 	are given in "quality" and "owner" fields.
 */
-	public int levelNo;
-	public float targetX;
-	public float targetY;
-	public float targetZ;
+	//public int levelNo;
+	//public float targetX;
+	//public float targetY;
+	//public float targetZ;
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		//CheckReferences();
-		if (levelNo==0)
-		{
-			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
-								}
+		float targetX=(float)objInt().quality*1.2f + 0.6f;
+		float targetY= (float)objInt().owner*1.2f + 0.6f;
+		if (objInt().zpos==0)
+		{//Stay on this level.
+			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(objInt().quality,objInt().owner)))*0.15f;
+			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+		}
 		else
 		{
-			float TileHeight = (float)GameWorldController.instance.Tilemaps[levelNo-1].GetFloorHeight(objInt().Quality,objInt().Owner);
-			float posNewTile =(TileHeight+1) * 0.15f ;
-
-			//GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
-			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,posNewTile,targetY);
-			GameWorldController.instance.SwitchLevel(levelNo-1);
-						//Move to the level height
-
-			//Debug.Log ("teleporting to level " + (levelNo-1));
-			//RoomManager.LoadRoom(levelNo.ToString());
+			//Goto to another level
+			GameWorldController.instance.SwitchLevel(objInt().zpos-1,objInt().quality,objInt().owner);
 		}
 	}
 

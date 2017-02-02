@@ -9,13 +9,14 @@ public class a_text_string_trap : trap_base {
  block 0009. The actual string number printed is (64*level + "owner")
 
 */
-	public int StringNo;	//What string we are spitting out. (num is based on level no)
-	public int StringBlock; //From what block the string is from.
+	//public int StringNo;	//What string we are spitting out. (num is based on level no)
+	//public int StringBlock; //From what block the string is from.
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		//CheckReferences();
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(StringBlock,StringNo));
+		int StringNo=(64*GameWorldController.instance.LevelNo)+objInt().owner;
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9,StringNo));
 	}
 
 	public override void PostActivate ()

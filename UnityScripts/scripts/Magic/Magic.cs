@@ -1519,6 +1519,9 @@ public class Magic : UWEBase {
 		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_VasPorYlem(GameObject caster, int EffectID)
 		{//Tremor. Spawn a couple of arrow traps and set them off?
+
+				//TODO:reimplement this.
+				//Possible spawn boulders with temporary damage effects???
 				TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
 				for (int i =0 ; i <= Random.Range(1,4);i++)			
 				{
@@ -1539,8 +1542,10 @@ public class Magic : UWEBase {
 								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
 								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
-								arrow.item_index=339+boulderTypeOffset;
-								arrow.item_type=23;
+								//TODO: Fix this
+								//arrow.item_index=339+boulderTypeOffset;
+								//arrow.objInt().o
+								//arrow.item_type=23;
 								arrow.ExecuteTrap(0,0,0);
 								Destroy(myObj);
 						}					

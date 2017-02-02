@@ -15,19 +15,19 @@ public class a_arrow_trap : trap_base {
 	*/
 
 
-	public int item_index;//The object id created.
-	public int item_type;//The type of the object created
+	//public int item_index;//The object id created.
+	//public int item_type;//The type of the object created
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
-	{
-		//CheckReferences();
+	{//TODO: update this for the new object system.
+		int item_index=  (objInt().quality << 5) | objInt().owner;
+		int item_type = GameWorldController.instance.objectMaster.type[item_index];
 		//Debug.Log ("an arrow trap has gone off. It will spawn a " + item_index + " of type " + item_type + " along vector " + this.gameObject.transform.rotation);
 		GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = this.transform.position;
 		myObj.transform.rotation = this.transform.rotation;
 		myObj.transform.parent=GameWorldController.instance.LevelMarker();
-		//myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
 		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_index,true);
 		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + item_index.ToString ("000"), _RES +"/Sprites/Objects/Objects_" + item_index.ToString ("000"), _RES +"/Sprites/Objects/Objects_" + item_index, item_type, item_index, 0, objInt().Quality, objInt().Owner, 1, 1, 0, 1, 0, 0, 0, 1);
 		myObj.AddComponent<object_base>();
@@ -40,8 +40,6 @@ public class a_arrow_trap : trap_base {
 		ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 		pd.Source=null;//Traps don't need to be identified.
 		pd.Damage=10;
-		//myObj.transform.position=ThrowDir;
-
 	}
 
 

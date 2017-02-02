@@ -12,7 +12,7 @@ using RAIN.Navigation;
 /// </summary>
 public class ObjectInteraction : UWEBase {
 
-		public AudioSource aud;
+		//public AudioSource aud;
 		public static bool PlaySoundEffects=true;
 
 		public const int NPC_TYPE =0;
@@ -114,6 +114,7 @@ public class ObjectInteraction : UWEBase {
 		public const int  FORCEFIELD= 95;
 		public const int  MOONGATE= 96;
 		public const int  BOULDER= 97;
+		public const int  ORB= 98;
 
 
 
@@ -189,7 +190,7 @@ public class ObjectInteraction : UWEBase {
 		public short enchantment;	//12
 		public short doordir;	//13
 		public short invis;		//14
-		public short is_quant;	//15
+		//public short isquant;	//15
 
 		public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
@@ -209,6 +210,8 @@ public class ObjectInteraction : UWEBase {
 		//     6-15   10  (*)         Quantity / special link / special property
 
 		public int link	;	//also quantity
+
+		public ObjectLoaderInfo objectloaderinfo;
 
 		void Start () {
 			isAnimated=false;
@@ -966,7 +969,7 @@ public class ObjectInteraction : UWEBase {
 			if (isEnchanted==1)
 			{
 				objInteract.isEnchanted=true;
-				Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
+						//Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
 			}
 			return objInteract;
 		}
@@ -1558,10 +1561,10 @@ public class ObjectInteraction : UWEBase {
 	void OnCollisionEnter(Collision collision) {
 		if (PlaySoundEffects)
 		{
-			if (aud!=null)
-			{
-				aud.Play();		
-			}	
+			//if (aud!=null)
+			//{
+			//	aud.Play();		
+			//}	
 		}			
 	}
 
@@ -1594,11 +1597,11 @@ public class ObjectInteraction : UWEBase {
 
 
 		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
-		{
+		{//TODO: Make sure all object creation uses this function!
 
 				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
 				bool CreateSprite=true;
-				bool skipRotate=true;
+				bool skipRotate=false;
 				bool RemoveBillboard=false;
 				myObj.transform.localPosition = position;
 				myObj.transform.Rotate(0.0f,0.0f,0.0f);//Initial rotation.
@@ -1608,6 +1611,7 @@ public class ObjectInteraction : UWEBase {
 				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
 				objInt.next=currObj.next;
 				objInt.link=currObj.link;
+				objInt.quality=currObj.quality;
 				objInt.enchantment=currObj.enchantment;
 				objInt.doordir=currObj.doordir;
 				objInt.invis=currObj.invis;
@@ -1620,7 +1624,7 @@ public class ObjectInteraction : UWEBase {
 				objInt.owner=currObj.owner;
 				objInt.tileX=currObj.tileX;
 				objInt.tileY=currObj.tileY;
-
+				objInt.objectloaderinfo = currObj;//Link back to the list directly.
 				//For now just generic.
 				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
 				{
@@ -1751,6 +1755,95 @@ public class ObjectInteraction : UWEBase {
 				case BOULDER:
 						myObj.AddComponent<Boulder>();
 						break;
+				case ORB:
+						myObj.AddComponent<Orb>();
+						break;
+				case BUTTON:
+						myObj.AddComponent<ButtonHandler>();
+						RemoveBillboard=true;
+						break;
+				case A_MOVE_TRIGGER :
+				case A_STEP_ON_TRIGGER:
+						myObj.AddComponent<a_move_trigger>();
+						break;
+				case A_PICK_UP_TRIGGER:
+						myObj.AddComponent<a_pick_up_trigger>();
+						break;
+				case A_USE_TRIGGER:
+				case A_LOOK_TRIGGER:
+				case AN_OPEN_TRIGGER:
+				case AN_UNLOCK_TRIGGER:
+						myObj.AddComponent<trigger_base>();	
+						break;
+				case A_DAMAGE_TRAP:
+						myObj.AddComponent<a_damage_trap>();
+						break;
+				case A_TELEPORT_TRAP:
+						myObj.AddComponent<a_teleport_trap>();
+						break;
+				case A_ARROW_TRAP:
+						myObj.AddComponent<a_arrow_trap>();
+						break;
+				case A_PIT_TRAP:
+						myObj.AddComponent<a_pit_trap>();
+						break;
+				case A_CHANGE_TERRAIN_TRAP:
+						myObj.AddComponent<a_change_terrain_trap>();
+						break;
+				case A_SPELLTRAP:
+						myObj.AddComponent<a_spelltrap>();
+						break;
+				case A_CREATE_OBJECT_TRAP:
+						myObj.AddComponent<a_create_object_trap>();
+						break;
+				case A_DOOR_TRAP:
+						myObj.AddComponent<a_door_trap>();
+						break;
+				case A_WARD_TRAP:
+						myObj.AddComponent<a_ward_trap>();
+						break;
+				case A_TELL_TRAP:
+						myObj.AddComponent<a_tell_trap>();
+						break;
+				case A_DELETE_OBJECT_TRAP:
+						myObj.AddComponent<a_delete_object_trap>();
+						break;
+				case AN_INVENTORY_TRAP:
+						myObj.AddComponent<an_inventory_trap>();
+						break;
+				case A_SET_VARIABLE_TRAP:
+						myObj.AddComponent<a_set_variable_trap>();
+						break;
+				case A_CHECK_VARIABLE_TRAP:
+						myObj.AddComponent<a_check_variable_trap>();
+						break;
+				case A_COMBINATION_TRAP:
+						myObj.AddComponent<a_combination_trap>();
+						break;
+				case A_TEXT_STRING_TRAP:
+						myObj.AddComponent<a_text_string_trap>();
+						break;
+				case A_DO_TRAP:
+						{
+							switch (objInt.quality)	
+							{
+							case 0x02://Camera
+									myObj.AddComponent<a_do_trap_camera>();break;
+							case 0x03://platform
+									myObj.AddComponent<a_do_trap_platform>();break;
+							case 0x18://bullfrog
+									myObj.AddComponent<a_do_trapBullfrog>();break;
+							case 0x2a://Gronk conversation
+									myObj.AddComponent<a_do_trap_conversation>();break;
+							case 0x28://emerald puzzle on level 6
+									myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
+							case 0x3F://end game sequence
+									myObj.AddComponent<a_do_trap_EndGame>();break;
+							default:
+									myObj.AddComponent<trap_base>();break;
+							}
+							break;
+						}
 				default:
 						myObj.AddComponent<object_base> ();
 						break;

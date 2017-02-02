@@ -525,7 +525,7 @@ public class MainMenuHud : GuiBase {
 		/// </summary>
 		public void JourneyOnwards()
 		{
-			GameWorldController.instance.SwitchLevel(0);
+			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			GameWorldController.instance.playerUW.playerController.enabled=true;

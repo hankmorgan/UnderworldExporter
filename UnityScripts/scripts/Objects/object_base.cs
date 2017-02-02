@@ -25,7 +25,7 @@ public class object_base : UWEBase {
 
 
 	///A trigger to activate when this object is picked up.
-	public string PickupLink;
+	//public string PickupLink;
 
 		/// <summary>
 		/// Gets the object interaction that this object base works with
@@ -194,6 +194,16 @@ public class object_base : UWEBase {
 		/// If object has a pickup link then the object referenced is activated
 	public virtual bool PickupEvent()
 	{
+		if ((objInt().link != 0) && (objInt().isQuant==false) && (objInt().enchantment==0))
+		{
+			if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_PICK_UP_TRIGGER)
+			{
+				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();	
+			}
+		}
+	return false;
+	}
+						/*
 		if (PickupLink!="")
 		{
 			GameObject obj = GameObject.Find (PickupLink);
@@ -205,8 +215,8 @@ public class object_base : UWEBase {
 				}
 			}
 		}
-		return false;
-	}
+		return false;*/
+
 
 
 		/// <summary>
@@ -301,11 +311,11 @@ public class object_base : UWEBase {
 		/// </summary>
 		/// <param name="target">Target.</param>
 		/// Possible use in room management when an object is stuck with DontDestroyOnLoan()
-  public virtual void CopyObject_base(GameObject target)
-	{
-		object_base objBase=target.AddComponent<object_base>();
-		objBase.PickupLink=PickupLink;
-	}
+ // public virtual void CopyObject_base(GameObject target)
+//	{
+	//	object_base objBase=target.AddComponent<object_base>();
+	//	objBase.PickupLink=PickupLink;
+	//}
 
 		/// <summary>
 		/// Changes the type of the object. Eg when destroyed and it needs to become debris.

@@ -296,7 +296,7 @@ public class ObjectLoader  {
 				case ObjectInteraction.DOOR:
 				case ObjectInteraction.HIDDENDOOR:
 				case ObjectInteraction.PORTCULLIS:
-						return "DOOR_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
+						return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
 				default:
 						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno+"_"+currObj.index.ToString("d4");
 				}
@@ -782,4 +782,23 @@ public class ObjectLoader  {
 		{
 			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index).item_id];
 		}
+
+
+		/// <summary>
+		/// Gets the game object at index.
+		/// </summary>
+		/// <returns>The <see cref="UnityEngine.GameObject"/>.</returns>
+		/// <param name="index">Index.</param>
+		public static GameObject getGameObjectAt(int index)
+		{
+			if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance!=null)
+			{
+				return GameWorldController.instance.CurrentObjectList().objInfo[index].instance.gameObject;
+			}
+			else
+			{
+				return null;
+			}
+		}
+
 }

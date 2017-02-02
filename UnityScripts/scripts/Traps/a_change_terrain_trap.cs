@@ -22,6 +22,12 @@ The path to the sword hilt on Level3
 	public int Y;
 	public int NewFloorHeight;
 
+		//TODO:Reimplement as follows
+		//Pull X,Y and new floor height from the object int properties.
+		//Rewrite the tile map info for the affected tiles
+		//Delete the affected tiles.
+		//re-render the new times.
+
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{

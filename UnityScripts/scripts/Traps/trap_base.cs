@@ -4,7 +4,7 @@ using System.Collections;
 public class trap_base : object_base {
 
 
-	public string TriggerObject;//Next in the chain
+	//public string TriggerObject;//Next in the chain
 
 	public virtual void ExecuteTrap(int triggerX, int triggerY, int State)
 	{
@@ -31,7 +31,7 @@ public class trap_base : object_base {
 	public virtual void TriggerNext(int triggerX, int triggerY, int State)
 	{
 
-		GameObject triggerObj= GameObject.Find (TriggerObject);
+		GameObject triggerObj= ObjectLoader.getGameObjectAt(objInt().link); // GameObject.Find (TriggerObject);
 		if (triggerObj!=null)
 		{
 			trigger_base trig= triggerObj.GetComponent<trigger_base>();

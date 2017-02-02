@@ -15,18 +15,26 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 	GameObject platformTile= GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);//Var.FindTile (Var.triggerX,Var.triggerY,1);
-		if (State==7)
+	//Get the height of the tile
+	
+	
+	//if (objInt().flags==7)
+	if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].trueHeight>=9)	
 		{
 			//Move the tile to the bottom
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.3f*7f,0f) ,0.7f));
+			objInt().flags=State;
 			//state = 1;
+			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].trueHeight=2;
 		}
 		else
 		{
 			//Go up a step.
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.3f,0f) ,0.1f));
-			//state++;
+			//objInt().flags=State;
+			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].trueHeight++;
 		}
+		objInt().flags=State;
 	}
 
 

@@ -29,8 +29,8 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		GameObject triggerObj = GameObject.Find (TriggerObject);
-		if (TriggerObject!=null)
+		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link); //GameObject.Find (TriggerObject);
+		if (triggerObj!=null)
 		{
 			Destroy(triggerObj);
 		}

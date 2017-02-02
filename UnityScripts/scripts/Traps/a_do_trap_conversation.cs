@@ -1,7 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// A Talking Door!
+/// </summary>
 public class a_do_trap_conversation : trap_base {
+
+
+	protected override void Start ()
+	{
+		base.Start ();
+		//Set up this talking door!
+		NPC_Door np =this.gameObject.AddComponent<NPC_Door>();
+		np.npc_whoami=25;
+		this.gameObject.AddComponent<Conversation_25>();
+
+	}
 
 	public override bool Activate (int triggerX, int triggerY, int State)
 	{

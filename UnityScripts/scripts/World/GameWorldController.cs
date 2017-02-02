@@ -40,6 +40,7 @@ public class GameWorldController : UWEBase {
 
 	public int LevelNo;
 
+		public int startLevel=0;
 		public Vector3 StartPos=new Vector3(38f, 4f, 2.7f);
 
 		private static bool UpdateLevel;
@@ -280,10 +281,6 @@ public class GameWorldController : UWEBase {
 		string tileName = GetTileName (x,y,surface);
 		return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
 	}
-
-	
-
-
 	
 		/// <summary>
 		/// Gets the gameobject name for the specified tile x,y and surface. Eg Wall_02_03, Tile_22_23
@@ -352,24 +349,30 @@ public class GameWorldController : UWEBase {
 			if (newLevelNo!=-1)
 			{
 				//Get my object info into the tile map.
-
+				LevelNo=newLevelNo;
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo]);
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],ObjectMarker);
-				LevelNo=newLevelNo;
-				//Make the nav meshes and gameobjects active
-				//for (int i=0; i <=NavMeshes.GetUpperBound(0);i++)
-				//{
-				///	NavMeshes[i].SetActive(i==newLevelNo);
-					//LevelObjects[i].SetActive(i==newLevelNo);
-				//}	
-			
-						GenerateNavmesh(NavRigLand);
-						GenerateNavmesh(NavRigWater);
+				GenerateNavmesh(NavRigLand);
+				GenerateNavmesh(NavRigWater);
 						//TODO Lava
 			}
 
 		}
 
+		/// <summary>
+		/// Switchs the level and puts the player at the floor level of the new level
+		/// </summary>
+		/// <param name="newLevelNo">New level no.</param>
+		/// <param name="newTileX">New tile x.</param>
+		/// <param name="newTileY">New tile y.</param>
+		public void SwitchLevel(int newLevelNo, int newTileX, int newTileY)
+		{
+				SwitchLevel(newLevelNo);
+				float targetX=(float)newTileX*1.2f + 0.6f;
+				float targetY= (float)newTileY*1.2f + 0.6f;
+				float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
+				GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.1f,targetY);
+		}
 
 		// This will regenerate the navigation mesh when called
 		void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)

@@ -103,6 +103,7 @@
 #define FORCEFIELD 95
 #define MOONGATE 96
 #define BOULDER 97
+#define ORB 98
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

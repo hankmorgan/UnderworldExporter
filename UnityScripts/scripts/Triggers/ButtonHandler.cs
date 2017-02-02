@@ -4,80 +4,120 @@ using System.Collections;
 public class ButtonHandler : object_base {
 	/*Code for buttons and switches*/
 
-	public string trigger;
-	public int triggerX;
-	public int triggerY;
-	public int state;
-	public int maxstate;
+//	public string trigger;
+	//public int triggerX;
+	//public int triggerY;
+	//public int state;//Should be flags.
+	//public int maxstate
 
 	public bool isOn;
-	public string spriteOn;
-	public string spriteOff;
+	public int itemdIDOn;
+	public int itemdIDOff;
 
-	public bool isRotarySwitch;
-	public string[] RotarySprites=new string[8];
+	//public bool isRotarySwitch;
+	public int[] RotaryImageIDs=new int[8];
 
-	private GameObject triggerObj;
+	//private GameObject triggerObj;
 
 	private SpriteRenderer ButtonSprite;
 
 	public bool SpriteSet;
-		private string currentSpriteName;
+		private int currentItemID; //for tracking id changes
 
 	// Use this for initialization
 	protected override void Start () {
 		base.Start();
-
+		objInt().flags=objInt().flags;
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//
 		//Var=GetComponent<ObjectVariables>();
 
+
 		ButtonSprite=this.gameObject.GetComponentInChildren<SpriteRenderer>();
-		if (isRotarySwitch==false)
+		if (isRotarySwitch()==false)
 		{
-			if (isOn==true)
-			{
-				setSprite(spriteOn);
+			//set sprites ids
+			if ((objInt().item_id >= 368) && (objInt().item_id <= 375))
+			{//is an off version 
+				itemdIDOff=objInt().item_id-368;
+				itemdIDOn=objInt().item_id-368+8;					
 			}
 			else
 			{
-				setSprite(spriteOff);
+				itemdIDOff=objInt().item_id-368-8;
+				itemdIDOn=objInt().item_id-368;	
+			}
+			if (isOn==true)
+			{
+				setSprite(itemdIDOn);
+			}
+			else
+			{
+				setSprite(itemdIDOff);
 			}
 		}
 		else
 		{
-			setRotarySprite(state);
+			//Populate the array of item ids
+						int StartImageId;
+						if (objInt().item_id==353)
+						{
+								StartImageId=4;	
+						}
+						else
+						{
+								StartImageId=12;	
+						}
+						for (int i = 0; i<8;i++)
+						{
+								RotaryImageIDs[i] =StartImageId+i;	
+						}
+			setRotarySprite(objInt().flags);
 		}
 	}
 
 		void Update()
 		{
-				if (isRotarySwitch==false)
+				if (isRotarySwitch()==false)
 				{
-						if ((isOn) && (currentSpriteName!=spriteOn) && (spriteOn!=""))
+						if ((isOn) && (currentItemID!=itemdIDOn))
 						{
-								setSprite(spriteOn);	
+								setSprite(itemdIDOn);	
 						}
-						if ((!isOn) && (currentSpriteName!=spriteOff) && (spriteOff!=""))
+						if ((!isOn) && (currentItemID!=itemdIDOff) )
 						{
-								setSprite(spriteOff);	
+								setSprite(itemdIDOff);	
 						}
 				}
 				else
 				{
-						if(currentSpriteName!=RotarySprites[state])
+						if(currentItemID!= objInt().flags)
 						{
-								setSprite(RotarySprites[state]);
+							setRotarySprite(objInt().flags);
 						}
 				}
 		}
 
 
+		bool isRotarySwitch()
+		{
+				//353
+				//354
+				switch(objInt().item_id)
+				{
+				case 353:
+				case 354:
+					return true;
+				default:
+					return false;
+				}
+		}
+
 	public override bool use ()
 	{
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
-			Debug.Log("USE!");
+			//Debug.Log("USE!");
 			return Activate ();
 		}
 		else
@@ -106,7 +146,7 @@ public class ButtonHandler : object_base {
 			}
 			else
 			{
-				setRotarySprite(state);
+				setRotarySprite(objInt().flags);
 			}
 		}*/
 	//}
@@ -115,10 +155,8 @@ public class ButtonHandler : object_base {
 	{
 	//public void LookAt()
 		//Generally gives the object description but depending on the trigger target type it may activate (lookat trigger)
-		if (triggerObj==null)
-		{
-			triggerObj=GameObject.Find (trigger);
-		}
+						//GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
+		GameObject triggerObj= ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
 			ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
@@ -143,46 +181,58 @@ public class ButtonHandler : object_base {
 
 	public override bool Activate()
 	{
-		if (trigger=="")
-		{
-			return false;
-		}
-		if (triggerObj == null)
-		{
-			triggerObj=GameObject.Find (trigger);
-		}
-
+						if (objInt().link==0)
+						{
+								return false;
+						}
+		//if (trigger=="")
+		//{
+			//return false;
+		//}
+		//if (triggerObj == null)
+		//{
+		//	triggerObj=GameObject.Find (trigger);
+		//}
+		GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
 		if (triggerObj==null)
 		{
 			return true;//Cannot activate.
 		}
-		triggerObj.GetComponent<trigger_base>().state=state;
+		if (triggerObj.GetComponent<trigger_base>()==null)
+		{
+			return false;
+		}
+		//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?
 		triggerObj.GetComponent<trigger_base>().Activate();
 
-		if (state == maxstate)
+		if (isRotarySwitch())
 		{
-			state=0;
+			if (objInt().flags == 7)
+			{
+				objInt().flags=0;
+			}
+			else
+			{
+				objInt().flags++;
+			}	
 		}
-		else
-		{
-			state++;
-		}
-		if (isRotarySwitch ==false)
+
+		if (isRotarySwitch() ==false)
 		{
 			if (isOn==false)
 			{
 				isOn=true;
-				setSprite(spriteOn);
+				setSprite(itemdIDOn);
 			}
 			else
 			{
 				isOn=false;
-				setSprite(spriteOff);
+				setSprite(itemdIDOff);
 			}
 		}
 		else
 		{
-			setRotarySprite(state);
+			setRotarySprite(objInt().flags);
 		}
 		return true;
 	}
@@ -190,19 +240,22 @@ public class ButtonHandler : object_base {
 
 	public void setSprite(string SpriteName)
 	{
-
-		if (SpriteName!="")
-		{
-			ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
-			currentSpriteName=SpriteName;
-			objInt().animationStarted=true;
-		}
-
+		ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
+		objInt().animationStarted=true;
 	}
 
-	public void setRotarySprite(int index)
+	public void setSprite(int SpriteID)
 	{
-		setSprite (RotarySprites[index]);
+			//UW1/Sprites/tmflat/tmflat_00%02d
+		setSprite ( _RES+"/sprites/tmflat/tmflat_" + SpriteID.ToString("d4"));//Loads the sprite.;//Assigns the sprite to the object.			
+		currentItemID=SpriteID;
+	}
+
+
+	public void setRotarySprite(int spriteId)
+	{
+		setSprite (  _RES+"/sprites/tmobj/tmobj_" + RotaryImageIDs[spriteId].ToString("d2") );
+		currentItemID=spriteId;
 	}
 
 

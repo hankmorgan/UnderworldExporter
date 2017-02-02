@@ -3,9 +3,14 @@ using System.Collections;
 
 public class trigger_base : object_base {
 
-	public string TrapObject;//The next trap to activte
-	public int state;
+	//public string TrapObject;//The next trap to activte
+	//public int state;
 
+	protected override void Start ()
+	{
+		base.Start ();
+		this.gameObject.layer=LayerMask.NameToLayer("Ignore Raycast");
+	}
 
 	public override bool Activate ()
 	{
@@ -14,18 +19,19 @@ public class trigger_base : object_base {
 		//Do what it needs to do.
 		//state=state;
 		//Trigger the next in the chain
-		GameObject triggerObj= GameObject.Find (TrapObject);
+		//GameObject triggerObj= GameObject.Find (TrapObject);
+		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (objInt().Quality,objInt().Owner,state);
-			if (state == 8)
+			triggerObj.GetComponent<trap_base>().Activate (objInt().Quality,objInt().Owner,objInt().flags);
+			/*if (objInt().flags == 8)
 			{
-				state = 0;
+				objInt().flags = 0;
 			}
 			else
 			{
-				state++;
-			}
+				objInt().flags++;
+			}*/
 		}
 
 		PostActivate();
