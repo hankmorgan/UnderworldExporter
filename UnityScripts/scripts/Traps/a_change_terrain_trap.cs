@@ -18,9 +18,9 @@ The path to the sword hilt on Level3
 */
 	//public int TileX;//The tile from which the change terrain trap begins.
 	//public int TileY;
-	public int X;//The range of tiles to be changed.
-	public int Y;
-	public int NewFloorHeight;
+	//public int X;//The range of tiles to be changed.
+	//public int Y;
+	//public int NewFloorHeight;
 
 		//TODO:Reimplement as follows
 		//Pull X,Y and new floor height from the object int properties.
@@ -28,7 +28,46 @@ The path to the sword hilt on Level3
 		//Delete the affected tiles.
 		//re-render the new times.
 
+	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	{
+		for (int x=0; x<=objInt().x;x++)
+		{
+			for (int y=0; y<=objInt().y;y++)
+			{
+					int tileXToChange=x+triggerX; 
+					int tileYToChange=y +triggerY;
+					GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
+					if (tile!=null)
+					{
+						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
+						Destroy (tile);
+						int textureQuality = (objInt().quality >> 1) & 0xf;
+						if (textureQuality<10)
+						{
+							tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
+						}
+										//currobj.zpos >> 2
+										//(objList[k].zpos >> 2);
+						tileToChange.Render=1;
+						for (int v=0;v<6;v++)
+						{
+							tileToChange.VisibleFaces[v]=1;		
+						}
+						tileToChange.tileType=objInt().quality & 0x01;;
+						tileToChange.trueHeight=objInt().zpos;
+						tileToChange.DimX=1;
+						tileToChange.DimY=1;
+						tileToChange.floorHeight=objInt().zpos>>2;
+						tileToChange.isWater=TileMap.isTextureWater(tileToChange.floorTexture);
+						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,1,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
+					}
+			}	
+		}
+	}
 
+
+
+		/*
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		Vector3 Dist = new Vector3(-64*1.2f,0,0);
@@ -74,5 +113,5 @@ The path to the sword hilt on Level3
 				}
 			}
 		}
-	}
+	}*/
 }

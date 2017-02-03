@@ -896,7 +896,7 @@ public class TileMap  {
 	/// </summary>
 	/// <returns><c>true</c>, if tile open was ised, <c>false</c> otherwise.</returns>
 	/// <param name="TileType">Tile type.</param>
-	public bool isTileOpen(int TileType)
+	public static bool isTileOpen(int TileType)
 	{
 		switch (TileType)
 		{
@@ -2148,7 +2148,7 @@ public class TileMap  {
 		}
 
 		//Temp
-		bool isTextureWater(int textureNo)
+		public static bool isTextureWater(int textureNo)
 		{
 				switch (textureNo)
 				{
@@ -2162,7 +2162,7 @@ public class TileMap  {
 				return false;
 		}
 
-		bool isTextureLava(int textureNo)
+		public static bool isTextureLava(int textureNo)
 		{
 				switch (textureNo)
 				{

@@ -162,7 +162,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-		static void RenderTile(GameObject parent, int game, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
+		public static void RenderTile(GameObject parent, int game, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
 				//Picks the tile to render based on tile type/flags.
 				switch (t.tileType)

@@ -115,6 +115,7 @@ public class ObjectInteraction : UWEBase {
 		public const int  MOONGATE= 96;
 		public const int  BOULDER= 97;
 		public const int  ORB= 98;
+		public const int  SPELL = 99;//used by wands
 
 
 
@@ -1603,6 +1604,7 @@ public class ObjectInteraction : UWEBase {
 				bool CreateSprite=true;
 				bool skipRotate=false;
 				bool RemoveBillboard=false;
+				bool AddAnimation=false;
 				myObj.transform.localPosition = position;
 				myObj.transform.Rotate(0.0f,0.0f,0.0f);//Initial rotation.
 				myObj.transform.parent = parent.transform;
@@ -1712,6 +1714,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case SILVERSEED:
 						myObj.AddComponent<SilverSeed>();
+						AddAnimation=true;
 						break;
 				case SHRINE:
 						myObj.AddComponent<Shrine>();
@@ -1823,6 +1826,20 @@ public class ObjectInteraction : UWEBase {
 				case A_TEXT_STRING_TRAP:
 						myObj.AddComponent<a_text_string_trap>();
 						break;
+				case TMAP_CLIP:
+				case TMAP_SOLID:
+						myObj.AddComponent<TMAP>();
+						CreateSprite=false;
+						RemoveBillboard=true;
+						break;
+				case FOUNTAIN:
+				case A_FOUNTAIN:
+						myObj.AddComponent<Fountain>();
+						break;
+				case ANIMATION:
+						myObj.AddComponent<object_base>();
+						AddAnimation=true;
+						break;
 				case A_DO_TRAP:
 						{
 							switch (objInt.quality)	
@@ -1860,6 +1877,13 @@ public class ObjectInteraction : UWEBase {
 				if (!skipRotate)
 				{
 					myObj.transform.Rotate(0.0f,currObj.heading*45f,0.0f);//final rotation		
+				}
+
+				if (AddAnimation)
+				{//This is a hack!
+					AnimationOverlay ao= myObj.AddComponent<AnimationOverlay>();					
+					ao.StartFrame=GameWorldController.instance.objectMaster.isAnimated[currObj.item_id] ;
+					ao.NoOfFrames=GameWorldController.instance.objectMaster.useSprite[currObj.item_id] ;
 				}
 				return objInt;
 		}

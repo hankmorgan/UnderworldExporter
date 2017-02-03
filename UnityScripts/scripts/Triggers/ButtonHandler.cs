@@ -193,6 +193,8 @@ public class ButtonHandler : object_base {
 		//{
 		//	triggerObj=GameObject.Find (trigger);
 		//}
+		if (ObjectLoader.getGameObjectAt(objInt().link)==null)
+				{return false;}
 		GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
 		if (triggerObj==null)
 		{

@@ -2,8 +2,18 @@
 using System.Collections;
 
 public class Wand : enchantment_base {
-	public int SpellObjectLink;
-	public int SpellObjectQuantity;
+	private int SpellObjectLink;
+	private int SpellObjectQuantity;
+
+	protected override void Start ()
+	{
+		base.Start ();
+		if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+		{
+			SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
+			SpellObjectQuantity=ObjectLoader.getObjectIntAt(objInt().link).quality;
+		}				 
+	}
 
 	protected override int GetActualSpellIndex ()
 	{

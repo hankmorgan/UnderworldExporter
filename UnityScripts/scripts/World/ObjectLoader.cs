@@ -22,7 +22,7 @@ public class ObjectLoader  {
 		public void LoadObjectList(TileMap tileMap, char[] lev_ark, int game)
 		{
 
-			objInfo=new ObjectLoaderInfo[1600];
+			objInfo=new ObjectLoaderInfo[1024];
 			BuildObjectListUW(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, game, tileMap.thisLevelNo);
 
 			setObjectTileXY(1,tileMap.Tiles,objInfo);
@@ -67,7 +67,7 @@ public class ObjectLoader  {
 				default:
 						return;
 				}
-				for (int x=0; x<1025;x++)
+				for (int x=0; x<1024;x++)
 				{	//read in master object list
 						objList[x]=new ObjectLoaderInfo();
 						objList[x].index = x; 
@@ -298,7 +298,7 @@ public class ObjectLoader  {
 				case ObjectInteraction.PORTCULLIS:
 						return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
 				default:
-						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno+"_"+currObj.index.ToString("d4");
+						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno.ToString("d2")+"_"+currObj.index.ToString("d4");
 				}
 
 		}
@@ -357,10 +357,10 @@ public class ObjectLoader  {
 						}	
 
 						for (int i = 0; i < 1024;i++)
-						{//Make sure triggers and traps are created.
+						{//Make sure triggers, traps and special items are created.
 								if (objList[i].InUseFlag == 0)
 								{
-										if ((isTrigger(objList[i]) )|| (isTrap(objList[i])))
+										if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
 										{
 												objList[i].InUseFlag=1;
 										}
@@ -378,7 +378,16 @@ public class ObjectLoader  {
 		}
 
 
-
+		bool isAlwaysInUse(ObjectLoaderInfo currobj)
+		{//Objects that will always be generated.
+			switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+			{	
+			case ObjectInteraction.SPELL:
+					return true;
+			default:
+					return false;							
+			}
+		}
 
 		bool isTrigger(ObjectLoaderInfo currobj)
 		{//Tells if the object is a trigger that can set of a trap.

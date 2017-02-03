@@ -133,6 +133,16 @@ public class object_base : UWEBase {
 			}
 			else
 			{
+				if(objInt().CanBeUsed==true)				
+				{//Hope this does'nt mess up everything!
+					if ((objInt().link != 0) && (objInt().isQuant==false) && (objInt().enchantment==0))
+					{//Not a quantity or an enchanted item.
+						if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_USE_TRIGGER)
+						{
+								ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();	
+						}	
+					}
+				}
 				return false;
 			}
 		}
@@ -557,7 +567,7 @@ public class object_base : UWEBase {
 						return 10;
 			default:
 					Debug.Log("EffectID" + EffectID + " unknownn");
-					return 30;
+					return 5;
 			}			
 	}
 

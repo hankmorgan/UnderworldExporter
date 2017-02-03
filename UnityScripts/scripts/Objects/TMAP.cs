@@ -3,8 +3,35 @@ using System.Collections;
 
 public class TMAP : object_base {
 
-	public string trigger;
-	public int TextureIndex;
+	//public string trigger;
+	private int TextureIndex;
+
+	protected override void Start ()
+	{
+		base.Start ();
+
+		if (objInt().y == 0)
+		{
+			this.transform.Translate(0.0f,0.0f,0.01f);
+		}
+		if (objInt().y == 7)
+		{
+				this.transform.Translate(0.0f,0.0f,-0.01f);
+		}
+		if (objInt().x == 0)
+		{
+				this.transform.Translate(-0.1f,0.0f,0.0f);
+		}
+		if (objInt().x == 7)
+		{
+			this.transform.Translate(0.1f,0.0f,0.0f);
+		}
+
+
+		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[objInt().owner];
+		CreateTMAP(this.gameObject,TextureIndex);	
+	}
+
 
 	public override bool LookAt()
 	{
@@ -13,9 +40,9 @@ public class TMAP : object_base {
 		{//This is a window into the abyss.
 			UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 		}
-		if (trigger != "")
+		if (objInt().link != 0)
 		{
-			GameObject triggerObj = GameObject.Find (trigger);
+			GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 			if (triggerObj!=null)
 				{
 				ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -37,9 +64,9 @@ public class TMAP : object_base {
 	{
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
-			if (trigger != "")
+			if (objInt().link != 0)
 			{
-				GameObject triggerObj = GameObject.Find (trigger);
+				GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 				if (triggerObj!=null)
 				{
 					ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -66,9 +93,9 @@ public class TMAP : object_base {
 		{
 			if (ObjectUsed.GetComponent<ObjectInteraction>().item_id==231)//The key of infinity.
 			{
-				if (trigger != "")
+				if (objInt().link != 0)
 				{
-					GameObject triggerObj = GameObject.Find (trigger);
+					GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 					if (triggerObj!=null)
 					{
 						ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -126,4 +153,26 @@ public class TMAP : object_base {
 
 				return base.UseObjectOnVerb_Inv();
 		}
+
+
+		static void CreateTMAP(GameObject myObj, int textureIndex)
+		{				
+			GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			SpriteController.name = myObj.name + "_quad";
+			SpriteController.transform.position = myObj.transform.position;
+			SpriteController.layer=LayerMask.NameToLayer("UWObjects");
+			SpriteController.transform.parent = myObj.transform;
+			SpriteController.transform.Rotate(0f,90f,0f);//Plus 90 to account for initial rotation.
+			SpriteController.transform.localScale=new Vector3(1.2f,1.2f,1.0f);
+			SpriteController.transform.localPosition=new Vector3(0.0f,0.6f,0.0f);
+			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
+			mr.material= (Material)Resources.Load (_RES+ "/Materials/tmap/" + _RES + "_" + textureIndex.ToString("d3"));
+			BoxCollider bx = myObj.AddComponent<BoxCollider>();
+			bx.size=new Vector3(1.25f,1.25f,0.1f);
+			bx.center=new Vector3(0.0f,0.65f,0.0f);
+			bx.isTrigger=true;
+		}
+
+
+
 }
