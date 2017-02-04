@@ -7,28 +7,28 @@ public class MapLoader : MonoBehaviour {
 
 	public Text Output;
 	public int LevelToRetrieve;
-	const int TILE_SOLID= 0;
-	const int TILE_OPEN= 1;
+	public const int TILE_SOLID= 0;
+	public const int TILE_OPEN= 1;
 	/*
 Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
 */
-	const int  TILE_DIAG_SE= 2;
-	const int  TILE_DIAG_SW =3;
-	const int  TILE_DIAG_NE= 4;
-	const int  TILE_DIAG_NW =5;
+	public const int  TILE_DIAG_SE= 2;
+	public const int  TILE_DIAG_SW =3;
+	public 	const int  TILE_DIAG_NE= 4;
+	public const int  TILE_DIAG_NW =5;
 
-	const int  TILE_SLOPE_N =6;
-	const int  TILE_SLOPE_S =7;
-	const int 	TILE_SLOPE_E =8;
-	const int  TILE_SLOPE_W =9;
-	const int  TILE_VALLEY_NW =10;
-	const int  TILE_VALLEY_NE= 11;
-	const int TILE_VALLEY_SE =12;
-	const int  TILE_VALLEY_SW= 13;
-	const int  TILE_RIDGE_SE= 14;
-	const int  TILE_RIDGE_SW= 15;
-	const int  TILE_RIDGE_NW= 16;
-	const int  TILE_RIDGE_NE =17;
+	public const int  TILE_SLOPE_N =6;
+	public const int  TILE_SLOPE_S =7;
+	public const int 	TILE_SLOPE_E =8;
+	public const int  TILE_SLOPE_W =9;
+	public const int  TILE_VALLEY_NW =10;
+	public const int  TILE_VALLEY_NE= 11;
+	public const int TILE_VALLEY_SE =12;
+	public const int  TILE_VALLEY_SW= 13;
+	public const int  TILE_RIDGE_SE= 14;
+	public const int  TILE_RIDGE_SW= 15;
+	public const int  TILE_RIDGE_NW= 16;
+	public const int  TILE_RIDGE_NE =17;
 
 
 	const int SLOPE_BOTH_PARALLEL= 0;
@@ -60,7 +60,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-	TileInfo[,] LevelInfo=new TileInfo[64,64];
+	public TileInfo[,] LevelInfo=new TileInfo[64,64];
 	public int[] texture_map = new int[256];
 	public Material[] MaterialMasterList=new Material[260];
 
@@ -83,7 +83,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 	//************************
 
-	bool BuildTileMapUW(string filePath, int game, int LevelNo)
+	public bool BuildTileMapUW(string filePath, int game, int LevelNo)
 		{
 		// File pointer
 		char[] lev_ark; 
@@ -184,6 +184,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			{
 			for (x=0; x<64;x++)
 				{
+				LevelInfo[x,y]=new TileInfo();
 				LevelInfo[x,y].tileX = x;
 				LevelInfo[x,y].tileY = y;
 				LevelInfo[x,y].address = AddressOfBlockStart+address_pointer;
@@ -568,21 +569,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		short skipCeil=1;
 
-		for (int y=0; y<64;y++)
-			{
-			for (int x=0; x<64;x++)
-				{
-				LevelInfo[x,y]=new TileInfo();
-				}
-			}
 
 		//Clear out the children in the transform
 			foreach (Transform child in this.gameObject.transform) {
 				GameObject.Destroy(child.gameObject);
 			}
-		
-		BuildTileMapUW(Path,1,LevelToRetrieve);
-		CleanUp(1);
+
 
 		for (int y = 0; y <= 63; y++)
 			{
@@ -2493,7 +2485,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 	/////
 
-	void CleanUp(int game)
+	public void CleanUp(int game)
 		{
 		int x; int y;
 

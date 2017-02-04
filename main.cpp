@@ -204,7 +204,7 @@ int main()
 	uw1_graphics_file[41] = "Data\\PRES1.BYT";//Palette no 15
 	uw1_graphics_file[42] = "Data\\PRES2.BYT";//Palette no 21
 	uw1_graphics_file[43] = "Data\\WIN1.BYT";
-	uw1_graphics_file[44] = "Data\\WIN2.BYT";
+	uw1_graphics_file[44] = "Data\\WIN2.BYT";//22
 
 	uw2_graphics_file[0] = "Data\\T64.tr";//uw2 textures
 	uw2_graphics_file[1] = "Data\\3DWIN.GR";
