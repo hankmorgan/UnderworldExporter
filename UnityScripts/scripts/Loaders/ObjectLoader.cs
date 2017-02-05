@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectLoader  {
+public class ObjectLoader : Loader {
 		const int UWDEMO =0;
 		const int  UW1= 1;
 		const int  UW2 =2;
@@ -49,7 +49,7 @@ public class ObjectLoader  {
 				char[] graves;
 
 				//Load in the grave information
-				DataLoader.ReadStreamFile(GameWorldController.instance.Graves_File, out graves);
+				DataLoader.ReadStreamFile(Loader.BasePath + GameWorldController.instance.Graves_File, out graves);
 				switch (game)
 				{
 				case 1:	//Underworld 1

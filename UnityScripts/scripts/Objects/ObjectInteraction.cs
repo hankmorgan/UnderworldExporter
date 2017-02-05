@@ -236,7 +236,8 @@ public class ObjectInteraction : UWEBase {
 			}
 			if (sr !=null)
 			{
-				sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
+				//sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
+				sr.sprite=GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex);
 				if (inventorySlot!=-1)
 				{
 					GameWorldController.instance.playerUW.playerInventory.Refresh(inventorySlot);
@@ -247,7 +248,8 @@ public class ObjectInteraction : UWEBase {
 
 		public Sprite GetInventoryDisplay()
 		{
-			return tc.RequestSprite(InvDisplayIndex,isAnimated);
+			//return tc.RequestSprite(InvDisplayIndex,isAnimated);
+			return GameWorldController.instance.ObjectArt.RequestSprite(InvDisplayIndex);
 		}
 
 		public Sprite GetEquipDisplay()
@@ -695,8 +697,8 @@ public class ObjectInteraction : UWEBase {
 						break;
 				}
 				//GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
-				myObj.AddComponent<StoreInformation>();
-				SpriteObj.AddComponent<StoreInformation>();
+				//myObj.AddComponent<StoreInformation>();
+				//SpriteObj.AddComponent<StoreInformation>();
 				return objInt;//myObj.GetComponent<ObjectInteraction> ();
 		}
 
@@ -1142,7 +1144,7 @@ public class ObjectInteraction : UWEBase {
 				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
 				npc.NPC_Launcher=NpcLauncher;
 				//npc.ai=ai;
-				NpcLauncher.AddComponent<StoreInformation>();
+				//NpcLauncher.AddComponent<StoreInformation>();
 
 				GameObject myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
 				GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TileInfo {
+public class TileInfo : Loader {
 
 		public int tileType;	//What type of tile I am.
 		public int trueHeight;

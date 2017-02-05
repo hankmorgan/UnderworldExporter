@@ -6,7 +6,7 @@ using System.IO;
 /// <summary>
 /// Data loader for loading binary files.
 /// </summary>
-public static class DataLoader  {
+public class DataLoader :Loader {
 		
 		public static bool ReadStreamFile(String Path, out char[] buffer)
 		{

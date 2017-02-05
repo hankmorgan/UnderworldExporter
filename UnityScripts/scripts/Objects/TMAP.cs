@@ -156,17 +156,18 @@ public class TMAP : object_base {
 
 
 		static void CreateTMAP(GameObject myObj, int textureIndex)
-		{				
+		{		
 			GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			SpriteController.name = myObj.name + "_quad";
 			SpriteController.transform.position = myObj.transform.position;
 			SpriteController.layer=LayerMask.NameToLayer("UWObjects");
 			SpriteController.transform.parent = myObj.transform;
-			SpriteController.transform.Rotate(0f,90f,0f);//Plus 90 to account for initial rotation.
+			SpriteController.transform.localRotation= Quaternion.identity;
 			SpriteController.transform.localScale=new Vector3(1.2f,1.2f,1.0f);
 			SpriteController.transform.localPosition=new Vector3(0.0f,0.6f,0.0f);
 			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
-			mr.material= (Material)Resources.Load (_RES+ "/Materials/tmap/" + _RES + "_" + textureIndex.ToString("d3"));
+			//mr.material= (Material)Resources.Load (_RES+ "/Materials/tmap/" + _RES + "_" + textureIndex.ToString("d3"));
+			mr.material=GameWorldController.instance.MaterialMasterList[textureIndex];//Assumes it is already loaded...
 			BoxCollider bx = myObj.AddComponent<BoxCollider>();
 			bx.size=new Vector3(1.25f,1.25f,0.1f);
 			bx.center=new Vector3(0.0f,0.65f,0.0f);

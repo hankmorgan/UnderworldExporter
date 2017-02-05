@@ -66,6 +66,10 @@ public class MainMenuHud : GuiBase {
 		{
 			if (GameWorldController.instance.AtMainMenu)
 			{
+				//Initialize the open screens from the game files
+				OpScr.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.OPSCR_BYT);
+				CharGen.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.CHARGEN_BYT);
+
 					CursorPosition = new Rect(
 							0.0f,
 							0.0f,
@@ -78,6 +82,7 @@ public class MainMenuHud : GuiBase {
 					Cutscene_Splash ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
 					UWHUD.instance.CutScenesFull.cs=ci;
 					UWHUD.instance.CutScenesFull.Begin();
+					
 			}
 		}
 

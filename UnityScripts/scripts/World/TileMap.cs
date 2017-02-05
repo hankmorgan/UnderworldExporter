@@ -10,7 +10,7 @@ using System.IO;
 /// Used for storing tile properties for use in various other scripts and generating the automap.
 /// Tile properties are read in from a text file called [UW1|UW2|Shock]_tileprops.txt
 /// </summary>
-public class TileMap  {
+public class TileMap : Loader {
 		public const int TILE_SOLID=0;
 		public const int TILE_OPEN= 1;
 		public const int TILE_DIAG_SE= 2;

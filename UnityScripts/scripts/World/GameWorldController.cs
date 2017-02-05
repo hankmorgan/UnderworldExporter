@@ -141,6 +141,17 @@ public class GameWorldController : UWEBase {
 	public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
 	public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
 
+
+	/// <summary>
+	/// Shared palettes for artwork
+	/// </summary>
+	public PaletteLoader palLoader;
+
+	public BytLoader bytloader;
+	public TextureLoader texLoader;
+	public GRLoader SpellIcons;
+	public GRLoader ObjectArt;
+
 	void Awake()
 	{
 		//if(LevelSerializer.IsDeserializing)	return;
@@ -154,6 +165,17 @@ public class GameWorldController : UWEBase {
 		commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
 		weaponprops =new WeaponProps();
 		weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
+
+		palLoader = new PaletteLoader();
+		palLoader.Path=Loader.BasePath + "data\\pals.dat";
+		palLoader.LoadPalettes();
+		bytloader=new BytLoader();
+
+		texLoader=new TextureLoader();
+		ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
+		SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
+			
+
 	}
 
 	void Start () {
@@ -165,10 +187,11 @@ public class GameWorldController : UWEBase {
 		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 		{
 			MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+			MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
 		}
 		//Load up my tile maps
 		//First read in my lev_ark file.
-		if (DataLoader.ReadStreamFile(Lev_Ark_File, out lev_ark))
+		if (DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark))
 		{			
 			for (int i=0; i<=Tilemaps.GetUpperBound(0);i++)
 			{
@@ -181,7 +204,7 @@ public class GameWorldController : UWEBase {
 								//Tilemaps[i].MergeWaterRegions();
 								//Tilemaps[i].MergeLavaRegions();
 				Tilemaps[i].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects
-			}		
+			}
 		}
 
 

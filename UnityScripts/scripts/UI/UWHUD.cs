@@ -110,8 +110,8 @@ public class UWHUD : HUD {
 		public Text RightShoulder_Qty;
 		public Text[] Backpack_Slot_Qty= new Text[8];
 
-
-
+		//Hud elements for run time loading
+		public RawImage mapBackground;
 
 
 		public Text ContextMenu;
@@ -120,11 +120,19 @@ public class UWHUD : HUD {
 		void Awake()
 		{
 			instance=this;
+
+
 		}
 
 
 		void Start()
 		{
+
+				//Init the art work for the hud
+				//Init hud elements
+				mapBackground.texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.BLNKMAP_BYT);
+
+
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();
 		}

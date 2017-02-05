@@ -30,7 +30,9 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 				setSpell= GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon();
 				if (setSpell > -1)
 				{
-					thisSpell.texture= Resources.Load <Texture2D> (_RES +"/HUD/Spells/spells_" + GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+					//thisSpell.texture= Resources.Load <Texture2D> (_RES +"/HUD/Spells/spells_" + GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+
+					thisSpell.texture = GameWorldController.instance.SpellIcons.LoadImageAt(GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon());
 				}
 				else
 				{

@@ -196,7 +196,7 @@ int main()
 	uw1_graphics_file[33] = "Data\\TMFLAT.GR";
 	uw1_graphics_file[34] = "Data\\TMOBJ.GR";
 	uw1_graphics_file[35] = "Data\\WEAPONS.GR";
-	uw1_graphics_file[36] = "Data\\BLNKMAP.BYT";
+	uw1_graphics_file[36] = "Data\\BLNKMAP.BYT";//3
 	uw1_graphics_file[37] = "Data\\CHARGEN.BYT";//palette no 9
 	uw1_graphics_file[38] = "Data\\CONV.BYT";
 	uw1_graphics_file[39] = "Data\\MAIN.BYT";

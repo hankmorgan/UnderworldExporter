@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TileMapRenderer : UWEBase{
+public class TileMapRenderer : Loader{
 
 		const int TILE_SOLID= 0;
 		const int TILE_OPEN= 1;
