@@ -13,7 +13,8 @@ public class ArtLoader : MonoBehaviour {
 	public string pathTexF="C:\\Games\\Uw1\\DATA\\F32.TR";
 	public string pathGR="C:\\Games\\Uw1\\DATA\\OBJECTS.GR";
 	public RawImage rawOut;
-	private Texture2D imageOut;
+	//private Texture2D imageOut;
+	public SpriteRenderer sprt;
 	public int pal;
 	public int textureIndex;
 	public int grIndex;
@@ -21,9 +22,9 @@ public class ArtLoader : MonoBehaviour {
 	char[] texturebufferW;
 	char[] texturebufferF;
 	char[] grBuffer;
-	bool texturesWLoaded;
-	bool texturesFLoaded;
-	bool grBufferLoaded;
+	public bool texturesWLoaded;
+	public bool texturesFLoaded;
+	public bool grBufferLoaded;
 
 	public void Start()
 		{
@@ -35,7 +36,7 @@ public class ArtLoader : MonoBehaviour {
 		char[] buffer;
 		if (DataLoader.ReadStreamFile(path, out buffer))
 			{//data read
-			rawOut.texture= Image(buffer,0,320,200,"rwar",palLoader.Palettes[pal],true);
+			rawOut.texture= Image(buffer,0,320,200,"name_goes_here",palLoader.Palettes[pal],true);
 			}
 		}
 
@@ -55,7 +56,7 @@ public class ArtLoader : MonoBehaviour {
 					}
 				}	
 			long textureOffset = DataLoader.getValAtAddress(texturebufferW, (textureIndex * 4) + 4, 32);
-			rawOut.texture= Image(texturebufferW,textureOffset, 64, 64,"rwar",palLoader.Palettes[0],false);
+			rawOut.texture= Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",palLoader.Palettes[0],false);
 			}
 		else
 			{//Floor textures (to match my list of textures)
@@ -71,7 +72,7 @@ public class ArtLoader : MonoBehaviour {
 					}
 				}
 			long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((textureIndex-210) * 4) + 4, 32);
-			rawOut.texture= Image(texturebufferF,textureOffset, 32, 32,"rwar",palLoader.Palettes[0],false);
+			rawOut.texture= Image(texturebufferF,textureOffset, 32, 32,"name_goes_here",palLoader.Palettes[0],false);
 			}
 		}
 
@@ -103,21 +104,54 @@ public class ArtLoader : MonoBehaviour {
 
 		switch (DataLoader.getValAtAddress(grBuffer, imageOffset, 8))//File type
 			{
+				case 0x4://8 bit uncompressed
+					{
+					imageOffset = imageOffset + 5;
+					sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[0],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+					break;
+					}
 				case 0x8://4 bit run-length
-				{
-				auxPalIndex = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 3, 8);
-				datalen = (int)DataLoader.getValAtAddress(grBuffer,imageOffset+4,16);
-				imgNibbles = new char[BitMapWidth*BitMapHeight*2];
+					{
+					auxPalIndex = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 3, 8);
+					datalen = (int)DataLoader.getValAtAddress(grBuffer,imageOffset+4,16);
+					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
+					imageOffset = imageOffset + 6;	//Start of raw data.
+					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
+					auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",palLoader.Palettes[0],auxPalIndex);
+					outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
+					//rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true);
+					sprt.sprite= Sprite.Create(Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+					break;
+					}
+				case 0xA://4 bit uncompressed//Same as above???
+					{
+					auxPalIndex = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 3, 8);
+					datalen = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 4, 16);
+					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
+					imageOffset = imageOffset + 6;	//Start of raw data.
+					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
+					auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",palLoader.Palettes[0],auxPalIndex);
 
-				imageOffset = imageOffset + 6;	//Start of raw data.
-				copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
-				auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",palLoader.Palettes[0],auxPalIndex);
-				outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
-				rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"rwar",auxpal,false);
-				}
-
+					sprt.sprite= Sprite.Create(Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+					break;				
+					}
 				break;
 		default:
+			//Check to see if the file is panels.gr
+			if (pathGR.ToUpper().EndsWith("PANELS.GR"))
+				{
+				BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
+				BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
+				//if ( _RES== UW2)
+				//	{
+				//	BitMapWidth=79;
+				//	BitMapHeight = 112;
+				//	}
+				imageOffset = DataLoader.getValAtAddress(grBuffer, (grIndex * 4) + 3, 32);
+				sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[0],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+
+				}
+
 			return;
 			}
 
@@ -280,11 +314,8 @@ public class ArtLoader : MonoBehaviour {
 			}
 		image.filterMode=FilterMode.Point;
 		image.alphaIsTransparency=Alpha;
-	
 		image.SetPixels32(imageColors);
 		image.Apply();
 		return image;
 		}
 }
-
-

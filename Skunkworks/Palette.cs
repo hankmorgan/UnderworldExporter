@@ -18,7 +18,7 @@ public class Palette  {
 			{
 			if (pixel != 0)	//Alpha
 				{
-				alpha = 1;
+				alpha = 255;
 				}
 			else
 				{
