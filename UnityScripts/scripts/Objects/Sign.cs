@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class Sign : Readable {
-	private bool spriteReady;
+	//private bool spriteReady;
 	protected override void Start ()
 	{
 		base.Start ();
-				setSprite(this.GetComponentInChildren<SpriteRenderer>(),_RES + "/Sprites/tmobj/tmobj_" + (20 + (objInt().flags & 0x07)));
-		
+		//setSprite(this.GetComponentInChildren<SpriteRenderer>(),_RES + "/Sprites/tmobj/tmobj_" + (20 + (objInt().flags & 0x07)));
+		setSpriteTMOBJ(this.GetComponentInChildren<SpriteRenderer>(),(20 + (objInt().flags & 0x07)));
 	}
 
 

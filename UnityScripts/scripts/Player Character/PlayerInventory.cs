@@ -68,8 +68,7 @@ public class PlayerInventory : UWEBase {
 		}
 		UWHUD.instance.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 		if (playerUW.isFemale)
-		{
-				
+		{				
 			UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+playerUW.Body).ToString("0000"));		
 		}
 		else

@@ -114,9 +114,14 @@ public class Armour : Equipment {
 		GameWorldController.instance.playerUW.playerInventory.Refresh(objInt().inventorySlot);
 	}
 
-	public override string getEquipString ()
+	//public override string getEquipString ()
+	//{
+	//	return ArmourEquipString;
+	//}
+		//TODO:return the armour
+	public override Sprite GetEquipDisplay ()
 	{
-		return ArmourEquipString;
+		return ObjectInteraction.tc.RequestSprite(ArmourEquipString);
 	}
 
 	public override bool EquipEvent (int slotNo)

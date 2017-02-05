@@ -575,9 +575,14 @@ public class object_base : UWEBase {
 		/// Gets the sprite name that is displayed when the object is equipped in inventory
 		/// </summary>
 		/// <returns>The equip string.</returns>
-		public virtual string getEquipString()
+	//	public virtual string getEquipString()
+		//{
+		//	return GameWorldController.instance.objectMaster.particle[objInt().item_id];
+		//}
+
+		public virtual Sprite GetEquipDisplay()
 		{
-			return GameWorldController.instance.objectMaster.particle[objInt().item_id];
+			return objInt().GetInventoryDisplay();		
 		}
 
 
@@ -708,20 +713,49 @@ public class object_base : UWEBase {
 		}
 
 
-		public bool setSprite(SpriteRenderer sprt, string SpriteName)
+		/// <summary>
+		/// Requests a sprite from tmOBJ
+		/// </summary>
+		/// <returns><c>true</c>, if sprite was set, <c>false</c> otherwise.</returns>
+		/// <param name="sprt">Sprt.</param>
+		/// <param name="SpriteIndex">Sprite index.</param>
+		public bool setSpriteTMOBJ(SpriteRenderer sprt, int SpriteIndex)
 		{
 				if (sprt==null)
 				{
 						return false;
 				}
-				if (SpriteName!="")
+				if (SpriteIndex!=-1)
 				{
-						sprt.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
-						//currentSpriteName=SpriteName;
-						objInt().animationStarted=true;
-						return true;
+					//sprt.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
+					sprt.sprite = GameWorldController.instance.TmObjArt.RequestSprite(SpriteIndex);
+					//currentSpriteName=SpriteName;
+					objInt().animationStarted=true;
+					return true;
 				}
 				return false;
 		}
+
+		/// <summary>
+		/// Sets a sprite from TMFLat
+		/// </summary>
+		/// <returns><c>true</c>, if sprite TMFLA was set, <c>false</c> otherwise.</returns>
+		/// <param name="sprt">Sprt.</param>
+		/// <param name="SpriteIndex">Sprite index.</param>
+		public bool setSpriteTMFLAT(SpriteRenderer sprt, int SpriteIndex)
+		{
+			if (sprt==null)
+			{
+				return false;
+			}
+			if (SpriteIndex!=-1)
+			{
+				sprt.sprite = GameWorldController.instance.TmFlatArt.RequestSprite(SpriteIndex);
+				objInt().animationStarted=true;
+				return true;
+			}
+			return false;
+		}
+
 
 }

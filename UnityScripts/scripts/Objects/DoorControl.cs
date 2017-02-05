@@ -615,7 +615,7 @@ public class DoorControl : object_base {
 		{
 			int doorIndex=0;
 				int textureIndex=0;
-				string DoorTexturePath="";
+				//string DoorTexturePath="";
 			//Try and match up the door item id with a texture.
 			if ((objInt.item_id>=320) && (objInt.item_id<=325))
 				{//320>>58
@@ -631,14 +631,14 @@ public class DoorControl : object_base {
 				case ObjectInteraction.HIDDENDOOR:
 						{
 							textureIndex = GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
-							DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
+							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
 							break;	
 						}
 				case ObjectInteraction.DOOR:
 				default:
 					{
 						textureIndex= GameWorldController.instance.currentTileMap().texture_map[doorIndex];
-						DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
+						//DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
 						break;
 					}					
 				}
@@ -666,7 +666,15 @@ public class DoorControl : object_base {
 							newObj.name=myObj.name + "_Model";
 							newObj.transform.parent=myObj.transform;
 							newObj.transform.position = myObj.transform.position;
-							newObj.GetComponent<Renderer>().material=(Material)Resources.Load(DoorTexturePath);
+								if  (GameWorldController.instance.objectMaster.type[objInt.item_id] == ObjectInteraction.HIDDENDOOR)
+								{
+									newObj.GetComponent<Renderer>().material=GameWorldController.instance.MaterialMasterList[textureIndex]; 	
+								}
+								else
+								{
+									newObj.GetComponent<Renderer>().material=GameWorldController.instance.MaterialDoors[textureIndex];
+								}
+							//
 							newObj.GetComponent<MeshCollider>().enabled=false;
 							MeshCollider mc = myObj.AddComponent<MeshCollider>();
 							mc.isTrigger=false;

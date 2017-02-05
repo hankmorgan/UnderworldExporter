@@ -258,13 +258,15 @@ public class ObjectInteraction : UWEBase {
 
 		public Sprite GetEquipDisplay()
 		{
-			return  tc.RequestSprite(GetEquipString());
+				return this.GetComponent<object_base>().GetEquipDisplay();
+				//return GameWorldController.instance.ObjectArt.RequestSprite(InvDisplayIndex);
+			//return  tc.RequestSprite(GetEquipString());
 		}
 
-		public string GetEquipString()
+		/*public string GetEquipString()
 		{
 			return this.GetComponent<object_base>().getEquipString();
-		}
+		}*/
 
 		public Sprite GetWorldDisplay()
 		{

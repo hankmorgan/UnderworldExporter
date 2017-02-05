@@ -239,24 +239,24 @@ public class ButtonHandler : object_base {
 		return true;
 	}
 
-
+				/*
 	public void setSprite(string SpriteName)
 	{
 		ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
 		objInt().animationStarted=true;
-	}
+	}*/
 
 	public void setSprite(int SpriteID)
 	{
 			//UW1/Sprites/tmflat/tmflat_00%02d
-		setSprite ( _RES+"/sprites/tmflat/tmflat_" + SpriteID.ToString("d4"));//Loads the sprite.;//Assigns the sprite to the object.			
+		setSpriteTMFLAT ( this.GetComponentInChildren<SpriteRenderer>(), SpriteID);//Loads the sprite.;//Assigns the sprite to the object.			
 		currentItemID=SpriteID;
 	}
 
 
 	public void setRotarySprite(int spriteId)
 	{
-		setSprite (  _RES+"/sprites/tmobj/tmobj_" + RotaryImageIDs[spriteId].ToString("d2") );
+		setSpriteTMOBJ (this.GetComponentInChildren<SpriteRenderer>(), RotaryImageIDs[spriteId] );
 		currentItemID=spriteId;
 	}
 

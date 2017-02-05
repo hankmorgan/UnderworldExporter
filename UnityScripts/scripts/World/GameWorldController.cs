@@ -147,6 +147,11 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public Material[] MaterialMasterList=new Material[260];
 
+		/// <summary>
+		/// The material for doors
+		/// </summary>
+		public Material[] MaterialDoors=new Material[12];
+
 	/// <summary>
 	/// Gameobject to load the objects at
 	/// </summary>
@@ -183,6 +188,21 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 	public GRLoader ObjectArt;
 
+		/// <summary>
+		/// The door art.
+		/// </summary>
+	public GRLoader DoorArt;
+
+	/// <summary>
+	/// The tm object art.
+	/// </summary>
+	public GRLoader TmObjArt;
+
+	/// <summary>
+	/// The tm flat art.
+	/// </summary>
+	public GRLoader TmFlatArt;
+
 	void Awake()
 	{
 		instance=this;
@@ -204,6 +224,9 @@ public class GameWorldController : UWEBase {
 		texLoader=new TextureLoader();
 		ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
 		SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
+		DoorArt=new GRLoader(GRLoader.DOORS_GR);
+		TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
+		TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
 	}
 
 	void Start () {
@@ -213,9 +236,17 @@ public class GameWorldController : UWEBase {
 		//Load up my map materials
 		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 		{
-			MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+			MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
 			MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
 		}
+
+		//Load up my door texture
+		for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
+		{
+			MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
+			MaterialDoors[i].mainTexture= DoorArt.LoadImageAt(i);
+		}
+
 		//Load up my tile maps
 		//First read in my lev_ark file.
 		if (DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark))

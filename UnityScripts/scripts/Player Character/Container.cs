@@ -613,10 +613,10 @@ public class Container : object_base {
 				return count;
 		}
 
-	public override string getEquipString ()
+	/*public override string getEquipString ()
 	{//Assumes no container is generated as an opened one.
 		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
-	}
+	}*/
 
 	public override string UseVerb ()
 	{
