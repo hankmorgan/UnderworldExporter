@@ -967,6 +967,7 @@ public class NPC : object_base {
 			launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
 
 			launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+			GameWorldController.MoveToWorld(launchedItem);
 			launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 
 			launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;

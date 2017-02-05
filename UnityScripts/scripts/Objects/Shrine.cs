@@ -242,6 +242,7 @@ public class Shrine : object_base {
 			//create the key of truth.
 			ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
 			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+			GameWorldController.MoveToInventory(myObjInt.gameObject);
 			GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
 			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

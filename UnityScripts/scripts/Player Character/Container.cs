@@ -318,6 +318,14 @@ public class Container : object_base {
 				if (item != null)
 				{
 					item.transform.parent=Parent;
+					if (Parent == GameWorldController.instance.LevelMarker())
+					{
+						GameWorldController.MoveToWorld(item);
+					}
+					else
+					{
+						GameWorldController.MoveToInventory(item);
+					}
 					if (item.GetComponent<Container>()!=null)
 					{
 						Container.SetItemsParent(item.GetComponent<Container>(),Parent);
@@ -639,6 +647,11 @@ public class Container : object_base {
 		/// <param name="objInt">Object int.</param>
 		public static void PopulateContainer(Container cn, ObjectInteraction objInt)
 		{
+				if (cn.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index==263)
+				{
+						Debug.Log("HER");
+				}
+
 				cn.ObjectsAccepted=-1;//For now default to accept all
 				cn.Capacity=40;
 				for (int i =0; i<cn.MaxCapacity();i++)
@@ -653,13 +666,11 @@ public class Container : object_base {
 						if (ObjectLoader.GetItemTypeAt(objInt.link) !=ObjectInteraction.LOCK)
 						{
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
-							//fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
 						}
 						while (tmpobj.next != 0)
 						{
 							tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next);//objList[tmpobj.next];
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
-								//fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
 						}
 				}
 

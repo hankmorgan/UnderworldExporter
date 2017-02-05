@@ -63,6 +63,7 @@ public class trap_base : object_base {
 		int TriggerRepeat = (objInt().flags>>1) & 0x1;
 		if (TriggerRepeat==0)
 		{
+			this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
 			Destroy (this.gameObject);
 		}
 	}

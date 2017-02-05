@@ -323,7 +323,10 @@ public class WindowDetectUW : WindowDetect {
 												Container.SetItemsPosition (droppedItem.GetComponent<Container>(),GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position);
 										}
 										droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
+	
 										droppedItem.transform.parent = GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(droppedItem);
+
 										GameWorldController.UnFreezeMovement(droppedItem);
 										if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.4f)
 										{//throw if above a certain point in the view port.

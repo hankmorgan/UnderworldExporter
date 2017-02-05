@@ -164,11 +164,11 @@ public class GRLoader : ArtLoader {
 				{
 					BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
 					BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
-					//if ( _RES== UW2)
-					//	{
-					//	BitMapWidth=79;
-					//	BitMapHeight = 112;
-					//	}
+					if ( _RES== "UW2")
+						{
+						BitMapWidth=79;
+						BitMapHeight = 112;
+						}
 					imageOffset = DataLoader.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
 					return Image(ImageFileData,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],true);
 				}

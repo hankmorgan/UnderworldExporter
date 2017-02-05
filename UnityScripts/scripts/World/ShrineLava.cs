@@ -92,6 +92,7 @@ public class ShrineLava : UWEBase {
 				GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
 				GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
 				newObj.transform.parent=GameWorldController.instance.LevelMarker();
+				GameWorldController.MoveToWorld(newObj);
 				newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
 				Quaternion playerRot = GameWorldController.instance.playerUW.transform.rotation;
 				Quaternion EndRot = new Quaternion(playerRot.x,playerRot.y, playerRot.z+1.2f,playerRot.w);

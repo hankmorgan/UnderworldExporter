@@ -102,6 +102,7 @@ public class Instrument : object_base {
 						//create the cup of wonder.
 						ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
 						myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+						GameWorldController.MoveToInventory(myObjInt.gameObject);
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
 						UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -109,6 +110,7 @@ public class Instrument : object_base {
 						CreatedCup=true;
 						//An object appears in the air and falls into your hands
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
+
 					}
 				}
 			}

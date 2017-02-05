@@ -532,10 +532,6 @@ public class UWCharacter : Character {
 	{
 		//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
-		if (InvMarker==null)
-		{
-			InvMarker=GameWorldController.instance.InventoryMarker;//InvMarker=GameObject.Find ("InventoryMarker");
-		}
 		if (pInv.ObjectInHand=="")//Player is not holding anything.
 		{//Find the object within the pickup range.
 			Ray ray ;

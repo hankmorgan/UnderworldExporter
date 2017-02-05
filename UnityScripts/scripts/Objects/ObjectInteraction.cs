@@ -11,7 +11,10 @@ using RAIN.Navigation;
 /// Use for common object actions. Weight, qty, type, how to display the object. 
 /// </summary>
 public class ObjectInteraction : UWEBase {
-
+		/// <summary>
+		/// The start position of the object when it became awake.
+		/// </summary>
+		private Vector3 startPos;
 		//public AudioSource aud;
 		public static bool PlaySoundEffects=true;
 
@@ -218,6 +221,7 @@ public class ObjectInteraction : UWEBase {
 			isAnimated=false;
 			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
+			startPos=this.transform.position;
 		}
 
 		void Update()
@@ -635,6 +639,7 @@ public class ObjectInteraction : UWEBase {
 					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				}
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
+				objectloaderinfo.InUseFlag=0;//Free up the slot
 				Destroy (this.gameObject);
 			}
 			else
@@ -1596,6 +1601,54 @@ public class ObjectInteraction : UWEBase {
 
 
 
+		public void UpdatePosition()
+		{
+			if (ObjectLoader.isStatic(objectloaderinfo))	
+			{
+					return;
+			}
+			float dist =Vector3.Distance(this.transform.position,startPos);
+			if (Vector3.Distance(this.transform.position,startPos)<=0.2f)
+				{//No movement. Just update heading.
+					heading= Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
+				}
+			else
+			{
+				float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
+				//Updates the tilex & tileY,
+				tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
+				tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
+				if (tileX>=64)
+				{
+						tileX=99;
+				}
+				if (tileY>=64)
+				{
+						tileY=99;
+				}
+				//updates the x,y and zpos
+				zpos =(int)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+				if ((tileX<99) && (tileY<99))
+				{//Update x & y
+					//Remove corner
+					float offX = (this.transform.position.x) - ((float)(tileX*1.2f));
+					x = (int)(7f * (offX/1.2f));
+
+					float offY = (this.transform.position.z) - ((float)(tileY*1.2f));
+					y = (int)(7f * (offY/1.2f));
+				}
+				//updates the heading.
+				heading= Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
+
+			}
+				objectloaderinfo.heading=heading;
+				objectloaderinfo.x=x;
+				objectloaderinfo.y=y;
+				objectloaderinfo.tileX=tileX;
+				objectloaderinfo.tileY=tileY;
+			
+			startPos=this.transform.position;
+		}
 
 
 
@@ -1889,11 +1942,6 @@ public class ObjectInteraction : UWEBase {
 				}
 				return objInt;
 		}
-
-
-
-
-
 
 
 

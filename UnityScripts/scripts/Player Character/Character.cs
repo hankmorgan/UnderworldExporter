@@ -18,7 +18,7 @@ public class Character : UWEBase {
 	public static int DefaultInteractionMode=InteractionModeUse;
 
 	//The storage location for container items.
-	public static GameObject InvMarker;
+	//public static GameObject GameWorldController.instance.InventoryMarker;
 
 	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;
@@ -180,10 +180,6 @@ public class Character : UWEBase {
 	public virtual void PickupMode (int ptrId)
 	{//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
-		if (InvMarker==null)
-		{
-			InvMarker=GameWorldController.instance.InventoryMarker;//GameObject.Find ("InventoryMarker");
-		}
 		if (pInv.ObjectInHand=="")//Player is not holding anything.
 		{//Find the object within the pickup range.
 			Ray ray ;
@@ -228,8 +224,8 @@ public class Character : UWEBase {
 		if (objPicked.GetComponent<Container>()!=null)
 		{
 			Container.SetPickedUpFlag(objPicked.GetComponent<Container>(),true);
-			Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
-			Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
+			Container.SetItemsParent(objPicked.GetComponent<Container>(),GameWorldController.instance.InventoryMarker.transform);
+			Container.SetItemsPosition (objPicked.GetComponent<Container>(),GameWorldController.instance.InventoryMarker.transform.position);
 		}
 		UWHUD.instance.CursorIcon=objPicked.GetInventoryDisplay().texture;
 		pInv.ObjectInHand=objPicked.transform.name;
@@ -237,35 +233,13 @@ public class Character : UWEBase {
 		{								
 			GameWorldController.FreezeMovement(objPicked.gameObject);
 		}
-		//Clone the object into the inventory
-		if (WindowDetectUW.UsingRoomManager==true)
-		{
-			GameObject objClone = Instantiate(objPicked.gameObject);
-			objClone.name=objPicked.name;
-			objPicked.name=objPicked.name+ "_destroyed";
-			//objPicked.transform.DestroyChildren();
-			DestroyImmediate(objPicked.gameObject);
 
-			objClone.transform.position = InvMarker.transform.position;
-			objClone.transform.parent=InvMarker.transform;
-			objClone.GetComponent<ObjectInteraction>().Pickup();
-			/*
-			UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
-			if (uid!=null)
-			{
-					//uid.Id=uid.GetInstanceID().ToString();		
-			}
-			*/
-			objClone.GetComponent<ObjectInteraction>().Pickup();
-			return objClone.GetComponent<ObjectInteraction>();	
-		}
-		else
-		{
-			objPicked.transform.position=InvMarker.transform.position;
-			objPicked.transform.parent=InvMarker.transform;
-			objPicked.Pickup();
-			return objPicked;
-		}
+		objPicked.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
+		objPicked.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+		GameWorldController.MoveToInventory(objPicked);
+		objPicked.Pickup();
+		return objPicked;
+
 	}
 
 

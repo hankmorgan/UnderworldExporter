@@ -372,13 +372,38 @@ public class ObjectLoader : Loader {
 		}
 
 
-		bool isContainer(ObjectLoaderInfo currobj)
+		public static bool isContainer(ObjectLoaderInfo currobj)
 		{
 				return  ((GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CONTAINER) || (GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CORPSE));
 		}
 
+		public static  bool isStatic(ObjectLoaderInfo currobj)
+		{//Objects that will never move
 
-		bool isAlwaysInUse(ObjectLoaderInfo currobj)
+				if (isTrap(currobj)||isTrigger(currobj))
+				{
+						return true;	
+				}
+				switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+				{	
+				case ObjectInteraction.TMAP_CLIP:
+				case ObjectInteraction.TMAP_SOLID:
+				case ObjectInteraction.DOOR:
+				case ObjectInteraction.HIDDENDOOR:
+				case ObjectInteraction.PORTCULLIS:
+				case ObjectInteraction.GRAVE:
+				case ObjectInteraction.FOUNTAIN:
+				case ObjectInteraction.BUTTON:
+				case ObjectInteraction.PILLAR:
+				case ObjectInteraction.BRIDGE:
+						return true;
+				default:
+						return false;							
+				}
+		}
+
+
+		public static  bool isAlwaysInUse(ObjectLoaderInfo currobj)
 		{//Objects that will always be generated.
 			switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
 			{	
@@ -389,7 +414,7 @@ public class ObjectLoader : Loader {
 			}
 		}
 
-		bool isTrigger(ObjectLoaderInfo currobj)
+		public static  bool isTrigger(ObjectLoaderInfo currobj)
 		{//Tells if the object is a trigger that can set of a trap.
 				switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
 				{
@@ -411,7 +436,7 @@ public class ObjectLoader : Loader {
 		}
 
 
-		bool isTrap(ObjectLoaderInfo currobj)
+		public static bool isTrap(ObjectLoaderInfo currobj)
 		{
 				switch (GameWorldController.instance.objectMaster.type[currobj.item_id] )
 				{
@@ -749,7 +774,7 @@ public class ObjectLoader : Loader {
 			//Init the objects
 			//instance.ObjectInteractions=new ObjectInteraction[1600];
 
-			for (int i=0;i<instance.objInfo.GetUpperBound(0);i++)
+			for (int i=0;i<=instance.objInfo.GetUpperBound(0);i++)
 			{
 			if (instance.objInfo[i]!=null)
 				{
@@ -808,6 +833,282 @@ public class ObjectLoader : Loader {
 			{
 				return null;
 			}
+		}
+
+		/// <summary>
+		/// Creates the new object list with just the items in the object marker.
+		/// </summary>
+		public static void UpdateObjectList()
+		{
+			//Update indices to match the array.
+
+			for (int i =0; i<=	GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
+			{
+				GameWorldController.instance.CurrentObjectList().objInfo[i].index=i;
+			}
+
+			//Clear the tilemaps indexobjectlist
+			for (int x=0;x<64;x++){
+				for (int y=0;y<64;y++){
+					GameWorldController.instance.currentTileMap().Tiles[x,y].indexObjectList=0;
+				}
+			}
+			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
+			{
+				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+				{
+					ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
+					//Copy back the info stored on the object interaction to the lists.
+					objInt.UpdatePosition();
+					if (objInt.objectloaderinfo.InUseFlag==1)
+	
+					GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);					
+
+					
+					if ((objInt.tileX!=99) && (objInt.tileY!=99))
+					{
+						int next =GetTileIndexNext(objInt.tileX,objInt.tileY);
+						if (next==0)
+						{
+							GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].indexObjectList=objInt.objectloaderinfo.index;	
+						}
+						else
+						{//Change the item at that index to be my object
+							objInt.next=next;
+							objInt.objectloaderinfo.next= next;	
+						}
+					}
+					else
+					{//This is an off map item. It should not change.
+							
+					}
+					if (t.gameObject.GetComponent<Container>())
+						{//Rebuild container chain
+							linkContainerContents(t.gameObject.GetComponent<Container>());
+						}
+				}
+			}
+		}
+
+
+		static void linkContainerContents(Container cn)
+		{
+				if (cn.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index==263)
+				{
+						Debug.Log("HER");
+				}
+
+			int itemCounter=0;
+			ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
+			int PrevIndex=cnObjInt.objectloaderinfo.index;
+			for (int i=0; i<cn.GetCapacity();i++)
+			{
+				GameObject obj= cn.GetGameObjectAt(i);	
+				if(obj != null)
+				{
+					ObjectInteraction itemObjInt= obj.GetComponent<ObjectInteraction>();
+					if (itemCounter==0)
+					{//First item link to the container
+						cnObjInt.link=  itemObjInt.objectloaderinfo.index;		
+						cnObjInt.objectloaderinfo.link= itemObjInt.objectloaderinfo.index;	
+						PrevIndex=itemObjInt.objectloaderinfo.index;
+					}
+					else
+					{//next item next onto previous item.
+						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
+						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
+						itemObjInt.next=0;//end for now.
+						itemObjInt.objectloaderinfo.next=0;
+						PrevIndex=itemObjInt.objectloaderinfo.index;
+					}
+					itemCounter++;
+					
+					//If a container then link its contents as well
+					if (obj.GetComponent<Container>())
+					{//Rebuild container chain
+						linkContainerContents(obj.GetComponent<Container>());
+					}
+				}
+
+			}
+		}
+
+		/// <summary>
+		/// Gets the object index currently at the tile.
+		/// </summary>
+		/// <returns>The tile index next.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public static int GetTileIndexNext(int tileX, int tileY)
+		{
+				return	GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].indexObjectList;
+		}
+
+
+		/// <summary>
+		/// Assigns the object to the object list and returns the index it is at.
+		/// </summary>
+		/// <returns>The object to list.</returns>
+		/// <param name="objInt">Object int.</param>
+		public static int AssignObjectToList(ref ObjectInteraction objInt)
+		{
+				int index;
+				int startindex=1;
+				//Check if objINt is an npc
+				if ((objInt.GetComponent<NPC>()==null))
+				{
+					startindex= 256;
+				}
+				//find a free slot in the list.
+				if(GameWorldController.instance.CurrentObjectList().getFreeSlot(startindex, out index))
+				{		
+					//Assign and return the reference
+					objInt.objectloaderinfo= GameWorldController.instance.CurrentObjectList().objInfo[index];
+					objInt.objectloaderinfo.InUseFlag=1;
+					objInt.objectloaderinfo.index=index;
+						Debug.Log("Assigning "+ objInt.name + " to index " + index);
+					if ((objInt.GetComponent<Container>()) || (objInt.GetComponent<NPC>()))
+						{//Put the container items back into the list as well
+								Container cn = objInt.GetComponent<Container>();
+								int itemCounter=0;
+								int prevLink=index;
+								for (int i=0; i<=cn.GetCapacity();i++)
+								{
+									GameObject obj= cn.GetGameObjectAt(i);
+									if(obj != null)
+									{
+										ObjectInteraction objI=obj.GetComponent<ObjectInteraction>();
+										int newlink = AssignObjectToList(ref objI);
+										if(itemCounter==0)
+										{//First object											
+											objInt.link=newlink;
+											objInt.objectloaderinfo.link=newlink;
+											prevLink= newlink;
+										}
+										else
+										{														
+											GameWorldController.instance.CurrentObjectList().objInfo[prevLink].next=newlink;
+											GameWorldController.instance.CurrentObjectList().objInfo[prevLink].instance.next=newlink;
+											prevLink= newlink;											
+											
+										}
+										objI.objectloaderinfo.next=0;//init
+										objI.next=0;
+										itemCounter++;
+									}
+								}
+								if(itemCounter==0)
+								{
+									objInt.link=0;//No contents
+								}
+						}
+					GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);
+				}	
+				return index;
+		}
+
+		/// <summary>
+		/// Gets the free slot available to use starting from the specified index.
+		/// </summary>
+		/// <returns>The free slot.</returns>
+		bool getFreeSlot(int startIndex, out int index)
+		{
+			for (int i=startIndex; i<=objInfo.GetUpperBound(0);i++)
+			{
+				if(objInfo[i].InUseFlag==0)	
+				{
+					index=i;
+					return true;
+				}
+			}
+			index=-1;
+			return false;
+		}
+		
+
+		void CopyDataToList(ObjectInteraction objInt, ref ObjectLoaderInfo info )
+		{
+			info.item_id= objInt.item_id;
+			info.flags= objInt.flags;	//9-12
+			info.enchantment= objInt.enchantment;	//12
+			info.doordir= objInt.doordir;	//13
+			info.invis= objInt.invis;		//14
+			if (objInt.isQuant)
+			{
+				info.is_quant= 1;	//15						
+			}
+			else
+			{
+				info.is_quant= 0;	//15	
+			}
+
+
+			info.texture= objInt.texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
+			//(gravestone, picture, lever, switch, shelf, bridge, ..)
+
+			info.zpos= objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+			info.heading= objInt.heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+			info.x= objInt.x; //   10-12   3   "ypos"      Object Y position (0-7)
+			info.y= objInt.y; //  13-15   3   "xpos"      Object X position (0-7)
+			//0004 quality / chain
+			info.quality= objInt.quality;	//;     0- 5   6   "quality"   Quality
+			info.next= objInt.next; //    6-15   10  "next"      Index of next object in chain
+
+			//0006 link / special
+			//     0- 5   6   "owner"     Owner / special
+
+			info.owner= objInt.owner;	//Also special
+			//     6-15   10  (*)         Quantity / special link / special property
+
+			info.link= objInt.link	;	//also quantity	
+			
+			info.tileX=objInt.tileX;
+			info.tileY=objInt.tileY;
+
+				//Npcs specific
+				if (info.index<256)
+				{
+						NPC npc = objInt.GetComponent<NPC>();
+						if (npc!=null)
+						{
+								//The values stored in the NPC info area (19 bytes) contain infos for
+								//critters unique to each object.
+								//0008 
+								info.npc_hp=npc.npc_hp;	//0-7
+								//0009	
+								//blank?
+								//000a   
+								//blank?
+								//000b   Int16      
+								info.npc_goal=(short)npc.npc_goal;	//0-3
+								info.npc_gtarg=(short)npc.npc_gtarg;    //4-11   
+								//000d        
+								info.npc_level=(short)npc.npc_level;	//0-3
+								info.npc_talkedto=(short)npc.npc_talkedto;   //13     
+								info.npc_attitude=(short)npc.npc_attitude;	//14-15
+								//000f    
+								//info.npc_height=npc.npc_height ;//6- 12 ?
+								//0016  
+								info.npc_yhome=(short)npc.npc_yhome;	// 4-9    
+								info.npc_xhome=(short)npc.npc_xhome; // 10-15  
+								//0018   0010   Int8   0-4:   npc_heading?
+								//info.npc_heading=npc.npc_heading;
+								//   0019      Int8   0-6:   
+								info.npc_hunger=(short)npc.npc_hunger; //(?)
+								//001a   0012   Int8          
+								info.npc_whoami=(short)npc.npc_whoami;
+
+								info.npc_health=(short)npc.npc_health;
+								info.npc_arms=(short)npc.npc_arms;
+								info.npc_power = (short)npc.npc_power;
+								info.npc_name = (short)npc.npc_name;		
+						}
+				}
+
+
+			//Match the two instances
+			info.instance=objInt;
+			objInt.objectloaderinfo=info;
 		}
 
 }

@@ -243,6 +243,7 @@ public class Conversation : GuiBase {
 				{
 					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 					demanded.transform.parent=GameWorldController.instance.LevelMarker();
+					GameWorldController.MoveToWorld(demanded);
 					demanded.transform.position=npc.transform.position;
 					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 					npcSlot.clear();
@@ -869,6 +870,7 @@ public class Conversation : GuiBase {
 					if (demanded!=null)
 					{
 						demanded.transform.parent=GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(demanded);
 						demanded.transform.position=npc.transform.position;
 						SomethingGiven=true;
 					}
@@ -948,6 +950,7 @@ public class Conversation : GuiBase {
 						{
 							playerHasSpace=0;
 							demanded.transform.parent=GameWorldController.instance.LevelMarker();
+							GameWorldController.MoveToWorld(demanded);
 							demanded.transform.position=npc.transform.position;
 							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
 						}
@@ -1071,6 +1074,7 @@ public class Conversation : GuiBase {
 				{
 					GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 					demanded.transform.parent=GameWorldController.instance.LevelMarker();
+					GameWorldController.MoveToWorld(demanded);
 					demanded.transform.position=npc.transform.position;
 					pcSlot.clear();
 				}
@@ -1101,6 +1105,7 @@ public class Conversation : GuiBase {
 				cn.AddItemToContainer (npcSlot.objectInSlot);
 				GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 				demanded.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+				GameWorldController.MoveToInventory(demanded);
 				demanded.transform.position = Vector3.zero;
 				npcSlot.clear ();
 				GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
@@ -1110,6 +1115,7 @@ public class Conversation : GuiBase {
 				GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 				demanded.transform.parent = GameWorldController.instance.LevelMarker ();
 				demanded.transform.position = npc.transform.position;
+				GameWorldController.MoveToWorld(demanded);
 				npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
 				npcSlot.clear ();
 			}
@@ -1132,6 +1138,7 @@ public class Conversation : GuiBase {
 				//Move to the inventory room
 				GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 				demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+				GameWorldController.MoveToWorld(demanded);
 				demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
 				pcSlot.clear ();
 			}
@@ -1165,6 +1172,7 @@ public class Conversation : GuiBase {
 					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 					demanded.transform.parent = GameWorldController.instance.LevelMarker ();
 					demanded.transform.position = npc.transform.position;
+					GameWorldController.MoveToWorld(demanded);
 					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
 					npcSlot.clear ();
 				}
@@ -1695,6 +1703,7 @@ public class Conversation : GuiBase {
 			{
 				playerHasSpace=0;
 				objInslot.transform.parent=GameWorldController.instance.LevelMarker();
+				GameWorldController.MoveToWorld(objInslot);
 				objInslot.transform.position=npc.transform.position;
 				npc.GetComponent<Container>().RemoveItemFromContainer(objInslot.name);
 			}
@@ -2114,6 +2123,7 @@ public class Conversation : GuiBase {
 			//                                     );
 			obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
 			obj.transform.parent=GameWorldController.instance.LevelMarker();
+			GameWorldController.MoveToWorld(obj);
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
 			UWHUD.instance.npcTrade[invSlot].clear();
 		}

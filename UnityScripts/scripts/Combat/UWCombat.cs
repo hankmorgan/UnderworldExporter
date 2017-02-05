@@ -398,6 +398,7 @@ public class UWCombat : Combat {
 					currentAmmo.consumeObject();//Reduce by one.
 				}
 				launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+				GameWorldController.MoveToWorld(launchedItem);
 				launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 
 				launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;

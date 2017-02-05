@@ -924,6 +924,7 @@ public class Magic : UWEBase {
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
 						myObj.transform.position = ray.GetPoint(dropRange);
 						myObj.transform.parent=GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(myObj);
 						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
@@ -969,6 +970,7 @@ public class Magic : UWEBase {
 						myObj.tag="NPCs";
 						myObj.transform.position = ray.GetPoint(dropRange);
 						myObj.transform.parent = GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(myObj);
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
@@ -1539,6 +1541,7 @@ public class Magic : UWEBase {
 								myObj.transform.position=pos;
 								myObj.transform.Rotate(-90,0,0);
 								myObj.transform.parent=GameWorldController.instance.LevelMarker();
+								GameWorldController.MoveToWorld(myObj);
 								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
 								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
@@ -1797,6 +1800,7 @@ public class Magic : UWEBase {
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
 				myObj.transform.parent=GameWorldController.instance.LevelMarker();
+				GameWorldController.MoveToWorld(myObj);
 				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_393",true);
 				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
@@ -2492,6 +2496,7 @@ public class Magic : UWEBase {
 				projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 				projectile.name = "MagicProjectile_" + SummonCount++;
 				projectile.transform.parent=GameWorldController.instance.LevelMarker();
+				GameWorldController.MoveToWorld(projectile);
 				ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 				mgp.spellprop=spellprop;

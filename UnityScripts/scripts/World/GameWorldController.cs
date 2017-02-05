@@ -15,48 +15,49 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// Enables texture animation effects
 		/// </summary>
-
 	public bool EnableTextureAnimation;
 
-		/// <summary>
-		/// Array of game objects containing the nav meshes
-		/// </summary>
-	//public GameObject[] NavMeshes=new GameObject[9];
-		/// <summary>
-		/// Array of game objects containing the level objects
-		/// </summary>
-	//public GameObject[] LevelObjects =new GameObject[9];
-	//public static TextureController tc;
 
+		/// <summary>
+		/// The level model parent object
+		/// </summary>
 	public GameObject LevelModel;
 	
 		/// <summary>
 		/// The instance of this class
 		/// </summary>
 	public static GameWorldController instance;
+
 		/// <summary>
 		/// What level number we are currently on.
-		/// </summary>
-
+		/// </summary>	
 	public int LevelNo;
 
+		/// <summary>
+		/// What level the player starts on in a quick start
+		/// </summary>
 		public int startLevel=0;
+		/// <summary>
+		/// What start position for the player.
+		/// </summary>
 		public Vector3 StartPos=new Vector3(38f, 4f, 2.7f);
 
-		private static bool UpdateLevel;
 
 	/// <summary>
-	/// Array of cycled game palettes for animatione effects.
+	/// Array of cycled game palettes for animation effects.
 	/// </summary>
 	public Texture2D[] paletteArray= new Texture2D[8];
+
 	/// <summary>
 	/// The index of the palette currently in use
 	/// </summary>
 	public int paletteIndex=0;
+
 	/// <summary>
 	/// The palette index when going in reverse.
 	/// </summary>
 	public int paletteIndexReverse=0;
+
 	/// <summary>
 	/// The Variables for the check/set variable traps
 	/// </summary>
@@ -88,11 +89,13 @@ public class GameWorldController : UWEBase {
 	/// The game object that picked up items are parented to.
 	/// </summary>
 	public GameObject InventoryMarker;
+
 	/// <summary>
 	/// The game name.
 	/// </summary>
 	/// Value is passed to UWEBase and used in all resource file loads
 	public string game;
+
 	//public string UI_Name;
 	/// <summary>
 	/// The object master class for storing and reading object properties in an external file
@@ -129,13 +132,29 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public bool AtMainMenu;
 
+	/// <summary>
+	/// Path to lev.ark file to load
+	/// </summary>
 	public string Lev_Ark_File;
+
+	/// <summary>
+	/// The graves file for associating grave textures with grave objects
+	/// </summary>
 	public string Graves_File;	
 	
+	/// <summary>
+	/// The material master list for matching the texture list to materials.
+	/// </summary>
 	public Material[] MaterialMasterList=new Material[260];
 
+	/// <summary>
+	/// Gameobject to load the objects at
+	/// </summary>
 	public GameObject ObjectMarker;
 
+		/// <summary>
+		/// The object lists for each level.
+		/// </summary>
 	public ObjectLoader[] objectList= new ObjectLoader[9];
 
 	public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
@@ -147,14 +166,25 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public PaletteLoader palLoader;
 
+	/// <summary>
+	/// The bytloader for bty files
+	/// </summary>
 	public BytLoader bytloader;
+		/// <summary>
+		/// The tex loader for textures
+		/// </summary>
 	public TextureLoader texLoader;
+		/// <summary>
+		/// The spell icons gr loader
+		/// </summary>
 	public GRLoader SpellIcons;
+		/// <summary>
+		/// The object art gr loader
+		/// </summary>
 	public GRLoader ObjectArt;
 
 	void Awake()
 	{
-		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
 		UWEBase._RES = game;
 		objectMaster=new ObjectMasters();
@@ -174,13 +204,10 @@ public class GameWorldController : UWEBase {
 		texLoader=new TextureLoader();
 		ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
 		SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
-			
-
 	}
 
 	void Start () {
 		char[] lev_ark;
-		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
 
 		//Load up my map materials
@@ -371,10 +398,20 @@ public class GameWorldController : UWEBase {
 		{
 			if (newLevelNo!=-1)
 			{
+				if(LevelNo!=-1)
+				{//Changing from a level
+					//Update the positions of all object interactions in the level
+					//UpdatePositions();
+
+					//Store the state of the object list with just the objects in objects transform for when I re
+					ObjectLoader.UpdateObjectList();	
+				}
+
+
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo]);
-				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],ObjectMarker);
+				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
 				GenerateNavmesh(NavRigLand);
 				GenerateNavmesh(NavRigWater);
 						//TODO Lava
@@ -502,6 +539,49 @@ public class GameWorldController : UWEBase {
 		public ObjectLoader CurrentObjectList()
 		{
 				return objectList[LevelNo];
+		}
+
+		/// <summary>
+		/// Moves the object to the game world where it will be managed by the objectloader list
+		/// </summary>
+		/// <param name="obj">Object.</param>
+		public static void MoveToWorld(GameObject obj)
+		{
+				//Debug.Log(obj.name + "is moved to world");
+				MoveToWorld(obj.GetComponent<ObjectInteraction>());
+		}
+
+		public static void MoveToWorld(ObjectInteraction obj)
+		{
+			//Add item to a free slot on the item list and point the instance back to this.
+				ObjectLoader.AssignObjectToList(ref obj);
+
+				//Not needed???
+		}
+
+		/// <summary>
+		/// Moves to inventory where it will no longer be managed by the objectloader list.
+		/// </summary>
+		/// <param name="obj">Object.</param>
+		public static void MoveToInventory(GameObject obj)
+		{
+			MoveToInventory(obj.GetComponent<ObjectInteraction>());
+		}
+
+		public static void MoveToInventory(ObjectInteraction obj)
+		{//Break the instance back to the object list
+			obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.
+		}
+
+		public void UpdatePositions()
+		{
+			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
+			{
+				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+				{
+					t.gameObject.GetComponent<ObjectInteraction>().UpdatePosition();	
+				}
+			}
 		}
 
 }

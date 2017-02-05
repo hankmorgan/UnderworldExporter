@@ -62,6 +62,7 @@ public class Potion : enchantment_base {
 			{
 					ChangeType(213,23);//Change to debris.
 					this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+					objInt().objectloaderinfo.InUseFlag=0;
 					Destroy(this);//Kill me now.
 			}
 			return true;

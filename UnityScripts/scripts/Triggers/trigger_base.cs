@@ -44,6 +44,7 @@ public class trigger_base : object_base {
 		//Debug.Log(TriggerRepeat);
 		if (TriggerRepeat==0)
 		{
+			this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
 			Destroy (this.gameObject);
 		}
 

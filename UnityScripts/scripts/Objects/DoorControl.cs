@@ -28,6 +28,20 @@ public class DoorControl : object_base {
 		///A trigger to activate when opened.
 	public string UseLink;
 
+		protected override void Start ()
+	{	
+				if (state())
+				{//Make sure it is open
+					if (isPortcullis()==false)
+					{
+						StartCoroutine(RotateDoor (this.transform,Vector3.up * +90,0.1f));
+					}
+					else
+					{
+						StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
+					}	
+				}
+	}
 
 
 		public bool isPortcullis()

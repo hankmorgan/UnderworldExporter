@@ -30,6 +30,7 @@ public class a_ward_trap : trap_base {
 				}
 				spellprop.onImpact(npc.transform);
 				spellprop.onHit(npc.gameObject.GetComponent<ObjectInteraction>());
+				this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
 				Destroy (this.gameObject);
 			}
 			else

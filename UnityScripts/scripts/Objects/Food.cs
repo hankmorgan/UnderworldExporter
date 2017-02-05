@@ -56,7 +56,7 @@ public class Food : object_base {
 					UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
 					break;
 				}
-			
+		
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.
 		}
@@ -157,6 +157,7 @@ public class Food : object_base {
 		{
 			ChangeType(213,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+			objInt().objectloaderinfo.InUseFlag=0;
 			Destroy(this);//Kill me now.
 		}
 		return true;

@@ -70,6 +70,7 @@ public class Impact : UWEBase {
 		GameObject hitimpact = new GameObject(ImpactName);
 		hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
 		hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
+		//GameWorldController.MoveToWorld(hitimpact);
 		Impact imp= hitimpact.AddComponent<Impact>();
 		imp.go(StartFrame,EndFrame);
 		//StartCoroutine( imp.Animate(StartFrame,EndFrame));		
