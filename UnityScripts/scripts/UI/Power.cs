@@ -13,14 +13,20 @@ public class Power : GuiBase {
 	public int RepeatCounter=0; 	/// Controls the repetition of the max charge.
 	public int PreviousIndex=-1;	/// Tracks the previous level of the charge.
 	public RawImage uiPowerGem;		/// The UI texture to display
+	private Texture2D[] PowerGemArt=new Texture2D[14];
 
 	public override void Start()
 	{
 		base.Start();
+		GRLoader powerArt = new GRLoader(GRLoader.POWER_GR);
 		if (uiPowerGem==null)
 		{
 			uiPowerGem= this.gameObject.GetComponent<RawImage>();
 		}
+			for (int i=0;i<=PowerGemArt.GetUpperBound(0);i++)
+			{
+				PowerGemArt[i]=powerArt.LoadImageAt(i);	
+			}
 	}
 
 	/// <summary>
@@ -46,7 +52,8 @@ public class Power : GuiBase {
 				if (index!=PreviousIndex)
 				{
 					RepeatCounter=0;
-					uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ index.ToString("0000"));
+					uiPowerGem.texture=PowerGemArt[index];
+										//Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ index.ToString("0000"));
 					//CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
@@ -56,7 +63,8 @@ public class Power : GuiBase {
 			if (IsInvoking("UpdateMaxCharge"))
 			{
 				CancelInvoke("UpdateMaxCharge");
-				uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ 0.ToString("0000"));
+				//uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ 0.ToString("0000"));
+				uiPowerGem.texture=PowerGemArt[0];
 			}
 			RepeatCounter=0;
 		}
@@ -67,7 +75,8 @@ public class Power : GuiBase {
 	/// </summary>
 	public void UpdateMaxCharge()
 	{
-		uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+		//uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+				uiPowerGem.texture=PowerGemArt[10+RepeatCounter];
 		//CurrentPower=_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)

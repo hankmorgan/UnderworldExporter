@@ -36,7 +36,9 @@ public class Impact : UWEBase {
 		{
 			image = this.gameObject.AddComponent<SpriteRenderer>();
 		}
-		image.sprite=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + index.ToString ("D4"));
+		//image.sprite=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + index.ToString ("D4"));
+
+		image.sprite = GameWorldController.instance.TmAnimo.RequestSprite(index);
 	}
 
 

@@ -39,6 +39,16 @@ public class ArtLoader : Loader {
 		return new Texture2D(1,1);
 	}
 
+	/// <summary>
+	/// Loads the image at index.
+	/// </summary>
+	/// <returns>The <see cref="UnityEngine.Texture2D"/>.</returns>
+	/// <param name="index">Index.</param>
+	public virtual Texture2D LoadImageAt(int index, bool Alpha)
+	{
+		return new Texture2D(1,1);
+	}
+
 
 	/// <summary>
 	/// Generates the image from the specified data buffer position

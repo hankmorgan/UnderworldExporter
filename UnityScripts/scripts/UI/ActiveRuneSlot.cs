@@ -19,7 +19,8 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		{
 			if (runes[i]==null)
 			{
-					runes[i]=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString("D2"));					
+				runes[i]=GameWorldController.instance.ObjectArt.LoadImageAt(232 + i);
+										//Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString("D2"));					
 			}
 			
 		}

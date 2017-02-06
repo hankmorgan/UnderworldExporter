@@ -27,13 +27,14 @@ public class RuneSlot : GuiBase {
 	public static void UpdateRuneDisplay () {
 		for  (int i=0; i<24; i++)
 		{
-						if (UWHUD.instance.runes[i].thisRune==null)
-						{
-								UWHUD.instance.runes[i].thisRune=UWHUD.instance.runes[i].gameObject.GetComponent<RawImage>();
-						}
+			if (UWHUD.instance.runes[i].thisRune==null)
+			{
+					UWHUD.instance.runes[i].thisRune=UWHUD.instance.runes[i].gameObject.GetComponent<RawImage>();
+			}
 		if ((playerUW.PlayerMagic.PlayerRunes[i] != false))
 			{					
-				UWHUD.instance.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
+				UWHUD.instance.runes[i].thisRune.texture=GameWorldController.instance.ObjectArt.LoadImageAt(232 + i);
+										//Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
 				UWHUD.instance.runes[i].isSet=true;
 			}
 			else

@@ -51,6 +51,13 @@ public class BytLoader : ArtLoader {
 	/// In this case the index is a loading of the seperate file. 
 	public override Texture2D LoadImageAt (int index)
 	{
+		return LoadImageAt(index,false);
+	}
+
+
+
+	public override Texture2D LoadImageAt (int index, bool Alpha)
+	{
 		if (currentIndex!=index)
 		{//Only load from disk if the image to bring back has changed.
 			DataLoaded=false;
@@ -58,6 +65,6 @@ public class BytLoader : ArtLoader {
 			LoadImageFile();		
 		}
 
-		return Image(ImageFileData,0,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],false);
+		return Image(ImageFileData,0,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
 	}
 }

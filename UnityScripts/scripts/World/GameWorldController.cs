@@ -203,6 +203,11 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public GRLoader TmFlatArt;
 
+	/// <summary>
+	/// Small animations art.
+	/// </summary>
+	public GRLoader TmAnimo;
+
 	void Awake()
 	{
 		instance=this;
@@ -228,6 +233,7 @@ public class GameWorldController : UWEBase {
 		DoorArt=new GRLoader(GRLoader.DOORS_GR);
 		TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
 		TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
+		TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
 	}
 
 	void Start () {
