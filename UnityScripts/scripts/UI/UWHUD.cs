@@ -112,7 +112,7 @@ public class UWHUD : HUD {
 
 		//Hud elements for run time loading
 		public RawImage mapBackground;
-
+		public RawImage mainwindow_art;
 
 		public Text ContextMenu;
 
@@ -131,7 +131,7 @@ public class UWHUD : HUD {
 				//Init the art work for the hud
 				//Init hud elements
 				mapBackground.texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.BLNKMAP_BYT);
-
+				//mainwindow_art.texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.MAIN_BYT);
 
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();

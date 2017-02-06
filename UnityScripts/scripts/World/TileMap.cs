@@ -1271,11 +1271,12 @@ public class TileMap : Loader {
 				// File pointer
 
 				//char[] tmp_ark; 
-				char[] tex_ark; 
+				char[] tex_ark=new char[1]; 
+				char[] tmp_ark=new char[1];
 				int NoOfBlocks;
 				long AddressOfBlockStart;
 				long address_pointer;
-				long textureAddress;
+				long textureAddress=0;
 				//long fileSize;
 				short x;	
 				short y;
@@ -1309,7 +1310,55 @@ public class TileMap : Loader {
 								//long objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
 								address_pointer =0;
 								break;
-						}	
+						}
+
+				case 2:
+						{
+							//******************
+							CEILING_HEIGHT=UW_CEILING_HEIGHT;
+
+							textureMapSize = 70;	//0x86;
+							tmp_ark =new char[lev_ark.GetUpperBound(0)+1];
+							for (int j =0; j<=lev_ark.GetUpperBound(0);j++)
+							{
+								tmp_ark[j] = lev_ark[j];
+							}	
+
+							address_pointer=0;
+							NoOfBlocks=(int)DataLoader.getValAtAddress(tmp_ark,0,32);	
+
+							address_pointer=6;
+
+							int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
+							int isCompressed =(compressionFlag>>1) & 0x01;
+							address_pointer=(LevelNo * 4) + 6;
+							if ((int)DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
+							{
+								return false ;
+							}
+							if (isCompressed == 1)
+							{
+								int datalen=0;
+								lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
+								address_pointer=address_pointer+4;
+								AddressOfBlockStart=0;
+								address_pointer=0;
+							}
+							else
+							{
+								int BlockStart = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+								int j=0;
+								AddressOfBlockStart=0;
+								lev_ark = new char[0x7c08];
+								for (i = BlockStart; i < BlockStart + 0x7c08; i++)
+								{
+									lev_ark[j] = tmp_ark[i];
+									j++;
+								}
+							}
+							break;
+
+						}
 				default:
 						return false;
 				}
@@ -1343,6 +1392,42 @@ public class TileMap : Loader {
 											CeilingTexture = texture_map[i];
 									}
 
+									break;
+								}
+						case 2: //uw2
+								{
+									if (textureAddress == -1)//Texture block was decompressed
+									{
+										textureAddress=0;//To stop array out of bounds->THis does not work in the original code??
+										if (i<64)
+										{
+											texture_map[i] =(int)DataLoader.getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
+											offset = offset + 2;
+										}
+										else
+										{//door textures
+											texture_map[i] = (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+											offset++;
+										}
+									}
+									else
+									{
+										if (i<64)
+										{
+											texture_map[i] =(int)DataLoader.getValAtAddress(tmp_ark,textureAddress+offset,16);//tmp //textureAddress+//(i*2)
+											offset = offset + 2;
+										}
+										else
+										{//door textures
+											texture_map[i] = (int)DataLoader.getValAtAddress(tmp_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+											offset++;
+										}
+									}
+
+									if (i == 0xf)
+									{
+										CeilingTexture=texture_map[i];
+									}
 									break;
 								}
 						}
@@ -1561,6 +1646,21 @@ public class TileMap : Loader {
 				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
 				//return (tileData& 0x3F);
 		}
+
+		int getFloorTexUw2(char[] buffer, long textureOffset, long tileData)
+		{//gets floor texture data at bits 10-13 of the tile data
+				long val = (tileData >>10) & 0x0F;	//gets the index of the texture
+				//look it up in texture block for it's absolute index for wxx.tr
+				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);	
+		}
+
+		int getWallTexUw2(char[]  buffer, long textureOffset, long tileData)
+		{
+				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
+				long val = (tileData & 0x3F);	//gets the index of the texture
+				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
+		}
+
 
 		int getObject(long tileData)
 		{

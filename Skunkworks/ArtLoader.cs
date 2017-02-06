@@ -12,6 +12,7 @@ public class ArtLoader : MonoBehaviour {
 	public string pathTexW="C:\\Games\\Uw1\\DATA\\W64.TR";
 	public string pathTexF="C:\\Games\\Uw1\\DATA\\F32.TR";
 	public string pathGR="C:\\Games\\Uw1\\DATA\\OBJECTS.GR";
+	public string auxPalPath="c:\\games\\uw1\\data\\allpals.dat";
 	public RawImage rawOut;
 	//private Texture2D imageOut;
 	public SpriteRenderer sprt;
@@ -117,7 +118,7 @@ public class ArtLoader : MonoBehaviour {
 					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",palLoader.Palettes[0],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[0],auxPalIndex);
 					outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
 					//rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true);
 					sprt.sprite= Sprite.Create(Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
@@ -130,7 +131,7 @@ public class ArtLoader : MonoBehaviour {
 					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",palLoader.Palettes[0],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[0],auxPalIndex);
 
 					sprt.sprite= Sprite.Create(Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
 					break;				
@@ -318,4 +319,42 @@ public class ArtLoader : MonoBehaviour {
 		image.Apply();
 		return image;
 		}
+
+	public void extractUW2Bitmaps()
+		{
+		char[] textureFile;          // Pointer to our buffered data (little endian format)
+		int i;
+		long NoOfTextures;
+
+		if (!DataLoader.ReadStreamFile(path, out textureFile))
+			{return;}
+
+		//if (DataLoader.ReadStreamFile(path, out buffer))
+		//	{//data read
+		//	rawOut.texture= Image(buffer,0,320,200,"name_goes_here",palLoader.Palettes[pal],true);
+		//	}
+
+		// Get the size of the file in bytes
+
+		NoOfTextures = DataLoader.getValAtAddress(textureFile,0,8);
+		long textureOffset = (int)DataLoader.getValAtAddress(textureFile, (grIndex * 4) + 6, 32);
+			if (textureOffset !=0)
+				{
+				int compressionFlag=(int)DataLoader.getValAtAddress(textureFile,((grIndex * 4) + 6)+(NoOfTextures*4),32);
+				int isCompressed =(compressionFlag>>1) & 0x01;
+				if (isCompressed==1)	
+					{
+					int datalen=0;
+					rawOut.texture = Image(MapLoader.unpackUW2(textureFile,textureOffset,ref datalen),0,320,200,"namehere",palLoader.Palettes[pal],true);
+					}
+				else
+					{
+					rawOut.texture= Image(textureFile,textureOffset,320,200,"name_goes_here",palLoader.Palettes[pal],true);	
+					}
+				}
+
+		}
+
+
+
 }

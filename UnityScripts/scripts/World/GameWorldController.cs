@@ -207,6 +207,7 @@ public class GameWorldController : UWEBase {
 	{
 		instance=this;
 		UWEBase._RES = game;
+		Loader._RES=game;
 		objectMaster=new ObjectMasters();
 		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
 		critter = new Critters();

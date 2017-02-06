@@ -60,10 +60,52 @@ public class ObjectLoader : Loader {
 								AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);
 								objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
 								address_pointer =0;
-
-
 								break;
 						}
+				
+				case 2: //underworld 2
+						{
+
+							char[] tmp_ark =new char[lev_ark.GetUpperBound(0)+1];
+							for (int i =0; i<=lev_ark.GetUpperBound(0);i++)
+							{
+									tmp_ark[i] = lev_ark[i];
+							}				
+							address_pointer=6;
+							NoOfBlocks=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
+							int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) ,32);
+							int isCompressed =(compressionFlag>>1) & 0x01;
+
+							long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
+							address_pointer=(LevelNo * 4) + 6;
+							if (DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
+							{
+									return;
+							}
+							if (isCompressed == 1)
+							{
+									int datalen=0;
+									lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
+							}
+							else
+							{//
+									int BlockStart = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+									int j = 0;
+									AddressOfBlockStart = 0;
+									lev_ark = new char[0x7c08];
+									for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
+									{
+											lev_ark[j] = tmp_ark[i];
+											j++;
+									}
+							}
+							address_pointer=address_pointer+4;
+							AddressOfBlockStart=0;	//since this array only contains that particular block
+							objectsAddress=(64*64*4);
+							address_pointer=0;
+							break;
+						}
+
 				default:
 						return;
 				}

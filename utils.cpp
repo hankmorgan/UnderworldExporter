@@ -88,6 +88,7 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
 		}
 	    else
 	      {
+
 		int	o = tmp[address_pointer++];
 		int	c = tmp[address_pointer++];
 
@@ -101,6 +102,10 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
 		 
 		while(c--)
 		    {
+			if (o < 0)
+				{
+				printf("%c\n",buf[o]);
+				}
 			*up++ = buf[o++];
 			*datalen = *datalen+1;
 			}

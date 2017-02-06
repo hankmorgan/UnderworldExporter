@@ -90,36 +90,36 @@ public class WindowDetectUW : WindowDetect {
 				}
 
 
-			if ((ContextUIEnabled) && (InventorySlot.Hovering==false))
-			{
-				//if (CursorInMainWindow)
-				//{
-					ContextUIMode();			
-				//}					
-			}
+				if ((ContextUIEnabled) && (InventorySlot.Hovering==false))
+				{
+						//if (CursorInMainWindow)
+						//{
+						ContextUIMode();			
+						//}					
+				}
 		}
 
 
 		void ContextUIMode()
 		{
-			Ray ray ;
-			if (UWCharacter.Instance.MouseLookEnabled==true)
-			{
-				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-			}
-			else
-			{
-				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
-			}
-			UWHUD.instance.ContextMenu.text="";
-			RaycastHit hit = new RaycastHit(); 
-			if (Physics.Raycast(ray,out hit,UWCharacter.Instance.GetUseRange()))
-			{
-				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
+				Ray ray ;
+				if (UWCharacter.Instance.MouseLookEnabled==true)
 				{
-					UWHUD.instance.ContextMenu.text=hit.transform.gameObject.GetComponent<ObjectInteraction>().LookDescriptionContext();
+						ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 				}
-			}		
+				else
+				{
+						ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+				}
+				UWHUD.instance.ContextMenu.text="";
+				RaycastHit hit = new RaycastHit(); 
+				if (Physics.Raycast(ray,out hit,UWCharacter.Instance.GetUseRange()))
+				{
+						if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
+								UWHUD.instance.ContextMenu.text=hit.transform.gameObject.GetComponent<ObjectInteraction>().LookDescriptionContext();
+						}
+				}		
 		}
 
 		/// <summary>
@@ -217,62 +217,62 @@ public class WindowDetectUW : WindowDetect {
 		/// <param name="ptrID">Ptr I.</param>
 		void ClickEvent(int ptrID)
 		{
-			if ((GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
-			{
-					//Debug.Log("player has a spell to cast");
-					return;
-			}
+				if ((GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
+				{
+						//Debug.Log("player has a spell to cast");
+						return;
+				}
 
-		if ((ContextUIEnabled) && (ContextUIUse) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==""))
-			{//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
-				if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
-				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
+				if ((ContextUIEnabled) && (ContextUIUse) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==""))
+				{//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
+						if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
+						{
+								UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
+						}
+						if ((object_base.PickAvail) && (ptrID==-2))//Pickup on right click
+						{
+								UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+						}
+						if ((object_base.TalkAvail) && (ptrID==-1))//Talk on left click
+						{
+								UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+						}
 				}
-				if ((object_base.PickAvail) && (ptrID==-2))//Pickup on right click
+				InteractionModeControl.UpdateNow=true;
+				switch (UWCharacter.InteractionMode)
 				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+				case UWCharacter.InteractionModeOptions://Options mode
+						return;//do nothing
+				case UWCharacter.InteractionModeTalk://Talk
+						GameWorldController.instance.playerUW.TalkMode();
+						break;
+				case UWCharacter.InteractionModePickup://Pickup
+						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+						{
+								UWWindowWait(1.0f);
+								ThrowObjectInHand();
+						}
+						else
+						{
+								GameWorldController.instance.playerUW.PickupMode(ptrID);
+						}			
+						break;
+				case UWCharacter.InteractionModeLook://look
+						GameWorldController.instance.playerUW.LookMode();//do nothing
+						break;
+				case UWCharacter.InteractionModeAttack:	//attack
+						break;
+				case UWCharacter.InteractionModeUse://Use
+						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+						{
+								GameWorldController.instance.playerUW.UseMode();
+						}
+						else
+						{
+								GameWorldController.instance.playerUW.UseMode();
+						}
+						break;
 				}
-				if ((object_base.TalkAvail) && (ptrID==-1))//Talk on left click
-				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-				}
-			}
-			InteractionModeControl.UpdateNow=true;
-			switch (UWCharacter.InteractionMode)
-			{
-			case UWCharacter.InteractionModeOptions://Options mode
-					return;//do nothing
-			case UWCharacter.InteractionModeTalk://Talk
-					GameWorldController.instance.playerUW.TalkMode();
-					break;
-			case UWCharacter.InteractionModePickup://Pickup
-					if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
-					{
-							UWWindowWait(1.0f);
-							ThrowObjectInHand();
-					}
-					else
-					{
-							GameWorldController.instance.playerUW.PickupMode(ptrID);
-					}			
-					break;
-			case UWCharacter.InteractionModeLook://look
-					GameWorldController.instance.playerUW.LookMode();//do nothing
-					break;
-			case UWCharacter.InteractionModeAttack:	//attack
-					break;
-			case UWCharacter.InteractionModeUse://Use
-					if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
-					{
-							GameWorldController.instance.playerUW.UseMode();
-					}
-					else
-					{
-							GameWorldController.instance.playerUW.UseMode();
-					}
-					break;
-			}
 		}
 
 		/// <summary>
@@ -323,7 +323,7 @@ public class WindowDetectUW : WindowDetect {
 												Container.SetItemsPosition (droppedItem.GetComponent<Container>(),GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position);
 										}
 										droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
-	
+
 										droppedItem.transform.parent = GameWorldController.instance.LevelMarker();
 										GameWorldController.MoveToWorld(droppedItem);
 

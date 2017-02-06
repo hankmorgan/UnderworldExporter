@@ -728,6 +728,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				{
 				if (textureAddress == -1)//Texture block was decompressed
 					{
+					//textureAddress = 0;
 					if (i<64)
 						{
 						texture_map[i] =getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)

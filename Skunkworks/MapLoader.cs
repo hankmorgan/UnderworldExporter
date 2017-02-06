@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 
 public class MapLoader : MonoBehaviour {
-
+	
 	public Text Output;
 	public int LevelToRetrieve;
 	public const int TILE_SOLID= 0;
@@ -88,7 +88,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		// File pointer
 		char[] lev_ark; 
 		//char[] tmp_ark; 
-		char[] tex_ark; 
+		char[] tex_ark=new char[1]; 
+		char[] tmp_ark=new char[1]; 
 		int NoOfBlocks;
 		long AddressOfBlockStart;
 		long address_pointer;
@@ -121,7 +122,70 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				//long objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
 				address_pointer =0;
 				break;
-				}	
+				}
+		case 2:
+				{
+				//******************
+				CEILING_HEIGHT=UW_CEILING_HEIGHT;
+
+				textureMapSize = 70;	//0x86;
+				if (!DataLoader.ReadStreamFile(filePath, out tmp_ark))
+					{
+					return false;
+					}
+
+				address_pointer=0;
+				NoOfBlocks=(int)DataLoader.getValAtAddress(tmp_ark,0,32);	
+
+				address_pointer=6;
+
+				int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
+				int isCompressed =(compressionFlag>>1) & 0x01;
+				address_pointer=(LevelNo * 4) + 6;
+				if ((int)DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
+					{
+
+					return false ;
+					}
+				if (isCompressed == 1)
+					{
+					int datalen=0;
+					lev_ark = unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
+					address_pointer=address_pointer+4;
+					AddressOfBlockStart=0;
+					address_pointer=0;
+					}
+				else
+					{
+					int BlockStart = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+					int j=0;
+					AddressOfBlockStart=0;
+					lev_ark = new char[0x7c08];
+					for (i = BlockStart; i < BlockStart + 0x7c08; i++)
+						{
+						lev_ark[j] = tmp_ark[i];
+						j++;
+						}
+					}	
+
+
+				//read in the textures
+				//address_pointer=(LevelNo * 4) + 6 + (80*4);
+				//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
+				textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
+				compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+				isCompressed =(compressionFlag>>1) & 0x01;
+
+				if (isCompressed == 1)
+					{
+					int datalen=0;
+					tex_ark = unpackUW2(tmp_ark, textureAddress, ref datalen);
+					textureAddress=-1;
+					}
+				break;
+				}				
+
+				//**************
 		default:
 			return false;
 		}
@@ -155,6 +219,42 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						CeilingTexture = texture_map[i];
 						}
 
+					break;
+					}
+				case 2:
+					{
+					if (textureAddress == -1)//Texture block was decompressed
+						{
+						textureAddress=0;
+						if (i<64)
+							{
+							texture_map[i] =(int)DataLoader.getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
+							offset = offset + 2;
+							}
+						else
+							{//door textures
+							texture_map[i] = (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+							offset++;
+							}
+						}
+					else
+						{
+						if (i<64)
+							{
+							texture_map[i] =(int)DataLoader.getValAtAddress(tmp_ark,textureAddress+offset,16);//tmp //textureAddress+//(i*2)
+							offset = offset + 2;
+							}
+						else
+							{//door textures
+							texture_map[i] = (int)DataLoader.getValAtAddress(tmp_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+							offset++;
+							}
+						}
+
+					if (i == 0xf)
+						{
+						CeilingTexture=texture_map[i];
+						}
 					break;
 					}
 				}
@@ -218,6 +318,18 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						}
 					LevelInfo[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
 					break;
+				
+				case 2:	//uw2
+						{
+						LevelInfo[x,y].floorTexture = getFloorTexUw2(tmp_ark, textureAddress, FirstTileInt);
+						//int val = (FirstTileInt >>10) & 0x0F;
+						LevelInfo[x,y].floorTexture = texture_map[(FirstTileInt >>10) & 0x0F];
+						LevelInfo[x,y].wallTexture = getWallTexUw2(tmp_ark, textureAddress, SecondTileInt);	
+						//(tileData & 0x3F
+						LevelInfo[x,y].wallTexture= texture_map[SecondTileInt & 0x3F];
+						break;
+						}	
+
 				}
 				if (LevelInfo[x,y].floorTexture<0)
 					{
@@ -383,7 +495,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 			}
 		
-		BuildTileMapUW(Path,1,LevelToRetrieve);
+		BuildTileMapUW(Path,2,LevelToRetrieve);
 
 		string result="";
 		for (int y=63; y>=0;y--)
@@ -2489,7 +2601,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		{
 		int x; int y;
 
-
 			for (x=0;x<64;x++){
 				for (y=0;y<64;y++){
 				//lets test this tile for visibility
@@ -2913,4 +3024,89 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			}
 		return floorTexture;
 		}
+
+
+
+	public static char[] unpackUW2(char[] tmp, long address_pointer, ref int datalen)
+		{
+
+		//Robbed and changed slightly from the Labyrinth of Worlds implementation project.
+		//This decompresses UW2 blocks.
+		long	len = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
+		long block_address=address_pointer;
+		char[] buf = new char[len+100];
+		char[] up = buf;
+		long upPtr=0;
+		long bufPtr=0;
+		datalen = 0;
+		address_pointer += 4;
+
+		while(upPtr < len)
+			{
+			int		bits = tmp[address_pointer++];
+			for(int r=0; r<8; r++)
+				{
+				if((bits & 1)==1)
+					{
+					//printf("transfer %d\ at %d\n", byte(base),base);
+					up[upPtr++] = tmp[address_pointer++];
+					datalen = datalen+1;
+					}
+				else
+					{
+					int	o = tmp[address_pointer++];
+					int	c = tmp[address_pointer++];
+
+					o |= (c&0xF0)<<4;
+					c = (c&15) + 3;
+					o = o+18;
+					if(o > (upPtr-bufPtr))
+						o -= 0x1000;
+					while(o < (upPtr-bufPtr-0x1000))
+						o += 0x1000;
+
+					while(c-- >0)
+						{
+						if (o<0)
+							{
+							up[upPtr++]= tmp[tmp.GetUpperBound(0)+ o++];
+							}
+						else
+							{
+							up[upPtr++]= buf[o++];
+							}
+						//Output.text=upPtr.ToString() + " = " + o.ToString();
+	
+
+						datalen = datalen+1;
+						}
+					}
+				bits >>= 1;
+				}
+			}
+
+		return buf;
+		}
+
+
+
+	int getFloorTexUw2(char[] buffer, long textureOffset, long tileData)
+		{//gets floor texture data at bits 10-13 of the tile data
+		long val = (tileData >>10) & 0x0F;	//gets the index of the texture
+		//look it up in texture block for it's absolute index for wxx.tr
+		return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);	
+		//	return ((tileData >>10) & 0x0F);	//was	11
+		}
+
+	int getWallTexUw2(char[]  buffer, long textureOffset, long tileData)
+		{
+		//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
+		//return ((tileData >>17)& 0x3F);
+		long val = (tileData & 0x3F);	//gets the index of the texture
+		return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
+		//return (tileData& 0x3F);
+		}
+
+
+
 }

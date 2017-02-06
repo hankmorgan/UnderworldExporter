@@ -64,4 +64,73 @@ public class DataLoader :Loader {
 						}
 				}
 		}
+
+
+		/// <summary>
+		/// Unpacks the Uw2 compressed blocks
+		/// </summary>
+		/// <returns>The Uw2 uncompressed block.</returns>
+		/// <param name="tmp">Tmp.</param>
+		/// <param name="address_pointer">Address pointer.</param>
+		/// <param name="datalen">Datalen.</param>
+	public static char[] unpackUW2(char[] tmp, long address_pointer, ref int datalen)
+	{
+
+		//Robbed and changed slightly from the Labyrinth of Worlds implementation project.
+		//This decompresses UW2 blocks.
+		long	len = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
+		long block_address=address_pointer;
+		char[] buf = new char[len+100];
+		char[] up = buf;
+		long upPtr=0;
+		long bufPtr=0;
+		datalen = 0;
+		address_pointer += 4;
+
+		while(upPtr < len)
+		{
+			int		bits = tmp[address_pointer++];
+			for(int r=0; r<8; r++)
+			{
+				if((bits & 1)==1)
+				{
+					//printf("transfer %d\ at %d\n", byte(base),base);
+					up[upPtr++] = tmp[address_pointer++];
+					datalen = datalen+1;
+				}
+				else
+				{
+					int	o = tmp[address_pointer++];
+					int	c = tmp[address_pointer++];
+
+					o |= (c&0xF0)<<4;
+					c = (c&15) + 3;
+					o = o+18;
+					if(o > (upPtr-bufPtr))
+							o -= 0x1000;
+					while(o < (upPtr-bufPtr-0x1000))
+							o += 0x1000;
+
+					while(c-- >0)
+					{
+						if (o<0)
+						{
+							up[upPtr++]= tmp[tmp.GetUpperBound(0)+ o++];
+						}
+						else
+						{
+							up[upPtr++]= buf[o++];
+						}
+
+						datalen = datalen+1;
+					}
+				}
+				bits >>= 1;
+			}
+		}
+
+		return buf;
+	}
+
+
 }
