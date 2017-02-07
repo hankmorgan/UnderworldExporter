@@ -15,6 +15,22 @@ public class HealthFlask : GuiBase_Draggable {
 	public bool isHealthDisplay;
 	private bool Poisoned;
 
+		void Start()
+		{
+			for (int i=0; i<=LevelImages.GetUpperBound(0);i++)
+			{
+				if (isHealthDisplay)
+				{
+					LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i);					
+				}
+				else
+				{
+					LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(25+i);					
+				}
+			}
+			this.GetComponent<RawImage>().texture=GameWorldController.instance.grFlasks.LoadImageAt(75);			
+		}
+
 	void Update () {
 		if (isHealthDisplay==true)
 		{//Health flask
@@ -57,11 +73,13 @@ public class HealthFlask : GuiBase_Draggable {
 		{
 			if (Poisoned==true)
 			{//Load the poisoned versions of the flask images.
-				LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
+				//LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
+				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i+50);
 			}
 			else
 			{//Load the healthy versions of the flask images.
-				LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i).ToString("0000"));
+				//LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i).ToString("0000"));
+				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i);
 			}
 		}
 	}

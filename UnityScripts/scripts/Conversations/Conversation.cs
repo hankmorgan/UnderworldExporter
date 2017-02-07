@@ -152,6 +152,7 @@ public class Conversation : GuiBase {
 
 	public void SetupConversation(int StringBlockNo)
 	{
+
 		///Setup UI Elements - code formerly in NPC
 		StringBlock =StringBlockNo;
 
@@ -183,7 +184,9 @@ public class Conversation : GuiBase {
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
-			npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+			GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+			//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+			npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
 		}	
 		else
 		{
@@ -193,7 +196,9 @@ public class Conversation : GuiBase {
 			{
 				HeadToUse=0;
 			}			
-			npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+			GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
+			//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+			npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
 		}
 		UWHUD.instance.MessageScroll.Clear ();
 		/*End UI Setup*/

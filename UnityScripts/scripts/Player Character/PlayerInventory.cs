@@ -58,6 +58,7 @@ public class PlayerInventory : UWEBase {
 
 	// Use this for initialization
 	void Start () {
+		GRLoader bodies = new GRLoader(GRLoader.BODIES_GR);
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
 		atTopLevel=true;
 		playerUW=this.GetComponent<UWCharacter>();
@@ -69,11 +70,13 @@ public class PlayerInventory : UWEBase {
 		UWHUD.instance.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 		if (playerUW.isFemale)
 		{				
-			UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+playerUW.Body).ToString("0000"));		
+			//UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+playerUW.Body).ToString("0000"));		
+			UWHUD.instance.playerBody.texture = bodies.LoadImageAt(5+playerUW.Body);
 		}
 		else
 		{
-			UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (playerUW.Body).ToString("0000"));		
+			//UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (playerUW.Body).ToString("0000"));		
+			UWHUD.instance.playerBody.texture = bodies.LoadImageAt(playerUW.Body);
 		}
 			
 

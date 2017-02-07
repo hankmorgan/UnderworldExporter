@@ -44,7 +44,7 @@ public class MainMenuHud : GuiBase {
 
 		protected  int cursorSizeX =64;
 		protected  int cursorSizeY =64;
-
+		GRLoader chrBtns; 
 		public void InitChargenScreen()
 		{
 				CharName.text="";
@@ -125,6 +125,8 @@ public class MainMenuHud : GuiBase {
 							OpScr.SetActive(false);
 							CharGenQuestion.text=getQuestion(0);
 							InitChargenScreen();
+							chrBtns= new GRLoader(GRLoader.CHRBTNS_GR);
+							chrBtns.PaletteNo=9;
 							PlaceButtons(Chargen.GetChoices(Chargen.STAGE_GENDER,-1),false);
 							break;
 
@@ -322,18 +324,22 @@ public class MainMenuHud : GuiBase {
 						chargenStage++;
 						PlaceButtons(Chargen.GetChoices(chargenStage,-1),false);
 						GameWorldController.instance.playerUW.Body=option;
-
+						GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
 						//Show the matching body.
 						//Update the paperdoll.
 						if (GameWorldController.instance.playerUW.isFemale)
 						{
-								CharGenBody.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (22+option).ToString("0000"));		
-								UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+option).ToString("0000"));		
+								//CharGenBody.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (22+option).ToString("0000"));		
+								CharGenBody.texture = chrBtns.LoadImageAt(22+option);
+								//UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+option).ToString("0000"));		
+								UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(5+option);
 						}
 						else
 						{
-								CharGenBody.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (17+option).ToString("0000"));		
-								UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (option).ToString("0000"));		
+								//CharGenBody.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (17+option).ToString("0000"));		
+								CharGenBody.texture = chrBtns.LoadImageAt(17+option);
+								//UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (option).ToString("0000"));		
+								UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(option);
 						}
 
 						break;
@@ -344,6 +350,7 @@ public class MainMenuHud : GuiBase {
 						chargenStage++;
 						RemoveButtons();
 						EnterCharName.gameObject.SetActive(true);
+						EnterCharName.GetComponent<RawImage>().texture=chrBtns.LoadImageAt(2);
 						EnterCharName.Select();
 						break;
 				case Chargen.STAGE_NAME:
@@ -476,12 +483,16 @@ public class MainMenuHud : GuiBase {
 				{
 					GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_CharGenImageButton"));
 					myObj.transform.SetParent(CharGen.transform);
+					myObj.GetComponent<ChargenButton>().ButtonBG.texture=chrBtns.LoadImageAt(4);
+					myObj.GetComponent<ChargenButton>().ButtonOff=chrBtns.LoadImageAt(4);
+					myObj.GetComponent<ChargenButton>().ButtonOn=chrBtns.LoadImageAt(5);
 					myObj.GetComponent<ChargenButton>().SubmitTarget=this;
 					myObj.GetComponent<ChargenButton>().Value=i;
 					myObj.GetComponent<RectTransform>().anchoredPosition=new Vector3(70f, 70 - i *35f);
 					myObj.GetComponent<RectTransform>().localScale=new Vector2(1.0f,1.0f);
 					//Load the protraits					
-					myObj.GetComponent<ChargenButton>().ButtonImage.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (GenderPortraitIndex+i).ToString("0000"));
+					//myObj.GetComponent<ChargenButton>().ButtonImage.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (GenderPortraitIndex+i).ToString("0000"));
+					myObj.GetComponent<ChargenButton>().ButtonImage.texture=chrBtns.LoadImageAt(GenderPortraitIndex+i);
 				}
 			}	
 			else
@@ -492,6 +503,9 @@ public class MainMenuHud : GuiBase {
 						for (int i=0; i<=buttons.GetUpperBound(0);i++)
 							{
 								GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_CharGenTextButton"));
+								myObj.GetComponent<ChargenButton>().ButtonBG.texture=chrBtns.LoadImageAt(2);
+								myObj.GetComponent<ChargenButton>().ButtonOff=chrBtns.LoadImageAt(2);
+								myObj.GetComponent<ChargenButton>().ButtonOn=chrBtns.LoadImageAt(6);
 								myObj.transform.SetParent(CharGen.transform);
 								myObj.GetComponent<ChargenButton>().SubmitTarget=this;
 								myObj.GetComponent<ChargenButton>().Value=i;
@@ -507,6 +521,9 @@ public class MainMenuHud : GuiBase {
 							for (int i=0; i<=buttons.GetUpperBound(0);i++)
 							{//First 5 buttons
 								GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_CharGenTextButton"));
+								myObj.GetComponent<ChargenButton>().ButtonBG.texture=chrBtns.LoadImageAt(2);
+								myObj.GetComponent<ChargenButton>().ButtonOff=chrBtns.LoadImageAt(2);
+								myObj.GetComponent<ChargenButton>().ButtonOn=chrBtns.LoadImageAt(6);
 								myObj.transform.SetParent(CharGen.transform);
 								myObj.GetComponent<ChargenButton>().SubmitTarget=this;
 								myObj.GetComponent<ChargenButton>().Value=i;

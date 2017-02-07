@@ -735,7 +735,8 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
-						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
 				else
 				{
@@ -770,7 +771,8 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
 				else
 				{
@@ -1476,7 +1478,8 @@ public class Magic : UWEBase {
 				{//Ready the spell to be cast.
 						InventorySpell=true;
 						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
-						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
 				else
 				{
@@ -2492,12 +2495,20 @@ public class Magic : UWEBase {
 		/// <param name="spellprop">Properties for the projectile.</param>
 		GameObject CreateMagicProjectile(Vector3 Location, GameObject Caster, SpellProp spellprop)
 		{//Creates the projectile.
-				GameObject projectile = new GameObject();
+				int index;
+				//Create an object info
+				GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index);
+				ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
+				oli.item_id=spellprop.ProjectileItemId;
+
+				GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.LevelMarker().gameObject,Location).gameObject;
 				projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 				projectile.name = "MagicProjectile_" + SummonCount++;
 				projectile.transform.parent=GameWorldController.instance.LevelMarker();
 				GameWorldController.MoveToWorld(projectile);
-				ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
+				//ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
+
+
 				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 				mgp.spellprop=spellprop;
 
@@ -2510,12 +2521,14 @@ public class Magic : UWEBase {
 						mgp.caster=Caster;
 				}
 
-				BoxCollider box = projectile.AddComponent<BoxCollider>();
+				BoxCollider box = projectile.GetComponent<BoxCollider>();
 				box.size = new Vector3(0.2f,0.2f,0.2f);
 				box.center= new Vector3(0.0f,0.1f,0.0f);
-				Rigidbody rgd =projectile.AddComponent<Rigidbody>();
+				Rigidbody rgd = projectile.GetComponent<Rigidbody>();
 				rgd.freezeRotation =true;
+				GameWorldController.UnFreezeMovement(projectile);
 				rgd.useGravity=false;
+
 				rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
 				if (Caster.name!=GameWorldController.instance.playerUW.name)
 				{

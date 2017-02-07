@@ -1053,7 +1053,7 @@ public class ObjectLoader : Loader {
 		/// Gets the free slot available to use starting from the specified index.
 		/// </summary>
 		/// <returns>The free slot.</returns>
-		bool getFreeSlot(int startIndex, out int index)
+		public bool getFreeSlot(int startIndex, out int index)
 		{
 			for (int i=startIndex; i<=objInfo.GetUpperBound(0);i++)
 			{

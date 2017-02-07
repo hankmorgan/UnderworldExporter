@@ -214,7 +214,7 @@ public class TileMap : Loader {
 		///Sets the map no display
 		UWHUD.instance.LevelNoDisplay.text=(thisLevelNo+1).ToString();
 		///Uses a cursor icon to display the player.
-		Texture2D playerPosIcon = (Texture2D)Resources.Load (UWEBase._RES +"/HUD/CURSORS/CURSORS_0018");
+		Texture2D playerPosIcon =GameWorldController.instance.grCursors.LoadImageAt(18);// (Texture2D)Resources.Load (UWEBase._RES +"/HUD/CURSORS/CURSORS_0018");
 
 		///Creates a blank texture2D of 64x64*TileSize in ARGB32 format.
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);

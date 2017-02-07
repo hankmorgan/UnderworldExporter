@@ -12,7 +12,8 @@ public class SpellProp_Fireball : SpellProp {
 	public override void init(int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
-		ProjectileSprite =UWEBase._RES +"/Sprites/Objects/Objects_020";
+		//ProjectileSprite =UWEBase._RES +"/Sprites/Objects/Objects_020";
+		ProjectileItemId=20;
 		Force=200.0f;
 		BaseDamage=16;
 		splashDamage=4;

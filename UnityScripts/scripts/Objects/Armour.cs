@@ -8,7 +8,7 @@ using System.Collections;
 public class Armour : Equipment {
 	public int Protection;
 	public string ArmourEquipString;
-	
+		public int EquipIconIndex;
 	/// ProtectionBonus of magic armour
 	public int ProtectionBonus;
 	/// Toughness Bonus for magic durability 
@@ -49,14 +49,46 @@ public class Armour : Equipment {
 			Destroy(this);//Kill me now.
 		}
 	}
+	
+	public override void UpdateQuality ()
+	{
+				int itemIndex= objInt().item_id-32;
+						
+				if ((itemIndex<15))
+				{//Armor pieces
+						if ((objInt().Quality>0) && (objInt().Quality<=15))
+						{
+								//Shit quality
+								EquipIconIndex=  itemIndex;
+						}
+						else if ((objInt().Quality>15) && (objInt().Quality<=30))
+						{//bashed about
+								EquipIconIndex=  itemIndex + (1*15);
+						}
+						else if ((objInt().Quality>30) && (objInt().Quality<=45))
+						{//medium
+								EquipIconIndex=  itemIndex + (2*15);
+						}
+						else
+						{//best
+								EquipIconIndex=  itemIndex + (3*15);
+						}
 
-	public override void UpdateQuality()
+				}
+				else
+				{//Crowns and dragonskin boots
+						EquipIconIndex= 60+ (objInt().item_id-47);
+				}
+	}
+		/*
+
+	public override void UpdateQuality1()
 	{	//Needs to be called when damaged.
 		if ((objInt().Quality>0) && (objInt().Quality<=15))
 		{
 			if (GameWorldController.instance.playerUW.isFemale)
 			{
-					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt().item_id]);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt().item_id]);
 			}
 			else
 			{
@@ -101,7 +133,8 @@ public class Armour : Equipment {
 		}
 	//objInt().SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
 	}
-	
+	*/
+		/*
 	/// <summary>
 	/// Sets the equip texture.
 	/// </summary>
@@ -113,15 +146,25 @@ public class Armour : Equipment {
 		ArmourEquipString=EquipTexture;
 		GameWorldController.instance.playerUW.playerInventory.Refresh(objInt().inventorySlot);
 	}
+		*/
 
 	//public override string getEquipString ()
 	//{
 	//	return ArmourEquipString;
 	//}
-		//TODO:return the armour
+
 	public override Sprite GetEquipDisplay ()
 	{
-		return ObjectInteraction.tc.RequestSprite(ArmourEquipString);
+		//return ObjectInteraction.tc.RequestSprite(ArmourEquipString);
+		if(GameWorldController.instance.playerUW.isFemale)
+		{
+			return GameWorldController.instance.armor_f.RequestSprite(EquipIconIndex);				
+		}
+		else
+		{
+			return GameWorldController.instance.armor_m.RequestSprite(EquipIconIndex);
+		}
+		
 	}
 
 	public override bool EquipEvent (int slotNo)

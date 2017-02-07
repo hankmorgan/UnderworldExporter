@@ -31,7 +31,8 @@ public class TradeSlot : GuiBase {
 		base.Start();
 		SlotImage=this.GetComponent<RawImage>();
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
-		IndicatorSelected = Resources.Load<Texture2D>(_RES +"/HUD/Cursors/cursors_0018");
+		//IndicatorSelected = Resources.Load<Texture2D>(_RES +"/HUD/Cursors/cursors_0018");
+		IndicatorSelected = GameWorldController.instance.grCursors.LoadImageAt(18);
 		SlotImage.texture=Blank;
 		Quantity.text="";
 		Indicator.texture=Blank;

@@ -8,7 +8,8 @@ public class SpellProp_FlameWind : SpellProp_Fireball {
 	{
 
 		base.init (effectId,SpellCaster);
-		ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
+		//ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
+		ProjectileItemId=20;//TODO:WHat do I do here?? There is no projectile.
 		Force=500.0f;
 		BaseDamage=16;
 		splashDamage=8;

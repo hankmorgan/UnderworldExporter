@@ -18,7 +18,8 @@ public class SpellProp  {
 	///What force is applied to the projectile.
 	public float Force; 
 	///What sprite is displayed
-	public string ProjectileSprite;
+	//public string ProjectileSprite;
+	public int ProjectileItemId;
 	///What impact image is played on a miss.
 	public int impactFrameStart;
 	///What impact image is played on a miss.

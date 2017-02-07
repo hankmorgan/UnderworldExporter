@@ -12,6 +12,11 @@ public class ArtLoader : Loader {
 	/// </summary>
 	protected char[] ImageFileData;
 
+		/// <summary>
+		/// The palette no to use with this file.
+		/// </summary>
+	public int PaletteNo=0;
+
 	/// <summary>
 	/// Loads the image file into the buffer
 	/// </summary>
@@ -63,7 +68,7 @@ public class ArtLoader : Loader {
 	protected Texture2D Image(char[] databuffer,long dataOffSet, int width, int height, string imageName, Palette pal , bool Alpha )
 	{
 		int pixelcount=0;
-		Texture2D image = new Texture2D(width, height);
+		Texture2D image = new Texture2D(width, height,TextureFormat.ARGB32,false);
 		Color32[] imageColors = new Color32[width * height];
 		long counter=0;
 		for (int iRow = height - 1; iRow >= 0; iRow--)
@@ -75,7 +80,7 @@ public class ArtLoader : Loader {
 			}
 		}
 		image.filterMode=FilterMode.Point;
-		image.alphaIsTransparency=Alpha;
+		//image.alphaIsTransparency=Alpha;
 		image.SetPixels32(imageColors);
 		image.Apply();
 		return image;

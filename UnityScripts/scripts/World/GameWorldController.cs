@@ -208,6 +208,31 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public GRLoader TmAnimo;
 
+	/// <summary>
+	/// The lev ark file data.
+	/// </summary>
+	private char[] lev_ark_file_data;
+
+	/// <summary>
+	/// The female armor
+	/// </summary>
+	public GRLoader armor_f;
+
+	/// <summary>
+	/// The male armor.
+	/// </summary>
+	public GRLoader armor_m;
+
+	/// <summary>
+	/// The cursors art
+	/// </summary>
+	public GRLoader grCursors;
+
+	/// <summary>
+	/// The health & mana flasks.
+	/// </summary>
+	public GRLoader grFlasks;
+
 	void Awake()
 	{
 		instance=this;
@@ -234,10 +259,14 @@ public class GameWorldController : UWEBase {
 		TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
 		TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
 		TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
+		armor_f=new GRLoader(GRLoader.ARMOR_F_GR);
+		armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
+		grCursors = new GRLoader(GRLoader.CURSORS_GR);
+		grFlasks=new GRLoader(GRLoader.FLASKS_GR);
 	}
 
 	void Start () {
-		char[] lev_ark;
+
 		instance=this;
 
 		//Load up my map materials
@@ -255,22 +284,12 @@ public class GameWorldController : UWEBase {
 		}
 
 		//Load up my tile maps
-		//First read in my lev_ark file.
-		if (DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark))
-		{			
-			for (int i=0; i<=Tilemaps.GetUpperBound(0);i++)
-			{
-				Tilemaps[i]=new TileMap();
-				Tilemaps[i].thisLevelNo=i;
-				Tilemaps[i].BuildTileMapUW(lev_ark,1,i);
-				objectList[i]=new ObjectLoader();
-				objectList[i].LoadObjectList( Tilemaps[i],lev_ark,1);
-								//Tilemaps[i].setRooms();
-								//Tilemaps[i].MergeWaterRegions();
-								//Tilemaps[i].MergeLavaRegions();
-				Tilemaps[i].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects
-			}
-		}
+		//First read in my lev_ark file in it's entirey
+		if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark_file_data))
+				{
+						Debug.Log(Lev_Ark_File + "File not loaded");
+						Application.Quit();
+				}
 
 
 
@@ -436,8 +455,24 @@ public class GameWorldController : UWEBase {
 		{
 			if (newLevelNo!=-1)
 			{
+
+					//Check loading
+					if (Tilemaps[newLevelNo]==null)
+					{//Data has not been loaded for this level
+						Tilemaps[newLevelNo]=new TileMap();
+						Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
+						Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data,1,newLevelNo);
+						objectList[newLevelNo]=new ObjectLoader();
+						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);
+						//Tilemaps[i].setRooms();
+						//Tilemaps[i].MergeWaterRegions();
+						//Tilemaps[i].MergeLavaRegions();
+						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
+					}
+
+
 				if(LevelNo!=-1)
-				{//Changing from a level
+				{//Changing from a level that has already loaded
 					//Update the positions of all object interactions in the level
 					//UpdatePositions();
 

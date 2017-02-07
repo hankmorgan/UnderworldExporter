@@ -114,6 +114,21 @@ public class UWHUD : HUD {
 		public RawImage mapBackground;
 		public RawImage mainwindow_art;
 
+		public RawImage npcTradeArea;
+		public RawImage pcTradeArea;
+		public RawImage ConvNPCPortraitBG;
+		public RawImage ConvPCPortraitBG;
+		public RawImage ConvPCTitleBG;
+		public RawImage ConvNPCTitleBG;
+		public RawImage ConvTextScrollTop;
+		public RawImage ConvTextScrollBottom;
+
+		public RawImage inventoryUpArrow;
+		public RawImage inventoryDownArrow;
+
+		public RawImage FlaskHealth;
+		public RawImage FlaskMana;
+
 		public Text ContextMenu;
 
 
@@ -132,6 +147,17 @@ public class UWHUD : HUD {
 				//Init hud elements
 				mapBackground.texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.BLNKMAP_BYT);
 				//mainwindow_art.texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.MAIN_BYT);
+
+				CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(0);
+				CursorIconDefault= GameWorldController.instance.grCursors.LoadImageAt(0);
+				CursorIconTarget=GameWorldController.instance.grCursors.LoadImageAt(9);
+				MapQuill=GameWorldController.instance.grCursors.LoadImageAt(14);
+				MapQuillWriting=GameWorldController.instance.grCursors.LoadImageAt(12);
+				MapEraser=GameWorldController.instance.grCursors.LoadImageAt(13);
+				inventoryDownArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(2);
+				inventoryUpArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(1);
+
+
 
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();
@@ -174,6 +200,7 @@ public class UWHUD : HUD {
 
 								break;
 						case 1://Stats display
+								StatsDisplay.UpdateNow=true	;	
 								InventoryEnabled=false;
 								RuneBagEnabled=false;
 								StatsEnabled=true;
@@ -215,6 +242,7 @@ public class UWHUD : HUD {
 
 								break;	
 						case 3://Conversation
+								GRLoader grConv = new GRLoader(GRLoader.CONVERSE_GR);
 								InventoryPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
 								PaperDollFemalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
 								PaperDollMalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
@@ -228,6 +256,14 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=false;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
+								npcTradeArea.texture=grConv.LoadImageAt(1);
+								pcTradeArea.texture=grConv.LoadImageAt(1);
+								ConvNPCPortraitBG.texture=grConv.LoadImageAt(2);
+								ConvPCPortraitBG.texture=grConv.LoadImageAt(2);
+								ConvTextScrollTop.texture=grConv.LoadImageAt(3);
+								ConvTextScrollTop.texture=grConv.LoadImageAt(4);
+								ConvPCTitleBG.texture=grConv.LoadImageAt(0);
+								ConvNPCTitleBG.texture=grConv.LoadImageAt(0);
 								UpdatePanelStates();
 								break;	
 						case 4://Map

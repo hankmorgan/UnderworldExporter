@@ -7,7 +7,8 @@ public class SpellProp_MagicArrow : SpellProp {
 	public override void init(int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
-		ProjectileSprite = UWEBase._RES +"/Sprites/Objects/Objects_023";
+		//ProjectileSprite = UWEBase._RES +"/Sprites/Objects/Objects_023";
+		ProjectileItemId=23;
 		Force=200.0f;
 		BaseDamage=3;
 		impactFrameStart=46;

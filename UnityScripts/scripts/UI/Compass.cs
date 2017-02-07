@@ -32,9 +32,12 @@ public class Compass : GuiBase_Draggable {
 	{
 		base.Start();
 		comp=this.GetComponent<RawImage>();
+
+		GRLoader grCompass=new GRLoader(GRLoader.COMPASS_GR);
 		for (int i=0;i<4;i++)
 		{
-			CompassPoles[i]=Resources.Load <Texture2D> (_RES +"/HUD/Compass/Compass_000"+i.ToString());
+			//CompassPoles[i]=Resources.Load <Texture2D> (_RES +"/HUD/Compass/Compass_000"+i.ToString());
+			CompassPoles[i] = grCompass.LoadImageAt(i);
 		}
 	}
 
