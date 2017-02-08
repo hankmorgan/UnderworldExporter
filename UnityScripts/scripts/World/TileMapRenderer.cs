@@ -59,7 +59,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-		public static void GenerateLevelFromTileMap(GameObject parent, int game, TileMap Level)
+		public static void GenerateLevelFromTileMap(GameObject parent, int game, TileMap Level, ObjectLoader objList)
 		{
 				UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
 				CEILING_HEIGHT=Level.CEILING_HEIGHT;
@@ -157,6 +157,220 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						}
 
 
+				}
+
+				//Render bridges, pillars
+				RenderBridges(parent,Level,objList);
+				RenderPillars(parent,Level,objList);
+				RenderDoorway (parent,Level,objList);
+		}
+
+		public static void RenderDoorway(GameObject Parent, TileMap level, ObjectLoader objList)
+		{
+				//TODO: Render a standard doorway and rotate.
+		}
+
+
+		public static void RendererDoorWayPortions(GameObject Parent, TileMap level, Vector3 position, ObjectLoaderInfo currdoor, float x0, float x1, float y0, float y1, float z0, float z1)
+		{
+
+				Vector3[] Verts= new Vector3[24];
+				Vector2[] UVs= new Vector2[24];
+				int t=0;
+				Verts[t++] = new Vector3(x0, y1, z0);
+				Verts[t++] = new Vector3(x0, y1, z1);
+				Verts[t++] = new Vector3(x1, y1, z1);
+				Verts[t++] = new Vector3(x1, y1, z0);
+
+				Verts[t++] = new Vector3(x1, y0, z0);
+				Verts[t++] = new Vector3(x1, y0, z1);
+				Verts[t++] = new Vector3(x0, y0, z1);
+				Verts[t++] = new Vector3(x0, y0, z0);
+
+				Verts[t++] = new Vector3(x1, y1, z0);
+				Verts[t++] = new Vector3(x1, y1, z1);
+				Verts[t++] = new Vector3(x1, y0, z1);
+				Verts[t++] = new Vector3(x1, y0, z0);
+
+				Verts[t++] = new Vector3(x0, y0, z0);
+				Verts[t++] = new Vector3(x0, y1, z0);
+				Verts[t++] = new Vector3(x1, y1, z0);
+				Verts[t++] = new Vector3(x1, y0, z0);
+
+				Verts[t++] = new Vector3(x0, y0, z0);
+				Verts[t++] = new Vector3(x0, y0, z1);
+				Verts[t++] = new Vector3(x0, y1, z1);
+				Verts[t++] = new Vector3(x0, y1, z0);
+
+				Verts[t++] = new Vector3(x1, y0, z1);
+				Verts[t++] = new Vector3(x1, y1, z1);
+				Verts[t++] = new Vector3(x0, y1, z1);
+				Verts[t++] = new Vector3(x0, y0, z1);
+
+
+				for (int j=0; j<6;j++)
+				{
+						UVs[(j*4)+0]= new Vector2(0f,0f);
+						UVs[(j*4)+1]= new Vector2(0f,CEILING_HEIGHT);
+						UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
+						UVs[(j*4)+3]= new Vector2(1f,0f);
+				}
+
+				Material[] MatsToUse = new Material[6];
+				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+				{
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currdoor.tileX,currdoor.tileY].wallTexture];
+				}
+				RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,"portion_" + ObjectLoader.UniqueObjectName(currdoor));
+					
+		}
+
+
+		public static void RenderPillars(GameObject Parent, TileMap level, ObjectLoader objList)
+		{
+				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
+				{
+						if ((objList.objInfo[i].item_id==352) && (objList.objInfo[i].InUseFlag==1))
+						{
+								Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
+								//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
+								Vector3[] Verts= new Vector3[24];
+								Vector2[] UVs= new Vector2[24];
+								int t=0;
+								float x1=0.03f;
+								float x0 =-0.03f;
+								float y0=-0.03f;
+								float y1=0.03f;
+								float z1=(float)(CEILING_HEIGHT * 0.15f)- position.y;
+								float z0=- position.y;
+
+								//x1
+								Verts[t++] = new Vector3(x0, y1, z0);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x1, y1, z0);
+
+								Verts[t++] = new Vector3(x1, y0, z0);
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x0, y0, z1);
+								Verts[t++] = new Vector3(x0, y0, z0);
+
+								Verts[t++] = new Vector3(x1, y1, z0);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x1, y0, z0);
+
+								Verts[t++] = new Vector3(x0, y0, z0);
+								Verts[t++] = new Vector3(x0, y1, z0);
+								Verts[t++] = new Vector3(x1, y1, z0);
+								Verts[t++] = new Vector3(x1, y0, z0);
+
+								Verts[t++] = new Vector3(x0, y0, z0);
+								Verts[t++] = new Vector3(x0, y0, z1);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x0, y1, z0);
+
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x0, y0, z1);
+
+
+								for (int j=0; j<6;j++)
+								{
+										UVs[(j*4)+0]= new Vector2(0f,0f);
+										UVs[(j*4)+1]= new Vector2(0f,CEILING_HEIGHT);
+										UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
+										UVs[(j*4)+3]= new Vector2(1f,0f);
+								}
+								int TextureIndex= objList.objInfo[i].flags & 0x3F;
+								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (TextureIndex).ToString("d2"));
+								if (tmobj.mainTexture==null)
+								{//UW1 style bridges UW2 has some differences....
+										tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(TextureIndex);
+								}
+								Material[] MatsToUse = new Material[6];
+								for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+								{//tmobj[30]+(objList[x].flags & 0x3F)
+										MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+								}
+								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+
+						}
+				}
+		}
+
+
+
+		public static void RenderBridges(GameObject Parent, TileMap level, ObjectLoader objList)
+		{
+				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
+				{
+						if ((objList.objInfo[i].item_id==356) && (objList.objInfo[i].InUseFlag==1))
+						{
+								Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
+								position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
+								Vector3[] Verts= new Vector3[24];
+								Vector2[] UVs= new Vector2[24];
+								int t=0;
+								float x1=0.6f;
+								float x0 =-0.6f;
+								float y0=-0.6f;
+								float y1=0.6f;
+								float z1=0.075f;
+								float z0=-0.075f;
+								//x1
+								Verts[t++] = new Vector3(x0, y1, z0);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x1, y1, z0);
+
+								Verts[t++] = new Vector3(x1, y0, z0);
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x0, y0, z1);
+								Verts[t++] = new Vector3(x0, y0, z0);
+
+								Verts[t++] = new Vector3(x1, y1, z0);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x1, y0, z0);
+
+								Verts[t++] = new Vector3(x0, y0, z0);
+								Verts[t++] = new Vector3(x0, y1, z0);
+								Verts[t++] = new Vector3(x1, y1, z0);
+								Verts[t++] = new Vector3(x1, y0, z0);
+
+								Verts[t++] = new Vector3(x0, y0, z0);
+								Verts[t++] = new Vector3(x0, y0, z1);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x0, y1, z0);
+
+								Verts[t++] = new Vector3(x1, y0, z1);
+								Verts[t++] = new Vector3(x1, y1, z1);
+								Verts[t++] = new Vector3(x0, y1, z1);
+								Verts[t++] = new Vector3(x0, y0, z1);
+
+								for (int j=0; j<6;j++)
+								{
+									UVs[(j*4)+0]= new Vector2(0f,0f);
+									UVs[(j*4)+1]= new Vector2(0f,1f);
+									UVs[(j*4)+2]= new Vector2(1f,1f);
+									UVs[(j*4)+3]= new Vector2(1f,0f);
+								}
+								int TextureIndex= objList.objInfo[i].flags & 0x3F;
+								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (30 + TextureIndex).ToString());
+								if (tmobj.mainTexture==null)
+								{//UW1 style bridges UW2 has some differences....
+									tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(30 + TextureIndex);
+								}
+								Material[] MatsToUse = new Material[6];
+								for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+								{//tmobj[30]+(objList[x].flags & 0x3F)
+									MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+								}
+								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+									
+						}
 				}
 		}
 
@@ -1002,6 +1216,53 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				mc.sharedMesh=mesh;
 
 		}
+
+		/// <summary>
+		/// Renders the cuboid from an arbitary set of vertices and uvs
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="verts">Verts.</param>
+		/// <param name="uvs">Uvs.</param>
+		/// <param name="position">Position.</param>
+		/// <param name="MatsToUse">Mats to use.</param>
+		/// <param name="NoOfFaces">No of faces.</param>
+		/// <param name="name">Name.</param>
+		static void RenderCuboid(GameObject parent, Vector3[] verts, Vector2[] uvs, Vector3 position, Material[] MatsToUse ,int NoOfFaces , string name)
+		{
+
+				GameObject Tile = new GameObject(name);
+				Tile.transform.parent=parent.transform;
+				Tile.transform.position = position;
+				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+				MeshFilter mf = Tile.AddComponent<MeshFilter>();
+				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+				MeshCollider mc = Tile.AddComponent<MeshCollider>();
+				mc.sharedMesh=null;
+				Mesh mesh = new Mesh();
+				mesh.vertices = verts;
+				mesh.uv = uvs;
+				mesh.subMeshCount=NoOfFaces;//VisibleFaces.GetUpperBound(0)+1;
+
+				int FaceCounter=0;
+				int [] tris = new int[6];
+				for (int i=0;i<NoOfFaces;i++)
+				{
+						tris[0]=0+(4*FaceCounter);
+						tris[1]=1+(4*FaceCounter);
+						tris[2]=2+(4*FaceCounter);
+						tris[3]=0+(4*FaceCounter);
+						tris[4]=2+(4*FaceCounter);
+						tris[5]=3+(4*FaceCounter);
+						mesh.SetTriangles(tris,FaceCounter);
+						FaceCounter++;
+				}
+				mr.materials= MatsToUse;
+				mesh.RecalculateNormals();
+				mesh.RecalculateBounds();
+				mf.mesh=mesh;
+				mc.sharedMesh=mesh;
+		}
+
 
 
 		static void RenderSolidTile(GameObject parent, int x, int y, TileInfo t, bool Water)

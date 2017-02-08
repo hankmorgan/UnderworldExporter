@@ -617,14 +617,7 @@ public class DoorControl : object_base {
 				int textureIndex=0;
 				//string DoorTexturePath="";
 			//Try and match up the door item id with a texture.
-			if ((objInt.item_id>=320) && (objInt.item_id<=325))
-				{//320>>58
-						doorIndex=objInt.item_id-262;
-				}
-				else
-				{//328>>58
-						doorIndex= objInt.item_id-270;
-				}
+
 
 			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
 				{
@@ -637,7 +630,15 @@ public class DoorControl : object_base {
 				case ObjectInteraction.DOOR:
 				default:
 					{
-						textureIndex= GameWorldController.instance.currentTileMap().texture_map[doorIndex];
+						if ((objInt.item_id>=320) && (objInt.item_id<=325))
+						{//320>>58
+								doorIndex=objInt.item_id-320;
+						}
+						else
+						{//328>>58
+								doorIndex= objInt.item_id-328;
+						}
+						textureIndex= GameWorldController.instance.currentTileMap().texture_map[58+doorIndex];
 						//DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
 						break;
 					}					

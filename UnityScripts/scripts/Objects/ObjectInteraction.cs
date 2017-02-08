@@ -1897,6 +1897,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<object_base>();
 						AddAnimation=true;
 						break;
+				case BRIDGE:
+						myObj.AddComponent<object_base>();
+						CreateSprite=false;
+						break;
 				case A_DO_TRAP:
 						{
 							switch (objInt.quality)	

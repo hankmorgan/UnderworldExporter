@@ -150,7 +150,7 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// The material for doors
 		/// </summary>
-		public Material[] MaterialDoors=new Material[12];
+		public Material[] MaterialDoors=new Material[13];
 
 	/// <summary>
 	/// Gameobject to load the objects at
@@ -483,7 +483,7 @@ public class GameWorldController : UWEBase {
 
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
-				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo]);
+				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
 				GenerateNavmesh(NavRigLand);
 				GenerateNavmesh(NavRigWater);
