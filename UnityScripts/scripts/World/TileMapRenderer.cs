@@ -184,6 +184,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
+
+
 		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
 		{
 
@@ -193,6 +195,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
 				}
 
+				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				float doorthickness = 0.1f;
+				float doorwidth = 0.8f;
+				float doorframewidth = 1.2f;
+				float doorSideWidth = (doorframewidth-doorwidth)/2f;
+				float doorheight = 7f * 0.15f;
 				//positions
 				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
 				//center in the tile and at the bottom of the map.
@@ -200,22 +208,17 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 				case EAST:
 				case WEST:
-						position =new Vector3( position.x, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
+						position =new Vector3( position.x-0.02f, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
 						break;
 				case NORTH:
 				case SOUTH:
-						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z);
+						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z-0.02f);
 						break;
 				}
 
-				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				float doorthickness = 0.1f;
-				float doorwidth = 0.8f;
-				float doorframewidth = 1.2f;
-				float doorSideWidth = (doorframewidth-doorwidth)/2f;
-				float doorheight = 7.3f * 0.15f;
-				float y0 = +doorthickness /2f;
-				float y1 = -doorthickness /2f;
+
+				float y0 = 0f;//+doorthickness /2f;
+				float y1 = 0f;//-doorthickness /2f;
 				float x0 = -doorframewidth /2f;
 				float x1 = +doorframewidth /2f;
 				float z0 = 0f;
@@ -246,18 +249,16 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				Vector2[] UVs = new Vector2[4];
 				UVs[0]= new Vector2(0f,0f);
-				//UVs[1]= new Vector2(0f,CEILING_HEIGHT*0.15f);
-				//UVs[2]= new Vector2(doorSideWidth,CEILING_HEIGHT*0.15f);
 				UVs[1]= new Vector2(0f,4);
 				UVs[2]= new Vector2(doorSideWidth,4);
 				UVs[3]= new Vector2(doorSideWidth,0f);
 
-				GameObject tile = RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"leftside_" + ObjectLoader.UniqueObjectName(currDoor));
+				GameObject tile = RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"rear_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));
 
 
-				y0 = +doorthickness /2f;
-				y1 = -doorthickness /2f;
+				//y0 = +doorthickness /2f;
+				//y1 = -doorthickness /2f;
 				x0 = -doorwidth /2f;
 				x1 = +doorwidth /2f;
 				z0 = 0f+ floorheight + doorheight;
@@ -294,13 +295,13 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
 				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
 
-				tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"over_" + ObjectLoader.UniqueObjectName(currDoor));
+				tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"rear_over_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));//TODO:FIx for headings.
 
 
 
-				y0 = +doorthickness /2f;
-				y1 = -doorthickness /2f;
+				//y0 = +doorthickness /2f;
+				//y1 = -doorthickness /2f;
 				x0 = -doorframewidth /2f;
 				x1 = +doorframewidth /2f;
 				z0 = 0f;
@@ -333,7 +334,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
 				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
 
-				tile = RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rightside_" + ObjectLoader.UniqueObjectName(currDoor));
+				tile = RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rear_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));
 
 		}
@@ -355,31 +356,34 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
 				}
-
+				//Door params
+				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				float doorthickness = 0.2f;
+				float doorwidth = 0.8f;
+				float doorframewidth = 1.2f;
+				float doorSideWidth = (doorframewidth-doorwidth)/2f;
+				float doorheight = 7.0f * 0.15f ;
+				Vector3 doorposition;
 				//positions
 				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
+				doorposition=position;
 				//center in the tile and at the bottom of the map.
 				switch (currDoor.heading*45)
 				{
 				case EAST:
 				case WEST:
-						position =new Vector3( position.x, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
+						position =new Vector3( position.x+0.02f, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
 						break;
 				case NORTH:
 				case SOUTH:
-						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z);
+						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z+0.02f);
 						break;
 				}
 
 
-				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				float doorthickness = 0.1f;
-				float doorwidth = 0.8f;
-				float doorframewidth = 1.2f;
-				float doorSideWidth = (doorframewidth-doorwidth)/2f;
-				float doorheight = 7.3f * 0.15f ;
-				float y0 = +doorthickness /2f;
-				float y1 = -doorthickness /2f;
+
+				float y0 = 0f;//+doorthickness /2f;
+				float y1 = 0f;//-doorthickness /2f;
 				float x0 = -doorframewidth /2f;
 				float x1 = +doorframewidth /2f;
 				float z0 = 0f;
@@ -413,12 +417,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				UVs[2]= new Vector2(doorSideWidth,4);
 				UVs[3]= new Vector2(doorSideWidth,0f);
 
-				RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"leftside_" + ObjectLoader.UniqueObjectName(currDoor));
+				RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"front_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 
 
 
-				y0 = +doorthickness /2f;
-				y1 = -doorthickness /2f;
+				//y0 = +doorthickness /2f;
+				//y1 = -doorthickness /2f;
 				x0 = -doorwidth /2f;
 				x1 = +doorwidth /2f;
 				z0 = 0f+ floorheight + doorheight;
@@ -455,13 +459,13 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
 				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
 
-				RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"over_" + ObjectLoader.UniqueObjectName(currDoor));
+				RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"front_over_" + ObjectLoader.UniqueObjectName(currDoor));
 
 
 
 
-				y0 = +doorthickness /2f;
-				y1 = -doorthickness /2f;
+				//y0 = +doorthickness /2f;
+				//y1 = -doorthickness /2f;
 				x0 = -doorframewidth /2f;
 				x1 = +doorframewidth /2f;
 				z0 = 0f;
@@ -493,8 +497,85 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
 				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
 
-				RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rightside_" + ObjectLoader.UniqueObjectName(currDoor));
+				RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"front_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
 
+				//Some filler
+				Vector3[] filler= new Vector3[12];
+				int v=0;
+				position = new Vector3(position.x,floorheight,position.z);
+				UVs= new Vector2[12];
+				UVs[0]= new Vector2(0,0f);
+				UVs[1]= new Vector2(0,1);
+				UVs[2]= new Vector2(1,1);
+				UVs[3]= new Vector2(1,0f);	
+				UVs[4]= new Vector2(0,0f);
+				UVs[5]= new Vector2(0,1);
+				UVs[6]= new Vector2(1,1);
+				UVs[7]= new Vector2(1,0f);	
+				UVs[8]= new Vector2(0,0f);
+				UVs[9]= new Vector2(0,1);
+				UVs[10]= new Vector2(1,1);
+				UVs[11]= new Vector2(1,0f);	
+
+
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						//side
+						v=0;
+						filler[v++] = new Vector3( 0.04f,-doorwidth/2, doorheight);
+						filler[v++] = new Vector3(0.04f,-doorwidth/2, 0f);
+						filler[v++] = new Vector3(-0.00f,-doorwidth/2,  0f);
+						filler[v++] = new Vector3(-0.00f,-doorwidth/2,  doorheight);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"side1_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						//over
+						v=0;
+						filler[v++] = new Vector3(0.00f,+doorwidth/2,  doorheight);
+						filler[v++] = new Vector3(0.04f,+doorwidth/2, doorheight);
+						filler[v++] = new Vector3(0.04f,-doorwidth/2,  doorheight);
+						filler[v++] = new Vector3(0.00f,-doorwidth/2,  doorheight);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						v=0;
+						//side
+						filler[v++] = new Vector3(0.04f,+doorwidth/2,  0f);
+						filler[v++] = new Vector3(0.04f,+doorwidth/2, doorheight);
+						filler[v++] = new Vector3(0.00f,+doorwidth/2,  doorheight);
+						filler[v++] = new Vector3(0.00f,+doorwidth/2, 0f);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"side2_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						break;
+
+
+				case NORTH:
+				case SOUTH:
+				default:
+						//side
+						v=0;
+						filler[v++] = new Vector3(-doorwidth/2, 0.00f, 0f);
+						filler[v++] = new Vector3(-doorwidth/2, 0.00f, doorheight);
+						filler[v++] = new Vector3(-doorwidth/2, -0.04f, doorheight);
+						filler[v++] = new Vector3(-doorwidth/2, -0.04f, 0f);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"side1_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						//over
+						v=0;
+						filler[v++] = new Vector3(+doorwidth/2, -0.00f, doorheight);
+						filler[v++] = new Vector3(+doorwidth/2, -0.04f, doorheight);
+						filler[v++] = new Vector3(-doorwidth/2, -0.04f, doorheight);
+						filler[v++] = new Vector3(-doorwidth/2,  0.00f, doorheight);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						v=0;
+						//side
+						filler[v++] = new Vector3(+doorwidth/2, 0.00f, doorheight);
+						filler[v++] = new Vector3(+doorwidth/2, 0.00f, 0f);
+						filler[v++] = new Vector3(+doorwidth/2, -0.04f, 0f);
+						filler[v++] = new Vector3(+doorwidth/2, -0.04f, doorheight);
+						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"side2_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						break;
+				}
+
+
+
+				RenderCuboid(Parent,filler,UVs,position,MatsToUse,3,"front_filler_" + ObjectLoader.UniqueObjectName(currDoor));
 		}
 
 		/*

@@ -5,6 +5,14 @@ public class Grave : object_base {
 	///ID of the grave to lookup
 	public int GraveID;
 
+	protected override void Start ()
+	{
+		base.Start ();
+		GraveID=  objInt().objectloaderinfo.DeathWatched;//seriously?????? Need to make this better. Look at BuildObjectList
+		CreateGrave(this.gameObject,objInt());
+	}
+
+
 	/// <summary>
 	/// Plays cutscene that displays the gravestone.
 	/// </summary>
@@ -110,4 +118,30 @@ public class Grave : object_base {
 
 		return base.UseObjectOnVerb_Inv();
 	}
+
+
+		public static void CreateGrave(GameObject myObj, ObjectInteraction objInt)
+		{//TODO:make this a properly texture model as part of map generation.
+			myObj.layer=LayerMask.NameToLayer("MapMesh");
+
+			GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cube); 
+			SpriteController.name = myObj.name + "_cube";
+			SpriteController.transform.position = myObj.transform.position;
+			SpriteController.transform.rotation=myObj.transform.rotation;
+			SpriteController.transform.parent = myObj.transform;
+			SpriteController.transform.localScale=new Vector3(0.5f,0.5f,0.1f);
+			SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
+
+			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
+			mr.material= (Material)Resources.Load (_RES+ "/Materials/tmobj/tmobj_" + objInt.flags+28);
+			mr.material.mainTexture= GameWorldController.instance.TmObjArt.LoadImageAt(objInt.flags+28);
+			BoxCollider bx = myObj.GetComponent<BoxCollider>();
+			bx.center= new Vector3(0.0f,0.25f,0.0f);
+			bx.size=new Vector3(0.5f,0.5f,0.1f);
+			bx.isTrigger=false;
+
+			bx=SpriteController.GetComponent<BoxCollider>();
+			bx.enabled=false;
+			Component.DestroyImmediate (bx);
+		}
 }

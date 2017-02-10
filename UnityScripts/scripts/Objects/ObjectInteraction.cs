@@ -102,8 +102,8 @@ public class ObjectInteraction : UWEBase {
 		public const int ANIMATION = 80;
 		public const int SILVERSEED = 81;
 		public const int FOUNTAIN = 82;
-		public const int GRAVE = 83;
-		public const int SHRINE = 84;
+		public const int SHRINE = 83;
+		public const int GRAVE = 84;
 		public const int ANVIL = 85;
 		public const int POLE = 86;
 		public const int SPIKE = 87;
@@ -1773,6 +1773,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<SilverSeed>();
 						AddAnimation=true;
 						break;
+				case GRAVE:
+						myObj.AddComponent<Grave>();
+						CreateSprite=false;
+						break;
 				case SHRINE:
 						myObj.AddComponent<Shrine>();
 						break;
@@ -1825,63 +1829,82 @@ public class ObjectInteraction : UWEBase {
 				case A_MOVE_TRIGGER :
 				case A_STEP_ON_TRIGGER:
 						myObj.AddComponent<a_move_trigger>();
+						CreateSprite=false;
 						break;
 				case A_PICK_UP_TRIGGER:
 						myObj.AddComponent<a_pick_up_trigger>();
+						CreateSprite=false;
 						break;
 				case A_USE_TRIGGER:
 				case A_LOOK_TRIGGER:
 				case AN_OPEN_TRIGGER:
 				case AN_UNLOCK_TRIGGER:
 						myObj.AddComponent<trigger_base>();	
+						CreateSprite=false;
 						break;
 				case A_DAMAGE_TRAP:
 						myObj.AddComponent<a_damage_trap>();
+						CreateSprite=false;
 						break;
 				case A_TELEPORT_TRAP:
 						myObj.AddComponent<a_teleport_trap>();
+						CreateSprite=false;
 						break;
 				case A_ARROW_TRAP:
 						myObj.AddComponent<a_arrow_trap>();
+						CreateSprite=false;
 						break;
 				case A_PIT_TRAP:
 						myObj.AddComponent<a_pit_trap>();
+						CreateSprite=false;
 						break;
 				case A_CHANGE_TERRAIN_TRAP:
 						myObj.AddComponent<a_change_terrain_trap>();
+						CreateSprite=false;
 						break;
 				case A_SPELLTRAP:
 						myObj.AddComponent<a_spelltrap>();
+						CreateSprite=false;
 						break;
 				case A_CREATE_OBJECT_TRAP:
 						myObj.AddComponent<a_create_object_trap>();
+						CreateSprite=false;
 						break;
 				case A_DOOR_TRAP:
 						myObj.AddComponent<a_door_trap>();
+						CreateSprite=false;
 						break;
 				case A_WARD_TRAP:
 						myObj.AddComponent<a_ward_trap>();
+						CreateSprite=false;
 						break;
 				case A_TELL_TRAP:
 						myObj.AddComponent<a_tell_trap>();
+						CreateSprite=false;
 						break;
 				case A_DELETE_OBJECT_TRAP:
 						myObj.AddComponent<a_delete_object_trap>();
+						CreateSprite=false;
 						break;
 				case AN_INVENTORY_TRAP:
 						myObj.AddComponent<an_inventory_trap>();
+						CreateSprite=false;
 						break;
 				case A_SET_VARIABLE_TRAP:
 						myObj.AddComponent<a_set_variable_trap>();
+						CreateSprite=false;
 						break;
 				case A_CHECK_VARIABLE_TRAP:
 						myObj.AddComponent<a_check_variable_trap>();
+						CreateSprite=false;
 						break;
 				case A_COMBINATION_TRAP:
 						myObj.AddComponent<a_combination_trap>();
+						CreateSprite=false;
 						break;
 				case A_TEXT_STRING_TRAP:
 						myObj.AddComponent<a_text_string_trap>();
+						CreateSprite=false;
 						break;
 				case TMAP_CLIP:
 				case TMAP_SOLID:
@@ -1920,6 +1943,7 @@ public class ObjectInteraction : UWEBase {
 							default:
 									myObj.AddComponent<trap_base>();break;
 							}
+							CreateSprite=false;
 							break;
 						}
 				default:
