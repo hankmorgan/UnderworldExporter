@@ -514,11 +514,11 @@ public class GameWorldController : UWEBase {
 				// Unregister any navigation mesh we may already have (probably none if you are using this)
 				NavRig.NavMesh.UnregisterNavigationGraph();
 				NavRig.NavMesh.Size = 20;
-				float startTime = Time.time;
+				//float startTime = Time.time;
 				NavRig.NavMesh.StartCreatingContours(_threadcount);
 				NavRig.NavMesh.CreateAllContours();
-				float endTime = Time.time;
-				Debug.Log("NavMesh generated in " + (endTime - startTime) + "s");
+				//float endTime = Time.time;
+				//Debug.Log("NavMesh generated in " + (endTime - startTime) + "s");
 				NavRig.NavMesh.RegisterNavigationGraph();
 				NavRig.Awake();
 

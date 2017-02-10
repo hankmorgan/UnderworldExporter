@@ -88,9 +88,12 @@ public class MainMenuHud : GuiBase {
 
 
 		void OnGUI()
-		{
+		{				
 				CursorPosition.center = Event.current.mousePosition;
-				GUI.DrawTexture (CursorPosition,CursorIcon);
+				if (CursorIcon!=null)
+				{
+						GUI.DrawTexture (CursorPosition,CursorIcon);		
+				}
 				if ((MenuMode==1) || (MenuMode==2))
 				{
 						if (Input.GetKey(KeyCode.Escape))

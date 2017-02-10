@@ -51,6 +51,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		const int fTOP =2;
 		const int fBOTTOM= 1;
 
+		//Door headings
+		const int NORTH=180;
+		const int SOUTH=0;
+		const int EAST=270;
+		const int WEST=90;
 
 
 		static int UW_CEILING_HEIGHT;
@@ -159,18 +164,340 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				}
 
-				//Render bridges, pillars
+				//Render bridges, pillars and door ways
 				RenderBridges(parent,Level,objList);
 				RenderPillars(parent,Level,objList);
-				RenderDoorway (parent,Level,objList);
+				RenderDoorways (parent,Level,objList);
 		}
 
-		public static void RenderDoorway(GameObject Parent, TileMap level, ObjectLoader objList)
+		public static void RenderDoorways(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
-				//TODO: Render a standard doorway and rotate.
+			for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
+			{
+				if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
+				{
+					RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
+					RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
+				}
+			}
 		}
 
 
+
+		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
+		{
+
+				Material[] MatsToUse = new Material[1];
+				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+				{
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
+				}
+
+				//positions
+				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
+				//center in the tile and at the bottom of the map.
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST:
+						position =new Vector3( position.x, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
+						break;
+				case NORTH:
+				case SOUTH:
+						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z);
+						break;
+				}
+
+				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				float doorthickness = 0.1f;
+				float doorwidth = 0.8f;
+				float doorframewidth = 1.2f;
+				float doorSideWidth = (doorframewidth-doorwidth)/2f;
+				float doorheight = 7.3f * 0.15f;
+				float y0 = +doorthickness /2f;
+				float y1 = -doorthickness /2f;
+				float x0 = -doorframewidth /2f;
+				float x1 = +doorframewidth /2f;
+				float z0 = 0f;
+				float z1 = CEILING_HEIGHT*0.15f;
+
+				//My vertex tris
+				Vector3[] leftHand = new Vector3[4];
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						leftHand[0] = new Vector3(y1,x0,z0);
+						leftHand[1] = new Vector3(y1,x0,z1);
+						leftHand[2] = new Vector3(y1,x0 + doorSideWidth,z1);
+						leftHand[3] = new Vector3(y1,x0 + doorSideWidth,z0);
+						break;
+				case NORTH:
+				case SOUTH:
+				default:
+						leftHand[0] = new Vector3(x0,y1,z0);
+						leftHand[1] = new Vector3(x0,y1,z1);
+						leftHand[2] = new Vector3(x0 + doorSideWidth,y1,z1);
+						leftHand[3] = new Vector3(x0 + doorSideWidth,y1,z0);
+						break;
+				}
+
+
+
+				Vector2[] UVs = new Vector2[4];
+				UVs[0]= new Vector2(0f,0f);
+				//UVs[1]= new Vector2(0f,CEILING_HEIGHT*0.15f);
+				//UVs[2]= new Vector2(doorSideWidth,CEILING_HEIGHT*0.15f);
+				UVs[1]= new Vector2(0f,4);
+				UVs[2]= new Vector2(doorSideWidth,4);
+				UVs[3]= new Vector2(doorSideWidth,0f);
+
+				GameObject tile = RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"leftside_" + ObjectLoader.UniqueObjectName(currDoor));
+				tile.transform.Rotate(new Vector3(0f,0f,-180f));
+
+
+				y0 = +doorthickness /2f;
+				y1 = -doorthickness /2f;
+				x0 = -doorwidth /2f;
+				x1 = +doorwidth /2f;
+				z0 = 0f+ floorheight + doorheight;
+				z1 = CEILING_HEIGHT*0.15f;
+				//1.2
+				Vector3[] overHead = new Vector3[4];
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						overHead[0] = new Vector3(y1,x0,z0);
+						overHead[1] = new Vector3(y1,x0,z1);
+						overHead[2] = new Vector3(y1,x1,z1);
+						overHead[3] = new Vector3(y1,x1,z0);
+						break;
+				case NORTH:
+				case SOUTH:
+				default:
+					overHead[0] = new Vector3(x0,y1,z0);
+					overHead[1] = new Vector3(x0,y1,z1);
+					overHead[2] = new Vector3(x1,y1,z1);
+					overHead[3] = new Vector3(x1,y1,z0);
+						break;					
+				}
+
+
+				float dist = (z0) /0.15f;//Get back to steps.
+				dist=dist/8f;
+
+
+				//Vector2[] UVs = new Vector2[4];
+				UVs[0]= new Vector2(0+doorSideWidth, dist);
+				UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
+				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
+				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
+
+				tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"over_" + ObjectLoader.UniqueObjectName(currDoor));
+				tile.transform.Rotate(new Vector3(0f,0f,-180f));//TODO:FIx for headings.
+
+
+
+				y0 = +doorthickness /2f;
+				y1 = -doorthickness /2f;
+				x0 = -doorframewidth /2f;
+				x1 = +doorframewidth /2f;
+				z0 = 0f;
+				z1 = CEILING_HEIGHT*0.15f;
+				//My vertex tris
+				Vector3[] rightHand = new Vector3[4];
+
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						rightHand[0] = new Vector3( y1,x0 + doorSideWidth + doorwidth,z0);
+						rightHand[1] = new Vector3( y1,x0 + doorSideWidth + doorwidth,z1);
+						rightHand[2] = new Vector3( y1,x0 + doorSideWidth + doorwidth + doorSideWidth,z1);
+						rightHand[3] = new Vector3( y1,x0 + doorSideWidth + doorwidth + doorSideWidth,z0);
+						break;
+				case NORTH:
+				case SOUTH:						
+				default:
+						rightHand[0] = new Vector3(x0 + doorSideWidth + doorwidth, y1,z0);
+						rightHand[1] = new Vector3(x0 + doorSideWidth + doorwidth, y1,z1);
+						rightHand[2] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y1,z1);
+						rightHand[3] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y1,z0);
+						break;
+				}
+
+				UVs = new Vector2[4];
+				UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
+				UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
+				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
+				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
+
+				tile = RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rightside_" + ObjectLoader.UniqueObjectName(currDoor));
+				tile.transform.Rotate(new Vector3(0f,0f,-180f));
+
+		}
+
+
+
+
+
+
+
+
+
+
+		public static void RenderDoorwayFront(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
+		{
+
+				Material[] MatsToUse = new Material[1];
+				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+				{
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
+				}
+
+				//positions
+				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
+				//center in the tile and at the bottom of the map.
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST:
+						position =new Vector3( position.x, 0f, currDoor.tileY*1.2f + 1.2f / 2f);
+						break;
+				case NORTH:
+				case SOUTH:
+						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z);
+						break;
+				}
+
+
+				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				float doorthickness = 0.1f;
+				float doorwidth = 0.8f;
+				float doorframewidth = 1.2f;
+				float doorSideWidth = (doorframewidth-doorwidth)/2f;
+				float doorheight = 7.3f * 0.15f ;
+				float y0 = +doorthickness /2f;
+				float y1 = -doorthickness /2f;
+				float x0 = -doorframewidth /2f;
+				float x1 = +doorframewidth /2f;
+				float z0 = 0f;
+				float z1 = CEILING_HEIGHT*0.15f;
+
+				//My vertex tris
+
+				Vector3[] leftHand = new Vector3[4];
+
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						leftHand[0] = new Vector3(y0,x0,z0);
+						leftHand[1] = new Vector3(y0,x0,z1);
+						leftHand[2] = new Vector3(y0,x0 + doorSideWidth,z1);
+						leftHand[3] = new Vector3(y0,x0 + doorSideWidth,z0);
+						break;
+				case NORTH:
+				case SOUTH:
+				default:
+						leftHand[0] = new Vector3(x0,y0,z0);
+						leftHand[1] = new Vector3(x0,y0,z1);
+						leftHand[2] = new Vector3(x0 + doorSideWidth,y0,z1);
+						leftHand[3] = new Vector3(x0 + doorSideWidth,y0,z0);
+						break;
+				}
+				Vector2[] UVs = new Vector2[4];
+				UVs[0]= new Vector2(0f,0f);
+				UVs[1]= new Vector2(0f,4);
+				UVs[2]= new Vector2(doorSideWidth,4);
+				UVs[3]= new Vector2(doorSideWidth,0f);
+
+				RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"leftside_" + ObjectLoader.UniqueObjectName(currDoor));
+
+
+
+				y0 = +doorthickness /2f;
+				y1 = -doorthickness /2f;
+				x0 = -doorwidth /2f;
+				x1 = +doorwidth /2f;
+				z0 = 0f+ floorheight + doorheight;
+				z1 = CEILING_HEIGHT*0.15f;
+				//1.2
+				Vector3[] overHead = new Vector3[4];
+
+
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						overHead[0] = new Vector3(y0,x0,z0);
+						overHead[1] = new Vector3(y0,x0,z1);
+						overHead[2] = new Vector3(y0,x1,z1);
+						overHead[3] = new Vector3(y0,x1,z0);
+						break;
+				case NORTH:
+				case SOUTH:
+				default:
+					overHead[0] = new Vector3(x0,y0,z0);
+					overHead[1] = new Vector3(x0,y0,z1);
+					overHead[2] = new Vector3(x1,y0,z1);
+					overHead[3] = new Vector3(x1,y0,z0);
+					break;
+				}
+				float dist = (z0) /0.15f;//Get back to steps.
+				dist=dist/8f;
+
+				
+				//Vector2[] UVs = new Vector2[4];
+				UVs[0]= new Vector2(0+doorSideWidth, dist);
+				UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
+				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
+				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
+
+				RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"over_" + ObjectLoader.UniqueObjectName(currDoor));
+
+
+
+
+				y0 = +doorthickness /2f;
+				y1 = -doorthickness /2f;
+				x0 = -doorframewidth /2f;
+				x1 = +doorframewidth /2f;
+				z0 = 0f;
+				z1 = CEILING_HEIGHT*0.15f;
+				//My vertex tris
+				Vector3[] rightHand = new Vector3[4];
+
+				switch (currDoor.heading*45)
+				{
+				case EAST:
+				case WEST://Swap x and y
+						rightHand[0] = new Vector3(y0,x0 + doorSideWidth + doorwidth, z0);
+						rightHand[1] = new Vector3(y0,x0 + doorSideWidth + doorwidth, z1);
+						rightHand[2] = new Vector3(y0,x0 + doorSideWidth + doorwidth + doorSideWidth,z1);
+						rightHand[3] = new Vector3(y0,x0 + doorSideWidth + doorwidth + doorSideWidth,z0);
+						break;
+				case NORTH:
+				case SOUTH:
+				default:
+					rightHand[0] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z0);
+					rightHand[1] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z1);
+					rightHand[2] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z1);
+					rightHand[3] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z0);
+						break;
+				}
+				UVs = new Vector2[4];
+				UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
+				UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
+				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
+				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
+
+				RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rightside_" + ObjectLoader.UniqueObjectName(currDoor));
+
+		}
+
+		/*
 		public static void RendererDoorWayPortions(GameObject Parent, TileMap level, Vector3 position, ObjectLoaderInfo currdoor, float x0, float x1, float y0, float y1, float z0, float z1)
 		{
 
@@ -223,7 +550,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 				RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,"portion_" + ObjectLoader.UniqueObjectName(currdoor));
 					
-		}
+		}*/
 
 
 		public static void RenderPillars(GameObject Parent, TileMap level, ObjectLoader objList)
@@ -1227,7 +1554,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		/// <param name="MatsToUse">Mats to use.</param>
 		/// <param name="NoOfFaces">No of faces.</param>
 		/// <param name="name">Name.</param>
-		static void RenderCuboid(GameObject parent, Vector3[] verts, Vector2[] uvs, Vector3 position, Material[] MatsToUse ,int NoOfFaces , string name)
+		static GameObject RenderCuboid(GameObject parent, Vector3[] verts, Vector2[] uvs, Vector3 position, Material[] MatsToUse ,int NoOfFaces , string name)
 		{
 
 				GameObject Tile = new GameObject(name);
@@ -1261,6 +1588,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				mesh.RecalculateBounds();
 				mf.mesh=mesh;
 				mc.sharedMesh=mesh;
+
+				return Tile;
 		}
 
 
