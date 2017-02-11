@@ -945,6 +945,7 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 			if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
 				{
 				//fprintf(LOGFILE, "\n\tAnim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
+				printf(" \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
 				fprintf(LOGFILE, " \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
 				ValidCount++;
 				}

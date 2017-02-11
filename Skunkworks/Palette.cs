@@ -11,6 +11,7 @@ public class Palette  {
 	public byte[] green= new byte[256];
 
 
+
 	public Color32 ColorAtPixel(byte pixel, bool Alpha)
 		{
 		byte alpha;

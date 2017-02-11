@@ -12,6 +12,7 @@ public class MapLoader : MonoBehaviour {
 	/*
 Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
 */
+	public Text output;
 	public const int  TILE_DIAG_SE= 2;
 	public const int  TILE_DIAG_SW =3;
 	public 	const int  TILE_DIAG_NE= 4;
@@ -59,17 +60,36 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 	//**********************
 
 
+	public Vector3[] testVerts;
+	public Vector2[] testUVs;
+	public GameObject testParent;
 
 	public TileInfo[,] LevelInfo=new TileInfo[64,64];
 	public int[] texture_map = new int[256];
 	public Material[] MaterialMasterList=new Material[260];
-
+	public Material[] MaterialTestList=new Material[2];
+	public int NoOfFacesToRender;
 	//**********************
 
 	public string Path;
 	public int UW_CEILING_HEIGHT;
 	public int CEILING_HEIGHT;
 
+	public void Update()
+		{
+		ReRender();
+		}
+
+	public void ReRender()
+		{
+		foreach (Transform t in testParent.transform)
+			{
+			Destroy(t.gameObject);
+			}
+
+		RenderCuboid(testParent,testVerts,testUVs,Vector3.zero,MaterialTestList,NoOfFacesToRender,"test");
+		}
+	
 
 	void Start()
 		{
@@ -78,6 +98,13 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			{
 			MaterialMasterList[i]=(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
 			}
+		string ans="";
+		for (int i =0 ; i<=testVerts.GetUpperBound(0);i++)
+			{
+			ans += testVerts[i].ToString()+"\n";
+			}
+		output.text=ans;
+
 		}
 
 
@@ -1149,6 +1176,44 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 			}
 		}
 	}
+
+
+
+	void RenderCuboid(GameObject parent, Vector3[] verts, Vector2[] uvs, Vector3 position, Material[] MatsToUse ,int NoOfFaces , string name)
+		{
+
+		GameObject Tile = new GameObject(name);
+		Tile.transform.parent=parent.transform;
+		Tile.transform.position = position;
+		Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+		MeshFilter mf = Tile.AddComponent<MeshFilter>();
+		MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+		MeshCollider mc = Tile.AddComponent<MeshCollider>();
+		mc.sharedMesh=null;
+		Mesh mesh = new Mesh();
+		mesh.vertices = verts;
+		mesh.uv = uvs;
+		mesh.subMeshCount=NoOfFaces;//VisibleFaces.GetUpperBound(0)+1;
+
+		int FaceCounter=0;
+		int [] tris = new int[6];
+		for (int i=0;i<NoOfFaces;i++)
+			{
+				tris[0]=0+(4*FaceCounter);
+				tris[1]=1+(4*FaceCounter);
+				tris[2]=2+(4*FaceCounter);
+				tris[3]=0+(4*FaceCounter);
+				tris[4]=2+(4*FaceCounter);
+				tris[5]=3+(4*FaceCounter);
+				mesh.SetTriangles(tris,FaceCounter);
+				FaceCounter++;
+			}
+		mr.materials= MatsToUse;
+		mesh.RecalculateNormals();
+		mesh.RecalculateBounds();
+		mf.mesh=mesh;
+		mc.sharedMesh=mesh;
+		}
 
 	void RenderCuboid(GameObject parent, int x, int y, TileInfo t, short Water, int Bottom, int Top, string TileName)
 		{

@@ -108,17 +108,17 @@ public class ArtLoader : MonoBehaviour {
 				case 0x4://8 bit uncompressed
 					{
 					imageOffset = imageOffset + 5;
-					sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[0],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+					sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
 					break;
 					}
 				case 0x8://4 bit run-length
 					{
 					auxPalIndex = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 3, 8);
 					datalen = (int)DataLoader.getValAtAddress(grBuffer,imageOffset+4,16);
-					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
+					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[0],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[pal],auxPalIndex);
 					outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
 					//rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true);
 					sprt.sprite= Sprite.Create(Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
@@ -128,10 +128,10 @@ public class ArtLoader : MonoBehaviour {
 					{
 					auxPalIndex = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 3, 8);
 					datalen = (int)DataLoader.getValAtAddress(grBuffer, imageOffset + 4, 16);
-					imgNibbles = new char[BitMapWidth*BitMapHeight*2];
+					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(grBuffer, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[0],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(auxPalPath,palLoader.Palettes[pal],auxPalIndex);
 
 					sprt.sprite= Sprite.Create(Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
 					break;				
@@ -149,7 +149,7 @@ public class ArtLoader : MonoBehaviour {
 				//	BitMapHeight = 112;
 				//	}
 				imageOffset = DataLoader.getValAtAddress(grBuffer, (grIndex * 4) + 3, 32);
-				sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[0],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+				sprt.sprite= Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
 
 				}
 
@@ -299,7 +299,7 @@ public class ArtLoader : MonoBehaviour {
 		}
 
 
-	private Texture2D Image(char[] databuffer,long dataOffSet, int width, int height, string imageName, Palette pal , bool Alpha )
+	public static Texture2D Image(char[] databuffer,long dataOffSet, int width, int height, string imageName, Palette pal , bool Alpha )
 		{
 		int pixelcount=0;
 		Texture2D image = new Texture2D(width, height);
@@ -353,6 +353,190 @@ public class ArtLoader : MonoBehaviour {
 					}
 				}
 
+		}
+
+
+
+
+
+
+	public static void ua_image_decode_rle(char[] FileIn, char[] pixels, int bits, int datalen, int maxpix, int addr_ptr,char[] auxpal)
+		{
+		//Code lifted from Underworld adventures.
+		// bit extraction variables
+		 int bits_avail = 0;
+		 int rawbits = 0;
+		 int bitmask = ((1 << bits) - 1) << (8 - bits);
+		 int nibble;
+
+		// rle decoding vars
+		 int pixcount = 0;
+		 int stage = 0; // we start in stage 0
+		 int count = 0;
+		 int record = 0; // we start with record 0=repeat (3=run)
+		 int repeatcount = 0;
+
+		while (datalen>0 && pixcount<maxpix)
+			{
+			// get new bits
+			if (bits_avail<bits)
+				{
+				// not enough bits available
+				if (bits_avail>0)
+					{
+					nibble = ((rawbits & bitmask) >> (8 - bits_avail));
+					nibble <<= (bits - bits_avail);
+					}
+				else
+					nibble = 0;
+
+				//rawbits = ( int)fgetc(fd);
+				rawbits = ( int)DataLoader.getValAtAddress(FileIn,addr_ptr,8);
+				addr_ptr++;
+				if ((int)rawbits == -1)  //EOF
+					return;
+
+				//         fprintf(LOGFILE,"fgetc: %02x\n",rawbits);
+
+				 int shiftval = 8 - (bits - bits_avail);
+
+				nibble |= (rawbits >> shiftval);
+
+				rawbits = (rawbits << (8 - shiftval)) & 0xFF;
+
+				bits_avail = shiftval;
+				}
+			else
+				{
+				// we still have enough bits
+				nibble = (rawbits & bitmask) >> (8 - bits);
+				bits_avail -= bits;
+				rawbits <<= bits;
+				}
+
+			//      fprintf(LOGFILE,"nibble: %02x\n",nibble);
+
+			// now that we have a nibble
+			datalen--;
+
+			switch (stage)
+			{
+			case 0: // we retrieve a new count
+				if (nibble == 0)
+					stage++;
+				else
+					{
+					count = nibble;
+					stage = 6;
+					}
+				break;
+			case 1:
+				count = nibble;
+				stage++;
+				break;
+
+			case 2:
+				count = (count << 4) | nibble;
+				if (count == 0)
+					stage++;
+				else
+					stage = 6;
+				break;
+
+			case 3:
+			case 4:
+			case 5:
+				count = (count << 4) | nibble;
+				stage++;
+				break;
+			}
+
+			if (stage<6) continue;
+
+			switch (record)
+			{
+			case 0:
+				// repeat record stage 1
+				//         fprintf(LOGFILE,"repeat: new count: %x\n",count);
+
+				if (count == 1)
+					{
+					record = 3; // skip this record; a run follows
+					break;
+					}
+
+				if (count == 2)
+					{
+					record = 2; // multiple run records
+					break;
+					}
+
+				record = 1; // read next nibble; it's the color to repeat
+				continue;
+
+			case 1:
+				// repeat record stage 2
+
+					{
+					// repeat 'nibble' color 'count' times
+					for ( int n = 0; n<count; n++)
+						{
+						pixels[pixcount++] = auxpal[nibble];
+						if (pixcount >= maxpix)
+							break;
+						}
+					}
+
+				//         fprintf(LOGFILE,"repeat: wrote %x times a '%x'\n",count,nibble);
+
+				if (repeatcount == 0)
+					{
+					record = 3; // next one is a run record
+					}
+				else
+					{
+					repeatcount--;
+					record = 0; // continue with repeat records
+					}
+				break;
+
+			case 2:
+				// multiple repeat stage
+
+				// 'count' specifies the number of repeat record to appear
+				//         fprintf(LOGFILE,"multiple repeat: %u\n",count);
+				repeatcount = count - 1;
+				record = 0;
+				break;
+
+			case 3:
+				// run record stage 1
+				// copy 'count' nibbles
+
+				//         fprintf(LOGFILE,"run: count: %x\n",count);
+
+				record = 4; // retrieve next nibble
+				continue;
+
+			case 4:
+				// run record stage 2
+
+				// now we have a nibble to write
+				pixels[pixcount++] = auxpal[nibble];
+
+				if (--count == 0)
+					{
+					//            fprintf(LOGFILE,"run: finished\n");
+					record = 0; // next one is a repeat again
+					}
+				else
+					continue;
+				break;
+			}
+
+			stage = 0;
+			// end of while loop
+			}
 		}
 
 
