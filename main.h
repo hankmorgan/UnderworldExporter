@@ -143,7 +143,7 @@ extern int CEILING_HEIGHT;
 
 
 //Should graphics be actually extracted or should I just go through the motions?
-#define ACTUALLY_EXTRACT_FILES  0
+#define ACTUALLY_EXTRACT_FILES  1
 
 //Should Repack_mode repack the .ark into UW1 format for pulling the conversation scripts out for UW2
 #define REPACK_INTO_UW1_HACK 1 

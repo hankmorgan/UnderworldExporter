@@ -1529,7 +1529,7 @@ printf("%s\n", filePathIn);
 		fprintf(LOGFILE,"Unable to open file!");
 		return 0;
 		}
-
+	printf("\nsize is %d", sizeof(lpfileheader));
 	// find out file length
 	fseek(fd, 0, SEEK_END);
 	long filesize = ftell(fd);
@@ -1537,7 +1537,7 @@ printf("%s\n", filePathIn);
 	fprintf(LOGFILE,"Reading in cutscene header\n");
 	// read in anim file header
 	fread(&lpheader, sizeof(lpfileheader), 1, fd);
-
+	
 	// skip color cycling structures
 	fseek(fd, 128, SEEK_CUR);
 	fprintf(LOGFILE,"Reading in cutscene palette\n");
@@ -1560,7 +1560,7 @@ printf("%s\n", filePathIn);
 	// read in large page descriptors
 	fprintf(LOGFILE,"Reading in cutscene page descriptors\n");
 	fread(lparray, sizeof(lp_descriptor), 256, fd);
-
+	printf("\nlp_d is size %d", sizeof(lp_descriptor));
 	// the file pointer now points to the first large page structure
 
 	// load remaining pages into memory
@@ -1588,23 +1588,29 @@ printf("%s\n", filePathIn);
 		// calculate large page descriptor pointer and large page pointer
 		curlp = reinterpret_cast<lp_descriptor*>(pages + 0x10000 * i);
 		thepage = reinterpret_cast<Uint8*>(curlp)+sizeof(lp_descriptor)+2 ;
+		//printf("\nThe page is at %d", thepage - pages);
 		// page length: curlp.nBytes+(curlp.nRecords*2)
 		int destframe = framenumber - curlp->baseRecord;
 
 		Uint16 offset = 0;
 		Uint16 *pagepointer = (Uint16*)thepage;
+		//printf("\nthe pagepointer starts at = %d", thepage - pages);
 		for (Uint16 i = 0; i < destframe; i++)
+			{
 			offset += pagepointer[i];
-
+			//printf("\nPagepointer = %d", pagepointer[i]);
+			}
+			
+		
 		Uint8 *ppointer = thepage + curlp->nRecords * 2 + offset;
-
+		//printf("\npPointer is = %d",  ppointer - pages);
 		Uint16 *ppointer16 = (Uint16*)(ppointer);
-
+		
 		if (ppointer[1])
 			ppointer += (4 + (ppointer16[1] + (ppointer16[1] & 1)));
 		else
 			ppointer += 4;
-
+		printf("\nfinal ppointer = %d", ppointer - pages);
 		// extract data to the output buffer
 		//   CPlayRunSkipDump(ppointer, outbuffer);
 		fprintf(LOGFILE,"Decoding frame %d of %d\n", framenumber, lpheader.nFrames);
@@ -1626,13 +1632,20 @@ printf("%s\n", filePathIn);
 
 void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 	{//From an implemtation by Underworld Adventures (hacking tools)
+	int loopcount = 0;
 	while (true)
 		{
+		loopcount++;
+		if (loopcount == 15)
+			{
+			printf("");
+			}
 		Sint8 cnt = (Sint8)*srcP++;
 
 		if (cnt>0)
 			{
 			// dump
+			fprintf(LOGFILE, "dump\n");
 			while (cnt>0)
 				{
 				*dstP++ = *srcP++;
@@ -1642,6 +1655,7 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 		else if (cnt == 0)
 			{
 			// run
+			fprintf(LOGFILE, "run\n");
 			Uint8 wordCnt = *srcP++;
 			Uint8 pixel = *srcP++;
 			while (wordCnt>0)
@@ -1656,17 +1670,20 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 			if (cnt != 0)
 				{
 				// shortSkip
+				fprintf(LOGFILE, "shortskip\n");
 				dstP += cnt;
 				}
 			else
 				{
 				// longOp
+				fprintf(LOGFILE, "longop\n");
 				Uint16 wordCnt = *((Uint16*)srcP);
 				srcP += 2;
-
+				
 				if ((Sint16)wordCnt <= 0)
 					{
 					// notLongSkip
+					fprintf(LOGFILE, "notlongskip\n");
 					if (wordCnt == 0)
 						{
 						break; // end loop
@@ -1676,6 +1693,7 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 					if (wordCnt >= 0x4000)
 						{
 						// longRun
+						fprintf(LOGFILE, "longrun\n");
 						wordCnt -= 0x4000; // Clear "longRun" bit
 						Uint8 pixel = *srcP++;
 						while (wordCnt>0)
@@ -1690,6 +1708,7 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 						// longDump
 						while (wordCnt>0)
 							{
+							fprintf(LOGFILE, "longdump\n");
 							*dstP++ = *srcP++;
 							wordCnt--;
 							}
@@ -1701,6 +1720,7 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 				else
 					{
 					// longSkip
+					fprintf(LOGFILE, "longskip\n");
 					dstP += wordCnt;
 					}
 				}

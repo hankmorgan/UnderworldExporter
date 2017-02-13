@@ -1122,7 +1122,7 @@ int main()
 					{
 					case UW1:
 						//for (int i = 17; i < 47; i++)
-						for (int i = 45; i < 47; i++)
+						for (int i = 19; i < 20; i++)
 							{
 							char inFile[255];
 							sprintf(inFile, "%s\\%s",path_uw1, uw1_cuts_file[i] ,1);
