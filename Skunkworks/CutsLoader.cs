@@ -125,13 +125,17 @@ public class CutsLoader : MonoBehaviour {
 			long ppointer = thepage + (curl.nRecords * 2) + offset;
 
 			//Uint16 *ppointer16 = (Uint16*)(ppointer);
-			if (cutsFile[ppointer+1] == 1)
+			if (cutsFile[ppointer+1] == 0)
 				{
 				ppointer += (4 + (cutsFile[ppointer+1] + (cutsFile[ppointer+1] & 1)));
 				}
 			else
 				{
 				ppointer += 4;
+				}
+			if (framenumber==6)
+				{
+				Debug.Log("h");
 				}
 			char[] imgOut ;//= //new char[lpH.height*lpH.width+ 4000];
 			myPlayRunSkipDump(ppointer, pages);//Stores in the global memory
@@ -151,6 +155,7 @@ public class CutsLoader : MonoBehaviour {
 	void myPlayRunSkipDump(long inptr, char[] srcData)
 		{//From an implemtation by Underworld Adventures (hacking tools)
 		long outPtr=0;
+
 		//dstImage = new char[size];
 		while (true)
 			{
