@@ -654,7 +654,7 @@ public class Container : object_base {
 
 				cn.ObjectsAccepted=-1;//For now default to accept all
 				cn.Capacity=40;
-				for (int i =0; i<cn.MaxCapacity();i++)
+				for (int i =0; i<=cn.MaxCapacity();i++)
 				{//init the variables.
 						if (cn.items[i]==null)
 						{cn.items[i]="";}

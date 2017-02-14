@@ -6,6 +6,8 @@ using System.Collections;
 /// To Use Implement a start funcfion that sets up the arrays in the subclasses. See cutscene_intro.cs as an example
 public class Cuts : GuiBase {
 	
+
+	public static CutsLoader filler;
     ///The times that the frames begin at
 	protected float[] ImageTimes=new float[50]; 
 		///The cut animation that plays at those points.
@@ -160,7 +162,11 @@ public class Cuts : GuiBase {
 	/// </summary>
 	public virtual void Awake()
 	{
-				return;	
+		if (filler==null)
+		{
+			filler=new CutsLoader(getFillerAnim().Replace("_","."));
+		}
+		return;	
 	}
 
 	/// <summary>

@@ -1008,7 +1008,7 @@ public class ObjectLoader : Loader {
 					objInt.objectloaderinfo= GameWorldController.instance.CurrentObjectList().objInfo[index];
 					objInt.objectloaderinfo.InUseFlag=1;
 					objInt.objectloaderinfo.index=index;
-						Debug.Log("Assigning "+ objInt.name + " to index " + index);
+						//Debug.Log("Assigning "+ objInt.name + " to index " + index);
 					if ((objInt.GetComponent<Container>()) || (objInt.GetComponent<NPC>()))
 						{//Put the container items back into the list as well
 								Container cn = objInt.GetComponent<Container>();

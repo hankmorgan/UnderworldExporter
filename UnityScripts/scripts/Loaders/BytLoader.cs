@@ -37,7 +37,7 @@ public class BytLoader : ArtLoader {
 			0,
 			6,
 			15,
-			21,
+			15,
 			0,
 			22	
 		};

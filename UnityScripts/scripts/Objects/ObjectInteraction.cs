@@ -723,7 +723,7 @@ public class ObjectInteraction : UWEBase {
 			}
 			else
 			{
-				switch (GameWorldController.instance.critter.Blood[item_id-64])
+			switch (GameWorldController.instance.critterData.Blood[item_id-64])
 				{
 					//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 					case 0:
@@ -749,7 +749,7 @@ public class ObjectInteraction : UWEBase {
 			}
 			else
 			{
-				switch (GameWorldController.instance.critter.Blood[item_id-64])
+			switch (GameWorldController.instance.critterData.Blood[item_id-64])
 				{
 				//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 				case 0:

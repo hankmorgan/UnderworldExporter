@@ -59,11 +59,13 @@ public class NPC : object_base {
 	///Multiple of 10 for dividing animations
 	///Angle index * Anim Range give AI_ANIM_X value to pick animation
 	public int AnimRange=1;
+	public int curranim=0;
 	
 	//public int CalcFacingForDebug;
 
 	/// Object ID for the NPC
 	private string NPC_ID;
+	public int NPC_IDi;
 	
 	/// The animation that is currently set
 	//private string CurrentAnim="";
@@ -149,7 +151,12 @@ public class NPC : object_base {
 	///Transform position to launch projectiles from
 	public GameObject NPC_Launcher; 
 	///What spell the NPC should cast if they have magicAttack==true
-	private int SpellIndex; 	
+	private int SpellIndex; 
+
+	private SpriteRenderer sprt;
+
+	public string CurrentSpriteName="";
+		public Sprite currentSpriteLoaded;
 
 	private int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 
@@ -163,6 +170,7 @@ public class NPC : object_base {
 	/// </summary>
 	protected override void Start () {
 		base.Start();
+		NPC_IDi=objInt().item_id;
 	}
 
 	void AI_INIT ()
@@ -181,7 +189,7 @@ public class NPC : object_base {
 			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", GameWorldController.instance.playerUW.gameObject);
 			ai.AI.WorkingMemory.SetItem<int> ("attackMode", 0);//Default to melee combat
 			ai.AI.Body = this.gameObject;
-			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critter.Speed [objInt ().item_id - 64] / 12.0f));
+			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critterData.Speed [objInt ().item_id - 64] / 12.0f));
 			ai.AI.WorkingMemory.SetItem<float> ("Speed", ai.AI.Motor.DefaultSpeed);
 			if (this.GetComponent<Animation>()!=null)
 			{
@@ -214,8 +222,10 @@ public class NPC : object_base {
 		{
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
-		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.critter.Exp[objInt().item_id-64]);
+		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.critterData.Exp[objInt().item_id-64]);
 	}
+
+	
 
 	/// <summary>
 	/// Update the NPC state, AI and animations
@@ -452,6 +462,30 @@ public class NPC : object_base {
 				}
 			}
 		}
+
+
+		public void LateUpdate()
+		{
+				if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
+			{
+					return;
+			}
+			if (sprt==null)
+			{
+				sprt=this.GetComponentInChildren<SpriteRenderer>();	
+			}
+				if (sprt.sprite==null)
+				{
+						return;
+				}
+			if(CurrentSpriteName != sprt.sprite.name)
+			{
+				CurrentSpriteName= sprt.sprite.name;
+				currentSpriteLoaded= GameWorldController.instance.critsLoader[NPC_IDi-64].RetrieveSpriteByName(CurrentSpriteName, CritterInfo.TranslateAnimToIndex(CritterInfo.TranslateAnimRangeToAnim(curranim)));
+			}
+			sprt.sprite=currentSpriteLoaded;
+		}
+
 
 	/// <summary>
 	/// Applies the attack to the NPC
@@ -869,11 +903,16 @@ public class NPC : object_base {
 	/// <param name="newState">New state.</param>
 	void playAnimation(string pAnim, int newState)
 	{
+				curranim=newState;
 		if (Frozen)
 		{
 			anim.enabled=true;
 			FrozenUpdate=2;
 		}
+			if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
+			{
+				GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);
+			}
 		//currentState=newState;
 		//CurrentAnim=pAnim;
 		anim.Play(pAnim);

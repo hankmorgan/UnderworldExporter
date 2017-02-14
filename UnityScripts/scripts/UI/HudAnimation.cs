@@ -8,7 +8,7 @@ public class HudAnimation : GuiBase {
 	//public UITexture TargetControl;
 	public RawImage TargetControl;
 	public string SetAnimation;
-	private SpriteRenderer sprt;
+	protected SpriteRenderer sprt;
 	public string PreviousAnimation;
 	private string PreviousSprite="";
 	private Animator anim;
@@ -41,6 +41,13 @@ public class HudAnimation : GuiBase {
 			}			
 		}
 	}
+
+
+	void PlayAnimFile(string animName)
+	{
+			
+	}
+
 
 	/*Have to declare these in derived classes due to unity editor bug*/
 //	public virtual void PreAnimPlay()

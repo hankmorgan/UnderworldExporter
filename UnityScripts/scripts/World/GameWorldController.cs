@@ -105,7 +105,7 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// The critter properties from objects.dat
 	/// </summary>
-	public Critters critter;
+	public Critters critterData;
 
 	/// <summary>
 	/// Common Object Properties
@@ -233,6 +233,13 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public GRLoader grFlasks;
 
+		/// <summary>
+		/// Cutscene data
+		/// </summary>
+	public CutsLoader cutsLoader;
+
+	public CritLoader[] critsLoader= new CritLoader[64];
+
 	void Awake()
 	{
 		instance=this;
@@ -240,8 +247,8 @@ public class GameWorldController : UWEBase {
 		Loader._RES=game;
 		objectMaster=new ObjectMasters();
 		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
-		critter = new Critters();
-		critter.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
+		critterData = new Critters();
+		critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
 		commobj=new CommonObjProps();
 		commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
 		weaponprops =new WeaponProps();
@@ -483,6 +490,7 @@ public class GameWorldController : UWEBase {
 
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
+				critsLoader= new CritLoader[64];//Clear out animations
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
 				GenerateNavmesh(NavRigLand);

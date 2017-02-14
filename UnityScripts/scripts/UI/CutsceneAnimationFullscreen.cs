@@ -6,11 +6,15 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	private bool isFullScreen;
 	private int currentFrameLoops;
 	public Cuts cs;
-
+	public string CurrentSpriteName;
+	Sprite CurrentSpriteLoaded;
 	public ScrollController mlCuts; //What control will print the subtitles
 	public AudioSource aud; //What control will play the audio.
 	public bool SkipAnim=false;
 	private float CutsceneTime;
+
+		public string currentCutsFile;
+		public string previousCutsFile;
 
 		public void End()
 		{
@@ -51,7 +55,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			yield return new WaitForSeconds(cs.getImageTime(i)-currTime);   //Wait until it is time for the frame
 			currTime = cs.getImageTime(i);                                   //For the next wait.
 			currentFrameLoops = cs.getImageLoops(i);
-			SetAnimation= cs.getImageFrame(i);	     
+			SetAnimation= cs.getImageFrame(i);	
 		}
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
@@ -151,6 +155,10 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 	protected override void Update()
 	{
+		//if (SetAnimation!=PreviousAnimation)
+		//{//Load the next cutscene file
+		//	InitCutsFile();
+		//}
 		base.Update();
 		if (PlayingSequence)
 		{
@@ -170,15 +178,67 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			}
 		}
 	}
+
+
+		void InitCutsFile()
+		{
+			if(SetAnimation!="Anim_Base")
+			{
+				GameWorldController.instance.cutsLoader= new CutsLoader(SetAnimation.Replace("_","."));
+			}
+		}
 	
 		/// <summary>
 	/// Deactivates the fullscreen animation if clicked on during anim_base
 	/// </summary>
-	public void OnClick()
-	{
-		if ((SetAnimation=="Anim_Base") || (SetAnimation==""))
+		public void LateUpdate()
 		{
-			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);	
+			if (sprt==null)
+			{
+				sprt=this.GetComponentInChildren<SpriteRenderer>();	
+			}
+
+			if(CurrentSpriteName != sprt.sprite.name)
+			{
+				CurrentSpriteName= sprt.sprite.name;
+				switch (sprt.sprite.name)
+					{
+					case "cuts_blank":
+						CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);
+						break;
+					case "SplashOrigin":
+					case "pres1_0000":
+						Texture2D img= GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);
+						CurrentSpriteLoaded=Sprite.Create(img,new Rect(0,0,img.width,img.height), new Vector2(0.5f, 0.0f));							
+						break;
+					case "SplashBlueSky":
+					case "pres2_0000":
+						Texture2D img1= GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
+						CurrentSpriteLoaded=Sprite.Create(img1,new Rect(0,0,img1.width,img1.height), new Vector2(0.5f, 0.0f));
+						break;
+								
+					default:
+						currentCutsFile = CurrentSpriteName.Substring(0,9);
+						if (currentCutsFile!=previousCutsFile)
+						{
+							GameWorldController.instance.cutsLoader= new CutsLoader(currentCutsFile.Replace("_","."));
+						}
+						previousCutsFile=currentCutsFile;
+						int SpriteNo;
+						if (int.TryParse(CurrentSpriteName.Substring(CurrentSpriteName.Length-4,4),out SpriteNo))
+						{
+							CurrentSpriteLoaded= GameWorldController.instance.cutsLoader.RequestSprite(SpriteNo);	
+						}
+						else
+						{
+							Debug.Log("Unable to find sprite index for " + CurrentSpriteName + " in animation " + SetAnimation);
+						}	
+						break;
+					}
+			}
+				sprt.sprite=CurrentSpriteLoaded;
+				TargetControl.texture =sprt.sprite.texture;
+
 		}
-	}
+
 }

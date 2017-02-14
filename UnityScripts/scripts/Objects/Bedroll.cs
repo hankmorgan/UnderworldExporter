@@ -35,6 +35,7 @@ public class Bedroll : object_base {
 				ObjectInteraction incense =GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(277); 
 				if (incense!=null)
 					{
+					UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
 					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
 					incense.consumeObject ();
 					switch (GameWorldController.instance.playerUW.quest().getIncenseDream())
@@ -57,6 +58,7 @@ public class Bedroll : object_base {
 							}
 							else
 							{//Regular sleep with a fade to black
+								UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
 								UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
 							}	
 						}					
