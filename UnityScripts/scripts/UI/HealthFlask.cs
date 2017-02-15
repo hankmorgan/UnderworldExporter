@@ -15,7 +15,8 @@ public class HealthFlask : GuiBase_Draggable {
 	public bool isHealthDisplay;
 	private bool Poisoned;
 
-		void Start()
+
+		public override void Start ()
 		{
 			for (int i=0; i<=LevelImages.GetUpperBound(0);i++)
 			{

@@ -172,13 +172,16 @@ public class Conversation : GuiBase {
 		///Sets up the portraits for the player and the NPC
 		RawImage portrait = UWHUD.instance.ConversationPortraits[0];
 		RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
+		GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
 		if (GameWorldController.instance.playerUW.isFemale)
 		{
-			portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body+5).ToString("0000"));//TODO:playerbody
+			//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body+5).ToString("0000"));//TODO:playerbody
+			portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body+5);
 		}
 		else
 		{
-			portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody		
+			//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody		
+			portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body);
 		}
 
 		

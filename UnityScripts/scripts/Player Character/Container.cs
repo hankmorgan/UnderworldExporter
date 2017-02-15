@@ -662,7 +662,7 @@ public class Container : object_base {
 				if (objInt.link != 0)	//Container has objects
 				{
 						ObjectLoaderInfo tmpobj = ObjectLoader.getObjectInfoAt(objInt.link);
-						int count = 0;
+						//int count = 0;
 						if (ObjectLoader.GetItemTypeAt(objInt.link) !=ObjectInteraction.LOCK)
 						{
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));

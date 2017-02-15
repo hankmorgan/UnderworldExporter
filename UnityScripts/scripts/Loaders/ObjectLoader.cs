@@ -41,7 +41,7 @@ public class ObjectLoader : Loader {
 
 				//unsigned char *lev_ark; 
 				//unsigned char *tmp_ark;		//for uw2 decompression
-				long fileSize;
+				//long fileSize;
 				int NoOfBlocks;
 				long AddressOfBlockStart;
 				long objectsAddress;
@@ -76,7 +76,7 @@ public class ObjectLoader : Loader {
 							int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) ,32);
 							int isCompressed =(compressionFlag>>1) & 0x01;
 
-							long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
+							//long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
 							address_pointer=(LevelNo * 4) + 6;
 							if (DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
 							{

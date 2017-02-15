@@ -67,7 +67,7 @@ public class ArtLoader : Loader {
 	/// <param name="Alpha">If set to <c>true</c> alpha.</param>
 	public static Texture2D Image(char[] databuffer,long dataOffSet, int width, int height, string imageName, Palette pal , bool Alpha )
 	{
-		int pixelcount=0;
+		//int pixelcount=0;
 		Texture2D image = new Texture2D(width, height,TextureFormat.ARGB32,false);
 		Color32[] imageColors = new Color32[width * height];
 		long counter=0;

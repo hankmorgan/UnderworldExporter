@@ -664,7 +664,8 @@ public class ObjectInteraction : UWEBase {
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
 				myObj.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-				GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
+				//GameObject SpriteObj =
+				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
 				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
 				//Some known examples that occur
@@ -1158,10 +1159,10 @@ public class ObjectInteraction : UWEBase {
 				newObj.name=myObj.name + "_Sprite";
 				newObj.transform.parent=myObj.transform;
 				newObj.transform.position = myObj.transform.position;
-				newObj.AddComponent<StoreAnimator>();
+				//newObj.AddComponent<StoreAnimator>();
 				SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
 				Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
-
+				mysprite.transform.localScale=new Vector3(2f,2f,2f);//Scale up sprites.
 				mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 				mysprite.sprite = image;//Assigns the sprite to the object.
 				//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
@@ -1609,7 +1610,7 @@ public class ObjectInteraction : UWEBase {
 			{
 					return;
 			}
-			float dist =Vector3.Distance(this.transform.position,startPos);
+			//float dist =Vector3.Distance(this.transform.position,startPos);
 			if (Vector3.Distance(this.transform.position,startPos)<=0.2f)
 				{//No movement. Just update heading.
 					heading= Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
@@ -1955,7 +1956,8 @@ public class ObjectInteraction : UWEBase {
 
 				if(CreateSprite)
 				{
-						GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
+						//GameObject SpriteObj =
+					ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
 				}
 
 

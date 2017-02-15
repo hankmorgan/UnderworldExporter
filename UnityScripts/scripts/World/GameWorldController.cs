@@ -5,6 +5,8 @@ using UnityEditor;
 #endif
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 /// <summary>
 /// Game world controller for controlling references and various global activities
@@ -240,9 +242,17 @@ public class GameWorldController : UWEBase {
 
 	public CritLoader[] critsLoader= new CritLoader[64];
 
+		void  LoadPath()
+		{
+			string fileName = Application.dataPath + "//..//" + UWEBase._RES + "_path.txt";
+			StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+			Loader.BasePath=fileReader.ReadLine().TrimEnd();
+		}
+
 	void Awake()
 	{
 		instance=this;
+		LoadPath();
 		UWEBase._RES = game;
 		Loader._RES=game;
 		objectMaster=new ObjectMasters();
@@ -495,6 +505,16 @@ public class GameWorldController : UWEBase {
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
 				GenerateNavmesh(NavRigLand);
 				GenerateNavmesh(NavRigWater);
+				if (LevelNo==7)
+				{//Create shrine lava.
+					GameObject shrineLava = new GameObject();
+					shrineLava.transform.parent=LevelMarker();
+					shrineLava.transform.localPosition=new Vector3(39f,0.402f,39.61f);
+					shrineLava.transform.localScale=new Vector3(6f,0.2f,4.8f);
+					shrineLava.AddComponent<ShrineLava>();
+					shrineLava.AddComponent<BoxCollider>();
+					shrineLava.GetComponent<BoxCollider>().isTrigger=true;
+				}
 						//TODO Lava
 			}
 

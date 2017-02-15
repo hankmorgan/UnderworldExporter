@@ -1525,37 +1525,37 @@ public class Magic : UWEBase {
 		void Cast_VasPorYlem(GameObject caster, int EffectID)
 		{//Tremor. Spawn a couple of arrow traps and set them off?
 
-				//TODO:reimplement this.
-				//Possible spawn boulders with temporary damage effects???
-				TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
-				for (int i =0 ; i <= Random.Range(1,4);i++)			
+			//TODO:reimplement this.
+			//Possible spawn boulders with temporary damage effects???
+			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+			for (int i =0 ; i <= Random.Range(1,4);i++)			
+			{
+				//	int boulderTypeOffset=Random.Range(0,4);
+
+				Vector3 pos = caster.transform.position+(Random.insideUnitSphere * Random.Range(1,3));
+				//Try and keep it in map range
+				//Debug.Log(pos);
+				if (tm.ValidTile(pos))
 				{
-						int boulderTypeOffset=Random.Range(0,4);
+					pos.Set(pos.x,4.5f,pos.z); //Put it on the roof.
 
-						Vector3 pos = caster.transform.position+(Random.insideUnitSphere * Random.Range(1,3));
-						//Try and keep it in map range
-						//Debug.Log(pos);
-						if (tm.ValidTile(pos))
-						{
-								pos.Set(pos.x,4.5f,pos.z); //Put it on the roof.
-
-								GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
-								myObj.layer=LayerMask.NameToLayer("UWObjects");
-								myObj.transform.position=pos;
-								myObj.transform.Rotate(-90,0,0);
-								myObj.transform.parent=GameWorldController.instance.LevelMarker();
-								GameWorldController.MoveToWorld(myObj);
-								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
-								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
-								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
-								//TODO: Fix this
-								//arrow.item_index=339+boulderTypeOffset;
-								//arrow.objInt().o
-								//arrow.item_type=23;
-								arrow.ExecuteTrap(0,0,0);
-								Destroy(myObj);
-						}					
-				}
+					GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
+					myObj.layer=LayerMask.NameToLayer("UWObjects");
+					myObj.transform.position=pos;
+					myObj.transform.Rotate(-90,0,0);
+					myObj.transform.parent=GameWorldController.instance.LevelMarker();
+					GameWorldController.MoveToWorld(myObj);
+					ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
+					//TODO: Fix this
+					//arrow.item_index=339+boulderTypeOffset;
+					//arrow.objInt().o
+					//arrow.item_type=23;
+					arrow.ExecuteTrap(0,0,0);
+					Destroy(myObj);
+				}					
+			}
 		}
 
 

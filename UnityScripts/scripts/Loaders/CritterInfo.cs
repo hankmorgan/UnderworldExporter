@@ -72,150 +72,188 @@ public class CritterInfo : Loader {
 
 		private int ReadPageFile(char[] PageFile, int XX, int YY ,int spriteIndex)
 		{
-				int addptr=0;
-				int slotbase = (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
-				int NoOfSlots =(int)DataLoader.getValAtAddress(PageFile,addptr++,8);
-				int[] SlotIndices = new int[NoOfSlots];
-				int spriteCounter=0;
-				int k=0;
-				string XXo = DecimalToOct(XX.ToString());
-				string YYo = DecimalToOct(YY.ToString());
-				for (int i=0; i<NoOfSlots;i++)
+			int addptr=0;
+			int slotbase = (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
+			int NoOfSlots =(int)DataLoader.getValAtAddress(PageFile,addptr++,8);
+			int[] SlotIndices = new int[NoOfSlots];
+			int spriteCounter=0;
+			int k=0;
+			string XXo = DecimalToOct(XX.ToString());
+			string YYo = DecimalToOct(YY.ToString());
+			for (int i=0; i<NoOfSlots;i++)
+			{
+				int val= (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
+				if (val!=255)
 				{
-						int val= (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
-						if (val!=255)
-						{
-								SlotIndices[k++] = i;
-						}
+					SlotIndices[k++] = i;
 				}
-				int NoOfSegs = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
-				for (int i = 0; i < NoOfSegs; i++)
+			}
+			int NoOfSegs = (int)DataLoader.getValAtAddress(PageFile, addptr++, 8);
+			for (int i = 0; i < NoOfSegs; i++)
+			{
+				//string[] AnimFiles = new string[8];
+				string AnimName = PrintAnimName(slotbase + SlotIndices[i]);
+
+				int index=TranslateAnimToIndex(slotbase + SlotIndices[i]);
+				AnimInfo.animName[index]=AnimName;
+				int ValidCount=0;
+				for (int j=0; j<8;j++)
 				{
-						string[] AnimFiles = new string[8];
-						string AnimName = PrintAnimName(slotbase + SlotIndices[i]);
+					int val=(int)DataLoader.getValAtAddress(PageFile,addptr++,8);
+					if (val!=255)
+					{					//AnimFiles[j] = "CR" + XX.ToString("d2") + "PAGE_N" + YY.ToString("d2") + "_" + AuxPalNo + "_" + val;
 
-						int index=TranslateAnimToIndex(slotbase + SlotIndices[i]);
-						AnimInfo.animName[index]=AnimName;
-						int ValidCount=0;
-						for (int j=0; j<8;j++)
-						{
-								int val=(int)DataLoader.getValAtAddress(PageFile,addptr++,8);
-								if (val!=255)
-								{					//AnimFiles[j] = "CR" + XX.ToString("d2") + "PAGE_N" + YY.ToString("d2") + "_" + AuxPalNo + "_" + val;
-
-										AnimInfo.animSequence[index,j]= "CR" + XXo + "PAGE_N" + YYo + "_" + AuxPalNo + "_" + (val + spriteIndex).ToString("d4");
-										AnimInfo.animIndices[index,j]= (val + spriteIndex);
-										ValidCount++;
-								}
-						}			
-				}
-
-				//Read in the palette
-				int NoOfPals = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);//Will skip ahead this far.
-				addptr++;
-				char[] auxPalVal=new char[32];
-				for (int i = 0; i < 32; i++)
-				{
-						auxPalVal[i] =(char)DataLoader.getValAtAddress(PageFile, (addptr)+(AuxPalNo * 32) + i, 8);
-				}
-
-				//Skip past the palettes
-				addptr = addptr + NoOfPals * 32;
-				int NoOfFrames = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);
-				//AnimInfo.animSprites=new Sprite[NoOfFrames];
-				addptr=addptr+2;
-				int addptr_start = addptr;//Bookmark my positiohn
-				int MaxWidth=0;
-				int MaxHeight=0;
-				int MaxHotSpotX=0;
-				int MaxHotSpotY=0;
-				for (int pass = 0; pass <= 1; pass++)
-				{
-					addptr=addptr_start;
-					if (pass == 0)
-					{//get the max width and height
-							for (int i = 0; i < NoOfFrames; i++)
-							{
-									int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
-									//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
-									int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
-									int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
-									int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
-									int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
-									if (hotspotx>BitMapWidth) 
-									{
-											hotspotx = BitMapWidth;
-									}
-									if (hotspoty>BitMapHeight)
-									{
-											hotspoty = BitMapHeight;
-									}
-
-									if (BitMapWidth > MaxWidth)
-									{
-											MaxWidth = BitMapWidth;
-									}
-									if (BitMapHeight > MaxHeight)
-									{
-											MaxHeight = BitMapHeight;
-									}
-
-									if (hotspotx > MaxHotSpotX)
-									{
-											MaxHotSpotX = hotspotx;
-									}
-									if (hotspoty > MaxHotSpotY)
-									{
-											MaxHotSpotY = hotspoty;
-									}
-							}
+						AnimInfo.animSequence[index,j]= "CR" + XXo + "PAGE_N" + YYo + "_" + AuxPalNo + "_" + (val).ToString("d4");
+						AnimInfo.animIndices[index,j]= (val + spriteIndex);
+						ValidCount++;
 					}
-					else
-					{//Extract
-							if (MaxHotSpotX * 2 > MaxWidth)
-							{//Try and center the hot spot in the image.
-									MaxWidth = MaxHotSpotX * 2;
-							}
-							char[] outputImg;
-							outputImg = new char[MaxWidth*MaxHeight*2];
-							for (int i = 0; i < NoOfFrames; i++)
-							{
-								int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
-								int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
-								int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
-								int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
-								int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
-								int compression = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 4, 8);
-								int datalen = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 5, 16);
+				}			
+			}
 
-								//Adjust the hotspots from the biggest point back to the image corners
-								int cornerX; int cornerY;
-								cornerX= MaxHotSpotX-hotspotx;
-								cornerY = MaxHotSpotY - hotspoty;
-								if (cornerX<=0)
-								{
-										cornerX = 0;
+			//Read in the palette
+			int NoOfPals = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);//Will skip ahead this far.
+			addptr++;
+			char[] auxPalVal=new char[32];
+			for (int i = 0; i < 32; i++)
+			{
+				auxPalVal[i] =(char)DataLoader.getValAtAddress(PageFile, (addptr)+(AuxPalNo * 32) + i, 8);
+			}
+
+			//Skip past the palettes
+			addptr = addptr + NoOfPals * 32;
+			int NoOfFrames = (int)DataLoader.getValAtAddress(PageFile, addptr, 8);
+			//AnimInfo.animSprites=new Sprite[NoOfFrames];
+			addptr=addptr+2;
+			int addptr_start = addptr;//Bookmark my positiohn
+			int MaxWidth=0;
+			int MaxHeight=0;
+			int MaxHotSpotX=0;
+			int MaxHotSpotY=0;
+			for (int pass = 0; pass <= 1; pass++)
+			{
+				addptr=addptr_start;
+				if (pass == 0)
+				{//get the max width and height
+					for (int i = 0; i < NoOfFrames; i++)
+					{
+						int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
+						int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
+						int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
+						int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
+						int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
+						if (hotspotx>BitMapWidth) 
+						{
+								hotspotx = BitMapWidth;
+						}
+						if (hotspoty>BitMapHeight)
+						{
+								hotspoty = BitMapHeight;
+						}
+
+						if (BitMapWidth > MaxWidth)
+						{
+								MaxWidth = BitMapWidth;
+						}
+						if (BitMapHeight > MaxHeight)
+						{
+								MaxHeight = BitMapHeight;
+						}
+
+						if (hotspotx > MaxHotSpotX)
+						{
+								MaxHotSpotX = hotspotx;
+						}
+						if (hotspoty > MaxHotSpotY)
+						{
+								MaxHotSpotY = hotspoty;
+						}
+					}
+				}
+				else
+				{//Extract
+					if (MaxHotSpotX * 2 > MaxWidth)
+					{//Try and center the hot spot in the image.
+						MaxWidth = MaxHotSpotX * 2;
+					}
+					char[] outputImg;
+					outputImg = new char[MaxWidth*MaxHeight*2];
+					for (int i = 0; i < NoOfFrames; i++)
+					{
+						int frameOffset = (int)DataLoader.getValAtAddress(PageFile, addptr + (i * 2), 16);
+						int BitMapWidth = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 0, 8);
+						int BitMapHeight = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 1, 8);
+						int hotspotx = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 2, 8);
+						int hotspoty = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 3, 8);
+						int compression = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 4, 8);
+						int datalen = (int)DataLoader.getValAtAddress(PageFile, frameOffset + 5, 16);
+
+						//Adjust the hotspots from the biggest point back to the image corners
+						int cornerX; int cornerY;
+						cornerX= MaxHotSpotX-hotspotx;
+						cornerY = MaxHotSpotY - hotspoty;
+						if (cornerX<=0)
+						{
+								cornerX = 0;
+						}
+						else
+						{
+								cornerX = cornerX - 1;
+						}
+						if (cornerY<=0)
+						{
+								cornerY = 0;
+						}
+
+						//Extract the image
+						char[] srcImg;
+						srcImg = new char[BitMapWidth*BitMapHeight*2];
+						outputImg = new char[MaxWidth*MaxHeight*2];
+						// Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+						ArtLoader.ua_image_decode_rle(PageFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxPalVal);
+
+
+						//*Put the sprite in the a frame of size max width & height
+						cornerY = MaxHeight-cornerY;//y is from the top left corner
+						int ColCounter = 0; int RowCounter = 0;
+						bool ImgStarted = false;
+						for (int y = 0; y < MaxHeight; y++)
+						{
+							for (int x = 0; x < MaxWidth; x++)
+							{
+								if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+								{//the pixel from the source image is here 
+									ImgStarted=true;
+									outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
+									ColCounter++;
 								}
 								else
 								{
-										cornerX = cornerX - 1;
+									outputImg[x + (y*MaxWidth)]=(char)0;//alpha
 								}
-								if (cornerY<=0)
-								{
-										cornerY = 0;
-								}
-
-								//Extract the image
-								char[] srcImg;
-								srcImg = new char[BitMapWidth*BitMapHeight*2];
-								// Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
-								ArtLoader.ua_image_decode_rle(PageFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxPalVal);
-								Texture2D imgData= ArtLoader.Image(srcImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
-								AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
-								spriteCounter++;
 							}
+							if (ImgStarted == true)
+							{//New Row on the src image
+								RowCounter++;
+								ColCounter=0;
+							}
+						}
+						//Set the heights for output
+						BitMapWidth=MaxWidth;
+						BitMapHeight = MaxHeight;
 
-					}//endextract
+
+								//****************************
+
+
+
+						Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
+						AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.0f));
+						//AnimInfo.animSprites[spriteIndex+ i].pixelsPerUnit=50;
+						AnimInfo.animSprites[spriteIndex+ i].texture.filterMode=FilterMode.Point;
+						spriteCounter++;
+					}
+
+				}//endextract
 			}
 				return spriteCounter;
 		}

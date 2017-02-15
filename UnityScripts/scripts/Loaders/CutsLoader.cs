@@ -167,7 +167,7 @@ comes the color palette:*/
 				{
 						ppointer += 4;
 				}
-				char[] imgOut ;//= //new char[lpH.height*lpH.width+ 4000];
+			//	char[] imgOut ;//= //new char[lpH.height*lpH.width+ 4000];
 				myPlayRunSkipDump(ppointer, pages);//Stores in the global memory
 				//output.texture= 
 				ImageCache[imagecount++]= Image(dstImage,0,lpH.width,lpH.height,"name here", pal, Alpha);

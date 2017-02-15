@@ -79,7 +79,7 @@ public class DataLoader :Loader {
 		//Robbed and changed slightly from the Labyrinth of Worlds implementation project.
 		//This decompresses UW2 blocks.
 		long	len = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
-		long block_address=address_pointer;
+		//long block_address=address_pointer;
 		char[] buf = new char[len+100];
 		char[] up = buf;
 		long upPtr=0;

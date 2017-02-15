@@ -82,7 +82,7 @@ public class TextureLoader : ArtLoader {
 								long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-210) * 4) + 4, 32);
 								return Image(texturebufferF,textureOffset, 32, 32,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
 						}
-						break;							
+						//break;							
 				}
 
 	

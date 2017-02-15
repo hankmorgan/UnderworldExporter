@@ -58,7 +58,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		const int WEST=90;
 
 
-		static int UW_CEILING_HEIGHT;
+		//static int UW_CEILING_HEIGHT;
 		static int CEILING_HEIGHT;
 
 
@@ -66,7 +66,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		public static void GenerateLevelFromTileMap(GameObject parent, int game, TileMap Level, ObjectLoader objList)
 		{
-				UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
+				//UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
 				CEILING_HEIGHT=Level.CEILING_HEIGHT;
 				bool skipCeil=true;
 
@@ -196,7 +196,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				float doorthickness = 0.1f;
+				//float doorthickness = 0.1f;
 				float doorwidth = 0.8f;
 				float doorframewidth = 1.2f;
 				float doorSideWidth = (doorframewidth-doorwidth)/2f;
@@ -217,7 +217,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 
 
-				float y0 = 0f;//+doorthickness /2f;
+				//float y0 = 0f;//+doorthickness /2f;
 				float y1 = 0f;//-doorthickness /2f;
 				float x0 = -doorframewidth /2f;
 				float x1 = +doorframewidth /2f;
@@ -358,15 +358,15 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 				//Door params
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				float doorthickness = 0.2f;
+				//float doorthickness = 0.2f;
 				float doorwidth = 0.8f;
 				float doorframewidth = 1.2f;
 				float doorSideWidth = (doorframewidth-doorwidth)/2f;
 				float doorheight = 7.0f * 0.15f ;
-				Vector3 doorposition;
+				//Vector3 doorposition;
 				//positions
 				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
-				doorposition=position;
+				//doorposition=position;
 				//center in the tile and at the bottom of the map.
 				switch (currDoor.heading*45)
 				{
@@ -383,7 +383,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 				float y0 = 0f;//+doorthickness /2f;
-				float y1 = 0f;//-doorthickness /2f;
+				//float y1 = 0f;//-doorthickness /2f;
 				float x0 = -doorframewidth /2f;
 				float x1 = +doorframewidth /2f;
 				float z0 = 0f;
@@ -766,11 +766,21 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 									UVs[(j*4)+3]= new Vector2(1f,0f);
 								}
 								int TextureIndex= objList.objInfo[i].flags & 0x3F;
-								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (30 + TextureIndex).ToString());
-								if (tmobj.mainTexture==null)
-								{//UW1 style bridges UW2 has some differences....
-									tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(30 + TextureIndex);
+								Material tmobj;
+								if (TextureIndex>=2)
+								{
+										TextureIndex= GameWorldController.instance.currentTileMap().texture_map[TextureIndex-2+48];
+										tmobj = GameWorldController.instance.MaterialMasterList[TextureIndex];//(Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (30 + TextureIndex).ToString());
 								}
+								else
+								{
+										tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (30 + TextureIndex).ToString());		
+										if (tmobj.mainTexture==null)
+										{//UW1 style bridges UW2 has some differences....
+												tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(30 + TextureIndex);
+										}
+								}
+
 								Material[] MatsToUse = new Material[6];
 								for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 								{//tmobj[30]+(objList[x].flags & 0x3F)
@@ -1205,6 +1215,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		static void RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
 		{
+
 				//Draw a cube with no slopes.
 				int NumberOfVisibleFaces=0;
 				//Get the number of faces
@@ -1259,8 +1270,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 								case vTOP:
 										{
 												//Set the verts	
-
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+
 												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
 												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
 												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
@@ -2591,7 +2602,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				float floorHeight=(float)(Top*0.15f);
 				float baseHeight=(float)(Bottom*0.15f);
 				float dimX = t.DimX;
-				float dimY = t.DimY;
+				//float dimY = t.DimY;
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
@@ -2713,7 +2724,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 		static int WallTexture(int face, TileInfo t)
 		{
 				int wallTexture;
-				int ceilOffset = 0;
+				//int ceilOffset = 0;
 				wallTexture = t.wallTexture;
 				switch (face)
 				{

@@ -19,7 +19,7 @@ public class ButtonHandler : object_base {
 
 	//private GameObject triggerObj;
 
-	private SpriteRenderer ButtonSprite;
+	//private SpriteRenderer ButtonSprite;
 
 	public bool SpriteSet;
 		private int currentItemID; //for tracking id changes
@@ -33,7 +33,7 @@ public class ButtonHandler : object_base {
 		//Var=GetComponent<ObjectVariables>();
 
 
-		ButtonSprite=this.gameObject.GetComponentInChildren<SpriteRenderer>();
+		//ButtonSprite=this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		if (isRotarySwitch()==false)
 		{
 			//set sprites ids

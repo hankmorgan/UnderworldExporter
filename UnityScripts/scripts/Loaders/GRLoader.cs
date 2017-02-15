@@ -170,12 +170,12 @@ public class GRLoader : ArtLoader {
 					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal("c:\\games\\uw1\\DATA\\allpals.dat",GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(BasePath+ "DATA\\allpals.dat",GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
 
 					ImageCache[index] =  Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha);
 					return ImageCache[index];
 				}
-				break;
+				//break;
 		default:
 				//Check to see if the file is panels.gr
 				if (pathGR[FileToLoad].ToUpper().EndsWith("PANELS.GR"))

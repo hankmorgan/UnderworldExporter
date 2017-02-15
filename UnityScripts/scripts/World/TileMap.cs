@@ -1101,14 +1101,14 @@ public class TileMap : Loader {
 		/// <param name="iIsWater">1 is water, 0 is not.</param>
 	private void SetIsWater(int tileX, int tileY,int iIsWater)
 		{return;
-		if (iIsWater==1)
+		/*if (iIsWater==1)
 			{
 				Tiles[tileX,tileY].isWater=true;	
 			}
 		else
 			{
 				Tiles[tileX,tileY].isWater=false;
-			}
+			}*/
 	}
 
 	/// <summary>
@@ -1204,7 +1204,7 @@ public class TileMap : Loader {
 	/// <param name="tileY">Tile y.</param>
 	private int GetTileRender( int tileX, int tileY)
 	{
-				return 1;
+				//return 1;
 		return Tiles[tileX,tileY].Render;
 	}
 
@@ -1224,14 +1224,14 @@ public class TileMap : Loader {
 		private void SetTileProp( int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava, int iIsBridge)
 			{
 				return;
-				SetTileType (tileX,tileY,itileType);
+				/*SetTileType (tileX,tileY,itileType);
 				Tiles[tileX,tileY].Render=(short)iRender;
 				SetFloorHeight ( tileX,tileY,FloorHeight);
 				SetCeilingHeight (tileX,tileY,CeilingHeight);
 				SetIsWater( tileX,tileY,iIsWater);
 				SetIsLava(tileX,tileY,iIsLava);
 				SetIsBridge(tileX,tileY,iIsBridge);
-				SetIsDoor(tileX,tileY,iIsDoor);
+				SetIsDoor(tileX,tileY,iIsDoor);*/
 			}
 
 		/// <summary>
@@ -1496,6 +1496,10 @@ public class TileMap : Loader {
 								{
 										Tiles[x,y].floorTexture=0;
 								}
+								if (Tiles[x,y].floorTexture>=262)
+								{
+									Tiles[x,y].floorTexture=0;
+								}		
 								if (Tiles[x,y].wallTexture>=256)
 								{
 										Tiles[x,y].wallTexture =0;
