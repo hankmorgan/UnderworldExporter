@@ -33,7 +33,7 @@ public class StringController : UWEBase {
 				//public long blockEnd;
 		} ;
 
-		public string Path;
+		//public string Path;
 	
 
 		/// <summary>
@@ -311,12 +311,12 @@ public class StringController : UWEBase {
 			instance=this;
 				if(UWEBase._RES!="UW1")
 				{					
-					InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
+					//InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
 				}
 				else
 				{
 					//use the new method
-					LoadStringsPak(Path);
+					//LoadStringsPak(Path);
 				}
 		}
 
@@ -340,7 +340,7 @@ public class StringController : UWEBase {
 		/// Loads and decodes the strings.pak file as specificed by the Path.
 		/// </summary>
 		/// <param name="path">Path.</param>
-		void LoadStringsPak(string path)
+		public void LoadStringsPak(string path)
 		{
 				string Result="";
 				long address_pointer=0;

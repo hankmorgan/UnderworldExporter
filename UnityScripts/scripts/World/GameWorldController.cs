@@ -285,7 +285,7 @@ public class GameWorldController : UWEBase {
 	void Start () {
 
 		instance=this;
-
+		StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 		//Load up my map materials
 		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 		{
