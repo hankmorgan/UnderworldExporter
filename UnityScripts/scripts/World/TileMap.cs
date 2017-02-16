@@ -1204,8 +1204,8 @@ public class TileMap : Loader {
 	/// <param name="tileY">Tile y.</param>
 	private int GetTileRender( int tileX, int tileY)
 	{
-				//return 1;
-		return Tiles[tileX,tileY].Render;
+				return 1;
+		//return Tiles[tileX,tileY].Render;
 	}
 
 		/// <summary>
