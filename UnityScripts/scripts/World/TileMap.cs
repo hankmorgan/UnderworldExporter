@@ -1369,31 +1369,31 @@ public class TileMap : Loader {
 						switch (game)
 						{
 						case 1:
+							{
+								if (i<48)	//Wall textures
 								{
-									if (i<48)	//Wall and floor textures are int 16s
-									{
-											texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
-											offset=offset+2;
-
-									}
-									else if (i<=57)	//Wall and floor textures are int 16s
-									{
-											texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
-											offset = offset + 2;
-
-									}
-									else
-									{ //door textures are int 8s
-											texture_map[i] = (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
-											offset++;
-									}
+									texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
+									offset=offset+2;
+								}
+								else if (i<=57)	//Floor textures are 49 to 56, ceiling is 57
+								{
+									texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
+									offset = offset + 2;
 									if (i == 57)
 									{
-											CeilingTexture = texture_map[i];
+										CeilingTexture = i;
 									}
 
-									break;
 								}
+								else
+								{ //door textures are int 8s
+									texture_map[i] = (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
+									offset++;
+								}
+
+
+								break;
+							}
 						case 2: //uw2
 								{
 									if (textureAddress == -1)//Texture block was decompressed
@@ -1466,9 +1466,10 @@ public class TileMap : Loader {
 
 								Tiles[x,y].tileType = getTile(FirstTileInt) ;
 								Tiles[x,y].floorHeight = getHeight(FirstTileInt) ;
-								Tiles[x,y].trueHeight=Tiles[x,y].floorHeight;//Save this value before shifting.
-								Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
-
+								//Tiles[x,y].trueHeight=Tiles[x,y].floorHeight;//Save this value before shifting.
+								//Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
+								//Turns out that shift is just a doubling!
+								Tiles[x,y].floorHeight  = Tiles[x,y].floorHeight*2; //remember to divide when writing this back.
 								Tiles[x,y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
 								Tiles[x,y].noOfNeighbours=0;
 								Tiles[x,y].tileTested = 0;
@@ -1476,19 +1477,19 @@ public class TileMap : Loader {
 								Tiles[x,y].BullFrog = 0;
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
-								Tiles[x,y].noMagic =(short)( (FirstTileInt>>13) & 0x1);
+								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
 								switch (game)
 								{
 								case 1:	//uw1
 										Tiles[x,y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
-										if (LevelNo == 6)
-										{//Tybals lair. Special case for the maze
+										//if (LevelNo == 6)
+										//{//Tybals lair. Special case for the maze
 												//int val = (FirstTileInt >> 10) & 0x0F;
-												if (((FirstTileInt >> 10) & 0x0F) == 4)
-												{//Maze floor
-														Tiles[x,y].floorTexture = 278;
-												}
-										}
+										//		if (((FirstTileInt >> 10) & 0x0F) == 4)
+										////		{//Maze floor
+										//				Tiles[x,y].floorTexture = 278;
+										//		}
+										//}
 										Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
 										break;
 								}
@@ -1636,9 +1637,11 @@ public class TileMap : Loader {
 
 		int getFloorTex(char[] buffer, long textureOffset, long tileData)
 		{//gets floor texture data at bits 10-13 of the tile data
-				int val = (int)(tileData >>10) & 0x0F;	//gets the index of the texture
+
+				return (int)(tileData >>10) & 0x0F;
+				//int val = (int)(tileData >>10) & 0x0F;	//gets the index of the texture
 				//look it up in texture block for it's absolute index for wxx.tr
-				return (int)DataLoader.getValAtAddress(buffer,textureOffset+96+(val*2),16) +210;			//96 needed?
+				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+96+(val*2),16) +210;			//96 needed?
 				//	return ((tileData >>10) & 0x0F);	//was	11
 		}
 
@@ -1646,8 +1649,9 @@ public class TileMap : Loader {
 		{
 				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
 				//return ((tileData >>17)& 0x3F);
-				int val = (int)(tileData & 0x3F);	//gets the index of the texture
-				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
+				return (int)(tileData & 0x3F);
+				//int val = (int)(tileData & 0x3F);	//gets the index of the texture
+				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
 				//return (tileData& 0x3F);
 		}
 

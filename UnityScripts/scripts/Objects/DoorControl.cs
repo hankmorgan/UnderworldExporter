@@ -28,6 +28,21 @@ public class DoorControl : object_base {
 		///A trigger to activate when opened.
 	public string UseLink;
 
+		//Visible faces indices
+		const int vTOP =0;
+		const int vEAST =1;
+		const int vBOTTOM= 2;
+		const int vWEST= 3;
+		const int vNORTH= 4;
+		const int vSOUTH= 5;
+
+		//Door headings
+		const int NORTH=180;
+		const int SOUTH=0;
+		const int EAST=270;
+		const int WEST=90;
+
+
 		protected override void Start ()
 	{	
 				if (state())
@@ -623,7 +638,8 @@ public class DoorControl : object_base {
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
-							textureIndex = GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+							textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+							//textureIndex = GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
 							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
 							break;	
 						}
@@ -657,31 +673,230 @@ public class DoorControl : object_base {
 						break;		
 						}
 
+				case ObjectInteraction.HIDDENDOOR:
+						RenderHiddenDoor(myObj.GetComponent<DoorControl>(), textureIndex);
+						break;	
 
 				case ObjectInteraction.DOOR:
-				case ObjectInteraction.HIDDENDOOR:
+				//case ObjectInteraction.HIDDENDOOR:
 				default:
 						{
+
 							GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
 							newObj = (GameObject)GameObject.Instantiate(myInstance);
 							newObj.name=myObj.name + "_Model";
 							newObj.transform.parent=myObj.transform;
 							newObj.transform.position = myObj.transform.position;
-								if  (GameWorldController.instance.objectMaster.type[objInt.item_id] == ObjectInteraction.HIDDENDOOR)
-								{
-									newObj.GetComponent<Renderer>().material=GameWorldController.instance.MaterialMasterList[textureIndex]; 	
-								}
-								else
-								{
-									newObj.GetComponent<Renderer>().material=GameWorldController.instance.MaterialDoors[textureIndex];
-								}
+							newObj.GetComponent<Renderer>().material=GameWorldController.instance.MaterialDoors[textureIndex];
 							//
 							newObj.GetComponent<MeshCollider>().enabled=false;
 							MeshCollider mc = myObj.AddComponent<MeshCollider>();
 							mc.isTrigger=false;
-							mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+							mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;							
 							break;	
+							
 						}
 				}			
 		}
+
+
+
+		/// <summary>
+		/// Renders a hidden door that matches the texture of the wall around it
+		/// </summary>
+		/// <param name="dc">Dc.</param>
+		/// <param name="textureIndex">Texture index.</param>
+		static void RenderHiddenDoor(DoorControl dc, int textureIndex)
+		{
+
+				//move the secret door to the bottom so I can match the uvs properly. I think
+				dc.transform.position = new Vector3(dc.transform.position.x,0f,dc.transform.position.z);
+
+				textureIndex=GameWorldController.instance.currentTileMap().texture_map[textureIndex];
+				//Draw a cube with no slopes.
+				int NumberOfVisibleFaces=6;
+				//Allocate enough verticea and UVs for the faces
+				Vector3[] verts =new Vector3[6*4];
+				Vector2[] uvs =new Vector2[6*4];
+				int tileX=dc.objInt().tileX;
+				int tileY=dc.objInt().tileY;
+				int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
+				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
+				float Bottom =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
+				float floorHeight=(float)(Top*0.15f);
+				float baseHeight=(float)(Bottom*0.15f);
+				float dimX = 1;
+				float dimY = 1;
+
+
+				float doorwidth = 0.8f;
+				float doorframewidth = 1.2f;
+				float doorSideWidth = (doorframewidth-doorwidth)/2f;
+				float doorheight = 7f * 0.15f;
+				//Uv ratios across the x axis of the door
+				float uvXPos1 = 0f;
+				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
+				float uvXPos3 =uvXPos2 + doorwidth/1.2f;
+				float uvXPos4 = 1f; // or 1.2f/1.2f
+
+				//Now create the mesh
+				GameObject Tile = new GameObject(dc.name + "_Model");
+
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
+
+				Tile.transform.parent=dc.transform;
+				Tile.transform.localPosition = Vector3.zero;
+
+				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+				MeshFilter mf = Tile.AddComponent<MeshFilter>();
+				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+				//MeshCollider mc = Tile.AddComponent<MeshCollider>();
+				//mc.sharedMesh=null;
+				Mesh mesh = new Mesh();
+				mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+				Material[] MatsToUse=new Material[NumberOfVisibleFaces];
+				//Now allocate the visible faces to triangles.
+				int FaceCounter=0;//Tracks which number face we are now on.
+				float PolySize= Top-Bottom;
+				float uv0= (float)(Bottom*0.125f);
+				float uv1=(PolySize / 8.0f) + (uv0);
+				for (int i=0;i<6;i++)
+				{
+					switch(i)
+					{
+					case vTOP:
+							{
+							//Set the verts	
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+
+							verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, -0.02f,floorHeight);
+							verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 0.02f, floorHeight);
+							verts[2+ (4*FaceCounter)]=  new Vector3(-doorwidth,0.02f, floorHeight);
+							verts[3+ (4*FaceCounter)]=  new Vector3(-doorwidth,-0.02f, floorHeight);
+
+							//Allocate UVs
+							uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+							uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+							uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+							uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
+
+							break;
+							}
+
+					case vNORTH:
+							{
+							//north wall vertices
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+										verts[0+ (4*FaceCounter)]=  new Vector3(-doorwidth,0.02f, baseHeight);
+										verts[1+ (4*FaceCounter)]=  new Vector3(-doorwidth,0.02f, floorHeight);
+										verts[2+ (4*FaceCounter)]=  new Vector3(0f,0.02f, floorHeight);
+										verts[3+ (4*FaceCounter)]=  new Vector3(0f,0.02f, baseHeight);
+
+							uvs[0+ (4*FaceCounter)]=new Vector2(uvXPos2,uv0);
+							uvs[1 +(4*FaceCounter)]=new Vector2(uvXPos2,uv1);
+							uvs[2+ (4*FaceCounter)]=new Vector2(uvXPos3,uv1);
+							uvs[3+ (4*FaceCounter)]=new Vector2(uvXPos3,uv0);
+
+
+							break;
+							}
+
+					case vWEST:
+							{
+							//west wall vertices
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+										verts[0+ (4*FaceCounter)]=  new Vector3(0f,+0.02f, baseHeight);
+										verts[1+ (4*FaceCounter)]=  new Vector3(0f,+0.02f, floorHeight);
+										verts[2+ (4*FaceCounter)]=  new Vector3(0f,-0.02f, floorHeight);
+										verts[3+ (4*FaceCounter)]=  new Vector3(0f,-0.02f, baseHeight);
+										uvs[0+ (4*FaceCounter)]=new Vector2(uvXPos2,uv0);
+										uvs[1 +(4*FaceCounter)]=new Vector2(uvXPos2,uv1);
+										uvs[2+ (4*FaceCounter)]=new Vector2(uvXPos3,uv1);
+										uvs[3+ (4*FaceCounter)]=new Vector2(uvXPos3,uv0);
+
+							break;
+							}
+
+					case vEAST:
+							{
+							//east wall vertices
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+										verts[0+ (4*FaceCounter)]=  new Vector3(-doorwidth,-0.02f, baseHeight);
+										verts[1+ (4*FaceCounter)]=  new Vector3(-doorwidth,-0.02f, floorHeight);
+										verts[2+ (4*FaceCounter)]=  new Vector3(-doorwidth,+0.02f*dimY, floorHeight);
+										verts[3+ (4*FaceCounter)]=  new Vector3(-doorwidth,+0.02f*dimY, baseHeight);
+										uvs[0+ (4*FaceCounter)]=new Vector2(uvXPos2,uv0);
+										uvs[1 +(4*FaceCounter)]=new Vector2(uvXPos2,uv1);
+										uvs[2+ (4*FaceCounter)]=new Vector2(uvXPos3,uv1);
+										uvs[3+ (4*FaceCounter)]=new Vector2(uvXPos3,uv0);
+
+							break;
+							}
+
+					case vSOUTH:
+							{
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+							//south wall vertices
+							verts[0+ (4*FaceCounter)]=  new Vector3(0f,-0.02f, baseHeight);
+							verts[1+ (4*FaceCounter)]=  new Vector3(0f,-0.02f, floorHeight);
+							verts[2+ (4*FaceCounter)]=  new Vector3(-doorwidth,-0.02f, floorHeight);
+							verts[3+ (4*FaceCounter)]=  new Vector3(-doorwidth,-0.02f, baseHeight);
+										uvs[0+ (4*FaceCounter)]=new Vector2(uvXPos2,uv0);
+										uvs[1 +(4*FaceCounter)]=new Vector2(uvXPos2,uv1);
+										uvs[2+ (4*FaceCounter)]=new Vector2(uvXPos3,uv1);
+										uvs[3+ (4*FaceCounter)]=new Vector2(uvXPos3,uv0);
+
+							break;
+							}
+					case vBOTTOM:
+							{
+							//bottom wall vertices
+							MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[textureIndex]; 
+							verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+							verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+							verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+							verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+							//Change default UVs
+							uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+							uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+							uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
+							uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
+							break;
+							}
+
+					}
+					FaceCounter++;
+				}
+
+				//Apply the uvs and create my tris
+				mesh.vertices = verts;
+				mesh.uv = uvs;
+				FaceCounter=0;
+				int [] tris = new int[6];
+				for (int i=0;i<6;i++)
+				{
+						tris[0]=0+(4*FaceCounter);
+						tris[1]=1+(4*FaceCounter);
+						tris[2]=2+(4*FaceCounter);
+						tris[3]=0+(4*FaceCounter);
+						tris[4]=2+(4*FaceCounter);
+						tris[5]=3+(4*FaceCounter);
+						mesh.SetTriangles(tris,FaceCounter);
+						FaceCounter++;
+				}
+
+				mr.materials= MatsToUse;//mats;
+				mesh.RecalculateNormals();
+				mesh.RecalculateBounds();
+				mf.mesh=mesh;
+				//mc.sharedMesh=mesh;
+
+				MeshCollider nmc =dc.gameObject.AddComponent<MeshCollider>();
+				nmc.isTrigger=false;
+				nmc.sharedMesh=mesh;		
+
+		}
+
+
 }

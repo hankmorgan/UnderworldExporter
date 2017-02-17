@@ -4,7 +4,7 @@ using System.Collections;
 public class TileInfo : Loader {
 
 		public int tileType;	//What type of tile I am.
-		public int trueHeight;
+		//public int trueHeight;
 		public int floorHeight;	//How high is the floor.
 		public int ceilingHeight;	//Constant in UW. Variable in shock
 		public int floorTexture;	//At the moment this is the index into the texture table

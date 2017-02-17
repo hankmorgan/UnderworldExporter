@@ -44,7 +44,8 @@ The path to the sword hilt on Level3
 						int textureQuality = (objInt().quality >> 1) & 0xf;
 						if (textureQuality<10)
 						{
-							tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
+							tileToChange.floorTexture=textureQuality+48;
+							//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
 						}
 										//currobj.zpos >> 2
 										//(objList[k].zpos >> 2);
@@ -54,10 +55,11 @@ The path to the sword hilt on Level3
 							tileToChange.VisibleFaces[v]=1;		
 						}
 						tileToChange.tileType=objInt().quality & 0x01;;
-						tileToChange.trueHeight=objInt().zpos;
+						//tileToChange.trueHeight=objInt().zpos;
 						tileToChange.DimX=1;
 						tileToChange.DimY=1;
 						tileToChange.floorHeight=objInt().zpos>>2;
+						tileToChange.floorHeight=tileToChange.floorHeight/2;//DOUBLE CHECK THIS
 						tileToChange.isWater=TileMap.isTextureWater(tileToChange.floorTexture);
 						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,1,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 					}

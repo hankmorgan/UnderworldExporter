@@ -481,9 +481,6 @@ public class GameWorldController : UWEBase {
 						Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data,1,newLevelNo);
 						objectList[newLevelNo]=new ObjectLoader();
 						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);
-						//Tilemaps[i].setRooms();
-						//Tilemaps[i].MergeWaterRegions();
-						//Tilemaps[i].MergeLavaRegions();
 						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
 					}
 
@@ -683,6 +680,88 @@ public class GameWorldController : UWEBase {
 					t.gameObject.GetComponent<ObjectInteraction>().UpdatePosition();	
 				}
 			}
+		}
+
+
+		/// <summary>
+		/// Writes a lev ark file based on the stored file
+		/// </summary>
+		public void WriteBackLevArk()
+		{
+				
+				//Write back tile states
+				for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
+				{
+						if (GameWorldController.instance.Tilemaps[l] !=null)
+						{
+								for (int x=0; x<64;x++)
+								{
+										for (int y=0; y<64;y++)
+										{			
+											//	Debug.Log(l +  " " + x + " " + y);
+												TileInfo t = Tilemaps[l].Tiles[x,y];
+												long addptr = t.address;
+
+												//Shift the bits to construct my data
+												int tileType = t.tileType;
+												int floorHeight = (t.floorHeight/2) << 4;
+
+
+												int ByteToWrite = tileType | floorHeight ;//| floorTexture | noMagic;//This will be set in the original data
+												lev_ark_file_data[addptr]= (char) ( lev_ark_file_data[addptr] | (char)(ByteToWrite) );
+
+												int floorTexture = t.floorTexture<<2;
+												int noMagic = t.noMagic << 6;
+
+												ByteToWrite= floorTexture | noMagic;
+												lev_ark_file_data[addptr+1]= (char) ( lev_ark_file_data[addptr+1] | (char)(ByteToWrite) );
+
+
+												int WallTexture = t.wallTexture;
+												int ObjectIndex = (t.indexObjectList & 0x3)<<6;//First write the first 2 bits at 6
+												ByteToWrite = WallTexture |  ObjectIndex;
+												lev_ark_file_data[addptr+2]= (char) ( lev_ark_file_data[addptr+2] | (char)(ByteToWrite) );
+
+												//Now write the rest of the object index
+												ObjectIndex = t.indexObjectList >>2;
+												ByteToWrite= ObjectIndex;
+												lev_ark_file_data[addptr+3]= (char) ( lev_ark_file_data[addptr+3] | (char)(ByteToWrite) );
+												//lev_ark_file_data[addptr+2]= lev_ark_file_data[addptr+2] | (char)secondByte;
+												//ALl i think i will change is the floor texture, type, height and first object index
+												/*0000 tile properties / flags:
+
+										bits     len  description
+										0- 3    4    tile type (0-9, see below)
+										4- 7    4    floor height
+										8       1    unknown (?? special light feature ??) always 0 in uw1
+										9       1    0, never used in uw1
+										10-13    4    floor texture index (into texture mapping)
+										14       1    when set, no magic is allowed to cast/to be casted upon
+										15       1    door bit (when 1, a door is present)
+
+										0002 tile properties 2 / object list link
+
+										bits     len  description
+										0- 5    6    wall texture index (into texture mapping)
+										6-15    10   first object in tile (index into master object list)*/
+												
+										}	
+								}		
+						}
+					
+				}
+
+
+				//Write the array to file
+
+				byte[] dataToWrite = new byte[lev_ark_file_data.GetUpperBound(0)+1];
+				for (long i=0; i<=lev_ark_file_data.GetUpperBound(0);i++)
+				{
+						dataToWrite[i] = (byte)lev_ark_file_data[i];
+				}
+				File.WriteAllBytes(Loader.BasePath +  "data\\testlev.ark" , dataToWrite);
+
+			
 		}
 
 }

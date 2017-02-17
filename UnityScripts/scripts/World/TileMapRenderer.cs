@@ -192,8 +192,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				Material[] MatsToUse = new Material[1];
 				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 				{
-						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
-				}
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];				}
 
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 				//float doorthickness = 0.1f;
@@ -201,6 +200,13 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				float doorframewidth = 1.2f;
 				float doorSideWidth = (doorframewidth-doorwidth)/2f;
 				float doorheight = 7f * 0.15f;
+
+				//Uv ratios across the x axis of the door
+				float uvXPos1 = 0f;
+				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
+				float uvXPos3 =uvXPos2 + doorwidth/1.2f;
+				float uvXPos4 = 1f; // or 1.2f/1.2f
+
 				//positions
 				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
 				//center in the tile and at the bottom of the map.
@@ -248,10 +254,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 				Vector2[] UVs = new Vector2[4];
-				UVs[0]= new Vector2(0f,0f);
-				UVs[1]= new Vector2(0f,4);
-				UVs[2]= new Vector2(doorSideWidth,4);
-				UVs[3]= new Vector2(doorSideWidth,0f);
+				UVs[0]= new Vector2(uvXPos1,0f);
+				UVs[1]= new Vector2(uvXPos1,4);
+				UVs[2]= new Vector2(uvXPos2,4);
+				UVs[3]= new Vector2(uvXPos2,0f);
 
 				GameObject tile = RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"rear_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));
@@ -290,14 +296,13 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 				//Vector2[] UVs = new Vector2[4];
-				UVs[0]= new Vector2(0+doorSideWidth, dist);
-				UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
-				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
-				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
+				UVs[0]= new Vector2(uvXPos2, dist);
+				UVs[1]= new Vector2(uvXPos2, CEILING_HEIGHT/8f);
+				UVs[2]= new Vector2(uvXPos3, CEILING_HEIGHT/8f);
+				UVs[3]= new Vector2(uvXPos3, dist);
 
 				tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"rear_over_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));//TODO:FIx for headings.
-
 
 
 				//y0 = +doorthickness /2f;
@@ -329,10 +334,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 
 				UVs = new Vector2[4];
-				UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
-				UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
-				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
-				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
+				UVs[0]= new Vector2(uvXPos3,0f);
+				UVs[1]= new Vector2(uvXPos3,4);
+				UVs[2]= new Vector2(uvXPos4,4);
+				UVs[3]= new Vector2(uvXPos4,0f);
 
 				tile = RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"rear_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));
@@ -354,7 +359,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				Material[] MatsToUse = new Material[1];
 				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 				{
-						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture];
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];
 				}
 				//Door params
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
@@ -363,6 +368,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				float doorframewidth = 1.2f;
 				float doorSideWidth = (doorframewidth-doorwidth)/2f;
 				float doorheight = 7.0f * 0.15f ;
+
+
+				//Uv ratios across the x axis of the door
+				float uvXPos1 = 0f;
+				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
+				float uvXPos3 =uvXPos2 + doorwidth/1.2f;
+				float uvXPos4 = 1f; // or 1.2f/1.2f
+
 				//Vector3 doorposition;
 				//positions
 				Vector3 position = objList.CalcObjectXYZ(1,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
@@ -412,10 +425,16 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						break;
 				}
 				Vector2[] UVs = new Vector2[4];
-				UVs[0]= new Vector2(0f,0f);
-				UVs[1]= new Vector2(0f,4);
-				UVs[2]= new Vector2(doorSideWidth,4);
-				UVs[3]= new Vector2(doorSideWidth,0f);
+				//UVs[0]= new Vector2(0f,0f);
+				//UVs[1]= new Vector2(0f,4);
+				//UVs[2]= new Vector2(doorSideWidth,4);
+				//UVs[3]= new Vector2(doorSideWidth,0f);
+
+				UVs[0]= new Vector2(uvXPos1,0f);
+				UVs[1]= new Vector2(uvXPos1,4);
+				UVs[2]= new Vector2(uvXPos2,4);
+				UVs[3]= new Vector2(uvXPos2,0f);
+
 
 				RenderCuboid(Parent,leftHand,UVs,position,MatsToUse,1,"front_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
 
@@ -454,10 +473,15 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				
 				//Vector2[] UVs = new Vector2[4];
-				UVs[0]= new Vector2(0+doorSideWidth, dist);
-				UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
-				UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
-				UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
+				//UVs[0]= new Vector2(0+doorSideWidth, dist);
+				//UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
+				//UVs[2]= new Vector2(doorwidth-doorSideWidth, CEILING_HEIGHT/8f);
+				//UVs[3]= new Vector2(doorwidth-doorSideWidth, dist);
+				UVs[0]= new Vector2(uvXPos2, dist);
+				UVs[1]= new Vector2(uvXPos2, CEILING_HEIGHT/8f);
+				UVs[2]= new Vector2(uvXPos3, CEILING_HEIGHT/8f);
+				UVs[3]= new Vector2(uvXPos3, dist);
+
 
 				RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"front_over_" + ObjectLoader.UniqueObjectName(currDoor));
 
@@ -492,10 +516,15 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						break;
 				}
 				UVs = new Vector2[4];
-				UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
-				UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
-				UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
-				UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
+				//UVs[0]= new Vector2(doorSideWidth + doorwidth,0f);
+				//UVs[1]= new Vector2(doorSideWidth + doorwidth,4);
+				//UVs[2]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,4);
+				//UVs[3]= new Vector2(doorSideWidth + doorwidth + doorSideWidth,0f);
+
+				UVs[0]= new Vector2(uvXPos3,0f);
+				UVs[1]= new Vector2(uvXPos3,4);
+				UVs[2]= new Vector2(uvXPos4,4);
+				UVs[3]= new Vector2(uvXPos4,0f);
 
 				RenderCuboid(Parent,rightHand,UVs,position,MatsToUse,1,"front_rightside_" + ObjectLoader.UniqueObjectName(currDoor));
 
@@ -2745,20 +2774,27 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 						wallTexture = 0;
 				}
-				return wallTexture;
+				return GameWorldController.instance.currentTileMap().texture_map[wallTexture];
 		}
 
+		/// <summary>
+		/// Returns the floor texture from the texture map.
+		/// </summary>
+		/// <returns>The texture.</returns>
+		/// <param name="face">Face.</param>
+		/// <param name="t">T.</param>
 		static int FloorTexture(int face, TileInfo t)
 		{
 				int floorTexture;
 
 				if (face == fCEIL)
 				{
-						floorTexture = t.shockCeilingTexture;
+						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
 				}
 				else
 				{
-						floorTexture = t.floorTexture;
+						//floorTexture = t.floorTexture;
+					floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
 				}
 
 				if ((floorTexture<0) || (floorTexture >512))
