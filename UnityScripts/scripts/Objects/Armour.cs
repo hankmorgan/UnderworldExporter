@@ -27,7 +27,7 @@ public class Armour : Equipment {
 	/// <returns>The actual spell index.</returns>
 	public override int GetActualSpellIndex ()
 	{
-		return objInt().Link-256+16;
+		return objInt().link-256+16;
 	}
 
 	protected override void Start () {
@@ -40,9 +40,9 @@ public class Armour : Equipment {
 	/// </summary>
 	public virtual void ArmourSelfDamage()
 	{
-		objInt().Quality-=1;
+		objInt().quality-=1;
 		UpdateQuality();
-		if (objInt().Quality<=0)
+		if (objInt().quality<=0)
 		{
 			ChangeType(208,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
@@ -56,16 +56,16 @@ public class Armour : Equipment {
 						
 				if ((itemIndex<15))
 				{//Armor pieces
-						if ((objInt().Quality>0) && (objInt().Quality<=15))
+						if ((objInt().quality>0) && (objInt().quality<=15))
 						{
 								//Shit quality
 								EquipIconIndex=  itemIndex;
 						}
-						else if ((objInt().Quality>15) && (objInt().Quality<=30))
+						else if ((objInt().quality>15) && (objInt().quality<=30))
 						{//bashed about
 								EquipIconIndex=  itemIndex + (1*15);
 						}
-						else if ((objInt().Quality>30) && (objInt().Quality<=45))
+						else if ((objInt().quality>30) && (objInt().quality<=45))
 						{//medium
 								EquipIconIndex=  itemIndex + (2*15);
 						}
@@ -84,7 +84,7 @@ public class Armour : Equipment {
 
 	public override void UpdateQuality1()
 	{	//Needs to be called when damaged.
-		if ((objInt().Quality>0) && (objInt().Quality<=15))
+		if ((objInt().quality>0) && (objInt().quality<=15))
 		{
 			if (GameWorldController.instance.playerUW.isFemale)
 			{
@@ -95,7 +95,7 @@ public class Armour : Equipment {
 				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowestQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt().Quality>15) && (objInt().Quality<=30))
+		else if ((objInt().quality>15) && (objInt().quality<=30))
 		{
 			//Low quality
 			if (GameWorldController.instance.playerUW.isFemale)
@@ -107,7 +107,7 @@ public class Armour : Equipment {
 				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt().Quality>30) && (objInt().Quality<=45))
+		else if ((objInt().quality>30) && (objInt().quality<=45))
 		{
 			//Medium
 			if (GameWorldController.instance.playerUW.isFemale)
@@ -119,7 +119,7 @@ public class Armour : Equipment {
 					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleMediumQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt().Quality>45) && (objInt().Quality<=63))
+		else if ((objInt().quality>45) && (objInt().quality<=63))
 		{
 			//Best
 			if (GameWorldController.instance.playerUW.isFemale)
@@ -172,7 +172,7 @@ public class Armour : Equipment {
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
 			UpdateQuality();
-			if (objInt().isEnchanted==true)
+			if (objInt().isEnchanted()==true)
 			{
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)

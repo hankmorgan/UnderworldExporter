@@ -90,23 +90,23 @@ public class Food : object_base {
 		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
 	{
-		if (objInt().Quality == 0)
+		if (objInt().quality == 0)
 			{
 			return StringController.instance.GetString (1,172);//worm
 			}
-		if ((objInt().Quality >=1) && (objInt().Quality <15))
+		if ((objInt().quality >=1) && (objInt().quality <15))
 			{
 			return StringController.instance.GetString (1,173);//rotten
 			}
-		if ((objInt().Quality >=15) && (objInt().Quality <32))
+		if ((objInt().quality >=15) && (objInt().quality <32))
 			{
 			return StringController.instance.GetString (1,174);//smelly
 			}
-		if ((objInt().Quality >=32) && (objInt().Quality <40))
+		if ((objInt().quality >=32) && (objInt().quality <40))
 			{
 			return StringController.instance.GetString (1,175);//day old
 			}
-		if ((objInt().Quality >=40) && (objInt().Quality <48))
+		if ((objInt().quality >=40) && (objInt().quality <48))
 			{
 			return StringController.instance.GetString (1,176);//fresh
 			}
@@ -123,24 +123,24 @@ public class Food : object_base {
 		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
 	private string foodSmellText()//
 	{
-		if (objInt().Quality == 0)
+		if (objInt().quality == 0)
 		{
 				return StringController.instance.GetString (5,18);//worm
 		}
-		if ((objInt().Quality >=1) && (objInt().Quality <15))
+		if ((objInt().quality >=1) && (objInt().quality <15))
 		{
 				return StringController.instance.GetString (5,19);//rotten
 		}
-		if ((objInt().Quality >=15) && (objInt().Quality <32))
+		if ((objInt().quality >=15) && (objInt().quality <32))
 		{
 				return StringController.instance.GetString (5,20);//smelly
 		}
-		if ((objInt().Quality >=32) && (objInt().Quality <40))
+		if ((objInt().quality >=32) && (objInt().quality <40))
 		{
 				return StringController.instance.GetString (5,21);//day old
 		}
 
-		if ((objInt().Quality >=40) && (objInt().Quality <48))
+		if ((objInt().quality >=40) && (objInt().quality <48))
 		{
 				return StringController.instance.GetString (5,22);//fresh
 		}
@@ -152,8 +152,8 @@ public class Food : object_base {
 
 	public override bool ApplyAttack (int damage)
 	{
-		objInt().Quality-=damage;
-		if (objInt().Quality<=0)
+		objInt().quality-=damage;
+		if (objInt().quality<=0)
 		{
 			ChangeType(213,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour

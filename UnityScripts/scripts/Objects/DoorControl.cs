@@ -143,12 +143,31 @@ public class DoorControl : object_base {
 
 	public override bool use ()
 	{
+		trigger_base trigger=null;
+		//If a door has a link and the link is to something that is not a lock then it is a trigger that I need to activae
+		if(objInt().link !=0)
+		{
+			ObjectInteraction linkedObject = ObjectLoader.getObjectIntAt(objInt().link);
+			if (linkedObject!=null)
+			{
+				if (linkedObject.GetItemType()!= ObjectInteraction.LOCK)
+				{
+					trigger= linkedObject.GetComponent<trigger_base>();	
+				}
+			}
+		}
+
+
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 		{
 			ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 			//Clear the object in hand
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+			if (trigger!=null)
+			{
+				trigger.Activate();
+			}
 			return true;	
 		}
 		else
@@ -156,6 +175,10 @@ public class DoorControl : object_base {
 			PlayerUse=true;
 			Activate();
 			PlayerUse=false;
+			if (trigger!=null)
+			{
+				trigger.Activate();
+			}
 			return true;
 		}
 	}
@@ -184,7 +207,7 @@ public class DoorControl : object_base {
 								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 								return false;
 						}
-						if((doorlock.Link & 0x3F)==dk.objInt().Owner)//This is a valid key for the door.
+						if((doorlock.link & 0x3F)==dk.objInt().owner)//This is a valid key for the door.
 						{
 							ToggleLock();
 								if (locked()==true)
@@ -199,7 +222,7 @@ public class DoorControl : object_base {
 						}
 					else
 						{
-						if (objInt().Link==53)
+						if (objInt().link==53)
 							{//There is no lock
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 							}
@@ -216,7 +239,7 @@ public class DoorControl : object_base {
 					{
 					if (Pickable==true)
 						{
-						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
+						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.quality))
 							{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,121));
 							UnlockDoor();
@@ -497,8 +520,8 @@ public class DoorControl : object_base {
 			{
 			damage= damage/DR();
 			}
-		objInt().Quality=objInt().Quality-damage;
-		if ((objInt().Quality<=0))
+		objInt().quality=objInt().quality-damage;
+		if ((objInt().quality<=0))
 			{
 				//locked=false;
 				UnlockDoor();
@@ -557,24 +580,24 @@ public class DoorControl : object_base {
 	private string DoorQuality()
 	{//TODO:The figures here are based on food quality levels!
 		
-		if (objInt().Quality == 0)
+		if (objInt().quality == 0)
 		{
 			return StringController.instance.GetString (5,0);//brken
 		}
-				if ((objInt().Quality >=1) && (objInt().Quality <15))
+				if ((objInt().quality >=1) && (objInt().quality <15))
 		{
 			return StringController.instance.GetString (5,1);//badly damaged
 		}
-				if ((objInt().Quality >=15) && (objInt().Quality <32))
+				if ((objInt().quality >=15) && (objInt().quality <32))
 		{
 			return StringController.instance.GetString (5,2);//damaged
 		}
-				if ((objInt().Quality >=32) && (objInt().Quality <=40))
+				if ((objInt().quality >=32) && (objInt().quality <=40))
 		{
 			return StringController.instance.GetString (5,3);//sturdy
 		}
 		
-				if ((objInt().Quality >40) && (objInt().Quality <48))
+				if ((objInt().quality >40) && (objInt().quality <48))
 		{
 			return StringController.instance.GetString (5,4);//massive?
 		}

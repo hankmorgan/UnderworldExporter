@@ -23,7 +23,7 @@ public class trigger_base : object_base {
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (objInt().Quality,objInt().Owner,objInt().flags);
+			triggerObj.GetComponent<trap_base>().Activate (objInt().quality,objInt().owner,objInt().flags);
 			/*if (objInt().flags == 8)
 			{
 				objInt().flags = 0;

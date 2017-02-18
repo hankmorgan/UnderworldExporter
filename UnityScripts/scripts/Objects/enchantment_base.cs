@@ -36,7 +36,7 @@ public class enchantment_base : object_base {
 	protected virtual int GetActualSpellIndex()
 	{
 		//Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
-		int index=objInt().Link-512;
+		int index=objInt().link-512;
 		if ( objInt().GetItemType() != ObjectInteraction.RING)
 		{
 			if (index<63)

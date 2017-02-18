@@ -15,7 +15,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		switch (objInt().Owner)
+		switch (objInt().owner)
 		{
 		case 0://Raise tile
 			Debug.Log ("Raise tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");

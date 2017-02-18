@@ -57,8 +57,8 @@ public class Potion : enchantment_base {
 
 	public override bool ApplyAttack (int damage)
 	{
-			objInt().Quality-=damage;
-			if (objInt().Quality<=0)
+			objInt().quality-=damage;
+			if (objInt().quality<=0)
 			{
 					ChangeType(213,23);//Change to debris.
 					this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour

@@ -59,9 +59,9 @@ public class LightSource : object_base {
 					LightTimer-=Time.deltaTime;
 					if (LightTimer<=0)
 					{
-						objInt().Quality--;
+						objInt().quality--;
 						LightTimer=LightTimerMax;
-						if (objInt().Quality==0)
+						if (objInt().quality==0)
 						{
 							SetOff();
 						}
@@ -127,7 +127,7 @@ public class LightSource : object_base {
 		/// </summary>
 	public void SetOn()
 	{		
-		if (objInt().Quality<=0)
+		if (objInt().quality<=0)
 		{//000~001~124~That light is already used up. \n
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,124));
 			return;
@@ -158,7 +158,7 @@ public class LightSource : object_base {
 		}
 		if (invSlot != null)
 			{
-			if   ((objInt().isQuant==false) || ((objInt().isQuant) && (objInt().Link==1)) || (objInt().isEnchanted==true))
+			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (objInt().link==1)) || (objInt().isEnchanted()==true))
 			{//Is a quantity of one or not a quantity/
 				pInv.RemoveItem(this.name);
 				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
@@ -171,12 +171,12 @@ public class LightSource : object_base {
 			{//Clone the item and move it's clone to the inventory slot
 				GameObject split = Instantiate(this.gameObject);
 				split.name= split.name+"_"+ GameWorldController.instance.playerUW.summonCount++;
-				split.GetComponent<ObjectInteraction>().Link=1;//Increment and decrement the object count as appropiate;
-				objInt().Link--;
+				split.GetComponent<ObjectInteraction>().link=1;//Increment and decrement the object count as appropiate;
+				objInt().link--;
 				split.transform.parent=this.transform.parent;
 				//Activate the split instead
 				split.GetComponent<ObjectInteraction>().Use();
-				split.GetComponent<ObjectInteraction>().isQuant=false;
+				split.GetComponent<ObjectInteraction>().isquant=0;
 			}
 		}
 		else
@@ -197,7 +197,7 @@ public class LightSource : object_base {
 		//objInt().InvDisplayIndex=ItemIdOff;
 		objInt().item_id=objInt().item_id-4;
 		objInt().InvDisplayIndex=objInt().item_id;
-		objInt().isQuant=true;
+		objInt().isquant=1;
 		objInt().RefreshAnim();
 		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 	}
@@ -215,24 +215,24 @@ public class LightSource : object_base {
 	private string lightStatusText()
 	{//The quality string of the light Eg is it spent or not.
 
-			if (objInt().Quality == 0)
+			if (objInt().quality == 0)
 			{
 				return StringController.instance.GetString (5,60);//burned out
 			}
-			if ((objInt().Quality >=1) && (objInt().Quality <15))
+			if ((objInt().quality >=1) && (objInt().quality <15))
 			{
 				return StringController.instance.GetString (5,61);//nearly spent
 			}
-			if ((objInt().Quality >=15) && (objInt().Quality <32))
+			if ((objInt().quality >=15) && (objInt().quality <32))
 			{
 				return StringController.instance.GetString (5,62);//half burned
 			}
-			if ((objInt().Quality >=32) && (objInt().Quality <49))
+			if ((objInt().quality >=32) && (objInt().quality <49))
 			{
 				return StringController.instance.GetString (5,63);//somewhat used
 			}
 
-			if ((objInt().Quality >=50) && (objInt().Quality <64))
+			if ((objInt().quality >=50) && (objInt().quality <64))
 			{
 				return StringController.instance.GetString (5,64);//hardly used
 			}

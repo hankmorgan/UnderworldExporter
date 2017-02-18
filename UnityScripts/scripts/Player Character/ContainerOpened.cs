@@ -98,7 +98,7 @@ public class ContainerOpened : GuiBase_Draggable {
 			ObjectInteraction item = GameObject.Find (GameWorldController.instance.playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
 			if (Container.TestContainerRules(DestinationContainer,11))
 			{
-				//if ((item.isQuant==false) || (item.isEnchanted))
+				//if ((item.isQuant()==false) || (item.isEnchanted()))
 				if (! item.IsStackable())
 				{
 					if (DestinationContainer.AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand))

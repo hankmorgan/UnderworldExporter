@@ -512,13 +512,13 @@ public class StringController : UWEBase {
 	{//Eventually this will return things like proper quants etc.
 		string output = GetString (4,objInt.item_id);
 
-		if ((objInt.isQuant ==true) && (objInt.isEnchanted==false))
+		if ((objInt.isQuant() ==true) && (objInt.isEnchanted()==false))
 		{
 			if (output.Contains("&"))
 			{
-				if (objInt.Link>1)
+				if (objInt.link>1)
 				{//Plural description
-					output= objInt.Link + " " + output.Split ('&')[1];		
+					output= objInt.link + " " + output.Split ('&')[1];		
 				}
 				else
 				{
@@ -527,11 +527,11 @@ public class StringController : UWEBase {
 			}
 		else
 			{
-				if (objInt.Link>1)
+				if (objInt.link>1)
 				{//Plurals
-					output = output.Replace("a_",objInt.Link + "_");
-					output = output.Replace("an_",objInt.Link + "_");
-					output = output.Replace("some_",objInt.Link + "_");
+					output = output.Replace("a_",objInt.link + "_");
+					output = output.Replace("an_",objInt.link + "_");
+					output = output.Replace("some_",objInt.link + "_");
 					output = output + "s";
 				}
 			}		
@@ -559,13 +559,13 @@ public class StringController : UWEBase {
 
 		string output = GetString (4,objInt.item_id);
 		
-		if ((objInt.isQuant ==true) && (objInt.isEnchanted==false))
+		if ((objInt.isQuant() ==true) && (objInt.isEnchanted()==false))
 		{
 			if (output.Contains("&"))
 			{//string is split into a singular and plural
-				if ((objInt.Link>1) && (Quantity>1))
+				if ((objInt.link>1) && (Quantity>1))
 				{//Plural description
-					output= objInt.Link + " " + output.Split ('&')[1];		
+					output= objInt.link + " " + output.Split ('&')[1];		
 				}
 				else
 				{
@@ -605,11 +605,11 @@ public class StringController : UWEBase {
 		{
 			output="";
 		}
-		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false) )
+		if ((objInt.isQuant() ==true) && (output.Contains("&")) && (objInt.isEnchanted()==false) )
 		{
-			if (objInt.Link>1)
+			if (objInt.link>1)
 			{//Plural description
-				output= objInt.Link + " " + output.Split ('&')[1];		
+				output= objInt.link + " " + output.Split ('&')[1];		
 			}
 			else
 			{

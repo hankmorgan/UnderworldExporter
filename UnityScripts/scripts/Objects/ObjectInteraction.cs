@@ -127,6 +127,30 @@ public class ObjectInteraction : UWEBase {
 		public const int HEADINGEAST =270;
 		public const int HEADINGWEST= 90;
 
+		//UW Props
+
+		public int index;	//it's own index in case I need to find myself.
+		public int item_id;	//0-8
+		public int flags;	//9-12
+		public short enchantment;	//12
+		public short doordir;	//13
+		public short invis;		//14
+		public short isquant;	//15
+
+		public int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+		public int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+		public int x; //   10-12   3   "ypos"      Object Y position (0-7)
+		public int y; //  13-15   3   "xpos"      Object X position (0-7)
+		//0004 quality / chain
+		public 		int quality;	//;     0- 5   6   "quality"   Quality
+		public long next; //    6-15   10  "next"      Index of next object in chain
+		//0006 link / special
+		//     0- 5   6   "owner"     Owner / special
+		public int owner;	//Also special
+		//     6-15   10  (*)         Quantity / special link / special property
+		public int link	;	//also quantity
+
+
 		/// <summary>
 		/// The sprite index number to use when displaying this object in the game world.
 		/// </summary>
@@ -165,55 +189,33 @@ public class ObjectInteraction : UWEBase {
 		//UW specific info.
 		//public int index;
 
-		public int Owner;	//Used for keys
-		public int Link;	//Also quantity
-		public int Quality;
-		public bool isQuant;
-		public bool isEnchanted;
+		//public int Owner;	//Used for keys
+		//public int link;	//Also quantity
+		//public int Quality;
+		//public bool isQuant;
+		//public bool isEnchanted();
 		public bool isIdentified;
 
 		//Display controls
-		public static TextureController tc;
+		//public static TextureController tc;
 		private SpriteRenderer sr =null;
 		public bool isAnimated;
 		public bool animationStarted;
 
 		public short InUseFlag;
-		public short levelno;
+		//public short levelno;
 		public short tileX;	//Position of the object on the tilemap
 		public short tileY;
-		public long address;
-		public short AlreadyRendered;
-		public short DeathWatched;
+		//public long address;
+		//public short AlreadyRendered;
+		//public short DeathWatched;
 
-		//UW Props
 
-		public int index;	//it's own index in case I need to find myself.
-		public int item_id;	//0-8
-		public int flags;	//9-12
-		public short enchantment;	//12
-		public short doordir;	//13
-		public short invis;		//14
-		//public short isquant;	//15
 
-		public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
+		//public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
-		public int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-		public int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
-		public int x; //   10-12   3   "ypos"      Object Y position (0-7)
-		public int y; //  13-15   3   "xpos"      Object X position (0-7)
-		//0004 quality / chain
-		public 		int quality;	//;     0- 5   6   "quality"   Quality
-		public long next; //    6-15   10  "next"      Index of next object in chain
 
-		//0006 link / special
-		//     0- 5   6   "owner"     Owner / special
-
-		public int owner;	//Also special
-		//     6-15   10  (*)         Quantity / special link / special property
-
-		public int link	;	//also quantity
 
 		public ObjectLoaderInfo objectloaderinfo;
 
@@ -627,7 +629,7 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		public void consumeObject()
 		{
-			if((isQuant ==false) || ((isQuant) && (Link==1)) || (isEnchanted==true))
+			if((isQuant() ==false) || ((isQuant()) && (link==1)) || (isEnchanted()==true))
 			{//the last of the item or is not a quantity;
 				Container cn = GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer();
 				//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
@@ -646,7 +648,7 @@ public class ObjectInteraction : UWEBase {
 			}
 			else
 			{//just decrement the quantity value;
-				Link--;
+				link--;
 				ObjectInteraction.Split (this);
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
 			}
@@ -675,8 +677,9 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case 47://Dragonskin boots
 						myObj.AddComponent<Boots>();
-						objInt.Link=  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
-						objInt.isEnchanted=true;
+						objInt.link=  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
+						//objInt.isEnchanted()=true;
+						objInt.enchantment=1;
 						break;
 				case 276://Exploding book
 						myObj.AddComponent<ReadableTrap>();
@@ -769,15 +772,15 @@ public class ObjectInteraction : UWEBase {
 		/// <returns>The qty.</returns>
 		public int GetQty()
 		{//Gets the true quantity of this object
-			if ((isEnchanted==true) || (this.GetComponent<Readable>()!=null))
+			if ((isEnchanted()==true) || (this.GetComponent<Readable>()!=null))
 			{
 				return 1;
 			}
 			else
 			{
-				if (isQuant==true)
+			if (isQuant()==true)
 				{
-					return Link;
+					return link;
 				}
 				else
 				{
@@ -837,7 +840,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="EquipString">Equip string.</param>
 		/// <param name="ItemType">Item type.</param>
 		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">Link.</param>
+		/// <param name="link">link.</param>
 		/// <param name="Quality">Quality.</param>
 		/// <param name="Owner">Owner.</param>
 		/// <param name="isMoveable">Is moveable.</param>
@@ -845,7 +848,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isAnimated">Is animated.</param>
 		/// <param name="useSprite">Use sprite.</param>
 		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted">Is enchanted.</param>
+		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		/// <param name="ChildName">Child name.</param>
@@ -872,7 +875,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="EquipString">Equip string.</param>
 		/// <param name="ItemType">Item type.</param>
 		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">Link.</param>
+		/// <param name="link">link.</param>
 		/// <param name="Quality">Quality.</param>
 		/// <param name="Owner">Owner.</param>
 		/// <param name="isMoveable">Is moveable.</param>
@@ -880,7 +883,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isAnimated">Is animated.</param>
 		/// <param name="useSprite">Use sprite.</param>
 		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted">Is enchanted.</param>
+		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
@@ -903,7 +906,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="EquipString">Equip string.</param>
 		/// <param name="ItemType">Item type.</param>
 		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">Link.</param>
+		/// <param name="link">link.</param>
 		/// <param name="Quality">Quality.</param>
 		/// <param name="Owner">Owner.</param>
 		/// <param name="isMoveable">Is moveable.</param>
@@ -911,7 +914,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isAnimated">Is animated.</param>
 		/// <param name="useSprite">Use sprite.</param>
 		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted">Is enchanted.</param>
+		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		public static ObjectInteraction CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
@@ -940,9 +943,9 @@ public class ObjectInteraction : UWEBase {
 			}
 
 			objInteract.item_id=ItemId;//Internal ItemID
-			objInteract.Link=link;
-			objInteract.Quality=Quality;
-			objInteract.Owner=Owner;
+			objInteract.link=link;
+			objInteract.quality=Quality;
+			objInteract.owner=Owner;
 			objInteract.flags=flags;
 
 			if (isMoveable==1)
@@ -975,13 +978,13 @@ public class ObjectInteraction : UWEBase {
 			}
 			if (isQuant==1)
 			{
-					objInteract.isQuant=true;
+					objInteract.isquant=1;
 			}
-			if (isEnchanted==1)
-			{
-				objInteract.isEnchanted=true;
+			//if (isEnchanted==1)
+			//{
+				objInteract.enchantment=(short)isEnchanted;
 						//Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
-			}
+			//}
 			return objInteract;
 		}
 
@@ -1014,7 +1017,7 @@ public class ObjectInteraction : UWEBase {
 		/// <returns><c>true</c> if this instance is stackable; otherwise, <c>false</c>.</returns>
 		public bool IsStackable()
 		{//An object is stackable if it has the isQuant flag and is not enchanted.
-			return ((isQuant) && (!isEnchanted));
+			return ((isQuant()) && (!isEnchanted()));
 		}
 
 		/// <summary>
@@ -1034,7 +1037,7 @@ public class ObjectInteraction : UWEBase {
 						(mergingInto.item_id == mergingFrom.AliasItemId())
 					)
 					&& 
-					(mergingInto.Quality==mergingFrom.Quality)
+					(mergingInto.quality==mergingFrom.quality)
 			);
 		}
 
@@ -1046,7 +1049,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="mergingFrom">Merging from. This will be destroyed</param>
 		public static void Merge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
 		{
-			mergingInto.Link += mergingFrom.Link;
+			mergingInto.link += mergingFrom.link;
 			mergingInto.GetComponent<object_base>().MergeEvent();
 			Destroy(mergingFrom.gameObject);
 		}
@@ -1087,10 +1090,10 @@ public class ObjectInteraction : UWEBase {
 			objIntNew.PickedUp=PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
 			objIntNew.inventorySlot=inventorySlot;
 			objIntNew.Owner=Owner;	//Used for keys
-			objIntNew.Link=Link;	//Also quantity
-			objIntNew.Quality=Quality;
-			objIntNew.isQuant=isQuant;
-			objIntNew.isEnchanted=isEnchanted;
+			objIntNew.link=link;	//Also quantity
+			objIntNew.quality=Quality;
+			objIntNew.isQuant()=isQuant;
+			objIntNew.isEnchanted()=isEnchanted();
 			objIntNew.sr =sr;
 			objIntNew.isAnimated=isAnimated;
 
@@ -1675,7 +1678,7 @@ public class ObjectInteraction : UWEBase {
 				objInt.enchantment=currObj.enchantment;
 				objInt.doordir=currObj.doordir;
 				objInt.invis=currObj.invis;
-				objInt.texture=currObj.texture;
+				//objInt.texture=currObj.texture;
 				objInt.zpos=currObj.zpos;
 				objInt.x=currObj.x;
 				objInt.y=currObj.y;
@@ -1684,7 +1687,7 @@ public class ObjectInteraction : UWEBase {
 				objInt.owner=currObj.owner;
 				objInt.tileX=currObj.tileX;
 				objInt.tileY=currObj.tileY;
-				objInt.objectloaderinfo = currObj;//Link back to the list directly.
+				objInt.objectloaderinfo = currObj;//link back to the list directly.
 				//For now just generic.
 				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
 				{
@@ -1976,5 +1979,21 @@ public class ObjectInteraction : UWEBase {
 		}
 
 
+		/// <summary>
+		/// Returns the enchantment flag as a bool
+		/// </summary>
+		/// <returns><c>true</c>, if enchanted was ised, <c>false</c> otherwise.</returns>
+		public bool isEnchanted()
+		{
+				return (enchantment==1);
+		}
 
+		/// <summary>
+		/// Returns the isQuant flag as a bool
+		/// </summary>
+		/// <returns><c>true</c>, if quant was ised, <c>false</c> otherwise.</returns>
+		public bool isQuant()
+		{
+				return (isquant==1);
+		}
 }

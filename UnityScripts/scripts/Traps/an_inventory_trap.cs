@@ -14,7 +14,7 @@ public class an_inventory_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		int itemToFind = objInt().Quality <<5 | objInt().Owner;
+		int itemToFind = objInt().quality <<5 | objInt().owner;
 		ObjectFound=false;
 		ObjectInteraction foundObjInt = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)

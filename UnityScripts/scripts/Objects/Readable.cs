@@ -7,7 +7,7 @@ public class Readable : object_base {
 	{
 	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
-			if ((_RES=="UW1") && (objInt().Link== 769))
+			if ((_RES=="UW1") && (objInt().link== 769))
 			{//Special case for Rotworm stew recipe
 				return MixRotwormStew();
 			}
@@ -37,13 +37,13 @@ public class Readable : object_base {
 			{
 			if (objInt().PickedUp==true)
 				{
-				if (objInt().Link==520)
+				if (objInt().link==520)
 				{//Special case. Chasm of fire map.
 					UWHUD.instance.CutScenesSmall.SetAnimation="ChasmMap";
 				}
 				else
 				{
-					UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (3,objInt().Link - 0x200));
+					UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (3,objInt().link - 0x200));
 				}
 				return true;
 			}

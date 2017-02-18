@@ -135,7 +135,7 @@ public class object_base : UWEBase {
 			{
 				if(objInt().CanBeUsed==true)				
 				{//Hope this does'nt mess up everything!
-					if ((objInt().link != 0) && (objInt().isQuant==false) && (objInt().enchantment==0))
+					if ((objInt().link != 0) && (objInt().isQuant()==false) && (objInt().enchantment==0))
 					{//Not a quantity or an enchanted item.
 						if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_USE_TRIGGER)
 						{
@@ -204,7 +204,7 @@ public class object_base : UWEBase {
 		/// If object has a pickup link then the object referenced is activated
 	public virtual bool PickupEvent()
 	{
-		if ((objInt().link != 0) && (objInt().isQuant==false) && (objInt().enchantment==0))
+		if ((objInt().link != 0) && (objInt().isQuant()==false) && (objInt().enchantment==0))
 		{
 			if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_PICK_UP_TRIGGER)
 			{

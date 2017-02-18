@@ -1003,7 +1003,7 @@ public class NPC : object_base {
 
 			//launchedItem = Instantiate(currentAmmo.gameObject);
 			launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-			launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+			launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
 
 			launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
 			GameWorldController.MoveToWorld(launchedItem);

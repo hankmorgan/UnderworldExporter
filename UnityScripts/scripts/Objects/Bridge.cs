@@ -10,6 +10,8 @@ public class Bridge : object_base {
 	public int TextureIndex;
 	public string UseLink;//A trigger to fire when used.
 
+
+
 		/// <summary>
 		/// Outputs the look description of the object
 		/// </summary>
@@ -37,17 +39,17 @@ public class Bridge : object_base {
 		/// Used in the tile puzzle on the Level 6-seers
 	public override bool use ()
 	{
-		if (UseLink!="")
-		{
-			GameObject obj = GameObject.Find (UseLink);
-			if (obj!=null)
-			{
-				if (obj.GetComponent<trigger_base>()!=null)
+		if (objInt().flags >= 2)
+			{				
+				GameObject obj = ObjectLoader.getGameObjectAt(objInt().link);
+				if (obj!=null)
 				{
-					return obj.GetComponent<trigger_base>().Activate();
-				}
+					if (obj.GetComponent<trigger_base>()!=null)
+					{
+						return obj.GetComponent<trigger_base>().Activate();
+					}
+				}	
 			}
-		}
 		return false;
 	}
 }

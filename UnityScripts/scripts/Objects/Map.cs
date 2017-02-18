@@ -10,7 +10,7 @@ public class Map : object_base {
 	protected override void Start ()
 	{
 		base.Start();
-		objInt().isQuant=false; 
+		objInt().isquant=0; 
 	}
 
 	public override bool use ()
@@ -49,7 +49,7 @@ public class Map : object_base {
 
 	public override bool LookAt()
 	{//Generic description of the map
-		objInt().isQuant=false; //quick bug fix
+		objInt().isquant=0; //quick bug fix
 			if (objInt().PickedUp==true)
 			{
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + "\n" + StringController.instance.GetString(1,151));

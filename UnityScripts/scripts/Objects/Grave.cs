@@ -21,7 +21,7 @@ public class Grave : object_base {
 	{
 		//CheckReferences();
 		UWHUD.instance.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().Link-512));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().link-512));
 		return true;
 	}
 
@@ -54,7 +54,7 @@ public class Grave : object_base {
 			//Activates a trigger a_move_trigger_54_52_04_0495 (selected by unknown means)
 			if (objIntUsed.item_id==198)//Bones
 				{
-					if (objIntUsed.Quality==63)
+					if (objIntUsed.quality==63)
 					{//Garamons bones
 					//Arise Garamon.
 					//000~001~134~You thoughtfully give the bones a final resting place.
@@ -62,7 +62,7 @@ public class Grave : object_base {
 					GameObject trig = GameObject.Find ("a_move_trigger_54_52_04_0495");
 						if (trig!=null)
 						{					
-							objInt().Link++;//Update the grave description
+							objInt().link++;//Update the grave description
 							objIntUsed.consumeObject ();
 							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
 						}
@@ -86,7 +86,7 @@ public class Grave : object_base {
 			}
 		else
 		{
-			if ((objIntUsed.item_id==198) && (objIntUsed.Quality==63))//Garamons Bones used on the wrong grave
+			if ((objIntUsed.item_id==198) && (objIntUsed.quality==63))//Garamons Bones used on the wrong grave
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));

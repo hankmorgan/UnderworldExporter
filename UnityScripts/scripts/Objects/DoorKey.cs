@@ -34,7 +34,7 @@ public class DoorKey : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,objInt().Owner+100));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,objInt().owner+100));
 		}
 		else
 		{

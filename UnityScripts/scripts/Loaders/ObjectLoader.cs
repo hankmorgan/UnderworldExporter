@@ -1075,7 +1075,7 @@ public class ObjectLoader : Loader {
 			info.enchantment= objInt.enchantment;	//12
 			info.doordir= objInt.doordir;	//13
 			info.invis= objInt.invis;		//14
-			if (objInt.isQuant)
+			if (objInt.isQuant())
 			{
 				info.is_quant= 1;	//15						
 			}
@@ -1085,7 +1085,7 @@ public class ObjectLoader : Loader {
 			}
 
 
-			info.texture= objInt.texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
+			//info.texture= objInt.texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 			//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
 			info.zpos= objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)

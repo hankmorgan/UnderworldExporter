@@ -15,8 +15,8 @@ public class Zanium : object_base {
 	 	ObjectInteraction someZanium=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(objInt().item_id);
 		if (someZanium!=null)
 		{//Add the zanium to the pile
-			someZanium.Link += objInt().Link;
-			someZanium.isQuant=true;
+			someZanium.link += objInt().link;
+			someZanium.isquant=1;
 			objInt().consumeObject();
 			GameWorldController.instance.playerUW.playerInventory.Refresh();//Update the display
 		}

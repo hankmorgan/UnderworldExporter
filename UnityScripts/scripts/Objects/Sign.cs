@@ -19,7 +19,7 @@ public class Sign : Readable {
 	public override bool Read ()
 	{
 
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().Link - 0x200));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
 		return true;
 
 	}

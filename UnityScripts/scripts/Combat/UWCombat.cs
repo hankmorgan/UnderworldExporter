@@ -393,7 +393,7 @@ public class UWCombat : Combat {
 				{//If in a stack instantiate a single copy and update the stack as needed.
 					launchedItem = Instantiate(currentAmmo.gameObject);
 					launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-					launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+					launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
 					ObjectInteraction.Split(launchedItem.GetComponent<ObjectInteraction>());
 					currentAmmo.consumeObject();//Reduce by one.
 				}

@@ -30,14 +30,14 @@ public class Lantern : LightSource {
 				}
 				else
 				{
-					if (objInt().Quality==64)
+					if (objInt().quality==64)
 					{
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,180));
 					}
 					else
 					{
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,179));
-						objInt().Quality = 64;
+						objInt().quality = 64;
 						objIntUsed.consumeObject();
 					}
 				}

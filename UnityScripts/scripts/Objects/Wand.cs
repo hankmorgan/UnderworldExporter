@@ -17,20 +17,20 @@ public class Wand : enchantment_base {
 
 	protected override int GetActualSpellIndex ()
 	{
-		if (objInt().isEnchanted==true)
+		if (objInt().isEnchanted()==true)
 		{
 			/* Per uwspecs
 				 * Most objects seem to use spells 256-320 (add 256) if the enchantment
    				 * number is in the range 0-63, otherwise they add 144 to use spells 208 and
    				 * up. Healing fountains, however, don't use a correction at all.
 				 */
-			if (objInt().Link-512<63)
+			if (objInt().link-512<63)
 			{
-				return objInt().Link-512+256;
+				return objInt().link-512+256;
 			}
 			else
 			{
-				return objInt().Link-512+144;
+				return objInt().link-512+144;
 			}
 
 		}
@@ -48,7 +48,7 @@ public class Wand : enchantment_base {
 			if (SpellObjectQuantity >0)
 				{
 					GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
-					if (objInt().isEnchanted==false)
+					if (objInt().isEnchanted()==false)
 						{
 						SpellObjectQuantity--;
 						if (SpellObjectQuantity ==0)
@@ -90,7 +90,7 @@ public class Wand : enchantment_base {
 				}					
 			}
 	
-		if ((SpellObjectQuantity>0) && (objInt().isEnchanted==false) && (objInt().isIdentified))
+		if ((SpellObjectQuantity>0) && (objInt().isEnchanted()==false) && (objInt().isIdentified))
 		{
 			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "

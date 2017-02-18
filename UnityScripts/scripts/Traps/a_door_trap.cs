@@ -16,7 +16,7 @@ Opens the door that is in the targeted tile.
 
 			DoorControl DC = door.GetComponent<DoorControl>();
 
-			switch (objInt().Quality)
+			switch (objInt().quality)
 			{
 			case 1://try open
 				DC.UnlockDoor();

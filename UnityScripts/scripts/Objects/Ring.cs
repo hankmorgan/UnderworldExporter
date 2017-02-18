@@ -8,7 +8,7 @@ public class Ring : enchantment_base {
 	{
 		if ((slotNo ==9) || (slotNo ==10))
 		{
-			if (objInt().isEnchanted==true)
+			if (objInt().isEnchanted()==true)
 			{
 				//cast enchantment.
 				SpellEffectApplied = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);

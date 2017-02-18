@@ -54,7 +54,7 @@ public class CritLoader : ArtLoader {
 				}
 				else
 				{
-					Debug.Log("Unable to find animation frame " + AnimToFind);
+					//Debug.Log("Unable to find animation frame " + AnimToFind);
 					return null;
 				}
 

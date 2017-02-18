@@ -17,7 +17,7 @@ public class TextureController : UWEBase {
 
 		// Use this for initialization
 		void Start () {		
-				ObjectInteraction.tc=this;
+				//ObjectInteraction.tc=this;
 				pal = this.GetComponent<UWPalette>();
 
 				ObjectInUse=new bool[NoOfObjects];

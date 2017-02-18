@@ -416,7 +416,7 @@ public class Container : object_base {
 
 			if (Valid)
 			{
-				if ((ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false) || (ObjectInHand.GetComponent<ObjectInteraction>().isEnchanted))
+				if ((ObjectInHand.GetComponent<ObjectInteraction>().isQuant()==false) || (ObjectInHand.GetComponent<ObjectInteraction>().isEnchanted()))
 				{
 					AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 				}

@@ -29,8 +29,8 @@ public class Weapon : Equipment {
 
 	public virtual void WeaponSelfDamage()
 	{//Damage caused to the weapon when it hits something with heavy resistance.
-		objInt().Quality-=1;
-		if (objInt().Quality<=0)
+		objInt().quality-=1;
+		if (objInt().quality<=0)
 		{
 			ChangeType(218,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
@@ -53,7 +53,7 @@ public class Weapon : Equipment {
 				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
 			}
 
-			if (objInt().isEnchanted==true)
+			if (objInt().isEnchanted()==true)
 			{
 				int EffectId = GetActualSpellIndex ();
 				switch (EffectId )

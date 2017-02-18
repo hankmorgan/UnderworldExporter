@@ -334,18 +334,18 @@ public class InventorySlot : GuiBase {
 				}
 			}
 
-			//if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
+			//if ((objInt.isQuant()==true) && (objInt.isEnchanted()==false))
 			if (objInt.IsStackable())
 			{
 				ObjectUsedOn = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 				if (ObjectUsedOn !=null)
 				{
 					if (ObjectInteraction.CanMerge(ObjectUsedOn.GetComponent<ObjectInteraction>(),objInt))
-				//	if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
+				//	if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.quality==ObjectUsedOn.GetComponent<ObjectInteraction>().quality))
 					{
 						//merge the items
 						ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(),objInt);
-						//ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
+						//ObjectUsedOn.GetComponent<ObjectInteraction>().link=ObjectUsedOn.GetComponent<ObjectInteraction>().link+objInt.link;
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 						GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
@@ -423,7 +423,7 @@ public class InventorySlot : GuiBase {
 					if (DoNotPickup==false)
 						{
 						ObjectInteraction objIntUsedOn = ObjectUsedOn.GetComponent<ObjectInteraction>();
-						//if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant)&&(ObjectUsedOn.GetComponent<ObjectInteraction>().Link==1)) || (ObjectUsedOn.GetComponent<ObjectInteraction>().isEnchanted ==true))
+						//if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant() ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant())&&(ObjectUsedOn.GetComponent<ObjectInteraction>().link==1)) || (ObjectUsedOn.GetComponent<ObjectInteraction>().isEnchanted() ==true))
 						if ((!objIntUsedOn.IsStackable()) || ( (objIntUsedOn.IsStackable()) &&  (objIntUsedOn.GetQty()==1)))
 							{//Is either not a quant or is a quantity of 1
 							GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
@@ -515,7 +515,7 @@ public class InventorySlot : GuiBase {
 		}
 		if (QuantityObj!=null)
 		{//Just do a normal pickup.
-			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().Link)
+			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().link)
 			{
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= QuantityObj.name;
 				UWHUD.instance.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
@@ -529,10 +529,10 @@ public class InventorySlot : GuiBase {
 			{
 				//split the obj. Do nothing to the inventory.
 				GameObject Split = Instantiate(QuantityObj);//What we are picking up.
-				Split.GetComponent<ObjectInteraction>().Link =quant;
+				Split.GetComponent<ObjectInteraction>().link =quant;
 				Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
 				Split.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;//this.transform.parent;
-				QuantityObj.GetComponent<ObjectInteraction>().Link=QuantityObj.GetComponent<ObjectInteraction>().Link-quant;
+				QuantityObj.GetComponent<ObjectInteraction>().link=QuantityObj.GetComponent<ObjectInteraction>().link-quant;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= Split.name;
 				UWHUD.instance.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());

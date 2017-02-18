@@ -769,7 +769,7 @@ public class Conversation : GuiBase {
 					DC.CloseDoor();
 					DC.LockDoor ();
 				}
-				if (DC.objInt ().Quality == 0)
+				if (DC.objInt ().quality == 0)
 				{
 					return 0;
 				}
@@ -1457,20 +1457,20 @@ public class Conversation : GuiBase {
 
 		if (locals[link]<=0)
 			{
-			locals[link]=obj.Link-512; 
+			locals[link]=obj.link-512; 
 			}
 		else
 			{
-			obj.Link=locals[link]+512;
+			obj.link=locals[link]+512;
 			}
 
 		if (locals[quality]<=0)	
 		{
-			locals[quality]=obj.Quality; 
+			locals[quality]=obj.quality; 
 		}
 		else
 		{
-			obj.Quality=locals[quality];
+			obj.quality=locals[quality];
 		}
 		if (locals[id]<=0)
 		{
@@ -1544,7 +1544,7 @@ public class Conversation : GuiBase {
 					ObjectInteraction objInt = objectAtSlot.GetComponent<ObjectInteraction>();
 					if (objInt!=null)
 					{
-						return objInt.Quality;
+						return objInt.quality;
 					}
 				}
 			}
@@ -1571,7 +1571,7 @@ public class Conversation : GuiBase {
 					ObjectInteraction objInt = objectAtSlot.GetComponent<ObjectInteraction>();
 					if (objInt!=null)
 					{
-						return objInt.Link;
+						return objInt.link;
 					}
 				}
 			}
@@ -1654,7 +1654,7 @@ public class Conversation : GuiBase {
 		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
-			return objInslot.GetComponent<ObjectInteraction>().Quality;
+			return objInslot.GetComponent<ObjectInteraction>().quality;
 		}
 		else
 		{
@@ -1678,7 +1678,7 @@ public class Conversation : GuiBase {
 		GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
-			objInslot.GetComponent<ObjectInteraction>().Quality= NewQuality;
+			objInslot.GetComponent<ObjectInteraction>().quality= NewQuality;
 		}
 	}
 
@@ -2019,19 +2019,19 @@ public class Conversation : GuiBase {
 				GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
 				if (objGiven!=null)
 				{
-					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant==true)
+					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant()==true)
 					     && 
-					     (objGiven.GetComponent<ObjectInteraction>().Link>1)
+					     (objGiven.GetComponent<ObjectInteraction>().link>1)
 					     &&
-					     (objGiven.GetComponent<ObjectInteraction>().isEnchanted==false)
+					     (objGiven.GetComponent<ObjectInteraction>().isEnchanted()==false)
 					     &&
-					     (objGiven.GetComponent<ObjectInteraction>().Link!=Quantity)
+					     (objGiven.GetComponent<ObjectInteraction>().link!=Quantity)
 					     )
 					{//Object is a quantity or is a quantity less than the number already there.
 						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
-						Split.GetComponent<ObjectInteraction>().Link =Quantity;
+						Split.GetComponent<ObjectInteraction>().link =Quantity;
 						Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
-						objGiven.GetComponent<ObjectInteraction>().Link=objGiven.GetComponent<ObjectInteraction>().Link-Quantity;
+						objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
 						cn.AddItemToContainer(objGiven.name);
 					}
 					else

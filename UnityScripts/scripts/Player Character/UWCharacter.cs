@@ -371,7 +371,7 @@ public class UWCharacter : Character {
 		}
 		if (QuantityObj!=null)
 			{
-			if (quant >= QuantityObj.Link)
+			if (quant >= QuantityObj.link)
 				{
 				Pickup(QuantityObj,playerInventory);
 				}
@@ -379,9 +379,9 @@ public class UWCharacter : Character {
 				{
 				//split the obj.
 				GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
-				Split.GetComponent<ObjectInteraction>().Link =quant;
+				Split.GetComponent<ObjectInteraction>().link =quant;
 				Split.name = Split.name+"_"+summonCount++;
-				QuantityObj.Link=QuantityObj.Link-quant;
+				QuantityObj.link=QuantityObj.link-quant;
 				Pickup (Split.GetComponent<ObjectInteraction>(), playerInventory);
 				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
 				QuantityObj=null;//Clear out to avoid weirdness.
@@ -562,7 +562,7 @@ public class UWCharacter : Character {
 						{
 							//right click check for quant.
 							//Pickup if either not a quantity or is a quantity of one.
-							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)) || (objPicked.isEnchanted))
+							if ((objPicked.isQuant() ==false) || ((objPicked.isQuant())&&(objPicked.link==1)) || (objPicked.isEnchanted()))
 							{
 								objPicked=Pickup(objPicked,pInv);
 							}
