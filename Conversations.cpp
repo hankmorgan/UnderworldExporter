@@ -120,12 +120,13 @@ void ExtractConversations(int game)
 				func_ptr = func_ptr + functionLength + 10;
 				}
 			fprintf(LOGFILE,"\n\t\t\t\t\tCode:\n");
+			int counter = 0;
 			for (int z = 0; z<codeSize * 2; z = z + 2)
 				{
 				fprintf(LOGFILE,"\t\t\t\t\t");
 				int OPCode = getValAtAddress(cnv_ark, func_ptr + z, 16);
 				//fprintf(LOGFILE,"%d,", getValAtAddress(cnv_ark, func_ptr + z, 16));
-				fprintf(LOGFILE,"%d:",z);
+				fprintf(LOGFILE,"%d:",counter++);
 				switch (OPCode)
 					{
 						case cnv_NOP: fprintf(LOGFILE,"NOP\n"); break;
@@ -143,15 +144,15 @@ void ExtractConversations(int game)
 						case cnv_TSTLE: fprintf(LOGFILE,"TSTLE\n"); break;
 						case cnv_TSTEQ: fprintf(LOGFILE,"TSTEQ\n"); break;
 						case cnv_TSTNE: fprintf(LOGFILE,"TSTNE\n"); break;
-						case cnv_JMP: fprintf(LOGFILE,"JMP "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_BEQ: fprintf(LOGFILE,"BEQ "); z = z + 2; fprintf(LOGFILE," %d\n,", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_BNE: fprintf(LOGFILE,"BNE "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_BRA: fprintf(LOGFILE,"BRA "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_CALL: fprintf(LOGFILE,"CALL "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_CALLI: fprintf(LOGFILE,"CALLI "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_JMP: fprintf(LOGFILE, "JMP "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_BEQ: fprintf(LOGFILE, "BEQ "); z = z + 2; fprintf(LOGFILE, " %d\n,", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_BNE: fprintf(LOGFILE, "BNE "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_BRA: fprintf(LOGFILE, "BRA "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_CALL: fprintf(LOGFILE, "CALL "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_CALLI: fprintf(LOGFILE, "CALLI "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
 						case cnv_RET: fprintf(LOGFILE,"RET\n"); break;
-						case cnv_PUSHI: fprintf(LOGFILE,"PUSHI "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
-						case cnv_PUSHI_EFF: fprintf(LOGFILE,"PUSHI_EFF "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_PUSHI: fprintf(LOGFILE, "PUSHI "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
+						case cnv_PUSHI_EFF: fprintf(LOGFILE, "PUSHI_EFF "); z = z + 2; fprintf(LOGFILE, " %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); counter++; break;
 						case cnv_POP: fprintf(LOGFILE,"POP\n"); break;
 						case cnv_SWAP: fprintf(LOGFILE,"SWAP\n"); break;
 						case cnv_PUSHBP: fprintf(LOGFILE,"PUSHBP\n"); break;
