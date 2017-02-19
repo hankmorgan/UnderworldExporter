@@ -6,7 +6,7 @@ using System.Collections;
 public class LightSource : object_base {
 	/// How bright the light is. Light radius
 	public int Brightness=4;//Default for the moment until we can get commonobj props imported.
-
+	public int duration;
 	/// Sprite index for the light on image
 	//public int ItemIdOn;
 	/// Sprite index for the light off image
@@ -42,6 +42,13 @@ public class LightSource : object_base {
 		/// Current time remaining on the light quality interval
 	public float LightTimer;
 
+	protected override void Start ()
+	{
+		base.Start ();
+		Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+		duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
+	}
+
 	/// <summary>
 	/// Ticks down the light source
 	/// </summary>
@@ -54,7 +61,8 @@ public class LightSource : object_base {
 			}
 			else
 			{
-				if (objInt().item_id!=147)
+				if (duration!=0)
+				//if (objInt().item_id!=151)
 				{//The taper never runs out
 					LightTimer-=Time.deltaTime;
 					if (LightTimer<=0)
@@ -132,7 +140,6 @@ public class LightSource : object_base {
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,124));
 			return;
 		}
-
 		LightTimer=LightTimerMax;		
 
 		//CheckReferences();
@@ -165,6 +172,8 @@ public class LightSource : object_base {
 				objInt().inventorySlot=invSlot.slotIndex;
 				//IsOn=true;
 				objInt().item_id=objInt().item_id+4;
+				Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+				duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
 				objInt().InvDisplayIndex=objInt().item_id;
 			}
 			else
@@ -199,6 +208,8 @@ public class LightSource : object_base {
 		objInt().InvDisplayIndex=objInt().item_id;
 		objInt().isquant=1;
 		objInt().RefreshAnim();
+		Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+		duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
 		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 	}
 

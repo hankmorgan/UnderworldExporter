@@ -1710,6 +1710,11 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case CONTAINER:						
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						if ((currObj.item_id >=128) && (currObj.item_id<=142))
+							{
+								myObj.AddComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;
+								myObj.AddComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
+							}
 						break;
 				case KEY:
 						myObj.AddComponent<DoorKey>();

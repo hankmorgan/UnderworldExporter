@@ -114,10 +114,10 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public CommonObjProps commobj;
 
-	/// <summary>
-	/// Weapon properties.
-	/// </summary>
-	public WeaponProps weaponprops;
+	// <summary>
+	// Weapon properties.
+	// </summary>
+//	public WeaponProps weaponprops;
 
 	/// <summary>
 	/// The grey scale shader. Reference to allow loading of a hidden shader.
@@ -242,6 +242,11 @@ public class GameWorldController : UWEBase {
 
 	public CritLoader[] critsLoader= new CritLoader[64];
 
+	/// <summary>
+	/// The object dat file
+	/// </summary>
+	public ObjectDatLoader objDat;
+
 		void  LoadPath()
 		{
 			string fileName = Application.dataPath + "//..//" + UWEBase._RES + "_path.txt";
@@ -261,8 +266,10 @@ public class GameWorldController : UWEBase {
 		critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
 		commobj=new CommonObjProps();
 		commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
-		weaponprops =new WeaponProps();
-		weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
+		//weaponprops =new WeaponProps();
+		//weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
+		objDat = new ObjectDatLoader();
+
 
 		palLoader = new PaletteLoader();
 		palLoader.Path=Loader.BasePath + "data\\pals.dat";

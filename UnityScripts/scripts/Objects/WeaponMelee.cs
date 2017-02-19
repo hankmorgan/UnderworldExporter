@@ -28,7 +28,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The slash damage</returns>
 		public int GetSlash()
 		{
-			return GameWorldController.instance.weaponprops.getPropSlash(objInt().item_id);
+			//return GameWorldController.instance.weaponprops.getPropSlash(objInt().item_id);
+			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Slash;
 		}
 
 		/// <summary>
@@ -37,7 +38,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bash damage</returns>
 		public int GetBash()
 		{
-			return GameWorldController.instance.weaponprops.getPropBash(objInt().item_id);
+			//return GameWorldController.instance.weaponprops.getPropBash(objInt().item_id);
+				return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Bash;
 		}
 
 		/// <summary>
@@ -46,7 +48,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The stab damage</returns>
 		public int GetStab()
 		{
-			return GameWorldController.instance.weaponprops.getPropStab(objInt().item_id);
+			//return GameWorldController.instance.weaponprops.getPropStab(objInt().item_id);
+			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab;
 		}
 
 		/// <summary>
@@ -55,7 +58,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The durability.</returns>
 		public int GetDurability()
 		{
-			return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
+			//return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
+			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability;
 		}
 
 
@@ -65,7 +69,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee slash.</returns>
 		public static int getMeleeSlash()
 		{
-			return GameWorldController.instance.weaponprops.getPropSlash(15);	
+			//return GameWorldController.instance.weaponprops.getPropSlash(15);	
+			return GameWorldController.instance.objDat.weaponStats[15].Slash;
 		}
 
 		/// <summary>
@@ -74,7 +79,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee bash.</returns>
 		public static int getMeleeBash()
 		{
-			return GameWorldController.instance.weaponprops.getPropBash(15);		
+			//return GameWorldController.instance.weaponprops.getPropBash(15);		
+			return GameWorldController.instance.objDat.weaponStats[15].Bash;
 		}
 
 		/// <summary>
@@ -83,7 +89,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee stab.</returns>
 		public static int getMeleeStab()
 		{
-			return GameWorldController.instance.weaponprops.getPropStab(15);	
+			//return GameWorldController.instance.weaponprops.getPropStab(15);	
+			return GameWorldController.instance.objDat.weaponStats[15].Stab;
 		}
 
 		/// <summary>
@@ -92,7 +99,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The skill.</returns>
 		public int GetSkill()
 		{
-			return GameWorldController.instance.weaponprops.getPropSkill(objInt().item_id);
+			//return GameWorldController.instance.weaponprops.getPropSkill(objInt().item_id);
+			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Skill;
 		}
 
 }

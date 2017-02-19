@@ -7,7 +7,8 @@ using System.IO;
 /// Weapon properties.
 /// </summary>
 public class WeaponProps : Props {
-	
+		//Obsolete
+	/*
 	private int[] Slash = new int[16];
 	private int[] Bash = new int[16];	
 	private int[] Stab = new int[16];	
@@ -73,4 +74,5 @@ public class WeaponProps : Props {
 			return true;
 		}
 	}
+	*/
 }
