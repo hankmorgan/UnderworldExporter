@@ -281,8 +281,9 @@ public class object_base : UWEBase {
 		}
 		else
 		{
-						
-		return (float)(objInt().GetQty())* GameWorldController.instance.commobj.Mass[objInt().item_id]*0.1f;
+
+		return (float)(objInt().GetQty())* GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f;// .Mass[objInt().item_id]*0.1f;
+		//return (float)(objInt().GetQty())* GameWorldController.instance.commobj.Mass[objInt().item_id]*0.1f;
 		}
 	}
 
@@ -757,5 +758,23 @@ public class object_base : UWEBase {
 			return false;
 		}
 
+
+
+		/// <summary>
+		/// Special event to occur when this item is in the inventory and is moved to another level
+		/// </summary>
+		public virtual void InventoryEventOnLevelEnter()
+		{
+
+		}
+
+		/// <summary>
+		/// Special event to occur when this item is in the inventory and is moved to another level
+		/// </summary>
+		/// Used mainly to update wands and their spell object links
+		public virtual void InventoryEventOnLevelExit()
+		{
+				
+		}
 
 }

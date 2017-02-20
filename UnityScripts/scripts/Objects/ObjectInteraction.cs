@@ -169,7 +169,7 @@ public class ObjectInteraction : UWEBase {
 		/// <summary>
 		/// Indicates if the object can be picked up.
 		/// </summary>
-		public bool CanBePickedUp;
+		//public bool CanBePickedUp;
 
 		/// <summary>
 		/// Indicates if the object can be used.
@@ -315,7 +315,7 @@ public class ObjectInteraction : UWEBase {
 			item= this.GetComponent<object_base>();
 			if(item!=null)
 			{
-				return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp&& WindowDetect.ContextUIUse, ( (GameWorldController.instance.playerUW.playerInventory.ObjectInHand ) !="" && (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)));
+				return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp()&& WindowDetect.ContextUIUse, ( (GameWorldController.instance.playerUW.playerInventory.ObjectInHand ) !="" && (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)));
 			}
 			else
 			{
@@ -727,7 +727,7 @@ public class ObjectInteraction : UWEBase {
 			}
 			else
 			{
-			switch (GameWorldController.instance.critterData.Blood[item_id-64])
+				switch (GameWorldController.instance.objDat.critterStats[item_id-64].Blood)
 				{
 					//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 					case 0:
@@ -753,7 +753,7 @@ public class ObjectInteraction : UWEBase {
 			}
 			else
 			{
-			switch (GameWorldController.instance.critterData.Blood[item_id-64])
+			switch (GameWorldController.instance.objDat.critterStats[item_id-64].Blood)
 				{
 				//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 				case 0:
@@ -950,7 +950,7 @@ public class ObjectInteraction : UWEBase {
 
 			if (isMoveable==1)
 			{
-				objInteract.CanBePickedUp=true;
+				//objInteract.CanBePickedUp=true;
 				Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
 				rgd.angularDrag=0.0f;
 				GameWorldController.FreezeMovement(myObj);
@@ -1933,6 +1933,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<object_base>();
 						CreateSprite=false;
 						break;
+				case SPELL:
+						myObj.AddComponent<a_spell>();
+						CreateSprite=false;
+						break;
 				case A_DO_TRAP:
 						{
 							switch (objInt.quality)	
@@ -2000,5 +2004,11 @@ public class ObjectInteraction : UWEBase {
 		public bool isQuant()
 		{
 				return (isquant==1);
+		}
+
+
+		public bool CanBePickedUp()
+		{
+			return GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp==1;
 		}
 }

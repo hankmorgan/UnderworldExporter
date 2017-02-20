@@ -8,7 +8,8 @@ using System.IO;
 /// </summary>
 /// Critter info is stored in an external file critters.txt
 public class Critters : Props {
-
+		//Obsolete
+		/*
 
 		public int[] Level = new int[64];
 		public int[] AvgHit = new int[64];//Is this defence?????
@@ -80,5 +81,5 @@ public class Critters : Props {
 				}
 
 		}
-
+*/
 }

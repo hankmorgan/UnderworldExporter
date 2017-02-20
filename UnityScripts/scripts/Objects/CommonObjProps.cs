@@ -5,7 +5,10 @@ using System.IO;
 /// <summary>
 /// Common object properties from UW Common Objects file.
 /// </summary>
+/// 
 public class CommonObjProps : Props {
+		//obsolete
+		/*
 	private int[] Height	 = new int[500];
 	private int[] Radius	 = new int[500];
 	private int[] Animated	 = new int[500];
@@ -72,4 +75,5 @@ public class CommonObjProps : Props {
 			return true;
 		}
 	}
+	*/
 }

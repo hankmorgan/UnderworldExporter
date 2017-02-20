@@ -42,7 +42,7 @@ public override bool use ()
 					if (Random.Range (0,10)>=7)
 					{//catch something or test for encumerance
 						//000~001~099~You catch a lovely fish.
-						if ((GameWorldController.instance.commobj.Mass[182]*0.1f) <= GameWorldController.instance.playerUW.playerInventory.getEncumberance())
+						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= GameWorldController.instance.playerUW.playerInventory.getEncumberance())
 						{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,99));
 							GameObject fishy = CreateFish();

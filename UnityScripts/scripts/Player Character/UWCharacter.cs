@@ -550,7 +550,7 @@ public class UWCharacter : Character {
 				objPicked=hit.transform.GetComponent<ObjectInteraction>();
 				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 				{
-					if (objPicked.CanBePickedUp==true)
+				if (objPicked.CanBePickedUp()==true)
 					{
 						//check for weight
 						if (objPicked.GetWeight() > playerInventory.getEncumberance())

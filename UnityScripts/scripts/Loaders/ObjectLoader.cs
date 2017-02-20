@@ -935,11 +935,6 @@ public class ObjectLoader : Loader {
 
 		static void linkContainerContents(Container cn)
 		{
-				if (cn.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index==263)
-				{
-						Debug.Log("HER");
-				}
-
 			int itemCounter=0;
 			ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
 			int PrevIndex=cnObjInt.objectloaderinfo.index;
@@ -1152,5 +1147,34 @@ public class ObjectLoader : Loader {
 			info.instance=objInt;
 			objInt.objectloaderinfo=info;
 		}
+
+
+		/// <summary>
+		/// Creates a new object in the static object section of the list.
+		/// </summary>
+		/// <returns>The object.</returns>
+		public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link)
+		{
+			int index=0;
+			if (GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index)	)
+			{
+				GameWorldController.instance.CurrentObjectList().objInfo[index].quality=quality;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].flags=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].owner=owner;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].item_id=item_id;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].next=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].link=link;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].zpos=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].x=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].y=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=99;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=99;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag=1;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].index=index;
+				return GameWorldController.instance.CurrentObjectList().objInfo[index];
+			}
+			return null;
+		}
+
 
 }

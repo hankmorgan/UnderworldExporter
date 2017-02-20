@@ -6,8 +6,18 @@ public class a_spelltrap : trap_base {
 	//	fields "quality" and "owner" determine spell type.
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		int spellindex = ((objInt().quality & 0xf)<<4) | (objInt().owner & 0xf) ;
+		//int spellindex = ((objInt().quality & 0xf)<<4) | (objInt().owner & 0xf) ;
 		//	Debug.Log ("casting spelleffect " + spellindex);
-		GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,spellindex,Magic.SpellRule_TargetVector);
+		GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,GetSpellIndex(),Magic.SpellRule_TargetVector);
 	}
+
+	/// <summary>
+	/// Gets the index of the spell. This is used for wands as well
+	/// </summary>
+	/// <returns>The spell index.</returns>
+	public int GetSpellIndex()
+	{
+		return ((objInt().quality & 0xf)<<4) | (objInt().owner & 0xf);
+	}
+
 }

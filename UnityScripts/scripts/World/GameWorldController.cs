@@ -112,7 +112,7 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// Common Object Properties
 	/// </summary>
-	public CommonObjProps commobj;
+	//public CommonObjProps commobj;
 
 	// <summary>
 	// Weapon properties.
@@ -247,6 +247,9 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public ObjectDatLoader objDat;
 
+
+	public CommonObjectDatLoader commonObject;
+
 		void  LoadPath()
 		{
 			string fileName = Application.dataPath + "//..//" + UWEBase._RES + "_path.txt";
@@ -254,6 +257,10 @@ public class GameWorldController : UWEBase {
 			Loader.BasePath=fileReader.ReadLine().TrimEnd();
 		}
 
+		/// <summary>
+		/// Awake this instance.
+		/// </summary>
+		/// Should be the very first script to run 
 	void Awake()
 	{
 		instance=this;
@@ -262,13 +269,15 @@ public class GameWorldController : UWEBase {
 		Loader._RES=game;
 		objectMaster=new ObjectMasters();
 		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
-		critterData = new Critters();
-		critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
-		commobj=new CommonObjProps();
-		commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
+		//critterData = new Critters();
+		//critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
+		//commobj=new CommonObjProps();
+		//commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
 		//weaponprops =new WeaponProps();
 		//weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
+		
 		objDat = new ObjectDatLoader();
+		commonObject= new CommonObjectDatLoader();
 
 
 		palLoader = new PaletteLoader();
@@ -479,18 +488,26 @@ public class GameWorldController : UWEBase {
 		{
 			if (newLevelNo!=-1)
 			{
+				//Send exit level events to all inventory objects
 
-					//Check loading
-					if (Tilemaps[newLevelNo]==null)
-					{//Data has not been loaded for this level
-						Tilemaps[newLevelNo]=new TileMap();
-						Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
-						Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data,1,newLevelNo);
-						objectList[newLevelNo]=new ObjectLoader();
-						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);
-						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
+				//Check loading
+				if (Tilemaps[newLevelNo]==null)
+				{//Data has not been loaded for this level
+					Tilemaps[newLevelNo]=new TileMap();
+					Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
+					Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data,1,newLevelNo);
+					objectList[newLevelNo]=new ObjectLoader();
+					objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);
+					Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
+				}
+						//Call events for inventory objects on level transition.
+				foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+				{
+					if (t.gameObject.GetComponent<object_base>()!=null)
+					{
+						t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
 					}
-
+				}
 
 				if(LevelNo!=-1)
 				{//Changing from a level that has already loaded
@@ -505,8 +522,18 @@ public class GameWorldController : UWEBase {
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
 				critsLoader= new CritLoader[64];//Clear out animations
+
+				//Call events for inventory objects on level transition.
+				foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+				{
+					if (t.gameObject.GetComponent<object_base>()!=null)
+					{
+						t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+					}
+				}
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
 				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+
 				GenerateNavmesh(NavRigLand);
 				GenerateNavmesh(NavRigWater);
 				if (LevelNo==7)

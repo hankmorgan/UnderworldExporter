@@ -168,7 +168,7 @@
 167 0 0 0 entity 16 an_emerald H 1 UW1/Sprites/Objects/OBJECTS_167 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_167 UW1/Sprites/Objects/OBJECTS_167 S T U UW1/Sprites/Objects/OBJECTS_167 W x Y 0 1
 168 0 0 0 entity 16 an_amulet H 1 UW1/Sprites/Objects/OBJECTS_168 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_168 UW1/Sprites/Objects/OBJECTS_168 S T U UW1/Sprites/Objects/OBJECTS_168 W x Y 0 1
 169 0 0 0 entity 16 a_goblet H 1 UW1/Sprites/Objects/OBJECTS_169 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_169 UW1/Sprites/Objects/OBJECTS_169 S T U UW1/Sprites/Objects/OBJECTS_169 W x Y 0 1
-170 0 0 0 entity 16 a_sceptre H 1 UW1/Sprites/Objects/OBJECTS_170 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_170 UW1/Sprites/Objects/OBJECTS_170 S T U UW1/Sprites/Objects/OBJECTS_170 W x Y 0 1
+170 0 0 0 entity 12 a_sceptre H 1 UW1/Sprites/Objects/OBJECTS_170 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_170 UW1/Sprites/Objects/OBJECTS_170 S T U UW1/Sprites/Objects/OBJECTS_170 W x Y 0 1
 171 0 0 0 entity 16 a_gold_chain H 1 UW1/Sprites/Objects/OBJECTS_171 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_171 UW1/Sprites/Objects/OBJECTS_171 S T U UW1/Sprites/Objects/OBJECTS_171 W x Y 0 1
 172 0 0 0 entity 16 a_gold_plate H 1 UW1/Sprites/Objects/OBJECTS_172 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_172 UW1/Sprites/Objects/OBJECTS_172 S T U UW1/Sprites/Objects/OBJECTS_172 W x Y 0 1
 173 0 0 0 entity 16 an_ankh_pendant H 1 UW1/Sprites/Objects/OBJECTS_173 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_173 UW1/Sprites/Objects/OBJECTS_173 S T U UW1/Sprites/Objects/OBJECTS_173 W x Y 0 1
@@ -219,9 +219,9 @@
 218 0 0 0 entity 69 some_rubble_piles_of_rubble H 1 UW1/Sprites/Objects/OBJECTS_218 0 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_218 UW1/Sprites/Objects/OBJECTS_218 S T U UW1/Sprites/Objects/OBJECTS_218 W x Y 0 1
 219 0 0 0 entity 69 a_pile_of_wood_chips_piles_of_wood_chips H 1 UW1/Sprites/Objects/OBJECTS_219 0 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_219 UW1/Sprites/Objects/OBJECTS_219 S T U UW1/Sprites/Objects/OBJECTS_219 W x Y 0 1
 220 0 0 0 entity 23 a_pile_of_bones_piles_of_bones H 1 UW1/Sprites/Objects/OBJECTS_220 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_220 UW1/Sprites/Objects/OBJECTS_220 S T U UW1/Sprites/Objects/OBJECTS_220 W x Y 0 1
-221 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_221 0 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_221 UW1/Sprites/Objects/OBJECTS_221 S T U UW1/Sprites/Objects/OBJECTS_221 W x Y 0 1
-222 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_222 0 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_222 UW1/Sprites/Objects/OBJECTS_222 S T U UW1/Sprites/Objects/OBJECTS_222 W x Y 0 1
-223 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_223 0 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_223 UW1/Sprites/Objects/OBJECTS_223 S T U UW1/Sprites/Objects/OBJECTS_223 W x Y 0 1
+221 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_221 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_221 UW1/Sprites/Objects/OBJECTS_221 S T U UW1/Sprites/Objects/OBJECTS_221 W x Y 0 1
+222 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_222 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_222 UW1/Sprites/Objects/OBJECTS_222 S T U UW1/Sprites/Objects/OBJECTS_222 W x Y 0 1
+223 0 0 0 entity 25 a_blood_stain H 1 UW1/Sprites/Objects/OBJECTS_223 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_223 UW1/Sprites/Objects/OBJECTS_223 S T U UW1/Sprites/Objects/OBJECTS_223 W x Y 0 1
 224 0 0 0 entity 16 a_runestone H 1 UW1/Sprites/Objects/OBJECTS_224 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_224 UW1/Sprites/Objects/OBJECTS_224 S T U UW1/Sprites/Objects/OBJECTS_224 W x Y 0 1
 225 0 0 0 entity 23 the_Key_of_Truth H 1 UW1/Sprites/Objects/OBJECTS_225 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_225 UW1/Sprites/Objects/OBJECTS_225 S T U UW1/Sprites/Objects/OBJECTS_225 W x Y 0 1
 226 0 0 0 entity 23 the_Key_of_Love H 1 UW1/Sprites/Objects/OBJECTS_226 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_226 UW1/Sprites/Objects/OBJECTS_226 S T U UW1/Sprites/Objects/OBJECTS_226 W x Y 0 1
@@ -277,7 +277,7 @@
 276 0 0 0 entity 16 a_book H 1 UW1/Sprites/Objects/OBJECTS_276 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_276 UW1/Sprites/Objects/OBJECTS_276 S T U UW1/Sprites/Objects/OBJECTS_276 W x Y 0 1
 277 0 0 0 entity 16 a_block_of_burning_incense_blocks_of_burning_incense H 1 UW1/Sprites/Objects/OBJECTS_277 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_277 UW1/Sprites/Objects/OBJECTS_277 S T U UW1/Sprites/Objects/OBJECTS_277 W x Y 0 1
 278 0 0 0 entity 16 a_block_of_incense_blocks_of_incense H 1 UW1/Sprites/Objects/OBJECTS_278 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_278 UW1/Sprites/Objects/OBJECTS_278 S T U UW1/Sprites/Objects/OBJECTS_278 W x Y 0 1
-279 0 0 0 entity 17 an_orb H 1 UW1/Sprites/Objects/OBJECTS_279 1 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_279 UW1/Sprites/Objects/OBJECTS_279 S T U UW1/Sprites/Objects/OBJECTS_279 W x Y 0 1
+279 0 0 0 entity 98 an_orb H 1 UW1/Sprites/Objects/OBJECTS_279 1 L M 1 0 0 UW1/Sprites/Objects/OBJECTS_279 UW1/Sprites/Objects/OBJECTS_279 S T U UW1/Sprites/Objects/OBJECTS_279 W x Y 0 1
 280 0 0 0 entity 16 a_broken_blade H 1 UW1/Sprites/Objects/OBJECTS_280 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_280 UW1/Sprites/Objects/OBJECTS_280 S T U UW1/Sprites/Objects/OBJECTS_280 W x Y 0 1
 281 0 0 0 entity 16 a_broken_hilt H 1 UW1/Sprites/Objects/OBJECTS_281 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_281 UW1/Sprites/Objects/OBJECTS_281 S T U UW1/Sprites/Objects/OBJECTS_281 W x Y 0 1
 282 0 0 0 entity 16 a_figurine H 1 UW1/Sprites/Objects/OBJECTS_282 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_282 UW1/Sprites/Objects/OBJECTS_282 S T U UW1/Sprites/Objects/OBJECTS_282 W x Y 0 1
@@ -286,7 +286,7 @@
 285 0 0 0 entity 16 dragon_scales_bunches_of_dragon_scales H 1 UW1/Sprites/Objects/OBJECTS_285 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_285 UW1/Sprites/Objects/OBJECTS_285 S T U UW1/Sprites/Objects/OBJECTS_285 W x Y 0 1
 286 0 0 0 entity 16 a_resilient_sphere_some_resilient_spheres H 1 UW1/Sprites/Objects/OBJECTS_286 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_286 UW1/Sprites/Objects/OBJECTS_286 S T U UW1/Sprites/Objects/OBJECTS_286 W x Y 0 1
 287 0 0 0 entity 16 a_standard H 1 UW1/Sprites/Objects/OBJECTS_287 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_287 UW1/Sprites/Objects/OBJECTS_287 S T U UW1/Sprites/Objects/OBJECTS_287 W x Y 0 1
-288 0 0 0 entity 16 a_spell H 1 UW1/Sprites/Objects/OBJECTS_288 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_288 UW1/Sprites/Objects/OBJECTS_288 S T U UW1/Sprites/Objects/OBJECTS_288 W x Y 0 1
+288 0 0 0 entity 99 a_spell H 1 UW1/Sprites/Objects/OBJECTS_288 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_288 UW1/Sprites/Objects/OBJECTS_288 S T U UW1/Sprites/Objects/OBJECTS_288 W x Y 0 1
 289 0 0 0 entity 94 a_bedroll H 1 UW1/Sprites/Objects/OBJECTS_289 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_289 UW1/Sprites/Objects/OBJECTS_289 S T U UW1/Sprites/Objects/OBJECTS_289 W x Y 0 1
 290 0 0 0 entity 81 a_silver_seed H 1 UW1/Sprites/Objects/OBJECTS_290 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_290 UW1/Sprites/Objects/OBJECTS_290 S T U UW1/Sprites/Objects/OBJECTS_290 W x Y 1 1
 291 0 0 0 entity 26 a_mandolin H 1 UW1/Sprites/Objects/OBJECTS_291 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_291 UW1/Sprites/Objects/OBJECTS_291 S T U UW1/Sprites/Objects/OBJECTS_291 W x Y 0 1

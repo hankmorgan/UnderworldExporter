@@ -189,7 +189,7 @@ public class NPC : object_base {
 			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", GameWorldController.instance.playerUW.gameObject);
 			ai.AI.WorkingMemory.SetItem<int> ("attackMode", 0);//Default to melee combat
 			ai.AI.Body = this.gameObject;
-			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critterData.Speed [objInt ().item_id - 64] / 12.0f));
+			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
 			ai.AI.WorkingMemory.SetItem<float> ("Speed", ai.AI.Motor.DefaultSpeed);
 			if (this.GetComponent<Animation>()!=null)
 			{
@@ -222,7 +222,7 @@ public class NPC : object_base {
 		{
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
-		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.critterData.Exp[objInt().item_id-64]);
+		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
 	}
 
 	

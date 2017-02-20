@@ -198,7 +198,7 @@ public class Character : UWEBase {
 				objPicked=hit.transform.GetComponent<ObjectInteraction>();
 				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 				{
-					if (objPicked.CanBePickedUp==true)
+					if (objPicked.CanBePickedUp()==true)
 					{
 						if (ptrId==-2)
 						{

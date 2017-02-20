@@ -1372,7 +1372,8 @@ public class Conversation : GuiBase {
 		{
 			UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
 			locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
-			return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
+			//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
+			return GameWorldController.instance.commonObject.properties[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id].Value;
 		}
 		else
 		{
