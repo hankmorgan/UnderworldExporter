@@ -1682,6 +1682,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = position;
 				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				MeshFilter mf = Tile.AddComponent<MeshFilter>();
 				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
 				MeshCollider mc = Tile.AddComponent<MeshCollider>();

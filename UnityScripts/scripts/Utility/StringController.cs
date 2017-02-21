@@ -40,7 +40,7 @@ public class StringController : UWEBase {
 		/// The instance of this class
 		/// </summary>
 	public static StringController instance;
-
+		/*
 	//Temporary array until I'm wide awake
 	private string[] UW1_TextureNames ={"a stone wall",
 		"a mossy stone wall",
@@ -304,12 +304,12 @@ public class StringController : UWEBase {
 		"a glowing blue pathway",
 		"a glowing blue pathway",
 		"a glowing blue pathway"
-	};
+	};*/
 
 		void Awake()
 		{
 			instance=this;
-				if(UWEBase._RES!="UW1")
+				/*if(UWEBase._RES!="UW1")
 				{					
 					//InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
 				}
@@ -317,7 +317,7 @@ public class StringController : UWEBase {
 				{
 					//use the new method
 					//LoadStringsPak(Path);
-				}
+				}*/
 		}
 
 
@@ -764,13 +764,24 @@ public class StringController : UWEBase {
 	/// <param name="index">Index.</param>
 	public string GetTextureName(int index)
 	{
+				if (index<210)
+				{//Return a wall texture.
+						return GetString(10,index);
+				}
+				else
+				{//return a floor texture in reverse order.
+					return GetString(10, 510-index+210);
+				}
+
+				/*
 		if (index <= UW1_TextureNames.Length)
 		{
-			return UW1_TextureNames[index];
+
+			//return UW1_TextureNames[index];
 		}
 		else
 		{
 			return "UNKNOWN TEXTURE";
-		}
+		}*/
 	}
 }

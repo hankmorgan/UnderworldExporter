@@ -1505,8 +1505,8 @@ public class TileMap : Loader {
 								{
 										Tiles[x,y].wallTexture =0;
 								}	
-								Tiles[x,y].isWater=isTextureWater(Tiles[x,y].floorTexture);
-								Tiles[x,y].isLava=isTextureLava(Tiles[x,y].floorTexture);
+								Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
+								Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
 
 								//UW only has a single ceiling texture so this is ignored.
 								//Tiles[x,y].shockCeilingTexture = Tiles[x,y].floorTexture;					
@@ -2258,6 +2258,8 @@ public class TileMap : Loader {
 		//Temp
 		public static bool isTextureWater(int textureNo)
 		{
+				return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
+				/*
 				switch (textureNo)
 				{
 				case 226:
@@ -2267,11 +2269,13 @@ public class TileMap : Loader {
 				case 244:
 						return true;
 				}
-				return false;
+				return false;*/
 		}
 
 		public static bool isTextureLava(int textureNo)
 		{
+				return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Lava;//Adjust for uw1 texturemap positions
+				/*
 				switch (textureNo)
 				{
 
@@ -2281,7 +2285,7 @@ public class TileMap : Loader {
 				case 251:
 						return true;
 				}
-				return false;	
+				return false;	*/
 		}
 
 

@@ -247,8 +247,15 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public ObjectDatLoader objDat;
 
-
+		/// <summary>
+		/// The common object properties
+		/// </summary>
 	public CommonObjectDatLoader commonObject;
+
+		/// <summary>
+		/// The terrain data from terrain.dat
+		/// </summary>
+	public TerrainDatLoader terrainData;
 
 		void  LoadPath()
 		{
@@ -296,6 +303,8 @@ public class GameWorldController : UWEBase {
 		armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
 		grCursors = new GRLoader(GRLoader.CURSORS_GR);
 		grFlasks=new GRLoader(GRLoader.FLASKS_GR);
+
+		terrainData= new TerrainDatLoader();
 	}
 
 	void Start () {

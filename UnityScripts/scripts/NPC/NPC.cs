@@ -9,6 +9,11 @@ using RAIN.Minds;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
 	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
+		public int poisondamage;
+		public int AttackPower;
+		public int AvgHit;
+		public int height;
+		public int radius;
 
 	//TODO: these need to match the UW npc_goals
 	//The behaviour trees need to be updated too.
@@ -156,7 +161,7 @@ public class NPC : object_base {
 	private SpriteRenderer sprt;
 
 	public string CurrentSpriteName="";
-		public Sprite currentSpriteLoaded;
+	public Sprite currentSpriteLoaded;
 
 	private int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 
@@ -171,6 +176,11 @@ public class NPC : object_base {
 	protected override void Start () {
 		base.Start();
 		NPC_IDi=objInt().item_id;
+		poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
+		AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
+		AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
+				height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
+				radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
 	}
 
 	void AI_INIT ()

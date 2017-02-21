@@ -5,6 +5,8 @@ using System.Collections;
 /// Texture controller for applying palettes (UWPalette) to textures for object sprites.
 /// </summary>
 public class TextureController : UWEBase {
+		//Obsolete
+		/*
 		private int NoOfObjects=500;
 		//private int NoOfTextures=500;
 		private bool[] ObjectInUse=new bool[500];
@@ -82,4 +84,5 @@ public class TextureController : UWEBase {
 		{
 				return Resources.Load <Texture2D> (BasePath+ index.ToString("0000"));
 		}
+		*/
 }

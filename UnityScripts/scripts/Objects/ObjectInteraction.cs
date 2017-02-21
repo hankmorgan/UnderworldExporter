@@ -11,6 +11,9 @@ using RAIN.Navigation;
 /// Use for common object actions. Weight, qty, type, how to display the object. 
 /// </summary>
 public class ObjectInteraction : UWEBase {
+
+		public int canbeowned;
+
 		/// <summary>
 		/// The start position of the object when it became awake.
 		/// </summary>
@@ -224,6 +227,7 @@ public class ObjectInteraction : UWEBase {
 			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 			startPos=this.transform.position;
+			canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;
 		}
 
 		void Update()
