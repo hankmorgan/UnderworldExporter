@@ -30,22 +30,44 @@ public class TerrainDatLoader : Loader {
 
 		public TerrainDatLoader()
 		{
+			string filename="terrain.dat";
+			if (_RES==GAME_UWDEMO)
+			{
+				filename="DTERRAIN.DAT";
+			}
 			Terrain = new int[256+256];//wall and floor
 			char[] terrain_dat;
 			int add_ptr=0;
-			if (DataLoader.ReadStreamFile(BasePath+"\\data\\terrain.dat",out terrain_dat))
+			if (DataLoader.ReadStreamFile(BasePath+"\\data\\" + filename,out terrain_dat))
 			{
-				for (int i=0; i<256;i++)	
-				{
-					Terrain[i]=(int)DataLoader.getValAtAddress(terrain_dat,add_ptr,16);
-					add_ptr+=2;
-				}
-				add_ptr=0x200;
-				for (int i=256; i<512;i++)	
-				{
-					Terrain[i]=(int)DataLoader.getValAtAddress(terrain_dat,add_ptr,16);
-					add_ptr+=2;
-				}
+						switch(Loader._RES)
+						{
+						case GAME_UW1:
+						case GAME_UWDEMO:
+								for (int i=0; i<256;i++)	
+								{
+										Terrain[i]=(int)DataLoader.getValAtAddress(terrain_dat,add_ptr,16);
+										add_ptr+=2;
+								}
+								add_ptr=0x200;
+								for (int i=256; i<512;i++)	
+								{
+										Terrain[i]=(int)DataLoader.getValAtAddress(terrain_dat,add_ptr,16);
+										add_ptr+=2;
+								}
+								break;
+						case GAME_UW2:
+								{
+										for (int i=0; i<256;i++)	
+										{
+												Terrain[i]=(int)DataLoader.getValAtAddress(terrain_dat,add_ptr,16);
+												add_ptr+=2;
+										}
+										break;
+								}
+							
+						}
+
 			}
 		}
 

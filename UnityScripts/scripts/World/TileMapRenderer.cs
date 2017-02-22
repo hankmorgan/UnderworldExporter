@@ -172,6 +172,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		public static void RenderDoorways(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
+				if (objList==null)
+				{
+						return;
+				}
 			for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 			{
 				if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
@@ -665,6 +669,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		public static void RenderPillars(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
+				if (objList==null)
+				{
+						return;
+				}
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
 						if ((objList.objInfo[i].item_id==352) && (objList.objInfo[i].InUseFlag==1))
@@ -741,6 +749,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		public static void RenderBridges(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
+				if (objList==null)
+				{
+						return;
+				}
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
 						if ((objList.objInfo[i].item_id==356) && (objList.objInfo[i].InUseFlag==1))
@@ -1298,102 +1310,102 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 								{
 								case vTOP:
 										{
-												//Set the verts	
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+											//Set the verts	
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
 
-												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
+											verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
 
-												//Allocate UVs
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
-												uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
-												uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
+											//Allocate UVs
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+											uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+											uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
 
-												break;
+											break;
 										}
 
 								case vNORTH:
 										{
-												//north wall vertices
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+											//north wall vertices
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
+											verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+											uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
+											uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
 
 
-												break;
+											break;
 										}
 
 								case vWEST:
 										{
-												//west wall vertices
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
+											//west wall vertices
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
+											verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+											uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
+											uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
 
-												break;
+											break;
 										}
 
 								case vEAST:
 										{
 												//east wall vertices
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
+											verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+											uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1);
+											uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0);
 
-												break;
+											break;
 										}
 
 								case vSOUTH:
 										{
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
-												//south wall vertices
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
+											//south wall vertices
+											verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1);
+											uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1);
+											uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0);
 
-												break;
+											break;
 										}
 								case vBOTTOM:
 										{
-												//bottom wall vertices
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-												//Change default UVs
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
-												break;
+											//bottom wall vertices
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
+											verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+											//Change default UVs
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+											uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
+											uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
+											break;
 										}
 
 								}
@@ -2790,17 +2802,26 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				if (face == fCEIL)
 				{
-						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
+					floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
 				}
 				else
 				{
-						//floorTexture = t.floorTexture;
-					floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
+					//floorTexture = t.floorTexture;
+					switch(_RES)
+					{
+					case GAME_UW2:
+						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
+						break;
+					default:
+						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
+						break;
+					}
+					
 				}
 
 				if ((floorTexture<0) || (floorTexture >512))
 				{
-						floorTexture = 0;
+					floorTexture = 0;
 				}
 				return floorTexture;
 		}

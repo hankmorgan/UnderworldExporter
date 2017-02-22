@@ -1,464 +1,464 @@
-0 0 0 0 entity 69 a_hand_axe func_emitter 0 uw2_object_000.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_000.tga
-1 0 0 0 entity 69 a_battle_axe func_emitter 0 uw2_object_001.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_001.tga
-2 0 0 0 entity 69 an_axe func_emitter 0 uw2_object_002.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_002.tga
-3 0 0 0 entity 69 a_dagger func_emitter 0 uw2_object_003.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_003.tga
-4 0 0 0 entity 69 a_shortsword func_emitter 0 uw2_object_004.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_004.tga
-5 0 0 0 entity 69 a_longsword func_emitter 0 uw2_object_005.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_005.tga
-6 0 0 0 entity 69 a_broadsword func_emitter 0 uw2_object_006.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_006.tga
-7 0 0 0 entity 69 a_cudgel func_emitter 0 uw2_object_007.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_007.tga
-8 0 0 0 entity 69 a_light_mace func_emitter 0 uw2_object_008.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_008.tga
-9 0 0 0 entity 69 a_mace func_emitter 0 uw2_object_009.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_009.tga
-10 0 0 0 entity 69 a_jewelled_dagger func_emitter 0 uw2_object_010.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_010.tga
-11 0 0 0 entity 69 a_jeweled_axe func_emitter 0 uw2_object_011.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_011.tga
-12 0 0 0 entity 69 a_black_sword func_emitter 0 uw2_object_012.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_012.tga
-13 0 0 0 entity 69 a_jeweled_sword func_emitter 0 uw2_object_013.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_013.tga
-14 0 0 0 entity 69 a_jeweled_mace func_emitter 0 uw2_object_014.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_014.tga
-15 0 0 0 entity 69 a_fist func_emitter 0 uw2_object_015.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_015.tga
-16 0 0 0 entity 69 a_sling_stone func_emitter 0 uw2_object_016.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_016.tga
-17 0 0 0 entity 69 a_crossbow_bolt func_emitter 0 uw2_object_017.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_017.tga
-18 0 0 0 entity 69 an_arrow func_emitter 0 uw2_object_018.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_018.tga
-19 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_019.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_019.tga
-20 0 0 0 entity 69 a_fireball func_emitter 0 uw2_object_020.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_020.tga
-21 0 0 0 entity 69 a_lightning_bolt func_emitter 0 uw2_object_021.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_021.tga
-22 0 0 0 entity 69 acid func_emitter 0 uw2_object_022.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_022.tga
-23 0 0 0 entity 69 a_magic_arrow func_emitter 0 uw2_object_023.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_023.tga
-24 0 0 0 entity 69 a_sling func_emitter 0 uw2_object_024.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_024.tga
-25 0 0 0 entity 69 a_bow func_emitter 0 uw2_object_025.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_025.tga
-26 0 0 0 entity 69 a_crossbow func_emitter 0 uw2_object_026.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_026.tga
-27 0 0 0 entity 69 a_homing_dart func_emitter 0 uw2_object_027.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_027.tga
-28 0 0 0 entity 69 a_snowball func_emitter 0 uw2_object_028.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_028.tga
-29 0 0 0 entity 69 a_fireball func_emitter 0 uw2_object_029.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_029.tga
-30 0 0 0 entity 69 a_satellite func_emitter 0 uw2_object_030.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_030.tga
-31 0 0 0 entity 69 a_jeweled_bow func_emitter 0 uw2_object_031.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_031.tga
-32 0 0 0 entity 69 a_leather_vest func_emitter 0 uw2_object_032.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_032.tga
-33 0 0 0 entity 69 a_mail_shirt func_emitter 0 uw2_object_033.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_033.tga
-34 0 0 0 entity 69 a_breastplate func_emitter 0 uw2_object_034.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_034.tga
-35 0 0 0 entity 69 leather_leggings&pairs_of_leather_leggings func_emitter 0 uw2_object_035.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_035.tga
-36 0 0 0 entity 69 mail_leggings&pairs_of_mail_leggings func_emitter 0 uw2_object_036.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_036.tga
-37 0 0 0 entity 69 plate_leggings&pairs_of_plate_leggings func_emitter 0 uw2_object_037.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_037.tga
-38 0 0 0 entity 69 leather_gloves&pairs_of_leather_gloves func_emitter 0 uw2_object_038.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_038.tga
-39 0 0 0 entity 69 chain_gauntlets&pairs_of_chain_gauntlets func_emitter 0 uw2_object_039.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_039.tga
-40 0 0 0 entity 69 plate_gauntlets&pairs_of_plate_gauntlets func_emitter 0 uw2_object_040.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_040.tga
-41 0 0 0 entity 69 leather_boots&pairs_of_leather_boots func_emitter 0 uw2_object_041.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_041.tga
-42 0 0 0 entity 69 chain_boots&pairs_of_chain_boots func_emitter 0 uw2_object_042.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_042.tga
-43 0 0 0 entity 69 plate_boots&pairs_of_plate_boots func_emitter 0 uw2_object_043.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_043.tga
-44 0 0 0 entity 69 a_leather_cap func_emitter 0 uw2_object_044.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_044.tga
-45 0 0 0 entity 69 a_chain_cowl func_emitter 0 uw2_object_045.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_045.tga
-46 0 0 0 entity 69 a_helmet func_emitter 0 uw2_object_046.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_046.tga
-47 0 0 0 entity 69 a_pair_of_swamp_boots&pairs_of_swamp_boots func_emitter 0 uw2_object_047.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_047.tga
-48 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_048.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_048.tga
-49 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_049.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_049.tga
-50 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_050.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_050.tga
-51 0 0 0 entity 69 fraznium_gauntlets&pairs_of_fraznium_gauntlets func_emitter 0 uw2_object_051.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_051.tga
-52 0 0 0 entity 69 a_fraznium_circlet func_emitter 0 uw2_object_052.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_052.tga
-53 0 0 0 entity 69 a_Guardian_signet_ring func_emitter 0 uw2_object_053.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_053.tga
-54 0 0 0 entity 69 a_strange_artifact func_emitter 0 uw2_object_054.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_054.tga
-55 0 0 0 entity 69 a_copper_ring func_emitter 0 uw2_object_055.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_055.tga
-56 0 0 0 entity 69 a_gold_ring func_emitter 0 uw2_object_056.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_056.tga
-57 0 0 0 entity 69 a_silver_ring func_emitter 0 uw2_object_057.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_057.tga
-58 0 0 0 entity 69 a_red_ring func_emitter 0 uw2_object_058.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_058.tga
-59 0 0 0 entity 69 a_tower_shield func_emitter 0 uw2_object_059.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_059.tga
-60 0 0 0 entity 69 a_wooden_shield func_emitter 0 uw2_object_060.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_060.tga
-61 0 0 0 entity 69 a_small_shield func_emitter 0 uw2_object_061.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_061.tga
-62 0 0 0 entity 69 a_buckler func_emitter 0 uw2_object_062.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_062.tga
-63 0 0 0 entity 69 a_jeweled_shield func_emitter 0 uw2_object_063.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_063.tga
-64 0 0 0 entity 0 a_rotworm atdm:ai_spider 0 uw2_object_064.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_064.tga
-65 0 0 0 entity 0 a_cave_bat atdm:ai_spider 0 uw2_object_065.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_065.tga
-66 0 0 0 entity 0 a_vampire_bat atdm:ai_spider 0 uw2_object_066.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_066.tga
-67 0 0 0 entity 0 a_giant_tan_rat atdm:ai_spider 0 uw2_object_067.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_067.tga
-68 0 0 0 entity 0 a_giant_grey_rat atdm:ai_spider 0 uw2_object_068.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_068.tga
-69 0 0 0 entity 0 a_flesh_slug atdm:ai_spider 0 uw2_object_069.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_069.tga
-70 0 0 0 entity 0 an_acid_slug atdm:ai_spider 0 uw2_object_070.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_070.tga
-71 0 0 0 entity 0 a_mongbat atdm:ai_spider 0 uw2_object_071.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_071.tga
-72 0 0 0 entity 0 a_skeleton atdm:ai_undead_skeleton_armed 0 uw2_object_072.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_072.tga
-73 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw2_object_073.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_073.tga
-74 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw2_object_074.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_074.tga
-75 0 0 0 entity 0 an_imp atdm:ai_spider 0 uw2_object_075.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_075.tga
-76 0 0 0 entity 0 a_giant_spider atdm:ai_spider 0 uw2_object_076.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_076.tga
-77 0 0 0 entity 0 a_lurker atdm:ai_spider 0 uw2_object_077.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_077.tga
-78 0 0 0 entity 0 a_bloodworm atdm:ai_spider 0 uw2_object_078.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_078.tga
-79 0 0 0 entity 0 a_stickman atdm:ai_spider 0 uw2_object_079.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_079.tga
-80 0 0 0 entity 0 a_white_worm atdm:ai_spider 0 uw2_object_080.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_080.tga
-81 0 0 0 entity 0 a_snow_cat atdm:ai_spider 0 uw2_object_081.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_081.tga
-82 0 0 0 entity 0 a_yeti&yeti atdm:ai_spider 0 uw2_object_082.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_082.tga
-83 0 0 0 entity 0 a_headless&headlesses atdm:ai_spider 0 uw2_object_083.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_083.tga
-84 0 0 0 entity 0 a_Talorid atdm:ai_spider 0 uw2_object_084.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_084.tga
-85 0 0 0 entity 0 a_ghost atdm:ai_spider 0 uw2_object_085.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_085.tga
-86 0 0 0 entity 0 a_wolf_spider atdm:ai_spider_huge 0 uw2_object_086.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_086.tga
-87 0 0 0 entity 0 a_trilkhun&trilkhai atdm:ai_spider 0 uw2_object_087.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_087.tga
-88 0 0 0 entity 0 a_brain_creature atdm:ai_spider 0 uw2_object_088.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_088.tga
-89 0 0 0 entity 0 a_deep_lurker atdm:ai_spider 0 uw2_object_089.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_089.tga
-90 0 0 0 entity 0 a_dread_spider atdm:ai_spider 0 uw2_object_090.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_090.tga
-91 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_091.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_091.tga
-92 0 0 0 entity 0 a_great_troll atdm:ai_spider 0 uw2_object_092.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_092.tga
-93 0 0 0 entity 0 a_spectre atdm:ai_spider 0 uw2_object_093.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_093.tga
-94 0 0 0 entity 0 a_hordling atdm:ai_spider 0 uw2_object_094.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_094.tga
-95 0 0 0 entity 0 an_earth_golem atdm:ai_spider 0 uw2_object_095.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_095.tga
-96 0 0 0 entity 0 a_fire_elemental atdm:ai_spider 0 uw2_object_096.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_096.tga
-97 0 0 0 entity 0 an_ice_golem atdm:ai_spider 0 uw2_object_097.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_097.tga
-98 0 0 0 entity 0 a_dire_ghost atdm:ai_spider 0 uw2_object_098.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_098.tga
-99 0 0 0 entity 0 a_reaper atdm:ai_spider 0 uw2_object_099.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_099.tga
-100 0 0 0 entity 0 a_despoiler atdm:ai_spider 0 uw2_object_100.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_100.tga
-101 0 0 0 entity 0 a_metal_golem atdm:ai_spider 0 uw2_object_101.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_101.tga
-102 0 0 0 entity 0 a_haunt atdm:ai_spider 0 uw2_object_102.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_102.tga
-103 0 0 0 entity 0 a_dire_reaper atdm:ai_spider 0 uw2_object_103.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_103.tga
-104 0 0 0 entity 0 a_destroyer atdm:ai_spider 0 uw2_object_104.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_104.tga
-105 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_105.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_105.tga
-106 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_106.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_106.tga
-107 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_107.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_107.tga
-108 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_108.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_108.tga
-109 0 0 0 entity 0 a_vorz atdm:ai_spider 0 uw2_object_109.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_109.tga
-110 0 0 0 entity 0 a_fighter atdm:ai_guard_archer_01 0 uw2_object_110.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_110.tga
-111 0 0 0 entity 0 a_gazer atdm:ai_spider 0 uw2_object_111.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_111.tga
-112 0 0 0 entity 0 a_human atdm:ai_townsfolk_commoner 0 uw2_object_112.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_112.tga
-113 0 0 0 entity 0 a_human atdm:ai_townsfolk_wench 0 uw2_object_113.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_113.tga
-114 0 0 0 entity 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_114.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_114.tga
-115 0 0 0 entity 0 a_human atdm:ai_noblewoman01 0 uw2_object_115.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_115.tga
-116 0 0 0 entity 0 a_human atdm:ai_noblewoman01 0 uw2_object_116.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_116.tga
-117 0 0 0 entity 0 a_human atdm:ai_mage01 0 uw2_object_117.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_117.tga
-118 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_118.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_118.tga
-119 0 0 0 entity 0 a_human atdm:ai_archmage01 0 uw2_object_119.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_119.tga
-120 0 0 0 entity 0 a_human atdm:ai_guard_female_rogue 0 uw2_object_120.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_120.tga
-121 0 0 0 entity 0 a_human atdm:ai_proguard 0 uw2_object_121.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_121.tga
-122 0 0 0 entity 0 a_human atdm:ai_nobleman 0 uw2_object_122.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_122.tga
-123 0 0 0 entity 0 a_human atdm:ai_guard_female_rogue 0 uw2_object_123.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_123.tga
-124 0 0 0 model 18 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_124.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_124.tga
-125 0 0 0 model 18 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_125.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_125.tga
-126 0 0 0 entity 0 a_human atdm:ai_townsfolk_wench 0 uw2_object_126.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_126.tga
-127 0 0 0 entity 0 an_adventurer atdm:ai_spider 0 uw2_object_127.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_127.tga
-128 0 0 0 entity 19 a_sack models/darkmod/uw1/cm.ase 1 uw2_object_128.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_128.tga
-129 0 0 0 entity 19 an_open_sack models/darkmod/uw1/cm.ase 1 uw2_object_129.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_129.tga
-130 0 0 0 entity 19 a_pack models/darkmod/uw1/cm.ase 1 uw2_object_130.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_130.tga
-131 0 0 0 entity 19 an_open_pack models/darkmod/uw1/cm.ase 1 uw2_object_131.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_131.tga
-132 0 0 0 entity 19 a_box&boxes models/darkmod/uw1/cm.ase 1 uw2_object_132.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_132.tga
-133 0 0 0 entity 19 an_open_box&open_boxes models/darkmod/uw1/cm.ase 1 uw2_object_133.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_133.tga
-134 0 0 0 entity 19 a_pouch&pouches models/darkmod/uw1/cm.ase 1 uw2_object_134.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_134.tga
-135 0 0 0 entity 19 an_open_pouch&pouches models/darkmod/uw1/cm.ase 1 uw2_object_135.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_135.tga
-136 0 0 0 entity 19 a_map_case models/darkmod/uw1/cm.ase 1 uw2_object_136.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_136.tga
-137 0 0 0 entity 19 an_open_map_case models/darkmod/uw1/cm.ase 1 uw2_object_137.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_137.tga
-138 0 0 0 entity 19 a_gold_coffer models/darkmod/uw1/cm.ase 1 uw2_object_138.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_138.tga
-139 0 0 0 entity 19 an_open_gold_coffer models/darkmod/uw1/cm.ase 1 uw2_object_139.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_139.tga
-140 0 0 0 entity 19 a_key_ring models/darkmod/uw1/cm.ase 1 uw2_object_140.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_140.tga
-141 0 0 0 entity 19 a_quiver models/darkmod/uw1/cm.ase 1 uw2_object_141.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_141.tga
-142 0 0 0 entity 19 a_bowl models/darkmod/uw1/cm.ase 1 uw2_object_142.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_142.tga
-143 0 0 0 entity 69 a_rune_bag func_emitter 0 uw2_object_143.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_143.tga
-144 0 0 0 entity 69 a_lantern func_emitter 0 uw2_object_144.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_144.tga
-145 0 0 0 entity 69 a_torch&torches func_emitter 0 uw2_object_145.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_145.tga
-146 0 0 0 entity 69 a_candle func_emitter 0 uw2_object_146.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_146.tga
-147 0 0 0 entity 69 a_light-sphere func_emitter 0 uw2_object_147.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_147.tga
-148 0 0 0 entity 69 a_lit_lantern func_emitter 0 uw2_object_148.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_148.tga
-149 0 0 0 entity 69 a_lit_torch func_emitter 0 uw2_object_149.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_149.tga
-150 0 0 0 entity 69 a_lit_candle func_emitter 0 uw2_object_150.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_150.tga
-151 0 0 0 entity 69 a_lit_light-sphere func_emitter 0 uw2_object_151.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_151.tga
-152 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_152.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_152.tga
-153 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_153.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_153.tga
-154 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_154.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_154.tga
-155 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_155.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_155.tga
-156 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_156.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_156.tga
-157 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_157.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_157.tga
-158 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_158.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_158.tga
-159 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_159.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_159.tga
-160 0 0 0 entity 69 a_coin func_emitter 0 uw2_object_160.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_160.tga
-161 0 0 0 entity 69 a_storage_crystal func_emitter 0 uw2_object_161.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_161.tga
-162 0 0 0 entity 69 a_ruby&rubies func_emitter 0 uw2_object_162.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_162.tga
-163 0 0 0 entity 69 a_red_gem func_emitter 0 uw2_object_163.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_163.tga
-164 0 0 0 entity 69 a_small_blue_gem func_emitter 0 uw2_object_164.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_164.tga
-165 0 0 0 entity 69 a_large_blue_gem func_emitter 0 uw2_object_165.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_165.tga
-166 0 0 0 entity 69 a_sapphire func_emitter 0 uw2_object_166.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_166.tga
-167 0 0 0 entity 69 an_emerald func_emitter 0 uw2_object_167.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_167.tga
-168 0 0 0 entity 69 a_black_pearl func_emitter 0 uw2_object_168.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_168.tga
-169 0 0 0 entity 69 a_goblet func_emitter 0 uw2_object_169.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_169.tga
-170 0 0 0 entity 69 a_sceptre func_emitter 0 uw2_object_170.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_170.tga
-171 0 0 0 entity 69 a_black_stone func_emitter 0 uw2_object_171.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_171.tga
-172 0 0 0 entity 69 a_white_stone func_emitter 0 uw2_object_172.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_172.tga
-173 0 0 0 entity 69 a_grey_stone func_emitter 0 uw2_object_173.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_173.tga
-174 0 0 0 entity 69 a_delgnigzator func_emitter 0 uw2_object_174.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_174.tga
-175 0 0 0 entity 69 a_pocketwatch&pocketwatches func_emitter 0 uw2_object_175.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_175.tga
-176 0 0 0 entity 69 a_piece_of_meat&pieces_of_meat func_emitter 0 uw2_object_176.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_176.tga
-177 0 0 0 entity 69 a_piece_of_meat&pieces_of_meat func_emitter 0 uw2_object_177.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_177.tga
-178 0 0 0 entity 69 a_piece_of_cheese&pieces_of_cheese func_emitter 0 uw2_object_178.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_178.tga
-179 0 0 0 entity 69 an_apple func_emitter 0 uw2_object_179.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_179.tga
-180 0 0 0 entity 69 an_ear_of_corn&ears_of_corn func_emitter 0 uw2_object_180.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_180.tga
-181 0 0 0 entity 69 a_loaf_of_bread&loaves_of_bread func_emitter 0 uw2_object_181.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_181.tga
-182 0 0 0 entity 69 a_fish&fish func_emitter 0 uw2_object_182.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_182.tga
-183 0 0 0 entity 69 some_popcorn&bunches_of_popcorn func_emitter 0 uw2_object_183.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_183.tga
-184 0 0 0 entity 69 a_pastry&pastries func_emitter 0 uw2_object_184.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_184.tga
-185 0 0 0 entity 69 a_mushroom func_emitter 0 uw2_object_185.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_185.tga
-186 0 0 0 entity 69 a_honeycomb func_emitter 0 uw2_object_186.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_186.tga
-187 0 0 0 entity 69 a_bottle_of_ale&bottles_of_ale func_emitter 0 uw2_object_187.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_187.tga
-188 0 0 0 entity 69 a_bottle_of_water&bottles_of_water func_emitter 0 uw2_object_188.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_188.tga
-189 0 0 0 entity 69 a_bottle_of_wine&bottles_of_wine func_emitter 0 uw2_object_189.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_189.tga
-190 0 0 0 entity 69 some_meat-on-a-stick&pieces_of_meat-on-a-stick func_emitter 0 uw2_object_190.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_190.tga
-191 0 0 0 entity 69 a_nutritious_wafer func_emitter 0 uw2_object_191.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_191.tga
-192 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_192.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_192.tga
-193 0 0 0 entity 69 some_grass&bunches_of_grass func_emitter 0 uw2_object_193.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_193.tga
-194 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_194.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_194.tga
-195 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_195.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_195.tga
-196 0 0 0 entity 69 a_bone func_emitter 0 uw2_object_196.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_196.tga
-197 0 0 0 entity 69 a_bone func_emitter 0 uw2_object_197.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_197.tga
-198 0 0 0 entity 69 a_pile_of_bones&piles_of_bones func_emitter 0 uw2_object_198.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_198.tga
-199 0 0 0 entity 69 a_broken_dagger func_emitter 0 uw2_object_199.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_199.tga
-200 0 0 0 entity 69 a_broken_sword func_emitter 0 uw2_object_200.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_200.tga
-201 0 0 0 entity 69 a_broken_axe func_emitter 0 uw2_object_201.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_201.tga
-202 0 0 0 entity 69 a_broken_mace func_emitter 0 uw2_object_202.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_202.tga
-203 0 0 0 entity 69 a_broken_shield func_emitter 0 uw2_object_203.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_203.tga
-204 0 0 0 entity 69 a_piece_of_wood&pieces_of_wood func_emitter 0 uw2_object_204.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_204.tga
-205 0 0 0 entity 69 a_piece_of_wood&pieces_of_wood func_emitter 0 uw2_object_205.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_205.tga
-206 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_206.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_206.tga
-207 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_207.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_207.tga
-208 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_208.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_208.tga
-209 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_209.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_209.tga
-210 0 0 0 entity 69 a_lump_of_wax&lumps_of_wax func_emitter 0 uw2_object_210.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_210.tga
-211 0 0 0 entity 69 a_stalactite func_emitter 0 uw2_object_211.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_211.tga
-212 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_212.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_212.tga
-213 0 0 0 entity 69 an_icicle func_emitter 0 uw2_object_213.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_213.tga
-214 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_214.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_214.tga
-215 0 0 0 entity 69 an_anvil func_emitter 0 uw2_object_215.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_215.tga
-216 0 0 0 entity 69 a_pole func_emitter 0 uw2_object_216.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_216.tga
-217 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_217.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_217.tga
-218 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_218.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_218.tga
-219 0 0 0 entity 69 some_rubble&piles_of_rubble func_emitter 0 uw2_object_219.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_219.tga
-220 0 0 0 entity 69 a_pile_of_wood_chips&piles_of_wood_chips func_emitter 0 uw2_object_220.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_220.tga
-221 0 0 0 entity 69 a_pile_of_bones&piles_of_bones func_emitter 0 uw2_object_221.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_221.tga
-222 0 0 0 entity 69 a_blood_stain func_emitter 0 uw2_object_222.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_222.tga
-223 0 0 0 entity 69 a_blood_stain func_emitter 0 uw2_object_223.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_223.tga
-224 0 0 0 entity 69 a_runestone func_emitter 0 uw2_object_224.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_224.tga
-225 0 0 0 entity 69 a_black_potion func_emitter 0 uw2_object_225.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_225.tga
-226 0 0 0 entity 69 a_purple_potion func_emitter 0 uw2_object_226.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_226.tga
-227 0 0 0 entity 69 a_yellow_potion func_emitter 0 uw2_object_227.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_227.tga
-228 0 0 0 entity 69 a_green_potion func_emitter 0 uw2_object_228.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_228.tga
-229 0 0 0 entity 69 a_red_potion func_emitter 0 uw2_object_229.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_229.tga
-230 0 0 0 entity 69 a_colorless_potion func_emitter 0 uw2_object_230.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_230.tga
-231 0 0 0 entity 69 a_brown_potion func_emitter 0 uw2_object_231.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_231.tga
-232 0 0 0 entity 69 an_An_stone func_emitter 0 uw2_object_232.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_232.tga
-233 0 0 0 entity 69 a_Bet_stone func_emitter 0 uw2_object_233.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_233.tga
-234 0 0 0 entity 69 a_Corp_stone func_emitter 0 uw2_object_234.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_234.tga
-235 0 0 0 entity 69 a_Des_stone func_emitter 0 uw2_object_235.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_235.tga
-236 0 0 0 entity 69 an_Ex_stone func_emitter 0 uw2_object_236.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_236.tga
-237 0 0 0 entity 69 a_Flam_stone func_emitter 0 uw2_object_237.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_237.tga
-238 0 0 0 entity 69 a_Grav_stone func_emitter 0 uw2_object_238.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_238.tga
-239 0 0 0 entity 69 a_Hur_stone func_emitter 0 uw2_object_239.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_239.tga
-240 0 0 0 entity 69 an_In_stone func_emitter 0 uw2_object_240.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_240.tga
-241 0 0 0 entity 69 a_Jux_stone func_emitter 0 uw2_object_241.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_241.tga
-242 0 0 0 entity 69 a_Kal_stone func_emitter 0 uw2_object_242.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_242.tga
-243 0 0 0 entity 69 a_Lor_stone func_emitter 0 uw2_object_243.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_243.tga
-244 0 0 0 entity 69 a_Mani_stone func_emitter 0 uw2_object_244.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_244.tga
-245 0 0 0 entity 69 a_Nox_stone func_emitter 0 uw2_object_245.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_245.tga
-246 0 0 0 entity 69 an_Ort_stone func_emitter 0 uw2_object_246.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_246.tga
-247 0 0 0 entity 69 a_Por_stone func_emitter 0 uw2_object_247.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_247.tga
-248 0 0 0 entity 69 a_Quas_stone func_emitter 0 uw2_object_248.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_248.tga
-249 0 0 0 entity 69 a_Rel_stone func_emitter 0 uw2_object_249.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_249.tga
-250 0 0 0 entity 69 a_Sanct_stone func_emitter 0 uw2_object_250.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_250.tga
-251 0 0 0 entity 69 a_Tym_stone func_emitter 0 uw2_object_251.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_251.tga
-252 0 0 0 entity 69 an_Uus_stone func_emitter 0 uw2_object_252.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_252.tga
-253 0 0 0 entity 69 a_Vas_stone func_emitter 0 uw2_object_253.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_253.tga
-254 0 0 0 entity 69 a_Wis_stone func_emitter 0 uw2_object_254.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_254.tga
-255 0 0 0 entity 69 a_Ylem_stone func_emitter 0 uw2_object_255.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_255.tga
-256 0 0 0 entity 69 a_curious_implement func_emitter 0 uw2_object_256.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_256.tga
-257 0 0 0 entity 69 a_lockpick func_emitter 0 uw2_object_257.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_257.tga
-258 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_258.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_258.tga
-259 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_259.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_259.tga
-260 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_260.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_260.tga
-261 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_261.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_261.tga
-262 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_262.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_262.tga
-263 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_263.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_263.tga
-264 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_264.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_264.tga
-265 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_265.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_265.tga
-266 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_266.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_266.tga
-267 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_267.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_267.tga
-268 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_268.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_268.tga
-269 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_269.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_269.tga
-270 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_270.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_270.tga
-271 0 0 0 entity 21 a_lock atdm:target_changelockstate 0 uw2_object_271.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_271.tga
-272 0 0 0 entity 69 an_eyeball func_emitter 0 uw2_object_272.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_272.tga
-273 0 0 0 entity 69 a_horn func_emitter 0 uw2_object_273.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_273.tga
-274 0 0 0 entity 69 a_pearl-tipped_rod&pearl-tipped_rods func_emitter 0 uw2_object_274.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_274.tga
-275 0 0 0 entity 69 a_black_eggshell&black_eggshells func_emitter 0 uw2_object_275.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_275.tga
-276 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_276.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_276.tga
-277 0 0 0 entity 69 a_serpent_statue&serpent_statues func_emitter 0 uw2_object_277.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_277.tga
-278 0 0 0 entity 69 a_bottle func_emitter 0 uw2_object_278.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_278.tga
-279 0 0 0 entity 69 an_amethyst_rod&amethyst_rods func_emitter 0 uw2_object_279.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_279.tga
-280 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_280.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_280.tga
-281 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_281.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_281.tga
-282 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_282.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_282.tga
-283 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_283.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_283.tga
-284 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_284.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_284.tga
-285 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_285.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_285.tga
-286 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_286.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_286.tga
-287 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_287.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_287.tga
-288 0 0 0 entity 69 a_spell func_emitter 0 uw2_object_288.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_288.tga
-289 0 0 0 entity 69 a_bedroll func_emitter 0 uw2_object_289.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_289.tga
-290 0 0 0 entity 69 an_orb func_emitter 0 uw2_object_290.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_290.tga
-291 0 0 0 entity 69 a_mandolin func_emitter 0 uw2_object_291.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_291.tga
-292 0 0 0 entity 69 a_flute func_emitter 0 uw2_object_292.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_292.tga
-293 0 0 0 entity 69 some_leeches&bunches_of_leeches func_emitter 0 uw2_object_293.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_293.tga
-294 0 0 0 entity 69 a_moonstone func_emitter 0 uw2_object_294.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_294.tga
-295 0 0 0 entity 69 a_force_field func_emitter 0 uw2_object_295.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_295.tga
-296 0 0 0 entity 69 a_rock_hammer func_emitter 0 uw2_object_296.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_296.tga
-297 0 0 0 entity 69 a_resilient_sphere func_emitter 0 uw2_object_297.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_297.tga
-298 0 0 0 entity 69 a_campfire func_emitter 0 uw2_object_298.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_298.tga
-299 0 0 0 entity 69 a_fishing_pole func_emitter 0 uw2_object_299.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_299.tga
-300 0 0 0 entity 69 some_thread&pieces_of_thread func_emitter 0 uw2_object_300.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_300.tga
-301 0 0 0 entity 69 an_oil_flask func_emitter 0 uw2_object_301.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_301.tga
-302 0 0 0 entity 69 a_fountain func_emitter 0 uw2_object_302.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_302.tga
-303 0 0 0 entity 69 a_banner func_emitter 0 uw2_object_303.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_303.tga
-304 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_304.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_304.tga
-305 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_305.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_305.tga
-306 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_306.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_306.tga
-307 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_307.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_307.tga
-308 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_308.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_308.tga
-309 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_309.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_309.tga
-310 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_310.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_310.tga
-311 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_311.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_311.tga
-312 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_312.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_312.tga
-313 0 0 0 entity 69 a_bit_of_a_map func_emitter 0 uw2_object_313.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_313.tga
-314 0 0 0 entity 69 a_map func_emitter 0 uw2_object_314.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_314.tga
-315 0 0 0 entity 69 a_dead_plant func_emitter 0 uw2_object_315.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_315.tga
-316 0 0 0 entity 69 a_dead_plant func_emitter 0 uw2_object_316.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_316.tga
-317 0 0 0 entity 69 a_bottle func_emitter 0 uw2_object_317.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_317.tga
-318 0 0 0 entity 69 a_stick func_emitter 0 uw2_object_318.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_318.tga
-319 0 0 0 entity 69 a_resilient_sphere func_emitter 0 uw2_object_319.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_319.tga
-320 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_320.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_320.tga
-321 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_321.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_321.tga
-322 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_322.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_322.tga
-323 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_323.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_323.tga
-324 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_324.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_324.tga
-325 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_325.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_325.tga
-326 0 0 0 entity 30 a_portcullis&portcullises atdm:door_96x48_3hinge 0 uw2_object_326.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_326.tga
-327 0 0 0 entity 29 a_secret_door atdm:mover_door 0 uw2_object_327.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_327.tga
-328 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_328.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_328.tga
-329 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_329.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_329.tga
-330 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_330.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_330.tga
-331 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_331.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_331.tga
-332 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_332.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_332.tga
-333 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_333.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_333.tga
-334 0 0 0 entity 30 an_open_portcullis atdm:door_96x48_3hinge 0 uw2_object_334.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_334.tga
-335 0 0 0 entity 29 a_secret_door atdm:mover_door 0 uw2_object_335.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_335.tga
-336 0 0 0 model 23 a_bench&benches models/darkmod/furniture/seating/bench_wooden01.lwo 0 uw2_object_336.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_336.tga
-337 0 0 0 entity 69 an_arrow func_emitter 0 uw2_object_337.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_337.tga
-338 0 0 0 entity 69 a_crossbow_bolt func_emitter 0 uw2_object_338.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_338.tga
-339 0 0 0 entity 69 a_large_boulder func_emitter 0 uw2_object_339.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_339.tga
-340 0 0 0 entity 69 a_large_boulder func_emitter 0 uw2_object_340.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_340.tga
-341 0 0 0 entity 69 a_boulder func_emitter 0 uw2_object_341.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_341.tga
-342 0 0 0 entity 69 a_small_boulder func_emitter 0 uw2_object_342.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_342.tga
-343 0 0 0 entity 69 a_shrine func_emitter 0 uw2_object_343.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_343.tga
-344 0 0 0 model 23 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo 0 uw2_object_344.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_344.tga
-345 0 0 0 entity 69 a_beam func_emitter 0 uw2_object_345.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_345.tga
-346 0 0 0 entity 69 a_moongate func_emitter 0 uw2_object_346.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_346.tga
-347 0 0 0 entity 19 a_barrel models/darkmod/containers/barrell_med_closed.lwo 0 uw2_object_347.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_347.tga
-348 0 0 0 model 23 a_chair models/darkmod/furniture/seating/chair_simple01.lwo 0 uw2_object_348.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_348.tga
-349 0 0 0 entity 19 a_chest models/darkmod/containers/openable/chest_wood.ase 0 uw2_object_349.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_349.tga
-350 0 0 0 model 19 a_nightstand models/darkmod/furniture/small_dresser.ase 0 uw2_object_350.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_350.tga
-351 0 0 0 model 18 a_lotus_turbo_esprit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_351.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_351.tga
-352 0 0 0 ignore 31 a_pillar worldspawn 0 uw2_object_352.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_352.tga
-353 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_353.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_353.tga
-354 0 0 0 entity 8 a_switch&switches models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_354.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_354.tga
-355 0 0 0 entity 68 a_painting models/darkmod/uw2/painting.ase 0 uw2_object_355.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_355.tga
-356 0 0 0 entity 7 a_bridge models/darkmod/uw1/uw1_bridge_new.ase 0 uw2_object_356.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_356.tga
-357 0 0 0 model 18 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_357.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_357.tga
-358 0 0 0 entity 10 some_writing atdm:readable_base 0 uw2_object_358.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_358.tga
-359 0 0 0 model 18 a_bed models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_359.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_359.tga
-360 0 0 0 model 18 a_large_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_360.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_360.tga
-361 0 0 0 model 18 a_shelf models/darkmod/furniture/shelves/wall_shelf_ornate1.lwo 0 uw2_object_361.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_361.tga
-362 0 0 0 entity 69 unknown func_emitter 0 uw2_object_362.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_362.tga
-363 0 0 0 entity 69 unknown func_emitter 0 uw2_object_363.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_363.tga
-364 0 0 0 entity 69 unknown func_emitter 0 uw2_object_364.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_364.tga
-365 0 0 0 entity 69 force_field func_emitter 0 uw2_object_365.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_365.tga
-366 0 0 0 entity 34 special_tmap_obj func_static 0 uw2_object_366.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_366.tga
-367 0 0 0 entity 35 special_tmap_obj func_static 0 uw2_object_367.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_367.tga
-368 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_368.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_368.tga
-369 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_369.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_369.tga
-370 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_370.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_370.tga
-371 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_371.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_371.tga
-372 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_372.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_372.tga
-373 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_373.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_373.tga
-374 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_374.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_374.tga
-375 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_375.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_375.tga
-376 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_376.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_376.tga
-377 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_377.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_377.tga
-378 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_378.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_378.tga
-379 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_379.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_379.tga
-380 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_380.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_380.tga
-381 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_381.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_381.tga
-382 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_382.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_382.tga
-383 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_383.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_383.tga
-384 0 0 0 entity 69 a_damage_trap func_emitter 0 uw2_object_384.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_384.tga
-385 0 0 0 entity 38 a_teleport_trap func_teleporter 1 uw2_object_385.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_385.tga
-386 0 0 0 entity 69 a_arrow_trap func_emitter 0 uw2_object_386.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_386.tga
-387 0 0 0 entity 40 a_hack_trap atdm:target_callscriptfunction 1 uw2_object_387.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_387.tga
-388 0 0 0 entity 69 a_special_effects_trap func_emitter 0 uw2_object_388.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_388.tga
-389 0 0 0 entity 42 a_change_terrain_trap func_static 1 uw2_object_389.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_389.tga
-390 0 0 0 entity 69 a_spelltrap func_emitter 0 uw2_object_390.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_390.tga
-391 0 0 0 entity 69 a_create_object_trap func_emitter 0 uw2_object_391.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_391.tga
-392 0 0 0 entity 69 a_door_trap func_emitter 0 uw2_object_392.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_392.tga
-393 0 0 0 entity 69 a_ward_trap func_emitter 0 uw2_object_393.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_393.tga
-394 0 0 0 entity 69 a_skill_trap func_emitter 0 uw2_object_394.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_394.tga
-395 0 0 0 entity 69 a_delete_object_trap func_emitter 0 uw2_object_395.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_395.tga
-396 0 0 0 entity 69 an_inventory_trap func_emitter 0 uw2_object_396.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_396.tga
-397 0 0 0 entity 69 a_set_variable_trap func_emitter 0 uw2_object_397.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_397.tga
-398 0 0 0 entity 69 a_check_variable_trap func_emitter 0 uw2_object_398.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_398.tga
-399 0 0 0 entity 69 a_null_trap func_emitter 0 uw2_object_399.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_399.tga
-400 0 0 0 model 53 a_text_string_trap models/darkmod/decorative/hourglass.ase 1 uw2_object_400.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_400.tga
-401 0 0 0 entity 69 an_experience_trap func_emitter 0 uw2_object_401.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_401.tga
-402 0 0 0 entity 69 a_jump_trap func_emitter 0 uw2_object_402.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_402.tga
-403 0 0 0 entity 69 a_change_from_trap func_emitter 0 uw2_object_403.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_403.tga
-404 0 0 0 entity 69 a_change_to_trap func_emitter 0 uw2_object_404.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_404.tga
-405 0 0 0 entity 69 an_oscillator_trap func_emitter 0 uw2_object_405.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_405.tga
-406 0 0 0 entity 69 a_proximity_trap func_emitter 0 uw2_object_406.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_406.tga
-407 0 0 0 entity 69 a_pit_trap func_emitter 0 uw2_object_407.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_407.tga
-408 0 0 0 entity 69 a_bridge_trap func_emitter 0 uw2_object_408.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_408.tga
-409 0 0 0 entity 69 unknown func_emitter 0 uw2_object_409.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_409.tga
-410 0 0 0 entity 69 unknown func_emitter 0 uw2_object_410.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_410.tga
-411 0 0 0 entity 69 unknown func_emitter 0 uw2_object_411.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_411.tga
-412 0 0 0 entity 69 unknown func_emitter 0 uw2_object_412.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_412.tga
-413 0 0 0 entity 69 unknown func_emitter 0 uw2_object_413.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_413.tga
-414 0 0 0 entity 69 a_flam_rune func_emitter 0 uw2_object_414.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_414.tga
-415 0 0 0 entity 69 a_tym_rune func_emitter 0 uw2_object_415.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_415.tga
-416 0 0 0 entity 54 a_move_trigger trigger_multiple 1 uw2_object_416.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_416.tga
-417 0 0 0 entity 69 a_pick_up_trigger func_emitter 0 uw2_object_417.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_417.tga
-418 0 0 0 model 56 a_use_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_418.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_418.tga
-419 0 0 0 model 57 a_look_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_419.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_419.tga
-420 0 0 0 entity 69 a_pressure_trigger func_emitter 0 uw2_object_420.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_420.tga
-421 0 0 0 entity 69 a_pressure_release_trigger func_emitter 0 uw2_object_421.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_421.tga
-422 0 0 0 entity 54 an_enter_trigger trigger_multiple 1 uw2_object_422.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_422.tga
-423 0 0 0 entity 69 an_exit_trigger func_emitter 0 uw2_object_423.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_423.tga
-424 0 0 0 entity 60 an_unlock_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_424.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_424.tga
-425 0 0 0 entity 69 a_timer_trigger func_emitter 0 uw2_object_425.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_425.tga
-426 0 0 0 entity 59 an_open_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_426.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_426.tga
-427 0 0 0 entity 69 a_close_trigger func_emitter 0 uw2_object_427.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_427.tga
-428 0 0 0 entity 69 a_scheduled_trigger func_emitter 0 uw2_object_428.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_428.tga
-429 0 0 0 entity 69 unknown func_emitter 0 uw2_object_429.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_429.tga
-430 0 0 0 entity 69 unknown func_emitter 0 uw2_object_430.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_430.tga
-431 0 0 0 entity 69 unknown func_emitter 0 uw2_object_431.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_431.tga
-432 0 0 0 entity 69 a_move_trigger func_emitter 0 uw2_object_432.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_432.tga
-433 0 0 0 entity 69 a_pick_up_trigger func_emitter 0 uw2_object_433.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_433.tga
-434 0 0 0 entity 69 a_use_trigger func_emitter 0 uw2_object_434.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_434.tga
-435 0 0 0 entity 69 a_look_trigger func_emitter 0 uw2_object_435.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_435.tga
-436 0 0 0 entity 69 a_pressure_trigger func_emitter 0 uw2_object_436.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_436.tga
-437 0 0 0 entity 69 a_pressure_release_trigger func_emitter 0 uw2_object_437.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_437.tga
-438 0 0 0 entity 69 an_enter_trigger func_emitter 0 uw2_object_438.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_438.tga
-439 0 0 0 entity 69 an_exit_trigger func_emitter 0 uw2_object_439.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_439.tga
-440 0 0 0 entity 69 an_unlock_trigger func_emitter 0 uw2_object_440.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_440.tga
-441 0 0 0 entity 69 a_timer_trigger func_emitter 0 uw2_object_441.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_441.tga
-442 0 0 0 entity 69 an_open_trigger func_emitter 0 uw2_object_442.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_442.tga
-443 0 0 0 entity 69 a_close_trigger func_emitter 0 uw2_object_443.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_443.tga
-444 0 0 0 entity 69 a_scheduled_trigger func_emitter 0 uw2_object_444.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_444.tga
-445 0 0 0 entity 69 unknown func_emitter 0 uw2_object_445.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_445.tga
-446 0 0 0 entity 69 unknown func_emitter 0 uw2_object_446.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_446.tga
-447 0 0 0 entity 69 unknown func_emitter 0 uw2_object_447.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_447.tga
-448 0 0 0 entity 69 some_blood func_emitter 0 uw2_object_448.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_448.tga
-449 0 0 0 entity 69 a_mist_cloud func_emitter 0 uw2_object_449.prt 0 sound models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_449.tga
-450 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_450.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_450.tga
-451 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_451.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_451.tga
-452 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_452.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_452.tga
-453 0 0 0 entity 69 lightning func_emitter 0 uw2_object_453.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_453.tga
-454 0 0 0 entity 69 a_splash&splashes func_emitter 0 uw2_object_454.prt 0 sound models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_454.tga
-455 0 0 0 entity 69 some_spacey_twinkles func_emitter 0 uw2_object_455.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_455.tga
-456 0 0 0 entity 69 some_smoke func_emitter 0 uw2_object_456.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_456.tga
-457 0 0 0 entity 69 a_fountain func_emitter 0 uw2_object_457.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_457.tga
-458 0 0 0 entity 69 some_frost func_emitter 0 uw2_object_458.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_458.tga
-459 0 0 0 entity 69 a_flash func_emitter 0 uw2_object_459.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_459.tga
-460 0 0 0 entity 69 lightning func_emitter 0 uw2_object_460.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_460.tga
-461 0 0 0 entity 69 a_wisp func_emitter 0 uw2_object_461.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_461.tga
-462 0 0 0 entity 69 a_vapor_trail func_emitter 0 uw2_object_462.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_462.tga
-463 0 0 0 ignore 18 a_moving_door models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_463.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_463.tga
+0 0 0 0 entity 69 a_hand_axe func_emitter 0 uw2_object_000.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_000.tga S T U UW2/Sprites/Objects/OBJECTS_000 W x Y 0 1 1
+1 0 0 0 entity 69 a_battle_axe func_emitter 0 uw2_object_001.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_001.tga S T U UW2/Sprites/Objects/OBJECTS_001 W x Y 0 1 2
+2 0 0 0 entity 69 an_axe func_emitter 0 uw2_object_002.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_002.tga S T U UW2/Sprites/Objects/OBJECTS_002 W x Y 0 1 3
+3 0 0 0 entity 69 a_dagger func_emitter 0 uw2_object_003.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_003.tga S T U UW2/Sprites/Objects/OBJECTS_003 W x Y 0 1 4
+4 0 0 0 entity 69 a_shortsword func_emitter 0 uw2_object_004.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_004.tga S T U UW2/Sprites/Objects/OBJECTS_004 W x Y 0 1 5
+5 0 0 0 entity 69 a_longsword func_emitter 0 uw2_object_005.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_005.tga S T U UW2/Sprites/Objects/OBJECTS_005 W x Y 0 1 6
+6 0 0 0 entity 69 a_broadsword func_emitter 0 uw2_object_006.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_006.tga S T U UW2/Sprites/Objects/OBJECTS_006 W x Y 0 1 7
+7 0 0 0 entity 69 a_cudgel func_emitter 0 uw2_object_007.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_007.tga S T U UW2/Sprites/Objects/OBJECTS_007 W x Y 0 1 8
+8 0 0 0 entity 69 a_light_mace func_emitter 0 uw2_object_008.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_008.tga S T U UW2/Sprites/Objects/OBJECTS_008 W x Y 0 1 9
+9 0 0 0 entity 69 a_mace func_emitter 0 uw2_object_009.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_009.tga S T U UW2/Sprites/Objects/OBJECTS_009 W x Y 0 1 10
+10 0 0 0 entity 69 a_jewelled_dagger func_emitter 0 uw2_object_010.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_010.tga S T U UW2/Sprites/Objects/OBJECTS_010 W x Y 0 1 11
+11 0 0 0 entity 69 a_jeweled_axe func_emitter 0 uw2_object_011.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_011.tga S T U UW2/Sprites/Objects/OBJECTS_011 W x Y 0 1 12
+12 0 0 0 entity 69 a_black_sword func_emitter 0 uw2_object_012.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_012.tga S T U UW2/Sprites/Objects/OBJECTS_012 W x Y 0 1 13
+13 0 0 0 entity 69 a_jeweled_sword func_emitter 0 uw2_object_013.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_013.tga S T U UW2/Sprites/Objects/OBJECTS_013 W x Y 0 1 14
+14 0 0 0 entity 69 a_jeweled_mace func_emitter 0 uw2_object_014.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_014.tga S T U UW2/Sprites/Objects/OBJECTS_014 W x Y 0 1 15
+15 0 0 0 entity 69 a_fist func_emitter 0 uw2_object_015.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_015.tga S T U UW2/Sprites/Objects/OBJECTS_015 W x Y 0 1 16
+16 0 0 0 entity 69 a_sling_stone func_emitter 0 uw2_object_016.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_016.tga S T U UW2/Sprites/Objects/OBJECTS_016 W x Y 0 1 17
+17 0 0 0 entity 69 a_crossbow_bolt func_emitter 0 uw2_object_017.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_017.tga S T U UW2/Sprites/Objects/OBJECTS_017 W x Y 0 1 18
+18 0 0 0 entity 69 an_arrow func_emitter 0 uw2_object_018.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_018.tga S T U UW2/Sprites/Objects/OBJECTS_018 W x Y 0 1 19
+19 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_019.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_019.tga S T U UW2/Sprites/Objects/OBJECTS_019 W x Y 0 1 20
+20 0 0 0 entity 69 a_fireball func_emitter 0 uw2_object_020.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_020.tga S T U UW2/Sprites/Objects/OBJECTS_020 W x Y 0 1 21
+21 0 0 0 entity 69 a_lightning_bolt func_emitter 0 uw2_object_021.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_021.tga S T U UW2/Sprites/Objects/OBJECTS_021 W x Y 0 1 22
+22 0 0 0 entity 69 acid func_emitter 0 uw2_object_022.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_022.tga S T U UW2/Sprites/Objects/OBJECTS_022 W x Y 0 1 23
+23 0 0 0 entity 69 a_magic_arrow func_emitter 0 uw2_object_023.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_023.tga S T U UW2/Sprites/Objects/OBJECTS_023 W x Y 0 1 24
+24 0 0 0 entity 69 a_sling func_emitter 0 uw2_object_024.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_024.tga S T U UW2/Sprites/Objects/OBJECTS_024 W x Y 0 1 25
+25 0 0 0 entity 69 a_bow func_emitter 0 uw2_object_025.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_025.tga S T U UW2/Sprites/Objects/OBJECTS_025 W x Y 0 1 26
+26 0 0 0 entity 69 a_crossbow func_emitter 0 uw2_object_026.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_026.tga S T U UW2/Sprites/Objects/OBJECTS_026 W x Y 0 1 27
+27 0 0 0 entity 69 a_homing_dart func_emitter 0 uw2_object_027.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_027.tga S T U UW2/Sprites/Objects/OBJECTS_027 W x Y 0 1 28
+28 0 0 0 entity 69 a_snowball func_emitter 0 uw2_object_028.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_028.tga S T U UW2/Sprites/Objects/OBJECTS_028 W x Y 0 1 29
+29 0 0 0 entity 69 a_fireball func_emitter 0 uw2_object_029.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_029.tga S T U UW2/Sprites/Objects/OBJECTS_029 W x Y 0 1 30
+30 0 0 0 entity 69 a_satellite func_emitter 0 uw2_object_030.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_030.tga S T U UW2/Sprites/Objects/OBJECTS_030 W x Y 0 1 31
+31 0 0 0 entity 69 a_jeweled_bow func_emitter 0 uw2_object_031.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_031.tga S T U UW2/Sprites/Objects/OBJECTS_031 W x Y 0 1 32
+32 0 0 0 entity 69 a_leather_vest func_emitter 0 uw2_object_032.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_032.tga S T U UW2/Sprites/Objects/OBJECTS_032 W x Y 0 1 33
+33 0 0 0 entity 69 a_mail_shirt func_emitter 0 uw2_object_033.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_033.tga S T U UW2/Sprites/Objects/OBJECTS_033 W x Y 0 1 34
+34 0 0 0 entity 69 a_breastplate func_emitter 0 uw2_object_034.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_034.tga S T U UW2/Sprites/Objects/OBJECTS_034 W x Y 0 1 35
+35 0 0 0 entity 69 leather_leggings&pairs_of_leather_leggings func_emitter 0 uw2_object_035.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_035.tga S T U UW2/Sprites/Objects/OBJECTS_035 W x Y 0 1 36
+36 0 0 0 entity 69 mail_leggings&pairs_of_mail_leggings func_emitter 0 uw2_object_036.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_036.tga S T U UW2/Sprites/Objects/OBJECTS_036 W x Y 0 1 37
+37 0 0 0 entity 69 plate_leggings&pairs_of_plate_leggings func_emitter 0 uw2_object_037.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_037.tga S T U UW2/Sprites/Objects/OBJECTS_037 W x Y 0 1 38
+38 0 0 0 entity 69 leather_gloves&pairs_of_leather_gloves func_emitter 0 uw2_object_038.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_038.tga S T U UW2/Sprites/Objects/OBJECTS_038 W x Y 0 1 39
+39 0 0 0 entity 69 chain_gauntlets&pairs_of_chain_gauntlets func_emitter 0 uw2_object_039.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_039.tga S T U UW2/Sprites/Objects/OBJECTS_039 W x Y 0 1 40
+40 0 0 0 entity 69 plate_gauntlets&pairs_of_plate_gauntlets func_emitter 0 uw2_object_040.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_040.tga S T U UW2/Sprites/Objects/OBJECTS_040 W x Y 0 1 41
+41 0 0 0 entity 69 leather_boots&pairs_of_leather_boots func_emitter 0 uw2_object_041.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_041.tga S T U UW2/Sprites/Objects/OBJECTS_041 W x Y 0 1 42
+42 0 0 0 entity 69 chain_boots&pairs_of_chain_boots func_emitter 0 uw2_object_042.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_042.tga S T U UW2/Sprites/Objects/OBJECTS_042 W x Y 0 1 43
+43 0 0 0 entity 69 plate_boots&pairs_of_plate_boots func_emitter 0 uw2_object_043.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_043.tga S T U UW2/Sprites/Objects/OBJECTS_043 W x Y 0 1 44
+44 0 0 0 entity 69 a_leather_cap func_emitter 0 uw2_object_044.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_044.tga S T U UW2/Sprites/Objects/OBJECTS_044 W x Y 0 1 45
+45 0 0 0 entity 69 a_chain_cowl func_emitter 0 uw2_object_045.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_045.tga S T U UW2/Sprites/Objects/OBJECTS_045 W x Y 0 1 46
+46 0 0 0 entity 69 a_helmet func_emitter 0 uw2_object_046.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_046.tga S T U UW2/Sprites/Objects/OBJECTS_046 W x Y 0 1 47
+47 0 0 0 entity 69 a_pair_of_swamp_boots&pairs_of_swamp_boots func_emitter 0 uw2_object_047.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_047.tga S T U UW2/Sprites/Objects/OBJECTS_047 W x Y 0 1 48
+48 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_048.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_048.tga S T U UW2/Sprites/Objects/OBJECTS_048 W x Y 0 1 49
+49 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_049.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_049.tga S T U UW2/Sprites/Objects/OBJECTS_049 W x Y 0 1 50
+50 0 0 0 entity 69 a_crown func_emitter 0 uw2_object_050.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_050.tga S T U UW2/Sprites/Objects/OBJECTS_050 W x Y 0 1 51
+51 0 0 0 entity 69 fraznium_gauntlets&pairs_of_fraznium_gauntlets func_emitter 0 uw2_object_051.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_051.tga S T U UW2/Sprites/Objects/OBJECTS_051 W x Y 0 1 52
+52 0 0 0 entity 69 a_fraznium_circlet func_emitter 0 uw2_object_052.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_052.tga S T U UW2/Sprites/Objects/OBJECTS_052 W x Y 0 1 53
+53 0 0 0 entity 69 a_Guardian_signet_ring func_emitter 0 uw2_object_053.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_053.tga S T U UW2/Sprites/Objects/OBJECTS_053 W x Y 0 1 54
+54 0 0 0 entity 69 a_strange_artifact func_emitter 0 uw2_object_054.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_054.tga S T U UW2/Sprites/Objects/OBJECTS_054 W x Y 0 1 55
+55 0 0 0 entity 69 a_copper_ring func_emitter 0 uw2_object_055.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_055.tga S T U UW2/Sprites/Objects/OBJECTS_055 W x Y 0 1 56
+56 0 0 0 entity 69 a_gold_ring func_emitter 0 uw2_object_056.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_056.tga S T U UW2/Sprites/Objects/OBJECTS_056 W x Y 0 1 57
+57 0 0 0 entity 69 a_silver_ring func_emitter 0 uw2_object_057.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_057.tga S T U UW2/Sprites/Objects/OBJECTS_057 W x Y 0 1 58
+58 0 0 0 entity 69 a_red_ring func_emitter 0 uw2_object_058.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_058.tga S T U UW2/Sprites/Objects/OBJECTS_058 W x Y 0 1 59
+59 0 0 0 entity 69 a_tower_shield func_emitter 0 uw2_object_059.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_059.tga S T U UW2/Sprites/Objects/OBJECTS_059 W x Y 0 1 60
+60 0 0 0 entity 69 a_wooden_shield func_emitter 0 uw2_object_060.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_060.tga S T U UW2/Sprites/Objects/OBJECTS_060 W x Y 0 1 61
+61 0 0 0 entity 69 a_small_shield func_emitter 0 uw2_object_061.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_061.tga S T U UW2/Sprites/Objects/OBJECTS_061 W x Y 0 1 62
+62 0 0 0 entity 69 a_buckler func_emitter 0 uw2_object_062.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_062.tga S T U UW2/Sprites/Objects/OBJECTS_062 W x Y 0 1 63
+63 0 0 0 entity 69 a_jeweled_shield func_emitter 0 uw2_object_063.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_063.tga S T U UW2/Sprites/Objects/OBJECTS_063 W x Y 0 1 64
+64 0 0 0 entity 0 a_rotworm atdm:ai_spider 0 uw2_object_064.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_064.tga S T U UW2/Sprites/Objects/OBJECTS_064 W x Y 0 1 65
+65 0 0 0 entity 0 a_cave_bat atdm:ai_spider 0 uw2_object_065.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_065.tga S T U UW2/Sprites/Objects/OBJECTS_065 W x Y 0 1 66
+66 0 0 0 entity 0 a_vampire_bat atdm:ai_spider 0 uw2_object_066.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_066.tga S T U UW2/Sprites/Objects/OBJECTS_066 W x Y 0 1 67
+67 0 0 0 entity 0 a_giant_tan_rat atdm:ai_spider 0 uw2_object_067.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_067.tga S T U UW2/Sprites/Objects/OBJECTS_067 W x Y 0 1 68
+68 0 0 0 entity 0 a_giant_grey_rat atdm:ai_spider 0 uw2_object_068.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_068.tga S T U UW2/Sprites/Objects/OBJECTS_068 W x Y 0 1 69
+69 0 0 0 entity 0 a_flesh_slug atdm:ai_spider 0 uw2_object_069.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_069.tga S T U UW2/Sprites/Objects/OBJECTS_069 W x Y 0 1 70
+70 0 0 0 entity 0 an_acid_slug atdm:ai_spider 0 uw2_object_070.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_070.tga S T U UW2/Sprites/Objects/OBJECTS_070 W x Y 0 1 71
+71 0 0 0 entity 0 a_mongbat atdm:ai_spider 0 uw2_object_071.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_071.tga S T U UW2/Sprites/Objects/OBJECTS_071 W x Y 0 1 72
+72 0 0 0 entity 0 a_skeleton atdm:ai_undead_skeleton_armed 0 uw2_object_072.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_072.tga S T U UW2/Sprites/Objects/OBJECTS_072 W x Y 0 1 73
+73 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw2_object_073.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_073.tga S T U UW2/Sprites/Objects/OBJECTS_073 W x Y 0 1 74
+74 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw2_object_074.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_074.tga S T U UW2/Sprites/Objects/OBJECTS_074 W x Y 0 1 75
+75 0 0 0 entity 0 an_imp atdm:ai_spider 0 uw2_object_075.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_075.tga S T U UW2/Sprites/Objects/OBJECTS_075 W x Y 0 1 76
+76 0 0 0 entity 0 a_giant_spider atdm:ai_spider 0 uw2_object_076.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_076.tga S T U UW2/Sprites/Objects/OBJECTS_076 W x Y 0 1 77
+77 0 0 0 entity 0 a_lurker atdm:ai_spider 0 uw2_object_077.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_077.tga S T U UW2/Sprites/Objects/OBJECTS_077 W x Y 0 1 78
+78 0 0 0 entity 0 a_bloodworm atdm:ai_spider 0 uw2_object_078.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_078.tga S T U UW2/Sprites/Objects/OBJECTS_078 W x Y 0 1 79
+79 0 0 0 entity 0 a_stickman atdm:ai_spider 0 uw2_object_079.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_079.tga S T U UW2/Sprites/Objects/OBJECTS_079 W x Y 0 1 80
+80 0 0 0 entity 0 a_white_worm atdm:ai_spider 0 uw2_object_080.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_080.tga S T U UW2/Sprites/Objects/OBJECTS_080 W x Y 0 1 81
+81 0 0 0 entity 0 a_snow_cat atdm:ai_spider 0 uw2_object_081.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_081.tga S T U UW2/Sprites/Objects/OBJECTS_081 W x Y 0 1 82
+82 0 0 0 entity 0 a_yeti&yeti atdm:ai_spider 0 uw2_object_082.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_082.tga S T U UW2/Sprites/Objects/OBJECTS_082 W x Y 0 1 83
+83 0 0 0 entity 0 a_headless&headlesses atdm:ai_spider 0 uw2_object_083.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_083.tga S T U UW2/Sprites/Objects/OBJECTS_083 W x Y 0 1 84
+84 0 0 0 entity 0 a_Talorid atdm:ai_spider 0 uw2_object_084.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_084.tga S T U UW2/Sprites/Objects/OBJECTS_084 W x Y 0 1 85
+85 0 0 0 entity 0 a_ghost atdm:ai_spider 0 uw2_object_085.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_085.tga S T U UW2/Sprites/Objects/OBJECTS_085 W x Y 0 1 86
+86 0 0 0 entity 0 a_wolf_spider atdm:ai_spider_huge 0 uw2_object_086.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_086.tga S T U UW2/Sprites/Objects/OBJECTS_086 W x Y 0 1 87
+87 0 0 0 entity 0 a_trilkhun&trilkhai atdm:ai_spider 0 uw2_object_087.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_087.tga S T U UW2/Sprites/Objects/OBJECTS_087 W x Y 0 1 88
+88 0 0 0 entity 0 a_brain_creature atdm:ai_spider 0 uw2_object_088.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_088.tga S T U UW2/Sprites/Objects/OBJECTS_088 W x Y 0 1 89
+89 0 0 0 entity 0 a_deep_lurker atdm:ai_spider 0 uw2_object_089.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_089.tga S T U UW2/Sprites/Objects/OBJECTS_089 W x Y 0 1 90
+90 0 0 0 entity 0 a_dread_spider atdm:ai_spider 0 uw2_object_090.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_090.tga S T U UW2/Sprites/Objects/OBJECTS_090 W x Y 0 1 91
+91 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_091.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_091.tga S T U UW2/Sprites/Objects/OBJECTS_091 W x Y 0 1 92
+92 0 0 0 entity 0 a_great_troll atdm:ai_spider 0 uw2_object_092.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_092.tga S T U UW2/Sprites/Objects/OBJECTS_092 W x Y 0 1 93
+93 0 0 0 entity 0 a_spectre atdm:ai_spider 0 uw2_object_093.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_093.tga S T U UW2/Sprites/Objects/OBJECTS_093 W x Y 0 1 94
+94 0 0 0 entity 0 a_hordling atdm:ai_spider 0 uw2_object_094.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_094.tga S T U UW2/Sprites/Objects/OBJECTS_094 W x Y 0 1 95
+95 0 0 0 entity 0 an_earth_golem atdm:ai_spider 0 uw2_object_095.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_095.tga S T U UW2/Sprites/Objects/OBJECTS_095 W x Y 0 1 96
+96 0 0 0 entity 0 a_fire_elemental atdm:ai_spider 0 uw2_object_096.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_096.tga S T U UW2/Sprites/Objects/OBJECTS_096 W x Y 0 1 97
+97 0 0 0 entity 0 an_ice_golem atdm:ai_spider 0 uw2_object_097.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_097.tga S T U UW2/Sprites/Objects/OBJECTS_097 W x Y 0 1 98
+98 0 0 0 entity 0 a_dire_ghost atdm:ai_spider 0 uw2_object_098.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_098.tga S T U UW2/Sprites/Objects/OBJECTS_098 W x Y 0 1 99
+99 0 0 0 entity 0 a_reaper atdm:ai_spider 0 uw2_object_099.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_099.tga S T U UW2/Sprites/Objects/OBJECTS_099 W x Y 0 1 100
+100 0 0 0 entity 0 a_despoiler atdm:ai_spider 0 uw2_object_100.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_100.tga S T U UW2/Sprites/Objects/OBJECTS_100 W x Y 0 1 101
+101 0 0 0 entity 0 a_metal_golem atdm:ai_spider 0 uw2_object_101.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_101.tga S T U UW2/Sprites/Objects/OBJECTS_101 W x Y 0 1 102
+102 0 0 0 entity 0 a_haunt atdm:ai_spider 0 uw2_object_102.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_102.tga S T U UW2/Sprites/Objects/OBJECTS_102 W x Y 0 1 103
+103 0 0 0 entity 0 a_dire_reaper atdm:ai_spider 0 uw2_object_103.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_103.tga S T U UW2/Sprites/Objects/OBJECTS_103 W x Y 0 1 104
+104 0 0 0 entity 0 a_destroyer atdm:ai_spider 0 uw2_object_104.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_104.tga S T U UW2/Sprites/Objects/OBJECTS_104 W x Y 0 1 105
+105 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_105.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_105.tga S T U UW2/Sprites/Objects/OBJECTS_105 W x Y 0 1 106
+106 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_106.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_106.tga S T U UW2/Sprites/Objects/OBJECTS_106 W x Y 0 1 107
+107 0 0 0 entity 0 a_liche atdm:ai_spider 0 uw2_object_107.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_107.tga S T U UW2/Sprites/Objects/OBJECTS_107 W x Y 0 1 108
+108 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_108.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_108.tga S T U UW2/Sprites/Objects/OBJECTS_108 W x Y 0 1 109
+109 0 0 0 entity 0 a_vorz atdm:ai_spider 0 uw2_object_109.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_109.tga S T U UW2/Sprites/Objects/OBJECTS_109 W x Y 0 1 110
+110 0 0 0 entity 0 a_fighter atdm:ai_guard_archer_01 0 uw2_object_110.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_110.tga S T U UW2/Sprites/Objects/OBJECTS_110 W x Y 0 1 111
+111 0 0 0 entity 0 a_gazer atdm:ai_spider 0 uw2_object_111.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_111.tga S T U UW2/Sprites/Objects/OBJECTS_111 W x Y 0 1 112
+112 0 0 0 entity 0 a_human atdm:ai_townsfolk_commoner 0 uw2_object_112.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_112.tga S T U UW2/Sprites/Objects/OBJECTS_112 W x Y 0 1 113
+113 0 0 0 entity 0 a_human atdm:ai_townsfolk_wench 0 uw2_object_113.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_113.tga S T U UW2/Sprites/Objects/OBJECTS_113 W x Y 0 1 114
+114 0 0 0 entity 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_114.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_114.tga S T U UW2/Sprites/Objects/OBJECTS_114 W x Y 0 1 115
+115 0 0 0 entity 0 a_human atdm:ai_noblewoman01 0 uw2_object_115.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_115.tga S T U UW2/Sprites/Objects/OBJECTS_115 W x Y 0 1 116
+116 0 0 0 entity 0 a_human atdm:ai_noblewoman01 0 uw2_object_116.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_116.tga S T U UW2/Sprites/Objects/OBJECTS_116 W x Y 0 1 117
+117 0 0 0 entity 0 a_human atdm:ai_mage01 0 uw2_object_117.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_117.tga S T U UW2/Sprites/Objects/OBJECTS_117 W x Y 0 1 118
+118 0 0 0 entity 0 a_human atdm:ai_spider 0 uw2_object_118.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_118.tga S T U UW2/Sprites/Objects/OBJECTS_118 W x Y 0 1 119
+119 0 0 0 entity 0 a_human atdm:ai_archmage01 0 uw2_object_119.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_119.tga S T U UW2/Sprites/Objects/OBJECTS_119 W x Y 0 1 120
+120 0 0 0 entity 0 a_human atdm:ai_guard_female_rogue 0 uw2_object_120.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_120.tga S T U UW2/Sprites/Objects/OBJECTS_120 W x Y 0 1 121
+121 0 0 0 entity 0 a_human atdm:ai_proguard 0 uw2_object_121.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_121.tga S T U UW2/Sprites/Objects/OBJECTS_121 W x Y 0 1 122
+122 0 0 0 entity 0 a_human atdm:ai_nobleman 0 uw2_object_122.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_122.tga S T U UW2/Sprites/Objects/OBJECTS_122 W x Y 0 1 123
+123 0 0 0 entity 0 a_human atdm:ai_guard_female_rogue 0 uw2_object_123.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_123.tga S T U UW2/Sprites/Objects/OBJECTS_123 W x Y 0 1 124
+124 0 0 0 model 18 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_124.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_124.tga S T U UW2/Sprites/Objects/OBJECTS_124 W x Y 0 1 125
+125 0 0 0 model 18 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_125.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_125.tga S T U UW2/Sprites/Objects/OBJECTS_125 W x Y 0 1 126
+126 0 0 0 entity 0 a_human atdm:ai_townsfolk_wench 0 uw2_object_126.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_126.tga S T U UW2/Sprites/Objects/OBJECTS_126 W x Y 0 1 127
+127 0 0 0 entity 0 an_adventurer atdm:ai_spider 0 uw2_object_127.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_127.tga S T U UW2/Sprites/Objects/OBJECTS_127 W x Y 0 1 128
+128 0 0 0 entity 19 a_sack models/darkmod/uw1/cm.ase 1 uw2_object_128.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_128.tga S T U UW2/Sprites/Objects/OBJECTS_128 W x Y 0 1 129
+129 0 0 0 entity 19 an_open_sack models/darkmod/uw1/cm.ase 1 uw2_object_129.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_129.tga S T U UW2/Sprites/Objects/OBJECTS_129 W x Y 0 1 130
+130 0 0 0 entity 19 a_pack models/darkmod/uw1/cm.ase 1 uw2_object_130.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_130.tga S T U UW2/Sprites/Objects/OBJECTS_130 W x Y 0 1 131
+131 0 0 0 entity 19 an_open_pack models/darkmod/uw1/cm.ase 1 uw2_object_131.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_131.tga S T U UW2/Sprites/Objects/OBJECTS_131 W x Y 0 1 132
+132 0 0 0 entity 19 a_box&boxes models/darkmod/uw1/cm.ase 1 uw2_object_132.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_132.tga S T U UW2/Sprites/Objects/OBJECTS_132 W x Y 0 1 133
+133 0 0 0 entity 19 an_open_box&open_boxes models/darkmod/uw1/cm.ase 1 uw2_object_133.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_133.tga S T U UW2/Sprites/Objects/OBJECTS_133 W x Y 0 1 134
+134 0 0 0 entity 19 a_pouch&pouches models/darkmod/uw1/cm.ase 1 uw2_object_134.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_134.tga S T U UW2/Sprites/Objects/OBJECTS_134 W x Y 0 1 135
+135 0 0 0 entity 19 an_open_pouch&pouches models/darkmod/uw1/cm.ase 1 uw2_object_135.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_135.tga S T U UW2/Sprites/Objects/OBJECTS_135 W x Y 0 1 136
+136 0 0 0 entity 19 a_map_case models/darkmod/uw1/cm.ase 1 uw2_object_136.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_136.tga S T U UW2/Sprites/Objects/OBJECTS_136 W x Y 0 1 137
+137 0 0 0 entity 19 an_open_map_case models/darkmod/uw1/cm.ase 1 uw2_object_137.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_137.tga S T U UW2/Sprites/Objects/OBJECTS_137 W x Y 0 1 138
+138 0 0 0 entity 19 a_gold_coffer models/darkmod/uw1/cm.ase 1 uw2_object_138.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_138.tga S T U UW2/Sprites/Objects/OBJECTS_138 W x Y 0 1 139
+139 0 0 0 entity 19 an_open_gold_coffer models/darkmod/uw1/cm.ase 1 uw2_object_139.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_139.tga S T U UW2/Sprites/Objects/OBJECTS_139 W x Y 0 1 140
+140 0 0 0 entity 19 a_key_ring models/darkmod/uw1/cm.ase 1 uw2_object_140.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_140.tga S T U UW2/Sprites/Objects/OBJECTS_140 W x Y 0 1 141
+141 0 0 0 entity 19 a_quiver models/darkmod/uw1/cm.ase 1 uw2_object_141.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_141.tga S T U UW2/Sprites/Objects/OBJECTS_141 W x Y 0 1 142
+142 0 0 0 entity 19 a_bowl models/darkmod/uw1/cm.ase 1 uw2_object_142.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_142.tga S T U UW2/Sprites/Objects/OBJECTS_142 W x Y 0 1 143
+143 0 0 0 entity 69 a_rune_bag func_emitter 0 uw2_object_143.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_143.tga S T U UW2/Sprites/Objects/OBJECTS_143 W x Y 0 1 144
+144 0 0 0 entity 69 a_lantern func_emitter 0 uw2_object_144.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_144.tga S T U UW2/Sprites/Objects/OBJECTS_144 W x Y 0 1 145
+145 0 0 0 entity 69 a_torch&torches func_emitter 0 uw2_object_145.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_145.tga S T U UW2/Sprites/Objects/OBJECTS_145 W x Y 0 1 146
+146 0 0 0 entity 69 a_candle func_emitter 0 uw2_object_146.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_146.tga S T U UW2/Sprites/Objects/OBJECTS_146 W x Y 0 1 147
+147 0 0 0 entity 69 a_light-sphere func_emitter 0 uw2_object_147.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_147.tga S T U UW2/Sprites/Objects/OBJECTS_147 W x Y 0 1 148
+148 0 0 0 entity 69 a_lit_lantern func_emitter 0 uw2_object_148.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_148.tga S T U UW2/Sprites/Objects/OBJECTS_148 W x Y 0 1 149
+149 0 0 0 entity 69 a_lit_torch func_emitter 0 uw2_object_149.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_149.tga S T U UW2/Sprites/Objects/OBJECTS_149 W x Y 0 1 150
+150 0 0 0 entity 69 a_lit_candle func_emitter 0 uw2_object_150.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_150.tga S T U UW2/Sprites/Objects/OBJECTS_150 W x Y 0 1 151
+151 0 0 0 entity 69 a_lit_light-sphere func_emitter 0 uw2_object_151.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_151.tga S T U UW2/Sprites/Objects/OBJECTS_151 W x Y 0 1 152
+152 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_152.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_152.tga S T U UW2/Sprites/Objects/OBJECTS_152 W x Y 0 1 153
+153 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_153.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_153.tga S T U UW2/Sprites/Objects/OBJECTS_153 W x Y 0 1 154
+154 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_154.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_154.tga S T U UW2/Sprites/Objects/OBJECTS_154 W x Y 0 1 155
+155 0 0 0 entity 69 a_wand func_emitter 0 uw2_object_155.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_155.tga S T U UW2/Sprites/Objects/OBJECTS_155 W x Y 0 1 156
+156 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_156.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_156.tga S T U UW2/Sprites/Objects/OBJECTS_156 W x Y 0 1 157
+157 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_157.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_157.tga S T U UW2/Sprites/Objects/OBJECTS_157 W x Y 0 1 158
+158 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_158.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_158.tga S T U UW2/Sprites/Objects/OBJECTS_158 W x Y 0 1 159
+159 0 0 0 entity 69 a_broken_wand func_emitter 0 uw2_object_159.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_159.tga S T U UW2/Sprites/Objects/OBJECTS_159 W x Y 0 1 160
+160 0 0 0 entity 69 a_coin func_emitter 0 uw2_object_160.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_160.tga S T U UW2/Sprites/Objects/OBJECTS_160 W x Y 0 1 161
+161 0 0 0 entity 69 a_storage_crystal func_emitter 0 uw2_object_161.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_161.tga S T U UW2/Sprites/Objects/OBJECTS_161 W x Y 0 1 162
+162 0 0 0 entity 69 a_ruby&rubies func_emitter 0 uw2_object_162.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_162.tga S T U UW2/Sprites/Objects/OBJECTS_162 W x Y 0 1 163
+163 0 0 0 entity 69 a_red_gem func_emitter 0 uw2_object_163.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_163.tga S T U UW2/Sprites/Objects/OBJECTS_163 W x Y 0 1 164
+164 0 0 0 entity 69 a_small_blue_gem func_emitter 0 uw2_object_164.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_164.tga S T U UW2/Sprites/Objects/OBJECTS_164 W x Y 0 1 165
+165 0 0 0 entity 69 a_large_blue_gem func_emitter 0 uw2_object_165.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_165.tga S T U UW2/Sprites/Objects/OBJECTS_165 W x Y 0 1 166
+166 0 0 0 entity 69 a_sapphire func_emitter 0 uw2_object_166.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_166.tga S T U UW2/Sprites/Objects/OBJECTS_166 W x Y 0 1 167
+167 0 0 0 entity 69 an_emerald func_emitter 0 uw2_object_167.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_167.tga S T U UW2/Sprites/Objects/OBJECTS_167 W x Y 0 1 168
+168 0 0 0 entity 69 a_black_pearl func_emitter 0 uw2_object_168.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_168.tga S T U UW2/Sprites/Objects/OBJECTS_168 W x Y 0 1 169
+169 0 0 0 entity 69 a_goblet func_emitter 0 uw2_object_169.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_169.tga S T U UW2/Sprites/Objects/OBJECTS_169 W x Y 0 1 170
+170 0 0 0 entity 69 a_sceptre func_emitter 0 uw2_object_170.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_170.tga S T U UW2/Sprites/Objects/OBJECTS_170 W x Y 0 1 171
+171 0 0 0 entity 69 a_black_stone func_emitter 0 uw2_object_171.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_171.tga S T U UW2/Sprites/Objects/OBJECTS_171 W x Y 0 1 172
+172 0 0 0 entity 69 a_white_stone func_emitter 0 uw2_object_172.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_172.tga S T U UW2/Sprites/Objects/OBJECTS_172 W x Y 0 1 173
+173 0 0 0 entity 69 a_grey_stone func_emitter 0 uw2_object_173.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_173.tga S T U UW2/Sprites/Objects/OBJECTS_173 W x Y 0 1 174
+174 0 0 0 entity 69 a_delgnigzator func_emitter 0 uw2_object_174.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_174.tga S T U UW2/Sprites/Objects/OBJECTS_174 W x Y 0 1 175
+175 0 0 0 entity 69 a_pocketwatch&pocketwatches func_emitter 0 uw2_object_175.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_175.tga S T U UW2/Sprites/Objects/OBJECTS_175 W x Y 0 1 176
+176 0 0 0 entity 69 a_piece_of_meat&pieces_of_meat func_emitter 0 uw2_object_176.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_176.tga S T U UW2/Sprites/Objects/OBJECTS_176 W x Y 0 1 177
+177 0 0 0 entity 69 a_piece_of_meat&pieces_of_meat func_emitter 0 uw2_object_177.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_177.tga S T U UW2/Sprites/Objects/OBJECTS_177 W x Y 0 1 178
+178 0 0 0 entity 69 a_piece_of_cheese&pieces_of_cheese func_emitter 0 uw2_object_178.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_178.tga S T U UW2/Sprites/Objects/OBJECTS_178 W x Y 0 1 179
+179 0 0 0 entity 69 an_apple func_emitter 0 uw2_object_179.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_179.tga S T U UW2/Sprites/Objects/OBJECTS_179 W x Y 0 1 180
+180 0 0 0 entity 69 an_ear_of_corn&ears_of_corn func_emitter 0 uw2_object_180.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_180.tga S T U UW2/Sprites/Objects/OBJECTS_180 W x Y 0 1 181
+181 0 0 0 entity 69 a_loaf_of_bread&loaves_of_bread func_emitter 0 uw2_object_181.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_181.tga S T U UW2/Sprites/Objects/OBJECTS_181 W x Y 0 1 182
+182 0 0 0 entity 69 a_fish&fish func_emitter 0 uw2_object_182.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_182.tga S T U UW2/Sprites/Objects/OBJECTS_182 W x Y 0 1 183
+183 0 0 0 entity 69 some_popcorn&bunches_of_popcorn func_emitter 0 uw2_object_183.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_183.tga S T U UW2/Sprites/Objects/OBJECTS_183 W x Y 0 1 184
+184 0 0 0 entity 69 a_pastry&pastries func_emitter 0 uw2_object_184.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_184.tga S T U UW2/Sprites/Objects/OBJECTS_184 W x Y 0 1 185
+185 0 0 0 entity 69 a_mushroom func_emitter 0 uw2_object_185.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_185.tga S T U UW2/Sprites/Objects/OBJECTS_185 W x Y 0 1 186
+186 0 0 0 entity 69 a_honeycomb func_emitter 0 uw2_object_186.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_186.tga S T U UW2/Sprites/Objects/OBJECTS_186 W x Y 0 1 187
+187 0 0 0 entity 69 a_bottle_of_ale&bottles_of_ale func_emitter 0 uw2_object_187.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_187.tga S T U UW2/Sprites/Objects/OBJECTS_187 W x Y 0 1 188
+188 0 0 0 entity 69 a_bottle_of_water&bottles_of_water func_emitter 0 uw2_object_188.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_188.tga S T U UW2/Sprites/Objects/OBJECTS_188 W x Y 0 1 189
+189 0 0 0 entity 69 a_bottle_of_wine&bottles_of_wine func_emitter 0 uw2_object_189.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_189.tga S T U UW2/Sprites/Objects/OBJECTS_189 W x Y 0 1 190
+190 0 0 0 entity 69 some_meat-on-a-stick&pieces_of_meat-on-a-stick func_emitter 0 uw2_object_190.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_190.tga S T U UW2/Sprites/Objects/OBJECTS_190 W x Y 0 1 191
+191 0 0 0 entity 69 a_nutritious_wafer func_emitter 0 uw2_object_191.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_191.tga S T U UW2/Sprites/Objects/OBJECTS_191 W x Y 0 1 192
+192 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_192.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_192.tga S T U UW2/Sprites/Objects/OBJECTS_192 W x Y 0 1 193
+193 0 0 0 entity 69 some_grass&bunches_of_grass func_emitter 0 uw2_object_193.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_193.tga S T U UW2/Sprites/Objects/OBJECTS_193 W x Y 0 1 194
+194 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_194.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_194.tga S T U UW2/Sprites/Objects/OBJECTS_194 W x Y 0 1 195
+195 0 0 0 entity 69 a_skull func_emitter 0 uw2_object_195.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_195.tga S T U UW2/Sprites/Objects/OBJECTS_195 W x Y 0 1 196
+196 0 0 0 entity 69 a_bone func_emitter 0 uw2_object_196.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_196.tga S T U UW2/Sprites/Objects/OBJECTS_196 W x Y 0 1 197
+197 0 0 0 entity 69 a_bone func_emitter 0 uw2_object_197.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_197.tga S T U UW2/Sprites/Objects/OBJECTS_197 W x Y 0 1 198
+198 0 0 0 entity 69 a_pile_of_bones&piles_of_bones func_emitter 0 uw2_object_198.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_198.tga S T U UW2/Sprites/Objects/OBJECTS_198 W x Y 0 1 199
+199 0 0 0 entity 69 a_broken_dagger func_emitter 0 uw2_object_199.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_199.tga S T U UW2/Sprites/Objects/OBJECTS_199 W x Y 0 1 200
+200 0 0 0 entity 69 a_broken_sword func_emitter 0 uw2_object_200.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_200.tga S T U UW2/Sprites/Objects/OBJECTS_200 W x Y 0 1 201
+201 0 0 0 entity 69 a_broken_axe func_emitter 0 uw2_object_201.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_201.tga S T U UW2/Sprites/Objects/OBJECTS_201 W x Y 0 1 202
+202 0 0 0 entity 69 a_broken_mace func_emitter 0 uw2_object_202.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_202.tga S T U UW2/Sprites/Objects/OBJECTS_202 W x Y 0 1 203
+203 0 0 0 entity 69 a_broken_shield func_emitter 0 uw2_object_203.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_203.tga S T U UW2/Sprites/Objects/OBJECTS_203 W x Y 0 1 204
+204 0 0 0 entity 69 a_piece_of_wood&pieces_of_wood func_emitter 0 uw2_object_204.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_204.tga S T U UW2/Sprites/Objects/OBJECTS_204 W x Y 0 1 205
+205 0 0 0 entity 69 a_piece_of_wood&pieces_of_wood func_emitter 0 uw2_object_205.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_205.tga S T U UW2/Sprites/Objects/OBJECTS_205 W x Y 0 1 206
+206 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_206.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_206.tga S T U UW2/Sprites/Objects/OBJECTS_206 W x Y 0 1 207
+207 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_207.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_207.tga S T U UW2/Sprites/Objects/OBJECTS_207 W x Y 0 1 208
+208 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_208.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_208.tga S T U UW2/Sprites/Objects/OBJECTS_208 W x Y 0 1 209
+209 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_209.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_209.tga S T U UW2/Sprites/Objects/OBJECTS_209 W x Y 0 1 210
+210 0 0 0 entity 69 a_lump_of_wax&lumps_of_wax func_emitter 0 uw2_object_210.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_210.tga S T U UW2/Sprites/Objects/OBJECTS_210 W x Y 0 1 211
+211 0 0 0 entity 69 a_stalactite func_emitter 0 uw2_object_211.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_211.tga S T U UW2/Sprites/Objects/OBJECTS_211 W x Y 0 1 212
+212 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_212.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_212.tga S T U UW2/Sprites/Objects/OBJECTS_212 W x Y 0 1 213
+213 0 0 0 entity 69 an_icicle func_emitter 0 uw2_object_213.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_213.tga S T U UW2/Sprites/Objects/OBJECTS_213 W x Y 0 1 214
+214 0 0 0 entity 69 a_pile_of_debris&piles_of_debris func_emitter 0 uw2_object_214.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_214.tga S T U UW2/Sprites/Objects/OBJECTS_214 W x Y 0 1 215
+215 0 0 0 entity 69 an_anvil func_emitter 0 uw2_object_215.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_215.tga S T U UW2/Sprites/Objects/OBJECTS_215 W x Y 0 1 216
+216 0 0 0 entity 69 a_pole func_emitter 0 uw2_object_216.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_216.tga S T U UW2/Sprites/Objects/OBJECTS_216 W x Y 0 1 217
+217 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_217.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_217.tga S T U UW2/Sprites/Objects/OBJECTS_217 W x Y 0 1 218
+218 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_218.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_218.tga S T U UW2/Sprites/Objects/OBJECTS_218 W x Y 0 1 219
+219 0 0 0 entity 69 some_rubble&piles_of_rubble func_emitter 0 uw2_object_219.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_219.tga S T U UW2/Sprites/Objects/OBJECTS_219 W x Y 0 1 220
+220 0 0 0 entity 69 a_pile_of_wood_chips&piles_of_wood_chips func_emitter 0 uw2_object_220.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_220.tga S T U UW2/Sprites/Objects/OBJECTS_220 W x Y 0 1 221
+221 0 0 0 entity 69 a_pile_of_bones&piles_of_bones func_emitter 0 uw2_object_221.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_221.tga S T U UW2/Sprites/Objects/OBJECTS_221 W x Y 0 1 222
+222 0 0 0 entity 69 a_blood_stain func_emitter 0 uw2_object_222.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_222.tga S T U UW2/Sprites/Objects/OBJECTS_222 W x Y 0 1 223
+223 0 0 0 entity 69 a_blood_stain func_emitter 0 uw2_object_223.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_223.tga S T U UW2/Sprites/Objects/OBJECTS_223 W x Y 0 1 224
+224 0 0 0 entity 69 a_runestone func_emitter 0 uw2_object_224.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_224.tga S T U UW2/Sprites/Objects/OBJECTS_224 W x Y 0 1 225
+225 0 0 0 entity 69 a_black_potion func_emitter 0 uw2_object_225.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_225.tga S T U UW2/Sprites/Objects/OBJECTS_225 W x Y 0 1 226
+226 0 0 0 entity 69 a_purple_potion func_emitter 0 uw2_object_226.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_226.tga S T U UW2/Sprites/Objects/OBJECTS_226 W x Y 0 1 227
+227 0 0 0 entity 69 a_yellow_potion func_emitter 0 uw2_object_227.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_227.tga S T U UW2/Sprites/Objects/OBJECTS_227 W x Y 0 1 228
+228 0 0 0 entity 69 a_green_potion func_emitter 0 uw2_object_228.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_228.tga S T U UW2/Sprites/Objects/OBJECTS_228 W x Y 0 1 229
+229 0 0 0 entity 69 a_red_potion func_emitter 0 uw2_object_229.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_229.tga S T U UW2/Sprites/Objects/OBJECTS_229 W x Y 0 1 230
+230 0 0 0 entity 69 a_colorless_potion func_emitter 0 uw2_object_230.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_230.tga S T U UW2/Sprites/Objects/OBJECTS_230 W x Y 0 1 231
+231 0 0 0 entity 69 a_brown_potion func_emitter 0 uw2_object_231.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_231.tga S T U UW2/Sprites/Objects/OBJECTS_231 W x Y 0 1 232
+232 0 0 0 entity 69 an_An_stone func_emitter 0 uw2_object_232.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_232.tga S T U UW2/Sprites/Objects/OBJECTS_232 W x Y 0 1 233
+233 0 0 0 entity 69 a_Bet_stone func_emitter 0 uw2_object_233.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_233.tga S T U UW2/Sprites/Objects/OBJECTS_233 W x Y 0 1 234
+234 0 0 0 entity 69 a_Corp_stone func_emitter 0 uw2_object_234.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_234.tga S T U UW2/Sprites/Objects/OBJECTS_234 W x Y 0 1 235
+235 0 0 0 entity 69 a_Des_stone func_emitter 0 uw2_object_235.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_235.tga S T U UW2/Sprites/Objects/OBJECTS_235 W x Y 0 1 236
+236 0 0 0 entity 69 an_Ex_stone func_emitter 0 uw2_object_236.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_236.tga S T U UW2/Sprites/Objects/OBJECTS_236 W x Y 0 1 237
+237 0 0 0 entity 69 a_Flam_stone func_emitter 0 uw2_object_237.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_237.tga S T U UW2/Sprites/Objects/OBJECTS_237 W x Y 0 1 238
+238 0 0 0 entity 69 a_Grav_stone func_emitter 0 uw2_object_238.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_238.tga S T U UW2/Sprites/Objects/OBJECTS_238 W x Y 0 1 239
+239 0 0 0 entity 69 a_Hur_stone func_emitter 0 uw2_object_239.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_239.tga S T U UW2/Sprites/Objects/OBJECTS_239 W x Y 0 1 240
+240 0 0 0 entity 69 an_In_stone func_emitter 0 uw2_object_240.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_240.tga S T U UW2/Sprites/Objects/OBJECTS_240 W x Y 0 1 241
+241 0 0 0 entity 69 a_Jux_stone func_emitter 0 uw2_object_241.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_241.tga S T U UW2/Sprites/Objects/OBJECTS_241 W x Y 0 1 242
+242 0 0 0 entity 69 a_Kal_stone func_emitter 0 uw2_object_242.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_242.tga S T U UW2/Sprites/Objects/OBJECTS_242 W x Y 0 1 243
+243 0 0 0 entity 69 a_Lor_stone func_emitter 0 uw2_object_243.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_243.tga S T U UW2/Sprites/Objects/OBJECTS_243 W x Y 0 1 244
+244 0 0 0 entity 69 a_Mani_stone func_emitter 0 uw2_object_244.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_244.tga S T U UW2/Sprites/Objects/OBJECTS_244 W x Y 0 1 245
+245 0 0 0 entity 69 a_Nox_stone func_emitter 0 uw2_object_245.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_245.tga S T U UW2/Sprites/Objects/OBJECTS_245 W x Y 0 1 246
+246 0 0 0 entity 69 an_Ort_stone func_emitter 0 uw2_object_246.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_246.tga S T U UW2/Sprites/Objects/OBJECTS_246 W x Y 0 1 247
+247 0 0 0 entity 69 a_Por_stone func_emitter 0 uw2_object_247.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_247.tga S T U UW2/Sprites/Objects/OBJECTS_247 W x Y 0 1 248
+248 0 0 0 entity 69 a_Quas_stone func_emitter 0 uw2_object_248.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_248.tga S T U UW2/Sprites/Objects/OBJECTS_248 W x Y 0 1 249
+249 0 0 0 entity 69 a_Rel_stone func_emitter 0 uw2_object_249.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_249.tga S T U UW2/Sprites/Objects/OBJECTS_249 W x Y 0 1 250
+250 0 0 0 entity 69 a_Sanct_stone func_emitter 0 uw2_object_250.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_250.tga S T U UW2/Sprites/Objects/OBJECTS_250 W x Y 0 1 251
+251 0 0 0 entity 69 a_Tym_stone func_emitter 0 uw2_object_251.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_251.tga S T U UW2/Sprites/Objects/OBJECTS_251 W x Y 0 1 252
+252 0 0 0 entity 69 an_Uus_stone func_emitter 0 uw2_object_252.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_252.tga S T U UW2/Sprites/Objects/OBJECTS_252 W x Y 0 1 253
+253 0 0 0 entity 69 a_Vas_stone func_emitter 0 uw2_object_253.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_253.tga S T U UW2/Sprites/Objects/OBJECTS_253 W x Y 0 1 254
+254 0 0 0 entity 69 a_Wis_stone func_emitter 0 uw2_object_254.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_254.tga S T U UW2/Sprites/Objects/OBJECTS_254 W x Y 0 1 255
+255 0 0 0 entity 69 a_Ylem_stone func_emitter 0 uw2_object_255.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_255.tga S T U UW2/Sprites/Objects/OBJECTS_255 W x Y 0 1 256
+256 0 0 0 entity 69 a_curious_implement func_emitter 0 uw2_object_256.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_256.tga S T U UW2/Sprites/Objects/OBJECTS_256 W x Y 0 1 257
+257 0 0 0 entity 69 a_lockpick func_emitter 0 uw2_object_257.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_257.tga S T U UW2/Sprites/Objects/OBJECTS_257 W x Y 0 1 258
+258 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_258.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_258.tga S T U UW2/Sprites/Objects/OBJECTS_258 W x Y 0 1 259
+259 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_259.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_259.tga S T U UW2/Sprites/Objects/OBJECTS_259 W x Y 0 1 260
+260 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_260.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_260.tga S T U UW2/Sprites/Objects/OBJECTS_260 W x Y 0 1 261
+261 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_261.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_261.tga S T U UW2/Sprites/Objects/OBJECTS_261 W x Y 0 1 262
+262 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_262.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_262.tga S T U UW2/Sprites/Objects/OBJECTS_262 W x Y 0 1 263
+263 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_263.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_263.tga S T U UW2/Sprites/Objects/OBJECTS_263 W x Y 0 1 264
+264 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_264.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_264.tga S T U UW2/Sprites/Objects/OBJECTS_264 W x Y 0 1 265
+265 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_265.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_265.tga S T U UW2/Sprites/Objects/OBJECTS_265 W x Y 0 1 266
+266 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_266.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_266.tga S T U UW2/Sprites/Objects/OBJECTS_266 W x Y 0 1 267
+267 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_267.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_267.tga S T U UW2/Sprites/Objects/OBJECTS_267 W x Y 0 1 268
+268 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_268.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_268.tga S T U UW2/Sprites/Objects/OBJECTS_268 W x Y 0 1 269
+269 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_269.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_269.tga S T U UW2/Sprites/Objects/OBJECTS_269 W x Y 0 1 270
+270 0 0 0 entity 5 a_key atdm:key_ornate 0 uw2_object_270.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_270.tga S T U UW2/Sprites/Objects/OBJECTS_270 W x Y 0 1 271
+271 0 0 0 entity 21 a_lock atdm:target_changelockstate 0 uw2_object_271.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_271.tga S T U UW2/Sprites/Objects/OBJECTS_271 W x Y 0 1 272
+272 0 0 0 entity 69 an_eyeball func_emitter 0 uw2_object_272.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_272.tga S T U UW2/Sprites/Objects/OBJECTS_272 W x Y 0 1 273
+273 0 0 0 entity 69 a_horn func_emitter 0 uw2_object_273.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_273.tga S T U UW2/Sprites/Objects/OBJECTS_273 W x Y 0 1 274
+274 0 0 0 entity 69 a_pearl-tipped_rod&pearl-tipped_rods func_emitter 0 uw2_object_274.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_274.tga S T U UW2/Sprites/Objects/OBJECTS_274 W x Y 0 1 275
+275 0 0 0 entity 69 a_black_eggshell&black_eggshells func_emitter 0 uw2_object_275.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_275.tga S T U UW2/Sprites/Objects/OBJECTS_275 W x Y 0 1 276
+276 0 0 0 entity 69 a_plant func_emitter 0 uw2_object_276.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_276.tga S T U UW2/Sprites/Objects/OBJECTS_276 W x Y 0 1 277
+277 0 0 0 entity 69 a_serpent_statue&serpent_statues func_emitter 0 uw2_object_277.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_277.tga S T U UW2/Sprites/Objects/OBJECTS_277 W x Y 0 1 278
+278 0 0 0 entity 69 a_bottle func_emitter 0 uw2_object_278.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_278.tga S T U UW2/Sprites/Objects/OBJECTS_278 W x Y 0 1 279
+279 0 0 0 entity 69 an_amethyst_rod&amethyst_rods func_emitter 0 uw2_object_279.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_279.tga S T U UW2/Sprites/Objects/OBJECTS_279 W x Y 0 1 280
+280 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_280.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_280.tga S T U UW2/Sprites/Objects/OBJECTS_280 W x Y 0 1 281
+281 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_281.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_281.tga S T U UW2/Sprites/Objects/OBJECTS_281 W x Y 0 1 282
+282 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_282.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_282.tga S T U UW2/Sprites/Objects/OBJECTS_282 W x Y 0 1 283
+283 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_283.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_283.tga S T U UW2/Sprites/Objects/OBJECTS_283 W x Y 0 1 284
+284 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_284.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_284.tga S T U UW2/Sprites/Objects/OBJECTS_284 W x Y 0 1 285
+285 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_285.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_285.tga S T U UW2/Sprites/Objects/OBJECTS_285 W x Y 0 1 286
+286 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_286.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_286.tga S T U UW2/Sprites/Objects/OBJECTS_286 W x Y 0 1 287
+287 0 0 0 entity 69 a_blackrock_gem func_emitter 0 uw2_object_287.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_287.tga S T U UW2/Sprites/Objects/OBJECTS_287 W x Y 0 1 288
+288 0 0 0 entity 69 a_spell func_emitter 0 uw2_object_288.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_288.tga S T U UW2/Sprites/Objects/OBJECTS_288 W x Y 0 1 289
+289 0 0 0 entity 69 a_bedroll func_emitter 0 uw2_object_289.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_289.tga S T U UW2/Sprites/Objects/OBJECTS_289 W x Y 0 1 290
+290 0 0 0 entity 69 an_orb func_emitter 0 uw2_object_290.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_290.tga S T U UW2/Sprites/Objects/OBJECTS_290 W x Y 0 1 291
+291 0 0 0 entity 69 a_mandolin func_emitter 0 uw2_object_291.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_291.tga S T U UW2/Sprites/Objects/OBJECTS_291 W x Y 0 1 292
+292 0 0 0 entity 69 a_flute func_emitter 0 uw2_object_292.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_292.tga S T U UW2/Sprites/Objects/OBJECTS_292 W x Y 0 1 293
+293 0 0 0 entity 69 some_leeches&bunches_of_leeches func_emitter 0 uw2_object_293.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_293.tga S T U UW2/Sprites/Objects/OBJECTS_293 W x Y 0 1 294
+294 0 0 0 entity 69 a_moonstone func_emitter 0 uw2_object_294.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_294.tga S T U UW2/Sprites/Objects/OBJECTS_294 W x Y 0 1 295
+295 0 0 0 entity 69 a_force_field func_emitter 0 uw2_object_295.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_295.tga S T U UW2/Sprites/Objects/OBJECTS_295 W x Y 0 1 296
+296 0 0 0 entity 69 a_rock_hammer func_emitter 0 uw2_object_296.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_296.tga S T U UW2/Sprites/Objects/OBJECTS_296 W x Y 0 1 297
+297 0 0 0 entity 69 a_resilient_sphere func_emitter 0 uw2_object_297.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_297.tga S T U UW2/Sprites/Objects/OBJECTS_297 W x Y 0 1 298
+298 0 0 0 entity 69 a_campfire func_emitter 0 uw2_object_298.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_298.tga S T U UW2/Sprites/Objects/OBJECTS_298 W x Y 0 1 299
+299 0 0 0 entity 69 a_fishing_pole func_emitter 0 uw2_object_299.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_299.tga S T U UW2/Sprites/Objects/OBJECTS_299 W x Y 0 1 300
+300 0 0 0 entity 69 some_thread&pieces_of_thread func_emitter 0 uw2_object_300.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_300.tga S T U UW2/Sprites/Objects/OBJECTS_300 W x Y 0 1 301
+301 0 0 0 entity 69 an_oil_flask func_emitter 0 uw2_object_301.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_301.tga S T U UW2/Sprites/Objects/OBJECTS_301 W x Y 0 1 302
+302 0 0 0 entity 69 a_fountain func_emitter 0 uw2_object_302.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_302.tga S T U UW2/Sprites/Objects/OBJECTS_302 W x Y 0 1 303
+303 0 0 0 entity 69 a_banner func_emitter 0 uw2_object_303.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_303.tga S T U UW2/Sprites/Objects/OBJECTS_303 W x Y 0 1 304
+304 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_304.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_304.tga S T U UW2/Sprites/Objects/OBJECTS_304 W x Y 0 1 305
+305 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_305.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_305.tga S T U UW2/Sprites/Objects/OBJECTS_305 W x Y 0 1 306
+306 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_306.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_306.tga S T U UW2/Sprites/Objects/OBJECTS_306 W x Y 0 1 307
+307 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_307.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_307.tga S T U UW2/Sprites/Objects/OBJECTS_307 W x Y 0 1 308
+308 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_308.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_308.tga S T U UW2/Sprites/Objects/OBJECTS_308 W x Y 0 1 309
+309 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_309.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_309.tga S T U UW2/Sprites/Objects/OBJECTS_309 W x Y 0 1 310
+310 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_310.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_310.tga S T U UW2/Sprites/Objects/OBJECTS_310 W x Y 0 1 311
+311 0 0 0 entity 11 a_scroll atdm:readable_mobile_scroll01 1 uw2_object_311.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_311.tga S T U UW2/Sprites/Objects/OBJECTS_311 W x Y 0 1 312
+312 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 uw2_object_312.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_312.tga S T U UW2/Sprites/Objects/OBJECTS_312 W x Y 0 1 313
+313 0 0 0 entity 69 a_bit_of_a_map func_emitter 0 uw2_object_313.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_313.tga S T U UW2/Sprites/Objects/OBJECTS_313 W x Y 0 1 314
+314 0 0 0 entity 69 a_map func_emitter 0 uw2_object_314.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_314.tga S T U UW2/Sprites/Objects/OBJECTS_314 W x Y 0 1 315
+315 0 0 0 entity 69 a_dead_plant func_emitter 0 uw2_object_315.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_315.tga S T U UW2/Sprites/Objects/OBJECTS_315 W x Y 0 1 316
+316 0 0 0 entity 69 a_dead_plant func_emitter 0 uw2_object_316.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_316.tga S T U UW2/Sprites/Objects/OBJECTS_316 W x Y 0 1 317
+317 0 0 0 entity 69 a_bottle func_emitter 0 uw2_object_317.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_317.tga S T U UW2/Sprites/Objects/OBJECTS_317 W x Y 0 1 318
+318 0 0 0 entity 69 a_stick func_emitter 0 uw2_object_318.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_318.tga S T U UW2/Sprites/Objects/OBJECTS_318 W x Y 0 1 319
+319 0 0 0 entity 69 a_resilient_sphere func_emitter 0 uw2_object_319.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_319.tga S T U UW2/Sprites/Objects/OBJECTS_319 W x Y 0 1 320
+320 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_320.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_320.tga S T U UW2/Sprites/Objects/OBJECTS_320 W x Y 0 1 321
+321 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_321.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_321.tga S T U UW2/Sprites/Objects/OBJECTS_321 W x Y 0 1 322
+322 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_322.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_322.tga S T U UW2/Sprites/Objects/OBJECTS_322 W x Y 0 1 323
+323 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_323.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_323.tga S T U UW2/Sprites/Objects/OBJECTS_323 W x Y 0 1 324
+324 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_324.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_324.tga S T U UW2/Sprites/Objects/OBJECTS_324 W x Y 0 1 325
+325 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 uw2_object_325.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_325.tga S T U UW2/Sprites/Objects/OBJECTS_325 W x Y 0 1 326
+326 0 0 0 entity 30 a_portcullis&portcullises atdm:door_96x48_3hinge 0 uw2_object_326.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_326.tga S T U UW2/Sprites/Objects/OBJECTS_326 W x Y 0 1 327
+327 0 0 0 entity 29 a_secret_door atdm:mover_door 0 uw2_object_327.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_327.tga S T U UW2/Sprites/Objects/OBJECTS_327 W x Y 0 1 328
+328 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_328.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_328.tga S T U UW2/Sprites/Objects/OBJECTS_328 W x Y 0 1 329
+329 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_329.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_329.tga S T U UW2/Sprites/Objects/OBJECTS_329 W x Y 0 1 330
+330 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_330.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_330.tga S T U UW2/Sprites/Objects/OBJECTS_330 W x Y 0 1 331
+331 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_331.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_331.tga S T U UW2/Sprites/Objects/OBJECTS_331 W x Y 0 1 332
+332 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_332.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_332.tga S T U UW2/Sprites/Objects/OBJECTS_332 W x Y 0 1 333
+333 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 uw2_object_333.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_333.tga S T U UW2/Sprites/Objects/OBJECTS_333 W x Y 0 1 334
+334 0 0 0 entity 30 an_open_portcullis atdm:door_96x48_3hinge 0 uw2_object_334.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_334.tga S T U UW2/Sprites/Objects/OBJECTS_334 W x Y 0 1 335
+335 0 0 0 entity 29 a_secret_door atdm:mover_door 0 uw2_object_335.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_335.tga S T U UW2/Sprites/Objects/OBJECTS_335 W x Y 0 1 336
+336 0 0 0 model 23 a_bench&benches models/darkmod/furniture/seating/bench_wooden01.lwo 0 uw2_object_336.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_336.tga S T U UW2/Sprites/Objects/OBJECTS_336 W x Y 0 1 337
+337 0 0 0 entity 69 an_arrow func_emitter 0 uw2_object_337.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_337.tga S T U UW2/Sprites/Objects/OBJECTS_337 W x Y 0 1 338
+338 0 0 0 entity 69 a_crossbow_bolt func_emitter 0 uw2_object_338.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_338.tga S T U UW2/Sprites/Objects/OBJECTS_338 W x Y 0 1 339
+339 0 0 0 entity 69 a_large_boulder func_emitter 0 uw2_object_339.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_339.tga S T U UW2/Sprites/Objects/OBJECTS_339 W x Y 0 1 340
+340 0 0 0 entity 69 a_large_boulder func_emitter 0 uw2_object_340.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_340.tga S T U UW2/Sprites/Objects/OBJECTS_340 W x Y 0 1 341
+341 0 0 0 entity 69 a_boulder func_emitter 0 uw2_object_341.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_341.tga S T U UW2/Sprites/Objects/OBJECTS_341 W x Y 0 1 342
+342 0 0 0 entity 69 a_small_boulder func_emitter 0 uw2_object_342.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_342.tga S T U UW2/Sprites/Objects/OBJECTS_342 W x Y 0 1 343
+343 0 0 0 entity 69 a_shrine func_emitter 0 uw2_object_343.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_343.tga S T U UW2/Sprites/Objects/OBJECTS_343 W x Y 0 1 344
+344 0 0 0 model 23 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo 0 uw2_object_344.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_344.tga S T U UW2/Sprites/Objects/OBJECTS_344 W x Y 0 1 345
+345 0 0 0 entity 69 a_beam func_emitter 0 uw2_object_345.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_345.tga S T U UW2/Sprites/Objects/OBJECTS_345 W x Y 0 1 346
+346 0 0 0 entity 69 a_moongate func_emitter 0 uw2_object_346.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_346.tga S T U UW2/Sprites/Objects/OBJECTS_346 W x Y 0 1 347
+347 0 0 0 entity 19 a_barrel models/darkmod/containers/barrell_med_closed.lwo 0 uw2_object_347.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_347.tga S T U UW2/Sprites/Objects/OBJECTS_347 W x Y 0 1 348
+348 0 0 0 model 23 a_chair models/darkmod/furniture/seating/chair_simple01.lwo 0 uw2_object_348.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_348.tga S T U UW2/Sprites/Objects/OBJECTS_348 W x Y 0 1 349
+349 0 0 0 entity 19 a_chest models/darkmod/containers/openable/chest_wood.ase 0 uw2_object_349.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_349.tga S T U UW2/Sprites/Objects/OBJECTS_349 W x Y 0 1 350
+350 0 0 0 model 19 a_nightstand models/darkmod/furniture/small_dresser.ase 0 uw2_object_350.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_350.tga S T U UW2/Sprites/Objects/OBJECTS_350 W x Y 0 1 351
+351 0 0 0 model 18 a_lotus_turbo_esprit models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_351.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_351.tga S T U UW2/Sprites/Objects/OBJECTS_351 W x Y 0 1 352
+352 0 0 0 ignore 31 a_pillar worldspawn 0 uw2_object_352.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_352.tga S T U UW2/Sprites/Objects/OBJECTS_352 W x Y 0 1 353
+353 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_353.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_353.tga S T U UW2/Sprites/Objects/OBJECTS_353 W x Y 0 1 354
+354 0 0 0 entity 8 a_switch&switches models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_354.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_354.tga S T U UW2/Sprites/Objects/OBJECTS_354 W x Y 0 1 355
+355 0 0 0 entity 68 a_painting models/darkmod/uw2/painting.ase 0 uw2_object_355.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_355.tga S T U UW2/Sprites/Objects/OBJECTS_355 W x Y 0 1 356
+356 0 0 0 entity 7 a_bridge models/darkmod/uw1/uw1_bridge_new.ase 0 uw2_object_356.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_356.tga S T U UW2/Sprites/Objects/OBJECTS_356 W x Y 0 1 357
+357 0 0 0 model 18 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_357.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_357.tga S T U UW2/Sprites/Objects/OBJECTS_357 W x Y 0 1 358
+358 0 0 0 entity 10 some_writing atdm:readable_base 0 uw2_object_358.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_358.tga S T U UW2/Sprites/Objects/OBJECTS_358 W x Y 0 1 359
+359 0 0 0 model 18 a_bed models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_359.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_359.tga S T U UW2/Sprites/Objects/OBJECTS_359 W x Y 0 1 360
+360 0 0 0 model 18 a_large_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_360.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_360.tga S T U UW2/Sprites/Objects/OBJECTS_360 W x Y 0 1 361
+361 0 0 0 model 18 a_shelf models/darkmod/furniture/shelves/wall_shelf_ornate1.lwo 0 uw2_object_361.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_361.tga S T U UW2/Sprites/Objects/OBJECTS_361 W x Y 0 1 362
+362 0 0 0 entity 69 unknown func_emitter 0 uw2_object_362.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_362.tga S T U UW2/Sprites/Objects/OBJECTS_362 W x Y 0 1 363
+363 0 0 0 entity 69 unknown func_emitter 0 uw2_object_363.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_363.tga S T U UW2/Sprites/Objects/OBJECTS_363 W x Y 0 1 364
+364 0 0 0 entity 69 unknown func_emitter 0 uw2_object_364.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_364.tga S T U UW2/Sprites/Objects/OBJECTS_364 W x Y 0 1 365
+365 0 0 0 entity 69 force_field func_emitter 0 uw2_object_365.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_365.tga S T U UW2/Sprites/Objects/OBJECTS_365 W x Y 0 1 366
+366 0 0 0 entity 34 special_tmap_obj func_static 0 uw2_object_366.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_366.tga S T U UW2/Sprites/Objects/OBJECTS_366 W x Y 0 1 367
+367 0 0 0 entity 35 special_tmap_obj func_static 0 uw2_object_367.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_367.tga S T U UW2/Sprites/Objects/OBJECTS_367 W x Y 0 1 368
+368 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_368.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_368.tga S T U UW2/Sprites/Objects/OBJECTS_368 W x Y 0 1 369
+369 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_369.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_369.tga S T U UW2/Sprites/Objects/OBJECTS_369 W x Y 0 1 370
+370 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_370.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_370.tga S T U UW2/Sprites/Objects/OBJECTS_370 W x Y 0 1 371
+371 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_371.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_371.tga S T U UW2/Sprites/Objects/OBJECTS_371 W x Y 0 1 372
+372 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_372.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_372.tga S T U UW2/Sprites/Objects/OBJECTS_372 W x Y 0 1 373
+373 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_373.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_373.tga S T U UW2/Sprites/Objects/OBJECTS_373 W x Y 0 1 374
+374 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_374.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_374.tga S T U UW2/Sprites/Objects/OBJECTS_374 W x Y 0 1 375
+375 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_375.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_375.tga S T U UW2/Sprites/Objects/OBJECTS_375 W x Y 0 1 376
+376 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_376.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_376.tga S T U UW2/Sprites/Objects/OBJECTS_376 W x Y 0 1 377
+377 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_377.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_377.tga S T U UW2/Sprites/Objects/OBJECTS_377 W x Y 0 1 378
+378 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_378.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_378.tga S T U UW2/Sprites/Objects/OBJECTS_378 W x Y 0 1 379
+379 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_379.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_379.tga S T U UW2/Sprites/Objects/OBJECTS_379 W x Y 0 1 380
+380 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_380.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_380.tga S T U UW2/Sprites/Objects/OBJECTS_380 W x Y 0 1 381
+381 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_381.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_381.tga S T U UW2/Sprites/Objects/OBJECTS_381 W x Y 0 1 382
+382 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_382.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_382.tga S T U UW2/Sprites/Objects/OBJECTS_382 W x Y 0 1 383
+383 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 uw2_object_383.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_383.tga S T U UW2/Sprites/Objects/OBJECTS_383 W x Y 0 1 384
+384 0 0 0 entity 69 a_damage_trap func_emitter 0 uw2_object_384.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_384.tga S T U UW2/Sprites/Objects/OBJECTS_384 W x Y 0 1 385
+385 0 0 0 entity 38 a_teleport_trap func_teleporter 1 uw2_object_385.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_385.tga S T U UW2/Sprites/Objects/OBJECTS_385 W x Y 0 1 386
+386 0 0 0 entity 69 a_arrow_trap func_emitter 0 uw2_object_386.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_386.tga S T U UW2/Sprites/Objects/OBJECTS_386 W x Y 0 1 387
+387 0 0 0 entity 40 a_hack_trap atdm:target_callscriptfunction 1 uw2_object_387.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_387.tga S T U UW2/Sprites/Objects/OBJECTS_387 W x Y 0 1 388
+388 0 0 0 entity 69 a_special_effects_trap func_emitter 0 uw2_object_388.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_388.tga S T U UW2/Sprites/Objects/OBJECTS_388 W x Y 0 1 389
+389 0 0 0 entity 42 a_change_terrain_trap func_static 1 uw2_object_389.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_389.tga S T U UW2/Sprites/Objects/OBJECTS_389 W x Y 0 1 390
+390 0 0 0 entity 69 a_spelltrap func_emitter 0 uw2_object_390.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_390.tga S T U UW2/Sprites/Objects/OBJECTS_390 W x Y 0 1 391
+391 0 0 0 entity 69 a_create_object_trap func_emitter 0 uw2_object_391.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_391.tga S T U UW2/Sprites/Objects/OBJECTS_391 W x Y 0 1 392
+392 0 0 0 entity 69 a_door_trap func_emitter 0 uw2_object_392.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_392.tga S T U UW2/Sprites/Objects/OBJECTS_392 W x Y 0 1 393
+393 0 0 0 entity 69 a_ward_trap func_emitter 0 uw2_object_393.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_393.tga S T U UW2/Sprites/Objects/OBJECTS_393 W x Y 0 1 394
+394 0 0 0 entity 69 a_skill_trap func_emitter 0 uw2_object_394.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_394.tga S T U UW2/Sprites/Objects/OBJECTS_394 W x Y 0 1 395
+395 0 0 0 entity 69 a_delete_object_trap func_emitter 0 uw2_object_395.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_395.tga S T U UW2/Sprites/Objects/OBJECTS_395 W x Y 0 1 396
+396 0 0 0 entity 69 an_inventory_trap func_emitter 0 uw2_object_396.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_396.tga S T U UW2/Sprites/Objects/OBJECTS_396 W x Y 0 1 397
+397 0 0 0 entity 69 a_set_variable_trap func_emitter 0 uw2_object_397.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_397.tga S T U UW2/Sprites/Objects/OBJECTS_397 W x Y 0 1 398
+398 0 0 0 entity 69 a_check_variable_trap func_emitter 0 uw2_object_398.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_398.tga S T U UW2/Sprites/Objects/OBJECTS_398 W x Y 0 1 399
+399 0 0 0 entity 69 a_null_trap func_emitter 0 uw2_object_399.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_399.tga S T U UW2/Sprites/Objects/OBJECTS_399 W x Y 0 1 400
+400 0 0 0 model 53 a_text_string_trap models/darkmod/decorative/hourglass.ase 1 uw2_object_400.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_400.tga S T U UW2/Sprites/Objects/OBJECTS_400 W x Y 0 1 401
+401 0 0 0 entity 69 an_experience_trap func_emitter 0 uw2_object_401.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_401.tga S T U UW2/Sprites/Objects/OBJECTS_401 W x Y 0 1 402
+402 0 0 0 entity 69 a_jump_trap func_emitter 0 uw2_object_402.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_402.tga S T U UW2/Sprites/Objects/OBJECTS_402 W x Y 0 1 403
+403 0 0 0 entity 69 a_change_from_trap func_emitter 0 uw2_object_403.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_403.tga S T U UW2/Sprites/Objects/OBJECTS_403 W x Y 0 1 404
+404 0 0 0 entity 69 a_change_to_trap func_emitter 0 uw2_object_404.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_404.tga S T U UW2/Sprites/Objects/OBJECTS_404 W x Y 0 1 405
+405 0 0 0 entity 69 an_oscillator_trap func_emitter 0 uw2_object_405.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_405.tga S T U UW2/Sprites/Objects/OBJECTS_405 W x Y 0 1 406
+406 0 0 0 entity 69 a_proximity_trap func_emitter 0 uw2_object_406.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_406.tga S T U UW2/Sprites/Objects/OBJECTS_406 W x Y 0 1 407
+407 0 0 0 entity 69 a_pit_trap func_emitter 0 uw2_object_407.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_407.tga S T U UW2/Sprites/Objects/OBJECTS_407 W x Y 0 1 408
+408 0 0 0 entity 69 a_bridge_trap func_emitter 0 uw2_object_408.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_408.tga S T U UW2/Sprites/Objects/OBJECTS_408 W x Y 0 1 409
+409 0 0 0 entity 69 unknown func_emitter 0 uw2_object_409.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_409.tga S T U UW2/Sprites/Objects/OBJECTS_409 W x Y 0 1 410
+410 0 0 0 entity 69 unknown func_emitter 0 uw2_object_410.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_410.tga S T U UW2/Sprites/Objects/OBJECTS_410 W x Y 0 1 411
+411 0 0 0 entity 69 unknown func_emitter 0 uw2_object_411.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_411.tga S T U UW2/Sprites/Objects/OBJECTS_411 W x Y 0 1 412
+412 0 0 0 entity 69 unknown func_emitter 0 uw2_object_412.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_412.tga S T U UW2/Sprites/Objects/OBJECTS_412 W x Y 0 1 413
+413 0 0 0 entity 69 unknown func_emitter 0 uw2_object_413.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_413.tga S T U UW2/Sprites/Objects/OBJECTS_413 W x Y 0 1 414
+414 0 0 0 entity 69 a_flam_rune func_emitter 0 uw2_object_414.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_414.tga S T U UW2/Sprites/Objects/OBJECTS_414 W x Y 0 1 415
+415 0 0 0 entity 69 a_tym_rune func_emitter 0 uw2_object_415.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_415.tga S T U UW2/Sprites/Objects/OBJECTS_415 W x Y 0 1 416
+416 0 0 0 entity 54 a_move_trigger trigger_multiple 1 uw2_object_416.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_416.tga S T U UW2/Sprites/Objects/OBJECTS_416 W x Y 0 1 417
+417 0 0 0 entity 69 a_pick_up_trigger func_emitter 0 uw2_object_417.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_417.tga S T U UW2/Sprites/Objects/OBJECTS_417 W x Y 0 1 418
+418 0 0 0 model 56 a_use_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_418.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_418.tga S T U UW2/Sprites/Objects/OBJECTS_418 W x Y 0 1 419
+419 0 0 0 model 57 a_look_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_419.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_419.tga S T U UW2/Sprites/Objects/OBJECTS_419 W x Y 0 1 420
+420 0 0 0 entity 69 a_pressure_trigger func_emitter 0 uw2_object_420.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_420.tga S T U UW2/Sprites/Objects/OBJECTS_420 W x Y 0 1 421
+421 0 0 0 entity 69 a_pressure_release_trigger func_emitter 0 uw2_object_421.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_421.tga S T U UW2/Sprites/Objects/OBJECTS_421 W x Y 0 1 422
+422 0 0 0 entity 54 an_enter_trigger trigger_multiple 1 uw2_object_422.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_422.tga S T U UW2/Sprites/Objects/OBJECTS_422 W x Y 0 1 423
+423 0 0 0 entity 69 an_exit_trigger func_emitter 0 uw2_object_423.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_423.tga S T U UW2/Sprites/Objects/OBJECTS_423 W x Y 0 1 424
+424 0 0 0 entity 60 an_unlock_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_424.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_424.tga S T U UW2/Sprites/Objects/OBJECTS_424 W x Y 0 1 425
+425 0 0 0 entity 69 a_timer_trigger func_emitter 0 uw2_object_425.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_425.tga S T U UW2/Sprites/Objects/OBJECTS_425 W x Y 0 1 426
+426 0 0 0 entity 59 an_open_trigger models/darkmod/decorative/hourglass.ase 1 uw2_object_426.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_426.tga S T U UW2/Sprites/Objects/OBJECTS_426 W x Y 0 1 427
+427 0 0 0 entity 69 a_close_trigger func_emitter 0 uw2_object_427.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_427.tga S T U UW2/Sprites/Objects/OBJECTS_427 W x Y 0 1 428
+428 0 0 0 entity 69 a_scheduled_trigger func_emitter 0 uw2_object_428.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_428.tga S T U UW2/Sprites/Objects/OBJECTS_428 W x Y 0 1 429
+429 0 0 0 entity 69 unknown func_emitter 0 uw2_object_429.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_429.tga S T U UW2/Sprites/Objects/OBJECTS_429 W x Y 0 1 430
+430 0 0 0 entity 69 unknown func_emitter 0 uw2_object_430.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_430.tga S T U UW2/Sprites/Objects/OBJECTS_430 W x Y 0 1 431
+431 0 0 0 entity 69 unknown func_emitter 0 uw2_object_431.prt 0 0 models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_431.tga S T U UW2/Sprites/Objects/OBJECTS_431 W x Y 0 1 432
+432 0 0 0 entity 69 a_move_trigger func_emitter 0 uw2_object_432.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_432.tga S T U UW2/Sprites/Objects/OBJECTS_432 W x Y 0 1 433
+433 0 0 0 entity 69 a_pick_up_trigger func_emitter 0 uw2_object_433.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_433.tga S T U UW2/Sprites/Objects/OBJECTS_433 W x Y 0 1 434
+434 0 0 0 entity 69 a_use_trigger func_emitter 0 uw2_object_434.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_434.tga S T U UW2/Sprites/Objects/OBJECTS_434 W x Y 0 1 435
+435 0 0 0 entity 69 a_look_trigger func_emitter 0 uw2_object_435.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_435.tga S T U UW2/Sprites/Objects/OBJECTS_435 W x Y 0 1 436
+436 0 0 0 entity 69 a_pressure_trigger func_emitter 0 uw2_object_436.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_436.tga S T U UW2/Sprites/Objects/OBJECTS_436 W x Y 0 1 437
+437 0 0 0 entity 69 a_pressure_release_trigger func_emitter 0 uw2_object_437.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_437.tga S T U UW2/Sprites/Objects/OBJECTS_437 W x Y 0 1 438
+438 0 0 0 entity 69 an_enter_trigger func_emitter 0 uw2_object_438.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_438.tga S T U UW2/Sprites/Objects/OBJECTS_438 W x Y 0 1 439
+439 0 0 0 entity 69 an_exit_trigger func_emitter 0 uw2_object_439.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_439.tga S T U UW2/Sprites/Objects/OBJECTS_439 W x Y 0 1 440
+440 0 0 0 entity 69 an_unlock_trigger func_emitter 0 uw2_object_440.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_440.tga S T U UW2/Sprites/Objects/OBJECTS_440 W x Y 0 1 441
+441 0 0 0 entity 69 a_timer_trigger func_emitter 0 uw2_object_441.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_441.tga S T U UW2/Sprites/Objects/OBJECTS_441 W x Y 0 1 442
+442 0 0 0 entity 69 an_open_trigger func_emitter 0 uw2_object_442.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_442.tga S T U UW2/Sprites/Objects/OBJECTS_442 W x Y 0 1 443
+443 0 0 0 entity 69 a_close_trigger func_emitter 0 uw2_object_443.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_443.tga S T U UW2/Sprites/Objects/OBJECTS_443 W x Y 0 1 444
+444 0 0 0 entity 69 a_scheduled_trigger func_emitter 0 uw2_object_444.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_444.tga S T U UW2/Sprites/Objects/OBJECTS_444 W x Y 0 1 445
+445 0 0 0 entity 69 unknown func_emitter 0 uw2_object_445.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_445.tga S T U UW2/Sprites/Objects/OBJECTS_445 W x Y 0 1 446
+446 0 0 0 entity 69 unknown func_emitter 0 uw2_object_446.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_446.tga S T U UW2/Sprites/Objects/OBJECTS_446 W x Y 0 1 447
+447 0 0 0 entity 69 unknown func_emitter 0 uw2_object_447.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_447.tga S T U UW2/Sprites/Objects/OBJECTS_447 W x Y 0 1 448
+448 0 0 0 entity 69 some_blood func_emitter 0 uw2_object_448.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_448.tga S T U UW2/Sprites/Objects/OBJECTS_448 W x Y 0 1 449
+449 0 0 0 entity 69 a_mist_cloud func_emitter 0 uw2_object_449.prt 0 sound models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_449.tga S T U UW2/Sprites/Objects/OBJECTS_449 W x Y 0 1 450
+450 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_450.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_450.tga S T U UW2/Sprites/Objects/OBJECTS_450 W x Y 0 1 451
+451 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_451.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_451.tga S T U UW2/Sprites/Objects/OBJECTS_451 W x Y 0 1 452
+452 0 0 0 entity 69 an_explosion func_emitter 0 uw2_object_452.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_452.tga S T U UW2/Sprites/Objects/OBJECTS_452 W x Y 0 1 453
+453 0 0 0 entity 69 lightning func_emitter 0 uw2_object_453.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_453.tga S T U UW2/Sprites/Objects/OBJECTS_453 W x Y 0 1 454
+454 0 0 0 entity 69 a_splash&splashes func_emitter 0 uw2_object_454.prt 0 sound models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_454.tga S T U UW2/Sprites/Objects/OBJECTS_454 W x Y 0 1 455
+455 0 0 0 entity 69 some_spacey_twinkles func_emitter 0 uw2_object_455.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_455.tga S T U UW2/Sprites/Objects/OBJECTS_455 W x Y 0 1 456
+456 0 0 0 entity 69 some_smoke func_emitter 0 uw2_object_456.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_456.tga S T U UW2/Sprites/Objects/OBJECTS_456 W x Y 0 1 457
+457 0 0 0 entity 69 a_fountain func_emitter 0 uw2_object_457.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_457.tga S T U UW2/Sprites/Objects/OBJECTS_457 W x Y 0 1 458
+458 0 0 0 entity 69 some_frost func_emitter 0 uw2_object_458.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_458.tga S T U UW2/Sprites/Objects/OBJECTS_458 W x Y 0 1 459
+459 0 0 0 entity 69 a_flash func_emitter 0 uw2_object_459.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_459.tga S T U UW2/Sprites/Objects/OBJECTS_459 W x Y 0 1 460
+460 0 0 0 entity 69 lightning func_emitter 0 uw2_object_460.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_460.tga S T U UW2/Sprites/Objects/OBJECTS_460 W x Y 0 1 461
+461 0 0 0 entity 69 a_wisp func_emitter 0 uw2_object_461.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_461.tga S T U UW2/Sprites/Objects/OBJECTS_461 W x Y 0 1 462
+462 0 0 0 entity 69 a_vapor_trail func_emitter 0 uw2_object_462.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_462.tga S T U UW2/Sprites/Objects/OBJECTS_462 W x Y 0 1 463
+463 0 0 0 ignore 18 a_moving_door models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw2_object_463.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw2_object_463.tga S T U UW2/Sprites/Objects/OBJECTS_463 W x Y 0 1 464

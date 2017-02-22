@@ -16,17 +16,18 @@ public class Power : GuiBase {
 	private Texture2D[] PowerGemArt=new Texture2D[14];
 
 	public override void Start()
-	{
+	{			
 		base.Start();
 		GRLoader powerArt = new GRLoader(GRLoader.POWER_GR);
 		if (uiPowerGem==null)
 		{
 			uiPowerGem= this.gameObject.GetComponent<RawImage>();
 		}
-			for (int i=0;i<=PowerGemArt.GetUpperBound(0);i++)
-			{
-				PowerGemArt[i]=powerArt.LoadImageAt(i);	
-			}
+		PowerGemArt = new Texture2D[powerArt.NoOfImages];
+		for (int i=0;i<=PowerGemArt.GetUpperBound(0);i++)
+		{
+			PowerGemArt[i]=powerArt.LoadImageAt(i);	
+		}
 	}
 
 	/// <summary>

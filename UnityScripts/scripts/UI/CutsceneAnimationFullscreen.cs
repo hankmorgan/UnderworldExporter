@@ -12,6 +12,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	public AudioSource aud; //What control will play the audio.
 	public bool SkipAnim=false;
 	private float CutsceneTime;
+	//public Sprite filler;
 
 		public string currentCutsFile;
 		public string previousCutsFile;
@@ -204,7 +205,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 				switch (sprt.sprite.name)
 					{
 					case "cuts_blank":
-						CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);
+						CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);	
 						break;
 					case "SplashOrigin":
 					case "pres1_0000":
@@ -216,7 +217,10 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 						Texture2D img1= GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
 						CurrentSpriteLoaded=Sprite.Create(img1,new Rect(0,0,img1.width,img1.height), new Vector2(0.5f, 0.0f));
 						break;
-								
+					case "SplashOriginDemo":
+							Texture2D img2= GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRESD_BYT);
+							CurrentSpriteLoaded=Sprite.Create(img2,new Rect(0,0,img2.width,img2.height), new Vector2(0.5f, 0.0f));							
+							break;	
 					default:
 						currentCutsFile = CurrentSpriteName.Substring(0,9);
 						if (currentCutsFile!=previousCutsFile)
@@ -236,8 +240,15 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 						break;
 					}
 			}
-				sprt.sprite=CurrentSpriteLoaded;
-				TargetControl.texture =sprt.sprite.texture;
+
+				if (sprt!=null)
+				{
+						sprt.sprite=CurrentSpriteLoaded;
+						if (sprt.sprite!=null)
+						{
+								TargetControl.texture =sprt.sprite.texture;		
+						}	
+				}
 
 		}
 

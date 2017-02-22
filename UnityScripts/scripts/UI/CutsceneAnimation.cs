@@ -6,6 +6,7 @@ public class CutsceneAnimation : HudAnimation {
 		Sprite CurrentSpriteLoaded;
 		public string currentCutsFile;
 		public string previousCutsFile;
+		//public Sprite filler;
 
 	/*Gui element for the small window animations*/
 
@@ -88,7 +89,7 @@ public class CutsceneAnimation : HudAnimation {
 						switch (sprt.sprite.name)
 						{
 						case "cuts_blank":
-								CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);
+								CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);	
 								break;
 						case "SplashOrigin":
 						case "pres1_0000":
@@ -120,8 +121,14 @@ public class CutsceneAnimation : HudAnimation {
 								break;
 						}
 				}
-				sprt.sprite=CurrentSpriteLoaded;
-				TargetControl.texture =sprt.sprite.texture;
+				if (sprt!=null)
+				{
+						sprt.sprite=CurrentSpriteLoaded;
+						if (sprt.sprite!=null)
+						{
+								TargetControl.texture =sprt.sprite.texture;		
+						}	
+				}
 
 		}
 

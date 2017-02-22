@@ -45,7 +45,14 @@ public class Cuts : GuiBase {
 		/// <returns>The filler animation.</returns>
 	public virtual string getFillerAnim()
 	{
-		return "cs000_n01";
+				switch(_RES)
+				{
+				case GAME_UWDEMO:
+						return "CS011.N00";
+				default:
+						return "cs000_n01";
+				}
+		
 	}
 	
 

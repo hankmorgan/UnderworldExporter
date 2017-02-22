@@ -65,7 +65,8 @@ public class MainMenuHud : GuiBase {
 		public override void Start()
 		{
 			if (GameWorldController.instance.AtMainMenu)
-			{
+			{					
+
 				//Initialize the open screens from the game files
 				OpScr.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.OPSCR_BYT);
 				CharGen.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.CHARGEN_BYT);

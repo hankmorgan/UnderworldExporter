@@ -7,9 +7,11 @@ using System.Collections;
 /// </summary>
 public class TextureLoader : ArtLoader {
 
-	private string pathTexW="DATA\\W64.TR";
-	private string pathTexF="DATA\\F32.TR";
-	private string pathTexUW2 = "DATA\\T64.TR";
+	private string pathTexW_UW0="DATA\\DW64.TR";
+	private string pathTexF_UW0="DATA\\DF32.TR";
+	private string pathTexW_UW1="DATA\\W64.TR";
+	private string pathTexF_UW1="DATA\\F32.TR";
+	private string pathTex_UW2 = "DATA\\T64.TR";
 
 	char[] texturebufferW;
 	char[] texturebufferF;
@@ -17,7 +19,8 @@ public class TextureLoader : ArtLoader {
 	
 	public bool texturesWLoaded;
 	public bool texturesFLoaded;
-
+	private int TextureSplit=210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
+	private int FloorDim=32;
 
 		/// <summary>
 		/// Loads the image at index.
@@ -27,64 +30,73 @@ public class TextureLoader : ArtLoader {
 		/// If the index is greater than 209 I return a floor texture.
 	public override Texture2D LoadImageAt (int index)
 	{
-				switch (_RES)
+		if (_RES==GAME_UWDEMO)
+		{//Point the UW1 texture files to the demo files
+			TextureSplit=48;
+			pathTexW_UW1=pathTexW_UW0;
+			pathTexF_UW1=pathTexF_UW0;			
+		}
+		if (_RES==GAME_UW2)
+		{
+			FloorDim=64;	
+		}
+
+		switch (_RES)
+		{
+		case GAME_UW2:
+			{
+				if (texturesFLoaded==false)
 				{
-				case "UW2":
-					{
-						if (texturesFLoaded==false)
+						if (!DataLoader.ReadStreamFile(BasePath+ pathTex_UW2, out texturebufferT))
 						{
-								if (!DataLoader.ReadStreamFile(BasePath+ pathTexUW2, out texturebufferT))
-								{
-										return base.LoadImageAt(index);
-								}
-								else
-								{
-										texturesFLoaded=true;
-								}
-						}
-						long textureOffset = DataLoader.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
-						return Image(texturebufferT,textureOffset, 32, 32,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
-					}
-
-
-				case "UWDEMO":
-				case "UW1":
-				default:
-						if (index<=209)
-						{//Wall textures
-								if (texturesWLoaded==false)
-								{
-										if (!DataLoader.ReadStreamFile(BasePath+ pathTexW, out texturebufferW))
-										{
-												return base.LoadImageAt(index);
-										}
-										else
-										{
-												texturesWLoaded=true;
-										}
-								}	
-								long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
-								return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+								return base.LoadImageAt(index);
 						}
 						else
-						{//Floor textures (to match my list of textures)
-								if (texturesFLoaded==false)
-								{
-										if (!DataLoader.ReadStreamFile(BasePath+ pathTexF, out texturebufferF))
-										{
-												return base.LoadImageAt(index);
-										}
-										else
-										{
-												texturesFLoaded=true;
-										}
-								}
-								long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-210) * 4) + 4, 32);
-								return Image(texturebufferF,textureOffset, 32, 32,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+						{
+								texturesFLoaded=true;
 						}
-						//break;							
 				}
+				long textureOffset = DataLoader.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
+				return Image(texturebufferT,textureOffset, FloorDim, FloorDim,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+			}
 
-	
+
+		case GAME_UWDEMO:				
+		case GAME_UW1:
+		default:
+			if (index<TextureSplit)
+			{//Wall textures
+				if (texturesWLoaded==false)
+				{
+					if (!DataLoader.ReadStreamFile(BasePath+ pathTexW_UW1, out texturebufferW))
+					{
+							return base.LoadImageAt(index);
+					}
+					else
+					{
+							texturesWLoaded=true;
+					}
+				}	
+				long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
+				return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+			}
+			else
+			{//Floor textures (to match my list of textures)
+				if (texturesFLoaded==false)
+				{
+					if (!DataLoader.ReadStreamFile(BasePath+ pathTexF_UW1, out texturebufferF))
+					{
+							return base.LoadImageAt(index);
+					}
+					else
+					{
+							texturesFLoaded=true;
+					}
+				}
+				long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-TextureSplit) * 4) + 4, 32);
+				return Image(texturebufferF,textureOffset, FloorDim, FloorDim,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+			}
+			//break;							
+		}	
 	}
 }

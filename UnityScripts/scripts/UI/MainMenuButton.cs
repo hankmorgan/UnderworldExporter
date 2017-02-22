@@ -14,13 +14,20 @@ public class MainMenuButton : GuiBase {
 
 	public override void Start ()
 	{
-		if (ButtonLoader== null)
+		switch (_RES)
 		{
-			ButtonLoader= new GRLoader(GRLoader.OPBTN_GR);
-			ButtonLoader.PaletteNo=6;
+		case GAME_UWDEMO:
+			return;
+		default:
+			if (ButtonLoader== null)
+			{
+					ButtonLoader= new GRLoader(GRLoader.OPBTN_GR);
+					ButtonLoader.PaletteNo=6;
 
-		}
-		ButtonBG.texture= ButtonLoader.LoadImageAt(ButtonOffIndex,false);
+			}
+			ButtonBG.texture= ButtonLoader.LoadImageAt(ButtonOffIndex,false);
+			break;
+		}	
 	}
 
 		public void OnHoverEnter()

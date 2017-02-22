@@ -14,8 +14,11 @@ public class BytLoader : ArtLoader {
 		public const int PRES2_BYT =6;
 		public const int WIN1_BYT =7;
 		public const int WIN2_BYT =8;
+		public const int PRESD_BYT =9;
+
 
 		private int currentIndex=-1;
+
 
 		private string[] FilePaths={
 			"Data\\BLNKMAP.BYT",
@@ -26,7 +29,8 @@ public class BytLoader : ArtLoader {
 		 	"Data\\PRES1.BYT",
 			"Data\\PRES2.BYT",
 			"Data\\WIN1.BYT",
-			"Data\\WIN2.BYT"
+			"Data\\WIN2.BYT",
+			"Data\\PRESD.BYT"
 		};
 
 		private int[] PaletteIndices=
@@ -39,7 +43,8 @@ public class BytLoader : ArtLoader {
 			15,
 			15,
 			0,
-			22	
+			22,
+			0
 		};
 
 
@@ -58,13 +63,54 @@ public class BytLoader : ArtLoader {
 
 	public override Texture2D LoadImageAt (int index, bool Alpha)
 	{
-		if (currentIndex!=index)
-		{//Only load from disk if the image to bring back has changed.
-			DataLoaded=false;
-			Path=FilePaths[index];
-			LoadImageFile();		
+		switch (_RES)
+		{
+		case GAME_UW2:
+			{
+				return  extractUW2Bitmap("data\\byt.ark", index, Alpha);
+			}
+		default:
+			{
+			if (currentIndex!=index)
+				{//Only load from disk if the image to bring back has changed.
+					DataLoaded=false;
+					Path=FilePaths[index];
+					LoadImageFile();		
+				}
+				return Image(ImageFileData,0,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
+			}
+		}
+	}
+
+		public Texture2D extractUW2Bitmap(string path, int index, bool Alpha)
+		{
+			char[] textureFile;          // Pointer to our buffered data (little endian format)
+			int i;
+			long NoOfTextures;
+
+			if (!DataLoader.ReadStreamFile(BasePath + path, out textureFile))
+			{return null;}
+			// Get the size of the file in bytes
+
+			NoOfTextures = DataLoader.getValAtAddress(textureFile,0,8);
+			long textureOffset = (int)DataLoader.getValAtAddress(textureFile, (index * 4) + 6, 32);
+			if (textureOffset !=0)
+			{
+					int compressionFlag=(int)DataLoader.getValAtAddress(textureFile,((index * 4) + 6)+(NoOfTextures*4),32);
+					int isCompressed =(compressionFlag>>1) & 0x01;
+					if (isCompressed==1)	
+					{
+						int datalen=0;
+						return Image(DataLoader.unpackUW2(textureFile,textureOffset,ref datalen),0,320,200,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
+					}
+					else
+					{
+						return Image(textureFile,textureOffset,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);	
+					}
+			}
+				return null;
 		}
 
-		return Image(ImageFileData,0,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
-	}
+
+
 }

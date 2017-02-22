@@ -259,7 +259,7 @@ public class GameWorldController : UWEBase {
 
 		void  LoadPath()
 		{
-			string fileName = Application.dataPath + "//..//" + UWEBase._RES + "_path.txt";
+			string fileName = Application.dataPath + "//..//" + game + "_path.txt";
 			StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
 			Loader.BasePath=fileReader.ReadLine().TrimEnd();
 		}
@@ -305,36 +305,39 @@ public class GameWorldController : UWEBase {
 		grFlasks=new GRLoader(GRLoader.FLASKS_GR);
 
 		terrainData= new TerrainDatLoader();
+
+
+		switch (_RES)
+		{
+			case GAME_UWDEMO:
+				Tilemaps = new TileMap[1];
+				objectList=new ObjectLoader[1];
+				break;
+			case GAME_UW2:
+				Tilemaps = new TileMap[72];//Not all are in use.
+				objectList=new ObjectLoader[72];
+				break;
+			case GAME_UW1:
+			default:
+				Tilemaps = new TileMap[9];
+				objectList=new ObjectLoader[9];
+				break;
+		}
 	}
+
 
 	void Start () {
 
 		instance=this;
 		StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-		//Load up my map materials
-		for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
+		switch(_RES)
 		{
-			MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
-			MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
+		case GAME_UWDEMO:
+		case GAME_UW2:
+				//UW Demo does not go to the menu. It will load automatically into the gameworld
+				AtMainMenu=false;	
+				break;
 		}
-
-		//Load up my door texture
-		for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
-		{
-			MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
-			MaterialDoors[i].mainTexture= DoorArt.LoadImageAt(i);
-		}
-
-		//Load up my tile maps
-		//First read in my lev_ark file in it's entirey
-		if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark_file_data))
-				{
-						Debug.Log(Lev_Ark_File + "File not loaded");
-						Application.Quit();
-				}
-
-
-
 
 		if (EnableTextureAnimation==true)
 		{
@@ -342,7 +345,7 @@ public class GameWorldController : UWEBase {
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
 
-		if ((AtMainMenu) && (!LevelSerializer.IsDeserializing))
+		if (AtMainMenu)
 		{
 			SwitchLevel(-1);//Turn off all level maps
 			UWHUD.instance.CutsceneFullPanel.SetActive(true);
@@ -355,12 +358,11 @@ public class GameWorldController : UWEBase {
 			getMus().InIntro=true;
 		}
 		else
-		{
-			AtMainMenu=false;
+		{			
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);	
 			UWHUD.instance.mainmenu.gameObject.SetActive(false);
-
-
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+			SwitchLevel(startLevel);
 		}
 		InvokeRepeating("PositionDetect",0.0f,0.02f);
 		return;
@@ -497,16 +499,22 @@ public class GameWorldController : UWEBase {
 		{
 			if (newLevelNo!=-1)
 			{
-				//Send exit level events to all inventory objects
+				if(LevelNo==-1)
+				{//I'm at the main menu. Load up the file data now.
+					InitLevelData();
+				}
 
 				//Check loading
 				if (Tilemaps[newLevelNo]==null)
 				{//Data has not been loaded for this level
 					Tilemaps[newLevelNo]=new TileMap();
 					Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
-					Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data,1,newLevelNo);
-					objectList[newLevelNo]=new ObjectLoader();
-					objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);
+					Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
+					if (UWEBase._RES==UWEBase.GAME_UW1)
+					{//For now only load uw1 objects.
+						objectList[newLevelNo]=new ObjectLoader();
+						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);	
+					}
 					Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
 				}
 						//Call events for inventory objects on level transition.
@@ -523,8 +531,12 @@ public class GameWorldController : UWEBase {
 					//Update the positions of all object interactions in the level
 					//UpdatePositions();
 
+					if (_RES==GAME_UW1)
+					{
+						ObjectLoader.UpdateObjectList();		
+					}
 					//Store the state of the object list with just the objects in objects transform for when I re
-					ObjectLoader.UpdateObjectList();	
+					
 				}
 
 
@@ -541,11 +553,18 @@ public class GameWorldController : UWEBase {
 					}
 				}
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
-				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+
+				switch(UWEBase._RES)
+				{//For the moment no objects in UWdemo or UW2
+				case UWEBase.GAME_UW1:
+					ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+					break;
+				}
+				
 
 				GenerateNavmesh(NavRigLand);
 				GenerateNavmesh(NavRigWater);
-				if (LevelNo==7)
+				if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
 				{//Create shrine lava.
 					GameObject shrineLava = new GameObject();
 					shrineLava.transform.parent=LevelMarker();
@@ -555,9 +574,7 @@ public class GameWorldController : UWEBase {
 					shrineLava.AddComponent<BoxCollider>();
 					shrineLava.GetComponent<BoxCollider>().isTrigger=true;
 				}
-						//TODO Lava
 			}
-
 		}
 
 		/// <summary>
@@ -805,6 +822,61 @@ public class GameWorldController : UWEBase {
 				File.WriteAllBytes(Loader.BasePath +  "data\\testlev.ark" , dataToWrite);
 
 			
+		}
+
+
+		/// <summary>
+		/// Inits the level data maps and textures.
+		/// </summary>
+		void InitLevelData()
+		{
+				switch (UWEBase._RES)
+				{
+				case UWEBase.GAME_UWDEMO:
+						MaterialMasterList= new Material[58];
+						break;
+				case UWEBase.GAME_UW2:
+						MaterialMasterList= new Material[256];//For each texture in UW2
+						break;
+				case UWEBase.GAME_UW1:						
+				default:
+						MaterialMasterList= new Material[260];//For each texture in UW1
+						break;
+				}
+
+				//Load up my map materials
+				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
+				{
+						MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
+						MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
+				}
+
+				//Load up my door texture
+				for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
+				{
+						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
+						MaterialDoors[i].mainTexture= DoorArt.LoadImageAt(i);
+				}
+
+				//Load up my tile maps
+				//First read in my lev_ark file
+				switch(UWEBase._RES)
+				{
+				case UWEBase.GAME_UWDEMO:
+						Lev_Ark_File = "Data\\level13.st";
+						break;
+				case UWEBase.GAME_UW2:
+				case UWEBase.GAME_UW1:						
+				default:
+						Lev_Ark_File = "Data\\lev.ark";//Eventually this will be a save game.
+						break;
+				}
+
+				if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark_file_data))
+				{
+						Debug.Log(Loader.BasePath + Lev_Ark_File + "File not loaded");
+						Application.Quit();
+				}		
 		}
 
 }

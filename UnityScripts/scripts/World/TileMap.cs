@@ -1266,7 +1266,7 @@ public class TileMap : Loader {
 		/// 
 
 
-		public bool BuildTileMapUW(char[] lev_ark, int game, int LevelNo)
+		public bool BuildTileMapUW(char[] lev_ark, int LevelNo)
 		{
 				// File pointer
 
@@ -1296,28 +1296,42 @@ public class TileMap : Loader {
 
 				MapNotes = new List<MapNote>();
 
-				switch (game)
+				switch (UWEBase._RES)
 				{
-				case 1:	//UW1
+				case UWEBase.GAME_UWDEMO:
 						{
-								CEILING_HEIGHT=UW_CEILING_HEIGHT;
-								// 0x7a;
+								textureMapSize=63;
 								//Get the number of blocks in this file.
-								NoOfBlocks =  (int)DataLoader.getValAtAddress(lev_ark,0,32);
+								NoOfBlocks = 1;
 								//Get the first map block
-								AddressOfBlockStart =  DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);	
-								textureAddress =  DataLoader.getValAtAddress(lev_ark,((LevelNo+18) * 4) + 2 ,32);
-								//long objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
+								AddressOfBlockStart = 0;	
+								textureAddress = 0; //it's in a different file
 								address_pointer =0;
+								CEILING_HEIGHT=UW_CEILING_HEIGHT;
+								DataLoader.ReadStreamFile(Loader.BasePath + "Data\\level13.txm" , out tex_ark );
 								break;
 						}
 
-				case 2:
+
+				case UWEBase.GAME_UW1:	//UW1
+						{
+							CEILING_HEIGHT=UW_CEILING_HEIGHT;
+							// 0x7a;
+							//Get the number of blocks in this file.
+							NoOfBlocks =  (int)DataLoader.getValAtAddress(lev_ark,0,32);
+							//Get the first map block
+							AddressOfBlockStart =  DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);	
+							textureAddress =  DataLoader.getValAtAddress(lev_ark,((LevelNo+18) * 4) + 2 ,32);
+							address_pointer =0;
+							break;
+						}
+
+				case UWEBase.GAME_UW2:
 						{
 							//******************
 							CEILING_HEIGHT=UW_CEILING_HEIGHT;
 
-							textureMapSize = 70;	//0x86;
+							textureMapSize =70;	//0x86;
 							tmp_ark =new char[lev_ark.GetUpperBound(0)+1];
 							for (int j =0; j<=lev_ark.GetUpperBound(0);j++)
 							{
@@ -1356,7 +1370,17 @@ public class TileMap : Loader {
 									j++;
 								}
 							}
-							break;
+								textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
+								compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+								isCompressed =(compressionFlag>>1) & 0x01;
+
+								if (isCompressed == 1)
+								{
+										int datalen=0;
+										tex_ark = DataLoader.unpackUW2(tmp_ark, textureAddress, ref datalen);
+										textureAddress=-1;
+								}
+								break;
 
 						}
 				default:
@@ -1366,9 +1390,34 @@ public class TileMap : Loader {
 				int offset=0;
 				for (i = 0; i<textureMapSize; i++)	//256
 				{//TODO: Only use this for texture lookups.
-						switch (game)
+						switch (UWEBase._RES)
 						{
-						case 1:
+						case UWEBase.GAME_UWDEMO:
+							{
+								if (i<48)	//Wall textures
+								{
+										texture_map[i] =  (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16); //(i * 2)
+										offset=offset+2;
+								}
+								else if (i<=57)	//Floor textures are 49 to 56, ceiling is 57
+								{
+										texture_map[i] =  (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16)+48; //(i * 2)
+										offset = offset + 2;
+										if (i == 57)
+										{
+												CeilingTexture = i;
+										}
+
+								}
+								else
+								{ //door textures are int 8s
+										texture_map[i] = (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
+										offset++;
+								}
+								break;
+							}
+
+						case UWEBase.GAME_UW1:
 							{
 								if (i<48)	//Wall textures
 								{
@@ -1394,11 +1443,11 @@ public class TileMap : Loader {
 
 								break;
 							}
-						case 2: //uw2
+						case UWEBase.GAME_UW2: //uw2
 								{
 									if (textureAddress == -1)//Texture block was decompressed
 									{
-										textureAddress=0;//To stop array out of bounds->THis does not work in the original code??
+										//textureAddress=0;//To stop array out of bounds->THis does not work in the original code??
 										if (i<64)
 										{
 											texture_map[i] =(int)DataLoader.getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
@@ -1426,33 +1475,13 @@ public class TileMap : Loader {
 
 									if (i == 0xf)
 									{
-										CeilingTexture=texture_map[i];
+										CeilingTexture=i;//texture_map[i];
 									}
 									break;
 								}
 						}
 				}
-				//Assign door textures to the object masters list
-				//Depends on the correct values in the config!!
-				//switch (game)
-				//{
-				//case 1:
-				//TODO: Restore this 
-				/*objectMasters[320].extraInfo = texture_map[58];
-			objectMasters[321].extraInfo = texture_map[59];
-			objectMasters[322].extraInfo = texture_map[60];
-			objectMasters[323].extraInfo = texture_map[61];
-			objectMasters[324].extraInfo = texture_map[62];
-			objectMasters[325].extraInfo = texture_map[63];
 
-			objectMasters[328].extraInfo = texture_map[58];
-			objectMasters[329].extraInfo = texture_map[59];
-			objectMasters[330].extraInfo = texture_map[60];
-			objectMasters[331].extraInfo = texture_map[61];
-			objectMasters[332].extraInfo = texture_map[62];
-			objectMasters[333].extraInfo = texture_map[63];
-			break;*/
-				//}
 				for (y=0; y<64;y++)
 				{
 						for (x=0; x<64;x++)
@@ -1478,24 +1507,31 @@ public class TileMap : Loader {
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
 								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
-								switch (game)
+								switch (UWEBase._RES)
 								{
-								case 1:	//uw1
-										Tiles[x,y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
-										//if (LevelNo == 6)
-										//{//Tybals lair. Special case for the maze
-												//int val = (FirstTileInt >> 10) & 0x0F;
-										//		if (((FirstTileInt >> 10) & 0x0F) == 4)
-										////		{//Maze floor
-										//				Tiles[x,y].floorTexture = 278;
-										//		}
-										//}
-										Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
-										break;
+									case UWEBase.GAME_UWDEMO://uwdemo
+									case UWEBase.GAME_UW1:	//uw1
+									case UWEBase.GAME_UW2:
+									default:
+											Tiles[x,y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
+											//if (LevelNo == 6)
+											//{//Tybals lair. Special case for the maze
+													//int val = (FirstTileInt >> 10) & 0x0F;
+											//		if (((FirstTileInt >> 10) & 0x0F) == 4)
+											////		{//Maze floor
+											//				Tiles[x,y].floorTexture = 278;
+											//		}
+											//}
+											Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
+											break;
+								
+										//Tiles[x,y].floorTexture = getFloorTexUw2()
+										//TODO:
+										//break;
 								}
 								if (Tiles[x,y].floorTexture<0)
 								{
-										Tiles[x,y].floorTexture=0;
+									Tiles[x,y].floorTexture=0;
 								}
 								if (Tiles[x,y].floorTexture>=262)
 								{
@@ -1657,16 +1693,19 @@ public class TileMap : Loader {
 
 		int getFloorTexUw2(char[] buffer, long textureOffset, long tileData)
 		{//gets floor texture data at bits 10-13 of the tile data
-				long val = (tileData >>10) & 0x0F;	//gets the index of the texture
+				return (int)((tileData >>10) & 0x0F);
+
+				//long val = (tileData >>10) & 0x0F;	//gets the index of the texture
 				//look it up in texture block for it's absolute index for wxx.tr
-				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);	
+				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);	
 		}
 
 		int getWallTexUw2(char[]  buffer, long textureOffset, long tileData)
 		{
 				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
-				long val = (tileData & 0x3F);	//gets the index of the texture
-				return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
+				//long val = (tileData & 0x3F);	//gets the index of the texture
+				return (int)((tileData & 0x3F));
+				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
 		}
 
 
@@ -2258,7 +2297,19 @@ public class TileMap : Loader {
 		//Temp
 		public static bool isTextureWater(int textureNo)
 		{
-				return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
+				if (textureNo> GameWorldController.instance.terrainData.Terrain.GetUpperBound(0) )
+				{
+						return false;
+				}
+				switch(_RES)
+				{
+				case GAME_UW2:
+					return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Water;
+
+				default:
+					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
+				}
+
 				/*
 				switch (textureNo)
 				{
@@ -2274,7 +2325,18 @@ public class TileMap : Loader {
 
 		public static bool isTextureLava(int textureNo)
 		{
-				return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Lava;//Adjust for uw1 texturemap positions
+				if (textureNo> GameWorldController.instance.terrainData.Terrain.GetUpperBound(0) )
+				{
+						return false;
+				}
+				switch(_RES)
+				{
+				case GAME_UW2:
+						return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Lava;
+
+				default:
+						return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Lava;//Adjust for uw1 texturemap positions
+				}				
 				/*
 				switch (textureNo)
 				{
