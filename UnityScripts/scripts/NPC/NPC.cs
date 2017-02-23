@@ -76,7 +76,9 @@ public class NPC : object_base {
 	//private string CurrentAnim="";
 	
 	/// The animator that the NPC is using for it's animations
-	private Animator anim;
+	//private Animator anim;
+
+	public NPC_Animation newAnim;
 	
 	/// For tracking the state of the NPC
 //	public int currentState=-1;
@@ -164,10 +166,10 @@ public class NPC : object_base {
 	public Sprite currentSpriteLoaded;
 
 	private int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
-
+		/*
 	void Awake () {
 		anim=GetComponentInChildren<Animator>();
-	}
+	}*/
 
 
 	/// <summary>
@@ -179,8 +181,16 @@ public class NPC : object_base {
 		poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
 		AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
 		AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
-				height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
-				radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
+		height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
+		radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
+		
+		newAnim=this.gameObject.AddComponent<NPC_Animation>();
+		if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
+		{
+				GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);
+		}
+		newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
+		newAnim.output=this.GetComponentInChildren<SpriteRenderer>();
 	}
 
 	void AI_INIT ()
@@ -246,7 +256,8 @@ public class NPC : object_base {
 		{//NPC will not move until timer is complete.
 			if (FrozenUpdate==0)
 			{
-				anim.enabled=false;
+				//anim.enabled=false;
+				newAnim.enabled=false;
 			}
 			else
 			{
@@ -263,10 +274,10 @@ public class NPC : object_base {
 			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			return;
 		}
-		if (anim==null)
-		{
-			anim=GetComponentInChildren<Animator>();
-		}
+		//if (anim==null)
+		//{
+		//	anim=GetComponentInChildren<Animator>();
+		//}
 
 		//The AI is only active when the player is within a certain distance to the player camera.
 		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
@@ -275,7 +286,9 @@ public class NPC : object_base {
 				{
 					AI_INIT ();
 					ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
-					anim.enabled=true;		
+					//anim.enabled=true;		
+					//anim.enabled=false;		
+					newAnim.enabled=true;
 				}							
 			}
 			else
@@ -284,10 +297,12 @@ public class NPC : object_base {
 				{
 					ai.AI.IsActive=false;
 				}
-				if (anim!=null)
-				{
-					anim.enabled=false;				
-				}				
+				//if (anim!=null)
+				//{
+				//	anim.enabled=false;		
+
+				//}
+				newAnim.enabled=false;
 				return;
 			}
 
@@ -473,9 +488,10 @@ public class NPC : object_base {
 			}
 		}
 
-
+		/*
 		public void LateUpdate()
 		{
+				return;
 				if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
 			{
 					return;
@@ -495,7 +511,7 @@ public class NPC : object_base {
 			}
 			sprt.sprite=currentSpriteLoaded;
 		}
-
+	*/
 
 	/// <summary>
 	/// Applies the attack to the NPC
@@ -671,10 +687,10 @@ public class NPC : object_base {
 	/// </summary>
 	/// Calculates the relative angle to the NPC
 	void UpdateSprite () {
-		if (anim == null)
-		{
-			anim = GetComponentInChildren<Animator>();
-		}
+		//if (anim == null)
+		//{
+		//	anim = GetComponentInChildren<Animator>();
+		//}
 		//Get the relative vector between the player and the npc.
 		direction = GameWorldController.instance.playerUW.gameObject.transform.position - this.gameObject.transform.position;
 		//Convert the direction into an angle.
@@ -740,102 +756,125 @@ public class NPC : object_base {
 		{
 		case AI_ANIM_IDLE_FRONT:
 		{	
-			playAnimation(NPC_ID +"_idle_front",CalcedFacing);
+			playAnimation(14,false);
+			//playAnimation(NPC_ID +"_idle_front",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_FRONT_RIGHT:
 		{	
-			playAnimation(NPC_ID +"_idle_front_right",CalcedFacing);
+			playAnimation(13,false);
+			//playAnimation(NPC_ID +"_idle_front_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_RIGHT:
 		{	
-			playAnimation(NPC_ID +"_idle_right",CalcedFacing);
+			playAnimation(12,false);
+			//playAnimation(NPC_ID +"_idle_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_REAR_RIGHT:
 		{	
-			playAnimation(NPC_ID +"_idle_rear_right",CalcedFacing);
+			playAnimation(11,false);
+			//playAnimation(NPC_ID +"_idle_rear_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_REAR:
 		{	
-			playAnimation(NPC_ID +"_idle_rear",CalcedFacing);
+			playAnimation(10,false);
+			//playAnimation(NPC_ID +"_idle_rear",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_REAR_LEFT:
 		{	
-			playAnimation(NPC_ID + "_idle_rear_left",CalcedFacing);
+			playAnimation(17,false);
+			//playAnimation(NPC_ID + "_idle_rear_left",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_LEFT:
 		{	
-			playAnimation(NPC_ID +"_idle_left",CalcedFacing);
+			playAnimation(16,false);
+		//	playAnimation(NPC_ID +"_idle_left",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_IDLE_FRONT_LEFT:
 		{	
-			playAnimation(NPC_ID +"_idle_front_left",CalcedFacing);
+			playAnimation(15,false);								
+			//playAnimation(NPC_ID +"_idle_front_left",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_FRONT:
 		{	
-			playAnimation(NPC_ID +"_walking_front",CalcedFacing);
+			playAnimation(22,true);								
+			//playAnimation(NPC_ID +"_walking_front",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_FRONT_RIGHT:
 		{	
-			playAnimation(NPC_ID + "_walking_front_right",CalcedFacing);
+			playAnimation(21,true);
+//			playAnimation(NPC_ID + "_walking_front_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_RIGHT:
 		{	
-			playAnimation(NPC_ID + "_walking_right",CalcedFacing);
+
+			playAnimation(20,true);
+			//playAnimation(NPC_ID + "_walking_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_REAR_RIGHT:
 		{	
-			playAnimation(NPC_ID +"_walking_rear_right",CalcedFacing);
+			playAnimation(19,true);								
+			//playAnimation(NPC_ID +"_walking_rear_right",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_REAR:
 		{	
-			playAnimation(NPC_ID +"_walking_rear",CalcedFacing);
+			playAnimation(18,true);								
+			//playAnimation(NPC_ID +"_walking_rear",CalcedFacing);
 			break;
 		}
 		case  AI_ANIM_WALKING_REAR_LEFT:
 		{	
-			playAnimation(NPC_ID +"_walking_rear_left",CalcedFacing);
+			playAnimation(25,true);								
+			//playAnimation(NPC_ID +"_walking_rear_left",CalcedFacing);
 			break;
 		}
 		case  AI_ANIM_WALKING_LEFT:
 		{	
-			playAnimation(NPC_ID + "_walking_left",CalcedFacing);
+			playAnimation(24,true);								
+			//playAnimation(NPC_ID + "_walking_left",CalcedFacing);
 			break;
 		}
 		case AI_ANIM_WALKING_FRONT_LEFT:
 		{	
-			playAnimation(NPC_ID + "_walking_front_left",CalcedFacing);
+			playAnimation(23,true);								
+			//playAnimation(NPC_ID + "_walking_front_left",CalcedFacing);
 			break;
 		}
 		default://special non angled states
-		{
-			switch(AnimRange)
 			{
-			case AI_ANIM_DEATH:
-				playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;
-			case AI_ANIM_ATTACK_BASH:
-				playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;
-			case AI_ANIM_ATTACK_SLASH:
-				playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
-			case AI_ANIM_ATTACK_THRUST:
-				playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
-			case AI_ANIM_COMBAT_IDLE:
-				playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
-			case AI_ANIM_ATTACK_SECONDARY:
-				playAnimation (NPC_ID +"_attack_secondary",AI_ANIM_ATTACK_SECONDARY);break;
+				switch(AnimRange)
+				{
+				case AI_ANIM_DEATH:
+					playAnimation(8,true);		break;								
+					//playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;
+				case AI_ANIM_ATTACK_BASH:
+					//playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;
+					playAnimation(1,true);break;
+				case AI_ANIM_ATTACK_SLASH:
+					//playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
+					playAnimation(2,true);break;
+				case AI_ANIM_ATTACK_THRUST:
+					//playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
+					playAnimation(3,true);break;
+				case AI_ANIM_COMBAT_IDLE:
+					//playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
+					playAnimation(0,true);break;
+				case AI_ANIM_ATTACK_SECONDARY:
+					//playAnimation (NPC_ID +"_attack_secondary",AI_ANIM_ATTACK_SECONDARY);break;
+					playAnimation(5,true);break;
+				}
 			}
-		}
 			break;
 		}
 	}
@@ -906,17 +945,25 @@ public class NPC : object_base {
 		}
 	}
 
+	void playAnimation(int index, bool isConstantAnim)
+	{
+		//newAnim.AnimationIndex=index
+		newAnim.Play(index,isConstantAnim);
+	}
+
 	/// <summary>
 	/// Checks if a new animation is needed and if so run it.
 	/// </summary>
 	/// <param name="pAnim">P animation.</param>
 	/// <param name="newState">New state.</param>
+		/// Obsolete. Used by the legacy animator
 	void playAnimation(string pAnim, int newState)
 	{
+				return;
 				curranim=newState;
 		if (Frozen)
 		{
-			anim.enabled=true;
+			//anim.enabled=true;
 			FrozenUpdate=2;
 		}
 			if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
@@ -925,7 +972,7 @@ public class NPC : object_base {
 			}
 		//currentState=newState;
 		//CurrentAnim=pAnim;
-		anim.Play(pAnim);
+		//anim.Play(pAnim);
 		}
 
 	/// <summary>

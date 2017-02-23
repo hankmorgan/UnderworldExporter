@@ -107,6 +107,10 @@ public class CritterInfo : Loader {
 						AnimInfo.animIndices[index,j]= (val + spriteIndex);
 						ValidCount++;
 					}
+					else
+					{
+						AnimInfo.animIndices[index,j]= -1;	
+					}
 				}			
 			}
 
@@ -518,9 +522,5 @@ public class CritterInfo : Loader {
 				default:
 						return idle_front;
 				}	
-
-
 		}
-
-
 }

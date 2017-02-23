@@ -1161,17 +1161,19 @@ public class ObjectInteraction : UWEBase {
 				//npc.ai=ai;
 				//NpcLauncher.AddComponent<StoreInformation>();
 
-				GameObject myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
-				GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
-				newObj.name=myObj.name + "_Sprite";
+				//GameObject myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
+				GameObject newObj = new GameObject(myObj.name + "_Sprite");
+				//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+				//newObj.name=myObj.name + "_Sprite";
 				newObj.transform.parent=myObj.transform;
 				newObj.transform.position = myObj.transform.position;
+				newObj.AddComponent<Billboard>();
 				//newObj.AddComponent<StoreAnimator>();
-				SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
-				Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
+				SpriteRenderer mysprite =  newObj.AddComponent<SpriteRenderer>();
+				//Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
 				mysprite.transform.localScale=new Vector3(2f,2f,2f);//Scale up sprites.
 				mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
-				mysprite.sprite = image;//Assigns the sprite to the object.
+				//mysprite.sprite = image;//Assigns the sprite to the object.
 				//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
 
 				CharacterController cap  = myObj.AddComponent<CharacterController>();
