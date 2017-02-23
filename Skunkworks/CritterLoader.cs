@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class CritterLoader : MonoBehaviour {
 	public string pathToAssocFile;
+	public string pathToAssocUW2File;
+	public string pathToPGMPFile;
+	public string pathToCRANFile;
 	private char[] assoc;
 	public CritterInfo[] critters =new CritterInfo[64];
 	public PaletteLoader pal;
@@ -17,10 +20,18 @@ public class CritterLoader : MonoBehaviour {
 	public int testAnimNo;
 	public int testFrameNo;
 	public int indextofind=0;
+	public int game;
 
 	void Start()
 		{
-		ReadAssocFile();
+		if (game==0)
+			{
+			ReadAssocFile();
+			}
+		else
+			{
+			ReadUW2AssocFile();
+			}		
 		}
 
 	void ReadAssocFile()
@@ -34,7 +45,10 @@ public class CritterLoader : MonoBehaviour {
 				{
 				int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
 				int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
-				critters[ass]= new CritterInfo(FileID, pal.Palettes[0], auxPal);
+				if (ass==3)
+					{
+					critters[ass]= new CritterInfo(FileID, pal.Palettes[0], auxPal);
+					}				
 				}
 			}
 		}
@@ -68,7 +82,7 @@ public class CritterLoader : MonoBehaviour {
 		if(index!=-1)
 			{
 			output2.sprite = critters[testCritterId].AnimInfo.animSprites[index];
-			}
+		}
 
 		}
 
@@ -77,6 +91,45 @@ public class CritterLoader : MonoBehaviour {
 		{
 		output2.sprite = critters[testCritterId].AnimInfo.animSprites[indextofind];
 
+		}
+
+
+	public void GetSpriteAtIndex(int index)
+		{
+		output.sprite = critters[testCritterId].AnimInfo.animSprites[index];
+		}
+
+
+
+
+
+
+
+	/**************************************/
+	void ReadUW2AssocFile()
+		{
+		char[] pgmp;
+		char[] cran;
+		pal.LoadPalettes();
+		//Load the assoc file
+		long AssocAddressPtr=0;
+		if  ( 
+			( DataLoader.ReadStreamFile(pathToAssocUW2File, out assoc) ) 
+			&& ( DataLoader.ReadStreamFile(pathToPGMPFile, out pgmp) ) 
+			&& ( DataLoader.ReadStreamFile(pathToCRANFile, out cran) )  
+		)
+			{
+			for (int ass = 0 ; ass <=63 ; ass++)
+				{
+					int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
+					int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
+					if (FileID!=255)
+						{
+						critters[ass]= new CritterInfo(FileID, pal.Palettes[0], auxPal, assoc, pgmp, cran);			
+						}
+			
+				}
+			}
 		}
 	
 }

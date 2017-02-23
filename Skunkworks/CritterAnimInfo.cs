@@ -12,7 +12,7 @@ public class CritterAnimInfo {
 		{
 		animSequence=new string[32,8];
 		animIndices=new int[32,8];
-		animSprites=new Sprite[128];//In order
+		animSprites=new Sprite[200];//In order
 		animName=new string[32];
 		}
 }

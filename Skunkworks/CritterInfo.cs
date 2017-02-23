@@ -66,7 +66,6 @@ public class CritterInfo {
 				}
 
 			}
-
 		}
 
 
@@ -105,6 +104,7 @@ public class CritterInfo {
 
 					AnimInfo.animSequence[index,j]= "CR" + XXo + "PAGE_N" + YYo + "_" + AuxPalNo + "_" + (val + spriteIndex);
 					AnimInfo.animIndices[index,j]= (val + spriteIndex);
+					Debug.Log(AnimInfo.animSequence[index,j] + " at " + index + " " + j + " points to " + (val + spriteIndex));
 					ValidCount++;
 					}
 				}			
@@ -426,4 +426,165 @@ public class CritterInfo {
 			}
 		return result;
 		}
+
+
+	public CritterInfo(int critter_id, Palette paletteToUse, int palno,char[] assocData, char[] PGMP, char[] cran)
+		{
+		int ExtractPageNo = 0;
+		string critterIDO = DecimalToOct(critter_id.ToString());
+		AnimInfo=new CritterAnimInfo();
+		int spriteIndex=0;
+		for (int i = 0; i < 8; i++)
+			{
+			if ((int)DataLoader.getValAtAddress(PGMP, critter_id * 8 + i, 8) != 255)//Checks if a critter exists at this index in the page file.
+				{
+				string ExtractPageNoO = DecimalToOct (ExtractPageNo.ToString());
+				//sprintf_s(fileCrit, 255, "%s\\CR%02o.%02d", CritPath, CritterID, ExtractPageNo);//Create a file name to extract from
+				//sprintf_s(OutFileName, 255, "CR%02o_%02d_%d", CritterID, ExtractPageNo, auxPalNo);//Get a name to extract to
+				//extractCrittersUW2(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA, ACTUALLY_EXTRACT_FILES);
+				string fileCrit= "c:\\games\\uw2\\crit\\CR" + critterIDO + "." + ExtractPageNoO;
+				spriteIndex=ReadUW2PageFileData(assocData,palno,fileCrit,AnimInfo,spriteIndex,paletteToUse);
+				ExtractPageNo++;
+				}
+			}
+		}
+
+
+	int ReadUW2PageFileData(char[] assocFile, int PaletteNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
+		{
+		//Debug.Log(fileCrit + " starting at  "  + spriteIndex);
+		Palette pal= paletteToUse;
+		char[]critterFile;
+		//char[] auxpalval=new char[32];
+		Palette[] auxpal = new Palette[32];
+		int auxPalNo = PaletteNo;
+		int AddressPointer;
+
+
+		//pal = new palette[256];
+		//getPalette(PaletteFile, pal, 0);//always palette 0?
+
+		DataLoader.ReadStreamFile(fileCrit,out critterFile);
+
+
+		//UW2 uses a different method
+		//Starting at offset 0x80
+		//fprintf(LOGFILE, "\n\t//%s - palette = %d", fileCrit, auxPalNo);
+		//auxPalNo=2;
+		AddressPointer = 0;//auxPalNo * 32;
+
+		char[] auxPalVal=new char[32];
+		for (int j = 0; j < 32; j++)
+			{
+			auxPalVal[j] =(char)DataLoader.getValAtAddress(critterFile, (AddressPointer)+(AuxPalNo * 32) + j, 8);
+			}
+		
+		int i = 0;
+		int MaxWidth = 0;
+		int MaxHeight = 0;
+		int MaxHotSpotX = 0;
+		int MaxHotSpotY = 0;
+
+		for (int pass = 0; pass <= 1;pass++)
+			{
+			if (pass == 0)
+				{//First pass is getting max image sizes
+				for (int index = 128; index < 640; index = index + 2)
+					{
+					int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
+					if (frameOffset != 0)
+						{
+						int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
+						int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
+						int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
+						int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
+							if (hotspotx>BitMapWidth)	{hotspotx = BitMapWidth;}
+							if (hotspoty>BitMapHeight)	{hotspoty = BitMapHeight;}
+							if (BitMapWidth > MaxWidth){MaxWidth = BitMapWidth;}
+							if (BitMapHeight > MaxHeight){MaxHeight = BitMapHeight;}
+							if (hotspotx > MaxHotSpotX){MaxHotSpotX = hotspotx;}
+							if (hotspoty > MaxHotSpotY){MaxHotSpotY = hotspoty;}
+						}//End frameoffsetr first pass
+					}//End for loop first pass
+				}//End first pass
+			else
+				{//Extract images
+				if (MaxHotSpotX * 2 > MaxWidth)
+					{//Try and center the hot spot in the image.
+					MaxWidth = MaxHotSpotX * 2;
+					}
+				char[] outputImg;
+				outputImg = new char[MaxWidth*MaxHeight * 2];
+				for (int index = 128; index < 640; index = index + 2)
+					{
+					int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
+					if (frameOffset != 0)
+						{
+						int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
+						int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
+						int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
+						int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
+						int compression = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 4, 8);
+						int datalen = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 5, 16);
+						//Adjust the hotspots from the biggest point back to the image corners
+						int cornerX; int cornerY;
+						cornerX = MaxHotSpotX - hotspotx;
+						cornerY = MaxHotSpotY - hotspoty;
+							if (cornerX <= 0){cornerX = 0;}
+							else{cornerX = cornerX - 1;}
+							if (cornerY <= 0){cornerY = 0;}
+
+						if (true)
+							{
+							//Merge the image into a new big image at the hotspot coordinates.;
+							char[] srcImg;
+
+							srcImg = new char[BitMapWidth*BitMapHeight * 2];
+							ArtLoader.ua_image_decode_rle(critterFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxPalVal);
+							cornerY = MaxHeight - cornerY;//y is from the top left corner
+
+							int ColCounter = 0; int RowCounter = 0;
+							bool ImgStarted = false;
+							for (int y = 0; y < MaxHeight; y++)
+								{
+								for (int x = 0; x < MaxWidth; x++)
+									{
+									if ((cornerX + ColCounter == x) && (MaxHeight - cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+										{//the pixel from the source image is here 
+										ImgStarted = true;
+										outputImg[x + (y*MaxWidth)] = srcImg[ColCounter + (RowCounter*BitMapWidth)];
+										ColCounter++;
+										}
+									else
+										{
+										outputImg[x + (y*MaxWidth)] = (char)0;//alpha
+										}
+									}
+								if (ImgStarted == true)
+									{//New Row on the src image
+									RowCounter++;
+									ColCounter = 0;
+									}
+								}
+							//Set the heights for output
+							BitMapWidth = MaxWidth;
+							BitMapHeight = MaxHeight;
+
+							//Debug.Log(fileCrit + " "  + spriteIndex);
+
+							Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
+							AnimInfo.animSprites[spriteIndex++]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+							}
+						}//end extrac frameoffset
+					}//End for loop extract
+				}//End extract images
+			
+			}
+		//Debug.Log(fileCrit + " returning  "  + spriteIndex);
+		return spriteIndex;
+
+
+		}
+
+
 }
