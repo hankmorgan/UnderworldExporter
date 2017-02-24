@@ -61,10 +61,23 @@ public class CritterLoader : MonoBehaviour {
 	public void RetrieveCritter(int critterID, int animNo, int FrameNo)
 		{
 		int index= critters[critterID].AnimInfo.animIndices[animNo,FrameNo];
-		debugInfo.text=  critters[critterID].AnimInfo.animName[animNo];
-		output.sprite = critters[critterID].AnimInfo.animSprites[index];
-		AnimToFind=critters[critterID].AnimInfo.animSequence[animNo,FrameNo];
-		RetrieveSpriteByName();
+		if (index!=-1)
+			{
+			debugInfo.text=  critters[critterID].AnimInfo.animName[animNo];
+			output.sprite = critters[critterID].AnimInfo.animSprites[index];
+			AnimToFind=critters[critterID].AnimInfo.animSequence[animNo,FrameNo];
+			testFrameNo++;
+			if (testFrameNo>5)
+				{
+				testFrameNo=0;
+				}
+			}
+		else
+			{
+			testFrameNo=0;
+			}
+
+		//RetrieveSpriteByName();
 		}
 
 	public void RetrieveSpriteByName()
@@ -90,13 +103,18 @@ public class CritterLoader : MonoBehaviour {
 	public void GetSpriteAt()
 		{
 		output2.sprite = critters[testCritterId].AnimInfo.animSprites[indextofind];
-
 		}
 
 
-	public void GetSpriteAtIndex(int index)
-		{
-		output.sprite = critters[testCritterId].AnimInfo.animSprites[index];
+	public void GetSpriteAtIndex()
+		{//(testCritterId,testAnimNo,testFrameNo);
+		output.sprite = critters[testCritterId].AnimInfo.animSprites[indextofind];
+		debugInfo.text= critters[testCritterId].AnimInfo.animName[indextofind];
+		indextofind++;
+		if (indextofind>6)
+			{
+			indextofind=0;
+			}
 		}
 
 

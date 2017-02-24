@@ -447,6 +447,35 @@ public class CritterInfo {
 				ExtractPageNo++;
 				}
 			}
+		int cranAdd = (critter_id * 512);
+		for (int Animation = 0; Animation<8; Animation++)//The the animation slot
+			{
+			bool NoAngle=isAnimUnAngled(Animation);
+			int NoOfValid=0;
+
+			for (int Angle = 0; Angle<8; Angle++)//Each animation has every possible angle.
+				{
+				if ((NoAngle==false) || (Angle==4))
+					{
+					int UW2animIndex= GetUW2Anim(Animation, Angle);
+					int animIndex= TranslateAnimToIndex(UW2animIndex);
+					AnimInfo.animName[animIndex] = PrintAnimName(UW2animIndex);
+					int ValidEntries = (int)DataLoader.getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
+					for (int FrameNo = 0; FrameNo < 8; FrameNo++)
+						{
+						int currFrame = (int)DataLoader.getValAtAddress(cran, cranAdd + (Animation * 64) + (Angle * 8) + (FrameNo), 8);
+						if (FrameNo<ValidEntries)
+							{
+							AnimInfo.animIndices[animIndex, FrameNo]=currFrame;
+							}
+						else
+							{
+							AnimInfo.animIndices[animIndex,FrameNo]=-1;
+							}
+						}
+					}
+				}
+			}
 		}
 
 
@@ -586,5 +615,61 @@ public class CritterInfo {
 
 		}
 
+
+	/// <summary>
+	/// Ises the animation unangled.
+	/// </summary>
+	/// <returns><c>true</c>, if animation unangled was ised, <c>false</c> otherwise.</returns>
+	/// <param name="animationNo">Animation no.</param>
+	bool isAnimUnAngled(int animationNo)
+		{
+		switch (animationNo)
+			{
+			case 0x2:
+			case 0x3: 
+			case 0x4:
+			case 0x5: 
+			case 0x6:
+			case 0x7:
+			case 0xd: 
+				return true; 
+			default:
+				return false;
+			}	
+		}
+
+	/// <summary>
+	/// Translates a uw2 animation index into a uw1 version
+	/// </summary>
+	/// <returns>The U w2 animation.</returns>
+	/// <param name="animation">Animation.</param>
+	/// <param name="angle">Angle.</param>
+	int GetUW2Anim(int animation, int angle)
+		{
+			{
+			switch (animation)
+				{
+				case 0x0://idlecombat
+					{
+					return 0x20+angle;
+					}
+				case 0x1://walking
+					{
+					return 0x80+angle;
+					}
+				case 0x2://Attacks
+				case 0x3:
+				case 0x4:
+					return animation -1;
+				case 0x5://secondary attack
+				case 0x6://unknown attack
+					return animation;
+				case 0x7://death
+					return 0xc;
+				default:
+					return animation;
+				}
+			}
+		}
 
 }
