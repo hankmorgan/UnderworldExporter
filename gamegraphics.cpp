@@ -2725,7 +2725,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 						fprintf(LOGFILE, ", %d, _RES + \"/Sprites/Critters\" , 0.2f);\n", NoOfValid);						
 						}
 					}
-				}
+				}//h
 			}
 		}
 	}

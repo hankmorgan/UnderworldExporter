@@ -12,7 +12,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	public AudioSource aud; //What control will play the audio.
 	public bool SkipAnim=false;
 	private float CutsceneTime;
-	//public Sprite filler;
+	public Sprite filler;
 
 		public string currentCutsFile;
 		public string previousCutsFile;
@@ -205,7 +205,14 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 				switch (sprt.sprite.name)
 					{
 					case "cuts_blank":
-						CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);	
+								if (Cuts.filler==null)
+								{
+										CurrentSpriteLoaded= filler;	
+								}
+								else
+								{
+								CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);	
+								}
 						break;
 					case "SplashOrigin":
 					case "pres1_0000":

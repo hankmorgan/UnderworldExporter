@@ -79,7 +79,8 @@ public class UWCharacter : Character {
 	public float lavaDamageTimer;//How long before applying lava damage
 	public string currRegion;
 	private bool InventoryReady=false;
-
+	public bool JustTeleported=false;
+	public float teleportedTimer=0f;
 
 	public void Awake()
 	{
@@ -185,6 +186,14 @@ public class UWCharacter : Character {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
+		if (JustTeleported)
+		{
+			teleportedTimer+=Time.deltaTime;
+			if (teleportedTimer>=2f)
+			{
+				JustTeleported=false;
+			}
+		}
 		if (InventoryReady==false)
 		{
 						

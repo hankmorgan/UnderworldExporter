@@ -673,7 +673,7 @@ public class ObjectInteraction : UWEBase {
 				//GameObject SpriteObj =
 				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.WorldIndex [NewItem_id], objM.InventoryIndex [NewItem_id], objM.InventoryIndex [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
 				//Some known examples that occur
 				switch (NewItem_id) {
 				case 10://Sword of justice
@@ -856,13 +856,13 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		/// <param name="ChildName">Child name.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
+		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
 		{
 			GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
 
 			newObj.transform.parent=myObj.transform;
 			newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
-			return CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+			return CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldIndex,InventoryIndex,EquipIndex,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
 		}
 
 		/// <summary>
@@ -890,9 +890,9 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
+		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
 		{
-				return CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+			return CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldIndex,InventoryIndex,EquipIndex,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
 		}
 
 		/// <summary>
@@ -921,7 +921,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
+		public static ObjectInteraction CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, int Worldindex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
 		{
 			ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
 
@@ -938,8 +938,8 @@ public class ObjectInteraction : UWEBase {
 				}
 			}
 
-			objInteract.WorldDisplayIndex = int.Parse(WorldString.Substring (WorldString.Length-3,3));
-			objInteract.InvDisplayIndex= int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
+				objInteract.WorldDisplayIndex = Worldindex;// int.Parse(WorldString.Substring (WorldString.Length-3,3));
+				objInteract.InvDisplayIndex= InventoryIndex;//int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
 
 			if (isUsable==1)
 			{
@@ -982,7 +982,11 @@ public class ObjectInteraction : UWEBase {
 			}
 			if (isQuant==1)
 			{
-					objInteract.isquant=1;
+				objInteract.isquant=1;
+			}
+			else
+			{
+				objInteract.isquant=0;
 			}
 			//if (isEnchanted==1)
 			//{
@@ -1171,7 +1175,16 @@ public class ObjectInteraction : UWEBase {
 				//newObj.AddComponent<StoreAnimator>();
 				SpriteRenderer mysprite =  newObj.AddComponent<SpriteRenderer>();
 				//Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
-				mysprite.transform.localScale=new Vector3(2f,2f,2f);//Scale up sprites.
+				switch (Loader._RES)
+				{
+				case Loader.GAME_UW2:
+					mysprite.transform.localScale=new Vector3(1.5f,1.5f,1.5f);//Scale up sprites.
+					break;
+				default:
+					mysprite.transform.localScale=new Vector3(2f,2f,2f);//Scale up sprites.
+					break;
+				}
+			
 				mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 				//mysprite.sprite = image;//Assigns the sprite to the object.
 				//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
@@ -1677,7 +1690,7 @@ public class ObjectInteraction : UWEBase {
 				myObj.transform.parent = parent.transform;
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [currObj.item_id], objM.InvIcon [currObj.item_id], objM.InvIcon [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
 				objInt.next=currObj.next;
 				objInt.link=currObj.link;
 				objInt.quality=currObj.quality;
@@ -2007,9 +2020,13 @@ public class ObjectInteraction : UWEBase {
 		/// Returns the isQuant flag as a bool
 		/// </summary>
 		/// <returns><c>true</c>, if quant was ised, <c>false</c> otherwise.</returns>
+		///   Per UWformats If the "is_quant" flag is set, the field is a quantity or a special
+		//property. If the value is < 512 or 0x0200 it gives the number of stacked
+		//items present. Identical objects may be stacked up to 256 objects at a
+		//time. The field name "quantity" is used for this.
 		public bool isQuant()
 		{
-				return (isquant==1);
+				return ((isquant==1) && (link<512));
 		}
 
 

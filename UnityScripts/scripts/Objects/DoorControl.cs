@@ -677,7 +677,15 @@ public class DoorControl : object_base {
 						{//328>>58
 								doorIndex= objInt.item_id-328;
 						}
-						textureIndex= GameWorldController.instance.currentTileMap().texture_map[58+doorIndex];
+								if (_RES==GAME_UW2)
+								{
+										textureIndex= GameWorldController.instance.currentTileMap().texture_map[64+doorIndex];	
+								}
+								else
+								{
+										textureIndex= GameWorldController.instance.currentTileMap().texture_map[58+doorIndex];	
+								}
+						
 						//DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
 						break;
 					}					

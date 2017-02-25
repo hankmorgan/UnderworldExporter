@@ -9,9 +9,20 @@ public class CritLoader : ArtLoader {
 	{				
 		//pal.LoadPalettes();
 		//Load the assoc file
+		string assocpath;
+		switch (_RES)
+		{
+			case GAME_UW2:
+				ReadUW2AssocFile(CritterToLoad);	
+				return;
+			case GAME_UWDEMO:
+				assocpath =  "crit\\DASSOC.ANM"; break;
+			default:
+				assocpath =  "crit\\ASSOC.ANM"; break;
+		}
 		char[] assoc;
 		long AssocAddressPtr=256;
-		if (DataLoader.ReadStreamFile(BasePath + "crit\\ASSOC.ANM", out assoc))
+		if (DataLoader.ReadStreamFile(BasePath + assocpath, out assoc))
 		{
 			for (int ass = 0 ; ass <=63 ; ass++)
 			{
@@ -61,7 +72,31 @@ public class CritLoader : ArtLoader {
 		}
 
 
-
-
-
+		void ReadUW2AssocFile(int CritterToLoad)
+		{
+			char[] assoc;
+			char[] pgmp;
+			char[] cran;
+			//Load the assoc file
+			long AssocAddressPtr=0;
+			if  ( 
+				( DataLoader.ReadStreamFile(BasePath + "crit\\AS.AN", out assoc) ) 
+				&& ( DataLoader.ReadStreamFile(BasePath + "crit\\pg.mp", out pgmp) ) 
+				&& ( DataLoader.ReadStreamFile(BasePath + "crit\\cr.AN", out cran) )  
+			)
+			{
+				for (int ass = 0 ; ass <=63 ; ass++)
+				{
+					int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
+					int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
+					//if (FileID!=255)
+					//{
+					if (ass==CritterToLoad)
+						{
+						critter= new CritterInfo(FileID, GameWorldController.instance.palLoader.Palettes[0], auxPal, assoc, pgmp, cran);			
+						}
+					//}
+				}
+			}
+		}
 }

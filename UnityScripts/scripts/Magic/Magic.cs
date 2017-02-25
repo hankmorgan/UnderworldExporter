@@ -928,7 +928,7 @@ public class Magic : UWEBase {
 						myObj.transform.parent=GameWorldController.instance.LevelMarker();
 						GameWorldController.MoveToWorld(myObj);
 						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 182+ ObjectNo, 182+ObjectNo, 182+ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
 						GameWorldController.UnFreezeMovement(myObj);
@@ -976,7 +976,7 @@ public class Magic : UWEBase {
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, spKM.RndNPC, spKM.RndNPC, spKM.RndNPC, 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
 						//Assumes the npc is spawning in the region the player is in
@@ -1546,7 +1546,7 @@ public class Magic : UWEBase {
 					myObj.transform.parent=GameWorldController.instance.LevelMarker();
 					GameWorldController.MoveToWorld(myObj);
 					ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 					//TODO: Fix this
 					//arrow.item_index=339+boulderTypeOffset;
@@ -1805,7 +1805,7 @@ public class Magic : UWEBase {
 				myObj.transform.parent=GameWorldController.instance.LevelMarker();
 				GameWorldController.MoveToWorld(myObj);
 				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_393",true);
-				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
+				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 393, 393, 393,ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
 				BoxCollider bx=myObj.GetComponent<BoxCollider>();
 				if (bx==null)

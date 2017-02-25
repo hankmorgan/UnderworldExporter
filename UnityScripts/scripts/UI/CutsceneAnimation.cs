@@ -6,7 +6,7 @@ public class CutsceneAnimation : HudAnimation {
 		Sprite CurrentSpriteLoaded;
 		public string currentCutsFile;
 		public string previousCutsFile;
-		//public Sprite filler;
+		public Sprite filler;
 
 	/*Gui element for the small window animations*/
 
@@ -89,7 +89,15 @@ public class CutsceneAnimation : HudAnimation {
 						switch (sprt.sprite.name)
 						{
 						case "cuts_blank":
-								CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);	
+								if (Cuts.filler==null)
+								{
+										CurrentSpriteLoaded= filler;	
+								}
+								else
+								{
+										CurrentSpriteLoaded= Cuts.filler.RequestSprite(0);		
+								}
+
 								break;
 						case "SplashOrigin":
 						case "pres1_0000":

@@ -187,7 +187,7 @@ public class NPC : object_base {
 		newAnim=this.gameObject.AddComponent<NPC_Animation>();
 		if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
 		{
-				GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);
+			GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);				
 		}
 		newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
 		newAnim.output=this.GetComponentInChildren<SpriteRenderer>();

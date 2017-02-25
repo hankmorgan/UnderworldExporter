@@ -15,8 +15,16 @@ public class a_teleport_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		if ((_RES==GAME_UW2) && (GameWorldController.instance.playerUW.JustTeleported))
+		{//To stop infinite level transitions in UW2
+			GameWorldController.instance.playerUW.JustTeleported=false;
+			return;
+		}
+
 		float targetX=(float)objInt().quality*1.2f + 0.6f;
 		float targetY= (float)objInt().owner*1.2f + 0.6f;
+		GameWorldController.instance.playerUW.JustTeleported=true;
+		GameWorldController.instance.playerUW.teleportedTimer=0f;
 		if (objInt().zpos==0)
 		{//Stay on this level.
 			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(objInt().quality,objInt().owner)))*0.15f;

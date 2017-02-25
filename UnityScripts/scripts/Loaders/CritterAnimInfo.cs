@@ -12,7 +12,15 @@ public class CritterAnimInfo {
 	{
 		animSequence=new string[32,8];
 		animIndices=new int[32,8];
-		animSprites=new Sprite[128];//In order
+		switch (Loader._RES)
+		{
+		case Loader.GAME_UW2:
+			animSprites=new Sprite[180];
+			break;
+		default:
+			animSprites=new Sprite[128];
+			break;
+		}		
 		animName=new string[32];
 	}
 }

@@ -275,7 +275,7 @@ public class GameWorldController : UWEBase {
 		UWEBase._RES = game;
 		Loader._RES=game;
 		objectMaster=new ObjectMasters();
-		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
+		//objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
 		//critterData = new Critters();
 		//critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
 		//commobj=new CommonObjProps();
@@ -510,11 +510,11 @@ public class GameWorldController : UWEBase {
 					Tilemaps[newLevelNo]=new TileMap();
 					Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
 					Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
-					if (UWEBase._RES==UWEBase.GAME_UW1)
-					{//For now only load uw1 objects.
+					//if (UWEBase._RES!=UWEBase.GAME_UW2)
+					//{//For now only load uw1/demo objects.
 						objectList[newLevelNo]=new ObjectLoader();
-						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data,1);	
-					}
+						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
+					//}
 					Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
 				}
 						//Call events for inventory objects on level transition.
@@ -554,12 +554,13 @@ public class GameWorldController : UWEBase {
 				}
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
 
-				switch(UWEBase._RES)
-				{//For the moment no objects in UWdemo or UW2
-				case UWEBase.GAME_UW1:
-					ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
-					break;
-				}
+				//switch(UWEBase._RES)
+				//{//For the moment no objects in  UW2
+				//case UWEBase.GAME_UWDEMO:
+				//case UWEBase.GAME_UW1:
+				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+				//	break;
+				//}
 				
 
 				GenerateNavmesh(NavRigLand);
