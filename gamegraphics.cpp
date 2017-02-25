@@ -710,6 +710,7 @@ void copyNibbles(unsigned char *InputData, unsigned char *OutputData, int NoOfNi
 //Split the data up into in's nibbles.
 int i = 0;
 NoOfNibbles=NoOfNibbles*2;
+
 	while (NoOfNibbles > 1)
 	{
 		OutputData[i] = (getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F;		//High nibble
@@ -3289,7 +3290,10 @@ add_ptr=0;
 				MaxHeight = 128;
 				MaxWidth = 208;
 				}
-
+			if (i>220)
+				{
+				printf("H");
+				}
 			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
 			int BitMapWidth = getValAtAddress(textureFile, textureOffset + 1, 8);
 			int BitMapHeight = getValAtAddress(textureFile, textureOffset + 2, 8);

@@ -79,15 +79,32 @@ public class GRLoader : ArtLoader {
 				"Data\\WEAPONS.GR",
 		};
 
+	private string AuxPalPath = "DATA\\allpals.dat";
+	bool useOverrideAuxPalIndex=false;
+	int OverrideAuxPalIndex=0;
 
 	public int FileToLoad;
 	private bool ImageFileDataLoaded;
 	public int NoOfImages;
 
-	Texture2D[] ImageCache=new Texture2D[1];
+	protected Texture2D[] ImageCache=new Texture2D[1];
 	 
 	public GRLoader(int File)
 	{
+		useOverrideAuxPalIndex=false;
+		OverrideAuxPalIndex=0	;
+		FileToLoad=File;
+		LoadImageFile();
+	}
+
+	public GRLoader(int File, string AuxPalToUse, int AuxPalIndex)
+	{
+		if (AuxPalIndex!=-1)
+		{
+			useOverrideAuxPalIndex=true;
+			OverrideAuxPalIndex=OverrideAuxPalIndex	;
+		}
+		AuxPalPath=AuxPalToUse;
 		FileToLoad=File;
 		LoadImageFile();
 	}
@@ -152,12 +169,19 @@ public class GRLoader : ArtLoader {
 				}
 		case 0x8://4 bit run-length
 				{
-					auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);
+					if (!useOverrideAuxPalIndex)
+					{
+						auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);	
+					}
+					else
+					{
+						auxPalIndex=OverrideAuxPalIndex;
+					}
 					datalen = (int)DataLoader.getValAtAddress(ImageFileData,imageOffset+4,16);
 					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ "DATA\\allpals.dat",GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
+					auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
 					outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
 					//rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true);
 					ImageCache[index] =  Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha);
@@ -165,13 +189,19 @@ public class GRLoader : ArtLoader {
 				}
 		case 0xA://4 bit uncompressed//Same as above???
 				{
-					auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);
+					if (!useOverrideAuxPalIndex)
+					{
+						auxPalIndex = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 3, 8);	
+					}
+					else
+					{
+						auxPalIndex=OverrideAuxPalIndex;
+					}
 					datalen = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 4, 16);
 					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal(BasePath+ "DATA\\allpals.dat",GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-
+					auxpal =PaletteLoader.LoadAuxilaryPal(BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
 					ImageCache[index] =  Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha);
 					return ImageCache[index];
 				}
@@ -205,7 +235,7 @@ public class GRLoader : ArtLoader {
 		/// <param name="NoOfNibbles">No of nibbles.</param>
 		/// <param name="add_ptr">Add ptr.</param>
 		/// This code from underworld adventures
-		void copyNibbles(char[] InputData, ref char[] OutputData, int NoOfNibbles, long add_ptr)
+		protected void copyNibbles(char[] InputData, ref char[] OutputData, int NoOfNibbles, long add_ptr)
 		{
 			//Split the data up into it's nibbles.
 			int i = 0;

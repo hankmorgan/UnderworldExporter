@@ -89,23 +89,23 @@ public class Cutscene_Intro : Cuts {
         ImageLoops[17] = -1;
 
         ImageFrames[18] = "cs000_n21";//Mountain intro
-        ImageTimes[18] = 178.0f;
-        ImageLoops[18] = -1;
+        ImageTimes[18] = 176.0f;
+        ImageLoops[18] = 0;
 
         ImageFrames[19] = "cs000_n20";//Mountain walk
-        ImageTimes[19] = 181.8f;
+        ImageTimes[19] = 179.8f;
         ImageLoops[19] = 0;
 
         ImageFrames[20] = "cs000_n22";//Abyss door opens
-        ImageTimes[20] = 184.3f;
+        ImageTimes[20] = 182.3f;
         ImageLoops[20] = 0;
 
         ImageFrames[21] = "cs000_n24";//Colwyn outside
-        ImageTimes[21] = 187.8f;
+        ImageTimes[21] = 185.8f;
         ImageLoops[21] = -1;
 
         ImageFrames[22] = "cs000_n23";//Door closes
-        ImageTimes[22] = 201.0f;
+        ImageTimes[22] = 199.0f;
         ImageLoops[22] = 0;
 
         ImageFrames[23]="Anim_Base";//To finish.

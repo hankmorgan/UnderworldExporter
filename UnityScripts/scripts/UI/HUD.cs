@@ -13,7 +13,7 @@ public class HUD : UWEBase {
 
 
 	/// Reference to the weapon animation animator.
-	public WeaponAnimation wpa;
+	public WeaponAnimationPlayer wpa;
 
 	public CutsceneAnimationFullscreen CutScenesFull;
 	public ScrollController MessageScroll;

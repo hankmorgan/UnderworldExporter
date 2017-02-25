@@ -9,7 +9,7 @@ public class TMAP : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-
+				/*
 		if (objInt().y == 0)
 		{
 			this.transform.Translate(0.0f,0.0f,0.01f);
@@ -26,7 +26,7 @@ public class TMAP : object_base {
 		{
 			this.transform.Translate(0.1f,0.0f,0.0f);
 		}
-
+*/
 
 		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[objInt().owner];
 		CreateTMAP(this.gameObject,TextureIndex);	
@@ -89,7 +89,7 @@ public class TMAP : object_base {
 
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
-		if (TextureIndex==47)//The door to the base of the abyss.
+		if ((UWEBase._RES== UWEBase.GAME_UW1) && (TextureIndex==47))//The door to the base of the abyss.
 		{
 			if (ObjectUsed.GetComponent<ObjectInteraction>().item_id==231)//The key of infinity.
 			{

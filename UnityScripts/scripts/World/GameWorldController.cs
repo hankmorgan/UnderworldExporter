@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using UnityEngine.UI;
+
 /// <summary>
 /// Game world controller for controlling references and various global activities
 /// </summary>
@@ -167,7 +169,6 @@ public class GameWorldController : UWEBase {
 	public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
 	public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
 
-
 	/// <summary>
 	/// Shared palettes for artwork
 	/// </summary>
@@ -257,6 +258,14 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 	public TerrainDatLoader terrainData;
 
+
+	/// <summary>
+	/// The weapon animation frames.
+	/// </summary>
+	public WeaponAnimation weaps;
+	public WeaponAnimationPlayer WeaponAnim;
+	public WeaponsLoader weapongr;
+
 		void  LoadPath()
 		{
 			string fileName = Application.dataPath + "//..//" + game + "_path.txt";
@@ -305,7 +314,7 @@ public class GameWorldController : UWEBase {
 		grFlasks=new GRLoader(GRLoader.FLASKS_GR);
 
 		terrainData= new TerrainDatLoader();
-
+		weaps=new WeaponAnimation();
 
 		switch (_RES)
 		{
@@ -323,6 +332,7 @@ public class GameWorldController : UWEBase {
 				objectList=new ObjectLoader[9];
 				break;
 		}
+
 	}
 
 
@@ -333,7 +343,7 @@ public class GameWorldController : UWEBase {
 		switch(_RES)
 		{
 		case GAME_UWDEMO:
-		case GAME_UW2:
+				//case GAME_UW2:
 				//UW Demo does not go to the menu. It will load automatically into the gameworld
 				AtMainMenu=false;	
 				break;
@@ -879,5 +889,4 @@ public class GameWorldController : UWEBase {
 						Application.Quit();
 				}		
 		}
-
 }

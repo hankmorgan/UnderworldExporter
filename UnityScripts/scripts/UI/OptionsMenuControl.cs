@@ -264,11 +264,11 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		//List the save names
 		UWHUD.instance.MessageScroll.Clear ();
 		
-		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
+	/*	foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
 		{
 			int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
 			saveNames[SaveIndex] = sg.Name;
-		}
+		}*/
 		for (int i=0; i<=saveNames.GetUpperBound(0);i++)
 		{
 			if (saveNames[i]!="")
@@ -370,16 +370,16 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="slotNo">Slot no.</param>
 	private void BeginSaveToSlot(int slotNo)
 	{
-		LevelSerializer.useCompression=false;
-		foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+		//LevelSerializer.useCompression=false;
+		/*foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
 			if (sgX.Name=="save_"+slotNo)
 			{					
 				sgX.Delete();
 				break;
 			}
-		}	
+		}*/	
 		isLoadingOrSaving=true;
-		LevelSerializer.SaveGame("save_"+slotNo);
+		//LevelSerializer.SaveGame("save_"+slotNo);
 		isLoadingOrSaving=false;
 		ReturnToGame();	
 	}
@@ -392,7 +392,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="slotNo">Slot no.</param>
 	private void RestoreFromSlot(int slotNo)
 	{
-		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+		/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
 						if (sg.Name=="save_"+slotNo)
 						{
 							isLoadingOrSaving=true;
@@ -403,7 +403,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 							ReturnToGame();
 
 						}
-				}
+				}*/
 			Debug.Log("Restored Save " + slotNo);
 	}
 

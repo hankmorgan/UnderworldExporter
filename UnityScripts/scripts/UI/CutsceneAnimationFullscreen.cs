@@ -56,6 +56,14 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			yield return new WaitForSeconds(cs.getImageTime(i)-currTime);   //Wait until it is time for the frame
 			currTime = cs.getImageTime(i);                                   //For the next wait.
 			currentFrameLoops = cs.getImageLoops(i);
+			if (currentFrameLoops!=0)
+			{
+				anim.looping=true;
+			}
+			else
+			{
+				anim.looping=false;
+			}
 			SetAnimation= cs.getImageFrame(i);	
 		}
 		SetAnimation= "Anim_Base";//End of anim.
@@ -189,6 +197,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			}
 		}
 	
+		/*
 		/// <summary>
 	/// Deactivates the fullscreen animation if clicked on during anim_base
 	/// </summary>
@@ -257,6 +266,6 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 						}	
 				}
 
-		}
+		}*/
 
 }

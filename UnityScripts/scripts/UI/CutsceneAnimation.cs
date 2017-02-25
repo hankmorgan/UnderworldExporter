@@ -76,7 +76,7 @@ public class CutsceneAnimation : HudAnimation {
 		/// <summary>
 		/// Deactivates the fullscreen animation if clicked on during anim_base
 		/// </summary>
-		public void LateUpdate()
+	/*	public void LateUpdate()
 		{
 				if (sprt==null)
 				{
@@ -138,7 +138,7 @@ public class CutsceneAnimation : HudAnimation {
 						}	
 				}
 
-		}
+		}*/
 
 
 }

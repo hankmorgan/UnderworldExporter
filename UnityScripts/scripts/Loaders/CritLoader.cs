@@ -89,13 +89,13 @@ public class CritLoader : ArtLoader {
 				{
 					int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
 					int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
-					//if (FileID!=255)
-					//{
+					if (FileID!=255)
+					{
 					if (ass==CritterToLoad)
 						{
 						critter= new CritterInfo(FileID, GameWorldController.instance.palLoader.Palettes[0], auxPal, assoc, pgmp, cran);			
 						}
-					//}
+					}
 				}
 			}
 		}

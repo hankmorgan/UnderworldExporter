@@ -21,11 +21,12 @@ public class UWCombat : Combat {
 		{ ///If not charging an attack and not executing an attack it will check interaction mode.
 			if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack))
 			{///Sets the weapon, race and handedness of the weapon animation.
-				UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
+				//UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
+				UWHUD.instance.wpa.SetAnimation=GetWeaponOffset()+GetHandOffset()+6;//For ready
 			}
 			else
 			{///Or Hides the weapon by animating the player putting it away.
-				UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
+				UWHUD.instance.wpa.SetAnimation=-1; //"WeaponPutAway";
 			}
 		}
 	}
@@ -40,7 +41,8 @@ public class UWCombat : Combat {
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
 			CurrentStrike=GetStrikeType();
-			UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Charge";
+			//UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Charge";
+			UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+GetStrikeOffset()+GetHandOffset()+0; //charge
 		}
 		else
 		{
@@ -221,7 +223,8 @@ public class UWCombat : Combat {
 				{
 					CurrentStrike=GetStrikeType();		
 				}
-				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Execute";
+				//UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Execute";
+				UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+GetStrikeOffset()+GetHandOffset()+1;//exeute
 				AttackExecuting=true;
 				StartCoroutine(ExecuteMelee(CurrentStrike,Charge));
 			}
@@ -287,6 +290,35 @@ public class UWCombat : Combat {
 		}
 	}
 
+		public int GetWeaponOffset()
+		{
+			if (currWeapon!=null)
+			{
+				switch (currWeapon.GetSkill())
+				{
+				case 3:
+						return 0;
+				case 4:
+						return 7;
+				case 5:
+						return 14;
+				default:
+						return 21;
+				}
+			}
+			else
+			{
+				if (currWeaponRanged!=null)
+				{
+						return -1;
+				}
+				else
+				{
+						return 21;
+				}
+			}
+		}
+
 	/// <summary>
 	/// Gets the race of the charcter for displaying their skin colour based on the Body variable of UWCharacter
 	/// </summary>
@@ -320,6 +352,18 @@ public class UWCombat : Combat {
 			return "Right";
 		}
 	}
+
+		public int GetHandOffset()
+		{
+				if (GameWorldController.instance.playerUW.isLefty)
+				{
+						return 28;
+				}
+				else
+				{
+						return 0;
+				}
+		}
 
 	/// <summary>
 	/// Gets the type of the strike based on where the mouse cursor is located on the Y axis of the viewport.
@@ -358,6 +402,40 @@ public class UWCombat : Combat {
 		}
 
 	}
+
+		public int GetStrikeOffset()
+		{
+				if (!GameWorldController.instance.playerUW.MouseLookEnabled)
+				{
+						if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
+						{
+								return 2;//bash
+						}
+						else if(Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.333f)
+						{
+								return 4;//Slash
+						}
+						else
+						{
+								return 0;//stab
+						}	
+				}
+				else
+				{
+						switch (Random.Range(1,4))
+						{
+						case 1:
+								return 2;
+						case 2:
+								return 4;
+						case 3:
+						default:
+								return 0;
+						}
+				}
+
+		}
+
 
 		/// <summary>
 		/// Launchs the ammo.

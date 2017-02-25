@@ -109,6 +109,18 @@ public class UWCharacter : Character {
 
 		UWHUD.instance.InputControl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
+
+		switch (GameWorldController.instance.playerUW.Body)
+		{
+		case 0:
+		case 2 :
+		case 3:
+		case 4:
+				GameWorldController.instance.weapongr=new WeaponsLoader(0);break;
+		default:
+				GameWorldController.instance.weapongr=new WeaponsLoader(1);break;
+		}
+
 		
 	}
 
@@ -197,8 +209,8 @@ public class UWCharacter : Character {
 		if (InventoryReady==false)
 		{
 						
-			if (!LevelSerializer.IsDeserializing)
-			{
+			//if (!LevelSerializer.IsDeserializing)
+			//{
 				if ((playerInventory!=null))
 				{
 					if (playerInventory.GetCurrentContainer()!=null)
@@ -207,7 +219,7 @@ public class UWCharacter : Character {
 							InventoryReady=true;				
 					}
 				}	
-			}
+			//}
 		}
 		if ((WindowDetectUW.WaitingForInput==true) && (Instrument.PlayingInstrument==false))//TODO:Make this cleaner!!
 		{//TODO: This should be in window detect

@@ -35,13 +35,17 @@ public class ObjectLoader : Loader {
 		}
 
 
+
+		/// <summary>
+		/// Builds the object list for UW games
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="texture_map">Texture map.</param>
+		/// <param name="lev_ark">Lev ark.</param>
+		/// <param name="LevelNo">Level no.</param>
 		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, char[] lev_ark, int LevelNo)
 		{
-			
-
-			//unsigned char *lev_ark; 
-			//unsigned char *tmp_ark;		//for uw2 decompression
-			//long fileSize;
 			int NoOfBlocks;
 			long AddressOfBlockStart;
 			long objectsAddress;
@@ -49,7 +53,7 @@ public class ObjectLoader : Loader {
 			char[] graves;
 
 			//Load in the grave information
-			DataLoader.ReadStreamFile(Loader.BasePath + GameWorldController.instance.Graves_File, out graves);
+			DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
 			switch (_RES)
 			{
 			case GAME_UWDEMO:
@@ -165,17 +169,17 @@ public class ObjectLoader : Loader {
 
 				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.DOOR)
 				{
-						switch (_RES)
-						{
-						case GAME_UWDEMO:
-						case GAME_UW1:
-						case GAME_UW2:
-							if ((objList[x].item_id >= 328) && (objList[x].item_id <= 333))
-							{//Open doors need to be adjusted down?
-									objList[x].zpos-=24;
-							}
-							break;
+					switch (_RES)
+					{
+					case GAME_UWDEMO:
+					case GAME_UW1:
+					case GAME_UW2:
+						if ((objList[x].item_id >= 328) && (objList[x].item_id <= 333))
+						{//Open doors need to be adjusted down?
+								objList[x].zpos-=24;
 						}
+						break;
+					}
 				}
 
 				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BRIDGE)
@@ -302,9 +306,15 @@ public class ObjectLoader : Loader {
 
 
 
-	///*********
+	//*********
 
-
+	
+		/// <summary>
+		/// Sets the object tile X and Y values. Flags if the object exists in the map
+		/// </summary>
+		/// <param name="game">Game.</param>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
 	void setObjectTileXY(int game,TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList)
 	{//Justs some useful info to know.
 		//ObjectItem currObj;
@@ -366,30 +376,34 @@ public class ObjectLoader : Loader {
 		return  ((GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CONTAINER) || (GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CORPSE));
 	}
 
-		public static  bool isStatic(ObjectLoaderInfo currobj)
-		{//Objects that will never move
-
-			if (isTrap(currobj)||isTrigger(currobj))
-			{
-					return true;	
-			}
-			switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
-			{	
-			case ObjectInteraction.TMAP_CLIP:
-			case ObjectInteraction.TMAP_SOLID:
-			case ObjectInteraction.DOOR:
-			case ObjectInteraction.HIDDENDOOR:
-			case ObjectInteraction.PORTCULLIS:
-			case ObjectInteraction.GRAVE:
-			case ObjectInteraction.FOUNTAIN:
-			case ObjectInteraction.BUTTON:
-			case ObjectInteraction.PILLAR:
-			case ObjectInteraction.BRIDGE:
-					return true;
-			default:
-					return false;							
-			}
+		/// <summary>
+		/// Tells if the objects that will never move
+		/// </summary>
+		/// <returns><c>true</c>, if static was ised, <c>false</c> otherwise.</returns>
+		/// <param name="currobj">Currobj.</param>
+	public static  bool isStatic(ObjectLoaderInfo currobj)
+	{
+		if (isTrap(currobj)||isTrigger(currobj))
+		{
+				return true;	
 		}
+		switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+		{	
+		case ObjectInteraction.TMAP_CLIP:
+		case ObjectInteraction.TMAP_SOLID:
+		case ObjectInteraction.DOOR:
+		case ObjectInteraction.HIDDENDOOR:
+		case ObjectInteraction.PORTCULLIS:
+		case ObjectInteraction.GRAVE:
+		case ObjectInteraction.FOUNTAIN:
+		case ObjectInteraction.BUTTON:
+		case ObjectInteraction.PILLAR:
+		case ObjectInteraction.BRIDGE:
+				return true;
+		default:
+				return false;							
+		}
+	}
 
 
 		public static  bool isAlwaysInUse(ObjectLoaderInfo currobj)
@@ -427,33 +441,33 @@ public class ObjectLoader : Loader {
 
 		public static bool isTrap(ObjectLoaderInfo currobj)
 		{
-				switch (GameWorldController.instance.objectMaster.type[currobj.item_id] )
+			switch (GameWorldController.instance.objectMaster.type[currobj.item_id] )
+			{
+			case ObjectInteraction.A_DAMAGE_TRAP :
+			case ObjectInteraction.A_TELEPORT_TRAP :
+			case  ObjectInteraction.A_ARROW_TRAP :
+			case  ObjectInteraction.A_DO_TRAP :
+			case  ObjectInteraction.A_PIT_TRAP :
+			case  ObjectInteraction.A_CHANGE_TERRAIN_TRAP :
+			case  ObjectInteraction.A_SPELLTRAP :
+			case  ObjectInteraction.A_CREATE_OBJECT_TRAP :
+			case  ObjectInteraction.A_DOOR_TRAP :
+			case  ObjectInteraction.A_WARD_TRAP :
+			case  ObjectInteraction.A_TELL_TRAP  :
+			case  ObjectInteraction.A_DELETE_OBJECT_TRAP :
+			case  ObjectInteraction.AN_INVENTORY_TRAP :
+			case  ObjectInteraction.A_SET_VARIABLE_TRAP :
+			case  ObjectInteraction.A_CHECK_VARIABLE_TRAP :
+			case  ObjectInteraction.A_COMBINATION_TRAP :
+			case  ObjectInteraction.A_TEXT_STRING_TRAP :
 				{
-				case ObjectInteraction.A_DAMAGE_TRAP :
-				case ObjectInteraction.A_TELEPORT_TRAP :
-				case  ObjectInteraction.A_ARROW_TRAP :
-				case  ObjectInteraction.A_DO_TRAP :
-				case  ObjectInteraction.A_PIT_TRAP :
-				case  ObjectInteraction.A_CHANGE_TERRAIN_TRAP :
-				case  ObjectInteraction.A_SPELLTRAP :
-				case  ObjectInteraction.A_CREATE_OBJECT_TRAP :
-				case  ObjectInteraction.A_DOOR_TRAP :
-				case  ObjectInteraction.A_WARD_TRAP :
-				case  ObjectInteraction.A_TELL_TRAP  :
-				case  ObjectInteraction.A_DELETE_OBJECT_TRAP :
-				case  ObjectInteraction.AN_INVENTORY_TRAP :
-				case  ObjectInteraction.A_SET_VARIABLE_TRAP :
-				case  ObjectInteraction.A_CHECK_VARIABLE_TRAP :
-				case  ObjectInteraction.A_COMBINATION_TRAP :
-				case  ObjectInteraction.A_TEXT_STRING_TRAP :
-						{
-								return true;
-						}
-				default:
-						{
-								return false;
-						}
+					return true;
 				}
+			default:
+				{
+					return false;
+				}
+			}
 		}
 
 
@@ -683,6 +697,37 @@ public class ObjectLoader : Loader {
 
 				switch (GameWorldController.instance.objectMaster.type[objList[index].item_id])
 				{
+				case ObjectInteraction.TMAP_CLIP:
+				case ObjectInteraction.TMAP_SOLID:
+						switch (objList[index].heading*45)
+						{
+						case ObjectInteraction.HEADINGWEST:
+						case ObjectInteraction.HEADINGEAST:								
+								/*offX = (x*BrushX) + 0.6f;*/
+								if (objList[index].x == 0)
+								{
+										offX +=0.15f;
+								}
+								if (objList[index].x == 7)
+								{
+										offX -=0.15f;
+								}
+								break;
+						case ObjectInteraction.HEADINGNORTH:
+						case ObjectInteraction.HEADINGSOUTH:
+								/*	offY = (y*BrushY) + 0.6f;*/
+								if (objList[index].x == 0)
+								{
+										offY +=0.15f;
+								}
+								if (objList[index].y == 7)
+								{
+										offY -=0.15f;
+								}
+								break;
+						}
+						break;
+
 				case ObjectInteraction.DOOR:
 				case ObjectInteraction.HIDDENDOOR:
 				case ObjectInteraction.PORTCULLIS:
@@ -724,16 +769,16 @@ public class ObjectLoader : Loader {
 										switch (game)
 										{
 										case SHOCK:
-												if (objList[index].x == 0){	offX = offX + 2.0f;	}
-												if (objList[index].x == 128){offX = offX - 2.0f;}
-												if (objList[index].y == 0){offY = offY + 2.0f;}
-												if (objList[index].y == 128){offY = offY - 2.0f;}
+												if (objList[index].x == 0){	offX = offX + 0.02f;	}
+												if (objList[index].x == 128){offX = offX - 0.02f;}
+												if (objList[index].y == 0){offY = offY + 0.02f;}
+												if (objList[index].y == 128){offY = offY - 0.02f;}
 												break;
 										default:
-												if (objList[index].x == 0){offX = offX + 2.0f;}
-												if (objList[index].x == 7){offX = offX - 2.0f;}
-												if (objList[index].y == 0){offY = offY + 2.0f;}
-												if (objList[index].y == 7){offY = offY - 2.0f;}
+												if (objList[index].x == 0){offX = offX + 0.02f;}
+												if (objList[index].x == 7){offX = offX - 0.02f;}
+												if (objList[index].y == 0){offY = offY + 0.02f;}
+												if (objList[index].y == 7){offY = offY - 0.02f;}
 												break;
 										}
 								}					

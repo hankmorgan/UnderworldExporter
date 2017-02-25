@@ -8,19 +8,21 @@ public class HudAnimation : GuiBase {
 	//public UITexture TargetControl;
 	public RawImage TargetControl;
 	public string SetAnimation;
-	protected SpriteRenderer sprt;
+	//protected SpriteRenderer sprt;
 	public string PreviousAnimation;
 	private string PreviousSprite="";
-	private Animator anim;
+	//private Animator anim;
+	public CutsAnimator anim;
 
 	public static int NormalCullingMask;//-33
 	// Use this for initialization
 	public override void Start()
 		{
 		base.Start();
-		sprt=this.GetComponent<SpriteRenderer>();
-		anim=this.GetComponent<Animator>();
-		anim.Play (SetAnimation);
+		//sprt=this.GetComponent<SpriteRenderer>();
+
+		anim.SetAnimation="Anim_Base";
+		//anim.Play (SetAnimation);
 		PreviousAnimation=SetAnimation;
 		NormalCullingMask=-33;  //= playerUW.playerCam.cullingMask;
 	}
@@ -29,17 +31,18 @@ public class HudAnimation : GuiBase {
 	protected virtual void Update () {
 		if (SetAnimation !=PreviousAnimation)
 		{
-			anim.Play (SetAnimation);
+						anim.SetAnimation=SetAnimation;
+			//anim.Play (SetAnimation);
 			PreviousAnimation=SetAnimation;
 		}
-		if (sprt.sprite!=null)
+		/*if (sprt.sprite!=null)
 		{
 			if (PreviousSprite!=sprt.sprite.name)
 			{
 					TargetControl.texture =sprt.sprite.texture;
 					PreviousSprite=sprt.sprite.name;
 			}			
-		}
+		}*/
 	}
 
 

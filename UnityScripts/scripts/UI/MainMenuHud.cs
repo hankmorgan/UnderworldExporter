@@ -176,11 +176,12 @@ public class MainMenuHud : GuiBase {
 				//List the save names
 				UWHUD.instance.MessageScroll.Clear ();
 
-				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
+				/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
 				{
 						int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
 						saveNames[SaveIndex] = sg.Name;
 				}
+*/
 				for (int i=0; i<=saveNames.GetUpperBound(0);i++)
 				{						
 						if (saveNames[i]!="")
@@ -208,7 +209,7 @@ public class MainMenuHud : GuiBase {
 					JourneyOnwards();
 					return;
 			}
-			foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
+			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
 				{
 					if (sg.Name=="save_"+SlotNo)
 					{					
@@ -217,7 +218,7 @@ public class MainMenuHud : GuiBase {
 						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);	
 						Destroy (this.gameObject);
 					}
-				}
+				}*/
 		}
 
 		public void ChargenClick(int option)

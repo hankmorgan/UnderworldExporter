@@ -459,7 +459,7 @@ public class WindowDetectUW : WindowDetect {
 						{
 								//if (UWHUD.instance.MouseLookCursor.texture.name != UWHUD.instance.CursorIcon.name)	
 								//{
-										UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;	
+								UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;	
 								//}
 
 								//Added due to unity bug where mouse is offscreen!!!!

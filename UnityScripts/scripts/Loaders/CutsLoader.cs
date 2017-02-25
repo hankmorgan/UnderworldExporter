@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CutsLoader : ArtLoader {
 
-		Texture2D[] ImageCache=new Texture2D[1];
+		public Texture2D[] ImageCache=new Texture2D[1];
 		char[] dstImage; //repeating buffer
 
 
