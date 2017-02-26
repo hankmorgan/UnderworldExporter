@@ -69,7 +69,7 @@ public class Food : object_base {
 		switch(objInt().item_id)
 		{
 			case 191://Wine of compassion
-				UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetString(1,264));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.YouSee) + " " + StringController.instance.GetString(1,264));
 				break;
 			case 192://plants
 			case 207:	
@@ -90,29 +90,37 @@ public class Food : object_base {
 		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
 	{
+			int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
+			int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+			Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
+				int BaseStringNo=173;
+				if (_RES==GAME_UW2)
+				{
+						BaseStringNo=187;
+				}
 		if (objInt().quality == 0)
 			{
-			return StringController.instance.GetString (1,172);//worm
+				return StringController.instance.GetString (1,BaseStringNo);//worm
 			}
 		if ((objInt().quality >=1) && (objInt().quality <15))
 			{
-			return StringController.instance.GetString (1,173);//rotten
+				return StringController.instance.GetString (1,BaseStringNo+1);//rotten
 			}
 		if ((objInt().quality >=15) && (objInt().quality <32))
 			{
-			return StringController.instance.GetString (1,174);//smelly
+				return StringController.instance.GetString (1,BaseStringNo+2);//smelly
 			}
 		if ((objInt().quality >=32) && (objInt().quality <40))
 			{
-			return StringController.instance.GetString (1,175);//day old
+				return StringController.instance.GetString (1,BaseStringNo+3);//day old
 			}
 		if ((objInt().quality >=40) && (objInt().quality <48))
 			{
-			return StringController.instance.GetString (1,176);//fresh
+				return StringController.instance.GetString (1,BaseStringNo+4);//fresh
 			}
 		else
 			{
-			return StringController.instance.GetString (1,176);//fresh
+				return StringController.instance.GetString (1,BaseStringNo+5);//fresh
 			}
 	}
 
@@ -123,6 +131,9 @@ public class Food : object_base {
 		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
 	private string foodSmellText()//
 	{
+		int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
+		int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+		Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
 		if (objInt().quality == 0)
 		{
 				return StringController.instance.GetString (5,18);//worm

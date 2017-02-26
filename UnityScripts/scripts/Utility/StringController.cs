@@ -8,6 +8,8 @@ using System.IO;
 /// </summary>
 public class StringController : UWEBase {
 
+	public static int YouSee=260;
+
 	/// <summary>
 	/// The game strings are stored in this hashtable.
 	/// </summary>
@@ -309,6 +311,18 @@ public class StringController : UWEBase {
 		void Awake()
 		{
 			instance=this;
+				//Set some default strings that differ between games.
+				switch (_RES)
+				{
+				case GAME_UW2:
+						YouSee=276;
+						break;
+				default:
+						YouSee=260;
+						break;
+				}
+
+
 				/*if(UWEBase._RES!="UW1")
 				{					
 					//InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
@@ -331,6 +345,7 @@ public class StringController : UWEBase {
 	{
 		GameStrings=new Hashtable();
 		return Load(StringFilePath);
+
 	}
 
 
@@ -544,7 +559,7 @@ public class StringController : UWEBase {
 				}				
 			}
 		output =output.Replace("_"," ");
-		return GetString(1,260) + output;
+		return GetString(1,YouSee) + output;
 	}
 
 
@@ -588,7 +603,7 @@ public class StringController : UWEBase {
 		}		
 		
 		output =output.Replace("_"," ");
-		return GetString(1,260) + output;
+		return GetString(1,YouSee) + output;
 
 	}
 
@@ -672,7 +687,7 @@ public class StringController : UWEBase {
 			}			
 		}
 		//output =output.Replace("_", " " + QualityString + " ");
-		return GetString(1,260) + output;
+		return GetString(1,YouSee) + output;
 	}
 
 	//// <summary>
@@ -684,6 +699,10 @@ public class StringController : UWEBase {
 	public string GetSimpleObjectNameUW(int item_id)
 	{//Without quants.
 		string output = GetString (4,item_id);
+		if (output==null)
+		{
+				return "";
+		}
 		if (output.Contains("&"))
 		{
 			output= output.Split ('&')[0];
@@ -709,7 +728,7 @@ public class StringController : UWEBase {
 	/// <param name="index">Index.</param>
 	public string TextureDescription(int index)
 	{//TODO:fix floor and wall naming
-		return (GetString(1,260)  + GetString (10,index));
+		return (GetString(1,YouSee)  + GetString (10,index));
 	}
 
 
@@ -764,24 +783,23 @@ public class StringController : UWEBase {
 	/// <param name="index">Index.</param>
 	public string GetTextureName(int index)
 	{
+		switch (_RES)
+		{
+		case GAME_UW2:
+
+				return GetString(10,index);//There is something odd here. Some textures in the file don't match this
+
+		default:
+			{
 				if (index<210)
 				{//Return a wall texture.
-						return GetString(10,index);
+					return GetString(10,index);
 				}
 				else
 				{//return a floor texture in reverse order.
 					return GetString(10, 510-index+210);
 				}
-
-				/*
-		if (index <= UW1_TextureNames.Length)
-		{
-
-			//return UW1_TextureNames[index];
+			}
 		}
-		else
-		{
-			return "UNKNOWN TEXTURE";
-		}*/
 	}
 }

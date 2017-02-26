@@ -83,17 +83,23 @@ public class CutsAnimator : GuiBase {
 			case "anim_base":
 				TargetControl.texture=anim_base;
 				break;	
+			case "splashlookingglass":
+				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(7);			
+				break;
+			case "splashoriginea":
+				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(6);			
+				break;
 			case "splashorigin":
 			case "pres1_0000":
-					TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);			
-					break;
+				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);			
+				break;
 			case "splashbluesky":
 			case "pres2_0000":
-					TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
-					break;
+				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES2_BYT);
+				break;
 			case "splashorigindemo":
-					TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRESD_BYT);		
-					break;	
+				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRESD_BYT);		
+				break;	
 			case "almricsitting"://special case
 				cuts = new CutsLoader("cs000.n11");
 				TargetControl.texture = cuts.ImageCache[0];

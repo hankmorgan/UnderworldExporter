@@ -530,7 +530,7 @@ public class UWCharacter : Character {
 							if (int.TryParse(rend.materials[materialIndex].name.Substring(4,3),out textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
 							{
 								//GetMessageLog ().text =
-								if (textureIndex==142)
+								if ((textureIndex==142) && (_RES!=GAME_UW2))
 								{//This is a window into the abyss.
 									UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 								}
