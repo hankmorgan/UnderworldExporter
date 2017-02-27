@@ -716,7 +716,7 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.HEADINGNORTH:
 						case ObjectInteraction.HEADINGSOUTH:
 								/*	offY = (y*BrushY) + 0.6f;*/
-								if (objList[index].x == 0)
+								if (objList[index].y == 0)
 								{
 										offY +=0.15f;
 								}

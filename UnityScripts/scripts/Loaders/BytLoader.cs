@@ -16,6 +16,9 @@ public class BytLoader : ArtLoader {
 		public const int WIN2_BYT =8;
 		public const int PRESD_BYT =9;
 
+		//UW2 bitmap indices
+		public const int UW2MAIN_BYT=5;
+
 
 		private int currentIndex=-1;
 
@@ -47,6 +50,21 @@ public class BytLoader : ArtLoader {
 			0
 		};
 
+
+		private int[] PaletteIndicesUW2=
+		{
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			15,
+			15,
+			0,
+			0,
+			0
+		};
 
 	/// <summary>
 	/// Loads the texture form a byt file
@@ -101,11 +119,11 @@ public class BytLoader : ArtLoader {
 					if (isCompressed==1)	
 					{
 						int datalen=0;
-						return Image(DataLoader.unpackUW2(textureFile,textureOffset,ref datalen),0,320,200,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);
+						return Image(DataLoader.unpackUW2(textureFile,textureOffset,ref datalen),0,320,200,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteIndicesUW2[index]],Alpha);
 					}
 					else
 					{
-						return Image(textureFile,textureOffset,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndices[index]],Alpha);	
+						return Image(textureFile,textureOffset,320,200,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteIndicesUW2[index]],Alpha);	
 					}
 			}
 				return null;

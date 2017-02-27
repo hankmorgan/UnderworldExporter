@@ -456,6 +456,10 @@ public class UWCharacter : Character {
 				ObjectInteraction objInt = hit.transform.GetComponent<ObjectInteraction>();
 				if (objInt != null)
 				{
+					if (EditorMode)
+					{//Select this object in the editor pane
+						IngameEditor.instance.ObjectSelect.value= objInt.objectloaderinfo.index;
+					}
 					objInt.LookDescription();
 					return;
 				}

@@ -326,8 +326,8 @@ public class TileMap : Loader {
 			Color[] defaultColour= playerPosIcon.GetPixels();
 			if (UWEBase.EditorMode)
 			{
-				float ratioX = IngameEditor.TileX / (64.0f*1.2f);
-				float ratioY = IngameEditor.TileY / (64.0f*1.2f);
+				float ratioX = (IngameEditor.TileX * 1.2f) / (64.0f*1.2f);
+				float ratioY = (IngameEditor.TileY * 1.2f) / (64.0f*1.2f);
 				output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);	
 			}
 			else

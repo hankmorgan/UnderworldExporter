@@ -68,8 +68,18 @@ public class MainMenuHud : GuiBase {
 			{					
 
 				//Initialize the open screens from the game files
-				OpScr.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.OPSCR_BYT);
-				CharGen.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.CHARGEN_BYT);
+						switch (_RES)
+						{
+						case GAME_UW2:
+								OpScr.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.UW2MAIN_BYT);
+								break;
+						default:
+								OpScr.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.OPSCR_BYT);
+
+								break;
+						}
+						CharGen.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.CHARGEN_BYT);
+				
 
 					CursorPosition = new Rect(
 							0.0f,

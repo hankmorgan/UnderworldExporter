@@ -132,7 +132,7 @@ public class ObjectInteraction : UWEBase {
 
 		//UW Props
 
-		public int index;	//it's own index in case I need to find myself.
+		//public int index;	//it's own index in case I need to find myself.
 		public int item_id;	//0-8
 		public int flags;	//9-12
 		public short enchantment;	//12

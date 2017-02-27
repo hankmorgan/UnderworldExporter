@@ -11,24 +11,52 @@ public class IngameEditor : GuiBase_Draggable {
 	public  Dropdown TileTypeSelect;
 	public Dropdown FloorTextureSelect;
 	public Dropdown WallTextureSelect;
+	public Dropdown ObjectSelect;
 
 	public Text LevelDetails;
 	public Text TileDetails;
+	public Text ObjectInfo;
+
 	public InputField TileHeightDetails;
+
+	public RectTransform TileMapDetailsPanel;
+	public RectTransform ObjectDetailsPanel;
 
 	public static int TileX=0;
 	public static int TileY=0;
 
+		public static IngameEditor instance;
+
+		void Awake()
+		{
+			instance=this;
+		}
+
 	void Start()
 	{
+			
 		if (GameWorldController.instance.LevelNo!=-1)
 		{
+			SwitchPanel(0);//Tilemap
 			UpdateFloorTexturesDropDown();
 			UpdateWallTexturesDropDown();
 			RefreshTileMap();
 			RefreshTileInfo();
+			
 		}
 	}
+
+		void UpdateObjectsDropDown()
+		{
+				ObjectSelect.ClearOptions();
+				for (int i=0; i<=GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
+				{						
+					string itemtext= ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+					ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
+				}
+				FloorTextureSelect.RefreshShownValue();
+		}
+
 
 	void UpdateFloorTexturesDropDown()
 	{
@@ -70,6 +98,7 @@ public class IngameEditor : GuiBase_Draggable {
 			RefreshTileInfo();
 			UpdateFloorTexturesDropDown();
 			UpdateWallTexturesDropDown();
+			UpdateObjectsDropDown();
 		}		
 	}
 
@@ -273,6 +302,34 @@ public class IngameEditor : GuiBase_Draggable {
 			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TileX,TileY)))*0.15f;
 			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 		}
+
+		public void SelectCurrentTile()
+		{
+			TileX=TileMap.visitTileX;
+			TileY=TileMap.visitTileY;			
+			RefreshTileInfo();
+		}
+
+		public void SwitchPanel(int Panel)
+		{
+			TileMapDetailsPanel.gameObject.SetActive(Panel==0);
+			ObjectDetailsPanel.gameObject.SetActive(Panel==1);
+			if (Panel==1)
+			{
+				UpdateObjectsDropDown();
+			}
+		}
+
+
+		public void RefreshObjectInfo()
+		{
+			int i= ObjectSelect.value;
+			string ObjectName=ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+			int item_id= GameWorldController.instance.CurrentObjectList().objInfo[i].item_id;
+			ObjectInfo.text= ObjectName + "\n" + "Item id = " + item_id;		
+		}
+
+
 }
 
 
