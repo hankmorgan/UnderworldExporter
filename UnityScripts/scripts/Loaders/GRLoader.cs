@@ -147,9 +147,13 @@ public class GRLoader : ArtLoader {
 				return ImageCache[index];
 			}
 		}
-					
+		
 		
 		long imageOffset = DataLoader.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
+		if (imageOffset>=ImageFileData.GetUpperBound(0))
+			{//Image out of range
+				return base.LoadImageAt(index);
+			}
 		int BitMapWidth = (int)DataLoader.getValAtAddress(ImageFileData,imageOffset+1, 8);
 		int BitMapHeight = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset+2, 8);
 		int datalen;
@@ -404,6 +408,10 @@ public class GRLoader : ArtLoader {
 			if (ImageCache[index]==null)
 			{
 				LoadImageAt(index);	
+				if (ImageCache[index]==null)
+				{//Still can't be loaded
+					return Resources.Load<Sprite>("Common/null");
+				}
 			}			
 			return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f, 0.0f));
 		}

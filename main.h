@@ -136,7 +136,7 @@ extern int CEILING_HEIGHT;
 #define UW2_SPACE_BLOCK 3
 
 //Turn on alpha channels globally.
-#define ALPHA 0
+#define ALPHA 1
 
 //Generate graphics in Greyscale for palette operations
 #define GREYSCALE 0

@@ -252,6 +252,7 @@ public class NPC : object_base {
 	/// </summary>
 	/// AI is only active when the player is close.
 	protected virtual void  Update () {
+		if (EditorMode==true){return;}
 		if (Frozen)
 		{//NPC will not move until timer is complete.
 			if (FrozenUpdate==0)

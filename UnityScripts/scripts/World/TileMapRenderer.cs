@@ -82,8 +82,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 						for (int x = 0; x <= 63; x++)
 						{
-								RenderTile(parent, game, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
-								RenderTile(parent, game, x, y, Level.Tiles[x,y], true, false, false, skipCeil);
+								RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
+								RenderTile(parent, x, y, Level.Tiles[x,y], true, false, false, skipCeil);
 						}
 				}
 
@@ -114,7 +114,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						tmp.VisibleFaces[vNORTH] = 0;
 						tmp.VisibleFaces[vSOUTH] = 0;
 						// top,east,bottom,west,north,south
-						RenderTile(parent, game, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
+						RenderTile(parent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
 
 
 						//Now add a room to store objects objects
@@ -139,7 +139,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										{
 												tmp.tileType = 1;
 										}
-										RenderTile(parent, game, x, y, tmp, false, false, false, false);
+										RenderTile(parent, x, y, tmp, false, false, false, false);
 								}
 						}
 						//And at 99,99 for special stuff.
@@ -157,7 +157,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										{
 												tmp.tileType = 1;
 										}
-										RenderTile(parent, game, x, y, tmp, false, false, false, false);
+										RenderTile(parent, x, y, tmp, false, false, false, false);
 								}
 						}
 
@@ -835,7 +835,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-		public static void RenderTile(GameObject parent, int game, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
+		public static void RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
 				//Picks the tile to render based on tile type/flags.
 				switch (t.tileType)
@@ -1734,7 +1734,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 						if (t.isWater == Water)
 						{
-								string TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+								string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 								RenderCuboid( parent, x, y, t, Water, -2, CEILING_HEIGHT + 1, TileName);
 						}
 				}

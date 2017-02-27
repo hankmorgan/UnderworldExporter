@@ -66,6 +66,7 @@ public class UWHUD : HUD {
 
 		public GameObject currentPanel;
 
+		public GameObject editorPanel;
 
 
 		//Panel states 
@@ -374,6 +375,8 @@ public class UWHUD : HUD {
 				EnableDisableControl(DragonRightPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
 				EnableDisableControl(CutsceneSmallPanel,CutSceneSmallEnabled);
 				EnableDisableControl(CutsceneFullPanel,CutSceneFullEnabled);	
+
+				EnableDisableControl(editorPanel,EditorMode);
 		}
 
 		/// <summary>

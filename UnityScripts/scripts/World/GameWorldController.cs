@@ -440,7 +440,13 @@ public class GameWorldController : UWEBase {
 	public static GameObject FindTile(int x, int y, int surface)
 	{
 		string tileName = GetTileName (x,y,surface);
-		return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
+		Transform found = instance.getCurrentLevelModel().transform.FindChild (tileName);
+		if (found!=null)
+		{
+			return found.gameObject;
+		}
+		Debug.Log("Cannot find " + tileName);
+		return null;
 	}
 	
 		/// <summary>
@@ -525,7 +531,11 @@ public class GameWorldController : UWEBase {
 						objectList[newLevelNo]=new ObjectLoader();
 						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
 					//}
-					Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects	
+					if (UWEBase.EditorMode==false)
+					{
+						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects									
+					}
+
 				}
 						//Call events for inventory objects on level transition.
 				foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
@@ -541,7 +551,7 @@ public class GameWorldController : UWEBase {
 					//Update the positions of all object interactions in the level
 					//UpdatePositions();
 
-					if (_RES==GAME_UW1)
+					if (UWEBase.EditorMode==false)
 					{
 						ObjectLoader.UpdateObjectList();		
 					}
@@ -553,13 +563,15 @@ public class GameWorldController : UWEBase {
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
 				critsLoader= new CritLoader[64];//Clear out animations
-
-				//Call events for inventory objects on level transition.
-				foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+				if (UWEBase.EditorMode==false)
 				{
-					if (t.gameObject.GetComponent<object_base>()!=null)
+					//Call events for inventory objects on level transition.
+					foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
 					{
-						t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+						if (t.gameObject.GetComponent<object_base>()!=null)
+						{
+							t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+						}
 					}
 				}
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);

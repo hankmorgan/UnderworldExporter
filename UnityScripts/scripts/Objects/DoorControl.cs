@@ -661,7 +661,15 @@ public class DoorControl : object_base {
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
-							textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+								if (objInt.tileX<=63)
+								{
+										textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+								}
+								else
+								{
+										textureIndex=0;
+								}
+							
 							//textureIndex = GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
 							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
 							break;	
@@ -739,7 +747,7 @@ public class DoorControl : object_base {
 		/// <param name="textureIndex">Texture index.</param>
 		static void RenderHiddenDoor(DoorControl dc, int textureIndex)
 		{
-
+				
 				//move the secret door to the bottom so I can match the uvs properly. I think
 				dc.transform.position = new Vector3(dc.transform.position.x,0f,dc.transform.position.z);
 
@@ -751,6 +759,7 @@ public class DoorControl : object_base {
 				Vector2[] uvs =new Vector2[6*4];
 				int tileX=dc.objInt().tileX;
 				int tileY=dc.objInt().tileY;
+				if (tileX==99){return;}
 				int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
 				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
 				float Bottom =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;

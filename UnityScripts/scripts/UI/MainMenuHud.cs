@@ -204,6 +204,13 @@ public class MainMenuHud : GuiBase {
 		/// <param name="SlotNo">Slot no.</param>
 		public void LoadSave(int SlotNo)
 		{
+			if (SlotNo==-2)
+			{//Speedstart
+				UWEBase.EditorMode=true;
+				JourneyOnwards();
+				return;
+			}
+
 			if (SlotNo==-1)
 			{//Speedstart
 					JourneyOnwards();

@@ -812,7 +812,7 @@ public class ObjectLoader : Loader {
 			{
 			if (instance.objInfo[i]!=null)
 				{
-				if (instance.objInfo[i].InUseFlag==1)
+					if ((instance.objInfo[i].InUseFlag==1) || (UWEBase.EditorMode))
 					{
 					Vector3 position = instance.CalcObjectXYZ(1,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
 					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i],parent,position);

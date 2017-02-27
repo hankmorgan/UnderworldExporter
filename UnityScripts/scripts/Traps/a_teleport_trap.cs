@@ -15,6 +15,10 @@ public class a_teleport_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		if (EditorMode)
+		{
+			return;
+		}
 		if ((_RES==GAME_UW2) && (GameWorldController.instance.playerUW.JustTeleported))
 		{//To stop infinite level transitions in UW2
 			GameWorldController.instance.playerUW.JustTeleported=false;

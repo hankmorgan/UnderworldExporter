@@ -15,4 +15,6 @@ public class UWEBase : MonoBehaviour {
 		/// The folder containing the resources for this game.
 		/// </summary>
 		public static string _RES= GAME_UW1;
+
+		public static bool EditorMode=false;
 }

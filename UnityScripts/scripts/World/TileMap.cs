@@ -324,9 +324,18 @@ public class TileMap : Loader {
 		if (thisLevelNo==GameWorldController.instance.LevelNo)
 		{
 			Color[] defaultColour= playerPosIcon.GetPixels();
-			float ratioX = GameWorldController.instance.playerUW.transform.position.x / (64.0f*1.2f);
-			float ratioY = GameWorldController.instance.playerUW.transform.position.z / (64.0f*1.2f);
-			output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);								
+			if (UWEBase.EditorMode)
+			{
+				float ratioX = IngameEditor.TileX / (64.0f*1.2f);
+				float ratioY = IngameEditor.TileY / (64.0f*1.2f);
+				output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);	
+			}
+			else
+			{
+				float ratioX = GameWorldController.instance.playerUW.transform.position.x / (64.0f*1.2f);
+				float ratioY = GameWorldController.instance.playerUW.transform.position.z / (64.0f*1.2f);
+				output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);			
+			}							
 		}
 
 		// Apply all SetPixel calls
@@ -1022,7 +1031,7 @@ public class TileMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 	private bool GetTileVisited(int tileX, int tileY)
 	{
-		return Tiles[tileX,tileY].tileVisited;
+		return ((Tiles[tileX,tileY].tileVisited) ||  (UWEBase.EditorMode==true));
 	}
 
 		/// <summary>
@@ -1554,6 +1563,10 @@ public class TileMap : Loader {
 										Tiles[x,y].shockSteep = ((Tiles[x,y].shockSteep  <<3) >> 2)*8 >>3;	//Shift copied from shock
 										Tiles[x,y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;
 								}
+								else
+								{
+										Tiles[x,y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;	
+								}
 
 
 								//Tiles[x,y].isDoor = getDoors(FirstTileInt);
@@ -1584,20 +1597,6 @@ public class TileMap : Loader {
 								Tiles[x,y].waterRegion= 0;
 								Tiles[x,y].landRegion = 0;//including connected bridges.
 								Tiles[x,y].lavaRegion = 0;
-
-								//Set some easy tile visible settings
-								switch (Tiles[x,y].tileType)
-								{
-								case TILE_SOLID:
-										//Bottom and top are invisible
-										Tiles[x,y].VisibleFaces[0] = 0;
-										Tiles[x,y].VisibleFaces[2] = 0;
-										break;
-								default:
-										//Bottom is invisible
-										Tiles[x,y].VisibleFaces[2] = 0;
-										break;
-								}
 
 								//Force off water to save on compile time during testing.
 								//Tiles[x,y].isWater=0;
@@ -1724,6 +1723,24 @@ public class TileMap : Loader {
 		{
 				int x; int y;
 
+
+				for (x=0;x<64;x++){
+						for (y=0;y<64;y++){
+							//Set some easy tile visible settings
+							switch (Tiles[x,y].tileType)
+							{
+							case TILE_SOLID:
+									//Bottom and top are invisible
+									Tiles[x,y].VisibleFaces[0] = 0;
+									Tiles[x,y].VisibleFaces[2] = 0;
+									break;
+							default:
+									//Bottom is invisible
+									Tiles[x,y].VisibleFaces[2] = 0;
+									break;
+							}
+						}
+				}
 
 				for (x=0;x<64;x++){
 						for (y=0;y<64;y++){
