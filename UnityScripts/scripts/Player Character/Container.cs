@@ -507,7 +507,8 @@ public class Container : object_base {
 		bool WeightTest=false;
 //		Container curContainer = this;
 		bool CapacityTest=false;
-		
+				if (EditorMode)//Anything is allowed in editor mode.
+				{return true;}
 		switch (cn.ObjectsAccepted)
 		{//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
 		case 0://runes

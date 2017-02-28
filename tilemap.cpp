@@ -654,6 +654,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			int j=0;
 			AddressOfBlockStart=0;
+			address_pointer = 0;
 			lev_ark = new unsigned char[0x7c08];
 			for (i = BlockStart; i < BlockStart + 0x7c08; i++)
 				{

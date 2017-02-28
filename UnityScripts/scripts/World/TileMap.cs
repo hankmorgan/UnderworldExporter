@@ -1372,6 +1372,7 @@ public class TileMap : Loader {
 								int BlockStart = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
 								int j=0;
 								AddressOfBlockStart=0;
+								address_pointer=0;//Since I am at the start of a fresh array.
 								lev_ark = new char[0x7c08];
 								for (i = BlockStart; i < BlockStart + 0x7c08; i++)
 								{
