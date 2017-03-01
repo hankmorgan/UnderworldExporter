@@ -122,8 +122,8 @@ public class ObjectInteraction : UWEBase {
 		public const int  BOULDER= 97;
 		public const int  ORB= 98;
 		public const int  SPELL = 99;//used by wands
-
-
+		public const int  AN_OSCILLATOR =100;
+		public const int  A_TIMER_TRIGGER=101;
 
 		public const int HEADINGNORTH =180;
 		public const int HEADINGSOUTH= 0;
@@ -1870,6 +1870,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<trigger_base>();	
 						CreateSprite=false;
 						break;
+				case A_TIMER_TRIGGER:
+						myObj.AddComponent<a_timer_trigger>();
+						CreateSprite=false;
+						break;
 				case A_DAMAGE_TRAP:
 						myObj.AddComponent<a_damage_trap>();
 						CreateSprite=false;
@@ -1934,6 +1938,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<a_text_string_trap>();
 						CreateSprite=false;
 						break;
+				case AN_OSCILLATOR:
+						myObj.AddComponent<an_oscillator_trap>();
+						CreateSprite=false;
+						break;
 				case TMAP_CLIP:
 				case TMAP_SOLID:
 						myObj.AddComponent<TMAP>();
@@ -1985,7 +1993,7 @@ public class ObjectInteraction : UWEBase {
 
 
 
-				if(CreateSprite)
+				if((CreateSprite) && (!EditorMode))
 				{
 						//GameObject SpriteObj =
 					ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		

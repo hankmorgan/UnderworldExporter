@@ -105,6 +105,8 @@
 #define BOULDER 97
 #define ORB 98
 #define SPELL 99
+#define AN_OSCILLATOR 100
+#define A_TIMER_TRIGGER 101
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

@@ -90,7 +90,7 @@ int main()
 
 	fclose(f);
 	const char *uw_game_files[7];
-	uw_game_files[0] = "Data\\lev.ark";
+	uw_game_files[0] = "Data\\LEV.ARK";
 	uw_game_files[1] = "Save0\\lev.ark";
 	uw_game_files[2] = "Save1\\lev.ark";
 	uw_game_files[3] = "Save2\\lev.ark";
