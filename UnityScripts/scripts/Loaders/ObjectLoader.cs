@@ -510,31 +510,38 @@ public class ObjectLoader : Loader {
 
 		void setElevatorBits(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList)
 		{//So I know the tile contains an elevator.
-				//Note for shock this is set when I read in the object. I should probably do the same for UW.
-				ObjectLoaderInfo currObj;
-				for (short x=0; x<64;x++)
+			//Note for shock this is set when I read in the object. I should probably do the same for UW.
+			ObjectLoaderInfo currObj;
+			for (short x=0; x<64;x++)
+			{
+				for (short y=0;y<64;y++)
 				{
-						for (short y=0;y<64;y++)
+					if (LevelInfo[x,y].indexObjectList !=0)
+					{
+						currObj = objList[LevelInfo[x,y].indexObjectList];
+						do  
 						{
-								if (LevelInfo[x,y].indexObjectList !=0)
-								{
-										currObj = objList[LevelInfo[x,y].indexObjectList];
-										do  
-										{
-												if ((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_DO_TRAP ) && (currObj.quality==3))
-												{
-														LevelInfo[x,y].hasElevator= 1;
-														//LevelInfo[x,y].ElevatorIndex = currObj.index;
-														currObj.tileX=x;
-														currObj.tileY=y;
-														break;
-												}
-												currObj=objList[currObj.next];
-										}while (currObj.index !=0);
-								}
-						}
+						if (
+							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_DO_TRAP ) && (currObj.quality==3))
+							|| 
+							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.AN_OSCILLATOR ))
+							|| 
+							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_PIT_TRAP ))
+							)
+							{
+								LevelInfo[x,y].hasElevator= 1;
+								LevelInfo[x,y].TerrainChange=1;
+								//LevelInfo[x,y].ElevatorIndex = currObj.index;
+								currObj.tileX=x;
+								currObj.tileY=y;
+								break;
+							}
+							currObj=objList[currObj.next];
+						}while (currObj.index !=0);
+					}
+				}
 
-				}	
+			}	
 
 		}
 
