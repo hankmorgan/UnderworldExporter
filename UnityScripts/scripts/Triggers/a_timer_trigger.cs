@@ -20,6 +20,10 @@ public class a_timer_trigger : trigger_base {
 		//Override to supress debug messages.
 	public override bool Activate ()
 	{
+				if (EditorMode)
+				{
+					return true;
+				}
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{

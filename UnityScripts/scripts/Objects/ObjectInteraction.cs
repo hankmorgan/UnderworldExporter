@@ -1993,7 +1993,7 @@ public class ObjectInteraction : UWEBase {
 
 
 
-				if((CreateSprite) && (!EditorMode))
+				if((CreateSprite) || (EditorMode))
 				{
 						//GameObject SpriteObj =
 					ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id,!RemoveBillboard);		
