@@ -1754,13 +1754,9 @@ public class Conversation : GuiBase {
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
 
-		//GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-		//myObj.layer=LayerMask.NameToLayer("UWObjects");
-		//myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-		//ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_id,true);
-		
-		ObjectInteraction objint = ObjectInteraction.CreateNewObject(item_id);
-		GameObject myObj = objint.gameObject;
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,0);
+		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+
 		/*
 		switch (item_id)
 		{//Some known cases

@@ -100,9 +100,15 @@ public class Instrument : object_base {
 					if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
 					{							
 						//create the cup of wonder.
-						ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
+
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0);
+						GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+						GameWorldController.MoveToInventory(cup);
+						ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
+
+						/*	ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
 						myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
-						GameWorldController.MoveToInventory(myObjInt.gameObject);
+						GameWorldController.MoveToInventory(myObjInt.gameObject);*/
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
 						UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

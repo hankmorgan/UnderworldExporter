@@ -240,9 +240,15 @@ public class Shrine : object_base {
 			//inputctrl.text=UWHUD.instance.MessageScroll.text;
 			Shrine.HasGivenKey=true;
 			//create the key of truth.
-			ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(225,0,0,0);
+			GameObject key = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+			GameWorldController.MoveToInventory(key);
+			ObjectInteraction myObjInt = key.GetComponent<ObjectInteraction>();
+
+
+			/*ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
 			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
-			GameWorldController.MoveToInventory(myObjInt.gameObject);
+			GameWorldController.MoveToInventory(myObjInt.gameObject);*/
 			GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
 			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

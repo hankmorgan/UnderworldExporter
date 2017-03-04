@@ -14,6 +14,9 @@ public class a_ward_trap : trap_base {
 		{
 			base.Start ();
 			this.gameObject.layer = LayerMask.NameToLayer("Ward");
+			SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
+			spIJ.init (SpellEffect.UW1_Spell_Effect_RuneofWarding,GameWorldController.instance.playerUW.gameObject);
+			spellprop=spIJ;
 		}
 
 	void OnTriggerEnter(Collider other)

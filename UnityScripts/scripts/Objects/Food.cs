@@ -93,7 +93,7 @@ public class Food : object_base {
 			int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
 			int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
 			Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
-				int BaseStringNo=173;
+				int BaseStringNo=172;
 				if (_RES==GAME_UW2)
 				{
 						BaseStringNo=187;

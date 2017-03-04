@@ -921,6 +921,11 @@ public class Magic : UWEBase {
 				float dropRange=1.2f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the spellcast
+
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,0);
+						ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange));
+
+						/*
 						int ObjectNo = 176 + Random.Range(0,7);
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
@@ -932,6 +937,7 @@ public class Magic : UWEBase {
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
 						GameWorldController.UnFreezeMovement(myObj);
+						*/
 				}
 		}
 
@@ -950,9 +956,9 @@ public class Magic : UWEBase {
 
 						//First determine the target ai to attack
 						//RaycastHit ht;
-						int goal=3;//Default behaviour is to follow the player
+						//int goal=3;//Default behaviour is to follow the player
 						int gtarg = 1;
-						string targetName="";
+						//string targetName="";
 						NPC target = GetNPCTargetRandom(caster,ref hit);
 						//If not make the summon a follower
 						if (target!=null)
@@ -960,22 +966,29 @@ public class Magic : UWEBase {
 								//Only attack hostiles or player enemies
 								if (target.npc_attitude==0)
 								{
-								targetName=target.name;
-								gtarg=999;
+								//targetName=target.name;
+								gtarg=target.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 								}
 						}
 
 
 						//int ObjectNo = 176 + Random.Range(0,7);
-						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
+						/*GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("NPCs");
 						myObj.tag="NPCs";
 						myObj.transform.position = ray.GetPoint(dropRange);
 						myObj.transform.parent = GameWorldController.instance.LevelMarker();
-						GameWorldController.MoveToWorld(myObj);
+						GameWorldController.MoveToWorld(myObj);*/
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0);
+						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
+						myObj.GetComponent<NPC>().npc_gtarg= gtarg;
+						myObj.GetComponent<NPC>().npc_goal=3;
+						myObj.GetComponent<NPC>().npc_hp=GameWorldController.instance.objDat.critterStats[spKM.RndNPC-64].AvgHit;
+
+						/*
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, spKM.RndNPC, spKM.RndNPC, spKM.RndNPC, 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
@@ -998,7 +1011,7 @@ public class Magic : UWEBase {
 						//TODO:Set up these properties to use correct values
 						ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, goal, 1, gtarg, 0, 4, 0, targetName, navMeshName);
 
-
+						*/
 						GameWorldController.UnFreezeMovement(myObj);
 				}
 		}
@@ -1538,7 +1551,7 @@ public class Magic : UWEBase {
 				if (tm.ValidTile(pos))
 				{
 					pos.Set(pos.x,4.5f,pos.z); //Put it on the roof.
-
+								/*
 					GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
 					myObj.layer=LayerMask.NameToLayer("UWObjects");
 					myObj.transform.position=pos;
@@ -1548,11 +1561,16 @@ public class Magic : UWEBase {
 					ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
 					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
+					*/
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0);
+					GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, pos).gameObject;
+					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(0,0,0);
+
 					//TODO: Fix this
 					//arrow.item_index=339+boulderTypeOffset;
 					//arrow.objInt().o
 					//arrow.item_type=23;
-					arrow.ExecuteTrap(0,0,0);
+					//arrow.ExecuteTrap(0,0,0);
 					Destroy(myObj);
 				}					
 			}
@@ -1799,6 +1817,8 @@ public class Magic : UWEBase {
 		/// 
 		void Cast_RuneOfWarding(Vector3 pos, int EffectID)
 		{
+
+				/*
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
@@ -1818,6 +1838,12 @@ public class Magic : UWEBase {
 				SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
 				spIJ.init (EffectID,GameWorldController.instance.playerUW.gameObject);
 				awt.spellprop=spIJ;
+
+*/
+				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0);
+				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,pos);
+
+
 				//000~001~276~The Rune of Warding is placed. \n
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,276));
 		}

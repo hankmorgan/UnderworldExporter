@@ -1056,18 +1056,21 @@ public class NPC : object_base {
 		if (!Physics.Raycast(ray,out hit,dropRange))
 		{///Checks No object interferes with the launch
 			float force =100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
-			GameObject launchedItem ;
-			launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
+			//launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
+
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(16,0,0,1);
+			GameObject launchedItem=	ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
+
 
 			//launchedItem = Instantiate(currentAmmo.gameObject);
-			launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-			launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
+		//	launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
+		//	launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
 
-			launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
-			GameWorldController.MoveToWorld(launchedItem);
-			launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+		//	launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+		//	GameWorldController.MoveToWorld(launchedItem);
+		//	launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 
-			launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
+		//	launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
 			GameWorldController.UnFreezeMovement(launchedItem);
 			Vector3 ThrowDir = TargetingVector;
 			///Apply the force along the direction of the ray that the player has targetted along.

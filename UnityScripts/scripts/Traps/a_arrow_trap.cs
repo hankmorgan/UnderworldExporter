@@ -21,17 +21,24 @@ public class a_arrow_trap : trap_base {
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{//TODO: update this for the new object system.
 		int item_index=  (objInt().quality << 5) | objInt().owner;
-		int item_type = GameWorldController.instance.objectMaster.type[item_index];
+		//int item_type = GameWorldController.instance.objectMaster.type[item_index];
 		//Debug.Log ("an arrow trap has gone off. It will spawn a " + item_index + " of type " + item_type + " along vector " + this.gameObject.transform.rotation);
-		GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-		myObj.layer=LayerMask.NameToLayer("UWObjects");
+	
+
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0);
+		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, this.transform.position).gameObject;
+
+
+
+		//GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+		//myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = this.transform.position;
 		myObj.transform.rotation = this.transform.rotation;
-		myObj.transform.parent=GameWorldController.instance.LevelMarker();
-		GameWorldController.MoveToWorld(myObj);
-		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_index,true);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, item_index,item_index,item_index, item_type, item_index, 0, objInt().quality, objInt().owner, 1, 1, 0, 1, 0, 0, 0, 1);
-		myObj.AddComponent<object_base>();
+		//myObj.transform.parent=GameWorldController.instance.LevelMarker();
+		//GameWorldController.MoveToWorld(myObj);
+		//ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_index,true);
+		//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, item_index,item_index,item_index, item_type, item_index, 0, objInt().quality, objInt().owner, 1, 1, 0, 1, 0, 0, 0, 1);
+		//myObj.AddComponent<object_base>();
 		GameWorldController.UnFreezeMovement(myObj);
 		myObj.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.Continuous;
 		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 50.0f *((float)(objInt().owner)));

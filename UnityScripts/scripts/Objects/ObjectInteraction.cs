@@ -613,6 +613,19 @@ public class ObjectInteraction : UWEBase {
 							InputObject2.GetComponent<ObjectInteraction>().consumeObject();
 					}
 
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject(lstOutput[i],40,0,0);
+					GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+					GameWorldController.MoveToInventory(Created);
+					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+					if (Created != null) {
+						Created.GetComponent<ObjectInteraction>().UpdateAnimation ();
+						Created.GetComponent<ObjectInteraction>().PickedUp=true;
+						UWHUD.instance.CursorIcon = Created.GetComponent<ObjectInteraction>().GetInventoryDisplay ().texture;
+					}
+					InteractionModeControl.UpdateNow=true;
+					return Created;
+
+								/*
 					ObjectInteraction CreatedObjectInt = CreateNewObject (lstOutput[i]);
 					if (CreatedObjectInt != null) {
 							CreatedObjectInt.UpdateAnimation ();
@@ -622,6 +635,7 @@ public class ObjectInteraction : UWEBase {
 					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 					InteractionModeControl.UpdateNow=true;
 					return CreatedObjectInt.gameObject;
+					*/
 				}
 			}
 
@@ -663,7 +677,7 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		/// <returns>The new object.</returns>
 		/// <param name="NewItem_id">New item identifier.</param>
-		public static ObjectInteraction CreateNewObject (int NewItem_id)
+		/*private static ObjectInteraction CreateNewObject (int NewItem_id)
 		{
 				//Create the new object
 				GameObject myObj = new GameObject ("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
@@ -715,7 +729,7 @@ public class ObjectInteraction : UWEBase {
 				//myObj.AddComponent<StoreInformation>();
 				//SpriteObj.AddComponent<StoreInformation>();
 				return objInt;//myObj.GetComponent<ObjectInteraction> ();
-		}
+		}*/
 
 
 		/// <summary>
@@ -856,14 +870,14 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		/// <param name="ChildName">Child name.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
+	/*	public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
 		{
 			GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
 
 			newObj.transform.parent=myObj.transform;
 			newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
 			return CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldIndex,InventoryIndex,EquipIndex,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-		}
+		}*/
 
 		/// <summary>
 		/// Creates an Object Interaction
@@ -890,10 +904,10 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
-		{
-			return CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldIndex,InventoryIndex,EquipIndex,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-		}
+		//private static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
+		//{
+		//	return CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldIndex,InventoryIndex,EquipIndex,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+	//	}
 
 		/// <summary>
 		/// Creates an Object Interaction
@@ -921,7 +935,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isEnchanted()">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
-		public static ObjectInteraction CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, int Worldindex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
+		private static ObjectInteraction CreateObjectInteraction(GameObject myObj, float DimX,float DimY,float DimZ, int Worldindex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
 		{
 			ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
 
@@ -955,7 +969,7 @@ public class ObjectInteraction : UWEBase {
 			if (isMoveable==1)
 			{
 				//objInteract.CanBePickedUp=true;
-				Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
+				Rigidbody rgd = myObj.AddComponent<Rigidbody>();
 				rgd.angularDrag=0.0f;
 				GameWorldController.FreezeMovement(myObj);
 			}
@@ -1690,7 +1704,7 @@ public class ObjectInteraction : UWEBase {
 				myObj.transform.parent = parent.transform;
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
+				ObjectInteraction objInt = CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
 				objInt.next=currObj.next;
 				objInt.link=currObj.link;
 				objInt.quality=currObj.quality;
