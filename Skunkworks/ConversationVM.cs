@@ -47,9 +47,14 @@ public class ConversationVM : MonoBehaviour {
 	const int cnv_OPNEG=41;
 
 	public Text Output;
+	public Text PlayerInput;
 	public int convtodisplay=0;
 	public int defaultResult;
 
+	public int MaxAnswer;
+
+
+	public int[] QuestVariables= new int[32];//placeholder
 
 	struct ImportedFunctions{
 		//0000   Int16   length of function name
@@ -86,10 +91,29 @@ public class ConversationVM : MonoBehaviour {
 	public string StringsPath; //to strings.pak
 
 	public StringController stringcontrol;
+
+
+
 	CnvStack stack;
+	public int call_level=1;
+	public int instrp=0;
+	public int basep = 0;
+	public int result_register;
 
 
-
+	public static int PlayerAnswer;
+	///Conversation waiting mode. Player has to enter a menu option
+	public static bool WaitingForInput;
+	///Conversation waiting mode. Player has to press any key to continue
+	public static bool WaitingForMore;
+	///Conversation waiting mode. Player has to type an answer.
+	public static bool WaitingForTyping;
+	///The array that maps menu options in a bablf_menu to their answer numbers
+	public static int[] bablf_array = new int[10];
+	///Tells if we are using a bablf_menu
+	public static bool usingBablF;
+	/// The answer from the bablf_menu
+	public static int bablf_ans=0;
 
 
 
@@ -132,6 +156,7 @@ public class ConversationVM : MonoBehaviour {
 						int funcptr= add_ptr+0x10;
 						for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
 							{
+
 						/*0000   Int16   length of function name
 						0002   n*char  name of function
 						n+02   Int16   ID (imported func.) / memory address (variable)
@@ -220,12 +245,17 @@ public class ConversationVM : MonoBehaviour {
 		}
 
 
-	public void RunConversation() 
+	public void RunConversation()
 		{
-		int call_level=1;
-		int instrp=0;
-		int basep = 0;
-		int result_register = defaultResult;
+		StartCoroutine(RunConversationVM());
+		}
+
+	public IEnumerator RunConversationVM() 
+		{
+		call_level=1;
+		instrp=0;
+		basep = 0;
+		result_register = defaultResult;
 		bool finished = false;
 		stack=new CnvStack(4096);
 		stack.set_stackp(100);//Skip over imported memory for the moment
@@ -451,6 +481,16 @@ public class ConversationVM : MonoBehaviour {
 			case cnv_CALLI: // imported function
 					{
 					int arg1 = conv[convtodisplay].instuctions[++instrp];
+					for (int i=0; i<=conv[convtodisplay].functions.GetUpperBound(0);i++)
+						{
+						if ((conv[convtodisplay].functions[i].ID_or_Address==arg1) && (conv[convtodisplay].functions[i].import_type==0x0111))
+							{
+							//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[convtodisplay].functions[i].functionName );
+							yield return StartCoroutine( run_imported_function(conv[convtodisplay].functions[i]));
+							break;
+							}
+						}
+
 
 					/*	std::string funcname;
 				if (imported_funcs.find(arg1) == imported_funcs.end())
@@ -582,7 +622,7 @@ public class ConversationVM : MonoBehaviour {
 			case cnv_SAY_OP:
 					{
 					int arg1 = stack.Pop();
-					say_op(arg1);
+					yield return StartCoroutine(say_op(arg1));
 					}
 				break;
 
@@ -623,10 +663,250 @@ public class ConversationVM : MonoBehaviour {
 
 		}
 
-	void say_op(int arg1)
+	IEnumerator say_op(int arg1)
 		{
-		Debug.Log (stringcontrol.GetString(conv[convtodisplay].StringBlock,arg1));
+		//Debug.Log( stringcontrol.GetString(conv[convtodisplay].StringBlock,arg1));
+		Output.text += stringcontrol.GetString(conv[convtodisplay].StringBlock,arg1) + "\n";
+		yield return 0;
+		}
+
+
+
+	IEnumerator run_imported_function(ImportedFunctions func)
+		{
+		switch (func.functionName.ToLower())
+			{
+			case "babl_menu":
+				{
+				stack.Pop();
+				int start =stack.Pop(); //stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
+				yield return StartCoroutine(babl_menu(start));
+				break;
+				}
+
+		case "babl_fmenu":
+				{
+				stack.Pop();
+				int start =stack.Pop(); // stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
+				int flagstart =stack.Pop(); //  stack.at(stack.stackptr-3);
+				yield return StartCoroutine(babl_fmenu(start,flagstart));
+				break;
+				}
+
+		case "get_quest":
+				{
+				stack.Pop();
+				int index= stack.at(stack.Pop());
+				//int index= stack.at( stack.at( stack.stackptr-2 ) );
+				result_register = get_quest(0,index);
+				break;
+				}
+
+		case "set_quest":
+				{
+				int val = stack.Pop();
+				int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
+				   //stack.at( stack.at( stack.stackptr-4 ) ) ;
+				set_quest(0,val,index );//Or the other way around.
+				break;
+				}
+
+		case "print":
+				{
+				say_op(stack.Pop());
+				break;
+				}
+
+		default: 
+			
+			Debug.Log("unimplemented function " + func.functionName);
+			break;
+			}
+		yield return 0;
+		}
+
+
+
+
+	public IEnumerator babl_menu(int Start)
+		{
+		PlayerInput.text="";
+		usingBablF=false;
+		string tmp="";
+		MaxAnswer=0;
+		int j=1;
+		for (int i = Start; i <=stack.Upperbound() ; i++)
+			{
+			if ( stack.at(i) >0)
+				{
+				//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
+				//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
+				PlayerInput.text += (j++ + "." + stringcontrol.GetString(conv[convtodisplay].StringBlock,stack.at(i))) + "\n";
+				MaxAnswer++;
+				}
+			else
+				{
+				break;
+				}
+			}
+		yield return StartCoroutine(WaitForInput());
+		int AnswerIndex=stack.at(Start+PlayerAnswer-1);
+		yield return StartCoroutine(say_op(AnswerIndex));
+		result_register = PlayerAnswer;
+		yield return 0;
+		}
+
+
+	/// <summary>
+	/// Dialog menu with choices that may or may not show based on the flags
+	/// </summary>
+	/// <param name="unknown">Unknown.</param>
+	/// <param name="localsArray">Array of local variables from the conversation</param>
+	/// <param name="Start">Index to start taking values from the array</param>
+	/// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
+	public IEnumerator babl_fmenu(int Start, int flagIndex)
+		{
+		Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
+		//tl_input.Clear();
+		PlayerInput.text="";
+		usingBablF=true;
+		for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
+			{//Reset the answers array
+			bablf_array[i]=0;
+			}
+		string tmp="";
+		int j=1;
+		MaxAnswer=0;
+		for (int i = Start; i <=stack.Upperbound() ; i++)
+			{
+			if (stack.at(i)!=0)
+				{
+				if (stack.at(flagIndex++) !=0)
+					{
+					bablf_array[j-1] = stack.at(i);
+					//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
+					PlayerInput.text += (j++ + "." + stringcontrol.GetString(conv[convtodisplay].StringBlock,stack.at(i))) + "\n";
+					MaxAnswer++;
+					}
+				}
+			else
+				{
+				break;
+				}
+			}
+		yield return StartCoroutine(WaitForInput());
+		//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[convtodisplay].StringBlock,bablf_array[bablf_ans-1]);
+		//yield return StartCoroutine(say (tmp,PC_SAY));
+		yield return StartCoroutine(say_op(bablf_array[bablf_ans-1]));
+		result_register=bablf_array[bablf_ans-1];
+		yield return 0;
+		}
+
+
+
+
+	/// <summary>
+	/// Waits for input in babl_menu and bablf_menu
+	/// </summary>
+	IEnumerator WaitForInput()
+		{
+		WaitingForInput=true;
+		while (WaitingForInput)
+			{yield return null;}
+		}
+
+
+
+
+	/// <summary>
+	/// Processes key presses from the player when waiting for input.
+	/// </summary>
+	void OnGUI()
+		{
+		if (WaitingForInput)
+			{
+			if (Input.GetKeyDown (KeyCode.Alpha1))
+				{
+				CheckAnswer(1);
+				}
+			else if (Input.GetKeyDown (KeyCode.Alpha2))
+				{
+				CheckAnswer(2);
+				}
+			else if (Input.GetKeyDown (KeyCode.Alpha3))
+				{
+				CheckAnswer(3);
+				}
+			else if (Input.GetKeyDown (KeyCode.Alpha4))
+				{
+				CheckAnswer(4);
+				}
+			else if (Input.GetKeyDown (KeyCode.Alpha5))
+				{
+				CheckAnswer(5);
+				}
+			else if (Input.GetKeyDown (KeyCode.Alpha6))
+				{
+				CheckAnswer(6);
+				}
+			}
+		}
+
+
+
+
+	/// <summary>
+	/// Checks the answer the player has entered to see if it in within the bounds of the valid options.
+	/// Sets the PlayerAnswer variable for checking within the conversations
+	/// </summary>
+	/// <param name="AnswerNo">The answer number from the menu entered by the player</param>
+	private void CheckAnswer(int AnswerNo)
+		{
+		if (usingBablF ==false)
+			{		
+			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
+				{
+				PlayerAnswer=AnswerNo;
+				WaitingForInput=false;
+				}
+			}
+		else
+			{
+			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
+				{
+				///For babl_fmenus convert the answer using the bablf_array
+				bablf_ans=AnswerNo;
+				PlayerAnswer=bablf_array[AnswerNo-1];
+				WaitingForInput=false;
+				usingBablF=false;
+				}
+			}
+		}
+
+
+	/// <summary>
+	/// Gets the quest variable.
+	/// </summary>
+	/// <returns>The quest.</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="QuestNo">Quest no to lookup</param>
+	public int get_quest(int unk, int QuestNo)
+		{
+		return QuestVariables[QuestNo];
+		}
+
+	/// <summary>
+	/// Sets the quest variable
+	/// </summary>
+	/// <param name="unk">Unk.</param>
+	/// <param name="value">Value to change to</param>
+	/// <param name="QuestNo">Quest no to change</param>
+	public void set_quest(int unk,int value, int QuestNo)
+		{
+		QuestVariables[QuestNo]=value;
 		}
 	
+
+
 
 }
