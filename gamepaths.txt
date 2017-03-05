@@ -1,5 +1,5 @@
 C:\Games\uwdemo
 c:\games\uw1
 c:\games\uw2
-C:\Games\shokdemo
+C:\Games\systemshock
 c:\sourceengine
