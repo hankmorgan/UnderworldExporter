@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class MapLoader : MonoBehaviour {
 	
+  public struct Chunk{
+    public long chunkUnpackedLength;
+    public int chunkCompressionType;//compression type
+    public long chunkPackedLength;
+    public int chunkContentType;
+    public char[] data;
+  };
+
+
 	public Text Output;
 	public int LevelToRetrieve;
 	public const int TILE_SOLID= 0;
@@ -3193,25 +3202,26 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
   /// 
   /// 
   /// 
+  /// 
+  /// 
+  /// 
+
+
+
   bool BuildTileMapShock(string filePath, int LevelNo)
   {
+    long address_pointer=4;
     LevelInfo=new TileInfo[64,64];
 
-    char[] archive_ark; 
-    char[] lev_ark; 
+    char[] archive_ark; //file data
+    Chunk lev_ark; 
     /*  unsigned char *tmp_ark; 
   unsigned char *sub_ark;*/ 
-    char[] tex_ark;
-    char[] inf_ark;
-    long AddressOfBlockStart=0;
-    long address_pointer=4;
-    long blockAddress =0;
+    Chunk tex_ark;
+    Chunk  inf_ark;
 
-    //  int chunkId;
-    long chunkUnpackedLength=0;
-    int chunkType=0;//compression type
-    long chunkPackedLength=0;
-    //  long chunkContentType;
+
+
 
     //Read in the archive.
     if (!DataLoader.ReadStreamFile(filePath, out archive_ark))
@@ -3219,47 +3229,53 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
       return false;
     }
 
-
-
-
-    //get the level info data from the archive
-    blockAddress =getShockBlockAddress(LevelNo*100+4004,archive_ark, ref chunkPackedLength, ref chunkUnpackedLength, ref chunkType); 
-    if (blockAddress == -1) {return false;}
-    inf_ark=new char[chunkUnpackedLength];
-    LoadShockChunk(blockAddress, chunkType, archive_ark, ref inf_ark, chunkPackedLength,chunkUnpackedLength);  
+    if (!LoadChunk(archive_ark, LevelNo*100+4004, out inf_ark))
+    {//Read in the evel properties.
+      return false;
+    }
     //Process level properties (height c-space)
-    int HeightUnits = (int) DataLoader.getValAtAddress(inf_ark,16,32);  //Log2 value. The higher the value the lower the level height.
+    int HeightUnits = (int) DataLoader.getValAtAddress(inf_ark.data,16,32);  //Log2 value. The higher the value the lower the level height.
     if (HeightUnits > 3)  //Any higher we lose data, 
     {
       HeightUnits=3;
     }
-    int cSpace = (int)DataLoader.getValAtAddress(inf_ark,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
+    int cSpace = (int)DataLoader.getValAtAddress(inf_ark.data,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
     SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);  //Shifts the scale of the level.
     CEILING_HEIGHT= SHOCK_CEILING_HEIGHT;
+
+
     //long sizeV = getValAtAddress(inf_ark,0,32);
     //long sizeH = getValAtAddress(inf_ark,4,32);
     //long always6_1 = getValAtAddress(inf_ark,8,32);
     //long always6_2 = getValAtAddress(inf_ark,12,32);  
-
+   
+    if (!LoadChunk(archive_ark, LevelNo*100+4005, out lev_ark))
+    {//Read in the level tilemap data
+      return false;
+    }
     //Read the main level data in
-    blockAddress =getShockBlockAddress(LevelNo*100+4005,archive_ark, ref chunkPackedLength,ref chunkUnpackedLength,ref chunkType); 
+   /* blockAddress =getShockBlockAddress(LevelNo*100+4005,archive_ark, ref chunkPackedLength,ref chunkUnpackedLength,ref chunkType); 
     if (blockAddress == -1) {return false;}
     lev_ark=new char[chunkUnpackedLength]; //or 64*64*16
     LoadShockChunk(blockAddress, chunkType, archive_ark, ref lev_ark,chunkPackedLength,chunkUnpackedLength);
     AddressOfBlockStart=0;
-    address_pointer=0;  
+    address_pointer=0;  */
 
 
+    if (!LoadChunk(archive_ark, LevelNo*100+4007, out tex_ark))
+    {//Read in the level texture data
+      return false;
+    }
 
     //get the texture data from the archive.is never compressed?
-    AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark, ref chunkPackedLength, ref chunkUnpackedLength,ref chunkType);
-    tex_ark = new char[chunkUnpackedLength]; 
-    for (long k=0; k< chunkUnpackedLength; k++)
+    //AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark, ref chunkPackedLength, ref chunkUnpackedLength,ref chunkType);
+    //tex_ark = new char[chunkUnpackedLength]; 
+
+    for (long k=0; k< tex_ark.chunkUnpackedLength; k++)
     {
-      texture_map[k] =  (int)DataLoader.getValAtAddress(archive_ark,AddressOfBlockStart + address_pointer,16);
+      texture_map[k] =  (int)DataLoader.getValAtAddress(archive_ark,address_pointer,16);
       address_pointer =address_pointer+2;   //tmp_ark[AddressOfBlockStart+k];
     }
-    AddressOfBlockStart=0;
     address_pointer=0;  
 
 
@@ -3279,7 +3295,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         LevelInfo[x,y]=new TileInfo();
         LevelInfo[x,y].tileX = (short)x;
         LevelInfo[x,y].tileY = (short)y;
-        LevelInfo[x,y].tileType = lev_ark[address_pointer];
+        LevelInfo[x,y].tileType = lev_ark.data[address_pointer];
         switch (LevelInfo[x,y].tileType)
         {//Need to swap some tile types around so that they conform to uw naming standards.
           case 4: {LevelInfo[x,y].tileType = 5; break; }
@@ -3303,9 +3319,9 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         6-10  Ceiling texture
         11-15 Floor texture
         */
-        LevelInfo[x,y].wallTexture = texture_map[(int)DataLoader.getValAtAddress(lev_ark, address_pointer + 6, 16) & 0x3F];
-        LevelInfo[x,y].shockCeilingTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark, address_pointer + 6, 16) >> 6) & 0x1F];
-        LevelInfo[x,y].floorTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark, address_pointer + 6, 16) >> 11) & 0x1F];
+        LevelInfo[x,y].wallTexture = texture_map[(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F];
+        LevelInfo[x,y].shockCeilingTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F];
+        LevelInfo[x,y].floorTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F];
 
         //LevelInfo[x,y].wallTexture = 270;//debug
         //LevelInfo[x,y].shockCeilingTexture = 273;
@@ -3318,14 +3334,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         LevelInfo[x,y].landRegion=0;
         LevelInfo[x,y].lavaRegion = 0;
         LevelInfo[x,y].waterRegion = 0;
-        LevelInfo[x,y].floorHeight = ((lev_ark[address_pointer + 1]) & 0x1F);
+        LevelInfo[x,y].floorHeight = ((lev_ark.data[address_pointer + 1]) & 0x1F);
         LevelInfo[x,y].floorHeight = ((LevelInfo[x,y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
-        LevelInfo[x,y].ceilingHeight = ((lev_ark[address_pointer + 2]) & 0x1F);
+        LevelInfo[x,y].ceilingHeight = ((lev_ark.data[address_pointer + 2]) & 0x1F);
         LevelInfo[x,y].ceilingHeight = ((LevelInfo[x,y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
-        LevelInfo[x,y].shockFloorOrientation = (short)(((lev_ark[address_pointer + 1]) >> 5) & 0x3);
-        LevelInfo[x,y].shockCeilOrientation =(short)(((lev_ark[address_pointer + 2]) >> 5) & 0x3);
+        LevelInfo[x,y].shockFloorOrientation = (short)(((lev_ark.data[address_pointer + 1]) >> 5) & 0x3);
+        LevelInfo[x,y].shockCeilOrientation =(short)(((lev_ark.data[address_pointer + 2]) >> 5) & 0x3);
 
         //Need to know heights in various directions for alignments.
         //Will set these properly after loading levels.
@@ -3334,7 +3350,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         LevelInfo[x,y].shockEastCeilHeight = LevelInfo[x,y].ceilingHeight;
         LevelInfo[x,y].shockWestCeilHeight = LevelInfo[x,y].ceilingHeight;
 
-        LevelInfo[x,y].shockSteep = (lev_ark[address_pointer + 3] & 0x0f);
+        LevelInfo[x,y].shockSteep = (lev_ark.data[address_pointer + 3] & 0x0f);
         LevelInfo[x,y].shockSteep = ((LevelInfo[x,y].shockSteep << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
         if ((LevelInfo[x,y].shockSteep == 0) && (LevelInfo[x,y].tileType >= 6))//If a sloped tile has no slope then it's a open tile.
@@ -3345,7 +3361,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         {
           LevelInfo[x,y].shockSteep = 0;
         }
-        LevelInfo[x,y].indexObjectList = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 4, 16);
+        LevelInfo[x,y].indexObjectList = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 4, 16);
 
 
         //if(LevelInfo[x,y].indexObjectList!=0)
@@ -3359,14 +3375,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         xxxxx8xx  Floor only
         xxxxxCxx  Ceiling only
         */
-        LevelInfo[x,y].shockSlopeFlag =(short)((DataLoader.getValAtAddress(lev_ark, address_pointer + 8, 32) >> 10) & 0x03);
-        LevelInfo[x,y].UseAdjacentTextures = ((int)DataLoader.getValAtAddress(lev_ark, address_pointer + 8, 32) >> 8) & 0x01;
-        LevelInfo[x,y].shockTextureOffset = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 8, 32) & 0xF;
+        LevelInfo[x,y].shockSlopeFlag =(short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 10) & 0x03);
+        LevelInfo[x,y].UseAdjacentTextures = ((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01;
+        LevelInfo[x,y].shockTextureOffset = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF;
         //unknownflags
         //70E000E0
         //  fprintf(LOGFILE,"\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
-        LevelInfo[x,y].shockShadeLower = (short)(((int)DataLoader.getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F);
-        LevelInfo[x,y].shockShadeUpper = (short)(((int)DataLoader.getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F);
+        LevelInfo[x,y].shockShadeLower = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 16) & 0x0F);
+        LevelInfo[x,y].shockShadeUpper = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 24) & 0x0F);
         //LevelInfo[x,y].shadeUpperGlobal = 0;
         // LevelInfo[x,y].shadeLowerGlobal = 0;
         LevelInfo[x,y].shockNorthOffset = LevelInfo[x,y].shockTextureOffset;
@@ -3374,10 +3390,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
         LevelInfo[x,y].shockEastOffset = LevelInfo[x,y].shockTextureOffset;
         LevelInfo[x,y].shockWestOffset = LevelInfo[x,y].shockTextureOffset;
 
-        LevelInfo[x,y].SHOCKSTATE[0] = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 0xC, 8);
-        LevelInfo[x,y].SHOCKSTATE[1] = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 0xD, 8);
-        LevelInfo[x,y].SHOCKSTATE[2] = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 0xE, 8);
-        LevelInfo[x,y].SHOCKSTATE[3] = (int)DataLoader.getValAtAddress(lev_ark, address_pointer + 0xF, 8);
+        LevelInfo[x,y].SHOCKSTATE[0] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xC, 8);
+        LevelInfo[x,y].SHOCKSTATE[1] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xD, 8);
+        LevelInfo[x,y].SHOCKSTATE[2] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xE, 8);
+        LevelInfo[x,y].SHOCKSTATE[3] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xF, 8);
 
         //LevelInfo[x,y].indexObjectList=0;
         //if (y == 0)
@@ -3459,8 +3475,32 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
   //*********************
 
 
+  public static bool LoadChunk(char[] archive_ark, int chunkNo, out Chunk data_ark )
+  {
+    long blockAddress =0;    //  int chunkId;
+    //long chunkUnpackedLength=0;
+    //int chunkType=0;//compression type
+    // long chunkPackedLength=0;
+    //  long chunkContentType;
+    data_ark.chunkPackedLength=0;
+    data_ark.chunkUnpackedLength=0;
+    data_ark.chunkContentType=0;
+    data_ark.chunkCompressionType=0;
+    //get the level info data from the archive
+    blockAddress =getShockBlockAddress(chunkNo,archive_ark, ref data_ark.chunkPackedLength, ref data_ark.chunkUnpackedLength, ref data_ark.chunkCompressionType , ref data_ark.chunkContentType); 
+    if (blockAddress == -1) {
+      data_ark.data=new char[1];
+      return false;
+    }
+    data_ark.data=new char[data_ark.chunkUnpackedLength];
+    LoadShockChunk(blockAddress, data_ark.chunkCompressionType, archive_ark, ref data_ark.data, data_ark.chunkPackedLength,data_ark.chunkUnpackedLength);  
+    return true;
+  }
 
-  long getShockBlockAddress(long BlockNo, char[] tmp_ark , ref long chunkPackedLength, ref long chunkUnpackedLength, ref int chunkType)
+
+
+
+  static long getShockBlockAddress(long BlockNo, char[] tmp_ark , ref long chunkPackedLength, ref long chunkUnpackedLength, ref int chunkCompressionType, ref int chunkContentType)
   {
     //Finds the address of the block based on the directory block no.
     //Justs loops through until it finds a match.
@@ -3478,12 +3518,14 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
     {
       int chunkId = (int)DataLoader.getValAtAddress(tmp_ark,address_pointer,16);
       chunkUnpackedLength =DataLoader.getValAtAddress(tmp_ark,address_pointer+2,24);
-      chunkType = (int)DataLoader.getValAtAddress(tmp_ark,address_pointer+5,8);  //Compression.
+      chunkCompressionType = (int)DataLoader.getValAtAddress(tmp_ark,address_pointer+5,8);  //Compression.
       chunkPackedLength = DataLoader.getValAtAddress(tmp_ark,address_pointer+6,24);
-      short chunkContentType =(short)DataLoader.getValAtAddress(tmp_ark,address_pointer+9,8);
+      chunkContentType =(short)DataLoader.getValAtAddress(tmp_ark,address_pointer+9,8);
       //printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",
       //  k,chunkId, *chunkUnpackedLength, *chunkType,*chunkPackedLength,chunkContentType);
       //printf("Absolute address is %d\n",AddressOfBlockStart);
+
+      Debug.Log(chunkId + " of type " + chunkContentType + " compress=" + chunkCompressionType + " packed= " + chunkPackedLength + " unpacked=" + chunkUnpackedLength + " at file address " + AddressOfBlockStart );
 
       //target chunk id is 4005 + level no * 100 for levels
       if (chunkId== BlockNo)    //4005+ LevelNo*100
@@ -3518,7 +3560,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-  long LoadShockChunk(long AddressOfBlockStart, int chunkType, char[] archive_ark, ref char[] OutputChunk,long chunkPackedLength,long chunkUnpackedLength)
+  static long LoadShockChunk(long AddressOfBlockStart, int chunkType, char[] archive_ark, ref char[] OutputChunk,long chunkPackedLength,long chunkUnpackedLength)
   {
     //Util to return an uncompressed shock block. Will use this for all future lookups and replace old ones
 
@@ -3735,7 +3777,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
    Specifications" page at
    http://madeira.physiol.ucl.ac.uk/people/jim/games/ss-res.txt
 */
-  void unpack_data (char[] pack,    ref char[] unpack, long unpacksize)
+  static void unpack_data (char[] pack,    ref char[] unpack, long unpacksize)
   {
 
     //unsigned char *byteptr;
