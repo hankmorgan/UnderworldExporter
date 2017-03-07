@@ -22,6 +22,18 @@ public class ShockArtLoader : MonoBehaviour {
     LoadShockArtChunk(path,ChunkToLoad);
   }
 
+
+  public void IHateLookingForPalettes()
+  {
+    PaletteChunk++;
+    LoadShockArtChunk(path,ChunkToLoad);
+    output.texture= ImageCache[index++];
+    if (index>ImageCache.GetUpperBound(0))
+    {
+      index=0;
+    }
+  }
+
   public void HopeThisWorks()
   {
     output.texture= ImageCache[index++];
@@ -36,6 +48,7 @@ public class ShockArtLoader : MonoBehaviour {
 
   bool LoadShockArtChunk(string filePath, int chunkToLoad)
   {
+    index=0;
     Palette pal= new Palette();
     char[] archive_ark; //file data
     char[] palette_ark;
@@ -78,9 +91,10 @@ public class ShockArtLoader : MonoBehaviour {
     {
       case 0://tnova texture?
        {         
-          ImageCache=new Texture2D[16];
+          ImageCache=new Texture2D[64];
           int offset=0;
-          for (int t=0; t<=ImageCache.GetUpperBound(0);t++)
+          //for (int t=0; t<=ImageCache.GetUpperBound(0);t++)
+          for (int t=0; t<=1;t++)
           {
             ImageCache[t]=ArtLoader.Image(art_ark.data,offset,64,64,"namehere",pal,true);
             offset+=(64*64);

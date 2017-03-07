@@ -116,7 +116,7 @@ public class TNovaLoader : MonoBehaviour {
           {
             if (textureCount[i]!=0)
             {
-              mats[matcounter++] =(Material)Resources.Load("UW1/Maps/Materials/uw1_" + i.ToString("d3"));
+              mats[matcounter++] =(Material)Resources.Load("Nova/Materials/nova" + i);
             }
           }
 
