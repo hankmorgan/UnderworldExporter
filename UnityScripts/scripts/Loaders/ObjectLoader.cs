@@ -428,7 +428,8 @@ public class ObjectLoader : Loader {
 				case  ObjectInteraction.A_STEP_ON_TRIGGER :
 				case  ObjectInteraction.AN_OPEN_TRIGGER :
 				case  ObjectInteraction.AN_UNLOCK_TRIGGER :
-				case ObjectInteraction.A_TIMER_TRIGGER:
+				case  ObjectInteraction.A_TIMER_TRIGGER:
+				case  ObjectInteraction.A_SCHEDULED_TRIGGER:
 						{
 								return true;
 						}	
@@ -462,6 +463,8 @@ public class ObjectLoader : Loader {
 			case  ObjectInteraction.A_COMBINATION_TRAP :
 			case  ObjectInteraction.A_TEXT_STRING_TRAP :
 			case  ObjectInteraction.AN_OSCILLATOR:
+			case ObjectInteraction.A_CHANGE_TO_TRAP:
+			case ObjectInteraction.A_CHANGE_FROM_TRAP:
 				{
 					return true;
 				}

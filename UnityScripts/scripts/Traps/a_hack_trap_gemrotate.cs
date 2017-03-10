@@ -8,4 +8,6 @@ public class a_hack_trap_gemrotate : trap_base {
 
 		//This has a quality of 54d
 
+		//Probably changes variable no 6 to set what is reachable. There is probably another value that sets what levels are available..
+
 }

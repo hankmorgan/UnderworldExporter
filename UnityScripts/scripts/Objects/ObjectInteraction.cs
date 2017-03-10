@@ -115,15 +115,18 @@ public class ObjectInteraction : UWEBase {
 		public const int MOONSTONE =90;
 		public const int LEECH= 91;
 		public const int FISHING_POLE= 92;
-		public const int  ZANIUM= 93;
-		public const int  BEDROLL =94;
-		public const int  FORCEFIELD= 95;
-		public const int  MOONGATE= 96;
-		public const int  BOULDER= 97;
-		public const int  ORB= 98;
-		public const int  SPELL = 99;//used by wands
-		public const int  AN_OSCILLATOR =100;
-		public const int  A_TIMER_TRIGGER=101;
+		public const int ZANIUM= 93;
+		public const int BEDROLL =94;
+		public const int FORCEFIELD= 95;
+		public const int MOONGATE= 96;
+		public const int BOULDER= 97;
+		public const int ORB= 98;
+		public const int SPELL = 99;//used by wands
+		public const int AN_OSCILLATOR =100;
+		public const int A_TIMER_TRIGGER=101;
+		public const int A_SCHEDULED_TRIGGER=102;
+		public const int A_CHANGE_FROM_TRAP=103;
+		public const int A_CHANGE_TO_TRAP=104;
 
 		public const int HEADINGNORTH =180;
 		public const int HEADINGSOUTH= 0;
@@ -1888,6 +1891,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<a_timer_trigger>();
 						CreateSprite=false;
 						break;
+				case A_SCHEDULED_TRIGGER:
+						myObj.AddComponent<a_scheduled_trigger>();
+						CreateSprite=false;
+						break;
 				case A_DAMAGE_TRAP:
 						myObj.AddComponent<a_damage_trap>();
 						CreateSprite=false;
@@ -1956,6 +1963,14 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<an_oscillator_trap>();
 						CreateSprite=false;
 						break;
+				case A_CHANGE_FROM_TRAP:
+						myObj.AddComponent<a_change_from_trap>();
+						CreateSprite=false;
+						break;
+				case A_CHANGE_TO_TRAP:
+						myObj.AddComponent<a_change_to_trap>();
+						CreateSprite=false;
+						break;
 				case TMAP_CLIP:
 				case TMAP_SOLID:
 						myObj.AddComponent<TMAP>();
@@ -1994,6 +2009,10 @@ public class ObjectInteraction : UWEBase {
 									myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
 							case 0x3F://end game sequence
 									myObj.AddComponent<a_do_trap_EndGame>();break;
+							case 54:
+									myObj.AddComponent<a_hack_trap_gemrotate>();break;
+							case 55:
+									myObj.AddComponent<a_hack_trap_teleport>();break;
 							default:
 									myObj.AddComponent<trap_base>();break;
 							}
