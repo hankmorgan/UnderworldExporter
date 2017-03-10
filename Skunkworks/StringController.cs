@@ -39,7 +39,7 @@ public class StringController  {
 	/// <summary>
 	/// The instance of this class
 	/// </summary>
-	public static StringController instance;
+	//public static StringController instance;
 
 	//Temporary array until I'm wide awake
 		private string[] UW1_TextureNames ={"a stone wall",
@@ -308,6 +308,7 @@ public class StringController  {
 
 
 
+
 	/// <summary>
 	/// Loads and decodes the strings.pak file as specificed by the Path.
 	/// </summary>
@@ -443,5 +444,68 @@ public class StringController  {
 		{//output a string at the specified block and string no.
 		return (string)GameStrings[BlockNo.ToString("000") + "_" + StringNo.ToString("000")];
 		}
+
+
+
+
+  public void LoadShockStrings(string path)
+  {
+    char[] archive_ark;
+
+    GameStrings=new Hashtable();
+    if (DataLoader.ReadStreamFile(path, out archive_ark))
+    {
+      //Read in every chunkaddress
+      long DirectoryAddress=DataLoader.getValAtAddress(archive_ark,124,32);
+      long NoOfChunks = DataLoader.getValAtAddress(archive_ark,DirectoryAddress,16);
+      long firstChunkAddress =DataLoader.getValAtAddress(archive_ark,DirectoryAddress+2,32);
+      long address_pointer=DirectoryAddress+6;
+      long AddressOfBlockStart= firstChunkAddress;
+      for (int k=0; k< NoOfChunks; k++)
+      {
+        long chunkId =  DataLoader.getValAtAddress(archive_ark,address_pointer,16);
+        long chunkUnpackedLength = DataLoader.getValAtAddress(archive_ark,address_pointer+2,24);
+        long chunkType =  DataLoader.getValAtAddress(archive_ark,address_pointer+5,8);
+        long chunkPackedLength =  DataLoader.getValAtAddress(archive_ark,address_pointer+6,24);
+        long chunkContentType =  DataLoader.getValAtAddress(archive_ark,address_pointer+9,8);
+        long NoSubChunks =  DataLoader.getValAtAddress(archive_ark,AddressOfBlockStart,16);
+
+        long strPtr=2;
+
+        for (int i = 0; i<NoSubChunks;i++)
+        {
+          long subChunkStart =AddressOfBlockStart+  DataLoader.getValAtAddress(archive_ark,AddressOfBlockStart+strPtr,32);
+          long subChunkEnd = AddressOfBlockStart+  DataLoader.getValAtAddress(archive_ark,AddressOfBlockStart+strPtr+4,32);
+          if (subChunkEnd > subChunkStart)
+          {
+            string key= chunkId.ToString("000") + "_"+ i.ToString("000") ;
+            //fprintf(LOGFILE, "%d€%03d€%03d€", k, chunkId, i);
+            //string result="";
+            char[] result= new char[subChunkEnd-subChunkStart];
+            long c=0;
+            for (long s=subChunkStart; ( (s<subChunkEnd) && (s<=archive_ark.GetUpperBound(0)) ); s++)
+            {
+              //result += archive_ark[s].ToString();
+              result[c++]= archive_ark[s];
+            }
+           
+            GameStrings[key]=new string(result);
+            //fprintf(LOGFILE, "%d€%03d€%03d€", k, chunkId, i);
+            //fprintf(LOGFILE, "%.*s\n", subChunkEnd - subChunkStart, tmp_ark + subChunkStart);
+          }
+          strPtr+=4;
+        }
+        //fprintf(LOGFILE, "}\n");
+        AddressOfBlockStart=AddressOfBlockStart+ chunkPackedLength;
+        if ((AddressOfBlockStart % 4) != 0)
+          AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries
+
+
+        address_pointer=address_pointer+10;     
+      }
+
+    }
+
+  }
 	
 }
