@@ -34,7 +34,7 @@ public class CritterInfo : Loader {
 
 		public int Item_Id;
 		public int FileNo;
-		public int AuxPalNo;
+		//public int AuxPalNo;
 		char[] FilePage0;
 		char[] FilePage1;
 		public Palette pal; //the game pal.
@@ -42,12 +42,12 @@ public class CritterInfo : Loader {
 
 		public CritterAnimInfo AnimInfo;
 
-		public CritterInfo(int critter_id, Palette paletteToUse, int palno)
+		public CritterInfo(int critter_id, Palette paletteToUse, int AuxPalNo)
 		{
 			//string fileO = DecimalToOct(file.ToString());
 			string critterIDO = DecimalToOct(critter_id.ToString());
 			//FileNo=file;
-			AuxPalNo=palno;
+			//AuxPalNo=palno;
 			pal=paletteToUse;
 			AnimInfo=new CritterAnimInfo();
 			int spriteIndex=0;
@@ -57,12 +57,12 @@ public class CritterInfo : Loader {
 				if (pass==0)
 				{//CR{CRITTER file ID in octal}PAGE.N{Page}
 					DataLoader.ReadStreamFile(BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage0);
-					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex);
+					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex, AuxPalNo);
 				}
 				else
 				{
 					DataLoader.ReadStreamFile( BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage1);
-					ReadPageFile(FilePage1,critter_id,pass,spriteIndex);
+					ReadPageFile(FilePage1,critter_id,pass,spriteIndex, AuxPalNo);
 				}
 			}
 		}
@@ -117,7 +117,7 @@ public class CritterInfo : Loader {
 
 
 
-		private int ReadPageFile(char[] PageFile, int XX, int YY ,int spriteIndex)
+		private int ReadPageFile(char[] PageFile, int XX, int YY ,int spriteIndex , int AuxPalNo)
 		{
 			int addptr=0;
 			int slotbase = (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
@@ -573,14 +573,14 @@ public class CritterInfo : Loader {
 
 
 
-		int ReadUW2PageFileData(char[] assocFile, int PaletteNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
+		int ReadUW2PageFileData(char[] assocFile, int AuxPalNo, string fileCrit, CritterAnimInfo critanim, int spriteIndex, Palette paletteToUse)
 		{
 				//Debug.Log(fileCrit + " starting at  "  + spriteIndex);
 				Palette pal= paletteToUse;
 				char[]critterFile;
 				//char[] auxpalval=new char[32];
 				Palette[] auxpal = new Palette[32];
-				int auxPalNo = PaletteNo;
+				//int auxPalNo = PaletteNo;
 				int AddressPointer;
 
 

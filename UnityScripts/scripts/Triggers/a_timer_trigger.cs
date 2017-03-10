@@ -35,7 +35,7 @@ public class a_timer_trigger : trigger_base {
 	}
 
 		//DO not destroy
-		public virtual void PostActivate()
-		{
-		}
+		//public virtual void PostActivate()
+		//{
+		//}
 }
