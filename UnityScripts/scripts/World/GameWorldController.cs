@@ -557,7 +557,7 @@ public class GameWorldController : UWEBase {
 					}
 					if (UWEBase.EditorMode==false)
 					{
-						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects									
+						Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
 					}
 
 				}

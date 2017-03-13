@@ -1995,7 +1995,7 @@ public class TileMap : Loader {
 
 		///Cleanup
 		/// 
-		public void CleanUp(int game)
+		public void CleanUp(string game)
 		{
 				int x; int y;
 
@@ -2096,7 +2096,10 @@ public class TileMap : Loader {
 
 
 				//return;
-				//if (game == SHOCK) {return;}
+				if (game == GAME_SHOCK) 
+				{//TODO:FIx some z-fighting due to tile visibility.
+						return;		
+				}
 				int j=1 ;
 				//Now lets combine the solids along particular axis
 				for (x=0;x<63;x++){
@@ -2369,6 +2372,8 @@ public class TileMap : Loader {
 
 		bool DoTilesMatch(TileInfo t1, TileInfo t2)
 		{//TODO:Tiles have a lot more properties now.
+				if(_RES==GAME_SHOCK)
+				{return false;}
 				//if ((t1.tileType >1) || (t1.hasElevator==1) || (t1.TerrainChange ==1) ||  (t2.hasElevator==1) || (t2.TerrainChange ==1) || (t1.isWater ==1) || (t2.isWater ==1)){	//autofail no none solid/open/special.
 				if ((t1.tileType >1) || (t1.hasElevator == 1) || (t1.TerrainChange == 1) || (t2.hasElevator == 1) || (t2.TerrainChange == 1)){	//autofail no none solid/open/special.
 						return false;
