@@ -92,6 +92,7 @@ public class UWCharacter : Character {
 	{
 
 		base.Start ();
+				if (_RES==GAME_SHOCK){return;}
 				InventoryReady=false;
 		GameWorldController.instance.playerUW=this;
 		XAxis.enabled=false;
@@ -197,6 +198,7 @@ public class UWCharacter : Character {
 
 	// Update is called once per frame
 	public override void Update () {
+				if (_RES==GAME_SHOCK){return;}
 		base.Update ();
 		if (JustTeleported)
 		{

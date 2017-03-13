@@ -76,7 +76,8 @@ public class TileMap : Loader {
 		public int thisLevelNo; //The number of this level
 		public int UW_CEILING_HEIGHT;
 		public int CEILING_HEIGHT;
-		public int[] texture_map = new int[256];
+		public int SHOCK_CEILING_HEIGHT;
+		public int[] texture_map = new int[272];
 
 		private int currRoomIndex;//Used in merging regions together.
 
@@ -1658,6 +1659,280 @@ public class TileMap : Loader {
 
 
 
+
+		public bool BuildTileMapShock(char[] archive_ark, int LevelNo)
+		{
+				long address_pointer=4;
+				//LevelInfo=new TileInfo[64,64];
+
+				//char[] archive_ark; //file data
+				DataLoader.Chunk lev_ark; 
+				/*  unsigned char *tmp_ark; 
+  unsigned char *sub_ark;*/ 
+				DataLoader.Chunk tex_ark;
+				DataLoader.Chunk  inf_ark;
+
+
+
+
+				//Read in the archive.
+				//if (!DataLoader.ReadStreamFile(filePath, out archive_ark))
+				//{
+			//			return false;
+				//}
+
+				if (!DataLoader.LoadChunk(archive_ark, LevelNo*100+4004, out inf_ark))
+				{//Read in the evel properties.
+						return false;
+				}
+				//Process level properties (height c-space)
+				int HeightUnits = (int) DataLoader.getValAtAddress(inf_ark.data,16,32);  //Log2 value. The higher the value the lower the level height.
+				if (HeightUnits > 3)  //Any higher we lose data, 
+				{
+						HeightUnits=3;
+				}
+				int cSpace = (int)DataLoader.getValAtAddress(inf_ark.data,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
+				SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);  //Shifts the scale of the level.
+				CEILING_HEIGHT= SHOCK_CEILING_HEIGHT;
+
+
+				//long sizeV = getValAtAddress(inf_ark,0,32);
+				//long sizeH = getValAtAddress(inf_ark,4,32);
+				//long always6_1 = getValAtAddress(inf_ark,8,32);
+				//long always6_2 = getValAtAddress(inf_ark,12,32);  
+
+				if (!DataLoader.LoadChunk(archive_ark, LevelNo*100+4005, out lev_ark))
+				{//Read in the level tilemap data
+						return false;
+				}
+				//Read the main level data in
+				/* blockAddress =getShockBlockAddress(LevelNo*100+4005,archive_ark, ref chunkPackedLength,ref chunkUnpackedLength,ref chunkType); 
+    if (blockAddress == -1) {return false;}
+    lev_ark=new char[chunkUnpackedLength]; //or 64*64*16
+    LoadShockChunk(blockAddress, chunkType, archive_ark, ref lev_ark,chunkPackedLength,chunkUnpackedLength);
+    AddressOfBlockStart=0;
+    address_pointer=0;  */
+
+
+				if (!DataLoader.LoadChunk(archive_ark, LevelNo*100+4007, out tex_ark))
+				{//Read in the level texture data
+						return false;
+				}
+
+				//get the texture data from the archive.is never compressed?
+				//AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark, ref chunkPackedLength, ref chunkUnpackedLength,ref chunkType);
+				//tex_ark = new char[chunkUnpackedLength]; 
+				address_pointer=0;
+				for (long k=0; k< tex_ark.chunkUnpackedLength/2; k++)
+				{
+						texture_map[k] =  (int)DataLoader.getValAtAddress(tex_ark.data,address_pointer,16);
+						address_pointer =address_pointer+2;   //tmp_ark[AddressOfBlockStart+k];
+				}
+				address_pointer=0;  
+
+
+				//Reactor   Map 0  (chunk 40xx)
+				//Levels 1-9  Map L  (chunk 4Lxx)
+				//SHODAN c/space  Map 10 (chunk 50xx)
+				//Delta grove Map 11 (chunk 51xx)
+				//Alpha grove Map 12 (chunk 52xx)
+				//Beta grove  Map 13 (chunk 53xx)
+				//C/space L1-2    Map 14 (chunk 54xx)
+				//C/space other Map 15 (chunk 55xx)
+				for (int y=0; y<64;y++)
+				{
+						for (int x = 0; x < 64; x++)
+						{
+								//Read in the tile data 
+								Tiles[x,y]=new TileInfo();
+								Tiles[x,y].tileX = (short)x;
+								Tiles[x,y].tileY = (short)y;
+								Tiles[x,y].tileType = lev_ark.data[address_pointer];
+								switch (Tiles[x,y].tileType)
+								{//Need to swap some tile types around so that they conform to uw naming standards.
+								case 4: {Tiles[x,y].tileType = 5; break; }
+								case 5: {Tiles[x,y].tileType = 4; break; }
+								case 7: {Tiles[x,y].tileType = 8; break; }
+								case 8: {Tiles[x,y].tileType = 7; break; }
+								}
+								Tiles[x,y].ActualType = (short)Tiles[x,y].tileType;
+								Tiles[x,y].indexObjectList = 0;
+								Tiles[x,y].Render = 1;
+								Tiles[x,y].DimX = 1;
+								Tiles[x,y].DimY = 1;
+								Tiles[x,y].Grouped = 0;
+								Tiles[x,y].BullFrog=0;
+								for (int v = 0; v < 6; v++)
+								{
+										Tiles[x,y].VisibleFaces[v] = 1;
+								}
+								/* word 6 contains
+        0-5 Wall texture (index into texture list)
+        6-10  Ceiling texture
+        11-15 Floor texture
+        */
+								//Tiles[x,y].wallTexture = texture_map[(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F];
+								Tiles[x,y].wallTexture =(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F;
+								//Tiles[x,y].shockCeilingTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F];
+								Tiles[x,y].shockCeilingTexture =((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F;
+								//Tiles[x,y].floorTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F];
+								Tiles[x,y].floorTexture = ((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F;
+								//Tiles[x,y].wallTexture = 270;//debug
+								//Tiles[x,y].shockCeilingTexture = 273;
+								Tiles[x,y].North = Tiles[x,y].wallTexture;
+								Tiles[x,y].South = Tiles[x,y].wallTexture;
+								Tiles[x,y].East = Tiles[x,y].wallTexture;
+								Tiles[x,y].West = Tiles[x,y].wallTexture;
+
+								Tiles[x,y].isWater = false;  //No swimming in shock.
+								Tiles[x,y].landRegion=0;
+								Tiles[x,y].lavaRegion = 0;
+								Tiles[x,y].waterRegion = 0;
+								Tiles[x,y].floorHeight = ((lev_ark.data[address_pointer + 1]) & 0x1F);
+								Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+
+								Tiles[x,y].ceilingHeight = ((lev_ark.data[address_pointer + 2]) & 0x1F);
+								Tiles[x,y].ceilingHeight = ((Tiles[x,y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+
+								Tiles[x,y].shockFloorOrientation = (short)(((lev_ark.data[address_pointer + 1]) >> 5) & 0x3);
+								Tiles[x,y].shockCeilOrientation =(short)(((lev_ark.data[address_pointer + 2]) >> 5) & 0x3);
+
+								//Need to know heights in various directions for alignments.
+								//Will set these properly after loading levels.
+								Tiles[x,y].shockNorthCeilHeight = Tiles[x,y].ceilingHeight;
+								Tiles[x,y].shockSouthCeilHeight = Tiles[x,y].ceilingHeight;
+								Tiles[x,y].shockEastCeilHeight = Tiles[x,y].ceilingHeight;
+								Tiles[x,y].shockWestCeilHeight = Tiles[x,y].ceilingHeight;
+
+								Tiles[x,y].shockSteep = (lev_ark.data[address_pointer + 3] & 0x0f);
+								Tiles[x,y].shockSteep = ((Tiles[x,y].shockSteep << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+
+								if ((Tiles[x,y].shockSteep == 0) && (Tiles[x,y].tileType >= 6))//If a sloped tile has no slope then it's a open tile.
+								{
+										Tiles[x,y].tileType = 1;
+								}
+								if ((Tiles[x,y].tileType == 1) && (Tiles[x,y].shockSteep > 0))  //similarly an open tile can't have a slope at all
+								{
+										Tiles[x,y].shockSteep = 0;
+								}
+								Tiles[x,y].indexObjectList = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 4, 16);
+
+
+								//if(Tiles[x,y].indexObjectList!=0)
+								//  {
+								//  fprintf(LOGFILE,"At %d %d we have: %d\n", x,y,Tiles[x,y].indexObjectList);
+								//  }
+
+								/*
+        xxxxx0xx  Floor & ceiling, same direction
+        xxxxx4xx  Floor & ceiling, ceiling opposite dir to tile type
+        xxxxx8xx  Floor only
+        xxxxxCxx  Ceiling only
+        */
+								Tiles[x,y].shockSlopeFlag =(short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 10) & 0x03);
+								Tiles[x,y].UseAdjacentTextures = ((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01;
+								Tiles[x,y].shockTextureOffset = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF;
+								//unknownflags
+								//70E000E0
+								//  fprintf(LOGFILE,"\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
+								Tiles[x,y].shockShadeLower = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 16) & 0x0F);
+								Tiles[x,y].shockShadeUpper = (short)(((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 24) & 0x0F);
+								//Tiles[x,y].shadeUpperGlobal = 0;
+								// Tiles[x,y].shadeLowerGlobal = 0;
+								Tiles[x,y].shockNorthOffset = Tiles[x,y].shockTextureOffset;
+								Tiles[x,y].shockSouthOffset = Tiles[x,y].shockTextureOffset;
+								Tiles[x,y].shockEastOffset = Tiles[x,y].shockTextureOffset;
+								Tiles[x,y].shockWestOffset = Tiles[x,y].shockTextureOffset;
+
+								Tiles[x,y].SHOCKSTATE[0] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xC, 8);
+								Tiles[x,y].SHOCKSTATE[1] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xD, 8);
+								Tiles[x,y].SHOCKSTATE[2] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xE, 8);
+								Tiles[x,y].SHOCKSTATE[3] = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 0xF, 8);
+
+								//Tiles[x,y].indexObjectList=0;
+								//if (y == 0)
+								//{
+								//  Tiles[x,y].tileType = TILE_SLOPE_N;
+								//  Tiles[x,y].shockSlopeFlag=SLOPE_FLOOR_ONLY;
+								//  Tiles[x,y].floorHeight=x;
+								//  Tiles[x,y].shockSteep=11;
+								//}
+								address_pointer=address_pointer+16;
+						}
+				}
+
+				for (int y=1; y<63;y++) //skip the outer textures.
+				{
+						for (int x=1; x<63;x++)
+						{
+								//if (
+								//  (Tiles[x,y].tileType  != TILE_OPEN) 
+								//  ||  ((Tiles[x,y].tileType  != TILE_OPEN) && (Tiles[x,y].UseAdjacentTextures == 1))
+								//  )
+								//  {
+								//if (Tiles[x,y].UseAdjacentTextures != 1)
+								//  {
+								if (Tiles[x+1,y].UseAdjacentTextures != 1)
+								{
+										Tiles[x,y].East = Tiles[x+1,y].wallTexture   ;
+										Tiles[x,y].shockEastOffset =Tiles[x+1,y].shockTextureOffset;
+										//Tiles[x,y].shockEastCeilHeight =LevelInfo[x+1,y].ceilingHeight - LevelInfo[x+1,y].shockSteep ;
+
+								}
+								if (Tiles[x-1,y].UseAdjacentTextures != 1)
+								{         
+										Tiles[x,y].West = Tiles[x-1,y].wallTexture   ;
+										Tiles[x,y].shockWestOffset =Tiles[x-1,y].shockTextureOffset;
+										//Tiles[x,y].shockWestCeilHeight =LevelInfo[x-1,y].ceilingHeight - LevelInfo[x-1,y].shockSteep ;
+
+								}
+								if (Tiles[x,y+1].UseAdjacentTextures != 1)
+								{
+										Tiles[x,y].North = Tiles[x,y+1].wallTexture   ;
+										Tiles[x,y].shockNorthOffset =Tiles[x,y+1].shockTextureOffset;
+										//Tiles[x,y].shockNorthCeilHeight =LevelInfo[x,y+1].ceilingHeight - LevelInfo[x,y+1].shockSteep ;
+
+								}
+								if (Tiles[x,y-1].UseAdjacentTextures != 1)
+								{
+										Tiles[x,y].South  =Tiles[x,y-1].wallTexture   ;
+										Tiles[x,y].shockSouthOffset =Tiles[x,y-1].shockTextureOffset;
+										//Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-1].shockSteep ;
+
+								}
+								//Need to calculate the adjustment here with the steepness and the direction of the slope.
+								Tiles[x,y].shockEastCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x+1,y],fEAST);
+								Tiles[x,y].shockWestCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x-1,y],fWEST);
+								Tiles[x,y].shockNorthCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y+1],fNORTH);
+								Tiles[x,y].shockSouthCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y-1],fSOUTH);
+								/*        Tiles[x,y].shockEastCeilHeight =LevelInfo[x+1,y].ceilingHeight - LevelInfo[x+1,y].shockSteep ;
+        Tiles[x,y].shockWestCeilHeight =LevelInfo[x-1,y].ceilingHeight - LevelInfo[x-1,y].shockSteep ;
+        Tiles[x,y].shockNorthCeilHeight =LevelInfo[x,y+1].ceilingHeight - LevelInfo[x,y+1].shockSteep ;
+        Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-1].shockSteep ;*/  
+								//}
+
+								Tiles[x,y].UpperEast = Tiles[x,y].East;
+								Tiles[x,y].UpperWest = Tiles[x,y].West;
+								Tiles[x,y].UpperNorth = Tiles[x,y].North;
+								Tiles[x,y].UpperSouth = Tiles[x,y].South;
+								Tiles[x,y].LowerEast = Tiles[x,y].East;
+								Tiles[x,y].LowerWest = Tiles[x,y].West;
+								Tiles[x,y].LowerNorth = Tiles[x,y].North;
+								Tiles[x,y].LowerSouth = Tiles[x,y].South;
+						}
+				}
+				return true;
+		}
+
+
+
+
+
+
+
+
+
+
 		//***********************
 
 		int getTile(long tileData)
@@ -2469,6 +2744,119 @@ public class TileMap : Loader {
 				}
 		}
 
+
+
+		int CalcNeighbourCeilHeight(TileInfo t1, TileInfo t2,int Direction)
+		{//TODO:Test me. I'm terrible.
+				// fNORTH 32
+				// fSOUTH 16
+				// fEAST 8
+				// fWEST 4
+				if  ((t2.tileType <=1) ||(t2.shockSlopeFlag == SLOPE_FLOOR_ONLY))
+				{//Don't need to do anything since it has a flat ceiling.
+						return t2.ceilingHeight;
+				}
+				else
+				{
+						//return t2.ceilingHeight;
+						switch (Direction)
+						{
+						case fNORTH:
+								{ 
+										switch (t2.tileType)
+										{
+										case TILE_SLOPE_N:
+										case TILE_SLOPE_S:
+												if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+												{
+														return t2.ceilingHeight+t2.shockSteep ;
+												}
+												else
+												{
+														return t2.ceilingHeight;
+												}
+												break;
+										default:
+												return t2.ceilingHeight;
+												break;
+										}
+								} 
+						case fSOUTH:
+								{
+										switch (t2.tileType)
+										{
+										case TILE_SLOPE_S:
+										case TILE_SLOPE_N:
+												if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+												{
+														return t2.ceilingHeight+t2.shockSteep ;
+												}
+												else
+												{
+														return t2.ceilingHeight;
+												}
+												break;
+										default:
+												return t2.ceilingHeight;
+												break;
+										}
+										//if (t2.tileType == TILE_SLOPE_S)
+										//  {
+										//  if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+										//    {
+										//    return t2.ceilingHeight+t2.shockSteep ;
+										//    }
+										//  else
+										//    {
+										//    return t2.ceilingHeight;
+										//    }
+										//  }
+										break;
+								} 
+						case fEAST:
+								{
+										switch (t2.tileType)
+										{
+										case TILE_SLOPE_E:
+										case TILE_SLOPE_W:
+												if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+												{
+														return t2.ceilingHeight+t2.shockSteep ;
+												}
+												else
+												{
+														return t2.ceilingHeight;
+												}
+												break;
+										default:
+												return t2.ceilingHeight;
+												break;
+										}
+								} 
+						case fWEST:
+								{
+										switch (t2.tileType)
+										{
+										case TILE_SLOPE_W:
+										case TILE_SLOPE_E:
+												if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+												{
+														return t2.ceilingHeight+t2.shockSteep ;
+												}
+												else
+												{
+														return t2.ceilingHeight;
+												}
+												break;
+										default:
+												return t2.ceilingHeight;
+												break;
+										}
+								}
+						}
+				}
+				return t2.ceilingHeight;
+		}
 
 
 

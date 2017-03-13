@@ -573,12 +573,14 @@ switch (game)
 			}
 		if (isCompressed == 1)
 			{
+			fprintf(LOGFILE, "\nUnpacking from address %d\n", getValAtAddress(tmp_ark, address_pointer, 32));
 			int datalen;
 			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			}
 		else
 			{//
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
+			fprintf(LOGFILE, "\nCopying from address %d\n", BlockStart);
 			int j = 0;
 			AddressOfBlockStart = 0;
 			lev_ark = new unsigned char[0x7c08];

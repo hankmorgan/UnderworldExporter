@@ -12,6 +12,7 @@ public class TextureLoader : ArtLoader {
 	private string pathTexW_UW1="DATA\\W64.TR";
 	private string pathTexF_UW1="DATA\\F32.TR";
 	private string pathTex_UW2 = "DATA\\T64.TR";
+	private string pathTex_SS1 = "RES\\DATA\\Texture.res";
 
 	char[] texturebufferW;
 	char[] texturebufferF;
@@ -21,6 +22,8 @@ public class TextureLoader : ArtLoader {
 	public bool texturesFLoaded;
 	private int TextureSplit=210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
 	private int FloorDim=32;
+
+	const int BitMapHeaderSize=28;
 
 		/// <summary>
 		/// Loads the image at index.
@@ -43,6 +46,60 @@ public class TextureLoader : ArtLoader {
 
 		switch (_RES)
 		{
+		case GAME_SHOCK:
+				{
+					if (texturesFLoaded==false)
+					{
+						if (!DataLoader.ReadStreamFile(BasePath+ pathTex_SS1, out texturebufferT))
+						{
+							return base.LoadImageAt(index);
+						}
+						else
+						{
+							texturesFLoaded=true;
+						}
+					}
+					//Load the chunk requested
+					//For textures this is index + 1000
+					DataLoader.Chunk art_ark;
+					if (DataLoader.LoadChunk(texturebufferT, index+1000, out art_ark ))
+					{
+						switch(art_ark.chunkContentType)
+						{
+						case 2:
+						case 17:
+								{
+									long textureOffset = (int)DataLoader.getValAtAddress(art_ark.data, 2 + (0 * 4), 32);
+									int CompressionType=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+4,16);
+									int Width=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+8,16);
+									int Height=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+10,16);
+									if ((Width>0) && (Height >0))
+									{
+
+									if(CompressionType==4)
+										{//compressed
+										char[] outputImg;
+										//  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
+										UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
+										return Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+										}
+									else
+										{//Uncompressed
+											return Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+										}
+									}
+									else
+									{
+										return base.LoadImageAt(index);
+									}
+								}
+								break;
+						}
+					}
+
+				return base.LoadImageAt(index);	
+				}
+
 		case GAME_UW2:
 			{
 				if (texturesFLoaded==false)

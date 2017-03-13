@@ -281,43 +281,52 @@ public class GameWorldController : UWEBase {
 	{
 		instance=this;
 		LoadPath();
+
 		UWEBase._RES = game;
 		Loader._RES=game;
-		objectMaster=new ObjectMasters();
-		//objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
-		//critterData = new Critters();
-		//critterData.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
-		//commobj=new CommonObjProps();
-		//commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
-		//weaponprops =new WeaponProps();
-		//weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
-		
-		objDat = new ObjectDatLoader();
-		commonObject= new CommonObjectDatLoader();
+				switch(game)
+				{
+				case GAME_SHOCK:
+						palLoader = new PaletteLoader();
+						palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
+						palLoader.PaletteNo=700;
+						palLoader.LoadPalettes();
+						texLoader=new TextureLoader();
+						break;
+				default:
+					objectMaster=new ObjectMasters();
+					objDat = new ObjectDatLoader();
+					commonObject= new CommonObjectDatLoader();
 
 
-		palLoader = new PaletteLoader();
-		palLoader.Path=Loader.BasePath + "data\\pals.dat";
-		palLoader.LoadPalettes();
-		bytloader=new BytLoader();
+					palLoader = new PaletteLoader();
+					palLoader.Path=Loader.BasePath + "data\\pals.dat";
+					palLoader.LoadPalettes();
+					bytloader=new BytLoader();
 
-		texLoader=new TextureLoader();
-		ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
-		SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
-		DoorArt=new GRLoader(GRLoader.DOORS_GR);
-		TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
-		TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
-		TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
-		armor_f=new GRLoader(GRLoader.ARMOR_F_GR);
-		armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
-		grCursors = new GRLoader(GRLoader.CURSORS_GR);
-		grFlasks=new GRLoader(GRLoader.FLASKS_GR);
+					texLoader=new TextureLoader();
+					ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
+					SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
+					DoorArt=new GRLoader(GRLoader.DOORS_GR);
+					TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
+					TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
+					TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
+					armor_f=new GRLoader(GRLoader.ARMOR_F_GR);
+					armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
+					grCursors = new GRLoader(GRLoader.CURSORS_GR);
+					grFlasks=new GRLoader(GRLoader.FLASKS_GR);
 
-		terrainData= new TerrainDatLoader();
-		weaps=new WeaponAnimation();
+					terrainData= new TerrainDatLoader();
+					weaps=new WeaponAnimation();
+					break;
+				}
+
 
 		switch (_RES)
 		{
+			case GAME_SHOCK:
+				Tilemaps=new TileMap[15];
+				break;
 			case GAME_UWDEMO:
 				Tilemaps = new TileMap[1];
 				objectList=new ObjectLoader[1];
@@ -339,13 +348,23 @@ public class GameWorldController : UWEBase {
 	void Start () {
 
 		instance=this;
-		StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+
 		switch(_RES)
 		{
+		case GAME_SHOCK:
+			AtMainMenu=false;
+			UWHUD.instance.gameObject.SetActive(false);
+			SwitchLevel(startLevel);
+			return;
+
 		case GAME_UWDEMO:
 				//case GAME_UW2:
 				//UW Demo does not go to the menu. It will load automatically into the gameworld
 				AtMainMenu=false;	
+				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+				break;
+			default:
+				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 				break;
 		}
 
@@ -525,25 +544,34 @@ public class GameWorldController : UWEBase {
 				{//Data has not been loaded for this level
 					Tilemaps[newLevelNo]=new TileMap();
 					Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
-					Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
-					//if (UWEBase._RES!=UWEBase.GAME_UW2)
-					//{//For now only load uw1/demo objects.
+					
+					if (UWEBase._RES!=UWEBase.GAME_SHOCK)
+					{
+						Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
 						objectList[newLevelNo]=new ObjectLoader();
 						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
-					//}
+					}
+					else
+					{
+						Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);	
+					}
 					if (UWEBase.EditorMode==false)
 					{
 						Tilemaps[newLevelNo].CleanUp(1);//I can reduce the tile map complexity after I know about what tiles change due to objects									
 					}
 
 				}
-						//Call events for inventory objects on level transition.
-				foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+				if (UWEBase._RES!=UWEBase.GAME_SHOCK)
 				{
-					if (t.gameObject.GetComponent<object_base>()!=null)
+					//Call events for inventory objects on level transition.
+					foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
 					{
-						t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
+						if (t.gameObject.GetComponent<object_base>()!=null)
+						{
+							t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
+						}
 					}
+
 				}
 
 				if(LevelNo!=-1)
@@ -562,27 +590,36 @@ public class GameWorldController : UWEBase {
 
 				//Get my object info into the tile map.
 				LevelNo=newLevelNo;
-				critsLoader= new CritLoader[64];//Clear out animations
-				if (UWEBase.EditorMode==false)
+				switch(UWEBase._RES)
 				{
-					//Call events for inventory objects on level transition.
-					foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
-					{
-						if (t.gameObject.GetComponent<object_base>()!=null)
+				case GAME_SHOCK:
+						break;
+				default:
+						critsLoader= new CritLoader[64];//Clear out animations
+						if (UWEBase.EditorMode==false)
 						{
-							t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+							//Call events for inventory objects on level transition.
+							foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+							{
+								if (t.gameObject.GetComponent<object_base>()!=null)
+								{
+									t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+								}
+							}
 						}
-					}
+						break;
 				}
-				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,1,Tilemaps[newLevelNo],objectList[newLevelNo]);
 
-				//switch(UWEBase._RES)
-				//{//For the moment no objects in  UW2
-				//case UWEBase.GAME_UWDEMO:
-				//case UWEBase.GAME_UW1:
-				ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
-				//	break;
-				//}
+				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo]);
+
+				switch(UWEBase._RES)
+				{//For the moment no objects in Shock
+					case GAME_SHOCK:
+						break;
+					default:
+						ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+						break;
+				}
 				
 
 				GenerateNavmesh(NavRigLand);
@@ -855,6 +892,9 @@ public class GameWorldController : UWEBase {
 		{
 				switch (UWEBase._RES)
 				{
+				case UWEBase.GAME_SHOCK:
+						MaterialMasterList= new Material[273];
+						break;
 				case UWEBase.GAME_UWDEMO:
 						MaterialMasterList= new Material[58];
 						break;
@@ -873,18 +913,30 @@ public class GameWorldController : UWEBase {
 						MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
 						MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
 				}
-
-				//Load up my door texture
-				for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
+				switch (_RES)
 				{
-						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
-						MaterialDoors[i].mainTexture= DoorArt.LoadImageAt(i);
-				}
+					case GAME_SHOCK:
+						break;
 
+					default:
+					//Load up my door texture
+					for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
+						{
+
+						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
+
+						}
+					break;
+
+				}
+	
 				//Load up my tile maps
 				//First read in my lev_ark file
 				switch(UWEBase._RES)
 				{
+				case GAME_SHOCK:
+						Lev_Ark_File = "res\\data\\archive.dat";
+						break;	
 				case UWEBase.GAME_UWDEMO:
 						Lev_Ark_File = "Data\\level13.st";
 						break;

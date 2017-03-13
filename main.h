@@ -4,6 +4,9 @@
 #include "tilemap.h"
 #include "gameobjects.h"
 /*Game paths*/
+#define testfile "C:\\Games\\Terra Nova\\CD\\Terra_Nova\\DATA\\RESPLNT0.RES" 
+
+
 
 //#define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
 //#define UW0_TEXTUREW_PATH "DATA\\level13.txm"

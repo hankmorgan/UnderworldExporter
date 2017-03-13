@@ -10,7 +10,7 @@ public class UWEBase : MonoBehaviour {
 		public const string GAME_UW1 = "UW1";
 		public const string GAME_UW2 = "UW2";
 		public const string GAME_SHOCK = "SHOCK";
-
+		public const string GAME_TNOVA = "TNOVA";
 		/// <summary>
 		/// The folder containing the resources for this game.
 		/// </summary>

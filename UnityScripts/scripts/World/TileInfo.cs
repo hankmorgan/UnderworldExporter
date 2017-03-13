@@ -51,14 +51,14 @@ public class TileInfo : Loader {
 		public int shockCeilingTexture;
 		public int shockSteep;
 		public int UseAdjacentTextures;
-		//int shockTextureOffset;
-		//int shockNorthOffset; int shockSouthOffset;
-		//int shockEastOffset; int shockWestOffset;
-		//short shockShadeUpper;	
-		//short shockShadeLower;
-		//long shockNorthCeilHeight; long shockSouthCeilHeight;
-		//long shockEastCeilHeight; long shockWestCeilHeight;
-		//short shockFloorOrientation; short shockCeilOrientation;
+		public int shockTextureOffset;
+		public int shockNorthOffset; public int shockSouthOffset;
+		public int shockEastOffset; public int shockWestOffset;
+		public short shockShadeUpper;	
+		public short shockShadeLower;
+		public long shockNorthCeilHeight; public long shockSouthCeilHeight;
+		public long shockEastCeilHeight; public long shockWestCeilHeight;
+		public short shockFloorOrientation; public short shockCeilOrientation;
 
 		public short ActualType;
 
@@ -79,7 +79,7 @@ public class TileInfo : Loader {
 		///int TerrainChangeIndices[10];	//Array of terrain change objects affecting this tile. I'll need this for scripting.
 		//int TerrainChangeIndex;	//index to the change terrain trap.
 
-		//int SHOCKSTATE[4];	//These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.
+		public int[] SHOCKSTATE=new int[4];	//These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.
 		//scripting state flags
 		//short global;
 		//short shadeUpperGlobal;

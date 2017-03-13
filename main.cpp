@@ -99,7 +99,7 @@ int main()
 	uw_game_files[6] = "data\\cnv.ark";	//UW2 ark files.
 
 	const char *shock_game_files[9];
-	shock_game_files[0] = "Data\\archive.dat";
+	shock_game_files[0] = "res\\Data\\archive.dat";
 	shock_game_files[1] = "res\\Data\\SAVGAM00.dat";
 	shock_game_files[2] = "res\\Data\\SAVGAM01.dat";
 	shock_game_files[3] = "res\\Data\\SAVGAM02.dat";
@@ -1102,6 +1102,7 @@ int main()
 					}
 				else
 					{
+					//sprintf_s(Graphics_File, 255, testfile, path_uw2);
 					ExtractShockGraphics(Graphics_File, Graphics_Pal, critPal, OutFileName, useTGA);
 					}
 				break;

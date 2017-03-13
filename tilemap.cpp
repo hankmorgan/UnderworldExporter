@@ -1042,7 +1042,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 	//get the texture data from the archive.is never compressed?
 	AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
 	tex_ark = new unsigned char[chunkUnpackedLength];	
-	for (long k=0; k< chunkUnpackedLength; k++)
+	for (long k=0; k< chunkUnpackedLength/2; k++)
 	{
 		texture_map[k] = getValAtAddress(archive_ark,AddressOfBlockStart + address_pointer,16);
 		address_pointer =address_pointer+2;		//tmp_ark[AddressOfBlockStart+k];

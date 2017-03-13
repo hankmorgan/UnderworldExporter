@@ -2097,6 +2097,7 @@ int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo)
 
 // This one is also almost directly from Jim Cameron's code.
 void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbits) {
+	int j = 0;
 	int i,xc;
 	unsigned char *bits_end;
 
@@ -2200,6 +2201,7 @@ int Height;
 			if (useTGA==1)
 				{
 				writeTGA(outputImg,0,Width,Height,index,pal,OutFileName,1);
+				return;
 				}
 			else
 				{

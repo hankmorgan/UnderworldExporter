@@ -6,6 +6,7 @@ public class Loader  {
 	public const string GAME_UW1 = "UW1";
 	public const string GAME_UW2 = "UW2";
 	public const string GAME_SHOCK = "SHOCK";
+	public const string GAME_TNOVA = "TNOVA";
 
 	public static string _RES="UW1";
 	public static string BasePath = "c:\\games\\uw1\\";

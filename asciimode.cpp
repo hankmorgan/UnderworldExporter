@@ -333,7 +333,7 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 	printRoomRegions(LevelInfo, LevelNo);
 
-	printRoomRegionsForNavmeshTagging(LevelInfo,objList, LevelNo);
+	//printRoomRegionsForNavmeshTagging(LevelInfo,objList, LevelNo);
 
 	if (game == SHOCK)
 		{

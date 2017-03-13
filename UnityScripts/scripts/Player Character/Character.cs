@@ -115,7 +115,7 @@ public class Character : UWEBase {
 
 	// Use this for initialization
 	public virtual void Start () {
-		if (GameWorldController.instance.game=="SS1")
+		if (_RES==GAME_SHOCK)
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;
 		}

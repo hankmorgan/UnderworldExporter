@@ -58,6 +58,7 @@ public class PlayerInventory : UWEBase {
 
 	// Use this for initialization
 	void Start () {
+		if (_RES==GAME_SHOCK){return;}
 		GRLoader bodies = new GRLoader(GRLoader.BODIES_GR);
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
 		atTopLevel=true;
@@ -88,7 +89,7 @@ public class PlayerInventory : UWEBase {
 		
 		switch(_RES)		
 		{
-		case "SS1":
+		case GAME_SHOCK:
 			{
 			UpdateShock();
 				break;

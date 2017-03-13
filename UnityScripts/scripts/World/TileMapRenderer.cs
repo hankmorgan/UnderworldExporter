@@ -64,7 +64,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 
 
-		public static void GenerateLevelFromTileMap(GameObject parent, int game, TileMap Level, ObjectLoader objList)
+		public static void GenerateLevelFromTileMap(GameObject parent, string game, TileMap Level, ObjectLoader objList)
 		{
 				//UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
 				CEILING_HEIGHT=Level.CEILING_HEIGHT;
@@ -89,7 +89,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				//Do a ceiling
 
-				if (game != 2)
+				if (game != GAME_SHOCK)
 				{
 						TileInfo tmp=new TileInfo();
 						//Ceiling
@@ -2809,6 +2809,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 					//floorTexture = t.floorTexture;
 					switch(_RES)
 					{
+					case GAME_SHOCK:
 					case GAME_UW2:
 						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
 						break;
