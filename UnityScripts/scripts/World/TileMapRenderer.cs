@@ -5,9 +5,9 @@ public class TileMapRenderer : Loader{
 
 		const int TILE_SOLID= 0;
 		const int TILE_OPEN= 1;
-		/*
-Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
-*/
+
+		//Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
+
 		const int  TILE_DIAG_SE= 2;
 		const int  TILE_DIAG_SW =3;
 		const int  TILE_DIAG_NE= 4;
@@ -71,26 +71,26 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				bool skipCeil=true;
 				if (game==GAME_SHOCK)
 				{
-					skipCeil=false;
+						skipCeil=false;
 				}
 				//Clear out the children in the transform
 				foreach (Transform child in parent.transform) {
 						GameObject.Destroy(child.gameObject);
 				}
 
-				//BuildTileMapUW(Path,1,LevelToRetrieve);
-
-
 				for (int y = 0; y <= 63; y++)
 				{
-						for (int x = 0; x <= 63; x++)
-						{
-							RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
-							if (game!=GAME_SHOCK)
-							{//Water
+					for (int x = 0; x <= 63; x++)
+					{
+
+						RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
+						if (game!=GAME_SHOCK)
+						{//Water
 								RenderTile(parent, x, y, Level.Tiles[x,y], true, false, false, skipCeil);	
-							}
-						}
+						}	
+
+
+					}
 				}
 
 				//Do a ceiling
@@ -166,8 +166,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										RenderTile(parent, x, y, tmp, false, false, false, false);
 								}
 						}
-
-
 				}
 
 				//Render bridges, pillars and door ways
@@ -182,18 +180,15 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				{
 						return;
 				}
-			for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
-			{
-				if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
+				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
-					RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
-					RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
+						if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
+						{
+								RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
+								RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
+						}
 				}
-			}
 		}
-
-
-
 
 
 		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
@@ -202,8 +197,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				Material[] MatsToUse = new Material[1];
 				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 				{
-						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];				}
-
+						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];				
+				}
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 				//float doorthickness = 0.1f;
 				float doorwidth = 0.8f;
@@ -245,7 +240,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						leftHand[0] = new Vector3(y1,x0,z0);
 						leftHand[1] = new Vector3(y1,x0,z1);
 						leftHand[2] = new Vector3(y1,x0 + doorSideWidth,z1);
@@ -284,7 +279,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						overHead[0] = new Vector3(y1,x0,z0);
 						overHead[1] = new Vector3(y1,x0,z1);
 						overHead[2] = new Vector3(y1,x1,z1);
@@ -293,10 +288,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case NORTH:
 				case SOUTH:
 				default:
-					overHead[0] = new Vector3(x0,y1,z0);
-					overHead[1] = new Vector3(x0,y1,z1);
-					overHead[2] = new Vector3(x1,y1,z1);
-					overHead[3] = new Vector3(x1,y1,z0);
+						overHead[0] = new Vector3(x0,y1,z0);
+						overHead[1] = new Vector3(x0,y1,z1);
+						overHead[2] = new Vector3(x1,y1,z1);
+						overHead[3] = new Vector3(x1,y1,z0);
 						break;					
 				}
 
@@ -327,7 +322,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						rightHand[0] = new Vector3( y1,x0 + doorSideWidth + doorwidth,z0);
 						rightHand[1] = new Vector3( y1,x0 + doorSideWidth + doorwidth,z1);
 						rightHand[2] = new Vector3( y1,x0 + doorSideWidth + doorwidth + doorSideWidth,z1);
@@ -353,13 +348,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));
 
 		}
-
-
-
-
-
-
-
 
 
 
@@ -419,7 +407,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						leftHand[0] = new Vector3(y0,x0,z0);
 						leftHand[1] = new Vector3(y0,x0,z1);
 						leftHand[2] = new Vector3(y0,x0 + doorSideWidth,z1);
@@ -463,7 +451,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						overHead[0] = new Vector3(y0,x0,z0);
 						overHead[1] = new Vector3(y0,x0,z1);
 						overHead[2] = new Vector3(y0,x1,z1);
@@ -472,16 +460,16 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case NORTH:
 				case SOUTH:
 				default:
-					overHead[0] = new Vector3(x0,y0,z0);
-					overHead[1] = new Vector3(x0,y0,z1);
-					overHead[2] = new Vector3(x1,y0,z1);
-					overHead[3] = new Vector3(x1,y0,z0);
-					break;
+						overHead[0] = new Vector3(x0,y0,z0);
+						overHead[1] = new Vector3(x0,y0,z1);
+						overHead[2] = new Vector3(x1,y0,z1);
+						overHead[3] = new Vector3(x1,y0,z0);
+						break;
 				}
 				float dist = (z0) /0.15f;//Get back to steps.
 				dist=dist/8f;
 
-				
+
 				//Vector2[] UVs = new Vector2[4];
 				//UVs[0]= new Vector2(0+doorSideWidth, dist);
 				//UVs[1]= new Vector2(0+doorSideWidth, CEILING_HEIGHT/8f);
@@ -510,7 +498,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						rightHand[0] = new Vector3(y0,x0 + doorSideWidth + doorwidth, z0);
 						rightHand[1] = new Vector3(y0,x0 + doorSideWidth + doorwidth, z1);
 						rightHand[2] = new Vector3(y0,x0 + doorSideWidth + doorwidth + doorSideWidth,z1);
@@ -519,10 +507,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				case NORTH:
 				case SOUTH:
 				default:
-					rightHand[0] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z0);
-					rightHand[1] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z1);
-					rightHand[2] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z1);
-					rightHand[3] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z0);
+						rightHand[0] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z0);
+						rightHand[1] = new Vector3(x0 + doorSideWidth + doorwidth, y0,z1);
+						rightHand[2] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z1);
+						rightHand[3] = new Vector3(x0 + doorSideWidth + doorwidth + doorSideWidth,y0,z0);
 						break;
 				}
 				UVs = new Vector2[4];
@@ -560,7 +548,7 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				switch (currDoor.heading*45)
 				{
 				case EAST:
-				case WEST://Swap x and y
+				case WEST: //Swap x and y
 						//side
 						v=0;
 						filler[v++] = new Vector3( 0.04f,-doorwidth/2, doorheight);
@@ -616,62 +604,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				RenderCuboid(Parent,filler,UVs,position,MatsToUse,3,"front_filler_" + ObjectLoader.UniqueObjectName(currDoor));
 		}
-
-		/*
-		public static void RendererDoorWayPortions(GameObject Parent, TileMap level, Vector3 position, ObjectLoaderInfo currdoor, float x0, float x1, float y0, float y1, float z0, float z1)
-		{
-
-				Vector3[] Verts= new Vector3[24];
-				Vector2[] UVs= new Vector2[24];
-				int t=0;
-				Verts[t++] = new Vector3(x0, y1, z0);
-				Verts[t++] = new Vector3(x0, y1, z1);
-				Verts[t++] = new Vector3(x1, y1, z1);
-				Verts[t++] = new Vector3(x1, y1, z0);
-
-				Verts[t++] = new Vector3(x1, y0, z0);
-				Verts[t++] = new Vector3(x1, y0, z1);
-				Verts[t++] = new Vector3(x0, y0, z1);
-				Verts[t++] = new Vector3(x0, y0, z0);
-
-				Verts[t++] = new Vector3(x1, y1, z0);
-				Verts[t++] = new Vector3(x1, y1, z1);
-				Verts[t++] = new Vector3(x1, y0, z1);
-				Verts[t++] = new Vector3(x1, y0, z0);
-
-				Verts[t++] = new Vector3(x0, y0, z0);
-				Verts[t++] = new Vector3(x0, y1, z0);
-				Verts[t++] = new Vector3(x1, y1, z0);
-				Verts[t++] = new Vector3(x1, y0, z0);
-
-				Verts[t++] = new Vector3(x0, y0, z0);
-				Verts[t++] = new Vector3(x0, y0, z1);
-				Verts[t++] = new Vector3(x0, y1, z1);
-				Verts[t++] = new Vector3(x0, y1, z0);
-
-				Verts[t++] = new Vector3(x1, y0, z1);
-				Verts[t++] = new Vector3(x1, y1, z1);
-				Verts[t++] = new Vector3(x0, y1, z1);
-				Verts[t++] = new Vector3(x0, y0, z1);
-
-
-				for (int j=0; j<6;j++)
-				{
-						UVs[(j*4)+0]= new Vector2(0f,0f);
-						UVs[(j*4)+1]= new Vector2(0f,CEILING_HEIGHT);
-						UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
-						UVs[(j*4)+3]= new Vector2(1f,0f);
-				}
-
-				Material[] MatsToUse = new Material[6];
-				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
-				{
-						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().Tiles[currdoor.tileX,currdoor.tileY].wallTexture];
-				}
-				RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,"portion_" + ObjectLoader.UniqueObjectName(currdoor));
-					
-		}*/
-
 
 		public static void RenderPillars(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
@@ -746,7 +678,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
 								}
 								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
-
 						}
 				}
 		}
@@ -807,10 +738,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 								for (int j=0; j<6;j++)
 								{
-									UVs[(j*4)+0]= new Vector2(0f,0f);
-									UVs[(j*4)+1]= new Vector2(0f,1f);
-									UVs[(j*4)+2]= new Vector2(1f,1f);
-									UVs[(j*4)+3]= new Vector2(1f,0f);
+										UVs[(j*4)+0]= new Vector2(0f,0f);
+										UVs[(j*4)+1]= new Vector2(0f,1f);
+										UVs[(j*4)+2]= new Vector2(1f,1f);
+										UVs[(j*4)+3]= new Vector2(1f,0f);
 								}
 								int TextureIndex= objList.objInfo[i].flags & 0x3F;
 								Material tmobj;
@@ -831,10 +762,9 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 								Material[] MatsToUse = new Material[6];
 								for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 								{//tmobj[30]+(objList[x].flags & 0x3F)
-									MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+										MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
 								}
-								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
-									
+								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));						
 						}
 				}
 		}
@@ -1285,11 +1215,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				GameObject Tile = new GameObject(TileName);
 				if (t.isWater==false)
 				{
-					Tile.layer=LayerMask.NameToLayer("MapMesh");
+						Tile.layer=LayerMask.NameToLayer("MapMesh");
 				}
 				else
 				{
-					Tile.layer=LayerMask.NameToLayer("Water");
+						Tile.layer=LayerMask.NameToLayer("Water");
 				}
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
@@ -1317,108 +1247,107 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 								{
 								case vTOP:
 										{
-											//Set the verts	
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+												//Set the verts	
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
 
-											verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
+												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
 
-											//Allocate UVs
-											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
-											uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
-											uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
+												//Allocate UVs
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+												uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+												uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
 
-											break;
+												break;
 										}
 
 								case vNORTH:
 										{
-											//north wall vertices
-											offset = CalcCeilOffset(fNORTH, t);
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
-											verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+												//north wall vertices
+												offset = CalcCeilOffset(fNORTH, t);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
+												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 
-											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
-											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
-											uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
-											uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
 
 
-											break;
+												break;
 										}
 
 								case vWEST:
 										{
-											//west wall vertices
+												//west wall vertices
 												offset = CalcCeilOffset(fWEST, t);
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
-											verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
+												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
 												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
 												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
 												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
 
-											break;
+												break;
 										}
 
 								case vEAST:
 										{
 												//east wall vertices
 												offset = CalcCeilOffset(fEAST, t);
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
-											verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
+												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
 												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
 												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
 												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
 												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
 
-											break;
+												break;
 										}
 
 								case vSOUTH:
 										{
 												offset = CalcCeilOffset(fSOUTH, t);
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
-											//south wall vertices
-											verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
+												//south wall vertices
+												verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
 												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
 												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
 												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
 												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
 
-											break;
+												break;
 										}
 								case vBOTTOM:
 										{
-											//bottom wall vertices
-											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
-											verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-											verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
-											//Change default UVs
-											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
-											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-											uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
-											uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
-											break;
+												//bottom wall vertices
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
+												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												//Change default UVs
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
+												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -1574,7 +1503,11 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										}
 
 								case vNORTH:
-										{
+										{				
+												float uv0InUse=0f; float uv1InUse=0f;
+												float uv2InUse=0f; float uv3InUse=0f;
+												CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+
 												//north wall vertices
 												offset = CalcCeilOffset(fNORTH, t);
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
@@ -1584,11 +1517,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 												verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperWest);
 												verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast);
 
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
-
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);//bottom uv
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);//top uv
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv2InUse-offset);//top uv
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv3InUse-offset);//bottom uv
 
 												break;
 										}
@@ -1596,22 +1528,32 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 								case vWEST:
 										{
 												//west wall vertices
+												//float uv0InUse=0f; float uv1InUse=0f;
+												float uv0InUse=0f; float uv1InUse=0f;
+												float uv2InUse=0f; float uv3InUse=0f;
+												CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
 												offset = CalcCeilOffset(fWEST, t);
+
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
 												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerEast+AdjustLowerSouth);
 												verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
 												verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperWest+AdjustUpperSouth);
 												verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv2InUse-offset);
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv3InUse-offset);
 
 												break;
 										}
 
 								case vEAST:
 										{
+												//static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int uv0_default, int uv1_default, out int UV0_OUT, out int UV1_OUT)
+												float uv0InUse=0f; float uv1InUse=0f;
+												float uv2InUse=0f; float uv3InUse=0f;
+												CalcUVsForSlopedTiles(t,SlopeDir, fEAST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+
 												//east wall vertices
 												offset = CalcCeilOffset(fEAST, t);
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
@@ -1619,16 +1561,19 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperEast+AdjustUpperSouth);
 												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperEast+AdjustUpperNorth);
 												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerWest+AdjustLowerSouth);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);//0
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);//1
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv2InUse-offset);//1
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv3InUse-offset);//0
 
 												break;
 										}
 
 								case vSOUTH:
 										{
+												float uv0InUse=0f; float uv1InUse=0f;
+												float uv2InUse=0f; float uv3InUse=0f;
+												CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
 												//south wall vertices
 												offset = CalcCeilOffset(fSOUTH, t);
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
@@ -1636,10 +1581,10 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouth+AdjustUpperWest);
 												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
 												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
+												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);
+												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);
+												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv2InUse-offset);
+												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv3InUse-offset);
 
 												break;
 										}
@@ -1659,7 +1604,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
 												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -1692,6 +1636,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				mc.sharedMesh=mesh;
 
 		}
+
+
 
 		/// <summary>
 		/// Renders the cuboid from an arbitary set of vertices and uvs
@@ -1815,7 +1761,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										//the wall part
 										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderDiagSEPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
-
 								}
 								if (t.isWater == Water)
 								{
@@ -1891,7 +1836,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				if (t.Render == 1){
 						if (invert == false)
 						{
-
 								if (Water != true)
 								{
 										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
@@ -1938,7 +1882,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 										RenderDiagNWPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
 								}
 
-
 								if (t.isWater == Water)
 								{
 										//it's floor
@@ -1963,13 +1906,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 				}
 				return;
 		}
-
-
-
-
-		////
-		/// 
-		/// 
 
 
 		static void RenderSlopeNTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
@@ -2127,7 +2063,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 		static void RenderRidgeNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
-
 				if (t.Render == 1)
 				{
 						if (invert == false)
@@ -2310,7 +2245,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 												break;
 										}
-
 								case vWEST:
 										{
 												//west wall vertices
@@ -2327,7 +2261,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -2474,7 +2407,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -2621,7 +2553,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -2768,7 +2699,6 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 												break;
 										}
-
 								}
 								FaceCounter++;
 						}
@@ -2855,27 +2785,27 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 				if (face == fCEIL)
 				{
-					floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
+						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
 				}
 				else
 				{
-					//floorTexture = t.floorTexture;
-					switch(_RES)
-					{
-					case GAME_SHOCK:
-					case GAME_UW2:
-						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
-						break;
-					default:
-						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
-						break;
-					}
-					
+						//floorTexture = t.floorTexture;
+						switch(_RES)
+						{
+						case GAME_SHOCK:
+						case GAME_UW2:
+								floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
+								break;
+						default:
+								floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
+								break;
+						}
+
 				}
 
 				if ((floorTexture<0) || (floorTexture >512))
 				{
-					floorTexture = 0;
+						floorTexture = 0;
 				}
 				return floorTexture;
 		}
@@ -2913,5 +2843,204 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 						return floorOffset * 0.125f;
 				}
 		}
+
+
+
+
+
+
+		static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, float uv0_default, float uv1_default, out float UV0_OUT, out float UV1_OUT, out float UV2_OUT, out float UV3_OUT)
+		{
+				//bottom = CEILING_HEIGHT - t.ceilingHeight, top= CEILING_HEIGHT + 1 for ceilings
+				//bottom =-2, top= t.floorHeight for floors
+				//float PolySize= Top-Bottom;
+				//float uv0= (float)(Bottom*0.125f);
+				//float uv1=(PolySize / 8.0f) + (uv0);
+				//Set default UVs
+				UV0_OUT=uv0_default;
+				UV1_OUT=uv1_default;
+				UV2_OUT=uv1_default;
+				UV3_OUT=uv0_default;
+				float dir=-1;
+				if (Floor==0)
+				{
+						dir=1;
+				}
+				//float Bottom;
+				//float Top;
+				//if (Floor==1)
+				//{
+				//		Bottom = -2;
+				//		Top = (float)t.floorHeight+(Steepness/3);
+				//		//Top = (float)t.floorHeight-4.3f;
+				//}
+				//else
+				//{
+				//		Bottom = CEILING_HEIGHT - t.ceilingHeight-Steepness; 
+				//		Top= CEILING_HEIGHT + 1; //for ceilings
+				//}
+				//float PolySize= Top-Bottom;
+				//Possible new UV Values
+				//float uv0New= (Bottom*0.125f);
+				//float uv1New=(PolySize / 8.0f) + (uv0New);
+				if (Floor==1)
+				{
+					switch(SlopeDir)
+					{
+					case TILE_SLOPE_N:
+							{
+									if (face==fEAST)
+									{
+											UV1_OUT= UV1_OUT + dir* getUVAdjust(Steepness);
+
+									}
+									if (face==fWEST)
+									{
+											UV2_OUT= UV2_OUT + dir* getUVAdjust(Steepness);
+									}
+									break;
+							}	
+
+					case TILE_SLOPE_S:
+							{
+									if (face==fEAST)
+									{
+											UV2_OUT= UV2_OUT + dir * getUVAdjust(Steepness);
+									}
+									if (face==fWEST)
+									{
+											UV1_OUT= UV1_OUT + dir* getUVAdjust(Steepness);
+									}
+									break;
+							}	
+
+					case TILE_SLOPE_E:
+							{
+									if (face==fNORTH)
+									{
+										UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
+									}
+									if (face==fSOUTH)
+									{
+										UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
+									}
+									break;
+							}	
+					case TILE_SLOPE_W:
+							{
+									if (face==fNORTH)
+									{
+										UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
+									}
+									if (face==fSOUTH)
+									{
+										UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
+									}
+									break;
+							}
+					}
+				}
+				else
+				{
+
+						switch(SlopeDir)
+						{
+						case TILE_SLOPE_N:
+								{
+										if (face==fEAST)
+										{
+												UV3_OUT= UV3_OUT + dir* getUVAdjust(Steepness);
+
+										}
+										if (face==fWEST)
+										{
+												UV0_OUT= UV0_OUT + dir* getUVAdjust(Steepness);
+										}
+										break;
+								}	
+
+						case TILE_SLOPE_S:
+								{
+										if (face==fEAST)
+										{
+												UV0_OUT= UV0_OUT + dir * getUVAdjust(Steepness);
+										}
+										if (face==fWEST)
+										{
+												UV3_OUT= UV3_OUT + dir* getUVAdjust(Steepness);
+										}
+										break;
+								}	
+
+						case TILE_SLOPE_E:
+								{
+										if (face==fNORTH)
+										{
+											UV0_OUT= UV0_OUT + dir *  getUVAdjust(Steepness);
+										}
+										if (face==fSOUTH)
+										{
+											UV3_OUT= UV3_OUT + dir *  getUVAdjust(Steepness);
+										}
+										break;
+								}	
+						case TILE_SLOPE_W:
+								{
+										if (face==fNORTH)
+										{
+											UV3_OUT= UV3_OUT + dir *  getUVAdjust(Steepness);
+										}
+										if (face==fSOUTH)
+										{
+											UV0_OUT= UV0_OUT + dir *  getUVAdjust(Steepness);
+										}
+										break;
+								}
+
+
+						}
+				}
+		}
+
+
+		//UGH
+		//Probably does not work on scaled levels
+		static float getUVAdjust(int steepness)
+		{//Approximate values
+				//When 2  ~ 0.225
+				//When 4 ~ 0.3825
+				//when 6 ~ 0.54
+				//when 8 ~ 0.65
+				//when 10 ~0.75
+				//when 12 ~0.835
+				switch (steepness)
+				{
+				case 0: return 0f;
+				case 1: return 0.1f;  
+				case 2: return 0.225f;
+				case 3: return 0.3f; //unchecked
+				case 4: return 0.382f;
+				case 5: return 0.461f;//unchecked
+				case 6: return 0.54f;
+				case 7: return 0.595f;
+				case 8: return 0.65f;
+				case 10: return 0.75f;
+				case 12: return 0.835f;
+				default:
+						{
+								Debug.Log("uncalced slope of steepness " + steepness);
+								return 0f;		
+						}
+
+
+				}
+		}
+
+
+
+
+
+
+
 
 }

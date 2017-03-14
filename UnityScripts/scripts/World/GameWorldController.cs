@@ -15,6 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 
 public class GameWorldController : UWEBase {
+		public float testUVadjust=0f;
 
 		/// <summary>
 		/// Enables texture animation effects
