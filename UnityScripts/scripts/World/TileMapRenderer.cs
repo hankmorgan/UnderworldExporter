@@ -82,13 +82,11 @@ public class TileMapRenderer : Loader{
 				{
 					for (int x = 0; x <= 63; x++)
 					{
-
 						RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
 						if (game!=GAME_SHOCK)
 						{//Water
 								RenderTile(parent, x, y, Level.Tiles[x,y], true, false, false, skipCeil);	
-						}	
-
+						}		
 
 					}
 				}
@@ -1506,7 +1504,9 @@ public class TileMapRenderer : Loader{
 										{				
 												float uv0InUse=0f; float uv1InUse=0f;
 												float uv2InUse=0f; float uv3InUse=0f;
-												CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												//CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+											//	CalcUVsForSlopedTiles(t,SlopeDir,fNORTH,Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
 
 												//north wall vertices
 												offset = CalcCeilOffset(fNORTH, t);
@@ -1531,7 +1531,9 @@ public class TileMapRenderer : Loader{
 												//float uv0InUse=0f; float uv1InUse=0f;
 												float uv0InUse=0f; float uv1InUse=0f;
 												float uv2InUse=0f; float uv3InUse=0f;
-												CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												//CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+
 												offset = CalcCeilOffset(fWEST, t);
 
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
@@ -1552,10 +1554,11 @@ public class TileMapRenderer : Loader{
 												//static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int uv0_default, int uv1_default, out int UV0_OUT, out int UV1_OUT)
 												float uv0InUse=0f; float uv1InUse=0f;
 												float uv2InUse=0f; float uv3InUse=0f;
-												CalcUVsForSlopedTiles(t,SlopeDir, fEAST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												CalcUVsForSlopedTiles(t,SlopeDir, fEAST, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
 
 												//east wall vertices
 												offset = CalcCeilOffset(fEAST, t);
+
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
 												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerWest+AdjustLowerNorth);
 												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperEast+AdjustUpperSouth);
@@ -1573,7 +1576,9 @@ public class TileMapRenderer : Loader{
 										{
 												float uv0InUse=0f; float uv1InUse=0f;
 												float uv2InUse=0f; float uv3InUse=0f;
-												CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												//CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+												CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
+
 												//south wall vertices
 												offset = CalcCeilOffset(fSOUTH, t);
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
@@ -2845,116 +2850,100 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
-
-
-
-		static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, float uv0_default, float uv1_default, out float UV0_OUT, out float UV1_OUT, out float UV2_OUT, out float UV3_OUT)
+		static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int Top, int Bottom, float uv0_default, float uv1_default, out float UV0_OUT, out float UV1_OUT, out float UV2_OUT, out float UV3_OUT)
 		{
-				//bottom = CEILING_HEIGHT - t.ceilingHeight, top= CEILING_HEIGHT + 1 for ceilings
-				//bottom =-2, top= t.floorHeight for floors
-				//float PolySize= Top-Bottom;
-				//float uv0= (float)(Bottom*0.125f);
-				//float uv1=(PolySize / 8.0f) + (uv0);
-				//Set default UVs
-				UV0_OUT=uv0_default;
-				UV1_OUT=uv1_default;
-				UV2_OUT=uv1_default;
-				UV3_OUT=uv0_default;
-				float dir=-1;
-				if (Floor==0)
+			UV0_OUT=uv0_default;
+			UV1_OUT=uv1_default;
+			UV2_OUT=uv1_default;
+			UV3_OUT=uv0_default;	
+			float PolySize= Top-Bottom;
+			float uv0= (float)(Bottom*0.125f);
+			float uv1=(PolySize / 8.0f) + (uv0);
+			float AdjustedUV = 0;
+			if (Floor==1)
+			{
+				AdjustedUV = (uv1/(PolySize+(float)Steepness)) * (PolySize);	
+			}
+			else
+			{
+						//AdjustedUV = (uv0/(PolySize+(float)Steepness)) * (PolySize);
+			}
+			if (Floor==1)
+			{
+				switch(SlopeDir)
 				{
-						dir=1;
-				}
-				//float Bottom;
-				//float Top;
-				//if (Floor==1)
-				//{
-				//		Bottom = -2;
-				//		Top = (float)t.floorHeight+(Steepness/3);
-				//		//Top = (float)t.floorHeight-4.3f;
-				//}
-				//else
-				//{
-				//		Bottom = CEILING_HEIGHT - t.ceilingHeight-Steepness; 
-				//		Top= CEILING_HEIGHT + 1; //for ceilings
-				//}
-				//float PolySize= Top-Bottom;
-				//Possible new UV Values
-				//float uv0New= (Bottom*0.125f);
-				//float uv1New=(PolySize / 8.0f) + (uv0New);
-				if (Floor==1)
-				{
-					switch(SlopeDir)
+				case TILE_SLOPE_N:
 					{
-					case TILE_SLOPE_N:
-							{
-									if (face==fEAST)
-									{
-											UV1_OUT= UV1_OUT + dir* getUVAdjust(Steepness);
-
-									}
-									if (face==fWEST)
-									{
-											UV2_OUT= UV2_OUT + dir* getUVAdjust(Steepness);
-									}
-									break;
-							}	
-
-					case TILE_SLOPE_S:
-							{
-									if (face==fEAST)
-									{
-											UV2_OUT= UV2_OUT + dir * getUVAdjust(Steepness);
-									}
-									if (face==fWEST)
-									{
-											UV1_OUT= UV1_OUT + dir* getUVAdjust(Steepness);
-									}
-									break;
-							}	
-
-					case TILE_SLOPE_E:
-							{
-									if (face==fNORTH)
-									{
-										UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
-									}
-									if (face==fSOUTH)
-									{
-										UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
-									}
-									break;
-							}	
-					case TILE_SLOPE_W:
-							{
-									if (face==fNORTH)
-									{
-										UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
-									}
-									if (face==fSOUTH)
-									{
-										UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
-									}
-									break;
-							}
+						if (face==fEAST)
+						{
+							UV1_OUT= AdjustedUV; //((UV1_OUT/ (float)(t.floorHeight+Steepness)) * t.floorHeight);
+						}
+						if (face==fWEST)
+						{
+							UV2_OUT= AdjustedUV;
+						}
+						break;
 					}
-				}
+			case TILE_SLOPE_S:
+					{
+							if (face==fEAST)
+							{
+									//UV2_OUT= UV2_OUT + dir * getUVAdjust(Steepness);
+												UV2_OUT= AdjustedUV;
+							}
+							if (face==fWEST)
+							{
+									//UV1_OUT= UV1_OUT + dir* getUVAdjust(Steepness);
+												UV1_OUT= AdjustedUV;
+							}
+							break;
+					}	
+
+			case TILE_SLOPE_E:
+					{
+							if (face==fNORTH)
+							{
+									//UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
+								UV2_OUT= AdjustedUV;
+							}
+							if (face==fSOUTH)
+							{
+									//UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
+								UV1_OUT= AdjustedUV;
+							}
+							break;
+					}	
+			case TILE_SLOPE_W:
+					{
+							if (face==fNORTH)
+							{
+									//UV1_OUT= UV1_OUT + dir *  getUVAdjust(Steepness);
+								UV1_OUT= AdjustedUV;
+							}
+							if (face==fSOUTH)
+							{
+									//UV2_OUT= UV2_OUT + dir *  getUVAdjust(Steepness);
+								UV2_OUT= AdjustedUV;
+							}
+							break;
+					}
+				}	
+			}
 				else
 				{
-
+						return;//These don't work yet
 						switch(SlopeDir)
 						{
 						case TILE_SLOPE_N:
 								{
 										if (face==fEAST)
 										{
-												UV3_OUT= UV3_OUT + dir* getUVAdjust(Steepness);
+												UV3_OUT= AdjustedUV;
 
 										}
 										if (face==fWEST)
 										{
-												UV0_OUT= UV0_OUT + dir* getUVAdjust(Steepness);
+												UV0_OUT= AdjustedUV;
 										}
 										break;
 								}	
@@ -2963,11 +2952,11 @@ public class TileMapRenderer : Loader{
 								{
 										if (face==fEAST)
 										{
-												UV0_OUT= UV0_OUT + dir * getUVAdjust(Steepness);
+												UV0_OUT= AdjustedUV;
 										}
 										if (face==fWEST)
 										{
-												UV3_OUT= UV3_OUT + dir* getUVAdjust(Steepness);
+												UV3_OUT= AdjustedUV;
 										}
 										break;
 								}	
@@ -2976,11 +2965,11 @@ public class TileMapRenderer : Loader{
 								{
 										if (face==fNORTH)
 										{
-											UV0_OUT= UV0_OUT + dir *  getUVAdjust(Steepness);
+												UV0_OUT= AdjustedUV;
 										}
 										if (face==fSOUTH)
 										{
-											UV3_OUT= UV3_OUT + dir *  getUVAdjust(Steepness);
+												UV3_OUT= AdjustedUV;
 										}
 										break;
 								}	
@@ -2988,59 +2977,17 @@ public class TileMapRenderer : Loader{
 								{
 										if (face==fNORTH)
 										{
-											UV3_OUT= UV3_OUT + dir *  getUVAdjust(Steepness);
+												UV3_OUT= AdjustedUV;
 										}
 										if (face==fSOUTH)
 										{
-											UV0_OUT= UV0_OUT + dir *  getUVAdjust(Steepness);
+												UV0_OUT= AdjustedUV;
 										}
 										break;
 								}
-
-
 						}
 				}
+
 		}
-
-
-		//UGH
-		//Probably does not work on scaled levels
-		static float getUVAdjust(int steepness)
-		{//Approximate values
-				//When 2  ~ 0.225
-				//When 4 ~ 0.3825
-				//when 6 ~ 0.54
-				//when 8 ~ 0.65
-				//when 10 ~0.75
-				//when 12 ~0.835
-				switch (steepness)
-				{
-				case 0: return 0f;
-				case 1: return 0.1f;  
-				case 2: return 0.225f;
-				case 3: return 0.3f; //unchecked
-				case 4: return 0.382f;
-				case 5: return 0.461f;//unchecked
-				case 6: return 0.54f;
-				case 7: return 0.595f;
-				case 8: return 0.65f;
-				case 10: return 0.75f;
-				case 12: return 0.835f;
-				default:
-						{
-								Debug.Log("uncalced slope of steepness " + steepness);
-								return 0f;		
-						}
-
-
-				}
-		}
-
-
-
-
-
-
-
 
 }
