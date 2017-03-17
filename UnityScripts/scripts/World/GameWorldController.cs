@@ -327,6 +327,7 @@ public class GameWorldController : UWEBase {
 		{
 			case GAME_SHOCK:
 				Tilemaps=new TileMap[15];
+				objectList=new ObjectLoader[15];
 				break;
 			case GAME_UWDEMO:
 				Tilemaps = new TileMap[1];

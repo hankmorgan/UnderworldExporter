@@ -3267,9 +3267,11 @@ public class TileMapRenderer : Loader{
 																		}
 																		else
 																		{
-																			uvs[index+0]= new Vector2(0,0);//0, vertical alignment
-																			uvs[index+1]= new Vector2(0,  (float)Steepness*0.125f); //vertical + scale
-																			uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
+																			CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																			uvs[index+0]= new Vector2(0,uvToUse);//0, vertical alignment
+																			uvs[index+1]= new Vector2(0, uvToUse+ (float)Steepness*0.125f); //vertical + scale
+																			uvs[index+2]= new Vector2(1,  uvToUse+(float)Steepness*0.125f);	//1, vertical alignment	
 																		}
 																	break;		
 																}
@@ -3295,12 +3297,14 @@ public class TileMapRenderer : Loader{
 																		}
 																		else
 																		{
+																			CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
 																			//uvs[index+0]= new Vector2(0,0);//0, vertical alignment
 																			//uvs[index+1]= new Vector2(1,  (float)Steepness*0.125f); //vertical + scale
 																			//uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
-																			uvs[index+0]= new Vector2(0, (float)Steepness*0.125f);
-																			uvs[index+1]= new Vector2(1, (float)Steepness*0.125f); 
-																			uvs[index+2]= new Vector2(1, 0);	
+																			uvs[index+0]= new Vector2(0, uvToUse+ (float)Steepness*0.125f);
+																			uvs[index+1]= new Vector2(1, uvToUse+ (float)Steepness*0.125f); 
+																			uvs[index+2]= new Vector2(1, uvToUse);	
 																		}
 																	break;	
 																}
@@ -3381,17 +3385,19 @@ public class TileMapRenderer : Loader{
 																		float uv0edge=0;float uv1edge=0;float uvToUse=0;
 																		if (Floor==1)
 																		{
-																				CalcUV(Top+Steepness,Top, out uv0edge, out uv1edge  );
-																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}
+																			CalcUV(Top+Steepness,Top, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}
 																			uvs[index+0]= new Vector2(0, uvToUse);//0, vertical alignment
 																			uvs[index+1]= new Vector2(0, uvToUse+ (float)Steepness*0.125f); //vertical + scale
 																			uvs[index+2]= new Vector2(1, uvToUse);	//1, vertical alignment	
 																		}
 																		else
 																		{
-																			uvs[index+0]= new Vector2(0,0);//0, vertical alignment
-																			uvs[index+1]= new Vector2(0,  (float)Steepness*0.125f); //vertical + scale
-																			uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
+																			CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																				uvs[index+0]= new Vector2(0,uvToUse);//0, vertical alignment
+																			uvs[index+1]= new Vector2(0,  uvToUse+(float)Steepness*0.125f); //vertical + scale
+																			uvs[index+2]= new Vector2(1, uvToUse+ (float)Steepness*0.125f);	//1, vertical alignment	
 																		}
 																		break;	
 																}
@@ -3416,9 +3422,11 @@ public class TileMapRenderer : Loader{
 																			//uvs[index+0]= new Vector2(0,0);//0, vertical alignment
 																			//uvs[index+1]= new Vector2(1,  (float)Steepness*0.125f); //vertical + scale
 																			//uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
-																			uvs[index+0]= new Vector2(0, (float)Steepness*0.125f);
-																			uvs[index+1]= new Vector2(1, (float)Steepness*0.125f); 
-																			uvs[index+2]= new Vector2(1, 0);	
+																				CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																			uvs[index+0]= new Vector2(0, uvToUse+ (float)Steepness*0.125f);
+																			uvs[index+1]= new Vector2(1, uvToUse+ (float)Steepness*0.125f); 
+																			uvs[index+2]= new Vector2(1, uvToUse);	
 																		}
 																		break;
 																}
@@ -3506,9 +3514,11 @@ public class TileMapRenderer : Loader{
 																		}
 																		else
 																		{
-																			uvs[index+0]= new Vector2(0, 0);//0, vertical alignment
-																			uvs[index+1]= new Vector2(0, (float)Steepness*0.125f); //vertical + scale
-																			uvs[index+2]= new Vector2(1, (float)Steepness*0.125f);	//1, vertical alignment	
+																				CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																			uvs[index+0]= new Vector2(0, uvToUse);//0, vertical alignment
+																			uvs[index+1]= new Vector2(0, uvToUse+ (float)Steepness*0.125f); //vertical + scale
+																			uvs[index+2]= new Vector2(1, uvToUse+(float)Steepness*0.125f);	//1, vertical alignment	
 																		}
 
 
@@ -3535,10 +3545,12 @@ public class TileMapRenderer : Loader{
 																		{
 																			//uvs[index+0]= new Vector2(0,0);//0, vertical alignment
 																			//uvs[index+1]= new Vector2(1, (float)Steepness*0.125f); //vertical + scale
-																			//uvs[index+2]= new Vector2(1, (float)Steepness*0.125f);	//1, vertical alignment		
-																			uvs[index+0]= new Vector2(0, (float)Steepness*0.125f);
-																			uvs[index+1]= new Vector2(1, (float)Steepness*0.125f); 
-																			uvs[index+2]= new Vector2(1, 0);	
+																			//uvs[index+2]= new Vector2(1, (float)Steepness*0.125f);	//1, vertical alignment	
+																				CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																			uvs[index+0]= new Vector2(0, uvToUse+(float)Steepness*0.125f);
+																			uvs[index+1]= new Vector2(1, uvToUse+(float)Steepness*0.125f); 
+																				uvs[index+2]= new Vector2(1, uvToUse);	
 																		}
 																		break;	
 																}
@@ -3627,9 +3639,11 @@ public class TileMapRenderer : Loader{
 																		}
 																		else
 																		{
-																				uvs[index+0]= new Vector2(0,0);//0, vertical alignment
-																				uvs[index+1]= new Vector2(0,  (float)Steepness*0.125f); //vertical + scale
-																				uvs[index+2]= new Vector2(1,  (float)Steepness*0.125f);	//1, vertical alignment	
+																				CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																				uvs[index+0]= new Vector2(0, uvToUse);//0, vertical alignment
+																				uvs[index+1]= new Vector2(0, uvToUse+ (float)Steepness*0.125f); //vertical + scale
+																				uvs[index+2]= new Vector2(1, uvToUse+ (float)Steepness*0.125f);	//1, vertical alignment	
 																		}
 																		break;		
 																}
@@ -3646,17 +3660,19 @@ public class TileMapRenderer : Loader{
 																		//uvToUse=uv0edge;
 																		if (Floor==1)
 																		{
-																				CalcUV(Top+Steepness,Top, out uv0edge, out uv1edge  );
-																				if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}
+																			CalcUV(Top+Steepness,Top, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}
 																			uvs[index+0]= new Vector2(0,uvToUse);//0, vertical alignment
 																			uvs[index+1]= new Vector2(1,uvToUse + (float)Steepness*0.125f); //vertical + scale
 																			uvs[index+2]= new Vector2(1,uvToUse);	//1, vertical alignment	
 																		}
 																		else
 																		{
-																			uvs[index+0]= new Vector2(0, (float)Steepness*0.125f);
-																			uvs[index+1]= new Vector2(1, (float)Steepness*0.125f); 
-																			uvs[index+2]= new Vector2(1, 0);	
+																			CalcUV(Bottom,Bottom-Steepness, out uv0edge, out uv1edge  );
+																			if (offset==0){uvToUse=+uv0edge;}else{uvToUse=uv0edge-offset;}//Ceil
+																			uvs[index+0]= new Vector2(0, uvToUse+(float)Steepness*0.125f);
+																			uvs[index+1]= new Vector2(1, uvToUse+(float)Steepness*0.125f); 
+																			uvs[index+2]= new Vector2(1, uvToUse);	
 																		}
 																		break;	
 																}
