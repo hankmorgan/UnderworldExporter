@@ -97,6 +97,58 @@ public class GRLoader : ArtLoader {
 		LoadImageFile();
 	}
 
+	public GRLoader(string FileName, int ChunkNo)//For SS1 chunks of art
+	{
+		useOverrideAuxPalIndex=false;
+		OverrideAuxPalIndex=0	;
+
+		if (!DataLoader.ReadStreamFile(BasePath+FileName, out ImageFileData))
+		{
+			Debug.Log("Unable to load " + BasePath+pathGR[FileToLoad]);
+			return;
+		}
+		else
+		{
+			DataLoader.Chunk art_ark;
+			DataLoader.LoadChunk(ImageFileData,ChunkNo, out art_ark);
+
+				switch ( art_ark.chunkContentType)
+				{
+				case 3://font //TODO
+						break;
+				case 2:
+				case 17:
+					NoOfImages=(int)DataLoader.getValAtAddress( art_ark.data,0,16);
+					ImageCache=new  Texture2D[NoOfImages];
+					ImageFileDataLoaded=true;
+					for (int i=0; i<NoOfImages;i++)
+					{
+						long textureOffset = (int)DataLoader.getValAtAddress(art_ark.data, 2 + (i * 4), 32);
+						int CompressionType=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+4,16);
+						int Width=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+8,16);
+						int Height=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+10,16);
+						if ((Width>0) && (Height >0))
+						{
+							if(CompressionType==4)
+							{//compressed
+								char[] outputImg;
+								//  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
+								UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
+								ImageCache[i]=ArtLoader.Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+							}
+							else
+							{//Uncompressed
+								ImageCache[i]= ArtLoader.Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+							}
+						}
+					}
+					break;
+				}
+
+			return;
+		}
+	}
+
 	public GRLoader(int File, string AuxPalToUse, int AuxPalIndex)
 	{
 		if (AuxPalIndex!=-1)
@@ -412,8 +464,9 @@ public class GRLoader : ArtLoader {
 				{//Still can't be loaded
 					return Resources.Load<Sprite>("Common/null");
 				}
-			}			
-			return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f, 0.0f));
+			}
+			return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f, 0.0f));	
+		
 		}
 
 }

@@ -293,6 +293,8 @@ public class GameWorldController : UWEBase {
 						palLoader.PaletteNo=700;
 						palLoader.LoadPalettes();
 						texLoader=new TextureLoader();
+						objectMaster=new ObjectMasters();
+						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
 						break;
 				default:
 					objectMaster=new ObjectMasters();
@@ -555,7 +557,9 @@ public class GameWorldController : UWEBase {
 					}
 					else
 					{
-						Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);	
+						Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
+						objectList[newLevelNo]=new ObjectLoader();
+						objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo],lev_ark_file_data);
 					}
 					if (UWEBase.EditorMode==false)
 					{
@@ -615,9 +619,9 @@ public class GameWorldController : UWEBase {
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo]);
 
 				switch(UWEBase._RES)
-				{//For the moment no objects in Shock
+				{
 					case GAME_SHOCK:
-						break;
+						//break;
 					default:
 						ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
 						break;

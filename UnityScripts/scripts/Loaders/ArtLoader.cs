@@ -7,6 +7,8 @@ using System.Collections;
 /// </summary>
 public class ArtLoader : Loader {
 
+	public	const int BitMapHeaderSize=28;
+
 	/// <summary>
 	/// The complete image file 
 	/// </summary>

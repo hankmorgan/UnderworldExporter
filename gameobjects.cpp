@@ -245,7 +245,7 @@ int ObjectSubClassIndex;
 	
 	int MasterAddressLookup[1024];
 	long address_pointer=4;	
-	ObjectItem tmpObjList[1600];
+	//ObjectItem tmpObjList[1600];
 	unsigned char *archive_ark;	//the full file.
 	unsigned char *xref_ark;		//The crossref table
 	unsigned char *mst_ark;		//The master table

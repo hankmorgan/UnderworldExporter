@@ -109,26 +109,26 @@
 #define A_TIMER_TRIGGER 101
 #define HIDDENPLACEHOLDER 999
 
-/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
-#define	SHOCK_TRIGGER_ENTRY			100	//Player enters trigger's tile
-#define	SHOCK_TRIGGER_NULL			101	//Not set off automatically, must be explicitly activated by a switch or another trigger
-#define	SHOCK_TRIGGER_FLOOR			102
-#define	SHOCK_TRIGGER_PLAYER_DEATH	103
-#define	SHOCK_TRIGGER_DEATHWATCH	104	//Object is destroyed / dies
-#define	SHOCK_TRIGGER_AOE_ENTRY		105
-#define	SHOCK_TRIGGER_AOE_CONTINOUS	106
-#define	SHOCK_TRIGGER_AI_HINT		107
-#define	SHOCK_TRIGGER_LEVEL			108	//Player enters level
-#define	SHOCK_TRIGGER_CONTINUOUS	109
-#define	SHOCK_TRIGGER_REPULSOR		110	//Repulsor lift floor
-#define	SHOCK_TRIGGER_ECOLOGY		111
-#define	SHOCK_TRIGGER_SHODAN		112
-#define	SHOCK_TRIGGER_TRIPBEAM		113
-#define	SHOCK_TRIGGER_BIOHAZARD		114
-#define	SHOCK_TRIGGER_RADHAZARD		115
-#define	SHOCK_TRIGGER_CHEMHAZARD	116
-#define	SHOCK_TRIGGER_MAPNOTE		117	//Map note placed by player (presumably)
-#define	SHOCK_TRIGGER_MUSIC			118
+/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
+#define	SHOCK_TRIGGER_ENTRY			1000	//Player enters trigger's tile
+#define	SHOCK_TRIGGER_NULL			1001	//Not set off automatically, must be explicitly activated by a switch or another trigger
+#define	SHOCK_TRIGGER_FLOOR			1002
+#define	SHOCK_TRIGGER_PLAYER_DEATH	1003
+#define	SHOCK_TRIGGER_DEATHWATCH	1004	//Object is destroyed / dies
+#define	SHOCK_TRIGGER_AOE_ENTRY		1005
+#define	SHOCK_TRIGGER_AOE_CONTINOUS	1006
+#define	SHOCK_TRIGGER_AI_HINT		1007
+#define	SHOCK_TRIGGER_LEVEL			1008	//Player enters level
+#define	SHOCK_TRIGGER_CONTINUOUS	1009
+#define	SHOCK_TRIGGER_REPULSOR		1010	//Repulsor lift floor
+#define	SHOCK_TRIGGER_ECOLOGY		1011
+#define	SHOCK_TRIGGER_SHODAN		1012
+#define	SHOCK_TRIGGER_TRIPBEAM		1013
+#define	SHOCK_TRIGGER_BIOHAZARD		1014
+#define	SHOCK_TRIGGER_RADHAZARD		1015
+#define	SHOCK_TRIGGER_CHEMHAZARD	1016
+#define	SHOCK_TRIGGER_MAPNOTE		1017	//Map note placed by player (presumably)
+#define	SHOCK_TRIGGER_MUSIC			1018
 
 //System Shock object classes
 #define GUNS_WEAPONS		0

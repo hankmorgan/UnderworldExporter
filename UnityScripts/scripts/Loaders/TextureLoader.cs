@@ -23,7 +23,7 @@ public class TextureLoader : ArtLoader {
 	private int TextureSplit=210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
 	private int FloorDim=32;
 
-	const int BitMapHeaderSize=28;
+	
 
 		/// <summary>
 		/// Loads the image at index.

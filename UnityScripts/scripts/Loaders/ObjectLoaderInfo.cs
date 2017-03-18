@@ -75,4 +75,22 @@ public class ObjectLoaderInfo {
 
 		public ObjectInteraction instance;
 
+		//Shock specific stuff
+		//TODO:Split UW specific and Shock specific out in to subclasses?
+		public int ObjectClass;
+		public int ObjectSubClass;
+		public int ObjectSubClassIndex;
+
+		public int Angle1;
+		public int Angle2;
+		public int Angle3;
+
+		public int sprite;
+		public int State;
+		public int unk1;//Probably a texture index.
+
+		public int[] shockProperties=new int[10]; //Shared properties memory
+		public int[] conditions=new int[4];  
+		public int TriggerAction;//Needs to be split into a property.
+		public int TriggerOnce;
 }

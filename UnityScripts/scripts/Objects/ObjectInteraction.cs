@@ -128,6 +128,51 @@ public class ObjectInteraction : UWEBase {
 		public const int A_CHANGE_FROM_TRAP=103;
 		public const int A_CHANGE_TO_TRAP=104;
 
+
+			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
+	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
+	public const int SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
+	public const int	SHOCK_TRIGGER_FLOOR		=	1002;
+	public const int	SHOCK_TRIGGER_PLAYER_DEATH	=1003;
+	public const int	SHOCK_TRIGGER_DEATHWATCH=	1004;	//Object is destroyed / dies
+	public const int	SHOCK_TRIGGER_AOE_ENTRY	=	1005;
+	public const int	SHOCK_TRIGGER_AOE_CONTINOUS	=1006;
+	public const int	SHOCK_TRIGGER_AI_HINT=		1007;
+	public const int	SHOCK_TRIGGER_LEVEL		=	1008;	//Player enters level
+	public const int	SHOCK_TRIGGER_CONTINUOUS=1009;
+	public const int	SHOCK_TRIGGER_REPULSOR	=	1010;	//Repulsor lift floor
+	public const int	SHOCK_TRIGGER_ECOLOGY	=	1011;
+	public const int	SHOCK_TRIGGER_SHODAN	=	1012;
+	public const int SHOCK_TRIGGER_TRIPBEAM	=	1013;
+	public const int	SHOCK_TRIGGER_BIOHAZARD	=	1014;
+	public const int	SHOCK_TRIGGER_RADHAZARD	=	1015;
+	public const int	SHOCK_TRIGGER_CHEMHAZARD=	1016;
+	public const int	SHOCK_TRIGGER_MAPNOTE	=	1017;	//Map note placed by player (presumably)
+	public const int SHOCK_TRIGGER_MUSIC		=	1018;
+
+
+	public const int  ACTION_DO_NOTHING =0 ;
+	public const int  ACTION_TRANSPORT_LEVEL=	1;
+	public const int  ACTION_RESURRECTION	=2;
+	public const int  ACTION_CLONE=	3;
+	public const int  ACTION_SET_VARIABLE=	4;
+	public const int  ACTION_ACTIVATE=	6;
+	public const int  ACTION_LIGHTING=	7;
+	public const int  ACTION_EFFECT=	8;
+	public const int  ACTION_MOVING_PLATFORM=	9;
+	public const int  ACTION_TIMER  = 11	;	//This is an assumption
+	public const int  ACTION_CHOICE	=12;
+	public const int  ACTION_EMAIL	=15;
+	public const int  ACTION_RADAWAY=	16;
+	public const int  ACTION_CHANGE_STATE=	19;
+	public const int  ACTION_AWAKEN =  21;
+	public const int  ACTION_MESSAGE=	22;
+	public const int  ACTION_SPAWN=	23	;	
+	public const int  ACTION_CHANGE_TYPE=	24;
+
+
+
+
 		public const int HEADINGNORTH =180;
 		public const int HEADINGSOUTH= 0;
 		public const int HEADINGEAST =270;
@@ -230,7 +275,11 @@ public class ObjectInteraction : UWEBase {
 			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 			startPos=this.transform.position;
-			canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;
+			if (_RES!=GAME_SHOCK)
+			{
+				canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;	
+			}
+			
 		}
 
 		void Update()
