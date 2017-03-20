@@ -2091,6 +2091,7 @@ public class TileMapRenderer : Loader{
 
 		static void RenderRidgeNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
+				string TileName="";
 				if (t.Render == 1)
 				{
 						if (invert == false)
@@ -2098,8 +2099,10 @@ public class TileMapRenderer : Loader{
 						{//consists of a slope n and a slope w
 								if (t.isWater == Water)
 								{
-										RenderSlopeNTile( parent , x, y, t, Water, invert);
-										RenderSlopeWTile( parent , x, y, t, Water, invert);
+										//RenderSlopeNTile( parent , x, y, t, Water, invert);
+										//RenderSlopeWTile( parent , x, y, t, Water, invert);
+										TileName = "TileRNW_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_NW, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -2117,13 +2120,15 @@ public class TileMapRenderer : Loader{
 		static void RenderRidgeNETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				//consists of a slope n and a slope e
-
+				string TileName="";
 				if (t.Render == 1){
 						if (invert == false){
 								if (t.isWater == Water)
 								{
-										RenderSlopeNTile( parent , x, y, t, Water, invert);
-										RenderSlopeETile( parent , x, y, t, Water, invert);
+										//RenderSlopeNTile( parent , x, y, t, Water, invert);
+										//RenderSlopeETile( parent , x, y, t, Water, invert);
+										TileName = "TileRNE_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_NE, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -2138,6 +2143,7 @@ public class TileMapRenderer : Loader{
 
 		static void RenderRidgeSWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
+				string TileName="";
 				//consists of a slope s and a slope w
 				if (t.Render == 1)
 				if (invert == false)
@@ -2145,8 +2151,10 @@ public class TileMapRenderer : Loader{
 						{
 								if (t.isWater == Water)
 								{
-										RenderSlopeSTile( parent , x, y, t, Water, invert);
-										RenderSlopeWTile( parent , x, y, t, Water, invert);
+										//RenderSlopeSTile( parent , x, y, t, Water, invert);
+										//RenderSlopeWTile( parent , x, y, t, Water, invert);
+										TileName = "TileRSW_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_SW, t.shockSteep, 1, TileName);
 								}
 						}
 				}
@@ -2164,15 +2172,17 @@ public class TileMapRenderer : Loader{
 		{
 				//consists of a slope s and a slope e
 				//done
-
+				string TileName="";
 				if (t.Render == 1)
 				{
 						if (invert == false)
 						{
 								if (t.isWater == Water)
 								{
-										RenderSlopeSTile( parent , x, y, t, Water, invert);
-										RenderSlopeETile( parent , x, y, t, Water, invert);
+										//RenderSlopeSTile( parent , x, y, t, Water, invert);
+										//RenderSlopeETile( parent , x, y, t, Water, invert);
+										TileName = "TileRSE_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_SE, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -3061,6 +3071,11 @@ public class TileMapRenderer : Loader{
 				float AdjustLowerEast = 0f;
 				float AdjustLowerWest = 0f;
 
+				float AdjustUpperNorthEast = 0f;
+				float AdjustUpperNorthWest = 0f;
+				float AdjustUpperSouthEast = 0f;
+				float AdjustUpperSouthWest = 0f;
+
 				if (Floor == 1)
 				{
 						switch (SlopeDir)
@@ -3076,6 +3091,18 @@ public class TileMapRenderer : Loader{
 								break;
 						case TILE_SLOPE_W:
 								AdjustUpperWest = (float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_NE:
+								AdjustUpperNorthEast = (float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_SE:
+								AdjustUpperSouthEast = (float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_NW:
+								AdjustUpperNorthWest = (float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_SW:
+								AdjustUpperSouthWest = (float)Steepness*0.15f;
 								break;
 						}
 				}
@@ -3182,10 +3209,23 @@ public class TileMapRenderer : Loader{
 												//Set the verts	
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
 
-												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
+												switch (SlopeDir)
+												{
+												case TILE_RIDGE_SE:
+												case TILE_RIDGE_NW://Vertices rotated for these
+														verts[3+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth+AdjustUpperSouthWest);
+														verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth+AdjustUpperNorthWest);
+														verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast+AdjustUpperNorthEast);
+														verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight+AdjustUpperSouth+AdjustUpperEast+AdjustUpperSouthEast);
+														break;
+												default:
+														verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth+AdjustUpperSouthWest);
+														verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth+AdjustUpperNorthWest);
+														verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast+AdjustUpperNorthEast);
+														verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight+AdjustUpperSouth+AdjustUpperEast+AdjustUpperSouthEast);
+														break;
+												}
+
 
 												//Allocate UVs
 												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
@@ -3222,8 +3262,8 @@ public class TileMapRenderer : Loader{
 														default:
 															
 															verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight  );
-															verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-															verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+															verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorthEast);
+															verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorthWest);
 															verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
 															uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);//bottom uv
 															uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);//top uv
@@ -3345,8 +3385,8 @@ public class TileMapRenderer : Loader{
 														break;
 												default:
 														verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
-														verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
-														verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+														verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouthWest);
+														verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouthEast);
 														verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
 														uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
 														uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
@@ -3468,8 +3508,8 @@ public class TileMapRenderer : Loader{
 														break;
 												default:
 														verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
-														verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
-														verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+														verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorthWest);
+														verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouthWest);
 														verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
 														uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
 														uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
@@ -3594,8 +3634,8 @@ public class TileMapRenderer : Loader{
 													break;
 												default:
 													verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
-													verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
-													verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+													verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouthEast);
+													verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorthEast);
 													verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
 													uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);//0
 													uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);//1
