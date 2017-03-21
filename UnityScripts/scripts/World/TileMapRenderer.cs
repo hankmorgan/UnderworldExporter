@@ -40,6 +40,9 @@ public class TileMapRenderer : Loader{
 		const int vNORTH= 4;
 		const int vSOUTH= 5;
 
+		public const int LayerFloor=0;
+		public const int LayerCeil=1;
+		
 
 		//BrushFaces
 		const int fSELF =128;
@@ -58,11 +61,12 @@ public class TileMapRenderer : Loader{
 		const int WEST=90;
 
 
+
 		//static int UW_CEILING_HEIGHT;
 		static int CEILING_HEIGHT;
 
-
-
+		const int CEIL_ADJ =0;
+		const int FLOOR_ADJ =0;//-2;
 
 		public static void GenerateLevelFromTileMap(GameObject parent, string game, TileMap Level, ObjectLoader objList)
 		{
@@ -779,6 +783,11 @@ public class TileMapRenderer : Loader{
 		public static void RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
 
+				if ((x==24) && (y==50))
+				{
+						int a=0;
+						a++;
+				}
 				//Picks the tile to render based on tile type/flags.
 				switch (t.tileType)
 				{
@@ -952,7 +961,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderValleyNWTile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderValleyNWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeNWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -970,7 +979,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_CEILING_ONLY:
 										{
 												if (skipFloor != true) { RenderOpenTile( parent , x, y, t, Water, false); }	//floor
-												if ((skipCeil  != true)) { RenderValleyNWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeNWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								}
@@ -983,7 +992,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderValleyNETile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderValleyNETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeNETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1001,7 +1010,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_CEILING_ONLY:
 										{
 												if (skipFloor != true) { RenderOpenTile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderValleyNETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeNETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								}
@@ -1014,7 +1023,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderValleySETile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderValleySETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeSETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1032,7 +1041,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_CEILING_ONLY:
 										{
 												if (skipFloor != true) { RenderOpenTile( parent , x, y, t, Water, false); }	//floor
-												if ((skipCeil  != true)) { RenderValleySETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeSETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								}
@@ -1045,7 +1054,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderValleySWTile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderValleySWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeSWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1063,7 +1072,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_CEILING_ONLY:
 										{
 												if (skipFloor != true) { RenderOpenTile( parent , x, y, t, Water, false); }	//floor
-												if ((skipCeil  != true)) { RenderValleySWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderRidgeSWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								}
@@ -1076,7 +1085,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderRidgeSETile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderRidgeSETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderValleySETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1107,7 +1116,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderRidgeSWTile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderRidgeSWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderValleySWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1138,7 +1147,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderRidgeNWTile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderRidgeNWTile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderValleyNWTile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1169,7 +1178,7 @@ public class TileMapRenderer : Loader{
 								case SLOPE_BOTH_PARALLEL:
 										{
 												if (skipFloor != true) { RenderRidgeNETile( parent , x, y, t, Water, false); }//floor
-												if ((skipCeil  != true)) { RenderRidgeNETile( parent , x, y, t, Water, true); }
+												if ((skipCeil  != true)) { RenderValleyNETile( parent , x, y, t, Water, true); }
 												break;
 										}
 								case SLOPE_BOTH_OPPOSITE:
@@ -1710,7 +1719,9 @@ public class TileMapRenderer : Loader{
 						if (t.isWater == Water)
 						{
 								string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
-								RenderCuboid( parent, x, y, t, Water, -2, CEILING_HEIGHT + 1, TileName);
+								t.VisibleFaces[vTOP]=0;
+								t.VisibleFaces[vBOTTOM]=0;
+								RenderCuboid( parent, x, y, t, Water, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ , TileName);
 						}
 				}
 		}
@@ -1736,7 +1747,7 @@ public class TileMapRenderer : Loader{
 												else
 												{
 														TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-														RenderCuboid(parent, x, y, t, Water, -2, t.floorHeight, TileName);
+														RenderCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TileName);
 												}
 										}
 										else
@@ -1753,7 +1764,7 @@ public class TileMapRenderer : Loader{
 										t.VisibleFaces[vBOTTOM]=1;
 										t.VisibleFaces[vTOP]=0;
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TileName);
+										RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TileName);
 										t.VisibleFaces[vBOTTOM]=visB;
 										t.VisibleFaces[vTOP]=visT;
 								}
@@ -1775,13 +1786,13 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//the wall part
-										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderDiagSEPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
+										TileName = "DSEWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderDiagSEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
 								{
 										//it's floor
-										//RenderDiagNWPortion( -2, t.floorHeight, t,"DiagNW1");
+										//RenderDiagNWPortion( FLOOR_ADJ, t.floorHeight, t,"DiagNW1");
 										short PreviousNorth = t.VisibleFaces[vNORTH];
 										short PreviousWest = t.VisibleFaces[vWEST];
 										t.VisibleFaces[vNORTH] = 0;
@@ -1793,7 +1804,7 @@ public class TileMapRenderer : Loader{
 						}
 						else
 						{//it's ceiling
-								//RenderDiagNWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t, "DiagNW2a");
+								//RenderDiagNWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagNW2a");
 								short vis= t.VisibleFaces[vBOTTOM];
 								t.VisibleFaces[vBOTTOM]=1;
 								RenderOpenTile( parent , x, y, t, Water, true);
@@ -1815,13 +1826,13 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//Its wall
-										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderDiagSWPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
+										TileName = "DSWWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderDiagSWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
 								{
 										//it's floor
-										//RenderDiagNEPortion( -2, t.floorHeight, t,"TileNe1");
+										//RenderDiagNEPortion( FLOOR_ADJ, t.floorHeight, t,"TileNe1");
 										short PreviousNorth = t.VisibleFaces[vNORTH];
 										short PreviousEast = t.VisibleFaces[vEAST];
 										t.VisibleFaces[vNORTH] = 0;
@@ -1834,7 +1845,7 @@ public class TileMapRenderer : Loader{
 						else
 						{
 								//its' ceiling.
-								//RenderDiagNEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t, "TileNe2");
+								//RenderDiagNEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "TileNe2");
 								short vis= t.VisibleFaces[vBOTTOM];
 								t.VisibleFaces[vBOTTOM]=1;
 								RenderOpenTile( parent , x, y, t, Water, true);
@@ -1854,13 +1865,13 @@ public class TileMapRenderer : Loader{
 						{
 								if (Water != true)
 								{
-										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderDiagNEPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
+										TileName = "DNEWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderDiagNEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
 								{
 										//it's floor
-										//RenderDiagSWPortion( -2, t.floorHeight, t, "DiagSW2");
+										//RenderDiagSWPortion( FLOOR_ADJ, t.floorHeight, t, "DiagSW2");
 										short PreviousSouth = t.VisibleFaces[vSOUTH];
 										short PreviousWest = t.VisibleFaces[vWEST];
 										t.VisibleFaces[vSOUTH] = 0;
@@ -1872,7 +1883,7 @@ public class TileMapRenderer : Loader{
 						}
 						else
 						{//it's ceiling
-								//RenderDiagSWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t, "DiagSE3");
+								//RenderDiagSWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagSE3");
 								short vis= t.VisibleFaces[vBOTTOM];
 								t.VisibleFaces[vBOTTOM]=1;
 								RenderOpenTile( parent , x, y, t, Water, true);
@@ -1894,14 +1905,14 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//It's wall.
-										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderDiagNWPortion(parent, -2, CEILING_HEIGHT + 1, t, TileName);
+										TileName = "DNWWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderDiagNWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 
 								if (t.isWater == Water)
-								{
+								{//TODO:Update these floors to only show the top surface.
 										//it's floor
-										//RenderDiagSEPortion( -2, t.floorHeight, t, "DiagSE2");
+										//RenderDiagSEPortion( FLOOR_ADJ, t.floorHeight, t, "DiagSE2");
 										short PreviousSouth = t.VisibleFaces[vSOUTH];
 										short PreviousEast = t.VisibleFaces[vEAST];
 										t.VisibleFaces[vSOUTH] = 0;
@@ -1913,7 +1924,7 @@ public class TileMapRenderer : Loader{
 						}
 						else
 						{//it's ceiling
-								//RenderDiagSEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t, "DiagSE3");
+								//RenderDiagSEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagSE3");
 								short vis= t.VisibleFaces[vBOTTOM];
 								t.VisibleFaces[vBOTTOM]=1;
 								RenderOpenTile( parent , x, y, t, Water, true);
@@ -1934,7 +1945,7 @@ public class TileMapRenderer : Loader{
 								{
 										//A floor
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_N, t.shockSteep, 1, TileName);
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_N, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -1945,7 +1956,7 @@ public class TileMapRenderer : Loader{
 								short visT= t.VisibleFaces[vTOP];
 								t.VisibleFaces[vBOTTOM]=1;
 								t.VisibleFaces[vTOP]=0;
-								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_N, t.shockSteep, 0, TileName);
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_N, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
 						}
@@ -1963,7 +1974,7 @@ public class TileMapRenderer : Loader{
 								{
 										//A floor
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1, TileName);
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -1974,7 +1985,7 @@ public class TileMapRenderer : Loader{
 								short visT= t.VisibleFaces[vTOP];
 								t.VisibleFaces[vBOTTOM]=1;
 								t.VisibleFaces[vTOP]=0;
-								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_S, t.shockSteep, 0, TileName);
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_S, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
 						}
@@ -1992,7 +2003,7 @@ public class TileMapRenderer : Loader{
 								{
 										//A floor
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1, TileName);
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -2003,7 +2014,7 @@ public class TileMapRenderer : Loader{
 								short visT= t.VisibleFaces[vTOP];
 								t.VisibleFaces[vBOTTOM]=1;
 								t.VisibleFaces[vTOP]=0;
-								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_W, t.shockSteep, 0, TileName);
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_W, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
 						}
@@ -2021,7 +2032,7 @@ public class TileMapRenderer : Loader{
 								{
 										//A floor
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1, TileName);
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1, TileName);
 								}
 						}
 						else
@@ -2032,7 +2043,7 @@ public class TileMapRenderer : Loader{
 								short visT= t.VisibleFaces[vTOP];
 								t.VisibleFaces[vBOTTOM]=1;
 								t.VisibleFaces[vTOP]=0;
-								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_E, t.shockSteep, 0, TileName);
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_E, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
 						}
@@ -2043,47 +2054,96 @@ public class TileMapRenderer : Loader{
 
 		static void RenderValleyNWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				int originalTile = t.tileType;
-				t.tileType = TILE_SLOPE_N;
-				RenderSlopeNTile( parent , x, y, t, Water, invert);
-				t.tileType = TILE_SLOPE_W;
-				RenderSlopeWTile( parent , x, y, t, Water, invert);
-				t.tileType = originalTile;
+				if (invert == false)
+				{
+					//int originalTile = t.tileType;
+					//t.tileType = TILE_SLOPE_N;
+					//RenderSlopeNTile( parent , x, y, t, Water, invert);
+					//t.tileType = TILE_SLOPE_W;
+					//RenderSlopeWTile( parent , x, y, t, Water, invert);
+					//t.tileType = originalTile;
+						string TileName = "VNW_" + x.ToString("D2") + "_" + y.ToString("D2");
+						RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NW, t.shockSteep, 1, TileName);
+				}
+				else
+				{
+					string TileName = "VNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+					t.VisibleFaces[vBOTTOM]=1;
+					RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SE, t.shockSteep, 0, TileName);
+				}
 				return;
 		}
 
 
 		static void RenderValleyNETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				int originalTile = t.tileType;
-				t.tileType = TILE_SLOPE_E;
-				RenderSlopeETile( parent , x, y, t, Water, invert);
-				t.tileType = TILE_SLOPE_N;
-				RenderSlopeNTile( parent , x, y, t, Water, invert);
-				t.tileType = originalTile;
-				return;
+				if (invert==false)
+				{
+						//int originalTile = t.tileType;
+						//t.tileType = TILE_SLOPE_E;
+						//RenderSlopeETile( parent , x, y, t, Water, invert);
+						//t.tileType = TILE_SLOPE_N;
+						//RenderSlopeNTile( parent , x, y, t, Water, invert);
+						//t.tileType = originalTile;
+						//return;
+						string TileName = "VNE_" + x.ToString("D2") + "_" + y.ToString("D2");
+						RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NE, t.shockSteep, 1, TileName);
+				}
+				else
+				{
+					string TileName = "VNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+					t.VisibleFaces[vBOTTOM]=1;
+						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SW, t.shockSteep, 0, TileName);
+				}
 		}
 
 		static void RenderValleySWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				int originalTile = t.tileType;
-				t.tileType = TILE_SLOPE_W;
-				RenderSlopeWTile( parent , x, y, t, Water, invert);
-				t.tileType = TILE_SLOPE_S;
-				RenderSlopeSTile( parent , x, y, t, Water, invert);
-				t.tileType = originalTile;
-				return;
+				if (invert==false)
+				{
+					//int originalTile = t.tileType;
+					//t.tileType = TILE_SLOPE_W;
+					//RenderSlopeWTile( parent , x, y, t, Water, invert);
+					//t.tileType = TILE_SLOPE_S;
+					//RenderSlopeSTile( parent , x, y, t, Water, invert);
+					//t.tileType = originalTile;
+					//return;
+
+						string TileName = "VSW_" + x.ToString("D2") + "_" + y.ToString("D2");
+						RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SW, t.shockSteep, 1, TileName);
+
+				}
+				else
+				{
+					string TileName = "VSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+					t.VisibleFaces[vBOTTOM]=1;
+					RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NE, t.shockSteep, 0, TileName);							
+				}
+	
 		}
 
 		static void RenderValleySETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				int originalTile = t.tileType;
-				t.tileType = TILE_SLOPE_E;
-				RenderSlopeETile( parent , x, y, t, Water, invert);
-				t.tileType = TILE_SLOPE_S;
-				RenderSlopeSTile( parent , x, y, t, Water, invert);
-				t.tileType = originalTile;
-				return;
+				if (invert==false)
+				{
+					//	int originalTile = t.tileType;
+						//t.tileType = TILE_SLOPE_E;
+						//RenderSlopeETile( parent , x, y, t, Water, invert);
+						//t.tileType = TILE_SLOPE_S;
+						//RenderSlopeSTile( parent , x, y, t, Water, invert);
+						//t.tileType = originalTile;
+						//return;	
+						string TileName = "VSE_" + x.ToString("D2") + "_" + y.ToString("D2");
+						RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SE, t.shockSteep, 1, TileName);
+				}
+				else
+				{
+						string TileName = "VSE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+						t.VisibleFaces[vBOTTOM]=1;
+						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NW, t.shockSteep, 0, TileName);							
+							
+				}
+
 		}
 
 
@@ -2091,7 +2151,7 @@ public class TileMapRenderer : Loader{
 
 		static void RenderRidgeNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				string TileName="";
+				
 				if (t.Render == 1)
 				{
 						if (invert == false)
@@ -2101,16 +2161,19 @@ public class TileMapRenderer : Loader{
 								{
 										//RenderSlopeNTile( parent , x, y, t, Water, invert);
 										//RenderSlopeWTile( parent , x, y, t, Water, invert);
-										TileName = "TileRNW_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_NW, t.shockSteep, 1, TileName);
+										string TileName = "TileRNW_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NW, t.shockSteep, 1, TileName);
 								}
 						}
 						else
 						{
 								//made of upper slope e and upper slope s
+								string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+								t.VisibleFaces[vBOTTOM]=1;
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SE, t.shockSteep, 0, TileName);							
 
-								RenderSlopeETile( parent , x, y, t, Water, invert);
-								RenderSlopeSTile( parent , x, y, t, Water, invert);
+								//RenderSlopeETile( parent , x, y, t, Water, invert);
+								//RenderSlopeSTile( parent , x, y, t, Water, invert);
 						}
 
 				}
@@ -2119,22 +2182,25 @@ public class TileMapRenderer : Loader{
 
 		static void RenderRidgeNETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				//consists of a slope n and a slope e
-				string TileName="";
+
 				if (t.Render == 1){
 						if (invert == false){
 								if (t.isWater == Water)
 								{
 										//RenderSlopeNTile( parent , x, y, t, Water, invert);
 										//RenderSlopeETile( parent , x, y, t, Water, invert);
-										TileName = "TileRNE_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_NE, t.shockSteep, 1, TileName);
+										string TileName = "TileRNE_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NE, t.shockSteep, 1, TileName);
 								}
 						}
 						else
 						{//invert is south and west slopes
-								RenderSlopeSTile( parent , x, y, t, Water, invert);
-								RenderSlopeWTile( parent , x, y, t, Water, invert);
+								//RenderSlopeSTile( parent , x, y, t, Water, invert);
+								//RenderSlopeWTile( parent , x, y, t, Water, invert);
+								string TileName = "RNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+								t.VisibleFaces[vBOTTOM]=1;
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SW, t.shockSteep, 0, TileName);							
+
 						}
 				}
 
@@ -2143,7 +2209,6 @@ public class TileMapRenderer : Loader{
 
 		static void RenderRidgeSWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				string TileName="";
 				//consists of a slope s and a slope w
 				if (t.Render == 1)
 				if (invert == false)
@@ -2153,16 +2218,20 @@ public class TileMapRenderer : Loader{
 								{
 										//RenderSlopeSTile( parent , x, y, t, Water, invert);
 										//RenderSlopeWTile( parent , x, y, t, Water, invert);
-										TileName = "TileRSW_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_SW, t.shockSteep, 1, TileName);
+										string TileName = "TileRSW_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SW, t.shockSteep, 1, TileName);
 								}
 						}
 				}
 				else
 				{	//invert is n and w slopes
 						//render a ceiling version of this tile
-						RenderSlopeNTile( parent , x, y, t, Water, invert);
-						RenderSlopeWTile( parent , x, y, t, Water, invert);
+						//RenderSlopeNTile( parent , x, y, t, Water, invert);
+						//RenderSlopeWTile( parent , x, y, t, Water, invert);
+						string TileName = "RSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+						t.VisibleFaces[vBOTTOM]=1;
+						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NE, t.shockSteep, 0, TileName);							
+
 
 				}
 				return;
@@ -2172,7 +2241,7 @@ public class TileMapRenderer : Loader{
 		{
 				//consists of a slope s and a slope e
 				//done
-				string TileName="";
+
 				if (t.Render == 1)
 				{
 						if (invert == false)
@@ -2181,16 +2250,21 @@ public class TileMapRenderer : Loader{
 								{
 										//RenderSlopeSTile( parent , x, y, t, Water, invert);
 										//RenderSlopeETile( parent , x, y, t, Water, invert);
-										TileName = "TileRSE_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderSlopedCuboid(parent, x, y, t, Water, -2, t.floorHeight, TILE_RIDGE_SE, t.shockSteep, 1, TileName);
+										string TileName = "TileRSE_" + x.ToString("D2") + "_" + y.ToString("D2");
+										RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SE, t.shockSteep, 1, TileName);
 								}
 						}
 						else
 						{//invert is n w
 								//render a ceiling version of this tile
 								//top and bottom faces move up
-								RenderSlopeNTile( parent , x, y, t, Water, invert);
-								RenderSlopeWTile( parent , x, y, t, Water, invert);
+								//RenderSlopeNTile( parent , x, y, t, Water, invert);
+								//RenderSlopeWTile( parent , x, y, t, Water, invert);
+								string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
+								t.VisibleFaces[vBOTTOM]=1;
+								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NW, t.shockSteep, 0, TileName);							
+
+
 						}
 				}
 				return;
@@ -2903,7 +2977,7 @@ public class TileMapRenderer : Loader{
 
 
 		static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int Top, int Bottom, float uv0_default, float uv1_default, out float UV0_OUT, out float UV1_OUT, out float UV2_OUT, out float UV3_OUT)
-		{
+		{//Obsolete?
 			UV0_OUT=uv0_default;
 			UV1_OUT=uv1_default;
 			UV2_OUT=uv1_default;
@@ -3076,6 +3150,11 @@ public class TileMapRenderer : Loader{
 				float AdjustUpperSouthEast = 0f;
 				float AdjustUpperSouthWest = 0f;
 
+				float AdjustLowerNorthEast = 0f;
+				float AdjustLowerNorthWest = 0f;
+				float AdjustLowerSouthEast = 0f;
+				float AdjustLowerSouthWest = 0f;
+
 				if (Floor == 1)
 				{
 						switch (SlopeDir)
@@ -3091,6 +3170,27 @@ public class TileMapRenderer : Loader{
 								break;
 						case TILE_SLOPE_W:
 								AdjustUpperWest = (float)Steepness*0.15f;
+								break;
+
+						case TILE_VALLEY_NE:
+								AdjustUpperNorthEast = +(float)Steepness*0.15f;
+								AdjustUpperNorthWest = +(float)Steepness*0.15f;
+								AdjustUpperSouthEast = +(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_SE:
+								AdjustUpperSouthEast = +(float)Steepness*0.15f;
+								AdjustUpperSouthWest = +(float)Steepness*0.15f;
+								AdjustUpperNorthEast = +(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_NW:
+								AdjustUpperNorthWest = +(float)Steepness*0.15f;
+								AdjustUpperNorthEast = +(float)Steepness*0.15f;
+								AdjustUpperSouthWest = +(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_SW:
+								AdjustUpperSouthWest = +(float)Steepness*0.15f;
+								AdjustUpperSouthEast = +(float)Steepness*0.15f;
+								AdjustUpperNorthWest = +(float)Steepness*0.15f;
 								break;
 						case TILE_RIDGE_NE:
 								AdjustUpperNorthEast = (float)Steepness*0.15f;
@@ -3122,6 +3222,39 @@ public class TileMapRenderer : Loader{
 						case TILE_SLOPE_W:
 								AdjustLowerWest = -(float)Steepness*0.15f;
 								break;
+						case TILE_VALLEY_NE:
+								AdjustLowerSouthWest = -(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_SE:
+								AdjustLowerNorthWest = -(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_NW:
+								AdjustLowerSouthEast = -(float)Steepness*0.15f;
+								break;
+						case TILE_VALLEY_SW:
+								AdjustLowerNorthEast = -(float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_NE:
+								AdjustLowerNorthWest = -(float)Steepness*0.15f;
+								AdjustLowerSouthEast = -(float)Steepness*0.15f;
+								AdjustLowerSouthWest = -(float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_SE:								
+								AdjustLowerNorthWest = -(float)Steepness*0.15f;
+								AdjustLowerSouthWest = -(float)Steepness*0.15f;
+								AdjustLowerNorthEast = -(float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_NW:								
+								AdjustLowerSouthWest = -(float)Steepness*0.15f;
+								AdjustLowerSouthEast = -(float)Steepness*0.15f;
+								AdjustLowerNorthEast = -(float)Steepness*0.15f;
+								break;
+						case TILE_RIDGE_SW:
+								AdjustLowerNorthWest = -(float)Steepness*0.15f;
+								AdjustLowerSouthEast = -(float)Steepness*0.15f;
+								AdjustLowerNorthEast = -(float)Steepness*0.15f;
+								break;
+
 						}
 				}
 
@@ -3213,6 +3346,8 @@ public class TileMapRenderer : Loader{
 												{
 												case TILE_RIDGE_SE:
 												case TILE_RIDGE_NW://Vertices rotated for these
+												case TILE_VALLEY_SE:
+												case TILE_VALLEY_NW://Vertices rotated for these
 														verts[3+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth+AdjustUpperSouthWest);
 														verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth+AdjustUpperNorthWest);
 														verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast+AdjustUpperNorthEast);
@@ -3734,10 +3869,26 @@ public class TileMapRenderer : Loader{
 												//bottom wall vertices
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
 												//TODO:Get the lower face adjustments for this (shock only)
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerWest);
+
+												switch (SlopeDir)
+												{
+												case TILE_VALLEY_NE:
+												case TILE_VALLEY_SW://Vertices rotated for these
+												case TILE_RIDGE_NE:
+												case TILE_RIDGE_SW://Vertices rotated for these
+														verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast+AdjustLowerSouthEast);
+														verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth+AdjustLowerNorthEast);
+														verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest+AdjustLowerNorthWest);
+														verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerWest+AdjustLowerSouthWest);
+														break;
+												default:
+														verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast+AdjustLowerSouthEast);
+														verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth+AdjustLowerNorthEast);
+														verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest+AdjustLowerNorthWest);
+														verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerWest+AdjustLowerSouthWest);
+														break;
+												}
+
 
 												//Change default UVs
 												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);

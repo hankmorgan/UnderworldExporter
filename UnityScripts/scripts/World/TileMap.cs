@@ -70,6 +70,8 @@ public class TileMap : Loader {
 		const int fTOP =2;
 		const int fBOTTOM= 1;
 
+		public const int LayerFloor=0;
+		public const int LayerCeil=1;
 
 
 
@@ -1592,6 +1594,7 @@ public class TileMap : Loader {
 								for (int v = 0; v < 6; v++)
 								{
 										Tiles[x,y].VisibleFaces[v]=1;
+										Tiles[x,y].VisibleFaces[v]=1;
 								}
 								//Restore this when texturesmasters is loaded.
 								//Tiles[x,y].isWater = (textureMasters[Tiles[x,y].floorTexture].water == 1) && ((Tiles[x,y].tileType !=0) && (ENABLE_WATER==1));
@@ -1999,96 +2002,97 @@ public class TileMap : Loader {
 		{
 				int x; int y;
 
-
-				for (x=0;x<64;x++){
-						for (y=0;y<64;y++){
-							//Set some easy tile visible settings
-							switch (Tiles[x,y].tileType)
-							{
-							case TILE_SOLID:
-									//Bottom and top are invisible
-									Tiles[x,y].VisibleFaces[0] = 0;
-									Tiles[x,y].VisibleFaces[2] = 0;
-									break;
-							default:
-									//Bottom is invisible
-									Tiles[x,y].VisibleFaces[2] = 0;
-									break;
-							}
-						}
-				}
-
-				for (x=0;x<64;x++){
-						for (y=0;y<64;y++){
-								//lets test this tile for visibility
-								//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
-								if ((Tiles[x,y].tileType ==0) && (Tiles[x,y].indexObjectList == 0)  && (Tiles[x,y].TerrainChange == 0)){
-										switch (y)
+						for (x=0;x<64;x++){
+								for (y=0;y<64;y++){
+										//Set some easy tile visible settings
+										switch (Tiles[x,y].tileType)
 										{
-										case 0:	//bottom row
-												switch (x)
-												{
-												case 0:	//bl corner
-														if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
-																&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ; ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												case 63://br corner
-														if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
-																&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												default: // invert t
-														if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) 
-																&& (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												}
+										case TILE_SOLID:
+												//Bottom and top are invisible
+												Tiles[x,y].VisibleFaces[vBOTTOM] = 0;
+												Tiles[x,y].VisibleFaces[vTOP] = 0;
 												break;
-										case 63: //Top row
-												switch (x)
-												{
-												case 0:	//tl corner
-														if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												case 63://tr corner
-														if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												default: //  t
-														if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
-																&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
-														{Tiles[x,y].Render =0;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												}	
-												break;
-										default: //
-												switch (x)
-												{
-												case 0:		//left edge
-														if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-														{Tiles[x,y].Render =0;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												case 63:	//right edge
-														if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-														{Tiles[x,y].Render =0 ;break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												default:		//+
-														if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
-																&& (Tiles[x,y + 1].TerrainChange == 0) && (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
-														{Tiles[x,y].Render =0; break;}
-														else {Tiles[x,y].Render =1 ;break;}
-												}
+										default:
+												//Bottom and top is invisible
+												Tiles[x,y].VisibleFaces[vBOTTOM] = 0;
+												Tiles[x,y].VisibleFaces[vTOP]=0;
 												break;
 										}
 								}
-						}
+
+						for (x=0;x<64;x++){
+								for (y=0;y<64;y++){
+										//lets test this tile for visibility
+										//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
+										if ((Tiles[x,y].tileType ==0) && (Tiles[x,y].indexObjectList == 0)  && (Tiles[x,y].TerrainChange == 0)){
+												switch (y)
+												{
+												case 0:	//bottom row
+														switch (x)
+														{
+														case 0:	//bl corner
+																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
+																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ; ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														case 63://br corner
+																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
+																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														default: // invert t
+																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) 
+																		&& (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														}
+														break;
+												case 63: //Top row
+														switch (x)
+														{
+														case 0:	//tl corner
+																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
+																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														case 63://tr corner
+																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
+																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														default: //  t
+																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
+																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
+																{Tiles[x,y].Render =0;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														}	
+														break;
+												default: //
+														switch (x)
+														{
+														case 0:		//left edge
+																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
+																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
+																{Tiles[x,y].Render =0;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														case 63:	//right edge
+																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
+																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
+																{Tiles[x,y].Render =0 ;break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														default:		//+
+																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
+																		&& (Tiles[x,y + 1].TerrainChange == 0) && (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
+																{Tiles[x,y].Render =0; break;}
+																else {Tiles[x,y].Render =1 ;break;}
+														}
+														break;
+												}
+										}
+								}
+						}	
 				}
+
 
 
 
@@ -2096,10 +2100,10 @@ public class TileMap : Loader {
 
 
 				//return;
-				if (game == GAME_SHOCK) 
-				{//TODO:FIx some z-fighting due to tile visibility.
-						return;		
-				}
+				//if (game == GAME_SHOCK) 
+				//{//TODO:FIx some z-fighting due to tile visibility.
+				//		return;		
+				//}
 				int j=1 ;
 				//Now lets combine the solids along particular axis
 				for (x=0;x<63;x++){

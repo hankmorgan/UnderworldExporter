@@ -16,7 +16,7 @@ public class TileInfo : Loader {
 		public short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
 		public short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til
 		public short Grouped;		//textures/darkmod/stone/cobblestones/blocks_uneven06_grey off but when I group a set of tiles this indicates the tile is a child of a group.
-		public short[] VisibleFaces=new short[6];	//Which faces are visible on a block. top0,east1,bottom2,west3,north4,south5 (these might be wrong. Test more!)
+		public short[] VisibleFaces=new short[6];	//Which faces are visible on a block. 
 		public int North; public int South;
 		public int East; public int West;
 		public int UpperNorth; public int UpperSouth;
