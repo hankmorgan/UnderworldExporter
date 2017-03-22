@@ -2100,10 +2100,10 @@ public class TileMap : Loader {
 
 
 				//return;
-				//if (game == GAME_SHOCK) 
-				//{//TODO:FIx some z-fighting due to tile visibility.
-				//		return;		
-				//}
+				if (game == GAME_SHOCK) 
+				{//TODO:FIx some z-fighting due to tile visibility.
+						return;		
+				}
 				int j=1 ;
 				//Now lets combine the solids along particular axis
 				for (x=0;x<63;x++){

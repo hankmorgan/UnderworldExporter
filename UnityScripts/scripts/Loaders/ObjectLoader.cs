@@ -1138,6 +1138,7 @@ public class ObjectLoader : Loader {
 				case ObjectInteraction.PORTCULLIS:
 						{
 							float DOORWIDTH=80f;
+
 							switch (objList[index].heading*45)
 							{//Move the object position so it can located in the right position in the centre of the frame.
 							case ObjectInteraction.HEADINGWEST:
@@ -1165,6 +1166,10 @@ public class ObjectLoader : Loader {
 									break;
 									}
 							}	
+								if (objList[index].x == 0){offX = offX + 2f;}
+								if (objList[index].x == 7){offX = offX - 2f;}
+								if (objList[index].y == 0){offY = offY + 2f;}
+								if (objList[index].y == 7){offY = offY - 2f;}
 							break;
 						}
 				default:
@@ -1186,11 +1191,13 @@ public class ObjectLoader : Loader {
 												if (objList[index].y == 7){offY = offY - 0.02f;}
 												break;
 										}
-								}					
+								}		
 								break;		
 						}
 
 				}
+
+
 
 				return new Vector3(offX/100.0f,offZ/100.0f,offY/100.0f);
 		}

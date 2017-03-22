@@ -930,7 +930,7 @@ public class GameWorldController : UWEBase {
 						{
 
 						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
-
+						MaterialDoors[i].mainTexture = DoorArt.LoadImageAt(i);
 						}
 					break;
 
