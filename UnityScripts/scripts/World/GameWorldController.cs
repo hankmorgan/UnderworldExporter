@@ -142,6 +142,8 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public string Lev_Ark_File;
 
+		public string Lev_Ark_File_Selected = "Data\\Lev.ark";
+
 	/// <summary>
 	/// The graves file for associating grave textures with grave objects
 	/// </summary>
@@ -250,9 +252,11 @@ public class GameWorldController : UWEBase {
 	public ObjectDatLoader objDat;
 
 		/// <summary>
-		/// The common object properties
+		/// The common object properties for uw
 		/// </summary>
 	public CommonObjectDatLoader commonObject;
+
+		public ObjectPropLoader ShockObjProp;
 
 		/// <summary>
 		/// The terrain data from terrain.dat
@@ -295,6 +299,7 @@ public class GameWorldController : UWEBase {
 						texLoader=new TextureLoader();
 						objectMaster=new ObjectMasters();
 						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
+						ShockObjProp= new ObjectPropLoader();
 						break;
 				default:
 					objectMaster=new ObjectMasters();
@@ -949,7 +954,7 @@ public class GameWorldController : UWEBase {
 				case UWEBase.GAME_UW2:
 				case UWEBase.GAME_UW1:						
 				default:
-						Lev_Ark_File = "Data\\lev.ark";//Eventually this will be a save game.
+						Lev_Ark_File =  Lev_Ark_File_Selected; //"Data\\lev.ark";//Eventually this will be a save game.
 						break;
 				}
 

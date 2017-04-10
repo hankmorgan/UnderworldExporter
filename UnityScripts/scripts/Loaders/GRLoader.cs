@@ -89,6 +89,8 @@ public class GRLoader : ArtLoader {
 
 	protected Texture2D[] ImageCache=new Texture2D[1];
 	 
+	//protected Vector2[] HotSpot= new Vector2[1];
+
 	public GRLoader(int File)
 	{
 		useOverrideAuxPalIndex=false;
@@ -120,6 +122,7 @@ public class GRLoader : ArtLoader {
 				case 17:
 					NoOfImages=(int)DataLoader.getValAtAddress( art_ark.data,0,16);
 					ImageCache=new  Texture2D[NoOfImages];
+					//HotSpot=new Vector2[NoOfImages];
 					ImageFileDataLoaded=true;
 					for (int i=0; i<NoOfImages;i++)
 					{
@@ -127,6 +130,17 @@ public class GRLoader : ArtLoader {
 						int CompressionType=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+4,16);
 						int Width=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+8,16);
 						int Height=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+10,16);
+						//int x1=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+0xE,8);
+						//int y1=(int)DataLoader.getValAtAddress(art_ark.data,textureOffset+0xF,8);
+						//x1 = 1<<x1;
+						//y1 = 1<<y1;
+						//float vX1; float vY1;
+
+								//vX1 = (float)x1/(float)Width;
+								//vY1 = (float)y1/(float)Height;
+										//vX1 =0.5f;
+							//if (y1 == 0) cy =       bmp->height; else cy = bmp->y1;
+						//HotSpot[i]=new Vector2(vX1,vY1);
 						if ((Width>0) && (Height >0))
 						{
 							if(CompressionType==4)
@@ -465,8 +479,37 @@ public class GRLoader : ArtLoader {
 					return Resources.Load<Sprite>("Common/null");
 				}
 			}
+
 			return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f, 0.0f));	
-		
+
+		}
+
+
+		public Sprite RequestSprite(int index, int offset)
+		{
+				if (ImageCache[index]==null)
+				{
+						LoadImageAt(index);	
+						if (ImageCache[index]==null)
+						{//Still can't be loaded
+								return Resources.Load<Sprite>("Common/null");
+						}
+				}
+
+				float height = (float)ImageCache[index].height;
+				float offsetf= (float)offset;
+
+				//When offset is zero sprite at (0.5, 0)
+				//When offset is height sprite at (0.5, 1)
+				float adj=0f;
+
+
+					adj = offsetf / height;	
+
+
+				adj= GameWorldController.instance.testUVadjust;
+				return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f,  adj));	
+	
 		}
 
 }

@@ -178,9 +178,17 @@ public class TileMapRenderer : Loader{
 				}
 
 				//Render bridges, pillars and door ways
-				RenderBridges(parent,Level,objList);
-				RenderPillars(parent,Level,objList);
-				RenderDoorways (parent,Level,objList);
+				switch (_RES)
+				{
+				case GAME_SHOCK:
+						break;
+				default:
+						RenderBridges(parent,Level,objList);
+						RenderPillars(parent,Level,objList);
+						RenderDoorways (parent,Level,objList);
+						break;
+				}
+
 		}
 
 		public static void RenderDoorways(GameObject Parent, TileMap level, ObjectLoader objList)

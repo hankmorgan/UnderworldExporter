@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
 
 public class MainMenuHud : GuiBase {
 		public Texture2D CursorIcon;
@@ -158,7 +159,7 @@ public class MainMenuHud : GuiBase {
 							CreateCharacterButton.SetActive(true);
 							CreditsButton.SetActive(true);
 							JourneyOnButton.SetActive(true);
-							for (int i=0; i<SaveGameButtons.GetUpperBound(0);i++)
+							for (int i=0; i<=SaveGameButtons.GetUpperBound(0);i++)
 							{
 								SaveGameButtons[i].SetActive(false);			
 							}		
@@ -185,6 +186,17 @@ public class MainMenuHud : GuiBase {
 				string[] saveNames= {"","","",""};
 				//List the save names
 				UWHUD.instance.MessageScroll.Clear ();
+
+				for (int i=1; i<=4;i++)
+				{
+					char[] fileDesc;
+					if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
+					{
+						saveNames[i-1]= new string(fileDesc);
+					}
+				}
+			
+
 
 				/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
 				{
@@ -216,6 +228,7 @@ public class MainMenuHud : GuiBase {
 		{
 			if (SlotNo==-2)
 			{//Speedstart
+				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
 				UWEBase.EditorMode=true;
 				JourneyOnwards();
 				return;
@@ -223,9 +236,22 @@ public class MainMenuHud : GuiBase {
 
 			if (SlotNo==-1)
 			{//Speedstart
-					JourneyOnwards();
-					return;
+				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
+				JourneyOnwards();
+				return;
 			}
+
+				//Load a save file
+
+				//Set the level file
+				GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+
+				//Read in the character data
+				GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
+
+				JourneyOnwards();
+				return;	;
+
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
 				{
 					if (sg.Name=="save_"+SlotNo)
@@ -237,6 +263,8 @@ public class MainMenuHud : GuiBase {
 					}
 				}*/
 		}
+
+
 
 		public void ChargenClick(int option)
 		{

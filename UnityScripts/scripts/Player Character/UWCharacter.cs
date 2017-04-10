@@ -808,4 +808,148 @@ public class UWCharacter : Character {
 		{
 			return PlayerSkills.GetSkill(Skills.SkillSneak);
 		}
+
+
+
+		public void LoadPlayerDat(int slotNo)
+		{
+				CharName="";
+				char[] buffer;
+				int x_position=0;
+				int y_position=0;
+				int z_position=0;
+				int heading;
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
+				{
+						int xOrValue= (int)buffer[0];
+						int incrnum = 3;
+
+						for(int i=1; i<220; i++)
+						{
+								if (i==81) 
+								{
+										incrnum = 3;
+								}
+								buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+								incrnum += 3;
+						}
+						string Result="";
+						int runeOffset=0;
+						for (int i=1; i<=221;i++)
+						{
+								if (i<14)
+								{
+										CharName +=buffer[i];
+								}
+								else
+								{
+										switch(i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
+										{
+										case 0x1E+1 ://Strength
+											PlayerSkills.STR=(int)buffer[i];break;
+										case 0x1F+1 ://Dex
+												PlayerSkills.DEX=(int)buffer[i];break;
+										case 0x20   + 1 : ///    Intelligence
+												PlayerSkills.INT=(int)buffer[i];break;
+										case 0x21   + 1 : ///    Attack
+												PlayerSkills.Attack=(int)buffer[i];break;
+										case 0x22   + 1 : ///    Defense
+												PlayerSkills.Defense=(int)buffer[i];break;
+										case 0x23   + 1 : ///    Unarmed
+												PlayerSkills.Unarmed=(int)buffer[i];break;
+										case 0x24   + 1 : ///    Sword
+												PlayerSkills.Sword=(int)buffer[i];break;
+										case 0x25   + 1 : ///    Axe
+												PlayerSkills.Axe=(int)buffer[i];break;
+										case 0x26   + 1 : ///    Mace
+												PlayerSkills.Mace=(int)buffer[i];break;
+										case 0x27   + 1 : ///    Missile
+												PlayerSkills.Missile=(int)buffer[i];break;
+										case 0x28   + 1 : ///    Mana
+												PlayerSkills.ManaSkill=(int)buffer[i];break;
+										case 0x29   + 1 : ///    Lore
+												PlayerSkills.Lore=(int)buffer[i];break;
+										case 0x2A   + 1 : ///    Casting
+												PlayerSkills.Casting=(int)buffer[i];break;
+										case 0x2B   + 1 : ///    Traps
+												PlayerSkills.Traps=(int)buffer[i];break;
+										case 0x2C   + 1 : ///    Search
+												PlayerSkills.Search=(int)buffer[i];break;
+										case 0x2D   + 1 : ///    Track
+												PlayerSkills.Track=(int)buffer[i];break;
+										case 0x2E   + 1 : ///    Sneak
+												PlayerSkills.Sneak=(int)buffer[i];break;
+										case 0x2F   + 1 : ///    Repair
+												PlayerSkills.Repair=(int)buffer[i];break;
+										case 0x30   + 1 : ///    Charm
+												PlayerSkills.Charm=(int)buffer[i];break;
+										case 0x31   + 1 : ///    Picklock
+												PlayerSkills.PickLock=(int)buffer[i];break;
+										case 0x32   + 1 : ///    Acrobat
+												PlayerSkills.Acrobat=(int)buffer[i];break;
+										case 0x33   + 1 : ///    Appraise
+												PlayerSkills.Appraise=(int)buffer[i];break;
+										case 0x34   + 1 : ///    Swimming
+												PlayerSkills.Swimming=(int)buffer[i];break;
+										case 0x36   + 1 : ///    max. vitality
+												MaxVIT=(int)buffer[i];break;
+										case 0x37   + 1 : ///    current mana, (play_mana)
+												PlayerMagic.CurMana=(int)buffer[i];break;
+										case 0x38   + 1 : ///    max. mana
+												PlayerMagic.MaxMana=(int)buffer[i];break;
+										case 0x39   + 1 : ///    hunger, play_hunger
+												FoodLevel=(int)buffer[i];break;						
+										case 0x3D   + 1 : ///    character level (play_level)
+												CharLevel=(int)buffer[i];break;
+										case 0x44 + 1://Runebits
+										case 0x45 + 1://Runebits
+										case 0x46 + 1://Runebits
+												for (int r =7; r>=0; r--)
+												{
+														if (((buffer[i]>>r) & 0x1 )== 1)
+														{
+															PlayerMagic.PlayerRunes[7-r+runeOffset]=true;
+														}
+														else
+														{
+															PlayerMagic.PlayerRunes[7-r+runeOffset]=false;
+														}
+												}
+												runeOffset+=8;
+												break;
+
+										case 0x4C   + 1 : ///   weight in 0.1 stones
+												//TODO: weight =(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x4E   + 1 : ///   experience in 0.1 points
+												EXP=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0x54   + 1 : ///   x-position in level
+												x_position= (int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x56   + 1 : ///   y-position
+												y_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x58   + 1 : ///   z-position
+												z_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x5A   + 1 : ///   heading
+												heading=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x5C   + 1 : ///   dungeon level
+												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
+										case 0x5F   + 1 : ///    bits 2..5: play_poison
+												//TODO:play_poison=(int)((buffer[i]>>2) & 0x7 );break;
+										case 0xCE   + 1 : ///   game time
+												//TODO:game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0xDC   + 1 : ///    current vitality
+												CurVIT=(int)buffer[i];break;
+										}
+								}
+						}
+						float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
+						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +0.4f ,(float)y_position/Ratio);
+
+				}
+
+
+		}
+
+
+
+
 }

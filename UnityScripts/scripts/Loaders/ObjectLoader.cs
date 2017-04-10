@@ -1079,6 +1079,10 @@ public class ObjectLoader : Loader {
 				offY = (y*BrushY) + ((objList[index].y) * (BrushY / ResolutionXY));
 
 				float zpos = objList[index].zpos;
+				//if (game==Loader.GAME_SHOCK)
+				//{
+				//	zpos= zpos- GameWorldController.instance.ShockObjProp.properties[objList[index].item_id].Offset;
+				//}
 				float ceil = tileMap.CEILING_HEIGHT;
 				offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
 				if ((game !=Loader.GAME_SHOCK) && (x<64) && (y<64))

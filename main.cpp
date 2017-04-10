@@ -1212,6 +1212,11 @@ int main()
 							UWCommonObj(game);
 							break;
 							}
+						case SHOCK:
+							{
+							shockCommonObject();
+							break;
+							}
 					}
 				break;
 				}

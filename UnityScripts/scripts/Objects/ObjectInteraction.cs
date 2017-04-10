@@ -299,7 +299,16 @@ public class ObjectInteraction : UWEBase {
 			if (sr !=null)
 			{
 				//sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
-				sr.sprite=GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex);
+						switch(_RES)
+						{
+						case GAME_SHOCK:
+								sr.sprite=GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex,GameWorldController.instance.ShockObjProp.properties[item_id].Offset);
+								break;
+						default:
+								sr.sprite=GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex);
+								break;
+						}
+				
 				if (inventorySlot!=-1)
 				{
 					GameWorldController.instance.playerUW.playerInventory.Refresh(inventorySlot);

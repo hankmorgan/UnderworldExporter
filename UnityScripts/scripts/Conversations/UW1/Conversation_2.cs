@@ -181,7 +181,8 @@ public class Conversation_2 : Conversation {
 		//int locals[24];
 		int[] locals =new int[25];
 		locals[1] = 15;
-		locals[2] = 10001;		
+		locals[2] = 10001;	
+                //Probably is checking the players repair skill	
 		global[10,0] = x_skills( 2, locals[2], locals[1] );
 		
 		if ( global[0,0] == 0 ) {

@@ -1963,6 +1963,12 @@ if ((fopen_s(&f,filePathCO, "rb") == 0))
 		fprintf(LOGFILE, "hp\t");
 		fprintf(LOGFILE, "armour\t");
 		fprintf(LOGFILE, "Render\t");
+		fprintf(LOGFILE, "Unk1\t");
+		fprintf(LOGFILE, "Unk2\t");
+		fprintf(LOGFILE, "Unk3\t");
+		fprintf(LOGFILE, "Unk4\t");
+		fprintf(LOGFILE, "Unk5\t");
+		fprintf(LOGFILE, "Unk6\t");
 		fprintf(LOGFILE, "Vulner\t");
 		fprintf(LOGFILE, "spevul\t");
 		fprintf(LOGFILE, "defence\t");
@@ -1994,7 +2000,15 @@ if ((fopen_s(&f,filePathCO, "rb") == 0))
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x04, 16));//hp  
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x06, 8));//armour  
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x07, 8));//Render  
-			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0e, 8));//Vulner  
+
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x08, 8));//unk1
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x09, 8));//unk2
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0a, 8));//unk3
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0b, 8));//unk4
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0c, 8));//unk5
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0d, 8));//unk6
+
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0e, 8));//Vulner 
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0f, 8));//spevul  
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x12, 8));//defence  
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x14, 16));//flags  
