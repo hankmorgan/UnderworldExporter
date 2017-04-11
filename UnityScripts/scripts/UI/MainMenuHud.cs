@@ -28,6 +28,7 @@ public class MainMenuHud : GuiBase {
 		public InputField EnterCharName;
 		public int MenuMode =0; //0=main, 1 = chargen, 2= save games
 		public int chargenStage=0; 
+
 		//0 = Gender
 		//1 = Handeness
 		//2 = Class
@@ -242,14 +243,13 @@ public class MainMenuHud : GuiBase {
 			}
 
 				//Load a save file
-
 				//Set the level file
 				GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-
 				//Read in the character data
 				GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
-
+				//Load up the map
 				JourneyOnwards();
+
 				return;	;
 
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
@@ -597,6 +597,7 @@ public class MainMenuHud : GuiBase {
 		/// </summary>
 		public void JourneyOnwards()
 		{
+				
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);

@@ -1789,7 +1789,7 @@ public class ObjectInteraction : UWEBase {
 						CreateSprite=false;
 						CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
 						SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
-						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						break;
 				case HIDDENDOOR:
 				case DOOR:
@@ -1803,7 +1803,7 @@ public class ObjectInteraction : UWEBase {
 						CreateSprite=false;
 						break;
 				case CONTAINER:						
-						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt);
+						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						if ((currObj.item_id >=128) && (currObj.item_id<=142))
 							{
 								myObj.AddComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;

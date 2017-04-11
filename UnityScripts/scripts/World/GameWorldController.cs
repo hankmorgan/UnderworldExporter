@@ -746,7 +746,15 @@ public class GameWorldController : UWEBase {
 
 		public TileMap currentTileMap()
 		{
-			return Tilemaps[LevelNo];	
+				if (LevelNo==-1)
+				{
+						return null;
+				}
+				else
+				{
+						return Tilemaps[LevelNo];				
+				}
+			
 		}
 
 		/// <summary>
@@ -767,7 +775,14 @@ public class GameWorldController : UWEBase {
 
 		public ObjectLoader CurrentObjectList()
 		{
-				return objectList[LevelNo];
+				if (LevelNo==-1)
+				{
+						return null;
+				}
+				else
+				{
+						return objectList[LevelNo];
+				}
 		}
 
 		/// <summary>

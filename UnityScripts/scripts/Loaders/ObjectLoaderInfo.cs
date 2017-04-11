@@ -74,6 +74,7 @@ public class ObjectLoaderInfo {
 
 
 		public ObjectInteraction instance;
+		public ObjectLoader parentList;
 
 		//Shock specific stuff
 		//TODO:Split UW specific and Shock specific out in to subclasses?

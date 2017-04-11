@@ -282,6 +282,7 @@ public class ObjectLoader : Loader {
 						objList[MasterIndex].tileX = xref[xref_ptr].tileX ;
 						objList[MasterIndex].tileY = xref[xref_ptr].tileY ;
 						objList[MasterIndex].next =xref[xref[xref_ptr].next].MstIndex  ;
+						objList[MasterIndex].parentList=this;
 
 						ObjectClass =(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+1,8);
 						objList[MasterIndex].ObjectClass = ObjectClass;
@@ -514,6 +515,7 @@ public class ObjectLoader : Loader {
 			for (int x=0; x<1024;x++)
 			{	//read in master object list
 				objList[x]=new ObjectLoaderInfo();
+				objList[x].parentList=this;
 				objList[x].index = x; 
 				objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 				objList[x].tileX=99;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
@@ -1230,8 +1232,21 @@ public class ObjectLoader : Loader {
 				{
 					if ((instance.objInfo[i].InUseFlag==1) || (UWEBase.EditorMode))
 					{
-					Vector3 position = instance.CalcObjectXYZ(_RES,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
+						Vector3 position;
+						if (tilemap==null)
+						{
+							position = new Vector3(99*1.2f,5f, 99*1.2f);
+						}
+						else
+						{
+							position = instance.CalcObjectXYZ(_RES,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
+						}
+					
 					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i],parent,position);
+										if(parent==GameWorldController.instance.InventoryMarker)
+										{//FOr inventory objects spawned
+												instance.objInfo[i].instance.PickedUp=true;	
+										}
 					}
 				}
 			}
@@ -1247,6 +1262,14 @@ public class ObjectLoader : Loader {
 		{
 			return GameWorldController.instance.CurrentObjectList().objInfo[index];
 		}
+
+
+		public static ObjectLoaderInfo getObjectInfoAt (int index, ObjectLoader objList)
+		{
+			//return GameWorldController.instance.CurrentObjectList().objInfo[index];
+				return objList.objInfo[index];
+		}
+
 
 		/// <summary>
 		/// Gets the object int at index.
@@ -1265,6 +1288,17 @@ public class ObjectLoader : Loader {
 		public static int GetItemTypeAt(int index)
 		{
 			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index).item_id];
+		}
+
+		/// <summary>
+		/// Gets the item type at index and objList.
+		/// </summary>
+		/// <returns>The <see cref="System.Int32"/>.</returns>
+		/// <param name="index">Index.</param>
+		/// <param name="objList">Object list.</param>
+		public static int GetItemTypeAt(int index, ObjectLoader objList)
+		{
+			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index,objList).item_id];
 		}
 
 

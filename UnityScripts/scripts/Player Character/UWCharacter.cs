@@ -944,6 +944,100 @@ public class UWCharacter : Character {
 						float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +0.4f ,(float)y_position/Ratio);
 
+						//Read in the inventory
+						//Stored in much the same way as an linked object list is.
+						//Inventory list
+						int NoOfItems = (buffer.GetUpperBound(0)-312)/8;
+						ObjectLoader objLoader = new ObjectLoader();
+						objLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];
+						//ObjectLoaderInfo[] objList = new ObjectLoaderInfo[NoOfItems+2];
+						int x=1;
+						//Debug.Log ("remaining space " + ((int)buffer.GetUpperBound(0)-222));
+						if (buffer.GetUpperBound(0)>=312)
+						{
+								int i = 312;
+								while (i < buffer.GetUpperBound(0))
+								{
+										objLoader.objInfo[x] = new ObjectLoaderInfo();
+										objLoader.objInfo[x].parentList=objLoader;
+										objLoader.objInfo[x].tileX=99;
+										objLoader.objInfo[x].tileY=99;
+										objLoader.objInfo[x].InUseFlag=1;
+										objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer,i+0,16)) & 0x1FF;
+										objLoader.objInfo[x].flags  = (int)((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x0F;
+										objLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 12) & 0x01);
+										objLoader.objInfo[x].doordir  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 13) & 0x01);
+										objLoader.objInfo[x].invis  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 14 )& 0x01);
+										objLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 15) & 0x01);
+										//position at +2
+										objLoader.objInfo[x].zpos = (int)(DataLoader.getValAtAddress(buffer,i+2,16)) & 0x7F;	//bits 0-6 
+										//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
+										objLoader.objInfo[x].heading = (int)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
+
+										objLoader.objInfo[x].y = (int)((DataLoader.getValAtAddress(buffer,i+2,16)) >> 10) & 0x07;	//bits 10-12
+										objLoader.objInfo[x].x = (int)((DataLoader.getValAtAddress(buffer,i+2,16)) >> 13) & 0x07;	//bits 13-15
+
+										//+4
+										objLoader.objInfo[x].quality =(int)((DataLoader.getValAtAddress(buffer,i+4,16)) & 0x3F);
+										objLoader.objInfo[x].next = ((DataLoader.getValAtAddress(buffer,i+4,16)>>6) & 0x3FF);
+
+										//+6
+
+										objLoader.objInfo[x].owner = (int)(DataLoader.getValAtAddress(buffer,i+6,16) & 0x3F) ;//bits 0-5
+
+										objLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF); //bits 6-15
+										i=i+8;
+										x++;
+
+								}
+								//Create the inventory objects
+								ObjectLoader.RenderObjectList(objLoader,GameWorldController.instance.currentTileMap(),GameWorldController.instance.InventoryMarker);
+								for (int j=258; j<286; j=j+2)
+								{//Apply objects to slots
+									int index = ((int)DataLoader.getValAtAddress(buffer,j,16) >>6);
+									string item_name;
+									if (index!=0)
+									{
+										item_name=ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
+									}
+									else
+									{
+										item_name="";	
+									}
+										switch(j)
+										{//Q? does handeness effect these???
+										case 260:// is the top left shoulder.
+												playerInventory.sLeftShoulder=item_name;break;
+										case 258://  is the top right shoulder.
+												playerInventory.sRightShoulder=item_name;break;
+										case 264://  is the left hand.
+												playerInventory.sLeftHand=item_name;break;
+										case 262://  is the right hand.
+												playerInventory.sRightHand=item_name;break;
+										case 266://  is the left ring (assumption.
+												playerInventory.sLeftRing=item_name;break;
+										case 268://  is the right ring (assumption.
+												playerInventory.sRightRing=item_name;break;
+										case 270://  is the backpack slots 1.
+												playerInventory.playerContainer.items[0]=item_name;break;
+										case 272://  is the backpack slots 2.
+												playerInventory.playerContainer.items[1]=item_name;break;
+										case 274://  is the backpack slots 3.
+												playerInventory.playerContainer.items[2]=item_name;break;
+										case 276://  is the backpack slots 4.
+												playerInventory.playerContainer.items[3]=item_name;break;
+										case 278://  is the backpack slots 5.
+												playerInventory.playerContainer.items[4]=item_name;break;
+										case 280://  is the backpack slots 6.
+												playerInventory.playerContainer.items[5]=item_name;break;
+										case 282://  is the backpack slots 7.
+												playerInventory.playerContainer.items[6]=item_name;break;
+										case 284://  is the backpack slots 8.
+												playerInventory.playerContainer.items[7]=item_name;break;
+										}
+								}
+
+						}
 				}
 
 

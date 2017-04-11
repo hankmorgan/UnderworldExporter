@@ -646,13 +646,8 @@ public class Container : object_base {
 		/// </summary>
 		/// <param name="cn">Cn.</param>
 		/// <param name="objInt">Object int.</param>
-		public static void PopulateContainer(Container cn, ObjectInteraction objInt)
+		public static void PopulateContainer(Container cn, ObjectInteraction objInt, ObjectLoader objList)
 		{
-				if (cn.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index==263)
-				{
-						Debug.Log("HER");
-				}
-
 				cn.ObjectsAccepted=-1;//For now default to accept all
 				cn.Capacity=40;
 				for (int i =0; i<=cn.MaxCapacity();i++)
@@ -662,15 +657,15 @@ public class Container : object_base {
 				}
 				if (objInt.link != 0)	//Container has objects
 				{
-						ObjectLoaderInfo tmpobj = ObjectLoader.getObjectInfoAt(objInt.link);
+						ObjectLoaderInfo tmpobj = ObjectLoader.getObjectInfoAt(objInt.link,objList);
 						//int count = 0;
-						if (ObjectLoader.GetItemTypeAt(objInt.link) !=ObjectInteraction.LOCK)
+						if (ObjectLoader.GetItemTypeAt(objInt.link,objList) !=ObjectInteraction.LOCK)
 						{
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
 						}
 						while (tmpobj.next != 0)
 						{
-							tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next);//objList[tmpobj.next];
+							tmpobj = ObjectLoader.getObjectInfoAt((int)tmpobj.next, objList);//objList[tmpobj.next];
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
 						}
 				}
