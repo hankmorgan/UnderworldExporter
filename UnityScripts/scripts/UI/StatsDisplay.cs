@@ -34,7 +34,10 @@ public class StatsDisplay : GuiBase_Draggable {
 		{
 			UpdateNow=false;
 			CharName.text=GameWorldController.instance.playerUW.CharName;
-			CharClass.text=GameWorldController.instance.playerUW.CharClass;
+			//CharClass.text=GameWorldController.instance.playerUW.CharClass;
+
+			CharClass.text= StringController.instance.GetString(2,23+GameWorldController.instance.playerUW.CharClass);
+
 			CharClassLevel.text =GameWorldController.instance.playerUW.CharLevel.ToString();
 			CharStr.text=GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
 			CharDex.text=GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();

@@ -3,12 +3,17 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.IO;
+
 /*
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
-
-
+		public int game_time;
+		public 	int heading;
+		public int testvalue;
+		public int indextochange;
+		public int newvalue;
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.
 	public static UWCharacter Instance;
@@ -25,7 +30,7 @@ public class UWCharacter : Character {
 	//Character related info
 	//Character Details
 
-	public string CharClass;
+	public int CharClass;
 	public int CharLevel;
 	public int EXP;
 	public int TrainingPoints;
@@ -54,6 +59,7 @@ public class UWCharacter : Character {
 	public int FoodLevel; //0-35 range.
 	public int Fatigue;   //0-29 range
 	public bool Poisoned;
+		public int play_poison;
 	public bool Paralyzed;
 
 	//Character skills
@@ -81,6 +87,8 @@ public class UWCharacter : Character {
 	private bool InventoryReady=false;
 	public bool JustTeleported=false;
 	public float teleportedTimer=0f;
+
+
 
 	public void Awake()
 	{
@@ -818,7 +826,7 @@ public class UWCharacter : Character {
 				int x_position=0;
 				int y_position=0;
 				int z_position=0;
-				int heading;
+			
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
 						int xOrValue= (int)buffer[0];
@@ -833,6 +841,19 @@ public class UWCharacter : Character {
 								buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
 								incrnum += 3;
 						}
+
+
+						if (true)
+						{
+								//write out decrypted file
+								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+								for (long i=0; i<=buffer.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)buffer[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded.dat", dataToWrite);
+						}
+
 						string Result="";
 						int runeOffset=0;
 						for (int i=1; i<=221;i++)
@@ -845,65 +866,73 @@ public class UWCharacter : Character {
 								{
 										switch(i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
 										{
-										case 0x1E+1 ://Strength
-											PlayerSkills.STR=(int)buffer[i];break;
-										case 0x1F+1 ://Dex
+										case 0x1F ://Strength
+												PlayerSkills.STR=(int)buffer[i];break;
+										case 0x20 ://Dex
 												PlayerSkills.DEX=(int)buffer[i];break;
-										case 0x20   + 1 : ///    Intelligence
+										case 0x21 : ///    Intelligence
 												PlayerSkills.INT=(int)buffer[i];break;
-										case 0x21   + 1 : ///    Attack
+										case 0x22 : ///    Attack
 												PlayerSkills.Attack=(int)buffer[i];break;
-										case 0x22   + 1 : ///    Defense
+										case 0x23 : ///    Defense
 												PlayerSkills.Defense=(int)buffer[i];break;
-										case 0x23   + 1 : ///    Unarmed
+										case 0x24 : ///    Unarmed
 												PlayerSkills.Unarmed=(int)buffer[i];break;
-										case 0x24   + 1 : ///    Sword
+										case 0x25  : ///    Sword
 												PlayerSkills.Sword=(int)buffer[i];break;
-										case 0x25   + 1 : ///    Axe
+										case 0x26  : ///    Axe
 												PlayerSkills.Axe=(int)buffer[i];break;
-										case 0x26   + 1 : ///    Mace
+										case 0x27 : ///    Mace
 												PlayerSkills.Mace=(int)buffer[i];break;
-										case 0x27   + 1 : ///    Missile
+										case 0x28   : ///    Missile
 												PlayerSkills.Missile=(int)buffer[i];break;
-										case 0x28   + 1 : ///    Mana
+										case 0x29  : ///    Mana
 												PlayerSkills.ManaSkill=(int)buffer[i];break;
-										case 0x29   + 1 : ///    Lore
+										case 0x2A : ///    Lore
 												PlayerSkills.Lore=(int)buffer[i];break;
-										case 0x2A   + 1 : ///    Casting
+										case 0x2B  : ///    Casting
 												PlayerSkills.Casting=(int)buffer[i];break;
-										case 0x2B   + 1 : ///    Traps
+										case 0x2C  : ///    Traps
 												PlayerSkills.Traps=(int)buffer[i];break;
-										case 0x2C   + 1 : ///    Search
+										case 0x2D  : ///    Search
 												PlayerSkills.Search=(int)buffer[i];break;
-										case 0x2D   + 1 : ///    Track
+										case 0x2E : ///    Track
 												PlayerSkills.Track=(int)buffer[i];break;
-										case 0x2E   + 1 : ///    Sneak
+										case 0x2F  : ///    Sneak
 												PlayerSkills.Sneak=(int)buffer[i];break;
-										case 0x2F   + 1 : ///    Repair
+										case 0x30  : ///    Repair
 												PlayerSkills.Repair=(int)buffer[i];break;
-										case 0x30   + 1 : ///    Charm
+										case 0x31 : ///    Charm
 												PlayerSkills.Charm=(int)buffer[i];break;
-										case 0x31   + 1 : ///    Picklock
+										case 0x32 : ///    Picklock
 												PlayerSkills.PickLock=(int)buffer[i];break;
-										case 0x32   + 1 : ///    Acrobat
+										case 0x33  : ///    Acrobat
 												PlayerSkills.Acrobat=(int)buffer[i];break;
-										case 0x33   + 1 : ///    Appraise
+										case 0x34  : ///    Appraise
 												PlayerSkills.Appraise=(int)buffer[i];break;
-										case 0x34   + 1 : ///    Swimming
+										case 0x35  : ///    Swimming
 												PlayerSkills.Swimming=(int)buffer[i];break;
-										case 0x36   + 1 : ///    max. vitality
+										case 0x36://Curvit
+												CurVIT=(int)buffer[i];break;
+										case 0x37 : ///    max. vitality
 												MaxVIT=(int)buffer[i];break;
-										case 0x37   + 1 : ///    current mana, (play_mana)
+										case 0x38 : ///    current mana, (play_mana)
 												PlayerMagic.CurMana=(int)buffer[i];break;
-										case 0x38   + 1 : ///    max. mana
+										case 0x39  : ///    max. mana
 												PlayerMagic.MaxMana=(int)buffer[i];break;
-										case 0x39   + 1 : ///    hunger, play_hunger
-												FoodLevel=(int)buffer[i];break;						
-										case 0x3D   + 1 : ///    character level (play_level)
+										case 0x3A : ///    hunger, play_hunger
+												FoodLevel=(int)buffer[i];break;		
+										case 0x3B:
+												//Unknown. Observed values 0 and 64?//Fatigue???
+												break;
+										case 0x3C:
+												testvalue=(int)buffer[i];break;	
+
+										case 0x3E : ///    character level (play_level)
 												CharLevel=(int)buffer[i];break;
-										case 0x44 + 1://Runebits
-										case 0x45 + 1://Runebits
-										case 0x46 + 1://Runebits
+										case 0x45://Runebits
+										case 0x46://Runebits
+										case 0x47://Runebits
 												for (int r =7; r>=0; r--)
 												{
 														if (((buffer[i]>>r) & 0x1 )== 1)
@@ -918,30 +947,91 @@ public class UWCharacter : Character {
 												runeOffset+=8;
 												break;
 
-										case 0x4C   + 1 : ///   weight in 0.1 stones
-												//TODO: weight =(int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x4E   + 1 : ///   experience in 0.1 points
+										case 0x4D : ///   weight in 0.1 stones
+												//Or STR * 2; safe to ignore?
+												//testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+												break;
+										case 0x4F  : ///   experience in 0.1 points
 												EXP=(int)DataLoader.getValAtAddress(buffer,i,32);break;
-										case 0x54   + 1 : ///   x-position in level
+										case 0x55 : ///   x-position in level
 												x_position= (int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x56   + 1 : ///   y-position
+										case 0x57  : ///   y-position
 												y_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x58   + 1 : ///   z-position
+										case 0x59 : ///   z-position
 												z_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x5A   + 1 : ///   heading
+										case 0x5B : ///   heading
 												heading=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x5C   + 1 : ///   dungeon level
+										case 0x5D  : ///   dungeon level
 												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
-										case 0x5F   + 1 : ///    bits 2..5: play_poison
-												//TODO:play_poison=(int)((buffer[i]>>2) & 0x7 );break;
-										case 0xCE   + 1 : ///   game time
-												//TODO:game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
-										case 0xDC   + 1 : ///    current vitality
+										case 0x60  : ///    bits 2..5: play_poison
+												play_poison=(int)((buffer[i]>>2) & 0x7 );break;
+
+										case 0x65: // hand, Gender & body, and class
+												{
+													//bit 1 = hand left/right
+													//bit 2-5 = gender & body
+													//bit 6-8 = class
+
+													GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
+													isLefty = (((int)buffer[i] & 0x1) == 0);
+													int bodyval= ((int)buffer[i]>>1) & 0xf;
+													//testvalue=bodyval;//buffer[i];
+														testvalue=(int)buffer[i];
+														if (bodyval % 2 == 0)
+														{//male 0,2,4,6,8
+															isFemale=false;
+															//Body
+															GameWorldController.instance.playerUW.Body=bodyval/2;
+															UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(0+(bodyval/2));
+														}
+														else
+														{//female=1,3,5,7,9
+															isFemale=true;
+															GameWorldController.instance.playerUW.Body=(bodyval-1)/2;
+															UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(5+((bodyval-1)/2));
+														}
+														//class
+														CharClass= buffer[i]>>5;
+
+													break;
+												}
+										case 0xCF  : ///   game time
+												game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0xDD  : ///    current vitality
 												CurVIT=(int)buffer[i];break;
 										}
 								}
 						}
-						float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
+
+						if (false)
+						{
+								xOrValue= (int)buffer[0];
+								incrnum = 3;
+								if (indextochange!=0)
+								{
+										buffer[indextochange]=(char)newvalue;										
+								}
+
+								for(int i=1; i<220; i++)
+								{
+										if (i==81) 
+										{
+												incrnum = 3;
+										}
+										buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+										incrnum += 3;
+								}
+								//write back reencrypted file to test c
+								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+								for (long i=0; i<=buffer.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)buffer[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\recoded.dat", dataToWrite);
+						}
+
+						//float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
+						float Ratio=213f;
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +0.4f ,(float)y_position/Ratio);
 
 						//Read in the inventory

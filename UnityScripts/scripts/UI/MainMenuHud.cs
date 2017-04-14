@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.IO;
 
 public class MainMenuHud : GuiBase {
+		string[] saveNames= {"","","",""};
 		public Texture2D CursorIcon;
 		public Rect CursorPosition;
 
@@ -184,7 +185,7 @@ public class MainMenuHud : GuiBase {
 				CreditsButton.SetActive(false);
 				JourneyOnButton.SetActive(false);
 
-				string[] saveNames= {"","","",""};
+
 				//List the save names
 				UWHUD.instance.MessageScroll.Clear ();
 
@@ -194,6 +195,10 @@ public class MainMenuHud : GuiBase {
 					if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
 					{
 						saveNames[i-1]= new string(fileDesc);
+					}
+					else
+					{
+						saveNames[i-1]="";
 					}
 				}
 			
@@ -312,7 +317,7 @@ public class MainMenuHud : GuiBase {
 						PlaceButtons(Chargen.GetChoices(chargenStage,-1),false);
 					break;
 				case Chargen.STAGE_CLASS:
-						GameWorldController.instance.playerUW.CharClass=getClass(option);
+						GameWorldController.instance.playerUW.CharClass=option;
 
 						CharClassAns=option;
 						SkillSeed= Chargen.getSeed(option);
@@ -324,7 +329,7 @@ public class MainMenuHud : GuiBase {
 						CharStr.text = "Str:   "+ GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
 						CharInt.text = "Int:   "+ GameWorldController.instance.playerUW.PlayerSkills.INT.ToString();
 						CharDex.text = "Dex:   "+ GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();
-						CharClass.text= GameWorldController.instance.playerUW.CharClass;
+						CharClass.text= getClass(GameWorldController.instance.playerUW.CharClass);
 						GameWorldController.instance.playerUW.MaxVIT= (GameWorldController.instance.playerUW.PlayerSkills.STR*2);
 						GameWorldController.instance.playerUW.CurVIT= (GameWorldController.instance.playerUW.PlayerSkills.STR*2);
 						CharVit.text = "Vit:   "+ GameWorldController.instance.playerUW.MaxVIT.ToString();
@@ -467,7 +472,7 @@ public class MainMenuHud : GuiBase {
 
 		public string getClass(int option)
 		{
-				return StringController.instance.GetString(2,23+option);
+			return StringController.instance.GetString(2,23+option);
 		}
 
 		public string getQuestion(int option)

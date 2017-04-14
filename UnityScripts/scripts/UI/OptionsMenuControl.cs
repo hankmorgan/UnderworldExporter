@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// Controls the ingame options menu
 /// </summary>
 public class OptionsMenuControl : GuiBase_Draggable {
-
+		string[] saveNames= {"","","",""};
 		public GameObject test;
 
 		private const int SAVE = 0;
@@ -260,15 +260,22 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 	void DisplaySaves ()
 	{
-		string[] saveNames= {"","","",""};
+
 		//List the save names
 		UWHUD.instance.MessageScroll.Clear ();
-		
-	/*	foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
-		{
-			int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
-			saveNames[SaveIndex] = sg.Name;
-		}*/
+	
+			for (int i=1; i<=4;i++)
+			{
+				char[] fileDesc;
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
+				{
+					saveNames[i-1]= new string(fileDesc);
+				}
+				else
+				{
+					saveNames[i-1]="";
+				}
+			}
 		for (int i=0; i<=saveNames.GetUpperBound(0);i++)
 		{
 			if (saveNames[i]!="")
@@ -389,8 +396,8 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <summary>
 		/// Restores save game from slot.
 		/// </summary>
-		/// <param name="slotNo">Slot no.</param>
-	private void RestoreFromSlot(int slotNo)
+		/// <param name="SlotNo">Slot no.</param>
+	private void RestoreFromSlot(int SlotNo)
 	{
 		/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
 						if (sg.Name=="save_"+slotNo)
@@ -404,7 +411,27 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 						}
 				}*/
-			Debug.Log("Restored Save " + slotNo);
+
+				if (saveNames[SlotNo]!="")
+				{
+						//Load a save file
+						//Set the level file
+						GameWorldController.instance.LevelNo=-1;
+						GameWorldController.instance.AtMainMenu=true;
+						GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+						//Read in the character data
+						GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
+						//Load up the map
+						GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
+						GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+						UWHUD.instance.gameObject.SetActive(true);
+						GameWorldController.instance.playerUW.playerController.enabled=true;
+						GameWorldController.instance.playerUW.playerMotor.enabled=true;
+						GameWorldController.instance.AtMainMenu=false;
+						GameWorldController.instance.playerUW.playerInventory.Refresh();
+						GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+				}
 	}
 
 	/// <summary>

@@ -1113,7 +1113,8 @@ public class ObjectLoader : Loader {
 						switch (objList[index].heading*45)
 						{
 						case ObjectInteraction.HEADINGWEST:
-						case ObjectInteraction.HEADINGEAST:								
+						case ObjectInteraction.HEADINGEAST:		
+								offY = (y*BrushY) + 60f;//center in tile
 								/*offX = (x*BrushX) + 0.6f;*/
 								if (objList[index].x == 0)
 								{
@@ -1127,6 +1128,7 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.HEADINGNORTH:
 						case ObjectInteraction.HEADINGSOUTH:
 								/*	offY = (y*BrushY) + 0.6f;*/
+								offX = (x*BrushX) +60f;
 								if (objList[index].y == 0)
 								{
 										offY +=0.15f;

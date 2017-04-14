@@ -15,6 +15,8 @@ using UnityEngine.UI;
 /// </summary>
 
 public class GameWorldController : UWEBase {
+
+		public bool bGenNavMeshes=true;
 		public float testUVadjust=0f;
 
 		/// <summary>
@@ -633,8 +635,12 @@ public class GameWorldController : UWEBase {
 				}
 				
 
-				GenerateNavmesh(NavRigLand);
-				GenerateNavmesh(NavRigWater);
+				if (bGenNavMeshes)
+				{
+					GenerateNavmesh(NavRigLand);
+					GenerateNavmesh(NavRigWater);								
+				}
+
 				if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
 				{//Create shrine lava.
 					GameObject shrineLava = new GameObject();
