@@ -1082,7 +1082,7 @@ public class UWCharacter : Character {
 								}
 								//Create the inventory objects
 								ObjectLoader.RenderObjectList(objLoader,GameWorldController.instance.currentTileMap(),GameWorldController.instance.InventoryMarker);
-								for (int j=258; j<286; j=j+2)
+								for (int j=248; j<286; j=j+2)
 								{//Apply objects to slots
 									int index = ((int)DataLoader.getValAtAddress(buffer,j,16) >>6);
 									string item_name;
@@ -1096,14 +1096,24 @@ public class UWCharacter : Character {
 									}
 										switch(j)
 										{//Q? does handeness effect these???
-										case 260:// is the top left shoulder.
-												playerInventory.sLeftShoulder=item_name;break;
+										case 248://Helm
+												playerInventory.sHelm=item_name;break;
+										case 250://Chest
+												playerInventory.sChest=item_name;break;
+										case 252: //gloves
+												playerInventory.sGloves=item_name;break;
+										case 254://Leggings
+												playerInventory.sLegs=item_name;break;
+										case 256://boots
+												playerInventory.sBoots=item_name;break;
 										case 258://  is the top right shoulder.
 												playerInventory.sRightShoulder=item_name;break;
-										case 264://  is the left hand.
-												playerInventory.sLeftHand=item_name;break;
+										case 260:// is the top left shoulder.
+												playerInventory.sLeftShoulder=item_name;break;
 										case 262://  is the right hand.
 												playerInventory.sRightHand=item_name;break;
+										case 264://  is the left hand.
+												playerInventory.sLeftHand=item_name;break;
 										case 266://  is the left ring (assumption.
 												playerInventory.sLeftRing=item_name;break;
 										case 268://  is the right ring (assumption.
@@ -1126,6 +1136,7 @@ public class UWCharacter : Character {
 												playerInventory.playerContainer.items[7]=item_name;break;
 										}
 								}
+								playerInventory.Refresh();
 
 						}
 				}

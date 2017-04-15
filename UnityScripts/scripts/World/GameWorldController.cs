@@ -768,7 +768,7 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		public void PositionDetect()
 		{
-				if (AtMainMenu==true)
+				if ((AtMainMenu==true) || (WindowDetect.InMap))
 				{
 						return;
 				}
@@ -984,5 +984,10 @@ public class GameWorldController : UWEBase {
 						Debug.Log(Loader.BasePath + Lev_Ark_File + "File not loaded");
 						Application.Quit();
 				}		
+		}
+
+		public char[] tilemapfiledata()
+		{
+				return lev_ark_file_data;
 		}
 }

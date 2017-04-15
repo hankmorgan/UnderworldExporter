@@ -1837,20 +1837,41 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<Map>();
 						break;
 				case HELM:
-						myObj.AddComponent<Helm>();
-						break;
+						{
+								Helm h = myObj.AddComponent<Helm>();
+								h.UpdateQuality();
+								break;		
+						}
+
 				case ARMOUR:
-						myObj.AddComponent<Armour>();
-						break;
+						{
+								Armour a =  myObj.AddComponent<Armour>();
+								a.UpdateQuality();
+								break;								
+						}
+
 				case GLOVES:
-						myObj.AddComponent<Gloves>();
-						break;
+						{
+								Gloves g = myObj.AddComponent<Gloves>();
+								g.UpdateQuality();
+								break;
+						}
+						
+
 				case BOOT:
-						myObj.AddComponent<Boots>();
-						break;
+						{
+								Boots b = myObj.AddComponent<Boots>();
+								b.UpdateQuality();
+								break;								
+						}
+
 				case LEGGINGS:
-						myObj.AddComponent<Leggings>();
-						break;
+						{
+								Leggings l =  myObj.AddComponent<Leggings>();
+								l.UpdateQuality();
+								break;	
+						}
+
 				case SHIELD:
 						myObj.AddComponent<Shield>();
 						break;

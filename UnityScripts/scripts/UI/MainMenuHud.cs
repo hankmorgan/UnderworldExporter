@@ -254,7 +254,7 @@ public class MainMenuHud : GuiBase {
 				GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
 				//Load up the map
 				JourneyOnwards();
-
+				GameWorldController.instance.playerUW.playerInventory.Refresh();
 				return;	;
 
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 

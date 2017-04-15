@@ -7,7 +7,7 @@ using System.Collections;
 /// Contains the string paths for the paperdoll graphics
 public class Armour : Equipment {
 	public int Protection;
-	public string ArmourEquipString;
+	//public string ArmourEquipString;
 		public int EquipIconIndex;
 	/// ProtectionBonus of magic armour
 	public int ProtectionBonus;
