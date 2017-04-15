@@ -1289,6 +1289,7 @@ public class TileMap : Loader {
 				long AddressOfBlockStart;
 				long address_pointer;
 				long textureAddress=0;
+				long automapAddress=0;
 				//long fileSize;
 				short x;	
 				short y;
@@ -1334,6 +1335,7 @@ public class TileMap : Loader {
 							//Get the first map block
 							AddressOfBlockStart =  DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);	
 							textureAddress =  DataLoader.getValAtAddress(lev_ark,((LevelNo+18) * 4) + 2 ,32);
+							automapAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+27) * 4) + 2 ,32);
 							address_pointer =0;
 							break;
 						}
@@ -1650,6 +1652,47 @@ public class TileMap : Loader {
 						}
 
 				}
+
+
+				//Load Automap info
+				if (automapAddress!=0)
+				{
+						switch(_RES)
+						{
+						case GAME_UW1:
+								{
+										int z=0;
+										for (y=0; y<64;y++)
+										{
+												for (x=0; x<64;x++)
+												{
+														if ((x==32) && (y==6))
+														{
+																int jkj=0;
+																jkj++;
+														}
+														int val = (int)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
+														//The automap contains one byte per tile, in the same order as the
+														//level tilemap. A valid value in the low nybble means the tile is displayed
+														//on the map. Valid values are the same as tile types:
+														if ( ((val & 0xf) >0) && ((val & 0xf) <0xA))
+														{
+																Tiles[x,y].tileVisited=true;
+														}
+														else
+														{
+																Tiles[x,y].tileVisited=false;
+														}
+														z++;
+												}
+										}
+										break;
+								}	
+				}
+
+
+				}
+
 
 				//Perform a cleanup of the data
 				//CleanUp(1);

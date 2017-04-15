@@ -827,6 +827,7 @@ public class UWCharacter : Character {
 				int y_position=0;
 				int z_position=0;
 			
+				playerInventory.currentContainer="_Gronk";
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
 						int xOrValue= (int)buffer[0];
