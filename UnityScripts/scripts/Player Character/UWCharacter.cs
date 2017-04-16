@@ -947,7 +947,40 @@ public class UWCharacter : Character {
 												}
 												runeOffset+=8;
 												break;
-
+										case 0x48:
+												if ((int)buffer[i]<24)
+												{
+														PlayerMagic.ActiveRunes[0]=(int)buffer[i];		
+												}
+												else
+												{
+														PlayerMagic.ActiveRunes[0]=-1;
+												}
+												ActiveRuneSlot.UpdateRuneSlots();
+												break;
+										case 0x49:
+												if ((int)buffer[i]<24)
+												{
+														PlayerMagic.ActiveRunes[1]=(int)buffer[i];		
+												}
+												else
+												{
+														PlayerMagic.ActiveRunes[1]=-1;
+												}
+												ActiveRuneSlot.UpdateRuneSlots();
+												break;
+										case 0x4A:
+												if ((int)buffer[i]<24)
+												{
+														PlayerMagic.ActiveRunes[2]=(int)buffer[i];		
+												}
+												else
+												{
+														PlayerMagic.ActiveRunes[2]=-1;
+												}
+												ActiveRuneSlot.UpdateRuneSlots();
+												break;
+											
 										case 0x4D : ///   weight in 0.1 stones
 												//Or STR * 2; safe to ignore?
 												//testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
