@@ -9,6 +9,8 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
+		public bool decode=true;//decodes a save file
+		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
 		public 	int heading;
 		public int testvalue;
@@ -844,7 +846,7 @@ public class UWCharacter : Character {
 						}
 
 
-						if (true)
+						if (decode)
 						{
 								//write out decrypted file
 								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
@@ -926,11 +928,20 @@ public class UWCharacter : Character {
 										case 0x3B:
 												//Unknown. Observed values 0 and 64?//Fatigue???
 												break;
-										case 0x3C:
-												testvalue=(int)buffer[i];break;	
+										//case 0x3C:
+										//		testvalue=(int)buffer[i];break;	
 
 										case 0x3E : ///    character level (play_level)
 												CharLevel=(int)buffer[i];break;
+										case 0x3F:
+										case 0x41:
+										case 0x43://Active spell effect
+												if(i==0x3f)
+												{
+														testvalue= (int)DataLoader.getValAtAddress(buffer,i,16);		
+												}
+												GetActiveSpellID((int)buffer[i]);break;
+
 										case 0x45://Runebits
 										case 0x46://Runebits
 										case 0x47://Runebits
@@ -948,37 +959,13 @@ public class UWCharacter : Character {
 												runeOffset+=8;
 												break;
 										case 0x48:
-												if ((int)buffer[i]<24)
-												{
-														PlayerMagic.ActiveRunes[0]=(int)buffer[i];		
-												}
-												else
-												{
-														PlayerMagic.ActiveRunes[0]=-1;
-												}
-												ActiveRuneSlot.UpdateRuneSlots();
+												SetActiveRuneSlots(0, (int)buffer[i]);
 												break;
 										case 0x49:
-												if ((int)buffer[i]<24)
-												{
-														PlayerMagic.ActiveRunes[1]=(int)buffer[i];		
-												}
-												else
-												{
-														PlayerMagic.ActiveRunes[1]=-1;
-												}
-												ActiveRuneSlot.UpdateRuneSlots();
+												SetActiveRuneSlots(1, (int)buffer[i]);
 												break;
 										case 0x4A:
-												if ((int)buffer[i]<24)
-												{
-														PlayerMagic.ActiveRunes[2]=(int)buffer[i];		
-												}
-												else
-												{
-														PlayerMagic.ActiveRunes[2]=-1;
-												}
-												ActiveRuneSlot.UpdateRuneSlots();
+												SetActiveRuneSlots(2, (int)buffer[i]);
 												break;
 											
 										case 0x4D : ///   weight in 0.1 stones
@@ -1010,7 +997,7 @@ public class UWCharacter : Character {
 													isLefty = (((int)buffer[i] & 0x1) == 0);
 													int bodyval= ((int)buffer[i]>>1) & 0xf;
 													//testvalue=bodyval;//buffer[i];
-														testvalue=(int)buffer[i];
+														//testvalue=(int)buffer[i];
 														if (bodyval % 2 == 0)
 														{//male 0,2,4,6,8
 															isFemale=false;
@@ -1037,7 +1024,7 @@ public class UWCharacter : Character {
 								}
 						}
 
-						if (false)
+						if (recode)
 						{
 								xOrValue= (int)buffer[0];
 								incrnum = 3;
@@ -1178,7 +1165,39 @@ public class UWCharacter : Character {
 
 		}
 
+		/// <summary>
+		/// Calcs the active spell effect id in a player.dat file
+		/// </summary>
+		/// <param name="val">Value.</param>
+		void GetActiveSpellID(int val)
+		{
+				{//active spell 1
+						if (val!=0)
+						{
+								//int val=(int)buffer[i];
+								int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4);
+								Debug.Log (StringController.instance.GetString(6,effectID));
+						}
+				}	
+		}
 
+		/// <summary>
+		/// Sets the active rune slots.
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+		/// <param name="rune">Rune.</param>
+		void SetActiveRuneSlots(int slotNo, int rune)
+		{
+				if (rune<24)
+				{
+						PlayerMagic.ActiveRunes[slotNo]=rune;		
+				}
+				else
+				{
+						PlayerMagic.ActiveRunes[slotNo]=-1;
+				}
+				ActiveRuneSlot.UpdateRuneSlots();	
+		}
 
 
 }
