@@ -141,7 +141,7 @@ public class UWCharacter : Character {
 		GameWorldController.instance.getMus().Death=true;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
-			if (ResurrectPosition!=Vector3.zero)
+			if ((ResurrectPosition!=Vector3.zero) && (ResurrectLevel!=0))
 			{
 				 UWHUD.instance.CutScenesSmall.SetAnimation="Death_With_Sapling";
 			}
@@ -974,6 +974,8 @@ public class UWCharacter : Character {
 												break;
 										case 0x4F  : ///   experience in 0.1 points
 												EXP=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0x53: // skillpoints available to spend
+												TrainingPoints=(int)buffer[i];break;
 										case 0x55 : ///   x-position in level
 												x_position= (int)DataLoader.getValAtAddress(buffer,i,16);break;
 										case 0x57  : ///   y-position
@@ -984,6 +986,8 @@ public class UWCharacter : Character {
 												heading=(int)DataLoader.getValAtAddress(buffer,i,16);break;
 										case 0x5D  : ///   dungeon level
 												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
+										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
+												ResurrectLevel=((int)buffer[i]>>4) & 0xf;break;
 										case 0x60  : ///    bits 2..5: play_poison
 												play_poison=(int)((buffer[i]>>2) & 0x7 );break;
 

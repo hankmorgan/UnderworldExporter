@@ -50,9 +50,9 @@ public class CutsceneAnimation : HudAnimation {
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			
 			GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
-			if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel)
+			if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
 			{
-				GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel);
+				GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel-1);
 			}
 			
 			break;
