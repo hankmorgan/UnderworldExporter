@@ -987,7 +987,10 @@ public class UWCharacter : Character {
 										case 0x5D  : ///   dungeon level
 												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
 										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
-												ResurrectLevel=((int)buffer[i]>>4) & 0xf;break;
+												//Low nibble is moongate level + 1
+												ResurrectLevel=((int)buffer[i]>>4) & 0xf;
+												MoonGateLevel=((int)buffer[i]) & 0xf;
+												break;
 										case 0x60  : ///    bits 2..5: play_poison
 												play_poison=(int)((buffer[i]>>2) & 0x7 );break;
 
