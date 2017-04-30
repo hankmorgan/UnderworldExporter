@@ -102,7 +102,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		//private bool SaveNow;
 		//private bool RestoreNow;
 		//private int slot;
-		private bool isLoadingOrSaving;
+		//private bool isLoadingOrSaving;
 
 	public void ButtonClickOptionsMenu(int index)
 	{
@@ -154,10 +154,10 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		case DETAIL_DONE:
 			initMenu();break;	
 		case RETURN:
-			if(!isLoadingOrSaving)
-			{
+			//if(!isLoadingOrSaving)
+			//{
 				ReturnToGame();	
-			}	
+			//}	
 			break;
 		case QUIT:
 			OptionQuit();break;
@@ -385,9 +385,9 @@ public class OptionsMenuControl : GuiBase_Draggable {
 				break;
 			}
 		}*/	
-		isLoadingOrSaving=true;
+		//isLoadingOrSaving=true;
 		//LevelSerializer.SaveGame("save_"+slotNo);
-		isLoadingOrSaving=false;
+		//isLoadingOrSaving=false;
 		ReturnToGame();	
 	}
 
@@ -431,6 +431,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 						GameWorldController.instance.playerUW.playerInventory.Refresh();
 						GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+						ReturnToGame();
 				}
 	}
 
@@ -503,11 +504,12 @@ public class OptionsMenuControl : GuiBase_Draggable {
 				LevelSerializer.Progress -= HandleLevelSerializerProgress;
 		}
 */
-
+		/*
 		IEnumerator LoadScreen (bool mode)
 		{
-			while (isLoadingOrSaving)
-			{
+				
+			//while (isLoadingOrSaving)
+			//{
 				if (mode==true)//Loading
 				{
 					UWHUD.instance.LoadingProgress.text="LOADING";
@@ -517,8 +519,8 @@ public class OptionsMenuControl : GuiBase_Draggable {
 					UWHUD.instance.LoadingProgress.text="SAVING" ;
 				}
 				yield return new WaitForSeconds(1);
-			}
-		}
+			//}
+		}*/
 	
 }
 

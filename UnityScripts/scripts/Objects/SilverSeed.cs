@@ -22,6 +22,7 @@ public class SilverSeed : object_base {
 			objInt().UpdateAnimation();//Update the inventory display
 			UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
 			GameWorldController.instance.playerUW.ResurrectPosition=Vector3.zero;
+			GameWorldController.instance.playerUW.ResurrectLevel=0;
 			objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,9));
 

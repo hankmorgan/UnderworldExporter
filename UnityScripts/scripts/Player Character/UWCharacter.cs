@@ -12,7 +12,7 @@ public class UWCharacter : Character {
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
-		public 	int heading;
+		//public 	int heading;
 		public int testvalue;
 		public int indextochange;
 		public int newvalue;
@@ -141,9 +141,10 @@ public class UWCharacter : Character {
 		GameWorldController.instance.getMus().Death=true;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
-			if ((ResurrectPosition!=Vector3.zero) && (ResurrectLevel!=0))
+			if (ResurrectLevel!=0)
 			{
-				 UWHUD.instance.CutScenesSmall.SetAnimation="Death_With_Sapling";
+				UWHUD.instance.CutScenesSmall.SetAnimation="Death_With_Sapling";
+				//this.transform.position=ResurrectPosition;
 			}
 			else
 			{
@@ -151,10 +152,6 @@ public class UWCharacter : Character {
 			}
 		}
 
-		if (ResurrectPosition!=Vector3.zero)
-		{
-			this.transform.position=ResurrectPosition;
-		}
 		//Cancel the spell
 		if (PlayerMagic.ReadiedSpell!="")
 		{
@@ -832,6 +829,8 @@ public class UWCharacter : Character {
 				playerInventory.currentContainer="_Gronk";
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
+
+						TileMap.OnWater=false;
 						int xOrValue= (int)buffer[0];
 						int incrnum = 3;
 
@@ -982,8 +981,21 @@ public class UWCharacter : Character {
 												y_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
 										case 0x59 : ///   z-position
 												z_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
-										case 0x5B : ///   heading
-												heading=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x5C : ///   heading
+												{
+													float heading=(float)DataLoader.getValAtAddress(buffer,i,8);	
+
+														//heading=255f-heading;//reversed
+														//playerCam.transform.rotation=Vector3.zero;
+
+														//this.transform.Rotate(0f,heading*(255f/360f),0f,Space.World);
+														this.transform.eulerAngles=new Vector3(0f,heading*(360f/255f),0f);
+														//playerCam.transform.localRotation.eulerAngles=Vector3.zero;
+														playerCam.transform.localRotation=Quaternion.identity;
+														break;
+												}
+
+
 										case 0x5D  : ///   dungeon level
 												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
 										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted

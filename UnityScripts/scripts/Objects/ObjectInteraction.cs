@@ -1703,6 +1703,7 @@ public class ObjectInteraction : UWEBase {
 
 		public void UpdatePosition()
 		{
+				if (objectloaderinfo==null){return;}
 			if (ObjectLoader.isStatic(objectloaderinfo))	
 			{
 					return;
@@ -1895,6 +1896,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case SILVERSEED:
 						myObj.AddComponent<SilverSeed>();
+						if (currObj.item_id==458)
+						{
+							GameWorldController.instance.playerUW.ResurrectPosition= myObj.transform.position;	
+						}
 						AddAnimation=true;
 						break;
 				case GRAVE:
@@ -1921,6 +1926,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case MOONSTONE:
 						myObj.AddComponent<MoonStone>();
+						GameWorldController.instance.playerUW.MoonGatePosition = myObj.transform.position;
 						break;
 				case LEECH:
 						myObj.AddComponent<Leech>();

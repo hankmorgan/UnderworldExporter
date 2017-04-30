@@ -1726,7 +1726,7 @@ public class TileMapRenderer : Loader{
 				{
 						if (t.isWater == Water)
 						{
-								string TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
+								string TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 								t.VisibleFaces[vTOP]=0;
 								t.VisibleFaces[vBOTTOM]=0;
 								RenderCuboid( parent, x, y, t, Water, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ , TileName);

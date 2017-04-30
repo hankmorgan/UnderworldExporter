@@ -1345,12 +1345,17 @@ public class ObjectLoader : Loader {
 				{
 					ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
 					//Copy back the info stored on the object interaction to the lists.
-					objInt.UpdatePosition();
-					if (objInt.objectloaderinfo.InUseFlag==1)
-	
-					GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);					
+						if (objInt.objectloaderinfo==null)
+						{
+						objInt.objectloaderinfo=new ObjectLoaderInfo();
+						objInt.objectloaderinfo.InUseFlag=1;
+						}
+						objInt.UpdatePosition();
+						if (objInt.objectloaderinfo.InUseFlag==1)
+						{
+								GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);		
+						}	
 
-					
 					if ((objInt.tileX!=99) && (objInt.tileY!=99))
 					{
 						int next =GetTileIndexNext(objInt.tileX,objInt.tileY);
