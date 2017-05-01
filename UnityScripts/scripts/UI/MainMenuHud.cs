@@ -243,6 +243,7 @@ public class MainMenuHud : GuiBase {
 			if (SlotNo==-1)
 			{//Speedstart
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
+				GameWorldController.instance.InitBGlobals(0);
 				JourneyOnwards();
 				return;
 			}
@@ -252,6 +253,8 @@ public class MainMenuHud : GuiBase {
 				GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
 				//Read in the character data
 				GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
+				//Read in bglob
+				GameWorldController.instance.InitBGlobals(SlotNo+1);
 				//Load up the map
 				JourneyOnwards();
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
@@ -420,6 +423,7 @@ public class MainMenuHud : GuiBase {
 						{
 							//Start a new game
 								GameWorldController.instance.playerUW.EXP=50;
+								GameWorldController.instance.InitBGlobals(0);
 								JourneyOnwards();
 						}
 						else

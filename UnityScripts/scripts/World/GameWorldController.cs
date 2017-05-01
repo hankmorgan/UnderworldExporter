@@ -273,17 +273,28 @@ public class GameWorldController : UWEBase {
 	public WeaponAnimationPlayer WeaponAnim;
 	public WeaponsLoader weapongr;
 
-		void  LoadPath()
-		{
-			string fileName = Application.dataPath + "//..//" + game + "_path.txt";
-			StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-			Loader.BasePath=fileReader.ReadLine().TrimEnd();
-		}
 
-		/// <summary>
-		/// Awake this instance.
-		/// </summary>
-		/// Should be the very first script to run 
+
+	public struct bablGlobal
+	{
+		public int ConversationNo;
+		public int Size;
+		public int[] Globals;
+	};
+
+	public bablGlobal[] bGlobals;
+
+	void  LoadPath()
+	{
+		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
+		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+		Loader.BasePath=fileReader.ReadLine().TrimEnd();
+	}
+
+	/// <summary>
+	/// Awake this instance.
+	/// </summary>
+	/// Should be the very first script to run 
 	void Awake()
 	{
 		instance=this;
@@ -1083,14 +1094,93 @@ public class GameWorldController : UWEBase {
 		}
 
 
-		public void InitBGlobals()
+		/// <summary>
+		/// Inits the B globals.
+		/// </summary>
+		/// <param name="SlotNo">Slot no.</param>
+		public void InitBGlobals(int SlotNo)
 		{
-				
+			char[] bglob_data;
+			if (SlotNo==0)	
+			{//Init from BABGLOBS.DAT. Initialise the data.
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
+				{
+					int NoOfSlots = bglob_data.GetUpperBound(0)/4;
+					int add_ptr=0;
+					bGlobals = new bablGlobal[NoOfSlots+1];
+					for (int i=0; i<=NoOfSlots;i++)
+					{
+						bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
+						bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
+						bGlobals[i].Globals = new int[bGlobals[i].Size];
+						add_ptr = add_ptr+4;
+					}
+				}	
+			}
+			else
+			{
+				int NoOfSlots=0;//Assumes the same no of slots that is in the babglobs is in bglobals.
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
+				{
+					NoOfSlots = bglob_data.GetUpperBound(0)/4;
+					NoOfSlots++;
+				}
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "Save" + SlotNo + "\\BGLOBALS.DAT", out bglob_data))
+				{
+					//int NoOfSlots = bglob_data.GetUpperBound(0)/4;
+					int add_ptr=0;
+					bGlobals = new bablGlobal[NoOfSlots];
+					for (int i=0; i<NoOfSlots;i++)
+					{
+										
+						bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
+						if (bGlobals[i].ConversationNo==67)
+						{
+								int z=0;
+								z++;
+						}
+						bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
+						bGlobals[i].Globals = new int[bGlobals[i].Size];
+						add_ptr+=4;
+						for (int g=0; g<bGlobals[i].Size; g++)
+						{
+							bGlobals[i].Globals[g]=	(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);							
+							add_ptr = add_ptr+2;
+						}						
+					}
+				}		
+			}
 		}
 
-		public void WriteBGlobals()
+		public void WriteBGlobals(int SlotNo)
 		{
-				
+			int fileSize=0;
+			for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
+			{
+				fileSize+=4;	//No and size
+				fileSize+=bGlobals[c].Size * 2;				
+			}
+			//Create an output byte array
+			Byte[] output = new byte[fileSize];
+			int add_ptr=0;
+			for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
+			{
+				//Write Slot No
+				output[add_ptr]=(byte) (bGlobals[c].ConversationNo & 0xff);
+				output[add_ptr+1]=(byte)( (bGlobals[c].ConversationNo >>8) & 0xff);
+				//Write Size
+				output[add_ptr+2]=(byte)( bGlobals[c].Size & 0xff);
+				output[add_ptr+3]=(byte) ((bGlobals[c].Size >>8) & 0xff);
+				add_ptr=add_ptr+4;
+				for (int g = 0; g<=bGlobals[c].Globals.GetUpperBound(0); g++)
+				{
+					output[add_ptr]=(byte)( bGlobals[c].Globals[g] & 0xff);
+					output[add_ptr+1]=(byte) ((bGlobals[c].Globals[g] >>8) & 0xff);
+					add_ptr+=2;
+				}
+			}
+			File.WriteAllBytes(Loader.BasePath +  "save" + SlotNo + "\\BGLOBALS.DAT" , output);
+
 		}
 
 }

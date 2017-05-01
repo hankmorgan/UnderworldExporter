@@ -380,13 +380,13 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		private void SaveToSlot(int SlotNo)
 		{
 			//Write a desc file
-			File.WriteAllText(Loader.BasePath +  "save" + SlotNo + "\\desc" , "save"+SlotNo);
+			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
 			//Write a player.dat file
-			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo);
+			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo+1);
 			//Write lev.ark file and object lists
-			GameWorldController.instance.WriteBackLevArk(SlotNo);
+			GameWorldController.instance.WriteBackLevArk(SlotNo+1);
 			//Write bglobals.dat
-			GameWorldController.instance.WriteBGlobals();
+			GameWorldController.instance.WriteBGlobals(SlotNo+1);
 		}
 
 
@@ -407,6 +407,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
 			//Load up the map
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
+			GameWorldController.instance.InitBGlobals(SlotNo+1);
 			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			GameWorldController.instance.playerUW.playerController.enabled=true;

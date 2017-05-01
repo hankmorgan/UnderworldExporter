@@ -231,7 +231,23 @@ public class Conversation : GuiBase {
 	/// </summary>
 	public void EndConversation()
 	{
-				///Give movement back to the player			
+
+		//Copy back private variables
+
+		for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
+		{
+		if (Conversation.CurrentConversation== GameWorldController.instance.bGlobals[c].ConversationNo)
+			{
+					for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+					{
+						//Copy Private variables
+						GameWorldController.instance.bGlobals[c].Globals[x]=privateVariables[x];
+					}
+					break;
+			}
+		}
+
+		///Give movement back to the player			
 		GameWorldController.instance.playerUW.playerMotor.enabled=true;
 		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		///Return any items in the trade area to their owner
