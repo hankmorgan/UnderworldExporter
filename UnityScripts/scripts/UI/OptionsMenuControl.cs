@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
+
 //using Polenter.Serialization;
 
 /// <summary>
@@ -114,7 +116,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		case SAVE_SLOT_1:
 		case SAVE_SLOT_2:
 		case SAVE_SLOT_3:
-			BeginSaveToSlot(index-SAVE_SLOT_0);
+			SaveToSlot(index-SAVE_SLOT_0);
 			break;
 		case SAVE_SLOT_CANCEL:
 				initMenu();break;
@@ -372,25 +374,20 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	}
 
 		/// <summary>
-		/// Begins the save to slot process
+		/// Saves to slot.
 		/// </summary>
-		/// <param name="slotNo">Slot no.</param>
-	private void BeginSaveToSlot(int slotNo)
-	{
-		//LevelSerializer.useCompression=false;
-		/*foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
-			if (sgX.Name=="save_"+slotNo)
-			{					
-				sgX.Delete();
-				break;
-			}
-		}*/	
-		//isLoadingOrSaving=true;
-		//LevelSerializer.SaveGame("save_"+slotNo);
-		//isLoadingOrSaving=false;
-		ReturnToGame();	
-	}
-
+		/// <param name="SlotNo">Slot no.</param>
+		private void SaveToSlot(int SlotNo)
+		{
+			//Write a desc file
+			File.WriteAllText(Loader.BasePath +  "save" + SlotNo + "\\desc" , "save"+SlotNo);
+			//Write a player.dat file
+			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo);
+			//Write lev.ark file and object lists
+			GameWorldController.instance.WriteBackLevArk(SlotNo);
+			//Write bglobals.dat
+			GameWorldController.instance.WriteBGlobals();
+		}
 
 
 		/// <summary>
@@ -399,40 +396,27 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="SlotNo">Slot no.</param>
 	private void RestoreFromSlot(int SlotNo)
 	{
-		/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
-						if (sg.Name=="save_"+slotNo)
-						{
-							isLoadingOrSaving=true;
-							LevelSerializer.LoadSavedLevel(sg.Data,false);
-							isLoadingOrSaving=false;
-							UWHUD.instance.LoadingProgress.text="";
-							GameWorldController.instance.playerUW.playerInventory.Refresh();
-							ReturnToGame();
-
-						}
-				}*/
-
-				if (saveNames[SlotNo]!="")
-				{
-						//Load a save file
-						//Set the level file
-						GameWorldController.instance.LevelNo=-1;
-						GameWorldController.instance.AtMainMenu=true;
-						GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-						//Read in the character data
-						GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
-						//Load up the map
-						GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
-						GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
-						UWHUD.instance.gameObject.SetActive(true);
-						GameWorldController.instance.playerUW.playerController.enabled=true;
-						GameWorldController.instance.playerUW.playerMotor.enabled=true;
-						GameWorldController.instance.AtMainMenu=false;
-						GameWorldController.instance.playerUW.playerInventory.Refresh();
-						GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
-						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-						ReturnToGame();
-				}
+		if (saveNames[SlotNo]!="")
+		{
+			//Load a save file
+			//Set the level file
+			GameWorldController.instance.LevelNo=-1;
+			GameWorldController.instance.AtMainMenu=true;
+			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+			//Read in the character data
+			GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
+			//Load up the map
+			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
+			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+			UWHUD.instance.gameObject.SetActive(true);
+			GameWorldController.instance.playerUW.playerController.enabled=true;
+			GameWorldController.instance.playerUW.playerMotor.enabled=true;
+			GameWorldController.instance.AtMainMenu=false;
+			GameWorldController.instance.playerUW.playerInventory.Refresh();
+			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+			ReturnToGame();
+		}
 	}
 
 	/// <summary>

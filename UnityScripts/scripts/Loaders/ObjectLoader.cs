@@ -115,9 +115,10 @@ public class ObjectLoader : Loader {
 		const int  BRIDGE_SIDE_TEXTURE_SOURCE =6;
 
 
-
-
-
+		/// <summary>
+		/// Address in the file where the data is kept.
+		/// </summary>
+		public long objectsAddress;
 
 
 		/// <summary>
@@ -442,7 +443,7 @@ public class ObjectLoader : Loader {
 		{
 			int NoOfBlocks;
 			long AddressOfBlockStart;
-			long objectsAddress;
+			
 			long address_pointer;
 			char[] graves;
 
@@ -463,6 +464,7 @@ public class ObjectLoader : Loader {
 				//Get the first map block
 				AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);
 				objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
+				
 				address_pointer =0;
 				break;
 				}
@@ -656,8 +658,6 @@ public class ObjectLoader : Loader {
 
 					objList[x].npc_talkedto =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
 					objList[x].npc_attitude = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
-
-					//objList[x].npc_deathVariable=DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14,16) & 0xF;
 
 					objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
 					objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
@@ -1326,17 +1326,29 @@ public class ObjectLoader : Loader {
 		/// </summary>
 		public static void UpdateObjectList()
 		{
+			TileMap currTileMap= GameWorldController.instance.currentTileMap();
+			ObjectLoader currObjList = GameWorldController.instance.CurrentObjectList();
+			int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
 			//Update indices to match the array.
 
-			for (int i =0; i<=	GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
+				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
-				GameWorldController.instance.CurrentObjectList().objInfo[i].index=i;
+				currObjList.objInfo[i].index=i;
+				currObjList.objInfo[i].next=0;
+					if (currObjList.objInfo[i].instance!=null)
+					{
+						currObjList.objInfo[i].instance.debugindex=i;
+						currObjList.objInfo[i].instance.next=0;				
+					}
+				
+				//GameWorldController.instance.CurrentObjectList().objInfo[i].tileX=99;
+				//GameWorldController.instance.CurrentObjectList().objInfo[i].tileY=99;
 			}
 
 			//Clear the tilemaps indexobjectlist
 			for (int x=0;x<64;x++){
 				for (int y=0;y<64;y++){
-					GameWorldController.instance.currentTileMap().Tiles[x,y].indexObjectList=0;
+					currTileMap.Tiles[x,y].indexObjectList=0;
 				}
 			}
 			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
@@ -1346,39 +1358,54 @@ public class ObjectLoader : Loader {
 					ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
 					//Copy back the info stored on the object interaction to the lists.
 						if (objInt.objectloaderinfo==null)
-						{
-						objInt.objectloaderinfo=new ObjectLoaderInfo();
-						objInt.objectloaderinfo.InUseFlag=1;
-						}
-						objInt.UpdatePosition();
+							{
+							objInt.objectloaderinfo=new ObjectLoaderInfo();
+							objInt.objectloaderinfo.InUseFlag=0;
+							objInt.objectloaderinfo.tileX=99;
+							objInt.objectloaderinfo.tileY=99;
+							}
+						objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
 						if (objInt.objectloaderinfo.InUseFlag==1)
-						{
-								GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);		
-						}	
-
-					if ((objInt.tileX!=99) && (objInt.tileY!=99))
-					{
-						int next =GetTileIndexNext(objInt.tileX,objInt.tileY);
-						if (next==0)
-						{
-							GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].indexObjectList=objInt.objectloaderinfo.index;	
-						}
-						else
-						{//Change the item at that index to be my object
-							objInt.next=next;
-							objInt.objectloaderinfo.next= next;	
-						}
-					}
-					else
-					{//This is an off map item. It should not change.
-							
-					}
-					if (t.gameObject.GetComponent<Container>())
-						{//Rebuild container chain
-							linkContainerContents(t.gameObject.GetComponent<Container>());
+							{
+								currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);		
+							}	
+							if ((t.gameObject.GetComponent<Container>()) || (t.gameObject.GetComponent<NPC>()))
+							{//Rebuild container chain
+								linkContainerContents(t.gameObject.GetComponent<Container>());
+								t.gameObject.GetComponent<ObjectInteraction>().link=0;
+								//objInt.objectloaderinfo.link=0;
+							}
 						}
 				}
-			}
+
+				//rebuild the linked list
+				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
+				{
+						int x= currObjList.objInfo[i].tileX;
+						int y=currObjList.objInfo[i].tileY;
+						if (currObjList.objInfo[i].InUseFlag==1)
+						{
+								if  ((x !=99) && (y!=99))
+								{
+										if (nexts[x,y] == 0)		
+										{//This object is the first in the chain at this tile
+												currTileMap.Tiles[x,y].indexObjectList= i;
+												nexts[x,y] = i;
+										}
+										else
+										{
+												currObjList.objInfo[nexts[x,y]].next = (long)i;
+												currObjList.objInfo[nexts[x,y]].instance.next=(long)i;
+												nexts[x,y] = i;
+										}
+								}	
+						}
+				}
+
+
+
+				//}
+			//}
 		}
 
 

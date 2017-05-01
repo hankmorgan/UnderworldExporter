@@ -1603,6 +1603,10 @@ for (int x=0; x<64;x++)
 	{
 	for (int y=0;y<64;y++)
 		{
+		if ((x == 3) && (y == 33))
+			{
+			printf("");
+			}
 		if (LevelInfo[x][y].indexObjectList !=0)
 			{
 			long nextObj=LevelInfo[x][y].indexObjectList;

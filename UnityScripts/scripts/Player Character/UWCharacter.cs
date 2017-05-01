@@ -817,7 +817,10 @@ public class UWCharacter : Character {
 		}
 
 
-
+		/// <summary>
+		/// Loads the player dat file into the current character
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
 		public void LoadPlayerDat(int slotNo)
 		{
 				CharName="";
@@ -1216,6 +1219,15 @@ public class UWCharacter : Character {
 						PlayerMagic.ActiveRunes[slotNo]=-1;
 				}
 				ActiveRuneSlot.UpdateRuneSlots();	
+		}
+
+		/// <summary>
+		/// Writes the player dat file based on the current character
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+		public void WritePlayerDat(int slotNo)
+		{
+
 		}
 
 

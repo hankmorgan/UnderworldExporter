@@ -330,29 +330,6 @@ public class GameWorldController : UWEBase {
 					weaps=new WeaponAnimation();
 					break;
 				}
-
-
-		switch (_RES)
-		{
-			case GAME_SHOCK:
-				Tilemaps=new TileMap[15];
-				objectList=new ObjectLoader[15];
-				break;
-			case GAME_UWDEMO:
-				Tilemaps = new TileMap[1];
-				objectList=new ObjectLoader[1];
-				break;
-			case GAME_UW2:
-				Tilemaps = new TileMap[72];//Not all are in use.
-				objectList=new ObjectLoader[72];
-				break;
-			case GAME_UW1:
-			default:
-				Tilemaps = new TileMap[9];
-				objectList=new ObjectLoader[9];
-				break;
-		}
-
 	}
 
 
@@ -838,9 +815,9 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// Writes a lev ark file based on the stored file
 		/// </summary>
-		public void WriteBackLevArk()
+		public void WriteBackLevArk(int slotNo)
 		{
-				
+				ObjectLoader.UpdateObjectList();
 				//Write back tile states
 				for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
 				{
@@ -849,9 +826,11 @@ public class GameWorldController : UWEBase {
 								for (int x=0; x<64;x++)
 								{
 										for (int y=0; y<64;y++)
-										{			
+										{		
+
 											//	Debug.Log(l +  " " + x + " " + y);
 												TileInfo t = Tilemaps[l].Tiles[x,y];
+
 												long addptr = t.address;
 
 												//Shift the bits to construct my data
@@ -869,15 +848,21 @@ public class GameWorldController : UWEBase {
 												lev_ark_file_data[addptr+1]= (char) ( lev_ark_file_data[addptr+1] | (char)(ByteToWrite) );
 
 
-												int WallTexture = t.wallTexture;
-												int ObjectIndex = (t.indexObjectList & 0x3)<<6;//First write the first 2 bits at 6
-												ByteToWrite = WallTexture |  ObjectIndex;
-												lev_ark_file_data[addptr+2]= (char) ( lev_ark_file_data[addptr+2] | (char)(ByteToWrite) );
+												ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
+												lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
+												lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
+
+												//int WallTexture = t.wallTexture;
+												//int ObjectIndex = (t.indexObjectList & 0x3)<<6;//First write the first 2 bits at 6
+												//ByteToWrite = WallTexture |  ObjectIndex;
+												//lev_ark_file_data[addptr+2]= (char) ( lev_ark_file_data[addptr+2] | (char)(ByteToWrite) );
 
 												//Now write the rest of the object index
-												ObjectIndex = t.indexObjectList >>2;
-												ByteToWrite= ObjectIndex;
-												lev_ark_file_data[addptr+3]= (char) ( lev_ark_file_data[addptr+3] | (char)(ByteToWrite) );
+												//ObjectIndex = t.indexObjectList >>2;
+												//ByteToWrite= ObjectIndex;
+												//lev_ark_file_data[addptr+3]= (char) ( lev_ark_file_data[addptr+3] | (char)(ByteToWrite) );
+
+
 												//lev_ark_file_data[addptr+2]= lev_ark_file_data[addptr+2] | (char)secondByte;
 												//ALl i think i will change is the floor texture, type, height and first object index
 												/*0000 tile properties / flags:
@@ -903,6 +888,89 @@ public class GameWorldController : UWEBase {
 					
 				}
 
+				//Write back object data
+				for (int l=0; l<=objectList.GetUpperBound(0); l++)
+				{
+						if (objectList[l]!=null)
+						{
+								long addptr = objectList[l].objectsAddress;
+								for (int o=0; o<=objectList[l].objInfo.GetUpperBound(0);o++)
+								{
+										ObjectLoaderInfo currobj= objectList[l].objInfo[o];
+										if (currobj!=null)
+										{
+												int ByteToWrite= (currobj.is_quant << 15) |
+																(currobj.invis << 14) |
+																(currobj.doordir << 13) |
+																(currobj.enchantment << 12) |
+																((currobj.flags & 0x0F) << 9) |
+																(currobj.item_id & 0x1FF) ;
+
+												lev_ark_file_data[addptr]=(char)(ByteToWrite & 0xFF);
+												lev_ark_file_data[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
+
+												ByteToWrite = ((currobj.x & 0x7) << 13) |
+																((currobj.y & 0x7) << 10) |
+																((currobj.heading & 0x7) << 7) |
+																((currobj.zpos & 0x7F));
+												lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
+												lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
+
+												ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
+																(currobj.quality & 0x3F); 
+												lev_ark_file_data[addptr+4]=(char)(ByteToWrite & 0xFF);
+												lev_ark_file_data[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);		
+												 
+												//objList[x].owner = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+												//objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+												ByteToWrite = ((currobj.link & 0x3FF)<<6) |
+														(currobj.owner & 0x3F); 
+												lev_ark_file_data[addptr+6]=(char)(ByteToWrite & 0xFF);
+												lev_ark_file_data[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
+
+
+
+												if (o<256)			
+												{//Additional npc mobile data.
+														
+														lev_ark_file_data[addptr+0x8] = (char)(currobj.npc_hp & 0x8);
+														lev_ark_file_data[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
+																(currobj.npc_goal & 0xF));
+
+														lev_ark_file_data[addptr+0xd]= (char)
+																(
+																((currobj.npc_attitude & 0x3)<<14) |
+																((currobj.npc_talkedto & 0x1)<<13) |
+																		currobj.npc_level & 0xF
+																);
+
+														lev_ark_file_data[addptr+0x16]= (char)(
+																((currobj.npc_xhome & 0x3F)<<10) |
+																((currobj.npc_yhome & 0x3F)<<4)
+														);
+
+														lev_ark_file_data[addptr+0x18]= (char)(
+																((currobj.npc_heading & 0xF)<<4) 
+														);
+
+														lev_ark_file_data[addptr+0x19]= (char)(
+																((currobj.npc_hunger & 0x3F)) 
+														);
+
+														lev_ark_file_data[addptr+0x1a]= (char)(
+																((currobj.npc_whoami & 0xFF)) 
+														);
+
+													addptr=addptr+8+19;	
+												}	
+												else
+												{													
+													addptr=addptr+8;
+												}
+										}
+								}
+						}
+				}
 
 				//Write the array to file
 
@@ -911,7 +979,7 @@ public class GameWorldController : UWEBase {
 				{
 						dataToWrite[i] = (byte)lev_ark_file_data[i];
 				}
-				File.WriteAllBytes(Loader.BasePath +  "data\\testlev.ark" , dataToWrite);
+				File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);
 
 			
 		}
@@ -922,6 +990,29 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		void InitLevelData()
 		{
+				switch (_RES)
+				{
+				case GAME_SHOCK:
+						Tilemaps=new TileMap[15];
+						objectList=new ObjectLoader[15];
+						break;
+				case GAME_UWDEMO:
+						Tilemaps = new TileMap[1];
+						objectList=new ObjectLoader[1];
+						break;
+				case GAME_UW2:
+						Tilemaps = new TileMap[72];//Not all are in use.
+						objectList=new ObjectLoader[72];
+						break;
+				case GAME_UW1:
+				default:
+						Tilemaps = new TileMap[9];
+						objectList=new ObjectLoader[9];
+						break;
+				}
+
+
+
 				switch (UWEBase._RES)
 				{
 				case UWEBase.GAME_SHOCK:
@@ -990,4 +1081,16 @@ public class GameWorldController : UWEBase {
 		{
 				return lev_ark_file_data;
 		}
+
+
+		public void InitBGlobals()
+		{
+				
+		}
+
+		public void WriteBGlobals()
+		{
+				
+		}
+
 }
