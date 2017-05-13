@@ -807,7 +807,8 @@ public class Magic : UWEBase {
 				{
 						seps[i].CancelEffect();
 				}
-				playerUW.Poisoned=false;
+				//playerUW.Poisoned=false;
+				playerUW.play_poison=0;
 		}
 
 		/// <summary>

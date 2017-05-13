@@ -23,7 +23,8 @@ public class SpellEffectPoison : SpellEffect {
 			{
 				GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 			}
-			GameWorldController.instance.playerUW.Poisoned=true;
+			//GameWorldController.instance.playerUW.Poisoned=true;
+			GameWorldController.instance.playerUW.play_poison=1;//TODO:find out value to use here.
 		}
 		else
 		{
@@ -43,7 +44,8 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{
-			GameWorldController.instance.playerUW.Poisoned=false;
+			//GameWorldController.instance.playerUW.Poisoned=false;
+			GameWorldController.instance.playerUW.play_poison=0;
 		}
 		else
 		{
@@ -56,7 +58,7 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{
-			if (GameWorldController.instance.playerUW.Poisoned==true)
+			if (GameWorldController.instance.playerUW.play_poison!=0)
 			{
 				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.CurVIT-DOT;
 			}
@@ -84,7 +86,7 @@ public class SpellEffectPoison : SpellEffect {
 		}
 		else
 		{
-			if ((GameWorldController.instance.playerUW.Poisoned==false) && (Active==true))
+			if ((GameWorldController.instance.playerUW.play_poison==0) && (Active==true))
 			{
 				CancelEffect();
 			}

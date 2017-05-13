@@ -18,6 +18,8 @@ owner = 0 damage trap
 owner != 0 poison trap
 */
 
+		//Question to answer. What impact does the flags value have?
+
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 
@@ -30,9 +32,10 @@ owner != 0 poison trap
 		}
 		else//poison version
 		{
-			if (GameWorldController.instance.playerUW.Poisoned==false)
+			if (GameWorldController.instance.playerUW.play_poison==0)
 			{
 				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+				GameWorldController.instance.playerUW.play_poison=Mathf.Max(1, GameWorldController.instance.playerUW.play_poison);//Is this the value the poison should apply?
 			}		
 		}
 	}

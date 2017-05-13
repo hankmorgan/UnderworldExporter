@@ -60,7 +60,7 @@ public class UWCharacter : Character {
 	//Character Status
 	public int FoodLevel; //0-35 range.
 	public int Fatigue;   //0-29 range
-	public bool Poisoned;
+	//public bool Poisoned;
 		public int play_poison;
 	public bool Paralyzed;
 

@@ -44,9 +44,9 @@ public class HealthFlask : GuiBase_Draggable {
 			MaxLevel=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 		}
 
-		if ((isHealthDisplay) && (GameWorldController.instance.playerUW.Poisoned!=Poisoned))
+		if ((isHealthDisplay) && ((GameWorldController.instance.playerUW.play_poison!= 0) !=Poisoned))
 		{
-			Poisoned = GameWorldController.instance.playerUW.Poisoned;
+			Poisoned = GameWorldController.instance.playerUW.play_poison!=0;
 			UpdatePoisonDisplay();
 		}
 
@@ -91,11 +91,27 @@ public class HealthFlask : GuiBase_Draggable {
 		string output=""; 
 		if (isHealthDisplay == true)
 		{
+				switch(GameWorldController.instance.playerUW.play_poison)
+				{
+						case 1:
+							output = "You are barely poisoned\n";break;
+						case 2:
+						case 3:
+							output = "You are mildly poisoned\n";break;								
+						case 4:
+						case 5:
+							output = "You are badly poisoned\n";break;
+						case 6:
+							output = "You are seriously poisoned\n";break;
+						case 7:
+							output = "You are egregiously poisoned\n";break;
+				}
+
 			//Your current vitality is out of 
-			if (GameWorldController.instance.playerUW.Poisoned==true)
-			{
-				output = "You are [barely/mildly/badly] poisoned\n";
-			}
+			//if (GameWorldController.instance.playerUW.Poisoned==true)
+			//{
+			//	output = "You are [barely/mildly/badly] poisoned\n";
+			//}
 			output= output + "Your current vitality is " +GameWorldController.instance.playerUW.CurVIT + " out of " + GameWorldController.instance.playerUW.MaxVIT;
 		}
 		else
