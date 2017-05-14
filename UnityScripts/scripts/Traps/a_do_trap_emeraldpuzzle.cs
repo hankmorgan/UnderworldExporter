@@ -21,7 +21,7 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 
 	private void CreateRuneStone(int ItemID)
 	{
-		string Item= ItemID.ToString("000");
+		//string Item= ItemID.ToString("000");
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(ItemID,0,0,1);
 		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,new Vector3(64.5f,4.0f,24.5f)).gameObject;

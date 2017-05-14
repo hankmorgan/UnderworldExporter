@@ -10,7 +10,7 @@ public class HudAnimation : GuiBase {
 	public string SetAnimation;
 	//protected SpriteRenderer sprt;
 	public string PreviousAnimation;
-	private string PreviousSprite="";
+	//private string PreviousSprite="";
 	//private Animator anim;
 	public CutsAnimator anim;
 

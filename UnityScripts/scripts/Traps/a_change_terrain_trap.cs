@@ -48,7 +48,7 @@ The path to the sword hilt on Level3
 						tileToChange.DimX=1;
 						tileToChange.DimY=1;
 						tileToChange.floorHeight=objInt().zpos>>2;
-						tileToChange.floorHeight=tileToChange.floorHeight;//DOUBLE CHECK THIS
+						//tileToChange.floorHeight=tileToChange.floorHeight;//DOUBLE CHECK THIS
 						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
 						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 					}

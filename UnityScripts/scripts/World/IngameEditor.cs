@@ -32,9 +32,11 @@ public class IngameEditor : GuiBase_Draggable {
 			instance=this;
 		}
 
-	void Start()
+
+	
+		public override void Start ()
 	{
-			
+				base.Start();	
 		if (GameWorldController.instance.LevelNo!=-1)
 		{
 			SwitchPanel(0);//Tilemap

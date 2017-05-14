@@ -103,7 +103,7 @@ public class BytLoader : ArtLoader {
 		public Texture2D extractUW2Bitmap(string path, int index, bool Alpha)
 		{
 			char[] textureFile;          // Pointer to our buffered data (little endian format)
-			int i;
+			//int i;
 			long NoOfTextures;
 
 			if (!DataLoader.ReadStreamFile(BasePath + path, out textureFile))

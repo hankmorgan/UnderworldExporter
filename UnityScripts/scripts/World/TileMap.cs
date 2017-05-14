@@ -1737,7 +1737,7 @@ public class TileMap : Loader {
 				{
 						HeightUnits=3;
 				}
-				int cSpace = (int)DataLoader.getValAtAddress(inf_ark.data,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
+				//int cSpace = (int)DataLoader.getValAtAddress(inf_ark.data,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
 				SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);  //Shifts the scale of the level.
 				CEILING_HEIGHT= SHOCK_CEILING_HEIGHT;
 
@@ -2827,10 +2827,10 @@ public class TileMap : Loader {
 												{
 														return t2.ceilingHeight;
 												}
-												break;
+												//break;
 										default:
 												return t2.ceilingHeight;
-												break;
+												//break;
 										}
 								} 
 						case fSOUTH:
@@ -2847,10 +2847,10 @@ public class TileMap : Loader {
 												{
 														return t2.ceilingHeight;
 												}
-												break;
+												//break;
 										default:
 												return t2.ceilingHeight;
-												break;
+												//break;
 										}
 										//if (t2.tileType == TILE_SLOPE_S)
 										//  {
@@ -2863,7 +2863,7 @@ public class TileMap : Loader {
 										//    return t2.ceilingHeight;
 										//    }
 										//  }
-										break;
+										//break;
 								} 
 						case fEAST:
 								{
@@ -2879,10 +2879,10 @@ public class TileMap : Loader {
 												{
 														return t2.ceilingHeight;
 												}
-												break;
+												//break;
 										default:
 												return t2.ceilingHeight;
-												break;
+												//break;
 										}
 								} 
 						case fWEST:
@@ -2899,10 +2899,10 @@ public class TileMap : Loader {
 												{
 														return t2.ceilingHeight;
 												}
-												break;
+												//break;
 										default:
 												return t2.ceilingHeight;
-												break;
+												//break;
 										}
 								}
 						}

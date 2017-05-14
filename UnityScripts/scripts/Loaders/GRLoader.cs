@@ -168,7 +168,7 @@ public class GRLoader : ArtLoader {
 		if (AuxPalIndex!=-1)
 		{
 			useOverrideAuxPalIndex=true;
-			OverrideAuxPalIndex=OverrideAuxPalIndex	;
+			//OverrideAuxPalIndex=OverrideAuxPalIndex	;
 		}
 		AuxPalPath=AuxPalToUse;
 		FileToLoad=File;

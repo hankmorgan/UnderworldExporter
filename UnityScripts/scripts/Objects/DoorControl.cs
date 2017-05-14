@@ -760,7 +760,7 @@ public class DoorControl : object_base {
 				int tileX=dc.objInt().tileX;
 				int tileY=dc.objInt().tileY;
 				if (tileX==99){return;}
-				int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
+				//int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
 				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
 				float Bottom =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
 				float floorHeight=(float)(Top*0.15f);
@@ -772,12 +772,12 @@ public class DoorControl : object_base {
 				float doorwidth = 0.8f;
 				float doorframewidth = 1.2f;
 				float doorSideWidth = (doorframewidth-doorwidth)/2f;
-				float doorheight = 7f * 0.15f;
+				//float doorheight = 7f * 0.15f;
 				//Uv ratios across the x axis of the door
 				float uvXPos1 = 0f;
 				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
 				float uvXPos3 =uvXPos2 + doorwidth/1.2f;
-				float uvXPos4 = 1f; // or 1.2f/1.2f
+				//float uvXPos4 = 1f; // or 1.2f/1.2f
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(dc.name + "_Model");

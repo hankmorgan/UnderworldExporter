@@ -16,6 +16,7 @@ public class UWCharacter : Character {
 		public int testvalue;
 		public int indextochange;
 		public int newvalue;
+		public int newvaluesize=8;
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.
 	public static UWCharacter Instance;
@@ -847,19 +848,7 @@ public class UWCharacter : Character {
 								incrnum += 3;
 						}
 
-
-						if (decode)
-						{
-								//write out decrypted file
-								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
-								for (long i=0; i<=buffer.GetUpperBound(0);i++)
-								{
-										dataToWrite[i] = (byte)buffer[i];
-								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded.dat", dataToWrite);
-						}
-
-						string Result="";
+						//string Result="";
 						int runeOffset=0;
 						for (int i=1; i<=221;i++)
 						{
@@ -1018,8 +1007,6 @@ public class UWCharacter : Character {
 													GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
 													isLefty = (((int)buffer[i] & 0x1) == 0);
 													int bodyval= ((int)buffer[i]>>1) & 0xf;
-													//testvalue=bodyval;//buffer[i];
-														//testvalue=(int)buffer[i];
 														if (bodyval % 2 == 0)
 														{//male 0,2,4,6,8
 															isFemale=false;
@@ -1038,39 +1025,75 @@ public class UWCharacter : Character {
 
 													break;
 												}
+										case 0x66://Quest flags
+												{
+													int val = (int)DataLoader.getValAtAddress(buffer,i,32);
+													for (int b=31; b>=0;b--)
+													{//Check order here
+														if (((val<<b) & 0x1) == 1)
+														{
+															quest().QuestVariables[32-b]=1;
+														}
+														else
+														{
+															quest().QuestVariables[32-b]=0;	
+														}
+													}
+												break;
+												}
+										case 0x6A:
+												quest().QuestVariables[32]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x6B:
+												quest().QuestVariables[33]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x6C:
+												quest().QuestVariables[34]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x6D:
+												quest().QuestVariables[35]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x6F://Garamon dream related?
+												quest().GaramonDream=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x71://Game variables
+										case 0x72:
+										case 0x73:
+										case 0x74:
+										case 0x75:
+										case 0x76:
+										case 0x77:
+										case 0x78:
+										case 0x79:
+										case 0x7A:
+										case 0x7B:
+										case 0x7C:
+										case 0x7D:
+										case 0x7E:
+										case 0x7F:
+										case 0x80:
+										case 0x81:
+										case 0x82:
+										case 0x83:
+										case 0x84:
+										case 0x85:
+										case 0x86:
+										case 0x87:
+										case 0x88:
+										case 0x89:
+										case 0x8A:
+										case 0x8B:
+										case 0x8C:
+										case 0x8D:
+										case 0x8E:
+										case 0x8F:
+										case 0x90:
+												{
+													GameWorldController.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+													break;
+												}
+
 										case 0xCF  : ///   game time
 												game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
 										case 0xDD  : ///    current vitality
 												CurVIT=(int)buffer[i];break;
 										}
 								}
-						}
-
-						if (recode)
-						{
-								xOrValue= (int)buffer[0];
-								incrnum = 3;
-								if (indextochange!=0)
-								{
-										buffer[indextochange]=(char)newvalue;										
-								}
-
-								for(int i=1; i<220; i++)
-								{
-										if (i==81) 
-										{
-												incrnum = 3;
-										}
-										buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
-										incrnum += 3;
-								}
-								//write back reencrypted file to test c
-								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
-								for (long i=0; i<=buffer.GetUpperBound(0);i++)
-								{
-										dataToWrite[i] = (byte)buffer[i];
-								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\recoded.dat", dataToWrite);
 						}
 
 						//float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
@@ -1182,6 +1205,47 @@ public class UWCharacter : Character {
 								playerInventory.Refresh();
 
 						}
+
+
+						if (decode)
+						{
+								//write out decrypted file for analysis
+								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+								for (long i=0; i<=buffer.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)buffer[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded.dat", dataToWrite);
+						}
+
+						if (recode)//Rewrite the file with test value changes.
+						{
+								xOrValue= (int)buffer[0];
+								incrnum = 3;
+								if (indextochange!=0)
+								{
+										buffer[indextochange]=(char)newvalue;										
+								}
+
+								for(int i=1; i<220; i++)
+								{
+										if (i==81) 
+										{
+												incrnum = 3;
+										}
+										buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+										incrnum += 3;
+								}
+								//write back reencrypted file to test c
+								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+								for (long i=0; i<=buffer.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)buffer[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\recoded.dat", dataToWrite);
+						}
+
+
 				}
 
 
@@ -1227,8 +1291,316 @@ public class UWCharacter : Character {
 		/// <param name="slotNo">Slot no.</param>
 		public void WritePlayerDat(int slotNo)
 		{
+				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\playertmp.dat",FileMode.Create);
+				BinaryWriter writer= new BinaryWriter(file);
+				int ActiveEffectIndex=0;
+				int runeOffset=0;
+				//Write the XOR Key
+				int XorKey=206;
+				DataLoader.WriteInt8(writer,XorKey);
+				//I'm lazy. I'm going to write a temp file and then re-encode using the key.
+				for (int i=1; i<312;i++)
+				{//non inventory data 
+
+						if (i<14)
+						{
+								if (i-1 <= CharName.Length)	
+								{
+									char alpha = CharName.ToCharArray()[i-1];
+									DataLoader.WriteInt8(writer,(int)alpha);
+								}
+								else
+								{
+									DataLoader.WriteInt8(writer,0);
+								}
+						}
+						else
+						{
+								switch(i)
+								{
+								case 0x1F ://Strength
+										DataLoader.WriteInt8(writer,PlayerSkills.STR);break;
+								case 0x20 ://Dex
+										DataLoader.WriteInt8(writer,PlayerSkills.DEX);break;
+								case 0x21 : ///    Intelligence
+										DataLoader.WriteInt8(writer,PlayerSkills.INT);break;
+								case 0x22 : ///    Attack
+										DataLoader.WriteInt8(writer,PlayerSkills.Attack);break;
+								case 0x23 : ///    Defense
+										DataLoader.WriteInt8(writer,PlayerSkills.Defense);break;
+								case 0x24 : ///    Unarmed
+										DataLoader.WriteInt8(writer,PlayerSkills.Unarmed);break;
+								case 0x25  : ///    Sword
+										DataLoader.WriteInt8(writer,PlayerSkills.Sword);break;
+								case 0x26  : ///    Axe
+										DataLoader.WriteInt8(writer,PlayerSkills.Axe);break;
+								case 0x27 : ///    Mace
+										DataLoader.WriteInt8(writer,PlayerSkills.Mace);break;
+								case 0x28   : ///    Missile
+										DataLoader.WriteInt8(writer,PlayerSkills.Missile);break;
+								case 0x29  : ///    Mana
+										DataLoader.WriteInt8(writer,PlayerSkills.ManaSkill);break;
+								case 0x2A : ///    Lore
+										DataLoader.WriteInt8(writer,PlayerSkills.Lore);break;
+								case 0x2B  : ///    Casting
+										DataLoader.WriteInt8(writer,PlayerSkills.Casting);break;
+								case 0x2C  : ///    Traps
+										DataLoader.WriteInt8(writer,PlayerSkills.Traps);break;
+								case 0x2D  : ///    Search
+										DataLoader.WriteInt8(writer,PlayerSkills.Search);break;
+								case 0x2E : ///    Track
+										DataLoader.WriteInt8(writer,PlayerSkills.Track);break;
+								case 0x2F  : ///    Sneak
+										DataLoader.WriteInt8(writer,PlayerSkills.Sneak);break;
+								case 0x30  : ///    Repair
+										DataLoader.WriteInt8(writer,PlayerSkills.Repair);break;
+								case 0x31 : ///    Charm
+										DataLoader.WriteInt8(writer,PlayerSkills.Charm);break;
+								case 0x32 : ///    Picklock
+										DataLoader.WriteInt8(writer,PlayerSkills.PickLock);break;
+								case 0x33  : ///    Acrobat
+										DataLoader.WriteInt8(writer,PlayerSkills.Acrobat);break;
+								case 0x34  : ///    Appraise
+										DataLoader.WriteInt8(writer,PlayerSkills.Appraise);break;
+								case 0x35  : ///    Swimming
+										DataLoader.WriteInt8(writer,PlayerSkills.Swimming);break;
+								case 0x36://Curvit
+										DataLoader.WriteInt8(writer,CurVIT);break;
+								case 0x37 : ///    max. vitality
+										DataLoader.WriteInt8(writer,MaxVIT);break;
+								case 0x38 : ///    current mana, (play_mana)
+										DataLoader.WriteInt8(writer,PlayerMagic.CurMana);break;
+								case 0x39  : ///    max. mana
+										DataLoader.WriteInt8(writer,PlayerMagic.MaxMana);break;
+								case 0x3A : ///    hunger, play_hunger
+										DataLoader.WriteInt8(writer,FoodLevel);break;
+
+								case 0x3B://Unknown s
+								case 0x3C:		
+										DataLoader.WriteInt8(writer,64);break;
+								case 0x3E : ///    character level (play_level)
+										DataLoader.WriteInt8(writer,CharLevel);break;
+								case 0x3F:
+								case 0x41:
+								case 0x43://Active spell effect
+										{
+											if (ActiveSpell[ActiveEffectIndex]!=null)
+											{
+												int effectId= ActiveSpell[ActiveEffectIndex].EffectID;
+														//int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
+												int byteToWrite =((effectId & 0xf0)>> 4) | ((effectId & 0xf) <<4);
+												DataLoader.WriteInt16(writer,byteToWrite);
+											}
+											else
+											{//No effect leave empty
+												DataLoader.WriteInt16(writer,0);		
+											}
+										ActiveEffectIndex++;
+										break;
+										}
+
+								case 0x3F+1:
+								case 0x41+1:
+								case 0x43+1://Active spell effect. 2nd byte do nothing here.
+										break;
+								case 0x45://Runebits
+								case 0x46://Runebits
+								case 0x47://Runebits
+										{
+											int RuneByte=0;
+											for (int r =7; r>=0; r--)
+											{
+												if (PlayerMagic.PlayerRunes[7-r+runeOffset]==true)
+												{
+													RuneByte |= (1<<r); 
+												}
+											}
+											DataLoader.WriteInt8(writer, RuneByte);
+											runeOffset+=8;
+											break;
+										}
+								case 0x48:
+										if (PlayerMagic.ActiveRunes[0]==-1)
+										{
+												DataLoader.WriteInt8(writer,24);	
+										}
+										else
+										{
+												DataLoader.WriteInt8(writer,PlayerMagic.ActiveRunes[0]);	
+										}
+										break;
+								case 0x49:
+										if (PlayerMagic.ActiveRunes[1]==-1)
+										{
+												DataLoader.WriteInt8(writer,24);	
+										}
+										else
+										{
+												DataLoader.WriteInt8(writer,PlayerMagic.ActiveRunes[1]);	
+										}
+										break;
+								case 0x4A:
+										if (PlayerMagic.ActiveRunes[2]==-1)
+										{
+												DataLoader.WriteInt8(writer,24);	
+										}
+										else
+										{
+												DataLoader.WriteInt8(writer,PlayerMagic.ActiveRunes[2]);	
+										}
+										break;
+								case 0x4D : ///   weight in 0.1 stones
+										//Or STR * 2; 
+										DataLoader.WriteInt16(writer,PlayerSkills.STR*2);
+										break;
+								case 0x4D+1://2nd Byte of weight. Ignore
+										break;
+								case 0x4F  : ///   experience in 0.1 points
+										DataLoader.WriteInt32(writer,EXP);break;
+								case 0x4F+1:
+								case 0x4F+2:
+								case 0x4F+3:
+										break;
+								case 0x53: // skillpoints available to spend
+								case 0x53+1:
+										DataLoader.WriteInt8(writer,TrainingPoints);break;
+								case 0x55 : ///   x-position in level
+										int x_position=(int)(this.transform.position.x*213f);
+										DataLoader.WriteInt16(writer,x_position);
+										break;
+								case 0x57  : ///   y-position
+										int y_position=(int)(this.transform.position.y*213f);
+										DataLoader.WriteInt16(writer,y_position);
+										break;
+								case 0x59 : ///   z-position
+										int z_position=(int)(this.transform.position.z*213f);
+										DataLoader.WriteInt16(writer,z_position);
+										break;
+								case 0x55+1 : ///   x-position in level
+								case 0x57+1  : ///   y-position
+								case 0x59+1 : ///   z-position
+										//Skip over int 16
+										break;
+								case 0x5C : ///   heading
+										{
+											float heading=this.transform.eulerAngles.y * (255f/360f);
+											DataLoader.WriteInt8(writer,(int)heading);break;
+											break;
+										}
+								case 0x5D  : ///   dungeon level										
+										DataLoader.WriteInt8(writer,GameWorldController.instance.LevelNo+1);break;
+								case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
+										{
+											int val = (ResurrectLevel & 0xf)<<4 | (MoonGateLevel & 0xf)	;
+											DataLoader.WriteInt8(writer,val);
+											break;
+										}
+								case 0x60  : ///    bits 2..5: play_poison
+										DataLoader.WriteInt8(writer,play_poison<<2);
+										break;
+								case 0x65: // hand, Gender & body, and class
+										{
+												//bit 1 = hand left/right
+												//bit 2-5 = gender & body
+												//bit 6-8 = class
+												int val=0;
+												if (!isLefty)
+												{
+														val |=1;
+												}
+												if (isFemale)
+												{
+														val |= ((Body*2) + 1) <<1;
+												}
+												else
+												{
+														val |= ((Body*2) + 1) <<1;	
+												}
+												val |=CharClass<<5;
+												DataLoader.WriteInt8(writer,val);break;
+												break;
+										}
+								case 0x66://Quest flags
+										{
+												int val = 0;
+												for (int b=0;b<32;b++)
+												{
+														val |= (quest().QuestVariables[b] & 0x1) << b;
+												}
+												DataLoader.WriteInt32(writer,val);
+												break;
+										}
+
+								case 0x66+1://Quest flags ignore
+								case 0x66+2://Quest flags ignore
+								case 0x66+3://Quest flags ignore
+										break;
+
+								case 0x6A:
+										DataLoader.WriteInt8(writer,quest().QuestVariables[32]);break;
+								case 0x6B:
+										DataLoader.WriteInt8(writer,quest().QuestVariables[33]);break;
+								case 0x6C:
+										DataLoader.WriteInt8(writer,quest().QuestVariables[34]);break;
+								case 0x6D:
+										DataLoader.WriteInt8(writer,quest().QuestVariables[35]);break;
+								case 0x6F://Garamon dream related?
+										DataLoader.WriteInt8(writer,quest().GaramonDream);break;
+
+								case 0x71://Game variables
+								case 0x72:
+								case 0x73:
+								case 0x74:
+								case 0x75:
+								case 0x76:
+								case 0x77:
+								case 0x78:
+								case 0x79:
+								case 0x7A:
+								case 0x7B:
+								case 0x7C:
+								case 0x7D:
+								case 0x7E:
+								case 0x7F:
+								case 0x80:
+								case 0x81:
+								case 0x82:
+								case 0x83:
+								case 0x84:
+								case 0x85:
+								case 0x86:
+								case 0x87:
+								case 0x88:
+								case 0x89:
+								case 0x8A:
+								case 0x8B:
+								case 0x8C:
+								case 0x8D:
+								case 0x8E:
+								case 0x8F:
+								case 0x90:
+										{
+											DataLoader.WriteInt8(writer,GameWorldController.instance.variables[i-0x71]);
+											break;
+										}
+
+
+								default://No value. Write 0
+										DataLoader.WriteInt8(writer,0);break;
+										break;
+
+								}	//endswitch
+						}
+
+				}
+
+				//write inventory.
+
+
+				writer.Close();
 
 		}
+
 
 
 }

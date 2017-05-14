@@ -88,7 +88,7 @@ public class CritterInfo : Loader {
 			for (int Animation = 0; Animation<8; Animation++)//The the animation slot
 			{
 				bool NoAngle=isAnimUnAngled(Animation);
-				int NoOfValid=0;
+				//int NoOfValid=0;
 
 				for (int Angle = 0; Angle<8; Angle++)//Each animation has every possible angle.
 				{
@@ -579,7 +579,7 @@ public class CritterInfo : Loader {
 				Palette pal= paletteToUse;
 				char[]critterFile;
 				//char[] auxpalval=new char[32];
-				Palette[] auxpal = new Palette[32];
+				//Palette[] auxpal = new Palette[32];
 				//int auxPalNo = PaletteNo;
 				int AddressPointer;
 
@@ -602,7 +602,7 @@ public class CritterInfo : Loader {
 						auxPalVal[j] =(char)DataLoader.getValAtAddress(critterFile, (AddressPointer)+(AuxPalNo * 32) + j, 8);
 				}
 
-				int i = 0;
+				//int i = 0;
 				int MaxWidth = 0;
 				int MaxHeight = 0;
 				int MaxHotSpotX = 0;

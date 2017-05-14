@@ -359,14 +359,14 @@ public class DataLoader :Loader {
 				//Util to return an uncompressed shock block. Will use this for all future lookups and replace old ones
 
 
-				int chunkId;
+				//int chunkId;
 				//  long chunkUnpackedLength;
 				//int chunkType=Compressed;//compression type
 				//long chunkPackedLength;
 				//long chunkContentType;
-				long filepos;
+				//long filepos;
 				//  long AddressOfBlockStart=0;
-				long address_pointer=4;
+				//long address_pointer=4;
 				//int blnLevelFound=0;    
 
 
@@ -385,7 +385,7 @@ public class DataLoader :Loader {
 										OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
 								}   
 								return chunkUnpackedLength;
-								break;
+
 						}
 				case 1: 
 						{//flat Compressed
@@ -398,7 +398,7 @@ public class DataLoader :Loader {
 
 								unpack_data(temp_ark,ref OutputChunk,chunkUnpackedLength);
 								return chunkUnpackedLength;
-								break;
+
 						}
 
 				case 3://Subdir compressed  //Just return the compressed data and unpack the sub chunks individually?
@@ -423,7 +423,7 @@ public class DataLoader :Loader {
 										OutputChunk[k]=tmpchunk[k-SubDirLength];
 								}
 								return chunkUnpackedLength;         
-								break;
+
 						}
 				case 2://Subdir uncompressed
 						//{
@@ -438,11 +438,57 @@ public class DataLoader :Loader {
 										OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
 								}   
 								return chunkUnpackedLength;
-								break;
+
 						}
 				}
 		}
 
+
+		/// <summary>
+		/// Writes an int8 to a file
+		/// </summary>
+		/// <param name="writer">Writer.</param>
+		/// <param name="val">Value.</param>
+		public static void WriteInt8(BinaryWriter writer, long val)
+		{
+				byte valOut= (byte)(val & 0xff);
+				writer.Write(valOut);
+		}
+
+
+		/// <summary>
+		/// Writes an int16 to a file
+		/// </summary>
+		/// <param name="writer">Writer.</param>
+		/// <param name="val">Value.</param>
+		public static void WriteInt16(BinaryWriter writer, long val)
+		{
+				byte valOut= (byte)(val & 0xff);
+				writer.Write(valOut);
+
+				valOut= (byte)(val >>8 & 0xff);
+				writer.Write(valOut);
+		}
+
+		/// <summary>
+		/// Writes an int32 to file
+		/// </summary>
+		/// <param name="writer">Writer.</param>
+		/// <param name="val">Value.</param>
+		public static void WriteInt32(BinaryWriter writer, long val)
+		{
+				byte valOut= (byte)(val & 0xff);
+				writer.Write(valOut);
+
+				valOut= (byte)(val >>8 & 0xff);
+				writer.Write(valOut);
+
+				valOut= (byte)(val >> 16 & 0xff);
+				writer.Write(valOut);
+
+				valOut= (byte)(val >>24 & 0xff);
+				writer.Write(valOut);
+		}
 
 
 }

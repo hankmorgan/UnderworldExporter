@@ -62,7 +62,7 @@ public class CommonObjectDatLoader : Loader {
 		{
 				
 				char[] comobj_dat;
-				int add_ptr;
+				//int add_ptr;
 				if (DataLoader.ReadStreamFile(BasePath+"\\data\\comobj.dat",out comobj_dat))
 							{
 						int len= (comobj_dat.GetUpperBound(0)-2)/11;

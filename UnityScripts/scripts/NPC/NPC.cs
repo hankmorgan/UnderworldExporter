@@ -971,7 +971,7 @@ public class NPC : object_base {
 	/// <param name="pAnim">P animation.</param>
 	/// <param name="newState">New state.</param>
 		/// Obsolete. Used by the legacy animator
-	void playAnimation(string pAnim, int newState)
+/*	void playAnimation(string pAnim, int newState)
 	{
 				return;
 				curranim=newState;
@@ -987,7 +987,7 @@ public class NPC : object_base {
 		//currentState=newState;
 		//CurrentAnim=pAnim;
 		//anim.Play(pAnim);
-		}
+		}*/
 
 	/// <summary>
 	/// NPC tries to hit the player.

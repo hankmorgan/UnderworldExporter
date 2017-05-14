@@ -93,7 +93,7 @@ public class TextureLoader : ArtLoader {
 										return base.LoadImageAt(index);
 									}
 								}
-								break;
+								//break;
 						}
 					}
 

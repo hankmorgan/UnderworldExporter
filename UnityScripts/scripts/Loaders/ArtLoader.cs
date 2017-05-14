@@ -284,7 +284,7 @@ public class ArtLoader : Loader {
 		// UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
 		// This one is also almost directly from Jim Cameron's code.
 		public void UncompressBitmap(char[] chunk_bits, long chunk_ptr, out char[] outbits, int numbits) {
-				int j=0;
+				//int j=0;
 				int i;
 				int xc;
 				// unsigned char *bits_end;

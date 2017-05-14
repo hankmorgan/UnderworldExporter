@@ -186,8 +186,8 @@ public class ObjectLoader : Loader {
 				int ObjectSubClass;
 				int ObjectSubClassIndex;
 
-				int[] MasterAddressLookup=new int[1600];
-				long address_pointer=4;	
+				//int[] MasterAddressLookup=new int[1600];
+				//long address_pointer=4;	
 
 				//unsigned char *archive_ark;	//the full file.
 
@@ -1755,7 +1755,7 @@ public class ObjectLoader : Loader {
 										//fprintf(LOGFILE,"\tLog Chunk %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]);
 										//fprintf(LOGFILE,"\tLevel %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]);
 										return true;
-										break;
+										//break;
 									}
 							case FIXTURES:
 									{
@@ -1788,7 +1788,7 @@ public class ObjectLoader : Loader {
 															{
 																	//based on SSHP interpretation
 																	int[] fontID = { 4, 7, 0, 10 };
-																	float[] scale= { 1.0f, 0.75f, 0.5f, 0.25f };
+																	//float[] scale= { 1.0f, 0.75f, 0.5f, 0.25f };
 																	//fprintf(LOGFILE,"Words:");
 																		objList[objIndex].shockProperties[WORDS_STRING_NO] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 6, 16);
 																		//fprintf(LOGFILE,"\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark.data, add_ptr + 6, 16));
@@ -1888,7 +1888,7 @@ public class ObjectLoader : Loader {
 
 
 											return true;
-											break;
+										//	break;
 									}
 							case GETTABLES_OTHER:
 									{
@@ -1910,7 +1910,7 @@ public class ObjectLoader : Loader {
 											//}
 
 												return true;
-											break;
+											//break;
 									}
 							case SWITCHES_PANELS:
 									{
@@ -1923,7 +1923,7 @@ public class ObjectLoader : Loader {
 											objList[objIndex].TriggerAction = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+6,16);
 											getShockButtons(LevelInfo,sub_ark,add_ptr,objList,objIndex);
 											return true;
-											break;
+											//break;
 									}
 							case DOORS_GRATINGS:
 									{
@@ -1945,7 +1945,7 @@ public class ObjectLoader : Loader {
 											//	fprintf(LOGFILE,"\tAccess Required:%d", getValAtAddress(sub_ark.data, add_ptr + 0xA, 8));
 											//	fprintf(LOGFILE, "\tOther val:%d\n", getValAtAddress(sub_ark.data, add_ptr + 0xB, 16));
 												return true;
-											break;
+											//break;
 									}
 							case	TRAPS_MARKERS: //and triggers too
 									{
@@ -1984,7 +1984,7 @@ public class ObjectLoader : Loader {
 
 
 											return true;
-											break;
+											//break;
 										}
 											case CONTAINERS_CORPSES:
 											//fprintf(LOGFILE,"\n\tContainer Properties\n");
@@ -2007,7 +2007,7 @@ public class ObjectLoader : Loader {
 											//fprintf(LOGFILE,"\tTop : %d", objList[objIndex].shockProperties[CONTAINER_TOP]);
 											//fprintf(LOGFILE,"\tSide : %d", objList[objIndex].shockProperties[CONTAINER_SIDE]);
 											return true;
-											break;
+											//break;
 									
 							case CRITTERS:
 									//fprintf(LOGFILE,"\Critter Properties\n");
@@ -2016,7 +2016,7 @@ public class ObjectLoader : Loader {
 										//fprintf(LOGFILE,"\tj=%d val(16) = %d\n", j, getValAtAddress(sub_ark.data, add_ptr + j, 16));
 									//}
 									return true;
-									break;
+									//break;
 							}
 					}
 					add_ptr+=RecordSize;
@@ -2034,7 +2034,7 @@ public class ObjectLoader : Loader {
 		void getShockTriggerAction(TileInfo[,] LevelInfo,DataLoader.Chunk sub_ark, int add_ptr, xrefTable[] xRef, ObjectLoaderInfo[] objList, int objIndex)
 		{
 				//Look up what a trigger does in system shock. Different trigger types activate other triggers/ do things in different ways.
-				short PrintDebug = 1;// (objList[objIndex].item_id == 384);
+				//short PrintDebug = 1;// (objList[objIndex].item_id == 384);
 				//fprintf(LOGFILE,"",UniqueObjectName(objList[objIndex]));	//Weirdness with garbage info getting printed out?
 				int TriggerType =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+6,8);
 				objList[objIndex].TriggerAction = TriggerType;

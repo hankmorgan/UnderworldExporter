@@ -6,7 +6,7 @@ public class Wand : enchantment_base {
 	//private int SpellObjectQuantity;
 	private int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
 	private int SpellObjectOwnerToCreate=0;
-	private int SpellObjectLinkToCreate=0;
+	//private int SpellObjectLinkToCreate=0;
 
 	protected override void Start ()
 	{
@@ -143,7 +143,7 @@ public class Wand : enchantment_base {
 				{		
 					SpellObjectOwnerToCreate = spell.objInt().owner;	
 					SpellObjectQualityToCreate = spell.objInt().quality;
-					SpellObjectLinkToCreate=spell.objInt().link;
+					//SpellObjectLinkToCreate=spell.objInt().link;
 					//Flag the spell trap as not being in use and change it's type to a fist so it will not persist.
 					//Assumes spell traps are all stored off map
 					spell.objInt().objectloaderinfo.InUseFlag=0;

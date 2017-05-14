@@ -6,7 +6,7 @@ public class WeaponsLoader : ArtLoader {
 		const int   repeat_record= 1;
 		const int   run_record= 2;
 
-	int NoOfImages=0;
+	//int NoOfImages=0;
 
 
 		protected Texture2D[] ImageCache=new Texture2D[1];
