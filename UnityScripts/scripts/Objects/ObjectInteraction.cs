@@ -12,7 +12,7 @@ using RAIN.Navigation;
 /// </summary>
 public class ObjectInteraction : UWEBase {
 
-		public int debugindex;
+		//public int debugindex;
 		public int canbeowned;
 
 		/// <summary>

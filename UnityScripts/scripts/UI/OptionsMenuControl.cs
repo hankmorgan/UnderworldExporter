@@ -379,14 +379,21 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="SlotNo">Slot no.</param>
 		private void SaveToSlot(int SlotNo)
 		{
-			//Write a desc file
-			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
-			//Write a player.dat file
-			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo+1);
+
 			//Write lev.ark file and object lists
 			GameWorldController.instance.WriteBackLevArk(SlotNo+1);
 			//Write bglobals.dat
 			GameWorldController.instance.WriteBGlobals(SlotNo+1);
+
+			//Write a desc file
+			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
+			//Write a player.dat file
+			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo+1);
+
+
+				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+				ReturnToGame();
+
 		}
 
 

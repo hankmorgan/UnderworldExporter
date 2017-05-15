@@ -1324,20 +1324,20 @@ public class ObjectLoader : Loader {
 		/// <summary>
 		/// Creates the new object list with just the items in the object marker.
 		/// </summary>
-		public static void UpdateObjectList()
+		public static void UpdateObjectList(TileMap currTileMap, ObjectLoader currObjList)
 		{
-			TileMap currTileMap= GameWorldController.instance.currentTileMap();
-			ObjectLoader currObjList = GameWorldController.instance.CurrentObjectList();
+			//TileMap currTileMap= GameWorldController.instance.currentTileMap();
+			//ObjectLoader currObjList = GameWorldController.instance.CurrentObjectList();
 			int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
 			//Update indices to match the array.
 
-				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
+			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
 				currObjList.objInfo[i].index=i;
 				currObjList.objInfo[i].next=0;
 					if (currObjList.objInfo[i].instance!=null)
 					{
-						currObjList.objInfo[i].instance.debugindex=i;
+						//currObjList.objInfo[i].instance.debugindex=i;
 						currObjList.objInfo[i].instance.next=0;				
 					}
 				
@@ -1345,12 +1345,16 @@ public class ObjectLoader : Loader {
 				//GameWorldController.instance.CurrentObjectList().objInfo[i].tileY=99;
 			}
 
-			//Clear the tilemaps indexobjectlist
-			for (int x=0;x<64;x++){
-				for (int y=0;y<64;y++){
-					currTileMap.Tiles[x,y].indexObjectList=0;
-				}
+			if (currTileMap!=null)
+			{
+					//Clear the tilemaps indexobjectlist
+					for (int x=0;x<64;x++){
+							for (int y=0;y<64;y++){
+									currTileMap.Tiles[x,y].indexObjectList=0;
+							}
+					}		
 			}
+
 			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
 			{
 				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
@@ -1401,13 +1405,104 @@ public class ObjectLoader : Loader {
 								}	
 						}
 				}
-
-
-
-				//}
-			//}
 		}
 
+
+		/// <summary>
+		/// Creates the new object list with just the items in the object marker.
+		/// </summary>
+		/// <returns>The inventory object list.</returns>
+		public static string[] UpdateInventoryObjectList()
+		{
+			int NoOfInventoryItems=0;
+			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
+				if (child!=null)
+				{
+					NoOfInventoryItems++;	
+					//Initialise the next value to zero.
+					child.gameObject.GetComponent<ObjectInteraction>().next=0;
+				}
+			}
+			//Store the objects in an array to give them indices
+			string[] InventoryObjects= new string[NoOfInventoryItems];
+			int i=0;
+			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
+				if (child!=null)
+				{
+						InventoryObjects[i++]=child.name;	
+				}
+			}
+
+			int itemIndex=0;
+			//Go through each slot
+			PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory;
+			for (int s=0; s<=18;s++)
+			{
+				GameObject obj;
+				if (s<=10)//Paperdoll objects
+				{
+					obj=pInv.GetGameObjectAtSlot(s);	
+				}
+				else
+				{
+					obj= pInv.playerContainer.GetGameObjectAt(11-s);		
+				}
+				if(obj!=null)
+				{
+					if (obj.GetComponent<Container>()!=null)		
+					{
+						linkInventoryContainers(obj.GetComponent<Container>(), ref InventoryObjects);	
+					}							
+				}
+			}
+			return InventoryObjects;
+		}
+
+
+		/// <summary>
+		/// Links the inventory list containers.
+		/// </summary>
+		/// <param name="cn">Cn.</param>
+		/// <param name="InventoryObjects">Inventory objects.</param>
+		static void linkInventoryContainers(Container cn, ref string[] InventoryObjects)
+		{
+			bool cnLinked=false;
+			cn.gameObject.GetComponent<ObjectInteraction>().link=0;//Initially unlinked.
+			int index= System.Array.IndexOf(InventoryObjects,cn.name)+64;
+			GameObject prev=null;
+			//int newindex=index;
+			//For each spot in the container
+			for (int i=0; i<=cn.MaxCapacity();i++)
+			{
+				//Get the item name in the container
+				string itemname=cn.GetItemAt(i);
+				if (itemname!="")
+				{
+					//Get the object
+					GameObject obj = GameObject.Find(itemname);
+					if (obj!=null)
+					{
+						index= System.Array.IndexOf(InventoryObjects,obj.name)+64;
+						if (cnLinked==false)	
+						{//The container is first linked to this object							
+							cn.gameObject.GetComponent<ObjectInteraction>().link = index;
+							cnLinked=true;
+							prev=obj;
+						}
+						else
+						{//The object needs to be a next of the previous object
+							//index= System.Array.IndexOf(InventoryObjects,obj.name);
+							prev.GetComponent<ObjectInteraction>().next=index;
+							prev=obj;
+						}						
+						if (obj.GetComponent<Container>()!=null)
+						{//if a container then link the items in that container.
+							linkInventoryContainers(obj.GetComponent<Container>(), ref InventoryObjects);	
+						}
+					}
+				}
+			}
+		}
 
 		static void linkContainerContents(Container cn)
 		{

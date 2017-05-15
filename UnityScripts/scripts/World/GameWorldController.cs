@@ -582,7 +582,7 @@ public class GameWorldController : UWEBase {
 
 					if (UWEBase.EditorMode==false)
 					{
-						ObjectLoader.UpdateObjectList();		
+						ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 					}
 					//Store the state of the object list with just the objects in objects transform for when I re
 					
@@ -828,7 +828,8 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		public void WriteBackLevArk(int slotNo)
 		{
-				ObjectLoader.UpdateObjectList();
+				//ObjectLoader.UpdateObjectList();
+				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());	
 				//Write back tile states
 				for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
 				{

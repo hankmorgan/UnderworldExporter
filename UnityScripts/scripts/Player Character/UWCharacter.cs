@@ -9,11 +9,12 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
+		public int XorKey=206;
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
 		//public 	int heading;
-		public int testvalue;
+		public float testvalue=0.4f;
 		public int indextochange;
 		public int newvalue;
 		public int newvaluesize=8;
@@ -836,6 +837,7 @@ public class UWCharacter : Character {
 
 						TileMap.OnWater=false;
 						int xOrValue= (int)buffer[0];
+						XorKey=xOrValue;
 						int incrnum = 3;
 
 						for(int i=1; i<220; i++)
@@ -927,10 +929,6 @@ public class UWCharacter : Character {
 										case 0x3F:
 										case 0x41:
 										case 0x43://Active spell effect
-												if(i==0x3f)
-												{
-														testvalue= (int)DataLoader.getValAtAddress(buffer,i,16);		
-												}
 												GetActiveSpellID((int)buffer[i]);break;
 
 										case 0x45://Runebits
@@ -1098,7 +1096,8 @@ public class UWCharacter : Character {
 
 						//float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
 						float Ratio=213f;
-						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +0.4f ,(float)y_position/Ratio);
+						float VertAdjust = 0.3543672f;
+						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
 
 						//Read in the inventory
 						//Stored in much the same way as an linked object list is.
@@ -1291,12 +1290,25 @@ public class UWCharacter : Character {
 		/// <param name="slotNo">Slot no.</param>
 		public void WritePlayerDat(int slotNo)
 		{
+				float Ratio=213f;
+				float VertAdjust = 0.3543672f;
+
+				//****Hardcoded values
+				int[] hardcoded = {
+						16,	16,	16,	16,	16,	240,	240,	240,	240,	240,	240,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	37,	24,	16,	16,	16,	16,	143,	112,	112,	112,	112,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	48,	16,	16,	16,	50,	33,	251,	241,	118,	122,	2,	160,	227,	22,	137,	140,	143,	0,	34,	0,	0,	0,	48,	0,	0,	0,	0,	0,	0,	0,	0,	44,	32,	128,	0,	0,	253,	0,	0,	0,	0,	0,	0,	0,	0
+				};
+
+				//*****
 				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\playertmp.dat",FileMode.Create);
 				BinaryWriter writer= new BinaryWriter(file);
 				int ActiveEffectIndex=0;
 				int runeOffset=0;
+
+				//update inventory linking
+				string[] inventoryObjects= ObjectLoader.UpdateInventoryObjectList();
+
+
 				//Write the XOR Key
-				int XorKey=206;
 				DataLoader.WriteInt8(writer,XorKey);
 				//I'm lazy. I'm going to write a temp file and then re-encode using the key.
 				for (int i=1; i<312;i++)
@@ -1451,7 +1463,7 @@ public class UWCharacter : Character {
 										break;
 								case 0x4D : ///   weight in 0.1 stones
 										//Or STR * 2; 
-										DataLoader.WriteInt16(writer,PlayerSkills.STR*2);
+										DataLoader.WriteInt16(writer,PlayerSkills.STR*2*10);
 										break;
 								case 0x4D+1://2nd Byte of weight. Ignore
 										break;
@@ -1462,18 +1474,17 @@ public class UWCharacter : Character {
 								case 0x4F+3:
 										break;
 								case 0x53: // skillpoints available to spend
-								case 0x53+1:
 										DataLoader.WriteInt8(writer,TrainingPoints);break;
 								case 0x55 : ///   x-position in level
-										int x_position=(int)(this.transform.position.x*213f);
+										int x_position=(int)(this.transform.position.x*Ratio);
 										DataLoader.WriteInt16(writer,x_position);
 										break;
 								case 0x57  : ///   y-position
-										int y_position=(int)(this.transform.position.y*213f);
+										int y_position=(int)(this.transform.position.z*Ratio);
 										DataLoader.WriteInt16(writer,y_position);
 										break;
 								case 0x59 : ///   z-position
-										int z_position=(int)(this.transform.position.z*213f);
+										int z_position=(int)((this.transform.position.y - VertAdjust)  * (Ratio));
 										DataLoader.WriteInt16(writer,z_position);
 										break;
 								case 0x55+1 : ///   x-position in level
@@ -1514,7 +1525,7 @@ public class UWCharacter : Character {
 												}
 												else
 												{
-														val |= ((Body*2) + 1) <<1;	
+														val |= ((Body*2) ) <<1;	
 												}
 												val |=CharClass<<5;
 												DataLoader.WriteInt8(writer,val);break;
@@ -1544,6 +1555,8 @@ public class UWCharacter : Character {
 										DataLoader.WriteInt8(writer,quest().QuestVariables[34]);break;
 								case 0x6D:
 										DataLoader.WriteInt8(writer,quest().QuestVariables[35]);break;
+								case 0x6E://Is always 8???
+										DataLoader.WriteInt8(writer,8);break;
 								case 0x6F://Garamon dream related?
 										DataLoader.WriteInt8(writer,quest().GaramonDream);break;
 
@@ -1584,23 +1597,284 @@ public class UWCharacter : Character {
 											break;
 										}
 
+										//Unknown values (possibly hardcoded)
+								case 0xA1:
+								case 0xA2:
+								case 0xA3:
+								case 0xA4:
+								case 0xA5:
+								case 0xA6:
+								case 0xA7:
+								case 0xA8:
+								case 0xA9:
+								case 0xAA:
+								case 0xAB:
+								case 0xAC:
+								case 0xAD:
+								case 0xAE:
+								case 0xAF:
+								case 0xB0:
+								case 0xB1:
+								case 0xB2:
+								case 0xB3:
+								case 0xB4:
+								case 0xB5:
+								case 0xB6:
+								case 0xB7:
+								case 0xB8:
+								case 0xB9:
+								case 0xBA:
+								case 0xBB:
+								case 0xBC:
+								case 0xBD:
+								case 0xBE:
+								case 0xBF:
+								case 0xC0:
+								case 0xC1:
+								case 0xC2:
+								case 0xC3:
+								case 0xC4:
+								case 0xC5:
+								case 0xC6:
+								case 0xC7:
+								case 0xC8:
+								case 0xC9:
+								case 0xCA:
+								case 0xCB:
+								case 0xCC:
+								case 0xCD:
+								case 0xCE:
+								//case 0xCF:
+								//case 0xD0:
+								//case 0xD1:
+								//case 0xD2:
+								case 0xD3:
+								case 0xD4:
+								case 0xD5:
+								case 0xD6:
+								case 0xD7:
+								case 0xD8:
+								case 0xD9:
+								case 0xDA:
+								case 0xDB:
+								case 0xDC:
+								//case 0xDD:
+								case 0xDE:
+								case 0xDF:
+								case 0xE0:
+								case 0xE1:
+								case 0xE2:
+								case 0xE3:
+								case 0xE4:
+								case 0xE5:
+								case 0xE6:
+								case 0xE7:
+								case 0xE8:
+								case 0xE9:
+								case 0xEA:
+								case 0xEB:
+								case 0xEC:
+								case 0xED:
+								case 0xEE:
+								case 0xEF:
+								case 0xF0:
+								case 0xF1:
+								case 0xF2:
+								case 0xF3:
+								case 0xF4:
+								case 0xF5:
+								case 0xF6:
+								case 0xF7:
+										DataLoader.WriteInt8(writer,hardcoded[i-161]);break;
+										break;
 
-								default://No value. Write 0
+								case 0xCF  : ///   game time
+										DataLoader.WriteInt32(writer,game_time);break;
+										break;
+								case 0xD0://gametime ignore
+								case 0xD1:
+								case 0xD2:
+										break;
+
+								case 0xDD://Duplicate curvit
+										DataLoader.WriteInt8(writer,CurVIT);break;
+										break;
+
+								case 0xF8: // Helm (all of these subsequent values are indices into the object list at offset 312
+										WriteInventoryIndex(writer, inventoryObjects,0);break;
+								case 0xF9: // Helm ignore
+										break;
+								case 0xFA: // Chest
+										WriteInventoryIndex(writer, inventoryObjects,1);break;
+								case 0xFB: // Chest ignore
+										break;
+								case 0xFC: // Gloves
+										WriteInventoryIndex(writer, inventoryObjects,4);break;
+								case 0xFD: // Gloves ignore
+										break;
+								case 0xFE: // Leggings
+										WriteInventoryIndex(writer, inventoryObjects,2);break;
+								case 0xFF: // Leggings ignore
+										break;
+								case 0x100: // Boots
+										WriteInventoryIndex(writer, inventoryObjects,3);break;
+								case 0x101: // Boots ignore
+										break;
+								case 0x102: // TopRightShoulder
+										WriteInventoryIndex(writer, inventoryObjects,5);break;
+								case 0x103: // TopRightShoulder ignore
+										break;
+								case 0x104: // TopLeftShoulder
+										WriteInventoryIndex(writer, inventoryObjects,6);break;
+								case 0x105: // TopLeftShoulder ignore
+										break;
+								case 0x106: // Righthand
+										WriteInventoryIndex(writer, inventoryObjects,7);break;
+								case 0x107: // Righthand ignore
+										break;
+								case 0x108: // LeftHand
+										WriteInventoryIndex(writer, inventoryObjects,8);break;
+								case 0x109: // LeftHand ignore
+										break;
+								case 0x10A: // RightRing
+										WriteInventoryIndex(writer, inventoryObjects,9);break;
+								case 0x10B: // RightRing ignore
+										break;
+								case 0x10C: // LeftRing
+										WriteInventoryIndex(writer, inventoryObjects,10);break;
+								case 0x10D: // LeftRing ignore
+										break;
+								case 0x10E: // Backpack0
+										WriteInventoryIndex(writer, inventoryObjects,11);break;
+								case 0x10F: // Backpack0 ignore
+										break;
+								case 0x110: // Backpack1
+										WriteInventoryIndex(writer, inventoryObjects,12);break;
+								case 0x111: // Backpack1 ignore
+										break;
+								case 0x112: // Backpack2
+										WriteInventoryIndex(writer, inventoryObjects,13);break;
+								case 0x113: // Backpack2 ignore
+										break;
+								case 0x114: // Backpack3
+										WriteInventoryIndex(writer, inventoryObjects,14);break;
+								case 0x115: // Backpack3 ignore
+										break;
+								case 0x116: // Backpack4
+										WriteInventoryIndex(writer, inventoryObjects,15);break;
+								case 0x117: // Backpack4 ignore
+										break;
+								case 0x118: // Backpack5
+										WriteInventoryIndex(writer, inventoryObjects,16);break;
+								case 0x119: // Backpack5 ignore
+										break;
+								case 0x11A: // Backpack6
+										WriteInventoryIndex(writer, inventoryObjects,17);break;
+								case 0x11B: // Backpack6 ignore
+										break;
+								case 0x11C: // Backpack7
+										WriteInventoryIndex(writer, inventoryObjects,18);break;
+								case 0x11D: // Backpack7 ignore
+										break;	
+
+								default://No value. Write 0									
 										DataLoader.WriteInt8(writer,0);break;
+
 										break;
 
 								}	//endswitch
+
+
 						}
 
 				}
 
-				//write inventory.
+				//ALl things going well I should be at byte no 312 where I can write the inventory info.
+				for (int o =0; o<=inventoryObjects.GetUpperBound(0); o++)
+				{
+						GameObject obj = GameObject.Find(inventoryObjects[o]);
+						if (obj!=null)
+						{
+								ObjectInteraction currobj = obj.GetComponent<ObjectInteraction>();
+								int ByteToWrite= (currobj.isquant << 15) |
+										(currobj.invis << 14) |
+										(currobj.doordir << 13) |
+										(currobj.enchantment << 12) |
+										((currobj.flags & 0x0F) << 9) |
+										(currobj.item_id & 0x1FF) ;
+							
+								DataLoader.WriteInt8(writer,(ByteToWrite & 0xFF));
+								DataLoader.WriteInt8(writer,((ByteToWrite>>8) & 0xFF));
+
+								ByteToWrite = ((currobj.x & 0x7) << 13) |
+										((currobj.y & 0x7) << 10) |
+										((currobj.heading & 0x7) << 7) |
+										((currobj.zpos & 0x7F));
+								DataLoader.WriteInt8(writer,(ByteToWrite & 0xFF));
+								DataLoader.WriteInt8(writer,((ByteToWrite>>8) & 0xFF));
+
+								ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
+										(currobj.quality & 0x3F); 
+								DataLoader.WriteInt8(writer,(ByteToWrite & 0xFF));
+								DataLoader.WriteInt8(writer,((ByteToWrite>>8) & 0xFF));	
+
+								ByteToWrite = ((currobj.link & 0x3FF)<<6) |
+										(currobj.owner & 0x3F); 
+								DataLoader.WriteInt8(writer,(ByteToWrite & 0xFF));
+								DataLoader.WriteInt8(writer,((ByteToWrite>>8) & 0xFF));	
+						}
+				}
 
 
 				writer.Close();
 
+				char[] buffer;
+				//Reopen and encrypt the file
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\playertmp.dat", out buffer))
+				{
+						int xOrValue= (int)buffer[0];
+						int incrnum = 3;
+						for(int i=1; i<220; i++)
+						{
+								if (i==81) 
+								{
+										incrnum = 3;
+								}
+								buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+								incrnum += 3;
+						}
+
+						byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+						for (long i=0; i<=buffer.GetUpperBound(0);i++)
+						{
+								dataToWrite[i] = (byte)buffer[i];
+						}
+						File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\playertmpEnc.dat", dataToWrite);
+
+				}				
+
 		}
 
-
+		static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, int slotIndex)
+		{
+			string itemAtSlot="";
+			if (slotIndex<=10)
+			{
+				itemAtSlot = GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex);	
+			}
+			else
+			{
+				itemAtSlot = GameWorldController.instance.playerUW.playerInventory.playerContainer.GetItemAt(11-slotIndex);
+			}
+			if (itemAtSlot!="")
+			{
+				int index = System.Array.IndexOf(InventoryObjects,itemAtSlot)+64;
+				DataLoader.WriteInt16(writer, index);
+			}
+			else
+			{
+				DataLoader.WriteInt16(writer, 0);
+			}
+		}
 
 }
