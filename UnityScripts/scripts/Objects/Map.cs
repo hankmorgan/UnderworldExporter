@@ -60,4 +60,16 @@ public class Map : object_base {
 			}
 		return true;
 	}
+
+	public override bool PickupEvent ()
+	{//If this value is not set then then vanilla underworld will crash when loading a saved game while holding a map.
+		objInt().isquant=1;
+		return true;
+	}
+
+	public override bool DropEvent ()
+	{
+		objInt().isquant=0;
+		return true;
+	}
 }

@@ -9,7 +9,7 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
-		public int XorKey=206;
+		public int XorKey=0xD9;
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
@@ -1114,6 +1114,7 @@ public class UWCharacter : Character {
 								while (i < buffer.GetUpperBound(0))
 								{
 										objLoader.objInfo[x] = new ObjectLoaderInfo();
+										objLoader.objInfo[x].index=x;
 										objLoader.objInfo[x].parentList=objLoader;
 										objLoader.objInfo[x].tileX=99;
 										objLoader.objInfo[x].tileY=99;
@@ -1205,6 +1206,8 @@ public class UWCharacter : Character {
 
 						}
 
+						//Change the XOR Key back to D9
+						XorKey= 0xD9; 
 
 						if (decode)
 						{
@@ -1214,10 +1217,10 @@ public class UWCharacter : Character {
 								{
 										dataToWrite[i] = (byte)buffer[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded.dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded_" + slotNo + ".dat", dataToWrite);
 						}
 
-						if (recode)//Rewrite the file with test value changes.
+					/*	if (recode)//Rewrite the file with test value changes.
 						{
 								xOrValue= (int)buffer[0];
 								incrnum = 3;
@@ -1242,7 +1245,7 @@ public class UWCharacter : Character {
 										dataToWrite[i] = (byte)buffer[i];
 								}
 								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\recoded.dat", dataToWrite);
-						}
+						}*/
 
 
 				}
@@ -1316,7 +1319,7 @@ public class UWCharacter : Character {
 
 						if (i<14)
 						{
-								if (i-1 <= CharName.Length)	
+								if (i-1 < CharName.Length)	
 								{
 									char alpha = CharName.ToCharArray()[i-1];
 									DataLoader.WriteInt8(writer,(int)alpha);
@@ -1461,6 +1464,12 @@ public class UWCharacter : Character {
 												DataLoader.WriteInt8(writer,PlayerMagic.ActiveRunes[2]);	
 										}
 										break;
+								case 0x4B:
+										{//No of inventory items?
+												DataLoader.WriteInt8(writer,inventoryObjects.GetUpperBound(0)<<2);
+												break;
+										}
+
 								case 0x4D : ///   weight in 0.1 stones
 										//Or STR * 2; 
 										DataLoader.WriteInt16(writer,PlayerSkills.STR*2*10);
@@ -1648,7 +1657,7 @@ public class UWCharacter : Character {
 								//case 0xD0:
 								//case 0xD1:
 								//case 0xD2:
-								case 0xD3:
+								//case 0xD3://Unknown inventory related
 								case 0xD4:
 								case 0xD5:
 								case 0xD6:
@@ -1656,7 +1665,7 @@ public class UWCharacter : Character {
 								case 0xD8:
 								case 0xD9:
 								case 0xDA:
-								case 0xDB:
+								//case 0xDB://Unknown inventory related
 								case 0xDC:
 								//case 0xDD:
 								case 0xDE:
@@ -1695,7 +1704,26 @@ public class UWCharacter : Character {
 								case 0xD1:
 								case 0xD2:
 										break;
-
+								case 0xD3:
+										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
+										{//player has inventory. Not sure where these values come from
+												DataLoader.WriteInt8(writer,0x60);break;	
+										}
+										else
+										{
+												DataLoader.WriteInt8(writer,0x63);break;	
+										}
+										break;
+								case 0xDB:
+										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
+										{//player has inventory. Not sure where these values come from
+												DataLoader.WriteInt8(writer,0x3A);break;	
+										}
+										else
+										{
+												DataLoader.WriteInt8(writer,0x7A);break;	
+										}
+										break;
 								case 0xDD://Duplicate curvit
 										DataLoader.WriteInt8(writer,CurVIT);break;
 										break;
@@ -1790,6 +1818,8 @@ public class UWCharacter : Character {
 				}
 
 				//ALl things going well I should be at byte no 312 where I can write the inventory info.
+
+
 				for (int o =0; o<=inventoryObjects.GetUpperBound(0); o++)
 				{
 						GameObject obj = GameObject.Find(inventoryObjects[o]);
@@ -1849,7 +1879,7 @@ public class UWCharacter : Character {
 						{
 								dataToWrite[i] = (byte)buffer[i];
 						}
-						File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\playertmpEnc.dat", dataToWrite);
+						File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\player.dat", dataToWrite);
 
 				}				
 
@@ -1864,11 +1894,11 @@ public class UWCharacter : Character {
 			}
 			else
 			{
-				itemAtSlot = GameWorldController.instance.playerUW.playerInventory.playerContainer.GetItemAt(11-slotIndex);
+				itemAtSlot = GameWorldController.instance.playerUW.playerInventory.playerContainer.GetItemAt(slotIndex-11);
 			}
 			if (itemAtSlot!="")
 			{
-				int index = System.Array.IndexOf(InventoryObjects,itemAtSlot)+64;
+				int index =((System.Array.IndexOf(InventoryObjects,itemAtSlot)+1)<<6);//64
 				DataLoader.WriteInt16(writer, index);
 			}
 			else

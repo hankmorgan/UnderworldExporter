@@ -313,7 +313,9 @@ public class WindowDetectUW : WindowDetect {
 
 										GameObject droppedItem = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 
+
 										droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+										droppedItem.GetComponent<ObjectInteraction>().Drop();
 										droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
 
 										if (droppedItem.GetComponent<Container>()!=null)

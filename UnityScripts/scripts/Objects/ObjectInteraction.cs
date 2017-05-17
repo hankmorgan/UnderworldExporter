@@ -501,6 +501,23 @@ public class ObjectInteraction : UWEBase {
 		}
 
 		/// <summary>
+		/// Events to call when the object is dropped and thrown in the world..
+		/// </summary>
+		public bool Drop()
+		{
+				object_base item=null;
+				item=this.GetComponent<object_base>();
+				if (item!=null)
+				{
+						return(item.DropEvent());
+				}
+				else
+				{
+						return false;
+				}	
+		}
+
+		/// <summary>
 		/// What happens when the item is put away.
 		/// </summary>
 		/// <returns><c>true</c>, if item away was put, <c>false</c> otherwise.</returns>

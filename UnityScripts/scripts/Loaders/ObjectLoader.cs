@@ -1414,7 +1414,9 @@ public class ObjectLoader : Loader {
 		/// <returns>The inventory object list.</returns>
 		public static string[] UpdateInventoryObjectList()
 		{
+			PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory;
 			int NoOfInventoryItems=0;
+			GameObject Prev=null;
 			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
 				if (child!=null)
 				{
@@ -1426,16 +1428,36 @@ public class ObjectLoader : Loader {
 			//Store the objects in an array to give them indices
 			string[] InventoryObjects= new string[NoOfInventoryItems];
 			int i=0;
+				//First add the objects on the paperdoll to the so that they are first.
+				for (int s=0; s<=18;s++)
+				{
+						string objName="";
+					if (s<=10)//Paperdoll objects
+						{
+						objName = pInv.GetObjectAtSlot(s);
+						}
+					else
+						{
+							objName =pInv.playerContainer.GetItemAt(s-11);		
+						}
+						if (objName!="")
+						{
+							InventoryObjects[i++]=objName;
+						}
+				}
 			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
 				if (child!=null)
 				{
-						InventoryObjects[i++]=child.name;	
+					if (System.Array.IndexOf(InventoryObjects,child.name)<0)//No match.
+					{
+							InventoryObjects[i++]=child.name;	
+					}						
 				}
 			}
 
 			int itemIndex=0;
 			//Go through each slot
-			PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory;
+			
 			for (int s=0; s<=18;s++)
 			{
 				GameObject obj;
@@ -1445,14 +1467,19 @@ public class ObjectLoader : Loader {
 				}
 				else
 				{
-					obj= pInv.playerContainer.GetGameObjectAt(11-s);		
+					obj= pInv.playerContainer.GetGameObjectAt(s-11);		
 				}
 				if(obj!=null)
 				{
 					if (obj.GetComponent<Container>()!=null)		
 					{
 						linkInventoryContainers(obj.GetComponent<Container>(), ref InventoryObjects);	
-					}							
+					}	
+					if (Prev!=null)
+					{
+						Prev.GetComponent<ObjectInteraction>().next = System.Array.IndexOf(InventoryObjects,obj.name)+1;
+					}
+					Prev=obj;
 				}
 			}
 			return InventoryObjects;
@@ -1468,7 +1495,7 @@ public class ObjectLoader : Loader {
 		{
 			bool cnLinked=false;
 			cn.gameObject.GetComponent<ObjectInteraction>().link=0;//Initially unlinked.
-			int index= System.Array.IndexOf(InventoryObjects,cn.name)+64;
+			int index= System.Array.IndexOf(InventoryObjects,cn.name)+1;
 			GameObject prev=null;
 			//int newindex=index;
 			//For each spot in the container
@@ -1482,7 +1509,7 @@ public class ObjectLoader : Loader {
 					GameObject obj = GameObject.Find(itemname);
 					if (obj!=null)
 					{
-						index= System.Array.IndexOf(InventoryObjects,obj.name)+64;
+						index= System.Array.IndexOf(InventoryObjects,obj.name)+1;
 						if (cnLinked==false)	
 						{//The container is first linked to this object							
 							cn.gameObject.GetComponent<ObjectInteraction>().link = index;

@@ -213,6 +213,16 @@ public class object_base : UWEBase {
 		}
 	return false;
 	}
+
+	/// <summary>
+	/// For special events when an object is dropped. Eg setting the map is_quant value back to zero
+	/// </summary>
+	/// <returns><c>true</c>, if event was droped, <c>false</c> otherwise.</returns>
+	public virtual bool DropEvent()
+	{
+			return false;
+	}
+
 						/*
 		if (PickupLink!="")
 		{
