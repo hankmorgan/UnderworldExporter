@@ -1746,7 +1746,16 @@ public class ObjectInteraction : UWEBase {
 						tileY=99;
 				}
 				//updates the x,y and zpos
-				zpos =(int)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+					switch(GetItemType())
+					{
+					case DOOR://DO not update heights of doors.
+					case HIDDENDOOR:
+						break;
+					default:
+						zpos =(int)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+						break;
+					}
+				
 				if ((tileX<99) && (tileY<99))
 				{//Update x & y
 					//Remove corner

@@ -1207,7 +1207,7 @@ public class UWCharacter : Character {
 						}
 
 						//Change the XOR Key back to D9
-						XorKey= 0xD9; 
+						//XorKey= 0xD9; 
 
 						if (decode)
 						{
@@ -1660,7 +1660,7 @@ public class UWCharacter : Character {
 								//case 0xD3://Unknown inventory related
 								case 0xD4:
 								case 0xD5:
-								case 0xD6:
+								//case 0xD6://THe mysterious clip through bridges byte
 								case 0xD7:
 								case 0xD8:
 								case 0xD9:
@@ -1714,6 +1714,11 @@ public class UWCharacter : Character {
 												DataLoader.WriteInt8(writer,0x63);break;	
 										}
 										break;
+								case 0xD6:
+										{//The mysterious clip through bridges on a second jump byte.
+												DataLoader.WriteInt8(writer,0x41);break;
+											break;
+										}
 								case 0xDB:
 										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
 										{//player has inventory. Not sure where these values come from
