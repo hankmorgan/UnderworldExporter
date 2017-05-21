@@ -724,7 +724,7 @@ public class SpellEffect : UWEBase {
 		-1,
 		-1};
 
-	///The number of ticks the effect last for.
+	///The number of ticks the effect last for and the the stability of the spell effect.
 	public int counter;	
 	///The length of time of a tick.
 	public int TickTime =10; 
@@ -737,6 +737,8 @@ public class SpellEffect : UWEBase {
 	///Used when an effect is created by equipment and needs to last as long as the player has equiped the item
 	public bool Permanent;
 	
+	
+
 
 
 	/// <summary>

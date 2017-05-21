@@ -248,17 +248,17 @@ public class MainMenuHud : GuiBase {
 				return;
 			}
 
-				//Load a save file
-				//Set the level file
-				GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-				//Read in the character data
-				GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
-				//Read in bglob
-				GameWorldController.instance.InitBGlobals(SlotNo+1);
-				//Load up the map
-				JourneyOnwards();
-				GameWorldController.instance.playerUW.playerInventory.Refresh();
-				return;	;
+			//Load a save file
+			//Set the level file
+			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+			//Read in the character data
+			SaveGame.LoadPlayerDat(SlotNo+1);
+			//Read in bglob
+			GameWorldController.instance.InitBGlobals(SlotNo+1);
+			//Load up the map
+			JourneyOnwards();
+			GameWorldController.instance.playerUW.playerInventory.Refresh();
+			return;	
 
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
 				{

@@ -11,9 +11,15 @@ public class GameClock : UWEBase {
 	/// </summary>
 	public float clockTime;
 	/// <summary>
-	/// The clock rate. How long is a minute relative to the clockTime
+	/// The clock rate. How long is a second relative to the clockTime
 	/// </summary>
-	public float clockRate=60.0f; 
+	public float clockRate=1.0f; 
+
+
+	/// <summary>
+	/// What game second we are at.
+	/// </summary>
+	public static int second;
 
 	/// <summary>
 	///What game minute we are at.
@@ -34,8 +40,13 @@ public class GameClock : UWEBase {
 		clockTime+=Time.deltaTime;
 		if (clockTime>=clockRate)
 		{
-			ClockTick ();
-			clockTime=0.0f;
+			second++;
+			if (second>=60)
+			{
+				ClockTick ();
+				clockTime=0.0f;		
+				second=0;
+			}
 		}
 	}
 
@@ -117,4 +128,13 @@ public class GameClock : UWEBase {
 	{
 		return Convert(day,hour,minute);
 	}
+		/*
+	public static long getUWTime()
+	{//Convert the seconds back to the uw time format
+		//one day in the real world is 86400 seconds
+		int absoluteseconds = second + (minute*60) + (hour*3600) + (day*86400);
+
+		//in uw this value is gameday << 16 | gamehour <<8 | gamesecond
+	}
+*/
 }

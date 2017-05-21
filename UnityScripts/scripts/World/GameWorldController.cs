@@ -991,9 +991,7 @@ public class GameWorldController : UWEBase {
 				{
 						dataToWrite[i] = (byte)lev_ark_file_data[i];
 				}
-				File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);
-
-			
+				File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);			
 		}
 
 

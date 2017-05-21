@@ -388,11 +388,11 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			//Write a desc file
 			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
 			//Write a player.dat file
-			GameWorldController.instance.playerUW.WritePlayerDat(SlotNo+1);
+			SaveGame.WritePlayerDat(SlotNo+1);
 
 
-				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-				ReturnToGame();
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+			ReturnToGame();
 
 		}
 
@@ -411,7 +411,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.AtMainMenu=true;
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
 			//Read in the character data
-			GameWorldController.instance.playerUW.LoadPlayerDat(SlotNo+1);
+			SaveGame.LoadPlayerDat(SlotNo+1);
 			//Load up the map
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 			GameWorldController.instance.InitBGlobals(SlotNo+1);
