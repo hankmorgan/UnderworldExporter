@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 
 public class SaveGame : Loader {
-
+		private const int NoOfEncryptedBytes=219;		//219
 		/// <summary>
 		/// Loads the player dat file into the current character
 		/// </summary>
@@ -16,6 +16,8 @@ public class SaveGame : Loader {
 				int y_position=0;
 				int z_position=0;
 
+				int[] gametimevals=new int[3];
+
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
@@ -25,16 +27,23 @@ public class SaveGame : Loader {
 						GameWorldController.instance.playerUW.XorKey=xOrValue;
 						int incrnum = 3;
 
-						for(int i=1; i<220; i++)
+						//Write out the XOR values used in this file.
+						FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\xor.dat",FileMode.Create);
+						BinaryWriter writer= new BinaryWriter(file);
+
+						for(int i=1; i<=NoOfEncryptedBytes; i++)
 						{
-								if (i==81) 
+								if ((i==81) | (i==161))
 								{
-										incrnum = 3;
+									incrnum = 3;
 								}
 								buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
+
+								DataLoader.WriteInt8(writer,((xOrValue+incrnum) & 0xFF));
+
 								incrnum += 3;
 						}
-
+						file.Close();
 						//string Result="";
 						int runeOffset=0;
 						for (int i=1; i<=221;i++)
@@ -270,16 +279,21 @@ public class SaveGame : Loader {
 													GameWorldController.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 													break;
 												}
-
 										case 0xCF  : ///   game time
 												GameWorldController.instance.playerUW.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0xD0: gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0xD1: gametimevals[1]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0xD2: gametimevals[2]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+
+
 										case 0xDD  : ///    current vitality
 												GameWorldController.instance.playerUW.CurVIT=(int)buffer[i];break;
 										}
 								}
 						}
 
-						//float Ratio=GameWorldController.instance.testUVadjust;//213 needs to be tested more.
+						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
+
 						float Ratio=213f;
 						float VertAdjust = 0.3543672f;
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
@@ -416,7 +430,7 @@ public class SaveGame : Loader {
 
 								for(int i=1; i<220; i++)
 								{
-										if (i==81) 
+										if ((i==81) | (i==161))
 										{
 												incrnum = 3;
 										}
@@ -971,9 +985,9 @@ public class SaveGame : Loader {
 				{
 						int xOrValue= (int)buffer[0];
 						int incrnum = 3;
-						for(int i=1; i<220; i++)
+						for(int i=1; i<=NoOfEncryptedBytes; i++)
 						{
-								if (i==81) 
+								if ((i==81) | (i==161))
 								{
 										incrnum = 3;
 								}

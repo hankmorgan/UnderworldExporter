@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 /// <summary>
 /// Game clock for the world.
 /// </summary>
@@ -128,13 +129,23 @@ public class GameClock : UWEBase {
 	{
 		return Convert(day,hour,minute);
 	}
-		/*
-	public static long getUWTime()
-	{//Convert the seconds back to the uw time format
+
+	public static void setUWTime(long timevalue)
+	{//Convert UW time value back into days, hours, minutes and seconds.
 		//one day in the real world is 86400 seconds
-		int absoluteseconds = second + (minute*60) + (hour*3600) + (day*86400);
+		//int absoluteseconds = second + (minute*60) + (hour*3600) + (day*86400);
 
 		//in uw this value is gameday << 16 | gamehour <<8 | gamesecond
+
+
+		System.TimeSpan ts=	System.TimeSpan.FromSeconds((double)timevalue);
+		day=ts.Days;
+		hour=ts.Hours;
+		minute=ts.Minutes;
+		second=ts.Seconds;
+		Debug.Log( day + " days " + hour +" hours " + minute + " minutes " + second + " seconds");
+
+
 	}
-*/
+
 }
