@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 
 public class SaveGame : Loader {
-		private const int NoOfEncryptedBytes=219;		//219
+		private const int NoOfEncryptedBytes=218;		//219
 		/// <summary>
 		/// Loads the player dat file into the current character
 		/// </summary>
@@ -496,11 +496,11 @@ public class SaveGame : Loader {
 				float VertAdjust = 0.3543672f;
 
 				//****Hardcoded values
-				int[] hardcoded = {
-						16,	16,	16,	16,	16,	240,	240,	240,	240,	240,	240,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	37,	24,	16,	16,	16,	16,	143,	112,	112,	112,	112,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	48,	16,	16,	16,	50,	33,	251,	241,	118,	122,	2,	160,	227,	22,	137,	140,	143,	0,	34,	0,	0,	0,	48,	0,	0,	0,	0,	0,	0,	0,	0,	44,	32,	128,	0,	0,	253,	0,	0,	0,	0,	0,	0,	0,	0
-				};
+			//	int[] hardcoded = {
+				//		16,	16,	16,	16,	16,	240,	240,	240,	240,	240,	240,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	37,	24,	16,	16,	16,	16,	143,	112,	112,	112,	112,	16,	16,	16,	16,	16,	48,	48,	48,	48,	48,	48,	16,	16,	16,	50,	33,	251,	241,	118,	122,	2,	160,	227,	22,	137,	140,	143,	0,	34,	0,	0,	0,	48,	0,	0,	0,	0,	0,	0,	0,	0,	44,	32,	128,	0,	0,	253,	0,	0,	0,	0,	0,	0,	0,	0
+				//};
 
-				//*****
+	
 				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\playertmp.dat",FileMode.Create);
 				BinaryWriter writer= new BinaryWriter(file);
 				int ActiveEffectIndex=0;
@@ -508,7 +508,6 @@ public class SaveGame : Loader {
 
 				//update inventory linking
 				string[] inventoryObjects= ObjectLoader.UpdateInventoryObjectList();
-
 
 				//Write the XOR Key
 				DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.XorKey);
@@ -665,7 +664,7 @@ public class SaveGame : Loader {
 										break;
 								case 0x4B:
 										{//No of inventory items?
-												DataLoader.WriteInt8(writer,inventoryObjects.GetUpperBound(0)<<2);
+												DataLoader.WriteInt8(writer,(inventoryObjects.GetUpperBound(0)+1)<<2);
 												break;
 										}
 
@@ -804,7 +803,20 @@ public class SaveGame : Loader {
 												DataLoader.WriteInt8(writer,GameWorldController.instance.variables[i-0x71]);
 												break;
 										}
+								case 0xBC:
+										//Unknown
+										DataLoader.WriteInt8(writer,0xFF);
+										break;
 
+								case 0xB6: //UW Game options
+										//high nibble is detail level.
+										//bit 0 of low nibble is sound
+										//bit 3 of low nibble is music
+										DataLoader.WriteInt8(writer,0x35);
+										break;
+								case 0xB7://Unknown
+										DataLoader.WriteInt8(writer,0x8);
+										break;										
 								case 0xCF  : ///   game time
 										DataLoader.WriteInt32(writer,GameWorldController.instance.playerUW.game_time);break;
 										break;
@@ -830,11 +842,11 @@ public class SaveGame : Loader {
 								case 0xDB:
 										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
 										{//player has inventory. Not sure where these values come from
-												DataLoader.WriteInt8(writer,0x3A);break;	
+												DataLoader.WriteInt8(writer,0x40);break;	
 										}
 										else
 										{
-												DataLoader.WriteInt8(writer,0x7A);break;	
+												DataLoader.WriteInt8(writer,0x0);break;	
 										}
 										break;
 								case 0xDD://Duplicate curvit
@@ -919,14 +931,14 @@ public class SaveGame : Loader {
 										break;	
 
 								default://No value. Write 0	or hardcoded values
-										if ((i>=0xA1) || (i<=0xF7))
-										{//Hardcoded value
-												DataLoader.WriteInt8(writer,hardcoded[i-161])	;
-										}
-										else
-										{
+										//if ((i>=0xA1) || (i<=0xF7))
+										//{//Unknown Hardcoded values
+										//		DataLoader.WriteInt8(writer,hardcoded[i-161])	;
+										//}
+										//else
+										//{
 												DataLoader.WriteInt8(writer,0);break;	
-										}
+										//}
 
 
 										break;
