@@ -1721,7 +1721,9 @@ public class ObjectInteraction : UWEBase {
 
 		public void UpdatePosition()
 		{
-				if (objectloaderinfo==null){return;}
+
+
+			if (objectloaderinfo==null){return;}
 			if (ObjectLoader.isStatic(objectloaderinfo))	
 			{
 					return;

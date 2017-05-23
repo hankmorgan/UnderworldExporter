@@ -347,6 +347,7 @@ public class DoorControl : object_base {
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
 				}
 				objInt().item_id+=8;
+				objInt().zpos+=24;
 				//state=true;
 				if(objInt().link!=0)
 					{	//If it's link is to something that is not a lock then it is likely to be a trigger
@@ -397,6 +398,7 @@ public class DoorControl : object_base {
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
 				}
 				objInt().item_id-=8;
+				objInt().zpos-=24;
 				//state=false;
 			}
 		}

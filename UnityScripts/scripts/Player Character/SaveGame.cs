@@ -3,7 +3,7 @@ using System.Collections;
 using System.IO;
 
 public class SaveGame : Loader {
-		private const int NoOfEncryptedBytes=218;		//219
+		private const int NoOfEncryptedBytes=0xD2;//218;		//219
 		/// <summary>
 		/// Loads the player dat file into the current character
 		/// </summary>
@@ -824,19 +824,20 @@ public class SaveGame : Loader {
 								case 0xD1:
 								case 0xD2:
 										break;
-								case 0xD3:
-										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
-										{//player has inventory. Not sure where these values come from
-												DataLoader.WriteInt8(writer,0x60);break;	
-										}
-										else
-										{
-												DataLoader.WriteInt8(writer,0x63);break;	
-										}
+								case 0xD3://No of inventory items + 1.
+										DataLoader.WriteInt16(writer,inventoryObjects.GetUpperBound(0)+1+1);
+										//Debug.Log("No of inventory " + inventoryObjects.GetUpperBound(0));
 										break;
+								case 0xD4://Skip prev
+										break;
+								case 0xD5:
+										{//7F 20
+												DataLoader.WriteInt8(writer,0x7F);break;
+												break;	
+										}
 								case 0xD6:
 										{//The mysterious clip through bridges on a second jump byte.
-												DataLoader.WriteInt8(writer,0x41);break;
+												DataLoader.WriteInt8(writer,0x20);break;
 												break;
 										}
 								case 0xDB:
