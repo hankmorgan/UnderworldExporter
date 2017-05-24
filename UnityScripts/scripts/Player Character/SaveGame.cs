@@ -17,7 +17,9 @@ public class SaveGame : Loader {
 				int z_position=0;
 
 				int[] gametimevals=new int[3];
-
+				int[] ActiveEffectIds=new int[3];
+				int[] ActiveEffectStability=new int[3];
+				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
@@ -123,8 +125,15 @@ public class SaveGame : Loader {
 										case 0x3F:
 										case 0x41:
 										case 0x43://Active spell effect
-												SaveGame.GetActiveSpellID((int)buffer[i]);break;
-
+												{
+													ActiveEffectIds[effectCounter]=SaveGame.GetActiveSpellID((int)buffer[i]);break;		
+												}
+										case 0x3F+1:
+										case 0x41+1:
+										case 0x43+1://Active spell effect stability
+												{
+													ActiveEffectStability[effectCounter++]=(int)buffer[i];break;		
+												}
 										case 0x45://Runebits
 										case 0x46://Runebits
 										case 0x47://Runebits
@@ -187,8 +196,11 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.ResurrectLevel=((int)buffer[i]>>4) & 0xf;
 												GameWorldController.instance.playerUW.MoonGateLevel=((int)buffer[i]) & 0xf;
 												break;
-										case 0x60  : ///    bits 2..5: play_poison
-												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );break;
+										case 0x60  : ///    bits 2..5: play_poison and no of active effects
+												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
+												effectCounter = ((int)buffer[i]>>6) & 0x3;
+												break;
+
 
 										case 0x65: // hand, Gender & body, and class
 												{
@@ -290,6 +302,50 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.CurVIT=(int)buffer[i];break;
 										}
 								}
+						}
+						//Reapply spell effects
+						for (int a=0; a<=GameWorldController.instance.playerUW.ActiveSpell.GetUpperBound(0);a++)
+						{//Clear out the old effects.
+							if (GameWorldController.instance.playerUW.ActiveSpell[a]!=null)	
+							{
+								GameWorldController.instance.playerUW.ActiveSpell[a].CancelEffect();	
+								if (GameWorldController.instance.playerUW.ActiveSpell[a]!=null)	
+								{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
+									GameWorldController.instance.playerUW.ActiveSpell[a].CancelEffect();	
+								}
+							}
+						}
+
+						//Clearout the passive spell effects
+						for (int a=0; a<=GameWorldController.instance.playerUW.PassiveSpell.GetUpperBound(0);a++)
+						{//Clear out the old passive effects.
+							if (GameWorldController.instance.playerUW.PassiveSpell[a]!=null)	
+							{
+								GameWorldController.instance.playerUW.PassiveSpell[a].CancelEffect();
+								if (GameWorldController.instance.playerUW.PassiveSpell[a]!=null)	
+								{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
+									GameWorldController.instance.playerUW.PassiveSpell[a].CancelEffect();	
+								}
+							}
+						}
+
+						for (int a=0; a<effectCounter;a++)
+						{//Recast the new ones.
+							GameWorldController.instance.playerUW.ActiveSpell[a] = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf );
+							GameWorldController.instance.playerUW.ActiveSpell[a].counter=ActiveEffectStability[a];
+						}
+
+
+						//Reapply poisoning.
+						if (GameWorldController.instance.playerUW.play_poison!=0)
+						{
+							SpellEffectPoison p = (SpellEffectPoison)GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+							p.counter=GameWorldController.instance.playerUW.play_poison;
+							p.DOT=p.Value/p.counter;//Recalculate the poison damage to reapply.									
+						}
+						else
+						{//Make sure any poison is cured.
+							GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);									
 						}
 
 						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
@@ -403,6 +459,16 @@ public class SaveGame : Loader {
 								}
 								GameWorldController.instance.playerUW.playerInventory.Refresh();
 
+							//Reapply effects from enchanted items by recalling the equip event.
+							for (int s=0; s<=10; s++)
+							{
+								GameObject obj = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(s);
+								if (obj!=null)
+								{
+									obj.GetComponent<ObjectInteraction>().Equip(s);
+								}
+							}
+
 						}
 
 						//Change the XOR Key back to D9
@@ -453,19 +519,27 @@ public class SaveGame : Loader {
 		}
 
 		/// <summary>
-		/// Calcs the active spell effect id in a player.dat file
+		/// Calcs the active spell effect id in a player.dat file and returns the correct value for the spell.
 		/// </summary>
 		/// <param name="val">Value.</param>
-		public static void GetActiveSpellID(int val)
+		public static int GetActiveSpellID(int val)
 		{
-			{//active spell 1
-				if (val!=0)
-				{
-					//int val=(int)buffer[i];
-					int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4);
-					Debug.Log (StringController.instance.GetString(6,effectID));
-				}
-			}	
+			int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4);
+			//Debug.Log (StringController.instance.GetString(6,effectID));
+
+			switch (effectID)
+			{
+				case 178: 
+					return SpellEffect.UW1_Spell_Effect_Speed;
+				case 179:
+					return SpellEffect.UW1_Spell_Effect_Telekinesis;					
+				case 176: 
+					return SpellEffect.UW1_Spell_Effect_FreezeTime;					
+				case 183:
+					return SpellEffect.UW1_Spell_Effect_RoamingSight;//Should not appear in a save game									
+				default:
+					return effectID;
+			}
 		}
 
 		/// <summary>

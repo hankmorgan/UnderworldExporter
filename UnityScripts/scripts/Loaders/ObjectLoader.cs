@@ -1083,7 +1083,7 @@ public class ObjectLoader : Loader {
 				float zpos = objList[index].zpos;
 				if (_RES!=GAME_SHOCK)
 				{
-					if ((objList[index].item_id >= 328) && (objList[x].item_id <= 333))
+					if ((objList[index].item_id >= 328) && (objList[index].item_id <= 333))
 					{//Open doors need to be adjusted down?
 						zpos -= 24f;
 					}	

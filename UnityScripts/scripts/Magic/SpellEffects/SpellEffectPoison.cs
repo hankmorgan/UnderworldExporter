@@ -6,7 +6,7 @@ using System.Collections;
 public class SpellEffectPoison : SpellEffect {
 
 	///The amount of damage per counter tick.
-	private int DOT; 
+	public int DOT; 
 
 	///The effect is applied to an npc
 	public bool isNPC;
