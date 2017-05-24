@@ -6,7 +6,7 @@ public class SpellProp_Light : SpellProp{
 		public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
-				this.counter=5;//Should counter be a function of the casters casting ability
+				this.counter=5;//Should counter be a function of the casters casting ability as this drives the stability of the spell.
 				switch(effectId)
 				{//TODO:Review these light values.
 				case SpellEffect.UW1_Spell_Effect_Darkness:	this.BaseDamage=1;  break;

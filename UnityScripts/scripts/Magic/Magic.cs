@@ -260,7 +260,7 @@ public class Magic : UWEBase {
 				case "In Lor":	//Light
 						{
 								SetSpellCost(1);
-								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Candlelight);
+								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Light);
 								break;
 						}	//il
 				case "Bet Wis Ex"://Locate
@@ -278,7 +278,7 @@ public class Magic : UWEBase {
 				case "Bet In Sanct"://Resist Blows
 						{
 								SetSpellCost(1);
-								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows_alt01);
+								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows);
 								break;
 						}//BIS
 				case "Sanct Hur"://Stealth
@@ -307,7 +307,7 @@ public class Magic : UWEBase {
 				case "Uus Por"://Jump
 						{
 								SetSpellCost(2);
-								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap_alt01);
+								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap);
 								break;
 						}//up
 				case "In Bet Mani"://Lesser Heal

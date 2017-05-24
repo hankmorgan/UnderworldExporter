@@ -726,7 +726,7 @@ public class SpellEffect : UWEBase {
 
 	///The number of ticks the effect last for and the the stability of the spell effect.
 	public int counter;	
-	///The length of time of a tick.
+	///The length of time of a tick before a spell reduces it stability
 	public int TickTime =10; 
 	///Effect Id of the current spell effect
 	public int EffectID; 

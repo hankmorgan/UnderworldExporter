@@ -503,7 +503,7 @@ public class SaveGame : Loader {
 	
 				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\playertmp.dat",FileMode.Create);
 				BinaryWriter writer= new BinaryWriter(file);
-				int ActiveEffectIndex=0;
+				int NoOfActiveEffects=0;
 				int runeOffset=0;
 
 				//update inventory linking
@@ -594,27 +594,51 @@ public class SaveGame : Loader {
 								case 0x3E : ///    character level (play_level)
 										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.CharLevel);break;
 								case 0x3F:
-								case 0x41:
-								case 0x43://Active spell effect
+								//Active spell effect
+									{
+										for (int e = 0; e<3;e++)
 										{
-												if (GameWorldController.instance.playerUW.ActiveSpell[ActiveEffectIndex]!=null)
-												{
-														int effectId= GameWorldController.instance.playerUW.ActiveSpell[ActiveEffectIndex].EffectID;
-														//int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
-														int byteToWrite =((effectId & 0xf0)>> 4) | ((effectId & 0xf) <<4);
-														DataLoader.WriteInt16(writer,byteToWrite);
-												}
-												else
-												{//No effect leave empty
-														DataLoader.WriteInt16(writer,0);		
-												}
-												ActiveEffectIndex++;
-												break;
-										}
+											if (GameWorldController.instance.playerUW.ActiveSpell[e]!=null)
+											{
+												int effectId= 0;
+												int byteToWrite=0;
 
+												switch (GameWorldController.instance.playerUW.ActiveSpell[e].EffectID)
+												{//Fix spell effects that do not work with the nibble swap 
+													case SpellEffect.UW1_Spell_Effect_Speed:
+														effectId=178;break;
+													case SpellEffect.UW1_Spell_Effect_Telekinesis:
+														effectId=179;break;	
+													case SpellEffect.UW1_Spell_Effect_FreezeTime:
+														effectId=176;break;	
+													case SpellEffect.UW1_Spell_Effect_RoamingSight://Should not appear in a save game
+														effectId=183;break;			
+													default:
+														effectId=GameWorldController.instance.playerUW.ActiveSpell[e].EffectID;
+														break;	
+												}
+												int stability =  GameWorldController.instance.playerUW.ActiveSpell[e].counter;
+												byteToWrite =(stability <<8) | ((effectId & 0xf0)>> 4) | ((effectId & 0xf) <<4);
+												
+												//int effectID= ((val & 0xf)<<4) | ((val & 0xf0) >> 4*/
+												
+												DataLoader.WriteInt16(writer,byteToWrite);
+												NoOfActiveEffects++;
+											}
+											else
+											{//No effect leave empty
+													DataLoader.WriteInt16(writer,0);		
+											}						
+												
+										}
+										break;
+									}
+
+								case 0x41:
+								case 0x43:
 								case 0x3F+1:
 								case 0x41+1:
-								case 0x43+1://Active spell effect. 2nd byte do nothing here.
+								case 0x43+1://Active spell effect. Addl. byte do nothing here.
 										break;
 								case 0x45://Runebits
 								case 0x46://Runebits
@@ -714,7 +738,7 @@ public class SaveGame : Loader {
 												break;
 										}
 								case 0x60  : ///    bits 2..5: play_poison
-										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.play_poison<<2);
+										DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) <<6)) | GameWorldController.instance.playerUW.play_poison<<2);
 										break;
 								case 0x65: // hand, Gender & body, and class
 										{
