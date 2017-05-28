@@ -218,7 +218,7 @@ public class ConversationVM : UWEBase {
 				}
 
 				///Identifies the NPC for future looking at
-				npc.objInt().isIdentified=true;
+				npc.objInt().isIdentified=true;//TODO:Replace this with vanilla behaviour
 
 				///Sets up the portraits for the player and the NPC
 				RawImage portrait = UWHUD.instance.ConversationPortraits[0];
@@ -476,7 +476,7 @@ public class ConversationVM : UWEBase {
 								break;
 
 						case cnv_JMP:
-								Debug.Log("instr = " +instrp + " JMP to " +  conv[currConv].instuctions[instrp+1]);
+								//Debug.Log("instr = " +instrp + " JMP to " +  conv[currConv].instuctions[instrp+1]);
 								instrp = conv[currConv].instuctions[instrp+1]-1;
 
 								break;
@@ -693,7 +693,7 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public void EndConversation(NPC npc)
 		{
-
+				Conversation.InConversation=false;
 				//Copy back private variables to the globals file.
 
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
@@ -779,7 +779,7 @@ public class ConversationVM : UWEBase {
 				///Puts the time scales back to normal
 				Time.timeScale=1.0f;
 
-				npc.npc_talkedto=1;
+				//npc.npc_talkedto=1;
 				UWHUD.instance.Conversation_tl.Clear();
 				UWHUD.instance.MessageScroll.Clear();
 
@@ -989,6 +989,33 @@ public class ConversationVM : UWEBase {
 								break;
 						}
 
+				case "sex":
+						{
+							stack.Pop();
+							stack.Pop();
+							stack.Pop();
+							int arg2=stack.Pop();
+							int arg1=stack.Pop();
+							if (GameWorldController.instance.playerUW.isFemale)
+							{
+								result_register=stack.at(arg2);		
+							}
+							else
+							{
+								result_register=stack.at(arg1);
+							}
+							break;
+						}
+
+				case "random":
+						{
+								stack.Pop();
+								//stack.Pop();
+								int arg1=stack.Pop();
+								result_register=Random.Range(1,stack.at(arg1)+1);
+							break;
+						}
+
 				default: 
 
 						Debug.Log("unimplemented function " + func.functionName);
@@ -1037,7 +1064,8 @@ public class ConversationVM : UWEBase {
 		/// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
 		public IEnumerator babl_fmenu(int Start, int flagIndex)
 		{
-				Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
+				UWHUD.instance.MessageScroll.Clear();
+				//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
 				//tl_input.Clear();
 				//PlayerInput.text="";
 				usingBablF=true;
