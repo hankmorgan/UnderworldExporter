@@ -283,6 +283,8 @@ public class GameWorldController : UWEBase {
 	};
 
 	public bablGlobal[] bGlobals;
+	public ConversationVM convVM;
+
 
 	void  LoadPath()
 	{
@@ -361,9 +363,11 @@ public class GameWorldController : UWEBase {
 				//UW Demo does not go to the menu. It will load automatically into the gameworld
 				AtMainMenu=false;	
 				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 				break;
 			default:
 				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 				break;
 		}
 
@@ -835,9 +839,9 @@ public class GameWorldController : UWEBase {
 				{
 						if (GameWorldController.instance.Tilemaps[l] !=null)
 						{
-								for (int x=0; x<64;x++)
+								for (int x=0; x<=TileMap.TileMapSizeX;x++)
 								{
-										for (int y=0; y<64;y++)
+										for (int y=0; y<=TileMap.TileMapSizeY;y++)
 										{		
 
 											//	Debug.Log(l +  " " + x + " " + y);

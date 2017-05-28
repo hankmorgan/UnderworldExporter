@@ -1355,9 +1355,9 @@ public class ObjectLoader : Loader {
 			if (currTileMap!=null)
 			{
 					//Clear the tilemaps indexobjectlist
-					for (int x=0;x<64;x++){
-							for (int y=0;y<64;y++){
-									currTileMap.Tiles[x,y].indexObjectList=0;
+					for (int x=0;x<=TileMap.TileMapSizeX;x++){
+						for (int y=0;y<=TileMap.TileMapSizeY;y++){
+								currTileMap.Tiles[x,y].indexObjectList=0;
 							}
 					}		
 			}
@@ -1396,7 +1396,7 @@ public class ObjectLoader : Loader {
 						int y=currObjList.objInfo[i].tileY;
 						if (currObjList.objInfo[i].InUseFlag==1)
 						{
-								if  ((x !=99) && (y!=99))
+								if  ((x !=TileMap.ObjectStorageTile) && (y!=TileMap.ObjectStorageTile))
 								{
 										if (nexts[x,y] == 0)		
 										{//This object is the first in the chain at this tile
@@ -1772,8 +1772,8 @@ public class ObjectLoader : Loader {
 				GameWorldController.instance.CurrentObjectList().objInfo[index].zpos=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].x=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].y=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=99;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=99;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=TileMap.ObjectStorageTile;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=TileMap.ObjectStorageTile;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag=1;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].index=index;
 				return GameWorldController.instance.CurrentObjectList().objInfo[index];
@@ -1802,9 +1802,9 @@ public class ObjectLoader : Loader {
 		if ((indexToFind==0) && (linkToReplace ==0))
 		{return;}
 
-		for (int x=0;x<64;x++)
+		for (int x=0;x<=TileMap.TileMapSizeX;x++)
 		{
-			for(int y=0;y<64;y++)
+			for(int y=0;y<=TileMap.TileMapSizeY;y++)
 			{
 				{
 					if (levelInfo[x,y].indexObjectList == indexToFind)

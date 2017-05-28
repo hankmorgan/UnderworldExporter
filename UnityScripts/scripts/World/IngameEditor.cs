@@ -114,16 +114,16 @@ public class IngameEditor : GuiBase_Draggable {
 		public void ChangeTileX(int offset)
 		{
 				TileX+=offset;
-				if (TileX>63){TileX=0;}
-				if (TileX<0){TileX=63;}
+				if (TileX>TileMap.TileMapSizeX){TileX=0;}
+				if (TileX<0){TileX=TileMap.TileMapSizeX;}
 				RefreshTileInfo();
 		}
 
 		public void ChangeTileY(int offset)
 		{
 				TileY+=offset;
-				if (TileY>63){TileY=0;}
-				if (TileY<0){TileY=63;}
+				if (TileY>TileMap.TileMapSizeY){TileY=0;}
+				if (TileY<0){TileY=TileMap.TileMapSizeY;}
 
 				RefreshTileInfo();
 		}
@@ -232,7 +232,7 @@ public class IngameEditor : GuiBase_Draggable {
 							}
 						}
 
-						if (TileY<63)
+						if (TileY<TileMap.TileMapSizeY)
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
 								{
@@ -250,7 +250,7 @@ public class IngameEditor : GuiBase_Draggable {
 								}
 						}
 
-						if (TileY<63)
+						if (TileY<TileMap.TileMapSizeY)
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
 								{
@@ -275,9 +275,9 @@ public class IngameEditor : GuiBase_Draggable {
 								{
 										if (! ((x==0) && (y==0)))//Not the middle
 										{
-												if  ((x+TileX<=63) && (x+TileX>=0))
+												if  ((x+TileX<=TileMap.TileMapSizeX) && (x+TileX>=0))
 												{
-														if ((y+TileY<=63) && (y+TileY>=0))
+														if ((y+TileY<=TileMap.TileMapSizeY) && (y+TileY>=0))
 														{
 															DestroyTile(x+TileX,y+TileY);
 															TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);

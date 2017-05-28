@@ -1739,13 +1739,13 @@ public class ObjectInteraction : UWEBase {
 				//Updates the tilex & tileY,
 				tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
 				tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
-				if (tileX>=64)
-				{
-						tileX=99;
+				if ((tileX>TileMap.TileMapSizeX) | (tileX<0))
+				{//Object is off map.
+					tileX=TileMap.ObjectStorageTile;
 				}
-				if (tileY>=64)
+				if ((tileY>TileMap.TileMapSizeX) | (tileY<0))
 				{
-						tileY=99;
+					tileY=TileMap.ObjectStorageTile;
 				}
 				//updates the x,y and zpos
 					switch(GetItemType())
@@ -1758,7 +1758,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 					}
 				
-				if ((tileX<99) && (tileY<99))
+				if ((tileX<TileMap.ObjectStorageTile) && (tileY<TileMap.ObjectStorageTile))
 				{//Update x & y
 					//Remove corner
 					float offX = (this.transform.position.x) - ((float)(tileX*1.2f));

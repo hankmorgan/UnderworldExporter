@@ -371,8 +371,8 @@ public class SaveGame : Loader {
 										objLoader.objInfo[x] = new ObjectLoaderInfo();
 										objLoader.objInfo[x].index=x;
 										objLoader.objInfo[x].parentList=objLoader;
-										objLoader.objInfo[x].tileX=99;
-										objLoader.objInfo[x].tileY=99;
+										objLoader.objInfo[x].tileX=TileMap.ObjectStorageTile;
+										objLoader.objInfo[x].tileY=TileMap.ObjectStorageTile;
 										objLoader.objInfo[x].InUseFlag=1;
 										objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer,i+0,16)) & 0x1FF;
 										objLoader.objInfo[x].flags  = (int)((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x0F;

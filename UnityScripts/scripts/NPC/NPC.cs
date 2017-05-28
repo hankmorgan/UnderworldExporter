@@ -596,43 +596,66 @@ public class NPC : object_base {
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npcname= StringController.instance.GetSimpleObjectNameUW(objInt);
 			}
-			Conversation cnv =this.GetComponent<Conversation>();
-			if (cnv!=null)
-			{	
-				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-				Conversation.CurrentConversation=npc_whoami;
-				Conversation.InConversation=true;
-				//cnv.WhoAmI=npc_whoami;
-				if (npcname=="")
-				{
-					UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
-				}
-				else
-				{
-					UWHUD.instance.NPCName.text=npcname;	
-				}				
-				UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
-				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
-				{
-					if (npc_whoami== GameWorldController.instance.bGlobals[c].ConversationNo)
-					{
-						cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
-						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
-						{
-							//Copy Private variables
-							cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];								
-						}
-						break;
-					}
-				}
-
-				StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
-			}
-			else
+			switch (npc_whoami)
 			{
-				//You get no response
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+
+			case 67://bragit under test.
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
+					Conversation.CurrentConversation=npc_whoami;//To make obsolete
+					Conversation.InConversation=true;
+					if (npcname=="")
+					{
+							UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
+					}
+					else
+					{
+							UWHUD.instance.NPCName.text=npcname;	
+					}				
+					UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+					GameWorldController.instance.convVM.RunConversation(this);
+					break;
+			default:
+					Conversation cnv =this.GetComponent<Conversation>();
+					if (cnv!=null)
+					{	
+							UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
+							Conversation.CurrentConversation=npc_whoami;
+							Conversation.InConversation=true;
+							//cnv.WhoAmI=npc_whoami;
+							if (npcname=="")
+							{
+									UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
+							}
+							else
+							{
+									UWHUD.instance.NPCName.text=npcname;	
+							}				
+							UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+							for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
+							{
+									if (npc_whoami== GameWorldController.instance.bGlobals[c].ConversationNo)
+									{
+											cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
+											for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+											{
+													//Copy Private variables
+													cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];								
+											}
+											break;
+									}
+							}
+
+							StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
+					}
+					else
+					{
+							//You get no response
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+					}
+					break;
 			}
+
+
 		}
 		return true;
 	}

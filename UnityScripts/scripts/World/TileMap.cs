@@ -7,8 +7,6 @@ using System.IO;
 
 /// <summary>
 /// Tile map class.
-/// Used for storing tile properties for use in various other scripts and generating the automap.
-/// Tile properties are read in from a text file called [UW1|UW2|Shock]_tileprops.txt
 /// </summary>
 public class TileMap : Loader {
 		public const int TILE_SOLID=0;
@@ -39,7 +37,20 @@ public class TileMap : Loader {
 		const int SOUTHWEST=6;
 		const int SOUTHEAST=7;
 
+		/// <summary>
+		/// The tile map size along the x axis
+		/// </summary>
+		public const int TileMapSizeX=63; //0 to 63
 
+		/// <summary>
+		/// The tile map size along the y axis.
+		/// </summary>
+		public const int TileMapSizeY=63; //0 to 63
+
+		/// <summary>
+		/// The object storage tile location where non map objects are kept.
+		/// </summary>
+		public const int ObjectStorageTile=99;
 
 		public const int SURFACE_FLOOR =1;
 		public const int SURFACE_CEIL = 2;
@@ -86,7 +97,7 @@ public class TileMap : Loader {
 		/// <summary>
 		/// Tile info storage class
 		/// </summary>
-	public TileInfo[,] Tiles=new TileInfo[64,64];
+		public TileInfo[,] Tiles=new TileInfo[TileMap.TileMapSizeX+1,TileMap.TileMapSizeY+1];
 
 		/// <summary>
 		/// The height of the max ceiling value for this level. Only used in SHOCK moving platform.
@@ -103,7 +114,7 @@ public class TileMap : Loader {
 	/// <summary>
 	/// The size of the tile in pixels in the map display
 	/// </summary>
-	public int TileSize = 4;
+	public const int TileSize = 4;
 
 
 
@@ -193,7 +204,7 @@ public class TileMap : Loader {
 	{
 		int tileX = (int)(location.x/1.2f);
 		int tileY = (int)(location.y/1.2f);
-		if ((tileX>=64) || (tileX<0) || (tileY>=64) || (tileY<0))
+		if ((tileX>TileMap.TileMapSizeX) || (tileX<0) || (tileY>TileMap.TileMapSizeY) || (tileY<0))
 		{//Location is outside the map
 				return false;
 		}
@@ -224,18 +235,18 @@ public class TileMap : Loader {
 		output.filterMode=FilterMode.Point;
 		output.wrapMode=TextureWrapMode.Clamp;
 		//Init the tile map as blank first
-		for (int i = 0; i<63; i++)
+		for (int i = 0; i<TileMap.TileMapSizeX; i++)
 		{
-			for (int j = 63; j>0; j--)
+			for (int j = TileMap.TileMapSizeY; j>0; j--)
 			{
 				DrawSolidTile(output,i,j,TileSize,TileSize,Background);
 			}
 		}
 
 		///Fills in the tile background colour first
-		for (int i = 0; i<63; i++)
+		for (int i = 0; i<TileMap.TileMapSizeX; i++)
 		{
-			for (int j = 63; j>0; j--)
+		for (int j = TileMap.TileMapSizeY; j>0; j--)
 			{//If the tile has been visited and can be rendered.
 				if ((GetTileRender(i,j)==1) && (GetTileVisited(i,j)))
 				{
@@ -245,9 +256,9 @@ public class TileMap : Loader {
 			}
 		}
 		///Draws the border lines of the tiles
-		for (int i = 0; i<63; i++)
+		for (int i = 0; i<TileMap.TileMapSizeX; i++)
 		{
-			for (int j = 63; j>0; j--)
+			for (int j = TileMap.TileMapSizeY; j>0; j--)
 			{
 				if (GetTileVisited( i,j)==true)
 				{
@@ -307,9 +318,9 @@ public class TileMap : Loader {
 			}
 		}
 
-		for (int i = 0; i<63; i++)
+		for (int i = 0; i<TileMap.TileMapSizeX; i++)
 		{
-			for (int j = 63; j>0; j--)
+		for (int j = TileMap.TileMapSizeY; j>0; j--)
 			{
 				if (GetIsDoor(i,j)==true)			
 				{
@@ -538,7 +549,7 @@ public class TileMap : Loader {
 	private void DrawOpenTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		//Check the tile to the north
-		if (TileY<63)
+		if (TileY<TileMap.TileMapSizeY)
 			{
 			if ((GetTileType( TileX,TileY+1)==TILE_SOLID) && (GetTileRender( TileX,TileY+1)==1))
 				{//Solid tile to the north.
@@ -554,7 +565,7 @@ public class TileMap : Loader {
 				}
 			}
 		//Check the tile to the east
-		if (TileX <63)
+		if (TileX <TileMap.TileMapSizeX)
 			{
 			if ((GetTileType( TileX+1,TileY)==TILE_SOLID) && (GetTileRender( TileX+1,TileY)==1))
 				{
@@ -703,7 +714,7 @@ public class TileMap : Loader {
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
 
 		//Check the tiles to the north and east of this tile to see what needs to be drawn for borders
-		if (TileY <63)
+		if (TileY <TileMap.TileMapSizeY)
 			{//north
 			int TileToTest = GetTileType(TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
@@ -711,7 +722,7 @@ public class TileMap : Loader {
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 				}
 			}
-		if (TileX <63)
+		if (TileX <TileMap.TileMapSizeX)
 			{//east
 			int TileToTest = GetTileType(TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
@@ -772,7 +783,7 @@ public class TileMap : Loader {
 		}
 
 		//Check North and East for solids.
-		if (TileY<63)
+		if (TileY<TileMap.TileMapSizeY)
 		{//North
 		if (GetTileType (TileX,TileY+1)== TILE_SOLID)
 			{
@@ -780,7 +791,7 @@ public class TileMap : Loader {
 			}
 		}
 		
-		if (TileX<63)
+		if (TileX<TileMap.TileMapSizeX)
 		{//East
 			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
 			{
@@ -813,7 +824,7 @@ public class TileMap : Loader {
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
 		}
-		if (TileX <63)
+		if (TileX <TileMap.TileMapSizeX)
 		{//East
 			int TileToTest = GetTileType(TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NW))
@@ -823,7 +834,7 @@ public class TileMap : Loader {
 		}
 
 		//Check North and West for solids.
-		if (TileY<63)
+		if (TileY<TileMap.TileMapSizeY)
 		{//North
 			if (GetTileType (TileX,TileY+1)== TILE_SOLID)
 			{
@@ -855,7 +866,7 @@ public class TileMap : Loader {
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
 	
 		//Check the tiles to the north and west of this tile
-		if (TileY <63)
+		if (TileY <TileMap.TileMapSizeY)
 		{//north
 			int TileToTest = GetTileType(TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SE))
@@ -882,7 +893,7 @@ public class TileMap : Loader {
 				}
 			}
 
-		if (TileX<63)
+		if (TileX<TileMap.TileMapSizeX)
 		{//East
 			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
 			{
@@ -1017,9 +1028,9 @@ public class TileMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		private void MarkTile(int tileX, int tileY)
 		{
-				if (((tileX>=0) && (tileX<=63)) 
+				if (((tileX>=0) && (tileX<=TileMap.TileMapSizeX)) 
 						&& 
-						((tileY>=0) && (tileY<=63)))
+						((tileY>=0) && (tileY<=TileMap.TileMapSizeY)))
 				{
 						Tiles[tileX,tileY].tileVisited=true;
 				}
@@ -1183,7 +1194,7 @@ public class TileMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		public int GetTileType(int tileX, int tileY)
 		{
-				if ((tileX>63) || (tileY>63) || (tileX<0) || (tileY<0))
+				if ((tileX>TileMap.TileMapSizeX) || (tileY>TileMap.TileMapSizeY) || (tileX<0) || (tileY<0))
 				{//Assume out of bounds is solid
 					return TILE_SOLID;
 				}
@@ -1299,9 +1310,9 @@ public class TileMap : Loader {
 
 				UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 
-				for  (x=0; x<64;x++)
+				for  (x=0; x<=TileMap.TileMapSizeX;x++)
 				{
-						for (y=0; y<64;y++)
+						for (y=0; y<=TileMap.TileMapSizeY;y++)
 						{
 								Tiles[x,y] =new TileInfo();
 						}
@@ -1497,9 +1508,9 @@ public class TileMap : Loader {
 						}
 				}
 
-				for (y=0; y<64;y++)
+				for (y=0; y<=TileMap.TileMapSizeY;y++)
 				{
-						for (x=0; x<64;x++)
+						for (x=0; x<=TileMap.TileMapSizeX;x++)
 						{
 								Tiles[x,y].tileX = x;
 								Tiles[x,y].tileY = y;
@@ -1611,14 +1622,14 @@ public class TileMap : Loader {
 								//Tiles[x,y].hasElevator=0;
 						}
 				}
-				for (y=0; y<64;y++)
+				for (y=0; y<=TileMap.TileMapSizeY;y++)
 				{
-						for (x=0; x<64;x++)
+						for (x=0; x<=TileMap.TileMapSizeX;x++)
 						{
 								if (Tiles[x,y].tileType >= 0) //was just solid only. Note: If textures are all wrong it's probably caused here!
 								{
 										//assign it's north texture
-										if (y<63)
+										if (y<TileMap.TileMapSizeY)
 										{Tiles[x,y].North =Tiles[x,y+1].wallTexture;}
 										else
 										{Tiles[x,y].North =-1;}
@@ -1629,7 +1640,7 @@ public class TileMap : Loader {
 										{Tiles[x,y].South =-1;}
 								}
 								//it's east
-								if (x<63)
+								if (x<TileMap.TileMapSizeX)
 								{Tiles[x,y].East =Tiles[x+1,y].wallTexture;}
 								else
 								{Tiles[x,y].East =-1;}
@@ -1639,7 +1650,7 @@ public class TileMap : Loader {
 								else
 								{Tiles[x,y].West =-1;}				
 						}
-						if ((x<64) && (y<64))
+						if ((x<=TileMap.TileMapSizeX) && (y<=TileMap.TileMapSizeY))
 						{
 								Tiles[x,y].UpperEast = Tiles[x,y].East;
 								Tiles[x,y].UpperWest = Tiles[x,y].West;
@@ -1662,15 +1673,10 @@ public class TileMap : Loader {
 						case GAME_UW1:
 								{
 										int z=0;
-										for (y=0; y<64;y++)
+										for (y=0; y<=TileMap.TileMapSizeY;y++)
 										{
-												for (x=0; x<64;x++)
+												for (x=0; x<=TileMap.TileMapSizeX;x++)
 												{
-														if ((x==32) && (y==6))
-														{
-																int jkj=0;
-																jkj++;
-														}
 														int val = (int)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
 														//The automap contains one byte per tile, in the same order as the
 														//level tilemap. A valid value in the low nybble means the tile is displayed
@@ -1785,9 +1791,9 @@ public class TileMap : Loader {
 				//Beta grove  Map 13 (chunk 53xx)
 				//C/space L1-2    Map 14 (chunk 54xx)
 				//C/space other Map 15 (chunk 55xx)
-				for (int y=0; y<64;y++)
+				for (int y=0; y<=TileMap.TileMapSizeY;y++)
 				{
-						for (int x = 0; x < 64; x++)
+						for (int x = 0; x <=TileMap.TileMapSizeX; x++)
 						{
 								//Read in the tile data 
 								Tiles[x,y]=new TileInfo();
@@ -1907,9 +1913,9 @@ public class TileMap : Loader {
 						}
 				}
 
-				for (int y=1; y<63;y++) //skip the outer textures.
+				for (int y=1; y<TileMap.TileMapSizeY;y++) //skip the outer textures.
 				{
-						for (int x=1; x<63;x++)
+						for (int x=1; x<TileMap.TileMapSizeX;x++)
 						{
 								//if (
 								//  (Tiles[x,y].tileType  != TILE_OPEN) 
@@ -2045,8 +2051,8 @@ public class TileMap : Loader {
 		{
 				int x; int y;
 
-						for (x=0;x<64;x++){
-								for (y=0;y<64;y++){
+						for (x=0;x<=TileMap.TileMapSizeX;x++){
+							for (y=0;y<=TileMap.TileMapSizeY;y++){
 										//Set some easy tile visible settings
 										switch (Tiles[x,y].tileType)
 										{
@@ -2063,8 +2069,8 @@ public class TileMap : Loader {
 										}
 								}
 
-						for (x=0;x<64;x++){
-								for (y=0;y<64;y++){
+						for (x=0;x<=TileMap.TileMapSizeX;x++){
+								for (y=0;y<=TileMap.TileMapSizeY;y++){
 										//lets test this tile for visibility
 										//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
 										if ((Tiles[x,y].tileType ==0) && (Tiles[x,y].indexObjectList == 0)  && (Tiles[x,y].TerrainChange == 0)){
@@ -2078,7 +2084,7 @@ public class TileMap : Loader {
 																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
 																{Tiles[x,y].Render =0 ; ;break;}
 																else {Tiles[x,y].Render =1 ;break;}
-														case 63://br corner
+														case TileMap.TileMapSizeX://br corner
 																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
 																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
 																{Tiles[x,y].Render =0 ;break;}
@@ -2090,7 +2096,7 @@ public class TileMap : Loader {
 																else {Tiles[x,y].Render =1 ;break;}
 														}
 														break;
-												case 63: //Top row
+												case TileMap.TileMapSizeY: //Top row
 														switch (x)
 														{
 														case 0:	//tl corner
@@ -2098,7 +2104,7 @@ public class TileMap : Loader {
 																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
 																{Tiles[x,y].Render =0 ;break;}
 																else {Tiles[x,y].Render =1 ;break;}
-														case 63://tr corner
+														case TileMap.TileMapSizeX://tr corner
 																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
 																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
 																{Tiles[x,y].Render =0 ;break;}
@@ -2118,7 +2124,7 @@ public class TileMap : Loader {
 																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
 																{Tiles[x,y].Render =0;break;}
 																else {Tiles[x,y].Render =1 ;break;}
-														case 63:	//right edge
+														case TileMap.TileMapSizeX:	//right edge
 																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
 																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
 																{Tiles[x,y].Render =0 ;break;}
@@ -2149,8 +2155,8 @@ public class TileMap : Loader {
 				}
 				int j=1 ;
 				//Now lets combine the solids along particular axis
-				for (x=0;x<63;x++){
-						for (y=0;y<63;y++){
+				for (x=0;x<TileMap.TileMapSizeX;x++){
+						for (y=0;y<TileMap.TileMapSizeY;y++){
 								if  ((Tiles[x,y].Grouped ==0))
 								{
 										j=1;
@@ -2178,8 +2184,8 @@ public class TileMap : Loader {
 				j=1;
 
 				////Now lets combine solids along the other axis
-				for (y=0;y<63;y++){
-						for (x=0;x<63;x++){
+				for (y=0;y<TileMap.TileMapSizeY;y++){
+						for (x=0;x<TileMap.TileMapSizeX;x++){
 								if  ((Tiles[x,y].Grouped ==0))
 								{
 										j=1;
@@ -2207,8 +2213,8 @@ public class TileMap : Loader {
 
 				//Clear invisible faces on solid tiles. 
 				//TODO:Support all 64x64 tiles
-				for (y = 0; y<=63; y++){
-						for (x = 0; x<=63; x++){
+				for (y = 0; y<=TileMap.TileMapSizeY; y++){
+						for (x = 0; x<=TileMap.TileMapSizeX; x++){
 								if ((Tiles[x,y].tileType == TILE_SOLID))
 								{
 										int dimx = Tiles[x,y].DimX;
@@ -2218,7 +2224,7 @@ public class TileMap : Loader {
 										{
 												Tiles[x,y].VisibleFaces[vWEST]=0;
 										}
-										if (x == 63)
+										if (x == TileMap.TileMapSizeX)
 										{
 												Tiles[x,y].VisibleFaces[vEAST] = 0;
 										}
@@ -2227,11 +2233,11 @@ public class TileMap : Loader {
 												Tiles[x,y].VisibleFaces[vSOUTH] = 0;
 										}
 
-										if (y == 63)
+										if (y == TileMap.TileMapSizeY)
 										{
 												Tiles[x,y].VisibleFaces[vNORTH] = 0;
 										}
-										if ((x+dimx <= 63) && (y+dimy <= 63))
+										if ((x+dimx <= TileMap.TileMapSizeX) && (y+dimy <= TileMap.TileMapSizeY))
 										{
 												if ((Tiles[x + dimx,y].tileType == TILE_SOLID) && (Tiles[x + dimx,y].TerrainChange == 0) && (Tiles[x,y].TerrainChange == 0))//Tile to the east is a solid
 												{
@@ -2249,8 +2255,8 @@ public class TileMap : Loader {
 				}
 
 				//Clear invisible faces on diagonals
-				for (y = 1; y < 63; y++){
-						for (x = 1; x < 63; x++){
+				for (y = 1; y < TileMap.TileMapSizeY; y++){
+						for (x = 1; x < TileMap.TileMapSizeX; x++){
 								switch (Tiles[x,y].tileType)
 								{
 								case TILE_DIAG_NW:
@@ -2315,8 +2321,8 @@ public class TileMap : Loader {
 
 				}
 
-				for (y = 1; y < 63; y++){
-						for (x = 1; x < 63; x++){
+				for (y = 1; y < TileMap.TileMapSizeY; y++){
+						for (x = 1; x < TileMap.TileMapSizeX; x++){
 								if ((Tiles[x,y].tileType == TILE_OPEN) && (Tiles[x,y].TerrainChange == 0) && (Tiles[x,y].BullFrog == 0))
 								{
 										if (
@@ -2361,8 +2367,8 @@ public class TileMap : Loader {
 						}
 				}
 				//Make sure solids & opens are still consistently visible.
-				for (y = 1; y < 63; y++){
-						for (x = 1; x < 63; x++){
+				for (y = 1; y < TileMap.TileMapSizeY; y++){
+						for (x = 1; x < TileMap.TileMapSizeX; x++){
 
 								if ((Tiles[x,y].tileType == TILE_SOLID) || (Tiles[x,y].tileType == TILE_OPEN))
 								{
@@ -2405,13 +2411,13 @@ public class TileMap : Loader {
 								}
 						}
 				}
-				for ( y = 0; y <= 63; y++){
+				for ( y = 0; y <= TileMap.TileMapSizeY; y++){
 						Tiles[0,y].VisibleFaces[vEAST]=1;
-						Tiles[63,y].VisibleFaces[vWEST] = 1;
+						Tiles[TileMap.TileMapSizeX,y].VisibleFaces[vWEST] = 1;
 				}
-				for ( x = 0; x <= 63; x++){
+				for ( x = 0; x <= TileMap.TileMapSizeX; x++){
 						Tiles[x,0].VisibleFaces[vNORTH] = 1;
-						Tiles[x,63].VisibleFaces[vSOUTH] = 1;
+						Tiles[x,TileMap.TileMapSizeY].VisibleFaces[vSOUTH] = 1;
 				}
 		}
 
@@ -2453,9 +2459,9 @@ public class TileMap : Loader {
 		{			
 				int RoomIndex=1;
 				ResetTileTests();
-				for (int x = 0; x<64; x++)
+				for (int x = 0; x<=TileMap.TileMapSizeX; x++)
 				{
-						for (int y = 0; y<64; y++)
+						for (int y = 0; y<=TileMap.TileMapSizeY; y++)
 						{
 								currRoomIndex = RoomIndex;
 								if (isMergeableRoom(x,y))
@@ -2473,9 +2479,9 @@ public class TileMap : Loader {
 		/// <param name="">.</param>
 		void ResetTileTests()
 		{
-				for (int x = 0; x<64; x++)
+				for (int x = 0; x<=TileMap.TileMapSizeX; x++)
 				{
-						for (int y = 0; y<64; y++)
+						for (int y = 0; y<=TileMap.TileMapSizeY; y++)
 						{
 								Tiles[x,y].tileTested=0;
 						}
@@ -2615,7 +2621,7 @@ public class TileMap : Loader {
 		//Get land region of the tile
 		public string GetTileRegionName(int tileX, int tileY)
 		{
-		if ((tileX != 99) && (tileY != 99))
+		if ((tileX != TileMap.ObjectStorageTile) && (tileY != TileMap.ObjectStorageTile))
 		{
 			if (Tiles[tileX,tileY].isLava)
 				{
@@ -2700,9 +2706,9 @@ public class TileMap : Loader {
 		{
 				int currRegion;
 				currRegion =1;
-				for (int x = 0; x<64; x++)
+				for (int x = 0; x<=TileMap.TileMapSizeX; x++)
 				{
-						for (int y = 0; y<64; y++)
+						for (int y = 0; y<=TileMap.TileMapSizeY; y++)
 						{
 								if (Tiles[x,y].hasBridge != true)
 								{
@@ -2746,14 +2752,16 @@ public class TileMap : Loader {
 		}
 
 
-
+		/// <summary>
+		/// Merges the lava regions into a single region
+		/// </summary>
 		public void MergeLavaRegions()
 		{
 				int currRegion;
 				currRegion = 1;
-				for (int x = 0; x<64; x++)
+				for (int x = 0; x<=TileMap.TileMapSizeX; x++)
 				{
-						for (int y = 0; y<64; y++)
+						for (int y = 0; y<=TileMap.TileMapSizeY; y++)
 						{
 								if (Tiles[x,y].hasBridge != true)
 								{

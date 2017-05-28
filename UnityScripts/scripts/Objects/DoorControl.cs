@@ -663,7 +663,7 @@ public class DoorControl : object_base {
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
-								if (objInt.tileX<=63)
+								if (objInt.tileX<=TileMap.TileMapSizeX)
 								{
 										textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
 								}
@@ -761,7 +761,7 @@ public class DoorControl : object_base {
 				Vector2[] uvs =new Vector2[6*4];
 				int tileX=dc.objInt().tileX;
 				int tileY=dc.objInt().tileY;
-				if (tileX==99){return;}
+				if (tileX==TileMap.ObjectStorageTile){return;}
 				//int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
 				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
 				float Bottom =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
