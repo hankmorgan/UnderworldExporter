@@ -51,11 +51,11 @@ public class CnvStack {
 		/// <summary>
 		/// Set the specified value on the stack
 		/// </summary>
-		/// <param name="arg1">Arg1.</param>
-		/// <param name="arg2">Arg2.</param>
-		public void Set(int arg1, int arg2)
+		/// <param name="index">Index to change</param>
+		/// <param name="val">value to set</param>
+		public void Set(int index, int val)
 		{
-				StackValues[arg1]=arg2;//I hope!
+				StackValues[index]=val;//I hope!
 		}
 
 		public int get_stackp()
@@ -72,7 +72,7 @@ public class CnvStack {
 		{
 				if (index>StackValues.GetUpperBound(0))
 				{
-						Debug.Log ("Stack out of bounds");
+						Debug.Log ("Stack out of bounds- At (" + index + ")");
 						return 0;
 				}
 				return StackValues[index];

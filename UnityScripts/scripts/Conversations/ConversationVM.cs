@@ -9,6 +9,14 @@ using System.IO;
 /// </summary>
 public class ConversationVM : UWEBase {
 
+
+		///The NPC is talking
+		public const int NPC_SAY=0;
+		///The PC is talking
+		public const int PC_SAY=1;
+		///Printed text is displayed
+		public const int PRINT_SAY=2;
+
 		//The op codes for the vm.
 		const int cnv_NOP=0;
 		const int cnv_OPADD=1;
@@ -478,7 +486,10 @@ public class ConversationVM : UWEBase {
 						case cnv_JMP:
 								//Debug.Log("instr = " +instrp + " JMP to " +  conv[currConv].instuctions[instrp+1]);
 								instrp = conv[currConv].instuctions[instrp+1]-1;
-
+								//if (conv[currConv].instuctions[instrp+1] == cnv_BRA)
+								//{//Skip over a branch when jumping
+								//		instrp+=2;
+								//}
 								break;
 
 						case cnv_BEQ:
@@ -502,12 +513,26 @@ public class ConversationVM : UWEBase {
 								break;
 
 						case cnv_BRA:
-								instrp += conv[currConv].instuctions[instrp+1];
-								break;
+								{
+									if (conv[currConv].instuctions[instrp+1]<=conv[currConv].instuctions.GetUpperBound(0))
+									{
+										instrp += conv[currConv].instuctions[instrp+1];		
+									}
+									else
+									{//Skip over an invalid instruction address
+										//instrp++;
+
+												//Go backwards
+										int offset =  conv[currConv].instuctions[instrp+1] ^ 0xffff	;
+												offset++;
+										instrp -=offset;
+									}
+									break;		
+								}
 
 						case cnv_CALL: // local function
 								// stack value points to next instruction after call
-								Debug.Log("inst=" + instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[instrp+1]-1));
+								//Debug.Log("inst=" + instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[instrp+1]-1));
 								stack.Push(instrp+1);
 								instrp = conv[currConv].instuctions[instrp+1]-1;
 								call_level++;
@@ -515,16 +540,16 @@ public class ConversationVM : UWEBase {
 
 						case cnv_CALLI: // imported function
 								{
-										int arg1 = conv[currConv].instuctions[++instrp];
-										for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+									int arg1 = conv[currConv].instuctions[++instrp];
+									for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+									{
+										if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==0x0111))
 										{
-												if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==0x0111))
-												{
-														//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
-														yield return StartCoroutine( run_imported_function(conv[currConv].functions[i]));
-														break;
-												}
+											//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
+											yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
+											break;
 										}
+									}
 
 
 										/*	std::string funcname;
@@ -546,7 +571,7 @@ public class ConversationVM : UWEBase {
 										else
 										{
 												int arg1 = stack.Pop();
-												Debug.Log("instr = " +instrp + " returning to " + arg1);
+												//Debug.Log("instr = " +instrp + " returning to " + arg1);
 												instrp = arg1;
 										}
 								}
@@ -684,14 +709,13 @@ public class ConversationVM : UWEBase {
 								finished=true;
 						}
 				}
-
-			EndConversation(npc);
+			yield return StartCoroutine(EndConversation(npc));
 		}
 
 		/// <summary>
 		/// Ends the conversation.
 		/// </summary>
-		public void EndConversation(NPC npc)
+		public IEnumerator EndConversation(NPC npc)
 		{
 				Conversation.InConversation=false;
 				//Copy back private variables to the globals file.
@@ -778,7 +802,7 @@ public class ConversationVM : UWEBase {
 
 				///Puts the time scales back to normal
 				Time.timeScale=1.0f;
-
+				yield return new WaitForSeconds(4f);
 				//npc.npc_talkedto=1;
 				UWHUD.instance.Conversation_tl.Clear();
 				UWHUD.instance.MessageScroll.Clear();
@@ -917,14 +941,46 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator say_op(int arg1)
 		{
-				//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
-				//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
-				UWHUD.instance.Conversation_tl.Add ( StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n");
-				yield return 0;
+			//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
+			//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
+			//UWHUD.instance.Conversation_tl.Add ( StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n", NPC_SAY);
+			yield return StartCoroutine(say_op(arg1,NPC_SAY));
+			yield return 0;
 		}
 
 
-		IEnumerator run_imported_function(ImportedFunctions func)
+		IEnumerator say_op(int arg1, int PrintType)
+		{
+				//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
+				//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
+
+				///Sets the markup to colour the text based on print type.
+
+				//UWHUD.instance.Conversation_tl.Add ( Markup + StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n" + "</color>");
+			yield return StartCoroutine(say_op(StringController.instance.GetString(conv[currConv].StringBlock,arg1),PrintType));
+			yield return 0;
+
+		}
+
+
+		IEnumerator say_op(string text, int PrintType)
+		{				
+			string Markup="";
+			switch (PrintType)
+			{
+			case PC_SAY:
+					Markup="<color=red>";break;//[FF0000]
+			case PRINT_SAY:
+					Markup="<color=black>";break;//[000000]
+			default:
+					Markup="<color=green>";break;//[00FF00]
+			}	
+			UWHUD.instance.Conversation_tl.Add ( Markup + text + "" + "</color>"); //\n
+			yield return 0;
+		}
+
+
+		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
 				//Debug.Log("Calling " + func.functionName);
 				switch (func.functionName.ToLower())
@@ -966,7 +1022,7 @@ public class ConversationVM : UWEBase {
 
 				case "print":
 						{
-								say_op(stack.Pop());
+								say_op(stack.Pop(),PRINT_SAY);
 								break;
 						}
 
@@ -1009,12 +1065,94 @@ public class ConversationVM : UWEBase {
 
 				case "random":
 						{
-								stack.Pop();
-								//stack.Pop();
-								int arg1=stack.Pop();
-								result_register=Random.Range(1,stack.at(arg1)+1);
+							stack.Pop();
+							//stack.Pop();
+							int arg1=stack.Pop();
+							result_register=Random.Range(1,stack.at(arg1)+1);
 							break;
 						}
+
+				case "show_inv":
+						{
+							//stack.Pop();
+							int arg1 = stack.at(stack.stackptr-2);
+							int arg2 = stack.at(stack.stackptr-3);
+							result_register= show_inv(arg1,arg2);
+							break;
+						}
+
+				case "give_to_npc":
+						{
+							stack.Pop();
+							int arg1= stack.Pop();	
+							int arg2= stack.Pop();
+							give_to_npc(npc, stack.at(arg1), stack.at(arg2));
+							break;
+						}
+
+				case "take_from_npc":
+						{
+							stack.Pop();
+							int arg1 = stack.Pop();
+							take_from_npc(npc, stack.at(arg1));
+							break;
+						}
+
+				case "setup_to_barter":
+						{
+							//stack.Pop();
+							setup_to_barter(npc);
+							break;
+						}
+
+				case "do_offer":
+						{
+							int noOfArgs=stack.Pop();
+							switch (noOfArgs)
+							{
+							case 7:
+								{
+									int []args =new int[noOfArgs];
+									int start= stack.Pop();
+									for (int i=0; i<noOfArgs; i++)
+									{
+										args[i]	= stack.at(start-i);
+									}
+
+
+									yield return StartCoroutine(do_offer(npc, noOfArgs,args[0],args[1],args[2],args[3],args[4],args[5],args[6]));
+									break;		
+								}
+
+							default:
+								{
+									Debug.Log("unimplemented version of do_offer " + noOfArgs);
+									break;		
+								}
+							}
+						break;
+						}
+
+				case "do_demand":
+						{
+							int noOfArgs=stack.Pop();
+							int []args =new int[noOfArgs];
+							int start= stack.Pop();
+							for (int i=0; i<noOfArgs; i++)
+							{
+									args[i]	= stack.at(start-i);
+							}	
+							yield return StartCoroutine(do_demand(npc,args[0],args[1]));
+							break;
+						}
+
+				case "do_judgement":
+						{
+							//stack.Pop();
+							yield return StartCoroutine(do_judgement(npc));
+							break;
+						}
+
 
 				default: 
 
@@ -1039,7 +1177,8 @@ public class ConversationVM : UWEBase {
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
 								//PlayerInput.text += (j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i))) + "\n";
-								UWHUD.instance.MessageScroll.Add(j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i)) + "\n");
+								UWHUD.instance.MessageScroll.Add(j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i)) + "");//  \n
+
 								MaxAnswer++;
 						}
 						else
@@ -1049,7 +1188,7 @@ public class ConversationVM : UWEBase {
 				}
 				yield return StartCoroutine(WaitForInput());
 				int AnswerIndex=stack.at(Start+PlayerAnswer-1);
-				yield return StartCoroutine(say_op(AnswerIndex));
+				yield return StartCoroutine(say_op(AnswerIndex, PC_SAY));
 				result_register = PlayerAnswer;
 				yield return 0;
 		}
@@ -1122,33 +1261,40 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
-				if (WaitingForInput)
+			if (WaitingForInput)
+			{
+				if (Input.GetKeyDown (KeyCode.Alpha1))
 				{
-						if (Input.GetKeyDown (KeyCode.Alpha1))
-						{
-								CheckAnswer(1);
-						}
-						else if (Input.GetKeyDown (KeyCode.Alpha2))
-						{
-								CheckAnswer(2);
-						}
-						else if (Input.GetKeyDown (KeyCode.Alpha3))
-						{
-								CheckAnswer(3);
-						}
-						else if (Input.GetKeyDown (KeyCode.Alpha4))
-						{
-								CheckAnswer(4);
-						}
-						else if (Input.GetKeyDown (KeyCode.Alpha5))
-						{
-								CheckAnswer(5);
-						}
-						else if (Input.GetKeyDown (KeyCode.Alpha6))
-						{
-								CheckAnswer(6);
-						}
+						CheckAnswer(1);
 				}
+				else if (Input.GetKeyDown (KeyCode.Alpha2))
+				{
+						CheckAnswer(2);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha3))
+				{
+						CheckAnswer(3);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha4))
+				{
+						CheckAnswer(4);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha5))
+				{
+						CheckAnswer(5);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha6))
+				{
+						CheckAnswer(6);
+				}
+			}
+			else if (WaitingForMore)
+			{
+				if (Input.GetKeyDown (KeyCode.Space))
+				{
+						WaitingForMore=false;
+				}
+			}
 		}
 
 
@@ -1228,8 +1374,516 @@ public class ConversationVM : UWEBase {
 
 
 
+		/// <summary>
+		/// Copies inventory item ids and slot positions into the array indices specified.
+		/// </summary>
+		/// <returns>The number of items found</returns>
+		/// <param name="startObjectPos">Start index of object position.</param>
+		/// <param name="startObjectIDs">Start index of object Ids.</param>
+		public int show_inv(int startObjectPos, int startObjectIDs)
+		{
+			int j=0;
+			for (int i=0; i<4;i++)
+			{
+					TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
+					if (pcSlot.isSelected())
+					{
+							//locals[startObjectPos+j]= i;
+							stack.Set(startObjectPos+j,i+1);
+							//locals[startObjectIDs+j]= pcSlot.GetObjectID();
+							stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
+							j++;
+					}
+			}
+				//Debug.Log(j + " items saved to " + startObjectPos + startObjectIDs);
+			return j;
+		}
 
 
 
+		/// <summary>
+		/// Gives the items at the specified positions in the array to the NPC
+		/// </summary>
+		/// <returns>1 if something given</returns>
+		/// <param name="start">Start index of slots to transfer from</param>
+		/// <param name="NoOfItems">No of items to transfer</param>
+		public int give_to_npc(NPC npc, int start, int NoOfItems)
+		{
+				Container cn =npc.gameObject.GetComponent<Container>();
+				bool SomethingGiven=false;
+				for (int i=0; i<NoOfItems; i++)
+				{
+						int slotNo = start-1+i; //locals[start+i] ;
+						if (slotNo<=3)
+						{
+								TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
+								//Give the item to the npc
+								if (Container.GetFreeSlot(cn)!=-1)
+								{
+										cn.AddItemToContainer(pcSlot.objectInSlot);
+										pcSlot.clear ();
+										SomethingGiven=true;
+								}
+								else
+								{
+										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+										if (demanded!=null)
+										{
+												demanded.transform.parent=GameWorldController.instance.LevelMarker();
+												GameWorldController.MoveToWorld(demanded);
+												demanded.transform.position=npc.transform.position;
+												SomethingGiven=true;
+										}
+										pcSlot.clear();
+								}
+						}
+				}
+				if (SomethingGiven==true)
+				{
+						return 1;
+				}
+				else
+				{
+						return 0;
+				}
+		}
+
+
+
+
+	/// <summary>
+	/// transfers an item from npc inventory to player inventory,based on an item id. 
+	/// </summary>
+	/// when the value is > 1000, all items of		
+	/// a category are copied. category item start = (arg1-1000)*16
+	/// My currenty example is lanugo (10) who is passing a value greater than 1000*/
+	/// Until It get more examples I'm doing the following*/
+	/// Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+	/// Another example goldthirst who specifically has an item id to pass.
+	/// 
+	/// <returns>1: ok, 2: player has no space left</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="arg1">Arg1.</param>
+	public int take_from_npc(NPC npc, int arg1)
+	{
+		/*
+		   id=0015 name="take_from_npc" ret_type=int
+		   parameters:   arg1: item id (can also be an item category value, > 1000)
+		   description:  transfers an item from npc inventory to player inventory,
+		                 based on an item id. when the value is > 1000, all items of
+		                 a category are copied. category item start = (arg1-1000)*16
+		   return value: 1: ok, 2: player has no space left
+			*/
+		/*My currenty example is lanugo (10) who is passing a value greater than 1000*/
+		/*Until It get more examples I'm doing the following*/
+		/*Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+		//Debug.Log ("Item Category is " + (arg1-1000)*16);
+		//Another example goldthirst who specifically has an item id to pass.
+		int playerHasSpace=1;
+		Container cn = npc.gameObject.GetComponent<Container>();
+		Container cnpc = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
+
+		int rangeS = (arg1-1000)*16;
+		int rangeE = rangeS+16;
+
+		for (int i = 0; i<= cn.MaxCapacity ();i++)
+		{
+			//string itemName=cn.GetItemAt (i);				
+			if (cn.GetItemAt (i)!="")
+			{
+				ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+				if (
+						((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+						||
+						((arg1<1000) && (objInt.item_id == arg1 ))
+				)
+				{
+					//Give to PC
+					GameObject demanded =cn.GetGameObjectAt(i);
+					string itemName=cn.GetItemAt (i);
+					if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+					{
+						demanded.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+						cnpc.AddItemToContainer(itemName);
+						demanded.GetComponent<ObjectInteraction>().PickedUp=true;
+						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+					}
+					else
+					{
+						playerHasSpace=0;
+						demanded.transform.parent=GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(demanded);
+						demanded.transform.position=npc.transform.position;
+						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+					}
+				}
+			}
+		}
+		return playerHasSpace;
+	}
+
+
+	/// <summary>
+	/// Waits for the player to press any key when printing text
+	/// </summary>
+	IEnumerator WaitForMore()
+	{
+			WaitingForMore=true;
+			while (WaitingForMore)
+			{yield return null;}
+	}
+
+
+
+
+
+		/// <summary>
+		/// Setups the barter windows
+		/// </summary>
+		/// TODO: Figure out where generic NPCs get their inventory for trading from???? Is there a loot list somewhere?
+		public void setup_to_barter(NPC npc)
+		{
+				/*
+		   id=001f name="setup_to_barter" ret_type=void
+		   parameters:   none
+		   description:  starts bartering; shows npc items in npc bartering area
+		 */
+
+				Container cn = npc.gameObject.GetComponent<Container>();
+				int itemCount=0;
+
+				Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
+				for (int i =0 ; i<= cn.MaxCapacity(); i++)
+				{
+						if (cn.GetItemAt(i)!="")
+						{
+								if (itemCount <=3)
+								{//Just take the first four items
+										ObjectInteraction itemToTrade = cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
+										TradeSlot ts = UWHUD.instance.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+										ts.objectInSlot=itemToTrade.gameObject.name;
+										ts.SlotImage.texture=itemToTrade.GetInventoryDisplay().texture;
+										int qty= itemToTrade.GetQty();
+										if (qty<=1)
+										{
+												ts.Quantity.text="";
+										}
+										else
+										{
+												ts.Quantity.text=qty.ToString();
+										}
+								}
+						}
+				}
+
+				return;
+		}
+
+
+		/// <summary>
+		/// Does the appraisal of the worth of the items in the trade area
+		/// TODO: figure out how this works. for the moment just base it out quantity of objects selected
+		/// Current implemenation is based on qty of objects in the trade area.
+		/// </summary>
+		/// <returns>The judgement.</returns>
+		/// <param name="unk">Unk.</param>
+
+		public IEnumerator do_judgement(NPC npc)
+		{
+				/*
+	id=0021 name="do_judgement" ret_type=void
+   parameters:   none
+   description:  judges current trade (using the "appraise" skill) and prints result
+		 */
+				//Debug.Log ("Do Judgment");
+
+				int playerObjectCount=0; int npcObjectCount=0;
+				for (int i = 0; i<4; i++)
+				{
+						TradeSlot npcSlot = UWHUD.instance.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+						TradeSlot pcSlot =  UWHUD.instance.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+						if (npcSlot.isSelected()){npcObjectCount++;}
+						if (pcSlot.isSelected()){playerObjectCount++;}
+				}
+				if (playerObjectCount<npcObjectCount)
+				{
+						yield return  StartCoroutine ( say_op("Player has the better deal",PRINT_SAY));
+				}
+				else if (playerObjectCount==npcObjectCount)
+				{
+						yield return  StartCoroutine (say_op("It is an even deal",PRINT_SAY));
+				}
+				else
+				{
+						yield return  StartCoroutine (say_op ("NPC has the better deal",PRINT_SAY));
+				}
+				//return;
+		}
+
+		/// <summary>
+		/// Declines the trade offer
+		/// Moves items back into respective inventories
+		/// </summary>
+		/// <param name="unk">Unk.</param>
+		public void do_decline(NPC npc)
+		{
+				/*
+   id=0022 name="do_decline" ret_type=void
+   parameters:   none
+   description:  declines trade offer (?)
+		*/
+
+				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				for (int i =0; i <=3; i++)
+				{
+						TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+						if (pcSlot.objectInSlot!="")
+						{//Move the object to the players container or to the ground
+								if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+								{
+										//GameWorldController.instance.playerUW.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+										cn.AddItemToContainer(pcSlot.objectInSlot);
+										pcSlot.clear ();
+										GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+								}
+								else
+								{
+										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(demanded);
+										demanded.transform.position=npc.transform.position;
+										pcSlot.clear();
+								}
+						}
+				}
+
+				for (int i=0; i<=3; i++)
+				{//Clear out the trade slots.
+						UWHUD.instance.npcTrade[i].clear();
+				}
+				return;
+		}
+
+
+
+		/// <summary>
+		/// Checks the offer.
+		/// checks if the deal is acceptable for the npc, based on the
+		/// selected items in both bartering areas. the values in arg1
+		/// to arg5 are probably values of the items that are
+		/// acceptable for the npc.
+		/// the function is sometimes called with 7 args, but arg6 and
+		/// arg7 are always set to -1.
+		/// </summary>
+		/// <returns>1 if the deal is acceptable, 0 if not</returns>
+		/// <param name="unk">Unk.</param>
+		/// <param name="arg1">Arg1.</param>
+		/// <param name="arg2">Arg2.</param>
+		/// <param name="arg3">Arg3.</param>
+		/// <param name="arg4">Arg4.</param>
+		/// <param name="arg5">Arg5.</param>
+		/// <param name="arg6">Arg6.</param>
+		/// <param name="arg7">Arg7.</param>
+		/// I think the values passed are actually the strings for how the npc reacts to the offer. The value judgment is done elsewhere
+		/// In the prototype I randomise the decision. And then randomise a response based on that decision.
+		/// Arg5 is the yes answer
+		public IEnumerator  do_offer(NPC npc, int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
+		{
+				/*
+   id=0018 name="do_offer" ret_type=int
+   parameters:   arg1 ... arg5: unknown
+                 [arg6, arg7]: unknown
+   description:  checks if the deal is acceptable for the npc, based on the
+                 selected items in both bartering areas. the values in arg1
+                 to arg5 are probably values of the items that are
+                 acceptable for the npc.
+                 the function is sometimes called with 7 args, but arg6 and
+                 arg7 are always set to -1.
+   return value: 1 if the deal is acceptable, 0 if not*/
+
+
+				PlayerAnswer = Random.Range (0,2);
+
+				if (PlayerAnswer==1)
+				{
+						yield return StartCoroutine (say_op (arg5));
+						//for the moment move to the player's backpack or if no room there drop them on the ground
+						//Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+						for (int i =0; i <=3; i++)
+						{
+								TakeFromNPC (npc,i);//Takes from the NPC slot if selected
+						}
+
+
+						//Now give the item to the NPC.
+						//cn =npc.gameObject.GetComponent<Container>();
+						for (int i =0; i <=3; i++)
+						{
+								TakeFromPC (npc, i);
+						}
+				}
+				else
+				{
+						//Debug.Log ("offer declined");
+						switch ( Random.Range(1,5))
+						{
+						case 1:
+								yield return StartCoroutine (say_op (arg1));break;
+						case 2:
+								yield return StartCoroutine (say_op (arg2));break;
+						case 3:
+								yield return StartCoroutine (say_op (arg3));break;
+						case 4:
+								yield return StartCoroutine (say_op (arg4));break;
+						}
+				}
+		}
+
+		/// <summary>
+		/// Does the offer.
+		/// </summary>
+		public IEnumerator do_offer(NPC npc, int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
+		{
+			yield return StartCoroutine( do_offer (npc, unk,arg1,arg2,arg3,arg4,arg5,arg6,-1) );
+		}
+
+		/// <summary>
+		/// Player demands the items from the npc
+		/// </summary>
+		/// <returns>returns 1 when player persuaded the NPC, 0 else</returns>
+		/// <param name="unk">Unk.</param>
+		/// <param name="arg1">string id with text to print if NPC is not willing to give the item</param>
+		/// <param name="arg2">string id with text if NPC gives the player the item</param>
+		public IEnumerator do_demand(NPC npc, int arg1, int arg2)
+		{
+				/*
+   id=0019 name="do_demand" ret_type=int
+   parameters:   arg1: string id with text to print if NPC is not willing
+                       to give the item
+                 arg2: string id with text if NPC gives the player the item
+   description:  decides if the player can "persuade" the NPC to give away
+                 the items in barter area, e.g. using karma.
+   return value: returns 1 when player persuaded the NPC, 0 else
+		 */
+				int DemandResult = Random.Range (0,2);
+				if (DemandResult==1)
+				{		
+						//Demand sucessfull
+						for (int i =0; i <=3; i++)
+						{
+								TakeFromNPC (npc, i);//Takes from the NPC slot if selected
+						}
+						yield return StartCoroutine ( say_op (arg2) );
+				}
+				else
+				{
+						//Unsucessful
+						yield return StartCoroutine ( say_op (arg1) );
+				}
+
+				//Move the players items back to his inventory;
+				RestorePCsInventory (npc);
+				PlayerAnswer=DemandResult;
+		}
+
+
+
+
+
+
+
+
+		/// <summary>
+		/// Gives the selected items to the NPC
+		/// </summary>
+		/// <param name="SlotNo">Slot no.</param>
+		private void TakeFromNPC (NPC npc, int SlotNo)
+		{
+				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
+				//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				if (npcSlot.isSelected ()) {
+						//Move the object to the container or to the ground
+						if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+						{
+								npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+								cn.AddItemToContainer (npcSlot.objectInSlot);
+								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+								GameWorldController.MoveToInventory(demanded);
+								demanded.transform.position = Vector3.zero;
+								npcSlot.clear ();
+								GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+								demanded.GetComponent<ObjectInteraction>().PickedUp=true;
+						}
+						else {
+								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								demanded.transform.position = npc.transform.position;
+								GameWorldController.MoveToWorld(demanded);
+								npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+								npcSlot.clear ();
+						}
+				}
+				return;
+		}
+		/// <summary>
+		/// Takes from PCs selected items  ang gives them to the NPC.
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+		void TakeFromPC (NPC npc, int slotNo)
+		{
+				Container cn = npc.GetComponent<Container> ();//GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				TradeSlot pcSlot = UWHUD.instance.playerTrade [slotNo];
+				if (pcSlot.isSelected ()) {
+						//Move the object to the container or to the ground
+						if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+						{
+								cn.AddItemToContainer (pcSlot.objectInSlot);
+								//Move to the inventory room
+								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								GameWorldController.MoveToWorld(demanded);
+								demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
+								pcSlot.clear ();
+						}
+						else {
+								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								demanded.transform.position = npc.transform.position;
+								pcSlot.clear ();
+						}
+				}
+		}
+		/// <summary>
+		/// Restores the Pcs inventory out of the trade area and back into the current container.
+		/// </summary>
+
+		void RestorePCsInventory (NPC npc)
+		{
+				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				for (int i = 0; i <= 3; i++) {
+						TradeSlot npcSlot = UWHUD.instance.playerTrade [i];
+						if (npcSlot.objectInSlot != "") {
+								//Move the object to the players container or to the ground
+								if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+								{
+										npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+										cn.AddItemToContainer (npcSlot.objectInSlot);
+										npcSlot.clear ();
+										GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+								}
+								else {
+										GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+										demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+										demanded.transform.position = npc.transform.position;
+										GameWorldController.MoveToWorld(demanded);
+										npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+										npcSlot.clear ();
+								}
+						}
+				}
+		}
 
 }

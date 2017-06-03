@@ -262,7 +262,7 @@ public class UWHUD : HUD {
 								ConvNPCPortraitBG.texture=grConv.LoadImageAt(2);
 								ConvPCPortraitBG.texture=grConv.LoadImageAt(2);
 								ConvTextScrollTop.texture=grConv.LoadImageAt(3);
-								ConvTextScrollTop.texture=grConv.LoadImageAt(4);
+								ConvTextScrollBottom.texture=grConv.LoadImageAt(4);
 								ConvPCTitleBG.texture=grConv.LoadImageAt(0);
 								ConvNPCTitleBG.texture=grConv.LoadImageAt(0);
 								UpdatePanelStates();

@@ -30,7 +30,7 @@ public class ScrollController : GuiBase {
 		
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 		{
-			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
+			/*string[] StrWords = Paragraphs[i].Split(new char [] {' '});
 			int colCounter=0;
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
@@ -47,12 +47,12 @@ public class ScrollController : GuiBase {
 					Output = Output + StrWords[j] + " ";
 					colCounter= colCounter+StrWords[j].Length + 1;
 				}
-			}
-			
-			ListAdd(Output );
+			}*/
+			ListAdd (Paragraphs[i]);
+			//ListAdd(Output );
 			if (i < Paragraphs.GetUpperBound(0))
 			{//TODO:Pause for more when not the last paragraph. 
-				ListAdd("[MORE]");
+				ListAdd("[MORE]-");
 			}
 		}
 	//NewUIOUt.text=uiIn.textLabel.text;
