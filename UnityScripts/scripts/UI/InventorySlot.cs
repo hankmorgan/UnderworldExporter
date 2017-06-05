@@ -445,6 +445,7 @@ public class InventorySlot : GuiBase {
 								InventorySlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
 								UWHUD.instance.MessageScroll.Set ("Move how many?");
 								Conversation.EnteringQty=true;
+								ConversationVM.EnteringQty=true;
 							}
 							else
 							{
@@ -497,6 +498,7 @@ public class InventorySlot : GuiBase {
 		inputctrl.gameObject.SetActive(false);
 		WindowDetect.WaitingForInput=false;
 		Conversation.EnteringQty=false;
+		ConversationVM.EnteringQty=false;
 		if (Conversation.InConversation==false)
 		{
 			UWHUD.instance.MessageScroll.Clear ();
@@ -506,7 +508,8 @@ public class InventorySlot : GuiBase {
 		{
 			//UWHUD.instance.MessageScroll.SetAnchorX(0.06f);
 			//UWHUD.instance.MessageScrollTemp.SetAnchorX(1.00f);
-			UWHUD.instance.MessageScroll.Set(InventorySlot.TempLookAt);
+			//UWHUD.instance.MessageScroll.Set(InventorySlot.TempLookAt);
+			UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
 		}
 
 		if (quant==0)

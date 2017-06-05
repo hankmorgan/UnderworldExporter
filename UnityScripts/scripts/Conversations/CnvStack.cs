@@ -21,6 +21,8 @@ public class CnvStack {
 		/// </summary>
 		public int basep=0;
 
+		public int TopValue=0;
+
 		public CnvStack(int stackSize)
 		{
 			StackValues=new int[stackSize];
@@ -35,6 +37,14 @@ public class CnvStack {
 				stackptr--;
 				int popvalue = StackValues[stackptr];
 				StackValues[stackptr]=0;
+				if (stackptr-1>=0)
+				{
+					TopValue=StackValues[stackptr-1];
+				}
+				else
+				{
+					TopValue=0;	
+				}
 				return popvalue;
 		}
 
@@ -46,6 +56,7 @@ public class CnvStack {
 		public void Push(int newValue)
 		{
 			StackValues[stackptr++]=newValue;
+			TopValue=newValue;
 		}
 
 		/// <summary>
@@ -65,7 +76,15 @@ public class CnvStack {
 
 		public void set_stackp(int ptr)
 		{
-				stackptr=ptr;
+			stackptr=ptr;
+			if (stackptr-1>=0)
+			{
+					TopValue=StackValues[stackptr-1];
+			}
+			else
+			{
+					TopValue=0;	
+			}
 		}
 
 		public int at(int index)
@@ -75,12 +94,17 @@ public class CnvStack {
 						Debug.Log ("Stack out of bounds- At (" + index + ")");
 						return 0;
 				}
+				if (index<0)
+				{
+						Debug.Log ("Stack out of bounds (neg)- At (" + index + ")");
+						return 0;
+				}
 				return StackValues[index];
 		}
 
 		public int Upperbound()
 		{
-				return StackValues.GetUpperBound(0);
+			return StackValues.GetUpperBound(0);
 		}
 
 }

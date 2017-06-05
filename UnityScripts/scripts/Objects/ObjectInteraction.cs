@@ -1836,8 +1836,8 @@ public class ObjectInteraction : UWEBase {
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						if ((currObj.item_id >=128) && (currObj.item_id<=142))
 							{
-								myObj.AddComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;
-								myObj.AddComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
+								myObj.GetComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;
+								myObj.GetComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
 							}
 						break;
 				case KEY:

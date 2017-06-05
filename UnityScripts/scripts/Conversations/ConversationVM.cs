@@ -9,6 +9,8 @@ using System.IO;
 /// </summary>
 public class ConversationVM : UWEBase {
 
+		/// Is the user entering a quantity
+		public static bool EnteringQty;
 
 		///The NPC is talking
 		public const int NPC_SAY=0;
@@ -18,48 +20,48 @@ public class ConversationVM : UWEBase {
 		public const int PRINT_SAY=2;
 
 		//The op codes for the vm.
-		const int cnv_NOP=0;
-		const int cnv_OPADD=1;
-		const int cnv_OPMUL=2;
-		const int cnv_OPSUB=3;
-		const int cnv_OPDIV=4;
-		const int cnv_OPMOD=5;
-		const int cnv_OPOR=6;
-		const int cnv_OPAND=7;
-		const int cnv_OPNOT=8;
-		const int cnv_TSTGT=9;
-		const int cnv_TSTGE=10;
-		const int cnv_TSTLT=11;
-		const int cnv_TSTLE=12;
-		const int cnv_TSTEQ=13;
-		const int cnv_TSTNE=14;
-		const int cnv_JMP=15;
-		const int cnv_BEQ=16;
-		const int cnv_BNE=17;
-		const int cnv_BRA=18;
-		const int cnv_CALL=19;
-		const int cnv_CALLI=20;
-		const int cnv_RET=21;
-		const int cnv_PUSHI=22;
-		const int cnv_PUSHI_EFF=23;
-		const int cnv_POP=24;
-		const int cnv_SWAP=25;
-		const int cnv_PUSHBP=26;
-		const int cnv_POPBP=27;
-		const int cnv_SPTOBP=28;
-		const int cnv_BPTOSP=29;
-		const int cnv_ADDSP=30;
-		const int cnv_FETCHM=31;
-		const int cnv_STO=32;
-		const int cnv_OFFSET=33;
-		const int cnv_START=34;
-		const int cnv_SAVE_REG=35;
-		const int cnv_PUSH_REG=36;
-		const int cnv_STRCMP=37;
-		const int cnv_EXIT_OP=38;
-		const int cnv_SAY_OP=39;
-		const int cnv_RESPOND_OP=40;
-		const int cnv_OPNEG=41;
+		const short cnv_NOP=0;
+		const short cnv_OPADD=1;
+		const short cnv_OPMUL=2;
+		const short cnv_OPSUB=3;
+		const short cnv_OPDIV=4;
+		const short cnv_OPMOD=5;
+		const short cnv_OPOR=6;
+		const short cnv_OPAND=7;
+		const short cnv_OPNOT=8;
+		const short cnv_TSTGT=9;
+		const short cnv_TSTGE=10;
+		const short cnv_TSTLT=11;
+		const short cnv_TSTLE=12;
+		const short cnv_TSTEQ=13;
+		const short cnv_TSTNE=14;
+		const short cnv_JMP=15;
+		const short cnv_BEQ=16;
+		const short cnv_BNE=17;
+		const short cnv_BRA=18;
+		const short cnv_CALL=19;
+		const short cnv_CALLI=20;
+		const short cnv_RET=21;
+		const short cnv_PUSHI=22;
+		const short cnv_PUSHI_EFF=23;
+		const short cnv_POP=24;
+		const short cnv_SWAP=25;
+		const short cnv_PUSHBP=26;
+		const short cnv_POPBP=27;
+		const short cnv_SPTOBP=28;
+		const short cnv_BPTOSP=29;
+		const short cnv_ADDSP=30;
+		const short cnv_FETCHM=31;
+		const short cnv_STO=32;
+		const short cnv_OFFSET=33;
+		const short cnv_START=34;
+		const short cnv_SAVE_REG=35;
+		const short cnv_PUSH_REG=36;
+		const short cnv_STRCMP=37;
+		const short cnv_EXIT_OP=38;
+		const short cnv_SAY_OP=39;
+		const short cnv_RESPOND_OP=40;
+		const short cnv_OPNEG=41;
 
 
 		const int import_function =0x111;
@@ -76,7 +78,6 @@ public class ConversationVM : UWEBase {
 		private int currConv=0;//The conversation that is being ran.
 
 		public int MaxAnswer;
-
 
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
@@ -106,7 +107,7 @@ public class ConversationVM : UWEBase {
 				public int NoOfImportedGlobals;//000E   Int16   number of imported globals (functions + variables)
 				//0010           start of imported functions list	
 				public ImportedFunctions[] functions;
-				public int[] instuctions;
+				public short[] instuctions;
 		};
 
 
@@ -192,11 +193,11 @@ public class ConversationVM : UWEBase {
 						conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
 						funcptr+= len+10;
 					}
-					conv[i].instuctions = new int[conv[i].CodeSize];
+					conv[i].instuctions = new short[conv[i].CodeSize];
 					int counter=0;
 					for (int c=0; c<conv[i].CodeSize*2; c=c+2)
 					{
-						conv[i].instuctions[counter++] = (int)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+						conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
 					}
 
 				}
@@ -304,410 +305,458 @@ public class ConversationVM : UWEBase {
 				//switch(code[instrp])
 				while ( (finished==false))
 				{
-						switch(conv[currConv].instuctions[instrp])
-						{
-						case cnv_NOP:
-								break;
+					switch(conv[currConv].instuctions[instrp])
+					{
+					case cnv_NOP:
+							break;
 
-						case cnv_OPADD:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg1 + arg2);
-								}
-								break;
+					case cnv_OPADD:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									stack.Push(arg1 + arg2);
+							}
+							break;
 
-						case cnv_OPMUL:
-								{
+					case cnv_OPMUL:
+							{
 
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg1 * arg2);
-								}
-								break;
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									stack.Push(arg1 * arg2);
+							}
+							break;
 
-						case cnv_OPSUB:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg2 - arg1);
-								}
-								break;
+					case cnv_OPSUB:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									stack.Push(arg2 - arg1);
+							}
+							break;
 
-						case cnv_OPDIV:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										//if (arg1==0)
-										//	throw ua_ex_div_by_zero;
-										stack.Push(arg2 / arg1);
-								}
-								break;
+					case cnv_OPDIV:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									//if (arg1==0)
+									//	throw ua_ex_div_by_zero;
+									stack.Push(arg2 / arg1);
+							}
+							break;
 
-						case cnv_OPMOD:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										//if (arg1==0)
-										//	throw ua_ex_div_by_zero;
-										stack.Push(arg2 % arg1);
-								}
-								break;
+					case cnv_OPMOD:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									//if (arg1==0)
+									//	throw ua_ex_div_by_zero;
+									stack.Push(arg2 % arg1);
+							}
+							break;
 
-						case cnv_OPOR:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg2 | arg1);
-								}
-								break;
+					case cnv_OPOR:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									stack.Push(arg2 | arg1);
+							}
+							break;
 
-						case cnv_OPAND:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg2 & arg1);
-								}
-								break;
+					case cnv_OPAND:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									stack.Push(arg2 & arg1);
+							}
+							break;
 
-						case cnv_OPNOT:
-								{
-										int arg1 = stack.Pop();
-										if (arg1==0)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(!stack.Pop());
-										break;
-								}
-
-
-						case cnv_TSTGT:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2>arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(arg2 > arg1);
-								}
-								break;
-
-						case cnv_TSTGE:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2>=arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-
-										//stack.Push(arg2 >= arg1);
-								}
-								break;
-
-						case cnv_TSTLT:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2<arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(arg2 < arg1);
-								}
-								break;
-
-						case cnv_TSTLE:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2<=arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(arg2 <= arg1);
-								}
-								break;
-
-						case cnv_TSTEQ:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2==arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(arg2 == arg1);
-								}
-								break;
-
-						case cnv_TSTNE:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										if (arg2!=arg1)
-										{
-												stack.Push(1);
-										}
-										else
-										{
-												stack.Push(0);
-										}
-										//stack.Push(arg2 != arg1);
-								}
-								break;
-
-						case cnv_JMP:
-								//Debug.Log("instr = " +instrp + " JMP to " +  conv[currConv].instuctions[instrp+1]);
-								instrp = conv[currConv].instuctions[instrp+1]-1;
-								//if (conv[currConv].instuctions[instrp+1] == cnv_BRA)
-								//{//Skip over a branch when jumping
-								//		instrp+=2;
-								//}
-								break;
-
-						case cnv_BEQ:
-								{
-										int arg1 = stack.Pop();
-										if (arg1 == 0)
-												instrp += conv[currConv].instuctions[instrp+1];
-										else
-												instrp++;
-								}
-								break;
-
-						case cnv_BNE:
-								{
-										int arg1 = stack.Pop();
-										if (arg1 != 0)
-												instrp += conv[currConv].instuctions[instrp+1];
-										else
-												instrp++;
-								}
-								break;
-
-						case cnv_BRA:
-								{
-									if (conv[currConv].instuctions[instrp+1]<=conv[currConv].instuctions.GetUpperBound(0))
+					case cnv_OPNOT:
+							{
+									int arg1 = stack.Pop();
+									if (arg1==0)
 									{
-										instrp += conv[currConv].instuctions[instrp+1];		
+											stack.Push(1);
 									}
 									else
-									{//Skip over an invalid instruction address
-										//instrp++;
-
-												//Go backwards
-										int offset =  conv[currConv].instuctions[instrp+1] ^ 0xffff	;
-												offset++;
-										instrp -=offset;
-									}
-									break;		
-								}
-
-						case cnv_CALL: // local function
-								// stack value points to next instruction after call
-								//Debug.Log("inst=" + instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[instrp+1]-1));
-								stack.Push(instrp+1);
-								instrp = conv[currConv].instuctions[instrp+1]-1;
-								call_level++;
-								break;
-
-						case cnv_CALLI: // imported function
-								{
-									int arg1 = conv[currConv].instuctions[++instrp];
-									for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
 									{
-										if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==0x0111))
-										{
-											//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
-											yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
-											break;
-										}
+											stack.Push(0);
+									}
+									//stack.Push(!stack.Pop());
+									break;
+							}
+
+
+					case cnv_TSTGT:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2>arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
+									}
+									//stack.Push(arg2 > arg1);
+							}
+							break;
+
+					case cnv_TSTGE:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2>=arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
 									}
 
+									//stack.Push(arg2 >= arg1);
+							}
+							break;
 
-										/*	std::string funcname;
-				if (imported_funcs.find(arg1) == imported_funcs.end())
-					throw ua_ex_imported_na;
+					case cnv_TSTLT:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2<arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
+									}
+									//stack.Push(arg2 < arg1);
+							}
+							break;
 
-				imported_func(imported_funcs[arg1].name);*/
+					case cnv_TSTLE:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2<=arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
+									}
+									//stack.Push(arg2 <= arg1);
+							}
+							break;
+
+					case cnv_TSTEQ:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2==arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
+									}
+									//stack.Push(arg2 == arg1);
+							}
+							break;
+
+					case cnv_TSTNE:
+							{
+									int arg1 = stack.Pop();
+									int arg2 = stack.Pop();
+									if (arg2!=arg1)
+									{
+											stack.Push(1);
+									}
+									else
+									{
+											stack.Push(0);
+									}
+									//stack.Push(arg2 != arg1);
+							}
+							break;
+
+					case cnv_JMP:
+							//Debug.Log("instr = " +instrp + " JMP to " +  conv[currConv].instuctions[instrp+1]);
+							instrp = conv[currConv].instuctions[instrp+1]-1;
+							//if (conv[currConv].instuctions[instrp+1] == cnv_BRA)
+							//{//Skip over a branch when jumping
+							//		instrp+=2;
+							//}
+							break;
+
+					case cnv_BEQ:
+							{
+									int arg1 = stack.Pop();
+									if (arg1 == 0)
+											instrp += conv[currConv].instuctions[instrp+1];
+									else
+											instrp++;
+							}
+							break;
+
+					case cnv_BNE:
+							{
+									int arg1 = stack.Pop();
+									if (arg1 != 0)
+											instrp += conv[currConv].instuctions[instrp+1];
+									else
+											instrp++;
+							}
+							break;
+
+					case cnv_BRA:
+							{
+								int offset = conv[currConv].instuctions[instrp+1];
+								if (offset >0)
+								{							
+									instrp += offset;	
 								}
-								break;
+								else
+								{		
+									instrp += offset;
+								}
+								//if (conv[currConv].instuctions[instrp+1]<=conv[currConv].instuctions.GetUpperBound(0))
+								//{
 
-						case cnv_RET:
+								//}
+								//else
+								//{//Skip over an invalid instruction address
+									//instrp++;
+
+											//Go backwards
+								//	int offset =  conv[currConv].instuctions[instrp+1] ^ 0xffff	;
+								//			offset++;
+								//	instrp -=offset;
+								//}
+								break;		
+							}
+
+					case cnv_CALL: // local function
+							// stack value points to next instruction after call
+							//Debug.Log("inst=" + instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[instrp+1]-1));
+							stack.Push(instrp+1);
+							instrp = conv[currConv].instuctions[instrp+1]-1;
+							call_level++;
+							break;
+
+					case cnv_CALLI: // imported function
+							{
+								int arg1 = conv[currConv].instuctions[++instrp];
+								for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
 								{
+									if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==0x0111))
+									{
+										//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
+										yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
+										break;
+									}
+								}
 
-										if (--call_level<0)
+
+									/*	std::string funcname;
+			if (imported_funcs.find(arg1) == imported_funcs.end())
+				throw ua_ex_imported_na;
+
+			imported_func(imported_funcs[arg1].name);*/
+							}
+							break;
+
+					case cnv_RET:
+							{
+
+									if (--call_level<0)
+									{
+											// conversation ended
+											finished = true;
+									}
+									else
+									{
+											int arg1 = stack.Pop();
+											//Debug.Log("instr = " +instrp + " returning to " + arg1);
+											instrp = arg1;
+									}
+							}
+							break;
+
+					case cnv_PUSHI:
+							{
+								//Debug.Log("Instruction:" + instrp +" Pushing Immediate value :" +conv[currConv].instuctions[instrp+1] + " => " + stack.stackptr);
+								stack.Push(conv[currConv].instuctions[++instrp]);
+								break;		
+							}
+
+
+					case cnv_PUSHI_EFF:
+							{
+									//int offset = conv[currConv].instuctions[instrp+1];
+									//if ( (offset >> 15)  == 1)
+									//{	//signed value
+									//		offset ^= 0xffff; 
+									//		offset =(offset)*-1;
+											//Debug.Log("offset = " + offset);
+									//}
+									//int offset =  conv[currConv].instuctions[instrp+1] ^ 0xffff	;
+									//Debug.Log("Instruction:" + instrp +" Pushing Effective Address :" + (stack.basep +conv[currConv].instuctions[instrp+1]) + " => " + stack.stackptr);
+
+										int offset =  conv[currConv].instuctions[instrp+1];
+										if (offset>=0)
 										{
-												// conversation ended
-												finished = true;
+											stack.Push(stack.basep + offset);	
+											
 										}
 										else
 										{
-												int arg1 = stack.Pop();
-												//Debug.Log("instr = " +instrp + " returning to " + arg1);
-												instrp = arg1;
-										}
-								}
-								break;
+											offset--; //to skip over base ptr;
+											stack.Push(stack.basep + offset);	
+										}	
+										instrp++;
+									//stack.Push(stack.basep + offset);
+									//instrp++;
+									break;
+							}
 
-						case cnv_PUSHI:
-								stack.Push(conv[currConv].instuctions[++instrp]);
-								break;
 
-						case cnv_PUSHI_EFF:
-								stack.Push(stack.basep + conv[currConv].instuctions[++instrp]);
-								break;
+					case cnv_POP:
+							stack.Pop();
+							break;
 
-						case cnv_POP:
-								stack.Pop();
-								break;
+					case cnv_SWAP:
+							{
+								int arg1 = stack.Pop();
+								int arg2 = stack.Pop();
+								stack.Push(arg1);
+								stack.Push(arg2);
+							}
+							break;
 
-						case cnv_SWAP:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										stack.Push(arg1);
-										stack.Push(arg2);
-								}
-								break;
+					case cnv_PUSHBP:
+							//Debug.Log("Instruction:" + instrp +" Pushing Base Ptr :" + stack.basep + " => " + stack.stackptr);
 
-						case cnv_PUSHBP:
-								stack.Push(stack.basep);
-								break;
+							stack.Push(stack.basep);
+							break;
 
-						case cnv_POPBP:
-								{
-										int arg1 = stack.Pop();
-										stack.basep = arg1;
-								}
-								break;
+					case cnv_POPBP:
+							{
+									int arg1 = stack.Pop();
+									stack.basep = arg1;
+							}
+							break;
 
-						case cnv_SPTOBP:
-								stack.basep = stack.get_stackp();
-								break;
+					case cnv_SPTOBP:
+							stack.basep = stack.get_stackp();
+							break;
 
-						case cnv_BPTOSP:
-								stack.set_stackp(stack.basep);
-								break;
+					case cnv_BPTOSP:
+							stack.set_stackp(stack.basep);
+							break;
 
-						case cnv_ADDSP:
-								{
-										int arg1 = stack.Pop();
+					case cnv_ADDSP:
+							{
+									int arg1 = stack.Pop();
 
-										// fill reserved stack space with dummy values
-										for(int i=0; i<arg1; i++)
-												stack.Push(0);
-								}
-								break;
+									/// fill reserved stack space with dummy values
+									for(int i=0; i<=arg1; i++)
+											stack.Push(0);
+								//stack.set_stackp(stack.stackptr+arg1);
+							}
+							break;
 
-						case cnv_FETCHM:
-								{
-										int arg1 = stack.Pop();
-										//Debug.Log("instr = " +instrp + " fetching address " + arg1 + " from stack at " +(stack.stackptr+1) + " Pushing value " + stack.at(arg1));
-										//fetch_value(arg1);
-										stack.Push(stack.at(arg1));
-								}
-								break;
+					case cnv_FETCHM:
+							{
+								//Debug.Log("Instruction:" + instrp +" Fetching address :" + stack.TopValue + " => " + stack.at(stack.TopValue));
+								int arg1 = stack.at(stack.Pop());
+								
+								//fetch_value(arg1);
+								stack.Push(arg1);
+							}
+							break;
 
-						case cnv_STO:
-								{
-										//int arg1 = stack.Pop();
-										int arg1 = stack.at(stack.stackptr-1);
-										//int arg2 = stack.Pop();
-										int arg2 = stack.at(stack.stackptr-2);
+					case cnv_STO:
+							{
+								int value = stack.Pop();
+								//int value = stack.at(stack.stackptr-1);
+								int index = stack.Pop();
+								//int index = stack.at(stack.stackptr-2);
 
-										//store_value(arg2,arg1);
+								//store_value(arg2,arg1);
+								
 
-										stack.Set(arg2,arg1);
-								}
-								break;
+								stack.Set(index,value);
+							}
+							break;
 
-						case cnv_OFFSET:
-								{
-										int arg1 = stack.Pop();
-										int arg2 = stack.Pop();
-										arg1 += arg2 - 1 ;
-										stack.Push(arg1);
-								}
-								break;
+					case cnv_OFFSET:
+							{
+								int arg1 = stack.Pop();
+								int arg2 = stack.Pop();
+								arg1 += arg2 - 1 ;
+								//Debug.Log("Instruction:" + instrp +" Offset pushed : " + arg1 + " => " + stack.stackptr);
 
-						case cnv_START:
-								// do nothing
-								break;
+								stack.Push(arg1);
+							}
+							break;
 
-						case cnv_SAVE_REG:
-								{
-										int arg1 = stack.Pop();
-										result_register = arg1;
-								}
-								break;
+					case cnv_START:
+							// do nothing
+							break;
 
-						case cnv_PUSH_REG:
-								//Debug.Log("instr = " +instrp + " saving result " + result_register + " to " + stack.stackptr );
-								stack.Push(result_register);
-								break;
+					case cnv_SAVE_REG:
+							{
+								int arg1 = stack.Pop();
+								result_register = arg1;
+							}
+							break;
 
-						case cnv_EXIT_OP:
-								// finish processing (we still might be in some sub function)
-								finished = true;
-								break;
+					case cnv_PUSH_REG:
+							//Debug.Log("instr = " +instrp + " saving result " + result_register + " to " + stack.stackptr );
+							//Debug.Log("Instruction:" + instrp +" Pushing Result :" + result_register + " => " + stack.stackptr);
 
-						case cnv_SAY_OP:
-								{
-										int arg1 = stack.Pop();
-										yield return StartCoroutine(say_op(arg1));
-								}
-								break;
+							stack.Push(result_register);
+							break;
 
-						case cnv_RESPOND_OP:
-								// do nothing
-								break;
+					case cnv_EXIT_OP:
+							// finish processing (we still might be in some sub function)
+							finished = true;
+							break;
 
-						case cnv_OPNEG:
-								{
-										int arg1 = stack.Pop();
-										stack.Push(-arg1);
-								}
-								break;
+					case cnv_SAY_OP:
+							{
+								int arg1 = stack.Pop();
+								yield return StartCoroutine(say_op(arg1));
+							}
+							break;
 
-						default: // unknown opcode
-								//throw ua_ex_unk_opcode;
-								break;
-						}
+					case cnv_RESPOND_OP:
+							// do nothing
+							break;
 
-						// process next instruction
-						++instrp;
-						if (instrp>conv[currConv].instuctions.GetUpperBound(0))
+					case cnv_OPNEG:
 						{
-								finished=true;
+							int arg1 = stack.Pop();
+							stack.Push(-arg1);
 						}
+						break;
+
+					default: // unknown opcode
+						//throw ua_ex_unk_opcode;
+						break;
+					}
+
+					// process next instruction
+					++instrp;
+					if (instrp>conv[currConv].instuctions.GetUpperBound(0))
+					{
+						finished=true;
+					}
 				}
 			yield return StartCoroutine(EndConversation(npc));
 		}
@@ -920,7 +969,7 @@ public class ConversationVM : UWEBase {
 										store_value(address,GameWorldController.instance.playerUW.FoodLevel);break;
 										break;
 							default:
-								Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
+								//Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
 								break;
 
 							}
@@ -987,88 +1036,96 @@ public class ConversationVM : UWEBase {
 				{
 				case "babl_menu":
 						{
-								stack.Pop();
-								int start =stack.Pop(); //stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
-								yield return StartCoroutine(babl_menu(start));
-								break;
+							stack.Pop();
+							int start =stack.Pop(); //stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
+							yield return StartCoroutine(babl_menu(start));
+							break;
 						}
 
 				case "babl_fmenu":
-						{
-								stack.Pop();
-								int start =stack.Pop(); // stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
-								int flagstart =stack.Pop(); //  stack.at(stack.stackptr-3);
-								yield return StartCoroutine(babl_fmenu(start,flagstart));
-								break;
+						{///FMENU appears bugged. Causes stackptr issues further down the line (see conversation 88  and door opening)
+							//stack.Pop();
+							int start =stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
+							int flagstart = stack.at(stack.stackptr-3);
+							yield return StartCoroutine(babl_fmenu(start,flagstart));
+							break;
 						}
 
 				case "get_quest":
 						{
-								stack.Pop();
-								int index= stack.at(stack.Pop());
-								//int index= stack.at( stack.at( stack.stackptr-2 ) );
-								result_register = get_quest(0,index);
-								break;
+							int[] args = argsArray();
+							//stack.Pop();
+							//int index= stack.at(stack.Pop());
+							//int index= stack.at( stack.at( stack.stackptr-2 ) );
+							result_register = get_quest(args[0]);
+							break;
 						}
 
 				case "set_quest":
 						{
-								int val = stack.Pop();
-								int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
-								//stack.at( stack.at( stack.stackptr-4 ) ) ;
-								set_quest(0,val,index );//Or the other way around.
-								break;
+							int[] args = argsArray();
+
+							//int val = stack.Pop();
+							//int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
+							//stack.at( stack.at( stack.stackptr-4 ) ) ;
+							set_quest(args[0],args[1]);//Or the other way around.
+							break;
 						}
 
 				case "print":
 						{
-								say_op(stack.Pop(),PRINT_SAY);
-								break;
+							say_op(stack.Pop(),PRINT_SAY);
+							break;
 						}
 
 				case "x_skills":
 						{
-								int val1 = stack.Pop();
-								int val2 = stack.Pop();
-								int val3 = stack.Pop();
-								int val4 = stack.Pop();
-								result_register = x_skills(val1,val2,val3,val4);//Or the other way around.
-								break;
+							int val1 = stack.Pop();
+							int val2 = stack.Pop();
+							int val3 = stack.Pop();
+							int val4 = stack.Pop();
+							result_register = x_skills(val1,val2,val3,val4);//Or the other way around.
+							break;
 						}
 
 				case "set_likes_dislikes":
 						{
-								stack.Pop();
-								int index1= stack.Pop();
-								int index2= stack.Pop();
-								set_likes_dislikes(index1,index2);
-								break;
+							stack.Pop();
+							int index1= stack.Pop();
+							int index2= stack.Pop();
+							set_likes_dislikes(index1,index2);
+							break;
 						}
 
 				case "sex":
 						{
-							stack.Pop();
-							stack.Pop();
-							stack.Pop();
-							int arg2=stack.Pop();
-							int arg1=stack.Pop();
+
+							int[] args = argsArray();
+
+							//stack.Pop();
+							//stack.Pop();
+							//stack.Pop();
+							//int arg2=stack.Pop();
+							//int arg1=stack.Pop();
 							if (GameWorldController.instance.playerUW.isFemale)
 							{
-								result_register=stack.at(arg2);		
+								result_register=stack.at(args[1]);	//2	
 							}
 							else
 							{
-								result_register=stack.at(arg1);
+								result_register=stack.at(args[0]);//1
 							}
 							break;
 						}
 
 				case "random":
 						{
+						//	int[] args = argsArray();
 							stack.Pop();
 							//stack.Pop();
 							int arg1=stack.Pop();
 							result_register=Random.Range(1,stack.at(arg1)+1);
+							result_register=Random.Range(1,arg1+1);
 							break;
 						}
 
@@ -1078,6 +1135,7 @@ public class ConversationVM : UWEBase {
 							int arg1 = stack.at(stack.stackptr-2);
 							int arg2 = stack.at(stack.stackptr-3);
 							result_register= show_inv(arg1,arg2);
+
 							break;
 						}
 
@@ -1086,15 +1144,18 @@ public class ConversationVM : UWEBase {
 							stack.Pop();
 							int arg1= stack.Pop();	
 							int arg2= stack.Pop();
-							give_to_npc(npc, stack.at(arg1), stack.at(arg2));
+							result_register = give_to_npc(npc, stack.at(arg1), stack.at(arg2));
 							break;
 						}
 
 				case "take_from_npc":
 						{
-							stack.Pop();
-							int arg1 = stack.Pop();
-							take_from_npc(npc, stack.at(arg1));
+							//stack.Pop();
+							//int arg1 = stack.Pop();
+							
+							int arg = stack.at(stack.stackptr-2);//ptr to value
+
+							result_register = take_from_npc(npc, stack.at(arg));
 							break;
 						}
 
@@ -1107,26 +1168,26 @@ public class ConversationVM : UWEBase {
 
 				case "do_offer":
 						{
-							int noOfArgs=stack.Pop();
-							switch (noOfArgs)
+							//int noOfArgs=stack.Pop();
+							int[] args = argsArray();
+							switch (args.GetUpperBound(0))
 							{
-							case 7:
+							case 6:
 								{
-									int []args =new int[noOfArgs];
-									int start= stack.Pop();
-									for (int i=0; i<noOfArgs; i++)
-									{
-										args[i]	= stack.at(start-i);
-									}
-
-
-									yield return StartCoroutine(do_offer(npc, noOfArgs,args[0],args[1],args[2],args[3],args[4],args[5],args[6]));
+									
+									yield return StartCoroutine(do_offer(npc, args[0],args[1],args[2],args[3],args[4],args[5],args[6]));
 									break;		
 								}
+								case 4:
+								{
+									yield return StartCoroutine(do_offer(npc, args[0],args[1],args[2],args[3],args[4],-1,-1));	
+									break;
+								}
+
 
 							default:
 								{
-									Debug.Log("unimplemented version of do_offer " + noOfArgs);
+									Debug.Log("unimplemented version of do_offer " + args.GetUpperBound(0));
 									break;		
 								}
 							}
@@ -1135,13 +1196,7 @@ public class ConversationVM : UWEBase {
 
 				case "do_demand":
 						{
-							int noOfArgs=stack.Pop();
-							int []args =new int[noOfArgs];
-							int start= stack.Pop();
-							for (int i=0; i<noOfArgs; i++)
-							{
-									args[i]	= stack.at(start-i);
-							}	
+							int[] args = argsArray();
 							yield return StartCoroutine(do_demand(npc,args[0],args[1]));
 							break;
 						}
@@ -1153,13 +1208,109 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "do_decline":
+						{
+							do_decline(npc);
+							break;
+						}
+
+				case "gronk_door":
+						{
+							int[] args = argsArray();
+								//stack.Pop();//no of args
+							gronk_door(args[0],args[1],args[2]);
+							break;
+						}
+
+
+				case "x_obj_stuff":
+						{//This is totally wrong!
+							//x_obj_stuff( 9,locals[9], locals[8], locals[7], locals[2], locals[6], locals[5], locals[4], locals[3], param2 );
+
+							//int[] args = argsArrayPtr();
+							//	int[] args=new int[4];
+								//stack.Pop();//no of args
+
+						
+								int[] args=new int[9];
+								//stack.Pop();//no of args
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								args[3]= stack.at(stack.stackptr-5);//ptr to value
+								args[4]= stack.at(stack.stackptr-6);//ptr to value
+								args[5]= stack.at(stack.stackptr-7);//ptr to value
+								args[6]= stack.at(stack.stackptr-8);//ptr to value
+								args[7]= stack.at(stack.stackptr-9);//ptr to value
+								args[8]= stack.at(stack.stackptr-10);//ptr to value
+								x_obj_stuff(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8]);
+
+							break;
+						}
+
+				case "find_inv":
+						{
+							int[] args=argsArray();
+							result_register = find_inv(npc, args[0], args[1]);
+							break;
+						}
+
+				case "identify_inv":
+						{
+
+								//Pop No of args.
+								//stack.Pop();
+								//pop that array ptr
+								// identify_inv( 4,locals,  17, 15, 16, locals[6+i] );
+								int[] args=new int[4];
+								//stack.Pop();//no of args
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								args[3]= stack.at(stack.stackptr-5);//ptr to value
+							//int[] args=argsArray();
+								result_register = identify_inv(args[0],args[1],args[2],args[3]) ;	
+							break;
+						}
 
 				default: 
-
-						Debug.Log("unimplemented function " + func.functionName);
+						
+						Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
 						break;
 				}
 				yield return 0;
+		}
+
+		/// <summary>
+		/// Creates an array of argumenst based on the number of args in the stack and that many values..
+		/// </summary>
+		/// <returns>The array.</returns>
+		int [] argsArray()
+		{
+			int noOfArgs=stack.Pop();
+			int []args =new int[noOfArgs];
+			int start= stack.Pop();
+			for (int i=0; i<noOfArgs; i++)
+			{
+					args[i]	= stack.at(start-i);
+			}	
+			return args;
+		}
+
+		/// <summary>
+		/// Creates an array of argumenst based on the number of args in the stack and that many values..
+		/// </summary>
+		/// <returns>The array.</returns>
+		int [] argsArrayPtr()
+		{
+			int noOfArgs=stack.Pop();
+			int []args =new int[noOfArgs];
+			int start= stack.Pop();
+			for (int i=0; i<noOfArgs; i++)
+			{
+					args[i]	=start-i;
+			}	
+			return args;
 		}
 
 		public IEnumerator babl_menu(int Start)
@@ -1236,7 +1387,8 @@ public class ConversationVM : UWEBase {
 				//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
 				//yield return StartCoroutine(say (tmp,PC_SAY));
 				yield return StartCoroutine(say_op(bablf_array[bablf_ans-1]));
-				result_register=bablf_array[bablf_ans-1];
+				//result_register=bablf_array[bablf_ans-1];
+				result_register=PlayerAnswer;
 				yield return 0;
 		}
 
@@ -1261,6 +1413,11 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
+				if (EnteringQty==true)
+				{
+						return;
+				}
+
 			if (WaitingForInput)
 			{
 				if (Input.GetKeyDown (KeyCode.Alpha1))
@@ -1335,18 +1492,17 @@ public class ConversationVM : UWEBase {
 		/// <returns>The quest.</returns>
 		/// <param name="unk">Unk.</param>
 		/// <param name="QuestNo">Quest no to lookup</param>
-		public int get_quest(int unk, int QuestNo)
+		public int get_quest(int QuestNo)
 		{
-				return GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo];
+			return GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo];
 		}
 
 		/// <summary>
 		/// Sets the quest variable
 		/// </summary>
-		/// <param name="unk">Unk.</param>
 		/// <param name="value">Value to change to</param>
 		/// <param name="QuestNo">Quest no to change</param>
-		public void set_quest(int unk,int value, int QuestNo)
+		public void set_quest(int value, int QuestNo)
 		{
 			GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo]=value;
 		}
@@ -1395,7 +1551,7 @@ public class ConversationVM : UWEBase {
 							j++;
 					}
 			}
-				//Debug.Log(j + " items saved to " + startObjectPos + startObjectIDs);
+			Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
 			return j;
 		}
 
@@ -1511,7 +1667,7 @@ public class ConversationVM : UWEBase {
 					}
 					else
 					{
-						playerHasSpace=0;
+						playerHasSpace=2;
 						demanded.transform.parent=GameWorldController.instance.LevelMarker();
 						GameWorldController.MoveToWorld(demanded);
 						demanded.transform.position=npc.transform.position;
@@ -1688,7 +1844,7 @@ public class ConversationVM : UWEBase {
 		/// I think the values passed are actually the strings for how the npc reacts to the offer. The value judgment is done elsewhere
 		/// In the prototype I randomise the decision. And then randomise a response based on that decision.
 		/// Arg5 is the yes answer
-		public IEnumerator  do_offer(NPC npc, int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
+		public IEnumerator  do_offer(NPC npc, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
 		{
 				/*
    id=0018 name="do_offer" ret_type=int
@@ -1703,9 +1859,10 @@ public class ConversationVM : UWEBase {
    return value: 1 if the deal is acceptable, 0 if not*/
 
 
-				PlayerAnswer = Random.Range (0,2);
-
-				if (PlayerAnswer==1)
+				//PlayerAnswer = 
+				int NpcAnswer=Random.Range (0,2);
+				result_register= NpcAnswer;
+				if (NpcAnswer==1)
 				{
 						yield return StartCoroutine (say_op (arg5));
 						//for the moment move to the player's backpack or if no room there drop them on the ground
@@ -1743,9 +1900,9 @@ public class ConversationVM : UWEBase {
 		/// <summary>
 		/// Does the offer.
 		/// </summary>
-		public IEnumerator do_offer(NPC npc, int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
+		public IEnumerator do_offer(NPC npc, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
 		{
-			yield return StartCoroutine( do_offer (npc, unk,arg1,arg2,arg3,arg4,arg5,arg6,-1) );
+			yield return StartCoroutine( do_offer (npc, arg1,arg2,arg3,arg4,arg5,arg6,-1) );
 		}
 
 		/// <summary>
@@ -1784,7 +1941,7 @@ public class ConversationVM : UWEBase {
 
 				//Move the players items back to his inventory;
 				RestorePCsInventory (npc);
-				PlayerAnswer=DemandResult;
+				result_register=DemandResult;
 		}
 
 
@@ -1885,5 +2042,245 @@ public class ConversationVM : UWEBase {
 						}
 				}
 		}
+
+
+		/// <summary>
+		/// Gronks the door open
+		/// </summary>
+		/// <returns> appears to have something to do with if the door is broken or not.</returns>
+		/// <param name="Action">close/open flag (0 means open)</param>
+		/// <param name="tileY">y tile coordinate with door to open</param>
+		/// <param name="tileX">x tile coordinate</param>
+		public int gronk_door(int Action, int tileY, int tileX)
+		{
+				/*
+		id=0025 name="gronk_door" ret_type=int
+		parameters:   arg1: x tile coordinate with door to open
+		arg2: y tile coordinate
+		arg3: close/open flag (0 means open)
+		description:  opens/closes door or portcullis
+		return value: unknown
+		return value appears to have something to do with if the door is broken or not.
+		*/
+
+				///Finds the door than needs to be opened
+				///Based on the action used the door control functions as appropiate.
+				GameObject dr = GameObject.Find ("door_" +tileX .ToString ("D3") + "_" + tileY.ToString ("D3"));
+				if (dr!=null)
+				{
+						DoorControl DC = dr.GetComponent<DoorControl>();
+						if (DC!=null)
+						{
+								if (Action==0)
+								{
+										DC.UnlockDoor();
+										DC.OpenDoor();
+								}
+								else
+								{
+										DC.CloseDoor();
+										DC.LockDoor ();
+								}
+								if (DC.objInt ().quality == 0)
+								{
+										return 0;
+								}
+								else
+								{
+										return 1;
+								}
+						}
+						else
+						{
+								Debug.Log (instrp+ " Unable to find doorcontrol to gronk " + " at " + tileX + " " + tileY);
+								return 0;
+						}
+
+				}
+				else
+				{
+						Debug.Log ("Unable to find door to gronk " + " at " + tileX + " " + tileY);
+						return 0;
+				}
+
+				//GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
+		}
+
+
+
+		public void x_obj_stuff(int arg1, int arg2, int arg3, int link, int arg5, int arg6, int quality, int id, int pos)
+		{
+				//Debug.Log("x_obj_stuff");		
+				//id=002f name="x_obj_stuff" ret_type=void
+				//	parameters:   arg1: not used in uw1
+				//		arg2: not used in uw1
+				//		arg3: 0, (upper bit of quality field?)
+				//		arg4: quantity/special field, 115
+				//		arg5: not used in uw1
+				//		arg6: not used in uw1
+				//		arg7: quality?
+				//		arg8: identified flag?
+				//		arg9: position in inventory object list
+				//		description:  sets object properties for object in inventory object list.
+				//			if a property shouldn't be set, -1 is passed for the
+				//         property value.
+				//If -1 then it returns the value in the array?
+
+			/*This may be implemented wrongly*/
+			pos = stack.at(pos);
+			ObjectInteraction obj;
+			pos--;
+			if (pos<0)
+			{
+				return;
+			}
+			if (pos<=3)
+			{//Item is in players trade area.
+				obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
+					
+			}
+			else if (pos <=7)
+			{//item in npc trade area
+				obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
+			}
+			else
+			{
+				return;
+			}
+			if (obj==null)
+			{
+				return;
+			}
+
+			if (stack.at(link)<=0)
+			{
+					//locals[link]=obj.link-512; 
+				stack.Set(link, obj.link-512);
+			}
+			else
+			{
+					//obj.link=locals[link]+512;
+				obj.link = stack.at(link)+512; 
+			}
+
+			if (stack.at(quality)<=0)	
+			{
+				//locals[quality]=obj.quality; 
+				stack.Set(quality, obj.quality);
+			}
+			else
+			{
+				obj.quality=stack.at(quality);
+			}
+			if (stack.at(id)<=0)
+			{
+					//locals[id]=obj.item_id; 
+				stack.Set(id, obj.item_id);
+			}
+			else
+			{
+				obj.item_id=stack.at(id);
+			}
+
+		}
+
+
+
+
+
+	/// <summary>
+	/// Finds item in PC or NPC inventory
+	/// </summary>
+	/// <returns>position in master object list, or 0 if not found</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="arg1">0: npc inventory; 1: player inventory</param>
+	/// <param name="item_id">Item type ID of the object to find.</param>
+	public int find_inv(NPC npc, int targetInventory, int item_id )
+	{
+		//id=0030 name="find_inv" ret_type=int
+		//	parameters:   arg1: 0: npc inventory; 1: player inventory
+		//	arg2: item id
+		//		description:  searches item in npc or player inventory
+		//		return value: position in master object list, or 0 if not found
+		switch (targetInventory)
+		{
+		case 0://NPC inventory
+			{
+				Container npcCont = npc.gameObject.GetComponent<Container>();
+
+				for ( int i=0; i<npcCont.Capacity; i++)
+				{
+					GameObject obj = npcCont.GetGameObjectAt(i);
+					if (obj!=null)
+					{
+						if (obj.GetComponent<ObjectInteraction>().item_id==item_id)
+						{
+								//return 1;//Found object
+							return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+						}
+					}
+				}	
+				break;
+			}
+			
+		case 1://PC Search
+			{
+				string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
+				GameObject obj= GameObject.Find(itemname);
+
+				if (obj!=null)
+				{
+						//return 1;
+						return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+				}
+				else
+				{
+						return 0;
+				}	
+			}
+
+		}
+		return 0;
+	}
+
+
+	/// <summary>
+	/// Identifies the item at the specified trade slot
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="unk2">Unk2.</param>
+	/// <param name="unk3">ItemId Sets the item id of the item into the locals array</param>
+	/// <param name="unk4">Unk4.</param>
+	/// <param name="inventorySlotIndex">Trade slot index.</param>
+	public int identify_inv(int pUNK1, int pUNK2, int pUNK3, int pTradeSlot)
+	{
+			//id=0017 name="identify_inv" ret_type=int
+			//	parameters:   arg1:
+			//arg2:
+			//arg3:
+			//arg4: inventory item position
+			//description:  unknown TODO
+			//return value: unknown
+			int tradeSlotIndex = stack.at(pTradeSlot);
+			if (tradeSlotIndex<=0)
+			{
+				return 0;
+			}
+			tradeSlotIndex--;//adjust to match my 0-based indices
+			if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
+			{
+					//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
+					//locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
+					//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
+				int unitValue = GameWorldController.instance.commonObject.properties[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id].Value;
+				int qty =UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().GetQty(); 
+
+				return unitValue*qty;
+			}
+			else
+			{
+					return 0;
+			}
+	}
 
 }
