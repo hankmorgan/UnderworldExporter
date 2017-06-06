@@ -43,7 +43,8 @@ public class InputHandler : GuiBase {
 						target.gameObject.GetComponent<InventorySlot>().OnSubmitPickup(valueInt);
 						break;		
 				case InputConversationWords:
-						target.gameObject.GetComponent<Conversation>().OnSubmitPickup(valueStr);
+						//target.gameObject.GetComponent<Conversation>().OnSubmitPickup(valueStr);
+						ConversationVM.OnSubmitPickup(valueStr);
 						break;
 				case InputMantraWords:
 						target.gameObject.GetComponent<Shrine>().OnSubmitPickup(valueStr);

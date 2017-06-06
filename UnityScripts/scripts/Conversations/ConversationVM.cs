@@ -118,8 +118,10 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		CnvStack stack;
 
-
+		/// The player answer.
 		public static int PlayerAnswer;
+		///The text the player has typed in response to a question
+		public static string PlayerTypedAnswer;
 		///Conversation waiting mode. Player has to enter a menu option
 		public static bool WaitingForInput;
 		///Conversation waiting mode. Player has to press any key to continue
@@ -209,7 +211,7 @@ public class ConversationVM : UWEBase {
 				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 				UWHUD.instance.Conversation_tl.Clear();
 				UWHUD.instance.MessageScroll.Clear();
-
+				PlayerInput=UWHUD.instance.MessageScroll.NewUIOUt;
 
 				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 
@@ -643,7 +645,7 @@ public class ConversationVM : UWEBase {
 						for(int i=0; i<=arg1; i++)
 							stack.Push(0);
 					
-					stack.set_stackp(stack.stackptr+arg1);
+					stack.set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
 					//stack.set_stackp(stack.stackptr+arg1);
 					break;
 					}
@@ -1034,6 +1036,12 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "babl_ask":
+						{
+							yield return StartCoroutine(babl_ask());
+							break;
+						}
+
 				case "get_quest":
 						{
 							int[] args = argsArray();
@@ -1256,6 +1264,16 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "contains":
+						{
+							int[] args=new int[2];
+							//stack.Pop();//no of args
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							stack.result_register=contains(args[0],args[1]);
+							break;
+						}
+
 				default: 
 						
 						Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1376,6 +1394,42 @@ public class ConversationVM : UWEBase {
 		}
 
 
+		/// <summary>
+		/// Sets up for typed input
+		/// </summary>
+		public IEnumerator babl_ask()
+		{
+			PlayerTypedAnswer="";
+			//tl_input.Set(">");
+			PlayerInput.text=">";
+			InputField inputctrl=UWHUD.instance.InputControl;
+			inputctrl.gameObject.SetActive(true);
+			//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
+			inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+			inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
+			inputctrl.contentType= InputField.ContentType.Standard;
+			inputctrl.text="";
+			inputctrl.Select();
+			yield return StartCoroutine(WaitForTypedInput());
+			yield return StartCoroutine(say_op (PlayerTypedAnswer,PC_SAY));
+			inputctrl.text="";
+			UWHUD.instance.MessageScroll.Clear ();
+			stack.StringMemory=PlayerTypedAnswer;
+			stack.result_register=1;
+		}
+
+		/// <summary>
+		/// Responds to player typed input submission.
+		/// </summary>
+		/// <param name="PlayerTypedAnswerIN">The string the player has typed</param>
+		public static void OnSubmitPickup(string PlayerTypedAnswerIN)
+		{
+				InputField inputctrl=UWHUD.instance.InputControl;
+				WaitingForTyping=false;
+				inputctrl.gameObject.SetActive(false);
+				PlayerTypedAnswer= PlayerTypedAnswerIN; 
+		}
+
 
 
 		/// <summary>
@@ -1388,8 +1442,15 @@ public class ConversationVM : UWEBase {
 				{yield return null;}
 		}
 
-
-
+		/// <summary>
+		/// Waits for typed input from the player when in babl_ask
+		/// </summary>
+		IEnumerator WaitForTypedInput()
+		{
+			WaitingForTyping=true;
+			while (WaitingForTyping)
+			{yield return null;}
+		}
 
 		/// <summary>
 		/// Processes key presses from the player when waiting for input.
@@ -2265,5 +2326,35 @@ public class ConversationVM : UWEBase {
 					return 0;
 			}
 	}
+
+
+	/// <summary>
+	/// checks if the first string contains the second string,
+	/// </summary>
+	/// <returns>returns 1 when the string was found, 0 when not</returns>
+	public int contains(int pString1, int pString2)
+	{//pString2 is the string memory.
+		//id=0007 name="contains" ret_type=int
+		//parameters:   arg1: pointer to first string id
+		//arg2: pointer to second string id
+		//description:  checks if the first string contains the second string,
+		//case-independent.
+		//return value: returns 1 when the string was found, 0 when not
+		string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
+		string String1 = stack.StringMemory;
+		if (String1=="")
+		{
+			return 0;//no cheating...
+		}
+		if (String2.ToUpper().Contains(String1.ToUpper()))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
 
 }

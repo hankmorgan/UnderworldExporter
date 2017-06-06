@@ -42,6 +42,8 @@ public class CnvStack {
 		/// </summary>
 		public int call_level=1;
 
+		public string StringMemory;
+
 		public CnvStack(int stackSize)
 		{
 			StackValues=new int[stackSize];
