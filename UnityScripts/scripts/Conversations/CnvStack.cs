@@ -6,6 +6,7 @@ using System.Collections;
 /// </summary>
 public class CnvStack {
 
+
 		/// <summary>
 		/// The stack values.
 		/// </summary>
@@ -17,16 +18,38 @@ public class CnvStack {
 		public int stackptr=0;
 
 		/// <summary>
+		/// The instruction Pointer.
+		/// </summary>
+		public int instrp=0;
+
+		/// <summary>
 		/// The base pointer
 		/// </summary>
 		public int basep=0;
 
+		/// <summary>
+		/// The top value in the stack.
+		/// </summary>
 		public int TopValue=0;
+
+		/// <summary>
+		/// The result register for imported functions.
+		/// </summary>
+		public int result_register;
+
+		/// <summary>
+		/// The call level of the VM.
+		/// </summary>
+		public int call_level=1;
 
 		public CnvStack(int stackSize)
 		{
 			StackValues=new int[stackSize];
 			stackptr=0;
+			result_register=1;//default value
+			instrp=0;
+			TopValue=0;
+			call_level=1;
 		}
 
 		/// <summary>
