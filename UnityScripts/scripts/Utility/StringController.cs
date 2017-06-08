@@ -15,6 +15,8 @@ public class StringController : UWEBase {
 	/// </summary>
 	/// Hash is in format [block number]_[string number]
 	private Hashtable GameStrings;
+	private Hashtable EntryCounts;
+
 
 		/// <summary>
 		/// Huffman node structure for decoding strings.pak
@@ -42,271 +44,6 @@ public class StringController : UWEBase {
 		/// The instance of this class
 		/// </summary>
 	public static StringController instance;
-		/*
-	//Temporary array until I'm wide awake
-	private string[] UW1_TextureNames ={"a stone wall",
-		"a mossy stone wall",
-		"a cracked stone wall",
-		"a drain",
-		"a vine-covered stone wall",
-		"a tapestry",
-		"the Banner of Cabirus",
-		"a stone wall",
-		"a stone wall",
-		"the Standard of the Mountainfolk",
-		"the Standard of the Knights",
-		"a grating",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a mossy irregular stone wall",
-		"the Standard of the Silver Serpent",
-		"a cracked irregular stone wall",
-		"a drain",
-		"a vine-covered irregular stone wall",
-		"a tapestry",
-		"a grating",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a natural stone wall",
-		"a natural stone wall",
-		"a mossy natural stone wall",
-		"a mossy natural stone wall",
-		"a waterfall",
-		"a grating",
-		"a natural stone wall",
-		"a natural stone wall",
-		"the locked doors of the Abyss",
-		"the locked doors of the Abyss",
-		"a drain",
-		"a tapestry",
-		"a vine-covered natural stone wall",
-		"a massive stone door",
-		"a massive stone door",
-		"a massive stone door",
-		"a massive stone door",
-		"a stone slab with a three-pronged indentation",
-		"a stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a drain",
-		"a cracked irregular stone wall",
-		"a vine-covered irregular stone wall",
-		"a grating",
-		"a moss-covered irregular stone wall",
-		"the Banner of Cabirus",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"the Standard of the Silver Sapling",
-		"an irregular stone wall",
-		"nothing",
-		"a massive stone door",
-		"a natural stone wall",
-		"a natural stone wall",
-		"a moss-covered natural stone wall",
-		"a moss-covered natural stone wall",
-		"a pipe",
-		"a drain",
-		"a natural stone wall",
-		"a natural stone wall",
-		"nothing",
-		"nothing",
-		"a grating",
-		"a tapestry",
-		"a stucco wall",
-		"a stucco wall",
-		"a peeling stucco wall",
-		"a tapestry",
-		"a peeling stucco wall",
-		"a small rusty pipe",
-		"a brick wall",
-		"a brick wall",
-		"a stucco wall",
-		"a stucco wall",
-		"a stucco wall",
-		"a brick wall",
-		"a grating",
-		"a Standard of the Silver Serpent",
-		"a drain",
-		"a peeling stucco wall",
-		"a stucco wall",
-		"nothing",
-		"a brick wall",
-		"a brick wall",
-		"a brick wall",
-		"a brick wall",
-		"nothing",
-		"nothing",
-		"a grating",
-		"a tapestry",
-		"a pipe",
-		"a mossy brick wall",
-		"a cracked brick wall",
-		"a drain",
-		"a finished oak wall",
-		"a finished oak wall",
-		"a finished oak wall",
-		"a finished oak wall",
-		"a grating",
-		"a pipe",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a tapestry",
-		"a drain",
-		"a pipe",
-		"the Standard of the Silver Serpent",
-		"the Standard of the Seers",
-		"the Standard of the Seers",
-		"a rough hewn wall",
-		"a window",
-		"a gold-veined rough hewn wall",
-		"a rough hewn wall",
-		"a rough hewn wall",
-		"a mossy rough hewn wall",
-		"a drain",
-		"a tapestry",
-		"a drain",
-		"a brick wall",
-		"a brick wall",
-		"a stairway leading down",
-		"a moss-covered wall",
-		"a stairway leading up",
-		"a stairway leading up",
-		"a stairway leading down",
-		"a window",
-		"a princess chained to a brick wall",
-		"a stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a drain",
-		"a cracked irregular stone wall",
-		"a vine-covered irregular stone wall",
-		"a grating",
-		"a mossy irregular stone wall",
-		"the Banner of Cabirus",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"the Standard of the Knights",
-		"a caved-in stairway",
-		"a caved-in passageway",
-		"a stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a mossy stone wall",
-		"a cracked irregular stone wall",
-		"a drain",
-		"a vine-covered irregular stone wall",
-		"a tapestry",
-		"a grating",
-		"a moss-covered irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"an irregular stone wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"an ankh",
-		"a marble wall",
-		"a marble wall",
-		"a stone wall",
-		"a stone wall",
-		"a stone wall",
-		"a stone wall",
-		"a massive stone door",
-		"a marble wall",
-		"a waterfall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a marble wall",
-		"a lavafall",
-		"a rough hewn wall",
-		"a rough hewn wall",
-		"a pipe",
-		"a stone floor",
-		"a stone floor",
-		"a puddle",
-		"a puddle",
-		"a stone floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a marble floor",
-		"a marble floor",
-		"a marble floor",
-		"a marble floor",
-		"water",
-		"water",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"rivulets of lava",
-		"lava",
-		"lava",
-		"nothing",
-		"a rough floor",
-		"a rough floor",
-		"a rough floor",
-		"a rough floor",
-		"a rough floor",
-		"water",
-		"water",
-		"water",
-		"a dirt floor",
-		"a rough floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"a dirt floor",
-		"rivulets of lava",
-		"a straw bed",
-		"a glowing green pathway",
-		"a glowing green pathway",
-		"a glowing green pathway",
-		"a glowing red pathway",
-		"a glowing red pathway",
-		"a glowing red pathway",
-		"a glowing blue pathway",
-		"a glowing blue pathway",
-		"a glowing blue pathway"
-	};*/
 
 		void Awake()
 		{
@@ -344,11 +81,9 @@ public class StringController : UWEBase {
 	public bool InitStringController(string StringFilePath)
 	{
 		GameStrings=new Hashtable();
+		EntryCounts=new Hashtable();
 		return Load(StringFilePath);
-
 	}
-
-
 
 
 		/// <summary>
@@ -364,7 +99,7 @@ public class StringController : UWEBase {
 				char[] Buffer;
 				string Key="";
 				GameStrings=new Hashtable();
-
+				EntryCounts=new Hashtable();
 
 				if (DataLoader.ReadStreamFile(path,out Buffer))
 				{
@@ -393,6 +128,7 @@ public class StringController : UWEBase {
 								blocks[i].address = DataLoader.getValAtAddress(Buffer,address_pointer,32);	
 								address_pointer=address_pointer+4;
 								blocks[i].NoOfEntries = DataLoader.getValAtAddress(Buffer,blocks[i].address,16);	//look ahead and get no of entries.
+								EntryCounts["_" + blocks[i].block_no]=blocks[i].NoOfEntries.ToString();
 								i++;
 						}
 						i=0;
@@ -484,7 +220,15 @@ public class StringController : UWEBase {
 	/// <param name="StringNo">String no.</param>
 	public string GetString(int BlockNo, int StringNo)
 	{//output a string at the specified block and string no.
-		return (string)GameStrings[BlockNo.ToString("000") + "_" + StringNo.ToString("000")];
+				string result= (string)GameStrings[BlockNo.ToString("000") + "_" + StringNo.ToString("000")];
+				if (result!=null)
+				{
+						return result;
+				}
+				else
+				{
+						return "";
+				}
 	}
 
 
@@ -802,4 +546,23 @@ public class StringController : UWEBase {
 			}
 		}
 	}
+
+		/// <summary>
+		/// Adds a string to string block and return a memory location for it.
+		/// </summary>
+		/// <returns>The string.</returns>
+		/// <param name="BlockNo">Block no.</param>
+		/// <param name="NewString">New string.</param>
+	public int AddString(int BlockNo, string NewString)
+	{
+		string NoOfEntries = (string)EntryCounts["_" + BlockNo];
+		int Count = int.Parse(NoOfEntries);
+		Count++;
+		GameStrings[BlockNo.ToString("000") + "_" + Count.ToString("000")] = NewString;	
+		EntryCounts["_" + BlockNo]= Count.ToString();
+
+		Debug.Log("New string :" + GameStrings[BlockNo.ToString("000") + "_" + Count.ToString("000")] );
+		return Count;
+	}
+	
 }

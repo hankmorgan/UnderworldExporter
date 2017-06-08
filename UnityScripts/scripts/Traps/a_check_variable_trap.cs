@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class a_check_variable_trap :a_variable_trap {
-	public int xpos;
+	//public int xpos;
 	/*
 	 * Per uw-formats.txt
   018e  a_check variable trap
@@ -61,12 +61,12 @@ the left, right, center button combination on Level3.
 	bool check_variable_trap()
 	{//TODO: this is a guess
 
-		if (heading!=0)
+		if (objInt().heading!=0)
 			{
 				int cmp = 0;
-				for(int i=VariableIndex; i<=VariableIndex+heading; i++)
-				{
-					if (xpos != 0)
+				for(int i=objInt().zpos; i<=objInt().zpos+objInt().heading; i++)
+				{								
+					if (objInt().x != 0)
 						cmp += GameWorldController.instance.variables[i];
 					else
 					{
@@ -74,13 +74,13 @@ the left, right, center button combination on Level3.
 						cmp |= (GameWorldController.instance.variables[i]  & 0x7);
 					}
 				}
-				Debug.Log ("cmp = " + cmp + " value=" + VariableValue);
-				return cmp == VariableValue;
+				Debug.Log ("cmp = " + cmp + " value=" + VariableValue());
+				return cmp == VariableValue();
 				
 			}
 		else
 			{//Is this right?
-				return VariableValue==GameWorldController.instance.variables[VariableIndex];
+				return VariableValue()==GameWorldController.instance.variables[objInt().zpos];
 			}
 		}
 }

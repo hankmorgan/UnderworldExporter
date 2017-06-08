@@ -37,50 +37,50 @@ public class a_set_variable_trap : a_variable_trap {
 	{
 		string operation="";
 		int OrigValue=0;
-		if (VariableIndex!=0)
+		if (objInt().zpos!=0)
 		{//Variable Operations
-			OrigValue=GameWorldController.instance.variables[VariableIndex];
+			OrigValue=GameWorldController.instance.variables[objInt().zpos];
 			//Debug.Log ("Variable " + VariableIndex + " op(" + heading + ") = " + GameWorldController.instance.variables[VariableIndex] );
-			switch(heading)
+			switch(objInt().heading)
 			{
 			case 0://Add
-				GameWorldController.instance.variables[VariableIndex] += VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] += VariableValue();
 				operation = "add";
 				break;
 			case 1://Sub
-				GameWorldController.instance.variables[VariableIndex] -= VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] -= VariableValue();
 				operation = "Sub";
 				break;
 			case 2://Set
-				GameWorldController.instance.variables[VariableIndex] = VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] = VariableValue();
 				operation = "Set";
 				break;
 			case 3://AND
-				GameWorldController.instance.variables[VariableIndex] &= VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] &= VariableValue();
 				operation = "And";
 				break;
 			case 4://OR
-				GameWorldController.instance.variables[VariableIndex] |= VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] |= VariableValue();
 				operation = "or";
 				break;
 			case 5://XOR
-				GameWorldController.instance.variables[VariableIndex] ^= VariableValue;
+				GameWorldController.instance.variables[objInt().zpos] ^= VariableValue();
 				operation = "xor";
 				break;
 			case 6://Shift left
 				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
 				//GameWorldController.instance.variables[VariableIndex] = GameWorldController.instance.variables[VariableIndex]<<VariableValue);
-				GameWorldController.instance.variables[VariableIndex] =	GameWorldController.instance.variables[VariableIndex] * (2*VariableValue) & 63;
+				GameWorldController.instance.variables[objInt().zpos] =	GameWorldController.instance.variables[objInt().zpos] * (2*VariableValue()) & 63;
 				operation = "shl";
 				break;
 
 			}
-			Debug.Log ("Operation + " + operation + "Variable " + VariableIndex + " was " + OrigValue + " now =" + GameWorldController.instance.variables[VariableIndex] );
+			Debug.Log ("Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.variables[objInt().zpos] );
 		}
 		else
 		{//Bitwise operations on bitfield
 			Debug.Log("Bitwise set variable");
-			switch(heading)
+			switch(objInt().zpos)
 			{
 			case 0://Set
 				

@@ -79,6 +79,7 @@ public class ConversationVM : UWEBase {
 
 		public int MaxAnswer;
 
+
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
 		/// </summary>
@@ -135,6 +136,15 @@ public class ConversationVM : UWEBase {
 		/// The answer from the bablf_menu
 		public static int bablf_ans=0;
 
+
+
+		void Update()
+		{
+			if (WaitingForTyping)
+			{
+				UWHUD.instance.InputControl.Select();//Keep focus on input control	
+			}
+		}
 
 		/// <summary>
 		/// Loads the cnv ark file and parses it to initialise the conversation headers and imported functions
@@ -954,7 +964,7 @@ public class ConversationVM : UWEBase {
 										store_value(address,GameWorldController.instance.playerUW.FoodLevel);break;
 										break;
 							default:
-								//Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
+								//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
 								break;
 
 							}
@@ -1044,11 +1054,15 @@ public class ConversationVM : UWEBase {
 
 				case "get_quest":
 						{
-							int[] args = argsArray();
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+
+
+							//int[] args = argsArray();
 							//stack.Pop();
 							//int index= stack.at(stack.Pop());
 							//int index= stack.at( stack.at( stack.stackptr-2 ) );
-							stack.result_register = get_quest(args[0]);
+							stack.result_register = get_quest(stack.at(args[0]));
 							break;
 						}
 
@@ -1064,9 +1078,10 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "print":
-						{
-							say_op(stack.Pop(),PRINT_SAY);
-							break;
+						{//TODO:review use of argsarray
+						int[] args = argsArray();								
+						yield return StartCoroutine(say_op(args[0],PRINT_SAY));
+						break;
 						}
 
 				case "x_skills":
@@ -1089,7 +1104,7 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "sex":
-						{
+						{//TODO:review use of argsarray
 
 							int[] args = argsArray();
 
@@ -1158,7 +1173,7 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "do_offer":
-						{
+						{//TODO:review use of argsarray
 							//int noOfArgs=stack.Pop();
 							int[] args = argsArray();
 							switch (args.GetUpperBound(0))
@@ -1178,7 +1193,7 @@ public class ConversationVM : UWEBase {
 
 							default:
 								{
-									Debug.Log("unimplemented version of do_offer " + args.GetUpperBound(0));
+									Debug.Log("uniplemented version of do_offer " + args.GetUpperBound(0));
 									break;		
 								}
 							}
@@ -1186,7 +1201,7 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "do_demand":
-						{
+						{//TODO:review use of argsarray
 							int[] args = argsArray();
 							yield return StartCoroutine(do_demand(npc,args[0],args[1]));
 							break;
@@ -1206,7 +1221,7 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "gronk_door":
-						{
+						{//TODO:review use of argsarray
 							int[] args = argsArray();
 								//stack.Pop();//no of args
 							gronk_door(args[0],args[1],args[2]);
@@ -1240,7 +1255,7 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "find_inv":
-						{
+						{//TODO:review use of argsarray
 							int[] args=argsArray();
 							stack.result_register = find_inv(npc, args[0], args[1]);
 							break;
@@ -1267,10 +1282,33 @@ public class ConversationVM : UWEBase {
 				case "contains":
 						{
 							int[] args=new int[2];
-							//stack.Pop();//no of args
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value
 							stack.result_register=contains(args[0],args[1]);
+							break;
+						}
+
+				case "set_race_attitude":
+						{
+								//TODO:review use of argsarray
+							int[] args=argsArray();
+							set_race_attitude(npc,args[0],args[1],args[2]);
+							break;
+						}
+
+				case "set_attitude":
+						{//TODO:review use of argsarray
+							int[] args=argsArray();
+							set_attitude(args[0],args[1]);
+							break;
+						}
+
+				case "compare":
+						{//TODO:review use of argsarray
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							stack.result_register= compare(stack.at(args[0]),stack.at(args[1]));
 							break;
 						}
 
@@ -1414,8 +1452,8 @@ public class ConversationVM : UWEBase {
 			yield return StartCoroutine(say_op (PlayerTypedAnswer,PC_SAY));
 			inputctrl.text="";
 			UWHUD.instance.MessageScroll.Clear ();
-			stack.StringMemory=PlayerTypedAnswer;
-			stack.result_register=1;
+			//stack.StringMemory=PlayerTypedAnswer;
+			stack.result_register= StringController.instance.AddString(conv[currConv].StringBlock,PlayerTypedAnswer);
 		}
 
 		/// <summary>
@@ -2341,12 +2379,89 @@ public class ConversationVM : UWEBase {
 		//case-independent.
 		//return value: returns 1 when the string was found, 0 when not
 		string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
-		string String1 = stack.StringMemory;
+		string String1 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString1));
 		if (String1=="")
 		{
 			return 0;//no cheating...
 		}
 		if (String2.ToUpper().Contains(String1.ToUpper()))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+
+		/// <summary>
+		/// Sets the race attitude.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="gtarg">Gtarg.</param>
+		/// <param name="attitude">Attitude.</param>
+		/// <param name="unk2">Unk2.</param>
+		/// Seems to set attitude for all npcs with the whoami of the same value.
+		public void set_race_attitude(NPC npc, int unk1, int attitude, int unk2)
+		{
+			//Used in Bandit chief conversation Level3
+			//id=0026 name="set_race_attitude" ret_type=void
+			//parameters:   unknown
+			//description:  sets attitude for a whole race (?)
+			//Seems to set attitude for all npcs with the whoami of the same value.
+			//Debug.Log ("set_race_attitude " + attitude);
+		/*	NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+			for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+			{
+				if (foundNPCs[i].npc_whoami== npc.npc_whoami)
+				{
+					Debug.Log("Setting attitude= " + attitude + " for " + foundNPCs[i].name);
+					foundNPCs[i].npc_attitude=attitude;
+					foundNPCs[i].npc_gtarg=gtarg;
+				}
+			}*/
+
+			Debug.Log(npc.name + " Set Race attitude " + unk1 + " " + attitude + " " + unk2);
+		}
+
+
+	/// <summary>
+	/// Sets the attitude of a target NPC
+	/// </summary>
+	/// <param name="Attitude">Attitude.</param>
+	/// <param name="target_whoami">The NPC whoami to find</param>
+	public void set_attitude(int attitude, int target_whoami)
+	{
+
+		NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+		for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+		{
+			if (foundNPCs[i].npc_whoami == target_whoami)
+			{
+				foundNPCs[i].npc_attitude=attitude;
+			}
+		}
+	}
+
+
+	/// <summary>
+	/// compares strings for equality, case independent
+	/// </summary>
+	/// <returns>returns 1 when strings are equal, 0 when not</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="StringIndex">String index.</param>
+	/// <param name="StringIn">String in.</param>
+	public int compare(int StringIndex1,  int StringIndex2)
+	{
+		//id=0004 name="compare" ret_type=int
+		//	parameters:   arg1: string id
+		//	arg2: string id
+		//	description:  compares strings for equality, case independent
+		//	return value: returns 1 when strings are equal, 0 when not
+		Debug.Log("Comparing :" + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() + " to " + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper() );
+		//In this implemention I get the string at stringindex compare with string memory (i'm assuming I'm only comparing with babl_ask)
+		if (StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() == StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper())
 		{
 			return 1;
 		}

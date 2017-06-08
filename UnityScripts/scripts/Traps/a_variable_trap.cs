@@ -8,26 +8,31 @@ public class a_variable_trap : trap_base {
       //    quality 8..13
 
 	//public int VariableIndex;
-	public int VariableIndex;	//currObj.zpos
-	public int VariableValue;	//((currObj.owner & 0x7) <<3) | (currObj.y )) or maybe 
-	public int heading;
-
+	//public int VariableIndex;	//currObj.zpos
+	//public int VariableValue;	//((currObj.owner & 0x7) <<3) | (currObj.y )) or maybe 
+	//public int heading;
 
 	protected override void Start ()
 	{
-			base.Start();
+		base.Start();
 		//Init the variables
 
-			VariableIndex=objInt().zpos;
-			VariableValue= ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
+		//VariableIndex=objInt().zpos;
 
-			heading = objInt().heading/45;
+
+		//heading = objInt().heading;
 	}
 
 
 	public override void PostActivate ()
 	{
 		//Do nothing. Stop trap from destroying itself.
+	}
+
+
+	public int VariableValue()
+	{
+		return ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
 	}
 
 }
