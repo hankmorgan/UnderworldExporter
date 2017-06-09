@@ -671,4 +671,21 @@ public class Container : object_base {
 				}
 
 		}
+
+	/// <summary>
+	/// Finds the item index of a specfic item in the container.
+	/// </summary>
+	/// <returns>The item in container.</returns>
+	public static int FindItemInContainer(Container cn, string ItemToFind)
+	{
+		for (int i =0; i<=cn.MaxCapacity ();i++)
+		{
+			if (cn.items[i] == ItemToFind)
+			{					
+				return i;
+			}
+		}
+		return -1;
+	}
+
 }

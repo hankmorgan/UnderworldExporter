@@ -8,7 +8,8 @@ using System.IO;
 /// based on UWAdventures hacking tools.
 /// </summary>
 public class ConversationVM : UWEBase {
-
+		//TODO:Make sure pickups support containers
+		//TODO:Make inventory related code operate on the master object list rather than trade slots.->Trade slots should just give indices into that list in show_inv, 
 		/// Is the user entering a quantity
 		public static bool EnteringQty;
 
@@ -1312,6 +1313,43 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "count_inv":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register=count_inv(stack.at(args[0]));
+							break;
+						}
+
+				case "remove_talker":
+						{
+							remove_talker(npc);
+							break;
+						}
+				case "give_ptr_npc":
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							give_ptr_npc(npc, stack.at(args[0]),stack.at(args[1]));
+							break;
+						}
+				case "take_from_npc_inv":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register= take_from_npc_inv(npc, stack.at(args[0]));
+							break;
+						}
+
+				case "take_id_from_npc":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register=  take_id_from_npc(npc, stack.at(args[0]));
+							break;
+						}
+
 				default: 
 						
 						Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1623,15 +1661,15 @@ public class ConversationVM : UWEBase {
 			int j=0;
 			for (int i=0; i<4;i++)
 			{
-					TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
-					if (pcSlot.isSelected())
-					{
-							//locals[startObjectPos+j]= i;
-							stack.Set(startObjectPos+j,i+1);
-							//locals[startObjectIDs+j]= pcSlot.GetObjectID();
-							stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
-							j++;
-					}
+				TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
+				if (pcSlot.isSelected())
+				{
+					//locals[startObjectPos+j]= i;
+					stack.Set(startObjectPos+j,i+1);
+					//locals[startObjectIDs+j]= pcSlot.GetObjectID();
+					stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
+					j++;
+				}
 			}
 			Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
 			return j;
@@ -2190,7 +2228,7 @@ public class ConversationVM : UWEBase {
 
 
 
-		public void x_obj_stuff(int arg1, int arg2, int arg3, int link, int arg5, int arg6, int quality, int id, int pos)
+		public void x_obj_stuff(int arg1, int arg2, int arg3, int link, int arg5, int owner, int quality, int item_id, int pos)
 		{
 				//Debug.Log("x_obj_stuff");		
 				//id=002f name="x_obj_stuff" ret_type=void
@@ -2201,7 +2239,7 @@ public class ConversationVM : UWEBase {
 				//		arg5: not used in uw1
 				//		arg6: not used in uw1
 				//		arg7: quality?
-				//		arg8: identified flag?
+				//		arg8: identified flag? or is it owner or item_id
 				//		arg9: position in inventory object list
 				//		description:  sets object properties for object in inventory object list.
 				//			if a property shouldn't be set, -1 is passed for the
@@ -2244,6 +2282,15 @@ public class ConversationVM : UWEBase {
 					//obj.link=locals[link]+512;
 				obj.link = stack.at(link)+512; 
 			}
+				if (stack.at(owner)<=0)	
+				{
+					stack.Set(owner, obj.owner);
+				}
+				else
+				{
+					obj.owner=stack.at(owner);
+				}
+
 
 			if (stack.at(quality)<=0)	
 			{
@@ -2254,15 +2301,15 @@ public class ConversationVM : UWEBase {
 			{
 				obj.quality=stack.at(quality);
 			}
-			if (stack.at(id)<=0)
+			if (stack.at(item_id)<=0)
 			{
 					//locals[id]=obj.item_id; 
-				stack.Set(id, obj.item_id);
+				stack.Set(item_id, obj.item_id);
 			}
-			else
-			{
-				obj.item_id=stack.at(id);
-			}
+			//else
+			//{
+			//	obj.item_id=stack.at(item_id);
+			//}
 
 		}
 
@@ -2459,7 +2506,7 @@ public class ConversationVM : UWEBase {
 		//	arg2: string id
 		//	description:  compares strings for equality, case independent
 		//	return value: returns 1 when strings are equal, 0 when not
-		Debug.Log("Comparing :" + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() + " to " + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper() );
+		//Debug.Log("Comparing :" + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() + " to " + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper() );
 		//In this implemention I get the string at stringindex compare with string memory (i'm assuming I'm only comparing with babl_ask)
 		if (StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() == StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper())
 		{
@@ -2472,4 +2519,163 @@ public class ConversationVM : UWEBase {
 	}
 
 
+	/// <summary>
+	/// counts number of items in inventory position.
+	/// </summary>
+	/// <returns>item number</returns>
+	/// <param name="ItemPos">Item position.</param>
+	public int count_inv(int ItemPos)
+	{
+		//id=001e name="count_inv" ret_type=int
+		//parameters:   unknown
+		//description:  counts number of items in inventory
+		//return value: item number
+		int total =0;
+				ItemPos--;
+				if (ItemPos<0){return 0;}
+		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
+		if (objInslot!=null)
+		{
+			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
+			if (objInt!=null)
+			{
+				return objInt.GetQty();
+			}
+		}
+		return total;
+	}
+
+
+
+	/// <summary>
+	///  removes npc the player is talking to (?)
+	/// </summary>
+	public void remove_talker(NPC npc)
+	{
+			//   id=002a name="remove_talker" ret_type=void
+			//parameters:   none
+			//		description:  removes npc the player is talking to (?)
+		npc.gameObject.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+	}
+
+
+	/// <summary>
+	/// Copies item from player inventory to npc inventory
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="Quantity">Quantity.</param>
+	/// <param name="slotNo">Slot no.</param>
+	public void give_ptr_npc(NPC npc, int Quantity, int slotNo)
+	{
+		/*
+id=0014 name="give_ptr_npc" ret_type=int
+parameters:   arg1: quantity (?), or -1 for ignore
+arg2: inventory object list pos
+description:  copies item from player inventory to npc inventory
+return value: none
+*/
+		slotNo--;
+		//Debug.Log ("give_ptr_npc");
+		if  ( (slotNo<0) || (slotNo >3))
+		{
+			return;
+		}
+		Container cn =npc.gameObject.GetComponent<Container>();
+		if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
+		{
+			if ((Quantity==-1))
+			{
+				cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				UWHUD.instance.playerTrade[slotNo].clear ();
+				GameWorldController.instance.playerUW.playerInventory.Refresh();
+			}
+			else
+			{//Clone the object and give the clone to the npc
+				GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				if (objGiven!=null)
+				{
+					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant()==true)
+							&& 
+							(objGiven.GetComponent<ObjectInteraction>().link>1)
+							&&
+							(objGiven.GetComponent<ObjectInteraction>().isEnchanted()==false)
+							&&
+							(objGiven.GetComponent<ObjectInteraction>().link!=Quantity)
+					)
+					{//Object is a quantity or is a quantity less than the number already there.
+						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
+						Split.GetComponent<ObjectInteraction>().link =Quantity;
+						Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
+						objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
+						cn.AddItemToContainer(objGiven.name);
+					}
+					else
+					{//Object is not a quantity or is the full amount.
+						cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+						UWHUD.instance.playerTrade[slotNo].clear ();
+						GameWorldController.instance.playerUW.playerInventory.Refresh();
+					}
+				}
+			}
+		}
+	}
+
+
+	/// <summary>
+	/// transfers item to player, per id (?)
+	/// </summary>
+	/// <returns>1: ok, 2: player has no space left</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="ItemPos">Item position.</param>
+	public int take_id_from_npc(NPC npc, int index)
+	{
+		//id=0016 name="take_id_from_npc" ret_type=int
+		//parameters:   arg1: inventory object list pos (from take_from_npc_inv)
+		//description:  transfers item to player, per id (?)
+		//return value: 1: ok, 2: player has no space left
+		string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
+		int playerHasSpace=1;
+		Container playerContainer = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
+		Container npcContainer = npc.GetComponent<Container>();
+
+		GameObject obj = GameObject.Find(ItemName);
+		if (obj==null){return 1;}
+
+				//Give to PC
+		if (Container.GetFreeSlot(playerContainer)!=-1)//Is there space in the container.
+		{						
+			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
+			playerContainer.AddItemToContainer(obj.name);
+			obj.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+			obj.GetComponent<ObjectInteraction>().PickedUp=true;
+			GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+			playerHasSpace=1;
+		}
+		else
+		{
+			playerHasSpace=2;
+			obj.transform.parent=GameWorldController.instance.LevelMarker();
+			GameWorldController.MoveToWorld(obj);
+			obj.transform.position=npc.transform.position;
+			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
+		}
+		return playerHasSpace;
+	}
+
+
+	/// <summary>
+	/// Gets the index of the item in the specified slot of the NPC inventory (I think)
+	/// </summary>
+	/// <returns>The object list index of the item</returns>
+	/// <param name="arg1">Arg1.</param>
+	public int take_from_npc_inv(NPC npc, int pos)
+	{
+		pos--;
+		GameObject obj=npc.GetComponent<Container>().GetGameObjectAt(pos);
+		if (pos!=null)
+		{
+			return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+		}
+		return 0;
+	}
 }

@@ -858,7 +858,7 @@ public class Conversation_12 : Conversation {
 /// <param name="param1">Param1.</param>
 /// <param name="param2">Param2.</param>
 /// <param name="param3">Param3.</param>
-	int func_0a34(int param1, int param2, int param3) {
+	int func_0a34(int link, int owner, int item_id) {
 		
 		//int locals[25];
 		int[] locals = new int[26];
@@ -872,7 +872,7 @@ public class Conversation_12 : Conversation {
 		if ( locals[15] <= locals[14] ) {//and again
 			
 			//if ( locals[1] == param3[0]play_hunger ) {
-			if ( locals[2] == param3 ) {					
+			if ( locals[2] == item_id ) {					
 				locals[16] = locals[15];
 				locals[12] = locals[7];
 				locals[15] = locals[14];
@@ -901,18 +901,18 @@ public class Conversation_12 : Conversation {
 				//Param2 = testing for plate
 				//param1 = testing for writ
 			locals[1] = 0;
-				if (param1== -1)
+				if (link == -1)
 				{//Testing for plate
-					if (param3== locals[19])	
+					if (item_id== locals[19])	
 					{
 						locals[25] = 1;
 						give_to_npc (2,locals,12,locals[25]);
 						locals[1] = 1;	
 					}
 				}
-				if (param2== -1)
+				if (owner== -1)
 				{//Testing for writ
-						if ((param1== locals[18]) && (param3==locals[19]))	
+						if ((link== locals[18]) && (item_id==locals[19]))	
 						{
 							locals[25] = 1;
 							give_to_npc (2,locals,12,locals[25]);
