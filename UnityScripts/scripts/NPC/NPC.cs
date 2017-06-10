@@ -589,7 +589,7 @@ public class NPC : object_base {
 			{//Generic conversation.
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npcname= StringController.instance.GetFormattedObjectNameUW(objInt);
-				npc_whoami=256+(objInt.item_id -64);
+				//npc_whoami=256+(objInt.item_id -64);
 			}
 			if (npc_whoami>255)
 			{//Generic conversation.

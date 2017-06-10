@@ -46,6 +46,10 @@ public class ProjectileDamage : MonoBehaviour {
 	/// Half damage is applied on richochets
 	void HandleImpact(GameObject other)
 	{			
+		if (Source==null)
+		{
+			Source=this.gameObject;
+		}
 		if ((hasHit==false) && (other.name==Source.name))
 		{//prevent the first hit suiciding the character
 			return;

@@ -46,7 +46,7 @@ public class a_arrow_trap : trap_base {
 		myObjChild.transform.position =myObj.transform.position;
 		myObjChild.transform.parent =myObj.transform;
 		ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
-		pd.Source=null;//Traps don't need to be identified.
+		pd.Source=this.gameObject;//Traps don't need to be identified.
 		pd.Damage=10;
 	}
 

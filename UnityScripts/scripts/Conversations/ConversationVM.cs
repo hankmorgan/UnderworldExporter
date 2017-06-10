@@ -72,6 +72,9 @@ public class ConversationVM : UWEBase {
 		const int return_int = 0x129;
 		const int return_string = 0x12b;
 
+
+		const int TradeAreaOffset=10000;
+
 		//The input and output controls
 		//private static Text Output;
 		private static Text PlayerInput;
@@ -218,7 +221,15 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public void RunConversation(NPC npc)
 		{
-				currConv=npc.npc_whoami;
+				if (npc.npc_whoami==0)
+				{
+					currConv = 256+(npc.objInt().item_id -64);
+				}
+				else
+				{
+					currConv=npc.npc_whoami;	
+				}
+
 				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 				UWHUD.instance.Conversation_tl.Clear();
 				UWHUD.instance.MessageScroll.Clear();
@@ -1097,10 +1108,14 @@ public class ConversationVM : UWEBase {
 
 				case "set_likes_dislikes":
 						{
-							stack.Pop();
-							int index1= stack.Pop();
-							int index2= stack.Pop();
-							set_likes_dislikes(index1,index2);
+							//stack.Pop();
+							//int index1= stack.Pop();
+							//int index2= stack.Pop();
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+
+								set_likes_dislikes(stack.at(args[0]),stack.at(args[1]));
 							break;
 						}
 
@@ -1128,11 +1143,13 @@ public class ConversationVM : UWEBase {
 				case "random":
 						{
 						//	int[] args = argsArray();
-							stack.Pop();
 							//stack.Pop();
-							int arg1=stack.Pop();
-							stack.result_register=Random.Range(1,stack.at(arg1)+1);
-							stack.result_register=Random.Range(1,arg1+1);
+							//stack.Pop();
+							//int arg1=stack.Pop();
+							//stack.result_register=Random.Range(1,stack.at(arg1)+1);
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register=Random.Range(1,stack.at(args[0])+1);
 							break;
 						}
 
@@ -1223,9 +1240,14 @@ public class ConversationVM : UWEBase {
 
 				case "gronk_door":
 						{//TODO:review use of argsarray
-							int[] args = argsArray();
+							//int[] args = argsArray();
 								//stack.Pop();//no of args
-							gronk_door(args[0],args[1],args[2]);
+							int[] args=new int[3];
+							//stack.Pop();//no of args
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-4);//ptr to value
+							stack.result_register=gronk_door(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
 							break;
 						}
 
@@ -1257,8 +1279,12 @@ public class ConversationVM : UWEBase {
 
 				case "find_inv":
 						{//TODO:review use of argsarray
-							int[] args=argsArray();
-							stack.result_register = find_inv(npc, args[0], args[1]);
+							//int[] args=argsArray();
+								int[] args=new int[2];
+								//stack.Pop();//no of args
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							stack.result_register = find_inv(npc, stack.at(args[0]), stack.at(args[1]));
 							break;
 						}
 
@@ -1347,6 +1373,22 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[1];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							stack.result_register=  take_id_from_npc(npc, stack.at(args[0]));
+							break;
+						}
+
+				case "find_barter":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register=  find_barter(stack.at(args[0]));
+							break;
+						}
+
+				case "length":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value	
+							stack.result_register= length(stack.at(args[0]));
 							break;
 						}
 
@@ -1665,7 +1707,7 @@ public class ConversationVM : UWEBase {
 				if (pcSlot.isSelected())
 				{
 					//locals[startObjectPos+j]= i;
-					stack.Set(startObjectPos+j,i+1);
+					stack.Set(startObjectPos+j, TradeAreaOffset +  i +1);		//Make them stand out.
 					//locals[startObjectIDs+j]= pcSlot.GetObjectID();
 					stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
 					j++;
@@ -1689,7 +1731,7 @@ public class ConversationVM : UWEBase {
 				bool SomethingGiven=false;
 				for (int i=0; i<NoOfItems; i++)
 				{
-						int slotNo = start-1+i; //locals[start+i] ;
+						int slotNo = start-1+i  - TradeAreaOffset ;//locals[start+i] ;
 						if (slotNo<=3)
 						{
 								TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
@@ -1773,7 +1815,7 @@ public class ConversationVM : UWEBase {
 						||
 						((arg1<1000) && (objInt.item_id == arg1 ))
 				)
-				{
+				{//TODO:replace with standard transfer item functions										
 					//Give to PC
 					GameObject demanded =cn.GetGameObjectAt(i);
 					string itemName=cn.GetItemAt (i);
@@ -2245,28 +2287,38 @@ public class ConversationVM : UWEBase {
 				//			if a property shouldn't be set, -1 is passed for the
 				//         property value.
 				//If -1 then it returns the value in the array?
+				/*This may be implemented wrongly*/
 
-			/*This may be implemented wrongly*/
+			ObjectInteraction obj=null;
+
+			
 			pos = stack.at(pos);
-			ObjectInteraction obj;
-			pos--;
-			if (pos<0)
+
+			if (pos>=TradeAreaOffset)//Item is in a trade slot
 			{
-				return;
-			}
-			if (pos<=3)
-			{//Item is in players trade area.
-				obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
-					
-			}
-			else if (pos <=7)
-			{//item in npc trade area
-				obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
+				pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
+				pos--;
+				if (pos<0)
+				{
+					return;
+				}
+				if (pos<=3)
+				{//Item is in players trade area.
+					obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
+
+				}
+				else if (pos <=7)
+				{//item in npc trade area
+					obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();					
+				}	
 			}
 			else
-			{
-				return;
-			}
+			{//Item is in the object masterlist
+				obj = GameWorldController.instance.CurrentObjectList().objInfo[pos].instance;
+			}		
+
+
+
 			if (obj==null)
 			{
 				return;
@@ -2282,14 +2334,15 @@ public class ConversationVM : UWEBase {
 					//obj.link=locals[link]+512;
 				obj.link = stack.at(link)+512; 
 			}
-				if (stack.at(owner)<=0)	
-				{
-					stack.Set(owner, obj.owner);
-				}
-				else
-				{
-					obj.owner=stack.at(owner);
-				}
+
+			if (stack.at(owner)<=0)	
+			{
+				stack.Set(owner, obj.owner);
+			}
+			else
+			{
+				obj.owner=stack.at(owner);
+			}
 
 
 			if (stack.at(quality)<=0)	
@@ -2353,7 +2406,8 @@ public class ConversationVM : UWEBase {
 			}
 			
 		case 1://PC Search
-			{
+				{
+				Debug.Log("PC version of find_inv."); //will happen in judy's conversation
 				string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
 				GameObject obj= GameObject.Find(itemname);
 
@@ -2678,4 +2732,64 @@ return value: none
 		}
 		return 0;
 	}
+
+
+	/// <summary>
+	/// searches for item in barter area
+	/// </summary>
+	/// <returns>This returns slot number + 1. Take this into account when retrieving the items in later functions</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="itemID">item id to find</param>
+	public int find_barter(int itemID)
+	{//This returns slot number + 1. Take this into account when retrieving the items in later functions
+		//id=0031 name="find_barter" ret_type=int
+		//	parameters:   arg1: item id to find
+		//	description:  searches for item in barter area
+		//	return value: returns pos in inventory object list, or 0 if not found
+		// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
+		for (int i = 0; i<4; i++)
+		{
+			if (UWHUD.instance.playerTrade[i].isSelected())
+			{
+				ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+				if (objInt!=null)
+				{					
+					if (itemID<1000)
+					{
+						if (objInt.item_id== itemID)
+						{
+							return i+1;
+						}
+					}
+					else
+					{
+						if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
+						{
+							return i+1;
+						}
+					}
+				}
+			}
+
+		}
+
+		return 0;
+	}
+
+
+		/// <summary>
+		/// Length of the specified string.
+		/// </summary>
+		/// <param name="str">String.</param>
+		public int length(int str)
+		{
+			//id=000b name="length" ret_type=int
+			//	parameters:   arg1: string id
+			//	description:  calculates length of string
+			//	return value: length of string
+			return StringController.instance.GetString(conv[currConv].StringBlock, str).Length;
+		}
+
+
+
 }
