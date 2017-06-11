@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class CutsAnimator : GuiBase {
 		public bool Reset;
@@ -123,13 +124,28 @@ public class CutsAnimator : GuiBase {
 			case "Anvil":
 				cuts = new CutsLoader("cs404.n01");
 				TargetControl.texture = cuts.ImageCache[0];
-				break;		
+				break;
+			//case "c401.n01":
+
 			default:
 				if (SetAnimation.Substring(0,7) == "Volcano")
 				{
 					cuts = new CutsLoader("cs400.n01");
 					int index= int.Parse(SetAnimation.Substring(SetAnimation.Length-1,1));
 					TargetControl.texture = cuts.ImageCache[index];
+				}
+				else if ((SetAnimation.Substring(0,5) == "Grave"))
+				{//Graves
+						cuts = new CutsLoader("cs401.n01");
+						//TargetControl.texture = cuts.ImageCache[0];
+						//break;	
+					string regexForNumber="([-+]?[0-9]*\\.?[0-9]+)";
+					Match GraveID =  Regex.Match(SetAnimation, regexForNumber);
+					if (GraveID.Success)
+					{
+						int value = int.Parse(GraveID.Groups[0].Value);
+						TargetControl.texture = cuts.ImageCache[value];	
+					}
 				}
 				else
 				{

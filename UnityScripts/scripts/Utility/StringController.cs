@@ -561,7 +561,7 @@ public class StringController : UWEBase {
 		GameStrings[BlockNo.ToString("000") + "_" + Count.ToString("000")] = NewString;	
 		EntryCounts["_" + BlockNo]= Count.ToString();
 
-		Debug.Log("New string :" + GameStrings[BlockNo.ToString("000") + "_" + Count.ToString("000")] );
+		//Debug.Log("New string :" + GameStrings[BlockNo.ToString("000") + "_" + Count.ToString("000")] );
 		return Count;
 	}
 	

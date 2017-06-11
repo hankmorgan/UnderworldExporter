@@ -1965,6 +1965,11 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case ZANIUM:
 						myObj.AddComponent<Zanium>();
+						myObj.layer= LayerMask.NameToLayer ("Zanium");
+						myObj.GetComponent<BoxCollider>().isTrigger=true;
+						BoxCollider bx= myObj.AddComponent<BoxCollider>();
+						bx.size = new Vector3(0.2f,0.2f,0.2f);
+						bx.center= new Vector3(0.0f,0.1f,0.0f);
 						break;
 				case INSTRUMENT:
 						myObj.AddComponent<Instrument>();

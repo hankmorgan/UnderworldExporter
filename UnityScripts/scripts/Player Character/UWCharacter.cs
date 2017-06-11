@@ -277,8 +277,8 @@ public class UWCharacter : Character {
 				}
 			}
 			else
-			{
-				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,0.9198418f,playerCam.transform.localPosition.z);
+			{//0.9198418f
+				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,1.0f,playerCam.transform.localPosition.z);
 				swimSpeedMultiplier=1.0f;
 				SwimTimer=0.0f;
 			}

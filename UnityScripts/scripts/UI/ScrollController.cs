@@ -50,10 +50,10 @@ public class ScrollController : GuiBase {
 			}*/
 			ListAdd (Paragraphs[i]);
 			//ListAdd(Output );
-			if (i < Paragraphs.GetUpperBound(0))
-			{//TODO:Pause for more when not the last paragraph. 
-				ListAdd("[MORE]-");
-			}
+			//if (i < Paragraphs.GetUpperBound(0))
+			//{//TODO:Pause for more when not the last paragraph. 
+			//	ListAdd("[MORE]-");
+			//}
 		}
 	//NewUIOUt.text=uiIn.textLabel.text;
 				PrintList();

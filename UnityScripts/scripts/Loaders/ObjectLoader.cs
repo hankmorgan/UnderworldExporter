@@ -445,10 +445,10 @@ public class ObjectLoader : Loader {
 			long AddressOfBlockStart;
 			
 			long address_pointer;
-			char[] graves;
+			//char[] graves;
 
 			//Load in the grave information
-			DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
+			//DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
 			switch (_RES)
 			{
 			case GAME_UWDEMO:
@@ -606,10 +606,10 @@ public class ObjectLoader : Loader {
 				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.GRAVE)
 				{
 					objList[x].texture = objList[x].flags+28;
-					if (objList[x].link >= 512)
-					{
-						objList[x].DeathWatched = (short)DataLoader.getValAtAddress(graves, objList[x].link - 512, 8);
-					}
+					//if (objList[x].link >= 512)
+					//{
+					//	objList[x].DeathWatched = (short)DataLoader.getValAtAddress(graves, objList[x].link - 512, 8);
+					//}
 				}
 				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
 				{

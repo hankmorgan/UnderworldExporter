@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Implementation of the conversation virtual machine
@@ -960,7 +961,9 @@ public class ConversationVM : UWEBase {
 								//case "play_drawn":
 								case "play_poison":
 										store_value(address,GameWorldController.instance.playerUW.play_poison);break;
-								//case "play_name":
+								case "play_name":
+										store_value(address,StringController.instance.AddString(conv[currConv].StringBlock,GameWorldController.instance.playerUW.CharName));break;
+
 								//case "new_player_exp":
 								case "play_level":
 										store_value(address,GameWorldController.instance.playerUW.CharLevel);break;
@@ -1020,20 +1023,120 @@ public class ConversationVM : UWEBase {
 
 
 		IEnumerator say_op(string text, int PrintType)
-		{				
-			string Markup="";
-			switch (PrintType)
+		{	
+			if (text.Contains("@"))
 			{
-			case PC_SAY:
-					Markup="<color=red>";break;//[FF0000]
-			case PRINT_SAY:
-					Markup="<color=black>";break;//[000000]
-			default:
-					Markup="<color=green>";break;//[00FF00]
-			}	
-			UWHUD.instance.Conversation_tl.Add ( Markup + text + "" + "</color>"); //\n
+				text = TextSubstitute(text);
+			}
+				string [] Lines  = text.Split(new string [] {"\n"}, System.StringSplitOptions.None);
+
+				for (int s=0; s<= Lines.GetUpperBound(0);s++)
+				{//Lines
+					string [] Paragraphs = Lines[s].Split(new string [] {"\\m"}, System.StringSplitOptions.None);
+
+					for (int i=0; i<=Paragraphs.GetUpperBound(0);i++)
+					{
+							string Markup="";
+							switch (PrintType)
+							{
+							case PC_SAY:
+									Markup="<color=red>";break;//[FF0000]
+							case PRINT_SAY:
+									Markup="<color=black>";break;//[000000]
+							default:
+									Markup="<color=green>";break;//[00FF00]
+							}	
+							UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
+							if (i<Paragraphs.GetUpperBound(0))
+							{
+								UWHUD.instance.Conversation_tl.Add ("<color=white>MORE</color>");
+								yield return StartCoroutine(WaitForMore());	
+							}
+
+					}
+				}
+
+
+
+
 			yield return 0;
 		}
+
+
+	string TextSubstitute(string input)
+	{
+		//X: source of variable to substitute, one of these: GSP
+		//G: game global variable
+		//S: stack variable
+		//P: pointer variable
+		//Y: type of variable, one of these: SI
+		//S: value is a string number into current string block
+		//I: value is an integer value
+		//<num>: decimal value
+		//<extension>: format: C<number>: use array index <number>
+		string regexForStringReplacement="@[GSP][SI]([-+]?[0-9]*\\.?[0-9]+)";
+		string regexForStringReplacementType="@[GSP][SI]";
+		string regexForStringReplacementValue="([-+]?[0-9]*\\.?[0-9]+)";
+		MatchCollection matches=Regex.Matches(input, regexForStringReplacement);
+		for (int s = 0; s<matches.Count; s++)
+		{
+			if (matches[s].Success)
+			{
+				string ReplacementString=matches[s].Groups[0].Value;
+				Match ReplacementValue =  Regex.Match(ReplacementString, regexForStringReplacementValue);
+				if (ReplacementValue.Success)
+				{
+					int value = int.Parse(ReplacementValue.Groups[0].Value);
+					//Try and find what type of replacement this is
+					Match ReplacementType = Regex.Match(ReplacementString, regexForStringReplacementType);
+					string FoundString="";
+					if (ReplacementType.Success)
+					{
+						switch (ReplacementType.Groups[0].Value)
+						{
+						case "@GS": //Global string.
+							{
+								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(value));
+								break;
+							}
+						case "@GI": //Global integer
+							{
+								FoundString= stack.at(value).ToString();
+								break;	
+							}
+						case "@SS": //Stack string
+							{
+								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+value));
+								break;	
+							}
+						case "@SI": //Stack integer
+							{
+								FoundString= stack.at(stack.basep+value).ToString();
+								break;	
+							}
+
+						case "@PS": //Pointer string
+							{
+								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.at(stack.basep+value)));
+								break;	
+							}
+						case "@PI": //Pointer integer
+							{
+								FoundString= stack.at(stack.at(stack.basep+value)).ToString();
+								break;	
+							}
+						}
+						if (FoundString!="")
+						{
+							Debug.Log("To Replace "+ ReplacementString + " Type=" + ReplacementType.Groups[0].Value + " value=" + value + " replacing with " + FoundString);
+							input=input.Replace(ReplacementString,FoundString);
+						}	
+					}	
+				}
+			}		
+		}
+		return input;
+	}
 
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
@@ -1043,9 +1146,10 @@ public class ConversationVM : UWEBase {
 				{
 				case "babl_menu":
 						{
-							stack.Pop();
-							int start =stack.Pop(); //stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
-							yield return StartCoroutine(babl_menu(start));
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+
+							yield return StartCoroutine(babl_menu(args[0]));
 							break;
 						}
 
@@ -1080,19 +1184,24 @@ public class ConversationVM : UWEBase {
 
 				case "set_quest":
 						{
-							int[] args = argsArray();
+							//int[] args = argsArray();
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
 
 							//int val = stack.Pop();
 							//int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
 							//stack.at( stack.at( stack.stackptr-4 ) ) ;
-							set_quest(args[0],args[1]);//Or the other way around.
+							set_quest(stack.at(args[0]),stack.at(args[1]));//Or the other way around.
 							break;
 						}
 
 				case "print":
 						{//TODO:review use of argsarray
-						int[] args = argsArray();								
-						yield return StartCoroutine(say_op(args[0],PRINT_SAY));
+						//int[] args = argsArray();								
+						int[] args=new int[2];
+						args[0]= stack.at(stack.stackptr-2);//ptr to value
+						yield return StartCoroutine(say_op(stack.at(args[0]),PRINT_SAY));
 						break;
 						}
 
@@ -1120,23 +1229,11 @@ public class ConversationVM : UWEBase {
 						}
 
 				case "sex":
-						{//TODO:review use of argsarray
-
-							int[] args = argsArray();
-
-							//stack.Pop();
-							//stack.Pop();
-							//stack.Pop();
-							//int arg2=stack.Pop();
-							//int arg1=stack.Pop();
-							if (GameWorldController.instance.playerUW.isFemale)
-							{
-								stack.result_register=stack.at(args[1]);	//2	
-							}
-							else
-							{
-								stack.result_register=stack.at(args[0]);//1
-							}
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							stack.result_register= sex(stack.at(args[0]),stack.at(args[1]));
 							break;
 						}
 
@@ -1165,10 +1262,13 @@ public class ConversationVM : UWEBase {
 
 				case "give_to_npc":
 						{
-							stack.Pop();
-							int arg1= stack.Pop();	
-							int arg2= stack.Pop();
-							stack.result_register = give_to_npc(npc, stack.at(arg1), stack.at(arg2));
+							//stack.Pop();
+							//int arg1= stack.Pop();	
+							//int arg2= stack.Pop();
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							stack.result_register = give_to_npc(npc, stack.at(args[0]), stack.at(args[1]));
 							break;
 						}
 
@@ -1193,25 +1293,39 @@ public class ConversationVM : UWEBase {
 				case "do_offer":
 						{//TODO:review use of argsarray
 							//int noOfArgs=stack.Pop();
-							int[] args = argsArray();
-							switch (args.GetUpperBound(0))
+							//int[] args = argsArray();
+
+							switch (stack.TopValue)//(args.GetUpperBound(0))
 							{
 							case 6:
 								{
-									
-									yield return StartCoroutine(do_offer(npc, args[0],args[1],args[2],args[3],args[4],args[5],args[6]));
+									int[] args=new int[7];
+									args[0]= stack.at(stack.stackptr-2);//ptr to value
+									args[1]= stack.at(stack.stackptr-3);//ptr to value
+									args[2]= stack.at(stack.stackptr-4);//ptr to value
+									args[3]= stack.at(stack.stackptr-5);//ptr to value
+									args[4]= stack.at(stack.stackptr-6);//ptr to value
+									args[5]= stack.at(stack.stackptr-7);//ptr to value
+									args[6]= stack.at(stack.stackptr-8);//ptr to value
+
+									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]), stack.at(args[5]), stack.at(args[6])));
 									break;		
 								}
 								case 4:
 								{
-									yield return StartCoroutine(do_offer(npc, args[0],args[1],args[2],args[3],args[4],-1,-1));	
+									int[] args=new int[4];
+									args[0]= stack.at(stack.stackptr-2);//ptr to value
+									args[1]= stack.at(stack.stackptr-3);//ptr to value
+									args[2]= stack.at(stack.stackptr-4);//ptr to value
+									args[3]= stack.at(stack.stackptr-5);//ptr to value
+									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]),-1,-1));	
 									break;
 								}
 
 
 							default:
 								{
-									Debug.Log("uniplemented version of do_offer " + args.GetUpperBound(0));
+									Debug.Log("uniplemented version of do_offer " + stack.TopValue);
 									break;		
 								}
 							}
@@ -1220,8 +1334,11 @@ public class ConversationVM : UWEBase {
 
 				case "do_demand":
 						{//TODO:review use of argsarray
-							int[] args = argsArray();
-							yield return StartCoroutine(do_demand(npc,args[0],args[1]));
+							//int[] args = argsArray();
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							yield return StartCoroutine(do_demand(npc,stack.at(args[0]),stack.at(args[1])));
 							break;
 						}
 
@@ -1243,7 +1360,6 @@ public class ConversationVM : UWEBase {
 							//int[] args = argsArray();
 								//stack.Pop();//no of args
 							int[] args=new int[3];
-							//stack.Pop();//no of args
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value
 							args[2]= stack.at(stack.stackptr-4);//ptr to value
@@ -1318,15 +1434,22 @@ public class ConversationVM : UWEBase {
 				case "set_race_attitude":
 						{
 								//TODO:review use of argsarray
-							int[] args=argsArray();
-							set_race_attitude(npc,args[0],args[1],args[2]);
+							//int[] args=argsArray();
+							int[] args=new int[3];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-3);//ptr to value
+							set_race_attitude(npc,stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
 							break;
 						}
 
 				case "set_attitude":
 						{//TODO:review use of argsarray
-							int[] args=argsArray();
-							set_attitude(args[0],args[1]);
+							//int[] args=argsArray();
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							set_attitude(stack.at(args[0]),stack.at(args[1]));
 							break;
 						}
 
@@ -1392,6 +1515,36 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+
+				case "find_barter_total":
+						{
+							int[] args=new int[4];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-4);//ptr to value
+							args[3]= stack.at(stack.stackptr-5);//ptr to value
+							stack.result_register=find_barter_total(args[0],args[1],args[2],stack.at(args[3]));
+							break;
+						}
+
+				case "do_inv_create":
+						{
+							int[] args=new int[1];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register= do_inv_create(stack.at(args[0]));
+							break;
+						}
+
+				case "place_object":
+						{
+							int[] args=new int[3];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-4);//ptr to value	
+							place_object(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
+							break;
+						}
+
 				default: 
 						
 						Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1404,17 +1557,17 @@ public class ConversationVM : UWEBase {
 		/// Creates an array of argumenst based on the number of args in the stack and that many values..
 		/// </summary>
 		/// <returns>The array.</returns>
-		int [] argsArray()
-		{
-			int noOfArgs=stack.Pop();
-			int []args =new int[noOfArgs];
-			int start= stack.Pop();
-			for (int i=0; i<noOfArgs; i++)
-			{
-					args[i]	= stack.at(start-i);
-			}	
-			return args;
-		}
+		//int [] argsArray()
+		//{
+		//	int noOfArgs=stack.Pop();
+		//	int []args =new int[noOfArgs];
+		//	int start= stack.Pop();
+		//	for (int i=0; i<noOfArgs; i++)
+		//	{
+		//			args[i]	= stack.at(start-i);
+		//	}	
+		//	return args;
+		//}
 
 		/// <summary>
 		/// Creates an array of argumenst based on the number of args in the stack and that many values..
@@ -1444,10 +1597,15 @@ public class ConversationVM : UWEBase {
 				{
 						if ( stack.at(i) >0)
 						{
+								string TextLine = StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i));
+								if (TextLine.Contains("@"))
+								{
+									TextLine=TextSubstitute(TextLine);
+								}
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
 								//PlayerInput.text += (j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i))) + "\n";
-								UWHUD.instance.MessageScroll.Add(j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i)) + "");//  \n
+								UWHUD.instance.MessageScroll.Add(j++ + "." +  TextLine + "");//  \n
 
 								MaxAnswer++;
 						}
@@ -1473,42 +1631,49 @@ public class ConversationVM : UWEBase {
 		/// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
 		public IEnumerator babl_fmenu(int Start, int flagIndex)
 		{
-				UWHUD.instance.MessageScroll.Clear();
-				//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
-				//tl_input.Clear();
-				//PlayerInput.text="";
-				usingBablF=true;
-				for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
-				{//Reset the answers array
-						bablf_array[i]=0;
-				}
-				string tmp="";
-				int j=1;
-				MaxAnswer=0;
-				for (int i = Start; i <=stack.Upperbound() ; i++)
+			UWHUD.instance.MessageScroll.Clear();
+			//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
+			//tl_input.Clear();
+			//PlayerInput.text="";
+			usingBablF=true;
+			for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
+			{//Reset the answers array
+					bablf_array[i]=0;
+			}
+			string tmp="";
+			int j=1;
+			MaxAnswer=0;
+			for (int i = Start; i <=stack.Upperbound() ; i++)
+			{
+				if (stack.at(i)!=0)
 				{
-						if (stack.at(i)!=0)
+					if (stack.at(flagIndex++) !=0)
+					{
+						string TextLine = StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i));
+						if (TextLine.Contains("@"))
 						{
-								if (stack.at(flagIndex++) !=0)
-								{
-										bablf_array[j-1] = stack.at(i);
-										//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
-										UWHUD.instance.MessageScroll.Add (j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i)) + "\n");
-										MaxAnswer++;
-								}
+								TextLine=TextSubstitute(TextLine);
 						}
-						else
-						{
-								break;
-						}
+
+
+						bablf_array[j-1] = stack.at(i);
+						//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
+						UWHUD.instance.MessageScroll.Add (j++ + "." + TextLine + "");
+						MaxAnswer++;
+					}
 				}
-				yield return StartCoroutine(WaitForInput());
-				//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
-				//yield return StartCoroutine(say (tmp,PC_SAY));
-				yield return StartCoroutine(say_op(bablf_array[bablf_ans-1]));
-				//stack.result_register=bablf_array[bablf_ans-1];
-				stack.result_register=PlayerAnswer;
-				yield return 0;
+				else
+				{
+					break;
+				}
+			}
+			yield return StartCoroutine(WaitForInput());
+			//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
+			//yield return StartCoroutine(say (tmp,PC_SAY));
+			yield return StartCoroutine(say_op(bablf_array[bablf_ans-1],PC_SAY));
+			//stack.result_register=bablf_array[bablf_ans-1];
+			stack.result_register=PlayerAnswer;
+			yield return 0;
 		}
 
 
@@ -1707,7 +1872,7 @@ public class ConversationVM : UWEBase {
 				if (pcSlot.isSelected())
 				{
 					//locals[startObjectPos+j]= i;
-					stack.Set(startObjectPos+j, TradeAreaOffset +  i +1);		//Make them stand out.
+					stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
 					//locals[startObjectIDs+j]= pcSlot.GetObjectID();
 					stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
 					j++;
@@ -1731,28 +1896,36 @@ public class ConversationVM : UWEBase {
 				bool SomethingGiven=false;
 				for (int i=0; i<NoOfItems; i++)
 				{
+						
 						int slotNo = start-1+i  - TradeAreaOffset ;//locals[start+i] ;
 						if (slotNo<=3)
 						{
 								TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
+								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 								//Give the item to the npc
 								if (Container.GetFreeSlot(cn)!=-1)
 								{
-										cn.AddItemToContainer(pcSlot.objectInSlot);
-										pcSlot.clear ();
+									cn.AddItemToContainer(pcSlot.objectInSlot);
+									pcSlot.clear ();
+									if (demanded!=null)
+									{
+										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(demanded);
+										demanded.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 										SomethingGiven=true;
+									}
+									SomethingGiven=true;
 								}
 								else
-								{
-										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-										if (demanded!=null)
-										{
-												demanded.transform.parent=GameWorldController.instance.LevelMarker();
-												GameWorldController.MoveToWorld(demanded);
-												demanded.transform.position=npc.transform.position;
-												SomethingGiven=true;
-										}
-										pcSlot.clear();
+								{									
+									if (demanded!=null)
+									{
+										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(demanded);
+										demanded.transform.position=npc.transform.position;
+										SomethingGiven=false;
+									}
+									pcSlot.clear();
 								}
 						}
 				}
@@ -2585,7 +2758,11 @@ public class ConversationVM : UWEBase {
 		//description:  counts number of items in inventory
 		//return value: item number
 		int total =0;
-				ItemPos--;
+				if (ItemPos>=TradeAreaOffset)
+				{
+					ItemPos = ItemPos - TradeAreaOffset;	
+				}
+
 				if (ItemPos<0){return 0;}
 		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
@@ -2791,5 +2968,177 @@ return value: none
 		}
 
 
+		/// <summary>
+		/// Gets the string no that identifies this players gender.
+		/// </summary>
+		/// <param name="unknown">Unknown.</param>
+		/// <param name="ParamFemale">female string</param>
+		/// <param name="ParamMale">male string</param>
+		public int sex(int ParamFemale, int ParamMale)
+		{
+			if (GameWorldController.instance.playerUW.isFemale==true)
+			{
+				return ParamFemale;
+			}
+			else
+			{
+				return ParamMale;
+			}
+		}
 
+
+
+		/// <summary>
+		/// Finds the barter total.
+		/// </summary>
+		/// <returns>The barter total.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="ptrCount">Ptr count.</param>
+		/// <param name="ptrSlot">Ptr slot.</param>
+		/// <param name="ptrNoOfSlots">Ptr no of slots.</param>
+		/// <param name="item_id">Item identifier.</param>
+		/// <param name="variables">Variables.</param>
+		/// My implementation 
+		/// find the total number of matching items
+		/// keep a list of slots where they are found
+		/// keep a number of found slots.
+		public int find_barter_total( int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id )
+		{
+				/*
+   id=0032 name="find_barter_total" ret_type=int
+   parameters:   s[0]: ???
+                 s[1]: pointer to number of found items
+                 s[2]: pointer to
+                 s[3]: pointer to
+                 s[4]: pointer to item ID to find
+   description:  searches for item in barter area
+   return value: 1 when found (?)
+	*/
+			ObjectInteraction objInt=null;
+			int slotFoundCounter=0;
+			stack.Set(ptrNoOfSlots,0);
+			for (int i = 0; i<4; i++)
+			{
+				if (UWHUD.instance.playerTrade[i].isSelected())
+				{
+					objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+
+					if (objInt!=null)
+					{
+						Debug.Log(objInt.item_id);
+						int founditem_id=objInt.item_id;
+						int itemqt = objInt.GetQty();
+						Debug.Log(itemqt);
+
+						if (item_id==founditem_id)
+						{
+						stack.Set(ptrCount, stack.at(ptrCount) + itemqt);
+						stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
+						stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
+
+						}
+					}
+					//	if (item_id<1000)
+					//	{
+							//if (objInt.item_id== item_id)
+							//{
+													//	Debug.Log("fuck1")						;
+								//Debug.Log(objInt.GetQty());
+													//	Debug.Log("fuck2")						;
+
+								//stack.Set(ptrCount, stack.at(ptrCount) + objInt.GetQty());
+								//stack.StackValues[ptrCount]+= objInt.GetQty();
+								//stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i));
+								//stack.StackValues[ptrSlot+slotFoundCounter++] = (TradeAreaOffset+i);
+								//stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
+								//stack.StackValues[ptrNoOfSlots]++;
+
+							//}
+						//}
+				//		else
+				//		{
+				//			if ((objInt.item_id>= (item_id-1000)*16) && (objInt.item_id< ((item_id+1)-1000)*16))
+				//			{
+				//				stack.Set(ptrCount, stack.at(ptrCount) + objInt.GetQty());
+				//				stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i));
+				//				stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
+				//			}
+				//		}
+				//	}		
+				}
+			}
+			return stack.StackValues[ptrCount];
+		}
+
+
+
+	/// <summary>
+	/// creates item in npc inventory
+	/// </summary>
+	/// <returns>inventory object list position</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="item_id">Item identifier.</param>
+	public int do_inv_create(int item_id)
+	{
+		//id=001a name="do_inv_create" ret_type=int
+		//parameters:   arg1: item id
+		//description:  creates item in npc inventory
+		//return value: inventory object list position
+
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,0);
+		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+		GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+		//Container npccont = npc.GetComponent<Container>();
+		//if(npccont!=null)
+		//{
+			//npccont.AddItemToContainer (myObj.name);
+			/*for (int i =0; i<4;i++)
+			{
+				if (UWHUD.instance.npcTrade[i].objectInSlot=="")
+				{
+					//NPCTradeItems[i]=myObj.name;
+					TradeSlot ts = UWHUD.instance.npcTrade[i];
+					ts.objectInSlot=myObj.name;
+					ts.SlotImage.texture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+					return i;
+				}
+			}*/
+		//}
+		return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+	}
+
+
+
+		/// <summary>
+		///  places a generated object in underworld
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="invSlot">inventory item slot number (from do_inv_create)</param>
+		public void place_object(int tileY, int tileX, int index )
+		{
+			/*
+id=0027 name="place_object" ret_type=void
+parameters:   arg1: x tile pos
+         arg2: y tile pos
+         arg3: inventory item slot number (from do_inv_create)
+description:  places a generated object in underworld
+         used in Judy's conversation, #23
+
+			*/
+			ObjectInteraction objInt=GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+			if (objInt!=null)
+			{
+				//string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
+				GameObject obj = objInt.gameObject;
+
+				obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+				//obj.transform.parent=GameWorldController.instance.LevelMarker();
+				//GameWorldController.MoveToWorld(obj);
+				//npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
+				//UWHUD.instance.npcTrade[invSlot].clear();
+			}
+			return;
+		}
 }

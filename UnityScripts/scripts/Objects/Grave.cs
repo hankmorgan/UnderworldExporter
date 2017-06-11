@@ -3,13 +3,28 @@ using System.Collections;
 
 public class Grave : object_base {
 	///ID of the grave to lookup
-	public int GraveID;
-
+	//public int GraveID;
+	bool LookingAt;
+	float timeOut=0f;
 	protected override void Start ()
 	{
 		base.Start ();
-		GraveID=  objInt().objectloaderinfo.DeathWatched;//seriously?????? Need to make this better. Look at BuildObjectList
+		//GraveID=  objInt().objectloaderinfo.DeathWatched;//seriously?????? Need to make this better. Look at BuildObjectList
 		CreateGrave(this.gameObject,objInt());
+	}
+
+	void Update()
+	{
+		if (LookingAt)
+		{
+			timeOut+=Time.deltaTime;
+			if (timeOut>=5f)
+			{
+				LookingAt=false;
+				UWHUD.instance.CutScenesSmall.SetAnimation="Anim_Base";
+							//	UWHUD.instance.CutScenesSmall.TargetControl.texture=UWHUD.instance.CutScenesSmall.anim_base
+			}
+		}
 	}
 
 
@@ -20,10 +35,29 @@ public class Grave : object_base {
 	public override bool LookAt ()
 	{
 		//CheckReferences();
-		UWHUD.instance.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
+		//UWHUD.instance.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
+//				UWHUD.instance.mainwindow_art.mainTexture= GameWorldController.instance.cutsLoader.
+
+		//GameWorldController.instance.cutsLoader= new CutsLoader("cs401.n01");
+		//UWHUD.instance.CutScenesSmall.TargetControl.texture=GameWorldController.instance.cutsLoader.LoadImageAt(GraveID());
+		UWHUD.instance.CutScenesSmall.SetAnimation= "Grave_" + GraveID();
+		LookingAt=true;timeOut=0f;
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().link-512));
 		return true;
 	}
+
+	public int GraveID()
+	{
+		char[] graves;
+		//Load in the grave information
+		DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
+		if (objInt().link >= 512)
+		{
+			return (short)DataLoader.getValAtAddress(graves, objInt().link - 512, 8)-1;
+		}
+		return 0;
+	}
+
 
 	public override bool use ()
 	{
@@ -49,7 +83,7 @@ public class Grave : object_base {
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (GraveID==6)
+			if (GraveID()==6)
 			{//Garamon's grave
 			//Activates a trigger a_move_trigger_54_52_04_0495 (selected by unknown means)
 			if (objIntUsed.item_id==198)//Bones
