@@ -593,6 +593,12 @@ public class ConversationVM : UWEBase {
 				case cnv_PUSHI:
 					{
 						//Debug.Log("Instruction:" + stack.instrp +" Pushing Immediate value :" +conv[currConv].instuctions[stack.instrp+1] + " => " + stack.stackptr);
+										if  (conv[currConv].instuctions[stack.instrp+1] == 1440)
+										{
+												int a=0;
+												a++;
+
+										}
 						stack.Push(conv[currConv].instuctions[++stack.instrp]);
 						break;		
 					}
@@ -668,7 +674,7 @@ public class ConversationVM : UWEBase {
 						for(int i=0; i<=arg1; i++)
 							stack.Push(0);
 					
-					stack.set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
+					//stack.set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
 					//stack.set_stackp(stack.stackptr+arg1);
 					break;
 					}
@@ -779,12 +785,12 @@ public class ConversationVM : UWEBase {
 
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
 				{
-					if (Conversation.CurrentConversation== GameWorldController.instance.bGlobals[c].ConversationNo)
+					if (Conversation.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
 					{
 						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
 						{
-								//Copy Private variables
-								GameWorldController.instance.bGlobals[c].Globals[x]=fetch_value(x);
+							//Copy Private variables
+							GameWorldController.instance.bGlobals[c].Globals[x]=fetch_value(x);
 						}
 						break;
 					}
@@ -854,8 +860,14 @@ public class ConversationVM : UWEBase {
 										npcSlot.clear();
 								}
 						}
-
 				}
+
+				///Return any items in the trade area to their owner
+				for (int i =0; i <=3; i++)
+				{
+					UWHUD.instance.npcTrade[i].clear();
+				}
+
 
 				///Puts the time scales back to normal
 				Time.timeScale=1.0f;
@@ -885,7 +897,7 @@ public class ConversationVM : UWEBase {
 				//Copy the stored values from glob first
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
 				{
-					if (npc.npc_whoami== GameWorldController.instance.bGlobals[c].ConversationNo)
+					if (npc.npc_whoami == GameWorldController.instance.bGlobals[c].ConversationNo)
 					{
 						//cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
 						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
@@ -907,7 +919,7 @@ public class ConversationVM : UWEBase {
 							int address=conv[currConv].functions[i].ID_or_Address;
 							switch (conv[currConv].functions[i].functionName.ToLower())
 							{
-							case "game_mins":
+								case "game_mins":
 									store_value(address,GameClock.minute);break;
 								case "game_days":
 									store_value(address,GameClock.day);break;
@@ -1111,7 +1123,7 @@ public class ConversationVM : UWEBase {
 							}
 						case "@SI": //Stack integer
 							{
-								FoundString= stack.at(stack.basep+value).ToString();
+								FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer
 								break;	
 							}
 
@@ -1297,7 +1309,7 @@ public class ConversationVM : UWEBase {
 
 							switch (stack.TopValue)//(args.GetUpperBound(0))
 							{
-							case 6:
+							case 7:
 								{
 									int[] args=new int[7];
 									args[0]= stack.at(stack.stackptr-2);//ptr to value
@@ -1311,13 +1323,14 @@ public class ConversationVM : UWEBase {
 									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]), stack.at(args[5]), stack.at(args[6])));
 									break;		
 								}
-								case 4:
+								case 5:
 								{
-									int[] args=new int[4];
+									int[] args=new int[5];
 									args[0]= stack.at(stack.stackptr-2);//ptr to value
 									args[1]= stack.at(stack.stackptr-3);//ptr to value
 									args[2]= stack.at(stack.stackptr-4);//ptr to value
 									args[3]= stack.at(stack.stackptr-5);//ptr to value
+									args[4]= stack.at(stack.stackptr-5);//ptr to value
 									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]),-1,-1));	
 									break;
 								}
@@ -2812,17 +2825,22 @@ return value: none
 			return;
 		}
 		Container cn =npc.gameObject.GetComponent<Container>();
+
+			
 		if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
 		{
+			GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
 			if ((Quantity==-1))
 			{
+				objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;
 				cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 				UWHUD.instance.playerTrade[slotNo].clear ();
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
 			}
 			else
 			{//Clone the object and give the clone to the npc
-				GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				//
 				if (objGiven!=null)
 				{
 					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant()==true)
@@ -2836,15 +2854,21 @@ return value: none
 					{//Object is a quantity or is a quantity less than the number already there.
 						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
 						Split.GetComponent<ObjectInteraction>().link =Quantity;
-						Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
+						
 						objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
+						
+						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+												//Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
+						Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().objectloaderinfo);//(objGiven.GetComponent<ObjectInteraction>()
 						cn.AddItemToContainer(objGiven.name);
 					}
 					else
 					{//Object is not a quantity or is the full amount.
 						cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
-						UWHUD.instance.playerTrade[slotNo].clear ();
+						objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
+						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 						GameWorldController.instance.playerUW.playerInventory.Refresh();
+						UWHUD.instance.playerTrade[slotNo].clear ();
 					}
 				}
 			}
@@ -2936,6 +2960,7 @@ return value: none
 						if (objInt.item_id== itemID)
 						{
 							return i+1;
+														//return 1;
 						}
 					}
 					else
@@ -2943,6 +2968,7 @@ return value: none
 						if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
 						{
 							return i+1;
+														//return 1;
 						}
 					}
 				}
