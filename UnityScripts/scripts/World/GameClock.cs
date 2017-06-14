@@ -20,33 +20,40 @@ public class GameClock : UWEBase {
 	/// <summary>
 	/// What game second we are at.
 	/// </summary>
-	public static int second;
+	public int _second;
 
 	/// <summary>
 	///What game minute we are at.
 	/// </summary>
-	public static int minute;
+	public int _minute;
 	/// <summary>
 	/// What game hour we are at
 	/// </summary>
-	public static int hour;
+	public int _hour;
 	/// <summary>
 	/// What game day we are at.
 	/// </summary>
-	public static int day;
+	public int _day;
 
+	static GameClock instance;
+
+	void Start()
+	{
+		instance=this;
+	}
 
 	// Update is called once per frame
 	void Update () {
 		clockTime+=Time.deltaTime;
 		if (clockTime>=clockRate)
 		{
-			second++;
-			if (second>=60)
+			_second++;
+			clockTime=0.0f;	
+			if (_second>=60)
 			{
 				ClockTick ();
-				clockTime=0.0f;		
-				second=0;
+					
+				_second=0;
 			}
 		}
 	}
@@ -56,21 +63,21 @@ public class GameClock : UWEBase {
 	/// </summary>
 	static void ClockTick()
 	{//Advance the time.
-		minute++;
-		if (minute%5==0)
+		instance._minute++;
+		if (instance._minute%5==0)
 		{
 			GameWorldController.instance.playerUW.RegenMana();
 		}
-		if (minute>=60)
+		if (instance._minute>=60)
 		{
-			minute=0;
-			hour++;
+			instance._minute=0;
+			instance._hour++;
 			GameWorldController.instance.playerUW.UpdateHungerAndFatigue();
 			//TODO:Update torches, lightsources and food					
-			if (hour>=24)
+			if (instance._hour>=24)
 			{
-				hour =0;
-				day++;
+				instance._hour =0;
+				instance._day++;
 			}
 		}
 	}
@@ -127,7 +134,7 @@ public class GameClock : UWEBase {
 	/// <returns>The now.</returns>
 	public static int ConvertNow()
 	{
-		return Convert(day,hour,minute);
+		return Convert(instance._day,instance._hour,instance._minute);
 	}
 
 	public static void setUWTime(long timevalue)
@@ -139,13 +146,34 @@ public class GameClock : UWEBase {
 
 
 		System.TimeSpan ts=	System.TimeSpan.FromSeconds((double)timevalue);
-		day=ts.Days;
-		hour=ts.Hours;
-		minute=ts.Minutes;
-		second=ts.Seconds;
-		Debug.Log( day + " days " + hour +" hours " + minute + " minutes " + second + " seconds");
+		instance._day=ts.Days;
+		instance._hour=ts.Hours;
+		instance._minute=ts.Minutes;
+		instance._second=ts.Seconds;
+		Debug.Log( instance._day + " days " + instance._hour +" hours " + instance._minute + " minutes " + instance._second + " seconds");
 
 
+	}
+
+
+	public static int second()
+	{
+		return instance._second;
+	}
+
+	public static int hour()
+	{
+		return instance._hour;
+	}
+
+	public static int day()
+	{
+		return instance._day;
+	}
+
+	public static int minute()
+	{
+		return instance._minute;
 	}
 
 }

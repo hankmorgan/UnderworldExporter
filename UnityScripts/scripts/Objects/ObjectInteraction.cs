@@ -1890,9 +1890,14 @@ public class ObjectInteraction : UWEBase {
 
 				case BOOT:
 						{
-								Boots b = myObj.AddComponent<Boots>();
-								b.UpdateQuality();
-								break;								
+							Boots b = myObj.AddComponent<Boots>();
+							b.UpdateQuality();
+							if ((currObj.item_id==47) && (currObj.link==0))										
+							{//Dragon skin boots special case when creating from a conversation.
+								currObj.link =  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
+								objInt.link =currObj.link;
+							}
+							break;								
 						}
 
 				case LEGGINGS:
@@ -2142,6 +2147,9 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<object_base> ();
 						break;
 				}
+
+
+
 
 
 

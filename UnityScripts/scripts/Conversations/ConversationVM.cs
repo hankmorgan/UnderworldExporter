@@ -920,9 +920,9 @@ public class ConversationVM : UWEBase {
 							switch (conv[currConv].functions[i].functionName.ToLower())
 							{
 								case "game_mins":
-									store_value(address,GameClock.minute);break;
+									store_value(address,GameClock.minute());break;
 								case "game_days":
-									store_value(address,GameClock.day);break;
+									store_value(address,GameClock.day());break;
 								//case "game_time"://What shou
 										//store_value(address,GameClock.);
 										//break;
@@ -1123,7 +1123,7 @@ public class ConversationVM : UWEBase {
 							}
 						case "@SI": //Stack integer
 							{
-								FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer
+								FoundString= stack.at(stack.basep+value).ToString();//Skip over 1 for basepointer
 								break;	
 							}
 
@@ -1153,7 +1153,7 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
-				//Debug.Log("Calling " + func.functionName);
+				Debug.Log("Calling " + func.functionName);
 				switch (func.functionName.ToLower())
 				{
 				case "babl_menu":
@@ -1544,7 +1544,7 @@ public class ConversationVM : UWEBase {
 						{
 							int[] args=new int[1];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register= do_inv_create(stack.at(args[0]));
+							stack.result_register= do_inv_create(npc, stack.at(args[0]));
 							break;
 						}
 
@@ -1558,10 +1558,19 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
-				default: 
-						
-						Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
+				case "do_inv_delete":
+					{
+						int[] args=new int[1];	
+						args[0]= stack.at(stack.stackptr-2);//ptr to value
+						do_inv_delete(npc, stack.at(args[0]));
 						break;
+					}
+
+				default: 
+					{	
+					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
+					break;
+					}
 				}
 				yield return 0;
 		}
@@ -1985,46 +1994,73 @@ public class ConversationVM : UWEBase {
 		//Another example goldthirst who specifically has an item id to pass.
 		int playerHasSpace=1;
 		Container cn = npc.gameObject.GetComponent<Container>();
-		Container cnpc = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
+		Container PlayerContainer = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
 
-		int rangeS = (arg1-1000)*16;
-		int rangeE = rangeS+16;
-
-		for (int i = 0; i<= cn.MaxCapacity ();i++)
-		{
-			//string itemName=cn.GetItemAt (i);				
-			if (cn.GetItemAt (i)!="")
+		if (arg1<1000)
+		{//I'm taking a specific item.
+			for (int i = 0; i<= cn.MaxCapacity ();i++)
 			{
-				ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-				if (
-						((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
-						||
-						((arg1<1000) && (objInt.item_id == arg1 ))
-				)
-				{//TODO:replace with standard transfer item functions										
-					//Give to PC
-					GameObject demanded =cn.GetGameObjectAt(i);
-					string itemName=cn.GetItemAt (i);
-					if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+				if (cn.GetItemAt (i)!="")
+				{	
+					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					if (objInt!=null)
 					{
-						demanded.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
-						cnpc.AddItemToContainer(itemName);
-						demanded.GetComponent<ObjectInteraction>().PickedUp=true;
-						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+				
+						if ( objInt.item_id==arg1)
+						{
+							playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);	
+							return playerHasSpace;
+						}	
 					}
-					else
-					{
-						playerHasSpace=2;
-						demanded.transform.parent=GameWorldController.instance.LevelMarker();
-						GameWorldController.MoveToWorld(demanded);
-						demanded.transform.position=npc.transform.position;
-						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
-					}
-				}
+				}					
 			}
 		}
+		else
+		{
+			int rangeS = (arg1-1000)*16;
+			int rangeE = rangeS+16;
+
+			for (int i = 0; i<= cn.MaxCapacity ();i++)
+			{
+				if (cn.GetItemAt (i)!="")
+				{
+					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					if (
+							((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+							||
+							((arg1<1000) && (objInt.item_id == arg1 ))
+					)
+					{								
+						playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);
+					}
+				}
+			}	
+		}
 		return playerHasSpace;
+	}
+
+	static int TakeItemFromNPCCOntainer (NPC npc, Container PlayerContainer, int index)
+	{
+		//Give to PC
+		GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt (index);
+		if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
+		 {
+			demanded.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+			PlayerContainer.AddItemToContainer (demanded.name);
+			demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
+			GameWorldController.MoveToInventory(demanded);
+			GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+			return 1;
+		}
+		else
+		{			
+			demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+			GameWorldController.MoveToWorld (demanded);
+			demanded.transform.position = npc.transform.position;
+			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+			return 2;
+		}
 	}
 
 
@@ -2617,11 +2653,11 @@ public class ConversationVM : UWEBase {
 	/// Identifies the item at the specified trade slot
 	/// </summary>
 	/// <param name="unk1">Unk1.</param>
-	/// <param name="unk2">Unk2.</param>
+	/// <param name="unk2">pStrPtr. Location to save the string pointer for this item.</param>
 	/// <param name="unk3">ItemId Sets the item id of the item into the locals array</param>
 	/// <param name="unk4">Unk4.</param>
 	/// <param name="inventorySlotIndex">Trade slot index.</param>
-	public int identify_inv(int pUNK1, int pUNK2, int pUNK3, int pTradeSlot)
+	public int identify_inv(int pUNK1, int pStrPtr, int pUNK3, int pTradeSlot)
 	{
 			//id=0017 name="identify_inv" ret_type=int
 			//	parameters:   arg1:
@@ -2630,19 +2666,35 @@ public class ConversationVM : UWEBase {
 			//arg4: inventory item position
 			//description:  unknown TODO
 			//return value: unknown
-			int tradeSlotIndex = stack.at(pTradeSlot);
-			if (tradeSlotIndex<=0)
+
+
+
+			int ItemPos = stack.at(pTradeSlot);
+			if (ItemPos>=TradeAreaOffset)
+			{
+					ItemPos = ItemPos - TradeAreaOffset -1;	
+			}
+			if (ItemPos<=0)
 			{
 				return 0;
 			}
-			tradeSlotIndex--;//adjust to match my 0-based indices
-			if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
+			//tradeSlotIndex--;//adjust to match my 0-based indices
+			ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
+			if (objInt != null)
 			{
 					//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
 					//locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
 					//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
-				int unitValue = GameWorldController.instance.commonObject.properties[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id].Value;
-				int qty =UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().GetQty(); 
+			int unitValue = GameWorldController.instance.commonObject.properties[objInt.item_id].Value;
+			int qty =objInt.GetQty(); 
+			if (pStrPtr>=0)
+				{
+					stack.Set(
+							pStrPtr,
+									StringController.instance.AddString(
+														conv[currConv].StringBlock, 
+														StringController.instance.GetSimpleObjectNameUW(objInt) ) );		
+				}
 
 				return unitValue*qty;
 			}
@@ -2773,7 +2825,7 @@ public class ConversationVM : UWEBase {
 		int total =0;
 				if (ItemPos>=TradeAreaOffset)
 				{
-					ItemPos = ItemPos - TradeAreaOffset;	
+					ItemPos = ItemPos - TradeAreaOffset -1;	
 				}
 
 				if (ItemPos<0){return 0;}
@@ -3104,7 +3156,7 @@ return value: none
 	/// <returns>inventory object list position</returns>
 	/// <param name="unk1">Unk1.</param>
 	/// <param name="item_id">Item identifier.</param>
-	public int do_inv_create(int item_id)
+	public int do_inv_create(NPC npc, int item_id)
 	{
 		//id=001a name="do_inv_create" ret_type=int
 		//parameters:   arg1: item id
@@ -3114,6 +3166,7 @@ return value: none
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,0);
 		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 		GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+		npc.GetComponent<Container>().AddItemToContainer(myObj.name);
 		//Container npccont = npc.GetComponent<Container>();
 		//if(npccont!=null)
 		//{
@@ -3167,4 +3220,35 @@ description:  places a generated object in underworld
 			}
 			return;
 		}
+
+	/// <summary>
+	// description:  Deletes item from npc inventory
+	/// </summary>
+	/// <param name="item_id">Item identifier.</param>
+	public void do_inv_delete(NPC npc, int item_id)
+	{
+		//id=001b name="do_inv_delete" ret_type=int
+		//	parameters:   arg1: item id
+		//		description:  deletes item from npc inventory
+		//		return value: none
+
+		//Debug.Log ("do_inv_delete(" + item_id + ")");
+
+		Container npcContainer = npc.GetComponent<Container>();
+		if (npcContainer!=null)
+		{
+			string Item=npcContainer.findItemOfType(item_id);
+			if (Item!="")
+			{
+				npcContainer.RemoveItemFromContainer(Item);
+				GameObject itemObj = GameObject.Find(Item);
+				if (itemObj!=null)
+				{
+					itemObj.GetComponent<ObjectInteraction>().consumeObject();		
+				}
+			}
+		}
+	}
+
+
 }

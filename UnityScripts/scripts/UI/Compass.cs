@@ -189,10 +189,10 @@ public class Compass : GuiBase_Draggable {
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,65) 
 						+ StringController.instance.GetString (1,411+GameWorldController.instance.LevelNo) 
 						+ StringController.instance.GetString (1,66));
-		if (GameClock.day<10)
+		if (GameClock.day()<10)
 		{
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,67) 
-								+ StringController.instance.GetString (1,411+GameClock.day)
+								+ StringController.instance.GetString (1,411+GameClock.day())
 								+ StringController.instance.GetString (1,68));
 		}
 		else
@@ -201,7 +201,7 @@ public class Compass : GuiBase_Draggable {
 		}
 
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,70) 
-						+ StringController.instance.GetString (1,71+((GameClock.hour)/2)));
+						+ StringController.instance.GetString (1,71+((GameClock.hour())/2)));
 
 
 		/*

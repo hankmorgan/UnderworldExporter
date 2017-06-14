@@ -120,7 +120,7 @@ public class Bedroll : object_base {
 				return false;//All done until tybal is dead.
 			}	
 		}
-		if (GameClock.day>=GameWorldController.instance.playerUW.quest().DayGaramonDream)
+		if (GameClock.day()>=GameWorldController.instance.playerUW.quest().DayGaramonDream)
 		{
 			return true;
 		}
@@ -197,7 +197,7 @@ public class Bedroll : object_base {
 				break;		
 			}
 
-		GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day+DaysToWait;
+		GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day()+DaysToWait;
 	}
 
 	static void RestoreHealthMana(UWCharacter sunshine)

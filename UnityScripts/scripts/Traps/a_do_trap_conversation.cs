@@ -12,19 +12,23 @@ public class a_do_trap_conversation : trap_base {
 		//Set up this talking door!
 		NPC_Door np =this.gameObject.AddComponent<NPC_Door>();
 		np.npc_whoami=25;
-		this.gameObject.AddComponent<Conversation_25>();
+		//this.gameObject.AddComponent<Conversation_25>();
 
 	}
 
 	public override bool Activate (int triggerX, int triggerY, int State)
 	{
-		NPC_Door np =  this.GetComponent<NPC_Door>();
-		if (np!=null)
+		if (Conversation.InConversation==false)
 		{
-			UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-			InteractionModeControl.UpdateNow=true;
-			return np.TalkTo();
+			NPC_Door np =  this.GetComponent<NPC_Door>();
+			if (np!=null)
+			{
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+				InteractionModeControl.UpdateNow=true;
+				return np.TalkTo();
+			}
 		}
+
 		return false;
 	}
 

@@ -1137,11 +1137,6 @@ public class GameWorldController : UWEBase {
 					{
 										
 						bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
-						if (bGlobals[i].ConversationNo==67)
-						{
-								int z=0;
-								z++;
-						}
 						bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
 						bGlobals[i].Globals = new int[bGlobals[i].Size];
 						add_ptr+=4;
