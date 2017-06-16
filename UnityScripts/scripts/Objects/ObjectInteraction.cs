@@ -1848,7 +1848,14 @@ public class ObjectInteraction : UWEBase {
 						//case A_DO_TRAP:
 				case BOOK:
 				case SCROLL:
-						myObj.AddComponent<Readable>();
+						if  ((_RES==GAME_UW1) && (objInt.item_id==276))
+						{
+							myObj.AddComponent<ReadableTrap>();	
+						}
+						else
+						{
+							myObj.AddComponent<Readable>();	
+						}
 						break;
 				case SIGN:
 						RemoveBillboard=true;

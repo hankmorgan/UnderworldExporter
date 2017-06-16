@@ -563,7 +563,7 @@ public class ConversationVM : UWEBase {
 						int arg1 = conv[currConv].instuctions[++stack.instrp];
 						for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
 						{
-							if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==0x0111))
+							if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
 							{
 								//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
 								yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
@@ -674,8 +674,8 @@ public class ConversationVM : UWEBase {
 						for(int i=0; i<=arg1; i++)
 							stack.Push(0);
 					
-					//stack.set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
-					//stack.set_stackp(stack.stackptr+arg1);
+					//stack.Set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
+					//stack.Set_stackp(stack.stackptr+arg1);
 					break;
 					}
 						
@@ -683,7 +683,7 @@ public class ConversationVM : UWEBase {
 				case cnv_FETCHM:
 					{
 						//Debug.Log("Instruction:" + stack.instrp +" Fetching address :" + stack.TopValue + " => " + stack.at(stack.TopValue));
-						//fetch_value(arg1);
+						//stack.at(arg1);
 						stack.Push(stack.at(stack.Pop()));
 						break;
 					}
@@ -695,7 +695,12 @@ public class ConversationVM : UWEBase {
 						//int value = stack.at(stack.stackptr-1);
 						int index = stack.Pop();
 						//int index = stack.at(stack.stackptr-2);
+						if (index<conv[currConv].NoOfImportedGlobals)
+						{
+							PrintImportedVariable(index, value)	;
+						}
 						stack.Set(index,value);
+
 						break;
 					}
 						
@@ -790,7 +795,7 @@ public class ConversationVM : UWEBase {
 						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
 						{
 							//Copy Private variables
-							GameWorldController.instance.bGlobals[c].Globals[x]=fetch_value(x);
+							GameWorldController.instance.bGlobals[c].Globals[x]=stack.at(x);
 						}
 						break;
 					}
@@ -805,29 +810,29 @@ public class ConversationVM : UWEBase {
 								switch (conv[currConv].functions[i].functionName.ToLower())
 								{
 								case "npc_talkedto":
-										npc.npc_talkedto = fetch_value(address);break;
+										npc.npc_talkedto = stack.at(address);break;
 								case "npc_gtarg":
-										npc.npc_gtarg = fetch_value(address);break;
+										npc.npc_gtarg = stack.at(address);break;
 								case "npc_attitude":
-										npc.npc_attitude= fetch_value(address);break;
+										npc.npc_attitude= stack.at(address);break;
 								case "npc_goal":
-										npc.npc_goal= fetch_value(address);break;
+										npc.npc_goal= stack.at(address);break;
 								case "npc_power":
-										npc.npc_power= fetch_value(address);break;
+										npc.npc_power= stack.at(address);break;
 								case "npc_arms":
-										npc.npc_arms= fetch_value(address);break;
+										npc.npc_arms= stack.at(address);break;
 								case "npc_hp":
-										npc.npc_hp= fetch_value(address);break;
+										npc.npc_hp= stack.at(address);break;
 								case "npc_health":										
-										npc.npc_health= fetch_value(address);break;
+										npc.npc_health= stack.at(address);break;
 								case "npc_hunger":
-										npc.npc_hunger= fetch_value(address);break;
+										npc.npc_hunger= stack.at(address);break;
 								case "npc_whoami":
-										npc.npc_whoami= fetch_value(address);break;
+										npc.npc_whoami= stack.at(address);break;
 								case "npc_yhome":
-										npc.npc_yhome= fetch_value(address);break;
+										npc.npc_yhome= stack.at(address);break;
 								case "npc_xhome":
-										npc.npc_xhome= fetch_value(address);break;
+										npc.npc_xhome= stack.at(address);break;
 								}
 
 						}
@@ -904,7 +909,7 @@ public class ConversationVM : UWEBase {
 						{
 							//Copy Private variables
 							//cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];	
-							store_value(x,GameWorldController.instance.bGlobals[c].Globals[x] );
+							stack.Set(x,GameWorldController.instance.bGlobals[c].Globals[x] );
 						}
 						break;
 					}
@@ -920,75 +925,75 @@ public class ConversationVM : UWEBase {
 							switch (conv[currConv].functions[i].functionName.ToLower())
 							{
 								case "game_mins":
-									store_value(address,GameClock.minute());break;
+									stack.Set(address,GameClock.minute());break;
 								case "game_days":
-									store_value(address,GameClock.day());break;
+									stack.Set(address,GameClock.day());break;
 								//case "game_time"://What shou
-										//store_value(address,GameClock.);
+										//stack.Set(address,GameClock.);
 										//break;
 								case "riddlecounter":
-										store_value(address,0);break;
+										stack.Set(address,0);break;
 								case "dungeon_level":
-										store_value(address,GameWorldController.instance.LevelNo+1);break;
+										stack.Set(address,GameWorldController.instance.LevelNo+1);break;
 								//case "npc_name":
 								case "npc_level":
-										store_value(address,npc.npc_level);break;
+										stack.Set(address,npc.npc_level);break;
 								case "npc_talkedto":
-										store_value(address,npc.npc_talkedto);break;
+										stack.Set(address,npc.npc_talkedto);break;
 								case "npc_gtarg":
-										store_value(address,npc.npc_gtarg);break;
+										stack.Set(address,npc.npc_gtarg);break;
 								case "npc_attitude":
-										store_value(address,npc.npc_attitude);break;
+										stack.Set(address,npc.npc_attitude);break;
 								case "npc_goal":
-										store_value(address,npc.npc_goal);break;
+										stack.Set(address,npc.npc_goal);break;
 								case "npc_power":
-										store_value(address,npc.npc_power);break;
+										stack.Set(address,npc.npc_power);break;
 								case "npc_arms":
-										store_value(address,npc.npc_arms);break;
+										stack.Set(address,npc.npc_arms);break;
 								case "npc_hp":
-										store_value(address,npc.npc_hp);break;
+										stack.Set(address,npc.npc_hp);break;
 								case "npc_health":
-										store_value(address,npc.npc_health);break;
+										stack.Set(address,npc.npc_health);break;
 								case "npc_hunger":
-										store_value(address,npc.npc_hunger);break;
+										stack.Set(address,npc.npc_hunger);break;
 								case "npc_whoami":
-										store_value(address,npc.npc_whoami);break;
+										stack.Set(address,npc.npc_whoami);break;
 								case "npc_yhome":
-										store_value(address,npc.npc_yhome);break;
+										stack.Set(address,npc.npc_yhome);break;
 								case "npc_xhome":
-										store_value(address,npc.npc_xhome);break;
+										stack.Set(address,npc.npc_xhome);break;
 								case "play_sex":
 										{
 											if (GameWorldController.instance.playerUW.isFemale)
 											{
-												store_value(address, 1);
+												stack.Set(address, 1);
 											}
 											else
 											{
-												store_value(address,0);
+												stack.Set(address,0);
 											}
 										break;
 										}
 
 								//case "play_drawn":
 								case "play_poison":
-										store_value(address,GameWorldController.instance.playerUW.play_poison);break;
+										stack.Set(address,GameWorldController.instance.playerUW.play_poison);break;
 								case "play_name":
-										store_value(address,StringController.instance.AddString(conv[currConv].StringBlock,GameWorldController.instance.playerUW.CharName));break;
+										stack.Set(address,StringController.instance.AddString(conv[currConv].StringBlock,GameWorldController.instance.playerUW.CharName));break;
 
 								//case "new_player_exp":
 								case "play_level":
-										store_value(address,GameWorldController.instance.playerUW.CharLevel);break;
+										stack.Set(address,GameWorldController.instance.playerUW.CharLevel);break;
 								case "play_mana":
-										store_value(address,GameWorldController.instance.playerUW.PlayerMagic.CurMana);break;
+										stack.Set(address,GameWorldController.instance.playerUW.PlayerMagic.CurMana);break;
 								case "play_hp":
-										store_value(address,GameWorldController.instance.playerUW.CurVIT);break;
+										stack.Set(address,GameWorldController.instance.playerUW.CurVIT);break;
 								//case "play_power":
 										
 								//case "play_arms":
 							//	case "play_health":
 								case "play_hunger":
-										store_value(address,GameWorldController.instance.playerUW.FoodLevel);break;
+										stack.Set(address,GameWorldController.instance.playerUW.FoodLevel);break;
 										break;
 							default:
 								//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
@@ -999,16 +1004,6 @@ public class ConversationVM : UWEBase {
 				}
 		}
 
-
-		void store_value(int at, int val)
-		{
-			stack.Set(at,val);
-		}
-
-		int fetch_value(int at)
-		{
-			return stack.at(at);
-		}
 
 		IEnumerator say_op(int arg1)
 		{
@@ -3250,5 +3245,18 @@ description:  places a generated object in underworld
 		}
 	}
 
+
+	void PrintImportedVariable(int index, int newValue)
+	{
+		//Find the variable name
+		for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+		{
+			if ((conv[currConv].functions[i].ID_or_Address==index) && (conv[currConv].functions[i].import_type==import_variable))
+			{
+				Debug.Log("Setting " + conv[currConv].functions[i].functionName + " to " + newValue + " was " + stack.at(index));
+				return;
+			}
+		}
+	}
 
 }

@@ -33,7 +33,7 @@ The path to the sword hilt on Level3
 						int textureQuality = (objInt().quality >> 1) & 0xf;
 						if (textureQuality<10)
 						{
-							tileToChange.floorTexture=textureQuality+48;
+							tileToChange.floorTexture=textureQuality;//+48;
 							//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
 						}
 										//currobj.zpos >> 2

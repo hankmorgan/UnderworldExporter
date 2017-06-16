@@ -8,7 +8,7 @@ public class ReadableTrap : object_base {
 	{
 	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
-			UWHUD.instance.MessageScroll.Add ("The book explodes in your face");
+			UWHUD.instance.MessageScroll.Add ("The book explodes in your face!");
 			GameWorldController.instance.playerUW.ApplyDamage(Random.Range (1,20));
 			GameWorldController.instance.playerUW.quest().QuestVariables[8]=1;//For Bronus/Morlock quest.
 			objInt().consumeObject ();

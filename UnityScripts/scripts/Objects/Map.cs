@@ -41,7 +41,7 @@ public class Map : object_base {
 			GameWorldController.instance.getMus().InMap=true;
 		}
 		UWHUD.instance.MessageScroll.Clear();
-
+		UWHUD.instance.ContextMenu.text="";
 		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
 
 		return true;
