@@ -1272,21 +1272,30 @@ public class TileMapRenderer : Loader{
 								{
 								case vTOP:
 										{
-												//Set the verts	
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+											//Set the verts	
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+											if (_RES==GAME_UW1)
+											if (GameWorldController.instance.LevelNo==6)
+											{
+												if (t.floorTexture==4)	
+												{//Special case for tybals floor
+													//MatsToUse[FaceCounter]= (Material)Resources.Load(_RES+ "\\Materials\\Textures\\uw1_224_maze");
+													MatsToUse[FaceCounter]=GameWorldController.instance.SpecialMaterials[0];
+												}
+											}
 
-												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
+											verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
+											verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
+											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
 
-												//Allocate UVs
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
-												uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
-												uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
+											//Allocate UVs
+											uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+											uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+											uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+											uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
 
-												break;
+											break;
 										}
 
 								case vNORTH:
@@ -3349,6 +3358,7 @@ public class TileMapRenderer : Loader{
 								{
 								case vTOP:
 										{
+
 												//Set the verts	
 												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
 

@@ -13,11 +13,15 @@ public class SpellEffectMazeNavigation : SpellEffect {
 		MeshRenderer[] mr = GameWorldController.instance.getCurrentLevelModel().GetComponentsInChildren<MeshRenderer>();
 		for (int i = 0; i<=mr.GetUpperBound (0);i++)
 		{
-			if (mr[i].sharedMaterial.name.Contains("_maze"))
+			if (mr[i].sharedMaterial!=null)
 			{
-				//toChange = mr[i].material;
-				mr[i].material.SetColor ("_Color", Color.yellow);
+				if (mr[i].sharedMaterial.name.Contains("_maze"))
+				{
+						//toChange = mr[i].material;
+						mr[i].material.SetColor ("_Color", Color.yellow);
+				}	
 			}
+
 		}
 		base.ApplyEffect ();
 	}

@@ -156,6 +156,8 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public Material[] MaterialMasterList=new Material[260];
 
+	public Material[] SpecialMaterials=new Material[1];
+
 		/// <summary>
 		/// The material for doors
 		/// </summary>
@@ -365,7 +367,11 @@ public class GameWorldController : UWEBase {
 				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 				break;
-			default:
+		case GAME_UW2:
+				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+				convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
+				break;		
+		default:
 				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 				break;
@@ -1047,8 +1053,13 @@ public class GameWorldController : UWEBase {
 				//Load up my map materials
 				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 				{
-						MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
-						MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
+					MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
+					MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
+				}
+				if (_RES==GAME_UW1)
+				{
+					SpecialMaterials[0]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_224_maze");
+					SpecialMaterials[0].mainTexture=texLoader.LoadImageAt(224);
 				}
 				switch (_RES)
 				{

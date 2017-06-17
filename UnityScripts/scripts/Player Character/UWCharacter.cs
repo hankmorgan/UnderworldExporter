@@ -702,7 +702,47 @@ public class UWCharacter : Character {
 		000~001~111~full
 		000~001~112~satiated
 		*/
-		return StringController.instance.GetString (1,104+((FoodLevel)/4));
+				int FoodLevelString = 0;//in 0x1e steps
+				if (FoodLevel< 0x1E)//starving
+				{
+						FoodLevelString=0;	
+				}
+				else if (FoodLevel< 0x3c)//Famished
+				{
+						FoodLevelString=1;
+				}
+				else if (FoodLevel< 0x5a)//Very hungry
+				{
+						FoodLevelString=2;
+				}
+				else if (FoodLevel< 0x78)//hungry
+				{
+						FoodLevelString=3;
+				}
+				else if (FoodLevel< 0x96)//peckish
+				{
+						FoodLevelString=4;
+				}
+				else if (FoodLevel< 0xB4)// fed
+				{
+						FoodLevelString=5;
+				}
+				else if (FoodLevel< 0xD2)//well fed
+				{
+						FoodLevelString=6;
+				}
+				else if (FoodLevel< 0xF0)//full
+				{
+						FoodLevelString=7;
+				}
+				else //satiated
+				{
+						FoodLevelString=8;	
+				}
+
+		//return StringController.instance.GetString (1,104+((FoodLevel)/8));
+				return StringController.instance.GetString (1,104+FoodLevelString);
+
 	}
 
 	public string GetFatiqueStatus()

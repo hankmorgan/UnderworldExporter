@@ -101,6 +101,11 @@ public class DataLoader :Loader {
 			int		bits = tmp[address_pointer++];
 			for(int r=0; r<8; r++)
 			{
+				if (address_pointer>tmp.GetUpperBound(0))
+				{//No more data!
+					Debug.Log("Unpack uw2 out of bounds. Returning what was unpacked.");
+					return buf;
+				}
 				if((bits & 1)==1)
 				{
 					//printf("transfer %d\ at %d\n", byte(base),base);

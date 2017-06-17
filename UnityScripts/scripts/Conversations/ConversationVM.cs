@@ -209,12 +209,109 @@ public class ConversationVM : UWEBase {
 					{
 						conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
 					}
-
 				}
+			}
+		}
+	}
+
+
+
+
+		/// <summary>
+		/// Loads the cnv ark file and parses it to initialise the conversation headers and imported functions
+		/// </summary>
+		/// <param name="cnv_ark_path">Cnv ark path.</param>
+		public void LoadCnvArkUW2(string cnv_ark_path)
+		{
+			char[] tmp_ark;
+			int address_pointer=2;
+			if (! DataLoader.ReadStreamFile(cnv_ark_path, out tmp_ark))
+				{
+					Debug.Log("unable to load uw2 conv ark");
+					return;
+				}
+
+			int NoOfConversations=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
+
+			conv=new cnvHeader[NoOfConversations];
+
+			for (int i=0; i<NoOfConversations;i++)
+			{
+				Debug.Log("Loading Uw2 convo " + i);
+						if (i==169)
+						{
+								int a=0;
+								a++;
+						}
+				int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfConversations*4) ,32);
+				int isCompressed =(compressionFlag>>1) & 0x01;
+				long add_ptr=DataLoader.getValAtAddress(tmp_ark,address_pointer,32);
+				if (add_ptr!=0)
+				{
+					if (isCompressed == 1)
+					{
+						int datalen=0;
+						char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
+						add_ptr=0;
+						/*
+					   0000   Int16   unknown, always seems to be 0x0828, or 28 08
+					   0002   Int16   unknown, always 0x0000
+					   0004   Int16   code size in number of instructions (16-bit words)
+					   0006   Int16   unknown, always 0x0000
+					   0008   Int16   unknown, always 0x0000
+					   000A   Int16   game strings block to use for conversation strings
+					   000C   Int16   number of memory slots reserved for variables (*)
+					   000E   Int16   number of imported globals (functions + variables)
+					   0010           start of imported functions list
+						*/
+						conv[i].CodeSize=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0x4,16);
+						conv[i].StringBlock=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xA,16);
+						conv[i].NoOfMemorySlots=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xC,16);
+						conv[i].NoOfImportedGlobals=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xE,16);
+						conv[i].functions= new ImportedFunctions[conv[i].NoOfImportedGlobals];
+						long funcptr= add_ptr+0x10;
+						for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
+						{
+
+								/*0000   Int16   length of function name
+								0002   n*char  name of function
+								n+02   Int16   ID (imported func.) / memory address (variable)
+								n+04   Int16   unknown, always seems to be 1
+								n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
+								n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)
+								*/
+								int len = (int)DataLoader.getValAtAddress (cnv_ark,funcptr,16);
+								for (int j=0 ; j<len;j++ )
+								{
+										conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark,funcptr+2+j,8);
+								}
+								conv[i].functions[f].ID_or_Address= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+2,16);
+								conv[i].functions[f].import_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+6,16);
+								conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
+								funcptr+= len+10;
+						}
+						conv[i].instuctions = new short[conv[i].CodeSize];
+						int counter=0;
+						for (int c=0; c<conv[i].CodeSize*2; c=c+2)
+						{
+								conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+						}
+
+
+					}	
+					else
+					{
+						Debug.Log("uncompressed flag in cnv.ark");
+					}
+				}
+				address_pointer=address_pointer+4;
 			}
 
 		}
-	}
+
+
+
+
 
 
 		/// <summary>
@@ -228,7 +325,11 @@ public class ConversationVM : UWEBase {
 				}
 				else
 				{
-					currConv=npc.npc_whoami;	
+					currConv=npc.npc_whoami;
+					if (_RES==GAME_UW2)
+					{
+						currConv++;
+					}
 				}
 
 				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
@@ -1148,7 +1249,10 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
-				Debug.Log("Calling " + func.functionName);
+				if (func.functionName!="babl_menu")
+				{
+						Debug.Log("Calling " + func.functionName);		
+				}
 				switch (func.functionName.ToLower())
 				{
 				case "babl_menu":
@@ -1561,6 +1665,15 @@ public class ConversationVM : UWEBase {
 						break;
 					}
 
+				case "x_traps":
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value	
+							stack.result_register= x_traps(stack.at(args[0]), stack.at(args[1]));
+							break;
+						}
+
 				default: 
 					{	
 					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1838,6 +1951,11 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to lookup</param>
 		public int get_quest(int QuestNo)
 		{
+				if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
+				{
+						Debug.Log("invalid quest no " + QuestNo);
+						return 0;
+				}
 			return GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo];
 		}
 
@@ -3244,6 +3362,22 @@ description:  places a generated object in underworld
 			}
 		}
 	}
+
+
+	/// <summary>
+	/// UWformats has no info on this. Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
+	/// </summary>
+	/// <returns>The traps.</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="VariableIndex">Variable index.</param>
+
+	public int x_traps( int unk1, int VariableIndex)
+	{//UWformats has no info on this.
+			//Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
+		return GameWorldController.instance.variables[VariableIndex];
+	}
+
+
 
 
 	void PrintImportedVariable(int index, int newValue)

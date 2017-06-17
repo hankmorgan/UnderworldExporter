@@ -1543,10 +1543,11 @@ public class TileMap : Loader {
 											//if (LevelNo == 6)
 											//{//Tybals lair. Special case for the maze
 													//int val = (FirstTileInt >> 10) & 0x0F;
-											//		if (((FirstTileInt >> 10) & 0x0F) == 4)
-											////		{//Maze floor
-											//				Tiles[x,y].floorTexture = 278;
-											//		}
+													//if (((FirstTileInt >> 10) & 0x0F) == 4)
+													//{//Maze floor
+															//Tiles[x,y].floorTexture = 278;
+
+													//}
 											//}
 											Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
 											break;

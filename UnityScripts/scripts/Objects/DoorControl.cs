@@ -53,7 +53,7 @@ public class DoorControl : object_base {
 					}
 					else
 					{
-						StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
+						//StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
 					}	
 				}
 	}

@@ -409,7 +409,6 @@ public class NPC : object_base {
 
 				}
 
-
 			if (ai.AI.Navigator.CurrentPath!=null)
 			{//Turns the AI around on their route.
 				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
@@ -431,9 +430,19 @@ public class NPC : object_base {
 				}
 				switch (npc_goal)
 				{
+					case 10://I just want to talk to you
+							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
+							if ((GameWorldController.instance.playerUW.isRoaming==false) 
+									&& (Conversation.InConversation==false))
+							{
+									if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=3)	
+									{
+											TalkTo();
+									}	
+							}
+							break;
 					case 0://Standing still
 					case 7:
-					case 10:
 					case 11:
 						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
 						break;
