@@ -237,12 +237,6 @@ public class ConversationVM : UWEBase {
 
 			for (int i=0; i<NoOfConversations;i++)
 			{
-				Debug.Log("Loading Uw2 convo " + i);
-						if (i==169)
-						{
-								int a=0;
-								a++;
-						}
 				int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfConversations*4) ,32);
 				int isCompressed =(compressionFlag>>1) & 0x01;
 				long add_ptr=DataLoader.getValAtAddress(tmp_ark,address_pointer,32);
@@ -309,7 +303,119 @@ public class ConversationVM : UWEBase {
 
 		}
 
+		/// <summary>
+		/// Displaies the instruction set.
+		/// </summary>
+		public void DisplayInstructionSet()
+		{
+			string result="";
 
+			result = "String Block = " +  conv[currConv].StringBlock + "\n";
+			result += "Code Size = " + conv[currConv].CodeSize + "\n";
+
+			//Display the properties of the conversation
+			for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+			{
+				if (conv[currConv].functions[i].import_type==import_function)
+				{
+					result += "Function : " + conv[currConv].functions[i].ID_or_Address + conv[currConv].functions[i].functionName  + "\n";
+				}
+				else
+				{
+					result += "Variable : " + conv[currConv].functions[i].ID_or_Address + conv[currConv].functions[i].functionName  + "\n";	
+				}
+			}
+
+
+
+
+
+			for (int z=0; z <conv[currConv].CodeSize;z++)
+			{
+				switch(conv[currConv].instuctions[z])
+				{
+				case cnv_NOP: result += z + ":" +"NOP\n";break;
+				case cnv_OPADD: result += z + ":" +"OPADD\n";break;
+				case cnv_OPMUL: result += z + ":" +"OPMUL\n";break;
+				case cnv_OPSUB: result += z + ":" +"OPSUB\n";break;
+				case cnv_OPDIV: result += z + ":" +"OPDIV\n";break;
+				case cnv_OPMOD: result += z + ":" +"OPMOD\n";break;
+				case cnv_OPOR: result += z + ":" +"OPOR\n";break;
+				case cnv_OPAND: result += z + ":" +"OPAND\n";break;
+				case cnv_OPNOT: result += z + ":" +"OPNOT\n";break;
+				case cnv_TSTGT: result += z + ":" +"TSTGT\n";break;
+				case cnv_TSTGE: result += z + ":" +"TSTGE\n";break;
+				case cnv_TSTLT: result += z + ":" +"TSTLT\n";break;
+				case cnv_TSTLE: result += z + ":" +"TSTLE\n";break;
+				case cnv_TSTEQ: result += z + ":" +"TSTEQ\n";break;
+				case cnv_TSTNE: result += z + ":" +"TSTNE\n";break;
+				case cnv_JMP: result += z + ":" +"JMP "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+				case cnv_BEQ:
+					{//conv[currConv].instuctions[stack.instrp+1];	
+						result += z + ":" +"BEQ "; 
+						z++; 
+						result +=  " " + conv[currConv].instuctions[z] + " // " ;
+						result += " to " + (conv[currConv].instuctions[z]+z);
+						result +=  "\n";break;		
+					}
+
+				case cnv_BNE: result += z + ":" +"BNE "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+				case cnv_BRA: result += z + ":" +"BRA "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+				case cnv_CALL: result += z + ":" +"CALL "; z++; result += " "+conv[currConv].instuctions[z] + "\n";break;
+				case cnv_CALLI:
+					{
+						result += z + ":" +"CALLI "; z++; 
+						//result += z + ":" + " "+ conv[currConv].instuctions[z] + " // ";
+						result += " "+ conv[currConv].instuctions[z] + " // ";
+						int arg1 = conv[currConv].instuctions[z];
+						for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+						{
+							if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
+							{
+								result +=conv[currConv].functions[i].functionName + "\n";
+								break;
+							}
+						}
+						break;
+					}
+
+				case cnv_RET: result += z + ":" +"RET\n";break;
+				case cnv_PUSHI: result += z + ":" +"PUSHI "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
+				case cnv_PUSHI_EFF: result += z + ":" +"PUSHI_EFF "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
+				case cnv_POP: result += z + ":" +"POP\n";break;
+				case cnv_SWAP: result += z + ":" +"SWAP\n";break;
+				case cnv_PUSHBP: result += z + ":" +"PUSHBP\n";break;
+				case cnv_POPBP: result += z + ":" +"POPBP\n";break;
+				case cnv_SPTOBP: result += z + ":" +"SPTOBP\n";break;
+				case cnv_BPTOSP: result += z + ":" +"BPTOSP\n";break;
+				case cnv_ADDSP: result += z + ":" +"ADDSP\n";break;
+				case cnv_FETCHM: result += z + ":" +"FETCHM\n";break;
+				case cnv_STO: result += z + ":" +"STO\n";break;
+				case cnv_OFFSET: result += z + ":" +"OFFSET\n";break;
+				case cnv_START: result += z + ":" +"START\n";break;
+				case cnv_SAVE_REG: result += z + ":" +"SAVE_REG\n";break;
+				case cnv_PUSH_REG: result += z + ":" +"PUSH_REG\n";break;
+				case cnv_STRCMP: result += z + ":" +"STRCMP\n";break;
+				case cnv_EXIT_OP: result += z + ":" +"EXIT_OP\n";break;
+				case cnv_SAY_OP: 
+					{
+						result += z + ":" +"SAY_OP  //";
+						int stringToSay = conv[currConv].instuctions[z-1];
+						string output =  StringController.instance.GetString(conv[currConv].StringBlock, stringToSay);
+						result += output + "\n";
+						break;	
+					}
+				case cnv_RESPOND_OP: result += z + ":" +"RESPOND_OP\n";break;
+				case cnv_OPNEG: result += z + ":" +"OPNEG\n";break;
+				}
+			}
+				//}
+			//Write the result to file
+
+				TextWriter tw =new StreamWriter(Loader.BasePath + "\\conversation_debug.txt");
+				tw.Write(result);
+				tw.Close();
+		}
 
 
 
@@ -363,25 +469,39 @@ public class ConversationVM : UWEBase {
 						portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body);
 				}
 
-
-				if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
+				switch (_RES)
 				{
+				case GAME_UW2:
+					{
 						GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
-						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 						npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
-				}	
-				else
-				{
-						//head in charhead.gr
-						int HeadToUse = npc.objInt().item_id-64;
-						if (HeadToUse >59)
+						break;
+					}
+				default:
+					{
+						if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 						{
-								HeadToUse=0;
-						}			
-						GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
-						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
-						npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
+							GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+							//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+							npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
+						}	
+						else
+						{
+							//head in charhead.gr
+							int HeadToUse = npc.objInt().item_id-64;
+							if (HeadToUse >59)
+							{
+									HeadToUse=0;
+							}			
+							GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
+							//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+							npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
+						}	
+						break;
+					}
 				}
+
+
 				UWHUD.instance.MessageScroll.Clear ();
 				/*End UI Setup*/
 
@@ -394,11 +514,19 @@ public class ConversationVM : UWEBase {
 						GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
 				}
 
+
+				DisplayInstructionSet();
 				///Slows the world down so no other npc will attack or interupt the conversation
 				Time.timeScale=0.00f;
 
 				StartCoroutine(RunConversationVM(npc));
 		}
+
+
+
+
+
+
 
 
 		/// <summary>
@@ -694,12 +822,6 @@ public class ConversationVM : UWEBase {
 				case cnv_PUSHI:
 					{
 						//Debug.Log("Instruction:" + stack.instrp +" Pushing Immediate value :" +conv[currConv].instuctions[stack.instrp+1] + " => " + stack.stackptr);
-										if  (conv[currConv].instuctions[stack.instrp+1] == 1440)
-										{
-												int a=0;
-												a++;
-
-										}
 						stack.Push(conv[currConv].instuctions[++stack.instrp]);
 						break;		
 					}
@@ -856,6 +978,7 @@ public class ConversationVM : UWEBase {
 
 				case cnv_RESPOND_OP:
 					{// do nothing
+						Debug.Log("Respond_Op");
 						break;
 					}
 
@@ -1036,7 +1159,8 @@ public class ConversationVM : UWEBase {
 										stack.Set(address,0);break;
 								case "dungeon_level":
 										stack.Set(address,GameWorldController.instance.LevelNo+1);break;
-								//case "npc_name":
+								case "npc_name":
+										stack.Set(address,StringController.instance.AddString( conv[currConv].StringBlock,StringController.instance.GetString (7,npc.npc_whoami+16)));break;
 								case "npc_level":
 										stack.Set(address,npc.npc_level);break;
 								case "npc_talkedto":
@@ -1081,7 +1205,6 @@ public class ConversationVM : UWEBase {
 										stack.Set(address,GameWorldController.instance.playerUW.play_poison);break;
 								case "play_name":
 										stack.Set(address,StringController.instance.AddString(conv[currConv].StringBlock,GameWorldController.instance.playerUW.CharName));break;
-
 								//case "new_player_exp":
 								case "play_level":
 										stack.Set(address,GameWorldController.instance.playerUW.CharLevel);break;
@@ -1249,10 +1372,10 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
-				if (func.functionName!="babl_menu")
-				{
-						Debug.Log("Calling " + func.functionName);		
-				}
+				//if (func.functionName!="babl_menu")
+				//{
+				//		Debug.Log("Calling " + func.functionName);		
+				//}
 				switch (func.functionName.ToLower())
 				{
 				case "babl_menu":
@@ -1674,6 +1797,23 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "switch_pic":
+						{
+							int[] args=new int[1];	
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							switch_pic(stack.at(args[0]));	
+							break;
+						}
+
+				case "x_clock":
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value	
+							stack.result_register= x_clock(stack.at(args[0]), stack.at(args[1]));
+							break;
+						}
+
 				default: 
 					{	
 					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1951,6 +2091,10 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to lookup</param>
 		public int get_quest(int QuestNo)
 		{
+				if (_RES==GAME_UW2)
+				{
+						Debug.Log("Checking Quest no " + QuestNo);
+				}
 				if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
 				{
 						Debug.Log("invalid quest no " + QuestNo);
@@ -1966,6 +2110,15 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to change</param>
 		public void set_quest(int value, int QuestNo)
 		{
+			if (_RES==GAME_UW2)
+			{
+				Debug.Log("Setting Quest no " + QuestNo + " to " + value);
+			}
+			if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
+			{
+				Debug.Log("Setting invalid quest no " + QuestNo);
+				return;
+			}
 			GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo]=value;
 		}
 
@@ -3379,6 +3532,30 @@ description:  places a generated object in underworld
 
 
 
+	/// <summary>
+	/// Switchs the portrait used in the conversation.
+	/// </summary>
+	/// <param name="PortraitNo">Portrait no.</param>
+	void switch_pic(int PortraitNo)
+	{
+		GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+		RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
+		npcPortrait.texture= grCharHead.LoadImageAt(PortraitNo-1);
+		UWHUD.instance.NPCName.text= StringController.instance.GetString (7,PortraitNo+16);
+	}
+
+		/// <summary>
+		/// Xs the clock.
+		/// </summary>
+		/// <returns>The clock.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="unk2">Unk2.</param>
+		int x_clock(int unk1, int unk2)
+		{
+			Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
+			return 0;
+		}
+
 
 	void PrintImportedVariable(int index, int newValue)
 	{
@@ -3392,5 +3569,7 @@ description:  places a generated object in underworld
 			}
 		}
 	}
+
+
 
 }

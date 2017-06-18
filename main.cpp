@@ -1159,7 +1159,15 @@ int main()
 				printf("Materials builder turned off at the moment.");
 				break;
 			case CONVERSATION_MODE:
-				ExtractConversations(UW1);
+				if (game == UW2)
+					{
+					ExtractConversationsUW2(game);
+					}
+				else
+					{
+					ExtractConversations(game);
+					}
+				
 				break;
 			case REPACK_MODE:
 				if (game == UW2)

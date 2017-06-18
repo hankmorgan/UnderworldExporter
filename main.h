@@ -34,6 +34,7 @@
 #define UW2_TERRAIN_PROPS "Data\\terrain.dat"
 #define UW2_CRITTER_ASSOC "crit\\AS.AN"
 #define UW2_WEAPON_PAL "data\\WEAP.CM"
+#define UW2_CONVERSATION "C:\\Games\\UW2\\data\\cnv.ark"
 //#define UW2_OUT_PATH "C:\\Games\\UW2\\data\\Repacked.ark"
 
 //Change these depending on which set of textures you want to extract

@@ -28,6 +28,11 @@ using System.Collections;
 /// 2: started quest to search the "writ of Lorne"
 /// 3: found writ
 /// 4: door to armoury opened
+/// 
+/// 
+/// 
+/// UW2 Quest flags
+/// 
 public class Quest : UWEBase {
 
 
@@ -93,6 +98,19 @@ public class Quest : UWEBase {
 		/// </summary>
 	public bool isTybalDead;
 
+
+		void Start()
+		{
+			switch (_RES)
+			{
+			case GAME_UW2:
+				QuestVariables=new int[200];//TODO:Figure out how many variables UW2 needs
+				break;
+			default:					
+				QuestVariables=new int[36];
+				break;
+			}
+		}
 
 
 	/// <summary>

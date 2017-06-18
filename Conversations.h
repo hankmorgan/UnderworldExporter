@@ -50,4 +50,5 @@
 
 
 	void ExtractConversations(int game);
+	void ExtractConversationsUW2(int game);
 #endif /* Conversations_h */
