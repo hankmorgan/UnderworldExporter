@@ -232,6 +232,11 @@ public class MainMenuHud : GuiBase {
 		/// <param name="SlotNo">Slot no.</param>
 		public void LoadSave(int SlotNo)
 		{
+				if (_RES==GAME_UW2)
+				{
+					SaveGame.LoadPlayerDatUW2(SlotNo+1);
+					return;
+				}
 			if (SlotNo==-2)
 			{//Speedstart
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
@@ -251,10 +256,16 @@ public class MainMenuHud : GuiBase {
 			//Load a save file
 			//Set the level file
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-			//Read in the character data
+			if (_RES!=GAME_UW2)
+			{
+				//Read in the character data
 			SaveGame.LoadPlayerDat(SlotNo+1);
+			}
+
 			//Read in bglob
-			GameWorldController.instance.InitBGlobals(SlotNo+1);
+			GameWorldController.instance.InitBGlobals(SlotNo+1);	
+
+
 			//Load up the map
 			JourneyOnwards();
 			GameWorldController.instance.playerUW.playerInventory.Refresh();

@@ -1141,4 +1141,70 @@ public class SaveGame : Loader {
 
 
 
+
+		public static void LoadPlayerDatUW2(int slotNo)
+		{
+				GameWorldController.instance.playerUW.CharName="loadingsave";
+				char[] buffer;
+				int x_position=0;
+				int y_position=0;
+				int z_position=0;
+
+				int[] gametimevals=new int[3];
+				int[] ActiveEffectIds=new int[3];
+				int[] ActiveEffectStability=new int[3];
+				int effectCounter=0;
+				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
+				{
+					TileMap.OnWater=false;
+
+						byte MS = (byte)DataLoader.getValAtAddress(buffer,0,8);
+						char [] c = new char[buffer.GetUpperBound(0)];
+						for (int i=1; i<=buffer.GetUpperBound(0); i++)
+						{
+							c[i-1] = buffer[i];
+						}
+						//MS=0x98;
+						int[] MA = new int[80];
+						MS += 7;
+						for (int i = 0; i<80; ++i)
+						{
+								MS += 6;
+								MA[i] = MS;
+						}
+						for (int i = 0; i<16; ++i)
+						{
+								MS += 7;
+								MA[i*5] = MS;
+						}
+						for (int i = 0; i<4; ++i)
+						{
+								MS += 0x29;
+								MA[i*12] = MS;
+						}
+						for (int i = 0; i<11; ++i)
+						{
+								MS += 0x49;
+								MA[i*7] = MS;
+						}
+
+						char[] P = new char[80];
+
+						P[0] = (char)(c[0] ^ MA[0]);
+								for (int i=1; i<0x50;++i)
+								{
+								P[i] =(char)(c[i] ^ (P[i-1] + c[i-1] + MA[i]));
+								}
+
+
+						return;
+				}
+
+
+
+
+		}
+
+
 }

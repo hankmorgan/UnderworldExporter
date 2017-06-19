@@ -501,7 +501,7 @@ void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long tex
 	long AddressOfBlockStart;
 	long objectsAddress;
 	long address_pointer;
-
+	long baseOffset = 0;
 switch (game)
 	{
 	case UWDEMO:	//Underworld Demo
@@ -576,11 +576,13 @@ switch (game)
 			fprintf(LOGFILE, "\nUnpacking from address %d\n", getValAtAddress(tmp_ark, address_pointer, 32));
 			int datalen;
 			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
+			baseOffset = getValAtAddress(tmp_ark, address_pointer, 32);
 			}
 		else
 			{//
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			fprintf(LOGFILE, "\nCopying from address %d\n", BlockStart);
+			baseOffset = BlockStart;
 			int j = 0;
 			AddressOfBlockStart = 0;
 			lev_ark = new unsigned char[0x7c08];
@@ -608,7 +610,7 @@ switch (game)
 			objList[x].tileY=99;
 			objList[x].levelno = LevelNo ;	
 			objList[x].next=0;
-			objList[x].address = objectsAddress+address_pointer;
+			objList[x].address = baseOffset + objectsAddress + address_pointer;
 			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
 			objList[x].objectOwner =0;
 			objList[x].objectOwnerEntity =0;

@@ -128,11 +128,11 @@ public class ObjectInteraction : UWEBase {
 		public const int A_SCHEDULED_TRIGGER=102;
 		public const int A_CHANGE_FROM_TRAP=103;
 		public const int A_CHANGE_TO_TRAP=104;
-
+		public const int AN_EXPERIENCE_TRAP=105;
 
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
-	public const int SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
+	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
 	public const int	SHOCK_TRIGGER_FLOOR		=	1002;
 	public const int	SHOCK_TRIGGER_PLAYER_DEATH	=1003;
 	public const int	SHOCK_TRIGGER_DEATHWATCH=	1004;	//Object is destroyed / dies
@@ -2100,6 +2100,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_CHANGE_TO_TRAP:
 						myObj.AddComponent<a_change_to_trap>();
+						CreateSprite=false;
+						break;
+				case AN_EXPERIENCE_TRAP:
+						myObj.AddComponent<an_experience_trap>();
 						CreateSprite=false;
 						break;
 				case TMAP_CLIP:

@@ -287,6 +287,7 @@ public class GameWorldController : UWEBase {
 	public bablGlobal[] bGlobals;
 	public ConversationVM convVM;
 
+	public int[] x_clocks=new int[32];
 
 	void  LoadPath()
 	{

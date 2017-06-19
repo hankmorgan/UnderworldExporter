@@ -541,7 +541,7 @@ public class ConversationVM : UWEBase {
 			//stack.result_register = 1;//Set a default value
 			bool finished = false;
 			stack=new CnvStack(4096);
-			stack.set_stackp(100);//Skip over imported memory for the moment
+			stack.set_stackp(200);//Skip over imported memory for the moment
 			stack.basep=0;
 
 			//Import the variables
@@ -1810,7 +1810,7 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[2];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value	
-							stack.result_register= x_clock(stack.at(args[0]), stack.at(args[1]));
+							x_clock(stack.at(args[0]), stack.at(args[1]));
 							break;
 						}
 
@@ -2127,10 +2127,11 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		/// <returns>The skills.</returns>
 		/// <param name="index">Index.</param>
+		/// IN UW2 the return value seems to indicate if the skill gain occurred.
 		public int x_skills(int val1, int val2, int val3, int val4)
 		{
-				Debug.Log("X_skills(" + val1 + "," + val2 + "," + val3 + "," + val4 +")");
-				return 0;
+			Debug.Log("X_skills(" + val1 + "," + val2 + "," + val3 + "," + val4 +")");
+			return 0;
 		}
 
 		/// <summary>
@@ -3545,15 +3546,32 @@ description:  places a generated object in underworld
 	}
 
 		/// <summary>
-		/// Xs the clock.
+		/// x_clock.
 		/// </summary>
 		/// <returns>The clock.</returns>
 		/// <param name="unk1">Unk1.</param>
 		/// <param name="unk2">Unk2.</param>
-		int x_clock(int unk1, int unk2)
+		/// Reckon it has something to do with game world state changes (possibly linked to scd.ark) and plot. Used alot in Britannia...
+		/// Parameters seem to support setting and retrieving of values.
+		/// A unk1 = 10001 is retrieve value at index unk2
+		/// other wise set unk1 to unk2
+		/// I think...
+		/// Some known values
+		/// 0=Staff strike
+		/// 1=Miranda conversations 
+		/// 2=Nystrul and blackrock gems treated
+		/// 15=Lord British related
+		void x_clock(int unk1, int unk2)
 		{
 			Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
-			return 0;
+			if (unk1==10001)
+			{
+				stack.result_register= GameWorldController.instance.x_clocks[unk2];
+			}
+			else
+			{
+				GameWorldController.instance.x_clocks[unk2]=unk1;	
+			}
 		}
 
 

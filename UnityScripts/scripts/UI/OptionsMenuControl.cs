@@ -411,7 +411,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.AtMainMenu=true;
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
 			//Read in the character data
-			SaveGame.LoadPlayerDat(SlotNo+1);
+			//SaveGame.LoadPlayerDat(SlotNo+1);
+
+			if (_RES!=GAME_UW2)
+			{
+				//Read in the character data
+				SaveGame.LoadPlayerDat(SlotNo+1);
+			}
+
 			//Load up the map
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 			GameWorldController.instance.InitBGlobals(SlotNo+1);

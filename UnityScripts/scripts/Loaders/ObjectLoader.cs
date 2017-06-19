@@ -860,6 +860,7 @@ public class ObjectLoader : Loader {
 			case  ObjectInteraction.AN_OSCILLATOR:
 			case ObjectInteraction.A_CHANGE_TO_TRAP:
 			case ObjectInteraction.A_CHANGE_FROM_TRAP:
+			case ObjectInteraction.AN_EXPERIENCE_TRAP:
 				{
 					return true;
 				}
@@ -1333,6 +1334,7 @@ public class ObjectLoader : Loader {
 		/// </summary>
 		public static void UpdateObjectList(TileMap currTileMap, ObjectLoader currObjList)
 		{
+			if (currObjList==null){return;}
 			//TileMap currTileMap= GameWorldController.instance.currentTileMap();
 			//ObjectLoader currObjList = GameWorldController.instance.CurrentObjectList();
 			int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
