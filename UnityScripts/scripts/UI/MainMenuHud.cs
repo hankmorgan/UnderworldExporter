@@ -232,11 +232,6 @@ public class MainMenuHud : GuiBase {
 		/// <param name="SlotNo">Slot no.</param>
 		public void LoadSave(int SlotNo)
 		{
-				if (_RES==GAME_UW2)
-				{
-					SaveGame.LoadPlayerDatUW2(SlotNo+1);
-					return;
-				}
 			if (SlotNo==-2)
 			{//Speedstart
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
@@ -259,7 +254,11 @@ public class MainMenuHud : GuiBase {
 			if (_RES!=GAME_UW2)
 			{
 				//Read in the character data
-			SaveGame.LoadPlayerDat(SlotNo+1);
+				SaveGame.LoadPlayerDat(SlotNo+1);
+			}
+			else
+			{
+				SaveGame.LoadPlayerDatUW2(SlotNo+1);	
 			}
 
 			//Read in bglob

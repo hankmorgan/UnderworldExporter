@@ -52,7 +52,10 @@ public class SaveGame : Loader {
 						{
 								if (i<14)
 								{
+										if (buffer[i].ToString() != "\0")
+										{
 										GameWorldController.instance.playerUW.CharName +=buffer[i];
+										}
 								}
 								else
 								{
@@ -1144,8 +1147,8 @@ public class SaveGame : Loader {
 
 		public static void LoadPlayerDatUW2(int slotNo)
 		{
-				GameWorldController.instance.playerUW.CharName="loadingsave";
-				char[] buffer;
+				GameWorldController.instance.playerUW.CharName="";
+				char[] pDat;
 				int x_position=0;
 				int y_position=0;
 				int z_position=0;
@@ -1155,16 +1158,16 @@ public class SaveGame : Loader {
 				int[] ActiveEffectStability=new int[3];
 				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out pDat))
 				{
 					TileMap.OnWater=false;
 
-						byte MS = (byte)DataLoader.getValAtAddress(buffer,0,8);
-						char [] c = new char[buffer.GetUpperBound(0)];
-						for (int i=1; i<=buffer.GetUpperBound(0); i++)
-						{
-							c[i-1] = buffer[i];
-						}
+						byte MS = (byte)DataLoader.getValAtAddress(pDat,0,8);
+						//char [] c = new char[pDat.GetUpperBound(0)];
+						///for (int i=1; i<=pDat.GetUpperBound(0); i++)
+						//{
+						//	c[i-1] = pDat[i];
+						//}
 						//MS=0x98;
 						int[] MA = new int[80];
 						MS += 7;
@@ -1189,13 +1192,291 @@ public class SaveGame : Loader {
 								MA[i*7] = MS;
 						}
 
-						char[] P = new char[80];
-
-						P[0] = (char)(c[0] ^ MA[0]);
-								for (int i=1; i<0x50;++i)
+						char[] buffer = new char[pDat.GetUpperBound(0)+1];
+						int offset=1;
+						int byteCounter=0;
+						for (int l=0; l<=11; l++)
+						{
+							buffer[0+offset] = (char)(pDat[0+offset] ^ MA[0]);
+							byteCounter++;
+							for (int i=1; i<0x50;++i)
+							{
+								if (byteCounter<0x37D)
 								{
-								P[i] =(char)(c[i] ^ (P[i-1] + c[i-1] + MA[i]));
+											buffer[i+offset] =(char)((
+												(pDat[i+offset] & 0xff) ^
+													( ( buffer[i-1+offset]  & 0xff)
+														+ ( pDat[i-1+offset] & 0xff)
+														+ ( MA[i] & 0xff)
+												)
+										) & 0xff);		
+									byteCounter++;
 								}
+								
+							}	
+							offset+=80;
+							
+						}
+
+						//Copy the remainder of the plaintext data
+						while (byteCounter <=pDat.GetUpperBound(0))
+						{
+							buffer[byteCounter]= pDat[byteCounter];
+							byteCounter++;
+						}
+				
+						if (GameWorldController.instance.playerUW.decode)
+						{
+								//write out decrypted file for analysis
+								byte[] dataToWrite = new byte[buffer.GetUpperBound(0)+1];
+								for (long i=0; i<=buffer.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)buffer[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded_" + slotNo + ".dat", dataToWrite);
+						}
+
+						int runeOffset=0;
+
+						for (int i=1; i<=300;i++)
+						{
+								if (i<14)
+								{
+										if (buffer[i].ToString() != "\0")
+										{
+												GameWorldController.instance.playerUW.CharName +=buffer[i];
+										}
+								}
+								else
+								{
+
+										switch(i)//UWformats doesn't take the first byte into account when describing offsets! I have incremented plus one
+										{
+										case 0x1F ://Strength
+												GameWorldController.instance.playerUW.PlayerSkills.STR=(int)buffer[i];break;
+										case 0x20 ://Dex
+												GameWorldController.instance.playerUW.PlayerSkills.DEX=(int)buffer[i];break;
+										case 0x21 : ///    Intelligence
+												GameWorldController.instance.playerUW.PlayerSkills.INT=(int)buffer[i];break;
+										case 0x22 : ///    Attack
+												GameWorldController.instance.playerUW.PlayerSkills.Attack=(int)buffer[i];break;
+										case 0x23 : ///    Defense
+												GameWorldController.instance.playerUW.PlayerSkills.Defense=(int)buffer[i];break;
+										case 0x24 : ///    Unarmed
+												GameWorldController.instance.playerUW.PlayerSkills.Unarmed=(int)buffer[i];break;
+										case 0x25  : ///    Sword
+												GameWorldController.instance.playerUW.PlayerSkills.Sword=(int)buffer[i];break;
+										case 0x26  : ///    Axe
+												GameWorldController.instance.playerUW.PlayerSkills.Axe=(int)buffer[i];break;
+										case 0x27 : ///    Mace
+												GameWorldController.instance.playerUW.PlayerSkills.Mace=(int)buffer[i];break;
+										case 0x28   : ///    Missile
+												GameWorldController.instance.playerUW.PlayerSkills.Missile=(int)buffer[i];break;
+										case 0x29  : ///    Mana
+												GameWorldController.instance.playerUW.PlayerSkills.ManaSkill=(int)buffer[i];break;
+										case 0x2A : ///    Lore
+												GameWorldController.instance.playerUW.PlayerSkills.Lore=(int)buffer[i];break;
+										case 0x2B  : ///    Casting
+												GameWorldController.instance.playerUW.PlayerSkills.Casting=(int)buffer[i];break;
+										case 0x2C  : ///    Traps
+												GameWorldController.instance.playerUW.PlayerSkills.Traps=(int)buffer[i];break;
+										case 0x2D  : ///    Search
+												GameWorldController.instance.playerUW.PlayerSkills.Search=(int)buffer[i];break;
+										case 0x2E : ///    Track
+												GameWorldController.instance.playerUW.PlayerSkills.Track=(int)buffer[i];break;
+										case 0x2F  : ///    Sneak
+												GameWorldController.instance.playerUW.PlayerSkills.Sneak=(int)buffer[i];break;
+										case 0x30  : ///    Repair
+												GameWorldController.instance.playerUW.PlayerSkills.Repair=(int)buffer[i];break;
+										case 0x31 : ///    Charm
+												GameWorldController.instance.playerUW.PlayerSkills.Charm=(int)buffer[i];break;
+										case 0x32 : ///    Picklock
+												GameWorldController.instance.playerUW.PlayerSkills.PickLock=(int)buffer[i];break;
+										case 0x33  : ///    Acrobat
+												GameWorldController.instance.playerUW.PlayerSkills.Acrobat=(int)buffer[i];break;
+										case 0x34  : ///    Appraise
+												GameWorldController.instance.playerUW.PlayerSkills.Appraise=(int)buffer[i];break;
+										case 0x35  : ///    Swimming
+												GameWorldController.instance.playerUW.PlayerSkills.Swimming=(int)buffer[i];break;
+										case 0x36://Curvit
+												GameWorldController.instance.playerUW.CurVIT=(int)buffer[i];break;
+										case 0x37 : ///    max. vitality
+												GameWorldController.instance.playerUW.MaxVIT=(int)buffer[i];break;
+										case 0x38 : ///    current mana, (play_mana)
+												GameWorldController.instance.playerUW.PlayerMagic.CurMana=(int)buffer[i];break;
+										case 0x39  : ///    max. mana
+												GameWorldController.instance.playerUW.PlayerMagic.MaxMana=(int)buffer[i];break;
+										case 0x3A : ///    hunger, play_hunger
+												GameWorldController.instance.playerUW.FoodLevel=(int)buffer[i];break;		
+										case 0x3B:
+												//Unknown. Observed values 0 and 64?//Fatigue???
+												break;
+												//case 0x3C:
+												//		testvalue=(int)buffer[i];break;	
+
+										case 0x3E : ///    character level (play_level)
+												GameWorldController.instance.playerUW.CharLevel=(int)buffer[i];break;
+										case 0x3F:
+										case 0x41:
+										case 0x43://Active spell effect
+												{
+														ActiveEffectIds[effectCounter]=SaveGame.GetActiveSpellID((int)buffer[i]);break;		
+												}
+										case 0x3F+1:
+										case 0x41+1:
+										case 0x43+1://Active spell effect stability
+												{
+														ActiveEffectStability[effectCounter++]=(int)buffer[i];break;		
+												}
+										case 0x45://Runebits
+										case 0x46://Runebits
+										case 0x47://Runebits
+												for (int r =7; r>=0; r--)
+												{
+														if (((buffer[i]>>r) & 0x1 )== 1)
+														{
+																GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[7-r+runeOffset]=true;
+														}
+														else
+														{
+																GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[7-r+runeOffset]=false;
+														}
+												}
+												runeOffset+=8;
+												break;
+										case 0x48:
+												SetActiveRuneSlots(0, (int)buffer[i]);
+												break;
+										case 0x49:
+												SetActiveRuneSlots(1, (int)buffer[i]);
+												break;
+										case 0x4A:
+												SetActiveRuneSlots(2, (int)buffer[i]);
+												break;
+
+										case 0x4D : ///   weight in 0.1 stones
+												//Or STR * 2; safe to ignore?
+												//testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+												break;
+										case 0x4F  : ///   experience in 0.1 points
+												GameWorldController.instance.playerUW.EXP=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0x53: // skillpoints available to spend
+												GameWorldController.instance.playerUW.TrainingPoints=(int)buffer[i];break;
+										case 0x55 : ///   x-position in level
+												x_position= (int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x57  : ///   y-position
+												y_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x59 : ///   z-position
+												z_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x5C : ///   heading
+												{
+														float heading=(float)DataLoader.getValAtAddress(buffer,i,8);	
+
+														//heading=255f-heading;//reversed
+														//playerCam.transform.rotation=Vector3.zero;
+
+														//this.transform.Rotate(0f,heading*(255f/360f),0f,Space.World);
+														GameWorldController.instance.playerUW.transform.eulerAngles=new Vector3(0f,heading*(360f/255f),0f);
+														//playerCam.transform.localRotation.eulerAngles=Vector3.zero;
+														GameWorldController.instance.playerUW.playerCam.transform.localRotation=Quaternion.identity;
+														break;
+												}
+
+
+										case 0x5D  : ///   dungeon level									
+												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
+										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
+												//Low nibble is moongate level + 1
+												GameWorldController.instance.playerUW.ResurrectLevel=((int)buffer[i]>>4) & 0xf;
+												GameWorldController.instance.playerUW.MoonGateLevel=((int)buffer[i]) & 0xf;
+												break;
+										case 0x60  : ///    bits 2..5: play_poison and no of active effects
+												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
+												effectCounter = ((int)buffer[i]>>6) & 0x3;
+												break;
+										case 0x65: // hand, Gender & body, and class
+												{
+														//bit 1 = hand left/right
+														//bit 2-5 = gender & body
+														//bit 6-8 = class
+
+														GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
+														GameWorldController.instance.playerUW.isLefty = (((int)buffer[i] & 0x1) == 0);
+														int bodyval= ((int)buffer[i]>>1) & 0xf;
+														if (bodyval % 2 == 0)
+														{//male 0,2,4,6,8
+																GameWorldController.instance.playerUW.isFemale=false;
+																//Body
+																GameWorldController.instance.playerUW.Body=bodyval/2;
+																UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(0+(bodyval/2));
+														}
+														else
+														{//female=1,3,5,7,9
+																GameWorldController.instance.playerUW.isFemale=true;
+																GameWorldController.instance.playerUW.Body=(bodyval-1)/2;
+																UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(5+((bodyval-1)/2));
+														}
+														//class
+														GameWorldController.instance.playerUW.CharClass= buffer[i]>>5;
+
+														break;
+												}
+
+
+										}
+								}
+
+						}
+						//Reapply spell effects
+						for (int a=0; a<=GameWorldController.instance.playerUW.ActiveSpell.GetUpperBound(0);a++)
+						{//Clear out the old effects.
+								if (GameWorldController.instance.playerUW.ActiveSpell[a]!=null)	
+								{
+										GameWorldController.instance.playerUW.ActiveSpell[a].CancelEffect();	
+										if (GameWorldController.instance.playerUW.ActiveSpell[a]!=null)	
+										{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
+												GameWorldController.instance.playerUW.ActiveSpell[a].CancelEffect();	
+										}
+								}
+						}
+
+						//Clearout the passive spell effects
+						for (int a=0; a<=GameWorldController.instance.playerUW.PassiveSpell.GetUpperBound(0);a++)
+						{//Clear out the old passive effects.
+								if (GameWorldController.instance.playerUW.PassiveSpell[a]!=null)	
+								{
+										GameWorldController.instance.playerUW.PassiveSpell[a].CancelEffect();
+										if (GameWorldController.instance.playerUW.PassiveSpell[a]!=null)	
+										{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
+												GameWorldController.instance.playerUW.PassiveSpell[a].CancelEffect();	
+										}
+								}
+						}
+
+						for (int a=0; a<effectCounter;a++)
+						{//Recast the new ones.
+								GameWorldController.instance.playerUW.ActiveSpell[a] = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf );
+								GameWorldController.instance.playerUW.ActiveSpell[a].counter=ActiveEffectStability[a];
+						}
+
+
+						//Reapply poisoning.
+						if (GameWorldController.instance.playerUW.play_poison!=0)
+						{
+								SpellEffectPoison p = (SpellEffectPoison)GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+								p.counter=GameWorldController.instance.playerUW.play_poison;
+								p.DOT=p.Value/p.counter;//Recalculate the poison damage to reapply.									
+						}
+						else
+						{//Make sure any poison is cured.
+								GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);									
+						}
+
+						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
+
+						float Ratio=213f;
+						float VertAdjust = 0.3543672f;
+						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
 
 
 						return;

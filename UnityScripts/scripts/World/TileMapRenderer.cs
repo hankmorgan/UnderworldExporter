@@ -687,16 +687,26 @@ public class TileMapRenderer : Loader{
 								}
 								int TextureIndex= objList.objInfo[i].flags & 0x3F;
 								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (TextureIndex).ToString("d2"));
-								if (tmobj.mainTexture==null)
-								{//UW1 style bridges UW2 has some differences....
-										tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(TextureIndex);
+								if (tmobj!=null)
+								{
+										if (tmobj.mainTexture==null)
+										{//UW1 style bridges UW2 has some differences....
+												tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(TextureIndex);
+										}
+										Material[] MatsToUse = new Material[6];
+										for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+										{//tmobj[30]+(objList[x].flags & 0x3F)
+												MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+										}	
+										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
 								}
-								Material[] MatsToUse = new Material[6];
-								for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
-								{//tmobj[30]+(objList[x].flags & 0x3F)
-										MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+								else
+								{
+										Debug.Log("RenderPillar: Missing material resource for tmobj/" + TextureIndex);
+										return;
 								}
-								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+						
+
 						}
 				}
 		}

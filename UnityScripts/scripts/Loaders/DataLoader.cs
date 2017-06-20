@@ -103,7 +103,7 @@ public class DataLoader :Loader {
 			{
 				if (address_pointer>tmp.GetUpperBound(0))
 				{//No more data!
-					Debug.Log("Unpack uw2 out of bounds. Returning what was unpacked.");
+					//Debug.Log("Unpack uw2 out of bounds. Returning what was unpacked.");
 					return buf;
 				}
 				if((bits & 1)==1)

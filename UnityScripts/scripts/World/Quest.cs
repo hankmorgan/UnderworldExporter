@@ -33,6 +33,12 @@ using System.Collections;
 /// 
 /// UW2 Quest flags
 /// 
+/// 8:  Kintara tells you about Javra
+/// 9:  Lobar tells you about the "virtues"
+/// 11: Listener under the castle is dead.
+/// 
+/// 
+/// 132: Set to 2 during Kintara conversation
 public class Quest : UWEBase {
 
 

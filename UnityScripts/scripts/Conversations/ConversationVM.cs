@@ -1814,6 +1814,14 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "x_exp":
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							x_exp(stack.at(args[0]));
+							break;
+						}
+
 				default: 
 					{	
 					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -3574,6 +3582,14 @@ description:  places a generated object in underworld
 			}
 		}
 
+		/// <summary>
+		/// Adds EXP to player.
+		/// </summary>
+		/// <param name="xpToAdd">Xp to add.</param>
+		void x_exp(int xpToAdd)
+		{
+				GameWorldController.instance.playerUW.AddXP(xpToAdd);
+		}
 
 	void PrintImportedVariable(int index, int newValue)
 	{
