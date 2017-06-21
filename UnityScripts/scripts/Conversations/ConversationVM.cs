@@ -83,7 +83,7 @@ public class ConversationVM : UWEBase {
 		private int currConv=0;//The conversation that is being ran.
 
 		public int MaxAnswer;
-
+		private int NPCTalkedToIndex=0;
 
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
@@ -318,11 +318,11 @@ public class ConversationVM : UWEBase {
 			{
 				if (conv[currConv].functions[i].import_type==import_function)
 				{
-					result += "Function : " + conv[currConv].functions[i].ID_or_Address + conv[currConv].functions[i].functionName  + "\n";
+					result += "Function : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";
 				}
 				else
 				{
-					result += "Variable : " + conv[currConv].functions[i].ID_or_Address + conv[currConv].functions[i].functionName  + "\n";	
+					result += "Variable : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";	
 				}
 			}
 
@@ -1016,6 +1016,7 @@ public class ConversationVM : UWEBase {
 				{
 					if (Conversation.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
 					{
+						GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex]=1;
 						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
 						{
 							//Copy Private variables
@@ -1034,7 +1035,8 @@ public class ConversationVM : UWEBase {
 								switch (conv[currConv].functions[i].functionName.ToLower())
 								{
 								case "npc_talkedto":
-										npc.npc_talkedto = stack.at(address);break;
+										npc.npc_talkedto = 1;break;
+										//npc.npc_talkedto = stack.at(address);break;
 								case "npc_gtarg":
 										npc.npc_gtarg = stack.at(address);break;
 								case "npc_attitude":
@@ -1164,6 +1166,7 @@ public class ConversationVM : UWEBase {
 								case "npc_level":
 										stack.Set(address,npc.npc_level);break;
 								case "npc_talkedto":
+										NPCTalkedToIndex=address;
 										stack.Set(address,npc.npc_talkedto);break;
 								case "npc_gtarg":
 										stack.Set(address,npc.npc_gtarg);break;
@@ -1332,7 +1335,7 @@ public class ConversationVM : UWEBase {
 							}
 						case "@GI": //Global integer
 							{
-								FoundString= stack.at(value).ToString();
+								FoundString= stack.at(value+1).ToString();
 								break;	
 							}
 						case "@SS": //Stack string
@@ -1342,7 +1345,7 @@ public class ConversationVM : UWEBase {
 							}
 						case "@SI": //Stack integer
 							{
-								FoundString= stack.at(stack.basep+value).ToString();//Skip over 1 for basepointer
+								FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer
 								break;	
 							}
 
@@ -1353,7 +1356,15 @@ public class ConversationVM : UWEBase {
 							}
 						case "@PI": //Pointer integer
 							{
-								FoundString= stack.at(stack.at(stack.basep+value)).ToString();
+								if (value <0)
+								{
+									FoundString= stack.at(stack.at(stack.basep+value-1)).ToString();//-1 for params
+								}
+								else
+								{
+									FoundString= stack.at(stack.at(stack.basep+value)).ToString();	
+								}
+							
 								break;	
 							}
 						}
@@ -1372,10 +1383,10 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
-				//if (func.functionName!="babl_menu")
-				//{
-				//		Debug.Log("Calling " + func.functionName);		
-				//}
+				if (func.functionName!="babl_menu")
+				{
+						Debug.Log("Calling " + func.functionName);		
+				}
 				switch (func.functionName.ToLower())
 				{
 				case "babl_menu":
@@ -1441,11 +1452,16 @@ public class ConversationVM : UWEBase {
 
 				case "x_skills":
 						{
-							int val1 = stack.Pop();
-							int val2 = stack.Pop();
-							int val3 = stack.Pop();
-							int val4 = stack.Pop();
-							stack.result_register = x_skills(val1,val2,val3,val4);//Or the other way around.
+							//int val1 = stack.Pop();
+							//int val2 = stack.Pop();
+							//int val3 = stack.Pop();
+							//int val4 = stack.Pop();
+							int[] args=new int[4];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-4);//ptr to value
+							args[3]= stack.at(stack.stackptr-5);//ptr to value
+							stack.result_register = x_skills(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));//Or the other way around.
 							break;
 						}
 
@@ -1502,7 +1518,7 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[2];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register = give_to_npc(npc, stack.at(args[0]), stack.at(args[1]));
+							stack.result_register = give_to_npc(npc, args[0], stack.at(args[1]));
 							break;
 						}
 
@@ -1822,6 +1838,23 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "check_inv_quality":
+						{
+							int[] args=new int[1];	
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							stack.result_register=check_inv_quality(stack.at(args[0]));
+							break;
+						}
+
+				case "set_inv_quality":
+						{
+							int[] args=new int[2];
+							args[0]= stack.at(stack.stackptr-2);//ptr to value
+							args[1]= stack.at(stack.stackptr-3);//ptr to value
+							set_inv_quality(stack.at(args[0]), stack.at(args[1]));
+							break;
+						}
+
 				default: 
 					{	
 					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -1829,38 +1862,6 @@ public class ConversationVM : UWEBase {
 					}
 				}
 				yield return 0;
-		}
-
-		/// <summary>
-		/// Creates an array of argumenst based on the number of args in the stack and that many values..
-		/// </summary>
-		/// <returns>The array.</returns>
-		//int [] argsArray()
-		//{
-		//	int noOfArgs=stack.Pop();
-		//	int []args =new int[noOfArgs];
-		//	int start= stack.Pop();
-		//	for (int i=0; i<noOfArgs; i++)
-		//	{
-		//			args[i]	= stack.at(start-i);
-		//	}	
-		//	return args;
-		//}
-
-		/// <summary>
-		/// Creates an array of argumenst based on the number of args in the stack and that many values..
-		/// </summary>
-		/// <returns>The array.</returns>
-		int [] argsArrayPtr()
-		{
-			int noOfArgs=stack.Pop();
-			int []args =new int[noOfArgs];
-			int start= stack.Pop();
-			for (int i=0; i<noOfArgs; i++)
-			{
-					args[i]	=start-i;
-			}	
-			return args;
 		}
 
 		public IEnumerator babl_menu(int Start)
@@ -2138,8 +2139,20 @@ public class ConversationVM : UWEBase {
 		/// IN UW2 the return value seems to indicate if the skill gain occurred.
 		public int x_skills(int val1, int val2, int val3, int val4)
 		{
-			Debug.Log("X_skills(" + val1 + "," + val2 + "," + val3 + "," + val4 +")");
-			return 0;
+			Debug.Log("X_skills (" + val1 + "," + val2 + "," + val3 + "," + val4 +")");
+			if (val1==10001)
+			{					
+				Debug.Log("Returning skill " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(val2));
+				return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(val2);
+			}
+			else
+			{
+				Debug.Log("Possibly setting skill to " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(val2) + " " + val2);
+				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(val2,val1);
+				return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(val2);
+			}
+		
+			
 		}
 
 		/// <summary>
@@ -2194,7 +2207,7 @@ public class ConversationVM : UWEBase {
 				for (int i=0; i<NoOfItems; i++)
 				{
 						
-						int slotNo = start-1+i  - TradeAreaOffset ;//locals[start+i] ;
+						int slotNo = stack.at(start+i)-1  - TradeAreaOffset ;//locals[start+i] ;
 						if (slotNo<=3)
 						{
 								TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
@@ -3602,8 +3615,56 @@ description:  places a generated object in underworld
 				return;
 			}
 		}
+		Debug.Log("Setting variable " + index + " to " + newValue + " was " + stack.at(index));
 	}
 
 
+		/// <summary>
+		/// Checks the inv quality.
+		/// </summary>
+		/// <returns> returns "quality" field of npc? inventory item</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="itemPos">Item position.</param>
+		public int check_inv_quality(int itemPos)
+		{
+			//id=001c name="check_inv_quality" ret_type=int
+			//parameters:   arg1: inventory item position
+			//description:  returns "quality" field of npc? inventory item
+			//return value: "quality" field
+			itemPos -=TradeAreaOffset;
+			itemPos--;
+			GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
+
+			if (objInslot!=null)
+			{
+					return objInslot.GetComponent<ObjectInteraction>().quality;
+			}
+			else
+			{
+					return 0;
+			}
+		}
+
+
+
+		/// <summary>
+		/// Sets the inv quality of the item at the specified item list position
+		/// </summary>
+		/// <param name="NewQuality">New quality.</param>
+		/// <param name="itemIndex">Item position in object list</param>
+		public void set_inv_quality(int NewQuality, int itemIndex)
+		{
+			//id=001d name="set_inv_quality" ret_type=int
+			//parameters:   arg1: quality value
+			//arg2: inventory object list position
+			//description:  sets quality for an item in inventory
+			//return value: none
+			//GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
+
+			if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
+			{
+				GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=NewQuality;
+			}
+		}
 
 }

@@ -58,7 +58,7 @@ public class StatsDisplay : GuiBase_Draggable {
 			for (int i = 0; i<=5;i++)
 			{
 				tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
-				tmpSkillValues=tmpSkillValues+GameWorldController.instance.playerUW.PlayerSkills.GetSkill(i+Offset);
+				tmpSkillValues=tmpSkillValues+GameWorldController.instance.playerUW.PlayerSkills.GetSkill(i+Offset+1);
 				if (i!=5)
 				{
 					tmpSkillNames = tmpSkillNames +"\n";

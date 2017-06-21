@@ -278,7 +278,7 @@ void ExtractConversationsUW2(int game)
 			int func_ptr = cnv_ptr + 0x10;
 			for (int k = 0; k < NoOfImports; k++)
 				{
-				fprintf(LOGFILE, "\n\n\t\t\tLength of Function Name: %d", getValAtAddress(cnv_ark, func_ptr, 16));
+				//fprintf(LOGFILE, "\n\n\t\t\tLength of Function Name: %d", getValAtAddress(cnv_ark, func_ptr, 16));
 				int functionLength = getValAtAddress(cnv_ark, func_ptr, 16);
 				fprintf(LOGFILE, "\n\t\t\tFunction Name:");
 				for (int j = 0; j < functionLength; j++)

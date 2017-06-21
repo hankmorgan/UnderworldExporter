@@ -1264,7 +1264,7 @@ public class ObjectInteraction : UWEBase {
 				//newObj.name=myObj.name + "_Sprite";
 				newObj.transform.parent=myObj.transform;
 				newObj.transform.position = myObj.transform.position;
-				newObj.AddComponent<Billboard>();
+				newObj.AddComponent<BillboardNPC>();
 				//newObj.AddComponent<StoreAnimator>();
 				SpriteRenderer mysprite =  newObj.AddComponent<SpriteRenderer>();
 				//Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.

@@ -463,10 +463,11 @@ public class MainMenuHud : GuiBase {
 
 		public void AdvanceSkill(int option, int Stage)
 		{
-				int actualSkillNo = Chargen.GetChoices(Stage,CharClassAns)[option]-31;
+				int actualSkillNo = Chargen.GetChoices(Stage,CharClassAns)[option]-30; //was -31
+				//actualSkillNo++;
 				//Debug.Log("advancing " + (actualSkillNo) + " by " + SkillSeed);
 				int SkillScore=Random.Range(1,SkillSeed);
-				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(actualSkillNo,SkillScore);
+				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(actualSkillNo ,SkillScore);
 				string skillname= StringController.instance.GetString(2,Chargen.GetChoices(Stage,CharClassAns)[option]);
 				for(int i=0;i<5;i++)//Update the display
 				{

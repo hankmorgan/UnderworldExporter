@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//TODO: Remove hours and just use minutes in range 1 to 1440.
 
 /// <summary>
 /// Game clock for the world.
@@ -29,7 +30,7 @@ public class GameClock : UWEBase {
 	/// <summary>
 	/// What game hour we are at
 	/// </summary>
-	public int _hour;
+	//public int _hour;
 	/// <summary>
 	/// What game day we are at.
 	/// </summary>
@@ -51,7 +52,7 @@ public class GameClock : UWEBase {
 			clockTime=0.0f;	
 			if (_second>=60)
 			{
-				ClockTick ();
+				ClockTick ();//Move minute forward
 					
 				_second=0;
 			}
@@ -61,7 +62,7 @@ public class GameClock : UWEBase {
 	/// <summary>
 	/// Clock tick. Activates regeneration, hunger and fatigue methods.
 	/// </summary>
-	static void ClockTick()
+/*	static void ClockTick()
 	{//Advance the time.
 		instance._minute++;
 		if (instance._minute%5==0)
@@ -80,7 +81,26 @@ public class GameClock : UWEBase {
 				instance._day++;
 			}
 		}
-	}
+	}*/
+
+		/// <summary>
+		/// Clock tick for every minute
+		/// </summary>
+		static void ClockTick()
+		{//Advance the time.
+				instance._minute++;
+				if (instance._minute%5==0)
+				{
+						GameWorldController.instance.playerUW.RegenMana();
+						GameWorldController.instance.playerUW.UpdateHungerAndFatigue();
+				}
+				if (instance._minute>=1440)
+				{
+						instance._minute=0;
+						instance._day++;
+						//instance._hour++;
+				}
+		}
 
 	/// <summary>
 	/// Move the clock forward 1 hour.
@@ -125,7 +145,9 @@ public class GameClock : UWEBase {
 	/// <param name="iMinute">I minute.</param>
 	public static int Convert(int iDay, int iHour, int iMinute)
 	{
-		return ((iDay*24*60) + (iHour*60)+iMinute); 
+				Debug.Log("Convert no you should never use!");
+				return 0;
+		//return ((iDay*24*60) + (iHour*60)+iMinute); 
 	}
 
 	/// <summary>
@@ -134,7 +156,9 @@ public class GameClock : UWEBase {
 	/// <returns>The now.</returns>
 	public static int ConvertNow()
 	{
-		return Convert(instance._day,instance._hour,instance._minute);
+			Debug.Log("Convert no you should never use!");
+		//return Convert(instance._day,instance._hour,instance._minute);
+			return 0;
 	}
 
 	public static void setUWTime(long timevalue)
@@ -147,10 +171,10 @@ public class GameClock : UWEBase {
 
 		System.TimeSpan ts=	System.TimeSpan.FromSeconds((double)timevalue);
 		instance._day=ts.Days;
-		instance._hour=ts.Hours;
+		//instance._hour=ts.Hours;
 		instance._minute=ts.Minutes;
 		instance._second=ts.Seconds;
-		Debug.Log( instance._day + " days " + instance._hour +" hours " + instance._minute + " minutes " + instance._second + " seconds");
+		//Debug.Log( instance._day + " days " + instance._hour +" hours " + instance._minute + " minutes " + instance._second + " seconds");
 
 
 	}
@@ -163,7 +187,8 @@ public class GameClock : UWEBase {
 
 	public static int hour()
 	{
-		return instance._hour;
+		//return instance._hour;
+		return instance._minute/60;
 	}
 
 	public static int day()

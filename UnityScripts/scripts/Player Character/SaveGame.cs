@@ -1394,7 +1394,7 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
-										case 0x65: // hand, Gender & body, and class
+										case 0x65+1: // hand, Gender & body, and class
 												{
 														//bit 1 = hand left/right
 														//bit 2-5 = gender & body
