@@ -195,8 +195,19 @@ public class GameClock : UWEBase {
 	{
 		return instance._day;
 	}
-
+		/// <summary>
+		/// Returns the clock minute..
+		/// </summary>
 	public static int minute()
+	{
+		return instance._minute % 24;
+	}
+
+		/// <summary>
+		/// Returns the total mintues.
+		/// </summary>
+		/// <returns>The minimum.</returns>
+	public static int game_min()
 	{
 		return instance._minute;
 	}

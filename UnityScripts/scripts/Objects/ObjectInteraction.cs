@@ -129,6 +129,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_CHANGE_FROM_TRAP=103;
 		public const int A_CHANGE_TO_TRAP=104;
 		public const int AN_EXPERIENCE_TRAP=105;
+		public const int A_POCKETWATCH=106;
 
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
@@ -1997,6 +1998,9 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case ORB:
 						myObj.AddComponent<Orb>();
+						break;
+				case A_POCKETWATCH:
+						myObj.AddComponent<PocketWatch>();
 						break;
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();

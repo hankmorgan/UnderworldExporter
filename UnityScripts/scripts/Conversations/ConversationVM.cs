@@ -1151,7 +1151,7 @@ public class ConversationVM : UWEBase {
 							switch (conv[currConv].functions[i].functionName.ToLower())
 							{
 								case "game_mins":
-									stack.Set(address,GameClock.minute());break;
+									stack.Set(address,GameClock.game_min());break;
 								case "game_days":
 									stack.Set(address,GameClock.day());break;
 								//case "game_time"://What shou
@@ -1344,8 +1344,16 @@ public class ConversationVM : UWEBase {
 								break;	
 							}
 						case "@SI": //Stack integer
-							{
-								FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer
+							{//TODO: this +1 behaves inconsistently. UW1 or UW2 difference???
+									if (_RES==GAME_UW2)
+									{
+											FoundString= stack.at(stack.basep+value).ToString();	
+									}
+									else
+									{
+											FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer	
+									}
+								
 								break;	
 							}
 
@@ -1383,10 +1391,10 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
 		{
-				if (func.functionName!="babl_menu")
-				{
-						Debug.Log("Calling " + func.functionName);		
-				}
+				//if (func.functionName!="babl_menu")
+				//{
+						//Debug.Log("Calling " + func.functionName);		
+				//}
 				switch (func.functionName.ToLower())
 				{
 				case "babl_menu":
@@ -3577,21 +3585,18 @@ description:  places a generated object in underworld
 		/// A unk1 = 10001 is retrieve value at index unk2
 		/// other wise set unk1 to unk2
 		/// I think...
-		/// Some known values
-		/// 0=Staff strike
-		/// 1=Miranda conversations 
-		/// 2=Nystrul and blackrock gems treated
-		/// 15=Lord British related
 		void x_clock(int unk1, int unk2)
 		{
-			Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
+			//Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
 			if (unk1==10001)
 			{
-				stack.result_register= GameWorldController.instance.x_clocks[unk2];
+				Debug.Log("x_clock returning: " + GameWorldController.instance.playerUW.quest().x_clocks[unk2] + " from " + unk2);
+				stack.result_register= GameWorldController.instance.playerUW.quest().x_clocks[unk2];
 			}
 			else
 			{
-				GameWorldController.instance.x_clocks[unk2]=unk1;	
+				Debug.Log("x_clock setting: " + unk2 + " to " + unk1);
+				GameWorldController.instance.playerUW.quest().x_clocks[unk2]=unk1;	
 			}
 		}
 
@@ -3615,7 +3620,7 @@ description:  places a generated object in underworld
 				return;
 			}
 		}
-		Debug.Log("Setting variable " + index + " to " + newValue + " was " + stack.at(index));
+		//Debug.Log("Setting variable " + index + " to " + newValue + " was " + stack.at(index));
 	}
 
 

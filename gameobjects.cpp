@@ -561,7 +561,7 @@ switch (game)
 						
 		address_pointer=6;
 		NoOfBlocks=getValAtAddress(tmp_ark,0,32);
-		int compressionFlag=getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) ,32);
+		int compressionFlag = getValAtAddress(tmp_ark, address_pointer + (NoOfBlocks * 4) + (LevelNo * 4), 32);
 		int isCompressed =(compressionFlag>>1) & 0x01;
 		
 		long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
@@ -580,7 +580,7 @@ switch (game)
 			}
 		else
 			{//
-			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
+			long BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			fprintf(LOGFILE, "\nCopying from address %d\n", BlockStart);
 			baseOffset = BlockStart;
 			int j = 0;

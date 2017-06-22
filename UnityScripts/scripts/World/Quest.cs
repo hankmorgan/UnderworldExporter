@@ -37,8 +37,12 @@ using System.Collections;
 /// 9:  Lobar tells you about the "virtues"
 /// 11: Listener under the castle is dead.
 /// 
+/// 109: Set after first LB conversation
+/// 119: Fizzit the thief surrenders
 /// 
 /// 132: Set to 2 during Kintara conversation
+/// 
+/// 143: Set to 33 after first LB conversation
 public class Quest : UWEBase {
 
 
@@ -104,19 +108,42 @@ public class Quest : UWEBase {
 		/// </summary>
 	public bool isTybalDead;
 
+	/// <summary>
+	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events.
+	/// </summary>
+	/// Possibly related to game variables
+	/// Some known values
+	/// 0=Staff strike 
+	/// 1=Miranda conversations & related event
+		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 52 may be related)
+		/// 2 - After you visited another world.
+		/// 3 - servants getting restless
+		/// 4 - concerned about water
+		/// 7 - Tory is killed
+		/// 9 - Charles finds a key
+		/// 11 - Go see Nelson
+		/// 13 - Patterson is dead
+		/// 14 - Gem is weak
+		/// 15 - Nystrul wants to see you again re endgame
+		/// 16 - Nystrul questions have been answered Mars Gotha comes
+	/// 2=Nystrul and blackrock gems treated
+	/// 
+	/// 15=Used in multiple convos. Possibly tells the game to process a change
+	public int[] x_clocks=new int[32];
 
-		void Start()
+
+	void Start()
+	{
+		switch (_RES)
 		{
-			switch (_RES)
-			{
-			case GAME_UW2:
-				QuestVariables=new int[200];//TODO:Figure out how many variables UW2 needs
-				break;
-			default:					
-				QuestVariables=new int[36];
-				break;
-			}
+		case GAME_UW2:
+			QuestVariables=new int[200];//TODO:Figure out how many variables UW2 needs
+			break;
+		default:					
+			QuestVariables=new int[36];
+			break;
 		}
+	}
 
 
 	/// <summary>
