@@ -116,7 +116,7 @@ public class Quest : UWEBase {
 	/// 0=Staff strike 
 	/// 1=Miranda conversations & related event
 		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 52 may be related)
-		/// 2 - After you visited another world.
+		/// 2 - After you visited another world.  (variable 17 is set to 16)
 		/// 3 - servants getting restless
 		/// 4 - concerned about water
 		/// 7 - Tory is killed

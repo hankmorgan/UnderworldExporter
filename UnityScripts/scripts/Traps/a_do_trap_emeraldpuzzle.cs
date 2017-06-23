@@ -7,6 +7,7 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+			Debug.Log (this.name);
 		if (hasExecuted==false)
 		{
 			//Check if 4 emeralds on on top of the plinths.

@@ -20,6 +20,7 @@ public class a_arrow_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{//TODO: update this for the new object system.
+				Debug.Log (this.name);
 		int item_index=  (objInt().quality << 5) | objInt().owner;
 		//int item_type = GameWorldController.instance.objectMaster.type[item_index];
 		//Debug.Log ("an arrow trap has gone off. It will spawn a " + item_index + " of type " + item_type + " along vector " + this.gameObject.transform.rotation);

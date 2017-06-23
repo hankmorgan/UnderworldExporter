@@ -6,6 +6,11 @@ public class trigger_base : object_base {
 	//public string TrapObject;//The next trap to activte
 	//public int state;
 
+		/// <summary>
+		/// The trigger me now. Fire off the trigger to test it's operation.
+		/// </summary>
+		public bool TriggerMeNow=false;
+
 	protected override void Start ()
 	{
 		base.Start ();
@@ -49,6 +54,16 @@ public class trigger_base : object_base {
 		}
 
 	}
+
+	void Update()
+	{
+		if(TriggerMeNow)
+		{
+			TriggerMeNow=false;
+			Activate();
+		}
+	}
+
 
 }
 

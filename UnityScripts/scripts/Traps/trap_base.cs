@@ -9,7 +9,7 @@ public class trap_base : object_base {
 	public virtual void ExecuteTrap(int triggerX, int triggerY, int State)
 	{
 		//Do whatever
-		Debug.Log ("ExecuteTrap " + this.name);
+		Debug.Log ("Base Execute Trap " + this.name);
 	}
 
 
@@ -17,6 +17,7 @@ public class trap_base : object_base {
 	public virtual bool Activate(int triggerX, int triggerY, int State)
 	{	//triggerX aka quality, triggerY aka owner
 		//CheckReferences();
+		//Debug.Log (this.name);
 		//Do what it needs to do.
 		ExecuteTrap(triggerX,triggerY, State);
 

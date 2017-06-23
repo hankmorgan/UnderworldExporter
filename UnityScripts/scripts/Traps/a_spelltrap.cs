@@ -6,6 +6,7 @@ public class a_spelltrap : trap_base {
 	//	fields "quality" and "owner" determine spell type.
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		//int spellindex = ((objInt().quality & 0xf)<<4) | (objInt().owner & 0xf) ;
 		//	Debug.Log ("casting spelleffect " + spellindex);
 		GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,GetSpellIndex(),Magic.SpellRule_TargetVector);

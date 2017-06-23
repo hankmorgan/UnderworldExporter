@@ -230,6 +230,10 @@ public class Container : object_base {
 			GameObject Spilled = GetGameObjectAt(i);//GameObject.Find (GetItemAt (i));
 			if (Spilled!=null)
 			{	
+				if(Spilled.GetComponent<trigger_base>()!=null)
+				{
+					Spilled.GetComponent<trigger_base>().Activate();		
+				}
 				bool flag=false;
 				Vector3 randomPoint=this.transform.position;
 				counter=0;

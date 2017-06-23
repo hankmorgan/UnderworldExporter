@@ -9,6 +9,7 @@ public class an_experience_trap : trap_base {
 	
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		GameWorldController.instance.playerUW.AddXP(objInt().owner);
 	}
 }

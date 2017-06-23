@@ -74,7 +74,7 @@ public class ConversationVM : UWEBase {
 		const int return_string = 0x12b;
 
 
-		const int TradeAreaOffset=10000;
+		const int TradeAreaOffset=0;//This hack is a bad hack...
 
 		//The input and output controls
 		//private static Text Output;
@@ -2812,7 +2812,7 @@ public class ConversationVM : UWEBase {
 			
 			pos = stack.at(pos);
 
-			if (pos>=TradeAreaOffset)//Item is in a trade slot
+			if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
 			{
 				pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
 				pos--;
@@ -2845,7 +2845,15 @@ public class ConversationVM : UWEBase {
 			if (stack.at(link)<=0)
 			{
 					//locals[link]=obj.link-512; 
-				stack.Set(link, obj.link-512);
+						if (_RES==GAME_UW2)
+						{//Looks like UW2 does not offset by 512 for testing links
+								stack.Set(link, obj.link);	
+						}
+						else
+						{
+								stack.Set(link, obj.link-512);	
+						}
+				
 			}
 			else
 			{
@@ -3391,6 +3399,8 @@ return value: none
 			ObjectInteraction objInt=null;
 			int slotFoundCounter=0;
 			stack.Set(ptrNoOfSlots,0);
+			stack.Set(ptrCount, 0);
+
 			for (int i = 0; i<4; i++)
 			{
 				if (UWHUD.instance.playerTrade[i].isSelected())

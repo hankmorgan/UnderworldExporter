@@ -75,7 +75,7 @@ public class a_set_variable_trap : a_variable_trap {
 				break;
 
 			}
-			Debug.Log ("Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.variables[objInt().zpos] );
+			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.variables[objInt().zpos] );
 		}
 		else
 		{//Bitwise operations on bitfield

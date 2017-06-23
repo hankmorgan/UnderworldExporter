@@ -22,7 +22,7 @@ owner != 0 poison trap
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-
+				Debug.Log (this.name);
 		if (objInt().owner ==0)
 		{
 			if (Random.Range(0,11) >= 7)

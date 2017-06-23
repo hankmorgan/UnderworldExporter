@@ -40,6 +40,7 @@ the left, right, center button combination on Level3.
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		if (check_variable_trap())
 		{
 			TriggerNext(triggerX,triggerY,State);

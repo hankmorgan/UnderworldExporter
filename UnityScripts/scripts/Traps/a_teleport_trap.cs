@@ -15,6 +15,7 @@ public class a_teleport_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		if (EditorMode)
 		{
 			return;

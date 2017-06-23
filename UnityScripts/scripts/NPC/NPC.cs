@@ -435,7 +435,7 @@ public class NPC : object_base {
 							if ((GameWorldController.instance.playerUW.isRoaming==false) 
 									&& (Conversation.InConversation==false))
 							{
-									if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=3)	
+									if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=1.5)	
 									{
 											TalkTo();
 									}	

@@ -11,6 +11,7 @@ public class a_pit_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		int tileXToChange=triggerX; 
 		int tileYToChange=triggerY;
 		GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);

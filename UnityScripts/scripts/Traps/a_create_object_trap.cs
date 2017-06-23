@@ -19,6 +19,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		if (objInt().quality <= Random.Range(0,41)) //100% chance when quality is zero.
 		{
 			//GameObject objToClone = GameObject.Find (TriggerObject);

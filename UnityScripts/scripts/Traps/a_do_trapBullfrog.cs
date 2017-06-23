@@ -15,14 +15,15 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		Debug.Log (this.name);
 		switch (objInt().owner)
 		{
 		case 0://Raise tile
-			Debug.Log ("Raise tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");
+			//Debug.Log ("Raise tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");
 			RaiseLowerBullfrog(+1);
 			break;
 		case 1://Lower tile
-			Debug.Log ("Lower tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");
+			//Debug.Log ("Lower tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");
 			RaiseLowerBullfrog(-1);
 			break;
 		case 2:
@@ -44,7 +45,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 			}
 			break;
 		case 4://reset
-			Debug.Log ("Reset all");
+			//Debug.Log ("Reset all");
 			ResetBullFrog();
 			break;
 		}
