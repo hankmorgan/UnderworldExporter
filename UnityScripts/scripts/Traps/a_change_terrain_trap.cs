@@ -17,7 +17,7 @@ The path to the sword hilt on Level3
 
 */
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		for (int x=0; x<=objInt().x;x++)
 		{

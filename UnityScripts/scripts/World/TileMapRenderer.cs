@@ -776,7 +776,15 @@ public class TileMapRenderer : Loader{
 								Material tmobj;
 								if (TextureIndex>=2)
 								{
-										TextureIndex= GameWorldController.instance.currentTileMap().texture_map[TextureIndex-2+48];
+										if (_RES==GAME_UW2)
+										{
+											TextureIndex= GameWorldController.instance.currentTileMap().texture_map[TextureIndex-2];		
+										}
+										else
+										{
+											TextureIndex= GameWorldController.instance.currentTileMap().texture_map[TextureIndex-2+48];	
+										}
+
 										tmobj = GameWorldController.instance.MaterialMasterList[TextureIndex];//(Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (30 + TextureIndex).ToString());
 								}
 								else
@@ -802,12 +810,6 @@ public class TileMapRenderer : Loader{
 
 		public static void RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
-
-				if ((x==24) && (y==50))
-				{
-						int a=0;
-						a++;
-				}
 				//Picks the tile to render based on tile type/flags.
 				switch (t.tileType)
 				{

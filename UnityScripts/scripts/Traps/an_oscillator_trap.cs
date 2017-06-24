@@ -10,13 +10,17 @@ public class an_oscillator_trap : trap_base {
 		//Y or zpos(likely) is possibly the min height. 
 		GameObject platformTile;
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		if  (platformTile ==  null)
 		{
 			platformTile =	GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);		
 		}
+				if  (platformTile ==  null)
+				{
+						return;
+				}
 		if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2>=objInt().owner)
 		{
 			objInt().x=0;	

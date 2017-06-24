@@ -6,7 +6,7 @@ public class trap_base : object_base {
 
 	//public string TriggerObject;//Next in the chain
 
-	public virtual void ExecuteTrap(int triggerX, int triggerY, int State)
+	public virtual void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
 	{
 		//Do whatever
 		Debug.Log ("Base Execute Trap " + this.name);
@@ -14,12 +14,12 @@ public class trap_base : object_base {
 
 
 
-	public virtual bool Activate(int triggerX, int triggerY, int State)
+	public virtual bool Activate(object_base src, int triggerX, int triggerY, int State)
 	{	//triggerX aka quality, triggerY aka owner
 		//CheckReferences();
 		//Debug.Log (this.name);
 		//Do what it needs to do.
-		ExecuteTrap(triggerX,triggerY, State);
+		ExecuteTrap(src, triggerX,triggerY, State);
 
 		//Trigger the next in the chain
 		TriggerNext (triggerX, triggerY, State);
@@ -31,7 +31,7 @@ public class trap_base : object_base {
 
 	public virtual void TriggerNext(int triggerX, int triggerY, int State)
 	{
-				if(objInt().link==0){return;}
+		if(objInt().link==0){return;}
 		GameObject triggerObj= ObjectLoader.getGameObjectAt(objInt().link); // GameObject.Find (TriggerObject);
 		if (triggerObj!=null)
 		{
@@ -46,7 +46,7 @@ public class trap_base : object_base {
 				trap_base trap = triggerObj.GetComponent<trap_base>();
 				if (trap!=null)
 				{
-					trap.Activate(triggerX,triggerY,State);
+					trap.Activate(this, triggerX,triggerY,State);
 					//return true;
 				}
 				else

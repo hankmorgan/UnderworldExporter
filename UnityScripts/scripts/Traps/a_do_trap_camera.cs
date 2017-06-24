@@ -28,7 +28,7 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	}
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		StartCoroutine (ActivateCamera());

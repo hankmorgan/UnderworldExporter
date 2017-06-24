@@ -33,7 +33,7 @@ public class a_set_variable_trap : a_variable_trap {
 
 
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		string operation="";
 		int OrigValue=0;

@@ -7,8 +7,8 @@ using System.Collections;
 /// The physical bridge is created as part of the map export but look descriptions are set up here using box colliders
 public class Bridge : object_base {
 	///Texture index for the bridge description
-	public int TextureIndex;
-	public string UseLink;//A trigger to fire when used.
+	//public int TextureIndex;
+	//public string UseLink;//A trigger to fire when used.
 
 
 
@@ -21,12 +21,14 @@ public class Bridge : object_base {
 		/// Examples: the tile puzzle in level6 seers and the Goblin shower in the tower in UW2
 	public override bool LookAt ()
 	{
+				
 		if (objInt().flags<2)
 		{
 			return base.LookAt ();
 		}
 		else
 		{
+			int TextureIndex=objInt().flags & 0x3F;
 			//Return material description
 			UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
 			return true;

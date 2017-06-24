@@ -9,7 +9,7 @@ public class a_pit_trap : trap_base {
 		//ZPos is likely the height of the floor.
 
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		int tileXToChange=triggerX; 

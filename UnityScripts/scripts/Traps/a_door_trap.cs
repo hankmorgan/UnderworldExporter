@@ -6,7 +6,7 @@ public class a_door_trap : trap_base {
 Opens the door that is in the targeted tile.
  */
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		GameObject door = GameWorldController.findDoor(triggerX,triggerY);

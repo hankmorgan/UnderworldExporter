@@ -15,10 +15,10 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 
 	 */
 
-	public override bool Activate (int triggerX, int triggerY, int State)
+	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
 		//Do what it needs to do.
-		ExecuteTrap(triggerX,triggerY, State);
+		ExecuteTrap(this, triggerX,triggerY, State);
 
 		//Delete object traps are always the end of the line so no more activations.
 
@@ -27,7 +27,7 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 	}
 
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link); //GameObject.Find (TriggerObject);

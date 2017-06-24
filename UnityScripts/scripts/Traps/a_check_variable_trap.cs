@@ -38,7 +38,7 @@ the left, right, center button combination on Level3.
 
 */
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		if (check_variable_trap())
@@ -47,11 +47,11 @@ the left, right, center button combination on Level3.
 		}
 	}
 
-	public override bool Activate (int triggerX, int triggerY, int State)
+	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
 		//CheckReferences();
 		//Do what it needs to do.
-		ExecuteTrap(triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
+		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
 
 		//Stuff to happen after the trap has fired.
 		PostActivate();

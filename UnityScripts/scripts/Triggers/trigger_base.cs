@@ -28,7 +28,11 @@ public class trigger_base : object_base {
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (objInt().quality,objInt().owner,objInt().flags);
+			if (triggerObj.GetComponent<trap_base>() !=null)
+			{
+				triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
+			}
+		
 			/*if (objInt().flags == 8)
 			{
 				objInt().flags = 0;
@@ -55,7 +59,7 @@ public class trigger_base : object_base {
 
 	}
 
-	void Update()
+	public virtual void Update()
 	{
 		if(TriggerMeNow)
 		{

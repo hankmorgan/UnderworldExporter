@@ -6,15 +6,17 @@ public class a_timer_trigger : trigger_base {
 		float traptime=0f;
 
 
-		void Update()
+	public override void Update ()
+	{
+		base.Update ();
+		traptime+=Time.deltaTime;
+		if(traptime> (float)objInt().zpos * 0.3f)
 		{
-			traptime+=Time.deltaTime;
-			if(traptime> (float)objInt().zpos * 0.3f)
-			{
 				Activate();
 				traptime=0f;
-			}			
-		}
+		}		
+	}
+
 
 
 		//Override to supress debug messages.
@@ -27,7 +29,7 @@ public class a_timer_trigger : trigger_base {
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (objInt().quality,objInt().owner,objInt().flags);
+			triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);
 		}
 
 		PostActivate();

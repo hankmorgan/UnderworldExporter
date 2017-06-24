@@ -18,7 +18,7 @@ public class a_arrow_trap : trap_base {
 	//public int item_index;//The object id created.
 	//public int item_type;//The type of the object created
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{//TODO: update this for the new object system.
 				Debug.Log (this.name);
 		int item_index=  (objInt().quality << 5) | objInt().owner;

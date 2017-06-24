@@ -16,7 +16,7 @@ public class a_do_trap_conversation : trap_base {
 
 	}
 
-	public override bool Activate (int triggerX, int triggerY, int State)
+	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
 		if (Conversation.InConversation==false)
 		{

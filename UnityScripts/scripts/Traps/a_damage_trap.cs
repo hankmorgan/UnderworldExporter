@@ -20,9 +20,9 @@ owner != 0 poison trap
 
 		//Question to answer. What impact does the flags value have?
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-				Debug.Log (this.name);
+		Debug.Log (this.name);
 		if (objInt().owner ==0)
 		{
 			if (Random.Range(0,11) >= 7)

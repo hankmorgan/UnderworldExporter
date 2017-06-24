@@ -43,7 +43,7 @@ public class DoorControl : object_base {
 		const int WEST=90;
 
 
-		protected override void Start ()
+	protected override void Start ()
 	{	
 				if (state())
 				{//Make sure it is open

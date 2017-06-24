@@ -130,7 +130,9 @@ public class ObjectInteraction : UWEBase {
 		public const int A_CHANGE_TO_TRAP=104;
 		public const int AN_EXPERIENCE_TRAP=105;
 		public const int A_POCKETWATCH=106;
-
+		public const int A_3D_MODEL = 107;
+		public const int A_BLACKROCK_GEM=108;
+		public const int A_NULL_TRAP=109;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -2002,6 +2004,12 @@ public class ObjectInteraction : UWEBase {
 				case A_POCKETWATCH:
 						myObj.AddComponent<PocketWatch>();
 						break;
+				case A_3D_MODEL:
+						myObj.AddComponent<Model3D>();
+						break;
+				case A_BLACKROCK_GEM:
+						myObj.AddComponent<BlackrockGem>();
+						break;
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();
 						RemoveBillboard=true;
@@ -2110,6 +2118,9 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<an_experience_trap>();
 						CreateSprite=false;
 						break;
+				case A_NULL_TRAP://Or generic unimplemented traps
+						myObj.AddComponent<trap_base>();
+						break;
 				case TMAP_CLIP:
 				case TMAP_SOLID:
 						myObj.AddComponent<TMAP>();
@@ -2153,7 +2164,7 @@ public class ObjectInteraction : UWEBase {
 							case 55:
 									myObj.AddComponent<a_hack_trap_teleport>();break;
 							default:
-									myObj.AddComponent<trap_base>();break;
+									myObj.AddComponent<a_hack_trap>();break;
 							}
 							CreateSprite=false;
 							break;

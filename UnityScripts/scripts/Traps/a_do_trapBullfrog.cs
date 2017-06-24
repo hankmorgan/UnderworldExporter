@@ -13,7 +13,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 
 	public static int[,] heights =new int[8,8];
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		switch (objInt().owner)

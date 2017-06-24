@@ -1565,7 +1565,7 @@ public class Magic : UWEBase {
 					*/
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0);
 					GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, pos).gameObject;
-					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(0,0,0);
+					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(),0,0,0);
 
 					//TODO: Fix this
 					//arrow.item_index=339+boulderTypeOffset;

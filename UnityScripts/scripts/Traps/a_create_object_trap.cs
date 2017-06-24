@@ -17,7 +17,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	//private bool TrapFired=false;
 	public string NavMeshRegion;//Which nav mesh should apply to cloned objects if they are npcs. No longer needed here!
 
-	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		if (objInt().quality <= Random.Range(0,41)) //100% chance when quality is zero.
@@ -51,10 +51,10 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		}
 	}
 
-	public override bool Activate (int triggerX, int triggerY, int State)
+	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
 		//Do what it needs to do.
-		ExecuteTrap(triggerX,triggerY, State);
+		ExecuteTrap(this, triggerX,triggerY, State);
 
 		//It's link is the object it is creating so no activation of more traps/triggers
 		PostActivate();
