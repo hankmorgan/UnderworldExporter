@@ -49,6 +49,7 @@ public class CutsAnimator : GuiBase {
 					else
 					{//fade to black
 						TargetControl.texture=black;
+						PostAnimPlay();
 					}						
 				}
 				else
@@ -67,6 +68,42 @@ public class CutsAnimator : GuiBase {
 		}
 	}
 
+
+		void PostAnimPlay()
+		{//Code to call at the end of some animations.
+				switch (SetAnimation.ToLower())	
+				{
+				case "death_with_sapling":
+						{
+							if (GameWorldController.instance.getMus()!=null)
+							{
+									GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
+									GameWorldController.instance.getMus().Death=false;
+									GameWorldController.instance.getMus().Combat=false;
+									GameWorldController.instance.getMus().Fleeing=false;
+									MusicController.LastAttackCounter=0.0f;
+							}
+							//maincam.enabled=true;
+							GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+							SetAnimation= "Anim_Base";//Clears out the animation.
+
+							if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
+							{
+									GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel-1);
+							}
+							GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
+							break;
+						}
+
+				case "death":
+					//PlayAnimFile("death_final");
+					SetAnimation="death_final";
+					break;
+				case "death_final":
+						Debug.Log("return to main menu..");
+						break;
+				}
+		}
 
 		void PlayAnimFile(string animName)
 		{
@@ -107,15 +144,21 @@ public class CutsAnimator : GuiBase {
 				break;
 			case "death_with_sapling":
 					cuts = new CutsLoader("cs402.n01");
+						mode=true;Reset=false;
 					TargetControl.texture = cuts.ImageCache[0];
+						StartCoroutine (cutscenerunner());		
 					break;
 			case "death":
 					cuts = new CutsLoader("cs403.n01");
+						mode=true;Reset=false;
 					TargetControl.texture = cuts.ImageCache[0];
+						StartCoroutine (cutscenerunner());		
 					break;
 			case "death_final":
 					cuts = new CutsLoader("cs403.n02");
 					TargetControl.texture = cuts.ImageCache[0];
+						mode=true;Reset=false;
+						StartCoroutine (cutscenerunner());		
 					break;
 			case "ChasmMap":
 				cuts = new CutsLoader("cs410.n01");
@@ -124,6 +167,7 @@ public class CutsAnimator : GuiBase {
 			case "Anvil":
 				cuts = new CutsLoader("cs404.n01");
 				TargetControl.texture = cuts.ImageCache[0];
+						StartCoroutine (cutscenerunner());		
 				break;
 			//case "c401.n01":
 

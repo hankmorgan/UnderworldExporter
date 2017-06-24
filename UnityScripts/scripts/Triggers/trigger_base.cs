@@ -19,7 +19,7 @@ public class trigger_base : object_base {
 
 	public override bool Activate ()
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 	//public overrideal bool Activate()
 		//Do what it needs to do.
 		//state=state;

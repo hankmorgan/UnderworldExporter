@@ -9,7 +9,7 @@ public class trap_base : object_base {
 	public virtual void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
 	{
 		//Do whatever
-		Debug.Log ("Base Execute Trap " + this.name);
+		//Debug.Log ("Base Execute Trap " + this.name);
 	}
 
 

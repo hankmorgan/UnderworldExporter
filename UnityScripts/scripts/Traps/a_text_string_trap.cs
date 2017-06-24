@@ -16,7 +16,18 @@ public class a_text_string_trap : trap_base {
 	{
 		Debug.Log (this.name);
 		//CheckReferences();
-		int StringNo=(64*GameWorldController.instance.LevelNo)+objInt().owner;
+				int StringNo=0;
+
+				switch (_RES)
+				{
+				case GAME_UW2:
+					StringNo=(32*objInt().quality + objInt().owner);//I hope.
+					break;
+				default:
+					StringNo=(64*GameWorldController.instance.LevelNo)+objInt().owner;	
+					break;
+				}
+
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9,StringNo));
 	}
 

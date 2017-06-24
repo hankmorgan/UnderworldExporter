@@ -227,6 +227,7 @@ public class StringController : UWEBase {
 				}
 				else
 				{
+						Debug.Log("Unable to find string " + BlockNo + "~" + StringNo);
 						return "";
 				}
 	}

@@ -19,6 +19,7 @@ The path to the sword hilt on Level3
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
+		Debug.Log(this.name);
 		for (int x=0; x<=objInt().x;x++)
 		{
 			for (int y=0; y<=objInt().y;y++)
@@ -43,16 +44,36 @@ The path to the sword hilt on Level3
 						{
 							tileToChange.VisibleFaces[v]=1;		
 						}
-						tileToChange.tileType=objInt().quality & 0x01;;
-						//tileToChange.trueHeight=objInt().zpos;
+						int tileTypeToChangeTo = objInt().quality & 0x01;
+						int newTileHeight = objInt().zpos>>2;
+
+						if (_RES==GAME_UW2)
+						{//UW2 has some slightly different behaviour to support toggling of traps
+						if ((tileToChange.tileType==TileMap.TILE_SOLID) && (tileTypeToChangeTo== TileMap.TILE_SOLID))
+							{//If the tile is already a solid then change it to an open tile at that height.
+								//Debug.Log(this.name + " Terrain change height to be checked " + objInt().zpos);
+								tileTypeToChangeTo=TileMap.TILE_OPEN;	
+							}
+						else if ((tileToChange.tileType==TileMap.TILE_OPEN) && (tileTypeToChangeTo== TileMap.TILE_OPEN))
+							{
+								tileTypeToChangeTo=TileMap.TILE_SOLID;	
+							}
+						}												
+
+						tileToChange.tileType=tileTypeToChangeTo;
 						tileToChange.DimX=1;
 						tileToChange.DimY=1;
-						tileToChange.floorHeight=objInt().zpos>>2;
+						tileToChange.floorHeight=newTileHeight;	
 						//tileToChange.floorHeight=tileToChange.floorHeight;//DOUBLE CHECK THIS
 						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
 						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 					}
 			}	
 		}
+	}
+
+	public override void PostActivate ()
+	{
+	//	base.PostActivate ();
 	}
 }
