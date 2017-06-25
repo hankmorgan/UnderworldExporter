@@ -32,11 +32,20 @@ The path to the sword hilt on Level3
 						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
 						Destroy (tile);
 						int textureQuality = (objInt().quality >> 1) & 0xf;
-						if (textureQuality<10)
-						{
-							tileToChange.floorTexture=textureQuality;//+48;
-							//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
+						switch (_RES)
+						{//I will probably have to change this again!
+						case GAME_UW2:
+							tileToChange.floorTexture=textureQuality;
+							break;
+						default:
+							if (textureQuality<10)
+							{
+								tileToChange.floorTexture=textureQuality;//+48;
+									//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
+							}
+							break;
 						}
+
 										//currobj.zpos >> 2
 										//(objList[k].zpos >> 2);
 						tileToChange.Render=1;
@@ -68,6 +77,10 @@ The path to the sword hilt on Level3
 						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
 						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 					}
+				else
+				{
+					Debug.Log(this.name + " Unable to find tile for change terrain trap " + tileXToChange + " " + tileYToChange );
+				}
 			}	
 		}
 	}

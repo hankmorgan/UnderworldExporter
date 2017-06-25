@@ -849,7 +849,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 						{
 						LevelInfo[x][y].floorTexture = getFloorTexUw2(tmp_ark, textureAddress, FirstTileInt);
 						//int val = (FirstTileInt >>10) & 0x0F;
-						LevelInfo[x][y].floorTexture = texture_map[(FirstTileInt >>10) & 0x0F];
+						//TODO:restore this line
+						//LevelInfo[x][y].floorTexture = texture_map[(FirstTileInt >>10) & 0x0F];
+						LevelInfo[x][y].floorTexture =(FirstTileInt >> 10) & 0x0F;
 						LevelInfo[x][y].wallTexture = getWallTexUw2(tmp_ark, textureAddress, SecondTileInt);	
 						//(tileData & 0x3F
 						LevelInfo[x][y].wallTexture= texture_map[SecondTileInt & 0x3F];
