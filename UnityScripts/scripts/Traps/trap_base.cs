@@ -68,4 +68,30 @@ public class trap_base : object_base {
 			Destroy (this.gameObject);
 		}
 	}
+
+		/// <summary>
+		/// Finds the trap of the specified type in chain of execution
+		/// </summary>
+		/// <returns><c>true</c>, if trap in chain was found, <c>false</c> otherwise.</returns>
+		/// <param name="link">Link.</param>
+		/// <param name="TrapType">Trap type.</param>
+		public virtual bool FindTrapInChain(int link, int TrapType)
+		{
+			if (link!=0)
+			{
+				ObjectInteraction objLink = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;
+				if (objLink!=null)
+				{
+					if (objLink.GetItemType()== TrapType)
+					{
+						return true;
+					}
+					else
+					{
+						return FindTrapInChain(objLink.link, TrapType);
+					}
+				}					
+			}
+			return false;
+		}
 }

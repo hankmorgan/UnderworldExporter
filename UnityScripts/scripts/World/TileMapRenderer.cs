@@ -1817,7 +1817,7 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//the wall part
-										TileName = "DSEWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderDiagSEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
@@ -1857,7 +1857,7 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//Its wall
-										TileName = "DSWWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderDiagSWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
@@ -1896,7 +1896,7 @@ public class TileMapRenderer : Loader{
 						{
 								if (Water != true)
 								{
-										TileName = "DNEWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderDiagNEPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 								if (t.isWater == Water)
@@ -1936,7 +1936,7 @@ public class TileMapRenderer : Loader{
 								if (Water != true)
 								{
 										//It's wall.
-										TileName = "DNWWall_" + x.ToString("D2") + "_" + y.ToString("D2");
+										TileName = "Wall_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderDiagNWPortion(parent, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ, t, TileName);
 								}
 
@@ -2939,6 +2939,7 @@ public class TileMapRenderer : Loader{
 						case GAME_SHOCK:
 						case GAME_UW2:
 								floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
+								//floorTexture = t.floorTexture;
 								break;
 						default:
 								floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture+48];
@@ -3994,11 +3995,175 @@ public class TileMapRenderer : Loader{
 
 
 
+		public static void UpdateTile(int TileX, int TileY, int NewTileType ,int NewFloorHeight, int NewFloorTexture ,int NewWallTexture, bool RenderImmediate)
+		{
+				//GameObject tileSelected;
+				bool ReRenderNeighbours=false;
+				//= GameWorldController.FindTile(TileX,TileX,TileMap.SURFACE_FLOOR);
+				//Update entered info
+				//TileInfo tileToChange= GameWorldController.instance.currentTileMap().Tiles[TileX,TileY];
+
+				if (RenderImmediate)
+				{
+					DestroyTile(TileX,TileY);	
+				}
+				switch (NewTileType)
+				{
+				case TileMap.TILE_SLOPE_E:
+				case TileMap.TILE_SLOPE_W:
+				case TileMap.TILE_SLOPE_N:
+				case TileMap.TILE_SLOPE_S:
+						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].shockSteep=1;
+						break;
+				}
+
+				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType= NewTileType;
+				int FloorHeight=0;
+				//if (int.TryParse(TileHeightDetails.text,out FloorHeight))
+				//{
+				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight= NewFloorHeight; //FloorHeight*2;	
+				//}
+
+				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture=NewFloorTexture;
+				//int ActualTextureIndex= GameWorldController.instance.currentTileMap().texture_map[FloorTextureSelect.value+48];
+				//GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
+				//GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
+				//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
+
+				if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture!= NewWallTexture)
+				{
+						if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType==TileMap.TILE_SOLID)
+						{
+								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].North=NewWallTexture;
+								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].South=NewWallTexture;
+								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].East=NewWallTexture;
+								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].West=NewWallTexture;
+						}
+						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture=NewWallTexture;
+
+						if (TileY>0)
+						{//Change its neighbour, only if the neighbour is not a solid
+								//if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
+								//{
+										GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].North=NewWallTexture;	
+										ReRenderNeighbours=true;
+								//}
+						}
+
+						if (TileY<TileMap.TileMapSizeY)
+						{//Change its neighbour, only if the neighbour is not a solid
+								//if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
+								//{
+										GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].South=NewWallTexture;	
+										ReRenderNeighbours=true;
+								//}
+						}
+
+						if (TileX>0)
+						{//Change its neighbour, only if the neighbour is not a solid
+								//if (GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
+								//{
+										GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].East=NewWallTexture;	
+										ReRenderNeighbours=true;
+								//}
+						}
+
+						if (TileY<TileMap.TileMapSizeY)
+						{//Change its neighbour, only if the neighbour is not a solid
+								//if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
+								//{
+										GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].West=NewWallTexture;
+										ReRenderNeighbours=true;
+								//}
+						}
+
+				}
+
+
+				if (RenderImmediate)
+				{
+				//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],true,false,false,true);
+				TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],false,false,false,true);
+				}
+
+
+				if (ReRenderNeighbours)
+				{
+						for (int x=-1; x<=1; x++)
+						{
+								for (int y=-1; y<=1; y++)
+								{
+										if (! ((x==0) && (y==0)))//Not the middle
+										{
+												if  ((x+TileX<=TileMap.TileMapSizeX) && (x+TileX>=0))
+												{
+														if ((y+TileY<=TileMap.TileMapSizeY) && (y+TileY>=0))
+														{
+																if (RenderImmediate)
+																{
+																DestroyTile(x+TileX,y+TileY);
+																//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
+																TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+x,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],false,false,false,true);
+																}
+														}	
+												}
+										}
+								}
+
+						}
+
+				}
+
+
+				//RefreshTileMap();
+
+		}
 
 
 
 
-
-
-
+		public static void DestroyTile(int x, int y)
+		{
+				GameObject tileSelected;
+				switch (GameWorldController.instance.currentTileMap().Tiles[x,y].tileType)
+				{
+				case TileMap.TILE_SOLID:
+						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_FLOOR);
+						if (tileSelected!=null)
+						{
+								tileSelected.gameObject.transform.position= GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
+								tileSelected.name = tileSelected.name + "_destroyed";
+								GameObject.DestroyImmediate(tileSelected);		
+						}
+						break;
+				case TileMap.TILE_DIAG_NE:
+				case TileMap.TILE_DIAG_NW:
+				case TileMap.TILE_DIAG_SE:
+				case TileMap.TILE_DIAG_SW:
+						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_FLOOR);
+						if (tileSelected!=null)
+						{
+								tileSelected.gameObject.transform.position= GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
+								tileSelected.name = tileSelected.name + "_destroyed";
+								GameObject.DestroyImmediate(tileSelected);		
+						}
+						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_WALL);
+						if (tileSelected!=null)
+						{
+								tileSelected.gameObject.transform.position= GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
+								tileSelected.name = tileSelected.name + "_destroyed";
+								GameObject.DestroyImmediate(tileSelected);		
+						}
+						break;
+				default:
+						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_FLOOR);
+						if (tileSelected!=null)
+						{
+								tileSelected.gameObject.transform.position= GameWorldController.instance.InventoryMarker.transform.position;//move away until destroyed
+								tileSelected.name = tileSelected.name + "_destroyed";
+								GameObject.DestroyImmediate(tileSelected);		
+						}
+						break;
+				}
+		}
 }

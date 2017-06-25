@@ -1158,6 +1158,8 @@ public class SaveGame : Loader {
 				int[] ActiveEffectStability=new int[3];
 				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
+				GameWorldController.instance.playerUW.JustTeleported=true;
+				GameWorldController.instance.playerUW.teleportedTimer=0f;
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out pDat))
 				{
 					TileMap.OnWater=false;

@@ -287,6 +287,8 @@ public class GameWorldController : UWEBase {
 	public bablGlobal[] bGlobals;
 	public ConversationVM convVM;
 
+	public static bool WorldReRenderPending=false;
+
 	void  LoadPath()
 	{
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
@@ -404,6 +406,16 @@ public class GameWorldController : UWEBase {
 		InvokeRepeating("PositionDetect",0.0f,0.02f);
 		return;
 	}
+
+		void LateUpdate()
+		{
+			if (WorldReRenderPending)
+				{						
+				currentTileMap().CleanUp(_RES);
+				TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList());
+				WorldReRenderPending=false;
+				}
+		}
 
 		/// <summary>
 		/// Gets the current level model.

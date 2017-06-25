@@ -9,9 +9,9 @@ public class a_change_to_trap : trap_base {
 		//and the to trap defines the end of the block.
 
 		//Changing the owner changes the tile type (10 is open)
-		//changing the zpos changes the tile heights
+		//changing the zpos (bits 0-3) changes the tile heights
 			//val=31 seems to leave tile the same as it was
-		//heading changes the texture of the floor	
+		//heading and bit 4 of the zpos changes the texture of the floor	
 		//quality changes the wall textures (63 is no change made)
 
 		//See the from trap for implemenation of this trap pair.

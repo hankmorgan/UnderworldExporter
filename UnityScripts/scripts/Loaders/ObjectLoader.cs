@@ -966,6 +966,17 @@ public class ObjectLoader : Loader {
 																for (int k=y; k<= y+currObj.y; k++  )
 																{
 																		LevelInfo[j,k].TerrainChange = 1;
+																		//Flag each of it's neighbours as well. May already be flagged.
+																		for (int q=-1; q<=1; q++)
+																		{
+																				for (int r=-1; r<=1; r++)
+																				{
+																						if   ( ((j+r>=0) && (j+r<63)) && ((k+q>=0) && (k+q<63)))
+																						{
+																								LevelInfo[j+r,k+q].TerrainChange=1;	
+																						}
+																				}	
+																		}
 																		///LevelInfo[j,k].TerrainChangeIndices[LevelInfo[j,k].TerrainChangeCount]=currObj.index;
 																		LevelInfo[j,k].TerrainChangeCount++;
 																		//LevelInfo[j,k].isWater  = 0;// turn off water in terrain change tiles
