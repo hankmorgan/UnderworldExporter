@@ -87,10 +87,21 @@ public class TileInfo : Loader {
 
 		public long address;	//The file address of the tile in question.
 
+		public bool NeedsReRender=false;
 
 
 		///Some stuff I need to obsolete
 		/// 
 		public bool tileVisited;
 
+
+
+		/// <summary>
+		/// Tells us the tile needs to be updated next LateUpdate
+		/// </summary>
+		public void TileNeedsUpdate()
+		{
+			NeedsReRender=true;
+			GameWorldController.WorldReRenderPending=true;
+		}
 }

@@ -2024,6 +2024,9 @@ public class ObjectInteraction : UWEBase {
 						CreateSprite=false;
 						break;
 				case A_USE_TRIGGER:
+						myObj.AddComponent<a_use_trigger>();	
+						CreateSprite=false;
+						break;
 				case A_LOOK_TRIGGER:
 				case AN_OPEN_TRIGGER:
 				case AN_UNLOCK_TRIGGER:

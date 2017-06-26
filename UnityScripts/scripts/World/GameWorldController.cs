@@ -29,6 +29,11 @@ public class GameWorldController : UWEBase {
 		/// The level model parent object
 		/// </summary>
 	public GameObject LevelModel;
+
+		/// <summary>
+		/// The level model parent object
+		/// </summary>
+		public GameObject SceneryModel;
 	
 		/// <summary>
 		/// The instance of this class
@@ -288,6 +293,7 @@ public class GameWorldController : UWEBase {
 	public ConversationVM convVM;
 
 	public static bool WorldReRenderPending=false;
+	public static bool FullReRender=false;
 
 	void  LoadPath()
 	{
@@ -411,9 +417,13 @@ public class GameWorldController : UWEBase {
 		{
 			if (WorldReRenderPending)
 				{						
-				currentTileMap().CleanUp(_RES);
-				TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList());
+				if (FullReRender)
+				{
+					currentTileMap().CleanUp(_RES);				
+				}			
+				TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,GameWorldController.instance.SceneryModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList(), !FullReRender);
 				WorldReRenderPending=false;
+				FullReRender=false;
 				}
 		}
 
@@ -632,7 +642,7 @@ public class GameWorldController : UWEBase {
 						break;
 				}
 
-				TileMapRenderer.GenerateLevelFromTileMap(LevelModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo]);
+				TileMapRenderer.GenerateLevelFromTileMap(LevelModel, SceneryModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo],false);
 
 				switch(UWEBase._RES)
 				{

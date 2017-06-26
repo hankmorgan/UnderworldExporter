@@ -37,6 +37,8 @@ using System.Collections;
 /// 9:  Lobar tells you about the "virtues"
 /// 11: Listener under the castle is dead.
 /// 
+/// 32: Meet a Talorid
+/// 
 /// 109: Set after first LB conversation
 /// 119: Fizzit the thief surrenders
 /// 

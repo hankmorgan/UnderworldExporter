@@ -68,7 +68,7 @@ public class TileMapRenderer : Loader{
 		const int CEIL_ADJ =0;
 		const int FLOOR_ADJ =0;//-2;
 
-		public static void GenerateLevelFromTileMap(GameObject parent, string game, TileMap Level, ObjectLoader objList)
+		public static void GenerateLevelFromTileMap(GameObject parent, GameObject sceneryParent, string game, TileMap Level, ObjectLoader objList, bool UpdateOnly)
 		{
 			//UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
 			CEILING_HEIGHT=Level.CEILING_HEIGHT;
@@ -77,28 +77,41 @@ public class TileMapRenderer : Loader{
 			{
 					skipCeil=false;
 			}
-			//Clear out the children in the transform
-			foreach (Transform child in parent.transform) {
-					GameObject.Destroy(child.gameObject);
+			
+			if (!UpdateOnly)
+			{
+				//Clear out the children in the transform
+				foreach (Transform child in parent.transform) {
+						GameObject.Destroy(child.gameObject);
+				}
+				foreach (Transform child in sceneryParent.transform) {
+						GameObject.Destroy(child.gameObject);
+				}
 			}
 
 			for (int y = 0; y <= TileMap.TileMapSizeY; y++)
 			{
 				for (int x = 0; x <= TileMap.TileMapSizeX; x++)
 				{
-							//if( (Level.Tiles[x,y].tileType==TILE_SLOPE_N) ||(Level.Tiles[x,y].tileType==TILE_SLOPE_S) || (Level.Tiles[x,y].tileType==TILE_SLOPE_E) || (Level.Tiles[x,y].tileType==TILE_SLOPE_W))
-							//if( (Level.Tiles[x,y].tileType==TILE_SLOPE_S))
-							//if( (Level.Tiles[x,y].tileType==TILE_SLOPE_N) ||(Level.Tiles[x,y].tileType==TILE_SLOPE_S)) 
-							//{
+					if ( 
+							( 
+							(UpdateOnly) && (Level.Tiles[x,y].NeedsReRender) 
+							)
+							||
+							(
+									!UpdateOnly
+							)
+					)
+					{
+							RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
 
-					RenderTile(parent, x, y, Level.Tiles[x,y], false, false, false, skipCeil);
-					if (game!=GAME_SHOCK)
-					{//Water
-							RenderTile(parent, x, y, Level.Tiles[x,y], true, false, false, skipCeil);	
-					}	
-							//}
-
-
+							if (game!=GAME_SHOCK)
+							{//Water
+									RenderTile(parent, x, y, Level.Tiles[x,y], true, false, false, skipCeil);
+									Level.Tiles[x,y].NeedsReRender=false;
+							}		
+					}
+					Level.Tiles[x,y].NeedsReRender=false;
 				}
 			}
 
@@ -106,59 +119,33 @@ public class TileMapRenderer : Loader{
 
 			if (game != GAME_SHOCK)
 			{
-				TileInfo tmp=new TileInfo();
-				//Ceiling
-				tmp.tileType = 1;
-				tmp.Render = 1;
-				tmp.isWater = false;
-				tmp.tileX = 0;
-				tmp.tileY = 0;
-				tmp.DimX = TileMap.TileMapSizeX+1;
-				tmp.DimY = TileMap.TileMapSizeY+1;
-				tmp.ceilingHeight = 0;
-				tmp.floorTexture = Level.Tiles[0,0].shockCeilingTexture;
-				tmp.shockCeilingTexture = Level.Tiles[0,0].shockCeilingTexture;
-				tmp.East = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
-				tmp.West = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
-				tmp.North = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
-				tmp.South = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
-				tmp.VisibleFaces[vTOP] = 0;
-				tmp.VisibleFaces[vEAST] = 0;
-				tmp.VisibleFaces[vBOTTOM] = 1;
-				tmp.VisibleFaces[vWEST] = 0;
-				tmp.VisibleFaces[vNORTH] = 0;
-				tmp.VisibleFaces[vSOUTH] = 0;
-				// top,east,bottom,west,north,south
-				RenderTile(parent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
-
-					/*
-					//Now add a room to store objects objects
-					tmp.DimX = 1;
-					tmp.DimY = 1;
-					tmp.floorHeight = 0;
-					for (int i = 0; i < 6; i++)
-					{
-							tmp.VisibleFaces[i] = 1;
-					}
-					for (short x = 65; x < 68; x++)
-					{
-							for (short y = 65; y < 68; y++)
-							{
-									tmp.tileX = x;
-									tmp.tileY = y;
-									if ((x != 66) || (y != 66))
-									{
-											tmp.tileType = 0;
-									}
-									else
-									{
-											tmp.tileType = 1;
-									}
-									RenderTile(parent, x, y, tmp, false, false, false, false);
-							}
-					}*/
-
-
+				if (!UpdateOnly)
+				{
+					TileInfo tmp=new TileInfo();
+					//Ceiling
+					tmp.tileType = 1;
+					tmp.Render = 1;
+					tmp.isWater = false;
+					tmp.tileX = 0;
+					tmp.tileY = 0;
+					tmp.DimX = TileMap.TileMapSizeX+1;
+					tmp.DimY = TileMap.TileMapSizeY+1;
+					tmp.ceilingHeight = 0;
+					tmp.floorTexture = Level.Tiles[0,0].shockCeilingTexture;
+					tmp.shockCeilingTexture = Level.Tiles[0,0].shockCeilingTexture;
+					tmp.East = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
+					tmp.West = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
+					tmp.North = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
+					tmp.South = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
+					tmp.VisibleFaces[vTOP] = 0;
+					tmp.VisibleFaces[vEAST] = 0;
+					tmp.VisibleFaces[vBOTTOM] = 1;
+					tmp.VisibleFaces[vWEST] = 0;
+					tmp.VisibleFaces[vNORTH] = 0;
+					tmp.VisibleFaces[vSOUTH] = 0;
+					// top,east,bottom,west,north,south
+					RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
+				
 				//And at 99,99 for special stuff.
 				for (short x = TileMap.ObjectStorageTile-1; x <= TileMap.ObjectStorageTile+1; x++)
 				{
@@ -174,23 +161,27 @@ public class TileMapRenderer : Loader{
 						{
 								tmp.tileType = 1;
 						}
-						RenderTile(parent, x, y, tmp, false, false, false, false);
+						RenderTile(sceneryParent, x, y, tmp, false, false, false, false);
 					}
 				}
 			}
-
-			//Render bridges, pillars and door ways
-			switch (_RES)
+		}
+		if (!UpdateOnly)
 			{
-			case GAME_SHOCK:
-					break;
-			default:
-					RenderBridges(parent,Level,objList);
-					RenderPillars(parent,Level,objList);
-					RenderDoorways (parent,Level,objList);
-					break;
-			}
 
+				//Render bridges, pillars and door ways
+				switch (_RES)
+				{
+				case GAME_SHOCK:
+						break;
+				default:
+						RenderBridges(sceneryParent,Level,objList);
+						RenderPillars(sceneryParent,Level,objList);
+						RenderDoorways (sceneryParent,Level,objList);
+						break;
+				}
+
+			}
 		}
 
 		public static void RenderDoorways(GameObject Parent, TileMap level, ObjectLoader objList)

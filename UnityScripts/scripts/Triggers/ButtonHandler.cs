@@ -40,12 +40,14 @@ public class ButtonHandler : object_base {
 			if ((objInt().item_id >= 368) && (objInt().item_id <= 375))
 			{//is an off version 
 				itemdIDOff=objInt().item_id-368;
-				itemdIDOn=objInt().item_id-368+8;					
+				itemdIDOn=objInt().item_id-368+8;	
+				isOn=false;
 			}
 			else
 			{
 				itemdIDOff=objInt().item_id-368-8;
 				itemdIDOn=objInt().item_id-368;	
+				isOn=true;
 			}
 			if (isOn==true)
 			{
@@ -181,10 +183,10 @@ public class ButtonHandler : object_base {
 
 	public override bool Activate()
 	{
-						if (objInt().link==0)
-						{
-								return false;
-						}
+		if (objInt().link==0)
+		{
+				return false;
+		}
 		//if (trigger=="")
 		//{
 			//return false;
@@ -204,8 +206,21 @@ public class ButtonHandler : object_base {
 		{
 			return false;
 		}
-		//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?
-		triggerObj.GetComponent<trigger_base>().Activate();
+		else
+		{
+			if (triggerObj.GetComponent<a_use_trigger>()!=null)
+			{
+					triggerObj.GetComponent<a_use_trigger>().Activate(isOn);		
+			}
+			else
+			{
+					triggerObj.GetComponent<trigger_base>().Activate();		
+			}
+
+				//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?
+				
+		}
+
 
 		if (isRotarySwitch())
 		{

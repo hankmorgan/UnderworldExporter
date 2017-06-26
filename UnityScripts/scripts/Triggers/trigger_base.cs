@@ -19,12 +19,6 @@ public class trigger_base : object_base {
 
 	public override bool Activate ()
 	{
-		//Debug.Log (this.name);
-	//public overrideal bool Activate()
-		//Do what it needs to do.
-		//state=state;
-		//Trigger the next in the chain
-		//GameObject triggerObj= GameObject.Find (TrapObject);
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{
@@ -32,15 +26,6 @@ public class trigger_base : object_base {
 			{
 				triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
 			}
-		
-			/*if (objInt().flags == 8)
-			{
-				objInt().flags = 0;
-			}
-			else
-			{
-				objInt().flags++;
-			}*/
 		}
 
 		PostActivate();

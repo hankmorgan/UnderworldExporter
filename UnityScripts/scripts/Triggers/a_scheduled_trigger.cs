@@ -7,7 +7,7 @@ public class a_scheduled_trigger : trigger_base {
 		//Possible usage to turn the gem room into ice when the ice caverns are first visited..
 
 		//Probably reads the same variables as those set by set variables so zpos is the likely index used here.
-		//Possible uses xclock variables
+		//Possibly uses xclock variables
 
 		//Known examples
 		//for fizzit
@@ -27,6 +27,15 @@ public class a_scheduled_trigger : trigger_base {
 			Owner : 39
 			Special Property/Link : 845 : 
 		*/
+
+
+
+		//IS SCD.ARK RELATED TO THIS THING!!!
+
+		//Variable 44 triggers scheduled trap where quality = 33	//waterdam
+		//Variable 51 (or 3) triggers scheduled trap where quality = 38  //value =9 (or 32)
+		//Quest 119 triggers scheduled trap where quality = 38 //fizit in jail a_scheduled_trigger_37_38_00_0844
+
 
 
 

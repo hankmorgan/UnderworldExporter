@@ -39,7 +39,7 @@ public class a_change_from_trap : trap_base {
 				 GameWorldController.instance.currentTileMap().Tiles[x,y].Render=1;		
 				 GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
 				 GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
-				 GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=0;	
+				GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=0;	
 				if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture==objInt().heading)
 				{	
 
@@ -98,7 +98,7 @@ public class a_change_from_trap : trap_base {
 							}
 						}
 
-						if (y<TileMap.TileMapSizeY)
+						if ( x<TileMap.TileMapSizeX)
 						{//Change its neighbour, only if the neighbour is not a solid
 							if ( GameWorldController.instance.currentTileMap().Tiles[x+1,y].tileType>TileMap.TILE_SOLID)
 							{
@@ -113,7 +113,8 @@ public class a_change_from_trap : trap_base {
 		//Re-render the level to see the changes
 		// GameWorldController.instance.currentTileMap().CleanUp(_RES);
 		//TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,_RES,curr,GameWorldController.instance.CurrentObjectList());
-			GameWorldController.WorldReRenderPending=true;//Request a world redraw at the next lateupdate.
+		GameWorldController.WorldReRenderPending=true;//Request a world redraw at the next lateupdate.
+		GameWorldController.FullReRender=true;
 
 	}
 

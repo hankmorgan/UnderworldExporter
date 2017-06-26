@@ -15,7 +15,7 @@ The path to the sword hilt on Level3
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log(this.name);
+		Debug.Log (this.name);
 		int textureQuality = (objInt().quality >> 1) & 0xf;
 		for (int x=0; x<=objInt().x;x++)
 		{
@@ -55,18 +55,22 @@ The path to the sword hilt on Level3
 						int newWallTexture = tileToChange.wallTexture;
 						if (_RES==GAME_UW2)
 						{//UW2 has some slightly different behaviour to support toggling of traps
-						if ((tileToChange.tileType==TileMap.TILE_SOLID) && (tileTypeToChangeTo== TileMap.TILE_SOLID))
+						/*if ((tileToChange.tileType==TileMap.TILE_SOLID) && (tileTypeToChangeTo== TileMap.TILE_SOLID))
 							{//If the tile is already a solid then change it to an open tile at that height.
 								//Debug.Log(this.name + " Terrain change height to be checked " + objInt().zpos);
+								//if ((objInt().flags & 0x1) == 1)//???
+								//{
 								tileTypeToChangeTo=TileMap.TILE_OPEN;	
+								//}								
 							}
 						else if ((tileToChange.tileType==TileMap.TILE_OPEN) && (tileTypeToChangeTo== TileMap.TILE_OPEN))
 							{
-								//tileTypeToChangeTo=TileMap.TILE_SOLID;	
+								tileTypeToChangeTo=TileMap.TILE_SOLID;	
 							}
+							*/
 							//Also the owner can be used to change wall texture. This means changing it's neighours.
 
-							if (objInt().owner>0)
+							if (objInt().owner<63)
 							{
 								newWallTexture=objInt().owner;
 							}
@@ -77,12 +81,14 @@ The path to the sword hilt on Level3
 						//tileToChange.tileType=tileTypeToChangeTo;
 						tileToChange.DimX=1;
 						tileToChange.DimY=1;
+
 						////tileToChange.floorHeight=newTileHeight;	
 						//tileToChange.floorHeight=tileToChange.floorHeight;//DOUBLE CHECK THIS
 						//tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
 						//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
-
+						tileToChange.TileNeedsUpdate();
 						TileMapRenderer.UpdateTile(tileXToChange,tileYToChange, tileTypeToChangeTo, newTileHeight,tileToChange.floorTexture, newWallTexture ,false );
+						Destroy (tile);
 					}
 				else
 				{
@@ -90,50 +96,43 @@ The path to the sword hilt on Level3
 				}
 			}	
 		}
-			if (_RES==GAME_UW2)
-			{
-						if (//Do not process a  terrain change if a future trap is a change_to/from trap or a rerender is pending.
-								(
-								(FindTrapInChain(objInt().link, ObjectInteraction.A_CHANGE_TO_TRAP))
-								||
-								(FindTrapInChain(objInt().link, ObjectInteraction.A_CHANGE_FROM_TRAP))
-								)
-								||
-								(
-									GameWorldController.WorldReRenderPending
-								)
-						)
+	
+		GameWorldController.WorldReRenderPending=true;
+			
+				if ((objInt().owner<63) && (_RES==GAME_UW2))
+				{
+						//Now re-render the tiles and their neighbours since the wall texture has changed.
+						for (int x=-1; x<=objInt().x+1;x++)
 						{
-								return;
+								for (int y=-1; y<=objInt().y+1;y++)
+								{
+
+										int tileXToChange=x+triggerX; 
+										int tileYToChange=y +triggerY;
+
+										GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
+										if (tile!=null)
+										{
+												Destroy (tile);
+												if ( (tileXToChange >=0) && (tileXToChange <=63) &&  (tileYToChange >=0) && (tileYToChange <=63))
+												{
+														TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];	
+														tileToChange.Render=1;
+														for (int v=0;v<6;v++)
+														{
+																tileToChange.VisibleFaces[v]=1;		
+														}
+														tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
+														//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);											
+														tileToChange.TileNeedsUpdate();
+												}
+										}
+								}
+
 						}
 
-			}
-
-
-		
-		//Now re-render the tiles and their neighbours
-		for (int x=-1; x<=objInt().x+1;x++)
-		{
-			for (int y=-1; y<=objInt().y+1;y++)
-			{
-								
-				int tileXToChange=x+triggerX; 
-				int tileYToChange=y +triggerY;
-
-				GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
-				if (tile!=null)
-				{
-					DestroyImmediate (tile);
-					if ( (tileXToChange >=0) && (tileXToChange <=63) &&  (tileYToChange >=0) && (tileYToChange <=63))
-					{
-						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
-						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
-						TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);											
-					}
 				}
-			}
 
-		}
 
 	}
 

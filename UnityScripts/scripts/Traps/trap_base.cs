@@ -82,6 +82,10 @@ public class trap_base : object_base {
 				ObjectInteraction objLink = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;
 				if (objLink!=null)
 				{
+					if (objLink.GetItemType() == ObjectInteraction.A_DELETE_OBJECT_TRAP)
+					{
+						return (TrapType == ObjectInteraction.A_DELETE_OBJECT_TRAP);
+					}
 					if (objLink.GetItemType()== TrapType)
 					{
 						return true;

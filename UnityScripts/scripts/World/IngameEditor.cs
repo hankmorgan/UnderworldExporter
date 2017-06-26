@@ -250,7 +250,7 @@ public class IngameEditor : GuiBase_Draggable {
 								}
 						}
 
-						if (TileY<TileMap.TileMapSizeY)
+						if (TileX<TileMap.TileMapSizeX)
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
 								{

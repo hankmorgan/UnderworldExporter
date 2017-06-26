@@ -1863,6 +1863,26 @@ public class ConversationVM : UWEBase {
 							break;
 						}
 
+				case "x_obj_pos":
+						{
+								int[] args=new int[5];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								args[3]= stack.at(stack.stackptr-5);//ptr to value		
+								args[4]= stack.at(stack.stackptr-5);//ptr to value	
+								x_obj_pos(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]),stack.at(args[4]));
+								break;
+						}
+
+				case "teleport_talker":
+						{
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								teleport_talker(npc, stack.at(args[0]), stack.at(args[1]));
+								break;
+						}
 				default: 
 					{	
 					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
@@ -3661,6 +3681,17 @@ description:  places a generated object in underworld
 		}
 
 
+		void x_obj_pos(int arg1, int arg2, int arg3, int arg4, int arg5)
+		{
+				Debug.Log("x_obj_pos (" + arg1  + arg2  + arg3  + arg4  + arg5);
+		}
+
+
+		void teleport_talker(NPC npc, int tileY, int tileX)
+		{
+			Debug.Log("moving " + npc.name + " to " + tileX + " " + tileY );
+			npc.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+		}
 
 		/// <summary>
 		/// Sets the inv quality of the item at the specified item list position

@@ -14,7 +14,7 @@ public class a_text_string_trap : trap_base {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		//CheckReferences();
 				int StringNo=0;
 
