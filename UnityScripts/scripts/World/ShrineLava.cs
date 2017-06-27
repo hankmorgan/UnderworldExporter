@@ -19,21 +19,15 @@ public class ShrineLava : UWEBase {
 						switch (objInt.item_id)
 						{
 						case Quest.TalismanHonour:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[0]=true;break;
 						case Quest.TalismanBook:								
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[1]=true;break;
 						case Quest.TalismanCup:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[2]=true;break;
 						case Quest.TalismanRing:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[3]=true;break;
 						case Quest.TalismanShield:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[4]=true;break;
 						case Quest.TalismanSword:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[5]=true;break;
 						case Quest.TalismanTaper:
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[6]=true;break;
-						case Quest.TalismanWine:								
-								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[7]=true;break;
+						case Quest.TalismanWine:	
+								GameWorldController.instance.playerUW.quest().TalismansRemaining--;
+								break;
 						default:
 								return;								
 						}
@@ -43,16 +37,19 @@ public class ShrineLava : UWEBase {
 
 						objInt.consumeObject();
 
-						for (int i=0;i<7;i++)
-						{
-								if (GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[i]==false)
-								{
-										return;
-								}
-						}
+						//for (int i=0;i<7;i++)
+						//{
+						//		if (GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[i]==false)
+						//		{
+						//				return;
+						//		}
+						//}
 
 						//Suck the avatar into the ethereal void.
+						if (GameWorldController.instance.playerUW.quest().TalismansRemaining<=0)
+						{
 						StartCoroutine(SuckItAvatar());
+						}
 
 				}
 		}

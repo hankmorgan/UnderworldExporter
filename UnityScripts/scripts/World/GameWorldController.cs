@@ -663,7 +663,7 @@ public class GameWorldController : UWEBase {
 				if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
 				{//Create shrine lava.
 					GameObject shrineLava = new GameObject();
-					shrineLava.transform.parent=LevelMarker();
+					shrineLava.transform.parent=SceneryModel.transform;
 					shrineLava.transform.localPosition=new Vector3(39f,0.402f,39.61f);
 					shrineLava.transform.localScale=new Vector3(6f,0.2f,4.8f);
 					shrineLava.AddComponent<ShrineLava>();

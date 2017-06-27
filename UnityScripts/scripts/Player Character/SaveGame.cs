@@ -200,6 +200,7 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.MoonGateLevel=((int)buffer[i]) & 0xf;
 												break;
 										case 0x60  : ///    bits 2..5: play_poison and no of active effects
+												GameWorldController.instance.playerUW.quest().IncenseDream=(int)(buffer[i] & 0x3);
 												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
@@ -256,6 +257,10 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.quest().QuestVariables[34]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 										case 0x6D:
 												GameWorldController.instance.playerUW.quest().QuestVariables[35]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										
+										case 0x6E://No of talismans still to destory
+												GameWorldController.instance.playerUW.quest().TalismansRemaining=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										
 										case 0x6F://Garamon dream related?
 												GameWorldController.instance.playerUW.quest().GaramonDream=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 										case 0x71://Game variables
@@ -810,12 +815,12 @@ public class SaveGame : Loader {
 										DataLoader.WriteInt8(writer,GameWorldController.instance.LevelNo+1);break;
 								case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
 										{
-												int val = (GameWorldController.instance.playerUW.ResurrectLevel & 0xf)<<4 | (GameWorldController.instance.playerUW.MoonGateLevel & 0xf)	;
-												DataLoader.WriteInt8(writer,val);
-												break;
+											int val = (GameWorldController.instance.playerUW.ResurrectLevel & 0xf)<<4 | (GameWorldController.instance.playerUW.MoonGateLevel & 0xf)	;
+											DataLoader.WriteInt8(writer,val);
+											break;
 										}
 								case 0x60  : ///    bits 2..5: play_poison
-										DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) <<6)) | GameWorldController.instance.playerUW.play_poison<<2);
+										DataLoader.WriteInt8(writer, ( ((NoOfActiveEffects & 0x3) <<6)) | (GameWorldController.instance.playerUW.play_poison<<2) | (GameWorldController.instance.playerUW.quest().IncenseDream & 0x3)   );
 										break;
 								case 0x65: // hand, Gender & body, and class
 										{
@@ -863,11 +868,10 @@ public class SaveGame : Loader {
 										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.quest().QuestVariables[34]);break;
 								case 0x6D:
 										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.quest().QuestVariables[35]);break;
-								case 0x6E://Is always 8???
-										DataLoader.WriteInt8(writer,8);break;
+								case 0x6E://No of talismans still to destory
+										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.quest().TalismansRemaining);break;
 								case 0x6F://Garamon dream related?
 										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.quest().GaramonDream);break;
-
 								case 0x71://Game variables
 								case 0x72:
 								case 0x73:

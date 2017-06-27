@@ -87,9 +87,9 @@ public class Quest : UWEBase {
 	public int[] QuestVariables=new int[256];
 
 	/// <summary>
-	/// The talismans cast into abyss in order to complete the game.
+	/// The no of talismans to still be cast into abyss in order to complete the game.
 	/// </summary>
-	public bool[] TalismansCastIntoAbyss = new bool[8];
+	public int TalismansRemaining; //= new bool[8];
 
 		/// <summary>
 		/// Tracks which garamon dream we are at.
