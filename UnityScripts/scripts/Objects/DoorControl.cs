@@ -26,7 +26,7 @@ public class DoorControl : object_base {
 		///Is it the player using the object or a trigger/trap.
 	private bool PlayerUse=false;
 		///A trigger to activate when opened.
-	public string UseLink;
+	//public string UseLink;
 
 		//Visible faces indices
 		const int vTOP =0;
@@ -358,7 +358,30 @@ public class DoorControl : object_base {
 							{
 									tb.Activate();
 							}
-						}		
+						}
+						else
+						{//The object is linked to a lock. The next of the lock is the use trigger to use here
+							ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
+							if (LockObj!=null)
+							{
+								if (LockObj.next!=0)
+								{
+									//if (ObjectLoader.GetItemTypeAt(LockObj.next) != ObjectInteraction.LOCK)
+									//{
+									ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(LockObj.next);
+									if (TriggerObject!=null)
+									{
+										trigger_base tb= TriggerObject.GetComponent<trigger_base>();
+										if (tb!=null)
+										{
+											tb.Activate();
+										}	
+									}
+
+									//}		
+								}
+							}
+						}
 					}
 
 

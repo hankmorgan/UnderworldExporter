@@ -551,7 +551,7 @@ public class ObjectLoader : Loader {
 
 				//+4
 				objList[x].quality =(int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
-				objList[x].next = ((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
+				objList[x].next = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
 
 				//+6
 
@@ -1418,8 +1418,8 @@ public class ObjectLoader : Loader {
 										}
 										else
 										{
-												currObjList.objInfo[nexts[x,y]].next = (long)i;
-												currObjList.objInfo[nexts[x,y]].instance.next=(long)i;
+												currObjList.objInfo[nexts[x,y]].next = i;
+												currObjList.objInfo[nexts[x,y]].instance.next=i;
 												nexts[x,y] = i;
 										}
 								}	
@@ -1553,6 +1553,11 @@ public class ObjectLoader : Loader {
 
 		static void linkContainerContents(Container cn)
 		{
+				if (cn==null)
+				{	
+						Debug.Log("Null container in LinkContainerContents");
+						return;
+				}
 			int itemCounter=0;
 			ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
 			int PrevIndex=cnObjInt.objectloaderinfo.index;

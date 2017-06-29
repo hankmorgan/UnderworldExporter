@@ -224,4 +224,13 @@ public class Armour : Equipment {
 		}
 		return false;
 	}
+
+		/// <summary>
+		/// Gets the defence score of this armour.
+		/// </summary>
+		/// <returns>The defence.</returns>
+		public int getDefence()
+		{
+			return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;
+		}
 }

@@ -1243,7 +1243,14 @@ public class TileMapRenderer : Loader{
 				GameObject Tile = new GameObject(TileName);
 				if (t.isWater==false)
 				{
-						Tile.layer=LayerMask.NameToLayer("MapMesh");
+					if (t.isLava)
+					{
+						Tile.layer=LayerMask.NameToLayer("Lava");
+					}
+					else
+					{
+						Tile.layer=LayerMask.NameToLayer("MapMesh");	
+					}
 				}
 				else
 				{
@@ -1492,7 +1499,14 @@ public class TileMapRenderer : Loader{
 				GameObject Tile = new GameObject(TileName);
 				if (t.isWater==false)
 				{
-						Tile.layer=LayerMask.NameToLayer("MapMesh");
+						if (t.isLava)
+						{
+								Tile.layer=LayerMask.NameToLayer("Lava");
+						}
+						else
+						{
+								Tile.layer=LayerMask.NameToLayer("MapMesh");	
+						}
 				}
 				else
 				{
@@ -3315,7 +3329,14 @@ public class TileMapRenderer : Loader{
 				GameObject Tile = new GameObject(TileName);
 				if (t.isWater==false)
 				{
-						Tile.layer=LayerMask.NameToLayer("MapMesh");
+						if (t.isLava)
+						{
+								Tile.layer=LayerMask.NameToLayer("Lava");
+						}
+						else
+						{
+								Tile.layer=LayerMask.NameToLayer("MapMesh");	
+						}
 				}
 				else
 				{

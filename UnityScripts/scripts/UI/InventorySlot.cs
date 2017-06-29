@@ -266,7 +266,7 @@ public class InventorySlot : GuiBase {
 			{
 			if (DoNotPickup==false)	
 				{
-				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,false))
 					{
 						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
@@ -286,7 +286,7 @@ public class InventorySlot : GuiBase {
 						//No effect occurred. Swap the two objects.
 					if (DoNotPickup==false)
 						{
-						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,true))
 							{
 								GameWorldController.instance.playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 							}
@@ -384,7 +384,7 @@ public class InventorySlot : GuiBase {
 			{
 			if (DoNotPickup==false)
 				{
-				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,false))
 					{
 						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
@@ -410,7 +410,7 @@ public class InventorySlot : GuiBase {
 						{
 						//TODO: Make sure this works with Equipment slots
 						//No effect occurred. Swap the two objects.
-						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,true))
 							{
 								GameWorldController.instance.playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 								GameWorldController.instance.playerUW.playerInventory.Refresh();

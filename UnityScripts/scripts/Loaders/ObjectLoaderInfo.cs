@@ -20,7 +20,7 @@ public class ObjectLoaderInfo {
 		public int y; //  13-15   3   "xpos"      Object X position (0-7)
 		//0004 quality / chain
 		public 		int quality;	//;     0- 5   6   "quality"   Quality
-		public long next; //    6-15   10  "next"      Index of next object in chain
+		public int next; //    6-15   10  "next"      Index of next object in chain
 
 		//0006 link / special
 		//     0- 5   6   "owner"     Owner / special

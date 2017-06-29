@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerInventory : UWEBase {
 
-	//The game objects at the various slots. (not in use?)
+
 
 	//public int game;
 	//TODO:make object in hand private so I can update code usages to use api instead.
@@ -977,4 +977,73 @@ public class PlayerInventory : UWEBase {
 		}
 		return null;
 	}
+
+		/// <summary>
+		/// Gets the armour score of all equiped armour
+		/// </summary>
+		/// <returns>The armour score.</returns>
+		public int getArmourScore()
+		{
+			//Get helm defence
+			int result = 0;
+
+			result += getDefenceAtSlot(0);
+			result += getDefenceAtSlot(1);
+			result += getDefenceAtSlot(2);
+			result += getDefenceAtSlot(3);
+			result += getDefenceAtSlot(4);	
+			return result;
+		}
+
+
+		int getDefenceAtSlot(int slot)
+		{
+
+				GameObject obj=	GetGameObjectAtSlot(slot);
+				if (obj!=null)
+				{
+						ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+						switch (slot)
+						{
+						case 0://Helm								
+						case 1://Chest								
+						case 2://Leggings								
+						case 3://Boots								
+						case 4://Gloves		
+								if (obj.gameObject.GetComponent<Armour>()!=null)
+								{
+									return obj.gameObject.GetComponent<Armour>().getDefence();	
+								}
+								break;
+						case 7://HandRight
+								if (GameWorldController.instance.playerUW.isLefty)
+								{
+										return 0;
+								}
+								else
+								{
+										if (obj.gameObject.GetComponent<Shield>()!=null)
+										{
+												return obj.gameObject.GetComponent<Shield>().getDefence();	
+										}
+								}
+								break;
+						case 8://HandLeft
+								if ( ! GameWorldController.instance.playerUW.isLefty)
+								{
+										return 0;
+								}
+								else
+								{
+										if (obj.gameObject.GetComponent<Shield>()!=null)
+										{
+												return obj.gameObject.GetComponent<Shield>().getDefence();	
+										}
+								}
+								break;
+						}
+				}
+
+				return 0;
+		}
 }

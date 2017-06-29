@@ -398,7 +398,7 @@ public class SaveGame : Loader {
 
 										//+4
 										objLoader.objInfo[x].quality =(int)((DataLoader.getValAtAddress(buffer,i+4,16)) & 0x3F);
-										objLoader.objInfo[x].next = ((DataLoader.getValAtAddress(buffer,i+4,16)>>6) & 0x3FF);
+										objLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer,i+4,16)>>6) & 0x3FF);
 
 										//+6
 
@@ -443,10 +443,10 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.playerInventory.sRightHand=item_name;break;
 										case 264://  is the left hand.
 												GameWorldController.instance.playerUW.playerInventory.sLeftHand=item_name;break;
-										case 266://  is the left ring (assumption.
-												GameWorldController.instance.playerUW.playerInventory.sLeftRing=item_name;break;
-										case 268://  is the right ring (assumption.
+										case 266://  is the right ring.
 												GameWorldController.instance.playerUW.playerInventory.sRightRing=item_name;break;
+										case 268://  is the left ring .
+												GameWorldController.instance.playerUW.playerInventory.sLeftRing=item_name;break;
 										case 270://  is the backpack slots 1.
 												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[0]=item_name;break;
 										case 272://  is the backpack slots 2.
@@ -995,13 +995,13 @@ public class SaveGame : Loader {
 										WriteInventoryIndex(writer, inventoryObjects,8);break;
 								case 0x109: // LeftHand ignore
 										break;
-								case 0x10A: // RightRing
-										WriteInventoryIndex(writer, inventoryObjects,9);break;
-								case 0x10B: // RightRing ignore
-										break;
-								case 0x10C: // LeftRing
+								case 0x10A: // leftRing
 										WriteInventoryIndex(writer, inventoryObjects,10);break;
-								case 0x10D: // LeftRing ignore
+								case 0x10B: // leftRing ignore
+										break;
+								case 0x10C: // rightRing
+										WriteInventoryIndex(writer, inventoryObjects,9);break;
+								case 0x10D: // rightRing ignore
 										break;
 								case 0x10E: // Backpack0
 										WriteInventoryIndex(writer, inventoryObjects,11);break;

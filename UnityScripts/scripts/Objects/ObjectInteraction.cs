@@ -198,7 +198,7 @@ public class ObjectInteraction : UWEBase {
 		public int y; //  13-15   3   "xpos"      Object X position (0-7)
 		//0004 quality / chain
 		public 		int quality;	//;     0- 5   6   "quality"   Quality
-		public long next; //    6-15   10  "next"      Index of next object in chain
+		public int next; //    6-15   10  "next"      Index of next object in chain
 		//0006 link / special
 		//     0- 5   6   "owner"     Owner / special
 		public int owner;	//Also special
@@ -1288,7 +1288,7 @@ public class ObjectInteraction : UWEBase {
 				CharacterController cap  = myObj.AddComponent<CharacterController>();
 				cap = myObj.GetComponent<CharacterController>();
 				switch(int.Parse(NPC_ID))
-				{
+				{//TODO:These are UW1 settings
 				case 97: //a_ghost
 				case 99: //a_ghoul
 				case 100: //a_ghost
@@ -1352,9 +1352,9 @@ public class ObjectInteraction : UWEBase {
 				case 125: //unknown
 				case 126: //unknown
 						cap.isTrigger=false;
-						cap.center = new Vector3(0.0f, 0.4f, 0.0f);
+						cap.center = new Vector3(0.0f, 0.5f, 0.0f);
 						cap.radius=0.2f;
-						cap.height=0.7f;
+						cap.height=1.0f;
 						break;
 
 						//Medium
@@ -1446,6 +1446,8 @@ public class ObjectInteraction : UWEBase {
 						npc.NavMeshRegion=NavMeshRegion;
 
 						npc.gtargName=gtargName;
+
+						/*
 						Conversation cnv ;//= myObj.AddComponent<Conversation>();
 						cnv=null;
 
@@ -1677,7 +1679,8 @@ public class ObjectInteraction : UWEBase {
 						if (cnv!=null)
 						{
 								cnv.npc= npc;
-						}					
+						}	
+						*/
 				}
 		}
 

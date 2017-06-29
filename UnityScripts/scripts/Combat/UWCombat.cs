@@ -119,12 +119,12 @@ public class UWCombat : Combat {
 								switch(CurrentStrike)
 								{
 								case "SLASH":
-									StrikeBaseDamage=WeaponMelee.getMeleeSlash();break;
+									StrikeBaseDamage=WeaponMelee.getMeleeSlash() * 100;break;
 								case "BASH":
-									StrikeBaseDamage=WeaponMelee.getMeleeBash();break;
+														StrikeBaseDamage=WeaponMelee.getMeleeBash() * 100;break;
 								case "STAB":
 								default:	
-									StrikeBaseDamage=WeaponMelee.getMeleeStab();break;
+														StrikeBaseDamage=WeaponMelee.getMeleeStab() * 100;break;
 								}
 						}
 						else

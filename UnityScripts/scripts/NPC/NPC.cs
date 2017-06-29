@@ -226,13 +226,17 @@ public class NPC : object_base {
 	void OnDeath()
 	{
 		//If the NPC has a conversation module check it to see if it has any special onDeath code. Eg Tybal, the Gazer on lvl2 and the Golem on Level 6
-		Conversation cnv = this.GetComponent<Conversation>();
-		if (cnv!=null)
+		//Conversation cnv = this.GetComponent<Conversation>();
+		//if (cnv!=null)
+		//{
+		//	if(cnv.OnDeath()==true)
+		//	{
+		//		return;
+		//	}			
+		//}
+		if (SpecialDeathCases())
 		{
-			if(cnv.OnDeath()==true)
-			{
-				return;
-			}			
+			return;
 		}
 
 		NPC_DEAD=true;//Tells the update to execute the NPC death animation
@@ -245,7 +249,53 @@ public class NPC : object_base {
 		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
 	}
 
-	
+	/// <summary>
+	/// Some NPCs has special events when they die.
+	/// </summary>
+	/// <returns><c>true</c>, if no more processing is to be done., <c>false</c> otherwise.</returns>
+		bool SpecialDeathCases()
+		{
+				switch(_RES)	
+				{
+				case GAME_UW1:
+						{
+							switch (npc_whoami)
+							{
+
+								case 22: //The golem on level 6
+									{
+										if (Conversation.InConversation==false)		
+										{
+											NPC_DEAD=false;
+											TalkTo ();
+										}
+										return true;	
+									}
+								case 110://The Gazer on level 2
+									{
+									GameWorldController.instance.playerUW.quest().QuestVariables[4]=1;
+									return false;
+									}
+								case 116:	//Tybal
+									{
+									//Play the tybal death cutscene.
+									GameWorldController.instance.playerUW.quest().isTybalDead=true;
+									GameWorldController.instance.playerUW.quest().GaramonDream=8;//Advance to Tybal is dead range of dreams
+									GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day();//Ensure dream triggers on next sleep
+									GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);
+									return false;														
+									}
+							}
+
+
+						break;
+						}
+				}
+
+
+				return false;
+		}
+
 
 	/// <summary>
 	/// Update the NPC state, AI and animations
@@ -485,7 +535,7 @@ public class NPC : object_base {
 									{
 										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
 										npc_goal=5;
-										npc_gtarg=999;
+										npc_gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
 									}
 
@@ -1055,6 +1105,8 @@ public class NPC : object_base {
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
+			int attackDamage =Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
+
 			if (hit.transform.Equals(this.transform))
 			{
 				Debug.Log ("you've hit yourself ? " + hit.transform.name);
@@ -1062,16 +1114,28 @@ public class NPC : object_base {
 			else
 			{
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
-				{
-					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
-					GameWorldController.instance.playerUW.ApplyDamage(5,this.gameObject);
+				{				
+					int playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
+
+					Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
+					if (playerArmour> attackDamage)
+					{
+							attackDamage=1;
+					}
+					else
+					{
+							attackDamage = attackDamage-playerArmour;
+					}
+					//TODO: armour durability
+					MusicController.LastAttackCounter=10.0f; //Thirty more seconds of combat music
+					GameWorldController.instance.playerUW.ApplyDamage(attackDamage,this.gameObject);
 				}
 			else
 				{
 					//Has it hit another npc or object
 					if (hit.transform.GetComponent<ObjectInteraction>()!=null)
 					{
-						hit.transform.GetComponent<ObjectInteraction>().Attack(5, this.gameObject);
+						hit.transform.GetComponent<ObjectInteraction>().Attack(attackDamage, this.gameObject);
 					}
 				}
 			}

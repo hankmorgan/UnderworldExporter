@@ -412,7 +412,7 @@ public class Container : object_base {
 				}
 			}
 
-			if (Container.TestContainerRules(this,11)==false)
+			if (Container.TestContainerRules(this,11,false)==false)
 			{
 				Valid=false;
 				return true;
@@ -493,7 +493,7 @@ public class Container : object_base {
 		return GetCapacity() - GetWeight() - GetBaseWeight();
 	}
 
-	public static bool TestContainerRules(Container cn, int SlotIndex)
+	public static bool TestContainerRules(Container cn, int SlotIndex, bool Swapping)
 	{
 		if (SlotIndex<11)
 		{
@@ -564,7 +564,7 @@ public class Container : object_base {
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));				
 			}
 		}
-		return (TypeTest && WeightTest && CapacityTest);
+		return (TypeTest && WeightTest && (CapacityTest | Swapping));
 	}
 
 		/// <summary>
