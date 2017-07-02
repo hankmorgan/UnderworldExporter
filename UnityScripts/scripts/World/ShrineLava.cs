@@ -86,15 +86,22 @@ public class ShrineLava : UWEBase {
 				{
 						slasherPos=slasher.transform.position;
 				}
-				GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
-				GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
-				newObj.transform.parent=GameWorldController.instance.LevelMarker();
-				GameWorldController.MoveToWorld(newObj);
-				newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
+				ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0);
+				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,
+						GameWorldController.instance.LevelMarker().gameObject,
+						GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+				myObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
+
+				//GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
+				//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
+				//newObj.transform.parent=GameWorldController.instance.LevelMarker();
+			//	GameWorldController.MoveToWorld(newObj);
+				//newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
 				Quaternion playerRot = GameWorldController.instance.playerUW.transform.rotation;
 				Quaternion EndRot = new Quaternion(playerRot.x,playerRot.y, playerRot.z+1.2f,playerRot.w);
 				Vector3 StartPos = GameWorldController.instance.playerUW.transform.position;
-				Vector3 EndPos = newObj.transform.localPosition;
+				Vector3 EndPos = myObj.transform.localPosition;
 				float rate = 1.0f/2.0f;
 				float index = 0.0f;
 				while (index <1.0f)
@@ -111,6 +118,6 @@ public class ShrineLava : UWEBase {
 
 				}
 				GameWorldController.instance.playerUW.transform.rotation = playerRot;
-				GameWorldController.instance.SwitchLevel(8);//One way trip.
+				GameWorldController.instance.SwitchLevel(8,26,24);//One way trip.
 		}
 }

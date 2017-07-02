@@ -17,7 +17,6 @@ A trigger that fires when the player character enters it
 
 	void OnTriggerEnter(Collider other)
 	{
-
 	if ((other.name==GameWorldController.instance.playerUW.name) || (other.name=="Feet"))
 		{
 			Activate ();

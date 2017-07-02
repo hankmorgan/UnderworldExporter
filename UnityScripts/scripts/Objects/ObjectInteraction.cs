@@ -133,6 +133,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_3D_MODEL = 107;
 		public const int A_BLACKROCK_GEM=108;
 		public const int A_NULL_TRAP=109;
+		public const int AN_ORB_ROCK=110;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -2013,6 +2014,10 @@ public class ObjectInteraction : UWEBase {
 				case A_BLACKROCK_GEM:
 						myObj.AddComponent<BlackrockGem>();
 						break;
+				case AN_ORB_ROCK:
+						myObj.layer=LayerMask.NameToLayer("MagicProjectile");
+						myObj.AddComponent<OrbRock>();
+						break;
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();
 						RemoveBillboard=true;
@@ -2142,7 +2147,7 @@ public class ObjectInteraction : UWEBase {
 						AddAnimation=true;
 						break;
 				case BRIDGE:
-						myObj.AddComponent<object_base>();
+						myObj.AddComponent<Bridge>();
 						CreateSprite=false;
 						break;
 				case SPELL:

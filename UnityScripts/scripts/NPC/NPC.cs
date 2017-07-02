@@ -238,7 +238,7 @@ public class NPC : object_base {
 		{
 			return;
 		}
-
+				objInt().objectloaderinfo.InUseFlag=0;
 		NPC_DEAD=true;//Tells the update to execute the NPC death animation
 		//Dump npc inventory on the floor.
 		Container cnt = this.GetComponent<Container>();
@@ -276,10 +276,15 @@ public class NPC : object_base {
 									GameWorldController.instance.playerUW.quest().QuestVariables[4]=1;
 									return false;
 									}
+								case 142://Rodrick
+									{
+									GameWorldController.instance.playerUW.quest().QuestVariables[11]=1;	
+									return false;
+									}
 								case 116:	//Tybal
 									{
 									//Play the tybal death cutscene.
-									GameWorldController.instance.playerUW.quest().isTybalDead=true;
+									//GameWorldController.instance.playerUW.quest().isTybalDead=true;
 									GameWorldController.instance.playerUW.quest().GaramonDream=8;//Advance to Tybal is dead range of dreams
 									GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day();//Ensure dream triggers on next sleep
 									GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);

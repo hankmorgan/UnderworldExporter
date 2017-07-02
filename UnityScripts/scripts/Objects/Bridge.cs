@@ -6,11 +6,32 @@ using System.Collections;
 /// Bridge Object in maps.
 /// The physical bridge is created as part of the map export but look descriptions are set up here using box colliders
 public class Bridge : object_base {
-	///Texture index for the bridge description
+	//Texture index for the bridge description
 	//public int TextureIndex;
 	//public string UseLink;//A trigger to fire when used.
 
 
+		public GameObject ModelInstance;//The model that this bridge uses.
+
+
+	protected override void Start ()
+	{
+		base.Start ();
+		BoxCollider bx = this.GetComponent<BoxCollider>();
+		if (bx!=null)
+		{
+			bx.center=new Vector3(0.08f, 0.006f, 0.08f);	
+			bx.size=new Vector3(1.2f, 0.18f, 1.2f);
+		}
+		foreach (Transform t in GameWorldController.instance.SceneryModel.transform)
+		{
+			if (t.name == this.name)
+			{
+				ModelInstance = t.gameObject;
+				return;
+			}
+		}
+	}
 
 		/// <summary>
 		/// Outputs the look description of the object
@@ -54,4 +75,10 @@ public class Bridge : object_base {
 			}
 		return false;
 	}
+
+	public override string ContextMenuUsedDesc ()
+	{
+		return "";
+	}
+
 }

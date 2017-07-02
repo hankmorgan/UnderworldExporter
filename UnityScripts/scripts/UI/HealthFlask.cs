@@ -63,6 +63,13 @@ public class HealthFlask : GuiBase_Draggable {
 					LevelImages[i].enabled=(i<FlaskLevel);
 				}
 			}
+			else
+			{
+				for (int i = 0; i <13; i++)
+				{
+					LevelImages[i].enabled=false;
+				}
+			}
 		}
 	}
 

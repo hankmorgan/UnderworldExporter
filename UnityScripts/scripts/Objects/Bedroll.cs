@@ -106,13 +106,13 @@ public class Bedroll : object_base {
 
 	private bool IsGaramonTime()
 	{//Is it time for a garamon dream
-		if (GameWorldController.instance.playerUW.quest().isTybalDead)
-		{
-			if (GameWorldController.instance.playerUW.quest().GaramonDream>10)
+		//if (GameWorldController.instance.playerUW.quest().isTybalDead)
+		//{
+			if (GameWorldController.instance.playerUW.quest().GaramonDream==8)
 			{
-				return false;//All done.
+				return true;//All done.
 			}
-		}
+		//}
 		else
 		{
 			if (GameWorldController.instance.playerUW.quest().GaramonDream>7)
@@ -120,6 +120,7 @@ public class Bedroll : object_base {
 				return false;//All done until tybal is dead.
 			}	
 		}
+
 		if (GameClock.day()>=GameWorldController.instance.playerUW.quest().DayGaramonDream)
 		{
 			return true;

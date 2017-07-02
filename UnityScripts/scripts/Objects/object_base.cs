@@ -652,9 +652,15 @@ public class object_base : UWEBase {
 				}
 				else
 				{
-					return ItemDesc + "\n" + UseableDesc + " " + PickableDesc;			
-				}
-			
+					if ((UseableDesc!="") || (PickableDesc!=""))
+					{
+						return ItemDesc + "\n" + UseableDesc + " " + PickableDesc;		
+					}
+					else
+					{
+						return "";//no object description returned.
+					}							
+				}			
 		}
 
 		/// <summary>

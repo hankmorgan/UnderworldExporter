@@ -108,7 +108,12 @@ public class Quest : UWEBase {
 		/// <summary>
 		/// Is tybal dead.
 		/// </summary>
-	public bool isTybalDead;
+	//public bool isTybalDead;
+
+		/// <summary>
+		/// Is the orb on tybals level destroyed.
+		/// </summary>
+		public bool isOrbDestroyed;
 
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events.

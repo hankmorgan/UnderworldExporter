@@ -15,7 +15,7 @@ public class a_teleport_trap : trap_base {
 
 		public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		if (EditorMode)
 		{
 			return;
@@ -38,6 +38,17 @@ public class a_teleport_trap : trap_base {
 		else
 		{
 			//Goto to another level
+			if (_RES==GAME_UW1)
+			{//Special case for the magic drain effect in UW1
+				if (GameWorldController.instance.playerUW.PlayerMagic.MaxMana<GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana)
+				{
+					GameWorldController.instance.playerUW.PlayerMagic.MaxMana=GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana;
+					if (GameWorldController.instance.playerUW.PlayerMagic.CurMana==0)
+					{
+						GameWorldController.instance.playerUW.PlayerMagic.CurMana = GameWorldController.instance.playerUW.PlayerMagic.MaxMana/4;
+					}
+				}
+			}
 			GameWorldController.instance.SwitchLevel(objInt().zpos-1,objInt().quality,objInt().owner);
 		}
 	}

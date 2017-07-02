@@ -664,7 +664,7 @@ public class UWCharacter : Character {
 			//Do stuff with acrobat here. In the mean time a flat skill check.
 			if ( ! PlayerSkills.TrySkill(Skills.SkillAcrobat, (int)fallSpeed))
 			{
-				ApplyDamage(5);//TODO:As a function of the acrobat skill versus fall.
+				ApplyDamage(Random.Range (1,5));//TODO:As a function of the acrobat skill versus fall.
 			}
 		}
 	}
@@ -774,6 +774,29 @@ public class UWCharacter : Character {
 			//000~001~147~You have attained experience level
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,147));
 			TrainingPoints+=3;
+			GameWorldController.instance.playerUW.MaxVIT=GameWorldController.instance.playerUW.PlayerSkills.STR*3;
+			switch (_RES)
+			{
+			case GAME_UW1:
+				if ((GameWorldController.instance.LevelNo==6) && ( !GameWorldController.instance.playerUW.quest().isOrbDestroyed ))
+				{
+					GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;;								
+				}
+				else
+				{
+					GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
+					GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+					GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;											
+				}
+				break;
+			default:
+				GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
+				GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+				GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+				break;
+			}
+
+
 		}
 		GameWorldController.instance.playerUW.CharLevel=level;
 	}

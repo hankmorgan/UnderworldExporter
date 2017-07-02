@@ -39,8 +39,11 @@ public class Magic : UWEBase {
 		public int MaxMana;
 		///How much mana the player currently has
 		public int CurMana;
+		///The true max mana the character has when their mana is drained.
+		public int TrueMaxMana;
 		///The mana cost of the next spell the player will cast
 		public int SpellCost;
+
 
 		///For spells cast on objects in slots
 		public GameObject ObjectInSlot;

@@ -113,7 +113,7 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.MaxVIT=(int)buffer[i];break;
 										case 0x38 : ///    current mana, (play_mana)
 												GameWorldController.instance.playerUW.PlayerMagic.CurMana=(int)buffer[i];break;
-										case 0x39  : ///    max. mana
+										case 0x39  : ///    max. mana  (see also true max mana)
 												GameWorldController.instance.playerUW.PlayerMagic.MaxMana=(int)buffer[i];break;
 										case 0x3A : ///    hunger, play_hunger
 												GameWorldController.instance.playerUW.FoodLevel=(int)buffer[i];break;		
@@ -204,8 +204,11 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
-
-
+										case 0x61:
+												{
+													GameWorldController.instance.playerUW.quest().isOrbDestroyed= ((((int)DataLoader.getValAtAddress(buffer,i,8) >> 5) & 0x1) == 1);break;
+												}											
+										
 										case 0x65: // hand, Gender & body, and class
 												{
 														//bit 1 = hand left/right
@@ -299,6 +302,9 @@ public class SaveGame : Loader {
 													GameWorldController.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 													break;
 												}
+										case 0xB1:  //The true max mana of the character. Used with the orb on level 7
+												GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=(int)DataLoader.getValAtAddress(buffer,i,8);
+												break;
 										case 0xCF  : ///   game time
 												GameWorldController.instance.playerUW.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
 										case 0xD0: gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
@@ -907,6 +913,16 @@ public class SaveGame : Loader {
 										{
 												DataLoader.WriteInt8(writer,GameWorldController.instance.variables[i-0x71]);
 												break;
+										}
+								case 0xB1://Bit 5 is the orb destroyed
+										{
+											int val =0;
+											if (GameWorldController.instance.playerUW.quest().isOrbDestroyed)
+											{
+													val=1;
+											}
+											DataLoader.WriteInt8(writer,val << 5);
+											break;
 										}
 								case 0xBC:
 										//Unknown

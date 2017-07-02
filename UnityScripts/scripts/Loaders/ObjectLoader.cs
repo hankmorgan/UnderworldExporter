@@ -736,6 +736,7 @@ public class ObjectLoader : Loader {
 										objList[nextObj].tileX = x;
 										objList[nextObj].tileY = y;
 										objList[nextObj].InUseFlag = 1;
+
 								}
 								if ( 
 										(GameWorldController.instance.objectMaster.type[objList[objList[nextObj].link].item_id] == ObjectInteraction.NPC_TYPE)
@@ -745,6 +746,10 @@ public class ObjectLoader : Loader {
 								{
 										SetContainerInUse(game, LevelInfo, objList, objList[objList[nextObj].link].index);
 								}
+							if (objList[nextObj].link!=0)
+							{//Make sure the object to be spawned is linked
+									objList[objList[nextObj].link].InUseFlag=1;
+							}
 						}
 
 						nextObj=objList[nextObj].next;

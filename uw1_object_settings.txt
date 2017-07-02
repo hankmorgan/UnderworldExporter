@@ -272,7 +272,7 @@
 271	0	0	0	21	a_lock	271	271	1	1	0	1
 272	0	0	0	16	a_picture_of_Tom	272	272	1	1	0	1
 273	0	0	0	16	a_crystal_splinter	273	273	1	1	0	1
-274	0	0	0	16	an_orb_rock	274	274	1	0	0	1
+274	0	0	0	110	an_orb_rock	274	274	1	1	0	1
 275	0	0	0	16	the_Gem_Cutter_of_Coulnes	275	275	1	1	0	1
 276	0	0	0	16	a_book	276	276	1	1	0	1
 277	0	0	0	16	a_block_of_burning_incense_blocks_of_burning_incense	277	277	1	1	0	1

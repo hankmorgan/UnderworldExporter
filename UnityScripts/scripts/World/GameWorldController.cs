@@ -664,7 +664,7 @@ public class GameWorldController : UWEBase {
 				{//Create shrine lava.
 					GameObject shrineLava = new GameObject();
 					shrineLava.transform.parent=SceneryModel.transform;
-					shrineLava.transform.localPosition=new Vector3(39f,0.402f,39.61f);
+								shrineLava.transform.localPosition=new Vector3(-39f,39.61f,0.402f);
 					shrineLava.transform.localScale=new Vector3(6f,0.2f,4.8f);
 					shrineLava.AddComponent<ShrineLava>();
 					shrineLava.AddComponent<BoxCollider>();
@@ -682,8 +682,8 @@ public class GameWorldController : UWEBase {
 		public void SwitchLevel(int newLevelNo, int newTileX, int newTileY)
 		{
 				SwitchLevel(newLevelNo);
-				float targetX=(float)newTileX*1.2f + 0.6f;
-				float targetY= (float)newTileY*1.2f + 0.6f;
+				float targetX=(float)newTileX*1.2f + 0.3f;
+				float targetY= (float)newTileY*1.2f + 0.3f;
 				float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
 				GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.1f,targetY);
 		}
