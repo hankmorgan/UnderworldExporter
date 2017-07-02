@@ -4,7 +4,49 @@ using System.Collections;
 public class Food : object_base {
 	/*Food items*/
 
-	public int Nutrition; //The nutritional value of this food.
+	//public int Nutrition; //The nutritional value of this food.
+
+		/// <summary>
+		/// Nutrition provided by this item of food
+		/// </summary>
+		public int Nutrition()
+		{
+				switch (_RES)	
+				{
+				case GAME_UW2:
+						{
+							return 16;
+						}
+				default:
+						{//TODO:Identify the proper values to use here (5 is still to be figured out)
+								switch (objInt().item_id)	
+								{
+								case 176://a_piece_of_meat_pieces_of_meat
+										return 16;
+								case 177://a_loaf_of_bread_loaves_of_bread	
+										return 16;
+								case 178://a_piece_of_cheese_pieces_of_cheese	
+										return 5;
+								case 179://an_apple	
+										return 6;
+								case 180://an_ear_of_corn_ears_of_corn	
+										return 5;
+								case 181://a_loaf_of_bread_loaves_of_bread	
+										return 16;
+								case 182://a_fish_fish	
+										return 16;
+								case 183://some_popcorn_bunches_of_popcorn
+										return 5;
+								case 184://a_mushroom	
+										return 5;
+								case 185://a_toadstool	
+										return 5;
+								}
+								break;
+						}
+				}
+			return 16;
+		}
 
 	public override bool use ()
 	{
@@ -30,7 +72,7 @@ public class Food : object_base {
 	public override bool Eat()
 	{//TODO:Implement drag and drop feeding.
 
-		if (Nutrition+GameWorldController.instance.playerUW.FoodLevel>=255)
+		if (Nutrition()+GameWorldController.instance.playerUW.FoodLevel>=255)
 		{
 			GameWorldController.instance.playerUW.FoodLevel=255;
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,126));
@@ -38,7 +80,7 @@ public class Food : object_base {
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.FoodLevel = Nutrition+GameWorldController.instance.playerUW.FoodLevel;
+			GameWorldController.instance.playerUW.FoodLevel = Nutrition()+GameWorldController.instance.playerUW.FoodLevel;
 			switch (objInt().item_id)
 				{
 				case 192://plants

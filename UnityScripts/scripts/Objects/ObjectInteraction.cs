@@ -134,6 +134,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_BLACKROCK_GEM=108;
 		public const int A_NULL_TRAP=109;
 		public const int AN_ORB_ROCK=110;
+		public const int AN_EXPLODING_BOOK=111;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1875,8 +1876,11 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<RuneBag>();
 						break;
 				case FOOD:
-						myObj.AddComponent<Food>();
-						break;
+						{
+							myObj.AddComponent<Food>();
+							break;								
+						}
+
 				case MAP:
 						myObj.AddComponent<Map>();
 						break;
@@ -2017,6 +2021,9 @@ public class ObjectInteraction : UWEBase {
 				case AN_ORB_ROCK:
 						myObj.layer=LayerMask.NameToLayer("MagicProjectile");
 						myObj.AddComponent<OrbRock>();
+						break;
+				case AN_EXPLODING_BOOK:
+						myObj.AddComponent<ReadableTrap>();
 						break;
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();

@@ -81,10 +81,12 @@ public override bool use ()
 	/// <returns>The fish.</returns>
 	GameObject CreateFish()
 	{
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(182,0,0,0);
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(182,40,0,1);
 		GameObject fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 		GameWorldController.MoveToInventory(fishy);
-
+		newobjt.index= GameWorldController.instance.playerUW.playerInventory.ItemCounter++;
+		fishy.name= ObjectLoader.UniqueObjectName(newobjt);
+				//fishy.GetComponent<Food>().Nutrition=5;
 		return fishy;// ObjectInteraction.CreateNewObject(182).gameObject;
 	}
 

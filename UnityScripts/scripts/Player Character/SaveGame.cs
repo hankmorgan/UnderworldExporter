@@ -162,7 +162,9 @@ public class SaveGame : Loader {
 										case 0x4A:
 												SetActiveRuneSlots(2, (int)buffer[i]);
 												break;
-
+										case 0x4B://No of items. used here just to initialise a value.
+												GameWorldController.instance.playerUW.playerInventory.ItemCounter= (int)buffer[i]>>2;
+												break;
 										case 0x4D : ///   weight in 0.1 stones
 												//Or STR * 2; safe to ignore?
 												//testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;

@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerInventory : UWEBase {
 
-
-
+	public int ItemCounter=0;
 	//public int game;
 	//TODO:make object in hand private so I can update code usages to use api instead.
 	public string ObjectInHand; //What is the current active object held by the player
