@@ -318,8 +318,10 @@ public class TileMapRenderer : Loader{
 
 				tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"rear_over_" + ObjectLoader.UniqueObjectName(currDoor));
 				tile.transform.Rotate(new Vector3(0f,0f,-180f));//TODO:FIx for headings.
-
-
+				if ((_RES==GAME_UW1) && (currDoor.tileX==12) && (currDoor.tileY==51) && (level.thisLevelNo==3))
+				{//Special case for possible map bug
+						tile.layer= LayerMask.NameToLayer ("UWObjects");	
+				}
 				//y0 = +doorthickness /2f;
 				//y1 = -doorthickness /2f;
 				x0 = -doorframewidth /2f;
@@ -491,10 +493,11 @@ public class TileMapRenderer : Loader{
 				UVs[3]= new Vector2(uvXPos3, dist);
 
 
-				RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"front_over_" + ObjectLoader.UniqueObjectName(currDoor));
-
-
-
+				GameObject tile = RenderCuboid(Parent,overHead,UVs,position,MatsToUse,1,"front_over_" + ObjectLoader.UniqueObjectName(currDoor));
+				if ((_RES==GAME_UW1) && (currDoor.tileX==12) && (currDoor.tileY==51) && (level.thisLevelNo==3))
+				{//Special case for possible map bug
+					tile.layer= LayerMask.NameToLayer ("UWObjects");	
+				}
 
 				//y0 = +doorthickness /2f;
 				//y1 = -doorthickness /2f;
@@ -572,7 +575,11 @@ public class TileMapRenderer : Loader{
 						filler[v++] = new Vector3(0.04f,+doorwidth/2, doorheight);
 						filler[v++] = new Vector3(0.04f,-doorwidth/2,  doorheight);
 						filler[v++] = new Vector3(0.00f,-doorwidth/2,  doorheight);
-						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						GameObject fillerpiece=RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						if ((_RES==GAME_UW1) && (currDoor.tileX==12) && (currDoor.tileY==51) && (level.thisLevelNo==3))
+						{//Special case for possible map bug
+								fillerpiece.layer= LayerMask.NameToLayer ("UWObjects");	
+						}
 						v=0;
 						//side
 						filler[v++] = new Vector3(0.04f,+doorwidth/2,  0f);
@@ -599,7 +606,11 @@ public class TileMapRenderer : Loader{
 						filler[v++] = new Vector3(+doorwidth/2, -0.04f, doorheight);
 						filler[v++] = new Vector3(-doorwidth/2, -0.04f, doorheight);
 						filler[v++] = new Vector3(-doorwidth/2,  0.00f, doorheight);
-						RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						GameObject fillerPiece=RenderCuboid(Parent,filler,UVs,position,MatsToUse,1,"over_filler_" + ObjectLoader.UniqueObjectName(currDoor));
+						if ((_RES==GAME_UW1) && (currDoor.tileX==12) && (currDoor.tileY==51) && (level.thisLevelNo==3))
+						{//Special case for possible map bug
+								fillerPiece.layer= LayerMask.NameToLayer ("UWObjects");	
+						}
 						v=0;
 						//side
 						filler[v++] = new Vector3(+doorwidth/2, 0.00f, doorheight);

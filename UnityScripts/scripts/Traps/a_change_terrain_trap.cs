@@ -54,28 +54,11 @@ The path to the sword hilt on Level3
 						int newTileHeight = objInt().zpos>>2;
 						int newWallTexture = tileToChange.wallTexture;
 						if (_RES==GAME_UW2)
-						{//UW2 has some slightly different behaviour to support toggling of traps
-						/*if ((tileToChange.tileType==TileMap.TILE_SOLID) && (tileTypeToChangeTo== TileMap.TILE_SOLID))
-							{//If the tile is already a solid then change it to an open tile at that height.
-								//Debug.Log(this.name + " Terrain change height to be checked " + objInt().zpos);
-								//if ((objInt().flags & 0x1) == 1)//???
-								//{
-								tileTypeToChangeTo=TileMap.TILE_OPEN;	
-								//}								
-							}
-						else if ((tileToChange.tileType==TileMap.TILE_OPEN) && (tileTypeToChangeTo== TileMap.TILE_OPEN))
-							{
-								tileTypeToChangeTo=TileMap.TILE_SOLID;	
-							}
-							*/
-							//Also the owner can be used to change wall texture. This means changing it's neighours.
-
+						{//Also the owner can be used to change wall texture. This means changing it's neighours.
 							if (objInt().owner<63)
 							{
 								newWallTexture=objInt().owner;
 							}
-
-
 						}												
 
 						//tileToChange.tileType=tileTypeToChangeTo;
@@ -89,6 +72,44 @@ The path to the sword hilt on Level3
 						tileToChange.TileNeedsUpdate();
 						TileMapRenderer.UpdateTile(tileXToChange,tileYToChange, tileTypeToChangeTo, newTileHeight,tileToChange.floorTexture, newWallTexture ,false );
 						Destroy (tile);
+
+						if (tileToChange.isDoor)
+						{//The door may be rendered
+							GameObject door = GameWorldController.findDoor(tileToChange.tileX,tileToChange.tileY);
+							if (door!=null)
+							{
+								string doorname = ObjectLoader.UniqueObjectName(door.GetComponent<ObjectInteraction>().objectloaderinfo);
+								DestroyDoorPortion("front_leftside_" + doorname);								
+								DestroyDoorPortion("front_over_" + doorname);
+								DestroyDoorPortion("front_rightside_" + doorname);
+								DestroyDoorPortion("side1_filler_" + doorname);
+								DestroyDoorPortion("over_filler_" + doorname);
+								DestroyDoorPortion("side2_filler_" + doorname);
+								DestroyDoorPortion("front_filler_" + doorname);
+								DestroyDoorPortion("rear_leftside_" + doorname);
+								DestroyDoorPortion("rear_over_" + doorname);
+								DestroyDoorPortion("rear_rightside_" + doorname);	
+								DestroyDoorPortion(doorname);
+								TileMapRenderer.RenderDoorwayFront(
+								GameWorldController.instance.LevelModel,
+													GameWorldController.instance.currentTileMap(),
+													GameWorldController.instance.CurrentObjectList(),
+													door.GetComponent<ObjectInteraction>().objectloaderinfo
+													);
+								TileMapRenderer.RenderDoorwayRear(
+												GameWorldController.instance.LevelModel,
+												GameWorldController.instance.currentTileMap(),
+												GameWorldController.instance.CurrentObjectList(),
+												door.GetComponent<ObjectInteraction>().objectloaderinfo
+													);
+								Vector3 objPos = door.transform.position;
+								ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+																door.GetComponent<ObjectInteraction>().objectloaderinfo,
+																GameWorldController.instance.LevelModel,objPos
+														);
+
+							}
+						}
 					}
 				else
 				{
@@ -133,11 +154,21 @@ The path to the sword hilt on Level3
 
 				}
 
-
 	}
 
 	public override void PostActivate ()
 	{
 	//	base.PostActivate ();
+	}
+
+
+
+	public void DestroyDoorPortion(string portionName)
+	{
+		GameObject obj = GameObject.Find (portionName);
+		if (obj!=null)
+		{
+			Destroy(obj);
+		}
 	}
 }

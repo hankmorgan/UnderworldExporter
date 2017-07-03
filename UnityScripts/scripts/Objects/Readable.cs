@@ -69,8 +69,11 @@ public class Readable : object_base {
 	bool MixRotwormStew()
 	{
 		bool hasPort=false;
+				ObjectInteraction port=null;
 		bool hasGreenMushroom=false;
+				ObjectInteraction mushroom=null;
 		bool hasCorpse=false;
+				ObjectInteraction corpse=null;
 		bool hasExtraItems=false;
 		//Find a bowl in the players inventory.
 		//Check if it only contains port, a rotworm corpse and a greenmushroom.
@@ -102,10 +105,13 @@ public class Readable : object_base {
 																switch (foundItemObj.item_id)		
 																{
 																case 184://Mushroom
+																		mushroom=foundItemObj;
 																		hasGreenMushroom=true;break;
 																case 190://Port
+																		port=foundItemObj;
 																		hasPort=true;break;
 																case 217://Rotworm Corpse
+																		corpse=foundItemObj;
 																		hasCorpse=true;break;
 																default:
 																		hasExtraItems=true;break;																			
@@ -121,6 +127,11 @@ public class Readable : object_base {
 										{//Mix port
 												//000~001~149~You mix the ingredients into a stew. \n
 											UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,149));
+												//Consume the items
+												port.consumeObject();
+												corpse.consumeObject();
+												mushroom.consumeObject();
+
 												ObjectInteraction bowlObjectInt =bowl.GetComponent<ObjectInteraction>();
 												bowlObjectInt.ChangeType(283,16);
 												Destroy(bowlContainer);

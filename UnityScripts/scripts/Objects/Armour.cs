@@ -172,8 +172,8 @@ public class Armour : Equipment {
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
 			UpdateQuality();
-			if (objInt().isEnchanted()==true)
-			{
+			if ((objInt().isEnchanted()==true) || ((_RES==GAME_UW1) && (objInt().item_id==47)))
+			{//Is magic or the dragonskin boots
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)
 				{
