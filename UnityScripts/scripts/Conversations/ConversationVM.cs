@@ -3489,26 +3489,11 @@ return value: none
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
 
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,0);
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1);
+		newobjt.is_quant=1;
 		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 		GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
 		npc.GetComponent<Container>().AddItemToContainer(myObj.name);
-		//Container npccont = npc.GetComponent<Container>();
-		//if(npccont!=null)
-		//{
-			//npccont.AddItemToContainer (myObj.name);
-			/*for (int i =0; i<4;i++)
-			{
-				if (UWHUD.instance.npcTrade[i].objectInSlot=="")
-				{
-					//NPCTradeItems[i]=myObj.name;
-					TradeSlot ts = UWHUD.instance.npcTrade[i];
-					ts.objectInSlot=myObj.name;
-					ts.SlotImage.texture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-					return i;
-				}
-			}*/
-		//}
 		return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 	}
 

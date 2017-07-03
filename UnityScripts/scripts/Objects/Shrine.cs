@@ -104,6 +104,18 @@ public class Shrine : object_base {
 		/// <param name="Mantra">Mantra.</param>
 	private void SubmitMantra(string Mantra)
 	{
+
+				if((Mantra==Mantra_FANLO))
+				{
+						GiveKeyOfTruth();
+						return;
+				}
+				if((Mantra==Mantra_INSAHN) )
+				{
+						TrackCupOfWonder();
+						return;
+				}
+
 		int SkillPointsToAdd=2;
 		Skills playerSkills= GameWorldController.instance.playerUW.PlayerSkills;
 		if (GameWorldController.instance.playerUW.TrainingPoints==0)
