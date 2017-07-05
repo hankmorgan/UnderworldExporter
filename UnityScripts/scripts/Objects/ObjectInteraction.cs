@@ -1794,7 +1794,7 @@ public class ObjectInteraction : UWEBase {
 		{//TODO: Make sure all object creation uses this function!
 
 				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
-				bool CreateSprite=true;
+				bool CreateSprite=true;//TODO:restore the following when going live. && (currObj.invis!=1);
 				bool skipRotate=false;
 				bool RemoveBillboard=false;
 				bool AddAnimation=false;

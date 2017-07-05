@@ -27,6 +27,9 @@ public class ButtonHandler : object_base {
 	// Use this for initialization
 	protected override void Start () {
 		base.Start();
+		BoxCollider bx = this.GetComponent<BoxCollider>();
+		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
+
 		objInt().flags=objInt().flags;
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//

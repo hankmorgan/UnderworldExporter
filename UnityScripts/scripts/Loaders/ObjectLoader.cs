@@ -1204,6 +1204,27 @@ public class ObjectLoader : Loader {
 								if (objList[index].y == 7){offY = offY - 2f;}
 							break;
 						}
+				case ObjectInteraction.A_MOVE_TRIGGER:
+						{
+							if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
+							{
+								int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
+								offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+							}
+							break;
+						}
+				case ObjectInteraction.BUTTON:
+				case ObjectInteraction.SIGN:
+						{//TODO: make this based on heading so as to support angled walls
+							if (objList[index].x == 0){offX = offX + 0.25f;}
+							if (objList[index].x == 7){offX = offX - 0.25f;}
+							if (objList[index].y == 0){offY = offY + 0.25f;}
+							if (objList[index].y == 7){offY = offY - 0.25f;}
+							break;
+						}
+
+
+
 				default:
 						{
 								if (WallAdjust == 1)

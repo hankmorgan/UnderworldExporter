@@ -28,34 +28,36 @@ public class DoorControl : object_base {
 		///A trigger to activate when opened.
 	//public string UseLink;
 
-		//Visible faces indices
-		const int vTOP =0;
-		const int vEAST =1;
-		const int vBOTTOM= 2;
-		const int vWEST= 3;
-		const int vNORTH= 4;
-		const int vSOUTH= 5;
+	//Visible faces indices
+	const int vTOP =0;
+	const int vEAST =1;
+	const int vBOTTOM= 2;
+	const int vWEST= 3;
+	const int vNORTH= 4;
+	const int vSOUTH= 5;
 
-		//Door headings
-		const int NORTH=180;
-		const int SOUTH=0;
-		const int EAST=270;
-		const int WEST=90;
+	//Door headings
+	const int NORTH=180;
+	const int SOUTH=0;
+	const int EAST=270;
+	const int WEST=90;
 
+	const int OpenRotation = -90;
+	const int CloseRotation = -OpenRotation;
 
 	protected override void Start ()
 	{	
-				if (state())
-				{//Make sure it is open
-					if (isPortcullis()==false)
-					{
-						StartCoroutine(RotateDoor (this.transform,Vector3.up * +90,0.1f));
-					}
-					else
-					{
-						//StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
-					}	
-				}
+		if (state())
+		{//Make sure it is open
+			if (isPortcullis()==false)
+			{
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * OpenRotation,0.1f));
+			}
+			else
+			{
+				//StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
+			}	
+		}
 	}
 
 
@@ -340,7 +342,7 @@ public class DoorControl : object_base {
 			{
 				if (isPortcullis()==false)
 				{
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,1.0f));
 				}
 				else
 				{
@@ -414,7 +416,7 @@ public class DoorControl : object_base {
 			{
 				if (isPortcullis()==false)
 				{
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * CloseRotation,1.0f));
 				}
 				else
 				{
@@ -427,6 +429,21 @@ public class DoorControl : object_base {
 		}
 	}
 
+
+		/// <summary>
+		/// Returns the multiplier for the door rotation
+		/// </summary>
+	int doordir()
+	{
+		if (objInt().doordir==0)
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
 
 		/// <summary>
 		/// Locks the door.

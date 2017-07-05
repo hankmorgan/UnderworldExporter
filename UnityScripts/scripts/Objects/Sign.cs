@@ -6,6 +6,9 @@ public class Sign : Readable {
 	protected override void Start ()
 	{
 		base.Start ();
+		BoxCollider bx = this.GetComponent<BoxCollider>();
+		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
+		bx.center= new Vector3(0.0f,0.15f,0.0f);
 		//setSprite(this.GetComponentInChildren<SpriteRenderer>(),_RES + "/Sprites/tmobj/tmobj_" + (20 + (objInt().flags & 0x07)));
 		setSpriteTMOBJ(this.GetComponentInChildren<SpriteRenderer>(),(20 + (objInt().flags & 0x07)));
 	}

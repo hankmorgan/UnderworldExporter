@@ -69,7 +69,14 @@ public class MagicProjectile : MonoBehaviour {
 					Impact.SpawnHitImpact(this.transform.name + "_impact",this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);	
 				
 				}
-			}			
+			}	
+
+			ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
+			if (objIntThis!=null)
+			{
+				objIntThis.objectloaderinfo.InUseFlag=0;//Free up object slot
+			}
+		
 			DestroyObject(this.gameObject);
 		}
 	}
