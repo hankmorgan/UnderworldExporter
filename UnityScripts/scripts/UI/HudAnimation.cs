@@ -6,10 +6,10 @@ public class HudAnimation : GuiBase {
 	//Base Class For playing cutscenes and other animations on the hud.
 
 	//public UITexture TargetControl;
-	public RawImage TargetControl;
-	public string SetAnimation;
+	//public RawImage TargetControl;
+//	public string SetAnimationFile;
 	//protected SpriteRenderer sprt;
-	public string PreviousAnimation;
+//	public string PreviousAnimationFile;
 	//private string PreviousSprite="";
 	//private Animator anim;
 	public CutsAnimator anim;
@@ -20,24 +20,25 @@ public class HudAnimation : GuiBase {
 		{
 		base.Start();
 		anim.SetAnimation="Anim_Base";
-		PreviousAnimation=SetAnimation;
+		anim.PrevAnimation="Anim_Base";
+		//PreviousAnimationFile=SetAnimationFile;
 		NormalCullingMask=-33;  //= playerUW.playerCam.cullingMask;
 	}
 	
 	// Update is called once per frame
-	protected virtual void Update () {
-		if (SetAnimation !=PreviousAnimation)
-		{
-			anim.SetAnimation=SetAnimation;
-			PreviousAnimation=SetAnimation;
-		}
-	}
+	//protected virtual void Update () {
+	//	if (SetAnimationFile !=PreviousAnimationFile)
+	//	{
+	//		anim.SetAnimation=SetAnimationFile;
+	//		PreviousAnimationFile=SetAnimationFile;
+	//	}
+	//}
 
 
-	void PlayAnimFile(string animName)
-	{
+	//void PlayAnimFile(string animName)
+	//{
 			
-	}
+	//}
 
 
 	/*Have to declare these in derived classes due to unity editor bug*/

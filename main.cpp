@@ -1121,9 +1121,9 @@ int main()
 			case CUTSCENE_EXTRACT_MODE:
 				switch (game)
 					{
-					case UW1:
+					case UW1://TODO: remove this hardcoding of cutscene selection.
 						//for (int i = 17; i < 47; i++)
-						for (int i = 39; i < 40; i++)
+						for (int i = 38; i < 39; i++)
 							{
 							char inFile[255];
 							sprintf(inFile, "%s\\%s",path_uw1, uw1_cuts_file[i] ,1);

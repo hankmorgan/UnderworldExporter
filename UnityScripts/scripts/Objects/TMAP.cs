@@ -36,9 +36,10 @@ public class TMAP : object_base {
 	public override bool LookAt()
 	{
 		UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(TextureIndex));
-		if (TextureIndex==142)
+		if ((TextureIndex==142) && ((_RES==GAME_UW1) || (_RES==GAME_UWDEMO)))
 		{//This is a window into the abyss.
-			UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
+			UWHUD.instance.CutScenesSmall.anim.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
+			UWHUD.instance.CutScenesSmall.anim.looping=true;
 		}
 		if (objInt().link != 0)
 		{

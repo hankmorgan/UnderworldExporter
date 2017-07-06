@@ -13,8 +13,11 @@ public class CutsAnimator : GuiBase {
 		public string PrevAnimation="";
 		bool mode;//True if using cs file
 		public bool looping;
-		BytLoader bty;
+		//BytLoader bty;
 		CutsLoader cuts;
+		public Material UI_UNLIT;//Special material for transparency issues.
+
+		//public Texture2D test;
 
 	public override void Start ()
 	{
@@ -28,8 +31,8 @@ public class CutsAnimator : GuiBase {
 		{
 			if (PrevAnimation!=SetAnimation)	
 			{
-				PlayAnimFile(SetAnimation);
 				PrevAnimation=SetAnimation;
+				PlayAnimFile(SetAnimation);				
 			}
 		}
 
@@ -74,6 +77,7 @@ public class CutsAnimator : GuiBase {
 				switch (SetAnimation.ToLower())	
 				{
 				case "death_with_sapling":
+				case "cs402.n01":
 						{
 							if (GameWorldController.instance.getMus()!=null)
 							{
@@ -96,11 +100,17 @@ public class CutsAnimator : GuiBase {
 						}
 
 				case "death":
+				case "cs403.n01":
 					//PlayAnimFile("death_final");
-					SetAnimation="death_final";
+					SetAnimation="cs403.n02";
 					break;
 				case "death_final":
+				case "cs403.n02":
 						Debug.Log("return to main menu..");
+						SetAnimation="Anim_Base";
+						break;
+				default:
+						SetAnimation="Anim_Base";
 						break;
 				}
 		}
@@ -109,6 +119,7 @@ public class CutsAnimator : GuiBase {
 		{
 			Reset=true;
 			frameIndex=0;
+			TargetControl.material=null;
 			StopAllCoroutines();
 			switch (SetAnimation.ToLower())
 			{	
@@ -143,24 +154,29 @@ public class CutsAnimator : GuiBase {
 				TargetControl.texture = cuts.ImageCache[0];
 				break;
 			case "death_with_sapling":
+						TargetControl.material=UI_UNLIT;
 					cuts = new CutsLoader("cs402.n01");
 						mode=true;Reset=false;
 					TargetControl.texture = cuts.ImageCache[0];
 						StartCoroutine (cutscenerunner());		
 					break;
 			case "death":
+						TargetControl.material=UI_UNLIT;
 					cuts = new CutsLoader("cs403.n01");
 						mode=true;Reset=false;
 					TargetControl.texture = cuts.ImageCache[0];
 						StartCoroutine (cutscenerunner());		
 					break;
 			case "death_final":
+						TargetControl.material=UI_UNLIT;
 					cuts = new CutsLoader("cs403.n02");
 					TargetControl.texture = cuts.ImageCache[0];
+						looping=true;
 						mode=true;Reset=false;
 						StartCoroutine (cutscenerunner());		
 					break;
 			case "ChasmMap":
+						TargetControl.material=UI_UNLIT;
 				cuts = new CutsLoader("cs410.n01");
 				TargetControl.texture = cuts.ImageCache[0];
 				break;	
@@ -176,10 +192,12 @@ public class CutsAnimator : GuiBase {
 				{
 					cuts = new CutsLoader("cs400.n01");
 					int index= int.Parse(SetAnimation.Substring(SetAnimation.Length-1,1));
-					TargetControl.texture = cuts.ImageCache[index];
+					TargetControl.texture = cuts.ImageCache[index];	
+					TargetControl.material=UI_UNLIT;					
 				}
 				else if ((SetAnimation.Substring(0,5) == "Grave"))
 				{//Graves
+								TargetControl.material=UI_UNLIT;
 						cuts = new CutsLoader("cs401.n01");
 						//TargetControl.texture = cuts.ImageCache[0];
 						//break;	
@@ -188,7 +206,7 @@ public class CutsAnimator : GuiBase {
 					if (GraveID.Success)
 					{
 						int value = int.Parse(GraveID.Groups[0].Value);
-						TargetControl.texture = cuts.ImageCache[value];	
+						TargetControl.texture = cuts.ImageCache[value];
 					}
 				}
 				else

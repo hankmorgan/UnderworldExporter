@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class CutsceneAnimation : HudAnimation {
-		public string CurrentSpriteName;
-		Sprite CurrentSpriteLoaded;
-		public string currentCutsFile;
-		public string previousCutsFile;
-		public Sprite filler;
+		//public string CurrentSpriteName;
+		//Sprite CurrentSpriteLoaded;
+		//public string currentCutsFile;
+		//public string previousCutsFile;
+		//public Sprite filler;
 
 	/*Gui element for the small window animations*/
 
@@ -14,26 +14,27 @@ public class CutsceneAnimation : HudAnimation {
 
 //	public Camera maincam;
 
-	public void PreAnimPlay()
-	{//Called by events in certain animations when starting playing
-		GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
-		return;
-	} 
+	//public void PreAnimPlay()
+	//{//Called by events in certain animations when starting playing
+	//	GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+	//	return;
+	//} 
 	
+		/*
 	public void PostAnimPlay()
 	{//Called by events in certain animations when finished playing
 
-		switch (SetAnimation)
+		switch (SetAnimationFile)
 		{
 		case "FadeToBlackSleep":
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-			SetAnimation= "Anim_Base";//Clears out the animation.
+			SetAnimationFile = "Anim_Base";//Clears out the animation.
 			Bedroll.WakeUp (GameWorldController.instance.playerUW);
 			break;
 		case "ChasmMap":
 			//maincam.enabled=true;
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-			SetAnimation= "Anim_Base";//Clears out the animation.
+			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_With_Sapling"://Resurrection
 		//	MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
@@ -47,7 +48,7 @@ public class CutsceneAnimation : HudAnimation {
 			}
 			//maincam.enabled=true;
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-			SetAnimation= "Anim_Base";//Clears out the animation.
+			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			
 			
 			if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
@@ -58,15 +59,16 @@ public class CutsceneAnimation : HudAnimation {
 			break;
 
 		case "Death"://Forever
-			SetAnimation= "Death_Final";
+			SetAnimationFile= "Death_Final";
 			break;
 		case "Death_Final"://Forever
 			break;
 		default:
 			//maincam.enabled=true;
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-			SetAnimation= "Anim_Base";//Clears out the animation.
+			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			break;
 		}
 	}
+	*/
 }

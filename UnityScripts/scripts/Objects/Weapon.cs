@@ -24,6 +24,10 @@ public class Weapon : Equipment {
 			InteractionModeControl.UpdateNow=true;
 						return true;
 		}
+		else
+		{
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+		}
 		return false;
 	}
 

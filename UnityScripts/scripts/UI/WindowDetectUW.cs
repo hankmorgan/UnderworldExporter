@@ -201,6 +201,11 @@ public class WindowDetectUW : WindowDetect {
 				{
 						return;
 				}
+				//Cancel out of a small cutscene
+				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
+				{
+					UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
+				}
 				switch (UWCharacter.InteractionMode)
 				{
 				case UWCharacter.InteractionModePickup:

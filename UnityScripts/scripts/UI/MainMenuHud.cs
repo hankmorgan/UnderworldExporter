@@ -91,7 +91,7 @@ public class MainMenuHud : GuiBase {
 							cursorSizeY);
 					//Play the splash screens.
 					CharGen.SetActive(false);
-					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+					UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 					UWHUD.instance.CutScenesFull.End();
 					Cutscene_Splash ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
 					UWHUD.instance.CutScenesFull.cs=ci;

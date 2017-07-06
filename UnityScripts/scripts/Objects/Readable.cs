@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Readable : object_base {
-
 	public override bool use ()
 	{
 	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
@@ -39,7 +38,8 @@ public class Readable : object_base {
 				{
 				if ((UWEBase._RES== UWEBase.GAME_UW1) && (objInt().link==520))
 				{//Special case. Chasm of fire map.
-					UWHUD.instance.CutScenesSmall.SetAnimation="ChasmMap";
+					UWHUD.instance.CutScenesSmall.anim.SetAnimation ="cs410.n01";
+					UWHUD.instance.CutScenesSmall.anim.looping=true;
 				}
 				else
 				{

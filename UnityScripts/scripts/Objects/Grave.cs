@@ -21,7 +21,7 @@ public class Grave : object_base {
 			if (timeOut>=5f)
 			{
 				LookingAt=false;
-				UWHUD.instance.CutScenesSmall.SetAnimation="Anim_Base";
+				UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";
 							//	UWHUD.instance.CutScenesSmall.TargetControl.texture=UWHUD.instance.CutScenesSmall.anim_base
 			}
 		}
@@ -40,8 +40,8 @@ public class Grave : object_base {
 
 		//GameWorldController.instance.cutsLoader= new CutsLoader("cs401.n01");
 		//UWHUD.instance.CutScenesSmall.TargetControl.texture=GameWorldController.instance.cutsLoader.LoadImageAt(GraveID());
-		UWHUD.instance.CutScenesSmall.SetAnimation= "Grave_" + GraveID();
-		LookingAt=true;timeOut=0f;
+		UWHUD.instance.CutScenesSmall.anim.SetAnimation= "Grave_" + GraveID();
+		//LookingAt=true;timeOut=0f;
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().link-512));
 		return true;
 	}

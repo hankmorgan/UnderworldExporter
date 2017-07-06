@@ -143,18 +143,20 @@ public class UWCharacter : Character {
 
 	void PlayerDeath()
 	{//CHeck if the player has planted the seed and if so send them to that position.
-		//mus.Death=true;
+	//mus.Death=true;
+				//TODO:Turn of the player camera
+		//GameWorldController.instance.playerUW.playerCam.cullingMask=31;
 		GameWorldController.instance.getMus().Death=true;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
 			if (ResurrectLevel!=0)
 			{
-				UWHUD.instance.CutScenesSmall.SetAnimation="Death_With_Sapling";
+				UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs402.n01";//="Death_With_Sapling";
 				//this.transform.position=ResurrectPosition;
 			}
 			else
 			{
-				UWHUD.instance.CutScenesSmall.SetAnimation="Death";
+				UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs403.n01";
 			}
 		}
 
@@ -551,7 +553,7 @@ public class UWCharacter : Character {
 								//GetMessageLog ().text =
 								if ((textureIndex==142) && (_RES!=GAME_UW2))
 								{//This is a window into the abyss.
-									UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
+									UWHUD.instance.CutScenesSmall.anim.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 								}
 								UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
 							}

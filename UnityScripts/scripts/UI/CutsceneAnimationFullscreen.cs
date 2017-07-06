@@ -14,6 +14,10 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	private float CutsceneTime;
 	public Sprite filler;
 
+		public string SetAnimationFile;
+		public string PreviousAnimationFile;
+
+
 		public string currentCutsFile;
 		public string previousCutsFile;
 
@@ -64,9 +68,9 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			{
 				anim.looping=false;
 			}
-			SetAnimation= cs.getImageFrame(i);	
+			SetAnimationFile= cs.getImageFrame(i);	
 		}
-		SetAnimation= "Anim_Base";//End of anim.
+		SetAnimationFile= "Anim_Base";//End of anim.
 		PlayingSequence=false;
 		PostAnimPlay();
 		End();
@@ -79,7 +83,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		case -1://Loop forever until interupted. Assumes anim is already looping.
 			break;
 		case 0://Loop has completed. Switch to black anim
-			SetAnimation= cs.getFillerAnim();
+			SetAnimationFile= cs.getFillerAnim();
 			break;
 		default:
 			currentFrameLoops--;  //Assumes animation is already looping.
@@ -152,7 +156,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 			//chains.ActiveControl=0;
 			//UWHUD.instance.RefreshPanels(PANELNAME);
-			SetAnimation= "Anim_Base";//Clears out the animation.
+			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			mlCuts.Set("");
 			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);			
 		}
@@ -162,13 +166,19 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		}
 	}
 
-	protected override void Update()
+	void Update()
 	{
 		//if (SetAnimation!=PreviousAnimation)
 		//{//Load the next cutscene file
 		//	InitCutsFile();
 		//}
-		base.Update();
+		//base.Update();
+					if (SetAnimationFile !=PreviousAnimationFile)
+					{
+						anim.SetAnimation=SetAnimationFile;
+						PreviousAnimationFile=SetAnimationFile;
+					}
+
 		if (PlayingSequence)
 		{
 			CutsceneTime+=Time.deltaTime;
@@ -176,7 +186,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			{
 					if (CutsceneTime>=3.0f)
 					{//Only end a cutscene if it has been running for longer than 3 seconds
-							SetAnimation= "Anim_Base";//End of anim.
+							SetAnimationFile= "Anim_Base";//End of anim.
 							PlayingSequence=false;
 							PostAnimPlay();
 							StopAllCoroutines();	
@@ -191,9 +201,9 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 		void InitCutsFile()
 		{
-			if(SetAnimation!="Anim_Base")
+		if(SetAnimationFile!="Anim_Base")
 			{
-				GameWorldController.instance.cutsLoader= new CutsLoader(SetAnimation.Replace("_","."));
+				GameWorldController.instance.cutsLoader= new CutsLoader(SetAnimationFile.Replace("_","."));
 			}
 		}
 	

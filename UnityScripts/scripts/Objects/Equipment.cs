@@ -44,7 +44,7 @@ public class Equipment : object_base {
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
 				//Do a difficulty check and prompt for approval.
-				UWHUD.instance.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item");
+				UWHUD.instance.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item. Press Y or N followed by enter to proceed");
 				InputField inputctrl =UWHUD.instance.InputControl;
 				inputctrl.gameObject.SetActive(true);
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
@@ -82,7 +82,7 @@ public class Equipment : object_base {
 		{
 			//do the repair 
 			//Play the cutscene.
-			UWHUD.instance.CutScenesSmall.SetAnimation="Anvil";
+			UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs404.n01";
 			//TODO:At the moment it suceeds but in future implement failures and breakages.
 			//Find out what the story with the sword of justice is?
 			//Do the result at the end of the animation.

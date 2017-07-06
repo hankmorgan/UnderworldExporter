@@ -40,6 +40,7 @@ public class CutsLoader : ArtLoader {
 		{
 			switch (File)
 			{
+				//case "cs400.n01"://  Look graphics for volcano
 				case "cs401.n01"://   grave stones
 				case "cs402.n01"://   death skulls w / silver sapling
 				case "cs403.n01"://   death skulls animation

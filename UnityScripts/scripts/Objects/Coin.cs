@@ -5,6 +5,12 @@ using System.Collections;
 /// </summary>
 public class Coin : object_base {
 
+	protected override void Start ()
+	{
+		base.Start ();
+		ChangeCoinType();
+	}
+
 	public override void MergeEvent ()
 	{
 		base.MergeEvent ();

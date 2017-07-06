@@ -36,16 +36,16 @@ public class Bedroll : object_base {
 				if (incense!=null)
 					{
 					UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+					UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 					incense.consumeObject ();
 					switch (GameWorldController.instance.playerUW.quest().getIncenseDream())
 						{
 						case 0:
-						UWHUD.instance.CutScenesFull.SetAnimation="cs013_n01";break;
+							UWHUD.instance.CutScenesFull.SetAnimationFile="cs013_n01";break;
 						case 1:
-						UWHUD.instance.CutScenesFull.SetAnimation="cs014_n01";break;
+							UWHUD.instance.CutScenesFull.SetAnimationFile="cs014_n01";break;
 						case 2:
-						UWHUD.instance.CutScenesFull.SetAnimation="cs015_n01";break;
+							UWHUD.instance.CutScenesFull.SetAnimationFile="cs015_n01";break;
 						}
 					}
 				else
@@ -59,7 +59,7 @@ public class Bedroll : object_base {
 							else
 							{//Regular sleep with a fade to black
 								UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-								UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+								UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 							}	
 						}					
 					}

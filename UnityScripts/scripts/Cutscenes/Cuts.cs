@@ -7,7 +7,7 @@ using System.Collections;
 public class Cuts : GuiBase {
 	
 
-	public static CutsLoader filler;
+	//public static CutsLoader filler;
     ///The times that the frames begin at
 	protected float[] ImageTimes=new float[50]; 
 	///The cut animation that plays at those points.
@@ -167,10 +167,10 @@ public class Cuts : GuiBase {
 	/// </summary>
 	public virtual void Awake()
 	{
-		if (filler==null)
-		{
-			filler=new CutsLoader(getFillerAnim().Replace("_","."));
-		}
+		//if (filler==null)
+		//{
+		//	filler=new CutsLoader(getFillerAnim().Replace("_","."));
+		//}
 		return;	
 	}
 

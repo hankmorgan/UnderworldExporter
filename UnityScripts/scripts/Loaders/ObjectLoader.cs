@@ -1129,126 +1129,129 @@ public class ObjectLoader : Loader {
 								break;
 						}
 				}
-
-				switch (GameWorldController.instance.objectMaster.type[objList[index].item_id])
+				if ((x<64) && (y<64))
 				{
-				case ObjectInteraction.TMAP_CLIP:
-				case ObjectInteraction.TMAP_SOLID:
-						switch (objList[index].heading*45)
+						switch (GameWorldController.instance.objectMaster.type[objList[index].item_id])
 						{
-						case ObjectInteraction.HEADINGWEST:
-						case ObjectInteraction.HEADINGEAST:		
-								offY = (y*BrushY) + 60f;//center in tile
-								/*offX = (x*BrushX) + 0.6f;*/
-								if (objList[index].x == 0)
+						case ObjectInteraction.TMAP_CLIP:
+						case ObjectInteraction.TMAP_SOLID:
+								switch (objList[index].heading*45)
 								{
-										offX +=0.15f;
-								}
-								if (objList[index].x == 7)
-								{
-										offX -=0.15f;
-								}
-								break;
-						case ObjectInteraction.HEADINGNORTH:
-						case ObjectInteraction.HEADINGSOUTH:
-								/*	offY = (y*BrushY) + 0.6f;*/
-								offX = (x*BrushX) +60f;
-								if (objList[index].y == 0)
-								{
-										offY +=0.15f;
-								}
-								if (objList[index].y == 7)
-								{
-										offY -=0.15f;
-								}
-								break;
-						}
-						break;
-
-				case ObjectInteraction.DOOR:
-				case ObjectInteraction.HIDDENDOOR:
-				case ObjectInteraction.PORTCULLIS:
-						{
-							float DOORWIDTH=80f;
-
-							switch (objList[index].heading*45)
-							{//Move the object position so it can located in the right position in the centre of the frame.
-							case ObjectInteraction.HEADINGWEST:
-									{
-									offY = (objList[index].tileY*BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
-									//offY = (((float)(objList[index].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
-									break;
-									}
-							case ObjectInteraction.HEADINGEAST:
-									{
-									offY = (objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;			
-									//offY = ((float)objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
-									break;
-										}
-							case ObjectInteraction.HEADINGNORTH:
-									{
-									offX = (objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));												
-									//offX = ((float)objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
-									break;
-									}
-							case ObjectInteraction.HEADINGSOUTH:
-									{
-									offX = (objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
-									//offX = ((float)objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
-									break;
-									}
-							}	
-								if (objList[index].x == 0){offX = offX + 2f;}
-								if (objList[index].x == 7){offX = offX - 2f;}
-								if (objList[index].y == 0){offY = offY + 2f;}
-								if (objList[index].y == 7){offY = offY - 2f;}
-							break;
-						}
-				case ObjectInteraction.A_MOVE_TRIGGER:
-						{
-							if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
-							{
-								int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
-								offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-							}
-							break;
-						}
-				case ObjectInteraction.BUTTON:
-				case ObjectInteraction.SIGN:
-						{//TODO: make this based on heading so as to support angled walls
-							if (objList[index].x == 0){offX = offX + 0.25f;}
-							if (objList[index].x == 7){offX = offX - 0.25f;}
-							if (objList[index].y == 0){offY = offY + 0.25f;}
-							if (objList[index].y == 7){offY = offY - 0.25f;}
-							break;
-						}
-
-
-
-				default:
-						{
-								if (WallAdjust == 1)
-								{//Adjust the object x,y to avoid clipping into walls.
-										switch (game)
+								case ObjectInteraction.HEADINGWEST:
+								case ObjectInteraction.HEADINGEAST:		
+										offY = (y*BrushY) + 60f;//center in tile
+										/*offX = (x*BrushX) + 0.6f;*/
+										if (objList[index].x == 0)
 										{
-										case Loader.GAME_SHOCK:
-												if (objList[index].x == 0){	offX = offX + 0.02f;	}
-												if (objList[index].x == 128){offX = offX - 0.02f;}
-												if (objList[index].y == 0){offY = offY + 0.02f;}
-												if (objList[index].y == 128){offY = offY - 0.02f;}
-												break;
-										default:
-												if (objList[index].x == 0){offX = offX + 0.02f;}
-												if (objList[index].x == 7){offX = offX - 0.02f;}
-												if (objList[index].y == 0){offY = offY + 0.02f;}
-												if (objList[index].y == 7){offY = offY - 0.02f;}
-												break;
+												offX +=0.15f;
 										}
-								}		
-								break;		
-						}
+										if (objList[index].x == 7)
+										{
+												offX -=0.15f;
+										}
+										break;
+								case ObjectInteraction.HEADINGNORTH:
+								case ObjectInteraction.HEADINGSOUTH:
+										/*	offY = (y*BrushY) + 0.6f;*/
+										offX = (x*BrushX) +60f;
+										if (objList[index].y == 0)
+										{
+												offY +=0.15f;
+										}
+										if (objList[index].y == 7)
+										{
+												offY -=0.15f;
+										}
+										break;
+								}
+								break;
 
+						case ObjectInteraction.DOOR:
+						case ObjectInteraction.HIDDENDOOR:
+						case ObjectInteraction.PORTCULLIS:
+								{
+										float DOORWIDTH=80f;
+
+										switch (objList[index].heading*45)
+										{//Move the object position so it can located in the right position in the centre of the frame.
+										case ObjectInteraction.HEADINGWEST:
+												{
+														offY = (objList[index].tileY*BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
+														//offY = (((float)(objList[index].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
+														break;
+												}
+										case ObjectInteraction.HEADINGEAST:
+												{
+														offY = (objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;			
+														//offY = ((float)objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
+														break;
+												}
+										case ObjectInteraction.HEADINGNORTH:
+												{
+														offX = (objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));												
+														//offX = ((float)objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
+														break;
+												}
+										case ObjectInteraction.HEADINGSOUTH:
+												{
+														offX = (objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
+														//offX = ((float)objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
+														break;
+												}
+										}	
+										if (objList[index].x == 0){offX = offX + 2f;}
+										if (objList[index].x == 7){offX = offX - 2f;}
+										if (objList[index].y == 0){offY = offY + 2f;}
+										if (objList[index].y == 7){offY = offY - 2f;}
+										break;
+								}
+						case ObjectInteraction.A_MOVE_TRIGGER:
+								{
+										if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
+										{
+												int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
+												offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+										}
+										break;
+								}
+						case ObjectInteraction.BUTTON:
+						case ObjectInteraction.SIGN:
+								{//TODO: make this based on heading so as to support angled walls
+										if (objList[index].x == 0){offX = offX + 0.25f;}
+										if (objList[index].x == 7){offX = offX - 0.25f;}
+										if (objList[index].y == 0){offY = offY + 0.25f;}
+										if (objList[index].y == 7){offY = offY - 0.25f;}
+										break;
+								}
+
+
+
+						default:
+								{
+										if (WallAdjust == 1)
+										{//Adjust the object x,y to avoid clipping into walls.
+												switch (game)
+												{
+												case Loader.GAME_SHOCK:
+														if (objList[index].x == 0){	offX = offX + 0.02f;	}
+														if (objList[index].x == 128){offX = offX - 0.02f;}
+														if (objList[index].y == 0){offY = offY + 0.02f;}
+														if (objList[index].y == 128){offY = offY - 0.02f;}
+														break;
+												default:
+														if (objList[index].x == 0){offX = offX + 0.02f;}
+														if (objList[index].x == 7){offX = offX - 0.02f;}
+														if (objList[index].y == 0){offY = offY + 0.02f;}
+														if (objList[index].y == 7){offY = offY - 0.02f;}
+														break;
+												}
+										}		
+										break;		
+								}
+
+						}	
 				}
+
 
 
 

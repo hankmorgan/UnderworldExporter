@@ -19,7 +19,7 @@ public class UWHUD : HUD {
 
 	public static UWHUD instance;
 	public MainMenuHud mainmenu;
-	public CutsceneAnimation CutScenesSmall;
+	public HudAnimation CutScenesSmall;
 
 	public TradeSlot[] playerTrade ;//= new TradeSlot[4];
 	public TradeSlot[] npcTrade ;//= new TradeSlot[4];
