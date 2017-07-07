@@ -277,7 +277,7 @@ public class GameWorldController : UWEBase {
 	/// The weapon animation frames.
 	/// </summary>
 	public WeaponAnimation weaps;
-	public WeaponAnimationPlayer WeaponAnim;
+	//public WeaponAnimationPlayer WeaponAnim;
 	public WeaponsLoader weapongr;
 
 
@@ -681,11 +681,11 @@ public class GameWorldController : UWEBase {
 		/// <param name="newTileY">New tile y.</param>
 		public void SwitchLevel(int newLevelNo, int newTileX, int newTileY)
 		{
-				SwitchLevel(newLevelNo);
-				float targetX=(float)newTileX*1.2f + 0.3f;
-				float targetY= (float)newTileY*1.2f + 0.3f;
-				float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
-				GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.1f,targetY);
+			SwitchLevel(newLevelNo);
+			float targetX=(float)newTileX*1.2f + 0.6f;
+			float targetY= (float)newTileY*1.2f + 0.6f;
+			float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
+			GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.1f,targetY);
 		}
 
 		// This will regenerate the navigation mesh when called

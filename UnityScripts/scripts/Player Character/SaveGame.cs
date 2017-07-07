@@ -209,7 +209,11 @@ public class SaveGame : Loader {
 										case 0x61:
 												{
 													GameWorldController.instance.playerUW.quest().isOrbDestroyed= ((((int)DataLoader.getValAtAddress(buffer,i,8) >> 5) & 0x1) == 1);break;
-												}											
+												}	
+										case 0x63:
+												{
+													GameWorldController.instance.playerUW.quest().isGaramonBuried= ((int)buffer[i]==28);break;
+												}
 										
 										case 0x65: // hand, Gender & body, and class
 												{
@@ -830,6 +834,18 @@ public class SaveGame : Loader {
 								case 0x60  : ///    bits 2..5: play_poison
 										DataLoader.WriteInt8(writer, ( ((NoOfActiveEffects & 0x3) <<6)) | (GameWorldController.instance.playerUW.play_poison<<2) | (GameWorldController.instance.playerUW.quest().IncenseDream & 0x3)   );
 										break;
+								case 0x63: //Is garamon buried
+										{
+											if (GameWorldController.instance.playerUW.quest().isGaramonBuried)
+											{
+												DataLoader.WriteInt8(writer, 28);	
+											}
+											else
+											{//Default value Unknown meaning.
+												DataLoader.WriteInt8(writer, 16);	
+											}
+											break;
+										}
 								case 0x65: // hand, Gender & body, and class
 										{
 												//bit 1 = hand left/right

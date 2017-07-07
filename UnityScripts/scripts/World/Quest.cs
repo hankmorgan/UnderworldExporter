@@ -115,6 +115,11 @@ public class Quest : UWEBase {
 		/// </summary>
 		public bool isOrbDestroyed;
 
+		/// <summary>
+		/// Has Garamon been buried. If so talismans can now be sacrificed.
+		/// </summary>
+		public bool isGaramonBuried;
+
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events.
 	/// </summary>

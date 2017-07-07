@@ -108,18 +108,22 @@ public class Bedroll : object_base {
 	{//Is it time for a garamon dream
 		//if (GameWorldController.instance.playerUW.quest().isTybalDead)
 		//{
-			if (GameWorldController.instance.playerUW.quest().GaramonDream==8)
+			if (GameWorldController.instance.playerUW.quest().GaramonDream==6)
 			{
 				return true;//All done.
 			}
+					if (GameWorldController.instance.playerUW.quest().GaramonDream==7)
+					{
+						return true;//Tybal is dead. Time to play a dream.
+					}	
 		//}
-		else
-		{
-			if (GameWorldController.instance.playerUW.quest().GaramonDream>7)
-			{
-				return false;//All done until tybal is dead.
-			}	
-		}
+		//else
+		//{
+		//	if (GameWorldController.instance.playerUW.quest().GaramonDream>7)
+		//	{
+		//		return false;//All done until tybal is dead.
+		//	}	
+		//}
 
 		if (GameClock.day()>=GameWorldController.instance.playerUW.quest().DayGaramonDream)
 		{
@@ -178,10 +182,11 @@ public class Bedroll : object_base {
 				UWHUD.instance.CutScenesFull.Begin();
 				DaysToWait=1;
 				break;
-			case 7:
-				Cutscene_Dream_8 d8 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_8>();
+			case 7: // Tybal is dead.
+				Cutscene_Dream_7 d8 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_7>();
 				UWHUD.instance.CutScenesFull.cs=d8;
 				UWHUD.instance.CutScenesFull.Begin();
+				GameWorldController.instance.playerUW.quest().GaramonDream=3;//Move back in the sequence
 				DaysToWait=1;
 				break;
 			case 8:

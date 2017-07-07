@@ -51,7 +51,7 @@ public class DoorControl : object_base {
 		{//Make sure it is open
 			if (isPortcullis()==false)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * OpenRotation,0.1f));
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,0.1f));
 			}
 			else
 			{
@@ -789,7 +789,7 @@ public class DoorControl : object_base {
 		/// <param name="textureIndex">Texture index.</param>
 		static void RenderHiddenDoor(DoorControl dc, int textureIndex)
 		{
-				
+
 				//move the secret door to the bottom so I can match the uvs properly. I think
 				dc.transform.position = new Vector3(dc.transform.position.x,0f,dc.transform.position.z);
 
@@ -974,9 +974,18 @@ public class DoorControl : object_base {
 				mf.mesh=mesh;
 				//mc.sharedMesh=mesh;
 
-				MeshCollider nmc =dc.gameObject.AddComponent<MeshCollider>();
-				nmc.isTrigger=false;
-				nmc.sharedMesh=mesh;		
+				//MeshCollider nmc =dc.gameObject.AddComponent<MeshCollider>();
+				//nmc.isTrigger=false;
+				//nmc.sharedMesh=mesh;		
+				float ResolutionZ = 128.0f;
+				float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
+				int newZpos=GameWorldController.instance.currentTileMap().Tiles[dc.objInt().tileX,dc.objInt().tileY].floorHeight * 4;
+				float BrushZ = 15f;
+				float offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+				offZ= offZ/100.0f;
+				BoxCollider bx= dc.GetComponent<BoxCollider>();
+				bx.center= new Vector3(-0.4f,0,0.525f+ offZ);
+				bx.size=new Vector3(0.8f, 0.04f, 1.05f);
 
 		}
 

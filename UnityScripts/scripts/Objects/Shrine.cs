@@ -105,15 +105,15 @@ public class Shrine : object_base {
 	private void SubmitMantra(string Mantra)
 	{
 
-				if((Mantra==Mantra_FANLO))
+				if((Mantra.ToUpper()==Mantra_FANLO))
 				{
-						GiveKeyOfTruth();
-						return;
+					GiveKeyOfTruth();
+					return;
 				}
-				if((Mantra==Mantra_INSAHN) )
+				if((Mantra.ToUpper()==Mantra_INSAHN) )
 				{
-						TrackCupOfWonder();
-						return;
+					TrackCupOfWonder();
+					return;
 				}
 
 		int SkillPointsToAdd=2;
@@ -270,7 +270,79 @@ public class Shrine : object_base {
 
 	public void TrackCupOfWonder()
 	{//TODO:Find out what happens when I have the cup of wonder.
-		UWHUD.instance.MessageScroll.Add ("The cup of wonder is somewhere...");
+				//Cup is in tile 26,43 on level 2 (zero based)
+				string CupIs= StringController.instance.GetString(1,35);
+				string locLevel = "";
+				string locHeading=""; 
+				int TileX= TileMap.visitTileX;
+				int TileY= TileMap.visitTileY;
+
+				float angle = (float)Mathf.Atan2(TileY-43, TileX-26);
+				angle=Mathf.Rad2Deg*angle;
+				int headingIndex = facing(angle);
+				/*
+				000~001~036~to the North
+				000~001~037~to the Northeast
+				000~001~038~to the East
+				000~001~039~to the Southeast
+				000~001~040~to the South
+				000~001~041~to the Southwest
+				000~001~042~to the West
+				000~001~043~to the Northwest
+				*/
+				switch (headingIndex)
+				{
+				case 0://The the west
+						locHeading= StringController.instance.GetString(1,42);break;	
+				case 1://To the south west
+						locHeading= StringController.instance.GetString(1,41);break;	
+				case 2://To the south
+						locHeading= StringController.instance.GetString(1,40);break;	
+				case 3://To the south east
+						locHeading= StringController.instance.GetString(1,39);break;	
+				case 4://To the east
+						locHeading= StringController.instance.GetString(1,38);break;	
+				case 5://To the north east
+						locHeading= StringController.instance.GetString(1,37);break;	
+				case 6://To the north
+						locHeading= StringController.instance.GetString(1,36);break;	
+				case 7://To the northwest
+				default:
+						locHeading= StringController.instance.GetString(1,43);break;	
+				}
+				switch(GameWorldController.instance.LevelNo)
+				{
+				case 0:
+					locLevel = "and " +StringController.instance.GetString(1,47);break;
+				case 1: 
+					locLevel = "and " +StringController.instance.GetString(1,48);break;
+				case 2:
+					locLevel = "";break;
+				case 3: 
+					locLevel = "and " +StringController.instance.GetString(1,52);break;
+				default:
+					locLevel = "and " +StringController.instance.GetString(1,55);break;
+				}
+
+				/*
+000~001~035~The Cup of Wonder is 
+000~001~044~far far below you
+000~001~045~far far below you
+000~001~046~far below you
+000~001~047~far below you
+000~001~048~below you
+000~001~049~below you
+000~001~050~underneath you
+000~001~052~above you
+000~001~053~above you
+000~001~054~above you
+000~001~055~far above you
+000~001~056~far above you
+000~001~057~far far above you
+000~001~058~far far above you
+
+				*/
+		UWHUD.instance.MessageScroll.Add (CupIs + locHeading + locLevel);
 		//inputctrl.text=UWHUD.instance.MessageScroll.text;
 	}
 
@@ -283,5 +355,70 @@ public class Shrine : object_base {
 	{
 		return "meditate";	
 	}
+
+
+		int facing(float angle)
+		{//Copied from NPC 
+				if ((angle >= -22.5) && (angle <= 22.5)) 
+				{
+						return 0;//*AnimRange;//Facing forward
+				} 
+				else 
+				{
+						if ((angle>22.5)&&(angle<=67.5))
+						{//Facing forward left
+								return 1;//*AnimRange;
+						}
+						else
+						{
+								if ((angle >67.5)&&(angle<=112.5))
+								{//facing (right)
+										return 2;//*AnimRange;
+								}
+								else
+								{
+										if ((angle >112.5)&&(angle<=157.5))
+										{//Facing away left
+												return 3;//*AnimRange;
+										}
+										else
+										{
+												if (((angle >157.5)&&(angle<=180.0)) || ((angle>=-180)&&(angle<=-157.5)))
+												{//Facing away
+														return 4;//*AnimRange;
+												}
+												else
+												{
+														if ((angle >=-157.5)&&(angle<-112.5))
+														{//Facing away right
+																return 5;//*AnimRange;
+														}
+														else
+														{
+																if ((angle >-112.5)&&(angle<-67.5))
+																{//Facing (left)
+																		return 6;//*AnimRange;
+																}
+																else
+																{
+																		if ((angle >-67.5)&&(angle<-22.5))
+																		{//Facing forward right
+																				return 7;//*AnimRange;
+																		}
+																		else
+																		{
+																				return 0;//*AnimRange;//default
+																		}
+																}
+														}
+												}
+										}
+								}
+						}
+				}
+		}
+
+
+
 }
 

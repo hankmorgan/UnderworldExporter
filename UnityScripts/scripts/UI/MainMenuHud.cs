@@ -233,7 +233,7 @@ public class MainMenuHud : GuiBase {
 		public void LoadSave(int SlotNo)
 		{
 			if (SlotNo==-2)
-			{//Speedstart
+			{//Speedstart to editor
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
 				UWEBase.EditorMode=true;
 				JourneyOnwards();
@@ -437,6 +437,21 @@ public class MainMenuHud : GuiBase {
 								GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 								GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 								GameWorldController.instance.InitBGlobals(0);
+								//Reset quest variables
+								for (int i=0; i<= GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0);i++)
+								{
+									GameWorldController.instance.playerUW.quest().QuestVariables[i]=0;		
+								}
+								switch(_RES)
+								{
+								default:
+									GameWorldController.instance.playerUW.quest().DayGaramonDream=0;
+									GameWorldController.instance.playerUW.quest().GaramonDream=0;
+									GameWorldController.instance.playerUW.quest().IncenseDream=0;
+									GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
+									GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
+									break;
+								}
 								JourneyOnwards();
 						}
 						else

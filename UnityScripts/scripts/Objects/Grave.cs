@@ -94,15 +94,16 @@ public class Grave : object_base {
 					//000~001~134~You thoughtfully give the bones a final resting place.
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,134));
 					GameObject trig = GameObject.Find ("a_move_trigger_54_52_04_0495");
-						if (trig!=null)
-						{					
-							objInt().link++;//Update the grave description
-							objIntUsed.consumeObject ();
-							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
-						}
-						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";						
-						return true;
+					if (trig!=null)
+					{					
+						objInt().link++;//Update the grave description
+						objIntUsed.consumeObject ();
+						trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
+					}
+					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
+					GameWorldController.instance.playerUW.quest().isGaramonBuried=true;
+					return true;
 					}
 					else
 					{//Regular bones

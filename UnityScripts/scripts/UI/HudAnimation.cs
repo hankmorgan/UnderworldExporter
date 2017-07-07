@@ -14,7 +14,7 @@ public class HudAnimation : GuiBase {
 	//private Animator anim;
 	public CutsAnimator anim;
 
-	public static int NormalCullingMask;//-33
+	public const int NormalCullingMask=-33;//-33
 	// Use this for initialization
 	public override void Start()
 		{
@@ -22,7 +22,7 @@ public class HudAnimation : GuiBase {
 		anim.SetAnimation="Anim_Base";
 		anim.PrevAnimation="Anim_Base";
 		//PreviousAnimationFile=SetAnimationFile;
-		NormalCullingMask=-33;  //= playerUW.playerCam.cullingMask;
+		//NormalCullingMask=-33;  //= playerUW.playerCam.cullingMask;
 	}
 	
 	// Update is called once per frame

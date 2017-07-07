@@ -23,11 +23,12 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 		public void End()
 		{
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			if (cs!=null)
 			{
 				cs.PostCutSceneEvent();
 				PlayingSequence=false;
-				UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);				
 				Destroy (cs);	
 			}
 		}
@@ -156,6 +157,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 			//chains.ActiveControl=0;
 			//UWHUD.instance.RefreshPanels(PANELNAME);
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			mlCuts.Set("");
 			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);			
@@ -173,11 +175,15 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		//	InitCutsFile();
 		//}
 		//base.Update();
-					if (SetAnimationFile !=PreviousAnimationFile)
-					{
-						anim.SetAnimation=SetAnimationFile;
-						PreviousAnimationFile=SetAnimationFile;
-					}
+		if (SetAnimationFile !=PreviousAnimationFile)
+		{
+			anim.SetAnimation=SetAnimationFile;
+			PreviousAnimationFile=SetAnimationFile;
+			if (SetAnimationFile.ToLower()=="anim_base")
+			{
+				GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			}
+		}
 
 		if (PlayingSequence)
 		{
@@ -186,6 +192,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			{
 					if (CutsceneTime>=3.0f)
 					{//Only end a cutscene if it has been running for longer than 3 seconds
+							GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 							SetAnimationFile= "Anim_Base";//End of anim.
 							PlayingSequence=false;
 							PostAnimPlay();

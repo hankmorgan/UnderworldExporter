@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Cutscene dream 7. Tybal is dead. (Swapped with dream 8)
+/// </summary>
 public class Cutscene_Dream_7 : Cuts {
 
 		public override void Awake()
@@ -25,7 +27,7 @@ public class Cutscene_Dream_7 : Cuts {
 
 
 
-				StringBlockNo=3104;
+				StringBlockNo=3105;//was 3104
 				noOfSubs=3;
 				for (int i=0;i<noOfSubs;i++)
 				{

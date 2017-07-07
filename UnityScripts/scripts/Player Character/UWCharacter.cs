@@ -686,7 +686,7 @@ public class UWCharacter : Character {
 		}
 		if (FoodLevel<3)
 		{
-			ApplyDamage(2);//Starving damage.
+			ApplyDamage(1);//Starving damage.
 		}
 	}
 

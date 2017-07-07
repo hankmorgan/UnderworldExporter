@@ -80,78 +80,6 @@ public class Armour : Equipment {
 						EquipIconIndex= 60+ (objInt().item_id-47);
 				}
 	}
-		/*
-
-	public override void UpdateQuality1()
-	{	//Needs to be called when damaged.
-		if ((objInt().quality>0) && (objInt().quality<=15))
-		{
-			if (GameWorldController.instance.playerUW.isFemale)
-			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt().item_id]);
-			}
-			else
-			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowestQuality[objInt().item_id]);
-			}
-		}
-		else if ((objInt().quality>15) && (objInt().quality<=30))
-		{
-			//Low quality
-			if (GameWorldController.instance.playerUW.isFemale)
-			{
-						SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowQuality[objInt()	.item_id]);
-			}
-			else
-			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowQuality[objInt().item_id]);
-			}
-		}
-		else if ((objInt().quality>30) && (objInt().quality<=45))
-		{
-			//Medium
-			if (GameWorldController.instance.playerUW.isFemale)
-			{
-					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleMediumQuality[objInt().item_id]);
-			}
-			else
-			{
-					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleMediumQuality[objInt().item_id]);
-			}
-		}
-		else if ((objInt().quality>45) && (objInt().quality<=63))
-		{
-			//Best
-			if (GameWorldController.instance.playerUW.isFemale)
-			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleBestQuality[objInt().item_id]);
-			}
-			else
-			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleBestQuality[objInt().item_id]);
-			}
-		}
-	//objInt().SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
-	}
-	*/
-		/*
-	/// <summary>
-	/// Sets the equip texture.
-	/// </summary>
-	/// <param name="EquipTexture">Equip texture.</param>
-	void SetEquipTexture(string EquipTexture)
-	{//Change the paperdoll image
-		//EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
-		//objInt().EquipString=EquipTexture;
-		ArmourEquipString=EquipTexture;
-		GameWorldController.instance.playerUW.playerInventory.Refresh(objInt().inventorySlot);
-	}
-		*/
-
-	//public override string getEquipString ()
-	//{
-	//	return ArmourEquipString;
-	//}
 
 	public override Sprite GetEquipDisplay ()
 	{
@@ -233,4 +161,5 @@ public class Armour : Equipment {
 		{
 			return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;
 		}
+
 }

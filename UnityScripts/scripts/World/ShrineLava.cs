@@ -13,65 +13,49 @@ public class ShrineLava : UWEBase {
 		/// <param name="other">Other.</param>
 		void OnTriggerEnter(Collider other)
 		{
-				if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
+			if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
+			{
+				if (GameWorldController.instance.playerUW.quest().isGaramonBuried == false)
 				{
-						ObjectInteraction objInt = other.gameObject.GetComponent<ObjectInteraction>();
-						switch (objInt.item_id)
-						{
-						case Quest.TalismanHonour:
-						case Quest.TalismanBook:								
-						case Quest.TalismanCup:
-						case Quest.TalismanRing:
-						case Quest.TalismanShield:
-						case Quest.TalismanSword:
-						case Quest.TalismanTaper:
-						case Quest.TalismanWine:	
-								GameWorldController.instance.playerUW.quest().TalismansRemaining--;
-								break;
-						default:
-								return;								
-						}
-
-						Impact.SpawnHitImpact(objInt.transform.name + "_impact",objInt.GetImpactPoint(),40,44);		
-
-
-						objInt.consumeObject();
-
-						//for (int i=0;i<7;i++)
-						//{
-						//		if (GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[i]==false)
-						//		{
-						//				return;
-						//		}
-						//}
-
-						//Suck the avatar into the ethereal void.
-						if (GameWorldController.instance.playerUW.quest().TalismansRemaining<=0)
-						{
-						StartCoroutine(SuckItAvatar());
-						}
-
+						return;
 				}
+				ObjectInteraction objInt = other.gameObject.GetComponent<ObjectInteraction>();
+				switch (objInt.item_id)
+				{
+				case Quest.TalismanHonour:
+				case Quest.TalismanBook:								
+				case Quest.TalismanCup:
+				case Quest.TalismanRing:
+				case Quest.TalismanShield:
+				case Quest.TalismanSword:
+				case Quest.TalismanTaper:
+				case Quest.TalismanWine:	
+						GameWorldController.instance.playerUW.quest().TalismansRemaining--;
+						break;
+				default:
+						return;								
+				}
+
+				Impact.SpawnHitImpact(objInt.transform.name + "_impact",objInt.GetImpactPoint(),40,44);		
+
+
+				objInt.consumeObject();
+
+				//for (int i=0;i<7;i++)
+				//{
+				//		if (GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[i]==false)
+				//		{
+				//				return;
+				//		}
+				//}
+
+				//Suck the avatar into the ethereal void.
+				if (GameWorldController.instance.playerUW.quest().TalismansRemaining<=0)
+				{
+				StartCoroutine(SuckItAvatar());
+				}
+			}
 		}
-
-
-		/*IEnumerator SuckItAvatar()
-		{
-				Vortex vrtx = GameWorldController.instance.playerUW.playerCam.gameObject.AddComponent<Vortex>();
-				vrtx.shader=GameWorldController.instance.vortex;
-				vrtx.radius = new Vector2(1.0f,1.0f);
-				vrtx.angle=0.0f;
-				float rate = 1.0f/2.0f;
-				float index = 0.0f;
-				while (index <1.0f)
-				{
-						vrtx.angle= 1440.0f * index;
-						index += rate * Time.deltaTime;
-						yield return new WaitForSeconds(0.01f);
-				}
-				Destroy(vrtx);
-				GameWorldController.instance.SwitchLevel(8);//One way trip.
-		}*/
 
 		/// <summary>
 		/// Sends the avatar into the ethereal void.
@@ -80,44 +64,42 @@ public class ShrineLava : UWEBase {
 		IEnumerator SuckItAvatar()
 		{
 				//Spawn a moon gate at the center of the lava
-				GameObject slasher = GameObject.Find("slasher_of_veils_32_33_07_0129");
-				Vector3 slasherPos=Vector3.zero;
+			GameObject slasher = GameObject.Find("slasher_of_veils_32_33_07_0129");//Assumes slasher will be at this index.
+			Vector3 slasherPos=Vector3.zero;
+			if (slasher!=null)
+			{
+				slasherPos=slasher.transform.position;
+			}
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0);
+			GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,
+			GameWorldController.instance.LevelMarker().gameObject,
+			GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+			GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+			myObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
+
+			//GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
+			//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
+			//newObj.transform.parent=GameWorldController.instance.LevelMarker();
+		//	GameWorldController.MoveToWorld(newObj);
+			//newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
+			Quaternion playerRot = GameWorldController.instance.playerUW.transform.rotation;
+			Quaternion EndRot = new Quaternion(playerRot.x,playerRot.y, playerRot.z+1.2f,playerRot.w);
+			Vector3 StartPos = GameWorldController.instance.playerUW.transform.position;
+			Vector3 EndPos = myObj.transform.localPosition;
+			float rate = 1.0f/2.0f;
+			float index = 0.0f;
+			while (index <1.0f)
+			{						
+				GameWorldController.instance.playerUW.transform.position=Vector3.Lerp(StartPos,EndPos,index);
+				GameWorldController.instance.playerUW.transform.rotation=Quaternion.Lerp(playerRot,EndRot,index);
 				if (slasher!=null)
 				{
-						slasherPos=slasher.transform.position;
+					slasher.transform.position=Vector3.Lerp(slasherPos,EndPos,index);	
 				}
-				ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0);
-				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,
-						GameWorldController.instance.LevelMarker().gameObject,
-						GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
-				myObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
-
-				//GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
-				//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
-				//newObj.transform.parent=GameWorldController.instance.LevelMarker();
-			//	GameWorldController.MoveToWorld(newObj);
-				//newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
-				Quaternion playerRot = GameWorldController.instance.playerUW.transform.rotation;
-				Quaternion EndRot = new Quaternion(playerRot.x,playerRot.y, playerRot.z+1.2f,playerRot.w);
-				Vector3 StartPos = GameWorldController.instance.playerUW.transform.position;
-				Vector3 EndPos = myObj.transform.localPosition;
-				float rate = 1.0f/2.0f;
-				float index = 0.0f;
-				while (index <1.0f)
-				{
-						
-						GameWorldController.instance.playerUW.transform.position=Vector3.Lerp(StartPos,EndPos,index);
-						GameWorldController.instance.playerUW.transform.rotation=Quaternion.Lerp(playerRot,EndRot,index);
-						if (slasher!=null)
-						{
-							slasher.transform.position=Vector3.Lerp(slasherPos,EndPos,index);	
-						}
-						index += rate * Time.deltaTime;
-						yield return new WaitForSeconds(0.01f);
-
-				}
-				GameWorldController.instance.playerUW.transform.rotation = playerRot;
-				GameWorldController.instance.SwitchLevel(8,26,24);//One way trip.
+				index += rate * Time.deltaTime;
+				yield return new WaitForSeconds(0.01f);
+			}
+			GameWorldController.instance.playerUW.transform.rotation = playerRot;
+			GameWorldController.instance.SwitchLevel(8,26,24);//One way trip.
 		}
 }
