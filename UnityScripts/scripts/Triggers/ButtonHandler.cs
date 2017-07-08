@@ -29,7 +29,7 @@ public class ButtonHandler : object_base {
 		base.Start();
 		BoxCollider bx = this.GetComponent<BoxCollider>();
 		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
-
+				bx.center= new Vector3(0f, 0.16f, 0f);
 		objInt().flags=objInt().flags;
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//

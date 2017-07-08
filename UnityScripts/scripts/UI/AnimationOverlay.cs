@@ -24,12 +24,13 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 				sprites[i] = GameWorldController.instance.TmAnimo.RequestSprite(i);
 			}
 		}
-
+		
 		Go ();
 	}
 
 	public void Go()
 	{
+		FrameNo=StartFrame;
 		StartCoroutine (Animate());
 	}
 

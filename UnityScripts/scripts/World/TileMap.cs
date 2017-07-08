@@ -116,6 +116,10 @@ public class TileMap : Loader {
 	/// </summary>
 	public const int TileSize = 4;
 
+		/// <summary>
+		/// The automap note addresses. These need to change dynamically.
+		/// </summary>
+	public static long[] AutomapNoteAddresses=new long[9];
 
 
 		/// <summary>
@@ -357,24 +361,24 @@ public class TileMap : Loader {
 
 	///Display the map notes
 	///Delete the map notes in memory
-				foreach(Transform child in UWHUD.instance.MapPanel.transform)
-				{
-						if (child.name.Substring(0,4) == "_Map")
-						{								
-								GameObject.Destroy(child.transform.gameObject);
-						}
-				}
+		foreach(Transform child in UWHUD.instance.MapPanel.transform)
+		{
+				if (child.name.Substring(0,4) == "_Map")
+			{								
+					GameObject.Destroy(child.transform.gameObject);
+			}
+		}
 
-				for (int i=0 ; i < MapNotes.Count;i++)
-				{///Instantiates the map note template UI control.
-					GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
-					myObj.transform.parent= UWHUD.instance.MapPanel.transform;
-					myObj.GetComponent<Text>().text = MapNotes[i].NoteText;
-					myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[i].NotePosition;
-					myObj.GetComponent<MapNoteId>().guid = MapNotes[i].guid;
-					//Move the control so that it sits in front of the map,
-					myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
-				}		
+		for (int i=0 ; i < MapNotes.Count;i++)
+		{///Instantiates the map note template UI control.
+			GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+			myObj.transform.parent= UWHUD.instance.MapPanel.transform;
+			myObj.GetComponent<Text>().text = MapNotes[i].NoteText;
+			myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[i].NotePosition;
+			myObj.GetComponent<MapNoteId>().guid = MapNotes[i].guid;
+			//Move the control so that it sits in front of the map,
+			myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
+		}		
 
 		return  output;		
 	}
@@ -1301,6 +1305,8 @@ public class TileMap : Loader {
 				long address_pointer;
 				long textureAddress=0;
 				long automapAddress=0;
+				long automapNotesAddress=0;
+				long AUTOMAP_EOF_ADDRESS=0;
 				//long fileSize;
 				short x;	
 				short y;
@@ -1339,6 +1345,10 @@ public class TileMap : Loader {
 
 				case UWEBase.GAME_UW1:	//UW1
 						{
+							for (int au=0; au<=AutomapNoteAddresses.GetUpperBound(0); au++)
+							{
+									AutomapNoteAddresses[au]=DataLoader.getValAtAddress(lev_ark,((au+36) * 4) + 2 ,32);
+							}
 							CEILING_HEIGHT=UW_CEILING_HEIGHT;
 							// 0x7a;
 							//Get the number of blocks in this file.
@@ -1347,6 +1357,11 @@ public class TileMap : Loader {
 							AddressOfBlockStart =  DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);	
 							textureAddress =  DataLoader.getValAtAddress(lev_ark,((LevelNo+18) * 4) + 2 ,32);
 							automapAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+27) * 4) + 2 ,32);
+							automapNotesAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+36) * 4) + 2 ,32);
+
+							AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(AutomapNoteAddresses,LevelNo,lev_ark); // DataLoader.getValAtAddress(lev_ark,((LevelNo+1+36) * 4) + 2 ,32);	
+		
+
 							address_pointer =0;
 							break;
 						}
@@ -1669,47 +1684,99 @@ public class TileMap : Loader {
 				//Load Automap info
 				if (automapAddress!=0)
 				{
-						switch(_RES)
+				switch(_RES)
+				{
+				case GAME_UW1:
 						{
-						case GAME_UW1:
+							int z=0;
+							for (y=0; y<=TileMap.TileMapSizeY;y++)
+							{
+								for (x=0; x<=TileMap.TileMapSizeX;x++)
 								{
-										int z=0;
-										for (y=0; y<=TileMap.TileMapSizeY;y++)
-										{
-												for (x=0; x<=TileMap.TileMapSizeX;x++)
-												{
-														int val = (int)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
-														//The automap contains one byte per tile, in the same order as the
-														//level tilemap. A valid value in the low nybble means the tile is displayed
-														//on the map. Valid values are the same as tile types:
-														if ( ((val & 0xf) >0) && ((val & 0xf) <0xA))
-														{
-																Tiles[x,y].tileVisited=true;
-														}
-														else
-														{
-																Tiles[x,y].tileVisited=false;
-														}
-														z++;
-												}
-										}
-										break;
-								}	
+									int val = (int)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
+									//The automap contains one byte per tile, in the same order as the
+									//level tilemap. A valid value in the low nybble means the tile is displayed
+									//on the map. Valid values are the same as tile types:
+									if ( ((val & 0xf) >0) && ((val & 0xf) <0xA))
+									{
+										Tiles[x,y].tileVisited=true;
+									}
+									else
+									{
+										Tiles[x,y].tileVisited=false;
+									}
+									z++;
+								}
+							}
+							break;
+						}	
+					}
 				}
 
+				if ((automapNotesAddress!=0) && (AUTOMAP_EOF_ADDRESS!=lev_ark.GetUpperBound(0)))
+				{
+					//long EOF_ADDRESS= lev_ark.GetUpperBound(0);
 
+					while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
+					{								
+						string NoteText ="";
+						bool terminated=false;
+						int PosX=0; int PosY=0;
+						PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
+						PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
+						for (int c=0; c<=0x31;c++)
+						{
+							if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
+							{
+								NoteText+=lev_ark[automapNotesAddress+c];
+							}
+							else
+							{
+								terminated=true;		
+							}
+						}
+						if (NoteText=="")
+						{
+							break;
+						}
+						if ( (PosY<=200) && (PosX<=320))
+						{
+								MapNote newmapnote = new MapNote();
+								newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
+								newmapnote.NoteText= NoteText;
+								newmapnote.guid=System.Guid.NewGuid();;
+								GameWorldController.instance.Tilemaps[LevelNo].MapNotes.Add(newmapnote);	
+						}
+						else
+						{
+								break;
+						}
+
+
+						automapNotesAddress+=54;
+					}
 				}
-
-
-				//Perform a cleanup of the data
-				//CleanUp(1);
-
-
-
-				return true;
+			return true;
 		}
 
 
+		long getNextAutomapBlock(long[] AutomapAddresses, int thisLevelNo, char[] lev_ark)
+		{//UW does not store map notes in order. In order to find the proper length of an automap note block I need to find the minimum next block address
+
+			long thisAddress = AutomapAddresses[thisLevelNo];
+			long selectedAddress=lev_ark.GetUpperBound(0);
+			for (int i=0; i<=AutomapAddresses.GetUpperBound(0); i++)
+			{
+				if (AutomapAddresses[i]> thisAddress)	
+				{
+					if (selectedAddress> AutomapAddresses[i])
+					{
+						selectedAddress=AutomapAddresses[i];
+					}
+				}
+			}
+			return selectedAddress;
+		}
 
 
 
@@ -2921,4 +2988,16 @@ public class TileMap : Loader {
 
 
 
+	public static long GetFirstAutomapAddress()
+	{
+		long min=AutomapNoteAddresses[0];
+		for (int i=0; i<=AutomapNoteAddresses.GetUpperBound(0);i++)
+		{
+			if (AutomapNoteAddresses[i]<min)
+			{
+				min = AutomapNoteAddresses[i];
+			}
+		}
+		return min;
+	}
 }

@@ -1068,6 +1068,7 @@ public class ConversationVM : UWEBase {
 				///Give movement back to the player			
 				GameWorldController.instance.playerUW.playerMotor.enabled=true;
 				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+
 				///Return any items in the trade area to their owner
 				for (int i =0; i <=3; i++)
 				{
@@ -2216,7 +2217,7 @@ public class ConversationVM : UWEBase {
 					j++;
 				}
 			}
-			Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
+			//Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
 			return j;
 		}
 
@@ -2364,6 +2365,24 @@ public class ConversationVM : UWEBase {
 			demanded.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
 			PlayerContainer.AddItemToContainer (demanded.name);
+			if (demanded.GetComponent<Container>())
+			{
+					Container cn = demanded.GetComponent<Container>();
+					for ( int i=0; i<=cn.MaxCapacity();i++)	
+					{
+							if (cn.GetItemAt(i)!="")
+							{
+									GameObject containerItem = cn.GetGameObjectAt(i);
+									if (containerItem!=null)
+									{
+										npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+										containerItem.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+										GameWorldController.MoveToInventory(containerItem);
+										containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+									}
+							}
+					}
+			}
 			demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
 			GameWorldController.MoveToInventory(demanded);
 			GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
@@ -2375,6 +2394,23 @@ public class ConversationVM : UWEBase {
 			GameWorldController.MoveToWorld (demanded);
 			demanded.transform.position = npc.transform.position;
 			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+			if (demanded.GetComponent<Container>())
+			{
+					Container cn = demanded.GetComponent<Container>();
+					for ( int i=0; i<=cn.MaxCapacity();i++)	
+					{
+							if (cn.GetItemAt(i)!="")
+							{
+									GameObject containerItem = cn.GetGameObjectAt(i);
+									if (containerItem!=null)
+									{
+											npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+									}
+							}
+					}
+			}
+
+
 			return 2;
 		}
 	}
@@ -3278,6 +3314,27 @@ return value: none
 			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
 			playerContainer.AddItemToContainer(obj.name);
 			obj.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+						//If the NPC is handing over an container item.
+						if (obj.GetComponent<Container>())
+						{
+								Container cn = obj.GetComponent<Container>();
+								for ( int i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+														containerItem.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+														GameWorldController.MoveToInventory(containerItem);
+														containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+												}
+										}
+								}
+						}
+
+
 			obj.GetComponent<ObjectInteraction>().PickedUp=true;
 			GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 			playerHasSpace=1;
@@ -3289,6 +3346,22 @@ return value: none
 			GameWorldController.MoveToWorld(obj);
 			obj.transform.position=npc.transform.position;
 			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
+						if (obj.GetComponent<Container>())
+						{
+								Container cn = obj.GetComponent<Container>();
+								for ( int i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+												}
+										}
+								}
+						}
+
 		}
 		return playerHasSpace;
 	}

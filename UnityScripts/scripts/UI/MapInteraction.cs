@@ -146,11 +146,11 @@ public class MapInteraction : GuiBase {
 
 		void Update()
 		{
-				//Debug.Log(InteractionMode);
-				if (InteractionMode==MapInteractionWriting)
-				{
-						MapNoteInput.Select();
-				}
+			//Debug.Log(InteractionMode);
+			if (InteractionMode==MapInteractionWriting)
+			{
+				MapNoteInput.Select();
+			}
 		}
 
 }

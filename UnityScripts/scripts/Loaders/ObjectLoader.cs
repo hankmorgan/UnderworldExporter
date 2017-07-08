@@ -725,33 +725,6 @@ public class ObjectLoader : Loader {
 						objList[nextObj].tileX=x;
 						objList[nextObj].tileY=y;
 						objList[nextObj].InUseFlag = 1;
-						if ((isContainer(objList[nextObj])) || (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.NPC_TYPE))
-						{
-								SetContainerInUse(game, LevelInfo,objList, objList[nextObj].index);
-						}
-						else if (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
-						{
-								if (objList[nextObj].InUseFlag == 0)
-								{
-										objList[nextObj].tileX = x;
-										objList[nextObj].tileY = y;
-										objList[nextObj].InUseFlag = 1;
-
-								}
-								if ( 
-										(GameWorldController.instance.objectMaster.type[objList[objList[nextObj].link].item_id] == ObjectInteraction.NPC_TYPE)
-										&& 
-										(objList[objList[nextObj].link].InUseFlag==0)
-								)
-								{
-										SetContainerInUse(game, LevelInfo, objList, objList[objList[nextObj].link].index);
-								}
-							if (objList[nextObj].link!=0)
-							{//Make sure the object to be spawned is linked
-									objList[objList[nextObj].link].InUseFlag=1;
-							}
-						}
-
 						nextObj=objList[nextObj].next;
 					}
 				}
@@ -764,6 +737,39 @@ public class ObjectLoader : Loader {
 					if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
 					{
 						objList[i].InUseFlag=1;
+						if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
+						{
+							if (objList[i].link!=0)
+							{//Make sure the object to be spawned is linked
+									objList[objList[i].link].InUseFlag=1;
+							}	
+						}
+					}
+				}
+
+				if ((isContainer(objList[i])) || (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.NPC_TYPE))
+				{
+					SetContainerInUse(game, LevelInfo,objList, objList[i].index);
+				}
+				else if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
+				{
+					if (objList[i].InUseFlag == 0)
+					{
+							//objList[nextObj].tileX = x;
+							//objList[nextObj].tileY = y;
+						objList[i].InUseFlag = 1;
+					}
+					if ( 
+							(GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id] == ObjectInteraction.NPC_TYPE)
+							&& 
+							(objList[objList[i].link].InUseFlag==0)
+					)
+					{
+						SetContainerInUse(game, LevelInfo, objList, objList[objList[i].link].index);
+					}
+					if (objList[i].link!=0)
+					{//Make sure the object to be spawned is linked
+						objList[objList[i].link].InUseFlag=1;
 					}
 				}
 			}

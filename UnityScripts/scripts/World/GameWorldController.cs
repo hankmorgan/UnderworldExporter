@@ -16,6 +16,7 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
+		public Vector2 NotePosition;
 		public bool bGenNavMeshes=true;
 		public float testUVadjust=0f;
 
@@ -854,175 +855,151 @@ public class GameWorldController : UWEBase {
 		}
 
 
+
 		/// <summary>
 		/// Writes a lev ark file based on the stored file
 		/// </summary>
 		public void WriteBackLevArk(int slotNo)
 		{
-				//ObjectLoader.UpdateObjectList();
-				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());	
-				//Write back tile states
-				for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
+			ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());	
+			//Write back tile states
+			for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
+			{
+				if (GameWorldController.instance.Tilemaps[l] !=null)
 				{
-						if (GameWorldController.instance.Tilemaps[l] !=null)
+					for (int x=0; x<=TileMap.TileMapSizeX;x++)
+					{
+						for (int y=0; y<=TileMap.TileMapSizeY;y++)
+						{		
+							TileInfo t = Tilemaps[l].Tiles[x,y];
+
+							long addptr = t.address;
+
+							//Shift the bits to construct my data
+							int tileType = t.tileType;
+							int floorHeight = (t.floorHeight/2) << 4;
+
+
+							int ByteToWrite = tileType | floorHeight ;//| floorTexture | noMagic;//This will be set in the original data
+							lev_ark_file_data[addptr]= (char) ( lev_ark_file_data[addptr] | (char)(ByteToWrite) );
+
+							int floorTexture = t.floorTexture<<2;
+							int noMagic = t.noMagic << 6;
+
+							ByteToWrite= floorTexture | noMagic;
+							lev_ark_file_data[addptr+1]= (char) ( lev_ark_file_data[addptr+1] | (char)(ByteToWrite) );
+
+
+							ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
+							lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
+							lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
+						}	
+					}		
+				}			
+			}
+
+			//Write back object data
+			for (int l=0; l<=objectList.GetUpperBound(0); l++)
+			{
+				if (objectList[l]!=null)
+				{
+					long addptr = objectList[l].objectsAddress;
+					for (int o=0; o<=objectList[l].objInfo.GetUpperBound(0);o++)
+					{
+						ObjectLoaderInfo currobj= objectList[l].objInfo[o];
+						if (currobj!=null)
 						{
-								for (int x=0; x<=TileMap.TileMapSizeX;x++)
-								{
-										for (int y=0; y<=TileMap.TileMapSizeY;y++)
-										{		
+							int ByteToWrite= (currobj.is_quant << 15) |
+											(currobj.invis << 14) |
+											(currobj.doordir << 13) |
+											(currobj.enchantment << 12) |
+											((currobj.flags & 0x0F) << 9) |
+											(currobj.item_id & 0x1FF) ;
 
-											//	Debug.Log(l +  " " + x + " " + y);
-												TileInfo t = Tilemaps[l].Tiles[x,y];
+							lev_ark_file_data[addptr]=(char)(ByteToWrite & 0xFF);
+							lev_ark_file_data[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
 
-												long addptr = t.address;
+							ByteToWrite = ((currobj.x & 0x7) << 13) |
+											((currobj.y & 0x7) << 10) |
+											((currobj.heading & 0x7) << 7) |
+											((currobj.zpos & 0x7F));
+							lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
+							lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
 
-												//Shift the bits to construct my data
-												int tileType = t.tileType;
-												int floorHeight = (t.floorHeight/2) << 4;
-
-
-												int ByteToWrite = tileType | floorHeight ;//| floorTexture | noMagic;//This will be set in the original data
-												lev_ark_file_data[addptr]= (char) ( lev_ark_file_data[addptr] | (char)(ByteToWrite) );
-
-												int floorTexture = t.floorTexture<<2;
-												int noMagic = t.noMagic << 6;
-
-												ByteToWrite= floorTexture | noMagic;
-												lev_ark_file_data[addptr+1]= (char) ( lev_ark_file_data[addptr+1] | (char)(ByteToWrite) );
-
-
-												ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
-												lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
-												lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
-
-												//int WallTexture = t.wallTexture;
-												//int ObjectIndex = (t.indexObjectList & 0x3)<<6;//First write the first 2 bits at 6
-												//ByteToWrite = WallTexture |  ObjectIndex;
-												//lev_ark_file_data[addptr+2]= (char) ( lev_ark_file_data[addptr+2] | (char)(ByteToWrite) );
-
-												//Now write the rest of the object index
-												//ObjectIndex = t.indexObjectList >>2;
-												//ByteToWrite= ObjectIndex;
-												//lev_ark_file_data[addptr+3]= (char) ( lev_ark_file_data[addptr+3] | (char)(ByteToWrite) );
+							ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
+											(currobj.quality & 0x3F); 
+							lev_ark_file_data[addptr+4]=(char)(ByteToWrite & 0xFF);
+							lev_ark_file_data[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);		
+							 
+							//objList[x].owner = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+							//objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+							ByteToWrite = ((currobj.link & 0x3FF)<<6) |
+									(currobj.owner & 0x3F); 
+							lev_ark_file_data[addptr+6]=(char)(ByteToWrite & 0xFF);
+							lev_ark_file_data[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
 
 
-												//lev_ark_file_data[addptr+2]= lev_ark_file_data[addptr+2] | (char)secondByte;
-												//ALl i think i will change is the floor texture, type, height and first object index
-												/*0000 tile properties / flags:
 
-										bits     len  description
-										0- 3    4    tile type (0-9, see below)
-										4- 7    4    floor height
-										8       1    unknown (?? special light feature ??) always 0 in uw1
-										9       1    0, never used in uw1
-										10-13    4    floor texture index (into texture mapping)
-										14       1    when set, no magic is allowed to cast/to be casted upon
-										15       1    door bit (when 1, a door is present)
+							if (o<256)			
+							{//Additional npc mobile data.
+								
+								lev_ark_file_data[addptr+0x8] = (char)(currobj.npc_hp & 0x8);
+								lev_ark_file_data[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
+										(currobj.npc_goal & 0xF));
 
-										0002 tile properties 2 / object list link
+								lev_ark_file_data[addptr+0xd]= (char)
+										(
+										((currobj.npc_attitude & 0x3)<<14) |
+										((currobj.npc_talkedto & 0x1)<<13) |
+												currobj.npc_level & 0xF
+										);
 
-										bits     len  description
-										0- 5    6    wall texture index (into texture mapping)
-										6-15    10   first object in tile (index into master object list)*/
-												
-										}	
-								}		
+								lev_ark_file_data[addptr+0x16]= (char)(
+										((currobj.npc_xhome & 0x3F)<<10) |
+										((currobj.npc_yhome & 0x3F)<<4)
+								);
+
+								lev_ark_file_data[addptr+0x18]= (char)(
+										((currobj.npc_heading & 0xF)<<4) 
+								);
+
+								lev_ark_file_data[addptr+0x19]= (char)(
+										((currobj.npc_hunger & 0x3F)) 
+								);
+
+								lev_ark_file_data[addptr+0x1a]= (char)(
+										((currobj.npc_whoami & 0xFF)) 
+								);
+
+								addptr=addptr+8+19;	
+							}	
+							else
+							{													
+								addptr=addptr+8;
+							}
 						}
-					
+					}
 				}
-
-				//Write back object data
-				for (int l=0; l<=objectList.GetUpperBound(0); l++)
-				{
-						if (objectList[l]!=null)
-						{
-								long addptr = objectList[l].objectsAddress;
-								for (int o=0; o<=objectList[l].objInfo.GetUpperBound(0);o++)
-								{
-										ObjectLoaderInfo currobj= objectList[l].objInfo[o];
-										if (currobj!=null)
-										{
-												int ByteToWrite= (currobj.is_quant << 15) |
-																(currobj.invis << 14) |
-																(currobj.doordir << 13) |
-																(currobj.enchantment << 12) |
-																((currobj.flags & 0x0F) << 9) |
-																(currobj.item_id & 0x1FF) ;
-
-												lev_ark_file_data[addptr]=(char)(ByteToWrite & 0xFF);
-												lev_ark_file_data[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
-
-												ByteToWrite = ((currobj.x & 0x7) << 13) |
-																((currobj.y & 0x7) << 10) |
-																((currobj.heading & 0x7) << 7) |
-																((currobj.zpos & 0x7F));
-												lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
-												lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
-
-												ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
-																(currobj.quality & 0x3F); 
-												lev_ark_file_data[addptr+4]=(char)(ByteToWrite & 0xFF);
-												lev_ark_file_data[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);		
-												 
-												//objList[x].owner = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-												//objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
-												ByteToWrite = ((currobj.link & 0x3FF)<<6) |
-														(currobj.owner & 0x3F); 
-												lev_ark_file_data[addptr+6]=(char)(ByteToWrite & 0xFF);
-												lev_ark_file_data[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
+			}
 
 
+				//To write map notes
+				//Produce the data as above
+				//Record the original addresses of the map notes.
+				//Create a new file.  (size of regular data (as far as first mapnotes address) + space needed for map notes)
+				//Edit the offsets in the new file to point to the map notes
+						//write the map notes.
+				//write the file to lev_ark.
 
-												if (o<256)			
-												{//Additional npc mobile data.
-														
-														lev_ark_file_data[addptr+0x8] = (char)(currobj.npc_hp & 0x8);
-														lev_ark_file_data[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
-																(currobj.npc_goal & 0xF));
 
-														lev_ark_file_data[addptr+0xd]= (char)
-																(
-																((currobj.npc_attitude & 0x3)<<14) |
-																((currobj.npc_talkedto & 0x1)<<13) |
-																		currobj.npc_level & 0xF
-																);
+			//Write the array to file
 
-														lev_ark_file_data[addptr+0x16]= (char)(
-																((currobj.npc_xhome & 0x3F)<<10) |
-																((currobj.npc_yhome & 0x3F)<<4)
-														);
-
-														lev_ark_file_data[addptr+0x18]= (char)(
-																((currobj.npc_heading & 0xF)<<4) 
-														);
-
-														lev_ark_file_data[addptr+0x19]= (char)(
-																((currobj.npc_hunger & 0x3F)) 
-														);
-
-														lev_ark_file_data[addptr+0x1a]= (char)(
-																((currobj.npc_whoami & 0xFF)) 
-														);
-
-													addptr=addptr+8+19;	
-												}	
-												else
-												{													
-													addptr=addptr+8;
-												}
-										}
-								}
-						}
-				}
-
-				//Write the array to file
-
-				byte[] dataToWrite = new byte[lev_ark_file_data.GetUpperBound(0)+1];
-				for (long i=0; i<=lev_ark_file_data.GetUpperBound(0);i++)
-				{
-						dataToWrite[i] = (byte)lev_ark_file_data[i];
-				}
-				File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);			
+			byte[] dataToWrite = new byte[lev_ark_file_data.GetUpperBound(0)+1];
+			for (long i=0; i<=lev_ark_file_data.GetUpperBound(0);i++)
+			{
+					dataToWrite[i] = (byte)lev_ark_file_data[i];
+			}
+			File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);			
 		}
 
 

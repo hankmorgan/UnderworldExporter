@@ -435,7 +435,7 @@ public class Magic : UWEBase {
 						{
 								SetSpellCost(5);
 								//Debug.Log(MagicWords+ " Missile Protection Cast");
-								Cast_GravSanctPor(caster,SpellEffect.UW1_Spell_Effect_MissileProtection);
+								Cast_GravSanctPor(caster,SpellEffect.UW1_Spell_Effect_MissileProtection_alt02);
 								break;
 						}//GSP
 				case "Ort Wis Ylem"://Name Enchantment
@@ -2944,15 +2944,16 @@ public class Magic : UWEBase {
 						}
 						break;
 						//Missiles
-				case SpellEffect.UW1_Spell_Effect_MissileProtection:
+				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
 						if (ActiveArrayIndex!=-1)
 						{
 								Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 								SpellResultType=SpellResultActive;
 						}
 						break;
+				case SpellEffect.UW1_Spell_Effect_MissileProtection:
 				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
-				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
+
 						if (PassiveArrayIndex!=-1)
 						{
 								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);

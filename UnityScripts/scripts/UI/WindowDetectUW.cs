@@ -205,6 +205,7 @@ public class WindowDetectUW : WindowDetect {
 				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
 				{
 					UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
+					return;
 				}
 				switch (UWCharacter.InteractionMode)
 				{
