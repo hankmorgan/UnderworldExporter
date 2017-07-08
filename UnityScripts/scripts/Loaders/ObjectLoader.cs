@@ -694,87 +694,82 @@ public class ObjectLoader : Loader {
 	}
 
 
-
-
-
-
-
-
-
-	//*********
-
-	
 		/// <summary>
 		/// Sets the object tile X and Y values. Flags if the object exists in the map
 		/// </summary>
 		/// <param name="game">Game.</param>
 		/// <param name="LevelInfo">Level info.</param>
 		/// <param name="objList">Object list.</param>
-	void setObjectTileXY(int game,TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList)
-	{//Justs some useful info to know.
-		//ObjectItem currObj;
-		for (short x=0; x<64;x++)
-		{
-			for (short y=0;y<64;y++)
-			{
-				if (LevelInfo[x,y].indexObjectList !=0)
+		void setObjectTileXY(int game,TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList)
+		{//Justs some useful info to know.
+				//ObjectItem currObj;
+				for (short x=0; x<64;x++)
 				{
-					long nextObj=LevelInfo[x,y].indexObjectList;
-					while (nextObj!=0)
-					{
-						objList[nextObj].tileX=x;
-						objList[nextObj].tileY=y;
-						objList[nextObj].InUseFlag = 1;
-						nextObj=objList[nextObj].next;
-					}
-				}
-			}	
-
-			for (int i = 0; i < 1024;i++)
-			{//Make sure triggers, traps and special items are created.
-				if (objList[i].InUseFlag == 0)
-				{
-					if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
-					{
-						objList[i].InUseFlag=1;
-						if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
+						for (short y=0;y<64;y++)
 						{
-							if (objList[i].link!=0)
-							{//Make sure the object to be spawned is linked
-									objList[objList[i].link].InUseFlag=1;
-							}	
-						}
-					}
-				}
+								if (LevelInfo[x,y].indexObjectList !=0)
+								{
+										long nextObj=LevelInfo[x,y].indexObjectList;
+										while (nextObj!=0)
+										{
+												objList[nextObj].tileX=x;
+												objList[nextObj].tileY=y;
+												objList[nextObj].InUseFlag = 1;
+												if ((isContainer(objList[nextObj])) || (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.NPC_TYPE))
+												{
+														SetContainerInUse(game, LevelInfo,objList, objList[nextObj].index);
+												}
+												else if (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
+												{
+														if (objList[nextObj].InUseFlag == 0)
+														{
+																objList[nextObj].tileX = x;
+																objList[nextObj].tileY = y;
+																objList[nextObj].InUseFlag = 1;
 
-				if ((isContainer(objList[i])) || (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.NPC_TYPE))
-				{
-					SetContainerInUse(game, LevelInfo,objList, objList[i].index);
+														}
+														if ( 
+																(GameWorldController.instance.objectMaster.type[objList[objList[nextObj].link].item_id] == ObjectInteraction.NPC_TYPE)
+																&& 
+																(objList[objList[nextObj].link].InUseFlag==0)
+														)
+														{
+																SetContainerInUse(game, LevelInfo, objList, objList[objList[nextObj].link].index);
+														}
+														if (objList[nextObj].link!=0)
+														{//Make sure the object to be spawned is linked
+																objList[objList[nextObj].link].InUseFlag=1;
+														}
+												}
+
+												nextObj=objList[nextObj].next;
+										}
+								}
+						}	
+
+						for (int i = 0; i < 1024;i++)
+						{//Make sure triggers, traps and special items are created.
+								if (objList[i].InUseFlag == 0)
+								{
+										if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
+										{
+												objList[i].InUseFlag=1;
+												if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
+												{
+														if (objList[i].link!=0)
+														{
+															objList[objList[i].link].InUseFlag = 1;			
+															if (GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id]== ObjectInteraction.NPC_TYPE)
+																{
+																	SetContainerInUse(game, LevelInfo, objList, objList[objList[i].link].index);	
+																}
+														}
+												}
+										}
+								}
+						}
 				}
-				else if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
-				{
-					if (objList[i].InUseFlag == 0)
-					{
-							//objList[nextObj].tileX = x;
-							//objList[nextObj].tileY = y;
-						objList[i].InUseFlag = 1;
-					}
-					if ( 
-							(GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id] == ObjectInteraction.NPC_TYPE)
-							&& 
-							(objList[objList[i].link].InUseFlag==0)
-					)
-					{
-						SetContainerInUse(game, LevelInfo, objList, objList[objList[i].link].index);
-					}
-					if (objList[i].link!=0)
-					{//Make sure the object to be spawned is linked
-						objList[objList[i].link].InUseFlag=1;
-					}
-				}
-			}
 		}
-	}
 
 
 	public static bool isContainer(ObjectLoaderInfo currobj)
@@ -1610,6 +1605,12 @@ public class ObjectLoader : Loader {
 					}
 					else
 					{//next item next onto previous item.
+										if (itemObjInt==null)
+										{
+												int a=0;
+												a++;
+												Debug.Log("link failure");
+										}
 						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
 						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
 						itemObjInt.next=0;//end for now.

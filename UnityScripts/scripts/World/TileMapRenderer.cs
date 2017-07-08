@@ -700,7 +700,7 @@ public class TileMapRenderer : Loader{
 										{//tmobj[30]+(objList[x].flags & 0x3F)
 												MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
 										}	
-										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,"pillar_" + ObjectLoader.UniqueObjectName(objList.objInfo[i]));
 								}
 								else
 								{
