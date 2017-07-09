@@ -454,10 +454,12 @@ public class DataLoader :Loader {
 		/// </summary>
 		/// <param name="writer">Writer.</param>
 		/// <param name="val">Value.</param>
-		public static void WriteInt8(BinaryWriter writer, long val)
+		public static long WriteInt8(BinaryWriter writer, long val)
 		{
 				byte valOut= (byte)(val & 0xff);
 				writer.Write(valOut);
+
+				return 1;
 		}
 
 
@@ -466,13 +468,15 @@ public class DataLoader :Loader {
 		/// </summary>
 		/// <param name="writer">Writer.</param>
 		/// <param name="val">Value.</param>
-		public static void WriteInt16(BinaryWriter writer, long val)
+		public static long WriteInt16(BinaryWriter writer, long val)
 		{
 				byte valOut= (byte)(val & 0xff);
 				writer.Write(valOut);
 
 				valOut= (byte)(val >>8 & 0xff);
 				writer.Write(valOut);
+
+				return 2;
 		}
 
 		/// <summary>
@@ -480,7 +484,7 @@ public class DataLoader :Loader {
 		/// </summary>
 		/// <param name="writer">Writer.</param>
 		/// <param name="val">Value.</param>
-		public static void WriteInt32(BinaryWriter writer, long val)
+		public static long WriteInt32(BinaryWriter writer, long val)
 		{
 				byte valOut= (byte)(val & 0xff);
 				writer.Write(valOut);
@@ -493,6 +497,8 @@ public class DataLoader :Loader {
 
 				valOut= (byte)(val >>24 & 0xff);
 				writer.Write(valOut);
+
+				return 4;
 		}
 
 

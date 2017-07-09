@@ -126,7 +126,9 @@ public class MapInteraction : GuiBase {
 				{
 					System.Guid guid = System.Guid.NewGuid();
 					MapNote newmapnote = new MapNote();
-					newmapnote.NotePosition=pos;
+					//newmapnote.NotePosition=pos;
+					newmapnote.PosX= (int)pos.x;
+					newmapnote.PosY= (int)(pos.y+100f);
 					newmapnote.NoteText= MapNoteInput.text;
 					newmapnote.guid=guid;
 					mapNoteCurrent.GetComponent<ContentSizeFitter>().horizontalFit= ContentSizeFitter.FitMode.PreferredSize;

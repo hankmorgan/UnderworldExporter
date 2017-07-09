@@ -19,11 +19,9 @@ public class GameWorldController : UWEBase {
 
 		struct UWBlock
 		{
-			public char[] TileMapData;
-			public char[] OverlayData;
-			public char[] TextureData;
-			public char[] AutomapData;
-			public char[] AutoMapNotes;
+			public char[] Data;
+			public long Address;
+			public long DataLen;
 		};
 
 		public Vector2 NotePosition;
@@ -820,7 +818,10 @@ public class GameWorldController : UWEBase {
 			{
 					return;
 			}
-
+				if (_RES!=GAME_UW1)
+				{
+						return;
+				}
 			TileMap.visitTileX =(int)(playerUW.transform.position.x/1.2f);
 			TileMap.visitTileY =(int)(playerUW.transform.position.z/1.2f);
 			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
@@ -907,51 +908,129 @@ public class GameWorldController : UWEBase {
 		/// Writes a lev ark file based on a rebuilding of the data.
 		/// </summary>
 		/// <param name="slotNo">Slot no.</param>
+		///<9 blocks level tilemap/master object list>
+		///<9 blocks object animation overlay info>
+		///<9 blocks texture mapping>
+		///<9 blocks automap infos>
+		///<9 blocks map notes>
+		///The remaining 9 x 10 blocks are unused.
+		/// 
 		public void WriteBackLevArk(int slotNo)
 		{
-
-				UWBlock[] blockData = new UWBlock[9];
+				UWBlock[] blockData = new UWBlock[45];
 
 				//First update the object list so as to match indices properly
 				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
-				long[] BlockSizes = new long[45];
-				long[]BlockAddresses = new long[45];
 
-				BlockAddresses[0]=542; //First block is always here.
+				 //First block is always here.
+				long AddressToCopyFrom=0;
 
-				//Read in the data for the tile maps
+				//Read in the data for the 9 tile/object maps
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{
-					long AddressToCopyFrom;
 					if (GameWorldController.instance.Tilemaps[l]!=null)
 					{
-						blockData[l].TileMapData= GameWorldController.instance.Tilemaps[l].TileMapToBytes();							
-						blockData[l].AutomapData=GameWorldController.instance.Tilemaps[l].AutoMapVisitedToBytes();
-					}
+						blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
+						blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
+					}///31752
 					else
 					{
 						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l* 4) + 2,32);
-						blockData[l].TileMapData=CopyData(AddressToCopyFrom,TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);
-
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+36 * 4) + 2,32);
-						blockData[l].AutomapData=CopyData(AddressToCopyFrom,TileMap.TileMapSizeX*TileMap.TileMapSizeY);
-
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+27 * 4) + 2,32);
-						long DataLen = AutoMap.getNextAutomapBlock(l,lev_ark_file_data);
-						blockData[l].AutoMapNotes=CopyData(AddressToCopyFrom,DataLen);
-
+						blockData[l].Data=CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
+						blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
 					}
+				}
+				//Read in the data for the animation overlays
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{					
+					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+9)* 4) + 2,32);
+					blockData[l+9].Data=CopyData(AddressToCopyFrom,64*6);
+					blockData[l+9].DataLen=blockData[l+9].Data.GetUpperBound(0)+1;
+				}
 
-					//Just copy Texture map and overlay data.
-					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+9* 4) + 2,32);
-					blockData[l].TextureData=CopyData(AddressToCopyFrom,64*6);
+				//read in the texture maps
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{
+					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+18) * 4) + 2,32);
+					blockData[l+18].Data=CopyData(AddressToCopyFrom,0x7a);
+					blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+				}
 
-					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+18* 4) + 2,32);
-					blockData[l].TextureData=CopyData(AddressToCopyFrom,0x7a);
-
+				//read in the auto maps
+				for (int l=0; l<=GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
+				{
+					blockData[l+27].Data=GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();
+					if (blockData[l+27].Data!=null)
+					{
+						blockData[l+27].DataLen=blockData[l+27].Data.GetUpperBound(0)+1;			
+					}
+					else
+					{
+						blockData[l+27].DataLen=0;		
+					}					
 				}
 
 
+				//read in the auto maps notes
+				for (int l=0; l<=GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
+				{
+					blockData[l+36].Data=GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
+					if (blockData[l+36].Data!=null)
+					{
+						blockData[l+36].DataLen=blockData[l+36].Data.GetUpperBound(0)+1;			
+					}
+					else
+					{
+						blockData[l+36].DataLen=0;		
+					}	
+				}
+
+				blockData[0].Address=542;
+				long prevAddress=blockData[0].Address;
+				//Work out the block addresses.
+				for (int i=1; i<blockData.GetUpperBound(0);i++)
+				{
+					if (blockData[i-1].DataLen!=0)
+					{
+						blockData[i].Address= prevAddress+blockData[i-1].DataLen;	
+						prevAddress=blockData[i].Address;
+					}
+					else
+					{
+						blockData[i].Address=0;	
+					}					
+				}
+
+				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\lev.ark",FileMode.Create);
+				BinaryWriter writer= new BinaryWriter(file);
+				long add_ptr=0;
+				add_ptr+=DataLoader.WriteInt8(writer, 0x87);
+				add_ptr+=DataLoader.WriteInt8(writer, 0);
+				for (int i=0; i<=blockData.GetUpperBound(0); i++)
+				{//write block addresses
+					add_ptr+=DataLoader.WriteInt32(writer, blockData[i].Address);		
+				}
+
+				for (long freespace=add_ptr; freespace<blockData[0].Address;freespace++)
+				{//write freespace
+					add_ptr+=DataLoader.WriteInt8(writer,0);
+				}
+
+				//Now be brave and write all my blocks!!!
+				for (int i=0; i<=blockData.GetUpperBound(0); i++)
+				{
+					if (blockData[i].Data!=null)
+					{
+						for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+						{
+							add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
+						}	
+					}
+				}
+
+				file.Close();
+
+				return;
 		}
 
 

@@ -214,41 +214,43 @@ public class AutoMap : Loader {
 
 						while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
 						{								
-								string NoteText ="";
-								bool terminated=false;
-								int PosX=0; int PosY=0;
-								PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
-								PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
-								for (int c=0; c<=0x31;c++)
-								{
-										if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
-										{
-												NoteText+=lev_ark[automapNotesAddress+c];
-										}
-										else
-										{
-												terminated=true;		
-										}
-								}
-								if (NoteText=="")
-								{
-										break;
-								}
-								if ( (PosY<=200) && (PosX<=320))
-								{
-										MapNote newmapnote = new MapNote();
-										newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
-										newmapnote.NoteText= NoteText;
-										newmapnote.guid=System.Guid.NewGuid();;
-										GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(newmapnote);	
-								}
-								else
-								{
-										break;
-								}
+							string NoteText ="";
+							bool terminated=false;
+							int PosX=0; int PosY=0;
+							PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
+							PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
+							for (int c=0; c<=0x31;c++)
+							{
+									if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
+									{
+											NoteText+=lev_ark[automapNotesAddress+c];
+									}
+									else
+									{
+											terminated=true;		
+									}
+							}
+							if (NoteText=="")
+							{
+								break;
+							}
+							if ( (PosY<=200) && (PosX<=320))
+							{
+								MapNote newmapnote = new MapNote();
+								newmapnote.PosX=PosX;
+								newmapnote.PosY=PosY;
+								//newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
+								newmapnote.NoteText= NoteText;
+								newmapnote.guid=System.Guid.NewGuid();
+								GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(newmapnote);	
+							}
+							else
+							{
+								break;
+							}
 
 
-								automapNotesAddress+=54;
+							automapNotesAddress+=54;
 						}
 				}
 
@@ -408,7 +410,7 @@ public class AutoMap : Loader {
 						GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
 						myObj.transform.parent= UWHUD.instance.MapPanel.transform;
 						myObj.GetComponent<Text>().text = MapNotes[i].NoteText;
-						myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[i].NotePosition;
+						myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[i].NotePosition();
 						myObj.GetComponent<MapNoteId>().guid = MapNotes[i].guid;
 						//Move the control so that it sits in front of the map,
 						myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
@@ -450,6 +452,11 @@ public class AutoMap : Loader {
 				else if (GetIsLava(TileX,TileY) == true)
 				{
 						TileColorPrimary=LavaColour;
+						TileColorSecondary=Color.clear;
+				}
+				else if (GetIsStair(TileX,TileY) == true)
+				{
+						TileColorPrimary=StairsTileColour;
 						TileColorSecondary=Color.clear;
 				}
 				else
@@ -1143,6 +1150,18 @@ public class AutoMap : Loader {
 
 
 		/// <summary>
+		/// Gets if the tile contains a stair.
+		/// </summary>
+		/// <returns><c>true</c>, if is stair was gotten, <c>false</c> otherwise.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		private bool GetIsStair(int tileX, int tileY)
+		{
+			return Tiles[tileX,tileY].DisplayType==DisplayTypeStair;
+		}
+
+
+		/// <summary>
 		/// Tells if the tile is one of the square open types
 		/// </summary>
 		/// <returns><c>true</c>, if tile open was ised, <c>false</c> otherwise.</returns>
@@ -1180,7 +1199,25 @@ public class AutoMap : Loader {
 					((tileY>=0) && (tileY<=TileMap.TileMapSizeY)))
 			{
 				Tiles[tileX,tileY].tileType=(short)Mark;
-				Tiles[tileX,tileY].DisplayType=(short)DisplayType;
+				if (Tiles[tileX,tileY].DisplayType!=DisplayTypeStair)
+				{
+					Tiles[tileX,tileY].DisplayType=(short)DisplayType;				
+				}				
+			}
+		}
+
+		/// <summary>
+		/// Marks the tile as visited and checks if it is in range.
+		/// </summary>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public void MarkTileDisplayType(int tileX, int tileY, int DisplayType)
+		{
+			if (((tileX>=0) && (tileX<=TileMap.TileMapSizeX)) 
+					&& 
+					((tileY>=0) && (tileY<=TileMap.TileMapSizeY)))
+			{
+			Tiles[tileX,tileY].DisplayType=(short)DisplayType;	
 			}
 		}
 
@@ -1246,4 +1283,108 @@ public class AutoMap : Loader {
 			return selectedAddress;
 		}
 
+
+		public char[] AutoMapVisitedToBytes()
+		{				
+				char[] AutoMapData= new char[(TileMapSizeX+1)*(TileMapSizeY+1)];	
+				int add_ptr=0;
+				for (int y=0; y<=TileMap.TileMapSizeY;y++)
+				{
+						for (int x=0; x<=TileMap.TileMapSizeX;x++)
+						{														
+								int val ;//= (short)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
+								//The automap contains one byte per tile, in the same order as the
+								//level tilemap. A valid value in the low nybble means the tile is displayed
+								//on the map. Valid values are the same as tile types:
+								val = Tiles[x,y].DisplayType<<4 | Tiles[x,y].tileType;
+								AutoMapData[add_ptr]=(char)val;
+								add_ptr++;
+						}
+				}
+
+				return AutoMapData;
+		}
+
+		public char[] AutoMapNotesToBytes()
+		{
+				//return null;
+				//char[] TileMapData= new char[TileMapSizeX*TileMapSizeY];	
+				if (MapNotes.Count>0)
+				{
+						int add_ptr=0;
+						char[] AutoMapData=new char[MapNotes.Count * 54];	
+						foreach (MapNote note in MapNotes)
+						{
+								bool terminated=false;
+							for (int i=0; i<54;i++)	
+							{
+								if (i<=0x31)
+								{
+									if (i<note.NoteText.Length)
+									{//Lower case notes will crash the game
+										char alpha =note.NoteText.ToUpper().ToCharArray()[i];	
+										AutoMapData[add_ptr+i]=alpha;
+									}		
+									else
+									{
+										if (terminated)
+										{//0x6f
+												AutoMapData[add_ptr+i]=(char)0x6f;	
+										}
+										else
+										{
+												AutoMapData[add_ptr+i]=(char)0;
+												terminated=true;
+										}										
+									}
+								}
+								else
+								{
+									switch (i)
+									{
+									case 0x32:
+										{
+											int val= note.PosX;
+											AutoMapData[add_ptr+i]=(char)(val & 0xFF);
+											AutoMapData[add_ptr+i+1]=(char)((val>>8) & 0xFF);
+											break;
+										}
+									case 0x34:
+										{
+											int val= note.PosY;
+											AutoMapData[add_ptr+i]=(char)(val & 0xFF);
+											AutoMapData[add_ptr+i+1]=(char)((val>>8) & 0xFF);
+											break;
+										}
+									}
+								}
+							}
+							add_ptr+=54;
+						}
+					return AutoMapData;
+				}
+				else
+				{
+					return null;	
+				}
+					
+		}
+
 }
+
+
+/*
+ 							int PosX=0; int PosY=0;
+							PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
+							PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
+							for (int c=0; c<=0x31;c++)
+							{
+									if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
+									{
+											NoteText+=lev_ark[automapNotesAddress+c];
+									}
+									else
+									{
+											terminated=true;		
+									}
+				*/

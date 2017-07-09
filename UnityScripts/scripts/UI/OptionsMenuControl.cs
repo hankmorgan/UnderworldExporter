@@ -382,6 +382,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 			//Write lev.ark file and object lists
 			GameWorldController.instance.WriteBackLevArk(SlotNo+1);
+
 			//Write bglobals.dat
 			GameWorldController.instance.WriteBGlobals(SlotNo+1);
 

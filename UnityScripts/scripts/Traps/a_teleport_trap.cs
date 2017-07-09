@@ -49,7 +49,6 @@ public class a_teleport_trap : trap_base {
 					}
 				}
 			}
-
 			GameWorldController.instance.SwitchLevel(objInt().zpos-1,objInt().quality,objInt().owner);
 		}
 	}

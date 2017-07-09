@@ -60,7 +60,7 @@ public class TileMap : Loader {
 		const int SLOPE_BOTH_PARALLEL= 0;
 		const int SLOPE_BOTH_OPPOSITE= 1;
 		const int SLOPE_FLOOR_ONLY =2;
-		const int  SLOPE_CEILING_ONLY= 3;
+		const int SLOPE_CEILING_ONLY= 3;
 
 		//Visible faces indices
 		const int vTOP =0;
@@ -1953,13 +1953,21 @@ public class TileMap : Loader {
 		/// Converts this tilemap/Objectlist into an array that can be written to file.
 		/// </summary>
 		/// <returns>The map to bytes.</returns>
-		public char[] TileMapToBytes()
+		public char[] TileMapToBytes(char[] lev_ark_file_data)
 		{
-				char[] TileMapData= new char[TileMapSizeX*TileMapSizeY*4  +  256*27 + 768*8];//Size of tilemap + object list
-				long addptr=0;
-				for (int x=0; x<=TileMap.TileMapSizeX;x++)
+				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
+				//prepopulate with existing data. Vanilla underworld will crash otherwise
+				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
+				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
 				{
-						for (int y=0; y<=TileMap.TileMapSizeY;y++)
+					TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
+				}
+				//return TileMapData;
+
+				long addptr=0;
+				for (int y=0; y<=TileMap.TileMapSizeY;y++)
+				{
+						for (int x=0; x<=TileMap.TileMapSizeX;x++)
 						{		
 								TileInfo t = Tiles[x,y];
 
@@ -1987,8 +1995,7 @@ public class TileMap : Loader {
 				}	
 
 
-
-
+				//return TileMapData;
 				//char[] ObjectListData= new char[256*27 + 768*8];
 
 				for (int o=0; o<=GameWorldController.instance.objectList[thisLevelNo].objInfo.GetUpperBound(0);o++)
@@ -2089,22 +2096,5 @@ public class TileMap : Loader {
 				OverlayAddress+=6;
 			}
 			return OverLayData;
-		}
-
-
-		public char[] AutoMapVisitedToBytes()
-		{//TODO
-			char[] TileMapData= new char[TileMapSizeX*TileMapSizeY];	
-			
-
-			return TileMapData;
-		}
-
-		public char[] AutoMapNotesToBytes()
-		{
-				//char[] TileMapData= new char[TileMapSizeX*TileMapSizeY];	
-
-
-				return null;	
 		}
 }
