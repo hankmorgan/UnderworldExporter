@@ -549,6 +549,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	int i;
 	int CeilingTexture=0;
 	int textureMapSize;
+	long AutoMapAddress;
 	
 	UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 	switch (game)
@@ -606,6 +607,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		//Get the first map block
 		AddressOfBlockStart = getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);	
 		textureAddress = getValAtAddress(lev_ark,((LevelNo+18) * 4) + 2 ,32);
+		AutoMapAddress = getValAtAddress(lev_ark, ((LevelNo + 27) * 4) + 2, 32);
 		//long objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
 		address_pointer =0;
 		break;
@@ -968,6 +970,28 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			LevelInfo[x][y].LowerSouth = LevelInfo[x][y].South;
 
 			}
+
+
+	//Load Automap info
+	if (AutoMapAddress != 0)
+		{
+			int z = 0;
+			for (int y = 0; y < 64; y++)
+				{
+				for (int x = 0; x < 64; x++)
+					{
+					short val = (short)getValAtAddress(lev_ark, AutoMapAddress + z, 8);
+					//The automap contains one byte per tile, in the same order as the
+					//level tilemap. A valid value in the low nybble means the tile is displayed
+					//on the map. Valid values are the same as tile types:
+					//LevelInfo[x][y].tileType = (short)(val & 0xf);
+					LevelInfo[x][y].DisplayType = (short)((val >> 4) & 0xf);
+					z++;
+					}
+				}
+		}
+
+
 return 1;
 }
 

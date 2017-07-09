@@ -313,6 +313,8 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 	printTileMap(LevelInfo, LevelNo);
 
+	printDisplayType(LevelInfo, LevelNo);
+
 	printNoMagicMap(LevelInfo,LevelNo);
 
 	printFlagsMap(LevelInfo, LevelNo);
@@ -395,6 +397,24 @@ void printNoMagicMap(tile LevelInfo[64][64], int LevelNo)
 			}
 		}
 	}
+
+void printDisplayType(tile LevelInfo[64][64], int LevelNo)
+	{
+	//Prints the tilemap 
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing DisplayType for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			fprintf(LOGFILE, "%d", LevelInfo[x][y].DisplayType);
+			fprintf(LOGFILE, "\\");//delimiter.
+			}
+		}
+	}
+
+
 
 void printFlagsMap(tile LevelInfo[64][64], int LevelNo)
 	{

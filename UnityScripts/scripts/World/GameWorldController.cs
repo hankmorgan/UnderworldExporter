@@ -16,6 +16,16 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
+
+		struct UWBlock
+		{
+			public char[] TileMapData;
+			public char[] OverlayData;
+			public char[] TextureData;
+			public char[] AutomapData;
+			public char[] AutoMapNotes;
+		};
+
 		public Vector2 NotePosition;
 		public bool bGenNavMeshes=true;
 		public float testUVadjust=0f;
@@ -81,6 +91,12 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public TileMap[] Tilemaps = new TileMap[9];
 
+
+	/// <summary>
+	/// The auto maps.
+	/// </summary>
+	public AutoMap[] AutoMaps = new AutoMap[9];
+	
 	/// <summary>
 	/// The player character.
 	/// </summary>
@@ -783,19 +799,51 @@ public class GameWorldController : UWEBase {
 			
 		}
 
+		public AutoMap currentAutoMap()
+		{
+			if (LevelNo==-1)
+			{
+				return null;
+			}
+			else
+			{
+				return AutoMaps[LevelNo];				
+			}
+		}
+
 		/// <summary>
 		/// Detects where the player currently is an updates their swimming state and auto map as needed.
 		/// </summary>
 		public void PositionDetect()
 		{
-				if ((AtMainMenu==true) || (WindowDetect.InMap))
-				{
-						return;
-				}
-				TileMap.visitTileX =(int)(playerUW.transform.position.x/1.2f);
-				TileMap.visitTileY =(int)(playerUW.transform.position.z/1.2f);
-				currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
+			if ((AtMainMenu==true) || (WindowDetect.InMap))
+			{
+					return;
+			}
+
+			TileMap.visitTileX =(int)(playerUW.transform.position.x/1.2f);
+			TileMap.visitTileY =(int)(playerUW.transform.position.z/1.2f);
+			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
 				GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
+				for (int x=-1; x<=1;x++)
+				{
+						for (int y=-1; y<=1;y++)
+						{
+								if
+										(
+										( 
+										(TileMap.visitTileX+x >=0 ) && (TileMap.visitTileX+x <=TileMap.TileMapSizeX )
+										)
+										&&
+										( 
+												(TileMap.visitTileY+y >=0 ) && (TileMap.visitTileY+y <=TileMap.TileMapSizeY)
+										)
+										)
+								{
+									currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
+								}
+						}	
+				}
 
 		}
 
@@ -855,11 +903,63 @@ public class GameWorldController : UWEBase {
 		}
 
 
+		/// <summary>
+		/// Writes a lev ark file based on a rebuilding of the data.
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+		public void WriteBackLevArk(int slotNo)
+		{
+
+				UWBlock[] blockData = new UWBlock[9];
+
+				//First update the object list so as to match indices properly
+				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+				long[] BlockSizes = new long[45];
+				long[]BlockAddresses = new long[45];
+
+				BlockAddresses[0]=542; //First block is always here.
+
+				//Read in the data for the tile maps
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{
+					long AddressToCopyFrom;
+					if (GameWorldController.instance.Tilemaps[l]!=null)
+					{
+						blockData[l].TileMapData= GameWorldController.instance.Tilemaps[l].TileMapToBytes();							
+						blockData[l].AutomapData=GameWorldController.instance.Tilemaps[l].AutoMapVisitedToBytes();
+					}
+					else
+					{
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l* 4) + 2,32);
+						blockData[l].TileMapData=CopyData(AddressToCopyFrom,TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);
+
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+36 * 4) + 2,32);
+						blockData[l].AutomapData=CopyData(AddressToCopyFrom,TileMap.TileMapSizeX*TileMap.TileMapSizeY);
+
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+27 * 4) + 2,32);
+						long DataLen = AutoMap.getNextAutomapBlock(l,lev_ark_file_data);
+						blockData[l].AutoMapNotes=CopyData(AddressToCopyFrom,DataLen);
+
+					}
+
+					//Just copy Texture map and overlay data.
+					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+9* 4) + 2,32);
+					blockData[l].TextureData=CopyData(AddressToCopyFrom,64*6);
+
+					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l+18* 4) + 2,32);
+					blockData[l].TextureData=CopyData(AddressToCopyFrom,0x7a);
+
+				}
+
+
+		}
+
+
 
 		/// <summary>
 		/// Writes a lev ark file based on the stored file
 		/// </summary>
-		public void WriteBackLevArk(int slotNo)
+		public void WriteBackLevArkX(int slotNo)
 		{
 			ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());	
 			//Write back tile states
@@ -1026,6 +1126,7 @@ public class GameWorldController : UWEBase {
 				default:
 						Tilemaps = new TileMap[9];
 						objectList=new ObjectLoader[9];
+						AutoMaps=new AutoMap[9];
 						break;
 				}
 
@@ -1098,6 +1199,18 @@ public class GameWorldController : UWEBase {
 						Debug.Log(Loader.BasePath + Lev_Ark_File + "File not loaded");
 						Application.Quit();
 				}		
+
+				//Load up auto map data
+				switch(_RES)
+				{
+				case GAME_UW1:
+					for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
+					{
+							AutoMaps[i]=new AutoMap();
+						AutoMaps[i].InitAutoMap(i,lev_ark_file_data);
+					}
+					break;
+				}
 		}
 
 		public char[] tilemapfiledata()
@@ -1188,6 +1301,23 @@ public class GameWorldController : UWEBase {
 			}
 			File.WriteAllBytes(Loader.BasePath +  "save" + SlotNo + "\\BGLOBALS.DAT" , output);
 
+		}
+
+		/// <summary>
+		/// Copies the data from the cached lev ark file to a new array;
+		/// </summary>
+		/// <returns>The data.</returns>
+		/// <param name="address">Address.</param>
+		/// <param name="length">Length.</param>
+		public char[] CopyData(long address, long length)
+		{
+			char[] DataToCopy=new char[length];
+
+			for (int i=0; i<=DataToCopy.GetUpperBound(0);i++)
+			{
+				DataToCopy[i] = lev_ark_file_data[address+i];
+			}
+			return DataToCopy;
 		}
 
 }

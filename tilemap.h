@@ -134,6 +134,8 @@ int SHOCKSTATE[4];	//These should be ff,00,00,00 on an initial map. I'm just bri
 	short shadeLowerGlobal;
 
 	long address;	//The file address of the tile in question.
+
+	short DisplayType;
 };
 
 

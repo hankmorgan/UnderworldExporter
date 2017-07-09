@@ -48,23 +48,23 @@ public class MapInteraction : GuiBase {
 		private void UpdateMap(int LevelNo)
 		{
 			WindowDetect.InMap=true;//turns on blocking collider.
-				bool delMap=false;
-				if (GameWorldController.instance.Tilemaps[LevelNo]==null)
-				{//Load up a temp map is no loaded map is available to display
-						delMap=true;
-						GameWorldController.instance.Tilemaps[LevelNo]=new TileMap();
-						GameWorldController.instance.Tilemaps[LevelNo].thisLevelNo=LevelNo;
-						GameWorldController.instance.Tilemaps[LevelNo].BuildTileMapUW(GameWorldController.instance.tilemapfiledata(), LevelNo);
-						GameWorldController.instance.objectList[LevelNo]=new ObjectLoader();
-						GameWorldController.instance.objectList[LevelNo].LoadObjectList( GameWorldController.instance.Tilemaps[LevelNo],GameWorldController.instance.tilemapfiledata());	
-				}
+				//bool delMap=false;
+				//if (GameWorldController.instance.Tilemaps[LevelNo]==null)
+			//	{//Load up a temp map is no loaded map is available to display
+				//		delMap=true;
+			//			GameWorldController.instance.Tilemaps[LevelNo]=new TileMap();
+				//		GameWorldController.instance.Tilemaps[LevelNo].thisLevelNo=LevelNo;
+			//			GameWorldController.instance.Tilemaps[LevelNo].BuildTileMapUW(GameWorldController.instance.tilemapfiledata(), LevelNo);
+			//			GameWorldController.instance.objectList[LevelNo]=new ObjectLoader();
+			//			GameWorldController.instance.objectList[LevelNo].LoadObjectList( GameWorldController.instance.Tilemaps[LevelNo],GameWorldController.instance.tilemapfiledata());	
+			//	}
 
-			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemaps[LevelNo].TileMapImage();
-				if (delMap==true)
-				{//del map if we loaded up a temp tile map to display level
-						GameWorldController.instance.Tilemaps[LevelNo]=null;	
-						GameWorldController.instance.objectList[LevelNo]=null;
-				}
+			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.AutoMaps[LevelNo].TileMapImage();
+			//if (delMap==true)
+			//{//del map if we loaded up a temp tile map to display level
+			//		GameWorldController.instance.Tilemaps[LevelNo]=null;	
+			//		GameWorldController.instance.objectList[LevelNo]=null;
+			//}
 		}
 
 		public void ClickEraser()
@@ -131,7 +131,7 @@ public class MapInteraction : GuiBase {
 					newmapnote.guid=guid;
 					mapNoteCurrent.GetComponent<ContentSizeFitter>().horizontalFit= ContentSizeFitter.FitMode.PreferredSize;
 					//mapNoteCurrent.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
-					GameWorldController.instance.Tilemaps[MapNo].MapNotes.Add(newmapnote);
+					GameWorldController.instance.AutoMaps[MapNo].MapNotes.Add(newmapnote);
 					mapNoteCurrent.GetComponent<MapNoteId>().guid= guid;								
 				}
 				InteractionMode=MapInteractionNormal;

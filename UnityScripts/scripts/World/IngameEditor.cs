@@ -106,7 +106,7 @@ public class IngameEditor : GuiBase_Draggable {
 
 	public void RefreshTileMap()
 		{
-			TileMapView.texture= GameWorldController.instance.currentTileMap().TileMapImage();
+			TileMapView.texture= GameWorldController.instance.currentAutoMap().TileMapImage();
 			LevelDetails.text= "Level + " + GameWorldController.instance.LevelNo;
 		}
 

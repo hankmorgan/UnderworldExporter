@@ -13,11 +13,11 @@ public class MapNoteId : MonoBehaviour{
 				if (MapInteraction.InteractionMode == 1)
 				{
 						//delete the mapnote
-						for (int i =0; i< GameWorldController.instance.Tilemaps[MapInteraction.MapNo].MapNotes.Count;i++)
+						for (int i =0; i< GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count;i++)
 						{
-								if (guid== GameWorldController.instance.Tilemaps[MapInteraction.MapNo].MapNotes[i].guid)
+								if (guid== GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].guid)
 								{
-										GameWorldController.instance.Tilemaps[MapInteraction.MapNo].MapNotes.RemoveAt(i);
+										GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.RemoveAt(i);
 										Destroy(this.gameObject);						
 										return;								
 								}

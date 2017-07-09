@@ -92,7 +92,7 @@ public class TileInfo : Loader {
 
 		///Some stuff I need to obsolete
 		/// 
-		public bool tileVisited;
+		//public bool tileVisited;
 
 
 
