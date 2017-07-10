@@ -434,6 +434,8 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
 			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+			//000~001~162~Restore Game Complete. \n
+			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,162));
 			ReturnToGame();
 		}
 	}

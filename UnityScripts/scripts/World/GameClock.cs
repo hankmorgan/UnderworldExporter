@@ -36,7 +36,7 @@ public class GameClock : UWEBase {
 	/// </summary>
 	public int _day;
 
-	static GameClock instance;
+	public static GameClock instance;
 
 	void Start()
 	{

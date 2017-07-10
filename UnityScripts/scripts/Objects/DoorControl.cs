@@ -350,6 +350,8 @@ public class DoorControl : object_base {
 				}
 				objInt().item_id+=8;
 				objInt().zpos+=24;
+				objInt().enchantment=1;
+				objInt().flags=13;
 				//state=true;
 				if(objInt().link!=0)
 					{	//If it's link is to something that is not a lock then it is likely to be a trigger
@@ -424,6 +426,8 @@ public class DoorControl : object_base {
 				}
 				objInt().item_id-=8;
 				objInt().zpos-=24;
+				objInt().flags=0;
+				objInt().enchantment=0;
 				//state=false;
 			}
 		}

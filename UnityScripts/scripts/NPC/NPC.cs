@@ -238,7 +238,7 @@ public class NPC : object_base {
 		{
 			return;
 		}
-				objInt().objectloaderinfo.InUseFlag=0;
+		objInt().objectloaderinfo.InUseFlag=0;
 		NPC_DEAD=true;//Tells the update to execute the NPC death animation
 		//Dump npc inventory on the floor.
 		Container cnt = this.GetComponent<Container>();

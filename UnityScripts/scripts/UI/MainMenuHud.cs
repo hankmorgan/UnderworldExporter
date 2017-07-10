@@ -244,6 +244,9 @@ public class MainMenuHud : GuiBase {
 			{//Speedstart
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
 				GameWorldController.instance.InitBGlobals(0);
+				GameClock.instance._day=0;
+				GameClock.instance._minute=51;
+				GameClock.instance._second=15;
 				JourneyOnwards();
 				return;
 			}
@@ -268,6 +271,8 @@ public class MainMenuHud : GuiBase {
 			//Load up the map
 			JourneyOnwards();
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
+			//000~001~162~Restore Game Complete. \n
+			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,162));
 			return;	
 
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
@@ -445,11 +450,15 @@ public class MainMenuHud : GuiBase {
 								switch(_RES)
 								{
 								default:
+									GameWorldController.instance.playerUW.quest().TalismansRemaining=8;
 									GameWorldController.instance.playerUW.quest().DayGaramonDream=0;
 									GameWorldController.instance.playerUW.quest().GaramonDream=0;
 									GameWorldController.instance.playerUW.quest().IncenseDream=0;
 									GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
 									GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
+									GameClock.instance._day=0;
+									GameClock.instance._minute=51;
+									GameClock.instance._second=15;
 									break;
 								}
 								JourneyOnwards();

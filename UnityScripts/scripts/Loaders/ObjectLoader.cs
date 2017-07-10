@@ -986,10 +986,10 @@ public class ObjectLoader : Loader {
 																		///LevelInfo[j,k].TerrainChangeIndices[LevelInfo[j,k].TerrainChangeCount]=currObj.index;
 																		LevelInfo[j,k].TerrainChangeCount++;
 																		//LevelInfo[j,k].isWater  = 0;// turn off water in terrain change tiles
-																		if (LevelInfo[j,k].isDoor==true)//The tile contains a door. I need to make sure the door is created at the height of the tile.
-																		{
-																				objList[LevelInfo[j,k].DoorIndex].zpos = objList[currObj.index].zpos;
-																		}
+																		//if (LevelInfo[j,k].isDoor==true)//The tile contains a door. I need to make sure the door is created at the height of the tile.
+																		//{
+																		//		objList[LevelInfo[j,k].DoorIndex].zpos = objList[currObj.index].zpos;
+																		//}
 																}						
 														}
 														currObj.tileX=x;
@@ -1101,10 +1101,10 @@ public class ObjectLoader : Loader {
 				float zpos = objList[index].zpos;
 				if (_RES!=GAME_SHOCK)
 				{
-					if ((objList[index].item_id >= 328) && (objList[index].item_id <= 333))
-					{//Open doors need to be adjusted down?
-						zpos -= 24f;
-					}	
+					//if ((objList[index].item_id >= 328) && (objList[index].item_id <= 333))
+					//{//Open doors need to be adjusted down?
+						//zpos -= 24f;
+					//}	
 				}
 				//if (game==Loader.GAME_SHOCK)
 				//{
@@ -1172,6 +1172,10 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.PORTCULLIS:
 								{
 										float DOORWIDTH=80f;
+
+										//Doors will always go at the tile height.
+										int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
+										offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
 
 										switch (objList[index].heading*45)
 										{//Move the object position so it can located in the right position in the centre of the frame.

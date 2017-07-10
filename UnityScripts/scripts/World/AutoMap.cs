@@ -1085,7 +1085,7 @@ public class AutoMap : Loader {
 			}
 			else
 			{
-					if (Tiles[tileX,tileY].tileType==10)
+					if ((Tiles[tileX,tileY].tileType==10) && (IngameEditor.EditorMode==false))
 					{
 						return TILE_SOLID;
 					}

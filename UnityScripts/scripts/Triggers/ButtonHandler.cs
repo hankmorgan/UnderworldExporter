@@ -243,11 +243,13 @@ public class ButtonHandler : object_base {
 			{
 				isOn=true;
 				setSprite(itemdIDOn);
+				objInt().item_id+=8;
 			}
 			else
 			{
 				isOn=false;
 				setSprite(itemdIDOff);
+				objInt().item_id-=8;
 			}
 		}
 		else

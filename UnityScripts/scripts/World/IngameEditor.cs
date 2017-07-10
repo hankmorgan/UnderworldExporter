@@ -95,17 +95,34 @@ public class IngameEditor : GuiBase_Draggable {
 		int levelnotoload=0;
 		if (int.TryParse(LevelNoToLoad.text, out levelnotoload))
 		{
-			GameWorldController.instance.SwitchLevel(levelnotoload);
-			RefreshTileMap();
-			RefreshTileInfo();
-			UpdateFloorTexturesDropDown();
-			UpdateWallTexturesDropDown();
-			UpdateObjectsDropDown();
+			if (levelnotoload<= GameWorldController.instance.Tilemaps.GetUpperBound(0))
+			{
+				GameWorldController.instance.SwitchLevel(levelnotoload);
+				RefreshTileMap();
+				RefreshTileInfo();
+				UpdateFloorTexturesDropDown();
+				UpdateWallTexturesDropDown();
+				UpdateObjectsDropDown();	
+			}
+			else
+			{
+				UWHUD.instance.MessageScroll.Add("Invalid Level No");
+			}
 		}		
 	}
 
 	public void RefreshTileMap()
 		{
+				AutoMap automap= GameWorldController.instance.currentAutoMap();
+				TileMap tilemap = GameWorldController.instance.currentTileMap();
+				//Mark all tiles as visited
+				for (int x=0; x<=TileMap.TileMapSizeX;x++)
+				{
+						for (int y=0; y<=TileMap.TileMapSizeY;y++)
+						{
+								automap.MarkTile(x,y,tilemap.Tiles[x,y].tileType, AutoMap.GetDisplayType(tilemap.Tiles[x,y]) );
+						}	
+				}
 			TileMapView.texture= GameWorldController.instance.currentAutoMap().TileMapImage();
 			LevelDetails.text= "Level + " + GameWorldController.instance.LevelNo;
 		}

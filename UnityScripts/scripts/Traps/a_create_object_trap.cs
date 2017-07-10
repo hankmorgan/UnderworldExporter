@@ -51,6 +51,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		ObjectLoaderInfo objI =  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link);
 		objI.instance= cloneObj.GetComponent<ObjectInteraction>();
 		cloneObj.GetComponent<ObjectInteraction>().objectloaderinfo= objI;
+		objI.InUseFlag=1;
 		cloneObj.name= ObjectLoader.UniqueObjectName(objI);
 		if (MoveItem)
 		{
