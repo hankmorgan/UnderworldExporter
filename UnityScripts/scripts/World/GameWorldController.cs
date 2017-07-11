@@ -16,15 +16,6 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
-
-		struct UWBlock
-		{
-			public char[] Data;
-			public long Address;
-			public long DataLen;
-		};
-
-
 		public bool bGenNavMeshes=true;
 
 		/// <summary>
@@ -913,7 +904,7 @@ public class GameWorldController : UWEBase {
 		/// 
 		public void WriteBackLevArk(int slotNo)
 		{
-				UWBlock[] blockData = new UWBlock[45];
+				DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[45];
 
 				//First update the object list so as to match indices properly
 				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		

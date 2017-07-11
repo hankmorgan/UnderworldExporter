@@ -8,6 +8,9 @@ using System.IO;
 /// </summary>
 public class DataLoader :Loader {
 
+		/// <summary>
+		/// System shock ark files.
+		/// </summary>
 		public struct Chunk{
 				public long chunkUnpackedLength;
 				public int chunkCompressionType;//compression type
@@ -15,6 +18,17 @@ public class DataLoader :Loader {
 				public int chunkContentType;
 				public char[] data;
 		};
+
+		/// <summary>
+		/// UW block structure for .ark files.
+		/// </summary>
+		public struct UWBlock
+		{
+				public char[] Data;
+				public long Address;
+				public long DataLen;
+		};
+
 
 
 		public static bool ReadStreamFile(String Path, out char[] buffer)

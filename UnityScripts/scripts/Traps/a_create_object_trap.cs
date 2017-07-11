@@ -17,17 +17,22 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	//private bool TrapFired=false;
 	public string NavMeshRegion;//Which nav mesh should apply to cloned objects if they are npcs. No longer needed here!
 
+		/// <summary>
+		/// The last object created. Used to force the garamon converation.
+		/// </summary>
+	public static string LastObjectCreated="";
+
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
 		if (objInt().quality <= Random.Range(1,41)) //100% chance when quality is zero.
 		{
-			//GameObject objToClone = GameObject.Find (TriggerObject);
 			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(objInt().link);
 			if (objToClone !=null)
 			{
 			  	GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);
-				
+				LastObjectCreated=NewObject.name;
+
 				if (objToClone.GetComponent<Container>()!=null)
 				{//Clone the items on this object
 					for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		

@@ -180,7 +180,7 @@ public class UWHUD : HUD {
 						case -1:
 								UpdatePanelStates();
 								break;
-						case 0://Inventory
+						case HUD_MODE_INVENTORY://Inventory
 								InventoryEnabled=true;
 								RuneBagEnabled=false;
 								StatsEnabled=false;
@@ -200,7 +200,7 @@ public class UWHUD : HUD {
 								}
 
 								break;
-						case 1://Stats display
+						case HUD_MODE_STATS://Stats display
 								StatsDisplay.UpdateNow=true	;	
 								InventoryEnabled=false;
 								RuneBagEnabled=false;
@@ -222,7 +222,7 @@ public class UWHUD : HUD {
 
 
 								break;	
-						case 2://Runebag
+						case HUD_MODE_RUNES://Runebag
 								InventoryEnabled=false;
 								RuneBagEnabled=true;
 								StatsEnabled=false;
@@ -242,7 +242,7 @@ public class UWHUD : HUD {
 								}
 
 								break;	
-						case 3://Conversation
+						case HUD_MODE_CONV://Conversation
 								GRLoader grConv = new GRLoader(GRLoader.CONVERSE_GR);
 								InventoryPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
 								PaperDollFemalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
@@ -267,7 +267,7 @@ public class UWHUD : HUD {
 								ConvNPCTitleBG.texture=grConv.LoadImageAt(0);
 								UpdatePanelStates();
 								break;	
-						case 4://Map
+						case HUD_MODE_MAP://Map
 								InventoryPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
 								PaperDollFemalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
 								PaperDollMalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);

@@ -99,10 +99,22 @@ public class Grave : object_base {
 						objInt().link++;//Update the grave description
 						objIntUsed.consumeObject ();
 						trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
+						GameWorldController.instance.playerUW.quest().isGaramonBuried=true;
+						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
+						//Garamon does not initiate conversation normally so I force the conversation.
+						GameObject garamon = GameObject.Find(a_create_object_trap.LastObjectCreated);
+						if (garamon!=null)
+						{
+							if (garamon.GetComponent<NPC>()!=null)
+							{
+								garamon.GetComponent<NPC>().TalkTo();
+							}
+						}
 					}
 					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
-					GameWorldController.instance.playerUW.quest().isGaramonBuried=true;
+					
 					return true;
 					}
 					else

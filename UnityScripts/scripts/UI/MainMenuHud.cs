@@ -48,6 +48,9 @@ public class MainMenuHud : GuiBase {
 		protected  int cursorSizeX =64;
 		protected  int cursorSizeY =64;
 		GRLoader chrBtns; 
+
+		public static MainMenuHud instance;
+
 		public void InitChargenScreen()
 		{
 				CharName.text="";
@@ -67,6 +70,7 @@ public class MainMenuHud : GuiBase {
 
 		public override void Start()
 		{
+			instance=this;
 			if (GameWorldController.instance.AtMainMenu)
 			{					
 
@@ -656,6 +660,7 @@ public class MainMenuHud : GuiBase {
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
 			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-			Destroy (this.gameObject);
+			//Destroy (this.gameObject);
+			MainMenuHud.instance.gameObject.SetActive(false);
 		}
 }
