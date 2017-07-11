@@ -725,13 +725,13 @@ public class SpellEffect : UWEBase {
 		-1};
 
 	///The number of ticks the effect last for and the the stability of the spell effect.
-	public int counter;	
+	public short counter;	
 	///The length of time of a tick before a spell reduces it stability
 	public int TickTime =10; 
 	///Effect Id of the current spell effect
 	public int EffectID; 
 	///The value for the spell effect. Eg light intensity. The Damage over time etc
-	public int Value;
+	public short Value;
 	///Is the effect running.
 	public bool Active;
 	///Used when an effect is created by equipment and needs to last as long as the player has equiped the item

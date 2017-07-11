@@ -94,7 +94,7 @@ public class Readable : object_base {
 								Container bowlContainer = bowl.GetComponent<Container>();
 								if (bowlContainer!=null)
 								{
-										for (int i=0; i<=bowlContainer.GetCapacity();i++)	
+									for (short i=0; i<=bowlContainer.GetCapacity();i++)	
 										{
 												GameObject foundItem = bowlContainer.GetGameObjectAt(i);
 												if (foundItem!=null)

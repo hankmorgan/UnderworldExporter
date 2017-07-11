@@ -14,24 +14,24 @@ public class SpellProp_Heal : SpellProp {
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt02:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt03:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt04:						
-						this.BaseDamage=Random.Range (1,10);break;
+						this.BaseDamage=(short)Random.Range (1,10);break;
 				case SpellEffect.UW1_Spell_Effect_Heal:
 				case SpellEffect.UW1_Spell_Effect_Heal_alt01:
 				case SpellEffect.UW1_Spell_Effect_Heal_alt02:
 				case SpellEffect.UW1_Spell_Effect_Heal_alt03:
 				case SpellEffect.UW1_Spell_Effect_Heal_alt04:
-						this.BaseDamage=Random.Range (10,20);break;
+						this.BaseDamage=(short)Random.Range (10,20);break;
 				case SpellEffect.UW1_Spell_Effect_EnhancedHeal:
 				case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt01:
 				case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt02:
 				case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt03:
-						this.BaseDamage=Random.Range (30,40);break;
+						this.BaseDamage=(short)Random.Range (30,40);break;
 				case SpellEffect.UW1_Spell_Effect_GreaterHeal:
 				case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt01:
 				case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt02:
 				case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt03:
 				case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt04:						
-						this.BaseDamage=Random.Range (50,60);break;
+						this.BaseDamage=(short)Random.Range (50,60);break;
 
 				}
 	}

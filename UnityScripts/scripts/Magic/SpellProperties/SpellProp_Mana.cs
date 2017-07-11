@@ -14,24 +14,24 @@ public class SpellProp_Mana : SpellProp {
 				case SpellEffect.UW1_Spell_Effect_ManaBoost_alt02:
 				case SpellEffect.UW1_Spell_Effect_ManaBoost_alt03:
 				case SpellEffect.UW1_Spell_Effect_ManaBoost_alt04:
-						BaseDamage=Random.Range(5,10);break;						
+						BaseDamage=(short)Random.Range(5,10);break;						
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt04:
-						BaseDamage=Random.Range(20,50);break;
+						BaseDamage=(short)Random.Range(20,50);break;
 				case SpellEffect.UW1_Spell_Effect_IncreaseMana:
 				case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt01:
 				case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt02:
 				case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt03:
-						BaseDamage=Random.Range(30,50);break;
+						BaseDamage=(short)Random.Range(30,50);break;
 				case SpellEffect.UW1_Spell_Effect_RegainMana:
 				case SpellEffect.UW1_Spell_Effect_RegainMana_alt01:
 				case SpellEffect.UW1_Spell_Effect_RegainMana_alt02:
 				case SpellEffect.UW1_Spell_Effect_RegainMana_alt03:
-						BaseDamage=Random.Range(30,50);break;
+						BaseDamage=(short)Random.Range(30,50);break;
 				case SpellEffect.UW1_Spell_Effect_RestoreMana:
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt01:
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
-						BaseDamage=Random.Range(3,70);break;
+						BaseDamage=(short)Random.Range(3,70);break;
 				}
 	}
 }

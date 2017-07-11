@@ -80,10 +80,10 @@ public class ContainerOpened : GuiBase_Draggable {
 				}
 
 			}
-			for (int i = 0; i<8; i++)
+			for (short i = 0; i<8; i++)
 			{
 				string sItem = DestinationContainer.GetItemAt(i);
-				GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
+				GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
 			}
 		}
 		else

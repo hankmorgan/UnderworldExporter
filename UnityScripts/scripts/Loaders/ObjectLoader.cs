@@ -178,7 +178,7 @@ public class ObjectLoader : Loader {
 
 
 		//void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, char[] lev_ark, int LevelNo)
-		bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int[] texture_map,char[] archive_ark, int LevelNo)
+		bool BuildObjectListShock(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map,char[] archive_ark, short LevelNo)
 		{
 
 				short InUseFlag;
@@ -301,9 +301,9 @@ public class ObjectLoader : Loader {
 
 								objList[MasterIndex].item_id = LookupIndex;
 
-								objList[MasterIndex].x = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 11, 8);
-								objList[MasterIndex].y = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 13, 8);
-								objList[MasterIndex].zpos = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 15, 8);
+								objList[MasterIndex].x = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 11, 8);
+								objList[MasterIndex].y = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 13, 8);
+								objList[MasterIndex].zpos = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 15, 8);
 
 								objList[MasterIndex].Angle1 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 16, 8);
 								objList[MasterIndex].Angle2 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 17, 8);
@@ -439,7 +439,7 @@ public class ObjectLoader : Loader {
 		/// <param name="texture_map">Texture map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
-		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int[] texture_map, char[] lev_ark, int LevelNo)
+		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
 		{
 			int NoOfBlocks;
 			long AddressOfBlockStart;
@@ -520,8 +520,8 @@ public class ObjectLoader : Loader {
 				objList[x].parentList=this;
 				objList[x].index = x; 
 				objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
-				objList[x].tileX=99;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-				objList[x].tileY=99;
+				objList[x].tileX=TileMap.ObjectStorageTile;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+				objList[x].tileY=TileMap.ObjectStorageTile;
 				objList[x].levelno = (short)LevelNo ;	
 				objList[x].next=0;
 				objList[x].address = objectsAddress+address_pointer;
@@ -535,27 +535,27 @@ public class ObjectLoader : Loader {
 						objList[x].item_id=0;
 				}
 				//printf("Item ID %d %d\n",x, objList[x].item_id);
-				objList[x].flags  = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x0F;
+				objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x0F);
 				objList[x].enchantment = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
 				objList[x].doordir  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
 				objList[x].invis  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
 				objList[x].is_quant = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
 
 				//position at +2
-				objList[x].zpos = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F;	//bits 0-6 
+				objList[x].zpos = (short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
 				//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
-				objList[x].heading = (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+				objList[x].heading = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
 
-				objList[x].y = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07;	//bits 10-12
-				objList[x].x = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07;	//bits 13-15
+				objList[x].y = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
+				objList[x].x = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
 
 				//+4
-				objList[x].quality =(int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
+				objList[x].quality =(short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
 				objList[x].next = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
 
 				//+6
 
-				objList[x].owner = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+				objList[x].owner = (short)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
 
 				objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
 
@@ -984,7 +984,7 @@ public class ObjectLoader : Loader {
 																				}	
 																		}
 																		///LevelInfo[j,k].TerrainChangeIndices[LevelInfo[j,k].TerrainChangeCount]=currObj.index;
-																		LevelInfo[j,k].TerrainChangeCount++;
+																		//LevelInfo[j,k].TerrainChangeCount++;
 																		//LevelInfo[j,k].isWater  = 0;// turn off water in terrain change tiles
 																		//if (LevelInfo[j,k].isDoor==true)//The tile contains a door. I need to make sure the door is created at the height of the tile.
 																		//{
@@ -1031,7 +1031,7 @@ public class ObjectLoader : Loader {
 														//else
 														//	{
 														LevelInfo[x,y].isDoor = true;
-														LevelInfo[x,y].DoorIndex = currObj.index;
+														//LevelInfo[x,y].DoorIndex = currObj.index;
 														//Put it's lock into use if it exists.
 														//I'm ignoring for the moment but it is here for compatability to vanilla.
 														if (currObj.link!=0)
@@ -1039,8 +1039,8 @@ public class ObjectLoader : Loader {
 																if (objList[currObj.link].InUseFlag==0)
 																{
 																		objList[currObj.link].InUseFlag=1;	
-																		objList[currObj.link].tileX=99;
-																		objList[currObj.link].tileY=99;	
+																		objList[currObj.link].tileX=TileMap.ObjectStorageTile;
+																		objList[currObj.link].tileY=TileMap.ObjectStorageTile;	
 																}
 
 														}
@@ -1052,7 +1052,7 @@ public class ObjectLoader : Loader {
 														if (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.SHOCK_DOOR)
 														{
 																LevelInfo[x,y].shockDoor = 1;
-																LevelInfo[x,y].DoorIndex = currObj.index;
+																//LevelInfo[x,y].DoorIndex = currObj.index;
 														}
 												}
 												currObj=objList[currObj.next];
@@ -1290,7 +1290,7 @@ public class ObjectLoader : Loader {
 						Vector3 position;
 						if (tilemap==null)
 						{
-							position = new Vector3(99*1.2f,5f, 99*1.2f);
+								position = new Vector3((float)TileMap.ObjectStorageTile*1.2f,5f, (float)TileMap.ObjectStorageTile*1.2f);
 						}
 						else
 						{
@@ -1419,8 +1419,8 @@ public class ObjectLoader : Loader {
 							{
 							objInt.objectloaderinfo=new ObjectLoaderInfo();
 							objInt.objectloaderinfo.InUseFlag=0;
-							objInt.objectloaderinfo.tileX=99;
-							objInt.objectloaderinfo.tileY=99;
+							objInt.objectloaderinfo.tileX=TileMap.ObjectStorageTile;
+							objInt.objectloaderinfo.tileY=TileMap.ObjectStorageTile;
 							}
 						objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
 						if (objInt.objectloaderinfo.InUseFlag==1)
@@ -1483,7 +1483,7 @@ public class ObjectLoader : Loader {
 			string[] InventoryObjects= new string[NoOfInventoryItems];
 			int i=0;
 				//First add the objects on the paperdoll to the so that they are first.
-				for (int s=0; s<=18;s++)
+				for (short s=0; s<=18;s++)
 				{
 						string objName="";
 					if (s<=10)//Paperdoll objects
@@ -1492,7 +1492,7 @@ public class ObjectLoader : Loader {
 						}
 					else
 						{
-							objName =pInv.playerContainer.GetItemAt(s-11);		
+							objName =pInv.playerContainer.GetItemAt((short)(s-11));		
 						}
 						if (objName!="")
 						{
@@ -1509,7 +1509,7 @@ public class ObjectLoader : Loader {
 				}
 			}
 
-			int itemIndex=0;
+			//int itemIndex=0;
 			//Go through each slot
 			
 			for (int s=0; s<=18;s++)
@@ -1521,7 +1521,7 @@ public class ObjectLoader : Loader {
 				}
 				else
 				{
-					obj= pInv.playerContainer.GetGameObjectAt(s-11);		
+					obj= pInv.playerContainer.GetGameObjectAt((short)(s-11));		
 				}
 				if(obj!=null)
 				{
@@ -1553,7 +1553,7 @@ public class ObjectLoader : Loader {
 			GameObject prev=null;
 			//int newindex=index;
 			//For each spot in the container
-			for (int i=0; i<=cn.MaxCapacity();i++)
+			for (short i=0; i<=cn.MaxCapacity();i++)
 			{
 				//Get the item name in the container
 				string itemname=cn.GetItemAt(i);
@@ -1595,7 +1595,7 @@ public class ObjectLoader : Loader {
 			int itemCounter=0;
 			ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
 			int PrevIndex=cnObjInt.objectloaderinfo.index;
-			for (int i=0; i<cn.GetCapacity();i++)
+			for (short i=0; i<cn.GetCapacity();i++)
 			{
 				GameObject obj= cn.GetGameObjectAt(i);	
 				if(obj != null)
@@ -1669,38 +1669,38 @@ public class ObjectLoader : Loader {
 						//Debug.Log("Assigning "+ objInt.name + " to index " + index);
 					if ((objInt.GetComponent<Container>()) || (objInt.GetComponent<NPC>()))
 						{//Put the container items back into the list as well
-								Container cn = objInt.GetComponent<Container>();
-								int itemCounter=0;
-								int prevLink=index;
-								for (int i=0; i<=cn.GetCapacity();i++)
+							Container cn = objInt.GetComponent<Container>();
+							int itemCounter=0;
+							int prevLink=index;
+							for (short i=0; i<=cn.GetCapacity();i++)
+							{
+								GameObject obj= cn.GetGameObjectAt(i);
+								if(obj != null)
 								{
-									GameObject obj= cn.GetGameObjectAt(i);
-									if(obj != null)
-									{
-										ObjectInteraction objI=obj.GetComponent<ObjectInteraction>();
-										int newlink = AssignObjectToList(ref objI);
-										if(itemCounter==0)
-										{//First object											
-											objInt.link=newlink;
-											objInt.objectloaderinfo.link=newlink;
-											prevLink= newlink;
-										}
-										else
-										{														
-											GameWorldController.instance.CurrentObjectList().objInfo[prevLink].next=newlink;
-											GameWorldController.instance.CurrentObjectList().objInfo[prevLink].instance.next=newlink;
-											prevLink= newlink;											
-											
-										}
-										objI.objectloaderinfo.next=0;//init
-										objI.next=0;
-										itemCounter++;
+									ObjectInteraction objI=obj.GetComponent<ObjectInteraction>();
+									int newlink = AssignObjectToList(ref objI);
+									if(itemCounter==0)
+									{//First object											
+										objInt.link=newlink;
+										objInt.objectloaderinfo.link=newlink;
+										prevLink= newlink;
 									}
+									else
+									{														
+										GameWorldController.instance.CurrentObjectList().objInfo[prevLink].next=newlink;
+										GameWorldController.instance.CurrentObjectList().objInfo[prevLink].instance.next=newlink;
+										prevLink= newlink;											
+										
+									}
+									objI.objectloaderinfo.next=0;//init
+									objI.next=0;
+									itemCounter++;
 								}
-								if(itemCounter==0)
-								{
-									objInt.link=0;//No contents
-								}
+							}
+							if(itemCounter==0)
+							{
+								objInt.link=0;//No contents
+							}
 						}
 					GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);
 				}	
@@ -1821,9 +1821,9 @@ public class ObjectLoader : Loader {
 			int index=0;
 			if (GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index)	)
 			{
-				GameWorldController.instance.CurrentObjectList().objInfo[index].quality=quality;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].quality=(short)quality;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].flags=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].owner=owner;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].owner=(short)owner;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].item_id=item_id;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].next=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].link=link;
@@ -1901,7 +1901,7 @@ public class ObjectLoader : Loader {
 
 
 
-		bool lookUpSubClass(char[] archive_ark,TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef,ObjectLoaderInfo[] objList, int[] texture_map, int objIndex, int levelNo)
+		bool lookUpSubClass(char[] archive_ark,TileInfo[,] LevelInfo, int BlockNo, int ClassType, int index, int RecordSize, xrefTable[] xRef,ObjectLoaderInfo[] objList, short[] texture_map, int objIndex, short levelNo)
 	{
 			//
 

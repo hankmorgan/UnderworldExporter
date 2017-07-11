@@ -103,7 +103,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 						GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),TileMap.SURFACE_FLOOR);
 						//StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,(float)(2*dir) * (0.3f),0f) ,0.1f));
 						//heights[targetX+x,targetY+y]+=dir*2;	
-						GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].floorHeight+=dir*2;
+						GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].floorHeight+=(short)(dir*2);
 						GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].TileNeedsUpdate();
 						Destroy(platformTile);
 						}
@@ -123,7 +123,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 							GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),TileMap.SURFACE_FLOOR);
 							//StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,(float)(1*dir) * (0.3f),0f) ,0.1f));
 							//heights[targetX+x,targetY+y]+=dir*1;	
-							GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].floorHeight+=dir;	
+							GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].floorHeight+=(short)dir;	
 							GameWorldController.instance.currentTileMap().Tiles[BaseX+targetX+x, BaseY+targetY+y].TileNeedsUpdate();
 							Destroy(platformTile);
 							}

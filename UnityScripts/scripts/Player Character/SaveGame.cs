@@ -18,7 +18,7 @@ public class SaveGame : Loader {
 
 				int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
-				int[] ActiveEffectStability=new int[3];
+				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
@@ -135,7 +135,7 @@ public class SaveGame : Loader {
 										case 0x41+1:
 										case 0x43+1://Active spell effect stability
 												{
-													ActiveEffectStability[effectCounter++]=(int)buffer[i];break;		
+												ActiveEffectStability[effectCounter++]=(short)buffer[i];break;		
 												}
 										case 0x45://Runebits
 										case 0x46://Runebits
@@ -195,15 +195,15 @@ public class SaveGame : Loader {
 
 
 										case 0x5D  : ///   dungeon level
-												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
+												GameWorldController.instance.startLevel=(short)(DataLoader.getValAtAddress(buffer,i,16) - 1);break;
 										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
 												//Low nibble is moongate level + 1
-												GameWorldController.instance.playerUW.ResurrectLevel=((int)buffer[i]>>4) & 0xf;
-												GameWorldController.instance.playerUW.MoonGateLevel=((int)buffer[i]) & 0xf;
+												GameWorldController.instance.playerUW.ResurrectLevel=(short)((buffer[i]>>4) & 0xf);
+												GameWorldController.instance.playerUW.MoonGateLevel=(short)((buffer[i]) & 0xf);
 												break;
 										case 0x60  : ///    bits 2..5: play_poison and no of active effects
 												GameWorldController.instance.playerUW.quest().IncenseDream=(int)(buffer[i] & 0x3);
-												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
+												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>2) & 0x7 );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x61:
@@ -306,7 +306,7 @@ public class SaveGame : Loader {
 										case 0x90:
 												{
 													GameWorldController.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
-													break;
+													//break;
 												}
 										case 0xB1:  //The true max mana of the character. Used with the orb on level 7
 												GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=(int)DataLoader.getValAtAddress(buffer,i,8);
@@ -361,7 +361,7 @@ public class SaveGame : Loader {
 						{
 							SpellEffectPoison p = (SpellEffectPoison)GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
 							p.counter=GameWorldController.instance.playerUW.play_poison;
-							p.DOT=p.Value/p.counter;//Recalculate the poison damage to reapply.									
+							p.DOT=(short)(p.Value/p.counter);//Recalculate the poison damage to reapply.									
 						}
 						else
 						{//Make sure any poison is cured.
@@ -395,26 +395,26 @@ public class SaveGame : Loader {
 										objLoader.objInfo[x].tileY=TileMap.ObjectStorageTile;
 										objLoader.objInfo[x].InUseFlag=1;
 										objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer,i+0,16)) & 0x1FF;
-										objLoader.objInfo[x].flags  = (int)((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x0F;
+										objLoader.objInfo[x].flags  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x0F);
 										objLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 12) & 0x01);
 										objLoader.objInfo[x].doordir  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 13) & 0x01);
 										objLoader.objInfo[x].invis  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 14 )& 0x01);
 										objLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 15) & 0x01);
 										//position at +2
-										objLoader.objInfo[x].zpos = (int)(DataLoader.getValAtAddress(buffer,i+2,16)) & 0x7F;	//bits 0-6 
+										objLoader.objInfo[x].zpos = (short)((DataLoader.getValAtAddress(buffer,i+2,16)) & 0x7F);	//bits 0-6 
 										//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
-										objLoader.objInfo[x].heading = (int)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
+										objLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
 
-										objLoader.objInfo[x].y = (int)((DataLoader.getValAtAddress(buffer,i+2,16)) >> 10) & 0x07;	//bits 10-12
-										objLoader.objInfo[x].x = (int)((DataLoader.getValAtAddress(buffer,i+2,16)) >> 13) & 0x07;	//bits 13-15
+										objLoader.objInfo[x].y = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 10) & 0x07);	//bits 10-12
+										objLoader.objInfo[x].x = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 13) & 0x07);	//bits 13-15
 
 										//+4
-										objLoader.objInfo[x].quality =(int)((DataLoader.getValAtAddress(buffer,i+4,16)) & 0x3F);
+										objLoader.objInfo[x].quality =(short)((DataLoader.getValAtAddress(buffer,i+4,16)) & 0x3F);
 										objLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer,i+4,16)>>6) & 0x3FF);
 
 										//+6
 
-										objLoader.objInfo[x].owner = (int)(DataLoader.getValAtAddress(buffer,i+6,16) & 0x3F) ;//bits 0-5
+										objLoader.objInfo[x].owner = (short)(DataLoader.getValAtAddress(buffer,i+6,16) & 0x3F) ;//bits 0-5
 
 										objLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF); //bits 6-15
 										i=i+8;
@@ -480,7 +480,7 @@ public class SaveGame : Loader {
 								GameWorldController.instance.playerUW.playerInventory.Refresh();
 
 							//Reapply effects from enchanted items by recalling the equip event.
-							for (int s=0; s<=10; s++)
+							for (short s=0; s<=10; s++)
 							{
 								GameObject obj = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(s);
 								if (obj!=null)
@@ -821,7 +821,7 @@ public class SaveGame : Loader {
 										{
 												float heading=GameWorldController.instance.playerUW.transform.eulerAngles.y * (255f/360f);
 												DataLoader.WriteInt8(writer,(int)heading);break;
-												break;
+												//break;
 										}
 								case 0x5D  : ///   dungeon level										
 										DataLoader.WriteInt8(writer,GameWorldController.instance.LevelNo+1);break;
@@ -866,7 +866,7 @@ public class SaveGame : Loader {
 												}
 												val |=GameWorldController.instance.playerUW.CharClass<<5;
 												DataLoader.WriteInt8(writer,val);break;
-												break;
+												//break;
 										}
 								case 0x66://Quest flags
 										{
@@ -958,7 +958,7 @@ public class SaveGame : Loader {
 										break;										
 								case 0xCF  : ///   game time
 										DataLoader.WriteInt32(writer,GameWorldController.instance.playerUW.game_time);break;
-										break;
+										//break;
 								case 0xD0://gametime ignore
 								case 0xD1:
 								case 0xD2:
@@ -972,12 +972,12 @@ public class SaveGame : Loader {
 								case 0xD5:
 										{//7F 20
 												DataLoader.WriteInt8(writer,0x7F);break;
-												break;	
+												//break;	
 										}
 								case 0xD6:
 										{//The mysterious clip through bridges on a second jump byte.
 												DataLoader.WriteInt8(writer,0x20);break;
-												break;
+												//break;
 										}
 								case 0xDB:
 										if (GameWorldController.instance.InventoryMarker.transform.childCount>0)
@@ -988,10 +988,10 @@ public class SaveGame : Loader {
 										{
 												DataLoader.WriteInt8(writer,0x0);break;	
 										}
-										break;
+										//break;
 								case 0xDD://Duplicate curvit
 										DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.CurVIT);break;
-										break;
+										//break;
 
 								case 0xF8: // Helm (all of these subsequent values are indices into the object list at offset 312
 										WriteInventoryIndex(writer, inventoryObjects,0);break;
@@ -1081,7 +1081,7 @@ public class SaveGame : Loader {
 										//}
 
 
-										break;
+										//break;
 
 								}	//endswitch
 
@@ -1158,7 +1158,7 @@ public class SaveGame : Loader {
 
 		}
 
-		static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, int slotIndex)
+		static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, short slotIndex)
 		{
 				string itemAtSlot="";
 				if (slotIndex<=10)
@@ -1167,7 +1167,7 @@ public class SaveGame : Loader {
 				}
 				else
 				{
-						itemAtSlot = GameWorldController.instance.playerUW.playerInventory.playerContainer.GetItemAt(slotIndex-11);
+						itemAtSlot = GameWorldController.instance.playerUW.playerInventory.playerContainer.GetItemAt((short)(slotIndex-11));
 				}
 				if (itemAtSlot!="")
 				{
@@ -1193,7 +1193,7 @@ public class SaveGame : Loader {
 
 				int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
-				int[] ActiveEffectStability=new int[3];
+				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
 				GameWorldController.instance.playerUW.JustTeleported=true;
@@ -1366,7 +1366,7 @@ public class SaveGame : Loader {
 										case 0x41+1:
 										case 0x43+1://Active spell effect stability
 												{
-														ActiveEffectStability[effectCounter++]=(int)buffer[i];break;		
+														ActiveEffectStability[effectCounter++]=(short)buffer[i];break;		
 												}
 										case 0x45://Runebits
 										case 0x46://Runebits
@@ -1424,14 +1424,14 @@ public class SaveGame : Loader {
 
 
 										case 0x5D  : ///   dungeon level									
-												GameWorldController.instance.startLevel=(int)DataLoader.getValAtAddress(buffer,i,16) - 1;break;
+												GameWorldController.instance.startLevel=(short)(DataLoader.getValAtAddress(buffer,i,16) - 1);break;
 										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
 												//Low nibble is moongate level + 1
-												GameWorldController.instance.playerUW.ResurrectLevel=((int)buffer[i]>>4) & 0xf;
-												GameWorldController.instance.playerUW.MoonGateLevel=((int)buffer[i]) & 0xf;
+												GameWorldController.instance.playerUW.ResurrectLevel=(short)((buffer[i]>>4) & 0xf);
+												GameWorldController.instance.playerUW.MoonGateLevel=(short)(buffer[i] & 0xf);
 												break;
 										case 0x60  : ///    bits 2..5: play_poison and no of active effects
-												GameWorldController.instance.playerUW.play_poison=(int)((buffer[i]>>2) & 0x7 );
+												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>2) & 0x7 );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x65+1: // hand, Gender & body, and class
@@ -1505,7 +1505,7 @@ public class SaveGame : Loader {
 						{
 								SpellEffectPoison p = (SpellEffectPoison)GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
 								p.counter=GameWorldController.instance.playerUW.play_poison;
-								p.DOT=p.Value/p.counter;//Recalculate the poison damage to reapply.									
+								p.DOT=(short)(p.Value/p.counter);//Recalculate the poison damage to reapply.									
 						}
 						else
 						{//Make sure any poison is cured.

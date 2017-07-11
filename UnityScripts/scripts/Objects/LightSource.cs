@@ -253,7 +253,7 @@ public class LightSource : object_base {
 			}
 	}
 
-	public override bool PutItemAwayEvent (int slotNo)
+	public override bool PutItemAwayEvent (short slotNo)
 	{
 			if (IsOn())
 			{

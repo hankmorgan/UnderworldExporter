@@ -17,7 +17,7 @@ public class a_change_from_trap : trap_base {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 				//return;
-		TileMap curr = GameWorldController.instance.currentTileMap();
+		//TileMap curr = GameWorldController.instance.currentTileMap();
 		ObjectInteraction ChangeTo=null;
 		if (objInt().link!=0)
 		{
@@ -28,8 +28,8 @@ public class a_change_from_trap : trap_base {
 			return;
 		}
 
-		int NewTileFloorTexture = ChangeTo.heading |  (((ChangeTo.zpos >> 4) & 0x1 ) << 3);
-		int NewFloorHeight = ChangeTo.zpos & 0xf;
+		short NewTileFloorTexture =(short)( ChangeTo.heading |  (((ChangeTo.zpos >> 4) & 0x1 ) << 3));
+		//int NewFloorHeight = ChangeTo.zpos & 0xf;
 		//Debug.Log(this.name + "triggerX = " + triggerX + " triggerY = " + triggerY);
 		for (int x=0; x<=63; x++)
 		{
@@ -54,7 +54,7 @@ public class a_change_from_trap : trap_base {
 					 GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
 					if (ChangeTo.owner<10)	
 					{
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].tileType=ChangeTo.owner;
+						GameWorldController.instance.currentTileMap().Tiles[x,y].tileType=(short)ChangeTo.owner;
 					}
 					if (ChangeTo.zpos<15)
 					{

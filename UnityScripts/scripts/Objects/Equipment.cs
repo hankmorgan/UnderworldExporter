@@ -88,7 +88,7 @@ public class Equipment : object_base {
 			//Do the result at the end of the animation.
 			if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
-				objInt().quality = objInt().quality+5;
+								objInt().quality +=5; //objInt().quality+5;
 				if (objInt().quality >63){objInt().quality=63;}
 				UWHUD.instance.MessageScroll.Add("You repair the item");
 			}		

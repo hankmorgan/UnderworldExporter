@@ -30,7 +30,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 				
 				if (objToClone.GetComponent<Container>()!=null)
 				{//Clone the items on this object
-					for (int i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
+					for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
 					{
 					if (objToClone.GetComponent<Container>().GetItemAt(i)!="")
 						{

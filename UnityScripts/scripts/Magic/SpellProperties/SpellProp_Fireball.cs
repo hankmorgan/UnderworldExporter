@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpellProp_Fireball : SpellProp {
 	//Fireball
-	protected int splashDamage;//Damage applied to the explosion.
+	protected short splashDamage;//Damage applied to the explosion.
 	protected float splashDistance;
 	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;

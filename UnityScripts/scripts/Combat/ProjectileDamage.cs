@@ -9,7 +9,7 @@ public class ProjectileDamage : MonoBehaviour {
 	/// Prevents ths projecile from hitting multiple targets before it destoys itself
 	private bool hasHit;
 	/// The damage applied by the projectile.
-	public int Damage;
+	public short Damage;
 	///What was last hit by the projectile
 	public string LastTarget;
 
@@ -74,7 +74,7 @@ public class ProjectileDamage : MonoBehaviour {
 				}
 				else
 				{//reduce damage on ricochets
-					Damage=Damage/2;
+					Damage=(short)(Damage/2);
 				}
 			}
 		}

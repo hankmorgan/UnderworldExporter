@@ -4,7 +4,8 @@ using System.Collections;
 public class Ring : enchantment_base {
 
 	public SpellEffect SpellEffectApplied;
-	public override bool EquipEvent (int slotNo)
+	
+	public override bool EquipEvent (short slotNo)
 	{
 		if ((slotNo ==9) || (slotNo ==10))
 		{
@@ -21,7 +22,7 @@ public class Ring : enchantment_base {
 		return true;
 	}
 
-	public override bool UnEquipEvent (int slotNo)
+	public override bool UnEquipEvent (short slotNo)
 	{
 		if (((slotNo ==9) || (slotNo ==10)) && (objInt().item_id!=54))//Not the ring of humility
 		{

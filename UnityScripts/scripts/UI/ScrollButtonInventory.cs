@@ -4,10 +4,10 @@ using System.Collections;
 public class ScrollButtonInventory : Scrollbutton {
 
 
-		public int stepSize;
-		public static int ScrollValue=0;
-		public int MaxScrollValue;
-		public int MinScrollValue;
+		public short stepSize;
+		public static short ScrollValue=0;
+		public short MaxScrollValue;
+		public short MinScrollValue;
 
 
 	private int previousScrollValue=-1;
@@ -15,7 +15,7 @@ public class ScrollButtonInventory : Scrollbutton {
 
 	public void OnClick()
 	{
-			ScrollValue = ScrollValue + stepSize;
+			ScrollValue = (short)(ScrollValue + stepSize);
 			if (ScrollValue >MaxScrollValue)
 			{
 					ScrollValue=MaxScrollValue;

@@ -22,13 +22,13 @@ public class a_pit_trap : trap_base {
 
 			if (tileToChange.floorHeight==0)
 			{//create a tile at the floor height
-				tileToChange.floorHeight=objInt().zpos>>2;
-				tileToChange.floorTexture =objInt().owner & 0xf;
+				tileToChange.floorHeight=(short)(objInt().zpos>>2);
+				tileToChange.floorTexture =(short)(objInt().owner & 0xf);
 			}
 			else
 			{
 				tileToChange.floorHeight=0;	
-				tileToChange.floorTexture =objInt().quality & 0xf;
+				tileToChange.floorTexture =(short)(objInt().quality & 0xf);
 			}
 		TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 

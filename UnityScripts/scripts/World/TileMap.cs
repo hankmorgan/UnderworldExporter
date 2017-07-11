@@ -6,101 +6,98 @@ using System.Text;
 using System.IO;
 
 /// <summary>
-/// Tile map class.
+/// Tile map class for storing and accessing the tilemap and tile properties..
 /// </summary>
 public class TileMap : Loader {
-		public const int TILE_SOLID=0;
-		public const int TILE_OPEN= 1;
-		public const int TILE_DIAG_SE= 2;
-		public const int TILE_DIAG_SW =3;
-		public const int TILE_DIAG_NE =4;
-		public const int TILE_DIAG_NW= 5;
-		public const int TILE_SLOPE_N =6;
-		public const int TILE_SLOPE_S= 7;
-		public const int TILE_SLOPE_E= 8;
-		public const int TILE_SLOPE_W= 9;
-		public const int TILE_VALLEY_NW =10;
-		public const int TILE_VALLEY_NE =11;
-		public const int TILE_VALLEY_SE= 12;
-		public const int TILE_VALLEY_SW =13;
-		public const int TILE_RIDGE_SE =14;
-		public const int TILE_RIDGE_SW =15;
-		public const int TILE_RIDGE_NW= 16;
-		public const int TILE_RIDGE_NE= 17;
+		public const short TILE_SOLID=0;
+		public const short TILE_OPEN= 1;
+		public const short TILE_DIAG_SE= 2;
+		public const short TILE_DIAG_SW =3;
+		public const short TILE_DIAG_NE =4;
+		public const short TILE_DIAG_NW= 5;
+		public const short TILE_SLOPE_N =6;
+		public const short TILE_SLOPE_S= 7;
+		public const short TILE_SLOPE_E= 8;
+		public const short TILE_SLOPE_W= 9;
+		public const short TILE_VALLEY_NW =10;
+		public const short TILE_VALLEY_NE =11;
+		public const short TILE_VALLEY_SE= 12;
+		public const short TILE_VALLEY_SW =13;
+		public const short TILE_RIDGE_SE =14;
+		public const short TILE_RIDGE_SW =15;
+		public const short TILE_RIDGE_NW= 16;
+		public const short TILE_RIDGE_NE= 17;
 
-		const int NORTH =0;
-		const int SOUTH =1;
-		const int EAST=2;
-		const int WEST=3;
-		const int NORTHWEST=4;
-		const int NORTHEAST=5;
-		const int SOUTHWEST=6;
-		const int SOUTHEAST=7;
+		const short NORTH =0;
+		const short SOUTH =1;
+		const short EAST=2;
+		const short WEST=3;
+		const short NORTHWEST=4;
+		const short NORTHEAST=5;
+		const short SOUTHWEST=6;
+		const short SOUTHEAST=7;
 
 		/// <summary>
 		/// The tile map size along the x axis
 		/// </summary>
-		public const int TileMapSizeX=63; //0 to 63
+		public const short TileMapSizeX=63; //0 to 63
 
 		/// <summary>
 		/// The tile map size along the y axis.
 		/// </summary>
-		public const int TileMapSizeY=63; //0 to 63
+		public const short TileMapSizeY=63; //0 to 63
 
 		/// <summary>
 		/// The object storage tile location where non map objects are kept.
 		/// </summary>
-		public const int ObjectStorageTile=99;
+		public const short ObjectStorageTile=99;
 
-		public const int SURFACE_FLOOR =1;
-		public const int SURFACE_CEIL = 2;
-		public const int SURFACE_WALL = 3;
-		public const int SURFACE_SLOPE = 4;
+		public const short SURFACE_FLOOR =1;
+		public const short SURFACE_CEIL = 2;
+		public const short SURFACE_WALL = 3;
+		public const short SURFACE_SLOPE = 4;
 
-		const int SLOPE_BOTH_PARALLEL= 0;
-		const int SLOPE_BOTH_OPPOSITE= 1;
-		const int SLOPE_FLOOR_ONLY =2;
-		const int SLOPE_CEILING_ONLY= 3;
+		const short SLOPE_BOTH_PARALLEL= 0;
+		const short SLOPE_BOTH_OPPOSITE= 1;
+		const short SLOPE_FLOOR_ONLY =2;
+		const short SLOPE_CEILING_ONLY= 3;
 
 		//Visible faces indices
-		const int vTOP =0;
-		const int vEAST =1;
-		const int vBOTTOM= 2;
-		const int vWEST= 3;
-		const int vNORTH= 4;
-		const int vSOUTH= 5;
+		const short vTOP =0;
+		const short vEAST =1;
+		const short vBOTTOM= 2;
+		const short vWEST= 3;
+		const short vNORTH= 4;
+		const short vSOUTH= 5;
 
 
 		//BrushFaces
-		const int fSELF =128;
-		const int fCEIL= 64;
-		const int fNORTH =32;
-		const int fSOUTH =16;
-		const int fEAST= 8;
-		const int fWEST= 4;
-		const int fTOP =2;
-		const int fBOTTOM= 1;
-
-		public const int LayerFloor=0;
-		public const int LayerCeil=1;
+		const short fSELF =128;
+		const short fCEIL= 64;
+		const short fNORTH =32;
+		const short fSOUTH =16;
+		const short fEAST= 8;
+		const short fWEST= 4;
+		const short fTOP =2;
+		const short fBOTTOM= 1;
 
 
 		public struct Overlay{
-				public int index;
-				public int unk1;
-				public int tileX;
-				public int tileY;
+				public short index;
+				public short unk1;
+				public short tileX;
+				public short tileY;
 		};
 
 		public Overlay[] Overlays=new Overlay[64];
 
-		public int thisLevelNo; //The number of this level
-		public int UW_CEILING_HEIGHT;
-		public int CEILING_HEIGHT;
-		public int SHOCK_CEILING_HEIGHT;
-		public int[] texture_map = new int[272];
+		public short thisLevelNo; //The number of this level
+		public short UW_CEILING_HEIGHT;
+		public short CEILING_HEIGHT;
+		public short SHOCK_CEILING_HEIGHT;
+		public short[] texture_map = new short[272];
 
-		private int currRoomIndex;//Used in merging regions together.
+	//	private int currRoomIndex;//Used in merging regions together.
 
 		/// <summary>
 		/// Tile info storage class
@@ -110,17 +107,17 @@ public class TileMap : Loader {
 		/// <summary>
 		/// The height of the max ceiling value for this level. Only used in SHOCK moving platform.
 		/// </summary>
-	public int GlobalCeilingHeight = 32;
+	//public int GlobalCeilingHeight = 32;
 
 
 	/// <summary>
 		/// The current tile X that the player is in
 		/// </summary>
-	public static int visitTileX;
+		public static short visitTileX;
 		/// <summary>
 		/// The current tile Y that the player is in.
 		/// </summary>
-	public static int visitTileY;
+		public static short visitTileY;
 		/// <summary>
 		/// Is the player currently standing on solid ground
 		/// </summary>
@@ -151,14 +148,10 @@ public class TileMap : Loader {
 				return false;
 		}
 		int tileType = GetTileType(tileX,tileY);
-		int isRendered = GetTileRender(tileX,tileY);
+		bool isRendered = GetTileRender(tileX,tileY);
 
-		return ((tileType!=TILE_SOLID) && (isRendered==1));
+		return ((tileType!=TILE_SOLID) && (isRendered));
 	}
-
-
-
-
 
 
 	/// <summary>
@@ -214,7 +207,7 @@ public class TileMap : Loader {
 		/// <param name="tileX">Tile x.</param>
 		/// <param name="tileY">Tile y.</param>
 		/// <param name="newHeight">New height.</param>
-	public void SetFloorHeight(int tileX, int tileY, int newHeight)
+	public void SetFloorHeight(int tileX, int tileY, short newHeight)
 	{
 		Tiles[tileX,tileY].floorHeight=newHeight;
 	}
@@ -226,85 +219,10 @@ public class TileMap : Loader {
 		/// <param name="tileX">Tile x.</param>
 		/// <param name="tileY">Tile y.</param>
 		/// <param name="newHeight">New height.</param>
-		public void SetCeilingHeight(int tileX, int tileY, int newHeight)
+		public void SetCeilingHeight(int tileX, int tileY, short newHeight)
 	{
 		//Debug.Log ("ceil :" + newHeight + " was " + CeilingHeight[tileX,tileY]);
 				Tiles[tileX,tileY].ceilingHeight=newHeight;
-	}
-
-	
-
-
-
-
-		/// <summary>
-		/// Sets if the tile is water.
-		/// </summary>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		/// <param name="iIsWater">1 is water, 0 is not.</param>
-	private void SetIsWater(int tileX, int tileY,int iIsWater)
-		{return;
-		/*if (iIsWater==1)
-			{
-				Tiles[tileX,tileY].isWater=true;	
-			}
-		else
-			{
-				Tiles[tileX,tileY].isWater=false;
-			}*/
-	}
-
-	/// <summary>
-	/// Sets if the tile is lava.
-	/// </summary>
-	/// <param name="LevelNo">Level no.</param>
-	/// <param name="tileX">Tile x.</param>
-	/// <param name="tileY">Tile y.</param>
-	/// <param name="iIsLava">I is lava.</param>
-	private void SetIsLava(int tileX, int tileY,int iIsLava)
-	{
-		if (iIsLava==1)
-		{
-			Tiles[tileX,tileY].isLava=true;	
-		}
-		else
-		{
-			Tiles[tileX,tileY].isLava=false;
-		}
-	}
-
-		/// <summary>
-		/// Marks if the tile has a bridge.
-		/// </summary>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		/// <param name="iIsBridge">I is bridge.</param>
-		private void SetIsBridge(int tileX, int tileY,int iIsBridge)
-		{
-			if (iIsBridge==1)
-			{
-				Tiles[tileX,tileY].hasBridge=true;	
-			}
-			else
-			{
-				Tiles[tileX,tileY].hasBridge=false;
-			}
-		}
-
-
-		/// <summary>
-		/// Sets the type of the tile.
-		/// </summary>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		/// <param name="itileType">Itile type. See tile type constants on this class</param>
-	private void SetTileType( int tileX, int tileY,int itileType)
-	{
-		Tiles[tileX,tileY].tileType=itileType;
 	}
 
 
@@ -326,58 +244,18 @@ public class TileMap : Loader {
 				}			
 		}
 
-
-
-		/// <summary>
-		/// Sets the tile render state. Only affects the automap.
-		/// </summary>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		/// <param name="iRender">1= render, 0 = invisible.</param>
-	private void SetTileRender(int tileX, int tileY,int iRender)
-	{
-		Tiles[tileX,tileY].Render=(short)iRender;
-	}
 	
 	/// <summary>
-	/// Gets the tile render state. Only affects the automap.
+	/// Gets the tile render state. 
 	/// </summary>
 	/// <returns>The tile render.</returns>
 	/// <param name="LevelNo">Level no.</param>
 	/// <param name="tileX">Tile x.</param>
 	/// <param name="tileY">Tile y.</param>
-	private int GetTileRender( int tileX, int tileY)
-	{
-				return 1;
-		//return Tiles[tileX,tileY].Render;
+	private bool GetTileRender( int tileX, int tileY)
+	{				
+		return Tiles[tileX,tileY].Render==1;
 	}
-
-		/// <summary>
-		/// Sets the tile properties that are read in from tileprops.txt
-		/// </summary>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		/// <param name="itileType">Itile type.</param>
-		/// <param name="iRender">I render.</param>
-		/// <param name="FloorHeight">Floor height.</param>
-		/// <param name="CeilingHeight">Ceiling height.</param>
-		/// <param name="iIsWater">is water.</param>
-		/// <param name="iIsDoor">is door.</param>
-		/// <param name="iIsLava">is lava.</param>
-		private void SetTileProp( int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava, int iIsBridge)
-			{
-				return;
-				/*SetTileType (tileX,tileY,itileType);
-				Tiles[tileX,tileY].Render=(short)iRender;
-				SetFloorHeight ( tileX,tileY,FloorHeight);
-				SetCeilingHeight (tileX,tileY,CeilingHeight);
-				SetIsWater( tileX,tileY,iIsWater);
-				SetIsLava(tileX,tileY,iIsLava);
-				SetIsBridge(tileX,tileY,iIsBridge);
-				SetIsDoor(tileX,tileY,iIsDoor);*/
-			}
 
 		/// <summary>
 		/// Gets the vector3 at the center of the tile specified.
@@ -394,28 +272,16 @@ public class TileMap : Loader {
 				);	
 		}
 
-			
+	
 		/// <summary>
-		/// Loads the tile map info from a config file called GAMENAME+ "_tileprops.txt"
+		/// Builds the UW 1 & 2 Tile map from the file data.
 		/// </summary>
-		/// <returns><c>true</c>, if tile map info was loaded, <c>false</c> otherwise.</returns>
-		/// <param name="fileName">File name.</param>
-		public bool LoadTileMapInfo(string fileName)
-		{
-				return false;
-		}
-
-		///LEVEL LOADER
-		/// 
-		/// 
-		/// 
-
-
+		/// <returns><c>true</c>, if tile map U was built, <c>false</c> otherwise.</returns>
+		/// <param name="lev_ark">Lev ark.</param>
+		/// <param name="LevelNo">Level no.</param>
+		/// See uw-formats.txt for file specs
 		public bool BuildTileMapUW(char[] lev_ark, int LevelNo)
 		{
-				// File pointer
-
-				//char[] tmp_ark; 
 				char[] tex_ark=new char[1]; 
 				char[] tmp_ark=new char[1];
 				int NoOfBlocks;
@@ -423,13 +289,11 @@ public class TileMap : Loader {
 				long address_pointer;
 				long textureAddress=0;
 				long OverlayAddress=0;
-
-				//long fileSize;
 				short x;	
 				short y;
-				int i;
-				int CeilingTexture=0;
-				int textureMapSize=64;
+				//int i;
+				short CeilingTexture=0;
+				short textureMapSize=64;
 
 				UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 
@@ -512,7 +376,7 @@ public class TileMap : Loader {
 								AddressOfBlockStart=0;
 								address_pointer=0;//Since I am at the start of a fresh array.
 								lev_ark = new char[0x7c08];
-								for (i = BlockStart; i < BlockStart + 0x7c08; i++)
+								for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
 								{
 									lev_ark[j] = tmp_ark[i];
 									j++;
@@ -536,7 +400,7 @@ public class TileMap : Loader {
 				}
 
 				int offset=0;
-				for (i = 0; i<textureMapSize; i++)	//256
+				for (int i = 0; i<textureMapSize; i++)	//256
 				{//TODO: Only use this for texture lookups.
 						switch (UWEBase._RES)
 						{
@@ -544,23 +408,23 @@ public class TileMap : Loader {
 							{
 								if (i<48)	//Wall textures
 								{
-										texture_map[i] =  (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16); //(i * 2)
+										texture_map[i] =  (short)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16); //(i * 2)
 										offset=offset+2;
 								}
 								else if (i<=57)	//Floor textures are 49 to 56, ceiling is 57
 								{
-										texture_map[i] =  (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16)+48; //(i * 2)
+										texture_map[i] =  (short)(DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 16)+48); //(i * 2)
 										offset = offset + 2;
 										if (i == 57)
 										{
-												CeilingTexture = i;
+											CeilingTexture = (short)i;
 										}
 
 								}
 								else
 								{ //door textures are int 8s
-										texture_map[i] = (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
-										offset++;
+									texture_map[i] = (short)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
+									offset++;
 								}
 								break;
 							}
@@ -569,22 +433,22 @@ public class TileMap : Loader {
 							{
 								if (i<48)	//Wall textures
 								{
-									texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
+									texture_map[i] =  (short)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
 									offset=offset+2;
 								}
 								else if (i<=57)	//Floor textures are 49 to 56, ceiling is 57
 								{
-									texture_map[i] =  (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
+									texture_map[i] =  (short)(DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 16)+210); //(i * 2)
 									offset = offset + 2;
 									if (i == 57)
 									{
-										CeilingTexture = i;
+										CeilingTexture = (short)i;
 									}
 
 								}
 								else
 								{ //door textures are int 8s
-									texture_map[i] = (int)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
+									texture_map[i] = (short)DataLoader.getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
 									offset++;
 								}
 
@@ -598,12 +462,12 @@ public class TileMap : Loader {
 										//textureAddress=0;//To stop array out of bounds->THis does not work in the original code??
 										if (i<64)
 										{
-											texture_map[i] =(int)DataLoader.getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
+											texture_map[i] =(short)DataLoader.getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
 											offset = offset + 2;
 										}
 										else
 										{//door textures
-											texture_map[i] = (int)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+											texture_map[i] = (short)DataLoader.getValAtAddress(tex_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
 											offset++;
 										}
 									}
@@ -611,19 +475,19 @@ public class TileMap : Loader {
 									{
 										if (i<64)
 										{
-											texture_map[i] =(int)DataLoader.getValAtAddress(tmp_ark,textureAddress+offset,16);//tmp //textureAddress+//(i*2)
+											texture_map[i] =(short)DataLoader.getValAtAddress(tmp_ark,textureAddress+offset,16);//tmp //textureAddress+//(i*2)
 											offset = offset + 2;
 										}
 										else
 										{//door textures
-											texture_map[i] = (int)DataLoader.getValAtAddress(tmp_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+											texture_map[i] = (short)DataLoader.getValAtAddress(tmp_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
 											offset++;
 										}
 									}
 
 									if (i == 0xf)
 									{
-										CeilingTexture=i;//texture_map[i];
+										CeilingTexture=(short)i;//texture_map[i];
 									}
 									break;
 								}
@@ -636,7 +500,7 @@ public class TileMap : Loader {
 						{
 								Tiles[x,y].tileX = x;
 								Tiles[x,y].tileY = y;
-								Tiles[x,y].address = AddressOfBlockStart+address_pointer;
+								//Tiles[x,y].address = AddressOfBlockStart+address_pointer;
 								long FirstTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
 								long SecondTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
 								address_pointer=address_pointer+4;
@@ -646,11 +510,11 @@ public class TileMap : Loader {
 								//Tiles[x,y].trueHeight=Tiles[x,y].floorHeight;//Save this value before shifting.
 								//Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 								//Turns out that shift is just a doubling!
-								Tiles[x,y].floorHeight  = Tiles[x,y].floorHeight*2; //remember to divide when writing this back.
+								Tiles[x,y].floorHeight  = (short)(Tiles[x,y].floorHeight*2); //remember to divide when writing this back.
 								Tiles[x,y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
-								Tiles[x,y].noOfNeighbours=0;
-								Tiles[x,y].tileTested = 0;
-								Tiles[x,y].TerrainChangeCount=0;
+								//Tiles[x,y].noOfNeighbours=0;
+								//Tiles[x,y].tileTested = 0;
+							//	Tiles[x,y].TerrainChangeCount=0;
 								Tiles[x,y].BullFrog = 0;
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
@@ -700,7 +564,7 @@ public class TileMap : Loader {
 								if (Tiles[x,y].tileType >=2)
 								{
 										Tiles[x,y].shockSteep = 1;
-										Tiles[x,y].shockSteep = ((Tiles[x,y].shockSteep  <<3) >> 2)*8 >>3;	//Shift copied from shock
+										Tiles[x,y].shockSteep =(short)( ((Tiles[x,y].shockSteep  <<3) >> 2)*8 >>3 );	//Shift copied from shock
 										Tiles[x,y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;
 								}
 								else
@@ -794,10 +658,10 @@ public class TileMap : Loader {
 				{//read in the next 64 entries of length 6 bytes						
 					for (int overlayIndex=0; overlayIndex<64; overlayIndex++ )
 					{
-						Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(lev_ark,OverlayAddress,16);
-						Overlays[overlayIndex].unk1 = (int)DataLoader.getValAtAddress(lev_ark,OverlayAddress+2,16);
-						Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(lev_ark,OverlayAddress+4,8);
-						Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(lev_ark,OverlayAddress+5,16);
+						Overlays[overlayIndex].index = (short)DataLoader.getValAtAddress(lev_ark,OverlayAddress,16);
+						Overlays[overlayIndex].unk1 = (short)DataLoader.getValAtAddress(lev_ark,OverlayAddress+2,16);
+						Overlays[overlayIndex].tileX = (short)DataLoader.getValAtAddress(lev_ark,OverlayAddress+4,8);
+						Overlays[overlayIndex].index = (short)DataLoader.getValAtAddress(lev_ark,OverlayAddress+5,16);
 						OverlayAddress+=6;
 					}
 				}
@@ -839,7 +703,7 @@ public class TileMap : Loader {
 						HeightUnits=3;
 				}
 				//int cSpace = (int)DataLoader.getValAtAddress(inf_ark.data,24,32);  //Per docs should return 1 on cyberspace. Does'nt appear to work.
-				SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);  //Shifts the scale of the level.
+				SHOCK_CEILING_HEIGHT = (short)(((256 >> HeightUnits) * 8 >>3));  //Shifts the scale of the level.
 				CEILING_HEIGHT= SHOCK_CEILING_HEIGHT;
 
 
@@ -872,7 +736,7 @@ public class TileMap : Loader {
 				address_pointer=0;
 				for (long k=0; k< tex_ark.chunkUnpackedLength/2; k++)
 				{
-						texture_map[k] =  (int)DataLoader.getValAtAddress(tex_ark.data,address_pointer,16);
+						texture_map[k] =  (short)DataLoader.getValAtAddress(tex_ark.data,address_pointer,16);
 						address_pointer =address_pointer+2;   //tmp_ark[AddressOfBlockStart+k];
 				}
 				address_pointer=0;  
@@ -894,7 +758,7 @@ public class TileMap : Loader {
 								Tiles[x,y]=new TileInfo();
 								Tiles[x,y].tileX = (short)x;
 								Tiles[x,y].tileY = (short)y;
-								Tiles[x,y].tileType = lev_ark.data[address_pointer];
+								Tiles[x,y].tileType = (short)lev_ark.data[address_pointer];
 								switch (Tiles[x,y].tileType)
 								{//Need to swap some tile types around so that they conform to uw naming standards.
 								case 4: {Tiles[x,y].tileType = 5; break; }
@@ -919,11 +783,11 @@ public class TileMap : Loader {
         11-15 Floor texture
         */
 								//Tiles[x,y].wallTexture = texture_map[(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F];
-								Tiles[x,y].wallTexture =(int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F;
+								Tiles[x,y].wallTexture =(short)(DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) & 0x3F);
 								//Tiles[x,y].shockCeilingTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F];
-								Tiles[x,y].shockCeilingTexture =((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F;
+								Tiles[x,y].shockCeilingTexture =(short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 6) & 0x1F);
 								//Tiles[x,y].floorTexture = texture_map[((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F];
-								Tiles[x,y].floorTexture = ((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F;
+								Tiles[x,y].floorTexture = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 6, 16) >> 11) & 0x1F);
 								//Tiles[x,y].wallTexture = 270;//debug
 								//Tiles[x,y].shockCeilingTexture = 273;
 								Tiles[x,y].North = Tiles[x,y].wallTexture;
@@ -935,11 +799,11 @@ public class TileMap : Loader {
 								Tiles[x,y].landRegion=0;
 								Tiles[x,y].lavaRegion = 0;
 								Tiles[x,y].waterRegion = 0;
-								Tiles[x,y].floorHeight = ((lev_ark.data[address_pointer + 1]) & 0x1F);
-								Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+								Tiles[x,y].floorHeight = (short)((lev_ark.data[address_pointer + 1]) & 0x1F);
+								Tiles[x,y].floorHeight = (short)(((Tiles[x,y].floorHeight << 3) >> HeightUnits) * 8 >> 3); //Shift it for varying height scales
 
-								Tiles[x,y].ceilingHeight = ((lev_ark.data[address_pointer + 2]) & 0x1F);
-								Tiles[x,y].ceilingHeight = ((Tiles[x,y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+								Tiles[x,y].ceilingHeight = (short)((lev_ark.data[address_pointer + 2]) & 0x1F);
+								Tiles[x,y].ceilingHeight = (short)(((Tiles[x,y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3); //Shift it for varying height scales
 
 								Tiles[x,y].shockFloorOrientation = (short)(((lev_ark.data[address_pointer + 1]) >> 5) & 0x3);
 								Tiles[x,y].shockCeilOrientation =(short)(((lev_ark.data[address_pointer + 2]) >> 5) & 0x3);
@@ -951,8 +815,8 @@ public class TileMap : Loader {
 								Tiles[x,y].shockEastCeilHeight = Tiles[x,y].ceilingHeight;
 								Tiles[x,y].shockWestCeilHeight = Tiles[x,y].ceilingHeight;
 
-								Tiles[x,y].shockSteep = (lev_ark.data[address_pointer + 3] & 0x0f);
-								Tiles[x,y].shockSteep = ((Tiles[x,y].shockSteep << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+								Tiles[x,y].shockSteep = (short)(lev_ark.data[address_pointer + 3] & 0x0f);
+								Tiles[x,y].shockSteep = (short)(((Tiles[x,y].shockSteep << 3) >> HeightUnits) * 8 >> 3); //Shift it for varying height scales
 
 								if ((Tiles[x,y].shockSteep == 0) && (Tiles[x,y].tileType >= 6))//If a sloped tile has no slope then it's a open tile.
 								{
@@ -977,8 +841,8 @@ public class TileMap : Loader {
         xxxxxCxx  Ceiling only
         */
 								Tiles[x,y].shockSlopeFlag =(short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 10) & 0x03);
-								Tiles[x,y].UseAdjacentTextures = ((int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01;
-								Tiles[x,y].shockTextureOffset = (int)DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF;
+								Tiles[x,y].UseAdjacentTextures = (short)((DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) >> 8) & 0x01);
+								Tiles[x,y].shockTextureOffset = (short)(DataLoader.getValAtAddress(lev_ark.data, address_pointer + 8, 32) & 0xF);
 								//unknownflags
 								//70E000E0
 								//  fprintf(LOGFILE,"\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
@@ -1048,10 +912,10 @@ public class TileMap : Loader {
 
 								}
 								//Need to calculate the adjustment here with the steepness and the direction of the slope.
-								Tiles[x,y].shockEastCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x+1,y],fEAST);
-								Tiles[x,y].shockWestCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x-1,y],fWEST);
-								Tiles[x,y].shockNorthCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y+1],fNORTH);
-								Tiles[x,y].shockSouthCeilHeight= CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y-1],fSOUTH);
+								Tiles[x,y].shockEastCeilHeight=(short)CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x+1,y],fEAST);
+								Tiles[x,y].shockWestCeilHeight= (short)CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x-1,y],fWEST);
+								Tiles[x,y].shockNorthCeilHeight= (short)CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y+1],fNORTH);
+								Tiles[x,y].shockSouthCeilHeight= (short)CalcNeighbourCeilHeight(Tiles[x,y],Tiles[x,y-1],fSOUTH);
 								/*        Tiles[x,y].shockEastCeilHeight =LevelInfo[x+1,y].ceilingHeight - LevelInfo[x+1,y].shockSteep ;
         Tiles[x,y].shockWestCeilHeight =LevelInfo[x-1,y].ceilingHeight - LevelInfo[x-1,y].shockSteep ;
         Tiles[x,y].shockNorthCeilHeight =LevelInfo[x,y+1].ceilingHeight - LevelInfo[x,y+1].shockSteep ;
@@ -1082,51 +946,51 @@ public class TileMap : Loader {
 
 		//***********************
 
-		int getTile(long tileData)
+		short getTile(long tileData)
 		{
 				//gets tile data at bits 0-3 of the tile data
-				return (int) (tileData & 0x0F);
+				return (short) (tileData & 0x0F);
 		}
 
-		int getHeight(long tileData)
+		short getHeight(long tileData)
 		{//gets height data at bits 4-7 of the tile data
-				return (int)(tileData & 0xF0) >> 4;
+				return (short)((tileData & 0xF0) >> 4);
 		}
 
-		int getFloorTex(char[] buffer, long textureOffset, long tileData)
+		short getFloorTex(char[] buffer, long textureOffset, long tileData)
 		{//gets floor texture data at bits 10-13 of the tile data
 
-				return (int)(tileData >>10) & 0x0F;
+				return (short)((tileData >>10) & 0x0F);
 				//int val = (int)(tileData >>10) & 0x0F;	//gets the index of the texture
 				//look it up in texture block for it's absolute index for wxx.tr
 				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+96+(val*2),16) +210;			//96 needed?
 				//	return ((tileData >>10) & 0x0F);	//was	11
 		}
 
-		int getWallTex(char[] buffer, long textureOffset, long tileData)
+		short getWallTex(char[] buffer, long textureOffset, long tileData)
 		{
 				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
 				//return ((tileData >>17)& 0x3F);
-				return (int)(tileData & 0x3F);
+				return (short)(tileData & 0x3F);
 				//int val = (int)(tileData & 0x3F);	//gets the index of the texture
 				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
 				//return (tileData& 0x3F);
 		}
 
-		int getFloorTexUw2(char[] buffer, long textureOffset, long tileData)
+		short getFloorTexUw2(char[] buffer, long textureOffset, long tileData)
 		{//gets floor texture data at bits 10-13 of the tile data
-				return (int)((tileData >>10) & 0x0F);
+				return (short)((tileData >>10) & 0x0F);
 
 				//long val = (tileData >>10) & 0x0F;	//gets the index of the texture
 				//look it up in texture block for it's absolute index for wxx.tr
 				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);	
 		}
 
-		int getWallTexUw2(char[]  buffer, long textureOffset, long tileData)
+		short getWallTexUw2(char[]  buffer, long textureOffset, long tileData)
 		{
 				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
 				//long val = (tileData & 0x3F);	//gets the index of the texture
-				return (int)((tileData & 0x3F));
+				return (short)((tileData & 0x3F));
 				//return (int)DataLoader.getValAtAddress(buffer,textureOffset+(val*2),16);
 		}
 
@@ -1545,7 +1409,7 @@ public class TileMap : Loader {
 						}
 				}
 		}
-
+		/*
 		/// <summary>
 		/// Merges the room tile list so that each ground tile is part of a "room" or continous connected region. This defines where an NPC can travel to.
 		/// </summary>
@@ -1568,21 +1432,22 @@ public class TileMap : Loader {
 						}
 				}
 		}
+		*/
 		/// <summary>
 		/// Resets the tile tests state
 		/// </summary>
 		/// <param name="">.</param>
-		void ResetTileTests()
-		{
-				for (int x = 0; x<=TileMap.TileMapSizeX; x++)
-				{
-						for (int y = 0; y<=TileMap.TileMapSizeY; y++)
-						{
-								Tiles[x,y].tileTested=0;
-						}
-				}
-		}
-
+	//	void ResetTileTests()
+	//	{
+	//			for (int x = 0; x<=TileMap.TileMapSizeX; x++)
+	//			{
+	//					for (int y = 0; y<=TileMap.TileMapSizeY; y++)
+	//					{
+	//							Tiles[x,y].tileTested=0;
+	//					}
+	//			}
+	//	}
+		/*
 
 		void MergeCurrentRoomRegion(short currRegion, int x, int y)
 		{
@@ -1611,11 +1476,11 @@ public class TileMap : Loader {
 						MergeCurrentRoomRegion( currRegion, x - 1, y);
 				}
 		}
+*/
 
 
 
-
-
+		/*
 		bool isMergeableRoom(int x, int y)
 		{
 				if (
@@ -1644,7 +1509,7 @@ public class TileMap : Loader {
 				}
 		}
 
-
+*/
 
 
 
@@ -1731,7 +1596,7 @@ public class TileMap : Loader {
 				return false;	*/
 		}
 
-
+		/*
 		public void MergeWaterRegions()
 		{
 				int currRegion;
@@ -1780,8 +1645,8 @@ public class TileMap : Loader {
 						MergeCurrentWaterRegion(currRegion, x-1, y);
 				}
 		}
-
-
+*/
+		/*
 		/// <summary>
 		/// Merges the lava regions into a single region
 		/// </summary>
@@ -1834,7 +1699,7 @@ public class TileMap : Loader {
 				}
 		}
 
-
+		*/
 
 		int CalcNeighbourCeilHeight(TileInfo t1, TileInfo t2,int Direction)
 		{//TODO:Test me. I'm terrible.

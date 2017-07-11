@@ -29,9 +29,9 @@ public class Container : object_base {
 	/// Gets the max capacity of the container.
 	/// </summary>
 	/// <returns>The capacity.</returns>
-	public int MaxCapacity()
+	public short MaxCapacity()
 	{
-		return items.GetUpperBound (0);
+		return (short)items.GetUpperBound (0);
 	}
 
 	/// <summary>
@@ -39,7 +39,7 @@ public class Container : object_base {
 	/// </summary>
 	/// <returns>The <see cref="System.String"/>.</returns>
 	/// <param name="index">Index.</param>
-	public string GetItemAt(int index)
+	public string GetItemAt(short index)
 	{
 		if ((index >=0) && (index<=MaxCapacity()))
 		{
@@ -56,7 +56,7 @@ public class Container : object_base {
 	/// </summary>
 	/// <returns>The <see cref="UnityEngine.GameObject"/>.</returns>
 	/// <param name="index">Index.</param>
-	public GameObject GetGameObjectAt(int index)
+	public GameObject GetGameObjectAt(short index)
 	{
 		if (GetItemAt(index)!="")
 		{
@@ -200,10 +200,10 @@ public class Container : object_base {
 			GameWorldController.instance.playerUW.playerInventory.currentContainer=GameWorldController.instance.playerUW.name;
 			this.ContainerParent=GameWorldController.instance.playerUW.name;
 		}
-		for (int i = 0; i<8; i++)
+		for (short i = 0; i<8; i++)
 		{
 			string sItem = this.GetItemAt(i);
-			GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
+			GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
 		}
 		UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
 		if (CountItems()>=8)
@@ -225,7 +225,7 @@ public class Container : object_base {
 		GameWorldController.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
-		for (int i=0; i<=MaxCapacity ();i++)
+		for (short i=0; i<=MaxCapacity ();i++)
 		{
 			GameObject Spilled = GetGameObjectAt(i);//GameObject.Find (GetItemAt (i));
 			if (Spilled!=null)
@@ -269,7 +269,7 @@ public class Container : object_base {
 
 	public static void SetPickedUpFlag(Container cn, bool NewValue)
 	{//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
-		for (int i =0; i<=cn.MaxCapacity();i++)
+		for (short i =0; i<=cn.MaxCapacity();i++)
 		{
 			GameObject item =cn.GetGameObjectAt(i); // GameObject.Find (cn.GetItemAt(i));
 			if (item !=null)
@@ -293,7 +293,7 @@ public class Container : object_base {
 
 	public static void SetItemsPosition(Container cn, Vector3 Position)
 	{
-		for (int i =0; i<=cn.MaxCapacity();i++)
+		for (short i =0; i<=cn.MaxCapacity();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -313,7 +313,7 @@ public class Container : object_base {
 
 	public static void SetItemsParent(Container cn, Transform Parent)
 	{
-		for (int i =0; i<=cn.MaxCapacity ();i++)
+		for (short i =0; i<=cn.MaxCapacity ();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -341,7 +341,7 @@ public class Container : object_base {
 
 	public static int GetFreeSlot(Container cn)
 	{//Returns an available slot on the current container.
-		for (int i=0;i<=cn.MaxCapacity();i++)
+		for (short i=0;i<=cn.MaxCapacity();i++)
 		{
 			if (cn.GetItemAt (i)=="")
 			{
@@ -359,12 +359,12 @@ public class Container : object_base {
 		int currFreeSlot=-1;
 		string ItemName;
 		bool GetNextSlot=true;
-		for (int i=0;i<=cn.MaxCapacity();i++)
+		for (short i=0;i<=cn.MaxCapacity();i++)
 		{
 			//Find the first free slot
 			if (GetNextSlot==true)
 			{
-				for (int j=0;j<=cn.MaxCapacity();j++)
+				for (short j=0;j<=cn.MaxCapacity();j++)
 				{
 					ItemName=cn.GetItemAt(j);
 					if (ItemName=="")
@@ -456,7 +456,7 @@ public class Container : object_base {
 	public override float GetWeight ()
 	{//Get the weight of all items in the container
 		float answer=base.GetWeight();//The container has it's own weight as well.
-		for (int i=0; i<=MaxCapacity();i++)
+		for (short i=0; i<=MaxCapacity();i++)
 		{
 			if (GetItemAt(i)!="")
 			{
@@ -574,7 +574,7 @@ public class Container : object_base {
 		/// <param name="itemid">Itemid.</param>
 	public string findItemOfType(int itemid)
 	{
-		for (int i =0; i<=MaxCapacity(); i++ )
+		for (short i =0; i<=MaxCapacity(); i++ )
 		{
 			GameObject obj = GetGameObjectAt(i);
 			if (obj!=null)

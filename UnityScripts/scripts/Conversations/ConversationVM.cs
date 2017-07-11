@@ -1048,7 +1048,7 @@ public class ConversationVM : UWEBase {
 								case "npc_arms":
 										npc.npc_arms= stack.at(address);break;
 								case "npc_hp":
-										npc.npc_hp= stack.at(address);break;
+										npc.npc_hp= (short)stack.at(address);break;
 								case "npc_health":										
 										npc.npc_health= stack.at(address);break;
 								case "npc_hunger":
@@ -1222,7 +1222,6 @@ public class ConversationVM : UWEBase {
 							//	case "play_health":
 								case "play_hunger":
 										stack.Set(address,GameWorldController.instance.playerUW.FoodLevel);break;
-										break;
 							default:
 								//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
 								break;
@@ -1898,7 +1897,6 @@ public class ConversationVM : UWEBase {
 				UWHUD.instance.MessageScroll.Clear();
 				//PlayerInput.text="";
 				usingBablF=false;
-				string tmp="";
 				MaxAnswer=0;
 				int j=1;
 				for (int i = Start; i <=stack.Upperbound() ; i++)
@@ -1948,7 +1946,7 @@ public class ConversationVM : UWEBase {
 			{//Reset the answers array
 					bablf_array[i]=0;
 			}
-			string tmp="";
+			
 			int j=1;
 			MaxAnswer=0;
 			for (int i = Start; i <=stack.Upperbound() ; i++)
@@ -2315,7 +2313,7 @@ public class ConversationVM : UWEBase {
 
 		if (arg1<1000)
 		{//I'm taking a specific item.
-			for (int i = 0; i<= cn.MaxCapacity ();i++)
+			for (short i = 0; i<= cn.MaxCapacity ();i++)
 			{
 				if (cn.GetItemAt (i)!="")
 				{	
@@ -2337,7 +2335,7 @@ public class ConversationVM : UWEBase {
 			int rangeS = (arg1-1000)*16;
 			int rangeE = rangeS+16;
 
-			for (int i = 0; i<= cn.MaxCapacity ();i++)
+			for (short i = 0; i<= cn.MaxCapacity ();i++)
 			{
 				if (cn.GetItemAt (i)!="")
 				{
@@ -2359,7 +2357,7 @@ public class ConversationVM : UWEBase {
 	static int TakeItemFromNPCCOntainer (NPC npc, Container PlayerContainer, int index)
 	{
 		//Give to PC
-		GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt (index);
+		GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt ((short)index);
 		if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
 		 {
 			demanded.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
@@ -2368,7 +2366,7 @@ public class ConversationVM : UWEBase {
 			if (demanded.GetComponent<Container>())
 			{
 					Container cn = demanded.GetComponent<Container>();
-					for ( int i=0; i<=cn.MaxCapacity();i++)	
+					for ( short i=0; i<=cn.MaxCapacity();i++)	
 					{
 							if (cn.GetItemAt(i)!="")
 							{
@@ -2397,7 +2395,7 @@ public class ConversationVM : UWEBase {
 			if (demanded.GetComponent<Container>())
 			{
 					Container cn = demanded.GetComponent<Container>();
-					for ( int i=0; i<=cn.MaxCapacity();i++)	
+					for ( short i=0; i<=cn.MaxCapacity();i++)	
 					{
 							if (cn.GetItemAt(i)!="")
 							{
@@ -2446,7 +2444,7 @@ public class ConversationVM : UWEBase {
 				int itemCount=0;
 
 				Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
-				for (int i =0 ; i<= cn.MaxCapacity(); i++)
+				for (short i =0 ; i<= cn.MaxCapacity(); i++)
 				{
 						if (cn.GetItemAt(i)!="")
 						{
@@ -2923,7 +2921,7 @@ public class ConversationVM : UWEBase {
 			}
 			else
 			{
-				obj.owner=stack.at(owner);
+				obj.owner=(short)stack.at(owner);
 			}
 
 
@@ -2934,7 +2932,7 @@ public class ConversationVM : UWEBase {
 			}
 			else
 			{
-				obj.quality=stack.at(quality);
+				obj.quality=(short)stack.at(quality);
 			}
 			if (stack.at(item_id)<=0)
 			{
@@ -2972,7 +2970,7 @@ public class ConversationVM : UWEBase {
 			{
 				Container npcCont = npc.gameObject.GetComponent<Container>();
 
-				for ( int i=0; i<npcCont.Capacity; i++)
+				for ( short i=0; i<npcCont.Capacity; i++)
 				{
 					GameObject obj = npcCont.GetGameObjectAt(i);
 					if (obj!=null)
@@ -3303,7 +3301,7 @@ return value: none
 		string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
 		int playerHasSpace=1;
 		Container playerContainer = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
-		Container npcContainer = npc.GetComponent<Container>();
+		//Container npcContainer = npc.GetComponent<Container>();
 
 		GameObject obj = GameObject.Find(ItemName);
 		if (obj==null){return 1;}
@@ -3318,7 +3316,7 @@ return value: none
 						if (obj.GetComponent<Container>())
 						{
 								Container cn = obj.GetComponent<Container>();
-								for ( int i=0; i<=cn.MaxCapacity();i++)	
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
 								{
 										if (cn.GetItemAt(i)!="")
 										{
@@ -3349,7 +3347,7 @@ return value: none
 						if (obj.GetComponent<Container>())
 						{
 								Container cn = obj.GetComponent<Container>();
-								for ( int i=0; i<=cn.MaxCapacity();i++)	
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
 								{
 										if (cn.GetItemAt(i)!="")
 										{
@@ -3375,8 +3373,8 @@ return value: none
 	public int take_from_npc_inv(NPC npc, int pos)
 	{
 		pos--;
-		GameObject obj=npc.GetComponent<Container>().GetGameObjectAt(pos);
-		if (pos!=null)
+		GameObject obj=npc.GetComponent<Container>().GetGameObjectAt((short)pos);
+		if (obj!=null)
 		{
 			return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 		}
@@ -3767,7 +3765,7 @@ description:  places a generated object in underworld
 
 			if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
 			{
-				GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=NewQuality;
+				GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
 			}
 		}
 

@@ -1328,7 +1328,7 @@ public class Magic : UWEBase {
 						{
 								if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo+1)
 								{//Teleport to level
-										GameWorldController.instance.SwitchLevel(playerUW.MoonGateLevel-1);
+									GameWorldController.instance.SwitchLevel((short)(playerUW.MoonGateLevel-1));
 								}
 								caster.transform.position = playerUW.MoonGatePosition;//Assumes moongate will be found!
 						}

@@ -458,7 +458,7 @@ public class DoorControl : object_base {
 		if (LockObject!=null)
 		{
 			//To lock set bit 8 of the flags
-			LockObject.flags = LockObject.flags | 0x1;
+			LockObject.flags = (short)(LockObject.flags | 0x1);
 		}
 	}
 
@@ -471,7 +471,7 @@ public class DoorControl : object_base {
 		if (LockObject!=null)
 		{
 			//To unlock unset bit 8 of the flags
-			LockObject.flags = LockObject.flags & 0xE;
+			LockObject.flags = (short)(LockObject.flags & 0xE);
 		}
 	}
 
@@ -553,20 +553,20 @@ public class DoorControl : object_base {
 		door.position = EndPos;
 	}
 
-	public override bool ApplyAttack (int damage, GameObject source)
+	public override bool ApplyAttack (short damage, GameObject source)
 	{
 		return ApplyAttack (damage);
 	}
 
-	public override bool ApplyAttack(int damage)
+	public override bool ApplyAttack(short damage)
 	{//TODO:Find out how massive doors resist damage
 		if (DR()<3)
 		{
 			if (DR()!=0)
 			{
-			damage= damage/DR();
+				damage= (short) (damage/DR());
 			}
-		objInt().quality=objInt().quality-damage;
+		objInt().quality=(short)(objInt().quality-damage);
 		if ((objInt().quality<=0))
 			{
 				//locked=false;
@@ -580,7 +580,7 @@ public class DoorControl : object_base {
 	/// <summary>
 	/// Gets the Damage resistance of this door
 	/// </summary>
-	private int DR()
+	private short DR()
 	{
 		switch (objInt().item_id)
 		{

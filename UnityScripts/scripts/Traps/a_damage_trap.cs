@@ -35,7 +35,7 @@ owner != 0 poison trap
 			if (GameWorldController.instance.playerUW.play_poison==0)
 			{
 				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
-				GameWorldController.instance.playerUW.play_poison=Mathf.Max(1, GameWorldController.instance.playerUW.play_poison);//Is this the value the poison should apply?
+				GameWorldController.instance.playerUW.play_poison=(short)(Mathf.Max(1, GameWorldController.instance.playerUW.play_poison));//Is this the value the poison should apply?
 			}		
 		}
 	}

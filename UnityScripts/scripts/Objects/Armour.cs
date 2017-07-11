@@ -95,7 +95,7 @@ public class Armour : Equipment {
 		
 	}
 
-	public override bool EquipEvent (int slotNo)
+	public override bool EquipEvent (short slotNo)
 	{
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
@@ -140,7 +140,7 @@ public class Armour : Equipment {
 		return true;
 	}
 	
-	public override bool UnEquipEvent (int slotNo)
+	public override bool UnEquipEvent (short slotNo)
 	{
 		if ((slotNo >=0) && (slotNo <=4))
 		{
@@ -157,7 +157,7 @@ public class Armour : Equipment {
 		/// Gets the defence score of this armour.
 		/// </summary>
 		/// <returns>The defence.</returns>
-		public int getDefence()
+		public short getDefence()
 		{
 			return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;
 		}

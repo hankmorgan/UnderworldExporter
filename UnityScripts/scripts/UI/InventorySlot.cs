@@ -7,8 +7,8 @@ public class InventorySlot : GuiBase {
 
 	//private UISprite slot;
 	//private RawImage slot;
-	public int slotIndex;//What index of inventory slot is this
-	public int SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
+	public short slotIndex;//What index of inventory slot is this
+	public short SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
 	//Possible values for the below. Should tally with UWexporter defines
 	public const int GeneralItems = -1;
 	public const int ARMOUR =2 ;

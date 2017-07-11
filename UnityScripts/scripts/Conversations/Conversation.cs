@@ -947,7 +947,7 @@ public class Conversation : GuiBase {
 			int rangeS = (arg1-1000)*16;
 			int rangeE = rangeS+16;
 			
-			for (int i = 0; i<= cn.MaxCapacity ();i++)
+			for (short i = 0; i<= cn.MaxCapacity ();i++)
 			{
 				//string itemName=cn.GetItemAt (i);				
 				if (cn.GetItemAt (i)!="")
@@ -1001,7 +1001,7 @@ public class Conversation : GuiBase {
 		int itemCount=0;
 
 		Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
-		for (int i =0 ; i<= cn.MaxCapacity(); i++)
+		for (short i =0 ; i<= cn.MaxCapacity(); i++)
 		{
 			if (cn.GetItemAt(i)!="")
 			{
@@ -1487,7 +1487,7 @@ public class Conversation : GuiBase {
 		}
 		else
 		{
-			obj.quality=locals[quality];
+			obj.quality= (short)locals[quality];
 		}
 		if (locals[id]<=0)
 		{
@@ -1518,7 +1518,7 @@ public class Conversation : GuiBase {
 		case 0://NPC inventory
 			Container npcCont = npc.gameObject.GetComponent<Container>();
 
-			for ( int i=0; i<npcCont.Capacity; i++)
+			for ( short i=0; i<npcCont.Capacity; i++)
 			{
 				GameObject obj = npcCont.GetGameObjectAt(i);
 				if (obj!=null)
@@ -1695,7 +1695,7 @@ public class Conversation : GuiBase {
 		GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
-			objInslot.GetComponent<ObjectInteraction>().quality= NewQuality;
+			objInslot.GetComponent<ObjectInteraction>().quality= (short)NewQuality;
 		}
 	}
 

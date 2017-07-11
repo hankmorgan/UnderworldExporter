@@ -28,7 +28,7 @@ public class Weapon : Equipment {
 		{
 			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
-		return false;
+		//return false;
 	}
 
 	public virtual void WeaponSelfDamage()
@@ -43,7 +43,7 @@ public class Weapon : Equipment {
 		}
 	}
 
-	public override bool EquipEvent (int slotNo)
+	public override bool EquipEvent (short slotNo)
 	{
 		//GameWorldController.instance.playerUW.PlayerCombat.currWeapon= this;
 		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
@@ -88,7 +88,7 @@ public class Weapon : Equipment {
 		return true;
 	}
 
-	public override bool UnEquipEvent (int slotNo)
+	public override bool UnEquipEvent (short slotNo)
 	{
 		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
 		{

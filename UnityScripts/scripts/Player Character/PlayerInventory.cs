@@ -53,7 +53,7 @@ public class PlayerInventory : UWEBase {
 	private LightSource ls;
 
 	public Container playerContainer;
-	public int ContainerOffset=0;//For scrolling the inventory.
+	public short ContainerOffset=0;//For scrolling the inventory.
 
 	// Use this for initialization
 	void Start () {
@@ -348,7 +348,7 @@ public class PlayerInventory : UWEBase {
 		}
 	}
 
-	public void SetObjectAtSlot(int slotIndex,string sObject)
+	public void SetObjectAtSlot(short slotIndex,string sObject)
 	{
 		switch (slotIndex)
 		{
@@ -418,7 +418,7 @@ public class PlayerInventory : UWEBase {
 		}
 	}
 
-	public void ClearSlot(int slotIndex)
+	public void ClearSlot(short slotIndex)
 	{
 		switch (slotIndex)
 		{
@@ -547,9 +547,9 @@ public class PlayerInventory : UWEBase {
 		bLeftHand=true;
 		bRightRing=true;
 		bLeftRing=true;
-		for (int i = 11; i<=18; i++)
+		for (short i = 11; i<=18; i++)
 			{
-				sBackPack[i-11] = cn.GetItemAt(ContainerOffset + i-11);
+				sBackPack[i-11] = cn.GetItemAt((short)(ContainerOffset + i-11));
 				bBackPack[i-11]=true;
 			}
 		if (UWHUD.instance.Encumberance.enabled==true)
@@ -560,7 +560,7 @@ public class PlayerInventory : UWEBase {
 	}
 
 
-	public void SwapObjects(GameObject ObjInSlot, int slotIndex, string cObjectInHand)
+	public void SwapObjects(GameObject ObjInSlot, short slotIndex, string cObjectInHand)
 	{//Swaps specified game object as the slot wth the passed object
 		//Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
 		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
@@ -845,7 +845,7 @@ public class PlayerInventory : UWEBase {
 		return GameObject.Find (name);
 	}
 
-	public void PutItemAwayEvent(int slotNo)
+	public void PutItemAwayEvent(short slotNo)
 	{
 		GameObject obj = GetGameObjectAtSlot(slotNo);
 		if (obj !=null)
@@ -853,12 +853,12 @@ public class PlayerInventory : UWEBase {
 			ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
 			if (objInt!=null)
 			{
-					objInt.PutItemAway(slotNo);
+				objInt.PutItemAway(slotNo);
 			}
 		}	
 	}
 
-	public void EquipItemEvent(int slotNo)
+	public void EquipItemEvent(short slotNo)
 	{//This must be called after the item is finally set.
 		GameObject obj = GetGameObjectAtSlot(slotNo);
 		if (obj !=null)
@@ -871,7 +871,7 @@ public class PlayerInventory : UWEBase {
 		}
 	}
 
-	public void UnEquipItemEvent(int slotNo)
+	public void UnEquipItemEvent(short slotNo)
 	{//This must be called before the item is finally removed.
 		GameObject obj = GetGameObjectAtSlot(slotNo);
 		if (obj !=null)
@@ -898,7 +898,7 @@ public class PlayerInventory : UWEBase {
 		}
 
 		//Get the weight of the gronk container as that is alway the top level of the inventory
-		for (int i = 0; i<=playerContainer.MaxCapacity();i++)
+		for (short i = 0; i<=playerContainer.MaxCapacity();i++)
 		{
 			GameObject objItem = playerContainer.GetGameObjectAt(i); //GameObject.Find (playerContainer.GetItemAt(i));
 			if (objItem!=null)
@@ -981,10 +981,10 @@ public class PlayerInventory : UWEBase {
 		/// Gets the armour score of all equiped armour
 		/// </summary>
 		/// <returns>The armour score.</returns>
-		public int getArmourScore()
+		public short getArmourScore()
 		{
 			//Get helm defence
-			int result = 0;
+			short result = 0;
 
 			result += getDefenceAtSlot(0);
 			result += getDefenceAtSlot(1);
@@ -995,13 +995,13 @@ public class PlayerInventory : UWEBase {
 		}
 
 
-		int getDefenceAtSlot(int slot)
+		short getDefenceAtSlot(int slot)
 		{
 
 				GameObject obj=	GetGameObjectAtSlot(slot);
 				if (obj!=null)
 				{
-						ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+						//ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
 						switch (slot)
 						{
 						case 0://Helm								

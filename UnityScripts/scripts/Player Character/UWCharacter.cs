@@ -67,7 +67,7 @@ public class UWCharacter : Character {
 	public int FoodLevel; //0-35 range.
 	public int Fatigue;   //0-29 range
 	//public bool Poisoned;
-		public int play_poison;
+	public short play_poison;
 	public bool Paralyzed;
 
 	//Character skills
@@ -84,11 +84,11 @@ public class UWCharacter : Character {
 
 	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
-	public int ResurrectLevel;
+	public short ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;
 
 	public Vector3 MoonGatePosition=Vector3.zero;
-	public int MoonGateLevel = 2;//Domain of the mountainmen
+	public short MoonGateLevel = 2;//Domain of the mountainmen
 
 	public float lavaDamageTimer;//How long before applying lava damage
 	public string currRegion;

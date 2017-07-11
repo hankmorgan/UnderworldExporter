@@ -110,7 +110,7 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-						int StrikeBaseDamage=0;
+						short StrikeBaseDamage=0;
 						int HitRollResult=RollForAHitMelee(GameWorldController.instance.playerUW,objInt,currWeapon);
 						if (currWeapon==null)
 						{//Fist 
@@ -119,12 +119,12 @@ public class UWCombat : Combat {
 								switch(CurrentStrike)
 								{
 								case "SLASH":
-									StrikeBaseDamage=WeaponMelee.getMeleeSlash() * 100;break;
+									StrikeBaseDamage= WeaponMelee.getMeleeSlash() ;break;
 								case "BASH":
-														StrikeBaseDamage=WeaponMelee.getMeleeBash() * 100;break;
+									StrikeBaseDamage= WeaponMelee.getMeleeBash();break;
 								case "STAB":
 								default:	
-														StrikeBaseDamage=WeaponMelee.getMeleeStab() * 100;break;
+									StrikeBaseDamage= WeaponMelee.getMeleeStab() ;break;
 								}
 						}
 						else
@@ -143,7 +143,7 @@ public class UWCombat : Combat {
 						}
 						//Depending on the hit type the damage will be multiplied by 0(miss), 1 (hit) or 2 (crit) and charge percentage
 							//For any kind of hit it will damage at the very least the min damage of the weapon.
-						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((int)((StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)) + Mathf.Min(1,HitRollResult)*StrikeBaseDamage),GameWorldController.instance.playerUW.gameObject);
+						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((short)((StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)) + Mathf.Min(1,HitRollResult)*StrikeBaseDamage),GameWorldController.instance.playerUW.gameObject);
 						
 						///Creates a blood splatter at the point of impact
 						switch (HitRollResult)
@@ -290,7 +290,7 @@ public class UWCombat : Combat {
 		}
 	}
 
-		public int GetWeaponOffset()
+		public short GetWeaponOffset()
 		{
 			if (currWeapon!=null)
 			{
@@ -353,7 +353,7 @@ public class UWCombat : Combat {
 		}
 	}
 
-		public int GetHandOffset()
+		public short GetHandOffset()
 		{
 				if (GameWorldController.instance.playerUW.isLefty)
 				{
@@ -403,7 +403,7 @@ public class UWCombat : Combat {
 
 	}
 
-		public int GetStrikeOffset()
+		public short GetStrikeOffset()
 		{
 				if (!GameWorldController.instance.playerUW.MouseLookEnabled)
 				{
@@ -490,7 +490,7 @@ public class UWCombat : Combat {
 				///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 				pd.Source=GameWorldController.instance.playerUW.gameObject;
-				pd.Damage=(int)(10.0f*(Charge/100.0f));
+				pd.Damage=(short)(10.0f*(Charge/100.0f));
 				return true;
 			}
 			else
@@ -506,7 +506,7 @@ public class UWCombat : Combat {
 	}
 
 
-	static int RollForAHitMelee(UWCharacter Origin, ObjectInteraction Target, WeaponMelee weap)
+	static short RollForAHitMelee(UWCharacter Origin, ObjectInteraction Target, WeaponMelee weap)
 	{
 		//0 =Miss
 		//1 = hit
@@ -545,8 +545,8 @@ public class UWCombat : Combat {
 		}
 	}
 
-	static int RollForAHitMelee(NPC Origin, ObjectInteraction Target)
+	static short RollForAHitMelee(NPC Origin, ObjectInteraction Target)
 	{
-			return 1;//Temp NPC will always hit.	
+		return 1;//Temp NPC will always hit.	
 	}
 }

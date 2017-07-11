@@ -6,9 +6,9 @@ using System.Collections;
 public class SpellProp  {
 
 	///How much damage or the base value the spell applies.
-	public int BaseDamage;
+	public short BaseDamage;
 	///How long the spell effect lasts
-	public int counter;
+	public short counter;
 	///What damage over time the spell effect has.
 	public int DOT;
 	///How many interations

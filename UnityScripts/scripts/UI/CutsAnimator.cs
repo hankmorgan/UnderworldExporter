@@ -92,7 +92,7 @@ public class CutsAnimator : GuiBase {
 
 						if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
 						{
-							GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel-1);
+							GameWorldController.instance.SwitchLevel((short)(GameWorldController.instance.playerUW.ResurrectLevel-1));
 						}
 						GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
 						GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;

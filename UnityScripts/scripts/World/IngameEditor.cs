@@ -97,7 +97,7 @@ public class IngameEditor : GuiBase_Draggable {
 		{
 			if (levelnotoload<= GameWorldController.instance.Tilemaps.GetUpperBound(0))
 			{
-				GameWorldController.instance.SwitchLevel(levelnotoload);
+				GameWorldController.instance.SwitchLevel((short)levelnotoload);
 				RefreshTileMap();
 				RefreshTileInfo();
 				UpdateFloorTexturesDropDown();
@@ -216,14 +216,14 @@ public class IngameEditor : GuiBase_Draggable {
 						break;
 				}
 		
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType= TileTypeSelect.value;
+			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType= (short)TileTypeSelect.value;
 			int FloorHeight=0;
 			if (int.TryParse(TileHeightDetails.text,out FloorHeight))
 			{
-				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight= FloorHeight*2;	
+				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight= (short)(FloorHeight*2);	
 			}
 			
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture=FloorTextureSelect.value;
+			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture=(short)(FloorTextureSelect.value);
 			int ActualTextureIndex= GameWorldController.instance.currentTileMap().texture_map[FloorTextureSelect.value+48];
 			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
 			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
@@ -233,19 +233,19 @@ public class IngameEditor : GuiBase_Draggable {
 				{
 						if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType==TileMap.TILE_SOLID)
 						{
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].North=WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].South=WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].East=WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].West=WallTextureSelect.value;
+							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].North=(short)WallTextureSelect.value;
+							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].South=(short)WallTextureSelect.value;
+							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].East=(short)WallTextureSelect.value;
+							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].West=(short)WallTextureSelect.value;
 						}
-						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture=WallTextureSelect.value;
+						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture=(short)WallTextureSelect.value;
 
 						if (TileY>0)
 						{//Change its neighbour, only if the neighbour is not a solid
 							if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
 							{
-									GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].North=WallTextureSelect.value;	
-										ReRenderNeighbours=true;
+								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].North=(short)WallTextureSelect.value;	
+								ReRenderNeighbours=true;
 							}
 						}
 
@@ -253,8 +253,8 @@ public class IngameEditor : GuiBase_Draggable {
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
 								{
-										GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].South=WallTextureSelect.value;	
-										ReRenderNeighbours=true;
+									GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].South=(short)WallTextureSelect.value;	
+									ReRenderNeighbours=true;
 								}
 						}
 
@@ -262,8 +262,8 @@ public class IngameEditor : GuiBase_Draggable {
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
 								{
-										GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].East=WallTextureSelect.value;	
-										ReRenderNeighbours=true;
+									GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].East=(short)WallTextureSelect.value;	
+									ReRenderNeighbours=true;
 								}
 						}
 
@@ -271,8 +271,8 @@ public class IngameEditor : GuiBase_Draggable {
 						{//Change its neighbour, only if the neighbour is not a solid
 								if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
 								{
-										GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].West=WallTextureSelect.value;
-										ReRenderNeighbours=true;
+									GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].West=(short)WallTextureSelect.value;
+									ReRenderNeighbours=true;
 								}
 						}
 

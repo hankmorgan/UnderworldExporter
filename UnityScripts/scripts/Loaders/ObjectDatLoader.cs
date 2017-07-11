@@ -11,11 +11,11 @@ public class ObjectDatLoader : Loader {
 				//0003   3      unknown
 				//0006   Int8   skill type (3: sword, 4: axe, 5: mace, 6: unarmed)
 				//0007   Int8   durability	
-			public int Slash;
-			public int Bash;
-			public int Stab;
-			public int Skill;
-			public int Durability;
+			public short Slash;
+			public short Bash;
+			public short Stab;
+			public short Skill;
+			public short Durability;
 		};
 
 		public struct RangedData
@@ -41,9 +41,9 @@ public class ObjectDatLoader : Loader {
 				05: boots
 				08: hat
 				09: ring*/
-				public int protection;
-				public int durability;
-				public int category;
+				public short protection;
+				public short durability;
+				public short category;
 		}
 
 		public struct ContainerData
@@ -95,7 +95,7 @@ public class ObjectDatLoader : Loader {
 2Fh 	1 	uint8 	 ?? 	Always 73.
 */
 				public int Level;
-				public int AvgHit;//Is this defence?????
+				public short AvgHit;//Is this defence?????
 				public int AttackPower;
 				public int Remains;
 				public int Blood;
@@ -132,11 +132,11 @@ public class ObjectDatLoader : Loader {
 				int j=0;
 				for (int i=0; i<16;i++)
 				{
-					weaponStats[j].Slash = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-					weaponStats[j].Bash = (int)DataLoader.getValAtAddress(obj_dat, add_ptr+1, 8);
-					weaponStats[j].Stab = (int)DataLoader.getValAtAddress(obj_dat, add_ptr+2, 8);
-					weaponStats[j].Skill = (int)DataLoader.getValAtAddress(obj_dat, add_ptr+6, 8);
-					weaponStats[j].Durability = (int)DataLoader.getValAtAddress(obj_dat, add_ptr+7, 8);
+					weaponStats[j].Slash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
+					weaponStats[j].Bash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr+1, 8);
+					weaponStats[j].Stab = (short)DataLoader.getValAtAddress(obj_dat, add_ptr+2, 8);
+					weaponStats[j].Skill = (short)DataLoader.getValAtAddress(obj_dat, add_ptr+6, 8);
+					weaponStats[j].Durability = (short)DataLoader.getValAtAddress(obj_dat, add_ptr+7, 8);
 					add_ptr=add_ptr+8;	
 					j++;
 				}
@@ -157,9 +157,9 @@ public class ObjectDatLoader : Loader {
 				j=0;
 				for (int i = 0; i < 32; i++)
 				{
-					armourStats[j].protection= (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
-					armourStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
-					armourStats[j].category=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 3, 8);
+					armourStats[j].protection= (short)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
+					armourStats[j].durability= (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
+					armourStats[j].category=(short)DataLoader.getValAtAddress(obj_dat, add_ptr + 3, 8);
 					add_ptr = add_ptr + 4;
 					j++;
 				}
@@ -192,7 +192,7 @@ public class ObjectDatLoader : Loader {
 				for (int i = 0; i < 64; i++)
 				{//Critters
 					critterStats[j].Level=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
-					critterStats[j].AvgHit=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 16);//Average Hitpoints
+					critterStats[j].AvgHit=(short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 16);//Average Hitpoints
 					critterStats[j].AttackPower= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);//Attack power
 					critterStats[j].Remains=(int)DataLoader.getValAtAddress(obj_dat,add_ptr + 8, 8) & 0xF0;//Remains body
 					critterStats[j].Blood=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood

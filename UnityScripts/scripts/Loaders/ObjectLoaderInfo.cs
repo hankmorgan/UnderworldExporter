@@ -5,7 +5,7 @@ public class ObjectLoaderInfo {
 
 		public int index;	//it's own index in case I need to find myself.
 		public int item_id;	//0-8
-		public int flags;	//9-12
+		public short flags;	//9-12
 		public short enchantment;	//12
 		public short doordir;	//13
 		public short invis;		//14
@@ -14,18 +14,18 @@ public class ObjectLoaderInfo {
 		public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
-		public int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-		public int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
-		public int x; //   10-12   3   "ypos"      Object Y position (0-7)
-		public int y; //  13-15   3   "xpos"      Object X position (0-7)
+		public short zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+		public short heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+		public short x; //   10-12   3   "ypos"      Object Y position (0-7)
+		public short y; //  13-15   3   "xpos"      Object X position (0-7)
 		//0004 quality / chain
-		public 		int quality;	//;     0- 5   6   "quality"   Quality
+		public short quality;	//;     0- 5   6   "quality"   Quality
 		public int next; //    6-15   10  "next"      Index of next object in chain
 
 		//0006 link / special
 		//     0- 5   6   "owner"     Owner / special
 
-		public int owner;	//Also special
+		public short owner;	//Also special
 		//     6-15   10  (*)         Quantity / special link / special property
 
 		public int link	;	//also quantity

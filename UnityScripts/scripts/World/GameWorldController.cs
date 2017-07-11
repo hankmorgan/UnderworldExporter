@@ -24,9 +24,8 @@ public class GameWorldController : UWEBase {
 			public long DataLen;
 		};
 
-		public Vector2 NotePosition;
+
 		public bool bGenNavMeshes=true;
-		public float testUVadjust=0f;
 
 		/// <summary>
 		/// Enables texture animation effects
@@ -52,12 +51,12 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// What level number we are currently on.
 		/// </summary>	
-	public int LevelNo;
+		public short LevelNo;
 
 		/// <summary>
 		/// What level the player starts on in a quick start
 		/// </summary>
-		public int startLevel=0;
+		public short startLevel=0;
 		/// <summary>
 		/// What start position for the player.
 		/// </summary>
@@ -159,17 +158,14 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public bool AtMainMenu;
 
-	/// <summary>
-	/// Path to lev.ark file to load
-	/// </summary>
-	public string Lev_Ark_File;
 
-		public string Lev_Ark_File_Selected = "Data\\Lev.ark";
+
+	public string Lev_Ark_File_Selected = "Data\\Lev.ark";
 
 	/// <summary>
 	/// The graves file for associating grave textures with grave objects
 	/// </summary>
-	public string Graves_File;	
+	//public string Graves_File;	
 	
 	/// <summary>
 	/// The material master list for matching the texture list to materials.
@@ -178,10 +174,10 @@ public class GameWorldController : UWEBase {
 
 	public Material[] SpecialMaterials=new Material[1];
 
-		/// <summary>
-		/// The material for doors
-		/// </summary>
-		public Material[] MaterialDoors=new Material[13];
+	/// <summary>
+	/// The material for doors
+	/// </summary>
+	public Material[] MaterialDoors=new Material[13];
 
 	/// <summary>
 	/// Gameobject to load the objects at
@@ -575,7 +571,7 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	/// <param name="newLevelNo">New level no.</param>
 		/// 
-		public void SwitchLevel(int newLevelNo)
+		public void SwitchLevel(short newLevelNo)
 		{
 			if (newLevelNo!=-1)
 			{
@@ -694,7 +690,7 @@ public class GameWorldController : UWEBase {
 		/// <param name="newLevelNo">New level no.</param>
 		/// <param name="newTileX">New tile x.</param>
 		/// <param name="newTileY">New tile y.</param>
-		public void SwitchLevel(int newLevelNo, int newTileX, int newTileY)
+		public void SwitchLevel(short newLevelNo, short newTileX, short newTileY)
 		{
 			SwitchLevel(newLevelNo);
 			float targetX=(float)newTileX*1.2f + 0.6f;
@@ -822,29 +818,29 @@ public class GameWorldController : UWEBase {
 				{
 						return;
 				}
-			TileMap.visitTileX =(int)(playerUW.transform.position.x/1.2f);
-			TileMap.visitTileY =(int)(playerUW.transform.position.z/1.2f);
+			TileMap.visitTileX =(short)(playerUW.transform.position.x/1.2f);
+			TileMap.visitTileY =(short)(playerUW.transform.position.z/1.2f);
 			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-				GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
-				for (int x=-1; x<=1;x++)
-				{
-						for (int y=-1; y<=1;y++)
-						{
-								if
-										(
-										( 
-										(TileMap.visitTileX+x >=0 ) && (TileMap.visitTileX+x <=TileMap.TileMapSizeX )
-										)
-										&&
-										( 
-												(TileMap.visitTileY+y >=0 ) && (TileMap.visitTileY+y <=TileMap.TileMapSizeY)
-										)
-										)
-								{
-									currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
-								}
-						}	
-				}
+			GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
+			for (int x=-1; x<=1;x++)
+			{
+					for (int y=-1; y<=1;y++)
+					{
+							if
+									(
+									( 
+									(TileMap.visitTileX+x >=0 ) && (TileMap.visitTileX+x <=TileMap.TileMapSizeX )
+									)
+									&&
+									( 
+											(TileMap.visitTileY+y >=0 ) && (TileMap.visitTileY+y <=TileMap.TileMapSizeY)
+									)
+									)
+							{
+								currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
+							}
+					}	
+			}
 
 		}
 
@@ -1034,7 +1030,7 @@ public class GameWorldController : UWEBase {
 		}
 
 
-
+		/*
 		/// <summary>
 		/// Writes a lev ark file based on the stored file
 		/// </summary>
@@ -1180,13 +1176,16 @@ public class GameWorldController : UWEBase {
 			}
 			File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);			
 		}
-
+		*/
 
 		/// <summary>
 		/// Inits the level data maps and textures.
 		/// </summary>
 		void InitLevelData()
 		{
+				// Path to lev.ark file to load
+				string Lev_Ark_File;
+				
 				switch (_RES)
 				{
 				case GAME_SHOCK:

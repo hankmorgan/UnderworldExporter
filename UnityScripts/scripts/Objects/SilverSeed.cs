@@ -57,7 +57,7 @@ public class SilverSeed : object_base {
 
 				UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
 				GameWorldController.instance.playerUW.ResurrectPosition=GameWorldController.instance.playerUW.transform.position;
-				GameWorldController.instance.playerUW.ResurrectLevel=GameWorldController.instance.LevelNo+1;
+				GameWorldController.instance.playerUW.ResurrectLevel=(short)(GameWorldController.instance.LevelNo+1);
 				//int tileX= GameWorldController.instance.Tilemap.visitTileX;
 				//int tileY= GameWorldController.instance.Tilemap.visitTileY;
 				objInt().gameObject.transform.parent=GameWorldController.instance.LevelMarker();

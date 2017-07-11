@@ -18,10 +18,12 @@ public class Action_Moving_Platform : MonoBehaviour {
 		GameObject ceilTile;
 		level=GameObject.Find("level");
 
-		int CurrentCeilingHeight=tm.GlobalCeilingHeight - tm.GetCeilingHeight(TileX,TileY);
+		//int CurrentCeilingHeight=tm.GlobalCeilingHeight - tm.GetCeilingHeight(TileX,TileY);
+				int CurrentCeilingHeight=32 - tm.GetCeilingHeight(TileX,TileY);
 		int CurrentFloorHeight=tm.GetFloorHeight(TileX,TileY);
 		int DisplacementFloor=TargetFloorHeight-CurrentFloorHeight;
-		int DisplacementCeiling=(tm.GlobalCeilingHeight-TargetCeilingHeight)-CurrentCeilingHeight;
+		//int DisplacementCeiling=(tm.GlobalCeilingHeight-TargetCeilingHeight)-CurrentCeilingHeight;
+				int DisplacementCeiling=(32-TargetCeilingHeight)-CurrentCeilingHeight;
 
 		floorTile=FindTile (TileX,TileY,1);
 		ceilTile=FindTile (TileX,TileY,2);
@@ -31,19 +33,19 @@ public class Action_Moving_Platform : MonoBehaviour {
 		case 1://Floor only moves
 			Debug.Log ("Displacement is " + DisplacementFloor);
 			StartCoroutine(MoveTile (floorTile.transform, new Vector3(0f,+0.15f*DisplacementFloor,0f) ,0.5f));
-			tm.SetFloorHeight(TileX,TileY,TargetFloorHeight);
+			tm.SetFloorHeight(TileX,TileY,(short)TargetFloorHeight);
 			break;
 		case 2://Ceiling only moves
 			Debug.Log ("Displacement is " + DisplacementCeiling);
 			StartCoroutine(MoveTile (ceilTile.transform, new Vector3(0f,+0.15f*DisplacementCeiling,0f) ,0.5f));
-			tm.SetCeilingHeight(TileX,TileY,TargetCeilingHeight);
+			tm.SetCeilingHeight(TileX,TileY,(short)TargetCeilingHeight);
 			break;
 		case 3://Both move
 			Debug.Log ("Displacement is " + DisplacementFloor);
 			StartCoroutine(MoveTile (floorTile.transform, new Vector3(0f,+0.15f*DisplacementFloor,0f) ,0.5f));
 			Debug.Log ("Displacement is " + DisplacementCeiling);
 			StartCoroutine(MoveTile (ceilTile.transform, new Vector3(0f,+0.15f*DisplacementCeiling,0f) ,0.5f));
-			tm.SetFloorHeight(TileX,TileY,TargetCeilingHeight);
+			tm.SetFloorHeight(TileX,TileY,(short)TargetCeilingHeight);
 			break;
 		}
 

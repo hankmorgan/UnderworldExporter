@@ -14,9 +14,9 @@ public class a_hack_trap_teleport : a_hack_trap {
 	const int Tomb =6;
 	const int EtherealVoid=7;
 
-	int[] DestinationLevels = {8,16,24,32,40,56,48,68};
-	int[] DestinationTileX = {33,27,18,31,4,59,32,33};
-	int[] DestinationTileY = {32,34,40,31,38,20,32,4};
+	short[] DestinationLevels = {8,16,24,32,40,56,48,68};
+	short[] DestinationTileX = {33,27,18,31,4,59,32,33};
+	short[] DestinationTileY = {32,34,40,31,38,20,32,4};
 
 //Probably used to teleport to an other world possible based on the state of the other gem hack trap and probably based on the players position.
 

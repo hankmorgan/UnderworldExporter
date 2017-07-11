@@ -12,7 +12,7 @@ public class Shield : Equipment {
 	}
 
 
-	public override bool EquipEvent (int slotNo)
+	public override bool EquipEvent (short slotNo)
 	{		
 		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==true)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==false)))//Only on off hand
 		{
@@ -62,7 +62,7 @@ public class Shield : Equipment {
 	/// Gets the defence score of this armour.
 	/// </summary>
 	/// <returns>The defence.</returns>
-	public int getDefence()
+	public short getDefence()
 	{
 		return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability;
 	}

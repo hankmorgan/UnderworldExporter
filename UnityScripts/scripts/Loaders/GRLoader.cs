@@ -496,19 +496,19 @@ public class GRLoader : ArtLoader {
 						}
 				}
 
-				float height = (float)ImageCache[index].height;
-				float offsetf= (float)offset;
+				//float height = (float)ImageCache[index].height;
+				//float offsetf= (float)offset;
 
 				//When offset is zero sprite at (0.5, 0)
 				//When offset is height sprite at (0.5, 1)
-				float adj=0f;
+				//float adj=0f;
 
 
-					adj = offsetf / height;	
+					//adj = offsetf / height;	
 
 
-				adj= GameWorldController.instance.testUVadjust;
-				return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f,  adj));	
+				//adj= GameWorldController.instance.testUVadjust;
+				return Sprite.Create(ImageCache[index],new Rect(0,0,ImageCache[index].width,ImageCache[index].height), new Vector2(0.5f,  0f));	
 	
 		}
 

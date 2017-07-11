@@ -26,7 +26,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the slash base damage
 		/// </summary>
 		/// <returns>The slash damage</returns>
-		public int GetSlash()
+		public short GetSlash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropSlash(objInt().item_id);
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Slash;
@@ -36,7 +36,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the bash base damage
 		/// </summary>
 		/// <returns>The bash damage</returns>
-		public int GetBash()
+		public short GetBash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropBash(objInt().item_id);
 				return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Bash;
@@ -46,7 +46,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the stab damage
 		/// </summary>
 		/// <returns>The stab damage</returns>
-		public int GetStab()
+		public short GetStab()
 		{
 			//return GameWorldController.instance.weaponprops.getPropStab(objInt().item_id);
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab;
@@ -56,7 +56,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the durability of the weapon.
 		/// </summary>
 		/// <returns>The durability.</returns>
-		public int GetDurability()
+		public short GetDurability()
 		{
 			//return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability;
@@ -67,7 +67,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the melee slash value
 		/// </summary>
 		/// <returns>The melee slash.</returns>
-		public static int getMeleeSlash()
+		public static short getMeleeSlash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropSlash(15);	
 			return GameWorldController.instance.objDat.weaponStats[15].Slash;
@@ -77,7 +77,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the melee bash value
 		/// </summary>
 		/// <returns>The melee bash.</returns>
-		public static int getMeleeBash()
+		public static short getMeleeBash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropBash(15);		
 			return GameWorldController.instance.objDat.weaponStats[15].Bash;
@@ -87,7 +87,7 @@ public class WeaponMelee : Weapon {
 		/// Gets the melee stab value.
 		/// </summary>
 		/// <returns>The melee stab.</returns>
-		public static int getMeleeStab()
+		public static short getMeleeStab()
 		{
 			//return GameWorldController.instance.weaponprops.getPropStab(15);	
 			return GameWorldController.instance.objDat.weaponStats[15].Stab;

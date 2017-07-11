@@ -188,22 +188,22 @@ public class ObjectInteraction : UWEBase {
 
 		//public int index;	//it's own index in case I need to find myself.
 		public int item_id;	//0-8
-		public int flags;	//9-12
+		public short flags;	//9-12
 		public short enchantment;	//12
 		public short doordir;	//13
 		public short invis;		//14
 		public short isquant;	//15
 
-		public int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-		public int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
-		public int x; //   10-12   3   "ypos"      Object Y position (0-7)
-		public int y; //  13-15   3   "xpos"      Object X position (0-7)
+		public short zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+		public short heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+		public short x; //   10-12   3   "ypos"      Object Y position (0-7)
+		public short y; //  13-15   3   "xpos"      Object X position (0-7)
 		//0004 quality / chain
-		public 		int quality;	//;     0- 5   6   "quality"   Quality
+		public short quality;	//;     0- 5   6   "quality"   Quality
 		public int next; //    6-15   10  "next"      Index of next object in chain
 		//0006 link / special
 		//     0- 5   6   "owner"     Owner / special
-		public int owner;	//Also special
+		public short owner;	//Also special
 		//     6-15   10  (*)         Quantity / special link / special property
 		public int link	;	//also quantity
 
@@ -241,7 +241,7 @@ public class ObjectInteraction : UWEBase {
 		/// <summary>
 		/// The inventory slot that the object is in.
 		/// </summary>
-		public int inventorySlot=-1;
+		public short inventorySlot=-1;
 
 		//UW specific info.
 		//public int index;
@@ -370,7 +370,7 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		/// <param name="damage">Damage.</param>
 		/// <param name="source">Source.</param>
-		public bool Attack (int damage, GameObject source)
+		public bool Attack (short damage, GameObject source)
 		{
 			this.GetComponent<object_base>().ApplyAttack(damage,source);
 			return true;	
@@ -527,7 +527,7 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if item away was put, <c>false</c> otherwise.</returns>
 		/// <param name="SlotNo">Slot no.</param>
-		public bool PutItemAway(int SlotNo)
+		public bool PutItemAway(short SlotNo)
 		{//What happens when an item is put into a backpack
 			inventorySlot=SlotNo;
 			object_base item=null;
@@ -547,7 +547,7 @@ public class ObjectInteraction : UWEBase {
 		/// What happens when the item is equipped
 		/// </summary>
 		/// <param name="SlotNo">Slot no.</param>
-		public bool Equip(int SlotNo)
+		public bool Equip(short SlotNo)
 		{//To handle what happens when an item (typically armour is equipped
 			object_base item=this.GetComponent<object_base>();
 			inventorySlot=SlotNo;
@@ -565,7 +565,7 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if equip was uned, <c>false</c> otherwise.</returns>
 		/// <param name="SlotNo">Slot no.</param>
-		public bool UnEquip(int SlotNo)
+		public bool UnEquip(short SlotNo)
 		{//To handle what happens when an item (typically armour is unequipped
 			object_base item=this.GetComponent<object_base>();
 			inventorySlot=-1;
@@ -1046,9 +1046,9 @@ public class ObjectInteraction : UWEBase {
 
 			objInteract.item_id=ItemId;//Internal ItemID
 			objInteract.link=link;
-			objInteract.quality=Quality;
-			objInteract.owner=Owner;
-			objInteract.flags=flags;
+			objInteract.quality=(short)Quality;
+			objInteract.owner=(short)Owner;
+			objInteract.flags=(short)flags;
 
 			if (isMoveable==1)
 			{
@@ -1436,7 +1436,7 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_yhome=npc_yhome;        //  y coord of home tile
 						npc.npc_hunger=npc_hunger;
 						npc.npc_health=npc_health;
-						npc.npc_hp=npc_hp;
+						npc.npc_hp=(short)npc_hp;
 						npc.npc_arms=npc_arms;          // (not used in uw1)
 						npc.npc_power=npc_power;
 						npc.npc_goal=npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
@@ -1739,7 +1739,7 @@ public class ObjectInteraction : UWEBase {
 			//float dist =Vector3.Distance(this.transform.position,startPos);
 			if (Vector3.Distance(this.transform.position,startPos)<=0.2f)
 				{//No movement. Just update heading.
-					heading= Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
+					heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
 				}
 			else
 			{
@@ -1762,7 +1762,7 @@ public class ObjectInteraction : UWEBase {
 					case HIDDENDOOR:
 						break;
 					default:
-						zpos =(int)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+						zpos =(short)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
 						break;
 					}
 				
@@ -1770,13 +1770,13 @@ public class ObjectInteraction : UWEBase {
 				{//Update x & y
 					//Remove corner
 					float offX = (this.transform.position.x) - ((float)(tileX*1.2f));
-					x = (int)(7f * (offX/1.2f));
+					x = (short)(7f * (offX/1.2f));
 
 					float offY = (this.transform.position.z) - ((float)(tileY*1.2f));
-					y = (int)(7f * (offY/1.2f));
+					y = (short)(7f * (offY/1.2f));
 				}
 				//updates the heading.
-				heading= Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
+				heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
 
 			}
 				objectloaderinfo.heading=heading;

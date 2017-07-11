@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Tile map renderer.
+/// </summary>
+/// Renders the tile map in 3d
 public class TileMapRenderer : Loader{
 
-		const int TILE_SOLID= 0;
-		const int TILE_OPEN= 1;
+		const int  TILE_SOLID= 0;
+		const int  TILE_OPEN= 1;
 
 		//Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
 
@@ -15,22 +19,21 @@ public class TileMapRenderer : Loader{
 
 		const int  TILE_SLOPE_N =6;
 		const int  TILE_SLOPE_S =7;
-		const int 	TILE_SLOPE_E =8;
+		const int  TILE_SLOPE_E =8;
 		const int  TILE_SLOPE_W =9;
 		const int  TILE_VALLEY_NW =10;
 		const int  TILE_VALLEY_NE= 11;
-		const int TILE_VALLEY_SE =12;
+		const int  TILE_VALLEY_SE =12;
 		const int  TILE_VALLEY_SW= 13;
 		const int  TILE_RIDGE_SE= 14;
 		const int  TILE_RIDGE_SW= 15;
 		const int  TILE_RIDGE_NW= 16;
 		const int  TILE_RIDGE_NE =17;
 
-
 		const int SLOPE_BOTH_PARALLEL= 0;
 		const int SLOPE_BOTH_OPPOSITE= 1;
 		const int SLOPE_FLOOR_ONLY =2;
-		const int  SLOPE_CEILING_ONLY= 3;
+		const int SLOPE_CEILING_ONLY= 3;
 
 		//Visible faces indices
 		const int vTOP =0;
@@ -40,8 +43,8 @@ public class TileMapRenderer : Loader{
 		const int vNORTH= 4;
 		const int vSOUTH= 5;
 
-		public const int LayerFloor=0;
-		public const int LayerCeil=1;
+		//public const int LayerFloor=0;
+		//public const int LayerCeil=1;
 		
 
 		//BrushFaces
@@ -68,14 +71,27 @@ public class TileMapRenderer : Loader{
 		const int CEIL_ADJ =0;
 		const int FLOOR_ADJ =0;//-2;
 
+		const float doorwidth = 0.8f;
+		const float doorframewidth = 1.2f;
+		const float doorSideWidth = (doorframewidth-doorwidth)/2f;
+		const float doorheight = 7f * 0.15f;
+
+		/// <summary>
+		/// Generates the level from tile map.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="sceneryParent">Scenery parent.</param>
+		/// <param name="game">Game.</param>
+		/// <param name="Level">Level.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="UpdateOnly">If set to <c>true</c> update only.</param>
 		public static void GenerateLevelFromTileMap(GameObject parent, GameObject sceneryParent, string game, TileMap Level, ObjectLoader objList, bool UpdateOnly)
 		{
-			//UW_CEILING_HEIGHT=Level.UW_CEILING_HEIGHT;
-			CEILING_HEIGHT=Level.CEILING_HEIGHT;
 			bool skipCeil=true;
+			CEILING_HEIGHT=Level.CEILING_HEIGHT;			
 			if (game==GAME_SHOCK)
 			{
-					skipCeil=false;
+				skipCeil=false;
 			}
 			
 			if (!UpdateOnly)
@@ -155,11 +171,11 @@ public class TileMapRenderer : Loader{
 						tmp.tileY = y;
 						if ((x != TileMap.ObjectStorageTile) || (y != TileMap.ObjectStorageTile))
 						{
-								tmp.tileType = 0;
+							tmp.tileType = 0;
 						}
 						else
 						{
-								tmp.tileType = 1;
+							tmp.tileType = 1;
 						}
 						RenderTile(sceneryParent, x, y, tmp, false, false, false, false);
 					}
@@ -168,7 +184,6 @@ public class TileMapRenderer : Loader{
 		}
 		if (!UpdateOnly)
 			{
-
 				//Render bridges, pillars and door ways
 				switch (_RES)
 				{
@@ -184,6 +199,12 @@ public class TileMapRenderer : Loader{
 			}
 		}
 
+		/// <summary>
+		/// Renders the doorways.
+		/// </summary>
+		/// <param name="Parent">Parent.</param>
+		/// <param name="level">Level.</param>
+		/// <param name="objList">Object list.</param>
 		public static void RenderDoorways(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
 				if (objList==null)
@@ -201,20 +222,21 @@ public class TileMapRenderer : Loader{
 		}
 
 
+		/// <summary>
+		/// Renders the doorway frame from the rear
+		/// </summary>
+		/// <param name="Parent">Parent.</param>
+		/// <param name="level">Level.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="currDoor">Curr door.</param>
 		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
 		{
-
 				Material[] MatsToUse = new Material[1];
 				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 				{
 						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];				
 				}
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				//float doorthickness = 0.1f;
-				float doorwidth = 0.8f;
-				float doorframewidth = 1.2f;
-				float doorSideWidth = (doorframewidth-doorwidth)/2f;
-				float doorheight = 7f * 0.15f;
 
 				//Uv ratios across the x axis of the door
 				float uvXPos1 = 0f;
@@ -362,7 +384,13 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders the doorway front portion
+		/// </summary>
+		/// <param name="Parent">Parent.</param>
+		/// <param name="level">Level.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="currDoor">Curr door.</param>
 		public static void RenderDoorwayFront(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
 		{
 
@@ -373,12 +401,6 @@ public class TileMapRenderer : Loader{
 				}
 				//Door params
 				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
-				//float doorthickness = 0.2f;
-				float doorwidth = 0.8f;
-				float doorframewidth = 1.2f;
-				float doorSideWidth = (doorframewidth-doorwidth)/2f;
-				float doorheight = 7.0f * 0.15f ;
-
 
 				//Uv ratios across the x axis of the door
 				float uvXPos1 = 0f;
@@ -402,8 +424,6 @@ public class TileMapRenderer : Loader{
 						position =new Vector3( currDoor.tileX*1.2f + 1.2f / 2f, 0f, position.z+0.02f);
 						break;
 				}
-
-
 
 				float y0 = 0f;//+doorthickness /2f;
 				//float y1 = 0f;//-doorthickness /2f;
@@ -458,7 +478,6 @@ public class TileMapRenderer : Loader{
 				z1 = CEILING_HEIGHT*0.15f;
 				//1.2
 				Vector3[] overHead = new Vector3[4];
-
 
 				switch (currDoor.heading*45)
 				{
@@ -626,15 +645,22 @@ public class TileMapRenderer : Loader{
 				RenderCuboid(Parent,filler,UVs,position,MatsToUse,3,"front_filler_" + ObjectLoader.UniqueObjectName(currDoor));
 		}
 
+		/// <summary>
+		/// Renders the pillar models.
+		/// </summary>
+		/// <param name="Parent">Parent.</param>
+		/// <param name="level">Level.</param>
+		/// <param name="objList">Object list.</param>
 		public static void RenderPillars(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
 				if (objList==null)
 				{
 						return;
 				}
+
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
-						if ((objList.objInfo[i].item_id==352) && (objList.objInfo[i].InUseFlag==1))
+						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
 						{
 								Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 								//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
@@ -706,15 +732,18 @@ public class TileMapRenderer : Loader{
 								{
 										Debug.Log("RenderPillar: Missing material resource for tmobj/" + TextureIndex);
 										return;
-								}
-						
-
+								}	
 						}
 				}
 		}
 
 
-
+		/// <summary>
+		/// Renders bridges
+		/// </summary>
+		/// <param name="Parent">Parent.</param>
+		/// <param name="level">Level.</param>
+		/// <param name="objList">Object list.</param>
 		public static void RenderBridges(GameObject Parent, TileMap level, ObjectLoader objList)
 		{
 				if (objList==null)
@@ -723,7 +752,7 @@ public class TileMapRenderer : Loader{
 				}
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
-						if ((objList.objInfo[i].item_id==356) && (objList.objInfo[i].InUseFlag==1))
+						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag==1))
 						{
 								Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 								position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
@@ -809,7 +838,17 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders the a tile
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
+		/// <param name="skipFloor">If set to <c>true</c> skip floor.</param>
+		/// <param name="skipCeil">If set to <c>true</c> skip ceil.</param>
 		public static void RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
 				//Picks the tile to render based on tile type/flags.
@@ -826,28 +865,28 @@ public class TileMapRenderer : Loader{
 								if ((skipCeil  != true)) { RenderOpenTile( parent , x, y, t, Water, true); }	//ceiling	
 								return;
 						}
-				case 2:
+				case TILE_DIAG_SE:
 						{//diag se
 								if (skipFloor != true) { RenderDiagSETile( parent , x, y, t, Water, false); }//floor
 								if ((skipCeil  != true)) { RenderDiagSETile( parent , x, y, t, Water, true); }
 								return;
 						}
 
-				case 3:
+				case TILE_DIAG_SW:
 						{	//diag sw
 								if (skipFloor != true) { RenderDiagSWTile( parent , x, y, t, Water, false); }//floor
 								if ((skipCeil  != true)) { RenderDiagSWTile( parent , x, y, t, Water, true); }
 								return;
 						}
 
-				case 4:
+				case TILE_DIAG_NE:
 						{	//diag ne
 								if (skipFloor != true) { RenderDiagNETile( parent , x, y, t, Water, invert); }//floor
 								if ((skipCeil  != true)) { RenderDiagNETile( parent , x, y, t, Water, true); }
 								return;
 						}
 
-				case 5:
+				case TILE_DIAG_NW:
 						{//diag nw
 								if (skipFloor != true) { RenderDiagNWTile( parent , x, y, t, Water, invert); }//floor
 								if ((skipCeil  != true)) { RenderDiagNWTile( parent , x, y, t, Water, true); }
@@ -1229,6 +1268,17 @@ public class TileMapRenderer : Loader{
 				}
 		}
 
+		/// <summary>
+		/// Renders the a cuboid with no slopes
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
 		{
 
@@ -1435,6 +1485,7 @@ public class TileMapRenderer : Loader{
 				mc.sharedMesh=mesh;
 		}
 
+		/*
 		static void RenderSlopedCuboidOld(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, string TileName)
 		{
 				//Draws a cube with sloped tops
@@ -1704,7 +1755,7 @@ public class TileMapRenderer : Loader{
 				mf.mesh=mesh;
 				mc.sharedMesh=mesh;
 
-		}
+		}*/
 
 
 
@@ -1758,7 +1809,14 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders a solid tile that files the entire tilespace
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
 		static void RenderSolidTile(GameObject parent, int x, int y, TileInfo t, bool Water)
 		{
 				if (t.Render == 1)
@@ -1774,7 +1832,15 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders an open tile with no slopes
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderOpenTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (t.Render == 1){
@@ -1820,6 +1886,15 @@ public class TileMapRenderer : Loader{
 		}
 
 
+		/// <summary>
+		/// Renders the diag SE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderDiagSETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
@@ -1862,7 +1937,15 @@ public class TileMapRenderer : Loader{
 		}
 
 
-		///
+		/// <summary>
+		/// Renders the diag SW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderDiagSWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
@@ -1903,7 +1986,15 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders the diag NE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderDiagNETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
@@ -1941,7 +2032,15 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
+		/// <summary>
+		/// Renders the diag NW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderDiagNWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
@@ -1981,7 +2080,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
-
+		/// <summary>
+		/// Renders the slope N tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderSlopeNTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
@@ -2011,6 +2118,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the slope S tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderSlopeSTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
@@ -2040,6 +2156,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the slope W tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderSlopeWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
@@ -2069,6 +2194,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the slope E tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderSlopeETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
@@ -2098,7 +2232,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
-
+		/// <summary>
+		/// Renders the valley NW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderValleyNWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (invert == false)
@@ -2121,7 +2263,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
-
+		/// <summary>
+		/// Renders the valley NE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderValleyNETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (invert==false)
@@ -2144,6 +2294,15 @@ public class TileMapRenderer : Loader{
 				}
 		}
 
+		/// <summary>
+		/// Renders the valley SW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderValleySWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (invert==false)
@@ -2169,6 +2328,15 @@ public class TileMapRenderer : Loader{
 	
 		}
 
+		/// <summary>
+		/// Renders the valley SE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderValleySETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (invert==false)
@@ -2193,9 +2361,15 @@ public class TileMapRenderer : Loader{
 
 		}
 
-
-
-
+		/// <summary>
+		/// Renders the ridge NW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderRidgeNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				
@@ -2227,6 +2401,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the ridge NE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderRidgeNETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 
@@ -2254,6 +2437,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the ridge SW tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderRidgeSWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				//consists of a slope s and a slope w
@@ -2284,6 +2476,15 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the ridge SE tile.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderRidgeSETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				//consists of a slope s and a slope e
@@ -2318,8 +2519,14 @@ public class TileMapRenderer : Loader{
 		}
 
 
-
-
+		/// <summary>
+		/// Renders the diag SE portion.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="t">T.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderDiagSEPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 				//Does a thing.
@@ -2466,6 +2673,14 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the diag SW portion.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="t">T.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderDiagSWPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 				//Does a thing.
@@ -2612,6 +2827,14 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the diag NW portion.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="t">T.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderDiagNWPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 				//Does a thing.
@@ -2758,6 +2981,14 @@ public class TileMapRenderer : Loader{
 				return;
 		}
 
+		/// <summary>
+		/// Renders the diag NE portion.
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="t">T.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderDiagNEPortion(GameObject parent,int Bottom, int Top, TileInfo t, string TileName)
 		{
 				//Does a thing.
@@ -2905,6 +3136,12 @@ public class TileMapRenderer : Loader{
 		}
 
 
+		/// <summary>
+		/// Gets the wall texture for the specified face
+		/// </summary>
+		/// <returns>The texture.</returns>
+		/// <param name="face">Face.</param>
+		/// <param name="t">T.</param>
 		static int WallTexture(int face, TileInfo t)
 		{
 				//return 34;
@@ -2971,8 +3208,12 @@ public class TileMapRenderer : Loader{
 				return floorTexture;
 		}
 
-
-
+		/*
+		/// <summary>
+		/// Calculates the sloped ceil offset.
+		/// </summary>
+		/// <returns>The sloped ceil offset.</returns>
+		/// <param name="ceilOffset">Ceil offset.</param>
 		static float CalcSlopedCeilOffset (long ceilOffset)
 		{
 				if (_RES != GAME_SHOCK)
@@ -2990,7 +3231,7 @@ public class TileMapRenderer : Loader{
 					return - floorOffset * 0.125f;	
 				}
 		}
-
+		*/
 
 		static float CalcCeilOffset(int face, TileInfo t)
 		{
@@ -3023,7 +3264,7 @@ public class TileMapRenderer : Loader{
 				}
 		}
 
-
+		/*
 		static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int Top, int Bottom, float uv0_default, float uv1_default, out float UV0_OUT, out float UV1_OUT, out float UV2_OUT, out float UV3_OUT)
 		{//Obsolete?
 			UV0_OUT=uv0_default;
@@ -3106,7 +3347,7 @@ public class TileMapRenderer : Loader{
 				else
 				{
 						return;//These don't work yet
-						switch(SlopeDir)
+						/*switch(SlopeDir)
 						{
 						case TILE_SLOPE_N:
 								{
@@ -3159,12 +3400,12 @@ public class TileMapRenderer : Loader{
 										}
 										break;
 								}
-						}
-				}
+						}*/
+			//	}
 
-		}
+	//	}
 
-
+			
 
 
 
@@ -3177,7 +3418,20 @@ public class TileMapRenderer : Loader{
 
 
 
-
+		/// <summary>
+		/// Renders a cuboid with sloped tops
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="SlopeDir">Slope dir.</param>
+		/// <param name="Steepness">Steepness.</param>
+		/// <param name="Floor">Floor.</param>
+		/// <param name="TileName">Tile name.</param>
 		static void RenderSlopedCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, string TileName)
 		{
 
@@ -4017,8 +4271,17 @@ public class TileMapRenderer : Loader{
 
 
 
-
-		public static void UpdateTile(int TileX, int TileY, int NewTileType ,int NewFloorHeight, int NewFloorTexture ,int NewWallTexture, bool RenderImmediate)
+		/// <summary>
+		/// Updates the tile properties and if necessary it's neighbours
+		/// </summary>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="NewTileType">New tile type.</param>
+		/// <param name="NewFloorHeight">New floor height.</param>
+		/// <param name="NewFloorTexture">New floor texture.</param>
+		/// <param name="NewWallTexture">New wall texture.</param>
+		/// <param name="RenderImmediate">If set to <c>true</c> render immediately. Otherwise wait for next frame.</param>
+		public static void UpdateTile(int TileX, int TileY, short NewTileType ,short NewFloorHeight, short NewFloorTexture ,short NewWallTexture, bool RenderImmediate)
 		{
 				//GameObject tileSelected;
 				bool ReRenderNeighbours=false;
@@ -4041,7 +4304,7 @@ public class TileMapRenderer : Loader{
 				}
 
 				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType= NewTileType;
-				int FloorHeight=0;
+				//int FloorHeight=0;
 				//if (int.TryParse(TileHeightDetails.text,out FloorHeight))
 				//{
 				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight= NewFloorHeight; //FloorHeight*2;	
@@ -4144,7 +4407,11 @@ public class TileMapRenderer : Loader{
 
 
 
-
+		/// <summary>
+		/// Destroys the tile at the specified location
+		/// </summary>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
 		public static void DestroyTile(int x, int y)
 		{
 				GameObject tileSelected;

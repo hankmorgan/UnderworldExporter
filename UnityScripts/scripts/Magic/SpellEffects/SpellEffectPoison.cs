@@ -6,7 +6,7 @@ using System.Collections;
 public class SpellEffectPoison : SpellEffect {
 
 	///The amount of damage per counter tick.
-	public int DOT; 
+	public short DOT; 
 
 	///The effect is applied to an npc
 	public bool isNPC;
@@ -35,7 +35,7 @@ public class SpellEffectPoison : SpellEffect {
 			npc.Poisoned=true;
 		}
 
-		DOT=Value/counter;//How many hp per tick gets knocked off the players/npcs health.
+		DOT=(short)(Value/counter);//How many hp per tick gets knocked off the players/npcs health.
 
 		base.ApplyEffect();
 	}
@@ -67,7 +67,7 @@ public class SpellEffectPoison : SpellEffect {
 		{
 			if (npc.Poisoned==true)
 			{
-				npc.npc_hp=npc.npc_hp-DOT;
+				npc.npc_hp=(short)(npc.npc_hp-DOT);
 				//GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.CurVIT-10;
 			}
 		}

@@ -459,6 +459,8 @@ public class MainMenuHud : GuiBase {
 									GameClock.instance._day=0;
 									GameClock.instance._minute=51;
 									GameClock.instance._second=15;
+									GameWorldController.instance.playerUW.Fatigue=20;
+									GameWorldController.instance.playerUW.FoodLevel=192;
 									break;
 								}
 								JourneyOnwards();

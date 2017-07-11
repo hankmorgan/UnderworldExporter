@@ -8,7 +8,7 @@ public class MoonStone : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		GameWorldController.instance.playerUW.MoonGateLevel = GameWorldController.instance.LevelNo+1;
+		GameWorldController.instance.playerUW.MoonGateLevel = (short)(GameWorldController.instance.LevelNo+1);
 		GameWorldController.instance.playerUW.MoonGatePosition=this.transform.position;
 	}
 
@@ -21,7 +21,7 @@ public class MoonStone : object_base {
 	{
 		if (objInt().PickedUp==false)
 		{
-			GameWorldController.instance.playerUW.MoonGateLevel = GameWorldController.instance.LevelNo+1;
+			GameWorldController.instance.playerUW.MoonGateLevel = (short)(GameWorldController.instance.LevelNo+1);
 			GameWorldController.instance.playerUW.MoonGatePosition=this.transform.position;
 		}
 		else

@@ -17,12 +17,12 @@ The path to the sword hilt on Level3
 	{
 		Debug.Log (this.name);
 		int textureQuality = (objInt().quality >> 1) & 0xf;
-		for (int x=0; x<=objInt().x;x++)
+		for (short x=0; x<=objInt().x;x++)
 		{
-			for (int y=0; y<=objInt().y;y++)
+			for (short y=0; y<=objInt().y;y++)
 			{
-					int tileXToChange=x+triggerX; 
-					int tileYToChange=y +triggerY;
+					short tileXToChange=(short)(x+triggerX); 
+					short tileYToChange=(short)(y +triggerY);
 					GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
 					if (tile!=null)
 					{
@@ -37,7 +37,7 @@ The path to the sword hilt on Level3
 						default:
 							if (textureQuality<10)
 							{
-								tileToChange.floorTexture=textureQuality;//+48;
+								tileToChange.floorTexture=(short)textureQuality;//+48;
 									//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
 							}
 							break;
@@ -50,9 +50,9 @@ The path to the sword hilt on Level3
 						{
 							tileToChange.VisibleFaces[v]=1;		
 						}
-						int tileTypeToChangeTo = objInt().quality & 0x01;
-						int newTileHeight = objInt().zpos>>2;
-						int newWallTexture = tileToChange.wallTexture;
+						short tileTypeToChangeTo = (short)(objInt().quality & 0x01);
+						short newTileHeight = (short)(objInt().zpos>>2);
+						short newWallTexture = tileToChange.wallTexture;
 						if (_RES==GAME_UW2)
 						{//Also the owner can be used to change wall texture. This means changing it's neighours.
 							if (objInt().owner<63)

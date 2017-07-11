@@ -55,7 +55,7 @@ public class Potion : enchantment_base {
 	}
 
 
-	public override bool ApplyAttack (int damage)
+	public override bool ApplyAttack (short damage)
 	{
 			objInt().quality-=damage;
 			if (objInt().quality<=0)

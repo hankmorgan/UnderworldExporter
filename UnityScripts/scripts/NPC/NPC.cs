@@ -112,7 +112,7 @@ public class NPC : object_base {
 //	public int npc_whoami;       //  npc conversation slot number
 	public int npc_hunger;
 	public int npc_health;
-	public int npc_hp;
+	public short npc_hp;
 	public int npc_arms;          // (not used in uw1)
 	public int npc_power;
 	public int npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
@@ -584,9 +584,9 @@ public class NPC : object_base {
 	/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
 	/// <param name="damage">Damage.</param>
 	/// NPC becomes hostile on attack. 
-	public override bool ApplyAttack(int damage)
+	public override bool ApplyAttack(short damage)
 	{
-		npc_hp=npc_hp-damage;
+		npc_hp=(short)(npc_hp-damage);
 		return true;
 	}
 
@@ -597,7 +597,7 @@ public class NPC : object_base {
 	/// <c>false</c>
 	/// <param name="damage">Damage.</param>
 	/// <param name="source">Source.</param>
-	public override bool ApplyAttack (int damage, GameObject source)
+	public override bool ApplyAttack (short damage, GameObject source)
 	{
 		if (source!=null)
 		{
@@ -1110,7 +1110,7 @@ public class NPC : object_base {
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
-			int attackDamage =Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
+			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
 
 			if (hit.transform.Equals(this.transform))
 			{
@@ -1120,16 +1120,16 @@ public class NPC : object_base {
 			{
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{				
-					int playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
+					short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
 
 					Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
 					if (playerArmour> attackDamage)
 					{
-							attackDamage=1;
+						attackDamage=1;
 					}
 					else
 					{
-							attackDamage = attackDamage-playerArmour;
+						attackDamage-=playerArmour;
 					}
 					//TODO: armour durability
 					MusicController.LastAttackCounter=10.0f; //Thirty more seconds of combat music

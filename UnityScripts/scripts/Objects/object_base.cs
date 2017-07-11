@@ -69,7 +69,7 @@ public class object_base : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
 		/// <param name="damage">Damage.</param>
-	public virtual bool ApplyAttack(int damage)
+	public virtual bool ApplyAttack(short damage)
 	{
 		return false;
 	}
@@ -80,7 +80,7 @@ public class object_base : UWEBase {
 		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
 		/// <param name="damage">Damage.</param>
 		/// <param name="source">Source.</param>
-	public virtual bool ApplyAttack(int damage, GameObject source)
+	public virtual bool ApplyAttack(short damage, GameObject source)
 	{
 		return false;
 	}
@@ -220,7 +220,7 @@ public class object_base : UWEBase {
 	/// <returns><c>true</c>, if event was droped, <c>false</c> otherwise.</returns>
 	public virtual bool DropEvent()
 	{
-			return false;
+		return false;
 	}
 
 						/*
@@ -244,7 +244,7 @@ public class object_base : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if item away was put, <c>false</c> otherwise.</returns>
 		/// <param name="slotNo">Slot no.</param>
-		public virtual bool PutItemAwayEvent(int slotNo)
+		public virtual bool PutItemAwayEvent(short slotNo)
 		{
 				return false;
 		}
@@ -254,7 +254,7 @@ public class object_base : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if event was equiped, <c>false</c> otherwise.</returns>
 		/// <param name="slotNo">Slot no.</param>
-	public virtual bool EquipEvent(int slotNo)
+	public virtual bool EquipEvent(short slotNo)
 	{
 		return false;
 	}
@@ -264,7 +264,7 @@ public class object_base : UWEBase {
 	/// </summary>
 	/// <returns><c>true</c>, if equip event was uned, <c>false</c> otherwise.</returns>
 	/// <param name="slotNo">Slot no.</param>
-	public virtual bool UnEquipEvent(int slotNo)
+	public virtual bool UnEquipEvent(short slotNo)
 	{
 		return false;
 	}
