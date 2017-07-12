@@ -1726,19 +1726,19 @@ public class ObjectInteraction : UWEBase {
 	}
 
 
-
+		/// <summary>
+		/// Updates the position of the object before writing it back to the lev.ark file
+		/// </summary>
 		public void UpdatePosition()
 		{
-
-
-			if (objectloaderinfo==null){return;}
+				if (objectloaderinfo==null){return;}
 			if (ObjectLoader.isStatic(objectloaderinfo))	
 			{
 					return;
 			}
 			//float dist =Vector3.Distance(this.transform.position,startPos);
-			if (Vector3.Distance(this.transform.position,startPos)<=0.2f)
-				{//No movement. Just update heading.
+			if ((Vector3.Distance(this.transform.position,startPos)<=0.2f) && (tileX!=TileMap.ObjectStorageTile))
+				{//No movement or not on the map Just update heading.
 					heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
 				}
 			else

@@ -927,8 +927,10 @@ public class Magic : UWEBase {
 				{//No object interferes with the spellcast
 
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,0);
-						ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange));
+						newobjt.InUseFlag=1;
+						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
 
+						
 						/*
 						int ObjectNo = 176 + Random.Range(0,7);
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
@@ -991,7 +993,7 @@ public class Magic : UWEBase {
 						myObj.GetComponent<NPC>().npc_gtarg= gtarg;
 						myObj.GetComponent<NPC>().npc_goal=3;
 						myObj.GetComponent<NPC>().npc_hp=GameWorldController.instance.objDat.critterStats[spKM.RndNPC-64].AvgHit;
-
+						newobjt.InUseFlag=1;
 						/*
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, spKM.RndNPC, spKM.RndNPC, spKM.RndNPC, 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
@@ -1544,7 +1546,8 @@ public class Magic : UWEBase {
 
 			//TODO:reimplement this.
 			//Possible spawn boulders with temporary damage effects???
-			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+			//TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+			TileMap tm = GameWorldController.instance.currentTileMap();
 			for (int i =0 ; i <= Random.Range(1,4);i++)			
 			{
 				//	int boulderTypeOffset=Random.Range(0,4);
@@ -1569,13 +1572,13 @@ public class Magic : UWEBase {
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0);
 					GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, pos).gameObject;
 					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(),0,0,0);
-
+					newobjt.InUseFlag=1;
 					//TODO: Fix this
 					//arrow.item_index=339+boulderTypeOffset;
 					//arrow.objInt().o
 					//arrow.item_type=23;
 					//arrow.ExecuteTrap(0,0,0);
-					Destroy(myObj);
+					//Destroy(myObj);
 				}					
 			}
 		}
@@ -1846,7 +1849,7 @@ public class Magic : UWEBase {
 */
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0);
 				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,pos);
-
+				newobjt.InUseFlag=1;
 
 				//000~001~276~The Rune of Warding is placed. \n
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,276));
@@ -2530,7 +2533,7 @@ public class Magic : UWEBase {
 				GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index);
 				ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
 				oli.item_id=spellprop.ProjectileItemId;
-
+				oli.InUseFlag=1;
 				GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.LevelMarker().gameObject,Location).gameObject;
 				projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 				projectile.name = "MagicProjectile_" + SummonCount++;

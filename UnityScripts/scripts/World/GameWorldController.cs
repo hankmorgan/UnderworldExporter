@@ -857,11 +857,11 @@ public class GameWorldController : UWEBase {
 				MoveToWorld(obj.GetComponent<ObjectInteraction>());
 		}
 
-		public static void MoveToWorld(ObjectInteraction obj)
+		public static ObjectInteraction MoveToWorld(ObjectInteraction obj)
 		{
 			//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
-
+				return obj;
 				//Not needed???
 		}
 

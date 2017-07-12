@@ -188,7 +188,7 @@ public class Container : object_base {
 			}
 		//Sort the container
 		Container.SortContainer(this);
-		UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture=currObjInt.GetEquipDisplay().texture;
+		UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture= GetContainerEquipDisplay().texture; //currObjInt.GetEquipDisplay().texture;
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
@@ -692,4 +692,38 @@ public class Container : object_base {
 		return -1;
 	}
 
+
+
+	public Sprite GetContainerEquipDisplay ()
+	{	
+		switch(_RES)
+		{
+		case GAME_UWDEMO:
+		case GAME_UW1:
+				{
+					switch(objInt().item_id)
+						{
+						case 128://Sack
+						case 130://pack
+						case 132://box
+						case 134://pouch
+						case 136://Map case
+						case 138://gold coffer
+								{
+									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id+1);	break;
+								}
+						default:
+								{
+									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);break;	
+								}
+						}
+						break;
+				}
+		default://
+				{
+					return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);break;
+					break;
+				}
+		}
+	}
 }

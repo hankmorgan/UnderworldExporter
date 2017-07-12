@@ -1830,6 +1830,10 @@ public class ObjectLoader : Loader {
 				GameWorldController.instance.CurrentObjectList().objInfo[index].zpos=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].x=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].y=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].invis=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].doordir=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].is_quant=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[index].enchantment=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=TileMap.ObjectStorageTile;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=TileMap.ObjectStorageTile;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag=1;

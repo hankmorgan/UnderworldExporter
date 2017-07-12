@@ -124,8 +124,8 @@ public class UWHUD : HUD {
 		public RawImage ConvTextScrollTop;
 		public RawImage ConvTextScrollBottom;
 
-		public RawImage inventoryUpArrow;
-		public RawImage inventoryDownArrow;
+		//public RawImage inventoryUpArrow;
+		//public RawImage inventoryDownArrow;
 
 		public RawImage FlaskHealth;
 		public RawImage FlaskMana;
@@ -155,8 +155,8 @@ public class UWHUD : HUD {
 				MapQuill=GameWorldController.instance.grCursors.LoadImageAt(14);
 				MapQuillWriting=GameWorldController.instance.grCursors.LoadImageAt(12);
 				MapEraser=GameWorldController.instance.grCursors.LoadImageAt(13);
-				inventoryDownArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(2);
-				inventoryUpArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(1);
+				//inventoryDownArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(2);
+				//inventoryUpArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(1);
 
 
 
