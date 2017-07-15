@@ -6,6 +6,37 @@ using System.Collections;
 /// </summary>
 public class MusicController : UWEBase {
 
+
+		public const int SOUND_EFFECT_FOOT_1=1;
+		public const int SOUND_EFFECT_FOOT_2=2;
+		public const int SOUND_EFFECT_PUNCH_1=3;
+		public const int SOUND_EFFECT_PUNCH_2=4;
+		public const int SOUND_EFFECT_WATER_LAND_1=5;
+		public const int SOUND_EFFECT_NPC_DEATH_1=6;
+		public const int SOUND_EFFECT_MELEE_HIT_1=7;
+		public const int SOUND_EFFECT_MELEE_HIT_2=8;
+		public const int SOUND_EFFECT_RANGED_STRIKE=9;
+		public const int SOUND_EFFECT_MELEE_MISS_1=10;
+		public const int SOUND_EFFECT_DOOR_MOVE=11;
+		public const int SOUND_EFFECT_DOOR_FINISH=12;
+		public const int SOUND_EFFECT_RUMBLE=18;
+		public const int SOUND_EFFECT_PORTCULLIS=20;
+		public const int SOUND_EFFECT_SPLASH_1=24;
+		public const int SOUND_EFFECT_SPLASH_2=25;
+		public const int SOUND_EFFECT_MELEE_MISS_2=28;
+		public const int SOUND_EFFECT_ICE_SLIDE=29;
+		public const int SOUND_EFFECT_DRINK=30;
+		public const int SOUND_EFFECT_EAT_1=31;
+		public const int SOUND_EFFECT_EAT_2=33;
+		public const int SOUND_EFFECT_NPC_DEATH_2=34;//Squishy npc death 1.
+		public const int SOUND_EFFECT_NPC_DEATH_3=35;//Squishy npc death 2.
+		public const int SOUND_EFFECT_ZAP=36;//Squishy npc death.
+		public const int SOUND_EFFECT_EAT_3=37;
+		public const int SOUND_EFFECT_BANG=40;
+		public const int SOUND_EFFECT_FOOT_GRAVELLY=47;
+		public const int SOUND_EFFECT_FOOT_ICE=48;
+
+
 	//Music modes
 	private const int MUS_DEATH=10;
 	private const int MUS_MAP=9;
@@ -127,6 +158,7 @@ public class MusicController : UWEBase {
 
 	public AudioSource MusicalInstruments;
 
+	public AudioClip[] SoundEffects=new AudioClip[1];
 
 	void Start () {
 		Aud= this.GetComponent<AudioSource>();

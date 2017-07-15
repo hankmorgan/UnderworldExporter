@@ -2431,6 +2431,22 @@ public class Magic : UWEBase {
 						{//No object interferes with the spellcast
 								//float force = 200.0f;
 								ReadiedSpell= "";
+								if (spellprop.noOfCasts>=1)
+								{
+									if (ObjectInteraction.PlaySoundEffects)
+									{
+										if (caster==GameWorldController.instance.playerUW.gameObject)
+										{
+											GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+											GameWorldController.instance.playerUW.aud.Play();
+										}
+										else
+										{
+											caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+											caster.GetComponent<AudioSource>().Play();	
+										}		
+									}
+								}
 								for (int i=0;i<spellprop.noOfCasts;i++)
 								{
 										GameObject projectile = CreateMagicProjectile(ray.GetPoint(dropRange/2.0f), caster,spellprop);
@@ -2510,12 +2526,23 @@ public class Magic : UWEBase {
 		/// <param name="spellprop">Properties for the projectile.</param>
 		bool CastProjectile(GameObject caster, Vector3 targetV, SpellProp spellprop)
 		{//Fires off the projectile at a vector3 position.
-				//float force = ;//200.0f;
-				GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
-				//Vector3 direction = (targetV-caster.transform.position);
-				//direction.Normalize();
-				LaunchProjectile(projectile,spellprop.Force,targetV);
-				return true;
+			GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
+			if (ObjectInteraction.PlaySoundEffects)
+			{
+				if (caster==GameWorldController.instance.playerUW.gameObject)
+				{
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+					GameWorldController.instance.playerUW.aud.Play();
+				}
+				else
+				{
+					caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+					caster.GetComponent<AudioSource>().Play();	
+				}		
+			}
+
+			LaunchProjectile(projectile,spellprop.Force,targetV);
+			return true;
 		}	
 
 

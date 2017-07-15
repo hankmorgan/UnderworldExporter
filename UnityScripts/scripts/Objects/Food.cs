@@ -98,7 +98,19 @@ public class Food : object_base {
 					UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
 					break;
 				}
-		
+			if (ObjectInteraction.PlaySoundEffects)
+			{
+				switch (Random.Range(1,3))
+				{
+				case 1:
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1];break;
+				case 2:
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2];break;
+				default:
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3];break;
+				}				
+				GameWorldController.instance.playerUW.aud.Play();		
+			}
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.
 		}

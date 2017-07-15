@@ -13,13 +13,14 @@ using RAIN.Navigation;
 public class ObjectInteraction : UWEBase {
 
 		//public int debugindex;
-		public int canbeowned;
+		//public int canbeowned;
 
 		/// <summary>
 		/// The start position of the object when it became awake.
 		/// </summary>
 		private Vector3 startPos;
-		//public AudioSource aud;
+		public AudioSource aud;
+		public Rigidbody rg; // = myObj.GetComponent<Rigidbody>();
 		public static bool PlaySoundEffects=true;
 
 		public const int NPC_TYPE =0;
@@ -281,10 +282,16 @@ public class ObjectInteraction : UWEBase {
 			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 			startPos=this.transform.position;
-			if (_RES!=GAME_SHOCK)
-			{
-				canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;	
-			}
+			//if (PlaySoundEffects)
+			//{
+				//aud = this.GetComponent<AudioSource>();			
+			//}
+			//rg= this.GetComponent<Rigidbody>();
+			
+			//if (_RES!=GAME_SHOCK)
+			//{
+			//	canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;	
+			//}
 			
 		}
 
@@ -1024,7 +1031,12 @@ public class ObjectInteraction : UWEBase {
 			ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
 
 			BoxCollider box =myObj.GetComponent<BoxCollider>();
-			if ((box==null) && (myObj.GetComponent<NPC>()==null) && (isUsable==1))
+
+			if (
+						(box==null) 
+						&& (GameWorldController.instance.objectMaster.type[ItemId] != ObjectInteraction.NPC_TYPE) 
+						&& (isUsable==1)				
+				)
 			{
 				//add a mesh for interaction
 				box= myObj.AddComponent<BoxCollider>();
@@ -1053,8 +1065,9 @@ public class ObjectInteraction : UWEBase {
 			if (isMoveable==1)
 			{
 				//objInteract.CanBePickedUp=true;
-				Rigidbody rgd = myObj.AddComponent<Rigidbody>();
-				rgd.angularDrag=0.0f;
+				objInteract.rg = myObj.AddComponent<Rigidbody>();
+
+				objInteract.rg.angularDrag=0.0f;
 				GameWorldController.FreezeMovement(myObj);
 			}
 
@@ -1078,19 +1091,26 @@ public class ObjectInteraction : UWEBase {
 			{
 				objInteract.ignoreSprite=true;
 			}
-			if (isQuant==1)
-			{
-				objInteract.isquant=1;
-			}
-			else
-			{
-				objInteract.isquant=0;
-			}
+				objInteract.isquant=(short)isQuant;
+			//if (isQuant==1)
+			//{
+			//	objInteract.isquant=1;
+			//}
+			//else
+			//{
+			//	objInteract.isquant=0;
+			//}
 			//if (isEnchanted==1)
 			//{
 				objInteract.enchantment=(short)isEnchanted;
 						//Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
 			//}
+
+				if (PlaySoundEffects)
+				{
+					objInteract.aud=myObj.AddComponent<AudioSource>();
+					objInteract.aud.maxDistance=5f;//TODO:Tweak this distance
+				}
 			return objInteract;
 		}
 
@@ -1372,7 +1392,7 @@ public class ObjectInteraction : UWEBase {
 						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
 						cap.radius=0.3f;
 						cap.height=0.3f;
-						cap.skinWidth=0.05f;
+						cap.skinWidth=0.02f;
 						break;
 						//Small
 				case 64: //a_rotworm
@@ -1695,10 +1715,17 @@ public class ObjectInteraction : UWEBase {
 	void OnCollisionEnter(Collision collision) {
 		if (PlaySoundEffects)
 		{
-			//if (aud!=null)
-			//{
-			//	aud.Play();		
-			//}	
+			if (rg!=null)
+			{
+				if (rg.useGravity==true)//Object is free to move around
+				{
+					if (aud!=null)
+					{
+						aud.clip=GameWorldController.instance.getMus().SoundEffects[0];
+						aud.Play();		
+					}	
+				}		
+			}
 		}			
 	}
 
@@ -2244,6 +2271,6 @@ public class ObjectInteraction : UWEBase {
 
 		public bool CanBePickedUp()
 		{
-			return GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp==1;
+			return  (GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp==1 || this.GetComponent<object_base>().CanBePickedUp());
 		}
 }

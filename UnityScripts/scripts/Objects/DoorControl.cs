@@ -45,13 +45,15 @@ public class DoorControl : object_base {
 	const int OpenRotation = -90;
 	const int CloseRotation = -OpenRotation;
 
+	const float DoorTravelTime=1.3f;
+
 	protected override void Start ()
 	{	
 		if (state())
 		{//Make sure it is open
 			if (isPortcullis()==false)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,0.1f));
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,0.01f));
 			}
 			else
 			{
@@ -342,10 +344,20 @@ public class DoorControl : object_base {
 			{
 				if (isPortcullis()==false)
 				{
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,1.0f));
+					if (ObjectInteraction.PlaySoundEffects)
+					{
+						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
+						objInt().aud.Play();		
+					}
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,DoorTravelTime));
 				}
 				else
 				{
+					if (ObjectInteraction.PlaySoundEffects)
+					{
+						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
+						objInt().aud.Play();		
+					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
 				}
 				objInt().item_id+=8;
@@ -418,10 +430,20 @@ public class DoorControl : object_base {
 			{
 				if (isPortcullis()==false)
 				{
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * CloseRotation,1.0f));
+					if (ObjectInteraction.PlaySoundEffects)
+					{
+						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
+						objInt().aud.Play();		
+					}
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * CloseRotation,DoorTravelTime));
 				}
 				else
 				{
+					if (ObjectInteraction.PlaySoundEffects)
+					{
+						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
+						objInt().aud.Play();		
+					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
 				}
 				objInt().item_id-=8;
@@ -527,6 +549,14 @@ public class DoorControl : object_base {
 		}
 		DoorBusy=false;
 		door.rotation = EndAngle;
+		if (traveltime>1f)
+		{
+			if (ObjectInteraction.PlaySoundEffects)
+			{
+				objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_FINISH];
+				objInt().aud.Play();		
+			}
+		}
 	}
 	
 		/// <summary>

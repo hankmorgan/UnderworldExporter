@@ -85,7 +85,7 @@ public class UWCharacter : Character {
 	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
 	public short ResurrectLevel;
-	public Vector3 ResurrectPosition=Vector3.zero;
+	public Vector3 ResurrectPosition=Vector3.zero;//TODO change this to a search.
 
 	public Vector3 MoonGatePosition=Vector3.zero;
 	public short MoonGateLevel = 2;//Domain of the mountainmen
@@ -147,6 +147,8 @@ public class UWCharacter : Character {
 				//TODO:Turn of the player camera
 		//GameWorldController.instance.playerUW.playerCam.cullingMask=31;
 		GameWorldController.instance.getMus().Death=true;
+		UWCharacter.InteractionMode=InteractionModeUse;
+		UWHUD.instance.wpa.SetAnimation=-1;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
 			if (ResurrectLevel!=0)
@@ -277,6 +279,22 @@ public class UWCharacter : Character {
 				{
 					SwimDamageTimer=0.0f;
 				}
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					if (!aud.isPlaying)
+					{
+						switch (Random.Range(1,3))
+						{
+						case 1:
+							aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];break;
+						case 2:
+						default:
+							aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_2];break;
+						}
+						aud.Play();
+					}		
+				}
+
 			}
 			else
 			{//0.9198418f
@@ -668,6 +686,8 @@ public class UWCharacter : Character {
 			{
 				ApplyDamage(Random.Range (1,5));//TODO:As a function of the acrobat skill versus fall.
 			}
+			aud.clip=GameWorldController.instance.getMus().SoundEffects[0];
+			aud.Play();
 		}
 	}
 

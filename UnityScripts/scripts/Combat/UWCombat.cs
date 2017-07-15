@@ -150,13 +150,28 @@ public class UWCombat : Combat {
 						{
 						case 0: //Miss
 								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),46,50);
+								if (ObjectInteraction.PlaySoundEffects)
+								{
+									objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
+									objInt.aud.Play();
+								}
 								break;
 						case 1://Hit
 								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
+								if (ObjectInteraction.PlaySoundEffects)
+								{
+										objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+										objInt.aud.Play();
+								}
 								break;
 						case 2://Crit
 								Impact.SpawnHitImpact(hit.transform.name + "_impact1",objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
 								Impact.SpawnHitImpact(hit.transform.name + "_impact2", objInt.GetImpactPoint()+Vector3.up*0.1f,objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
+								if (ObjectInteraction.PlaySoundEffects)
+								{
+									objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_2];
+									objInt.aud.Play();
+								}
 								break;
 						}
 						
@@ -170,7 +185,11 @@ public class UWCombat : Combat {
 					///If a miss does a miss impact and potentially damages the weapon.
 
 					Impact.SpawnHitImpact(hit.transform.name + "_impact", hit.point,46,50);
-
+					if (ObjectInteraction.PlaySoundEffects)
+					{
+						GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
+						GameWorldController.instance.playerUW.aud.Play();
+					}
 					if (currWeapon!=null)
 					{
 						currWeapon.onHit (null);
@@ -181,6 +200,11 @@ public class UWCombat : Combat {
 		}
 		else
 		{
+			if (ObjectInteraction.PlaySoundEffects)
+			{
+				GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
+				GameWorldController.instance.playerUW.aud.Play();
+			}
 			if (currWeapon!=null)
 			{
 				currWeapon.onHit (null);

@@ -202,10 +202,14 @@ public class WindowDetectUW : WindowDetect {
 						return;
 				}
 				//Cancel out of a small cutscene
+
 				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
 				{
-					UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
-					return;
+					if (GameWorldController.instance.getMus().Death==true)
+					{
+						UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
+						return;	
+					}
 				}
 				switch (UWCharacter.InteractionMode)
 				{

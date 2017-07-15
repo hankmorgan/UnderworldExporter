@@ -247,6 +247,32 @@ public class NPC : object_base {
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
 		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
+
+				//Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
+				//Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
+				//Flying = 0x02 (Flying critters like bats and imps), 
+				//Swimming = 0x03 (Swimming critters like lurkers), 
+				//Creeping = 0x04 (Creeping critters like rats and spiders), 
+				//Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
+				//EarthGolem = 0x11 (Only used for the earth golem),
+				//Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
+		switch(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Remains)
+		{
+		case 0x0:
+		case 0x02:
+			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3];break;
+		case 0x03:
+			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];break;
+		case 0x04:
+		case 0x05:
+			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2];break;
+		case 0x11:
+			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_RUMBLE];break;
+		case 0x01:
+		default:
+			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1];break;								
+		}
+		objInt().aud.Play();
 	}
 
 	/// <summary>

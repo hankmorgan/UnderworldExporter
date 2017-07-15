@@ -76,17 +76,17 @@ public class CutsAnimator : GuiBase {
 		{//Code to call at the end of some animations.
 				switch (SetAnimation.ToLower())	
 				{
-				case "death_with_sapling":
+				case "death_with_sapling"://Player will resurrect,
 				case "cs402.n01":
 					{
 						if (GameWorldController.instance.getMus()!=null)
 						{
-								GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
 								GameWorldController.instance.getMus().Death=false;
 								GameWorldController.instance.getMus().Combat=false;
 								GameWorldController.instance.getMus().Fleeing=false;
 								MusicController.LastAttackCounter=0.0f;
 						}
+						GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
 						GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 						SetAnimation= "Anim_Base";//Clears out the animation.
 
@@ -99,14 +99,12 @@ public class CutsAnimator : GuiBase {
 						break;
 					}
 
-				case "death":
+				case "death"://PLayer is dying and will not resurrect.
 				case "cs403.n01":
-					//PlayAnimFile("death_final");
 					SetAnimation="cs403.n02";
 					break;
-				case "death_final":
+				case "death_final"://Player has finally died.
 				case "cs403.n02":
-						//Debug.Log("return to main menu..");
 						SetAnimation="Anim_Base";
 						GameWorldController.instance.AtMainMenu=true;
 						//Clear out game objects
@@ -180,27 +178,27 @@ public class CutsAnimator : GuiBase {
 				TargetControl.texture = cuts.ImageCache[0];
 				break;
 			case "death_with_sapling":
-					TargetControl.material=UI_UNLIT;
-					cuts = new CutsLoader("cs402.n01");
-					mode=true;Reset=false;
-					TargetControl.texture = cuts.ImageCache[0];
-					StartCoroutine (cutscenerunner());		
-					break;
+				TargetControl.material=UI_UNLIT;
+				cuts = new CutsLoader("cs402.n01");
+				mode=true;Reset=false;
+				TargetControl.texture = cuts.ImageCache[0];
+				StartCoroutine (cutscenerunner());		
+				break;
 			case "death":
-					TargetControl.material=UI_UNLIT;
-					cuts = new CutsLoader("cs403.n01");
-					mode=true;Reset=false;
-					TargetControl.texture = cuts.ImageCache[0];
-					StartCoroutine (cutscenerunner());		
-					break;
+				TargetControl.material=UI_UNLIT;
+				cuts = new CutsLoader("cs403.n01");
+				mode=true;Reset=false;
+				TargetControl.texture = cuts.ImageCache[0];
+				StartCoroutine (cutscenerunner());		
+				break;
 			case "death_final":
-					TargetControl.material=UI_UNLIT;
-					cuts = new CutsLoader("cs403.n02");
-					TargetControl.texture = cuts.ImageCache[0];
-					looping=true;
-					mode=true;Reset=false;
-					StartCoroutine (cutscenerunner());		
-					break;
+				TargetControl.material=UI_UNLIT;
+				cuts = new CutsLoader("cs403.n02");
+				TargetControl.texture = cuts.ImageCache[0];
+				looping=true;
+				mode=true;Reset=false;
+				StartCoroutine (cutscenerunner());		
+				break;
 			case "ChasmMap":
 				TargetControl.material=UI_UNLIT;
 				cuts = new CutsLoader("cs410.n01");

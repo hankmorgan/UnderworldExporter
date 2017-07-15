@@ -99,6 +99,8 @@ public class Character : UWEBase {
 	/// </summary>
 	public GameObject TargetPoint;
 
+	public AudioSource aud;
+
 	public void ApplyDamage(int damage)
 	{
 		//Applies damage to the player.

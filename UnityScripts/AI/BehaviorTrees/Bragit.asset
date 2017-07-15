@@ -74,7 +74,7 @@ MonoBehaviour:
       name=&quot;TargetPlayer&quot; debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot;
       /&gt;&lt;move turnspeed=&quot;100&quot; repeatuntil=&quot;success&quot; name=&quot;MoveToPlayer&quot;
       movetarget=&quot;&quot; movespeed=&quot;&quot; facetarget=&quot;MoveTarget&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot; closeenoughangle=&quot;30&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.1&quot; closeenoughangle=&quot;30&quot;
       /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
@@ -127,7 +127,7 @@ MonoBehaviour:
       classname=&quot;AI_COMBAT_END&quot; /&gt;&lt;action repeatuntil=&quot;&quot;
       parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
       name=&quot;playDeathAnim&quot; debugbreak=&quot;False&quot; classname=&quot;AI_DEATH&quot;
-      /&gt;&lt;timer waitforsec=&quot;1.2&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
+      /&gt;&lt;timer waitforsec=&quot;1&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
       debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
       parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;DestroyAI&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_Destroy&quot; /&gt;&lt;/constraint&gt;&lt;constraint

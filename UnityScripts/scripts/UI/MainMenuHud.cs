@@ -655,12 +655,12 @@ public class MainMenuHud : GuiBase {
 			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			GameWorldController.instance.playerUW.playerController.enabled=true;
-			GameWorldController.instance.playerUW.playerMotor.enabled=false;
+			GameWorldController.instance.getMus().Death=false;
+			GameWorldController.instance.playerUW.playerMotor.enabled=true;
 			GameWorldController.instance.AtMainMenu=false;
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
 			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-			//Destroy (this.gameObject);
 			MainMenuHud.instance.gameObject.SetActive(false);
 		}
 }

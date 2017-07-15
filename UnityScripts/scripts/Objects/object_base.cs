@@ -793,4 +793,13 @@ public class object_base : UWEBase {
 				
 		}
 
+		/// <summary>
+		/// Determines whether this object type can be picked up regardless of what is set in common object properties.
+		/// </summary>
+		/// <returns><c>true</c> if this instance can be picked up; otherwise, <c>false</c>.</returns>
+		public virtual bool CanBePickedUp()
+		{
+			return false;
+		}
+
 }

@@ -81,8 +81,13 @@ public class SilverSeed : object_base {
 		}
 	}
 
-		public override string UseVerb()
-		{
-			return "plant";
-		}
+	public override string UseVerb()
+	{
+		return "plant";
+	}
+
+	public override bool CanBePickedUp ()
+	{
+		return true;
+	}
 }

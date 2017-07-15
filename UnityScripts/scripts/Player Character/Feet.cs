@@ -29,6 +29,11 @@ public class Feet : UWEBase {
 		{
 			if (other.gameObject.layer==waterLayer)
 			{
+				if (TileMap.OnWater==false)
+				{
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_WATER_LAND_1];
+					GameWorldController.instance.playerUW.aud.Play();
+				}
 				TileMap.OnWater=true;  
 			}
 			else 
