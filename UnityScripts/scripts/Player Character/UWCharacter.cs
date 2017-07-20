@@ -104,10 +104,10 @@ public class UWCharacter : Character {
 		//DontDestroyOnLoad(this);
 	}
 
-	public override void Start ()
+	public override void Begin ()
 	{
 
-		base.Start ();
+		base.Begin ();
 				if (_RES==GAME_SHOCK){return;}
 				InventoryReady=false;
 		GameWorldController.instance.playerUW=this;
@@ -212,10 +212,65 @@ public class UWCharacter : Character {
 		}
 	}
 
+	void FlyingMode ()
+	{
+		playerMotor.movement.maxFallSpeed = 0.0f;
+		playerMotor.movement.maxForwardSpeed = flySpeed * speedMultiplier;
+		if (((Input.GetKeyDown (KeyCode.R)) || (Input.GetKey (KeyCode.R))) && (WindowDetectUW.WaitingForInput == false)) {
+			//Fly up
+			this.GetComponent<CharacterController> ().Move (new Vector3 (0, 0.2f * Time.deltaTime, 0));
+		}
+		else
+			if (((Input.GetKeyDown (KeyCode.V)) || (Input.GetKey (KeyCode.V))) && (WindowDetectUW.WaitingForInput == false)) {
+				//Fly down
+				this.GetComponent<CharacterController> ().Move (new Vector3 (0, -0.2f * Time.deltaTime, 0));
+			}
+	}
+
+	void SwimmingMode ()
+	{
+		playerCam.transform.localPosition = new Vector3 (playerCam.transform.localPosition.x, -0.8f, playerCam.transform.localPosition.z);
+		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 0.1f);
+		SwimTimer = SwimTimer + Time.deltaTime;
+		//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
+		if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f) {
+			SwimDamageTimer += Time.deltaTime;
+			if (SwimDamageTimer >= 10.0f)//Take Damage every 10 seconds.
+			 {
+				ApplyDamage (1);
+				SwimDamageTimer = 0.0f;
+			}
+		}
+		else {
+			SwimDamageTimer = 0.0f;
+		}
+		if (ObjectInteraction.PlaySoundEffects) {
+			if (!aud.isPlaying) {
+				switch (Random.Range (1, 3)) {
+				case 1:
+					aud.clip = GameWorldController.instance.getMus ().SoundEffects [MusicController.SOUND_EFFECT_SPLASH_1];
+					break;
+				case 2:
+				default:
+					aud.clip = GameWorldController.instance.getMus ().SoundEffects [MusicController.SOUND_EFFECT_SPLASH_2];
+					break;
+				}
+				aud.Play ();
+			}
+		}
+	}
 
 	// Update is called once per frame
 	public override void Update () {
-				if (_RES==GAME_SHOCK){return;}
+				if ((_RES==GAME_SHOCK) || (_RES==GAME_TNOVA))
+				{	
+						if (isFlying)
+						{
+								flySpeed=10f;
+								FlyingMode();
+						}
+						return;
+				}
 		base.Update ();
 		if (JustTeleported)
 		{
@@ -225,7 +280,7 @@ public class UWCharacter : Character {
 				JustTeleported=false;
 			}
 		}
-		if (InventoryReady==false)
+		if( (PlayerInventory.Ready==true) && (InventoryReady=false))
 		{
 						
 			//if (!LevelSerializer.IsDeserializing)
@@ -262,39 +317,7 @@ public class UWCharacter : Character {
 		{
 			if (isSwimming==true)
 			{
-				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,-0.8f,playerCam.transform.localPosition.z);
-				swimSpeedMultiplier= Mathf.Max((float)(PlayerSkills.Swimming/30.0f),0.1f);
-				SwimTimer = SwimTimer + Time.deltaTime;
-				//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
-				if (SwimTimer>=05.0f + PlayerSkills.Swimming*15.0f)
-				{
-					SwimDamageTimer+=Time.deltaTime;
-					if (SwimDamageTimer>=10.0f)//Take Damage every 10 seconds.
-					{
-						ApplyDamage (1);
-						SwimDamageTimer=0.0f;
-					}
-				}
-				else
-				{
-					SwimDamageTimer=0.0f;
-				}
-				if (ObjectInteraction.PlaySoundEffects)
-				{
-					if (!aud.isPlaying)
-					{
-						switch (Random.Range(1,3))
-						{
-						case 1:
-							aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];break;
-						case 2:
-						default:
-							aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_2];break;
-						}
-						aud.Play();
-					}		
-				}
-
+				SwimmingMode ();
 			}
 			else
 			{//0.9198418f
@@ -308,16 +331,7 @@ public class UWCharacter : Character {
 
 		if (isFlying)
 		{//Flying spell
-			playerMotor.movement.maxFallSpeed=0.0f;
-			playerMotor.movement.maxForwardSpeed=flySpeed*speedMultiplier;
-			if (((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R))) && (WindowDetectUW.WaitingForInput==false))
-			{//Fly up
-					this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f * Time.deltaTime,0));
-			}
-			else if (((Input.GetKeyDown(KeyCode.V)) || (Input.GetKey(KeyCode.V))) && (WindowDetectUW.WaitingForInput==false))
-			{//Fly down
-				this.GetComponent<CharacterController>().Move(new Vector3(0,-0.2f * Time.deltaTime,0));
-			}
+			FlyingMode ();
 		}
 		else
 		{

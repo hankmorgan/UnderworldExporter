@@ -29,6 +29,8 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 	public GameObject LevelModel;
 
+		public GameObject TNovaLevelModel;
+
 		/// <summary>
 		/// The level model parent object
 		/// </summary>
@@ -111,7 +113,7 @@ public class GameWorldController : UWEBase {
 	/// The game name.
 	/// </summary>
 	/// Value is passed to UWEBase and used in all resource file loads
-	public string game;
+	//public string game;
 
 	//public string UI_Name;
 	/// <summary>
@@ -297,7 +299,7 @@ public class GameWorldController : UWEBase {
 	public static bool WorldReRenderPending=false;
 	public static bool FullReRender=false;
 
-	void  LoadPath()
+	void  LoadPath(string game)
 	{
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
 		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
@@ -311,108 +313,17 @@ public class GameWorldController : UWEBase {
 	void Awake()
 	{
 		instance=this;
-		LoadPath();
-
-		UWEBase._RES = game;
-		Loader._RES=game;
-				switch(game)
-				{
-				case GAME_SHOCK:
-						palLoader = new PaletteLoader();
-						palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
-						palLoader.PaletteNo=700;
-						palLoader.LoadPalettes();
-						texLoader=new TextureLoader();
-						objectMaster=new ObjectMasters();
-						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
-						ShockObjProp= new ObjectPropLoader();
-						break;
-				default:
-					objectMaster=new ObjectMasters();
-					objDat = new ObjectDatLoader();
-					commonObject= new CommonObjectDatLoader();
-
-
-					palLoader = new PaletteLoader();
-					palLoader.Path=Loader.BasePath + "data\\pals.dat";
-					palLoader.LoadPalettes();
-					bytloader=new BytLoader();
-
-					texLoader=new TextureLoader();
-					ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
-					SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
-					DoorArt=new GRLoader(GRLoader.DOORS_GR);
-					TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
-					TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
-					TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
-					armor_f=new GRLoader(GRLoader.ARMOR_F_GR);
-					armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
-					grCursors = new GRLoader(GRLoader.CURSORS_GR);
-					grFlasks=new GRLoader(GRLoader.FLASKS_GR);
-
-					terrainData= new TerrainDatLoader();
-					weaps=new WeaponAnimation();
-					break;
-				}
+		//LoadPath();
+		return;
 	}
 
 
 	void Start () {
-
+				
 		instance=this;
-
-		switch(_RES)
-		{
-		case GAME_SHOCK:
-			AtMainMenu=false;
-			UWHUD.instance.gameObject.SetActive(false);
-			SwitchLevel(startLevel);
-			return;
-
-		case GAME_UWDEMO:
-				//case GAME_UW2:
-				//UW Demo does not go to the menu. It will load automatically into the gameworld
-				AtMainMenu=false;	
-				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
-				break;
-		case GAME_UW2:
-				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-				convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
-				break;		
-		default:
-				StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-				convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
-				break;
-		}
-
-		if (EnableTextureAnimation==true)
-		{
-			UWHUD.instance.CutsceneFullPanel.SetActive(false);
-			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
-		}
-
-		if (AtMainMenu)
-		{
-			SwitchLevel(-1);//Turn off all level maps
-			UWHUD.instance.CutsceneFullPanel.SetActive(true);
-			UWHUD.instance.mainmenu.gameObject.SetActive(true);
-			//Freeze player movement and put them at a set location
-			playerUW.playerController.enabled=false;
-			playerUW.playerMotor.enabled=false;
-			playerUW.transform.position=Vector3.zero;
-
-			getMus().InIntro=true;
-		}
-		else
-		{			
-			UWHUD.instance.CutsceneFullPanel.SetActive(false);	
-			UWHUD.instance.mainmenu.gameObject.SetActive(false);
-			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
-			SwitchLevel(startLevel);
-		}
-		InvokeRepeating("PositionDetect",0.0f,0.02f);
+		AtMainMenu=true;
 		return;
+
 	}
 
 		void LateUpdate()
@@ -428,6 +339,134 @@ public class GameWorldController : UWEBase {
 				FullReRender=false;
 				}
 		}
+
+		/// <summary>
+		/// Begins the specified game.
+		/// </summary>
+		/// <param name="res">Res.</param>
+		public void Begin(string res)
+		{
+				UWHUD.instance.gameSelectUi.SetActive(false);
+				LoadPath(res);
+				UWEBase._RES = res;//game;
+				Loader._RES= res;//game;
+				switch(res)
+				{
+				case GAME_TNOVA:
+						break;
+				case GAME_SHOCK:
+						palLoader = new PaletteLoader();
+						palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
+						palLoader.PaletteNo=700;
+						palLoader.LoadPalettes();
+						texLoader=new TextureLoader();
+						objectMaster=new ObjectMasters();
+						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
+						ShockObjProp= new ObjectPropLoader();
+						break;
+				default:
+						objectMaster=new ObjectMasters();
+						objDat = new ObjectDatLoader();
+						commonObject= new CommonObjectDatLoader();
+
+
+						palLoader = new PaletteLoader();
+						palLoader.Path=Loader.BasePath + "data\\pals.dat";
+						palLoader.LoadPalettes();
+						bytloader=new BytLoader();
+
+						texLoader=new TextureLoader();
+						ObjectArt=new GRLoader(GRLoader.OBJECTS_GR);
+						SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
+						DoorArt=new GRLoader(GRLoader.DOORS_GR);
+						TmObjArt=new GRLoader(GRLoader.TMOBJ_GR);
+						TmFlatArt=new GRLoader(GRLoader.TMFLAT_GR);
+						TmAnimo=new GRLoader(GRLoader.ANIMO_GR);
+						armor_f=new GRLoader(GRLoader.ARMOR_F_GR);
+						armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
+						grCursors = new GRLoader(GRLoader.CURSORS_GR);
+						grFlasks=new GRLoader(GRLoader.FLASKS_GR);
+
+						terrainData= new TerrainDatLoader();
+						weaps=new WeaponAnimation();
+						break;
+				}
+
+				switch(res)
+				{
+				case GAME_TNOVA:
+						AtMainMenu=false;
+						TileMapRenderer.EnableCollision=false;
+						bGenNavMeshes=false;
+						UWHUD.instance.gameObject.SetActive(false);
+						UWHUD.instance.window.SetFullScreen();
+						playerUW.isFlying=true;
+						playerUW.playerMotor.enabled=true;
+						SwitchTNovaMap(startLevel);
+						return;
+				case GAME_SHOCK:
+						TileMapRenderer.EnableCollision=false;
+						bGenNavMeshes=false;
+						AtMainMenu=false;
+						playerUW.isFlying=true;
+						playerUW.playerMotor.enabled=true;
+						UWHUD.instance.gameObject.SetActive(false);
+						UWHUD.instance.window.SetFullScreen();
+						SwitchLevel(startLevel);
+						return;
+
+				case GAME_UWDEMO:
+						//case GAME_UW2:
+						//UW Demo does not go to the menu. It will load automatically into the gameworld
+						AtMainMenu=false;	
+						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						break;
+				case GAME_UW2:
+						UWHUD.instance.Begin();
+						playerUW.Begin();
+						playerUW.playerInventory.Begin();
+						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+						convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
+						break;		
+				default:
+						UWHUD.instance.Begin();
+						playerUW.Begin();
+						playerUW.playerInventory.Begin();
+						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
+						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						break;
+				}
+
+				if (EnableTextureAnimation==true)
+				{
+						UWHUD.instance.CutsceneFullPanel.SetActive(false);
+						InvokeRepeating("UpdateAnimation",0.2f,0.2f);
+				}
+
+				if (AtMainMenu)
+				{
+						SwitchLevel(-1);//Turn off all level maps
+						UWHUD.instance.CutsceneFullPanel.SetActive(true);
+						UWHUD.instance.mainmenu.gameObject.SetActive(true);
+						//Freeze player movement and put them at a set location
+						playerUW.playerController.enabled=false;
+						playerUW.playerMotor.enabled=false;
+						playerUW.transform.position=Vector3.zero;
+
+						getMus().InIntro=true;
+				}
+				else
+				{			
+						UWHUD.instance.CutsceneFullPanel.SetActive(false);	
+						UWHUD.instance.mainmenu.gameObject.SetActive(false);
+						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+						SwitchLevel(startLevel);
+				}
+				InvokeRepeating("PositionDetect",0.0f,0.02f);
+				return;		
+		}
+
 
 		/// <summary>
 		/// Gets the current level model.
@@ -1387,6 +1426,25 @@ public class GameWorldController : UWEBase {
 				DataToCopy[i] = lev_ark_file_data[address+i];
 			}
 			return DataToCopy;
+		}
+
+
+		public void SwitchTNovaMap(int levelNo)
+		{
+				string path =Loader.BasePath + "MAPS\\smug.res";
+				char[] archive_ark;
+				if (DataLoader.ReadStreamFile(path, out archive_ark))
+				{
+						DataLoader.Chunk lev_ark;
+						if (!DataLoader.LoadChunk(archive_ark, 86, out lev_ark ))
+						{
+							return;
+						}
+						playerUW.playerCam.GetComponent<Light>().range=200f;
+						playerUW.playerCam.farClipPlane=200f;
+						TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
+
+				}
 		}
 
 }

@@ -117,7 +117,7 @@ public class Character : UWEBase {
 	}
 
 	// Use this for initialization
-	public virtual void Start () {
+	public virtual void Begin () {
 		if (_RES==GAME_SHOCK)
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;

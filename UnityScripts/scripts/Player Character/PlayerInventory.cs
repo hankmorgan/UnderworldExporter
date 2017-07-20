@@ -55,8 +55,9 @@ public class PlayerInventory : UWEBase {
 	public Container playerContainer;
 	public short ContainerOffset=0;//For scrolling the inventory.
 
-	// Use this for initialization
-	void Start () {
+		public static bool Ready;
+	
+	public void Begin () {
 		if (_RES==GAME_SHOCK){return;}
 		GRLoader bodies = new GRLoader(GRLoader.BODIES_GR);
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
@@ -79,13 +80,13 @@ public class PlayerInventory : UWEBase {
 			UWHUD.instance.playerBody.texture = bodies.LoadImageAt(playerUW.Body);
 		}
 			
-
+		Ready=true;
 		Refresh();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (!Ready){return;}
 		switch(_RES)		
 		{
 		case GAME_SHOCK:

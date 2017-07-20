@@ -18,6 +18,8 @@ public class UWHUD : HUD {
 
 
 	public static UWHUD instance;
+	public GameObject gameUi;
+	public GameObject gameSelectUi;
 	public MainMenuHud mainmenu;
 	public HudAnimation CutScenesSmall;
 
@@ -136,13 +138,13 @@ public class UWHUD : HUD {
 		void Awake()
 		{
 			instance=this;
-
-
 		}
 
 
-		void Start()
+		public void Begin()
 		{
+				gameUi.SetActive(true);
+				gameSelectUi.SetActive(false);
 
 				//Init the art work for the hud
 				//Init hud elements

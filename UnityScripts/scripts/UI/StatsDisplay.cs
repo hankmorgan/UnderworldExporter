@@ -30,43 +30,47 @@ public class StatsDisplay : GuiBase_Draggable {
 
 	// Update is called once per frame
 	void Update () {
-		if (UpdateNow==true)
-		{
-			UpdateNow=false;
-			CharName.text=GameWorldController.instance.playerUW.CharName;
-			//CharClass.text=GameWorldController.instance.playerUW.CharClass;
+			if (!GameWorldController.instance.AtMainMenu)
+			{
+					if (UpdateNow==true)
+					{
+							UpdateNow=false;
+							CharName.text=GameWorldController.instance.playerUW.CharName;
+							//CharClass.text=GameWorldController.instance.playerUW.CharClass;
 
-			CharClass.text= StringController.instance.GetString(2,23+GameWorldController.instance.playerUW.CharClass);
+							CharClass.text= StringController.instance.GetString(2,23+GameWorldController.instance.playerUW.CharClass);
 
-			CharClassLevel.text =GameWorldController.instance.playerUW.CharLevel.ToString();
-			CharStr.text=GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
-			CharDex.text=GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();
-			CharInt.text=GameWorldController.instance.playerUW.PlayerSkills.INT.ToString();
-			CharVIT.text = GameWorldController.instance.playerUW.CurVIT +"/"+GameWorldController.instance.playerUW.MaxVIT;
-			CharMana.text = GameWorldController.instance.playerUW.PlayerMagic.CurMana +"/"+GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
-			CharEXP.text=GameWorldController.instance.playerUW.EXP.ToString ();
-			tmpSkillNames="";
-			tmpSkillValues="";
-			if (Offset>15)
-			{
-				Offset=15;
+							CharClassLevel.text =GameWorldController.instance.playerUW.CharLevel.ToString();
+							CharStr.text=GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
+							CharDex.text=GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();
+							CharInt.text=GameWorldController.instance.playerUW.PlayerSkills.INT.ToString();
+							CharVIT.text = GameWorldController.instance.playerUW.CurVIT +"/"+GameWorldController.instance.playerUW.MaxVIT;
+							CharMana.text = GameWorldController.instance.playerUW.PlayerMagic.CurMana +"/"+GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+							CharEXP.text=GameWorldController.instance.playerUW.EXP.ToString ();
+							tmpSkillNames="";
+							tmpSkillValues="";
+							if (Offset>15)
+							{
+									Offset=15;
+							}
+							if (Offset<0)
+							{
+									Offset=0;
+							}
+							for (int i = 0; i<=5;i++)
+							{
+									tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
+									tmpSkillValues=tmpSkillValues+GameWorldController.instance.playerUW.PlayerSkills.GetSkill(i+Offset+1);
+									if (i!=5)
+									{
+											tmpSkillNames = tmpSkillNames +"\n";
+											tmpSkillValues = tmpSkillValues +"\n";
+									}
+							}
+							CharSkills.text=tmpSkillNames;
+							CharSkillLevels.text=tmpSkillValues;
+					}	
 			}
-			if (Offset<0)
-			{
-				Offset=0;
-			}
-			for (int i = 0; i<=5;i++)
-			{
-				tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
-				tmpSkillValues=tmpSkillValues+GameWorldController.instance.playerUW.PlayerSkills.GetSkill(i+Offset+1);
-				if (i!=5)
-				{
-					tmpSkillNames = tmpSkillNames +"\n";
-					tmpSkillValues = tmpSkillValues +"\n";
-				}
-			}
-			CharSkills.text=tmpSkillNames;
-			CharSkillLevels.text=tmpSkillValues;
-		}
+	
 	}
 }

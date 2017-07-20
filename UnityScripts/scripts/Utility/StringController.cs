@@ -220,6 +220,10 @@ public class StringController : UWEBase {
 	/// <param name="StringNo">String no.</param>
 	public string GetString(int BlockNo, int StringNo)
 	{//output a string at the specified block and string no.
+				if (GameStrings==null)
+				{
+						return "";
+				}
 		string result= (string)GameStrings[BlockNo.ToString("000") + "_" + StringNo.ToString("000")];
 		if (result!=null)
 		{
