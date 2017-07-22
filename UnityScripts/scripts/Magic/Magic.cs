@@ -2054,7 +2054,6 @@ public class Magic : UWEBase {
 				//Targets a random NPC in the area of the npc and returns a raycast hit on the line of site
 				Camera cam = caster.GetComponentInChildren<Camera>();//Camera.main;
 				Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
-				//Collider[] objectsInArea = Physics.OverlapSphere(caster.transform.position,10.0f);
 				foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,5.0f))
 				{
 						bool ValidNPCtype=false;
@@ -2540,8 +2539,11 @@ public class Magic : UWEBase {
 					caster.GetComponent<AudioSource>().Play();	
 				}		
 			}
-
-			LaunchProjectile(projectile,spellprop.Force,targetV);
+			if (projectile!=null)
+			{
+					LaunchProjectile(projectile,spellprop.Force,targetV);	
+			}
+			
 			return true;
 		}	
 
@@ -2558,48 +2560,53 @@ public class Magic : UWEBase {
 				int index;
 				//Create an object info
 				GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index);
-				ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
-				oli.item_id=spellprop.ProjectileItemId;
-				oli.InUseFlag=1;
-				GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.LevelMarker().gameObject,Location).gameObject;
-				projectile.layer = LayerMask.NameToLayer("MagicProjectile");
-				projectile.name = "MagicProjectile_" + SummonCount++;
-				projectile.transform.parent=GameWorldController.instance.LevelMarker();
-				GameWorldController.MoveToWorld(projectile);
-				//ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
-
-
-				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
-				mgp.spellprop=spellprop;
-
-				if (Caster.name.Contains("NPC_Launcher"))
+				if (index!=-1)
 				{
-						mgp.caster=Caster.transform.parent.gameObject;
+						ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
+						oli.item_id=spellprop.ProjectileItemId;
+						oli.InUseFlag=1;
+						GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.LevelMarker().gameObject,Location).gameObject;
+						projectile.layer = LayerMask.NameToLayer("MagicProjectile");
+						projectile.name = "MagicProjectile_" + SummonCount++;
+						projectile.transform.parent=GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(projectile);
+						//ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
+
+
+						MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
+						mgp.spellprop=spellprop;
+
+						if (Caster.name.Contains("NPC_Launcher"))
+						{
+								mgp.caster=Caster.transform.parent.gameObject;
+						}
+						else
+						{
+								mgp.caster=Caster;
+						}
+
+						BoxCollider box = projectile.GetComponent<BoxCollider>();
+						box.size = new Vector3(0.2f,0.2f,0.2f);
+						box.center= new Vector3(0.0f,0.1f,0.0f);
+						Rigidbody rgd = projectile.GetComponent<Rigidbody>();
+						rgd.freezeRotation =true;
+						GameWorldController.UnFreezeMovement(projectile);
+						rgd.useGravity=false;
+
+						rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
+						if (Caster.name!=GameWorldController.instance.playerUW.name)
+						{
+								projectile.transform.position=Caster.transform.position;
+								projectile.transform.rotation=Caster.transform.rotation;
+						}	
+						else
+						{
+								projectile.transform.position=Location;
+						}	
+						return projectile;
 				}
-				else
-				{
-						mgp.caster=Caster;
-				}
+				return null;
 
-				BoxCollider box = projectile.GetComponent<BoxCollider>();
-				box.size = new Vector3(0.2f,0.2f,0.2f);
-				box.center= new Vector3(0.0f,0.1f,0.0f);
-				Rigidbody rgd = projectile.GetComponent<Rigidbody>();
-				rgd.freezeRotation =true;
-				GameWorldController.UnFreezeMovement(projectile);
-				rgd.useGravity=false;
-
-				rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
-				if (Caster.name!=GameWorldController.instance.playerUW.name)
-				{
-						projectile.transform.position=Caster.transform.position;
-						projectile.transform.rotation=Caster.transform.rotation;
-				}	
-				else
-				{
-						projectile.transform.position=Location;
-				}
-				return projectile;
 		}
 
 

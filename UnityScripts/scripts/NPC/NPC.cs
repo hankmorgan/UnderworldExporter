@@ -9,9 +9,9 @@ using RAIN.Minds;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
 	private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-		//public int poisondamage;
-		//public int AttackPower;
-		//public int AvgHit;
+		public int poisondamage;
+		public int AttackPower;
+		public int AvgHit;
 		//public int height;
 		//public int radius;
 
@@ -167,7 +167,7 @@ public class NPC : object_base {
 	public string CurrentSpriteName="";
 	public Sprite currentSpriteLoaded;
 
-	private int Ammo=10;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+	public int Ammo=4;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 		/*
 	void Awake () {
 		anim=GetComponentInChildren<Animator>();
@@ -180,9 +180,9 @@ public class NPC : object_base {
 	protected override void Start () {
 		base.Start();
 		NPC_IDi=objInt().item_id;
-		//poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
-		//AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
-		//AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
+		poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
+		AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
+		AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
 		//height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
 		//radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
 		
@@ -647,6 +647,26 @@ public class NPC : object_base {
 						}
 					}
 				}	
+				//Alert nearby npcs that i have been attacked.
+				//Will alert npcs of same item id or an allied type. (eg goblins & trolls)
+					foreach (Collider Col in Physics.OverlapSphere(this.transform.position,4.0f))
+					{
+						if (Col.gameObject.GetComponent<NPC>()!=null)
+						{
+							if (
+								(AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))	
+								||
+								(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
+							)
+								{
+									Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
+									Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
+									Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
+									Col.gameObject.GetComponent<NPC>().gtargName=gtarg.name;
+									Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+								}
+						}
+					}
 			}
 			else
 			{//NPC attack
@@ -661,6 +681,44 @@ public class NPC : object_base {
 
 		ApplyAttack(damage);
 		return true;
+	}
+
+	static bool AreNPCSAllied(NPC srcNPC, NPC dstNPC)
+	{
+		if(srcNPC.objInt().item_id==dstNPC.objInt().item_id)	
+		{
+				return true;
+		}
+		switch (srcNPC.objInt().item_id)
+		{
+			case 70://UW1 Goblins
+			case 71:
+			case 76:
+			case 77:
+			case 78:
+			case 80:
+			case 96://uw1 trolls
+			case 111:
+			case 112:
+				{
+					switch (dstNPC.objInt().item_id)
+					{
+						case 70://UW1 Goblins
+						case 71:
+						case 76:
+						case 77:
+						case 78:
+						case 80:
+						case 96://trolls
+						case 111:
+						case 112:
+								return true;										
+					}
+				break;
+				}
+		}
+		return false;
+
 	}
 
 	/// <summary>
@@ -1141,7 +1199,7 @@ public class NPC : object_base {
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
 			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
-
+			
 			if (hit.transform.Equals(this.transform))
 			{
 				Debug.Log ("you've hit yourself ? " + hit.transform.name);
@@ -1151,8 +1209,9 @@ public class NPC : object_base {
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{				
 					short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
-
-					Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
+					short playerDefence = (short)GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense);
+					attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
+					//Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
 					if (playerArmour> attackDamage)
 					{
 						attackDamage=1;

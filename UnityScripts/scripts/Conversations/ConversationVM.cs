@@ -1014,7 +1014,7 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public IEnumerator EndConversation(NPC npc)
 		{
-				ConversationVM.InConversation=false;
+				
 				//Copy back private variables to the globals file.
 
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
@@ -1109,6 +1109,7 @@ public class ConversationVM : UWEBase {
 				///Puts the time scales back to normal
 				Time.timeScale=1.0f;
 				yield return new WaitForSeconds(4f);
+				ConversationVM.InConversation=false;
 				//npc.npc_talkedto=1;
 				UWHUD.instance.Conversation_tl.Clear();
 				UWHUD.instance.MessageScroll.Clear();
