@@ -10,9 +10,9 @@ public class SpellEffectFear : SpellEffect {
 	/// Backup the original state of the Npc
 	//public int OriginalState;
 	/// Backup the original attitude and goals of the npc
-	public int OriginalAttitude;
-	public int OriginalGtarg;
-	public int OriginalGoal;
+	public short OriginalAttitude;
+	public short OriginalGtarg;
+	public short OriginalGoal;
 
 	private NPC npc;
 	public bool WasActive;

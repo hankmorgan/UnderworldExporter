@@ -649,7 +649,7 @@ public class ObjectLoader : Loader {
 				if (x<256)	
 				{
 					//mobile objects		
-					objList[x].npc_hp =(int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
+					objList[x].npc_hp =(short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
 
 					objList[x].npc_goal =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
 					objList[x].npc_gtarg =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
@@ -665,7 +665,29 @@ public class ObjectLoader : Loader {
 					objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 16) >> 4 & 0xF);
 					objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);
 
-					objList[x].npc_whoami = (int)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+					objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+								int i=0;
+					for (int z=0x8; z<=0x1a;z++)
+					{
+						switch (z)
+						{
+						case 0xb:
+						case 0xd:
+						case 0xf:
+						case 0x16:
+								objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
+								break;
+						case 0xb+1:
+						case 0xd+1:
+						case 0xf+1:
+						case 0x16+1:
+								break;
+						default:
+								objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
+								break;								
+						}
+						
+					}
 					address_pointer=address_pointer+8+19;
 				}
 				else

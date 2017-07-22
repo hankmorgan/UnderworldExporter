@@ -990,7 +990,7 @@ public class Magic : UWEBase {
 
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0);
 						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
-						myObj.GetComponent<NPC>().npc_gtarg= gtarg;
+						myObj.GetComponent<NPC>().npc_gtarg= (short)gtarg;
 						myObj.GetComponent<NPC>().npc_goal=3;
 						myObj.GetComponent<NPC>().npc_hp=GameWorldController.instance.objDat.critterStats[spKM.RndNPC-64].AvgHit;
 						newobjt.InUseFlag=1;
@@ -2673,7 +2673,7 @@ public class Magic : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
-			if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (Conversation.InConversation)){return;}
+			if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)){return;}
 			if (
 					(Event.current.Equals(Event.KeyboardEvent("q")))
 					&&

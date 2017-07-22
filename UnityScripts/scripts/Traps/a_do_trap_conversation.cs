@@ -18,7 +18,7 @@ public class a_do_trap_conversation : trap_base {
 
 	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
-		if (Conversation.InConversation==false)
+	if (ConversationVM.InConversation==false)
 		{
 			NPC_Door np =  this.GetComponent<NPC_Door>();
 			if (np!=null)

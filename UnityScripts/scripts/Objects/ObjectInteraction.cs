@@ -1264,16 +1264,23 @@ public class ObjectInteraction : UWEBase {
 
 
 
-		public static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
+		//public static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
+		/// <summary>
+		/// Creates the NPC entity.
+		/// </summary>
+		/// <param name="myObj">My object.</param>
+		/// <param name="objInt">Object int.</param>
+		/// <param name="objI">Object i.</param>
+		public static NPC CreateNPC(GameObject myObj, ObjectInteraction objInt, ObjectLoaderInfo objI)
 		{
 				myObj.layer=LayerMask.NameToLayer("NPCs");
 				myObj.tag="NPCs";
 				NPC npc = myObj.AddComponent<NPC>();
 
-				if (npc_whoami == 0)
-				{
-						npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
-				}
+				//if (npc_whoami == 0)
+				//{
+				//		npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
+				//}
 
 				//Probably only need to add this when an NPC supports ranged attacks?
 				GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
@@ -1311,7 +1318,7 @@ public class ObjectInteraction : UWEBase {
 
 				CharacterController cap  = myObj.AddComponent<CharacterController>();
 				cap = myObj.GetComponent<CharacterController>();
-				switch(int.Parse(NPC_ID))
+				switch(objInt.item_id)
 				{//TODO:These are UW1 settings
 				case 97: //a_ghost
 				case 99: //a_ghoul
@@ -1324,7 +1331,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				}
 
-				switch (int.Parse(NPC_ID))
+				switch (objInt.item_id)
 				{
 
 				//Big
@@ -1413,9 +1420,10 @@ public class ObjectInteraction : UWEBase {
 				}
 
 				cap.stepOffset=0.1f;//Stop npcs from climbing over each other
+			return npc;
 		}
 
-		public static void SetNPCProps(GameObject myObj, 
+	/*	public static void SetNPCProps(GameObject myObj, 
 				int npc_whoami, int npc_xhome, int npc_yhome,
 				int npc_hunger, int npc_health,
 				int npc_hp, int npc_arms, int npc_power ,
@@ -1433,10 +1441,10 @@ public class ObjectInteraction : UWEBase {
 						"",
 						NavMeshRegion
 				)	;
-		}
+		}*/
 
 
-		public static void SetNPCProps(GameObject myObj, 
+		/*public static void SetNPCProps(GameObject myObj, 
 				int npc_whoami, int npc_xhome, int npc_yhome,
 				int npc_hunger, int npc_health,
 				int npc_hp, int npc_arms, int npc_power ,
@@ -1444,267 +1452,45 @@ public class ObjectInteraction : UWEBase {
 				int npc_talkedto, int npc_level,int npc_name,
 				string gtargName,
 				string NavMeshRegion
-		)
+		)*/
+
+		/// <summary>
+		/// Sets the NPC properties.
+		/// </summary>
+		/// <param name="myObj">My object.</param>
+		/// <param name="objInt">Object int.</param>
+		/// <param name="objI">Object i.</param>
+		public static void SetNPCProps(GameObject myObj, NPC npc, ObjectInteraction objInt, ObjectLoaderInfo objI, string NavMeshRegion,string gtargName)
 		{
-				NPC npc = myObj.GetComponent<NPC>();
+				//NPC npc = myObj.GetComponent<NPC>();
 				if (npc!=null)
 				{
 
-						if ((npc.npc_whoami==0) && (npc_whoami  != 0))
-						{
-								npc.npc_whoami= npc_whoami;
-						}
-						npc.npc_xhome=npc_xhome;        //  x coord of home tile
-						npc.npc_yhome=npc_yhome;        //  y coord of home tile
-						npc.npc_hunger=npc_hunger;
-						npc.npc_health=npc_health;
-						npc.npc_hp=(short)npc_hp;
-						npc.npc_arms=npc_arms;          // (not used in uw1)
-						npc.npc_power=npc_power;
-						npc.npc_goal=npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-						npc.npc_attitude=npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-						npc.npc_gtarg=npc_gtarg;         //goal target; 1:player
-						npc.npc_talkedto=npc_talkedto;      // is 1 when player already talked to npc
-						npc.npc_level=npc_level;
-						npc.npc_name=npc_name;       //    (not used in uw1)
+						//if ((npc.npc_whoami==0) && (objI.npc_whoami  != 0))
+						//{
+								npc.npc_whoami= objI.npc_whoami;
+						//}
+						npc.npc_xhome=objI.npc_xhome;        //  x coord of home tile
+						npc.npc_yhome=objI.npc_yhome;        //  y coord of home tile
+						npc.npc_hunger=objI.npc_hunger;
+						npc.npc_health=objI.npc_health;
+						npc.npc_hp=objI.npc_hp;
+						npc.npc_arms=objI.npc_arms;          // (not used in uw1)
+						npc.npc_power=objI.npc_power;
+						npc.npc_goal=objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+						npc.npc_attitude=objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+						npc.npc_gtarg=objI.npc_gtarg;         //goal target; 1:player
+						npc.npc_talkedto=objI.npc_talkedto;      // is 1 when player already talked to npc
+						npc.npc_level=objI.npc_level;
+						npc.npc_name=objI.npc_name;       //    (not used in uw1)
 						npc.NavMeshRegion=NavMeshRegion;
 
 						npc.gtargName=gtargName;
 
-						/*
-						Conversation cnv ;//= myObj.AddComponent<Conversation>();
-						cnv=null;
-
-						switch (myObj.GetComponent<NPC>().npc_whoami)
+						for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
 						{
-						case 0:
-						case 207://A worried spectre named warren
-						case 248://Slasher of veils
-						case 255://No conversation/monsters
-						case 256:
-						case 257:
-						case 258:
-						case 259:
-						case 261:
-						case 264:
-						case 265:
-						case 266:
-						case 267:
-						case 270:
-						case 273:
-						case 274:
-						case 275:
-						case 279:
-						case 284:
-						case 283:
-						case 289:
-						case 292:
-						case 293:
-						case 294:
-						case 297:
-						case 298:
-						case 302:
-						case 303:
-						case 304:
-						case 305:
-						case 306:
-						case 308:
-						case 309:
-						case 310:
-						case 311:
-						case 312:
-						case 313:
-								break;
-						case 1://Corby
-								cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
-						case 2://Shak
-								cnv=(Conversation)myObj.AddComponent<Conversation_2>();break;
-						case 3://Goldthirst
-								cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
-						case 4://Shanlick
-								cnv=(Conversation)myObj.AddComponent<Conversation_4>();break;
-						case 5://Eyesnack
-								cnv=(Conversation)myObj.AddComponent<Conversation_5>();break;
-						case 6://Marrowsuck
-								cnv=(Conversation)myObj.AddComponent<Conversation_6>();break;
-						case 7://Ketchaval
-								cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
-						case 8://Retichall
-								cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
-						case 9://Vernix
-								cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
-						case 10://Lanugo
-								cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
-						case 12:// Dorna Ironfist
-								cnv=(Conversation)myObj.AddComponent<Conversation_12>();break;
-						case 13:// Morlock
-								cnv=(Conversation)myObj.AddComponent<Conversation_13>();break;
-						case 14:// Dr Owl
-								cnv=(Conversation)myObj.AddComponent<Conversation_14>();break;
-						case 15://Sseetharee
-								cnv=(Conversation)myObj.AddComponent<Conversation_15>();break;
-						case 16://Ishtass
-								cnv=(Conversation)myObj.AddComponent<Conversation_16>();break;
-						case 17://Sethar Strongarm
-								cnv=(Conversation)myObj.AddComponent<Conversation_17>();break;
-						case 18://Lakshi Longtooth
-								cnv=(Conversation)myObj.AddComponent<Conversation_18>();break;
-						case 19://Hagbard
-								cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
-						case 20://Gulik
-								cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
-						case 21://Steeltoe
-								cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
-						case 22://Golem
-								cnv=(Conversation)myObj.AddComponent<Conversation_22>();break;
-						case 23://Judy
-								cnv=(Conversation)myObj.AddComponent<Conversation_23>();break;
-						case 24://prisoner
-								cnv=(Conversation)myObj.AddComponent<Conversation_24>();break;
-						case 25://Talking door
-								cnv=(Conversation)myObj.AddComponent<Conversation_25>();break;
-						case 27://Garamon
-								cnv=(Conversation)myObj.AddComponent<Conversation_27>();break;
-						case 28://Zak
-								cnv=(Conversation)myObj.AddComponent<Conversation_28>();break;
-						case 64://Jaacar
-								cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
-						case 65://Eb
-								cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
-						case 66://Drog
-								cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
-						case 67://Bragit
-								cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
-						case 88://Brawnclan
-								cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
-						case 89://Hewstone
-								cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
-						case 90://Ironwit
-								cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
-						case 110://Gazer
-								cnv=(Conversation)myObj.AddComponent<Conversation_110>();break;
-						case 112://bandit
-								cnv=(Conversation)myObj.AddComponent<Conversation_112>();break;
-						case 113://bandit
-								cnv=(Conversation)myObj.AddComponent<Conversation_113>();break;
-						case 114://Iss'leek
-								cnv=(Conversation)myObj.AddComponent<Conversation_114>();break;
-						case 136://Oradinar
-								cnv=(Conversation)myObj.AddComponent<Conversation_136>();break;
-						case 137://Linnet
-								cnv=(Conversation)myObj.AddComponent<Conversation_137>();break;
-						case 138://Derek
-								cnv=(Conversation)myObj.AddComponent<Conversation_138>();break;
-						case 139://Trisch
-								cnv=(Conversation)myObj.AddComponent<Conversation_139>();break;
-						case 140://Ree
-								cnv=(Conversation)myObj.AddComponent<Conversation_140>();break;
-						case 141://Feznor
-								cnv=(Conversation)myObj.AddComponent<Conversation_141>();break;
-						case 142://Rodrick
-								cnv=(Conversation)myObj.AddComponent<Conversation_142>();break;
-						case 143://Biden
-								cnv=(Conversation)myObj.AddComponent<Conversation_143>();break;
-						case 144://Rawstag
-								cnv=(Conversation)myObj.AddComponent<Conversation_144>();break;
-						case 146://Doris
-								cnv=(Conversation)myObj.AddComponent<Conversation_146>();break;
-						case 147://Kyle
-								cnv=(Conversation)myObj.AddComponent<Conversation_147>();break;
-						case 148://Cecil
-								cnv=(Conversation)myObj.AddComponent<Conversation_148>();break;
-						case 161://Anjor
-								cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
-						case 162://Kneeknibble
-								cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
-						case 149://Meredith
-								cnv=(Conversation)myObj.AddComponent<Conversation_149>();break;
-						case 184://Delanrey
-								cnv=(Conversation)myObj.AddComponent<Conversation_184>();break;
-						case 185://Nilpont
-								cnv=(Conversation)myObj.AddComponent<Conversation_185>();break;
-						case 187://Illomo
-								cnv=(Conversation)myObj.AddComponent<Conversation_187>();break;
-						case 188://Gralwart
-								cnv=(Conversation)myObj.AddComponent<Conversation_188>();break;
-						case 189://Shenilor
-								cnv=(Conversation)myObj.AddComponent<Conversation_189>();break;
-						case 190://Bronus
-								cnv=(Conversation)myObj.AddComponent<Conversation_190>();break;
-						case 191://Ranthru
-								cnv=(Conversation)myObj.AddComponent<Conversation_191>();break;
-						case 192://Fyrgen
-								cnv=(Conversation)myObj.AddComponent<Conversation_192>();break;
-						case 193://Louvon
-								cnv=(Conversation)myObj.AddComponent<Conversation_193>();break;
-						case 194://Dominus
-								cnv=(Conversation)myObj.AddComponent<Conversation_194>();break;
-						case 208://Cardon
-								cnv=(Conversation)myObj.AddComponent<Conversation_208>();break;
-						case 209://guard (tybals lair checkpoint)
-								cnv=(Conversation)myObj.AddComponent<Conversation_209>();break;
-						case 210://Narutu
-								cnv=(Conversation)myObj.AddComponent<Conversation_210>();break;
-						case 211://Dantes
-								cnv=(Conversation)myObj.AddComponent<Conversation_211>();break;
-						case 212://Kallistan
-								cnv=(Conversation)myObj.AddComponent<Conversation_212>();break;
-						case 213://Fintor
-								cnv=(Conversation)myObj.AddComponent<Conversation_213>();break;
-						case 214://Bolinard
-								cnv=(Conversation)myObj.AddComponent<Conversation_214>();break;
-						case 215://Smonden
-								cnv=(Conversation)myObj.AddComponent<Conversation_215>();break;
-						case 216://guard (tybals prison troll)
-								cnv=(Conversation)myObj.AddComponent<Conversation_216>();break;
-						case 217://Gurstang
-								cnv=(Conversation)myObj.AddComponent<Conversation_217>();break;
-						case 218://guard (tybals lair checkpoint)
-								cnv=(Conversation)myObj.AddComponent<Conversation_218>();break;
-						case 219://guard (tybals lair checkpoint)
-								cnv=(Conversation)myObj.AddComponent<Conversation_219>();break;
-						case 220://guard (tybals prison)
-								cnv=(Conversation)myObj.AddComponent<Conversation_220>();break;
-						case 221://Imp
-								cnv=(Conversation)myObj.AddComponent<Conversation_221>();break;
-						case 222://guard (tybals lair)
-								cnv=(Conversation)myObj.AddComponent<Conversation_222>();break;
-						case 231://Tybal
-								cnv=(Conversation)myObj.AddComponent<Conversation_231>();break;
-						case 232://Caroso
-								cnv=(Conversation)myObj.AddComponent<Conversation_232>();break;
-						case 262://Generic Green Goblin
-								cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
-						case 263://Generic Green Goblin
-								cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
-						case 268://Generic Gray Goblin
-								cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
-						case 272://Generic Gray Goblin
-								cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
-						case 276://Generic Mountainman
-								cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
-						case 277://Generic Lizardman
-								cnv=(Conversation)myObj.AddComponent<Conversation_277>();break;
-						case 280://Generic Lizardman
-								cnv=(Conversation)myObj.AddComponent<Conversation_280>();break;
-						case 281://Generic Gray Lizardman
-								cnv=(Conversation)myObj.AddComponent<Conversation_281>();break;
-						case 282://Generic Outcast
-								cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
-						case 288://Generic Troll
-								cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
-						case 314://Wisp
-								cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
-						default:
-								cnv=myObj.AddComponent<Conversation>();
-								//Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
-								break;
-						}			
-						if (cnv!=null)
-						{
-								cnv.npc= npc;
-						}	
-						*/
+							npc.NPC_DATA[i]=objI.NPC_DATA[i];
+						}
 				}
 		}
 
@@ -1853,11 +1639,17 @@ public class ObjectInteraction : UWEBase {
 				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
 				{
 				case NPC_TYPE:
+					{
+						NPC npc;
 						CreateSprite=false;
-						CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
-						SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
+						npc = CreateNPC(myObj,objInt,currObj);
+						//CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
+						//SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
+						SetNPCProps(myObj,npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
-						break;
+						break;	
+					}
+
 				case HIDDENDOOR:
 				case DOOR:
 				case PORTCULLIS:

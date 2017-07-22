@@ -326,7 +326,7 @@ public class UWCharacter : Character {
 				SwimTimer=0.0f;
 			}
 		}
-		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!Conversation.InConversation));
+		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
 		
 
 		if (isFlying)

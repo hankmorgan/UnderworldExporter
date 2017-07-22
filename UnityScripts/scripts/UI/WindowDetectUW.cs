@@ -398,7 +398,7 @@ public class WindowDetectUW : WindowDetect {
 		/// </summary>
 		void OnGUI()
 		{//Controls switching between Mouselook and interaction and sets the cursor icon
-				if (Conversation.InConversation==true)
+				if (ConversationVM.InConversation==true)
 				{
 						GameWorldController.instance.playerUW.XAxis.enabled=false;
 						GameWorldController.instance.playerUW.YAxis.enabled=false;

@@ -25,7 +25,7 @@ public class InventorySlot : GuiBase {
 
 		public void BeginDrag()
 		{
-			if ((WindowDetectUW.WaitingForInput) || (Conversation.InConversation))
+			if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation))
 			{return;}
 			if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
 			{
@@ -438,13 +438,13 @@ public class InventorySlot : GuiBase {
 						else
 							{
 							//Debug.Log("attempting to pick up a quantity");
-							if (Conversation.InConversation==true)
+							if (ConversationVM.InConversation==true)
 							{
 								//UWHUD.instance.MessageScroll.SetAnchorX(1.0f);//Move off screen.
 								//UWHUD.instance.MessageScrollTemp.SetAnchorX(0.06f);
 								InventorySlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
 								UWHUD.instance.MessageScroll.Set ("Move how many?");
-								Conversation.EnteringQty=true;
+							
 								ConversationVM.EnteringQty=true;
 							}
 							else
@@ -497,9 +497,8 @@ public class InventorySlot : GuiBase {
 		inputctrl.text="";
 		inputctrl.gameObject.SetActive(false);
 		WindowDetect.WaitingForInput=false;
-		Conversation.EnteringQty=false;
 		ConversationVM.EnteringQty=false;
-		if (Conversation.InConversation==false)
+		if (ConversationVM.InConversation==false)
 		{
 			UWHUD.instance.MessageScroll.Clear ();
 			Time.timeScale=1.0f;
@@ -584,7 +583,7 @@ public class InventorySlot : GuiBase {
 		yield return new WaitForSeconds(0.1f);
 		
 		InventorySlot.LookingAt=false;
-		if (Conversation.InConversation==true)
+		if (ConversationVM.InConversation==true)
 		{
 			Time.timeScale=0.00f;
 		}

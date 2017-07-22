@@ -365,6 +365,7 @@ public class GameWorldController : UWEBase {
 						ShockObjProp= new ObjectPropLoader();
 						break;
 				default:
+						MusicController.Begin();
 						objectMaster=new ObjectMasters();
 						objDat = new ObjectDatLoader();
 						commonObject= new CommonObjectDatLoader();

@@ -9,10 +9,15 @@ using System.Text.RegularExpressions;
 /// based on UWAdventures hacking tools.
 /// </summary>
 public class ConversationVM : UWEBase {
+
+
 		//TODO:Make sure pickups support containers
 		//TODO:Make inventory related code operate on the master object list rather than trade slots.->Trade slots should just give indices into that list in show_inv, 
 		/// Is the user entering a quantity
 		public static bool EnteringQty;
+
+		public static bool InConversation;
+		public static int CurrentConversation;
 
 		///The NPC is talking
 		public const int NPC_SAY=0;
@@ -1009,12 +1014,12 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public IEnumerator EndConversation(NPC npc)
 		{
-				Conversation.InConversation=false;
+				ConversationVM.InConversation=false;
 				//Copy back private variables to the globals file.
 
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
 				{
-					if (Conversation.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
+					if (ConversationVM.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
 					{
 						GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex]=1;
 						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
@@ -1038,27 +1043,27 @@ public class ConversationVM : UWEBase {
 										npc.npc_talkedto = 1;break;
 										//npc.npc_talkedto = stack.at(address);break;
 								case "npc_gtarg":
-										npc.npc_gtarg = stack.at(address);break;
+										npc.npc_gtarg = (short)stack.at(address);break;
 								case "npc_attitude":
-										npc.npc_attitude= stack.at(address);break;
+										npc.npc_attitude= (short)stack.at(address);break;
 								case "npc_goal":
-										npc.npc_goal= stack.at(address);break;
+										npc.npc_goal= (short)stack.at(address);break;
 								case "npc_power":
-										npc.npc_power= stack.at(address);break;
+										npc.npc_power= (short)stack.at(address);break;
 								case "npc_arms":
-										npc.npc_arms= stack.at(address);break;
+										npc.npc_arms= (short)stack.at(address);break;
 								case "npc_hp":
 										npc.npc_hp= (short)stack.at(address);break;
 								case "npc_health":										
-										npc.npc_health= stack.at(address);break;
+										npc.npc_health= (short)stack.at(address);break;
 								case "npc_hunger":
-										npc.npc_hunger= stack.at(address);break;
+										npc.npc_hunger= (short)stack.at(address);break;
 								case "npc_whoami":
-										npc.npc_whoami= stack.at(address);break;
+										npc.npc_whoami= (short)stack.at(address);break;
 								case "npc_yhome":
-										npc.npc_yhome= stack.at(address);break;
+										npc.npc_yhome= (short)stack.at(address);break;
 								case "npc_xhome":
-										npc.npc_xhome= stack.at(address);break;
+										npc.npc_xhome= (short)stack.at(address);break;
 								}
 
 						}
@@ -3118,7 +3123,7 @@ public class ConversationVM : UWEBase {
 					foundNPCs[i].npc_gtarg=gtarg;
 				}
 			}*/
-
+				//theory only works on local npcs???
 			Debug.Log(npc.name + " Set Race attitude " + unk1 + " " + attitude + " " + unk2);
 		}
 
@@ -3136,7 +3141,7 @@ public class ConversationVM : UWEBase {
 		{
 			if (foundNPCs[i].npc_whoami == target_whoami)
 			{
-				foundNPCs[i].npc_attitude=attitude;
+				foundNPCs[i].npc_attitude=(short)attitude;
 			}
 		}
 	}

@@ -8,12 +8,12 @@ using RAIN.Minds;
 /// </summary>
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
-	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-		public int poisondamage;
-		public int AttackPower;
-		public int AvgHit;
-		public int height;
-		public int radius;
+	private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
+		//public int poisondamage;
+		//public int AttackPower;
+		//public int AvgHit;
+		//public int height;
+		//public int radius;
 
 	//TODO: these need to match the UW npc_goals
 	//The behaviour trees need to be updated too.
@@ -69,7 +69,7 @@ public class NPC : object_base {
 	//public int CalcFacingForDebug;
 
 	/// Object ID for the NPC
-	private string NPC_ID;
+	//private string NPC_ID;
 	public int NPC_IDi;
 	
 	/// The animation that is currently set
@@ -87,16 +87,16 @@ public class NPC : object_base {
 	//private string oldNPC_ID;
 	
 	/// The animation index the NPC is facing
-	private int facingIndex;
+	private short facingIndex;
 	/// Previous value for tracking changes
-	private int PreviousFacing=-1;
+	private short PreviousFacing=-1;
 	/// Previous value for tracking changes
 	private int PreviousAnimRange=-1;
 	/// The compass point (see heading array) the NPC is facing relative to the player
-	private int CalcedFacing;
+	private short CalcedFacing;
 	
 	///Integer representation of the current facing of the character. To match with animation angles
-	private int currentHeading;
+	private short currentHeading;
 	//Direction between the player and the NPC for calculating relative angle
 	private Vector3 direction;	//vector between the player and the ai.
 	/// The angle to the character from the player.
@@ -106,25 +106,27 @@ public class NPC : object_base {
 	public string NavMeshRegion;
 
 	//NPC Properties from Underworld
-	public int npc_whoami;
-	public int npc_xhome;        //  x coord of home tile
-	public int npc_yhome;        //  y coord of home tile
+	public short npc_whoami;
+	public short npc_xhome;        //  x coord of home tile
+	public short npc_yhome;        //  y coord of home tile
 //	public int npc_whoami;       //  npc conversation slot number
-	public int npc_hunger;
-	public int npc_health;
+	public short npc_hunger;
+	public short npc_health;
 	public short npc_hp;
-	public int npc_arms;          // (not used in uw1)
-	public int npc_power;
-	public int npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-	public int npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-	public int npc_gtarg;         //goal target; 1:player
+	public short npc_arms;          // (not used in uw1)
+	public short npc_power;
+	public short npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+	public short npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+	public short npc_gtarg;         //goal target; 1:player
 	
 	private GameObject gtarg;
 	public string gtargName;
 
-	public int npc_talkedto;      // is 1 when player already talked to npc
-	public int npc_level;
-	public int npc_name;       //    (not used in uw1)
+	public short npc_talkedto;      // is 1 when player already talked to npc
+	public short npc_level;
+	public short npc_name;       //    (not used in uw1)
+
+		public short[] NPC_DATA=new short[15];
 
 	///flags the NPC as dead so we can kill them off in the next frame
 	public bool NPC_DEAD;
@@ -178,11 +180,11 @@ public class NPC : object_base {
 	protected override void Start () {
 		base.Start();
 		NPC_IDi=objInt().item_id;
-		poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
-		AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
-		AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
-		height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
-		radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
+		//poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
+		//AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
+		//AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
+		//height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
+		//radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
 		
 		newAnim=this.gameObject.AddComponent<NPC_Animation>();
 		if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
@@ -198,7 +200,7 @@ public class NPC : object_base {
 		if (ai == null) {
 			GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
 			GameObject newObj = (GameObject)GameObject.Instantiate (myInstance);
-			NPC_ID=objInt().item_id.ToString();
+			//NPC_ID=objInt().item_id.ToString();
 			newObj.name = this.gameObject.name + "_AI";
 			newObj.transform.position = Vector3.zero;
 			newObj.transform.parent = this.gameObject.transform;
@@ -290,7 +292,7 @@ public class NPC : object_base {
 
 								case 22: //The golem on level 6
 									{
-										if (Conversation.InConversation==false)		
+										if (ConversationVM.InConversation==false)		
 										{
 											NPC_DEAD=false;
 											TalkTo ();
@@ -389,13 +391,13 @@ public class NPC : object_base {
 			}
 
 			//Decide what attack modes to use
-			switch (NPC_ID)
+		switch (_objInt.item_id)
 			{
 			//Uses ranged weapons
-			case "70":
-			case "76":
-			case "77":
-			case "78":
+			case 70:
+			case 76:
+			case 77:
+			case 78:
 				if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) && (Ammo>0))
 				{//Ranged attack if far away
 					ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
@@ -406,16 +408,16 @@ public class NPC : object_base {
 				}
 				break;
 			//Uses magic attacks when not very near
-			case "75":
-			case "81":
-			case "106":
-			case "107":
-			case "108":
-			case "109":
-			case "115":
-			case "120":
-			case "122":
-			case "123":						
+			case 75:
+			case 81:
+			case 106:
+			case 107:
+			case 108:
+			case 109:
+			case 115:
+			case 120:
+			case 122:
+			case 123:						
 				if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
 				{//Ranged attack if far away
 					ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
@@ -514,7 +516,7 @@ public class NPC : object_base {
 					case 10://I just want to talk to you
 							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
 							if ((GameWorldController.instance.playerUW.isRoaming==false) 
-									&& (Conversation.InConversation==false))
+									&& (ConversationVM.InConversation==false))
 							{
 									if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=1.5)	
 									{
@@ -566,7 +568,7 @@ public class NPC : object_base {
 									{
 										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
 										npc_goal=5;
-										npc_gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+										npc_gtarg=(short)GameWorldController.instance.playerUW.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
 									}
 
@@ -692,8 +694,8 @@ public class NPC : object_base {
 			default:
 				{
 						UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-						Conversation.CurrentConversation=npc_whoami;//To make obsolete
-						Conversation.InConversation=true;
+						ConversationVM.CurrentConversation=npc_whoami;//To make obsolete
+						ConversationVM.InConversation=true;
 						if (npcname=="")
 						{
 								UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
@@ -842,22 +844,22 @@ public class NPC : object_base {
 			PreviousAnimRange=AnimRange;
 		}
 		//Offset the compass heading by the players relative heading.
-		CalcedFacing=facingIndex + currentHeading;
+		CalcedFacing=(short)(facingIndex + currentHeading);
 		if (CalcedFacing>=8)//Make sure it wrapps around correcly between 0 and 7 ->The compass headings.
 		{
-			CalcedFacing=CalcedFacing-8;
+			CalcedFacing=(short)(CalcedFacing-8);
 		}
 		if (CalcedFacing<=-8)
 		{
-			CalcedFacing=CalcedFacing+8;
+			CalcedFacing=(short)(CalcedFacing+8);
 		}
 		if (CalcedFacing<0)
 		{
-			CalcedFacing=8+CalcedFacing;
+			CalcedFacing=(short)(8+CalcedFacing);
 		}
 		else if (CalcedFacing>7)
 		{
-			CalcedFacing=8-CalcedFacing;
+			CalcedFacing=(short)(8-CalcedFacing);
 		}
 	
 		//Calculate an animation index from the facing and the animation range.
@@ -876,11 +878,11 @@ public class NPC : object_base {
 				((AnimRange== AI_ANIM_COMBAT_IDLE) && (!((CalcedFacing==0)||(CalcedFacing==1)||(CalcedFacing==7)) ))
 		)
 		{
-			CalcedFacing=(CalcedFacing+1)*1;//Use an idle animation if we can't see the attack
+			CalcedFacing=(short)((CalcedFacing+1)*1);//Use an idle animation if we can't see the attack
 		}
 		else
 		{
-			CalcedFacing=(CalcedFacing+1)*AnimRange;				
+			CalcedFacing=(short)((CalcedFacing+1)*AnimRange);
 		}
 		
 		
@@ -1017,7 +1019,7 @@ public class NPC : object_base {
 	/// Breaks down the angle in the the facing sector. Clockwise from 0)
 	/// </summary>
 	/// <param name="angle">Angle.</param>
-	int facing(float angle)
+	short facing(float angle)
 	{
 		if ((angle >= -22.5) && (angle <= 22.5)) 
 		{
@@ -1113,6 +1115,8 @@ public class NPC : object_base {
 	/// </summary>
 	public void ExecuteAttack()
 	{
+		if(ConversationVM.InConversation){return;}
+						
 		if(gtarg==null)
 		{
 			return;

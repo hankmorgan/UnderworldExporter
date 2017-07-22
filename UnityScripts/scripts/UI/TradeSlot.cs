@@ -87,7 +87,7 @@ public class TradeSlot : GuiBase {
 		Time.timeScale=0.1f;
 		yield return new WaitForSeconds(0.1f);
 		TradeSlot.LookingAt=false;
-		if (Conversation.InConversation==true)
+		if (ConversationVM.InConversation==true)
 		{
 			Time.timeScale=0.00f;
 		}

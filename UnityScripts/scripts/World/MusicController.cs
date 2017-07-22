@@ -160,9 +160,17 @@ public class MusicController : UWEBase {
 
 	public AudioClip[] SoundEffects=new AudioClip[1];
 
+		private static bool ready;
+
 	void Start () {
 		Aud= this.GetComponent<AudioSource>();
 	}
+
+	public static void Begin()
+	{
+		ready=true;	
+	}
+
 
 	/// <summary>
 	/// Updates the state of the music based on the current world and player state.
@@ -234,7 +242,10 @@ public class MusicController : UWEBase {
 	
 	// Update is called once per frame
 	void Update () {
-		UpdateMusicState ();
+		if (ready)
+		{
+			UpdateMusicState ();	
+		}		
 	}
 
 	/// <summary>

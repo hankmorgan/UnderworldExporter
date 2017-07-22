@@ -33,7 +33,7 @@ public class ObjectLoaderInfo {
 		//The values stored in the NPC info area (19 bytes) contain infos for
 		//critters unique to each object.
 		//0008 
-		public int npc_hp;	//0-7
+		public short npc_hp;	//0-7
 		//0009	
 		//blank?
 		//000a   
@@ -55,7 +55,7 @@ public class ObjectLoaderInfo {
 		//   0019      Int8   0-6:   
 		public short npc_hunger; //(?)
 		//001a   0012   Int8          
-		public int npc_whoami;
+		public short npc_whoami;
 
 		public short npc_health=0;
 		public short npc_arms=0;
@@ -94,4 +94,6 @@ public class ObjectLoaderInfo {
 		public int[] conditions=new int[4];  
 		public int TriggerAction;//Needs to be split into a property.
 		public int TriggerOnce;
+
+		public short[] NPC_DATA=new short[15];
 }
