@@ -104,12 +104,20 @@ public class UWCharacter : Character {
 		//DontDestroyOnLoad(this);
 	}
 
+	public void Start()
+	{
+		GameWorldController.instance.playerUW=this;
+		XAxis.enabled=false;
+		YAxis.enabled=false;
+		MouseLookEnabled=false;
+	}
+
 	public override void Begin ()
 	{
 
 		base.Begin ();
-				if (_RES==GAME_SHOCK){return;}
-				InventoryReady=false;
+		if (_RES==GAME_SHOCK){return;}
+		InventoryReady=false;
 		GameWorldController.instance.playerUW=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;

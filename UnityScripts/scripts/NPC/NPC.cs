@@ -289,7 +289,6 @@ public class NPC : object_base {
 						{
 							switch (npc_whoami)
 							{
-
 								case 22: //The golem on level 6
 									{
 										if (ConversationVM.InConversation==false)		
@@ -1197,8 +1196,7 @@ public class NPC : object_base {
 
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
-		{
-			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
+		{	
 			
 			if (hit.transform.Equals(this.transform))
 			{
@@ -1206,23 +1204,33 @@ public class NPC : object_base {
 			}
 			else
 			{
+			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
-				{				
-					short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
-					short playerDefence = (short)GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense);
-					attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
-					//Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
-					if (playerArmour> attackDamage)
-					{
-						attackDamage=1;
+				{	
+					//Roll for a hit
+					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillDefense, Random.Range(0,35)))
+					{						
+						short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
+						short playerDefence = (short)GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense);
+						attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
+						//Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
+						if (playerArmour> attackDamage)
+						{
+							attackDamage=1;
+						}
+						else
+						{
+							attackDamage-=playerArmour;
+						}
+						//TODO: armour durability
+						MusicController.LastAttackCounter=10.0f; //Thirty more seconds of combat music
+						GameWorldController.instance.playerUW.ApplyDamage(attackDamage,this.gameObject);
+						if (ObjectInteraction.PlaySoundEffects)
+						{
+							GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+							GameWorldController.instance.playerUW.aud.Play();
+						}
 					}
-					else
-					{
-						attackDamage-=playerArmour;
-					}
-					//TODO: armour durability
-					MusicController.LastAttackCounter=10.0f; //Thirty more seconds of combat music
-					GameWorldController.instance.playerUW.ApplyDamage(attackDamage,this.gameObject);
 				}
 			else
 				{

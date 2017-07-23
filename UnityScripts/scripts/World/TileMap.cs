@@ -1899,8 +1899,7 @@ public class TileMap : Loader {
 
 								if (o<256)			
 								{//Additional npc mobile data.
-
-										TileMapData[addptr+0x8] = (char)(currobj.npc_hp & 0x8);
+										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
 										TileMapData[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
 												(currobj.npc_goal & 0xF));
 
@@ -1961,5 +1960,39 @@ public class TileMap : Loader {
 				OverlayAddress+=6;
 			}
 			return OverLayData;
+		}
+
+
+		/// <summary>
+		/// Converts the uw1 texture map to bytes.
+		/// </summary>
+		/// <returns>The map to bytes.</returns>
+		public char[] TextureMapToBytes()
+		{
+			char[] textureMapData=new char[122];
+			short textureMapSize=64;
+			int TextureMapAddress=0;
+			for (int i=0; i<textureMapSize;i++)
+			{
+				if (i<48)	//Wall textures
+				{
+					textureMapData[TextureMapAddress+0]=(char)(texture_map[i] & 0xFF);
+					textureMapData[TextureMapAddress+1]=(char)((texture_map[i]>>8) & 0xFF);
+					TextureMapAddress+=2;
+				}
+				else if (i<=57)	//Floor textures are 49 to 56, ceiling is 57
+				{
+					textureMapData[TextureMapAddress+0]=(char)((texture_map[i]-210) & 0xFF);
+					textureMapData[TextureMapAddress+1]=(char)(((texture_map[i]-210)>>8) & 0xFF);
+					TextureMapAddress+=2;
+				}
+				else
+				{ //door textures
+					textureMapData[TextureMapAddress]= (char)(texture_map[i]);
+					TextureMapAddress++;
+				}						
+			}
+
+			return textureMapData;
 		}
 }

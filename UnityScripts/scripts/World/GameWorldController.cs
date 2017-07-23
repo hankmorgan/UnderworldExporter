@@ -978,9 +978,17 @@ public class GameWorldController : UWEBase {
 				//read in the texture maps
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{
-					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+18) * 4) + 2,32);
-					blockData[l+18].Data=CopyData(AddressToCopyFrom,0x7a);
-					blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+					if (GameWorldController.instance.Tilemaps[l]!=null)
+					{
+						blockData[l+18].Data= GameWorldController.instance.Tilemaps[l].TextureMapToBytes(); 
+						blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+					}
+					else
+					{
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+18) * 4) + 2,32);
+						blockData[l+18].Data=CopyData(AddressToCopyFrom,0x7a);
+						blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+					}					
 				}
 
 				//read in the auto maps
