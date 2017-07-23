@@ -43,14 +43,14 @@ public class UWHUD : HUD {
 
 	public GameObject ContainerOpened;
 
-		//UW Cursors
-		public Texture2D  MapQuill;
-		public Texture2D  MapQuillWriting;
-		public Texture2D  MapEraser;
+	//UW Cursors
+	public Texture2D  MapQuill;
+	public Texture2D  MapQuillWriting;
+	public Texture2D  MapEraser;
 
-		public ActiveRuneSlot[] activeRunes;
+	public ActiveRuneSlot[] activeRunes;
 
-		public RuneSlot[] runes;
+	public RuneSlot[] runes;
 
 
 	//Panels
@@ -134,6 +134,7 @@ public class UWHUD : HUD {
 
 		public Text ContextMenu;
 
+		public IngameEditor editor;
 
 		void Awake()
 		{

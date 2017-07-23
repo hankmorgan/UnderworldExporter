@@ -1437,25 +1437,25 @@ public class ObjectLoader : Loader {
 				{
 					ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
 					//Copy back the info stored on the object interaction to the lists.
-						if (objInt.objectloaderinfo==null)
-							{
-							objInt.objectloaderinfo=new ObjectLoaderInfo();
-							objInt.objectloaderinfo.InUseFlag=0;
-							objInt.objectloaderinfo.tileX=TileMap.ObjectStorageTile;
-							objInt.objectloaderinfo.tileY=TileMap.ObjectStorageTile;
-							}
-						objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
-						if (objInt.objectloaderinfo.InUseFlag==1)
-							{
-								currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);		
-							}	
+					if (objInt.objectloaderinfo==null)
+						{
+						objInt.objectloaderinfo=new ObjectLoaderInfo();
+						objInt.objectloaderinfo.InUseFlag=0;
+						objInt.objectloaderinfo.tileX=TileMap.ObjectStorageTile;
+						objInt.objectloaderinfo.tileY=TileMap.ObjectStorageTile;
+						}
+					objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
+					if (objInt.objectloaderinfo.InUseFlag==1)
+						{
+							currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);	
 							if ((t.gameObject.GetComponent<Container>()) || (t.gameObject.GetComponent<NPC>()))
 							{//Rebuild container chain
-								linkContainerContents(t.gameObject.GetComponent<Container>());
-								t.gameObject.GetComponent<ObjectInteraction>().link=0;
-								//objInt.objectloaderinfo.link=0;
+									linkContainerContents(t.gameObject.GetComponent<Container>());
+									t.gameObject.GetComponent<ObjectInteraction>().link=0;
+									//objInt.objectloaderinfo.link=0;
 							}
-						}
+						}	
+					}
 				}
 
 				//rebuild the linked list

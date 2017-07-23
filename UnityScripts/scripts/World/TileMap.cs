@@ -63,12 +63,12 @@ public class TileMap : Loader {
 		const short SLOPE_CEILING_ONLY= 3;
 
 		//Visible faces indices
-		const short vTOP =0;
-		const short vEAST =1;
-		const short vBOTTOM= 2;
-		const short vWEST= 3;
-		const short vNORTH= 4;
-		const short vSOUTH= 5;
+		public const short vTOP =0;
+		public const short vEAST =1;
+		public const short vBOTTOM= 2;
+		public const short vWEST= 3;
+		public const short vNORTH= 4;
+		public const short vSOUTH= 5;
 
 
 		//BrushFaces
@@ -153,6 +153,16 @@ public class TileMap : Loader {
 		return ((tileType!=TILE_SOLID) && (isRendered));
 	}
 
+		/// <summary>
+		/// Validates the tile to see if it is within the range of tiles.
+		/// </summary>
+		/// <returns><c>true</c>, if tile was valided, <c>false</c> otherwise.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public static bool ValidTile(int tileX, int tileY)
+		{			
+			return ( ( (tileX>=0) && (tileX<=TileMapSizeX) ) && ( (tileY>=0) && (tileY<=TileMapSizeY) ) );
+		}
 
 	/// <summary>
 	/// Tells if the tile is one of the square open types

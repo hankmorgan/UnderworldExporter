@@ -197,6 +197,10 @@ public class TileMapRenderer : Loader{
 				}
 
 			}
+			if ((GameWorldController.EditorMode) && (UpdateOnly))
+			{
+				UWHUD.instance.editor.RefreshTileMap();
+			}
 		}
 
 		/// <summary>

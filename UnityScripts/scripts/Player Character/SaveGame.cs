@@ -374,6 +374,26 @@ public class SaveGame : Loader {
 						float VertAdjust = 0.3543672f;
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
 
+						//CLear out the original inventory
+						GameWorldController.instance.playerUW.playerInventory.sHelm="";
+						GameWorldController.instance.playerUW.playerInventory.sChest="";
+						GameWorldController.instance.playerUW.playerInventory.sGloves="";
+						GameWorldController.instance.playerUW.playerInventory.sLegs="";
+						GameWorldController.instance.playerUW.playerInventory.sBoots="";
+						GameWorldController.instance.playerUW.playerInventory.sRightShoulder="";
+						GameWorldController.instance.playerUW.playerInventory.sLeftShoulder="";
+						GameWorldController.instance.playerUW.playerInventory.sRightHand="";
+						GameWorldController.instance.playerUW.playerInventory.sLeftHand="";
+						GameWorldController.instance.playerUW.playerInventory.sRightRing="";
+						GameWorldController.instance.playerUW.playerInventory.sLeftRing="";
+						for (int c=0; c<=GameWorldController.instance.playerUW.playerInventory.playerContainer.items.GetUpperBound(0);c++)
+						{
+							GameWorldController.instance.playerUW.playerInventory.playerContainer.items[c]="";
+						}
+						foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
+							GameObject.Destroy(child.gameObject);
+						}
+
 						//Read in the inventory
 						//Stored in much the same way as an linked object list is.
 						//Inventory list

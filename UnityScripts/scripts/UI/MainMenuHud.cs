@@ -239,6 +239,10 @@ public class MainMenuHud : GuiBase {
 			if (SlotNo==-2)
 			{//Speedstart to editor
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
+				GameWorldController.instance.InitBGlobals(0);
+				GameClock.instance._day=0;
+				GameClock.instance._minute=51;
+				GameClock.instance._second=15;
 				UWEBase.EditorMode=true;
 				JourneyOnwards();
 				return;
@@ -662,5 +666,10 @@ public class MainMenuHud : GuiBase {
 			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			MainMenuHud.instance.gameObject.SetActive(false);
+			if (EditorMode)
+			{
+				GameWorldController.instance.PositionDetect();
+				UWHUD.instance.editor.SelectCurrentTile();
+			}
 		}
 }

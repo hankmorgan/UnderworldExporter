@@ -877,14 +877,14 @@ public class GameWorldController : UWEBase {
 
 		public ObjectLoader CurrentObjectList()
 		{
-				if (LevelNo==-1)
-				{
-						return null;
-				}
-				else
-				{
-						return objectList[LevelNo];
-				}
+			if (LevelNo==-1)
+			{
+				return null;
+			}
+			else
+			{
+				return objectList[LevelNo];
+			}
 		}
 
 		/// <summary>

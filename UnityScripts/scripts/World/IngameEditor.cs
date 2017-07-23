@@ -5,113 +5,116 @@ using UnityEngine.UI;
 public class IngameEditor : GuiBase_Draggable {
 
 
-	public RawImage TileMapView;
-	public InputField LevelNoToLoad;
+		public RawImage TileMapView;
+		public InputField LevelNoToLoad;
 
-	public  Dropdown TileTypeSelect;
-	public Dropdown FloorTextureSelect;
-	public Dropdown WallTextureSelect;
-	public Dropdown ObjectSelect;
+		public Dropdown TileTypeSelect;
+		public Dropdown FloorTextureSelect;
+		public Dropdown WallTextureSelect;
+		public Dropdown ObjectSelect;
 
-	public Text LevelDetails;
-	public Text TileDetails;
-	public Text ObjectInfo;
+		public InputField TileRangeX;
+		public InputField TileRangeY;
 
-	public InputField TileHeightDetails;
+		public Text LevelDetails;
+		public Text TileDetails;
+		public Text ObjectInfo;
 
-	public RectTransform TileMapDetailsPanel;
-	public RectTransform ObjectDetailsPanel;
+		public InputField TileHeightDetails;
 
-	public static int TileX=0;
-	public static int TileY=0;
+		public RectTransform TileMapDetailsPanel;
+		public RectTransform ObjectDetailsPanel;
+
+		public static int TileX=0;
+		public static int TileY=0;
 
 		public static IngameEditor instance;
 
 		void Awake()
 		{
-			instance=this;
+				instance=this;
 		}
 
 
-	
+
 		public override void Start ()
-	{
-				base.Start();	
-		if (GameWorldController.instance.LevelNo!=-1)
 		{
-			SwitchPanel(0);//Tilemap
-			UpdateFloorTexturesDropDown();
-			UpdateWallTexturesDropDown();
-			RefreshTileMap();
-			RefreshTileInfo();
-			
+				base.Start();	
+				if (GameWorldController.instance.LevelNo!=-1)
+				{
+						SwitchPanel(0);//Tilemap
+						UpdateFloorTexturesDropDown();
+						UpdateWallTexturesDropDown();
+						RefreshTileMap();
+						RefreshTileInfo();
+
+				}
 		}
-	}
 
 		void UpdateObjectsDropDown()
 		{
 				ObjectSelect.ClearOptions();
 				for (int i=0; i<=GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
 				{						
-					string itemtext= ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
-					ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
+						string itemtext= ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+						ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
 				}
 				FloorTextureSelect.RefreshShownValue();
 		}
 
 
-	void UpdateFloorTexturesDropDown()
-	{
-		FloorTextureSelect.ClearOptions();
-		for (int i=48; i<=57;i++ )//Uw1 floor texturemap size
+		void UpdateFloorTexturesDropDown()
 		{
-			int index= GameWorldController.instance.currentTileMap().texture_map[i];
-			string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-			Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
-			Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-			FloorTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
+				FloorTextureSelect.ClearOptions();
+				for (int i=48; i<=57;i++ )//Uw1 floor texturemap size
+				{
+						int index= GameWorldController.instance.currentTileMap().texture_map[i];
+						string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+						Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+						Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+						FloorTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
+				}
+				FloorTextureSelect.RefreshShownValue();
 		}
-		FloorTextureSelect.RefreshShownValue();
-	}
 
 
 		void UpdateWallTexturesDropDown()
 		{
-			WallTextureSelect.ClearOptions();
-			for (int i=0; i<=47;i++ )//Uw1 wall texturemap size
-			{
-				int index= GameWorldController.instance.currentTileMap().texture_map[i];
-				string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-				Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
-				Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-				WallTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
-			}
+				WallTextureSelect.ClearOptions();
+				for (int i=0; i<=47;i++ )//Uw1 wall texturemap size
+				{
+						int index= GameWorldController.instance.currentTileMap().texture_map[i];
+						string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+						Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+						Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+						WallTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
+				}
 				WallTextureSelect.RefreshShownValue();
 		}
 
 
-	public void ChangeLevel()
-	{
-		int levelnotoload=0;
-		if (int.TryParse(LevelNoToLoad.text, out levelnotoload))
+		public void ChangeLevel()
 		{
-			if (levelnotoload<= GameWorldController.instance.Tilemaps.GetUpperBound(0))
-			{
-				GameWorldController.instance.SwitchLevel((short)levelnotoload);
-				RefreshTileMap();
-				RefreshTileInfo();
-				UpdateFloorTexturesDropDown();
-				UpdateWallTexturesDropDown();
-				UpdateObjectsDropDown();	
-			}
-			else
-			{
-				UWHUD.instance.MessageScroll.Add("Invalid Level No");
-			}
-		}		
-	}
+				int levelnotoload=0;
+				if (int.TryParse(LevelNoToLoad.text, out levelnotoload))
+				{
+						if (levelnotoload<= GameWorldController.instance.Tilemaps.GetUpperBound(0))
+						{
+								GameWorldController.instance.SwitchLevel((short)levelnotoload);
+								RefreshTileMap();
+								RefreshTileInfo();
+								UpdateFloorTexturesDropDown();
+								UpdateWallTexturesDropDown();
+								UpdateObjectsDropDown();	
+						}
+						else
+						{
+								UWHUD.instance.MessageScroll.Add("Invalid Level No");
+						}
+				}		
+		}
 
-	public void RefreshTileMap()
+		public void RefreshTileMap()
 		{
 				AutoMap automap= GameWorldController.instance.currentAutoMap();
 				TileMap tilemap = GameWorldController.instance.currentTileMap();
@@ -123,8 +126,8 @@ public class IngameEditor : GuiBase_Draggable {
 								automap.MarkTile(x,y,tilemap.Tiles[x,y].tileType, AutoMap.GetDisplayType(tilemap.Tiles[x,y]) );
 						}	
 				}
-			TileMapView.texture= GameWorldController.instance.currentAutoMap().TileMapImage();
-			LevelDetails.text= "Level + " + GameWorldController.instance.LevelNo;
+				TileMapView.texture= GameWorldController.instance.currentAutoMap().TileMapImage();
+				LevelDetails.text= "Level + " + GameWorldController.instance.LevelNo;
 		}
 
 
@@ -147,17 +150,17 @@ public class IngameEditor : GuiBase_Draggable {
 
 		public void RefreshTileInfo()
 		{
-			TileDetails.text= "X=" + TileX + " Y=" +TileY;
-			TileTypeSelect.value= GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType;
+				TileDetails.text= "X=" + TileX + " Y=" +TileY;
+				TileTypeSelect.value= GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType;
 
-			TileHeightDetails.text=  ((float)GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight/2f).ToString();
-			FloorTextureSelect.value = GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture;
-			WallTextureSelect.value =  GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture;
-			RefreshTileMap();
+				TileHeightDetails.text=  ((float)GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight/2f).ToString();
+				FloorTextureSelect.value = GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture;
+				WallTextureSelect.value =  GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture;
+				RefreshTileMap();
 		}
 
 
-
+		/*
 		public void DestroyTile(int x, int y)
 		{
 				GameObject tileSelected;
@@ -196,93 +199,307 @@ public class IngameEditor : GuiBase_Draggable {
 
 
 		}
+		*/
 
-	public void UpdateTile()
+
+		public void UpdateTile()
 		{
-			//GameObject tileSelected;
-			bool ReRenderNeighbours=false;
-			//= GameWorldController.FindTile(TileX,TileX,TileMap.SURFACE_FLOOR);
-			//Update entered info
-			//TileInfo tileToChange= GameWorldController.instance.currentTileMap().Tiles[TileX,TileY];
+				int DimX=0;int DimY=0;
+				int FloorHeight=0;
+				int WallTexture= WallTextureSelect.value;
+				int FloorTexture= FloorTextureSelect.value;
+				int TileTypeSelected= TileTypeSelect.value;		
 
-				DestroyTile(TileX,TileY);
+				int.TryParse(TileHeightDetails.text,out FloorHeight);
+
+				if (!int.TryParse(TileRangeX.text, out DimX))
+				{
+						DimX=0;	
+				}				
+				if (!int.TryParse(TileRangeY.text, out DimY))
+				{
+						DimY=0;	
+				}
+				if ((DimX==0) && (DimY==0))
+				{//Just update the specified tile
+						UpdateTile(TileX,TileY,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);	
+				}
+				else
+				{
+						//Find min and max, x & y values
+						int MinX= Mathf.Min(TileX, TileX+DimX);
+						int MaxX= Mathf.Max(TileX, TileX+DimX);
+						int MinY= Mathf.Min(TileY, TileY+DimY);
+						int MaxY= Mathf.Max(TileY, TileY+DimY);
+
+						switch(TileTypeSelected)
+						{
+						case TileMap.TILE_SOLID:
+						case TileMap.TILE_OPEN:
+								for (int x=MinX;x <=MaxX; x++)
+								{
+										for (int y=MinY;y <=MaxY; y++)
+										{
+												if (TileMap.ValidTile(x,y))
+												{
+														GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)FloorHeight;
+														if (TileTypeSelected==TileMap.TILE_OPEN)
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;
+														}
+														else
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=0;	
+														}
+														UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);										
+												}
+										}	
+								}
+								break;
+						case TileMap.TILE_SLOPE_E:
+								{
+										int HeightToSet=FloorHeight;
+										if (MinX<TileX)
+										{//Slopes up to this point
+												HeightToSet=  (HeightToSet + (Mathf.Abs(DimX) * -1));
+										}
+										else
+										{//slopes up from this point
+												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										}
+										for (int x=MinX;x <=MaxX; x++)
+										{
+												for (int y=MinY;y <=MaxY; y++)
+												{
+														if ( 
+																(TileMap.ValidTile(x,y))
+																&&
+																(HeightToSet>=0)
+																&&
+																(HeightToSet<=15)
+														)
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
+																GameWorldController.instance.currentTileMap().Tiles[x,y].shockSteep=2;
+																UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,HeightToSet);	
+														}
+												}
+												HeightToSet++;
+										}
+								}								
+								break;
+						case TileMap.TILE_SLOPE_W:
+								{
+										int HeightToSet=FloorHeight;
+										if (MinX<TileX)
+										{//Slopes down this point
+												HeightToSet=  (HeightToSet + (Mathf.Abs(DimX) * +1));
+										}
+										else
+										{//slopes down from this point
+												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										}
+										for (int x=MinX;x <=MaxX; x++)
+										{
+												for (int y=MinY;y <=MaxY; y++)
+												{
+														if ( 
+																(TileMap.ValidTile(x,y))
+																&&
+																(HeightToSet>=0)
+																&&
+																(HeightToSet<=15)
+														)
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
+																GameWorldController.instance.currentTileMap().Tiles[x,y].shockSteep=2;
+																UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,HeightToSet);	
+														}
+												}
+												HeightToSet--;
+										}
+								}								
+								break;
+
+						case TileMap.TILE_SLOPE_N:
+								{
+										int HeightToSet=FloorHeight;
+										if (MinY<TileY)
+										{//Slopes up to this point
+												HeightToSet=  (HeightToSet + (Mathf.Abs(DimY) * -1));
+										}
+										else
+										{//slopes up from this point
+												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										}
+										for (int y=MinY;y <=MaxY; y++)
+										{
+												for (int x=MinX;x <=MaxX; x++)
+												{
+														if ( 
+																(TileMap.ValidTile(x,y))
+																&&
+																(HeightToSet>=0)
+																&&
+																(HeightToSet<=15)
+														)
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
+																GameWorldController.instance.currentTileMap().Tiles[x,y].shockSteep=2;
+																UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,HeightToSet);	
+														}
+												}
+												HeightToSet++;
+										}
+								}								
+								break;
+						case TileMap.TILE_SLOPE_S:
+								{
+										int HeightToSet=FloorHeight;
+										if (MinX<TileX)
+										{//Slopes down this point
+												HeightToSet=  (HeightToSet + (Mathf.Abs(DimY) * +1));
+										}
+										else
+										{//slopes down from this point
+												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										}
+										for (int y=MinY;y <=MaxY; y++)
+										{
+												for (int x=MinX;x <=MaxX; x++)
+												{
+														if ( 
+																(TileMap.ValidTile(x,y))
+																&&
+																(HeightToSet>=0)
+																&&
+																(HeightToSet<=15)
+														)
+														{
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
+																GameWorldController.instance.currentTileMap().Tiles[x,y].shockSteep=2;
+																UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,HeightToSet);	
+														}
+												}
+												HeightToSet--;
+										}
+								}								
+								break;
+
+						case TileMap.TILE_DIAG_SE:
+						case TileMap.TILE_DIAG_NW:
+								{//Turns the smallest square of this tile type in the tile
+										int MinSquare = Mathf.Abs(Mathf.Min(DimX,DimY));
+										for (int xy=0; xy<=MinSquare;xy++)
+										{
+												if (TileMap.ValidTile(MinX+ xy, MinY+xy))
+												{
+														GameWorldController.instance.currentTileMap().Tiles[MinX+ xy, MinY+xy].VisibleFaces[TileMap.vTOP]=1;	
+														UpdateTile(MinX+ xy, MinY+xy,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);	
+												}	
+										}
+										break;
+								}
+							case TileMap.TILE_DIAG_SW:
+							case TileMap.TILE_DIAG_NE:
+								{//Turns the smallest square of this tile type in the tile
+									int MinSquare = Mathf.Abs(Mathf.Min(DimX,DimY));
+									for (int xy=0; xy<=MinSquare;xy++)
+									{
+											if (TileMap.ValidTile(MaxX- xy, MinY+xy))
+											{
+													GameWorldController.instance.currentTileMap().Tiles[MaxX- xy, MinY+xy].VisibleFaces[TileMap.vTOP]=1;	
+													UpdateTile(MaxX- xy, MinY+xy,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);	
+											}	
+									}
+									break;
+
+								}
+						}
+						
+				}			
+		}
+
+		public void UpdateTile(int tileXtoUpdate, int tileYtoUpdate, int TileTypeSelected, int FloorTextureSelected, int WallTextureSelected, int FloorHeight)
+		{
+				bool ReRenderNeighbours=false;
+
+				if (!GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].NeedsReRender)
+				{
+						TileMapRenderer.DestroyTile(tileXtoUpdate, tileYtoUpdate);	
+				}
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].TileNeedsUpdate();
+
 				switch (TileTypeSelect.value)
 				{
-					case TileMap.TILE_SLOPE_E:
-					case TileMap.TILE_SLOPE_W:
-					case TileMap.TILE_SLOPE_N:
-					case TileMap.TILE_SLOPE_S:
-						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].shockSteep=1;
+				case TileMap.TILE_SLOPE_E:
+				case TileMap.TILE_SLOPE_W:
+				case TileMap.TILE_SLOPE_N:
+				case TileMap.TILE_SLOPE_S:
+						GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].shockSteep=2;
 						break;
 				}
-		
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType= (short)TileTypeSelect.value;
-			int FloorHeight=0;
-			if (int.TryParse(TileHeightDetails.text,out FloorHeight))
-			{
-				GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorHeight= (short)(FloorHeight*2);	
-			}
-			
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].floorTexture=(short)(FloorTextureSelect.value);
-			int ActualTextureIndex= GameWorldController.instance.currentTileMap().texture_map[FloorTextureSelect.value+48];
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
-			GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
-			//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
 
-				if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture!= WallTextureSelect.value)
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].tileType= (short)TileTypeSelected;
+
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].floorHeight= (short)(FloorHeight*2);	
+
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].floorTexture=(short)(FloorTextureSelected);
+				int ActualTextureIndex= GameWorldController.instance.currentTileMap().texture_map[FloorTextureSelected+48];
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].isWater=TileMap.isTextureWater(ActualTextureIndex);
+				GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].isLava=TileMap.isTextureLava(ActualTextureIndex);
+
+				if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].wallTexture!= WallTextureSelected)
 				{
-						if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].tileType==TileMap.TILE_SOLID)
+						if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].tileType==TileMap.TILE_SOLID)
 						{
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].North=(short)WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].South=(short)WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].East=(short)WallTextureSelect.value;
-							GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].West=(short)WallTextureSelect.value;
+								GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].North=(short)WallTextureSelected;
+								GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].South=(short)WallTextureSelected;
+								GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].East=(short)WallTextureSelected;
+								GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].West=(short)WallTextureSelected;
 						}
-						GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].wallTexture=(short)WallTextureSelect.value;
+						GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate].wallTexture=(short)WallTextureSelected;
 
-						if (TileY>0)
+						if (tileYtoUpdate>0)
 						{//Change its neighbour, only if the neighbour is not a solid
-							if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
-							{
-								GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].North=(short)WallTextureSelect.value;	
-								ReRenderNeighbours=true;
-							}
-						}
-
-						if (TileY<TileMap.TileMapSizeY)
-						{//Change its neighbour, only if the neighbour is not a solid
-								if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
+								if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate-1].tileType>TileMap.TILE_SOLID)
 								{
-									GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].South=(short)WallTextureSelect.value;	
-									ReRenderNeighbours=true;
+										GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate-1].North=(short)WallTextureSelected;	
+										ReRenderNeighbours=true;
 								}
 						}
 
-						if (TileX>0)
+						if (tileYtoUpdate<TileMap.TileMapSizeY)
 						{//Change its neighbour, only if the neighbour is not a solid
-								if (GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
+								if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate+1].tileType>TileMap.TILE_SOLID)
 								{
-									GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].East=(short)WallTextureSelect.value;	
-									ReRenderNeighbours=true;
+										GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate,tileYtoUpdate+1].South=(short)WallTextureSelected;	
+										ReRenderNeighbours=true;
 								}
 						}
 
-						if (TileX<TileMap.TileMapSizeX)
+						if (tileXtoUpdate>0)
 						{//Change its neighbour, only if the neighbour is not a solid
-								if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
+								if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate-1,tileYtoUpdate].tileType>TileMap.TILE_SOLID)
 								{
-									GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].West=(short)WallTextureSelect.value;
-									ReRenderNeighbours=true;
+										GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate-1,tileYtoUpdate].East=(short)WallTextureSelected;	
+										ReRenderNeighbours=true;
 								}
 						}
 
+						if (tileXtoUpdate<TileMap.TileMapSizeX)
+						{//Change its neighbour, only if the neighbour is not a solid
+								if (GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate+1,tileYtoUpdate].tileType>TileMap.TILE_SOLID)
+								{
+										GameWorldController.instance.currentTileMap().Tiles[tileXtoUpdate+1,tileYtoUpdate].West=(short)WallTextureSelected;
+										ReRenderNeighbours=true;
+								}
+						}
 				}
-
-
-			TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],true,false,false,true);
-			TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],false,false,false,true);
-
-
 
 				if (ReRenderNeighbours)
 				{
@@ -292,13 +509,15 @@ public class IngameEditor : GuiBase_Draggable {
 								{
 										if (! ((x==0) && (y==0)))//Not the middle
 										{
-												if  ((x+TileX<=TileMap.TileMapSizeX) && (x+TileX>=0))
+												if  ((x+tileXtoUpdate<=TileMap.TileMapSizeX) && (x+tileXtoUpdate>=0))
 												{
-														if ((y+TileY<=TileMap.TileMapSizeY) && (y+TileY>=0))
+														if ((y+tileYtoUpdate<=TileMap.TileMapSizeY) && (y+tileYtoUpdate>=0))
 														{
-															DestroyTile(x+TileX,y+TileY);
-															TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
-															TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+x,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],false,false,false,true);
+																if (!GameWorldController.instance.currentTileMap().Tiles[x+tileXtoUpdate, y+tileYtoUpdate].NeedsReRender)
+																{
+																		TileMapRenderer.DestroyTile(x+tileXtoUpdate, y+tileYtoUpdate);	
+																}															
+																GameWorldController.instance.currentTileMap().Tiles[x+tileXtoUpdate,y+tileYtoUpdate].TileNeedsUpdate();
 														}	
 												}
 										}
@@ -307,45 +526,41 @@ public class IngameEditor : GuiBase_Draggable {
 						}
 
 				}
-
-
-			RefreshTileMap();
-
 		}
 
 		public void Teleport()
 		{
-			float targetX=(float)TileX*1.2f + 0.6f;
-			float targetY= (float)TileY*1.2f + 0.6f;
+				float targetX=(float)TileX*1.2f + 0.6f;
+				float targetY= (float)TileY*1.2f + 0.6f;
 
-			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TileX,TileY)))*0.15f;
-			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+				float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TileX,TileY)))*0.15f;
+				GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 		}
 
 		public void SelectCurrentTile()
 		{
-			TileX=TileMap.visitTileX;
-			TileY=TileMap.visitTileY;			
-			RefreshTileInfo();
+				TileX=TileMap.visitTileX;
+				TileY=TileMap.visitTileY;			
+				RefreshTileInfo();
 		}
 
 		public void SwitchPanel(int Panel)
 		{
-			TileMapDetailsPanel.gameObject.SetActive(Panel==0);
-			ObjectDetailsPanel.gameObject.SetActive(Panel==1);
-			if (Panel==1)
-			{
-				UpdateObjectsDropDown();
-			}
+				TileMapDetailsPanel.gameObject.SetActive(Panel==0);
+				ObjectDetailsPanel.gameObject.SetActive(Panel==1);
+				if (Panel==1)
+				{
+						UpdateObjectsDropDown();
+				}
 		}
 
 
 		public void RefreshObjectInfo()
 		{
-			int i= ObjectSelect.value;
-			string ObjectName=ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
-			int item_id= GameWorldController.instance.CurrentObjectList().objInfo[i].item_id;
-			ObjectInfo.text= ObjectName + "\n" + "Item id = " + item_id;		
+				int i= ObjectSelect.value;
+				string ObjectName=ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+				int item_id= GameWorldController.instance.CurrentObjectList().objInfo[i].item_id;
+				ObjectInfo.text= ObjectName + "\n" + "Item id = " + item_id;		
 		}
 
 

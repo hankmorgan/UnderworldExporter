@@ -10,7 +10,7 @@ public class Map : object_base {
 	protected override void Start ()
 	{
 		base.Start();
-		objInt().isquant=0; 
+	//	objInt().isquant=0; 
 	}
 
 	public override bool use ()
