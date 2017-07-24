@@ -10,29 +10,32 @@ A trigger that fires when the player character enters it
 	{
 		base.Start ();
 		BoxCollider box=this.gameObject.AddComponent<BoxCollider>();
-		box.transform.position = this.gameObject.transform.position;
-		box.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+		//box.transform.position = this.gameObject.transform.position;
+		//box.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+		box.size = new Vector3(1.2f, 1.2f, 1.2f);
 		box.isTrigger=true;
 
-			//Check if this trap points to a teleport trap that goes to another level
-			if ( (objInt().tileX<TileMap.TileMapSizeX) && (objInt().tileY<TileMap.TileMapSizeY))
+		//Check if this trap points to a teleport trap that goes to another level
+		if ( (objInt().tileX<TileMap.TileMapSizeX) && (objInt().tileY<TileMap.TileMapSizeY))
+		{
+			if (objInt().link!=0)
 			{
-				if (objInt().link!=0)
+				GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+				if (triggerObj!=null)
 				{
-					GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
-					if (triggerObj!=null)
+					if (triggerObj.GetComponent<a_teleport_trap>() !=null)
 					{
-						if (triggerObj.GetComponent<a_teleport_trap>() !=null)
+						if (triggerObj.GetComponent<a_teleport_trap>().objInt().zpos!=0)
 						{
-							if (triggerObj.GetComponent<a_teleport_trap>().objInt().zpos!=0)
+							if (_RES==GAME_UW1)
 							{
-								GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStair);
-							}
+							GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStair);
+							}						
 						}
-					}	
+					}
 				}	
+			}	
 		}
-
 	}
 
 	void OnTriggerEnter(Collider other)

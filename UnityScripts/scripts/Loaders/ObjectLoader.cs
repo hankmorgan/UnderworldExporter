@@ -1234,10 +1234,13 @@ public class ObjectLoader : Loader {
 								}
 						case ObjectInteraction.A_MOVE_TRIGGER:
 								{
-										if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
+										if (tileMap.Tiles[x,y].tileType!=TileMap.TILE_SOLID)
 										{
+											if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
+											{
 												int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
 												offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+											}	
 										}
 										break;
 								}

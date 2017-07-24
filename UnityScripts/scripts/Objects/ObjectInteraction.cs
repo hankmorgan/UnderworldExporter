@@ -1111,7 +1111,7 @@ public class ObjectInteraction : UWEBase {
 				if (PlaySoundEffects)
 				{
 					objInteract.aud=myObj.AddComponent<AudioSource>();
-					objInteract.aud.maxDistance=5f;//TODO:Tweak this distance
+					objInteract.aud.maxDistance=3f;//TODO:Tweak this distance
 				}
 			return objInteract;
 		}

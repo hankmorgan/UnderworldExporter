@@ -88,7 +88,7 @@ public class TileInfo : Loader {
 		//public long address;	//The file address of the tile in question.
 
 		public bool NeedsReRender=false;
-
+		//public bool HasTeleport=false;
 
 		///Some stuff I need to obsolete
 		/// 

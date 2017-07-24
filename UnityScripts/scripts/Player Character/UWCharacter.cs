@@ -226,12 +226,12 @@ public class UWCharacter : Character {
 		playerMotor.movement.maxForwardSpeed = flySpeed * speedMultiplier;
 		if (((Input.GetKeyDown (KeyCode.R)) || (Input.GetKey (KeyCode.R))) && (WindowDetectUW.WaitingForInput == false)) {
 			//Fly up
-			this.GetComponent<CharacterController> ().Move (new Vector3 (0, 0.2f * Time.deltaTime, 0));
+			this.GetComponent<CharacterController> ().Move (new Vector3 (0, 0.2f * Time.deltaTime* speedMultiplier, 0));
 		}
 		else
 			if (((Input.GetKeyDown (KeyCode.V)) || (Input.GetKey (KeyCode.V))) && (WindowDetectUW.WaitingForInput == false)) {
 				//Fly down
-				this.GetComponent<CharacterController> ().Move (new Vector3 (0, -0.2f * Time.deltaTime, 0));
+			this.GetComponent<CharacterController> ().Move (new Vector3 (0, -0.2f * Time.deltaTime* speedMultiplier, 0));
 			}
 	}
 
@@ -283,7 +283,7 @@ public class UWCharacter : Character {
 		if (JustTeleported)
 		{
 			teleportedTimer+=Time.deltaTime;
-			if (teleportedTimer>=2f)
+			if (teleportedTimer>=0.1f)
 			{
 				JustTeleported=false;
 			}

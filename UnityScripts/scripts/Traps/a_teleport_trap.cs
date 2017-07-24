@@ -28,7 +28,9 @@ public class a_teleport_trap : trap_base {
 
 		float targetX=(float)objInt().quality*1.2f + 0.6f;
 		float targetY= (float)objInt().owner*1.2f + 0.6f;
-		GameWorldController.instance.playerUW.JustTeleported=true;
+
+
+		GameWorldController.instance.playerUW.JustTeleported=true;	
 		GameWorldController.instance.playerUW.teleportedTimer=0f;
 		if (objInt().zpos==0)
 		{//Stay on this level.

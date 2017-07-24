@@ -656,6 +656,28 @@ public class MainMenuHud : GuiBase {
 		{
 				
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
+				switch(_RES)
+				{
+				case GAME_SHOCK:
+				case GAME_TNOVA:
+						break;
+				case GAME_UW2:
+						{
+							if (GameWorldController.instance.startLevel==0)
+							{//Avatar's bedroom
+								GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
+							}
+							break;
+						}						
+				default:
+						{
+							if (GameWorldController.instance.startLevel==0)
+							{//entrance to the abyss
+								GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;
+							}
+							break;
+						}			
+				}
 			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			GameWorldController.instance.playerUW.playerController.enabled=true;

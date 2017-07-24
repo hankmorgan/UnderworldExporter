@@ -353,6 +353,11 @@ public class GameWorldController : UWEBase {
 				switch(res)
 				{
 				case GAME_TNOVA:
+						GameWorldController.instance.playerUW.XAxis.enabled=true;
+						GameWorldController.instance.playerUW.YAxis.enabled=true;
+						GameWorldController.instance.playerUW.MouseLookEnabled=true;
+						GameWorldController.instance.playerUW.speedMultiplier=20;
+						GameWorldController.instance.playerUW.playerCam.farClipPlane=4000f;
 						break;
 				case GAME_SHOCK:
 						palLoader = new PaletteLoader();
@@ -363,6 +368,10 @@ public class GameWorldController : UWEBase {
 						objectMaster=new ObjectMasters();
 						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
 						ShockObjProp= new ObjectPropLoader();
+						GameWorldController.instance.playerUW.XAxis.enabled=true;
+						GameWorldController.instance.playerUW.YAxis.enabled=true;
+						GameWorldController.instance.playerUW.MouseLookEnabled=true;
+						GameWorldController.instance.playerUW.speedMultiplier=20;
 						break;
 				default:
 						MusicController.Begin();
@@ -403,6 +412,7 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.window.SetFullScreen();
 						playerUW.isFlying=true;
 						playerUW.playerMotor.enabled=true;
+						GameWorldController.instance.playerUW.playerCam.backgroundColor=Color.white;
 						SwitchTNovaMap(startLevel);
 						return;
 				case GAME_SHOCK:
