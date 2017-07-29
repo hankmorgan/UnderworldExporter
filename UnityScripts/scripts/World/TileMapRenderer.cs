@@ -4512,17 +4512,18 @@ public class TileMapRenderer : Loader{
 
 		public static bool RenderTNovaMap(Transform parent, char[] data)
 		{
-				long[,] height = new long[513,513];
-				int[,] texture = new int[513,513];
-				int[] textureCount=new int[64];
-				int[] textureUsage=new int[64];
+				short[,] height = new short[513,513];
+				short[,] texture = new short[513,513];
+				short[,] rotation = new short[513,513];
+				short[] textureCount=new short[64];
+				short[] textureUsage=new short[64];
 
 				float brushSize=12f;
 
 						long address_pointer=0;
 						address_pointer=0;  
 						int meshcount=1;
-						long maxHeight=0;long minHeight=0;
+						short maxHeight=0;short minHeight=0;
 						for (int x=0; x<=height.GetUpperBound(0);x++)
 						{
 								for (int y=0; y<=height.GetUpperBound(1);y++)
@@ -4539,12 +4540,14 @@ public class TileMapRenderer : Loader{
 										if (byte0 > 63)
 												byte0=byte0-64;
 
-										texture[x,y]=byte0;
+										texture[x,y]=(short)byte0;
 
-										byte1 =byte1 & 0xF0;         //AND with 11110000b: remove shadow+rotation in lower half of byte
-										height[x,y] = (byte2 <<4) | (byte1 >> 4);
+										//byte1 =byte1 & 0xF0;         //AND with 11110000b: remove shadow+rotation in lower half of byte
+										rotation[x,y]= (short)((byte1 & 0x0F) >>2);
+
+										height[x,y] = (short)((byte2 <<4) | ((byte1 & 0xF0) >> 4));
 										if (byte2 > 0x7F)            //negative height
-										{height[x,y] = height[x,y] - 4096;}
+										{height[x,y] = (short)(height[x,y] - 4096);}
 										//height[x,y] =height[x,y] + 2048;
 										if ((x==0) && (y==0))
 										{
@@ -4580,19 +4583,19 @@ public class TileMapRenderer : Loader{
 												}
 										}
 
-										int textureUsageCounter=0;
+										short textureUsageCounter=0;
 										//Clean up my textures
-										for (int i=0; i<=textureUsage.GetUpperBound(0);i++)
+										for (short i=0; i<=textureUsage.GetUpperBound(0);i++)
 										{
 												if (textureCount[i]!=0)
 												{
-														textureUsage[i] = textureUsageCounter++;
+												textureUsage[i] = textureUsageCounter++;
 												}
 										}
 
 										Material[] mats = new Material[textureUsageCounter];
 										int matcounter=0;
-										for (int i=0; i<=textureUsage.GetUpperBound(0);i++)
+										for (short i=0; i<=textureUsage.GetUpperBound(0);i++)
 										{
 												if (textureCount[i]!=0)
 												{
@@ -4636,12 +4639,43 @@ public class TileMapRenderer : Loader{
 														verts[1+ (4*FaceCounter)]=  new Vector3(cornerX+0.0f, cornerY+brushSize, heights[1]);
 														verts[2+ (4*FaceCounter)]=  new Vector3(cornerX +brushSize,cornerY+brushSize, heights[2]);
 														verts[3+ (4*FaceCounter)]=  new Vector3(cornerX +brushSize,cornerY+0.0f, heights[3]);
+														
+												switch (rotation[x,y])
+												{
+												case 1://ok
+														uvs[1+ (4*FaceCounter)]=new Vector2(0.0f,+1.0f);
+														uvs[2+ (4*FaceCounter)]=new Vector2(+1.0f,+1.0f);
+														uvs[3+ (4*FaceCounter)]=new Vector2(+1.0f,0.0f); 
+														uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);	
+														break;
+												case 2://ok
+														uvs[0+ (4*FaceCounter)]=new Vector2(1f,0f);	
+														uvs[1+ (4*FaceCounter)]=new Vector2(0f,0f);
+														uvs[2+ (4*FaceCounter)]=new Vector2(0f,1f); 
+														uvs[3+ (4*FaceCounter)]=new Vector2(1f,1f);
+																											 
+														break;
+												case 3:
+														uvs[3+ (4*FaceCounter)]=new Vector2(0.0f,1.0f);
+														uvs[0+ (4*FaceCounter)]=new Vector2(1.0f,1.0f);
+														uvs[1+ (4*FaceCounter)]=new Vector2(1.0f,0.0f);
+														uvs[2+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+														break;
 
+												case 0:
+												default://ok
+														uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f);
+														uvs[1+ (4*FaceCounter)]=new Vector2(1.0f,1.0f);
+														uvs[2+ (4*FaceCounter)]=new Vector2(1.0f,0.0f);
+														uvs[3+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+														break;
+
+												}
 														//Allocate UVs
-														uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
-														uvs[1+ (4*FaceCounter)]=new Vector2(0.0f,1.0f);
-														uvs[2+ (4*FaceCounter)]=new Vector2(1.0f,1.0f);
-														uvs[3+ (4*FaceCounter)]=new Vector2(1.0f,0.0f);  
+													//	uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+														//uvs[1+ (4*FaceCounter)]=new Vector2(0.0f,1.0f);
+														//uvs[2+ (4*FaceCounter)]=new Vector2(1.0f,1.0f);
+														//uvs[3+ (4*FaceCounter)]=new Vector2(1.0f,0.0f);  
 
 														FaceCounter++;
 

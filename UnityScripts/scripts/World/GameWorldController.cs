@@ -357,7 +357,6 @@ public class GameWorldController : UWEBase {
 						GameWorldController.instance.playerUW.YAxis.enabled=true;
 						GameWorldController.instance.playerUW.MouseLookEnabled=true;
 						GameWorldController.instance.playerUW.speedMultiplier=20;
-						GameWorldController.instance.playerUW.playerCam.farClipPlane=4000f;
 						break;
 				case GAME_SHOCK:
 						palLoader = new PaletteLoader();
@@ -1450,7 +1449,7 @@ public class GameWorldController : UWEBase {
 
 		public void SwitchTNovaMap(int levelNo)
 		{
-				string path =Loader.BasePath + "MAPS\\smug.res";
+				string path =Loader.BasePath + "MAPS\\roadmap.res";
 				char[] archive_ark;
 				if (DataLoader.ReadStreamFile(path, out archive_ark))
 				{
@@ -1460,7 +1459,7 @@ public class GameWorldController : UWEBase {
 							return;
 						}
 						playerUW.playerCam.GetComponent<Light>().range=200f;
-						playerUW.playerCam.farClipPlane=200f;
+						playerUW.playerCam.farClipPlane=3000f;
 						TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
 
 				}
