@@ -547,12 +547,12 @@ public class UWCombat : Combat {
 		{
 			WeaponSkill= Origin.PlayerSkills.GetSkill(Skills.SkillUnarmed);
 		}
-		HitScore=Origin.PlayerSkills.Attack/2+WeaponSkill+ Random.Range(1,5);
+		HitScore=(Origin.PlayerSkills.Attack/2) + WeaponSkill;
 		if (Target.GetComponent<NPC>()!=null)
 		{//Target is an NPC
 				//Need to calculate this based on npc level
-
-			DefenseScore=-1;	//Until I figure out what values drive this, always hit.
+			DefenseScore=GameWorldController.instance.objDat.critterStats[Target.GetComponent<NPC>().objInt().item_id-64].Defence;
+			//DefenseScore=-1;	//Until I figure out what values drive this, always hit.
 		}
 		else
 		{

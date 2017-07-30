@@ -101,6 +101,7 @@ public class ObjectDatLoader : Loader {
 				public int Blood;
 				public int GeneralType;
 				public int Passive;
+				public int Defence;
 				public int Speed;
 				public int Poison;
 				public int Category;
@@ -109,6 +110,8 @@ public class ObjectDatLoader : Loader {
 				public int[] AttackChanceToHit;//What defense rolls against to save against this attack  = new int[3];
 				public int[] AttackDamage; //the damage of the choose attack.
 				public int[] AttackProbability; //Probability of which attack/animation to execute
+
+
 				//public int ProbPercent1;
 				//public int ProbValue2;
 				//public int ProbPercent2;
@@ -201,6 +204,7 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].Blood=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
 					critterStats[j].GeneralType= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//General Type
 					critterStats[j].Passive=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
+					critterStats[j].Defence=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
 					critterStats[j].Speed=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
 					critterStats[j].Poison=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8);//Poison Damage
 					critterStats[j].Category= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8);//Category

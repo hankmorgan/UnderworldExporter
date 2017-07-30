@@ -436,7 +436,7 @@ public class GameWorldController : UWEBase {
 						playerUW.isFlying=true;
 						playerUW.playerMotor.enabled=true;
 						GameWorldController.instance.playerUW.playerCam.backgroundColor=Color.white;
-						SwitchTNovaMap(startLevel);
+						SwitchTNovaMap("");
 						return;
 				case GAME_SHOCK:
 						TileMapRenderer.EnableCollision=false;
@@ -1363,12 +1363,7 @@ public class GameWorldController : UWEBase {
 				}
 		}
 
-		public char[] tilemapfiledata()
-		{
-				return lev_ark_file_data;
-		}
-
-
+	
 		/// <summary>
 		/// Inits the B globals.
 		/// </summary>
@@ -1422,6 +1417,10 @@ public class GameWorldController : UWEBase {
 			}
 		}
 
+		/// <summary>
+		/// Writes the BGlobals data to file
+		/// </summary>
+		/// <param name="SlotNo">Slot no.</param>
 		public void WriteBGlobals(int SlotNo)
 		{
 			int fileSize=0;
@@ -1470,23 +1469,35 @@ public class GameWorldController : UWEBase {
 			return DataToCopy;
 		}
 
+		/// <summary>
+		/// Switchs to a Terr nova map.
+		/// </summary>
+		/// <param name="levelFileName">Level file name.</param>
+		public void SwitchTNovaMap(string levelFileName)
+		{			
+			string path;
+			if (levelFileName=="")
+			{
+				path= NovaLevelSelect.MapSelected;
+			}
+			else
+			{
+				path=levelFileName;//Loader.BasePath + "MAPS\\roadmap.res";		
+			}
+			 
+			char[] archive_ark;
+			if (DataLoader.ReadStreamFile(path, out archive_ark))
+			{
+					DataLoader.Chunk lev_ark;
+					if (!DataLoader.LoadChunk(archive_ark, 86, out lev_ark ))
+					{
+						return;
+					}
+					playerUW.playerCam.GetComponent<Light>().range=200f;
+					playerUW.playerCam.farClipPlane=3000f;
+					TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
 
-		public void SwitchTNovaMap(int levelNo)
-		{
-				string path =Loader.BasePath + "MAPS\\roadmap.res";
-				char[] archive_ark;
-				if (DataLoader.ReadStreamFile(path, out archive_ark))
-				{
-						DataLoader.Chunk lev_ark;
-						if (!DataLoader.LoadChunk(archive_ark, 86, out lev_ark ))
-						{
-							return;
-						}
-						playerUW.playerCam.GetComponent<Light>().range=200f;
-						playerUW.playerCam.farClipPlane=3000f;
-						TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
-
-				}
+			}
 		}
 
 }

@@ -2414,7 +2414,7 @@ fprintf(LOGFILE, "\n\tName\tAmmo\tDurability");
 */
 j=64;
 	fprintf(LOGFILE, "\nAddress is %d\nCritters\n", addressPtr);
-	fprintf(LOGFILE, "\nName\tAddress\tLevel\tUnk1\tUnk2\tUnk3\tAvgHit\tAttackPower\tUnk4\tRemainsBody\tRemainsBlood\tGeneralType\tPassive\tUnk5\tSpeed\tUnk6\tUnk7\tPoison\tCategory\tEquipDamage\tUnk8\tProbValue1\tProb1_1\tProb_1_2\tProbPercent1\tProbValue2\tProb2_1\tProb_2_2\tProbPercent2\tProbValue3\tProb3_1\tProb_3_2\tProbPercent3\tExp\t73");
+	fprintf(LOGFILE, "\nName\tAddress\tLevel\tUnk1\tUnk2\tUnk3\tAvgHit\tAttackPower\tUnk4\tRemainsBody\tRemainsBlood\tGeneralType\tPassive\tDefence\tSpeed\tUnk6\tUnk7\tPoison\tCategory\tEquipDamage\tUnk8\tProbValue1\tProb1_1\tProb_1_2\tProbPercent1\tProbValue2\tProb2_1\tProb_2_2\tProbPercent2\tProbValue3\tProb3_1\tProb_3_2\tProbPercent3\tExp\t73");
 	for (int i = 0; i < 64; i++)
 		{//Critters
 		fprintf(LOGFILE, "\n%s\t", objectMasters[j].desc);
@@ -2430,7 +2430,7 @@ j=64;
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0x0F);//Remains blood
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 9, 8));//General Type
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xA, 8));//Passiveness
-		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xB, 8));//unk5
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xB, 8));//Defence
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xC, 8));//Speed
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xD, 8));//unk6
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xE, 8));//unk7

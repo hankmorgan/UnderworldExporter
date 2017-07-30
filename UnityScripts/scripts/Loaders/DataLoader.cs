@@ -30,26 +30,37 @@ public class DataLoader :Loader {
 		};
 
 
-
+		/// <summary>
+		/// Reads the file into the file buffer
+		/// </summary>
+		/// <returns><c>true</c>, if stream file was  read, <c>false</c> otherwise.</returns>
+		/// <param name="Path">Path.</param>
+		/// <param name="buffer">Buffer.</param>
 		public static bool ReadStreamFile(String Path, out char[] buffer)
-		{
-				FileStream fs= File.OpenRead(Path);
-				if (fs.CanRead)
-				{
-						buffer= new char[fs.Length];
-						for (int i =0; i<fs.Length;i++)
-						{
-								buffer[i]=(char)fs.ReadByte();
-						}
-						fs.Close();
-						return true;
-				}
-				else
-				{
-						fs.Close();
-						buffer= new char[0];
-						return false;
-				}
+		{				
+			if (!File.Exists(Path))
+			{
+				Debug.Log("File not found : " + Path);
+				buffer=null;
+				return false;
+			}
+			FileStream fs= File.OpenRead(Path);
+			if (fs.CanRead)
+			{
+					buffer= new char[fs.Length];
+					for (int i =0; i<fs.Length;i++)
+					{
+							buffer[i]=(char)fs.ReadByte();
+					}
+					fs.Close();
+					return true;
+			}
+			else
+			{
+					fs.Close();
+					buffer= new char[0];
+					return false;
+			}
 		}
 
 
@@ -69,6 +80,13 @@ public class DataLoader :Loader {
 				return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1 ;		//24 was 32
 		}
 
+		/// <summary>
+		/// Gets the value at the specified address in the file buffer and performs any necessary -endian conversions
+		/// </summary>
+		/// <returns>The value at address.</returns>
+		/// <param name="buffer">Buffer.</param>
+		/// <param name="Address">Address.</param>
+		/// <param name="size">Size of the data in bits</param>
 		public static long getValAtAddress(char[] buffer, long Address, int size)
 		{//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
 				switch (size)
@@ -83,7 +101,8 @@ public class DataLoader :Loader {
 						{return ConvertInt32(buffer[Address], buffer[Address + 1], buffer[Address + 2], buffer[Address + 3]); }
 				default:
 						{
-								return -1;
+							Debug.Log("Invalid data size in getValAtAddress");
+							return -1;
 						}
 				}
 		}
