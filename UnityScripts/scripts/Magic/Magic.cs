@@ -2535,8 +2535,16 @@ public class Magic : UWEBase {
 				}
 				else
 				{
-					caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-					caster.GetComponent<AudioSource>().Play();	
+					if (caster.name.Contains("_NPC_Launcher"))
+					{
+						caster.transform.parent.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+						caster.transform.parent.GetComponent<AudioSource>().Play();		
+					}
+					else
+					{
+						caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+						caster.GetComponent<AudioSource>().Play();	
+					}
 				}		
 			}
 			if (projectile!=null)

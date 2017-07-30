@@ -9,9 +9,9 @@ using RAIN.Minds;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
 	private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-		public int poisondamage;
-		public int AttackPower;
-		public int AvgHit;
+		//public int poisondamage;
+		//public int AttackPower;
+		//public int AvgHit;
 		//public int height;
 		//public int radius;
 
@@ -65,6 +65,8 @@ public class NPC : object_base {
 	///Angle index * Anim Range give AI_ANIM_X value to pick animation
 	public int AnimRange=1;
 	public int curranim=0;
+
+	public int CurrentAttack;//What attack the NPC is currently executing.
 	
 	//public int CalcFacingForDebug;
 
@@ -180,9 +182,9 @@ public class NPC : object_base {
 	protected override void Start () {
 		base.Start();
 		NPC_IDi=objInt().item_id;
-		poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
-		AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
-		AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
+		//poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
+		//AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
+		//AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
 		//height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
 		//radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
 		
@@ -1204,15 +1206,17 @@ public class NPC : object_base {
 			}
 			else
 			{
-			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
+			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackDamage[CurrentAttack]);	
+			short ToHit  =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackChanceToHit[CurrentAttack]);	
+										//(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{	
 					//Roll for a hit
-					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillDefense, Random.Range(0,35)))
+					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillDefense,ToHit))
 					{						
 						short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
 						short playerDefence = (short)GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense);
-						attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
+						//attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
 						//Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
 						if (playerArmour> attackDamage)
 						{

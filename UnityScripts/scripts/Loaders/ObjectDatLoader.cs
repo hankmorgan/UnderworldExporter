@@ -105,12 +105,15 @@ public class ObjectDatLoader : Loader {
 				public int Poison;
 				public int Category;
 				public int EquipDamage;
-				public int ProbValue1;
-				public int ProbPercent1;
-				public int ProbValue2;
-				public int ProbPercent2;
-				public int ProbValue3;
-				public int ProbPercent3;
+				//public int ProbValue1;
+				public int[] AttackChanceToHit;//What defense rolls against to save against this attack  = new int[3];
+				public int[] AttackDamage; //the damage of the choose attack.
+				public int[] AttackProbability; //Probability of which attack/animation to execute
+				//public int ProbPercent1;
+				//public int ProbValue2;
+				//public int ProbPercent2;
+				//public int ProbValue3;
+				//public int ProbPercent3;
 				public int Exp;
 		};
 
@@ -202,12 +205,30 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].Poison=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8);//Poison Damage
 					critterStats[j].Category= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8);//Category
 					critterStats[j].EquipDamage= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
-					critterStats[j].ProbValue1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x13, 16);//Probability1
-					critterStats[j].ProbPercent1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x15, 8);//Probab1
-					critterStats[j].ProbValue2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x16, 16);//Probability2
-					critterStats[j].ProbPercent2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x18, 8);//Probab2
-					critterStats[j].ProbValue3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x19, 16);//Probability3
-					critterStats[j].ProbPercent3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);//Probab3
+					
+					critterStats[j].AttackChanceToHit=new int[3];
+					critterStats[j].AttackDamage=new int[3];
+					critterStats[j].AttackProbability=new int[3];  
+
+					critterStats[j].AttackChanceToHit[0] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x13, 8);
+					critterStats[j].AttackDamage[0] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x14, 8);
+					critterStats[j].AttackProbability[0]=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x15, 8);
+
+					critterStats[j].AttackChanceToHit[1] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x16, 8);
+					critterStats[j].AttackDamage[1] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x17, 8);
+					critterStats[j].AttackProbability[1]=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x18, 8);
+
+					critterStats[j].AttackChanceToHit[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x19, 8);
+					critterStats[j].AttackDamage[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1A, 8);
+					critterStats[j].AttackProbability[2]=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);
+
+
+					//critterStats[j].ProbValue1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x13, 16);//Probability1
+					//critterStats[j].ProbPercent1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x15, 8);//Probab1
+					//critterStats[j].ProbValue2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x16, 16);//Probability2
+					//critterStats[j].ProbPercent2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x18, 8);//Probab2
+					//critterStats[j].ProbValue3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x19, 16);//Probability3
+					//critterStats[j].ProbPercent3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);//Probab3
 					critterStats[j].Exp= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp
 					add_ptr = add_ptr + 48;
 				j++;

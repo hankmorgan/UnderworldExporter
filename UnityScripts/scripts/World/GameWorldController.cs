@@ -322,6 +322,30 @@ public class GameWorldController : UWEBase {
 				
 		instance=this;
 		AtMainMenu=true;
+		switch(_RES)
+		{
+		case GAME_SHOCK:
+		case GAME_TNOVA:
+				break;
+		case GAME_UW2:
+				{
+					if (GameWorldController.instance.startLevel==0)
+					{//Avatar's bedroom
+						GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
+					}
+					break;
+				}						
+		default:
+				{
+					if (GameWorldController.instance.startLevel==0)
+					{//entrance to the abyss
+						GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;
+					}
+					break;
+				}			
+		}
+
+
 		return;
 
 	}

@@ -2414,40 +2414,44 @@ fprintf(LOGFILE, "\n\tName\tAmmo\tDurability");
 */
 j=64;
 	fprintf(LOGFILE, "\nAddress is %d\nCritters\n", addressPtr);
-	fprintf(LOGFILE, "\nName\tLevel\tAvgHit\tAttackPower\tRemainsBody\tRemainsBlood\tGeneralType\tPassive\tSpeed\tPoison\tCategory\tEquipDamage\tProbValue1\tProbPercent1\tProbValue2\tProbPercent2\tProbValue3\tProbPercent3\tExp\t73");
+	fprintf(LOGFILE, "\nName\tAddress\tLevel\tUnk1\tUnk2\tUnk3\tAvgHit\tAttackPower\tUnk4\tRemainsBody\tRemainsBlood\tGeneralType\tPassive\tUnk5\tSpeed\tUnk6\tUnk7\tPoison\tCategory\tEquipDamage\tUnk8\tProbValue1\tProb1_1\tProb_1_2\tProbPercent1\tProbValue2\tProb2_1\tProb_2_2\tProbPercent2\tProbValue3\tProb3_1\tProb_3_2\tProbPercent3\tExp\t73");
 	for (int i = 0; i < 64; i++)
 		{//Critters
-	//	fprintf(LOGFILE, "\n%s", objectMasters[j].desc);
-		fprintf(LOGFILE, "\n%d", getValAtAddress(obj_dat, addressPtr + 0, 8));//Level
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 1, 8));
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 2, 8));
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 3, 8));
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 4, 16));//Average Hitpoints
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Attack power
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 7, 8));
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0xF0);//Remains body
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0x0F);//Remains blood
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 9, 8));//General Type
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xA, 8));//Passiveness
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xB, 8));
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xC, 8));//Speed
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xD, 16));
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xF, 8));//Poison Damage
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x10, 8));//Category
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x11, 8));//Equipment damage
-		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x12, 8));//?
-
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x13, 16));//Probability1
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x15, 8));//Probab1
-
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x16, 16));//Probability2
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x18, 8));//Probab2
-
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x19, 16));//Probability3
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x1B, 8));//Probab3
-
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x28, 16));//Exp
-		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x2F, 8));
+		fprintf(LOGFILE, "\n%s\t", objectMasters[j].desc);
+		fprintf(LOGFILE, " %d\t", addressPtr);
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0, 8));//Level
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 1, 8));//unk1
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 2, 8));//unk2
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 3, 8));//unk3
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 4, 16));//Average Hitpoints
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 6, 8));//Attack power
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 7, 8));//unk4
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0xF0);//Remains body
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0x0F);//Remains blood
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 9, 8));//General Type
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xA, 8));//Passiveness
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xB, 8));//unk5
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xC, 8));//Speed
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xD, 8));//unk6
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xE, 8));//unk7
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0xF, 8));//Poison Damage
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x10, 8));//Category
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x11, 8));//Equipment damage
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x12, 8));//? unk8
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x13, 16));//Probability1
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x13, 8));//Probability1_1//Attack type?
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x14, 8));//Probability1_2//Damage of attack type
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x15, 8));//Probab1 percent//Probability to use attack
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x16, 16));//Probability2
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x16, 8));//Probability2_1//Attack type?
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x17, 8));//Probability2_2//Probability to use type?
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x18, 8));//Probab2
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x19, 16));//Probability3
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x19, 8));//Probability3_1//Attack type?
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x1A, 8));//Probability3_2//Probability to use type?
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x1B, 8));//Probab3
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x28, 16));//Exp
+		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x2F, 8));//Always 73
 		addressPtr = addressPtr + 48;
 		j++;
 		}
