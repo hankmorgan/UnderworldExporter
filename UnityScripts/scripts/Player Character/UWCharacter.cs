@@ -224,6 +224,8 @@ public class UWCharacter : Character {
 	{
 		playerMotor.movement.maxFallSpeed = 0.0f;
 		playerMotor.movement.maxForwardSpeed = flySpeed * speedMultiplier;
+		playerMotor.movement.maxSidewaysSpeed=playerMotor.movement.maxForwardSpeed*2/3;
+		playerMotor.movement.maxBackwardsSpeed=playerMotor.movement.maxForwardSpeed/3;
 		if (((Input.GetKeyDown (KeyCode.R)) || (Input.GetKey (KeyCode.R))) && (WindowDetectUW.WaitingForInput == false)) {
 			//Fly up
 			this.GetComponent<CharacterController> ().Move (new Vector3 (0, 0.2f * Time.deltaTime* speedMultiplier, 0));
@@ -238,7 +240,7 @@ public class UWCharacter : Character {
 	void SwimmingMode ()
 	{
 		playerCam.transform.localPosition = new Vector3 (playerCam.transform.localPosition.x, -0.8f, playerCam.transform.localPosition.z);
-		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 0.1f);
+		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 1f);//TODO:redo me
 		SwimTimer = SwimTimer + Time.deltaTime;
 		//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
 		if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f) {
@@ -325,10 +327,12 @@ public class UWCharacter : Character {
 		{
 			if (isSwimming==true)
 			{
+				playerMotor.jumping.enabled=false;				
 				SwimmingMode ();
 			}
 			else
 			{//0.9198418f
+				playerMotor.jumping.enabled=true;
 				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,1.0f,playerCam.transform.localPosition.z);
 				swimSpeedMultiplier=1.0f;
 				SwimTimer=0.0f;
@@ -351,6 +355,8 @@ public class UWCharacter : Character {
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
 				playerMotor.movement.maxForwardSpeed=walkSpeed*speedMultiplier*swimSpeedMultiplier;
+				playerMotor.movement.maxSidewaysSpeed=playerMotor.movement.maxForwardSpeed*2/3;
+				playerMotor.movement.maxBackwardsSpeed=playerMotor.movement.maxForwardSpeed/3;
 			}
 		}
 

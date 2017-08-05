@@ -167,4 +167,22 @@ public class Equipment : object_base {
 			}
 		return "";
 		}
+
+
+	/// <summary>
+	/// Damage caused to the item when it hits or is hit by something with heavy resistance.
+	/// </summary>
+	public virtual void SelfDamage(short damage)
+	{
+		objInt().quality-=damage;
+		UpdateQuality();
+		if (objInt().quality<=0)
+		{
+			ChangeType(208,23);//Change to debris.
+			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+			//Destroy(this);//Kill me now.
+		}
+	}
+
+
 }

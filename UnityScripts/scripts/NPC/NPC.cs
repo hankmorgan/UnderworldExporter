@@ -1205,43 +1205,31 @@ public class NPC : object_base {
 				Debug.Log ("you've hit yourself ? " + hit.transform.name);
 			}
 			else
-			{
-			short attackDamage =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackDamage[CurrentAttack]);	
-			short ToHit  =(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackChanceToHit[CurrentAttack]);	
-										//(short)Random.Range(1, GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower);			
+			{			
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{	
-					//Roll for a hit
-					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillDefense,ToHit))
-					{						
-						short playerArmour = GameWorldController.instance.playerUW.playerInventory.getArmourScore();	
-						short playerDefence = (short)GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense);
-						//attackDamage = (short)(attackDamage*(((float)(30 - playerDefence))/35f));
-						//Debug.Log(this.name + " hits with power= " + attackDamage + " mitigated by " + playerArmour);
-						if (playerArmour> attackDamage)
-						{
-							attackDamage=1;
-						}
-						else
-						{
-							attackDamage-=playerArmour;
-						}
-						//TODO: armour durability
-						MusicController.LastAttackCounter=10.0f; //Thirty more seconds of combat music
-						GameWorldController.instance.playerUW.ApplyDamage(attackDamage,this.gameObject);
-						if (ObjectInteraction.PlaySoundEffects)
-						{
-							GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
-							GameWorldController.instance.playerUW.aud.Play();
-						}
-					}
+					UWCombat.NPC_Hits_PC(GameWorldController.instance.playerUW,this);
 				}
 			else
-				{
+				{						
 					//Has it hit another npc or object
-					if (hit.transform.GetComponent<ObjectInteraction>()!=null)
+					if (hit.transform.GetComponent<NPC>()!=null)
 					{
-						hit.transform.GetComponent<ObjectInteraction>().Attack(attackDamage, this.gameObject);
+						UWCombat.NPC_Hits_NPC(hit.transform.GetComponent<NPC>(), this);
+					}
+					else if (hit.transform.GetComponent<ObjectInteraction>()!=null)
+					{
+						short attackDamage =(short)Random.Range(1, GetDamage()+1);
+						hit.transform.GetComponent<ObjectInteraction>().Attack(attackDamage, this.gameObject);	
+					}
+					else
+					{
+						Impact.SpawnHitImpact(hit.transform.name + "_impact", GetImpactPoint(),46,50);
+						if (ObjectInteraction.PlaySoundEffects)
+						{
+							objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
+							objInt().aud.Play();
+						}
 					}
 				}
 			}
@@ -1348,4 +1336,26 @@ public class NPC : object_base {
 	{
 		return gtarg;
 	}
+
+
+	public int GetAttack()
+	{
+		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackPower;
+	}
+
+	public int GetDamage()
+	{
+		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].AttackDamage[CurrentAttack];
+	}
+
+	public int GetDefence()
+	{
+		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Defence;	
+	}
+
+	public int GetArmourDamage()
+	{
+		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].EquipDamage;
+	}
+
 }

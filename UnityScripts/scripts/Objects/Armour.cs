@@ -34,21 +34,6 @@ public class Armour : Equipment {
 		base.Start ();
 		UpdateQuality();
 	}
-
-	/// <summary>
-	/// Damage caused to the weapon when it hits something with heavy resistance.
-	/// </summary>
-	public virtual void ArmourSelfDamage()
-	{
-		objInt().quality-=1;
-		UpdateQuality();
-		if (objInt().quality<=0)
-		{
-			ChangeType(208,23);//Change to debris.
-			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			Destroy(this);//Kill me now.
-		}
-	}
 	
 	public override void UpdateQuality ()
 	{

@@ -205,7 +205,7 @@ public class WindowDetectUW : WindowDetect {
 
 				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
 				{
-					if (GameWorldController.instance.getMus().Death==true)
+					if ((GameWorldController.instance.playerUW.CurVIT>0))
 					{
 						UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
 						return;	

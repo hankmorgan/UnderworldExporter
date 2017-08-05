@@ -110,90 +110,12 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-						short StrikeBaseDamage=0;
-						int HitRollResult=RollForAHitMelee(GameWorldController.instance.playerUW,objInt,currWeapon);
-						if (currWeapon==null)
-						{//Fist 
-								//2	4	3	
-								//switch (StrikeType.ToUpper())
-								switch(CurrentStrike)
-								{
-								case "SLASH":
-									StrikeBaseDamage= WeaponMelee.getMeleeSlash() ;break;
-								case "BASH":
-									StrikeBaseDamage= WeaponMelee.getMeleeBash();break;
-								case "STAB":
-								default:	
-									StrikeBaseDamage= WeaponMelee.getMeleeStab() ;break;
-								}
-						}
-						else
-						{
-								//switch (StrikeType.ToUpper())
-								switch(CurrentStrike)
-								{
-								case "SLASH":
-										StrikeBaseDamage=currWeapon.GetSlash();break;
-								case "BASH":
-										StrikeBaseDamage=currWeapon.GetBash();break;
-								case "STAB":
-								default:	
-									StrikeBaseDamage=currWeapon.GetStab();break;
-								}	
-						}
-						//Depending on the hit type the damage will be multiplied by 0(miss), 1 (hit) or 2 (crit) and charge percentage
-							//For any kind of hit it will damage at the very least the min damage of the weapon.
-						hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack((short)((StrikeBaseDamage*HitRollResult*(StrikeCharge/100.0f)) + Mathf.Min(1,HitRollResult)*StrikeBaseDamage),GameWorldController.instance.playerUW.gameObject);
-						
-						///Creates a blood splatter at the point of impact
-						switch (HitRollResult)
-						{
-						case 0: //Miss
-								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),46,50);
-								if (ObjectInteraction.PlaySoundEffects)
-								{
-									objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
-									objInt.aud.Play();
-								}
-								break;
-						case 1://Hit
-								Impact.SpawnHitImpact(hit.transform.name + "_impact", objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
-								if (ObjectInteraction.PlaySoundEffects)
-								{
-										objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
-										objInt.aud.Play();
-								}
-								break;
-						case 2://Crit
-								Impact.SpawnHitImpact(hit.transform.name + "_impact1",objInt.GetImpactPoint(),objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
-								Impact.SpawnHitImpact(hit.transform.name + "_impact2", objInt.GetImpactPoint()+Vector3.up*0.1f,objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());		
-								if (ObjectInteraction.PlaySoundEffects)
-								{
-									objInt.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_2];
-									objInt.aud.Play();
-								}
-								break;
-						}
-						
-						if (currWeapon!=null)
-						{///Performs the onHit action of the melee weapon.
-							currWeapon.onHit (hit.transform.gameObject);
-						}
-					}
-				else
-				{
-					///If a miss does a miss impact and potentially damages the weapon.
-
-					Impact.SpawnHitImpact(hit.transform.name + "_impact", hit.point,46,50);
-					if (ObjectInteraction.PlaySoundEffects)
+					switch (objInt.GetItemType())
 					{
-						GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
-						GameWorldController.instance.playerUW.aud.Play();
-					}
-					if (currWeapon!=null)
-					{
-						currWeapon.onHit (null);
-						currWeapon.WeaponSelfDamage();
+					case ObjectInteraction.NPC_TYPE:
+						PC_Hits_NPC(GameWorldController.instance.playerUW,currWeapon,CurrentStrike,StrikeCharge,objInt.GetComponent<NPC>(), hit);break;
+					default:
+						objInt.Attack((short)Random.Range(1,5),GameWorldController.instance.playerUW.gameObject);break;
 					}
 				}
 			}
@@ -529,48 +451,177 @@ public class UWCombat : Combat {
 		}
 	}
 
+		//Combat calcs
 
-	static short RollForAHitMelee(UWCharacter Origin, ObjectInteraction Target, WeaponMelee weap)
+
+		/// <summary>
+		/// Combat calculations for PC hitting an NPC
+		/// </summary>
+		/// <param name="playerUW">Player Character</param>
+		/// <param name="npc">Npc.</param>
+		/// <param name="hit">Hit.</param>
+		public static void PC_Hits_NPC(UWCharacter playerUW, WeaponMelee currentWeapon, string StrikeName, float StrikeCharge,  NPC npc, RaycastHit hit)
+		{
+
+			int attackScore = 0;
+			int BaseDamage;
+			if (currentWeapon!=null)
+			{
+				attackScore =playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 + playerUW.PlayerSkills.GetSkill(currentWeapon.GetSkill()+1);		
+				switch(StrikeName)			
+				{
+					case "SLASH":
+						BaseDamage=currentWeapon.GetSlash();break;
+					case "BASH":
+						BaseDamage=currentWeapon.GetBash();break;
+					case "STAB":
+					default:	
+						BaseDamage=currentWeapon.GetStab();break;
+				}
+			}
+			else
+			{
+				attackScore =playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 + playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed);	
+				switch(StrikeName)
+					{
+					case "SLASH":
+							BaseDamage= WeaponMelee.getMeleeSlash() ;break;
+					case "BASH":
+							BaseDamage= WeaponMelee.getMeleeBash();break;
+					case "STAB":
+					default:	
+							BaseDamage= WeaponMelee.getMeleeStab() ;break;
+					}
+			}
+
+
+			int toHit = Mathf.Max(npc.GetDefence() - attackScore,0);
+			int roll = Random.Range(-1,31);//-1 is critical miss. 30 is always hit
+			int HitRollResult=0;
+			if (((roll >= toHit) || (roll>=30)) && (roll>-1))
+			{
+				short Damage= (short)(Mathf.Max(((float)(BaseDamage))*(StrikeCharge/100f),1));
+				npc.ApplyAttack(Damage,playerUW.gameObject);
+				HitRollResult=1;
+				if (roll==30)
+				{
+					HitRollResult=2;//crit. apply double damage
+					npc.ApplyAttack(Damage,playerUW.gameObject);
+				}
+			}
+			else
+			{
+				HitRollResult=0;
+				npc.ApplyAttack(0,playerUW.gameObject);//A zero damage attack to update ai if needed
+				if (currentWeapon!=null)
+				{
+					//Apply equipment damage to weapon if NPC Defence is 1.5 times attackscore	
+					if ((float)npc.GetDefence() > (float)attackScore*1.5f)
+					{
+						currentWeapon.WeaponSelfDamage();
+					}
+				}
+			}
+
+
+			///Creates a blood splatter at the point of impact
+			switch (HitRollResult)
+			{
+			case 0: //Miss
+				Impact.SpawnHitImpact(hit.transform.name + "_impact", npc.objInt().GetImpactPoint(),46,50);
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					npc.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
+					npc.objInt().aud.Play();
+				}
+				break;
+			case 1://Hit
+				Impact.SpawnHitImpact(hit.transform.name + "_impact",  npc.objInt().GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					npc.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+					npc.objInt().aud.Play();
+				}
+				break;
+			case 2://Crit
+				Impact.SpawnHitImpact(hit.transform.name + "_impact1", npc.objInt().GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				Impact.SpawnHitImpact(hit.transform.name + "_impact2", npc.objInt().GetImpactPoint()+Vector3.up*0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					npc.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_2];
+					npc.objInt().aud.Play();
+				}
+				break;
+			}
+
+		if (currentWeapon!=null)
+			{///Performs the onHit action of the melee weapon.
+				currentWeapon.onHit (hit.transform.gameObject);
+			}
+		}
+
+
+		/// <summary>
+		/// NPC hits player
+		/// </summary>
+		/// <param name="playerUW">Player U.</param>
+		/// <param name="npc">Npc.</param>
+	public static void NPC_Hits_PC(UWCharacter playerUW, NPC npc)
 	{
-		//0 =Miss
-		//1 = hit
-		//2 = Crit eventually.
-		int HitScore;
-		int DefenseScore;
-		int WeaponSkill;
-
-		if (weap!=null)
+		int PlayerDefence =0; 
+		if( playerUW.PlayerCombat.currWeapon!=null)
 		{
-			WeaponSkill= Origin.PlayerSkills.GetSkill(weap.GetSkill());		
+			PlayerDefence =	playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(playerUW.PlayerCombat.currWeapon.GetSkill()+1)/2);
 		}
 		else
 		{
-			WeaponSkill= Origin.PlayerSkills.GetSkill(Skills.SkillUnarmed);
+			PlayerDefence =	playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed)/2);
 		}
-		HitScore=(Origin.PlayerSkills.Attack/2) + WeaponSkill;
-		if (Target.GetComponent<NPC>()!=null)
-		{//Target is an NPC
-				//Need to calculate this based on npc level
-			DefenseScore=GameWorldController.instance.objDat.critterStats[Target.GetComponent<NPC>().objInt().item_id-64].Defence;
-			//DefenseScore=-1;	//Until I figure out what values drive this, always hit.
-		}
-		else
-		{
-			DefenseScore=-1;//Will always hit an non-npc;
+		int toHit = Mathf.Max(PlayerDefence - npc.GetAttack() , 0);
+		int roll = Random.Range(-1,31);
+		int BaseDamage=npc.GetDamage();//get the damage of the current attack
+		if (((roll >= toHit) || (roll>=30)) && (roll>-1))
+			{
+				int PlayerArmourScore=playerUW.playerInventory.getArmourScore();
+				int ReducedDamage= Mathf.Max(1, BaseDamage - PlayerArmourScore);
+				//Hit
+				playerUW.ApplyDamage(Random.Range(1, ReducedDamage+1),npc.gameObject );
+				//reduce damage by protection
+				if (BaseDamage>PlayerArmourScore)
+				{
+					//apply equipment damage to a random piece of armour
+					playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, npc.GetArmourDamage()+1));
+				}
+				MusicController.LastAttackCounter=10.0f; //Ten more seconds of combat music
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+					GameWorldController.instance.playerUW.aud.Play();
+				}
+			}		
 		}
 
-		if (DefenseScore<=HitScore)
+		/// <summary>
+		/// NPC hits another NPC
+		/// </summary>
+		/// <param name="targetNPC">Target NP.</param>
+		/// <param name="originNPC">Origin NP.</param>
+		public static void NPC_Hits_NPC(NPC targetNPC, NPC originNPC)
 		{
-			return 1;		
+			int Defence = targetNPC.GetDefence();
+			int Attack = originNPC.GetAttack();
+			int toHit = Mathf.Max(Defence-Attack,1);
+			int roll = Random.Range(-1,31);
+			int BaseDamage= Random.Range(1, originNPC.GetDamage()+1);
+			if (((roll >= toHit) || (roll>=30)) && (roll>-1))
+			{
+				targetNPC.ApplyAttack((short)BaseDamage,originNPC.gameObject);
+				Impact.SpawnHitImpact(targetNPC + "_impact", targetNPC.GetImpactPoint(), targetNPC.objInt().GetHitFrameStart(), targetNPC.objInt().GetHitFrameEnd());		
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+					originNPC.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+					originNPC.objInt().aud.Play();
+				}
+			}						
 		}
-		else
-		{
-			return 0;//A Miss
-		}
-	}
-
-	static short RollForAHitMelee(NPC Origin, ObjectInteraction Target)
-	{
-		return 1;//Temp NPC will always hit.	
-	}
 }

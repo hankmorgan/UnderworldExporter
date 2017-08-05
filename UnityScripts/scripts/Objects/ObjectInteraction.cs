@@ -1386,6 +1386,7 @@ public class ObjectInteraction : UWEBase {
 						cap.center = new Vector3(0.0f, 0.5f, 0.0f);
 						cap.radius=0.2f;
 						cap.height=1.0f;
+						cap.skinWidth=0.02f;
 						break;
 
 						//Medium
@@ -1416,6 +1417,7 @@ public class ObjectInteraction : UWEBase {
 						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
 						cap.radius=0.3f;
 						cap.height=0.3f;
+						cap.skinWidth=0.02f;
 						break;
 				}
 

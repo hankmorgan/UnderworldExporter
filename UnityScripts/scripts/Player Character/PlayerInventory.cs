@@ -995,6 +995,69 @@ public class PlayerInventory : UWEBase {
 			return result;
 		}
 
+		/// <summary>
+		/// Applies the armour damage to the players armour (random piece)
+		/// If no piece is in the slot picked then no damage is applied
+		/// </summary>
+		public void ApplyArmourDamage(short armourDamage)
+		{
+			int[] slots={0,1,2,3,4,7,8};
+			int PieceToDamage= slots[Random.Range(0,slots.GetUpperBound(0))];
+				PieceToDamage=2;//test
+			GameObject obj=	GetGameObjectAtSlot(PieceToDamage);
+			if (obj!=null)
+			{
+				switch (PieceToDamage)
+				{
+				case 0://Helm								
+				case 1://Chest								
+				case 2://Leggings								
+				case 3://Boots								
+				case 4://Gloves	
+					if (obj.gameObject.GetComponent<Armour>()!=null)
+					{
+						obj.gameObject.GetComponent<Armour>().SelfDamage(armourDamage);
+						if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+						{
+							playerUW.playerInventory.ClearSlot((short)PieceToDamage);
+							obj.transform.parent=GameWorldController.instance.LevelMarker().transform;
+							obj.transform.position=playerUW.transform.position;
+							GameWorldController.MoveToWorld(obj.GetComponent<ObjectInteraction>());
+							GameWorldController.UnFreezeMovement(obj);
+							playerUW.playerInventory.Refresh();
+						}
+					}
+					break;
+				case 7://HandRight
+						if (! GameWorldController.instance.playerUW.isLefty)
+						{								
+							if (obj.gameObject.GetComponent<Shield>()!=null)
+							{
+								obj.gameObject.GetComponent<Shield>().SelfDamage(armourDamage);	
+								if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+								{														
+									playerUW.playerInventory.Refresh();
+								}
+							}
+						}
+						break;
+				case 8://HandLeft
+					if ( GameWorldController.instance.playerUW.isLefty)
+					{
+						if (obj.gameObject.GetComponent<Shield>()!=null)
+						{
+							obj.gameObject.GetComponent<Shield>().SelfDamage(armourDamage);	
+							if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+							{
+								playerUW.playerInventory.Refresh();
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+
 
 		short getDefenceAtSlot(int slot)
 		{
