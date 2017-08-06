@@ -297,6 +297,7 @@ public class GameWorldController : UWEBase {
 	public ConversationVM convVM;
 
 	public static bool WorldReRenderPending=false;
+	public static bool ObjectReRenderPending=false;
 	public static bool FullReRender=false;
 
 	void  LoadPath(string game)
@@ -354,11 +355,16 @@ public class GameWorldController : UWEBase {
 		{
 			if (WorldReRenderPending)
 				{						
-				if (FullReRender)
+				if ((FullReRender) && (!EditorMode))
 				{
 					currentTileMap().CleanUp(_RES);				
-				}			
+				}
 				TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,GameWorldController.instance.SceneryModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList(), !FullReRender);
+				if(ObjectReRenderPending)
+				{								
+					ObjectReRenderPending=false;
+					ObjectLoader.RenderObjectList(CurrentObjectList(),currentTileMap(),LevelMarker().gameObject);
+				}
 				WorldReRenderPending=false;
 				FullReRender=false;
 				}
@@ -884,8 +890,18 @@ public class GameWorldController : UWEBase {
 				}
 			TileMap.visitTileX =(short)(playerUW.transform.position.x/1.2f);
 			TileMap.visitTileY =(short)(playerUW.transform.position.z/1.2f);
+			if (EditorMode)
+			{
+				if ((TileMap.visitedTileX != TileMap.visitTileX) || (TileMap.visitedTileY != TileMap.visitTileY)) 
+				{
+					if(IngameEditor.FollowMeMode)
+					{
+						IngameEditor.UpdateFollowMeMode(TileMap.visitTileX,TileMap.visitTileY);
+					}
+				}
+			}
 			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-			GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
+			GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking) && (!GameWorldController.EditorMode)) ;
 			for (int x=-1; x<=1;x++)
 			{
 					for (int y=-1; y<=1;y++)
@@ -905,7 +921,8 @@ public class GameWorldController : UWEBase {
 							}
 					}	
 			}
-
+			TileMap.visitedTileX=TileMap.visitTileX;
+			TileMap.visitedTileY=TileMap.visitTileY;
 		}
 
 		public ObjectLoader CurrentObjectList()

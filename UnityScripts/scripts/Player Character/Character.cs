@@ -169,6 +169,24 @@ public class Character : UWEBase {
 						UWHUD.instance.window.UWWindowWait (1.0f);
 					}
 				}
+				else if (hit.transform.parent==GameWorldController.instance.LevelModel.transform)
+				{
+					if (EditorMode)	
+					{
+						string[] tilenamePortions = hit.transform.name.Split('_');
+						int tileX=int.Parse(tilenamePortions[1]);
+						int tileY=int.Parse(tilenamePortions[2]);
+						if (IngameEditor.FollowMeMode)	
+						{
+
+							IngameEditor.UpdateFollowMeMode(tileX,tileY);	
+						}
+						else
+						{
+							IngameEditor.instance.SelectTile(tileX,tileY);
+						}
+					}
+				}
 			}
 		}
 	}

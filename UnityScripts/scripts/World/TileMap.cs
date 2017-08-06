@@ -118,6 +118,16 @@ public class TileMap : Loader {
 		/// The current tile Y that the player is in.
 		/// </summary>
 		public static short visitTileY;
+
+		/// The tile X that the player was in the previously
+		/// </summary>
+		public static short visitedTileX;
+		/// <summary>
+		/// The current tile Y that the player was in the previously
+		/// </summary>
+		public static short visitedTileY;
+
+
 		/// <summary>
 		/// Is the player currently standing on solid ground
 		/// </summary>
