@@ -787,7 +787,7 @@ switch (game)
 			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
 			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
 
-			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 16) >> 4 & 0xF);
+			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
 			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);
 
 			objList[x].npc_whoami = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);

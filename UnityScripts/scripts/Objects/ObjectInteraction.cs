@@ -136,6 +136,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_NULL_TRAP=109;
 		public const int AN_ORB_ROCK=110;
 		public const int AN_EXPLODING_BOOK=111;
+		public const int A_MAGIC_PROJECTILE=112;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1462,7 +1463,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="myObj">My object.</param>
 		/// <param name="objInt">Object int.</param>
 		/// <param name="objI">Object i.</param>
-		public static void SetNPCProps(GameObject myObj, NPC npc, ObjectInteraction objInt, ObjectLoaderInfo objI, string NavMeshRegion,string gtargName)
+		public static void SetNPCProps(GameObject myObj, MobileObject npc, ObjectInteraction objInt, ObjectLoaderInfo objI, string NavMeshRegion,string gtargName)
 		{
 				//NPC npc = myObj.GetComponent<NPC>();
 				if (npc!=null)
@@ -1486,7 +1487,7 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_level=objI.npc_level;
 						npc.npc_name=objI.npc_name;       //    (not used in uw1)
 						npc.NavMeshRegion=NavMeshRegion;
-
+						npc.npc_heading=objI.npc_heading;
 						npc.gtargName=gtargName;
 
 						for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
@@ -1647,7 +1648,7 @@ public class ObjectInteraction : UWEBase {
 						npc = CreateNPC(myObj,objInt,currObj);
 						//CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
 						//SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
-						SetNPCProps(myObj,npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+								SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						break;	
 					}
@@ -1848,6 +1849,13 @@ public class ObjectInteraction : UWEBase {
 				case AN_EXPLODING_BOOK:
 						myObj.AddComponent<ReadableTrap>();
 						break;
+				case A_MAGIC_PROJECTILE:
+						{
+							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
+							SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+							break;	
+						}
+
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();
 						RemoveBillboard=true;

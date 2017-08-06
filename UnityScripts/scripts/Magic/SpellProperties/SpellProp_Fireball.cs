@@ -31,7 +31,7 @@ public class SpellProp_Fireball : SpellProp {
 		//A big old explosion
 		for (int i=0;i<3;i++)
 		{//The flames
-			Impact.SpawnHitImpact(tf.name+ "_impact",tf.position+(Random.insideUnitSphere*0.5f),SecondaryStartFrame, SecondaryEndFrame);	
+			Impact.SpawnHitImpact(Impact.ImpactMagic(),tf.position+(Random.insideUnitSphere*0.5f),SecondaryStartFrame, SecondaryEndFrame);	
 		}
 		foreach (Collider Col in Physics.OverlapSphere(tf.position,splashDistance))
 		{

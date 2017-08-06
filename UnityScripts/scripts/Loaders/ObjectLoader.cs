@@ -662,8 +662,8 @@ public class ObjectLoader : Loader {
 					objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
 					objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
 
-					objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 16) >> 4 & 0xF);
-					objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);
+					objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
+					objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
 
 					objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
 								int i=0;
@@ -1634,12 +1634,6 @@ public class ObjectLoader : Loader {
 					}
 					else
 					{//next item next onto previous item.
-										if (itemObjInt==null)
-										{
-												int a=0;
-												a++;
-												Debug.Log("link failure");
-										}
 						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
 						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
 						itemObjInt.next=0;//end for now.
@@ -1793,7 +1787,7 @@ public class ObjectLoader : Loader {
 				//Npcs specific
 				if (info.index<256)
 				{
-						NPC npc = objInt.GetComponent<NPC>();
+						MobileObject npc = objInt.GetComponent<MobileObject>();
 						if (npc!=null)
 						{
 								//The values stored in the NPC info area (19 bytes) contain infos for
@@ -1817,7 +1811,7 @@ public class ObjectLoader : Loader {
 								info.npc_yhome=(short)npc.npc_yhome;	// 4-9    
 								info.npc_xhome=(short)npc.npc_xhome; // 10-15  
 								//0018   0010   Int8   0-4:   npc_heading?
-								//info.npc_heading=npc.npc_heading;
+								info.npc_heading=(short)npc.npc_heading;
 								//   0019      Int8   0-6:   
 								info.npc_hunger=(short)npc.npc_hunger; //(?)
 								//001a   0012   Int8          

@@ -12,6 +12,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	SpriteRenderer image;
 	static Sprite[] sprites=new Sprite[53];
 	static bool spriteSet = false;
+	public bool Looping=true;
 	// Use this for initialization
 	void Start () {
 		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
@@ -50,7 +51,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	}
 	
 	public IEnumerator Animate()
-	{
+	{//Note is it likely that the owner value in the object is the animation frame we are on.
 
 		LoadAnimo (FrameNo);
 		//the count down of the sad butterfly like existance of an impact.
@@ -64,8 +65,19 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 			FrameNo++;
 			if (FrameNo>=StartFrame+NoOfFrames)
 			{
-				FrameNo=StartFrame;
-				LoadAnimo (FrameNo);
+				if (Looping==true)
+				{
+					FrameNo=StartFrame;
+					LoadAnimo (FrameNo);	
+				}
+				else
+				{
+					if (this.GetComponent<ObjectInteraction>()!=null)	
+					{
+						this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;//Free up the slot
+						Destroy (this.gameObject);
+					}
+				}
 			}
 			else
 			{//Loads the next animation fram;

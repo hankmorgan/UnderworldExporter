@@ -4,7 +4,7 @@ using System.Collections;
 /// Magic projectiles that are launched from spells.
 /// </summary>
 /// Projectiles use properties defined by SpellProp to decide what damage or other special effects should happen.
-public class MagicProjectile : MonoBehaviour {
+public class MagicProjectile : MobileObject {
 
 	/// Has the projectile hit something
 	public bool HasHit;
@@ -52,7 +52,7 @@ public class MagicProjectile : MonoBehaviour {
 				//Create a impact animation to illustrate the collision
 				if(objInt.GetHitFrameStart()>=0)
 				{
-					Impact.SpawnHitImpact(this.transform.name + "_impact",objInt.GetImpactPoint(),objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());	
+					Impact.SpawnHitImpact(Impact.ImpactMagic(),objInt.GetImpactPoint(),objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());	
 				}
 			}
 			else
@@ -66,7 +66,7 @@ public class MagicProjectile : MonoBehaviour {
 				else
 				{
 					//Do a miss impact 
-					Impact.SpawnHitImpact(this.transform.name + "_impact",this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);	
+					Impact.SpawnHitImpact(Impact.ImpactDamage(),this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);	
 				
 				}
 			}	

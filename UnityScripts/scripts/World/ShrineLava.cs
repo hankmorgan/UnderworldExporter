@@ -36,7 +36,7 @@ public class ShrineLava : UWEBase {
 						return;								
 				}
 
-				Impact.SpawnHitImpact(objInt.transform.name + "_impact",objInt.GetImpactPoint(),40,44);		
+				Impact.SpawnHitImpact(Impact.ImpactMagic(),objInt.GetImpactPoint(),40,44);		
 
 
 				objInt.consumeObject();

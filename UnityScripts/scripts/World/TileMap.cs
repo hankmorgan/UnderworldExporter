@@ -1926,7 +1926,9 @@ public class TileMap : Loader {
 										);
 
 										TileMapData[addptr+0x18]= (char)(
-												((currobj.npc_heading & 0xF)<<4) 
+												(TileMapData[addptr+0x18] & 0xE0)
+												|
+												(currobj.npc_heading & 0x1F) 
 										);
 
 										TileMapData[addptr+0x19]= (char)(

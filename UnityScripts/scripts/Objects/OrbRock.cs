@@ -6,7 +6,7 @@ public class OrbRock : object_base {
 	public static void DestroyOrb(ObjectInteraction orbToDestroy)
 	{
 		//Spawn an impact
-		Impact.SpawnHitImpact(orbToDestroy.transform.name + "_impact", orbToDestroy.GetImpactPoint(),46,50);
+		Impact.SpawnHitImpact(Impact.ImpactDamage(), orbToDestroy.GetImpactPoint(),46,50);
 		GameWorldController.instance.playerUW.quest().isOrbDestroyed=true;
 		GameWorldController.instance.playerUW.PlayerMagic.MaxMana=GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana;
 		GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;

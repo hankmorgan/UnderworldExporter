@@ -61,8 +61,7 @@ public class ObjectLoaderInfo {
 		public short npc_arms=0;
 		public short npc_power = 0;
 		public short npc_name = 0;
-
-
+	
 		//My additions
 		public short InUseFlag;
 		public short levelno;

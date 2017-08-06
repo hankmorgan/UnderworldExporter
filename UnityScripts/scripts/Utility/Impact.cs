@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// Class for things like blood splatters, spell explosion animations
 /// </summary>
-public class Impact : UWEBase {
+public class Impact : object_base {
 
 	void Start () {
 		//Make sure the impact is always facing the player.		
@@ -67,16 +67,36 @@ public class Impact : UWEBase {
 		}		
 	}
 
-	public static void SpawnHitImpact(string ImpactName, Vector3 ImpactPosition, int StartFrame, int EndFrame)
+	public static void SpawnHitImpact(int Item_ID, Vector3 ImpactPosition, int StartFrame, int EndFrame)
 	{
-		GameObject hitimpact = new GameObject(ImpactName);
-		hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
-		hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(Item_ID,40,StartFrame,1);
+		ObjectInteraction objInt = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ImpactPosition);
+		objInt.GetComponent<AnimationOverlay>().Looping=false;
+
+		///GameObject hitimpact = new GameObject(ImpactName);
+		///hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
+		///hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
 		//GameWorldController.MoveToWorld(hitimpact);
-		Impact imp= hitimpact.AddComponent<Impact>();
-		imp.go(StartFrame,EndFrame);
+		//Impact imp= hitimpact.AddComponent<Impact>();
+		//imp.go(StartFrame,EndFrame);
 		//StartCoroutine( imp.Animate(StartFrame,EndFrame));		
 	}
 
+
+		public static int ImpactBlood()
+		{
+			return 448;
+		}
+
+
+		public static int ImpactDamage()
+		{
+			return 459;
+		}
+
+		public static int ImpactMagic()
+		{
+			return 459;
+		}
 
 }
