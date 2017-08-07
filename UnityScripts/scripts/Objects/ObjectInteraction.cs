@@ -1490,6 +1490,9 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_heading=objI.npc_heading;
 						npc.gtargName=gtargName;
 
+						npc.Projectile_Pitch=objI.Projectile_Pitch;
+						npc.Projectile_Yaw=objI.Projectile_Yaw;
+
 						for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
 						{
 							npc.NPC_DATA[i]=objI.NPC_DATA[i];
@@ -1648,7 +1651,7 @@ public class ObjectInteraction : UWEBase {
 						npc = CreateNPC(myObj,objInt,currObj);
 						//CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
 						//SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
-								SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+						SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						break;	
 					}
@@ -1853,6 +1856,60 @@ public class ObjectInteraction : UWEBase {
 						{
 							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
 							SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+							if (GameWorldController.LoadingObjects)
+							{
+								BoxCollider box = myObj.GetComponent<BoxCollider>();
+								box.size = new Vector3(0.2f,0.2f,0.2f);
+								box.center= new Vector3(0.0f,0.1f,0.0f);
+								Rigidbody rgd = myObj.GetComponent<Rigidbody>();
+								rgd.freezeRotation =true;
+								mgp.rgd=rgd;
+								GameWorldController.UnFreezeMovement(myObj);
+
+								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
+								//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
+								float force;
+								switch(currObj.item_id)
+								{
+								case 20://fireball
+										{
+												SpellProp_Fireball spFB =new SpellProp_Fireball();
+												spFB.init (SpellEffect.UW1_Spell_Effect_Fireball,myObj);
+												mgp.spellprop=spFB;
+												force=spFB.Force;
+												break;
+										}
+
+								case 21://lightning
+										{
+												SpellProp_Fireball spLN =new SpellProp_Fireball();
+												spLN.init (SpellEffect.UW1_Spell_Effect_ElectricalBolt,myObj);
+												mgp.spellprop=spLN;
+												force=spLN.Force;
+												break;
+										}
+								case 22://acid
+										{
+												SpellProp_Acid spAC =new SpellProp_Acid();
+												spAC.init (SpellEffect.UW1_Spell_Effect_Acid_alt01,myObj);
+												mgp.spellprop=spAC;
+												force=spAC.Force;
+												break;
+										}
+								case 23://magic missile
+								default:
+										{
+												SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+												spOJ.init (SpellEffect.UW1_Spell_Effect_MagicArrow,myObj);
+												mgp.spellprop=spOJ;
+												force=spOJ.Force;
+												break;
+										}
+								}
+								Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
+								myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
+							}
+							
 							break;	
 						}
 

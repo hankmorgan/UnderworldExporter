@@ -131,7 +131,7 @@ public class Food : object_base {
 			case 217://Dead Rotworm
 				return base.LookAt();
 			default:		
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()));		
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()) + OwnershipString());		
 				break;
 		}
 		return true;

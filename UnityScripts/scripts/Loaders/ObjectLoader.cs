@@ -666,7 +666,12 @@ public class ObjectLoader : Loader {
 					objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
 
 					objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
-								int i=0;
+					
+					objList[x].Projectile_Yaw =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+					objList[x].Projectile_Pitch = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+
+
+					int i=0;
 					for (int z=0x8; z<=0x1a;z++)
 					{
 						switch (z)
@@ -1299,6 +1304,7 @@ public class ObjectLoader : Loader {
 		/// </summary>
 		public static void RenderObjectList(ObjectLoader instance, TileMap tilemap, GameObject parent)
 		{
+				GameWorldController.LoadingObjects=true;
 			//Clear out the children in the transform
 			foreach (Transform child in parent.transform) {
 					GameObject.Destroy(child.gameObject);
@@ -1310,7 +1316,7 @@ public class ObjectLoader : Loader {
 			{
 			if (instance.objInfo[i]!=null)
 				{
-					if ((instance.objInfo[i].InUseFlag==1) || (UWEBase.EditorMode))
+				if ((instance.objInfo[i].InUseFlag==1))	//|| (UWEBase.EditorMode)
 					{
 						Vector3 position;
 						if (tilemap==null)
@@ -1330,6 +1336,7 @@ public class ObjectLoader : Loader {
 					}
 				}
 			}
+				GameWorldController.LoadingObjects=false;
 		}
 
 
@@ -1799,28 +1806,31 @@ public class ObjectLoader : Loader {
 								//000a   
 								//blank?
 								//000b   Int16      
-								info.npc_goal=(short)npc.npc_goal;	//0-3
-								info.npc_gtarg=(short)npc.npc_gtarg;    //4-11   
+								info.npc_goal=npc.npc_goal;	//0-3
+								info.npc_gtarg=npc.npc_gtarg;    //4-11   
 								//000d        
 								info.npc_level=(short)npc.npc_level;	//0-3
-								info.npc_talkedto=(short)npc.npc_talkedto;   //13     
-								info.npc_attitude=(short)npc.npc_attitude;	//14-15
+								info.npc_talkedto=npc.npc_talkedto;   //13     
+								info.npc_attitude=npc.npc_attitude;	//14-15
 								//000f    
 								//info.npc_height=npc.npc_height ;//6- 12 ?
 								//0016  
-								info.npc_yhome=(short)npc.npc_yhome;	// 4-9    
-								info.npc_xhome=(short)npc.npc_xhome; // 10-15  
+								info.npc_yhome=npc.npc_yhome;	// 4-9    
+								info.npc_xhome=npc.npc_xhome; // 10-15  
 								//0018   0010   Int8   0-4:   npc_heading?
-								info.npc_heading=(short)npc.npc_heading;
+								info.npc_heading=npc.npc_heading;
 								//   0019      Int8   0-6:   
-								info.npc_hunger=(short)npc.npc_hunger; //(?)
+								info.npc_hunger=npc.npc_hunger; //(?)
 								//001a   0012   Int8          
-								info.npc_whoami=(short)npc.npc_whoami;
+								info.npc_whoami=npc.npc_whoami;
 
-								info.npc_health=(short)npc.npc_health;
-								info.npc_arms=(short)npc.npc_arms;
-								info.npc_power = (short)npc.npc_power;
-								info.npc_name = (short)npc.npc_name;		
+								info.npc_health=npc.npc_health;
+								info.npc_arms=npc.npc_arms;
+								info.npc_power = npc.npc_power;
+								info.npc_name = npc.npc_name;	
+
+								info.Projectile_Pitch=npc.Projectile_Pitch;
+								info.Projectile_Yaw=npc.Projectile_Yaw;
 						}
 				}
 

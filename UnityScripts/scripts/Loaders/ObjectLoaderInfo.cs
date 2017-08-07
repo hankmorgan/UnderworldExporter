@@ -61,6 +61,12 @@ public class ObjectLoaderInfo {
 		public short npc_arms=0;
 		public short npc_power = 0;
 		public short npc_name = 0;
+
+		//Projectiles are stored in the mobile object area.
+		//The following properties are currently known
+		public short Projectile_Yaw;
+		public short Projectile_Pitch;
+
 	
 		//My additions
 		public short InUseFlag;

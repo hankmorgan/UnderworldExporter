@@ -791,6 +791,11 @@ switch (game)
 			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);
 
 			objList[x].npc_whoami = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+
+			//These are for projectiles 
+			objList[x].projectile_yaw = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
+			objList[x].projectile_pitch = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8);
+
 			//objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
 
 			////extra info //19 bytes

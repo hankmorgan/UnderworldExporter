@@ -109,18 +109,18 @@ public class Equipment : object_base {
 		{
 			if (objInt().isIdentified==true)
 			{
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
 			}
 			else
 			{
 					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 						objInt().isIdentified=true;
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
 					}
 					else
 					{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()));		
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
 					}					
 			}
 			return true;

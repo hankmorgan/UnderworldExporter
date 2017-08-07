@@ -215,7 +215,7 @@ public class LightSource : object_base {
 
 	public override bool LookAt()
 	{
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),lightStatusText()));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),lightStatusText()) + OwnershipString());
 		return true;
 	}
 

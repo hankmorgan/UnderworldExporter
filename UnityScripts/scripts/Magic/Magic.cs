@@ -2608,6 +2608,7 @@ public class Magic : UWEBase {
 						box.center= new Vector3(0.0f,0.1f,0.0f);
 						Rigidbody rgd = projectile.GetComponent<Rigidbody>();
 						rgd.freezeRotation =true;
+						mgp.rgd=rgd;
 						GameWorldController.UnFreezeMovement(projectile);
 						rgd.useGravity=false;
 

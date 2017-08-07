@@ -92,7 +92,7 @@ public class object_base : UWEBase {
 	public virtual bool LookAt()
 	{
 		//CheckReferences();
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + OwnershipString() );
 		return true;
 	}
 
@@ -800,6 +800,23 @@ public class object_base : UWEBase {
 		public virtual bool CanBePickedUp()
 		{
 			return false;
+		}
+
+
+		/// <summary>
+		/// String for displaying the ownership of the object in question.
+		/// </summary>
+		/// <returns>The string.</returns>
+		public virtual string OwnershipString()
+		{
+			if (GameWorldController.instance.commonObject.properties[objInt().item_id].CanBelongTo==1)
+			{
+				if (((objInt().owner & 0x1f))!=0)
+				{
+					return " belonging to"	+ StringController.instance.GetString(1,370+(objInt().owner & 0x1f) );//This is what uw formats says. I think this is wrong...
+				}
+			}
+				return "";
 		}
 
 }

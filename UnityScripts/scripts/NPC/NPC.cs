@@ -623,6 +623,8 @@ public class NPC : MobileObject {
 						}
 					}
 				}	
+
+								//TODO: THEORY check if the first 5 bits of owner signifies the raise of npcs to notify!
 				//Alert nearby npcs that i have been attacked.
 				//Will alert npcs of same item id or an allied type. (eg goblins & trolls)
 					foreach (Collider Col in Physics.OverlapSphere(this.transform.position,4.0f))

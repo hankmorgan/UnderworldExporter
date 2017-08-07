@@ -284,7 +284,7 @@ public class GameWorldController : UWEBase {
 	//public WeaponAnimationPlayer WeaponAnim;
 	public WeaponsLoader weapongr;
 
-
+	public static bool LoadingObjects=false;
 
 	public struct bablGlobal
 	{
@@ -692,10 +692,10 @@ public class GameWorldController : UWEBase {
 					//Update the positions of all object interactions in the level
 					//UpdatePositions();
 
-					if (UWEBase.EditorMode==false)
-					{
+					//if (UWEBase.EditorMode==false)
+					//{
 						ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
-					}
+					//}
 					//Store the state of the object list with just the objects in objects transform for when I re
 					
 				}

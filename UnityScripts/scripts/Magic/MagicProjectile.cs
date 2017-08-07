@@ -5,14 +5,16 @@ using System.Collections;
 /// </summary>
 /// Projectiles use properties defined by SpellProp to decide what damage or other special effects should happen.
 public class MagicProjectile : MobileObject {
-
+		public float x;
+		public float y;
+		public float z;
 	/// Has the projectile hit something
 	public bool HasHit;
 	///who has cast the project. It will ignore them to avoid self harm
 	public GameObject caster;
 	///Spell properties object to define the behaviour of the projectile
 	public SpellProp spellprop; 
-
+	public Rigidbody rgd;
 	/// <summary>
 	/// The Projectile hits something.
 	/// </summary>
@@ -24,6 +26,10 @@ public class MagicProjectile : MobileObject {
 	/// Generates an impact effect
 	void OnCollisionEnter(Collision collision)
 	{//
+			if (caster==null)
+			{
+				caster=this.gameObject;
+			}
 		if(collision.gameObject.name== caster.name)
 		{//Prevents the caster from hitting themselves
 			return;
@@ -37,7 +43,7 @@ public class MagicProjectile : MobileObject {
 			HasHit=true;
 
 			//Code to execute when a projectile hits a spot (for launching AOE effects)
-			spellprop.onImpact(this.transform);
+			spellprop.onImpact(this.transform);			
 
 			ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
 
@@ -80,4 +86,20 @@ public class MagicProjectile : MobileObject {
 			DestroyObject(this.gameObject);
 		}
 	}
+
+	public void Update()
+	{
+		if (rgd!=null)
+		{
+			Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
+			Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
+
+			x=rgd.velocity.x;
+			y=rgd.velocity.y;
+			z=rgd.velocity.z;
+		}			
+	}
+
+
+	
 }

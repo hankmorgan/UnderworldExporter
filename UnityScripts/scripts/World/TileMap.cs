@@ -1920,6 +1920,9 @@ public class TileMap : Loader {
 								if (o<256)			
 								{//Additional npc mobile data.
 										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
+
+										TileMapData[addptr+0x9] = (char)(currobj.Projectile_Yaw);
+
 										TileMapData[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
 												(currobj.npc_goal & 0xF));
 
@@ -1929,6 +1932,8 @@ public class TileMap : Loader {
 														((currobj.npc_talkedto & 0x1)<<13) |
 														currobj.npc_level & 0xF
 												);
+
+										TileMapData[addptr+0x14] = (char)(currobj.Projectile_Pitch);
 
 										TileMapData[addptr+0x16]= (char)(
 												((currobj.npc_xhome & 0x3F)<<10) |
