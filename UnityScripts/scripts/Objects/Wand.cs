@@ -125,7 +125,7 @@ public class Wand : enchantment_base {
 		{
 		base.InventoryEventOnLevelEnter ();
 			//Create a spell trap and store it on the map. This occurs before the list is rendered.
-		ObjectLoaderInfo newobj= ObjectLoader.newObject(390,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink );
+		ObjectLoaderInfo newobj= ObjectLoader.newObject(390,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
 		//ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobj,GameWorldController.instance.LevelMarker().gameObject,new Vector3(99f*1.2f,0,99f*1.2f));
 		objInt().link = newobj.index;
 		}

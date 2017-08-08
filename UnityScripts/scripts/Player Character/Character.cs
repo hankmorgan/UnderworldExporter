@@ -261,6 +261,7 @@ public class Character : UWEBase {
 		objPicked.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 		objPicked.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 		GameWorldController.MoveToInventory(objPicked);
+		pInv.ObjectInHand=objPicked.transform.name;
 		objPicked.Pickup();
 		return objPicked;
 

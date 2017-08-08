@@ -26,7 +26,7 @@ public class a_arrow_trap : trap_base {
 		//Debug.Log ("an arrow trap has gone off. It will spawn a " + item_index + " of type " + item_type + " along vector " + this.gameObject.transform.rotation);
 	
 
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0);
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, this.transform.position).gameObject;
 
 

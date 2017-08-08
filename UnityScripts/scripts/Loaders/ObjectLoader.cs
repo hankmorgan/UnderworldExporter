@@ -518,6 +518,7 @@ public class ObjectLoader : Loader {
 			{	//read in master object list
 				objList[x]=new ObjectLoaderInfo();
 				objList[x].parentList=this;
+				objList[x].guid=System.Guid.NewGuid();
 				objList[x].index = x; 
 				objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 				objList[x].tileX=TileMap.ObjectStorageTile;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
@@ -706,18 +707,16 @@ public class ObjectLoader : Loader {
 
 	public static string UniqueObjectName(ObjectLoaderInfo currObj)
 	{//returns a unique name for the object
-
-			//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
-			switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
-			{
-			case ObjectInteraction.DOOR:
-			case ObjectInteraction.HIDDENDOOR:
-			case ObjectInteraction.PORTCULLIS:
-					return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
-			default:
-					return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno.ToString("d2")+"_"+currObj.index.ToString("d4");
-			}
-
+		//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+		switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+		{
+		case ObjectInteraction.DOOR:
+		case ObjectInteraction.HIDDENDOOR:
+		case ObjectInteraction.PORTCULLIS:
+			return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
+		default:
+			return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno.ToString("d2")+"_"+currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+		}
 	}
 
 
@@ -1845,11 +1844,12 @@ public class ObjectLoader : Loader {
 		/// Creates a new object in the static object section of the list.
 		/// </summary>
 		/// <returns>The object.</returns>
-		public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link)
+		public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link, int startIndex)
 		{
 			int index=0;
-			if (GameWorldController.instance.CurrentObjectList().getFreeSlot(256, out index)	)
+			if (GameWorldController.instance.CurrentObjectList().getFreeSlot(startIndex, out index)	)
 			{
+				GameWorldController.instance.CurrentObjectList().objInfo[index].guid=System.Guid.NewGuid();
 				GameWorldController.instance.CurrentObjectList().objInfo[index].quality=(short)quality;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].flags=0;
 				GameWorldController.instance.CurrentObjectList().objInfo[index].owner=(short)owner;

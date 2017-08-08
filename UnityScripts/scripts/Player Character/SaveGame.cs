@@ -410,6 +410,7 @@ public class SaveGame : Loader {
 								{
 										objLoader.objInfo[x] = new ObjectLoaderInfo();
 										objLoader.objInfo[x].index=x;
+										objLoader.objInfo[x].guid=System.Guid.NewGuid();
 										objLoader.objInfo[x].parentList=objLoader;
 										objLoader.objInfo[x].tileX=TileMap.ObjectStorageTile;
 										objLoader.objInfo[x].tileY=TileMap.ObjectStorageTile;

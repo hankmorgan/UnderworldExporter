@@ -69,7 +69,7 @@ public class Impact : object_base {
 
 	public static void SpawnHitImpact(int Item_ID, Vector3 ImpactPosition, int StartFrame, int EndFrame)
 	{
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(Item_ID,40,StartFrame,1);
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(Item_ID,40,StartFrame,1,256);
 		ObjectInteraction objInt = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ImpactPosition);
 		objInt.GetComponent<AnimationOverlay>().Looping=false;
 

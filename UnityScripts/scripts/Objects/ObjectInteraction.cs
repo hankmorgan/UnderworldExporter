@@ -707,7 +707,7 @@ public class ObjectInteraction : UWEBase {
 							InputObject2.GetComponent<ObjectInteraction>().consumeObject();
 					}
 
-					ObjectLoaderInfo newobjt= ObjectLoader.newObject(lstOutput[i],40,0,0);
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject(lstOutput[i],40,0,0,256);
 					GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 					GameWorldController.MoveToInventory(Created);
 					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

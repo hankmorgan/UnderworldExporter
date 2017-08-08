@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ObjectLoaderInfo {
-
+		
 		public int index;	//it's own index in case I need to find myself.
 		public int item_id;	//0-8
 		public short flags;	//9-12
@@ -101,4 +101,6 @@ public class ObjectLoaderInfo {
 		public int TriggerOnce;
 
 		public short[] NPC_DATA=new short[15];
+
+		public System.Guid guid;
 }

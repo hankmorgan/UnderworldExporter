@@ -462,12 +462,24 @@ public class UWCharacter : Character {
 			else
 				{
 				//split the obj.
-				GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
-				Split.GetComponent<ObjectInteraction>().link =quant;
-				Split.name = Split.name+"_"+summonCount++;
-				QuantityObj.link=QuantityObj.link-quant;
-				Pickup (Split.GetComponent<ObjectInteraction>(), playerInventory);
-				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
+
+
+				ObjectLoaderInfo newobjt= ObjectLoader.newObject(QuantityObj.item_id,QuantityObj.quality,QuantityObj.owner,quant,256);
+				newobjt.is_quant=QuantityObj.isquant;
+				newobjt.flags=QuantityObj.flags;
+				newobjt.enchantment=QuantityObj.enchantment;
+				newobjt.doordir=QuantityObj.doordir;
+				newobjt.invis=QuantityObj.invis;
+				ObjectInteraction Split =ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,QuantityObj.transform.position);
+				newobjt.InUseFlag=1;
+				QuantityObj.link-=quant;
+
+				//GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
+				//Split.GetComponent<ObjectInteraction>().link =quant;
+				//Split.name = Split.name+"_"+summonCount++;
+				//QuantityObj.link=QuantityObj.link-quant;
+				Pickup (Split, playerInventory);
+				ObjectInteraction.Split (Split,QuantityObj);
 				QuantityObj=null;//Clear out to avoid weirdness.
 				}
 			}

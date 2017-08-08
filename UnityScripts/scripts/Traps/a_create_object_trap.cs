@@ -53,7 +53,16 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	{
 		GameObject cloneObj = Instantiate(objToClone.gameObject);
 
-		ObjectLoaderInfo objI =  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link);
+		ObjectLoaderInfo objI ;
+		if (objToClone.GetComponent<NPC>()!=null)
+		{
+				objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,2);	
+		}
+		else
+		{
+				objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,256);	
+		}
+
 		objI.instance= cloneObj.GetComponent<ObjectInteraction>();
 		cloneObj.GetComponent<ObjectInteraction>().objectloaderinfo= objI;
 		objI.InUseFlag=1;

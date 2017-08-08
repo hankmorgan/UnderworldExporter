@@ -3591,7 +3591,7 @@ return value: none
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
 
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1);
+		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1,256);
 		newobjt.is_quant=1;
 		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 		GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());

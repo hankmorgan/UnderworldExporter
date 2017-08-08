@@ -951,6 +951,8 @@ public class GameWorldController : UWEBase {
 		{
 			//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
+				obj.UpdatePosition();
+				obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
 				return obj;
 				//Not needed???
 		}
@@ -966,7 +968,7 @@ public class GameWorldController : UWEBase {
 
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
-			obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.
+			obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
 		}
 
 		public void UpdatePositions()

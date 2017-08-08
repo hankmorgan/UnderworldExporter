@@ -926,7 +926,7 @@ public class Magic : UWEBase {
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the spellcast
 
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,0);
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,0,256);
 						newobjt.InUseFlag=1;
 						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
 
@@ -988,7 +988,7 @@ public class Magic : UWEBase {
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0);
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0,2);
 						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
 						myObj.GetComponent<NPC>().npc_gtarg= (short)gtarg;
 						myObj.GetComponent<NPC>().npc_goal=3;
@@ -1569,7 +1569,7 @@ public class Magic : UWEBase {
 					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 					*/
-					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0);
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0,256);
 					GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, pos).gameObject;
 					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(),0,0,0);
 					newobjt.InUseFlag=1;
@@ -1847,7 +1847,7 @@ public class Magic : UWEBase {
 				awt.spellprop=spIJ;
 
 */
-				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0);
+				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0,256);
 				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,pos);
 				newobjt.InUseFlag=1;
 
@@ -2571,6 +2571,7 @@ public class Magic : UWEBase {
 				if (index!=-1)
 				{
 						ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
+						oli.guid=System.Guid.NewGuid();
 						oli.item_id=spellprop.ProjectileItemId;
 						oli.invis=0;
 						oli.enchantment=0;

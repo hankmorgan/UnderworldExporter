@@ -1246,7 +1246,7 @@ public class NPC : MobileObject {
 			float force =100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
 			//launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
 
-			ObjectLoaderInfo newobjt= ObjectLoader.newObject(16,0,0,1);
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(16,0,0,1,256);
 			GameObject launchedItem=	ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
 
 

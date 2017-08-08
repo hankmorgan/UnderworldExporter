@@ -70,7 +70,7 @@ public class ShrineLava : UWEBase {
 			{
 				slasherPos=slasher.transform.position;
 			}
-			ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0);
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0,256);
 			GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,
 			GameWorldController.instance.LevelMarker().gameObject,
 			GameWorldController.instance.InventoryMarker.transform.position).gameObject;
