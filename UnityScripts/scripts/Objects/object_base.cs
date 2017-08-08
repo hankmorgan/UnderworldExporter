@@ -211,6 +211,14 @@ public class object_base : UWEBase {
 				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();	
 			}
 		}
+		if(CanBeOwned())
+		{
+			if (((objInt().owner & 0x1f))!=0)
+			{
+				SignalTheft(GameWorldController.instance.playerUW.transform.position, objInt().owner);
+				objInt().owner=0;
+			}	
+		}
 	return false;
 	}
 
@@ -802,6 +810,14 @@ public class object_base : UWEBase {
 			return false;
 		}
 
+		/// <summary>
+		/// Returns if the item in question can be owned by an NPC
+		/// </summary>
+		/// <returns><c>true</c> if this instance can be owned; otherwise, <c>false</c>.</returns>
+		public bool CanBeOwned()
+		{
+			return (GameWorldController.instance.commonObject.properties[objInt().item_id].CanBelongTo==1);	
+		}
 
 		/// <summary>
 		/// String for displaying the ownership of the object in question.
@@ -809,7 +825,7 @@ public class object_base : UWEBase {
 		/// <returns>The string.</returns>
 		public virtual string OwnershipString()
 		{
-			if (GameWorldController.instance.commonObject.properties[objInt().item_id].CanBelongTo==1)
+			if (CanBeOwned())
 			{
 				if (((objInt().owner & 0x1f))!=0)
 				{
@@ -817,6 +833,40 @@ public class object_base : UWEBase {
 				}
 			}
 				return "";
+		}
+
+
+		/// <summary>
+		/// Signals the theft of this object to a specific race
+		/// </summary>
+		public static void SignalTheft(Vector3 position, int Owner)
+		{
+			foreach (Collider Col in Physics.OverlapSphere(position,4.0f))
+			{
+				if (Col.gameObject.GetComponent<NPC>() != null)
+				{
+					if ((Col.gameObject.GetComponent<NPC>().GetRace()==(Owner & 0x1f)))
+					{										
+						string OwnerName = StringController.instance.GetString(1,370+(Owner & 0x1f) );
+										string reaction="";
+						Col.gameObject.GetComponent<NPC>().npc_attitude--;//Make the npc angry with the player.
+						if(Col.gameObject.GetComponent<NPC>().npc_attitude<=0)
+						{
+								Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
+								Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
+								Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;
+								Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+												reaction = StringController.instance.GetString(1,225);
+						}
+						else
+						{
+							reaction = StringController.instance.GetString(1,226);
+								//StringController.instance.GetString(1,370+(objInt().owner & 0x1f) )
+						}
+						UWHUD.instance.MessageScroll.Add(OwnerName.Trim() + reaction);
+					}
+				}
+			}	
 		}
 
 }

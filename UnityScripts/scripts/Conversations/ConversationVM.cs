@@ -1703,7 +1703,7 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[3];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-3);//ptr to value
+							args[2]= stack.at(stack.stackptr-4);//ptr to value
 							set_race_attitude(npc,stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
 							break;
 						}
@@ -3106,7 +3106,7 @@ public class ConversationVM : UWEBase {
 		/// <param name="attitude">Attitude.</param>
 		/// <param name="unk2">Unk2.</param>
 		/// Seems to set attitude for all npcs with the whoami of the same value.
-		public void set_race_attitude(NPC npc, int unk1, int attitude, int unk2)
+		public void set_race_attitude(NPC npc, int unk1, int attitude, int Race)
 		{
 			//Used in Bandit chief conversation Level3
 			//id=0026 name="set_race_attitude" ret_type=void
@@ -3125,7 +3125,32 @@ public class ConversationVM : UWEBase {
 				}
 			}*/
 				//theory only works on local npcs???
-			Debug.Log(npc.name + " Set Race attitude " + unk1 + " " + attitude + " " + unk2);
+				Debug.Log(npc.name + " Set Race attitude " + unk1 + " " + attitude + " " + Race);
+				foreach (Collider Col in Physics.OverlapSphere(npc.transform.position,4.0f))
+				{
+						if (Col.gameObject.GetComponent<NPC>()!=null)
+						{
+								if (Col.gameObject.GetComponent<NPC>().GetRace()==Race)
+										//if (
+										//	(AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))	
+										//	||
+										//	(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
+										//)
+								{
+									Col.gameObject.GetComponent<NPC>().npc_attitude=(short)attitude;
+
+									if (attitude==0)
+									{		
+										Col.gameObject.GetComponent<NPC>().npc_gtarg=5;
+										Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
+										Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;	
+										Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+									}
+								}
+						}
+				}
+
+
 		}
 
 

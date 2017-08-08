@@ -17,7 +17,7 @@ public class MobileObject : object_base {
 		public short npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 		public short npc_gtarg;         //goal target; 1:player
 		public short npc_heading;
-		protected GameObject gtarg;
+		public GameObject gtarg;
 		public string gtargName;
 
 		public short npc_talkedto;      // is 1 when player already talked to npc

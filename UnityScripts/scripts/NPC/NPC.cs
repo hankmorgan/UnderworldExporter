@@ -624,18 +624,18 @@ public class NPC : MobileObject {
 					}
 				}	
 
-								//TODO: THEORY check if the first 5 bits of owner signifies the raise of npcs to notify!
 				//Alert nearby npcs that i have been attacked.
 				//Will alert npcs of same item id or an allied type. (eg goblins & trolls)
 					foreach (Collider Col in Physics.OverlapSphere(this.transform.position,4.0f))
 					{
 						if (Col.gameObject.GetComponent<NPC>()!=null)
 						{
-							if (
-								(AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))	
-								||
-								(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
-							)
+							if (AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))
+							//if (
+							//	(AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))	
+							//	||
+							//	(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
+							//)
 								{
 									Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
 									Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
@@ -663,6 +663,8 @@ public class NPC : MobileObject {
 
 	static bool AreNPCSAllied(NPC srcNPC, NPC dstNPC)
 	{
+		return (srcNPC.GetRace()==dstNPC.GetRace());
+				/*
 		if(srcNPC.objInt().item_id==dstNPC.objInt().item_id)	
 		{
 				return true;
@@ -696,7 +698,7 @@ public class NPC : MobileObject {
 				}
 		}
 		return false;
-
+*/
 	}
 
 	/// <summary>
@@ -1334,5 +1336,11 @@ public class NPC : MobileObject {
 	{
 		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].EquipDamage;
 	}
+
+	public int GetRace()
+	{
+		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Race;
+	}
+
 
 }

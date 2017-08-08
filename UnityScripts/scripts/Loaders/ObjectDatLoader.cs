@@ -99,7 +99,7 @@ public class ObjectDatLoader : Loader {
 				public int AttackPower;
 				public int Remains;
 				public int Blood;
-				public int GeneralType;
+				public int Race;
 				public int Passive;
 				public int Defence;
 				public int Speed;
@@ -202,7 +202,7 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].AttackPower= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);//Attack power
 					critterStats[j].Remains=(int)DataLoader.getValAtAddress(obj_dat,add_ptr + 8, 8) & 0xF0;//Remains body
 					critterStats[j].Blood=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
-					critterStats[j].GeneralType= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//General Type
+					critterStats[j].Race= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//Uwformats calls this General Type
 					critterStats[j].Passive=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
 					critterStats[j].Defence=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
 					critterStats[j].Speed=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
