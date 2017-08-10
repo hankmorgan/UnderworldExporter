@@ -952,7 +952,7 @@ public class GameWorldController : UWEBase {
 			//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
 				obj.UpdatePosition();
-				obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
+				//obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
 				return obj;
 				//Not needed???
 		}

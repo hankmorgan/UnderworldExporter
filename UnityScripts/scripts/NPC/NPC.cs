@@ -285,7 +285,7 @@ public class NPC : MobileObject {
 									GameWorldController.instance.playerUW.quest().QuestVariables[11]=1;	
 									return false;
 									}
-								case 116:	//Tybal
+								case 231:	//Tybal
 									{
 									//Play the tybal death cutscene.
 									//GameWorldController.instance.playerUW.quest().isTybalDead=true;
@@ -718,7 +718,7 @@ public class NPC : MobileObject {
 			if (npc_whoami==0)
 			{//Generic conversation.
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
-				npcname= StringController.instance.GetFormattedObjectNameUW(objInt);
+				npcname= StringController.instance.GetSimpleObjectNameUW(objInt);
 				//npc_whoami=256+(objInt.item_id -64);
 			}
 			if (npc_whoami>255)
@@ -1276,7 +1276,7 @@ public class NPC : MobileObject {
 
 	public override string ContextMenuDesc (int item_id)
 	{
-		if(objInt().isIdentified==true)
+		if ((objInt().isIdentified==true) && (npc_whoami!=0))
 		{
 			return StringController.instance.GetString (7,npc_whoami+16);
 		}	

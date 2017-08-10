@@ -1124,7 +1124,7 @@ public class SaveGame : Loader {
 										(currobj.invis << 14) |
 										(currobj.doordir << 13) |
 										(currobj.enchantment << 12) |
-										((currobj.flags & 0x0F) << 9) |
+										((currobj.flags & 0x07) << 9) |
 										(currobj.item_id & 0x1FF) ;
 
 								DataLoader.WriteInt8(writer,(ByteToWrite & 0xFF));

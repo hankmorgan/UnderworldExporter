@@ -1892,7 +1892,7 @@ public class TileMap : Loader {
 										(currobj.invis << 14) |
 										(currobj.doordir << 13) |
 										(currobj.enchantment << 12) |
-										((currobj.flags & 0x0F) << 9) |
+										((currobj.flags & 0x07) << 9) |
 										(currobj.item_id & 0x1FF) ;
 
 								TileMapData[addptr]=(char)(ByteToWrite & 0xFF);

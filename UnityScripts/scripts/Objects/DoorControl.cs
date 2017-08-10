@@ -57,7 +57,7 @@ public class DoorControl : object_base {
 			}
 			else
 			{
-				//StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
+				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
 			}	
 		}
 	}
@@ -363,7 +363,17 @@ public class DoorControl : object_base {
 				objInt().item_id+=8;
 				objInt().zpos+=24;
 				objInt().enchantment=1;
-				objInt().flags=13;
+				if (isPortcullis())
+				{
+					//objInt().flags=12;	
+					objInt().flags=4;
+				}
+				else
+				{
+					//objInt().flags=13;	
+					objInt().flags=5;	
+				}
+				
 				//state=true;
 				if(objInt().link!=0)
 					{	//If it's link is to something that is not a lock then it is likely to be a trigger
@@ -737,14 +747,14 @@ public class DoorControl : object_base {
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
-								if (objInt.tileX<=TileMap.TileMapSizeX)
-								{
-										textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
-								}
-								else
-								{
-										textureIndex=0;
-								}
+							if (objInt.tileX<=TileMap.TileMapSizeX)
+							{
+								textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+							}
+							else
+							{
+								textureIndex=0;
+							}
 							
 							//textureIndex = GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
 							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");

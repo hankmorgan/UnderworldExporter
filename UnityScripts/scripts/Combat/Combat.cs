@@ -15,8 +15,8 @@ public class Combat : MonoBehaviour {
 	public bool AttackExecuting; 
 	/// The current charge of the attack.
 	public float Charge;  
-	/// The rate per second that the attack charge increases by. Needs to be changed to reflect player combat skills.
-	protected float chargeRate=33.0f;
+	/// The rate per second that the attack charge increases by. 
+	public float chargeRate=33.0f;
 
 
 

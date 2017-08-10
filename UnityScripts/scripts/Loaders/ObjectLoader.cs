@@ -536,7 +536,7 @@ public class ObjectLoader : Loader {
 						objList[x].item_id=0;
 				}
 				//printf("Item ID %d %d\n",x, objList[x].item_id);
-				objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x0F);
+				objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
 				objList[x].enchantment = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
 				objList[x].doordir  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
 				objList[x].invis  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
@@ -565,7 +565,7 @@ public class ObjectLoader : Loader {
 						objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				}
 
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.DOOR)
+				/*if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.DOOR)
 				{
 					switch (_RES)
 					{
@@ -576,6 +576,52 @@ public class ObjectLoader : Loader {
 						{//Open doors need to be adjusted down?
 								//objList[x].zpos-=24;
 						}
+						break;
+					}
+				}*/
+				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_MOVING_DOOR)		
+				{
+					//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
+					//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
+					//it should be in
+					objList[x].item_id= 320+ objList[x].owner;
+					switch (objList[x].item_id)
+						{//closed doors
+						case 320:
+						case 321:
+						case 322:
+						case 323:
+						case 324:
+						case 325:							
+						case 327://secret door
+							objList[x].item_id+=8;
+							//objList[x].zpos-=24;
+							objList[x].flags=5;
+							objList[x].enchantment=1;
+							objList[x].owner=0;
+							break;
+
+						case 326://Portcullis
+							objList[x].item_id+=8;
+							//objList[x].zpos-=24;
+							objList[x].flags=4;
+							objList[x].enchantment=1;
+							objList[x].owner=0;
+							break;
+						//open doors
+						case 328:
+						case 329:
+						case 330:
+						case 331:
+						case 332:
+						case 333:
+						case 335://Open secret door
+						case 334://open portcullis
+							objList[x].item_id-=8;
+							//objList[x].zpos-=24;
+							objList[x].flags=0;
+							objList[x].enchantment=0;
+							objList[x].owner=0;
 						break;
 					}
 				}
@@ -1651,7 +1697,10 @@ public class ObjectLoader : Loader {
 					//If a container then link its contents as well
 					if (obj.GetComponent<Container>())
 					{//Rebuild container chain
-						linkContainerContents(obj.GetComponent<Container>());
+						if (obj!=cn.gameObject)
+						{
+							linkContainerContents(obj.GetComponent<Container>());	
+						}						
 					}
 				}
 

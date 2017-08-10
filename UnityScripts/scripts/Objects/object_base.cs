@@ -852,11 +852,12 @@ public class object_base : UWEBase {
 						Col.gameObject.GetComponent<NPC>().npc_attitude--;//Make the npc angry with the player.
 						if(Col.gameObject.GetComponent<NPC>().npc_attitude<=0)
 						{
-								Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
-								Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
-								Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;
-								Col.gameObject.GetComponent<NPC>().npc_goal=5;	
-												reaction = StringController.instance.GetString(1,225);
+							Col.gameObject.GetComponent<NPC>().npc_attitude=0;
+							Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
+							Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
+							Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;
+							Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+							reaction = StringController.instance.GetString(1,225);
 						}
 						else
 						{

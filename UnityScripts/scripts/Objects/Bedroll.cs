@@ -36,7 +36,7 @@ public class Bedroll : object_base {
 				if (incense!=null)
 					{
 					UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-					UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
+					//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 					incense.consumeObject ();
 					switch (GameWorldController.instance.playerUW.quest().getIncenseDream())
 						{
@@ -58,8 +58,9 @@ public class Bedroll : object_base {
 							}
 							else
 							{//Regular sleep with a fade to black
-								UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-								UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
+								StartCoroutine(SleepDelay());
+								//UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
+								//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 							}	
 						}					
 					}
@@ -232,5 +233,15 @@ public class Bedroll : object_base {
 	{
 		return "sleep";
 	}
+
+
+		IEnumerator SleepDelay()
+		{
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
+			UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
+			yield return new WaitForSeconds(3f);
+			UWHUD.instance.CutScenesFull.SetAnimationFile="Anim_Base";
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
+		}
 
 }

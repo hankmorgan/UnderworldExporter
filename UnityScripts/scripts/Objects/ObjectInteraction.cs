@@ -137,6 +137,7 @@ public class ObjectInteraction : UWEBase {
 		public const int AN_ORB_ROCK=110;
 		public const int AN_EXPLODING_BOOK=111;
 		public const int A_MAGIC_PROJECTILE=112;
+		public const int A_MOVING_DOOR=113;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1737,7 +1738,7 @@ public class ObjectInteraction : UWEBase {
 						{
 							Boots b = myObj.AddComponent<Boots>();
 							b.UpdateQuality();
-							if ((currObj.item_id==47) && (currObj.link==0))										
+							if ((currObj.item_id==47) && (_RES==GAME_UW1))										
 							{//Dragon skin boots special case when creating from a conversation.
 								currObj.link =  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
 								objInt.link =currObj.link;

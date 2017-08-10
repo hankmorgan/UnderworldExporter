@@ -38,6 +38,7 @@ public class UWCombat : Combat {
 	/// </summary>
 	public override void CombatBegin()
 	{ 
+		chargeRate= (33f) + (66f * ((float)UWCharacter.Instance.PlayerSkills.Attack/30f));
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
 			CurrentStrike=GetStrikeType();

@@ -219,8 +219,11 @@ public class TileMapRenderer : Loader{
 				{
 						if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
 						{
-								RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
-								RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
+								if (level.Tiles[objList.objInfo[i].tileX,objList.objInfo[i].tileY].tileType!=TILE_SOLID)
+								{
+										RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
+										RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
+								}
 						}
 				}
 		}

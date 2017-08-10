@@ -134,7 +134,9 @@ public class UWHUD : HUD {
 
 		public Text ContextMenu;
 
+		public Text editorButtonLabel;
 		public IngameEditor editor;
+
 
 		void Awake()
 		{

@@ -282,6 +282,10 @@ public class UWCharacter : Character {
 						return;
 				}
 		base.Update ();
+				if (EditorMode)
+				{
+					CurVIT=MaxVIT;	
+				}
 		if (JustTeleported)
 		{
 			teleportedTimer+=Time.deltaTime;

@@ -238,13 +238,22 @@ public class MainMenuHud : GuiBase {
 		{
 			if (SlotNo==-2)
 			{//Speedstart to editor
-				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
-				GameWorldController.instance.InitBGlobals(0);
-				GameClock.instance._day=0;
-				GameClock.instance._minute=51;
-				GameClock.instance._second=15;
-				UWEBase.EditorMode=true;
-				JourneyOnwards();
+				//GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
+				//GameWorldController.instance.InitBGlobals(0);
+				//GameClock.instance._day=0;
+				//GameClock.instance._minute=51;
+				//GameClock.instance._second=15;
+				if (UWEBase.EditorMode==true)
+				{
+					UWHUD.instance.editorButtonLabel.text="Enable Editor";
+					UWEBase.EditorMode=false;
+				}
+				else
+				{
+					UWHUD.instance.editorButtonLabel.text="Editor Enabled";
+					UWEBase.EditorMode=true;				
+				}				
+				//JourneyOnwards();
 				return;
 			}
 

@@ -93,12 +93,13 @@ public class Grave : object_base {
 					//Arise Garamon.
 					//000~001~134~You thoughtfully give the bones a final resting place.
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,134));
-					GameObject trig = GameObject.Find ("a_move_trigger_54_52_04_0495");
-					if (trig!=null)
+
+					ObjectInteraction trigObj =GameWorldController.instance.CurrentObjectList().objInfo[495].instance; // GameObject.Find ("a_move_trigger_54_52_04_0495");
+					if (trigObj!=null)
 					{					
 						objInt().link++;//Update the grave description
 						objIntUsed.consumeObject ();
-						trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
+						trigObj.GetComponent<trigger_base>().Activate();
 						GameWorldController.instance.playerUW.quest().isGaramonBuried=true;
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
