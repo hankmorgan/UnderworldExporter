@@ -1342,5 +1342,15 @@ public class NPC : MobileObject {
 		return GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Race;
 	}
 
-
+	public int Room()
+	{
+		if (TileMap.ValidTile(objInt().tileX, objInt().tileY))
+		{
+			return GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY].roomRegion;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 }

@@ -31,6 +31,7 @@ public class MobileObject : object_base {
 
 
 		public short[] NPC_DATA=new short[15];
-		/// The Navmesh region the NPC is in
+
+		/// The RAIN AI Navmesh region the NPC is in
 		public string NavMeshRegion;
 }

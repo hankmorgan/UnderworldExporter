@@ -10,6 +10,7 @@ public class TileInfo : Loader {
 		public short floorTexture;	//At the moment this is the index into the texture table
 		public short wallTexture;	
 		public int indexObjectList;	//Points to a linked list of objects in the objects block
+		public short doorBit;
 		public bool isDoor;	
 		public short shockDoor;
 		public short Render;		//If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
@@ -26,13 +27,14 @@ public class TileInfo : Loader {
 		public short Diagonal;
 		public short Top; public short Bottom;	//Textures in each face
 		//public short noOfNeighbours;	//Non solid neighbour tile count.
+		public bool isLand;
 		public bool isWater;		//Set when it has a water texture.
 		public bool isLava;		//Set when it has a lava texture.
 		public bool hasBridge;//Set when the tile contains a bridge.
 		//public short hasExit;//Set when it contains a move trigger that goes to another level.
 		//short waterRegion;	//Index to the water contigous area.
 		//public short isCorridor;  //Part of a group of 4 or more tiles with only 2 non solid neighbours
-		//short roomRegion;	//Index to the contigous room that the tile is part of.
+		public short roomRegion;	//Index to the contigous room that the tile is part of.
 		//short upperRegion; //Special case to store multiple values when the tile is part of a bridge.
 		public short waterRegion; //Mask on water tiles for nav mesh generation.
 		public short lavaRegion;// Mask on lave tiles for nav mesh generation.

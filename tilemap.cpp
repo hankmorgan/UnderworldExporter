@@ -826,7 +826,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].BullFrog = 0;
 
 				LevelInfo[x][y].flags = (FirstTileInt>>7) & 0x3;
-				LevelInfo[x][y].noMagic = (FirstTileInt>>13) & 0x1;
+				LevelInfo[x][y].noMagic = (FirstTileInt>>14) & 0x1;
+				LevelInfo[x][y].doorBit = (FirstTileInt >> 15) & 0x1;
 				switch (game)
 					{
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file

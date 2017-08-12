@@ -90,7 +90,7 @@ public class ScrollController : GuiBase {
 
 	public void ListAdd(string text)
 	{
-		if (ptr==MaxEntries)
+		if (ptr==MaxEntries)		
 		{			
 			for (int i=0;i<txtToDisplay.GetUpperBound(0);i++)
 			{//push the items up the list.

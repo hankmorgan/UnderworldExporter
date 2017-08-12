@@ -117,6 +117,7 @@ public class MainMenuHud : GuiBase {
 						if (Input.GetKey(KeyCode.Escape))
 						{
 								MenuMode=0;
+								chargenStage=0;
 								OpScr.SetActive(true);
 								CharGen.SetActive(false);
 								ButtonClickMainMenu(4);
@@ -342,11 +343,11 @@ public class MainMenuHud : GuiBase {
 					//Handedness
 						if (option == 0)
 						{
-								GameWorldController.instance.playerUW.isLefty=false;
+								GameWorldController.instance.playerUW.isLefty=true;
 						}
 						else
 						{
-								GameWorldController.instance.playerUW.isLefty=true;
+								GameWorldController.instance.playerUW.isLefty=false;
 						}
 						chargenStage++;
 						PlaceButtons(Chargen.GetChoices(chargenStage,-1),false);
@@ -463,6 +464,10 @@ public class MainMenuHud : GuiBase {
 								for (int i=0; i<= GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0);i++)
 								{
 									GameWorldController.instance.playerUW.quest().QuestVariables[i]=0;		
+								}
+								for (int i=0; i<=GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes.GetUpperBound(0);i++)
+								{
+									GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[i]=false;
 								}
 								switch(_RES)
 								{

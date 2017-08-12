@@ -8,9 +8,17 @@ public class PaletteLoader : ArtLoader {
 
 	public Palette[] Palettes = new Palette[22];
 	public int NoOfPals=22;
+	public Palette GreyScale=null;
 
 	public void LoadPalettes()
 	{
+		GreyScale=new Palette();
+		for (int i=0; i <= GreyScale.blue.GetUpperBound(0); i++)
+		{
+			GreyScale.red[i]=(byte)i;	
+			GreyScale.blue[i]=(byte)i;
+			GreyScale.green[i]=(byte)i;
+		}
 		switch(_RES)
 		{
 			case GAME_SHOCK:

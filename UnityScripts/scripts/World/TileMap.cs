@@ -189,7 +189,7 @@ public class TileMap : Loader {
 		case TILE_SLOPE_E:
 		case TILE_SLOPE_W:
 			{
-				return true;
+			return true;
 			}
 		default:
 			{
@@ -254,14 +254,33 @@ public class TileMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		public int GetTileType(int tileX, int tileY)
 		{
-				if ((tileX>TileMap.TileMapSizeX) || (tileY>TileMap.TileMapSizeY) || (tileX<0) || (tileY<0))
-				{//Assume out of bounds is solid
-					return TILE_SOLID;
-				}
-				else
-				{
-					return Tiles[tileX,tileY].tileType;
-				}			
+			//if ((tileX>TileMap.TileMapSizeX) || (tileY>TileMap.TileMapSizeY) || (tileX<0) || (tileY<0))
+			if (TileMap.ValidTile(tileX,tileY))
+			{//Assume out of bounds is solid
+				return TILE_SOLID;
+			}
+			else
+			{
+				return Tiles[tileX,tileY].tileType;
+			}			
+		}
+
+		/// <summary>
+		/// Gets the room region at the specified tile
+		/// </summary>
+		/// <returns>The room.</returns>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public int GetRoom(int tileX, int tileY)
+		{
+			if (TileMap.ValidTile(tileX,tileY))
+			{
+				return Tiles[tileX,tileY].roomRegion;
+			}
+			else
+			{
+				return 0;
+			}
 		}
 
 	
@@ -539,6 +558,7 @@ public class TileMap : Loader {
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
 								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
+								Tiles[x,y].doorBit =(short)( (FirstTileInt>>15) & 0x1);
 								switch (UWEBase._RES)
 								{
 									case UWEBase.GAME_UWDEMO://uwdemo
@@ -576,7 +596,7 @@ public class TileMap : Loader {
 								}	
 								Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
 								Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
-
+								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) );
 								//UW only has a single ceiling texture so this is ignored.
 								//Tiles[x,y].shockCeilingTexture = Tiles[x,y].floorTexture;					
 								Tiles[x,y].shockCeilingTexture=CeilingTexture;
@@ -1866,8 +1886,8 @@ public class TileMap : Loader {
 
 								int floorTexture = t.floorTexture<<2;
 								int noMagic = t.noMagic << 6;
-
-								ByteToWrite= floorTexture | noMagic;
+								int DoorBit = t.doorBit << 7;
+								ByteToWrite= floorTexture | noMagic | DoorBit;
 								TileMapData[addptr+1]= (char)(ByteToWrite);
 
 
@@ -2021,5 +2041,88 @@ public class TileMap : Loader {
 			}
 
 			return textureMapData;
+		}
+
+
+		/// <summary>
+		/// Defines continous rooms regions.
+		/// </summary>
+		public void CreateRooms()
+		{
+			short RegionNo=1;
+				//Reset room settings
+			for (int x=0; x<=TileMapSizeX;x++)
+			{
+				for (int y=0; y<=TileMapSizeY;y++)
+				{
+					Tiles[x,y].roomRegion=0;
+				}		
+			}
+
+			for (int x=0; x<=TileMapSizeX;x++)
+			{
+				for (int y=0; y<=TileMapSizeY;y++)
+				{
+					if (
+							isTileOpen(Tiles[x,y].tileType)
+					&& 
+							(Tiles[x,y].roomRegion==0)
+					)
+					{//Tiles is open and room region is not set
+						Tiles[x,y].roomRegion=RegionNo;
+						fillRoomRegion(x,y, TileTerrainType(x,y) ,RegionNo)	;
+						RegionNo++;
+					}
+				}
+			}
+		}
+
+
+		void fillRoomRegion(int startX, int startY, int terrainType,short RegionNo)
+		{
+			//Check in each direction
+			for (int x=-1; x<=1; x++)
+			{
+				for (int y=-1; y<=1; y++)
+				{
+					if ((x!=0) && (y!=0))
+					{
+						if (TileMap.ValidTile(startX+x,startY+y))	
+						{
+							if (
+									isTileOpen(Tiles[startX+x,startY+y].tileType)
+									&& 
+									(Tiles[startX+x,startY+y].roomRegion==0)
+									&& 
+									(terrainType == TileTerrainType(startX+x,startY+y))
+							)
+							{//Tiles is open and room region is not set and is a matching terrain type.
+								Tiles[startX+x,startY+y].roomRegion=RegionNo;	
+								fillRoomRegion(startX+x,startY+y, terrainType ,RegionNo)	;
+							}
+						}
+					}
+				}	
+			}
+		}
+
+		int TileTerrainType(int x, int y)
+		{
+			if (Tiles[x,y].isLand)
+			{
+				return 0;	
+			}
+			else if (Tiles[x,y].isWater)
+			{
+				return 1;	
+			}
+			else if (Tiles[x,y].isLava)
+			{
+				return 2;	
+			}
+			else
+			{
+				return 0;
+			}
 		}
 }

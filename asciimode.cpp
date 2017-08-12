@@ -380,6 +380,17 @@ void printTileMap(tile LevelInfo[64][64], int LevelNo)
 			fprintf(LOGFILE,"|");//delimiter.
 			}
 		}
+	
+	fprintf(LOGFILE, "\nNow Printing tile offset addresses for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			fprintf(LOGFILE, "(%d,%d) = %d",x,y, LevelInfo[x][y].address);
+			fprintf(LOGFILE, "|");//delimiter.
+			}
+		}
 	}
 
 void printNoMagicMap(tile LevelInfo[64][64], int LevelNo)
@@ -469,13 +480,15 @@ void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600], int Le
 	//Door flags set by setDoorBits()
 
 	int x; int y;
-	fprintf(LOGFILE,"\nNow Printing door positions for level :%d.", LevelNo);
+	fprintf(LOGFILE,"\nNow Printing door positions (by DoorBit) for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
 		{
 		fprintf(LOGFILE,"\n");
 		for (x = 0; x<64; x++)
 			{
-			if (LevelInfo[x][y].isDoor == 1)
+			fprintf(LOGFILE, "%d", LevelInfo[x][y].doorBit);
+			/*
+			if (LevelInfo[x][y].doorBit == 1)
 				{
 				fprintf(LOGFILE,"%d(%d,%d)|", objList[LevelInfo[x][y].indexObjectList].heading, objList[LevelInfo[x][y].indexObjectList].x, objList[LevelInfo[x][y].indexObjectList].y);
 				}
@@ -483,6 +496,7 @@ void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600], int Le
 				{
 				fprintf(LOGFILE,".|");
 				}
+				*/
 			}
 		}
 

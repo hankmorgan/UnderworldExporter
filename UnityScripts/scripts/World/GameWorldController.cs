@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
-		public bool bGenNavMeshes=true;
+	public bool bGenNavMeshes=true;
 
 		/// <summary>
 		/// Enables texture animation effects
@@ -672,8 +672,10 @@ public class GameWorldController : UWEBase {
 					{
 						Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
 					}
+					Tilemaps[newLevelNo].CreateRooms();
 
 				}
+
 				if (UWEBase._RES!=UWEBase.GAME_SHOCK)
 				{
 					//Call events for inventory objects on level transition.
@@ -735,7 +737,7 @@ public class GameWorldController : UWEBase {
 				}
 				
 
-				if (bGenNavMeshes)
+				if ((bGenNavMeshes) && (!EditorMode))
 				{
 					GenerateNavmesh(NavRigLand);
 					GenerateNavmesh(NavRigWater);								
@@ -1322,7 +1324,18 @@ public class GameWorldController : UWEBase {
 				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 				{
 					MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
-					MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i);
+						switch (MaterialMasterList[i].shader.name.ToUpper())
+						{
+						case "COLOURREPLACEMENT":
+						case "COLOURREPLACEMENTREVERSE":
+							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,1);
+							break;
+						default:
+							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
+							break;
+						}
+					//Debug.Log( MaterialMasterList[i].shader.name);
+				
 				}
 				if (_RES==GAME_UW1)
 				{

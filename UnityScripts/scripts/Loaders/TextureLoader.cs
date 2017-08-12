@@ -24,14 +24,36 @@ public class TextureLoader : ArtLoader {
 	private int FloorDim=32;
 
 	
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TextureLoader"/> class.
+		/// </summary>
+		/// <param name="index">Index.</param>
+		/// <param name="TextureType">Texture type. 0 = normal, 1 = palette cycled</param>
+	public Texture2D LoadImageAt (int index, short TextureType)
+	{
+		switch(TextureType)
+		{
+		case 1: // Palette cycled
+			return LoadImageAt (index,GameWorldController.instance.palLoader.GreyScale);
+		default:
+			return LoadImageAt (index,GameWorldController.instance.palLoader.Palettes[0]);
+		}
+	}
+
+
+	public override Texture2D LoadImageAt (int index)
+	{
+		return LoadImageAt (index,GameWorldController.instance.palLoader.Palettes[0]);
+	}
 
 		/// <summary>
 		/// Loads the image at index.
 		/// </summary>
 		/// <returns>The <see cref="UnityEngine.Texture2D"/>.</returns>
 		/// <param name="index">Index.</param>
+		/// <param name="palToUse">Pal to use.</param>
 		/// If the index is greater than 209 I return a floor texture.
-	public override Texture2D LoadImageAt (int index)
+	public Texture2D LoadImageAt (int index, Palette palToUse)
 	{
 		if (_RES==GAME_UWDEMO)
 		{//Point the UW1 texture files to the demo files
@@ -81,11 +103,11 @@ public class TextureLoader : ArtLoader {
 										char[] outputImg;
 										//  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
 										UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
-										return Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+										return Image(outputImg,0,Width,Height,"namehere",palToUse,true);
 										}
 									else
 										{//Uncompressed
-											return Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+										return Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",palToUse,true);
 										}
 									}
 									else
@@ -114,7 +136,7 @@ public class TextureLoader : ArtLoader {
 						}
 				}
 				long textureOffset = DataLoader.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
-				return Image(texturebufferT,textureOffset, FloorDim, FloorDim,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+				return Image(texturebufferT,textureOffset, FloorDim, FloorDim,"name_goes_here",palToUse,false);
 			}
 
 
@@ -135,7 +157,7 @@ public class TextureLoader : ArtLoader {
 					}
 				}	
 				long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
-				return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+				return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",palToUse,false);
 			}
 			else
 			{//Floor textures (to match my list of textures)
@@ -151,7 +173,7 @@ public class TextureLoader : ArtLoader {
 					}
 				}
 				long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-TextureSplit) * 4) + 4, 32);
-				return Image(texturebufferF,textureOffset, FloorDim, FloorDim,"name_goes_here",GameWorldController.instance.palLoader.Palettes[0],false);
+				return Image(texturebufferF,textureOffset, FloorDim, FloorDim,"name_goes_here",palToUse,false);
 			}
 			//break;							
 		}	
