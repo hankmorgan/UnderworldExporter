@@ -753,7 +753,10 @@ public class Container : object_base {
 	}
 
 
-
+		/// <summary>
+		/// Gets the container equip display for when it is opened on the panel.
+		/// </summary>
+		/// <returns>The container equip display.</returns>
 	public Sprite GetContainerEquipDisplay ()
 	{	
 		switch(_RES)
@@ -770,19 +773,17 @@ public class Container : object_base {
 						case 136://Map case
 						case 138://gold coffer
 								{
-									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id+1);	break;
+									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id+1);	
 								}
 						default:
 								{
-									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);break;	
+									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);
 								}
-						}
-						break;
+						}						
 				}
 		default://
 				{
-					return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);break;
-					break;
+					return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);					
 				}
 		}
 	}

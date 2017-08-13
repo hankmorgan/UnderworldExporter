@@ -12,7 +12,7 @@ public class TileInfo : Loader {
 		public int indexObjectList;	//Points to a linked list of objects in the objects block
 		public short doorBit;
 		public bool isDoor;	
-		public short shockDoor;
+		//public short shockDoor;
 		public short Render;		//If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
 		public short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
 		public short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til
@@ -39,12 +39,12 @@ public class TileInfo : Loader {
 		public short waterRegion; //Mask on water tiles for nav mesh generation.
 		public short lavaRegion;// Mask on lave tiles for nav mesh generation.
 		public short landRegion;// mask on land tiles for nave mesh generation
-		public short bridgeRegion;//Mask for bridges.
-		public short tileTested;  //for recursive region tests
+		//public short bridgeRegion;//Mask for bridges.
+		//public short tileTested;  //for recursive region tests
 		public short tileX;
 		public short tileY;
 		public short flags;//UW Tile flags
-		public short noMagic;//Only seems to matter on Level 9 and possibly where there is water?
+		public short noMagic;//Only seems to matter on Level 9 and possibly where there is water? UPDATE>Possible bug in reading data. Retest this.
 
 		public short BullFrog;	//Tile is a bullfrog tile. UW1/lvl3
 		//Shock Specific Stuff
@@ -62,7 +62,7 @@ public class TileInfo : Loader {
 		public short shockEastCeilHeight; public short shockWestCeilHeight;
 		public short shockFloorOrientation; public short shockCeilOrientation;
 
-		public short ActualType;
+		//public short ActualType;
 
 		//public int DoorIndex;	//Index to the door object if this tile has one.
 

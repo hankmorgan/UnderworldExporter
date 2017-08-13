@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerInventory : UWEBase {
 
-	public int ItemCounter=0;
+	//public int ItemCounter=0;
 	//public int game;
 	//TODO:make object in hand private so I can update code usages to use api instead.
 	public string ObjectInHand; //What is the current active object held by the player
@@ -42,7 +42,7 @@ public class PlayerInventory : UWEBase {
 	public GameObject InventoryMarker;
 	private GameObject[] LightGameObjects=new GameObject[4];
 
-	public bool atTopLevel;
+	//public bool atTopLevel;
 	public string currentContainer;
 	private UWCharacter playerUW;
 
@@ -61,7 +61,7 @@ public class PlayerInventory : UWEBase {
 		if (_RES==GAME_SHOCK){return;}
 		GRLoader bodies = new GRLoader(GRLoader.BODIES_GR);
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
-		atTopLevel=true;
+		//atTopLevel=true;
 		playerUW=this.GetComponent<UWCharacter>();
 		playerContainer =this.GetComponent<Container>();
 		for (int i =0;i<8;i++)
@@ -152,7 +152,7 @@ public class PlayerInventory : UWEBase {
 			lt = this.gameObject.GetComponentInChildren<Light> ();
 		}
 		ls = null;
-		int MaxBrightness = LightSource.MagicBrightness;
+		float MaxBrightness = LightSource.MagicBrightness;
 		//Start with magically generated light.
 		for (int i = 5; i <= 8; i++) {
 			ls = null;
@@ -174,8 +174,8 @@ public class PlayerInventory : UWEBase {
 					ls = LightGameObjects [i - 5].GetComponent<LightSource> ();
 					if (ls != null) {
 						if (ls.IsOn() == true) {
-							if (MaxBrightness < ls.Brightness) {
-								MaxBrightness = ls.Brightness;
+							if (MaxBrightness < ls.Brightness()) {
+								MaxBrightness = ls.Brightness();
 							}
 						}
 					}

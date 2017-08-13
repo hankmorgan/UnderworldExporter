@@ -892,6 +892,8 @@ public class GameWorldController : UWEBase {
 				}
 			TileMap.visitTileX =(short)(playerUW.transform.position.x/1.2f);
 			TileMap.visitTileY =(short)(playerUW.transform.position.z/1.2f);
+			instance.playerUW.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
+
 			if (EditorMode)
 			{
 				if ((TileMap.visitedTileX != TileMap.visitTileX) || (TileMap.visitedTileY != TileMap.visitTileY)) 

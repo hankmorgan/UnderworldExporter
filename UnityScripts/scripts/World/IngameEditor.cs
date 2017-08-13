@@ -364,10 +364,10 @@ public class IngameEditor : GuiBase_Draggable {
 										{//Slopes up to this point
 												HeightToSet=  (HeightToSet + (Mathf.Abs(DimX) * -1));
 										}
-										else
-										{//slopes up from this point
-												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
-										}
+										//else
+										//{//slopes up from this point
+										//		HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										//}
 										for (int x=MinX;x <=MaxX; x++)
 										{
 												for (int y=MinY;y <=MaxY; y++)
@@ -401,10 +401,10 @@ public class IngameEditor : GuiBase_Draggable {
 										{//Slopes down this point
 												HeightToSet=  (HeightToSet + (Mathf.Abs(DimX) * +1));
 										}
-										else
-										{//slopes down from this point
-												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
-										}
+										//else
+										//{//slopes down from this point
+										//		HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										//}
 										for (int x=MinX;x <=MaxX; x++)
 										{
 												for (int y=MinY;y <=MaxY; y++)
@@ -438,10 +438,10 @@ public class IngameEditor : GuiBase_Draggable {
 										{//Slopes up to this point
 												HeightToSet=  (HeightToSet + (Mathf.Abs(DimY) * -1));
 										}
-										else
-										{//slopes up from this point
-												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
-										}
+										//else
+										//{//slopes up from this point
+										//		HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										//}
 										for (int y=MinY;y <=MaxY; y++)
 										{
 												for (int x=MinX;x <=MaxX; x++)
@@ -474,10 +474,10 @@ public class IngameEditor : GuiBase_Draggable {
 										{//Slopes down this point
 												HeightToSet=  (HeightToSet + (Mathf.Abs(DimY) * +1));
 										}
-										else
-										{//slopes down from this point
-												HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
-										}
+										//else
+										//{//slopes down from this point
+										//		HeightToSet= HeightToSet;//Mathf.Min(15, (HeightToSet + (DimX * 1)));		
+										//}
 										for (int y=MinY;y <=MaxY; y++)
 										{
 												for (int x=MinX;x <=MaxX; x++)
@@ -751,7 +751,7 @@ public class IngameEditor : GuiBase_Draggable {
 		/// Will not change the tile type if the type is a solid
 		public static void UpdateFollowMeMode(int tileX, int tileY)
 		{
-			int DimX=0;int DimY=0;
+			//int DimX=0;int DimY=0;
 			int FloorHeight=0;
 			int WallTexture= instance.WallTextureSelect.value;
 			int FloorTexture= instance.FloorTextureSelect.value;

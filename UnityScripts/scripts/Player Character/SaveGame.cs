@@ -163,7 +163,7 @@ public class SaveGame : Loader {
 												SetActiveRuneSlots(2, (int)buffer[i]);
 												break;
 										case 0x4B://No of items. used here just to initialise a value.
-												GameWorldController.instance.playerUW.playerInventory.ItemCounter= (int)buffer[i]>>2;
+												//GameWorldController.instance.playerUW.playerInventory.ItemCounter= (int)buffer[i]>>2;
 												break;
 										case 0x4D : ///   weight in 0.1 stones
 												//Or STR * 2; safe to ignore?

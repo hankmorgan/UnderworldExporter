@@ -4,8 +4,10 @@ using System.Collections;
 /// Class for things like blood splatters, spell explosion animations
 /// </summary>
 public class Impact : object_base {
+		
 
-	void Start () {
+	protected override void Start () {
+		base.Start();
 		//Make sure the impact is always facing the player.		
 		if (this.gameObject.GetComponent<Billboard>()==null)
 		{

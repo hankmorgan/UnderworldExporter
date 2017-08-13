@@ -516,9 +516,16 @@ public class NPC : MobileObject {
 					case 5://Attack target
 					case 9:
 						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-						Vector3 AB = this.transform.position - gtarg.transform.position;
-						Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
-						ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
+						if (Room()==GameWorldController.instance.playerUW.room)
+						{
+							Vector3 AB = this.transform.position - gtarg.transform.position;
+							Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
+							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);	
+						}
+						else
+						{		//AI won't move to player position if they are in a different "room"
+							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",this.transform.position);	
+						}	
 						break;
 
 					case 6://Run away (morale failure)
@@ -664,41 +671,6 @@ public class NPC : MobileObject {
 	static bool AreNPCSAllied(NPC srcNPC, NPC dstNPC)
 	{
 		return (srcNPC.GetRace()==dstNPC.GetRace());
-				/*
-		if(srcNPC.objInt().item_id==dstNPC.objInt().item_id)	
-		{
-				return true;
-		}
-		switch (srcNPC.objInt().item_id)
-		{
-			case 70://UW1 Goblins
-			case 71:
-			case 76:
-			case 77:
-			case 78:
-			case 80:
-			case 96://uw1 trolls
-			case 111:
-			case 112:
-				{
-					switch (dstNPC.objInt().item_id)
-					{
-						case 70://UW1 Goblins
-						case 71:
-						case 76:
-						case 77:
-						case 78:
-						case 80:
-						case 96://trolls
-						case 111:
-						case 112:
-								return true;										
-					}
-				break;
-				}
-		}
-		return false;
-*/
 	}
 
 	/// <summary>
@@ -731,67 +703,22 @@ public class NPC : MobileObject {
 
 			default:
 				{
-						UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-						ConversationVM.CurrentConversation=npc_whoami;//To make obsolete
-						ConversationVM.InConversation=true;
-						if (npcname=="")
-						{
-								UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
-						}
-						else
-						{
-								UWHUD.instance.NPCName.text=npcname;	
-						}				
-						UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
-						GameWorldController.instance.convVM.RunConversation(this);
-						break;		
-				}
-								/*
-				case -1:
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
+					ConversationVM.CurrentConversation=npc_whoami;//To make obsolete
+					ConversationVM.InConversation=true;
+					if (npcname=="")
 					{
-						Conversation cnv =this.GetComponent<Conversation>();
-						if (cnv!=null)
-						{	
-								UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-								Conversation.CurrentConversation=npc_whoami;
-								Conversation.InConversation=true;
-								//cnv.WhoAmI=npc_whoami;
-								if (npcname=="")
-								{
-										UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
-								}
-								else
-								{
-										UWHUD.instance.NPCName.text=npcname;	
-								}				
-								UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
-								for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
-								{
-										if (npc_whoami== GameWorldController.instance.bGlobals[c].ConversationNo)
-										{
-												cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
-												for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
-												{
-														//Copy Private variables
-														cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];								
-												}
-												break;
-										}
-								}
-
-								StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
-						}
-						else
-						{
-								//You get no response
-								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
-						}
-						break;		
-					}*/
-
+							UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
+					}
+					else
+					{
+							UWHUD.instance.NPCName.text=npcname;	
+					}				
+					UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+					GameWorldController.instance.convVM.RunConversation(this);
+					break;		
+				}
 			}
-
-
 		}
 		return true;
 	}

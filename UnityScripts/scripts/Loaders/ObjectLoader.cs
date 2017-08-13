@@ -813,6 +813,10 @@ public class ObjectLoader : Loader {
 																objList[objList[nextObj].link].InUseFlag=1;
 														}
 												}
+												else if (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.BRIDGE)
+												{
+													LevelInfo[x,y].hasBridge=true;	
+												}
 
 												nextObj=objList[nextObj].next;
 										}
@@ -1079,61 +1083,7 @@ public class ObjectLoader : Loader {
 
 
 
-		void setDoorBits(TileInfo[,] LevelInfo,ObjectLoaderInfo[] objList)
-		{//So I know if the tile contains a door.
-				ObjectLoaderInfo currObj;
-				for (short x=0; x<64;x++)
-				{
-						for (int y=0;y<64;y++)
-						{
-								if (LevelInfo[x,y].indexObjectList !=0)
-								{
-										currObj = objList[LevelInfo[x,y].indexObjectList];
-										do  
-										{
-												if ((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.DOOR ) 
-														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.HIDDENDOOR )
-														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.PORTCULLIS))
-												{
-														//if (currObj.Angle1 >0)
-														//	{
-														//	//This door is a flat grating. I don't support that yet!
-														//	break;
-														//	}
-														//else
-														//	{
-														LevelInfo[x,y].isDoor = true;
-														//LevelInfo[x,y].DoorIndex = currObj.index;
-														//Put it's lock into use if it exists.
-														//I'm ignoring for the moment but it is here for compatability to vanilla.
-														if (currObj.link!=0)
-														{
-																if (objList[currObj.link].InUseFlag==0)
-																{
-																		objList[currObj.link].InUseFlag=1;	
-																		objList[currObj.link].tileX=TileMap.ObjectStorageTile;
-																		objList[currObj.link].tileY=TileMap.ObjectStorageTile;	
-																}
-
-														}
-														//	}
-														break;
-												}
-												else
-												{
-														if (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.SHOCK_DOOR)
-														{
-																LevelInfo[x,y].shockDoor = 1;
-																//LevelInfo[x,y].DoorIndex = currObj.index;
-														}
-												}
-												currObj=objList[currObj.next];
-										}while (currObj.index !=0);
-								}
-						}
-
-				}
-		}
+	
 
 		void SetBullFrog(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int LevelNo)
 		{
@@ -3056,6 +3006,61 @@ public class ObjectLoader : Loader {
 
 
 
+		void setDoorBits(TileInfo[,] LevelInfo,ObjectLoaderInfo[] objList)
+		{//So I know if the tile contains a door.
+				ObjectLoaderInfo currObj;
+				for (short x=0; x<64;x++)
+				{
+						for (int y=0;y<64;y++)
+						{
+								if (LevelInfo[x,y].indexObjectList !=0)
+								{
+										currObj = objList[LevelInfo[x,y].indexObjectList];
+										do  
+										{
+												if ((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.DOOR ) 
+														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.HIDDENDOOR )
+														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.PORTCULLIS))
+												{
+														//if (currObj.Angle1 >0)
+														//	{
+														//	//This door is a flat grating. I don't support that yet!
+														//	break;
+														//	}
+														//else
+														//	{
+														LevelInfo[x,y].isDoor = true;
+														//LevelInfo[x,y].DoorIndex = currObj.index;
+														//Put it's lock into use if it exists.
+														//I'm ignoring for the moment but it is here for compatability to vanilla.
+														if (currObj.link!=0)
+														{
+																if (objList[currObj.link].InUseFlag==0)
+																{
+																		objList[currObj.link].InUseFlag=1;	
+																		objList[currObj.link].tileX=TileMap.ObjectStorageTile;
+																		objList[currObj.link].tileY=TileMap.ObjectStorageTile;	
+																}
+
+														}
+														//	}
+														break;
+												}
+												//else
+												//{
+												//		if (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.SHOCK_DOOR)
+												//		{
+																//LevelInfo[x,y].shockDoor = 1;
+																//LevelInfo[x,y].DoorIndex = currObj.index;
+												//		}
+												//}
+												currObj=objList[currObj.next];
+										}while (currObj.index !=0);
+								}
+						}
+
+				}
+		}
 
 
 

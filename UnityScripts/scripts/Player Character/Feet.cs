@@ -20,7 +20,7 @@ public class Feet : UWEBase {
 	}
 
 	void OnTriggerStay(Collider other) {
-		UWCharacter.Instance.currRegion=other.gameObject.tag;
+		//UWCharacter.Instance.currRegion=other.gameObject.tag;
 		if (other.gameObject.layer==landLayer)
 		{
 			TileMap.OnGround=true;  

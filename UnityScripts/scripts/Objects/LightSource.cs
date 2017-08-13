@@ -5,8 +5,8 @@ using System.Collections;
 /// </summary>
 public class LightSource : object_base {
 	/// How bright the light is. Light radius
-	public int Brightness=4;//Default for the moment until we can get commonobj props imported.
-	public int duration;
+	//public int Brightness=4;//Default for the moment until we can get commonobj props imported.
+	//public int duration;
 	/// Sprite index for the light on image
 	//public int ItemIdOn;
 	/// Sprite index for the light off image
@@ -33,21 +33,21 @@ public class LightSource : object_base {
 		}
 
 		/// Basic brightness around the player.
-	public const int BaseBrightness = 8;
+	public const float BaseBrightness = 6;
 
 		/// The light level obtained from magic spells
-	public static int MagicBrightness=0;
+	public static float MagicBrightness=0;
 		/// Interval of time between light quality drops
 	public float LightTimerMax=30.0f;
 		/// Current time remaining on the light quality interval
 	public float LightTimer;
 
-	protected override void Start ()
-	{
-		base.Start ();
-		Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-		duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
-	}
+	//protected override void Start ()
+	//{
+		//base.Start ();
+		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+		//duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
+	//}
 
 	/// <summary>
 	/// Ticks down the light source
@@ -61,7 +61,7 @@ public class LightSource : object_base {
 			}
 			else
 			{
-				if (duration!=0)
+				if (Duration()!=0)
 				//if (objInt().item_id!=151)
 				{//The taper never runs out
 					LightTimer-=Time.deltaTime;
@@ -172,8 +172,8 @@ public class LightSource : object_base {
 				objInt().inventorySlot=invSlot.slotIndex;
 				//IsOn=true;
 				objInt().item_id=objInt().item_id+4;
-				Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-				duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
+				//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+				//Duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
 				objInt().InvDisplayIndex=objInt().item_id;
 			}
 			else
@@ -208,8 +208,8 @@ public class LightSource : object_base {
 		objInt().InvDisplayIndex=objInt().item_id;
 		objInt().isquant=1;
 		objInt().RefreshAnim();
-		Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-		duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
+		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
+		//duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
 		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 	}
 
@@ -272,6 +272,17 @@ public class LightSource : object_base {
 			{
 				return "ignite";
 			}
+		}
+
+
+		public float Brightness()
+		{
+			return (float)GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness * 1.5f;		
+		}
+
+		public int Duration()
+		{
+			return GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;	
 		}
 
 }

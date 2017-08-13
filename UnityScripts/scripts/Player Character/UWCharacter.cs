@@ -33,7 +33,7 @@ public class UWCharacter : Character {
 
 	public int Body;//Which body/portrait this character has 
 
-
+	public int room;
 
 	//Character related info
 	//Character Details
@@ -91,7 +91,7 @@ public class UWCharacter : Character {
 	public short MoonGateLevel = 2;//Domain of the mountainmen
 
 	public float lavaDamageTimer;//How long before applying lava damage
-	public string currRegion;
+	//public string currRegion;
 	private bool InventoryReady=false;
 	public bool JustTeleported=false;
 	public float teleportedTimer=0f;
@@ -725,9 +725,11 @@ public class UWCharacter : Character {
 	{
 		if (isSwimming==false)
 		{
+			float fallspeedAdjusted = fallSpeed-((float)PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
 			//Do stuff with acrobat here. In the mean time a flat skill check.
-			if ( ! PlayerSkills.TrySkill(Skills.SkillAcrobat, (int)fallSpeed))
+			if ( fallspeedAdjusted>=3.5f)
 			{
+				//Debug.Log("Fallspeed = " + fallSpeed + " adjusted down to " + fallspeedAdjusted) ;
 				ApplyDamage(Random.Range (1,5));//TODO:As a function of the acrobat skill versus fall.
 			}
 			aud.clip=GameWorldController.instance.getMus().SoundEffects[0];

@@ -806,7 +806,7 @@ public class TileMap : Loader {
 								case 7: {Tiles[x,y].tileType = 8; break; }
 								case 8: {Tiles[x,y].tileType = 7; break; }
 								}
-								Tiles[x,y].ActualType = (short)Tiles[x,y].tileType;
+								//Tiles[x,y].ActualType = (short)Tiles[x,y].tileType;
 								Tiles[x,y].indexObjectList = 0;
 								Tiles[x,y].Render = 1;
 								Tiles[x,y].DimX = 1;
@@ -2064,7 +2064,7 @@ public class TileMap : Loader {
 				for (int y=0; y<=TileMapSizeY;y++)
 				{
 					if (
-							isTileOpen(Tiles[x,y].tileType)
+						(Tiles[x,y].tileType!=TILE_SOLID)
 					&& 
 							(Tiles[x,y].roomRegion==0)
 					)
@@ -2075,6 +2075,21 @@ public class TileMap : Loader {
 					}
 				}
 			}
+		
+				string output="";
+
+				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_output.txt", true);
+				for (int x=0; x<=TileMapSizeX;x++)
+				{
+						output +="\n";
+						for (int y=0; y<=TileMapSizeY;y++)
+						{
+								output += Tiles[x,y].roomRegion.ToString("d3") + ",";
+						}
+				}
+				writer.WriteLine(output);
+				writer.Close();
+
 		}
 
 
@@ -2085,16 +2100,26 @@ public class TileMap : Loader {
 			{
 				for (int y=-1; y<=1; y++)
 				{
-					if ((x!=0) && (y!=0))
+					if (
+						((x==-1) && (y==0))
+						||
+						((x==1) && (y==0))
+						||
+						((x==0) && (y==-1))
+						||
+						((x==0) && (y==+1))
+					)								
 					{
 						if (TileMap.ValidTile(startX+x,startY+y))	
 						{
 							if (
-									isTileOpen(Tiles[startX+x,startY+y].tileType)
+									(Tiles[startX+x,startY+y].tileType !=TILE_SOLID)
 									&& 
 									(Tiles[startX+x,startY+y].roomRegion==0)
 									&& 
 									(terrainType == TileTerrainType(startX+x,startY+y))
+									&&
+									(isTileOpenFromDirection(startX+x,startY+y, x, y))
 							)
 							{//Tiles is open and room region is not set and is a matching terrain type.
 								Tiles[startX+x,startY+y].roomRegion=RegionNo;	
@@ -2106,9 +2131,16 @@ public class TileMap : Loader {
 			}
 		}
 
+
+		/// <summary>
+		/// Terrain types for calculating room regions.
+		/// </summary>
+		/// <returns>The terrain type.</returns>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
 		int TileTerrainType(int x, int y)
 		{
-			if (Tiles[x,y].isLand)
+			if ((Tiles[x,y].isLand) || (Tiles[x,y].hasBridge))
 			{
 				return 0;	
 			}
@@ -2124,5 +2156,54 @@ public class TileMap : Loader {
 			{
 				return 0;
 			}
+		}
+
+		/// <summary>
+		/// Determines if the tile is open (Ie no wall is in the way) from the specified direction. 
+		/// </summary>
+		/// <returns><c>true</c>, if tile open from direction was ised, <c>false</c> otherwise.</returns>
+		/// <param name="X">X.</param>
+		/// <param name="Y">Y.</param>
+		/// <param name="directionX">Direction x.</param>
+		/// <param name="directionY">Direction y.</param>
+		bool isTileOpenFromDirection(int X, int Y, int directionX, int directionY)
+		{
+				switch (Tiles[X,Y].tileType)	
+				{
+				case TILE_OPEN:
+				case TILE_SLOPE_N:
+				case TILE_SLOPE_S:
+				case TILE_SLOPE_E:
+				case TILE_SLOPE_W:
+						return true;
+				case TILE_DIAG_NE:
+						if ( (directionX==1) || (directionY==-1))
+						{
+							return true;	
+						}
+						break;
+				case TILE_DIAG_NW:
+						if ( (directionX==1) || (directionY==1))
+						{
+								return true;	
+						}
+						break;
+				case TILE_DIAG_SE:
+						if ( (directionX==-1) || (directionY==-1))
+						{
+								return true;	
+						}
+						break;
+				case TILE_DIAG_SW:
+						if ( (directionX==-1) || (directionY==1))
+						{
+								return true;	
+						}
+						break;
+						
+				default:
+						return false;
+				}
+				return false;
 		}
 }
