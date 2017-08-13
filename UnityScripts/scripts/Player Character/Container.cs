@@ -10,10 +10,10 @@ public class Container : object_base {
 	/// </summary>
 	public int Capacity;
 
-	/// <summary>
-	/// What objects the container accepts
-	/// </summary>
-	public int ObjectsAccepted;//TODO:Make this work off of common obj
+	// <summary>
+	// What objects the container accepts
+	// </summary>
+	//public int ObjectsAccepted;//TODO:Make this work off of common obj
 
 	/// <summary>
 	/// Is the container open on the players inventory.
@@ -218,7 +218,67 @@ public class Container : object_base {
 		}
 	}
 
-	public void SpillContents()
+		public void SpillContents()
+		{
+				TileMap tm =GameWorldController.instance.currentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
+				GameWorldController.FreezeMovement(this.gameObject);
+				ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+				objInt.UpdatePosition();
+				objInt.SetWorldDisplay(objInt.GetEquipDisplay());	
+				for (short i=0; i<=MaxCapacity ();i++)
+				{
+						GameObject Spilled = GetGameObjectAt(i);//GameObject.Find (GetItemAt (i));
+						if (Spilled!=null)
+						{	
+								if(Spilled.GetComponent<trigger_base>()!=null)
+								{
+										Spilled.GetComponent<trigger_base>().Activate();		
+								}
+								else
+								{
+									ObjectInteraction objSpilled= Spilled.GetComponent<ObjectInteraction>();
+									Spilled.transform.position=this.transform.position;
+									objSpilled.UpdatePosition();
+									switch(tm.Tiles[objInt.tileX,objInt.tileY].tileType)
+									{
+									case TileMap.TILE_OPEN:
+									case TileMap.TILE_SLOPE_N:
+									case TileMap.TILE_SLOPE_S:
+									case TileMap.TILE_SLOPE_E:
+									case TileMap.TILE_SLOPE_W:
+										objSpilled.x  =(short)Random.Range(1,7);	
+										objSpilled.y  =(short)Random.Range(1,7);
+										break;
+									case TileMap.TILE_DIAG_SE:
+										objSpilled.x  =(short)Random.Range(1,7);
+										objSpilled.y  =(short)Random.Range(0,objSpilled.x);
+										break;
+									case TileMap.TILE_DIAG_SW:
+										objSpilled.x  =(short)Random.Range(1,7);
+										objSpilled.y  =(short)Random.Range(1,7-objSpilled.x);
+										break;
+									case TileMap.TILE_DIAG_NE:
+										objSpilled.x  =(short)Random.Range(1,7);
+										objSpilled.y  =(short)Random.Range(8-objSpilled.x, 8);
+										break;
+									case TileMap.TILE_DIAG_NW:
+										objSpilled.x  =(short)Random.Range(1,7);
+										objSpilled.y  =(short)Random.Range(objSpilled.x, 8);
+										break;
+									}
+									objSpilled.zpos=(short)(tm.Tiles[objInt.tileX,objInt.tileY].floorHeight*4);
+									objSpilled.objectloaderinfo.x=objSpilled.x;
+									objSpilled.objectloaderinfo.y=objSpilled.y;
+									objSpilled.objectloaderinfo.zpos=objSpilled.zpos;
+									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, objSpilled.objectloaderinfo.tileX,objSpilled.objectloaderinfo.tileY,0);									RemoveItemFromContainer(i);
+									Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
+									GameWorldController.UnFreezeMovement(Spilled);
+								}
+						}
+				}
+		}
+
+	public void SpillContentsX()
 	{//Removes the contents of a container out in the real world.
 		int counter;
 		TileMap tm =GameWorldController.instance.currentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
@@ -513,7 +573,7 @@ public class Container : object_base {
 		bool CapacityTest=false;
 				if (EditorMode)//Anything is allowed in editor mode.
 				{return true;}
-		switch (cn.ObjectsAccepted)
+		switch (cn.ObjectsAccepted())
 		{//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
 		case 0://runes
 			TypeTest=(objInt.GetItemType()==ObjectInteraction.RUNE);break;
@@ -652,7 +712,7 @@ public class Container : object_base {
 		/// <param name="objInt">Object int.</param>
 		public static void PopulateContainer(Container cn, ObjectInteraction objInt, ObjectLoader objList)
 		{
-				cn.ObjectsAccepted=-1;//For now default to accept all
+				//cn.ObjectsAccepted=-1;//For now default to accept all
 				cn.Capacity=40;
 				for (int i =0; i<=cn.MaxCapacity();i++)
 				{//init the variables.
@@ -725,5 +785,22 @@ public class Container : object_base {
 					break;
 				}
 		}
+	}
+
+	/// <summary>
+	/// What types of objects this container type accepts.
+	/// </summary>
+	/// <returns>The accepted.</returns>
+	public int ObjectsAccepted()
+	{
+		if (this== GameWorldController.instance.playerUW.playerInventory.playerContainer)
+		{
+			return -1;
+		}
+		else
+		{
+			return GameWorldController.instance.objDat.containerStats[objInt().item_id-128].objectsMask;
+		}
+			
 	}
 }

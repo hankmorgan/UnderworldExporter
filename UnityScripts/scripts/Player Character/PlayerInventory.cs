@@ -996,6 +996,23 @@ public class PlayerInventory : UWEBase {
 		}
 
 		/// <summary>
+		/// Gets the armour score of all equiped armour
+		/// </summary>
+		/// <returns>The armour score.</returns>
+		public short getArmourDurability()
+		{
+				//Get helm defence
+				short result = 0;
+
+				result += getDefenceAtSlot(0);
+				result += getDefenceAtSlot(1);
+				result += getDefenceAtSlot(2);
+				result += getDefenceAtSlot(3);
+				result += getDefenceAtSlot(4);	
+				return result;
+		}
+
+		/// <summary>
 		/// Applies the armour damage to the players armour (random piece)
 		/// If no piece is in the slot picked then no damage is applied
 		/// </summary>
@@ -1016,7 +1033,8 @@ public class PlayerInventory : UWEBase {
 				case 4://Gloves	
 					if (obj.gameObject.GetComponent<Armour>()!=null)
 					{
-						obj.gameObject.GetComponent<Armour>().SelfDamage(armourDamage);
+						short durability = obj.gameObject.GetComponent<Armour>().getDurability();				
+						obj.gameObject.GetComponent<Armour>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));
 						if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
 						{
 							playerUW.playerInventory.ClearSlot((short)PieceToDamage);
@@ -1033,7 +1051,8 @@ public class PlayerInventory : UWEBase {
 						{								
 							if (obj.gameObject.GetComponent<Shield>()!=null)
 							{
-								obj.gameObject.GetComponent<Shield>().SelfDamage(armourDamage);	
+								short durability = obj.gameObject.GetComponent<Shield>().getDurability();
+								obj.gameObject.GetComponent<Shield>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));	
 								if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
 								{														
 									playerUW.playerInventory.Refresh();
@@ -1065,45 +1084,53 @@ public class PlayerInventory : UWEBase {
 				GameObject obj=	GetGameObjectAtSlot(slot);
 				if (obj!=null)
 				{
-						//ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
-						switch (slot)
-						{
-						case 0://Helm								
-						case 1://Chest								
-						case 2://Leggings								
-						case 3://Boots								
-						case 4://Gloves		
-								if (obj.gameObject.GetComponent<Armour>()!=null)
+					//ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+					switch (slot)
+					{
+					case 0://Helm								
+					case 1://Chest								
+					case 2://Leggings								
+					case 3://Boots								
+					case 4://Gloves		
+							if (obj.gameObject.GetComponent<Armour>()!=null)
+							{
+								return obj.gameObject.GetComponent<Armour>().getDefence();	
+							}
+							break;
+					case 5://rings
+							{
+								if (obj.gameObject.GetComponent<Ring>()!=null)
 								{
-									return obj.gameObject.GetComponent<Armour>().getDefence();	
-								}
+									return obj.gameObject.GetComponent<Ring>().getDefence();	
+								}	
 								break;
-						case 7://HandRight
-								if (GameWorldController.instance.playerUW.isLefty)
+							}
+					case 7://HandRight
+							if (GameWorldController.instance.playerUW.isLefty)
+							{
+									return 0;
+							}
+							else
+							{
+								if (obj.gameObject.GetComponent<Shield>()!=null)
 								{
-										return 0;
+									return obj.gameObject.GetComponent<Shield>().getDefence();	
 								}
-								else
+							}
+							break;
+					case 8://HandLeft
+							if ( ! GameWorldController.instance.playerUW.isLefty)
+							{
+								return 0;
+							}
+							else
+							{
+								if (obj.gameObject.GetComponent<Shield>()!=null)
 								{
-										if (obj.gameObject.GetComponent<Shield>()!=null)
-										{
-												return obj.gameObject.GetComponent<Shield>().getDefence();	
-										}
+									return obj.gameObject.GetComponent<Shield>().getDefence();	
 								}
-								break;
-						case 8://HandLeft
-								if ( ! GameWorldController.instance.playerUW.isLefty)
-								{
-										return 0;
-								}
-								else
-								{
-										if (obj.gameObject.GetComponent<Shield>()!=null)
-										{
-												return obj.gameObject.GetComponent<Shield>().getDefence();	
-										}
-								}
-								break;
+							}
+							break;
 						}
 				}
 

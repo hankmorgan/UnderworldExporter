@@ -1155,7 +1155,7 @@ public class ObjectLoader : Loader {
 
 		///calczyz
 		///  float *offX, float *offY, float *offZ,
-		public Vector3 CalcObjectXYZ(string game, TileMap tileMap, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, long index, int x, int y, short WallAdjust)
+		public static Vector3 CalcObjectXYZ(string game, TileMap tileMap, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, long index, int x, int y, short WallAdjust)
 		{
 				float offX= 0f; float offY= 0f; float offZ= 0f;
 				float ResolutionXY = 7.0f;	// A tile has a 7x7 grid for object positioning.
@@ -1370,7 +1370,7 @@ public class ObjectLoader : Loader {
 						}
 						else
 						{
-							position = instance.CalcObjectXYZ(_RES,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
+							position = CalcObjectXYZ(_RES,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
 						}
 					
 					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i],parent,position);

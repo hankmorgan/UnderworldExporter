@@ -6,13 +6,26 @@ using UnityEngine.UI;
 /// </summary>
 public class Equipment : object_base {
 	///Not sure if this is needed.	
-	//public int Durability;	
+	//public int Durability;
+
+	/// ProtectionBonus of magic armour
+	public short ProtectionBonus;
+	/// Toughness Bonus for magic durability 
+	public short ToughnessBonus;
+
+
+	public int EquipIconIndex;
+
+	protected override void Start ()
+	{
+		base.Start ();
+		UpdateQuality();
+	}
 
 	public virtual int GetActualSpellIndex()
 	{
 		return objInt().link-256;
 	}
-
 
 	public override bool use ()
 	{
@@ -174,15 +187,50 @@ public class Equipment : object_base {
 	/// </summary>
 	public virtual void SelfDamage(short damage)
 	{
+		if (_RES==GAME_UW1)
+		{
+			if ((objInt().item_id==10) ||(objInt().item_id==55) || (objInt().item_id==47)|| (objInt().item_id==48)|| (objInt().item_id==49)|| (objInt().item_id==50))
+			{//No damage to sword of justice shield of valor, dragonskin boots or crowns.
+				return;
+			}
+		}
+		short equipBefore=(short)EquipIconIndex;
 		objInt().quality-=damage;
-		UpdateQuality();
+		UpdateQuality();	
 		if (objInt().quality<=0)
 		{
+			UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(objInt().item_id) + " was destroyed");
 			ChangeType(208,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			//Destroy(this);//Kill me now.
+			if (this.GetComponent<Weapon>())
+			{
+				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
+			}
 		}
+		else
+		{
+			if (equipBefore!=EquipIconIndex)
+			{
+				UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(objInt().item_id) + " was damaged");						
+			}
+		}
+
 	}
 
+
+		/// <summary>
+		/// Gets the defence score of this armour.
+		/// </summary>
+		/// <returns>The defence.</returns>
+		public virtual short getDefence()
+		{
+				return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;	
+		}
+
+		public virtual short getDurability()
+		{
+				return 0;
+			//return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability;	
+		}
 
 }

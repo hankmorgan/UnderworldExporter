@@ -6,13 +6,8 @@ using System.Collections;
 /// Wearable armour
 /// Contains the string paths for the paperdoll graphics
 public class Armour : Equipment {
-	public int Protection;
+	//public int Protection;
 	//public string ArmourEquipString;
-		public int EquipIconIndex;
-	/// ProtectionBonus of magic armour
-	public int ProtectionBonus;
-	/// Toughness Bonus for magic durability 
-	public int ToughnessBonus;
 	
 	/// The image to display when worn.
 	/// Takes the image from the Equip[Gender][Quality] strings
@@ -30,40 +25,40 @@ public class Armour : Equipment {
 		return objInt().link-256+16;
 	}
 
-	protected override void Start () {
-		base.Start ();
-		UpdateQuality();
-	}
+	//protected override void Start () {
+	//	base.Start ();
+	//	UpdateQuality();
+	//}
 	
 	public override void UpdateQuality ()
 	{
-				int itemIndex= objInt().item_id-32;
-						
-				if ((itemIndex<15))
-				{//Armor pieces
-						if ((objInt().quality>0) && (objInt().quality<=15))
-						{
-								//Shit quality
-								EquipIconIndex=  itemIndex;
-						}
-						else if ((objInt().quality>15) && (objInt().quality<=30))
-						{//bashed about
-								EquipIconIndex=  itemIndex + (1*15);
-						}
-						else if ((objInt().quality>30) && (objInt().quality<=45))
-						{//medium
-								EquipIconIndex=  itemIndex + (2*15);
-						}
-						else
-						{//best
-								EquipIconIndex=  itemIndex + (3*15);
-						}
+		int itemIndex= objInt().item_id-32;
+				
+		if ((itemIndex<15))
+		{//Armor pieces
+			if ((objInt().quality>0) && (objInt().quality<=15))
+			{
+					//Shit quality
+					EquipIconIndex=  itemIndex;
+			}
+			else if ((objInt().quality>15) && (objInt().quality<=30))
+			{//bashed about
+					EquipIconIndex=  itemIndex + (1*15);
+			}
+			else if ((objInt().quality>30) && (objInt().quality<=45))
+			{//medium
+					EquipIconIndex=  itemIndex + (2*15);
+			}
+			else
+			{//best
+					EquipIconIndex=  itemIndex + (3*15);
+			}
 
-				}
-				else
-				{//Crowns and dragonskin boots
-						EquipIconIndex= 60+ (objInt().item_id-47);
-				}
+		}
+		else
+		{//Crowns and dragonskin boots
+			EquipIconIndex= 60+ (objInt().item_id-47);
+		}
 	}
 
 	public override Sprite GetEquipDisplay ()
@@ -98,7 +93,7 @@ public class Armour : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-					ProtectionBonus=EffectId-463;
+					ProtectionBonus=(short)(EffectId-463);
 					break;
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -108,7 +103,7 @@ public class Armour : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-					ToughnessBonus=EffectId-471;
+					ToughnessBonus=(short)(EffectId-471);
 					break;
 
 				default:
@@ -138,13 +133,15 @@ public class Armour : Equipment {
 		return false;
 	}
 
-		/// <summary>
-		/// Gets the defence score of this armour.
-		/// </summary>
-		/// <returns>The defence.</returns>
-		public short getDefence()
-		{
-			return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;
-		}
+	public override short getDurability ()
+	{
+		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability+ ToughnessBonus);	
+	}
+
+
+	public override short getDefence()
+	{
+		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection+ProtectionBonus);
+	}
 
 }

@@ -13,6 +13,8 @@ public class UWCombat : Combat {
 	///What animation to play for this weapon swing
 	private string CurrentStrike;
 
+	private short CurrentStrikeAnimation;
+
 	public override void PlayerCombatIdle ()
 	{
 		base.PlayerCombatIdle ();
@@ -42,8 +44,9 @@ public class UWCombat : Combat {
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
 			CurrentStrike=GetStrikeType();
+			CurrentStrikeAnimation=GetStrikeOffset();
 			//UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Charge";
-			UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+GetStrikeOffset()+GetHandOffset()+0; //charge
+			UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+CurrentStrikeAnimation+GetHandOffset()+0; //charge
 		}
 		else
 		{
@@ -125,6 +128,13 @@ public class UWCombat : Combat {
 				else
 				{//Probably hit a wall or tile floor
 					Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin +  hit.point)/2f,46,50);
+					if(currWeapon!=null)
+					{
+						short durability = currWeapon.getDurability();
+						//currWeapon.WeaponSelfDamage();	
+						currWeapon.SelfDamage((short)(Mathf.Max(0, Random.Range(1,durability+1)-durability)));
+					}
+
 					if (ObjectInteraction.PlaySoundEffects)
 					{
 						GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
@@ -183,7 +193,7 @@ public class UWCombat : Combat {
 					CurrentStrike=GetStrikeType();		
 				}
 				//UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + CurrentStrike + "_" + GetRace () + "_" + GetHand() + "_Execute";
-				UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+GetStrikeOffset()+GetHandOffset()+1;//exeute
+				UWHUD.instance.wpa.SetAnimation = GetWeaponOffset()+CurrentStrikeAnimation+GetHandOffset()+1;//exeute
 				AttackExecuting=true;
 				StartCoroutine(ExecuteMelee(CurrentStrike,Charge));
 			}
@@ -531,7 +541,9 @@ public class UWCombat : Combat {
 					//Apply equipment damage to weapon if NPC Defence is 1.5 times attackscore	
 					if ((float)npc.GetDefence() > (float)attackScore*1.5f)
 					{
-						currentWeapon.WeaponSelfDamage();
+						short durability = currentWeapon.getDurability();
+						//currentWeapon.WeaponSelfDamage();
+						currentWeapon.SelfDamage((short)Mathf.Max(0, Random.Range(0, npc.GetArmourDamage()+1) - durability));
 					}
 				}
 			}

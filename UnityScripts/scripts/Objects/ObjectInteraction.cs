@@ -1673,7 +1673,7 @@ public class ObjectInteraction : UWEBase {
 						if ((currObj.item_id >=128) && (currObj.item_id<=142))
 							{
 								myObj.GetComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;
-								myObj.GetComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
+								//myObj.GetComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
 							}
 						break;
 				case KEY:

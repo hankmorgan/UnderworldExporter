@@ -31,17 +31,10 @@ public class Weapon : Equipment {
 		//return false;
 	}
 
-	public virtual void WeaponSelfDamage()
-	{//Damage caused to the weapon when it hits something with heavy resistance.
-		objInt().quality-=1;
-		if (objInt().quality<=0)
-		{
-			ChangeType(218,23);//Change to debris.
-			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
-			Destroy(this);//Kill me now.
-		}
-	}
+	//public virtual void WeaponSelfDamage()
+	//{//Damage caused to the weapon when it hits something with heavy resistance.
+		//
+	//}
 
 	public override bool EquipEvent (short slotNo)
 	{

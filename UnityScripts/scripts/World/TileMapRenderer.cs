@@ -252,7 +252,7 @@ public class TileMapRenderer : Loader{
 				float uvXPos4 = 1f; // or 1.2f/1.2f
 
 				//positions
-				Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
+				Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
 				//center in the tile and at the bottom of the map.
 				switch (currDoor.heading*45)
 				{
@@ -417,7 +417,7 @@ public class TileMapRenderer : Loader{
 
 				//Vector3 doorposition;
 				//positions
-				Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
+				Vector3 position =ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,currDoor.index, currDoor.tileX, currDoor.tileY,0);
 				//doorposition=position;
 				//center in the tile and at the bottom of the map.
 				switch (currDoor.heading*45)
@@ -669,7 +669,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
 						{
-								Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
+								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 								//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
 								Vector3[] Verts= new Vector3[24];
 								Vector2[] UVs= new Vector2[24];
@@ -761,7 +761,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag==1))
 						{
-								Vector3 position = objList.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
+								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 								position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
 								Vector3[] Verts= new Vector3[24];
 								Vector2[] UVs= new Vector2[24];

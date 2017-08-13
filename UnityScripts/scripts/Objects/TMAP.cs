@@ -158,6 +158,29 @@ public class TMAP : object_base {
 
 		static void CreateTMAP(GameObject myObj, int textureIndex)
 		{		
+			ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
+			TileMap tm = GameWorldController.instance.currentTileMap();
+				float doorFrameOffsetX=0f;float doorFrameOffsetY=0f;
+				if (tm.Tiles[objInt.tileX, objInt.tileY].isDoor)
+				{
+						switch (objInt.heading * 45)
+						{
+						case ObjectInteraction.HEADINGSOUTH:
+								doorFrameOffsetX=-.03f;
+								break;
+						case ObjectInteraction.HEADINGNORTH:
+								doorFrameOffsetX=+.03f;
+								break;
+
+						case ObjectInteraction.HEADINGEAST:
+								doorFrameOffsetY=+.03f;
+								break;
+						case ObjectInteraction.HEADINGWEST:
+								doorFrameOffsetY=-.03f;
+								break;
+						}
+				}
+
 			GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			SpriteController.name = myObj.name + "_quad";
 			SpriteController.transform.position = myObj.transform.position;
@@ -165,7 +188,7 @@ public class TMAP : object_base {
 			SpriteController.transform.parent = myObj.transform;
 			SpriteController.transform.localRotation= Quaternion.identity;
 			SpriteController.transform.localScale=new Vector3(1.2f,1.2f,1.0f);
-			SpriteController.transform.localPosition=new Vector3(0.0f,0.6f,0.0f);
+			SpriteController.transform.localPosition=new Vector3(doorFrameOffsetX,0.6f,doorFrameOffsetY );
 			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
 			//mr.material= (Material)Resources.Load (_RES+ "/Materials/tmap/" + _RES + "_" + textureIndex.ToString("d3"));
 			mr.material=GameWorldController.instance.MaterialMasterList[textureIndex];//Assumes it is already loaded...

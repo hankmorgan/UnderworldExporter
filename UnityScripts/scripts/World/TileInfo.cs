@@ -106,4 +106,5 @@ public class TileInfo : Loader {
 			NeedsReRender=true;
 			GameWorldController.WorldReRenderPending=true;
 		}
+
 }

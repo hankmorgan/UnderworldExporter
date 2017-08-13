@@ -21,6 +21,27 @@ public class WeaponMelee : Weapon {
 			}
 		}
 	}
+		/*
+	public override void WeaponSelfDamage ()
+	{
+		base.WeaponSelfDamage ();
+		if (_RES==GAME_UW1)
+		{
+				if (objInt().item_id==10)
+				{//No damage to sword of justice
+						return;
+				}
+		}
+		Debug.Log(this.name + " has " + GetDurability() + " durability");
+		objInt().quality-=1;
+		if (objInt().quality<=0)
+		{
+				ChangeType(218,23);//Change to debris.
+				this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
+				Destroy(this);//Kill me now.
+		}
+	}*/
 
 		/// <summary>
 		/// Gets the slash base damage
@@ -52,11 +73,12 @@ public class WeaponMelee : Weapon {
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab;
 		}
 
+
 		/// <summary>
 		/// Gets the durability of the weapon.
 		/// </summary>
 		/// <returns>The durability.</returns>
-		public short GetDurability()
+		public override short getDurability()
 		{
 			//return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability;
@@ -103,4 +125,26 @@ public class WeaponMelee : Weapon {
 			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Skill;
 		}
 
+
+	public override void UpdateQuality ()
+	{
+		if ((objInt().quality>0) && (objInt().quality<=15))
+		{
+				//Shit quality
+			EquipIconIndex=  4;
+		}
+		else if ((objInt().quality>15) && (objInt().quality<=30))
+		{//bashed about
+			EquipIconIndex=  3;
+		}
+		else if ((objInt().quality>30) && (objInt().quality<=45))
+		{//medium
+			EquipIconIndex=  2;
+		}
+		else
+		{//best
+			EquipIconIndex=  1;
+		}
+	}
 }
+

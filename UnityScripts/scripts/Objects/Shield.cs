@@ -56,15 +56,6 @@ public class Shield : Equipment {
 		}
 		return true;
 	}
-
-
-	/// <summary>
-	/// Gets the defence score of this armour.
-	/// </summary>
-	/// <returns>The defence.</returns>
-	public short getDefence()
-	{
-		return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability;
-	}
-
 }
+
+
