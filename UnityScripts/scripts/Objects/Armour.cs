@@ -93,7 +93,7 @@ public class Armour : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-					ProtectionBonus=(short)(EffectId-463);
+					//ProtectionBonus=(short)(EffectId-463);
 					break;
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -103,7 +103,7 @@ public class Armour : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-					ToughnessBonus=(short)(EffectId-471);
+					//ToughnessBonus=(short)(EffectId-471);
 					break;
 
 				default:
@@ -135,13 +135,13 @@ public class Armour : Equipment {
 
 	public override short getDurability ()
 	{
-		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability+ ToughnessBonus);	
+		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability+ DurabilityBonus());	
 	}
 
 
 	public override short getDefence()
 	{
-		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection+ProtectionBonus);
+		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection+ProtectionBonus());
 	}
 
 }

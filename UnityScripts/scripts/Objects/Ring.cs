@@ -5,6 +5,11 @@ public class Ring : Equipment {
 
 	public SpellEffect SpellEffectApplied;
 	
+	public override int GetActualSpellIndex ()
+	{
+		return objInt().link-512;
+	}
+
 	public override bool EquipEvent (short slotNo)
 	{
 		if ((slotNo ==9) || (slotNo ==10))
@@ -22,7 +27,7 @@ public class Ring : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-						ProtectionBonus=(short)(EffectId-463);
+						//ProtectionBonus=(short)(EffectId-463);
 						break;
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -32,7 +37,7 @@ public class Ring : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-						ToughnessBonus=(short)(EffectId-471);
+						//ToughnessBonus=(short)(EffectId-471);
 						break;
 
 				default:
@@ -73,11 +78,11 @@ public class Ring : Equipment {
 
 	public override short getDefence ()
 	{
-		return ProtectionBonus;
+		return ProtectionBonus();
 	}
 
 	public override short getDurability ()
 	{
-		return ToughnessBonus;
+		return DurabilityBonus();
 	}
 }

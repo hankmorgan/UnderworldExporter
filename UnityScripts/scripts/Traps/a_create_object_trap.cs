@@ -15,8 +15,8 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 */
 
 	//private bool TrapFired=false;
-	public string NavMeshRegion;//Which nav mesh should apply to cloned objects if they are npcs. No longer needed here!
-
+	//public string NavMeshRegion;//Which nav mesh should apply to cloned objects if they are npcs. No longer needed here!
+	//public int Room;
 		/// <summary>
 		/// The last object created. Used to force the garamon converation.
 		/// </summary>
@@ -82,12 +82,10 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 				cloneObj.transform.position = this.gameObject.transform.position;
 			}	
 		}
+		
 
 		cloneObj.transform.parent=objToClone.transform.parent;
-		if (cloneObj.GetComponent<NPC>()!=null)
-		{
-			cloneObj.GetComponent<NPC>().NavMeshRegion=NavMeshRegion;
-		}	
+		objI.instance.UpdatePosition();
 		return cloneObj;
 	}
 

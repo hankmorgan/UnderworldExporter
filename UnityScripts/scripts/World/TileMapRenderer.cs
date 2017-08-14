@@ -810,7 +810,7 @@ public class TileMapRenderer : Loader{
 										UVs[(j*4)+2]= new Vector2(1f,1f);
 										UVs[(j*4)+3]= new Vector2(1f,0f);
 								}
-								int TextureIndex= objList.objInfo[i].flags & 0x3F;
+								int TextureIndex=  (objList.objInfo[i].enchantment<<3) | objList.objInfo[i].flags & 0x3F;
 								Material tmobj;
 								if (TextureIndex>=2)
 								{

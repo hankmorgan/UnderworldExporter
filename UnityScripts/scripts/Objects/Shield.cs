@@ -30,7 +30,7 @@ public class Shield : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-					ProtectionBonus=(short)(EffectId-463);
+					//ProtectionBonus=(short)(EffectId-463);
 					break;
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -40,7 +40,7 @@ public class Shield : Equipment {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-					ToughnessBonus=(short)(EffectId-471);
+					//ToughnessBonus=(short)(EffectId-471);
 					break;
 					
 				default:

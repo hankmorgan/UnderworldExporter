@@ -815,7 +815,12 @@ public class ObjectLoader : Loader {
 												}
 												else if (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.BRIDGE)
 												{
-													LevelInfo[x,y].hasBridge=true;	
+													int TextureIndex=  (objList[nextObj].enchantment<<3) | objList[nextObj].flags & 0x3F;
+													if (TextureIndex<2)
+													{//Only flag the normal briges as such.
+														LevelInfo[x,y].hasBridge=true;				
+													}
+													
 												}
 
 												nextObj=objList[nextObj].next;

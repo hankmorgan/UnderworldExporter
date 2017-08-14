@@ -49,7 +49,7 @@ public class Bridge : object_base {
 		}
 		else
 		{
-			int TextureIndex=objInt().flags & 0x3F;
+			int TextureIndex=(objInt().enchantment<<3) | objInt().flags & 0x3F;
 			//Return material description
 			UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
 			return true;

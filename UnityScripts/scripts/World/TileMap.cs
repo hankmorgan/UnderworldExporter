@@ -1939,32 +1939,56 @@ public class TileMap : Loader {
 
 								if (o<256)			
 								{//Additional npc mobile data.
+										
 										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
 
 										TileMapData[addptr+0x9] = (char)(currobj.Projectile_Yaw);
 
-										TileMapData[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
+										ByteToWrite=( (currobj.npc_gtarg & 0xFF) <<4  |
 												(currobj.npc_goal & 0xF));
+										TileMapData[addptr+0xb] = (char)(ByteToWrite & 0xFF);
+										TileMapData[addptr+0xb+1] = (char)((ByteToWrite>>8) & 0xFF);
 
-										TileMapData[addptr+0xd]= (char)
-												(
-														((currobj.npc_attitude & 0x3)<<14) |
-														((currobj.npc_talkedto & 0x1)<<13) |
-														currobj.npc_level & 0xF
-												);
+									//	TileMapData[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
+										//		(currobj.npc_goal & 0xF));
+
+
+										ByteToWrite=((currobj.npc_attitude & 0x3)<<14) |
+												((currobj.npc_talkedto & 0x1)<<13) |
+												(currobj.npc_level & 0xF);
+										TileMapData[addptr+0xd] = (char)(ByteToWrite & 0xFF);
+										TileMapData[addptr+0xd+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+										//TileMapData[addptr+0xd]= (char)
+										//		(
+										//				((currobj.npc_attitude & 0x3)<<14) |
+										//				((currobj.npc_talkedto & 0x1)<<13) |
+										//				(currobj.npc_level & 0xF)
+										//		);
 
 										TileMapData[addptr+0x14] = (char)(currobj.Projectile_Pitch);
 
-										TileMapData[addptr+0x16]= (char)(
-												((currobj.npc_xhome & 0x3F)<<10) |
-												((currobj.npc_yhome & 0x3F)<<4)
-										);
+										ByteToWrite=((currobj.npc_xhome & 0x3F)<<10) |
+												((currobj.npc_yhome & 0x3F)<<4);
+										TileMapData[addptr+0x16] = (char)(ByteToWrite & 0xFF);
+										TileMapData[addptr+0x16+1] = (char)((ByteToWrite>>8) & 0xFF);
+										
+									//	TileMapData[addptr+0x16]= (char)(
+									//			((currobj.npc_xhome & 0x3F)<<10) |
+									//			((currobj.npc_yhome & 0x3F)<<4)
+									//	);
 
-										TileMapData[addptr+0x18]= (char)(
-												(TileMapData[addptr+0x18] & 0xE0)
+										ByteToWrite=(TileMapData[addptr+0x18] & 0xE0)
 												|
-												(currobj.npc_heading & 0x1F) 
-										);
+												(currobj.npc_heading & 0x1F) ;
+										TileMapData[addptr+0x18] = (char)(ByteToWrite & 0xFF);
+										TileMapData[addptr+0x18+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+										//TileMapData[addptr+0x18]= (char)(
+										//		(TileMapData[addptr+0x18] & 0xE0)
+										//		|
+										//		(currobj.npc_heading & 0x1F) 
+										//);
 
 										TileMapData[addptr+0x19]= (char)(
 												((currobj.npc_hunger & 0x3F)) 
@@ -2076,6 +2100,10 @@ public class TileMap : Loader {
 				}
 			}
 		
+				if (false)
+				{
+						
+				
 				string output="";
 
 				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_output.txt", true);
@@ -2089,6 +2117,7 @@ public class TileMap : Loader {
 				}
 				writer.WriteLine(output);
 				writer.Close();
+				}
 
 		}
 

@@ -5,6 +5,7 @@ using System.Collections;
 /// Melee Weapons.
 /// </summary>
 public class WeaponMelee : Weapon {
+			
 
 	/// <summary>
 	/// Apply any possible magic effects when the weapon strikes.
@@ -21,27 +22,6 @@ public class WeaponMelee : Weapon {
 			}
 		}
 	}
-		/*
-	public override void WeaponSelfDamage ()
-	{
-		base.WeaponSelfDamage ();
-		if (_RES==GAME_UW1)
-		{
-				if (objInt().item_id==10)
-				{//No damage to sword of justice
-						return;
-				}
-		}
-		Debug.Log(this.name + " has " + GetDurability() + " durability");
-		objInt().quality-=1;
-		if (objInt().quality<=0)
-		{
-				ChangeType(218,23);//Change to debris.
-				this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
-				Destroy(this);//Kill me now.
-		}
-	}*/
 
 		/// <summary>
 		/// Gets the slash base damage
@@ -50,7 +30,7 @@ public class WeaponMelee : Weapon {
 		public short GetSlash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropSlash(objInt().item_id);
-			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Slash;
+			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Slash+DamageBonus());
 		}
 
 		/// <summary>
@@ -60,7 +40,7 @@ public class WeaponMelee : Weapon {
 		public short GetBash()
 		{
 			//return GameWorldController.instance.weaponprops.getPropBash(objInt().item_id);
-				return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Bash;
+			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Bash+DamageBonus());
 		}
 
 		/// <summary>
@@ -70,7 +50,7 @@ public class WeaponMelee : Weapon {
 		public short GetStab()
 		{
 			//return GameWorldController.instance.weaponprops.getPropStab(objInt().item_id);
-			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab;
+			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab+DamageBonus());
 		}
 
 
@@ -81,7 +61,7 @@ public class WeaponMelee : Weapon {
 		public override short getDurability()
 		{
 			//return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
-			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability;
+			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability+DurabilityBonus());
 		}
 
 
@@ -146,5 +126,49 @@ public class WeaponMelee : Weapon {
 			EquipIconIndex=  1;
 		}
 	}
+
+		/// <summary>
+		/// Returns the damage bonus provided by the weapons enchantment
+		/// </summary>
+		/// <returns>The bonus.</returns>
+	public short DamageBonus()
+	{
+		switch(objInt().link)
+		{
+			case SpellEffect.UW1_Spell_Effect_MinorDamage:
+			case SpellEffect.UW1_Spell_Effect_Damage:
+			case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
+			case SpellEffect.UW1_Spell_Effect_MajorDamage:
+			case SpellEffect.UW1_Spell_Effect_GreatDamage:
+			case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
+			case SpellEffect.UW1_Spell_Effect_TremendousDamage:
+			case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
+				return (short)(objInt().link-453);//Damage bonus starts at +3 why not					
+		}
+		return 0;
+	}
+
+
+		/// <summary>
+		/// Returns a bonus toHit score provided by the enchantment
+		/// </summary>
+		/// <returns>The bonus.</returns>
+		public short AccuracyBonus()
+		{
+			switch(objInt().link)
+			{
+				case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
+				case SpellEffect.UW1_Spell_Effect_Accuracy:
+				case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
+				case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
+				case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
+				case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
+				case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
+				case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
+					return (short)(objInt().link-445); 
+			}
+			return 0;
+		}
+
 }
 

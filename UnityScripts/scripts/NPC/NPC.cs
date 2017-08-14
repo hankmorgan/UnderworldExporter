@@ -503,6 +503,7 @@ public class NPC : MobileObject {
 					case 0://Standing still
 					case 7:
 					case 11:
+						case 12:
 						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
 						break;
 

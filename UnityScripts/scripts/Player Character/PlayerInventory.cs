@@ -979,7 +979,7 @@ public class PlayerInventory : UWEBase {
 	}
 
 		/// <summary>
-		/// Gets the armour score of all equiped armour
+		/// Gets the armour score of all equiped armour plus the players toughness bonus
 		/// </summary>
 		/// <returns>The armour score.</returns>
 		public short getArmourScore()
@@ -992,7 +992,7 @@ public class PlayerInventory : UWEBase {
 			result += getDefenceAtSlot(2);
 			result += getDefenceAtSlot(3);
 			result += getDefenceAtSlot(4);	
-			return result;
+			return (short)(result+GameWorldController.instance.playerUW.Resistance);
 		}
 
 		/// <summary>

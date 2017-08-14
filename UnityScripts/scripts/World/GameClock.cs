@@ -8,6 +8,8 @@ using System.Collections;
 /// Ticks up the game clock one minute every [clockrate] seconds.
 public class GameClock : UWEBase {
 	
+	public int[] gametimevals=new int[3]; //For save games.
+
 	/// <summary>
 	/// How long has passed since the last clock tick
 	/// </summary>
@@ -45,10 +47,26 @@ public class GameClock : UWEBase {
 
 	// Update is called once per frame
 	void Update () {
+		if (ConversationVM.InConversation){return;}						
 		clockTime+=Time.deltaTime;
 		if (clockTime>=clockRate)
 		{
 			_second++;
+			gametimevals[0]++;
+			if(gametimevals[0]>=255)
+			{
+				gametimevals[0]=0;
+				gametimevals[1]++;
+				if(gametimevals[1]>=255)
+				{
+					gametimevals[1]=0;
+					gametimevals[2]++;
+					if(gametimevals[2]>=255)
+					{
+						gametimevals[2]=0;
+					}
+				}
+			}
 			clockTime=0.0f;	
 			if (_second>=60)
 			{
@@ -58,30 +76,6 @@ public class GameClock : UWEBase {
 			}
 		}
 	}
-
-	/// <summary>
-	/// Clock tick. Activates regeneration, hunger and fatigue methods.
-	/// </summary>
-/*	static void ClockTick()
-	{//Advance the time.
-		instance._minute++;
-		if (instance._minute%5==0)
-		{
-			GameWorldController.instance.playerUW.RegenMana();
-		}
-		if (instance._minute>=60)
-		{
-			instance._minute=0;
-			instance._hour++;
-			GameWorldController.instance.playerUW.UpdateHungerAndFatigue();
-			//TODO:Update torches, lightsources and food					
-			if (instance._hour>=24)
-			{
-				instance._hour =0;
-				instance._day++;
-			}
-		}
-	}*/
 
 		/// <summary>
 		/// Clock tick for every minute
@@ -109,8 +103,30 @@ public class GameClock : UWEBase {
 	{
 		for (int i=0; i<60; i++)
 		{
-			ClockTick();
+			ClockTick();//one minute
+
+			int overflow=0;
+			instance.gametimevals[0]+=60;
+			if(instance.gametimevals[0]>=255)
+			{
+				overflow= Mathf.Max(0,instance.gametimevals[0]-255);
+				instance.gametimevals[0]=overflow;
+				instance.gametimevals[1]++;
+				if(instance.gametimevals[1]>=255)
+				{
+					instance.gametimevals[1]=0;
+					instance.gametimevals[2]++;
+					if(instance.gametimevals[2]>=255)
+					{
+						instance.gametimevals[2]=0;
+					}
+				}
+			}
+
+
+
 		}
+
 	}
 
 	/// <summary>
@@ -178,6 +194,13 @@ public class GameClock : UWEBase {
 
 
 	}
+
+	public static long getUWTime()
+	{
+		System.TimeSpan ts = new System.TimeSpan(instance._day,0, instance._minute,instance._second);
+		return (long)ts.TotalSeconds;
+	}
+
 
 
 	public static int second()

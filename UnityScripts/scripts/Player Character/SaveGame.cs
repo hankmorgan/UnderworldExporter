@@ -16,7 +16,7 @@ public class SaveGame : Loader {
 				int y_position=0;
 				int z_position=0;
 
-				int[] gametimevals=new int[3];
+				//int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
 				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
@@ -313,10 +313,12 @@ public class SaveGame : Loader {
 												break;
 										case 0xCF  : ///   game time
 												GameWorldController.instance.playerUW.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
-										case 0xD0: gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
-										case 0xD1: gametimevals[1]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
-										case 0xD2: gametimevals[2]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
-
+										case 0xD0: 
+												GameClock.instance.gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0xD1: 
+												GameClock.instance.gametimevals[1]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0xD2: 
+												GameClock.instance.gametimevals[2]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 
 										case 0xDD  : ///    current vitality
 												GameWorldController.instance.playerUW.CurVIT=(int)buffer[i];break;
@@ -368,7 +370,7 @@ public class SaveGame : Loader {
 							GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);									
 						}
 
-						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
+						GameClock.setUWTime( GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255 )  + (GameClock.instance.gametimevals[2] * 255 * 255 ));
 
 						float Ratio=213f;
 						float VertAdjust = 0.3543672f;
@@ -644,6 +646,7 @@ public class SaveGame : Loader {
 						}
 						else
 						{
+
 								switch(i)
 								{
 								case 0x1F ://Strength
@@ -978,12 +981,15 @@ public class SaveGame : Loader {
 										DataLoader.WriteInt8(writer,0x8);
 										break;										
 								case 0xCF  : ///   game time
-										DataLoader.WriteInt32(writer,GameWorldController.instance.playerUW.game_time);break;
+										//DataLoader.WriteInt32(writer,GameWorldController.instance.playerUW.game_time);break;
+										DataLoader.WriteInt8(writer,0);break;//Write zero since I don't track milliseconds
 										//break;
-								case 0xD0://gametime ignore
+								case 0xD0:
+										DataLoader.WriteInt8(writer,GameClock.instance.gametimevals[0]);break;
 								case 0xD1:
+										DataLoader.WriteInt8(writer,GameClock.instance.gametimevals[1]);break;
 								case 0xD2:
-										break;
+										DataLoader.WriteInt8(writer,GameClock.instance.gametimevals[2]);break;
 								case 0xD3://No of inventory items + 1.
 										DataLoader.WriteInt16(writer,inventoryObjects.GetUpperBound(0)+1+1);
 										//Debug.Log("No of inventory " + inventoryObjects.GetUpperBound(0));

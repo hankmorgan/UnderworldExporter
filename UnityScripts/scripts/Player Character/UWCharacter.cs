@@ -97,7 +97,6 @@ public class UWCharacter : Character {
 	public float teleportedTimer=0f;
 
 
-
 	public void Awake()
 	{
 		Instance=this;

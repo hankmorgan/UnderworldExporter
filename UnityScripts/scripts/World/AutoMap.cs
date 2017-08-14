@@ -208,7 +208,7 @@ public class AutoMap : Loader {
 					}
 				}
 
-				if ((automapNotesAddress!=0) && (AUTOMAP_EOF_ADDRESS!=lev_ark.GetUpperBound(0)))
+				if ((automapNotesAddress!=0) && (AUTOMAP_EOF_ADDRESS<=lev_ark.GetUpperBound(0)))
 				{
 						//long EOF_ADDRESS= lev_ark.GetUpperBound(0);
 

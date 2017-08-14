@@ -491,6 +491,7 @@ public class UWCombat : Combat {
 			if (currentWeapon!=null)
 			{
 				attackScore =playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 + playerUW.PlayerSkills.GetSkill(currentWeapon.GetSkill()+1);		
+				attackScore+=currentWeapon.AccuracyBonus();
 				switch(StrikeName)			
 				{
 					case "SLASH":

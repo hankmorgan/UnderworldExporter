@@ -18,7 +18,7 @@ public class MapInteraction : GuiBase {
 		public void MapClose()
 		{
 			WindowDetect.InMap=false;
-
+			InventorySlot.Hovering=false;
 			if  (GameWorldController.instance.getMus()!=null)
 			{
 			GameWorldController.instance.getMus().InMap=false;

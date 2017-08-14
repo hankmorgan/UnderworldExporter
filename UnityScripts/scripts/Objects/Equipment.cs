@@ -8,10 +8,10 @@ public class Equipment : object_base {
 	///Not sure if this is needed.	
 	//public int Durability;
 
-	/// ProtectionBonus of magic armour
-	public short ProtectionBonus;
-	/// Toughness Bonus for magic durability 
-	public short ToughnessBonus;
+	// ProtectionBonus of magic armour
+	//public short ProtectionBonus;
+	// Toughness Bonus for magic durability 
+	//public short ToughnessBonus;
 
 
 	public int EquipIconIndex;
@@ -229,8 +229,50 @@ public class Equipment : object_base {
 
 		public virtual short getDurability()
 		{
-				return 0;
+			return (short)(0+DurabilityBonus());
 			//return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability;	
 		}
+
+
+		/// <summary>
+		/// Returns the durability bonus applied to the weapon from it's enchantment.
+		/// </summary>
+		/// <returns>The bonus.</returns>
+		public short DurabilityBonus()
+		{
+				switch(objInt().link)
+				{
+				case SpellEffect.UW1_Spell_Effect_MinorToughness:
+				case SpellEffect.UW1_Spell_Effect_Toughness:
+				case SpellEffect.UW1_Spell_Effect_AdditionalToughness:
+				case SpellEffect.UW1_Spell_Effect_MajorToughness:
+				case SpellEffect.UW1_Spell_Effect_GreatToughness:
+				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
+				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
+				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
+						return (short)(objInt().link-472);//Toughness bonus starts at +3 why not					
+				}
+				return 0;	
+		}
+
+
+		public short ProtectionBonus()
+		{
+				switch(objInt().link)
+				{
+				case SpellEffect.UW1_Spell_Effect_MinorProtection:
+				case SpellEffect.UW1_Spell_Effect_Protection:
+				case SpellEffect.UW1_Spell_Effect_AdditionalProtection:
+				case SpellEffect.UW1_Spell_Effect_MajorProtection:
+				case SpellEffect.UW1_Spell_Effect_GreatProtection:
+				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
+				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
+				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
+						return (short)(objInt().link-461);//Protection bonus starts at +3 why not					
+				}
+				return 0;	
+		}
+
+
 
 }
