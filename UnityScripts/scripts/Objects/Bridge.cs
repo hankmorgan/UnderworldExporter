@@ -43,7 +43,7 @@ public class Bridge : object_base {
 	public override bool LookAt ()
 	{
 				
-		if (objInt().flags<2)
+		if ( ( (objInt().enchantment<<3) | objInt().flags)<2)
 		{
 			return base.LookAt ();
 		}

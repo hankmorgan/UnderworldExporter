@@ -45,26 +45,39 @@ public class MapInteraction : GuiBase {
 				}
 		}
 
-		private void UpdateMap(int LevelNo)
+		/// <summary>
+		/// Updates the map.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		public static void UpdateMap(int LevelNo)
 		{
 			WindowDetect.InMap=true;//turns on blocking collider.
-				//bool delMap=false;
-				//if (GameWorldController.instance.Tilemaps[LevelNo]==null)
-			//	{//Load up a temp map is no loaded map is available to display
-				//		delMap=true;
-			//			GameWorldController.instance.Tilemaps[LevelNo]=new TileMap();
-				//		GameWorldController.instance.Tilemaps[LevelNo].thisLevelNo=LevelNo;
-			//			GameWorldController.instance.Tilemaps[LevelNo].BuildTileMapUW(GameWorldController.instance.tilemapfiledata(), LevelNo);
-			//			GameWorldController.instance.objectList[LevelNo]=new ObjectLoader();
-			//			GameWorldController.instance.objectList[LevelNo].LoadObjectList( GameWorldController.instance.Tilemaps[LevelNo],GameWorldController.instance.tilemapfiledata());	
-			//	}
+			MapInteraction.MapNo=LevelNo;
+			UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
+			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.AutoMaps[MapInteraction.MapNo].TileMapImage();
 
-			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.AutoMaps[LevelNo].TileMapImage();
-			//if (delMap==true)
-			//{//del map if we loaded up a temp tile map to display level
-			//		GameWorldController.instance.Tilemaps[LevelNo]=null;	
-			//		GameWorldController.instance.objectList[LevelNo]=null;
-			//}
+			///Display the map notes
+			///Delete the map notes in memory
+			foreach(Transform child in UWHUD.instance.MapPanel.transform)
+			{
+				if (child.name.Substring(0,4) == "_Map")
+				{								
+					GameObject.Destroy(child.transform.gameObject);
+				}
+			}
+			if (GameWorldController.instance.AutoMaps[MapInteraction.MapNo]!=null)
+			{
+				for (int i=0 ; i < GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count;i++)
+				{///Instantiates the map note template UI control.
+					GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+					myObj.transform.parent= UWHUD.instance.MapPanel.transform;
+					myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NoteText;
+					myObj.GetComponent<RectTransform>().anchoredPosition= GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NotePosition();
+					myObj.GetComponent<MapNoteId>().guid = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].guid;
+					//Move the control so that it sits in front of the map,
+					myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
+				}						
+			}
 		}
 
 		public void ClickEraser()

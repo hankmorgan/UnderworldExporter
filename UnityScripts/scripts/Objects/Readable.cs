@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Readable : object_base {
+	
+
 	public override bool use ()
 	{
 	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")

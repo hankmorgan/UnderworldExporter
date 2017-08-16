@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonHandler : object_base {
+public class ButtonHandler : Decal {
 	/*Code for buttons and switches*/
 
 //	public string trigger;

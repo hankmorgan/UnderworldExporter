@@ -284,6 +284,8 @@ public class GameWorldController : UWEBase {
 	//public WeaponAnimationPlayer WeaponAnim;
 	public WeaponsLoader weapongr;
 
+		public int difficulty=1; //1=standard, 0=easy.
+
 	public static bool LoadingObjects=false;
 
 	public struct bablGlobal

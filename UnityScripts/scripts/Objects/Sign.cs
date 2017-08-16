@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sign : Readable {
+public class Sign : Decal {
 	//private bool spriteReady;
 	protected override void Start ()
 	{
@@ -19,7 +19,12 @@ public class Sign : Readable {
 		return Read();
 	}
 
-	public override bool Read ()
+	public override bool LookAt ()
+	{
+		return Read ();
+	}
+
+	public virtual bool Read ()
 	{
 
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
@@ -27,6 +32,16 @@ public class Sign : Readable {
 
 	}
 
+
+	public override string UseVerb()
+	{
+			return "read";	
+	}
+
+	public override string ExamineVerb ()
+	{
+			return "read";
+	}
 
 
 }

@@ -12,7 +12,7 @@ public class Instrument : object_base {
 		/// Records the last few notes played for a puzzle.
 	static string NoteRecord;
 
-	public static bool CreatedCup;
+	//public static bool CreatedCup;
 
 	protected override void Start ()
 	{
@@ -93,7 +93,7 @@ public class Instrument : object_base {
 			if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
 			{
 				//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-				if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
+				if ((GameWorldController.instance.LevelNo==2) && (GameWorldController.instance.playerUW.quest().isCupFound==false) && (objInt().item_id==292))
 				{									
 					int tileX=TileMap.visitTileX;
 					int tileY=TileMap.visitTileY;
@@ -113,7 +113,7 @@ public class Instrument : object_base {
 						UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 						InteractionModeControl.UpdateNow=true;
-						CreatedCup=true;
+						GameWorldController.instance.playerUW.quest().isCupFound=true;
 						//An object appears in the air and falls into your hands
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
 

@@ -208,7 +208,9 @@ public class SaveGame : Loader {
 												break;
 										case 0x61:
 												{
-													GameWorldController.instance.playerUW.quest().isOrbDestroyed= ((((int)DataLoader.getValAtAddress(buffer,i,8) >> 5) & 0x1) == 1);break;
+													GameWorldController.instance.playerUW.quest().isOrbDestroyed= ((((int)DataLoader.getValAtAddress(buffer,i,8) >> 5) & 0x1) == 1);
+													GameWorldController.instance.playerUW.quest().isCupFound= ((((int)DataLoader.getValAtAddress(buffer,i,8) >> 6) & 0x1) == 1);
+														break;
 												}	
 										case 0x63:
 												{
@@ -858,6 +860,21 @@ public class SaveGame : Loader {
 								case 0x60  : ///    bits 2..5: play_poison
 										DataLoader.WriteInt8(writer, ( ((NoOfActiveEffects & 0x3) <<6)) | (GameWorldController.instance.playerUW.play_poison<<2) | (GameWorldController.instance.playerUW.quest().IncenseDream & 0x3)   );
 										break;
+								case 0x61:
+										{
+											int val =0;
+											if (GameWorldController.instance.playerUW.quest().isOrbDestroyed)
+											{
+												val=32;//bit 5
+											}
+											if (GameWorldController.instance.playerUW.quest().isCupFound)
+											{
+												val = val | 64;		// bit 6 is the cup found.
+											}
+
+											DataLoader.WriteInt8(writer,val);	
+											break;
+										}
 								case 0x63: //Is garamon buried
 										{
 											if (GameWorldController.instance.playerUW.quest().isGaramonBuried)
@@ -956,21 +973,18 @@ public class SaveGame : Loader {
 												DataLoader.WriteInt8(writer,GameWorldController.instance.variables[i-0x71]);
 												break;
 										}
-								case 0xB1://Bit 5 is the orb destroyed
+								case 0xB1://The max mana the player has when their mana is drained by the magic orb.
 										{
-											int val =0;
-											if (GameWorldController.instance.playerUW.quest().isOrbDestroyed)
-											{
-													val=1;
-											}
-											DataLoader.WriteInt8(writer,val << 5);
+											DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana);
 											break;
 										}
 								case 0xBC:
 										//Unknown
 										DataLoader.WriteInt8(writer,0xFF);
 										break;
-
+								case 0xb5://difficulty
+										DataLoader.WriteInt8(writer,GameWorldController.instance.difficulty);break;
+										//TODO:Save difficulty here at 0xb5
 								case 0xB6: //UW Game options
 										//high nibble is detail level.
 										//bit 0 of low nibble is sound

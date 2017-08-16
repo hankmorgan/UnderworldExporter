@@ -430,101 +430,132 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public void RunConversation(NPC npc)
 		{
-				if (npc.npc_whoami==0)
-				{
-					currConv = 256+(npc.objInt().item_id -64);
-				}
-				else
-				{
+			string npcname="";
+
+			if (npc.npc_whoami==0)
+			{
+				currConv = 256+(npc.objInt().item_id -64);
+				npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
+			}
+			else
+			{
 					currConv=npc.npc_whoami;
 					if (_RES==GAME_UW2)
 					{
-						currConv++;
+							currConv++;
 					}
-				}
+			}
 
-				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
-				UWHUD.instance.Conversation_tl.Clear();
-				UWHUD.instance.MessageScroll.Clear();
-				PlayerInput=UWHUD.instance.MessageScroll.NewUIOUt;
+			if (npc.npc_whoami>255)
+			{//Generic conversation.
+				npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
+			}
 
-				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
+			if ((conv[currConv].CodeSize==0) || (npc.npc_whoami == 255))
+			{//006~007~001~You get no response.
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+				return;
+			}
 
-				///Clear the trade slots for the npcs
-				for (int i=0; i<4;i++)
+			if (npcname=="")
+			{
+				UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc.npc_whoami+16);						
+			}
+			else
+			{
+				UWHUD.instance.NPCName.text=npcname;	
+			}				
+			
+			UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+
+
+
+			UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
+			ConversationVM.CurrentConversation=npc.npc_whoami;//To make obsolete
+			ConversationVM.InConversation=true;
+
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
+			UWHUD.instance.Conversation_tl.Clear();
+			UWHUD.instance.MessageScroll.Clear();
+			PlayerInput=UWHUD.instance.MessageScroll.NewUIOUt;
+
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
+
+			///Clear the trade slots for the npcs
+			for (int i=0; i<4;i++)
+			{
+					UWHUD.instance.npcTrade[i++].clear ();
+			}
+
+			///Identifies the NPC for future looking at
+			npc.objInt().isIdentified=true;//TODO:Replace this with vanilla behaviour
+
+			///Sets up the portraits for the player and the NPC
+			RawImage portrait = UWHUD.instance.ConversationPortraits[0];
+			RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
+			GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
+			if (GameWorldController.instance.playerUW.isFemale)
+			{
+					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body+5).ToString("0000"));//TODO:playerbody
+					portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body+5);
+			}
+			else
+			{
+					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody		
+					portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body);
+			}
+
+			switch (_RES)
+			{
+			case GAME_UW2:
 				{
-						UWHUD.instance.npcTrade[i++].clear ();
+					GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+					npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
+					break;
 				}
-
-				///Identifies the NPC for future looking at
-				npc.objInt().isIdentified=true;//TODO:Replace this with vanilla behaviour
-
-				///Sets up the portraits for the player and the NPC
-				RawImage portrait = UWHUD.instance.ConversationPortraits[0];
-				RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
-				GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
-				if (GameWorldController.instance.playerUW.isFemale)
+			default:
 				{
-						//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body+5).ToString("0000"));//TODO:playerbody
-						portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body+5);
-				}
-				else
-				{
-						//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody		
-						portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body);
-				}
-
-				switch (_RES)
-				{
-				case GAME_UW2:
+					if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 					{
 						GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 						npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
-						break;
-					}
-				default:
+					}	
+					else
 					{
-						if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
+						//head in charhead.gr
+						int HeadToUse = npc.objInt().item_id-64;
+						if (HeadToUse >59)
 						{
-							GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
-							//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
-							npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
-						}	
-						else
-						{
-							//head in charhead.gr
-							int HeadToUse = npc.objInt().item_id-64;
-							if (HeadToUse >59)
-							{
-									HeadToUse=0;
-							}			
-							GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
-							//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
-							npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
-						}	
-						break;
-					}
+								HeadToUse=0;
+						}			
+						GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
+						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+						npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
+					}	
+					break;
 				}
+			}
 
 
-				UWHUD.instance.MessageScroll.Clear ();
-				/*End UI Setup*/
+			UWHUD.instance.MessageScroll.Clear ();
+			/*End UI Setup*/
 
-				///Cancels player movement
-				GameWorldController.instance.playerUW.playerMotor.enabled=false;
+			///Cancels player movement
+			GameWorldController.instance.playerUW.playerMotor.enabled=false;
 
-				///Sets the music to the conversation theme
-				if  (GameWorldController.instance.getMus()!=null)
-				{
-						GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
-				}
+			///Sets the music to the conversation theme
+			if  (GameWorldController.instance.getMus()!=null)
+			{
+					GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
+			}
 
 
-				DisplayInstructionSet();
-				///Slows the world down so no other npc will attack or interupt the conversation
-				Time.timeScale=0.00f;
+			DisplayInstructionSet();
+			///Slows the world down so no other npc will attack or interupt the conversation
+			Time.timeScale=0.00f;
 
-				StartCoroutine(RunConversationVM(npc));
+			StartCoroutine(RunConversationVM(npc));
 		}
 
 

@@ -9,11 +9,6 @@ using RAIN.Minds;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject {
 	private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-		//public int poisondamage;
-		//public int AttackPower;
-		//public int AvgHit;
-		//public int height;
-		//public int radius;
 
 	//TODO: these need to match the UW npc_goals
 	//The behaviour trees need to be updated too.
@@ -520,8 +515,18 @@ public class NPC : MobileObject {
 						if (Room()==GameWorldController.instance.playerUW.room)
 						{
 							Vector3 AB = this.transform.position - gtarg.transform.position;
-							Vector3 Movepos = gtarg.transform.position + (0.9f * AB.normalized) ;
-							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);	
+							if(AB.magnitude>1f)
+							{
+								Vector3 Movepos = gtarg.transform.position; //;+ (AB.normalized) ;
+								ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);		
+							}
+							else
+							{
+								ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",this.transform.position);	
+							}
+
+							//Vector3 Movepos = gtarg.transform.position + (0.10f * AB.normalized) ;
+
 						}
 						else
 						{		//AI won't move to player position if they are in a different "room"
@@ -634,7 +639,7 @@ public class NPC : MobileObject {
 
 				//Alert nearby npcs that i have been attacked.
 				//Will alert npcs of same item id or an allied type. (eg goblins & trolls)
-					foreach (Collider Col in Physics.OverlapSphere(this.transform.position,4.0f))
+					foreach (Collider Col in Physics.OverlapSphere(this.transform.position,8.0f))
 					{
 						if (Col.gameObject.GetComponent<NPC>()!=null)
 						{
@@ -680,47 +685,7 @@ public class NPC : MobileObject {
 	/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 	public override bool TalkTo()
 	{//Begin a conversation.
-		string npcname="";
-		if ((npc_whoami == 255))
-		{
-			//006~007~001~You get no response.
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
-		}
-		else
-		{
-			if (npc_whoami==0)
-			{//Generic conversation.
-				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
-				npcname= StringController.instance.GetSimpleObjectNameUW(objInt);
-				//npc_whoami=256+(objInt.item_id -64);
-			}
-			if (npc_whoami>255)
-			{//Generic conversation.
-				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
-				npcname= StringController.instance.GetSimpleObjectNameUW(objInt);
-			}
-			switch (npc_whoami)
-			{
-
-			default:
-				{
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-					ConversationVM.CurrentConversation=npc_whoami;//To make obsolete
-					ConversationVM.InConversation=true;
-					if (npcname=="")
-					{
-							UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
-					}
-					else
-					{
-							UWHUD.instance.NPCName.text=npcname;	
-					}				
-					UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
-					GameWorldController.instance.convVM.RunConversation(this);
-					break;		
-				}
-			}
-		}
+		GameWorldController.instance.convVM.RunConversation(this);
 		return true;
 	}
 

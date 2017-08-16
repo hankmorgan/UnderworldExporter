@@ -74,7 +74,8 @@ public class Impact : object_base {
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(Item_ID,40,StartFrame,1,256);
 		ObjectInteraction objInt = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ImpactPosition);
 		objInt.GetComponent<AnimationOverlay>().Looping=false;
-
+		objInt.GetComponent<AnimationOverlay>().StartFrame=StartFrame;
+		objInt.GetComponent<AnimationOverlay>().NoOfFrames=StartFrame-EndFrame;
 		///GameObject hitimpact = new GameObject(ImpactName);
 		///hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
 		///hitimpact.transform.parent = GameWorldController.instance.LevelMarker();

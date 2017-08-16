@@ -1033,5 +1033,43 @@ public class DoorControl : object_base {
 
 		}
 
+		public override string ContextMenuDesc (int item_id)
+		{
+				switch  (GameWorldController.instance.objectMaster.type[item_id])
+				{
+					case ObjectInteraction.HIDDENDOOR:
+						if (state()==false)//Closed and probably hidden
+						{
+								return "";		
+						}
+						else
+						{
+							return base.ContextMenuDesc (item_id);
+						}
+
+						break;
+				default:
+					return base.ContextMenuDesc (item_id);
+				}
+		}
+
+	public override string ContextMenuUsedDesc ()
+	{
+		switch  (GameWorldController.instance.objectMaster.type[objInt().item_id])
+		{
+		case ObjectInteraction.HIDDENDOOR:
+			if (state()==false)//Closed and probably hidden
+			{
+				return "";		
+			}
+			else
+			{
+				return base.ContextMenuUsedDesc ();	
+			}
+		default:
+				return base.ContextMenuUsedDesc ();	
+		}		
+	}
+
 
 }

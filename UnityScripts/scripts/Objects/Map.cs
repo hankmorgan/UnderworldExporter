@@ -32,10 +32,8 @@ public class Map : object_base {
 		/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
 	public bool OpenMap()
 	{
-		WindowDetect.InMap=true;//turns on blocking collider.
-		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
-		UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
-		UWHUD.instance.MapDisplay.texture=GameWorldController.instance.currentAutoMap().TileMapImage();
+		MapInteraction.UpdateMap(GameWorldController.instance.LevelNo);
+		
 		if  (GameWorldController.instance.getMus()!=null)
 		{
 			GameWorldController.instance.getMus().InMap=true;

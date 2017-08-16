@@ -392,31 +392,10 @@ public class AutoMap : Loader {
 						}							
 				}
 
-				// Apply all SetPixel calls
-				output.Apply();
-
-				///Display the map notes
-				///Delete the map notes in memory
-				foreach(Transform child in UWHUD.instance.MapPanel.transform)
-				{
-						if (child.name.Substring(0,4) == "_Map")
-						{								
-								GameObject.Destroy(child.transform.gameObject);
-						}
-				}
-
-				for (int i=0 ; i < MapNotes.Count;i++)
-				{///Instantiates the map note template UI control.
-						GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
-						myObj.transform.parent= UWHUD.instance.MapPanel.transform;
-						myObj.GetComponent<Text>().text = MapNotes[i].NoteText;
-						myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[i].NotePosition();
-						myObj.GetComponent<MapNoteId>().guid = MapNotes[i].guid;
-						//Move the control so that it sits in front of the map,
-						myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
-				}		
-
-				return  output;		
+			// Apply all SetPixel calls
+			output.Apply();
+			return  output;		
+					
 		}
 
 
@@ -1371,20 +1350,3 @@ public class AutoMap : Loader {
 		}
 
 }
-
-
-/*
- 							int PosX=0; int PosY=0;
-							PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
-							PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
-							for (int c=0; c<=0x31;c++)
-							{
-									if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
-									{
-											NoteText+=lev_ark[automapNotesAddress+c];
-									}
-									else
-									{
-											terminated=true;		
-									}
-				*/

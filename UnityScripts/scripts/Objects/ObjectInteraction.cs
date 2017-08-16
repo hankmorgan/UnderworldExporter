@@ -186,6 +186,10 @@ public class ObjectInteraction : UWEBase {
 		public const int HEADINGSOUTH= 0;
 		public const int HEADINGEAST =270;
 		public const int HEADINGWEST= 90;
+		public const int HEADINGNORTHEAST=225;
+		public const int HEADINGSOUTHEAST=315;
+		public const int HEADINGNORTHWEST=135;
+		public const int HEADINGSOUTHWEST=45;
 
 		//UW Props
 
@@ -1289,7 +1293,7 @@ public class ObjectInteraction : UWEBase {
 				NpcLauncher.transform.position=Vector3.zero; 
 				//NpcLauncher.transform.rotation=Vector3.zero; 
 				NpcLauncher.transform.parent=myObj.transform;
-				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
+				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.2f);
 				npc.NPC_Launcher=NpcLauncher;
 				//npc.ai=ai;
 				//NpcLauncher.AddComponent<StoreInformation>();
@@ -1386,9 +1390,10 @@ public class ObjectInteraction : UWEBase {
 				case 126: //unknown
 						cap.isTrigger=false;
 						cap.center = new Vector3(0.0f, 0.5f, 0.0f);
-						cap.radius=0.2f;
+						cap.radius=0.3f;
 						cap.height=1.0f;
 						cap.skinWidth=0.02f;
+						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.2f);
 						break;
 
 						//Medium
@@ -1403,8 +1408,9 @@ public class ObjectInteraction : UWEBase {
 						cap.isTrigger=false;
 						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
 						cap.radius=0.3f;
-						cap.height=0.3f;
+						cap.height=0.7f;
 						cap.skinWidth=0.02f;
+						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.4f,0.2f);
 						break;
 						//Small
 				case 64: //a_rotworm
@@ -1417,8 +1423,9 @@ public class ObjectInteraction : UWEBase {
 				case 122: //a_wisp
 						cap.isTrigger=false;
 						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
+						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.2f,0.2f);
 						cap.radius=0.3f;
-						cap.height=0.3f;
+						cap.height=0.6f;
 						cap.skinWidth=0.02f;
 						break;
 				}

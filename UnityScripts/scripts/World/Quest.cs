@@ -120,6 +120,12 @@ public class Quest : UWEBase {
 		/// </summary>
 		public bool isGaramonBuried;
 
+
+		/// <summary>
+		/// Is the cup of wonder found.
+		/// </summary>
+		public bool isCupFound;
+
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events.
 	/// </summary>

@@ -881,6 +881,8 @@ public class ObjectLoader : Loader {
 		case ObjectInteraction.BUTTON:
 		case ObjectInteraction.PILLAR:
 		case ObjectInteraction.BRIDGE:
+		case ObjectInteraction.SIGN:
+		case ObjectInteraction.LOCK:
 				return true;
 		default:
 				return false;							
@@ -1420,15 +1422,21 @@ public class ObjectLoader : Loader {
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
 				currObjList.objInfo[i].index=i;
-				currObjList.objInfo[i].next=0;
-					if (currObjList.objInfo[i].instance!=null)
-					{
-						//currObjList.objInfo[i].instance.debugindex=i;
-						currObjList.objInfo[i].instance.next=0;				
-					}
-				
-				//GameWorldController.instance.CurrentObjectList().objInfo[i].tileX=99;
-				//GameWorldController.instance.CurrentObjectList().objInfo[i].tileY=99;
+				//GameWorldController.instance.objectMaster.type[objInt().item_id]
+				switch(GameWorldController.instance.objectMaster.type[currObjList.objInfo[i].item_id])
+				{
+				case ObjectInteraction.LOCK:
+						//The next of a lock is sometimes a trigger.
+						break;
+				default:
+						currObjList.objInfo[i].next=0;
+						if (currObjList.objInfo[i].instance!=null)
+						{
+								//currObjList.objInfo[i].instance.debugindex=i;
+								currObjList.objInfo[i].instance.next=0;				
+						}
+						break;
+				}
 			}
 
 			if (currTileMap!=null)

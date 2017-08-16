@@ -439,6 +439,7 @@ public class MainMenuHud : GuiBase {
 						//Show the name input box.
 						//Remove buttons.
 						chargenStage++;
+						GameWorldController.instance.difficulty=option;
 						RemoveButtons();
 						EnterCharName.gameObject.SetActive(true);
 						EnterCharName.GetComponent<RawImage>().texture=chrBtns.LoadImageAt(2);
@@ -478,6 +479,7 @@ public class MainMenuHud : GuiBase {
 									GameWorldController.instance.playerUW.quest().IncenseDream=0;
 									GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
 									GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
+									GameWorldController.instance.playerUW.quest().isCupFound=false;
 									GameClock.instance._day=0;
 									GameClock.instance._minute=51;
 									GameClock.instance._second=15;
