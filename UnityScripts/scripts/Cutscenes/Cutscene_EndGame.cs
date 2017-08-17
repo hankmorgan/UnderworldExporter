@@ -42,7 +42,7 @@ public class Cutscene_EndGame : Cuts {
 
 			ImageFrames[8] = "cs000_n01";//Fade to black ?
 			ImageTimes[8]=55.0f;
-			ImageLoops[8]=0;
+			ImageLoops[8]=-1;
 
 			ImageFrames[9] = "cs000_n06";//Fade in Garamon 4s
 			ImageTimes[9]=63.0f;
@@ -166,4 +166,5 @@ public class Cutscene_EndGame : Cuts {
 			//Debug.Log("Display the victory screen");
 				//Switch to the closing stats screen.
 	}
+
 }

@@ -596,7 +596,9 @@ public class TileMap : Loader {
 								}	
 								Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
 								Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
-								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) );
+								Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture+48]);
+								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) || (Tiles[x,y].isNothing));
+
 								//UW only has a single ceiling texture so this is ignored.
 								//Tiles[x,y].shockCeilingTexture = Tiles[x,y].floorTexture;					
 								Tiles[x,y].shockCeilingTexture=CeilingTexture;
@@ -1595,18 +1597,6 @@ public class TileMap : Loader {
 				default:
 					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
 				}
-
-				/*
-				switch (textureNo)
-				{
-				case 226:
-				case 227:
-				case 242:
-				case 243:
-				case 244:
-						return true;
-				}
-				return false;*/
 		}
 
 		public static bool isTextureLava(int textureNo)
@@ -1622,19 +1612,24 @@ public class TileMap : Loader {
 
 				default:
 						return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Lava;//Adjust for uw1 texturemap positions
-				}				
-				/*
-				switch (textureNo)
-				{
-
-				case 233:
-				case 234:
-				case 235:
-				case 251:
-						return true;
-				}
-				return false;	*/
+				}			
 		}
+
+		/// <summary>
+		/// Is the texture nothing.
+		/// </summary>
+		/// <returns><c>true</c>, if texture nothing was ised, <c>false</c> otherwise.</returns>
+		/// <param name="textureNo">Texture no.</param>
+		public static bool isTextureNothing(int textureNo)
+		{
+			switch (textureNo)
+				{
+				case 236:
+					return true;
+				}
+				return false;	
+		}
+
 
 		/*
 		public void MergeWaterRegions()
@@ -1861,10 +1856,10 @@ public class TileMap : Loader {
 		public char[] TileMapToBytes(char[] lev_ark_file_data)
 		{
 				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
-				//prepopulate with existing data. Vanilla underworld will crash otherwise
+
 				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
 				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
-				{
+				{//prepopulate with existing data. Vanilla underworld will crash otherwise
 					TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
 				}
 				//return TileMapData;
@@ -2180,6 +2175,10 @@ public class TileMap : Loader {
 			else if (Tiles[x,y].isLava)
 			{
 				return 2;	
+			}
+			else if (Tiles[x,y].isNothing)
+			{
+				return 3;
 			}
 			else
 			{

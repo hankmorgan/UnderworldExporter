@@ -53,7 +53,7 @@ public class ContainerOpened : GuiBase_Draggable {
 						{
 								GetComponent<RawImage>().texture=GameWorldController.instance.playerUW.playerInventory.Blank;
 								BackpackBg.SetActive(false);
-								if (DestinationContainer.CountItems()>=8)
+							if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
 								{
 										InvUp.SetActive(true);
 										InvDown.SetActive(true);
@@ -68,7 +68,7 @@ public class ContainerOpened : GuiBase_Draggable {
 						{								
 								GetComponent<RawImage>().texture= DestinationContainer.transform.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
 								BackpackBg.SetActive(true);
-								if (DestinationContainer.CountItems()>=8)
+								if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
 								{
 										InvUp.SetActive(true);
 										InvDown.SetActive(true);

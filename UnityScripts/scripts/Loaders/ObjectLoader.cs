@@ -1466,7 +1466,7 @@ public class ObjectLoader : Loader {
 					if (objInt.objectloaderinfo.InUseFlag==1)
 						{
 							currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);	
-							if ((t.gameObject.GetComponent<Container>()) || (t.gameObject.GetComponent<NPC>()))
+							if ((t.gameObject.GetComponent<Container>()!=null))
 							{//Rebuild container chain
 									linkContainerContents(t.gameObject.GetComponent<Container>());
 									t.gameObject.GetComponent<ObjectInteraction>().link=0;
@@ -1658,7 +1658,7 @@ public class ObjectLoader : Loader {
 					itemCounter++;
 					
 					//If a container then link its contents as well
-					if (obj.GetComponent<Container>())
+					if (obj.GetComponent<Container>()!=null)
 					{//Rebuild container chain
 						if (obj!=cn.gameObject)
 						{

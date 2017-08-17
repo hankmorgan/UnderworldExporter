@@ -560,8 +560,16 @@ public class NPC : MobileObject {
 										npc_gtarg=(short)GameWorldController.instance.playerUW.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
 									}
-
 								}
+								if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
+								{//slasher of veils in the void needs to get rowdy.
+									if (objInt().item_id==124)
+									{
+										npc_goal=5;	
+										gtarg=GameWorldController.instance.playerUW.gameObject;
+									}
+								}
+
 							}
 						}
 					break;

@@ -206,7 +206,7 @@ public class Container : object_base {
 			GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
 		}
 		UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
-		if (CountItems()>=8)
+		if ((CountItems()>=8) && (this!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
 		{
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(true);
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(true);

@@ -605,6 +605,10 @@ public class UWCombat : Combat {
 		}
 		int toHit = Mathf.Max(PlayerDefence - npc.GetAttack() , 0);
 		int roll = Random.Range(-1,31);
+		if ((_RES==GAME_UW1)&& (npc.objInt().item_id==124))
+		{
+			roll=30;//Slasher will always hit.
+		}
 		int BaseDamage=npc.GetDamage();//get the damage of the current attack
 		if (((roll >= toHit) || (roll>=30)) && (roll>-1))
 			{

@@ -1309,21 +1309,7 @@ public class TileMapRenderer : Loader{
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
-				if (t.isWater==false)
-				{
-					if (t.isLava)
-					{
-						Tile.layer=LayerMask.NameToLayer("Lava");
-					}
-					else
-					{
-						Tile.layer=LayerMask.NameToLayer("MapMesh");	
-					}
-				}
-				else
-				{
-						Tile.layer=LayerMask.NameToLayer("Water");
-				}
+				SetTileLayer (t, Tile);
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
 
@@ -1497,281 +1483,7 @@ public class TileMapRenderer : Loader{
 						mc.sharedMesh=null;
 						mc.sharedMesh=mesh;	
 				}
-
 		}
-
-		/*
-		static void RenderSlopedCuboidOld(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, string TileName)
-		{
-				//Draws a cube with sloped tops
-
-				float AdjustUpperNorth = 0f;
-				float AdjustUpperSouth = 0f;
-				float AdjustUpperEast = 0f;
-				float AdjustUpperWest = 0f;
-
-				float AdjustLowerNorth = 0f;
-				float AdjustLowerSouth = 0f;
-				float AdjustLowerEast = 0f;
-				float AdjustLowerWest = 0f;
-
-				if (Floor == 1)
-				{
-						switch (SlopeDir)
-						{
-						case TILE_SLOPE_N:
-								AdjustUpperNorth = (float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_S:
-								AdjustUpperSouth = (float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_E:
-								AdjustUpperEast =(float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_W:
-								AdjustUpperWest = (float)Steepness*0.15f;
-								break;
-						}
-				}
-				if (Floor == 0)
-				{
-						switch (SlopeDir)
-						{
-						case TILE_SLOPE_N:
-								AdjustLowerNorth = -(float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_S:
-								AdjustLowerSouth = -(float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_E:
-								AdjustLowerEast =-(float)Steepness*0.15f;
-								break;
-						case TILE_SLOPE_W:
-								AdjustLowerWest = -(float)Steepness*0.15f;
-								break;
-						}
-				}
-
-				//Draw a cube with no slopes.
-				int NumberOfVisibleFaces=0;
-				//Get the number of faces
-				for (int i=0; i<6;i++)
-				{
-						if (t.VisibleFaces[i]==1)
-						{
-								NumberOfVisibleFaces++;
-						}
-				}
-				//Allocate enough verticea and UVs for the faces
-				Material[] MatsToUse=new Material[NumberOfVisibleFaces];
-				Vector3[] verts =new Vector3[NumberOfVisibleFaces*4];
-				Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4];
-				float offset=0f;
-				float floorHeight=(float)(Top*0.15f);
-				float baseHeight=(float)(Bottom*0.15f);
-				float dimX = t.DimX;
-				float dimY = t.DimY;
-
-				//Now create the mesh
-				GameObject Tile = new GameObject(TileName);
-				if (t.isWater==false)
-				{
-						if (t.isLava)
-						{
-								Tile.layer=LayerMask.NameToLayer("Lava");
-						}
-						else
-						{
-								Tile.layer=LayerMask.NameToLayer("MapMesh");	
-						}
-				}
-				else
-				{
-						Tile.layer=LayerMask.NameToLayer("Water");
-				}
-				Tile.transform.parent=parent.transform;
-				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
-
-				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
-				MeshFilter mf = Tile.AddComponent<MeshFilter>();
-				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
-				MeshCollider mc = Tile.AddComponent<MeshCollider>();
-				mc.sharedMesh=null;
-
-				Mesh mesh = new Mesh();
-				mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
-				//Now allocate the visible faces to triangles.
-				int FaceCounter=0;//Tracks which number face we are now on.
-				float PolySize= Top-Bottom;
-				float uv0= (float)(Bottom*0.125f);
-				float uv1=(PolySize / 8.0f) + (uv0);
-				for (int i=0;i<6;i++)
-				{
-						if (t.VisibleFaces[i]==1)
-						{
-								switch(i)
-								{
-								case vTOP:
-										{
-												//Set the verts	
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
-
-												verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight+AdjustUpperWest+AdjustUpperSouth);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
-
-												//Allocate UVs
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
-												uvs[2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
-												uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
-
-												break;
-										}
-
-								case vNORTH:
-										{				
-												float uv0InUse=0f; float uv1InUse=0f;
-												float uv2InUse=0f; float uv3InUse=0f;
-												//CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-											//	CalcUVsForSlopedTiles(t,SlopeDir,fNORTH,Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-												CalcUVsForSlopedTiles(t,SlopeDir, fNORTH, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-
-												//north wall vertices
-												offset = CalcCeilOffset(fNORTH, t);
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
-
-												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight  +AdjustLowerSouth+AdjustLowerWest);
-												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperEast);
-												verts[2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperNorth+AdjustUpperWest);
-												verts[3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast);
-
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);//bottom uv
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);//top uv
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv2InUse-offset);//top uv
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv3InUse-offset);//bottom uv
-
-												break;
-										}
-
-								case vWEST:
-										{
-												//west wall vertices
-												//float uv0InUse=0f; float uv1InUse=0f;
-												float uv0InUse=0f; float uv1InUse=0f;
-												float uv2InUse=0f; float uv3InUse=0f;
-												//CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-												CalcUVsForSlopedTiles(t,SlopeDir, fWEST, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-
-												offset = CalcCeilOffset(fWEST, t);
-
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerEast+AdjustLowerSouth);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight+AdjustUpperWest+AdjustUpperNorth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperWest+AdjustUpperSouth);
-												verts[3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv2InUse-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv3InUse-offset);
-
-												break;
-										}
-
-								case vEAST:
-										{
-												//static void CalcUVsForSlopedTiles(TileInfo t, int SlopeDir , int face, int Steepness, int Floor, int uv0_default, int uv1_default, out int UV0_OUT, out int UV1_OUT)
-												float uv0InUse=0f; float uv1InUse=0f;
-												float uv2InUse=0f; float uv3InUse=0f;
-												CalcUVsForSlopedTiles(t,SlopeDir, fEAST, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-
-												//east wall vertices
-												offset = CalcCeilOffset(fEAST, t);
-
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerWest+AdjustLowerNorth);
-												verts[1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperEast+AdjustUpperSouth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight+AdjustUpperEast+AdjustUpperNorth);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerWest+AdjustLowerSouth);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);//0
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);//1
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimY,uv2InUse-offset);//1
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimY,uv3InUse-offset);//0
-
-												break;
-										}
-
-								case vSOUTH:
-										{
-												float uv0InUse=0f; float uv1InUse=0f;
-												float uv2InUse=0f; float uv3InUse=0f;
-												//CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-												CalcUVsForSlopedTiles(t,SlopeDir, fSOUTH, Steepness,Floor,Top,Bottom,uv0,uv1, out uv0InUse, out uv1InUse,out uv2InUse, out uv3InUse);
-
-												//south wall vertices
-												offset = CalcCeilOffset(fSOUTH, t);
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerNorth+AdjustLowerEast);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight+AdjustUpperSouth+AdjustUpperWest);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight+AdjustUpperSouth+AdjustUpperEast);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest);
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,uv0InUse-offset);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,uv1InUse-offset);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,uv2InUse-offset);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,uv3InUse-offset);
-
-												break;
-										}
-								case vBOTTOM:
-										{
-												//bottom wall vertices
-												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
-												//TODO:Get the lower face adjustments for this (shock only)
-												verts[0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerEast);
-												verts[1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight+AdjustLowerEast+AdjustLowerNorth);
-												verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight+AdjustLowerNorth+AdjustLowerWest);
-												verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight+AdjustLowerSouth+AdjustLowerWest);
-												//Change default UVs
-												uvs[0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
-												uvs[1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
-												uvs[2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
-												uvs[3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
-												break;
-										}
-								}
-								FaceCounter++;
-						}
-				}
-
-				//Apply the uvs and create my tris
-				mesh.vertices = verts;
-				mesh.uv = uvs;
-				FaceCounter=0;
-				int [] tris = new int[6];
-				for (int i=0;i<6;i++)
-				{
-						if (t.VisibleFaces[i]==1)
-						{
-								tris[0]=0+(4*FaceCounter);
-								tris[1]=1+(4*FaceCounter);
-								tris[2]=2+(4*FaceCounter);
-								tris[3]=0+(4*FaceCounter);
-								tris[4]=2+(4*FaceCounter);
-								tris[5]=3+(4*FaceCounter);
-								mesh.SetTriangles(tris,FaceCounter);
-								FaceCounter++;
-						}
-				}
-
-				mr.materials=MatsToUse;
-				mesh.RecalculateNormals();
-				mesh.RecalculateBounds();
-				mf.mesh=mesh;
-				mc.sharedMesh=mesh;
-
-		}*/
-
 
 
 		/// <summary>
@@ -3636,23 +3348,11 @@ public class TileMapRenderer : Loader{
 				float dimX = t.DimX;
 				float dimY = t.DimY;
 
+
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
-				if (t.isWater==false)
-				{
-						if (t.isLava)
-						{
-								Tile.layer=LayerMask.NameToLayer("Lava");
-						}
-						else
-						{
-								Tile.layer=LayerMask.NameToLayer("MapMesh");	
-						}
-				}
-				else
-				{
-						Tile.layer=LayerMask.NameToLayer("Water");
-				}
+				SetTileLayer(t,Tile);
+
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
 
@@ -4509,6 +4209,25 @@ public class TileMapRenderer : Loader{
 				}
 		}
 
+	static void SetTileLayer (TileInfo t, GameObject Tile)
+	{
+		if (t.isWater == false) {
+			if (t.isLava) {
+				Tile.layer = LayerMask.NameToLayer ("Lava");
+			}
+			else {
+				if (t.isNothing) {
+					Tile.layer = LayerMask.NameToLayer ("Nothing");
+				}
+				else {
+					Tile.layer = LayerMask.NameToLayer ("MapMesh");
+				}
+			}
+		}
+		else {
+			Tile.layer = LayerMask.NameToLayer ("Water");
+		}
+	}
 
 
 

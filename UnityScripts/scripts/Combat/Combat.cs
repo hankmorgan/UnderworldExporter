@@ -5,7 +5,7 @@ using System.Collections;
 /// Base Class for combat related logic (player side)
 /// Combat is the animation of weapon swings, attack charging and attack execution.
 /// </summary>
-public class Combat : MonoBehaviour {
+public class Combat : UWEBase {
 
 	/// How far a melee attack is raycast from the player.
 	protected float weaponRange=1.0f;

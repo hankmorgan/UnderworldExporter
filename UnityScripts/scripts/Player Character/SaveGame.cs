@@ -1562,10 +1562,17 @@ public class SaveGame : Loader {
 
 						return;
 				}
+		}
 
 
 
-
+		/// <summary>
+		/// Returns a save game name to use when saving.
+		/// </summary>
+		/// <returns>The game name.</returns>
+		public static string SaveGameName(int slotNo)
+		{
+				return "Level " + GameWorldController.instance.LevelNo + " " + System.DateTime.Now;
 		}
 
 

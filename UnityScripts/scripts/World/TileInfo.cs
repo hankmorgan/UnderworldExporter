@@ -30,7 +30,8 @@ public class TileInfo : Loader {
 		public bool isLand;
 		public bool isWater;		//Set when it has a water texture.
 		public bool isLava;		//Set when it has a lava texture.
-		public bool hasBridge;//Set when the tile contains a bridge.
+		public bool hasBridge; //Set when the tile contains a bridge.
+		public bool isNothing; //Set when the tile has the nothing textures
 		//public short hasExit;//Set when it contains a move trigger that goes to another level.
 		//short waterRegion;	//Index to the water contigous area.
 		//public short isCorridor;  //Part of a group of 4 or more tiles with only 2 non solid neighbours

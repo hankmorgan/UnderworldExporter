@@ -187,6 +187,22 @@ public class Cuts : GuiBase {
 	/// </summary>
 	public virtual void PostCutSceneEvent()
 	{
-			return;		
+		GameWorldController.instance.AtMainMenu=true;
+		//Clear out game objects
+		foreach (Transform child in GameWorldController.instance.LevelModel.transform) {
+				GameObject.Destroy(child.gameObject);
+		}
+		foreach (Transform child in GameWorldController.instance.LevelMarker()) {
+				GameObject.Destroy(child.gameObject);
+		}
+		foreach (Transform child in GameWorldController.instance.SceneryModel.transform) {
+				GameObject.Destroy(child.gameObject);
+		}
+		MainMenuHud.instance.gameObject.SetActive(true);
+		MainMenuHud.instance.MenuMode=0;
+		MainMenuHud.instance.OpScr.SetActive(true);
+		MainMenuHud.instance.CharGen.SetActive(false);
+		MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
+		return;		
 	}
 }

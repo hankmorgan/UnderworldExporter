@@ -1125,7 +1125,7 @@ public class ConversationVM : UWEBase {
 								npcSlot.clear();
 								demanded.transform.parent=GameWorldController.instance.LevelMarker();
 								GameWorldController.MoveToWorld(demanded);//ok
-								demanded.transform.position=npc.transform.position;
+								demanded.transform.position=npc.NPC_Launcher.transform.position;
 							}
 						}
 				}
@@ -2296,7 +2296,7 @@ public class ConversationVM : UWEBase {
 									{
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
 										GameWorldController.MoveToWorld(demanded);//ok
-										demanded.transform.position=npc.transform.position;
+										demanded.transform.position=npc.NPC_Launcher.transform.position;
 										SomethingGiven=false;
 									}
 									pcSlot.clear();
@@ -2428,7 +2428,7 @@ public class ConversationVM : UWEBase {
 			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
 			demanded.transform.parent = GameWorldController.instance.LevelMarker ();
 			GameWorldController.MoveToWorld (demanded);//ok
-			demanded.transform.position = npc.transform.position;
+			demanded.transform.position = npc.NPC_Launcher.transform.position;
 			if (demanded.GetComponent<Container>())
 			{
 				Container cn = demanded.GetComponent<Container>();
@@ -2579,7 +2579,7 @@ public class ConversationVM : UWEBase {
 							GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 							demanded.transform.parent=GameWorldController.instance.LevelMarker();
 							GameWorldController.MoveToWorld(demanded);//ok
-							demanded.transform.position=npc.transform.position;
+							demanded.transform.position=npc.NPC_Launcher.transform.position;
 							pcSlot.clear();
 						}
 					}
@@ -2748,7 +2748,7 @@ public class ConversationVM : UWEBase {
 				else {
 					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 					demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-					demanded.transform.position = npc.transform.position;
+					demanded.transform.position = npc.NPC_Launcher.transform.position;
 					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
 					npcSlot.clear ();
 					GameWorldController.MoveToWorld(demanded);//ok
@@ -2780,7 +2780,7 @@ public class ConversationVM : UWEBase {
 						else {
 							GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 							demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-							demanded.transform.position = npc.transform.position;
+							demanded.transform.position = npc.NPC_Launcher.transform.position;
 							GameWorldController.MoveToWorld(demanded);//ok
 							pcSlot.clear ();
 						}
@@ -2809,7 +2809,7 @@ public class ConversationVM : UWEBase {
 						//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
 						pcSlot.clear ();
 						demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-						demanded.transform.position = npc.transform.position;
+						demanded.transform.position = npc.NPC_Launcher.transform.position;
 						GameWorldController.MoveToWorld(demanded);//ok
 					}
 				}
@@ -3405,7 +3405,7 @@ return value: none
 			playerHasSpace=2;
 			obj.transform.parent=GameWorldController.instance.LevelMarker();
 			
-			obj.transform.position=npc.transform.position;
+			obj.transform.position=npc.NPC_Launcher.transform.position;
 			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
 			//GameWorldController.MoveToWorld(obj); object is already in the world.
 			if (obj.GetComponent<Container>()!=null)
