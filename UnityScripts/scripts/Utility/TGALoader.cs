@@ -62,9 +62,9 @@ public static class TGALoader
 				}
 			} else
 			{
-				throw new Exception("TGA texture had non 32/24 bit depth.");
+				throw new Exception("TGA texture has non 32/24 bit depth.");
 			}
-			
+			tex.filterMode=FilterMode.Point;
 			tex.SetPixels32(pulledColors);
 			tex.Apply();
 			return tex;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 /// <summary>
 /// Byt loader. Loads from UW1 byt files in the data folder
@@ -85,10 +86,15 @@ public class BytLoader : ArtLoader {
 		{
 		case GAME_UW2:
 			{
+								
 				return  extractUW2Bitmap("data\\byt.ark", index, Alpha);
 			}
 		default:
 			{
+				if (File.Exists(BasePath +FilePaths[index].Replace(".","_") + "\\001.tga"))
+				{
+					return TGALoader.LoadTGA(BasePath + FilePaths[index].Replace(".","_") + "\\001.tga")	;
+				}
 			if (currentIndex!=index)
 				{//Only load from disk if the image to bring back has changed.
 					DataLoaded=false;
@@ -105,6 +111,11 @@ public class BytLoader : ArtLoader {
 			char[] textureFile;          // Pointer to our buffered data (little endian format)
 			//int i;
 			long NoOfTextures;
+
+				if (File.Exists(BasePath +path.Replace(".","_") + "\\" + index.ToString("d3") + ".tga"))
+				{
+					return TGALoader.LoadTGA(BasePath +path.Replace(".","_") + "\\" + index.ToString("d3") + ".tga")	;
+				}
 
 			if (!DataLoader.ReadStreamFile(BasePath + path, out textureFile))
 			{return null;}

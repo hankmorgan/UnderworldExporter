@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 public class CritterInfo : Loader {
 
 		public const int idle_combat = 0x0;
@@ -32,13 +32,13 @@ public class CritterInfo : Loader {
 
 
 
-		public int Item_Id;
-		public int FileNo;
+		//public int Item_Id;
+		//public int FileNo;
 		//public int AuxPalNo;
 		char[] FilePage0;
 		char[] FilePage1;
 		public Palette pal; //the game pal.
-		private Palette auxpal;
+		//private Palette auxpal;
 
 		public CritterAnimInfo AnimInfo;
 
@@ -57,12 +57,14 @@ public class CritterInfo : Loader {
 				if (pass==0)
 				{//CR{CRITTER file ID in octal}PAGE.N{Page}
 					DataLoader.ReadStreamFile(BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage0);
-					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex, AuxPalNo);
+					bool LoadMod=Directory.Exists(BasePath + "crit\\CR" + critterIDO  +"page_n0" + pass);
+					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "crit\\CR" + critterIDO  +"page_n0" + pass);
 				}
 				else
 				{
 					DataLoader.ReadStreamFile( BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage1);
-					ReadPageFile(FilePage1,critter_id,pass,spriteIndex, AuxPalNo);
+					bool LoadMod=Directory.Exists(BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass);
+					ReadPageFile(FilePage1,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass);
 				}
 			}
 		}
@@ -117,7 +119,7 @@ public class CritterInfo : Loader {
 
 
 
-		private int ReadPageFile(char[] PageFile, int XX, int YY ,int spriteIndex , int AuxPalNo)
+		private int ReadPageFile(char[] PageFile, int XX, int YY ,int spriteIndex , int AuxPalNo,bool LoadMod, string ModPath)
 		{
 			int addptr=0;
 			int slotbase = (int)DataLoader.getValAtAddress(PageFile,addptr++,8);
@@ -254,54 +256,63 @@ public class CritterInfo : Loader {
 						{
 								cornerY = 0;
 						}
-
-						//Extract the image
-						char[] srcImg;
-						srcImg = new char[BitMapWidth*BitMapHeight*2];
-						outputImg = new char[MaxWidth*MaxHeight*2];
-						// Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
-						ArtLoader.ua_image_decode_rle(PageFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxPalVal);
-
-
-						//*Put the sprite in the a frame of size max width & height
-						cornerY = MaxHeight-cornerY;//y is from the top left corner
-						int ColCounter = 0; int RowCounter = 0;
-						bool ImgStarted = false;
-						for (int y = 0; y < MaxHeight; y++)
+						bool ModFileIsLoaded=false;
+						if (LoadMod)
 						{
-							for (int x = 0; x < MaxWidth; x++)
-							{
-								if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
-								{//the pixel from the source image is here 
-									ImgStarted=true;
-									outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
-									ColCounter++;
-								}
-								else
+							if (File.Exists(ModPath + "\\" + AuxPalNo + "\\" + i.ToString("d3") +".tga"))
 								{
-									outputImg[x + (y*MaxWidth)]=(char)0;//alpha
+									Texture2D tex= TGALoader.LoadTGA(ModPath + "\\" + AuxPalNo + "\\" + i.ToString("d3") +".tga");
+									ModFileIsLoaded=true;
+									AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(tex,new Rect(0f,0f,tex.width,tex.height),new Vector2 (0.5f,0.0f));
 								}
-							}
-							if (ImgStarted == true)
-							{//New Row on the src image
-								RowCounter++;
-								ColCounter=0;
-							}
 						}
-						//Set the heights for output
-						BitMapWidth=MaxWidth;
-						BitMapHeight = MaxHeight;
+						if (!ModFileIsLoaded)
+						{
+							//Extract the image
+							char[] srcImg;
+							srcImg = new char[BitMapWidth*BitMapHeight*2];
+							outputImg = new char[MaxWidth*MaxHeight*2];
+							// Sprite.Create(Image(grBuffer,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",palLoader.Palettes[pal],true),new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.5f));
+							ArtLoader.ua_image_decode_rle(PageFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxPalVal);
 
 
-								//****************************
+							//*Put the sprite in the a frame of size max width & height
+							cornerY = MaxHeight-cornerY;//y is from the top left corner
+							int ColCounter = 0; int RowCounter = 0;
+							bool ImgStarted = false;
+							for (int y = 0; y < MaxHeight; y++)
+							{
+									for (int x = 0; x < MaxWidth; x++)
+									{
+											if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+											{//the pixel from the source image is here 
+													ImgStarted=true;
+													outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
+													ColCounter++;
+											}
+											else
+											{
+													outputImg[x + (y*MaxWidth)]=(char)0;//alpha
+											}
+									}
+									if (ImgStarted == true)
+									{//New Row on the src image
+											RowCounter++;
+											ColCounter=0;
+									}
+							}
+							//Set the heights for output
+							BitMapWidth = MaxWidth;
+							BitMapHeight = MaxHeight;
 
+							//****************************
 
+							Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
+							AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.0f));
+							AnimInfo.animSprites[spriteIndex+ i].texture.filterMode=FilterMode.Point;
+							spriteCounter++;	
+						}
 
-						Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
-						AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.0f));
-						//AnimInfo.animSprites[spriteIndex+ i].pixelsPerUnit=50;
-						AnimInfo.animSprites[spriteIndex+ i].texture.filterMode=FilterMode.Point;
-						spriteCounter++;
 					}
 
 				}//endextract

@@ -7,6 +7,11 @@ using System.Collections;
 /// </summary>
 public class ArtLoader : Loader {
 
+	/// <summary>
+	/// If modded data is detected try and load that first.
+	/// </summary>
+	protected bool LoadMod; 
+
 	public	const int BitMapHeaderSize=28;
 
 	/// <summary>
@@ -24,7 +29,7 @@ public class ArtLoader : Loader {
 	/// </summary>
 	/// <returns><c>true</c>, if image file was loaded, <c>false</c> otherwise.</returns>
 	public virtual bool LoadImageFile()
-	{
+	{					
 		if (DataLoader.ReadStreamFile(BasePath + Path, out ImageFileData))
 		{//data read
 			DataLoaded=true;

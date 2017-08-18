@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 
 /// <summary>
 /// Loads data from various GR Files.
@@ -74,8 +74,7 @@ public class GRLoader : ArtLoader {
 				"Data\\QUEST.GR",
 				"Data\\SCRLEDGE.GR",
 				"Data\\SPELLS.GR",
-				"Data\\TMFLAT.GR",
-				"Data\\TMOBJ.GR",
+				"Data\\TMFLAT.GR",				"Data\\TMOBJ.GR",
 				"Data\\WEAPONS.GR",
 		};
 
@@ -177,6 +176,11 @@ public class GRLoader : ArtLoader {
 
 	public override bool LoadImageFile ()
 	{
+		string ModPath= BasePath+pathGR[FileToLoad].Replace(".","_");	
+		if (Directory.Exists(ModPath))
+		{
+			LoadMod=true;
+		}
 		if (!DataLoader.ReadStreamFile(BasePath+pathGR[FileToLoad], out ImageFileData))
 		{
 			Debug.Log("Unable to load " + BasePath+pathGR[FileToLoad]);
@@ -186,6 +190,16 @@ public class GRLoader : ArtLoader {
 		{
 			NoOfImages=(int)DataLoader.getValAtAddress(ImageFileData,1,16);
 			ImageCache=new  Texture2D[NoOfImages];
+			if (LoadMod)
+				{//Load up modded image data at the path
+					for (int i=0; i<=ImageCache.GetUpperBound(0);i++)	
+					{
+						if (File.Exists(ModPath + "\\" + i.ToString("d3") + ".tga") )
+						{
+							ImageCache[i]=TGALoader.LoadTGA(ModPath + "\\" + i.ToString("d3") + ".tga");
+						}		
+					}
+				}
 			ImageFileDataLoaded=true;
 			return true;
 		}

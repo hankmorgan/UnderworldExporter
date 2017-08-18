@@ -1,32 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.IO;
+using System.Text;
 
 public class GameSelect : GuiBase {
 
 	public string RES;
+	public bool Game_Found;
+		public Text PathStatus;
+
+	public override void Start ()
+	{
+		base.Start ();
+		CheckPath();
+	}
+
+	void CheckPath()
+	{
+		string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
+		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+		string Path= fileReader.ReadLine().TrimEnd();
+		Game_Found=(Directory.Exists(Path)) ;
+		if (Game_Found)
+		{
+			PathStatus.text=RES + " found at " + Path; 
+		}
+		else
+		{
+			PathStatus.text=RES + " not found at " + Path; 	
+		}
+	}
 
 	public void OnClick()
 	{
-				switch (RES)
+		if (!Game_Found){return;}
+		switch (RES)
+		{
+		case GAME_SHOCK:
+			GameObject selectObj = GameObject.Find("SSLevelSelect");
+			if (selectObj!=null)
+			{
+				Dropdown selLevel = selectObj.GetComponent<Dropdown>();
+				if (selLevel!=null)
 				{
-				case GAME_SHOCK:
-					GameObject selectObj = GameObject.Find("SSLevelSelect");
-					if (selectObj!=null)
-					{
-						Dropdown selLevel = selectObj.GetComponent<Dropdown>();
-						if (selLevel!=null)
-						{
-							GameWorldController.instance.startLevel=(short)selLevel.value;
-						}
-					}
-					break;
+					GameWorldController.instance.startLevel=(short)selLevel.value;
 				}
+			}
+			break;
+		}
 		GameWorldController.instance.Begin(RES);
 	}
 
 	public void onHoverEnter()
 	{
+		if (!Game_Found){return;}
 		RawImage img = this.GetComponent<RawImage>();
 		if	(img!=null)
 		{
@@ -36,6 +64,7 @@ public class GameSelect : GuiBase {
 
 	public void onHoverExit()
 	{
+		if (!Game_Found){return;}				
 		RawImage img = this.GetComponent<RawImage>();
 		if	(img!=null)
 		{

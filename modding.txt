@@ -1,0 +1,25 @@
+UW Exporter now supports loading of TGA files in place of sprites loaded by .gr files, textures in .tr files, bitmaps in .byt maps and critter animations in page files
+
+Instructions
+
+In the game data folder (eg c:\uw1\data ) create a new folder and name it the same as the data file you want to override and replace the dot with and underscore
+EG to replace object sprite art create a folder called objects_gr.
+Within the folder you can place your replacement art. The files should be named 001.tga, 002.tga etc.  
+Note the TGALoader currently requires 24 or 32 bit depth.
+
+For .byt files just name the file 001.tga in the folder
+
+For textures note that in UW1 floor and wall textures are split across two files but in Exporter the textures are loaded into a single data structure.
+Create seperate folders for each file as described but in the folder for floor textures offset the texture index by plus 210.
+Animated textures use a palette shifted shader to animate so the game will expect a greyscale file to be loaded to appear properly.
+
+For critter animation frames you will have to do the following to support the different auxilary palettes the game has for critters.
+In the CRIT folder create a new folder as above (eg cr14page_n00 for file cr14page.n00). 
+Within this folder create another folder for the palette index. This will be either 0, 1 or 2.
+Then within that folder create the tga file as above.
+
+See the attached uw1_object_settings.txt files and uw1_retro_config.txt files to get a listing of what some of the files contain. 
+
+
+The original TGALoader code was sourced from 
+http://forum.unity3d.com/threads/tga-loader-for-unity3d.172291/

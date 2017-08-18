@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO;
 
 /// <summary>
 /// Loads textures.
@@ -22,8 +22,49 @@ public class TextureLoader : ArtLoader {
 	public bool texturesFLoaded;
 	private int TextureSplit=210;//at what point does a texture index refer to the floor instead of a wall in uw1/demo
 	private int FloorDim=32;
+	private string ModPathW;
+	private string ModPathF;
 
-	
+		public TextureLoader()
+		{
+			switch (_RES)
+			{
+			case GAME_SHOCK:
+				break;
+			case GAME_UW2:
+				ModPathW= BasePath+ pathTex_UW2.Replace(".","_");	
+				if (Directory.Exists(ModPathW))
+				{
+					LoadMod=true;
+				}
+				break;				
+			case GAME_UWDEMO:
+				ModPathW= BasePath+ pathTexW_UW0.Replace(".","_");	
+				if (Directory.Exists(ModPathW))
+				{
+					LoadMod=true;
+				}	
+				ModPathF= BasePath+ pathTexF_UW0.Replace(".","_");	
+				if (Directory.Exists(ModPathF))
+				{
+					LoadMod=true;
+				}	
+				break;
+			case GAME_UW1:
+				ModPathW= BasePath+ pathTexW_UW1.Replace(".","_");	
+				if (Directory.Exists(ModPathW))
+				{
+					LoadMod=true;
+				}	
+				ModPathF= BasePath+ pathTexF_UW1.Replace(".","_");	
+				if (Directory.Exists(ModPathF))
+				{
+					LoadMod=true;
+				}	
+				break;
+			}	
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TextureLoader"/> class.
 		/// </summary>
@@ -125,7 +166,7 @@ public class TextureLoader : ArtLoader {
 		case GAME_UW2:
 			{
 				if (texturesFLoaded==false)
-				{
+				{										
 						if (!DataLoader.ReadStreamFile(BasePath+ pathTex_UW2, out texturebufferT))
 						{
 								return base.LoadImageAt(index);
@@ -143,39 +184,54 @@ public class TextureLoader : ArtLoader {
 		case GAME_UWDEMO:				
 		case GAME_UW1:
 		default:
-			if (index<TextureSplit)
-			{//Wall textures
-				if (texturesWLoaded==false)
-				{
-					if (!DataLoader.ReadStreamFile(BasePath+ pathTexW_UW1, out texturebufferW))
+			{				
+				if (index<TextureSplit)
+				{//Wall textures
+					if (texturesWLoaded==false)
 					{
-							return base.LoadImageAt(index);
+						if (!DataLoader.ReadStreamFile(BasePath+ pathTexW_UW1, out texturebufferW))
+						{
+								return base.LoadImageAt(index);
+						}
+						else
+						{
+								texturesWLoaded=true;
+						}
 					}
-					else
+					if(LoadMod)
 					{
-							texturesWLoaded=true;
-					}
-				}	
-				long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
-				return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",palToUse,false);
-			}
-			else
-			{//Floor textures (to match my list of textures)
-				if (texturesFLoaded==false)
-				{
-					if (!DataLoader.ReadStreamFile(BasePath+ pathTexF_UW1, out texturebufferF))
-					{
-							return base.LoadImageAt(index);
-					}
-					else
-					{
-							texturesFLoaded=true;
-					}
+						if (File.Exists(ModPathW + "\\" + index.ToString("d3") + ".tga") )	
+							{
+								return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + ".tga");								
+							}
+					}						
+					long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
+					return Image(texturebufferW,textureOffset, 64, 64,"name_goes_here",palToUse,false);
 				}
-				long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-TextureSplit) * 4) + 4, 32);
-				return Image(texturebufferF,textureOffset, FloorDim, FloorDim,"name_goes_here",palToUse,false);
-			}
-			//break;							
-		}	
+				else
+				{//Floor textures (to match my list of textures)
+					if (texturesFLoaded==false)
+					{
+						if (!DataLoader.ReadStreamFile(BasePath+ pathTexF_UW1, out texturebufferF))
+						{
+								return base.LoadImageAt(index);
+						}
+						else
+						{
+								texturesFLoaded=true;
+						}
+					}
+					if(LoadMod)
+						{
+							if (File.Exists(ModPathF + "\\" + index.ToString("d3") + ".tga") )	
+							{
+								return TGALoader.LoadTGA(ModPathF + "\\" + index.ToString("d3") + ".tga");								
+							}
+						}	
+					long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-TextureSplit) * 4) + 4, 32);
+					return Image(texturebufferF,textureOffset, FloorDim, FloorDim,"name_goes_here",palToUse,false);
+				}
+			}//end switch	
+		}
 	}
 }
