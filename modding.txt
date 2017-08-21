@@ -2,7 +2,7 @@ UW Exporter now supports loading of TGA files in place of sprites loaded by .gr 
 
 Instructions
 
-In the game data folder (eg c:\uw1\data ) create a new folder and name it the same as the data file you want to override and replace the dot with and underscore
+In the game data folder (eg c:\uw1\data ) create a new folder and name it the same as the data file you want to override and replace the dot with an underscore
 EG to replace object sprite art create a folder called objects_gr.
 Within the folder you can place your replacement art. The files should be named 001.tga, 002.tga etc.  
 Note the TGALoader currently requires 24 or 32 bit depth.

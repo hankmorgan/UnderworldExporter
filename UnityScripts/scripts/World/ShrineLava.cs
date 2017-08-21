@@ -41,14 +41,6 @@ public class ShrineLava : UWEBase {
 
 				objInt.consumeObject();
 
-				//for (int i=0;i<7;i++)
-				//{
-				//		if (GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[i]==false)
-				//		{
-				//				return;
-				//		}
-				//}
-
 				//Suck the avatar into the ethereal void.
 				if (GameWorldController.instance.playerUW.quest().TalismansRemaining<=0)
 				{

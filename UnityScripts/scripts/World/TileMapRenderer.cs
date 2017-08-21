@@ -4214,6 +4214,7 @@ public class TileMapRenderer : Loader{
 		if (t.isWater == false) {
 			if (t.isLava) {
 				Tile.layer = LayerMask.NameToLayer ("Lava");
+				AddLavaContact(Tile);
 			}
 			else {
 				if (t.isNothing) {
@@ -4226,6 +4227,7 @@ public class TileMapRenderer : Loader{
 		}
 		else {
 			Tile.layer = LayerMask.NameToLayer ("Water");
+			AddWaterContact(Tile);
 		}
 	}
 
@@ -4452,4 +4454,14 @@ public class TileMapRenderer : Loader{
 		}
 
 
+
+	static void AddWaterContact(GameObject tile)
+	{
+		tile.AddComponent<TileContactWater>();
+	}
+
+	static void AddLavaContact(GameObject tile)
+	{
+		tile.AddComponent<TileContactLava>();
+	}
 }

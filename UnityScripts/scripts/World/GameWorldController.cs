@@ -832,16 +832,15 @@ public class GameWorldController : UWEBase {
 		/// <param name="myObj">My object.</param>
 		public static void UnFreezeMovement(GameObject myObj)
 		{//Allow objects which can move in the 3d world to moving when they are released.
-				Rigidbody rg = myObj.GetComponent<Rigidbody>();
-				if (rg!=null)
-				{
-						rg.useGravity=true;
-						rg.constraints = 
-								RigidbodyConstraints.FreezeRotationX 
-								| RigidbodyConstraints.FreezeRotationY 
-								| RigidbodyConstraints.FreezeRotationZ;
-
-				}
+			Rigidbody rg = myObj.GetComponent<Rigidbody>();
+			if (rg!=null)
+			{
+				rg.useGravity=true;
+				rg.constraints = 
+						RigidbodyConstraints.FreezeRotationX 
+						| RigidbodyConstraints.FreezeRotationY 
+						| RigidbodyConstraints.FreezeRotationZ;
+			}
 		}
 
 		public MusicController getMus()
