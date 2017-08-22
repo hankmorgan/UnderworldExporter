@@ -1783,7 +1783,20 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<Shield>();
 						break;
 				case WEAPON:
-						myObj.AddComponent<WeaponMelee>();
+						{
+							switch(objInt.item_id)
+							{
+							case 24://sling
+							case 25://bow
+							case 26://crossbow
+							case 31://jewelled bow.
+								myObj.AddComponent<WeaponRanged>();
+								break;
+							default:
+								myObj.AddComponent<WeaponMelee>();		
+								break;
+							}
+						}
 						break;
 				case TORCH:
 						myObj.AddComponent<LightSource>();

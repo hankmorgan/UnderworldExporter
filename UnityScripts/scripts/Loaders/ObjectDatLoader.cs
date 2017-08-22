@@ -19,13 +19,9 @@ public class ObjectDatLoader : Loader {
 		};
 
 		public struct RangedData
-		{
-
-				//0000   Int16  unknown
-				//bits 9-15: ammunition needed (+0x10)
-				//0002   Int8   durability	
+		{			
 			public int ammo;
-			public int durability;
+			public int damage;
 		}
 
 		public struct ArmourData
@@ -111,18 +107,14 @@ public class ObjectDatLoader : Loader {
 				public int[] AttackDamage; //the damage of the choose attack.
 				public int[] AttackProbability; //Probability of which attack/animation to execute
 
+				public int[] Loot;  //A list of item ids that the Npc drops on death or uses in bartering
 
-				//public int ProbPercent1;
-				//public int ProbValue2;
-				//public int ProbPercent2;
-				//public int ProbValue3;
-				//public int ProbPercent3;
 				public int Exp;
 		};
 
 
 		public MeleeData[] weaponStats=new MeleeData[16];
-		public RangedData[] rangedStats=new RangedData[16];
+		public RangedData[] rangedStats=new RangedData[8];
 		public ArmourData[] armourStats=new ArmourData[32];
 		public ContainerData[] containerStats=new ContainerData[16];
 		public LightSourceData[] lightSourceStats=new LightSourceData[8];
@@ -150,11 +142,20 @@ public class ObjectDatLoader : Loader {
 
 				add_ptr=0x82;
 				j=0;
-				for (int i = 0; i < 16; i++)
+					for (int i=0; i<8; i++)
+					{//ranged weapon damage stats.
+						rangedStats[j].damage= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8) ;
+						add_ptr = add_ptr + 3;
+						j++;	
+					}
+				j=0;
+				for (int i = 0; i < 8; i++)
 				{//Ranged weapons
 				//This is probably wrong!!
-					rangedStats[j].ammo=0x10 + ((((int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) >> 9) & 0x7F));
-					rangedStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8);
+					//rangedStats[j].ammo=0x10 + ((((int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) >> 9) & 0x7F));
+					//rangedStats[j].ammo= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) ;
+					//rangedStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8);
+					rangedStats[j].ammo= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8)  + 16 ;//an index into the ranged table+16;
 					add_ptr = add_ptr + 3;
 					j++;
 				}
@@ -226,14 +227,35 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].AttackDamage[2] = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1A, 8);
 					critterStats[j].AttackProbability[2]=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);
 
-
-					//critterStats[j].ProbValue1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x13, 16);//Probability1
-					//critterStats[j].ProbPercent1=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x15, 8);//Probab1
-					//critterStats[j].ProbValue2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x16, 16);//Probability2
-					//critterStats[j].ProbPercent2= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x18, 8);//Probab2
-					//critterStats[j].ProbValue3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x19, 16);//Probability3
-					//critterStats[j].ProbPercent3= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x1B, 8);//Probab3
 					critterStats[j].Exp= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x28, 16);//Exp
+
+					critterStats[j].Loot=new int[4];
+					critterStats[j].Loot[0]=-1;critterStats[j].Loot[1]=-1;critterStats[j].Loot[2]=-1;critterStats[j].Loot[3]=-1;
+
+					int byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 , 8);
+					if ((byte1 & 0x1) == 1)
+					{
+						critterStats[j].Loot[0]= byte1 >> 1;
+					}
+
+					byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20+1 , 8);
+					if ((byte1 & 0x1) == 1)
+					{
+						critterStats[j].Loot[1]= byte1 >> 1;
+					}
+
+					byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 + 2, 16);
+					if (byte1!=0)
+					{
+						critterStats[j].Loot[2]= (byte1 >> 4); 
+					}
+
+					byte1 = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x20 + 4, 16);
+					if (byte1!=0)
+					{
+						critterStats[j].Loot[3]= (byte1 >> 4); 
+					}
+
 					add_ptr = add_ptr + 48;
 				j++;
 				}

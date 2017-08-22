@@ -2346,7 +2346,7 @@ void UWCommonObj(int game)
 //			0006   Int8   skill type(3: sword, 4 : axe, 5 : mace, 6 : unarmed)
 //			0007   Int8   durability
 		}
-j=24;
+j=16;
 fprintf(LOGFILE, "\nAddress is %d\nRanged\n", addressPtr);
 fprintf(LOGFILE, "\n\tName\tAmmo\tDurability");
 	for (int i = 0; i < 16; i++)
@@ -2457,6 +2457,68 @@ j=64;
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x1B, 8));//Probab3
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x28, 16));//Exp
 		fprintf(LOGFILE, " %d\t", getValAtAddress(obj_dat, addressPtr + 0x2F, 8));//Always 73
+
+		int byte1 = getValAtAddress(obj_dat, addressPtr + 0x20 , 8);
+		if ((byte1 & 0x1) == 1)
+			{
+			byte1 = byte1 >> 1;
+			fprintf(LOGFILE, " %s\t", objectMasters[byte1].desc);
+			}
+		else
+			{
+			fprintf(LOGFILE, " %d\t", 0);
+			}
+		
+		byte1 = getValAtAddress(obj_dat, addressPtr + 0x20+1, 8);
+		if ((byte1 & 0x1) == 1)
+			{
+			byte1 = byte1 >> 1;
+			fprintf(LOGFILE, " %s\t", objectMasters[byte1].desc);
+			}
+		else
+			{
+			fprintf(LOGFILE, " %d\t", byte1);
+			}
+	
+		byte1 = getValAtAddress(obj_dat, addressPtr + 0x20 + 2, 16);
+		if (byte1!=0)
+			{
+			byte1 = (byte1 >> 4); //| (( byte1 & 0xf0) <<4);
+			fprintf(LOGFILE, " %s\t", objectMasters[byte1].desc);
+			}
+		else
+			{
+			fprintf(LOGFILE, " %d\t", byte1);
+			}
+
+		byte1 = getValAtAddress(obj_dat, addressPtr + 0x20 + 4, 16);
+		if (byte1 != 0)
+			{
+			byte1 = (byte1 >> 4); //| (( byte1 & 0xf0) <<4);
+			fprintf(LOGFILE, " %s\t", objectMasters[byte1].desc);
+			}
+		else
+			{
+			fprintf(LOGFILE, " %d\t", byte1);
+			}
+
+//at plus 2 5f (dragonskin) creates a longsword
+//at plus 4 5f (dragonskin) creates a longsword
+
+	/*	for (int o = 0; o <= 4; o++)
+			{
+			int byte1 = getValAtAddress(obj_dat, addressPtr + 0x20 + o, 8);
+			if ((byte1 & 0x1) == 1)
+				{
+				byte1 = byte1 >> 1;
+				fprintf(LOGFILE, " %s\t", objectMasters[byte1].desc);
+				}
+			else
+				{
+				fprintf(LOGFILE, " %d\t", 0);
+				}
+			}	*/
+
 		addressPtr = addressPtr + 48;
 		j++;
 		}

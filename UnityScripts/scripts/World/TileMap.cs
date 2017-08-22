@@ -2070,55 +2070,56 @@ public class TileMap : Loader {
 		{
 			short RegionNo=1;
 				//Reset room settings
-			for (int x=0; x<=TileMapSizeX;x++)
+			for (int y=TileMapSizeY; y>=0;y--)
 			{
-				for (int y=0; y<=TileMapSizeY;y++)
+				for (int x=0; x<=TileMapSizeX;x++)
 				{
 					Tiles[x,y].roomRegion=0;
 				}		
 			}
 
-			for (int x=0; x<=TileMapSizeX;x++)
+			for (int y=TileMapSizeY; y>=0;y--)
 			{
-				for (int y=0; y<=TileMapSizeY;y++)
-				{
-					if (
-						(Tiles[x,y].tileType!=TILE_SOLID)
-					&& 
-							(Tiles[x,y].roomRegion==0)
-					)
-					{//Tiles is open and room region is not set
-						Tiles[x,y].roomRegion=RegionNo;
-						fillRoomRegion(x,y, TileTerrainType(x,y) ,RegionNo)	;
-						RegionNo++;
-					}
-				}
-			}
-		
-				if (false)
-				{
-						
-				
-				string output="";
-
-				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_output.txt", true);
 				for (int x=0; x<=TileMapSizeX;x++)
 				{
-						output +="\n";
-						for (int y=0; y<=TileMapSizeY;y++)
-						{
-								output += Tiles[x,y].roomRegion.ToString("d3") + ",";
-						}
+				if (
+					(Tiles[x,y].tileType!=TILE_SOLID)
+				&& 
+						(Tiles[x,y].roomRegion==0)
+				)
+				{//Tiles is open and room region is not set
+					Tiles[x,y].roomRegion=RegionNo;
+					fillRoomRegion(x,y, TileTerrainType(x,y) ,RegionNo)	;
+					RegionNo++;
 				}
-				writer.WriteLine(output);
-				writer.Close();
-				}
+			}
+		}
+		
+			if (false)
+			{
+					
+			
+			string output="";
+
+			StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_output.txt", true);
+				for (int y=TileMapSizeY; y>=0;y--)
+				{
+					output +="\n";
+					for (int x=0; x<=TileMapSizeX;x++)
+					{
+							output += Tiles[x,y].roomRegion.ToString("d3") + ",";
+					}
+			}
+			writer.WriteLine(output);
+			writer.Close();
+			}
 
 		}
 
 
 		void fillRoomRegion(int startX, int startY, int terrainType,short RegionNo)
 		{
+			short thisTileHeight = Tiles[startX,startY].floorHeight;
 			//Check in each direction
 			for (int x=-1; x<=1; x++)
 			{
@@ -2137,15 +2138,30 @@ public class TileMap : Loader {
 						if (TileMap.ValidTile(startX+x,startY+y))	
 						{
 							if (
-									(Tiles[startX+x,startY+y].tileType !=TILE_SOLID)
+								(Tiles[startX+x,startY+y].tileType !=TILE_SOLID)
+								&& 
+								(Tiles[startX+x,startY+y].roomRegion==0)
+								&& 
+								(terrainType == TileTerrainType(startX+x,startY+y))
+								&&
+								(isTileOpenFromDirection(startX+x,startY+y, x, y))
+								&&
+								(
+									( 
+									(thisTileHeight >= Tiles[startX+x,startY+y].floorHeight-2 ) 
 									&& 
-									(Tiles[startX+x,startY+y].roomRegion==0)
-									&& 
-									(terrainType == TileTerrainType(startX+x,startY+y))
-									&&
-									(isTileOpenFromDirection(startX+x,startY+y, x, y))
+									(thisTileHeight <= Tiles[startX+x,startY+y].floorHeight+2 )
+									)
+									||
+									(
+										(
+										(Tiles[startX+x,startY+y].hasBridge) || (Tiles[startX,startY].hasBridge) 
+										) 
+										&& (terrainType==0)
+									)
+								)
 							)
-							{//Tiles is open and room region is not set and is a matching terrain type.
+							{//Tiles is open and room region is not set and is a matching terrain type and does not drop down too far (unless it has a bridge and I'm testing for land)
 								Tiles[startX+x,startY+y].roomRegion=RegionNo;	
 								fillRoomRegion(startX+x,startY+y, terrainType ,RegionNo)	;
 							}

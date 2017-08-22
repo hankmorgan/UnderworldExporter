@@ -24,7 +24,10 @@ public class UWCombat : Combat {
 			if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack))
 			{///Sets the weapon, race and handedness of the weapon animation.
 				//UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
-				UWHUD.instance.wpa.SetAnimation=GetWeaponOffset()+GetHandOffset()+6;//For ready
+				if(IsMelee())
+				{
+					UWHUD.instance.wpa.SetAnimation=GetWeaponOffset()+GetHandOffset()+6;//For ready						
+				}				
 			}
 			else
 			{///Or Hides the weapon by animating the player putting it away.
@@ -52,14 +55,14 @@ public class UWCombat : Combat {
 		{
 			///If ranged check for ammo as defined by the Weapon
 			/// If ammo if found give the player a targeting crosshair
-			currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType);
-			if ((currentAmmo == null) && (ObjectInteraction.Alias(currWeaponRanged.AmmoType)!=currWeaponRanged.AmmoType))
+			currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType());
+			if ((currentAmmo == null) && (ObjectInteraction.Alias(currWeaponRanged.AmmoType())!=currWeaponRanged.AmmoType()))
 			{//Ammo type has an alias. try and find that instead.
-				currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(ObjectInteraction.Alias(currWeaponRanged.AmmoType));
+				currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(ObjectInteraction.Alias(currWeaponRanged.AmmoType()));
 			}
 			if (currentAmmo==null)
 			{//No ammo.
-				UWHUD.instance.MessageScroll.Add ("Sorry, you have no " + StringController.instance.GetObjectNounUW(currWeaponRanged.AmmoType));
+				UWHUD.instance.MessageScroll.Add ("Sorry, you have no " + StringController.instance.GetObjectNounUW(currWeaponRanged.AmmoType()));
 				return;
 			}
 			else
@@ -429,27 +432,24 @@ public class UWCombat : Combat {
 			{///Checks No object interferes with the launch
 				float force = 1000.0f*(charge/100.0f);
 				GameObject launchedItem ;
-
-				if (currentAmmo.GetQty()==1)
-				{///Removes the instance of the object 
+				if(currentAmmo.GetQty()==1)
+				{
 					launchedItem = currentAmmo.gameObject;
-					GameWorldController.instance.playerUW.playerInventory.RemoveItem(currentAmmo.name);
+					GameWorldController.instance.playerUW.playerInventory.RemoveItem(currentAmmo.name);	
+					launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+					GameWorldController.MoveToWorld(launchedItem);
+					launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);
+					launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world	
 				}
 				else
-				{//If in a stack instantiate a single copy and update the stack as needed.
-					launchedItem = Instantiate(currentAmmo.gameObject);
-					launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-					launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
-					ObjectInteraction.Split(launchedItem.GetComponent<ObjectInteraction>());
-					currentAmmo.consumeObject();//Reduce by one.
+				{//reduce this quantity by one and create a copy in the world
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject( currWeaponRanged.AmmoType(),40,0,1,256);
+					launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange-0.1f)).gameObject;
+					currentAmmo.consumeObject();
 				}
-				launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
-				GameWorldController.MoveToWorld(launchedItem);
-				launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
-
-				launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
-				GameWorldController.UnFreezeMovement(launchedItem);
+				GameWorldController.UnFreezeMovement(launchedItem);				
 				Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
+
 				///Apply the force along the direction of the ray that the player has targetted along.
 				launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 				GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
@@ -458,7 +458,7 @@ public class UWCombat : Combat {
 				///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 				pd.Source=GameWorldController.instance.playerUW.gameObject;
-				pd.Damage=(short)(10.0f*(Charge/100.0f));
+				pd.Damage= (short)currWeaponRanged.Damage(); //   (short)(10.0f*(Charge/100.0f));
 				return true;
 			}
 			else
@@ -499,7 +499,8 @@ public class UWCombat : Combat {
 
 
 			int toHit = Mathf.Max(npc.GetDefence() - attackScore,0);
-			int roll = Random.Range(-1,31);//-1 is critical miss. 30 is always hit
+			//Difficulty is either 1 for standard or 0 for easy.
+			int roll = Mathf.Max(30,Random.Range(-1,31) + ( 5 * (1- GameWorldController.instance.difficulty) )  );//-1 is critical miss. 30 is always hit
 			int HitRollResult=0;
 			if (((roll >= toHit) || (roll>=30)) && (roll>-1))
 			{
@@ -510,6 +511,10 @@ public class UWCombat : Combat {
 				{
 					HitRollResult=2;//crit. apply double damage
 					npc.ApplyAttack(Damage,playerUW.gameObject);
+				}
+				if (roll >=27)
+				{
+					HitRollResult=2;//critical
 				}
 			}
 			else

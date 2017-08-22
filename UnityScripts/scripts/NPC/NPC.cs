@@ -370,8 +370,14 @@ public class NPC : MobileObject {
 			case 76:
 			case 77:
 			case 78:
-				if ((Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) && (Ammo>0))
-				{//Ranged attack if far away
+				if (
+					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+					&&
+					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+					&&
+					(Ammo>0)
+						)
+					{//Ranged attack if far away( but not too far away)
 					ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
 				}
 				else
@@ -390,8 +396,12 @@ public class NPC : MobileObject {
 			case 120:
 			case 122:
 			case 123:						
-				if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2)
-				{//Ranged attack if far away
+				if (
+					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+					&&
+					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+					)
+				{//Ranged attack if far away (but not too far)
 					ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
 					SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
 				}
@@ -1136,7 +1146,7 @@ public class NPC : MobileObject {
 		}
 		else
 		{//Trying to hit an object						
-				TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
+			TargetingPoint=gtarg.GetComponent<ObjectInteraction>().GetImpactPoint();//Aims for the objects impact point	
 		}
 		Vector3 TargetingVector = (TargetingPoint-NPC_Launcher.transform.position).normalized;
 		TargetingVector=TargetingVector + new Vector3(0.0f,0.3f,0.0f);//Try and give the vector an arc
@@ -1146,21 +1156,10 @@ public class NPC : MobileObject {
 		if (!Physics.Raycast(ray,out hit,dropRange))
 		{///Checks No object interferes with the launch
 			float force =100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
-			//launchedItem= ObjectInteraction.CreateNewObject(16).gameObject;
 
-			ObjectLoaderInfo newobjt= ObjectLoader.newObject(16,0,0,1,256);
-			GameObject launchedItem=	ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
+			ObjectLoaderInfo newobjt = ObjectLoader.newObject(16,0,0,1,256);
+			GameObject launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
 
-
-			//launchedItem = Instantiate(currentAmmo.gameObject);
-		//	launchedItem.name="launched_missile_" +GameWorldController.instance.playerUW.PlayerMagic.SummonCount++;
-		//	launchedItem.GetComponent<ObjectInteraction>().link=1;//Only 1
-
-		//	launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
-		//	GameWorldController.MoveToWorld(launchedItem);
-		//	launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
-
-		//	launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
 			GameWorldController.UnFreezeMovement(launchedItem);
 			Vector3 ThrowDir = TargetingVector;
 			///Apply the force along the direction of the ray that the player has targetted along.
@@ -1171,7 +1170,7 @@ public class NPC : MobileObject {
 			///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 			ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 			pd.Source=this.gameObject;
-			pd.Damage=10;
+			pd.Damage=(short)GameWorldController.instance.objDat.rangedStats[0].damage;//sling damage.
 			Ammo--;
 		}
 	}

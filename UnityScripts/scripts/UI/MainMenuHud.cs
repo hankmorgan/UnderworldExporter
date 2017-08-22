@@ -457,6 +457,7 @@ public class MainMenuHud : GuiBase {
 						{
 							//Start a new game
 								GameWorldController.instance.playerUW.EXP=50;
+								GameWorldController.instance.playerUW.TrainingPoints=1;
 								GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
 								GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 								GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;

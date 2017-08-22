@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Weapon : Equipment {
 
-	public int AccuracyBonus;
-	public int DamageBonus;
+	//public int AccuracyBonus;
+	//public int DamageBonus;
 
 	public override bool use ()
 	{
@@ -50,7 +50,7 @@ public class Weapon : Equipment {
 				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
 			}
 
-			if (objInt().isEnchanted()==true)
+			/*if (objInt().isEnchanted()==true)
 			{
 				int EffectId = GetActualSpellIndex ();
 				switch (EffectId )
@@ -76,7 +76,7 @@ public class Weapon : Equipment {
 					this.DamageBonus = EffectId-455;
 					break;
 				}
-			}
+			}*/
 		}
 		return true;
 	}

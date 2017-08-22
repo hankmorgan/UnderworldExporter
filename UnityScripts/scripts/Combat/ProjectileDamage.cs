@@ -4,7 +4,7 @@ using System.Collections;
 /// Projectile damage.
 /// Applies damage to the object that the ranged projectile has hit.
 /// </summary>
-public class ProjectileDamage : MonoBehaviour {
+public class ProjectileDamage : UWEBase {
 
 	/// Prevents ths projecile from hitting multiple targets before it destoys itself
 	private bool hasHit;
