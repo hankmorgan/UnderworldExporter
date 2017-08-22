@@ -518,8 +518,8 @@ public class MainMenuHud : GuiBase {
 		{
 				int actualSkillNo = Chargen.GetChoices(Stage,CharClassAns)[option]-30; //was -31
 				//actualSkillNo++;
-				//Debug.Log("advancing " + (actualSkillNo) + " by " + SkillSeed);
-				int SkillScore=Random.Range(1,SkillSeed);
+				//Increase the skill by up to (no more than the skill seed) Apply the attibute bonus if needed.
+				int SkillScore=Mathf.Min( Random.Range(1,SkillSeed) + Skills.getSkillAttributeBonus(actualSkillNo) , SkillSeed);
 				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(actualSkillNo ,SkillScore);
 				string skillname= StringController.instance.GetString(2,Chargen.GetChoices(Stage,CharClassAns)[option]);
 				for(int i=0;i<5;i++)//Update the display
