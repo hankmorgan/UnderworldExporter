@@ -29,6 +29,20 @@ using System.Collections;
 /// 
 public class enchantment_base : object_base {
 
+	public override bool use ()
+	{
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		{
+			GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
+			return true;
+		}
+		else
+		{
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+		}	
+	}
+
+
 	/// <summary>
 	/// Gets the actual spell index of the spell.
 	/// </summary>

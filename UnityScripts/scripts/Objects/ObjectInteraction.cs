@@ -1697,7 +1697,14 @@ public class ObjectInteraction : UWEBase {
 						}
 						else
 						{
-							myObj.AddComponent<Readable>();	
+							if ((objInt.isEnchanted()) && (objInt.link!=0))
+								{
+									myObj.AddComponent<MagicScroll>();
+								}
+								else
+								{
+									myObj.AddComponent<Readable>();		
+								}							
 						}
 						break;
 				case SIGN:
@@ -1714,6 +1721,18 @@ public class ObjectInteraction : UWEBase {
 						{
 							myObj.AddComponent<Food>();
 							break;								
+						}
+				case CLUTTER:
+						{
+							if ((objInt.isEnchanted()) && (objInt.link!=0))
+							{
+								myObj.AddComponent<enchantment_base>();
+							}
+							else
+							{
+								myObj.AddComponent<object_base>();
+							}
+							break;
 						}
 
 				case MAP:

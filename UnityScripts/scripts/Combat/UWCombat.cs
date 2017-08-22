@@ -121,7 +121,7 @@ public class UWCombat : Combat {
 						break;
 					default:
 						Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin +  hit.point)/2f,46,50);
-						objInt.Attack((short)Random.Range(1,5),GameWorldController.instance.playerUW.gameObject);
+						objInt.Attack((short)GetPlayerBaseDamage(currWeapon,CurrentStrike),GameWorldController.instance.playerUW.gameObject);
 						break;
 					}
 				}
@@ -131,7 +131,6 @@ public class UWCombat : Combat {
 					if(currWeapon!=null)
 					{
 						short durability = currWeapon.getDurability();
-						//currWeapon.WeaponSelfDamage();	
 						currWeapon.SelfDamage((short)(Mathf.Max(0, Random.Range(1,durability+1)-durability)));
 					}
 
@@ -487,35 +486,15 @@ public class UWCombat : Combat {
 		{
 
 			int attackScore = 0;
-			int BaseDamage;
+			int BaseDamage= GetPlayerBaseDamage(currentWeapon,StrikeName);
 			if (currentWeapon!=null)
 			{
 				attackScore =playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 + playerUW.PlayerSkills.GetSkill(currentWeapon.GetSkill()+1);		
 				attackScore+=currentWeapon.AccuracyBonus();
-				switch(StrikeName)			
-				{
-					case "SLASH":
-						BaseDamage=currentWeapon.GetSlash();break;
-					case "BASH":
-						BaseDamage=currentWeapon.GetBash();break;
-					case "STAB":
-					default:	
-						BaseDamage=currentWeapon.GetStab();break;
-				}
 			}
 			else
 			{
 				attackScore =playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 + playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed);	
-				switch(StrikeName)
-					{
-					case "SLASH":
-							BaseDamage= WeaponMelee.getMeleeSlash() ;break;
-					case "BASH":
-							BaseDamage= WeaponMelee.getMeleeBash();break;
-					case "STAB":
-					default:	
-							BaseDamage= WeaponMelee.getMeleeStab() ;break;
-					}
 			}
 
 
@@ -653,5 +632,38 @@ public class UWCombat : Combat {
 					originNPC.objInt().aud.Play();
 				}
 			}						
+		}
+
+
+		public static int GetPlayerBaseDamage(WeaponMelee currentWeapon, string StrikeName)
+		{
+			int BaseDamage=1;
+			if (currentWeapon!=null)
+			{
+				switch(StrikeName)			
+				{
+				case "SLASH":
+						BaseDamage=currentWeapon.GetSlash();break;
+				case "BASH":
+						BaseDamage=currentWeapon.GetBash();break;
+				case "STAB":
+				default:	
+						BaseDamage=currentWeapon.GetStab();break;
+				}
+			}
+			else
+			{
+				switch(StrikeName)
+				{
+				case "SLASH":
+						BaseDamage= WeaponMelee.getMeleeSlash() ;break;
+				case "BASH":
+						BaseDamage= WeaponMelee.getMeleeBash();break;
+				case "STAB":
+				default:	
+						BaseDamage= WeaponMelee.getMeleeStab() ;break;
+				}
+			}
+			return BaseDamage;					
 		}
 }

@@ -2858,6 +2858,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_Light:
 				case SpellEffect.UW1_Spell_Effect_Daylight:
 				case SpellEffect.UW1_Spell_Effect_Sunlight:			
+				case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
 
 						//These need to have different values. Create a system of unique values array(?)
 						//Only the player needs light.
@@ -2870,7 +2871,6 @@ public class Magic : UWEBase {
 
 				case SpellEffect.UW1_Spell_Effect_MagicLantern:
 				case SpellEffect.UW1_Spell_Effect_Light_alt01:
-				case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
 				case SpellEffect.UW1_Spell_Effect_Light_alt02:
 				case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
 						if (PassiveArrayIndex!=-1)

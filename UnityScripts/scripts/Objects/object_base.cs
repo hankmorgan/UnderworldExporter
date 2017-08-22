@@ -82,7 +82,7 @@ public class object_base : UWEBase {
 		/// <param name="source">Source.</param>
 	public virtual bool ApplyAttack(short damage, GameObject source)
 	{
-		return false;
+		return ApplyAttack(damage);
 	}
 
 		/// <summary>

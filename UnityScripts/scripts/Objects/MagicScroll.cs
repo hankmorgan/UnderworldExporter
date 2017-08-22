@@ -17,8 +17,21 @@ public class MagicScroll : enchantment_base {
 	}
 
 
-		public override string UseVerb ()
+	public override string UseVerb ()
+	{
+		return "cast";
+	}
+
+	public override bool ApplyAttack (short damage)
+	{
+		objInt().quality-=damage;
+		if (objInt().quality<=0)
 		{
-			return "cast";
+			ChangeType(213,23);//Change to debris.
+			this.gameObject.AddComponent<enchantment_base>();//Add a generic object base for behaviour. THis is the famous magic debris
+			Destroy(this);//Remove the potion enchantment.
 		}
+		return true;
+	}
+
 }

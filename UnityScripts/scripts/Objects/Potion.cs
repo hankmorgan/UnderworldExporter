@@ -57,15 +57,15 @@ public class Potion : enchantment_base {
 
 	public override bool ApplyAttack (short damage)
 	{
-			objInt().quality-=damage;
-			if (objInt().quality<=0)
-			{
-					ChangeType(213,23);//Change to debris.
-					this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-					objInt().objectloaderinfo.InUseFlag=0;
-					Destroy(this);//Kill me now.
-			}
-			return true;
+		objInt().quality-=damage;
+		if (objInt().quality<=0)
+		{
+			ChangeType(213,23);//Change to debris.
+			this.gameObject.AddComponent<enchantment_base>();//Add a generic object base for behaviour. THis is the famous magic debris
+			//objInt().objectloaderinfo.InUseFlag=0;
+			Destroy(this);//Remove the potion enchantment.
+		}
+		return true;
 	}
 
 

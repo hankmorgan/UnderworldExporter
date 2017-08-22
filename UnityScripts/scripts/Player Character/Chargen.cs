@@ -36,15 +36,15 @@ public class Chargen : Props {
 	//String nos of char classes choice
 		private static  int[] ClassesChoice={23,24,25,26,27,28,29,30};
 
-	//Class specific base attributes numbers
+	//Class specific base attributes numbers. These are taken from skills.dat
 		private static  int[] BaseStr={20,12,14,18,18,12,16,12};
 		private static  int[] BaseDex={16,16,20,18,12,18,16,12};
 		private static  int[] BaseInt={12,20,14,12,18,18,16,12};
 
-	//Skill points random range
+	//Skill points random range These are taken from skills.dat.
 		private static  int[] SkillSeed={12,12,12,12,12,12,12,20};
 
-	//Skills specific skill choices. points to the string no.
+	//Skills specific skill choices. points to the string no. These are taken from skills.dat
 		private static  int[][] FighterSkills={  
 				new int[]{31} , 
 				new int[]{32} , 
