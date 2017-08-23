@@ -447,6 +447,7 @@ public class UWCombat : Combat {
 					launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange-0.1f)).gameObject;
 					currentAmmo.consumeObject();
 				}
+				launchedItem.GetComponent<ObjectInteraction>().isquant=1;
 				GameWorldController.UnFreezeMovement(launchedItem);				
 				Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
 
@@ -459,6 +460,8 @@ public class UWCombat : Combat {
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 				pd.Source=GameWorldController.instance.playerUW.gameObject;
 				pd.Damage= (short)currWeaponRanged.Damage(); //   (short)(10.0f*(Charge/100.0f));
+				pd.AttackCharge=charge;
+				pd.AttackScore = GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 +  GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillMissile);	
 				return true;
 			}
 			else

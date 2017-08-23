@@ -4,8 +4,15 @@ using UnityEngine.UI;
 
 public class IngameEditor : GuiBase_Draggable {
 
+		public static int TileX=0;
+		public static int TileY=0;
+
+		public ObjectLoaderInfo currObj;
+
+		private bool EditorHidden=false;
 		public Material UI_UNLIT;
 		public RawImage TileMapView;
+		public GameObject EditorBackground;
 		public InputField LevelNoToLoad;
 
 		public Dropdown TileTypeSelect;
@@ -16,22 +23,36 @@ public class IngameEditor : GuiBase_Draggable {
 		public Dropdown DoorTextureMapSelect;
 
 		public Dropdown ObjectSelect;
+		public Dropdown ObjectItemIds;
+
+		public Toggle ObjectFlagisQuant;
+		public Toggle ObjectFlaginVis;
+		public Toggle ObjectFlagDoorDir;
+		public Toggle ObjectFlagEnchant;
+		public InputField ObjectFlagValue;
+		public InputField ObjectLink;
+		public InputField ObjectOwner;
+		public InputField ObjectQuality;
+		public InputField ObjectNext;
+
+		public InputField ObjectTileX;
+		public InputField ObjectTileY;
+
+		public InputField ObjectXPos;
+		public InputField ObjectYPos;
+		public InputField ObjectZPos;
 
 		public InputField TileRangeX;
 		public InputField TileRangeY;
 
 		public Text LevelDetails;
 		public Text TileDetails;
-		public Text ObjectInfo;
 
 		public InputField TileHeightDetails;
 
 		public RectTransform TileMapDetailsPanel;
 		public RectTransform ObjectDetailsPanel;
 		public RectTransform TextureMapDetailsPanel;
-
-		public static int TileX=0;
-		public static int TileY=0;
 
 		public static IngameEditor instance;
 
@@ -53,8 +74,6 @@ public class IngameEditor : GuiBase_Draggable {
 			instance=this;
 		}
 
-
-
 		public override void Start ()
 		{
 				base.Start();	
@@ -67,6 +86,11 @@ public class IngameEditor : GuiBase_Draggable {
 						RefreshTileMap();
 						RefreshTileInfo();
 				}
+				//Initiliase Item Ids
+				for (int i=0; i<=GameWorldController.instance.objectMaster.desc.GetUpperBound(0);i++)
+				{
+					ObjectItemIds.options.Add(new Dropdown.OptionData(GameWorldController.instance.objectMaster.desc[i]));	
+				}
 		}
 
 		void UpdateObjectsDropDown()
@@ -74,7 +98,7 @@ public class IngameEditor : GuiBase_Draggable {
 				ObjectSelect.ClearOptions();
 				for (int i=0; i<=GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
 				{						
-						string itemtext= ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+						string itemtext= ObjectLoader.UniqueObjectNameEditor(GameWorldController.instance.CurrentObjectList().objInfo[i]);
 						ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
 				}
 				FloorTextureSelect.RefreshShownValue();
@@ -237,49 +261,7 @@ public class IngameEditor : GuiBase_Draggable {
 		}
 
 
-		/*
-		public void DestroyTile(int x, int y)
-		{
-				GameObject tileSelected;
-				switch (GameWorldController.instance.currentTileMap().Tiles[x,y].tileType)
-				{
-				case TileMap.TILE_SOLID:
-						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_WALL);
-						if (tileSelected!=null)
-						{
-								DestroyImmediate(tileSelected);		
-						}
-						break;
-				case TileMap.TILE_DIAG_NE:
-				case TileMap.TILE_DIAG_NW:
-				case TileMap.TILE_DIAG_SE:
-				case TileMap.TILE_DIAG_SW:
-						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_FLOOR);
-						if (tileSelected!=null)
-						{
-								DestroyImmediate(tileSelected);		
-						}
-						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_WALL);
-						if (tileSelected!=null)
-						{
-								DestroyImmediate(tileSelected);		
-						}
-						break;
-				default:
-						tileSelected= GameWorldController.FindTile(x,y,TileMap.SURFACE_FLOOR);
-						if (tileSelected!=null)
-						{
-								DestroyImmediate(tileSelected);		
-						}
-						break;
-				}
-
-
-		}
-		*/
-
-
-		public void UpdateTile()
+	public void UpdateTile()
 		{
 				int DimX=0;int DimY=0;
 				int FloorHeight=0;
@@ -726,12 +708,46 @@ public class IngameEditor : GuiBase_Draggable {
 		}
 
 
+		public void TogglePanels()
+		{
+			if (!EditorHidden)	
+			{
+				SwitchPanel(-1);
+				EditorHidden=true;
+			}
+			else
+			{
+				SwitchPanel(0);
+				EditorHidden=false;
+			}
+			EditorBackground.SetActive(!EditorHidden);
+		}
+
 		public void RefreshObjectInfo()
 		{
-			int i= ObjectSelect.value;
-			string ObjectName=ObjectLoader.UniqueObjectName(GameWorldController.instance.CurrentObjectList().objInfo[i]);
-			int item_id= GameWorldController.instance.CurrentObjectList().objInfo[i].item_id;
-			ObjectInfo.text= ObjectName + "\n" + "Item id = " + item_id;		
+			currObj=GameWorldController.instance.CurrentObjectList().objInfo[ObjectSelect.value];
+			//string ObjectName=ObjectLoader.UniqueObjectNameEditor(currObj);
+			ObjectItemIds.value = currObj.item_id; 
+			ObjectFlagDoorDir.isOn = (currObj.doordir==1);
+			ObjectFlagEnchant.isOn= (currObj.enchantment==1);
+			ObjectFlaginVis.isOn= (currObj.invis==1);
+			ObjectFlagisQuant.isOn=(currObj.is_quant==1);
+			ObjectFlagValue.text=currObj.flags.ToString();
+			ObjectOwner.text=currObj.owner.ToString();
+			ObjectLink.text=currObj.link.ToString();
+			ObjectNext.text=currObj.next.ToString();
+			ObjectQuality.text=currObj.quality.ToString();
+			if (currObj.instance!=null)
+			{
+				currObj.instance.UpdatePosition();
+			}
+			ObjectTileX.text=currObj.tileX.ToString();
+			ObjectTileY.text=currObj.tileY.ToString();
+
+			ObjectXPos.text=currObj.x.ToString();
+			ObjectYPos.text=currObj.y.ToString();
+			ObjectZPos.text=currObj.zpos.ToString();
+
 		}
 
 
@@ -776,6 +792,152 @@ public class IngameEditor : GuiBase_Draggable {
 			}
 			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].VisibleFaces[TileMap.vTOP]=1;
 			IngameEditor.instance.UpdateTile(tileX,tileY,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);
+		}
+
+
+		public void ObjectEditorApplyChanges()
+		{
+			currObj.item_id= ObjectItemIds.value;
+			if (ObjectFlagisQuant.isOn)
+			{
+				currObj.is_quant=1;
+			}
+			else
+			{
+				currObj.is_quant=0;
+			}
+
+			if (ObjectFlaginVis.isOn)
+			{
+					currObj.invis=1;
+			}
+			else
+			{
+					currObj.invis=0;
+			}
+
+			if (ObjectFlagDoorDir.isOn)
+			{
+				currObj.doordir=1;
+			}
+			else
+			{
+				currObj.doordir=0;
+			}
+
+			if (ObjectFlagEnchant.isOn)
+			{
+				currObj.enchantment=1;
+			}
+			else
+			{
+				currObj.enchantment=0;
+			}
+			int val=0;
+			if (int.TryParse(ObjectFlagValue.text, out val))
+			{
+				currObj.flags= (short)(val & 0x7);
+				ObjectFlagValue.text=currObj.flags.ToString();
+			}
+
+			if (int.TryParse(ObjectOwner.text, out val))
+			{
+				currObj.owner= (short)(val & 0x3F);
+				ObjectOwner.text=currObj.owner.ToString();
+			}
+
+			if (int.TryParse(ObjectLink.text, out val))
+			{
+				currObj.link= (short)(val & 0x3FF);
+				ObjectLink.text=currObj.link.ToString();
+			}
+
+			if (int.TryParse(ObjectQuality.text, out val))
+			{
+				currObj.quality= (short)(val & 0x3F);
+				ObjectQuality.text=currObj.quality.ToString();
+			}
+
+			switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+			{
+				case ObjectInteraction.LOCK:
+				case ObjectInteraction.A_USE_TRIGGER:
+					if (int.TryParse(ObjectNext.text, out val))
+					{
+						currObj.next= (short)(val & 0x3Ff);
+						ObjectNext.text=currObj.next.ToString();
+					}
+					break;
+				default:
+					break;//do not allow changing the next of an object. The engine normally handles this.
+			}
+
+			if (int.TryParse(ObjectTileX.text, out val))
+			{
+				if  ((val <0 ) || (val > TileMap.TileMapSizeX))
+				{
+					val=TileMap.ObjectStorageTile;
+				}
+				currObj.tileX= (short)(val);
+				ObjectTileX.text=currObj.tileX.ToString();
+			}
+
+			if (int.TryParse(ObjectTileY.text, out val))
+			{
+				if  ((val <0 ) || (val > TileMap.TileMapSizeY))
+				{
+					val=TileMap.ObjectStorageTile;
+				}
+				currObj.tileY= (short)(val);
+				ObjectTileY.text=currObj.tileY.ToString();
+			}
+
+
+			if (int.TryParse(ObjectXPos.text, out val))
+			{
+				currObj.x= (short)(val & 0x7);
+				ObjectXPos.text=currObj.x.ToString();
+			}
+			if (int.TryParse(ObjectYPos.text, out val))
+			{
+				currObj.y= (short)(val & 0x7);
+				ObjectYPos.text=currObj.y.ToString();
+			}
+			if (int.TryParse(ObjectZPos.text, out val))
+			{
+				currObj.zpos= (short)(val & 0x7F);
+				ObjectZPos.text=currObj.zpos.ToString();
+			}
+
+			if (currObj.instance!=null)
+			{
+				Destroy (currObj.instance.gameObject);
+				Vector3 pos = ObjectLoader.CalcObjectXYZ(_RES,
+						GameWorldController.instance.currentTileMap(), 
+						GameWorldController.instance.currentTileMap().Tiles, 
+						GameWorldController.instance.CurrentObjectList().objInfo, 
+						(long)currObj.index, (short)currObj.tileX, 
+						(short)currObj.tileY,0);
+				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+						currObj,GameWorldController.instance.LevelMarker().gameObject, 
+						pos );
+			}
+			else
+			{
+				if (currObj.tileX<=TileMap.TileMapSizeX)//A object is brought from off map.
+				{
+					currObj.InUseFlag=1;
+					Vector3 pos = ObjectLoader.CalcObjectXYZ(_RES,
+							GameWorldController.instance.currentTileMap(), 
+							GameWorldController.instance.currentTileMap().Tiles, 
+							GameWorldController.instance.CurrentObjectList().objInfo, 
+							(long)currObj.index, (short)currObj.tileX, 
+							(short)currObj.tileY,0);
+					ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+							currObj,GameWorldController.instance.LevelMarker().gameObject, 
+							pos );
+				}
+			}
 		}
 
 }

@@ -204,25 +204,34 @@ public class Magic : UWEBase {
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,211));
 						return false;
 				}
-				else if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
+				else //if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
 				{//Skill test. Random chance to backfire
-						if (Random.Range(1,10)<8)
-						{//TODO:decide on the chances
-								//000~001~213~Casting was not successful.
-								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,213));
+						int toCast = Mathf.Max((TestSpellLevel*3) - casterUW.PlayerSkills.GetSkill(Skills.SkillCasting) , 1);
+						int roll = Random.Range(0,31);
+						if (roll<toCast)
+						{
+							switch(roll)
+							{
+							case 0:
+							case 1:
+							case 2:
+							case 3: //backfire
+									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,214));
+									casterUW.CurVIT = casterUW.CurVIT-3;
+									break;
+							default:
+									//000~001~213~Casting was not successful.
+									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,213));
+									break;
+							}
+							return false;
 						}
-						else
-						{//000~001~214~The spell backfires.
-								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,214));
-								casterUW.CurVIT = casterUW.CurVIT-3;
-						}
-						return false;
 				}
-				else
-				{//Casting sucessful. 
-						UWHUD.instance.MessageScroll.Add ("Casting " + MagicWords);
-						return true;
-				}
+				//else//
+				//{//Casting sucessful. 
+			UWHUD.instance.MessageScroll.Add ("Casting " + MagicWords);
+			return true;
+				//}
 		}
 
 		/// <summary>

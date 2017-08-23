@@ -772,66 +772,6 @@ public class ObjectInteraction : UWEBase {
 		}
 
 		/// <summary>
-		/// Creates a new game object at run time.
-		/// </summary>
-		/// <returns>The new object.</returns>
-		/// <param name="NewItem_id">New item identifier.</param>
-		/*private static ObjectInteraction CreateNewObject (int NewItem_id)
-		{
-				//Create the new object
-				GameObject myObj = new GameObject ("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-				myObj.layer = LayerMask.NameToLayer ("UWObjects");
-				myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-				myObj.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-				//GameObject SpriteObj =
-				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
-				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.WorldIndex [NewItem_id], objM.InventoryIndex [NewItem_id], objM.InventoryIndex [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
-				//Some known examples that occur
-				switch (NewItem_id) {
-				case 10://Sword of justice
-						myObj.AddComponent<WeaponMelee>();
-						break;
-				case 47://Dragonskin boots
-						myObj.AddComponent<Boots>();
-						objInt.link=  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
-						//objInt.isEnchanted()=true;
-						objInt.enchantment=1;
-						break;
-				case 276://Exploding book
-						myObj.AddComponent<ReadableTrap>();
-						break;
-				case 299:
-						//Fishing pole
-						myObj.AddComponent<FishingPole> ();
-						break;
-				case 182://fish
-				case 183://Popcorn
-				case 217://Rotworm corpse						
-						Food fd = myObj.AddComponent<Food> ();
-						fd.Nutrition = 5;
-						break;
-				case 314://Scroll given by biden?
-						myObj.AddComponent<Readable>();//Scroll given by Biden
-						break;
-				case 339://Boulders
-				case 340:
-				case 341:
-				case 342:
-						myObj.AddComponent<Boulder>();	
-						break;
-				default:
-						myObj.AddComponent<object_base> ();
-						break;
-				}
-				//GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
-				//myObj.AddComponent<StoreInformation>();
-				//SpriteObj.AddComponent<StoreInformation>();
-				return objInt;//myObj.GetComponent<ObjectInteraction> ();
-		}*/
-
-
-		/// <summary>
 		/// What image frames does an weapon hit on this object create.
 		/// </summary>
 		/// <returns>The hit frame start.</returns>
@@ -1208,51 +1148,6 @@ public class ObjectInteraction : UWEBase {
 			splitFrom.GetComponent<object_base>().Split ();
 		}
 
-		/*
-		public ObjectInteraction CopyGameObjectInteraction(GameObject target)
-		{
-			//Copies a uw gameobject and it's properties
-			//copy this object interaction.
-			ObjectInteraction objIntNew = target.AddComponent<ObjectInteraction>();
-			objIntNew.WorldDisplayIndex=WorldDisplayIndex;
-			objIntNew.InvDisplayIndex=InvDisplayIndex;
-			objIntNew.ignoreSprite=ignoreSprite;//For button handlers that do their own sprite work.
-			objIntNew.item_id=item_id;
-			objIntNew.flags=flags;
-			objIntNew.CanBePickedUp=CanBePickedUp;
-			objIntNew.CanBeUsed=CanBeUsed;//unimplemented
-			objIntNew.PickedUp=PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
-			objIntNew.inventorySlot=inventorySlot;
-			objIntNew.Owner=Owner;	//Used for keys
-			objIntNew.link=link;	//Also quantity
-			objIntNew.quality=Quality;
-			objIntNew.isQuant()=isQuant;
-			objIntNew.isEnchanted()=isEnchanted();
-			objIntNew.sr =sr;
-			objIntNew.isAnimated=isAnimated;
-
-			if (objIntNew.CanBePickedUp==true)
-			{
-				Rigidbody rgd = target.AddComponent<Rigidbody>();
-				rgd.angularDrag=0.0f;
-				GameWorldController.FreezeMovement(target);
-			}
-
-			BoxCollider box =objIntNew.GetComponent<BoxCollider>();
-			if ((box==null) && (objIntNew.GetComponent<NPC>()==null) && (objIntNew.CanBeUsed==true))
-			{
-				//add a mesh for interaction
-				box=target.AddComponent<BoxCollider>();
-				box.size = new Vector3(0.2f,0.2f,0.2f);
-				box.center= new Vector3(0.0f,0.1f,0.0f);
-				if (objIntNew.CanBePickedUp==true)
-				{
-					box.material= Resources.Load<PhysicMaterial>("Materials/objects_bounce");
-				}
-			}
-			return objIntNew;
-		}
-*/
 		/// <summary>
 		/// Changes the type of this object
 		/// </summary>
@@ -1608,11 +1503,12 @@ public class ObjectInteraction : UWEBase {
 				heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
 
 			}
-				objectloaderinfo.heading=heading;
-				objectloaderinfo.x=x;
-				objectloaderinfo.y=y;
-				objectloaderinfo.tileX=tileX;
-				objectloaderinfo.tileY=tileY;
+			objectloaderinfo.heading=heading;
+			objectloaderinfo.x=x;
+			objectloaderinfo.y=y;
+			objectloaderinfo.zpos=zpos;
+			objectloaderinfo.tileX=tileX;
+			objectloaderinfo.tileY=tileY;
 			
 			startPos=this.transform.position;
 		}

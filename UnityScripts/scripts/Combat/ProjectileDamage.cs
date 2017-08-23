@@ -13,6 +13,11 @@ public class ProjectileDamage : UWEBase {
 	///What was last hit by the projectile
 	public string LastTarget;
 
+
+	public int AttackScore;
+	public float AttackCharge;
+	public int ArmourDamage;
+
 	/// <summary>
 	/// The source of the projectile. (Trap, NPC, player)
 	/// </summary>
@@ -59,18 +64,50 @@ public class ProjectileDamage : UWEBase {
 			hasHit=true;
 			StartCoroutine(EndProjectile());
 		}
+
 		if (LastTarget != other.name)
 		{//only get hit once.
 			LastTarget=other.name;
+			//Perform damage calls
+			int otherDefenceScore=0;
+			int DamageReduction=0;
+			if (other.name=="_Gronk")
+			{
+				otherDefenceScore=GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillMissile)/2);
+				DamageReduction=GameWorldController.instance.playerUW.playerInventory.getArmourScore();				
+			}
+			else if (other.GetComponent<NPC>()!=null)
+			{
+				otherDefenceScore= other.GetComponent<NPC>().GetDefence();
+			}
+			else
+			{
+					return;
+			}
+			int toHit =Mathf.Max( otherDefenceScore-AttackScore, 1);
+			int roll = Random.Range(1,31);
+			if (roll<toHit)
+			{
+				return; //no damage applied.
+			}
+
+			int DamageToApply = (int)(Mathf.Max(((float)(Damage))*(AttackCharge/100f),1));
+			DamageToApply= Mathf.Max(1, DamageToApply-DamageReduction);
+
 			if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
 			{
-				other.gameObject.GetComponent<ObjectInteraction>().Attack(Damage,Source);
+				other.gameObject.GetComponent<ObjectInteraction>().Attack((short)DamageToApply,Source);
 			}
 			else
 			{
 			if (other.GetComponent<UWCharacter>())
 				{
-					other.GetComponent<UWCharacter>().ApplyDamage(Damage,Source);
+					other.GetComponent<UWCharacter>().ApplyDamage(DamageToApply,Source);
+					if (DamageToApply>DamageReduction)
+					{
+						//apply equipment damage to a random piece of armour
+						GameWorldController.instance.playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, ArmourDamage+1));
+					}
 				}
 				else
 				{//reduce damage on ricochets
@@ -78,7 +115,6 @@ public class ProjectileDamage : UWEBase {
 				}
 			}
 		}
-
 	}
 	
 	/// <summary>

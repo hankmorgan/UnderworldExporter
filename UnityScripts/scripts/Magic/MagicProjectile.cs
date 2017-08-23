@@ -72,8 +72,7 @@ public class MagicProjectile : MobileObject {
 				else
 				{
 					//Do a miss impact 
-					Impact.SpawnHitImpact(Impact.ImpactDamage(),this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);	
-				
+					Impact.SpawnHitImpact(Impact.ImpactDamage(),this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);					
 				}
 			}	
 

@@ -53,6 +53,7 @@ public override bool use ()
 								FishobjInt.UpdateAnimation();
 								//UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
 								UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
+								FishobjInt.isquant=1;
 							}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

@@ -9,25 +9,6 @@ public class TMAP : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-				/*
-		if (objInt().y == 0)
-		{
-			this.transform.Translate(0.0f,0.0f,0.01f);
-		}
-		if (objInt().y == 7)
-		{
-				this.transform.Translate(0.0f,0.0f,-0.01f);
-		}
-		if (objInt().x == 0)
-		{
-				this.transform.Translate(-0.1f,0.0f,0.0f);
-		}
-		if (objInt().x == 7)
-		{
-			this.transform.Translate(0.1f,0.0f,0.0f);
-		}
-*/
-
 		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[objInt().owner];
 		CreateTMAP(this.gameObject,TextureIndex);	
 	}
@@ -195,9 +176,10 @@ public class TMAP : object_base {
 			BoxCollider bx = myObj.AddComponent<BoxCollider>();
 			bx.size=new Vector3(1.25f,1.25f,0.1f);
 			bx.center=new Vector3(0.0f,0.65f,0.0f);
-			bx.isTrigger=true;
+			if (GameWorldController.instance.objectMaster.type[objInt.item_id]==ObjectInteraction.TMAP_CLIP)
+			{
+				bx.isTrigger=true;
+			}			
 		}
-
-
 
 }

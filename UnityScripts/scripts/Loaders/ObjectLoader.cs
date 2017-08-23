@@ -765,6 +765,19 @@ public class ObjectLoader : Loader {
 		}
 	}
 
+		public static string UniqueObjectNameEditor(ObjectLoaderInfo currObj)
+		{//returns a shorter unique name for the object editor
+				//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+				{
+				//case ObjectInteraction.DOOR:
+				//case ObjectInteraction.HIDDENDOOR:
+				//case ObjectInteraction.PORTCULLIS:
+				//		return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
+				default:
+					return GameWorldController.instance.objectMaster.desc[currObj.item_id] +"_"+currObj.index.ToString("d4");// + "_" + currObj.guid.ToString();
+				}
+		}
 
 		/// <summary>
 		/// Sets the object tile X and Y values. Flags if the object exists in the map
@@ -1426,7 +1439,8 @@ public class ObjectLoader : Loader {
 				switch(GameWorldController.instance.objectMaster.type[currObjList.objInfo[i].item_id])
 				{
 				case ObjectInteraction.LOCK:
-						//The next of a lock is sometimes a trigger.
+				case ObjectInteraction.A_USE_TRIGGER:
+						//The next of theses is sometimes a trigger.
 						break;
 				default:
 						currObjList.objInfo[i].next=0;

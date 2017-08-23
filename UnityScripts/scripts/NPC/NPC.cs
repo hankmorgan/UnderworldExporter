@@ -1200,6 +1200,9 @@ public class NPC : MobileObject {
 			ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
 			pd.Source=this.gameObject;
 			pd.Damage=(short)GameWorldController.instance.objDat.rangedStats[0].damage;//sling damage.
+			pd.AttackCharge=100f;
+			pd.AttackScore =GetAttack();//Assuming there is no special ranged attack score?
+			pd.ArmourDamage=GetArmourDamage();
 			Ammo--;
 		}
 	}
