@@ -265,6 +265,8 @@ public class MainMenuHud : GuiBase {
 				GameClock.instance._day=0;
 				GameClock.instance._minute=51;
 				GameClock.instance._second=15;
+				GameWorldController.instance.playerUW.CurVIT=255;
+				GameWorldController.instance.playerUW.MaxVIT=255;
 				JourneyOnwards();
 				return;
 			}

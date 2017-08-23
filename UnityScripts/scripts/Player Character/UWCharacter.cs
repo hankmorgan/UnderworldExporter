@@ -17,11 +17,8 @@ public class UWCharacter : Character {
 		public bool decode=true;//decodes a save file
 		//public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
-		//public 	int heading;
-		//public float testvalue=0.4f;
-		//public int indextochange;
-		//public int newvalue;
-		//public int newvaluesize=8;
+
+
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.
 	public static UWCharacter Instance;

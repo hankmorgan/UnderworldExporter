@@ -2479,8 +2479,8 @@ public class ConversationVM : UWEBase {
 
 				Container cn = npc.gameObject.GetComponent<Container>();
 				int itemCount=0;
-
-				Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
+				npc.SetupNPCInventory();
+				//Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
 				for (short i =0 ; i<= cn.MaxCapacity(); i++)
 				{
 						if (cn.GetItemAt(i)!="")

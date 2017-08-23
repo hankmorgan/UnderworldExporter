@@ -219,6 +219,8 @@ public class NPC : MobileObject {
 		Container cnt = this.GetComponent<Container>();
 		if (cnt!=null)
 		{
+			SetupNPCInventory();
+
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
 		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
@@ -248,6 +250,25 @@ public class NPC : MobileObject {
 			objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1];break;								
 		}
 		objInt().aud.Play();
+	}
+
+	/// <summary>
+	/// Setups the NPC inventory if they use a loot list.
+	/// </summary>
+	public void SetupNPCInventory ()
+	{
+		Container cnt = this.GetComponent<Container>();
+		if (cnt.CountItems () == 0) {
+			//Populate the container with a loot list
+			for (int i = 0; i <= GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot.GetUpperBound (0); i++) {
+				if (GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i] != -1) {
+					int itemid = GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i];
+					ObjectLoaderInfo newobjt = ObjectLoader.newObject (itemid, Random.Range (1, 41), 0, 1, 256);
+					newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+					cnt.AddItemToContainer (newobjt.instance.name);
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -1131,6 +1152,10 @@ public class NPC : MobileObject {
 	/// </summary>
 	public void ExecuteMagicAttack()
 	{
+		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)>8)
+		{
+			return;						
+		}
 		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex,Magic.SpellRule_TargetVector);
 	}
 
@@ -1139,6 +1164,10 @@ public class NPC : MobileObject {
 	/// </summary>
 	public void ExecuteRangedAttack()
 	{
+		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)>8)
+		{
+			return;						
+		}
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player

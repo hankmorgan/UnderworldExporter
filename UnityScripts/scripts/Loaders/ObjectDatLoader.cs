@@ -144,7 +144,7 @@ public class ObjectDatLoader : Loader {
 				j=0;
 					for (int i=0; i<8; i++)
 					{//ranged weapon damage stats.
-						rangedStats[j].damage= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8) ;
+						rangedStats[j].damage= (int)((DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) >> 9) & 0x7f );
 						add_ptr = add_ptr + 3;
 						j++;	
 					}

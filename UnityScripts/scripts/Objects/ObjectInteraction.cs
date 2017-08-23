@@ -1633,7 +1633,8 @@ public class ObjectInteraction : UWEBase {
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
 				ObjectInteraction objInt = CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
-				objInt.next=currObj.next;
+				objInt.objectloaderinfo = currObj;
+				currObj.instance = objInt;
 				objInt.link=currObj.link;
 				objInt.quality=currObj.quality;
 				objInt.enchantment=currObj.enchantment;

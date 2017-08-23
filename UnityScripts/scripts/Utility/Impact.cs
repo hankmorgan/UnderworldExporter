@@ -69,37 +69,31 @@ public class Impact : object_base {
 		}		
 	}
 
-	public static void SpawnHitImpact(int Item_ID, Vector3 ImpactPosition, int StartFrame, int EndFrame)
+	public static GameObject SpawnHitImpact(int Item_ID, Vector3 ImpactPosition, int StartFrame, int EndFrame)
 	{
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(Item_ID,40,StartFrame,1,256);
 		ObjectInteraction objInt = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ImpactPosition);
 		objInt.GetComponent<AnimationOverlay>().Looping=false;
 		objInt.GetComponent<AnimationOverlay>().StartFrame=StartFrame;
 		objInt.GetComponent<AnimationOverlay>().NoOfFrames=StartFrame-EndFrame;
-		///GameObject hitimpact = new GameObject(ImpactName);
-		///hitimpact.transform.position=ImpactPosition;//ray.GetPoint(weaponRange/0.7f);
-		///hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
-		//GameWorldController.MoveToWorld(hitimpact);
-		//Impact imp= hitimpact.AddComponent<Impact>();
-		//imp.go(StartFrame,EndFrame);
-		//StartCoroutine( imp.Animate(StartFrame,EndFrame));		
+		return objInt.gameObject;
 	}
 
 
-		public static int ImpactBlood()
-		{
-			return 448;
-		}
+	public static int ImpactBlood()
+	{
+		return 448;
+	}
 
 
-		public static int ImpactDamage()
-		{
-			return 459;
-		}
+	public static int ImpactDamage()
+	{
+		return 459;
+	}
 
-		public static int ImpactMagic()
-		{
-			return 459;
-		}
+	public static int ImpactMagic()
+	{
+		return 459;
+	}
 
 }

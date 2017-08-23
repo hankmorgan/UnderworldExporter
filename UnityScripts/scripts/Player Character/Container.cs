@@ -270,7 +270,8 @@ public class Container : object_base {
 									objSpilled.objectloaderinfo.x=objSpilled.x;
 									objSpilled.objectloaderinfo.y=objSpilled.y;
 									objSpilled.objectloaderinfo.zpos=objSpilled.zpos;
-									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, objSpilled.objectloaderinfo.tileX,objSpilled.objectloaderinfo.tileY,0);									RemoveItemFromContainer(i);
+									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, this.objInt().objectloaderinfo.tileX,this.objInt().objectloaderinfo.tileY,0);									
+									RemoveItemFromContainer(i);
 									Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
 									GameWorldController.UnFreezeMovement(Spilled);
 								}
