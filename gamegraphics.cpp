@@ -84,44 +84,52 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
     textureFile = new unsigned char[fileSize];
     fread(textureFile, fileSize, 1,file);
 	fclose(file); 
-	palette *pal;
-	pal = new palette[256];
-	getPalette(PaletteFile, pal, PaletteNo);  
-	NoOfTextures = getValAtAddress(textureFile,0,8);
-	for (i = 0; i <NoOfTextures; i++)
+
+	for (int p = 0; p <= 16; p++)
 		{
-		long textureOffset = getValAtAddress(textureFile, (i * 4) + 6, 32);
-		if (textureOffset !=0)
+		palette *pal;
+		pal = new palette[256];
+		//getPalette(PaletteFile, pal, PaletteNo);
+		getPalette(PaletteFile, pal, p);
+		NoOfTextures = getValAtAddress(textureFile, 0, 8);
+		char OutFileNameToUse[255];
+		sprintf_s(OutFileNameToUse, 255, "%d_%s_",p, OutFileName);
+		for (i = 0; i <NoOfTextures; i++)
 			{
-			int compressionFlag=getValAtAddress(textureFile,((i * 4) + 6)+(NoOfTextures*4),32);
-			int isCompressed =(compressionFlag>>1) & 0x01;
-			if (isCompressed==1)	
+			long textureOffset = getValAtAddress(textureFile, (i * 4) + 6, 32);
+			if (textureOffset != 0)
 				{
-				int datalen;
-				unsigned char *outputImg = unpackUW2(textureFile,textureOffset,&datalen);		
-				if (useTGA == 1)
+				int compressionFlag = getValAtAddress(textureFile, ((i * 4) + 6) + (NoOfTextures * 4), 32);
+				int isCompressed = (compressionFlag >> 1) & 0x01;
+				if (isCompressed == 1)
 					{
-					writeTGA(outputImg, 0, 320, 200, i, pal, OutFileName,0);
+					int datalen;
+					unsigned char *outputImg = unpackUW2(textureFile, textureOffset, &datalen);
+					if (useTGA == 1)
+						{
+						writeTGA(outputImg, 0, 320, 200, i, pal, OutFileNameToUse, 0);
+						}
+					else
+						{
+						writeBMP(outputImg, 0, 320, 200, i, pal, OutFileNameToUse);
+						}
+
 					}
 				else
 					{
-					writeBMP(outputImg, 0, 320, 200, i, pal, OutFileName);
-					}
-				
-				}
-			else
-				{
-				if (useTGA == 1)
-					{
-					writeTGA(textureFile, textureOffset, 320, 200, i, pal, OutFileName,0);
-					}
-				else
-					{
-					writeBMP(textureFile, textureOffset, 320, 200, i, pal, OutFileName);
+					if (useTGA == 1)
+						{
+						writeTGA(textureFile, textureOffset, 320, 200, i, pal, OutFileNameToUse, 0);
+						}
+					else
+						{
+						writeBMP(textureFile, textureOffset, 320, 200, i, pal, OutFileNameToUse);
+						}
 					}
 				}
 			}
-		}	
+		}
+
 }
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255],int useTGA)

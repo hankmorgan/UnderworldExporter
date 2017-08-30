@@ -1046,8 +1046,6 @@ public class DoorControl : object_base {
 						{
 							return base.ContextMenuDesc (item_id);
 						}
-
-						break;
 				default:
 					return base.ContextMenuDesc (item_id);
 				}

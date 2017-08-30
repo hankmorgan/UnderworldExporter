@@ -9,11 +9,17 @@ public class WeaponsLoader : ArtLoader {
 	//int NoOfImages=0;
 
 
-		protected Texture2D[] ImageCache=new Texture2D[1];
+	protected Texture2D[] ImageCache=new Texture2D[1];
 
 	public WeaponsLoader(int AuxPal)
 	{
-		ReadAnimData(AuxPal);
+		switch(_RES)
+		{
+		case GAME_UW1:
+		case GAME_UW2:
+				ReadAnimData(AuxPal);break;				
+		}
+		
 	}
 
 

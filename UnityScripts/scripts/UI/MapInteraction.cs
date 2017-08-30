@@ -38,7 +38,7 @@ public class MapInteraction : GuiBase {
 
 		public void MapDown()
 		{//Actually increases the map number!
-				if (MapNo<8)	
+				if (MapNo<GameWorldController.instance.AutoMaps.GetUpperBound(0))	
 				{
 					MapNo++;
 					UpdateMap(MapNo);
@@ -67,16 +67,19 @@ public class MapInteraction : GuiBase {
 			}
 			if (GameWorldController.instance.AutoMaps[MapInteraction.MapNo]!=null)
 			{
-				for (int i=0 ; i < GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count;i++)
-				{///Instantiates the map note template UI control.
-					GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
-					myObj.transform.parent= UWHUD.instance.MapPanel.transform;
-					myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NoteText;
-					myObj.GetComponent<RectTransform>().anchoredPosition= GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NotePosition();
-					myObj.GetComponent<MapNoteId>().guid = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].guid;
-					//Move the control so that it sits in front of the map,
-					myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
-				}						
+				if (GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes!=null)
+				{
+					for (int i=0 ; i < GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count;i++)
+					{///Instantiates the map note template UI control.
+						GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+						myObj.transform.parent= UWHUD.instance.MapPanel.transform;
+						myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NoteText;
+						myObj.GetComponent<RectTransform>().anchoredPosition= GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NotePosition();
+						myObj.GetComponent<MapNoteId>().guid = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].guid;
+						//Move the control so that it sits in front of the map,
+						myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
+					}		
+				}					
 			}
 		}
 

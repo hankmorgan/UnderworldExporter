@@ -13,8 +13,17 @@ public class a_teleport_trap : trap_base {
 	//public float targetY;
 	//public float targetZ;
 
-		public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
+		if (_RES==GAME_UWDEMO)
+		{
+			if (objInt().zpos!=0)
+			{
+				ExecuteForUWDemo();
+				return;
+			}
+				//Special case for the UW Demo.
+		}
 		//Debug.Log (this.name);
 		if (EditorMode)
 		{
@@ -54,6 +63,11 @@ public class a_teleport_trap : trap_base {
 			GameWorldController.instance.SwitchLevel((short)(objInt().zpos-1),objInt().quality,objInt().owner);
 		}
 	}
+
+		public void ExecuteForUWDemo()
+		{//IN the UW demo the level transition 
+				UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
+		}
 
 	public override void PostActivate ()
 	{//Prevent deletion of the trap

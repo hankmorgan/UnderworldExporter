@@ -223,21 +223,29 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 	private void OptionSave()
 	{
-		DisplayBG.texture= SaveBG;
-		SaveMenu.SetActive(false);
-		RestoreMenu.SetActive(false);
-		DetailMenu.SetActive(false);
-		SoundMenu.SetActive(false);
-		MusicMenu.SetActive(false);		
-		ReturnMenu.SetActive(false);
-		QuitMenu.SetActive(false);
-		SaveSlot_0.SetActive(true);
-		SaveSlot_1.SetActive(true);
-		SaveSlot_2.SetActive(true);
-		SaveSlot_3.SetActive(true);
-		Save_Cancel.SetActive(true);
+		if (_RES==GAME_UW2)
+		{
+			DisplayBG.texture= SaveBG;
+			SaveMenu.SetActive(false);
+			RestoreMenu.SetActive(false);
+			DetailMenu.SetActive(false);
+			SoundMenu.SetActive(false);
+			MusicMenu.SetActive(false);		
+			ReturnMenu.SetActive(false);
+			QuitMenu.SetActive(false);
+			SaveSlot_0.SetActive(true);
+			SaveSlot_1.SetActive(true);
+			SaveSlot_2.SetActive(true);
+			SaveSlot_3.SetActive(true);
+			Save_Cancel.SetActive(true);
 
-				DisplaySaves ();
+			DisplaySaves ();	
+		}
+		else
+		{
+			UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
+		}
+
 	}
 
 	private void OptionRestore()

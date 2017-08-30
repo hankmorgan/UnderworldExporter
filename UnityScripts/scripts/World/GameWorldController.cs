@@ -325,30 +325,6 @@ public class GameWorldController : UWEBase {
 				
 		instance=this;
 		AtMainMenu=true;
-		switch(_RES)
-		{
-		case GAME_SHOCK:
-		case GAME_TNOVA:
-				break;
-		case GAME_UW2:
-				{
-					if (GameWorldController.instance.startLevel==0)
-					{//Avatar's bedroom
-						GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
-					}
-					break;
-				}						
-		default:
-				{
-					if (GameWorldController.instance.startLevel==0)
-					{//entrance to the abyss
-						GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;
-					}
-					break;
-				}			
-		}
-
-
 		return;
 
 	}
@@ -433,6 +409,33 @@ public class GameWorldController : UWEBase {
 						break;
 				}
 
+
+				switch(_RES)
+				{
+				case GAME_SHOCK:
+				case GAME_TNOVA:
+						break;
+				case GAME_UW2:
+						{
+							if (GameWorldController.instance.startLevel==0)
+							{//Avatar's bedroom
+									GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
+							}
+							break;
+						}	
+				case GAME_UWDEMO:
+						GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;break;
+				default:
+						{
+								if (GameWorldController.instance.startLevel==0)
+								{//entrance to the abyss
+										GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;
+								}
+								break;
+						}			
+				}
+
+
 				switch(res)
 				{
 				case GAME_TNOVA:
@@ -461,6 +464,10 @@ public class GameWorldController : UWEBase {
 						//case GAME_UW2:
 						//UW Demo does not go to the menu. It will load automatically into the gameworld
 						AtMainMenu=false;	
+						GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+						UWHUD.instance.Begin();
+						playerUW.Begin();
+						playerUW.playerInventory.Begin();
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 						break;
@@ -887,10 +894,10 @@ public class GameWorldController : UWEBase {
 			{
 					return;
 			}
-				if (_RES!=GAME_UW1)
-				{
-						return;
-				}
+			if ((_RES!=GAME_UW1) && (_RES!=GAME_UWDEMO) && (_RES!=GAME_UW2) )
+			{
+					return;
+			}
 			TileMap.visitTileX =(short)(playerUW.transform.position.x/1.2f);
 			TileMap.visitTileY =(short)(playerUW.transform.position.z/1.2f);
 			instance.playerUW.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
@@ -1291,10 +1298,12 @@ public class GameWorldController : UWEBase {
 				case GAME_UWDEMO:
 						Tilemaps = new TileMap[1];
 						objectList=new ObjectLoader[1];
+						AutoMaps=new AutoMap[1];
 						break;
 				case GAME_UW2:
 						Tilemaps = new TileMap[72];//Not all are in use.
 						objectList=new ObjectLoader[72];
+						AutoMaps=new AutoMap[72];
 						break;
 				case GAME_UW1:
 				default:
@@ -1388,11 +1397,22 @@ public class GameWorldController : UWEBase {
 				//Load up auto map data
 				switch(_RES)
 				{
+				case GAME_UWDEMO:
+						AutoMaps[0]=new AutoMap();
+						AutoMaps[0].InitAutoMapDemo();
+						break;
 				case GAME_UW1:
 					for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
 					{
-							AutoMaps[i]=new AutoMap();
+						AutoMaps[i]=new AutoMap();
 						AutoMaps[i].InitAutoMap(i,lev_ark_file_data);
+					}
+					break;
+				case GAME_UW2:
+					for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
+					{
+						AutoMaps[i]=new AutoMap();
+						AutoMaps[i].InitAutoMapUW2(i);
 					}
 					break;
 				}

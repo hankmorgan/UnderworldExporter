@@ -38,7 +38,7 @@ public class WeaponAnimationPlayer : UWEBase {
 				return;
 			}
 			animationCounter+=Time.deltaTime;
-			if (animationCounter>=frameRate)
+			if ((animationCounter>=frameRate) && (_RES!=GAME_UWDEMO))
 			{
 				animationCounter=0f;
 				if(AnimationPos<=GameWorldController.instance.weaps.frames.GetUpperBound(1))

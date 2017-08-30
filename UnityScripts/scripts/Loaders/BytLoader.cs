@@ -54,7 +54,7 @@ public class BytLoader : ArtLoader {
 
 		private int[] PaletteIndicesUW2=
 		{
-			0,
+			3,
 			0,
 			0,
 			0,
