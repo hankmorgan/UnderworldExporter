@@ -1030,8 +1030,8 @@ public class ObjectLoader : Loader {
 							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_PIT_TRAP ))
 							)
 							{
-								LevelInfo[x,y].hasElevator= 1;
-								LevelInfo[x,y].TerrainChange=1;
+								//LevelInfo[x,y].hasElevator= true;
+								LevelInfo[x,y].TerrainChange=true;
 								//LevelInfo[x,y].ElevatorIndex = currObj.index;
 								currObj.tileX=x;
 								currObj.tileY=y;
@@ -1060,14 +1060,14 @@ public class ObjectLoader : Loader {
 										{
 												if (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP )
 												{
-														LevelInfo[x,y].TerrainChange= 1;
+														LevelInfo[x,y].TerrainChange= true;
 														//LevelInfo[x,y].TerrainChangeIndex = currObj.index;
 														//Need to flag the range of tiles affected. X/y of the object gives the dimensions
 														for (int j=x; j<= x+currObj.x; j++ )
 														{
 																for (int k=y; k<= y+currObj.y; k++  )
 																{
-																		LevelInfo[j,k].TerrainChange = 1;
+																		LevelInfo[j,k].TerrainChange = true;
 																		//Flag each of it's neighbours as well. May already be flagged.
 																		for (int q=-1; q<=1; q++)
 																		{
@@ -1075,17 +1075,10 @@ public class ObjectLoader : Loader {
 																				{
 																						if   ( ((j+r>=0) && (j+r<63)) && ((k+q>=0) && (k+q<63)))
 																						{
-																								LevelInfo[j+r,k+q].TerrainChange=1;	
+																								LevelInfo[j+r,k+q].TerrainChange=true;	
 																						}
 																				}	
 																		}
-																		///LevelInfo[j,k].TerrainChangeIndices[LevelInfo[j,k].TerrainChangeCount]=currObj.index;
-																		//LevelInfo[j,k].TerrainChangeCount++;
-																		//LevelInfo[j,k].isWater  = 0;// turn off water in terrain change tiles
-																		//if (LevelInfo[j,k].isDoor==true)//The tile contains a door. I need to make sure the door is created at the height of the tile.
-																		//{
-																		//		objList[LevelInfo[j,k].DoorIndex].zpos = objList[currObj.index].zpos;
-																		//}
 																}						
 														}
 														currObj.tileX=x;
@@ -1107,14 +1100,16 @@ public class ObjectLoader : Loader {
 
 		void SetBullFrog(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int LevelNo)
 		{
-				//Special UW1 case
-				if (LevelNo==3)
+				//Special UW1 case for the bullfrog puzzle
+				if ((LevelNo==3) && (_RES==GAME_UW1))
 				{
 						for (int x= 48; x< 56;x++)
 						{
 								for (int y = 48; y< 56; y++)
 								{
-										LevelInfo[x,y].BullFrog=1;
+										//LevelInfo[x,y].BullFrog=true;
+										//LevelInfo[x,y].hasElevator=true;
+										LevelInfo[x,y].TerrainChange=true;
 								}
 						}	
 				}

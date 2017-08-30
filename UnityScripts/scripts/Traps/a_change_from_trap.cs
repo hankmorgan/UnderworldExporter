@@ -36,18 +36,18 @@ public class a_change_from_trap : trap_base {
 			for (int y=0; y<=63; y++)
 			{
 				//Every tile needs to be reset and tested again.
-				 GameWorldController.instance.currentTileMap().Tiles[x,y].Render=1;		
-				 GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
-				 GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
-				GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=0;	
+				GameWorldController.instance.currentTileMap().Tiles[x,y].Render=true;		
+				GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
+				GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
+				GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=false;	
 				if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture==objInt().heading)
 				{	
 
 					//Tiles[x,y].VisibleFaces = 63;
 					for (int v = 0; v < 6; v++)
 					{
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=1;
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=1;
+						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
+						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
 					}
 
 

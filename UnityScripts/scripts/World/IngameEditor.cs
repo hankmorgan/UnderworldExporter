@@ -326,11 +326,11 @@ public class IngameEditor : GuiBase_Draggable {
 
 											if ((TileTypeSelected==TileMap.TILE_OPEN) || (TileTypeSelected==-1))
 											{
-												GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;
+												GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=true;
 											}
 											else
 											{
-												GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=0;	
+												GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=false;	
 											}
 
 											UpdateTile(x,y,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);			
@@ -362,7 +362,7 @@ public class IngameEditor : GuiBase_Draggable {
 																(HeightToSet<=15)
 														)
 														{
-																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=true;	
 																if (FloorHeight!=-1)
 																{
 																	GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;																	
@@ -399,7 +399,7 @@ public class IngameEditor : GuiBase_Draggable {
 																(HeightToSet<=15)
 														)
 														{
-																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=true;
 																if (FloorHeight!=-1)
 																{
 																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
@@ -436,7 +436,7 @@ public class IngameEditor : GuiBase_Draggable {
 																(HeightToSet<=15)
 														)
 														{
-																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=true;	
 																if (FloorHeight!=-1)
 																{
 																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
@@ -472,7 +472,7 @@ public class IngameEditor : GuiBase_Draggable {
 																(HeightToSet<=15)
 														)
 														{
-																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=1;	
+																GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[TileMap.vTOP]=true;	
 																if (FloorHeight!=-1)
 																{
 																GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight=(short)HeightToSet;
@@ -494,7 +494,7 @@ public class IngameEditor : GuiBase_Draggable {
 										{
 												if (TileMap.ValidTile(MinX+ xy, MinY+xy))
 												{
-														GameWorldController.instance.currentTileMap().Tiles[MinX+ xy, MinY+xy].VisibleFaces[TileMap.vTOP]=1;	
+														GameWorldController.instance.currentTileMap().Tiles[MinX+ xy, MinY+xy].VisibleFaces[TileMap.vTOP]=true;	
 														UpdateTile(MinX+ xy, MinY+xy,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);	
 												}	
 										}
@@ -508,7 +508,7 @@ public class IngameEditor : GuiBase_Draggable {
 									{
 											if (TileMap.ValidTile(MaxX- xy, MinY+xy))
 											{
-													GameWorldController.instance.currentTileMap().Tiles[MaxX- xy, MinY+xy].VisibleFaces[TileMap.vTOP]=1;	
+														GameWorldController.instance.currentTileMap().Tiles[MaxX- xy, MinY+xy].VisibleFaces[TileMap.vTOP]=true;	
 													UpdateTile(MaxX- xy, MinY+xy,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);	
 											}	
 									}
@@ -790,7 +790,7 @@ public class IngameEditor : GuiBase_Draggable {
 			{					
 					WallTexture=-1;
 			}
-			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].VisibleFaces[TileMap.vTOP]=1;
+			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].VisibleFaces[TileMap.vTOP]=true;
 			IngameEditor.instance.UpdateTile(tileX,tileY,TileTypeSelected,FloorTexture,WallTexture,FloorHeight);
 		}
 

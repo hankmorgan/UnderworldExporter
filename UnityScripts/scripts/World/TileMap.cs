@@ -28,14 +28,14 @@ public class TileMap : Loader {
 		public const short TILE_RIDGE_NW= 16;
 		public const short TILE_RIDGE_NE= 17;
 
-		const short NORTH =0;
+		/*const short NORTH =0;
 		const short SOUTH =1;
 		const short EAST=2;
 		const short WEST=3;
 		const short NORTHWEST=4;
 		const short NORTHEAST=5;
 		const short SOUTHWEST=6;
-		const short SOUTHEAST=7;
+		const short SOUTHEAST=7;*/
 
 		/// <summary>
 		/// The tile map size along the x axis
@@ -62,7 +62,7 @@ public class TileMap : Loader {
 		const short SLOPE_FLOOR_ONLY =2;
 		const short SLOPE_CEILING_ONLY= 3;
 
-		//Visible faces indices
+		//Visible faces indices. Used in sorting tile visiblity.
 		public const short vTOP =0;
 		public const short vEAST =1;
 		public const short vBOTTOM= 2;
@@ -293,7 +293,7 @@ public class TileMap : Loader {
 	/// <param name="tileY">Tile y.</param>
 	private bool GetTileRender( int tileX, int tileY)
 	{				
-		return Tiles[tileX,tileY].Render==1;
+		return Tiles[tileX,tileY].Render==true;
 	}
 
 		/// <summary>
@@ -554,7 +554,7 @@ public class TileMap : Loader {
 								//Tiles[x,y].noOfNeighbours=0;
 								//Tiles[x,y].tileTested = 0;
 							//	Tiles[x,y].TerrainChangeCount=0;
-								Tiles[x,y].BullFrog = 0;
+								//Tiles[x,y].BullFrog = false;
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
 								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
@@ -628,15 +628,15 @@ public class TileMap : Loader {
 								//First index of the linked list of objects.
 								Tiles[x,y].indexObjectList = getObject(SecondTileInt);
 
-								Tiles[x,y].Render=1;		
+								Tiles[x,y].Render=true;		
 								Tiles[x,y].DimX=1;			
 								Tiles[x,y].DimY=1;			
-								Tiles[x,y].Grouped=0;	
+								Tiles[x,y].Grouped=false;	
 								//Tiles[x,y].VisibleFaces = 63;
 								for (int v = 0; v < 6; v++)
 								{
-										Tiles[x,y].VisibleFaces[v]=1;
-										Tiles[x,y].VisibleFaces[v]=1;
+										Tiles[x,y].VisibleFaces[v]=true;
+										Tiles[x,y].VisibleFaces[v]=true;
 								}
 								//Restore this when texturesmasters is loaded.
 								//Tiles[x,y].isWater = (textureMasters[Tiles[x,y].floorTexture].water == 1) && ((Tiles[x,y].tileType !=0) && (ENABLE_WATER==1));
@@ -808,16 +808,14 @@ public class TileMap : Loader {
 								case 7: {Tiles[x,y].tileType = 8; break; }
 								case 8: {Tiles[x,y].tileType = 7; break; }
 								}
-								//Tiles[x,y].ActualType = (short)Tiles[x,y].tileType;
 								Tiles[x,y].indexObjectList = 0;
-								Tiles[x,y].Render = 1;
+								Tiles[x,y].Render = true;
 								Tiles[x,y].DimX = 1;
 								Tiles[x,y].DimY = 1;
-								Tiles[x,y].Grouped = 0;
-								Tiles[x,y].BullFrog=0;
+								Tiles[x,y].Grouped = false;
 								for (int v = 0; v < 6; v++)
 								{
-										Tiles[x,y].VisibleFaces[v] = 1;
+									Tiles[x,y].VisibleFaces[v] = true;
 								}
 								/* word 6 contains
         0-5 Wall texture (index into texture list)
@@ -1044,10 +1042,11 @@ public class TileMap : Loader {
 		}
 
 
-
-
-		///Cleanup
-		/// 
+		/// <summary>
+		/// Cleans up the tilemap. Splits up the tiles into strips of tiles along the x or y axis and sets tile face visibility as required
+		/// </summary>
+		/// <param name="game">Game.</param>
+		/// Although the tile map renderer supports tiles of size X*Y I'm only smart enought to optimise the tilemap into strips of X*1 or Y*1 !!
 		public void CleanUp(string game)
 		{
 				int x; int y;
@@ -1059,13 +1058,13 @@ public class TileMap : Loader {
 										{
 										case TILE_SOLID:
 												//Bottom and top are invisible
-												Tiles[x,y].VisibleFaces[vBOTTOM] = 0;
-												Tiles[x,y].VisibleFaces[vTOP] = 0;
+												Tiles[x,y].VisibleFaces[vBOTTOM] = false;
+												Tiles[x,y].VisibleFaces[vTOP] = false;
 												break;
 										default:
 												//Bottom and top is invisible
-												Tiles[x,y].VisibleFaces[vBOTTOM] = 0;
-												Tiles[x,y].VisibleFaces[vTOP]=0;
+												Tiles[x,y].VisibleFaces[vBOTTOM] = false;
+												Tiles[x,y].VisibleFaces[vTOP]=false;
 												break;
 										}
 								}
@@ -1074,7 +1073,7 @@ public class TileMap : Loader {
 								for (y=0;y<=TileMap.TileMapSizeY;y++){
 										//lets test this tile for visibility
 										//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
-										if ((Tiles[x,y].tileType ==0) && (Tiles[x,y].indexObjectList == 0)  && (Tiles[x,y].TerrainChange == 0)){
+										if ((Tiles[x,y].tileType ==0) && (Tiles[x,y].indexObjectList == 0)  && (Tiles[x,y].TerrainChange == false)){
 												switch (y)
 												{
 												case 0:	//bottom row
@@ -1082,19 +1081,19 @@ public class TileMap : Loader {
 														{
 														case 0:	//bl corner
 																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
-																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ; ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x + 1,y].TerrainChange == false) && (Tiles[x,y+1].TerrainChange == false))
+																{Tiles[x,y].Render =false ; ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														case TileMap.TileMapSizeX://br corner
 																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0)
-																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x - 1,y].TerrainChange == false) && (Tiles[x,y+1].TerrainChange == false))
+																{Tiles[x,y].Render =false ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														default: // invert t
 																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) 
-																		&& (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x+1,y].TerrainChange == false) && (Tiles[x,y+1].TerrainChange == false) && (Tiles[x+1,y].TerrainChange == false))
+																{Tiles[x,y].Render =false ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														}
 														break;
 												case TileMap.TileMapSizeY: //Top row
@@ -1102,19 +1101,19 @@ public class TileMap : Loader {
 														{
 														case 0:	//tl corner
 																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x + 1,y].TerrainChange == false) && (Tiles[x,y-1].TerrainChange == false))
+																{Tiles[x,y].Render =false ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														case TileMap.TileMapSizeX://tr corner
 																if ((Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																		&& (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x - 1,y].TerrainChange == false) && (Tiles[x,y-1].TerrainChange == false))
+																{Tiles[x,y].Render =false ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														default: //  t
 																if ((Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
-																		&& (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
-																{Tiles[x,y].Render =0;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x + 1,y].TerrainChange == false) && (Tiles[x,y - 1].TerrainChange == false) && (Tiles[x-1,y].TerrainChange == false))
+																{Tiles[x,y].Render =false;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														}	
 														break;
 												default: //
@@ -1122,19 +1121,19 @@ public class TileMap : Loader {
 														{
 														case 0:		//left edge
 																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x+1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-																{Tiles[x,y].Render =0;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x,y+1].TerrainChange == false) && (Tiles[x+1,y].TerrainChange == false) && (Tiles[x,y-1].TerrainChange == false))
+																{Tiles[x,y].Render =false;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														case TileMap.TileMapSizeX:	//right edge
 																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) 
-																		&& (Tiles[x,y+1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0) && (Tiles[x,y-1].TerrainChange == 0))
-																{Tiles[x,y].Render =0 ;break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x,y+1].TerrainChange == false) && (Tiles[x-1,y].TerrainChange == false) && (Tiles[x,y-1].TerrainChange == false))
+																{Tiles[x,y].Render =false ;break;}
+																else {Tiles[x,y].Render =true ;break;}
 														default:		//+
 																if ((Tiles[x,y + 1].tileType == 0) && (Tiles[x + 1,y].tileType == 0) && (Tiles[x,y - 1].tileType == 0) && (Tiles[x - 1,y].tileType == 0) 
-																		&& (Tiles[x,y + 1].TerrainChange == 0) && (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x-1,y].TerrainChange == 0))
-																{Tiles[x,y].Render =0; break;}
-																else {Tiles[x,y].Render =1 ;break;}
+																		&& (Tiles[x,y + 1].TerrainChange == false) && (Tiles[x + 1,y].TerrainChange == false) && (Tiles[x,y - 1].TerrainChange == false) && (Tiles[x-1,y].TerrainChange == false))
+																{Tiles[x,y].Render =false; break;}
+																else {Tiles[x,y].Render =true ;break;}
 														}
 														break;
 												}
@@ -1158,16 +1157,16 @@ public class TileMap : Loader {
 				//Now lets combine the solids along particular axis
 				for (x=0;x<TileMap.TileMapSizeX;x++){
 						for (y=0;y<TileMap.TileMapSizeY;y++){
-								if  ((Tiles[x,y].Grouped ==0))
+								if  ((Tiles[x,y].Grouped ==false))
 								{
 										j=1;
-										while ((Tiles[x,y].Render == 1) && (Tiles[x,y + j].Render == 1) && (Tiles[x,y + j].Grouped == 0) && (Tiles[x,y + j].BullFrog == 0))		//&& (Tiles[x,y].tileType ==0) && (Tiles[x,y+j].tileType ==0)
+										while ((Tiles[x,y].Render == true) && (Tiles[x,y + j].Render == true) && (Tiles[x,y + j].Grouped == false))		//&& (Tiles[x,y].tileType ==0) && (Tiles[x,y+j].tileType ==0)
 										{
 												//combine these two if they match and they are not already part of a group
 												if (DoTilesMatch(Tiles[x,y],Tiles[x,y+j])){
-														Tiles[x,y+j].Render =0;
-														Tiles[x,y+j].Grouped =1;
-														Tiles[x,y].Grouped =1;
+														Tiles[x,y+j].Render =false;
+														Tiles[x,y+j].Grouped =true;
+														Tiles[x,y].Grouped =true;
 														//Tiles[x,y].DimY++;
 														j++;
 												}
@@ -1187,16 +1186,16 @@ public class TileMap : Loader {
 				////Now lets combine solids along the other axis
 				for (y=0;y<TileMap.TileMapSizeY;y++){
 						for (x=0;x<TileMap.TileMapSizeX;x++){
-								if  ((Tiles[x,y].Grouped ==0))
+								if  ((Tiles[x,y].Grouped ==false))
 								{
 										j=1;
-										while ((Tiles[x,y].Render == 1) && (Tiles[x + j,y].Render == 1) && (Tiles[x + j,y].Grouped == 0) && (Tiles[x + j,y].BullFrog == 0))		//&& (Tiles[x,y].tileType ==0) && (Tiles[x,y+j].tileType ==0)
+										while ((Tiles[x,y].Render == true) && (Tiles[x + j,y].Render == true) && (Tiles[x + j,y].Grouped == false))		//&& (Tiles[x,y].tileType ==0) && (Tiles[x,y+j].tileType ==0)
 										{
 												//combine these two if they  match and they are not already part of a group
 												if (DoTilesMatch(Tiles[x,y],Tiles[x+j,y])){
-														Tiles[x+j,y].Render =0;
-														Tiles[x+j,y].Grouped =1;
-														Tiles[x,y].Grouped =1;
+														Tiles[x+j,y].Render =false;
+														Tiles[x+j,y].Grouped =true;
+														Tiles[x,y].Grouped =true;
 														//Tiles[x,y].DimY++;
 														j++;
 												}
@@ -1223,32 +1222,32 @@ public class TileMap : Loader {
 
 										if (x == 0)
 										{
-												Tiles[x,y].VisibleFaces[vWEST]=0;
+												Tiles[x,y].VisibleFaces[vWEST]=false;
 										}
 										if (x == TileMap.TileMapSizeX)
 										{
-												Tiles[x,y].VisibleFaces[vEAST] = 0;
+												Tiles[x,y].VisibleFaces[vEAST] = false;
 										}
 										if (y == 0 )
 										{
-												Tiles[x,y].VisibleFaces[vSOUTH] = 0;
+												Tiles[x,y].VisibleFaces[vSOUTH] = false;
 										}
 
 										if (y == TileMap.TileMapSizeY)
 										{
-												Tiles[x,y].VisibleFaces[vNORTH] = 0;
+												Tiles[x,y].VisibleFaces[vNORTH] = false;
 										}
 										if ((x+dimx <= TileMap.TileMapSizeX) && (y+dimy <= TileMap.TileMapSizeY))
 										{
-												if ((Tiles[x + dimx,y].tileType == TILE_SOLID) && (Tiles[x + dimx,y].TerrainChange == 0) && (Tiles[x,y].TerrainChange == 0))//Tile to the east is a solid
+												if ((Tiles[x + dimx,y].tileType == TILE_SOLID) && (Tiles[x + dimx,y].TerrainChange == false) && (Tiles[x,y].TerrainChange == false))//Tile to the east is a solid
 												{
-														Tiles[x,y].VisibleFaces[vEAST] = 0;
-														Tiles[x + dimx,y].VisibleFaces[vWEST] = 0;
+														Tiles[x,y].VisibleFaces[vEAST] = false;
+														Tiles[x + dimx,y].VisibleFaces[vWEST] = false;
 												}
-												if ((Tiles[x,y + dimy].tileType == TILE_SOLID) && (Tiles[x,y].TerrainChange == 0) && (Tiles[x,y + dimy].TerrainChange == 0))//TIle to the north is a solid
+												if ((Tiles[x,y + dimy].tileType == TILE_SOLID) && (Tiles[x,y].TerrainChange == false) && (Tiles[x,y + dimy].TerrainChange == false))//TIle to the north is a solid
 												{
-														Tiles[x,y].VisibleFaces[vNORTH] = 0;
-														Tiles[x,y + dimy].VisibleFaces[vSOUTH] = 0;
+														Tiles[x,y].VisibleFaces[vNORTH] = false;
+														Tiles[x,y + dimy].VisibleFaces[vSOUTH] = false;
 												}
 										}
 								}
@@ -1262,57 +1261,57 @@ public class TileMap : Loader {
 								{
 								case TILE_DIAG_NW:
 										{
-												if ((Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y-1].TerrainChange == 0))
+												if ((Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y-1].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vSOUTH]=0;
-														Tiles[x,y - 1].VisibleFaces[vNORTH]=0;
+														Tiles[x,y].VisibleFaces[vSOUTH]=false;
+														Tiles[x,y - 1].VisibleFaces[vNORTH]=false;
 												}
-												if ((Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange==0))
+												if ((Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange== false))
 												{
-														Tiles[x,y].VisibleFaces[vEAST] = 0;
-														Tiles[x + 1,y].VisibleFaces[vWEST]=0;
+														Tiles[x,y].VisibleFaces[vEAST] = false;
+														Tiles[x + 1,y].VisibleFaces[vWEST]=false;
 												}
 										}
 										break;
 								case TILE_DIAG_NE:
 										{
-												if ((Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y - 1].TerrainChange == 0))
+												if ((Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y - 1].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vSOUTH] = 0;
-														Tiles[x,y - 1].VisibleFaces[vNORTH] = 0;
+														Tiles[x,y].VisibleFaces[vSOUTH] = false;
+														Tiles[x,y - 1].VisibleFaces[vNORTH] = false;
 												}
-												if ((Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == 0))
+												if ((Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vWEST] = 0;
-														Tiles[x - 1,y].VisibleFaces[vEAST] = 0;
+														Tiles[x,y].VisibleFaces[vWEST] = false;
+														Tiles[x - 1,y].VisibleFaces[vEAST] = false;
 												}
 										}
 										break;
 								case TILE_DIAG_SE:
 										{
-												if ((Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == 0))
+												if ((Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vNORTH] = 0;
-														Tiles[x,y + 1].VisibleFaces[vSOUTH] = 0;
+														Tiles[x,y].VisibleFaces[vNORTH] = false;
+														Tiles[x,y + 1].VisibleFaces[vSOUTH] = false;
 												}
-												if ((Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == 0))
+												if ((Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vWEST] = 0;
-														Tiles[x - 1,y].VisibleFaces[vEAST] = 0;
+														Tiles[x,y].VisibleFaces[vWEST] = false;
+														Tiles[x - 1,y].VisibleFaces[vEAST] = false;
 												}
 										}
 										break;
 								case TILE_DIAG_SW:
 										{
-												if ((Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == 0))
+												if ((Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vNORTH] = 0;
-														Tiles[x,y + 1].VisibleFaces[vSOUTH] = 0;
+														Tiles[x,y].VisibleFaces[vNORTH] = false;
+														Tiles[x,y + 1].VisibleFaces[vSOUTH] = false;
 												}
-												if ((Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange == 0))
+												if ((Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange == false))
 												{
-														Tiles[x,y].VisibleFaces[vEAST] = 0;
-														Tiles[x + 1,y].VisibleFaces[vWEST] = 0;
+														Tiles[x,y].VisibleFaces[vEAST] = false;
+														Tiles[x + 1,y].VisibleFaces[vWEST] = false;
 												}
 										}
 										break;
@@ -1324,44 +1323,44 @@ public class TileMap : Loader {
 
 				for (y = 1; y < TileMap.TileMapSizeY; y++){
 						for (x = 1; x < TileMap.TileMapSizeX; x++){
-								if ((Tiles[x,y].tileType == TILE_OPEN) && (Tiles[x,y].TerrainChange == 0) && (Tiles[x,y].BullFrog == 0))
+								if ((Tiles[x,y].tileType == TILE_OPEN) && (Tiles[x,y].TerrainChange == false))
 								{
 										if (
-												((Tiles[x + 1,y].tileType == TILE_OPEN) && (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x + 1,y].BullFrog == 0) && (Tiles[x + 1,y].floorHeight >= Tiles[x,y].floorHeight))
+												((Tiles[x + 1,y].tileType == TILE_OPEN) && (Tiles[x + 1,y].TerrainChange == false) && (Tiles[x + 1,y].floorHeight >= Tiles[x,y].floorHeight))
 												||
-												(Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange == 0) && (Tiles[x + 1,y].BullFrog == 0)
+												(Tiles[x + 1,y].tileType == TILE_SOLID) && (Tiles[x + 1,y].TerrainChange == false) 
 										)
 										{
-												Tiles[x,y].VisibleFaces[vEAST]=0;
+												Tiles[x,y].VisibleFaces[vEAST]=false;
 										}
 
 
 										if (
-												((Tiles[x - 1,y].tileType == TILE_OPEN) && (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x - 1,y].BullFrog == 0) && (Tiles[x - 1,y].floorHeight >= Tiles[x,y].floorHeight))
+												((Tiles[x - 1,y].tileType == TILE_OPEN) && (Tiles[x - 1,y].TerrainChange == false) && (Tiles[x - 1,y].floorHeight >= Tiles[x,y].floorHeight))
 												||
-												(Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == 0) && (Tiles[x - 1,y].BullFrog == 0)
+												(Tiles[x - 1,y].tileType == TILE_SOLID) && (Tiles[x - 1,y].TerrainChange == false)
 										)
 										{
-												Tiles[x,y].VisibleFaces[vWEST] = 0;
+												Tiles[x,y].VisibleFaces[vWEST] = false;
 										}
 
 
 										if (
-												((Tiles[x,y + 1].tileType == TILE_OPEN) && (Tiles[x,y + 1].TerrainChange == 0) && (Tiles[x,y + 1].BullFrog == 0) && (Tiles[x,y + 1].floorHeight >= Tiles[x,y].floorHeight))
+												((Tiles[x,y + 1].tileType == TILE_OPEN) && (Tiles[x,y + 1].TerrainChange == false) && (Tiles[x,y + 1].floorHeight >= Tiles[x,y].floorHeight))
 												||
-												(Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == 0) && (Tiles[x,y + 1].BullFrog == 0)
+												(Tiles[x,y + 1].tileType == TILE_SOLID) && (Tiles[x,y + 1].TerrainChange == false) 
 										)
 										{
-												Tiles[x,y].VisibleFaces[vNORTH] = 0;
+												Tiles[x,y].VisibleFaces[vNORTH] = false;
 										}
 
 										if (
-												((Tiles[x,y - 1].tileType == TILE_OPEN) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x,y - 1].BullFrog == 0) && (Tiles[x,y - 1].floorHeight >= Tiles[x,y].floorHeight))
+												((Tiles[x,y - 1].tileType == TILE_OPEN) && (Tiles[x,y - 1].TerrainChange == false) && (Tiles[x,y - 1].floorHeight >= Tiles[x,y].floorHeight))
 												||
-												(Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y - 1].TerrainChange == 0) && (Tiles[x,y - 1].BullFrog == 0)
+												(Tiles[x,y - 1].tileType == TILE_SOLID) && (Tiles[x,y - 1].TerrainChange == false)
 										)
 										{
-												Tiles[x,y].VisibleFaces[vSOUTH] = 0;
+												Tiles[x,y].VisibleFaces[vSOUTH] = false;
 										}
 								}
 
@@ -1387,25 +1386,25 @@ public class TileMap : Loader {
 										//Check along each axis
 										for (int i = 0; i < Tiles[x,y].DimX; i++)
 										{
-												if (Tiles[x + i,y].VisibleFaces[vNORTH] == 1)
+												if (Tiles[x + i,y].VisibleFaces[vNORTH] == true)
 												{
-														Tiles[x,y].VisibleFaces[vNORTH]=1;
+														Tiles[x,y].VisibleFaces[vNORTH]=true;
 												}
-												if (Tiles[x + i,y].VisibleFaces[vSOUTH] == 1)
+												if (Tiles[x + i,y].VisibleFaces[vSOUTH] == true)
 												{
-														Tiles[x,y].VisibleFaces[vSOUTH] = 1;
+														Tiles[x,y].VisibleFaces[vSOUTH] = true;
 												}
 										}
 
 										for (int i = 0; i < Tiles[x,y].DimY; i++)
 										{
-												if (Tiles[x,y+i].VisibleFaces[vEAST] == 1)
+												if (Tiles[x,y+i].VisibleFaces[vEAST] == true)
 												{
-														Tiles[x,y].VisibleFaces[vEAST] = 1;
+														Tiles[x,y].VisibleFaces[vEAST] = true;
 												}
-												if (Tiles[x,y+i].VisibleFaces[vWEST] == 1)
+												if (Tiles[x,y+i].VisibleFaces[vWEST] == true)
 												{
-														Tiles[x,y].VisibleFaces[vWEST] = 1;
+														Tiles[x,y].VisibleFaces[vWEST] = true;
 												}
 										}
 
@@ -1413,12 +1412,12 @@ public class TileMap : Loader {
 						}
 				}
 				for ( y = 0; y <= TileMap.TileMapSizeY; y++){
-						Tiles[0,y].VisibleFaces[vEAST]=1;
-						Tiles[TileMap.TileMapSizeX,y].VisibleFaces[vWEST] = 1;
+						Tiles[0,y].VisibleFaces[vEAST]=true;
+						Tiles[TileMap.TileMapSizeX,y].VisibleFaces[vWEST] = true;
 				}
 				for ( x = 0; x <= TileMap.TileMapSizeX; x++){
-						Tiles[x,0].VisibleFaces[vNORTH] = 1;
-						Tiles[x,TileMap.TileMapSizeY].VisibleFaces[vSOUTH] = 1;
+						Tiles[x,0].VisibleFaces[vNORTH] = true;
+						Tiles[x,TileMap.TileMapSizeY].VisibleFaces[vSOUTH] = true;
 				}
 		}
 
@@ -1429,7 +1428,7 @@ public class TileMap : Loader {
 				if(_RES==GAME_SHOCK)
 				{return false;}
 				//if ((t1.tileType >1) || (t1.hasElevator==1) || (t1.TerrainChange ==1) ||  (t2.hasElevator==1) || (t2.TerrainChange ==1) || (t1.isWater ==1) || (t2.isWater ==1)){	//autofail no none solid/open/special.
-				if ((t1.tileType >1) || (t1.hasElevator == 1) || (t1.TerrainChange == 1) || (t2.hasElevator == 1) || (t2.TerrainChange == 1)){	//autofail no none solid/open/special.
+				if ((t1.tileType >1)  || (t1.TerrainChange == true)  || (t2.TerrainChange == true)){	//autofail no none solid/open/special.
 						return false;
 				}
 				else

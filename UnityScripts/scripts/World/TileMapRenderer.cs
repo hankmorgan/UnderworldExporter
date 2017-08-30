@@ -140,7 +140,7 @@ public class TileMapRenderer : Loader{
 					TileInfo tmp=new TileInfo();
 					//Ceiling
 					tmp.tileType = 1;
-					tmp.Render = 1;
+					tmp.Render = true;
 					tmp.isWater = false;
 					tmp.tileX = 0;
 					tmp.tileY = 0;
@@ -153,12 +153,12 @@ public class TileMapRenderer : Loader{
 					tmp.West = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
 					tmp.North = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
 					tmp.South = Level.Tiles[0,0].shockCeilingTexture;//CAULK;
-					tmp.VisibleFaces[vTOP] = 0;
-					tmp.VisibleFaces[vEAST] = 0;
-					tmp.VisibleFaces[vBOTTOM] = 1;
-					tmp.VisibleFaces[vWEST] = 0;
-					tmp.VisibleFaces[vNORTH] = 0;
-					tmp.VisibleFaces[vSOUTH] = 0;
+					tmp.VisibleFaces[vTOP] = false;
+					tmp.VisibleFaces[vEAST] = false;
+					tmp.VisibleFaces[vBOTTOM] = true;
+					tmp.VisibleFaces[vWEST] = false;
+					tmp.VisibleFaces[vNORTH] = false;
+					tmp.VisibleFaces[vSOUTH] = false;
 					// top,east,bottom,west,north,south
 					RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
 				
@@ -1294,7 +1294,7 @@ public class TileMapRenderer : Loader{
 				//Get the number of faces
 				for (int i=0; i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								NumberOfVisibleFaces++;
 						}
@@ -1332,7 +1332,7 @@ public class TileMapRenderer : Loader{
 				float offset=0f;
 				for (int i=0;i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								switch(i)
 								{
@@ -1460,7 +1460,7 @@ public class TileMapRenderer : Loader{
 				int [] tris = new int[6];
 				for (int i=0;i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								tris[0]=0+(4*FaceCounter);
 								tris[1]=1+(4*FaceCounter);
@@ -1553,13 +1553,13 @@ public class TileMapRenderer : Loader{
 		/// <param name="Water">If set to <c>true</c> water.</param>
 		static void RenderSolidTile(GameObject parent, int x, int y, TileInfo t, bool Water)
 		{
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (t.isWater == Water)
 						{
 								string TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-								t.VisibleFaces[vTOP]=0;
-								t.VisibleFaces[vBOTTOM]=0;
+								t.VisibleFaces[vTOP]=false;
+								t.VisibleFaces[vBOTTOM]=false;
 								RenderCuboid( parent, x, y, t, Water, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ , TileName);
 						}
 				}
@@ -1577,25 +1577,25 @@ public class TileMapRenderer : Loader{
 		/// <param name="invert">If set to <c>true</c> invert.</param>
 		static void RenderOpenTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
-				if (t.Render == 1){
+				if (t.Render == true){
 						string TileName = "";
 						if (t.isWater == Water)
 						{
 								if (invert == false)
 								{
 										//Bottom face 
-										if ((t.hasElevator == 0))
+										if (t.TerrainChange)
 										{
-												if (t.BullFrog >0)
-												{
-														TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-														RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
-												}
-												else
-												{
-														TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-														RenderCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TileName);
-												}
+												//if (t.BullFrog)
+												//{
+												//		TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+												RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
+												//}
+												//else
+												//{
+												//		TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+												//		RenderCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TileName);
+												//}
 										}
 										else
 										{
@@ -1606,10 +1606,10 @@ public class TileMapRenderer : Loader{
 								else
 								{
 										//Ceiling version of the tile
-										short visB= t.VisibleFaces[vBOTTOM];
-										short visT= t.VisibleFaces[vTOP];
-										t.VisibleFaces[vBOTTOM]=1;
-										t.VisibleFaces[vTOP]=0;
+										bool visB= t.VisibleFaces[vBOTTOM];
+										bool visT= t.VisibleFaces[vTOP];
+										t.VisibleFaces[vBOTTOM]=true;
+										t.VisibleFaces[vTOP]=false;
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 										RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TileName);
 										t.VisibleFaces[vBOTTOM]=visB;
@@ -1634,7 +1634,7 @@ public class TileMapRenderer : Loader{
 				string TileName = "";
 				//int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
 
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (invert == false)
 						{
@@ -1649,10 +1649,10 @@ public class TileMapRenderer : Loader{
 								{
 										//it's floor
 										//RenderDiagNWPortion( FLOOR_ADJ, t.floorHeight, t,"DiagNW1");
-										short PreviousNorth = t.VisibleFaces[vNORTH];
-										short PreviousWest = t.VisibleFaces[vWEST];
-										t.VisibleFaces[vNORTH] = 0;
-										t.VisibleFaces[vWEST] = 0;
+										bool PreviousNorth = t.VisibleFaces[vNORTH];
+										bool PreviousWest = t.VisibleFaces[vWEST];
+										t.VisibleFaces[vNORTH] = false;
+										t.VisibleFaces[vWEST] = false;
 										RenderOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vNORTH] = PreviousNorth;
 										t.VisibleFaces[vWEST] = PreviousWest;
@@ -1661,8 +1661,8 @@ public class TileMapRenderer : Loader{
 						else
 						{//it's ceiling
 								//RenderDiagNWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagNW2a");
-								short vis= t.VisibleFaces[vBOTTOM];
-								t.VisibleFaces[vBOTTOM]=1;
+								bool vis= t.VisibleFaces[vBOTTOM];
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderOpenTile( parent , x, y, t, Water, true);
 								t.VisibleFaces[vBOTTOM]=vis;
 						}
@@ -1683,7 +1683,7 @@ public class TileMapRenderer : Loader{
 		static void RenderDiagSWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (invert == false)
 						{
@@ -1697,10 +1697,10 @@ public class TileMapRenderer : Loader{
 								{
 										//it's floor
 										//RenderDiagNEPortion( FLOOR_ADJ, t.floorHeight, t,"TileNe1");
-										short PreviousNorth = t.VisibleFaces[vNORTH];
-										short PreviousEast = t.VisibleFaces[vEAST];
-										t.VisibleFaces[vNORTH] = 0;
-										t.VisibleFaces[vEAST] = 0;
+										bool PreviousNorth = t.VisibleFaces[vNORTH];
+										bool PreviousEast = t.VisibleFaces[vEAST];
+										t.VisibleFaces[vNORTH] = false;
+										t.VisibleFaces[vEAST] = false;
 										RenderOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vNORTH] = PreviousNorth;
 										t.VisibleFaces[vEAST] = PreviousEast;
@@ -1710,8 +1710,8 @@ public class TileMapRenderer : Loader{
 						{
 								//its' ceiling.
 								//RenderDiagNEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "TileNe2");
-								short vis= t.VisibleFaces[vBOTTOM];
-								t.VisibleFaces[vBOTTOM]=1;
+								bool vis= t.VisibleFaces[vBOTTOM];
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderOpenTile( parent , x, y, t, Water, true);
 								t.VisibleFaces[vBOTTOM]=vis;
 						}
@@ -1732,7 +1732,7 @@ public class TileMapRenderer : Loader{
 		static void RenderDiagNETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName = "";
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false)
 						{
 								if (Water != true)
@@ -1744,10 +1744,10 @@ public class TileMapRenderer : Loader{
 								{
 										//it's floor
 										//RenderDiagSWPortion( FLOOR_ADJ, t.floorHeight, t, "DiagSW2");
-										short PreviousSouth = t.VisibleFaces[vSOUTH];
-										short PreviousWest = t.VisibleFaces[vWEST];
-										t.VisibleFaces[vSOUTH] = 0;
-										t.VisibleFaces[vWEST] = 0;
+										bool PreviousSouth = t.VisibleFaces[vSOUTH];
+										bool PreviousWest = t.VisibleFaces[vWEST];
+										t.VisibleFaces[vSOUTH] = false;
+										t.VisibleFaces[vWEST] = false;
 										RenderOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vSOUTH] = PreviousSouth;
 										t.VisibleFaces[vWEST] = PreviousWest;
@@ -1756,8 +1756,8 @@ public class TileMapRenderer : Loader{
 						else
 						{//it's ceiling
 								//RenderDiagSWPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagSE3");
-								short vis= t.VisibleFaces[vBOTTOM];
-								t.VisibleFaces[vBOTTOM]=1;
+								bool vis= t.VisibleFaces[vBOTTOM];
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderOpenTile( parent , x, y, t, Water, true);
 								t.VisibleFaces[vBOTTOM]=vis;
 						}
@@ -1778,7 +1778,7 @@ public class TileMapRenderer : Loader{
 		static void RenderDiagNWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (invert == false)
 						{
@@ -1793,10 +1793,10 @@ public class TileMapRenderer : Loader{
 								{//TODO:Update these floors to only show the top surface.
 										//it's floor
 										//RenderDiagSEPortion( FLOOR_ADJ, t.floorHeight, t, "DiagSE2");
-										short PreviousSouth = t.VisibleFaces[vSOUTH];
-										short PreviousEast = t.VisibleFaces[vEAST];
-										t.VisibleFaces[vSOUTH] = 0;
-										t.VisibleFaces[vEAST] = 0;
+										bool PreviousSouth = t.VisibleFaces[vSOUTH];
+										bool PreviousEast = t.VisibleFaces[vEAST];
+										t.VisibleFaces[vSOUTH] = false;
+										t.VisibleFaces[vEAST] = false;
 										RenderOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vSOUTH] = PreviousSouth;
 										t.VisibleFaces[vEAST] = PreviousEast;
@@ -1805,8 +1805,8 @@ public class TileMapRenderer : Loader{
 						else
 						{//it's ceiling
 								//RenderDiagSEPortion( CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, t, "DiagSE3");
-								short vis= t.VisibleFaces[vBOTTOM];
-								t.VisibleFaces[vBOTTOM]=1;
+								bool vis= t.VisibleFaces[vBOTTOM];
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderOpenTile( parent , x, y, t, Water, true);
 								t.VisibleFaces[vBOTTOM]=vis;
 						}
@@ -1826,7 +1826,7 @@ public class TileMapRenderer : Loader{
 		static void RenderSlopeNTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false)
 						{
 								if (t.isWater == Water)
@@ -1840,10 +1840,10 @@ public class TileMapRenderer : Loader{
 						{
 								//It's invert
 								TileName = "N_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								short visB= t.VisibleFaces[vBOTTOM];
-								short visT= t.VisibleFaces[vTOP];
-								t.VisibleFaces[vBOTTOM]=1;
-								t.VisibleFaces[vTOP]=0;
+								bool visB= t.VisibleFaces[vBOTTOM];
+								bool visT= t.VisibleFaces[vTOP];
+								t.VisibleFaces[vBOTTOM]=true;
+								t.VisibleFaces[vTOP]=false;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_N, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
@@ -1864,7 +1864,7 @@ public class TileMapRenderer : Loader{
 		static void RenderSlopeSTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false)
 						{
 								if (t.isWater == Water)
@@ -1878,10 +1878,10 @@ public class TileMapRenderer : Loader{
 						{
 								//It's invert
 								TileName = "S_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								short visB= t.VisibleFaces[vBOTTOM];
-								short visT= t.VisibleFaces[vTOP];
-								t.VisibleFaces[vBOTTOM]=1;
-								t.VisibleFaces[vTOP]=0;
+								bool visB= t.VisibleFaces[vBOTTOM];
+								bool visT= t.VisibleFaces[vTOP];
+								t.VisibleFaces[vBOTTOM]=true;
+								t.VisibleFaces[vTOP]=false;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_S, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
@@ -1902,7 +1902,7 @@ public class TileMapRenderer : Loader{
 		static void RenderSlopeWTile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false)
 						{
 								if (t.isWater == Water)
@@ -1916,10 +1916,10 @@ public class TileMapRenderer : Loader{
 						{
 								//It's invert
 								TileName = "W_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								short visB= t.VisibleFaces[vBOTTOM];
-								short visT= t.VisibleFaces[vTOP];
-								t.VisibleFaces[vBOTTOM]=1;
-								t.VisibleFaces[vTOP]=0;
+								bool visB= t.VisibleFaces[vBOTTOM];
+								bool visT= t.VisibleFaces[vTOP];
+								t.VisibleFaces[vBOTTOM]=true;
+								t.VisibleFaces[vTOP]=false;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_W, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
@@ -1940,7 +1940,7 @@ public class TileMapRenderer : Loader{
 		static void RenderSlopeETile(GameObject parent,int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				string TileName="";
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false)
 						{
 								if (t.isWater == Water)
@@ -1954,10 +1954,10 @@ public class TileMapRenderer : Loader{
 						{
 								//It's invert
 								TileName = "E_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								short visB= t.VisibleFaces[vBOTTOM];
-								short visT= t.VisibleFaces[vTOP];
-								t.VisibleFaces[vBOTTOM]=1;
-								t.VisibleFaces[vTOP]=0;
+								bool visB= t.VisibleFaces[vBOTTOM];
+								bool visT= t.VisibleFaces[vTOP];
+								t.VisibleFaces[vBOTTOM]=true;
+								t.VisibleFaces[vTOP]=false;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_E, t.shockSteep, 0, TileName);
 								t.VisibleFaces[vBOTTOM]=visB;
 								t.VisibleFaces[vTOP]=visT;
@@ -1991,7 +1991,7 @@ public class TileMapRenderer : Loader{
 				else
 				{
 					string TileName = "VNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-					t.VisibleFaces[vBOTTOM]=1;
+					t.VisibleFaces[vBOTTOM]=true;
 					RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SE, t.shockSteep, 0, TileName);
 				}
 				return;
@@ -2023,8 +2023,8 @@ public class TileMapRenderer : Loader{
 				else
 				{
 					string TileName = "VNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-					t.VisibleFaces[vBOTTOM]=1;
-						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SW, t.shockSteep, 0, TileName);
+					t.VisibleFaces[vBOTTOM]=true;
+					RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SW, t.shockSteep, 0, TileName);
 				}
 		}
 
@@ -2056,7 +2056,7 @@ public class TileMapRenderer : Loader{
 				else
 				{
 					string TileName = "VSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-					t.VisibleFaces[vBOTTOM]=1;
+					t.VisibleFaces[vBOTTOM]=true;
 					RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NE, t.shockSteep, 0, TileName);							
 				}
 	
@@ -2088,7 +2088,7 @@ public class TileMapRenderer : Loader{
 				else
 				{
 						string TileName = "VSE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-						t.VisibleFaces[vBOTTOM]=1;
+						t.VisibleFaces[vBOTTOM]=true;
 						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NW, t.shockSteep, 0, TileName);							
 							
 				}
@@ -2107,7 +2107,7 @@ public class TileMapRenderer : Loader{
 		static void RenderRidgeNWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (invert == false)
 
@@ -2124,7 +2124,7 @@ public class TileMapRenderer : Loader{
 						{
 								//made of upper slope e and upper slope s
 								string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								t.VisibleFaces[vBOTTOM]=1;
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SE, t.shockSteep, 0, TileName);							
 
 								//RenderSlopeETile( parent , x, y, t, Water, invert);
@@ -2147,7 +2147,7 @@ public class TileMapRenderer : Loader{
 		static void RenderRidgeNETile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 
-				if (t.Render == 1){
+				if (t.Render == true){
 						if (invert == false){
 								if (t.isWater == Water)
 								{
@@ -2162,7 +2162,7 @@ public class TileMapRenderer : Loader{
 								//RenderSlopeSTile( parent , x, y, t, Water, invert);
 								//RenderSlopeWTile( parent , x, y, t, Water, invert);
 								string TileName = "RNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								t.VisibleFaces[vBOTTOM]=1;
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SW, t.shockSteep, 0, TileName);							
 
 						}
@@ -2183,7 +2183,7 @@ public class TileMapRenderer : Loader{
 		static void RenderRidgeSWTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				//consists of a slope s and a slope w
-				if (t.Render == 1)
+				if (t.Render == true)
 				if (invert == false)
 				{
 						{
@@ -2202,7 +2202,7 @@ public class TileMapRenderer : Loader{
 						//RenderSlopeNTile( parent , x, y, t, Water, invert);
 						//RenderSlopeWTile( parent , x, y, t, Water, invert);
 						string TileName = "RSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-						t.VisibleFaces[vBOTTOM]=1;
+						t.VisibleFaces[vBOTTOM]=true;
 						RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NE, t.shockSteep, 0, TileName);							
 
 
@@ -2224,7 +2224,7 @@ public class TileMapRenderer : Loader{
 				//consists of a slope s and a slope e
 				//done
 
-				if (t.Render == 1)
+				if (t.Render == true)
 				{
 						if (invert == false)
 						{
@@ -2243,7 +2243,7 @@ public class TileMapRenderer : Loader{
 								//RenderSlopeNTile( parent , x, y, t, Water, invert);
 								//RenderSlopeWTile( parent , x, y, t, Water, invert);
 								string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
-								t.VisibleFaces[vBOTTOM]=1;
+								t.VisibleFaces[vBOTTOM]=true;
 								RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NW, t.shockSteep, 0, TileName);							
 
 
@@ -2273,7 +2273,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vNORTH) || (i==vWEST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										NumberOfVisibleFaces++;
 								}
@@ -2324,7 +2324,7 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vWEST)))
+						if ((t.VisibleFaces[i]==true) && ((i==vNORTH) || (i==vWEST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{
@@ -2385,7 +2385,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vNORTH) || (i==vWEST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										tris[0]=0+(4*FaceCounter);
 										tris[1]=1+(4*FaceCounter);
@@ -2432,7 +2432,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vNORTH) || (i==vEAST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										NumberOfVisibleFaces++;
 								}
@@ -2483,7 +2483,7 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vNORTH) || (i==vEAST)))
+						if ((t.VisibleFaces[i]==true) && ((i==vNORTH) || (i==vEAST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{
@@ -2545,7 +2545,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vNORTH) || (i==vEAST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										tris[0]=0+(4*FaceCounter);
 										tris[1]=1+(4*FaceCounter);
@@ -2594,7 +2594,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vSOUTH) || (i==vEAST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										NumberOfVisibleFaces++;
 								}
@@ -2644,7 +2644,7 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vSOUTH) || (i==vEAST)))
+						if ((t.VisibleFaces[i]==true) && ((i==vSOUTH) || (i==vEAST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{
@@ -2705,7 +2705,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vSOUTH) || (i==vEAST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										tris[0]=0+(4*FaceCounter);
 										tris[1]=1+(4*FaceCounter);
@@ -2754,7 +2754,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vSOUTH) || (i==vWEST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										NumberOfVisibleFaces++;
 								}
@@ -2804,7 +2804,7 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0;i<6;i++)
 				{
-						if ((t.VisibleFaces[i]==1) && ((i==vSOUTH) || (i==vWEST)))
+						if ((t.VisibleFaces[i]==true) && ((i==vSOUTH) || (i==vWEST)))
 						{//Will only render north or west if needed.
 								switch(i)
 								{
@@ -2865,7 +2865,7 @@ public class TileMapRenderer : Loader{
 				{
 						if ((i==vSOUTH) || (i==vWEST))
 						{
-								if (t.VisibleFaces[i]==1)
+								if (t.VisibleFaces[i]==true)
 								{
 										tris[0]=0+(4*FaceCounter);
 										tris[1]=1+(4*FaceCounter);
@@ -3324,7 +3324,7 @@ public class TileMapRenderer : Loader{
 				//Get the number of faces
 				for (int i=0; i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								NumberOfVisibleFaces++;
 								if (  
@@ -3388,7 +3388,7 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0;i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								switch(i)
 								{
@@ -3967,7 +3967,7 @@ public class TileMapRenderer : Loader{
 				int LastIndex=0;
 				for (int i=0;i<6;i++)
 				{
-					if (t.VisibleFaces[i]==1)
+					if (t.VisibleFaces[i]==true)
 					{
 						tris[0]=0+(4*FaceCounter) ;
 						tris[1]=1+(4*FaceCounter) ;
@@ -3988,7 +3988,7 @@ public class TileMapRenderer : Loader{
 				LastIndex++;
 				for (int i=0;i<6;i++)
 				{
-						if (t.VisibleFaces[i]==1)
+						if (t.VisibleFaces[i]==true)
 						{
 								if (  
 										( ((SlopeDir==TILE_SLOPE_N) || (SlopeDir==TILE_SLOPE_S)) && ((i==vWEST) || (i==vEAST) ) )
