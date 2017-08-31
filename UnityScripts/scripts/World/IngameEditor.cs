@@ -706,8 +706,21 @@ public class IngameEditor : GuiBase_Draggable {
 
 		public void Teleport()
 		{
+				
 				float targetX=(float)TileX*1.2f + 0.6f;
 				float targetY= (float)TileY*1.2f + 0.6f;
+				if (ObjectDetailsPanel.gameObject.activeInHierarchy)
+				{
+						if (currObj.tileX!=99)
+						{
+								targetX=(float)currObj.tileX*1.2f + 0.6f;	
+						}
+						if (currObj.tileY!=99)
+						{
+								targetY=(float)currObj.tileY*1.2f + 0.6f;	
+						}
+
+				}
 
 				float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TileX,TileY)))*0.15f;
 				GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);

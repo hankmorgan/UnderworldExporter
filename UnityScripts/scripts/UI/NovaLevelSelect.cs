@@ -11,7 +11,6 @@ public class NovaLevelSelect : GuiBase {
 
 	public override void Start ()
 	{
-
 		base.Start ();
 		if (File.Exists(Application.dataPath + "//..//tnova_path.txt"))
 		{			
@@ -23,8 +22,7 @@ public class NovaLevelSelect : GuiBase {
 			{
 				Select.options.Add(new Dropdown.OptionData(pFiles[i].Replace(NovaPath+"\\","")));
 			}
-		}
-		
+		}		
 	}
 
 	public void SelectOption()

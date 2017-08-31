@@ -310,6 +310,10 @@ public class GameWorldController : UWEBase {
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
 		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
 		Loader.BasePath=fileReader.ReadLine().TrimEnd();
+		if (Loader.BasePath.EndsWith("\\") !=true)
+		{
+			Loader.BasePath = Loader.BasePath + "\\";
+		}
 	}
 
 	/// <summary>
@@ -1554,6 +1558,7 @@ public class GameWorldController : UWEBase {
 					}
 					playerUW.playerCam.GetComponent<Light>().range=200f;
 					playerUW.playerCam.farClipPlane=3000f;
+						playerUW.playerCam.renderingPath = RenderingPath.DeferredShading;
 					TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
 
 			}

@@ -1,7 +1,7 @@
 UnderworldExporter
 ==================
  
-Welcome to Underworld Exporter -> Ultima Underworld 1 & 2 in Unity. 
+Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity. 
 
 
 Contents
@@ -15,7 +15,7 @@ Contents
 
 1 Games Supported
 
-	The following Looking Glass Studios games are supported to various levels. Original game files are required to play.
+	The following Looking Glass Studios games are supported to various levels. Original game files are absolutley required to play however in the interests of full disclosure some UI assets and sound effects are bundled with this download.
 
 	1.1 Ultima Underworld 1 (UW1).
 		UW1 is fully supported and can be completed from start to finish. Save games are both forward and backwardly compatable with the original dos version.
@@ -176,14 +176,18 @@ Contents
 			Texture Map Editor: Allows changing of the level wall, floor and door texture palette 
 				Clicking on the this option brings up a display of all textures in the map. Clicking on a texture selects it. The selected texture can then be changed from the drop down.
 
-6 Some known bugs
-	Limited range of resolutions.
+6 Some known bugs and issues
+	Limited range of resolutions due to using original game art.
+	Very few 3d models are implemented. These will display as sprites. Use your imagination.
 	The automap may hitch the first time you open it. Subsequent usage is okay.
 	Map notes may not scale in size with your resolution.
 	Animated textures use a special shader that cycles the game palette. Currently this shader does not support lighting and animated textures will appear full bright.
 	Npcs in combat do not turn to face you quickly. NPC AI in general is not great at combat so try and play fair with them.
 	UW2 is very buggy and not as feature complete as UW1.
 	No weapon animations in UW0. Animations in UW2 are misaligned.
+	Occasional glitches may occur when loading save games produced by UWE in vanilla underworld.
+	Pushing against NPCs may allow you to walk over them.	
+	Sound design is very basic at the moment. Sound effects are from Underworld 2.
 
 7 Credits
 	This project would not be possible without the trailblazing work of Blue Sky Software (LookingGlass Studios) and the various teams that dug deep into the file formats of the Underworld and Shock games. Thanks. See the code credits.txt file for some specific examples where I took code from earlier projects.
