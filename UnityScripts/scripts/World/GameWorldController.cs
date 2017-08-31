@@ -305,7 +305,7 @@ public class GameWorldController : UWEBase {
 
 	public KeyBindings keybinds;
 
-	void  LoadPath(string game)
+	void LoadPath(string game)
 	{
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
 		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);

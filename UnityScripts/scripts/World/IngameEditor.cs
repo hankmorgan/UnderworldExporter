@@ -53,6 +53,7 @@ public class IngameEditor : GuiBase_Draggable {
 		public RectTransform TileMapDetailsPanel;
 		public RectTransform ObjectDetailsPanel;
 		public RectTransform TextureMapDetailsPanel;
+		public RectTransform MobileObjectDetailsPanel;
 
 		public static IngameEditor instance;
 
@@ -66,6 +67,16 @@ public class IngameEditor : GuiBase_Draggable {
 		public Toggle LockTileHeight;
 		public Toggle LockFloorTextures;
 		public Toggle LockWallTextures;
+
+		public InputField npc_whoami;
+		public InputField npc_xhome;
+		public InputField npc_yhome;
+		public InputField npc_hp;
+		public Dropdown npc_goal;
+		public InputField npc_goaltarget;
+		public InputField npc_attitude;
+		public InputField npc_talkedto;
+
 
 		public static bool FollowMeMode=false;
 
@@ -85,6 +96,7 @@ public class IngameEditor : GuiBase_Draggable {
 						UpdateDoorTexturesGrid();
 						RefreshTileMap();
 						RefreshTileInfo();
+						UpdateNPCGoals();
 				}
 				//Initiliase Item Ids
 				for (int i=0; i<=GameWorldController.instance.objectMaster.desc.GetUpperBound(0);i++)
@@ -101,9 +113,28 @@ public class IngameEditor : GuiBase_Draggable {
 						string itemtext= ObjectLoader.UniqueObjectNameEditor(GameWorldController.instance.CurrentObjectList().objInfo[i]);
 						ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
 				}
-				FloorTextureSelect.RefreshShownValue();
+				ObjectSelect.RefreshShownValue();
 		}
 
+
+		void UpdateNPCGoals()
+		{
+				npc_goal.ClearOptions();
+				npc_goal.options.Add(new Dropdown.OptionData("0-Stand Still"));
+				npc_goal.options.Add(new Dropdown.OptionData("1-Random Movement"));
+				npc_goal.options.Add(new Dropdown.OptionData("2-Random Movement"));
+				npc_goal.options.Add(new Dropdown.OptionData("3-Follow Target"));
+				npc_goal.options.Add(new Dropdown.OptionData("4-Random Movement"));
+				npc_goal.options.Add(new Dropdown.OptionData("5-Attack Target"));
+				npc_goal.options.Add(new Dropdown.OptionData("6-Flee Target"));
+				npc_goal.options.Add(new Dropdown.OptionData("7-Stand Still"));
+				npc_goal.options.Add(new Dropdown.OptionData("8-Random Movement"));
+				npc_goal.options.Add(new Dropdown.OptionData("9-Attack Target"));
+				npc_goal.options.Add(new Dropdown.OptionData("10-Begin Conversation"));
+				npc_goal.options.Add(new Dropdown.OptionData("11-Stand Still"));
+				npc_goal.options.Add(new Dropdown.OptionData("12-Stand Still"));
+				npc_goal.RefreshShownValue();
+		}
 
 		void UpdateFloorTexturesDropDown()
 		{
@@ -705,6 +736,10 @@ public class IngameEditor : GuiBase_Draggable {
 			{
 				UpdateObjectsDropDown();
 			}
+			if (Panel!=1)
+			{
+				MobileObjectDetailsPanel.gameObject.SetActive(false);
+			}
 		}
 
 
@@ -748,6 +783,19 @@ public class IngameEditor : GuiBase_Draggable {
 			ObjectYPos.text=currObj.y.ToString();
 			ObjectZPos.text=currObj.zpos.ToString();
 
+			MobileObjectDetailsPanel.gameObject.SetActive((currObj.index<=255));
+			if (currObj.index<=255)
+			{
+				//populate mobile data
+				npc_whoami.text=currObj.npc_whoami.ToString();
+				npc_xhome.text=currObj.npc_xhome.ToString();
+				npc_yhome.text=currObj.npc_yhome.ToString();
+				npc_hp.text=currObj.npc_hp.ToString();
+				npc_goal.value=currObj.npc_goal;
+				npc_goaltarget.text=currObj.npc_gtarg.ToString();
+				npc_attitude.text=currObj.npc_attitude.ToString();
+				npc_talkedto.text=currObj.npc_talkedto.ToString();
+			}
 		}
 
 
@@ -857,6 +905,50 @@ public class IngameEditor : GuiBase_Draggable {
 				currObj.quality= (short)(val & 0x3F);
 				ObjectQuality.text=currObj.quality.ToString();
 			}
+
+				if (currObj.index<=255)
+				{//A mobile object
+						if (int.TryParse(npc_whoami.text, out val))
+						{
+							currObj.npc_whoami =(short)(val);
+							npc_whoami.text=currObj.npc_whoami.ToString();
+						}
+						if (int.TryParse(npc_xhome.text, out val))
+						{
+							currObj.npc_xhome =(short)(val);
+							npc_xhome.text=currObj.npc_xhome.ToString();
+						}
+						if (int.TryParse(npc_yhome.text, out val))
+						{
+							currObj.npc_yhome =(short)(val);
+							npc_yhome.text=currObj.npc_yhome.ToString();
+						}
+						if (int.TryParse(npc_hp.text, out val))
+						{
+							currObj.npc_hp =(short)(val);
+							npc_hp.text=currObj.npc_hp.ToString();
+						}
+
+						currObj.npc_goal=(short)npc_goal.value;
+
+						if (int.TryParse(npc_goaltarget.text, out val))
+						{
+								currObj.npc_gtarg =(short)(val);
+								npc_goaltarget.text=currObj.npc_gtarg.ToString();
+						}
+
+
+						if (int.TryParse(npc_attitude.text, out val))
+						{
+							currObj.npc_attitude =(short)(val);
+							npc_attitude.text=currObj.npc_attitude.ToString();
+						}
+						if (int.TryParse(npc_talkedto.text, out val))
+						{
+							currObj.npc_talkedto =(short)(val & 0x1);
+							npc_talkedto.text=currObj.npc_talkedto.ToString();
+						}
+				}
 
 			switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
 			{
