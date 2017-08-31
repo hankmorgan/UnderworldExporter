@@ -412,7 +412,8 @@ public class WindowDetectUW : WindowDetect {
 				{
 						if (WindowDetect.InMap==false)
 						{
-								if ((Event.current.Equals(Event.KeyboardEvent("f")) && (WaitingForInput==false)))
+								//if ((Event.current.Equals(Event.KeyboardEvent("f")) && (WaitingForInput==false)))
+								if  ( (Event.current.keyCode == KeyBindings.instance.ToggleFullScreen) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
 								{//Toggle full screen.
 										if (FullScreen==true)
 										{
@@ -423,13 +424,16 @@ public class WindowDetectUW : WindowDetect {
 												SetFullScreen();
 										}
 								}
-								if ((Event.current.Equals(Event.KeyboardEvent("t"))) && (WaitingForInput==false))
+								//if ((Event.current.Equals(Event.KeyboardEvent("t"))) && (WaitingForInput==false))
+								if  ( (Event.current.keyCode == KeyBindings.instance.TrackSkill) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
+								//if ( ( Input.GetKey(KeyCode.T) ) && (WaitingForInput==false))
 								{//Tracking skill
 										TryTracking();	
 								}
 
 
-								if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
+								//if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
+								if  ( (Event.current.keyCode == KeyBindings.instance.ToggleMouseLook) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
 								{			
 										if (GameWorldController.instance.playerUW.MouseLookEnabled==false)
 										{//Switch to mouse look.

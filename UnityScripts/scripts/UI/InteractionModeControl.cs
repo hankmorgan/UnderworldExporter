@@ -5,7 +5,7 @@ public class InteractionModeControl : GuiBase_Draggable {
 
 	//The mode selection UI elements master control
 	public RawImage[] Controls=new RawImage[6];
-
+	public InteractionModeControlItem[] ControlItems = new InteractionModeControlItem[6];
 
 	public static bool UpdateNow=true;
 

@@ -175,7 +175,7 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// Gameobject to load the objects at
 	/// </summary>
-	public GameObject ObjectMarker;
+	public GameObject _ObjectMarker;
 
 		/// <summary>
 		/// The object lists for each level.
@@ -302,6 +302,9 @@ public class GameWorldController : UWEBase {
 	public static bool ObjectReRenderPending=false;
 	public static bool FullReRender=false;
 
+
+	public KeyBindings keybinds;
+
 	void  LoadPath(string game)
 	{
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
@@ -358,6 +361,7 @@ public class GameWorldController : UWEBase {
 				LoadPath(res);
 				UWEBase._RES = res;//game;
 				Loader._RES= res;//game;
+				keybinds.ApplyBindings();//Applies keybinds to certain controls
 				switch(res)
 				{
 				case GAME_TNOVA:
@@ -475,6 +479,7 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.Begin();
 						playerUW.Begin();
 						playerUW.playerInventory.Begin();
+						playerUW.quest().QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 						convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
 						break;		
@@ -636,13 +641,12 @@ public class GameWorldController : UWEBase {
 	}
 	
 	/// <summary>
-	/// Returns the transform of the levels object marker. So objects will remain on that level
+	/// Returns the transform of the levels object marker where objects are generated on.
 	/// </summary>
 	/// <returns>The marker.</returns>
 	public Transform LevelMarker()
 	{
-		return ObjectMarker.transform;
-		//return LevelObjects[LevelNo].transform;
+		return _ObjectMarker.transform;
 	}
 
 	/// <summary>
@@ -985,7 +989,7 @@ public class GameWorldController : UWEBase {
 
 		public void UpdatePositions()
 		{
-			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
+			foreach (Transform t in GameWorldController.instance.LevelMarker()) 
 			{
 				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{

@@ -1458,7 +1458,7 @@ public class ObjectLoader : Loader {
 					}		
 			}
 
-			foreach (Transform t in GameWorldController.instance.ObjectMarker.transform) 
+			foreach (Transform t in GameWorldController.instance.LevelMarker()) 
 			{
 				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{

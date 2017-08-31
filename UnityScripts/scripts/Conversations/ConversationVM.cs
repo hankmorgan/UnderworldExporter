@@ -1328,7 +1328,7 @@ public class ConversationVM : UWEBase {
 				}
 
 
-
+			yield return new WaitForSecondsRealtime(0.2f);
 
 			yield return 0;
 		}

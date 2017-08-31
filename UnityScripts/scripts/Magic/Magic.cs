@@ -2711,7 +2711,9 @@ public class Magic : UWEBase {
 		{
 			if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)){return;}
 			if (
-					(Event.current.Equals(Event.KeyboardEvent("q")))
+					(Event.current.keyCode == KeyBindings.instance.CastSpell)
+					&&
+					(Event.current.type==EventType.KeyDown)
 					&&
 					(UWHUD.instance.window.JustClicked==false)
 					&&

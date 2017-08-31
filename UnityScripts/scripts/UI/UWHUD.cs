@@ -137,6 +137,7 @@ public class UWHUD : HUD {
 		public Text editorButtonLabel;
 		public IngameEditor editor;
 
+		public InteractionModeControl InteractionControl;
 
 		void Awake()
 		{
