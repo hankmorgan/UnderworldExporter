@@ -223,7 +223,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 	private void OptionSave()
 	{
-		if (_RES==GAME_UW2)
+		if (_RES==GAME_UW1)
 		{
 			DisplayBG.texture= SaveBG;
 			SaveMenu.SetActive(false);
