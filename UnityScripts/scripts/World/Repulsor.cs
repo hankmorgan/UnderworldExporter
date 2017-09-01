@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Repulsor : MonoBehaviour {
-
+		//do not use code is crap!
 	public bool RepulsorOn;
 	public bool PlayerInside;
 	public float TargetHeight;
@@ -79,7 +79,7 @@ public class Repulsor : MonoBehaviour {
 			}
 			else
 			{
-				return true;
+								yield return 0;
 			}
 		}
 		if (PlayerInside==true)

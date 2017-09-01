@@ -1170,7 +1170,7 @@ public class SaveGame : Loader {
 				}
 
 
-				writer.Close();
+				writer.Close();//The file now saved is un-encrypted
 
 				char[] buffer;
 				//Reopen and encrypt the file

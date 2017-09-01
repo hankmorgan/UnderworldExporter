@@ -386,13 +386,18 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// </summary>
 		/// <param name="SlotNo">Slot no.</param>
 		private void SaveToSlot(int SlotNo)
-		{
+		{				
 			//000~001~159~Impossible, you are between worlds. \n
 			if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
 			{
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,159));
 				return;
 			}
+				if (!Directory.Exists(Loader.BasePath + "save" + (SlotNo+1)))
+				{
+						Directory.CreateDirectory(Loader.BasePath + "save" + (SlotNo+1));
+				}
+
 			//Write lev.ark file and object lists
 			GameWorldController.instance.WriteBackLevArk(SlotNo+1);
 
