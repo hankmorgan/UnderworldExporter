@@ -258,7 +258,7 @@ public class ObjectInteraction : UWEBase {
 		//public int Quality;
 		//public bool isQuant;
 		//public bool isEnchanted();
-		public bool isIdentified;
+		//public bool isIdentified;
 
 		//Display controls
 		//public static TextureController tc;
@@ -279,7 +279,12 @@ public class ObjectInteraction : UWEBase {
 		//public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
-
+		public enum IdentificationFlags
+		{
+			Unidentified=0,
+			PartiallyIdentified=1,
+			Identified=2
+		};
 
 		public ObjectLoaderInfo objectloaderinfo;
 
@@ -1463,7 +1468,12 @@ public class ObjectInteraction : UWEBase {
 			//float dist =Vector3.Distance(this.transform.position,startPos);
 			if ((Vector3.Distance(this.transform.position,startPos)<=0.2f) && (tileX!=TileMap.ObjectStorageTile))
 				{//No movement or not on the map Just update heading.
-					heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);	
+					if (
+								objectloaderinfo.index>=256				
+						)						
+						{//Only update the heading on the mobile objects.
+						heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);
+						}					
 				}
 			else
 			{
@@ -2070,5 +2080,23 @@ public class ObjectInteraction : UWEBase {
 		public bool CanBePickedUp()
 		{
 			return  (GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp==1 || this.GetComponent<object_base>().CanBePickedUp());
+		}
+
+
+		/// <summary>
+		/// Returns if the object has been identified. Based on the heading value of the object.
+		/// </summary>
+		public IdentificationFlags identity()
+		{
+			switch(heading>>2)	
+			{
+			case 2:
+					return IdentificationFlags.Identified;
+			case 1:
+					return IdentificationFlags.PartiallyIdentified;
+			default:
+			case 0:
+					return IdentificationFlags.Unidentified;
+			}
 		}
 }

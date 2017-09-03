@@ -420,7 +420,7 @@ public class SaveGame : Loader {
 										objLoader.objInfo[x].tileY=TileMap.ObjectStorageTile;
 										objLoader.objInfo[x].InUseFlag=1;
 										objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer,i+0,16)) & 0x1FF;
-										objLoader.objInfo[x].flags  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x0F);
+										objLoader.objInfo[x].flags  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x07);
 										objLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 12) & 0x01);
 										objLoader.objInfo[x].doordir  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 13) & 0x01);
 										objLoader.objInfo[x].invis  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 14 )& 0x01);

@@ -1522,11 +1522,13 @@ public class Magic : UWEBase {
 								float dropRange=playerUW.GetUseRange();
 								if (Physics.Raycast(ray,out hit,dropRange))	
 								{//The spell has hit something
-										ObjectInteraction objInt =hit.transform.gameObject.GetComponent<ObjectInteraction>();
-										if (objInt!=null)
-										{
-												objInt.isIdentified=true;
-										}
+									ObjectInteraction objInt =hit.transform.gameObject.GetComponent<ObjectInteraction>();
+									if (objInt!=null)
+									{
+										objInt.heading= 7;
+										objInt.LookDescription();
+											//objInt.isIdentified=true;
+									}
 								}										
 						}
 						else
@@ -1538,7 +1540,9 @@ public class Magic : UWEBase {
 										ObjectInteraction objInt =ObjectInSlot.GetComponent<ObjectInteraction>();
 										if (objInt!=null)
 										{
-												objInt.isIdentified=true;
+												//objInt.isIdentified=true;
+											objInt.heading= 7;
+											objInt.LookDescription();
 										}		
 								}
 						}

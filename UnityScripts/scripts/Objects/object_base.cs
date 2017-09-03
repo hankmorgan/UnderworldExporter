@@ -583,10 +583,10 @@ public class object_base : UWEBase {
 			case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 			case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
 			case SpellEffect.UW1_Spell_Effect_PoisonHidden:
-						return 10;
+						//return 10;
 			default:
-					Debug.Log("EffectID" + EffectID + " unknownn");
-					return 5;
+					//Debug.Log("EffectID" + EffectID + " unknownn");
+				return Random.Range(1,31);//This is totally wrong!
 			}			
 	}
 

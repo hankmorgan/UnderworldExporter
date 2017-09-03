@@ -94,23 +94,24 @@ public class enchantment_base : object_base {
 		case 187 :// a_red_potion
 		case 188 :// a_green_potion
 		default:
-			if (objInt().isIdentified==true)
-				{
+			switch(objInt().identity())
+			{
+			case ObjectInteraction.IdentificationFlags.Identified:
 					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
-				}
-			else
-				{
+					break;
+			case ObjectInteraction.IdentificationFlags.Unidentified:
+			case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
 					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
-						objInt().isIdentified=true;
+						objInt().heading=7;
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 					}
 					else
 					{
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));		
 					}					
-				}
-				
+					break;
+			}				
 			break;			
 		}
 		return true;

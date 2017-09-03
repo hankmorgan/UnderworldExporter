@@ -84,25 +84,28 @@ public class Wand : enchantment_base {
 	public override bool LookAt ()
 	{
 	string FormattedName="";
-	
-		if (objInt().isIdentified==true)
-			{
-				FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
-			}
-		else
-			{
-				if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+				bool isIdentified=true;
+				switch(objInt().identity())
 				{
-					objInt().isIdentified=true;
-					FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
-				}
-				else
-				{
-					FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt());		
-				}					
-			}
+				case ObjectInteraction.IdentificationFlags.Identified:
+						FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
+						break;
+				case ObjectInteraction.IdentificationFlags.Unidentified:
+				case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
+						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+						{
+								objInt().heading=7;
+								FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
+						}
+						else
+						{
+								isIdentified=false;
+								FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt());		
+						}	
+						break;
+				}	
 	
-		if ((objInt().quality>0) && (objInt().isEnchanted()==false) && (objInt().isIdentified))
+		if ((objInt().quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
 		{
 			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "

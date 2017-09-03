@@ -487,9 +487,6 @@ public class ConversationVM : UWEBase {
 					UWHUD.instance.npcTrade[i++].clear ();
 			}
 
-			///Identifies the NPC for future looking at
-			npc.objInt().isIdentified=true;//TODO:Replace this with vanilla behaviour
-
 			///Sets up the portraits for the player and the NPC
 			RawImage portrait = UWHUD.instance.ConversationPortraits[0];
 			RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];

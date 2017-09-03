@@ -752,7 +752,7 @@ public class NPC : MobileObject {
 			}
 			else
 			{
-				if(objInt().isIdentified==true)
+				if(npc_talkedto!=0)
 				{
 					output=output+" named " + StringController.instance.GetString (7,npc_whoami+16);
 				}				
@@ -1209,7 +1209,7 @@ public class NPC : MobileObject {
 
 	public override string ContextMenuDesc (int item_id)
 	{
-		if ((objInt().isIdentified==true) && (npc_whoami!=0))
+		if ((npc_talkedto!=0) && (npc_whoami!=0))
 		{
 			return StringController.instance.GetString (7,npc_whoami+16);
 		}	

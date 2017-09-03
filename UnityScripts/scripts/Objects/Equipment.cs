@@ -120,22 +120,25 @@ public class Equipment : object_base {
 	{
 		if (objInt().isEnchanted()==true)
 		{
-			if (objInt().isIdentified==true)
-			{
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
-			}
-			else
-			{
-					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
-					{
-						objInt().isIdentified=true;
+			switch(objInt().identity())
+				{
+				case ObjectInteraction.IdentificationFlags.Identified:
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
-					}
-					else
-					{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
-					}					
-			}
+						break;				
+				case ObjectInteraction.IdentificationFlags.Unidentified:
+				case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
+						//Try and re-id using lore skill
+						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+						{
+							objInt().heading=7;
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
+						}
+						else
+						{
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
+						}
+						break;
+				}		
 			return true;
 		}
 		else
