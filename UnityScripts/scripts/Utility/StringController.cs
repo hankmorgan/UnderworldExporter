@@ -37,8 +37,7 @@ public class StringController : UWEBase {
 				//public long blockEnd;
 		} ;
 
-		//public string Path;
-	
+
 
 		/// <summary>
 		/// The instance of this class
@@ -49,15 +48,6 @@ public class StringController : UWEBase {
 		{
 			instance=this;
 				//Set some default strings that differ between games.
-				switch (_RES)
-				{
-				case GAME_UW2:
-						YouSee=276;
-						break;
-				default:
-						YouSee=260;
-						break;
-				}
 
 
 				/*if(UWEBase._RES!="UW1")
@@ -92,6 +82,18 @@ public class StringController : UWEBase {
 		/// <param name="path">Path.</param>
 		public void LoadStringsPak(string path)
 		{
+				//Set some default string numbers
+				switch (_RES)
+				{
+				case GAME_UW2:
+						YouSee=276;
+						break;
+				default:
+						YouSee=260;
+						break;
+				}
+
+
 				string Result="";
 				long address_pointer=0;
 				huffman_node[] hman;

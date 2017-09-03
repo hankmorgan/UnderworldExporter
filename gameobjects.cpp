@@ -2246,7 +2246,7 @@ void UWCommonObj(int game)
 	fclose(file);
 	int addressPtr = 2;//First 2 bytes are unknown
 	int j = 0;
-	fprintf(LOGFILE, "\nDesc\tHeight\tRadius\tAnimated\tMass\tFlags0\tFlags1\tFlags2\tMagic?\tDecal\tPickable\tFlags6\tContainer\tValue\tQualClass\tOwned\tQualType\tLookAt\n");
+	fprintf(LOGFILE, "\nDesc\tHeight\tRadius\tAnimated\tMass\tFlags0\tFlags1\tFlags2\tMagic?\tDecal\tPickable\tFlags6\tContainer\tValue\tQualClass\tType\tOwned\tQualType\tLookAt\t6(0..1)\t6(4+)\t7\t8\t9\t10  \n");
 	for (int i = 0; i < fileSize-2 / 11; i++)
 		{
 		if (j <= 463)
@@ -2272,12 +2272,20 @@ void UWCommonObj(int game)
 			objectMasters[j].uwProperties[UW_PROP_VALUE] = getValAtAddress(comobj_dat, addressPtr + 4, 16);
 			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);//QualClass
 			objectMasters[j].uwProperties[UW_PROP_QUALITYCLASS] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 1) & 0xf);//type
 			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);//Ownership
 			objectMasters[j].uwProperties[UW_PROP_OWNER] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
 			fprintf(LOGFILE, "\t%d", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);//QualType
 			objectMasters[j].uwProperties[UW_PROP_QUALITYTYPE] = getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
-			fprintf(LOGFILE, "\t%d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);//Lookat
-
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);//Lookat
+			
+			//Other full values
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 6, 8) & 0x3));
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 4));
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 7, 8)));
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 8, 8)));
+			fprintf(LOGFILE, "\t%d", (getValAtAddress(comobj_dat, addressPtr + 9, 8)));
+			fprintf(LOGFILE, "\t%d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 4));
 			}
 
 	/*	0000  Int8    height

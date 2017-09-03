@@ -1588,7 +1588,7 @@ public class TileMapRenderer : Loader{
 										{
 												//if (t.BullFrog)
 												//{
-												//		TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 												RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
 												//}
 												//else

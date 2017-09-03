@@ -132,7 +132,7 @@ public class NPC : MobileObject {
 	///Transform position to launch projectiles from
 	public GameObject NPC_Launcher; 
 	///What spell the NPC should cast if they have magicAttack==true
-	private int SpellIndex; 
+	//private int SpellIndex; 
 
 	private SpriteRenderer sprt;
 
@@ -384,57 +384,70 @@ public class NPC : MobileObject {
 			}
 
 			//Decide what attack modes to use
-		switch (_objInt.item_id)
-			{
-			//Uses ranged weapons
-			case 70:
-			case 76:
-			case 77:
-			case 78:
-				if (
-					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
-					&&
-					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
-					&&
-					(Ammo>0)
-						)
-					{//Ranged attack if far away( but not too far away)
-					ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
-				}
-				else
+				switch (_RES)
 				{
-					ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+				case GAME_UW2:
+						{
+							ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
+							break;	
+						}
+				default:
+						{
+							switch (_objInt.item_id)
+							{
+							//Uses ranged weapons
+							case 70:
+							case 76:
+							case 77:
+							case 78:
+									if (
+											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+											&&
+											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+											&&
+											(Ammo>0)
+									)
+									{//Ranged attack if far away( but not too far away)
+											ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
+									}
+									else
+									{
+											ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+									}
+									break;
+									//Uses magic attacks when not very near
+							case 75:
+							case 81:
+							case 106:
+							case 107:
+							case 108:
+							case 109:
+							case 115:
+							case 120://fire elemental
+							case 122:
+							case 123:	//tybal					
+									if (
+											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+											&&
+											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+									)
+									{//Ranged attack if far away (but not too far)
+											ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
+											//SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
+									}
+									else
+									{
+											ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
+									}
+									break;
+							default:
+									ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
+									break;
+							}
+							break;
+						}
 				}
-				break;
-			//Uses magic attacks when not very near
-			case 75:
-			case 81:
-			case 106:
-			case 107:
-			case 108:
-			case 109:
-			case 115:
-			case 120:
-			case 122:
-			case 123:						
-				if (
-					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
-					&&
-					(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
-					)
-				{//Ranged attack if far away (but not too far)
-					ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
-					SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
-				}
-				else
-				{
-					ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
-				}
-				break;
-			default:
-				ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
-				break;
-			}
+
 
 			//Update the appearance of the NPC
 			UpdateSprite();
@@ -1156,7 +1169,7 @@ public class NPC : MobileObject {
 		{
 			return;						
 		}
-		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex,Magic.SpellRule_TargetVector);
+		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex(),Magic.SpellRule_TargetVector);
 	}
 
 	/// <summary>
@@ -1286,4 +1299,29 @@ public class NPC : MobileObject {
 			return 0;
 		}
 	}
+
+		/// <summary>
+		/// What spell the NPC should use
+		/// </summary>
+		/// <returns>The index.</returns>
+		public int SpellIndex()
+		{
+				switch(_RES)
+				{
+				case GAME_UW2:
+						return SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow 
+				
+				default:
+						switch(objInt().item_id)
+						{
+						case 120://Fire elemental
+								return SpellEffect.UW1_Spell_Effect_Fireball_alt01;
+						case 123:
+								return SpellEffect.UW1_Spell_Effect_SheetLightning_alt01;
+						default:
+								return SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow 
+						}
+				}
+
+		}
 }

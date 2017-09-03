@@ -261,6 +261,7 @@ public class MainMenuHud : GuiBase {
 			if (SlotNo==-1)
 			{//Speedstart
 				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
+				GameWorldController.instance.SCD_Ark_File_Selected="Data\\scd.ark";
 				GameWorldController.instance.InitBGlobals(0);
 				GameClock.instance._day=0;
 				GameClock.instance._minute=51;
@@ -274,6 +275,7 @@ public class MainMenuHud : GuiBase {
 			//Load a save file
 			//Set the level file
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+			GameWorldController.instance.SCD_Ark_File_Selected="Save" + (SlotNo+1) + "\\scd.ark";
 			if (_RES!=GAME_UW2)
 			{
 				//Read in the character data

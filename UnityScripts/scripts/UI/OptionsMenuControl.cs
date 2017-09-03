@@ -430,6 +430,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.LevelNo=-1;
 			GameWorldController.instance.AtMainMenu=true;
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
+			GameWorldController.instance.SCD_Ark_File_Selected="Save" + (SlotNo+1) + "\\scd.ark";
 			//Read in the character data
 			//SaveGame.LoadPlayerDat(SlotNo+1);
 

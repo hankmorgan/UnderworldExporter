@@ -134,7 +134,10 @@ public class UWCombat : Combat {
 					if(currWeapon!=null)
 					{
 						short durability = currWeapon.getDurability();
-						currWeapon.SelfDamage((short)(Mathf.Max(0, Random.Range(1,durability+1)-durability)));
+						if (durability<=30)
+						{
+							currWeapon.SelfDamage((short)(Mathf.Max(0, Random.Range(1,durability+1)-durability)));								
+						}						
 					}
 
 					if (ObjectInteraction.PlaySoundEffects)
@@ -531,7 +534,10 @@ public class UWCombat : Combat {
 					{
 						short durability = currentWeapon.getDurability();
 						//currentWeapon.WeaponSelfDamage();
-						currentWeapon.SelfDamage((short)Mathf.Max(0, Random.Range(0, npc.GetArmourDamage()+1) - durability));
+						if (durability<=30)
+						{
+								currentWeapon.SelfDamage((short)Mathf.Max(0, Random.Range(0, npc.GetArmourDamage()+1) - durability));						
+						}						
 					}
 				}
 			}

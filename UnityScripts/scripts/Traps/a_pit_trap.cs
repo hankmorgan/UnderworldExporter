@@ -18,8 +18,6 @@ public class a_pit_trap : trap_base {
 		if (tile!=null)
 		{
 			TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
-			Destroy (tile);
-
 			if (tileToChange.floorHeight==0)
 			{//create a tile at the floor height
 				tileToChange.floorHeight=(short)(objInt().zpos>>2);
@@ -30,8 +28,8 @@ public class a_pit_trap : trap_base {
 				tileToChange.floorHeight=0;	
 				tileToChange.floorTexture =(short)(objInt().quality & 0xf);
 			}
-		TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
-
+			tileToChange.TileNeedsUpdate();
+			Destroy (tile);
 		}
 
 	}

@@ -1508,6 +1508,157 @@ public class SaveGame : Loader {
 								}
 
 						}
+
+
+						/*Load inventory*/
+
+						//Read in the inventory
+						//Stored in much the same way as an linked object list is.
+						//Inventory list
+						int NoOfItems = (buffer.GetUpperBound(0)-994)/8;
+						ObjectLoader objLoader = new ObjectLoader();
+						objLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];
+
+						int x=1;
+
+						if (buffer.GetUpperBound(0)>=995)
+						{
+								int i = 995;
+								while (i < buffer.GetUpperBound(0))
+								{
+										objLoader.objInfo[x] = new ObjectLoaderInfo();
+										objLoader.objInfo[x].index=x;
+										objLoader.objInfo[x].guid=System.Guid.NewGuid();
+										objLoader.objInfo[x].parentList=objLoader;
+										objLoader.objInfo[x].tileX=TileMap.ObjectStorageTile;
+										objLoader.objInfo[x].tileY=TileMap.ObjectStorageTile;
+										objLoader.objInfo[x].InUseFlag=1;
+										objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer,i+0,16)) & 0x1FF;
+										objLoader.objInfo[x].flags  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16))>> 9) & 0x07);
+										objLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 12) & 0x01);
+										objLoader.objInfo[x].doordir  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 13) & 0x01);
+										objLoader.objInfo[x].invis  = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 14 )& 0x01);
+										objLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer,i+0,16)) >> 15) & 0x01);
+										//position at +2
+										objLoader.objInfo[x].zpos = (short)((DataLoader.getValAtAddress(buffer,i+2,16)) & 0x7F);	//bits 0-6 
+										//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
+										objLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 7) & 0x07); //bits 7-9
+
+										objLoader.objInfo[x].y = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 10) & 0x07);	//bits 10-12
+										objLoader.objInfo[x].x = (short)(((DataLoader.getValAtAddress(buffer,i+2,16)) >> 13) & 0x07);	//bits 13-15
+
+										//+4
+										objLoader.objInfo[x].quality =(short)((DataLoader.getValAtAddress(buffer,i+4,16)) & 0x3F);
+										objLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer,i+4,16)>>6) & 0x3FF);
+
+										//+6
+
+										objLoader.objInfo[x].owner = (short)(DataLoader.getValAtAddress(buffer,i+6,16) & 0x3F) ;//bits 0-5
+
+										objLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF); //bits 6-15
+										i=i+8;
+										x++;
+
+								}
+								//Create the inventory objects
+								ObjectLoader.RenderObjectList(objLoader,GameWorldController.instance.currentTileMap(),GameWorldController.instance.InventoryMarker);
+								//Find any wands and move their spell objects to the gameworld to behave like UW1
+								for (int o=0; o<=objLoader.objInfo.GetUpperBound(0);o++)
+								{
+										if (objLoader.objInfo[o]!=null)
+										{
+												if ( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.WAND )
+												{
+														ObjectLoaderInfo spellObj = objLoader.objInfo[ objLoader.objInfo[o].link ];
+														if (spellObj!=null)
+														{
+																//Move it's spell object to the game world and destroy the instance of that object that is on the inventory marker
+																//ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, spellObj.quality,spellObj.owner,spellObj.link,256);
+																//ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
+																Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
+																wandInfo.SpellObjectOwnerToCreate= spellObj.owner;
+																wandInfo.SpellObjectLink= spellObj.link;
+																wandInfo.SpellObjectQualityToCreate= spellObj.quality;
+																GameObject.Destroy(spellObj.instance.gameObject);
+														}
+												}		
+										}
+								}
+
+
+								for (int j=931; j<969; j=j+2)
+								{//Apply objects to slots
+										int index = ((int)DataLoader.getValAtAddress(buffer,j,16) >>6);
+										string item_name;
+										if (index!=0)
+										{
+												item_name=ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
+										}
+										else
+										{
+												item_name="";	
+										}
+										switch(j)
+										{//Q? does handeness effect these???
+										case 931://Helm
+												GameWorldController.instance.playerUW.playerInventory.sHelm=item_name;break;
+										case 933://Chest
+												GameWorldController.instance.playerUW.playerInventory.sChest=item_name;break;
+										case 935: //gloves
+												GameWorldController.instance.playerUW.playerInventory.sGloves=item_name;break;
+										case 937://Leggings
+												GameWorldController.instance.playerUW.playerInventory.sLegs=item_name;break;
+										case 939://boots
+												GameWorldController.instance.playerUW.playerInventory.sBoots=item_name;break;
+										case 941://  is the top right shoulder.
+												GameWorldController.instance.playerUW.playerInventory.sRightShoulder=item_name;break;
+										case 943:// is the top left shoulder.
+												GameWorldController.instance.playerUW.playerInventory.sLeftShoulder=item_name;break;
+										case 945://  is the right hand.
+												GameWorldController.instance.playerUW.playerInventory.sRightHand=item_name;break;
+										case 947://  is the left hand.
+												GameWorldController.instance.playerUW.playerInventory.sLeftHand=item_name;break;
+										case 949://  is the right ring.
+												GameWorldController.instance.playerUW.playerInventory.sRightRing=item_name;break;
+										case 951://  is the left ring .
+												GameWorldController.instance.playerUW.playerInventory.sLeftRing=item_name;break;
+										case 953://  is the backpack slots 1.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[0]=item_name;break;
+										case 955://  is the backpack slots 2.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[1]=item_name;break;
+										case 957://  is the backpack slots 3.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[2]=item_name;break;
+										case 959://  is the backpack slots 4.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[3]=item_name;break;
+										case 961://  is the backpack slots 5.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[4]=item_name;break;
+										case 963://  is the backpack slots 6.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[5]=item_name;break;
+										case 965://  is the backpack slots 7.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[6]=item_name;break;
+										case 967://  is the backpack slots 8.
+												GameWorldController.instance.playerUW.playerInventory.playerContainer.items[7]=item_name;break;
+										}
+								}
+								GameWorldController.instance.playerUW.playerInventory.Refresh();
+
+							//Reapply effects from enchanted items by recalling the equip event.
+							for (short s=0; s<=10; s++)
+							{
+								GameObject obj = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(s);
+								if (obj!=null)
+								{
+									obj.GetComponent<ObjectInteraction>().Equip(s);
+								}
+							}
+
+						}
+
+
+						/* end load inventory  */
+
+
+
 						//Reapply spell effects
 						for (int a=0; a<=GameWorldController.instance.playerUW.ActiveSpell.GetUpperBound(0);a++)
 						{//Clear out the old effects.

@@ -170,5 +170,27 @@ public class WeaponMelee : Weapon {
 			return 0;
 		}
 
+	public override bool LookAt ()
+	{
+				if ( (_RES==GAME_UW1) && (objInt().item_id==10))
+				{
+						switch(objInt().identity())
+						{
+						case ObjectInteraction.IdentificationFlags.Identified:
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(4,StringController.YouSee) +  StringController.instance.GetString(4,268));
+							break;
+						default:
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
+							break;
+						}
+						return true;
+				}
+				else
+				{
+					return base.LookAt ();				
+				}
+		
+	}
+
 }
 

@@ -1033,16 +1033,19 @@ public class PlayerInventory : UWEBase {
 				case 4://Gloves	
 					if (obj.gameObject.GetComponent<Armour>()!=null)
 					{
-						short durability = obj.gameObject.GetComponent<Armour>().getDurability();				
-						obj.gameObject.GetComponent<Armour>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));
-						if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+						short durability = obj.gameObject.GetComponent<Armour>().getDurability();	
+						if (durability<=30)
 						{
-							playerUW.playerInventory.ClearSlot((short)PieceToDamage);
-							obj.transform.parent=GameWorldController.instance.LevelMarker().transform;
-							obj.transform.position=playerUW.transform.position;
-							GameWorldController.MoveToWorld(obj.GetComponent<ObjectInteraction>());
-							GameWorldController.UnFreezeMovement(obj);
-							playerUW.playerInventory.Refresh();
+							obj.gameObject.GetComponent<Armour>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));
+							if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+							{
+								playerUW.playerInventory.ClearSlot((short)PieceToDamage);
+								obj.transform.parent=GameWorldController.instance.LevelMarker().transform;
+								obj.transform.position=playerUW.transform.position;
+								GameWorldController.MoveToWorld(obj.GetComponent<ObjectInteraction>());
+								GameWorldController.UnFreezeMovement(obj);
+								playerUW.playerInventory.Refresh();
+							}	
 						}
 					}
 					break;
@@ -1052,10 +1055,13 @@ public class PlayerInventory : UWEBase {
 							if (obj.gameObject.GetComponent<Shield>()!=null)
 							{
 								short durability = obj.gameObject.GetComponent<Shield>().getDurability();
-								obj.gameObject.GetComponent<Shield>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));	
-								if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
-								{														
-									playerUW.playerInventory.Refresh();
+								if (durability<=30)
+								{
+									obj.gameObject.GetComponent<Shield>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));	
+									if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+									{														
+										playerUW.playerInventory.Refresh();
+									}		
 								}
 							}
 						}
@@ -1065,10 +1071,14 @@ public class PlayerInventory : UWEBase {
 					{
 						if (obj.gameObject.GetComponent<Shield>()!=null)
 						{
-							obj.gameObject.GetComponent<Shield>().SelfDamage(armourDamage);	
-							if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+							short durability = obj.gameObject.GetComponent<Shield>().getDurability();
+							if (durability<=30)
 							{
-								playerUW.playerInventory.Refresh();
+								obj.gameObject.GetComponent<Shield>().SelfDamage((short)(Mathf.Max(0, armourDamage-durability)));	
+								if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
+								{														
+										playerUW.playerInventory.Refresh();
+								}		
 							}
 						}
 					}

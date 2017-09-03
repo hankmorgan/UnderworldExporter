@@ -16,6 +16,8 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
+		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
+
 	public bool bGenNavMeshes=true;
 
 		/// <summary>
@@ -154,6 +156,7 @@ public class GameWorldController : UWEBase {
 
 
 	public string Lev_Ark_File_Selected = "Data\\Lev.ark";
+	public string SCD_Ark_File_Selected = "Data\\SCD.ark";
 
 	/// <summary>
 	/// The graves file for associating grave textures with grave objects
@@ -769,6 +772,14 @@ public class GameWorldController : UWEBase {
 					shrineLava.AddComponent<ShrineLava>();
 					shrineLava.AddComponent<BoxCollider>();
 					shrineLava.GetComponent<BoxCollider>().isTrigger=true;
+				}
+
+				if (_RES==GAME_UW2)
+				{
+					if (whatTheHellIsThatFileFor!=null)
+					{
+						whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected,newLevelNo);
+					}
 				}
 			}
 		}

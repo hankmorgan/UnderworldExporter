@@ -2,20 +2,30 @@
 using System.Collections;
 
 public class Wand : enchantment_base {
-	private int SpellObjectLink;
-	//private int SpellObjectQuantity;
-	private int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
-	private int SpellObjectOwnerToCreate=0;
-	//private int SpellObjectLinkToCreate=0;
+	public int SpellObjectLink;
+	public int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
+	public int SpellObjectOwnerToCreate=0;
 
 	protected override void Start ()
 	{
 		base.Start ();
-		if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
-		{
-			SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
-			//SpellObjectQuantity=ObjectLoader.getObjectIntAt(objInt().link).quality;
-		}				 
+				if (_RES==GAME_UW2)				
+				{
+					if(objInt().PickedUp)		
+					{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256);
+						ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
+						objInt().link = newobjt.index;
+					}
+
+				}//UW2 stores enchantments on the player.dat. This is not implemented yet
+
+
+			if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+			{
+					SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
+			}		
+ 
 	}
 	
 	/// <summary>
@@ -126,6 +136,7 @@ public class Wand : enchantment_base {
 	/// </summary>
 	public override void InventoryEventOnLevelEnter ()
 		{
+				if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		base.InventoryEventOnLevelEnter ();
 			//Create a spell trap and store it on the map. This occurs before the list is rendered.
 		ObjectLoaderInfo newobj= ObjectLoader.newObject(390,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
@@ -136,6 +147,7 @@ public class Wand : enchantment_base {
 
 	public override void InventoryEventOnLevelExit ()
 		{
+		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		//Store the spell properties so I can create it in the next level. 
 		base.InventoryEventOnLevelExit ();
 		GameObject linked = ObjectLoader.getGameObjectAt(objInt().link);
