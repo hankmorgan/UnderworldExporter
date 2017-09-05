@@ -1373,7 +1373,7 @@ public class ConversationVM : UWEBase {
 								break;	
 							}
 						case "@SS": //Stack string
-							{
+							{//TODO: Miranda's conversation in UW2 where she tells you about the lines of power that are cut is of format @SS1SI10
 								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+value));
 								break;	
 							}
