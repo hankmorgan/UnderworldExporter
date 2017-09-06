@@ -3741,7 +3741,7 @@ description:  places a generated object in underworld
 				stack.result_register= GameWorldController.instance.playerUW.quest().x_clocks[unk2];
 			}
 			else
-			{
+			{//Should this be an increment???
 				Debug.Log("x_clock setting: " + unk2 + " to " + unk1);
 				GameWorldController.instance.playerUW.quest().x_clocks[unk2]=unk1;	
 			}

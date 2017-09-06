@@ -1567,7 +1567,15 @@ public class SaveGame : Loader {
 								{
 										if (objLoader.objInfo[o]!=null)
 										{
-												if ( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.WAND )
+												if ( 
+														( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.WAND )
+														||
+														(
+																( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.CLUTTER)
+																&&
+																(objLoader.objInfo[o].link!=0)
+														)
+												)
 												{
 														ObjectLoaderInfo spellObj = objLoader.objInfo[ objLoader.objInfo[o].link ];
 														if (spellObj!=null)

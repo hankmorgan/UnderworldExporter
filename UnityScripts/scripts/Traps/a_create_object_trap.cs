@@ -24,7 +24,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		string created="";
 		if (objInt().quality <= Random.Range(1,41)) //100% chance when quality is zero.
 		{
 			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(objInt().link);
@@ -32,7 +32,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 			{
 			  	GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);
 				LastObjectCreated=NewObject.name;
-
+				created=NewObject.name;
 				if (objToClone.GetComponent<Container>()!=null)
 				{//Clone the items on this object
 					for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
@@ -47,6 +47,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 				}
 			}
 		}
+	Debug.Log (this.name + " " + created);
 	}
 
 	public GameObject CloneObject(ObjectInteraction objToClone, int triggerX, int triggerY, bool MoveItem)

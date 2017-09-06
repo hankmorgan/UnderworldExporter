@@ -1631,9 +1631,9 @@ public class ObjectInteraction : UWEBase {
 						}
 				case CLUTTER:
 						{
-							if ((objInt.isEnchanted()) && (objInt.link!=0))
+							if ((objInt.isMagicallyEnchanted()) && (objInt.link!=0))
 							{
-								myObj.AddComponent<enchantment_base>();
+								myObj.AddComponent<Wand>();
 							}
 							else
 							{
@@ -2053,6 +2053,29 @@ public class ObjectInteraction : UWEBase {
 				return objInt;
 		}
 
+		/// <summary>
+		/// Is the object an enchanted object or does it link to something
+		/// </summary>
+		/// <returns><c>true</c>, if magically enchanted was ised, <c>false</c> otherwise.</returns>
+		public bool isMagicallyEnchanted()
+		{
+				if (enchantment==1)
+				{
+						return true;
+				}
+				else
+				{
+						if (link!=0)
+						{
+								//if (GameWorldController.instance.objectMaster.type[ GameWorldController.instance.CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
+								//{
+										return true;
+								//}
+						}
+				}
+				return false;
+					
+		}
 
 		/// <summary>
 		/// Returns the enchantment flag as a bool

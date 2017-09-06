@@ -58,7 +58,14 @@ using System.Collections;
 /// 29: You know Dorstag has the gem(?)
 /// 30: Dorstag refused your challenge(?)
 /// 32: Met a Talorid
+/// 33: You have agreed to help the talorid (historian)
+/// 34: Met or heard of Eloemosynathor
 /// 35: The vortz are attacking!
+/// 36: Quest to clarify question for Data Integrator
+/// 37: talorus related (checked by futurian)
+/// 38: talorus related
+/// 39: talorus related
+/// 40: Dialogian has helped with data integrator
 /// 43: Patterson has gone postal
 /// 45: Janar has been met and befriended
 /// 
@@ -94,7 +101,7 @@ using System.Collections;
 /// 
 /// 134: PT related
 /// 135: Checked by goblin in sewers
-/// 143: Set to 33 after first LB conversation
+/// 143: Set to 33 after first LB conversation. Possible script bug.
 public class Quest : UWEBase {
 
 
