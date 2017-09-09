@@ -79,8 +79,8 @@ public class a_set_variable_trap : a_variable_trap {
 		}
 		else
 		{//Bitwise operations on bitfield
-			Debug.Log("Bitwise set variable");
-			switch(objInt().zpos)
+			Debug.Log("Bitwise set variable. Not implemented yet");
+			switch(objInt().heading)
 			{
 			case 0://Set
 				

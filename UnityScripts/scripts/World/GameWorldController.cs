@@ -797,6 +797,7 @@ public class GameWorldController : UWEBase {
 			float targetY= (float)newTileY*1.2f + 0.6f;
 			float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
 			GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.1f,targetY);
+			GameWorldController.instance.playerUW.TeleportPosition=new Vector3(targetX,Height+0.1f,targetY);
 		}
 
 		// This will regenerate the navigation mesh when called

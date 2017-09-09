@@ -44,10 +44,12 @@ public class a_teleport_trap : trap_base {
 		if (objInt().zpos==0)
 		{//Stay on this level.
 			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(objInt().quality,objInt().owner)))*0.15f;
-			GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+			GameWorldController.instance.playerUW.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+			GameWorldController.instance.playerUW.TeleportPosition=GameWorldController.instance.playerUW.transform.position;
 		}
 		else
 		{
+			GameWorldController.instance.playerUW.teleportedTimer=-1f;//Longer wait period when travelling between levels.
 			//Goto to another level
 			if (_RES==GAME_UW1)
 			{//Special case for the magic drain effect in UW1
@@ -60,6 +62,7 @@ public class a_teleport_trap : trap_base {
 					}
 				}
 			}
+			GameWorldController.instance.playerUW.playerMotor.movement.velocity=Vector3.zero;
 			GameWorldController.instance.SwitchLevel((short)(objInt().zpos-1),objInt().quality,objInt().owner);
 		}
 	}

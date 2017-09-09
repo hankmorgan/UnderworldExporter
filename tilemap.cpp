@@ -549,7 +549,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	int i;
 	int CeilingTexture=0;
 	int textureMapSize;
-	long AutoMapAddress;
+	long AutoMapAddress=0;
 	
 	UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 	switch (game)

@@ -1251,11 +1251,14 @@ public class ObjectLoader : Loader {
 								{
 										if (tileMap.Tiles[x,y].tileType!=TileMap.TILE_SOLID)
 										{
-											if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
-											{
-												int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
-												offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-											}	
+												if (tileMap.Tiles[x,y].TerrainChange==false)
+												{
+														if (objList[index].zpos< tileMap.Tiles[x,y].floorHeight * 4)
+														{
+																int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
+																offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+														}		
+												}
 										}
 										break;
 								}

@@ -1199,6 +1199,49 @@ public class SaveGame : Loader {
 
 		}
 
+	static char[] DecodeEncodeUW2PlayerDat (char[] pDat, byte MS)
+	{
+		int[] MA = new int[80];
+		MS += 7;
+		for (int i = 0; i < 80; ++i) {
+			MS += 6;
+			MA [i] = MS;
+		}
+		for (int i = 0; i < 16; ++i) {
+			MS += 7;
+			MA [i * 5] = MS;
+		}
+		for (int i = 0; i < 4; ++i) {
+			MS += 0x29;
+			MA [i * 12] = MS;
+		}
+		for (int i = 0; i < 11; ++i) {
+			MS += 0x49;
+			MA [i * 7] = MS;
+		}
+		char[] buffer = new char[pDat.GetUpperBound (0) + 1];
+		int offset = 1;
+		int byteCounter = 0;
+		for (int l = 0; l <= 11; l++) {
+			buffer [0 + offset] = (char)(pDat [0 + offset] ^ MA [0]);
+			byteCounter++;
+			for (int i = 1; i < 0x50; ++i) {
+				if (byteCounter < 0x37D) {
+					buffer [i + offset] = (char)(((pDat [i + offset] & 0xff) ^ ((buffer [i - 1 + offset] & 0xff) + (pDat [i - 1 + offset] & 0xff) + (MA [i] & 0xff))) & 0xff);
+					byteCounter++;
+				}
+			}
+			offset += 80;
+		}
+		//Copy the remainder of the plaintext data
+		while (byteCounter <= pDat.GetUpperBound (0)) {
+			buffer [byteCounter] = pDat [byteCounter];
+			byteCounter++;
+		}
+		buffer[0]=pDat[0];
+		return buffer;
+	}
+
 		static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, short slotIndex)
 		{
 				string itemAtSlot="";
@@ -1244,68 +1287,8 @@ public class SaveGame : Loader {
 					TileMap.OnWater=false;
 
 						byte MS = (byte)DataLoader.getValAtAddress(pDat,0,8);
-						//char [] c = new char[pDat.GetUpperBound(0)];
-						///for (int i=1; i<=pDat.GetUpperBound(0); i++)
-						//{
-						//	c[i-1] = pDat[i];
-						//}
-						//MS=0x98;
-						int[] MA = new int[80];
-						MS += 7;
-						for (int i = 0; i<80; ++i)
-						{
-								MS += 6;
-								MA[i] = MS;
-						}
-						for (int i = 0; i<16; ++i)
-						{
-								MS += 7;
-								MA[i*5] = MS;
-						}
-						for (int i = 0; i<4; ++i)
-						{
-								MS += 0x29;
-								MA[i*12] = MS;
-						}
-						for (int i = 0; i<11; ++i)
-						{
-								MS += 0x49;
-								MA[i*7] = MS;
-						}
 
-						char[] buffer = new char[pDat.GetUpperBound(0)+1];
-						int offset=1;
-						int byteCounter=0;
-						for (int l=0; l<=11; l++)
-						{
-							buffer[0+offset] = (char)(pDat[0+offset] ^ MA[0]);
-							byteCounter++;
-							for (int i=1; i<0x50;++i)
-							{
-								if (byteCounter<0x37D)
-								{
-											buffer[i+offset] =(char)((
-												(pDat[i+offset] & 0xff) ^
-													( ( buffer[i-1+offset]  & 0xff)
-														+ ( pDat[i-1+offset] & 0xff)
-														+ ( MA[i] & 0xff)
-												)
-										) & 0xff);		
-									byteCounter++;
-								}
-								
-							}	
-							offset+=80;
-							
-						}
-
-						//Copy the remainder of the plaintext data
-						while (byteCounter <=pDat.GetUpperBound(0))
-						{
-							buffer[byteCounter]= pDat[byteCounter];
-							byteCounter++;
-						}
-				
+						char[] buffer = DecodeEncodeUW2PlayerDat (pDat, MS);
 						if (GameWorldController.instance.playerUW.decode)
 						{
 								//write out decrypted file for analysis
@@ -1316,6 +1299,36 @@ public class SaveGame : Loader {
 								}
 								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded_" + slotNo + ".dat", dataToWrite);
 						}
+
+
+
+
+
+
+						/*for (int c=0; c<=pDat.GetUpperBound(0);c++)
+						{
+								if (recodetest[c]!=pDat[c])
+								{
+										Debug.Log("File difference at " + c);
+										break;
+								}
+						}*/
+
+						//File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
+						if (GameWorldController.instance.playerUW.recode)
+						{
+								buffer[171]=(char)1;
+								char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
+
+								byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];
+								for (long i=0; i<=recodetest.GetUpperBound(0);i++)
+								{
+										dataToWrite[i] = (byte)recodetest[i];
+								}
+								File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", dataToWrite);
+						}
+
+
 
 						int runeOffset=0;
 
@@ -1717,7 +1730,7 @@ public class SaveGame : Loader {
 						float Ratio=213f;
 						float VertAdjust = 0.3543672f;
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
-
+						GameWorldController.instance.playerUW.TeleportPosition=GameWorldController.instance.StartPos;
 
 						return;
 				}

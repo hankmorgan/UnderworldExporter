@@ -34,9 +34,12 @@ public class a_scheduled_trigger : trigger_base {
 
 		//Variable 44 triggers scheduled trap where quality = 33	//waterdam
 		//Variable 51 (or 3) triggers scheduled trap where quality = 38  //value =9 (or 32)
-		//Quest 119 triggers scheduled trap where quality = 38 //fizit in jail a_scheduled_trigger_37_38_00_0844
+		//Quest 119 triggers scheduled trap where quality = 38 , owner =39 //fizit in jail a_scheduled_trigger_37_38_00_0844
 
 
+		//Changing the owner and quality breaks the trap
 
+
+		//Is it used to check a set of conditions???
 
 }

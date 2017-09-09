@@ -3,13 +3,13 @@ using System.Collections;
 
 public class trap_base : object_base {
 
-
+	public bool ExecuteNow;
 	//public string TriggerObject;//Next in the chain
 
 	public virtual void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
 	{
 		//Do whatever
-		//Debug.Log ("Base Execute Trap " + this.name);
+		Debug.Log ("Base Execute Trap " + this.name);
 	}
 
 
@@ -97,5 +97,15 @@ public class trap_base : object_base {
 				}					
 			}
 			return false;
+		}
+
+
+		public void Update()
+		{
+			if (ExecuteNow)
+			{
+				ExecuteNow=false;
+				ExecuteTrap(this, 0 , 0 , 0);
+			}
 		}
 }

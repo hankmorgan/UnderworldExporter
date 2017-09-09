@@ -52,6 +52,7 @@ using System.Collections;
 /// 19: You know Relk has found the black jewel (josie tells you)
 /// 20: You've met Mokpo
 /// 22: Blog is now your friend(?)
+/// 24: Checked in the pits by dorstag
 /// 26: You know about the magic scepter (for the Zoranthus)
 /// 27: You know about the sigil of binding(by bringing the scepter to zorantus)
 /// 28: Took Krilner as a slave
@@ -79,6 +80,9 @@ using System.Collections;
 /// 61: You've brought water to Josie
 /// 
 /// 63: Used by Rawstag (you know blog?)
+/// 64: Is mors dead
+/// 65: Pits related (checked by dorstag)
+/// 106: Meet mors gothi and got the book
 /// 107: Set after freeing praetor loth
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
 /// 110: Checked when talking to LB. The guardians forces are attacking
@@ -94,15 +98,17 @@ using System.Collections;
 /// 123: Relk is dead
 /// 128: 0-128 bit field of where the lines of power have been broken. NEed to fix string replacement to implement.
 /// 129: Pits related
-/// 131: You are told that you are in the prison tower =1
+/// 131: You are told that you are in the prison tower =1  
 /// 	You are told you are in kilhorn keep =3
 /// 	You are told you are in scintilus = 19
+/// 	(this is probably a bit field.)
 /// 132: Set to 2 during Kintara conversation
 /// 
 /// 134: PT related
 /// 135: Checked by goblin in sewers
-/// 143: Set to 33 after first LB conversation. Possible script bug.
+/// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWEBase {
+
 
 
 		/// <summary>
@@ -186,11 +192,12 @@ public class Quest : UWEBase {
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)
 	/// </summary>
-	/// Possibly related to game variables
+	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat
+	/// Possibly these are hard coded events related to game progress.
 	/// Some known values
-	/// 0=Staff strike 
+		/// 0=Staff strike (<---this is wrong)
 	/// 1=Miranda conversations & related events in the castle
-		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 52 may be related)
+		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)
 		/// 2 - After you visited another world.  (variable 17 is set to 16), dupre is tempted
 		/// 3 - servants getting restless
 		/// 4 - concerned about water, dupre is annoyed by patterson
@@ -206,6 +213,21 @@ public class Quest : UWEBase {
 	/// 
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
 	public int[] x_clocks=new int[32];
+
+		public enum x_clock_events{
+				ExploreCastleDepths,
+				VisitedAnotherWorld,
+				ServantsGetRestless,
+				WaterConcerns,
+				ToryIsKilled,
+				CharlesFindsAKey,
+				NelsonIsGoingToBeKilled,
+				PattersonIsDead,
+				TheGemIsWeak,
+				NystrulWantsToEndTheGame,
+				MorsGothaAttacks
+		};
+
 
 
 	void Start()
@@ -233,6 +255,26 @@ public class Quest : UWEBase {
 			IncenseDream=0;
 		}
 		return IncenseDream++;
+	}
+
+
+	/// <summary>
+	/// X Clock_Event processing
+	/// </summary>
+	/// <param name="x_clock_event">X clock event.</param>
+	public void x_clock_hook(x_clock_events x_clock_event)
+	{
+		switch(x_clock_event)	
+		{
+		case x_clock_events.ExploreCastleDepths:
+			{//You have begun exploring underneath the castle.
+				if (x_clocks[1]==0)
+				{
+					x_clocks[1]=1;
+				}
+				break;
+			}
+		}
 	}
 
 }

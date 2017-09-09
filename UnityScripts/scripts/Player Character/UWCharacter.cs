@@ -15,7 +15,7 @@ public class UWCharacter : Character {
 		public int XorKey=0xD9;
 
 		public bool decode=true;//decodes a save file
-		//public bool recode=true;//recodes a save file at indextochange with newvalue
+		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
 
 
@@ -91,6 +91,7 @@ public class UWCharacter : Character {
 	//public string currRegion;
 	private bool InventoryReady=false;
 	public bool JustTeleported=false;
+	public Vector3 TeleportPosition;
 	public float teleportedTimer=0f;
 
 
@@ -283,13 +284,17 @@ public class UWCharacter : Character {
 				{
 					CurVIT=MaxVIT;	
 				}
-		if (JustTeleported)
+		if ((JustTeleported))
 		{
 			teleportedTimer+=Time.deltaTime;
 			if (teleportedTimer>=0.1f)
 			{
 				JustTeleported=false;
 			}
+			else
+			{
+				this.transform.position=TeleportPosition;
+			}				
 		}
 		if( (PlayerInventory.Ready==true) && (InventoryReady=false))
 		{
