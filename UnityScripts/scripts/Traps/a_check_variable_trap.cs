@@ -61,18 +61,25 @@ the left, right, center button combination on Level3.
 
 	bool check_variable_trap()
 	{//Based on what uw-formats says. Seems to work okay.
-
+			if (_RES==GAME_UW2)
+			{//Some variables in UW2 seem to map to different values.
+				switch (objInt().zpos)
+				{
+				case 19:
+					return VariableValue()==GameWorldController.instance.playerUW.quest().DjinnCapture;	
+				}
+			}
 		if (objInt().heading!=0)
 			{
 				int cmp = 0;
 				for(int i=objInt().zpos; i<=objInt().zpos+objInt().heading; i++)
 				{								
 					if (objInt().x != 0)
-						cmp += GameWorldController.instance.variables[i];
+						cmp += GameWorldController.instance.playerUW.quest().variables[i];
 					else
 					{
 						cmp <<= 3;
-						cmp |= (GameWorldController.instance.variables[i]  & 0x7);
+						cmp |= (GameWorldController.instance.playerUW.quest().variables[i]  & 0x7);
 					}
 				}
 				Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());
@@ -81,9 +88,13 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + GameWorldController.instance.variables[objInt().zpos] + ")" );
-				return VariableValue()==GameWorldController.instance.variables[objInt().zpos];
+				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + GameWorldController.instance.playerUW.quest().variables[objInt().zpos] + ")" );
+				return VariableValue()==GameWorldController.instance.playerUW.quest().variables[objInt().zpos];
 			}
 		}
+
+
+
+
 
 }

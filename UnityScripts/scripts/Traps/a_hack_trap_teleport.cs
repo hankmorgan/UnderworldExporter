@@ -37,7 +37,7 @@ public class a_hack_trap_teleport : a_hack_trap {
 	{
 		int xPos = src.objInt().x;
 		int yPos = src.objInt().y;
-		int variable = GameWorldController.instance.variables[6];
+		int variable = GameWorldController.instance.playerUW.quest().variables[6];
 
 				//x and y positions are as follows.
 				//2,7

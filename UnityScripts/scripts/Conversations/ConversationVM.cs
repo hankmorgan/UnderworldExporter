@@ -3704,7 +3704,7 @@ description:  places a generated object in underworld
 	public int x_traps( int unk1, int VariableIndex)
 	{//UWformats has no info on this.
 			//Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
-		return GameWorldController.instance.variables[VariableIndex];
+		return GameWorldController.instance.playerUW.quest().variables[VariableIndex];
 	}
 
 

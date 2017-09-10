@@ -1795,9 +1795,13 @@ public class ObjectInteraction : UWEBase {
 				case AN_ORB_ROCK:
 						myObj.layer=LayerMask.NameToLayer("MagicProjectile");
 						myObj.AddComponent<OrbRock>();
-						break;
+						break;			
 				case AN_EXPLODING_BOOK:
 						myObj.AddComponent<ReadableTrap>();
+						break;
+				case UW_PAINTING:
+						RemoveBillboard=true;
+						myObj.AddComponent<UWPainting>();
 						break;
 				case A_MAGIC_PROJECTILE:
 						{

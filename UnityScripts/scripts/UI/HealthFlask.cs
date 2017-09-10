@@ -98,21 +98,29 @@ public class HealthFlask : GuiBase_Draggable {
 		string output=""; 
 		if (isHealthDisplay == true)
 		{
-				switch(GameWorldController.instance.playerUW.play_poison)
-				{
-						case 1:
-							output = "You are barely poisoned\n";break;
-						case 2:
-						case 3:
-							output = "You are mildly poisoned\n";break;								
-						case 4:
-						case 5:
-							output = "You are badly poisoned\n";break;
-						case 6:
-							output = "You are seriously poisoned\n";break;
-						case 7:
-							output = "You are egregiously poisoned\n";break;
-				}
+			switch(GameWorldController.instance.playerUW.play_poison)
+			{
+				case 1:
+				case 2:
+				case 3:
+					output = "You are barely poisoned\n";break;
+				case 4:
+				case 5:
+				case 6:
+					output = "You are mildly poisoned\n";break;								
+				case 7:
+				case 8:
+				case 9:
+					output = "You are badly poisoned\n";break;
+				case 10:
+				case 11:
+				case 12:
+					output = "You are seriously poisoned\n";break;
+				case 13:
+				case 14:
+				case 15:
+					output = "You are egregiously poisoned\n";break;							
+			}
 
 			//Your current vitality is out of 
 			//if (GameWorldController.instance.playerUW.Poisoned==true)

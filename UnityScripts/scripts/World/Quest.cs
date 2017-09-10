@@ -190,6 +190,16 @@ public class Quest : UWEBase {
 		public bool isCupFound;
 
 	/// <summary>
+	/// The game Variables for the check/set variable traps
+	/// </summary>
+	public int[] variables = new int[127];
+
+		/// <summary>
+		/// Tracks capture progress of the djinn
+		/// </summary>
+	public short DjinnCapture=0;
+
+	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)
 	/// </summary>
 	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat

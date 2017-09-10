@@ -14,7 +14,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
-		GameWorldController.instance.variables[6]=0;
+		//GameWorldController.instance.playerUW.quest().variables[6]=0;
 	}
 
 		/// <summary>
@@ -29,7 +29,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 	//		base.ExecuteTrap (src, triggerX, triggerY, State);
-
+				/*
 		if (GameWorldController.instance.variables[6] == 0)
 		{
 			GameWorldController.instance.variables[6] = 8;	
@@ -38,6 +38,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 		{
 			GameWorldController.instance.variables[6] = 0;		
 		}
+		*/
 	}
 
 	public override void PostActivate ()

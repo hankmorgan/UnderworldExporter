@@ -1181,11 +1181,13 @@ public class ObjectLoader : Loader {
 										/*offX = (x*BrushX) + 0.6f;*/
 										if (objList[index].x == 0)
 										{
-												offX +=0.15f;
+												//offX -=0.15f;
+												offX +=3;
 										}
 										if (objList[index].x == 7)
 										{
-												offX -=0.15f;
+												//offX -=0.15f;
+												offX -=3;
 										}
 										break;
 								case ObjectInteraction.HEADINGNORTH:
@@ -1194,11 +1196,13 @@ public class ObjectLoader : Loader {
 										offX = (x*BrushX) +60f;
 										if (objList[index].y == 0)
 										{
-												offY +=0.15f;
+												//offY +=0.15f;
+												offY +=3;
 										}
 										if (objList[index].y == 7)
 										{
-												offY -=0.15f;
+												//offY -=0.15f;
+												offY -=3;
 										}
 										break;
 								}

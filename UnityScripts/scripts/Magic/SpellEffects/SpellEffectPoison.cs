@@ -12,8 +12,7 @@ public class SpellEffectPoison : SpellEffect {
 	public bool isNPC;
 	
 	///The NPC the spell is applied to.
-	private NPC npc;
-
+	private NPC npc;	
 
 	public override void ApplyEffect ()
 	{
@@ -24,7 +23,13 @@ public class SpellEffectPoison : SpellEffect {
 				GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 			}
 			//GameWorldController.instance.playerUW.Poisoned=true;
-			GameWorldController.instance.playerUW.play_poison=1;//TODO:find out value to use here.
+			if (Value!=0)
+			{
+				GameWorldController.instance.playerUW.play_poison=Value;								
+			}
+		
+
+						//TODO:find out value to use here.
 		}
 		else
 		{

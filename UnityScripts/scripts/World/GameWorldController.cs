@@ -73,11 +73,7 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public int paletteIndexReverse=0;
 
-	/// <summary>
-	/// The Variables for the check/set variable traps
-	/// </summary>
-	public int[] variables = new int[127];
-	
+
 	/// <summary>
 	/// The tilemap class for the game
 	/// </summary>

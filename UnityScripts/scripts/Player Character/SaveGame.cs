@@ -203,7 +203,7 @@ public class SaveGame : Loader {
 												break;
 										case 0x60  : ///    bits 2..5: play_poison and no of active effects
 												GameWorldController.instance.playerUW.quest().IncenseDream=(int)(buffer[i] & 0x3);
-												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>2) & 0x7 );
+												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>2) & 0xf );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x61:
@@ -307,7 +307,7 @@ public class SaveGame : Loader {
 										case 0x8F:
 										case 0x90:
 												{
-													GameWorldController.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+													GameWorldController.instance.playerUW.quest().variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 													//break;
 												}
 										case 0xB1:  //The true max mana of the character. Used with the orb on level 7
@@ -864,8 +864,9 @@ public class SaveGame : Loader {
 											DataLoader.WriteInt8(writer,val);
 											break;
 										}
-								case 0x60  : ///    bits 2..5: play_poison
+								case 0x60  : ///    bits 2..5: play_poison.  no of active spell effects
 										DataLoader.WriteInt8(writer, ( ((NoOfActiveEffects & 0x3) <<6)) | (GameWorldController.instance.playerUW.play_poison<<2) | (GameWorldController.instance.playerUW.quest().IncenseDream & 0x3)   );
+
 										break;
 								case 0x61:
 										{
@@ -977,8 +978,8 @@ public class SaveGame : Loader {
 								case 0x8F:
 								case 0x90:
 										{
-												DataLoader.WriteInt8(writer,GameWorldController.instance.variables[i-0x71]);
-												break;
+											DataLoader.WriteInt8(writer,GameWorldController.instance.playerUW.quest().variables[i-0x71]);
+											break;
 										}
 								case 0xB1://The max mana the player has when their mana is drained by the magic orb.
 										{
@@ -1297,6 +1298,8 @@ public class SaveGame : Loader {
 				int[] ActiveEffectIds=new int[3];
 				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
+				int QuestCounter=0;
+				int VariableCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
 				GameWorldController.instance.playerUW.JustTeleported=true;
 				GameWorldController.instance.playerUW.teleportedTimer=0f;
@@ -1335,7 +1338,7 @@ public class SaveGame : Loader {
 						//File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
 						if (GameWorldController.instance.playerUW.recode)
 						{
-								buffer[734]=(char)3;
+								buffer[881]=(char)2;
 								char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
 
 								byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];
@@ -1502,15 +1505,15 @@ public class SaveGame : Loader {
 												GameWorldController.instance.playerUW.ResurrectLevel=(short)((buffer[i]>>4) & 0xf);
 												GameWorldController.instance.playerUW.MoonGateLevel=(short)(buffer[i] & 0xf);
 												break;
-										case 0x60  : ///    bits 2..5: play_poison and no of active effects
-												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>2) & 0x7 );
+										case 0x61  : ///    bits 1..4 play_poison and no of active effects (unchecked)
+												GameWorldController.instance.playerUW.play_poison=(short)((buffer[i]>>1) & 0xF );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
-										case 0x65+1: // hand, Gender & body, and class
+										case 0x66: // hand, Gender & body, and class
 												{
-														//bit 1 = hand left/right
-														//bit 2-5 = gender & body
-														//bit 6-8 = class
+														//bit 0 = hand left/right
+														//bit 1-4 = gender & body
+														//bit 5-7 = class
 
 														GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
 														GameWorldController.instance.playerUW.isLefty = (((int)buffer[i] & 0x1) == 0);
@@ -1534,7 +1537,214 @@ public class SaveGame : Loader {
 														break;
 												}
 
+										case 0x67:  //Quests 0 to 3
+										case 0x6B:  //Quests 4 to 7
+										case 0x6F:  //Quests 8 to 11
+										case 0x73:  //Quests 12 to 15
+										case 0x77:  //Quests 16 to 19
+										case 0x7B:  //Quests 20 to 23
+										case 0x7F:  //Quests 24 to 27
+										case 0x83:  //Quests 28 to 31
+										case 0x87:  //Quests 32 to 35
+										case 0x8B:  //Quests 36 to 39
+										case 0x8F:  //Quests 40 to 43
+										case 0x93:  //Quests 44 to 47
+										case 0x97:  //Quests 48 to 51
+										case 0x9B:  //Quests 52 to 55
+										case 0x9F:  //Quests 56 to 59
+										case 0xA3:  //Quests 60 to 63
+										case 0xA7:  //Quests 64 to 67
+										case 0xAB:  //Quests 68 to 71
+										case 0xAF:  //Quests 72 to 75
+										case 0xB3:  //Quests 76 to 79
+										case 0xB7:  //Quests 80 to 83
+										case 0xBB:  //Quests 84 to 87
+										case 0xBF:  //Quests 88 to 91
+										case 0xC3:  //Quests 92 to 95
+										case 0xC7:  //Quests 96 to 99
+										case 0xCB:  //Quests 100 to 103
+										case 0xCF:  //Quests 104 to 107
+										case 0xD3:  //Quests 108 to 111
+										case 0xD7:  //Quests 112 to 115
+										case 0xDB:  //Quests 116 to 119
+										case 0xDF:  //Quests 120 to 123
+										case 0xE3:  //Quests 124 to 127
+												{//The first 4 bits of each of these is the quest flags.
+													int val = (int)DataLoader.getValAtAddress(buffer,i,8);
+													for (int q=0; q<4;q++)
+													{
+														GameWorldController.instance.playerUW.quest().QuestVariables[QuestCounter++] = (val >> q) & 0x1;
+													}
+													break;
+												}
+										case 0xE7:  //Quest 128 - Where the lines of power have been cut
+										case 0xE8:  //Quest 129
+										case 0xE9:  //Quest 130
+										case 0xEA:  //Quest 131
+										case 0xEB:  //Quest 132
+										case 0xEC:  //Quest 133
+										case 0xED:  //Quest 134
+										case 0xEE:  //Quest 135
+										case 0xEF:  //Quest 136
+										case 0xF0:  //Quest 137
+										case 0xF1:  //Quest 138
+												{//TODO:These quests are not tested.
+													GameWorldController.instance.playerUW.quest().QuestVariables[i-103]=(int)DataLoader.getValAtAddress(buffer,i,8);
+													break;
+												}
 
+
+										case 0xFA:  //Variable0
+										case 0xFC:  //Variable1
+										case 0xFE:  //Variable2
+										case 0x100:  //Variable3
+										case 0x102:  //Variable4
+										case 0x104:  //Variable5
+										case 0x106:  //Treated gems used/ Variable6
+										case 0x108:  //Variable7
+										case 0x10A:  //Variable8
+										case 0x10C:  //Variable9
+										case 0x10E:  //Variable10
+										case 0x110:  //Variable11
+										case 0x112:  //Variable12
+										case 0x114:  //Variable13
+										case 0x116:  //Variable14
+										case 0x118:  //Variable15
+										case 0x11A:  //Variable16
+										case 0x11C:  //Variable17
+										case 0x11E:  //Variable18
+										case 0x120:  //Variable19
+										case 0x122:  //Variable20
+										case 0x124:  //Variable21
+										case 0x126:  //Variable22
+										case 0x128:  //Variable23
+										case 0x12A:  //Variable24
+										case 0x12C:  //Variable25
+										case 0x12E:  //Variable26
+										case 0x130:  //Variable27
+										case 0x132:  //Variable28
+										case 0x134:  //Variable29
+										case 0x136:  //Variable30
+										case 0x138:  //Variable31
+										case 0x13A:  //Variable32
+										case 0x13C:  //Variable33
+										case 0x13E:  //Variable34
+										case 0x140:  //Variable35
+										case 0x142:  //Variable36
+										case 0x144:  //Variable37
+										case 0x146:  //Variable38
+										case 0x148:  //Variable39
+										case 0x14A:  //Variable40
+										case 0x14C:  //Variable41
+										case 0x14E:  //Variable42
+										case 0x150:  //Variable43
+										case 0x152:  //Variable44
+										case 0x154:  //Variable45
+										case 0x156:  //Variable46
+										case 0x158:  //Variable47
+										case 0x15A:  //Variable48
+										case 0x15C:  //Variable49
+										case 0x15E:  //Variable50
+										case 0x160:  //Variable 51
+										case 0x162:  //Variable 52
+										case 0x164:  //Variable 53 
+										case 0x166:  //54
+										case 0x168:  //55
+										case 0x16A:  //56
+										case 0x16C:  //57
+										case 0x16E:  //58
+										case 0x170:  //59
+										case 0x172:  //60
+										case 0x174:  //61
+										case 0x176:  //62
+										case 0x178:  //63
+										case 0x17A:  //64
+										case 0x17C:  //65
+										case 0x17E:  //66
+										case 0x180:  //67
+										case 0x182:  //68
+										case 0x184:  //69
+										case 0x186:  //70
+										case 0x188:  //71
+										case 0x18A:  //72
+										case 0x18C:  //73
+										case 0x18E:  //74
+										case 0x190:  //75
+										case 0x192:  //76
+										case 0x194:  //77
+										case 0x196:  //78
+										case 0x198:  //79
+										case 0x19A:  //80
+										case 0x19C:  //81
+										case 0x19E:  //82
+										case 0x1A0:  //83
+										case 0x1A2:  //84
+										case 0x1A4:  //85
+										case 0x1A6:  //86
+										case 0x1A8:  //87
+										case 0x1AA:  //88
+										case 0x1AC:  //89
+										case 0x1AE:  //90
+										case 0x1B0:  //91
+										case 0x1B2:  //92
+										case 0x1B4:  //93
+										case 0x1B6:  //94
+										case 0x1B8:  //95
+										case 0x1BA:  //96
+										case 0x1BC:  //97
+										case 0x1BE:  //98
+										case 0x1C0:  //99
+										case 0x1C2:  //100
+										case 0x1C4:  //Variable 101
+										case 0x1C6:  //102
+										case 0x1C8:  //103
+										case 0x1CA:  //104
+										case 0x1CC:  //105
+										case 0x1CE:  //106
+										case 0x1D0:  //107
+										case 0x1D2:  //108
+										case 0x1D4:  //109
+										case 0x1D6:  //110
+										case 0x1D8:  //111
+										case 0x1DA:  //112
+										case 0x1DC:  //Variable 113
+										case 0x1DE:  //Variable 114 (duplicate with below!!!)
+										case 0x1E0:  //Variable 115
+										case 0x1E2:  //116
+										case 0x1E4:  //117
+										case 0x1E6:  //118
+										case 0x1E8:  //119
+										case 0x1EA:  //120
+										case 0x1EC:  //121
+										case 0x1EE:  //122
+										case 0x1F0:  //123
+										case 0x1F2:  //124
+										case 0x1F4:  //125
+										case 0x1F6:  //126
+										case 0x1F8:  //Variable 127
+												{
+													GameWorldController.instance.playerUW.quest().variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,8);
+													break;
+												}
+										case 0x303:
+												{//Game objections high nibble is graphic detail
+												int val =	(int)DataLoader.getValAtAddress(buffer,i,8);
+												ObjectInteraction.PlaySoundEffects= ((val & 0x1) == 1);
+												MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
+												break;
+												}
+
+										case 0x36f:
+												{//The mysterious x_clock
+													GameWorldController.instance.playerUW.quest().x_clocks[1]=(int)DataLoader.getValAtAddress(buffer,i,8);
+													break;
+												}
+
+										case 0x371://DjinnCapture
+												{
+													GameWorldController.instance.playerUW.quest().DjinnCapture=(short)DataLoader.getValAtAddress(buffer,i,8);
+													break;
+												}
 										}
 								}
 
