@@ -40,7 +40,7 @@ the left, right, center button combination on Level3.
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		if (check_variable_trap())
 		{
 			TriggerNext(triggerX,triggerY,State);
@@ -60,7 +60,7 @@ the left, right, center button combination on Level3.
 
 
 	bool check_variable_trap()
-	{//TODO: this is a guess
+	{//Based on what uw-formats says. Seems to work okay.
 
 		if (objInt().heading!=0)
 			{
@@ -75,13 +75,15 @@ the left, right, center button combination on Level3.
 						cmp |= (GameWorldController.instance.variables[i]  & 0x7);
 					}
 				}
-				Debug.Log ("cmp = " + cmp + " value=" + VariableValue());
+				Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());
 				return cmp == VariableValue();
 				
 			}
 		else
 			{//Is this right?
+				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + GameWorldController.instance.variables[objInt().zpos] + ")" );
 				return VariableValue()==GameWorldController.instance.variables[objInt().zpos];
 			}
 		}
+
 }

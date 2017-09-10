@@ -36,6 +36,7 @@ public class MusicController : UWEBase {
 		public const int SOUND_EFFECT_FOOT_GRAVELLY=47;
 		public const int SOUND_EFFECT_FOOT_ICE=48;
 
+	public static bool PlayMusic=true;
 
 	//Music modes
 	private const int MUS_DEATH=10;
@@ -254,14 +255,19 @@ public class MusicController : UWEBase {
 	/// <param name="tracklist">Tracklist array</param>
 	void PlayRandom(int[] tracklist)
 	{
-		int rnd = Random.Range (0,tracklist.GetUpperBound(0)+1);
-		Aud.clip=MainTrackList[tracklist[rnd]];
-		if (Stopped==false)
+		if (PlayMusic)
 		{
-			Aud.Play();				
+				int rnd = Random.Range (0,tracklist.GetUpperBound(0)+1);
+				Aud.clip=MainTrackList[tracklist[rnd]];
+				if (Stopped==false)
+				{
+						Aud.Play();				
+				}
 		}
-		
-
+		else
+		{
+			Aud.Stop();
+		}
 	}
 	/// <summary>
 	/// Stops music

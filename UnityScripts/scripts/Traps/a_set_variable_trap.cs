@@ -75,7 +75,7 @@ public class a_set_variable_trap : a_variable_trap {
 				break;
 
 			}
-			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.variables[objInt().zpos] );
+			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.variables[objInt().zpos] + " using varvalue" + VariableValue());
 		}
 		else
 		{//Bitwise operations on bitfield
@@ -104,6 +104,20 @@ public class a_set_variable_trap : a_variable_trap {
 				
 				break;
 			}
+		}	
+	}
+
+
+	public override int VariableValue ()
+		{//UW2 does this differently.
+		//See the puzzle on loth 1. (solution left to right is is 1,4,2,3,5) which xors to 31 when using the owner only.
+		//The check variable seems to work as normal in uw1 and uw2.
+		switch(_RES)
+		{
+		case GAME_UW2:
+				return objInt().owner;
+		default:
+				return ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
 		}	
 	}
 }

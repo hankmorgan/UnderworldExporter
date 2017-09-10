@@ -313,6 +313,13 @@ public class SaveGame : Loader {
 										case 0xB1:  //The true max mana of the character. Used with the orb on level 7
 												GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=(int)DataLoader.getValAtAddress(buffer,i,8);
 												break;
+										case 0xB6: //Game options. High nibble is detail which is ignored Bit 0 is sound. Bit 3 is music
+												{
+													int val =	(int)DataLoader.getValAtAddress(buffer,i,8);
+													ObjectInteraction.PlaySoundEffects= ((val & 0x1) == 1);
+													MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
+													break;
+												}
 										case 0xCF  : ///   game time
 												GameWorldController.instance.playerUW.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
 										case 0xD0: 
@@ -527,7 +534,7 @@ public class SaveGame : Loader {
 								{
 										dataToWrite[i] = (byte)buffer[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded_" + slotNo + ".dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decod_" + slotNo + ".dat", dataToWrite);
 						}
 
 						/*	if (recode)//Rewrite the file with test value changes.
@@ -984,14 +991,25 @@ public class SaveGame : Loader {
 										break;
 								case 0xb5://difficulty
 										DataLoader.WriteInt8(writer,GameWorldController.instance.difficulty);break;
-										//TODO:Save difficulty here at 0xb5
-								case 0xB6: //UW Game options
+
+								case 0xB6: //UW Game options TODO: Implement these
 										//high nibble is detail level.
 										//bit 0 of low nibble is sound
 										//bit 3 of low nibble is music
-										DataLoader.WriteInt8(writer,0x35);
+										{
+											int valToWrite = 0x30;//High detail	
+											if (ObjectInteraction.PlaySoundEffects)
+											{
+												valToWrite = valToWrite | 0x1;
+											}
+											if (MusicController.PlayMusic)
+											{
+												valToWrite = valToWrite | 0x4;
+											}
+											DataLoader.WriteInt8(writer,valToWrite);
+										}
 										break;
-								case 0xB7://Unknown
+								case 0xB7://Unknown. Always 8
 										DataLoader.WriteInt8(writer,0x8);
 										break;										
 								case 0xCF  : ///   game time
@@ -1297,7 +1315,7 @@ public class SaveGame : Loader {
 								{
 										dataToWrite[i] = (byte)buffer[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decoded_" + slotNo + ".dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decode_" + slotNo + ".dat", dataToWrite);
 						}
 
 
@@ -1317,7 +1335,7 @@ public class SaveGame : Loader {
 						//File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
 						if (GameWorldController.instance.playerUW.recode)
 						{
-								buffer[171]=(char)1;
+								buffer[734]=(char)3;
 								char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
 
 								byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];

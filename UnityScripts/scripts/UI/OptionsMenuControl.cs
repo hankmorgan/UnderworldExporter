@@ -469,13 +469,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		if (state==true)
 		{
 			MusicState.texture=MusicStateOn;
-			GameWorldController.instance.getMus().ResumeAll();
+			GameWorldController.instance.getMus().ResumeAll();			
 		}
 		else
 		{
 			MusicState.texture=MusicStateOff;	
 			GameWorldController.instance.getMus().StopAll();
 		}
+		MusicController.PlayMusic=state;
 	}
 
 	/// <summary>
@@ -486,14 +487,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	{
 		if (state==true)
 		{
-			ObjectInteraction.PlaySoundEffects=true;
+			
 			SoundState.texture=SoundStateOn;
 		}
 		else
 		{
-			ObjectInteraction.PlaySoundEffects=false;
 			SoundState.texture=SoundStateOff;	
 		}
+		ObjectInteraction.PlaySoundEffects=state;
 	}
 
 	/// <summary>

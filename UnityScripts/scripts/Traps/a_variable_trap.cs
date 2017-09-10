@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class a_variable_trap : trap_base {
+		public int value;
       //   field   bits in value
         //  ypos    0..2
        //   owner   3..7     (bit 5 of "owner" seems not to be used)
@@ -23,14 +24,23 @@ public class a_variable_trap : trap_base {
 	//	//heading = objInt().heading;
 	//}
 
+	protected override void Start ()
+	{
+		base.Start ();
+		value=VariableValue();
+	}
+
 
 	public override void PostActivate ()
 	{
 		//Do nothing. Stop trap from destroying itself.
 	}
 
-
-	public int VariableValue()
+		/// <summary>
+		/// Works out the variable the trap uses to set or check against.
+		/// </summary>
+		/// <returns>The value.</returns>
+	public virtual int VariableValue()
 	{
 		return ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
 	}
