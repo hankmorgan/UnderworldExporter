@@ -138,6 +138,7 @@ public class ObjectInteraction : UWEBase {
 		public const int AN_EXPLODING_BOOK=111;
 		public const int A_MAGIC_PROJECTILE=112;
 		public const int A_MOVING_DOOR=113;
+		public const int A_PRESSURE_TRIGGER=114;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1893,6 +1894,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_SCHEDULED_TRIGGER:
 						myObj.AddComponent<a_scheduled_trigger>();
+						CreateSprite=false;
+						break;
+				case A_PRESSURE_TRIGGER:
+						myObj.AddComponent<a_pressure_trigger>();
 						CreateSprite=false;
 						break;
 				case A_DAMAGE_TRAP:

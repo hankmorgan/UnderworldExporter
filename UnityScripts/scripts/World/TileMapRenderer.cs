@@ -2900,7 +2900,7 @@ public class TileMapRenderer : Loader{
 		/// <returns>The texture.</returns>
 		/// <param name="face">Face.</param>
 		/// <param name="t">T.</param>
-		static int WallTexture(int face, TileInfo t)
+		public static int WallTexture(int face, TileInfo t)
 		{
 				//return 34;
 				int wallTexture;
@@ -2934,7 +2934,7 @@ public class TileMapRenderer : Loader{
 		/// <returns>The texture.</returns>
 		/// <param name="face">Face.</param>
 		/// <param name="t">T.</param>
-		static int FloorTexture(int face, TileInfo t)
+		public static int FloorTexture(int face, TileInfo t)
 		{
 				int floorTexture;
 

@@ -15,13 +15,18 @@ public class TileContact : UWEBase {
 			{
 				TileContactEvent(collision.gameObject.GetComponent<ObjectInteraction>(), collision.contacts[0].point);
 			}
-		//Debug.Log(collision.other.name + " has collided with " + this.name);
 	}
 
 
 	protected virtual void TileContactEvent(ObjectInteraction obj, Vector3 position)
 	{
 				
+	}
+
+
+		protected virtual void TileContactEvent(Feet feet, Vector3 position)
+	{
+
 	}
 
 	/// <summary>
