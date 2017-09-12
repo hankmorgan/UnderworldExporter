@@ -529,11 +529,13 @@ public class DoorControl : object_base {
 	{
 		if (state()==false)//Closed
 		{
+			Debug.Log("Toggling door open");
 			UnlockDoor();
 			OpenDoor(doorTravelTime);	
 		}
 		else
 		{
+			Debug.Log("Toggling door closed");
 			CloseDoor (doorTravelTime);
 			LockDoor();
 		}

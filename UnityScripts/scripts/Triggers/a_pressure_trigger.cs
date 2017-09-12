@@ -6,6 +6,8 @@ using System.Collections;
 /// A pressure trigger that is activated when a weight is placed or removed from a tile.
 /// </summary>
 /// There are multiple Item ids that have this trigger type.
+/// A pressure trigger only triggers on weights put on.
+/// A release trigger only triggers on weights removed. Both triggers track if the weight is on them.
 /// Currently this implementation is tested for IDs 436 & 437 which change the texture of the tile.
 public class a_pressure_trigger : trigger_base {
 
@@ -20,38 +22,42 @@ public class a_pressure_trigger : trigger_base {
 
 	public Collider[] colliders;
 
+	public bool IsReleaseTrigger;
+
 	//Any door that uses this trigger
 
 	//public static a_pressure_trigger instance;
-
+		//public long frameNo=0;
 	public a_door_trap door; //Any door that this trigger might use
 
-	bool WaitingForStateChange;
-	int eventNo=0;
-	bool trigger_busy=false;
+	//bool WaitingForStateChange;
+	//int eventNo=0;
+	//bool trigger_busy=false;
 	public float WeightOnTrigger;
-		public Vector3 TileVector;
+	public float PreviousWeightOnTrigger;
+	public Vector3 TileVector;
 
-	public enum PlayerContactStates{
+	/*public enum PlayerContactStates{
 			playerInContact,
 			playerLeavesContact,
 			playerNotInContact,
 			playerEntersContact
-	};
+	};*/
 
-	public PlayerContactStates playerContactState;
+	//public PlayerContactStates playerContactState;
 
 	protected override void Start ()
 	{
 		base.Start ();
-
+		IsReleaseTrigger = ((objInt().item_id==437) || (objInt().item_id==421));
+						
 		TileXToWatch=objInt().tileX;
 		TileYToWatch=objInt().tileY;
 		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
 
 		int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
-		if (objInt().y==2)
+		/*if (objInt().y==2)
 		{//Is released
 				TextureOn=currentFloorTexture+1;
 				TextureOff=currentFloorTexture;
@@ -60,7 +66,23 @@ public class a_pressure_trigger : trigger_base {
 		{//Is weighed down.
 				TextureOn=currentFloorTexture;
 				TextureOff=currentFloorTexture-1;
+		}*/
+
+		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
+		WeightOnTrigger=0f;		
+		for (int i=0; i<=colliders.GetUpperBound(0);i++)
+		{
+			if (colliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)
+			{
+				WeightOnTrigger+= colliders[i].gameObject.GetComponent<ObjectInteraction>().GetWeight();
+			}
+			else if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
+			{
+				WeightOnTrigger+=5000;
+			}
 		}
+		PreviousWeightOnTrigger=WeightOnTrigger;
+		Debug.Log("starting weight is " + PreviousWeightOnTrigger);
 
 		if ( GameWorldController.instance.objectMaster.type[GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].item_id]== ObjectInteraction.A_DOOR_TRAP)
 		{					
@@ -77,7 +99,8 @@ public class a_pressure_trigger : trigger_base {
 	public override void Update ()
 	{
 		base.Update();
-		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.05f,0.4f));
+		
+		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
 		WeightOnTrigger=0f;
 		for (int i=0; i<=colliders.GetUpperBound(0);i++)
 		{
@@ -85,18 +108,40 @@ public class a_pressure_trigger : trigger_base {
 			{
 				WeightOnTrigger+= colliders[i].gameObject.GetComponent<ObjectInteraction>().GetWeight();
 			}
-			else if(colliders[i].gameObject.GetComponent<UWCharacter>()!=null)
+			else if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
 			{
 				WeightOnTrigger+=5000;
 			}
 		}
-		//WeightOnTrigger= getWeightOnTrigger();
+
+		if (IsReleaseTrigger)
+		{
+			if ((WeightOnTrigger<1.0f) && (PreviousWeightOnTrigger>=1.0f))								
+			{
+				ReleaseWeightFrom();	
+			}
+		}
+		else
+		{
+			if ((WeightOnTrigger>=1.0f) && (PreviousWeightOnTrigger<1.0f))								
+			{
+				PutWeightOn();
+			}	
+		}
+
+		PreviousWeightOnTrigger=WeightOnTrigger;
+				/*
 		if (objInt().y==2)
 		{//Needs weight
 			if (WeightOnTrigger>=1.0f)
 			{
 				objInt().y=3;
-				PutWeightOn();
+				if (!IsReleaseTrigger)
+				{
+						//Debug.Log("Weighing on frame no " + frameNo+ " " + this.name);
+						PutWeightOn();	
+				}
+				return;
 			}
 		}
 		else if (objInt().y==3)
@@ -104,84 +149,22 @@ public class a_pressure_trigger : trigger_base {
 			if (WeightOnTrigger<1.0f)
 			{
 				objInt().y=2;
-				ReleaseWeightFrom();
-			}	
-		}			
-	}
-		/*
-	bool UpdatePlayerContactState ()
-	{
-		switch (playerContactState) {
-		case PlayerContactStates.playerInContact:
-			//Player is in this tile. Check if player leaves.
-			trigger_busy=false;
-			if (! isPlayerGroundedInTile() ) 
-			{
-				playerContactState = PlayerContactStates.playerLeavesContact;
-				return true;
-			}
-			break;
-		case PlayerContactStates.playerLeavesContact:
-			if ((findDoorNotBusy ()) && (!trigger_busy)) 
+				if (IsReleaseTrigger)
 				{
-				//Debug.Log (eventNo++ + " player leaves contact due to free door");
-				playerContactState = PlayerContactStates.playerNotInContact;
-				ReleaseWeightFrom ();
-				trigger_busy=true;
-				return true;
-			}
-			//else 
-			//{
-				//Debug.Log (eventNo++ + " player waiting on door to become free. will leave contact when this happens");
-			//}
-			break;
-		case PlayerContactStates.playerNotInContact:
-			//Check if player enters contact
-			trigger_busy=false;
-			if (isPlayerGroundedInTile()) 
-			{
-				playerContactState = PlayerContactStates.playerEntersContact;
-				return true;
-			}
-			break;
-		case PlayerContactStates.playerEntersContact:
-			if ((findDoorNotBusy ()) && (!trigger_busy)) 
-			{
-				//Debug.Log (eventNo++ + " player in contact and door is free");
-				playerContactState = PlayerContactStates.playerInContact;
-				PutWeightOn ();
-				trigger_busy=true;
-				return true;
-			}				
-			//else 
-			//{
-			//	Debug.Log (eventNo++ + " player enters contact and is waiting on door");
-			//}
-			break;
-		}
-		return false;
-	}
-*/
-		/*
-		public bool isPlayerGroundedInTile()
-		{
-			GameWorldController.instance.PositionDetect();
-			return 
-					(
-							(
-								(TileXToWatch == TileMap.visitTileX)
-								&&
-								(TileXToWatch == TileMap.visitTileX) 
-							)
-							&& 
-								(TileMap.OnGround)
-					)	;
+					//Debug.Log("Releasing on frame no " + frameNo+ " " + this.name);
+					ReleaseWeightFrom();
+				}
+				return;
+			}	
 		}*/
 
+	
+	}
+	
 	public void PutWeightOn()
 	{
-		Debug.Log(eventNo++ + " weighing down");				
-		UpdateTileTexture(TextureOn);
+		//Debug.Log(eventNo++ + " weighing down");				
+		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
 		if (door!=null)
 		{
 			door.TriggerInstantly=true;
@@ -195,8 +178,8 @@ public class a_pressure_trigger : trigger_base {
 
 	public void ReleaseWeightFrom()
 	{
-		Debug.Log(eventNo++ + " releasing weight");		
-		UpdateTileTexture(TextureOff);
+		//Debug.Log(eventNo++ + " releasing weight");		
+		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
 		if (door!=null)
 		{
 			door.TriggerInstantly=true;
@@ -211,20 +194,20 @@ public class a_pressure_trigger : trigger_base {
 
 	public void UpdateTileTexture(int newTexture)
 	{
-		switch(objInt().item_id)
-		{
-		case 436://A pressure trigger
-		case 437://A pressure release trigger.
+		//switch(objInt().item_id)
+		//{
+		//case 436://A pressure trigger
+		//case 437://A pressure release trigger.
 			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;
 			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[newTexture];
 			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
 			Destroy(GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR));
 			//Debug.Log("setting texture " + TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])) ;
 			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])];
-			break;
-		default:
-			return;
-		}
+			//break;
+		//default:
+			//return;
+		//}
 	}
 		/*
 	bool IsTriggerWeighedDown()
@@ -275,12 +258,12 @@ public class a_pressure_trigger : trigger_base {
 	*/
 
 
-	bool findDoorNotBusy()
-	{
+//	bool findDoorNotBusy()
+	//{
 	//	if (door!=null)
 		//{
 		//	return ! door.DoorBusy;
 	//	}
-		return true;
-	}
+	//	return true;
+	//}
 }

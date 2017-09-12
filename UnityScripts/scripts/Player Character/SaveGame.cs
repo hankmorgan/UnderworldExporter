@@ -1353,7 +1353,7 @@ public class SaveGame : Loader {
 
 						int runeOffset=0;
 
-						for (int i=1; i<=300;i++)
+						for (int i=1; i<=930;i++)
 						{
 								if (i<14)
 								{
