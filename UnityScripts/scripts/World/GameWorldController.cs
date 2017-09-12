@@ -835,18 +835,18 @@ public class GameWorldController : UWEBase {
 	/// <param name="myObj">My object.</param>
 	public static void FreezeMovement(GameObject myObj)
 	{//Stop objects which can move in the 3d world from moving when they are in the inventory or containers.
-			Rigidbody rg = myObj.GetComponent<Rigidbody>();
-			if (rg!=null)
-			{
-					rg.useGravity=false;
-					rg.constraints = 
-							RigidbodyConstraints.FreezeRotationX 
-							| RigidbodyConstraints.FreezeRotationY 
-							| RigidbodyConstraints.FreezeRotationZ 
-							| RigidbodyConstraints.FreezePositionX 
-							| RigidbodyConstraints.FreezePositionY 
-							| RigidbodyConstraints.FreezePositionZ;
-			}
+		Rigidbody rg = myObj.GetComponent<Rigidbody>();
+		if (rg!=null)
+		{
+			rg.useGravity=false;
+			rg.constraints = 
+					RigidbodyConstraints.FreezeRotationX 
+					| RigidbodyConstraints.FreezeRotationY 
+					| RigidbodyConstraints.FreezeRotationZ 
+					| RigidbodyConstraints.FreezePositionX 
+					| RigidbodyConstraints.FreezePositionY 
+					| RigidbodyConstraints.FreezePositionZ;
+		}
 	}
 
 		/// <summary>

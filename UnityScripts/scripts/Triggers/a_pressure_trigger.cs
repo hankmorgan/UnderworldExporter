@@ -11,18 +11,26 @@ public class a_pressure_trigger : trigger_base {
 
 		/// <summary>
 		/// The tile that triggers this transition.
-		/// </summary>
-	public TileContactTrigger Tile;
+		/// </summary>	
 	public int TileXToWatch;
 	public int TileYToWatch;
 
-		//Any door that uses this trigger
+	public int TextureOn;
+	public int TextureOff;
 
-	public DoorControl door; //Any door that this trigger might use
+	public Collider[] colliders;
+
+	//Any door that uses this trigger
+
+	//public static a_pressure_trigger instance;
+
+	public a_door_trap door; //Any door that this trigger might use
 
 	bool WaitingForStateChange;
 	int eventNo=0;
-		bool trigger_busy=false;
+	bool trigger_busy=false;
+	public float WeightOnTrigger;
+		public Vector3 TileVector;
 
 	public enum PlayerContactStates{
 			playerInContact,
@@ -36,57 +44,71 @@ public class a_pressure_trigger : trigger_base {
 	protected override void Start ()
 	{
 		base.Start ();
+
 		TileXToWatch=objInt().tileX;
 		TileYToWatch=objInt().tileY;
-		if ((TileXToWatch==TileMap.visitTileX) && (TileXToWatch==TileMap.visitTileX))
-		{
-			playerContactState=PlayerContactStates.playerInContact;
-		}
-		else
-		{
-			playerContactState=PlayerContactStates.playerNotInContact;
-		}
-		LinkContact();
-	}
+		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
 
-	void LinkContact()
-	{
-		GameObject TileGameObject = GameWorldController.FindTile(objInt().tileX,objInt().tileY,TileMap.SURFACE_FLOOR);
-		if (TileGameObject!=null)
-		{
-			Tile = TileGameObject.AddComponent<TileContactTrigger>();	
-			Tile.triggerToUse=this;
-			TileXToWatch=objInt().tileX;
-			TileYToWatch=objInt().tileY;
-		}	
+		int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
+		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
+		if (objInt().y==2)
+		{//Is released
+				TextureOn=currentFloorTexture+1;
+				TextureOff=currentFloorTexture;
+		}
+		else if (objInt().y==3)
+		{//Is weighed down.
+				TextureOn=currentFloorTexture;
+				TextureOff=currentFloorTexture-1;
+		}
 
 		if ( GameWorldController.instance.objectMaster.type[GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].item_id]== ObjectInteraction.A_DOOR_TRAP)
-		{
+		{					
 			ObjectInteraction objDoorTrap=	ObjectLoader.getObjectIntAt(objInt().link);
+
 			if (objDoorTrap!=null)
 			{
-				GameObject doorObj = GameWorldController.findDoor(objDoorTrap.quality,objDoorTrap.owner);
-				if(doorObj!=null)
-				{
-					door=doorObj.GetComponent<DoorControl>();
-				}
+				door = objDoorTrap.GetComponent<a_door_trap>();
 			}
 		}
 	}
 
+
 	public override void Update ()
 	{
 		base.Update();
-		if (Tile==null)
+		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.05f,0.4f));
+		WeightOnTrigger=0f;
+		for (int i=0; i<=colliders.GetUpperBound(0);i++)
 		{
-			LinkContact();	
+			if (colliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)
+			{
+				WeightOnTrigger+= colliders[i].gameObject.GetComponent<ObjectInteraction>().GetWeight();
+			}
+			else if(colliders[i].gameObject.GetComponent<UWCharacter>()!=null)
+			{
+				WeightOnTrigger+=5000;
+			}
 		}
-		else
-		{
-			UpdatePlayerContactState ();
+		//WeightOnTrigger= getWeightOnTrigger();
+		if (objInt().y==2)
+		{//Needs weight
+			if (WeightOnTrigger>=1.0f)
+			{
+				objInt().y=3;
+				PutWeightOn();
+			}
 		}
+		else if (objInt().y==3)
+		{//Needs lightening.
+			if (WeightOnTrigger<1.0f)
+			{
+				objInt().y=2;
+				ReleaseWeightFrom();
+			}	
+		}			
 	}
-
+		/*
 	bool UpdatePlayerContactState ()
 	{
 		switch (playerContactState) {
@@ -102,16 +124,16 @@ public class a_pressure_trigger : trigger_base {
 		case PlayerContactStates.playerLeavesContact:
 			if ((findDoorNotBusy ()) && (!trigger_busy)) 
 				{
-				Debug.Log (eventNo++ + " player leaves contact due to free door");
+				//Debug.Log (eventNo++ + " player leaves contact due to free door");
 				playerContactState = PlayerContactStates.playerNotInContact;
 				ReleaseWeightFrom ();
 				trigger_busy=true;
 				return true;
 			}
-			else 
-			{
-				Debug.Log (eventNo++ + " player waiting on door to become free. will leave contact when this happens");
-			}
+			//else 
+			//{
+				//Debug.Log (eventNo++ + " player waiting on door to become free. will leave contact when this happens");
+			//}
 			break;
 		case PlayerContactStates.playerNotInContact:
 			//Check if player enters contact
@@ -125,22 +147,22 @@ public class a_pressure_trigger : trigger_base {
 		case PlayerContactStates.playerEntersContact:
 			if ((findDoorNotBusy ()) && (!trigger_busy)) 
 			{
-				Debug.Log (eventNo++ + " player in contact and door is free");
+				//Debug.Log (eventNo++ + " player in contact and door is free");
 				playerContactState = PlayerContactStates.playerInContact;
 				PutWeightOn ();
 				trigger_busy=true;
 				return true;
 			}				
-			else 
-			{
-				Debug.Log (eventNo++ + " player enters contact and is waiting on door");
-			}
+			//else 
+			//{
+			//	Debug.Log (eventNo++ + " player enters contact and is waiting on door");
+			//}
 			break;
 		}
 		return false;
 	}
-
-
+*/
+		/*
 		public bool isPlayerGroundedInTile()
 		{
 			GameWorldController.instance.PositionDetect();
@@ -154,76 +176,49 @@ public class a_pressure_trigger : trigger_base {
 							&& 
 								(TileMap.OnGround)
 					)	;
-		}
+		}*/
 
-	public bool PutWeightOn()
+	public void PutWeightOn()
 	{
-		if(door!=null)
+		Debug.Log(eventNo++ + " weighing down");				
+		UpdateTileTexture(TextureOn);
+		if (door!=null)
 		{
-			if (door.DoorBusy)
-			{
-				return false;
-			}
+			door.TriggerInstantly=true;
 		}
-
-		if (IsTriggerWeighedDown())
+		Activate ();	
+		if (door!=null)
 		{
-			if(objInt().y==2)//This is the behaviour in scintillus academy. Untested on other locations
-			{
-				Debug.Log(eventNo++ + " weighing down");
-				objInt().y=3;
-				UpdateTileTexture(1);
-				Activate ();			
-			}				
-			return true;
-		}
-		else
-		{
-			return false;//ReleaseWeightFrom();
+			door.TriggerInstantly=false;
 		}
 	}
 
-	public bool ReleaseWeightFrom()
+	public void ReleaseWeightFrom()
 	{
-		if(door!=null)
+		Debug.Log(eventNo++ + " releasing weight");		
+		UpdateTileTexture(TextureOff);
+		if (door!=null)
 		{
-			if (door.DoorBusy)
-			{
-				return false;
-			}
+			door.TriggerInstantly=true;
 		}
-
-		if (IsTriggerLightened())
+		Activate ();	
+		if (door!=null)
 		{
-			if (objInt().y==3)//This is the behaviour in scintillus academy. Untested on other locations
-			{
-				Debug.Log(eventNo++ + " releasing weight");
-				objInt().y=2;
-				UpdateTileTexture(-1);
-				Activate ();		
-				return true;	
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;//PutWeightOn();
+			door.TriggerInstantly=false;
 		}	
 	}
 
 
-	public void UpdateTileTexture(int dir)
+	public void UpdateTileTexture(int newTexture)
 	{
 		switch(objInt().item_id)
 		{
 		case 436://A pressure trigger
 		case 437://A pressure release trigger.
-			GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY].floorTexture += (short)dir;
-			GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY].TileNeedsUpdate();
-			Destroy(Tile.gameObject);
+			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;
+			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[newTexture];
+			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
+			Destroy(GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR));
 			//Debug.Log("setting texture " + TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])) ;
 			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])];
 			break;
@@ -231,7 +226,7 @@ public class a_pressure_trigger : trigger_base {
 			return;
 		}
 	}
-
+		/*
 	bool IsTriggerWeighedDown()
 	{
 		return (getWeightOnTrigger() >= 10f);
@@ -240,40 +235,52 @@ public class a_pressure_trigger : trigger_base {
 	bool IsTriggerLightened()
 	{
 		return (!IsTriggerWeighedDown());
-	}
-
+	}*/
+		/*
 	public float getWeightOnTrigger()
 	{
 		float totalWeight=0;
 		GameWorldController.instance.PositionDetect();
-		if ((TileMap.visitTileX==objInt().tileX) && (TileMap.visitTileY==objInt().tileY))
+		if ((TileMap.visitTileX==TileXToWatch) && (TileMap.visitTileY==TileYToWatch))
 		{
-				totalWeight=255f;//The player is always heavy enough
+			totalWeight=255f;//The player is always heavy enough
 		}
 		else
 		{
-				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
+						//int ybefore=0;
+						//ybefore=objInt().y;
+			//	ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
+						//Debug.Log("Y was " + ybefore + " is now " + objInt().y);
 				int index= GameWorldController.instance.currentTileMap().Tiles[this.objInt().tileX,this.objInt().tileY].indexObjectList;
-
+				int tileHeight = GameWorldController.instance.currentTileMap().Tiles[this.objInt().tileX,this.objInt().tileY].floorHeight;
 				if (index!=0)
 				{
-						while (index!=0)		
-						{
-								totalWeight += GameWorldController.instance.CurrentObjectList().objInfo[index].instance.GetWeight();
-								index = GameWorldController.instance.CurrentObjectList().objInfo[index].next;
-						}
+					while (index!=0)		
+					{
+						if ( 
+							(GameWorldController.instance.CurrentObjectList().objInfo[index].instance.zpos >=tileHeight*4)
+							&&
+							(GameWorldController.instance.CurrentObjectList().objInfo[index].instance.zpos <=(tileHeight*4)+2)
+								)
+								{
+									totalWeight += GameWorldController.instance.CurrentObjectList().objInfo[index].instance.GetWeight();	
+								}	
+						index = GameWorldController.instance.CurrentObjectList().objInfo[index].next;
+					}
 				}	
 		}
+		//Debug.Log("total weight=" + totalWeight);
 		return totalWeight;
 	}
+	*/
 
 
 	bool findDoorNotBusy()
 	{
-		if (door!=null)
-		{
-			return ! door.DoorBusy;
-		}
+	//	if (door!=null)
+		//{
+		//	return ! door.DoorBusy;
+	//	}
 		return true;
 	}
 }

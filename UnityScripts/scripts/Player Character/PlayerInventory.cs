@@ -920,7 +920,17 @@ public class PlayerInventory : UWEBase {
 	{//What remaining weight the player can carry.
 
 		float InventoryWeight=getInventoryWeight();
-		float CarryWeight = playerUW.PlayerSkills.STR*2.0f;
+		float CarryWeight=0f;
+		switch(_RES)
+		{
+		case GAME_UW2:
+			CarryWeight= playerUW.PlayerSkills.STR*3.0f;
+			break;
+		default:
+			CarryWeight= playerUW.PlayerSkills.STR*2.0f;
+			break;
+		}
+				 
 		return CarryWeight-InventoryWeight;
 	}
 

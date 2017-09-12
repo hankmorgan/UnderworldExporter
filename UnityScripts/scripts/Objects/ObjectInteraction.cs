@@ -275,8 +275,6 @@ public class ObjectInteraction : UWEBase {
 		//public short AlreadyRendered;
 		//public short DeathWatched;
 
-
-
 		//public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
@@ -514,6 +512,18 @@ public class ObjectInteraction : UWEBase {
 		{
 			object_base item=null;
 			item=this.GetComponent<object_base>();
+			if (TileMap.ValidTile(tileX,tileY))
+			{
+				if (GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].PressureTriggerIndex!=0)		
+				{
+					ObjectInteraction obj = ObjectLoader.getObjectIntAt(GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].PressureTriggerIndex);
+					if (obj.GetComponent<a_pressure_trigger>()!=null)
+					{
+						obj.GetComponent<a_pressure_trigger>().ReleaseWeightFrom();
+					}
+				}
+			}
+
 			if (item!=null)
 			{
 				return(item.PickupEvent());

@@ -927,6 +927,7 @@ public class ObjectLoader : Loader {
 				case  ObjectInteraction.AN_UNLOCK_TRIGGER :
 				case  ObjectInteraction.A_TIMER_TRIGGER:
 				case  ObjectInteraction.A_SCHEDULED_TRIGGER:
+				case ObjectInteraction.A_PRESSURE_TRIGGER:
 						{
 								return true;
 						}	

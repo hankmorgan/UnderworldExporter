@@ -45,7 +45,7 @@ public class DoorControl : object_base {
 	const int OpenRotation = -90;
 	const int CloseRotation = -OpenRotation;
 
-	const float DoorTravelTime=1.3f;
+	public const float DefaultDoorTravelTime=1.3f;
 
 	protected override void Start ()
 	{	
@@ -316,11 +316,11 @@ public class DoorControl : object_base {
 		{//Toggle Open and closed
 			if (state()==false)
 				{//Door is closed
-				OpenDoor ();
+				OpenDoor (DoorControl.DefaultDoorTravelTime);
 				}
 			else
 				{//Door is open
-				CloseDoor ();
+					CloseDoor (DoorControl.DefaultDoorTravelTime);
 				}
 		}
 		else
@@ -336,7 +336,7 @@ public class DoorControl : object_base {
 	/// <summary>
 	/// Opens the door.
 	/// </summary>
-	public void OpenDoor()
+	public void OpenDoor(float DoorTravelTime)
 	{
 		if (state()	==false)
 			{
@@ -358,7 +358,7 @@ public class DoorControl : object_base {
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
 						objInt().aud.Play();		
 					}
-					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),DoorTravelTime));
 				}
 				objInt().item_id+=8;
 				objInt().zpos+=24;
@@ -432,7 +432,7 @@ public class DoorControl : object_base {
 	/// <summary>
 	/// Closes the door.
 	/// </summary>
-	public void CloseDoor()
+	public void CloseDoor(float DoorTravelTime)
 	{
 		if (state()==true)
 		{
@@ -454,7 +454,7 @@ public class DoorControl : object_base {
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
 						objInt().aud.Play();		
 					}
-					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),DoorTravelTime));
 				}
 				objInt().item_id-=8;
 				objInt().zpos-=24;
@@ -525,16 +525,16 @@ public class DoorControl : object_base {
 		/// <summary>
 		/// Toggles the door open or closed.
 		/// </summary>
-	public void ToggleDoor()
+	public void ToggleDoor(float doorTravelTime)
 	{
 		if (state()==false)//Closed
 		{
 			UnlockDoor();
-			OpenDoor();	
+			OpenDoor(doorTravelTime);	
 		}
 		else
 		{
-			CloseDoor ();
+			CloseDoor (doorTravelTime);
 			LockDoor();
 		}
 	}
@@ -611,7 +611,7 @@ public class DoorControl : object_base {
 			{
 				//locked=false;
 				UnlockDoor();
-				OpenDoor();
+				OpenDoor(DoorControl.DefaultDoorTravelTime);
 			}
 		}
 		return true;		

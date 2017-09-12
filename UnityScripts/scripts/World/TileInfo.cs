@@ -58,6 +58,7 @@ public class TileInfo : Loader {
 
 		public bool NeedsReRender=false;
 
+		public int PressureTriggerIndex=0;
 
 		/// <summary>
 		/// Tells us the tile needs to be updated next LateUpdate

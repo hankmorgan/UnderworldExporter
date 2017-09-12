@@ -2841,24 +2841,24 @@ public class ConversationVM : UWEBase {
 						DoorControl DC = dr.GetComponent<DoorControl>();
 						if (DC!=null)
 						{
-								if (Action==0)
-								{
-										DC.UnlockDoor();
-										DC.OpenDoor();
-								}
-								else
-								{
-										DC.CloseDoor();
-										DC.LockDoor ();
-								}
-								if (DC.objInt ().quality == 0)
-								{
-										return 0;
-								}
-								else
-								{
-										return 1;
-								}
+							if (Action==0)
+							{
+								DC.UnlockDoor();
+								DC.OpenDoor(DoorControl.DefaultDoorTravelTime);
+							}
+							else
+							{
+								DC.CloseDoor(DoorControl.DefaultDoorTravelTime);
+								DC.LockDoor ();
+							}
+							if (DC.objInt ().quality == 0)
+							{
+								return 0;
+							}
+							else
+							{
+								return 1;
+							}
 						}
 						else
 						{
