@@ -247,6 +247,44 @@ public class Magic : UWEBase {
 		}
 
 		/// <summary>
+		/// Gets the best spell vector to use depending on type of caster
+		/// </summary>
+		/// <returns>The best spell vector.</returns>
+		/// <param name="caster">Caster.</param>
+		/// If npc target the gtarg
+		/// If other object target the forward direction
+		Vector3 GetBestSpellVector(GameObject casterToEval)
+		{
+				GameObject caster;
+				if (casterToEval.name.Contains("NPC_Launcher"))
+				{
+						caster=casterToEval.transform.parent.gameObject;
+				}
+				else
+				{
+						caster=casterToEval;
+				}
+				if (caster.GetComponent<NPC>()!=null)	
+				{
+						if (caster.GetComponent<NPC>().gtargName=="_Gronk")
+						{
+								return (GameWorldController.instance.playerUW.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+						}
+						else
+						{
+								return (caster.GetComponent<NPC>().getGtarg().transform.position - caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+						}
+						//Get a vector between the npcs launcher and the player cam
+
+				}
+				else
+				{
+						return caster.transform.forward;
+				}
+		}
+
+
+		/// <summary>
 		/// Casts the spell from the selected magic runes
 		/// </summary>
 		/// <param name="caster">Caster.</param>
@@ -254,6 +292,10 @@ public class Magic : UWEBase {
 		/// <param name="ready">If set to <c>true</c> then the spell is being readied (for targetted spells), false for immediate cast</param>
 		public void castSpell(GameObject caster, string MagicWords, bool ready)
 		{
+				if(_RES==GAME_UW2)
+				{
+						Debug.Log("this effect Ids need to be updated for UW2.");
+				}
 				switch (MagicWords)
 				{
 				case "An An An":
@@ -2114,6 +2156,20 @@ public class Magic : UWEBase {
 
 
 		/// <summary>
+		/// Casts the wand of altara spell. WIll cut lines of power in certain locations.
+		/// </summary>
+		void Cast_Altara()
+		{
+			Debug.Log("Perform the wand of altara spell");
+
+				//Check if player is in a certain location.
+
+				//Has the line of power been cut.
+
+				//Cut the power and set the quest.
+		}
+
+		/// <summary>
 		/// Creates and sets the spell effect on the array passed
 		/// </summary>
 		/// <returns>The spell effect created</returns>
@@ -2123,226 +2179,431 @@ public class Magic : UWEBase {
 		/// <param name="EffectID">Effect I.</param>
 		SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectID)
 		{
-				//Adds an effect to the player from a spell.
-				//TODO:Validate this list versus all available spell effects
-				//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-
-				switch (EffectID)
+			//Adds an effect to the player from a spell.
+			//TODO:Validate this list versus all available spell effects
+			//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+			switch(_RES)
+			{
+			case GAME_UW2:
 				{
-				case SpellEffect.UW1_Spell_Effect_Darkness:
-				case SpellEffect.UW1_Spell_Effect_BurningMatch:
-				case SpellEffect.UW1_Spell_Effect_Candlelight:
-				case SpellEffect.UW1_Spell_Effect_Light:
-				case SpellEffect.UW1_Spell_Effect_MagicLantern:
-				case SpellEffect.UW1_Spell_Effect_Daylight:
-				case SpellEffect.UW1_Spell_Effect_Sunlight:
-				case SpellEffect.UW1_Spell_Effect_Light_alt01:
-				case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
-				case SpellEffect.UW1_Spell_Effect_Light_alt02:
-				case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectLight>();
-						break;
+					switch (EffectID)
+					{
+								case SpellEffect.UW2_Spell_Effect_Darkness:
+								case SpellEffect.UW2_Spell_Effect_BurningMatch:
+								case SpellEffect.UW2_Spell_Effect_Candlelight:
+								case SpellEffect.UW2_Spell_Effect_Light:
+								case SpellEffect.UW2_Spell_Effect_MagicLantern:
+								case SpellEffect.UW2_Spell_Effect_Daylight:
+								case SpellEffect.UW2_Spell_Effect_Sunlight:
+								case SpellEffect.UW2_Spell_Effect_Light_alt01:
+								case SpellEffect.UW2_Spell_Effect_Daylight_alt01:
+								case SpellEffect.UW2_Spell_Effect_Light_alt02:
+								case SpellEffect.UW2_Spell_Effect_Daylight_alt02:
+									ActiveSpellArray[index]=caster.AddComponent<SpellEffectLight>();
+									break;
 
-				case SpellEffect.UW1_Spell_Effect_Leap:
-				case SpellEffect.UW1_Spell_Effect_Leap_alt01:
-				case SpellEffect.UW1_Spell_Effect_Leap_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectLeap>();
-						//To implement
-						break;
-				case SpellEffect.UW1_Spell_Effect_SlowFall:
-				case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
-				case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Levitate:
-				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
-				case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
-				case SpellEffect.UW1_Spell_Effect_Fly:
-				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
-				case SpellEffect.UW1_Spell_Effect_Fly_alt02:						
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_WaterWalk:
-				case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
-				case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_ResistBlows:
-				case SpellEffect.UW1_Spell_Effect_ThickSkin:
-				case SpellEffect.UW1_Spell_Effect_IronFlesh:
-				case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
-				case SpellEffect.UW1_Spell_Effect_ThickSkin_alt01:
-				case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:
-				case SpellEffect.UW1_Spell_Effect_ResistBlows_alt02:
-				case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
-				case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
-						//Todo
-						break;
-				case SpellEffect.UW1_Spell_Effect_Stealth:
-				case SpellEffect.UW1_Spell_Effect_Conceal:
-				case SpellEffect.UW1_Spell_Effect_Stealth_alt01:
-				case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
-				case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
-				case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
-				case SpellEffect.UW1_Spell_Effect_Invisibilty:
-				case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
-				case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:						
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
-						//Todo
-						break;
+								case SpellEffect.UW2_Spell_Effect_Leap:
+								case SpellEffect.UW2_Spell_Effect_Leaping_alt01:
+								case SpellEffect.UW2_Spell_Effect_Leap_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectLeap>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_SlowFall:
+								case SpellEffect.UW2_Spell_Effect_SlowFall_alt01:
+								case SpellEffect.UW2_Spell_Effect_SlowFall_alt02:										
+									ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
+									break;
+								case SpellEffect.UW2_Spell_Effect_Fly:
+								case SpellEffect.UW2_Spell_Effect_Fly_alt01:
+								case SpellEffect.UW2_Spell_Effect_Fly_alt02:
+								case SpellEffect.UW2_Spell_Effect_Levitate:
+								case SpellEffect.UW2_Spell_Effect_Levitate_alt01:
+								case SpellEffect.UW2_Spell_Effect_Levitate_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_WaterWalk:
+								case SpellEffect.UW2_Spell_Effect_WaterWalk_alt01:
+								case SpellEffect.UW2_Spell_Effect_WaterWalk_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_ResistBlows:
+								case SpellEffect.UW2_Spell_Effect_ThickSkin:
+								case SpellEffect.UW2_Spell_Effect_IronFlesh:
+								case SpellEffect.UW2_Spell_Effect_ResistBlows_alt01:
+								case SpellEffect.UW2_Spell_Effect_ThickSkin_alt01:
+								case SpellEffect.UW2_Spell_Effect_IronFlesh_alt01:
+								case SpellEffect.UW2_Spell_Effect_ResistBlows_alt02:
+								case SpellEffect.UW2_Spell_Effect_ThickSkin_alt02:
+								case SpellEffect.UW2_Spell_Effect_IronFlesh_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Stealth:
+								case SpellEffect.UW2_Spell_Effect_Conceal:
+								case SpellEffect.UW2_Spell_Effect_Invisibilty:
+								case SpellEffect.UW2_Spell_Effect_Invisibility_alt01:
+								case SpellEffect.UW2_Spell_Effect_Stealth_alt01:
+								case SpellEffect.UW2_Spell_Effect_Conceal_alt01:
+								case SpellEffect.UW2_Spell_Effect_Invisibility_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_MissileProtection:
+								case SpellEffect.UW2_Spell_Effect_MissileProtection_alt01:
+								case SpellEffect.UW2_Spell_Effect_MissileProtection_alt02:
+										
+								case SpellEffect.UW2_Spell_Effect_MagicProtection:
+								case SpellEffect.UW2_Spell_Effect_GreaterMagicProtection:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
+										//Todo
+										break;
 
-						//Missiles
-				case SpellEffect.UW1_Spell_Effect_MissileProtection:
-				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
-				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
+								case SpellEffect.UW2_Spell_Effect_Flameproof:
+								case SpellEffect.UW2_Spell_Effect_Flameproof_alt01:
+								case SpellEffect.UW2_Spell_Effect_Flameproof_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectFlameproof>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_PoisonResistance:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
+										//Todo
+										break;
+								case SpellEffect.UW2_Spell_Effect_Speed:
+								case SpellEffect.UW2_Spell_Effect_Speed_alt01:
+								case SpellEffect.UW2_Spell_Effect_Speed_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Telekinesis:
+								case SpellEffect.UW2_Spell_Effect_Telekinesis_alt01:
+								case SpellEffect.UW2_Spell_Effect_Telekinesis_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_FreezeTime:
+								case SpellEffect.UW2_Spell_Effect_FreezeTime_alt01:
+								case SpellEffect.UW2_Spell_Effect_FreezeTime_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Regeneration_alt01:
+								case SpellEffect.UW2_Spell_Effect_Regeneration:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_ManaRegeneration:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Hallucination:
+								case SpellEffect.UW2_Spell_Effect_Hallucination_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_NightVision:
+								case SpellEffect.UW2_Spell_Effect_NightVision_alt01:
+								case SpellEffect.UW2_Spell_Effect_NightVision_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Poison:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_MassParalyze:
+								case SpellEffect.UW2_Spell_Effect_Paralyze:
+								case SpellEffect.UW2_Spell_Effect_Paralyze_alt01:
+								case SpellEffect.UW2_Spell_Effect_MassParalyze_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_Charm://known in uw1 as ally?
+								case SpellEffect.UW2_Spell_Effect_Charm_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_MassConfusion:
+								case SpellEffect.UW2_Spell_Effect_MassConfusion_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_CauseFear:
+								case SpellEffect.UW2_Spell_Effect_CauseFear_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectFear>();
+										break;
+								case SpellEffect.UW2_Spell_Effect_MinorAccuracy:
+								case SpellEffect.UW2_Spell_Effect_MajorAccuracy:
+								case SpellEffect.UW2_Spell_Effect_GreatAccuracy:
+								case SpellEffect.UW2_Spell_Effect_UnsurpassedAccuracy:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();//not used anymore???
+										break;
 
-						//Magic
-				case SpellEffect.UW1_Spell_Effect_MagicProtection:
-				case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
+								case SpellEffect.UW2_Spell_Effect_MinorDamage:
+								case SpellEffect.UW2_Spell_Effect_MajorDamage:
+								case SpellEffect.UW2_Spell_Effect_GreatDamage:
+								case SpellEffect.UW2_Spell_Effect_UnsurpassedDamage:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
+										break;
 
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
-						//Todo
-						break;
-						//Flames
-				case SpellEffect.UW1_Spell_Effect_Flameproof:
-				case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
-				case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectFlameproof>();
-						break;
+								case SpellEffect.UW2_Spell_Effect_MinorProtection:
+								case SpellEffect.UW2_Spell_Effect_Protection:
+								case SpellEffect.UW2_Spell_Effect_AdditionalProtection:
+								case SpellEffect.UW2_Spell_Effect_MajorProtection:
+								case SpellEffect.UW2_Spell_Effect_GreatProtection:
+								case SpellEffect.UW2_Spell_Effect_VeryGreatProtection:
+								case SpellEffect.UW2_Spell_Effect_TremendousProtection:
+								case SpellEffect.UW2_Spell_Effect_UnsurpassedProtection:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
+										break;
 
-				case SpellEffect.UW1_Spell_Effect_PoisonResistance:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
-						//Todo
-						break;
-				case SpellEffect.UW1_Spell_Effect_Speed:
-				case SpellEffect.UW1_Spell_Effect_Haste:			
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
-						//Todo
-						break;
-				case SpellEffect.UW1_Spell_Effect_Telekinesis:
-				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
-				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_FreezeTime:
-				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
-				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Regeneration:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_MazeNavigation:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectMazeNavigation>();
-						break;			
-				case SpellEffect.UW1_Spell_Effect_Hallucination:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_NightVision:
-				case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
-				case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Poison:
-				case SpellEffect.UW1_Spell_Effect_Poison_alt01:
-				case SpellEffect.UW1_Spell_Effect_PoisonHidden:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Paralyze:
-				case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Ally:
-				case SpellEffect.UW1_Spell_Effect_Ally_alt01:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_Confusion:
-				case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_CauseFear:
-				case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:	
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectFear>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_Accuracy:
-				case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
-				case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_MinorDamage:
-				case SpellEffect.UW1_Spell_Effect_Damage:
-				case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
-				case SpellEffect.UW1_Spell_Effect_MajorDamage:
-				case SpellEffect.UW1_Spell_Effect_GreatDamage:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
-				case SpellEffect.UW1_Spell_Effect_TremendousDamage:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_MinorProtection:
-				case SpellEffect.UW1_Spell_Effect_Protection:
-				case SpellEffect.UW1_Spell_Effect_AdditionalProtection:
-				case SpellEffect.UW1_Spell_Effect_MajorProtection:
-				case SpellEffect.UW1_Spell_Effect_GreatProtection:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
-				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_MinorToughness:
-				case SpellEffect.UW1_Spell_Effect_Toughness:
-				case SpellEffect.UW1_Spell_Effect_AdditionalToughness:
-				case SpellEffect.UW1_Spell_Effect_MajorToughness:
-				case SpellEffect.UW1_Spell_Effect_GreatToughness:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
-				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
-						break;
-				case SpellEffect.UW1_Spell_Effect_RoamingSight:
-				case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
-				case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectRoamingSight>();
-						break;		
-				case SpellEffect.UW1_Spell_Effect_Curse:
-				case SpellEffect.UW1_Spell_Effect_Curse_alt01:
-				case SpellEffect.UW1_Spell_Effect_Curse_alt02:
-				case SpellEffect.UW1_Spell_Effect_Cursed:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt01:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt02:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt03:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt04:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt05:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt06:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt07:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt09:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt10:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt11:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt12:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt13:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt14:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
-				case SpellEffect.UW1_Spell_Effect_Cursed_alt16:							
-						ActiveSpellArray[index]=caster.AddComponent<SpellEffectCurse>();
-						break;		
-				default:
+								case SpellEffect.UW2_Spell_Effect_MinorToughness:
+								case SpellEffect.UW2_Spell_Effect_Toughness:
+								case SpellEffect.UW2_Spell_Effect_AdditionalToughness:
+								case SpellEffect.UW2_Spell_Effect_MajorToughness:
+								case SpellEffect.UW2_Spell_Effect_GreatToughness:
+								case SpellEffect.UW2_Spell_Effect_VeryGreatToughness:
+								case SpellEffect.UW2_Spell_Effect_TremendousToughness:
+								case SpellEffect.UW2_Spell_Effect_UnsurpassedToughness:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
+										break;
+
+								case SpellEffect.UW2_Spell_Effect_RoamingSight:
+								case SpellEffect.UW2_Spell_Effect_RoamingSight_alt01:
+								case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectRoamingSight>();
+										break;
+
+								case SpellEffect.UW2_Spell_Effect_Curse:
+								case SpellEffect.UW2_Spell_Effect_Cursed:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt01:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt02:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt03:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt04:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt05:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt06:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt07:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt08:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt09:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt10:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt11:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt12:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt13:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt14:
+								case SpellEffect.UW2_Spell_Effect_Cursed_alt15:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectCurse>();
+										break;	
+										
+					default:
 						Debug.Log ("effect Id is " + EffectID);
 						ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
 						break;
-
+					}
+					break;
 				}
 
-				ActiveSpellArray[index].EffectID=EffectID;
-				return ActiveSpellArray[index];
+			default:
+				{
+					switch (EffectID)
+					{
+					case SpellEffect.UW1_Spell_Effect_Darkness:
+					case SpellEffect.UW1_Spell_Effect_BurningMatch:
+					case SpellEffect.UW1_Spell_Effect_Candlelight:
+					case SpellEffect.UW1_Spell_Effect_Light:
+					case SpellEffect.UW1_Spell_Effect_MagicLantern:
+					case SpellEffect.UW1_Spell_Effect_Daylight:
+					case SpellEffect.UW1_Spell_Effect_Sunlight:
+					case SpellEffect.UW1_Spell_Effect_Light_alt01:
+					case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
+					case SpellEffect.UW1_Spell_Effect_Light_alt02:
+					case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectLight>();
+							break;
+
+					case SpellEffect.UW1_Spell_Effect_Leap:
+					case SpellEffect.UW1_Spell_Effect_Leap_alt01:
+					case SpellEffect.UW1_Spell_Effect_Leap_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectLeap>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_SlowFall:
+					case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
+					case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Levitate:
+					case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
+					case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+					case SpellEffect.UW1_Spell_Effect_Fly:
+					case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+					case SpellEffect.UW1_Spell_Effect_Fly_alt02:						
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_WaterWalk:
+					case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
+					case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_ResistBlows:
+					case SpellEffect.UW1_Spell_Effect_ThickSkin:
+					case SpellEffect.UW1_Spell_Effect_IronFlesh:
+					case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
+					case SpellEffect.UW1_Spell_Effect_ThickSkin_alt01:
+					case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:
+					case SpellEffect.UW1_Spell_Effect_ResistBlows_alt02:
+					case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
+					case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Stealth:
+					case SpellEffect.UW1_Spell_Effect_Conceal:
+					case SpellEffect.UW1_Spell_Effect_Stealth_alt01:
+					case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
+					case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
+					case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
+					case SpellEffect.UW1_Spell_Effect_Invisibilty:
+					case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
+					case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:						
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
+							break;
+							//Missiles
+					case SpellEffect.UW1_Spell_Effect_MissileProtection:
+					case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
+					case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
+
+							//Magic
+					case SpellEffect.UW1_Spell_Effect_MagicProtection:
+					case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
+
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
+							//Todo
+							break;
+							//Flames
+					case SpellEffect.UW1_Spell_Effect_Flameproof:
+					case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
+					case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectFlameproof>();
+							break;
+
+					case SpellEffect.UW1_Spell_Effect_PoisonResistance:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
+							//Todo
+							break;
+					case SpellEffect.UW1_Spell_Effect_Speed:
+					case SpellEffect.UW1_Spell_Effect_Haste:			
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
+							//Todo
+							break;
+					case SpellEffect.UW1_Spell_Effect_Telekinesis:
+					case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
+					case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_FreezeTime:
+					case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
+					case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Regeneration:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_MazeNavigation:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectMazeNavigation>();
+							break;			
+					case SpellEffect.UW1_Spell_Effect_Hallucination:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_NightVision:
+					case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
+					case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Poison:
+					case SpellEffect.UW1_Spell_Effect_Poison_alt01:
+					case SpellEffect.UW1_Spell_Effect_PoisonHidden:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Paralyze:
+					case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Ally:
+					case SpellEffect.UW1_Spell_Effect_Ally_alt01:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_Confusion:
+					case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_CauseFear:
+					case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:	
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectFear>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
+					case SpellEffect.UW1_Spell_Effect_Accuracy:
+					case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
+					case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
+					case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
+					case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
+					case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
+					case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_MinorDamage:
+					case SpellEffect.UW1_Spell_Effect_Damage:
+					case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
+					case SpellEffect.UW1_Spell_Effect_MajorDamage:
+					case SpellEffect.UW1_Spell_Effect_GreatDamage:
+					case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
+					case SpellEffect.UW1_Spell_Effect_TremendousDamage:
+					case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_MinorProtection:
+					case SpellEffect.UW1_Spell_Effect_Protection:
+					case SpellEffect.UW1_Spell_Effect_AdditionalProtection:
+					case SpellEffect.UW1_Spell_Effect_MajorProtection:
+					case SpellEffect.UW1_Spell_Effect_GreatProtection:
+					case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
+					case SpellEffect.UW1_Spell_Effect_TremendousProtection:
+					case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_MinorToughness:
+					case SpellEffect.UW1_Spell_Effect_Toughness:
+					case SpellEffect.UW1_Spell_Effect_AdditionalToughness:
+					case SpellEffect.UW1_Spell_Effect_MajorToughness:
+					case SpellEffect.UW1_Spell_Effect_GreatToughness:
+					case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
+					case SpellEffect.UW1_Spell_Effect_TremendousToughness:
+					case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
+							break;
+					case SpellEffect.UW1_Spell_Effect_RoamingSight:
+					case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
+					case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectRoamingSight>();
+							break;		
+					case SpellEffect.UW1_Spell_Effect_Curse:
+					case SpellEffect.UW1_Spell_Effect_Curse_alt01:
+					case SpellEffect.UW1_Spell_Effect_Curse_alt02:
+					case SpellEffect.UW1_Spell_Effect_Cursed:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt01:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt02:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt03:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt04:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt05:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt06:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt07:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt09:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt10:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt11:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt12:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt13:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt14:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
+					case SpellEffect.UW1_Spell_Effect_Cursed_alt16:							
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffectCurse>();
+							break;		
+					default:
+							Debug.Log ("effect Id is " + EffectID);
+							ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
+							break;
+
+					}//end uw1 effects list
+					break;
+				}
+			}
+
+
+			ActiveSpellArray[index].EffectID=EffectID;
+			return ActiveSpellArray[index];
 		}
 
 		/// <summary>
@@ -2765,7 +3026,14 @@ public class Magic : UWEBase {
 		/// <param name="SpellRule">What spell rule is applicable</param>
 		public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectID, int SpellRule)
 		{//Either cast enchantment now or skip straight to fire off a readied spell.
-				return CastEnchantment (caster,target,EffectID,false,SpellRule);
+				switch(_RES)
+				{
+				case GAME_UW2:
+
+				default:
+					return CastEnchantmentUW1 (caster,target,EffectID,false,SpellRule);
+				}
+
 		}
 
 		/// <summary>
@@ -2778,7 +3046,14 @@ public class Magic : UWEBase {
 		/// <param name="SpellRule">What spell rule is applicable</param>
 		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, int SpellRule)
 		{//Either cast enchantment now or ready it for casting.
-				return CastEnchantment (caster,target,EffectID,true,SpellRule);
+				switch(_RES)
+				{
+				case GAME_UW2:
+						
+				default:
+						return CastEnchantmentUW1 (caster,target,EffectID,true,SpellRule);
+				}
+
 		}
 
 		/// <summary>
@@ -2791,11 +3066,8 @@ public class Magic : UWEBase {
 		/// <param name="ready">If set to <c>true</c> ready.</param>
 		/// <param name="SpellRule">Spell rule to apply.</param>
 		/// Spells cast from anything that carries and enchantment.
-		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
-		{//Eventually casts spells from things like fountains, potions, enchanted weapons.
-			//TODO: The switch statement may need to be further divided because of passive/active effects.
-			//TODO: this list may be incomplete. I need to include things from my spreadsheet that are not status effects.
-			//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		public SpellEffect CastEnchantmentUW1(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
+		{
 			int ActiveArrayIndex=-1;
 			int PassiveArrayIndex=-1;
 			int SpellResultType= SpellResultNone;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
@@ -3502,7 +3774,7 @@ public class Magic : UWEBase {
 
 				case SpellEffect.UW1_Spell_Effect_MassParalyze:
 				case SpellEffect.UW1_Spell_Effect_Acid_alt01:
-				case SpellEffect.UW1_Spell_Effect_LocalTeleport_alt01:
+				case SpellEffect.UW1_Spell_Effect_LocalTeleport:
 						//Cast spell/no spell effect
 						SpellResultType=SpellResultNone;
 						break;
@@ -3557,9 +3829,8 @@ public class Magic : UWEBase {
 						break;
 
 				default:
-						Debug.Log ("effect Id is " + EffectID);
+						Debug.Log ("Unimplemented effect Id is " + EffectID);
 						SpellResultType=SpellResultNone;
-						//ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
 						break;
 
 				}
@@ -3578,39 +3849,877 @@ public class Magic : UWEBase {
 		}
 
 		/// <summary>
-		/// Gets the best spell vector to use depending on type of caster
+		/// Casts the enchantment based on the spell rules, targets and ready state
 		/// </summary>
-		/// <returns>The best spell vector.</returns>
+		/// <returns>The enchantment applied</returns>
 		/// <param name="caster">Caster.</param>
-		/// If npc target the gtarg
-		/// If other object target the forward direction
-		Vector3 GetBestSpellVector(GameObject casterToEval)
+		/// <param name="target">Target.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="ready">If set to <c>true</c> ready.</param>
+		/// <param name="SpellRule">Spell rule to apply.</param>
+		/// Spells cast from anything that carries and enchantment.
+		/// UW2 version of this.
+		public SpellEffect CastEnchantmentUW2(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
 		{
-				GameObject caster;
-				if (casterToEval.name.Contains("NPC_Launcher"))
-				{
-						caster=casterToEval.transform.parent.gameObject;
-				}
-				else
-				{
-						caster=casterToEval;
-				}
-				if (caster.GetComponent<NPC>()!=null)	
-				{
-						if (caster.GetComponent<NPC>().gtargName=="_Gronk")
-						{
-							return (GameWorldController.instance.playerUW.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
-						}
-						else
-						{
-							return (caster.GetComponent<NPC>().getGtarg().transform.position - caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
-						}
-						//Get a vector between the npcs launcher and the player cam
+				int ActiveArrayIndex=-1;
+				int PassiveArrayIndex=-1;
+				int SpellResultType= SpellResultNone;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
+				SpellEffect[] other=null;
 
+				if (SpellRule!=SpellRule_TargetVector)
+				{	
+						ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
+						PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
+
+						if (target!=null)
+						{
+								PassiveArrayIndex=CheckPassiveSpellEffectNPC(target);//Was other.
+								if (target.GetComponent<NPC>()!=null)
+								{
+										other= target.GetComponent<NPC>().NPCStatusEffects;
+								}
+						}
 				}
-				else
+
+				/*
+				insert uw2 effect ids
+				
+				*/
+				switch(EffectID)
 				{
-					return caster.transform.forward;
+					case SpellEffect.UW2_Spell_Effect_Altara:
+						{
+							Cast_Altara();
+							SpellResultType=SpellResultNone;
+							break;
+						}
+					
+					case SpellEffect.UW2_Spell_Effect_Armageddon:
+					case SpellEffect.UW2_Spell_Effect_Armageddon_alt01:
+						{
+							Cast_VasKalCorp(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Bouncing:
+				case SpellEffect.UW2_Spell_Effect_Bouncing_alt01:
+				case SpellEffect.UW2_Spell_Effect_Bounce_alt01:
+						{//A bouncing spell. Not sure what this does
+							Debug.Log("BOOOOUNCCCEEEE!!!!");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_CurePoison:
+				case SpellEffect.UW2_Spell_Effect_CurePoison_alt01:
+						{
+							Cast_AnNox(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Curse:
+						{
+							Cast_Curse(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;			
+						}
+				case SpellEffect.UW2_Spell_Effect_Cursed:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt01:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt02:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt03:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt04:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt05:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt06:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt07:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt08:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt09:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt10:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt11:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt12:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt13:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt14:
+				case SpellEffect.UW2_Spell_Effect_Cursed_alt15:
+						//Affect player from cursed items
+						if (PassiveArrayIndex!=-1)
+						{
+							Cast_CursedItem(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							SpellResultType=SpellResultPassive;
+						}
+						break;
+				
+				case SpellEffect.UW2_Spell_Effect_DeadlySeeker:
+				case SpellEffect.UW2_Spell_Effect_DeadlySeeker_alt01:
+						{
+							//Wand of deadly seeker. A homing missile
+							Debug.Log("wand of deadly seeker");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Charm:
+				case SpellEffect.UW2_Spell_Effect_Charm_alt01:
+						{
+							Debug.Log("charm");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_MassConfusion:
+				case SpellEffect.UW2_Spell_Effect_MassConfusion_alt01:						
+						{
+							Cast_VasAnWis(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_CauseFear:
+				case SpellEffect.UW2_Spell_Effect_CauseFear_alt01:
+						{
+								Cast_QuasCorp(caster,EffectID);
+								SpellResultType=SpellResultNone;
+								break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_FireDoom:
+						{
+							Debug.Log("Firedoom");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Flameproof:
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_Flameproof_alt01:
+				case SpellEffect.UW2_Spell_Effect_Flameproof_alt02:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+						}
+						break;
+
+				case SpellEffect.UW2_Spell_Effect_Fly:
+				case SpellEffect.UW2_Spell_Effect_Levitate:
+						if (PassiveArrayIndex!=-1)
+						{
+							Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							SpellResultType=SpellResultPassive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_Fly_alt01:
+				case SpellEffect.UW2_Spell_Effect_Fly_alt02:
+				case SpellEffect.UW2_Spell_Effect_Levitate_alt01:
+				case SpellEffect.UW2_Spell_Effect_Levitate_alt02:
+						if (ActiveArrayIndex!=-1)
+						{
+							Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+							SpellResultType=SpellResultActive;
+						}
+						break;		
+
+				case SpellEffect.UW2_Spell_Effect_SlowFall:
+				case SpellEffect.UW2_Spell_Effect_SlowFall_alt01:
+				case SpellEffect.UW2_Spell_Effect_SlowFall_alt02:
+						{
+							if (ActiveArrayIndex!=-1)
+							{
+								Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+							}
+							break;
+						}
+				case SpellEffect.UW2_Spell_Effect_CreateFood:
+				case SpellEffect.UW2_Spell_Effect_CreateFood_alt01:
+						{
+							//Cast spell/no spell effect
+							Cast_InManiYlem(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_DispelHunger:						
+				case SpellEffect.UW2_Spell_Effect_DispelHunger_alt01:
+						{
+							Debug.Log("Dispel Hunger");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_FreezeTime:
+						//Active variation.
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_FreezeTime_alt01:
+				case SpellEffect.UW2_Spell_Effect_FreezeTime_alt02:
+						{
+							if (PassiveArrayIndex!=-1)
+							{
+								Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+							}		
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_Frost:
+				case SpellEffect.UW2_Spell_Effect_Frost_alt01:
+						{
+							Debug.Log("stay frosty");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Hallucination:
+				case SpellEffect.UW2_Spell_Effect_Hallucination_alt01:
+						{
+							Cast_Hallucination(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							SpellResultType=SpellResultPassive;
+							break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt01:
+				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt02:
+				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt03:
+				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt04:
+				case SpellEffect.UW2_Spell_Effect_Heal:
+				case SpellEffect.UW2_Spell_Effect_Heal_alt01:
+				case SpellEffect.UW2_Spell_Effect_Heal_alt02:
+				case SpellEffect.UW2_Spell_Effect_Heal_alt03:
+				case SpellEffect.UW2_Spell_Effect_EnhancedHeal:
+				case SpellEffect.UW2_Spell_Effect_EnhancedHeal_alt02:
+				case SpellEffect.UW2_Spell_Effect_EnhancedHeal_alt03:
+				case SpellEffect.UW2_Spell_Effect_EnhancedHeal_alt04:
+				case SpellEffect.UW2_Spell_Effect_GreaterHeal:
+				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt01:
+				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt02:
+				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt03:
+				case SpellEffect.UW2_Spell_Effect_Restoration:
+				case SpellEffect.UW2_Spell_Effect_Regeneration_alt01:
+				case SpellEffect.UW2_Spell_Effect_Regeneration:
+				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt05:
+				case SpellEffect.UW2_Spell_Effect_Heal_alt04:
+				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt04:
+				case SpellEffect.UW2_Spell_Effect_Restoration_alt01:
+					{
+						Cast_Heal (caster,EffectID);//Get seperate values;
+						SpellResultType=SpellResultNone;
+						break;
+					}
+
+				case SpellEffect.UW2_Spell_Effect_Invisibilty:
+				case SpellEffect.UW2_Spell_Effect_Stealth:
+				case SpellEffect.UW2_Spell_Effect_Conceal:
+						//PLayer only
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+
+				case SpellEffect.UW2_Spell_Effect_Invisibility_alt01:
+				case SpellEffect.UW2_Spell_Effect_Invisibility_alt02:
+				case SpellEffect.UW2_Spell_Effect_Stealth_alt01:
+				case SpellEffect.UW2_Spell_Effect_Conceal_alt01:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+						}
+						break;
+
+				case SpellEffect.UW2_Spell_Effect_SmiteFoe:
+				case SpellEffect.UW2_Spell_Effect_SmiteFoe_alt01:
+						{
+							Debug.Log("smite foe");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Leap:
+						if (PassiveArrayIndex!=-1)
+						{
+							Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						}
+						SpellResultType=SpellResultPassive;
+						break;
+				case SpellEffect.UW2_Spell_Effect_Leaping_alt01:
+				case SpellEffect.UW2_Spell_Effect_Leap_alt01:
+						if (ActiveArrayIndex!=-1)
+						{
+							Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+							SpellResultType=SpellResultActive;
+						}
+						break;
+
+				case SpellEffect.UW2_Spell_Effect_LifeStealer:
+						{
+							Debug.Log("life stealer");
+							SpellResultType=SpellResultNone;
+							break;	
+						}
+				case SpellEffect.UW2_Spell_Effect_Darkness:
+				case SpellEffect.UW2_Spell_Effect_BurningMatch:
+				case SpellEffect.UW2_Spell_Effect_Candlelight:
+				case SpellEffect.UW2_Spell_Effect_Light:
+				case SpellEffect.UW2_Spell_Effect_MagicLantern:
+				case SpellEffect.UW2_Spell_Effect_NightVision:
+				case SpellEffect.UW2_Spell_Effect_Daylight:
+				case SpellEffect.UW2_Spell_Effect_Sunlight:
+						//These need to have different values. Create a system of unique values array(?)
+						//Only the player needs light.
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_Light_alt01:
+				case SpellEffect.UW2_Spell_Effect_NightVision_alt01:
+				case SpellEffect.UW2_Spell_Effect_Daylight_alt01:
+				case SpellEffect.UW2_Spell_Effect_Light_alt02:
+				case SpellEffect.UW2_Spell_Effect_NightVision_alt02:
+				case SpellEffect.UW2_Spell_Effect_Daylight_alt02:
+					if (PassiveArrayIndex!=-1)
+					{
+						Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						SpellResultType=SpellResultPassive;
+					}
+					break;
+
+				case SpellEffect.UW2_Spell_Effect_Locate:
+				case SpellEffect.UW2_Spell_Effect_Locate_alt01:
+					{
+						Debug.Log("locate");
+						SpellResultType=SpellResultNone;
+						break;	
+					}
+
+				
+				case SpellEffect.UW2_Spell_Effect_NameEnchantment:
+				case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:
+				case SpellEffect.UW2_Spell_Effect_Enchantment_alt01:
+						{
+							Cast_NameEnchantment(caster,ready,EffectID);
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+
+				case SpellEffect.UW2_Spell_Effect_StudyMonster:
+				case SpellEffect.UW2_Spell_Effect_StudyMonster_alt01:
+						{
+							Debug.Log("study monster");
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Luck_alt01:
+				case SpellEffect.UW2_Spell_Effect_Luck_alt02:
+						{
+							Debug.Log("lucky");
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+
+				case SpellEffect.UW2_Spell_Effect_MagicProtection:
+				case SpellEffect.UW2_Spell_Effect_GreaterMagicProtection:
+						{
+							if (PassiveArrayIndex!=-1)
+							{
+								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+							}
+								break;
+						}
+				case SpellEffect.UW2_Spell_Effect_MagicSatellite_alt01:
+						{
+								Debug.Log("magic satellite");
+								SpellResultType=SpellResultNone;
+								break;			
+						}
+
+				case SpellEffect.UW2_Spell_Effect_IncreaseMana:
+				case SpellEffect.UW2_Spell_Effect_IncreaseMana_alt01:
+				case SpellEffect.UW2_Spell_Effect_IncreaseMana_alt02:
+				case SpellEffect.UW2_Spell_Effect_IncreaseMana_alt03:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt01:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt02:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt03:
+				case SpellEffect.UW2_Spell_Effect_RegainMana:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt01:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt02:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt03:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt04:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt05:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt06:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt07:
+				case SpellEffect.UW2_Spell_Effect_IncreaseMana_alt04:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt04:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt04:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana:
+				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt05:
+				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt01:
+					{
+						Cast_Mana(caster,EffectID);
+						SpellResultType=SpellResultNone;
+						break;	
+					}
+
+				case SpellEffect.UW2_Spell_Effect_ManaRegeneration:
+						{
+							Debug.Log("mana regen");
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+
+				case SpellEffect.UW2_Spell_Effect_MapArea:
+				case SpellEffect.UW2_Spell_Effect_MapArea_alt01:
+						{
+							Debug.Log("map area");
+							SpellResultType=SpellResultNone;
+							break;										
+						}
+				case SpellEffect.UW2_Spell_Effect_MindBlast:
+						{
+							Debug.Log("mind blast");
+							SpellResultType=SpellResultNone;
+							break;			
+						}
+				case SpellEffect.UW2_Spell_Effect_MissileProtection:
+				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt01:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;	
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt02:
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_BasiliskOil:
+						{
+								Debug.Log("basilisk oil");
+								SpellResultType=SpellResultNone;
+								break;		
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Open:
+				case SpellEffect.UW2_Spell_Effect_Open_alt01:
+						{
+							Cast_ExYlem(caster,ready,EffectID);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+				case SpellEffect.UW2_Spell_Effect_Enchantment:
+						{
+							Debug.Log("enchantment");
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+				case SpellEffect.UW2_Spell_Effect_MassParalyze:
+				case SpellEffect.UW2_Spell_Effect_Paralyze:
+				case SpellEffect.UW2_Spell_Effect_Paralyze_alt01:
+				case SpellEffect.UW2_Spell_Effect_MassParalyze_alt01:
+						{
+								//Can effect player and npc
+								//TODO: does this spell work from wands and the like. If so do I need to figure out targetting.
+								//Enchantment spells come in as target self. Presumably there is one version that is player paralyzes themselves
+								//and another where it is get random target. For now paralyze self :)
+								switch(SpellRule)
+								{
+								case SpellRule_TargetOther:
+										if (target!=null)
+										{
+												if (PassiveArrayIndex!=-1)
+												{
+														Cast_Paralyze (target,other,EffectID,PassiveArrayIndex);SpellResultType=SpellResultNone;
+												}
+										}
+										break;
+								case SpellRule_TargetSelf:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Paralyze (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+										}
+										break;
+								}
+								break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Poison:
+						{
+								//Can effect player and npc
+								switch(SpellRule)
+								{
+								case SpellRule_TargetOther:
+										if (target!=null)
+										{
+												if (PassiveArrayIndex!=-1)
+												{
+														Cast_Poison (target,other,EffectID,PassiveArrayIndex);SpellResultType=SpellResultNone;
+												}
+										}
+										break;
+								case SpellRule_TargetSelf:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Poison (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+										}
+										break;
+								}
+								break;	
+						}
+				case SpellEffect.UW2_Spell_Effect_PoisonResistance:
+						{
+							Debug.Log ("Poison Resistance enchantment");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_PoisonWeapon:
+				case SpellEffect.UW2_Spell_Effect_PoisonWeapon_alt01:
+				case SpellEffect.UW2_Spell_Effect_PoisonWeapon_alt02:
+						{
+							Debug.Log ("Poison Weapon");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_GateTravel:
+				case SpellEffect.UW2_Spell_Effect_GateTravel_alt01:
+				case SpellEffect.UW2_Spell_Effect_GateTravel_alt02:
+						{
+							Cast_VasRelPor(caster,EffectID);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Portal:
+				case SpellEffect.UW2_Spell_Effect_Portal_alt01:
+						{
+							Debug.Log ("Portal");
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_MagicArrow:
+				case SpellEffect.UW2_Spell_Effect_MagicArrow_alt01:
+						{
+							if (SpellRule!=SpellRule_TargetVector)
+							{
+									Cast_OrtJux(caster,ready,EffectID);
+							}
+							else
+							{
+									SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+									spOJ.init (EffectID,caster);
+									CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spOJ);
+							}
+							SpellResultType=SpellResultNone;
+							break;		
+						}
+				
+				case SpellEffect.UW2_Spell_Effect_Fireball:
+				case SpellEffect.UW2_Spell_Effect_Fireball_alt01:
+						{
+								if (SpellRule!=SpellRule_TargetVector)
+								{
+										Cast_PorFlam(caster,ready,EffectID);
+								}
+								else
+								{
+										SpellProp_Fireball spPF =new SpellProp_Fireball();
+										spPF.init (EffectID,caster);
+										spPF.caster=caster;
+										CastProjectile(caster,GetBestSpellVector(caster),(SpellProp)spPF);
+								}
+								SpellResultType=SpellResultNone;
+								break;	
+						}
+				case SpellEffect.UW2_Spell_Effect_AcidSpit:
+				case SpellEffect.UW2_Spell_Effect_AcidSpit_alt01:
+				case SpellEffect.UW2_Spell_Effect_Acid_alt01:
+						{
+								Debug.Log ("acid");
+								SpellResultType=SpellResultNone;
+								break;	
+						}
+
+
+				case SpellEffect.UW2_Spell_Effect_Snowballs:
+				case SpellEffect.UW2_Spell_Effect_Snowballs_alt01:
+						{
+								Debug.Log ("snowballs");
+								SpellResultType=SpellResultNone;
+								break;
+						}
+				case SpellEffect.UW2_Spell_Effect_Lightning_alt05:
+				case SpellEffect.UW2_Spell_Effect_ElectricalBolt:
+						{
+								if (SpellRule!=SpellRule_TargetVector)
+								{
+										Cast_OrtGrav(caster,ready,EffectID);
+								}
+								else
+								{
+										SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
+										spOG.init (EffectID,caster);
+										CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spOG);
+								}
+								SpellResultType=SpellResultNone;
+								break;
+						}
+				case SpellEffect.UW2_Spell_Effect_SheetLightning:
+				case SpellEffect.UW2_Spell_Effect_SheetLightning_alt01:
+						{
+								if (SpellRule!=SpellRule_TargetVector)
+								{
+										Cast_VasOrtGrav(caster,EffectID);
+								}
+								else
+								{
+										SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
+										spVOG.init (EffectID,caster);
+										CastProjectile(caster,GetBestSpellVector(caster),(SpellProp)spVOG);
+								}
+								SpellResultType=SpellResultNone;
+								break;	
+						}
+				
+				case SpellEffect.UW2_Spell_Effect_FlameWind:
+				case SpellEffect.UW2_Spell_Effect_FlameWind_alt01:
+						{
+								if (SpellRule!=SpellRule_TargetVector)
+								{
+										Cast_FlamHur(caster,EffectID);
+								}
+								else
+								{
+										SpellProp_FlameWind spFH =new SpellProp_FlameWind();
+										spFH.init (EffectID,caster);
+										CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spFH);
+								}
+								SpellResultType=SpellResultNone;
+								break;
+						}
+				case SpellEffect.UW2_Spell_Effect_Shockwave:
+				case SpellEffect.UW2_Spell_Effect_Shockwave_alt01:
+						
+						{
+								Debug.Log("SHockwave")	;
+								SpellResultType=SpellResultNone;
+								break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Mending:
+				case SpellEffect.UW2_Spell_Effect_Mending_alt01:
+						{
+							Debug.Log("mending (check uw1 version!)")	;
+							SpellResultType=SpellResultNone;
+							break;	
+						}
+				
+
+				case SpellEffect.UW2_Spell_Effect_ResistBlows:
+				case SpellEffect.UW2_Spell_Effect_ThickSkin:
+				case SpellEffect.UW2_Spell_Effect_IronFlesh:
+					if (PassiveArrayIndex!=-1)
+					{
+						Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						SpellResultType=SpellResultPassive;
+					}
+
+					break;
+
+
+				case SpellEffect.UW2_Spell_Effect_ResistBlows_alt01:
+				case SpellEffect.UW2_Spell_Effect_ThickSkin_alt01:
+				case SpellEffect.UW2_Spell_Effect_IronFlesh_alt01:
+				case SpellEffect.UW2_Spell_Effect_ResistBlows_alt02:
+				case SpellEffect.UW2_Spell_Effect_ThickSkin_alt02:
+				case SpellEffect.UW2_Spell_Effect_IronFlesh_alt02:
+						{
+							if (ActiveArrayIndex!=-1)
+							{
+								Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+							}
+							break;
+						}
+				
+				case SpellEffect.UW2_Spell_Effect_Reveal:
+				case SpellEffect.UW2_Spell_Effect_Reveal_alt01:						
+						{
+							Debug.Log("reveal")	;
+							SpellResultType=SpellResultNone;
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_RoamingSight:
+				case SpellEffect.UW2_Spell_Effect_RoamingSight_alt01:
+				case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
+						{
+							Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+							SpellResultType=SpellResultNone;
+							break;
+						}
+						
+				case SpellEffect.UW2_Spell_Effect_DispelRune:
+				case SpellEffect.UW2_Spell_Effect_RuneOfFlame:
+				case SpellEffect.UW2_Spell_Effect_RuneOfStasis:
+				case SpellEffect.UW2_Spell_Effect_RuneofFlame_alt01:
+				case SpellEffect.UW2_Spell_Effect_DispelRune_alt01:
+				case SpellEffect.UW2_Spell_Effect_RuneofStasis_alt01:
+						{
+								Debug.Log("uw2 rune traps")	;
+								SpellResultType=SpellResultNone;
+								break;
+						}
+				case SpellEffect.UW2_Spell_Effect_Speed:
+				case SpellEffect.UW2_Spell_Effect_Speed_alt01:
+				case SpellEffect.UW2_Spell_Effect_Speed_alt02:
+						{
+							//player only
+							if (ActiveArrayIndex!=-1)
+							{
+									Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+									SpellResultType=SpellResultActive;
+							}
+							break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_StoneStrike:
+						{
+							Debug.Log("stone strike")	;
+							SpellResultType=SpellResultNone;
+							break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_SummonMonster:
+				case SpellEffect.UW2_Spell_Effect_SummonDemon:
+				case SpellEffect.UW2_Spell_Effect_SummonDemon_alt01:
+							{
+								Cast_KalMani(caster,EffectID);
+								SpellResultType=SpellResultNone;
+								break;
+							}
+
+				case SpellEffect.UW2_Spell_Effect_Telekinesis:
+						//player only
+						if (ActiveArrayIndex!=-1)
+						{
+							Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+							SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt01:
+				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt02:
+						if (PassiveArrayIndex!=-1)
+						{
+							Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							SpellResultType=SpellResultPassive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_LocalTeleport:
+						{
+							Debug.Log("local teleport")	;
+							SpellResultType=SpellResultNone;
+							break;			
+						}
+				case SpellEffect.UW2_Spell_Effect_RemoveTrap:
+				case SpellEffect.UW2_Spell_Effect_DetectTrap:
+				case SpellEffect.UW2_Spell_Effect_DetectTrap_alt01:
+				case SpellEffect.UW2_Spell_Effect_RemoveTrap_alt01:
+						{
+								Debug.Log("trap spells")	;
+								SpellResultType=SpellResultNone;
+								break;	
+						}
+
+				case SpellEffect.UW2_Spell_Effect_Tremor:
+				case SpellEffect.UW2_Spell_Effect_Tremor_alt01:
+						{
+							Cast_VasPorYlem(caster,EffectID);	
+							SpellResultType=SpellResultNone;	
+							break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_SmiteUndead:
+				case SpellEffect.UW2_Spell_Effect_SmiteUndead_alt01:
+						{
+								Cast_AnCorpMani(caster,EffectID);
+								SpellResultType=SpellResultNone;
+								break;
+						}
+
+				case SpellEffect.UW2_Spell_Effect_RepelUndead_alt01:
+						{
+								Debug.Log("repel undead")	;
+								SpellResultType=SpellResultNone;
+								break;	
+						}
+				case SpellEffect.UW2_Spell_Effect_UndeadBane:
+						{
+								Debug.Log("undeath bane")	;
+								SpellResultType=SpellResultNone;
+								break;		
+						}
+				case SpellEffect.UW2_Spell_Effect_Valor:
+				case SpellEffect.UW2_Spell_Effect_Valor_alt01:
+				case SpellEffect.UW2_Spell_Effect_Valor_alt02:
+						{
+								Debug.Log("valor")	;
+								SpellResultType=SpellResultNone;
+								break;			
+						}
+
+				case SpellEffect.UW2_Spell_Effect_WaterWalk:
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
+				case SpellEffect.UW2_Spell_Effect_WaterWalk_alt01:
+				case SpellEffect.UW2_Spell_Effect_WaterWalk_alt02:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+						}
+						break;	
+						
+				default:						
+					Debug.Log ("Unimplemented effect Id is " + EffectID);
+					SpellResultType=SpellResultNone;
+					break;
+				}
+
+				//Return a reference to the spell effect. If any.
+				switch (SpellResultType)
+				{
+				case SpellResultNone://No spell effect or unimplemented spell
+						return null;
+				case SpellResultPassive://Passive spell effect
+						return playerUW.PassiveSpell[PassiveArrayIndex];
+				case SpellResultActive://Active spell effect
+						return playerUW.ActiveSpell[ActiveArrayIndex];
+				default:
+						return null;
 				}
 		}
 }
