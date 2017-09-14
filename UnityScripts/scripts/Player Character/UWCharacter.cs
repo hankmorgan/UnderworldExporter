@@ -61,7 +61,7 @@ public class UWCharacter : Character {
 	public bool FireProof;//Takes no damage from lava
 	
 	//Character Status
-	public int FoodLevel; //0-35 range.
+	public int FoodLevel; //0-255 range.
 	public int Fatigue;   //0-29 range
 	//public bool Poisoned;
 	public short play_poison;

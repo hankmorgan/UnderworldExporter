@@ -124,9 +124,23 @@ public class Magic : UWEBase {
 				case "In Bet Mani"://Lesser Heal
 				case "Rel Des Por"://Slow Fall
 				case "In Sanct"://Thick Skin
-				case "In Jux"://Rune of Warding
+
 						TestSpellLevel=2;
 						break;
+				//2nd circle Uw1 only
+				case "In Jux"://Rune of Warding
+						if(_RES!=GAME_UW2)
+						{
+							TestSpellLevel=2;
+						}
+						break;	
+				//2nd circle uw2 only
+				case "Quas Mani Ylem":
+						if(_RES==GAME_UW2)
+						{
+							TestSpellLevel=2;
+						}
+						break;			
 
 						//3rd Circle
 				case "Bet Sanct Lor"://Conceal
@@ -134,6 +148,11 @@ public class Magic : UWEBase {
 				case "Quas Lor"://Night Vision
 				case "Rel Tym Por"://Speed
 				case "Ylem Por"://Water Walk
+
+						TestSpellLevel=3;
+						break;
+
+						//3rd circle uw1 only
 				case "Sanct Jux"://Strengten Door
 						TestSpellLevel=3;
 						break;
@@ -166,6 +185,15 @@ public class Magic : UWEBase {
 				case "Vas Ort Grav"://Sheet Lightning
 				case "Ort Por Ylem"://Telekinesis
 						TestSpellLevel=6;
+						break;
+
+				//6th circle UW2 only
+				case "Wis Ex"://Map Area						
+						if(_RES==GAME_UW2)
+						{
+							TestSpellLevel=6;
+							break;	
+						}
 						break;
 
 						//7th Circle
@@ -292,10 +320,6 @@ public class Magic : UWEBase {
 		/// <param name="ready">If set to <c>true</c> then the spell is being readied (for targetted spells), false for immediate cast</param>
 		public void castSpell(GameObject caster, string MagicWords, bool ready)
 		{
-				if(_RES==GAME_UW2)
-				{
-						Debug.Log("this effect Ids need to be updated for UW2.");
-				}
 				switch (MagicWords)
 				{
 				case "An An An":
@@ -307,39 +331,76 @@ public class Magic : UWEBase {
 						//1st Circle
 				case "In Mani Ylem"://Create Food
 						{
-								SetSpellCost(1);
-								Cast_InManiYlem(caster,SpellEffect.UW1_Spell_Effect_CreateFood);
-								break;
+							SetSpellCost(1);
+							if (_RES==GAME_UW2)
+							{
+								Cast_InManiYlem(caster,SpellEffect.UW2_Spell_Effect_CreateFood);
+							}
+							else
+							{
+								Cast_InManiYlem(caster,SpellEffect.UW1_Spell_Effect_CreateFood);		
+							}
+							break;
 						}//imy
 				case "In Lor":	//Light
 						{
-								SetSpellCost(1);
-								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Light);
-								break;
+							SetSpellCost(1);
+							if (_RES==GAME_UW2)
+							{
+								Cast_LightSpells(caster,SpellEffect.UW2_Spell_Effect_Light);
+							}
+							else
+							{
+								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Light);		
+							}
+
+							break;
 						}	//il
 				case "Bet Wis Ex"://Locate
 						{//UW2 spell?
-								SetSpellCost(1);
-								Debug.Log(MagicWords+ " Locate Cast");
-								break;
+							SetSpellCost(1);
+							Debug.Log(MagicWords+ " Locate Cast");
+							break;
 						}//bwe
 				case "Ort Jux"://Magic Arrow
 						{
-								SetSpellCost(1);
-								Cast_OrtJux(caster, ready,SpellEffect.UW1_Spell_Effect_MagicArrow);
-								break;
+							SetSpellCost(1);
+							if (_RES==GAME_UW2)
+							{
+								Cast_OrtJux(caster, ready,SpellEffect.UW2_Spell_Effect_MagicArrow);
+							}
+							else
+							{
+								Cast_OrtJux(caster, ready,SpellEffect.UW1_Spell_Effect_MagicArrow);		
+							}
+
+							break;
 						}//OJ
 				case "Bet In Sanct"://Resist Blows
 						{
-								SetSpellCost(1);
+							SetSpellCost(1);
+							if (_RES==GAME_UW2)
+							{
+								Cast_ResistanceSpells(caster,SpellEffect.UW2_Spell_Effect_ResistBlows);
+							}
+							else
+							{
 								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows);
-								break;
+							}
+							break;
 						}//BIS
 				case "Sanct Hur"://Stealth
 						{
 								SetSpellCost(1);
-								//Debug.Log(MagicWords+ " Stealth Cast");
-								Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Stealth);
+								if (_RES==GAME_UW2)
+								{
+										Cast_StealthSpells(caster,SpellEffect.UW2_Spell_Effect_Stealth);
+								}
+								else
+								{
+										Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Stealth);		
+								}
+
 								break;
 						}//sh
 
@@ -347,300 +408,589 @@ public class Magic : UWEBase {
 				case "Quas Corp"://Cause Fear
 						{
 								SetSpellCost(2);
-								//Debug.Log(MagicWords+ " Cause Fear Cast");
-								Cast_QuasCorp(caster,SpellEffect.UW1_Spell_Effect_CauseFear);
+								if (_RES==GAME_UW2)
+								{
+									Cast_QuasCorp(caster,SpellEffect.UW2_Spell_Effect_CauseFear);
+								}
+								else
+								{
+									Cast_QuasCorp(caster,SpellEffect.UW1_Spell_Effect_CauseFear);		
+								}
+
 								break;
 						}//qc
-				case "Wis Mani"://Detect Monster
+				case "Wis Mani"://Detect/study Monster
 						{
-								SetSpellCost(2);
-								//Debug.Log(MagicWords+ " Detect Monster Cast");
-								Cast_DetectMonster(caster,SpellEffect.UW1_Spell_Effect_DetectMonster);
-								break;
+							SetSpellCost(2);
+							if (_RES==GAME_UW2)
+							{
+								Cast_DetectMonster(caster,SpellEffect.UW2_Spell_Effect_StudyMonster);	
+							}
+							else
+							{
+								Cast_DetectMonster(caster,SpellEffect.UW1_Spell_Effect_DetectMonster);		
+							}
+
+							break;
 						}//wm
 				case "Uus Por"://Jump
 						{
-								SetSpellCost(2);
-								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap);
-								break;
+							SetSpellCost(2);
+							if (_RES==GAME_UW2)
+							{
+								Cast_UusPor(caster,SpellEffect.UW2_Spell_Effect_Leap);	
+							}
+							else
+							{
+								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap);		
+							}
+							break;
 						}//up
 				case "In Bet Mani"://Lesser Heal
 						{
-								SetSpellCost(2);
-								Cast_Heal(caster,SpellEffect.UW1_Spell_Effect_LesserHeal);
-								break;
+							SetSpellCost(2);
+							if (_RES==GAME_UW2)
+							{
+								Cast_Heal(caster,SpellEffect.UW2_Spell_Effect_LesserHeal_alt01);
+							}
+							else
+							{
+								Cast_Heal(caster,SpellEffect.UW1_Spell_Effect_LesserHeal);		
+							}
+							break;
 						}//IBM
 				case "Rel Des Por"://Slow Fall
 						{
-								SetSpellCost(2);
-								Cast_RelDesPor(caster,SpellEffect.UW1_Spell_Effect_SlowFall);
-								break;
+							SetSpellCost(2);
+							if (_RES==GAME_UW2)
+							{
+								Cast_RelDesPor(caster,SpellEffect.UW2_Spell_Effect_SlowFall);
+							}
+							else
+							{
+								Cast_RelDesPor(caster,SpellEffect.UW1_Spell_Effect_SlowFall);		
+							}
+							break;
 						}//RDP
 				case "In Sanct"://Thick Skin
 						{
-								SetSpellCost(2);
-								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ThickSkin);
+						SetSpellCost(2);
+						if (_RES==GAME_UW2)
+						{
+							Cast_ResistanceSpells(caster,SpellEffect.UW2_Spell_Effect_ThickSkin);
+						}
+						else
+						{
+							Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ThickSkin);		
+						}
+
+
 								break;
 						}//IS
 				case "In Jux"://Rune of Warding
 						{
 								SetSpellCost(2);
-								Cast_InJux(caster,SpellEffect.UW1_Spell_Effect_RuneofWarding);
+								//UW1 spell only
+								Cast_InJux(caster,SpellEffect.UW1_Spell_Effect_RuneofWarding);		
 								break;
 						}//IJ
+
+				case "Quas Mani Ylem":
+						{
+							SetSpellCost(2);	
+							Cast_DispelHunger(caster,SpellEffect.UW2_Spell_Effect_DispelHunger);
+							break;
+						}
 
 						//3rd Circle
 				case "Bet Sanct Lor"://Conceal
 						{
-								SetSpellCost(3);
-								//Debug.Log(MagicWords+ " Conceal Cast");
-								Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Conceal);
-								break;
+							SetSpellCost(3);
+							if (_RES==GAME_UW2)
+							{
+									Cast_StealthSpells(caster,SpellEffect.UW2_Spell_Effect_Conceal);	
+							}
+							else
+							{
+									Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Conceal);		
+							}
+							break;
 						}//BSL
 				case "Ort Grav"://Lightning
 						{
-								SetSpellCost(3);
-								Cast_OrtGrav(caster, ready,SpellEffect.UW1_Spell_Effect_ElectricalBolt);
-								break;
+							SetSpellCost(3);
+							if (_RES==GAME_UW2)
+							{
+								Cast_OrtGrav(caster, ready,SpellEffect.UW2_Spell_Effect_ElectricalBolt);
+							}
+							else
+							{
+								Cast_OrtGrav(caster, ready,SpellEffect.UW1_Spell_Effect_ElectricalBolt);		
+							}
+							break;
 						}//OG
 				case "Quas Lor"://Night Vision
 						{
-								SetSpellCost(3);
-								/*Debug.Log(MagicWords+ " Night Vision Cast");*/
-								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_NightVision);
-								break;
+							SetSpellCost(3);
+							if (_RES==GAME_UW2)
+							{
+								Cast_LightSpells(caster,SpellEffect.UW2_Spell_Effect_NightVision);
+							}
+							else
+							{
+								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_NightVision);		
+							}									
+
+							break;
 						}//QL
 				case "An Kal Corp"://Repel Undead
 						{
-								SetSpellCost(3);
-								Debug.Log(MagicWords+ " Repel Undead Cast");
-								break;
+							SetSpellCost(3);
+							if (_RES==GAME_UW2)
+							{
+									Debug.Log(MagicWords+ " Repel Undead Cast uw2 version");
+									break;
+							}
+							else
+							{
+									Debug.Log(MagicWords+ " Repel Undead Cast");
+									break;										
+							}
+
 						}//akc
 				case "Rel Tym Por"://Speed
 						{
-								SetSpellCost(3);
-								//Debug.Log(MagicWords+ " Speed Cast");
-								Cast_RelTymPor(caster,SpellEffect.UW1_Spell_Effect_Speed);
-								break;
+							SetSpellCost(3);
+							if(_RES==GAME_UW2)
+							{
+								Cast_RelTymPor(caster,SpellEffect.UW2_Spell_Effect_Speed);
+							}
+							else
+							{
+								Cast_RelTymPor(caster,SpellEffect.UW1_Spell_Effect_Speed);		
+							}
+							break;
 						}//rtp
 				case "Ylem Por"://Water Walk
 						{
-								SetSpellCost(3);
-								Cast_YlemPor(caster,SpellEffect.UW1_Spell_Effect_WaterWalk);
-								break;
+							SetSpellCost(3);
+							if (_RES==GAME_UW2)
+							{
+								Cast_YlemPor(caster,SpellEffect.UW2_Spell_Effect_WaterWalk);
+							}
+							else
+							{
+								Cast_YlemPor(caster,SpellEffect.UW1_Spell_Effect_WaterWalk);			
+							}							
+							break;
 						}//YP
 				case "Sanct Jux"://Strengten Door
-						{
-								SetSpellCost(3);
-								Cast_SanctJux(caster,ready,SpellEffect.UW1_Spell_Effect_StrengthenDoor);
-								break;
+						{								
+							SetSpellCost(3);//UW1 only					
+							Cast_SanctJux(caster,ready,SpellEffect.UW1_Spell_Effect_StrengthenDoor);
+							break;
 						}//SJ
 
 						//4th Circle
 				case "An Sanct"://Curse
 						{
-								SetSpellCost(4);
-								//Debug.Log(MagicWords+ " Curse Cast");
+							SetSpellCost(4);
+							if (_RES==GAME_UW2)
+							{
+								Cast_Curse(caster,SpellEffect.UW2_Spell_Effect_Curse);
+							}
+							else
+							{
 								Cast_Curse(caster,SpellEffect.UW1_Spell_Effect_Curse);
-								break;
+							}
+							break;
 						}//AS
 				case "Sanct Flam":// Flameproof
 						{
-								SetSpellCost(4);
-								Cast_SanctFlam(caster,SpellEffect.UW1_Spell_Effect_Flameproof);
-								break;
+							SetSpellCost(4);
+							if (_RES==GAME_UW2)
+							{
+								Cast_SanctFlam(caster,SpellEffect.UW2_Spell_Effect_Flameproof);
+							}
+							else
+							{
+								Cast_SanctFlam(caster,SpellEffect.UW1_Spell_Effect_Flameproof);		
+							}
+							break;
 						}//SF
 				case "In Mani"://Heal
 						{
-								SetSpellCost(4);
-								Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_Heal);
-								break;
+							SetSpellCost(4);
+							if (_RES==GAME_UW2)
+							{
+								Cast_Heal (caster,SpellEffect.UW2_Spell_Effect_Heal);
+							}
+							else
+							{
+								Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_Heal);		
+							}
+							break;
 						}//IM
 				case "Hur Por"://Levitate
 						{	
-								SetSpellCost(4);
-								Cast_LevitateSpells(caster,SpellEffect.UW1_Spell_Effect_Levitate);
-								break;
+							SetSpellCost(4);
+							if(_RES==GAME_UW2)
+							{
+								Cast_LevitateSpells(caster,SpellEffect.UW2_Spell_Effect_Levitate);
+							}
+							else
+							{
+								Cast_LevitateSpells(caster,SpellEffect.UW1_Spell_Effect_Levitate);		
+							}
+							break;
 						}//HP
 				case "Nox Ylem"://Poison
 						{
-								SetSpellCost(4);
-								Cast_NoxYlem(caster,SpellEffect.UW1_Spell_Effect_Poison);
-								break;
+							SetSpellCost(4);
+							if(_RES==GAME_UW2)
+							{
+								Cast_NoxYlem(caster,SpellEffect.UW2_Spell_Effect_Poison);
+							}
+							else
+							{
+								Cast_NoxYlem(caster,SpellEffect.UW1_Spell_Effect_Poison);		
+							}
+
+							break;
 						}//NY
 				case "An Jux"://Remove Trap
 						{
-								SetSpellCost(4);
-								Debug.Log(MagicWords+ " Remove Trap Cast");
-								break;
+							SetSpellCost(4);
+							Debug.Log(MagicWords+ " Remove Trap Cast");
+							break;
 						}//AJ
 
 						//5th Circle
 				case "Por Flam"://Fireball
 						{
-								SetSpellCost(5);
-								Cast_PorFlam(caster, ready,SpellEffect.UW1_Spell_Effect_Fireball);
-								break;
+							SetSpellCost(5);
+							if (_RES==GAME_UW2)
+							{
+								Cast_PorFlam(caster, ready,SpellEffect.UW2_Spell_Effect_Fireball);
+							}
+							else
+							{
+								Cast_PorFlam(caster, ready,SpellEffect.UW1_Spell_Effect_Fireball);		
+							}
+							break;
 						}//PF
 				case "Grav Sanct Por"://Missile Protection
 						{
-								SetSpellCost(5);
-								//Debug.Log(MagicWords+ " Missile Protection Cast");
-								Cast_GravSanctPor(caster,SpellEffect.UW1_Spell_Effect_MissileProtection_alt02);
-								break;
+							SetSpellCost(5);
+							if (_RES==GAME_UW2)
+							{
+									Cast_GravSanctPor(caster,SpellEffect.UW2_Spell_Effect_MissileProtection_alt02);
+							}
+							else
+							{
+									Cast_GravSanctPor(caster,SpellEffect.UW1_Spell_Effect_MissileProtection_alt02);		
+							}
+							break;
 						}//GSP
 				case "Ort Wis Ylem"://Name Enchantment
 						{
-								SetSpellCost(5);
-								//Debug.Log(MagicWords+ " Name Enchantment Cast");
-								Cast_NameEnchantment(caster,ready,SpellEffect.UW1_Spell_Effect_NameEnchantment);
-								break;
+							SetSpellCost(5);
+							if (_RES==GAME_UW2)
+							{
+								Cast_NameEnchantment(caster,ready,SpellEffect.UW2_Spell_Effect_NameEnchantment);
+							}
+							else
+							{
+								Cast_NameEnchantment(caster,ready,SpellEffect.UW1_Spell_Effect_NameEnchantment);		
+							}
+							break;
 						}//OWY
 				case "Ex Ylem"://Open
 						{
-								SetSpellCost(5);
-								Cast_ExYlem(caster, ready,SpellEffect.UW1_Spell_Effect_Open);
-								break;
+							SetSpellCost(5);
+							if(_RES==GAME_UW2)
+							{
+								Cast_ExYlem(caster, ready,SpellEffect.UW2_Spell_Effect_Open);
+							}
+							else
+							{
+								Cast_ExYlem(caster, ready,SpellEffect.UW1_Spell_Effect_Open);		
+							}
+							break;
 						}//EY
 				case "An Nox"://Cure Poison
 						{
-								SetSpellCost(5);
-								Cast_AnNox(caster,SpellEffect.UW1_Spell_Effect_CurePoison);
-								break;
+							SetSpellCost(5);
+							if (_RES==GAME_UW2)
+							{
+								Cast_AnNox(caster,SpellEffect.UW2_Spell_Effect_CurePoison);
+							}
+							else
+							{
+								Cast_AnNox(caster,SpellEffect.UW1_Spell_Effect_CurePoison);		
+							}
+							break;
 						}//AN
 				case "An Corp Mani"://Smite Undead
 						{
-								SetSpellCost(5);
-								//Debug.Log(MagicWords+ " Smite Undead Cast");
-								Cast_AnCorpMani(caster,SpellEffect.UW1_Spell_Effect_SmiteUndead);
-								break;
+							SetSpellCost(5);
+							if (_RES==GAME_UW2)
+							{
+								Cast_AnCorpMani(caster,SpellEffect.UW2_Spell_Effect_SmiteUndead);
+							}
+							else
+							{
+								Cast_AnCorpMani(caster,SpellEffect.UW1_Spell_Effect_SmiteUndead);		
+							}
+							break;
 						}//ACM
 
 						//6th Circle
 				case "Vas In Lor"://Daylight
 						{
-								SetSpellCost(6);
-								//Debug.Log(MagicWords+ " Daylight Cast");
-								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Daylight);
-								break;
+							SetSpellCost(6);
+							if(_RES==GAME_UW2)
+							{
+								Cast_LightSpells(caster,SpellEffect.UW2_Spell_Effect_Daylight);
+							}
+							else
+							{
+								Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Daylight);		
+							}
+							break;
 						}//VIL
 				case "Vas Rel Por"://Gate Travel
 						{
-								SetSpellCost(6);
-								Cast_VasRelPor(caster,SpellEffect.UW1_Spell_Effect_GateTravel);
-								break;
+							SetSpellCost(6);
+							if (_RES==GAME_UW2)
+							{
+								Cast_VasRelPor(caster,SpellEffect.UW2_Spell_Effect_GateTravel);
+							}
+							else
+							{
+								Cast_VasRelPor(caster,SpellEffect.UW1_Spell_Effect_GateTravel);		
+							}
+							break;
 						}//VRP
 				case "Vas In Mani"://Greater Heal
 						{
-								SetSpellCost(6);
-								Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_GreaterHeal);
-								break;
+							SetSpellCost(6);
+							if(_RES==GAME_UW2)
+							{
+								Cast_Heal (caster,SpellEffect.UW2_Spell_Effect_GreaterHeal);
+							}
+							else
+							{
+								Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_GreaterHeal);			
+							}							
+							break;
 						}//VIM
 				case "An Ex Por"://Paralyze
 						{
-								SetSpellCost(6);
+							SetSpellCost(6);
+							if(_RES==GAME_UW2)
+							{
+								Cast_AnExPor(caster,SpellEffect.UW2_Spell_Effect_Paralyze);	
+							}
+							else
+							{
 								Cast_AnExPor(caster,SpellEffect.UW1_Spell_Effect_Paralyze);
-								break;
+							}							
+							break;
 						}//AEP
 				case "Vas Ort Grav"://Sheet Lightning
 						{
-								SetSpellCost(6);
-								//Debug.Log(MagicWords+ " Sheet Lightning Cast");
-								Cast_VasOrtGrav(caster,SpellEffect.UW1_Spell_Effect_SheetLightning);
-								break;
+							SetSpellCost(6);
+							if(_RES==GAME_UW2)
+							{
+								Cast_VasOrtGrav(caster,SpellEffect.UW2_Spell_Effect_SheetLightning);	
+							}
+							else
+							{
+								Cast_VasOrtGrav(caster,SpellEffect.UW1_Spell_Effect_SheetLightning);		
+							}
+							break;
 						}//VOG
 				case "Ort Por Ylem"://Telekinesis
 						{
-								SetSpellCost(6);
-								//Debug.Log(MagicWords+ " Telekinesis Cast");
-								Cast_OrtPorYlem(caster,SpellEffect.UW1_Spell_Effect_Telekinesis);
-								break;
+							SetSpellCost(6);
+							if (_RES==GAME_UW2)
+							{
+								Cast_OrtPorYlem(caster,SpellEffect.UW2_Spell_Effect_Telekinesis);
+							}
+							else
+							{
+								Cast_OrtPorYlem(caster,SpellEffect.UW1_Spell_Effect_Telekinesis);		
+							}
+							break;
 						}//OPY
 
-						//7th Circle
-				case "In Mani Rel"://Ally
+				case "Wis Ex":
 						{
-								SetSpellCost(7);
-								//Debug.Log(MagicWords+ " Ally Cast");
-								Cast_InManiRel(caster,SpellEffect.UW1_Spell_Effect_Ally);
+							SetSpellCost(6);
+							if(_RES==GAME_UW2)
+							{
+								Cast_MapArea(caster,SpellEffect.UW2_Spell_Effect_MapArea);
+							}
+							break;
+						}
+
+						//7th Circle
+				case "In Mani Rel"://Ally/charm
+						{
+							SetSpellCost(7);
+							if (_RES==GAME_UW2)
+							{
+								Cast_InManiRel(caster,SpellEffect.UW2_Spell_Effect_Charm);
+							}
+							else
+							{
+								Cast_InManiRel(caster,SpellEffect.UW1_Spell_Effect_Ally);		
+							}
+
 								break;
 						}//IMR
 				case "Vas An Wis"://Confusion
 						{
-								SetSpellCost(7);
-								//Debug.Log(MagicWords+ " Confusion Cast");
-								Cast_VasAnWis(caster,SpellEffect.UW1_Spell_Effect_Confusion);
-								break;
+							SetSpellCost(7);
+							if (_RES==GAME_UW2)
+							{
+								Cast_VasAnWis(caster,SpellEffect.UW2_Spell_Effect_MassConfusion);
+							}
+							else
+							{
+								Cast_VasAnWis(caster,SpellEffect.UW1_Spell_Effect_Confusion);		
+							}
+							break;
 						}//VAW
 				case "Vas Sanct Lor"://Invisibility
 						{
-								SetSpellCost(7);
-								//Debug.Log(MagicWords+ " Invisibility Cast");
-								Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Invisibilty);
-								break;
+							SetSpellCost(7);
+							if(_RES==GAME_UW2)
+							{
+								Cast_StealthSpells(caster,SpellEffect.UW2_Spell_Effect_Invisibilty);
+							}
+							else
+							{
+								Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Invisibilty);			
+							}						
+							break;
 						}//VSL
 				case "Vas Hur Por"://Fly
 						{
-								SetSpellCost(7);
-								Cast_LevitateSpells	(caster,SpellEffect.UW1_Spell_Effect_Fly);
-								//Debug.Log(MagicWords+ " Fly Cast");
-								break;
+							SetSpellCost(7);
+							if (_RES==GAME_UW2)
+							{
+								Cast_LevitateSpells	(caster,SpellEffect.UW2_Spell_Effect_Fly);
+							}
+							else
+							{
+								Cast_LevitateSpells	(caster,SpellEffect.UW1_Spell_Effect_Fly);		
+							}
+							break;
 						}//VHP
 				case "Kal Mani"://Monster Summoning
 						{
-								SetSpellCost(7);
-								Cast_KalMani(caster,SpellEffect.UW1_Spell_Effect_SummonMonster);
-								break;
+							SetSpellCost(7);
+							if(_RES==GAME_UW2)
+							{
+								Cast_KalMani(caster,SpellEffect.UW2_Spell_Effect_SummonMonster);
+							}
+							else
+							{
+								Cast_KalMani(caster,SpellEffect.UW1_Spell_Effect_SummonMonster);			
+							}							
+							break;
 						}//KM
 				case "Ort An Quas"://Reveal
 						{
-								SetSpellCost(7);
-								Debug.Log(MagicWords+ " Reveal Cast");
-								break;
+							SetSpellCost(7);
+							Debug.Log(MagicWords+ " Reveal Cast");
+							break;
 						}//OAQ
 						//8th Circle
 				case "Vas Kal Corp"://Armageddon
 						{
-								SetSpellCost(8);
-								//Debug.Log(MagicWords+ " Armageddon Cast");
-								Cast_VasKalCorp(caster,SpellEffect.UW1_Spell_Effect_Armageddon);
-								break;
+							SetSpellCost(8);
+							if(_RES==GAME_UW2)
+							{
+								Cast_VasKalCorp(caster,SpellEffect.UW2_Spell_Effect_Armageddon);
+							}
+							else
+							{
+								Cast_VasKalCorp(caster,SpellEffect.UW1_Spell_Effect_Armageddon);										
+							}
+							break;
 						}//vkc
 				case "Flam Hur"://Flame Wind
 						{
-								SetSpellCost(8);
-								Cast_FlamHur(caster,SpellEffect.UW1_Spell_Effect_FlameWind);
-								break;
+							SetSpellCost(8);
+							if (_RES==GAME_UW2)
+							{
+								Cast_FlamHur(caster,SpellEffect.UW2_Spell_Effect_FlameWind);
+							}
+							else
+							{
+								Cast_FlamHur(caster,SpellEffect.UW1_Spell_Effect_FlameWind);		
+							}
+							break;
 						}//fh
 				case "An Tym":// Freeze Time
 						{
-								SetSpellCost(8);
-								Cast_AnTym(caster,SpellEffect.UW1_Spell_Effect_FreezeTime);
-								break;
+							SetSpellCost(8);
+							if(_RES==GAME_UW2)
+							{
+								Cast_AnTym(caster,SpellEffect.UW2_Spell_Effect_FreezeTime);
+							}
+							else
+							{
+								Cast_AnTym(caster,SpellEffect.UW1_Spell_Effect_FreezeTime);		
+							}
+							break;
 						}//at
 				case "In Vas Sanct"://Iron Flesh
 						{
-								SetSpellCost(8);
-								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_IronFlesh);
-								break;
+							SetSpellCost(8);
+							if(_RES==GAME_UW2)
+							{
+								Cast_ResistanceSpells(caster,SpellEffect.UW2_Spell_Effect_IronFlesh);
+							}
+							else
+							{
+								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_IronFlesh);			
+							}							
+							break;
 						}//ivs
 				case "Ort Por Wis"://Roaming sight
 						{
-								SetSpellCost(8);
-								Cast_OrtPorWis(caster,SpellEffect.UW1_Spell_Effect_RoamingSight);
-								break;
+							SetSpellCost(8);
+							if (_RES==GAME_UW2)
+							{
+								Cast_OrtPorWis(caster,SpellEffect.UW2_Spell_Effect_RoamingSight);
+							}
+							else
+							{
+								Cast_OrtPorWis(caster,SpellEffect.UW1_Spell_Effect_RoamingSight);			
+							}							
+							break;
 						}//opw
 				case "Vas Por Ylem"://Tremor
 						{
-								SetSpellCost(8);
-								Cast_VasPorYlem(caster,SpellEffect.UW1_Spell_Effect_Tremor);
-								break;
+							SetSpellCost(8);
+							if(_RES==GAME_UW2)
+							{
+								Cast_VasPorYlem(caster,SpellEffect.UW2_Spell_Effect_Tremor);
+							}
+							else
+							{
+								Cast_VasPorYlem(caster,SpellEffect.UW1_Spell_Effect_Tremor);			
+							}							
+							break;
 						}//vpy
 				default:
 						{
-
-								//Debug.Log("Unknown spell:" + MagicWords);
-								break;
+							Debug.Log("Unknown spell cast:" + MagicWords);
+							break;
 						}
 				}//magicwords
 		}
@@ -2158,7 +2508,7 @@ public class Magic : UWEBase {
 		/// <summary>
 		/// Casts the wand of altara spell. WIll cut lines of power in certain locations.
 		/// </summary>
-		void Cast_Altara()
+		void Cast_Altara(GameObject caster,int EffectID)
 		{
 			Debug.Log("Perform the wand of altara spell");
 
@@ -2167,6 +2517,32 @@ public class Magic : UWEBase {
 				//Has the line of power been cut.
 
 				//Cut the power and set the quest.
+		}
+
+
+		/// <summary>
+		/// Reveals an area of the map
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect I.</param>
+		void Cast_MapArea(GameObject caster,int EffectID)
+		{
+			GameWorldController.instance.PositionDetect();
+			for (int x=-5; x<=5; x++)
+			{
+				for (int y=-5; y<=5; y++)
+				{
+					if (TileMap.ValidTile(TileMap.visitTileX+x, TileMap.visitTileY+y))
+					{
+						GameWorldController.instance.currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, GameWorldController.instance.currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(GameWorldController.instance.currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
+					}
+				}		
+			}
+		}
+
+		void Cast_DispelHunger(GameObject caster,int EffectID)
+		{
+			GameWorldController.instance.playerUW.FoodLevel=255;
 		}
 
 		/// <summary>
@@ -3889,7 +4265,7 @@ public class Magic : UWEBase {
 				{
 					case SpellEffect.UW2_Spell_Effect_Altara:
 						{
-							Cast_Altara();
+							Cast_Altara(caster,EffectID);
 							SpellResultType=SpellResultNone;
 							break;
 						}
@@ -4047,7 +4423,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_DispelHunger:						
 				case SpellEffect.UW2_Spell_Effect_DispelHunger_alt01:
 						{
-							Debug.Log("Dispel Hunger");
+							Cast_DispelHunger(caster,EffectID);
 							SpellResultType=SpellResultNone;
 							break;
 						}
@@ -4285,7 +4661,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_MapArea:
 				case SpellEffect.UW2_Spell_Effect_MapArea_alt01:
 						{
-							Debug.Log("map area");
+							Cast_MapArea(caster,EffectID);
 							SpellResultType=SpellResultNone;
 							break;										
 						}

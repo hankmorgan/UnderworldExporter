@@ -23,8 +23,16 @@ public class SpellEffectLevitate : SpellEffect {
 		base.CancelEffect();
 		if (!Permanent)
 		{//Only allow floating when not an equipment effect.
-				GameWorldController.instance.playerUW.isFloating=true;				
-				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);
+				GameWorldController.instance.playerUW.isFloating=true;	
+				if (_RES==GAME_UW2)
+				{
+					GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW2_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);
+				}
+				else
+				{
+					GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);				
+				}
+				
 		}		
 		GameWorldController.instance.playerUW.flySpeed=0;		
 	}

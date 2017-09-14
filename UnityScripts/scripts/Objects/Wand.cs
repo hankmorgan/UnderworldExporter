@@ -55,7 +55,16 @@ public class Wand : enchantment_base {
 		}
 		else
 		{
-			return SpellObjectLink-256;
+			if (_RES==GAME_UW2)
+			{
+				if (SpellObjectLink-256>=320)	
+				{
+					return SpellObjectLink-368;
+				}
+			}
+
+				return SpellObjectLink-256;	//default
+			
 		}
 	}
 				
@@ -116,7 +125,7 @@ public class Wand : enchantment_base {
 				}	
 	
 		if ((objInt().quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
-		{
+		{//TODO: is the quality here the quality on the wand or the quality on the spell object? Is this behaviour different in uw1 vs uw2
 			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "
 				+ objInt().quality 
