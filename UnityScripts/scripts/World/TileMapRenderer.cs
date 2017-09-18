@@ -1316,10 +1316,7 @@ public class TileMapRenderer : Loader{
 				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
 				MeshFilter mf = Tile.AddComponent<MeshFilter>();
 				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
-				//if (EnableCollision)
-				//{
 
-				//}
 				Mesh mesh = new Mesh();
 				mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
 
@@ -2291,6 +2288,7 @@ public class TileMapRenderer : Loader{
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
 
@@ -2449,6 +2447,7 @@ public class TileMapRenderer : Loader{
 				float offset=0f;
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
 
@@ -2612,6 +2611,7 @@ public class TileMapRenderer : Loader{
 
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
 
@@ -2772,6 +2772,7 @@ public class TileMapRenderer : Loader{
 				float offset=0f;
 				//Now create the mesh
 				GameObject Tile = new GameObject(TileName);
+				Tile.layer=LayerMask.NameToLayer("MapMesh");
 				Tile.transform.parent=parent.transform;
 				Tile.transform.position = new Vector3(t.tileX*1.2f,0.0f, t.tileY*1.2f);
 

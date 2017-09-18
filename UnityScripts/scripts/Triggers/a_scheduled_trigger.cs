@@ -42,4 +42,16 @@ public class a_scheduled_trigger : trigger_base {
 
 		//Is it used to check a set of conditions???
 
+		//Removing SCD.ark breaks the trigger.
+		//In fizzits usage a particular value changes from 1 to 2.
+		//That scd.ark file changes in block no 15 (zero based 0 to 15)
+		//In the conversation with fizzit the x_clock function is called with param 15 and the value returned
+		//is incremented by 1.
+		//A later value in the same block is hex 0x77 (119). Changing this breaks the trigger but does not stop
+		//scd.ark from changing.
+		//Setting the byte after that to zero also breaks it. The byte 0x0A precedes this.
+		//16 bytes later the values are owner-1 and quality-1. 
+		//CHaning either of these breaks the trigger. These are preceded by 0xA. Setting these to known owner/quality 
+		//of other triggers does not seem to work.
+
 }

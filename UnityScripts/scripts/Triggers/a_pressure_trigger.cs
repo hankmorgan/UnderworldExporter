@@ -12,39 +12,60 @@ using System.Collections;
 public class a_pressure_trigger : trigger_base {
 
 		/// <summary>
-		/// The tile that triggers this transition.
+		/// The tile X that contains this trigger.
 		/// </summary>	
 	public int TileXToWatch;
+		/// <summary>
+		/// The tile Y that contains this trigger.
+		/// </summary>
 	public int TileYToWatch;
 
+		/// <summary>
+		/// The texture index when weight is on the trigger.
+		/// </summary>
 	public int TextureOn;
+
+		/// <summary>
+		/// The texture index when no weight is on the trigger.
+		/// </summary>
 	public int TextureOff;
 
+		/// <summary>
+		/// The colliders that are in contact with the trigger.
+		/// </summary>
 	public Collider[] colliders;
 
+		/// <summary>
+		/// If true the trigger will fire when weight is taken off.
+		/// </summary>
 	public bool IsReleaseTrigger;
 
-	//Any door that uses this trigger
-
-	//public static a_pressure_trigger instance;
-		//public long frameNo=0;
+		/// <summary>
+		/// Any door trap that is linked to this trigger. For instant opening.
+		/// </summary>
 	public a_door_trap door; //Any door that this trigger might use
 
-	//bool WaitingForStateChange;
-	//int eventNo=0;
-	//bool trigger_busy=false;
+
+		/// <summary>
+		/// The weight on trigger in this frame
+		/// </summary>
 	public float WeightOnTrigger;
+
+		/// <summary>
+		/// The  weight on trigger in the last frame
+		/// </summary>
 	public float PreviousWeightOnTrigger;
-	public Vector3 TileVector;
 
-	/*public enum PlayerContactStates{
-			playerInContact,
-			playerLeavesContact,
-			playerNotInContact,
-			playerEntersContact
-	};*/
+		/// <summary>
+		/// The position of the center of the tile.
+		/// </summary>
+	private Vector3 TileVector;
 
-	//public PlayerContactStates playerContactState;
+		/// <summary>
+		/// The contact area that detects the presence of objects.
+		/// </summary>
+	public Vector3 ContactArea= new Vector3(0.4f,0.1f,0.4f);
+
 
 	protected override void Start ()
 	{
@@ -57,16 +78,6 @@ public class a_pressure_trigger : trigger_base {
 
 		int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
-		/*if (objInt().y==2)
-		{//Is released
-				TextureOn=currentFloorTexture+1;
-				TextureOff=currentFloorTexture;
-		}
-		else if (objInt().y==3)
-		{//Is weighed down.
-				TextureOn=currentFloorTexture;
-				TextureOff=currentFloorTexture-1;
-		}*/
 
 		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
 		WeightOnTrigger=0f;		
@@ -82,7 +93,7 @@ public class a_pressure_trigger : trigger_base {
 			}
 		}
 		PreviousWeightOnTrigger=WeightOnTrigger;
-		Debug.Log("starting weight is " + PreviousWeightOnTrigger);
+		//Debug.Log("starting weight is " + PreviousWeightOnTrigger);
 
 		if ( GameWorldController.instance.objectMaster.type[GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].item_id]== ObjectInteraction.A_DOOR_TRAP)
 		{					
@@ -95,12 +106,15 @@ public class a_pressure_trigger : trigger_base {
 		}
 	}
 
-
+		/// <summary>
+		/// Update this instance.
+		/// </summary>
+		/// Continually checks what objects are in the contact area.
 	public override void Update ()
 	{
 		base.Update();
 		
-		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
+		colliders= Physics.OverlapBox(TileVector, ContactArea);
 		WeightOnTrigger=0f;
 		for (int i=0; i<=colliders.GetUpperBound(0);i++)
 		{
@@ -130,40 +144,13 @@ public class a_pressure_trigger : trigger_base {
 		}
 
 		PreviousWeightOnTrigger=WeightOnTrigger;
-				/*
-		if (objInt().y==2)
-		{//Needs weight
-			if (WeightOnTrigger>=1.0f)
-			{
-				objInt().y=3;
-				if (!IsReleaseTrigger)
-				{
-						//Debug.Log("Weighing on frame no " + frameNo+ " " + this.name);
-						PutWeightOn();	
-				}
-				return;
-			}
-		}
-		else if (objInt().y==3)
-		{//Needs lightening.
-			if (WeightOnTrigger<1.0f)
-			{
-				objInt().y=2;
-				if (IsReleaseTrigger)
-				{
-					//Debug.Log("Releasing on frame no " + frameNo+ " " + this.name);
-					ReleaseWeightFrom();
-				}
-				return;
-			}	
-		}*/
-
-	
 	}
 	
+		/// <summary>
+		/// Puts the weight on the trigger and activates
+		/// </summary>
 	public void PutWeightOn()
 	{
-		//Debug.Log(eventNo++ + " weighing down");				
 		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
 		if (door!=null)
 		{
@@ -175,10 +162,11 @@ public class a_pressure_trigger : trigger_base {
 			door.TriggerInstantly=false;
 		}
 	}
-
+		/// <summary>
+		/// Releases the weight from the trigger and activates
+		/// </summary>
 	public void ReleaseWeightFrom()
 	{
-		//Debug.Log(eventNo++ + " releasing weight");		
 		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
 		if (door!=null)
 		{
@@ -191,79 +179,14 @@ public class a_pressure_trigger : trigger_base {
 		}	
 	}
 
-
+		/// <summary>
+		/// Updates the tile texture of the floor.
+		/// </summary>
+		/// <param name="newTexture">New texture.</param>
 	public void UpdateTileTexture(int newTexture)
 	{
-		//switch(objInt().item_id)
-		//{
-		//case 436://A pressure trigger
-		//case 437://A pressure release trigger.
-			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;
-			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[newTexture];
-			GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
-			Destroy(GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR));
-			//Debug.Log("setting texture " + TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])) ;
-			//Tile.gameObject.GetComponent<MeshRenderer>().materials[0] =	GameWorldController.instance.MaterialMasterList[TileMapRenderer.FloorTexture(TileMap.SURFACE_FLOOR, GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY])];
-			//break;
-		//default:
-			//return;
-		//}
+		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;	
+		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
+		Destroy(GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR));
 	}
-		/*
-	bool IsTriggerWeighedDown()
-	{
-		return (getWeightOnTrigger() >= 10f);
-	}
-
-	bool IsTriggerLightened()
-	{
-		return (!IsTriggerWeighedDown());
-	}*/
-		/*
-	public float getWeightOnTrigger()
-	{
-		float totalWeight=0;
-		GameWorldController.instance.PositionDetect();
-		if ((TileMap.visitTileX==TileXToWatch) && (TileMap.visitTileY==TileYToWatch))
-		{
-			totalWeight=255f;//The player is always heavy enough
-		}
-		else
-		{
-						//int ybefore=0;
-						//ybefore=objInt().y;
-			//	ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
-						//Debug.Log("Y was " + ybefore + " is now " + objInt().y);
-				int index= GameWorldController.instance.currentTileMap().Tiles[this.objInt().tileX,this.objInt().tileY].indexObjectList;
-				int tileHeight = GameWorldController.instance.currentTileMap().Tiles[this.objInt().tileX,this.objInt().tileY].floorHeight;
-				if (index!=0)
-				{
-					while (index!=0)		
-					{
-						if ( 
-							(GameWorldController.instance.CurrentObjectList().objInfo[index].instance.zpos >=tileHeight*4)
-							&&
-							(GameWorldController.instance.CurrentObjectList().objInfo[index].instance.zpos <=(tileHeight*4)+2)
-								)
-								{
-									totalWeight += GameWorldController.instance.CurrentObjectList().objInfo[index].instance.GetWeight();	
-								}	
-						index = GameWorldController.instance.CurrentObjectList().objInfo[index].next;
-					}
-				}	
-		}
-		//Debug.Log("total weight=" + totalWeight);
-		return totalWeight;
-	}
-	*/
-
-
-//	bool findDoorNotBusy()
-	//{
-	//	if (door!=null)
-		//{
-		//	return ! door.DoorBusy;
-	//	}
-	//	return true;
-	//}
 }
