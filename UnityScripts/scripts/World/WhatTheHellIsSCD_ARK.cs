@@ -7,7 +7,7 @@ using System.IO;
 
 public class WhatTheHellIsSCD_ARK : UWEBase {
 
-	public int InfoSize=4;
+	public int InfoSize=16;
 
 	public void DumpScdArkInfo(string SCD_Ark_File_Path, int LevelNo)
 	{
@@ -26,7 +26,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 		int NoOfBlocks=(int)DataLoader.getValAtAddress(scd_ark_file_data,0,32);
 		for (LevelNo=0; LevelNo<NoOfBlocks; LevelNo++)
 		{
-			writer.WriteLine("Block No " + LevelNo);	
+
 			long address_pointer=6;
 			int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
 			int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (LevelNo*4) ,32);
@@ -62,18 +62,39 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 			}
 			int add_ptr=0;
 				//Output data
-			for (int i=0; i<datalen/InfoSize; i++)
+						Debug.Log("block no " + LevelNo);
+			output = output + "\nBlock no " + LevelNo + "\n";
+			output = output+ "No of rows " + (int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8) + "\n";
+			int noOfRows = (int)DataLoader.getValAtAddress(scd_ark,0,8);
+			if (noOfRows!=0)
 			{
-				output="";
-				for (int d= 0; d<InfoSize; d++)
+				output = output + "Unknown info 1-325\n";
+				for (int i=1;i<324;i++)
 				{
-					output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8) + ",";
+					output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8) + ",";		
 				}
+			
 
-				writer.WriteLine(output);
-							
+				output = output +"\nRow Data\n";
+				add_ptr=326;
+								int r=0;
+				//for (int i=0; i<noOfRows; i++)
+				for (int i=326; i<datalen; i++)
+				{				
+
+					output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8) + ",";
+					r++;
+					if (r==16)
+					{
+							r=0;
+							output = output +"\n"; 		
+					}
+
+													 
+				}
 			}
 		}
+		writer.WriteLine(output);
 		writer.Close();
 
 	}

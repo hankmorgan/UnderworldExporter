@@ -54,4 +54,13 @@ public class a_scheduled_trigger : trigger_base {
 		//CHaning either of these breaks the trigger. These are preceded by 0xA. Setting these to known owner/quality 
 		//of other triggers does not seem to work.
 
+		//SCD.ark structure
+
+		//Standard block structure. 15 uncompressed blocks.
+
+		//Offset 0  int8  No of lines of instructions/conditionals in the block
+		//Offset 1 to 325 Unknown and mostly blank data
+		//Rest of data. No Of Lines * 16 bytes data. Possible quest flags, variable conditions and points to triggers (owner & quality?) etc to trigger this object
+
+
 }
