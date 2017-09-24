@@ -62,8 +62,8 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 			}
 			int add_ptr=0;
 				//Output data
-						Debug.Log("block no " + LevelNo);
-			output = output + "\nBlock no " + LevelNo + "\n";
+						//Debug.Log("block no " + LevelNo);
+			output = output + "\nBlock no " + LevelNo + " at address " + AddressOfBlockStart + "\n";
 			output = output+ "No of rows " + (int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8) + "\n";
 			int noOfRows = (int)DataLoader.getValAtAddress(scd_ark,0,8);
 			if (noOfRows!=0)

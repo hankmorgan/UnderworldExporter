@@ -62,11 +62,26 @@ the left, right, center button combination on Level3.
 	bool check_variable_trap()
 	{//Based on what uw-formats says. Seems to work okay.
 			if (_RES==GAME_UW2)
-			{//Some variables in UW2 seem to map to different values.
+			{//Some variables in UW2 seem to map to x_clock values
 				switch (objInt().zpos)
 				{
-				case 19:
-					return VariableValue()==GameWorldController.instance.playerUW.quest().DjinnCapture;	
+					case 17://castle events
+					case 18://This is tested					
+					case 19://Djinn capture
+					case 20://The following are untested
+					case 21:
+					case 22:
+					case 23:
+					case 24:
+					case 25:
+					case 26:
+					case 27:
+					case 28:
+					case 29:
+					case 30:
+					case 31:								
+						//return VariableValue()==GameWorldController.instance.playerUW.quest().DjinnCapture;	
+						return VariableValue()==GameWorldController.instance.playerUW.quest().x_clocks[objInt().zpos-16];	
 				}
 			}
 		if (objInt().heading!=0)

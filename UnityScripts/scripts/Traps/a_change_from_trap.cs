@@ -31,25 +31,28 @@ public class a_change_from_trap : trap_base {
 		short NewTileFloorTexture =(short)( ChangeTo.heading |  (((ChangeTo.zpos >> 4) & 0x1 ) << 3));
 		//int NewFloorHeight = ChangeTo.zpos & 0xf;
 		//Debug.Log(this.name + "triggerX = " + triggerX + " triggerY = " + triggerY);
+				Debug.Log("Changing tiles to floor " + NewTileFloorTexture +  "(" + GameWorldController.instance.currentTileMap().texture_map[NewTileFloorTexture] + ") where " + objInt().heading+ " (" + GameWorldController.instance.currentTileMap().texture_map[objInt().heading] + ")" );
 		for (int x=0; x<=63; x++)
 		{
 			for (int y=0; y<=63; y++)
 			{
 				//Every tile needs to be reset and tested again.
-				GameWorldController.instance.currentTileMap().Tiles[x,y].Render=true;		
-				GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
-				GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
-				GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=false;	
+				//GameWorldController.instance.currentTileMap().Tiles[x,y].Render=true;		
+				//GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
+				//GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
+				//GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=false;	
 				if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture==objInt().heading)
 				{	
 
 					//Tiles[x,y].VisibleFaces = 63;
-					for (int v = 0; v < 6; v++)
+					if ( GameWorldController.instance.currentTileMap().Tiles[x,y].Render)
 					{
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
+							for (int v = 0; v < 6; v++)
+							{
+									GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
+									GameWorldController.instance.currentTileMap().Tiles[x,y].VisibleFaces[v]=true;
+							}		
 					}
-
 
 					 GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
 					if (ChangeTo.owner<10)	

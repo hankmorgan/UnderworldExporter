@@ -293,7 +293,7 @@ public class UWCharacter : Character {
 			}
 			else
 			{
-				this.transform.position=TeleportPosition;
+				this.transform.position= new Vector3(TeleportPosition.x, this.transform.position.y, TeleportPosition.z);
 			}				
 		}
 		if( (PlayerInventory.Ready==true) && (InventoryReady=false))

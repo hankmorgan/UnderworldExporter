@@ -31,7 +31,7 @@ public class a_teleport_trap : trap_base {
 		}
 		if ((_RES==GAME_UW2) && (GameWorldController.instance.playerUW.JustTeleported))
 		{//To stop infinite level transitions in UW2
-			GameWorldController.instance.playerUW.JustTeleported=false;
+			//GameWorldController.instance.playerUW.JustTeleported=false;
 			return;
 		}
 

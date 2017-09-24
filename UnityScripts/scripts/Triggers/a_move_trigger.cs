@@ -27,10 +27,10 @@ A trigger that fires when the player character enters it
 					{
 						if (triggerObj.GetComponent<a_teleport_trap>().objInt().zpos!=0)
 						{
-							if (_RES==GAME_UW1)
-							{
+							//if (_RES==GAME_UW1)
+							//{
 							GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStair);
-							}						
+							//}						
 						}
 					}
 				}	

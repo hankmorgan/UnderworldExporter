@@ -1179,31 +1179,25 @@ public class ObjectLoader : Loader {
 								case ObjectInteraction.HEADINGWEST:
 								case ObjectInteraction.HEADINGEAST:		
 										offY = (y*BrushY) + 60f;//center in tile
-										/*offX = (x*BrushX) + 0.6f;*/
 										if (objList[index].x == 0)
 										{
-												//offX -=0.15f;
-												offX +=3;
+											offX +=4;
 										}
 										if (objList[index].x == 7)
 										{
-												//offX -=0.15f;
-												offX -=3;
+											offX -=4;
 										}
 										break;
 								case ObjectInteraction.HEADINGNORTH:
 								case ObjectInteraction.HEADINGSOUTH:
-										/*	offY = (y*BrushY) + 0.6f;*/
 										offX = (x*BrushX) +60f;
 										if (objList[index].y == 0)
 										{
-												//offY +=0.15f;
-												offY +=3;
+											offY +=4;
 										}
 										if (objList[index].y == 7)
 										{
-												//offY -=0.15f;
-												offY -=3;
+											offY -=4;
 										}
 										break;
 								}

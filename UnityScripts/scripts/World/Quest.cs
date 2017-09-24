@@ -33,7 +33,7 @@ using System.Collections;
 /// 
 /// UW2 Quest flags
 /// 0: PT related - The troll is released
-/// 1: PT related
+/// 1: PT related - Bishop is free?
 /// 2: PT related - Borne wants you to kill bishop
 /// 3: PT related - Bishop is dead
 /// 
@@ -71,11 +71,12 @@ using System.Collections;
 /// 45: Janar has been met and befriended
 /// 
 /// 47: You have recieve the quest from the triliki
+/// 49: Bishop tells you about the gem.
 /// 50: The keep is going to crash.
 /// 
 /// 54: Checked by Mors Gotha? related to keep crashing
 /// 
-/// 58: Set when meeting bishop
+/// 58: Set when meeting bishop. Bishop tells you about altara
 /// 
 /// 61: You've brought water to Josie
 /// 
@@ -197,7 +198,7 @@ public class Quest : UWEBase {
 		/// <summary>
 		/// Tracks capture progress of the djinn
 		/// </summary>
-	public short DjinnCapture=0;
+//	public short DjinnCapture=0;
 
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)
@@ -205,7 +206,6 @@ public class Quest : UWEBase {
 	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat
 	/// Possibly these are hard coded events related to game progress.
 	/// Some known values
-		/// 0=Staff strike (<---this is wrong)
 	/// 1=Miranda conversations & related events in the castle
 		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)
 		/// 2 - After you visited another world.  (variable 17 is set to 16), dupre is tempted
@@ -224,7 +224,7 @@ public class Quest : UWEBase {
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
 	public int[] x_clocks=new int[32];
 
-		public enum x_clock_events{
+	/*	public enum x_clock_events{
 				ExploreCastleDepths,
 				VisitedAnotherWorld,
 				ServantsGetRestless,
@@ -236,7 +236,7 @@ public class Quest : UWEBase {
 				TheGemIsWeak,
 				NystrulWantsToEndTheGame,
 				MorsGothaAttacks
-		};
+		};*/
 
 
 
@@ -267,8 +267,43 @@ public class Quest : UWEBase {
 		return IncenseDream++;
 	}
 
+		public bool x_clock_hook(int index,int value)
+		{
+			switch (index)
+			{
+				case 17://Alias for x_clock 1
+				case 18:
+				case 19://Djinn capture
+				case 20:
+				case 21:
+				case 22:
+				case 23:
+				case 24:
+				case 25:
+				case 26:
+				case 27:
+				case 28:
+				case 29:
+				case 30:
+				case 31:
+					{
+						if (x_clocks[index-16]< value)
+						{
+							x_clocks[index-16]=value;
+							Debug.Log("x_clock_hook = " + index + " set to " + value);
+						}
+						else
+						{
+							Debug.Log("x_clock_hook (skipped) = " + index + " set to " + value);	
+						}
+						return true;
+					}
+			}
+		return false;
+		}
 
-	/// <summary>
+
+/*	/// <summary>
 	/// X Clock_Event processing
 	/// </summary>
 	/// <param name="x_clock_event">X clock event.</param>
@@ -285,6 +320,6 @@ public class Quest : UWEBase {
 				break;
 			}
 		}
-	}
+	}*/
 
 }

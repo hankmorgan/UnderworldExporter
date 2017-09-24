@@ -23,12 +23,12 @@ public class a_pressure_trigger : trigger_base {
 		/// <summary>
 		/// The texture index when weight is on the trigger.
 		/// </summary>
-	public int TextureOn;
+	//public int TextureOn;
 
 		/// <summary>
 		/// The texture index when no weight is on the trigger.
 		/// </summary>
-	public int TextureOff;
+	//public int TextureOff;
 
 		/// <summary>
 		/// The colliders that are in contact with the trigger.
@@ -134,13 +134,21 @@ public class a_pressure_trigger : trigger_base {
 			{
 				ReleaseWeightFrom();	
 			}
+			else if ((WeightOnTrigger>=1.0f) && (PreviousWeightOnTrigger<1.0f) && (!GameWorldController.WorldReRenderPending))
+			{//Trigger has gained weight but is a release trigger.
+				UpdateTileTexture(8);	
+			}
 		}
 		else
 		{
 			if ((WeightOnTrigger>=1.0f) && (PreviousWeightOnTrigger<1.0f))								
 			{
 				PutWeightOn();
-			}	
+			}
+			else if ((WeightOnTrigger<=1.0f) && (PreviousWeightOnTrigger>1.0f) && (!GameWorldController.WorldReRenderPending))
+			{//Trigger has lost weight but is not a release trigger.
+				UpdateTileTexture(7);	
+			}
 		}
 
 		PreviousWeightOnTrigger=WeightOnTrigger;
@@ -151,7 +159,8 @@ public class a_pressure_trigger : trigger_base {
 		/// </summary>
 	public void PutWeightOn()
 	{
-		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
+		//UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
+		UpdateTileTexture(8);
 		if (door!=null)
 		{
 			door.TriggerInstantly=true;
@@ -167,7 +176,8 @@ public class a_pressure_trigger : trigger_base {
 		/// </summary>
 	public void ReleaseWeightFrom()
 	{
-		UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
+		//UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
+		UpdateTileTexture(7);
 		if (door!=null)
 		{
 			door.TriggerInstantly=true;
@@ -184,9 +194,13 @@ public class a_pressure_trigger : trigger_base {
 		/// </summary>
 		/// <param name="newTexture">New texture.</param>
 	public void UpdateTileTexture(int newTexture)
-	{
+	{//Question. Is the texture map always 7 & 8??
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;	
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
-		Destroy(GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR));
+		GameObject tileToDestroy= GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR);
+		if (tileToDestroy!=null)
+		{
+			Destroy(tileToDestroy);				
+		}		
 	}
 }

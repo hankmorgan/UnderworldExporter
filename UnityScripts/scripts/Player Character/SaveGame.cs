@@ -1293,6 +1293,7 @@ public class SaveGame : Loader {
 				int x_position=0;
 				int y_position=0;
 				int z_position=0;
+				int x_clock=1;
 
 				int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
@@ -1733,18 +1734,32 @@ public class SaveGame : Loader {
 												MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
 												break;
 												}
-
-										case 0x36f:
-												{//The mysterious x_clock
-													GameWorldController.instance.playerUW.quest().x_clocks[1]=(int)DataLoader.getValAtAddress(buffer,i,8);
+										//x_clocks
+										case 0x36f://1 Castle events
+										case 0x370://2
+										case 0x371://3 DjinnCapture
+										case 0x372://4
+										case 0x373://5
+										case 0x374://6
+										case 0x375://7
+										case 0x376://8
+										case 0x377://9
+										case 0x378://10
+										case 0x379://11
+										case 0x37a://12
+										case 0x37b://13
+										case 0x37c://14
+										case 0x37d://15 -- This could be wrong.
+												{//The mysterious x_clocks
+													GameWorldController.instance.playerUW.quest().x_clocks[x_clock++]=(int)DataLoader.getValAtAddress(buffer,i,8);
 													break;
 												}
 
-										case 0x371://DjinnCapture
-												{
-													GameWorldController.instance.playerUW.quest().DjinnCapture=(short)DataLoader.getValAtAddress(buffer,i,8);
-													break;
-												}
+									//	case 0x371://DjinnCapture
+											//	{
+												//	GameWorldController.instance.playerUW.quest().DjinnCapture=(short)DataLoader.getValAtAddress(buffer,i,8);
+												//	break;
+												//}
 										}
 								}
 

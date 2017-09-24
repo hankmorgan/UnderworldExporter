@@ -52,8 +52,19 @@ public class a_set_variable_trap : a_variable_trap {
 				operation = "Sub";
 				break;
 			case 2://Set
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();
-				operation = "Set";
+				if  (_RES==GAME_UW2)
+				{//Some variables in UW2 are actually pointers to the mysterious x_clock
+					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue() ) )
+						{
+							GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
+							operation = "Set";
+						}
+				}
+				else
+				{
+					GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
+					operation = "Set";
+				}	
 				break;
 			case 3://AND
 				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] &= VariableValue();
