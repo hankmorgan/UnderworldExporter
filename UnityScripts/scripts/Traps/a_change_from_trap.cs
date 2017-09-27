@@ -29,9 +29,11 @@ public class a_change_from_trap : trap_base {
 		}
 
 		short NewTileFloorTexture =(short)( ChangeTo.heading |  (((ChangeTo.zpos >> 4) & 0x1 ) << 3));
+
+		short tileFloorCriteria = (short)( objInt().heading |  (((objInt().zpos >> 4) & 0x1 ) << 3));
 		//int NewFloorHeight = ChangeTo.zpos & 0xf;
 		//Debug.Log(this.name + "triggerX = " + triggerX + " triggerY = " + triggerY);
-				Debug.Log("Changing tiles to floor " + NewTileFloorTexture +  "(" + GameWorldController.instance.currentTileMap().texture_map[NewTileFloorTexture] + ") where " + objInt().heading+ " (" + GameWorldController.instance.currentTileMap().texture_map[objInt().heading] + ")" );
+				//Debug.Log("Changing tiles to floor " + NewTileFloorTexture +  "(" + GameWorldController.instance.currentTileMap().texture_map[NewTileFloorTexture] + ") where " + objInt().heading+ " (" + GameWorldController.instance.currentTileMap().texture_map[objInt().heading] + ")" );
 		for (int x=0; x<=63; x++)
 		{
 			for (int y=0; y<=63; y++)
@@ -41,7 +43,7 @@ public class a_change_from_trap : trap_base {
 				//GameWorldController.instance.currentTileMap().Tiles[x,y].DimX=1;			
 				//GameWorldController.instance.currentTileMap().Tiles[x,y].DimY=1;			
 				//GameWorldController.instance.currentTileMap().Tiles[x,y].Grouped=false;	
-				if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture==objInt().heading)
+				if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture ==  tileFloorCriteria)//==objInt().heading)
 				{	
 
 					//Tiles[x,y].VisibleFaces = 63;
@@ -63,53 +65,62 @@ public class a_change_from_trap : trap_base {
 					{
 						 GameWorldController.instance.currentTileMap().Tiles[x,y].floorHeight= ChangeTo.zpos;
 					}
-					if (ChangeTo.quality<63)
-					{
-						// GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture= ChangeTo.quality;
+				}//end floor texture criteria.
 
-							//Now change neighbours
-						if ( GameWorldController.instance.currentTileMap().Tiles[x,y].tileType==TileMap.TILE_SOLID)
-						{
-							 GameWorldController.instance.currentTileMap().Tiles[x,y].North=ChangeTo.quality;
-							 GameWorldController.instance.currentTileMap().Tiles[x,y].South=ChangeTo.quality;
-							 GameWorldController.instance.currentTileMap().Tiles[x,y].East=ChangeTo.quality;
-							 GameWorldController.instance.currentTileMap().Tiles[x,y].West=ChangeTo.quality;
-						}
-						 GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture=ChangeTo.quality;
+								//	if (ChangeTo.quality<63)
+								if (objInt().quality==GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture )										
+								{//This is probably a seperate test to the floor texture test above.
 
-						if (y>0)
-						{//Change its neighbour, only if the neighbour is not a solid
-							if ( GameWorldController.instance.currentTileMap().Tiles[x,y-1].tileType>TileMap.TILE_SOLID)
-							{
-									 GameWorldController.instance.currentTileMap().Tiles[x,y-1].North=ChangeTo.quality;	
-							}
-						}
+									GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture=ChangeTo.quality;
 
-						if (y<TileMap.TileMapSizeY)
-						{//Change its neighbour, only if the neighbour is not a solid
-							if ( GameWorldController.instance.currentTileMap().Tiles[x,y+1].tileType>TileMap.TILE_SOLID)
-							{
-									 GameWorldController.instance.currentTileMap().Tiles[x,y+1].South=ChangeTo.quality;	
-							}
-						}
+										//TODO: test against each direction individually rather than use self.
+										// GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture= ChangeTo.quality;
 
-						if (x>0)
-						{//Change its neighbour, only if the neighbour is not a solid
-							if ( GameWorldController.instance.currentTileMap().Tiles[x-1,y].tileType>TileMap.TILE_SOLID)
-							{
-									 GameWorldController.instance.currentTileMap().Tiles[x-1,y].East=ChangeTo.quality;	
-							}
-						}
+										//Now change neighbours
+									/*	if ( GameWorldController.instance.currentTileMap().Tiles[x,y].tileType==TileMap.TILE_SOLID)
+										{
+												GameWorldController.instance.currentTileMap().Tiles[x,y].North=ChangeTo.quality;
+												GameWorldController.instance.currentTileMap().Tiles[x,y].South=ChangeTo.quality;
+												GameWorldController.instance.currentTileMap().Tiles[x,y].East=ChangeTo.quality;
+												GameWorldController.instance.currentTileMap().Tiles[x,y].West=ChangeTo.quality;
+										}
+										GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture=ChangeTo.quality;
 
-						if ( x<TileMap.TileMapSizeX)
-						{//Change its neighbour, only if the neighbour is not a solid
-							if ( GameWorldController.instance.currentTileMap().Tiles[x+1,y].tileType>TileMap.TILE_SOLID)
-							{
-									 GameWorldController.instance.currentTileMap().Tiles[x+1,y].West=ChangeTo.quality;
-							}
-						}
-					}
-				}
+										if (y>0)
+										{//Change its neighbour, only if the neighbour is not a solid
+												if ( GameWorldController.instance.currentTileMap().Tiles[x,y-1].tileType>TileMap.TILE_SOLID)
+												{
+														GameWorldController.instance.currentTileMap().Tiles[x,y-1].North=ChangeTo.quality;	
+												}
+										}
+
+										if (y<TileMap.TileMapSizeY)
+										{//Change its neighbour, only if the neighbour is not a solid
+												if ( GameWorldController.instance.currentTileMap().Tiles[x,y+1].tileType>TileMap.TILE_SOLID)
+												{
+														GameWorldController.instance.currentTileMap().Tiles[x,y+1].South=ChangeTo.quality;	
+												}
+										}
+
+										if (x>0)
+										{//Change its neighbour, only if the neighbour is not a solid
+												if ( GameWorldController.instance.currentTileMap().Tiles[x-1,y].tileType>TileMap.TILE_SOLID)
+												{
+														GameWorldController.instance.currentTileMap().Tiles[x-1,y].East=ChangeTo.quality;	
+												}
+										}
+
+										if ( x<TileMap.TileMapSizeX)
+										{//Change its neighbour, only if the neighbour is not a solid
+												if ( GameWorldController.instance.currentTileMap().Tiles[x+1,y].tileType>TileMap.TILE_SOLID)
+												{
+														GameWorldController.instance.currentTileMap().Tiles[x+1,y].West=ChangeTo.quality;
+												}
+										}*/
+								}
+
+					GameWorldController.instance.currentTileMap().SetTileMapWallFacesUW();//Update neighbour wall faces
+
 			}	
 		}
 

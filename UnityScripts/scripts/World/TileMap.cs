@@ -651,47 +651,8 @@ public class TileMap : Loader {
 								//Tiles[x,y].hasElevator=0;
 						}
 				}
-				for (y=0; y<=TileMap.TileMapSizeY;y++)
-				{
-						for (x=0; x<=TileMap.TileMapSizeX;x++)
-						{
-								if (Tiles[x,y].tileType >= 0) //was just solid only. Note: If textures are all wrong it's probably caused here!
-								{
-										//assign it's north texture
-										if (y<TileMap.TileMapSizeY)
-										{Tiles[x,y].North =Tiles[x,y+1].wallTexture;}
-										else
-										{Tiles[x,y].North =-1;}
-										//assign it's southern
-										if (y>0)
-										{Tiles[x,y].South  =Tiles[x,y-1].wallTexture;}
-										else
-										{Tiles[x,y].South =-1;}
-								}
-								//it's east
-								if (x<TileMap.TileMapSizeX)
-								{Tiles[x,y].East =Tiles[x+1,y].wallTexture;}
-								else
-								{Tiles[x,y].East =-1;}
-								//assign it's West
-								if (x>0)
-								{Tiles[x,y].West =Tiles[x-1,y].wallTexture;}
-								else
-								{Tiles[x,y].West =-1;}				
-						}
-						if ((x<=TileMap.TileMapSizeX) && (y<=TileMap.TileMapSizeY))
-						{
-								Tiles[x,y].UpperEast = Tiles[x,y].East;
-								Tiles[x,y].UpperWest = Tiles[x,y].West;
-								Tiles[x,y].UpperNorth = Tiles[x,y].North;
-								Tiles[x,y].UpperSouth = Tiles[x,y].South;
-								Tiles[x,y].LowerEast = Tiles[x,y].East;
-								Tiles[x,y].LowerWest = Tiles[x,y].West;
-								Tiles[x,y].LowerNorth = Tiles[x,y].North;
-								Tiles[x,y].LowerSouth = Tiles[x,y].South;
-						}
 
-				}
+				SetTileMapWallFacesUW ();
 
 
 
@@ -712,6 +673,61 @@ public class TileMap : Loader {
 			return true;
 		}
 
+
+		/// <summary>
+		/// Creates the tile map wall textures for each north, south, east and west faces
+		/// </summary>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+	public void SetTileMapWallFacesUW ()
+	{
+				short x; short y;
+     	for ( y = 0; y <= TileMap.TileMapSizeY; y++) {
+			for (x = 0; x <= TileMap.TileMapSizeX; x++) {
+				if (Tiles [x, y].tileType >= 0)//was just solid only. Note: If textures are all wrong it's probably caused here!
+				 {
+					//assign it's north texture
+					if (y < TileMap.TileMapSizeY) {
+						Tiles [x, y].North = Tiles [x, y + 1].wallTexture;
+					}
+					else {
+						Tiles [x, y].North = -1;
+					}
+					//assign it's southern
+					if (y > 0) {
+						Tiles [x, y].South = Tiles [x, y - 1].wallTexture;
+					}
+					else {
+						Tiles [x, y].South = -1;
+					}
+				}
+				//it's east
+				if (x < TileMap.TileMapSizeX) {
+					Tiles [x, y].East = Tiles [x + 1, y].wallTexture;
+				}
+				else {
+					Tiles [x, y].East = -1;
+				}
+				//assign it's West
+				if (x > 0) {
+					Tiles [x, y].West = Tiles [x - 1, y].wallTexture;
+				}
+				else {
+					Tiles [x, y].West = -1;
+				}
+			}
+			if ((x <= TileMap.TileMapSizeX) && (y <= TileMap.TileMapSizeY)) {
+				Tiles [x, y].UpperEast = Tiles [x, y].East;
+				Tiles [x, y].UpperWest = Tiles [x, y].West;
+				Tiles [x, y].UpperNorth = Tiles [x, y].North;
+				Tiles [x, y].UpperSouth = Tiles [x, y].South;
+				Tiles [x, y].LowerEast = Tiles [x, y].East;
+				Tiles [x, y].LowerWest = Tiles [x, y].West;
+				Tiles [x, y].LowerNorth = Tiles [x, y].North;
+				Tiles [x, y].LowerSouth = Tiles [x, y].South;
+			}
+		}
+	}
 
 		public bool BuildTileMapShock(char[] archive_ark, int LevelNo)
 		{
