@@ -55,7 +55,7 @@ public class Decal : object_base {
 						case TileMap.TILE_DIAG_NE:
 								if( (heading==ObjectInteraction.HEADINGNORTHEAST))
 								{//This decal is out from the wall.
-									adjustment+=new Vector3(-0.08f,0,-0.08f);										
+									adjustment+=new Vector3(+0.02f,0,+0.02f);										
 								}
 								break;
 

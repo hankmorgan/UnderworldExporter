@@ -177,7 +177,7 @@ public class WeaponMelee : Weapon {
 						switch(objInt().identity())
 						{
 						case ObjectInteraction.IdentificationFlags.Identified:
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(4,StringController.YouSee) +  StringController.instance.GetString(4,268));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(4,StringController.str_you_see_) +  StringController.instance.GetString(4,268));
 							break;
 						default:
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		

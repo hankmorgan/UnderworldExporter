@@ -79,6 +79,7 @@ public class DoorControl : object_base {
 		/// Gets the lock object interaction.
 		/// </summary>
 		/// <returns>The lock object int.</returns>
+		/// TODO: The portcullis on lvl 7 of the prison tower is linked to a door trap rather than a lock. 
 		ObjectInteraction getLockObjInt()
 		{
 			if(objInt().link==0)

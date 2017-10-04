@@ -2020,23 +2020,25 @@ public class ObjectInteraction : UWEBase {
 							switch (objInt.quality)	
 							{
 							case 0x02://Camera
-									myObj.AddComponent<a_do_trap_camera>();break;
+								myObj.AddComponent<a_do_trap_camera>();break;
 							case 0x03://platform
-									myObj.AddComponent<a_do_trap_platform>();break;
+								myObj.AddComponent<a_do_trap_platform>();break;
+							case 0x5://A trespass trap
+								myObj.AddComponent<a_hack_trap_trespass>();break;
 							case 0x18://bullfrog
-									myObj.AddComponent<a_do_trapBullfrog>();break;
+								myObj.AddComponent<a_do_trapBullfrog>();break;
 							case 0x2a://Gronk conversation
-									myObj.AddComponent<a_do_trap_conversation>();break;
+								myObj.AddComponent<a_do_trap_conversation>();break;
 							case 0x28://emerald puzzle on level 6
-									myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
+								myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
 							case 0x3F://end game sequence
-									myObj.AddComponent<a_do_trap_EndGame>();break;
+								myObj.AddComponent<a_do_trap_EndGame>();break;
 							case 54:
-									myObj.AddComponent<a_hack_trap_gemrotate>();break;
+								myObj.AddComponent<a_hack_trap_gemrotate>();break;
 							case 55:
-									myObj.AddComponent<a_hack_trap_teleport>();break;
+								myObj.AddComponent<a_hack_trap_teleport>();break;
 							default:
-									myObj.AddComponent<a_hack_trap>();break;
+								myObj.AddComponent<a_hack_trap>();break;
 							}
 							CreateSprite=false;
 							break;

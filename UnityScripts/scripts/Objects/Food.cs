@@ -123,7 +123,7 @@ public class Food : object_base {
 		switch(objInt().item_id)
 		{
 			case 191://Wine of compassion
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.YouSee) + " " + StringController.instance.GetString(1,264));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_see_) + " " + StringController.instance.GetString(1,264));
 				break;
 			case 192://plants
 			case 207:	

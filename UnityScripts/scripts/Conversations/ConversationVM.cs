@@ -1851,7 +1851,14 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[2];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value	
-							stack.result_register= x_traps(stack.at(args[0]), stack.at(args[1]));
+							if (stack.at(args[0])==10001)
+							{
+								stack.result_register= x_traps(stack.at(args[0]), stack.at(args[1]));			
+							}
+							else
+							{
+								x_traps(stack.at(args[0]), stack.at(args[1]));			
+							}	
 							break;
 						}
 
@@ -2161,15 +2168,15 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to lookup</param>
 		public int get_quest(int QuestNo)
 		{
-				if (_RES==GAME_UW2)
-				{
-						Debug.Log("Checking Quest no " + QuestNo);
-				}
-				if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
-				{
-						Debug.Log("invalid quest no " + QuestNo);
-						return 0;
-				}
+			if (_RES==GAME_UW2)
+			{
+				Debug.Log("Checking Quest no " + QuestNo + " it's value is " + GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo]);
+			}
+			if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
+			{
+				Debug.Log("invalid quest no " + QuestNo);
+				return 0;
+			}
 			return GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo];
 		}
 
@@ -3695,16 +3702,20 @@ description:  places a generated object in underworld
 
 
 	/// <summary>
-	/// UWformats has no info on this. Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
+	/// UWformats has no info on this. Based on usage in conversation 220 and on level 7 of prison tower I think it means it looks at the same variables as the check variable traps
 	/// </summary>
 	/// <returns>The traps.</returns>
 	/// <param name="unk1">Unk1.</param>
 	/// <param name="VariableIndex">Variable index.</param>
 
-	public int x_traps( int unk1, int VariableIndex)
-	{//UWformats has no info on this.
-			//Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
-		return GameWorldController.instance.playerUW.quest().variables[VariableIndex];
+	public int x_traps( int VariableValue, int VariableIndex)
+	{
+		Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
+		if (VariableValue<= GameWorldController.instance.playerUW.quest().variables.GetUpperBound(0))
+		{					
+			GameWorldController.instance.playerUW.quest().variables[VariableIndex]=VariableValue;
+		}
+		return GameWorldController.instance.playerUW.quest().variables[VariableIndex];		
 	}
 
 

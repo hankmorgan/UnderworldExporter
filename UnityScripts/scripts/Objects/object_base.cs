@@ -215,7 +215,7 @@ public class object_base : UWEBase {
 		{
 			if (((objInt().owner & 0x1f))!=0)
 			{
-				SignalTheft(GameWorldController.instance.playerUW.transform.position, objInt().owner);
+				SignalTheft(GameWorldController.instance.playerUW.transform.position, objInt().owner , 4f);
 				objInt().owner=0;
 			}	
 		}
@@ -624,7 +624,7 @@ public class object_base : UWEBase {
 		/// <summary>
 		/// Signals the theft of this object to a specific race
 		/// </summary>
-		public static void SignalTheft(Vector3 position, int Owner)
+		public static void SignalTheft(Vector3 position, int Owner, float range)
 		{
 			foreach (Collider Col in Physics.OverlapSphere(position,4.0f))
 			{
@@ -642,11 +642,11 @@ public class object_base : UWEBase {
 							Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
 							Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;
 							Col.gameObject.GetComponent<NPC>().npc_goal=5;	
-							reaction = StringController.instance.GetString(1,225);
+							reaction = StringController.instance.GetString(1,StringController.str__is_angered_by_your_action_);
 						}
 						else
 						{
-							reaction = StringController.instance.GetString(1,226);
+							reaction = StringController.instance.GetString(1,StringController.str__is_annoyed_by_your_action_);
 								//StringController.instance.GetString(1,370+(objInt().owner & 0x1f) )
 						}
 						UWHUD.instance.MessageScroll.Add(OwnerName.Trim() + reaction);

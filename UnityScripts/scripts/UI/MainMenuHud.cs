@@ -294,7 +294,7 @@ public class MainMenuHud : GuiBase {
 			JourneyOnwards();
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
 			//000~001~162~Restore Game Complete. \n
-			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,162));
+			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_restore_game_complete_));
 			return;	
 
 			/*foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
