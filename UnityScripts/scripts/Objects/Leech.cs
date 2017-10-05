@@ -11,7 +11,7 @@ public override bool use ()
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,224));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_the_leeches_remove_the_poison_as_well_as_some_of_your_skin_and_blood_));
 			GameWorldController.instance.playerUW.ApplyDamage(Random.Range (1,6));
 			objInt().consumeObject();
 			return true;

@@ -121,7 +121,7 @@ public class Shrine : object_base {
 		if (GameWorldController.instance.playerUW.TrainingPoints==0)
 		{
 			//000~001~024~You are not ready to advance. \n
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));						
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_are_not_ready_to_advance_));						
 			return;
 		}
 		string answer="";
@@ -247,11 +247,11 @@ public class Shrine : object_base {
 		{
 			//Code to spawn key of truth in player hand
 			//Debug.Log ("You get the key of truth");
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,30));//No skills appear
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_none_of_your_skills_improved_));//No skills appear
 			//inputctrl.text=UWHUD.instance.MessageScroll.text;
 			Shrine.HasGivenKey=true;
 			//create the key of truth.
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject(225,0,0,0,256);
+			ObjectLoaderInfo newobjt= ObjectLoader.newObject(225,0,0,0,256);
 			GameObject key = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 			GameWorldController.MoveToInventory(key);
 			ObjectInteraction myObjInt = key.GetComponent<ObjectInteraction>();

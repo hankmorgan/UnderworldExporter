@@ -12,7 +12,7 @@ public class Fountain : object_base {
 			{
 				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,objInt().link-512,Magic.SpellRule_TargetSelf);
 			}
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,237));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_the_water_refreshes_you_));
 			return true;
 		}
 		else

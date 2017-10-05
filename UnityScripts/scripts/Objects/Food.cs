@@ -52,12 +52,22 @@ public class Food : object_base {
 	{
 		if ((GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="") || (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==this.name))
 		{//Eat if no object in hand or if the object in hand is this item.
+						
+								
 			switch(objInt().item_id)
 			{
 			case 191://Wine of compassion.
-				//000~001~127~You are unable to open the wine bottle.
-				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,127));
-				return true;
+				if (_RES==GAME_UW1)
+				{
+					//000~001~127~You are unable to open the wine bottle.
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,127));
+					return true;
+				}
+				else
+				{
+					return Eat();
+				}
+				
 			default:
 				return Eat();
 			}
@@ -75,18 +85,18 @@ public class Food : object_base {
 		if (Nutrition()+GameWorldController.instance.playerUW.FoodLevel>=255)
 		{
 			GameWorldController.instance.playerUW.FoodLevel=255;
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,126));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_are_too_full_to_eat_that_now_));
 			return false;
 		}
 		else
 		{
 			GameWorldController.instance.playerUW.FoodLevel = Nutrition()+GameWorldController.instance.playerUW.FoodLevel;
-			switch (objInt().item_id)
+			switch (objInt().item_id)//TODO:update for UW2
 				{
 				case 192://plants
 				case 207:	
 				case 212:
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,233));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_plant_is_plain_tasting_but_nourishing_));
 						break;	
 				case 217://Dead rotworm
 					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,234));
@@ -147,11 +157,11 @@ public class Food : object_base {
 			int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
 			int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
 			Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
-				int BaseStringNo=172;
-				if (_RES==GAME_UW2)
-				{
-						BaseStringNo=187;
-				}
+				int BaseStringNo=StringController.str__tasted_putrid_;
+				//if (_RES==GAME_UW2)
+				//{
+				//		BaseStringNo=187;
+				//}
 		if (objInt().quality == 0)
 			{
 				return StringController.instance.GetString (1,BaseStringNo);//worm

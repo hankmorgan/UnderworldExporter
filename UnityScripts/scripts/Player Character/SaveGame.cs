@@ -1339,7 +1339,7 @@ public class SaveGame : Loader {
 						//File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
 						if (GameWorldController.instance.playerUW.recode)
 						{
-								buffer[881]=(char)2;
+								buffer[252]=(char)1;
 								char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
 
 								byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];

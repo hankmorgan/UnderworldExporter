@@ -63,7 +63,7 @@ public class StringController : UWEBase {
 		public static int str_late_afternoon=79;
 		public static int str_early_evening=80;
 		public static int str_evening=81;
-		public static int str_night=82;
+		public static int str_night_3=82;
 		public static int str__=83;
 		public static int str_barely=84;
 		public static int str_mildly=85;
@@ -365,8 +365,8 @@ public class StringController : UWEBase {
 						str__day_of_your_imprisonment_=70;
 						str_it_has_been_an_uncountable_number_of_days_since_you_entered_the_abyss_=71;
 						str_you_guess_that_it_is_currently_=72;
-						str_night=84;
-						str_night=84;
+						str_night_1=84;
+						str_night_2=84;
 						str_dawn=86;
 						str_early_morning=87;
 						str_morning=88;
@@ -376,7 +376,7 @@ public class StringController : UWEBase {
 						str_late_afternoon=92;
 						str_early_evening=93;
 						str_evening=94;
-						str_night=84;
+						str_night_3=84;
 						str__=96;
 						str_barely=97;
 						str_mildly=98;

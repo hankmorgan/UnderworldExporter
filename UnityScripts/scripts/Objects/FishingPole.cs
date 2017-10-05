@@ -44,7 +44,7 @@ public override bool use ()
 						//000~001~099~You catch a lovely fish.
 						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= GameWorldController.instance.playerUW.playerInventory.getEncumberance())
 						{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,99));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_catch_a_lovely_fish_));
 							GameObject fishy = CreateFish();
 							GameWorldController.instance.playerUW.playerInventory.ObjectInHand=fishy.name;
 							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
@@ -61,19 +61,19 @@ public override bool use ()
 						}
 						else
 						{//000~001~102~You feel a nibble, but the fish gets away.
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,102));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_feel_a_nibble_but_the_fish_gets_away_));
 						}
 					}
 					else
 					{//000~001~100~No luck this time.
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,100));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_no_luck_this_time_));
 					}
 					return;
 				}
 			}
 		}
 		//000~001~101~You cannot fish there.  Perhaps somewhere else.
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,101));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_cannot_fish_there__perhaps_somewhere_else_));
 	}
 
 	/// <summary>

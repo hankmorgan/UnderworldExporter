@@ -119,7 +119,7 @@ public class Compass : GuiBase_Draggable {
 	{//String representation of the above.
 		int Offset= Compass.getCompassHeadingOffset(src,dst);
 
-		return StringController.instance.GetString(1, 36 + Offset);		
+		return StringController.instance.GetString(1, StringController.str_to_the_north + Offset);	//36	
 	}
 
 
@@ -181,27 +181,27 @@ public class Compass : GuiBase_Draggable {
 		if (Dragging==true){return;}
 				if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) {return;}
 				UWHUD.instance.MessageScroll.Clear ();
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,64) 
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_are_currently_) 
 						+ GameWorldController.instance.playerUW.GetFedStatus() 
 		                                      + " and " 
 						+ GameWorldController.instance.playerUW.GetFatiqueStatus());
 
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,65) 
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_are_on_the_) 
 						+ StringController.instance.GetString (1,411+GameWorldController.instance.LevelNo) 
-						+ StringController.instance.GetString (1,66));
+						+ StringController.instance.GetString (1,StringController.str__level_of_the_abyss_));
 		if (GameClock.day()<10)
 		{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,67) 
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_it_is_the_) 
 								+ StringController.instance.GetString (1,411+GameClock.day())
-								+ StringController.instance.GetString (1,68));
+								+ StringController.instance.GetString (1,StringController.str__day_of_your_imprisonment_));
 		}
 		else
 		{//incountable
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,69));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_it_has_been_an_uncountable_number_of_days_since_you_entered_the_abyss_));
 		}
 
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,70) 
-						+ StringController.instance.GetString (1,71+((GameClock.hour())/2)));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_guess_that_it_is_currently_) 
+						+ StringController.instance.GetString (1,StringController.str_night_1+((GameClock.hour())/2)));
 
 
 		/*

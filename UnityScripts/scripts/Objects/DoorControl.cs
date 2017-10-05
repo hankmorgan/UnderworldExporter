@@ -246,19 +246,19 @@ public class DoorControl : object_base {
 						{
 						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.quality))
 							{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,121));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
 							UnlockDoor();
 							}
 						else
 							{
 							//Debug.Log ("Picklock failed!");
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,120));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
 							objIntUsed.consumeObject();
 							}
 						}
 					else
 						{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,120));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
 						}
 					break;
 					}

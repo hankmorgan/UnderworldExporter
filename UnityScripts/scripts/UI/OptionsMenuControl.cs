@@ -390,7 +390,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			//000~001~159~Impossible, you are between worlds. \n
 			if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
 			{
-				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,159));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_impossible_you_are_between_worlds_));
 				return;
 			}
 				if (!Directory.Exists(Loader.BasePath + "save" + (SlotNo+1)))
@@ -455,7 +455,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			//000~001~162~Restore Game Complete. \n
-			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,162));
+			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_restore_game_complete_));
 			ReturnToGame();
 		}
 	}

@@ -291,7 +291,7 @@ public class ButtonHandler : Decal {
 			case ObjectInteraction.POLE:
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
-				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,157));
+				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,StringController.str_using_the_pole_you_trigger_the_switch_));
 				return Activate();
 			default:
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";

@@ -185,7 +185,7 @@ public class object_base : UWEBase {
 	public virtual bool TalkTo()
 	{
 		//000~001~156~You cannot talk to that.
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,156));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_cannot_talk_to_that_));
 		return true;
 	}
 

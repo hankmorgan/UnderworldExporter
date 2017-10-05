@@ -21,7 +21,7 @@ public class Pole : object_base {
 
 	public override bool FailMessage ()
 	{
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,158));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_pole_cannot_be_used_on_that_));
 		return false;
 	}
 

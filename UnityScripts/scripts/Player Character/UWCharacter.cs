@@ -561,7 +561,7 @@ public class UWCharacter : Character {
 					case "BRID":
 						//000~001~171~You see a bridge.
 						//GetMessageLog().text= 
-						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,171));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_see_a_bridge_));
 						break;
 					case "WALL":
 					case "TILE":
@@ -661,7 +661,7 @@ public class UWCharacter : Character {
 						//check for weight
 						if (objPicked.GetWeight() > playerInventory.getEncumberance())
 						{//000~001~095~That is too heavy for you to pick up.
-							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,95));
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_that_is_too_heavy_for_you_to_pick_up_));
 							return;
 						}
 						if (ptrId==-2)
@@ -710,7 +710,7 @@ public class UWCharacter : Character {
 						}	
 						else
 						{
-							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,96));									
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_cannot_pick_that_up_));									
 						}					
 					}
 				}
@@ -811,7 +811,7 @@ public class UWCharacter : Character {
 				}
 
 		//return StringController.instance.GetString (1,104+((FoodLevel)/8));
-				return StringController.instance.GetString (1,104+FoodLevelString);
+		return StringController.instance.GetString (1,StringController.str_starving+FoodLevelString);
 
 	}
 
@@ -825,7 +825,7 @@ public class UWCharacter : Character {
 		000~001~117~rested
 		000~001~118~wide awake	
 		*/
-		return StringController.instance.GetString (1,113+((Fatigue)/5));
+		return StringController.instance.GetString (1,StringController.str_fatigued+((Fatigue)/5));
 	}
 
 	public void RegenMana()
@@ -842,7 +842,7 @@ public class UWCharacter : Character {
 		if (GameWorldController.instance.playerUW.CharLevel<level)
 		{
 			//000~001~147~You have attained experience level
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,147));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_have_attained_experience_level_));
 			TrainingPoints+=3;
 			GameWorldController.instance.playerUW.MaxVIT=GameWorldController.instance.playerUW.PlayerSkills.STR*3;
 			switch (_RES)

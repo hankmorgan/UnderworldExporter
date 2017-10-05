@@ -611,7 +611,7 @@ public class Container : object_base {
 		}
 		else
 		{//000~001~248~That item does not fit.
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_that_item_does_not_fit_));
 		}
 		
 		if (WeightTest==true)
@@ -622,7 +622,7 @@ public class Container : object_base {
 			}
 			else
 			{//000~001~248~That item does not fit.
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));				
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_that_item_does_not_fit_));				
 			}
 		}
 		return (TypeTest && WeightTest && (CapacityTest | Swapping));

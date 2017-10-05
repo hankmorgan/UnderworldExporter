@@ -224,12 +224,12 @@ public class Magic : UWEBase {
 
 				if (Mathf.Max(Mathf.Round(casterUW.CharLevel/2),1)<TestSpellLevel)
 				{//Not experienced enough
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,210));
-						return false;
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_are_not_experienced_enough_to_cast_spells_of_that_circle_));
+					return false;
 				}
 				else if (CurMana< TestSpellLevel*3)
 				{//Mana test
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,211));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_do_not_have_enough_mana_to_cast_the_spell_));
 						return false;
 				}
 				else //if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
@@ -244,12 +244,12 @@ public class Magic : UWEBase {
 							case 1:
 							case 2:
 							case 3: //backfire
-									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,214));
+									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_the_spell_backfires_));
 									casterUW.CurVIT = casterUW.CurVIT-3;
 									break;
 							default:
 									//000~001~213~Casting was not successful.
-									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,213));
+									UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_casting_was_not_successful_));
 									break;
 							}
 							return false;
@@ -1737,7 +1737,7 @@ public class Magic : UWEBase {
 						}
 						else
 						{
-								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_moonstone_is_not_available_));
 						}
 
 				}
@@ -2429,7 +2429,7 @@ public class Magic : UWEBase {
 		/// <param name="caster">Caster.</param>
 		void SpellIncantationFailed(GameObject caster)
 		{
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,212));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_incantation_failed_));
 		}
 
 		/// <summary>

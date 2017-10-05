@@ -87,40 +87,43 @@ public class Instrument : object_base {
 			CurrentInstrument="";
 			WindowDetectUW.WaitingForInput=false;
 			GameWorldController.instance.playerUW.playerMotor.enabled=true;
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_put_the_instrument_down_));
 			GameWorldController.instance.getMus().Resume();
 			//354237875
-			if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
-			{
-				//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-				if ((GameWorldController.instance.LevelNo==2) && (GameWorldController.instance.playerUW.quest().isCupFound==false) && (objInt().item_id==292))
-				{									
-					int tileX=TileMap.visitTileX;
-					int tileY=TileMap.visitTileY;
-					if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
-					{							
-						//create the cup of wonder.
+			if (_RES==GAME_UW1)
+			{				
+				if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
+				{
+					//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
+					if ((GameWorldController.instance.LevelNo==2) && (GameWorldController.instance.playerUW.quest().isCupFound==false) && (objInt().item_id==292))
+					{									
+						int tileX=TileMap.visitTileX;
+						int tileY=TileMap.visitTileY;
+						if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
+						{							
+							//create the cup of wonder.
 
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0,256);
-						GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-						GameWorldController.MoveToInventory(cup);
-						ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
+							ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0,256);
+							GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+							GameWorldController.MoveToInventory(cup);
+							ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
 
-						/*	ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
-						myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
-						GameWorldController.MoveToInventory(myObjInt.gameObject);*/
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
-						UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
-						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
-						InteractionModeControl.UpdateNow=true;
-						GameWorldController.instance.playerUW.quest().isCupFound=true;
-						//An object appears in the air and falls into your hands
-						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
+							/*	ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
+							myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+							GameWorldController.MoveToInventory(myObjInt.gameObject);*/
+							GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
+							UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+							InteractionModeControl.UpdateNow=true;
+							GameWorldController.instance.playerUW.quest().isCupFound=true;
+							//An object appears in the air and falls into your hands
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
 
+						}
 					}
 				}
-			}
-		}		
+			}	
+		}
 	}
 
 		/// <summary>

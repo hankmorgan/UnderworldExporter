@@ -29,7 +29,7 @@ public class Oil : object_base {
 
 	public override bool FailMessage ()
 	{
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,177));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_cannot_use_oil_on_that_));
 		return false;
 	}
 }

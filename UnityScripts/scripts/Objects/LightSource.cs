@@ -121,7 +121,7 @@ public class LightSource : object_base {
 			case ObjectInteraction.OIL:
 				if (objInt().item_id==149)//Lit torch
 				{
-					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,182));	
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_think_it_is_a_bad_idea_to_add_oil_to_the_lit_torch_));	
 					return true ;
 				}
 				break;
@@ -137,7 +137,7 @@ public class LightSource : object_base {
 	{		
 		if (objInt().quality<=0)
 		{//000~001~124~That light is already used up. \n
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,124));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_that_light_is_already_used_up_));
 			return;
 		}
 		LightTimer=LightTimerMax;		
@@ -190,7 +190,7 @@ public class LightSource : object_base {
 		}
 		else
 		{
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,258));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_there_is_no_place_to_put_that_));
 		}
 		objInt().RefreshAnim();
 		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
