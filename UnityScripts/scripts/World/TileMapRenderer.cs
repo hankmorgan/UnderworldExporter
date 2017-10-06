@@ -2936,7 +2936,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="face">Face.</param>
 		/// <param name="t">T.</param>
 		public static int FloorTexture(int face, TileInfo t)
-		{
+		{				
 				int floorTexture;
 
 				if (face == fCEIL)

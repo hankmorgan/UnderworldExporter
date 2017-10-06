@@ -139,6 +139,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_MAGIC_PROJECTILE=112;
 		public const int A_MOVING_DOOR=113;
 		public const int A_PRESSURE_TRIGGER=114;
+		public const int A_CLOSE_TRIGGER =115;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1567,6 +1568,7 @@ public class ObjectInteraction : UWEBase {
 				objInt.tileX=currObj.tileX;
 				objInt.tileY=currObj.tileY;
 				objInt.objectloaderinfo = currObj;//link back to the list directly.
+				objInt.next=currObj.next;
 				//For now just generic.
 				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
 				{
@@ -1895,6 +1897,7 @@ public class ObjectInteraction : UWEBase {
 				case A_LOOK_TRIGGER:
 				case AN_OPEN_TRIGGER:
 				case AN_UNLOCK_TRIGGER:
+				case A_CLOSE_TRIGGER:
 						myObj.AddComponent<trigger_base>();	
 						CreateSprite=false;
 						break;

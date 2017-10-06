@@ -391,44 +391,37 @@ public class DoorControl : object_base {
 							ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
 							if (LockObj!=null)
 							{
-								if (LockObj.next!=0)
+								int next= LockObj.next;
+
+								while (next!=0)
 								{
-									//if (ObjectLoader.GetItemTypeAt(LockObj.next) != ObjectInteraction.LOCK)
-									//{
-									ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(LockObj.next);
+									ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(next);
 									if (TriggerObject!=null)
-									{
+										{
+										next=0;
 										trigger_base tb= TriggerObject.GetComponent<trigger_base>();
 										if (tb!=null)
 										{
-											tb.Activate();
+											if (tb.objInt().GetItemType()!=ObjectInteraction.A_CLOSE_TRIGGER)
+												{
+													tb.Activate();											
+												}
+											next = tb.objInt().next;
 										}	
+									}	
+									else
+									{
+										next=0;
 									}
-
-									//}		
 								}
 							}
 						}
 					}
-
-
-				/*if (UseLink!="")
-				{
-					GameObject trigObj = GameObject.Find (UseLink);
-					if (trigObj!=null)
-					{
-						trigger_base tb = trigObj.GetComponent<trigger_base>();
-						if (tb!=null)
-						{
-								tb.Activate();
-						}
-						
-					}
-				}
-				*/
 			}
 		}
 	}
+
+
 
 	/// <summary>
 	/// Closes the door.
@@ -462,6 +455,52 @@ public class DoorControl : object_base {
 				objInt().flags=0;
 				objInt().enchantment=0;
 				//state=false;
+
+								if(objInt().link!=0)
+								{	//If it's link is to something that is not a lock then it is likely to be a trigger
+										if (ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+										{
+												trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+												if (tb!=null)
+												{
+														tb.Activate();
+												}
+										}
+										else
+										{//The object is linked to a lock. The next of the lock is the use trigger to use here
+												ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
+												if (LockObj!=null)
+												{
+														int next= LockObj.next;
+
+														while (next!=0)
+														{
+																next=0;
+																ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(next);
+																if (TriggerObject!=null)
+																{
+																		trigger_base tb= TriggerObject.GetComponent<trigger_base>();
+																		if (tb!=null)
+																		{
+																				if (tb.objInt().GetItemType()!=ObjectInteraction.AN_OPEN_TRIGGER)
+																				{
+																						tb.Activate();											
+																				}											
+																				next = tb.objInt().next;
+																		}
+
+																}	
+																else
+																{
+																		next=0;
+																}
+														}
+												}
+										}
+								}
+
+
+
 			}
 		}
 	}
