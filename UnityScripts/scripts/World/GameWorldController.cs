@@ -301,8 +301,9 @@ public class GameWorldController : UWEBase {
 	public static bool ObjectReRenderPending=false;
 	public static bool FullReRender=false;
 
-
 	public KeyBindings keybinds;
+
+	public event_base events;
 
 	void LoadPath(string game)
 	{
@@ -769,13 +770,12 @@ public class GameWorldController : UWEBase {
 					shrineLava.AddComponent<BoxCollider>();
 					shrineLava.GetComponent<BoxCollider>().isTrigger=true;
 				}
-
-				if (_RES==GAME_UW2)
+			}
+			if ((_RES==GAME_UW2) && (EditorMode==false))
+			{
+				if (events!=null)
 				{
-					if (whatTheHellIsThatFileFor!=null)
-					{
-						whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected,newLevelNo);
-					}
+					events.ProcessEvents(newLevelNo);
 				}
 			}
 		}
@@ -1429,6 +1429,17 @@ public class GameWorldController : UWEBase {
 					{
 						AutoMaps[i]=new AutoMap();
 						AutoMaps[i].InitAutoMapUW2(i);
+					}
+					break;
+				}
+
+				switch(_RES)
+				{
+				case GAME_UW2:
+					events= new event_base();		
+					if (whatTheHellIsThatFileFor!=null)
+					{
+						whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected);
 					}
 					break;
 				}

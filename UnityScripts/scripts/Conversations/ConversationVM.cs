@@ -1155,6 +1155,15 @@ public class ConversationVM : UWEBase {
 
 				///Resets the UI
 				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+
+				//Process scheduled events
+				if ((_RES==GAME_UW2) && (EditorMode==false))
+				{
+					if (GameWorldController.instance.events!=null)
+					{
+						GameWorldController.instance.events.ProcessEvents(GameWorldController.instance.LevelNo);
+					}
+				}
 		}
 
 

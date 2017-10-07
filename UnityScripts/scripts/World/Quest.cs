@@ -298,6 +298,12 @@ public class Quest : UWEBase {
 						}
 						return true;
 					}
+				case 51://This changes a quest variable!
+					{
+						Debug.Log("quest/variable = " + index + " set to " + value);
+						GameWorldController.instance.playerUW.quest().QuestVariables[index]=value;
+						return true;
+					}
 			}
 		return false;
 		}

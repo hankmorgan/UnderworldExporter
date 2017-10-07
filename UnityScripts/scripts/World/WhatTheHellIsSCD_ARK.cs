@@ -10,8 +10,9 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 
 	public int InfoSize=16;
 
-	public void DumpScdArkInfo(string SCD_Ark_File_Path, int LevelNo)
+	public void DumpScdArkInfo(string SCD_Ark_File_Path)
 	{
+				int LevelNo=0;
 		string output="";
 		StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);
 		
