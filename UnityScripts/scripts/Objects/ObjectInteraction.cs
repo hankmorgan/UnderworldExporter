@@ -132,7 +132,7 @@ public class ObjectInteraction : UWEBase {
 		public const int AN_EXPERIENCE_TRAP=105;
 		public const int A_POCKETWATCH=106;
 		public const int A_3D_MODEL = 107;
-		public const int A_BLACKROCK_GEM=108;
+		public const int A_LARGE_BLACKROCK_GEM=108;
 		public const int A_NULL_TRAP=109;
 		public const int AN_ORB_ROCK=110;
 		public const int AN_EXPLODING_BOOK=111;
@@ -140,6 +140,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_MOVING_DOOR=113;
 		public const int A_PRESSURE_TRIGGER=114;
 		public const int A_CLOSE_TRIGGER =115;
+		public const int A_BLACKROCK_GEM=116;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1801,6 +1802,9 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_3D_MODEL:
 						myObj.AddComponent<Model3D>();
+						break;
+				case A_LARGE_BLACKROCK_GEM:
+						myObj.AddComponent<LargeBlackrockGem>();
 						break;
 				case A_BLACKROCK_GEM:
 						myObj.AddComponent<BlackrockGem>();

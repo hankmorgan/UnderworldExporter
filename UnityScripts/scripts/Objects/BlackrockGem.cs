@@ -1,19 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlackrockGem : Model3D {
-
-
-
-	protected override void Start ()
+public class BlackrockGem : object_base {
+//One of the small blackrock gemstones
+		//
+	public override bool LookAt ()
 	{
-		GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cylinder); 
-		SpriteController.name = this.name + "_model";
-		SpriteController.transform.position = this.transform.position;
-		SpriteController.transform.rotation=this.transform.rotation;
-		SpriteController.transform.parent = this.transform;
-		//SpriteController.transform.localScale=new Vector3(0.5f,0.5f,0.1f);
-		SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
+		string lookdesc;
+		if (objInt().owner==1)
+		{
+			lookdesc=StringController.instance.GetString(1,StringController.str_you_see_) 
+				+ " a " 
+				+ StringController.instance.GetString(1,357) 
+				+ StringController.instance.GetSimpleObjectNameUW(objInt())	;
+		}
+		else
+		{
+			lookdesc=StringController.instance.GetString(1,StringController.str_you_see_) 
+					+ " a " 
+					+ StringController.instance.GetString(1,356) 
+					+ StringController.instance.GetSimpleObjectNameUW(objInt())	;
+		}
+		UWHUD.instance.MessageScroll.Add(lookdesc);
+		return true;
 	}
 
 }

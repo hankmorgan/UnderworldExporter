@@ -222,7 +222,7 @@ public class Quest : UWEBase {
 	/// 2=Nystrul and blackrock gems treated
 	/// 
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
-	public int[] x_clocks=new int[15];
+	public int[] x_clocks=new int[16];
 
 
 	void Start()

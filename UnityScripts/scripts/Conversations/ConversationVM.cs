@@ -90,6 +90,8 @@ public class ConversationVM : UWEBase {
 		public int MaxAnswer;
 		private int NPCTalkedToIndex=0;
 
+		ObjectInteraction lastObjectTraded;
+
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
 		/// </summary>
@@ -546,7 +548,7 @@ public class ConversationVM : UWEBase {
 			{
 					GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
 			}
-
+			lastObjectTraded=null;
 
 			DisplayInstructionSet();
 			///Slows the world down so no other npc will attack or interupt the conversation
@@ -2368,6 +2370,7 @@ public class ConversationVM : UWEBase {
 				if (cn.GetItemAt (i)!="")
 				{	
 					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					lastObjectTraded=objInt;
 					if (objInt!=null)
 					{
 				
@@ -2390,6 +2393,7 @@ public class ConversationVM : UWEBase {
 				if (cn.GetItemAt (i)!="")
 				{
 					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					lastObjectTraded=objInt;
 					if (
 							((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
 							||
@@ -2945,7 +2949,12 @@ public class ConversationVM : UWEBase {
 
 			if (obj==null)
 			{
-				return;
+				Debug.Log("Obj not found in x_obj_stuff. Trying the last traded object");
+				obj=lastObjectTraded;
+				if (obj==null)
+				{
+						return;				
+				}				
 			}
 
 			if (stack.at(link)<=0)
@@ -3039,9 +3048,29 @@ public class ConversationVM : UWEBase {
 			
 		case 1://PC Search
 				{
+				int rangeS = (item_id-1000)*16;
+				int rangeE = rangeS+16;
+					GameObject obj=null;
+					if (item_id>1000)
+					{
+						for (int i=rangeS; i<=rangeE;i++)		
+						{
+							string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(i);
+							obj= GameObject.Find(itemname);	
+							if (obj!=null)
+							{
+								break;
+							}
+						}
+					}
+					else
+					{
+						string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
+						obj= GameObject.Find(itemname);	
+					}
+
 				Debug.Log("PC version of find_inv."); //will happen in judy's conversation
-				string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
-				GameObject obj= GameObject.Find(itemname);
+
 
 				if (obj!=null)
 				{
@@ -3577,10 +3606,10 @@ return value: none
 
 					if (objInt!=null)
 					{
-						Debug.Log(objInt.item_id);
+						//Debug.Log(objInt.item_id);
 						int founditem_id=objInt.item_id;
 						int itemqt = objInt.GetQty();
-						Debug.Log(itemqt);
+						//Debug.Log(itemqt);
 
 						if (item_id==founditem_id)
 						{
