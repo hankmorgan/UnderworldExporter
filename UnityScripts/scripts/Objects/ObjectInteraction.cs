@@ -2030,6 +2030,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_trespass>();break;
 							case 0x18://bullfrog
 								myObj.AddComponent<a_do_trapBullfrog>();break;
+							case 0x1c://CHange texture of tmap
+								myObj.AddComponent<a_hack_trap_texture>();break;
 							case 0x2a://Gronk conversation
 								myObj.AddComponent<a_do_trap_conversation>();break;
 							case 0x28://emerald puzzle on level 6

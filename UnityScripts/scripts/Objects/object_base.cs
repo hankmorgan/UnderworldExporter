@@ -208,7 +208,8 @@ public class object_base : UWEBase {
 		{
 			if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_PICK_UP_TRIGGER)
 			{
-				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();	
+				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();
+				objInt().link=0;
 			}
 		}
 		if(CanBeOwned())

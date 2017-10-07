@@ -40,12 +40,22 @@ public class a_set_variable_trap : a_variable_trap {
 		if (objInt().zpos!=0)
 		{//Variable Operations
 			OrigValue=GameWorldController.instance.playerUW.quest().variables[objInt().zpos];
-			//Debug.Log ("Variable " + VariableIndex + " op(" + heading + ") = " + GameWorldController.instance.playerUW.quest().variables[VariableIndex] );
 			switch(objInt().heading)
 			{
 			case 0://Add
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] += VariableValue();
-				operation = "add";
+				if (_RES==GAME_UW2)
+				{
+					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					{
+						GameWorldController.instance.playerUW.quest().variables[objInt().zpos] += VariableValue();
+						operation = "add";	
+					}
+				}
+				else
+				{
+					GameWorldController.instance.playerUW.quest().variables[objInt().zpos] += VariableValue();
+					operation = "add";	
+				}
 				break;
 			case 1://Sub
 				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] -= VariableValue();
@@ -54,11 +64,11 @@ public class a_set_variable_trap : a_variable_trap {
 			case 2://Set
 				if  (_RES==GAME_UW2)
 				{//Some variables in UW2 are actually pointers to the mysterious x_clock
-					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue() ) )
-						{
-							GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
-							operation = "Set";
-						}
+					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					{
+						GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
+						operation = "Set";
+					}
 				}
 				else
 				{

@@ -4,7 +4,7 @@ using System.Collections;
 public class a_hack_trap_teleport : a_hack_trap {
 
 	public bool[] availableWorlds = new bool[8];
-
+	public static int NoOfWorlds=0;
 	const int PrisonTower=0;
 	const int Killorn=1;
 	const int IceCaverns =2;
@@ -17,12 +17,13 @@ public class a_hack_trap_teleport : a_hack_trap {
 	short[] DestinationLevels = {8,16,24,32,40,56,48,68};
 	short[] DestinationTileX = {33,27,18,31,4,59,32,33};
 	short[] DestinationTileY = {32,34,40,31,38,20,32,4};
+		//TODO: destination heights.
 
 //Probably used to teleport to an other world possible based on the state of the other gem hack trap and probably based on the players position.
 
 		//One thing to note: there is an invisible rotary switch near this trap. Making this visible and using changes the available face
 		//on the gem and what level you can go to.
-		//It's linked to the variable no 6 via a set_variable_trap. Seems like that variable controls what level the teleport goes to. (untested)
+		//It's linked to the variable no 6 via a set_variable_trap. Seems like that variable controls what level the teleport goes to. 
 
 
 		// this has a quality of 55d
@@ -30,6 +31,40 @@ public class a_hack_trap_teleport : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
+		if (GameWorldController.instance.playerUW.quest().x_clocks[1]<4)
+		{
+			availableWorlds[PrisonTower]=true;
+			NoOfWorlds=0;
+		}
+		else if (GameWorldController.instance.playerUW.quest().x_clocks[1]<8)
+		{
+			availableWorlds[PrisonTower]=true;
+			availableWorlds[Killorn]=true;
+			availableWorlds[IceCaverns]=true;
+			NoOfWorlds=2;
+		}
+		else if (GameWorldController.instance.playerUW.quest().x_clocks[1]<13)
+		{
+			availableWorlds[PrisonTower]=true;
+			availableWorlds[Killorn]=true;
+			availableWorlds[IceCaverns]=true;
+			availableWorlds[Talorus]=true;
+			availableWorlds[Scintillus]=true;
+			availableWorlds[Pits]=true;
+			NoOfWorlds=5;
+		}
+		else
+		{
+			availableWorlds[PrisonTower]=true;
+			availableWorlds[Killorn]=true;
+			availableWorlds[IceCaverns]=true;
+			availableWorlds[Talorus]=true;
+			availableWorlds[Scintillus]=true;
+			availableWorlds[Pits]=true;
+			availableWorlds[Tomb]=true;
+			availableWorlds[EtherealVoid]=true;
+			NoOfWorlds=7;
+		}
 		availableWorlds[0]=true;
 	}
 

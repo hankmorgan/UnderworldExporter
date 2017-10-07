@@ -441,7 +441,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			}
 			else
 			{
-					SaveGame.LoadPlayerDatUW2(SlotNo+1);	
+				SaveGame.LoadPlayerDatUW2(SlotNo+1);	
 			}
 			//Load up the map
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);

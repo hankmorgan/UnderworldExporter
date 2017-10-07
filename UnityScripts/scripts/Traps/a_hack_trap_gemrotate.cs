@@ -9,7 +9,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 		//This has a quality of 54d
 
 		//Probably changes variable no 6 to set what is reachable. There is probably another value that sets what levels are available..
-
+	int prevWorld=-1;
 
 	protected override void Start ()
 	{
@@ -39,6 +39,17 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 			GameWorldController.instance.variables[6] = 0;		
 		}
 		*/
+
+		GameWorldController.instance.playerUW.quest().variables[6]++;
+		if (GameWorldController.instance.playerUW.quest().variables[6] > a_hack_trap_teleport.NoOfWorlds)
+		{
+			GameWorldController.instance.playerUW.quest().variables[6]=0;	
+		}
+		if (prevWorld!=GameWorldController.instance.playerUW.quest().variables[6])
+		{
+			Debug.Log("Now serving world " +  GameWorldController.instance.playerUW.quest().variables[6]);				
+		}		
+		prevWorld=GameWorldController.instance.playerUW.quest().variables[6];
 	}
 
 	public override void PostActivate ()

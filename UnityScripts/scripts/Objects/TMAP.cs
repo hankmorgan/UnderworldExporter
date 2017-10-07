@@ -4,7 +4,7 @@ using System.Collections;
 public class TMAP : object_base {
 
 	//public string trigger;
-	private int TextureIndex;
+	public int TextureIndex;
 
 	protected override void Start ()
 	{
@@ -137,8 +137,12 @@ public class TMAP : object_base {
 		}
 
 
-		static void CreateTMAP(GameObject myObj, int textureIndex)
+		public static void CreateTMAP(GameObject myObj, int textureIndex)
 		{		
+			if (myObj.transform.childCount>0)
+			{
+				Destroy(myObj.transform.GetChild(0).gameObject);
+			}
 			ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
 			TileMap tm = GameWorldController.instance.currentTileMap();
 				float doorFrameOffsetX=0f;float doorFrameOffsetY=0f;

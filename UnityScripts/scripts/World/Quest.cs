@@ -222,22 +222,7 @@ public class Quest : UWEBase {
 	/// 2=Nystrul and blackrock gems treated
 	/// 
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
-	public int[] x_clocks=new int[32];
-
-	/*	public enum x_clock_events{
-				ExploreCastleDepths,
-				VisitedAnotherWorld,
-				ServantsGetRestless,
-				WaterConcerns,
-				ToryIsKilled,
-				CharlesFindsAKey,
-				NelsonIsGoingToBeKilled,
-				PattersonIsDead,
-				TheGemIsWeak,
-				NystrulWantsToEndTheGame,
-				MorsGothaAttacks
-		};*/
-
+	public int[] x_clocks=new int[15];
 
 
 	void Start()
@@ -267,7 +252,7 @@ public class Quest : UWEBase {
 		return IncenseDream++;
 	}
 
-		public bool x_clock_hook(int index,int value)
+		public bool x_clock_hook(int index,int value,int operation)
 		{
 			switch (index)
 			{
@@ -287,16 +272,30 @@ public class Quest : UWEBase {
 				case 30:
 				case 31:
 					{
-						if (x_clocks[index-16]< value)
+						switch(operation)
 						{
-							x_clocks[index-16]=value;
-							Debug.Log("x_clock_hook = " + index + " set to " + value);
+
+						case 0://add
+							{
+								x_clocks[index-16]+=value;	
+								Debug.Log("x_clock_hook = " + index + " incremented by " + value + " to " + x_clocks[index-16]);		
+								return true;												
+							}
+
+						case 2: //set
+							if (x_clocks[index-16]< value)
+							{
+								x_clocks[index-16]=value;
+								Debug.Log("x_clock_hook = " + index + " set to " + value);		
+							}
+							else
+							{
+								Debug.Log("x_clock_hook (skipped) = " + index + " set to " + value);	
+							}
+							return true;
 						}
-						else
-						{
-							Debug.Log("x_clock_hook (skipped) = " + index + " set to " + value);	
-						}
-						return true;
+
+					return true;
 					}
 				case 51://This changes a quest variable!
 					{
