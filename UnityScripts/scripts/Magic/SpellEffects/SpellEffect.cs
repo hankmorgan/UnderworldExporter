@@ -991,7 +991,7 @@ public class SpellEffect : UWEBase {
 		-1};
 
 		private static int[] UW2_Spell_Icons=
-				{-1,
+		{-1,
 				23,
 				23,
 				23,
@@ -1286,7 +1286,7 @@ public class SpellEffect : UWEBase {
 				-1,
 				-1,
 				-1,
-				-1,
+				20,
 				-1,
 				-1,
 				26,
@@ -1471,6 +1471,7 @@ public class SpellEffect : UWEBase {
 				-1,
 				-1,
 				-1};
+
 
 
 	///The number of ticks the effect last for and the the stability of the spell effect.

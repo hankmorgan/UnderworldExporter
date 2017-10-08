@@ -1833,17 +1833,26 @@ public class SaveGame : Loader {
 														)
 												)
 												{
-														ObjectLoaderInfo spellObj = objLoader.objInfo[ objLoader.objInfo[o].link ];
-														if (spellObj!=null)
-														{
-																//Move it's spell object to the game world and destroy the instance of that object that is on the inventory marker
-																//ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, spellObj.quality,spellObj.owner,spellObj.link,256);
-																//ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
-																Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
-																wandInfo.SpellObjectOwnerToCreate= spellObj.owner;
-																wandInfo.SpellObjectLink= spellObj.link;
-																wandInfo.SpellObjectQualityToCreate= spellObj.quality;
-																GameObject.Destroy(spellObj.instance.gameObject);
+														if ( objLoader.objInfo[o].enchantment == 0)
+														{//Enchantment is in a spell object link
+																ObjectLoaderInfo spellObj = objLoader.objInfo[ objLoader.objInfo[o].link ];
+																if (spellObj!=null)
+																{
+																		//Move it's spell object to the game world and destroy the instance of that object that is on the inventory marker
+																		//ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, spellObj.quality,spellObj.owner,spellObj.link,256);
+																		//ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
+																		Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
+																		wandInfo.SpellObjectOwnerToCreate= spellObj.owner;
+																		wandInfo.SpellObjectLink= spellObj.link;
+																		wandInfo.SpellObjectQualityToCreate= spellObj.quality;
+																		GameObject.Destroy(spellObj.instance.gameObject);
+																}	
+														}
+														else
+														{//enchantment is on the wand itself.
+															//Debug.Log("wand link is out of range")	;
+															Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
+															wandInfo.SpellObjectOwnerToCreate= -1;
 														}
 												}		
 										}

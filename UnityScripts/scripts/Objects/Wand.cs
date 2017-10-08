@@ -9,22 +9,29 @@ public class Wand : enchantment_base {
 	protected override void Start ()
 	{
 		base.Start ();
-				if (_RES==GAME_UW2)				
-				{
-					if(objInt().PickedUp)		
-					{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256);
-						ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
-						objInt().link = newobjt.index;
-					}
-
-				}//UW2 stores enchantments on the player.dat. This is not implemented yet
-
-
-			if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+		if (_RES==GAME_UW2)				
+		{
+			if (SpellObjectOwnerToCreate==-1)
+			{//This is  wand with infinite charges. Does not use a spell object for it's enchantment.
+				//Debug.Log("linking wand " + this.name + " to an existing spell");
+				//SpellObjectLink = ObjectLoader.getObjectIntAt(objInt().link).link;
+			}
+			else
 			{
-					SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
-			}		
+				if(objInt().PickedUp)		
+				{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256);
+					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
+					objInt().link = newobjt.index;
+				}	
+			}
+		}//UW2 stores enchantments on the player.dat. This is not properly implemented yet
+
+
+		if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+		{
+			SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
+		}		
  
 	}
 	
@@ -63,7 +70,7 @@ public class Wand : enchantment_base {
 				}
 			}
 
-				return SpellObjectLink-256;	//default
+			return SpellObjectLink-256;	//default
 			
 		}
 	}

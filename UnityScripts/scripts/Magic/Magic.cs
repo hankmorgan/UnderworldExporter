@@ -3425,7 +3425,7 @@ public class Magic : UWEBase {
 				switch(_RES)
 				{
 				case GAME_UW2:
-						
+						return CastEnchantmentUW2 (caster,target,EffectID,true,SpellRule);
 				default:
 						return CastEnchantmentUW1 (caster,target,EffectID,true,SpellRule);
 				}
@@ -4995,6 +4995,7 @@ public class Magic : UWEBase {
 							}
 
 				case SpellEffect.UW2_Spell_Effect_Telekinesis:
+				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt01:
 						//player only
 						if (ActiveArrayIndex!=-1)
 						{
@@ -5002,7 +5003,7 @@ public class Magic : UWEBase {
 							SpellResultType=SpellResultActive;
 						}
 						break;
-				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt01:
+				
 				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt02:
 						if (PassiveArrayIndex!=-1)
 						{
