@@ -973,13 +973,20 @@ public class GameWorldController : UWEBase {
 		{
 				//Debug.Log(obj.name + "is moved to world");
 				MoveToWorld(obj.GetComponent<ObjectInteraction>());
+
 		}
+
 
 		public static ObjectInteraction MoveToWorld(ObjectInteraction obj)
 		{
 			//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
 				obj.UpdatePosition();
+				if (ConversationVM.InConversation)
+				{
+					ConversationVM.BuildObjectList();//Reflect changes to object lists
+				}
+
 				//obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
 				return obj;
 				//Not needed???
@@ -997,6 +1004,10 @@ public class GameWorldController : UWEBase {
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
 			obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
+			if (ConversationVM.InConversation)
+			{
+					ConversationVM.BuildObjectList();//Reflect changes to object lists
+			}
 		}
 
 		public void UpdatePositions()

@@ -12,7 +12,7 @@ public class ConversationVM : UWEBase {
 
 
 		//TODO:Make sure pickups support containers
-		//TODO:Make inventory related code operate on the master object list rather than trade slots.->Trade slots should just give indices into that list in show_inv, 
+
 		/// Is the user entering a quantity
 		public static bool EnteringQty;
 
@@ -78,8 +78,9 @@ public class ConversationVM : UWEBase {
 		const int return_int = 0x129;
 		const int return_string = 0x12b;
 
+		//const int TradeAreaOffset=0;//This hack is a bad hack...
 
-		const int TradeAreaOffset=0;//This hack is a bad hack...
+		private static string[] ObjectMasterList;
 
 		//The input and output controls
 		//private static Text Output;
@@ -90,7 +91,7 @@ public class ConversationVM : UWEBase {
 		public int MaxAnswer;
 		private int NPCTalkedToIndex=0;
 
-		ObjectInteraction lastObjectTraded;
+		//ObjectInteraction lastObjectTraded;
 
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
@@ -548,7 +549,9 @@ public class ConversationVM : UWEBase {
 			{
 					GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
 			}
-			lastObjectTraded=null;
+			//lastObjectTraded=null;
+
+			BuildObjectList();
 
 			DisplayInstructionSet();
 			///Slows the world down so no other npc will attack or interupt the conversation
@@ -1438,7 +1441,7 @@ public class ConversationVM : UWEBase {
 		{
 				//if (func.functionName!="babl_menu")
 				//{
-						//Debug.Log("Calling " + func.functionName);		
+				Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
 				//}
 				switch (func.functionName.ToLower())
 				{
@@ -1784,7 +1787,7 @@ public class ConversationVM : UWEBase {
 							int[] args=new int[2];
 							args[0]= stack.at(stack.stackptr-2);//ptr to value
 							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							give_ptr_npc(npc, stack.at(args[0]),stack.at(args[1]));
+							give_ptr_npc(npc, stack.at(args[0]),args[1]);
 							break;
 						}
 				case "take_from_npc_inv":
@@ -2260,9 +2263,10 @@ public class ConversationVM : UWEBase {
 				TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
 				if (pcSlot.isSelected())
 				{
-					//locals[startObjectPos+j]= i;
-					stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
-					//locals[startObjectIDs+j]= pcSlot.GetObjectID();
+					
+					stack.Set(startObjectPos+j, FindObjectIndexInObjectList(pcSlot.objectInSlot));
+					//stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
+					
 					stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
 					j++;
 				}
@@ -2286,22 +2290,28 @@ public class ConversationVM : UWEBase {
 				for (int i=0; i<NoOfItems; i++)
 				{
 						
-						int slotNo = stack.at(start+i)-1  - TradeAreaOffset ;//locals[start+i] ;
-						if (slotNo<=3)
-						{
-								TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
-								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+						//int slotNo = stack.at(start+i)-1  - TradeAreaOffset ;//locals[start+i] ;
+
+						int slotNo = stack.at(start+i);
+
+						//if (slotNo<=3)
+						//{
+								//TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
+								//GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+								GameObject demanded = FindGameObjectInObjectList(slotNo);
 								//Give the item to the npc
 								if (Container.GetFreeSlot(cn)!=-1)
 								{
 									if (demanded!=null)
 									{
+										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
 										GameWorldController.MoveToWorld(demanded);//ok
 										demanded.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 										SomethingGiven=true;
 										cn.AddItemToContainer(demanded.name);
-										pcSlot.clear ();
+
+										//pcSlot.clear ();
 									}
 									SomethingGiven=true;
 								}
@@ -2309,14 +2319,15 @@ public class ConversationVM : UWEBase {
 								{									
 									if (demanded!=null)
 									{
+										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
 										GameWorldController.MoveToWorld(demanded);//ok
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
 										SomethingGiven=false;
 									}
-									pcSlot.clear();
+									//pcSlot.clear();
 								}
-						}
+						//}
 				}
 				if (SomethingGiven==true)
 				{
@@ -2370,7 +2381,7 @@ public class ConversationVM : UWEBase {
 				if (cn.GetItemAt (i)!="")
 				{	
 					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-					lastObjectTraded=objInt;
+					//lastObjectTraded=objInt;
 					if (objInt!=null)
 					{
 				
@@ -2393,7 +2404,7 @@ public class ConversationVM : UWEBase {
 				if (cn.GetItemAt (i)!="")
 				{
 					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-					lastObjectTraded=objInt;
+					//lastObjectTraded=objInt;
 					if (
 							((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
 							||
@@ -2743,6 +2754,7 @@ public class ConversationVM : UWEBase {
 		/// Gives the selected items to the NPC
 		/// </summary>
 		/// <param name="SlotNo">Slot no.</param>
+		/// Use only in bartering as this does not refer to the master object list!
 		private void TakeFromNPC (NPC npc, int SlotNo)
 		{
 			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
@@ -2922,7 +2934,7 @@ public class ConversationVM : UWEBase {
 			
 			pos = stack.at(pos);
 
-			if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
+		/*	if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
 			{
 				pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
 				pos--;
@@ -2943,14 +2955,14 @@ public class ConversationVM : UWEBase {
 			else
 			{//Item is in the object masterlist
 				obj = GameWorldController.instance.CurrentObjectList().objInfo[pos].instance;
-			}		
-
-
+			}	*/	
+				
+			obj=FindObjectInteractionInObjectList(pos);
 
 			if (obj==null)
 			{
 				Debug.Log("Obj not found in x_obj_stuff. Trying the last traded object");
-				obj=lastObjectTraded;
+				//obj=lastObjectTraded;
 				if (obj==null)
 				{
 						return;				
@@ -3039,7 +3051,8 @@ public class ConversationVM : UWEBase {
 						if (obj.GetComponent<ObjectInteraction>().item_id==item_id)
 						{
 								//return 1;//Found object
-							return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+							//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+							return FindObjectIndexInObjectList(obj.name);
 						}
 					}
 				}	
@@ -3075,7 +3088,8 @@ public class ConversationVM : UWEBase {
 				if (obj!=null)
 				{
 						//return 1;
-						return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+						//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+					return FindObjectIndexInObjectList(obj.name);
 				}
 				else
 				{
@@ -3109,16 +3123,20 @@ public class ConversationVM : UWEBase {
 
 
 			int ItemPos = stack.at(pTradeSlot);
-			if (ItemPos>=TradeAreaOffset)
+		/*	if (ItemPos>=TradeAreaOffset)
 			{
 					ItemPos = ItemPos - TradeAreaOffset -1;	
 			}
 			if (ItemPos<=0)
 			{
 				return 0;
-			}
+			}*/
+			
+
 			//tradeSlotIndex--;//adjust to match my 0-based indices
-			ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
+			//ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
+			ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos);
+		
 			if (objInt != null)
 			{
 					//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
@@ -3286,23 +3304,26 @@ public class ConversationVM : UWEBase {
 		//parameters:   unknown
 		//description:  counts number of items in inventory
 		//return value: item number
-		int total =0;
-				if (ItemPos>=TradeAreaOffset)
+		//int total =0;
+			/*	if (ItemPos>=TradeAreaOffset)
 				{
 					ItemPos = ItemPos - TradeAreaOffset -1;	
 				}
 
-				if (ItemPos<0){return 0;}
-		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
-		if (objInslot!=null)
-		{
-			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
+				if (ItemPos<0){return 0;}*/
+
+
+		//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
+		//GameObject objInslot = FindGameObjectInObjectList(ItemPos);
+		//if (objInslot!=null)
+		//{
+			ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos); // objInslot.GetComponent<ObjectInteraction>();
 			if (objInt!=null)
 			{
 				return objInt.GetQty();
 			}
-		}
-		return total;
+		//}
+		return 0;//if not found.
 	}
 
 
@@ -3325,7 +3346,7 @@ public class ConversationVM : UWEBase {
 	/// <param name="unk1">Unk1.</param>
 	/// <param name="Quantity">Quantity.</param>
 	/// <param name="slotNo">Slot no.</param>
-	public void give_ptr_npc(NPC npc, int Quantity, int slotNo)
+	public void give_ptr_npc(NPC npc, int Quantity, int ptrSlotNo)
 	{
 		/*
 id=0014 name="give_ptr_npc" ret_type=int
@@ -3334,24 +3355,32 @@ arg2: inventory object list pos
 description:  copies item from player inventory to npc inventory
 return value: none
 */
-		slotNo--;
+		
+
+		/*slotNo--;
 		//Debug.Log ("give_ptr_npc");
 		if  ( (slotNo<0) || (slotNo >3))
 		{
 			return;
-		}
-		Container cn =npc.gameObject.GetComponent<Container>();
+		}*/
 
+		int slotNo = stack.at(ptrSlotNo);
+		Container cn =npc.gameObject.GetComponent<Container>();
+		GameObject objGiven= FindGameObjectInObjectList(slotNo);
 			
-		if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
+		//if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
+		if (objGiven!=null)
 		{
-			GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
+			//GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
 			if ((Quantity==-1))
 			{
+				ClearTradeSlotWithObject(slotNo);
 				objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;
-				cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				cn.AddItemToContainer(objGiven.name);
 				GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-				UWHUD.instance.playerTrade[slotNo].clear ();
+				//UWHUD.instance.playerTrade[slotNo].clear ();
+				
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
 			}
 			else
@@ -3380,15 +3409,20 @@ return value: none
 					}
 					else
 					{//Object is not a quantity or is the full amount.
-						cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+						ClearTradeSlotWithObject(slotNo);
+						//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+						cn.AddItemToContainer(objGiven.name);
 						objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
 						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 						GameWorldController.instance.playerUW.playerInventory.Refresh();
-						UWHUD.instance.playerTrade[slotNo].clear ();
+						//UWHUD.instance.playerTrade[slotNo].clear ();
 					}
 				}
 			}
 		}
+		//After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
+		stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
+
 	}
 
 
@@ -3512,16 +3546,20 @@ return value: none
 					{
 						if (objInt.item_id== itemID)
 						{
-							return i+1;
-														//return 1;
+							//return i+1;
+
+						return FindObjectIndexInObjectList(objInt.name);
+
 						}
 					}
 					else
 					{
 						if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
 						{
-							return i+1;
-														//return 1;
+							//return i+1;
+
+						return FindObjectIndexInObjectList(objInt.name);
+
 						}
 					}
 				}
@@ -3592,7 +3630,11 @@ return value: none
                  s[4]: pointer to item ID to find
    description:  searches for item in barter area
    return value: 1 when found (?)
-	*/
+
+*/
+
+
+				
 			ObjectInteraction objInt=null;
 			int slotFoundCounter=0;
 			stack.Set(ptrNoOfSlots,0);
@@ -3606,49 +3648,22 @@ return value: none
 
 					if (objInt!=null)
 					{
-						//Debug.Log(objInt.item_id);
 						int founditem_id=objInt.item_id;
 						int itemqt = objInt.GetQty();
-						//Debug.Log(itemqt);
 
 						if (item_id==founditem_id)
 						{
 						stack.Set(ptrCount, stack.at(ptrCount) + itemqt);
-						stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
+						//stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
+						stack.Set(ptrSlot+slotFoundCounter++,FindObjectIndexInObjectList(objInt.name));
 						stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
 
 						}
 					}
-					//	if (item_id<1000)
-					//	{
-							//if (objInt.item_id== item_id)
-							//{
-													//	Debug.Log("fuck1")						;
-								//Debug.Log(objInt.GetQty());
-													//	Debug.Log("fuck2")						;
-
-								//stack.Set(ptrCount, stack.at(ptrCount) + objInt.GetQty());
-								//stack.StackValues[ptrCount]+= objInt.GetQty();
-								//stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i));
-								//stack.StackValues[ptrSlot+slotFoundCounter++] = (TradeAreaOffset+i);
-								//stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
-								//stack.StackValues[ptrNoOfSlots]++;
-
-							//}
-						//}
-				//		else
-				//		{
-				//			if ((objInt.item_id>= (item_id-1000)*16) && (objInt.item_id< ((item_id+1)-1000)*16))
-				//			{
-				//				stack.Set(ptrCount, stack.at(ptrCount) + objInt.GetQty());
-				//				stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i));
-				//				stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
-				//			}
-				//		}
-				//	}		
 				}
 			}
 			return stack.StackValues[ptrCount];
+				
 		}
 
 
@@ -3832,13 +3847,13 @@ description:  places a generated object in underworld
 			//parameters:   arg1: inventory item position
 			//description:  returns "quality" field of npc? inventory item
 			//return value: "quality" field
-			itemPos -=TradeAreaOffset;
-			itemPos--;
-			GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
-
+			//itemPos -=TradeAreaOffset;
+			//itemPos--;
+			//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
+			ObjectInteraction objInslot = FindObjectInteractionInObjectList(itemPos);
 			if (objInslot!=null)
 			{
-					return objInslot.GetComponent<ObjectInteraction>().quality;
+					return objInslot.quality;
 			}
 			else
 			{
@@ -3877,6 +3892,97 @@ description:  places a generated object in underworld
 			{
 				GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
 			}
+		}
+
+
+
+		public static void BuildObjectList()
+		{
+			ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+				int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
+				ObjectMasterList=new string[1024+noOfInventoryItems+1];
+				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int i=0; i<1024; i++)
+				{
+					if (objList[i].instance!=null)
+					{
+						ObjectMasterList[i]=objList[i].instance.name;	
+					}
+					else
+					{
+						ObjectMasterList[i]="";
+					}
+				}
+				for (int i=1024; i<1024+noOfInventoryItems;i++)
+				{
+					ObjectMasterList[i]= GameWorldController.instance.InventoryMarker.transform.GetChild(i-1024).gameObject.name;
+				}
+		}
+
+		static int FindObjectIndexInObjectList(string objectName)
+		{
+			for (int i=0; i<=ObjectMasterList.GetUpperBound(0);i++)
+			{
+				if (ObjectMasterList[i]==objectName)
+				{
+					return i;
+				}
+			}
+			return 0;
+		}
+
+		static ObjectInteraction FindObjectInteractionInObjectList(int index)
+		{
+			GameObject obj = FindGameObjectInObjectList(index);
+			if (obj!=null)
+			{
+				if (obj.GetComponent<ObjectInteraction>()!=null)
+				{
+					return obj.GetComponent<ObjectInteraction>();
+				}
+			}			
+			return null;
+		}
+
+		static GameObject FindGameObjectInObjectList(int index)
+		{
+			string objName = ObjectMasterList[index];
+			if (objName!="")
+			{
+				GameObject obj = GameObject.Find(objName);
+				return obj;
+			}
+			return null;
+		}
+
+		static void ClearTradeSlotWithObject(int index)
+		{
+				TradeSlot toClear= FindTradeSlotWithItem(index);
+				if (toClear!=null)
+				{
+					toClear.clear();
+				}
+		}
+
+		static TradeSlot FindTradeSlotWithItem(int index)
+		{
+				string objName = ObjectMasterList[index];
+				if (objName==""){return null;}
+				for (int i=0; i<=UWHUD.instance.playerTrade.GetUpperBound(0);i++)
+				{
+						if (UWHUD.instance.playerTrade[i].objectInSlot==objName)
+						{
+								return UWHUD.instance.playerTrade[i];
+						}
+				}
+				for (int i=0; i<=UWHUD.instance.npcTrade.GetUpperBound(0);i++)
+				{
+						if (UWHUD.instance.npcTrade[i].objectInSlot==objName)
+						{
+								return UWHUD.instance.npcTrade[i];
+						}
+				}
+				return null;
 		}
 
 }
