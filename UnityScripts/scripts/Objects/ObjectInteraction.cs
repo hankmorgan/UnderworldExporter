@@ -2036,6 +2036,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_do_trapBullfrog>();break;
 							case 0x1c://CHange texture of tmap
 								myObj.AddComponent<a_hack_trap_texture>();break;
+							case 20://Terraform puzzle on scintilus 
+								myObj.AddComponent<a_hack_trap_terraform_puzzle>();break;
 							case 0x2a://Gronk conversation
 								myObj.AddComponent<a_do_trap_conversation>();break;
 							case 0x28://emerald puzzle on level 6
