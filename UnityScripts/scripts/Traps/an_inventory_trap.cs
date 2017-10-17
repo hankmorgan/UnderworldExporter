@@ -14,12 +14,13 @@ public class an_inventory_trap : trap_base {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		int itemToFind = objInt().quality <<5 | objInt().owner;
 		ObjectFound=false;
 		ObjectInteraction foundObjInt = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)
 		{
+			//Debug.Log("Inventory trap " + this.name + " found " + foundObjInt.name);
 			ObjectFound=true;
 		}
 	}

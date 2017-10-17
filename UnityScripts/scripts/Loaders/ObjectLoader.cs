@@ -839,10 +839,13 @@ public class ObjectLoader : Loader {
 												nextObj=objList[nextObj].next;
 										}
 								}
-						}	
+						}
+				}
 
-						for (int i = 0; i < 1024;i++)
-						{//Make sure triggers, traps and special items are created.
+				for (int i = 0; i < 1024;i++)
+				{//Make sure triggers, traps and special items are created.
+						if (objList[i]!=null)
+						{
 								if (objList[i].InUseFlag == 0)
 								{
 										if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
@@ -852,17 +855,18 @@ public class ObjectLoader : Loader {
 												{
 														if (objList[i].link!=0)
 														{
-															objList[objList[i].link].InUseFlag = 1;			
-															if (GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id]== ObjectInteraction.NPC_TYPE)
+																objList[objList[i].link].InUseFlag = 1;			
+																if (GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id]== ObjectInteraction.NPC_TYPE)
 																{
-																	SetContainerInUse(game, LevelInfo, objList, objList[objList[i].link].index);	
+																		SetContainerInUse(game, LevelInfo, objList, objList[objList[i].link].index);	
 																}
 														}
 												}
 										}
-								}
+								}	
 						}
 				}
+
 		}
 
 
@@ -1078,6 +1082,7 @@ public class ObjectLoader : Loader {
 																						if   ( ((j+r>=0) && (j+r<63)) && ((k+q>=0) && (k+q<63)))
 																						{
 																								LevelInfo[j+r,k+q].TerrainChange=true;	
+																								LevelInfo[j+r,k+q].Render=true;
 																						}
 																				}	
 																		}

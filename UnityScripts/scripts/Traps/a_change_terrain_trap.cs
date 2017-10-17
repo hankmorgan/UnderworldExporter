@@ -120,39 +120,36 @@ The path to the sword hilt on Level3
 	
 		GameWorldController.WorldReRenderPending=true;
 			
-				if ((objInt().owner<63) && (_RES==GAME_UW2))
+	//	if ((objInt().owner<63) && (_RES==GAME_UW2))
+	//	{
+			//Now force re-render the tiles and their neighbours
+			for (int x=-1; x<=objInt().x+1;x++)
+			{
+				for (int y=-1; y<=objInt().y+1;y++)
 				{
-						//Now re-render the tiles and their neighbours since the wall texture has changed.
-						for (int x=-1; x<=objInt().x+1;x++)
+					int tileXToChange=x+triggerX; 
+					int tileYToChange=y +triggerY;
+
+					GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
+					if (tile!=null)
+					{
+						Destroy (tile);
+					}
+					if ( (tileXToChange >=0) && (tileXToChange <=63) &&  (tileYToChange >=0) && (tileYToChange <=63))
+					{
+						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];	
+						tileToChange.Render=true;
+						for (int v=0;v<6;v++)
 						{
-								for (int y=-1; y<=objInt().y+1;y++)
-								{
-
-										int tileXToChange=x+triggerX; 
-										int tileYToChange=y +triggerY;
-
-										GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
-										if (tile!=null)
-										{
-												Destroy (tile);
-												if ( (tileXToChange >=0) && (tileXToChange <=63) &&  (tileYToChange >=0) && (tileYToChange <=63))
-												{
-														TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];	
-														tileToChange.Render=true;
-														for (int v=0;v<6;v++)
-														{
-																tileToChange.VisibleFaces[v]=true;		
-														}
-														tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
-														//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);											
-														tileToChange.TileNeedsUpdate();
-												}
-										}
-								}
-
+							tileToChange.VisibleFaces[v]=true;		
 						}
-
+						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
+						//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);											
+						tileToChange.TileNeedsUpdate();
+					}
 				}
+			}
+		//}
 
 	}
 

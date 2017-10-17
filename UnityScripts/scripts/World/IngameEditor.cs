@@ -91,9 +91,13 @@ public class IngameEditor : GuiBase_Draggable {
 				if (GameWorldController.instance.LevelNo!=-1)
 				{
 						SwitchPanel(0);//Tilemap
-						UpdateFloorTexturesDropDown();
-						UpdateWallTexturesDropDown();
-						UpdateDoorTexturesGrid();
+						if (_RES!=GAME_UW2)
+						{
+								UpdateFloorTexturesDropDown();
+								UpdateWallTexturesDropDown();
+								UpdateDoorTexturesGrid();	
+						}
+
 						RefreshTileMap();
 						RefreshTileInfo();
 						UpdateNPCGoals();
@@ -233,10 +237,15 @@ public class IngameEditor : GuiBase_Draggable {
 						if (levelnotoload<= GameWorldController.instance.Tilemaps.GetUpperBound(0))
 						{
 								GameWorldController.instance.SwitchLevel((short)levelnotoload);
+
 								RefreshTileMap();
 								RefreshTileInfo();
-								UpdateFloorTexturesDropDown();
-								UpdateWallTexturesDropDown();
+								if (_RES!=GAME_UW2)
+								{
+										UpdateFloorTexturesDropDown();
+										UpdateWallTexturesDropDown();		
+								}
+
 								UpdateObjectsDropDown();	
 						}
 						else

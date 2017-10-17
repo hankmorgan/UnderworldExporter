@@ -8,13 +8,16 @@ public class a_timer_trigger : trigger_base {
 
 	public override void Update ()
 	{
-		base.Update ();
-		traptime+=Time.deltaTime;
-		if(traptime> (float)objInt().zpos * 0.3f)
+		if (GameWorldController.instance.EnableTimerTriggers)
 		{
+			base.Update ();
+			traptime+=Time.deltaTime;
+			if(traptime> (float)objInt().zpos * 0.3f)
+			{
 				Activate();
 				traptime=0f;
-		}		
+			}			
+		}	
 	}
 
 

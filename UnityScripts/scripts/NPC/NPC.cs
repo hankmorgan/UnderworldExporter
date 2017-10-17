@@ -316,6 +316,18 @@ public class NPC : MobileObject {
 
 						break;
 						}
+
+				case GAME_UW2:
+					{
+						switch(npc_whoami)
+						{
+						case 145://The listener under the castle
+							GameWorldController.instance.playerUW.quest().QuestVariables[11]=1;
+							GameWorldController.instance.playerUW.quest().x_clocks[1]++;//Confirm this behaviour!
+							return false;
+						}
+						break;
+					}
 				}
 
 

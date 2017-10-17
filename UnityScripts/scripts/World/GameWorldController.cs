@@ -301,6 +301,8 @@ public class GameWorldController : UWEBase {
 	public static bool ObjectReRenderPending=false;
 	public static bool FullReRender=false;
 
+	public bool EnableTimerTriggers=true;
+
 	public KeyBindings keybinds;
 
 	public event_base events;

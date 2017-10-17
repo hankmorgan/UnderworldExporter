@@ -1441,7 +1441,7 @@ public class ConversationVM : UWEBase {
 		{
 				//if (func.functionName!="babl_menu")
 				//{
-				Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
+				//Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
 				//}
 				switch (func.functionName.ToLower())
 				{
