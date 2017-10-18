@@ -2219,22 +2219,46 @@ public class ConversationVM : UWEBase {
 		/// <returns>The skills.</returns>
 		/// <param name="index">Index.</param>
 		/// IN UW2 the return value seems to indicate if the skill gain occurred.
-		public int x_skills(int val1, int val2, int val3, int val4)
+		public int x_skills(int mode, int skillToChange, int val3, int val4)
 		{
-			Debug.Log("X_skills (" + val1 + "," + val2 + "," + val3 + "," + val4 +")");
-			if (val1==10001)
-			{					
-				Debug.Log("Returning skill " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(val2));
-				return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(val2);
+			Debug.Log("X_skills (" + mode + "," + skillToChange + "," + val3 + "," + val4 +")");
+			if (_RES!=GAME_UW2)
+			{
+				if (mode==10001)
+				{					
+					Debug.Log("Returning skill " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(skillToChange));
+					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+				}
+				else
+				{
+					Debug.Log("Possibly setting skill to " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
+					GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(skillToChange,mode);
+					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+				}		
 			}
 			else
-			{
-				Debug.Log("Possibly setting skill to " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(val2) + " " + val2);
-				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(val2,val1);
-				return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(val2);
-			}
-		
-			
+			{//In uw2 skill numbers are zero based?
+				skillToChange++;
+				switch (mode)
+				{
+				case 9999://Return the skill value
+					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+				case 10001: //Increase the skill if points are available. Returns 1 if sucess 0 if fail
+					if (GameWorldController.instance.playerUW.TrainingPoints>0)
+					{
+						GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(skillToChange,1);
+						GameWorldController.instance.playerUW.TrainingPoints--;
+						return 1;
+					}
+					else
+					{
+						return 0;
+					}
+				default://Set the skill to the specified value.
+					GameWorldController.instance.playerUW.PlayerSkills.SetSkill(skillToChange,mode);
+					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+				}
+			}			
 		}
 
 		/// <summary>
@@ -3063,13 +3087,15 @@ public class ConversationVM : UWEBase {
 				{
 				int rangeS = (item_id-1000)*16;
 				int rangeE = rangeS+16;
-					GameObject obj=null;
-					if (item_id>1000)
+					//GameObject obj=null;
+								ObjectInteraction obj = null;
+					if (item_id>=1000)
 					{
 						for (int i=rangeS; i<=rangeE;i++)		
 						{
-							string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(i);
-							obj= GameObject.Find(itemname);	
+							//string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(i);
+							//obj= GameObject.Find(itemname);	
+							obj = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(i);
 							if (obj!=null)
 							{
 								break;
@@ -3078,8 +3104,9 @@ public class ConversationVM : UWEBase {
 					}
 					else
 					{
-						string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
-						obj= GameObject.Find(itemname);	
+						//string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
+						obj = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(item_id);
+						//obj= GameObject.Find(itemname);	
 					}
 
 				Debug.Log("PC version of find_inv."); //will happen in judy's conversation
@@ -3089,7 +3116,8 @@ public class ConversationVM : UWEBase {
 				{
 						//return 1;
 						//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-					return FindObjectIndexInObjectList(obj.name);
+					//return FindObjectIndexInObjectList(obj.name);
+					return 1;
 				}
 				else
 				{
