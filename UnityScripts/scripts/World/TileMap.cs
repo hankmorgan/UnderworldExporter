@@ -206,7 +206,14 @@ public class TileMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 	public int GetFloorHeight(int tileX, int tileY)
 	{
-		return Tiles[tileX,tileY].floorHeight;
+		if (ValidTile(tileX,tileY))
+		{
+			return Tiles[tileX,tileY].floorHeight;
+		}
+		else
+		{
+			return 0;
+		}		
 	}
 
 		/// <summary>

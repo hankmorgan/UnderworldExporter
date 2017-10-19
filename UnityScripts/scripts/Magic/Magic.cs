@@ -2511,12 +2511,84 @@ public class Magic : UWEBase {
 		void Cast_Altara(GameObject caster,int EffectID)
 		{
 			Debug.Log("Perform the wand of altara spell");
-
+				int x0=0; int x1=0; 
+				int y0=0; int y1=0;
+				int WorldBit=-1;
 				//Check if player is in a certain location.
-
+				switch(GameWorldController.instance.LevelNo)
+				{
+				case (short)GameWorldController.UW2_LevelNames.Prison7:
+						x0=27;y0=31;
+						x1=29;y1=35;
+						WorldBit=0;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Killorn1:
+						x0=28;y0=26;
+						x1=31;y1=30;
+						WorldBit=1;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Ice1:
+						x0=18;y0=48;
+						x1=21;y1=51;
+						WorldBit=2;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Talorus0:
+						x0=56;y0=2;
+						x1=60;y1=6;
+						WorldBit=3;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Academy7:
+						x0=35;y0=29;
+						x1=37;y1=32;
+						WorldBit=4;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Tomb0:
+						x0=23;y0=39;
+						x1=25;y1=41;
+						WorldBit=5;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Pits0:
+						x0=28;y0=59;
+						x1=34;y1=61;
+						WorldBit=6;
+						break;
+				case (short)GameWorldController.UW2_LevelNames.Ethereal4:
+						x0=29;y0=25;
+						x1=35;y1=31;
+						WorldBit=7;
+						break;
+				//default:
+					//	UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,322));//Spell has no effect
+						//return;
+						//break;
+						//No effect
+				}
 				//Has the line of power been cut.
-
+				int BitState=1;
+				if (WorldBit!=-1)
+				{
+					BitState= (GameWorldController.instance.playerUW.quest().QuestVariables[128] >> WorldBit) & 0x1;	
+				}
 				//Cut the power and set the quest.
+				if (BitState==0)
+				{
+						//Check position
+						int tileX=TileMap.visitTileX;
+						int tileY=TileMap.visitTileY;
+						if (
+								((tileX>=x0) && (tileY>=y0))
+								&&
+								((tileX<=x1) && (tileY<=y1))
+						)
+						{
+							UWHUD.instance.MessageScroll.Add("Imagine the screen is shaking now");	
+							BitState = 1 << WorldBit;//Get the bit that needs to be set.
+							GameWorldController.instance.playerUW.quest().QuestVariables[128] |=BitState;//Set the bit
+								return;
+						}
+				}
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,322));//Spell has no effect	
+
 		}
 
 

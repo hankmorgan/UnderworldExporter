@@ -23,14 +23,22 @@ public class Bridge : object_base {
 			bx.center=new Vector3(0.08f, 0.006f, 0.08f);	
 			bx.size=new Vector3(1.2f, 0.18f, 1.2f);
 		}
-		foreach (Transform t in GameWorldController.instance.SceneryModel.transform)
+		if (objInt().invis==0)
 		{
-			if (t.name == this.name)
+			foreach (Transform t in GameWorldController.instance.SceneryModel.transform)
 			{
-				ModelInstance = t.gameObject;
-				return;
+				if (t.name == this.name)
+				{
+					ModelInstance = t.gameObject;
+					return;
+				}
 			}
 		}
+		else
+		{//Make this bridge use it's box collider for collision
+			this.gameObject.layer=LayerMask.NameToLayer("MapMesh");
+		}
+
 	}
 
 		/// <summary>
@@ -42,17 +50,23 @@ public class Bridge : object_base {
 		/// Examples: the tile puzzle in level6 seers and the Goblin shower in the tower in UW2
 	public override bool LookAt ()
 	{
-				
-		if ( ( (objInt().enchantment<<3) | objInt().flags)<2)
+		if(objInt().invis==0)	
 		{
-			return base.LookAt ();
+			if ( ( (objInt().enchantment<<3) | objInt().flags)<2)
+			{
+					return base.LookAt ();
+			}
+			else
+			{
+					int TextureIndex=(objInt().enchantment<<3) | objInt().flags & 0x3F;
+					//Return material description
+					UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
+					return true;
+			}	
 		}
 		else
 		{
-			int TextureIndex=(objInt().enchantment<<3) | objInt().flags & 0x3F;
-			//Return material description
-			UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
-			return true;
+			return true;//No description for invisible bridges
 		}
 	}
 
