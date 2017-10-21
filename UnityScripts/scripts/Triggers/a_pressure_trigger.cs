@@ -9,6 +9,10 @@ using System.Collections;
 /// A pressure trigger only triggers on weights put on.
 /// A release trigger only triggers on weights removed. Both triggers track if the weight is on them.
 /// Currently this implementation is tested for IDs 436 & 437 which change the texture of the tile.
+/// 
+/// The y paramater seems to control if the texture changes when weight is released. Depending on value will either toggle texture, do nothing or use texture 6 (?)
+/// x might do the same for putting weight on.
+/// Hard coding of texture values does not seem right but i've seen no exceptions yet.
 public class a_pressure_trigger : trigger_base {
 
 		/// <summary>

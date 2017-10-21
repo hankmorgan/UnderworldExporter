@@ -217,6 +217,8 @@ public class TileMapRenderer : Loader{
 				}
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
+						if (objList.objInfo[i]!=null)
+						{
 						if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
 						{
 								if (level.Tiles[objList.objInfo[i].tileX,objList.objInfo[i].tileY].tileType!=TILE_SOLID)
@@ -225,7 +227,9 @@ public class TileMapRenderer : Loader{
 										RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
 								}
 						}
+						}
 				}
+
 		}
 
 
@@ -667,6 +671,8 @@ public class TileMapRenderer : Loader{
 
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
+						if (objList.objInfo[i]!=null)
+						{
 						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
 						{
 								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
@@ -741,6 +747,7 @@ public class TileMapRenderer : Loader{
 										return;
 								}	
 						}
+						}
 				}
 		}
 
@@ -759,6 +766,9 @@ public class TileMapRenderer : Loader{
 				}
 				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++)
 				{
+						if (objList.objInfo[i] !=null)
+						{						
+						
 						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag==1) && (objList.objInfo[i].invis==0))
 						{
 								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
@@ -840,6 +850,7 @@ public class TileMapRenderer : Loader{
 										MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
 								}
 								RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,ObjectLoader.UniqueObjectName(objList.objInfo[i]));						
+						}
 						}
 				}
 		}

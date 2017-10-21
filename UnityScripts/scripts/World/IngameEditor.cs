@@ -112,10 +112,16 @@ public class IngameEditor : GuiBase_Draggable {
 		void UpdateObjectsDropDown()
 		{
 				ObjectSelect.ClearOptions();
-				for (int i=0; i<=GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0);i++ )
-				{						
-						string itemtext= ObjectLoader.UniqueObjectNameEditor(GameWorldController.instance.CurrentObjectList().objInfo[i]);
-						ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
+				ObjectLoader objList = GameWorldController.instance.CurrentObjectList();
+
+				for (int i=0; i<=objList.objInfo.GetUpperBound(0);i++ )
+				{				
+						if (objList.objInfo[i]!=null)		
+						{
+								string itemtext= ObjectLoader.UniqueObjectNameEditor(GameWorldController.instance.CurrentObjectList().objInfo[i]);
+								ObjectSelect.options.Add(new Dropdown.OptionData(itemtext));
+
+						}
 				}
 				ObjectSelect.RefreshShownValue();
 		}

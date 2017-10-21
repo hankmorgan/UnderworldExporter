@@ -779,10 +779,10 @@ public class GameWorldController : UWEBase {
 					//Update the positions of all object interactions in the level
 					//UpdatePositions();
 
-					//if (UWEBase.EditorMode==false)
-					//{
+					if (UWEBase.EditorMode==false)
+					{
 						ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
-					//}
+					}
 					//Store the state of the object list with just the objects in objects transform for when I re
 					
 				}
