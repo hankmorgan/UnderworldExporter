@@ -64,4 +64,10 @@ public class Cutscene_Splash : Cuts {
 
 
 		}
+
+
+	public override void PostCutSceneEvent ()
+	{
+		GotoMainMenu();
+	}
 }

@@ -162,9 +162,7 @@ public class Cutscene_EndGame : Cuts {
 
 	public override void PostCutSceneEvent ()
 	{
-		base.PostCutSceneEvent ();
-			//Debug.Log("Display the victory screen");
-				//Switch to the closing stats screen.
+		GotoMainMenu();
 	}
 
 }

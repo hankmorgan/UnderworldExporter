@@ -187,6 +187,12 @@ public class Cuts : GuiBase {
 	/// </summary>
 	public virtual void PostCutSceneEvent()
 	{
+		return;	
+	}
+
+
+	public void GotoMainMenu()
+	{
 		GameWorldController.instance.AtMainMenu=true;
 		//Clear out game objects
 		foreach (Transform child in GameWorldController.instance.LevelModel.transform) {
@@ -203,6 +209,6 @@ public class Cuts : GuiBase {
 		MainMenuHud.instance.OpScr.SetActive(true);
 		MainMenuHud.instance.CharGen.SetActive(false);
 		MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
-		return;		
+		return;	
 	}
 }

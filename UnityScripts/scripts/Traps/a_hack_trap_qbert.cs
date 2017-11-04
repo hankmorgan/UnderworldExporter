@@ -12,10 +12,10 @@ public class a_hack_trap_qbert : a_hack_trap {
 		//owner = 3 //entrance from the purple zone (stickman)
 		//Owner = 4 //entrance from the green zone (maze)
 		//Owner = 11 to 15 //Unknown usage possibly used for  other moongate destinations such as the sigil of binding or the shrine
-		//owner = 16 //used in leaving the pyramid area
+		//owner = 16 //used in leaving the pyramid area and the sigil
 
 		//Owner = 63 //Used in stepping on the pyramid, Most steps point to one of two traps with this owner value.
 
 
-		//game variables 102 to 108 are used for this trap
+		//game variables 101 to 108 are used for this trap
 }

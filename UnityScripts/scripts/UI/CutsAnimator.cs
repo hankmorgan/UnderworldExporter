@@ -117,11 +117,20 @@ public class CutsAnimator : GuiBase {
 						foreach (Transform child in GameWorldController.instance.SceneryModel.transform) {
 								GameObject.Destroy(child.gameObject);
 						}
+						for (int x=0;x<=GameWorldController.instance.Tilemaps.GetUpperBound(0);x++)
+						{								
+							GameWorldController.instance.Tilemaps[x]=null;
+						}
+						for (int x=0;x<=GameWorldController.instance.objectList.GetUpperBound(0);x++)
+						{								
+							GameWorldController.instance.objectList[x]=null;
+						}
 						MainMenuHud.instance.gameObject.SetActive(true);
 						MainMenuHud.instance.MenuMode=0;
 						MainMenuHud.instance.OpScr.SetActive(true);
 						MainMenuHud.instance.CharGen.SetActive(false);
 						MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
+						GameWorldController.instance.LevelNo=-1;
 						break;
 				default:
 						GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class a_hack_trap : trap_base {		
 	//qual=5 is a trespass trap.
+		//qual = 12 is an oscillator row of tiles (i think)
 		//qual=20 used for rising platforms on level 42 (scintilus)
 	//qual=21 is the moving switches in loths tomb.
 		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint.

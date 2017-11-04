@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using UnityEngine.UI;
 
 public class SaveGame : Loader {
 		private const int NoOfEncryptedBytes=0xD2;//218;		//219
@@ -21,6 +22,10 @@ public class SaveGame : Loader {
 				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
 				GameWorldController.instance.playerUW.playerInventory.currentContainer="_Gronk";
+				UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture=GameWorldController.instance.playerUW.playerInventory.Blank;
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(false);
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
 				{
 
