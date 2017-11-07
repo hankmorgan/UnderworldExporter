@@ -761,7 +761,7 @@ public class GameWorldController : UWEBase {
 
 				}
 
-				if (UWEBase._RES!=UWEBase.GAME_SHOCK)
+				if ((UWEBase._RES!=UWEBase.GAME_SHOCK) && (LevelNo!=-1))
 				{
 					//Call events for inventory objects on level transition.
 					foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 

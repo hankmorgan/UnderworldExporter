@@ -188,7 +188,7 @@ public class GameClock : UWEBase {
 		System.TimeSpan ts=	System.TimeSpan.FromSeconds((double)timevalue);
 		instance._day=ts.Days;
 		//instance._hour=ts.Hours;
-		instance._minute=ts.Minutes;
+		instance._minute=ts.Minutes + ts.Hours*60;
 		instance._second=ts.Seconds;
 		//Debug.Log( instance._day + " days " + instance._hour +" hours " + instance._minute + " minutes " + instance._second + " seconds");
 

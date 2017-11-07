@@ -2311,6 +2311,7 @@ public class ConversationVM : UWEBase {
 		{
 				Container cn =npc.gameObject.GetComponent<Container>();
 				bool SomethingGiven=false;
+				GameObject[]  objsGiven= new GameObject[4];
 				for (int i=0; i<NoOfItems; i++)
 				{
 						
@@ -2330,7 +2331,8 @@ public class ConversationVM : UWEBase {
 									{
 										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
-										GameWorldController.MoveToWorld(demanded);//ok
+										//GameWorldController.MoveToWorld(demanded);//ok
+										objsGiven[i]=demanded;//These have to be moved to world after this function ends or else the master list will get messed up
 										demanded.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 										SomethingGiven=true;
 										cn.AddItemToContainer(demanded.name);
@@ -2345,13 +2347,22 @@ public class ConversationVM : UWEBase {
 									{
 										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
-										GameWorldController.MoveToWorld(demanded);//ok
+										//GameWorldController.MoveToWorld(demanded);//ok
+										objsGiven[i]=demanded;//These have to be moved to world after this function ends or else the master list will get messed up
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
 										SomethingGiven=false;
 									}
 									//pcSlot.clear();
 								}
 						//}
+				}
+
+				for (int i=0;i<=objsGiven.GetUpperBound(0);i++)
+				{
+					if (objsGiven[i]!=null)
+					{
+							GameWorldController.MoveToWorld(objsGiven[i]);
+					}
 				}
 				if (SomethingGiven==true)
 				{
