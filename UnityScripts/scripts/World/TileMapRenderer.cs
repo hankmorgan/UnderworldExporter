@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 /// Renders the tile map in 3d
 public class TileMapRenderer : Loader{
-
+		const bool debugtextures=false;
 		const int  TILE_SOLID= 0;
 		const int  TILE_OPEN= 1;
 
@@ -2949,7 +2949,10 @@ public class TileMapRenderer : Loader{
 		public static int FloorTexture(int face, TileInfo t)
 		{				
 				int floorTexture;
-
+				if (debugtextures)
+				{
+						return t.floorTexture;
+				}
 				if (face == fCEIL)
 				{
 						floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];

@@ -589,6 +589,7 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 						SwitchLevel(startLevel);
 				}
+				PositionDetect();
 				InvokeRepeating("PositionDetect",0.0f,0.02f);
 				return;		
 		}
