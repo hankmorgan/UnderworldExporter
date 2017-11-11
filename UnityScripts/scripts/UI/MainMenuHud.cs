@@ -477,21 +477,30 @@ public class MainMenuHud : GuiBase {
 								}
 								switch(_RES)
 								{
-								default:
-									GameWorldController.instance.playerUW.quest().TalismansRemaining=8;
-									GameWorldController.instance.playerUW.quest().DayGaramonDream=0;
-									GameWorldController.instance.playerUW.quest().GaramonDream=0;
-									GameWorldController.instance.playerUW.quest().IncenseDream=0;
-									GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
-									GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
-									GameWorldController.instance.playerUW.quest().isCupFound=false;
-									GameClock.instance._day=0;
-									GameClock.instance._minute=51;
-									GameClock.instance._second=15;
-									GameWorldController.instance.playerUW.Fatigue=20;
-									GameWorldController.instance.playerUW.FoodLevel=192;
-									break;
+								case GAME_UW1:
+								case GAME_UWDEMO:
+										GameWorldController.instance.playerUW.quest().TalismansRemaining=8;
+										GameWorldController.instance.playerUW.quest().DayGaramonDream=0;
+										GameWorldController.instance.playerUW.quest().GaramonDream=0;
+										GameWorldController.instance.playerUW.quest().IncenseDream=0;
+										GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
+										GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
+										GameWorldController.instance.playerUW.quest().isCupFound=false;
+										break;
+								case  GAME_UW2:
+										GameWorldController.instance.playerUW.quest().variables[101]=255;
+										GameWorldController.instance.playerUW.quest().variables[102]=255;
+										GameWorldController.instance.playerUW.quest().variables[103]=255;
+										GameWorldController.instance.playerUW.quest().variables[104]=255;
+										GameWorldController.instance.playerUW.quest().variables[105]=255;
+										GameWorldController.instance.playerUW.quest().variables[106]=255;
+										break;
 								}
+								GameClock.instance._day=0;
+								GameClock.instance._minute=51;
+								GameClock.instance._second=15;
+								GameWorldController.instance.playerUW.Fatigue=20;
+								GameWorldController.instance.playerUW.FoodLevel=192;
 								JourneyOnwards();
 						}
 						else

@@ -165,6 +165,13 @@ public class TextureLoader : ArtLoader {
 
 		case GAME_UW2:
 			{
+				if(LoadMod)
+				{
+					if (File.Exists(ModPathW + "\\" + index.ToString("d3") + ".tga") )	
+					{
+						return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + ".tga");								
+					}
+				}	
 				if (texturesFLoaded==false)
 				{										
 						if (!DataLoader.ReadStreamFile(BasePath+ pathTex_UW2, out texturebufferT))

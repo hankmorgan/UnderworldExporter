@@ -1708,7 +1708,7 @@ public class SaveGame : Loader {
 										case 0x1CC:  //105
 										case 0x1CE:  //106
 										case 0x1D0:  //107
-										case 0x1D2:  //108
+
 										case 0x1D4:  //109
 										case 0x1D6:  //110
 										case 0x1D8:  //111
@@ -1730,6 +1730,11 @@ public class SaveGame : Loader {
 										case 0x1F8:  //Variable 127
 												{
 													GameWorldController.instance.playerUW.quest().variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,8);
+													break;
+												}
+										case 0x1D2:  //Variable 108 //Int 16 used in qbert
+												{
+													GameWorldController.instance.playerUW.quest().variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,16);
 													break;
 												}
 										case 0x303:

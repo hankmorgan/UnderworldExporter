@@ -199,6 +199,10 @@ public class a_pressure_trigger : trigger_base {
 		/// <param name="newTexture">New texture.</param>
 	public void UpdateTileTexture(int newTexture)
 	{//Question. Is the texture map always 7 & 8??
+				if (objInt().x==3)
+				{//TODO:confirm this behaviour is consistent
+						return;
+				}
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;	
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
 		GameObject tileToDestroy= GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR);
