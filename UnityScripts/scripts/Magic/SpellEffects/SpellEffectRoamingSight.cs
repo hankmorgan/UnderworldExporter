@@ -12,11 +12,11 @@ public class SpellEffectRoamingSight : SpellEffect {
 		/// </summary>
 		public override void ApplyEffect ()
 		{
-			GameWorldController.instance.playerUW.isRoaming=true;
-			OldMana=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
-			GameWorldController.instance.playerUW.PlayerMagic.CurMana=0;
-			OldPosition = GameWorldController.instance.playerUW.transform.position;
-			GameWorldController.instance.playerUW.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
+			UWCharacter.Instance.isRoaming=true;
+			OldMana=UWCharacter.Instance.PlayerMagic.CurMana;
+			UWCharacter.Instance.PlayerMagic.CurMana=0;
+			OldPosition = UWCharacter.Instance.transform.position;
+			UWCharacter.Instance.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
 			base.ApplyEffect();
 		}
 
@@ -25,9 +25,9 @@ public class SpellEffectRoamingSight : SpellEffect {
 		/// </summary>
 		public override void CancelEffect ()
 		{
-			GameWorldController.instance.playerUW.isRoaming=false;
-			GameWorldController.instance.playerUW.transform.position=OldPosition;
-			GameWorldController.instance.playerUW.PlayerMagic.CurMana=OldMana;
+			UWCharacter.Instance.isRoaming=false;
+			UWCharacter.Instance.transform.position=OldPosition;
+			UWCharacter.Instance.PlayerMagic.CurMana=OldMana;
 			base.CancelEffect();
 		}
 }

@@ -61,15 +61,15 @@ public class Grave : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			return LookAt ();
 		}
 		else
 		{
 			//TODO: if garamons bones activate something special.
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
-			//return GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			//return UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 	}
 
@@ -100,9 +100,9 @@ public class Grave : object_base {
 						objInt().link++;//Update the grave description
 						objIntUsed.consumeObject ();
 						trigObj.GetComponent<trigger_base>().Activate();
-						GameWorldController.instance.playerUW.quest().isGaramonBuried=true;
+						Quest.instance.isGaramonBuried=true;
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
+						UWCharacter.Instance.playerInventory.ObjectInHand="";	
 						//Garamon does not initiate conversation normally so I force the conversation.
 						GameObject garamon = GameObject.Find(a_create_object_trap.LastObjectCreated);
 						if (garamon!=null)
@@ -114,7 +114,7 @@ public class Grave : object_base {
 						}
 					}
 					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";	
+					UWCharacter.Instance.playerInventory.ObjectInHand="";	
 					
 					return true;
 					}
@@ -123,7 +123,7 @@ public class Grave : object_base {
 						//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+						UWCharacter.Instance.playerInventory.ObjectInHand="";
 						return true;
 					}
 				}
@@ -139,13 +139,13 @@ public class Grave : object_base {
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				return true;
 			}
 			else
 			{
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
 			}
 		}
@@ -154,7 +154,7 @@ public class Grave : object_base {
 
 	public override string UseObjectOnVerb_World ()
 	{
-		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
 		if (ObjIntInHand!=null)
 		{
 			switch (ObjIntInHand.item_id)	

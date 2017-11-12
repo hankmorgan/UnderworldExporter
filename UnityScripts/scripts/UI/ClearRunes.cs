@@ -8,12 +8,12 @@ public class ClearRunes : GuiBase {
 			
 		//Debug.Log("Clearing Runes - find player");
 		//UWCharacter playerUW= GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		if (GameWorldController.instance.playerUW!=null)
+		if (UWCharacter.Instance!=null)
 		{
 			//Debug.Log("Clearing Runes");
-			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0]=-1;
-			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1]=-1;
-			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2]=-1;
+			UWCharacter.Instance.PlayerMagic.ActiveRunes[0]=-1;
+			UWCharacter.Instance.PlayerMagic.ActiveRunes[1]=-1;
+			UWCharacter.Instance.PlayerMagic.ActiveRunes[2]=-1;
 			ActiveRuneSlot.UpdateRuneSlots();
 		}
 	}

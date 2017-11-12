@@ -158,6 +158,10 @@ public class ObjectLoader : Loader {
 			setElevatorBits(tileMap.Tiles,objInfo);
 			setTerrainChangeBits(tileMap.Tiles,objInfo);
 			SetBullFrog(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+			if (_RES==GAME_UW2)
+			{
+				setQbert(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+			}
 
 		}
 
@@ -1122,6 +1126,37 @@ public class ObjectLoader : Loader {
 				}
 		}
 
+		/// <summary>
+		/// Sets the qbert tiles that will change with the pyramid.
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="LevelNo">Level no.</param>
+		void setQbert(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int LevelNo)
+		{
+			if ((LevelNo==68) && (_RES==GAME_UW2))
+			{
+						
+						LevelInfo[45,50].TerrainChange	=true;
+						LevelInfo[46,50].TerrainChange	=true;
+						LevelInfo[47,50].TerrainChange	=true;
+						LevelInfo[48,50].TerrainChange	=true;
+						LevelInfo[49,50].TerrainChange	=true;
+
+				LevelInfo[44,51].TerrainChange	=true;
+				LevelInfo[45,52].TerrainChange	=true;
+				LevelInfo[46,53].TerrainChange	=true;
+				LevelInfo[47,54].TerrainChange	=true;
+				LevelInfo[48,55].TerrainChange	=true;
+				LevelInfo[49,56].TerrainChange	=true;
+
+						LevelInfo[50,51].TerrainChange	=true;
+						LevelInfo[50,52].TerrainChange	=true;
+						LevelInfo[50,53].TerrainChange	=true;
+						LevelInfo[50,54].TerrainChange	=true;
+						LevelInfo[50,55].TerrainChange	=true;
+			}
+		}
 
 
 
@@ -1525,7 +1560,7 @@ public class ObjectLoader : Loader {
 		/// <returns>The inventory object list.</returns>
 		public static string[] UpdateInventoryObjectList()
 		{
-			PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory;
+			PlayerInventory pInv = UWCharacter.Instance.playerInventory;
 			int NoOfInventoryItems=0;
 			GameObject Prev=null;
 			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {

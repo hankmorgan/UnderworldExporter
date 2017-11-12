@@ -33,27 +33,27 @@ public class ContainerOpened : GuiBase_Draggable {
 		public void OnClick()
 		{
 				if (Dragging==true){return;}
-				if (GameWorldController.instance.playerUW.playerInventory.currentContainer==GameWorldController.instance.playerUW.name)
+				if (UWCharacter.Instance.playerInventory.currentContainer==UWCharacter.Instance.name)
 				{//Don't do anything on the top level
-						GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
+						UWCharacter.Instance.playerInventory.ContainerOffset=0;
 						BackpackBg.SetActive(false);
 						return;
 				}
-				if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+				if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 				{//Player has no object in their hand. We close up the container.
 						ScrollButtonInventory.ScrollValue=0;
-						GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
-						Container currentContainerObj = GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer();
-						GameWorldController.instance.playerUW.playerInventory.currentContainer = currentContainerObj.ContainerParent;
+						UWCharacter.Instance.playerInventory.ContainerOffset=0;
+						Container currentContainerObj = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+						UWCharacter.Instance.playerInventory.currentContainer = currentContainerObj.ContainerParent;
 						currentContainerObj.isOpenOnPanel=false;
 						//Close child containers as well
 						CloseChildContainer (currentContainerObj);
-						Container DestinationContainer = GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer();
-						if (GameWorldController.instance.playerUW.playerInventory.currentContainer == GameWorldController.instance.playerUW.name)
+						Container DestinationContainer = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+						if (UWCharacter.Instance.playerInventory.currentContainer == UWCharacter.Instance.name)
 						{
-								GetComponent<RawImage>().texture=GameWorldController.instance.playerUW.playerInventory.Blank;
+								GetComponent<RawImage>().texture=UWCharacter.Instance.playerInventory.Blank;
 								BackpackBg.SetActive(false);
-							if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
+							if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=UWCharacter.Instance.playerInventory.playerContainer))
 								{
 										InvUp.SetActive(true);
 										InvDown.SetActive(true);
@@ -68,7 +68,7 @@ public class ContainerOpened : GuiBase_Draggable {
 						{								
 								GetComponent<RawImage>().texture= DestinationContainer.transform.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
 								BackpackBg.SetActive(true);
-								if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
+								if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=UWCharacter.Instance.playerInventory.playerContainer))
 								{
 										InvUp.SetActive(true);
 										InvDown.SetActive(true);
@@ -83,7 +83,7 @@ public class ContainerOpened : GuiBase_Draggable {
 						for (short i = 0; i<8; i++)
 						{
 								string sItem = DestinationContainer.GetItemAt(i);
-								GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
+								UWCharacter.Instance.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
 						}
 				}
 				else
@@ -93,18 +93,18 @@ public class ContainerOpened : GuiBase_Draggable {
 								return;
 						}
 						//Move the contents out of the container into the parent.
-						Container CurrentContainer = GameObject.Find (GameWorldController.instance.playerUW.playerInventory.currentContainer).GetComponent<Container>();
+						Container CurrentContainer = GameObject.Find (UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
 						Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
-						ObjectInteraction item = GameObject.Find (GameWorldController.instance.playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
+						ObjectInteraction item = GameObject.Find (UWCharacter.Instance.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
 						if (Container.TestContainerRules(DestinationContainer,11,false))
 						{
 								//if ((item.isQuant()==false) || (item.isEnchanted()))
 								if (! item.IsStackable())
 								{
-										if (DestinationContainer.AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand))
+										if (DestinationContainer.AddItemToContainer(UWCharacter.Instance.playerInventory.ObjectInHand))
 										{//Object has moved
 												UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-												GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+												UWCharacter.Instance.playerInventory.ObjectInHand="";
 										}
 								}
 								else
@@ -112,7 +112,7 @@ public class ContainerOpened : GuiBase_Draggable {
 										if (DestinationContainer.AddItemMergedItemToContainer(item.gameObject))
 										{//Object has moved
 												UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-												GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+												UWCharacter.Instance.playerInventory.ObjectInHand="";
 										}
 								}
 						}

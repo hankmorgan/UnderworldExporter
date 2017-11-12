@@ -42,7 +42,7 @@ public class Lantern : LightSource {
 					}
 				}
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				return true;
 			default:
 				return base.ActivateByObject(ObjectUsed);
@@ -54,7 +54,7 @@ public class Lantern : LightSource {
 
 	public override string UseObjectOnVerb_Inv ()
 	{
-		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
 		if (ObjIntInHand!=null)
 		{
 			switch (ObjIntInHand.GetItemType())	

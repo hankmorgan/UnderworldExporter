@@ -12,7 +12,7 @@ public class DoorKey : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
 				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,7));
@@ -20,7 +20,7 @@ public class DoorKey : object_base {
 			}
 			else
 			{
-				return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 			}
 		}
 		else

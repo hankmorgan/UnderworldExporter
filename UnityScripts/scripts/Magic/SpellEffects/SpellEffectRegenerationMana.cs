@@ -16,10 +16,10 @@ public class SpellEffectRegenerationMana : SpellEffect {
 		public override void EffectOverTime ()
 		{
 			base.EffectOverTime ();
-			GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.CurMana+DOT;
-			if (GameWorldController.instance.playerUW.PlayerMagic.CurMana>=GameWorldController.instance.playerUW.PlayerMagic.MaxMana)
+			UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.CurMana+DOT;
+			if (UWCharacter.Instance.PlayerMagic.CurMana>=UWCharacter.Instance.PlayerMagic.MaxMana)
 			{
-				GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+				UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
 			}
 		}
 }

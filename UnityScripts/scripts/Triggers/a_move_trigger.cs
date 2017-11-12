@@ -58,7 +58,7 @@ A trigger that fires when the player character enters it
 	{
 		if (playerStartedInTrigger!=true)
 		{
-			if (((other.name==GameWorldController.instance.playerUW.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
+			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
 			{
 				Debug.Log(this.name);
 				Activate ();
@@ -68,5 +68,37 @@ A trigger that fires when the player character enters it
 		{
 			playerStartedInTrigger=false;
 		}
+	}
+
+	public override bool Activate ()
+	{
+		if (_RES==GAME_UW2)
+		{//Check for moongates in this tile to support qbert in UW2.
+			if(GameWorldController.instance.LevelNo==68)
+			{
+				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int i = 0; i < 1024;i++)
+				{//Make sure triggers, traps and special items are created.
+					if (objList[i]!=null)
+					{
+						if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.MOONGATE)
+						{
+							if ((objList[i].tileX == objInt().tileX) && (objList[i].tileY == objInt().tileY))
+							{
+								if (objList[i].instance.invis==1)
+								{//No teleporting on an invisible moon gate in this level.
+										return false;
+								}
+								else
+								{//Okay to teleport
+										break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return base.Activate ();
 	}
 }

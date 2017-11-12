@@ -336,7 +336,7 @@ public class ObjectInteraction : UWEBase {
 				
 				if (inventorySlot!=-1)
 				{
-					GameWorldController.instance.playerUW.playerInventory.Refresh(inventorySlot);
+					UWCharacter.Instance.playerInventory.Refresh(inventorySlot);
 				}
 				animationStarted=true;
 			}
@@ -405,7 +405,7 @@ public class ObjectInteraction : UWEBase {
 			item= this.GetComponent<object_base>();
 			if(item!=null)
 			{
-				return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp()&& WindowDetect.ContextUIUse, ( (GameWorldController.instance.playerUW.playerInventory.ObjectInHand ) !="" && (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)));
+				return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp()&& WindowDetect.ContextUIUse, ( (UWCharacter.Instance.playerInventory.ObjectInHand ) !="" && (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)));
 			}
 			else
 			{
@@ -483,7 +483,7 @@ public class ObjectInteraction : UWEBase {
 		public bool Use()
 		{//Code to activate objects by type.
 			//Objects will return true if they have done everything that needs to be done and false if they expect the calling code to do something instead.
-			GameObject ObjectInHand =GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand();
+			GameObject ObjectInHand =UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 			object_base item = this.GetComponent<object_base>();//Base object class
 
 			if (ObjectInHand != null)
@@ -492,7 +492,7 @@ public class ObjectInteraction : UWEBase {
 				GameObject combined = CombineObject(this.gameObject,ObjectInHand);
 				if (combined!=null)
 				{
-					GameWorldController.instance.playerUW.playerInventory.ObjectInHand = combined.name	;
+					UWCharacter.Instance.playerInventory.ObjectInHand = combined.name	;
 					return true;
 				}	
 			}
@@ -766,18 +766,18 @@ public class ObjectInteraction : UWEBase {
 		{
 			if((isQuant() ==false) || ((isQuant()) && (link==1)) || (isEnchanted()==true))
 			{//the last of the item or is not a quantity;
-				Container cn = GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer();
+				Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
 				//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
 				if (!cn.RemoveItemFromContainer(this.name))
 				{//Try and remove from the paperdoll if not found in the current container.
-					GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(this.name);
+					UWCharacter.Instance.playerInventory.RemoveItemFromEquipment(this.name);
 				}
-				if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==this.name)
+				if (UWCharacter.Instance.playerInventory.ObjectInHand==this.name)
 				{
-					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";//Make sure there is not instance of this object in the players hand	
+					UWCharacter.Instance.playerInventory.ObjectInHand="";//Make sure there is not instance of this object in the players hand	
 					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				}
-				GameWorldController.instance.playerUW.playerInventory.Refresh();
+				UWCharacter.Instance.playerInventory.Refresh();
 				objectloaderinfo.InUseFlag=0;//Free up the slot
 				Destroy (this.gameObject);
 			}
@@ -785,7 +785,7 @@ public class ObjectInteraction : UWEBase {
 			{//just decrement the quantity value;
 				link--;
 				ObjectInteraction.Split (this);
-				GameWorldController.instance.playerUW.playerInventory.Refresh();
+				UWCharacter.Instance.playerInventory.Refresh();
 			}
 		}
 
@@ -1738,7 +1738,7 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<SilverSeed>();
 						if (currObj.item_id==458)
 						{
-							GameWorldController.instance.playerUW.ResurrectPosition= myObj.transform.position;	
+							UWCharacter.Instance.ResurrectPosition= myObj.transform.position;	
 						}
 						AddAnimation=true;
 						break;
@@ -1766,7 +1766,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case MOONSTONE:
 						myObj.AddComponent<MoonStone>();
-						GameWorldController.instance.playerUW.MoonGatePosition = myObj.transform.position;
+						UWCharacter.Instance.MoonGatePosition = myObj.transform.position;
 						break;
 				case LEECH:
 						myObj.AddComponent<Leech>();
@@ -2060,11 +2060,6 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<object_base> ();
 						break;
 				}
-
-
-
-
-
 
 				if((CreateSprite) || (EditorMode))
 				{

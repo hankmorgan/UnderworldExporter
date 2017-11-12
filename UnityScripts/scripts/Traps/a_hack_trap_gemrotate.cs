@@ -14,7 +14,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
-		//GameWorldController.instance.playerUW.quest().variables[6]=0;
+		//Quest.instance.variables[6]=0;
 	}
 
 		/// <summary>
@@ -40,16 +40,16 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 		}
 		*/
 
-		GameWorldController.instance.playerUW.quest().variables[6]++;
-		if (GameWorldController.instance.playerUW.quest().variables[6] > a_hack_trap_teleport.NoOfWorlds)
+		Quest.instance.variables[6]++;
+		if (Quest.instance.variables[6] > a_hack_trap_teleport.NoOfWorlds)
 		{
-			GameWorldController.instance.playerUW.quest().variables[6]=0;	
+			Quest.instance.variables[6]=0;	
 		}
-		if (prevWorld!=GameWorldController.instance.playerUW.quest().variables[6])
+		if (prevWorld!=Quest.instance.variables[6])
 		{
-			Debug.Log("Now serving world " +  GameWorldController.instance.playerUW.quest().variables[6]);				
+			Debug.Log("Now serving world " +  Quest.instance.variables[6]);				
 		}		
-		prevWorld=GameWorldController.instance.playerUW.quest().variables[6];
+		prevWorld=Quest.instance.variables[6];
 	}
 
 	public override void PostActivate ()

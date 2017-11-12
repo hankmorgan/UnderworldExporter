@@ -10,7 +10,7 @@ public class Potion : enchantment_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			int index=0; //= GetActualSpellIndex();
 			int UseString=-1;
@@ -36,7 +36,7 @@ public class Potion : enchantment_base {
 			}
 			
 			
-			GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,index,Magic.SpellRule_TargetSelf );
+			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,index,Magic.SpellRule_TargetSelf );
 			
 			if (UseString !=-1)
 			{
@@ -48,8 +48,8 @@ public class Potion : enchantment_base {
 		}
 		else
 		{
-			//return GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			//return UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 
 	}

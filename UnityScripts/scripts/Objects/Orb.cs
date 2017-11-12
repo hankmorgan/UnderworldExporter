@@ -9,10 +9,10 @@ public class Orb : object_base {
 		base.Start ();
 		if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==6))
 			{
-			if (GameWorldController.instance.playerUW.quest().isOrbDestroyed==false)	
+			if (Quest.instance.isOrbDestroyed==false)	
 				{
-					GameWorldController.instance.playerUW.PlayerMagic.CurMana=0;
-					GameWorldController.instance.playerUW.PlayerMagic.MaxMana=0;
+					UWCharacter.Instance.PlayerMagic.CurMana=0;
+					UWCharacter.Instance.PlayerMagic.MaxMana=0;
 				}
 			}
 	}
@@ -37,7 +37,7 @@ public class Orb : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if (objInt().link!=0)
 			{
@@ -54,7 +54,7 @@ public class Orb : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 
 		return LookAt();
@@ -73,7 +73,7 @@ public class Orb : object_base {
 					if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==6))
 					{
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+						UWCharacter.Instance.playerInventory.ObjectInHand="";
 						OrbRock.DestroyOrb(objInt());
 						return true;
 					}

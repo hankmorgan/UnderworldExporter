@@ -44,7 +44,7 @@ public class TMAP : object_base {
 
 	public override bool use()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if (objInt().link != 0)
 			{
@@ -65,7 +65,7 @@ public class TMAP : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -87,7 +87,7 @@ public class TMAP : object_base {
 						{
 							objIntTrigger.GetComponent<trigger_base> ().Activate();
 							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+							UWCharacter.Instance.playerInventory.ObjectInHand="";
 							return true;
 						}
 					}
@@ -121,7 +121,7 @@ public class TMAP : object_base {
 		{
 				if (TextureIndex==47)//The door to the base of the abyss.
 				{
-						ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+						ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
 						if (ObjIntInHand!=null)
 						{
 								switch (ObjIntInHand.item_id)	

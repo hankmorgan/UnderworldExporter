@@ -4,15 +4,15 @@ using System.Collections;
 public class MagicScroll : enchantment_base {
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
+			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
 			objInt().consumeObject();
 			return true;
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}		
 	}
 

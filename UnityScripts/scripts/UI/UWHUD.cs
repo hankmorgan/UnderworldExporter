@@ -373,8 +373,8 @@ public class UWHUD : HUD {
 				}
 				EnableDisableControl(StatsDisplayPanel,StatsEnabled);
 				EnableDisableControl(InventoryPanel, InventoryEnabled);
-				EnableDisableControl(PaperDollFemalePanel, InventoryEnabled && GameWorldController.instance.playerUW.isFemale);
-				EnableDisableControl(PaperDollMalePanel, InventoryEnabled && !GameWorldController.instance.playerUW.isFemale);
+				EnableDisableControl(PaperDollFemalePanel, InventoryEnabled && UWCharacter.Instance.isFemale);
+				EnableDisableControl(PaperDollMalePanel, InventoryEnabled && !UWCharacter.Instance.isFemale);
 				EnableDisableControl(ConversationPanel,ConversationEnabled);
 				EnableDisableControl(MapPanel,MapEnabled);
 				EnableDisableControl(DragonLeftPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));

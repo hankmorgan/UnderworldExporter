@@ -73,8 +73,8 @@ public class ProjectileDamage : UWEBase {
 			int DamageReduction=0;
 			if (other.name=="_Gronk")
 			{
-				otherDefenceScore=GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillDefense) + (GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillMissile)/2);
-				DamageReduction=GameWorldController.instance.playerUW.playerInventory.getArmourScore();				
+				otherDefenceScore=UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillDefense) + (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile)/2);
+				DamageReduction=UWCharacter.Instance.playerInventory.getArmourScore();				
 			}
 			else if (other.GetComponent<NPC>()!=null)
 			{
@@ -106,7 +106,7 @@ public class ProjectileDamage : UWEBase {
 					if (DamageToApply>DamageReduction)
 					{
 						//apply equipment damage to a random piece of armour
-						GameWorldController.instance.playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, ArmourDamage+1));
+						UWCharacter.Instance.playerInventory.ApplyArmourDamage((short)Random.Range(0, ArmourDamage+1));
 					}
 				}
 				else

@@ -7,7 +7,7 @@ public override bool use ()
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
 				GoFish();
 				return true;
@@ -29,8 +29,8 @@ public override bool use ()
 	/// </summary>
 	private void GoFish()
 	{
-		int tileX=(int)(GameWorldController.instance.playerUW.transform.position.x/1.2f);
-		int tileY=(int)(GameWorldController.instance.playerUW.transform.position.z/1.2f);
+		int tileX=(int)(UWCharacter.Instance.transform.position.x/1.2f);
+		int tileY=(int)(UWCharacter.Instance.transform.position.z/1.2f);
 	
 
 		for (int x=-1; x<=1;x++)
@@ -42,11 +42,11 @@ public override bool use ()
 					if (Random.Range (0,10)>=7)
 					{//catch something or test for encumerance
 						//000~001~099~You catch a lovely fish.
-						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= GameWorldController.instance.playerUW.playerInventory.getEncumberance())
+						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= UWCharacter.Instance.playerInventory.getEncumberance())
 						{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_catch_a_lovely_fish_));
 							GameObject fishy = CreateFish();
-							GameWorldController.instance.playerUW.playerInventory.ObjectInHand=fishy.name;
+							UWCharacter.Instance.playerInventory.ObjectInHand=fishy.name;
 							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
 							if (FishobjInt!=null)
 							{
@@ -86,7 +86,7 @@ public override bool use ()
 		GameObject fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 		fishy.name= ObjectLoader.UniqueObjectName(newobjt);
 		GameWorldController.MoveToInventory(fishy);
-		//newobjt.index= GameWorldController.instance.playerUW.playerInventory.ItemCounter++;
+		//newobjt.index= UWCharacter.Instance.playerInventory.ItemCounter++;
 		
 				//fishy.GetComponent<Food>().Nutrition=5;
 		return fishy;// ObjectInteraction.CreateNewObject(182).gameObject;

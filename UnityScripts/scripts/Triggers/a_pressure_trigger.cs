@@ -79,7 +79,7 @@ public class a_pressure_trigger : trigger_base {
 		TileXToWatch=objInt().tileX;
 		TileYToWatch=objInt().tileY;
 		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
-
+		TileVector=new Vector3(TileVector.x,this.transform.position.y,TileVector.z);
 		int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
 		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
 

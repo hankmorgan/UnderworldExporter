@@ -16,10 +16,10 @@ public class SpellEffectRegenerationHealth : SpellEffect {
 	public override void EffectOverTime ()
 	{
 		base.EffectOverTime ();
-		GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.CurVIT+DOT;
-		if (GameWorldController.instance.playerUW.CurVIT>=GameWorldController.instance.playerUW.MaxVIT)
+		UWCharacter.Instance.CurVIT=UWCharacter.Instance.CurVIT+DOT;
+		if (UWCharacter.Instance.CurVIT>=UWCharacter.Instance.MaxVIT)
 		{
-			GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
+			UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 		}
 	}
 }

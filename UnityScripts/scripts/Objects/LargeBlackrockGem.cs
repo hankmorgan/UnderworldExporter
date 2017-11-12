@@ -19,9 +19,9 @@ public class LargeBlackrockGem : Model3D {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 		else
 		{
@@ -40,17 +40,17 @@ public class LargeBlackrockGem : Model3D {
 				{	
 					int thisGemIndex= objI.item_id-280;
 					int bitField = (1<<thisGemIndex);
-					GameWorldController.instance.playerUW.quest().x_clocks[2]++;
-					GameWorldController.instance.playerUW.quest().QuestVariables[130] |= bitField;
+					Quest.instance.x_clocks[2]++;
+					Quest.instance.QuestVariables[130] |= bitField;
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338));				
-								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338+GameWorldController.instance.playerUW.quest().x_clocks[2]));
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338+Quest.instance.x_clocks[2]));
 					objI.consumeObject();						
 				}
 				else
 				{
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,347));
 				}				
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				return true;
 			}
 		}

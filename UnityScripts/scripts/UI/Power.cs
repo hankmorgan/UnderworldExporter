@@ -35,11 +35,11 @@ public class Power : GuiBase {
 	/// Once it reaches full charge it will loop the max charge animation.
 	/// </summary>
 	public void Update () {
-		if ((PreviousCharge!=GameWorldController.instance.playerUW.PlayerCombat.Charge)||(GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==true))
+		if ((PreviousCharge!=UWCharacter.Instance.PlayerCombat.Charge)||(UWCharacter.Instance.PlayerCombat.AttackCharging==true))
 		{
-				PreviousCharge=GameWorldController.instance.playerUW.PlayerCombat.Charge;
+				PreviousCharge=UWCharacter.Instance.PlayerCombat.Charge;
 			 
-			int index= (int)GameWorldController.instance.playerUW.PlayerCombat.Charge/10;
+			int index= (int)UWCharacter.Instance.PlayerCombat.Charge/10;
 	
 			if (index==10)
 			{

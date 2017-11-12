@@ -7,9 +7,9 @@ public class OrbRock : object_base {
 	{
 		//Spawn an impact
 		Impact.SpawnHitImpact(Impact.ImpactDamage(), orbToDestroy.GetImpactPoint(),46,50);
-		GameWorldController.instance.playerUW.quest().isOrbDestroyed=true;
-		GameWorldController.instance.playerUW.PlayerMagic.MaxMana=GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana;
-		GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+		Quest.instance.isOrbDestroyed=true;
+		UWCharacter.Instance.PlayerMagic.MaxMana=UWCharacter.Instance.PlayerMagic.TrueMaxMana;
+		UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
 		//000-001-133 The orb is destroyed
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,133));
 

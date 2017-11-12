@@ -17,7 +17,7 @@ public class an_inventory_trap : trap_base {
 		//Debug.Log (this.name);
 		int itemToFind = objInt().quality <<5 | objInt().owner;
 		ObjectFound=false;
-		ObjectInteraction foundObjInt = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(itemToFind);
+		ObjectInteraction foundObjInt = UWCharacter.Instance.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)
 		{
 			//Debug.Log("Inventory trap " + this.name + " found " + foundObjInt.name);

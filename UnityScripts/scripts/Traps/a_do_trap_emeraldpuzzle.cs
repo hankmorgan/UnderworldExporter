@@ -28,7 +28,7 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,new Vector3(64.5f,4.0f,24.5f)).gameObject;
 
 
-		//GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+		//GameObject myObj=  new GameObject("SummonedObject_" + UWCharacter.Instance.PlayerMagic.SummonCount++);
 		//myObj.layer=LayerMask.NameToLayer("UWObjects");
 		//myObj.transform.parent=GameWorldController.instance.LevelMarker();
 		//GameWorldController.MoveToWorld(myObj);

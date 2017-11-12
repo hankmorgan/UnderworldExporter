@@ -31,19 +31,19 @@ public class a_hack_trap_teleport : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
-		if (GameWorldController.instance.playerUW.quest().x_clocks[1]<4)
+		if (Quest.instance.x_clocks[1]<4)
 		{
 			availableWorlds[PrisonTower]=true;
 			NoOfWorlds=0;
 		}
-		else if (GameWorldController.instance.playerUW.quest().x_clocks[1]<8)
+		else if (Quest.instance.x_clocks[1]<8)
 		{
 			availableWorlds[PrisonTower]=true;
 			availableWorlds[Killorn]=true;
 			availableWorlds[IceCaverns]=true;
 			NoOfWorlds=2;
 		}
-		else if (GameWorldController.instance.playerUW.quest().x_clocks[1]<13)
+		else if (Quest.instance.x_clocks[1]<13)
 		{
 			availableWorlds[PrisonTower]=true;
 			availableWorlds[Killorn]=true;
@@ -72,7 +72,7 @@ public class a_hack_trap_teleport : a_hack_trap {
 	{
 		int xPos = src.objInt().x;
 		int yPos = src.objInt().y;
-		int variable = GameWorldController.instance.playerUW.quest().variables[6];
+		int variable = Quest.instance.variables[6];
 
 				//x and y positions are as follows.
 				//2,7
@@ -165,8 +165,8 @@ public class a_hack_trap_teleport : a_hack_trap {
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.JustTeleported=true;
-			GameWorldController.instance.playerUW.teleportedTimer=0f;
+			UWCharacter.Instance.JustTeleported=true;
+			UWCharacter.Instance.teleportedTimer=0f;
 			GameWorldController.instance.SwitchLevel(DestinationLevels[WorldToGoto],DestinationTileX[WorldToGoto],DestinationTileY[WorldToGoto]);	
 		}
 	}

@@ -180,7 +180,7 @@ public class NPC : MobileObject {
 			AIRig aiR = newObj.GetComponent<AIRig> ();
 			aiR.AI.Body = this.gameObject;
 			ai = aiR;
-			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", GameWorldController.instance.playerUW.gameObject);
+			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", UWCharacter.Instance.gameObject);
 			ai.AI.WorkingMemory.SetItem<int> ("attackMode", 0);//Default to melee combat
 			ai.AI.Body = this.gameObject;
 			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
@@ -223,7 +223,7 @@ public class NPC : MobileObject {
 
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
-		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
+		UWCharacter.Instance.AddXP(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Exp);
 
 				//Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
 				//Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
@@ -294,21 +294,21 @@ public class NPC : MobileObject {
 									}
 								case 110://The Gazer on level 2
 									{
-									GameWorldController.instance.playerUW.quest().QuestVariables[4]=1;
+									Quest.instance.QuestVariables[4]=1;
 									return false;
 									}
 								case 142://Rodrick
 									{
-									GameWorldController.instance.playerUW.quest().QuestVariables[11]=1;	
+									Quest.instance.QuestVariables[11]=1;	
 									return false;
 									}
 								case 231:	//Tybal
 									{
 									//Play the tybal death cutscene.
-									//GameWorldController.instance.playerUW.quest().isTybalDead=true;
-									GameWorldController.instance.playerUW.quest().GaramonDream=7;//Advance to Tybal is dead range of dreams
-									GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day();//Ensure dream triggers on next sleep
-									GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);
+									//Quest.instance.isTybalDead=true;
+									Quest.instance.GaramonDream=7;//Advance to Tybal is dead range of dreams
+									Quest.instance.DayGaramonDream=GameClock.day();//Ensure dream triggers on next sleep
+									UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);
 									return false;														
 									}
 							}
@@ -322,8 +322,8 @@ public class NPC : MobileObject {
 						switch(npc_whoami)
 						{
 						case 145://The listener under the castle
-							GameWorldController.instance.playerUW.quest().QuestVariables[11]=1;
-							GameWorldController.instance.playerUW.quest().x_clocks[1]++;//Confirm this behaviour!
+							Quest.instance.QuestVariables[11]=1;
+							Quest.instance.x_clocks[1]++;//Confirm this behaviour!
 							return false;
 						}
 						break;
@@ -369,12 +369,12 @@ public class NPC : MobileObject {
 		//}
 
 		//The AI is only active when the player is within a certain distance to the player camera.
-		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
+		if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=8)
 			{
 				if (objInt()!=null)
 				{
 					AI_INIT ();
-					ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
+					ai.AI.IsActive= Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=8;
 					//anim.enabled=true;		
 					//anim.enabled=false;		
 					newAnim.enabled=true;
@@ -413,9 +413,9 @@ public class NPC : MobileObject {
 							case 77:
 							case 78:
 									if (
-											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+											(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)>=2) 
 											&&
-											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+											(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=8) 
 											&&
 											(Ammo>0)
 									)
@@ -439,9 +439,9 @@ public class NPC : MobileObject {
 							case 122:
 							case 123:	//tybal					
 									if (
-											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)>=2) 
+											(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)>=2) 
 											&&
-											(Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=8) 
+											(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=8) 
 									)
 									{//Ranged attack if far away (but not too far)
 											ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
@@ -470,13 +470,13 @@ public class NPC : MobileObject {
 					gtargName="_Gronk";
 					if (gtarg==null)
 					{
-						gtarg=GameWorldController.instance.playerUW.transform.gameObject;				
+						gtarg=UWCharacter.Instance.transform.gameObject;				
 					}
 					else
 					{
 						if (gtarg.name!="_Gronk")
 						{
-							gtarg=GameWorldController.instance.playerUW.transform.gameObject;	
+							gtarg=UWCharacter.Instance.transform.gameObject;	
 						}
 					}
 				}
@@ -506,7 +506,7 @@ public class NPC : MobileObject {
 									{
 										npc_goal=3;
 										npc_gtarg=1;
-										gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+										gtarg=UWCharacter.Instance.transform.gameObject;
 									}
 
 								//NPC Enemy who has defeated their attacker->Focus on player.
@@ -514,7 +514,7 @@ public class NPC : MobileObject {
 								{
 										npc_goal=5;
 										npc_gtarg=1;	
-										gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+										gtarg=UWCharacter.Instance.transform.gameObject;
 								}
 						}
 
@@ -534,7 +534,7 @@ public class NPC : MobileObject {
 			{
 				//If the player comes close and I'm hostile. Make sure I go to combat mode.
 				//Make this variable the detection range when stealth spells are created
-				if ((npc_attitude==0) && (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=GameWorldController.instance.playerUW.DetectionRange))		
+				if ((npc_attitude==0) && (Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=UWCharacter.Instance.DetectionRange))		
 				{
 					npc_goal=5;	//Attack player
 					npc_gtarg=1;
@@ -543,10 +543,10 @@ public class NPC : MobileObject {
 				{
 					case 10://I just want to talk to you
 							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
-							if ((GameWorldController.instance.playerUW.isRoaming==false) 
+							if ((UWCharacter.Instance.isRoaming==false) 
 									&& (ConversationVM.InConversation==false))
 							{
-									if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=1.5)	
+									if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=1.5)	
 									{
 											TalkTo();
 									}	
@@ -569,7 +569,7 @@ public class NPC : MobileObject {
 					case 5://Attack target
 					case 9:
 						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-						if (Room()==GameWorldController.instance.playerUW.room)
+						if (Room()==UWCharacter.Instance.room)
 						{
 							Vector3 AB = this.transform.position - gtarg.transform.position;
 							if(AB.magnitude>1f)
@@ -606,16 +606,16 @@ public class NPC : MobileObject {
 						
 							if (gtarg.name=="_Gronk")
 							{//Help out the player dynamically
-								if (GameWorldController.instance.playerUW.HelpMeMyFriends==true)
+								if (UWCharacter.Instance.HelpMeMyFriends==true)
 								{
-								GameWorldController.instance.playerUW.HelpMeMyFriends=false;
+								UWCharacter.Instance.HelpMeMyFriends=false;
 								//If I'm not already busy with another NPC
-									if(GameWorldController.instance.playerUW.LastEnemyToHitMe!=null)
+									if(UWCharacter.Instance.LastEnemyToHitMe!=null)
 									{
-										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
+										gtarg=UWCharacter.Instance.LastEnemyToHitMe;
 										npc_goal=5;
-										npc_gtarg=(short)GameWorldController.instance.playerUW.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;																
+										npc_gtarg=(short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+										gtargName=UWCharacter.Instance.LastEnemyToHitMe.name;																
 									}
 								}
 								if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
@@ -623,7 +623,7 @@ public class NPC : MobileObject {
 									if (objInt().item_id==124)
 									{
 										npc_goal=5;	
-										gtarg=GameWorldController.instance.playerUW.gameObject;
+										gtarg=UWCharacter.Instance.gameObject;
 									}
 								}
 
@@ -690,14 +690,14 @@ public class NPC : MobileObject {
 				{	
 					//Assumes the player has attacked
 					npc_gtarg=1;
-					gtarg=GameWorldController.instance.playerUW.gameObject;
+					gtarg=UWCharacter.Instance.gameObject;
 					gtargName=gtarg.name;
 					npc_goal=5;
 					if (npc_hp<5)//Low health. 20% Chance for morale break
 					{
 					if (Random.Range(0,5)>=4)
 						{
-							GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther);
+							UWCharacter.Instance.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther);
 						}
 					}
 				}	
@@ -717,7 +717,7 @@ public class NPC : MobileObject {
 								{
 									Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
 									Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
-									Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
+									Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
 									Col.gameObject.GetComponent<NPC>().gtargName=gtarg.name;
 									Col.gameObject.GetComponent<NPC>().npc_goal=5;	
 								}
@@ -823,7 +823,7 @@ public class NPC : MobileObject {
 		//	anim = GetComponentInChildren<Animator>();
 		//}
 		//Get the relative vector between the player and the npc.
-		direction = GameWorldController.instance.playerUW.gameObject.transform.position - this.gameObject.transform.position;
+		direction = UWCharacter.Instance.gameObject.transform.position - this.gameObject.transform.position;
 		//Convert the direction into an angle.
 		angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
 		
@@ -1124,7 +1124,7 @@ public class NPC : MobileObject {
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player
-			TargetingPoint=GameWorldController.instance.playerUW.TargetPoint.transform.position;
+			TargetingPoint=UWCharacter.Instance.TargetPoint.transform.position;
 		}
 		else
 		{//Trying to hit an object						
@@ -1143,9 +1143,9 @@ public class NPC : MobileObject {
 			}
 			else
 			{			
-			if (hit.transform.name == GameWorldController.instance.playerUW.name)
+			if (hit.transform.name == UWCharacter.Instance.name)
 				{	
-					UWCombat.NPC_Hits_PC(GameWorldController.instance.playerUW,this);
+					UWCombat.NPC_Hits_PC(UWCharacter.Instance,this);
 				}
 			else
 				{						
@@ -1177,7 +1177,7 @@ public class NPC : MobileObject {
 	/// </summary>
 	public void ExecuteMagicAttack()
 	{
-		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)>8)
+		if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)>8)
 		{
 			return;						
 		}
@@ -1189,14 +1189,14 @@ public class NPC : MobileObject {
 	/// </summary>
 	public void ExecuteRangedAttack()
 	{
-		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)>8)
+		if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)>8)
 		{
 			return;						
 		}
 		Vector3 TargetingPoint;
 		if (gtarg.name=="_Gronk")
 		{//Try and hit the player
-			TargetingPoint=GameWorldController.instance.playerUW.TargetPoint.transform.position;
+			TargetingPoint=UWCharacter.Instance.TargetPoint.transform.position;
 		}
 		else
 		{//Trying to hit an object						

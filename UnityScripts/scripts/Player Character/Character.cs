@@ -121,7 +121,7 @@ public class Character : UWEBase {
 		if (_RES==GAME_SHOCK)
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;
-			GameWorldController.instance.playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
+			UWCharacter.Instance.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		}
 	}
 

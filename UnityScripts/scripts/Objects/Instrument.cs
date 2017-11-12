@@ -23,7 +23,7 @@ public class Instrument : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
 				if (PlayingInstrument==false)
 				{
@@ -33,7 +33,7 @@ public class Instrument : object_base {
 			}
 			else
 			{
-				return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 			}
 		}
 		else
@@ -49,7 +49,7 @@ public class Instrument : object_base {
 	public void PlayInstrument()
 	{
 		WindowDetectUW.WaitingForInput=true;
-		GameWorldController.instance.playerUW.playerMotor.enabled=false;
+		UWCharacter.Instance.playerMotor.enabled=false;
 		PlayingInstrument=true;
 		CurrentInstrument=this.name;
 		GameWorldController.instance.getMus().Stop ();
@@ -86,7 +86,7 @@ public class Instrument : object_base {
 			PlayingInstrument=false;
 			CurrentInstrument="";
 			WindowDetectUW.WaitingForInput=false;
-			GameWorldController.instance.playerUW.playerMotor.enabled=true;
+			UWCharacter.Instance.playerMotor.enabled=true;
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_put_the_instrument_down_));
 			GameWorldController.instance.getMus().Resume();
 			//354237875
@@ -95,7 +95,7 @@ public class Instrument : object_base {
 				if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
 				{
 					//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-					if ((GameWorldController.instance.LevelNo==2) && (GameWorldController.instance.playerUW.quest().isCupFound==false) && (objInt().item_id==292))
+					if ((GameWorldController.instance.LevelNo==2) && (Quest.instance.isCupFound==false) && (objInt().item_id==292))
 					{									
 						int tileX=TileMap.visitTileX;
 						int tileY=TileMap.visitTileY;
@@ -111,11 +111,11 @@ public class Instrument : object_base {
 							/*	ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
 							myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 							GameWorldController.MoveToInventory(myObjInt.gameObject);*/
-							GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
+							UWCharacter.Instance.playerInventory.ObjectInHand=myObjInt.name;
 							UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
-							GameWorldController.instance.playerUW.quest().isCupFound=true;
+							Quest.instance.isCupFound=true;
 							//An object appears in the air and falls into your hands
 							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
 

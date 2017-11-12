@@ -55,10 +55,10 @@ public class UWCombat : Combat {
 		{
 			///If ranged check for ammo as defined by the Weapon
 			/// If ammo if found give the player a targeting crosshair
-			currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType());
+			currentAmmo=UWCharacter.Instance.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType());
 			if ((currentAmmo == null) && (ObjectInteraction.Alias(currWeaponRanged.AmmoType())!=currWeaponRanged.AmmoType()))
 			{//Ammo type has an alias. try and find that instead.
-				currentAmmo=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(ObjectInteraction.Alias(currWeaponRanged.AmmoType()));
+				currentAmmo=UWCharacter.Instance.playerInventory.findObjInteractionByID(ObjectInteraction.Alias(currWeaponRanged.AmmoType()));
 			}
 			if (currentAmmo==null)
 			{//No ammo.
@@ -100,7 +100,7 @@ public class UWCombat : Combat {
 		yield return new WaitForSeconds(0.4f);
 		
 		Ray ray ;
-		if (GameWorldController.instance.playerUW.MouseLookEnabled==true)
+		if (UWCharacter.Instance.MouseLookEnabled==true)
 		{
 			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		}
@@ -120,11 +120,11 @@ public class UWCombat : Combat {
 					switch (objInt.GetItemType())
 					{
 					case ObjectInteraction.NPC_TYPE:
-						PC_Hits_NPC(GameWorldController.instance.playerUW,currWeapon,CurrentStrike,StrikeCharge,objInt.GetComponent<NPC>(), hit);
+						PC_Hits_NPC(UWCharacter.Instance,currWeapon,CurrentStrike,StrikeCharge,objInt.GetComponent<NPC>(), hit);
 						break;
 					default:
 						Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin +  hit.point)/2f,46,50);
-						objInt.Attack((short)GetPlayerBaseDamage(currWeapon,CurrentStrike),GameWorldController.instance.playerUW.gameObject);
+						objInt.Attack((short)GetPlayerBaseDamage(currWeapon,CurrentStrike),UWCharacter.Instance.gameObject);
 						break;
 					}
 				}
@@ -142,8 +142,8 @@ public class UWCombat : Combat {
 
 					if (ObjectInteraction.PlaySoundEffects)
 					{
-						GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
-						GameWorldController.instance.playerUW.aud.Play();
+						UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
+						UWCharacter.Instance.aud.Play();
 					}
 				}
 			}
@@ -152,8 +152,8 @@ public class UWCombat : Combat {
 		{
 			if (ObjectInteraction.PlaySoundEffects)
 			{
-				GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
-				GameWorldController.instance.playerUW.aud.Play();
+				UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_1];
+				UWCharacter.Instance.aud.Play();
 			}
 			if (currWeapon!=null)
 			{
@@ -299,7 +299,7 @@ public class UWCombat : Combat {
 	/// <returns>The race.</returns>
 	public string GetRace()
 	{
-		switch (GameWorldController.instance.playerUW.Body)
+		switch (UWCharacter.Instance.Body)
 		{
 		case 0:
 		case 2 :
@@ -317,7 +317,7 @@ public class UWCombat : Combat {
 	/// <returns>The hand.</returns>
 	public string GetHand()
 	{
-		if (GameWorldController.instance.playerUW.isLefty)
+		if (UWCharacter.Instance.isLefty)
 		{
 			return "Left";
 		}
@@ -329,7 +329,7 @@ public class UWCombat : Combat {
 
 		public short GetHandOffset()
 		{
-				if (GameWorldController.instance.playerUW.isLefty)
+				if (UWCharacter.Instance.isLefty)
 				{
 						return 28;
 				}
@@ -346,7 +346,7 @@ public class UWCombat : Combat {
 	/// <returns>The strike type.</returns>
 	public string GetStrikeType()
 	{
-		if (!GameWorldController.instance.playerUW.MouseLookEnabled)
+		if (!UWCharacter.Instance.MouseLookEnabled)
 		{
 				if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
 				{
@@ -379,7 +379,7 @@ public class UWCombat : Combat {
 
 		public short GetStrikeOffset()
 		{
-				if (!GameWorldController.instance.playerUW.MouseLookEnabled)
+				if (!UWCharacter.Instance.MouseLookEnabled)
 				{
 						if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
 						{
@@ -420,7 +420,7 @@ public class UWCombat : Combat {
 		if (currentAmmo!=null)
 		{
 			Ray ray ;
-			if (GameWorldController.instance.playerUW.MouseLookEnabled==true)
+			if (UWCharacter.Instance.MouseLookEnabled==true)
 			{
 				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 			}
@@ -438,7 +438,7 @@ public class UWCombat : Combat {
 				if(currentAmmo.GetQty()==1)
 				{
 					launchedItem = currentAmmo.gameObject;
-					GameWorldController.instance.playerUW.playerInventory.RemoveItem(currentAmmo.name);	
+					UWCharacter.Instance.playerInventory.RemoveItem(currentAmmo.name);	
 					launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
 					GameWorldController.MoveToWorld(launchedItem);
 					launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);
@@ -461,10 +461,10 @@ public class UWCombat : Combat {
 				myObjChild.transform.parent =launchedItem.transform;
 				///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
-				pd.Source=GameWorldController.instance.playerUW.gameObject;
+				pd.Source=UWCharacter.Instance.gameObject;
 				pd.Damage= (short)currWeaponRanged.Damage(); //   (short)(10.0f*(Charge/100.0f));
 				pd.AttackCharge=charge;
-				pd.AttackScore = GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillAttack)/2 +  GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillMissile);	
+				pd.AttackScore = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillAttack)/2 +  UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillMissile);	
 				return true;
 			}
 			else
@@ -618,8 +618,8 @@ public class UWCombat : Combat {
 				MusicController.LastAttackCounter=10.0f; //Ten more seconds of combat music
 				if (ObjectInteraction.PlaySoundEffects)
 				{
-					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
-					GameWorldController.instance.playerUW.aud.Play();
+					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+					UWCharacter.Instance.aud.Play();
 				}
 			}		
 		}

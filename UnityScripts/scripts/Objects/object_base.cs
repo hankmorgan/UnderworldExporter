@@ -46,7 +46,7 @@ public class object_base : UWEBase {
 		//objInt = this.gameObject.GetComponent<ObjectInteraction>();
 	/*	if (playerUW==null)
 		{
-			playerUW=GameWorldController.instance.playerUW;
+			playerUW=UWCharacter.Instance;
 		}
 		if (ml==null)
 		{
@@ -108,7 +108,7 @@ public class object_base : UWEBase {
 		{
 			FailMessage();
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+			UWCharacter.Instance.playerInventory.ObjectInHand="";
 			return true;
 		}
 		else
@@ -124,7 +124,7 @@ public class object_base : UWEBase {
 	public virtual bool use()
 	{
 		//CheckReferences();
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand =="")
 		{
 			if ((objInt().CanBeUsed==true) && (objInt().PickedUp==true))
 			{
@@ -148,7 +148,7 @@ public class object_base : UWEBase {
 		}
 		else
 		{
-		return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+		return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -173,7 +173,7 @@ public class object_base : UWEBase {
 	public void BecomeObjectInHand()
 	{//In order to use it.
 		UWHUD.instance.CursorIcon= objInt().GetInventoryDisplay().texture;
-		GameWorldController.instance.playerUW.playerInventory.ObjectInHand=this.name;
+		UWCharacter.Instance.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
 	}
@@ -216,7 +216,7 @@ public class object_base : UWEBase {
 		{
 			if (((objInt().owner & 0x1f))!=0)
 			{
-				SignalTheft(GameWorldController.instance.playerUW.transform.position, objInt().owner , 4f);
+				SignalTheft(UWCharacter.Instance.transform.position, objInt().owner , 4f);
 				objInt().owner=0;
 			}	
 		}
@@ -425,7 +425,7 @@ public class object_base : UWEBase {
 							PickAvail=false;
 					}	
 				}
-				if((UWCharacter.InteractionMode==UWCharacter.InteractionModePickup) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!=""))
+				if((UWCharacter.InteractionMode==UWCharacter.InteractionModePickup) && (UWCharacter.Instance.playerInventory.ObjectInHand!=""))
 				{//I'm actually throwing something.
 						UseAvail=false;		
 						UseableDesc="";
@@ -640,8 +640,8 @@ public class object_base : UWEBase {
 						{
 							Col.gameObject.GetComponent<NPC>().npc_attitude=0;
 							Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
-							Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
-							Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;
+							Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
+							Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;
 							Col.gameObject.GetComponent<NPC>().npc_goal=5;	
 							reaction = StringController.instance.GetString(1,StringController.str__is_angered_by_your_action_);
 						}

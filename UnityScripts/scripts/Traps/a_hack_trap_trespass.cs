@@ -10,7 +10,7 @@ public class a_hack_trap_trespass : a_hack_trap {
 		Debug.Log("A trespass trap " + objInt().owner + " "  + this.name );
 		if (((objInt().owner & 0x1f))!=0)
 		{
-			SignalTheft(GameWorldController.instance.playerUW.transform.position, objInt().owner,7f);
+			SignalTheft(UWCharacter.Instance.transform.position, objInt().owner,7f);
 		}	
 	}
 

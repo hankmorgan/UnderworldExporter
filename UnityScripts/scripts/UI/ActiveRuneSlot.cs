@@ -37,9 +37,9 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		/*Checks the set value on the player and if different display the new rune.*/
 		for (int i=0; i<3;i++)
 		{
-				if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]!=-1)
+				if (UWCharacter.Instance.PlayerMagic.ActiveRunes[i]!=-1)
 				{
-					UWHUD.instance.activeRunes[i].thisRune.texture = runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]];				
+					UWHUD.instance.activeRunes[i].thisRune.texture = runes[UWCharacter.Instance.PlayerMagic.ActiveRunes[i]];				
 				}
 				else
 				{
@@ -49,13 +49,13 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		}
 
 				/*
-		if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
+		if (UWCharacter.Instance.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
 		{
-			setRune= GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber];
-			if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
+			setRune= UWCharacter.Instance.PlayerMagic.ActiveRunes[SlotNumber];
+			if (UWCharacter.Instance.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
 				
-				thisRune.texture=runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
+				thisRune.texture=runes[UWCharacter.Instance.PlayerMagic.ActiveRunes[SlotNumber]];
 			}
 			else
 			{
@@ -72,12 +72,12 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		}
 		if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)){return;}
 
-		if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell=="")
+		if (UWCharacter.Instance.PlayerMagic.ReadiedSpell=="")
 		{
-			if (GameWorldController.instance.playerUW.PlayerMagic.TestSpellCast(GameWorldController.instance.playerUW,GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2]))
+			if (UWCharacter.Instance.PlayerMagic.TestSpellCast(UWCharacter.Instance,UWCharacter.Instance.PlayerMagic.ActiveRunes[0],UWCharacter.Instance.PlayerMagic.ActiveRunes[1],UWCharacter.Instance.PlayerMagic.ActiveRunes[2]))
 			{
-				GameWorldController.instance.playerUW.PlayerMagic.castSpell(GameWorldController.instance.playerUW.gameObject,GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2],true);
-				GameWorldController.instance.playerUW.PlayerMagic.ApplySpellCost();
+				UWCharacter.Instance.PlayerMagic.castSpell(UWCharacter.Instance.gameObject,UWCharacter.Instance.PlayerMagic.ActiveRunes[0],UWCharacter.Instance.PlayerMagic.ActiveRunes[1],UWCharacter.Instance.PlayerMagic.ActiveRunes[2],true);
+				UWCharacter.Instance.PlayerMagic.ApplySpellCost();
 			}
 		}
 	}

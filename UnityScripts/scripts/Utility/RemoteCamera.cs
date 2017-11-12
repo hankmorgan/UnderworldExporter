@@ -26,7 +26,7 @@ public class RemoteCamera : MonoBehaviour {
 		}
 
 		myMat = ScreenToDisplayOn.GetComponent<Renderer>().materials;
-		player=GameWorldController.instance.playerUW.gameObject;//GameObject.Find ("Gronk");
+		player=UWCharacter.Instance.gameObject;//GameObject.Find ("Gronk");
 	}
 	
 	// Update is called once per frame

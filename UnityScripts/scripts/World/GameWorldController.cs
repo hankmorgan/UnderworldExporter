@@ -154,13 +154,13 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// The player character.
 	/// </summary>
-	[SerializeField]
+	/*[SerializeField]
 	private UWCharacter _playerUW;
 	public UWCharacter playerUW {
 		get { return _playerUW; }
 		set { _playerUW=value; }
 		}
-
+*/
 
 	/// <summary>
 	/// The music controller for the game
@@ -437,10 +437,10 @@ public class GameWorldController : UWEBase {
 				switch(res)
 				{
 				case GAME_TNOVA:
-						GameWorldController.instance.playerUW.XAxis.enabled=true;
-						GameWorldController.instance.playerUW.YAxis.enabled=true;
-						GameWorldController.instance.playerUW.MouseLookEnabled=true;
-						GameWorldController.instance.playerUW.speedMultiplier=20;
+						UWCharacter.Instance.XAxis.enabled=true;
+						UWCharacter.Instance.YAxis.enabled=true;
+						UWCharacter.Instance.MouseLookEnabled=true;
+						UWCharacter.Instance.speedMultiplier=20;
 						break;
 				case GAME_SHOCK:
 						palLoader = new PaletteLoader();
@@ -451,10 +451,10 @@ public class GameWorldController : UWEBase {
 						objectMaster=new ObjectMasters();
 						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
 						ShockObjProp= new ObjectPropLoader();
-						GameWorldController.instance.playerUW.XAxis.enabled=true;
-						GameWorldController.instance.playerUW.YAxis.enabled=true;
-						GameWorldController.instance.playerUW.MouseLookEnabled=true;
-						GameWorldController.instance.playerUW.speedMultiplier=20;
+						UWCharacter.Instance.XAxis.enabled=true;
+						UWCharacter.Instance.YAxis.enabled=true;
+						UWCharacter.Instance.MouseLookEnabled=true;
+						UWCharacter.Instance.speedMultiplier=20;
 						break;
 				default:
 						MusicController.Begin();
@@ -520,17 +520,17 @@ public class GameWorldController : UWEBase {
 						bGenNavMeshes=false;
 						UWHUD.instance.gameObject.SetActive(false);
 						UWHUD.instance.window.SetFullScreen();
-						playerUW.isFlying=true;
-						playerUW.playerMotor.enabled=true;
-						GameWorldController.instance.playerUW.playerCam.backgroundColor=Color.white;
+						UWCharacter.Instance.isFlying=true;
+						UWCharacter.Instance.playerMotor.enabled=true;
+						UWCharacter.Instance.playerCam.backgroundColor=Color.white;
 						SwitchTNovaMap("");
 						return;
 				case GAME_SHOCK:
 						TileMapRenderer.EnableCollision=false;
 						bGenNavMeshes=false;
 						AtMainMenu=false;
-						playerUW.isFlying=true;
-						playerUW.playerMotor.enabled=true;
+						UWCharacter.Instance.isFlying=true;
+						UWCharacter.Instance.playerMotor.enabled=true;
 						UWHUD.instance.gameObject.SetActive(false);
 						UWHUD.instance.window.SetFullScreen();
 						SwitchLevel(startLevel);
@@ -540,25 +540,25 @@ public class GameWorldController : UWEBase {
 						//case GAME_UW2:
 						//UW Demo does not go to the menu. It will load automatically into the gameworld
 						AtMainMenu=false;	
-						GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+						UWCharacter.Instance.transform.position= GameWorldController.instance.StartPos;
 						UWHUD.instance.Begin();
-						playerUW.Begin();
-						playerUW.playerInventory.Begin();
+						UWCharacter.Instance.Begin();
+						UWCharacter.Instance.playerInventory.Begin();
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 						break;
 				case GAME_UW2:
 						UWHUD.instance.Begin();
-						playerUW.Begin();
-						playerUW.playerInventory.Begin();
-						playerUW.quest().QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
+						UWCharacter.Instance.Begin();
+						UWCharacter.Instance.playerInventory.Begin();
+						Quest.instance.QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 						convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
 						break;		
 				default:
 						UWHUD.instance.Begin();
-						playerUW.Begin();
-						playerUW.playerInventory.Begin();
+						UWCharacter.Instance.Begin();
+						UWCharacter.Instance.playerInventory.Begin();
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
 						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 						break;
@@ -576,9 +576,9 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.CutsceneFullPanel.SetActive(true);
 						UWHUD.instance.mainmenu.gameObject.SetActive(true);
 						//Freeze player movement and put them at a set location
-						playerUW.playerController.enabled=false;
-						playerUW.playerMotor.enabled=false;
-						playerUW.transform.position=Vector3.zero;
+						UWCharacter.Instance.playerController.enabled=false;
+						UWCharacter.Instance.playerMotor.enabled=false;
+						UWCharacter.Instance.transform.position=Vector3.zero;
 
 						getMus().InIntro=true;
 				}
@@ -861,8 +861,8 @@ public class GameWorldController : UWEBase {
 			float targetX=(float)newTileX*1.2f + 0.6f;
 			float targetY= (float)newTileY*1.2f + 0.6f;
 			float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
-			GameWorldController.instance.playerUW.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-			GameWorldController.instance.playerUW.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);;
+			UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+			UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);;
 		}
 
 		// This will regenerate the navigation mesh when called
@@ -983,9 +983,9 @@ public class GameWorldController : UWEBase {
 			{
 					return;
 			}
-			TileMap.visitTileX =(short)(playerUW.transform.position.x/1.2f);
-			TileMap.visitTileY =(short)(playerUW.transform.position.z/1.2f);
-			instance.playerUW.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
+			TileMap.visitTileX =(short)(UWCharacter.Instance.transform.position.x/1.2f);
+			TileMap.visitTileY =(short)(UWCharacter.Instance.transform.position.z/1.2f);
+			UWCharacter.Instance.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
 
 			if (EditorMode)
 			{
@@ -998,7 +998,7 @@ public class GameWorldController : UWEBase {
 				}
 			}
 			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-			GameWorldController.instance.playerUW.isSwimming=((TileMap.OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+			UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
 			for (int x=-1; x<=1;x++)
 			{
 					for (int y=-1; y<=1;y++)
@@ -1655,9 +1655,9 @@ public class GameWorldController : UWEBase {
 					{
 						return;
 					}
-					playerUW.playerCam.GetComponent<Light>().range=200f;
-					playerUW.playerCam.farClipPlane=3000f;
-						playerUW.playerCam.renderingPath = RenderingPath.DeferredShading;
+					UWCharacter.Instance.playerCam.GetComponent<Light>().range=200f;
+					UWCharacter.Instance.playerCam.farClipPlane=3000f;
+						UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
 					TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
 
 			}

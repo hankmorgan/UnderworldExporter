@@ -469,7 +469,7 @@ public class ConversationVM : UWEBase {
 				UWHUD.instance.NPCName.text=npcname;	
 			}				
 			
-			UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+			UWHUD.instance.PCName.text= UWCharacter.Instance.CharName;
 
 
 
@@ -494,15 +494,15 @@ public class ConversationVM : UWEBase {
 			RawImage portrait = UWHUD.instance.ConversationPortraits[0];
 			RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
 			GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
-			if (GameWorldController.instance.playerUW.isFemale)
+			if (UWCharacter.Instance.isFemale)
 			{
-					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body+5).ToString("0000"));//TODO:playerbody
-					portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body+5);
+					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body+5).ToString("0000"));//TODO:playerbody
+					portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body+5);
 			}
 			else
 			{
-					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody		
-					portrait.texture= grPCHead.LoadImageAt(GameWorldController.instance.playerUW.Body);
+					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body).ToString("0000"));//TODO:playerbody		
+					portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body);
 			}
 
 			switch (_RES)
@@ -542,7 +542,7 @@ public class ConversationVM : UWEBase {
 			/*End UI Setup*/
 
 			///Cancels player movement
-			GameWorldController.instance.playerUW.playerMotor.enabled=false;
+			UWCharacter.Instance.playerMotor.enabled=false;
 
 			///Sets the music to the conversation theme
 			if  (GameWorldController.instance.getMus()!=null)
@@ -1104,8 +1104,8 @@ public class ConversationVM : UWEBase {
 
 
 				///Give movement back to the player			
-				GameWorldController.instance.playerUW.playerMotor.enabled=true;
-				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				UWCharacter.Instance.playerMotor.enabled=true;
+				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 
 				///Return any items in the trade area to their owner
 				for (int i =0; i <=3; i++)
@@ -1118,7 +1118,7 @@ public class ConversationVM : UWEBase {
 								npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 								cn.AddItemToContainer(npcSlot.objectInSlot);
 								npcSlot.clear ();
-								GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+								UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
 							}
 							else
 							{
@@ -1152,7 +1152,7 @@ public class ConversationVM : UWEBase {
 				{
 						GameWorldController.instance.getMus().InMap=false;
 				}
-				if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+				if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
 				{
 						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 				}
@@ -1241,7 +1241,7 @@ public class ConversationVM : UWEBase {
 										stack.Set(address,npc.npc_xhome);break;
 								case "play_sex":
 										{
-											if (GameWorldController.instance.playerUW.isFemale)
+											if (UWCharacter.Instance.isFemale)
 											{
 												stack.Set(address, 1);
 											}
@@ -1254,22 +1254,22 @@ public class ConversationVM : UWEBase {
 
 								//case "play_drawn":
 								case "play_poison":
-										stack.Set(address,GameWorldController.instance.playerUW.play_poison);break;
+										stack.Set(address,UWCharacter.Instance.play_poison);break;
 								case "play_name":
-										stack.Set(address,StringController.instance.AddString(conv[currConv].StringBlock,GameWorldController.instance.playerUW.CharName));break;
+										stack.Set(address,StringController.instance.AddString(conv[currConv].StringBlock,UWCharacter.Instance.CharName));break;
 								//case "new_player_exp":
 								case "play_level":
-										stack.Set(address,GameWorldController.instance.playerUW.CharLevel);break;
+										stack.Set(address,UWCharacter.Instance.CharLevel);break;
 								case "play_mana":
-										stack.Set(address,GameWorldController.instance.playerUW.PlayerMagic.CurMana);break;
+										stack.Set(address,UWCharacter.Instance.PlayerMagic.CurMana);break;
 								case "play_hp":
-										stack.Set(address,GameWorldController.instance.playerUW.CurVIT);break;
+										stack.Set(address,UWCharacter.Instance.CurVIT);break;
 								//case "play_power":
 										
 								//case "play_arms":
 							//	case "play_health":
 								case "play_hunger":
-										stack.Set(address,GameWorldController.instance.playerUW.FoodLevel);break;
+										stack.Set(address,UWCharacter.Instance.FoodLevel);break;
 							default:
 								//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
 								break;
@@ -1963,7 +1963,7 @@ public class ConversationVM : UWEBase {
 								{
 									TextLine=TextSubstitute(TextLine);
 								}
-								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
+								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",UWCharacter.Instance.CharName));
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
 								//PlayerInput.text += (j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i))) + "\n";
 								UWHUD.instance.MessageScroll.Add(j++ + "." +  TextLine + "");//  \n
@@ -2184,14 +2184,14 @@ public class ConversationVM : UWEBase {
 		{
 			if (_RES==GAME_UW2)
 			{
-				Debug.Log("Checking Quest no " + QuestNo + " it's value is " + GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo]);
+				Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.instance.QuestVariables[QuestNo]);
 			}
-			if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
+			if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
 			{
 				Debug.Log("invalid quest no " + QuestNo);
 				return 0;
 			}
-			return GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo];
+			return Quest.instance.QuestVariables[QuestNo];
 		}
 
 		/// <summary>
@@ -2205,12 +2205,12 @@ public class ConversationVM : UWEBase {
 			{
 				Debug.Log("Setting Quest no " + QuestNo + " to " + value);
 			}
-			if (QuestNo> GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0))
+			if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
 			{
 				Debug.Log("Setting invalid quest no " + QuestNo);
 				return;
 			}
-			GameWorldController.instance.playerUW.quest().QuestVariables[QuestNo]=value;
+			Quest.instance.QuestVariables[QuestNo]=value;
 		}
 
 		/// <summary>
@@ -2226,14 +2226,14 @@ public class ConversationVM : UWEBase {
 			{
 				if (mode==10001)
 				{					
-					Debug.Log("Returning skill " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(skillToChange));
-					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+					Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange));
+					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
 				}
 				else
 				{
-					Debug.Log("Possibly setting skill to " + GameWorldController.instance.playerUW.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
-					GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(skillToChange,mode);
-					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+					Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
+					UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,mode);
+					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
 				}		
 			}
 			else
@@ -2242,12 +2242,12 @@ public class ConversationVM : UWEBase {
 				switch (mode)
 				{
 				case 9999://Return the skill value
-					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
 				case 10001: //Increase the skill if points are available. Returns 1 if sucess 0 if fail
-					if (GameWorldController.instance.playerUW.TrainingPoints>0)
+					if (UWCharacter.Instance.TrainingPoints>0)
 					{
-						GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(skillToChange,1);
-						GameWorldController.instance.playerUW.TrainingPoints--;
+						UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,1);
+						UWCharacter.Instance.TrainingPoints--;
 						return 1;
 					}
 					else
@@ -2255,8 +2255,8 @@ public class ConversationVM : UWEBase {
 						return 0;
 					}
 				default://Set the skill to the specified value.
-					GameWorldController.instance.playerUW.PlayerSkills.SetSkill(skillToChange,mode);
-					return GameWorldController.instance.playerUW.PlayerSkills.GetSkill(skillToChange);
+					UWCharacter.Instance.PlayerSkills.SetSkill(skillToChange,mode);
+					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
 				}
 			}			
 		}
@@ -2407,7 +2407,7 @@ public class ConversationVM : UWEBase {
 		//Another example goldthirst who specifically has an item id to pass.
 		int playerHasSpace=1;
 		Container cn = npc.gameObject.GetComponent<Container>();
-		Container PlayerContainer = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
+		Container PlayerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
 
 		if (arg1<1000)
 		{//I'm taking a specific item.
@@ -2460,7 +2460,7 @@ public class ConversationVM : UWEBase {
 		GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt ((short)index);
 		if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
 		 {
-			demanded.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+			demanded.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
 			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
 			PlayerContainer.AddItemToContainer (demanded.name);
 			if (demanded.GetComponent<Container>())
@@ -2474,7 +2474,7 @@ public class ConversationVM : UWEBase {
 						if (containerItem!=null)
 						{
 							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
-							containerItem.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+							containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
 							GameWorldController.MoveToInventory(containerItem);
 							containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
 						}
@@ -2483,7 +2483,7 @@ public class ConversationVM : UWEBase {
 			}
 			demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
 			GameWorldController.MoveToInventory(demanded);
-			GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+			UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
 			return 1;
 		}
 		else
@@ -2624,7 +2624,7 @@ public class ConversationVM : UWEBase {
    description:  declines trade offer (?)
 		*/
 
-				Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 				for (int i =0; i <=3; i++)
 				{
 					TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
@@ -2632,10 +2632,10 @@ public class ConversationVM : UWEBase {
 					{//Move the object to the players container or to the ground
 						if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 						{
-							//GameWorldController.instance.playerUW.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+							//UWCharacter.Instance.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
 							cn.AddItemToContainer(pcSlot.objectInSlot);
 							pcSlot.clear ();
-							GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+							UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
 						}
 						else
 						{
@@ -2700,7 +2700,7 @@ public class ConversationVM : UWEBase {
 				{
 						yield return StartCoroutine (say_op (arg5));
 						//for the moment move to the player's backpack or if no room there drop them on the ground
-						//Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+						//Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 						for (int i =0; i <=3; i++)
 						{
 								TakeFromNPC (npc,i);//Takes from the NPC slot if selected
@@ -2792,7 +2792,7 @@ public class ConversationVM : UWEBase {
 		/// Use only in bartering as this does not refer to the master object list!
 		private void TakeFromNPC (NPC npc, int SlotNo)
 		{
-			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+			Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
 			//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.isSelected ()) {
@@ -2806,7 +2806,7 @@ public class ConversationVM : UWEBase {
 					GameWorldController.MoveToInventory(demanded);
 					demanded.transform.position = Vector3.zero;
 					npcSlot.clear ();
-					GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+					UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
 					demanded.GetComponent<ObjectInteraction>().PickedUp=true;
 				}
 				else {
@@ -2826,7 +2826,7 @@ public class ConversationVM : UWEBase {
 		/// <param name="slotNo">Slot no.</param>
 		void TakeFromPC (NPC npc, int slotNo)
 		{
-				Container cn = npc.GetComponent<Container> ();//GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn = npc.GetComponent<Container> ();//GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 				TradeSlot pcSlot = UWHUD.instance.playerTrade [slotNo];
 				if (pcSlot.isSelected ()) {
 						//Move the object to the container or to the ground
@@ -2856,7 +2856,7 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		void RestorePCsInventory (NPC npc)
 		{
-			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+			Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			for (int i = 0; i <= 3; i++) {
 				TradeSlot pcSlot = UWHUD.instance.playerTrade [i];
 				if (pcSlot.objectInSlot != "") {
@@ -2866,7 +2866,7 @@ public class ConversationVM : UWEBase {
 						//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
 						cn.AddItemToContainer (pcSlot.objectInSlot);
 						pcSlot.clear ();
-						GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+						UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
 					}
 					else {
 						GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
@@ -3104,9 +3104,9 @@ public class ConversationVM : UWEBase {
 					{
 						for (int i=rangeS; i<=rangeE;i++)		
 						{
-							//string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(i);
+							//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(i);
 							//obj= GameObject.Find(itemname);	
-							obj = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(i);
+							obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(i);
 							if (obj!=null)
 							{
 								break;
@@ -3115,8 +3115,8 @@ public class ConversationVM : UWEBase {
 					}
 					else
 					{
-						//string itemname =	GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id);
-						obj = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(item_id);
+						//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(item_id);
+						obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
 						//obj= GameObject.Find(itemname);	
 					}
 
@@ -3274,8 +3274,8 @@ public class ConversationVM : UWEBase {
 									if (attitude==0)
 									{		
 										Col.gameObject.GetComponent<NPC>().npc_gtarg=5;
-										Col.gameObject.GetComponent<NPC>().gtarg=GameWorldController.instance.playerUW.gameObject;
-										Col.gameObject.GetComponent<NPC>().gtargName=GameWorldController.instance.playerUW.gameObject.name;	
+										Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
+										Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;	
 										Col.gameObject.GetComponent<NPC>().npc_goal=5;	
 									}
 								}
@@ -3375,7 +3375,7 @@ public class ConversationVM : UWEBase {
 			//   id=002a name="remove_talker" ret_type=void
 			//parameters:   none
 			//		description:  removes npc the player is talking to (?)
-		npc.gameObject.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+		npc.gameObject.transform.position = UWCharacter.Instance.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
 	}
 
 
@@ -3420,7 +3420,7 @@ return value: none
 				GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 				//UWHUD.instance.playerTrade[slotNo].clear ();
 				
-				GameWorldController.instance.playerUW.playerInventory.Refresh();
+				UWCharacter.Instance.playerInventory.Refresh();
 			}
 			else
 			{//Clone the object and give the clone to the npc
@@ -3442,7 +3442,7 @@ return value: none
 						objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
 						
 						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-												//Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
+												//Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
 						Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().objectloaderinfo);//(objGiven.GetComponent<ObjectInteraction>()
 						cn.AddItemToContainer(objGiven.name);
 					}
@@ -3453,7 +3453,7 @@ return value: none
 						cn.AddItemToContainer(objGiven.name);
 						objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
 						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-						GameWorldController.instance.playerUW.playerInventory.Refresh();
+						UWCharacter.Instance.playerInventory.Refresh();
 						//UWHUD.instance.playerTrade[slotNo].clear ();
 					}
 				}
@@ -3479,7 +3479,7 @@ return value: none
 		//return value: 1: ok, 2: player has no space left
 		string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
 		int playerHasSpace=1;
-		Container playerContainer = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
+		Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
 		//Container npcContainer = npc.GetComponent<Container>();
 
 		GameObject obj = GameObject.Find(ItemName);
@@ -3504,7 +3504,7 @@ return value: none
 						if (containerItem!=null)
 						{
 							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
-							containerItem.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+							containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
 							GameWorldController.MoveToInventory(containerItem);
 							containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
 						}
@@ -3512,7 +3512,7 @@ return value: none
 				}
 			}
 			obj.GetComponent<ObjectInteraction>().PickedUp=true;
-			GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
+			UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
 			playerHasSpace=1;
 		}
 		else
@@ -3632,7 +3632,7 @@ return value: none
 		/// <param name="ParamMale">male string</param>
 		public int sex(int ParamFemale, int ParamMale)
 		{
-			if (GameWorldController.instance.playerUW.isFemale==true)
+			if (UWCharacter.Instance.isFemale==true)
 			{
 				return ParamFemale;
 			}
@@ -3803,11 +3803,11 @@ description:  places a generated object in underworld
 	public int x_traps( int VariableValue, int VariableIndex)
 	{
 		Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
-		if (VariableValue<= GameWorldController.instance.playerUW.quest().variables.GetUpperBound(0))
+		if (VariableValue<= Quest.instance.variables.GetUpperBound(0))
 		{					
-			GameWorldController.instance.playerUW.quest().variables[VariableIndex]=VariableValue;
+			Quest.instance.variables[VariableIndex]=VariableValue;
 		}
-		return GameWorldController.instance.playerUW.quest().variables[VariableIndex];		
+		return Quest.instance.variables[VariableIndex];		
 	}
 
 
@@ -3840,13 +3840,13 @@ description:  places a generated object in underworld
 			//Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
 			if (unk1==10001)
 			{
-				Debug.Log("x_clock returning: " + GameWorldController.instance.playerUW.quest().x_clocks[unk2] + " from " + unk2);
-				stack.result_register= GameWorldController.instance.playerUW.quest().x_clocks[unk2];
+				Debug.Log("x_clock returning: " + Quest.instance.x_clocks[unk2] + " from " + unk2);
+				stack.result_register= Quest.instance.x_clocks[unk2];
 			}
 			else
 			{//Should this be an increment???
 				Debug.Log("x_clock setting: " + unk2 + " to " + unk1);
-				GameWorldController.instance.playerUW.quest().x_clocks[unk2]=unk1;	
+				Quest.instance.x_clocks[unk2]=unk1;	
 			}
 		}
 
@@ -3856,7 +3856,7 @@ description:  places a generated object in underworld
 		/// <param name="xpToAdd">Xp to add.</param>
 		void x_exp(int xpToAdd)
 		{
-				GameWorldController.instance.playerUW.AddXP(xpToAdd);
+				UWCharacter.Instance.AddXP(xpToAdd);
 		}
 
 	void PrintImportedVariable(int index, int newValue)

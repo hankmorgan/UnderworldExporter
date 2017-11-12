@@ -10,6 +10,6 @@ public class an_experience_trap : trap_base {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log (this.name);
-		GameWorldController.instance.playerUW.AddXP(objInt().owner);
+		UWCharacter.Instance.AddXP(objInt().owner);
 	}
 }

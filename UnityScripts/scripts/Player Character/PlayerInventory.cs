@@ -1002,7 +1002,7 @@ public class PlayerInventory : UWEBase {
 			result += getDefenceAtSlot(2);
 			result += getDefenceAtSlot(3);
 			result += getDefenceAtSlot(4);	
-			return (short)(result+GameWorldController.instance.playerUW.Resistance);
+			return (short)(result+UWCharacter.Instance.Resistance);
 		}
 
 		/// <summary>
@@ -1060,7 +1060,7 @@ public class PlayerInventory : UWEBase {
 					}
 					break;
 				case 7://HandRight
-						if (! GameWorldController.instance.playerUW.isLefty)
+						if (! UWCharacter.Instance.isLefty)
 						{								
 							if (obj.gameObject.GetComponent<Shield>()!=null)
 							{
@@ -1077,7 +1077,7 @@ public class PlayerInventory : UWEBase {
 						}
 						break;
 				case 8://HandLeft
-					if ( GameWorldController.instance.playerUW.isLefty)
+					if ( UWCharacter.Instance.isLefty)
 					{
 						if (obj.gameObject.GetComponent<Shield>()!=null)
 						{
@@ -1126,7 +1126,7 @@ public class PlayerInventory : UWEBase {
 								break;
 							}
 					case 7://HandRight
-							if (GameWorldController.instance.playerUW.isLefty)
+							if (UWCharacter.Instance.isLefty)
 							{
 									return 0;
 							}
@@ -1139,7 +1139,7 @@ public class PlayerInventory : UWEBase {
 							}
 							break;
 					case 8://HandLeft
-							if ( ! GameWorldController.instance.playerUW.isLefty)
+							if ( ! UWCharacter.Instance.isLefty)
 							{
 								return 0;
 							}

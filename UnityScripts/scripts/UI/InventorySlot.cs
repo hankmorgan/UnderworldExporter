@@ -27,7 +27,7 @@ public class InventorySlot : GuiBase {
 		{
 			if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation))
 			{return;}
-			if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
+			if ( UWCharacter.Instance.playerInventory.ObjectInHand =="")
 			{
 				//InteractionModeValue=UWCharacter.InteractionMode;
 				UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -38,7 +38,7 @@ public class InventorySlot : GuiBase {
 
 	void UseFromSlot()
 	{
-		GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+		GameObject currObj=UWCharacter.Instance.playerInventory.GetGameObjectAtSlot (slotIndex);
 
 		if (currObj !=null)
 		{
@@ -47,10 +47,10 @@ public class InventorySlot : GuiBase {
 		}
 		else
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
 			{
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 			}
 		}
 	}
@@ -58,8 +58,8 @@ public class InventorySlot : GuiBase {
 
 	void LookFromSlot()
 	{
-		//string ObjectName= GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex);
-		GameObject objLookedAt = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
+		//string ObjectName= UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex);
+		GameObject objLookedAt = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);
 
 		if (objLookedAt!=null)
 		{
@@ -83,7 +83,7 @@ public class InventorySlot : GuiBase {
 
 	void ClickEvent(int pointerID)
 	{
-		if (GameWorldController.instance.playerUW.isRoaming==true)
+		if (UWCharacter.Instance.isRoaming==true)
 		{//No inventory use while using wizard eye.
 				return;
 		}
@@ -92,7 +92,7 @@ public class InventorySlot : GuiBase {
 		{
 			leftClick=false;
 		}
-		if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell=="")
+		if (UWCharacter.Instance.PlayerMagic.ReadiedSpell=="")
 			{				
 						/*if ((WindowDetect.ContextUIEnabled) && (WindowDetect.ContextUIUse))
 						{
@@ -153,7 +153,7 @@ public class InventorySlot : GuiBase {
 				case UWCharacter.InteractionModeUse://use
 							if	((WindowDetect.ContextUIEnabled) && (WindowDetect.ContextUIUse))
 								{
-								if ((leftClick) || (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!=""))
+								if ((leftClick) || (UWCharacter.Instance.playerInventory.ObjectInHand!=""))
 									{
 											UseFromSlot();
 									}
@@ -177,16 +177,16 @@ public class InventorySlot : GuiBase {
 			}
 		else
 			{
-			GameWorldController.instance.playerUW.PlayerMagic.ObjectInSlot=null;
-			if (GameWorldController.instance.playerUW.PlayerMagic.InventorySpell==true)
+			UWCharacter.Instance.PlayerMagic.ObjectInSlot=null;
+			if (UWCharacter.Instance.PlayerMagic.InventorySpell==true)
 				{
-					GameWorldController.instance.playerUW.PlayerMagic.ObjectInSlot = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
-					GameWorldController.instance.playerUW.PlayerMagic.castSpell(this.gameObject, GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell,false);
-					GameWorldController.instance.playerUW.PlayerMagic.SpellCost=0;
+					UWCharacter.Instance.PlayerMagic.ObjectInSlot = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);
+					UWCharacter.Instance.PlayerMagic.castSpell(this.gameObject, UWCharacter.Instance.PlayerMagic.ReadiedSpell,false);
+					UWCharacter.Instance.PlayerMagic.SpellCost=0;
 					UWHUD.instance.window.UWWindowWait (1.0f);		
 				}
 			}
-		GameWorldController.instance.playerUW.playerInventory.Refresh ();
+		UWCharacter.Instance.playerInventory.Refresh ();
 
 	}
 
@@ -196,7 +196,7 @@ public class InventorySlot : GuiBase {
 	{
 		if (isLeftClick==false)
 		{//Looking at object
-		GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+		GameObject currObj=UWCharacter.Instance.playerInventory.GetGameObjectAtSlot (slotIndex);
 
 		if (currObj!=null)
 		{
@@ -225,9 +225,9 @@ public class InventorySlot : GuiBase {
 
 		GameObject ObjectUsedOn=null;
 		bool DoNotPickup=false;
-		if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
+		if ( UWCharacter.Instance.playerInventory.ObjectInHand !="")
 			{ 
-			ObjectInteraction objInt =GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+			ObjectInteraction objInt =UWCharacter.Instance.playerInventory.GetObjIntInHand();
 			//Eating food dropped in helm slot
 			if (SlotCategory==HELM)
 			{
@@ -247,63 +247,63 @@ public class InventorySlot : GuiBase {
 
 				if (objInt.IsStackable())
 					{
-					ObjectUsedOn = GameObject.Find (GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex));
+					ObjectUsedOn = GameObject.Find (UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex));
 					if (ObjectUsedOn !=null)
 						{
 						if (ObjectInteraction.CanMerge(ObjectUsedOn.GetComponent<ObjectInteraction>(), objInt))
 							{
 							ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(), objInt);
 							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-							GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
+							UWCharacter.Instance.playerInventory.ObjectInHand="";
+							UWCharacter.Instance.playerInventory.Refresh (slotIndex);
 								return;
 							}
 						}
 					}
 			}
 
-		if (GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
+		if (UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
 			if (DoNotPickup==false)	
 				{
-				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,false))
+				if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(),slotIndex,false))
 					{
-						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+						UWCharacter.Instance.playerInventory.SetObjectAtSlot(slotIndex,UWCharacter.Instance.playerInventory.ObjectInHand);
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");
+						UWCharacter.Instance.playerInventory.SetObjectInHand("");
 					}
 				}
 			}
 		else
 			{
 			//Get the object at the slot and test it's activation.
-			ObjectUsedOn = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			ObjectUsedOn = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 			if (ObjectUsedOn.GetComponent<ObjectInteraction>().Use()==false)
 				{//if nothing happened when I clicked on the object at the slot.
-				if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand != "")
+				if (UWCharacter.Instance.playerInventory.ObjectInHand != "")
 						{
 						//TODO: Make sure this works with Equipment slots
 						//No effect occurred. Swap the two objects.
 					if (DoNotPickup==false)
 						{
-						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,true))
+						if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(),slotIndex,true))
 							{
-								GameWorldController.instance.playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+								UWCharacter.Instance.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,UWCharacter.Instance.playerInventory.ObjectInHand);
 							}
 						}
 					}
 					else
 						{//Pick up the item at that slot.
 						//TODO: Make this work with Equipment slots
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
+						UWCharacter.Instance.playerInventory.ObjectInHand= ObjectUsedOn.name;
 						UWHUD.instance.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-						//GameWorldController.instance.playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						//UWCharacter.Instance.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 							{
-							Container cn = GameObject.Find(GameWorldController.instance.playerUW.playerInventory.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+							Container cn = GameObject.Find(UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
+							cn.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset+this.slotIndex-11);
 							}
-						GameWorldController.instance.playerUW.playerInventory.ClearSlot(this.slotIndex);
+						UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
 					}
 				}
 			}
@@ -315,9 +315,9 @@ public class InventorySlot : GuiBase {
 		//pInv = player.GetComponent<PlayerInventory>();
 		GameObject ObjectUsedOn=null;//The object at the clicked slot
 		bool DoNotPickup=false;
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
 		{
-			ObjectInteraction objInt = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand ().GetComponent<ObjectInteraction>();
+			ObjectInteraction objInt = UWCharacter.Instance.playerInventory.GetGameObjectInHand ().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.GetItemType()) && (SlotCategory!=-1))
 			{//Slot is not a general use on andThis item type does not go in this slot.
 			//	Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory);
@@ -337,7 +337,7 @@ public class InventorySlot : GuiBase {
 			//if ((objInt.isQuant()==true) && (objInt.isEnchanted()==false))
 			if (objInt.IsStackable())
 			{
-				ObjectUsedOn = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+				ObjectUsedOn = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 				if (ObjectUsedOn !=null)
 				{
 					if (ObjectInteraction.CanMerge(ObjectUsedOn.GetComponent<ObjectInteraction>(),objInt))
@@ -347,8 +347,8 @@ public class InventorySlot : GuiBase {
 						ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(),objInt);
 						//ObjectUsedOn.GetComponent<ObjectInteraction>().link=ObjectUsedOn.GetComponent<ObjectInteraction>().link+objInt.link;
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-						GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
+						UWCharacter.Instance.playerInventory.ObjectInHand="";
+						UWCharacter.Instance.playerInventory.Refresh (slotIndex);
 						//Destroy(objInt.gameObject);
 						return;
 					}
@@ -356,10 +356,10 @@ public class InventorySlot : GuiBase {
 			}
 		}
 		//Code for when I right click in pickup mode.
-		if (GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex) !="")
+		if (UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex) !="")
 			{//Special case for opening containers in pickup mode.
-				ObjectUsedOn = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
-				if ((GameWorldController.instance.playerUW.playerInventory.ObjectInHand==""))
+				ObjectUsedOn = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);
+				if ((UWCharacter.Instance.playerInventory.ObjectInHand==""))
 				{
 					if (ObjectUsedOn.GetComponent<Container>() !=null)
 					{
@@ -367,28 +367,28 @@ public class InventorySlot : GuiBase {
 							{
 								return ;
 							}
-						GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
+						UWCharacter.Instance.playerInventory.ObjectInHand= ObjectUsedOn.name;
 						UWHUD.instance.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						if (this.slotIndex>=11)
 						{
 						//Container cn = //;GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-						GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+						UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset+this.slotIndex-11);
 						}
-						GameWorldController.instance.playerUW.playerInventory.ClearSlot(this.slotIndex);
+						UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
 						return;
 					}
 				}
 			}
 
-		if (GameWorldController.instance.playerUW.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
+		if (UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
 			if (DoNotPickup==false)
 				{
-				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,false))
+				if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(),slotIndex,false))
 					{
-						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+						UWCharacter.Instance.playerInventory.SetObjectAtSlot(slotIndex,UWCharacter.Instance.playerInventory.ObjectInHand);
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");// .ObjectInHand="";
+						UWCharacter.Instance.playerInventory.SetObjectInHand("");// .ObjectInHand="";
 					}
 				}
 			}
@@ -396,24 +396,24 @@ public class InventorySlot : GuiBase {
 			{
 			bool ObjectActivated =false;
 			//Get the object at the slot and test it's activation.
-			ObjectUsedOn = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			ObjectUsedOn = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 			//When right clicking only try to activate when an object in in the hand
-			if (GameWorldController.instance.playerUW.playerInventory.GetObjectInHand() !="")
+			if (UWCharacter.Instance.playerInventory.GetObjectInHand() !="")
 				{
 				ObjectActivated = ObjectUsedOn.GetComponent<ObjectInteraction>().Use();
 				}
 			if (ObjectActivated==false)
 				{//if nothing happened when I clicked on the object at the slot with something in hand.
-				if (GameWorldController.instance.playerUW.playerInventory.GetObjectInHand() != "")
+				if (UWCharacter.Instance.playerInventory.GetObjectInHand() != "")
 					{
 					if (DoNotPickup==false)
 						{
 						//TODO: Make sure this works with Equipment slots
 						//No effect occurred. Swap the two objects.
-						if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex,true))
+						if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(),slotIndex,true))
 							{
-								GameWorldController.instance.playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
-								GameWorldController.instance.playerUW.playerInventory.Refresh();
+								UWCharacter.Instance.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,UWCharacter.Instance.playerInventory.ObjectInHand);
+								UWCharacter.Instance.playerInventory.Refresh();
 							}
 						}
 					}
@@ -426,14 +426,14 @@ public class InventorySlot : GuiBase {
 						//if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant() ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant())&&(ObjectUsedOn.GetComponent<ObjectInteraction>().link==1)) || (ObjectUsedOn.GetComponent<ObjectInteraction>().isEnchanted() ==true))
 						if ((!objIntUsedOn.IsStackable()) || ( (objIntUsedOn.IsStackable()) &&  (objIntUsedOn.GetQty()==1)))
 							{//Is either not a quant or is a quantity of 1
-							GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
+							UWCharacter.Instance.playerInventory.ObjectInHand= ObjectUsedOn.name;
 							//UWHUD.instance.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 							UWHUD.instance.CursorIcon= objIntUsedOn.GetInventoryDisplay ().texture;
 							if (this.slotIndex>=11)
 							{
-								GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+								UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset+this.slotIndex-11);
 							}
-							GameWorldController.instance.playerUW.playerInventory.ClearSlot(this.slotIndex);
+							UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
 							}
 						else
 							{
@@ -519,26 +519,26 @@ public class InventorySlot : GuiBase {
 		{//Just do a normal pickup.
 			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().link)
 			{
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= QuantityObj.name;
+				UWCharacter.Instance.playerInventory.ObjectInHand= QuantityObj.name;
 				UWHUD.instance.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				if (this.slotIndex>=11)
 				{
-					GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+					UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset+this.slotIndex-11);
 				}
-				GameWorldController.instance.playerUW.playerInventory.ClearSlot(this.slotIndex);
+				UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
 			}
 			else
 			{
 				//split the obj. Do nothing to the inventory.
 				GameObject Split = Instantiate(QuantityObj);//What we are picking up.
 				Split.GetComponent<ObjectInteraction>().link =quant;
-				Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
-				Split.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;//this.transform.parent;
+				Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
+				Split.transform.parent=UWCharacter.Instance.playerInventory.InventoryMarker.transform;//this.transform.parent;
 				QuantityObj.GetComponent<ObjectInteraction>().link=QuantityObj.GetComponent<ObjectInteraction>().link-quant;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= Split.name;
+				UWCharacter.Instance.playerInventory.ObjectInHand= Split.name;
 				UWHUD.instance.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
-				GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
+				UWCharacter.Instance.playerInventory.Refresh (slotIndex);
 				QuantityObj=null;//Clear out to avoid weirdness.
 			}
 		}
@@ -546,7 +546,7 @@ public class InventorySlot : GuiBase {
 
 	public ObjectInteraction GetGameObjectInteration()
 	{
-		GameObject obj = GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+		GameObject obj = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot (slotIndex);
 		if (obj!=null)
 		{
 			return obj.GetComponent<ObjectInteraction>();
@@ -602,13 +602,13 @@ public class InventorySlot : GuiBase {
 		/// </summary>
 		public void OnHoverEnter()
 		{
-			//if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+			//if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
 			//{
 			//	return;
 			//}
 			Hovering=true;
 			UWHUD.instance.ContextMenu.text="";	
-			GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);	
+			GameObject currObj=UWCharacter.Instance.playerInventory.GetGameObjectAtSlot (slotIndex);	
 				if (currObj!=null)
 				{
 						ObjectInteraction objInt=currObj.GetComponent<ObjectInteraction>();
@@ -617,7 +617,7 @@ public class InventorySlot : GuiBase {
 								string ObjectName="";
 								string UseString="";
 								ObjectName=StringController.instance.GetSimpleObjectNameUW(objInt.item_id);
-								if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+								if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 								{
 									switch (UWCharacter.InteractionMode)
 										{

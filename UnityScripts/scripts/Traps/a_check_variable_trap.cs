@@ -80,8 +80,8 @@ the left, right, center button combination on Level3.
 					case 29:
 					case 30:
 					case 31:								
-						//return VariableValue()==GameWorldController.instance.playerUW.quest().DjinnCapture;	
-						return VariableValue()==GameWorldController.instance.playerUW.quest().x_clocks[objInt().zpos-16];	
+						//return VariableValue()==Quest.instance.DjinnCapture;	
+						return VariableValue()==Quest.instance.x_clocks[objInt().zpos-16];	
 				}
 			}
 		if (objInt().heading!=0)
@@ -90,11 +90,11 @@ the left, right, center button combination on Level3.
 				for(int i=objInt().zpos; i<=objInt().zpos+objInt().heading; i++)
 				{								
 					if (objInt().x != 0)
-						cmp += GameWorldController.instance.playerUW.quest().variables[i];
+						cmp += Quest.instance.variables[i];
 					else
 					{
 						cmp <<= 3;
-						cmp |= (GameWorldController.instance.playerUW.quest().variables[i]  & 0x7);
+						cmp |= (Quest.instance.variables[i]  & 0x7);
 					}
 				}
 				Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());
@@ -103,8 +103,8 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + GameWorldController.instance.playerUW.quest().variables[objInt().zpos] + ")" );
-				return VariableValue()==GameWorldController.instance.playerUW.quest().variables[objInt().zpos];
+				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + Quest.instance.variables[objInt().zpos] + ")" );
+				return VariableValue()==Quest.instance.variables[objInt().zpos];
 			}
 		}
 

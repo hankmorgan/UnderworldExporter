@@ -103,7 +103,7 @@ public class UWCharacter : Character {
 
 	public void Start()
 	{
-		GameWorldController.instance.playerUW=this;
+		//UWCharacter.Instance=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
@@ -115,7 +115,7 @@ public class UWCharacter : Character {
 		base.Begin ();
 		if (_RES==GAME_SHOCK){return;}
 		InventoryReady=false;
-		GameWorldController.instance.playerUW=this;
+		//UWCharacter.Instance=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
@@ -132,7 +132,7 @@ public class UWCharacter : Character {
 		UWHUD.instance.InputControl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
 
-		switch (GameWorldController.instance.playerUW.Body)
+		switch (UWCharacter.Instance.Body)
 		{
 		case 0:
 		case 2 :
@@ -150,7 +150,7 @@ public class UWCharacter : Character {
 	{//CHeck if the player has planted the seed and if so send them to that position.
 	//mus.Death=true;
 				//TODO:Turn of the player camera
-		//GameWorldController.instance.playerUW.playerCam.cullingMask=31;
+		//UWCharacter.Instance.playerCam.cullingMask=31;
 		GameWorldController.instance.getMus().Death=true;
 		UWCharacter.InteractionMode=InteractionModeUse;
 		UWHUD.instance.wpa.SetAnimation=-1;
@@ -839,36 +839,36 @@ public class UWCharacter : Character {
 
 	public void SetCharLevel(int level)
 	{
-		if (GameWorldController.instance.playerUW.CharLevel<level)
+		if (UWCharacter.Instance.CharLevel<level)
 		{
 			//000~001~147~You have attained experience level
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_have_attained_experience_level_));
 			TrainingPoints+=3;
-			GameWorldController.instance.playerUW.MaxVIT=GameWorldController.instance.playerUW.PlayerSkills.STR*3;
+			UWCharacter.Instance.MaxVIT=UWCharacter.Instance.PlayerSkills.STR*3;
 			switch (_RES)
 			{
 			case GAME_UW1:
-				if ((GameWorldController.instance.LevelNo==6) && ( !GameWorldController.instance.playerUW.quest().isOrbDestroyed ))
+				if ((GameWorldController.instance.LevelNo==6) && ( !Quest.instance.isOrbDestroyed ))
 				{
-					GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;;								
+					UWCharacter.Instance.PlayerMagic.TrueMaxMana=UWCharacter.Instance.PlayerSkills.ManaSkill*3;;								
 				}
 				else
 				{
-					GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
-					GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
-					GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;											
+					UWCharacter.Instance.PlayerMagic.MaxMana= UWCharacter.Instance.PlayerSkills.ManaSkill*3;
+					UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
+					UWCharacter.Instance.PlayerMagic.TrueMaxMana=UWCharacter.Instance.PlayerMagic.MaxMana;											
 				}
 				break;
 			default:
-				GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
-				GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
-				GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+				UWCharacter.Instance.PlayerMagic.MaxMana= UWCharacter.Instance.PlayerSkills.ManaSkill*3;
+				UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
+				UWCharacter.Instance.PlayerMagic.TrueMaxMana=UWCharacter.Instance.PlayerMagic.MaxMana;
 				break;
 			}
 
 
 		}
-		GameWorldController.instance.playerUW.CharLevel=level;
+		UWCharacter.Instance.CharLevel=level;
 	}
 
 		/// <summary>

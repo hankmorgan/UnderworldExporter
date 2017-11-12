@@ -408,8 +408,8 @@ public class AutoMap : Loader {
 						}
 						else
 						{
-								float ratioX = GameWorldController.instance.playerUW.transform.position.x / (64.0f*1.2f);
-								float ratioY = GameWorldController.instance.playerUW.transform.position.z / (64.0f*1.2f);
+								float ratioX = UWCharacter.Instance.transform.position.x / (64.0f*1.2f);
+								float ratioY = UWCharacter.Instance.transform.position.z / (64.0f*1.2f);
 								output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);			
 						}							
 				}

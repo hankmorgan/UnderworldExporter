@@ -126,11 +126,11 @@ public class Compass : GuiBase_Draggable {
 	
 	// Update is called once per frame
 	void Update () {
-		if (PreviousHeading!=GameWorldController.instance.playerUW.currentHeading)
+		if (PreviousHeading!=UWCharacter.Instance.currentHeading)
 		{
 			UpdateNorthIndicator();
-			PreviousHeading=GameWorldController.instance.playerUW.currentHeading;
-			switch (GameWorldController.instance.playerUW.currentHeading)
+			PreviousHeading=UWCharacter.Instance.currentHeading;
+			switch (UWCharacter.Instance.currentHeading)
 			{
 				case NORTH:
 				case SOUTH:
@@ -170,7 +170,7 @@ public class Compass : GuiBase_Draggable {
 	{
 		for (int i =0; i<16;i++)
 		{
-						NorthIndicators[i].enabled=(i==GameWorldController.instance.playerUW.currentHeading);
+						NorthIndicators[i].enabled=(i==UWCharacter.Instance.currentHeading);
 		}
 	}
 
@@ -182,9 +182,9 @@ public class Compass : GuiBase_Draggable {
 				if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)) {return;}
 				UWHUD.instance.MessageScroll.Clear ();
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_are_currently_) 
-						+ GameWorldController.instance.playerUW.GetFedStatus() 
+						+ UWCharacter.Instance.GetFedStatus() 
 		                                      + " and " 
-						+ GameWorldController.instance.playerUW.GetFatiqueStatus());
+						+ UWCharacter.Instance.GetFatiqueStatus());
 
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_are_on_the_) 
 						+ StringController.instance.GetString (1,411+GameWorldController.instance.LevelNo) 

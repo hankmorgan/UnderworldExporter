@@ -15,7 +15,7 @@ public class a_ward_trap : trap_base {
 			base.Start ();
 			this.gameObject.layer = LayerMask.NameToLayer("Ward");
 			SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
-			spIJ.init (SpellEffect.UW1_Spell_Effect_RuneofWarding,GameWorldController.instance.playerUW.gameObject);
+			spIJ.init (SpellEffect.UW1_Spell_Effect_RuneofWarding,UWCharacter.Instance.gameObject);
 			spellprop=spIJ;
 		}
 
@@ -26,7 +26,7 @@ public class a_ward_trap : trap_base {
 
 			if (npc!=null)//Has the collision hit an npc
 			{
-				spellprop.init(SpellEffect.UW1_Spell_Effect_RuneofWarding,GameWorldController.instance.playerUW.gameObject);
+				spellprop.init(SpellEffect.UW1_Spell_Effect_RuneofWarding,UWCharacter.Instance.gameObject);
 				if(spellprop.BaseDamage!=0)
 				{
 						npc.ApplyAttack(spellprop.BaseDamage);

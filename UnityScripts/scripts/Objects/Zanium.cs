@@ -12,13 +12,13 @@ public class Zanium : object_base {
 	public void SuckUpZanium()
 	{
 		//
-	 	ObjectInteraction someZanium=GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(objInt().item_id);
+	 	ObjectInteraction someZanium=UWCharacter.Instance.playerInventory.findObjInteractionByID(objInt().item_id);
 		if (someZanium!=null)
 		{//Add the zanium to the pile
 			someZanium.link += objInt().link;
 			someZanium.isquant=1;
 			objInt().consumeObject();
-			GameWorldController.instance.playerUW.playerInventory.Refresh();//Update the display
+			UWCharacter.Instance.playerInventory.Refresh();//Update the display
 		}
 	}
 
@@ -26,7 +26,7 @@ public class Zanium : object_base {
 
 	void OnTriggerEnter(Collider other)
 	{		
-		if ((other.name==GameWorldController.instance.playerUW.name))
+		if ((other.name==UWCharacter.Instance.name))
 		{
 			SuckUpZanium();
 		}

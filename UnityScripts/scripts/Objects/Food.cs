@@ -50,7 +50,7 @@ public class Food : object_base {
 
 	public override bool use ()
 	{
-		if ((GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="") || (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==this.name))
+		if ((UWCharacter.Instance.playerInventory.ObjectInHand=="") || (UWCharacter.Instance.playerInventory.ObjectInHand==this.name))
 		{//Eat if no object in hand or if the object in hand is this item.
 						
 								
@@ -74,7 +74,7 @@ public class Food : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -82,15 +82,15 @@ public class Food : object_base {
 	public override bool Eat()
 	{//TODO:Implement drag and drop feeding.
 
-		if (Nutrition()+GameWorldController.instance.playerUW.FoodLevel>=255)
+		if (Nutrition()+UWCharacter.Instance.FoodLevel>=255)
 		{
-			GameWorldController.instance.playerUW.FoodLevel=255;
+			UWCharacter.Instance.FoodLevel=255;
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_are_too_full_to_eat_that_now_));
 			return false;
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.FoodLevel = Nutrition()+GameWorldController.instance.playerUW.FoodLevel;
+			UWCharacter.Instance.FoodLevel = Nutrition()+UWCharacter.Instance.FoodLevel;
 			switch (objInt().item_id)//TODO:update for UW2
 				{
 				case 192://plants
@@ -113,13 +113,13 @@ public class Food : object_base {
 				switch (Random.Range(1,3))
 				{
 				case 1:
-					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1];break;
+					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1];break;
 				case 2:
-					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2];break;
+					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2];break;
 				default:
-					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3];break;
+					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3];break;
 				}				
-				GameWorldController.instance.playerUW.aud.Play();		
+				UWCharacter.Instance.aud.Play();		
 			}
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.

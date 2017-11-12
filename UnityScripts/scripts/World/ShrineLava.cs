@@ -15,7 +15,7 @@ public class ShrineLava : UWEBase {
 		{
 			if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
 			{
-				if (GameWorldController.instance.playerUW.quest().isGaramonBuried == false)
+				if (Quest.instance.isGaramonBuried == false)
 				{
 						return;
 				}
@@ -30,7 +30,7 @@ public class ShrineLava : UWEBase {
 				case Quest.TalismanSword:
 				case Quest.TalismanTaper:
 				case Quest.TalismanWine:	
-						GameWorldController.instance.playerUW.quest().TalismansRemaining--;
+						Quest.instance.TalismansRemaining--;
 						break;
 				default:
 						return;								
@@ -42,7 +42,7 @@ public class ShrineLava : UWEBase {
 				objInt.consumeObject();
 
 				//Suck the avatar into the ethereal void.
-				if (GameWorldController.instance.playerUW.quest().TalismansRemaining<=0)
+				if (Quest.instance.TalismansRemaining<=0)
 				{
 				StartCoroutine(SuckItAvatar());
 				}
@@ -74,16 +74,16 @@ public class ShrineLava : UWEBase {
 			//newObj.transform.parent=GameWorldController.instance.LevelMarker();
 		//	GameWorldController.MoveToWorld(newObj);
 			//newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
-			Quaternion playerRot = GameWorldController.instance.playerUW.transform.rotation;
+			Quaternion playerRot = UWCharacter.Instance.transform.rotation;
 			Quaternion EndRot = new Quaternion(playerRot.x,playerRot.y, playerRot.z+1.2f,playerRot.w);
-			Vector3 StartPos = GameWorldController.instance.playerUW.transform.position;
+			Vector3 StartPos = UWCharacter.Instance.transform.position;
 			Vector3 EndPos = myObj.transform.localPosition;
 			float rate = 1.0f/2.0f;
 			float index = 0.0f;
 			while (index <1.0f)
 			{						
-				GameWorldController.instance.playerUW.transform.position=Vector3.Lerp(StartPos,EndPos,index);
-				GameWorldController.instance.playerUW.transform.rotation=Quaternion.Lerp(playerRot,EndRot,index);
+				UWCharacter.Instance.transform.position=Vector3.Lerp(StartPos,EndPos,index);
+				UWCharacter.Instance.transform.rotation=Quaternion.Lerp(playerRot,EndRot,index);
 				if (slasher!=null)
 				{
 					slasher.transform.position=Vector3.Lerp(slasherPos,EndPos,index);	
@@ -91,7 +91,7 @@ public class ShrineLava : UWEBase {
 				index += rate * Time.deltaTime;
 				yield return new WaitForSeconds(0.01f);
 			}
-			GameWorldController.instance.playerUW.transform.rotation = playerRot;
+			UWCharacter.Instance.transform.rotation = playerRot;
 			GameWorldController.instance.SwitchLevel(8,26,24);//One way trip.
 		}
 }

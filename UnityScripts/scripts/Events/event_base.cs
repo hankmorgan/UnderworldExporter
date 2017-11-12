@@ -127,11 +127,11 @@ public class event_base : Loader {
 								{
 									if (events_blocks[b].event_actions[r].event_isQuest)
 									{//Test a quest variable
-										test=(1 ==  GameWorldController.instance.playerUW.quest().QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
+										test=(1 ==  Quest.instance.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
 									}
 									else
 									{//test a game variable
-										test=(1 ==  GameWorldController.instance.playerUW.quest().variables[events_blocks[b].event_actions[r].event_variable])	;
+										test=(1 ==  Quest.instance.variables[events_blocks[b].event_actions[r].event_variable])	;
 									}
 								}
 								if (test)

@@ -6,18 +6,18 @@ public class Fountain : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if ((objInt().isEnchanted()==true) &&(objInt().link>=512))
 			{
-				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,objInt().link-512,Magic.SpellRule_TargetSelf);
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,objInt().link-512,Magic.SpellRule_TargetSelf);
 			}
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_the_water_refreshes_you_));
 			return true;
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());		
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());		
 		}
 	}
 

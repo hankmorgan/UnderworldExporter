@@ -17,7 +17,7 @@ public class StatsDisplay : GuiBase_Draggable {
 
 	public static int Offset;
 
-	//public static UWCharacter GameWorldController.instance.playerUW;
+	//public static UWCharacter UWCharacter.Instance;
 
 	private string[] Skillnames = {"ATTACK","DEFENSE","UNARMED","SWORD","AXE","MACE","MISSILE",
 									"MANA","LORE","CASTING","TRAPS","SEARCH","TRACK","SNEAK","REPAIR",
@@ -35,18 +35,18 @@ public class StatsDisplay : GuiBase_Draggable {
 					if (UpdateNow==true)
 					{
 							UpdateNow=false;
-							CharName.text=GameWorldController.instance.playerUW.CharName;
-							//CharClass.text=GameWorldController.instance.playerUW.CharClass;
+							CharName.text=UWCharacter.Instance.CharName;
+							//CharClass.text=UWCharacter.Instance.CharClass;
 
-							CharClass.text= StringController.instance.GetString(2,23+GameWorldController.instance.playerUW.CharClass);
+							CharClass.text= StringController.instance.GetString(2,23+UWCharacter.Instance.CharClass);
 
-							CharClassLevel.text =GameWorldController.instance.playerUW.CharLevel.ToString();
-							CharStr.text=GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
-							CharDex.text=GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();
-							CharInt.text=GameWorldController.instance.playerUW.PlayerSkills.INT.ToString();
-							CharVIT.text = GameWorldController.instance.playerUW.CurVIT +"/"+GameWorldController.instance.playerUW.MaxVIT;
-							CharMana.text = GameWorldController.instance.playerUW.PlayerMagic.CurMana +"/"+GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
-							CharEXP.text=GameWorldController.instance.playerUW.EXP.ToString ();
+							CharClassLevel.text =UWCharacter.Instance.CharLevel.ToString();
+							CharStr.text=UWCharacter.Instance.PlayerSkills.STR.ToString();
+							CharDex.text=UWCharacter.Instance.PlayerSkills.DEX.ToString();
+							CharInt.text=UWCharacter.Instance.PlayerSkills.INT.ToString();
+							CharVIT.text = UWCharacter.Instance.CurVIT +"/"+UWCharacter.Instance.MaxVIT;
+							CharMana.text = UWCharacter.Instance.PlayerMagic.CurMana +"/"+UWCharacter.Instance.PlayerMagic.MaxMana;
+							CharEXP.text=UWCharacter.Instance.EXP.ToString ();
 							tmpSkillNames="";
 							tmpSkillValues="";
 							if (Offset>15)
@@ -60,7 +60,7 @@ public class StatsDisplay : GuiBase_Draggable {
 							for (int i = 0; i<=5;i++)
 							{
 									tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
-									tmpSkillValues=tmpSkillValues+GameWorldController.instance.playerUW.PlayerSkills.GetSkill(i+Offset+1);
+									tmpSkillValues=tmpSkillValues+UWCharacter.Instance.PlayerSkills.GetSkill(i+Offset+1);
 									if (i!=5)
 									{
 											tmpSkillNames = tmpSkillNames +"\n";

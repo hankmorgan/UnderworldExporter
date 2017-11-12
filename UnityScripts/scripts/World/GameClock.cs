@@ -85,8 +85,8 @@ public class GameClock : UWEBase {
 				instance._minute++;
 				if (instance._minute%5==0)
 				{
-						GameWorldController.instance.playerUW.RegenMana();
-						GameWorldController.instance.playerUW.UpdateHungerAndFatigue();
+						UWCharacter.Instance.RegenMana();
+						UWCharacter.Instance.UpdateHungerAndFatigue();
 				}
 				if (instance._minute>=1440)
 				{

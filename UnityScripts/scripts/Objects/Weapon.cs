@@ -8,9 +8,9 @@ public class Weapon : Equipment {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand =="")
 		{
-			if (((this.objInt().inventorySlot==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((this.objInt().inventorySlot==8) && (GameWorldController.instance.playerUW.isLefty==true)))
+			if (((this.objInt().inventorySlot==7) && (UWCharacter.Instance.isLefty==false)) || ((this.objInt().inventorySlot==8) && (UWCharacter.Instance.isLefty==true)))
 			{
 				if(UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
 				{
@@ -26,7 +26,7 @@ public class Weapon : Equipment {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 		//return false;
 	}
@@ -38,16 +38,16 @@ public class Weapon : Equipment {
 
 	public override bool EquipEvent (short slotNo)
 	{
-		//GameWorldController.instance.playerUW.PlayerCombat.currWeapon= this;
-		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
+		//UWCharacter.Instance.PlayerCombat.currWeapon= this;
+		if (((slotNo ==7) && (UWCharacter.Instance.isLefty==false)) || ((slotNo ==8) && (UWCharacter.Instance.isLefty==true)))
 		{
 			if (this.GetComponent<WeaponRanged>()!=null)
 			{
-				GameWorldController.instance.playerUW.PlayerCombat.currWeaponRanged=(WeaponRanged)this;
+				UWCharacter.Instance.PlayerCombat.currWeaponRanged=(WeaponRanged)this;
 			}
 			if (this.GetComponent<WeaponMelee>()!=null)
 			{
-				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
+				UWCharacter.Instance.PlayerCombat.currWeapon=(WeaponMelee)this;
 			}
 
 			/*if (objInt().isEnchanted()==true)
@@ -83,10 +83,10 @@ public class Weapon : Equipment {
 
 	public override bool UnEquipEvent (short slotNo)
 	{
-		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
+		if (((slotNo ==7) && (UWCharacter.Instance.isLefty==false)) || ((slotNo ==8) && (UWCharacter.Instance.isLefty==true)))
 		{
-			GameWorldController.instance.playerUW.PlayerCombat.currWeapon = null;
-			GameWorldController.instance.playerUW.PlayerCombat.currWeaponRanged = null;
+			UWCharacter.Instance.PlayerCombat.currWeapon = null;
+			UWCharacter.Instance.PlayerCombat.currWeaponRanged = null;
 		}
 		return false;
 	}

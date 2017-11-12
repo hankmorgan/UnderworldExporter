@@ -6,7 +6,7 @@ public class Readable : object_base {
 
 	public override bool use ()
 	{
-	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
+	if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
 		{
 			if ((_RES=="UW1") && (objInt().link== 769))
 			{//Special case for Rotworm stew recipe
@@ -16,7 +16,7 @@ public class Readable : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -83,7 +83,7 @@ public class Readable : object_base {
 		//000~001~148~The bowl does not contain the correct ingredients. \n
 		//000~001~149~You mix the ingredients into a stew. \n
 		//000~001~150~You need a bowl to mix the ingredients. \n
-		Container cn = GameWorldController.instance.playerUW.playerInventory.playerContainer;
+		Container cn = UWCharacter.Instance.playerInventory.playerContainer;
 		if (cn!=null)
 		{
 		string BowlName=cn.findItemOfType(142); //Finds the first bowl in the inventory;

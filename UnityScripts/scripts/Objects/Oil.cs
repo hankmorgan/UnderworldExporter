@@ -7,7 +7,7 @@ public class Oil : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
 				UWHUD.instance.MessageScroll.Set ("Use oil on?");
@@ -15,7 +15,7 @@ public class Oil : object_base {
 			}
 			else
 			{
-				return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 			}
 		}
 		else

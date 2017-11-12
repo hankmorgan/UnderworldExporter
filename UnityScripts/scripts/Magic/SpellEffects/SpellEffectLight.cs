@@ -11,14 +11,14 @@ public class SpellEffectLight : SpellEffect {
 		{
 			LightSource.MagicBrightness=Value;			
 		}
-		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+		UWCharacter.Instance.playerInventory.UpdateLightSources();
 		base.ApplyEffect();
 	}
 
 	public override void CancelEffect ()
 	{
 		LightSource.MagicBrightness=0;//The next frame of other magic lights will set the next max magic brightness.
-		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+		UWCharacter.Instance.playerInventory.UpdateLightSources();
 		base.CancelEffect();
 	}
 
@@ -31,7 +31,7 @@ public class SpellEffectLight : SpellEffect {
 			if (LightSource.MagicBrightness<Value)
 			{
 				LightSource.MagicBrightness=Value;
-				GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+				UWCharacter.Instance.playerInventory.UpdateLightSources();
 			}
 		}
 	}

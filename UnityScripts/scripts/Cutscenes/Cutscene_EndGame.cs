@@ -156,7 +156,7 @@ public class Cutscene_EndGame : Cuts {
 	public override void PreCutsceneEvent ()
 	{
 		base.PreCutsceneEvent ();
-		GameWorldController.instance.playerUW.transform.position=Vector3.zero;
+		UWCharacter.Instance.transform.position=Vector3.zero;
 		GameWorldController.instance.getMus().EndGame=true;		
 	}
 

@@ -82,7 +82,7 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
 		{
 			if (objInt().PickedUp==false)
 			{
@@ -105,7 +105,7 @@ public class LightSource : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -145,7 +145,7 @@ public class LightSource : object_base {
 		//CheckReferences();
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
-		PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		PlayerInventory pInv = UWCharacter.Instance.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{						
@@ -179,7 +179,7 @@ public class LightSource : object_base {
 			else
 			{//Clone the item and move it's clone to the inventory slot
 				GameObject split = Instantiate(this.gameObject);
-				split.name= split.name+"_"+ GameWorldController.instance.playerUW.summonCount++;
+				split.name= split.name+"_"+ UWCharacter.Instance.summonCount++;
 				split.GetComponent<ObjectInteraction>().link=1;//Increment and decrement the object count as appropiate;
 				objInt().link--;
 				split.transform.parent=this.transform.parent;
@@ -193,7 +193,7 @@ public class LightSource : object_base {
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_there_is_no_place_to_put_that_));
 		}
 		objInt().RefreshAnim();
-		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+		UWCharacter.Instance.playerInventory.UpdateLightSources();
 	}
 	
 	/// <summary>
@@ -210,7 +210,7 @@ public class LightSource : object_base {
 		objInt().RefreshAnim();
 		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
 		//duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
-		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+		UWCharacter.Instance.playerInventory.UpdateLightSources();
 	}
 
 	public override bool LookAt()

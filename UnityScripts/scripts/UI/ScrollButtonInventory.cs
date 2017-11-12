@@ -32,8 +32,8 @@ public class ScrollButtonInventory : Scrollbutton {
 		if (ScrollValue!=previousScrollValue)
 		{
 			previousScrollValue=ScrollValue;
-			GameWorldController.instance.playerUW.playerInventory.ContainerOffset=ScrollValue;
-			GameWorldController.instance.playerUW.playerInventory.Refresh ();
+			UWCharacter.Instance.playerInventory.ContainerOffset=ScrollValue;
+			UWCharacter.Instance.playerInventory.Refresh ();
 		}
 	}
 }

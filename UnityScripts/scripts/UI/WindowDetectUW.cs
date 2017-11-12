@@ -32,7 +32,7 @@ public class WindowDetectUW : WindowDetect {
 		/// </summary>
 		void Update ()
 		{
-				if (GameWorldController.instance.playerUW.isRoaming==true)
+				if (UWCharacter.Instance.isRoaming==true)
 				{//No inventory use while using wizard eye spell
 						return;
 				}
@@ -51,35 +51,35 @@ public class WindowDetectUW : WindowDetect {
 				{
 				case UWCharacter.InteractionModeAttack:
 						{
-								if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="")								
+								if (UWCharacter.Instance.PlayerMagic.ReadiedSpell!="")								
 								{//Player has spell to fire off first
 										return;
 								}
-								if (GameWorldController.instance.playerUW.PlayerCombat.AttackExecuting==true)
+								if (UWCharacter.Instance.PlayerCombat.AttackExecuting==true)
 								{//No attacks can be started while executing the last one.
 										return;
 								}
 								if  ((WindowDetectUW.CursorInMainWindow==false))
 								{
 										MouseHeldDown=false;
-										GameWorldController.instance.playerUW.PlayerCombat.AttackCharging=false;
+										UWCharacter.Instance.PlayerCombat.AttackCharging=false;
 								}
 								if ((MouseHeldDown==true)  )
 								{
-										if(GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==false)
+										if(UWCharacter.Instance.PlayerCombat.AttackCharging==false)
 										{//Begin the attack
-												GameWorldController.instance.playerUW.PlayerCombat.CombatBegin();
+												UWCharacter.Instance.PlayerCombat.CombatBegin();
 										}
-										if ((GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==true) && (GameWorldController.instance.playerUW.PlayerCombat.Charge<100))
+										if ((UWCharacter.Instance.PlayerCombat.AttackCharging==true) && (UWCharacter.Instance.PlayerCombat.Charge<100))
 										{//While still charging increase the charge by the charge rate.
-												GameWorldController.instance.playerUW.PlayerCombat.CombatCharging ();
+												UWCharacter.Instance.PlayerCombat.CombatCharging ();
 										}
 										return;
 								}
-								else if (GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==true)
+								else if (UWCharacter.Instance.PlayerCombat.AttackCharging==true)
 								{
 										//Player has been building an attack up and has released it.
-										GameWorldController.instance.playerUW.PlayerCombat.ReleaseAttack();
+										UWCharacter.Instance.PlayerCombat.ReleaseAttack();
 								}
 								break;
 						}
@@ -161,7 +161,7 @@ public class WindowDetectUW : WindowDetect {
 
 		protected override void OnPress (bool isPressed, int PtrID)
 		{
-				if (GameWorldController.instance.playerUW.isRoaming==true)
+				if (UWCharacter.Instance.isRoaming==true)
 				{//No inventory use while using wizard eye.
 						return;
 				}
@@ -193,7 +193,7 @@ public class WindowDetectUW : WindowDetect {
 
 		public void OnClick(int ptrID)
 		{
-				if (GameWorldController.instance.playerUW.isRoaming==true)
+				if (UWCharacter.Instance.isRoaming==true)
 				{//No inventory use while using wizard eye.
 						return;
 				}				
@@ -205,7 +205,7 @@ public class WindowDetectUW : WindowDetect {
 
 				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
 				{
-					if ((GameWorldController.instance.playerUW.CurVIT>0))
+					if ((UWCharacter.Instance.CurVIT>0))
 					{
 						UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
 						return;	
@@ -227,13 +227,13 @@ public class WindowDetectUW : WindowDetect {
 		/// <param name="ptrID">Ptr I.</param>
 		void ClickEvent(int ptrID)
 		{
-				if ((GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
+				if ((UWCharacter.Instance.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
 				{
 						//Debug.Log("player has a spell to cast");
 						return;
 				}
 
-				if ((ContextUIEnabled) && (ContextUIUse) && (GameWorldController.instance.playerUW.playerInventory.ObjectInHand==""))
+				if ((ContextUIEnabled) && (ContextUIUse) && (UWCharacter.Instance.playerInventory.ObjectInHand==""))
 				{//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
 						if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
 						{
@@ -254,32 +254,32 @@ public class WindowDetectUW : WindowDetect {
 				case UWCharacter.InteractionModeOptions://Options mode
 						return;//do nothing
 				case UWCharacter.InteractionModeTalk://Talk
-						GameWorldController.instance.playerUW.TalkMode();
+						UWCharacter.Instance.TalkMode();
 						break;
 				case UWCharacter.InteractionModePickup://Pickup
-						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+						if (UWCharacter.Instance.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 						{
 								UWWindowWait(1.0f);
 								ThrowObjectInHand();
 						}
 						else
 						{
-								GameWorldController.instance.playerUW.PickupMode(ptrID);
+								UWCharacter.Instance.PickupMode(ptrID);
 						}			
 						break;
 				case UWCharacter.InteractionModeLook://look
-						GameWorldController.instance.playerUW.LookMode();//do nothing
+						UWCharacter.Instance.LookMode();//do nothing
 						break;
 				case UWCharacter.InteractionModeAttack:	//attack
 						break;
 				case UWCharacter.InteractionModeUse://Use
-						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+						if (UWCharacter.Instance.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 						{
-								GameWorldController.instance.playerUW.UseMode();
+								UWCharacter.Instance.UseMode();
 						}
 						else
 						{
-								GameWorldController.instance.playerUW.UseMode();
+								UWCharacter.Instance.UseMode();
 						}
 						break;
 				}
@@ -291,16 +291,16 @@ public class WindowDetectUW : WindowDetect {
 		protected override void ThrowObjectInHand ()
 		{
 				base.ThrowObjectInHand ();
-				if (GameWorldController.instance.playerUW.playerInventory.GetObjectInHand()!="")
+				if (UWCharacter.Instance.playerInventory.GetObjectInHand()!="")
 				{//The player is holding something
-						if (GameWorldController.instance.playerUW.playerInventory.JustPickedup==false)//To prevent the click event dropping an object immediately after pickup
+						if (UWCharacter.Instance.playerInventory.JustPickedup==false)//To prevent the click event dropping an object immediately after pickup
 						{
 								//Determine what is directly in front of the player via a raycast
 								//If something is in the way then cancel the drop
 								//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 								Ray ray ;
-								if (GameWorldController.instance.playerUW.MouseLookEnabled==true)
+								if (UWCharacter.Instance.MouseLookEnabled==true)
 								{
 										ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 								}
@@ -321,7 +321,7 @@ public class WindowDetectUW : WindowDetect {
 
 										//Get the object being dropped and moved towards the end of the ray
 
-										GameObject droppedItem = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+										GameObject droppedItem = UWCharacter.Instance.playerInventory.GetGameObjectInHand(); //GameObject.Find(UWCharacter.Instance.playerInventory.ObjectInHand);
 
 
 										droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
@@ -332,9 +332,9 @@ public class WindowDetectUW : WindowDetect {
 										{//Set the picked up flag recursively for container items.
 												Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(),false);
 												Container.SetItemsParent(droppedItem.GetComponent<Container>(),GameWorldController.instance.LevelMarker());
-												Container.SetItemsPosition (droppedItem.GetComponent<Container>(),GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position);
+												Container.SetItemsPosition (droppedItem.GetComponent<Container>(),UWCharacter.Instance.playerInventory.InventoryMarker.transform.position);
 										}
-										droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
+										droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//UWCharacter.Instance.transform.position;
 
 										droppedItem.transform.parent = GameWorldController.instance.LevelMarker();
 										GameWorldController.MoveToWorld(droppedItem);
@@ -349,13 +349,13 @@ public class WindowDetectUW : WindowDetect {
 
 										//Clear the object and reset the cursor
 										UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-										GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");
+										UWCharacter.Instance.playerInventory.SetObjectInHand("");
 								}
 
 						}
 						else
 						{				
-								GameWorldController.instance.playerUW.playerInventory.JustPickedup=false;//The next click event will allow dropping.
+								UWCharacter.Instance.playerInventory.JustPickedup=false;//The next click event will allow dropping.
 						}
 				}
 		}
@@ -373,7 +373,7 @@ public class WindowDetectUW : WindowDetect {
 				RectTransform pos= this.GetComponent<RectTransform>();
 				pos.localPosition = new Vector3(0f,0f,0f);
 				pos.sizeDelta = new Vector3(0f, 0f);
-				GameWorldController.instance.playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
+				UWCharacter.Instance.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 				UWHUD.instance.RefreshPanels(-1);//refresh controls
 		}
 
@@ -388,7 +388,7 @@ public class WindowDetectUW : WindowDetect {
 				RectTransform pos= this.GetComponent<RectTransform>();
 				pos.localPosition = new Vector3(-22f,25f,0f);
 				pos.sizeDelta = new Vector3(-148f, -88f);
-				GameWorldController.instance.playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+				UWCharacter.Instance.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
 				UWHUD.instance.RefreshPanels(-1);//refresh controls
 		}
 
@@ -400,9 +400,9 @@ public class WindowDetectUW : WindowDetect {
 		{//Controls switching between Mouselook and interaction and sets the cursor icon
 				if (ConversationVM.InConversation==true)
 				{
-						GameWorldController.instance.playerUW.XAxis.enabled=false;
-						GameWorldController.instance.playerUW.YAxis.enabled=false;
-						GameWorldController.instance.playerUW.MouseLookEnabled=false;
+						UWCharacter.Instance.XAxis.enabled=false;
+						UWCharacter.Instance.YAxis.enabled=false;
+						UWCharacter.Instance.MouseLookEnabled=false;
 						Cursor.lockState = CursorLockMode.None;
 						CursorPosition.center = Event.current.mousePosition;
 						GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
@@ -435,11 +435,11 @@ public class WindowDetectUW : WindowDetect {
 								//if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
 								if  ( (Event.current.keyCode == KeyBindings.instance.ToggleMouseLook) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
 								{			
-										if (GameWorldController.instance.playerUW.MouseLookEnabled==false)
+										if (UWCharacter.Instance.MouseLookEnabled==false)
 										{//Switch to mouse look.
-												GameWorldController.instance.playerUW.YAxis.enabled=true;
-												GameWorldController.instance.playerUW.XAxis.enabled=true;
-												GameWorldController.instance.playerUW.MouseLookEnabled=true;
+												UWCharacter.Instance.YAxis.enabled=true;
+												UWCharacter.Instance.XAxis.enabled=true;
+												UWCharacter.Instance.MouseLookEnabled=true;
 												Cursor.lockState = CursorLockMode.Locked;
 												Cursor.visible = false;
 
@@ -447,9 +447,9 @@ public class WindowDetectUW : WindowDetect {
 										}
 										else
 										{
-												GameWorldController.instance.playerUW.XAxis.enabled=false;
-												GameWorldController.instance.playerUW.YAxis.enabled=false;
-												GameWorldController.instance.playerUW.MouseLookEnabled=false;
+												UWCharacter.Instance.XAxis.enabled=false;
+												UWCharacter.Instance.YAxis.enabled=false;
+												UWCharacter.Instance.MouseLookEnabled=false;
 												Cursor.lockState = CursorLockMode.None;
 												UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;	
 												//UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
@@ -459,7 +459,7 @@ public class WindowDetectUW : WindowDetect {
 						}
 
 
-						if (GameWorldController.instance.playerUW.MouseLookEnabled == false)
+						if (UWCharacter.Instance.MouseLookEnabled == false)
 						{
 								if ((WindowDetectUW.InMap==true) && (MapInteraction.InteractionMode==2))
 								{
@@ -481,7 +481,7 @@ public class WindowDetectUW : WindowDetect {
 								//Added due to unity bug where mouse is offscreen!!!!
 								//UGH!!!
 								//WHen not in combat or with a readied spell.
-								if ((UWCharacter.InteractionMode!=UWCharacter.InteractionModeAttack) && (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell==""))
+								if ((UWCharacter.InteractionMode!=UWCharacter.InteractionModeAttack) && (UWCharacter.Instance.PlayerMagic.ReadiedSpell==""))
 								{
 										if (JustClicked==false)
 										{
@@ -548,8 +548,8 @@ public class WindowDetectUW : WindowDetect {
 		/// </summary>
 		void TryTracking()
 		{
-				bool SkillSucess = GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillTrack,Random.Range(0,30));
-				int skillLevel = GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillTrack);
+				bool SkillSucess = UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillTrack,Random.Range(0,30));
+				int skillLevel = UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillTrack);
 				Debug.Log("Track test = " + SkillSucess);
 				Skills.TrackMonsters(this.gameObject,(float)skillLevel/3,SkillSucess);
 		}

@@ -39,64 +39,64 @@ public class a_set_variable_trap : a_variable_trap {
 		int OrigValue=0;
 		if (objInt().zpos!=0)
 		{//Variable Operations
-			OrigValue=GameWorldController.instance.playerUW.quest().variables[objInt().zpos];
+			OrigValue=Quest.instance.variables[objInt().zpos];
 			switch(objInt().heading)
 			{
 			case 0://Add
 				if (_RES==GAME_UW2)
 				{
-					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
 					{
-						GameWorldController.instance.playerUW.quest().variables[objInt().zpos] += VariableValue();
+						Quest.instance.variables[objInt().zpos] += VariableValue();
 						operation = "add";	
 					}
 				}
 				else
 				{
-					GameWorldController.instance.playerUW.quest().variables[objInt().zpos] += VariableValue();
+					Quest.instance.variables[objInt().zpos] += VariableValue();
 					operation = "add";	
 				}
 				break;
 			case 1://Sub
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] -= VariableValue();
+				Quest.instance.variables[objInt().zpos] -= VariableValue();
 				operation = "Sub";
 				break;
 			case 2://Set
 				if  (_RES==GAME_UW2)
 				{//Some variables in UW2 are actually pointers to the mysterious x_clock
-					if ( ! GameWorldController.instance.playerUW.quest().x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
 					{
-						GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
+						Quest.instance.variables[objInt().zpos] = VariableValue();						
 						operation = "Set";
 					}
 				}
 				else
 				{
-					GameWorldController.instance.playerUW.quest().variables[objInt().zpos] = VariableValue();						
+					Quest.instance.variables[objInt().zpos] = VariableValue();						
 					operation = "Set";
 				}	
 				break;
 			case 3://AND
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] &= VariableValue();
+				Quest.instance.variables[objInt().zpos] &= VariableValue();
 				operation = "And";
 				break;
 			case 4://OR
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] |= VariableValue();
+				Quest.instance.variables[objInt().zpos] |= VariableValue();
 				operation = "or";
 				break;
 			case 5://XOR
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] ^= VariableValue();
+				Quest.instance.variables[objInt().zpos] ^= VariableValue();
 				operation = "xor";
 				break;
 			case 6://Shift left
 				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
-				//GameWorldController.instance.playerUW.quest().variables[VariableIndex] = GameWorldController.instance.playerUW.quest().variables[VariableIndex]<<VariableValue);
-				GameWorldController.instance.playerUW.quest().variables[objInt().zpos] =	GameWorldController.instance.playerUW.quest().variables[objInt().zpos] * (2*VariableValue()) & 63;
+				//Quest.instance.variables[VariableIndex] = Quest.instance.variables[VariableIndex]<<VariableValue);
+				Quest.instance.variables[objInt().zpos] =	Quest.instance.variables[objInt().zpos] * (2*VariableValue()) & 63;
 				operation = "shl";
 				break;
 
 			}
-			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + GameWorldController.instance.playerUW.quest().variables[objInt().zpos] + " using varvalue" + VariableValue());
+			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + Quest.instance.variables[objInt().zpos] + " using varvalue" + VariableValue());
 		}
 		else
 		{//Bitwise operations on bitfield

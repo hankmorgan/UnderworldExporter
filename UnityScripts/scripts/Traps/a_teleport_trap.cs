@@ -29,9 +29,9 @@ public class a_teleport_trap : trap_base {
 		{
 			return;
 		}
-		if ((_RES==GAME_UW2) && (GameWorldController.instance.playerUW.JustTeleported))
+		if ((_RES==GAME_UW2) && (UWCharacter.Instance.JustTeleported))
 		{//To stop infinite level transitions in UW2
-			//GameWorldController.instance.playerUW.JustTeleported=false;
+			//UWCharacter.Instance.JustTeleported=false;
 			return;
 		}
 
@@ -39,30 +39,30 @@ public class a_teleport_trap : trap_base {
 		float targetY= (float)objInt().owner*1.2f + 0.6f;
 
 
-		GameWorldController.instance.playerUW.JustTeleported=true;	
-		GameWorldController.instance.playerUW.teleportedTimer=0f;
+		UWCharacter.Instance.JustTeleported=true;	
+		UWCharacter.Instance.teleportedTimer=0f;
 		if (objInt().zpos==0)
 		{//Stay on this level.
 			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(objInt().quality,objInt().owner)))*0.15f;
-			GameWorldController.instance.playerUW.transform.position = new Vector3(targetX,Height+0.3f,targetY);
-			GameWorldController.instance.playerUW.TeleportPosition=GameWorldController.instance.playerUW.transform.position;
+			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+			UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.teleportedTimer=-1f;//Longer wait period when travelling between levels.
+			UWCharacter.Instance.teleportedTimer=-1f;//Longer wait period when travelling between levels.
 			//Goto to another level
 			if (_RES==GAME_UW1)
 			{//Special case for the magic drain effect in UW1
-				if (GameWorldController.instance.playerUW.PlayerMagic.MaxMana<GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana)
+				if (UWCharacter.Instance.PlayerMagic.MaxMana<UWCharacter.Instance.PlayerMagic.TrueMaxMana)
 				{
-					GameWorldController.instance.playerUW.PlayerMagic.MaxMana=GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana;
-					if (GameWorldController.instance.playerUW.PlayerMagic.CurMana==0)
+					UWCharacter.Instance.PlayerMagic.MaxMana=UWCharacter.Instance.PlayerMagic.TrueMaxMana;
+					if (UWCharacter.Instance.PlayerMagic.CurMana==0)
 					{
-						GameWorldController.instance.playerUW.PlayerMagic.CurMana = GameWorldController.instance.playerUW.PlayerMagic.MaxMana/4;
+						UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana/4;
 					}
 				}
 			}
-			GameWorldController.instance.playerUW.playerMotor.movement.velocity=Vector3.zero;
+			UWCharacter.Instance.playerMotor.movement.velocity=Vector3.zero;
 			GameWorldController.instance.SwitchLevel((short)(objInt().zpos-1),objInt().quality,objInt().owner);
 		}
 	}

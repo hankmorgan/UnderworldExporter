@@ -186,7 +186,7 @@ public class MusicController : UWEBase {
 			InIntro = false;
 			Combat = true;
 		}
-		if ((GameWorldController.instance.playerUW.CurVIT <= 10) && (Combat == true)) {
+		if ((UWCharacter.Instance.CurVIT <= 10) && (Combat == true)) {
 			Injured = true;
 		}
 		else {

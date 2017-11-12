@@ -266,8 +266,8 @@ public class MainMenuHud : GuiBase {
 				GameClock.instance._day=0;
 				GameClock.instance._minute=51;
 				GameClock.instance._second=15;
-				GameWorldController.instance.playerUW.CurVIT=255;
-				GameWorldController.instance.playerUW.MaxVIT=255;
+				UWCharacter.Instance.CurVIT=255;
+				UWCharacter.Instance.MaxVIT=255;
 				JourneyOnwards();
 				return;
 			}
@@ -292,7 +292,7 @@ public class MainMenuHud : GuiBase {
 
 			//Load up the map
 			JourneyOnwards();
-			GameWorldController.instance.playerUW.playerInventory.Refresh();
+			UWCharacter.Instance.playerInventory.Refresh();
 			//000~001~162~Restore Game Complete. \n
 			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_restore_game_complete_));
 			return;	
@@ -328,15 +328,15 @@ public class MainMenuHud : GuiBase {
 				{
 				case Chargen.STAGE_GENDER:
 					//Gender
-						GameWorldController.instance.playerUW.PlayerSkills.InitSkills();//Set all skills to zero
+						UWCharacter.Instance.PlayerSkills.InitSkills();//Set all skills to zero
 
 						if (option == 0)
 						{
-							GameWorldController.instance.playerUW.isFemale=false;
+							UWCharacter.Instance.isFemale=false;
 						}
 						else
 						{
-							GameWorldController.instance.playerUW.isFemale=true;
+							UWCharacter.Instance.isFemale=true;
 						}
 						CharGender.text=StringController.instance.GetString(2,Chargen.GetChoices(chargenStage,-1)[option]);
 						chargenStage++;
@@ -347,32 +347,32 @@ public class MainMenuHud : GuiBase {
 					//Handedness
 						if (option == 0)
 						{
-								GameWorldController.instance.playerUW.isLefty=true;
+								UWCharacter.Instance.isLefty=true;
 						}
 						else
 						{
-								GameWorldController.instance.playerUW.isLefty=false;
+								UWCharacter.Instance.isLefty=false;
 						}
 						chargenStage++;
 						PlaceButtons(Chargen.GetChoices(chargenStage,-1),false);
 					break;
 				case Chargen.STAGE_CLASS:
-						GameWorldController.instance.playerUW.CharClass=option;
+						UWCharacter.Instance.CharClass=option;
 
 						CharClassAns=option;
 						SkillSeed= Chargen.getSeed(option);
 						//Set str, int and dex here.
 						//Max attribute is 30. Min is 12.
-						GameWorldController.instance.playerUW.PlayerSkills.STR=Mathf.Min(Mathf.Max(Chargen.getBaseSTR(option) + Random.Range(1,SkillSeed),12),30);
-						GameWorldController.instance.playerUW.PlayerSkills.INT=Mathf.Min(Mathf.Max(Chargen.getBaseINT(option) + Random.Range(1,SkillSeed),12),30);
-						GameWorldController.instance.playerUW.PlayerSkills.DEX=Mathf.Min(Mathf.Max(Chargen.getBaseDEX(option) + Random.Range(1,SkillSeed),12),30);
-						CharStr.text = "Str:   "+ GameWorldController.instance.playerUW.PlayerSkills.STR.ToString();
-						CharInt.text = "Int:   "+ GameWorldController.instance.playerUW.PlayerSkills.INT.ToString();
-						CharDex.text = "Dex:   "+ GameWorldController.instance.playerUW.PlayerSkills.DEX.ToString();
-						CharClass.text= getClass(GameWorldController.instance.playerUW.CharClass);
-						GameWorldController.instance.playerUW.MaxVIT= (GameWorldController.instance.playerUW.PlayerSkills.STR*2);
-						GameWorldController.instance.playerUW.CurVIT= (GameWorldController.instance.playerUW.PlayerSkills.STR*2);
-						CharVit.text = "Vit:   "+ GameWorldController.instance.playerUW.MaxVIT.ToString();
+						UWCharacter.Instance.PlayerSkills.STR=Mathf.Min(Mathf.Max(Chargen.getBaseSTR(option) + Random.Range(1,SkillSeed),12),30);
+						UWCharacter.Instance.PlayerSkills.INT=Mathf.Min(Mathf.Max(Chargen.getBaseINT(option) + Random.Range(1,SkillSeed),12),30);
+						UWCharacter.Instance.PlayerSkills.DEX=Mathf.Min(Mathf.Max(Chargen.getBaseDEX(option) + Random.Range(1,SkillSeed),12),30);
+						CharStr.text = "Str:   "+ UWCharacter.Instance.PlayerSkills.STR.ToString();
+						CharInt.text = "Int:   "+ UWCharacter.Instance.PlayerSkills.INT.ToString();
+						CharDex.text = "Dex:   "+ UWCharacter.Instance.PlayerSkills.DEX.ToString();
+						CharClass.text= getClass(UWCharacter.Instance.CharClass);
+						UWCharacter.Instance.MaxVIT= (UWCharacter.Instance.PlayerSkills.STR*2);
+						UWCharacter.Instance.CurVIT= (UWCharacter.Instance.PlayerSkills.STR*2);
+						CharVit.text = "Vit:   "+ UWCharacter.Instance.MaxVIT.ToString();
 						//todo
 						chargenStage++;
 						if (Chargen.GetChoices(chargenStage,CharClassAns).GetUpperBound(0)==0)
@@ -418,11 +418,11 @@ public class MainMenuHud : GuiBase {
 				case Chargen.STAGE_PORTRAIT:
 						chargenStage++;
 						PlaceButtons(Chargen.GetChoices(chargenStage,-1),false);
-						GameWorldController.instance.playerUW.Body=option;
+						UWCharacter.Instance.Body=option;
 						GRLoader chrBdy = new GRLoader(GRLoader.BODIES_GR);
 						//Show the matching body.
 						//Update the paperdoll.
-						if (GameWorldController.instance.playerUW.isFemale)
+						if (UWCharacter.Instance.isFemale)
 						{
 								//CharGenBody.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (22+option).ToString("0000"));		
 								CharGenBody.texture = chrBtns.LoadImageAt(22+option);
@@ -451,7 +451,7 @@ public class MainMenuHud : GuiBase {
 						break;
 				case Chargen.STAGE_NAME:
 						//Set the player name.
-						//GameWorldController.instance.playerUW.CharName=CharNameAns;
+						//UWCharacter.Instance.CharName=CharNameAns;
 						chargenStage++;
 						EnterCharName.gameObject.SetActive(false);
 						PlaceButtons(Chargen.GetChoices(chargenStage,CharClassAns),false);
@@ -460,47 +460,47 @@ public class MainMenuHud : GuiBase {
 						if (option==0)
 						{
 							//Start a new game
-								GameWorldController.instance.playerUW.EXP=50;
-								GameWorldController.instance.playerUW.TrainingPoints=1;
-								GameWorldController.instance.playerUW.PlayerMagic.MaxMana= GameWorldController.instance.playerUW.PlayerSkills.ManaSkill*3;
-								GameWorldController.instance.playerUW.PlayerMagic.CurMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
-								GameWorldController.instance.playerUW.PlayerMagic.TrueMaxMana=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+								UWCharacter.Instance.EXP=50;
+								UWCharacter.Instance.TrainingPoints=1;
+								UWCharacter.Instance.PlayerMagic.MaxMana= UWCharacter.Instance.PlayerSkills.ManaSkill*3;
+								UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
+								UWCharacter.Instance.PlayerMagic.TrueMaxMana=UWCharacter.Instance.PlayerMagic.MaxMana;
 								GameWorldController.instance.InitBGlobals(0);
 								//Reset quest variables
-								for (int i=0; i<= GameWorldController.instance.playerUW.quest().QuestVariables.GetUpperBound(0);i++)
+								for (int i=0; i<= Quest.instance.QuestVariables.GetUpperBound(0);i++)
 								{
-									GameWorldController.instance.playerUW.quest().QuestVariables[i]=0;		
+									Quest.instance.QuestVariables[i]=0;		
 								}
-								for (int i=0; i<=GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes.GetUpperBound(0);i++)
+								for (int i=0; i<=UWCharacter.Instance.PlayerMagic.PlayerRunes.GetUpperBound(0);i++)
 								{
-									GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[i]=false;
+									UWCharacter.Instance.PlayerMagic.PlayerRunes[i]=false;
 								}
 								switch(_RES)
 								{
 								case GAME_UW1:
 								case GAME_UWDEMO:
-										GameWorldController.instance.playerUW.quest().TalismansRemaining=8;
-										GameWorldController.instance.playerUW.quest().DayGaramonDream=0;
-										GameWorldController.instance.playerUW.quest().GaramonDream=0;
-										GameWorldController.instance.playerUW.quest().IncenseDream=0;
-										GameWorldController.instance.playerUW.quest().isGaramonBuried=false;
-										GameWorldController.instance.playerUW.quest().isOrbDestroyed=false;
-										GameWorldController.instance.playerUW.quest().isCupFound=false;
+										Quest.instance.TalismansRemaining=8;
+										Quest.instance.DayGaramonDream=0;
+										Quest.instance.GaramonDream=0;
+										Quest.instance.IncenseDream=0;
+										Quest.instance.isGaramonBuried=false;
+										Quest.instance.isOrbDestroyed=false;
+										Quest.instance.isCupFound=false;
 										break;
 								case  GAME_UW2:
-										GameWorldController.instance.playerUW.quest().variables[101]=255;
-										GameWorldController.instance.playerUW.quest().variables[102]=255;
-										GameWorldController.instance.playerUW.quest().variables[103]=255;
-										GameWorldController.instance.playerUW.quest().variables[104]=255;
-										GameWorldController.instance.playerUW.quest().variables[105]=255;
-										GameWorldController.instance.playerUW.quest().variables[106]=255;
+										Quest.instance.variables[101]=255;
+										Quest.instance.variables[102]=255;
+										Quest.instance.variables[103]=255;
+										Quest.instance.variables[104]=255;
+										Quest.instance.variables[105]=255;
+										Quest.instance.variables[106]=255;
 										break;
 								}
 								GameClock.instance._day=0;
 								GameClock.instance._minute=51;
 								GameClock.instance._second=15;
-								GameWorldController.instance.playerUW.Fatigue=20;
-								GameWorldController.instance.playerUW.FoodLevel=192;
+								UWCharacter.Instance.Fatigue=20;
+								UWCharacter.Instance.FoodLevel=192;
 								JourneyOnwards();
 						}
 						else
@@ -523,7 +523,7 @@ public class MainMenuHud : GuiBase {
 				//chargenStage++;
 				//CharNameAns=EnterCharName.text;
 				CharName.text=EnterCharName.text;
-				GameWorldController.instance.playerUW.CharName=EnterCharName.text;
+				UWCharacter.Instance.CharName=EnterCharName.text;
 				EnterCharName.gameObject.SetActive(false);
 				ChargenClick(0);
 		}
@@ -534,19 +534,19 @@ public class MainMenuHud : GuiBase {
 				//actualSkillNo++;
 				//Increase the skill by up to (no more than the skill seed) Apply the attibute bonus if needed.
 				int SkillScore=Mathf.Min( Random.Range(1,SkillSeed) + Skills.getSkillAttributeBonus(actualSkillNo) , SkillSeed);
-				GameWorldController.instance.playerUW.PlayerSkills.AdvanceSkill(actualSkillNo ,SkillScore);
+				UWCharacter.Instance.PlayerSkills.AdvanceSkill(actualSkillNo ,SkillScore);
 				string skillname= StringController.instance.GetString(2,Chargen.GetChoices(Stage,CharClassAns)[option]);
 				for(int i=0;i<5;i++)//Update the display
 				{
 						if (CharSkillName[i].text=="")
 						{//First free slot
 							CharSkillName[i].text= skillname;
-							CharSkillVal[i].text= GameWorldController.instance.playerUW.PlayerSkills.GetSkill(actualSkillNo).ToString();
+							CharSkillVal[i].text= UWCharacter.Instance.PlayerSkills.GetSkill(actualSkillNo).ToString();
 							return;
 						}
 						else if (CharSkillName[i].text == skillname)
 						{//Skill found add to it.
-							CharSkillVal[i].text= GameWorldController.instance.playerUW.PlayerSkills.GetSkill(actualSkillNo).ToString();
+							CharSkillVal[i].text= UWCharacter.Instance.PlayerSkills.GetSkill(actualSkillNo).ToString();
 							return;
 						}
 				}
@@ -612,7 +612,7 @@ public class MainMenuHud : GuiBase {
 			if (isImageButton)
 			{//JUST A VERTICAL LIST OF PORTRAITS
 				int GenderPortraitIndex=7;
-				if (GameWorldController.instance.playerUW.isFemale)
+				if (UWCharacter.Instance.isFemale)
 				{
 					GenderPortraitIndex=12;
 				}
@@ -687,14 +687,14 @@ public class MainMenuHud : GuiBase {
 				
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 
-			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+			UWCharacter.Instance.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
-			GameWorldController.instance.playerUW.playerController.enabled=true;
+			UWCharacter.Instance.playerController.enabled=true;
 			GameWorldController.instance.getMus().Death=false;
-			GameWorldController.instance.playerUW.playerMotor.enabled=true;
+			UWCharacter.Instance.playerMotor.enabled=true;
 			GameWorldController.instance.AtMainMenu=false;
-			GameWorldController.instance.playerUW.playerInventory.Refresh();
-			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+			UWCharacter.Instance.playerInventory.Refresh();
+			UWCharacter.Instance.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			MainMenuHud.instance.gameObject.SetActive(false);
 			if (EditorMode)

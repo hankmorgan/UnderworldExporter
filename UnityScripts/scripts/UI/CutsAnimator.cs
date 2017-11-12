@@ -86,16 +86,16 @@ public class CutsAnimator : GuiBase {
 								GameWorldController.instance.getMus().Fleeing=false;
 								MusicController.LastAttackCounter=0.0f;
 						}
-						GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
-						GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
+						UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 						SetAnimation= "Anim_Base";//Clears out the animation.
 
-						if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
+						if (GameWorldController.instance.LevelNo!=UWCharacter.Instance.ResurrectLevel-1)
 						{
-							GameWorldController.instance.SwitchLevel((short)(GameWorldController.instance.playerUW.ResurrectLevel-1));
+							GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel-1));
 						}
-						GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
-						GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
+						UWCharacter.Instance.gameObject.transform.position=UWCharacter.Instance.ResurrectPosition;
+						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 						break;
 					}
 
@@ -133,7 +133,7 @@ public class CutsAnimator : GuiBase {
 						GameWorldController.instance.LevelNo=-1;
 						break;
 				default:
-						GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+						UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 						SetAnimation="Anim_Base";
 						break;
 				}
@@ -141,7 +141,7 @@ public class CutsAnimator : GuiBase {
 
 		void PlayAnimFile(string animName)
 		{			
-			GameWorldController.instance.playerUW.playerCam.cullingMask=0;
+			UWCharacter.Instance.playerCam.cullingMask=0;
 			Reset=true;
 			frameIndex=0;	
 			StopAllCoroutines();
@@ -156,7 +156,7 @@ public class CutsAnimator : GuiBase {
 			case "":
 			case "anim_base":
 				TargetControl.material=null;
-				GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+				UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 				TargetControl.texture=anim_base;
 				break;	
 			case "splashlookingglass":

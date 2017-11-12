@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SpellEffectsDisplay : GuiBase_Draggable {
 	public int SlotNumber;
-	//public static UWCharacter GameWorldController.instance.playerUW;
+	//public static UWCharacter UWCharacter.Instance;
 	private int setSpell=-1;
 	private RawImage thisSpell;
 	private static Texture2D SpellBlank;
@@ -23,16 +23,16 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber] != null)
+		if (UWCharacter.Instance.ActiveSpell[SlotNumber] != null)
 		{
-			if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon()!=setSpell)
+			if (UWCharacter.Instance.ActiveSpell[SlotNumber].EffectIcon()!=setSpell)
 			{
-				setSpell= GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon();
+				setSpell= UWCharacter.Instance.ActiveSpell[SlotNumber].EffectIcon();
 				if (setSpell > -1)
 				{
-					//thisSpell.texture= Resources.Load <Texture2D> (_RES +"/HUD/Spells/spells_" + GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+					//thisSpell.texture= Resources.Load <Texture2D> (_RES +"/HUD/Spells/spells_" + UWCharacter.Instance.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
 
-					thisSpell.texture = GameWorldController.instance.SpellIcons.LoadImageAt(GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon());
+					thisSpell.texture = GameWorldController.instance.SpellIcons.LoadImageAt(UWCharacter.Instance.ActiveSpell[SlotNumber].EffectIcon());
 				}
 				else
 				{
@@ -60,7 +60,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	
 	void ClickEvent(int ptrID)
 	{
-		if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber]==null)
+		if (UWCharacter.Instance.ActiveSpell[SlotNumber]==null)
 		{
 			return;
 		}
@@ -68,12 +68,12 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 		{
 		case -1://Left click
 		{
-			GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].CancelEffect();
+			UWCharacter.Instance.ActiveSpell[SlotNumber].CancelEffect();
 			break;
 		}
 		case -2://right click
 		{
-			UWHUD.instance.MessageScroll.Add (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].getSpellDescription());
+			UWHUD.instance.MessageScroll.Add (UWCharacter.Instance.ActiveSpell[SlotNumber].getSpellDescription());
 			break;
 		}
 		}

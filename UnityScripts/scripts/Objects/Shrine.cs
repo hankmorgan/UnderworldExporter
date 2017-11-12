@@ -62,7 +62,7 @@ public class Shrine : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if (WaitingForInput==false)
 			{
@@ -84,7 +84,7 @@ public class Shrine : object_base {
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());			
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());			
 		}
 	}
 
@@ -117,8 +117,8 @@ public class Shrine : object_base {
 				}
 
 		int SkillPointsToAdd=Random.Range(1,4) ;
-		Skills playerSkills= GameWorldController.instance.playerUW.PlayerSkills;
-		if (GameWorldController.instance.playerUW.TrainingPoints==0)
+		Skills playerSkills= UWCharacter.Instance.PlayerSkills;
+		if (UWCharacter.Instance.TrainingPoints==0)
 		{
 			//000~001~024~You are not ready to advance. \n
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_are_not_ready_to_advance_));						
@@ -233,7 +233,7 @@ public class Shrine : object_base {
 		if (answer!="")
 		{
 			UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
-			GameWorldController.instance.playerUW.TrainingPoints-=1;
+			UWCharacter.Instance.TrainingPoints-=1;
 		}
 		else
 		{
@@ -260,7 +260,7 @@ public class Shrine : object_base {
 			/*ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
 			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 			GameWorldController.MoveToInventory(myObjInt.gameObject);*/
-			GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
+			UWCharacter.Instance.playerInventory.ObjectInHand=myObjInt.name;
 			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 			InteractionModeControl.UpdateNow=true;

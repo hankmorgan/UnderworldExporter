@@ -77,7 +77,7 @@ public class a_hack_trap_terraform_puzzle : a_hack_trap {
 					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=(short)((objInt().owner-2)*2);
 					if ((TileMap.visitTileX == tileX) && (TileMap.visitTileY==tileY))
 					{
-						GameWorldController.instance.playerUW.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+						UWCharacter.Instance.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
 					}
 				}
 				GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();

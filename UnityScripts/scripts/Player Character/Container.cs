@@ -178,7 +178,7 @@ public class Container : object_base {
 
 	public void OpenContainer()
 	{
-		GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
+		UWCharacter.Instance.playerInventory.ContainerOffset=0;
 		ScrollButtonStatsDisplay.ScrollValue=0;
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
@@ -192,21 +192,21 @@ public class Container : object_base {
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
-			ContainerParent=GameWorldController.instance.playerUW.playerInventory.currentContainer;
+			ContainerParent=UWCharacter.Instance.playerInventory.currentContainer;
 		}
-		GameWorldController.instance.playerUW.playerInventory.currentContainer=this.name;
-		if (GameWorldController.instance.playerUW.playerInventory.currentContainer=="")
+		UWCharacter.Instance.playerInventory.currentContainer=this.name;
+		if (UWCharacter.Instance.playerInventory.currentContainer=="")
 		{
-			GameWorldController.instance.playerUW.playerInventory.currentContainer=GameWorldController.instance.playerUW.name;
-			this.ContainerParent=GameWorldController.instance.playerUW.name;
+			UWCharacter.Instance.playerInventory.currentContainer=UWCharacter.Instance.name;
+			this.ContainerParent=UWCharacter.Instance.name;
 		}
 		for (short i = 0; i<8; i++)
 		{
 			string sItem = this.GetItemAt(i);
-			GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
+			UWCharacter.Instance.playerInventory.SetObjectAtSlot((short)(i+11),sItem);
 		}
 		UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
-		if ((CountItems()>=8) && (this!=GameWorldController.instance.playerUW.playerInventory.playerContainer))
+		if ((CountItems()>=8) && (this!=UWCharacter.Instance.playerInventory.playerContainer))
 		{
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(true);
 			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(true);
@@ -453,7 +453,7 @@ public class Container : object_base {
 
 	public override bool use ()
 	{
-		GameObject ObjectInHand=GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand();
+		GameObject ObjectInHand=UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 		//TODO:add object to container or open container.
 		//Container cn = this.gameObject.GetComponent<Container>();
 		if (ObjectInHand == null)
@@ -483,14 +483,14 @@ public class Container : object_base {
 			{
 				if ((ObjectInHand.GetComponent<ObjectInteraction>().isQuant()==false) || (ObjectInHand.GetComponent<ObjectInteraction>().isEnchanted()))
 				{
-					AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+					AddItemToContainer(UWCharacter.Instance.playerInventory.ObjectInHand);
 				}
 				else
 				{
 					AddItemMergedItemToContainer(ObjectInHand.gameObject);
 				}
 				//If the item is already in the current player container then remove it's reference
-				//if(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer())
+				//if(UWCharacter.Instance.playerInventory.GetCurrentContainer())
 				//	{}
 
 				if (isOpenOnPanel == true)
@@ -500,9 +500,9 @@ public class Container : object_base {
 				else
 				{
 					//Remove to prevent item duplication
-					removeFromContainer(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
+					removeFromContainer(UWCharacter.Instance.playerInventory.GetCurrentContainer(),UWCharacter.Instance.playerInventory.ObjectInHand);
 				}
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= "";
+				UWCharacter.Instance.playerInventory.ObjectInHand= "";
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 
 				return true;
@@ -547,7 +547,7 @@ public class Container : object_base {
 
 	public float GetFreeCapacity()
 	{
-		if (this.gameObject.name==GameWorldController.instance.playerUW.name)
+		if (this.gameObject.name==UWCharacter.Instance.name)
 		{
 			return 999;
 		}
@@ -560,12 +560,12 @@ public class Container : object_base {
 		{
 			return true;
 		}
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			return true;
 		}
 		//Test the various rules for this slot
-		ObjectInteraction objInt = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+		ObjectInteraction objInt = UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 		//If in a non player container check that the object in hand can be added to it.
 		bool TypeTest=false;
 		//If in a non player container check that the container has the weight capacity to accept it.
@@ -795,7 +795,7 @@ public class Container : object_base {
 	/// <returns>The accepted.</returns>
 	public int ObjectsAccepted()
 	{
-		if (this== GameWorldController.instance.playerUW.playerInventory.playerContainer)
+		if (this== UWCharacter.Instance.playerInventory.playerContainer)
 		{
 			return -1;
 		}

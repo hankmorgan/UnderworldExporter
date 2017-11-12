@@ -7,7 +7,7 @@ public override bool use ()
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
+			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
 				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,130));
@@ -15,7 +15,7 @@ public override bool use ()
 			}
 			else
 			{
-				return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 			}
 		}
 		else

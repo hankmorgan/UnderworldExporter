@@ -224,6 +224,12 @@ public class Quest : UWEBase {
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
 	public int[] x_clocks=new int[16];
 
+	public static Quest instance;
+
+	void Awake()
+	{
+		instance=this;
+	}
 
 	void Start()
 	{
@@ -300,7 +306,7 @@ public class Quest : UWEBase {
 				case 51://This changes a quest variable!
 					{
 						Debug.Log("quest/variable = " + index + " set to " + value);
-						GameWorldController.instance.playerUW.quest().QuestVariables[index]=value;
+						Quest.instance.QuestVariables[index]=value;
 						return true;
 					}
 			}

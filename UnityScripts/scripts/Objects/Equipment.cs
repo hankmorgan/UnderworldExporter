@@ -29,9 +29,9 @@ public class Equipment : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 		else
 		{
@@ -99,7 +99,7 @@ public class Equipment : object_base {
 			//TODO:At the moment it suceeds but in future implement failures and breakages.
 			//Find out what the story with the sword of justice is?
 			//Do the result at the end of the animation.
-			if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillRepair,0))
+			if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
 								objInt().quality +=5; //objInt().quality+5;
 				if (objInt().quality >63){objInt().quality=63;}
@@ -112,7 +112,7 @@ public class Equipment : object_base {
 			UpdateQuality();
 		}
 		//cancel the repair 
-		GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+		UWCharacter.Instance.playerInventory.ObjectInHand="";
 		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 	}
 
@@ -128,7 +128,7 @@ public class Equipment : object_base {
 				case ObjectInteraction.IdentificationFlags.Unidentified:
 				case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
 						//Try and re-id using lore skill
-						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+						if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 						{
 							objInt().heading=7;
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
@@ -207,7 +207,7 @@ public class Equipment : object_base {
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
 			if (this.GetComponent<Weapon>())
 			{
-				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
+				UWCharacter.Instance.PlayerCombat.currWeapon=null;
 			}
 		}
 		else

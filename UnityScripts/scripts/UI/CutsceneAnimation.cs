@@ -16,7 +16,7 @@ public class CutsceneAnimation : HudAnimation {
 
 	//public void PreAnimPlay()
 	//{//Called by events in certain animations when starting playing
-	//	GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+	//	UWCharacter.Instance.playerCam.cullingMask=0;//Stops the camera from rendering.
 	//	return;
 	//} 
 	
@@ -27,35 +27,35 @@ public class CutsceneAnimation : HudAnimation {
 		switch (SetAnimationFile)
 		{
 		case "FadeToBlackSleep":
-			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimationFile = "Anim_Base";//Clears out the animation.
-			Bedroll.WakeUp (GameWorldController.instance.playerUW);
+			Bedroll.WakeUp (UWCharacter.Instance);
 			break;
 		case "ChasmMap":
 			//maincam.enabled=true;
-			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_With_Sapling"://Resurrection
 		//	MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
 			if (GameWorldController.instance.getMus()!=null)
 			{
-				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
+				UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 				GameWorldController.instance.getMus().Death=false;
 				GameWorldController.instance.getMus().Combat=false;
 				GameWorldController.instance.getMus().Fleeing=false;
 				MusicController.LastAttackCounter=0.0f;
 			}
 			//maincam.enabled=true;
-			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			
 			
-			if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel-1)
+			if (GameWorldController.instance.LevelNo!=UWCharacter.Instance.ResurrectLevel-1)
 			{
-				GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel-1);
+				GameWorldController.instance.SwitchLevel(UWCharacter.Instance.ResurrectLevel-1);
 			}
-			GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
+			UWCharacter.Instance.gameObject.transform.position=UWCharacter.Instance.ResurrectPosition;
 			break;
 
 		case "Death"://Forever
@@ -65,7 +65,7 @@ public class CutsceneAnimation : HudAnimation {
 			break;
 		default:
 			//maincam.enabled=true;
-			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimationFile= "Anim_Base";//Clears out the animation.
 			break;
 		}

@@ -7,7 +7,7 @@ public class TradeSlot : GuiBase {
 
 	public bool PlayerSlot=false;
 	public int SlotNo;
-	//static UWCharacter GameWorldController.instance.playerUW;
+	//static UWCharacter UWCharacter.Instance;
 	//static PlayerInventory pInv;
 	public bool pressedDown=false;
 	public string objectInSlot;
@@ -104,13 +104,13 @@ public class TradeSlot : GuiBase {
 	public void PlayerSlotLeftClick()
 	{
 		if (TradeSlot.Locked){return;}
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand != "")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand != "")
 		{
 			//put the object in hand in this slot.
 			if (objectInSlot=="")
 			{//Empty slot
-				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+				objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
+				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				SlotImage.texture=UWHUD.instance.CursorIcon;
 				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 				Selected=true;
@@ -119,9 +119,9 @@ public class TradeSlot : GuiBase {
 			{//Swap the objects
 				string tmp;
 				tmp = objectInSlot;
-				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand=tmp;
-				UWHUD.instance.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
+				UWCharacter.Instance.playerInventory.ObjectInHand=tmp;
+				UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				Selected=true;
 			}
 		}
@@ -130,8 +130,8 @@ public class TradeSlot : GuiBase {
 			if (objectInSlot!="")
 			{
 				//Pickup the object in the slot
-				GameWorldController.instance.playerUW.playerInventory.SetObjectInHand(objectInSlot);
-				UWHUD.instance.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				UWCharacter.Instance.playerInventory.SetObjectInHand(objectInSlot);
+				UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				objectInSlot="";
 				SlotImage.texture=Blank;
 				Selected=false;
@@ -199,7 +199,7 @@ public class TradeSlot : GuiBase {
 				NPCSlotClick();
 			}
 		}
-		GameWorldController.instance.playerUW.playerInventory.Refresh ();
+		UWCharacter.Instance.playerInventory.Refresh ();
 	}
 
 	public bool isSelected()

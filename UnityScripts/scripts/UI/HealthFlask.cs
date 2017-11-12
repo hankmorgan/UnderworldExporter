@@ -35,18 +35,18 @@ public class HealthFlask : GuiBase_Draggable {
 	void Update () {
 		if (isHealthDisplay==true)
 		{//Health flask
-			Level=GameWorldController.instance.playerUW.CurVIT;
-			MaxLevel=GameWorldController.instance.playerUW.MaxVIT;
+			Level=UWCharacter.Instance.CurVIT;
+			MaxLevel=UWCharacter.Instance.MaxVIT;
 		}
 		else
 		{//mana flask
-			Level=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
-			MaxLevel=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+			Level=UWCharacter.Instance.PlayerMagic.CurMana;
+			MaxLevel=UWCharacter.Instance.PlayerMagic.MaxMana;
 		}
 
-		if ((isHealthDisplay) && ((GameWorldController.instance.playerUW.play_poison!= 0) !=Poisoned))
+		if ((isHealthDisplay) && ((UWCharacter.Instance.play_poison!= 0) !=Poisoned))
 		{
-			Poisoned = GameWorldController.instance.playerUW.play_poison!=0;
+			Poisoned = UWCharacter.Instance.play_poison!=0;
 			UpdatePoisonDisplay();
 		}
 
@@ -98,7 +98,7 @@ public class HealthFlask : GuiBase_Draggable {
 		string output=""; 
 		if (isHealthDisplay == true)
 		{
-			switch(GameWorldController.instance.playerUW.play_poison)
+			switch(UWCharacter.Instance.play_poison)
 			{
 				case 1:
 				case 2:
@@ -123,15 +123,15 @@ public class HealthFlask : GuiBase_Draggable {
 			}
 
 			//Your current vitality is out of 
-			//if (GameWorldController.instance.playerUW.Poisoned==true)
+			//if (UWCharacter.Instance.Poisoned==true)
 			//{
 			//	output = "You are [barely/mildly/badly] poisoned\n";
 			//}
-			output= output + "Your current vitality is " +GameWorldController.instance.playerUW.CurVIT + " out of " + GameWorldController.instance.playerUW.MaxVIT;
+			output= output + "Your current vitality is " +UWCharacter.Instance.CurVIT + " out of " + UWCharacter.Instance.MaxVIT;
 		}
 		else
 		{//your current mana points are 
-			output= output + "Your current mana points are " +GameWorldController.instance.playerUW.PlayerMagic.CurMana + " out of " + GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
+			output= output + "Your current mana points are " +UWCharacter.Instance.PlayerMagic.CurMana + " out of " + UWCharacter.Instance.PlayerMagic.MaxMana;
 		}
 
 		UWHUD.instance.MessageScroll.Add(output);

@@ -2913,8 +2913,8 @@ public class TileMapRenderer : Loader{
 		/// <param name="face">Face.</param>
 		/// <param name="t">T.</param>
 		public static int WallTexture(int face, TileInfo t)
-		{
-				//return 34;
+		{			
+
 				int wallTexture;
 				//int ceilOffset = 0;
 				wallTexture = t.wallTexture;
@@ -2936,6 +2936,10 @@ public class TileMapRenderer : Loader{
 				if ((wallTexture<0) || (wallTexture >512))
 				{
 						wallTexture = 0;
+				}
+				if (debugtextures)
+				{
+					return wallTexture;
 				}
 				return GameWorldController.instance.currentTileMap().texture_map[wallTexture];
 		}

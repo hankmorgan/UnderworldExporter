@@ -738,7 +738,7 @@ public class IngameEditor : GuiBase_Draggable {
 				}
 
 				float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TileX,TileY)))*0.15f;
-				GameWorldController.instance.playerUW.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+				UWCharacter.Instance.gameObject.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 		}
 
 		public void SelectCurrentTile()

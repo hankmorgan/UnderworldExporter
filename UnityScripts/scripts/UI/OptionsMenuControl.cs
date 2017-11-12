@@ -446,13 +446,13 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			//Load up the map
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 			GameWorldController.instance.InitBGlobals(SlotNo+1);
-			GameWorldController.instance.playerUW.transform.position= GameWorldController.instance.StartPos;
+			UWCharacter.Instance.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
-			GameWorldController.instance.playerUW.playerController.enabled=true;
-			GameWorldController.instance.playerUW.playerMotor.enabled=true;
+			UWCharacter.Instance.playerController.enabled=true;
+			UWCharacter.Instance.playerMotor.enabled=true;
 			GameWorldController.instance.AtMainMenu=false;
-			GameWorldController.instance.playerUW.playerInventory.Refresh();
-			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
+			UWCharacter.Instance.playerInventory.Refresh();
+			UWCharacter.Instance.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			//000~001~162~Restore Game Complete. \n
 			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_restore_game_complete_));

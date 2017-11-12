@@ -6,13 +6,13 @@ public class RuneBag : object_base {
 
 	public override bool use ()
 	{
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
 		{
 			return Activate ();
 		}
 		else
 		{
-			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -36,10 +36,10 @@ public class RuneBag : object_base {
 		//Test for a valid rune being used on the bag and if so add the rune to the players inventory.
 		if(ObjectUsed.GetComponent<RuneStone>() !=null)
 		{
-			GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
+			UWCharacter.Instance.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
 			//Add rune to rune bag and destroy the original object.
 			ObjectUsed.GetComponent<ObjectInteraction>().consumeObject();
-			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+			UWCharacter.Instance.playerInventory.ObjectInHand="";
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			return true;
 		}
@@ -63,7 +63,7 @@ public class RuneBag : object_base {
 
 	public override string UseObjectOnVerb_Inv ()
 	{
-		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
 		if (ObjIntInHand!=null)
 		{
 			switch (ObjIntInHand.GetItemType())	

@@ -8,20 +8,20 @@ public class SpellEffectTelekinesis : SpellEffect {
 	public override void ApplyEffect ()
 	{
 		base.ApplyEffect();
-		GameWorldController.instance.playerUW.isTelekinetic=true;
+		UWCharacter.Instance.isTelekinetic=true;
 	}
 
 	public override void CancelEffect ()
 	{
 		base.CancelEffect ();
-		GameWorldController.instance.playerUW.isTelekinetic=false;
+		UWCharacter.Instance.isTelekinetic=false;
 	}
 
 	void Update()
 	{//Keep the effect applied.
 		if (Active)
 		{
-			GameWorldController.instance.playerUW.isTelekinetic=true;
+			UWCharacter.Instance.isTelekinetic=true;
 		}
 	}
 

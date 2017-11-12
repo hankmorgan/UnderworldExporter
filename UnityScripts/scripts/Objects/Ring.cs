@@ -43,7 +43,7 @@ public class Ring : Equipment {
 				default:
 					{
 						//cast enchantment.
-						SpellEffectApplied = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
+						SpellEffectApplied = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
 						if (SpellEffectApplied!=null)
 						{
 								SpellEffectApplied.SetPermanent(true);

@@ -296,7 +296,7 @@ public class Magic : UWEBase {
 				{
 						if (caster.GetComponent<NPC>().gtargName=="_Gronk")
 						{
-								return (GameWorldController.instance.playerUW.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+								return (UWCharacter.Instance.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
 						}
 						else
 						{
@@ -2248,7 +2248,7 @@ public class Magic : UWEBase {
 				bx.center=new Vector3(0.0f,0.1f,0.0f);
 				bx.isTrigger=true;
 				SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
-				spIJ.init (EffectID,GameWorldController.instance.playerUW.gameObject);
+				spIJ.init (EffectID,UWCharacter.Instance.gameObject);
 				awt.spellprop=spIJ;
 
 */
@@ -2274,7 +2274,7 @@ public class Magic : UWEBase {
 				SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
 				sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
-				if (caster.name!=GameWorldController.instance.playerUW.name)
+				if (caster.name!=UWCharacter.Instance.name)
 				{
 						sep.isNPC=true;
 				}
@@ -2312,7 +2312,7 @@ public class Magic : UWEBase {
 				mindspell.init (EffectID,caster);	
 				SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.counter=mindspell.counter; //It will run for x ticks. 
-				if (caster.name!=GameWorldController.instance.playerUW.name)
+				if (caster.name!=UWCharacter.Instance.name)
 				{
 						sep.isNPC=true;
 				}
@@ -2414,7 +2414,7 @@ public class Magic : UWEBase {
 				curse.init (EffectID,caster);	
 				SpellEffectCurse sep = (SpellEffectCurse)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.counter=curse.counter; //It will run for x ticks. 
-				if (caster.name!=GameWorldController.instance.playerUW.name)
+				if (caster.name!=UWCharacter.Instance.name)
 				{
 						sep.isNPC=true;
 				}
@@ -2567,7 +2567,7 @@ public class Magic : UWEBase {
 				int BitState=1;
 				if (WorldBit!=-1)
 				{
-					BitState= (GameWorldController.instance.playerUW.quest().QuestVariables[128] >> WorldBit) & 0x1;	
+					BitState= (Quest.instance.QuestVariables[128] >> WorldBit) & 0x1;	
 				}
 				//Cut the power and set the quest.
 				if (BitState==0)
@@ -2583,7 +2583,7 @@ public class Magic : UWEBase {
 						{
 							UWHUD.instance.MessageScroll.Add("Imagine the screen is shaking now");	
 							BitState = 1 << WorldBit;//Get the bit that needs to be set.
-							GameWorldController.instance.playerUW.quest().QuestVariables[128] |=BitState;//Set the bit
+							Quest.instance.QuestVariables[128] |=BitState;//Set the bit
 								return;
 						}
 				}
@@ -2614,7 +2614,7 @@ public class Magic : UWEBase {
 
 		void Cast_DispelHunger(GameObject caster,int EffectID)
 		{
-			GameWorldController.instance.playerUW.FoodLevel=255;
+			UWCharacter.Instance.FoodLevel=255;
 		}
 
 		/// <summary>
@@ -3156,10 +3156,10 @@ public class Magic : UWEBase {
 								{
 									if (ObjectInteraction.PlaySoundEffects)
 									{
-										if (caster==GameWorldController.instance.playerUW.gameObject)
+										if (caster==UWCharacter.Instance.gameObject)
 										{
-											GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-											GameWorldController.instance.playerUW.aud.Play();
+											UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+											UWCharacter.Instance.aud.Play();
 										}
 										else
 										{
@@ -3250,10 +3250,10 @@ public class Magic : UWEBase {
 			GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
 			if (ObjectInteraction.PlaySoundEffects)
 			{
-				if (caster==GameWorldController.instance.playerUW.gameObject)
+				if (caster==UWCharacter.Instance.gameObject)
 				{
-					GameWorldController.instance.playerUW.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-					GameWorldController.instance.playerUW.aud.Play();
+					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+					UWCharacter.Instance.aud.Play();
 				}
 				else
 				{
@@ -3336,7 +3336,7 @@ public class Magic : UWEBase {
 						rgd.useGravity=false;
 
 						rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
-						if (Caster.name!=GameWorldController.instance.playerUW.name)
+						if (Caster.name!=UWCharacter.Instance.name)
 						{
 								projectile.transform.position=Caster.transform.position;
 								projectile.transform.rotation=Caster.transform.rotation;

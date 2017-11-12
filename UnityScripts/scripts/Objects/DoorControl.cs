@@ -163,12 +163,12 @@ public class DoorControl : object_base {
 		}
 
 
-		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
+		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
 		{
-			ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 			//Clear the object in hand
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
+			UWCharacter.Instance.playerInventory.ObjectInHand="";
 			if (trigger!=null)
 			{
 				trigger.Activate();
@@ -244,7 +244,7 @@ public class DoorControl : object_base {
 					{
 					if (Pickable==true)
 						{
-						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.quality))
+						if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.quality))
 							{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
 							UnlockDoor();
@@ -751,7 +751,7 @@ public class DoorControl : object_base {
 
 	public override string UseObjectOnVerb_World ()
 	{
-		ObjectInteraction ObjIntInHand=GameWorldController.instance.playerUW.playerInventory.GetObjIntInHand();
+		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
 		if (ObjIntInHand!=null)
 		{
 			switch (ObjIntInHand.GetItemType())	

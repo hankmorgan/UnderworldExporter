@@ -10,25 +10,25 @@ public class SpellEffectWaterWalk : SpellEffect {
 	{
 		if (Active)
 		{
-			GameWorldController.instance.playerUW.isWaterWalking=true;
+			UWCharacter.Instance.isWaterWalking=true;
 		}
 	}
 
 	public override void ApplyEffect ()
 	{
 		
-		if (GameWorldController.instance.playerUW==null)
+		if (UWCharacter.Instance==null)
 		{
-			GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
+			UWCharacter.Instance= this.GetComponent<UWCharacter>();
 		}
-		GameWorldController.instance.playerUW.isWaterWalking=true;
+		UWCharacter.Instance.isWaterWalking=true;
 		
 		base.ApplyEffect();
 	}
 
 	public override void CancelEffect ()
 	{
-		GameWorldController.instance.playerUW.isWaterWalking=false;
+		UWCharacter.Instance.isWaterWalking=false;
 		base.CancelEffect();
 	}
 }
