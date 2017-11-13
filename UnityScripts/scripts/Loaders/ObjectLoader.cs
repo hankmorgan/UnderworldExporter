@@ -937,6 +937,7 @@ public class ObjectLoader : Loader {
 				case  ObjectInteraction.A_SCHEDULED_TRIGGER:
 				case ObjectInteraction.A_PRESSURE_TRIGGER:
 				case ObjectInteraction.A_CLOSE_TRIGGER:
+				case ObjectInteraction.AN_ENTER_TRIGGER:
 						{
 								return true;
 						}	
@@ -973,6 +974,7 @@ public class ObjectLoader : Loader {
 			case ObjectInteraction.A_CHANGE_TO_TRAP:
 			case ObjectInteraction.A_CHANGE_FROM_TRAP:
 			case ObjectInteraction.AN_EXPERIENCE_TRAP:
+			case ObjectInteraction.A_JUMP_TRAP:
 				{
 					return true;
 				}

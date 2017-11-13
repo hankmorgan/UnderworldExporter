@@ -7,9 +7,10 @@ A trigger that fires when the player character enters it
 */
 	bool playerStartedInTrigger=false;
 	
+	protected Vector3 boxDimensions= new Vector3(1.2f,1.2f,1.2f);
+
 	protected override void Start ()
-	{
-				
+	{				
 		base.Start ();
 		if ( (TileMap.visitTileX==objInt().tileX) && (TileMap.visitTileY==objInt().tileY))
 		{//TODO:do this based on trigger box
@@ -18,7 +19,7 @@ A trigger that fires when the player character enters it
 		BoxCollider box=this.gameObject.AddComponent<BoxCollider>();
 		//box.transform.position = this.gameObject.transform.position;
 		//box.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-		box.size = new Vector3(1.2f, 1.2f, 1.2f);
+		box.size = boxDimensions;//new Vector3(1.2f, 1.2f, 1.2f);
 
 		box.isTrigger=true;
 		Collider[] colliders=Physics.OverlapBox(this.transform.position, box.size);

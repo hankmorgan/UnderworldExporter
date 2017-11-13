@@ -141,6 +141,8 @@ public class ObjectInteraction : UWEBase {
 		public const int A_PRESSURE_TRIGGER=114;
 		public const int A_CLOSE_TRIGGER =115;
 		public const int A_BLACKROCK_GEM=116;
+		public const int AN_ENTER_TRIGGER=117;
+		public const int A_JUMP_TRAP=118;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1890,6 +1892,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<a_move_trigger>();
 						CreateSprite=false;
 						break;
+				case AN_ENTER_TRIGGER:
+						myObj.AddComponent<an_enter_trigger>();
+						CreateSprite=false;
+						break;
 				case A_PICK_UP_TRIGGER:
 						myObj.AddComponent<a_pick_up_trigger>();
 						CreateSprite=false;
@@ -1999,6 +2005,11 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_NULL_TRAP://Or generic unimplemented traps
 						myObj.AddComponent<trap_base>();
+						CreateSprite=false;
+						break;
+				case A_JUMP_TRAP:
+						myObj.AddComponent<a_jump_trap>();
+						CreateSprite=false;
 						break;
 				case TMAP_CLIP:
 				case TMAP_SOLID:
