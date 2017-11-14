@@ -7,7 +7,7 @@ public class a_use_trigger : trigger_base {
  A trigger that is fired when the player uses something eg switches
  */
 
-		public bool Activate (bool mode)
+		public bool Activate (GameObject src, bool mode)
 		{
 				Debug.Log (this.name);
 				GameObject triggerObj=null;
@@ -31,15 +31,15 @@ public class a_use_trigger : trigger_base {
 				{
 						if (triggerObj.GetComponent<trap_base>() !=null)
 						{
-								triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
+							triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
 						}
 						if (triggerObj.GetComponent<trigger_base>() !=null)
 						{
-							triggerObj.GetComponent<trigger_base>().Activate ();	
+							triggerObj.GetComponent<trigger_base>().Activate (this.gameObject);	
 						}
 				}
 
-				PostActivate();
+				PostActivate(src);
 				return true;
 		}
 

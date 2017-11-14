@@ -153,7 +153,7 @@ The path to the sword hilt on Level3
 
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 	//	base.PostActivate ();
 	}

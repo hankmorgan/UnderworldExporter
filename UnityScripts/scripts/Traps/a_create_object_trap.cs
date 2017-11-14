@@ -97,7 +97,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		ExecuteTrap(this, triggerX,triggerY, State);
 
 		//It's link is the object it is creating so no activation of more traps/triggers
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 }

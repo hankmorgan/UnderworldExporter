@@ -28,7 +28,7 @@ public class Orb : object_base {
 				switch (GameWorldController.instance.objectMaster.type[objIntLink.item_id])
 				{
 				case ObjectInteraction.A_LOOK_TRIGGER:
-					return objIntLink.GetComponent<trigger_base>().Activate();					
+					return objIntLink.GetComponent<trigger_base>().Activate(this.gameObject);					
 				}
 			}
 		}
@@ -47,7 +47,7 @@ public class Orb : object_base {
 					switch (GameWorldController.instance.objectMaster.type[objIntLink.item_id])
 					{
 					case ObjectInteraction.A_USE_TRIGGER:
-						return objIntLink.GetComponent<trigger_base>().Activate();																										
+						return objIntLink.GetComponent<trigger_base>().Activate(this.gameObject);																										
 					}
 				}
 			}

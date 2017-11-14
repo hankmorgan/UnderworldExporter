@@ -8,7 +8,7 @@ public class RuneBag : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
 		{
-			return Activate ();
+			return Activate (this.gameObject);
 		}
 		else
 		{
@@ -24,7 +24,7 @@ public class RuneBag : object_base {
 		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_RUNES);
 	}
 
-	public override bool Activate()
+	public override bool Activate(GameObject src)
 	{
 		OpenRuneBag();
 		return true;

@@ -429,6 +429,9 @@ public class SpellEffect : UWEBase {
 		public const int UW2_Spell_Effect_LocalTeleport = 322;
 		public const int UW2_Spell_Effect_ManaBoost_alt05 = 323;
 		public const int UW2_Spell_Effect_RestoreMana_alt01 = 324;
+
+
+
 		public const int UW2_Spell_Effect_Snowballs_alt01 = 328;
 		public const int UW2_Spell_Effect_Leap_alt01 = 384;
 		public const int UW2_Spell_Effect_SlowFall_alt02 = 385;
@@ -441,7 +444,7 @@ public class SpellEffect : UWEBase {
 		public const int UW2_Spell_Effect_Conceal_alt01 = 392;
 		public const int UW2_Spell_Effect_Invisibility_alt02 = 393;
 		public const int UW2_Spell_Effect_MissileProtection_alt02 = 394;
-		public const int UW2_Spell_Effect_Flameproof_alt02 = 395;
+		public const int UW2_Spell_Effect_Flameproof_alt02 =395;
 		public const int UW2_Spell_Effect_Valor_alt02 = 399;
 		public const int UW2_Spell_Effect_PoisonWeapon_alt02 = 400;
 		public const int UW2_Spell_Effect_FreezeTime_alt02 = 401;

@@ -22,7 +22,15 @@ public class Armour : Equipment {
 	/// <returns>The actual spell index.</returns>
 	public override int GetActualSpellIndex ()
 	{
-		return objInt().link-256+16;
+		int index =objInt().link-256+16;
+		if (_RES==GAME_UW2)
+		{
+			if ((index >=325) && (index<=326))
+			{
+				return index+69;				
+			}					
+		}		
+		return index;
 	}
 
 	//protected override void Start () {
@@ -112,6 +120,10 @@ public class Armour : Equipment {
 					if (SpellEffectApplied!=null)
 					{
 						SpellEffectApplied.SetPermanent(true);
+					}
+					else
+					{
+						Debug.Log(this.name +  " was unable to apply effect. " + GetActualSpellIndex());
 					}
 					break;
 				}

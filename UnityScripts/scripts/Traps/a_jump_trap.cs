@@ -33,7 +33,7 @@ public class a_jump_trap : trap_base {
 		impact = Vector3.Lerp(impact, Vector3.zero, 5*Time.deltaTime);
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{//do not delete
 	
 	}

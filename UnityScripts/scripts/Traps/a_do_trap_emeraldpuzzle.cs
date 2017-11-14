@@ -79,7 +79,7 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 	return false;
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 	//Stop trap from destroying itself.
 

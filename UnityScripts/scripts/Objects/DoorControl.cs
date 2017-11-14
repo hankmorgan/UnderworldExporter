@@ -171,19 +171,19 @@ public class DoorControl : object_base {
 			UWCharacter.Instance.playerInventory.ObjectInHand="";
 			if (trigger!=null)
 			{
-				trigger.Activate();
+				trigger.Activate(this.gameObject);
 			}
 			return true;	
 		}
 		else
 		{//Normal Usage
 			PlayerUse=true;
-			Activate();
+			Activate(this.gameObject);
 			PlayerUse=false;
-			if (trigger!=null)
-			{
-				trigger.Activate();
-			}
+			//if (trigger!=null)
+			//{
+			//	trigger.Activate();
+			//}
 			return true;
 		}
 	}
@@ -311,7 +311,7 @@ public class DoorControl : object_base {
 		return false;	
 	}
 
-	public override bool Activate()
+	public override bool Activate(GameObject src)
 	{
 		if (locked()==false)
 		{//Toggle Open and closed
@@ -378,12 +378,18 @@ public class DoorControl : object_base {
 				//state=true;
 				if(objInt().link!=0)
 					{	//If it's link is to something that is not a lock then it is likely to be a trigger
-						if (ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+						if (
+								(
+										(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+										&&
+										(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.A_CLOSE_TRIGGER)
+								)
+							)
 						{
 							trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
 							if (tb!=null)
 							{
-									tb.Activate();
+								tb.Activate(this.gameObject);
 							}
 						}
 						else
@@ -404,7 +410,7 @@ public class DoorControl : object_base {
 										{
 											if (tb.objInt().GetItemType()!=ObjectInteraction.A_CLOSE_TRIGGER)
 												{
-													tb.Activate();											
+													tb.Activate(this.gameObject);											
 												}
 											next = tb.objInt().next;
 										}	
@@ -458,13 +464,18 @@ public class DoorControl : object_base {
 
 								if(objInt().link!=0)
 								{	//If it's link is to something that is not a lock then it is likely to be a trigger
-										if (ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+										if
+												(
+												(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+												&&
+												(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.AN_OPEN_TRIGGER)
+												)
 										{
-												trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
-												if (tb!=null)
-												{
-														tb.Activate();
-												}
+											trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+											if (tb!=null)
+											{														
+												tb.Activate(this.gameObject);
+											}
 										}
 										else
 										{//The object is linked to a lock. The next of the lock is the use trigger to use here
@@ -484,7 +495,7 @@ public class DoorControl : object_base {
 																		{
 																				if (tb.objInt().GetItemType()!=ObjectInteraction.AN_OPEN_TRIGGER)
 																				{
-																						tb.Activate();											
+																					tb.Activate(this.gameObject);											
 																				}											
 																				next = tb.objInt().next;
 																		}

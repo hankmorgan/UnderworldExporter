@@ -58,7 +58,7 @@ public class object_base : UWEBase {
 	/// <summary>
 	/// For when this object is activated by code. Eg buttons
 	/// </summary>
-	public virtual bool Activate()
+	public virtual bool Activate(GameObject src)
 	{//Unimplemented items 
 		//CheckReferences();
 		return false;
@@ -139,7 +139,7 @@ public class object_base : UWEBase {
 					{//Not a quantity or an enchanted item.
 						if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_USE_TRIGGER)
 						{
-								ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();	
+							ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate(this.gameObject);	
 						}	
 					}
 				}
@@ -208,7 +208,7 @@ public class object_base : UWEBase {
 		{
 			if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_PICK_UP_TRIGGER)
 			{
-				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate();
+				ObjectLoader.getGameObjectAt(objInt().link).GetComponent<trigger_base>().Activate(this.gameObject);	
 				objInt().link=0;
 			}
 		}

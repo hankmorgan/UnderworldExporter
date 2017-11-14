@@ -189,7 +189,7 @@ public class a_hack_trap_teleport : a_hack_trap {
 		}
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 	//no deletion
 	}

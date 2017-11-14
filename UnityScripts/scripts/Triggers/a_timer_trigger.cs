@@ -14,7 +14,7 @@ public class a_timer_trigger : trigger_base {
 			traptime+=Time.deltaTime;
 			if(traptime> (float)objInt().zpos * 0.3f)
 			{
-				Activate();
+				Activate(this.gameObject);
 				traptime=0f;
 			}			
 		}	
@@ -23,7 +23,7 @@ public class a_timer_trigger : trigger_base {
 
 
 		//Override to supress debug messages.
-	public override bool Activate ()
+	public override bool Activate (GameObject src)
 	{
 				if (EditorMode)
 				{
@@ -35,7 +35,7 @@ public class a_timer_trigger : trigger_base {
 			triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);
 		}
 
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 

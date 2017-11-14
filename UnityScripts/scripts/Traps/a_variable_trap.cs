@@ -31,7 +31,7 @@ public class a_variable_trap : trap_base {
 	}
 
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 		//Do nothing. Stop trap from destroying itself.
 	}

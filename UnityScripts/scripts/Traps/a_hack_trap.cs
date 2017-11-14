@@ -3,6 +3,7 @@ using System.Collections;
 
 public class a_hack_trap : trap_base {		
 	//qual=5 is a trespass trap.
+		//qual=10  is probably the awarding of class specific items at the start fof the game
 		//qual = 12 is an oscillator row of tiles (i think)
 		//qual=20 used for rising platforms on level 42 (scintilus)
 	//qual=21 is the moving switches in loths tomb.
@@ -13,8 +14,11 @@ public class a_hack_trap : trap_base {
 		//qual =32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
 	//qual=35 is recharge light crystals	
 
-	public override void PostActivate ()
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//no trap deletion
+		Debug.Log ("Hack Trap " + this.name);
 	}
+
+
+
 }

@@ -34,7 +34,7 @@ public class a_do_trap_conversation : trap_base {
 
 
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)	
 	{//Do not destroy
 
 	}

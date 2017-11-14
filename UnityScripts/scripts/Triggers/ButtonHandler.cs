@@ -123,7 +123,7 @@ public class ButtonHandler : Decal {
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			//Debug.Log("USE!");
-			return Activate ();
+			return Activate (this.gameObject);
 		}
 		else
 		{
@@ -169,7 +169,7 @@ public class ButtonHandler : Decal {
 			if (TargetObjInt.GetItemType()==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
 				base.LookAt();
-				this.Activate();
+				this.Activate(this.gameObject);
 			}
 			else
 			{
@@ -184,7 +184,7 @@ public class ButtonHandler : Decal {
 	}
 
 
-	public override bool Activate()
+	public override bool Activate(GameObject src)
 	{
 		if (objInt().link==0)
 		{
@@ -213,11 +213,11 @@ public class ButtonHandler : Decal {
 		{
 			if (triggerObj.GetComponent<a_use_trigger>()!=null)
 			{
-					triggerObj.GetComponent<a_use_trigger>().Activate(isOn);		
+				triggerObj.GetComponent<a_use_trigger>().Activate(this.gameObject,isOn);		
 			}
 			else
 			{
-					triggerObj.GetComponent<trigger_base>().Activate();		
+				triggerObj.GetComponent<trigger_base>().Activate(this.gameObject);		
 			}
 
 				//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?
@@ -292,7 +292,7 @@ public class ButtonHandler : Decal {
 				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,StringController.str_using_the_pole_you_trigger_the_switch_));
-				return Activate();
+				return Activate(this.gameObject);
 			default:
 				UWCharacter.Instance.playerInventory.ObjectInHand="";
 				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;

@@ -17,7 +17,7 @@ public class trigger_base : object_base {
 		this.gameObject.layer=LayerMask.NameToLayer("Ignore Raycast");
 	}
 
-	public override bool Activate ()
+	public override bool Activate (GameObject src)
 	{
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
@@ -28,18 +28,27 @@ public class trigger_base : object_base {
 			}
 		}
 
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 
-	public virtual void PostActivate()
+	public virtual void PostActivate(GameObject src)
 	{
 		int TriggerRepeat = (objInt().flags>>1) & 0x1;
 		//Debug.Log(TriggerRepeat);
 		if (TriggerRepeat==0)
 		{
 			this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
+			if (src.GetComponent<ObjectInteraction>()!=null)
+			{//Clear the link to the trigger/trap from the source if it is destroyed.
+				if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
+				{
+					src.GetComponent<ObjectInteraction>().link=0;
+				}
+			}
+
 			Destroy (this.gameObject);
+
 		}
 
 	}
@@ -49,7 +58,7 @@ public class trigger_base : object_base {
 		if(TriggerMeNow)
 		{
 			TriggerMeNow=false;
-			Activate();
+			Activate(this.gameObject);
 		}
 	}
 

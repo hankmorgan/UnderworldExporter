@@ -62,7 +62,7 @@ A trigger that fires when the player character enters it
 			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
 			{
 				Debug.Log(this.name);
-				Activate ();
+				Activate (other.gameObject);
 			}	
 		}
 		else
@@ -71,7 +71,7 @@ A trigger that fires when the player character enters it
 		}
 	}
 
-	public override bool Activate ()
+	public override bool Activate (GameObject src)
 	{
 		if (_RES==GAME_UW2)
 		{//Check for moongates in this tile to support qbert in UW2.
@@ -100,6 +100,6 @@ A trigger that fires when the player character enters it
 				}
 			}
 		}
-		return base.Activate ();
+		return base.Activate (this.gameObject);
 	}
 }

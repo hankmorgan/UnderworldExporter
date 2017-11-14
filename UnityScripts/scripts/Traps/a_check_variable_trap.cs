@@ -54,7 +54,7 @@ the left, right, center button combination on Level3.
 		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
 
 		//Stuff to happen after the trap has fired.
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 

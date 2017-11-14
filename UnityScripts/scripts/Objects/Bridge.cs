@@ -83,7 +83,7 @@ public class Bridge : object_base {
 				{
 					if (obj.GetComponent<trigger_base>()!=null)
 					{
-						return obj.GetComponent<trigger_base>().Activate();
+						return obj.GetComponent<trigger_base>().Activate(this.gameObject);
 					}
 				}	
 			}

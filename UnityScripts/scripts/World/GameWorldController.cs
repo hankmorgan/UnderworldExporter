@@ -432,7 +432,7 @@ public class GameWorldController : UWEBase {
 				UWHUD.instance.gameSelectUi.SetActive(false);
 				LoadPath(res);
 				UWEBase._RES = res;//game;
-				Loader._RES= res;//game;
+				UWClass._RES= res;//game;
 				keybinds.ApplyBindings();//Applies keybinds to certain controls
 				switch(res)
 				{

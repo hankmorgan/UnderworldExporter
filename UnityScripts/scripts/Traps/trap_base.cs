@@ -25,7 +25,7 @@ public class trap_base : object_base {
 		TriggerNext (triggerX, triggerY, State);
 
 		//Stuff to happen after the trap has fired.
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 
@@ -38,7 +38,7 @@ public class trap_base : object_base {
 			trigger_base trig= triggerObj.GetComponent<trigger_base>();
 			if (trig!=null)
 			{
-				trig.Activate();
+				trig.Activate(this.gameObject);
 			}
 			else
 			{
@@ -58,13 +58,20 @@ public class trap_base : object_base {
 		}
 	}
 
-	public virtual void PostActivate()
+	public virtual void PostActivate(object_base src)
 	{
 		//Destruction of traps is probably controlled by the trigger.
 		int TriggerRepeat = (objInt().flags>>1) & 0x1;
 		if (TriggerRepeat==0)
 		{
 			this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
+			if (src.GetComponent<ObjectInteraction>()!=null)
+			{//Clear the link to the trigger/trap from the source if it is destroyed.
+				if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
+				{
+					src.GetComponent<ObjectInteraction>().link=0;
+				}
+			}
 			Destroy (this.gameObject);
 		}
 	}

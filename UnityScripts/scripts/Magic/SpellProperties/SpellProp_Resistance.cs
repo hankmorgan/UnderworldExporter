@@ -20,6 +20,9 @@ public class SpellProp_Resistance : SpellProp {
 			case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:				
 			case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
 					BaseDamage=3;counter=5;break;
+				default:
+						Debug.Log("Default values used in resistance spell");
+						BaseDamage=1;counter=3;break;
 		}
 	}
 }

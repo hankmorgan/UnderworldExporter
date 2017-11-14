@@ -52,7 +52,7 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 		prevWorld=Quest.instance.variables[6];
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 
 	}

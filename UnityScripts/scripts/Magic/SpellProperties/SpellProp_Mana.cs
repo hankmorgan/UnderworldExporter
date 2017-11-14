@@ -32,6 +32,11 @@ public class SpellProp_Mana : SpellProp {
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
 				case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
 						BaseDamage=(short)Random.Range(3,70);break;
+
+				default:
+						Debug.Log("Default values used in mana spell");
+						BaseDamage=20;;break;
+
 				}
 	}
 }

@@ -151,7 +151,7 @@ public class event_base : Loader {
 												{
 													if (objList[o].instance.GetItemType()==ObjectInteraction.A_SCHEDULED_TRIGGER)	
 													{
-														objList[o].instance.GetComponent<trigger_base>().Activate();		
+														objList[o].instance.GetComponent<trigger_base>().Activate(null);		
 													}
 												}
 											}

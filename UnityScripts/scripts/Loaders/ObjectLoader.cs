@@ -971,10 +971,11 @@ public class ObjectLoader : Loader {
 			case  ObjectInteraction.A_COMBINATION_TRAP :
 			case  ObjectInteraction.A_TEXT_STRING_TRAP :
 			case  ObjectInteraction.AN_OSCILLATOR:
-			case ObjectInteraction.A_CHANGE_TO_TRAP:
-			case ObjectInteraction.A_CHANGE_FROM_TRAP:
-			case ObjectInteraction.AN_EXPERIENCE_TRAP:
-			case ObjectInteraction.A_JUMP_TRAP:
+			case  ObjectInteraction.A_CHANGE_TO_TRAP:
+			case  ObjectInteraction.A_CHANGE_FROM_TRAP:
+			case  ObjectInteraction.AN_EXPERIENCE_TRAP:
+			case  ObjectInteraction.A_JUMP_TRAP:
+			case  ObjectInteraction.A_SKILL_TRAP:
 				{
 					return true;
 				}

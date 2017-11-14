@@ -55,7 +55,7 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 		platform.position = EndPos;
 		}
 
-		public override void PostActivate ()
+		public override void PostActivate (object_base src)
 		{//Do not destroy.
 
 		}

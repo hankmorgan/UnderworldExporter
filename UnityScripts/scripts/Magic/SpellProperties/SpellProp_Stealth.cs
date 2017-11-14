@@ -22,6 +22,10 @@ public class SpellProp_Stealth : SpellProp {
 			case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
 			case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
 					StealthLevel=30;counter=5;break;
+
+				default:
+						Debug.Log("Default values used in stealth spell");
+						StealthLevel=30;counter=5;break;
 			}
 		}
 }

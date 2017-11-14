@@ -37,6 +37,10 @@ public class SpellProp_Movement : SpellProp {
 			case SpellEffect.UW1_Spell_Effect_Speed:
 			case SpellEffect.UW1_Spell_Effect_Haste:
 					Speed=1.2f; counter=6;break;
+
+				default:
+						Debug.Log("Default values used in speed spell");
+						Speed=1.2f; counter=6;break;
 			}
 	}
 }

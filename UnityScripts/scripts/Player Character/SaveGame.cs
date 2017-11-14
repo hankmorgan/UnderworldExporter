@@ -1925,6 +1925,19 @@ public class SaveGame : Loader {
 								}
 								UWCharacter.Instance.playerInventory.Refresh();
 
+								//Reapply spell effects
+								for (int a=0; a<=UWCharacter.Instance.ActiveSpell.GetUpperBound(0);a++)
+								{//Clear out the old effects.
+										if (UWCharacter.Instance.ActiveSpell[a]!=null)	
+										{
+												UWCharacter.Instance.ActiveSpell[a].CancelEffect();	
+												if (UWCharacter.Instance.ActiveSpell[a]!=null)	
+												{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
+														UWCharacter.Instance.ActiveSpell[a].CancelEffect();	
+												}
+										}
+								}
+
 							//Reapply effects from enchanted items by recalling the equip event.
 							for (short s=0; s<=10; s++)
 							{
@@ -1942,31 +1955,7 @@ public class SaveGame : Loader {
 
 
 
-						//Reapply spell effects
-						for (int a=0; a<=UWCharacter.Instance.ActiveSpell.GetUpperBound(0);a++)
-						{//Clear out the old effects.
-								if (UWCharacter.Instance.ActiveSpell[a]!=null)	
-								{
-										UWCharacter.Instance.ActiveSpell[a].CancelEffect();	
-										if (UWCharacter.Instance.ActiveSpell[a]!=null)	
-										{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
-												UWCharacter.Instance.ActiveSpell[a].CancelEffect();	
-										}
-								}
-						}
 
-						//Clearout the passive spell effects
-						for (int a=0; a<=UWCharacter.Instance.PassiveSpell.GetUpperBound(0);a++)
-						{//Clear out the old passive effects.
-								if (UWCharacter.Instance.PassiveSpell[a]!=null)	
-								{
-										UWCharacter.Instance.PassiveSpell[a].CancelEffect();
-										if (UWCharacter.Instance.PassiveSpell[a]!=null)	
-										{//The prevous effect had cancelled into anew effect. Eg fly->slowfall. Cancel again.
-												UWCharacter.Instance.PassiveSpell[a].CancelEffect();	
-										}
-								}
-						}
 
 						for (int a=0; a<effectCounter;a++)
 						{//Recast the new ones.

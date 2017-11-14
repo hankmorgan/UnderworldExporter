@@ -31,7 +31,7 @@ public class a_text_string_trap : trap_base {
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9,StringNo));
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{//Do not destroy.
 
 	}

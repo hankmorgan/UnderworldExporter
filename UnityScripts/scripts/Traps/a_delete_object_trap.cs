@@ -22,7 +22,7 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 
 		//Delete object traps are always the end of the line so no more activations.
 
-		PostActivate();
+		PostActivate(src);
 		return true;
 	}
 

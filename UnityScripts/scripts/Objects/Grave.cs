@@ -99,7 +99,7 @@ public class Grave : object_base {
 					{					
 						objInt().link++;//Update the grave description
 						objIntUsed.consumeObject ();
-						trigObj.GetComponent<trigger_base>().Activate();
+						trigObj.GetComponent<trigger_base>().Activate(this.gameObject);
 						Quest.instance.isGaramonBuried=true;
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						UWCharacter.Instance.playerInventory.ObjectInHand="";	

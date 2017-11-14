@@ -64,7 +64,7 @@ Opens the door that is in the targeted tile.
 		}
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{//To stop destruction of trap
 
 	}

@@ -35,7 +35,7 @@ public class a_pit_trap : trap_base {
 	}
 
 		//Do not destroy
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 
 	}

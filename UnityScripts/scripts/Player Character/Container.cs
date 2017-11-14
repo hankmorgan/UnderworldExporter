@@ -232,7 +232,7 @@ public class Container : object_base {
 						{	
 								if(Spilled.GetComponent<trigger_base>()!=null)
 								{
-										Spilled.GetComponent<trigger_base>().Activate();		
+									Spilled.GetComponent<trigger_base>().Activate(this.gameObject);		
 								}
 								else
 								{
@@ -293,7 +293,7 @@ public class Container : object_base {
 			{	
 				if(Spilled.GetComponent<trigger_base>()!=null)
 				{
-					Spilled.GetComponent<trigger_base>().Activate();		
+					Spilled.GetComponent<trigger_base>().Activate(this.gameObject);		
 				}
 				bool flag=false;
 				Vector3 randomPoint=this.transform.position;
@@ -340,7 +340,7 @@ public class Container : object_base {
 					item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
 					if (item.GetComponent<ObjectInteraction>().GetItemType()==ObjectInteraction.A_PICK_UP_TRIGGER)
 					{//Special case
-						item.GetComponent<a_pick_up_trigger>().Activate();
+						item.GetComponent<a_pick_up_trigger>().Activate(cn.gameObject);
 						cn.RemoveItemFromContainer(i);
 					}
 					else if (item.GetComponent<Container>()!=null)

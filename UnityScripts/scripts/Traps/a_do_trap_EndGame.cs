@@ -16,7 +16,7 @@ public class a_do_trap_EndGame : trap_base {
 
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 		//Stop camera from destroying itself
 	}

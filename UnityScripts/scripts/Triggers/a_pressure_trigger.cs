@@ -169,7 +169,7 @@ public class a_pressure_trigger : trigger_base {
 		{
 			door.TriggerInstantly=true;
 		}
-		Activate ();	
+		Activate (this.gameObject);	
 		if (door!=null)
 		{
 			door.TriggerInstantly=false;
@@ -186,7 +186,7 @@ public class a_pressure_trigger : trigger_base {
 		{
 			door.TriggerInstantly=true;
 		}
-		Activate ();	
+		Activate (this.gameObject);	
 		if (door!=null)
 		{
 			door.TriggerInstantly=false;

@@ -24,6 +24,10 @@ public class SpellProp_Light : SpellProp{
 				case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
 				case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
 						this.BaseDamage=12;  break;
+
+				default:
+						Debug.Log("Default values used in light spell");
+						BaseDamage=12;break;
 				}
 
 	}

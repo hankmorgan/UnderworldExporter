@@ -45,6 +45,10 @@ public class SpellProp_Mind : SpellProp {
 		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
 				BaseDamage=5;//range of the detection
 				break;
+
+				default:
+						Debug.Log("Default values used in mind spell");
+						BaseDamage=5;break;
 		}
 
 		

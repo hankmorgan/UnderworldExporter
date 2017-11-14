@@ -4446,6 +4446,7 @@ public class Magic : UWEBase {
 						break;
 				case SpellEffect.UW2_Spell_Effect_Flameproof_alt01:
 				case SpellEffect.UW2_Spell_Effect_Flameproof_alt02:
+
 						if (PassiveArrayIndex!=-1)
 						{
 								Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
@@ -4744,20 +4745,21 @@ public class Magic : UWEBase {
 							break;			
 						}
 				case SpellEffect.UW2_Spell_Effect_MissileProtection:
-				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt01:
-						if (PassiveArrayIndex!=-1)
-						{
-								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;	
-						}
-						break;
-				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt02:
 						if (ActiveArrayIndex!=-1)
 						{
 								Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 								SpellResultType=SpellResultActive;
 						}
 						break;
+				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt01:
+				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt02:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;	
+						}
+						break;
+
 				case SpellEffect.UW2_Spell_Effect_BasiliskOil:
 						{
 								Debug.Log("basilisk oil");
@@ -5153,7 +5155,7 @@ public class Magic : UWEBase {
 						break;	
 						
 				default:						
-					Debug.Log ("Unimplemented effect Id is " + EffectID);
+					Debug.Log ("Unimplemented effect Id is " + EffectID + " caster =" + caster + " target =" + target);
 					SpellResultType=SpellResultNone;
 					break;
 				}

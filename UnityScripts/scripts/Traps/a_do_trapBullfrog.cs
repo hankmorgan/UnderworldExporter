@@ -135,7 +135,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 	}
 
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{//To stop destruction of trap
 
 	}

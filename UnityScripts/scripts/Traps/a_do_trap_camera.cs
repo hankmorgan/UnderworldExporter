@@ -47,7 +47,7 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 		UWCharacter.Instance.playerCam.enabled=true;
 	}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{
 		//Stop camera from destroying itself
 	}

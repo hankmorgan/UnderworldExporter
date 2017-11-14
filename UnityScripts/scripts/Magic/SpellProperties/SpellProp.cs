@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// Properties for spells. Mainly used for projectile spells.
 /// </summary>
-public class SpellProp  {
+public class SpellProp : UWClass {
 
 	///How much damage or the base value the spell applies.
 	public short BaseDamage;

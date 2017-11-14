@@ -63,10 +63,10 @@ public class a_scheduled_trigger : trigger_base {
 		//Rest of data. No Of Lines * 16 bytes data. Possible quest flags, variable conditions and points to triggers (owner & quality?) etc to trigger this object
 
 
-	public override bool Activate ()
+	public override bool Activate (GameObject src)
 	{
 		Debug.Log("scheduled trigger " + this.name)	;
-		return base.Activate();
+		return base.Activate(this.gameObject);
 	}
 
 }

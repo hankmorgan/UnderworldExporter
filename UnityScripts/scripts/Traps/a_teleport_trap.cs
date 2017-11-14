@@ -72,7 +72,7 @@ public class a_teleport_trap : trap_base {
 				UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
 		}
 
-	public override void PostActivate ()
+	public override void PostActivate (object_base src)
 	{//Prevent deletion of the trap
 
 	}

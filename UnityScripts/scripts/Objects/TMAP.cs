@@ -33,7 +33,7 @@ public class TMAP : object_base {
 				    (objIntTrigger.GetItemType()==ObjectInteraction.A_USE_TRIGGER)
 				    )
 					{
-						objIntTrigger.GetComponent<trigger_base> ().Activate();
+						objIntTrigger.GetComponent<trigger_base> ().Activate(this.gameObject);
 						return true;
 					}
 				}
@@ -56,7 +56,7 @@ public class TMAP : object_base {
 						(objIntTrigger.GetItemType()==ObjectInteraction.A_USE_TRIGGER)
 					    )
 					{
-						objIntTrigger.GetComponent<trigger_base> ().Activate();
+						objIntTrigger.GetComponent<trigger_base> ().Activate(this.gameObject);
 						return true;
 					}
 				}
@@ -85,7 +85,7 @@ public class TMAP : object_base {
 							(objIntTrigger.GetItemType()==ObjectInteraction.AN_OPEN_TRIGGER)
 							)
 						{
-							objIntTrigger.GetComponent<trigger_base> ().Activate();
+							objIntTrigger.GetComponent<trigger_base> ().Activate(this.gameObject);
 							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 							UWCharacter.Instance.playerInventory.ObjectInHand="";
 							return true;
