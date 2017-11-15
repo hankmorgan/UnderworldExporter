@@ -1225,11 +1225,11 @@ public class ObjectLoader : Loader {
 										offY = (y*BrushY) + 60f;//center in tile
 										if (objList[index].x == 0)
 										{
-											offX +=4;
+												offX +=1;//was 4
 										}
 										if (objList[index].x == 7)
 										{
-											offX -=4;
+												offX -=1;//was 4
 										}
 										break;
 								case ObjectInteraction.HEADINGNORTH:
@@ -1237,11 +1237,11 @@ public class ObjectLoader : Loader {
 										offX = (x*BrushX) +60f;
 										if (objList[index].y == 0)
 										{
-											offY +=4;
+											offY +=1;//was 4
 										}
 										if (objList[index].y == 7)
 										{
-											offY -=4;
+												offY -=1;//was 4
 										}
 										break;
 								}
@@ -1307,11 +1307,11 @@ public class ObjectLoader : Loader {
 								}
 						case ObjectInteraction.BUTTON:
 						case ObjectInteraction.SIGN:
-								{//TODO: make this based on heading so as to support angled walls
-										if (objList[index].x == 0){offX = offX + 0.25f;}
-										if (objList[index].x == 7){offX = offX - 0.25f;}
-										if (objList[index].y == 0){offY = offY + 0.25f;}
-										if (objList[index].y == 7){offY = offY - 0.25f;}
+								{//TODO: make this based on heading so as to support angled walls									
+										if (objList[index].x == 0){offX = offX + 1.5f;}
+										if (objList[index].x == 7){offX = offX - 1.5f;}
+										if (objList[index].y == 0){offY = offY + 1.5f;}
+										if (objList[index].y == 7){offY = offY - 1.5f;}
 										break;
 								}
 

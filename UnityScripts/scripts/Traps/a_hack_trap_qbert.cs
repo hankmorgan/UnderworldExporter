@@ -294,7 +294,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 				//TODO:Update the walls of the pyramid here!
 				SetPyramidWallColour(ColourTestPassed);
 				Debug.Log("Moongate spawned");
-				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.invis=0;
+				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.setInvis(0);
 				//Change the owner and quality of the telport trap at 973 based on the colour
 				switch(ColourTestPassed)
 				{
@@ -326,12 +326,12 @@ public class a_hack_trap_qbert : a_hack_trap {
 				if (ColourSequence.GetUpperBound(0)>=4)
 				{//All normal sequences found and the pyramid has been solved at least once. Allow access to the orange pyramid
 					Quest.instance.variables[105]=5;
-					GameWorldController.instance.CurrentObjectList().objInfo[666].instance.invis=0; //my code is evil...
+					GameWorldController.instance.CurrentObjectList().objInfo[666].instance.setInvis(0); //my code is evil...
 				}	
 			}
 			else
 			{
-				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.invis=1;
+				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.setInvis(1);
 				Debug.Log("Moongate despawned");
 			}
 			//}

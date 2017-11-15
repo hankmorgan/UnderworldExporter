@@ -150,22 +150,22 @@ public class Chargen : Props {
 		{
 				switch (charclass)
 				{
-				case 0://fighter
+				case UWCharacter.CharClassFighter://fighter
 						return FighterSkills[stage-3];
 						//return getArrayDimension(FighterSkills, stage-3);
-				case 1://mage
+				case  UWCharacter.CharClassMage://mage
 						return MageSkills[stage-3];
-				case 2://bard
+				case  UWCharacter.CharClassBard://bard
 						return BardSkills[stage-3];
-				case 3://tinker
+				case  UWCharacter.CharClassTinker://tinker
 						return TinkerSkills[stage-3];
-				case 4://Druid
+				case  UWCharacter.CharClassDruid://Druid
 						return DruidSkills[stage-3];
-				case 5://paladin
+				case  UWCharacter.CharClassPaladin://paladin
 						return PaladinSkills[stage-3];
-				case 6://ranger
+				case  UWCharacter.CharClassRanger://ranger
 						return RangerSkills[stage-3];
-				case 7://shepherd
+				case  UWCharacter.CharClassShepard://shepherd
 						return ShepherdSkills[stage-3];
 				default:
 						int[] ans ={1};

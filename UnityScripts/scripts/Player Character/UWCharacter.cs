@@ -18,6 +18,15 @@ public class UWCharacter : Character {
 		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public int game_time;
 
+		public const int CharClassFighter=0;
+		public const int CharClassMage=1;
+		public const int CharClassBard=2;
+		public const int CharClassTinker=3;
+		public const int CharClassDruid=4;
+		public const int CharClassPaladin=5;
+		public const int CharClassRanger=6;
+		public const int CharClassShepard=7;
+
 
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.

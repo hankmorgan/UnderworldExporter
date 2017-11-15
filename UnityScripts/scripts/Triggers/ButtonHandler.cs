@@ -122,8 +122,14 @@ public class ButtonHandler : Decal {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			//Debug.Log("USE!");
-			return Activate (this.gameObject);
+			if (objInt().invis==0)
+			{
+				return Activate (this.gameObject);								
+			}
+			else
+			{//Can't use an invisible switch
+				return false;
+			}	
 		}
 		else
 		{
@@ -269,15 +275,22 @@ public class ButtonHandler : Decal {
 	public void setSprite(int SpriteID)
 	{
 			//UW1/Sprites/tmflat/tmflat_00%02d
-		setSpriteTMFLAT ( this.GetComponentInChildren<SpriteRenderer>(), SpriteID);//Loads the sprite.;//Assigns the sprite to the object.			
-		currentItemID=SpriteID;
+		if (objInt().invis==0)
+		{
+			setSpriteTMFLAT ( this.GetComponentInChildren<SpriteRenderer>(), SpriteID);//Loads the sprite.;//Assigns the sprite to the object.			
+			currentItemID=SpriteID;	
+		}
+
 	}
 
 
 	public void setRotarySprite(int spriteId)
 	{
+		if (objInt().invis==0)
+		{
 		setSpriteTMOBJ (this.GetComponentInChildren<SpriteRenderer>(), RotaryImageIDs[spriteId] );
 		currentItemID=spriteId;
+		}
 	}
 
 

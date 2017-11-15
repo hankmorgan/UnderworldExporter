@@ -55,7 +55,7 @@ A trigger that fires when the player character enters it
 		}
 	}
 
-	void OnTriggerEnter(Collider other)
+	protected virtual void OnTriggerEnter(Collider other)
 	{
 		if (playerStartedInTrigger!=true)
 		{

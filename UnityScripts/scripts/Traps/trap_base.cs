@@ -65,12 +65,15 @@ public class trap_base : object_base {
 		if (TriggerRepeat==0)
 		{
 			this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
-			if (src.GetComponent<ObjectInteraction>()!=null)
-			{//Clear the link to the trigger/trap from the source if it is destroyed.
-				if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
-				{
-					src.GetComponent<ObjectInteraction>().link=0;
-				}
+			if (src!=null)
+			{
+				if (src.GetComponent<ObjectInteraction>()!=null)
+				{//Clear the link to the trigger/trap from the source if it is destroyed.
+					if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
+					{	
+						src.GetComponent<ObjectInteraction>().link=0;
+					}
+				}		
 			}
 			Destroy (this.gameObject);
 		}

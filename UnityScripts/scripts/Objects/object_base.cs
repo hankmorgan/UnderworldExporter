@@ -395,7 +395,15 @@ public class object_base : UWEBase {
 		/// Gets the context menu text.
 		/// </summary>
 		public string GetContextMenuText(int item_id, bool isUseable, bool isPickable , bool ObjectInHand)
-		{				
+		{			
+			if (objInt().invis==1)
+			{
+				UseAvail=false;
+				TalkAvail=false;
+				PickAvail=false;
+				return "";
+
+			}
 			ItemDesc= ContextMenuDesc(item_id);
 			TalkAvail=false;
 			if (isUseable)

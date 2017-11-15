@@ -144,6 +144,7 @@ public class ObjectInteraction : UWEBase {
 		public const int AN_ENTER_TRIGGER=117;
 		public const int A_JUMP_TRAP=118;
 		public const int A_SKILL_TRAP=119;
+		public const int AN_EXIT_TRIGGER=120;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -297,6 +298,12 @@ public class ObjectInteraction : UWEBase {
 			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 			startPos=this.transform.position;
+				if (sr!=null)
+				{
+						sr.gameObject.SetActive(invis==0);			
+				}
+			
+
 			//if (PlaySoundEffects)
 			//{
 				//aud = this.GetComponent<AudioSource>();			
@@ -312,7 +319,7 @@ public class ObjectInteraction : UWEBase {
 
 		void Update()
 		{
-			if ((animationStarted==false) && (ignoreSprite==false))
+			if ((animationStarted==false) && (ignoreSprite==false) && (invis==0))
 			{
 				UpdateAnimation();
 			}
@@ -1897,6 +1904,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<an_enter_trigger>();
 						CreateSprite=false;
 						break;
+				case AN_EXIT_TRIGGER:
+						myObj.AddComponent<an_exit_trigger>();
+						CreateSprite=false;
+						break;
 				case A_PICK_UP_TRIGGER:
 						myObj.AddComponent<a_pick_up_trigger>();
 						CreateSprite=false;
@@ -2055,23 +2066,27 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_do_trap_platform>();break;
 							case 0x5://A trespass trap
 								myObj.AddComponent<a_hack_trap_trespass>();break;
+							case 0xA://Bonus object trap
+								myObj.AddComponent<a_hack_trap_class_item>();break;
 							case 0x18://bullfrog
 								myObj.AddComponent<a_do_trapBullfrog>();break;
 							case 0x1c://CHange texture of tmap
 								myObj.AddComponent<a_hack_trap_texture>();break;
-							case 20://Terraform puzzle on scintilus 
+							case 0x14://Terraform puzzle on scintilus 
 								myObj.AddComponent<a_hack_trap_terraform_puzzle>();break;
-							case 32://qbert puzzle in the void
+							case 0x20://qbert puzzle in the void
 								myObj.AddComponent<a_hack_trap_qbert>();break;
+							case 0x27://Change visiblity of linked item
+								myObj.AddComponent<a_hack_trap_visibility>();break;		
 							case 0x2a://Gronk conversation
 								myObj.AddComponent<a_do_trap_conversation>();break;
 							case 0x28://emerald puzzle on level 6
 								myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
 							case 0x3F://end game sequence
 								myObj.AddComponent<a_do_trap_EndGame>();break;
-							case 54:
+							case 0x36:
 								myObj.AddComponent<a_hack_trap_gemrotate>();break;
-							case 55:
+							case 0x37:
 								myObj.AddComponent<a_hack_trap_teleport>();break;
 							default:
 								myObj.AddComponent<a_hack_trap>();break;
@@ -2172,6 +2187,16 @@ public class ObjectInteraction : UWEBase {
 			default:
 			case 0:
 					return IdentificationFlags.Unidentified;
+			}
+		}
+
+		public void setInvis(short val)
+		{
+			invis=val;
+			//Debug.Log(this.name + " has it's visiblity changed to " + val);
+			if (sr!=null)
+			{
+				sr.gameObject.SetActive(val==0);
 			}
 		}
 }
