@@ -1924,10 +1924,12 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<a_close_trigger>();	
 						CreateSprite=false;
 						break;
-				case A_LOOK_TRIGGER:
 				case AN_UNLOCK_TRIGGER:
-
-						myObj.AddComponent<trigger_base>();	
+						myObj.AddComponent<an_unlock_trigger>();	
+						CreateSprite=false;
+						break;
+				case A_LOOK_TRIGGER:
+						myObj.AddComponent<a_look_trigger>();	
 						CreateSprite=false;
 						break;
 				case A_TIMER_TRIGGER:

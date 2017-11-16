@@ -20,7 +20,7 @@ public class DoorControl : object_base {
 		///Is the door opening or closing. Used to keep if flying off it's hinges!
 	public bool DoorBusy;
 		///Sets if the lock can be picked.
-	public bool Pickable;
+	public bool Pickable=true;
 		///Is the door spiked
 	public bool Spiked;//Probably on the lock object?
 		///Is it the player using the object or a trigger/trap.
@@ -214,7 +214,7 @@ public class DoorControl : object_base {
 						}
 						if((doorlock.link & 0x3F)==dk.objInt().owner)//This is a valid key for the door.
 						{
-							ToggleLock();
+							ToggleLock(true);
 								if (locked()==true)
 								{//Locked message
 								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,4));
@@ -244,16 +244,16 @@ public class DoorControl : object_base {
 					{
 					if (Pickable==true)
 						{
-						if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.quality))
+							if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Random.Range(1,25)))
 							{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
-							UnlockDoor();
+							UnlockDoor(true);
 							}
 						else
-							{
+							{														
 							//Debug.Log ("Picklock failed!");
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
-							objIntUsed.consumeObject();
+							//objIntUsed.consumeObject();
 							}
 						}
 					else
@@ -548,20 +548,31 @@ public class DoorControl : object_base {
 		/// <summary>
 		/// Unlocks the door.
 		/// </summary>
-	public void UnlockDoor()
+	public void UnlockDoor(bool PlayerUse)
 	{
 		ObjectInteraction LockObject = getLockObjInt();
 		if (LockObject!=null)
 		{
 			//To unlock unset bit 8 of the flags
 			LockObject.flags = (short)(LockObject.flags & 0xE);
+			if ((PlayerUse) && (LockObject.next!=0))
+			{
+				if (ObjectLoader.GetItemTypeAt(LockObject.next)==ObjectInteraction.AN_UNLOCK_TRIGGER)
+				{
+					ObjectInteraction triggerObj = ObjectLoader.getObjectIntAt(LockObject.next);
+					if (triggerObj!=null)
+					{
+						triggerObj.GetComponent<object_base>().Activate(this.gameObject);		
+					}
+				}	
+			}
 		}
 	}
 
 		/// <summary>
 		/// Toggles the lock state
 		/// </summary>
-	public void ToggleLock()
+	public void ToggleLock(bool PlayerUse)
 	{
 		if (locked()==false)
 		{
@@ -569,19 +580,19 @@ public class DoorControl : object_base {
 		}
 		else
 		{
-			UnlockDoor();
+			UnlockDoor(PlayerUse);
 		}
 	}
 
 		/// <summary>
 		/// Toggles the door open or closed.
 		/// </summary>
-	public void ToggleDoor(float doorTravelTime)
+	public void ToggleDoor(float doorTravelTime, bool PlayerUse)
 	{
 		if (state()==false)//Closed
 		{
 			Debug.Log("Toggling door open");
-			UnlockDoor();
+			UnlockDoor(PlayerUse);
 			OpenDoor(doorTravelTime);	
 		}
 		else
@@ -663,7 +674,7 @@ public class DoorControl : object_base {
 		if ((objInt().quality<=0))
 			{
 				//locked=false;
-				UnlockDoor();
+				UnlockDoor(true);
 				OpenDoor(DoorControl.DefaultDoorTravelTime);
 			}
 		}

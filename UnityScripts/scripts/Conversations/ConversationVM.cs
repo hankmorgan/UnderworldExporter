@@ -2910,7 +2910,7 @@ public class ConversationVM : UWEBase {
 						{
 							if (Action==0)
 							{
-								DC.UnlockDoor();
+								DC.UnlockDoor(false);
 								DC.OpenDoor(DoorControl.DefaultDoorTravelTime);
 							}
 							else

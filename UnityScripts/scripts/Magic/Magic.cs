@@ -1154,11 +1154,11 @@ public class Magic : UWEBase {
 								DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
 								if (dc!=null)
 								{
-										dc.UnlockDoor();
+									dc.UnlockDoor(true);
 								}
 								else if (hit.transform.GetComponent<PortcullisInteraction>()!=null)
 								{
-										hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction().gameObject.GetComponent<DoorControl>().UnlockDoor();
+									hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction().gameObject.GetComponent<DoorControl>().UnlockDoor(true);
 								}
 						}
 				}

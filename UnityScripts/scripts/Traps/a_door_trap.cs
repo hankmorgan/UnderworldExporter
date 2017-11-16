@@ -21,12 +21,12 @@ Opens the door that is in the targeted tile.
 			case 1://try open
 				if (TriggerInstantly)
 				{
-					DC.UnlockDoor();
+					DC.UnlockDoor(false);
 					DC.OpenDoor(0f);	
 				}
 				else
 				{
-					DC.UnlockDoor();
+					DC.UnlockDoor(false);
 					DC.OpenDoor(DoorControl.DefaultDoorTravelTime);	
 				}
 
@@ -48,11 +48,11 @@ Opens the door that is in the targeted tile.
 				//TODO:check if toggle respects unlocked status. (door trap 1001 on level 3)
 				if (TriggerInstantly)
 				{
-					DC.ToggleDoor(0);						
+					DC.ToggleDoor(0,false);						
 				}
 				else
 				{
-					DC.ToggleDoor(DoorControl.DefaultDoorTravelTime);
+					DC.ToggleDoor(DoorControl.DefaultDoorTravelTime,false);
 				}				
 				break;
 			}

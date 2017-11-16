@@ -93,6 +93,17 @@ public class object_base : UWEBase {
 	{
 		//CheckReferences();
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + OwnershipString() );
+		if ((objInt().link != 0) && (objInt().isQuant()==false) && (objInt().enchantment==0))
+		{
+			if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.A_LOOK_TRIGGER)
+			{
+				ObjectInteraction obj = ObjectLoader.getObjectIntAt(objInt().link);
+				if (obj!=null)
+				{
+					obj.GetComponent<object_base>().Activate(this.gameObject);
+				}
+			}								
+		}
 		return true;
 	}
 
