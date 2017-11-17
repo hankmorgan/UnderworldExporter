@@ -50,8 +50,8 @@ public class trap_base : object_base {
 					//return true;
 				}
 				else
-				{
-					Debug.Log ("no trigger or trap found on this object");
+				{									
+					//Debug.Log ("no trigger or trap found on this object " + triggerObj);					
 					//return false;
 				}
 			}
@@ -102,7 +102,7 @@ public class trap_base : object_base {
 					}
 					else
 					{
-						return FindTrapInChain(objLink.link, TrapType);
+						return FindTrapInChain(objLink.link, TrapType);						
 					}
 				}					
 			}

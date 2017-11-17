@@ -26,4 +26,30 @@ Not really used by uwexporter but does exist in UW. Created here for compatabilt
 			triggerObj.SendMessage ("Activate");
 		}
 	}*/
+
+	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
+	{
+		//Debug.Log(this.name + " called by " +src.name);
+				//LockObject.flags = (short)(LockObject.flags | 0x1);
+
+				if ((objInt().flags & 0x1) == 1)
+				{//locked
+					objInt().flags = (short)(objInt().flags & 0xE);	
+				}
+				else
+				{
+					objInt().flags = (short)(objInt().flags | 0x1);
+				}
+	}
+
+
+	public override void TriggerNext (int triggerX, int triggerY, int State)
+	{
+	
+	}
+
+	public override void PostActivate (object_base src)
+	{
+
+	}
 }

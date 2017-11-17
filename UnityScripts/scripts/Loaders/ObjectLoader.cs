@@ -916,6 +916,7 @@ public class ObjectLoader : Loader {
 			switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
 			{	
 			case ObjectInteraction.SPELL:
+			case ObjectInteraction.LOCK:
 					return true;
 			default:
 					return false;							
@@ -1475,9 +1476,22 @@ public class ObjectLoader : Loader {
 
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
+
+
 				currObjList.objInfo[i].index=i;
+				bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
+				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
 				//GameWorldController.instance.objectMaster.type[objInt().item_id]
-				switch(GameWorldController.instance.objectMaster.type[currObjList.objInfo[i].item_id])
+				if ( ! ( (IsTriggerOrTrap) && (!OnMap) ) )
+				{//Only clear nexts if the object is not an offmap trigger/trap
+						currObjList.objInfo[i].next=0;
+						if (currObjList.objInfo[i].instance!=null)
+						{
+								//currObjList.objInfo[i].instance.debugindex=i;
+							currObjList.objInfo[i].instance.next=0;				
+						}
+				}
+			/*	switch(GameWorldController.instance.objectMaster.type[currObjList.objInfo[i].item_id])
 				{
 				case ObjectInteraction.LOCK:
 				case ObjectInteraction.A_USE_TRIGGER:
@@ -1491,7 +1505,7 @@ public class ObjectLoader : Loader {
 								currObjList.objInfo[i].instance.next=0;				
 						}
 						break;
-				}
+				}*/
 			}
 
 			if (currTileMap!=null)

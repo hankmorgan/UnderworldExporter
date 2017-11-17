@@ -93,8 +93,9 @@ public class DoorControl : object_base {
 					return ObjectLoader.getObjectIntAt(objInt().link);	
 				}
 				else
-				{
-						return null;
+				{//Try and find in the chain of execution.						
+					return null;
+					//return FindObjectInChain(objInt().link, ObjectInteraction.LOCK);
 				}					
 			}
 		}
@@ -408,7 +409,12 @@ public class DoorControl : object_base {
 										trigger_base tb= TriggerObject.GetComponent<trigger_base>();
 										if (tb!=null)
 										{
-											if (tb.objInt().GetItemType()!=ObjectInteraction.A_CLOSE_TRIGGER)
+											if 
+												(
+												(tb.objInt().GetItemType()!=ObjectInteraction.A_CLOSE_TRIGGER)
+														&&
+												(tb.objInt().GetItemType()!=ObjectInteraction.AN_UNLOCK_TRIGGER)
+												)
 												{
 													tb.Activate(this.gameObject);											
 												}
@@ -486,13 +492,16 @@ public class DoorControl : object_base {
 
 														while (next!=0)
 														{
-																next=0;
+																
 																ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(next);
+
 																if (TriggerObject!=null)
 																{
+																		next=0;
 																		trigger_base tb= TriggerObject.GetComponent<trigger_base>();
 																		if (tb!=null)
 																		{
+																				
 																				if (tb.objInt().GetItemType()!=ObjectInteraction.AN_OPEN_TRIGGER)
 																				{
 																					tb.Activate(this.gameObject);											

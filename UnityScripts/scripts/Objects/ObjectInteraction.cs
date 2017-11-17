@@ -2058,6 +2058,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<a_spell>();
 						CreateSprite=false;
 						break;
+				//case ObjectInteraction.LOCK:
+					//	myObj.AddComponent<a_lock>();
+						//CreateSprite=false;
+						break;
 				case A_DO_TRAP:
 						{
 							switch (objInt.quality)	

@@ -675,4 +675,43 @@ public class object_base : UWEBase {
 			}	
 		}
 
+
+		/// <summary>
+		/// Finds the trap of the specified type in chain of execution of linked items
+		/// </summary>
+		/// <returns><c>true</c>, if trap in chain was found, <c>false</c> otherwise.</returns>
+		/// <param name="link">Link.</param>
+		/// <param name="TrapType">Trap type.</param>
+		public virtual ObjectInteraction FindObjectInChain(int link, int ItemType)
+		{
+				if (link!=0)
+				{
+						ObjectInteraction objLink = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;
+						if (objLink!=null)
+						{
+								if (objLink.GetItemType() == ObjectInteraction.A_DELETE_OBJECT_TRAP)
+								{//Stop infinite loops
+									if (ItemType == ObjectInteraction.A_DELETE_OBJECT_TRAP)
+										{
+											return objLink;
+										}
+										else
+										{
+											return null;
+										}
+
+								}
+								if (objLink.GetItemType()== ItemType)
+								{
+										return objLink;
+								}
+								else
+								{
+									return FindObjectInChain(objLink.link, ItemType);
+								}
+						}					
+				}
+				return null;
+		}
+
 }

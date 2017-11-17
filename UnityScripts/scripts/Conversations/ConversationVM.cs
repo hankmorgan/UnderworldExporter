@@ -2910,7 +2910,7 @@ public class ConversationVM : UWEBase {
 						{
 							if (Action==0)
 							{
-								DC.UnlockDoor(false);
+								DC.UnlockDoor(false);//Possibly Npcs don't actually unlock the door
 								DC.OpenDoor(DoorControl.DefaultDoorTravelTime);
 							}
 							else
