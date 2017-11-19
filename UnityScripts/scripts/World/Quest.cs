@@ -105,7 +105,7 @@ using System.Collections;
 /// 	(this is probably a bit field.)
 /// 132: Set to 2 during Kintara conversation
 /// 
-/// 134: PT related
+/// 134: The password for the prison tower (random value)
 /// 135: Checked by goblin in sewers
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWEBase {
@@ -204,7 +204,7 @@ public class Quest : UWEBase {
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)
 	/// </summary>
 	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat
-	/// Possibly these are hard coded events related to game progress.
+	/// Possibly these are hard coded events related to game progress. Some gamevariables seem to act as pointers to x_clocks
 	/// Some known values
 	/// 1=Miranda conversations & related events in the castle
 		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)

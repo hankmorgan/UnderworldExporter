@@ -1063,13 +1063,17 @@ public class ConversationVM : UWEBase {
 						break;
 					}
 				}
-
+				int maxAddress=0;//where does the imported memory end
 				//Copy back npc related variables that need to update. Eg attitude. Talked to etc.
 				for (int i=0; i<= conv[currConv].functions.GetUpperBound(0);i++)
 				{
 						if (conv[currConv].functions[i].import_type== import_variable)
 						{
 								int address=conv[currConv].functions[i].ID_or_Address;
+								if(address>maxAddress)
+								{
+										maxAddress=address;	
+								}
 								switch (conv[currConv].functions[i].functionName.ToLower())
 								{
 								case "npc_talkedto":
@@ -1101,6 +1105,14 @@ public class ConversationVM : UWEBase {
 
 						}
 				}
+				if (_RES==GAME_UW2)
+				{//Hack to fix quest flag settings for garg
+					if (currConv==5)
+					{
+						Quest.instance.QuestVariables[0]=stack.at(31);
+					}
+				}
+
 
 
 				///Give movement back to the player			
@@ -3845,7 +3857,7 @@ description:  places a generated object in underworld
 			}
 			else
 			{//Should this be an increment???
-				Debug.Log("x_clock setting: " + unk2 + " to " + unk1);
+				Debug.Log("x_clock setting: " + (unk2) + " to " + unk1);
 				Quest.instance.x_clocks[unk2]=unk1;	
 			}
 		}

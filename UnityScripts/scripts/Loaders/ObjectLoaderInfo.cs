@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectLoaderInfo {
+public class ObjectLoaderInfo : UWClass {
 		
 		public int index;	//it's own index in case I need to find myself.
 		public int item_id;	//0-8

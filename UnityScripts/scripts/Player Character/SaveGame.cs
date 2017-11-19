@@ -1759,7 +1759,7 @@ public class SaveGame : Loader {
 										case 0x37a://12
 										case 0x37b://13
 										case 0x37c://14
-										case 0x37d://15 -- This could be wrong.
+										//case 0x37d://15 -- This could be wrong.
 												{//The mysterious x_clocks
 													Quest.instance.x_clocks[x_clock++]=(int)DataLoader.getValAtAddress(buffer,i,8);
 													break;

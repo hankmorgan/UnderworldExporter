@@ -151,17 +151,17 @@ public class TMAP : object_base {
 						switch (objInt.heading * 45)
 						{
 						case ObjectInteraction.HEADINGSOUTH:
-								doorFrameOffsetX=-.03f;
+								doorFrameOffsetX=-.12f;
 								break;
 						case ObjectInteraction.HEADINGNORTH:
-								doorFrameOffsetX=+.03f;
+								doorFrameOffsetX=+.12f;
 								break;
 
 						case ObjectInteraction.HEADINGEAST:
-								doorFrameOffsetY=+.03f;
+								doorFrameOffsetY=-.06f;
 								break;
 						case ObjectInteraction.HEADINGWEST:
-								doorFrameOffsetY=-.03f;
+								doorFrameOffsetY=+.12f;
 								break;
 						}
 				}

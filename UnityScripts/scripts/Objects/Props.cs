@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Base class for properties files
 /// </summary>
-public class Props  {
+public class Props : UWClass   {
 
-		public string _RES="UW1";
+		//public string _RES="UW1";
 }

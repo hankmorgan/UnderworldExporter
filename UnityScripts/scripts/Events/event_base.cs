@@ -136,30 +136,72 @@ public class event_base : Loader {
 								}
 								if (test)
 								{
-								//Find the next condition
-									if (events_blocks[b].event_actions[r+1]!=null)	
+								//work through the rows until a condition is hit
+									int eventNo =1;
+									bool EventsAvailable=true;
+
+									while (EventsAvailable)
 									{
-										if (events_blocks[b].event_actions[r+1].type == event_action.RowTypeEvent)
-										{
-											//Fire the events in this block!
-											ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
-											int eventTileX=events_blocks[b].event_actions[r+1].EventTileX;
-											int eventTileY=events_blocks[b].event_actions[r+1].EventTileY;
-											for (int o=256; o<=objList.GetUpperBound(0);o++)
+										if (events_blocks[b].event_actions[r+eventNo]!=null)	
 											{
-												if ( (objList[o].tileX==eventTileX) && (objList[o].tileY==eventTileY) && (objList[o].instance!=null))
+											if (events_blocks[b].event_actions[r+eventNo].LevelNo != events_blocks[b].event_actions[r].LevelNo)
 												{
-													if (objList[o].instance.GetItemType()==ObjectInteraction.A_SCHEDULED_TRIGGER)	
-													{
-														objList[o].instance.GetComponent<trigger_base>().Activate(null);		
-													}
+														EventsAvailable=false;	
 												}
+												else
+												{										
+															switch(events_blocks[b].event_actions[r+eventNo].type)
+																{
+																case event_action.RowTypeCondition:
+																		{
+																			EventsAvailable=false;
+																			break;																										
+																		}
+																case event_action.RowTypeEvent:
+																		{
+																			//Fire the events in this block!
+																			ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+																			int eventTileX=events_blocks[b].event_actions[r+eventNo].EventTileX;
+																			int eventTileY=events_blocks[b].event_actions[r+eventNo].EventTileY;
+																			for (int o=256; o<=objList.GetUpperBound(0);o++)
+																			{
+																				if ( (objList[o].tileX==eventTileX) && (objList[o].tileY==eventTileY) && (objList[o].instance!=null))
+																				{
+																					if (objList[o].instance.GetItemType()==ObjectInteraction.A_SCHEDULED_TRIGGER)	
+																					{
+																						objList[o].instance.GetComponent<trigger_base>().Activate(null);		
+																					}
+																				}
+																			}
+																			//Clear the event
+																			events_blocks[b].event_actions[r+eventNo]=null;
+																			eventNo++;
+																			if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
+																			{
+																					EventsAvailable=false;
+																			}
+																			break;
+																		}
+																default:
+																		//EventsAvailable=false;
+																		Debug.Log("Unknown row type " + events_blocks[b].event_actions[r+eventNo].type);
+																		eventNo++;
+																		if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
+																		{
+																			EventsAvailable=false;
+																		}
+																		break;
+
+																}//end switch type.
+												}
+				
+											}//end if null
+											else
+											{
+												EventsAvailable=false;
 											}
-											//Clear the event
-											events_blocks[b].event_actions[r+1]=null;
-										}
-									}	
-								}
+									}//end do
+								}//end test
 								break;
 							}//end case condition
 						}//end switch
