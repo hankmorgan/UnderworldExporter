@@ -10,6 +10,8 @@ using RAIN.Minds;
 public class NPC : MobileObject {
 	private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
 
+		public int DebugRace;
+
 	//TODO: these need to match the UW npc_goals
 	//The behaviour trees need to be updated too.
 	public const int AI_STATE_IDLERANDOM = 0;
@@ -165,6 +167,7 @@ public class NPC : MobileObject {
 		}
 		newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
 		newAnim.output=this.GetComponentInChildren<SpriteRenderer>();
+				DebugRace=GetRace();
 	}
 
 	void AI_INIT ()

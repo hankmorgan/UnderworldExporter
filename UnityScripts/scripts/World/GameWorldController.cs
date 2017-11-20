@@ -113,6 +113,9 @@ public class GameWorldController : UWEBase {
 		/// </summary>	
 		public short LevelNo;
 
+
+		public static bool LoadingGame=false;
+
 		/// <summary>
 		/// What level the player starts on in a quick start
 		/// </summary>
@@ -844,7 +847,12 @@ public class GameWorldController : UWEBase {
 			{
 				if (events!=null)
 				{
-					events.ProcessEvents(newLevelNo);
+								if (!LoadingGame)
+								{
+										events.ProcessEvents(newLevelNo);					
+								}
+										
+					
 				}
 			}
 		}

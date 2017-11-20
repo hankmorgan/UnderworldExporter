@@ -14,7 +14,7 @@ public class a_hack_trap : trap_base {
 		//qual=28 is change tmap objects to use a different texture
 		//qual =32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
 	//qual=35 is recharge light crystals	
-		//qual =36. Called after first LB conversation. Plays the guardian cutscene and possibly moves all NPCs to their proper locations.
+		//qual =36. Called after first LB conversation. Moves all NPCs to their proper locations.
 		//qual=39 is change object visability
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)

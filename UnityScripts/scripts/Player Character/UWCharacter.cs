@@ -16,6 +16,8 @@ public class UWCharacter : Character {
 
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
+		public int IndexToRecode=0;
+		public int ValueToRecode=0;
 		public int game_time;
 
 		public const int CharClassFighter=0;

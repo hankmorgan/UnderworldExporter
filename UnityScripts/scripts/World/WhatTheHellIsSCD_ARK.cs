@@ -112,6 +112,13 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 															case event_action.RowTypeEvent:
 																		output = output + "Event";
 																	break;
+																case event_action.RowTypeRaceAdjust:
+																		output = output + "Race";
+																		break;
+																case event_action.RowTypeWhoAmIAdjust:
+																		output = output + "WhoAmI";
+																		break;
+
 															default:
 																		output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr,8) ;
 																	break;

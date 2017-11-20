@@ -2084,6 +2084,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_texture>();break;
 							case 0x20://qbert puzzle in the void
 								myObj.AddComponent<a_hack_trap_qbert>();break;
+							case 0x24://Move castlenpcs
+								myObj.AddComponent<a_hack_trap_castle_npcs>();break;	
 							case 0x27://Change visiblity of linked item
 								myObj.AddComponent<a_hack_trap_visibility>();break;		
 							case 0x2a://Gronk conversation

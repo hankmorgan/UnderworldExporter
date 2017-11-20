@@ -684,7 +684,7 @@ public class MainMenuHud : GuiBase {
 		/// </summary>
 		public void JourneyOnwards()
 		{
-				
+			GameWorldController.LoadingGame=true;
 			GameWorldController.instance.SwitchLevel(GameWorldController.instance.startLevel);
 
 			UWCharacter.Instance.transform.position= GameWorldController.instance.StartPos;
@@ -702,5 +702,6 @@ public class MainMenuHud : GuiBase {
 				GameWorldController.instance.PositionDetect();
 				UWHUD.instance.editor.SelectCurrentTile();
 			}
+			GameWorldController.LoadingGame=false;
 		}
 }

@@ -427,6 +427,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		{
 			//Load a save file
 			//Set the level file
+						GameWorldController.LoadingGame=true;
 			GameWorldController.instance.LevelNo=-1;
 			GameWorldController.instance.AtMainMenu=true;
 			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
@@ -456,7 +457,9 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			//000~001~162~Restore Game Complete. \n
 			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_restore_game_complete_));
+			GameWorldController.LoadingGame=false;
 			ReturnToGame();
+
 		}
 	}
 

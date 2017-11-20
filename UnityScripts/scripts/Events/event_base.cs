@@ -86,13 +86,18 @@ public class event_base : Loader {
 					events_blocks[BlockNo].event_actions[r].LevelNo=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+0,8);
 					switch (events_blocks[BlockNo].event_actions[r].type)
 					{
-					case event_action.RowTypeCondition:						
+					case event_action.RowTypeCondition:			
+						//events_blocks[BlockNo].event_actions[r].Enabled =  (1 == (int)DataLoader.getValAtAddress(scd_ark,add_ptr+5,8));//is this wrong
 						events_blocks[BlockNo].event_actions[r].event_variable = (int)DataLoader.getValAtAddress(scd_ark,add_ptr+3,8);
 						events_blocks[BlockNo].event_actions[r].event_isQuest = (1 == (int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8));
 						break;					
 					case event_action.RowTypeEvent:						
 						events_blocks[BlockNo].event_actions[r].EventTileX=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+3,8);
 						events_blocks[BlockNo].event_actions[r].EventTileY=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8);
+						break;
+					case event_action.RowTypeRaceAdjust:
+						events_blocks[BlockNo].event_actions[r].Race=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8);
+						//Todo:Find out the properties to change here
 						break;
 					default:
 						break;
@@ -125,21 +130,33 @@ public class event_base : Loader {
 								bool test=false;
 								if (events_blocks[b].event_actions[r].LevelNo==levelNo+1)
 								{
-									if (events_blocks[b].event_actions[r].event_isQuest)
-									{//Test a quest variable
-										test=(1 ==  Quest.instance.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
-									}
-									else
-									{//test a game variable
-										test=(1 ==  Quest.instance.variables[events_blocks[b].event_actions[r].event_variable])	;
-									}
+									//if (events_blocks[b].event_actions[r].Enabled)
+									//{
+										if (events_blocks[b].event_actions[r].event_isQuest)
+										{//Test a quest variable
+											test=(1 ==  Quest.instance.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
+																				if (test)
+																				{
+																						Debug.Log("matched on quest " + events_blocks[b].event_actions[r].event_variable);
+																				}
+										}
+										else
+										{//test a game variable
+											test=(1 ==  Quest.instance.variables[events_blocks[b].event_actions[r].event_variable])	;
+																				if (test)
+																				{
+																						Debug.Log("matched on variable " + events_blocks[b].event_actions[r].event_variable);
+																				}
+										}		
+									//}
+
 								}
 								if (test)
 								{
 								//work through the rows until a condition is hit
 									int eventNo =1;
 									bool EventsAvailable=true;
-
+									//events_blocks[b].event_actions[r].Enabled=false;
 									while (EventsAvailable)
 									{
 										if (events_blocks[b].event_actions[r+eventNo]!=null)	
@@ -181,6 +198,29 @@ public class event_base : Loader {
 																					EventsAvailable=false;
 																			}
 																			break;
+																		}
+																case event_action.RowTypeRaceAdjust:
+																		{
+																			Debug.Log("Adjust race attitudes" +events_blocks[b].event_actions[r+eventNo].Race );
+																			events_blocks[b].event_actions[r+eventNo]=null;
+																			eventNo++;
+																			if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
+																			{
+																					EventsAvailable=false;
+																			}
+																			break;
+																			break;
+																		}
+																case event_action.RowTypeWhoAmIAdjust:
+																		{
+																				Debug.Log("Adjust whoami"  );
+																				events_blocks[b].event_actions[r+eventNo]=null;
+																				eventNo++;
+																				if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
+																				{
+																						EventsAvailable=false;
+																				}
+																				break;
 																		}
 																default:
 																		//EventsAvailable=false;
