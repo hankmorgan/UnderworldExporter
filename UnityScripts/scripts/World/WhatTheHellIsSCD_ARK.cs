@@ -24,7 +24,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 		if (TableView)
 		{
 			writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.csv", false);	
-			output=output + "Block,Level,1,Type,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
+			output=output + "Address,Block,Level,1,Type,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
 		}
 		else
 		{
@@ -58,7 +58,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 			}
 
 			if (isCompressed == 1)
-			{
+			{//should not happen in scd.ark
 				datalen=0;
 				scd_ark = DataLoader.unpackUW2(scd_ark_file_data,DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32), ref datalen);
 				address_pointer=address_pointer+4;
@@ -69,7 +69,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 			{
 				long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
 				int j=0;
-				AddressOfBlockStart=0;
+				AddressOfBlockStart=BlockStart;
 				address_pointer=0;//Since I am at the start of a fresh array.
 				scd_ark = new char[datalen];
 				for (long i = BlockStart; i < BlockStart + datalen; i++)
@@ -98,7 +98,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 										{			
 												if (r==0)
 												{
-														output = output + LevelNo +",";	
+														output = output + AddressOfBlockStart+add_ptr + "," + LevelNo +",";	
 												}
 												switch(r)
 												{
@@ -117,6 +117,9 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 																		break;
 																case event_action.RowTypeWhoAmIAdjust:
 																		output = output + "WhoAmI";
+																		break;
+																case event_action.RowTypePlaceNPC:
+																		output = output + "PlaceNPC";
 																		break;
 
 															default:

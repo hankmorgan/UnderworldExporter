@@ -75,7 +75,7 @@ using System.Collections;
 /// 50: The keep is going to crash.
 /// 
 /// 54: Checked by Mors Gotha? related to keep crashing
-/// 
+/// 55: Banner of Killorn returned (based on Scd.ark research)
 /// 58: Set when meeting bishop. Bishop tells you about altara
 /// 
 /// 61: You've brought water to Josie
