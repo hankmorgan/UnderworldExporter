@@ -83,6 +83,7 @@ using System.Collections;
 /// 63: Used by Rawstag (you know blog?)
 /// 64: Is mors dead
 /// 65: Pits related (checked by dorstag)
+/// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
 /// 106: Meet mors gothi and got the book
 /// 107: Set after freeing praetor loth
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
@@ -212,9 +213,11 @@ public class Quest : UWEBase {
 		/// 3 - servants getting restless
 		/// 4 - concerned about water, dupre is annoyed by patterson
 		/// 5 - Dupre is bored / dupre is fetching water
-		/// 7 - Tory is killed
+		/// 7 - Miranda wants to talk to you pre tori murder
+		/// 8 - tori is murdered
 		/// 9 - Charles finds a key
 		/// 11 - Go see Nelson
+		/// 12 - Patterson goes postal
 		/// 13 - Patterson is dead
 		/// 14 - Gem is weak
 		/// 15 - Nystrul wants to see you again re endgame
@@ -312,25 +315,4 @@ public class Quest : UWEBase {
 			}
 		return false;
 		}
-
-
-/*	/// <summary>
-	/// X Clock_Event processing
-	/// </summary>
-	/// <param name="x_clock_event">X clock event.</param>
-	public void x_clock_hook(x_clock_events x_clock_event)
-	{
-		switch(x_clock_event)	
-		{
-		case x_clock_events.ExploreCastleDepths:
-			{//You have begun exploring underneath the castle.
-				if (x_clocks[1]==0)
-				{
-					x_clocks[1]=1;
-				}
-				break;
-			}
-		}
-	}*/
-
 }

@@ -39,7 +39,7 @@ public class SpellEffectFear : SpellEffect {
 				npc.npc_attitude=NPC.AI_ATTITUDE_UPSET;
 
 				//Makes the NPC Run away
-				npc.npc_goal=6;
+				npc.npc_goal=(short)NPC.npc_goals.npc_goal_flee;
 				npc.npc_gtarg=1;
 				
 				WasActive=true;

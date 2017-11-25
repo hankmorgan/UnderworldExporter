@@ -1178,7 +1178,7 @@ public class ConversationVM : UWEBase {
 				{
 					if (GameWorldController.instance.events!=null)
 					{
-						GameWorldController.instance.events.ProcessEvents(GameWorldController.instance.LevelNo);
+								GameWorldController.instance.events.ProcessEvents();
 					}
 				}
 		}
@@ -3288,7 +3288,7 @@ public class ConversationVM : UWEBase {
 										Col.gameObject.GetComponent<NPC>().npc_gtarg=5;
 										Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
 										Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;	
-										Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+										Col.gameObject.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;	
 									}
 								}
 						}

@@ -2090,6 +2090,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_visibility>();break;		
 							case 0x2a://Gronk conversation
 								myObj.AddComponent<a_do_trap_conversation>();break;
+							case 0x2c:
+								myObj.AddComponent<a_hack_trap_sleep>();break;
 							case 0x28://emerald puzzle on level 6
 								myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
 							case 0x3F://end game sequence

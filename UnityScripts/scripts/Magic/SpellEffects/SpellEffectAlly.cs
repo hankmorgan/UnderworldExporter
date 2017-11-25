@@ -34,7 +34,7 @@ public class SpellEffectAlly : SpellEffect {
 					//npc.state=NPC.AI_STATE_STANDING;	//Temporarily just wander around
 					npc.npc_attitude=NPC.AI_ATTITUDE_MELLOW;
 								//Makes the NPC follow the player
-								npc.npc_goal=3;
+								npc.npc_goal=(short)NPC.npc_goals.npc_goal_follow;;
 								npc.npc_gtarg=1;
 
 					WasActive=true;

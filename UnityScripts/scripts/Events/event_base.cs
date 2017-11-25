@@ -4,250 +4,247 @@ using System.Collections;
 /// <summary>
 /// Event base.
 /// </summary>
-/// Class for loading the SCD ark events
-public class event_base : Loader {
+/// Based Class for loading the SCD ark events
+public class event_base : UWClass {
+
+		public const int RowTypeSetNPCGoal= 1;
+		public const int RowTypeMoveNPC= 2;
+		public const int RowTypeKillNPC= 3;//Only used to kill tory.
+		public const int RowTypeFireTriggers= 5;//Fires triggers in specified tiles. Similar to scheduled trigger but ignores type (untested)?
+		public const int RowTypeCondition= 10;	
+		public const int RowTypeRemoveNPC=245; //Remove an NPC from the game world
+		public const int RowTypeRaceAttidude=248;//Change the races attitude/other properties towards you.
+		public const int RowTypeSetProps=249;//Change the various properties of an NPC based on the WHOAMI in offset 6
+		public const int RowTypeScheduled=251;
+		public const int RowTypeKillNPCorRace=253;//Kill an npc or race with the specified race???
+		public const int RowTypePlaceNPC=254;//??
+		public const int RowTypeSetNPCGOAL_Alt=255;
+		/// <summary>
+		/// The raw data from scd.ark
+		/// </summary>
+		public char[] RawData= new char[16];
+
+		/// <summary>
+		/// The block within which this event is contained.
+		/// </summary>
+		public int BlockNo;
+
+		/// <summary>
+		/// The type of event row this is.
+		/// </summary>
+		public int type;
+
+		/// <summary>
+		/// The levelNo of the event to be triggered
+		/// </summary>
+		public int LevelNo=0;  //the level no can also refer to a world eg 247 means any part of the prison tower.
+
+		/// <summary>
+		/// The x clock that is required for this event to occur (can happen in conditions or events)
+		/// </summary>
+		/// 0=not required
+		/// Uses block no to refer to clock index.
+		public int x_clock=0;
 
 
-
-	//public struct scheduled_event
-	//{
-		//public event_condition condition;
-		//public event_action action;
-	//};
-
-	public struct event_block
-	{
-		public int[] eventheader;	
-		public event_action[] event_actions;
-	};
-
-	public event_block[] events_blocks;// = new event_block[15];
-
-
-	/// <summary>
-	/// Initializes a new instance of the <see cref="event_base"/> class.
-	/// </summary>
-	public event_base()
-	{
-		char[] scd_ark;	
-		char[] scd_ark_file_data;
-		if (!DataLoader.ReadStreamFile(Loader.BasePath +  GameWorldController.instance.SCD_Ark_File_Selected, out scd_ark_file_data))
+		/// <summary>
+		/// Inits the raw data from the scd.ark file
+		/// </summary>
+		/// <param name="add_ptr">Add ptr.</param>
+		/// <param name="fileData">File data.</param>
+		public void InitRawData(int blockNo, int add_ptr, char[]fileData)
 		{
-			Debug.Log(Loader.BasePath +  GameWorldController.instance.SCD_Ark_File_Selected + " File not loaded");
-			return;
+				BlockNo=blockNo;
+				for (int i=0; i<=RawData.GetUpperBound(0);i++)
+				{
+						RawData[i]=fileData[add_ptr+i];
+				}
+				LevelNo= RawData[0]-1;//Adjust to match UWE level nos
+				type=RawData[2];
+				x_clock=RawData[14];
 		}
 
-		int NoOfBlocks=(int)DataLoader.getValAtAddress(scd_ark_file_data,0,32);
 
-		events_blocks = new event_block[NoOfBlocks];
-		for (int BlockNo=0;BlockNo<=events_blocks.GetUpperBound(0); BlockNo++)
+		/// <summary>
+		/// Checks the conditions necessary to fire this event or check this conditional.
+		/// </summary>
+		/// <returns><c>true</c>, if condition was checked, <c>false</c> otherwise.</returns>
+		public virtual bool CheckCondition()
 		{
-			long address_pointer=6;
-			int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (BlockNo*4) ,32);
-			int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (BlockNo*4) ,32);
-			int isCompressed =(compressionFlag>>1) & 0x01;
-			long AddressOfBlockStart;
-			address_pointer=(BlockNo * 4) + 6;
-			if ((int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32)==0)
-			{
-				Debug.Log("No Scd.ark data for this level");
-			}
-			long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
-			int j=0;
-			AddressOfBlockStart=0;
-			address_pointer=0;//Since I am at the start of a fresh array.
-			scd_ark = new char[datalen];
-			for (long i = BlockStart; i < BlockStart + datalen; i++)
-			{
-				scd_ark[j] = scd_ark_file_data[i];
-				j++;
-			}
+			return LevelTest() && xclocktest();
+		}
 
-			int add_ptr=0;
+		/// <summary>
+		/// Executes the events defined by this row.
+		/// </summary>
+		public virtual void ExecuteEvent()
+		{
+				Debug.Log("unimplemented event type :" + type );
+		}
 
-			int noOfRows = (int)DataLoader.getValAtAddress(scd_ark,0,8);
-			if (noOfRows!=0)
-			{
-				//output = output + "Unknown info 1-325\n";
-				events_blocks[BlockNo]=new event_block();
-				events_blocks[BlockNo].eventheader=new int[325];
-				for (int i=1;i<324;i++)
+		/// <summary>
+		/// Determines whether the current level is the level number specified by the condition
+		/// </summary>
+		/// <returns><c>true</c> if this instance is level the specified levelNoToTest; otherwise, <c>false</c>.</returns>
+		/// <param name="levelNoToTest">Level no to test.</param>
+		public bool IsLevel(int levelNoToTest)
+		{
+				if (levelNoToTest==LevelNo)
 				{
-					events_blocks[BlockNo].eventheader[i-1]=(int)DataLoader.getValAtAddress(scd_ark,add_ptr++,8);
+						return true;
 				}
-
-				add_ptr=326;
-				events_blocks[BlockNo].event_actions = new event_action[noOfRows];//Events are cleared after firing.
-				int r=0;
-				for (int i=0; i<events_blocks[BlockNo].event_actions.GetUpperBound(0); i++)
-				{	
-					events_blocks[BlockNo].event_actions[r]=new event_action();
-					events_blocks[BlockNo].event_actions[r].type = (int)DataLoader.getValAtAddress(scd_ark,add_ptr+2,8);
-					events_blocks[BlockNo].event_actions[r].LevelNo=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+0,8);
-					switch (events_blocks[BlockNo].event_actions[r].type)
+				else
+				{
+					switch (LevelNo)
 					{
-					case event_action.RowTypeCondition:			
-						//events_blocks[BlockNo].event_actions[r].Enabled =  (1 == (int)DataLoader.getValAtAddress(scd_ark,add_ptr+5,8));//is this wrong
-						events_blocks[BlockNo].event_actions[r].event_variable = (int)DataLoader.getValAtAddress(scd_ark,add_ptr+3,8);
-						events_blocks[BlockNo].event_actions[r].event_isQuest = (1 == (int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8));
-						break;					
-					case event_action.RowTypeEvent:						
-						events_blocks[BlockNo].event_actions[r].EventTileX=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+3,8);
-						events_blocks[BlockNo].event_actions[r].EventTileY=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8);
-						break;
-					case event_action.RowTypeRaceAdjust:
-						events_blocks[BlockNo].event_actions[r].Race=(int)DataLoader.getValAtAddress(scd_ark,add_ptr+4,8);
-						//Todo:Find out the properties to change here
-						break;
+					case 246://Prison tower area code -1
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Prison0) 
+									&&
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Prison7));
+					
+					case 240://Talorus area code -1
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Talorus0) 
+									&&
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Talorus1));
+							
+					case 254://Pits area code -1
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Pits0) 
+									&&
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Pits2));
+
 					default:
-						break;
+							return false;
 					}
-					r++;
-					add_ptr+=16;
+
 				}
-			}
 		}
-	}
 
-
-
-	public void ProcessEvents(int levelNo)
-	{
-		for (int b=0; b<=events_blocks.GetUpperBound(0);b++)
+		/// <summary>
+		/// Tests if the xclock is correct to fire this event.
+		/// </summary>
+		public bool xclocktest()
 		{
-			if (events_blocks[b].event_actions!=null)
+			if (x_clock==0)
 			{
-				
-				for (int r=0; r< events_blocks[b].event_actions.GetUpperBound(0);r++)//Last block is always null
-				{
-					if (events_blocks[b].event_actions[r]!=null)
-					{
-						switch(events_blocks[b].event_actions[r].type)
-						{
-						case event_action.RowTypeCondition:
-							{
-								//Check the condition
-								bool test=false;
-								if (events_blocks[b].event_actions[r].LevelNo==levelNo+1)
-								{
-									//if (events_blocks[b].event_actions[r].Enabled)
-									//{
-										if (events_blocks[b].event_actions[r].event_isQuest)
-										{//Test a quest variable
-											test=(1 ==  Quest.instance.QuestVariables[events_blocks[b].event_actions[r].event_variable])	;
-																				if (test)
-																				{
-																						Debug.Log("matched on quest " + events_blocks[b].event_actions[r].event_variable);
-																				}
-										}
-										else
-										{//test a game variable
-											test=(1 ==  Quest.instance.variables[events_blocks[b].event_actions[r].event_variable])	;
-																				if (test)
-																				{
-																						Debug.Log("matched on variable " + events_blocks[b].event_actions[r].event_variable);
-																				}
-										}		
-									//}
-
-								}
-								if (test)
-								{
-								//work through the rows until a condition is hit
-									int eventNo =1;
-									bool EventsAvailable=true;
-									//events_blocks[b].event_actions[r].Enabled=false;
-									while (EventsAvailable)
-									{
-										if (events_blocks[b].event_actions[r+eventNo]!=null)	
-											{
-											if (events_blocks[b].event_actions[r+eventNo].LevelNo != events_blocks[b].event_actions[r].LevelNo)
-												{
-														EventsAvailable=false;	
-												}
-												else
-												{										
-															switch(events_blocks[b].event_actions[r+eventNo].type)
-																{
-																case event_action.RowTypeCondition:
-																		{
-																			EventsAvailable=false;
-																			break;																										
-																		}
-																case event_action.RowTypeEvent:
-																		{
-																			//Fire the events in this block!
-																			ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
-																			int eventTileX=events_blocks[b].event_actions[r+eventNo].EventTileX;
-																			int eventTileY=events_blocks[b].event_actions[r+eventNo].EventTileY;
-																			for (int o=256; o<=objList.GetUpperBound(0);o++)
-																			{
-																				if ( (objList[o].tileX==eventTileX) && (objList[o].tileY==eventTileY) && (objList[o].instance!=null))
-																				{
-																					if (objList[o].instance.GetItemType()==ObjectInteraction.A_SCHEDULED_TRIGGER)	
-																					{
-																						objList[o].instance.GetComponent<trigger_base>().Activate(null);		
-																					}
-																				}
-																			}
-																			//Clear the event
-																			events_blocks[b].event_actions[r+eventNo]=null;
-																			eventNo++;
-																			if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
-																			{
-																					EventsAvailable=false;
-																			}
-																			break;
-																		}
-																case event_action.RowTypeRaceAdjust:
-																		{
-																			Debug.Log("Adjust race attitudes" +events_blocks[b].event_actions[r+eventNo].Race );
-																			events_blocks[b].event_actions[r+eventNo]=null;
-																			eventNo++;
-																			if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
-																			{
-																					EventsAvailable=false;
-																			}
-																			break;
-																			break;
-																		}
-																case event_action.RowTypeWhoAmIAdjust:
-																		{
-																				Debug.Log("Adjust whoami"  );
-																				events_blocks[b].event_actions[r+eventNo]=null;
-																				eventNo++;
-																				if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
-																				{
-																						EventsAvailable=false;
-																				}
-																				break;
-																		}
-																default:
-																		//EventsAvailable=false;
-																		Debug.Log("Unknown row type " + events_blocks[b].event_actions[r+eventNo].type);
-																		eventNo++;
-																		if (eventNo>=events_blocks[b].event_actions.GetUpperBound(0))
-																		{
-																			EventsAvailable=false;
-																		}
-																		break;
-
-																}//end switch type.
-												}
-				
-											}//end if null
-											else
-											{
-												EventsAvailable=false;
-											}
-									}//end do
-								}//end test
-								break;
-							}//end case condition
-						}//end switch
-					}
-				}
+				return true;
+			}
+			else
+			{
+				return (Quest.instance.x_clocks[BlockNo]==x_clock);		
 			}
 		}
-	}
+
+
+		public bool LevelTest()
+		{
+				return IsLevel(GameWorldController.instance.LevelNo);
+		}
+
+		/// <summary>
+		/// Finds every NPC with the specified whoami.
+		/// </summary>
+		/// <returns>The NP.</returns>
+		/// <param name="WhoAmI">Who am i.</param>
+		public NPC[] findNPC(int WhoAmI)
+		{
+				int NoOfNpcs=0;
+				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int o=0; o<=256;o++)
+				{
+						if (objList[o].instance!=null)
+						{
+								if (objList[o].instance.GetComponent<NPC>())
+								{
+										if (objList[o].instance.GetComponent<NPC>().npc_whoami == WhoAmI)
+										{
+												objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
+												if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+												{
+														NoOfNpcs++;		
+												}
+										}		
+								}
+						}
+				}
+				if (NoOfNpcs!=0)
+				{
+						NPC[] result = new NPC[NoOfNpcs];
+						int i=0;
+						for (int o=0; o<=256;o++)
+						{
+								if (objList[o].instance!=null)
+								{
+										if (objList[o].instance.GetComponent<NPC>())
+										{
+												if (objList[o].instance.GetComponent<NPC>().npc_whoami == WhoAmI)
+												{
+														if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+														{
+														result[i++] = objList[o].instance.GetComponent<NPC>();
+														}
+												}		
+										}
+								}
+						}
+						return result;
+				}
+				else
+				{
+					return null;
+				}
+
+		}
+
+
+		/// <summary>
+		/// Gets all the npcs of the specified race.
+		/// </summary>
+		/// <returns>The race.</returns>
+		/// <param name="race">Race.</param>
+		public NPC[] findRace(int Race)
+		{
+				int NoOfNpcs=0;
+				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int o=0; o<=256;o++)
+				{
+						if (objList[o].instance!=null)
+						{
+								if (objList[o].instance.GetComponent<NPC>())
+								{
+										if (objList[o].instance.GetComponent<NPC>().GetRace() == Race)
+										{
+												objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
+												if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+												{
+														NoOfNpcs++;		
+												}		
+										}		
+								}
+						}
+				}
+				if (NoOfNpcs!=0)
+				{
+					NPC[] result = new NPC[NoOfNpcs];
+					int i=0;
+					for (int o=0; o<=256;o++)
+					{
+							if (objList[o].instance!=null)
+							{
+									if (objList[o].instance.GetComponent<NPC>())
+									{
+											if (objList[o].instance.GetComponent<NPC>().GetRace() == Race)
+											{
+													//objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
+													if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+													{
+																result[i++]	= objList[o].instance.GetComponent<NPC>();
+													}		
+											}		
+									}
+							}
+					}
+					return result;
+				}
+				return null;
+		}
 }

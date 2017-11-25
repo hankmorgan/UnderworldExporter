@@ -661,7 +661,7 @@ public class object_base : UWEBase {
 							Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
 							Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
 							Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;
-							Col.gameObject.GetComponent<NPC>().npc_goal=5;	
+							Col.gameObject.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;	
 							reaction = StringController.instance.GetString(1,StringController.str__is_angered_by_your_action_);
 						}
 						else

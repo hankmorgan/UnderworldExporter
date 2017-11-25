@@ -374,7 +374,7 @@ public class GameWorldController : UWEBase {
 
 	public KeyBindings keybinds;
 
-	public event_base events;
+	public event_processor events;
 
 	void LoadPath(string game)
 	{
@@ -847,12 +847,10 @@ public class GameWorldController : UWEBase {
 			{
 				if (events!=null)
 				{
-								if (!LoadingGame)
-								{
-										events.ProcessEvents(newLevelNo);					
-								}
-										
-					
+					if (!LoadingGame)
+					{
+							events.ProcessEvents();					
+					}
 				}
 			}
 		}
@@ -1524,7 +1522,7 @@ public class GameWorldController : UWEBase {
 				switch(_RES)
 				{
 				case GAME_UW2:
-					events= new event_base();		
+					events= new event_processor();		
 					if (whatTheHellIsThatFileFor!=null)
 					{
 						whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected);

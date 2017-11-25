@@ -16,6 +16,7 @@ public class a_hack_trap : trap_base {
 	//qual=35 is recharge light crystals	
 		//qual =36. Called after first LB conversation. Moves all NPCs to their proper locations.
 		//qual=39 is change object visability
+		//qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{

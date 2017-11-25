@@ -7,82 +7,82 @@ using System.IO;
 //SCD.ark in uw2 does things. I don't know what they are yet. 
 
 public class WhatTheHellIsSCD_ARK : UWEBase {
-	public bool TableView=true;
-	public int InfoSize=16;
+		public bool TableView=true;
+		public int InfoSize=16;
 		public bool DoTheThingThisCodeDoes=false;
 
-	public void DumpScdArkInfo(string SCD_Ark_File_Path)
-	{
+		public void DumpScdArkInfo(string SCD_Ark_File_Path)
+		{
 				if (!DoTheThingThisCodeDoes)
 				{
 						return;
 				}
 
 				int LevelNo=0;
-		string output="";
-		StreamWriter writer;// = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);
-		if (TableView)
-		{
-			writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.csv", false);	
-			output=output + "Address,Block,Level,1,Type,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
-		}
-		else
-		{
-			writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);			
-		}
-
-
-		
-		char[] scd_ark;	
-		char[] scd_ark_file_data;
-		if (!DataLoader.ReadStreamFile(Loader.BasePath +  SCD_Ark_File_Path, out scd_ark_file_data))
-		{
-			Debug.Log(Loader.BasePath + SCD_Ark_File_Path + " File not loaded");
-			return;
-		}	
-
-		int NoOfBlocks=(int)DataLoader.getValAtAddress(scd_ark_file_data,0,32);
-		for (LevelNo=0; LevelNo<NoOfBlocks; LevelNo++)
-		{
-
-			long address_pointer=6;
-			int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
-			int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (LevelNo*4) ,32);
-			int isCompressed =(compressionFlag>>1) & 0x01;
-			long AddressOfBlockStart;
-			address_pointer=(LevelNo * 4) + 6;
-			//Debug.Log("Block " + LevelNo + " Datalen is " + datalen + " at address " + ( (int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32) ));
-			if ((int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32)==0)
-			{
-				Debug.Log("No Scd.ark data for this level");
-			}
-
-			if (isCompressed == 1)
-			{//should not happen in scd.ark
-				datalen=0;
-				scd_ark = DataLoader.unpackUW2(scd_ark_file_data,DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32), ref datalen);
-				address_pointer=address_pointer+4;
-				AddressOfBlockStart=0;
-				address_pointer=0;
-			}
-			else
-			{
-				long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
-				int j=0;
-				AddressOfBlockStart=BlockStart;
-				address_pointer=0;//Since I am at the start of a fresh array.
-				scd_ark = new char[datalen];
-				for (long i = BlockStart; i < BlockStart + datalen; i++)
+				string output="";
+				StreamWriter writer;// = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);
+				if (TableView)
 				{
-					scd_ark[j] = scd_ark_file_data[i];
-					j++;
+						writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.csv", false);	
+						output=output + "Address,Block,Level,1,Type,TypeDesc,Variable/TileX,IsQuest/TileY,5,6,7,8,9,10,11,12,13,14,15\n";
 				}
-			}
-			int add_ptr=0;
+				else
+				{
+						writer = new StreamWriter( Application.dataPath + "//..//_scd_ark.txt", false);			
+				}
+
+
+
+				char[] scd_ark;	
+				char[] scd_ark_file_data;
+				if (!DataLoader.ReadStreamFile(Loader.BasePath +  SCD_Ark_File_Path, out scd_ark_file_data))
+				{
+						Debug.Log(Loader.BasePath + SCD_Ark_File_Path + " File not loaded");
+						return;
+				}	
+
+				int NoOfBlocks=(int)DataLoader.getValAtAddress(scd_ark_file_data,0,32);
+				for (LevelNo=0; LevelNo<NoOfBlocks; LevelNo++)
+				{
+
+						long address_pointer=6;
+						int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
+						int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (LevelNo*4) ,32);
+						int isCompressed =(compressionFlag>>1) & 0x01;
+						long AddressOfBlockStart;
+						address_pointer=(LevelNo * 4) + 6;
+						//Debug.Log("Block " + LevelNo + " Datalen is " + datalen + " at address " + ( (int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32) ));
+						if ((int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32)==0)
+						{
+								Debug.Log("No Scd.ark data for this level");
+						}
+
+						if (isCompressed == 1)
+						{//should not happen in scd.ark
+								datalen=0;
+								scd_ark = DataLoader.unpackUW2(scd_ark_file_data,DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32), ref datalen);
+								address_pointer=address_pointer+4;
+								AddressOfBlockStart=0;
+								address_pointer=0;
+						}
+						else
+						{
+								long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
+								int j=0;
+								AddressOfBlockStart=BlockStart;
+								address_pointer=0;//Since I am at the start of a fresh array.
+								scd_ark = new char[datalen];
+								for (long i = BlockStart; i < BlockStart + datalen; i++)
+								{
+										scd_ark[j] = scd_ark_file_data[i];
+										j++;
+								}
+						}
+						int add_ptr=0;
 
 						if (TableView)
 						{
-								
+
 								int noOfRows = (int)DataLoader.getValAtAddress(scd_ark,0,8);	
 								if (noOfRows!=0)
 								{
@@ -101,34 +101,52 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 														output = output + AddressOfBlockStart+add_ptr + "," + LevelNo +",";	
 												}
 												switch(r)
-												{
-													case 2://type
+												{													
+												case 2://type
 														{
-															switch ((int)DataLoader.getValAtAddress(scd_ark,add_ptr,8))
-															{
-															case event_action.RowTypeCondition:
+																output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr,8) ;
+																switch ((int)DataLoader.getValAtAddress(scd_ark,add_ptr,8))
+																{//TODO:Add all the identified types in event_action.cs
+																case event_base.RowTypeSetNPCGoal:
+																		output = output + "SetGoal";
+																		break;
+																case event_base.RowTypeCondition:
 																		output = output + "Condition";
-																	break;
-															case event_action.RowTypeEvent:
-																		output = output + "Event";
-																	break;
-																case event_action.RowTypeRaceAdjust:
-																		output = output + "Race";
 																		break;
-																case event_action.RowTypeWhoAmIAdjust:
-																		output = output + "WhoAmI";
+																case event_base.RowTypeKillNPC:
+																		output =output+"KillNPC";
 																		break;
-																case event_action.RowTypePlaceNPC:
+																case event_base.RowTypeFireTriggers:
+																		output = output + "FireTrigger";
+																		break;
+																case event_base.RowTypeScheduled:
+																		output = output + "ScheduledEvent";
+																		break;
+																case event_base.RowTypeRaceAttidude:
+																		output = output + "RaceAttitude";
+																		break;
+																case event_base.RowTypeSetProps:
+																		output = output + "SetProps";
+																		break;
+																case event_base.RowTypeRemoveNPC:
+																		output = output + "RemoveNPC";
+																		break;
+																case event_base.RowTypeKillNPCorRace:
+																		output=output + "KillNPCorRace";
+																		break;
+																case event_base.RowTypePlaceNPC:
 																		output = output + "PlaceNPC";
 																		break;
+																case event_base.RowTypeSetNPCGOAL_Alt:
+																		output = output + "SetGoal Alt";
+																		break;
+																default:
+																		output = output + "UNK";
+																		break;
+																}
 
-															default:
-																		output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr,8) ;
-																	break;
-															}
-
-															add_ptr++;
-															break;
+																add_ptr++;
+																break;
 														}
 
 												default:
@@ -136,17 +154,17 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 														break;
 												}
 
-											
-											r++;
-											if (r==16)
-											{
-												r=0;
-												output = output +"\n"; 		
-											}
-											else
-											{
-												output=output + ",";	
-											}
+
+												r++;
+												if (r==16)
+												{
+														r=0;
+														output = output +"\n"; 		
+												}
+												else
+												{
+														output=output + ",";	
+												}
 
 										}
 										output = output +"\n";
@@ -187,22 +205,9 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 						}
 
 
+				}
+				writer.WriteLine(output);
+				writer.Close();
+
 		}
-		writer.WriteLine(output);
-		writer.Close();
-
-	}
-
-		/*
-observed factors based on datalen of various scd.ark files
-1, 2, 3, 4,    6,        12,         131, 262, 393, 524, 786, 1572
-1, 2, 3, 4,    6, 9,     12,         18, 27, 36, 54, 81, 108, 162, 324
-1, 2, 3, 4, 5, 6,    10, 12,     15, 19, 20, 30, 38, 57, 60, 76, 95, 114, 190, 228, 285, 380, 570, 1140
-1, 2, 3, 4, 5, 6, 7, 10, 12, 14, 15, 20, 21, 28, 30, 35, 42, 60, 70, 84, 105, 140, 210, 420
-1, 2, 3, 4,    6,        12, 139, 278, 417, 556, 834, 1668
-1, 2,    4,                     281, 562, 1124
-1, 2, 3, 4,    6, 12, 107, 214, 321, 428, 642, 1284
-1, 2, 3, 4,    6, 9, 12, 18, 36, 41, 82, 123, 164, 246, 369, 492, 738, 1476
-
-*/
 }

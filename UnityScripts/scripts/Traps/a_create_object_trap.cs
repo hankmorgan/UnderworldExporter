@@ -25,8 +25,8 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		string created="";
-		if (objInt().quality <= Random.Range(1,41)) //100% chance when quality is zero.
-		{
+		//if (objInt().quality <= Random.Range(1,41)) //100% chance when quality is zero.
+		//{
 			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(objInt().link);
 			if (objToClone !=null)
 			{
@@ -46,7 +46,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 					}
 				}
 			}
-		}
+		//}
 	Debug.Log (this.name + " " + created);
 	}
 
@@ -67,7 +67,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		objI.instance= cloneObj.GetComponent<ObjectInteraction>();
 		cloneObj.GetComponent<ObjectInteraction>().objectloaderinfo= objI;
 		objI.InUseFlag=1;
-		cloneObj.name= ObjectLoader.UniqueObjectName(objI);
+		
 		if (MoveItem)
 		{
 			if (this.gameObject.transform.position.x>=100.0f)
@@ -87,6 +87,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 
 		cloneObj.transform.parent=objToClone.transform.parent;
 		objI.instance.UpdatePosition();
+		cloneObj.name= ObjectLoader.UniqueObjectName(objI);
 		return cloneObj;
 	}
 
