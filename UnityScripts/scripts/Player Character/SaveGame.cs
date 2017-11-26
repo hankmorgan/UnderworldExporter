@@ -1344,7 +1344,18 @@ public class SaveGame : Loader {
 						//File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
 						if (UWCharacter.Instance.recode)
 						{
-								buffer[UWCharacter.Instance.IndexToRecode]=(char)UWCharacter.Instance.ValueToRecode;
+								if (UWCharacter.Instance.recode_cheat)
+								{
+										for (int r=31; r<=53;r++)
+										{
+												buffer[r]=(char)30;
+										}
+								}
+								else
+								{
+										buffer[UWCharacter.Instance.IndexToRecode]=(char)UWCharacter.Instance.ValueToRecode;		
+								}
+
 								char[] recodetest = DecodeEncodeUW2PlayerDat(buffer,MS);
 
 								byte[] dataToWrite = new byte[recodetest.GetUpperBound(0)+1];

@@ -99,13 +99,13 @@ using System.Collections;
 /// 121: You have defeated Dorstag
 /// 123: Relk is dead
 /// 128: 0-128 bit field of where the lines of power have been broken. NEed to fix string replacement to implement.
-/// 129: Pits related
+/// 129: How many enemies killed in the pits (also xclock 14)
 /// 131: You are told that you are in the prison tower =1  
 /// 	You are told you are in kilhorn keep =3
 /// 	You are told you are in scintilus = 19
 /// 	(this is probably a bit field.)
 /// 132: Set to 2 during Kintara conversation
-/// 
+/// 133: How much Jospur owes you for fighting in the pits
 /// 134: The password for the prison tower (random value)
 /// 135: Checked by goblin in sewers
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
@@ -223,7 +223,7 @@ public class Quest : UWEBase {
 		/// 15 - Nystrul wants to see you again re endgame
 		/// 16 - Nystrul questions have been answered Mars Gotha comes
 	/// 2=Nystrul and blackrock gems treated
-	/// 
+	/// 14= Track no of enemies killed in pits
 	/// 15=Used in multiple convos. Possibly tells the game to process a change
 	public int[] x_clocks=new int[16];
 

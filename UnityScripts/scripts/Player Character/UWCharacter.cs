@@ -16,6 +16,7 @@ public class UWCharacter : Character {
 
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
+		public bool recode_cheat=true;//recodes a save file into an all 30s character
 		public int IndexToRecode=0;
 		public int ValueToRecode=0;
 		public int game_time;
