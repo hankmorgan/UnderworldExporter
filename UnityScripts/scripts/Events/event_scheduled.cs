@@ -6,6 +6,7 @@ public class event_scheduled : event_base {
 
 		public override void ExecuteEvent ()
 		{
+				base.ExecuteEvent();
 				int eventTileX = RawData[3];
 				int eventTileY = RawData[4];
 

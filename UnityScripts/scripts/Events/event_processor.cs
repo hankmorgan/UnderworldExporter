@@ -76,8 +76,10 @@ public class event_processor : UWClass {
 												events_blocks[BlockNo].events[r]=new event_conditional();
 												break;
 										case event_base.RowTypeSetNPCGoal:
-										case event_base.RowTypeSetNPCGOAL_Alt:
 												events_blocks[BlockNo].events[r]=new event_set_goal();
+												break;
+										case event_base.RowTypeSetNPCGOAL_Alt:
+												events_blocks[BlockNo].events[r]=new event_set_goal_alt();
 												break;
 										case event_base.RowTypeMoveNPC:
 												events_blocks[BlockNo].events[r]=new event_move_npc();
@@ -150,35 +152,16 @@ public class event_processor : UWClass {
 				{
 						if (events_blocks[b].events!=null)
 						{
-								bool executing =false;
+								//bool executing =false;
 								for (int r=0; r<=events_blocks[b].events.GetUpperBound(0);r++)
 								{
 										if(events_blocks[b].events[r]!=null)
 										{
-												switch (events_blocks[b].events[r].type)		
+												events_blocks[b].events[r].Process();
+												if (events_blocks[b].events[r].clear)
 												{
-												case event_base.RowTypeCondition:
-														{//This is a condition. Test and see if I need to execute events.
-																executing= events_blocks[b].events[r].CheckCondition();	
-																break;
-														}
-												default:
-														{//This is an action.
-																if (executing)
-																{
-																		if (events_blocks[b].events[r].CheckCondition())//Make sure this event can be called now
-																		{//Execute the event and delete when done.
-																				events_blocks[b].events[r].ExecuteEvent();
-																				if (events_blocks[b].events[r].LevelNo<=80)
-																				{//Don't delete multilevel events
-																						events_blocks[b].events[r]=null;		
-																				}
-
-																		}
-																}
-																break;
-														}
-												}//switch event type
+														events_blocks[b].events[r]=null;
+												}
 										}//rows null										
 								}//rows loop
 						}//block null

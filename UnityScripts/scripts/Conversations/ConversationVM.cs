@@ -1438,7 +1438,7 @@ public class ConversationVM : UWEBase {
 						}
 						if (FoundString!="")
 						{
-							Debug.Log("To Replace "+ ReplacementString + " Type=" + ReplacementType.Groups[0].Value + " value=" + value + " replacing with " + FoundString);
+							//Debug.Log("To Replace "+ ReplacementString + " Type=" + ReplacementType.Groups[0].Value + " value=" + value + " replacing with " + FoundString);
 							input=input.Replace(ReplacementString,FoundString);
 						}	
 					}	

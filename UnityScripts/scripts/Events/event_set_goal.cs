@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class event_set_goal : event_base {
+public class event_set_goal : event_always {
 
 //Event that sets the goal for an NPC or a race
 
 	public override void ExecuteEvent ()
 	{
+		base.ExecuteEvent();
 		bool isNPC = RawData[3]==0;
 		int WhoAmIorRace=RawData[4];
 		int newGoal = RawData[5];

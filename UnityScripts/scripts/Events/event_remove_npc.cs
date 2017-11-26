@@ -7,6 +7,7 @@ public class event_remove_npc : event_base {
 
 	public override void ExecuteEvent ()
 	{
+		base.ExecuteEvent();
 		int WhoAmI=RawData[4];
 		NPC[] npc = findNPC(WhoAmI);
 		if (npc!=null)

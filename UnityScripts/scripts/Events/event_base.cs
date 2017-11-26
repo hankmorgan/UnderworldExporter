@@ -47,6 +47,37 @@ public class event_base : UWClass {
 		public int x_clock=0;
 
 
+		public bool clear=false;
+
+		/// <summary>
+		/// Controls if we are executing a block of commands following a conditional.
+		/// </summary>
+		public static bool Executing=false;
+
+		public virtual void Process()
+		{
+				if (Executing)
+				{
+						if (CheckCondition())
+						{
+								ExecuteEvent();
+								PostEvent();
+						}						
+				}
+		}
+
+		/// <summary>
+		/// Handling of the event post activation.
+		/// </summary>
+		/// Usually this is destroying the row
+		public virtual void PostEvent()
+		{
+				if (LevelNo<=80)
+				{
+						clear=true;				
+				}			
+		}
+
 		/// <summary>
 		/// Inits the raw data from the scd.ark file
 		/// </summary>
@@ -79,7 +110,7 @@ public class event_base : UWClass {
 		/// </summary>
 		public virtual void ExecuteEvent()
 		{
-				Debug.Log("unimplemented event type :" + type );
+				Debug.Log("Event type :" + type );
 		}
 
 		/// <summary>

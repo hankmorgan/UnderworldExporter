@@ -104,7 +104,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 												{													
 												case 2://type
 														{
-																output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr,8) ;
+																output = output + (int)DataLoader.getValAtAddress(scd_ark,add_ptr,8) +"," ;
 																switch ((int)DataLoader.getValAtAddress(scd_ark,add_ptr,8))
 																{//TODO:Add all the identified types in event_action.cs
 																case event_base.RowTypeSetNPCGoal:

@@ -6,6 +6,7 @@ public class event_kill_npc_or_race : event_base {
 
 	public override void ExecuteEvent ()
 	{
+		base.ExecuteEvent();
 		NPC[] npcs=null;
 		bool isNPC = (RawData[5]==1);
 		if (isNPC)

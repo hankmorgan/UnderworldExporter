@@ -8,6 +8,7 @@ public class event_set_npc_props : event_base {
 
 	public override void ExecuteEvent ()
 	{
+				base.ExecuteEvent();
 				int whoAmI= RawData[5];
 				int newGoal=RawData[3];
 				int homeX=0; int homeY=0;

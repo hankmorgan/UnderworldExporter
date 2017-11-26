@@ -5,8 +5,9 @@ public class event_fire_triggers : event_base {
 
 		//Fires any type of trigger at the specified tiles
 
-	public override void ExecuteEvent ()
-	{
+		public override void ExecuteEvent ()
+		{
+				base.ExecuteEvent();
 				int eventTileX = RawData[3];
 				int eventTileY = RawData[4];
 
@@ -21,5 +22,5 @@ public class event_fire_triggers : event_base {
 								}
 						}
 				}
-	}
+		}
 }

@@ -8,6 +8,7 @@ public class event_move_npc : event_base {
 
 	public override void ExecuteEvent ()
 	{
+		base.ExecuteEvent();
 		int tileX=RawData[3];
 		int tileY=RawData[4];
 		int WhoAmI= RawData[6];

@@ -1234,7 +1234,7 @@ public class ObjectInteraction : UWEBase {
 				switch (Loader._RES)
 				{
 				case Loader.GAME_UW2:
-					mysprite.transform.localScale=new Vector3(1.5f,1.5f,1.5f);//Scale up sprites.
+					mysprite.transform.localScale=new Vector3(1.2f,1.2f,1.2f);//Scale up sprites.
 					break;
 				default:
 					mysprite.transform.localScale=new Vector3(2f,2f,2f);//Scale up sprites.

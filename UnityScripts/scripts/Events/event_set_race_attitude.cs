@@ -6,6 +6,7 @@ public class event_set_race_attitude : event_base {
 
 	public override void ExecuteEvent ()
 	{
+		base.ExecuteEvent();
 		int Race=RawData[4];
 		int newAttitude = RawData[5];
 
