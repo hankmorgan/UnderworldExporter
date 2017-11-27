@@ -8,20 +8,20 @@ public class Coin : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		ChangeCoinType();
+		//ChangeCoinType();
 	}
 
 	public override void MergeEvent ()
 	{
 		base.MergeEvent ();
-		ChangeCoinType();
+		//ChangeCoinType();
 
 	}
 
 	public override void Split ()
 	{
 		base.Split ();
-		ChangeCoinType();
+		//ChangeCoinType();
 	}
 
 		/// <summary>
@@ -32,7 +32,7 @@ public class Coin : object_base {
 		/// Coins are in multiple variants coin, gold coin.
 	public override int AliasItemId ()
 	{
-
+				
 		if (objInt().item_id==160)
 		{
 			return 161;

@@ -196,10 +196,13 @@ public class Quest : UWEBase {
 	/// </summary>
 	public int[] variables = new int[127];
 
+	public bool FightingInArena=false;
+
 		/// <summary>
-		/// Tracks capture progress of the djinn
+		/// The arena opponents item ids
 		/// </summary>
-//	public short DjinnCapture=0;
+	public int[] ArenaOpponents =new int[5];
+
 
 	/// <summary>
 	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)

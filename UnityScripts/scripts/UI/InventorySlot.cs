@@ -196,6 +196,7 @@ public class InventorySlot : GuiBase {
 	{
 		if (isLeftClick==false)
 		{//Looking at object
+						
 		GameObject currObj=UWCharacter.Instance.playerInventory.GetGameObjectAtSlot (slotIndex);
 
 		if (currObj!=null)
@@ -207,7 +208,7 @@ public class InventorySlot : GuiBase {
 				}
 		}
 
-			TemporaryLookAt();
+			//TemporaryLookAt();
 			return;
 		}
 		else
@@ -529,8 +530,21 @@ public class InventorySlot : GuiBase {
 			}
 			else
 			{
-				//split the obj. Do nothing to the inventory.
-				GameObject Split = Instantiate(QuantityObj);//What we are picking up.
+				//split the obj. 
+				ObjectInteraction objI = QuantityObj.GetComponent<ObjectInteraction>();
+				objI.link=objI.link-quant;
+				ObjectLoaderInfo newObj = ObjectLoader.newObject(objI.item_id,objI.quality,objI.owner,quant,-1);
+				newObj.is_quant=1;
+				ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newObj,GameWorldController.instance.InventoryMarker,GameWorldController.instance.InventoryMarker.transform.position);
+				GameWorldController.MoveToInventory(NewObjI);
+				UWCharacter.Instance.playerInventory.ObjectInHand= NewObjI.name;
+				UWHUD.instance.CursorIcon=NewObjI.GetInventoryDisplay().texture;
+				ObjectInteraction.Split (objI,NewObjI);
+				UWCharacter.Instance.playerInventory.Refresh (slotIndex);
+				QuantityObj=null;
+
+
+			/*	GameObject Split = Instantiate(QuantityObj);//What we are picking up.
 				Split.GetComponent<ObjectInteraction>().link =quant;
 				Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
 				Split.transform.parent=UWCharacter.Instance.playerInventory.InventoryMarker.transform;//this.transform.parent;
@@ -539,7 +553,7 @@ public class InventorySlot : GuiBase {
 				UWHUD.instance.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
 				UWCharacter.Instance.playerInventory.Refresh (slotIndex);
-				QuantityObj=null;//Clear out to avoid weirdness.
+				QuantityObj=null;//Clear out to avoid weirdness.*/
 			}
 		}
 	}

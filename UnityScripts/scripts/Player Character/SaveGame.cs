@@ -1306,6 +1306,7 @@ public class SaveGame : Loader {
 				int effectCounter=0;
 				int QuestCounter=0;
 				int VariableCounter=0;
+				int arena=0;
 				UWCharacter.Instance.playerInventory.currentContainer="_Gronk";
 				UWCharacter.Instance.JustTeleported=true;
 				UWCharacter.Instance.teleportedTimer=0f;
@@ -1525,6 +1526,9 @@ public class SaveGame : Loader {
 										case 0x61  : ///    bits 1..4 play_poison and no of active effects (unchecked)
 												UWCharacter.Instance.play_poison=(short)((buffer[i]>>1) & 0xF );
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
+												break;
+										case 0x64:
+												Quest.instance.FightingInArena=  ((((int)buffer[i]>>2) & 0x1) == 1);
 												break;
 										case 0x66: // hand, Gender & body, and class
 												{
@@ -1754,6 +1758,16 @@ public class SaveGame : Loader {
 												ObjectInteraction.PlaySoundEffects= ((val & 0x1) == 1);
 												MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
 												break;
+												}
+
+										case 0x361://Item Ids of arena warriors.
+										case 0x362:
+										case 0x363:
+										case 0x364:
+										case 0x365:
+												{
+													Quest.instance.ArenaOpponents[arena++]=(int)DataLoader.getValAtAddress(buffer,i,8);
+													break;
 												}
 										//x_clocks
 										case 0x36f://1 Castle events
@@ -2011,3 +2025,4 @@ public class SaveGame : Loader {
 
 
 }
+

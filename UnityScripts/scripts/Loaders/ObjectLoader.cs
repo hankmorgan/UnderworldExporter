@@ -1928,28 +1928,56 @@ public class ObjectLoader : Loader {
 		public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link, int startIndex)
 		{
 			int index=0;
-			if (GameWorldController.instance.CurrentObjectList().getFreeSlot(startIndex, out index)	)
-			{
-				GameWorldController.instance.CurrentObjectList().objInfo[index].guid=System.Guid.NewGuid();
-				GameWorldController.instance.CurrentObjectList().objInfo[index].quality=(short)quality;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].flags=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].owner=(short)owner;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].item_id=item_id;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].next=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].link=link;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].zpos=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].x=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].y=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].invis=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].doordir=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].is_quant=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].enchantment=0;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=TileMap.ObjectStorageTile;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=TileMap.ObjectStorageTile;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag=1;
-				GameWorldController.instance.CurrentObjectList().objInfo[index].index=index;
-				return GameWorldController.instance.CurrentObjectList().objInfo[index];
-			}
+				if (startIndex>=0)
+				{
+						if (GameWorldController.instance.CurrentObjectList().getFreeSlot(startIndex, out index)	)
+						{
+								GameWorldController.instance.CurrentObjectList().objInfo[index].guid=System.Guid.NewGuid();
+								GameWorldController.instance.CurrentObjectList().objInfo[index].quality=(short)quality;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].flags=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].owner=(short)owner;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].item_id=item_id;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].next=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].link=link;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].zpos=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].x=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].y=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].invis=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].doordir=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].is_quant=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].enchantment=0;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].tileX=TileMap.ObjectStorageTile;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].tileY=TileMap.ObjectStorageTile;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag=1;
+								GameWorldController.instance.CurrentObjectList().objInfo[index].index=index;
+								return GameWorldController.instance.CurrentObjectList().objInfo[index];
+						}	
+				}
+				else
+				{
+						ObjectLoaderInfo objI = new ObjectLoaderInfo();
+						objI.guid=System.Guid.NewGuid();
+						objI.quality=(short)quality;
+						objI.flags=0;
+						objI.owner=(short)owner;
+						objI.item_id=item_id;
+						objI.next=0;
+						objI.link=link;
+						objI.zpos=0;
+						objI.x=0;
+						objI.y=0;
+						objI.invis=0;
+						objI.doordir=0;
+						objI.is_quant=0;
+						objI.enchantment=0;
+						objI.tileX=TileMap.ObjectStorageTile;
+						objI.tileY=TileMap.ObjectStorageTile;
+						objI.InUseFlag=1;
+						objI.index=index;
+						return objI;
+
+				}
+
 			return null;
 		}
 

@@ -153,29 +153,29 @@ public class ConversationVM : UWEBase {
 
 		void Update()
 		{
-			if (WaitingForTyping)
-			{
-				UWHUD.instance.InputControl.Select();//Keep focus on input control	
-			}
+				if (WaitingForTyping)
+				{
+						UWHUD.instance.InputControl.Select();//Keep focus on input control	
+				}
 		}
 
 		/// <summary>
 		/// Loads the cnv ark file and parses it to initialise the conversation headers and imported functions
 		/// </summary>
 		/// <param name="cnv_ark_path">Cnv ark path.</param>
-	public void LoadCnvArk(string cnv_ark_path)
-	{
-		char[] cnv_ark;
-		if (DataLoader.ReadStreamFile(cnv_ark_path, out cnv_ark))
+		public void LoadCnvArk(string cnv_ark_path)
 		{
-			int NoOfConversations = (int)DataLoader.getValAtAddress(cnv_ark,0,16);
-			conv=new cnvHeader[NoOfConversations];
-			for (int i=0; i<NoOfConversations;i++)
-			{
-				int add_ptr = (int)DataLoader.getValAtAddress(cnv_ark,2+ i*4,32);
-				if (add_ptr!=0)
+				char[] cnv_ark;
+				if (DataLoader.ReadStreamFile(cnv_ark_path, out cnv_ark))
 				{
-					/*
+						int NoOfConversations = (int)DataLoader.getValAtAddress(cnv_ark,0,16);
+						conv=new cnvHeader[NoOfConversations];
+						for (int i=0; i<NoOfConversations;i++)
+						{
+								int add_ptr = (int)DataLoader.getValAtAddress(cnv_ark,2+ i*4,32);
+								if (add_ptr!=0)
+								{
+										/*
 				   0000   Int16   unknown, always seems to be 0x0828, or 28 08
 				   0002   Int16   unknown, always 0x0000
 				   0004   Int16   code size in number of instructions (16-bit words)
@@ -186,41 +186,41 @@ public class ConversationVM : UWEBase {
 				   000E   Int16   number of imported globals (functions + variables)
 				   0010           start of imported functions list
 					*/
-					conv[i].CodeSize=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0x4,16);
-					conv[i].StringBlock=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xA,16);
-					conv[i].NoOfMemorySlots=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xC,16);
-					conv[i].NoOfImportedGlobals=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xE,16);
-					conv[i].functions= new ImportedFunctions[conv[i].NoOfImportedGlobals];
-					int funcptr= add_ptr+0x10;
-					for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
-					{
+										conv[i].CodeSize=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0x4,16);
+										conv[i].StringBlock=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xA,16);
+										conv[i].NoOfMemorySlots=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xC,16);
+										conv[i].NoOfImportedGlobals=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xE,16);
+										conv[i].functions= new ImportedFunctions[conv[i].NoOfImportedGlobals];
+										int funcptr= add_ptr+0x10;
+										for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
+										{
 
-						/*0000   Int16   length of function name
+												/*0000   Int16   length of function name
 						0002   n*char  name of function
 						n+02   Int16   ID (imported func.) / memory address (variable)
 						n+04   Int16   unknown, always seems to be 1
 						n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
 						n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
-						int len = (int)DataLoader.getValAtAddress (cnv_ark,funcptr,16);
-						for (int j=0 ; j<len;j++ )
-						{
-								conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark,funcptr+2+j,8);
+												int len = (int)DataLoader.getValAtAddress (cnv_ark,funcptr,16);
+												for (int j=0 ; j<len;j++ )
+												{
+														conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark,funcptr+2+j,8);
+												}
+												conv[i].functions[f].ID_or_Address= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+2,16);
+												conv[i].functions[f].import_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+6,16);
+												conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
+												funcptr+= len+10;
+										}
+										conv[i].instuctions = new short[conv[i].CodeSize];
+										int counter=0;
+										for (int c=0; c<conv[i].CodeSize*2; c=c+2)
+										{
+												conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+										}
+								}
 						}
-						conv[i].functions[f].ID_or_Address= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+2,16);
-						conv[i].functions[f].import_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+6,16);
-						conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
-						funcptr+= len+10;
-					}
-					conv[i].instuctions = new short[conv[i].CodeSize];
-					int counter=0;
-					for (int c=0; c<conv[i].CodeSize*2; c=c+2)
-					{
-						conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
-					}
 				}
-			}
 		}
-	}
 
 
 
@@ -231,31 +231,31 @@ public class ConversationVM : UWEBase {
 		/// <param name="cnv_ark_path">Cnv ark path.</param>
 		public void LoadCnvArkUW2(string cnv_ark_path)
 		{
-			char[] tmp_ark;
-			int address_pointer=2;
-			if (! DataLoader.ReadStreamFile(cnv_ark_path, out tmp_ark))
+				char[] tmp_ark;
+				int address_pointer=2;
+				if (! DataLoader.ReadStreamFile(cnv_ark_path, out tmp_ark))
 				{
-					Debug.Log("unable to load uw2 conv ark");
-					return;
+						Debug.Log("unable to load uw2 conv ark");
+						return;
 				}
 
-			int NoOfConversations=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
+				int NoOfConversations=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
 
-			conv=new cnvHeader[NoOfConversations];
+				conv=new cnvHeader[NoOfConversations];
 
-			for (int i=0; i<NoOfConversations;i++)
-			{
-				int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfConversations*4) ,32);
-				int isCompressed =(compressionFlag>>1) & 0x01;
-				long add_ptr=DataLoader.getValAtAddress(tmp_ark,address_pointer,32);
-				if (add_ptr!=0)
+				for (int i=0; i<NoOfConversations;i++)
 				{
-					if (isCompressed == 1)
-					{
-						int datalen=0;
-						char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
-						add_ptr=0;
-						/*
+						int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfConversations*4) ,32);
+						int isCompressed =(compressionFlag>>1) & 0x01;
+						long add_ptr=DataLoader.getValAtAddress(tmp_ark,address_pointer,32);
+						if (add_ptr!=0)
+						{
+								if (isCompressed == 1)
+								{
+										int datalen=0;
+										char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
+										add_ptr=0;
+										/*
 					   0000   Int16   unknown, always seems to be 0x0828, or 28 08
 					   0002   Int16   unknown, always 0x0000
 					   0004   Int16   code size in number of instructions (16-bit words)
@@ -266,48 +266,48 @@ public class ConversationVM : UWEBase {
 					   000E   Int16   number of imported globals (functions + variables)
 					   0010           start of imported functions list
 						*/
-						conv[i].CodeSize=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0x4,16);
-						conv[i].StringBlock=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xA,16);
-						conv[i].NoOfMemorySlots=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xC,16);
-						conv[i].NoOfImportedGlobals=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xE,16);
-						conv[i].functions= new ImportedFunctions[conv[i].NoOfImportedGlobals];
-						long funcptr= add_ptr+0x10;
-						for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
-						{
+										conv[i].CodeSize=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0x4,16);
+										conv[i].StringBlock=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xA,16);
+										conv[i].NoOfMemorySlots=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xC,16);
+										conv[i].NoOfImportedGlobals=(int)DataLoader.getValAtAddress(cnv_ark,add_ptr+0xE,16);
+										conv[i].functions= new ImportedFunctions[conv[i].NoOfImportedGlobals];
+										long funcptr= add_ptr+0x10;
+										for (int f=0; f<conv[i].NoOfImportedGlobals; f++)
+										{
 
-								/*0000   Int16   length of function name
+												/*0000   Int16   length of function name
 								0002   n*char  name of function
 								n+02   Int16   ID (imported func.) / memory address (variable)
 								n+04   Int16   unknown, always seems to be 1
 								n+06   Int16   import type (0x010F=variable, 0x0111=imported func.)
 								n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)
 								*/
-								int len = (int)DataLoader.getValAtAddress (cnv_ark,funcptr,16);
-								for (int j=0 ; j<len;j++ )
+												int len = (int)DataLoader.getValAtAddress (cnv_ark,funcptr,16);
+												for (int j=0 ; j<len;j++ )
+												{
+														conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark,funcptr+2+j,8);
+												}
+												conv[i].functions[f].ID_or_Address= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+2,16);
+												conv[i].functions[f].import_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+6,16);
+												conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
+												funcptr+= len+10;
+										}
+										conv[i].instuctions = new short[conv[i].CodeSize];
+										int counter=0;
+										for (int c=0; c<conv[i].CodeSize*2; c=c+2)
+										{
+												conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
+										}
+
+
+								}	
+								else
 								{
-										conv[i].functions[f].functionName += (char)DataLoader.getValAtAddress(cnv_ark,funcptr+2+j,8);
+										Debug.Log("uncompressed flag in cnv.ark");
 								}
-								conv[i].functions[f].ID_or_Address= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+2,16);
-								conv[i].functions[f].import_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+6,16);
-								conv[i].functions[f].return_type= (int)DataLoader.getValAtAddress(cnv_ark,funcptr+len+8,16);
-								funcptr+= len+10;
 						}
-						conv[i].instuctions = new short[conv[i].CodeSize];
-						int counter=0;
-						for (int c=0; c<conv[i].CodeSize*2; c=c+2)
-						{
-								conv[i].instuctions[counter++] = (short)DataLoader.getValAtAddress(cnv_ark, funcptr + c, 16);
-						}
-
-
-					}	
-					else
-					{
-						Debug.Log("uncompressed flag in cnv.ark");
-					}
+						address_pointer=address_pointer+4;
 				}
-				address_pointer=address_pointer+4;
-			}
 
 		}
 
@@ -316,109 +316,109 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public void DisplayInstructionSet()
 		{
-			string result="";
+				string result="";
 
-			result = "String Block = " +  conv[currConv].StringBlock + "\n";
-			result += "Code Size = " + conv[currConv].CodeSize + "\n";
+				result = "String Block = " +  conv[currConv].StringBlock + "\n";
+				result += "Code Size = " + conv[currConv].CodeSize + "\n";
 
-			//Display the properties of the conversation
-			for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
-			{
-				if (conv[currConv].functions[i].import_type==import_function)
+				//Display the properties of the conversation
+				for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
 				{
-					result += "Function : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";
-				}
-				else
-				{
-					result += "Variable : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";	
-				}
-			}
-
-
-
-
-
-			for (int z=0; z <conv[currConv].CodeSize;z++)
-			{
-				switch(conv[currConv].instuctions[z])
-				{
-				case cnv_NOP: result += z + ":" +"NOP\n";break;
-				case cnv_OPADD: result += z + ":" +"OPADD\n";break;
-				case cnv_OPMUL: result += z + ":" +"OPMUL\n";break;
-				case cnv_OPSUB: result += z + ":" +"OPSUB\n";break;
-				case cnv_OPDIV: result += z + ":" +"OPDIV\n";break;
-				case cnv_OPMOD: result += z + ":" +"OPMOD\n";break;
-				case cnv_OPOR: result += z + ":" +"OPOR\n";break;
-				case cnv_OPAND: result += z + ":" +"OPAND\n";break;
-				case cnv_OPNOT: result += z + ":" +"OPNOT\n";break;
-				case cnv_TSTGT: result += z + ":" +"TSTGT\n";break;
-				case cnv_TSTGE: result += z + ":" +"TSTGE\n";break;
-				case cnv_TSTLT: result += z + ":" +"TSTLT\n";break;
-				case cnv_TSTLE: result += z + ":" +"TSTLE\n";break;
-				case cnv_TSTEQ: result += z + ":" +"TSTEQ\n";break;
-				case cnv_TSTNE: result += z + ":" +"TSTNE\n";break;
-				case cnv_JMP: result += z + ":" +"JMP "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
-				case cnv_BEQ:
-					{//conv[currConv].instuctions[stack.instrp+1];	
-						result += z + ":" +"BEQ "; 
-						z++; 
-						result +=  " " + conv[currConv].instuctions[z] + " // " ;
-						result += " to " + (conv[currConv].instuctions[z]+z);
-						result +=  "\n";break;		
-					}
-
-				case cnv_BNE: result += z + ":" +"BNE "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
-				case cnv_BRA: result += z + ":" +"BRA "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
-				case cnv_CALL: result += z + ":" +"CALL "; z++; result += " "+conv[currConv].instuctions[z] + "\n";break;
-				case cnv_CALLI:
-					{
-						result += z + ":" +"CALLI "; z++; 
-						//result += z + ":" + " "+ conv[currConv].instuctions[z] + " // ";
-						result += " "+ conv[currConv].instuctions[z] + " // ";
-						int arg1 = conv[currConv].instuctions[z];
-						for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+						if (conv[currConv].functions[i].import_type==import_function)
 						{
-							if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
-							{
-								result +=conv[currConv].functions[i].functionName + "\n";
-								break;
-							}
+								result += "Function : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";
 						}
-						break;
-					}
-
-				case cnv_RET: result += z + ":" +"RET\n";break;
-				case cnv_PUSHI: result += z + ":" +"PUSHI "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
-				case cnv_PUSHI_EFF: result += z + ":" +"PUSHI_EFF "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
-				case cnv_POP: result += z + ":" +"POP\n";break;
-				case cnv_SWAP: result += z + ":" +"SWAP\n";break;
-				case cnv_PUSHBP: result += z + ":" +"PUSHBP\n";break;
-				case cnv_POPBP: result += z + ":" +"POPBP\n";break;
-				case cnv_SPTOBP: result += z + ":" +"SPTOBP\n";break;
-				case cnv_BPTOSP: result += z + ":" +"BPTOSP\n";break;
-				case cnv_ADDSP: result += z + ":" +"ADDSP\n";break;
-				case cnv_FETCHM: result += z + ":" +"FETCHM\n";break;
-				case cnv_STO: result += z + ":" +"STO\n";break;
-				case cnv_OFFSET: result += z + ":" +"OFFSET\n";break;
-				case cnv_START: result += z + ":" +"START\n";break;
-				case cnv_SAVE_REG: result += z + ":" +"SAVE_REG\n";break;
-				case cnv_PUSH_REG: result += z + ":" +"PUSH_REG\n";break;
-				case cnv_STRCMP: result += z + ":" +"STRCMP\n";break;
-				case cnv_EXIT_OP: result += z + ":" +"EXIT_OP\n";break;
-				case cnv_SAY_OP: 
-					{
-						result += z + ":" +"SAY_OP  //";
-						int stringToSay = conv[currConv].instuctions[z-1];
-						string output =  StringController.instance.GetString(conv[currConv].StringBlock, stringToSay);
-						result += output + "\n";
-						break;	
-					}
-				case cnv_RESPOND_OP: result += z + ":" +"RESPOND_OP\n";break;
-				case cnv_OPNEG: result += z + ":" +"OPNEG\n";break;
+						else
+						{
+								result += "Variable : " + conv[currConv].functions[i].ID_or_Address + " " + conv[currConv].functions[i].functionName  + "\n";	
+						}
 				}
-			}
+
+
+
+
+
+				for (int z=0; z <conv[currConv].CodeSize;z++)
+				{
+						switch(conv[currConv].instuctions[z])
+						{
+						case cnv_NOP: result += z + ":" +"NOP\n";break;
+						case cnv_OPADD: result += z + ":" +"OPADD\n";break;
+						case cnv_OPMUL: result += z + ":" +"OPMUL\n";break;
+						case cnv_OPSUB: result += z + ":" +"OPSUB\n";break;
+						case cnv_OPDIV: result += z + ":" +"OPDIV\n";break;
+						case cnv_OPMOD: result += z + ":" +"OPMOD\n";break;
+						case cnv_OPOR: result += z + ":" +"OPOR\n";break;
+						case cnv_OPAND: result += z + ":" +"OPAND\n";break;
+						case cnv_OPNOT: result += z + ":" +"OPNOT\n";break;
+						case cnv_TSTGT: result += z + ":" +"TSTGT\n";break;
+						case cnv_TSTGE: result += z + ":" +"TSTGE\n";break;
+						case cnv_TSTLT: result += z + ":" +"TSTLT\n";break;
+						case cnv_TSTLE: result += z + ":" +"TSTLE\n";break;
+						case cnv_TSTEQ: result += z + ":" +"TSTEQ\n";break;
+						case cnv_TSTNE: result += z + ":" +"TSTNE\n";break;
+						case cnv_JMP: result += z + ":" +"JMP "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+						case cnv_BEQ:
+								{//conv[currConv].instuctions[stack.instrp+1];	
+										result += z + ":" +"BEQ "; 
+										z++; 
+										result +=  " " + conv[currConv].instuctions[z] + " // " ;
+										result += " to " + (conv[currConv].instuctions[z]+z);
+										result +=  "\n";break;		
+								}
+
+						case cnv_BNE: result += z + ":" +"BNE "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+						case cnv_BRA: result += z + ":" +"BRA "; z++; result +=  " "+ conv[currConv].instuctions[z] + "\n";break;
+						case cnv_CALL: result += z + ":" +"CALL "; z++; result += " "+conv[currConv].instuctions[z] + "\n";break;
+						case cnv_CALLI:
+								{
+										result += z + ":" +"CALLI "; z++; 
+										//result += z + ":" + " "+ conv[currConv].instuctions[z] + " // ";
+										result += " "+ conv[currConv].instuctions[z] + " // ";
+										int arg1 = conv[currConv].instuctions[z];
+										for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+										{
+												if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
+												{
+														result +=conv[currConv].functions[i].functionName + "\n";
+														break;
+												}
+										}
+										break;
+								}
+
+						case cnv_RET: result += z + ":" +"RET\n";break;
+						case cnv_PUSHI: result += z + ":" +"PUSHI "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
+						case cnv_PUSHI_EFF: result += z + ":" +"PUSHI_EFF "; z++; result += " "+ conv[currConv].instuctions[z] + "\n";break;
+						case cnv_POP: result += z + ":" +"POP\n";break;
+						case cnv_SWAP: result += z + ":" +"SWAP\n";break;
+						case cnv_PUSHBP: result += z + ":" +"PUSHBP\n";break;
+						case cnv_POPBP: result += z + ":" +"POPBP\n";break;
+						case cnv_SPTOBP: result += z + ":" +"SPTOBP\n";break;
+						case cnv_BPTOSP: result += z + ":" +"BPTOSP\n";break;
+						case cnv_ADDSP: result += z + ":" +"ADDSP\n";break;
+						case cnv_FETCHM: result += z + ":" +"FETCHM\n";break;
+						case cnv_STO: result += z + ":" +"STO\n";break;
+						case cnv_OFFSET: result += z + ":" +"OFFSET\n";break;
+						case cnv_START: result += z + ":" +"START\n";break;
+						case cnv_SAVE_REG: result += z + ":" +"SAVE_REG\n";break;
+						case cnv_PUSH_REG: result += z + ":" +"PUSH_REG\n";break;
+						case cnv_STRCMP: result += z + ":" +"STRCMP\n";break;
+						case cnv_EXIT_OP: result += z + ":" +"EXIT_OP\n";break;
+						case cnv_SAY_OP: 
+								{
+										result += z + ":" +"SAY_OP  //";
+										int stringToSay = conv[currConv].instuctions[z-1];
+										string output =  StringController.instance.GetString(conv[currConv].StringBlock, stringToSay);
+										result += output + "\n";
+										break;	
+								}
+						case cnv_RESPOND_OP: result += z + ":" +"RESPOND_OP\n";break;
+						case cnv_OPNEG: result += z + ":" +"OPNEG\n";break;
+						}
+				}
 				//}
-			//Write the result to file
+				//Write the result to file
 
 				TextWriter tw =new StreamWriter(Loader.BasePath + "\\conversation_debug.txt");
 				tw.Write(result);
@@ -433,131 +433,131 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public void RunConversation(NPC npc)
 		{
-			string npcname="";
+				string npcname="";
 
-			if (npc.npc_whoami==0)
-			{
-				currConv = 256+(npc.objInt().item_id -64);
-				npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
-			}
-			else
-			{
-					currConv=npc.npc_whoami;
-					if (_RES==GAME_UW2)
-					{
-							currConv++;
-					}
-			}
-
-			if (npc.npc_whoami>255)
-			{//Generic conversation.
-				npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
-			}
-
-			if ((conv[currConv].CodeSize==0) || (npc.npc_whoami == 255))
-			{//006~007~001~You get no response.
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
-				return;
-			}
-
-			if (npcname=="")
-			{
-				UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc.npc_whoami+16);						
-			}
-			else
-			{
-				UWHUD.instance.NPCName.text=npcname;	
-			}				
-			
-			UWHUD.instance.PCName.text= UWCharacter.Instance.CharName;
-
-
-
-			UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
-			ConversationVM.CurrentConversation=npc.npc_whoami;//To make obsolete
-			ConversationVM.InConversation=true;
-
-			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
-			UWHUD.instance.Conversation_tl.Clear();
-			UWHUD.instance.MessageScroll.Clear();
-			PlayerInput=UWHUD.instance.MessageScroll.NewUIOUt;
-
-			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
-
-			///Clear the trade slots for the npcs
-			for (int i=0; i<4;i++)
-			{
-					UWHUD.instance.npcTrade[i++].clear ();
-			}
-
-			///Sets up the portraits for the player and the NPC
-			RawImage portrait = UWHUD.instance.ConversationPortraits[0];
-			RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
-			GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
-			if (UWCharacter.Instance.isFemale)
-			{
-					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body+5).ToString("0000"));//TODO:playerbody
-					portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body+5);
-			}
-			else
-			{
-					//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body).ToString("0000"));//TODO:playerbody		
-					portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body);
-			}
-
-			switch (_RES)
-			{
-			case GAME_UW2:
+				if (npc.npc_whoami==0)
 				{
-					GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
-					npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
-					break;
+						currConv = 256+(npc.objInt().item_id -64);
+						npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
 				}
-			default:
+				else
 				{
-					if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
-					{
-						GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
-						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
-						npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
-					}	
-					else
-					{
-						//head in charhead.gr
-						int HeadToUse = npc.objInt().item_id-64;
-						if (HeadToUse >59)
+						currConv=npc.npc_whoami;
+						if (_RES==GAME_UW2)
 						{
-								HeadToUse=0;
-						}			
-						GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
-						//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
-						npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
-					}	
-					break;
+								currConv++;
+						}
 				}
-			}
+
+				if (npc.npc_whoami>255)
+				{//Generic conversation.
+						npcname= StringController.instance.GetSimpleObjectNameUW(npc.objInt());
+				}
+
+				if ((conv[currConv].CodeSize==0) || (npc.npc_whoami == 255))
+				{//006~007~001~You get no response.
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+						return;
+				}
+
+				if (npcname=="")
+				{
+						UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc.npc_whoami+16);						
+				}
+				else
+				{
+						UWHUD.instance.NPCName.text=npcname;	
+				}				
+
+				UWHUD.instance.PCName.text= UWCharacter.Instance.CharName;
 
 
-			UWHUD.instance.MessageScroll.Clear ();
-			/*End UI Setup*/
 
-			///Cancels player movement
-			UWCharacter.Instance.playerMotor.enabled=false;
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
+				ConversationVM.CurrentConversation=npc.npc_whoami;//To make obsolete
+				ConversationVM.InConversation=true;
 
-			///Sets the music to the conversation theme
-			if  (GameWorldController.instance.getMus()!=null)
-			{
-					GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
-			}
-			//lastObjectTraded=null;
+				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
+				UWHUD.instance.Conversation_tl.Clear();
+				UWHUD.instance.MessageScroll.Clear();
+				PlayerInput=UWHUD.instance.MessageScroll.NewUIOUt;
 
-			BuildObjectList();
+				UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 
-			DisplayInstructionSet();
-			///Slows the world down so no other npc will attack or interupt the conversation
-			Time.timeScale=0.00f;
+				///Clear the trade slots for the npcs
+				for (int i=0; i<4;i++)
+				{
+						UWHUD.instance.npcTrade[i++].clear ();
+				}
 
-			StartCoroutine(RunConversationVM(npc));
+				///Sets up the portraits for the player and the NPC
+				RawImage portrait = UWHUD.instance.ConversationPortraits[0];
+				RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
+				GRLoader grPCHead = new GRLoader(GRLoader.HEADS_GR);
+				if (UWCharacter.Instance.isFemale)
+				{
+						//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body+5).ToString("0000"));//TODO:playerbody
+						portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body+5);
+				}
+				else
+				{
+						//portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (UWCharacter.Instance.Body).ToString("0000"));//TODO:playerbody		
+						portrait.texture= grPCHead.LoadImageAt(UWCharacter.Instance.Body);
+				}
+
+				switch (_RES)
+				{
+				case GAME_UW2:
+						{
+								GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+								npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
+								break;
+						}
+				default:
+						{
+								if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
+								{
+										GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+										//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+										npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
+								}	
+								else
+								{
+										//head in charhead.gr
+										int HeadToUse = npc.objInt().item_id-64;
+										if (HeadToUse >59)
+										{
+												HeadToUse=0;
+										}			
+										GRLoader grGenHead =new GRLoader(GRLoader.GENHEAD_GR);
+										//npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+										npcPortrait.texture = grGenHead.LoadImageAt(HeadToUse);
+								}	
+								break;
+						}
+				}
+
+
+				UWHUD.instance.MessageScroll.Clear ();
+				/*End UI Setup*/
+
+				///Cancels player movement
+				UWCharacter.Instance.playerMotor.enabled=false;
+
+				///Sets the music to the conversation theme
+				if  (GameWorldController.instance.getMus()!=null)
+				{
+						GameWorldController.instance.getMus().GetComponent<MusicController>().InMap=true;
+				}
+				//lastObjectTraded=null;
+
+				BuildObjectList();
+
+				DisplayInstructionSet();
+				///Slows the world down so no other npc will attack or interupt the conversation
+				Time.timeScale=0.00f;
+
+				StartCoroutine(RunConversationVM(npc));
 		}
 
 
@@ -573,237 +573,237 @@ public class ConversationVM : UWEBase {
 		/// <returns>The conversation V.</returns>
 		private IEnumerator RunConversationVM(NPC npc)
 		{
-			
-			
-			//basep = 0;
-			//stack.result_register = 1;//Set a default value
-			bool finished = false;
-			stack=new CnvStack(4096);
-			stack.set_stackp(200);//Skip over imported memory for the moment
-			stack.basep=0;
-
-			//Import the variables
-			ImportVariableMemory(npc);
 
 
-			// execute one instruction
-			//switch(code[stack.instrp])
-			while ( (finished==false))
-			{
-				switch(conv[currConv].instuctions[stack.instrp])
+				//basep = 0;
+				//stack.result_register = 1;//Set a default value
+				bool finished = false;
+				stack=new CnvStack(4096);
+				stack.set_stackp(200);//Skip over imported memory for the moment
+				stack.basep=0;
+
+				//Import the variables
+				ImportVariableMemory(npc);
+
+
+				// execute one instruction
+				//switch(code[stack.instrp])
+				while ( (finished==false))
 				{
-				case cnv_NOP:
-					{
-						break;				
-					}
-						
-
-				case cnv_OPADD:
-					{
-						stack.Push(stack.Pop() + stack.Pop());
-						break;
-					}
-					
-
-				case cnv_OPMUL:
-					{
-						stack.Push(stack.Pop() * stack.Pop());
-						break;
-					}
-						
-
-				case cnv_OPSUB:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						stack.Push(arg2 - arg1);
-						break;
-					}
-						
-
-				case cnv_OPDIV:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						//if (arg1==0)
-						//	throw ua_ex_div_by_zero;
-						stack.Push(arg2 / arg1);
-						break;
-					}
-						
-
-				case cnv_OPMOD:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						//if (arg1==0)
-						//	throw ua_ex_div_by_zero;
-						stack.Push(arg2 % arg1);
-						break;
-					}
-						
-
-				case cnv_OPOR:
-					{
-						stack.Push(stack.Pop() | stack.Pop());
-					}
-					break;
-
-				case cnv_OPAND:
-					{
-						stack.Push(stack.Pop() & stack.Pop());
-					}
-					break;
-
-				case cnv_OPNOT:
-					{
-						if (stack.Pop()==0)
+						switch(conv[currConv].instuctions[stack.instrp])
 						{
-							stack.Push(1);
-						}
-						else
-						{
-							stack.Push(0);
-						}
-							//stack.Push(!stack.Pop());
-						break;
-					}
+						case cnv_NOP:
+								{
+										break;				
+								}
 
 
-				case cnv_TSTGT:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						if (arg2>arg1)
-						{
-							stack.Push(1);
-						}
-						else
-						{
-							stack.Push(0);
-						}
-							//stack.Push(arg2 > arg1);
-						break;
-					}
-					
+						case cnv_OPADD:
+								{
+										stack.Push(stack.Pop() + stack.Pop());
+										break;
+								}
 
-				case cnv_TSTGE:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						if (arg2>=arg1)
-						{
-								stack.Push(1);
-						}
-						else
-						{
-								stack.Push(0);
-						}
 
-							//stack.Push(arg2 >= arg1);
-						break;
-					}
-						
+						case cnv_OPMUL:
+								{
+										stack.Push(stack.Pop() * stack.Pop());
+										break;
+								}
 
-				case cnv_TSTLT:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						if (arg2<arg1)
-						{
-							stack.Push(1);
-						}
-						else
-						{
-							stack.Push(0);
-						}
-							//stack.Push(arg2 < arg1);
-						break;
-					}
-						
 
-				case cnv_TSTLE:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						if (arg2<=arg1)
-						{
-								stack.Push(1);
-						}
-						else
-						{
-								stack.Push(0);
-						}
-							//stack.Push(arg2 <= arg1);
-						break;
-					}
-					
+						case cnv_OPSUB:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										stack.Push(arg2 - arg1);
+										break;
+								}
 
-				case cnv_TSTEQ:
-					{
-						if (stack.Pop()==stack.Pop())
-						{
-							stack.Push(1);
-						}
-						else
-						{
-							stack.Push(0);
-						}
-						break;
-					}
-						
 
-				case cnv_TSTNE:
-					{
-						if (stack.Pop()!=stack.Pop())
-						{
-							stack.Push(1);
-						}
-						else
-						{
-							stack.Push(0);
-						}
-							//stack.Push(arg2 != arg1);
-						break;
-					}						
+						case cnv_OPDIV:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										//if (arg1==0)
+										//	throw ua_ex_div_by_zero;
+										stack.Push(arg2 / arg1);
+										break;
+								}
 
-				case cnv_JMP:
-					{//Debug.Log("instr = " +stack.instrp + " JMP to " +  conv[currConv].instuctions[stack.instrp+1]);
-						stack.instrp = conv[currConv].instuctions[stack.instrp+1]-1;
-						break;	
-					}
 
-				case cnv_BEQ:
-					{
-					if (stack.Pop() == 0)
-						{
-							stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
-						}
+						case cnv_OPMOD:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										//if (arg1==0)
+										//	throw ua_ex_div_by_zero;
+										stack.Push(arg2 % arg1);
+										break;
+								}
 
-						else
-						{
-							stack.instrp++;	
-						}
-					break;
-					}						
 
-				case cnv_BNE:
-					{
-					if (stack.Pop() != 0)
-						{
-							stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
-						}							
-					else
-						{
-							stack.instrp++;	
-						}
-						break;
-					}						
+						case cnv_OPOR:
+								{
+										stack.Push(stack.Pop() | stack.Pop());
+								}
+								break;
 
-				case cnv_BRA:
-					{
-						stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
-						/*int offset = conv[currConv].instuctions[stack.instrp+1];
+						case cnv_OPAND:
+								{
+										stack.Push(stack.Pop() & stack.Pop());
+								}
+								break;
+
+						case cnv_OPNOT:
+								{
+										if (stack.Pop()==0)
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										//stack.Push(!stack.Pop());
+										break;
+								}
+
+
+						case cnv_TSTGT:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										if (arg2>arg1)
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										//stack.Push(arg2 > arg1);
+										break;
+								}
+
+
+						case cnv_TSTGE:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										if (arg2>=arg1)
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+
+										//stack.Push(arg2 >= arg1);
+										break;
+								}
+
+
+						case cnv_TSTLT:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										if (arg2<arg1)
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										//stack.Push(arg2 < arg1);
+										break;
+								}
+
+
+						case cnv_TSTLE:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										if (arg2<=arg1)
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										//stack.Push(arg2 <= arg1);
+										break;
+								}
+
+
+						case cnv_TSTEQ:
+								{
+										if (stack.Pop()==stack.Pop())
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										break;
+								}
+
+
+						case cnv_TSTNE:
+								{
+										if (stack.Pop()!=stack.Pop())
+										{
+												stack.Push(1);
+										}
+										else
+										{
+												stack.Push(0);
+										}
+										//stack.Push(arg2 != arg1);
+										break;
+								}						
+
+						case cnv_JMP:
+								{//Debug.Log("instr = " +stack.instrp + " JMP to " +  conv[currConv].instuctions[stack.instrp+1]);
+										stack.instrp = conv[currConv].instuctions[stack.instrp+1]-1;
+										break;	
+								}
+
+						case cnv_BEQ:
+								{
+										if (stack.Pop() == 0)
+										{
+												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
+										}
+
+										else
+										{
+												stack.instrp++;	
+										}
+										break;
+								}						
+
+						case cnv_BNE:
+								{
+										if (stack.Pop() != 0)
+										{
+												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
+										}							
+										else
+										{
+												stack.instrp++;	
+										}
+										break;
+								}						
+
+						case cnv_BRA:
+								{
+										stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
+										/*int offset = conv[currConv].instuctions[stack.instrp+1];
 						if (offset >0)
 						{							
 							stack.instrp += offset;	
@@ -812,234 +812,234 @@ public class ConversationVM : UWEBase {
 						{		
 							stack.instrp += offset;
 						}*/
-						break;		
-					}
+										break;		
+								}
 
-				case cnv_CALL: // local function
-					{
-						// stack value points to next instruction after call
-						//Debug.Log("inst=" + stack.instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[stack.instrp+1]-1));
-						stack.Push(stack.instrp+1);
-						stack.instrp = conv[currConv].instuctions[stack.instrp+1]-1;
-						stack.call_level++;
-						break;	
-					}
+						case cnv_CALL: // local function
+								{
+										// stack value points to next instruction after call
+										//Debug.Log("inst=" + stack.instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[stack.instrp+1]-1));
+										stack.Push(stack.instrp+1);
+										stack.instrp = conv[currConv].instuctions[stack.instrp+1]-1;
+										stack.call_level++;
+										break;	
+								}
 
-				case cnv_CALLI: // imported function
-					{
-						int arg1 = conv[currConv].instuctions[++stack.instrp];
-						for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
-						{
-							if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
-							{
-								//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
-								yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
+						case cnv_CALLI: // imported function
+								{
+										int arg1 = conv[currConv].instuctions[++stack.instrp];
+										for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+										{
+												if ((conv[currConv].functions[i].ID_or_Address==arg1) && (conv[currConv].functions[i].import_type==import_function))
+												{
+														//Debug.Log("Calling function  " + arg1 + " which is currently : " + conv[currConv].functions[i].functionName );
+														yield return StartCoroutine( run_imported_function(conv[currConv].functions[i] , npc));
+														break;
+												}
+										}
+										break;
+								}
+
+
+						case cnv_RET:
+								{
+										if (--stack.call_level<0)
+										{
+												// conversation ended
+												finished = true;
+										}
+										else
+										{
+												//Debug.Log("instr = " +stack.instrp + " returning to " + arg1);
+												stack.instrp = stack.Pop();
+										}
+										break;
+								}
+
+
+						case cnv_PUSHI:
+								{
+										//Debug.Log("Instruction:" + stack.instrp +" Pushing Immediate value :" +conv[currConv].instuctions[stack.instrp+1] + " => " + stack.stackptr);
+										stack.Push(conv[currConv].instuctions[++stack.instrp]);
+										break;		
+								}
+
+
+						case cnv_PUSHI_EFF:
+								{
+										int offset =  conv[currConv].instuctions[stack.instrp+1];
+										if (offset>=0)
+										{
+												stack.Push(stack.basep + offset);	
+
+										}
+										else
+										{
+												offset--; //to skip over base ptr;
+												stack.Push(stack.basep + offset);	
+										}	
+										stack.instrp++;
+										break;
+								}
+
+
+						case cnv_POP:
+								{
+										stack.Pop();
+										break;	
+								}
+
+
+						case cnv_SWAP:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										stack.Push(arg1);
+										stack.Push(arg2);
+										break;
+								}					
+
+						case cnv_PUSHBP:
+								{
+										//Debug.Log("Instruction:" + stack.instrp +" Pushing Base Ptr :" + stack.basep + " => " + stack.stackptr);							
+										stack.Push(stack.basep);
+										break;	
+								}
+
+
+						case cnv_POPBP:
+								{
+										int arg1 = stack.Pop();
+										stack.basep = arg1;
+										break;
+								}						
+
+						case cnv_SPTOBP:
+								{
+										stack.basep = stack.stackptr;
+										break;	
+								}
+
+
+						case cnv_BPTOSP:
+								{
+										stack.set_stackp(stack.basep);
+										break;	
+								}
+
+
+						case cnv_ADDSP:
+								{
+										int arg1 = stack.Pop();
+										/// fill reserved stack space with dummy values
+										for(int i=0; i<=arg1; i++)
+												stack.Push(0);
+
+										//stack.Set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
+										//stack.Set_stackp(stack.stackptr+arg1);
+										break;
+								}
+
+
+						case cnv_FETCHM:
+								{
+										//Debug.Log("Instruction:" + stack.instrp +" Fetching address :" + stack.TopValue + " => " + stack.at(stack.TopValue));
+										//stack.at(arg1);
+										stack.Push(stack.at(stack.Pop()));
+										break;
+								}
+
+
+						case cnv_STO:
+								{
+										int value = stack.Pop();
+										//int value = stack.at(stack.stackptr-1);
+										int index = stack.Pop();
+										//int index = stack.at(stack.stackptr-2);
+										if (index<conv[currConv].NoOfImportedGlobals)
+										{
+												PrintImportedVariable(index, value)	;
+										}
+										stack.Set(index,value);
+
+										break;
+								}
+
+
+						case cnv_OFFSET:
+								{
+										int arg1 = stack.Pop();
+										int arg2 = stack.Pop();
+										//Debug.Log("Offset " +arg1 + " & " + arg2  + "= " + (arg1+arg2-1));
+										arg1 += arg2 - 1 ;
+										//Debug.Log("Instruction:" + stack.instrp +" Offset pushed : " + arg1 + " => " + stack.stackptr);
+
+										stack.Push(arg1);
+										break;
+								}
+
+
+						case cnv_START:
+								{
+										// do nothing
+										break;		
+								}
+
+						case cnv_SAVE_REG:
+								{
+										stack.result_register = stack.Pop();
+										break;
+								}
+
+
+						case cnv_PUSH_REG:
+								{
+										stack.Push(stack.result_register);
+										break;
+								}
+
+
+						case cnv_EXIT_OP:
+								{
+										// finish processing (we still might be in some sub function)
+										finished = true;
+										break;										
+								}
+
+
+						case cnv_SAY_OP:
+								{
+										int arg1 = stack.Pop();
+										yield return StartCoroutine(say_op(arg1));
+										break;
+								}						
+
+						case cnv_RESPOND_OP:
+								{// do nothing
+										Debug.Log("Respond_Op");
+										break;
+								}
+
+						case cnv_OPNEG:
+								{
+										stack.Push(-stack.Pop());
+										break;
+								}
+
+
+						default: // unknown opcode
+								//throw ua_ex_unk_opcode;
 								break;
-							}
 						}
-						break;
-					}
-						
 
-				case cnv_RET:
-					{
-						if (--stack.call_level<0)
+						// process next instruction
+						++stack.instrp;
+						if (stack.instrp>conv[currConv].instuctions.GetUpperBound(0))
 						{
-							// conversation ended
-							finished = true;
+								finished=true;
 						}
-						else
-						{
-							//Debug.Log("instr = " +stack.instrp + " returning to " + arg1);
-							stack.instrp = stack.Pop();
-						}
-						break;
-					}
-						
-
-				case cnv_PUSHI:
-					{
-						//Debug.Log("Instruction:" + stack.instrp +" Pushing Immediate value :" +conv[currConv].instuctions[stack.instrp+1] + " => " + stack.stackptr);
-						stack.Push(conv[currConv].instuctions[++stack.instrp]);
-						break;		
-					}
-
-
-				case cnv_PUSHI_EFF:
-					{
-						int offset =  conv[currConv].instuctions[stack.instrp+1];
-						if (offset>=0)
-						{
-							stack.Push(stack.basep + offset);	
-							
-						}
-						else
-						{
-							offset--; //to skip over base ptr;
-							stack.Push(stack.basep + offset);	
-						}	
-						stack.instrp++;
-						break;
-					}
-
-
-				case cnv_POP:
-					{
-						stack.Pop();
-						break;	
-					}
-
-
-				case cnv_SWAP:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						stack.Push(arg1);
-						stack.Push(arg2);
-						break;
-					}					
-
-				case cnv_PUSHBP:
-					{
-						//Debug.Log("Instruction:" + stack.instrp +" Pushing Base Ptr :" + stack.basep + " => " + stack.stackptr);							
-						stack.Push(stack.basep);
-						break;	
-					}
-
-
-				case cnv_POPBP:
-					{
-						int arg1 = stack.Pop();
-						stack.basep = arg1;
-						break;
-					}						
-
-				case cnv_SPTOBP:
-					{
-						stack.basep = stack.stackptr;
-						break;	
-					}
-
-
-				case cnv_BPTOSP:
-					{
-						stack.set_stackp(stack.basep);
-						break;	
-					}
-
-
-				case cnv_ADDSP:
-					{
-						int arg1 = stack.Pop();
-						/// fill reserved stack space with dummy values
-						for(int i=0; i<=arg1; i++)
-							stack.Push(0);
-					
-					//stack.Set_stackp(stack.stackptr+arg1);//This will probably cause problems down the line....
-					//stack.Set_stackp(stack.stackptr+arg1);
-					break;
-					}
-						
-
-				case cnv_FETCHM:
-					{
-						//Debug.Log("Instruction:" + stack.instrp +" Fetching address :" + stack.TopValue + " => " + stack.at(stack.TopValue));
-						//stack.at(arg1);
-						stack.Push(stack.at(stack.Pop()));
-						break;
-					}
-						
-
-				case cnv_STO:
-					{
-						int value = stack.Pop();
-						//int value = stack.at(stack.stackptr-1);
-						int index = stack.Pop();
-						//int index = stack.at(stack.stackptr-2);
-						if (index<conv[currConv].NoOfImportedGlobals)
-						{
-							PrintImportedVariable(index, value)	;
-						}
-						stack.Set(index,value);
-
-						break;
-					}
-						
-
-				case cnv_OFFSET:
-					{
-						int arg1 = stack.Pop();
-						int arg2 = stack.Pop();
-						//Debug.Log("Offset " +arg1 + " & " + arg2  + "= " + (arg1+arg2-1));
-						arg1 += arg2 - 1 ;
-						//Debug.Log("Instruction:" + stack.instrp +" Offset pushed : " + arg1 + " => " + stack.stackptr);
-
-						stack.Push(arg1);
-						break;
-					}
-						
-
-				case cnv_START:
-					{
-					// do nothing
-					break;		
-					}
-
-				case cnv_SAVE_REG:
-					{
-					stack.result_register = stack.Pop();
-					break;
-					}
-						
-
-				case cnv_PUSH_REG:
-					{
-						stack.Push(stack.result_register);
-						break;
-					}
-
-
-				case cnv_EXIT_OP:
-					{
-						// finish processing (we still might be in some sub function)
-						finished = true;
-						break;										
-					}
-
-
-				case cnv_SAY_OP:
-					{
-						int arg1 = stack.Pop();
-						yield return StartCoroutine(say_op(arg1));
-						break;
-					}						
-
-				case cnv_RESPOND_OP:
-					{// do nothing
-						Debug.Log("Respond_Op");
-						break;
-					}
-
-				case cnv_OPNEG:
-					{
-						stack.Push(-stack.Pop());
-						break;
-					}
-					
-
-				default: // unknown opcode
-					//throw ua_ex_unk_opcode;
-					break;
 				}
-
-				// process next instruction
-				++stack.instrp;
-				if (stack.instrp>conv[currConv].instuctions.GetUpperBound(0))
-				{
-					finished=true;
-				}
-			}
-			yield return StartCoroutine(EndConversation(npc));
+				yield return StartCoroutine(EndConversation(npc));
 		}
 
 		/// <summary>
@@ -1047,21 +1047,21 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public IEnumerator EndConversation(NPC npc)
 		{
-				
+
 				//Copy back private variables to the globals file.
 
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
 				{
-					if (ConversationVM.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
-					{
-						GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex]=1;
-						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+						if (ConversationVM.CurrentConversation == GameWorldController.instance.bGlobals[c].ConversationNo)
 						{
-							//Copy Private variables
-							GameWorldController.instance.bGlobals[c].Globals[x]=stack.at(x);
+								GameWorldController.instance.bGlobals[c].Globals[NPCTalkedToIndex]=1;
+								for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+								{
+										//Copy Private variables
+										GameWorldController.instance.bGlobals[c].Globals[x]=stack.at(x);
+								}
+								break;
 						}
-						break;
-					}
 				}
 				int maxAddress=0;//where does the imported memory end
 				//Copy back npc related variables that need to update. Eg attitude. Talked to etc.
@@ -1107,10 +1107,10 @@ public class ConversationVM : UWEBase {
 				}
 				if (_RES==GAME_UW2)
 				{//Hack to fix quest flag settings for garg
-					if (currConv==5)
-					{
-						Quest.instance.QuestVariables[0]=stack.at(31);
-					}
+						if (currConv==5)
+						{
+								Quest.instance.QuestVariables[0]=stack.at(31);
+						}
 				}
 
 
@@ -1125,29 +1125,29 @@ public class ConversationVM : UWEBase {
 						TradeSlot npcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 						if (npcSlot.objectInSlot!="")
 						{///Moves the object to the players container or to the ground
-							if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-							{
-								npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-								cn.AddItemToContainer(npcSlot.objectInSlot);
-								npcSlot.clear ();
-								UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
-							}
-							else
-							{
-								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-								npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-								npcSlot.clear();
-								demanded.transform.parent=GameWorldController.instance.LevelMarker();
-								GameWorldController.MoveToWorld(demanded);//ok
-								demanded.transform.position=npc.NPC_Launcher.transform.position;
-							}
+								if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+								{
+										npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+										cn.AddItemToContainer(npcSlot.objectInSlot);
+										npcSlot.clear ();
+										UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
+								}
+								else
+								{
+										GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+										npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+										npcSlot.clear();
+										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(demanded);//ok
+										demanded.transform.position=npc.NPC_Launcher.transform.position;
+								}
 						}
 				}
 
 				///Return any items in the trade area to their owner
 				for (int i =0; i <=3; i++)
 				{
-					UWHUD.instance.npcTrade[i].clear();
+						UWHUD.instance.npcTrade[i].clear();
 				}
 
 
@@ -1176,10 +1176,10 @@ public class ConversationVM : UWEBase {
 				//Process scheduled events
 				if ((_RES==GAME_UW2) && (EditorMode==false))
 				{
-					if (GameWorldController.instance.events!=null)
-					{
+						if (GameWorldController.instance.events!=null)
+						{
 								GameWorldController.instance.events.ProcessEvents();
-					}
+						}
 				}
 		}
 
@@ -1189,17 +1189,17 @@ public class ConversationVM : UWEBase {
 				//Copy the stored values from glob first
 				for (int c = 0; c<=GameWorldController.instance.bGlobals.GetUpperBound(0);c++)
 				{
-					if (npc.npc_whoami == GameWorldController.instance.bGlobals[c].ConversationNo)
-					{
-						//cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
-						for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+						if (npc.npc_whoami == GameWorldController.instance.bGlobals[c].ConversationNo)
 						{
-							//Copy Private variables
-							//cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];	
-							stack.Set(x,GameWorldController.instance.bGlobals[c].Globals[x] );
+								//cnv.privateVariables = new int[GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0)+1];
+								for (int x=0; x<= GameWorldController.instance.bGlobals[c].Globals.GetUpperBound(0);x++)
+								{
+										//Copy Private variables
+										//cnv.privateVariables[x]	= GameWorldController.instance.bGlobals[c].Globals[x];	
+										stack.Set(x,GameWorldController.instance.bGlobals[c].Globals[x] );
+								}
+								break;
 						}
-						break;
-					}
 				}
 
 
@@ -1208,14 +1208,14 @@ public class ConversationVM : UWEBase {
 				{
 						if (conv[currConv].functions[i].import_type== import_variable)
 						{
-							int address=conv[currConv].functions[i].ID_or_Address;
-							switch (conv[currConv].functions[i].functionName.ToLower())
-							{
+								int address=conv[currConv].functions[i].ID_or_Address;
+								switch (conv[currConv].functions[i].functionName.ToLower())
+								{
 								case "game_mins":
-									stack.Set(address,GameClock.game_min());break;
+										stack.Set(address,GameClock.game_min());break;
 								case "game_days":
-									stack.Set(address,GameClock.day());break;
-								//case "game_time"://What shou
+										stack.Set(address,GameClock.day());break;
+										//case "game_time"://What shou
 										//stack.Set(address,GameClock.);
 										//break;
 								case "riddlecounter":
@@ -1253,40 +1253,40 @@ public class ConversationVM : UWEBase {
 										stack.Set(address,npc.npc_xhome);break;
 								case "play_sex":
 										{
-											if (UWCharacter.Instance.isFemale)
-											{
-												stack.Set(address, 1);
-											}
-											else
-											{
-												stack.Set(address,0);
-											}
-										break;
+												if (UWCharacter.Instance.isFemale)
+												{
+														stack.Set(address, 1);
+												}
+												else
+												{
+														stack.Set(address,0);
+												}
+												break;
 										}
 
-								//case "play_drawn":
+										//case "play_drawn":
 								case "play_poison":
 										stack.Set(address,UWCharacter.Instance.play_poison);break;
 								case "play_name":
 										stack.Set(address,StringController.instance.AddString(conv[currConv].StringBlock,UWCharacter.Instance.CharName));break;
-								//case "new_player_exp":
+										//case "new_player_exp":
 								case "play_level":
 										stack.Set(address,UWCharacter.Instance.CharLevel);break;
 								case "play_mana":
 										stack.Set(address,UWCharacter.Instance.PlayerMagic.CurMana);break;
 								case "play_hp":
 										stack.Set(address,UWCharacter.Instance.CurVIT);break;
-								//case "play_power":
-										
-								//case "play_arms":
-							//	case "play_health":
+										//case "play_power":
+
+										//case "play_arms":
+										//	case "play_health":
 								case "play_hunger":
 										stack.Set(address,UWCharacter.Instance.FoodLevel);break;
-							default:
-								//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
-								break;
+								default:
+										//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
+										break;
 
-							}
+								}
 						}
 				}
 		}
@@ -1294,11 +1294,11 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator say_op(int arg1)
 		{
-			//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
-			//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
-			//UWHUD.instance.Conversation_tl.Add ( StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n", NPC_SAY);
-			yield return StartCoroutine(say_op(arg1,NPC_SAY));
-			yield return 0;
+				//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
+				//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
+				//UWHUD.instance.Conversation_tl.Add ( StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n", NPC_SAY);
+				yield return StartCoroutine(say_op(arg1,NPC_SAY));
+				yield return 0;
 		}
 
 
@@ -1310,143 +1310,144 @@ public class ConversationVM : UWEBase {
 				///Sets the markup to colour the text based on print type.
 
 				//UWHUD.instance.Conversation_tl.Add ( Markup + StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n" + "</color>");
-			yield return StartCoroutine(say_op(StringController.instance.GetString(conv[currConv].StringBlock,arg1),PrintType));
-			yield return 0;
+				yield return StartCoroutine(say_op(StringController.instance.GetString(conv[currConv].StringBlock,arg1),PrintType));
+				yield return 0;
 
 		}
 
 
 		IEnumerator say_op(string text, int PrintType)
 		{	
-			if (text.Contains("@"))
-			{
-				text = TextSubstitute(text);
-			}
+				if (text.Contains("@"))
+				{
+						text = TextSubstitute(text);
+				}
 				string [] Lines  = text.Split(new string [] {"\n"}, System.StringSplitOptions.None);
 
 				for (int s=0; s<= Lines.GetUpperBound(0);s++)
 				{//Lines
-					string [] Paragraphs = Lines[s].Split(new string [] {"\\m"}, System.StringSplitOptions.None);
+						string [] Paragraphs = Lines[s].Split(new string [] {"\\m"}, System.StringSplitOptions.None);
 
-					for (int i=0; i<=Paragraphs.GetUpperBound(0);i++)
-					{
-							string Markup="";
-							switch (PrintType)
-							{
-							case PC_SAY:
-									Markup="<color=red>";break;//[FF0000]
-							case PRINT_SAY:
-									Markup="<color=black>";break;//[000000]
-							default:
-									Markup="<color=green>";break;//[00FF00]
-							}	
-							UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
-							if (i<Paragraphs.GetUpperBound(0))
-							{
-								UWHUD.instance.Conversation_tl.Add ("<color=white>MORE</color>");
-								yield return StartCoroutine(WaitForMore());	
-							}
-
-					}
-				}
-
-
-			yield return new WaitForSecondsRealtime(0.2f);
-
-			yield return 0;
-		}
-
-
-	string TextSubstitute(string input)
-	{
-		//X: source of variable to substitute, one of these: GSP
-		//G: game global variable
-		//S: stack variable
-		//P: pointer variable
-		//Y: type of variable, one of these: SI
-		//S: value is a string number into current string block
-		//I: value is an integer value
-		//<num>: decimal value
-		//<extension>: format: C<number>: use array index <number>
-		string regexForStringReplacement="@[GSP][SI]([-+]?[0-9]*\\.?[0-9]+)";
-		string regexForStringReplacementType="@[GSP][SI]";
-		string regexForStringReplacementValue="([-+]?[0-9]*\\.?[0-9]+)";
-		MatchCollection matches=Regex.Matches(input, regexForStringReplacement);
-		for (int s = 0; s<matches.Count; s++)
-		{
-			if (matches[s].Success)
-			{
-				string ReplacementString=matches[s].Groups[0].Value;
-				Match ReplacementValue =  Regex.Match(ReplacementString, regexForStringReplacementValue);
-				if (ReplacementValue.Success)
-				{
-					int value = int.Parse(ReplacementValue.Groups[0].Value);
-					//Try and find what type of replacement this is
-					Match ReplacementType = Regex.Match(ReplacementString, regexForStringReplacementType);
-					string FoundString="";
-					if (ReplacementType.Success)
-					{
-						switch (ReplacementType.Groups[0].Value)
+						for (int i=0; i<=Paragraphs.GetUpperBound(0);i++)
 						{
-						case "@GS": //Global string.
-							{
-								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(value));
-								break;
-							}
-						case "@GI": //Global integer
-							{
-								FoundString= stack.at(value+1).ToString();
-								break;	
-							}
-						case "@SS": //Stack string
-							{//TODO: Miranda's conversation in UW2 where she tells you about the lines of power that are cut is of format @SS1SI10
-								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+value));
-								break;	
-							}
-						case "@SI": //Stack integer
-							{//TODO: this +1 behaves inconsistently. UW1 or UW2 difference???
-									if (_RES==GAME_UW2)
-									{
-											FoundString= stack.at(stack.basep+value).ToString();	
-									}
-									else
-									{
-											FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer	
-									}
-								
-								break;	
-							}
+								string Markup="";
+								switch (PrintType)
+								{
+								case PC_SAY:
+										Markup="<color=red>";break;//[FF0000]
+								case PRINT_SAY:
+										Markup="<color=black>";break;//[000000]
+								default:
+										Markup="<color=green>";break;//[00FF00]
+								}	
+								UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
+								if (i<Paragraphs.GetUpperBound(0))
+								{
+										UWHUD.instance.Conversation_tl.Add ("<color=white>MORE</color>");
+										yield return StartCoroutine(WaitForMore());	
+								}
 
-						case "@PS": //Pointer string
-							{
-								FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.at(stack.basep+value)));
-								break;	
-							}
-						case "@PI": //Pointer integer
-							{
-								if (value <0)
-								{
-									FoundString= stack.at(stack.at(stack.basep+value-1)).ToString();//-1 for params
-								}
-								else
-								{
-									FoundString= stack.at(stack.at(stack.basep+value)).ToString();	
-								}
-							
-								break;	
-							}
 						}
-						if (FoundString!="")
-						{
-							//Debug.Log("To Replace "+ ReplacementString + " Type=" + ReplacementType.Groups[0].Value + " value=" + value + " replacing with " + FoundString);
-							input=input.Replace(ReplacementString,FoundString);
-						}	
-					}	
 				}
-			}		
+
+
+				yield return new WaitForSecondsRealtime(0.2f);
+
+				yield return 0;
 		}
-		return input;
-	}
+
+
+		string TextSubstitute(string input)
+		{
+				//X: source of variable to substitute, one of these: GSP
+				//G: game global variable
+				//S: stack variable
+				//P: pointer variable
+				//Y: type of variable, one of these: SI
+				//S: value is a string number into current string block
+				//I: value is an integer value
+				//<num>: decimal value
+				//<extension>: format: C<number>: use array index <number>
+				string regexForStringReplacement="@[GSP][SI]([-+]?[0-9]*\\.?[0-9]+)";
+				string regexForStringReplacementType="@[GSP][SI]";
+				string regexForStringReplacementValue="([-+]?[0-9]*\\.?[0-9]+)";
+				MatchCollection matches=Regex.Matches(input, regexForStringReplacement);
+				for (int s = 0; s<matches.Count; s++)
+				{
+						if (matches[s].Success)
+						{
+								string ReplacementString=matches[s].Groups[0].Value;
+								Match ReplacementValue =  Regex.Match(ReplacementString, regexForStringReplacementValue);
+								if (ReplacementValue.Success)
+								{
+										int value = int.Parse(ReplacementValue.Groups[0].Value);
+										//Try and find what type of replacement this is
+										Match ReplacementType = Regex.Match(ReplacementString, regexForStringReplacementType);
+										string FoundString="";
+										if (ReplacementType.Success)
+										{
+												switch (ReplacementType.Groups[0].Value)
+												{
+												case "@GS": //Global string.
+														{
+																FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(value));
+																break;
+														}
+												case "@GI": //Global integer
+														{
+																//FoundString= stack.at(value+1).ToString();
+																FoundString= stack.at(value).ToString();
+																break;	
+														}
+												case "@SS": //Stack string
+														{//TODO: Miranda's conversation in UW2 where she tells you about the lines of power that are cut is of format @SS1SI10
+																FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+value));
+																break;	
+														}
+												case "@SI": //Stack integer
+														{//TODO: this +1 behaves inconsistently. UW1 or UW2 difference???
+																if (_RES==GAME_UW2)
+																{
+																		FoundString= stack.at(stack.basep+value).ToString();	
+																}
+																else
+																{
+																		FoundString= stack.at(stack.basep+value+1).ToString();//Skip over 1 for basepointer	
+																}
+
+																break;	
+														}
+
+												case "@PS": //Pointer string
+														{
+																FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.at(stack.basep+value)));
+																break;	
+														}
+												case "@PI": //Pointer integer
+														{
+																if (value <0)
+																{
+																		FoundString= stack.at(stack.at(stack.basep+value-1)).ToString();//-1 for params
+																}
+																else
+																{
+																		FoundString= stack.at(stack.at(stack.basep+value)).ToString();	
+																}
+
+																break;	
+														}
+												}
+												if (FoundString!="")
+												{
+														//Debug.Log("To Replace "+ ReplacementString + " Type=" + ReplacementType.Groups[0].Value + " value=" + value + " replacing with " + FoundString);
+														input=input.Replace(ReplacementString,FoundString);
+												}	
+										}	
+								}
+						}		
+				}
+				return input;
+		}
 
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)
@@ -1459,26 +1460,26 @@ public class ConversationVM : UWEBase {
 				{
 				case "babl_menu":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
 
-							yield return StartCoroutine(babl_menu(args[0]));
-							break;
+								yield return StartCoroutine(babl_menu(args[0]));
+								break;
 						}
 
 				case "babl_fmenu":
 						{///FMENU appears bugged. Causes stackptr issues further down the line (see conversation 88  and door opening)
-							//stack.Pop();
-							int start =stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
-							int flagstart = stack.at(stack.stackptr-3);
-							yield return StartCoroutine(babl_fmenu(start,flagstart));
-							break;
+								//stack.Pop();
+								int start =stack.at(stack.stackptr-2);//Not sure if this is correct for all conversations but lets try it anyway!
+								int flagstart = stack.at(stack.stackptr-3);
+								yield return StartCoroutine(babl_fmenu(start,flagstart));
+								break;
 						}
 
 				case "babl_ask":
 						{
-							yield return StartCoroutine(babl_ask());
-							break;
+								yield return StartCoroutine(babl_ask());
+								break;
 						}
 
 				case "get_quest":
@@ -1487,215 +1488,215 @@ public class ConversationVM : UWEBase {
 								args[0]= stack.at(stack.stackptr-2);//ptr to value
 
 
-							//int[] args = argsArray();
-							//stack.Pop();
-							//int index= stack.at(stack.Pop());
-							//int index= stack.at( stack.at( stack.stackptr-2 ) );
-							stack.result_register = get_quest(stack.at(args[0]));
-							break;
+								//int[] args = argsArray();
+								//stack.Pop();
+								//int index= stack.at(stack.Pop());
+								//int index= stack.at( stack.at( stack.stackptr-2 ) );
+								stack.result_register = get_quest(stack.at(args[0]));
+								break;
 						}
 
 				case "set_quest":
 						{
-							//int[] args = argsArray();
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
+								//int[] args = argsArray();
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
 
-							//int val = stack.Pop();
-							//int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
-							//stack.at( stack.at( stack.stackptr-4 ) ) ;
-							set_quest(stack.at(args[0]),stack.at(args[1]));//Or the other way around.
-							break;
+								//int val = stack.Pop();
+								//int index= stack.at(stack.Pop()); //stack.at( stack.at( stack.stackptr-5 ) );
+								//stack.at( stack.at( stack.stackptr-4 ) ) ;
+								set_quest(stack.at(args[0]),stack.at(args[1]));//Or the other way around.
+								break;
 						}
 
 				case "print":
 						{//TODO:review use of argsarray
-						//int[] args = argsArray();								
-						int[] args=new int[2];
-						args[0]= stack.at(stack.stackptr-2);//ptr to value
-						yield return StartCoroutine(say_op(stack.at(args[0]),PRINT_SAY));
-						break;
+								//int[] args = argsArray();								
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								yield return StartCoroutine(say_op(stack.at(args[0]),PRINT_SAY));
+								break;
 						}
 
 				case "x_skills":
 						{
-							//int val1 = stack.Pop();
-							//int val2 = stack.Pop();
-							//int val3 = stack.Pop();
-							//int val4 = stack.Pop();
-							int[] args=new int[4];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-4);//ptr to value
-							args[3]= stack.at(stack.stackptr-5);//ptr to value
-							stack.result_register = x_skills(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));//Or the other way around.
-							break;
+								//int val1 = stack.Pop();
+								//int val2 = stack.Pop();
+								//int val3 = stack.Pop();
+								//int val4 = stack.Pop();
+								int[] args=new int[4];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								args[3]= stack.at(stack.stackptr-5);//ptr to value
+								stack.result_register = x_skills(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));//Or the other way around.
+								break;
 						}
 
 				case "set_likes_dislikes":
 						{
-							//stack.Pop();
-							//int index1= stack.Pop();
-							//int index2= stack.Pop();
+								//stack.Pop();
+								//int index1= stack.Pop();
+								//int index2= stack.Pop();
 								int[] args=new int[2];
 								args[0]= stack.at(stack.stackptr-2);//ptr to value
 								args[1]= stack.at(stack.stackptr-3);//ptr to value
 
 								set_likes_dislikes(stack.at(args[0]),stack.at(args[1]));
-							break;
+								break;
 						}
 
 				case "sex":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register= sex(stack.at(args[0]),stack.at(args[1]));
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								stack.result_register= sex(stack.at(args[0]),stack.at(args[1]));
+								break;
 						}
 
 				case "random":
 						{
-						//	int[] args = argsArray();
-							//stack.Pop();
-							//stack.Pop();
-							//int arg1=stack.Pop();
-							//stack.result_register=Random.Range(1,stack.at(arg1)+1);
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register=Random.Range(1,stack.at(args[0])+1);
-							break;
+								//	int[] args = argsArray();
+								//stack.Pop();
+								//stack.Pop();
+								//int arg1=stack.Pop();
+								//stack.result_register=Random.Range(1,stack.at(arg1)+1);
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register=Random.Range(1,stack.at(args[0])+1);
+								break;
 						}
 
 				case "show_inv":
 						{
-							//stack.Pop();
-							int arg1 = stack.at(stack.stackptr-2);
-							int arg2 = stack.at(stack.stackptr-3);
-							stack.result_register= show_inv(arg1,arg2);
+								//stack.Pop();
+								int arg1 = stack.at(stack.stackptr-2);
+								int arg2 = stack.at(stack.stackptr-3);
+								stack.result_register= show_inv(arg1,arg2);
 
-							break;
+								break;
 						}
 
 				case "give_to_npc":
 						{
-							//stack.Pop();
-							//int arg1= stack.Pop();	
-							//int arg2= stack.Pop();
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register = give_to_npc(npc, args[0], stack.at(args[1]));
-							break;
+								//stack.Pop();
+								//int arg1= stack.Pop();	
+								//int arg2= stack.Pop();
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								stack.result_register = give_to_npc(npc, args[0], stack.at(args[1]));
+								break;
 						}
 
 				case "take_from_npc":
 						{
-							//stack.Pop();
-							//int arg1 = stack.Pop();
-							
-							int arg = stack.at(stack.stackptr-2);//ptr to value
+								//stack.Pop();
+								//int arg1 = stack.Pop();
 
-							stack.result_register = take_from_npc(npc, stack.at(arg));
-							break;
+								int arg = stack.at(stack.stackptr-2);//ptr to value
+
+								stack.result_register = take_from_npc(npc, stack.at(arg));
+								break;
 						}
 
 				case "setup_to_barter":
 						{
-							//stack.Pop();
-							setup_to_barter(npc);
-							break;
+								//stack.Pop();
+								setup_to_barter(npc);
+								break;
 						}
 
 				case "do_offer":
 						{//TODO:review use of argsarray
-							//int noOfArgs=stack.Pop();
-							//int[] args = argsArray();
+								//int noOfArgs=stack.Pop();
+								//int[] args = argsArray();
 
-							switch (stack.TopValue)//(args.GetUpperBound(0))
-							{
-							case 7:
+								switch (stack.TopValue)//(args.GetUpperBound(0))
 								{
-									int[] args=new int[7];
-									args[0]= stack.at(stack.stackptr-2);//ptr to value
-									args[1]= stack.at(stack.stackptr-3);//ptr to value
-									args[2]= stack.at(stack.stackptr-4);//ptr to value
-									args[3]= stack.at(stack.stackptr-5);//ptr to value
-									args[4]= stack.at(stack.stackptr-6);//ptr to value
-									args[5]= stack.at(stack.stackptr-7);//ptr to value
-									args[6]= stack.at(stack.stackptr-8);//ptr to value
+								case 7:
+										{
+												int[] args=new int[7];
+												args[0]= stack.at(stack.stackptr-2);//ptr to value
+												args[1]= stack.at(stack.stackptr-3);//ptr to value
+												args[2]= stack.at(stack.stackptr-4);//ptr to value
+												args[3]= stack.at(stack.stackptr-5);//ptr to value
+												args[4]= stack.at(stack.stackptr-6);//ptr to value
+												args[5]= stack.at(stack.stackptr-7);//ptr to value
+												args[6]= stack.at(stack.stackptr-8);//ptr to value
 
-									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]), stack.at(args[5]), stack.at(args[6])));
-									break;		
-								}
+												yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]), stack.at(args[5]), stack.at(args[6])));
+												break;		
+										}
 								case 5:
-								{
-									int[] args=new int[5];
-									args[0]= stack.at(stack.stackptr-2);//ptr to value
-									args[1]= stack.at(stack.stackptr-3);//ptr to value
-									args[2]= stack.at(stack.stackptr-4);//ptr to value
-									args[3]= stack.at(stack.stackptr-5);//ptr to value
-									args[4]= stack.at(stack.stackptr-5);//ptr to value
-									yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]),-1,-1));	
-									break;
-								}
+										{
+												int[] args=new int[5];
+												args[0]= stack.at(stack.stackptr-2);//ptr to value
+												args[1]= stack.at(stack.stackptr-3);//ptr to value
+												args[2]= stack.at(stack.stackptr-4);//ptr to value
+												args[3]= stack.at(stack.stackptr-5);//ptr to value
+												args[4]= stack.at(stack.stackptr-5);//ptr to value
+												yield return StartCoroutine(do_offer(npc, stack.at(args[0]), stack.at(args[1]), stack.at(args[2]), stack.at(args[3]), stack.at(args[4]),-1,-1));	
+												break;
+										}
 
 
-							default:
-								{
-									Debug.Log("uniplemented version of do_offer " + stack.TopValue);
-									break;		
+								default:
+										{
+												Debug.Log("uniplemented version of do_offer " + stack.TopValue);
+												break;		
+										}
 								}
-							}
-						break;
+								break;
 						}
 
 				case "do_demand":
 						{//TODO:review use of argsarray
-							//int[] args = argsArray();
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							yield return StartCoroutine(do_demand(npc,stack.at(args[0]),stack.at(args[1])));
-							break;
+								//int[] args = argsArray();
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								yield return StartCoroutine(do_demand(npc,stack.at(args[0]),stack.at(args[1])));
+								break;
 						}
 
 				case "do_judgement":
 						{
-							//stack.Pop();
-							yield return StartCoroutine(do_judgement(npc));
-							break;
+								//stack.Pop();
+								yield return StartCoroutine(do_judgement(npc));
+								break;
 						}
 
 				case "do_decline":
 						{
-							do_decline(npc);
-							break;
+								do_decline(npc);
+								break;
 						}
 
 				case "gronk_door":
 						{//TODO:review use of argsarray
-							//int[] args = argsArray();
+								//int[] args = argsArray();
 								//stack.Pop();//no of args
-							int[] args=new int[3];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-4);//ptr to value
-							stack.result_register=gronk_door(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
-							break;
+								int[] args=new int[3];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								stack.result_register=gronk_door(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
+								break;
 						}
 
 
 				case "x_obj_stuff":
 						{//This is totally wrong!
-							//x_obj_stuff( 9,locals[9], locals[8], locals[7], locals[2], locals[6], locals[5], locals[4], locals[3], param2 );
+								//x_obj_stuff( 9,locals[9], locals[8], locals[7], locals[2], locals[6], locals[5], locals[4], locals[3], param2 );
 
-							//int[] args = argsArrayPtr();
-							//	int[] args=new int[4];
+								//int[] args = argsArrayPtr();
+								//	int[] args=new int[4];
 								//stack.Pop();//no of args
 
-						
+
 								int[] args=new int[9];
 								//stack.Pop();//no of args
 								args[0]= stack.at(stack.stackptr-2);//ptr to value
@@ -1709,18 +1710,18 @@ public class ConversationVM : UWEBase {
 								args[8]= stack.at(stack.stackptr-10);//ptr to value
 								x_obj_stuff(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8]);
 
-							break;
+								break;
 						}
 
 				case "find_inv":
 						{//TODO:review use of argsarray
-							//int[] args=argsArray();
+								//int[] args=argsArray();
 								int[] args=new int[2];
 								//stack.Pop();//no of args
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register = find_inv(npc, stack.at(args[0]), stack.at(args[1]));
-							break;
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								stack.result_register = find_inv(npc, stack.at(args[0]), stack.at(args[1]));
+								break;
 						}
 
 				case "identify_inv":
@@ -1736,198 +1737,198 @@ public class ConversationVM : UWEBase {
 								args[1]= stack.at(stack.stackptr-3);//ptr to value
 								args[2]= stack.at(stack.stackptr-4);//ptr to value
 								args[3]= stack.at(stack.stackptr-5);//ptr to value
-							//int[] args=argsArray();
+								//int[] args=argsArray();
 								stack.result_register = identify_inv(args[0],args[1],args[2],args[3]) ;	
-							break;
+								break;
 						}
 
 				case "contains":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register=contains(args[0],args[1]);
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								stack.result_register=contains(args[0],args[1]);
+								break;
 						}
 
 				case "set_race_attitude":
 						{
 								//TODO:review use of argsarray
-							//int[] args=argsArray();
-							int[] args=new int[3];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-4);//ptr to value
-							set_race_attitude(npc,stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
-							break;
+								//int[] args=argsArray();
+								int[] args=new int[3];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								set_race_attitude(npc,stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
+								break;
 						}
 
 				case "set_attitude":
 						{//TODO:review use of argsarray
-							//int[] args=argsArray();
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							set_attitude(stack.at(args[0]),stack.at(args[1]));
-							break;
+								//int[] args=argsArray();
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								set_attitude(stack.at(args[0]),stack.at(args[1]));
+								break;
 						}
 
 				case "compare":
 						{//TODO:review use of argsarray
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							stack.result_register= compare(stack.at(args[0]),stack.at(args[1]));
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								stack.result_register= compare(stack.at(args[0]),stack.at(args[1]));
+								break;
 						}
 
 				case "count_inv":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register=count_inv(stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register=count_inv(stack.at(args[0]));
+								break;
 						}
 
 				case "remove_talker":
 						{
-							remove_talker(npc);
-							break;
+								remove_talker(npc);
+								break;
 						}
 				case "give_ptr_npc":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							give_ptr_npc(npc, stack.at(args[0]),args[1]);
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								give_ptr_npc(npc, stack.at(args[0]),args[1]);
+								break;
 						}
 				case "take_from_npc_inv":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register= take_from_npc_inv(npc, stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register= take_from_npc_inv(npc, stack.at(args[0]));
+								break;
 						}
 
 				case "take_id_from_npc":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register=  take_id_from_npc(npc, stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register=  take_id_from_npc(npc, stack.at(args[0]));
+								break;
 						}
 
 				case "find_barter":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register=  find_barter(stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register=  find_barter(stack.at(args[0]));
+								break;
 						}
 
 				case "length":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value	
-							stack.result_register= length(stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value	
+								stack.result_register= length(stack.at(args[0]));
+								break;
 						}
 
 
 				case "find_barter_total":
 						{
-							int[] args=new int[4];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-4);//ptr to value
-							args[3]= stack.at(stack.stackptr-5);//ptr to value
-							stack.result_register=find_barter_total(args[0],args[1],args[2],stack.at(args[3]));
-							break;
+								int[] args=new int[4];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value
+								args[3]= stack.at(stack.stackptr-5);//ptr to value
+								stack.result_register=find_barter_total(args[0],args[1],args[2],stack.at(args[3]));
+								break;
 						}
 
 				case "do_inv_create":
 						{
-							int[] args=new int[1];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register= do_inv_create(npc, stack.at(args[0]));
-							break;
+								int[] args=new int[1];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register= do_inv_create(npc, stack.at(args[0]));
+								break;
 						}
 
 				case "place_object":
 						{
-							int[] args=new int[3];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							args[2]= stack.at(stack.stackptr-4);//ptr to value	
-							place_object(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
-							break;
+								int[] args=new int[3];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value	
+								place_object(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
+								break;
 						}
 
 				case "do_inv_delete":
-					{
-						int[] args=new int[1];	
-						args[0]= stack.at(stack.stackptr-2);//ptr to value
-						do_inv_delete(npc, stack.at(args[0]));
-						break;
-					}
+						{
+								int[] args=new int[1];	
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								do_inv_delete(npc, stack.at(args[0]));
+								break;
+						}
 
 				case "x_traps":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value	
-							if (stack.at(args[0])==10001)
-							{
-								stack.result_register= x_traps(stack.at(args[0]), stack.at(args[1]));			
-							}
-							else
-							{
-								x_traps(stack.at(args[0]), stack.at(args[1]));			
-							}	
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value	
+								if (stack.at(args[0])==10001)
+								{
+										stack.result_register= x_traps(stack.at(args[0]), stack.at(args[1]));			
+								}
+								else
+								{
+										x_traps(stack.at(args[0]), stack.at(args[1]));			
+								}	
+								break;
 						}
 
 				case "switch_pic":
 						{
-							int[] args=new int[1];	
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							switch_pic(stack.at(args[0]));	
-							break;
+								int[] args=new int[1];	
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								switch_pic(stack.at(args[0]));	
+								break;
 						}
 
 				case "x_clock":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value	
-							x_clock(stack.at(args[0]), stack.at(args[1]));
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value	
+								x_clock(stack.at(args[0]), stack.at(args[1]));
+								break;
 						}
 
 				case "x_exp":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							x_exp(stack.at(args[0]));
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								x_exp(stack.at(args[0]));
+								break;
 						}
 
 				case "check_inv_quality":
 						{
-							int[] args=new int[1];	
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							stack.result_register=check_inv_quality(stack.at(args[0]));
-							break;
+								int[] args=new int[1];	
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								stack.result_register=check_inv_quality(stack.at(args[0]));
+								break;
 						}
 
 				case "set_inv_quality":
 						{
-							int[] args=new int[2];
-							args[0]= stack.at(stack.stackptr-2);//ptr to value
-							args[1]= stack.at(stack.stackptr-3);//ptr to value
-							set_inv_quality(stack.at(args[0]), stack.at(args[1]));
-							break;
+								int[] args=new int[2];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								set_inv_quality(stack.at(args[0]), stack.at(args[1]));
+								break;
 						}
 
 				case "x_obj_pos":
@@ -1950,11 +1951,59 @@ public class ConversationVM : UWEBase {
 								teleport_talker(npc, stack.at(args[0]), stack.at(args[1]));
 								break;
 						}
+
+				case "babl_hack":
+						{
+								switch ( stack.at(stack.at(stack.stackptr-2)))
+								{
+								case 1://Are you in a fight
+										{
+											if (Quest.instance.FightingInArena)
+											{
+													stack.result_register=1;
+											}
+											else
+											{
+													stack.result_register=0;
+											}
+											break;
+										}
+								case 2://Set up arena fight.
+										{
+											int[] args=new int[4];
+											args[0]= stack.at(stack.stackptr-2);//ptr to value
+											args[1]= stack.at(stack.stackptr-3);//ptr to value
+											args[2]= stack.at(stack.stackptr-4);//ptr to value
+											args[3]= stack.at(stack.stackptr-5);//ptr to value
+											babl_hackSetUpFight (stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));	
+											break;
+										}
+								case 3://Jospur arena debt
+										{
+											int[] args=new int[1];
+											args[0]= stack.at(stack.stackptr-2);//ptr to value
+											babl_hackJospurDebt(stack.at(args[0]));
+											break;
+										}
+								}
+
+								break;
+						}
+
+				case "teleport_player":
+						{
+								int[] args=new int[3];
+								args[0]= stack.at(stack.stackptr-2);//ptr to value
+								args[1]= stack.at(stack.stackptr-3);//ptr to value
+								args[2]= stack.at(stack.stackptr-4);//ptr to value	
+								teleport_player(stack.at(args[0]),stack.at(args[1]),stack.at(args[2]));
+								break;
+						}
 				default: 
-					{	
-					Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " stack at " + stack.stackptr);
-					break;
-					}
+						{	
+								Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " instr at " + stack.instrp);
+								break;
+						}
 				}
 				yield return 0;
 		}
@@ -1973,7 +2022,7 @@ public class ConversationVM : UWEBase {
 								string TextLine = StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i));
 								if (TextLine.Contains("@"))
 								{
-									TextLine=TextSubstitute(TextLine);
+										TextLine=TextSubstitute(TextLine);
 								}
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",UWCharacter.Instance.CharName));
 								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
@@ -2004,49 +2053,49 @@ public class ConversationVM : UWEBase {
 		/// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
 		public IEnumerator babl_fmenu(int Start, int flagIndex)
 		{
-			UWHUD.instance.MessageScroll.Clear();
-			//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
-			//tl_input.Clear();
-			//PlayerInput.text="";
-			usingBablF=true;
-			for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
-			{//Reset the answers array
-					bablf_array[i]=0;
-			}
-			
-			int j=1;
-			MaxAnswer=0;
-			for (int i = Start; i <=stack.Upperbound() ; i++)
-			{
-				if (stack.at(i)!=0)
+				UWHUD.instance.MessageScroll.Clear();
+				//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
+				//tl_input.Clear();
+				//PlayerInput.text="";
+				usingBablF=true;
+				for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
+				{//Reset the answers array
+						bablf_array[i]=0;
+				}
+
+				int j=1;
+				MaxAnswer=0;
+				for (int i = Start; i <=stack.Upperbound() ; i++)
 				{
-					if (stack.at(flagIndex++) !=0)
-					{
-						string TextLine = StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i));
-						if (TextLine.Contains("@"))
+						if (stack.at(i)!=0)
 						{
-								TextLine=TextSubstitute(TextLine);
+								if (stack.at(flagIndex++) !=0)
+								{
+										string TextLine = StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i));
+										if (TextLine.Contains("@"))
+										{
+												TextLine=TextSubstitute(TextLine);
+										}
+
+
+										bablf_array[j-1] = stack.at(i);
+										//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
+										UWHUD.instance.MessageScroll.Add (j++ + "." + TextLine + "");
+										MaxAnswer++;
+								}
 						}
-
-
-						bablf_array[j-1] = stack.at(i);
-						//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
-						UWHUD.instance.MessageScroll.Add (j++ + "." + TextLine + "");
-						MaxAnswer++;
-					}
+						else
+						{
+								break;
+						}
 				}
-				else
-				{
-					break;
-				}
-			}
-			yield return StartCoroutine(WaitForInput());
-			//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
-			//yield return StartCoroutine(say (tmp,PC_SAY));
-			yield return StartCoroutine(say_op(bablf_array[bablf_ans-1],PC_SAY));
-			//stack.result_register=bablf_array[bablf_ans-1];
-			stack.result_register=PlayerAnswer;
-			yield return 0;
+				yield return StartCoroutine(WaitForInput());
+				//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
+				//yield return StartCoroutine(say (tmp,PC_SAY));
+				yield return StartCoroutine(say_op(bablf_array[bablf_ans-1],PC_SAY));
+				//stack.result_register=bablf_array[bablf_ans-1];
+				stack.result_register=PlayerAnswer;
+				yield return 0;
 		}
 
 
@@ -2055,23 +2104,23 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public IEnumerator babl_ask()
 		{
-			PlayerTypedAnswer="";
-			//tl_input.Set(">");
-			PlayerInput.text=">";
-			InputField inputctrl=UWHUD.instance.InputControl;
-			inputctrl.gameObject.SetActive(true);
-			//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
-			inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
-			inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
-			inputctrl.contentType= InputField.ContentType.Standard;
-			inputctrl.text="";
-			inputctrl.Select();
-			yield return StartCoroutine(WaitForTypedInput());
-			yield return StartCoroutine(say_op (PlayerTypedAnswer,PC_SAY));
-			inputctrl.text="";
-			UWHUD.instance.MessageScroll.Clear ();
-			//stack.StringMemory=PlayerTypedAnswer;
-			stack.result_register= StringController.instance.AddString(conv[currConv].StringBlock,PlayerTypedAnswer);
+				PlayerTypedAnswer="";
+				//tl_input.Set(">");
+				PlayerInput.text=">";
+				InputField inputctrl=UWHUD.instance.InputControl;
+				inputctrl.gameObject.SetActive(true);
+				//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
+				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
+				inputctrl.contentType= InputField.ContentType.Standard;
+				inputctrl.text="";
+				inputctrl.Select();
+				yield return StartCoroutine(WaitForTypedInput());
+				yield return StartCoroutine(say_op (PlayerTypedAnswer,PC_SAY));
+				inputctrl.text="";
+				UWHUD.instance.MessageScroll.Clear ();
+				//stack.StringMemory=PlayerTypedAnswer;
+				stack.result_register= StringController.instance.AddString(conv[currConv].StringBlock,PlayerTypedAnswer);
 		}
 
 		/// <summary>
@@ -2103,9 +2152,9 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		IEnumerator WaitForTypedInput()
 		{
-			WaitingForTyping=true;
-			while (WaitingForTyping)
-			{yield return null;}
+				WaitingForTyping=true;
+				while (WaitingForTyping)
+				{yield return null;}
 		}
 
 		/// <summary>
@@ -2118,40 +2167,40 @@ public class ConversationVM : UWEBase {
 						return;
 				}
 
-			if (WaitingForInput)
-			{
-				if (Input.GetKeyDown (KeyCode.Alpha1))
+				if (WaitingForInput)
 				{
-						CheckAnswer(1);
+						if (Input.GetKeyDown (KeyCode.Alpha1))
+						{
+								CheckAnswer(1);
+						}
+						else if (Input.GetKeyDown (KeyCode.Alpha2))
+						{
+								CheckAnswer(2);
+						}
+						else if (Input.GetKeyDown (KeyCode.Alpha3))
+						{
+								CheckAnswer(3);
+						}
+						else if (Input.GetKeyDown (KeyCode.Alpha4))
+						{
+								CheckAnswer(4);
+						}
+						else if (Input.GetKeyDown (KeyCode.Alpha5))
+						{
+								CheckAnswer(5);
+						}
+						else if (Input.GetKeyDown (KeyCode.Alpha6))
+						{
+								CheckAnswer(6);
+						}
 				}
-				else if (Input.GetKeyDown (KeyCode.Alpha2))
+				else if (WaitingForMore)
 				{
-						CheckAnswer(2);
+						if (Input.GetKeyDown (KeyCode.Space))
+						{
+								WaitingForMore=false;
+						}
 				}
-				else if (Input.GetKeyDown (KeyCode.Alpha3))
-				{
-						CheckAnswer(3);
-				}
-				else if (Input.GetKeyDown (KeyCode.Alpha4))
-				{
-						CheckAnswer(4);
-				}
-				else if (Input.GetKeyDown (KeyCode.Alpha5))
-				{
-						CheckAnswer(5);
-				}
-				else if (Input.GetKeyDown (KeyCode.Alpha6))
-				{
-						CheckAnswer(6);
-				}
-			}
-			else if (WaitingForMore)
-			{
-				if (Input.GetKeyDown (KeyCode.Space))
-				{
-						WaitingForMore=false;
-				}
-			}
 		}
 
 
@@ -2194,16 +2243,16 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to lookup</param>
 		public int get_quest(int QuestNo)
 		{
-			if (_RES==GAME_UW2)
-			{
-				Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.instance.QuestVariables[QuestNo]);
-			}
-			if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
-			{
-				Debug.Log("invalid quest no " + QuestNo);
-				return 0;
-			}
-			return Quest.instance.QuestVariables[QuestNo];
+				if (_RES==GAME_UW2)
+				{
+						Debug.Log("Checking Quest no " + QuestNo + " it's value is " + Quest.instance.QuestVariables[QuestNo]);
+				}
+				if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
+				{
+						Debug.Log("invalid quest no " + QuestNo);
+						return 0;
+				}
+				return Quest.instance.QuestVariables[QuestNo];
 		}
 
 		/// <summary>
@@ -2213,16 +2262,16 @@ public class ConversationVM : UWEBase {
 		/// <param name="QuestNo">Quest no to change</param>
 		public void set_quest(int value, int QuestNo)
 		{
-			if (_RES==GAME_UW2)
-			{
-				Debug.Log("Setting Quest no " + QuestNo + " to " + value);
-			}
-			if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
-			{
-				Debug.Log("Setting invalid quest no " + QuestNo);
-				return;
-			}
-			Quest.instance.QuestVariables[QuestNo]=value;
+				if (_RES==GAME_UW2)
+				{
+						Debug.Log("Setting Quest no " + QuestNo + " to " + value);
+				}
+				if (QuestNo> Quest.instance.QuestVariables.GetUpperBound(0))
+				{
+						Debug.Log("Setting invalid quest no " + QuestNo);
+						return;
+				}
+				Quest.instance.QuestVariables[QuestNo]=value;
 		}
 
 		/// <summary>
@@ -2233,44 +2282,44 @@ public class ConversationVM : UWEBase {
 		/// IN UW2 the return value seems to indicate if the skill gain occurred.
 		public int x_skills(int mode, int skillToChange, int val3, int val4)
 		{
-			Debug.Log("X_skills (" + mode + "," + skillToChange + "," + val3 + "," + val4 +")");
-			if (_RES!=GAME_UW2)
-			{
-				if (mode==10001)
-				{					
-					Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange));
-					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+				Debug.Log("X_skills (" + mode + "," + skillToChange + "," + val3 + "," + val4 +")");
+				if (_RES!=GAME_UW2)
+				{
+						if (mode==10001)
+						{					
+								Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange));
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						}
+						else
+						{
+								Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
+								UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,mode);
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						}		
 				}
 				else
-				{
-					Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
-					UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,mode);
-					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
-				}		
-			}
-			else
-			{//In uw2 skill numbers are zero based?
-				skillToChange++;
-				switch (mode)
-				{
-				case 9999://Return the skill value
-					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
-				case 10001: //Increase the skill if points are available. Returns 1 if sucess 0 if fail
-					if (UWCharacter.Instance.TrainingPoints>0)
-					{
-						UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,1);
-						UWCharacter.Instance.TrainingPoints--;
-						return 1;
-					}
-					else
-					{
-						return 0;
-					}
-				default://Set the skill to the specified value.
-					UWCharacter.Instance.PlayerSkills.SetSkill(skillToChange,mode);
-					return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
-				}
-			}			
+				{//In uw2 skill numbers are zero based?
+						skillToChange++;
+						switch (mode)
+						{
+						case 9999://Return the skill value
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						case 10001: //Increase the skill if points are available. Returns 1 if sucess 0 if fail
+								if (UWCharacter.Instance.TrainingPoints>0)
+								{
+										UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,1);
+										UWCharacter.Instance.TrainingPoints--;
+										return 1;
+								}
+								else
+								{
+										return 0;
+								}
+						default://Set the skill to the specified value.
+								UWCharacter.Instance.PlayerSkills.SetSkill(skillToChange,mode);
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						}
+				}			
 		}
 
 		/// <summary>
@@ -2293,22 +2342,22 @@ public class ConversationVM : UWEBase {
 		/// <param name="startObjectIDs">Start index of object Ids.</param>
 		public int show_inv(int startObjectPos, int startObjectIDs)
 		{
-			int j=0;
-			for (int i=0; i<4;i++)
-			{
-				TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
-				if (pcSlot.isSelected())
+				int j=0;
+				for (int i=0; i<4;i++)
 				{
-					
-					stack.Set(startObjectPos+j, FindObjectIndexInObjectList(pcSlot.objectInSlot));
-					//stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
-					
-					stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
-					j++;
+						TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
+						if (pcSlot.isSelected())
+						{
+
+								stack.Set(startObjectPos+j, FindObjectIndexInObjectList(pcSlot.objectInSlot));
+								//stack.Set(startObjectPos+j, TradeAreaOffset +  i + 1);		//Make them stand out.
+
+								stack.Set(startObjectIDs+j,pcSlot.GetObjectID());
+								j++;
+						}
 				}
-			}
-			//Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
-			return j;
+				//Debug.Log(j + " items saved to pos:" + startObjectPos + " w/id:" + startObjectIDs);
+				return j;
 		}
 
 
@@ -2326,21 +2375,21 @@ public class ConversationVM : UWEBase {
 				GameObject[]  objsGiven= new GameObject[4];
 				for (int i=0; i<NoOfItems; i++)
 				{
-						
+
 						//int slotNo = stack.at(start+i)-1  - TradeAreaOffset ;//locals[start+i] ;
 
 						int slotNo = stack.at(start+i);
 
 						//if (slotNo<=3)
 						//{
-								//TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
-								//GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-								GameObject demanded = FindGameObjectInObjectList(slotNo);
-								//Give the item to the npc
-								if (Container.GetFreeSlot(cn)!=-1)
+						//TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];
+						//GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+						GameObject demanded = FindGameObjectInObjectList(slotNo);
+						//Give the item to the npc
+						if (Container.GetFreeSlot(cn)!=-1)
+						{
+								if (demanded!=null)
 								{
-									if (demanded!=null)
-									{
 										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
 										//GameWorldController.MoveToWorld(demanded);//ok
@@ -2350,31 +2399,31 @@ public class ConversationVM : UWEBase {
 										cn.AddItemToContainer(demanded.name);
 
 										//pcSlot.clear ();
-									}
-									SomethingGiven=true;
 								}
-								else
-								{									
-									if (demanded!=null)
-									{
+								SomethingGiven=true;
+						}
+						else
+						{									
+								if (demanded!=null)
+								{
 										ClearTradeSlotWithObject(slotNo);
 										demanded.transform.parent=GameWorldController.instance.LevelMarker();
 										//GameWorldController.MoveToWorld(demanded);//ok
 										objsGiven[i]=demanded;//These have to be moved to world after this function ends or else the master list will get messed up
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
 										SomethingGiven=false;
-									}
-									//pcSlot.clear();
 								}
+								//pcSlot.clear();
+						}
 						//}
 				}
 
 				for (int i=0;i<=objsGiven.GetUpperBound(0);i++)
 				{
-					if (objsGiven[i]!=null)
-					{
-							GameWorldController.MoveToWorld(objsGiven[i]);
-					}
+						if (objsGiven[i]!=null)
+						{
+								GameWorldController.MoveToWorld(objsGiven[i]);
+						}
 				}
 				if (SomethingGiven==true)
 				{
@@ -2389,22 +2438,22 @@ public class ConversationVM : UWEBase {
 
 
 
-	/// <summary>
-	/// transfers an item from npc inventory to player inventory,based on an item id. 
-	/// </summary>
-	/// when the value is > 1000, all items of		
-	/// a category are copied. category item start = (arg1-1000)*16
-	/// My currenty example is lanugo (10) who is passing a value greater than 1000*/
-	/// Until It get more examples I'm doing the following*/
-	/// Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
-	/// Another example goldthirst who specifically has an item id to pass.
-	/// 
-	/// <returns>1: ok, 2: player has no space left</returns>
-	/// <param name="unk">Unk.</param>
-	/// <param name="arg1">Arg1.</param>
-	public int take_from_npc(NPC npc, int arg1)
-	{
-		/*
+		/// <summary>
+		/// transfers an item from npc inventory to player inventory,based on an item id. 
+		/// </summary>
+		/// when the value is > 1000, all items of		
+		/// a category are copied. category item start = (arg1-1000)*16
+		/// My currenty example is lanugo (10) who is passing a value greater than 1000*/
+		/// Until It get more examples I'm doing the following*/
+		/// Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+		/// Another example goldthirst who specifically has an item id to pass.
+		/// 
+		/// <returns>1: ok, 2: player has no space left</returns>
+		/// <param name="unk">Unk.</param>
+		/// <param name="arg1">Arg1.</param>
+		public int take_from_npc(NPC npc, int arg1)
+		{
+				/*
 		   id=0015 name="take_from_npc" ret_type=int
 		   parameters:   arg1: item id (can also be an item category value, > 1000)
 		   description:  transfers an item from npc inventory to player inventory,
@@ -2412,129 +2461,129 @@ public class ConversationVM : UWEBase {
 		                 a category are copied. category item start = (arg1-1000)*16
 		   return value: 1: ok, 2: player has no space left
 			*/
-		/*My currenty example is lanugo (10) who is passing a value greater than 1000*/
-		/*Until It get more examples I'm doing the following*/
-		/*Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
-		//Debug.Log ("Item Category is " + (arg1-1000)*16);
-		//Another example goldthirst who specifically has an item id to pass.
-		int playerHasSpace=1;
-		Container cn = npc.gameObject.GetComponent<Container>();
-		Container PlayerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
+				/*My currenty example is lanugo (10) who is passing a value greater than 1000*/
+				/*Until It get more examples I'm doing the following*/
+				/*Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+				//Debug.Log ("Item Category is " + (arg1-1000)*16);
+				//Another example goldthirst who specifically has an item id to pass.
+				int playerHasSpace=1;
+				Container cn = npc.gameObject.GetComponent<Container>();
+				Container PlayerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
 
-		if (arg1<1000)
-		{//I'm taking a specific item.
-			for (short i = 0; i<= cn.MaxCapacity ();i++)
-			{
-				if (cn.GetItemAt (i)!="")
-				{	
-					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-					//lastObjectTraded=objInt;
-					if (objInt!=null)
-					{
-				
-						if ( objInt.item_id==arg1)
+				if (arg1<1000)
+				{//I'm taking a specific item.
+						for (short i = 0; i<= cn.MaxCapacity ();i++)
 						{
-							playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);	
-							return playerHasSpace;
+								if (cn.GetItemAt (i)!="")
+								{	
+										ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+										//lastObjectTraded=objInt;
+										if (objInt!=null)
+										{
+
+												if ( objInt.item_id==arg1)
+												{
+														playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);	
+														return playerHasSpace;
+												}	
+										}
+								}					
+						}
+				}
+				else
+				{
+						int rangeS = (arg1-1000)*16;
+						int rangeE = rangeS+16;
+
+						for (short i = 0; i<= cn.MaxCapacity ();i++)
+						{
+								if (cn.GetItemAt (i)!="")
+								{
+										ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+										//lastObjectTraded=objInt;
+										if (
+												((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+												||
+												((arg1<1000) && (objInt.item_id == arg1 ))
+										)
+										{								
+												playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);
+										}
+								}
 						}	
-					}
-				}					
-			}
+				}
+				return playerHasSpace;
 		}
-		else
+
+		static int TakeItemFromNPCCOntainer (NPC npc, Container PlayerContainer, int index)
 		{
-			int rangeS = (arg1-1000)*16;
-			int rangeE = rangeS+16;
-
-			for (short i = 0; i<= cn.MaxCapacity ();i++)
-			{
-				if (cn.GetItemAt (i)!="")
+				//Give to PC
+				GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt ((short)index);
+				if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
 				{
-					ObjectInteraction objInt =cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-					//lastObjectTraded=objInt;
-					if (
-							((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
-							||
-							((arg1<1000) && (objInt.item_id == arg1 ))
-					)
-					{								
-						playerHasSpace = TakeItemFromNPCCOntainer (npc, PlayerContainer, i);
-					}
-				}
-			}	
-		}
-		return playerHasSpace;
-	}
-
-	static int TakeItemFromNPCCOntainer (NPC npc, Container PlayerContainer, int index)
-	{
-		//Give to PC
-		GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt ((short)index);
-		if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
-		 {
-			demanded.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
-			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
-			PlayerContainer.AddItemToContainer (demanded.name);
-			if (demanded.GetComponent<Container>())
-			{
-				Container cn = demanded.GetComponent<Container>();
-				for ( short i=0; i<=cn.MaxCapacity();i++)	
-				{
-					if (cn.GetItemAt(i)!="")
-					{
-						GameObject containerItem = cn.GetGameObjectAt(i);
-						if (containerItem!=null)
+						demanded.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
+						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+						PlayerContainer.AddItemToContainer (demanded.name);
+						if (demanded.GetComponent<Container>())
 						{
-							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
-							containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
-							GameWorldController.MoveToInventory(containerItem);
-							containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+								Container cn = demanded.GetComponent<Container>();
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+														containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
+														GameWorldController.MoveToInventory(containerItem);
+														containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+												}
+										}
+								}
 						}
-					}
+						demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
+						GameWorldController.MoveToInventory(demanded);
+						UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
+						return 1;
 				}
-			}
-			demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
-			GameWorldController.MoveToInventory(demanded);
-			UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
-			return 1;
-		}
-		else
-		{			
-			npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
-			demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-			GameWorldController.MoveToWorld (demanded);//ok
-			demanded.transform.position = npc.NPC_Launcher.transform.position;
-			if (demanded.GetComponent<Container>())
-			{
-				Container cn = demanded.GetComponent<Container>();
-				for ( short i=0; i<=cn.MaxCapacity();i++)	
-				{
-					if (cn.GetItemAt(i)!="")
-					{
-						GameObject containerItem = cn.GetGameObjectAt(i);
-						if (containerItem!=null)
+				else
+				{			
+						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+						demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+						GameWorldController.MoveToWorld (demanded);//ok
+						demanded.transform.position = npc.NPC_Launcher.transform.position;
+						if (demanded.GetComponent<Container>())
 						{
-							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+								Container cn = demanded.GetComponent<Container>();
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+												}
+										}
+								}
 						}
-					}
+
+
+						return 2;
 				}
-			}
-
-
-			return 2;
 		}
-	}
 
 
-	/// <summary>
-	/// Waits for the player to press any key when printing text
-	/// </summary>
-	IEnumerator WaitForMore()
-	{
-			WaitingForMore=true;
-			while (WaitingForMore)
-			{yield return null;}
-	}
+		/// <summary>
+		/// Waits for the player to press any key when printing text
+		/// </summary>
+		IEnumerator WaitForMore()
+		{
+				WaitingForMore=true;
+				while (WaitingForMore)
+				{yield return null;}
+		}
 
 
 
@@ -2639,25 +2688,25 @@ public class ConversationVM : UWEBase {
 				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 				for (int i =0; i <=3; i++)
 				{
-					TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
-					if (pcSlot.objectInSlot!="")
-					{//Move the object to the players container or to the ground
-						if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-						{
-							//UWCharacter.Instance.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
-							cn.AddItemToContainer(pcSlot.objectInSlot);
-							pcSlot.clear ();
-							UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
+						TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+						if (pcSlot.objectInSlot!="")
+						{//Move the object to the players container or to the ground
+								if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+								{
+										//UWCharacter.Instance.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+										cn.AddItemToContainer(pcSlot.objectInSlot);
+										pcSlot.clear ();
+										UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
+								}
+								else
+								{
+										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										GameWorldController.MoveToWorld(demanded);//ok
+										demanded.transform.position=npc.NPC_Launcher.transform.position;
+										pcSlot.clear();
+								}
 						}
-						else
-						{
-							GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-							demanded.transform.parent=GameWorldController.instance.LevelMarker();
-							GameWorldController.MoveToWorld(demanded);//ok
-							demanded.transform.position=npc.NPC_Launcher.transform.position;
-							pcSlot.clear();
-						}
-					}
 				}
 
 				for (int i=0; i<=3; i++)
@@ -2748,7 +2797,7 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		public IEnumerator do_offer(NPC npc, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
 		{
-			yield return StartCoroutine( do_offer (npc, arg1,arg2,arg3,arg4,arg5,arg6,-1) );
+				yield return StartCoroutine( do_offer (npc, arg1,arg2,arg3,arg4,arg5,arg6,-1) );
 		}
 
 		/// <summary>
@@ -2804,33 +2853,33 @@ public class ConversationVM : UWEBase {
 		/// Use only in bartering as this does not refer to the master object list!
 		private void TakeFromNPC (NPC npc, int SlotNo)
 		{
-			Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
-			TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
-			//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-			if (npcSlot.isSelected ()) {
-				//Move the object to the container or to the ground
-				if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
-				{
-					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
-					cn.AddItemToContainer (npcSlot.objectInSlot);
-					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-					demanded.transform.parent = GameWorldController.instance.InventoryMarker.transform;
-					GameWorldController.MoveToInventory(demanded);
-					demanded.transform.position = Vector3.zero;
-					npcSlot.clear ();
-					UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
-					demanded.GetComponent<ObjectInteraction>().PickedUp=true;
+				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
+				//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				if (npcSlot.isSelected ()) {
+						//Move the object to the container or to the ground
+						if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+						{
+								npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+								cn.AddItemToContainer (npcSlot.objectInSlot);
+								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+								GameWorldController.MoveToInventory(demanded);
+								demanded.transform.position = Vector3.zero;
+								npcSlot.clear ();
+								UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
+								demanded.GetComponent<ObjectInteraction>().PickedUp=true;
+						}
+						else {
+								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								demanded.transform.position = npc.NPC_Launcher.transform.position;
+								npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+								npcSlot.clear ();
+								GameWorldController.MoveToWorld(demanded);//ok
+						}
 				}
-				else {
-					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-					demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-					demanded.transform.position = npc.NPC_Launcher.transform.position;
-					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
-					npcSlot.clear ();
-					GameWorldController.MoveToWorld(demanded);//ok
-				}
-			}
-			return;
+				return;
 		}
 		/// <summary>
 		/// Takes from PCs selected items  ang gives them to the NPC.
@@ -2844,21 +2893,21 @@ public class ConversationVM : UWEBase {
 						//Move the object to the container or to the ground
 						if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
 						{
-							
-							//Move to the inventory room
-							GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-							demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-							GameWorldController.MoveToWorld(demanded);//ok
-							cn.AddItemToContainer (demanded.name);
-							demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
-							pcSlot.clear ();
+
+								//Move to the inventory room
+								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								GameWorldController.MoveToWorld(demanded);//ok
+								cn.AddItemToContainer (demanded.name);
+								demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
+								pcSlot.clear ();
 						}
 						else {
-							GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-							demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-							demanded.transform.position = npc.NPC_Launcher.transform.position;
-							GameWorldController.MoveToWorld(demanded);//ok
-							pcSlot.clear ();
+								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								demanded.transform.position = npc.NPC_Launcher.transform.position;
+								GameWorldController.MoveToWorld(demanded);//ok
+								pcSlot.clear ();
 						}
 				}
 		}
@@ -2868,28 +2917,28 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		void RestorePCsInventory (NPC npc)
 		{
-			Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
-			for (int i = 0; i <= 3; i++) {
-				TradeSlot pcSlot = UWHUD.instance.playerTrade [i];
-				if (pcSlot.objectInSlot != "") {
-					//Move the object to the players container or to the ground
-					if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
-					{
-						//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
-						cn.AddItemToContainer (pcSlot.objectInSlot);
-						pcSlot.clear ();
-						UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
-					}
-					else {
-						GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-						//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
-						pcSlot.clear ();
-						demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-						demanded.transform.position = npc.NPC_Launcher.transform.position;
-						GameWorldController.MoveToWorld(demanded);//ok
-					}
+				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				for (int i = 0; i <= 3; i++) {
+						TradeSlot pcSlot = UWHUD.instance.playerTrade [i];
+						if (pcSlot.objectInSlot != "") {
+								//Move the object to the players container or to the ground
+								if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+								{
+										//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
+										cn.AddItemToContainer (pcSlot.objectInSlot);
+										pcSlot.clear ();
+										UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
+								}
+								else {
+										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+										//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
+										pcSlot.clear ();
+										demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+										demanded.transform.position = npc.NPC_Launcher.transform.position;
+										GameWorldController.MoveToWorld(demanded);//ok
+								}
+						}
 				}
-			}
 		}
 
 
@@ -2920,24 +2969,24 @@ public class ConversationVM : UWEBase {
 						DoorControl DC = dr.GetComponent<DoorControl>();
 						if (DC!=null)
 						{
-							if (Action==0)
-							{
-								DC.UnlockDoor(false);//Possibly Npcs don't actually unlock the door
-								DC.OpenDoor(DoorControl.DefaultDoorTravelTime);
-							}
-							else
-							{
-								DC.CloseDoor(DoorControl.DefaultDoorTravelTime);
-								DC.LockDoor ();
-							}
-							if (DC.objInt ().quality == 0)
-							{
-								return 0;
-							}
-							else
-							{
-								return 1;
-							}
+								if (Action==0)
+								{
+										DC.UnlockDoor(false);//Possibly Npcs don't actually unlock the door
+										DC.OpenDoor(DoorControl.DefaultDoorTravelTime);
+								}
+								else
+								{
+										DC.CloseDoor(DoorControl.DefaultDoorTravelTime);
+										DC.LockDoor ();
+								}
+								if (DC.objInt ().quality == 0)
+								{
+										return 0;
+								}
+								else
+								{
+										return 1;
+								}
 						}
 						else
 						{
@@ -2976,12 +3025,12 @@ public class ConversationVM : UWEBase {
 				//If -1 then it returns the value in the array?
 				/*This may be implemented wrongly*/
 
-			ObjectInteraction obj=null;
+				ObjectInteraction obj=null;
 
-			
-			pos = stack.at(pos);
 
-		/*	if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
+				pos = stack.at(pos);
+
+				/*	if (pos<=7)//Item is in a trade slot  Assuming I'll never have to change an object at the top of the inventory list. Another bad hack.
 			{
 				pos -=TradeAreaOffset;//Take the offset off to get back to a trade slot.
 				pos--;
@@ -3003,22 +3052,22 @@ public class ConversationVM : UWEBase {
 			{//Item is in the object masterlist
 				obj = GameWorldController.instance.CurrentObjectList().objInfo[pos].instance;
 			}	*/	
-				
-			obj=FindObjectInteractionInObjectList(pos);
 
-			if (obj==null)
-			{
-				Debug.Log("Obj not found in x_obj_stuff. Trying the last traded object");
-				//obj=lastObjectTraded;
+				obj=FindObjectInteractionInObjectList(pos);
+
 				if (obj==null)
 				{
-						return;				
-				}				
-			}
+						Debug.Log("Obj not found in x_obj_stuff. Trying the last traded object");
+						//obj=lastObjectTraded;
+						if (obj==null)
+						{
+								return;				
+						}				
+				}
 
-			if (stack.at(link)<=0)
-			{
-					//locals[link]=obj.link-512; 
+				if (stack.at(link)<=0)
+				{
+						//locals[link]=obj.link-512; 
 						if (_RES==GAME_UW2)
 						{//Looks like UW2 does not offset by 512 for testing links
 								stack.Set(link, obj.link);	
@@ -3027,154 +3076,162 @@ public class ConversationVM : UWEBase {
 						{
 								stack.Set(link, obj.link-512);	
 						}
-				
-			}
-			else
-			{
-					//obj.link=locals[link]+512;
-				obj.link = stack.at(link)+512; 
-			}
 
-			if (stack.at(owner)<=0)	
-			{
-				stack.Set(owner, obj.owner);
-			}
-			else
-			{
-				obj.owner=(short)stack.at(owner);
-			}
-
-
-			if (stack.at(quality)<=0)	
-			{
-				//locals[quality]=obj.quality; 
-				stack.Set(quality, obj.quality);
-			}
-			else
-			{
-				obj.quality=(short)stack.at(quality);
-			}
-			if (stack.at(item_id)<=0)
-			{
-					//locals[id]=obj.item_id; 
-				stack.Set(item_id, obj.item_id);
-			}
-			//else
-			//{
-			//	obj.item_id=stack.at(item_id);
-			//}
-
-		}
-
-
-
-
-
-	/// <summary>
-	/// Finds item in PC or NPC inventory
-	/// </summary>
-	/// <returns>position in master object list, or 0 if not found</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="arg1">0: npc inventory; 1: player inventory</param>
-	/// <param name="item_id">Item type ID of the object to find.</param>
-	public int find_inv(NPC npc, int targetInventory, int item_id )
-	{
-		//id=0030 name="find_inv" ret_type=int
-		//	parameters:   arg1: 0: npc inventory; 1: player inventory
-		//	arg2: item id
-		//		description:  searches item in npc or player inventory
-		//		return value: position in master object list, or 0 if not found
-		switch (targetInventory)
-		{
-		case 0://NPC inventory
-			{
-				Container npcCont = npc.gameObject.GetComponent<Container>();
-
-				for ( short i=0; i<npcCont.Capacity; i++)
-				{
-					GameObject obj = npcCont.GetGameObjectAt(i);
-					if (obj!=null)
-					{
-						if (obj.GetComponent<ObjectInteraction>().item_id==item_id)
-						{
-								//return 1;//Found object
-							//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-							return FindObjectIndexInObjectList(obj.name);
-						}
-					}
-				}	
-				break;
-			}
-			
-		case 1://PC Search
-				{
-				int rangeS = (item_id-1000)*16;
-				int rangeE = rangeS+16;
-					//GameObject obj=null;
-								ObjectInteraction obj = null;
-					if (item_id>=1000)
-					{
-						for (int i=rangeS; i<=rangeE;i++)		
-						{
-							//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(i);
-							//obj= GameObject.Find(itemname);	
-							obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(i);
-							if (obj!=null)
-							{
-								break;
-							}
-						}
-					}
-					else
-					{
-						//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(item_id);
-						obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
-						//obj= GameObject.Find(itemname);	
-					}
-
-				Debug.Log("PC version of find_inv."); //will happen in judy's conversation
-
-
-				if (obj!=null)
-				{
-						//return 1;
-						//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-					//return FindObjectIndexInObjectList(obj.name);
-					return 1;
 				}
 				else
 				{
-						return 0;
-				}	
-			}
+						//obj.link=locals[link]+512;
+						if (obj.isQuant())
+						{
+								obj.link = stack.at(link); 
+						}
+						else
+						{
+								obj.link = stack.at(link)+512; 		
+						}
+
+				}
+
+				if (stack.at(owner)<=0)	
+				{
+						stack.Set(owner, obj.owner);
+				}
+				else
+				{
+						obj.owner=(short)stack.at(owner);
+				}
+
+
+				if (stack.at(quality)<=0)	
+				{
+						//locals[quality]=obj.quality; 
+						stack.Set(quality, obj.quality);
+				}
+				else
+				{
+						obj.quality=(short)stack.at(quality);
+				}
+				if (stack.at(item_id)<=0)
+				{
+						//locals[id]=obj.item_id; 
+						stack.Set(item_id, obj.item_id);
+				}
+				//else
+				//{
+				//	obj.item_id=stack.at(item_id);
+				//}
 
 		}
-		return 0;
-	}
-
-
-	/// <summary>
-	/// Identifies the item at the specified trade slot
-	/// </summary>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="unk2">pStrPtr. Location to save the string pointer for this item.</param>
-	/// <param name="unk3">ItemId Sets the item id of the item into the locals array</param>
-	/// <param name="unk4">Unk4.</param>
-	/// <param name="inventorySlotIndex">Trade slot index.</param>
-	public int identify_inv(int pUNK1, int pStrPtr, int pUNK3, int pTradeSlot)
-	{
-			//id=0017 name="identify_inv" ret_type=int
-			//	parameters:   arg1:
-			//arg2:
-			//arg3:
-			//arg4: inventory item position
-			//description:  unknown TODO
-			//return value: unknown
 
 
 
-			int ItemPos = stack.at(pTradeSlot);
-		/*	if (ItemPos>=TradeAreaOffset)
+
+
+		/// <summary>
+		/// Finds item in PC or NPC inventory
+		/// </summary>
+		/// <returns>position in master object list, or 0 if not found</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="arg1">0: npc inventory; 1: player inventory</param>
+		/// <param name="item_id">Item type ID of the object to find.</param>
+		public int find_inv(NPC npc, int targetInventory, int item_id )
+		{
+				//id=0030 name="find_inv" ret_type=int
+				//	parameters:   arg1: 0: npc inventory; 1: player inventory
+				//	arg2: item id
+				//		description:  searches item in npc or player inventory
+				//		return value: position in master object list, or 0 if not found
+				switch (targetInventory)
+				{
+				case 0://NPC inventory
+						{
+								Container npcCont = npc.gameObject.GetComponent<Container>();
+
+								for ( short i=0; i<npcCont.Capacity; i++)
+								{
+										GameObject obj = npcCont.GetGameObjectAt(i);
+										if (obj!=null)
+										{
+												if (obj.GetComponent<ObjectInteraction>().item_id==item_id)
+												{
+														//return 1;//Found object
+														//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+														return FindObjectIndexInObjectList(obj.name);
+												}
+										}
+								}	
+								break;
+						}
+
+				case 1://PC Search
+						{
+								int rangeS = (item_id-1000)*16;
+								int rangeE = rangeS+16;
+								//GameObject obj=null;
+								ObjectInteraction obj = null;
+								if (item_id>=1000)
+								{
+										for (int i=rangeS; i<=rangeE;i++)		
+										{
+												//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(i);
+												//obj= GameObject.Find(itemname);	
+												obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(i);
+												if (obj!=null)
+												{
+														break;
+												}
+										}
+								}
+								else
+								{
+										//string itemname =	UWCharacter.Instance.GetComponent<Container>().findItemOfType(item_id);
+										obj = UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
+										//obj= GameObject.Find(itemname);	
+								}
+
+								Debug.Log("PC version of find_inv."); //will happen in judy's conversation
+
+
+								if (obj!=null)
+								{
+										//return 1;
+										//return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+										//return FindObjectIndexInObjectList(obj.name);
+										return 1;
+								}
+								else
+								{
+										return 0;
+								}	
+						}
+
+				}
+				return 0;
+		}
+
+
+		/// <summary>
+		/// Identifies the item at the specified trade slot
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="unk2">pStrPtr. Location to save the string pointer for this item.</param>
+		/// <param name="unk3">ItemId Sets the item id of the item into the locals array</param>
+		/// <param name="unk4">Unk4.</param>
+		/// <param name="inventorySlotIndex">Trade slot index.</param>
+		public int identify_inv(int pUNK1, int pStrPtr, int pUNK3, int pTradeSlot)
+		{
+				//id=0017 name="identify_inv" ret_type=int
+				//	parameters:   arg1:
+				//arg2:
+				//arg3:
+				//arg4: inventory item position
+				//description:  unknown TODO
+				//return value: unknown
+
+
+
+				int ItemPos = stack.at(pTradeSlot);
+				/*	if (ItemPos>=TradeAreaOffset)
 			{
 					ItemPos = ItemPos - TradeAreaOffset -1;	
 			}
@@ -3182,64 +3239,64 @@ public class ConversationVM : UWEBase {
 			{
 				return 0;
 			}*/
-			
 
-			//tradeSlotIndex--;//adjust to match my 0-based indices
-			//ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
-			ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos);
-		
-			if (objInt != null)
-			{
-					//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
-					//locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
-					//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
-			int unitValue = GameWorldController.instance.commonObject.properties[objInt.item_id].Value;
-			int qty =objInt.GetQty(); 
-			if (pStrPtr>=0)
+
+				//tradeSlotIndex--;//adjust to match my 0-based indices
+				//ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
+				ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos);
+
+				if (objInt != null)
 				{
-					stack.Set(
-							pStrPtr,
-									StringController.instance.AddString(
-														conv[currConv].StringBlock, 
-														StringController.instance.GetSimpleObjectNameUW(objInt) ) );		
+						//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
+						//locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
+						//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
+						int unitValue = GameWorldController.instance.commonObject.properties[objInt.item_id].Value;
+						int qty =objInt.GetQty(); 
+						if (pStrPtr>=0)
+						{
+								stack.Set(
+										pStrPtr,
+										StringController.instance.AddString(
+												conv[currConv].StringBlock, 
+												StringController.instance.GetSimpleObjectNameUW(objInt) ) );		
+						}
+
+						return unitValue*qty;
 				}
-
-				return unitValue*qty;
-			}
-			else
-			{
-					return 0;
-			}
-	}
+				else
+				{
+						return 0;
+				}
+		}
 
 
-	/// <summary>
-	/// checks if the first string contains the second string,
-	/// </summary>
-	/// <returns>returns 1 when the string was found, 0 when not</returns>
-	public int contains(int pString1, int pString2)
-	{//pString2 is the string memory.
-		//id=0007 name="contains" ret_type=int
-		//parameters:   arg1: pointer to first string id
-		//arg2: pointer to second string id
-		//description:  checks if the first string contains the second string,
-		//case-independent.
-		//return value: returns 1 when the string was found, 0 when not
-		string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
-		string String1 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString1));
-		if (String1=="")
-		{
-			return 0;//no cheating...
+		/// <summary>
+		/// checks if the first string contains the second string,
+		/// </summary>
+		/// <returns>returns 1 when the string was found, 0 when not</returns>
+		public int contains(int pString1, int pString2)
+		{//pString2 is the string memory.
+				//id=0007 name="contains" ret_type=int
+				//parameters:   arg1: pointer to first string id
+				//arg2: pointer to second string id
+				//description:  checks if the first string contains the second string,
+				//case-independent.
+				//return value: returns 1 when the string was found, 0 when not
+				string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
+				string String1 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString1));
+				if (String1=="")
+				{
+						return 0;//no cheating...
+				}
+				if (String2.ToUpper().Contains(String1.ToUpper()))
+				{
+						return 1;
+				}
+				else
+				{
+						return 0;
+				}
 		}
-		if (String2.ToUpper().Contains(String1.ToUpper()))
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
 
 
 		/// <summary>
@@ -3252,13 +3309,13 @@ public class ConversationVM : UWEBase {
 		/// Seems to set attitude for all npcs with the whoami of the same value.
 		public void set_race_attitude(NPC npc, int unk1, int attitude, int Race)
 		{
-			//Used in Bandit chief conversation Level3
-			//id=0026 name="set_race_attitude" ret_type=void
-			//parameters:   unknown
-			//description:  sets attitude for a whole race (?)
-			//Seems to set attitude for all npcs with the whoami of the same value.
-			//Debug.Log ("set_race_attitude " + attitude);
-		/*	NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+				//Used in Bandit chief conversation Level3
+				//id=0026 name="set_race_attitude" ret_type=void
+				//parameters:   unknown
+				//description:  sets attitude for a whole race (?)
+				//Seems to set attitude for all npcs with the whoami of the same value.
+				//Debug.Log ("set_race_attitude " + attitude);
+				/*	NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
 			for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
 			{
 				if (foundNPCs[i].npc_whoami== npc.npc_whoami)
@@ -3281,15 +3338,15 @@ public class ConversationVM : UWEBase {
 										//	(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
 										//)
 								{
-									Col.gameObject.GetComponent<NPC>().npc_attitude=(short)attitude;
+										Col.gameObject.GetComponent<NPC>().npc_attitude=(short)attitude;
 
-									if (attitude==0)
-									{		
-										Col.gameObject.GetComponent<NPC>().npc_gtarg=5;
-										Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
-										Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;	
-										Col.gameObject.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;	
-									}
+										if (attitude==0)
+										{		
+												Col.gameObject.GetComponent<NPC>().npc_gtarg=5;
+												Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
+												Col.gameObject.GetComponent<NPC>().gtargName=UWCharacter.Instance.gameObject.name;	
+												Col.gameObject.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;	
+										}
 								}
 						}
 				}
@@ -3298,65 +3355,65 @@ public class ConversationVM : UWEBase {
 		}
 
 
-	/// <summary>
-	/// Sets the attitude of a target NPC
-	/// </summary>
-	/// <param name="Attitude">Attitude.</param>
-	/// <param name="target_whoami">The NPC whoami to find</param>
-	public void set_attitude(int attitude, int target_whoami)
-	{
-
-		NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
-		for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+		/// <summary>
+		/// Sets the attitude of a target NPC
+		/// </summary>
+		/// <param name="Attitude">Attitude.</param>
+		/// <param name="target_whoami">The NPC whoami to find</param>
+		public void set_attitude(int attitude, int target_whoami)
 		{
-			if (foundNPCs[i].npc_whoami == target_whoami)
-			{
-				foundNPCs[i].npc_attitude=(short)attitude;
-			}
+
+				NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+				for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+				{
+						if (foundNPCs[i].npc_whoami == target_whoami)
+						{
+								foundNPCs[i].npc_attitude=(short)attitude;
+						}
+				}
 		}
-	}
 
 
-	/// <summary>
-	/// compares strings for equality, case independent
-	/// </summary>
-	/// <returns>returns 1 when strings are equal, 0 when not</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="StringIndex">String index.</param>
-	/// <param name="StringIn">String in.</param>
-	public int compare(int StringIndex1,  int StringIndex2)
-	{
-		//id=0004 name="compare" ret_type=int
-		//	parameters:   arg1: string id
-		//	arg2: string id
-		//	description:  compares strings for equality, case independent
-		//	return value: returns 1 when strings are equal, 0 when not
-		//Debug.Log("Comparing :" + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() + " to " + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper() );
-		//In this implemention I get the string at stringindex compare with string memory (i'm assuming I'm only comparing with babl_ask)
-		if (StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() == StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper())
+		/// <summary>
+		/// compares strings for equality, case independent
+		/// </summary>
+		/// <returns>returns 1 when strings are equal, 0 when not</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="StringIndex">String index.</param>
+		/// <param name="StringIn">String in.</param>
+		public int compare(int StringIndex1,  int StringIndex2)
 		{
-			return 1;
+				//id=0004 name="compare" ret_type=int
+				//	parameters:   arg1: string id
+				//	arg2: string id
+				//	description:  compares strings for equality, case independent
+				//	return value: returns 1 when strings are equal, 0 when not
+				//Debug.Log("Comparing :" + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() + " to " + StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper() );
+				//In this implemention I get the string at stringindex compare with string memory (i'm assuming I'm only comparing with babl_ask)
+				if (StringController.instance.GetString(conv[currConv].StringBlock,StringIndex1).ToUpper() == StringController.instance.GetString(conv[currConv].StringBlock,StringIndex2).ToUpper())
+				{
+						return 1;
+				}
+				else
+				{
+						return 0;
+				}
 		}
-		else
+
+
+		/// <summary>
+		/// counts number of items in inventory position.
+		/// </summary>
+		/// <returns>item number</returns>
+		/// <param name="ItemPos">Item position.</param>
+		public int count_inv(int ItemPos)
 		{
-			return 0;
-		}
-	}
-
-
-	/// <summary>
-	/// counts number of items in inventory position.
-	/// </summary>
-	/// <returns>item number</returns>
-	/// <param name="ItemPos">Item position.</param>
-	public int count_inv(int ItemPos)
-	{
-		//id=001e name="count_inv" ret_type=int
-		//parameters:   unknown
-		//description:  counts number of items in inventory
-		//return value: item number
-		//int total =0;
-			/*	if (ItemPos>=TradeAreaOffset)
+				//id=001e name="count_inv" ret_type=int
+				//parameters:   unknown
+				//description:  counts number of items in inventory
+				//return value: item number
+				//int total =0;
+				/*	if (ItemPos>=TradeAreaOffset)
 				{
 					ItemPos = ItemPos - TradeAreaOffset -1;	
 				}
@@ -3364,262 +3421,262 @@ public class ConversationVM : UWEBase {
 				if (ItemPos<0){return 0;}*/
 
 
-		//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
-		//GameObject objInslot = FindGameObjectInObjectList(ItemPos);
-		//if (objInslot!=null)
-		//{
-			ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos); // objInslot.GetComponent<ObjectInteraction>();
-			if (objInt!=null)
-			{
-				return objInt.GetQty();
-			}
-		//}
-		return 0;//if not found.
-	}
+				//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
+				//GameObject objInslot = FindGameObjectInObjectList(ItemPos);
+				//if (objInslot!=null)
+				//{
+				ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos); // objInslot.GetComponent<ObjectInteraction>();
+				if (objInt!=null)
+				{
+						return objInt.GetQty();
+				}
+				//}
+				return 0;//if not found.
+		}
 
 
 
-	/// <summary>
-	///  removes npc the player is talking to (?)
-	/// </summary>
-	public void remove_talker(NPC npc)
-	{
-			//   id=002a name="remove_talker" ret_type=void
-			//parameters:   none
-			//		description:  removes npc the player is talking to (?)
-		npc.gameObject.transform.position = UWCharacter.Instance.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
-	}
+		/// <summary>
+		///  removes npc the player is talking to (?)
+		/// </summary>
+		public void remove_talker(NPC npc)
+		{
+				//   id=002a name="remove_talker" ret_type=void
+				//parameters:   none
+				//		description:  removes npc the player is talking to (?)
+				npc.gameObject.transform.position = UWCharacter.Instance.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+		}
 
 
-	/// <summary>
-	/// Copies item from player inventory to npc inventory
-	/// </summary>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="Quantity">Quantity.</param>
-	/// <param name="slotNo">Slot no.</param>
-	public void give_ptr_npc(NPC npc, int Quantity, int ptrSlotNo)
-	{
-		/*
+		/// <summary>
+		/// Copies item from player inventory to npc inventory
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="Quantity">Quantity.</param>
+		/// <param name="slotNo">Slot no.</param>
+		public void give_ptr_npc(NPC npc, int Quantity, int ptrSlotNo)
+		{
+				/*
 id=0014 name="give_ptr_npc" ret_type=int
 parameters:   arg1: quantity (?), or -1 for ignore
 arg2: inventory object list pos
 description:  copies item from player inventory to npc inventory
 return value: none
 */
-		
 
-		/*slotNo--;
-		//Debug.Log ("give_ptr_npc");
-		if  ( (slotNo<0) || (slotNo >3))
-		{
-			return;
-		}*/
 
-		int slotNo = stack.at(ptrSlotNo);
-		Container cn =npc.gameObject.GetComponent<Container>();
-		GameObject objGiven= FindGameObjectInObjectList(slotNo);
-			
-		//if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
-		if (objGiven!=null)
-		{
-			//GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
-			if ((Quantity==-1))
-			{
-				ClearTradeSlotWithObject(slotNo);
-				objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;
-				//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
-				cn.AddItemToContainer(objGiven.name);
-				GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-				//UWHUD.instance.playerTrade[slotNo].clear ();
-				
-				UWCharacter.Instance.playerInventory.Refresh();
-			}
-			else
-			{//Clone the object and give the clone to the npc
-				//
+				/*slotNo--;
+				//Debug.Log ("give_ptr_npc");
+				if  ( (slotNo<0) || (slotNo >3))
+				{
+						return;
+				}*/
+
+				int slotNo = stack.at(ptrSlotNo);
+				Container cn =npc.gameObject.GetComponent<Container>();
+				GameObject objGiven= FindGameObjectInObjectList(slotNo);
+
+				//if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
 				if (objGiven!=null)
 				{
-					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant()==true)
-							&& 
-							(objGiven.GetComponent<ObjectInteraction>().link>1)
-							&&
-							(objGiven.GetComponent<ObjectInteraction>().isEnchanted()==false)
-							&&
-							(objGiven.GetComponent<ObjectInteraction>().link!=Quantity)
-					)
-					{//Object is a quantity or is a quantity less than the number already there.
-						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
-						Split.GetComponent<ObjectInteraction>().link =Quantity;
-						
-						objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
-						
-						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+						//GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
+						if ((Quantity==-1))
+						{
+								ClearTradeSlotWithObject(slotNo);
+								objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;
+								//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+								cn.AddItemToContainer(objGiven.name);
+								GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+								//UWHUD.instance.playerTrade[slotNo].clear ();
+
+								UWCharacter.Instance.playerInventory.Refresh();
+						}
+						else
+						{//Clone the object and give the clone to the npc
+								//
+								if (objGiven!=null)
+								{
+										if  ((objGiven.GetComponent<ObjectInteraction>().isQuant()==true)
+												&& 
+												(objGiven.GetComponent<ObjectInteraction>().link>1)
+												&&
+												(objGiven.GetComponent<ObjectInteraction>().isEnchanted()==false)
+												&&
+												(objGiven.GetComponent<ObjectInteraction>().link!=Quantity)
+										)
+										{//Object is a quantity or is a quantity less than the number already there.
+												GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
+												Split.GetComponent<ObjectInteraction>().link =Quantity;
+
+												objGiven.GetComponent<ObjectInteraction>().link=objGiven.GetComponent<ObjectInteraction>().link-Quantity;
+
+												GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 												//Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
-						Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().objectloaderinfo);//(objGiven.GetComponent<ObjectInteraction>()
-						cn.AddItemToContainer(objGiven.name);
-					}
-					else
-					{//Object is not a quantity or is the full amount.
-						ClearTradeSlotWithObject(slotNo);
-						//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
-						cn.AddItemToContainer(objGiven.name);
-						objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
-						GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-						UWCharacter.Instance.playerInventory.Refresh();
-						//UWHUD.instance.playerTrade[slotNo].clear ();
-					}
+												Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().objectloaderinfo);//(objGiven.GetComponent<ObjectInteraction>()
+												cn.AddItemToContainer(objGiven.name);
+										}
+										else
+										{//Object is not a quantity or is the full amount.
+												ClearTradeSlotWithObject(slotNo);
+												//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+												cn.AddItemToContainer(objGiven.name);
+												objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
+												GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+												UWCharacter.Instance.playerInventory.Refresh();
+												//UWHUD.instance.playerTrade[slotNo].clear ();
+										}
+								}
+						}
 				}
-			}
+				//After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
+				stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
+
 		}
-		//After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
-		stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
-
-	}
 
 
-	/// <summary>
-	/// transfers item to player, per id (?)
-	/// </summary>
-	/// <returns>1: ok, 2: player has no space left</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="ItemPos">Item position.</param>
-	public int take_id_from_npc(NPC npc, int index)
-	{
-		//id=0016 name="take_id_from_npc" ret_type=int
-		//parameters:   arg1: inventory object list pos (from take_from_npc_inv)
-		//description:  transfers item to player, per id (?)
-		//return value: 1: ok, 2: player has no space left
-		string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
-		int playerHasSpace=1;
-		Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
-		//Container npcContainer = npc.GetComponent<Container>();
+		/// <summary>
+		/// transfers item to player, per id (?)
+		/// </summary>
+		/// <returns>1: ok, 2: player has no space left</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="ItemPos">Item position.</param>
+		public int take_id_from_npc(NPC npc, int index)
+		{
+				//id=0016 name="take_id_from_npc" ret_type=int
+				//parameters:   arg1: inventory object list pos (from take_from_npc_inv)
+				//description:  transfers item to player, per id (?)
+				//return value: 1: ok, 2: player has no space left
+				string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
+				int playerHasSpace=1;
+				Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
+				//Container npcContainer = npc.GetComponent<Container>();
 
-		GameObject obj = GameObject.Find(ItemName);
-		if (obj==null){return 1;}
+				GameObject obj = GameObject.Find(ItemName);
+				if (obj==null){return 1;}
 
 				//Give to PC
-		if (Container.GetFreeSlot(playerContainer)!=-1)//Is there space in the container.
-		{						
-			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
-			playerContainer.AddItemToContainer(obj.name);
-			GameWorldController.MoveToInventory(obj);
-			obj.transform.parent=GameWorldController.instance.InventoryMarker.transform;
-			//If the NPC is handing over an container item.
-			if (obj.GetComponent<Container>())
-			{
-				Container cn = obj.GetComponent<Container>();
-				for ( short i=0; i<=cn.MaxCapacity();i++)	
+				if (Container.GetFreeSlot(playerContainer)!=-1)//Is there space in the container.
+				{						
+						npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
+						playerContainer.AddItemToContainer(obj.name);
+						GameWorldController.MoveToInventory(obj);
+						obj.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+						//If the NPC is handing over an container item.
+						if (obj.GetComponent<Container>())
+						{
+								Container cn = obj.GetComponent<Container>();
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+														containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
+														GameWorldController.MoveToInventory(containerItem);
+														containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+												}
+										}
+								}
+						}
+						obj.GetComponent<ObjectInteraction>().PickedUp=true;
+						UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
+						playerHasSpace=1;
+				}
+				else
 				{
-					if (cn.GetItemAt(i)!="")
-					{
-						GameObject containerItem = cn.GetGameObjectAt(i);
-						if (containerItem!=null)
+						playerHasSpace=2;
+						obj.transform.parent=GameWorldController.instance.LevelMarker();
+
+						obj.transform.position=npc.NPC_Launcher.transform.position;
+						npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
+						//GameWorldController.MoveToWorld(obj); object is already in the world.
+						if (obj.GetComponent<Container>()!=null)
 						{
-							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
-							containerItem.transform.parent= UWCharacter.Instance.playerInventory.InventoryMarker.transform;
-							GameWorldController.MoveToInventory(containerItem);
-							containerItem.GetComponent<ObjectInteraction> ().PickedUp = true;
+								Container cn = obj.GetComponent<Container>();
+								for ( short i=0; i<=cn.MaxCapacity();i++)	
+								{
+										if (cn.GetItemAt(i)!="")
+										{
+												GameObject containerItem = cn.GetGameObjectAt(i);
+												if (containerItem!=null)
+												{
+														npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
+												}
+										}
+								}
 						}
-					}
+
 				}
-			}
-			obj.GetComponent<ObjectInteraction>().PickedUp=true;
-			UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
-			playerHasSpace=1;
+				return playerHasSpace;
 		}
-		else
+
+
+		/// <summary>
+		/// Gets the index of the item in the specified slot of the NPC inventory (I think)
+		/// </summary>
+		/// <returns>The object list index of the item</returns>
+		/// <param name="arg1">Arg1.</param>
+		public int take_from_npc_inv(NPC npc, int pos)
 		{
-			playerHasSpace=2;
-			obj.transform.parent=GameWorldController.instance.LevelMarker();
-			
-			obj.transform.position=npc.NPC_Launcher.transform.position;
-			npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
-			//GameWorldController.MoveToWorld(obj); object is already in the world.
-			if (obj.GetComponent<Container>()!=null)
-			{
-				Container cn = obj.GetComponent<Container>();
-				for ( short i=0; i<=cn.MaxCapacity();i++)	
+				pos--;
+				GameObject obj=npc.GetComponent<Container>().GetGameObjectAt((short)pos);
+				if (obj!=null)
 				{
-					if (cn.GetItemAt(i)!="")
-					{
-						GameObject containerItem = cn.GetGameObjectAt(i);
-						if (containerItem!=null)
-						{
-							npc.GetComponent<Container> ().RemoveItemFromContainer (containerItem.name);
-						}
-					}
+						return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
 				}
-			}
-
+				return 0;
 		}
-		return playerHasSpace;
-	}
 
 
-	/// <summary>
-	/// Gets the index of the item in the specified slot of the NPC inventory (I think)
-	/// </summary>
-	/// <returns>The object list index of the item</returns>
-	/// <param name="arg1">Arg1.</param>
-	public int take_from_npc_inv(NPC npc, int pos)
-	{
-		pos--;
-		GameObject obj=npc.GetComponent<Container>().GetGameObjectAt((short)pos);
-		if (obj!=null)
-		{
-			return obj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-		}
-		return 0;
-	}
-
-
-	/// <summary>
-	/// searches for item in barter area
-	/// </summary>
-	/// <returns>This returns slot number + 1. Take this into account when retrieving the items in later functions</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="itemID">item id to find</param>
-	public int find_barter(int itemID)
-	{//This returns slot number + 1. Take this into account when retrieving the items in later functions
-		//id=0031 name="find_barter" ret_type=int
-		//	parameters:   arg1: item id to find
-		//	description:  searches for item in barter area
-		//	return value: returns pos in inventory object list, or 0 if not found
-		// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
-		for (int i = 0; i<4; i++)
-		{
-			if (UWHUD.instance.playerTrade[i].isSelected())
-			{
-				ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
-				if (objInt!=null)
-				{					
-					if (itemID<1000)
-					{
-						if (objInt.item_id== itemID)
+		/// <summary>
+		/// searches for item in barter area
+		/// </summary>
+		/// <returns>This returns slot number + 1. Take this into account when retrieving the items in later functions</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="itemID">item id to find</param>
+		public int find_barter(int itemID)
+		{//This returns slot number + 1. Take this into account when retrieving the items in later functions
+				//id=0031 name="find_barter" ret_type=int
+				//	parameters:   arg1: item id to find
+				//	description:  searches for item in barter area
+				//	return value: returns pos in inventory object list, or 0 if not found
+				// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
+				for (int i = 0; i<4; i++)
+				{
+						if (UWHUD.instance.playerTrade[i].isSelected())
 						{
-							//return i+1;
+								ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
+								if (objInt!=null)
+								{					
+										if (itemID<1000)
+										{
+												if (objInt.item_id== itemID)
+												{
+														//return i+1;
 
-						return FindObjectIndexInObjectList(objInt.name);
+														return FindObjectIndexInObjectList(objInt.name);
 
+												}
+										}
+										else
+										{
+												if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
+												{
+														//return i+1;
+
+														return FindObjectIndexInObjectList(objInt.name);
+
+												}
+										}
+								}
 						}
-					}
-					else
-					{
-						if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
-						{
-							//return i+1;
 
-						return FindObjectIndexInObjectList(objInt.name);
-
-						}
-					}
 				}
-			}
 
+				return 0;
 		}
-
-		return 0;
-	}
 
 
 		/// <summary>
@@ -3628,11 +3685,11 @@ return value: none
 		/// <param name="str">String.</param>
 		public int length(int str)
 		{
-			//id=000b name="length" ret_type=int
-			//	parameters:   arg1: string id
-			//	description:  calculates length of string
-			//	return value: length of string
-			return StringController.instance.GetString(conv[currConv].StringBlock, str).Length;
+				//id=000b name="length" ret_type=int
+				//	parameters:   arg1: string id
+				//	description:  calculates length of string
+				//	return value: length of string
+				return StringController.instance.GetString(conv[currConv].StringBlock, str).Length;
 		}
 
 
@@ -3644,14 +3701,14 @@ return value: none
 		/// <param name="ParamMale">male string</param>
 		public int sex(int ParamFemale, int ParamMale)
 		{
-			if (UWCharacter.Instance.isFemale==true)
-			{
-				return ParamFemale;
-			}
-			else
-			{
-				return ParamMale;
-			}
+				if (UWCharacter.Instance.isFemale==true)
+				{
+						return ParamFemale;
+				}
+				else
+				{
+						return ParamMale;
+				}
 		}
 
 
@@ -3685,60 +3742,60 @@ return value: none
 */
 
 
-				
-			ObjectInteraction objInt=null;
-			int slotFoundCounter=0;
-			stack.Set(ptrNoOfSlots,0);
-			stack.Set(ptrCount, 0);
 
-			for (int i = 0; i<4; i++)
-			{
-				if (UWHUD.instance.playerTrade[i].isSelected())
+				ObjectInteraction objInt=null;
+				int slotFoundCounter=0;
+				stack.Set(ptrNoOfSlots,0);
+				stack.Set(ptrCount, 0);
+
+				for (int i = 0; i<4; i++)
 				{
-					objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
-
-					if (objInt!=null)
-					{
-						int founditem_id=objInt.item_id;
-						int itemqt = objInt.GetQty();
-
-						if (item_id==founditem_id)
+						if (UWHUD.instance.playerTrade[i].isSelected())
 						{
-						stack.Set(ptrCount, stack.at(ptrCount) + itemqt);
-						//stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
-						stack.Set(ptrSlot+slotFoundCounter++,FindObjectIndexInObjectList(objInt.name));
-						stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
+								objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 
+								if (objInt!=null)
+								{
+										int founditem_id=objInt.item_id;
+										int itemqt = objInt.GetQty();
+
+										if (item_id==founditem_id)
+										{
+												stack.Set(ptrCount, stack.at(ptrCount) + itemqt);
+												//stack.Set(ptrSlot+slotFoundCounter++,(TradeAreaOffset+i+1));
+												stack.Set(ptrSlot+slotFoundCounter++,FindObjectIndexInObjectList(objInt.name));
+												stack.Set(ptrNoOfSlots, stack.at(ptrNoOfSlots) + 1);
+
+										}
+								}
 						}
-					}
 				}
-			}
-			return stack.StackValues[ptrCount];
-				
+				return stack.StackValues[ptrCount];
+
 		}
 
 
 
-	/// <summary>
-	/// creates item in npc inventory
-	/// </summary>
-	/// <returns>inventory object list position</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="item_id">Item identifier.</param>
-	public int do_inv_create(NPC npc, int item_id)
-	{
-		//id=001a name="do_inv_create" ret_type=int
-		//parameters:   arg1: item id
-		//description:  creates item in npc inventory
-		//return value: inventory object list position
+		/// <summary>
+		/// creates item in npc inventory
+		/// </summary>
+		/// <returns>inventory object list position</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="item_id">Item identifier.</param>
+		public int do_inv_create(NPC npc, int item_id)
+		{
+				//id=001a name="do_inv_create" ret_type=int
+				//parameters:   arg1: item id
+				//description:  creates item in npc inventory
+				//return value: inventory object list position
 
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1,256);
-		newobjt.is_quant=1;
-		GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-		GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
-		npc.GetComponent<Container>().AddItemToContainer(myObj.name);
-		return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-	}
+				ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1,256);
+				newobjt.is_quant=1;
+				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+				npc.GetComponent<Container>().AddItemToContainer(myObj.name);
+				return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+		}
 
 
 
@@ -3751,7 +3808,7 @@ return value: none
 		/// <param name="invSlot">inventory item slot number (from do_inv_create)</param>
 		public void place_object(int tileY, int tileX, int index )
 		{
-			/*
+				/*
 id=0027 name="place_object" ret_type=void
 parameters:   arg1: x tile pos
          arg2: y tile pos
@@ -3760,81 +3817,81 @@ description:  places a generated object in underworld
          used in Judy's conversation, #23
 
 			*/
-			ObjectInteraction objInt=GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
-			if (objInt!=null)
-			{
-				//string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
-				GameObject obj = objInt.gameObject;
-
-				obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
-				//obj.transform.parent=GameWorldController.instance.LevelMarker();
-				//GameWorldController.MoveToWorld(obj);
-				//npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
-				//UWHUD.instance.npcTrade[invSlot].clear();
-			}
-			return;
-		}
-
-	/// <summary>
-	// description:  Deletes item from npc inventory
-	/// </summary>
-	/// <param name="item_id">Item identifier.</param>
-	public void do_inv_delete(NPC npc, int item_id)
-	{
-		//id=001b name="do_inv_delete" ret_type=int
-		//	parameters:   arg1: item id
-		//		description:  deletes item from npc inventory
-		//		return value: none
-
-		//Debug.Log ("do_inv_delete(" + item_id + ")");
-
-		Container npcContainer = npc.GetComponent<Container>();
-		if (npcContainer!=null)
-		{
-			string Item=npcContainer.findItemOfType(item_id);
-			if (Item!="")
-			{
-				npcContainer.RemoveItemFromContainer(Item);
-				GameObject itemObj = GameObject.Find(Item);
-				if (itemObj!=null)
+				ObjectInteraction objInt=GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+				if (objInt!=null)
 				{
-					itemObj.GetComponent<ObjectInteraction>().consumeObject();		
+						//string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
+						GameObject obj = objInt.gameObject;
+
+						obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+						//obj.transform.parent=GameWorldController.instance.LevelMarker();
+						//GameWorldController.MoveToWorld(obj);
+						//npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
+						//UWHUD.instance.npcTrade[invSlot].clear();
 				}
-			}
+				return;
 		}
-	}
 
+		/// <summary>
+		// description:  Deletes item from npc inventory
+		/// </summary>
+		/// <param name="item_id">Item identifier.</param>
+		public void do_inv_delete(NPC npc, int item_id)
+		{
+				//id=001b name="do_inv_delete" ret_type=int
+				//	parameters:   arg1: item id
+				//		description:  deletes item from npc inventory
+				//		return value: none
 
-	/// <summary>
-	/// UWformats has no info on this. Based on usage in conversation 220 and on level 7 of prison tower I think it means it looks at the same variables as the check variable traps
-	/// </summary>
-	/// <returns>The traps.</returns>
-	/// <param name="unk1">Unk1.</param>
-	/// <param name="VariableIndex">Variable index.</param>
+				//Debug.Log ("do_inv_delete(" + item_id + ")");
 
-	public int x_traps( int VariableValue, int VariableIndex)
-	{
-		Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
-		if (VariableValue<= Quest.instance.variables.GetUpperBound(0))
-		{					
-			Quest.instance.variables[VariableIndex]=VariableValue;
+				Container npcContainer = npc.GetComponent<Container>();
+				if (npcContainer!=null)
+				{
+						string Item=npcContainer.findItemOfType(item_id);
+						if (Item!="")
+						{
+								npcContainer.RemoveItemFromContainer(Item);
+								GameObject itemObj = GameObject.Find(Item);
+								if (itemObj!=null)
+								{
+										itemObj.GetComponent<ObjectInteraction>().consumeObject();		
+								}
+						}
+				}
 		}
-		return Quest.instance.variables[VariableIndex];		
-	}
+
+
+		/// <summary>
+		/// UWformats has no info on this. Based on usage in conversation 220 and on level 7 of prison tower I think it means it looks at the same variables as the check variable traps
+		/// </summary>
+		/// <returns>The traps.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="VariableIndex">Variable index.</param>
+
+		public int x_traps( int VariableValue, int VariableIndex)
+		{
+				Debug.Log("x_traps :" + VariableValue + " " + VariableIndex);
+				if (VariableValue<= Quest.instance.variables.GetUpperBound(0))
+				{					
+						Quest.instance.variables[VariableIndex]=VariableValue;
+				}
+				return Quest.instance.variables[VariableIndex];		
+		}
 
 
 
-	/// <summary>
-	/// Switchs the portrait used in the conversation.
-	/// </summary>
-	/// <param name="PortraitNo">Portrait no.</param>
-	void switch_pic(int PortraitNo)
-	{
-		GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
-		RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
-		npcPortrait.texture= grCharHead.LoadImageAt(PortraitNo-1);
-		UWHUD.instance.NPCName.text= StringController.instance.GetString (7,PortraitNo+16);
-	}
+		/// <summary>
+		/// Switchs the portrait used in the conversation.
+		/// </summary>
+		/// <param name="PortraitNo">Portrait no.</param>
+		void switch_pic(int PortraitNo)
+		{
+				GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+				RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
+				npcPortrait.texture= grCharHead.LoadImageAt(PortraitNo-1);
+				UWHUD.instance.NPCName.text= StringController.instance.GetString (7,PortraitNo+16);
+		}
 
 		/// <summary>
 		/// x_clock.
@@ -3849,17 +3906,17 @@ description:  places a generated object in underworld
 		/// I think...
 		void x_clock(int unk1, int unk2)
 		{
-			//Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
-			if (unk1==10001)
-			{
-				Debug.Log("x_clock returning: " + Quest.instance.x_clocks[unk2] + " from " + unk2);
-				stack.result_register= Quest.instance.x_clocks[unk2];
-			}
-			else
-			{//Should this be an increment???
-				Debug.Log("x_clock setting: " + (unk2) + " to " + unk1);
-				Quest.instance.x_clocks[unk2]=unk1;	
-			}
+				//Debug.Log("x_clock " + unk1 + " " + unk2 + " at instruction " + stack.instrp);
+				if (unk1==10001)
+				{
+						Debug.Log("x_clock returning: " + Quest.instance.x_clocks[unk2] + " from " + unk2);
+						stack.result_register= Quest.instance.x_clocks[unk2];
+				}
+				else
+				{//Should this be an increment???
+						Debug.Log("x_clock setting: " + (unk2) + " to " + unk1);
+						Quest.instance.x_clocks[unk2]=unk1;	
+				}
 		}
 
 		/// <summary>
@@ -3871,19 +3928,19 @@ description:  places a generated object in underworld
 				UWCharacter.Instance.AddXP(xpToAdd);
 		}
 
-	void PrintImportedVariable(int index, int newValue)
-	{
-		//Find the variable name
-		for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+		void PrintImportedVariable(int index, int newValue)
 		{
-			if ((conv[currConv].functions[i].ID_or_Address==index) && (conv[currConv].functions[i].import_type==import_variable))
-			{
-				Debug.Log("Setting " + conv[currConv].functions[i].functionName + " to " + newValue + " was " + stack.at(index));
-				return;
-			}
+				//Find the variable name
+				for (int i=0; i<=conv[currConv].functions.GetUpperBound(0);i++)
+				{
+						if ((conv[currConv].functions[i].ID_or_Address==index) && (conv[currConv].functions[i].import_type==import_variable))
+						{
+								Debug.Log("Setting " + conv[currConv].functions[i].functionName + " to " + newValue + " was " + stack.at(index));
+								return;
+						}
+				}
+				//Debug.Log("Setting variable " + index + " to " + newValue + " was " + stack.at(index));
 		}
-		//Debug.Log("Setting variable " + index + " to " + newValue + " was " + stack.at(index));
-	}
 
 
 		/// <summary>
@@ -3894,22 +3951,22 @@ description:  places a generated object in underworld
 		/// <param name="itemPos">Item position.</param>
 		public int check_inv_quality(int itemPos)
 		{
-			//id=001c name="check_inv_quality" ret_type=int
-			//parameters:   arg1: inventory item position
-			//description:  returns "quality" field of npc? inventory item
-			//return value: "quality" field
-			//itemPos -=TradeAreaOffset;
-			//itemPos--;
-			//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
-			ObjectInteraction objInslot = FindObjectInteractionInObjectList(itemPos);
-			if (objInslot!=null)
-			{
-					return objInslot.quality;
-			}
-			else
-			{
-					return 0;
-			}
+				//id=001c name="check_inv_quality" ret_type=int
+				//parameters:   arg1: inventory item position
+				//description:  returns "quality" field of npc? inventory item
+				//return value: "quality" field
+				//itemPos -=TradeAreaOffset;
+				//itemPos--;
+				//GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
+				ObjectInteraction objInslot = FindObjectInteractionInObjectList(itemPos);
+				if (objInslot!=null)
+				{
+						return objInslot.quality;
+				}
+				else
+				{
+						return 0;
+				}
 		}
 
 
@@ -3918,12 +3975,54 @@ description:  places a generated object in underworld
 				Debug.Log("x_obj_pos (" + arg1 + "," + arg2 + ","  + arg3 + "," + arg4 + "," + arg5);
 		}
 
-
+		/// <summary>
+		/// Teleports the talker.
+		/// </summary>
+		/// <param name="npc">Npc.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="tileX">Tile x.</param>
 		void teleport_talker(NPC npc, int tileY, int tileX)
 		{
-			Debug.Log("moving " + npc.name + " to " + tileX + " " + tileY );
-			npc.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+				Debug.Log("moving " + npc.name + " to " + tileX + " " + tileY );
+				npc.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
 		}
+
+		/// <summary>
+		/// Babls the hack.
+		/// </summary>
+		/// <param name="arg">Argument.</param>
+		/// Jospur arena debt
+		void babl_hackJospurDebt(int arg)
+		{					
+				//Arena debt
+			stack.result_register=Quest.instance.QuestVariables[133];	
+		}
+
+		/// <summary>
+		/// Babls the hack.
+		/// </summary>
+		/// <param name="arg">Argument.</param>
+		/// <param name="NoOfFighters">No of fighters.</param>
+		/// <param name="arena">Arena.</param>
+		/// <param name="unk">Unk.</param>
+		void babl_hackSetUpFight(int arg, int NoOfFighters, int arena, int unk)
+		{
+				Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena)	;
+				Quest.instance.QuestVariables[133]= NoOfFighters*5;
+				Quest.instance.FightingInArena=true;
+		}
+
+		/// <summary>
+		/// Teleports the player.
+		/// </summary>
+		/// <param name="level">Level.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		void teleport_player(int level, int tileX, int tileY)
+		{
+				Debug.Log("teleporting to " + level + " " + tileX + " " + tileY)	;
+		}
+
 
 		/// <summary>
 		/// Sets the inv quality of the item at the specified item list position
@@ -3932,78 +4031,78 @@ description:  places a generated object in underworld
 		/// <param name="itemIndex">Item position in object list</param>
 		public void set_inv_quality(int NewQuality, int itemIndex)
 		{
-			//id=001d name="set_inv_quality" ret_type=int
-			//parameters:   arg1: quality value
-			//arg2: inventory object list position
-			//description:  sets quality for an item in inventory
-			//return value: none
-			//GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
+				//id=001d name="set_inv_quality" ret_type=int
+				//parameters:   arg1: quality value
+				//arg2: inventory object list position
+				//description:  sets quality for an item in inventory
+				//return value: none
+				//GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
 
-			if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
-			{
-				GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
-			}
+				if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
+				{
+						GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
+				}
 		}
 
 
 
 		public static void BuildObjectList()
 		{
-			ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 				int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
 				ObjectMasterList=new string[1024+noOfInventoryItems+1];
 				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
 				for (int i=0; i<1024; i++)
 				{
-					if (objList[i].instance!=null)
-					{
-						ObjectMasterList[i]=objList[i].instance.name;	
-					}
-					else
-					{
-						ObjectMasterList[i]="";
-					}
+						if (objList[i].instance!=null)
+						{
+								ObjectMasterList[i]=objList[i].instance.name;	
+						}
+						else
+						{
+								ObjectMasterList[i]="";
+						}
 				}
 				for (int i=1024; i<1024+noOfInventoryItems;i++)
 				{
-					ObjectMasterList[i]= GameWorldController.instance.InventoryMarker.transform.GetChild(i-1024).gameObject.name;
+						ObjectMasterList[i]= GameWorldController.instance.InventoryMarker.transform.GetChild(i-1024).gameObject.name;
 				}
 		}
 
 		static int FindObjectIndexInObjectList(string objectName)
 		{
-			for (int i=0; i<=ObjectMasterList.GetUpperBound(0);i++)
-			{
-				if (ObjectMasterList[i]==objectName)
+				for (int i=0; i<=ObjectMasterList.GetUpperBound(0);i++)
 				{
-					return i;
+						if (ObjectMasterList[i]==objectName)
+						{
+								return i;
+						}
 				}
-			}
-			return 0;
+				return 0;
 		}
 
 		static ObjectInteraction FindObjectInteractionInObjectList(int index)
 		{
-			GameObject obj = FindGameObjectInObjectList(index);
-			if (obj!=null)
-			{
-				if (obj.GetComponent<ObjectInteraction>()!=null)
+				GameObject obj = FindGameObjectInObjectList(index);
+				if (obj!=null)
 				{
-					return obj.GetComponent<ObjectInteraction>();
-				}
-			}			
-			return null;
+						if (obj.GetComponent<ObjectInteraction>()!=null)
+						{
+								return obj.GetComponent<ObjectInteraction>();
+						}
+				}			
+				return null;
 		}
 
 		static GameObject FindGameObjectInObjectList(int index)
 		{
-			string objName = ObjectMasterList[index];
-			if (objName!="")
-			{
-				GameObject obj = GameObject.Find(objName);
-				return obj;
-			}
-			return null;
+				string objName = ObjectMasterList[index];
+				if (objName!="")
+				{
+						GameObject obj = GameObject.Find(objName);
+						return obj;
+				}
+				return null;
 		}
 
 		static void ClearTradeSlotWithObject(int index)
@@ -4011,7 +4110,7 @@ description:  places a generated object in underworld
 				TradeSlot toClear= FindTradeSlotWithItem(index);
 				if (toClear!=null)
 				{
-					toClear.clear();
+						toClear.clear();
 				}
 		}
 
@@ -4035,5 +4134,7 @@ description:  places a generated object in underworld
 				}
 				return null;
 		}
+
+
 
 }
