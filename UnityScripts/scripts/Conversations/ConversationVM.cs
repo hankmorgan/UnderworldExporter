@@ -91,7 +91,14 @@ public class ConversationVM : UWEBase {
 		public int MaxAnswer;
 		private int NPCTalkedToIndex=0;
 
-		//ObjectInteraction lastObjectTraded;
+		/// <summary>
+		/// The player will teleport at the end of the conversation
+		/// </summary>
+		private bool Teleport=false;
+		private int TeleportLevel=-1;
+		private int TeleportTileX=-1;
+		private int TeleportTileY=-1;
+		private bool SettingUpFight=false;
 
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
@@ -460,6 +467,20 @@ public class ConversationVM : UWEBase {
 						return;
 				}
 
+				if (//Don't talk to hostile NPCS in UW2
+						(_RES==GAME_UW2) 
+						&& 
+						(
+								(npc.npc_goal==(short)NPC.npc_goals.npc_goal_attack_5)
+						||
+								(npc.npc_goal==(short)NPC.npc_goals.npc_goal_attack_9)
+						)
+				)
+				{
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+						return;	
+				}
+
 				if (npcname=="")
 				{
 						UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc.npc_whoami+16);						
@@ -556,7 +577,8 @@ public class ConversationVM : UWEBase {
 				DisplayInstructionSet();
 				///Slows the world down so no other npc will attack or interupt the conversation
 				Time.timeScale=0.00f;
-
+				Teleport=false;
+				SettingUpFight=false;
 				StartCoroutine(RunConversationVM(npc));
 		}
 
@@ -1175,10 +1197,33 @@ public class ConversationVM : UWEBase {
 
 				//Process scheduled events
 				if ((_RES==GAME_UW2) && (EditorMode==false))
-				{
+				{						
+
 						if (GameWorldController.instance.events!=null)
 						{
 								GameWorldController.instance.events.ProcessEvents();
+						}
+				}
+				if (SettingUpFight==false)
+				{
+					Quest.instance.FightingInArena=0;//Clear the arena flag
+				}
+				if (Teleport)
+				{
+						if (TeleportLevel!=GameWorldController.instance.LevelNo)	
+						{//stay on this level
+								float targetX=(float)TeleportTileX*1.2f + 0.6f;
+								float targetY= (float)TeleportTileY*1.2f + 0.6f;
+								float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TeleportTileX,TeleportTileY)))*0.15f;
+								UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.1f,targetY);
+								UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;	
+						}
+						else
+						{
+								UWCharacter.Instance.JustTeleported=true;	
+								UWCharacter.Instance.teleportedTimer=0f;
+								UWCharacter.Instance.playerMotor.movement.velocity=Vector3.zero;
+								GameWorldController.instance.SwitchLevel((short)TeleportLevel,(short)TeleportTileX,(short)TeleportTileY);
 						}
 				}
 		}
@@ -1954,40 +1999,39 @@ public class ConversationVM : UWEBase {
 
 				case "babl_hack":
 						{
-								switch ( stack.at(stack.at(stack.stackptr-2)))
+							switch ( stack.at(stack.at(stack.stackptr-2)))//babl_hack mode
+							{
+							case 0://Challenge a fighter
 								{
-								case 1://Are you in a fight
-										{
-											if (Quest.instance.FightingInArena)
-											{
-													stack.result_register=1;
-											}
-											else
-											{
-													stack.result_register=0;
-											}
-											break;
-										}
-								case 2://Set up arena fight.
-										{
-											int[] args=new int[4];
-											args[0]= stack.at(stack.stackptr-2);//ptr to value
-											args[1]= stack.at(stack.stackptr-3);//ptr to value
-											args[2]= stack.at(stack.stackptr-4);//ptr to value
-											args[3]= stack.at(stack.stackptr-5);//ptr to value
-											babl_hackSetUpFight (stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));	
-											break;
-										}
-								case 3://Jospur arena debt
-										{
-											int[] args=new int[1];
-											args[0]= stack.at(stack.stackptr-2);//ptr to value
-											babl_hackJospurDebt(stack.at(args[0]));
-											break;
-										}
+									SettingUpFight=true;	
+									Quest.instance.ArenaOpponents[0]=npc.objInt().objectloaderinfo.index;
+									Quest.instance.FightingInArena=1;
+									break;
 								}
-
-								break;
+							case 1://Are you in a fight
+								{	
+									stack.result_register=Quest.instance.FightingInArena;
+									break;
+								}
+							case 2://Set up arena fight.
+								{
+									int[] args=new int[4];
+									args[0]= stack.at(stack.stackptr-2);//ptr to value
+									args[1]= stack.at(stack.stackptr-3);//ptr to value
+									args[2]= stack.at(stack.stackptr-4);//ptr to value
+									args[3]= stack.at(stack.stackptr-5);//ptr to value
+									babl_hackSetUpFight (stack.at(args[0]),stack.at(args[1]),stack.at(args[2]),stack.at(args[3]));	
+									break;
+								}
+							case 3://Jospur arena debt
+								{
+									int[] args=new int[1];
+									args[0]= stack.at(stack.stackptr-2);//ptr to value
+									babl_hackJospurDebt(stack.at(args[0]));
+									break;
+								}
+							}
+							break;
 						}
 
 				case "teleport_player":
@@ -4008,8 +4052,47 @@ description:  places a generated object in underworld
 		void babl_hackSetUpFight(int arg, int NoOfFighters, int arena, int unk)
 		{
 				Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena)	;
+				SettingUpFight=true;
 				Quest.instance.QuestVariables[133]= NoOfFighters*5;
-				Quest.instance.FightingInArena=true;
+				Quest.instance.FightingInArena=1;
+				int[] tileX=new int[5];
+				int[] tileY=new int[5];
+				switch (arena)
+				{
+				case 0://water
+						
+				case 1://air
+
+				case 2://fire
+
+				case 3://earth
+				default:
+						tileX[0]=36;//,35,36,35,37};
+						tileY[0]=27;//,26,27,26,27};
+						tileX[1]=35;
+						tileY[1]=26;
+						tileX[2]=36;
+						tileY[2]=27;
+						tileX[3]=35;
+						tileY[3]=26;
+						tileX[4]=37;
+						tileX[4]=27;
+						break;
+				}
+
+				for (int i=0; i<NoOfFighters;i++)
+				{
+						ObjectLoaderInfo objNew= ObjectLoader.newObject(Random.Range(120,122),36,27,0,1);
+						Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(tileX[i],tileY[i]);
+						ObjectInteraction objI= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), objNew, GameWorldController.instance.LevelMarker().gameObject,pos);
+						objI.GetComponent<NPC>().npc_attitude=0;
+						objI.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;
+						objI.GetComponent<NPC>().npc_hp=49;
+						objI.GetComponent<NPC>().npc_xhome=(short)tileX[i];
+						objI.GetComponent<NPC>().npc_yhome=(short)tileY[i];
+						objI.GetComponent<NPC>().npc_whoami=102;
+						Quest.instance.ArenaOpponents[i]=objNew.index;
+				}
 		}
 
 		/// <summary>
@@ -4018,9 +4101,13 @@ description:  places a generated object in underworld
 		/// <param name="level">Level.</param>
 		/// <param name="tileX">Tile x.</param>
 		/// <param name="tileY">Tile y.</param>
-		void teleport_player(int level, int tileX, int tileY)
+		void teleport_player(int level, int tileY, int tileX)
 		{
 				Debug.Log("teleporting to " + level + " " + tileX + " " + tileY)	;
+				Teleport=true;
+				TeleportLevel=level-1;
+				TeleportTileX=tileX;
+				TeleportTileY=tileY;
 		}
 
 
@@ -4134,7 +4221,4 @@ description:  places a generated object in underworld
 				}
 				return null;
 		}
-
-
-
 }

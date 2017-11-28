@@ -1528,7 +1528,7 @@ public class SaveGame : Loader {
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x64:
-												Quest.instance.FightingInArena=  ((((int)buffer[i]>>2) & 0x1) == 1);
+												Quest.instance.FightingInArena=  (((int)buffer[i]>>2) & 0x1) ;
 												break;
 										case 0x66: // hand, Gender & body, and class
 												{

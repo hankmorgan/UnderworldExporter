@@ -196,7 +196,7 @@ public class Quest : UWEBase {
 	/// </summary>
 	public int[] variables = new int[127];
 
-	public bool FightingInArena=false;
+	public int FightingInArena=0;
 
 		/// <summary>
 		/// The arena opponents item ids

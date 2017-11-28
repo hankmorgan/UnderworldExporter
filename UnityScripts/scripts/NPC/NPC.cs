@@ -234,6 +234,21 @@ public class NPC : MobileObject {
 				{
 						return;
 				}
+				if (_RES==GAME_UW2)
+				{//Improve players Win loss record in the arena
+					if (Quest.instance.FightingInArena==1)
+					{
+						for (int i=0; i<=Quest.instance.ArenaOpponents.GetUpperBound(0);i++)
+						{
+							if (Quest.instance.ArenaOpponents[i]==objInt().objectloaderinfo.index)
+							{//Update the players win-loss records.
+								Quest.instance.ArenaOpponents[i]=0;
+								Quest.instance.QuestVariables[129]=Mathf.Min(255, Quest.instance.QuestVariables[129]+1);
+								Quest.instance.x_clocks[14]=Mathf.Min(255, Quest.instance.x_clocks[14]+1);								
+							}
+						}	
+					}
+				}
 				objInt().objectloaderinfo.InUseFlag=0;
 				objInt().objectloaderinfo.npc_hp=0;
 				NPC_DEAD=true;//Tells the update to execute the NPC death animation

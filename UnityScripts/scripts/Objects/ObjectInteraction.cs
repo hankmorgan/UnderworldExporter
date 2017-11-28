@@ -2074,10 +2074,21 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_trespass>();break;
 							case 0xA://Bonus object trap
 								myObj.AddComponent<a_hack_trap_class_item>();break;
+							case 0x1E://Avatar is a coward.
+								myObj.AddComponent<a_hack_trap_coward>();break;
 							case 0x14://Terraform puzzle on scintilus 
 								myObj.AddComponent<a_hack_trap_terraform_puzzle>();break;
 							case 0x18://bullfrog
-								myObj.AddComponent<a_do_trapBullfrog>();break;
+								{
+									if (_RES!=GAME_UW2)
+									{
+										myObj.AddComponent<a_do_trapBullfrog>();break;						
+									}
+									else
+									{
+										myObj.AddComponent<trap_base>();break;
+									}
+								}								
 							case 0x1B://Unlinker
 								myObj.AddComponent<a_hack_trap_unlink>();break;
 							case 0x1c://CHange texture of tmap
