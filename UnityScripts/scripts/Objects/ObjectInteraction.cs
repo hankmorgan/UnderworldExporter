@@ -2086,7 +2086,7 @@ public class ObjectInteraction : UWEBase {
 									}
 									else
 									{
-										myObj.AddComponent<trap_base>();break;
+										myObj.AddComponent<a_hack_trap_tmap_range_change>();break;
 									}
 								}								
 							case 0x1B://Unlinker

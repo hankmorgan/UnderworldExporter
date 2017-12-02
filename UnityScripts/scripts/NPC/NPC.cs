@@ -244,7 +244,8 @@ public class NPC : MobileObject {
 							{//Update the players win-loss records.
 								Quest.instance.ArenaOpponents[i]=0;
 								Quest.instance.QuestVariables[129]=Mathf.Min(255, Quest.instance.QuestVariables[129]+1);
-								Quest.instance.x_clocks[14]=Mathf.Min(255, Quest.instance.x_clocks[14]+1);								
+								Quest.instance.x_clocks[14]=Mathf.Min(255, Quest.instance.x_clocks[14]+1);	
+								Quest.instance.QuestVariables[24]=1;//You have won a fight.
 							}
 						}	
 					}
@@ -358,6 +359,13 @@ public class NPC : MobileObject {
 						{
 								switch(npc_whoami)
 								{
+
+								case 98://Zaria
+										Quest.instance.QuestVariables[25]=1;
+										return false;
+								case 99://Dorstag
+										Quest.instance.QuestVariables[121]=1;
+										return false;
 								case 145://The listener under the castle
 										Quest.instance.QuestVariables[11]=1;
 										Quest.instance.x_clocks[1]++;//Confirm this behaviour!

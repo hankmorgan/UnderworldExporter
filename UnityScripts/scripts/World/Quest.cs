@@ -52,7 +52,9 @@ using System.Collections;
 /// 19: You know Relk has found the black jewel (josie tells you)
 /// 20: You've met Mokpo
 /// 22: Blog is now your friend(?)
-/// 24: Checked in the pits by dorstag
+/// 23: You have used Blog to defeat dorstag
+/// 24: You have won a duel in the arena
+/// 25: You have defeated Zaria in the pits
 /// 26: You know about the magic scepter (for the Zoranthus)
 /// 27: You know about the sigil of binding(by bringing the scepter to zorantus)
 /// 28: Took Krilner as a slave
@@ -80,7 +82,7 @@ using System.Collections;
 /// 
 /// 61: You've brought water to Josie
 /// 
-/// 63: Used by Rawstag (you know blog?)
+/// 63: Blog has given you the gem
 /// 64: Is mors dead
 /// 65: Pits related (checked by dorstag)
 /// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
@@ -93,7 +95,7 @@ using System.Collections;
 /// 115: checked when talking to LB. The servants are on strike
 /// 116: The strike has been called off.
 /// 
-/// 118: The wisps tell you about the triliki
+/// 118: The wisps tell you about the trilikisssss2
 /// 119: Fizzit the thief surrenders
 /// 120: checked by miranda?
 /// 121: You have defeated Dorstag

@@ -32,6 +32,7 @@ public class a_hack_trap_coward : a_hack_trap {
 		{
 			//Update win loss record to record a loss
 			Quest.instance.QuestVariables[129] = Mathf.Max(Quest.instance.QuestVariables[129]-OpponentsFound, 0);
+			Quest.instance.QuestVariables[133]=0;
 			if (OpponentIndex>0)
 			{//Begin taunting conversation.
 				ObjectInteraction objI = ObjectLoader.getObjectIntAt(OpponentIndex);
