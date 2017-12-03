@@ -61,7 +61,7 @@ A trigger that fires when the player character enters it
 		{
 			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
 			{
-				Debug.Log(this.name);
+				//Debug.Log(this.name);
 				Activate (other.gameObject);
 			}	
 		}

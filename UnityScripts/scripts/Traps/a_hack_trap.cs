@@ -5,6 +5,7 @@ public class a_hack_trap : trap_base {
 	//qual=5 is a trespass trap.
 		//qual=10  is probably the awarding of class specific items at the start fof the game
 		//qual = 12 is an oscillator row of tiles (i think)
+		//qual = 14 cycles wall/floro colours in a room in talours
 		//qual=20 used for rising platforms on level 42 (scintilus)
 	//qual=21 is the moving switches in loths tomb.
 		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti?

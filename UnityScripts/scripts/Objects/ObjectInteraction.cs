@@ -145,6 +145,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_JUMP_TRAP=118;
 		public const int A_SKILL_TRAP=119;
 		public const int AN_EXIT_TRIGGER=120;
+		public const int UNIMPLEMENTED_TRAP=121;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -2024,8 +2025,8 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<an_experience_trap>();
 						CreateSprite=false;
 						break;
-				case A_NULL_TRAP://Or generic unimplemented traps
-						myObj.AddComponent<trap_base>();
+				case A_NULL_TRAP://A trap that does nothing
+						myObj.AddComponent<a_null_trap>();
 						CreateSprite=false;
 						break;
 				case A_JUMP_TRAP:
@@ -2034,6 +2035,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_SKILL_TRAP:
 						myObj.AddComponent<a_skill_trap>();
+						CreateSprite=false;
+						break;
+				case UNIMPLEMENTED_TRAP:
+						myObj.AddComponent<trap_base>();
 						CreateSprite=false;
 						break;
 				case TMAP_CLIP:
@@ -2074,6 +2079,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_trespass>();break;
 							case 0xA://Bonus object trap
 								myObj.AddComponent<a_hack_trap_class_item>();break;
+							case 0xE://colour cycle a room in talorus
+								myObj.AddComponent<a_hack_trap_colour_cycle>();break;
 							case 0x1E://Avatar is a coward.
 								myObj.AddComponent<a_hack_trap_coward>();break;
 							case 0x14://Terraform puzzle on scintilus 
@@ -2095,6 +2102,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_texture>();break;
 							case 0x20://qbert puzzle in the void
 								myObj.AddComponent<a_hack_trap_qbert>();break;
+							case 0x23://Light sphere recharge
+								myObj.AddComponent<a_hack_trap_light_recharge>();break;
 							case 0x24://Move castlenpcs
 								myObj.AddComponent<a_hack_trap_castle_npcs>();break;	
 							case 0x27://Change visiblity of linked item

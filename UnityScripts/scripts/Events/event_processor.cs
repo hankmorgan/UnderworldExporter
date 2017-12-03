@@ -150,6 +150,8 @@ public class event_processor : UWClass {
 		{			
 				for (int b=0; b<=events_blocks.GetUpperBound(0);b++)
 				{
+						//Begin each blook in execution mode. This will allow for firing of non-conditional traps
+						event_base.Executing=true;
 						if (events_blocks[b].events!=null)
 						{
 								//bool executing =false;

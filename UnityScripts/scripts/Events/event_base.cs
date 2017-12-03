@@ -47,6 +47,9 @@ public class event_base : UWClass {
 		public int x_clock=0;
 
 
+		/// <summary>
+		/// Flags if the event should be cleared after execution
+		/// </summary>
 		public bool clear=false;
 
 		/// <summary>

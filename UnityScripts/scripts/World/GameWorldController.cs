@@ -371,6 +371,7 @@ public class GameWorldController : UWEBase {
 	public static bool FullReRender=false;
 
 	public bool EnableTimerTriggers=true;
+	public float TimerRate = 1f;
 
 	public KeyBindings keybinds;
 

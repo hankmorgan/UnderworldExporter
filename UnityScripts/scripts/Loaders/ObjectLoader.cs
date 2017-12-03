@@ -161,6 +161,7 @@ public class ObjectLoader : Loader {
 			if (_RES==GAME_UW2)
 			{
 				setQbert(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+				SetColourCyclingTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
 			}
 
 		}
@@ -977,6 +978,8 @@ public class ObjectLoader : Loader {
 			case  ObjectInteraction.AN_EXPERIENCE_TRAP:
 			case  ObjectInteraction.A_JUMP_TRAP:
 			case  ObjectInteraction.A_SKILL_TRAP:
+			case  ObjectInteraction.A_NULL_TRAP:
+			case  ObjectInteraction.UNIMPLEMENTED_TRAP:
 				{
 					return true;
 				}
@@ -1163,6 +1166,34 @@ public class ObjectLoader : Loader {
 		}
 
 
+		/// <summary>
+		/// Marks the colour cycling tiles for terrain changing.
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="LevelNo">Level no.</param>
+		void SetColourCyclingTiles(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int LevelNo)
+		{
+				for (int i=0; i<=objList.GetUpperBound(0);i++)
+				{
+						if (objList[i].item_id==387)
+						{
+								if (objList[i].quality==0xE)
+								{
+										for (int x=objList[i].tileX-1; x <=objList[i].tileX+5;x++ )
+										{
+												for (int y=objList[i].tileY-1; y <=objList[i].tileY+5;y++ )
+												{
+														if (TileMap.ValidTile(x,y))
+														{
+																LevelInfo[x,y].TerrainChange=true;
+														}
+												}
+										}
+								}
+						}
+				}
+		}
 
 		///calczyz
 		///  float *offX, float *offY, float *offZ,

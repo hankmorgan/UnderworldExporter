@@ -9,7 +9,7 @@ public class a_use_trigger : trigger_base {
 
 		public bool Activate (GameObject src, bool mode)
 		{
-				Debug.Log (this.name);
+				//Debug.Log (this.name);
 				GameObject triggerObj=null;
 				if (mode)
 				{

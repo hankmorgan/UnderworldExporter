@@ -5,10 +5,8 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 
 
 		//Looks like it changes a range of textures on TMAPs between the trap of the trigger object and the trap
-		//Tmaps with a quality == 40 get incremented by the traps owner and their texture changes accordingly
-
+		//Tmaps with an owner == 63 gets changed to 40 plus traps owner and their texture changes accordingly
 		//This implementation is not fully correct yet!
-
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -16,6 +14,7 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 				int minY= Mathf.Min (triggerY, src.objInt().tileY);
 				int maxX= Mathf.Max (triggerX, src.objInt().tileX);
 				int maxY= Mathf.Max (triggerY, src.objInt().tileY);
+				//Ignore the range for the moment.
 				minX=0;
 				minY=0;
 				maxX=63;
@@ -34,7 +33,7 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 												(objList[i].instance.tileY<=maxX)
 												)
 										{
-												if (objList[i].instance.quality==40)
+												if (objList[i].instance.owner==63)
 												{
 														TMAP tmap= objList[i].instance.GetComponent<TMAP>();
 														if (tmap!=null)
