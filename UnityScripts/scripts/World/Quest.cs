@@ -66,7 +66,7 @@ using System.Collections;
 /// 35: The vortz are attacking!
 /// 36: Quest to clarify question for Data Integrator
 /// 37: talorus related (checked by futurian)
-/// 38: talorus related
+/// 38: talorus related *bliy scup is regenerated
 /// 39: talorus related
 /// 40: Dialogian has helped with data integrator
 /// 43: Patterson has gone postal
@@ -99,6 +99,7 @@ using System.Collections;
 /// 119: Fizzit the thief surrenders
 /// 120: checked by miranda?
 /// 121: You have defeated Dorstag
+/// 122: You have killed the bly scup ductosnore
 /// 123: Relk is dead
 /// 128: 0-128 bit field of where the lines of power have been broken. NEed to fix string replacement to implement.
 /// 129: How many enemies killed in the pits (also xclock 14)

@@ -146,6 +146,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_SKILL_TRAP=119;
 		public const int AN_EXIT_TRIGGER=120;
 		public const int UNIMPLEMENTED_TRAP=121;
+		public const int A_STORAGECRYSTAL = 122;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1831,6 +1832,10 @@ public class ObjectInteraction : UWEBase {
 						RemoveBillboard=true;
 						myObj.AddComponent<UWPainting>();
 						break;
+
+				case A_STORAGECRYSTAL:
+						myObj.AddComponent<StorageCrystal>();
+						break;
 				case A_MAGIC_PROJECTILE:
 						{
 							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
@@ -2095,7 +2100,9 @@ public class ObjectInteraction : UWEBase {
 									{
 										myObj.AddComponent<a_hack_trap_tmap_range_change>();break;
 									}
-								}								
+								}	
+							case 0x19://Bliy scup spawner
+								myObj.AddComponent<a_hack_trap_skup>();break;
 							case 0x1B://Unlinker
 								myObj.AddComponent<a_hack_trap_unlink>();break;
 							case 0x1c://CHange texture of tmap

@@ -370,6 +370,29 @@ public class NPC : MobileObject {
 										Quest.instance.QuestVariables[11]=1;
 										Quest.instance.x_clocks[1]++;//Confirm this behaviour!
 										return false;
+								case 152://Bliy Scup Ductosnore
+										{
+											Quest.instance.QuestVariables[122]=1;
+											//Fires off move trigger at 638 to delete the walls
+											ObjectInteraction obj = ObjectLoader.getObjectIntAt(638);
+											if (obj!=null)
+											{
+												if (obj.GetComponent<trigger_base>()!=null)
+												{
+													obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
+												}
+											}
+											obj = ObjectLoader.getObjectIntAt(649);
+											if (obj!=null)
+											{
+												if (obj.GetComponent<trigger_base>()!=null)
+												{
+														obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
+												}
+											}
+											return false;												
+										}
+
 								}
 								break;
 						}

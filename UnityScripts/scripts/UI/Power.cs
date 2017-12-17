@@ -77,7 +77,15 @@ public class Power : GuiBase {
 	public void UpdateMaxCharge()
 	{
 		//uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
-				uiPowerGem.texture=PowerGemArt[10+RepeatCounter];
+				if (_RES!=GAME_UW2)
+				{
+						uiPowerGem.texture=PowerGemArt[10+RepeatCounter];		
+				}
+				else
+				{
+						uiPowerGem.texture=PowerGemArt[10];
+				}
+
 		//CurrentPower=_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)
