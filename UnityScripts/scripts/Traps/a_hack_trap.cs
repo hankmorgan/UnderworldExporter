@@ -8,11 +8,13 @@ public class a_hack_trap : trap_base {
 		//qual = 14 cycles wall/floro colours in a room in talours
 		//qual=20 used for rising platforms on level 42 (scintilus)
 	//qual=21 is the moving switches in loths tomb.
+		//qual=23 is a variant of the tmpa change
 		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti?
 			
 	//qual=25 is the bly scup chamber puzzle
 		//qual=27 Removes the link from the target object
 		//qual=28 is change tmap objects to use a different texture
+		//Qual=29 is randomly flick buttons. (talorus 1)
 		//qual=30 is the avatar is a coward trap in the pits
 		//qual=31 something in the arena of fire?
 		//qual =32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)

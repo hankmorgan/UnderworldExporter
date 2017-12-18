@@ -2105,8 +2105,11 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_skup>();break;
 							case 0x1B://Unlinker
 								myObj.AddComponent<a_hack_trap_unlink>();break;
+							case 0x17:
 							case 0x1c://CHange texture of tmap
 								myObj.AddComponent<a_hack_trap_texture>();break;
+							case 0x1d:
+								myObj.AddComponent<a_hack_trap_button_flicker>();break;		
 							case 0x20://qbert puzzle in the void
 								myObj.AddComponent<a_hack_trap_qbert>();break;
 							case 0x23://Light sphere recharge

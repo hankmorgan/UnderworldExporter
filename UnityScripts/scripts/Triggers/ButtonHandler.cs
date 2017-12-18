@@ -137,31 +137,6 @@ public class ButtonHandler : Decal {
 		}
 	}
 
-		/*
-	// Update is called once per frame
-	void Update () {
-		return;
-		/*if (SpriteSet==false)
-		{
-			SpriteSet=true;
-			if (isRotarySwitch==false)
-			{
-				if (isOn==true)
-				{
-					setSprite(spriteOn);
-				}
-				else
-				{
-					setSprite(spriteOff);
-				}
-			}
-			else
-			{
-				setRotarySprite(objInt().flags);
-			}
-		}*/
-	//}
-
 	public override bool LookAt ()
 	{
 	//public void LookAt()
@@ -192,44 +167,35 @@ public class ButtonHandler : Decal {
 
 	public override bool Activate(GameObject src)
 	{
-		if (objInt().link==0)
+		if (objInt().link!=0)
 		{
-				return false;
-		}
-		//if (trigger=="")
-		//{
-			//return false;
-		//}
-		//if (triggerObj == null)
-		//{
-		//	triggerObj=GameObject.Find (trigger);
-		//}
+		
 		if (ObjectLoader.getGameObjectAt(objInt().link)==null)
-				{return false;}
-		GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
-		if (triggerObj==null)
-		{
-			return true;//Cannot activate.
-		}
-		if (triggerObj.GetComponent<trigger_base>()==null)
-		{
-			return false;
-		}
-		else
-		{
-			if (triggerObj.GetComponent<a_use_trigger>()!=null)
 			{
-				triggerObj.GetComponent<a_use_trigger>().Activate(this.gameObject,isOn);		
+				return false;
+			}
+			GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
+			if (triggerObj==null)
+			{
+				return true;//Cannot activate.
+			}
+			if (triggerObj.GetComponent<trigger_base>()==null)
+			{
+				return false;
 			}
 			else
 			{
-				triggerObj.GetComponent<trigger_base>().Activate(this.gameObject);		
+				if (triggerObj.GetComponent<a_use_trigger>()!=null)
+				{
+					triggerObj.GetComponent<a_use_trigger>().Activate(this.gameObject,isOn);		
+				}
+				else
+				{
+					triggerObj.GetComponent<trigger_base>().Activate(this.gameObject);		
+				}
+					//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?				
 			}
-
-				//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?
-				
 		}
-
 
 		if (isRotarySwitch())
 		{

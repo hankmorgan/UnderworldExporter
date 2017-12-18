@@ -377,6 +377,8 @@ public class GameWorldController : UWEBase {
 
 	public event_processor events;
 
+	private int startX=-1; private int startY=-1;
+	
 	void LoadPath(string game)
 	{
 		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
@@ -817,6 +819,18 @@ public class GameWorldController : UWEBase {
 
 				TileMapRenderer.GenerateLevelFromTileMap(LevelModel, SceneryModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo],false);
 
+				if ((startX !=-1) &&(startY!=-1))
+				{
+					float targetX=(float)startX*1.2f + 0.6f;
+					float targetY= (float)startY*1.2f + 0.6f;
+					float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
+
+					UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+					UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
+				}
+				startX=-1;startY=-1;
+
+
 				switch(UWEBase._RES)
 				{
 					case GAME_SHOCK:
@@ -864,12 +878,17 @@ public class GameWorldController : UWEBase {
 		/// <param name="newTileY">New tile y.</param>
 		public void SwitchLevel(short newLevelNo, short newTileX, short newTileY)
 		{
+			
+			//float targetX=(float)newTileX*1.2f + 0.6f;
+			//float targetY= (float)newTileY*1.2f + 0.6f;
+			//float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
+
+			//UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+			//UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);
+			
+			startX =newTileX;
+			startY =newTileY;
 			SwitchLevel(newLevelNo);
-			float targetX=(float)newTileX*1.2f + 0.6f;
-			float targetY= (float)newTileY*1.2f + 0.6f;
-			float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
-			UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-			UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);;
 		}
 
 		// This will regenerate the navigation mesh when called
