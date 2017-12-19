@@ -141,6 +141,10 @@ public class TileMap : Loader {
 		/// </summary>
 	public static bool OnLava=false;
 	//public GameObject feet;//For detecting the ground.
+		/// <summary>
+		///Is the player currently on Ice
+		/// </summary>
+		public static bool OnIce=false;
 
 
 		/// <summary>
@@ -601,9 +605,22 @@ public class TileMap : Loader {
 								{
 										Tiles[x,y].wallTexture =0;
 								}	
-								Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
-								Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
-								Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture+48]);
+
+								switch(_RES)
+								{
+								case GAME_UW2:
+										Tiles[x,y].isIce=isTextureWater(texture_map[Tiles[x,y].floorTexture]);
+										Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture]); //lookup into terrain.dat
+										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture]);
+										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture]);
+										break;
+								default:
+										Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
+										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
+										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture+48]);
+										break;
+								}
+
 								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) || (Tiles[x,y].isNothing));
 
 								//UW only has a single ceiling texture so this is ignored.
@@ -1620,6 +1637,22 @@ public class TileMap : Loader {
 					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
 				}
 		}
+
+		public static bool isTextureIce(int textureNo)
+		{
+			if (textureNo> GameWorldController.instance.terrainData.Terrain.GetUpperBound(0) )
+			{
+					return false;
+			}
+			switch(_RES)
+			{
+			case GAME_UW2:
+					return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Ice;
+			default:
+					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
+			}
+		}
+
 
 		public static bool isTextureLava(int textureNo)
 		{

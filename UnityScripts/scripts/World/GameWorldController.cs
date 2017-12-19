@@ -1025,6 +1025,8 @@ public class GameWorldController : UWEBase {
 			}
 			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
 			UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+			UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+
 			for (int x=-1; x<=1;x++)
 			{
 					for (int y=-1; y<=1;y++)

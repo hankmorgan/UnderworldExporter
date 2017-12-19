@@ -4239,6 +4239,10 @@ public class TileMapRenderer : Loader{
 				if (t.isNothing) {
 					Tile.layer = LayerMask.NameToLayer ("Nothing");
 				}
+				else if (t.isIce)
+				{
+					Tile.layer= LayerMask.NameToLayer ("Ice");
+				}
 				else {
 					Tile.layer = LayerMask.NameToLayer ("MapMesh");
 				}

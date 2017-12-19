@@ -8,6 +8,12 @@ A trigger that fires when the player character enters it
 	//public bool playerStartedInTrigger=false;
 	
 	protected Vector3 boxDimensions= new Vector3(1.2f,1.2f,1.2f);
+	//protected short TriggerReady=5;
+	//protected bool startPosTested=false;
+	public bool playerStartedInTrigger=false;
+	private BoxCollider box;
+
+
 
 	protected override void Start ()
 	{				
@@ -16,20 +22,13 @@ A trigger that fires when the player character enters it
 		//{//TODO:do this based on trigger box
 		//	playerStartedInTrigger=true;
 		//}
-		BoxCollider box=this.gameObject.AddComponent<BoxCollider>();
+		box=this.gameObject.AddComponent<BoxCollider>();
 		//box.transform.position = this.gameObject.transform.position;
 		//box.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 		box.size = boxDimensions;//new Vector3(1.2f, 1.2f, 1.2f);
 		box.isTrigger=true;
-	/*	Collider[] colliders=Physics.OverlapBox(this.transform.position, box.size);
-		for (int i=0; i<=colliders.GetUpperBound(0);i++)
-		{
-			if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
-			{
-				playerStartedInTrigger=true;
-				break;
-			}
-		}*/
+
+				CheckPlayerStart();
 
 		//Check if this trap points to a teleport trap that goes to another level
 		if ( (objInt().tileX<TileMap.TileMapSizeX) && (objInt().tileY<TileMap.TileMapSizeY))
@@ -54,29 +53,59 @@ A trigger that fires when the player character enters it
 		}
 	}
 
+	/*void Update()
+	{
+		if (TriggerReady<5)
+		{
+				TriggerReady++;	
+		}
+		else
+		{
+			if (!startPosTested)	
+			{
+				CheckPlayerStart();
+				startPosTested=true;
+			}
+		}
+	}*/
+
+
+	void CheckPlayerStart()
+	{
+		Collider[] colliders=Physics.OverlapBox(this.transform.position, box.size/2);
+		for (int i=0; i<=colliders.GetUpperBound(0);i++)
+		{
+			if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
+			{
+				playerStartedInTrigger=true;
+				break;
+			}
+		}
+	}
+
+
 	protected virtual void OnTriggerEnter(Collider other)
 	{
-		//if (playerStartedInTrigger!=true)
+		//if (TriggerReady>=5)
 		//{
-			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
+			if (playerStartedInTrigger!=true)
 			{
-				//Debug.Log(this.name);
-				Activate (other.gameObject);
+				if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
+				{
+										Debug.Log("Activating " + this.name);
+					Activate (other.gameObject);
+				}	
 			}	
-		//}
-		//else
-		//{
-		//	playerStartedInTrigger=false;
 		//}
 	}
 
-	/*protected virtual void OnTriggerExit(Collider other)
+	protected virtual void OnTriggerExit(Collider other)
 	{
 		if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
 		{
 			playerStartedInTrigger=false;		
 		}
-	}*/
+	}
 
 	public override bool Activate (GameObject src)
 	{

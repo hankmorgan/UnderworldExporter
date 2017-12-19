@@ -10,6 +10,7 @@ public class Feet : UWEBase {
 	int waterLayer;
 	int landLayer;
 	int lavaLayer;
+	int iceLayer;
 
 
 	void Start()
@@ -17,13 +18,14 @@ public class Feet : UWEBase {
 		waterLayer=LayerMask.NameToLayer("Water");
 		landLayer=LayerMask.NameToLayer("MapMesh");
 		lavaLayer=LayerMask.NameToLayer("Lava");
+		iceLayer=LayerMask.NameToLayer("Ice");
 	}
 
 	void OnTriggerStay(Collider other) {
 		//UWCharacter.Instance.currRegion=other.gameObject.tag;
 		if (other.gameObject.layer==landLayer)
 		{
-			TileMap.OnGround=true;  
+			TileMap.OnGround=true; 
 		}
 		else
 		{
@@ -42,6 +44,11 @@ public class Feet : UWEBase {
 				{
 					TileMap.OnGround=true;  
 					TileMap.OnLava=true;
+				}
+				if (other.gameObject.layer==iceLayer)
+				{
+					TileMap.OnGround=true;  
+					TileMap.OnIce=true;
 				}
 			}
 		}

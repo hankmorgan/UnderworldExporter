@@ -12,7 +12,7 @@ public class Entry_Trigger : MonoBehaviour {
 	{
 	if (other.name==UWCharacter.Instance.name)
 		{
-			Activate ();
+					Activate ();
 		}
 	}
 

@@ -14,6 +14,10 @@ public class UWCharacter : Character {
 		/// </summary>
 		public int XorKey=0xD9;
 
+		public bool onIce;
+		public bool onIcePrev;
+		public Vector3 IceVelocity=Vector3.zero;
+
 		public bool decode=true;//decodes a save file
 		public bool recode=true;//recodes a save file at indextochange with newvalue
 		public bool recode_cheat=true;//recodes a save file into an all 30s character
@@ -291,6 +295,17 @@ public class UWCharacter : Character {
 						}
 						return;
 				}
+
+				if (onIce)
+				{		
+					//if (onIcePrev==false)
+					//{
+					//	IceVelocity = playerMotor.movement.velocity.normalized * 2f;
+					//}
+					//playerMotor.movement.velocity=IceVelocity;//playerMotor.movement.velocity.normalized;
+				}
+				onIcePrev = onIce;
+
 		base.Update ();
 				if (EditorMode)
 				{

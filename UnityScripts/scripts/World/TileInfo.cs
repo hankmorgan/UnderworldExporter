@@ -26,6 +26,7 @@ public class TileInfo : Loader {
 		public short Top; public short Bottom;	//Textures in each face
 		public bool isLand;
 		public bool isWater;		//Set when it has a water texture.
+		public bool isIce;
 		public bool isLava;		//Set when it has a lava texture.
 		public bool hasBridge; //Set when the tile contains a bridge.
 		public bool isNothing; //Set when the tile has the nothing textures
