@@ -609,7 +609,7 @@ public class TileMap : Loader {
 								switch(_RES)
 								{
 								case GAME_UW2:
-										Tiles[x,y].isIce=isTextureWater(texture_map[Tiles[x,y].floorTexture]);
+										Tiles[x,y].isIce=isTextureIce(texture_map[Tiles[x,y].floorTexture]);
 										Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture]); //lookup into terrain.dat
 										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture]);
 										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture]);
@@ -1631,7 +1631,12 @@ public class TileMap : Loader {
 				switch(_RES)
 				{
 				case GAME_UW2:
-					return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Water;
+					return 
+						(
+							GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Water
+								||
+							GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Waterfall
+						);
 
 				default:
 					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
@@ -1647,7 +1652,14 @@ public class TileMap : Loader {
 			switch(_RES)
 			{
 			case GAME_UW2:
-					return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Ice;
+					return (
+								
+
+								(GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Ice_wall)
+						);
+								//GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.IceNonSlip)
+								//||
+
 			default:
 					return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Water;//Adjust for uw1 texturemap positions
 			}

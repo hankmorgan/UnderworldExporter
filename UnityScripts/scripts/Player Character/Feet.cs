@@ -36,7 +36,8 @@ public class Feet : UWEBase {
 					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_WATER_LAND_1];
 					UWCharacter.Instance.aud.Play();
 				}
-				TileMap.OnWater=true;  
+				TileMap.OnWater=true;
+				TileMap.OnIce=false;
 			}
 			else 
 			{
@@ -44,6 +45,7 @@ public class Feet : UWEBase {
 				{
 					TileMap.OnGround=true;  
 					TileMap.OnLava=true;
+					TileMap.OnIce=false;
 				}
 				if (other.gameObject.layer==iceLayer)
 				{
@@ -63,14 +65,19 @@ public class Feet : UWEBase {
 		{
 			if (other.gameObject.layer==waterLayer)
 			{
-				TileMap.OnWater=false;  
+				TileMap.OnWater=false;
 			}
 			else 
 			{
 				if (other.gameObject.layer==lavaLayer)
 				{
 					TileMap.OnGround=false;
-					TileMap.OnLava=false;
+					TileMap.OnLava=false;					
+				}
+				if (other.gameObject.layer==iceLayer)
+				{
+						TileMap.OnGround=false;
+						TileMap.OnIce=false;					
 				}
 			}
 		}

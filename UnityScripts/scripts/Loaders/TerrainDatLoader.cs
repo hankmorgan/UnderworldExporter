@@ -21,10 +21,11 @@ public class TerrainDatLoader : Loader {
 		public const int Lava =0x20;//(not lavafall)
 		public const int Waterfall  =0x40;//     - UW2
 		public const int  Ice_wall =0xC0; //     - UW2
+		//TODO:ID more water types
 		//00D8
 		public const int Ice_walls= 0xE8;// (crumbling?)
 		public const int  Lavafall  = 0x80;   //  - UW2
-		public const int  Ice     =0xF8  ; //   - UW2
+		public const int  IceNonSlip     =0xF8  ; //   - UW2
 
 		public int[] Terrain;
 
