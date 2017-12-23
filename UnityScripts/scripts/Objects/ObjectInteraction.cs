@@ -2117,13 +2117,37 @@ public class ObjectInteraction : UWEBase {
 							case 0x24://Move castlenpcs
 								myObj.AddComponent<a_hack_trap_castle_npcs>();break;	
 							case 0x27://Change visiblity of linked item
-								myObj.AddComponent<a_hack_trap_visibility>();break;		
-							case 0x2a://Gronk conversation
-								myObj.AddComponent<a_do_trap_conversation>();break;
+								myObj.AddComponent<a_hack_trap_visibility>();break;	
+							case 0x28:
+								{
+									if (_RES==GAME_UW2)
+									{
+											myObj.AddComponent<a_hack_trap_vendingselect>();break;	
+									}
+									else
+									{//emerald puzzle on level 6
+											myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;	
+									}
+								}
+							case 0x29://vending maching
+								{
+									myObj.AddComponent<a_hack_trap_vending>();break;	
+								}
+							case 0x2a://Gronk conversation/vending machine sign
+								{
+									if (_RES==GAME_UW2)
+									{
+											myObj.AddComponent<a_hack_trap_vendingsign>();
+									}
+									else
+									{
+											myObj.AddComponent<a_do_trap_conversation>();
+									}
+									break;
+								}								
 							case 0x2c:
 								myObj.AddComponent<a_hack_trap_sleep>();break;
-							case 0x28://emerald puzzle on level 6
-								myObj.AddComponent<a_do_trap_emeraldpuzzle>();break;
+
 							case 0x3F://end game sequence
 								myObj.AddComponent<a_do_trap_EndGame>();break;
 							case 0x36:

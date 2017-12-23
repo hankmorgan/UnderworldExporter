@@ -26,10 +26,45 @@ public class Sign : Decal {
 
 	public virtual bool Read ()
 	{
+		switch (_RES)
+		{
 
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
-		return true;
+		case GAME_UW2:
+			{
+				//TODO: Need to figure out how the "sign/writing/plaque" etc prefix works
+				if (objInt().isquant==1)
+				{//This is a normal sign
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
+						return true;		
+				}
+				else
+				{//This is linked to a trigger that spouts some nonsense.
+					ObjectInteraction linkObj = ObjectLoader.getObjectIntAt(objInt().link);
+					if (linkObj!=null)
+					{
+						switch (linkObj.GetItemType())
+						{
+						case ObjectInteraction.A_USE_TRIGGER:
+							return linkObj.GetComponent<trigger_base>().Activate(this.gameObject);					
+						case ObjectInteraction.A_LOOK_TRIGGER:
+							return linkObj.GetComponent<trigger_base>().Activate(this.gameObject);
+						default:
+							UWHUD.instance.MessageScroll.Add("You need to investigate me " + this.name);
+							return true;
+						}
 
+					}
+				}
+				return false;
+			}
+		default:
+			{
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
+				return true;								
+			}
+
+		}
+		
 	}
 
 
