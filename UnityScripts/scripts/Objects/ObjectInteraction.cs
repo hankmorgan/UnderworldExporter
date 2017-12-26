@@ -2112,6 +2112,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_button_flicker>();break;		
 							case 0x20://qbert puzzle in the void
 								myObj.AddComponent<a_hack_trap_qbert>();break;
+							case 0x21://Bottle recycler
+								myObj.AddComponent<a_hack_trap_recycle>();break;
 							case 0x23://Light sphere recharge
 								myObj.AddComponent<a_hack_trap_light_recharge>();break;
 							case 0x24://Move castlenpcs

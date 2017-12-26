@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_do_trap_emeraldpuzzle : trap_base {
+public class a_do_trap_emeraldpuzzle : a_hack_trap {
 
 	public bool hasExecuted;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_do_trapBullfrog : a_do_trap_platform {
+public class a_do_trapBullfrog : a_hack_trap {
 
 	/*
 	 * Guess

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_do_trap_camera : trap_base {
+public class a_do_trap_camera : a_hack_trap {
 /*
 A variant of the do trap.
 This is mainly used by crystal balls to show a vision of an area on a map.

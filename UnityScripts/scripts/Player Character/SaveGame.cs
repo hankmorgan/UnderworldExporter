@@ -1300,6 +1300,8 @@ public class SaveGame : Loader {
 				int z_position=0;
 				int x_clock=1;
 
+
+
 				int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
 				short[] ActiveEffectStability=new short[3];
@@ -1308,6 +1310,12 @@ public class SaveGame : Loader {
 				int VariableCounter=0;
 				int arena=0;
 				UWCharacter.Instance.playerInventory.currentContainer="_Gronk";
+				UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture=UWCharacter.Instance.playerInventory.Blank;
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(false);
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
+				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);
+
+
 				UWCharacter.Instance.JustTeleported=true;
 				UWCharacter.Instance.teleportedTimer=0f;
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out pDat))

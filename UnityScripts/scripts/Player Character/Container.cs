@@ -760,11 +760,11 @@ public class Container : object_base {
 		/// <returns>The container equip display.</returns>
 	public Sprite GetContainerEquipDisplay ()
 	{	
-		switch(_RES)
-		{
-		case GAME_UWDEMO:
-		case GAME_UW1:
-				{
+		//switch(_RES)
+		//{
+		//case GAME_UWDEMO:
+		//case GAME_UW1:
+				//{
 					switch(objInt().item_id)
 						{
 						case 128://Sack
@@ -781,12 +781,12 @@ public class Container : object_base {
 									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);
 								}
 						}						
-				}
-		default://
-				{
-					return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);					
-				}
-		}
+				//}
+		//default://
+			//	{
+				//	return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);					
+				//}
+		//}
 	}
 
 	/// <summary>

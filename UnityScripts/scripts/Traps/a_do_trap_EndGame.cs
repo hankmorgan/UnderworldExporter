@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Ends the game. Plays the ending cutscene.
 /// </summary>
-public class a_do_trap_EndGame : trap_base {
+public class a_do_trap_EndGame : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{

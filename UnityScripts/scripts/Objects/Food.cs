@@ -121,7 +121,34 @@ public class Food : object_base {
 				}				
 				UWCharacter.Instance.aud.Play();		
 			}
+
+			if (_RES==GAME_UW2)
+			{//Some food items leave left overs
+					int LeftOverToCreate=-1;
+					switch (objInt().item_id)
+					{
+					case 176:
+					case 177://meat
+							LeftOverToCreate=197;break;
+					case 187:								
+					case 188:
+					case 189://bottles.
+							LeftOverToCreate=317;break;
+					}
+
+					if (LeftOverToCreate!=-1)
+					{
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( LeftOverToCreate,40,0,0,256);
+						newobjt.InUseFlag=1;
+						ObjectInteraction created=ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+						GameWorldController.MoveToWorld(created.gameObject);
+						UWCharacter.Instance.playerInventory.ObjectInHand=created.name;
+						UWHUD.instance.CursorIcon= created.GetInventoryDisplay().texture;
+						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+					}
+			}
 			objInt().consumeObject();//destroy and remove from inventory/world.
+
 			return true; //Food was eaten.
 		}
 	}

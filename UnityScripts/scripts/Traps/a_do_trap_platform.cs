@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_do_trap_platform : trap_base {
+public class a_do_trap_platform : a_hack_trap {
 
 /*
 Moves a tile up and down.

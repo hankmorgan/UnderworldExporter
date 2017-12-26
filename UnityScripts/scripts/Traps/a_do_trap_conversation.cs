@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// A Talking Door!
 /// </summary>
-public class a_do_trap_conversation : trap_base {
+public class a_do_trap_conversation : a_hack_trap {
 
 
 	protected override void Start ()
