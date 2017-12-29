@@ -726,7 +726,7 @@ public class TileMapRenderer : Loader{
 										UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
 										UVs[(j*4)+3]= new Vector2(1f,0f);
 								}
-								int TextureIndex= objList.objInfo[i].flags & 0x3F;
+								int TextureIndex= objList.objInfo[i].flags & 0x3;//& 0x3F;
 								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (TextureIndex).ToString("d2"));
 								if (tmobj!=null)
 								{
@@ -739,7 +739,7 @@ public class TileMapRenderer : Loader{
 										{//tmobj[30]+(objList[x].flags & 0x3F)
 												MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
 										}	
-										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6,"pillar_" + ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6, ObjectLoader.UniqueObjectName(objList.objInfo[i]));
 								}
 								else
 								{

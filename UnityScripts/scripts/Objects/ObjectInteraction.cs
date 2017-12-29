@@ -1832,7 +1832,10 @@ public class ObjectInteraction : UWEBase {
 						RemoveBillboard=true;
 						myObj.AddComponent<UWPainting>();
 						break;
-
+				case PILLAR:
+						myObj.AddComponent<Pillar>();
+						CreateSprite=false;
+						break;
 				case A_STORAGECRYSTAL:
 						myObj.AddComponent<StorageCrystal>();
 						break;

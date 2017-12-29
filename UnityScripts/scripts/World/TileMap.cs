@@ -1675,7 +1675,11 @@ public class TileMap : Loader {
 				switch(_RES)
 				{
 				case GAME_UW2:
-						return GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Lava;
+						return (
+								(GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Lava)
+								||
+								(GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Lavafall)
+							);
 
 				default:
 						return GameWorldController.instance.terrainData.Terrain[256 + textureNo-210] == TerrainDatLoader.Lava;//Adjust for uw1 texturemap positions

@@ -51,7 +51,15 @@ The path to the sword hilt on Level3
 							tileToChange.VisibleFaces[v]=true;		
 						}
 						short tileTypeToChangeTo = (short)(objInt().quality & 0x01);
-						short newTileHeight = (short)(objInt().zpos>>2);
+						short newTileHeight;// = (short)(objInt().zpos>>2);
+						if (objInt().zpos ==120)
+						{//If at this height use the trigger zpos for height instead.
+							newTileHeight=(short)(src.objInt().zpos>>2);
+						}
+						else
+						{
+							newTileHeight = (short)(objInt().zpos>>2);		
+						}
 						short newWallTexture = tileToChange.wallTexture;
 						if (_RES==GAME_UW2)
 						{//Also the owner can be used to change wall texture. This means changing it's neighours.

@@ -161,9 +161,9 @@ public class ObjectLoader : Loader {
 			if (_RES==GAME_UW2)
 			{
 				setQbert(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
-				SetColourCyclingTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+				FindOffMapOscillatorTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+				SetColourCyclingTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);				
 			}
-
 		}
 
 		public void LoadObjectListShock(TileMap tileMap, char[] lev_ark)
@@ -1163,6 +1163,53 @@ public class ObjectLoader : Loader {
 						LevelInfo[50,54].TerrainChange	=true;
 						LevelInfo[50,55].TerrainChange	=true;
 			}
+		}
+
+		/// <summary>
+		/// Finds the off map oscillator tiles.
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="LevelNo">Level no.</param>
+		/// Hack to fix guardians trap world
+		void FindOffMapOscillatorTiles(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,int LevelNo)
+		{
+				//Fix for UW2 map bug involving oscillator
+				if (LevelNo==71)
+				{
+						LevelInfo[34,44].TerrainChange=true;
+				}
+
+				/*for (int i =0; i<=objList.GetUpperBound(0);i++)
+				{
+						if (isTrigger(objList[i]))
+						{
+								if (objList[i].link!=0)
+								{
+										if(GameWorldController.instance.objectMaster.type[ objList[objList[i].link].item_id ] == ObjectInteraction.AN_OSCILLATOR)												
+										{
+												if (TileMap.ValidTile(objList[i].quality, objList[i].owner))
+												{
+													LevelInfo[objList[i].quality, objList[i].owner].TerrainChange=true;
+												}
+										}
+								}
+						}
+						if (isTrap(objList[i]))
+						{
+								if (objList[i].link!=0)
+								{
+										if(GameWorldController.instance.objectMaster.type[ objList[objList[i].link].item_id ] == ObjectInteraction.AN_OSCILLATOR)												
+										{
+												if (TileMap.ValidTile(objList[i].tileX, objList[i].tileY))
+												{
+														LevelInfo[objList[i].tileX, objList[i].tileY].TerrainChange=true;
+												}
+										}
+								}
+						}
+
+				}*/
 		}
 
 

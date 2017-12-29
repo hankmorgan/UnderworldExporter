@@ -40,26 +40,28 @@ public class an_oscillator_trap : trap_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		TileXToWatch=objInt().tileX;
-		TileYToWatch=objInt().tileY;
-		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
+
 	}
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
+		TileXToWatch=triggerX;
+		TileYToWatch=triggerY;
+		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
+
 		if  (platformTile ==  null)
 		{
 			platformTile =	GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);		
 		}
-				if  (platformTile ==  null)
-				{
-						return;
-				}
+		if  (platformTile ==  null)
+		{
+				return;
+		}
 		if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2>=objInt().owner)
 		{
 			objInt().x=0;	
 		}
-			else if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2<= objInt().quality )
+		else if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2<= objInt().quality )
 		{
 			objInt().x=1;	
 		}

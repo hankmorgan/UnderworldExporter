@@ -45,6 +45,26 @@ the left, right, center button combination on Level3.
 		{
 			TriggerNext(triggerX,triggerY,State);
 		}
+		else
+		{
+			if (_RES==GAME_UW2)	
+			{//If linked to a null trap in UW2 the next of the null trap will act as a "false" action.
+				ObjectInteraction nullObj= ObjectLoader.getObjectIntAt(objInt().link);
+				//if (triggerObj.tileX==TileMap.ObjectStorageTile)
+				if(nullObj.GetItemType()==ObjectInteraction.A_NULL_TRAP)
+				{
+					ObjectInteraction triggerObj = ObjectLoader.getObjectIntAt(nullObj.next);
+					if (triggerObj!=null)
+					{
+						if (triggerObj.GetComponent<trap_base>()!=null)
+						{
+							triggerObj.GetComponent<trap_base>().Activate(this, triggerX, triggerY, State);
+							PostActivate(src);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public override bool Activate (object_base src,int triggerX, int triggerY, int State)

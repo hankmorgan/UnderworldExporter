@@ -357,44 +357,64 @@ public class NPC : MobileObject {
 
 				case GAME_UW2:
 						{
-								switch(npc_whoami)
-								{
-
-								case 98://Zaria
-										Quest.instance.QuestVariables[25]=1;
-										return false;
-								case 99://Dorstag
-										Quest.instance.QuestVariables[121]=1;
-										return false;
-								case 145://The listener under the castle
-										Quest.instance.QuestVariables[11]=1;
-										Quest.instance.x_clocks[1]++;//Confirm this behaviour!
-										return false;
-								case 152://Bliy Scup Ductosnore
+							switch(npc_whoami)
+							{
+							case 58://Brain creatures in Kilhorn
+									Quest.instance.QuestVariables[50]=1;
+									return false;
+							case 75: //Demon guard in Kilhorn.
+									if(NPC_IDi==108)
+									{//Convert into a hordling
+										NPC_IDi=94;
+										objInt().item_id=94;
+										npc_hp=	92;	
+										NPC_DEAD=false;
+										if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
 										{
-											Quest.instance.QuestVariables[122]=1;
-											//Fires off move trigger at 638 to delete the walls
-											ObjectInteraction obj = ObjectLoader.getObjectIntAt(638);
-											if (obj!=null)
-											{
-												if (obj.GetComponent<trigger_base>()!=null)
-												{
-													obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
-												}
-											}
-											obj = ObjectLoader.getObjectIntAt(649);
-											if (obj!=null)
-											{
-												if (obj.GetComponent<trigger_base>()!=null)
-												{
-														obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
-												}
-											}
-											return false;												
+											GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);				
 										}
+										newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
+										return true;
+									}
+									else
+									{
+										return false;
+									}
+							case 98://Zaria
+									Quest.instance.QuestVariables[25]=1;
+									return false;
+							case 99://Dorstag
+									Quest.instance.QuestVariables[121]=1;
+									return false;
+							case 145://The listener under the castle
+									Quest.instance.QuestVariables[11]=1;
+									Quest.instance.x_clocks[1]++;//Confirm this behaviour!
+									return false;
+							case 152://Bliy Scup Ductosnore
+									{
+										Quest.instance.QuestVariables[122]=1;
+										//Fires off move trigger at 638 to delete the walls
+										ObjectInteraction obj = ObjectLoader.getObjectIntAt(638);
+										if (obj!=null)
+										{
+											if (obj.GetComponent<trigger_base>()!=null)
+											{
+												obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
+											}
+										}
+										obj = ObjectLoader.getObjectIntAt(649);
+										if (obj!=null)
+										{
+											if (obj.GetComponent<trigger_base>()!=null)
+											{
+													obj.GetComponent<trigger_base>().Activate(UWCharacter.Instance.gameObject);
+											}
+										}
+										return false;												
+									}
 
-								}
-								break;
+							}
+							break;
 						}
 				}
 

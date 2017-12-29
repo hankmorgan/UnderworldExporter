@@ -34,9 +34,9 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 		if (triggerObj!=null)
 		{
 			triggerObj.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
-			if (triggerObj.GetComponent<Bridge>()!=null)
+			if (triggerObj.GetComponent<map_object>()!=null)
 			{
-				Destroy(triggerObj.GetComponent<Bridge>().ModelInstance);	
+				Destroy(triggerObj.GetComponent<map_object>().ModelInstance);	
 			}
 			Debug.Log (this.name + " deleting " + triggerObj.name);
 			Destroy(triggerObj);

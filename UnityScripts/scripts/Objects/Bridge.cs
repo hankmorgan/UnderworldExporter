@@ -5,13 +5,13 @@ using System.Collections;
 /// </summary>
 /// Bridge Object in maps.
 /// The physical bridge is created as part of the map export but look descriptions are set up here using box colliders
-public class Bridge : object_base {
+public class Bridge : map_object {
 	//Texture index for the bridge description
 	//public int TextureIndex;
 	//public string UseLink;//A trigger to fire when used.
 
 
-		public GameObject ModelInstance;//The model that this bridge uses.
+
 
 
 	protected override void Start ()
@@ -23,22 +23,6 @@ public class Bridge : object_base {
 			bx.center=new Vector3(0.08f, 0.006f, 0.08f);	
 			bx.size=new Vector3(1.2f, 0.18f, 1.2f);
 		}
-		if (objInt().invis==0)
-		{
-			foreach (Transform t in GameWorldController.instance.SceneryModel.transform)
-			{
-				if (t.name == this.name)
-				{
-					ModelInstance = t.gameObject;
-					return;
-				}
-			}
-		}
-		else
-		{//Make this bridge use it's box collider for collision
-			this.gameObject.layer=LayerMask.NameToLayer("MapMesh");
-		}
-
 	}
 
 		/// <summary>
