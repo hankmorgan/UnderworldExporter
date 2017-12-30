@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class CritterAnimInfo {
-
+	public const int NoOfAnims=44;
 	public string[,] animSequence;
 	public int[,] animIndices;
 	public Sprite[] animSprites;
@@ -10,8 +10,8 @@ public class CritterAnimInfo {
 
 	public CritterAnimInfo()
 	{
-		animSequence=new string[32,8];
-		animIndices=new int[32,8];
+		animSequence=new string[NoOfAnims,8];
+		animIndices=new int[NoOfAnims,8];
 		switch (Loader._RES)
 		{
 		case Loader.GAME_UW2:
@@ -21,6 +21,6 @@ public class CritterAnimInfo {
 			animSprites=new Sprite[128];
 			break;
 		}		
-		animName=new string[32];
+		animName=new string[NoOfAnims];
 	}
 }

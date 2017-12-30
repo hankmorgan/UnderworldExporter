@@ -70,6 +70,17 @@ public class an_oscillator_trap : trap_base {
 		{//moving up
 			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight+=2;		
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.3f,0f) ,0.1f));
+			if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight>=30)
+				{
+					if (
+							(TileMap.visitTileX==triggerX) 
+							&&
+							(TileMap.visitTileY==triggerY) 
+					)
+								{//Kill the player if they are in the tile  (ouch my head)
+							UWCharacter.Instance.CurVIT -= 1000;
+					}
+				}
 		}
 		else
 		{//moving down
@@ -119,15 +130,19 @@ public class an_oscillator_trap : trap_base {
 		/// Could be better.
 		public void MoveObjectsInContact(float Height)
 		{
-			for (int i=0; i<=colliders.GetUpperBound(0);i++)
-			{
-				if (colliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)
+				for (int i=0; i<=colliders.GetUpperBound(0);i++)
 				{
-					Vector3 objPosition =colliders[i].gameObject.transform.position;
-					GameWorldController.UnFreezeMovement(colliders[i].gameObject);
-					colliders[i].gameObject.transform.position=new Vector3(objPosition.x,Height,objPosition.z);
+						if (colliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
+								if (colliders[i].gameObject.GetComponent<ObjectInteraction>().isMoveable())
+								{
+										Vector3 objPosition =colliders[i].gameObject.transform.position;
+										GameWorldController.UnFreezeMovement(colliders[i].gameObject);
+										colliders[i].gameObject.transform.position=new Vector3(objPosition.x,Height,objPosition.z);	
+								}
+
+						}
 				}
-			}
 		}
 
 }

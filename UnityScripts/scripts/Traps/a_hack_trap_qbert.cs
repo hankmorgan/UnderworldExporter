@@ -62,6 +62,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 				LeaveArea();
 				break;
 			case 32:
+			case 12:
 				GameWorldController.instance.PositionDetect();
 				RandomTeleport(src);
 				break;
@@ -71,6 +72,9 @@ public class a_hack_trap_qbert : a_hack_trap {
 			case 63:
 				GameWorldController.instance.PositionDetect();
 				StepOnPyramid(TileMap.visitTileX, TileMap.visitTileY);
+				break;
+			default:
+				UWHUD.instance.MessageScroll.Add("Unimplemented qbert destination " + objInt().owner);
 				break;
 		}
 	}
@@ -652,4 +656,9 @@ public class a_hack_trap_qbert : a_hack_trap {
 		return false;
 	}
 
+
+	public override void PostActivate (object_base src)
+	{
+
+	}
 }

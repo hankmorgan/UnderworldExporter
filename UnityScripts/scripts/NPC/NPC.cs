@@ -1162,7 +1162,7 @@ public class NPC : MobileObject {
 				}
 		}
 
-		void playAnimation(int index, bool isConstantAnim)
+		protected void playAnimation(int index, bool isConstantAnim)
 		{
 				//newAnim.AnimationIndex=index
 				newAnim.Play(index,isConstantAnim);

@@ -61,7 +61,8 @@ public class trap_base : object_base {
 	public virtual void PostActivate(object_base src)
 	{
 		//Destruction of traps is probably controlled by the trigger.
-		int TriggerRepeat = (objInt().flags>>1) & 0x1;
+		//int TriggerRepeat = (objInt().flags>>1) & 0x1;
+		int TriggerRepeat = (objInt().flags) & 0x1;
 		if (TriggerRepeat==0)
 		{
 			this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;

@@ -44,7 +44,10 @@ public class NPC_Animation : MonoBehaviour {
 				ConstantAnim=isConstant;
 				AnimationPos=0;
 				animationCounter=0f;
-				output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos++]];//Start the animation.	
+				if (critAnim.animIndices[AnimationIndex,AnimationPos++]!=-1)
+				{
+					output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos++]];//Start the animation.					
+				}				
 			}
 		AnimationIndex=anim;
 	}

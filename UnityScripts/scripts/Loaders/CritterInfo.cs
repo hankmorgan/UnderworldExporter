@@ -363,6 +363,38 @@ public class CritterInfo : Loader {
 						return "idle_left"; 
 				case 0x27:
 						return "idle_rear_left"; 
+				case 0x28:
+						return "unknown_anim_40";
+				case 0x29:
+						return "unknown_anim_41";
+				case 0x2a:
+						return "unknown_anim_42";
+				case 0x2b:
+						return "unknown_anim_43";
+				case 0x2c:
+						return "unknown_anim_44";
+				case 0x2d:
+						return "unknown_anim_45";
+				case 0x2e:
+						return "unknown_anim_46";
+				case 0x2f:
+						return "unknown_anim_47";
+				case 0x50:
+						return "unknown_anim_80";
+				case 0x51:
+						return "unknown_anim_81";
+				case 0x52:
+						return "unknown_anim_82";
+				case 0x53:
+						return "unknown_anim_83";
+				case 0x54:
+						return "unknown_anim_84";
+				case 0x55:
+						return "unknown_anim_85";
+				case 0x56:
+						return "unknown_anim_86";
+				case 0x57:
+						return "unknown_anim_87";
 				case 0x80:
 						return "walking_rear"; 
 				case 0x81:
@@ -380,6 +412,7 @@ public class CritterInfo : Loader {
 				case 0x87:
 						return "walking_rear_left"; 
 				default:
+						Debug.Log("unknown animation" + animNo);
 						return "unknown_anim"; 
 				}	
 		}
@@ -440,7 +473,40 @@ public class CritterInfo : Loader {
 						return walking_left;
 				case 25 : 
 						return walking_rear_left;
-				default:return 0;
+				case 26:
+						return 80;	
+				case 27:
+						return 81;	
+				case 28:
+						return 82;	
+				case 29:
+						return 83;	
+				case 30:
+						return 84;	
+				case 31:
+						return 85;	
+				case 32:
+						return 86;	
+				case 33:
+						return 87;	
+				case 34:
+						return 40;
+				case 35:
+						return 41;
+				case 36:
+						return 42;
+				case 37:
+						return 43;
+				case 38:
+						return 44;
+				case 39:
+						return 45;
+				case 40:
+						return 46;
+				case 41:
+						return 47;
+				default:
+						return 0;
 				}
 		}
 
@@ -502,7 +568,40 @@ public class CritterInfo : Loader {
 						return 24;
 				case walking_rear_left : 
 						return 25;
-				default:return 0;
+				case 80://unknown anim 1
+						return 26;
+				case 81://unknown anim 2
+						return 27;
+				case 82://unknown anim 3
+						return 28;
+				case 83://unknown anim 4
+						return 29;
+				case 84://unknown anim 5
+						return 30;
+				case 85://unknown anim 6
+						return 31;
+				case 86://unknown anim 7
+						return 32;
+				case 87://unknown anim 8
+						return 33;
+				case 40://unknown anim 9
+						return 34;
+				case 41://unknown anim 10
+						return 35;
+				case 42://unknown anim 11
+						return 36;
+				case 43://unknown anim 12
+						return 37;
+				case 44://unknown anim 13
+						return 38;
+				case 45://unknown anim 14
+						return 39;
+				case 46://unknown anim 15
+						return 40;
+				case 47://unknown anim 16
+						return 41;
+				default:
+						return 0;
 				}
 		}
 
@@ -528,7 +627,7 @@ public class CritterInfo : Loader {
 		}
 
 
-		public static int TranslateAnimRangeToAnim(int animToTranslate)
+	/*	public static int TranslateAnimRangeToAnim(int animToTranslate)
 		{
 				//Animations are clasified by number
 				switch (animToTranslate)
@@ -580,7 +679,7 @@ public class CritterInfo : Loader {
 				default:
 						return idle_front;
 				}	
-		}
+		} */
 
 
 

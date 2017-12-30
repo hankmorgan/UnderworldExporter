@@ -16,8 +16,8 @@ public class ObjectMasters {
 		public int[] isUseable= new int[500];
 		public int[] isMoveable= new int[500];
 		public int[] InventoryIndex=new int[500];
-		public int[] isAnimated= new int[500];
-		public int[] useSprite= new int[500];
+		public int[] startFrame= new int[500];//Start frame for animated objects.
+		public int[] useSprite= new int[500];//Uses a sprite and also the no of anim frames for animated objects.
 
 	public ObjectMasters()
 	{
@@ -62,7 +62,7 @@ public class ObjectMasters {
 						InventoryIndex[i]= int.Parse (entries[7]);
 						isUseable[i]= int.Parse(entries[8]);
 						isMoveable[i]= int.Parse(entries[9]);
-						isAnimated[i]= int.Parse(entries[10]);
+						startFrame[i]= int.Parse(entries[10]);
 						useSprite[i]= int.Parse(entries[11]);
 						i++;
 					}

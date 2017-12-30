@@ -711,6 +711,8 @@ public class ObjectLoader : Loader {
 					objList[x].npc_talkedto =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
 					objList[x].npc_attitude = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
 
+					objList[x].npc_voidanim=(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x3);
+
 					objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
 					objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
 
@@ -1973,6 +1975,7 @@ public class ObjectLoader : Loader {
 								//000f    
 								//info.npc_height=npc.npc_height ;//6- 12 ?
 								//0016  
+								info.npc_voidanim=npc.npc_voidanim;
 								info.npc_yhome=npc.npc_yhome;	// 4-9    
 								info.npc_xhome=npc.npc_xhome; // 10-15  
 								//0018   0010   Int8   0-4:   npc_heading?

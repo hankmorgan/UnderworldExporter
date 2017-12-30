@@ -48,6 +48,7 @@ public class ObjectLoaderInfo : UWClass {
 		//000f    
 		public short npc_height ;//6- 12 ?
 		//0016  
+		public short npc_voidanim; //0-3 
 		public short npc_yhome;	// 4-9    
 		public short npc_xhome; // 10-15  
 		//0018   0010   Int8   0-4:   npc_heading?

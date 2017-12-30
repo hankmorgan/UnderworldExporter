@@ -10,21 +10,21 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	public int NoOfFrames=5;
 	public bool Active=true;
 	SpriteRenderer image;
-	static Sprite[] sprites=new Sprite[53];
+	//static Sprite[] sprites=new Sprite[64];
 	static bool spriteSet = false;
 	public bool Looping=true;
 	// Use this for initialization
 	void Start () {
 		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-		if (spriteSet==false)
-		{
-			spriteSet=true;
-			for (int i = 0; i<=sprites.GetUpperBound(0);i++)
-			{
+		//if (spriteSet==false)
+		//{
+		//	spriteSet=true;
+			//for (int i = 0; i<=sprites.GetUpperBound(0);i++)
+			//{
 				//sprites[i]=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + i.ToString ("D4"));
-				sprites[i] = GameWorldController.instance.TmAnimo.RequestSprite(i);
-			}
-		}
+			//	sprites[i] = GameWorldController.instance.TmAnimo.RequestSprite(i);
+			//}
+		//}
 		
 		Go ();
 	}
@@ -47,7 +47,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
 	//	image.sprite=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + index.ToString ("D4"));
-		image.sprite=sprites[index];
+		image.sprite=GameWorldController.instance.TmAnimo.RequestSprite(index);//sprites[index];
 	}
 	
 	public IEnumerator Animate()

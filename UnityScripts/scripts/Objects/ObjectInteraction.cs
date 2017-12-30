@@ -147,6 +147,8 @@ public class ObjectInteraction : UWEBase {
 		public const int AN_EXIT_TRIGGER=120;
 		public const int UNIMPLEMENTED_TRAP=121;
 		public const int A_STORAGECRYSTAL = 122;
+		public const int NPC_WISP = 123;
+		public const int NPC_VOID = 124;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -896,7 +898,7 @@ public class ObjectInteraction : UWEBase {
 		public static GameObject CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 		{	
 			//Create a sprite.
-			GameObject SpriteController = new GameObject(myObj.name + "_sprite");
+			GameObject SpriteController = new GameObject("_sprite");
 			SpriteController.transform.position = myObj.transform.position;
 			SpriteRenderer mysprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
 			Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
@@ -1207,32 +1209,17 @@ public class ObjectInteraction : UWEBase {
 				myObj.layer=LayerMask.NameToLayer("NPCs");
 				myObj.tag="NPCs";
 				NPC npc = myObj.AddComponent<NPC>();
-
-				//if (npc_whoami == 0)
-				//{
-				//		npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
-				//}
-
 				//Probably only need to add this when an NPC supports ranged attacks?
 				GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
 				NpcLauncher.transform.position=Vector3.zero; 
-				//NpcLauncher.transform.rotation=Vector3.zero; 
 				NpcLauncher.transform.parent=myObj.transform;
 				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.2f);
 				npc.NPC_Launcher=NpcLauncher;
-				//npc.ai=ai;
-				//NpcLauncher.AddComponent<StoreInformation>();
-
-				//GameObject myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
-				GameObject newObj = new GameObject(myObj.name + "_Sprite");
-				//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
-				//newObj.name=myObj.name + "_Sprite";
+				GameObject newObj = new GameObject("_Sprite");
 				newObj.transform.parent=myObj.transform;
 				newObj.transform.position = myObj.transform.position;
 				newObj.AddComponent<BillboardNPC>();
-				//newObj.AddComponent<StoreAnimator>();
 				SpriteRenderer mysprite =  newObj.AddComponent<SpriteRenderer>();
-				//Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
 				switch (Loader._RES)
 				{
 				case Loader.GAME_UW2:
@@ -1244,8 +1231,6 @@ public class ObjectInteraction : UWEBase {
 				}
 			
 				mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
-				//mysprite.sprite = image;//Assigns the sprite to the object.
-				//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
 
 				CharacterController cap  = myObj.AddComponent<CharacterController>();
 				cap = myObj.GetComponent<CharacterController>();
@@ -1406,6 +1391,7 @@ public class ObjectInteraction : UWEBase {
 						//{
 								npc.npc_whoami= objI.npc_whoami;
 						//}
+						npc.npc_voidanim=objI.npc_voidanim;
 						npc.npc_xhome=objI.npc_xhome;        //  x coord of home tile
 						npc.npc_yhome=objI.npc_yhome;        //  y coord of home tile
 						npc.npc_hunger=objI.npc_hunger;
@@ -1563,7 +1549,7 @@ public class ObjectInteraction : UWEBase {
 				myObj.transform.parent = parent.transform;
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-				ObjectInteraction objInt = CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.isAnimated[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
+				ObjectInteraction objInt = CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, objM.WorldIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.InventoryIndex [currObj.item_id], objM.type [currObj.item_id], currObj.item_id, currObj.link, currObj.quality, currObj.owner, objM.isMoveable[currObj.item_id], objM.isUseable[currObj.item_id], objM.startFrame[currObj.item_id], objM.useSprite[currObj.item_id], currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag);
 				objInt.objectloaderinfo = currObj;
 				currObj.instance = objInt;
 				objInt.link=currObj.link;
@@ -1596,7 +1582,16 @@ public class ObjectInteraction : UWEBase {
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						break;	
 					}
-
+				case NPC_WISP:
+						myObj.AddComponent<NPC_Wisp>();
+						AddAnimation=true;
+						break;
+				case NPC_VOID:
+						{
+							NPC_VoidCreature npc = myObj.AddComponent<NPC_VoidCreature>();
+							SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+							break;	
+						}
 				case HIDDENDOOR:
 				case DOOR:
 				case PORTCULLIS:
@@ -2184,9 +2179,39 @@ public class ObjectInteraction : UWEBase {
 
 				if (AddAnimation)
 				{//This is a hack!
+						bool looping=true;
+						if (_RES==GAME_UW2)
+						{
+							switch(currObj.item_id)
+							{
+							case 448://blood
+							case 450:
+							case 451:
+							case 452://explosions
+							case 453://lightning
+							case 459://flash
+							case 462://vapor trail
+								looping=false;break;
+							}
+						}
+						else
+						{
+							switch(currObj.item_id)
+							{
+							case 450:
+							case 451:
+							case 452://explosions
+							case 453://lightning
+							case 459://damage
+									looping=false;break;
+							}	
+						}
+
+
 					AnimationOverlay ao= myObj.AddComponent<AnimationOverlay>();					
-					ao.StartFrame=GameWorldController.instance.objectMaster.isAnimated[currObj.item_id] ;
+					ao.StartFrame=GameWorldController.instance.objectMaster.startFrame[currObj.item_id] ;
 					ao.NoOfFrames=GameWorldController.instance.objectMaster.useSprite[currObj.item_id] ;
+					ao.Looping=looping;
 				}
 				return objInt;
 		}
@@ -2238,6 +2263,10 @@ public class ObjectInteraction : UWEBase {
 		}
 
 
+		/// <summary>
+		/// Determines whether this instance can be picked up.
+		/// </summary>
+		/// <returns><c>true</c> if this instance can be picked up; otherwise, <c>false</c>.</returns>
 		public bool CanBePickedUp()
 		{
 			return  (GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp==1 || this.GetComponent<object_base>().CanBePickedUp());
@@ -2261,6 +2290,11 @@ public class ObjectInteraction : UWEBase {
 			}
 		}
 
+
+		/// <summary>
+		/// Sets the invisibility of the object
+		/// </summary>
+		/// <param name="val">Value.</param>
 		public void setInvis(short val)
 		{
 			invis=val;
@@ -2270,4 +2304,10 @@ public class ObjectInteraction : UWEBase {
 				sr.gameObject.SetActive(val==0);
 			}
 		}
+
+		public bool isMoveable()
+		{//GameWorldController.instance.objectMaster
+			return (GameWorldController.instance.objectMaster.isMoveable[item_id]==1);
+		}
+
 }

@@ -5,6 +5,7 @@ public class MobileObject : object_base {
 		
 		//NPC Properties from Underworld
 		public short npc_whoami;
+		public short npc_voidanim;
 		public short npc_xhome;        //  x coord of home tile
 		public short npc_yhome;        //  y coord of home tile
 		//	public int npc_whoami;       //  npc conversation slot number
