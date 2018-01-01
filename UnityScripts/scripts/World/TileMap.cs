@@ -713,41 +713,12 @@ public class TileMap : Loader {
 		/// <param name="y">The y coordinate.</param>
 	public void SetTileMapWallFacesUW ()
 	{
-				short x; short y;
+		short x; short y;
      	for ( y = 0; y <= TileMap.TileMapSizeY; y++) {
 			for (x = 0; x <= TileMap.TileMapSizeX; x++) {
-				if (Tiles [x, y].tileType >= 0)//was just solid only. Note: If textures are all wrong it's probably caused here!
-				 {
-					//assign it's north texture
-					if (y < TileMap.TileMapSizeY) {
-						Tiles [x, y].North = Tiles [x, y + 1].wallTexture;
-					}
-					else {
-						Tiles [x, y].North = -1;
-					}
-					//assign it's southern
-					if (y > 0) {
-						Tiles [x, y].South = Tiles [x, y - 1].wallTexture;
-					}
-					else {
-						Tiles [x, y].South = -1;
-					}
-				}
-				//it's east
-				if (x < TileMap.TileMapSizeX) {
-					Tiles [x, y].East = Tiles [x + 1, y].wallTexture;
-				}
-				else {
-					Tiles [x, y].East = -1;
-				}
-				//assign it's West
-				if (x > 0) {
-					Tiles [x, y].West = Tiles [x - 1, y].wallTexture;
-				}
-				else {
-					Tiles [x, y].West = -1;
-				}
+				SetTileWallFacesUW (x,y);
 			}
+						/*
 			if ((x <= TileMap.TileMapSizeX) && (y <= TileMap.TileMapSizeY)) {
 				Tiles [x, y].UpperEast = Tiles [x, y].East;
 				Tiles [x, y].UpperWest = Tiles [x, y].West;
@@ -757,6 +728,47 @@ public class TileMap : Loader {
 				Tiles [x, y].LowerWest = Tiles [x, y].West;
 				Tiles [x, y].LowerNorth = Tiles [x, y].North;
 				Tiles [x, y].LowerSouth = Tiles [x, y].South;
+			}
+			*/
+		}
+	}
+
+		/// <summary>
+		/// Sets the tile wall faces for the selected tile
+		/// </summary>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+	public void SetTileWallFacesUW (short x, short y)
+	{
+		if (Tiles [x, y].tileType >= 0)//was just solid only. Note: If textures are all wrong it's probably caused here!
+		 {
+			//assign it's north texture
+			if (y < TileMap.TileMapSizeY) {
+				Tiles [x, y].North = Tiles [x, y + 1].wallTexture;
+			}
+			else {
+				Tiles [x, y].North = -1;
+			}
+			//assign it's southern
+			if (y > 0) {
+				Tiles [x, y].South = Tiles [x, y - 1].wallTexture;
+			}
+			else {
+				Tiles [x, y].South = -1;
+			}
+			//it's east
+			if (x < TileMap.TileMapSizeX) {
+				Tiles [x, y].East = Tiles [x + 1, y].wallTexture;
+			}
+			else {
+				Tiles [x, y].East = -1;
+			}
+			//assign it's West
+			if (x > 0) {
+				Tiles [x, y].West = Tiles [x - 1, y].wallTexture;
+			}
+			else {
+				Tiles [x, y].West = -1;
 			}
 		}
 	}
