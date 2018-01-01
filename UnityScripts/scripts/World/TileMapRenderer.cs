@@ -673,80 +673,80 @@ public class TileMapRenderer : Loader{
 				{
 						if (objList.objInfo[i]!=null)
 						{
-						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
-						{
-								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
-								//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
-								Vector3[] Verts= new Vector3[24];
-								Vector2[] UVs= new Vector2[24];
-								int t=0;
-								float x1=0.03f;
-								float x0 =-0.03f;
-								float y0=-0.03f;
-								float y1=0.03f;
-								float z1=(float)(CEILING_HEIGHT * 0.15f)- position.y;
-								float z0=- position.y;
+							if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
+							{
+									Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
+									//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
+									Vector3[] Verts= new Vector3[24];
+									Vector2[] UVs= new Vector2[24];
+									int t=0;
+									float x1=0.03f;
+									float x0 =-0.03f;
+									float y0=-0.03f;
+									float y1=0.03f;
+									float z1=(float)(CEILING_HEIGHT * 0.15f)- position.y;
+									float z0=- position.y;
 
-								//x1
-								Verts[t++] = new Vector3(x0, y1, z0);
-								Verts[t++] = new Vector3(x0, y1, z1);
-								Verts[t++] = new Vector3(x1, y1, z1);
-								Verts[t++] = new Vector3(x1, y1, z0);
+									//x1
+									Verts[t++] = new Vector3(x0, y1, z0);
+									Verts[t++] = new Vector3(x0, y1, z1);
+									Verts[t++] = new Vector3(x1, y1, z1);
+									Verts[t++] = new Vector3(x1, y1, z0);
 
-								Verts[t++] = new Vector3(x1, y0, z0);
-								Verts[t++] = new Vector3(x1, y0, z1);
-								Verts[t++] = new Vector3(x0, y0, z1);
-								Verts[t++] = new Vector3(x0, y0, z0);
+									Verts[t++] = new Vector3(x1, y0, z0);
+									Verts[t++] = new Vector3(x1, y0, z1);
+									Verts[t++] = new Vector3(x0, y0, z1);
+									Verts[t++] = new Vector3(x0, y0, z0);
 
-								Verts[t++] = new Vector3(x1, y1, z0);
-								Verts[t++] = new Vector3(x1, y1, z1);
-								Verts[t++] = new Vector3(x1, y0, z1);
-								Verts[t++] = new Vector3(x1, y0, z0);
+									Verts[t++] = new Vector3(x1, y1, z0);
+									Verts[t++] = new Vector3(x1, y1, z1);
+									Verts[t++] = new Vector3(x1, y0, z1);
+									Verts[t++] = new Vector3(x1, y0, z0);
 
-								Verts[t++] = new Vector3(x0, y0, z0);
-								Verts[t++] = new Vector3(x0, y1, z0);
-								Verts[t++] = new Vector3(x1, y1, z0);
-								Verts[t++] = new Vector3(x1, y0, z0);
+									Verts[t++] = new Vector3(x0, y0, z0);
+									Verts[t++] = new Vector3(x0, y1, z0);
+									Verts[t++] = new Vector3(x1, y1, z0);
+									Verts[t++] = new Vector3(x1, y0, z0);
 
-								Verts[t++] = new Vector3(x0, y0, z0);
-								Verts[t++] = new Vector3(x0, y0, z1);
-								Verts[t++] = new Vector3(x0, y1, z1);
-								Verts[t++] = new Vector3(x0, y1, z0);
+									Verts[t++] = new Vector3(x0, y0, z0);
+									Verts[t++] = new Vector3(x0, y0, z1);
+									Verts[t++] = new Vector3(x0, y1, z1);
+									Verts[t++] = new Vector3(x0, y1, z0);
 
-								Verts[t++] = new Vector3(x1, y0, z1);
-								Verts[t++] = new Vector3(x1, y1, z1);
-								Verts[t++] = new Vector3(x0, y1, z1);
-								Verts[t++] = new Vector3(x0, y0, z1);
+									Verts[t++] = new Vector3(x1, y0, z1);
+									Verts[t++] = new Vector3(x1, y1, z1);
+									Verts[t++] = new Vector3(x0, y1, z1);
+									Verts[t++] = new Vector3(x0, y0, z1);
 
 
-								for (int j=0; j<6;j++)
-								{
-										UVs[(j*4)+0]= new Vector2(0f,0f);
-										UVs[(j*4)+1]= new Vector2(0f,CEILING_HEIGHT);
-										UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
-										UVs[(j*4)+3]= new Vector2(1f,0f);
-								}
-								int TextureIndex= objList.objInfo[i].flags & 0x3;//& 0x3F;
-								Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (TextureIndex).ToString("d2"));
-								if (tmobj!=null)
-								{
-										if (tmobj.mainTexture==null)
-										{//UW1 style bridges UW2 has some differences....
-												tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(TextureIndex);
-										}
-										Material[] MatsToUse = new Material[6];
-										for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
-										{//tmobj[30]+(objList[x].flags & 0x3F)
-												MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
-										}	
-										RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6, ObjectLoader.UniqueObjectName(objList.objInfo[i]));
-								}
-								else
-								{
-										Debug.Log("RenderPillar: Missing material resource for tmobj/" + TextureIndex);
-										return;
-								}	
-						}
+									for (int j=0; j<6;j++)
+									{
+											UVs[(j*4)+0]= new Vector2(0f,0f);
+											UVs[(j*4)+1]= new Vector2(0f,CEILING_HEIGHT);
+											UVs[(j*4)+2]= new Vector2(1f,CEILING_HEIGHT);
+											UVs[(j*4)+3]= new Vector2(1f,0f);
+									}
+									int TextureIndex= objList.objInfo[i].flags & 0x3;//& 0x3F;
+									Material tmobj = (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + (TextureIndex).ToString("d2"));
+									if (tmobj!=null)
+									{
+											if (tmobj.mainTexture==null)
+											{//UW1 style bridges UW2 has some differences....
+													tmobj.mainTexture=GameWorldController.instance.TmObjArt.LoadImageAt(TextureIndex);
+											}
+											Material[] MatsToUse = new Material[6];
+											for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
+											{//tmobj[30]+(objList[x].flags & 0x3F)
+													MatsToUse[j]= tmobj;//GameWorldController.instance.MaterialMasterList[j];
+											}	
+											RenderCuboid(Parent, Verts,UVs,position,MatsToUse,6, ObjectLoader.UniqueObjectName(objList.objInfo[i]));
+									}
+									else
+									{
+											Debug.Log("RenderPillar: Missing material resource for tmobj/" + TextureIndex);
+											return;
+									}	
+							}
 						}
 				}
 		}

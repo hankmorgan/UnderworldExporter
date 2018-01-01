@@ -13,10 +13,18 @@ public static class TGALoader
 	
 	public static Texture2D LoadTGA(string fileName)
 	{
-		using (var imageFile = File.OpenRead(fileName))
+		if (File.Exists(fileName))
 		{
-			return LoadTGA(imageFile);
+			using (var imageFile = File.OpenRead(fileName))
+			{
+				return LoadTGA(imageFile);
+			}	
 		}
+		else
+		{
+			return null;
+		}
+
 	}
 
 	public static Texture2D LoadTGA(Stream TGAStream)

@@ -1297,9 +1297,12 @@ public class SaveGame : Loader {
 				char[] pDat;
 				int x_position=0;
 				int y_position=0;
+
+				int x_position_dream=0;
+				int y_position_dream=0;
+
 				int z_position=0;
 				int x_clock=1;
-
 
 
 				int[] gametimevals=new int[3];
@@ -1536,7 +1539,10 @@ public class SaveGame : Loader {
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x64:
-												Quest.instance.FightingInArena=  (((int)buffer[i]>>2) & 0x1) ;
+												Quest.instance.DreamPlantEaten =(1==(((int)buffer[i]) & 0x1));
+												Quest.instance.InDreamWorld= (1==(((int)buffer[i]>>1) & 0x1)) ;
+												Quest.instance.FightingInArena= (1==(((int)buffer[i]>>2) & 0x1)) ;
+												UWCharacter.Instance.DreamWorldTimer=30f;
 												break;
 										case 0x66: // hand, Gender & body, and class
 												{
@@ -1760,8 +1766,14 @@ public class SaveGame : Loader {
 													Quest.instance.variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,16);
 													break;
 												}
+										case  0x2fb : ///   x-position in level
+												x_position_dream= (int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x2fd  : ///   y-position
+												y_position_dream=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+										case 0x301:
+												UWCharacter.Instance.DreamReturnLevel=(short)(DataLoader.getValAtAddress(buffer,i,8) - 1);break;
 										case 0x303:
-												{//Game objections high nibble is graphic detail
+												{//Game options high nibble is graphic detail
 												int val =	(int)DataLoader.getValAtAddress(buffer,i,8);
 												ObjectInteraction.PlaySoundEffects= ((val & 0x1) == 1);
 												MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
@@ -1986,10 +1998,6 @@ public class SaveGame : Loader {
 
 						/* end load inventory  */
 
-
-
-
-
 						for (int a=0; a<effectCounter;a++)
 						{//Recast the new ones.
 								UWCharacter.Instance.ActiveSpell[a] = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf );
@@ -2014,6 +2022,9 @@ public class SaveGame : Loader {
 						float Ratio=213f;
 						float VertAdjust = 0.3543672f;
 						GameWorldController.instance.StartPos=new Vector3((float)x_position/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position/Ratio);
+						Vector3 DreamReturn = new Vector3((float)x_position_dream/Ratio, (float)z_position/Ratio +VertAdjust ,(float)y_position_dream/Ratio);
+						UWCharacter.Instance.DreamReturnTileX =(short)(DreamReturn.x / 1.2f);
+						UWCharacter.Instance.DreamReturnTileY =(short)(DreamReturn.z / 1.2f);
 						UWCharacter.Instance.TeleportPosition=GameWorldController.instance.StartPos;
 
 						return;

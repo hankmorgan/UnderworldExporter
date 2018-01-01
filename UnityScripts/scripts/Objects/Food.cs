@@ -84,7 +84,6 @@ public class Food : object_base {
 
 		if (Nutrition()+UWCharacter.Instance.FoodLevel>=255)
 		{
-			UWCharacter.Instance.FoodLevel=255;
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_are_too_full_to_eat_that_now_));
 			return false;
 		}
@@ -127,9 +126,12 @@ public class Food : object_base {
 					int LeftOverToCreate=-1;
 					switch (objInt().item_id)
 					{
+
 					case 176:
 					case 177://meat
-							LeftOverToCreate=197;break;
+						LeftOverToCreate=197;break;
+					case 186://honeycomb
+						LeftOverToCreate=210;break;
 					case 187:								
 					case 188:
 					case 189://bottles.

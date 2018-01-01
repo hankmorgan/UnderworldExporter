@@ -43,7 +43,7 @@ public class a_hack_trap_coward : a_hack_trap {
 			}
 			else
 			{
-				Quest.instance.FightingInArena=0;
+				Quest.instance.FightingInArena=false;
 			}
 		}
 		

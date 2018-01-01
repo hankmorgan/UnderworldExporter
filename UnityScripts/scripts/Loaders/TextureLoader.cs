@@ -76,6 +76,8 @@ public class TextureLoader : ArtLoader {
 		{
 		case 1: // Palette cycled
 			return LoadImageAt (index,GameWorldController.instance.palLoader.GreyScale);
+		case 2://normal map
+			return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + "_normal.tga");
 		default:
 			return LoadImageAt (index,GameWorldController.instance.palLoader.Palettes[0]);
 		}
@@ -241,4 +243,40 @@ public class TextureLoader : ArtLoader {
 			}//end switch	
 		}
 	}
+
+
+
+		/// <summary>
+		/// Converts a texture2d into a normal map
+		/// </summary>
+		/// <returns>The map.</returns>
+		/// <param name="source">Source.</param>
+		/// <param name="strength">Strength.</param>
+		/// Sourced from http://jon-martin.com/?p=123
+	public static Texture2D NormalMap(Texture2D source,float strength) {
+		strength=Mathf.Clamp(strength,0.0F,10.0F);
+		Texture2D result;
+		float xLeft;
+		float xRight;
+		float yUp;
+		float yDown;
+		float yDelta;
+		float xDelta;
+		result = new Texture2D (source.width, source.height, TextureFormat.ARGB32, true);
+		for (int by=0; by<result.height; by++) {
+				for (int bx=0; bx<result.width; bx++) {
+						xLeft = source.GetPixel(bx-1,by).grayscale*strength;
+						xRight = source.GetPixel(bx+1,by).grayscale*strength;
+						yUp = source.GetPixel(bx,by-1).grayscale*strength;
+						yDown = source.GetPixel(bx,by+1).grayscale*strength;
+						xDelta = ((xLeft-xRight)+1)*0.5f;
+						yDelta = ((yUp-yDown)+1)*0.5f;
+						result.SetPixel(bx,by,new Color(xDelta,yDelta,1.0f,yDelta));
+				}
+		}
+		result.Apply();
+		return result;
+	}
+
+
 }

@@ -33,7 +33,7 @@ public class LightSource : object_base {
 		}
 
 		/// Basic brightness around the player.
-	public const float BaseBrightness = 6;
+	public const float BaseBrightness = 16;
 
 		/// The light level obtained from magic spells
 	public static float MagicBrightness=0;

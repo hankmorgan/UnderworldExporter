@@ -83,7 +83,7 @@ public class InventorySlot : GuiBase {
 
 	void ClickEvent(int pointerID)
 	{
-		if (UWCharacter.Instance.isRoaming==true)
+		if ((UWCharacter.Instance.isRoaming==true) || (Quest.instance.InDreamWorld))
 		{//No inventory use while using wizard eye.
 				return;
 		}

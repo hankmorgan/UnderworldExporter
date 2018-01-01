@@ -53,23 +53,6 @@ A trigger that fires when the player character enters it
 		}
 	}
 
-	/*void Update()
-	{
-		if (TriggerReady<5)
-		{
-				TriggerReady++;	
-		}
-		else
-		{
-			if (!startPosTested)	
-			{
-				CheckPlayerStart();
-				startPosTested=true;
-			}
-		}
-	}*/
-
-
 	void CheckPlayerStart()
 	{
 		Collider[] colliders=Physics.OverlapBox(this.transform.position, box.size/2);
@@ -86,22 +69,19 @@ A trigger that fires when the player character enters it
 
 	protected virtual void OnTriggerEnter(Collider other)
 	{
-		//if (TriggerReady>=5)
-		//{
-			if (playerStartedInTrigger!=true)
+		if (playerStartedInTrigger!=true)
+		{
+			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
 			{
-				if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
-				{
-										Debug.Log("Activating " + this.name);
-					Activate (other.gameObject);
-				}	
+				Debug.Log("Activating " + this.name);
+				Activate (other.gameObject);
 			}	
-		//}
+		}	
 	}
 
 	protected virtual void OnTriggerExit(Collider other)
 	{
-		if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode))
+		if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
 		{
 			playerStartedInTrigger=false;		
 		}

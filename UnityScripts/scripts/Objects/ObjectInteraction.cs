@@ -149,6 +149,7 @@ public class ObjectInteraction : UWEBase {
 		public const int A_STORAGECRYSTAL = 122;
 		public const int NPC_WISP = 123;
 		public const int NPC_VOID = 124;
+		public const int DREAM_PLANT = 125;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1386,11 +1387,7 @@ public class ObjectInteraction : UWEBase {
 				//NPC npc = myObj.GetComponent<NPC>();
 				if (npc!=null)
 				{
-
-						//if ((npc.npc_whoami==0) && (objI.npc_whoami  != 0))
-						//{
-								npc.npc_whoami= objI.npc_whoami;
-						//}
+						npc.npc_whoami= objI.npc_whoami;
 						npc.npc_voidanim=objI.npc_voidanim;
 						npc.npc_xhome=objI.npc_xhome;        //  x coord of home tile
 						npc.npc_yhome=objI.npc_yhome;        //  y coord of home tile
@@ -1833,6 +1830,9 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_STORAGECRYSTAL:
 						myObj.AddComponent<StorageCrystal>();
+						break;
+				case DREAM_PLANT:
+						myObj.AddComponent<DreamPlant>();
 						break;
 				case A_MAGIC_PROJECTILE:
 						{

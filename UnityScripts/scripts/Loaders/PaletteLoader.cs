@@ -10,7 +10,18 @@ public class PaletteLoader : ArtLoader {
 	public int NoOfPals=22;
 	public Palette GreyScale=null;
 
-	public void LoadPalettes()
+	public PaletteLoader(string PathToResource , int chunkID)
+	{
+		Path = Loader.BasePath+ PathToResource;
+		if (_RES==GAME_UW2)
+		{
+			PaletteNo=chunkID;
+		}
+		LoadPalettes();
+	}
+
+
+	void LoadPalettes()
 	{
 		GreyScale=new Palette();
 		for (int i=0; i <= GreyScale.blue.GetUpperBound(0); i++)
@@ -90,4 +101,8 @@ public class PaletteLoader : ArtLoader {
 		}
 		return auxpal;
 	}
+
+
+
+
 }

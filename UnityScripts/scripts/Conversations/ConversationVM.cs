@@ -1206,7 +1206,7 @@ public class ConversationVM : UWEBase {
 				}
 				if (SettingUpFight==false)
 				{
-					Quest.instance.FightingInArena=0;//Clear the arena flag
+					Quest.instance.FightingInArena=false;//Clear the arena flag
 				}
 				if (Teleport)
 				{
@@ -2005,12 +2005,19 @@ public class ConversationVM : UWEBase {
 								{
 									SettingUpFight=true;	
 									Quest.instance.ArenaOpponents[0]=npc.objInt().objectloaderinfo.index;
-									Quest.instance.FightingInArena=1;
+									Quest.instance.FightingInArena=true;
 									break;
 								}
 							case 1://Are you in a fight
 								{	
-									stack.result_register=Quest.instance.FightingInArena;
+									if(Quest.instance.FightingInArena)
+									{
+										stack.result_register=1;	
+									}
+									else
+									{
+										stack.result_register=0;
+									}
 									break;
 								}
 							case 2://Set up arena fight.
@@ -4054,7 +4061,7 @@ description:  places a generated object in underworld
 				Debug.Log("Setting up a fight with " + NoOfFighters + " in arena " + arena)	;
 				SettingUpFight=true;
 				Quest.instance.QuestVariables[133]= NoOfFighters*5;
-				Quest.instance.FightingInArena=1;
+				Quest.instance.FightingInArena=true;
 				int[] tileX=new int[5];
 				int[] tileY=new int[5];
 				switch (arena)

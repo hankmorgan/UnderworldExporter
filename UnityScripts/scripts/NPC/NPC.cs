@@ -236,7 +236,7 @@ public class NPC : MobileObject {
 				}
 				if (_RES==GAME_UW2)
 				{//Improve players Win loss record in the arena
-					if (Quest.instance.FightingInArena==1)
+					if (Quest.instance.FightingInArena)
 					{
 						for (int i=0; i<=Quest.instance.ArenaOpponents.GetUpperBound(0);i++)
 						{

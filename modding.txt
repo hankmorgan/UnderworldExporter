@@ -23,3 +23,6 @@ See the attached uw1_object_settings.txt files and uw1_retro_config.txt files to
 
 The original TGALoader code was sourced from 
 http://forum.unity3d.com/threads/tga-loader-for-unity3d.172291/
+
+
+To load a normal map for a texure name the file ###_normal.tga.  Loading of the normal map depends on the underlying material in the project set to use the legacy\bumped diffuse shader.

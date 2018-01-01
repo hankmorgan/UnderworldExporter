@@ -449,10 +449,10 @@ public class GameWorldController : UWEBase {
 						UWCharacter.Instance.speedMultiplier=20;
 						break;
 				case GAME_SHOCK:
-						palLoader = new PaletteLoader();
-						palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
-						palLoader.PaletteNo=700;
-						palLoader.LoadPalettes();
+						palLoader = new PaletteLoader("res\\data\\gamepal.res", 700);
+						//palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
+						//palLoader.PaletteNo=700;
+						//palLoader.LoadPalettes();
 						texLoader=new TextureLoader();
 						objectMaster=new ObjectMasters();
 						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
@@ -469,9 +469,30 @@ public class GameWorldController : UWEBase {
 						commonObject= new CommonObjectDatLoader();
 
 
-						palLoader = new PaletteLoader();
-						palLoader.Path=Loader.BasePath + "data\\pals.dat";
-						palLoader.LoadPalettes();
+						palLoader = new PaletteLoader("data\\pals.dat",-1);
+						//palLoader.Path=Loader.BasePath + "data\\pals.dat";
+						//palLoader.LoadPalettes();
+						//Create palette cycles and store them in the palette array
+
+						PaletteLoader palCycler = new PaletteLoader("data\\pals.dat",-1);
+
+						for (int c=0; c<=27;c++)
+						{
+								switch (_RES)
+								{
+								case GAME_UW2:
+										Palette.cyclePalette(palCycler.Palettes[0], 224, 16);
+										Palette.cyclePalette(palCycler.Palettes[0], 3, 6);
+										break;
+								default:
+										Palette.cyclePalette(palCycler.Palettes[0], 48, 4);
+										Palette.cyclePalette(palCycler.Palettes[0], 16, 7);//Reverse direction.
+										break;
+								}
+							paletteArray[c] = Palette.toImage(palCycler.Palettes[0]);			
+						}
+
+
 						bytloader=new BytLoader();
 
 						texLoader=new TextureLoader();
@@ -1464,14 +1485,23 @@ public class GameWorldController : UWEBase {
 						{
 						case "COLOURREPLACEMENT":
 						case "COLOURREPLACEMENTREVERSE":
-							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,1);
+							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,1);//load a greyscale texture for use with the shader.
+							break;
+						case "LEGACY SHADERS/BUMPED DIFFUSE":
+								{
+									Texture2D loadedTexture =  texLoader.LoadImageAt(i,2);//Get normal map for mod directory
+									MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
+									if (loadedTexture!=null)
+									{
+										MaterialMasterList[i].SetTexture("_BumpMap",TextureLoader.NormalMap(loadedTexture,1f));						
+									}
+								}
 							break;
 						default:
+								//Debug.Log(i + " is " + MaterialMasterList[i].shader.name);
 							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
 							break;
 						}
-					//Debug.Log( MaterialMasterList[i].shader.name);
-				
 				}
 				if (_RES==GAME_UW1)
 				{

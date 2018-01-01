@@ -539,6 +539,14 @@ public class TileMap : Loader {
 									{
 										CeilingTexture=(short)i;//texture_map[i];
 									}
+									if (
+												(LevelNo==(int)(GameWorldController.UW2_LevelNames.Ethereal4))
+												&& 
+												(i==16)
+												)
+									{//Not sure why this is an exceptional case!
+										CeilingTexture=CeilingTexture=(short)i;
+									}
 									break;
 								}
 						}

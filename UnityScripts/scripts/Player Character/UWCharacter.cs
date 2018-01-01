@@ -110,6 +110,18 @@ public class UWCharacter : Character {
 	public Vector3 TeleportPosition;
 	public float teleportedTimer=0f;
 
+		/// <summary>
+		/// The dream return position when you are dreaming in the void.
+		/// </summary>
+	public short DreamReturnTileX=0;
+	public short DreamReturnTileY=0;
+
+		/// <summary>
+		/// The dream return level when you are dreaming in the void.
+		/// </summary>
+	public short DreamReturnLevel=0;
+
+	public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
 
 	public void Awake()
 	{
@@ -286,31 +298,32 @@ public class UWCharacter : Character {
 
 	// Update is called once per frame
 	public override void Update () {
-				if ((_RES==GAME_SHOCK) || (_RES==GAME_TNOVA))
-				{	
-						if (isFlying)
-						{
-								flySpeed=10f;
-								FlyingMode();
-						}
-						return;
-				}
+		if ((_RES==GAME_SHOCK) || (_RES==GAME_TNOVA))
+		{	
+			if (isFlying)
+			{
+				flySpeed=10f;
+				FlyingMode();
+			}
+			return;
+		}
 
-				if (onIce)
-				{		
-					//if (onIcePrev==false)
-					//{
-					//	IceVelocity = playerMotor.movement.velocity.normalized * 2f;
-					//}
-					//playerMotor.movement.velocity=IceVelocity;//playerMotor.movement.velocity.normalized;
-				}
-				onIcePrev = onIce;
+		if (onIce)
+		{		
+			//if (onIcePrev==false)
+			//{
+			//	IceVelocity = playerMotor.movement.velocity.normalized * 2f;
+			//}
+			//playerMotor.movement.velocity=IceVelocity;//playerMotor.movement.velocity.normalized;
+		}
+		onIcePrev = onIce;
 
 		base.Update ();
-				if (EditorMode)
-				{
-					CurVIT=MaxVIT;	
-				}
+		if (EditorMode)
+		{
+			CurVIT=MaxVIT;	
+		}
+
 		if ((JustTeleported))
 		{
 			teleportedTimer+=Time.deltaTime;
@@ -324,8 +337,7 @@ public class UWCharacter : Character {
 			}				
 		}
 		if( (PlayerInventory.Ready==true) && (InventoryReady=false))
-		{
-						
+		{						
 			//if (!LevelSerializer.IsDeserializing)
 			//{
 				if ((playerInventory!=null))
@@ -347,7 +359,6 @@ public class UWCharacter : Character {
 		}
 		if ((CurVIT<=0) && (GameWorldController.instance.getMus().Death==false))
 		{
-
 			PlayerDeath();
 			return;
 		}
@@ -373,6 +384,15 @@ public class UWCharacter : Character {
 		}
 		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
 		
+		if(Quest.instance.InDreamWorld)
+		{
+			isFlying=true;
+			DreamWorldTimer -=Time.deltaTime;
+			if(DreamWorldTimer<0)
+			{
+				DreamTravelFromVoid ();
+			}
+		}
 
 		if (isFlying)
 		{//Flying spell
@@ -392,7 +412,6 @@ public class UWCharacter : Character {
 				playerMotor.movement.maxBackwardsSpeed=playerMotor.movement.maxForwardSpeed/3;
 			}
 		}
-
 		
 		if (isLeaping)
 		{//Jump spell
@@ -411,8 +430,7 @@ public class UWCharacter : Character {
 		GameWorldController.instance.getMus().WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
 
 		if (PlayerMagic.ReadiedSpell!="")
-		{//Player has a spell thats about to be cast. All other activity is ignored.
-	
+		{//Player has a spell thats about to be cast. All other activity is ignored.	
 			SpellMode ();
 			return;
 		}
@@ -991,10 +1009,57 @@ public class UWCharacter : Character {
 		}
 
 
-		/// <summary>
-		/// The player goes to sleep
-		/// </summary>
 		public void Sleep()
+		{
+			switch(_RES)
+			{
+			case GAME_UW2:
+					SleepUW2();break;
+			default:
+					SleepUW1();break;
+			}
+		}
+
+
+		/// <summary>
+		/// The player goes to sleep in UW2
+		/// </summary>
+		public void SleepUW2()
+		{
+				if (!CheckForMonsters())
+				{
+						
+						if (Quest.instance.DreamPlantEaten)
+						{
+								DreamTravelToVoid ();
+						}
+						else
+						{	
+								if (UWCharacter.Instance.FoodLevel>=3)					
+								{
+										if (IsGaramonTime())
+										{//PLay a garamon dream
+												//PlayGaramonDream(Quest.instance.GaramonDream++);	
+												UWHUD.instance.MessageScroll.Add("You dream of the guardian");
+										}
+										else
+										{//Regular sleep with a fade to black
+												StartCoroutine(SleepDelay());
+										}	
+								}					
+						}
+						SleepRegen ();
+				}
+				else
+				{
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,14));
+				}	
+		}
+
+		/// <summary>
+		/// The player goes to sleep in UW1
+		/// </summary>
+		public void SleepUW1()
 		{
 				//Rules to implement for sleeping
 				//Only sleep if there are no hostile monsters nearby.
@@ -1024,18 +1089,7 @@ public class UWCharacter : Character {
 						ObjectInteraction incense =UWCharacter.Instance.playerInventory.findObjInteractionByID(277); 
 						if (incense!=null)
 						{
-								UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-								//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
-								incense.consumeObject ();
-								switch (Quest.instance.getIncenseDream())
-								{
-								case 0:
-										UWHUD.instance.CutScenesFull.SetAnimationFile="cs013_n01";break;
-								case 1:
-										UWHUD.instance.CutScenesFull.SetAnimationFile="cs014_n01";break;
-								case 2:
-										UWHUD.instance.CutScenesFull.SetAnimationFile="cs015_n01";break;
-								}
+								IncenseDream (incense);
 						}
 						else
 						{	
@@ -1048,34 +1102,10 @@ public class UWCharacter : Character {
 										else
 										{//Regular sleep with a fade to black
 												StartCoroutine(SleepDelay());
-												//UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,true);
-												//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 										}	
 								}					
 						}
-						for (int i=UWCharacter.Instance.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
-						{
-								if (UWCharacter.Instance.FoodLevel>=3)
-								{
-										GameClock.Advance();//Move time forward.
-								}
-								else
-								{//Too hungry to sleep.
-										UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,17));
-										UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);		
-										UWCharacter.Instance.Fatigue+=i;
-										return;// true;
-								}
-						}
-						UWCharacter.Instance.Fatigue=29;//Fully rested
-						if (UWCharacter.Instance.CurVIT<UWCharacter.Instance.MaxVIT)
-						{//Random regen of an amount of health
-								UWCharacter.Instance.CurVIT += Random.Range (1, UWCharacter.Instance.MaxVIT-UWCharacter.Instance.CurVIT+1);
-						}
-						if (UWCharacter.Instance.PlayerMagic.CurMana<UWCharacter.Instance.PlayerMagic.MaxMana)
-						{//Random regen of an amount of mana
-								UWCharacter.Instance.PlayerMagic.CurMana += Random.Range (1, UWCharacter.Instance.PlayerMagic.MaxMana-UWCharacter.Instance.PlayerMagic.CurMana+1);
-						}
+						SleepRegen ();
 				}
 				else
 				{
@@ -1083,6 +1113,74 @@ public class UWCharacter : Character {
 				}	
 		}
 
+	void IncenseDream (ObjectInteraction incense)
+	{
+		UWHUD.instance.EnableDisableControl (UWHUD.instance.CutsceneFullPanel.gameObject, true);
+		//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
+		incense.consumeObject ();
+		switch (Quest.instance.getIncenseDream ()) {
+		case 0:
+			UWHUD.instance.CutScenesFull.SetAnimationFile = "cs013_n01";
+			break;
+		case 1:
+			UWHUD.instance.CutScenesFull.SetAnimationFile = "cs014_n01";
+			break;
+		case 2:
+			UWHUD.instance.CutScenesFull.SetAnimationFile = "cs015_n01";
+			break;
+		}
+	}
+
+	void DreamTravelToVoid()
+	{
+		//Record the players position.	
+		Quest.instance.DreamPlantEaten=false;
+		DreamReturnTileX=TileMap.visitTileX;
+		DreamReturnTileY=TileMap.visitTileY;
+		DreamReturnLevel = GameWorldController.instance.LevelNo;
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));
+		GameWorldController.instance.SwitchLevel(68,32,27);//TODO:implement other destinations.
+		Quest.instance.InDreamWorld=true;
+		DreamWorldTimer=30f;
+		Quest.instance.QuestVariables[48]=1;		
+	}
+
+	void DreamTravelFromVoid ()
+	{
+		Quest.instance.InDreamWorld = false;
+		isFlying=false;
+		GameWorldController.instance.SwitchLevel (DreamReturnLevel,DreamReturnTileX,DreamReturnTileY);
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1, 25));
+	}
+
+	void SleepRegen ()
+	{
+		for (int i = UWCharacter.Instance.Fatigue; i < 29; i = i + 3)//Sleep restores at a rate of 3 points per hour
+		 {
+			if (UWCharacter.Instance.FoodLevel >= 3) {
+				GameClock.Advance ();
+				//Move time forward.
+			}
+			else {
+				//Too hungry to sleep.
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1, 17));
+				UWHUD.instance.EnableDisableControl (UWHUD.instance.CutsceneFullPanel, false);
+				UWCharacter.Instance.Fatigue += i;
+				return;
+				// true;
+			}
+		}
+		UWCharacter.Instance.Fatigue = 29;
+		//Fully rested
+		if (UWCharacter.Instance.CurVIT < UWCharacter.Instance.MaxVIT) {
+			//Random regen of an amount of health
+			UWCharacter.Instance.CurVIT += Random.Range (1, UWCharacter.Instance.MaxVIT - UWCharacter.Instance.CurVIT + 1);
+		}
+		if (UWCharacter.Instance.PlayerMagic.CurMana < UWCharacter.Instance.PlayerMagic.MaxMana) {
+			//Random regen of an amount of mana
+			UWCharacter.Instance.PlayerMagic.CurMana += Random.Range (1, UWCharacter.Instance.PlayerMagic.MaxMana - UWCharacter.Instance.PlayerMagic.CurMana + 1);
+		}
+	}
 
 		private bool CheckForMonsters()
 		{//Finds monsters in the area.

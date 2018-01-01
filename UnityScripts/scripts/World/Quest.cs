@@ -73,6 +73,7 @@ using System.Collections;
 /// 45: Janar has been met and befriended
 /// 
 /// 47: You have recieve the quest from the triliki
+/// 48: You have dreamed about the void
 /// 49: Bishop tells you about the gem.
 /// 50: The keep is going to crash.
 /// 
@@ -199,7 +200,10 @@ public class Quest : UWEBase {
 	/// </summary>
 	public int[] variables = new int[127];
 
-	public int FightingInArena=0;
+		/// <summary>
+		/// Is the player fighting in arena.
+		/// </summary>
+	public bool FightingInArena=false;
 
 		/// <summary>
 		/// The arena opponents item ids
@@ -208,7 +212,17 @@ public class Quest : UWEBase {
 
 
 	/// <summary>
-	/// The x clocks Does a thing. Not sure what it is yet but used in conversations to track events. (Progress through game?)
+	/// Has the player eaten a dream plant.
+	/// </summary>
+	public bool DreamPlantEaten=false;
+
+	/// <summary>
+	/// Is the player in the dream world
+	/// </summary>
+	public bool InDreamWorld=false;
+
+	/// <summary>
+	/// The x clocks tracks progress during the game and is used in firing events
 	/// </summary>
 	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat
 	/// Possibly these are hard coded events related to game progress. Some gamevariables seem to act as pointers to x_clocks
@@ -267,6 +281,14 @@ public class Quest : UWEBase {
 		return IncenseDream++;
 	}
 
+
+		/// <summary>
+		/// Hooks certain quest variables into the xclock.
+		/// </summary>
+		/// <returns><c>true</c>, if clock hook was xed, <c>false</c> otherwise.</returns>
+		/// <param name="index">Index.</param>
+		/// <param name="value">Value.</param>
+		/// <param name="operation">Operation.</param>
 		public bool x_clock_hook(int index,int value,int operation)
 		{
 			switch (index)

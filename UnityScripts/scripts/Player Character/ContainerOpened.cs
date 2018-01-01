@@ -33,6 +33,10 @@ public class ContainerOpened : GuiBase_Draggable {
 		public void OnClick()
 		{
 				if (Dragging==true){return;}
+				if ((UWCharacter.Instance.isRoaming==true) || (Quest.instance.InDreamWorld))
+				{//No inventory use while using wizard eye.
+						return;
+				}
 				if (UWCharacter.Instance.playerInventory.currentContainer==UWCharacter.Instance.name)
 				{//Don't do anything on the top level
 						UWCharacter.Instance.playerInventory.ContainerOffset=0;
