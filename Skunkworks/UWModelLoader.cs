@@ -6,6 +6,9 @@ public class UWModelLoader : MonoBehaviour {
 
   public int modelToLoad;
   public string outputname;
+  public Vector3[] verts;
+  public int[] trisToRender;
+  public bool rendernow;
 
   enum nodecmd
   {
@@ -193,7 +196,7 @@ public class UWModelLoader : MonoBehaviour {
       float ey = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;
       float ez = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;
 
-      Vector3 extents = new Vector3(ex,ez,ey);
+      Vector3 extents = new Vector3((float)ex,(float)ez,(float)ey);
       //ua_vector3d extents(ex,ez,ey);
 
      // ua_mdl_trace("dumping builtin model %u (%s)\noffset=0x%08x [unk1=0x%04x, extents=(%f,%f,%f) ]\n",
@@ -237,11 +240,28 @@ public class UWModelLoader : MonoBehaviour {
 
   }
 
+  void Update()
+  {
+    if (rendernow)
+    {
+      //rendernow=false;
+      Mesh mesh = new Mesh();
+      GetComponent<MeshFilter>().mesh = mesh;
+
+      mesh.vertices =verts;
+      // mesh.uv = newUV;
+
+      mesh.SetTriangles(trisToRender,0);
+      mesh.RecalculateNormals();
+     
+    }
+  }
+
 
   void RenderModel(UWModel mod)
   {
     outputname=mod.modelname;
-    Vector3[] verts = new Vector3[mod.NoOfVerts+1];
+    verts = new Vector3[mod.NoOfVerts+1];
     for (int i=0; i<=verts.GetUpperBound(0);i++)
     {
       verts[i]=mod.verts[i];
@@ -249,31 +269,33 @@ public class UWModelLoader : MonoBehaviour {
     //int noOfTris=mod.tris.Count;
     //noOfTris +=  (3- (noOfTris%3) );//round up to a multiple of 3 tris
      
-    int[] tris = new int[mod.tris.Count];
-    for (int i=0; i<=tris.GetUpperBound(0);i++)
+   // int[]  tris
+    trisToRender= new int[mod.tris.Count];
+    for (int i=0; i<= trisToRender.GetUpperBound(0);i++)
     {
       if(mod.tris.Count>i)
       {
-        tris[i]=mod.tris[i];  
+        trisToRender[i]=mod.tris[i];  
       }
-
     }
-    Mesh mesh = new Mesh();
-    GetComponent<MeshFilter>().mesh = mesh;
 
-    mesh.vertices =verts;
-   // mesh.uv = newUV;
 
-    mesh.SetTriangles(tris,0);
-    mesh.RecalculateNormals();
 
   }
 
 
   float ua_mdl_read_fixed(char[] fileData, long addressPtr)
   {
-    long val = DataLoader.getValAtAddress(fileData,addressPtr,16) ;//static_cast<Sint16>(fread16(fd));
-    return (float)(val)/ 256.0f;
+    int val = (int)DataLoader.getValAtAddress(fileData,addressPtr,16) ;//static_cast<Sint16>(fread16(fd));
+    int sign = (val>>15) & 0x1;
+    if (sign==1)
+    {
+      val = val & 0x0FFF;
+      val =val * -1;
+    }
+     
+
+    return ((float)(val)) / (256f); //256.0f;
   }
 
   int ua_mdl_read_vertno(char[] fileData, long addressPtr)
@@ -290,7 +312,8 @@ public class UWModelLoader : MonoBehaviour {
     {
       mod.verts.Capacity=vertno+1;
     }
-    mod.verts.Insert(vertno,vertex);
+   // mod.verts.Insert(vertno,vertex);
+    mod.verts[vertno]=vertex;
     if (mod.NoOfVerts< vertno)
     {
       mod.NoOfVerts=vertno;
@@ -314,58 +337,65 @@ public class UWModelLoader : MonoBehaviour {
       // read next command
      // ua_model_nodecmd cmd = (ua_model_nodecmd)fread16(fd);
       int cmd = (int)(DataLoader.getValAtAddress(modelfile,addressptr,16));addressptr+=2;
-      int refvert; int vertno; int unk1;
-      float vx;float vy; float vz;
-      float nx; float ny; float nz;
-      Vector3 refvect;
+      //int refvert; int vertno; int unk1;
+      //float vx;float vy; float vz;
+      //float nx; float ny; float nz;
+      //Vector3 refvect;
 
       //ua_mdl_trace(" %04x ",cmd);
       switch((nodecmd)cmd)
       {
         // misc. nodes
         case nodecmd.M3_UW_ENDNODE: // 0000 end node
-         // ua_mdl_trace("[end]");
-          loop = false;
-          break;
-
+          {
+            // ua_mdl_trace("[end]");
+            loop = false;
+            break;
+          }
         case nodecmd.M3_UW_ORIGIN: // 0078 define model center
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
-          mod.origin = mod.verts[vertno];// mod.verts[vertno] ;
+          {
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
+            mod.origin = mod.verts[vertno];// mod.verts[vertno] ;
 
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
-          unk1 =  (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2; //fread16(fd);
-         // ua_mdl_trace("[origin] vertno=%u unk1=%04x origin=(%f,%f,%f)",
-          //  vertno,unk1,vx,vy,vz);
-          break;
+            int unk1 =  (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2; //fread16(fd);
+            // ua_mdl_trace("[origin] vertno=%u unk1=%04x origin=(%f,%f,%f)",
+            //  vertno,unk1,vx,vy,vz);
+            break;
+          }
+
 
           // vertex definition nodes
         case nodecmd.M3_UW_VERTEX: // 007a define initial vertex
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
+          {
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
 
-          refvect = new Vector3(vx,vy,vz);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = new Vector3((float)vx,(float)vy,(float)vz);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-         // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f)",
-           // vertno,vx,vy,vz);
-          break;
+            // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f)",
+            // vertno,vx,vy,vz);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTICES: // 0082 define initial vertices
           {
             int nvert =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
-            vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
+            int vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
             for(int n=0; n<nvert; n++)
             {
-              vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-              vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-              vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
-              refvect = new Vector3(vx,vy,vz);
+              Vector3 refvect = new Vector3((float)vx,(float)vy,(float)vz);
               ua_mdl_store_vertex(refvect,vertno+n,ref mod);
 
               //ua_mdl_trace("%s[vertex] vertno=%u vertex=(%f,%f,%f)",
@@ -375,103 +405,122 @@ public class UWModelLoader : MonoBehaviour {
           break;
 
         case nodecmd.M3_UW_VERTEX_X: // 0086 define vertex offset X
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect =mod.verts[refvert];
-        //  refvect.x += vx;
-          refvect  = new Vector3(refvect.x+vx,refvect.y,refvect.z);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect =mod.verts[refvert];
+            //  refvect.x += vx;
+            refvect  = new Vector3(refvect.x+(float)vx,refvect.y,refvect.z);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-          //ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) x from=%u",
-          //  vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            //ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) x from=%u",
+            //  vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_Z: // 0088 define vertex offset Z
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect = mod.verts[refvert];
-          //refvect.z += vz;
-          refvect  = new Vector3(refvect.x,refvect.y,refvect.z+vz);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = mod.verts[refvert];
+            //refvect.z += vz;
+            refvect  = new Vector3(refvect.x,refvect.y,refvect.z+(float)vz);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-          //ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) z from=%u",
-          //  vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            //ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) z from=%u",
+            //  vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_Y: // 008a define vertex offset Y
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect = mod.verts[refvert];
-          //refvect.y += vy;
-          refvect  = new Vector3(refvect.x,refvect.y+vy,refvect.z);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = mod.verts[refvert];
+            //refvect.y += vy;
+            refvect  = new Vector3(refvect.x,refvect.y+(float)vy,refvect.z);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-         // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) y from=%u",
-         //   vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) y from=%u",
+            //   vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_XZ: // 0090 define vertex offset X,Z
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect = mod.verts[refvert];
-          //refvect.x += vx;
-          //refvect.z += vz;
-          refvect  = new Vector3(refvect.x+vx,refvect.y,refvect.z+vz);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = mod.verts[refvert];
+            //refvect.x += vx;
+            //refvect.z += vz;
+            refvect  = new Vector3(refvect.x+(float)vx,refvect.y,refvect.z+(float)vz);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-         // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) xz from=%u",
-        //    vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) xz from=%u",
+            //    vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_XY: // 0092 define vertex offset X,Y
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect = mod.verts[refvert];
-          refvect.x += vx;
-          refvect.y += vy;
-          refvect  = new Vector3(refvect.x+vx,refvect.y+vy,refvect.z);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = mod.verts[refvert];
+            // refvect.x += vx;
+            //  refvect.y += vy;
+            refvect  = new Vector3(refvect.x+(float)vx,refvect.y+(float)vy,refvect.z);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-         // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) xy from=%u",
-         //   vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) xy from=%u",
+            //   vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_YZ: // 0094 define vertex offset Y,Z
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+          {
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-          refvect = mod.verts[refvert];
-          //refvect.y += vy;
-         // refvect.z += vz;
-          refvect  = new Vector3(refvect.x,refvect.y+vy,refvect.z+vz);
-          ua_mdl_store_vertex(refvect,vertno,ref mod);
+            Vector3 refvect = mod.verts[refvert];
+            //refvect.y += vy;
+            // refvect.z += vz;
+            refvect  = new Vector3(refvect.x,refvect.y+(float)vy,refvect.z+(float)vz);
+            ua_mdl_store_vertex(refvect,vertno,ref mod);
 
-         // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) yz from=%u",
-        //    vertno,refvect.x,refvect.y,refvect.z,refvert);
-          break;
+            // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f) yz from=%u",
+            //    vertno,refvect.x,refvect.y,refvect.z,refvert);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_CEIL: // 008c define vertex variable height
           {
-            refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-            unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-            vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-            refvect = mod.verts[refvert];
-            refvect.z = 32.0f; // todo: ceiling value
+            Vector3 refvect = mod.verts[refvert];
+           // refvect.z = 32.0f; // todo: ceiling value
+            refvect  = new Vector3(refvect.x,refvect.y,32f);
             ua_mdl_store_vertex(refvect,vertno,ref mod);
 
             //  ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,ceil) ceil from=%u unk1=%04x",
@@ -481,49 +530,56 @@ public class UWModelLoader : MonoBehaviour {
 
           // face plane checks
         case nodecmd.M3_UW_FACE_PLANE: // 0058 define face plane, arbitrary heading
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          nz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+          {
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float  vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float nz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
-        //  ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f)",
-        //    unk1,nx,ny,nz,vx,vy,vz);
-          break;
+            //  ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f)",
+            //    unk1,nx,ny,nz,vx,vy,vz);
+            break;
+          }
+
 
         case nodecmd.M3_UW_FACE_PLANE_X: // 0064 define face plane X
         case nodecmd.M3_UW_FACE_PLANE_Z: // 0066 define face plane Z
         case nodecmd.M3_UW_FACE_PLANE_Y: // 0068 define face plane Y
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+          {
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float  vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
-         // ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f) %c",
-           // unk1,
-          //cmd == nodecmd.M3_UW_FACE_PLANE_X ? nx : 0.0,
-         // cmd == nodecmd.M3_UW_FACE_PLANE_Y ? nx : 0.0,
-          //cmd == nodecmd.M3_UW_FACE_PLANE_Z ? nx : 0.0,
-          //cmd == nodecmd.M3_UW_FACE_PLANE_X ? vx : 0.0,
-          //cmd == nodecmd.M3_UW_FACE_PLANE_Y ? vx : 0.0,
-          //cmd == nodecmd.M3_UW_FACE_PLANE_Z ? vx : 0.0,
+            // ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f) %c",
+            // unk1,
+            //cmd == nodecmd.M3_UW_FACE_PLANE_X ? nx : 0.0,
+            // cmd == nodecmd.M3_UW_FACE_PLANE_Y ? nx : 0.0,
+            //cmd == nodecmd.M3_UW_FACE_PLANE_Z ? nx : 0.0,
+            //cmd == nodecmd.M3_UW_FACE_PLANE_X ? vx : 0.0,
+            //cmd == nodecmd.M3_UW_FACE_PLANE_Y ? vx : 0.0,
+            //cmd == nodecmd.M3_UW_FACE_PLANE_Z ? vx : 0.0,
 
-           // cmd == M3_UW_FACE_PLANE_X ? 'x' : cmd == M3_UW_FACE_PLANE_Y ? 'y' : 'z'
-          //);
-          break;
+            // cmd == M3_UW_FACE_PLANE_X ? 'x' : cmd == M3_UW_FACE_PLANE_Y ? 'y' : 'z'
+            //);
+            break; 
+          }
+   
 
         case nodecmd.M3_UW_FACE_PLANE_ZY: // 005e define face plane Z/Y
         case nodecmd.M3_UW_FACE_PLANE_XY: // 0060 define face plane X/Y
         case nodecmd.M3_UW_FACE_PLANE_XZ: // 0062 define face plane X/Z
-          unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
-          nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;// ua_mdl_read_fixed(fd);
-          ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-          vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+          {
+            int unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
+            float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;// ua_mdl_read_fixed(fd);
+            float ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
-          //ua_mdl_trace("[planecheck] skip=%04x ",unk1);
-          /*if (dump)
+            //ua_mdl_trace("[planecheck] skip=%04x ",unk1);
+            /*if (dump)
             switch(cmd)
           {
             case nodecmd.M3_UW_FACE_PLANE_ZY:
@@ -536,7 +592,9 @@ public class UWModelLoader : MonoBehaviour {
             //  ua_mdl_trace("normal=(%f,%f,%f) dist=(%f,%f,%f) xz",nx,0.0,ny,vx,0.0,vy);
               break;
           }*/
-          break;
+            break;
+          }
+
 
           // face info nodes
         case nodecmd.M3_UW_FACE_VERTICES: // 007e define face vertices
@@ -549,7 +607,7 @@ public class UWModelLoader : MonoBehaviour {
             for(int i=0; i<nvert; i++)
             {
              // Uint16 
-              vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+              int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
              // mod.tris.Add(vertno);//moved
               faceverts[i] = vertno;
@@ -578,7 +636,7 @@ public class UWModelLoader : MonoBehaviour {
             // read texture number
             if ((nodecmd)cmd== nodecmd.M3_UW_TEXTURE_FACE)
             {
-              unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd); // texture number?
+              int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd); // texture number?
               //ua_mdl_trace("texnum=%04x ",unk1);
             }
 
@@ -590,10 +648,10 @@ public class UWModelLoader : MonoBehaviour {
             for(int i=0; i<nvert; i++)
             {
              // Uint16 
-              vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+              int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
 
-              double u0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-              double v0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float u0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float v0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
              // mod.tris.Add(vertno);//moved
               faceverts[i] = vertno;
@@ -623,14 +681,14 @@ public class UWModelLoader : MonoBehaviour {
           {
             if((nodecmd)(cmd)==nodecmd.M3_UW_SORT_PLANE)
             {
-              nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-              vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+              float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             }
 
-            ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-            vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-            nz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-            vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float nz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            float  vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
           /*  if (dump)
             {
@@ -686,35 +744,44 @@ public class UWModelLoader : MonoBehaviour {
 
           // unknown nodes
         case nodecmd.M3_UW_COLOR_DEF: // 0014 ??? colour definition
-          refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-         // ua_mdl_trace("[shade] color refvert=%u unk1=%04x vertno=%u",refvert,unk1,vertno);
-          break;
+          {
+            int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            // ua_mdl_trace("[shade] color refvert=%u unk1=%04x vertno=%u",refvert,unk1,vertno);
+            break;
+          }
+
 
         case nodecmd.M3_UW_FACE_SHADE: // 00BC define face shade
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          vertno = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          //ua_mdl_trace("[shade] shade unk1=%02x unk2=%02x",unk1,vertno);
-          break;
+          {
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            int vertno = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            //ua_mdl_trace("[shade] shade unk1=%02x unk2=%02x",unk1,vertno);
+            break; 
+          }
+
 
         case nodecmd.M3_UW_FACE_TWOSHADES: // 00BE ??? seems to define 2 shades
-          vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          //ua_mdl_trace("[shade] twoshade unk1=%02x unk2=%02x ",vertno,unk1);
-          break;
+          {
+            int vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            //ua_mdl_trace("[shade] twoshade unk1=%02x unk2=%02x ",vertno,unk1);
+            break;
+          }
+
 
         case nodecmd.M3_UW_VERTEX_DARK: // 00D4 define dark vertex face (?)
           {
             int nvert =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
-            unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
+            int unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
 
             //ua_mdl_trace("[shade] color nvert=%u, unk1=%04x vertlist=",
             //  nvert,unk1);
 
             for(int n=0; n<nvert; n++)
             {
-              vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+              int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
              // unk1 = fgetc(fd);
               addressptr++;
 
@@ -739,7 +806,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_FACE_SHORT: // 00A0 ??? shorthand face definition
           {
-            vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
            //X ua_poly_tessellator tess;
 
             //ua_mdl_trace("[face] shorthand unk1=%u vertlist=",vertno);
@@ -765,7 +832,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case (nodecmd)0x00d2: // 00D2 ??? shorthand face definition
           {
-            vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
+            int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             //X            ua_poly_tessellator tess;
 
             //ua_mdl_trace("[face] vertno=%u vertlist=",vertno);
@@ -797,7 +864,7 @@ public class UWModelLoader : MonoBehaviour {
             long pos = addressptr;//(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr++;//ftell(fd);
 
             int nvert =  ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
-            unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
 
             for(int n=0; n<nvert; n++)
             {
@@ -814,11 +881,15 @@ public class UWModelLoader : MonoBehaviour {
           break;
 
         case (nodecmd)0x0012:
-          unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
-          break;
+          {
+            int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
+            break;
+
+          }
 
         default:
           //ua_mdl_trace("unknown command at offset 0x%08x\n",ftell(fd)-2);
+          Debug.Log("unknow cmd at " + addressptr);
           return;
       }
      // ua_mdl_trace("\n");
@@ -826,7 +897,7 @@ public class UWModelLoader : MonoBehaviour {
   }
 
 
-  void convertVertToTris(int[] vertices,ref UWModel mod)
+ /* void convertVertToTris(int[] vertices,ref UWModel mod)
   {
      switch (vertices.GetUpperBound(0))
     {   
@@ -849,8 +920,45 @@ public class UWModelLoader : MonoBehaviour {
           break;
         }
     }
+  }*/
+ 
+  void convertVertToTris(int[] vertices, ref UWModel mod)
+  {
+
+   //for (int i=0; i<=vertices.GetUpperBound(0); i++)
+  //  {
+      //Debug.Log("vert " + i + " is " + vertices[i] + " at position " + mod.verts[vertices[i]]);
+  //  }
+    Vector2[] vertices2D =  new Vector2[vertices.GetUpperBound(0)+1];
+
+    for (int i=0; i<=vertices2D.GetUpperBound(0);i++)
+    {
+      float u = mod.verts[vertices[i]].x/ mod.verts[vertices[i]].z;
+      float v = mod.verts[vertices[i]].y/ mod.verts[vertices[i]].z;
+      vertices2D[vertices2D.GetUpperBound(0)-i] = new Vector2(u,v);//mod.verts[vertices[i]];
+    }
+
+
+    Triangulator tr = new Triangulator(vertices2D);
+    int[] indices = tr.Triangulate();
+
+
+    for (int i=0; i<=indices.GetUpperBound(0);i++)
+    {
+      //find the original vertex ref and add it to the tri's
+      for (int j=0; j<=mod.verts.Count;j++)
+      {
+
+        if (mod.verts[j]==mod.verts[vertices[indices[i]]])
+        {
+          mod.tris.Add(j);
+          break;
+        }
+      }
+    }
+
   }
- /* void convertVertToTris(int[] vertices,ref UWModel mod)
+/*  void convertVertToTris(int[] vertices,ref UWModel mod)
   {
 
     int startvert=0;
@@ -859,9 +967,9 @@ public class UWModelLoader : MonoBehaviour {
 
     for (int i=0; i<=vertices.GetUpperBound(0)-2;i++)
     {
-      mod.tris.Add(vertices[startvert]);
-      mod.tris.Add(vertices[lastvert]);
       mod.tris.Add(vertices[lastvert+1]);
+      mod.tris.Add(vertices[lastvert]);
+      mod.tris.Add(vertices[startvert]);
       lastvert=lastvert+1;  
     }
   }*/
