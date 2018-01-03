@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class UWModelLoader : MonoBehaviour {
 
@@ -9,6 +10,18 @@ public class UWModelLoader : MonoBehaviour {
   public Vector3[] verts;
   public int[] trisToRender;
   public bool rendernow;
+  public bool rendermarkers;
+  public bool usePreloadedTris=false;
+
+  //Shrine
+  int[] PreLoadedTris={44,31,28,44,58,31,42,28,27,40,27,25,38,25,23,36,23,21,34,21,11,48,57,58,47,61,57,51,63,61,53,65,63,55,8,65,8,55,33,8,33,11,11,33,34,65,53,55,53,63,51,51,51,51,51,61,47,47,57,48,48,58,44,44,28,42,42,27,40,40,25,38,38,23,36,36,21,34,8,5,6,8,72,5,11,12,14,11,14,18,72,8,18,18,8,11,3,72,18,19,3,18,1,3,19,66,1,19,69,2,1,69,1,66,45,30,59,49,59,56,46,56,60,50,60,62,52,62,64,54,64,9,45,29,30,43,24,26,39,22,24,37,20,22,35,10,20,9,10,32,9,7,4,9,4,73,10,15,13,10,17,15,9,73,10,10,73,17,17,73,76,17,76,77,76,0,77,77,0,16,0,67,16,16,67,68,67,70,68,68,70,71,32,10,35,35,20,37,37,22,39,39,24,43,43,29,45,45,59,49,46,49,56,50,46,60,52,50,62,54,52,64,32,54,9,2,70,1,70,67,1,67,0,1,1,0,3,3,0,73,3,73,72,72,73,4,72,4,5,5,4,6,6,4,7,8,6,7,8,7,9,65,8,9,65,9,64,63,65,64,63,64,62,61,63,62,61,62,60,57,61,60,57,60,56,58,57,56,58,56,59,31,58,59,31,59,30,28,31,30,28,30,29,27,28,29,27,29,26,25,27,26,25,26,24,23,25,24,23,24,22,21,23,22,21,22,20,11,21,20,11,20,10,12,11,10,12,10,13,14,12,13,14,13,15,18,14,15,18,15,17,19,18,17,19,17,16,66,19,16,66,16,68,69,66,68,69,68,71,2,69,71,2,71,70,45,44,42,43,42,40,41,40,38,39,38,36,37,36,34,35,34,33,32,33,55,54,55,53,52,53,51,50,51,47,46,47,48,49,48,44,42,43,45,40,41,43,38,39,41,36,37,39,34,35,37,33,32,35,55,54,32,53,52,54,51,50,52,47,46,50,48,49,46,44,45,49,26,29,43};
+
+
+    //{44,31,28,44,58,31,42,28,27,40,27,25,38,25,23,36,23,21,34,21,11,48,57,58,47,61,57,51,63,61,53,65,63,55,8,65,8,55,33,8,33,11,11,33,34,65,53,55,53,63,51,51,51,51,51,61,47,47,57,48,48,58,44,44,28,42,42,27,40,40,25,38,38,23,36,36,21,34,8,5,6,8,72,5,11,12,14,11,14,18,72,8,18,18,8,11,3,72,18,19,3,18,1,3,19,66,1,19,69,2,1,69,1,66,45,30,59,49,59,56,46,56,60,50,60,62,52,62,64,54,64,9,45,29,30,43,24,29,39,22,24,37,20,22,35,10,20,9,10,32,9,7,4,9,4,73,10,15,13,10,17,15,9,73,10,10,73,17,17,73,76,17,76,77,76,0,77,77,0,16,0,67,16,16,67,68,67,70,68,68,70,71,32,10,35,35,20,37,37,22,39,39,24,43,43,29,45,45,59,49,46,49,56,50,46,60,52,50,62,54,52,64,32,54,9,2,70,1,70,67,1,67,0,1,1,0,3,3,0,73,3,73,72,72,73,4,72,4,5,5,4,6,6,4,7,8,6,7,8,7,9,65,8,9,65,9,64,63,65,64,63,64,62,61,63,62,61,62,60,57,61,60,57,60,56,58,57,56,58,56,59,31,58,59,31,59,30,28,31,30,28,30,29,27,28,29,27,29,26,25,27,26,25,26,24,23,25,24,23,24,22,21,23,22,21,22,20,11,21,20,11,20,10,12,11,10,12,10,13,14,12,13,14,13,15,18,14,15,18,15,17,19,18,17,19,17,16,66,19,16,66,16,68,69,66,68,69,68,71,2,69,71,2,71,70,45,44,42,43,42,40,41,40,38,39,38,36,37,36,34,35,34,33,32,33,55,54,55,53,52,53,51,50,51,47,46,47,48,49,48,44,42,43,45,40,41,43,38,39,41,36,37,39,34,35,37,33,32,35,55,54,32,53,52,54,51,50,52,47,46,50,48,49,46,44,45,49};
+
+
+
+    //{1,2,3};
 
   enum nodecmd
   {
@@ -115,7 +128,7 @@ public class UWModelLoader : MonoBehaviour {
     };
 
   public string exepath="c:\\games\\uw1\\uw.exe";
-
+  StreamWriter writer;
 	// Use this for initialization
 	void Start () {	  
     modeltable[0].table_offset=0x0004e910;modeltable[0].value=0x40064ab6;modeltable[0].base_offset=0x0004e99e;
@@ -125,10 +138,11 @@ public class UWModelLoader : MonoBehaviour {
     modeltable[4].table_offset=0x00054cf0;modeltable[4].value=0x59aa64d4;modeltable[4].base_offset=0x00054d8a;
     modeltable[5].table_offset=0x000550e0;modeltable[5].value=0x59aa64d4;modeltable[5].base_offset=0x0005517a;
 
-
+    writer=new StreamWriter( Application.dataPath + "//..//model.txt", false); 
 
     DecodeModel(exepath);
 
+    writer.Close();
 	}
 	
 
@@ -167,6 +181,8 @@ public class UWModelLoader : MonoBehaviour {
       Debug.Log("didn't find models in file\n");
       return; // didn't find list
     }
+
+
 
 
     // read in offsets
@@ -222,9 +238,9 @@ public class UWModelLoader : MonoBehaviour {
       //ua_model_parse_node(fd, origin, vertex_list, model->triangles, dump);
       if (n==modelToLoad)
       {
+        writer.WriteLine("Loading model " + ua_model_name[n] +  " at " + addressptr);
         ua_model_parse_node(modelfile,addressptr,ref models[n], true);  
       }
-
 
 
    //x   ua_mdl_trace("\n");
@@ -250,18 +266,35 @@ public class UWModelLoader : MonoBehaviour {
 
       mesh.vertices =verts;
       // mesh.uv = newUV;
+      if (usePreloadedTris)
+      {
+        mesh.SetTriangles(PreLoadedTris,0);
+        trisToRender = new int[PreLoadedTris.GetUpperBound(0)+1];
+        for (int i=0; i<=PreLoadedTris.GetUpperBound(0);i++)
+        {
+          trisToRender[i]=PreLoadedTris[i];
+        }
+      }
+      else
+      {
+        mesh.SetTriangles(trisToRender,0);  
+      }
 
-      mesh.SetTriangles(trisToRender,0);
-      mesh.RecalculateNormals();
-
-   /*   for (int i=0; i<=verts.GetUpperBound(0);i++)
+      mesh.RecalculateNormals();     
+    }
+    if (rendermarkers)
+    {
+      rendermarkers=false;
+      for (int i=0; i<=verts.GetUpperBound(0);i++)
       {
         GameObject vertToDisplay = new GameObject();
+        TextMesh tm = vertToDisplay.AddComponent<TextMesh>();
+        tm.text= i.ToString();
+        tm.characterSize=0.01f;
         vertToDisplay.transform.parent=this.transform;
-        vertToDisplay.transform.position= verts[i];
+        vertToDisplay.transform.localPosition= verts[i];
         vertToDisplay.name = "Vert_" + i.ToString();
-      }*/
-     
+      }
     }
   }
 
@@ -316,6 +349,7 @@ public class UWModelLoader : MonoBehaviour {
     {
       mod.NoOfVerts=vertno;
     }
+    writer.WriteLine("\tStoring Vertex " + vertno + " at " + vertex);
   }
 
 
@@ -337,19 +371,21 @@ public class UWModelLoader : MonoBehaviour {
         case nodecmd.M3_UW_ENDNODE: // 0000 end node
           {
             // ua_mdl_trace("[end]");
-            Debug.Log ("Instr " + instr + " end");
+            writer.WriteLine("instr " + instr + "end");
             loop = false;
             break;
           }
         case nodecmd.M3_UW_ORIGIN: // 0078 define model center
           {
-            Debug.Log ("Instr " + instr + " origin");
+            writer.WriteLine ("\nInstr " + instr + " origin");
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
             mod.origin = mod.verts[vertno];// mod.verts[vertno] ;
 
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+
+            writer.WriteLine("\tOrigin at " + mod.origin);
 
             int unk1 =  (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2; //fread16(fd);
             // ua_mdl_trace("[origin] vertno=%u unk1=%04x origin=(%f,%f,%f)",
@@ -361,7 +397,7 @@ public class UWModelLoader : MonoBehaviour {
           // vertex definition nodes
         case nodecmd.M3_UW_VERTEX: // 007a define initial vertex
           {
-            Debug.Log ("Instr " + instr + " M3_UW_VERTEX");
+            writer.WriteLine ("\nInstr " + instr + " M3_UW_VERTEX");
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
@@ -369,7 +405,7 @@ public class UWModelLoader : MonoBehaviour {
 
             Vector3 refvect = new Vector3((float)vx,(float)vy,(float)vz);
             ua_mdl_store_vertex(refvect,vertno,ref mod);
-            //Debug.Log("Instr " + instr + "Vertex #" + vertno + "="  + refvect);
+            //Debug.Log("\nInstr " + instr + "Vertex #" + vertno + "="  + refvect);
             // ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,%f)",
             // vertno,vx,vy,vz);
             break;
@@ -378,7 +414,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTICES: // 0082 define initial vertices
           {
-            Debug.Log ("Instr " + instr + " M3_UW_VERTICES");
+            writer.WriteLine ("\nInstr " + instr + " M3_UW_VERTICES");
             int nvert =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
             int vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
             for(int n=0; n<nvert; n++)
@@ -389,7 +425,7 @@ public class UWModelLoader : MonoBehaviour {
 
               Vector3 refvect = new Vector3((float)vx,(float)vy,(float)vz);
               ua_mdl_store_vertex(refvect,vertno+n,ref mod);
-              Debug.Log("Instr " + instr + "Vertex #" + vertno + "="  + refvect);
+              //Debug.Log("\nInstr " + instr + "Vertex #" + vertno + "="  + refvect);
               //ua_mdl_trace("%s[vertex] vertno=%u vertex=(%f,%f,%f)",
                // n==0 ? "" : "\n      ",vertno+n,vx,vy,vz);
             }
@@ -398,7 +434,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_X: // 0086 define vertex offset X
           {
-            Debug.Log ("Instr " + instr + " offsetX");
+            writer.WriteLine ("\nInstr " + instr + " offsetX");
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -416,7 +452,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_Z: // 0088 define vertex offset Z
           {
-            Debug.Log ("Instr " + instr + " offsetZ");
+            writer.WriteLine ("\nInstr " + instr + " offsetZ");
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -433,7 +469,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_Y: // 008a define vertex offset Y
           {
-            Debug.Log ("Instr " + instr + " offsetY");
+            writer.WriteLine ("\nInstr " + instr + " offsetY");
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -452,7 +488,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_XZ: // 0090 define vertex offset X,Z
           {
-            Debug.Log ("Instr " + instr + " offsetXZ");
+            writer.WriteLine ("\nInstr " + instr + " offsetXZ");
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -473,7 +509,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_XY: // 0092 define vertex offset X,Y
           {
-            Debug.Log ("Instr " + instr + " offsetXY");
+            writer.WriteLine ("\nInstr " + instr + " offsetXY");
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -495,7 +531,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_YZ: // 0094 define vertex offset Y,Z
           {
-            Debug.Log ("Instr " + instr + " offsetYZ");
+            writer.WriteLine ("\nInstr " + instr + " offsetYZ");
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -518,7 +554,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_CEIL: // 008c define vertex variable height
           {
-            Debug.Log ("Instr " + instr + " UW_VERTEX_CEIL");
+            writer.WriteLine ("\nInstr " + instr + " UW_VERTEX_CEIL");
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -528,7 +564,7 @@ public class UWModelLoader : MonoBehaviour {
             //refvect  = new Vector3(refvect.x,refvect.y,32f);
             Vector3 adj = new Vector3(0f,0f,32f);
             ua_mdl_store_vertex(refvect+adj,vertno,ref mod);
-            Debug.Log("Vertex Ceil #" +(vertno) + "="  + (refvect+adj) + " from " + refvect + "(" + refvert + ")" + " adj = " +adj);
+          //  writer.WriteLine("\tVertex Ceil #" +(vertno) + "="  + (refvect+adj) + " from " + refvect + "(" + refvert + ")" + " adj = " +adj);
             //  ua_mdl_trace("[vertex] vertno=%u vertex=(%f,%f,ceil) ceil from=%u unk1=%04x",
             //   vertno,refvect.x,refvect.y,refvert,unk1);
             break;
@@ -537,7 +573,7 @@ public class UWModelLoader : MonoBehaviour {
           // face plane checks
         case nodecmd.M3_UW_FACE_PLANE: // 0058 define face plane, arbitrary heading
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_PLANE");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_PLANE");
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float  vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
@@ -545,7 +581,7 @@ public class UWModelLoader : MonoBehaviour {
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float nz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vz = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-
+            writer.Write("\t Normal (" + nx+","+ny+","+nz +") dist (" + vx+","+vy+","+vz+")\n");
             //  ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f)",
             //    unk1,nx,ny,nz,vx,vy,vz);
             break;
@@ -556,10 +592,11 @@ public class UWModelLoader : MonoBehaviour {
         case nodecmd.M3_UW_FACE_PLANE_Z: // 0066 define face plane Z
         case nodecmd.M3_UW_FACE_PLANE_Y: // 0068 define face plane Y
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_PLANE (x/z/y)");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_PLANE (x/z/y)");
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float  vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
+            writer.Write("\t Normal (" + nx+ ") dist (" + vx + ")\n");
 
             // ua_mdl_trace("[planecheck] skip=%04x normal=(%f,%f,%f) dist=(%f,%f,%f) %c",
             // unk1,
@@ -580,13 +617,13 @@ public class UWModelLoader : MonoBehaviour {
         case nodecmd.M3_UW_FACE_PLANE_XY: // 0060 define face plane X/Y
         case nodecmd.M3_UW_FACE_PLANE_XZ: // 0062 define face plane X/Z
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_PLANE (zy/xy/xz)");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_PLANE (zy/xy/xz)");
             int unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
             float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;// ua_mdl_read_fixed(fd);
             float ny = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
             float vy = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
-
+            writer.Write("\t Normal (" + nx+","+ny+") dist (" + vx+","+vy+")\n");
             //ua_mdl_trace("[planecheck] skip=%04x ",unk1);
             /*if (dump)
             switch(cmd)
@@ -608,10 +645,10 @@ public class UWModelLoader : MonoBehaviour {
           // face info nodes
         case nodecmd.M3_UW_FACE_VERTICES: // 007e define face vertices
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_VERTICES");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_VERTICES");
             int nvert = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             //Xua_poly_tessellator tess;
-
+            string output="\tFace Verts are :";
            // ua_mdl_trace("[face] nvert=%u vertlist=",nvert);
             int[] faceverts = new int[nvert];
             for(int i=0; i<nvert; i++)
@@ -622,7 +659,7 @@ public class UWModelLoader : MonoBehaviour {
              // mod.tris.Add(vertno);//moved
               faceverts[i] = vertno;
               //Xua_vertex3d vert;
-
+              output = output + vertno + ",";
              //
              //X vert.pos = mod.verts[vertno];
              //X tess.add_poly_vertex(vert);
@@ -634,16 +671,18 @@ public class UWModelLoader : MonoBehaviour {
           //X  const std::vector<ua_triangle3d_textured>& tri = tess.tessellate(0x0001);
             //triangles.insert(triangles.begin(),tri.begin(),tri.end());
             //mod.tris.Add(vertno);
+            writer.WriteLine(output);
             convertVertToTris(faceverts,ref mod);
+           
           }
           break;
 
         case nodecmd.M3_UW_TEXTURE_FACE: // 00a8 define texture-mapped face
         case nodecmd.M3_UW_TMAP_VERTICES: // 00b4 define face vertices with u,v information
           {
-            Debug.Log ("Instr " + instr + " UW_TEXTURE_FACE or UW_TMAP_VERTICES");
+            writer.WriteLine ("\nInstr " + instr + " UW_TEXTURE_FACE or UW_TMAP_VERTICES");
            // ua_mdl_trace("[face] %s ",cmd==M3_UW_TEXTURE_FACE ? "tex" : "tmap");
-
+            string output="\tFace Verts are :";
             // read texture number
             if ((nodecmd)cmd== nodecmd.M3_UW_TEXTURE_FACE)
             {
@@ -660,7 +699,7 @@ public class UWModelLoader : MonoBehaviour {
             {
              // Uint16 
               int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
-
+              output = output + vertno + ",";
               float u0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
               float v0 = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
 
@@ -675,6 +714,7 @@ public class UWModelLoader : MonoBehaviour {
               //ua_mdl_trace("%u (%f/%f)",vertno,u0,v0);
              // if (i<=nvert-1) ua_mdl_trace(" ");
             }
+            writer.WriteLine(output);
             convertVertToTris(faceverts,ref mod);
             //X const std::vector<ua_triangle3d_textured>& tri = tess.tessellate(0x0002);
             //X triangles.insert(triangles.begin(),tri.begin(),tri.end());
@@ -690,7 +730,7 @@ public class UWModelLoader : MonoBehaviour {
         case nodecmd.M3_UW_SORT_PLANE_XY: // 000E define sort node, XY plane
         case nodecmd.M3_UW_SORT_PLANE_XZ: // 0010 define sort node, XZ plane
           {
-            Debug.Log ("Instr " + instr + " SORT PLANES");
+            writer.WriteLine ("\nInstr " + instr + " SORT PLANES");
             if((nodecmd)(cmd)==nodecmd.M3_UW_SORT_PLANE)
             {
               float nx = ua_mdl_read_fixed(modelfile,addressptr);addressptr+=2;//ua_mdl_read_fixed(fd);
@@ -735,7 +775,7 @@ public class UWModelLoader : MonoBehaviour {
           // unknown nodes
         case nodecmd.M3_UW_COLOR_DEF: // 0014 ??? colour definition
           {
-            Debug.Log ("Instr " + instr + " UW_COLOR_DEF");
+            writer.WriteLine ("\nInstr " + instr + " UW_COLOR_DEF");
             int refvert = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
@@ -746,7 +786,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_FACE_SHADE: // 00BC define face shade
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_SHADE");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_SHADE");
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             int vertno = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             //ua_mdl_trace("[shade] shade unk1=%02x unk2=%02x",unk1,vertno);
@@ -756,7 +796,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_FACE_TWOSHADES: // 00BE ??? seems to define 2 shades
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_TWOSHADES");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_TWOSHADES");
             int vertno =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             //ua_mdl_trace("[shade] twoshade unk1=%02x unk2=%02x ",vertno,unk1);
@@ -766,7 +806,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_VERTEX_DARK: // 00D4 define dark vertex face (?)
           {
-            Debug.Log ("Instr " + instr + " UW_VERTEX_DARK");
+            writer.WriteLine ("\nInstr " + instr + " UW_VERTEX_DARK");
             int nvert =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
             int unk1 =(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;// fread16(fd);
 
@@ -793,27 +833,29 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_FACE_GOURAUD: // 00D6 define gouraud shading
          // ua_mdl_trace("[shade] gouraud");
-          Debug.Log ("Instr " + instr + " UW_FACE_GOURAUD");
+          writer.WriteLine ("\nInstr " + instr + " UW_FACE_GOURAUD");
           break;
 
         case nodecmd.M3_UW_FACE_UNK40: // 0040 ???
-          Debug.Log ("Instr " + instr + " UW_FACE_UNK40");
+          writer.WriteLine ("\nInstr " + instr + " UW_FACE_UNK40");
          // ua_mdl_trace("[shade] unknown");
           break;
 
         case nodecmd.M3_UW_FACE_SHORT: // 00A0 ??? shorthand face definition
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_SHORT");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_SHORT");
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
            //X ua_poly_tessellator tess;
-
+            string output = "\t";
             //ua_mdl_trace("[face] shorthand unk1=%u vertlist=",vertno);
             int[] faceverts = new int[4];
             for(int i=0; i<4; i++)
             {
               vertno = (int)DataLoader.getValAtAddress(modelfile,addressptr,8);addressptr++; //fgetc(fd);
+              output = output + vertno +  ",";
               faceverts[i] = vertno;
             }
+            writer.WriteLine(output);
             convertVertToTris(faceverts,ref mod);
             //X const std::vector<ua_triangle3d_textured>& tri = tess.tessellate(0x0003);
             //triangles.insert(triangles.begin(),tri.begin(),tri.end());
@@ -822,17 +864,19 @@ public class UWModelLoader : MonoBehaviour {
 
         case (nodecmd)0x00d2: // 00D2 ??? shorthand face definition
           {
-            Debug.Log ("Instr " + instr + " UW_SHORTHAND_FACE_DEFINITION");
+            writer.WriteLine ("\nInstr " + instr + " UW_SHORTHAND_FACE_DEFINITION");
             int vertno = ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;
             //X            ua_poly_tessellator tess;
-
+            string output = "\t";
             //ua_mdl_trace("[face] vertno=%u vertlist=",vertno);
             int[] faceverts = new int[4];
             for(int i=0; i<4; i++)
             {
               vertno = (int)DataLoader.getValAtAddress(modelfile,addressptr,8);addressptr++; //fgetc(fd);
+              output = output + vertno + ",";
               faceverts[i] = vertno;
             }
+            writer.WriteLine(output);
             convertVertToTris(faceverts,ref mod);
             //X const std::vector<ua_triangle3d_textured>& tri = tess.tessellate(0x0004);
            // triangles.insert(triangles.begin(),tri.begin(),tri.end());
@@ -843,7 +887,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case nodecmd.M3_UW_FACE_UNK16: // 0016 ???
           {
-            Debug.Log ("Instr " + instr + " UW_FACE_UNK16");
+            writer.WriteLine ("\nInstr " + instr + " UW_FACE_UNK16");
             long pos = addressptr;//(int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr++;//ftell(fd);
 
             int nvert =  ua_mdl_read_vertno(modelfile,addressptr); addressptr+=2;//ua_mdl_read_vertno(fd);
@@ -865,7 +909,7 @@ public class UWModelLoader : MonoBehaviour {
 
         case (nodecmd)0x0012:
           {
-            Debug.Log ("Instr " + instr + " UNK 12");
+            writer.WriteLine ("\nInstr " + instr + " UNK 12");
             int unk1 = (int)DataLoader.getValAtAddress(modelfile,addressptr,16);addressptr+=2;//fread16(fd);
             break;
 
@@ -873,7 +917,7 @@ public class UWModelLoader : MonoBehaviour {
 
         default:
           //ua_mdl_trace("unknown command at offset 0x%08x\n",ftell(fd)-2);
-          Debug.Log ("Instr " + instr + " UNKNOWN CMD");         
+          writer.WriteLine ("\nInstr " + instr + " UNKNOWN CMD returning");         
           return;
       }
      // ua_mdl_trace("\n");
@@ -906,7 +950,7 @@ public class UWModelLoader : MonoBehaviour {
     }
   }*/
 
-   /*void convertVertToTris(int[] vertices, ref UWModel mod)
+ /*  void convertVertToTris(int[] vertices, ref UWModel mod)
   {
     Vector2[] vertices2D =  new Vector2[vertices.GetUpperBound(0)+1];
     for (int i=0; i<=vertices2D.GetUpperBound(0);i++)
@@ -935,20 +979,49 @@ public class UWModelLoader : MonoBehaviour {
   }*/
  
   void convertVertToTris(int[] vertices,ref UWModel mod)
-  {
+  {//This is sort of wrong.
 
     int startvert=0;
     int lastvert=1;
     int NoOfVerts = vertices.GetUpperBound(0);
-
+   
+    string output = "\t";
     for (int i=0; i<=vertices.GetUpperBound(0)-2;i++)
     {
       mod.tris.Add(vertices[lastvert+1]);
       mod.tris.Add(vertices[lastvert]);
       mod.tris.Add(vertices[startvert]);
+      output = output +  "(" + (vertices[lastvert+1]) + "," + vertices[lastvert] + "," + vertices[startvert] +")" ;
       lastvert=lastvert+1;  
     }
+    writer.Write (output + "\n");
+
   }
 
+
+
+
+  public void exportTris()
+  {
+    StreamWriter Exportwriter=new StreamWriter( Application.dataPath + "//..//tris.txt", false);
+    string output = "";
+    for (int i =0; i<=trisToRender.GetUpperBound(0);i++)
+    {
+      output = output + trisToRender[i].ToString() + ",";
+    }
+    Exportwriter.Write(output);
+    Exportwriter.Close();
+
+
+    Exportwriter=new StreamWriter( Application.dataPath + "//..//verts.txt", false);
+    output = "";
+    for (int i =0; i<=verts.GetUpperBound(0);i++)
+    {
+      output = output + " ModelVerts[" + i + "] = new Vector3(" + verts[i].x + "f,"  + verts[i].z + "f,"  + verts[i].y + "f);\n";
+    }
+    Exportwriter.Write(output);
+    Exportwriter.Close();
+
+  }
  
 }

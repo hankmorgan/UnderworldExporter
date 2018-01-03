@@ -352,7 +352,7 @@ public class GameWorldController : UWEBase {
 	//public WeaponAnimationPlayer WeaponAnim;
 	public WeaponsLoader weapongr;
 
-		public int difficulty=1; //1=standard, 0=easy.
+	public int difficulty=1; //1=standard, 0=easy.
 
 	public static bool LoadingObjects=false;
 
@@ -378,6 +378,8 @@ public class GameWorldController : UWEBase {
 	public event_processor events;
 
 	private int startX=-1; private int startY=-1;
+
+	public Material modelMaterial;
 	
 	void LoadPath(string game)
 	{
