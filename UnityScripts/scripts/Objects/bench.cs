@@ -7,8 +7,8 @@ public class bench : Model3D {
 
 	public override int[] ModelTriangles (int meshNo)
 	{
-				Debug.Log("reverse this array permanently");
-				return new int[]{4,7,6,4,6,5,6,7,2,7,3,2,5,2,1,5,6,2,7,0,3,7,4,0,4,1,0,4,5,1,0,1,2,0,2,3,8,18,21,8,19,18,8,21,19,19,21,18,15,25,24,15,24,27,15,24,25,15,27,24,26,15,25,15,26,14,14,13,15,13,12,15,13,26,25,13,25,12,9,8,10,10,8,11,9,20,19,9,19,8,11,8,15,12,11,15,22,23,24,22,24,27,31,22,27,31,27,30,31,30,23,23,30,24,17,21,18,17,16,21,16,28,29,16,29,21,30,27,21,30,21,29,28,17,29,17,18,29,20,10,19,10,11,19}.Reverse().ToArray();
+		Debug.Log("reverse this array permanently");
+		return new int[]{4,7,6,4,6,5,6,7,2,7,3,2,5,2,1,5,6,2,7,0,3,7,4,0,4,1,0,4,5,1,0,1,2,0,2,3,8,18,21,8,19,18,8,21,19,19,21,18,15,25,24,15,24,27,15,24,25,15,27,24,26,15,25,15,26,14,14,13,15,13,12,15,13,26,25,13,25,12,9,8,10,10,8,11,9,20,19,9,19,8,11,8,15,12,11,15,22,23,24,22,24,27,31,22,27,31,27,30,31,30,23,23,30,24,17,21,18,17,16,21,16,28,29,16,29,21,30,27,21,30,21,29,28,17,29,17,18,29,20,10,19,10,11,19}.Reverse().ToArray();
 	}
 
 	public override Vector3[] ModelVertices ()
@@ -49,6 +49,50 @@ public class bench : Model3D {
 
 		return ModelVerts;
 
+	}
+
+	public override Color ModelColour (int meshNo)
+	{
+		return Color.grey;
+	}
+
+
+	public override Vector2[] ModelUVs ()
+	{
+		Vector2[] ModelUVs = new Vector2[32];
+		ModelUVs[0] = new Vector2(0f,0f);
+		ModelUVs[1] = new Vector2(0f,1f);
+		ModelUVs[2] = new Vector2(1f,1f);
+		ModelUVs[3] = new Vector2(1f,0f);
+		ModelUVs[4] = new Vector2(0f,0f);
+		ModelUVs[5] = new Vector2(0f,1f);
+		ModelUVs[6] = new Vector2(1f,1f);
+		ModelUVs[7] = new Vector2(1f,0f);
+		ModelUVs[8] = new Vector2(0f,0f);
+		ModelUVs[9] = new Vector2(0f,1f);
+		ModelUVs[10] = new Vector2(1f,1f);
+		ModelUVs[11] = new Vector2(1f,0f);
+		ModelUVs[12] = new Vector2(0f,0f);
+		ModelUVs[13] = new Vector2(0f,1f);
+		ModelUVs[14] = new Vector2(1f,1f);
+		ModelUVs[15] = new Vector2(1f,0f);
+		ModelUVs[16] = new Vector2(0f,0f);
+		ModelUVs[17] = new Vector2(0f,1f);
+		ModelUVs[18] = new Vector2(1f,1f);
+		ModelUVs[19] = new Vector2(1f,0f);
+		ModelUVs[20] = new Vector2(0f,0f);
+		ModelUVs[21] = new Vector2(1f,0.1f);
+		ModelUVs[22] = new Vector2(1f,0f);
+		ModelUVs[23] = new Vector2(0f,0f);
+		ModelUVs[24] = new Vector2(0f,1f);
+		ModelUVs[25] = new Vector2(1f,1f);
+		ModelUVs[26] = new Vector2(1f,0f);
+		ModelUVs[27] = new Vector2(0f,0f);
+		ModelUVs[28] = new Vector2(0f,0f);
+		ModelUVs[29] = new Vector2(0f,1f);
+		ModelUVs[30] = new Vector2(1f,0f);
+		ModelUVs[31] = new Vector2(1f,2f);
+		return ModelUVs;
 	}
 
 }

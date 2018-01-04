@@ -151,6 +151,7 @@ public class ObjectInteraction : UWEBase {
 		public const int NPC_VOID = 124;
 		public const int DREAM_PLANT = 125;
 		public const int BENCH = 126;
+		public const int ARROW = 127;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -1799,6 +1800,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case BOULDER:
 						myObj.AddComponent<Boulder>();
+						CreateSprite=false;
 						break;
 				case ORB:
 						myObj.AddComponent<Orb>();
@@ -1838,6 +1840,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case BENCH:
 						myObj.AddComponent<bench>();
+						CreateSprite=false;
+						break;
+				case ARROW:
+						myObj.AddComponent<Arrow>();
 						CreateSprite=false;
 						break;
 				case A_MAGIC_PROJECTILE:

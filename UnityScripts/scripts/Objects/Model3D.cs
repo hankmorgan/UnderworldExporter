@@ -30,12 +30,30 @@ public class Model3D : object_base {
 		mr.material = GameWorldController.instance.modelMaterial;
 		mesh.subMeshCount = NoOfMeshes();
 		mesh.vertices =ModelVertices();
+		Vector2[] uvs = ModelUVs();
+		//uvs[0]=new Vector2(0f,0f);
+		//uvs[1]=new Vector2(0f,1f);
+		//uvs[2]=new Vector2(1f,1f);
+		//uvs[3]=new Vector2(1f,0f);
+		//int UvCounter=0;
 		for (int i=0; i<NoOfMeshes();i++)
 		{
 			mesh.SetTriangles(ModelTriangles(i),i);	
+			//uvs[UvCounter+0]=new Vector2(0f,0f);	
+			//uvs[UvCounter+1]=new Vector2(0f,1f);	
+			//uvs[UvCounter+2]=new Vector2(1f,1f);
+			//uvs[UvCounter+3]=new Vector2(1f,0f);
+			//UvCounter+=4;
 		}	
+		if (uvs.GetUpperBound(0)>0)
+		{
+				mesh.uv= uvs;
+		}
+
+		mr.material.SetColor("_Color",ModelColour(0));
 		mesh.triangles=	mesh.triangles;
 		meshF.mesh = mesh;
+		//meshF.mesh.uv=uvs;
 		mesh.RecalculateNormals(); 
 		mesh.RecalculateBounds();
 		MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
@@ -50,11 +68,22 @@ public class Model3D : object_base {
 
 	public virtual Vector3[] ModelVertices()
 	{
-		return new Vector3[]{Vector3.zero};
+		return new Vector3[]{Vector3.zero,Vector3.zero,Vector3.zero,Vector3.zero};
 	}
 
 	public virtual int NoOfMeshes()
 	{
 		return 1;
 	}
+
+	public virtual Color ModelColour(int meshNo)
+	{
+		return Color.white;
+	}
+
+	public virtual Vector2[] ModelUVs()
+	{
+		return new Vector2[]{Vector2.zero};
+	}
+
 }
