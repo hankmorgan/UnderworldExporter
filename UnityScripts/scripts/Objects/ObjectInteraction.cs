@@ -150,7 +150,7 @@ public class ObjectInteraction : UWEBase {
 		public const int NPC_WISP = 123;
 		public const int NPC_VOID = 124;
 		public const int DREAM_PLANT = 125;
-		public const int BENCH = 126;
+		//public const int BENCH = 126;
 		public const int ARROW = 127;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
@@ -1809,7 +1809,8 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<PocketWatch>();
 						break;
 				case A_3D_MODEL:
-						myObj.AddComponent<Model3D>();
+						myObj.AddComponent<GenericModel3D>();
+						CreateSprite=false;
 						break;
 				case A_LARGE_BLACKROCK_GEM:
 						myObj.AddComponent<LargeBlackrockGem>();
@@ -1825,7 +1826,7 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<ReadableTrap>();
 						break;
 				case UW_PAINTING:
-						RemoveBillboard=true;
+						CreateSprite=false;
 						myObj.AddComponent<UWPainting>();
 						break;
 				case PILLAR:
@@ -1838,10 +1839,10 @@ public class ObjectInteraction : UWEBase {
 				case DREAM_PLANT:
 						myObj.AddComponent<DreamPlant>();
 						break;
-				case BENCH:
-						myObj.AddComponent<bench>();
-						CreateSprite=false;
-						break;
+				//case BENCH:
+				//		myObj.AddComponent<bench>();
+				//		CreateSprite=false;
+				//		break;
 				case ARROW:
 						myObj.AddComponent<Arrow>();
 						CreateSprite=false;

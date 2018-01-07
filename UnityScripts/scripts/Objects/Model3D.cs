@@ -26,36 +26,40 @@ public class Model3D : object_base {
 		
 		MeshFilter meshF = this.gameObject.AddComponent<MeshFilter>();
 		MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
+		Material[] mats = new Material[NoOfMeshes()];
 		Mesh mesh = new Mesh();
-		mr.material = GameWorldController.instance.modelMaterial;
-		mesh.subMeshCount = NoOfMeshes();
+		//mr.material = GameWorldController.instance.modelMaterial;
+
+		mesh.subMeshCount = NoOfMeshes();				
+
 		mesh.vertices =ModelVertices();
-		Vector2[] uvs = ModelUVs();
-		//uvs[0]=new Vector2(0f,0f);
-		//uvs[1]=new Vector2(0f,1f);
-		//uvs[2]=new Vector2(1f,1f);
-		//uvs[3]=new Vector2(1f,0f);
-		//int UvCounter=0;
+
+		Vector2[] uvs = ModelUVs(mesh.vertices);
+
 		for (int i=0; i<NoOfMeshes();i++)
 		{
 			mesh.SetTriangles(ModelTriangles(i),i);	
-			//uvs[UvCounter+0]=new Vector2(0f,0f);	
-			//uvs[UvCounter+1]=new Vector2(0f,1f);	
-			//uvs[UvCounter+2]=new Vector2(1f,1f);
-			//uvs[UvCounter+3]=new Vector2(1f,0f);
-			//UvCounter+=4;
+			mats[i] = ModelMaterials(i);
+						//mr.material.SetColor("_Color",ModelColour(0));
+			//mats[i].SetColor("_Color",ModelColour(i));
 		}	
 		if (uvs.GetUpperBound(0)>0)
 		{
-				mesh.uv= uvs;
+			mesh.uv= uvs;
 		}
 
-		mr.material.SetColor("_Color",ModelColour(0));
-		mesh.triangles=	mesh.triangles;
+		mr.materials=mats;
+		for (int i=0; i<NoOfMeshes();i++)
+		{
+			mr.materials[i].SetColor("_Color",ModelColour(i));
+			mr.materials[i].mainTexture = ModelTexture(i);
+		}
+
+		//mesh.triangles=	mesh.triangles;
 		meshF.mesh = mesh;
-		//meshF.mesh.uv=uvs;
 		mesh.RecalculateNormals(); 
 		mesh.RecalculateBounds();
+		
 		MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
 		mc.sharedMesh=null;
 		mc.sharedMesh=mesh;	
@@ -81,9 +85,25 @@ public class Model3D : object_base {
 		return Color.white;
 	}
 
-	public virtual Vector2[] ModelUVs()
+	public virtual Vector2[] ModelUVs(Vector3[] verts)
 	{
-		return new Vector2[]{Vector2.zero};
+		//return new Vector2[]{Vector2.zero};
+		Vector2[] customUVs = new Vector2[verts.Length];
+		for (int i = 0; i <  customUVs.Length; i++)
+		{
+			customUVs[i] = new Vector2(verts[i].x, verts[i].z);
+		}
+		return customUVs;
 	}
 
+	public virtual Material ModelMaterials(int meshNo)
+	{
+		return GameWorldController.instance.modelMaterial;
+	}
+
+
+	public virtual Texture2D ModelTexture (int meshNo)
+	{
+		return null;
+	}
 }

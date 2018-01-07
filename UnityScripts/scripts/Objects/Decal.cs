@@ -19,7 +19,7 @@ public class Decal : object_base {
 		Vector3 objPos=this.transform.position;
 				Vector3 adjustment=Vector3.zero;
 				if (TileMap.ValidTile(tileX,tileY))
-				{
+				{//TODO:this is probably wrong!!
 						switch (GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].tileType)
 						{
 						case TileMap.TILE_OPEN:
