@@ -74,7 +74,8 @@ public class GRLoader : ArtLoader {
 				"Data\\QUEST.GR",
 				"Data\\SCRLEDGE.GR",
 				"Data\\SPELLS.GR",
-				"Data\\TMFLAT.GR",				"Data\\TMOBJ.GR",
+				"Data\\TMFLAT.GR",				
+				"Data\\TMOBJ.GR",
 				"Data\\WEAPONS.GR",
 		};
 
@@ -84,7 +85,7 @@ public class GRLoader : ArtLoader {
 
 	public int FileToLoad;
 	private bool ImageFileDataLoaded;
-	public int NoOfImages;
+	int NoOfImages;
 
 	protected Texture2D[] ImageCache=new Texture2D[1];
 	 
@@ -119,7 +120,7 @@ public class GRLoader : ArtLoader {
 						break;
 				case 2:
 				case 17:
-					NoOfImages=(int)DataLoader.getValAtAddress( art_ark.data,0,16);
+					NoOfImages=(int)DataLoader.getValAtAddress(art_ark.data,0,16);
 					ImageCache=new  Texture2D[NoOfImages];
 					//HotSpot=new Vector2[NoOfImages];
 					ImageFileDataLoaded=true;
@@ -526,4 +527,13 @@ public class GRLoader : ArtLoader {
 	
 		}
 
+
+		/// <summary>
+		/// Nos the of images in the cache
+		/// </summary>
+		/// <returns>The of images.</returns>
+		public int NoOfFileImages()
+		{
+			return ImageCache.Length;
+		}
 }

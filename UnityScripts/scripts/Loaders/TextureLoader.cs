@@ -25,6 +25,8 @@ public class TextureLoader : ArtLoader {
 	private string ModPathW;
 	private string ModPathF;
 
+	public const float BumpMapStrength=1f;
+
 		public TextureLoader()
 		{
 			switch (_RES)

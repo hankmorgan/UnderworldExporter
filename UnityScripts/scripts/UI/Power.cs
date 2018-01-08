@@ -23,7 +23,7 @@ public class Power : GuiBase {
 		{
 			uiPowerGem= this.gameObject.GetComponent<RawImage>();
 		}
-		PowerGemArt = new Texture2D[powerArt.NoOfImages];
+		PowerGemArt = new Texture2D[powerArt.NoOfFileImages()];
 		for (int i=0;i<=PowerGemArt.GetUpperBound(0);i++)
 		{
 			PowerGemArt[i]=powerArt.LoadImageAt(i);	

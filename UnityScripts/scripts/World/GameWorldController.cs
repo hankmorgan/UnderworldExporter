@@ -236,9 +236,15 @@ public class GameWorldController : UWEBase {
 	public Material[] SpecialMaterials=new Material[1];
 
 	/// <summary>
-	/// The material for doors
+	/// The materials for doors  (doors.gr)
 	/// </summary>
 	public Material[] MaterialDoors=new Material[13];
+
+	/// <summary>
+	/// The materials for tmobj + models (tmobj.gr)
+	/// </summary>
+	public Material[] MaterialObj=new Material[54];
+
 
 	/// <summary>
 	/// Gameobject to load the objects at
@@ -1495,7 +1501,7 @@ public class GameWorldController : UWEBase {
 									MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
 									if (loadedTexture!=null)
 									{
-										MaterialMasterList[i].SetTexture("_BumpMap",TextureLoader.NormalMap(loadedTexture,1f));						
+										MaterialMasterList[i].SetTexture("_BumpMap",TextureLoader.NormalMap(loadedTexture,TextureLoader.BumpMapStrength));						
 									}
 								}
 							break;
@@ -1510,6 +1516,18 @@ public class GameWorldController : UWEBase {
 					SpecialMaterials[0]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_224_maze");
 					SpecialMaterials[0].mainTexture=texLoader.LoadImageAt(224);
 				}
+				MaterialObj = new Material[TmObjArt.NoOfFileImages()];
+
+				//Load the materials for the TMOBJ file
+				for (int i=0; i<=MaterialObj.GetUpperBound(0);i++)
+				{
+					MaterialObj[i]= (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + i.ToString("d2"));	
+					if (MaterialObj[i]!=null)
+					{
+						MaterialObj[i].mainTexture = TmObjArt.LoadImageAt(i);			
+					}					
+				}
+
 				switch (_RES)
 				{
 					case GAME_SHOCK:
@@ -1519,7 +1537,6 @@ public class GameWorldController : UWEBase {
 					//Load up my door texture
 					for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
 						{
-
 						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
 						MaterialDoors[i].mainTexture = DoorArt.LoadImageAt(i);
 						}

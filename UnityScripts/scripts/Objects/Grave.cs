@@ -181,8 +181,8 @@ public class Grave : object_base {
 			SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
 
 			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
-			mr.material= (Material)Resources.Load (_RES+ "/Materials/tmobj/tmobj_" + objInt.flags+28);
-			mr.material.mainTexture= GameWorldController.instance.TmObjArt.LoadImageAt(objInt.flags+28);
+			mr.material= GameWorldController.instance.MaterialObj[objInt.flags+28]; //(Material)Resources.Load (_RES+ "/Materials/tmobj/tmobj_" + objInt.flags+28);
+			//mr.material.mainTexture= GameWorldController.instance.TmObjArt.LoadImageAt(objInt.flags+28);
 			BoxCollider bx = myObj.GetComponent<BoxCollider>();
 			bx.center= new Vector3(0.0f,0.25f,0.0f);
 			bx.size=new Vector3(0.5f,0.5f,0.1f);

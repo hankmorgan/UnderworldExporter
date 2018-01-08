@@ -16,9 +16,21 @@ public class GenericModel3D : Model3D {
 				{
 					return BenchTriangles().Reverse().ToArray();
 				}
-			case 345:
+			case 344://table
+				{
+					return TableTriangles().Reverse().ToArray();	
+				}
+			case 345://beam
 				{
 					return BeamTriangles().Reverse().ToArray();	
+				}
+			case 348://chair
+				{
+					return ChairTriangles(meshNo).Reverse().ToArray();
+				}
+			case 350://Nightstand
+				{
+					return NightStandTriangles().Reverse().ToArray();	
 				}
 			case 361:
 				{
@@ -35,15 +47,27 @@ public class GenericModel3D : Model3D {
 				{
 				case 336://Bench
 						{
-								return BenchVertices();
+							return BenchVertices();
+						}
+				case 344://table
+						{
+							return TableVertices();	
 						}
 				case 345://Beam
 						{
 								return BeamVertices();
 						}
+				case 348://chair
+						{
+							return ChairVertices();
+						}
+				case 350://Nightstand
+						{
+							return NightStandVertices();	
+						}
 				case 361:
 						{
-								return ShelfVertices();
+							return ShelfVertices();
 						}
 				}
 				return base.ModelVertices();
@@ -53,6 +77,85 @@ public class GenericModel3D : Model3D {
 		{
 				return Color.grey;
 		}
+
+
+
+		public override Material ModelMaterials (int meshNo)
+		{
+				switch (objInt().item_id)
+				{
+				case 336://Bench
+				case 344://Table			
+						{
+								//return BenchVertices();
+								if (_RES==GAME_UW2)
+								{
+										return GameWorldController.instance.MaterialObj[34];			
+								}
+								else
+								{
+										return GameWorldController.instance.MaterialObj[30];			
+								}					
+						}
+						//case 345://Beam
+						//{
+
+						//}
+				case 348://chair
+						{
+								switch(meshNo)		
+								{
+								case 0://Frame
+										return GameWorldController.instance.MaterialObj[34];
+								default://cushion
+										return GameWorldController.instance.MaterialObj[38];
+								}
+						}
+				case 350://Nightstand
+						{
+								return GameWorldController.instance.MaterialObj[34];	
+						}
+				case 361://shelf
+						{
+								return GameWorldController.instance.MaterialObj[38];
+						}
+				}
+				return base.ModelMaterials (meshNo);
+		}
+
+		public override float TextureScaling ()
+		{
+				switch (objInt().item_id)
+				{
+				case 336://Bench
+				case 344://table
+				case 348://chair
+				case 350://Nightstand
+				case 361://shelf		
+						{
+								return 4;
+						}
+						//case 345://Beam
+						//{
+
+						//}
+				}
+				return base.TextureScaling ();
+		}
+
+
+		public override int NoOfMeshes ()
+		{
+				switch (objInt().item_id)
+				{
+				case 348://chair
+						return 2;
+				default:
+						return base.NoOfMeshes();
+				}
+		}
+
+
 
 
 
@@ -145,4 +248,212 @@ public class GenericModel3D : Model3D {
 			return new int[]{4,7,3,0,4,3,10,9,8,9,10,8,13,12,11,12,13,11,2,1,0,3,2,0,5,6,7,4,5,7,5,4,0,1,5,0,6,5,1,2,6,1,7,6,2,3,7,2};	
 		}
 
+
+		int[] TableTriangles()
+		{
+			return new int[]{9,5,6,12,9,6,15,12,6,17,15,6,50,17,6,53,50,6,36,35,34,37,36,34,29,31,30,28,29,30,66,64,65,67,66,65,86,84,85,87,86,85,58,57,56,59,58,56,57,70,71,56,57,71,60,58,59,61,60,59,76,74,75,77,76,75,78,76,77,79,78,77,80,78,79,81,80,79,44,42,43,45,44,43,42,40,41,43,42,41,20,2,19,21,20,19,2,23,22,19,2,22,46,44,45,47,46,45,23,25,24,22,23,24,3,1,0,4,3,0,6,5,4,0,6,4,7,3,4,8,7,4,1,55,54,0,1,54,5,9,8,4,5,8,53,6,0,54,53,0,10,7,8,11,10,8,55,52,51,54,55,51,9,12,11,8,9,11,50,53,54,51,50,54,13,10,11,14,13,11,52,18,16,51,52,16,14,11,12,15,14,12,51,16,17,50,51,17,16,14,15,17,16,15,18,13,14,16,18,14,52,55,1,18,52,1,13,18,1,10,13,1,7,10,1,3,7,1,35,48,49,34,35,49,73,86,87,72,73,87,31,33,32,30,31,32,33,20,21,32,33,21,62,60,61,63,62,61,64,62,63,65,64,63,68,66,67,69,68,67,70,68,69,71,70,69,25,27,26,24,25,26,27,29,28,26,27,28,58,57,56,59,58,56,57,70,71,56,57,71,60,58,59,61,60,59,76,74,75,77,76,75,78,76,77,79,78,77,80,78,79,81,80,79,44,42,43,45,44,43,42,40,41,43,42,41,20,2,19,21,20,19,2,23,22,19,2,22,46,44,45,47,46,45,23,25,24,22,23,24,3,1,0,4,3,0,6,5,4,0,6,4,7,3,4,8,7,4,1,55,54,0,1,54,5,9,8,4,5,8,53,6,0,54,53,0,10,7,8,11,10,8,55,52,51,54,55,51,9,12,11,8,9,11,50,53,54,51,50,54,13,10,11,14,13,11,52,18,16,51,52,16,14,11,12,15,14,12,51,16,17,50,51,17,16,14,15,17,16,15,18,13,14,16,18,14,52,55,1,18,52,1,13,18,1,10,13,1,7,10,1,3,7,1};
+		}
+
+		Vector3[] TableVertices()
+		{
+			Vector3[] ModelVerts = new Vector3[88];
+			ModelVerts[0] = new Vector3(-0.2109375f,0.328125f,-0.2109375f);
+			ModelVerts[1] = new Vector3(-0.203125f,0.3398438f,-0.1953125f);
+			ModelVerts[2] = new Vector3(0.15625f,0f,-0.15625f);
+			ModelVerts[3] = new Vector3(0.203125f,0.3398438f,-0.1953125f);
+			ModelVerts[4] = new Vector3(0.2109375f,0.328125f,-0.2109375f);
+			ModelVerts[5] = new Vector3(0.2109375f,0.2851563f,-0.2109375f);
+			ModelVerts[6] = new Vector3(-0.2109375f,0.2851563f,-0.2109375f);
+			ModelVerts[7] = new Vector3(0.265625f,0.3398438f,-0.1328125f);
+			ModelVerts[8] = new Vector3(0.28125f,0.328125f,-0.140625f);
+			ModelVerts[9] = new Vector3(0.28125f,0.2851563f,-0.140625f);
+			ModelVerts[10] = new Vector3(0.265625f,0.3398438f,0.1328125f);
+			ModelVerts[11] = new Vector3(0.28125f,0.328125f,0.140625f);
+			ModelVerts[12] = new Vector3(0.28125f,0.2851563f,0.140625f);
+			ModelVerts[13] = new Vector3(0.203125f,0.3398438f,0.1953125f);
+			ModelVerts[14] = new Vector3(0.2109375f,0.328125f,0.2109375f);
+			ModelVerts[15] = new Vector3(0.2109375f,0.2851563f,0.2109375f);
+			ModelVerts[16] = new Vector3(-0.2109375f,0.328125f,0.2109375f);
+			ModelVerts[17] = new Vector3(-0.2109375f,0.2851563f,0.2109375f);
+			ModelVerts[18] = new Vector3(-0.203125f,0.3398438f,0.1953125f);
+			ModelVerts[19] = new Vector3(0.1601563f,0.2851563f,-0.1601563f);
+			ModelVerts[20] = new Vector3(0.1484375f,0f,-0.15625f);
+			ModelVerts[21] = new Vector3(0.140625f,0.2851563f,-0.1601563f);
+			ModelVerts[22] = new Vector3(0.1757813f,0.2851563f,-0.15625f);
+			ModelVerts[23] = new Vector3(0.1679688f,0f,-0.1484375f);
+			ModelVerts[24] = new Vector3(0.1757813f,0.2851563f,-0.125f);
+			ModelVerts[25] = new Vector3(0.1679688f,0f,-0.1328125f);
+			ModelVerts[26] = new Vector3(0.1601563f,0.2851563f,-0.1210938f);
+			ModelVerts[27] = new Vector3(0.15625f,0f,-0.125f);
+			ModelVerts[28] = new Vector3(0.140625f,0.2851563f,-0.1210938f);
+			ModelVerts[29] = new Vector3(0.1484375f,0f,-0.125f);
+			ModelVerts[30] = new Vector3(0.125f,0.2851563f,-0.125f);
+			ModelVerts[31] = new Vector3(0.1328125f,0f,-0.1328125f);
+			ModelVerts[32] = new Vector3(0.125f,0.2851563f,-0.15625f);
+			ModelVerts[33] = new Vector3(0.1328125f,0f,-0.1484375f);
+			ModelVerts[34] = new Vector3(0.140625f,0.2851563f,0.1210938f);
+			ModelVerts[35] = new Vector3(0.1484375f,0f,0.125f);
+			ModelVerts[36] = new Vector3(0.1328125f,0f,0.1328125f);
+			ModelVerts[37] = new Vector3(0.125f,0.2851563f,0.125f);
+			ModelVerts[38] = new Vector3(0.1328125f,0f,0.1484375f);
+			ModelVerts[39] = new Vector3(0.125f,0.2851563f,0.15625f);
+			ModelVerts[40] = new Vector3(0.1484375f,0f,0.15625f);
+			ModelVerts[41] = new Vector3(0.140625f,0.2851563f,0.1601563f);
+			ModelVerts[42] = new Vector3(0.15625f,0f,0.15625f);
+			ModelVerts[43] = new Vector3(0.1601563f,0.2851563f,0.1601563f);
+			ModelVerts[44] = new Vector3(0.1679688f,0f,0.1484375f);
+			ModelVerts[45] = new Vector3(0.1757813f,0.2851563f,0.15625f);
+			ModelVerts[46] = new Vector3(0.1679688f,0f,0.1328125f);
+			ModelVerts[47] = new Vector3(0.1757813f,0.2851563f,0.125f);
+			ModelVerts[48] = new Vector3(0.15625f,0f,0.125f);
+			ModelVerts[49] = new Vector3(0.1601563f,0.2851563f,0.1210938f);
+			ModelVerts[50] = new Vector3(-0.28125f,0.2851563f,0.140625f);
+			ModelVerts[51] = new Vector3(-0.28125f,0.328125f,0.140625f);
+			ModelVerts[52] = new Vector3(-0.265625f,0.3398438f,0.1328125f);
+			ModelVerts[53] = new Vector3(-0.28125f,0.2851563f,-0.140625f);
+			ModelVerts[54] = new Vector3(-0.28125f,0.328125f,-0.140625f);
+			ModelVerts[55] = new Vector3(-0.265625f,0.3398438f,-0.1328125f);
+			ModelVerts[56] = new Vector3(-0.1601563f,0.2851563f,-0.1601563f);
+			ModelVerts[57] = new Vector3(-0.15625f,0f,-0.15625f);
+			ModelVerts[58] = new Vector3(-0.1679688f,0f,-0.1484375f);
+			ModelVerts[59] = new Vector3(-0.1757813f,0.2851563f,-0.15625f);
+			ModelVerts[60] = new Vector3(-0.1679688f,0f,-0.1328125f);
+			ModelVerts[61] = new Vector3(-0.1757813f,0.2851563f,-0.125f);
+			ModelVerts[62] = new Vector3(-0.15625f,0f,-0.125f);
+			ModelVerts[63] = new Vector3(-0.1601563f,0.2851563f,-0.1210938f);
+			ModelVerts[64] = new Vector3(-0.1484375f,0f,-0.125f);
+			ModelVerts[65] = new Vector3(-0.140625f,0.2851563f,-0.1210938f);
+			ModelVerts[66] = new Vector3(-0.1328125f,0f,-0.1328125f);
+			ModelVerts[67] = new Vector3(-0.125f,0.2851563f,-0.125f);
+			ModelVerts[68] = new Vector3(-0.1328125f,0f,-0.1484375f);
+			ModelVerts[69] = new Vector3(-0.125f,0.2851563f,-0.15625f);
+			ModelVerts[70] = new Vector3(-0.1484375f,0f,-0.15625f);
+			ModelVerts[71] = new Vector3(-0.140625f,0.2851563f,-0.1601563f);
+			ModelVerts[72] = new Vector3(-0.1601563f,0.2851563f,0.1210938f);
+			ModelVerts[73] = new Vector3(-0.15625f,0f,0.125f);
+			ModelVerts[74] = new Vector3(-0.1679688f,0f,0.1328125f);
+			ModelVerts[75] = new Vector3(-0.1757813f,0.2851563f,0.125f);
+			ModelVerts[76] = new Vector3(-0.1679688f,0f,0.1484375f);
+			ModelVerts[77] = new Vector3(-0.1757813f,0.2851563f,0.15625f);
+			ModelVerts[78] = new Vector3(-0.15625f,0f,0.15625f);
+			ModelVerts[79] = new Vector3(-0.1601563f,0.2851563f,0.1601563f);
+			ModelVerts[80] = new Vector3(-0.1484375f,0f,0.15625f);
+			ModelVerts[81] = new Vector3(-0.140625f,0.2851563f,0.1601563f);
+			ModelVerts[82] = new Vector3(-0.1328125f,0f,0.1484375f);
+			ModelVerts[83] = new Vector3(-0.125f,0.2851563f,0.15625f);
+			ModelVerts[84] = new Vector3(-0.1328125f,0f,0.1328125f);
+			ModelVerts[85] = new Vector3(-0.125f,0.2851563f,0.125f);
+			ModelVerts[86] = new Vector3(-0.1484375f,0f,0.125f);
+			ModelVerts[87] = new Vector3(-0.140625f,0.2851563f,0.1210938f);
+			return ModelVerts;
+		}
+
+
+		int[] ChairTriangles(int MeshNo)
+		{
+			switch (MeshNo)
+			{
+			case 0:
+					return new int[]{1,0,2,0,3,2,1,24,23,1,23,0,5,7,6,5,4,7,6,7,32,33,6,32,20,22,21,20,20,25,20,25,29,20,14,22,20,29,14,26,28,27,26,19,28,26,30,19,30,31,19,3,7,4,3,0,7,23,22,0,0,22,14,7,31,32,7,19,31,28,19,29,29,19,14,14,13,10,14,15,13,13,13,13,19,8,18,8,11,18,14,19,15,15,19,18,18,11,13,18,13,15};
+			case 1:
+					return new int[]{0,10,8,0,8,7,10,13,11,10,11,8};
+			}
+			return base.ModelTriangles(MeshNo);
+		}
+
+
+		Vector3[] ChairVertices()
+		{
+			Vector3[] ModelVerts = new Vector3[36];
+			ModelVerts[0] = new Vector3(0.15625f,0.296875f,0.1367188f);
+			ModelVerts[1] = new Vector3(0.1679688f,0f,0.1367188f);
+			ModelVerts[2] = new Vector3(0.1679688f,0f,0.1054688f);
+			ModelVerts[3] = new Vector3(0.15625f,0.2421875f,0.0703125f);
+			ModelVerts[4] = new Vector3(0.15625f,0.2421875f,-0.0703125f);
+			ModelVerts[5] = new Vector3(0.1679688f,0f,-0.1054688f);
+			ModelVerts[6] = new Vector3(0.1679688f,0f,-0.1367188f);
+			ModelVerts[7] = new Vector3(0.15625f,0.296875f,-0.1367188f);
+			ModelVerts[8] = new Vector3(-0.04296875f,0.296875f,-0.1367188f);
+			ModelVerts[9] = new Vector3(-0.0703125f,0.296875f,0f);
+			ModelVerts[10] = new Vector3(-0.04296875f,0.296875f,0.1367188f);
+			ModelVerts[11] = new Vector3(-0.1171875f,0.671875f,-0.1367188f);
+			ModelVerts[12] = new Vector3(-0.1445313f,0.671875f,0f);
+			ModelVerts[13] = new Vector3(-0.1171875f,0.671875f,0.1367188f);
+			ModelVerts[14] = new Vector3(-0.09375f,0.296875f,0.1367188f);
+			ModelVerts[15] = new Vector3(-0.1445313f,0.671875f,0.1367188f);
+			ModelVerts[16] = new Vector3(-0.1679688f,0.671875f,0f);
+			ModelVerts[17] = new Vector3(-0.1171875f,0.296875f,0f);
+			ModelVerts[18] = new Vector3(-0.1445313f,0.671875f,-0.1367188f);
+			ModelVerts[19] = new Vector3(-0.09375f,0.296875f,-0.1367188f);
+			ModelVerts[20] = new Vector3(-0.15625f,0f,0.1367188f);
+			ModelVerts[21] = new Vector3(-0.1054688f,0f,0.1367188f);
+			ModelVerts[22] = new Vector3(-0.04296875f,0.2421875f,0.1367188f);
+			ModelVerts[23] = new Vector3(0.1015625f,0.2421875f,0.1367188f);
+			ModelVerts[24] = new Vector3(0.1328125f,0f,0.1367188f);
+			ModelVerts[25] = new Vector3(-0.15625f,0f,0.1054688f);
+			ModelVerts[26] = new Vector3(-0.15625f,0f,-0.1367188f);
+			ModelVerts[27] = new Vector3(-0.15625f,0f,-0.1054688f);
+			ModelVerts[28] = new Vector3(-0.1054688f,0.234375f,-0.0703125f);
+			ModelVerts[29] = new Vector3(-0.1054688f,0.234375f,0.0703125f);
+			ModelVerts[30] = new Vector3(-0.1054688f,0f,-0.1367188f);
+			ModelVerts[31] = new Vector3(-0.04296875f,0.2421875f,-0.1367188f);
+			ModelVerts[32] = new Vector3(0.1015625f,0.2421875f,-0.1367188f);
+			ModelVerts[33] = new Vector3(0.1328125f,0f,-0.1367188f);
+			ModelVerts[34] = new Vector3(-0.1054688f,0.2421875f,0.0703125f);
+			ModelVerts[35] = new Vector3(-0.1054688f,0.2421875f,-0.0703125f);
+			return ModelVerts;
+		}
+
+
+
+		int[] NightStandTriangles()
+		{
+			return new int[]{0,2,3,4,0,3,35,39,38,34,35,38,39,37,36,38,39,36,28,26,27,29,28,27,26,25,24,27,26,24,19,23,22,18,19,22,23,21,20,22,23,20,12,10,11,13,12,11,10,9,1,11,10,1,3,2,0,4,3,0,4,0,5,6,4,5,3,4,6,7,3,6,2,3,7,8,2,7,0,2,8,5,0,8,32,33,36,37,32,36,14,15,12,13,14,12,30,24,25,31,30,25,16,17,20,21,16,20,18,17,16,19,18,16,30,31,28,29,30,28,35,39,38,34,35,38,39,37,36,38,39,36,28,26,27,29,28,27,26,25,24,27,26,24,19,23,22,18,19,22,23,21,20,22,23,20,12,10,11,13,12,11,10,9,1,11,10,1,3,2,0,4,3,0,4,0,5,6,4,5,3,4,6,7,3,6,2,3,7,8,2,7,0,2,8,5,0,8};
+		}
+
+		Vector3[] NightStandVertices()
+		{
+			Vector3[] ModelVerts = new Vector3[40];
+			ModelVerts[0] = new Vector3(0.1171875f,0.1835938f,-0.1171875f);
+			ModelVerts[1] = new Vector3(-0.09375f,-0.00390625f,-0.07421875f);
+			ModelVerts[2] = new Vector3(-0.1171875f,0.1835938f,-0.1171875f);
+			ModelVerts[3] = new Vector3(-0.1171875f,0.1835938f,0.1679688f);
+			ModelVerts[4] = new Vector3(0.1171875f,0.1835938f,0.1679688f);
+			ModelVerts[5] = new Vector3(0.1171875f,0.1679688f,-0.1171875f);
+			ModelVerts[6] = new Vector3(0.1171875f,0.1679688f,0.1679688f);
+			ModelVerts[7] = new Vector3(-0.1171875f,0.1679688f,0.1679688f);
+			ModelVerts[8] = new Vector3(-0.1171875f,0.1679688f,-0.1171875f);
+			ModelVerts[9] = new Vector3(-0.09375f,0.1679688f,-0.0625f);
+			ModelVerts[10] = new Vector3(-0.09375f,0.1679688f,-0.0859375f);
+			ModelVerts[11] = new Vector3(-0.09375f,-0.00390625f,-0.0859375f);
+			ModelVerts[12] = new Vector3(-0.0703125f,0.1679688f,-0.0859375f);
+			ModelVerts[13] = new Vector3(-0.08203125f,-0.00390625f,-0.0859375f);
+			ModelVerts[14] = new Vector3(-0.08203125f,-0.00390625f,-0.07421875f);
+			ModelVerts[15] = new Vector3(-0.0703125f,0.1679688f,-0.0625f);
+			ModelVerts[16] = new Vector3(0.0703125f,0.1679688f,-0.0625f);
+			ModelVerts[17] = new Vector3(0.08203125f,-0.00390625f,-0.07421875f);
+			ModelVerts[18] = new Vector3(0.09375f,-0.00390625f,-0.07421875f);
+			ModelVerts[19] = new Vector3(0.09375f,0.1679688f,-0.0625f);
+			ModelVerts[20] = new Vector3(0.08203125f,-0.00390625f,-0.0859375f);
+			ModelVerts[21] = new Vector3(0.0703125f,0.1679688f,-0.0859375f);
+			ModelVerts[22] = new Vector3(0.09375f,-0.00390625f,-0.0859375f);
+			ModelVerts[23] = new Vector3(0.09375f,0.1679688f,-0.0859375f);
+			ModelVerts[24] = new Vector3(0.09375f,-0.00390625f,0.125f);
+			ModelVerts[25] = new Vector3(0.09375f,0.1679688f,0.1132813f);
+			ModelVerts[26] = new Vector3(0.09375f,0.1679688f,0.1367188f);
+			ModelVerts[27] = new Vector3(0.09375f,-0.00390625f,0.1367188f);
+			ModelVerts[28] = new Vector3(0.0703125f,0.1679688f,0.1367188f);
+			ModelVerts[29] = new Vector3(0.08203125f,-0.00390625f,0.1367188f);
+			ModelVerts[30] = new Vector3(0.08203125f,-0.00390625f,0.125f);
+			ModelVerts[31] = new Vector3(0.0703125f,0.1679688f,0.1132813f);
+			ModelVerts[32] = new Vector3(-0.0703125f,0.1679688f,0.1132813f);
+			ModelVerts[33] = new Vector3(-0.08203125f,-0.00390625f,0.125f);
+			ModelVerts[34] = new Vector3(-0.09375f,-0.00390625f,0.125f);
+			ModelVerts[35] = new Vector3(-0.09375f,0.1679688f,0.1132813f);
+			ModelVerts[36] = new Vector3(-0.08203125f,-0.00390625f,0.1367188f);
+			ModelVerts[37] = new Vector3(-0.0703125f,0.1679688f,0.1367188f);
+			ModelVerts[38] = new Vector3(-0.09375f,-0.00390625f,0.1367188f);
+			ModelVerts[39] = new Vector3(-0.09375f,0.1679688f,0.1367188f);
+			return ModelVerts;
+		}
 }
