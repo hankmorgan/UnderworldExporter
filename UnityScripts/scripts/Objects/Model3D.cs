@@ -8,6 +8,7 @@ using System.Collections;
 public class Model3D : object_base {
 		
 
+
 	
 	protected override void Start ()
 	{
@@ -31,11 +32,11 @@ public class Model3D : object_base {
 		MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
 		Material[] mats = new Material[NoOfMeshes()];
 		Mesh mesh = new Mesh();
-		//mr.material = GameWorldController.instance.modelMaterial;
+
 
 		mesh.subMeshCount = NoOfMeshes();				
 
-		mesh.vertices =ModelVertices();
+		mesh.vertices = ModelVertices();
 
 		Vector2[] uvs = ModelUVs(mesh.vertices);
 
@@ -43,7 +44,7 @@ public class Model3D : object_base {
 		{
 			mesh.SetTriangles(ModelTriangles(i),i);	
 			mats[i] = ModelMaterials(i);
-						//mr.material.SetColor("_Color",ModelColour(0));
+			//mr.material.SetColor("_Color",ModelColour(0));
 			//mats[i].SetColor("_Color",ModelColour(i));
 		}	
 		if (uvs.GetUpperBound(0)>0)
@@ -55,10 +56,8 @@ public class Model3D : object_base {
 		for (int i=0; i<NoOfMeshes();i++)
 		{
 			mr.materials[i].SetColor("_Color",ModelColour(i));
-			//mr.materials[i].mainTexture = ModelTexture(i);
 		}
 
-		//mesh.triangles=	mesh.triangles;
 		meshF.mesh = mesh;
 		mesh.RecalculateNormals(); 
 		mesh.RecalculateBounds();
@@ -118,67 +117,36 @@ public class Model3D : object_base {
 
 
 
-		protected void AdjustModelPos ()
+	protected void AdjustModelPos ()
+	{
+		//Line up decals to walls where the decal is set to be on an edge.
+		int tileX = objInt ().tileX;
+		int tileY = objInt ().tileY;
+		int x = objInt ().x;
+		int y = objInt ().y;
+		int heading = objInt ().heading * 45;
+		Vector3 objPos = this.transform.position;
+		Vector3 adjustment = Vector3.zero;
+		if (TileMap.ValidTile (tileX, tileY)) 
 		{
-				//Line up decals to walls where the decal is set to be on an edge.
-				int tileX = objInt ().tileX;
-				int tileY = objInt ().tileY;
-				int x = objInt ().x;
-				int y = objInt ().y;
-				int heading = objInt ().heading * 45;
-				Vector3 objPos = this.transform.position;
-				Vector3 adjustment = Vector3.zero;
-				if (TileMap.ValidTile (tileX, tileY)) 
-				{
-						switch (GameWorldController.instance.currentTileMap ().Tiles [tileX, tileY].tileType) {
-						case TileMap.TILE_OPEN: {
-										if ((y == 0) && ((heading == ObjectInteraction.HEADINGSOUTH) || (heading == ObjectInteraction.HEADINGNORTH))) {
-												//Move object Right.
-												adjustment += new Vector3 (0, 0, 0.06f);
-										}
-										if ((y == 7) && ((heading == ObjectInteraction.HEADINGSOUTH) || (heading == ObjectInteraction.HEADINGNORTH))) {
-												//Move object left.
-												adjustment += new Vector3 (0, 0, -0.06f);
-										}
-										if ((x == 0) && ((heading == ObjectInteraction.HEADINGEAST) || (heading == ObjectInteraction.HEADINGWEST))) {
-												//move object forward
-												adjustment += new Vector3 (0.06f, 0, 0);
-										}
-										if ((x == 7) && ((heading == ObjectInteraction.HEADINGEAST) || (heading == ObjectInteraction.HEADINGWEST))) {
-												//Move object backward..
-												adjustment += new Vector3 (-0.06f, 0, 0);
-										}
-										break;
-								}
-						case TileMap.TILE_DIAG_NW:
-								if ((heading == ObjectInteraction.HEADINGNORTHWEST)) {
-										//This decal clips into the wall
-										adjustment += new Vector3 (-0.02f, 0, +0.02f);
-								}
-								break;
-						case TileMap.TILE_DIAG_NE:
-								if ((heading == ObjectInteraction.HEADINGNORTHEAST)) {
-										//This decal is out from the wall.
-										adjustment += new Vector3 (+0.02f, 0, +0.02f);
-								}
-								break;
-						case TileMap.TILE_DIAG_SE:
-								if ((heading == ObjectInteraction.HEADINGSOUTHEAST)) {
-										//This decal is out from the wall.
-										adjustment += new Vector3 (-0.08f, 0, +0.08f);
-								}
-								break;
-						case TileMap.TILE_DIAG_SW:
-								if ((heading == ObjectInteraction.HEADINGSOUTHWEST)) {
-										//This decal is out from the wall.
-										adjustment += new Vector3 (+0.08f, 0, +0.08f);
-								}
-								break;
-						default:
-								break;
-						}
-						this.transform.position = objPos + adjustment;
-				}
+			if ((y == 0)) {
+					//Move object Right.
+					adjustment += new Vector3 (0, 0, 0.06f);
+			}
+			if ((y == 7) ) {
+					//Move object left.
+					adjustment += new Vector3 (0, 0, -0.06f);
+			}
+			if ((x == 0)) {
+					//move object forward
+					adjustment += new Vector3 (0.06f, 0, 0);
+			}
+			if ((x == 7) ) {
+					//Move object backward..
+					adjustment += new Vector3 (-0.06f, 0, 0);
+			}
 		}
+		this.transform.position = objPos + adjustment;
+	}
 
 }

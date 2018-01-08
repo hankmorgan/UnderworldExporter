@@ -384,7 +384,10 @@ public class ObjectInteraction : UWEBase {
 
 		public void SetWorldDisplay(Sprite NewSprite)
 		{
-			sr.sprite=NewSprite;
+			if (sr!=null)
+			{
+				sr.sprite=NewSprite;			
+			}			
 		}
 
 		public void RefreshAnim()
@@ -1602,14 +1605,21 @@ public class ObjectInteraction : UWEBase {
 						skipRotate=true;
 						CreateSprite=false;
 						break;
-				case CONTAINER:						
-						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
-						if ((currObj.item_id >=128) && (currObj.item_id<=142))
+				case CONTAINER:
+						{
+							switch(objInt.item_id)
+							{
+							case 347://barrel variant
+								Container.PopulateContainer(myObj.AddComponent<Barrel>(),objInt,currObj.parentList);CreateSprite=false; break;
+							default:
+								Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);break;		
+							}
+							if ((currObj.item_id >=128) && (currObj.item_id<=142))
 							{
 								myObj.GetComponent<Container>().Capacity=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].capacity;
-								//myObj.GetComponent<Container>().ObjectsAccepted=GameWorldController.instance.objDat.containerStats[currObj.item_id-128].objectsMask;	
-							}
-						break;
+							}					
+							break;	
+						}
 				case KEY:
 						myObj.AddComponent<DoorKey>();
 						break;
