@@ -1830,6 +1830,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_LARGE_BLACKROCK_GEM:
 						myObj.AddComponent<LargeBlackrockGem>();
+						CreateSprite=false;
 						break;
 				case A_BLACKROCK_GEM:
 						myObj.AddComponent<BlackrockGem>();

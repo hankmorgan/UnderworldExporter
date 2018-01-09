@@ -10,11 +10,14 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 
 		//Probably changes variable no 6 to set what is reachable. There is probably another value that sets what levels are available..
 	int prevWorld=-1;
+	public LargeBlackrockGem gem;
 
 	protected override void Start ()
 	{
 		base.Start ();
 		//Quest.instance.variables[6]=0;
+		gem = FindObjectOfType<LargeBlackrockGem>();
+		UpdateGemFace();
 	}
 
 		/// <summary>
@@ -45,11 +48,30 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 		{
 			Quest.instance.variables[6]=0;	
 		}
+
 		if (prevWorld!=Quest.instance.variables[6])
 		{
 			Debug.Log("Now serving world " +  Quest.instance.variables[6]);				
-		}		
+		}	
+				UpdateGemFace ();
+
 		prevWorld=Quest.instance.variables[6];
+	}
+
+	void UpdateGemFace ()
+	{
+		if (gem != null) {
+			if (gem.GetComponent<MeshRenderer> () != null) {
+				for (int i = 0; i <= 7; i++) {
+					if (i == Quest.instance.variables [6]) {
+						gem.GetComponent<MeshRenderer> ().materials [i].SetColor ("_Color", Color.white);
+					}
+					else {
+						gem.GetComponent<MeshRenderer> ().materials [i].SetColor ("_Color", Color.blue);
+					}
+				}
+			}
+		}
 	}
 
 	public override void PostActivate (object_base src)
