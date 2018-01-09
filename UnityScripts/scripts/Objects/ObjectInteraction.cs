@@ -150,7 +150,7 @@ public class ObjectInteraction : UWEBase {
 		public const int NPC_WISP = 123;
 		public const int NPC_VOID = 124;
 		public const int DREAM_PLANT = 125;
-		//public const int BENCH = 126;
+		public const int BED = 126;
 		public const int ARROW = 127;
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
@@ -1609,6 +1609,8 @@ public class ObjectInteraction : UWEBase {
 						{
 							switch(objInt.item_id)
 							{
+							case 349://Chest variant
+								Container.PopulateContainer(myObj.AddComponent<Chest>(),objInt,currObj.parentList);CreateSprite=false; break;
 							case 347://barrel variant
 								Container.PopulateContainer(myObj.AddComponent<Barrel>(),objInt,currObj.parentList);CreateSprite=false; break;
 							default:
@@ -1804,6 +1806,10 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case BEDROLL:
 						myObj.AddComponent<Bedroll>();
+						break;
+				case BED:
+						myObj.AddComponent<Bed>();
+						CreateSprite=false;
 						break;
 				case TREASURE://or gold
 						myObj.AddComponent<Coin>();

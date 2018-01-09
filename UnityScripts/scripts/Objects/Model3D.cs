@@ -45,7 +45,7 @@ public class Model3D : object_base {
 			mesh.SetTriangles(ModelTriangles(i),i);	
 			mats[i] = ModelMaterials(i);
 			//mr.material.SetColor("_Color",ModelColour(0));
-			//mats[i].SetColor("_Color",ModelColour(i));
+			mats[i].SetColor("_Color",ModelColour(i));
 		}	
 		if (uvs.GetUpperBound(0)>0)
 		{
