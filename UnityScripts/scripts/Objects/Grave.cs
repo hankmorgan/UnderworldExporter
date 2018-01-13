@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
-public class Grave : object_base {
+public class Grave : Model3D {
 	///ID of the grave to lookup
 	//public int GraveID;
 	bool LookingAt;
 	float timeOut=0f;
-	protected override void Start ()
+	/*protected override void Start ()
 	{
 		base.Start ();
 		//GraveID=  objInt().objectloaderinfo.DeathWatched;//seriously?????? Need to make this better. Look at BuildObjectList
 		CreateGrave(this.gameObject,objInt());
-	}
+	}*/
 
 	void Update()
 	{
@@ -50,10 +51,13 @@ public class Grave : object_base {
 	{
 		char[] graves;
 		//Load in the grave information
-		DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
-		if (objInt().link >= 512)
+		if (_RES!=GAME_UW2)
 		{
-			return (short)DataLoader.getValAtAddress(graves, objInt().link - 512, 8)-1;
+				DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
+				if (objInt().link >= 512)
+				{
+						return (short)DataLoader.getValAtAddress(graves, objInt().link - 512, 8)-1;
+				}		
 		}
 		return 0;
 	}
@@ -168,7 +172,7 @@ public class Grave : object_base {
 	}
 
 
-		public static void CreateGrave(GameObject myObj, ObjectInteraction objInt)
+	/*	public static void CreateGrave(GameObject myObj, ObjectInteraction objInt)
 		{//TODO:make this a properly texture model as part of map generation.
 			myObj.layer=LayerMask.NameToLayer("MapMesh");
 
@@ -191,5 +195,71 @@ public class Grave : object_base {
 			bx=SpriteController.GetComponent<BoxCollider>();
 			bx.enabled=false;
 			Component.DestroyImmediate (bx);
+		}*/
+
+
+
+
+		/***************************Model definition*******************/
+
+	public override int NoOfMeshes ()
+	{
+		return 2;
+	}
+
+	public override Vector3[] ModelVertices ()
+	{
+		Vector3[] ModelVerts=new Vector3[8];
+		ModelVerts[0] = new Vector3(-0.125f,0f,-0.015625f);
+		ModelVerts[1] = new Vector3(-0.125f,0.375f,-0.015625f);
+		ModelVerts[2] = new Vector3(0.125f,0.375f,-0.015625f);
+		ModelVerts[3] = new Vector3(0.125f,0f,-0.015625f);
+		ModelVerts[4] = new Vector3(-0.125f,0f,0.015625f);
+		ModelVerts[5] = new Vector3(-0.125f,0.375f,0.015625f);
+		ModelVerts[6] = new Vector3(0.125f,0.375f,0.015625f);
+		ModelVerts[7] = new Vector3(0.125f,0f,0.015625f);
+		return ModelVerts;
+	}
+
+	public override int[] ModelTriangles (int meshNo)
+	{
+		switch (meshNo)
+		{
+		case 0://headstone
+			return new int[]{0,2,1,0,3,2,4,5,6,4,6,7}.Reverse().ToArray();
+		case 1://trim
+			return new int[]{0,1,4,4,1,5,3,7,6,3,6,2,5,1,2,5,2,6,0,4,7,0,7,3}.Reverse().ToArray();
 		}
+
+		return base.ModelTriangles(meshNo);
+	}
+
+
+	public override Material ModelMaterials (int meshNo)
+	{
+		switch (meshNo)
+		{
+		case 0://headstone
+			return GameWorldController.instance.MaterialObj[objInt().flags+28];
+		case 1://Trim
+			return GameWorldController.instance.MaterialObj[objInt().flags+28];
+		}
+		return base.ModelMaterials (meshNo);
+	}
+
+
+	public override Vector2[] ModelUVs (Vector3[] verts)
+	{
+		Vector2[] ModelUvs=new Vector2[8];
+		ModelUvs[0] = new Vector2(0f,0f);
+		ModelUvs[1] = new Vector2(0f,1f);
+		ModelUvs[2] = new Vector2(1f,1f);
+		ModelUvs[3] = new Vector2(1f,0f);
+		ModelUvs[4] = new Vector2(0f,0f);
+		ModelUvs[5] = new Vector2(0f,1f);
+		ModelUvs[6] = new Vector2(1f,1f);
+		ModelUvs[7] = new Vector2(1f,0f);
+		return ModelUvs;
+	}
+
 }

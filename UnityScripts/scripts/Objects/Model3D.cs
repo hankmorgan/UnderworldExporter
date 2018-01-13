@@ -61,10 +61,13 @@ public class Model3D : object_base {
 		meshF.mesh = mesh;
 		mesh.RecalculateNormals(); 
 		mesh.RecalculateBounds();
-		
-		MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
-		mc.sharedMesh=null;
-		mc.sharedMesh=mesh;	
+		if (isSolidModel())
+		{
+			MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
+			mc.sharedMesh=null;
+			mc.sharedMesh=mesh;							
+		}
+
 	}
 
 	public virtual int[] ModelTriangles(int meshNo)
@@ -85,6 +88,11 @@ public class Model3D : object_base {
 	public virtual Color ModelColour(int meshNo)
 	{
 		return Color.white;
+	}
+
+	public virtual bool isSolidModel()
+	{
+		return true;
 	}
 
 	public virtual Vector2[] ModelUVs(Vector3[] verts)

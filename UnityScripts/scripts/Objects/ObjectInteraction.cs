@@ -1787,6 +1787,10 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<MoonStone>();
 						UWCharacter.Instance.MoonGatePosition = myObj.transform.position;
 						break;
+				case MOONGATE:
+						myObj.AddComponent<MoonGate>();
+						CreateSprite=false;
+						break;
 				case LEECH:
 						myObj.AddComponent<Leech>();
 						break;
