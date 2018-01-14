@@ -357,6 +357,13 @@ public class NPC : MobileObject {
 
 				case GAME_UW2:
 						{
+							if (GameWorldController.instance.LevelNo==3)
+							{
+								if (objInt().item_id==78)//Blood worms on level 3 of britannia. This is a quest for the friendly goblins
+								{
+										Quest.instance.QuestVariables[135]++;
+								}
+							}
 							switch(npc_whoami)
 							{
 							case 58://Brain creatures in Kilhorn

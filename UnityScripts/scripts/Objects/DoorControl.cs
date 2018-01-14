@@ -600,13 +600,13 @@ public class DoorControl : object_base {
 	{
 		if (state()==false)//Closed
 		{
-			Debug.Log("Toggling door open");
+			//Debug.Log("Toggling door open");
 			UnlockDoor(PlayerUse);
 			OpenDoor(doorTravelTime);	
 		}
 		else
 		{
-			Debug.Log("Toggling door closed");
+			//Debug.Log("Toggling door closed");
 			CloseDoor (doorTravelTime);
 			LockDoor();
 		}

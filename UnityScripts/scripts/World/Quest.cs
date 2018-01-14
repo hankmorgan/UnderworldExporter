@@ -111,7 +111,7 @@ using System.Collections;
 /// 132: Set to 2 during Kintara conversation
 /// 133: How much Jospur owes you for fighting in the pits
 /// 134: The password for the prison tower (random value)
-/// 135: Checked by goblin in sewers
+/// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
 public class Quest : UWEBase {
 

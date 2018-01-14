@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+
+
+/// <summary>
+/// Critter info.
+/// </summary>
+/// Detailed animation information for critters
 public class CritterInfo : Loader {
 
 		public const int idle_combat = 0x0;
@@ -282,24 +288,24 @@ public class CritterInfo : Loader {
 							bool ImgStarted = false;
 							for (int y = 0; y < MaxHeight; y++)
 							{
-									for (int x = 0; x < MaxWidth; x++)
+								for (int x = 0; x < MaxWidth; x++)
+								{
+									if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+									{//the pixel from the source image is here 
+										ImgStarted=true;
+										outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
+										ColCounter++;
+									}
+									else
 									{
-											if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
-											{//the pixel from the source image is here 
-													ImgStarted=true;
-													outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
-													ColCounter++;
-											}
-											else
-											{
-													outputImg[x + (y*MaxWidth)]=(char)0;//alpha
-											}
+											outputImg[x + (y*MaxWidth)]=(char)0;//alpha
 									}
-									if (ImgStarted == true)
-									{//New Row on the src image
-											RowCounter++;
-											ColCounter=0;
-									}
+								}
+								if (ImgStarted == true)
+								{//New Row on the src image
+									RowCounter++;
+									ColCounter=0;
+								}
 							}
 							//Set the heights for output
 							BitMapWidth = MaxWidth;
@@ -308,7 +314,9 @@ public class CritterInfo : Loader {
 							//****************************
 
 							Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
-							AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.0f));
+							CropImageData (ref imgData, pal);
+
+							AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(imgData,new Rect(0f,0f,imgData.width,imgData.height),new Vector2 (0.5f,0.0f));
 							AnimInfo.animSprites[spriteIndex+ i].texture.filterMode=FilterMode.Point;
 							spriteCounter++;	
 						}
@@ -722,29 +730,36 @@ public class CritterInfo : Loader {
 				{
 						if (pass == 0)
 						{//First pass is getting max image sizes
-								for (int index = 128; index < 640; index = index + 2)
+							for (int index = 128; index < 640; index = index + 2)
+							{
+								int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
+								if (frameOffset != 0)
 								{
-										int frameOffset = (int)DataLoader.getValAtAddress(critterFile, index, 16);
-										if (frameOffset != 0)
-										{
-												int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
-												int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
-												int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
-												int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
-												if (hotspotx>BitMapWidth)	{hotspotx = BitMapWidth;}
-												if (hotspoty>BitMapHeight)	{hotspoty = BitMapHeight;}
-												if (BitMapWidth > MaxWidth){MaxWidth = BitMapWidth;}
-												if (BitMapHeight > MaxHeight){MaxHeight = BitMapHeight;}
-												if (hotspotx > MaxHotSpotX){MaxHotSpotX = hotspotx;}
-												if (hotspoty > MaxHotSpotY){MaxHotSpotY = hotspoty;}
-										}//End frameoffsetr first pass
-								}//End for loop first pass
+									int BitMapWidth = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 0, 8);
+									int BitMapHeight = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 1, 8);
+									int hotspotx = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 2, 8);
+									int hotspoty = (int)DataLoader.getValAtAddress(critterFile, frameOffset + 3, 8);
+									if (hotspotx>BitMapWidth)	{hotspotx = BitMapWidth;}
+									if (hotspoty>BitMapHeight)	{hotspoty = BitMapHeight;}
+									if (BitMapWidth > MaxWidth){MaxWidth = BitMapWidth;}
+									if (BitMapHeight > MaxHeight){MaxHeight = BitMapHeight;} 
+									if (hotspotx > MaxHotSpotX){MaxHotSpotX = hotspotx;}
+									if (hotspoty > MaxHotSpotY){MaxHotSpotY = hotspoty;}
+								}//End frameoffsetr first pass
+							}//End for loop first pass
+
+							switch (fileCrit.Substring(fileCrit.Length-7,4).ToUpper())
+							{
+								case "CR02"://Rat. max height is calculated incorrectly
+									MaxHeight = 100;
+									break;
+							}
 						}//End first pass
 						else
 						{//Extract images
 								if (MaxHotSpotX * 2 > MaxWidth)
 								{//Try and center the hot spot in the image.
-										MaxWidth = MaxHotSpotX * 2;
+									MaxWidth = MaxHotSpotX * 2;
 								}
 								char[] outputImg;
 								outputImg = new char[MaxWidth*MaxHeight * 2];
@@ -806,7 +821,8 @@ public class CritterInfo : Loader {
 														//Debug.Log(fileCrit + " "  + spriteIndex);
 
 														Texture2D imgData= ArtLoader.Image(outputImg,0,BitMapWidth,BitMapHeight,"namehere",pal,true);
-														AnimInfo.animSprites[spriteIndex++]= Sprite.Create(imgData,new Rect(0f,0f,BitMapWidth,BitMapHeight),new Vector2 (0.5f,0.0f));
+														CropImageData(ref imgData , pal);
+														AnimInfo.animSprites[spriteIndex++]= Sprite.Create(imgData,new Rect(0f,0f,imgData.width,imgData.height),new Vector2 (0.5f,0.0f));
 												}
 										}//end extrac frameoffset
 								}//End for loop extract
@@ -877,8 +893,42 @@ public class CritterInfo : Loader {
 		}
 
 
+		/// <summary>
+		/// Crops the image data to remove all alpha space from beneath the npcs feet
+		/// </summary>
+		/// <param name="imgData">Image data.</param>
+		/// <param name="PalUsed">Pal used.</param>
+	static void CropImageData (ref Texture2D imgData, Palette PalUsed)
+	{
+		Color alphacolor = PalUsed.ColorAtPixel ((byte)0, true);
+		int InvalidRows = 0;//imgData.height;
+		for (int x = 0; x < imgData.height; x++) {
+			bool rowIsAllAlpha = true;
+			for (int y = 0; y <= imgData.width; y++) {
+				if (imgData.GetPixel (y, x) != alphacolor) {
+					rowIsAllAlpha = false;
+					break;
+				}
+			}
+			if (rowIsAllAlpha) {
+				InvalidRows++;
+				for (int z=0; z<=imgData.width;z++)
+				{
+					imgData.SetPixel(z,x,Color.white);
+				}
+			}
+			else {
+				break;
+			}
+		}
+		if ((InvalidRows < imgData.height)) {
+			Texture2D newImg= new Texture2D(imgData.width, imgData.height-InvalidRows,TextureFormat.ARGB32,false);
+			newImg.SetPixels(imgData.GetPixels (0, InvalidRows, imgData.width, imgData.height-InvalidRows));
+			newImg.filterMode=FilterMode.Point;
+			newImg.Apply();
+			imgData=newImg;
 
-
-
-
+			//imgData.Apply();
+		}
+	}
 }
