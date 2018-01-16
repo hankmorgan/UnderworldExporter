@@ -32,8 +32,9 @@ public class Map : object_base {
 		/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
 	public bool OpenMap()
 	{
+		UWCharacter.Instance.playerMotor.jumping.enabled=false;
 		MapInteraction.UpdateMap(GameWorldController.instance.LevelNo);
-		
+		WindowDetectUW.InMap=true;
 		if  (GameWorldController.instance.getMus()!=null)
 		{
 			GameWorldController.instance.getMus().InMap=true;

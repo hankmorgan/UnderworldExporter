@@ -66,8 +66,8 @@ public class SilverSeed : object_base {
 				UWCharacter.Instance.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);
 				UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt().gameObject.name);
 				UWCharacter.Instance.playerInventory.Refresh ();
-
 				objInt().PickedUp=false;
+				GameWorldController.MoveToWorld(objInt());
 				return true;
 			}
 			else

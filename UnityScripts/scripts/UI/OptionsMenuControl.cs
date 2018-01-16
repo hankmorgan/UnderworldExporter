@@ -488,8 +488,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	private void ToggleSound(bool state)
 	{
 		if (state==true)
-		{
-			
+		{			
 			SoundState.texture=SoundStateOn;
 		}
 		else

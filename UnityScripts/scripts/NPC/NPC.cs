@@ -287,7 +287,10 @@ public class NPC : MobileObject {
 				default:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1];break;								
 				}
-				objInt().aud.Play();
+				if (ObjectInteraction.PlaySoundEffects)
+				{
+						objInt().aud.Play();		
+				}
 		}
 
 		/// <summary>
@@ -1305,6 +1308,7 @@ public class NPC : MobileObject {
 						float force =100f*Vector3.Distance(TargetingPoint,NPC_Launcher.transform.position);
 
 						ObjectLoaderInfo newobjt = ObjectLoader.newObject(16,0,0,1,256);
+						newobjt.is_quant=1;
 						GameObject launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
 
 						GameWorldController.UnFreezeMovement(launchedItem);

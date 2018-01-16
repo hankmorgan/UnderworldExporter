@@ -265,7 +265,7 @@ public class UWCharacter : Character {
 	void SwimmingMode ()
 	{
 		playerCam.transform.localPosition = new Vector3 (playerCam.transform.localPosition.x, -0.8f, playerCam.transform.localPosition.z);
-		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 1f);//TODO:redo me
+		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 0.1f);//TODO:redo me
 		SwimTimer = SwimTimer + Time.deltaTime;
 		//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
 		if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f) {
@@ -375,13 +375,13 @@ public class UWCharacter : Character {
 			}
 			else
 			{//0.9198418f
-				playerMotor.jumping.enabled=true;
+				playerMotor.jumping.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap) );
 				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,1.0f,playerCam.transform.localPosition.z);
 				swimSpeedMultiplier=1.0f;
 				SwimTimer=0.0f;
 			}
 		}
-		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
+		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) );
 		
 		if(Quest.instance.InDreamWorld)
 		{
@@ -786,8 +786,11 @@ public class UWCharacter : Character {
 				//Debug.Log("Fallspeed = " + fallSpeed + " adjusted down to " + fallspeedAdjusted) ;
 				ApplyDamage(Random.Range (1,5));//TODO:As a function of the acrobat skill versus fall.
 			}
-			aud.clip=GameWorldController.instance.getMus().SoundEffects[0];
-			aud.Play();
+			if (ObjectInteraction.PlaySoundEffects)
+			{
+					aud.clip=GameWorldController.instance.getMus().SoundEffects[0];
+					aud.Play();								
+			}
 		}
 	}
 

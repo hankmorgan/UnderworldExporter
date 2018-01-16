@@ -18,6 +18,7 @@ public class MapInteraction : GuiBase {
 		public void MapClose()
 		{
 			WindowDetect.InMap=false;
+			UWCharacter.Instance.playerMotor.jumping.enabled=true;
 			InventorySlot.Hovering=false;
 			if  (GameWorldController.instance.getMus()!=null)
 			{
@@ -51,7 +52,7 @@ public class MapInteraction : GuiBase {
 		/// <param name="LevelNo">Level no.</param>
 		public static void UpdateMap(int LevelNo)
 		{
-			WindowDetect.InMap=true;//turns on blocking collider.
+			WindowDetect.InMap=true;//turns on blocking collider.			
 			MapInteraction.MapNo=LevelNo;
 			UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
 			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.AutoMaps[MapInteraction.MapNo].TileMapImage();

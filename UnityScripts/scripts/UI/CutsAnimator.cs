@@ -89,7 +89,7 @@ public class CutsAnimator : GuiBase {
 						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 						UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 						SetAnimation= "Anim_Base";//Clears out the animation.
-
+						PrevAnimation="x";
 						if (GameWorldController.instance.LevelNo!=UWCharacter.Instance.ResurrectLevel-1)
 						{
 							GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel-1));
@@ -169,7 +169,7 @@ public class CutsAnimator : GuiBase {
 				break;
 			case "splashorigin":
 			case "pres1_0000":
-						TargetControl.material=UI_UNLIT;
+				TargetControl.material=UI_UNLIT;
 				TargetControl.texture = (Texture2D)GameWorldController.instance.bytloader.LoadImageAt(BytLoader.PRES1_BYT);			
 				break;
 			case "splashbluesky":
@@ -191,6 +191,7 @@ public class CutsAnimator : GuiBase {
 				cuts = new CutsLoader("cs402.n01");
 				mode=true;Reset=false;
 				TargetControl.texture = cuts.ImageCache[0];
+				looping=false;
 				StartCoroutine (cutscenerunner());		
 				break;
 			case "death":
