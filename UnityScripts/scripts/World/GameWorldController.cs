@@ -1834,18 +1834,53 @@ public class GameWorldController : UWEBase {
 																				break;
 																		}
 
-																case "FLYUP": KeyBindings.instance.FlyUp=keyCodeToUse;break;
-																case "FLYDOWN": KeyBindings.instance.FlyDown=keyCodeToUse;break;
-																case "TOGGLEMOUSELOOK": KeyBindings.instance.ToggleMouseLook=keyCodeToUse;break;
-																case "TOGGLEFULLSCREEN": KeyBindings.instance.ToggleFullScreen=keyCodeToUse;break;
-																case "INTERACTIONOPTIONS": KeyBindings.instance.InteractionOptions=keyCodeToUse;break;
-																case "INTERACTIONTALK": KeyBindings.instance.InteractionTalk=keyCodeToUse;break;
-																case "INTERACTIONPICKUP": KeyBindings.instance.InteractionPickup=keyCodeToUse;break;
-																case "INTERACTIONLOOK": KeyBindings.instance.InteractionLook=keyCodeToUse;break;
-																case "INTERACTIONATTACK": KeyBindings.instance.InteractionAttack=keyCodeToUse;break;
-																case "INTERACTIONUSE": KeyBindings.instance.InteractionUse=keyCodeToUse;break;
-																case "CASTSPELL": KeyBindings.instance.CastSpell=keyCodeToUse;break;
-																case "TRACKSKILL": KeyBindings.instance.TrackSkill=keyCodeToUse;break;
+																case "FLYUP": 
+																		KeyBindings.instance.FlyUp=keyCodeToUse;break;
+																case "FLYDOWN": 
+																		KeyBindings.instance.FlyDown=keyCodeToUse;break;
+																case "TOGGLEMOUSELOOK": 
+																		KeyBindings.instance.ToggleMouseLook=keyCodeToUse;break;
+																case "TOGGLEFULLSCREEN": 
+																		KeyBindings.instance.ToggleFullScreen=keyCodeToUse;break;
+																case "INTERACTIONOPTIONS": 
+																		KeyBindings.instance.InteractionOptions=keyCodeToUse;break;
+																case "INTERACTIONTALK": 
+																		KeyBindings.instance.InteractionTalk=keyCodeToUse;break;
+																case "INTERACTIONPICKUP": 
+																		KeyBindings.instance.InteractionPickup=keyCodeToUse;break;
+																case "INTERACTIONLOOK": 
+																		KeyBindings.instance.InteractionLook=keyCodeToUse;break;
+																case "INTERACTIONATTACK": 
+																		KeyBindings.instance.InteractionAttack=keyCodeToUse;break;
+																case "INTERACTIONUSE": 
+																		KeyBindings.instance.InteractionUse=keyCodeToUse;break;
+																case "CASTSPELL": 
+																		KeyBindings.instance.CastSpell=keyCodeToUse;break;
+																case "TRACKSKILL": 
+																		KeyBindings.instance.TrackSkill=keyCodeToUse;break;
+
+
+																case "DEFAULTLIGHTLEVEL":
+																		{
+																				float lightlevel=16f;
+																				if(float.TryParse(entries[1], out lightlevel))		
+																				{
+																						LightSource.BaseBrightness=lightlevel;
+																				}
+																				break;
+																		}
+																
+																case "INFINITEMANA":
+																		{
+																			Magic.InfiniteMana	= (entries[1]=="1");
+																			break;
+																		}
+
+																case "GODMODE":
+																		{
+																			UWCharacter.Invincible = (entries[1]=="1");
+																			break;
+																		}
 
 																}	
 														}		

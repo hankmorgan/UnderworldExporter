@@ -37,7 +37,7 @@ public class Magic : UWEBase {
 		public int[] ActiveRunes=new int[3];
 
 		///The player has unlimited mana
-		public bool InfiniteMana;
+		public static bool InfiniteMana;
 
 		///How much mana the player can have
 		public int MaxMana;

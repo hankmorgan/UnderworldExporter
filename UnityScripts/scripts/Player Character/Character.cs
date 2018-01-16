@@ -34,6 +34,8 @@ public class Character : UWEBase {
 	protected float talkRange=20.0f;
 	protected float lookRange=25.0f;
 
+	public static bool Invincible;
+
 	/// <summary>
 	/// The calculated detection range for when NPCs can first become aware of the PC.
 	/// </summary>
@@ -103,8 +105,12 @@ public class Character : UWEBase {
 
 	public void ApplyDamage(int damage)
 	{
+		if (!Invincible)
+		{
+				CurVIT=CurVIT-damage;	
+		}
 		//Applies damage to the player.
-		CurVIT=CurVIT-damage;
+		
 		//TODO:Check the players armour and apply damage on a crit			
 	}
 

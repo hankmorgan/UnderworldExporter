@@ -225,6 +225,7 @@ public class Container : object_base {
 				ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 				objInt.UpdatePosition();
 				objInt.SetWorldDisplay(objInt.GetEquipDisplay());	
+				objInt.link=0; //So items in world will not create infinitly lopping references
 				for (short i=0; i<=MaxCapacity ();i++)
 				{
 						GameObject Spilled = GetGameObjectAt(i);//GameObject.Find (GetItemAt (i));
