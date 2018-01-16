@@ -33,7 +33,7 @@ public class enchantment_base : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
+			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Equipable);
 			return true;
 		}
 		else
@@ -94,17 +94,33 @@ public class enchantment_base : object_base {
 		case 187 :// a_red_potion
 		case 188 :// a_green_potion
 		default:
+			string enchantmentname=StringController.instance.GetString(6,GetActualSpellIndex());
 			switch(objInt().identity())
 			{
 			case ObjectInteraction.IdentificationFlags.Identified:
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+					if (enchantmentname!="")
+					{
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);					
+					}
+					else
+					{
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()))	;
+					}					
 					break;
 			case ObjectInteraction.IdentificationFlags.Unidentified:
 			case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
 					if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 						objInt().heading=7;
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+						if (enchantmentname!="")
+						{
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);										
+						}
+						else
+						{
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()))	;								
+						}
+						
 					}
 					else
 					{

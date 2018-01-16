@@ -34,7 +34,7 @@ owner != 0 poison trap
 		{
 			if (UWCharacter.Instance.play_poison==0)
 			{
-				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
 				UWCharacter.Instance.play_poison=(short)(Mathf.Max(1, UWCharacter.Instance.play_poison));//Is this the value the poison should apply?
 			}		
 		}

@@ -26,7 +26,7 @@ public class Potion : enchantment_base {
 				break;
 			case 186 :// a_bottle_of_ale_bottles_of_ale
 				UseString=239;
-				index=GetActualSpellIndex();
+				index=base.GetActualSpellIndex();
 				break;
 			case 187 :// a_red_potion
 			case 188 :// a_green_potion
@@ -34,9 +34,8 @@ public class Potion : enchantment_base {
 				index=GetActualSpellIndex();
 				break;
 			}
-			
-			
-			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,index,Magic.SpellRule_TargetSelf );
+		
+			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,index,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable );
 			
 			if (UseString !=-1)
 			{
@@ -51,8 +50,13 @@ public class Potion : enchantment_base {
 			//return UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
 		}
-
 	}
+
+	protected override int GetActualSpellIndex ()
+	{
+		return objInt().link - 527;
+	}
+
 
 
 	public override bool ApplyAttack (short damage)

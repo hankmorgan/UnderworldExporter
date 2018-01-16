@@ -8,7 +8,7 @@ public class GameSelect : GuiBase {
 
 	public string RES;
 	public bool Game_Found;
-		public Text PathStatus;
+	public Text PathStatus;
 
 	public override void Start ()
 	{
@@ -18,17 +18,28 @@ public class GameSelect : GuiBase {
 
 	void CheckPath()
 	{
-		string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
-		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		string Path= fileReader.ReadLine().TrimEnd();
+				string Path="";
+				switch(RES)
+				{
+				case GAME_UWDEMO: Path=GameWorldController.instance.path_uw0;break;
+				case GAME_UW1: Path=GameWorldController.instance.path_uw1;break;
+				case GAME_UW2:Path=GameWorldController.instance.path_uw2;break;
+				case GAME_SHOCK:Path=GameWorldController.instance.path_shock;break;
+				case GAME_TNOVA:Path=GameWorldController.instance.path_tnova;break;
+					break;
+				}
+
+		//string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
+		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+		//string Path= fileReader.ReadLine().TrimEnd();
 		Game_Found=(Directory.Exists(Path)) ;
 		if (Game_Found)
 		{
-			PathStatus.text=RES + " found at " + Path; 
+			PathStatus.text=RES + " folder found at " + Path; 
 		}
 		else
 		{
-			PathStatus.text=RES + " not found at " + Path; 	
+			PathStatus.text=RES + " folder not found at " + Path; 	
 		}
 	}
 

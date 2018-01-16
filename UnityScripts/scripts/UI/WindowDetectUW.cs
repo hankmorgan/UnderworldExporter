@@ -205,11 +205,11 @@ public class WindowDetectUW : WindowDetect {
 
 				if (UWHUD.instance.CutScenesSmall.anim.SetAnimation.ToUpper()!="ANIM_BASE")
 				{
-					if ((UWCharacter.Instance.CurVIT>0))
-					{
-						UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
-						return;	
-					}
+						if ((UWCharacter.Instance.CurVIT>0))
+						{
+								UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";	
+								return;	
+						}
 				}
 				switch (UWCharacter.InteractionMode)
 				{
@@ -344,7 +344,10 @@ public class WindowDetectUW : WindowDetect {
 										{//throw if above a certain point in the view port.
 												Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
 												//Apply the force along the direction.
-												droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+												if (droppedItem.GetComponent<Rigidbody>()!=null)
+												{
+														droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);		
+												}
 										}
 
 										//Clear the object and reset the cursor
@@ -398,15 +401,13 @@ public class WindowDetectUW : WindowDetect {
 		/// </summary>
 		void OnGUI()
 		{//Controls switching between Mouselook and interaction and sets the cursor icon
+				if (GameWorldController.instance.AtMainMenu)
+				{
+						return;
+				}
 				if (ConversationVM.InConversation==true)
 				{
-						UWCharacter.Instance.XAxis.enabled=false;
-						UWCharacter.Instance.YAxis.enabled=false;
-						UWCharacter.Instance.MouseLookEnabled=false;
-						Cursor.lockState = CursorLockMode.None;
-						CursorPosition.center = Event.current.mousePosition;
-						GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
-						UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;
+						ConversationMouseMode ();
 				}
 				else
 				{
@@ -426,7 +427,7 @@ public class WindowDetectUW : WindowDetect {
 								}
 								//if ((Event.current.Equals(Event.KeyboardEvent("t"))) && (WaitingForInput==false))
 								if  ( (Event.current.keyCode == KeyBindings.instance.TrackSkill) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
-								//if ( ( Input.GetKey(KeyCode.T) ) && (WaitingForInput==false))
+										//if ( ( Input.GetKey(KeyCode.T) ) && (WaitingForInput==false))
 								{//Tracking skill
 										TryTracking();	
 								}
@@ -437,22 +438,11 @@ public class WindowDetectUW : WindowDetect {
 								{			
 										if (UWCharacter.Instance.MouseLookEnabled==false)
 										{//Switch to mouse look.
-												UWCharacter.Instance.YAxis.enabled=true;
-												UWCharacter.Instance.XAxis.enabled=true;
-												UWCharacter.Instance.MouseLookEnabled=true;
-												Cursor.lockState = CursorLockMode.Locked;
-												Cursor.visible = false;
-
-												UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
+												SwitchToMouseLook ();
 										}
 										else
 										{
-												UWCharacter.Instance.XAxis.enabled=false;
-												UWCharacter.Instance.YAxis.enabled=false;
-												UWCharacter.Instance.MouseLookEnabled=false;
-												Cursor.lockState = CursorLockMode.None;
-												UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;	
-												//UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
+												SwitchFromMouseLook ();
 
 										}
 								}
@@ -461,15 +451,7 @@ public class WindowDetectUW : WindowDetect {
 
 						if (UWCharacter.Instance.MouseLookEnabled == false)
 						{
-								if ((WindowDetectUW.InMap==true) && (MapInteraction.InteractionMode==2))
-								{
-										CursorPosition.center = MapInteraction.CursorPos+MapInteraction.caretAdjustment;	
-								}
-								else
-								{
-										CursorPosition.center = Event.current.mousePosition;						
-								}
-								GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
+								DrawCursor ();
 						}	
 						else
 						{
@@ -542,6 +524,48 @@ public class WindowDetectUW : WindowDetect {
 						}	
 				}
 		}
+
+	public void DrawCursor ()
+	{
+		if ((WindowDetectUW.InMap == true) && (MapInteraction.InteractionMode == 2)) {
+			CursorPosition.center = MapInteraction.CursorPos + MapInteraction.caretAdjustment;
+		}
+		else {
+			CursorPosition.center = Event.current.mousePosition;
+		}
+		GUI.DrawTexture (CursorPosition, UWHUD.instance.CursorIcon);
+	}
+
+		public static void SwitchToMouseLook ()
+		{
+				UWCharacter.Instance.YAxis.enabled = true;
+				UWCharacter.Instance.XAxis.enabled = true;
+				UWCharacter.Instance.MouseLookEnabled = true;
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
+				UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIcon;
+		}
+
+		public static void SwitchFromMouseLook ()
+		{
+				UWCharacter.Instance.XAxis.enabled = false;
+				UWCharacter.Instance.YAxis.enabled = false;
+				UWCharacter.Instance.MouseLookEnabled = false;
+				Cursor.lockState = CursorLockMode.None;
+				UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIconBlank;
+				//UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
+		}
+
+	void ConversationMouseMode ()
+	{
+		UWCharacter.Instance.XAxis.enabled = false;
+		UWCharacter.Instance.YAxis.enabled = false;
+		UWCharacter.Instance.MouseLookEnabled = false;
+		Cursor.lockState = CursorLockMode.None;
+		CursorPosition.center = Event.current.mousePosition;
+		GUI.DrawTexture (CursorPosition, UWHUD.instance.CursorIcon);
+		UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIconBlank;
+	}
 
 		/// <summary>
 		/// Tries the tracking skill to detect nearby monsters

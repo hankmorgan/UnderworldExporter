@@ -73,7 +73,7 @@ A trigger that fires when the player character enters it
 		{
 			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
 			{
-				Debug.Log("Activating " + this.name);
+				//Debug.Log("Activating " + this.name);
 				Activate (other.gameObject);
 			}	
 		}	

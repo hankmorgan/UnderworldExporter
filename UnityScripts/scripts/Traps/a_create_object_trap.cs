@@ -47,7 +47,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 				}
 			}
 		//}
-	Debug.Log (this.name + " " + created);
+	//Debug.Log (this.name + " " + created);
 	}
 
 	public GameObject CloneObject(ObjectInteraction objToClone, int triggerX, int triggerY, bool MoveItem)

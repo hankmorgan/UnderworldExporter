@@ -122,7 +122,6 @@ public class UWCharacter : Character {
 	public short DreamReturnLevel=0;
 
 	public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
-
 	public void Awake()
 	{
 		Instance=this;

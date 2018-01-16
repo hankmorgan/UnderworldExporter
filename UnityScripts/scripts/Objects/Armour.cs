@@ -116,7 +116,7 @@ public class Armour : Equipment {
 
 				default:
 					//cast enchantment.
-					SpellEffectApplied = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
+					SpellEffectApplied = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Equipable);
 					if (SpellEffectApplied!=null)
 					{
 						SpellEffectApplied.SetPermanent(true);

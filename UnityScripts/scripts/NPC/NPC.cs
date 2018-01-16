@@ -346,7 +346,7 @@ public class NPC : MobileObject {
 												//Quest.instance.isTybalDead=true;
 												Quest.instance.GaramonDream=7;//Advance to Tybal is dead range of dreams
 												Quest.instance.DayGaramonDream=GameClock.day();//Ensure dream triggers on next sleep
-												UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);
+												UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf,-1);
 												return false;														
 										}
 								}
@@ -790,7 +790,7 @@ public class NPC : MobileObject {
 										{
 												if (Random.Range(0,5)>=4)
 												{
-														UWCharacter.Instance.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther);
+														UWCharacter.Instance.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther,-1);
 												}
 										}
 								}	
@@ -1270,11 +1270,11 @@ public class NPC : MobileObject {
 		/// </summary>
 		public void ExecuteMagicAttack()
 		{
-				if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)>8)
-				{
-						return;						
-				}
-				UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex(),Magic.SpellRule_TargetVector);
+			if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)>8)
+			{
+					return;						
+			}
+			UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex(),Magic.SpellRule_TargetVector,Magic.SpellRule_Immediate);
 		}
 
 		/// <summary>

@@ -83,6 +83,8 @@ public class GameWorldController : UWEBase {
 	public bool bGenNavMeshes=true;
 
 
+		public MouseLook MouseX;
+		public MouseLook MouseY;
 
 
 		/// <summary>
@@ -386,12 +388,34 @@ public class GameWorldController : UWEBase {
 	private int startX=-1; private int startY=-1;
 
 	public Material modelMaterial;
+
+		//Game paths
+		public string path_uw0;
+		public string path_uw1;
+		public string path_uw2;
+		public string path_shock;
+		public string path_tnova;
+
 	
-	void LoadPath(string game)
+	void LoadPath(string _RES)
 	{
-		string fileName = Application.dataPath + "//..//" + game + "_path.txt";
-		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		Loader.BasePath=fileReader.ReadLine().TrimEnd();
+				//return;
+		//string fileName = Application.dataPath + "//..//" + game + "_path.txt";
+		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+		string path="";
+
+		 //fileReader.ReadLine().TrimEnd();
+				switch(_RES)
+				{
+				case GAME_UWDEMO: path=GameWorldController.instance.path_uw0;break;
+				case GAME_UW1: path=GameWorldController.instance.path_uw1;break;
+				case GAME_UW2:path=GameWorldController.instance.path_uw2;break;
+				case GAME_SHOCK:path=GameWorldController.instance.path_shock;break;
+				case GAME_TNOVA:path=GameWorldController.instance.path_tnova;break;
+						break;
+				}
+
+		Loader.BasePath= path; 
 		if (Loader.BasePath.EndsWith("\\") !=true)
 		{
 			Loader.BasePath = Loader.BasePath + "\\";
@@ -405,6 +429,7 @@ public class GameWorldController : UWEBase {
 	void Awake()
 	{
 		instance=this;
+		LoadConfigFile();
 		//LoadPath();
 		return;
 	}
@@ -448,6 +473,7 @@ public class GameWorldController : UWEBase {
 				UWEBase._RES = res;//game;
 				UWClass._RES= res;//game;
 				keybinds.ApplyBindings();//Applies keybinds to certain controls
+
 				switch(res)
 				{
 				case GAME_TNOVA:
@@ -1738,6 +1764,104 @@ public class GameWorldController : UWEBase {
 					TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
 
 			}
+		}
+
+
+		bool LoadConfigFile()
+		{
+			string fileName = Application.dataPath + "//..//config.ini";
+				if (File.Exists(fileName))
+				{
+						string line;
+						StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+						//string PreviousKey="";
+						//string PreviousValue="";
+						using (fileReader)
+						{
+								// While there's lines left in the text file, do this:
+								do
+								{
+										line = fileReader.ReadLine();
+										if (line != null)
+										{
+												if (line.Length >1)
+												{
+														if ((line.Substring(1,1)!=";") && (line.Contains("=")))//Is not a commment and contains a param
+														{
+																string[] entries = line.Split('=');
+																int val = 0;
+																string pathfound="";
+																KeyCode keyCodeToUse;
+																KeyBindings.instance.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
+
+																switch(entries[0].ToUpper())
+																{
+																case "MOUSEX"://Mouse sensitivity X
+																		if (int.TryParse(entries[1], out val ))
+																		{
+																				MouseX.sensitivityX = val;
+																		}
+																		break;
+																case "MOUSEY"://Mouse sensitivity Y
+																		if (int.TryParse(entries[1], out val ))
+																		{
+																				MouseY.sensitivityY = val;
+																		}
+																		break;
+																case "PATH_UW0":
+																		{
+																				path_uw0=entries[1];
+																				break;
+																		}
+																case "PATH_UW1":
+																		{
+																				path_uw1=entries[1];
+																				break;
+																		}
+																case "PATH_UW2":
+																		{
+																				path_uw2=entries[1];
+																				break;
+																		}
+																case "PATH_SHOCK":
+																		{
+																				path_shock=entries[1];
+																				break;
+																		}
+																case "PATH_TNOVA":
+																		{
+																				path_tnova=entries[1];
+																				break;
+																		}
+
+																case "FLYUP": KeyBindings.instance.FlyUp=keyCodeToUse;break;
+																case "FLYDOWN": KeyBindings.instance.FlyDown=keyCodeToUse;break;
+																case "TOGGLEMOUSELOOK": KeyBindings.instance.ToggleMouseLook=keyCodeToUse;break;
+																case "TOGGLEFULLSCREEN": KeyBindings.instance.ToggleFullScreen=keyCodeToUse;break;
+																case "INTERACTIONOPTIONS": KeyBindings.instance.InteractionOptions=keyCodeToUse;break;
+																case "INTERACTIONTALK": KeyBindings.instance.InteractionTalk=keyCodeToUse;break;
+																case "INTERACTIONPICKUP": KeyBindings.instance.InteractionPickup=keyCodeToUse;break;
+																case "INTERACTIONLOOK": KeyBindings.instance.InteractionLook=keyCodeToUse;break;
+																case "INTERACTIONATTACK": KeyBindings.instance.InteractionAttack=keyCodeToUse;break;
+																case "INTERACTIONUSE": KeyBindings.instance.InteractionUse=keyCodeToUse;break;
+																case "CASTSPELL": KeyBindings.instance.CastSpell=keyCodeToUse;break;
+																case "TRACKSKILL": KeyBindings.instance.TrackSkill=keyCodeToUse;break;
+
+																}	
+														}		
+												}
+
+										}
+								}
+								while (line != null);
+								fileReader.Close();
+								return true;
+						}	
+				}
+				else
+				{
+						return false;
+				}
 		}
 
 }

@@ -2312,14 +2312,19 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		public IdentificationFlags identity()
 		{
-			switch(heading>>2)	
+			switch(heading)	
 			{
-			case 2:
+				case 7:
+				case 6:
+				case 5:
+				case 4:
+				case 3:
+				case 2:
 					return IdentificationFlags.Identified;
-			case 1:
+				case 1:
 					return IdentificationFlags.PartiallyIdentified;
-			default:
-			case 0:
+				default:
+				case 0:
 					return IdentificationFlags.Unidentified;
 			}
 		}

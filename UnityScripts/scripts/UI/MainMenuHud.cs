@@ -73,7 +73,7 @@ public class MainMenuHud : GuiBase {
 			instance=this;
 			if (GameWorldController.instance.AtMainMenu)
 			{					
-
+				WindowDetectUW.SwitchFromMouseLook();
 				//Initialize the open screens from the game files
 						switch (_RES)
 						{
@@ -87,7 +87,7 @@ public class MainMenuHud : GuiBase {
 						}
 						CharGen.GetComponent<RawImage>().texture=GameWorldController.instance.bytloader.LoadImageAt(BytLoader.CHARGEN_BYT);
 				
-
+					CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(0);
 					CursorPosition = new Rect(
 							0.0f,
 							0.0f,

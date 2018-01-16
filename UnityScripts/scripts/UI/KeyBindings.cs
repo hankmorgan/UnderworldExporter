@@ -21,7 +21,7 @@ public class KeyBindings : GuiBase {
 		//NOTE: not ALL characters are bound to a keycode due to Unity"s Limitations
 
 
-		Dictionary<string, KeyCode> chartoKeycode = new Dictionary<string, KeyCode>()
+		public Dictionary<string, KeyCode> chartoKeycode = new Dictionary<string, KeyCode>()
 		{	
 				
 				  {".", KeyCode.KeypadPeriod},
@@ -155,9 +155,14 @@ public class KeyBindings : GuiBase {
 	public KeyCode CastSpell = KeyCode.Q;
 	public KeyCode TrackSkill = KeyCode.T;
 
-	public override void Start ()
+	/*public override void Start ()
 	{
 		base.Start ();
+		
+	}*/
+
+	void Awake()
+	{//Should execute before game world controller
 		instance=this;
 	}
 

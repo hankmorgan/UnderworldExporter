@@ -9,6 +9,10 @@ public class Magic : UWEBase {
 		
 		public static UWCharacter playerUW;
 
+		public const int SpellRule_Consumable=2;
+		public const int SpellRule_Equipable=1;
+		public const int SpellRule_Immediate=0;
+
 		//Spell effect rules
 		///Spell is affecting another character/thing
 		public const int SpellRule_TargetOther=0;
@@ -3472,14 +3476,14 @@ public class Magic : UWEBase {
 		/// <param name="target">Target.</param>
 		/// <param name="EffectID">Effect ID of the spell</param>
 		/// <param name="SpellRule">What spell rule is applicable</param>
-		public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectID, int SpellRule)
+		public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectID, int SpellRule, int CastType)
 		{//Either cast enchantment now or skip straight to fire off a readied spell.
 				switch(_RES)
 				{
 				case GAME_UW2:
-
+						return CastEnchantmentUW2 (caster,target,EffectID,false,SpellRule, CastType);
 				default:
-					return CastEnchantmentUW1 (caster,target,EffectID,false,SpellRule);
+						return CastEnchantmentUW1 (caster,target,EffectID,false,SpellRule, CastType);
 				}
 
 		}
@@ -3492,14 +3496,14 @@ public class Magic : UWEBase {
 		/// <param name="target">Target.</param>
 		/// <param name="EffectID">Effect ID of the spell</param>
 		/// <param name="SpellRule">What spell rule is applicable</param>
-		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, int SpellRule)
+		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, int SpellRule, int CastType)
 		{//Either cast enchantment now or ready it for casting.
 				switch(_RES)
 				{
 				case GAME_UW2:
-						return CastEnchantmentUW2 (caster,target,EffectID,true,SpellRule);
+						return CastEnchantmentUW2 (caster,target,EffectID,true,SpellRule,CastType);
 				default:
-						return CastEnchantmentUW1 (caster,target,EffectID,true,SpellRule);
+						return CastEnchantmentUW1 (caster,target,EffectID,true,SpellRule,CastType);
 				}
 
 		}
@@ -3514,7 +3518,7 @@ public class Magic : UWEBase {
 		/// <param name="ready">If set to <c>true</c> ready.</param>
 		/// <param name="SpellRule">Spell rule to apply.</param>
 		/// Spells cast from anything that carries and enchantment.
-		public SpellEffect CastEnchantmentUW1(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
+		public SpellEffect CastEnchantmentUW1(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule, int CastType)
 		{
 			int ActiveArrayIndex=-1;
 			int PassiveArrayIndex=-1;
@@ -3594,108 +3598,142 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_Daylight:
 				case SpellEffect.UW1_Spell_Effect_Sunlight:			
 				case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
-
-						//These need to have different values. Create a system of unique values array(?)
-						//Only the player needs light.
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
-
 				case SpellEffect.UW1_Spell_Effect_MagicLantern:
 				case SpellEffect.UW1_Spell_Effect_Light_alt01:
 				case SpellEffect.UW1_Spell_Effect_Light_alt02:
 				case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;	
+								}
+								break;
 						}
-						break;
-
 
 				case SpellEffect.UW1_Spell_Effect_Leap:
-						if (PassiveArrayIndex!=-1)
-						{
-								Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-						}
-						SpellResultType=SpellResultPassive;
-						break;
 				case SpellEffect.UW1_Spell_Effect_Leap_alt01:
 				case SpellEffect.UW1_Spell_Effect_Leap_alt02:
-						//TODO: Find out which one of these is a magic ring effect!
-						//Player only
-						if (ActiveArrayIndex!=-1)
 						{
-								Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+										}
+										SpellResultType=SpellResultPassive;
+										break;
+								case SpellRule_Consumable:
+								default:								
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
 						}
 						break;
 
 				case SpellEffect.UW1_Spell_Effect_SlowFall:
-						//Player only
-						if (ActiveArrayIndex!=-1)
-						{
-							Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-							SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
 				case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-							Cast_SlowFall(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-							SpellResultType=SpellResultPassive;
+							switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_SlowFall(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										//Player only
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+							break;
 						}
-						break;
+
+
 				case SpellEffect.UW1_Spell_Effect_Levitate:
 				case SpellEffect.UW1_Spell_Effect_Fly:
-						if (PassiveArrayIndex!=-1)
-						{
-								Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
 				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:						
 				case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
 				case SpellEffect.UW1_Spell_Effect_Fly_alt02:
-						if (ActiveArrayIndex!=-1)
 						{
-								Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
+
+
 				case SpellEffect.UW1_Spell_Effect_WaterWalk:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
 				case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;					
+		
 
 				case SpellEffect.UW1_Spell_Effect_ResistBlows:
 				case SpellEffect.UW1_Spell_Effect_ThickSkin:
 				case SpellEffect.UW1_Spell_Effect_IronFlesh:
-						{
-								if (PassiveArrayIndex!=-1)
-								{
-										Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-										SpellResultType=SpellResultPassive;
-								}
-
-								break;
-						}
 				case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
 				case SpellEffect.UW1_Spell_Effect_ThickSkin_alt01:
 				case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:
@@ -3703,10 +3741,23 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
 				case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
 						{
-								if (ActiveArrayIndex!=-1)
+								switch(CastType)
 								{
-										Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-										SpellResultType=SpellResultActive;
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:								
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}						
+										break;
 								}
 								break;
 						}
@@ -3715,68 +3766,111 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_Stealth:
 				case SpellEffect.UW1_Spell_Effect_Conceal:
 				case SpellEffect.UW1_Spell_Effect_Invisibilty:
-						//PLayer only
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_Stealth_alt01:
 				case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
 				case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
 				case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
 				case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
 				case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:						
-						//PLayer only
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
-						//Missiles
+
+
 				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_MissileProtection:
 				case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
-
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;	
-						}
-						break;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;	
+										}
+										break;
 
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
+						}
 						//Flameproof. PLayer only.
 				case SpellEffect.UW1_Spell_Effect_Flameproof:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
 				case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
-						if (PassiveArrayIndex!=-1)
+
 						{
-								Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
+
+
 						//Magic
 				case SpellEffect.UW1_Spell_Effect_MagicProtection:
 				case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
-						//player only
-						if (PassiveArrayIndex!=-1)
 						{
-							Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-							SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
 
 						break;
@@ -3787,50 +3881,77 @@ public class Magic : UWEBase {
 						break;
 				case SpellEffect.UW1_Spell_Effect_Speed:
 				case SpellEffect.UW1_Spell_Effect_Haste:
-						//player only
-						if (ActiveArrayIndex!=-1)
 						{
-								Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Speed(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
-				case SpellEffect.UW1_Spell_Effect_Telekinesis:
 
-						//player only
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
+				case SpellEffect.UW1_Spell_Effect_Telekinesis:
 				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
 				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
 
 				case SpellEffect.UW1_Spell_Effect_FreezeTime:
-						//Active variation.
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
-						//player only
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						//Cast_AnTym(target,EffectID);
-					//	SpellResultType=SpellResultNone;
-
 						break;
 				case SpellEffect.UW1_Spell_Effect_Regeneration:
 						//player only
@@ -3857,20 +3978,31 @@ public class Magic : UWEBase {
 						SpellResultType=SpellResultPassive;
 						break;
 				case SpellEffect.UW1_Spell_Effect_NightVision:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_NightVision(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
 				case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_NightVision(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
-						}	
-						break;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_NightVision(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}	
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_NightVision(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
+						}
+
+
 				case SpellEffect.UW1_Spell_Effect_Poison:
 				case SpellEffect.UW1_Spell_Effect_Poison_alt01:
 				case SpellEffect.UW1_Spell_Effect_PoisonHidden:
@@ -3962,7 +4094,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
 						//Applies to armour only do not implement here.
 						SpellResultType=SpellResultNone;
-						Debug.Log ("protection enchantment");
+						//Debug.Log ("protection enchantment");
 						break;
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -3974,7 +4106,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
 						//Applies to armour only do not implement here.
 						SpellResultType=SpellResultNone;
-						Debug.Log ("toughness enchantment");
+						//Debug.Log ("toughness enchantment");
 						break;
 
 
@@ -4307,7 +4439,7 @@ public class Magic : UWEBase {
 		/// <param name="SpellRule">Spell rule to apply.</param>
 		/// Spells cast from anything that carries and enchantment.
 		/// UW2 version of this.
-		public SpellEffect CastEnchantmentUW2(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
+		public SpellEffect CastEnchantmentUW2(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule, int CastType)
 		{
 				int ActiveArrayIndex=-1;
 				int PassiveArrayIndex=-1;
@@ -4438,52 +4570,85 @@ public class Magic : UWEBase {
 						}
 
 				case SpellEffect.UW2_Spell_Effect_Flameproof:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_Flameproof_alt01:
 				case SpellEffect.UW2_Spell_Effect_Flameproof_alt02:
-
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
+
 
 				case SpellEffect.UW2_Spell_Effect_Fly:
 				case SpellEffect.UW2_Spell_Effect_Levitate:
-						if (PassiveArrayIndex!=-1)
-						{
-							Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-							SpellResultType=SpellResultPassive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_Fly_alt01:
 				case SpellEffect.UW2_Spell_Effect_Fly_alt02:
 				case SpellEffect.UW2_Spell_Effect_Levitate_alt01:
-				case SpellEffect.UW2_Spell_Effect_Levitate_alt02:
-						if (ActiveArrayIndex!=-1)
+				case SpellEffect.UW2_Spell_Effect_Levitate_alt02:	
 						{
-							Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-							SpellResultType=SpellResultActive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;		
+
 
 				case SpellEffect.UW2_Spell_Effect_SlowFall:
 				case SpellEffect.UW2_Spell_Effect_SlowFall_alt01:
 				case SpellEffect.UW2_Spell_Effect_SlowFall_alt02:
 						{
-							if (ActiveArrayIndex!=-1)
-							{
-								Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-							}
-							break;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_SlowFall(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
+
 				case SpellEffect.UW2_Spell_Effect_CreateFood:
 				case SpellEffect.UW2_Spell_Effect_CreateFood_alt01:
 						{
@@ -4502,23 +4667,32 @@ public class Magic : UWEBase {
 						}
 
 				case SpellEffect.UW2_Spell_Effect_FreezeTime:
-						//Active variation.
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_FreezeTime_alt01:
-				case SpellEffect.UW2_Spell_Effect_FreezeTime_alt02:
+				case SpellEffect.UW2_Spell_Effect_FreezeTime_alt02:						
 						{
-							if (PassiveArrayIndex!=-1)
-							{
-								Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
-							}		
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										{
+												if (PassiveArrayIndex!=-1)
+												{
+														Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+														SpellResultType=SpellResultPassive;
+												}		
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
+
 				case SpellEffect.UW2_Spell_Effect_Frost:
 				case SpellEffect.UW2_Spell_Effect_Frost_alt01:
 						{
@@ -4567,24 +4741,31 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_Invisibilty:
 				case SpellEffect.UW2_Spell_Effect_Stealth:
 				case SpellEffect.UW2_Spell_Effect_Conceal:
-						//PLayer only
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
-
 				case SpellEffect.UW2_Spell_Effect_Invisibility_alt01:
 				case SpellEffect.UW2_Spell_Effect_Invisibility_alt02:
 				case SpellEffect.UW2_Spell_Effect_Stealth_alt01:
 				case SpellEffect.UW2_Spell_Effect_Conceal_alt01:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
 
 				case SpellEffect.UW2_Spell_Effect_SmiteFoe:
 				case SpellEffect.UW2_Spell_Effect_SmiteFoe_alt01:
@@ -4595,21 +4776,29 @@ public class Magic : UWEBase {
 						}
 
 				case SpellEffect.UW2_Spell_Effect_Leap:
-						if (PassiveArrayIndex!=-1)
-						{
-							Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-						}
-						SpellResultType=SpellResultPassive;
-						break;
 				case SpellEffect.UW2_Spell_Effect_Leaping_alt01:
 				case SpellEffect.UW2_Spell_Effect_Leap_alt01:
-						if (ActiveArrayIndex!=-1)
 						{
-							Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-							SpellResultType=SpellResultActive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+										}
+										SpellResultType=SpellResultPassive;
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
-
 				case SpellEffect.UW2_Spell_Effect_LifeStealer:
 						{
 							Debug.Log("life stealer");
@@ -4624,27 +4813,33 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_NightVision:
 				case SpellEffect.UW2_Spell_Effect_Daylight:
 				case SpellEffect.UW2_Spell_Effect_Sunlight:
-						//These need to have different values. Create a system of unique values array(?)
-						//Only the player needs light.
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_Light_alt01:
 				case SpellEffect.UW2_Spell_Effect_NightVision_alt01:
 				case SpellEffect.UW2_Spell_Effect_Daylight_alt01:
 				case SpellEffect.UW2_Spell_Effect_Light_alt02:
 				case SpellEffect.UW2_Spell_Effect_NightVision_alt02:
 				case SpellEffect.UW2_Spell_Effect_Daylight_alt02:
-					if (PassiveArrayIndex!=-1)
-					{
-						Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-						SpellResultType=SpellResultPassive;
-					}
-					break;
-
+						{
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
+						}
 				case SpellEffect.UW2_Spell_Effect_Locate:
 				case SpellEffect.UW2_Spell_Effect_Locate_alt01:
 					{
@@ -4682,13 +4877,32 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_MagicProtection:
 				case SpellEffect.UW2_Spell_Effect_GreaterMagicProtection:
 						{
-							if (PassiveArrayIndex!=-1)
-							{
-								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
-							}
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										{
+												if (PassiveArrayIndex!=-1)
+												{
+														Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+														SpellResultType=SpellResultPassive;
+												}
+												break;
+										}
+								case SpellRule_Consumable:
+								default:
+										{
+												if (ActiveArrayIndex!=-1)
+												{
+														Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+														SpellResultType=SpellResultActive;
+												}
+												break;
+										}
+
+								}
 								break;
 						}
+
 				case SpellEffect.UW2_Spell_Effect_MagicSatellite_alt01:
 						{
 								Debug.Log("magic satellite");
@@ -4745,20 +4959,30 @@ public class Magic : UWEBase {
 							break;			
 						}
 				case SpellEffect.UW2_Spell_Effect_MissileProtection:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt01:
 				case SpellEffect.UW2_Spell_Effect_MissileProtection_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;	
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;	
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;
+
 
 				case SpellEffect.UW2_Spell_Effect_BasiliskOil:
 						{
@@ -5003,14 +5227,28 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_ThickSkin_alt02:
 				case SpellEffect.UW2_Spell_Effect_IronFlesh_alt02:
 						{
-							if (ActiveArrayIndex!=-1)
-							{
-								Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-							}
-							break;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-				
+
+
 				case SpellEffect.UW2_Spell_Effect_Reveal:
 				case SpellEffect.UW2_Spell_Effect_Reveal_alt01:						
 						{
@@ -5043,15 +5281,26 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_Speed_alt01:
 				case SpellEffect.UW2_Spell_Effect_Speed_alt02:
 						{
-							//player only
-							if (ActiveArrayIndex!=-1)
-							{
-									Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-									SpellResultType=SpellResultActive;
-							}
-							break;	
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Speed(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;	
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;	
+								}
+								break;
 						}
-
 				case SpellEffect.UW2_Spell_Effect_StoneStrike:
 						{
 							Debug.Log("stone strike")	;
@@ -5070,21 +5319,29 @@ public class Magic : UWEBase {
 
 				case SpellEffect.UW2_Spell_Effect_Telekinesis:
 				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt01:
-						//player only
-						if (ActiveArrayIndex!=-1)
-						{
-							Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-							SpellResultType=SpellResultActive;
-						}
-						break;
-				
 				case SpellEffect.UW2_Spell_Effect_Telekinesis_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-							Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-							SpellResultType=SpellResultPassive;
+							switch(CastType)
+							{
+							case SpellRule_Equipable:
+									if (PassiveArrayIndex!=-1)
+									{
+											Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											SpellResultType=SpellResultPassive;
+									}
+									break;
+							case SpellRule_Consumable:
+							default:
+									if (ActiveArrayIndex!=-1)
+									{
+											Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											SpellResultType=SpellResultActive;
+									}
+									break;
+							}
+							break;
 						}
-						break;
+
 				case SpellEffect.UW2_Spell_Effect_LocalTeleport:
 						{
 							Debug.Log("local teleport")	;
@@ -5139,21 +5396,29 @@ public class Magic : UWEBase {
 						}
 
 				case SpellEffect.UW2_Spell_Effect_WaterWalk:
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
 				case SpellEffect.UW2_Spell_Effect_WaterWalk_alt01:
 				case SpellEffect.UW2_Spell_Effect_WaterWalk_alt02:
-						if (PassiveArrayIndex!=-1)
 						{
-								Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-								SpellResultType=SpellResultPassive;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;	
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
-						break;	
-						
 				default:						
 					Debug.Log ("Unimplemented effect Id is " + EffectID + " caster =" + caster + " target =" + target);
 					SpellResultType=SpellResultNone;

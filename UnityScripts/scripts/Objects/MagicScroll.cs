@@ -6,7 +6,7 @@ public class MagicScroll : enchantment_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
+			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable );
 			objInt().consumeObject();
 			return true;
 		}

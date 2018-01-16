@@ -9,7 +9,7 @@ public class a_spelltrap : trap_base {
 		Debug.Log (this.name);
 		//int spellindex = ((objInt().quality & 0xf)<<4) | (objInt().owner & 0xf) ;
 		//	Debug.Log ("casting spelleffect " + spellindex);
-		UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,GetSpellIndex(),Magic.SpellRule_TargetVector);
+		UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,GetSpellIndex(),Magic.SpellRule_TargetVector, Magic.SpellRule_Immediate);
 	}
 
 	/// <summary>

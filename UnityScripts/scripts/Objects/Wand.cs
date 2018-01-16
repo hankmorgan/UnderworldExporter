@@ -85,7 +85,7 @@ public class Wand : enchantment_base {
 		{
 			if (objInt().quality >0)
 				{
-					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
+					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf, Magic.SpellRule_Immediate);
 					if (objInt().isEnchanted()==false)
 						{
 						objInt().quality--;

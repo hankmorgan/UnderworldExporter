@@ -409,8 +409,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , SaveGame.SaveGameName(SlotNo+1));
 			//Write a player.dat file
 			SaveGame.WritePlayerDat(SlotNo+1);
-
-
+			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_save_game_succeeded_));
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			ReturnToGame();
 

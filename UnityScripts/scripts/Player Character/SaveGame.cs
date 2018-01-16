@@ -367,21 +367,24 @@ public class SaveGame : Loader {
 
 						for (int a=0; a<effectCounter;a++)
 						{//Recast the new ones.
-							UWCharacter.Instance.ActiveSpell[a] = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf );
-							UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];
+								UWCharacter.Instance.ActiveSpell[a] = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable );
+							if (UWCharacter.Instance.ActiveSpell[a]!=null)
+							{
+									UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];		
+							}
 						}
 
 
 						//Reapply poisoning.
 						if (UWCharacter.Instance.play_poison!=0)
 						{
-							SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+							SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
 							p.counter=UWCharacter.Instance.play_poison;
 							p.DOT=(short)(p.Value/p.counter);//Recalculate the poison damage to reapply.									
 						}
 						else
 						{//Make sure any poison is cured.
-							UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);									
+							UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
 						}
 
 						GameClock.setUWTime( GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255 )  + (GameClock.instance.gametimevals[2] * 255 * 255 ));
@@ -2000,21 +2003,25 @@ public class SaveGame : Loader {
 
 						for (int a=0; a<effectCounter;a++)
 						{//Recast the new ones.
-								UWCharacter.Instance.ActiveSpell[a] = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf );
-								UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];
+								UWCharacter.Instance.ActiveSpell[a] = UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,ActiveEffectIds[a], Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable );
+								//UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];
+								if (UWCharacter.Instance.ActiveSpell[a]!=null)
+								{
+										UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];		
+								}
 						}
 
 
 						//Reapply poisoning.
 						if (UWCharacter.Instance.play_poison!=0)
 						{
-								SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+								SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
 								p.counter=UWCharacter.Instance.play_poison;
 								p.DOT=(short)(p.Value/p.counter);//Recalculate the poison damage to reapply.									
 						}
 						else
 						{//Make sure any poison is cured.
-								UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);									
+								UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
 						}
 
 						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));

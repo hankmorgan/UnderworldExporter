@@ -10,7 +10,7 @@ public class Fountain : object_base {
 		{
 			if ((objInt().isEnchanted()==true) &&(objInt().link>=512))
 			{
-				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,objInt().link-512,Magic.SpellRule_TargetSelf);
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,objInt().link-512,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
 			}
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_the_water_refreshes_you_));
 			return true;

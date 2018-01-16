@@ -23,16 +23,15 @@ public class SpellEffectLevitate : SpellEffect {
 		base.CancelEffect();
 		if (!Permanent)
 		{//Only allow floating when not an equipment effect.
-				UWCharacter.Instance.isFloating=true;	
-				if (_RES==GAME_UW2)
-				{
-					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW2_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);
-				}
-				else
-				{
-					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);				
-				}
-				
+			UWCharacter.Instance.isFloating=true;	
+			if (_RES==GAME_UW2)
+			{
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW2_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
+			}
+			else
+			{
+				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);				
+			}				
 		}		
 		UWCharacter.Instance.flySpeed=0;		
 	}
