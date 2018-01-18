@@ -139,6 +139,8 @@ public class UWHUD : HUD {
 
 		public InteractionModeControl InteractionControl;
 
+		public Eyes MonsterEyes;
+
 		void Awake()
 		{
 			instance=this;

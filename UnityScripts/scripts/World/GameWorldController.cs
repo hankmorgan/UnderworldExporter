@@ -1789,7 +1789,7 @@ public class GameWorldController : UWEBase {
 														if ((line.Substring(1,1)!=";") && (line.Contains("=")))//Is not a commment and contains a param
 														{
 																string[] entries = line.Split('=');
-																int val = 0;
+																//int val = 0;
 																string pathfound="";
 																KeyCode keyCodeToUse;
 																KeyBindings.instance.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
@@ -1797,17 +1797,23 @@ public class GameWorldController : UWEBase {
 																switch(entries[0].ToUpper())
 																{
 																case "MOUSEX"://Mouse sensitivity X
-																		if (int.TryParse(entries[1], out val ))
 																		{
-																				MouseX.sensitivityX = val;
+																				float val=15f;
+																				if (float.TryParse(entries[1], out val ))
+																				{
+																						MouseX.sensitivityX = val;
+																				}	
+																				break;
 																		}
-																		break;
 																case "MOUSEY"://Mouse sensitivity Y
-																		if (int.TryParse(entries[1], out val ))
 																		{
-																				MouseY.sensitivityY = val;
+																				float val=15f;
+																				if (float.TryParse(entries[1], out val ))
+																				{
+																						MouseY.sensitivityY = val;
+																				}	
+																				break;
 																		}
-																		break;
 																case "PATH_UW0":
 																		{
 																				path_uw0=entries[1];
@@ -1869,7 +1875,16 @@ public class GameWorldController : UWEBase {
 																				}
 																				break;
 																		}
-																
+
+																case "FOV":
+																		{
+																				float fov=75f;
+																				if(float.TryParse(entries[1], out fov))		
+																				{
+																						Camera.main.fieldOfView=fov;
+																				}
+																				break;
+																		}
 																case "INFINITEMANA":
 																		{
 																			Magic.InfiniteMana	= (entries[1]=="1");

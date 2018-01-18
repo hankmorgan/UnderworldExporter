@@ -37,7 +37,7 @@ public class Power : GuiBase {
 	public void Update () {
 		if ((PreviousCharge!=UWCharacter.Instance.PlayerCombat.Charge)||(UWCharacter.Instance.PlayerCombat.AttackCharging==true))
 		{
-				PreviousCharge=UWCharacter.Instance.PlayerCombat.Charge;
+			PreviousCharge=UWCharacter.Instance.PlayerCombat.Charge;
 			 
 			int index= (int)UWCharacter.Instance.PlayerCombat.Charge/10;
 	

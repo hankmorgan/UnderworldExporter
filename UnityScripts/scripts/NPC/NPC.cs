@@ -161,6 +161,9 @@ public class NPC : MobileObject {
 		public Sprite currentSpriteLoaded;
 
 		public int Ammo=4;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+
+		private short StartingHP;
+
 		/*
 	void Awake () {
 		anim=GetComponentInChildren<Animator>();
@@ -173,6 +176,7 @@ public class NPC : MobileObject {
 		protected override void Start () {
 				base.Start();
 				NPC_IDi=objInt().item_id;
+				StartingHP=npc_hp;
 				//poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
 				//AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
 				//AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
@@ -305,7 +309,7 @@ public class NPC : MobileObject {
 								if (GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i] != -1) {
 										int itemid = GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i];
 										ObjectLoaderInfo newobjt = ObjectLoader.newObject (itemid, Random.Range (1, 41), 0, 1, 256);
-										newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+										newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
 										cnt.AddItemToContainer (newobjt.instance.name);
 								}
 						}
@@ -765,6 +769,7 @@ public class NPC : MobileObject {
 		public override bool ApplyAttack(short damage)
 		{
 				npc_hp=(short)(npc_hp-damage);
+				UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP );
 				return true;
 		}
 

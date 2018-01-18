@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class NPC_Animation : MonoBehaviour {
-		static float frameRate =0.2f;
+		const float frameRate =0.2f;
 
 		public int AnimationIndex;//Animation to display
 		public int AnimationPos;//Position in the animation.
