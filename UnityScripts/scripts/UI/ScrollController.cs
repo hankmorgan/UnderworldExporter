@@ -115,7 +115,7 @@ public class ScrollController : GuiBase {
 		NewUIOUt.text=result;
 				if (useDragon)
 				{
-						Dragons.MoveScroll();
+					Dragons.MoveScroll();
 				}
 	}
 }

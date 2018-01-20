@@ -351,6 +351,57 @@ public class ArtLoader : Loader {
 
 		}
 
+		/// <summary>
+		/// Creates a blank image for superimposing other images onto.
+		/// </summary>
+		/// <returns>The blank image.</returns>
+		/// <param name="ImgWidth">Image width.</param>
+		/// <param name="ImgHeight">Image height.</param>
+		public static Texture2D CreateBlankImage(int ImgWidth, int ImgHeight)
+		{
+				Texture2D tex = new Texture2D(ImgWidth,ImgHeight,TextureFormat.ARGB32,false);
+				Color32[] imageColors = new Color32[ImgWidth * ImgHeight];
+				for (int i=0; i<=imageColors.GetUpperBound(0);i++)
+				{
+						imageColors[i] = GameWorldController.instance.palLoader.Palettes[0].ColorAtPixel(0,true);
+				}
+				tex.SetPixels32(imageColors);
+				tex.Apply();
+				return tex;
+		}
 
+
+		/// <summary>
+		/// Inserts the one image over another at the specified position and returns a new image for further use.
+		/// </summary>
+		/// <returns>The image.</returns>
+		/// <param name="srcImg">Source image.</param>
+		/// <param name="dstImg">Dst image.</param>
+		/// <param name="CornerX">Corner x.</param>
+		/// <param name="CornerY">Corner y.</param>
+		public static Texture2D InsertImage(Texture2D  srcImg, Texture2D dstImg,int CornerX, int CornerY )
+		{
+				Texture2D result = new Texture2D(dstImg.width,dstImg.height,TextureFormat.ARGB32,false);
+				result.SetPixels32(dstImg.GetPixels32());
+
+				for (int x=0; x<srcImg.width; x++)
+				{
+						for (int y=0; y<srcImg.height; y++)
+						{
+								//If within bounds of source
+								if ((x + CornerX < dstImg.width ) && (y+ CornerY<dstImg.height))
+								{
+										if ( ( CornerX + x >=0  ) && ( CornerY + y >=0  ) )
+										{
+												result.SetPixel(CornerX + x, CornerY + y, srcImg.GetPixel(x,y) );	
+										}										
+								}
+
+						}
+				}
+				result.filterMode=FilterMode.Point;
+				result.Apply();
+				return result;
+		}
 
 }

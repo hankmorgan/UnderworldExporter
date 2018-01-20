@@ -1626,14 +1626,11 @@ void SetContainerInUse(int game, tile LevelInfo[64][64], ObjectItem objList[1600
 void setObjectTileXY(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {//Justs some useful info to know.
 //ObjectItem currObj;
+//objList[954].link = 0;
 for (int x=0; x<64;x++)
 	{
 	for (int y=0;y<64;y++)
 		{
-		if ((x == 3) && (y == 33))
-			{
-			printf("");
-			}
 		if (LevelInfo[x][y].indexObjectList !=0)
 			{
 			long nextObj=LevelInfo[x][y].indexObjectList;
