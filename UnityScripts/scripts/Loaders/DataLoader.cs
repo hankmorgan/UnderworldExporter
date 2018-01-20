@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 /// <summary>
 /// Data loader for loading binary files.
@@ -40,7 +41,7 @@ public class DataLoader :Loader {
 		{				
 			if (!File.Exists(Path))
 			{
-				Debug.Log("File not found : " + Path);
+				Debug.Log("DataLoader.ReadStreamFile : File not found : " + Path);
 				buffer=null;
 				return false;
 			}
@@ -115,72 +116,256 @@ public class DataLoader :Loader {
 		/// <param name="tmp">Tmp.</param>
 		/// <param name="address_pointer">Address pointer.</param>
 		/// <param name="datalen">Datalen.</param>
+		/// Robbed and changed slightly from the Labyrinth of Worlds implementation project.
+		///This decompresses UW2 blocks.
 	public static char[] unpackUW2(char[] tmp, long address_pointer, ref int datalen)
 	{
-
-		//Robbed and changed slightly from the Labyrinth of Worlds implementation project.
-		//This decompresses UW2 blocks.
-		long	len = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
-		//long block_address=address_pointer;
-		char[] buf = new char[len+100];
-		char[] up = buf;
+		long BlockLen = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
+		char[] buf = new char[BlockLen+100];
 		long upPtr=0;
-		long bufPtr=0;
 		datalen = 0;
 		address_pointer += 4;
-
-		while(upPtr < len)
+		
+		while(upPtr < BlockLen)
 		{
-			int		bits = tmp[address_pointer++];
+			byte bits = (byte)tmp[address_pointer++];
 			for(int r=0; r<8; r++)
 			{
 				if (address_pointer>tmp.GetUpperBound(0))
 				{//No more data!
-					//Debug.Log("Unpack uw2 out of bounds. Returning what was unpacked.");
 					return buf;
 				}
 				if((bits & 1)==1)
-				{
-					//printf("transfer %d\ at %d\n", byte(base),base);
-					up[upPtr++] = tmp[address_pointer++];
+				{//Transfer
+					buf[upPtr++] = tmp[address_pointer++];
 					datalen = datalen+1;
 				}
 				else
-				{
+				{//copy
 					int	o = tmp[address_pointer++];
 					int	c = tmp[address_pointer++];
 
 					o |= (c&0xF0)<<4;
 					c = (c&15) + 3;
 					o = o+18;
-					if(o > (upPtr-bufPtr))
-							o -= 0x1000;
-					while(o < (upPtr-bufPtr-0x1000))
-							o += 0x1000;
+					if (o>upPtr)
+						{
+							o -= 0x1000;					
+						}
 
+					while(o < (upPtr-0x1000))
+						{
+							o += 0x1000;					
+						}
+							
 					while(c-- >0)
 					{
-						if (o<0)
-						{
-							up[upPtr++]= tmp[tmp.GetUpperBound(0)+ o++];
-						}
-						else
-						{
-							up[upPtr++]= buf[o++];
-						}
-
-						datalen = datalen+1;
+						buf[upPtr++]= buf[o++];
+						datalen++;    // = datalen+1;
 					}
 				}
 				bits >>= 1;
 			}
 		}
-
 		return buf;
 	}
 
 
+		/// <summary>
+		/// Repacks a byte array into a UW2 compressed block
+		/// </summary>
+		/// <param name="srcData">Source data.</param>
+		/// 
+		///for each byte in src data
+		///read in byte.
+		///if byte count >3
+		///  if find byte in previous data
+		///if previous data header is a copy record then increment its size (up to max of 18)
+		///else create a new copy record.
+		/// this is a transfer record
+		///else
+		///this is a transfer record
+		public static char[] RepackUW2(char[] srcData)
+		{
+			List<char> Input = new List<char>();
+			List<char> Output = new List<char>();
+			int addptr=0;
+			int bit=0;
+				int MatchingOffset; int PrevMatchingOffset=-1; int CopyRecordOffset=0;
+				int copycount=0; int HeaderIndex=0;
+			while (addptr<=srcData.GetUpperBound(0))
+			{
+				//Read in the data to the input list
+				Input.Add(srcData[addptr++]);
+				if (Input.Count>3)//One I have at least 3 bytes I can test its contents
+				{//THIS IS WRONG> Code will only match up to size 3.
+					//At this point I need to start testing increasing sizes of data up to 18 bytes until I find the max copy record to create;
+					if(FindMatchingSequence(ref Output, ref Input, out MatchingOffset))	
+						{//the data is part of a copy sequence. Try and find the biggest block and make a copy record out of that.
+									//TODO
+									//
+						/*	if (MatchingOffset == PrevMatchingOffset )	
+							{//Increment copy count
+								copycount++;
+								IncrementCopyRecord(ref Output, CopyRecordOffset);
+								if (copycount>=18)
+								{
+									PrevMatchingOffset=-1; //force a new copy record on next loop	
+									Input.Clear();
+								}								
+							}
+							else
+							{//Create copy record
+								copycount=0;
+								if (bit==0)
+								{
+										HeaderIndex=CreateHeader(ref Output);	
+								}
+								CopyRecordOffset = CreateCopyRecord(ref Output, MatchingOffset, copycount, HeaderIndex, bit++ );
+							}*/
+						}
+						else
+						{//There is no copy for the specified data. Transfer data that is not copied and clear out the input buffer
+							for (int i=copycount; i<Input.Count; i++)
+							{
+								if (bit==0)
+								{
+									HeaderIndex=CreateHeader(ref Output);	
+								}
+								CreateTransferRecord(ref Output, Input[i], HeaderIndex,bit++);								
+							}
+							Input.Clear();
+						}
+				}
+				if (bit==8)
+				{
+					bit=0;
+				}
+			}
 
+			//Write the data to a file.
+			WriteListToBytes(Output,Loader.BasePath + "data\\recodetest.dat" );
+			char[] outchar = new char[Output.Count];
+			for (int i=0; i<Output.Count;i++)
+			{
+					outchar[i] = Output[i];
+			}
+			return outchar;			
+		}
+
+		static int CreateHeader(ref List<char> Output)
+		{
+			Output.Add((char)0);
+			return Output.Count-1;
+		}
+
+		static void WriteListToBytes(List<char> Output, string path)
+		{
+			FileStream file = File.Open(path,FileMode.Create);
+			BinaryWriter writer= new BinaryWriter(file);
+			DataLoader.WriteInt32(writer, Output.Count);
+			for (int i=0; i<Output.Count;i++)
+			{
+				DataLoader.WriteInt8(writer, (long)Output[i]);
+			}
+			writer.Close();
+		}
+
+		static void CreateTransferRecord(ref List<char> Output, char TransferData, int headerIndex, int bit)
+		{				
+				Output[headerIndex] = (char)(Output[headerIndex] | (1<<bit));
+				Output.Add(TransferData);
+		}
+
+		static int CreateCopyRecord(ref List<char> Output, int Offset, int CopyCount, int headerIndex, int bit)
+		{
+			//The copy record starts with two Int8's:
+			//0000   Int8   0..7: position
+			//0001   Int8   0..3: copy count
+			//				4..7: position
+			//int val = Offset
+			Output[headerIndex] = (char)(Output[headerIndex] | (0<<bit));
+
+			//Offset= getTrueOffset(Offset);
+			//CopyCount-=3;
+			int val1 = Offset & 0xF;
+			int val2 = (CopyCount & 0xf)  | (( Offset >> 7) << 4);
+
+			Output.Add((char)val1);
+			Output.Add((char)val2);
+			return Output.Count-1;
+		}
+
+		static void IncrementCopyRecord(ref List<char> Output, int CopyRecordOffset)
+		{
+			int val = getCopyCountAtOffset(ref Output, CopyRecordOffset);
+			val++;
+			val = val & 0xF;
+			char chardata = (char)(Output[CopyRecordOffset] & 0xf8);//Clear the bits for the count.
+			chardata = (char)(chardata | val);
+			Output[CopyRecordOffset]=chardata;
+		}
+
+		static int getCopyCountAtOffset(ref List<char> Output, int CopyRecordOffset)
+		{
+			if (CopyRecordOffset<0)
+			{
+				return 0;
+			}
+			else
+			{
+				int val = Output[CopyRecordOffset];
+				val = val & 0xF;//Extract copy count
+				return val;	
+			}
+		}
+
+		static bool FindMatchingSequence(ref List<char>records, ref List<char>searchfor, out int MatchingOffset)
+		{			
+			int lowerbound= (records.Count / 4096) * 4096;
+			string searchval = charListToVal(searchfor,0,searchfor.Count);
+			MatchingOffset=-1;
+			for (int i = records.Count - searchfor.Count; i>=lowerbound; i--)
+			{
+				string recordval = charListToVal(records, i, searchfor.Count-1)	;
+				if (recordval==searchval)
+				{
+					MatchingOffset=i;
+					return true;
+				}
+			}
+			return false;
+		}
+
+		static string charListToVal(List<char> input, int start, int len)
+		{
+			string output="";
+			for (int i = start; i<=start+len; i++)
+			{
+				if (i<input.Count)
+				{
+					output = output + input[i].ToString();		
+				}
+			}
+			return output;
+		}
+
+
+		/// <summary>
+		/// Gets the true offset of the copy record.
+		/// </summary>
+		/// <returns>The true offset.</returns>
+		/// <param name="offset">Offset.</param>
+		static int getTrueOffset(int offset)
+		{
+			while (offset>4096)
+			{
+				offset -=4096;
+			}
+			offset -=18;
+
+			return offset;
+		}
 
 		//****************************************************************************
 

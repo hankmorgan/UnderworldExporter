@@ -100,6 +100,8 @@ public class ConversationVM : UWEBase {
 		private int TeleportTileY=-1;
 		private bool SettingUpFight=false;
 
+		public static bool VMLoaded=false;
+
 		/// <summary>
 		/// Imported function and memory data from the conv.ark file
 		/// </summary>
@@ -156,6 +158,18 @@ public class ConversationVM : UWEBase {
 		/// The answer from the bablf_menu
 		public static int bablf_ans=0;
 
+
+		public void InitConvVM()
+		{
+			switch(_RES)
+				{
+				case GAME_UW2:
+					LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");break;
+				default:
+					LoadCnvArk(Loader.BasePath+"data\\cnv.ark");break;				
+				}
+			VMLoaded=true;
+		}
 
 
 		void Update()
@@ -441,6 +455,10 @@ public class ConversationVM : UWEBase {
 		public void RunConversation(NPC npc)
 		{
 				string npcname="";
+				if (!ConversationVM.VMLoaded)
+				{
+					InitConvVM();
+				}
 
 				if (npc.npc_whoami==0)
 				{

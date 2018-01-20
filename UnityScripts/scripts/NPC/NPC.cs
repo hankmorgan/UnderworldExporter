@@ -850,7 +850,7 @@ public class NPC : MobileObject {
 		/// </summary>
 		/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 		public override bool TalkTo()
-		{//Begin a conversation.
+		{//Begin a conversation.				
 				GameWorldController.instance.convVM.RunConversation(this);
 				return true;
 		}

@@ -415,6 +415,7 @@ public class TileMap : Loader {
 							{
 								int datalen=0;
 								lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
+								//char[] packed = DataLoader.RepackUW2(lev_ark);
 								address_pointer=address_pointer+4;
 								AddressOfBlockStart=0;
 								address_pointer=0;
@@ -432,17 +433,17 @@ public class TileMap : Loader {
 									j++;
 								}
 							}
-								textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
-								compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
-								isCompressed =(compressionFlag>>1) & 0x01;
+							textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
+							compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+							isCompressed =(compressionFlag>>1) & 0x01;
 
-								if (isCompressed == 1)
-								{
-										int datalen=0;
-										tex_ark = DataLoader.unpackUW2(tmp_ark, textureAddress, ref datalen);
-										textureAddress=-1;
-								}
-								break;
+							if (isCompressed == 1)
+							{
+									int datalen=0;
+									tex_ark = DataLoader.unpackUW2(tmp_ark, textureAddress, ref datalen);
+									textureAddress=-1;
+							}
+							break;
 
 						}
 				default:

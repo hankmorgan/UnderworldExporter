@@ -15,7 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 
 public class GameWorldController : UWEBase {
-
+		
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
 		public enum UW1_LevelNames
@@ -606,7 +606,7 @@ public class GameWorldController : UWEBase {
 						UWCharacter.Instance.Begin();
 						UWCharacter.Instance.playerInventory.Begin();
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						//convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 						break;
 				case GAME_UW2:
 						UWHUD.instance.Begin();
@@ -614,14 +614,14 @@ public class GameWorldController : UWEBase {
 						UWCharacter.Instance.playerInventory.Begin();
 						Quest.instance.QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
+						//convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
 						break;		
 				default:
 						UWHUD.instance.Begin();
 						UWCharacter.Instance.Begin();
 						UWCharacter.Instance.playerInventory.Begin();
 						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						//convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
 						break;
 				}
 
