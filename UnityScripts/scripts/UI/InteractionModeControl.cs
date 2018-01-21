@@ -10,6 +10,14 @@ public class InteractionModeControl : GuiBase_Draggable {
 	public static bool UpdateNow=true;
 
 	public OptionsMenuControl OptionsMenu;
+		GRLoader lfti;
+
+	public override void Start ()
+	{
+		base.Start ();
+		lfti=new GRLoader(GRLoader.LFTI_GR);
+		Controls[0].texture=lfti.LoadImageAt(0);
+	}
 
 	void Update () {
 	
@@ -21,11 +29,13 @@ public class InteractionModeControl : GuiBase_Draggable {
 			{
 				if (i != UWCharacter.InteractionMode)
 				{//Off version
-					Controls[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/lfti/lfti_"+ (i*2).ToString("0000"));
+					//Controls[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/lfti/lfti_"+ (i*2).ToString("0000"));
+					Controls[i].texture= lfti.LoadImageAt((i*2));
 				}
 				else
 				{//On Version
-					Controls[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/lfti/lfti_"+ ((i*2)+1).ToString("0000"));
+					//Controls[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/lfti/lfti_"+ ((i*2)+1).ToString("0000"));
+					Controls[i].texture= lfti.LoadImageAt(((i*2)+1));
 				}
 			}
 			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeOptions)

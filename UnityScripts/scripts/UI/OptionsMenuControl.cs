@@ -101,10 +101,62 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		public GameObject QuitYes;
 		public GameObject QuitNo;
 
-		//private bool SaveNow;
-		//private bool RestoreNow;
-		//private int slot;
-		//private bool isLoadingOrSaving;
+
+	public override void Start ()
+	{
+		base.Start ();
+		if (_RES!=GAME_UW2)
+		{			
+			InitOptionButtonsArt();				
+		}		
+	}
+
+	void InitOptionButtonsArt()
+	{
+
+		SetArt(ref MainBG, 1);
+		SetArt(ref SaveBG, 2);
+		SetArt(ref RestoreBG, 2);
+		SetArt(ref MusicBG, 4);
+		SetArt (ref SoundBG, 4);
+		SetArt (ref DetailBG, 5);
+		SetArt (ref QuitBG, 3);
+		SetArt (ref MusicStateOn, 47);
+		SetArt(ref MusicStateOff, 48);
+		SetArt(ref SoundStateOff, 49);
+		SetArt(ref SoundStateOn, 50);
+		SetArt(ref DetailStateLow, 53);
+		SetArt (ref DetailStateMed, 54);
+		SetArt (ref DetailStateHi,55);
+		SetArt (ref DetailStateBest, 56);
+
+				SetArt (Restore_State,46);
+				SetArt (MusicState,47);
+				SetArt(SoundState,49);
+				SetArt (Sound_Label,52);
+				SetArt( DetailState,56);
+
+
+	}
+
+	static void SetArt(ref Texture2D tex, int artIndex)
+	{
+		tex = GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+	}
+
+	static void SetArt(RawImage image, int artIndex)
+	{
+		image.texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+	}
+
+	static void SetArt(GameObject obj, int artIndex)
+	{
+		if (obj.GetComponent<RawImage>()!=null)	
+			{
+			obj.GetComponent<RawImage>().texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+			}
+	}
+
 
 	public void ButtonClickOptionsMenu(int index)
 	{

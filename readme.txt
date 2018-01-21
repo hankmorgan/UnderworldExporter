@@ -3,6 +3,8 @@ UnderworldExporter
  
 Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity. 
 
+Release 1.03
+
 
 Contents
 	1 - Game Support
@@ -26,11 +28,9 @@ Contents
 			-Weapon animations are not currently working (combat still works)
 
 	1.3 Ultima Underworld 2 (UW2)
-		UW2 is partially supported with full support to come in time. The following features (list not exhaustive) are unimplmented.
-			-Game saves (loading of saves is possible but does not load player state or inventory fully)
-			-Travel to other worlds  via the blackrock gem is not linked to game progress (all levels available)
-			-The scheduled event systems that drive the plot forward not implemented
-			-Many traps and triggers are not implemented.
+		UW2 is partially supported with full support to come in time.
+			-Game saves (loading of vanilla saves is possible)
+			-Some traps and triggers are not implemented.
 			-Many new conversation functions are not implemented
 			-UW2 specific HUD is not implemented.		
 			
@@ -43,14 +43,10 @@ Contents
 2 Installation and Configuration
 	The same executable is used for all games. 
 	Download the uwe.zip file and extract it to any location you wish. (eg c:\games\uwe\)
-	In the extracted folder open the following files depending on the games you have or wish to play.
-		uw1_path.txt
-		uw0_path.txt
-		uw2_path.txt
-		shock_path.txt
-		tnova_path.txt 
-	Edit the file path in the file to match the folder where the original game is located.
-		Eg If the UW1 executable uw.exe is at c:\games\uw1\uw.exe then you should enter c:\games\uw1\ in the path file
+	In the extracted folder open the config.ini file. 
+
+	For each game there is a different config variable for the game paths.  EG  Path_UW1 for Underworld 1. Edit the file path to match the folder where the original game is located.
+		Eg If the UW1 executable uw.exe is at c:\games\uw1\uw.exe then you should enter c:\games\uw1\ in the path file next to Path_UW1
 	Launch the exporter by running the uwe.exe executable.
 	When you launch the splash screen should detail the games found and the paths recorded for them. 
 	Click on a game icon to launch.
@@ -58,7 +54,7 @@ Contents
 		UW0 will take you straight to the game world.
 		For SHOCK and TNOVA you can select a level to load from the drop down boxes.
 	
-	*If you own the gog.com versions you may need to extract the game files first. In the gog game folder find the file game.gog. Extract it using 7-zip or your file extractor of choice and point your paths to this data.	
+	*If you own the gog.com versions you may need to extract the game files first. In the gog game folder find the file game.gog. Extract it using 7-zip or your file extractor of choice and point your paths to this extracted data.	
 
 3  The following are the default controls
 
@@ -76,7 +72,7 @@ Contents
 
 	In game a context sensitive overlay will tell you what a right or left click will do when hovering over an object.
 
-	*These controls can be edited by changing the values in the bindings.txt file. Other standard controls are managed by the Unity launcher.
+	*These controls can be edited by changing the values in the config.ini file. Other standard controls are managed by the Unity launcher. Mouse sensitivity and axis settings can be configured from the config.ini
 
 4 Gameplay
 
@@ -178,8 +174,7 @@ Contents
 
 6 Some known bugs and issues
 	Limited range of resolutions due to using original game art.
-	Very few 3d models are implemented. These will display as sprites. Use your imagination.
-	The automap may hitch the first time you open it. Subsequent usage is okay.
+	3D models have placeholder texturing.
 	Map notes may not scale in size with your resolution.
 	Animated textures use a special shader that cycles the game palette. Currently this shader does not support lighting and animated textures will appear full bright.
 	Npcs in combat do not turn to face you quickly. NPC AI in general is not great at combat so try and play fair with them.

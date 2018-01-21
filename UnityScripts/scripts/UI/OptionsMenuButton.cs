@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Click buttons
 /// </summary>
-public class OptionsMenuButton : MonoBehaviour {
+public class OptionsMenuButton : GuiBase {
 
 		public enum OptionsMenu
 		{
@@ -42,12 +42,22 @@ public class OptionsMenuButton : MonoBehaviour {
 		}
 
 		public Texture2D ButtonOff;
+		public int ButtonOffIndex;
 		public Texture2D ButtonOn;
+		public int ButtonOnIndex;
 		public RawImage ButtonBG;
 
 		public OptionsMenuControl SubmitTarget;
 
 		public OptionsMenu index; //List in OptionsMenuControl
+
+	public override void Start ()
+	{
+		base.Start ();
+		ButtonOff= GameWorldController.instance.grOptbtns.LoadImageAt(ButtonOffIndex);
+		ButtonOn= GameWorldController.instance.grOptbtns.LoadImageAt(ButtonOnIndex);
+		this.GetComponent<RawImage>().texture= ButtonOff;
+	}
 
 		public void OnHoverEnter()
 		{

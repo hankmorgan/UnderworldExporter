@@ -1880,7 +1880,7 @@ public class ObjectInteraction : UWEBase {
 								Rigidbody rgd = myObj.GetComponent<Rigidbody>();
 								rgd.freezeRotation =true;
 								mgp.rgd=rgd;
-								GameWorldController.UnFreezeMovement(myObj);
+								//GameWorldController.UnFreezeMovement(myObj);
 
 								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
 								//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
@@ -1922,8 +1922,10 @@ public class ObjectInteraction : UWEBase {
 												break;
 										}
 								}
+
+										force =0;
 								Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
-								myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
+								//myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
 							}
 							
 							break;	

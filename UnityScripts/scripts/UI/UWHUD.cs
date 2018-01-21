@@ -166,7 +166,13 @@ public class UWHUD : HUD {
 				//inventoryDownArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(2);
 				//inventoryUpArrow.texture=GameWorldController.instance.grCursors.LoadImageAt(1);
 
+				GRLoader grPanels = new GRLoader(GRLoader.PANELS_GR);
+				InventoryPanel.GetComponent<RawImage>().texture= grPanels.LoadImageAt(0);
+				RuneBagPanel.GetComponent<RawImage>().texture=grPanels.LoadImageAt(1);
+				StatsDisplayPanel.GetComponent<RawImage>().texture=grPanels.LoadImageAt(2);
 
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,_RES!=GAME_UW2);
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,_RES==GAME_UW2);
 
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();
@@ -379,10 +385,11 @@ public class UWHUD : HUD {
 				EnableDisableControl(PaperDollMalePanel, InventoryEnabled && !UWCharacter.Instance.isFemale);
 				EnableDisableControl(ConversationPanel,ConversationEnabled);
 				EnableDisableControl(MapPanel,MapEnabled);
-				EnableDisableControl(DragonLeftPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
-				EnableDisableControl(DragonRightPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
+				EnableDisableControl(DragonLeftPanel, ( (_RES!=GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false))));
+				EnableDisableControl(DragonRightPanel,( (_RES!=GAME_UW2) && (((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false))));
 				EnableDisableControl(CutsceneSmallPanel,CutSceneSmallEnabled);
 				EnableDisableControl(CutsceneFullPanel,CutSceneFullEnabled);	
+				EnableDisableControl(MonsterEyes.gameObject,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
 
 				EnableDisableControl(editorPanel,EditorMode);
 		}

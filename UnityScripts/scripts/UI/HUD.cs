@@ -18,8 +18,20 @@ public class HUD : UWEBase {
 	public CutsceneAnimationFullscreen CutScenesFull;
 	public ScrollController MessageScroll;
 	public InputField InputControl;
-	public GameObject main_window;//The immersive heads up display
+	public GameObject main_windowUW1;//The immersive heads up display for UW1
+	public GameObject main_windowUW2;//The immersive heads up display for UW2
 	public RawImage MapDisplay; //should be in a subclass?
 
-		public Text LoadingProgress;
+	public Text LoadingProgress;
+
+/*	public GameObject main_window()
+	{
+		switch(_RES)
+		{
+		case GAME_UW2:
+				return main_windowUW2;
+		default:
+				return main_windowUW1;
+		}
+	}*/
 }

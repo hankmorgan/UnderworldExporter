@@ -33,11 +33,10 @@ public class Compass : GuiBase_Draggable {
 		base.Start();
 		comp=this.GetComponent<RawImage>();
 
-		GRLoader grCompass=new GRLoader(GRLoader.COMPASS_GR);
 		for (int i=0;i<4;i++)
 		{
 			//CompassPoles[i]=Resources.Load <Texture2D> (_RES +"/HUD/Compass/Compass_000"+i.ToString());
-			CompassPoles[i] = grCompass.LoadImageAt(i);
+			CompassPoles[i] = GameWorldController.instance.grCompass.LoadImageAt(i);
 		}
 	}
 
@@ -170,7 +169,7 @@ public class Compass : GuiBase_Draggable {
 	{
 		for (int i =0; i<16;i++)
 		{
-						NorthIndicators[i].enabled=(i==UWCharacter.Instance.currentHeading);
+			NorthIndicators[i].enabled=(i==UWCharacter.Instance.currentHeading);
 		}
 	}
 

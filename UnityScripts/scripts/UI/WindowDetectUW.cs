@@ -14,6 +14,15 @@ public class WindowDetectUW : WindowDetect {
 				base.Start ();
 				JustClicked=false;
 				WindowWaitCount=0;
+				switch(_RES)
+				{
+				case GAME_UW2:
+						UWCharacter.Instance.playerCam.rect= new Rect(0.05f,0.28f,0.655f,0.64f);
+						break;
+				default:
+						UWCharacter.Instance.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+						break;
+				}
 		}
 
 		/// <summary>
@@ -372,7 +381,8 @@ public class WindowDetectUW : WindowDetect {
 				FullScreen=true;
 				setPositions();
 
-				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,false);
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,false);
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,false);
 				RectTransform pos= this.GetComponent<RectTransform>();
 				pos.localPosition = new Vector3(0f,0f,0f);
 				pos.sizeDelta = new Vector3(0f, 0f);
@@ -387,11 +397,31 @@ public class WindowDetectUW : WindowDetect {
 		{
 				FullScreen=false;
 				setPositions();
-				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,true);
+				switch(_RES)
+				{
+					case GAME_UW2:
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,false);
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,true);
+						break;
+					default:
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,true);
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,false);
+						break;
+				}
+
 				RectTransform pos= this.GetComponent<RectTransform>();
 				pos.localPosition = new Vector3(-22f,25f,0f);
 				pos.sizeDelta = new Vector3(-148f, -88f);
-				UWCharacter.Instance.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+				switch(_RES)
+				{
+				case GAME_UW2:
+						UWCharacter.Instance.playerCam.rect= new Rect(0.05f,0.28f,0.655f,0.64f);
+						break;
+				default:
+						UWCharacter.Instance.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+						break;
+				}
+
 				UWHUD.instance.RefreshPanels(-1);//refresh controls
 		}
 

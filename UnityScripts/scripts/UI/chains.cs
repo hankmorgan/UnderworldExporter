@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class chains : GuiBase_Draggable {
 	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
 	//public static int setControl=0;
+
+		public override void Start ()
+	{
+		base.Start ();
+		GRLoader Chains = new GRLoader(GRLoader.CHAINS_GR);
+		this.GetComponent<RawImage>().texture=Chains.LoadImageAt(0);
+	}
 
 	public void OnClick()
 	{

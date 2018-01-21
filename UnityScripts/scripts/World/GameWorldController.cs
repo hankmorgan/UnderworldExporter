@@ -328,9 +328,19 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public GRLoader grFlasks;
 
-		/// <summary>
-		/// Cutscene data
-		/// </summary>
+	/// <summary>
+	/// The option menus
+	/// </summary>
+	public GRLoader grOptbtns;
+
+	/// <summary>
+	/// The Compass 
+	/// </summary>
+	public GRLoader grCompass;
+
+	/// <summary>
+	/// Cutscene data
+	/// </summary>
 	public CutsLoader cutsLoader;
 
 	public CritLoader[] critsLoader= new CritLoader[64];
@@ -345,7 +355,7 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 	public CommonObjectDatLoader commonObject;
 
-		public ObjectPropLoader ShockObjProp;
+	public ObjectPropLoader ShockObjProp;
 
 		/// <summary>
 		/// The terrain data from terrain.dat
@@ -540,7 +550,8 @@ public class GameWorldController : UWEBase {
 						armor_m=new GRLoader(GRLoader.ARMOR_M_GR);
 						grCursors = new GRLoader(GRLoader.CURSORS_GR);
 						grFlasks=new GRLoader(GRLoader.FLASKS_GR);
-
+						grOptbtns= new GRLoader(GRLoader.OPTBTNS_GR);
+						grCompass=new GRLoader(GRLoader.COMPASS_GR);
 						terrainData= new TerrainDatLoader();
 						weaps=new WeaponAnimation();
 						break;

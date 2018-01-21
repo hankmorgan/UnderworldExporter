@@ -4085,11 +4085,41 @@ description:  places a generated object in underworld
 				switch (arena)
 				{
 				case 0://water
-						
+						tileX[0]=37;
+						tileY[0]=25;
+						tileX[1]=36;
+						tileY[1]=35;
+						tileX[2]=35;
+						tileY[2]=35;
+						tileX[3]=35;
+						tileY[3]=36;
+						tileX[4]=35;
+						tileX[4]=37;
+						break;
 				case 1://air
-
+						tileX[0]=27;
+						tileY[0]=37;
+						tileX[1]=27;
+						tileY[1]=36;
+						tileX[2]=27;
+						tileY[2]=35;
+						tileX[3]=26;
+						tileY[3]=35;
+						tileX[4]=25;
+						tileX[4]=35;
+						break;
 				case 2://fire
-
+						tileX[0]=25;
+						tileY[0]=27;
+						tileX[1]=26;
+						tileY[1]=27;
+						tileX[2]=27;
+						tileY[2]=27;
+						tileX[3]=27;
+						tileY[3]=26;
+						tileX[4]=27;
+						tileX[4]=25;
+						break;
 				case 3://earth
 				default:
 						tileX[0]=36;//,35,36,35,37};
