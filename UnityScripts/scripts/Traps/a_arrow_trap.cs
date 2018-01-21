@@ -20,13 +20,26 @@ public class a_arrow_trap : trap_base {
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, this.transform.position).gameObject;
-
-		myObj.transform.position = this.transform.position;
-		myObj.transform.rotation = this.transform.rotation;
+		if (objInt().tileX ==TileMap.ObjectStorageTile)
+		{
+			Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(triggerX,triggerY);
+			pos = new Vector3(pos.x,this.transform.position.y,pos.z);
+			myObj.transform.position=pos;
+		}
+		else
+		{
+			myObj.transform.position = this.transform.position;			
+		}
+		myObj.transform.rotation = this.transform.rotation;	
+		if (myObj.GetComponent<Rigidbody>()==null)
+		{
+			myObj.AddComponent<Rigidbody>();
+		}
 
 		GameWorldController.UnFreezeMovement(myObj);
 		myObj.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.Continuous;
 		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 50.0f *((float)(objInt().owner)));
+		
 		GameObject myObjChild = new GameObject(myObj.name + "_damage");
 		myObjChild.transform.position =myObj.transform.position;
 		myObjChild.transform.parent =myObj.transform;

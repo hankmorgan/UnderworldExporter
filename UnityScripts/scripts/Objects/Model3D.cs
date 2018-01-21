@@ -6,68 +6,60 @@ using System.Collections;
 /// </summary>
 /// Vertices and triangles are based on the skunkworks 3d model loader that is 70% correct. Models Fixed up in "post".
 public class Model3D : object_base {
-		
-
-
 	
+
 	protected override void Start ()
 	{
 		base.Start ();
-		
 		AdjustModelPos();
-
 		this.gameObject.layer = LayerMask.NameToLayer("MapMesh");
-		Rigidbody rgd = this.GetComponent<Rigidbody>();
-		if (rgd!=null)
-		{
-			DestroyImmediate (rgd);
-		}
-		BoxCollider box = this.GetComponent<BoxCollider>();
-		if (box!=null)
-		{
+		GameObject child = new GameObject();
+		child.transform.parent=this.transform;						
+		Generate3DModel (this.gameObject);
+	}
+
+	void Generate3DModel (GameObject parent)
+	{
+		BoxCollider box = this.GetComponent<BoxCollider> ();
+		if (box != null) {
 			DestroyImmediate (box);
 		}
-		
-		MeshFilter meshF = this.gameObject.AddComponent<MeshFilter>();
-		MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
-		Material[] mats = new Material[NoOfMeshes()];
-		Mesh mesh = new Mesh();
-
-
-		mesh.subMeshCount = NoOfMeshes();				
-
-		mesh.vertices = ModelVertices();
-
-		Vector2[] uvs = ModelUVs(mesh.vertices);
-
-		for (int i=0; i<NoOfMeshes();i++)
-		{
-			mesh.SetTriangles(ModelTriangles(i),i);	
-			mats[i] = ModelMaterials(i);
+		MeshFilter meshF = parent.AddComponent<MeshFilter>();
+		MeshRenderer mr = parent.AddComponent<MeshRenderer>();
+		Material[] mats = new Material[NoOfMeshes ()];
+		Mesh mesh = new Mesh ();
+		mesh.subMeshCount = NoOfMeshes ();
+		mesh.vertices = ModelVertices ();
+		Vector2[] uvs = ModelUVs (mesh.vertices);
+		for (int i = 0; i < NoOfMeshes (); i++) {
+			mesh.SetTriangles (ModelTriangles (i), i);
+			mats [i] = ModelMaterials (i);
 			//mr.material.SetColor("_Color",ModelColour(0));
-			mats[i].SetColor("_Color",ModelColour(i));
-		}	
-		if (uvs.GetUpperBound(0)>0)
-		{
-			mesh.uv= uvs;
+			mats [i].SetColor ("_Color", ModelColour (i));
 		}
-
-		mr.materials=mats;
-		for (int i=0; i<NoOfMeshes();i++)
-		{
-			mr.materials[i].SetColor("_Color",ModelColour(i));
+		if (uvs.GetUpperBound (0) > 0) {
+			mesh.uv = uvs;
 		}
-
+		mr.materials = mats;
+		for (int i = 0; i < NoOfMeshes (); i++) {
+			mr.materials [i].SetColor ("_Color", ModelColour (i));
+		}
 		meshF.mesh = mesh;
-		mesh.RecalculateNormals(); 
-		mesh.RecalculateBounds();
-		if (isSolidModel())
-		{
-			MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
-			mc.sharedMesh=null;
-			mc.sharedMesh=mesh;							
+		mesh.RecalculateNormals ();
+		mesh.RecalculateBounds ();
+		if (isSolidModel ()) {
+			MeshCollider mc = parent.AddComponent<MeshCollider> ();
+			mc.convex=true;
+			mc.sharedMesh = null;
+			mc.sharedMesh = mesh;
 		}
-
+		else
+		{
+			Rigidbody rgd = this.GetComponent<Rigidbody> ();
+			if (rgd != null) {
+				DestroyImmediate (rgd);
+			}
+		}
 	}
 
 	public virtual int[] ModelTriangles(int meshNo)

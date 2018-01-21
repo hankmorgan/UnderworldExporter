@@ -68,50 +68,57 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
   
  //Robbed and changed slightly from the Labyrinth of Worlds implementation project.
  //This decompresses UW2 blocks.
- 
+  fprintf(LOGFILE, "Unpacking block");
     int	len = getValAtAddress(tmp,address_pointer,32);	//lword(base);
     unsigned char*	buf = new unsigned char[len+100];
     unsigned char*	up = buf;
 	*datalen = 0;
     address_pointer += 4;
-
+	int upPtr = 0;
+	int bitBlock = 0;
     while(up < buf+len)
       {
-	int		bits = tmp[address_pointer++];
-	for(int r=0; r<8; r++)
-	  {
-	    if(bits&1)
-	    {
-	    //printf("transfer %d\ at %d\n", byte(base),base);
-		*up++ = tmp[address_pointer++];
-		*datalen = *datalen+1;
-		}
-	    else
-	      {
-
-		int	o = tmp[address_pointer++];
-		int	c = tmp[address_pointer++];
-
-		o |= (c&0xF0)<<4;
-		c = (c&15) + 3;
-		o = o+18;
-		if(o > (up-buf))
-		    o -= 0x1000;
-		while(o < (up-buf-0x1000))
-		    o += 0x1000;
-		 
-		while(c--)
-		    {
-			if (o < 0)
-				{
-				printf("%c\n",buf[o]);
-				}
-			*up++ = buf[o++];
+		int	bits = tmp[address_pointer++];
+		fprintf(LOGFILE, "\n\tBit Block %d at %d is %d", bitBlock++, address_pointer, bits);
+		for(int r=0; r<8; r++)
+		  {
+			if(bits&1)
+			{
+			//printf("transfer %d\ at %d\n", byte(base),base);
+			fprintf(LOGFILE, "\n\t\tTransferring from %d to %d Value %d", address_pointer, upPtr++, tmp[address_pointer]);
+			*up++ = tmp[address_pointer++];
 			*datalen = *datalen+1;
 			}
-	      }
-	    bits >>= 1;
-	  }
+			else
+			  {
+				int	o = tmp[address_pointer++];
+				int	c = tmp[address_pointer++];
+
+				o |= (c&0xF0)<<4;
+				c = (c&15) + 3;
+				o = o+18;
+				int OrigOffset = o;
+				int uplessbuf = up - buf;
+				if(o > (up-buf))
+					o -= 0x1000;
+				while(o < (up-buf-0x1000))
+					o += 0x1000;
+		 
+				fprintf(LOGFILE, "\n\t\tCopy Record C= %d  O=%d  (orig offset=%d)", c, o, OrigOffset);
+				while(c--)
+					{
+					//if (o < 0)
+					//	{
+					//	printf("Offset is less than 0!");
+					//	}
+					//fprintf(LOGFILE, "\n\t\t\tCopying Value %d from %d to %d ", buf[o], o, upPtr++);
+					fprintf(LOGFILE, "%d ", buf[o]);
+					*up++ = buf[o++];
+					*datalen = *datalen+1;
+					}
+				  }
+			bits >>= 1;
+		  }
       }
 
     return buf;

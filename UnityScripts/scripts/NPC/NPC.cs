@@ -308,7 +308,17 @@ public class NPC : MobileObject {
 						for (int i = 0; i <= GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot.GetUpperBound (0); i++) {
 								if (GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i] != -1) {
 										int itemid = GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Loot [i];
-										ObjectLoaderInfo newobjt = ObjectLoader.newObject (itemid, Random.Range (1, 41), 0, 1, 256);
+										ObjectLoaderInfo newobjt = ObjectLoader.newObject (itemid, Random.Range (1, 41), 0, 0, 256);
+										if (itemid==16)//Sling stone.
+										{
+												newobjt.is_quant=1;
+												newobjt.link= Random.Range(1,10);
+												newobjt.quality=40;
+										}
+										else
+										{
+												newobjt.is_quant=0;
+										}
 										newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
 										cnt.AddItemToContainer (newobjt.instance.name);
 								}
@@ -1220,8 +1230,9 @@ public class NPC : MobileObject {
 				}
 				float weaponRange=1.5f;
 
-				//NPC tries to raycast at the player or object
 
+
+				//NPC tries to raycast at the player or object
 				Vector3 TargetingPoint;
 				if (gtarg.name=="_Gronk")
 				{//Try and hit the player
@@ -1237,7 +1248,6 @@ public class NPC : MobileObject {
 				RaycastHit hit = new RaycastHit(); 
 				if (Physics.Raycast(ray,out hit,weaponRange))
 				{	
-
 						if (hit.transform.Equals(this.transform))
 						{
 								Debug.Log ("you've hit yourself ? " + hit.transform.name);
@@ -1263,11 +1273,11 @@ public class NPC : MobileObject {
 										else
 										{
 												Impact.SpawnHitImpact(Impact.ImpactDamage(), GetImpactPoint(),46,50);
-												if (ObjectInteraction.PlaySoundEffects)
-												{
-														objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
-														objInt().aud.Play();
-												}
+												//if (ObjectInteraction.PlaySoundEffects)
+												//{
+												//		objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
+												//		objInt().aud.Play();
+												//}
 										}
 								}
 						}

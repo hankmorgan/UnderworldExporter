@@ -32,8 +32,8 @@ public class WindowDetectUW : WindowDetect {
 		/// </summary>
 		void Update ()
 		{
-				if (UWCharacter.Instance.isRoaming==true)
-				{//No inventory use while using wizard eye spell
+				if ((UWCharacter.Instance.isRoaming==true) || (UWCharacter.Instance.CurVIT<0))
+				{//No inventory use while using wizard eye spell or dead.
 						return;
 				}
 				if (JustClicked==true)
