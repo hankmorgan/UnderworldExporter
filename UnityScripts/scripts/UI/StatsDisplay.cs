@@ -29,7 +29,9 @@ public class StatsDisplay : GuiBase_Draggable {
 	string tmpSkillValues;
 
 	// Update is called once per frame
-	void Update () {
+		public override void Update ()
+		{
+			base.Update();
 			if (!GameWorldController.instance.AtMainMenu)
 			{
 					if (UpdateNow==true)

@@ -54,8 +54,11 @@ public class OptionsMenuButton : GuiBase {
 	public override void Start ()
 	{
 		base.Start ();
+		if (_RES!=GAME_UW2)
+		{		
 		ButtonOff= GameWorldController.instance.grOptbtns.LoadImageAt(ButtonOffIndex);
 		ButtonOn= GameWorldController.instance.grOptbtns.LoadImageAt(ButtonOnIndex);
+		}
 		this.GetComponent<RawImage>().texture= ButtonOff;
 	}
 

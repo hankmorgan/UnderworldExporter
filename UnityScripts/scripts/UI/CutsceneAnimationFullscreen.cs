@@ -160,7 +160,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		}
 	}
 
-	void Update()
+	public override void Update ()
 	{
 		if (SetAnimationFile !=PreviousAnimationFile)
 		{

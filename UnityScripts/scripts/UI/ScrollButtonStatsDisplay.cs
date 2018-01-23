@@ -25,7 +25,9 @@ public class ScrollButtonStatsDisplay : Scrollbutton {
 
 
 	// Update is called once per frame
-	void Update () {
+	public override void Update ()
+	{
+		base.Update();				
 		if (PreviousValue!=ScrollValue)
 		{
 			PreviousValue=ScrollValue;

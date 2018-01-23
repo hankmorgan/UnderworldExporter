@@ -48,7 +48,9 @@ public class TradeSlot : GuiBase {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update ()
+	{
+		base.Update();
 		if (isSelected())
 		{
 			Indicator.texture=IndicatorSelected;

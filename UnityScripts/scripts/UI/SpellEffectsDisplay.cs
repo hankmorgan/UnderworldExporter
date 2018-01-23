@@ -22,7 +22,9 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update ()
+	{
+		base.Update();
 		if (UWCharacter.Instance.ActiveSpell[SlotNumber] != null)
 		{
 			if (UWCharacter.Instance.ActiveSpell[SlotNumber].EffectIcon()!=setSpell)

@@ -32,7 +32,9 @@ public class HealthFlask : GuiBase_Draggable {
 			this.GetComponent<RawImage>().texture=GameWorldController.instance.grFlasks.LoadImageAt(75);			
 		}
 
-	void Update () {
+	public override void Update ()
+		{
+		base.Update();
 		if (isHealthDisplay==true)
 		{//Health flask
 			Level=UWCharacter.Instance.CurVIT;

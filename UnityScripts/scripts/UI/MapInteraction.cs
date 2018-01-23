@@ -163,9 +163,9 @@ public class MapInteraction : GuiBase {
 			caretAdjustment = new Vector2(MapNoteInput.text.Length* 9f,0f);
 		}
 
-		void Update()
+		public override void Update ()
 		{
-			//Debug.Log(InteractionMode);
+			base.Update();
 			if (InteractionMode==MapInteractionWriting)
 			{
 				MapNoteInput.Select();

@@ -28,13 +28,21 @@ public class Power : GuiBase {
 		{
 			PowerGemArt[i]=powerArt.LoadImageAt(i);	
 		}
+		if (_RES==GAME_UW2)
+		{
+			uiPowerGem.GetComponent<GuiBase_Draggable>().rectT = new RectTransform[2];
+			uiPowerGem.GetComponent<GuiBase_Draggable>().rectT[0] = this.GetComponent<RectTransform>();
+			uiPowerGem.GetComponent<GuiBase_Draggable>().rectT[1] = UWHUD.instance.HudCompass.GetComponent<RectTransform>();
+		}
 	}
 
 	/// <summary>
 	/// Compares the previous charge with the current attack charge. If the charge level has changed it changes the power gem image.
 	/// Once it reaches full charge it will loop the max charge animation.
 	/// </summary>
-	public void Update () {
+	public override void Update ()
+	{
+		base.Update();
 		if ((PreviousCharge!=UWCharacter.Instance.PlayerCombat.Charge)||(UWCharacter.Instance.PlayerCombat.AttackCharging==true))
 		{
 			PreviousCharge=UWCharacter.Instance.PlayerCombat.Charge;

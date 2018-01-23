@@ -66,6 +66,7 @@ public class UWHUD : HUD {
 		public GameObject CutsceneSmallPanel;
 		public GameObject CutsceneFullPanel;
 
+
 		public GameObject currentPanel;
 
 		public GameObject editorPanel;
@@ -137,9 +138,20 @@ public class UWHUD : HUD {
 		public Text editorButtonLabel;
 		public IngameEditor editor;
 
-		public InteractionModeControl InteractionControl;
+		public InteractionModeControl InteractionControlUW1;
+		public InteractionModeControl InteractionControlUW2;
 
 		public Eyes MonsterEyes;
+
+		public Compass HudCompass;
+
+		public Power powergem;
+
+		public SpellEffectsDisplay[] spelleffectdisplay;
+
+		public GameObject MessageLogScrollEdgeRight;
+		public GameObject MessageScrollBackground;
+		public GameObject MessageScrollDrag;
 
 		void Awake()
 		{
@@ -174,13 +186,99 @@ public class UWHUD : HUD {
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,_RES!=GAME_UW2);
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,_RES==GAME_UW2);
 
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW1.gameObject,_RES!=GAME_UW2);
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2.gameObject,_RES==GAME_UW2);
+
+
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();
+
+
+
+				switch(_RES)
+					{
+					case GAME_UW2:
+						//Set UW2 specific UI positions
+						SetUIElementPosition(HudCompass, 16f, 52f, new Vector2 (-40f,-56f));
+						SetUIElementPosition(HudCompass.NorthIndicators[0], 4f, 10f, new Vector2(26.02f-26f,13.98f -8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[1], 4f, 10f, new Vector2(33.01f-26f,13.99f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[2], 5f, 5f, new Vector2(40.46f-26f,12.51f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[3], 4f, 10f, new Vector2(44.00f-26f,12.01f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[4], 5f, 7f, new Vector2(48.52f-26f,8.5f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[5], 6f, 9f, new Vector2(46.51f-26f,7.02f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[6], 5f, 8f, new Vector2(42.00f-26f,4.5f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[7], 5f, 11f, new Vector2(33.49f-26f,3.5f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[8], 5f, 12f, new Vector2(26f-26f,2.49f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[9], 5f, 11f, new Vector2(18.5f-26f,3.49f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[10], 5f, 8f, new Vector2(9.99f-26f,4.49f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[11], 6f, 10f, new Vector2(5.04f-26f,7.01f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[12], 5f, 7f, new Vector2(3.49f-26f,8.49f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[13], 5f, 8f, new Vector2(5.98f-26f,10.51f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[14], 6f, 8f, new Vector2(11.99f-26f,11.97f-8f));
+						SetUIElementPosition(HudCompass.NorthIndicators[15], 5f, 10f, new Vector2(19.03f-26f,13.5f-8f));
+						SetUIElementPosition(powergem,5f,14f, new Vector2(-40f, -53.79f));
+						powergem.transform.parent.GetComponent<RectTransform>().SetSiblingIndex ( HudCompass.GetComponent<RectTransform>().GetSiblingIndex()+1);
+
+						SetUIElementPosition(ChainsControl, 32f, 15f, new Vector2(119.7f, -35f));
+
+						FlaskMana.GetComponent<RectTransform>().anchoredPosition = new Vector2(139.5f, -48.4f);
+						FlaskHealth.GetComponent<RectTransform>().anchoredPosition= new Vector2 (100.14f,-48.5f);
+
+						activeRunes[0].transform.parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(1.9f, -11.6f);
+
+						spelleffectdisplay[0].transform.parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-35f, -11.6f);
+
+						InventoryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+						RuneBagPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+						StatsDisplayPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+
+						SetUIElementPosition(MonsterEyes, 3f,20f, new Vector2(-40.06f, 94.48f) );
+
+						MessageLogScrollEdgeRight.GetComponent<RectTransform>().anchoredPosition = new Vector2(65.87f, -64.4f);
+						MessageScrollBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 208.68f);
+						MessageScrollBackground.GetComponent<RectTransform>().anchoredPosition=new Vector2(-40.8f, -64.8f);
+						MessageScrollDrag.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 216f);
+						MessageScrollDrag.GetComponent<RectTransform>().anchoredPosition=new Vector2(-41.2f, -64.5f);
+
+						MessageScroll.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 172f);
+						MessageScroll.GetComponent<RectTransform>().anchoredPosition= new Vector2(-39.5f, -62.4f);
+						break;
+					}
 		}
-		//void Start()
-		//{
-			//RefreshPanels(-1);
-		//}
+
+
+
+		static void SetUIElementPosition(RectTransform rectT, float height, float width, Vector2 anchorPos)
+		{
+			rectT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);
+			rectT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height);
+			rectT.anchoredPosition= anchorPos;
+		}
+
+		static void SetUIElementPosition(GameObject obj, float height, float width, Vector2 anchorPos)
+		{
+			if (obj.GetComponent<RectTransform>()!=null)
+			{
+				SetUIElementPosition(obj.GetComponent<RectTransform>(), height, width, anchorPos);
+			}
+		}
+
+		static void SetUIElementPosition(RawImage obj, float height, float width, Vector2 anchorPos)
+		{
+			if (obj.GetComponent<RectTransform>()!=null)
+			{
+				SetUIElementPosition(obj.GetComponent<RectTransform>(), height, width, anchorPos);
+			}
+		}
+
+		static void SetUIElementPosition(GuiBase obj, float height, float width, Vector2 anchorPos)
+		{
+			if (obj.GetComponent<RectTransform>()!=null)
+			{
+				SetUIElementPosition(obj.GetComponent<RectTransform>(), height, width, anchorPos);
+			}
+		}
+
 
 		/// <summary>
 		/// Refreshs the panels depending on the active mode

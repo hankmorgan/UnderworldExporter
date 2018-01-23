@@ -26,8 +26,8 @@ public class CutsAnimator : GuiBase {
 		mode=false;
 	}
 
-
-	void Update()
+	public override void Update ()
+	{
 		{
 			if (PrevAnimation!=SetAnimation)	
 			{
@@ -35,6 +35,7 @@ public class CutsAnimator : GuiBase {
 				PlayAnimFile(SetAnimation);				
 			}
 		}
+	}
 
 	IEnumerator cutscenerunner()
 	{

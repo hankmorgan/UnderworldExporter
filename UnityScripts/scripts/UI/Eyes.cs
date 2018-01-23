@@ -60,10 +60,10 @@ public class Eyes : GuiBase {
 
 
 
-	void Update()
+	public override void Update()
 	{
+		base.Update();
 		currentTime+=Time.deltaTime;
-
 		if (currentTime>frameRate)
 		{
 			currentTime=0f;

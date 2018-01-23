@@ -38,6 +38,13 @@ public class Compass : GuiBase_Draggable {
 			//CompassPoles[i]=Resources.Load <Texture2D> (_RES +"/HUD/Compass/Compass_000"+i.ToString());
 			CompassPoles[i] = GameWorldController.instance.grCompass.LoadImageAt(i);
 		}
+		if(_RES==GAME_UW2)
+		{
+			rectT = new RectTransform[2];
+			rectT[0] = this.GetComponent<RectTransform>();
+			rectT[1] = UWHUD.instance.powergem.transform.parent.GetComponent<RectTransform>();
+		}
+
 	}
 
 	public static int getCompassHeadingOffset(GameObject src, GameObject dst)
@@ -124,7 +131,9 @@ public class Compass : GuiBase_Draggable {
 
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update ()
+	{
+		base.Update();
 		if (PreviousHeading!=UWCharacter.Instance.currentHeading)
 		{
 			UpdateNorthIndicator();

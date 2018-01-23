@@ -77,8 +77,9 @@ public class Dragons : GuiBase {
 				counters[CounterIndex] = 0f;
 		}
 
-		void Update()
+		public override void Update ()
 		{
+				base.Update();
 				for (int i=0; i<=counters.GetUpperBound(0);i++)
 				{
 						counters[i]+=Time.deltaTime;
