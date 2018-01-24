@@ -140,6 +140,7 @@ public class UWHUD : HUD {
 
 		public InteractionModeControl InteractionControlUW1;
 		public InteractionModeControl InteractionControlUW2;
+		public RawImage InteractionControlUW2BG;
 
 		public Eyes MonsterEyes;
 
@@ -189,7 +190,6 @@ public class UWHUD : HUD {
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW1.gameObject,_RES!=GAME_UW2);
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2.gameObject,_RES==GAME_UW2);
 
-
 				MapPanel.transform.SetAsLastSibling();
 				ConversationPanel.transform.SetAsLastSibling();
 
@@ -228,11 +228,51 @@ public class UWHUD : HUD {
 
 						spelleffectdisplay[0].transform.parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-35f, -11.6f);
 
-						InventoryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
-						RuneBagPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
-						StatsDisplayPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+						//InventoryPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+						SetUIElementPosition(InventoryPanel, 112f,  79f, new Vector2(114.6f,36.7f));
+						SetUIElementPosition(RuneBagPanel, 112f,  79f, new Vector2(114.6f,36.7f));
+						SetUIElementPosition(StatsDisplayPanel, 112f,  79f, new Vector2(114.6f,36.7f));
+						//RuneBagPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+						//StatsDisplayPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(114.7f,36f);
+
+						SetUIElementPosition(playerBody, 69f,36f, new Vector2(1.78f,20.51f) );
+
+
+						SetUIElementPosition(RightShoulder_Slot, 16f,16f, new Vector2(16.8f-39f,99.4f-56.3f));
+						SetUIElementPosition(LeftShoulder_Slot, 16f,16f, new Vector2(65.3f-39f,99.4f-56.3f));
+						SetUIElementPosition(RightHand_Slot, 16f,16f, new Vector2(12.8f-39f,77f-56.3f));
+						SetUIElementPosition(LeftHand_Slot, 16f,16f, new Vector2(68.3f-39f,76.9f-56.3f));
+
+						SetUIElementPosition(BackPack_Slot[0], 16f,16f, new Vector2(11.9f-39f,30f-55.9f));
+						SetUIElementPosition(BackPack_Slot[1], 16f,16f, new Vector2(30.9f-39f,30f-55.9f));
+						SetUIElementPosition(BackPack_Slot[2], 16f,16f, new Vector2(49.9f-39f,30f-55.9f));
+						SetUIElementPosition(BackPack_Slot[3], 16f,16f, new Vector2(68.9f-39f,30f-55.9f));
+						SetUIElementPosition(BackPack_Slot[4], 16f,16f, new Vector2(11.9f-39f,12f-55.9f));
+						SetUIElementPosition(BackPack_Slot[5], 16f,16f, new Vector2(30.9f-39f,12f-55.9f));
+						SetUIElementPosition(BackPack_Slot[6], 16f,16f, new Vector2(49.9f-39f,12f-55.9f));
+						SetUIElementPosition(BackPack_Slot[7], 16f,16f, new Vector2(68.9f-39f,12f-55.9f));
+
+						SetUIElementPosition(ContainerOpened, 16f,16f, new Vector2(-26f, -4.8f));
+
+						SetUIElementPosition(RightRing_Slot,8f,8f, new Vector2(-13.71f, 5.01f));
+						SetUIElementPosition(LeftRing_Slot,8f,8f, new Vector2(17.69f, 5.01f));
 
 						SetUIElementPosition(MonsterEyes, 3f,20f, new Vector2(-40.06f, 94.48f) );
+
+						SetUIElementPosition(Legs_f_Slot,51f,19f, new Vector2(276.83f-157.83f,132.71f-80.71f));
+						SetUIElementPosition(Chest_f_Slot,44f,33f, new Vector2(277.83f-157.83f,137.71f-80.71f));
+						SetUIElementPosition(Helm_f_Slot,20f,20f, new Vector2(276.38f-157.83f,162.74f-80.71f));
+						SetUIElementPosition(Gloves_f_Slot,15f,33f, new Vector2(276.9f-157.83f,131.11f-80.71f));
+						SetUIElementPosition(Boots_f_Slot,14f,21f, new Vector2(275.83f-157.83f,109.01f-80.71f));
+
+						SetUIElementPosition(Legs_m_Slot,51f,19f, new Vector2(276.83f-157.83f,132.71f-80.71f));
+						SetUIElementPosition(Chest_m_Slot,44f,33f, new Vector2(277.83f-157.83f,137.71f-80.71f));
+						SetUIElementPosition(Helm_m_Slot,20f,20f, new Vector2(276.38f-157.83f,162.74f-80.71f));
+						SetUIElementPosition(Gloves_m_Slot,15f,33f, new Vector2(276.9f-157.83f,131.11f-80.71f));
+						SetUIElementPosition(Boots_m_Slot,14f,21f, new Vector2(275.83f-157.83f,109.01f-80.71f));
+
+
+						SetUIElementPosition(ContainerOpened.GetComponent<ContainerOpened>().BackpackBg, 0.9f,-34.4f, new Vector2(40.9f, 21.7f) );
 
 						MessageLogScrollEdgeRight.GetComponent<RectTransform>().anchoredPosition = new Vector2(65.87f, -64.4f);
 						MessageScrollBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 208.68f);

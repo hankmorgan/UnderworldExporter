@@ -1569,6 +1569,7 @@ public class SaveGame : Loader {
 																UWCharacter.Instance.Body=(bodyval-1)/2;
 																UWHUD.instance.playerBody.texture=chrBdy.LoadImageAt(5+((bodyval-1)/2));
 														}
+
 														//class
 														UWCharacter.Instance.CharClass= buffer[i]>>5;
 

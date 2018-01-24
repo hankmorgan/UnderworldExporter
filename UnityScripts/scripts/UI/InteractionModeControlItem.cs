@@ -23,6 +23,7 @@ public class InteractionModeControlItem : GuiBase {
 			isOn=false;
 			InteractionModeControl.UpdateNow=true;
 			UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject,false);
 		}
 		else
 		{
@@ -30,6 +31,7 @@ public class InteractionModeControlItem : GuiBase {
 			imc.TurnOffOthers(InteractionMode);
 			InteractionModeControl.UpdateNow=true;
 			UWCharacter.InteractionMode=InteractionMode;
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject,_RES==GAME_UW2);
 		}
 	}
 

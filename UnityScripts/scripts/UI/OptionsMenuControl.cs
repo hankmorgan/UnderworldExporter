@@ -102,59 +102,176 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		public GameObject QuitNo;
 
 
+		public Texture2D[] UW2Imgs;
+
 	public override void Start ()
 	{
 		base.Start ();
-		if (_RES!=GAME_UW2)
-		{			
-			InitOptionButtonsArt();				
-		}		
+		InitOptionButtonsArt();	
 	}
 
 	void InitOptionButtonsArt()
 	{
+		if (_RES==GAME_UW2)
+		{//Setup and crop the UW2 images into a useable format and order
+				Texture2D buttonbgart_80x65 = ArtLoader.CreateBlankImage(80,65);
+				Texture2D buttonbgart_80x14 = ArtLoader.CreateBlankImage(80,14);
+				UW2Imgs= new Texture2D[61];
+				this.GetComponent<RawImage>().texture = GameWorldController.instance.grOptbtns.LoadImageAt(3);
+				UW2Imgs[1] =  GameWorldController.instance.grOptbtns.LoadImageAt(3);//main
+				UW2Imgs[2] =  GameWorldController.instance.grOptbtns.LoadImageAt(6);//save/restore bg
+				UW2Imgs[3] =  GameWorldController.instance.grOptbtns.LoadImageAt(5);//save
+				UW2Imgs[4] =  GameWorldController.instance.grOptbtns.LoadImageAt(7);//music/sound bg
+				UW2Imgs[5] =  GameWorldController.instance.grOptbtns.LoadImageAt(4);//details
+				
 
-		SetArt(ref MainBG, 1);
-		SetArt(ref SaveBG, 2);
-		SetArt(ref RestoreBG, 2);
-		SetArt(ref MusicBG, 4);
+						UW2Imgs[6] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -98 );//save button off
+						UW2Imgs[7] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -98 );//save button on				
+
+						UW2Imgs[8] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -82 );//restore button off
+						UW2Imgs[9] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -82 );//restore button on
+
+						UW2Imgs[10] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -66 );//music button off
+						UW2Imgs[11] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -66 );//music button on
+
+						UW2Imgs[12] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -50 );//sound button off
+						UW2Imgs[13] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -50 );//sound button on
+
+						UW2Imgs[14] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -34 );//detail button off
+						UW2Imgs[15] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -34 );//detail button on
+
+						UW2Imgs[18] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -18 );//quit button off
+						UW2Imgs[19] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -18 );//quit button on
+
+						UW2Imgs[16] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -3 );//return button off
+						UW2Imgs[17] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -3 );//return button on
+
+
+						UW2Imgs[20] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -66 );//music on / off
+						UW2Imgs[21] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -66 );//music on / on
+						UW2Imgs[22] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -50 );//music off / off
+						UW2Imgs[23] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -50 );//music off / on
+
+						UW2Imgs[24] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -18 );//save cancel
+						UW2Imgs[25] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -18 );//save cancel
+
+
+						UW2Imgs[30] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -82 );//save 1 off
+						UW2Imgs[31] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -82 );//save 1 on
+						UW2Imgs[32] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -66 );//save 2 off
+						UW2Imgs[33] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -66 );//save 2 on
+						UW2Imgs[34] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -50 );//save 3 off
+						UW2Imgs[35] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -50 );//save 3 on
+						UW2Imgs[36] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 off
+						UW2Imgs[37] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 on
+
+						UW2Imgs[36] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 off
+						UW2Imgs[37] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 on
+
+						UW2Imgs[38] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -66 );//detail low off
+						UW2Imgs[39] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -66 );//detail low on
+
+						UW2Imgs[40] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -50 );//detail med off
+						UW2Imgs[41] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -50 );//detail med on
+
+						UW2Imgs[42] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -34 );//detail hi off
+						UW2Imgs[43] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -34 );//detail hi on
+
+						UW2Imgs[44] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -18 );//detail best off
+						UW2Imgs[45] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -18);//detail best on
+
+						UW2Imgs[26] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -3 );//detail cancel off
+						UW2Imgs[27] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -3);//detail cancel on
+
+						UW2Imgs[47] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -33 );//musicstate on
+						UW2Imgs[48] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -49 );//musicstate off
+						UW2Imgs[49] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -17 );//soundstate off
+						UW2Imgs[50] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, 0 );//soundstate on
+
+						UW2Imgs[52] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x14, 0, -17 );//sound label
+
+						UW2Imgs[53] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -49 );//detail low
+						UW2Imgs[54] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -33 );//detail med
+						UW2Imgs[55] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -17 );//detail hi
+						UW2Imgs[56] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, 0 );//detail best
+
+						UW2Imgs[46] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x14, 0, -33 );//restore state
+
+						UW2Imgs[57] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -66 );//quit yes off
+						UW2Imgs[58] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -66 );//quit yes on
+
+						UW2Imgs[59] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -50 );//quit no off 
+						UW2Imgs[60] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -50 );//quit no on
+
+		}
+
+
+
+		SetArt (ref MainBG, 1);
+		SetArt (ref SaveBG, 2);
+		SetArt (ref RestoreBG, 2);
+		SetArt (ref MusicBG, 4);
 		SetArt (ref SoundBG, 4);
 		SetArt (ref DetailBG, 5);
 		SetArt (ref QuitBG, 3);
 		SetArt (ref MusicStateOn, 47);
-		SetArt(ref MusicStateOff, 48);
-		SetArt(ref SoundStateOff, 49);
-		SetArt(ref SoundStateOn, 50);
-		SetArt(ref DetailStateLow, 53);
+		SetArt (ref MusicStateOff, 48);
+		SetArt (ref SoundStateOff, 49);
+		SetArt (ref SoundStateOn, 50);
+		SetArt (ref DetailStateLow, 53);
 		SetArt (ref DetailStateMed, 54);
 		SetArt (ref DetailStateHi,55);
 		SetArt (ref DetailStateBest, 56);
 
-				SetArt (Restore_State,46);
-				SetArt (MusicState,47);
-				SetArt(SoundState,49);
-				SetArt (Sound_Label,52);
-				SetArt( DetailState,56);
+		SetArt (Restore_State,46);
+		SetArt (MusicState,47);//TODO:load the initial value.
+		SetArt (SoundState,49);//TODO:load the initial value.
+		SetArt (Sound_Label,52);
+		SetArt (DetailState,56);//TODO:load the initial value.
 
 
 	}
 
-	static void SetArt(ref Texture2D tex, int artIndex)
+	void SetArt(ref Texture2D tex, int artIndex)
 	{
-		tex = GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+		if (_RES!=GAME_UW2)
+		{
+			tex = GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);				
+		}
+		else
+		{
+			tex = UW2Imgs[artIndex];
+		}		
 	}
 
-	static void SetArt(RawImage image, int artIndex)
+	void SetArt(RawImage image, int artIndex)
 	{
-		image.texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+		if (_RES!=GAME_UW2)
+		{
+			image.texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);		
+		}
+		else
+		{
+			image.texture=  UW2Imgs[artIndex];
+		}	
 	}
 
-	static void SetArt(GameObject obj, int artIndex)
+	void SetArt(GameObject obj, int artIndex)
 	{
-		if (obj.GetComponent<RawImage>()!=null)	
+		if (_RES!=GAME_UW2)
+		{
+			if (obj.GetComponent<RawImage>()!=null)	
 			{
-			obj.GetComponent<RawImage>().texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+					obj.GetComponent<RawImage>().texture= GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
 			}
+		}
+		else
+		{
+			if (obj.GetComponent<RawImage>()!=null)	
+			{
+					obj.GetComponent<RawImage>().texture= UW2Imgs[artIndex];  // GameWorldController.instance.grOptbtns.LoadImageAt(artIndex);
+			}
+		}
 	}
 
 
@@ -326,18 +443,18 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		//List the save names
 		UWHUD.instance.MessageScroll.Clear ();
 	
-			for (int i=1; i<=4;i++)
+		for (int i=1; i<=4;i++)
+		{
+			char[] fileDesc;
+			if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
 			{
-				char[] fileDesc;
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
-				{
-					saveNames[i-1]= new string(fileDesc);
-				}
-				else
-				{
-					saveNames[i-1]="";
-				}
+				saveNames[i-1]= new string(fileDesc);
 			}
+			else
+			{
+				saveNames[i-1]="";
+			}
+		}
 		for (int i=0; i<=saveNames.GetUpperBound(0);i++)
 		{
 			if (saveNames[i]!="")
@@ -559,47 +676,17 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		switch (DetailLevel)
 		{
 		case DETAIL_LOW:
+			DetailState.texture= DetailStateLow;
 			QualitySettings.SetQualityLevel(0,true);break;
 		case DETAIL_MED:
+			DetailState.texture= DetailStateMed;
 			QualitySettings.SetQualityLevel(1,true);break;
 		case DETAIL_HI:
+			DetailState.texture= DetailStateHi;
 			QualitySettings.SetQualityLevel(2,true);break;
 		case DETAIL_BEST:
+			DetailState.texture= DetailStateBest;
 			QualitySettings.SetQualityLevel(3,true);break;
 		}
 	}
-
-		/*
-		static void HandleLevelSerializerProgress (string section, float complete)
-		{
-				Debug.Log(string.Format("Progress on {0} = {1:0.00%}", section, complete));
-		}
-
-		private void OnEnable() {
-				LevelSerializer.Progress += HandleLevelSerializerProgress;
-		}
-
-		private void OnDisable() {
-				LevelSerializer.Progress -= HandleLevelSerializerProgress;
-		}
-*/
-		/*
-		IEnumerator LoadScreen (bool mode)
-		{
-				
-			//while (isLoadingOrSaving)
-			//{
-				if (mode==true)//Loading
-				{
-					UWHUD.instance.LoadingProgress.text="LOADING";
-				}
-				else
-				{
-					UWHUD.instance.LoadingProgress.text="SAVING" ;
-				}
-				yield return new WaitForSeconds(1);
-			//}
-		}*/
-	
 }
-

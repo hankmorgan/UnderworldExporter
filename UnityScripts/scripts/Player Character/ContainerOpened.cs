@@ -8,6 +8,13 @@ public class ContainerOpened : GuiBase_Draggable {
 		public GameObject InvUp;
 		public GameObject InvDown;
 
+		public override void Start ()
+		{
+				base.Start ();
+				GRLoader grInv = new GRLoader(GRLoader.INV_GR);
+				BackpackBg.GetComponent<RawImage>().texture= grInv.LoadImageAt(6);
+		}
+
 		void CloseChildContainer(Container ClosingParent)
 		{//Recursively closes open child containers
 				ClosingParent.isOpenOnPanel=false;
@@ -57,7 +64,7 @@ public class ContainerOpened : GuiBase_Draggable {
 						{
 								GetComponent<RawImage>().texture=UWCharacter.Instance.playerInventory.Blank;
 								BackpackBg.SetActive(false);
-							if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=UWCharacter.Instance.playerInventory.playerContainer))
+								if ((DestinationContainer.CountItems()>=8) && (DestinationContainer!=UWCharacter.Instance.playerInventory.playerContainer))
 								{
 										InvUp.SetActive(true);
 										InvDown.SetActive(true);

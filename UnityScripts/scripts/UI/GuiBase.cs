@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// Base class for UI components. Allows moving of elements and sets up common references.
 /// </summary>
 public class GuiBase : UWEBase {
-		//public Vector3 anchorPos;
+		public Vector3 anchorPos;
 	public virtual void Start()
 	{
 
@@ -17,9 +17,9 @@ public class GuiBase : UWEBase {
 
 	public virtual void Update()
 	{
-		/*if (this.GetComponent<RectTransform>()!=null)
+		if (this.GetComponent<RectTransform>()!=null)
 		{
 			anchorPos =this.GetComponent<RectTransform>().anchoredPosition;
-		}*/
+		}
 	}
 }

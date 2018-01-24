@@ -21,9 +21,9 @@ public class InteractionModeControl : GuiBase_Draggable {
 		grlfti=new GRLoader(GRLoader.LFTI_GR);
 		if (_RES==GAME_UW2)
 		{
-				CropUW2Textures();	
+			SetUpUW2OptBtns();	
 		}
-	SetImage (ref Controls[0], 0);//Init the options button
+		SetImage (ref Controls[0], 0);//Init the options button
 	}
 
 	public override void Update ()
@@ -78,10 +78,11 @@ public class InteractionModeControl : GuiBase_Draggable {
 			}		
 	}
 
-	void CropUW2Textures()
+	void SetUpUW2OptBtns()
 	{
 		GRLoader grOptBtns = new GRLoader(GRLoader.OPTBTNS_GR);
 		Texture2D buttonBG = ArtLoader.CreateBlankImage(25,14);
+		UWHUD.instance.InteractionControlUW2BG.texture= grOptBtns.LoadImageAt(2);
 
 		UW2Buttons = new Texture2D[12];
 				//In off and on pairs
