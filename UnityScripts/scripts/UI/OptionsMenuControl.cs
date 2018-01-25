@@ -114,94 +114,98 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	{
 		if (_RES==GAME_UW2)
 		{//Setup and crop the UW2 images into a useable format and order
-				Texture2D buttonbgart_80x65 = ArtLoader.CreateBlankImage(80,65);
-				Texture2D buttonbgart_80x14 = ArtLoader.CreateBlankImage(80,14);
-				UW2Imgs= new Texture2D[61];
-				this.GetComponent<RawImage>().texture = GameWorldController.instance.grOptbtns.LoadImageAt(3);
-				UW2Imgs[1] =  GameWorldController.instance.grOptbtns.LoadImageAt(3);//main
-				UW2Imgs[2] =  GameWorldController.instance.grOptbtns.LoadImageAt(6);//save/restore bg
-				UW2Imgs[3] =  GameWorldController.instance.grOptbtns.LoadImageAt(5);//save
-				UW2Imgs[4] =  GameWorldController.instance.grOptbtns.LoadImageAt(7);//music/sound bg
-				UW2Imgs[5] =  GameWorldController.instance.grOptbtns.LoadImageAt(4);//details
-				
+			Texture2D buttonbgart_80x65 = ArtLoader.CreateBlankImage(80,65);
+			Texture2D buttonbgart_80x16 = ArtLoader.CreateBlankImage(80,16);
+			UW2Imgs= new Texture2D[63];
+			this.GetComponent<RawImage>().texture = GameWorldController.instance.grOptbtns.LoadImageAt(3);
+			UW2Imgs[1] =  GameWorldController.instance.grOptbtns.LoadImageAt(3);//main
+			UW2Imgs[2] =  GameWorldController.instance.grOptbtns.LoadImageAt(6);//save/restore bg
+			UW2Imgs[3] =  GameWorldController.instance.grOptbtns.LoadImageAt(5);//save
+			UW2Imgs[4] =  GameWorldController.instance.grOptbtns.LoadImageAt(7);//music/sound bg
+			UW2Imgs[5] =  GameWorldController.instance.grOptbtns.LoadImageAt(4);//details
+			
 
-						UW2Imgs[6] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -98 );//save button off
-						UW2Imgs[7] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -98 );//save button on				
+			UW2Imgs[6] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -98 );//save button off
+			UW2Imgs[7] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -98 );//save button on				
 
-						UW2Imgs[8] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -82 );//restore button off
-						UW2Imgs[9] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -82 );//restore button on
+			UW2Imgs[8] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -82 );//restore button off
+			UW2Imgs[9] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -82 );//restore button on
 
-						UW2Imgs[10] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -66 );//music button off
-						UW2Imgs[11] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -66 );//music button on
+			UW2Imgs[10] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -66 );//music button off
+			UW2Imgs[11] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -66 );//music button on
 
-						UW2Imgs[12] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -50 );//sound button off
-						UW2Imgs[13] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -50 );//sound button on
+			UW2Imgs[12] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -50 );//sound button off
+			UW2Imgs[13] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -50 );//sound button on
 
-						UW2Imgs[14] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -34 );//detail button off
-						UW2Imgs[15] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -34 );//detail button on
+			UW2Imgs[14] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -34 );//detail button off
+			UW2Imgs[15] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -34 );//detail button on
 
-						UW2Imgs[18] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -18 );//quit button off
-						UW2Imgs[19] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -18 );//quit button on
+			UW2Imgs[16] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -3 );//return button off
+			UW2Imgs[17] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -3 );//return button on
 
-						UW2Imgs[16] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -3 );//return button off
-						UW2Imgs[17] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x14, 0, -3 );//return button on
+			UW2Imgs[18] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(3), buttonbgart_80x16, 0, -18 );//quit button off
+			UW2Imgs[19] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(8), buttonbgart_80x16, 0, -18 );//quit button on
+
+			UW2Imgs[20] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x16, 0, -66 );//music on / off
+			UW2Imgs[21] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(12), buttonbgart_80x16, 0, -66 );//music on / on
+
+			UW2Imgs[22] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x16, 0, -50 );//music off / off
+			UW2Imgs[23] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(12), buttonbgart_80x16, 0, -50 );//music off / on
+
+			UW2Imgs[24] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(6), buttonbgart_80x16, 0, -18 );//save cancel off
+			UW2Imgs[25] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x16, 0, -18 );//save cancel on
+	
+			UW2Imgs[26] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -3 );//detail cancel off
+			UW2Imgs[27] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -3);//detail cancel on
+
+			UW2Imgs[28] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x16, 0, -34 );//music/sound cancel off
+			UW2Imgs[29] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(12), buttonbgart_80x16, 0, -34);//music/sound cancel on
+
+			UW2Imgs[30] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(6), buttonbgart_80x16, 0, -82 );//save 1 off
+			UW2Imgs[31] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x16, 0, -82 );//save 1 on
+			UW2Imgs[32] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(6), buttonbgart_80x16, 0, -66 );//save 2 off
+			UW2Imgs[33] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x16, 0, -66 );//save 2 on
+			UW2Imgs[34] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(6), buttonbgart_80x16, 0, -50 );//save 3 off
+			UW2Imgs[35] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x16, 0, -50 );//save 3 on
+			UW2Imgs[36] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(6), buttonbgart_80x16, 0, -34 );//save 4 off
+			UW2Imgs[37] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x16, 0, -34 );//save 4 on
+
+			UW2Imgs[38] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -66 );//detail low off
+			UW2Imgs[39] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -66 );//detail low on
+
+			UW2Imgs[40] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -50 );//detail med off
+			UW2Imgs[41] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -50 );//detail med on
+
+			UW2Imgs[42] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -34 );//detail hi off
+			UW2Imgs[43] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -34 );//detail hi on
+
+			UW2Imgs[44] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -18 );//detail best off
+			UW2Imgs[45] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -18);//detail best on
+			
+			UW2Imgs[46] =ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x16, 0, -33 ); //Restore state
+
+			UW2Imgs[47] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x16, 0, -33 );//musicstate on
+			UW2Imgs[48] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x16, 0, -49 );//musicstate off
+			UW2Imgs[49] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x16, 0, -17 );//soundstate off
+			UW2Imgs[50] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x16, 0, -1 );//soundstate on
+
+			UW2Imgs[52] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x16, 0, -17 );//sound label
+
+			UW2Imgs[53] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x16, 0, -49 );//detail low
+			UW2Imgs[54] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x16, 0, -33 );//detail med
+			UW2Imgs[55] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x16, 0, -17 );//detail hi
+			UW2Imgs[56] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x16, 0, -1 );//detail best
+
+	
+			UW2Imgs[57] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(5), buttonbgart_80x16, 0, -66 );//quit yes off
+			UW2Imgs[58] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x16, 0, -66 );//quit yes on
+
+			UW2Imgs[59] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(5), buttonbgart_80x16, 0, -50 );//quit no off 
+			UW2Imgs[60] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x16, 0, -50 );//quit no on
 
 
-						UW2Imgs[20] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -66 );//music on / off
-						UW2Imgs[21] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -66 );//music on / on
-						UW2Imgs[22] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -50 );//music off / off
-						UW2Imgs[23] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(7), buttonbgart_80x14, 0, -50 );//music off / on
-
-						UW2Imgs[24] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -18 );//save cancel
-						UW2Imgs[25] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -18 );//save cancel
-
-
-						UW2Imgs[30] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -82 );//save 1 off
-						UW2Imgs[31] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -82 );//save 1 on
-						UW2Imgs[32] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -66 );//save 2 off
-						UW2Imgs[33] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -66 );//save 2 on
-						UW2Imgs[34] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -50 );//save 3 off
-						UW2Imgs[35] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -50 );//save 3 on
-						UW2Imgs[36] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 off
-						UW2Imgs[37] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 on
-
-						UW2Imgs[36] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 off
-						UW2Imgs[37] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(11), buttonbgart_80x14, 0, -34 );//save 4 on
-
-						UW2Imgs[38] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -66 );//detail low off
-						UW2Imgs[39] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -66 );//detail low on
-
-						UW2Imgs[40] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -50 );//detail med off
-						UW2Imgs[41] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -50 );//detail med on
-
-						UW2Imgs[42] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -34 );//detail hi off
-						UW2Imgs[43] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -34 );//detail hi on
-
-						UW2Imgs[44] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -18 );//detail best off
-						UW2Imgs[45] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -18);//detail best on
-
-						UW2Imgs[26] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -3 );//detail cancel off
-						UW2Imgs[27] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x14, 0, -3);//detail cancel on
-
-						UW2Imgs[47] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -33 );//musicstate on
-						UW2Imgs[48] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -49 );//musicstate off
-						UW2Imgs[49] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, -17 );//soundstate off
-						UW2Imgs[50] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(15), buttonbgart_80x14, 0, 0 );//soundstate on
-
-						UW2Imgs[52] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x14, 0, -17 );//sound label
-
-						UW2Imgs[53] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -49 );//detail low
-						UW2Imgs[54] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -33 );//detail med
-						UW2Imgs[55] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, -17 );//detail hi
-						UW2Imgs[56] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(13), buttonbgart_80x14, 0, 0 );//detail best
-
-						UW2Imgs[46] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(14), buttonbgart_80x14, 0, -33 );//restore state
-
-						UW2Imgs[57] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -66 );//quit yes off
-						UW2Imgs[58] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -66 );//quit yes on
-
-						UW2Imgs[59] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -50 );//quit no off 
-						UW2Imgs[60] = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(10), buttonbgart_80x14, 0, -50 );//quit no on
+			UW2Imgs[61]  = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(4), buttonbgart_80x16, 0, -2 );//detail cancel off
+			UW2Imgs[62]  = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -2 );//detail cancel on
 
 		}
 
@@ -274,9 +278,23 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		}
 	}
 
+	/// <summary>
+	/// Clears the highlighted buttons when the menu is moved on.
+	/// </summary>
+	void ClearHighlights()
+	{
+		foreach (Transform child in this.gameObject.transform) 
+		{
+			if (child.GetComponent<OptionsMenuButton>()!=null)
+			{
+				child.GetComponent<OptionsMenuButton>().OnHoverExit();	
+			}
+		}
+	}
 
 	public void ButtonClickOptionsMenu(int index)
 	{
+		ClearHighlights();
 		switch (index)
 		{
 		case SAVE:
@@ -392,8 +410,6 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 	private void OptionSave()
 	{
-		if (_RES==GAME_UW1)
-		{
 			DisplayBG.texture= SaveBG;
 			SaveMenu.SetActive(false);
 			RestoreMenu.SetActive(false);
@@ -409,12 +425,6 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			Save_Cancel.SetActive(true);
 
 			DisplaySaves ();	
-		}
-		else
-		{
-			UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
-		}
-
 	}
 
 	private void OptionRestore()
@@ -556,6 +566,12 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="SlotNo">Slot no.</param>
 		private void SaveToSlot(int SlotNo)
 		{				
+				if (_RES==GAME_UW2)
+				{
+						UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
+						return;
+				}
+
 			//000~001~159~Impossible, you are between worlds. \n
 			if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
 			{

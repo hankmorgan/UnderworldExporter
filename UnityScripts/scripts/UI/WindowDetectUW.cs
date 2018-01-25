@@ -8,6 +8,8 @@ public class WindowDetectUW : WindowDetect {
 		/// Is the game using experimental room manager code.
 		/// </summary>
 		public static bool UsingRoomManager =false;	
+		Vector3 windowedPosition;
+		Vector3 windowedSize;
 
 		public override void Start ()
 		{
@@ -384,6 +386,8 @@ public class WindowDetectUW : WindowDetect {
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW1,false);
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.main_windowUW2,false);
 				RectTransform pos= this.GetComponent<RectTransform>();
+				windowedPosition = pos.localPosition;
+				windowedSize= pos.sizeDelta;
 				pos.localPosition = new Vector3(0f,0f,0f);
 				pos.sizeDelta = new Vector3(0f, 0f);
 				UWCharacter.Instance.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
@@ -410,8 +414,10 @@ public class WindowDetectUW : WindowDetect {
 				}
 
 				RectTransform pos= this.GetComponent<RectTransform>();
-				pos.localPosition = new Vector3(-22f,25f,0f);
-				pos.sizeDelta = new Vector3(-148f, -88f);
+				//pos.localPosition = new Vector3(-22f,25f,0f);
+				pos.localPosition=windowedPosition;
+				//pos.sizeDelta = new Vector3(-148f, -88f);
+				pos.sizeDelta=windowedSize;
 				switch(_RES)
 				{
 				case GAME_UW2:

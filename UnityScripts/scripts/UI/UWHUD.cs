@@ -199,6 +199,9 @@ public class UWHUD : HUD {
 					{
 					case GAME_UW2:
 						//Set UW2 specific UI positions
+
+						SetUIElementPosition(window,128f,210f, new Vector2(-40.8f,20f));
+
 						SetUIElementPosition(HudCompass, 16f, 52f, new Vector2 (-40f,-56f));
 						SetUIElementPosition(HudCompass.NorthIndicators[0], 4f, 10f, new Vector2(26.02f-26f,13.98f -8f));
 						SetUIElementPosition(HudCompass.NorthIndicators[1], 4f, 10f, new Vector2(33.01f-26f,13.99f-8f));

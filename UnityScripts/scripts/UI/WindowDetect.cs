@@ -13,7 +13,7 @@ WindowDetect.cs
 ///1) Detecting if the mouse cursor is within the bounds of the main player view. (and related effects)
 ///2) Dropping and throwing objects in the 3d view
 /// Any other functions of the 3d win area
-public class WindowDetect : UWEBase {
+public class WindowDetect : GuiBase {
 
 		/// <summary>
 		/// The cursor width
