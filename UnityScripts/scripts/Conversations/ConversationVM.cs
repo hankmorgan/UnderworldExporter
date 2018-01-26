@@ -458,6 +458,10 @@ public class ConversationVM : UWEBase {
 				if (!ConversationVM.VMLoaded)
 				{
 					InitConvVM();
+					if (_RES==GAME_UW2)
+					{
+						UWHUD.instance.UW2ConversationBG.texture =	GameWorldController.instance.bytloader.LoadImageAt(2,false);
+					}
 				}
 
 				if (npc.npc_whoami==0)
@@ -499,6 +503,7 @@ public class ConversationVM : UWEBase {
 						return;	
 				}
 
+
 				if (npcname=="")
 				{
 						UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc.npc_whoami+16);						
@@ -506,7 +511,7 @@ public class ConversationVM : UWEBase {
 				else
 				{
 						UWHUD.instance.NPCName.text=npcname;	
-				}				
+				}		
 
 				UWHUD.instance.PCName.text= UWCharacter.Instance.CharName;
 
@@ -1399,9 +1404,9 @@ public class ConversationVM : UWEBase {
 								case PC_SAY:
 										Markup="<color=red>";break;//[FF0000]
 								case PRINT_SAY:
-										Markup="<color=black>";break;//[000000]
+										Markup="<color=purple>";break;//[000000]
 								default:
-										Markup="<color=green>";break;//[00FF00]
+										Markup="<color=black>";break;//[00FF00]
 								}	
 								UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
 								if (i<Paragraphs.GetUpperBound(0))

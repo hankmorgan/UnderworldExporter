@@ -96,7 +96,8 @@ public class HealthFlask : GuiBase_Draggable {
 
 	public void OnClick()
 	{
-		if (Dragging==true){return;}				
+		if (Dragging==true){return;}	
+		if(ConversationVM.InConversation){return;}
 		string output=""; 
 		if (isHealthDisplay == true)
 		{

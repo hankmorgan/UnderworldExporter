@@ -122,6 +122,7 @@ public class TradeSlot : GuiBase {
 				string tmp;
 				tmp = objectInSlot;
 				objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
+				SlotImage.texture=	UWHUD.instance.CursorIcon;
 				UWCharacter.Instance.playerInventory.ObjectInHand=tmp;
 				UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				Selected=true;

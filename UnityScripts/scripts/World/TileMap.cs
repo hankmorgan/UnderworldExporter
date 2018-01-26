@@ -147,6 +147,12 @@ public class TileMap : Loader {
 		public static bool OnIce=false;
 
 
+		public TileMap(short NewLevelNo)
+		{
+				thisLevelNo=NewLevelNo;
+		}
+
+
 		/// <summary>
 		/// Checks to see if the tile at a specified location is within the valid game world. (eg is rendered and is not a solid).
 		/// Assumes the map is positioned at 0,0,0

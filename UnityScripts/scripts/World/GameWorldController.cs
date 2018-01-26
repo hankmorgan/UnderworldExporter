@@ -811,8 +811,7 @@ public class GameWorldController : UWEBase {
 				//Check loading
 				if (Tilemaps[newLevelNo]==null)
 				{//Data has not been loaded for this level
-					Tilemaps[newLevelNo]=new TileMap();
-					Tilemaps[newLevelNo].thisLevelNo=newLevelNo;
+					Tilemaps[newLevelNo]=new TileMap(newLevelNo);
 					
 					if (UWEBase._RES!=UWEBase.GAME_SHOCK)
 					{
@@ -1908,6 +1907,11 @@ public class GameWorldController : UWEBase {
 																			break;
 																		}
 
+																case "CONTEXTUIENABLED":
+																		{
+																			WindowDetectUW.ContextUIEnabled = (entries[1]=="1");
+																			break;
+																		}
 																}	
 														}		
 												}

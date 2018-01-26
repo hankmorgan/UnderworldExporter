@@ -91,13 +91,9 @@ public class IngameEditor : GuiBase_Draggable {
 				if (GameWorldController.instance.LevelNo!=-1)
 				{
 						SwitchPanel(0);//Tilemap
-						if (_RES!=GAME_UW2)
-						{
-								UpdateFloorTexturesDropDown();
-								UpdateWallTexturesDropDown();
-								UpdateDoorTexturesGrid();	
-						}
-
+						UpdateFloorTexturesDropDown();
+						UpdateWallTexturesDropDown();
+						UpdateDoorTexturesGrid();
 						RefreshTileMap();
 						RefreshTileInfo();
 						UpdateNPCGoals();
@@ -153,23 +149,54 @@ public class IngameEditor : GuiBase_Draggable {
 			foreach (Transform child in FloorTextureMapDisplay.transform) {//Remove the texture maps loaded in the controls
 					GameObject.Destroy(child.gameObject);
 			}
-			for (int i=48; i<=57;i++ )//Uw1 floor texturemap size
-			{
-				int index= GameWorldController.instance.currentTileMap().texture_map[i];
-				string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-				Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
-				Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-				FloorTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));				
-				CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,FloorTextureMapDisplay.transform,TextureMapButton.TextureTypeFloor);
-			}
 
-			for (int index=210; index<=261;index++)
-			{				
-				string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-				Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
-				Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-				FloorTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
-			}
+				switch(_RES)
+				{
+				case GAME_UW2:
+						for (int i=0; i<64;i++ )//UW2 entire texture map
+						{
+							int index= GameWorldController.instance.currentTileMap().texture_map[i];
+							string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+							Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+							Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+							FloorTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));				
+							CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,FloorTextureMapDisplay.transform,TextureMapButton.TextureTypeFloor);									
+						}
+						for (int index=0; index<256;index++) //All uw2 textures
+						{				
+								string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+								Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
+								Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+								FloorTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
+						}
+
+						FloorTextureMapDisplay.constraintCount=20;
+						FloorTextureMapDisplay.spacing= new Vector2(-18f,-20f);
+						break;
+
+				default:
+					{
+						for (int i=48; i<=57;i++ )//Uw1 floor texturemap size
+						{
+							int index= GameWorldController.instance.currentTileMap().texture_map[i];
+							string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+							Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+							Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+							FloorTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));				
+							CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,FloorTextureMapDisplay.transform,TextureMapButton.TextureTypeFloor);
+						}
+
+						for (int index=210; index<=261;index++) //All floor textures
+						{				
+							string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+							Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
+							Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+							FloorTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
+						}
+						break;
+					}
+				}
+
 
 			FloorTextureSelect.RefreshShownValue();
 			FloorTextureMapSelect.RefreshShownValue();
@@ -183,22 +210,54 @@ public class IngameEditor : GuiBase_Draggable {
 				foreach (Transform child in WallTextureMapDisplay.transform) {//Remove the texture maps loaded in the controls
 						GameObject.Destroy(child.gameObject);
 				}
-				for (int i=0; i<=47;i++ )//Uw1 wall texturemap size
+				switch(_RES)
 				{
-					int index= GameWorldController.instance.currentTileMap().texture_map[i];
-					string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-					Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
-					Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-					WallTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
-					CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,WallTextureMapDisplay.transform,TextureMapButton.TextureTypeWall);
+				case GAME_UW2:
+						{
+								for (int i=0; i<64;i++ )//Uw2 texturemap size
+								{
+										int index= GameWorldController.instance.currentTileMap().texture_map[i];
+										string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+										Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+										Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+										WallTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
+										CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,WallTextureMapDisplay.transform,TextureMapButton.TextureTypeWall);
+								}
+								for (int index=0; index<256;index++)
+								{				
+										string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+										Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
+										Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+										WallTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
+								}
+								WallTextureMapDisplay.constraintCount=20;
+								WallTextureMapDisplay.spacing= new Vector2(-18f,-20f);
+								break;
+						}
+				default:
+						{
+								for (int i=0; i<=47;i++ )//Uw1 wall texturemap size
+								{
+										int index= GameWorldController.instance.currentTileMap().texture_map[i];
+										string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+										Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);
+										Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+										WallTextureSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));
+										CreateTextureMapButton(GameWorldController.instance.texLoader.LoadImageAt(index),i,index,WallTextureMapDisplay.transform,TextureMapButton.TextureTypeWall);
+								}
+								for (int index=0; index<210;index++)
+								{				
+										string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
+										Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
+										Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
+										WallTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
+								}
+								break;
+						}
+
 				}
-				for (int index=0; index<210;index++)
-				{				
-					string itemtext=index.ToString() +  " " + StringController.instance.GetTextureName(index);
-					Texture2D tex =GameWorldController.instance.texLoader.LoadImageAt(index);	
-					Sprite sprite = Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f) );//THis does not work!!!
-					WallTextureMapSelect.options.Add(new Dropdown.OptionData(itemtext,sprite));					
-				}
+
+
 
 				WallTextureSelect.RefreshShownValue();
 				WallTextureMapSelect.RefreshShownValue();
@@ -211,15 +270,39 @@ public class IngameEditor : GuiBase_Draggable {
 			foreach (Transform child in DoorTextureMapDisplay.transform) {//Remove the texture maps loaded in the controls
 					GameObject.Destroy(child.gameObject);
 			}
-			for (int i=58; i<64;i++ )//Uw1 door textures
-			{		
-				int index= GameWorldController.instance.currentTileMap().texture_map[i];
-				CreateTextureMapButton ( GameWorldController.instance.MaterialDoors[index].mainTexture,i, index, DoorTextureMapDisplay.transform,TextureMapButton.TextureTypeDoor);				
-			}	
-			for (int i=0; i<=GameWorldController.instance.MaterialDoors.GetUpperBound(0);i++)
-			{
-				DoorTextureMapSelect.options.Add(new Dropdown.OptionData("Door_" + i.ToString("D2")));
-			}
+				switch(_RES)
+				{
+
+				case GAME_UW2:
+						{
+							for (int i=64; i<70;i++ )//Uw2 door textures
+							{		
+									int index= GameWorldController.instance.currentTileMap().texture_map[i];
+									CreateTextureMapButton ( GameWorldController.instance.MaterialDoors[index].mainTexture,i, index, DoorTextureMapDisplay.transform,TextureMapButton.TextureTypeDoor);				
+							}	
+							for (int i=0; i<=GameWorldController.instance.MaterialDoors.GetUpperBound(0);i++)
+							{
+									DoorTextureMapSelect.options.Add(new Dropdown.OptionData("Door_" + i.ToString("D2")));
+							}
+							break;
+						}
+
+					default:
+					{
+						for (int i=58; i<64;i++ )//Uw1 door textures
+						{		
+								int index= GameWorldController.instance.currentTileMap().texture_map[i];
+								CreateTextureMapButton ( GameWorldController.instance.MaterialDoors[index].mainTexture,i, index, DoorTextureMapDisplay.transform,TextureMapButton.TextureTypeDoor);				
+						}	
+						for (int i=0; i<=GameWorldController.instance.MaterialDoors.GetUpperBound(0);i++)
+						{
+								DoorTextureMapSelect.options.Add(new Dropdown.OptionData("Door_" + i.ToString("D2")));
+						}
+						break;
+					}
+
+				}
+
 			DoorTextureMapSelect.RefreshShownValue();
 		}
 
@@ -246,11 +329,8 @@ public class IngameEditor : GuiBase_Draggable {
 
 								RefreshTileMap();
 								RefreshTileInfo();
-								if (_RES!=GAME_UW2)
-								{
-										UpdateFloorTexturesDropDown();
-										UpdateWallTexturesDropDown();		
-								}
+								UpdateFloorTexturesDropDown();		
+								UpdateWallTexturesDropDown();	
 
 								UpdateObjectsDropDown();	
 						}

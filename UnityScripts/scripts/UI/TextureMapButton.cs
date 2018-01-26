@@ -35,7 +35,15 @@ public class TextureMapButton : GuiBase {
 			IngameEditor.instance.WallTextureMapSelect.gameObject.SetActive(false);
 			IngameEditor.instance.DoorTextureMapSelect.gameObject.SetActive(false);
 			IngameEditor.instance.FloorTextureMapSelect.gameObject.SetActive(true);
-			IngameEditor.instance.FloorTextureMapSelect.value=TextureIndex-210;			
+			if (_RES == GAME_UW2)
+			{
+				IngameEditor.instance.FloorTextureMapSelect.value=TextureIndex;			
+			}
+			else
+			{
+				IngameEditor.instance.FloorTextureMapSelect.value=TextureIndex-210;								
+			}
+			
 			break;
 
 		case TextureTypeWall:						
