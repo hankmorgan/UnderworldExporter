@@ -921,21 +921,21 @@ public class ObjectInteraction : UWEBase {
 			return SpriteController;
 		}
 
+
 		/// <summary>
-		/// Creates an Object Interaction
+		/// Creates the object interaction.
 		/// </summary>
 		/// <returns>The object interaction.</returns>
 		/// <param name="myObj">My object.</param>
 		/// <param name="DimX">Dim x.</param>
 		/// <param name="DimY">Dim y.</param>
 		/// <param name="DimZ">Dim z.</param>
-		/// <param name="CenterY">Center y.</param>
-		/// <param name="WorldString">World string.</param>
-		/// <param name="InventoryString">Inventory string.</param>
-		/// <param name="EquipString">Equip string.</param>
+		/// <param name="Worldindex">Worldindex.</param>
+		/// <param name="InventoryIndex">Inventory index.</param>
+		/// <param name="EquipIndex">Equip index.</param>
 		/// <param name="ItemType">Item type.</param>
 		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">link.</param>
+		/// <param name="link">Link.</param>
 		/// <param name="Quality">Quality.</param>
 		/// <param name="Owner">Owner.</param>
 		/// <param name="isMoveable">Is moveable.</param>
@@ -943,73 +943,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="isAnimated">Is animated.</param>
 		/// <param name="useSprite">Use sprite.</param>
 		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted()">Is enchanted.</param>
-		/// <param name="flags">Flags.</param>
-		/// <param name="inUseFlag">In use flag.</param>
-		/// <param name="ChildName">Child name.</param>
-	/*	public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
-		{
-			GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
-
-			newObj.transform.parent=myObj.transform;
-			newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
-			return CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldIndex,InventoryIndex,EquipIndex,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-		}*/
-
-		/// <summary>
-		/// Creates an Object Interaction
-		/// </summary>
-		/// <returns>The object interaction.</returns>
-		/// <param name="myObj">My object.</param>
-		/// <param name="DimX">Dim x.</param>
-		/// <param name="DimY">Dim y.</param>
-		/// <param name="DimZ">Dim z.</param>
-		/// <param name="CenterY">Center y.</param>
-		/// <param name="WorldString">World string.</param>
-		/// <param name="InventoryString">Inventory string.</param>
-		/// <param name="EquipString">Equip string.</param>
-		/// <param name="ItemType">Item type.</param>
-		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">link.</param>
-		/// <param name="Quality">Quality.</param>
-		/// <param name="Owner">Owner.</param>
-		/// <param name="isMoveable">Is moveable.</param>
-		/// <param name="isUsable">Is usable.</param>
-		/// <param name="isAnimated">Is animated.</param>
-		/// <param name="useSprite">Use sprite.</param>
-		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted()">Is enchanted.</param>
-		/// <param name="flags">Flags.</param>
-		/// <param name="inUseFlag">In use flag.</param>
-		//private static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, int WorldIndex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
-		//{
-		//	return CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldIndex,InventoryIndex,EquipIndex,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-	//	}
-
-		/// <summary>
-		/// Creates an Object Interaction
-		/// </summary>
-		/// <returns>The object interaction.</returns>
-		/// <param name="myObj">My object.</param>
-		/// <param name="parentObj">Parent object.</param>
-		/// <param name="DimX">Dim x.</param>
-		/// <param name="DimY">Dim y.</param>
-		/// <param name="DimZ">Dim z.</param>
-		/// <param name="CenterY">Center y.</param>
-		/// <param name="WorldString">World string.</param>
-		/// <param name="InventoryString">Inventory string.</param>
-		/// <param name="EquipString">Equip string.</param>
-		/// <param name="ItemType">Item type.</param>
-		/// <param name="ItemId">Item identifier.</param>
-		/// <param name="link">link.</param>
-		/// <param name="Quality">Quality.</param>
-		/// <param name="Owner">Owner.</param>
-		/// <param name="isMoveable">Is moveable.</param>
-		/// <param name="isUsable">Is usable.</param>
-		/// <param name="isAnimated">Is animated.</param>
-		/// <param name="useSprite">Use sprite.</param>
-		/// <param name="isQuant">Is quant.</param>
-		/// <param name="isEnchanted()">Is enchanted.</param>
+		/// <param name="isEnchanted">Is enchanted.</param>
 		/// <param name="flags">Flags.</param>
 		/// <param name="inUseFlag">In use flag.</param>
 		private static ObjectInteraction CreateObjectInteraction(GameObject myObj, float DimX,float DimY,float DimZ, int Worldindex, int InventoryIndex, int EquipIndex, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)

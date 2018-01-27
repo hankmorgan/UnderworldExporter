@@ -98,6 +98,9 @@ public class CommonObjectDatLoader : Loader {
 				}
 
 
+				//Fix some bugs caused by incorrect data in object settings
+				properties[302].FlagCanBePickedUp=0;//fountains
+
 		}
 
 }

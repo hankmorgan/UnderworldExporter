@@ -31,7 +31,7 @@ public class ObjectMasters {
 		default:
 			Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_settings.txt");
 			break;
-		}			
+		}	
 	}
 
 	private bool Load(string fileName)

@@ -214,7 +214,7 @@ public class Shrine : Model3D {
 			playerSkills.AdvanceSkill(Skills.SkillSwimming,SkillPointsToAdd+ Skills.getSkillAttributeBonus(Skills.SkillSwimming));
 			answer="Swimming";break;
 		case Mantra_AMO ://Sword 
-			playerSkills.AdvanceSkill(Skills.SkillAcrobat,SkillPointsToAdd+ Skills.getSkillAttributeBonus(Skills.SkillSword));
+			playerSkills.AdvanceSkill(Skills.SkillSword,SkillPointsToAdd+ Skills.getSkillAttributeBonus(Skills.SkillSword));
 			answer="Sword";break;
 		case Mantra_SAHF ://Track 
 			playerSkills.AdvanceSkill(Skills.SkillTrack,SkillPointsToAdd+ Skills.getSkillAttributeBonus(Skills.SkillTrack));

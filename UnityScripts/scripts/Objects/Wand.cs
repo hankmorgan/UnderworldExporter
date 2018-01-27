@@ -20,7 +20,7 @@ public class Wand : enchantment_base {
 			{
 				if(objInt().PickedUp)		
 				{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
-					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256);
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,513);
 					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
 					objInt().link = newobjt.index;
 				}	
@@ -152,7 +152,8 @@ public class Wand : enchantment_base {
 	/// </summary>
 	public override void InventoryEventOnLevelEnter ()
 		{
-				if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
+		//objInt().isquant=0;
+		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		base.InventoryEventOnLevelEnter ();
 			//Create a spell trap and store it on the map. This occurs before the list is rendered.
 		ObjectLoaderInfo newobj= ObjectLoader.newObject(390,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
@@ -166,6 +167,7 @@ public class Wand : enchantment_base {
 		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		//Store the spell properties so I can create it in the next level. 
 		base.InventoryEventOnLevelExit ();
+		//objInt().isquant=0;
 		GameObject linked = ObjectLoader.getGameObjectAt(objInt().link);
 			if (linked!=null)
 			{

@@ -40,7 +40,7 @@ public class GuiBase_Draggable : GuiBase {
 		/// <param name="evnt">Evnt.</param>
 	public void OnDrag(BaseEventData evnt)
 	{
-		if (UWHUD.instance.window.FullScreen==true)
+		if ((UWHUD.instance.window.FullScreen==true) && (ConversationVM.InConversation==false))
 		{					
 			PointerEventData pntr = (PointerEventData)evnt;
 			for (int i=0; i<=rectT.GetUpperBound(0);i++)
