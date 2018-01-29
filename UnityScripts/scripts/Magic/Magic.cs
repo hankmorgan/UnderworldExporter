@@ -1330,25 +1330,10 @@ public class Magic : UWEBase {
 				float dropRange=1.2f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the spellcast
-
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,0,256);
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,1,256);
+						newobjt.is_quant=1;
 						newobjt.InUseFlag=1;
 						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
-
-						
-						/*
-						int ObjectNo = 176 + Random.Range(0,7);
-						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
-						myObj.layer=LayerMask.NameToLayer("UWObjects");
-						myObj.transform.position = ray.GetPoint(dropRange);
-						myObj.transform.parent=GameWorldController.instance.LevelMarker();
-						GameWorldController.MoveToWorld(myObj);
-						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 182+ ObjectNo, 182+ObjectNo, 182+ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-						Food fd = myObj.AddComponent<Food>();
-						fd.Nutrition=5;//TODO:determine values to use here.
-						GameWorldController.UnFreezeMovement(myObj);
-						*/
 				}
 		}
 
@@ -4409,7 +4394,16 @@ public class Magic : UWEBase {
 						break;
 
 				default:
-						Debug.Log ("Unimplemented effect Id is " + EffectID);
+						{
+							if (target!=null)
+							{
+									Debug.Log ("Unimplemented effect Id is " + EffectID + " target is " + target.name);
+							}
+							else
+							{
+									Debug.Log ("Unimplemented effect Id is " + EffectID);	
+							}
+						}
 						SpellResultType=SpellResultNone;
 						break;
 

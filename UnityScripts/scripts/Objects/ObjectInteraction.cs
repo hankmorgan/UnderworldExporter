@@ -207,7 +207,7 @@ public class ObjectInteraction : UWEBase {
 
 		//UW Props
 
-		//public int index;	//it's own index in case I need to find myself.
+		[Header("UW Properties")]
 		public int item_id;	//0-8
 		public short flags;	//9-12
 		public short enchantment;	//12
@@ -229,6 +229,8 @@ public class ObjectInteraction : UWEBase {
 		public int link	;	//also quantity
 
 
+
+		[Header("Display Settings")]
 		/// <summary>
 		/// The sprite index number to use when displaying this object in the game world.
 		/// </summary>
@@ -244,11 +246,13 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		public bool ignoreSprite;//For button handlers that do their own sprite work.
 
-		/// <summary>
-		/// Indicates if the object can be picked up.
-		/// </summary>
-		//public bool CanBePickedUp;
+		//Display controls
+		private SpriteRenderer sr =null;
+		public bool isAnimated;
+		public bool animationStarted;
 
+
+		[Header("Interaction Options")]
 		/// <summary>
 		/// Indicates if the object can be used.
 		/// </summary>
@@ -263,33 +267,12 @@ public class ObjectInteraction : UWEBase {
 		/// The inventory slot that the object is in.
 		/// </summary>
 		public short inventorySlot=-1;
-
-		//UW specific info.
-		//public int index;
-
-		//public int Owner;	//Used for keys
-		//public int link;	//Also quantity
-		//public int Quality;
-		//public bool isQuant;
-		//public bool isEnchanted();
-		//public bool isIdentified;
-
-		//Display controls
-		//public static TextureController tc;
-		private SpriteRenderer sr =null;
-		public bool isAnimated;
-		public bool animationStarted;
-
 		public short InUseFlag;
-		//public short levelno;
+
+		[Header("Positioning")]
 		public short tileX;	//Position of the object on the tilemap
 		public short tileY;
-		//public long address;
-		//public short AlreadyRendered;
-		//public short DeathWatched;
 
-		//public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
-		//(gravestone, picture, lever, switch, shelf, bridge, ..)
 
 		public enum IdentificationFlags
 		{
@@ -961,7 +944,7 @@ public class ObjectInteraction : UWEBase {
 				//add a mesh for interaction
 				box= myObj.AddComponent<BoxCollider>();
 				box.size = new Vector3(0.2f,0.2f,0.2f);
-				box.center= new Vector3(0.0f,0.1f,0.0f);
+				box.center= new Vector3(0.0f,0.08f,0.0f);
 				if (isMoveable==1)
 				{
 					box.material= Resources.Load<PhysicMaterial>("Materials/objects_bounce");
@@ -1096,7 +1079,9 @@ public class ObjectInteraction : UWEBase {
 		public static void Merge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
 		{
 			mergingInto.link += mergingFrom.link;
+			mergingInto.isquant=1;
 			mergingInto.GetComponent<object_base>().MergeEvent();
+			mergingFrom.objectloaderinfo.InUseFlag=0;
 			Destroy(mergingFrom.gameObject);
 		}
 
@@ -1239,7 +1224,7 @@ public class ObjectInteraction : UWEBase {
 				case 125: //unknown
 				case 126: //unknown
 						cap.isTrigger=false;
-						cap.center = new Vector3(0.0f, 0.5f, 0.0f);
+						cap.center = new Vector3(0.0f, 0.55f, 0.0f);
 						cap.radius=0.3f;
 						cap.height=1.0f;
 						cap.skinWidth=0.02f;
@@ -1407,14 +1392,22 @@ public class ObjectInteraction : UWEBase {
 		/// </summary>
 		public void UpdatePosition()
 		{
-				if (objectloaderinfo==null){return;}
+				if (objectloaderinfo==null)
+				{
+						Debug.Log(this.name+" has no objectloaderinfo");
+						return;
+				}
 			if (ObjectLoader.isStatic(objectloaderinfo))	
 			{
 					return;
 			}
+			tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
+			tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
+
 			//float dist =Vector3.Distance(this.transform.position,startPos);
-			if ((Vector3.Distance(this.transform.position,startPos)<=0.2f) && (tileX!=TileMap.ObjectStorageTile))
-				{//No movement or not on the map Just update heading.
+			if ((Vector3.Distance(this.transform.position,startPos)>0.2f) && (tileX!=TileMap.ObjectStorageTile))
+			//if ((tileX!=TileMap.ObjectStorageTile))
+			/*	{//No movement or not on the map Just update heading.
 					if (
 								objectloaderinfo.index>=256				
 						)						
@@ -1422,12 +1415,12 @@ public class ObjectInteraction : UWEBase {
 						heading= (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y/45f);
 						}					
 				}
-			else
+			else*/
 			{
 				float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
 				//Updates the tilex & tileY,
-				tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
-				tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
+				//tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
+				//tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
 				if ((tileX>TileMap.TileMapSizeX) | (tileX<0))
 				{//Object is off map.
 					tileX=TileMap.ObjectStorageTile;
@@ -1444,6 +1437,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 					default:
 						zpos =(short)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+						zpos=(short)Mathf.Min(Mathf.Ceil(zpos), 128f);
 						break;
 					}
 				

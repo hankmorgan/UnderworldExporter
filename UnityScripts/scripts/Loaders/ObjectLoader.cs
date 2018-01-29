@@ -1556,8 +1556,6 @@ public class ObjectLoader : Loader {
 
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
-
-
 				currObjList.objInfo[i].index=i;
 				bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
 				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;

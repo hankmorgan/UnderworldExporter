@@ -8,14 +8,14 @@ public class Shield : Equipment {
 
 	public override int GetActualSpellIndex ()
 	{
-		if (_RES==GAME_UW2)
-		{
+		//if (_RES==GAME_UW2)
+		//{
 			return objInt().link-240;
-		}
-		else
-		{
-			return objInt().link-512;				
-		}		
+		//}
+		//else
+		//{
+		//	return objInt().link-512;				
+		//}		
 	}
 
 

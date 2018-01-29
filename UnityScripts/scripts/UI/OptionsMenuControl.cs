@@ -208,6 +208,10 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			UW2Imgs[62]  = ArtLoader.InsertImage(GameWorldController.instance.grOptbtns.LoadImageAt(9), buttonbgart_80x16, 0, -2 );//detail cancel on
 
 		}
+		else
+		{
+			this.GetComponent<RawImage>().texture = GameWorldController.instance.grOptbtns.LoadImageAt(1);
+		}
 
 
 

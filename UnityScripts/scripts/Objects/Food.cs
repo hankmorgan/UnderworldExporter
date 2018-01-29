@@ -4,7 +4,20 @@ using System.Collections;
 public class Food : object_base {
 	/*Food items*/
 
-	//public int Nutrition; //The nutritional value of this food.
+	protected override void Start ()
+	{
+		base.Start();
+		//Fix to repair invalid food properties.
+		if  ((objInt().isquant==0) && (objInt().link<=1))
+		{
+			if ((objInt().item_id>=176) && (objInt().item_id<=192))
+			{
+					//Debug.Log("Fixing food item " + this.name);
+					objInt().isquant=1;
+					objInt().link=1;	
+			}
+		}
+	}
 
 		/// <summary>
 		/// Nutrition provided by this item of food

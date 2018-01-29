@@ -225,15 +225,6 @@ public class NPC : MobileObject {
 		/// Dumps out their inventory.
 		void OnDeath()
 		{
-				//If the NPC has a conversation module check it to see if it has any special onDeath code. Eg Tybal, the Gazer on lvl2 and the Golem on Level 6
-				//Conversation cnv = this.GetComponent<Conversation>();
-				//if (cnv!=null)
-				//{
-				//	if(cnv.OnDeath()==true)
-				//	{
-				//		return;
-				//	}			
-				//}
 				if (SpecialDeathCases())
 				{
 						return;
@@ -275,7 +266,7 @@ public class NPC : MobileObject {
 				//Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
 				//EarthGolem = 0x11 (Only used for the earth golem),
 				//Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
-				switch(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Remains)
+				switch(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Category)
 				{
 				case 0x0:
 				case 0x02:
@@ -302,6 +293,13 @@ public class NPC : MobileObject {
 		/// </summary>
 		public void SetupNPCInventory ()
 		{
+				if (_RES==GAME_UW1)
+				{
+						if (objInt().item_id==64)
+						{//Special case for rotworms.
+								return;
+						}
+				}
 				Container cnt = this.GetComponent<Container>();
 				if (cnt.CountItems () == 0) {
 						//Populate the container with a loot list
@@ -336,6 +334,12 @@ public class NPC : MobileObject {
 				{
 				case GAME_UW1:
 						{
+								if (objInt().item_id==64)
+								{//Drop a rotworm corpse
+										ObjectLoaderInfo newobjt= ObjectLoader.newObject(217,0,0,0,256);
+										ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,this.transform.position);
+										return false;	
+								}
 								switch (npc_whoami)
 								{
 								case 22: //The golem on level 6

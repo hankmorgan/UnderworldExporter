@@ -53,10 +53,10 @@ public class object_base : UWEBase {
 			ml=UWHUD.instance.MessageScroll;
 		}
 		CheckReferences();*/
-			//	if ( (objInt().link==1) && (objInt().isquant==0))
-				//{
-			//			Debug.Log(this.name + " link is 1");
-			//	}
+		//if ( (objInt().link==1) && (objInt().isquant==0))
+		//{
+		//	Debug.Log(this.name + " link is 1 when isquant is 0");
+		//}
 	}
 
 	/// <summary>

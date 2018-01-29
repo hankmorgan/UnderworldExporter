@@ -19,19 +19,24 @@ public class NPC_Animation : MonoBehaviour {
 		if (animationCounter>=frameRate)
 		{
 			animationCounter=0f;
-			if (critAnim.animIndices[AnimationIndex,AnimationPos]!=-1)
+			if (AnimationPos<=critAnim.animIndices.GetUpperBound(1))
 			{
-				output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos]];	
+				if (critAnim.animIndices[AnimationIndex,AnimationPos]!=-1)
+				{
+
+					output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos]];	
+					
+				}
 			}
 			AnimationPos++;
-			if (AnimationPos>critAnim.animIndices.GetUpperBound(1))
+			if ((AnimationPos>critAnim.animIndices.GetUpperBound(1)) && (ConstantAnim==false))
 			{
 				AnimationPos=0;
 			}
-			if ((critAnim.animIndices[AnimationIndex,AnimationPos] == -1) && (ConstantAnim==true))
-			{
-				AnimationPos=0;	
-			}
+			//if ((critAnim.animIndices[AnimationIndex,AnimationPos] == -1) && (ConstantAnim==true))
+			//{
+			//	AnimationPos=0;	
+			//}
 		}	
 
 	}

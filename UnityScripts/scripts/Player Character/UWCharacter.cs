@@ -781,7 +781,7 @@ public class UWCharacter : Character {
 		{
 			float fallspeedAdjusted = fallSpeed-((float)PlayerSkills.GetSkill(Skills.SkillAcrobat) * 0.13f);
 			//Do stuff with acrobat here. In the mean time a flat skill check.
-			if ( fallspeedAdjusted>=3.5f)
+			if ( fallspeedAdjusted>=5f)
 			{
 				//Debug.Log("Fallspeed = " + fallSpeed + " adjusted down to " + fallspeedAdjusted) ;
 				ApplyDamage(Random.Range (1,5));//TODO:As a function of the acrobat skill versus fall.

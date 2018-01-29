@@ -15,7 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 
 public class GameWorldController : UWEBase {
-		
+
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
 		public enum UW1_LevelNames
@@ -80,23 +80,55 @@ public class GameWorldController : UWEBase {
 
 
 
-	public bool bGenNavMeshes=true;
-
-
+		[Header("Controls")]
 		public MouseLook MouseX;
 		public MouseLook MouseY;
 
 
+		[Header("World Options")]
+
+		/// <summary>
+		/// Generate Nav meshes or not
+		/// </summary>
+		public bool bGenNavMeshes=true;
+
 		/// <summary>
 		/// Enables texture animation effects
 		/// </summary>
-	public bool EnableTextureAnimation;
+		public bool EnableTextureAnimation;
+
+		/// <summary>
+		/// The grey scale shader. Reference to allow loading of a hidden shader.
+		/// </summary>
+		public Shader greyScale;
+
+		/// <summary>
+		/// The vortex effect shader.  Reference to allow loading of a hidden shader.
+		/// </summary>
+		public Shader vortex;
+
+		/// <summary>
+		/// Is the game at the main menu or should it start at the mainmenu.
+		/// </summary>
+		public bool AtMainMenu;
 
 
 		/// <summary>
+		/// Enable timer triggers
+		/// </summary>
+		public bool EnableTimerTriggers=true;
+
+		/// <summary>
+		/// The timer execution rate.
+		/// </summary>
+		public float TimerRate = 1f;
+
+
+		[Header("Parent Objects")]
+		/// <summary>
 		/// The level model parent object
 		/// </summary>
-	public GameObject LevelModel;
+		public GameObject LevelModel;
 
 		public GameObject TNovaLevelModel;
 
@@ -104,12 +136,24 @@ public class GameWorldController : UWEBase {
 		/// The level model parent object
 		/// </summary>
 		public GameObject SceneryModel;
-	
+
+
+		/// <summary>
+		/// Gameobject to load the objects at
+		/// </summary>
+		public GameObject _ObjectMarker;
+
 		/// <summary>
 		/// The instance of this class
 		/// </summary>
-	public static GameWorldController instance;
+		public static GameWorldController instance;
 
+		/// <summary>
+		/// The game object that picked up items are parented to.
+		/// </summary>
+		public GameObject InventoryMarker;
+
+		[Header("Level")]
 		/// <summary>
 		/// What level number we are currently on.
 		/// </summary>	
@@ -129,276 +173,89 @@ public class GameWorldController : UWEBase {
 
 
 
-	/// <summary>
-	/// Array of cycled game palettes for animation effects.
-	/// </summary>
-	public Texture2D[] paletteArray= new Texture2D[8];
 
-	/// <summary>
-	/// The index of the palette currently in use
-	/// </summary>
-	public int paletteIndex=0;
+		[Header("Palettes")]
+		/// <summary>
+		/// Array of cycled game palettes for animation effects.
+		/// </summary>
+		public Texture2D[] paletteArray= new Texture2D[8];
 
-	/// <summary>
-	/// The palette index when going in reverse.
-	/// </summary>
-	public int paletteIndexReverse=0;
+		/// <summary>
+		/// The index of the palette currently in use
+		/// </summary>
+		public int paletteIndex=0;
 
+		/// <summary>
+		/// The palette index when going in reverse.
+		/// </summary>
+		public int paletteIndexReverse=0;
 
-	/// <summary>
-	/// The tilemap class for the game
-	/// </summary>
-	public TileMap[] Tilemaps = new TileMap[9];
-
-
-	/// <summary>
-	/// The auto maps.
-	/// </summary>
-	public AutoMap[] AutoMaps = new AutoMap[9];
-	
-	/// <summary>
-	/// The player character.
-	/// </summary>
-	/*[SerializeField]
-	private UWCharacter _playerUW;
-	public UWCharacter playerUW {
-		get { return _playerUW; }
-		set { _playerUW=value; }
-		}
-*/
-
-	/// <summary>
-	/// The music controller for the game
-	/// </summary>
-	private MusicController mus;
+		/// <summary>
+		/// Shared palettes for artwork
+		/// </summary>
+		public PaletteLoader palLoader;
 
 
-	/// <summary>
-	/// The game object that picked up items are parented to.
-	/// </summary>
-	public GameObject InventoryMarker;
-
-	/// <summary>
-	/// The game name.
-	/// </summary>
-	/// Value is passed to UWEBase and used in all resource file loads
-	//public string game;
-
-	//public string UI_Name;
-	/// <summary>
-	/// The object master class for storing and reading object properties in an external file
-	/// </summary>
-	public ObjectMasters objectMaster;
-
-	/// <summary>
-	/// The critter properties from objects.dat
-	/// </summary>
-	public Critters critterData;
-
-	/// <summary>
-	/// Common Object Properties
-	/// </summary>
-	//public CommonObjProps commobj;
-
-	// <summary>
-	// Weapon properties.
-	// </summary>
-//	public WeaponProps weaponprops;
-
-	/// <summary>
-	/// The grey scale shader. Reference to allow loading of a hidden shader.
-	/// </summary>
-	public Shader greyScale;
-
-	/// <summary>
-	/// The vortex effect shader.  Reference to allow loading of a hidden shader.
-	/// </summary>
-	public Shader vortex;
-
-	/// <summary>
-	/// Is the game at the main menu or should it start at the mainmenu.
-	/// </summary>
-	public bool AtMainMenu;
+		[Header("LevelMaps")]
+		/// <summary>
+		/// The tilemap class for the game
+		/// </summary>
+		public TileMap[] Tilemaps = new TileMap[9];
 
 
-
-	public string Lev_Ark_File_Selected = "Data\\Lev.ark";
-	public string SCD_Ark_File_Selected = "Data\\SCD.ark";
-
-	/// <summary>
-	/// The graves file for associating grave textures with grave objects
-	/// </summary>
-	//public string Graves_File;	
-	
-	/// <summary>
-	/// The material master list for matching the texture list to materials.
-	/// </summary>
-	public Material[] MaterialMasterList=new Material[260];
-
-	public Material[] SpecialMaterials=new Material[1];
-
-	/// <summary>
-	/// The materials for doors  (doors.gr)
-	/// </summary>
-	public Material[] MaterialDoors=new Material[13];
-
-	/// <summary>
-	/// The materials for tmobj + models (tmobj.gr)
-	/// </summary>
-	public Material[] MaterialObj=new Material[54];
-
-
-	/// <summary>
-	/// Gameobject to load the objects at
-	/// </summary>
-	public GameObject _ObjectMarker;
+		/// <summary>
+		/// The auto maps.
+		/// </summary>
+		public AutoMap[] AutoMaps = new AutoMap[9];
 
 		/// <summary>
 		/// The object lists for each level.
 		/// </summary>
-	public ObjectLoader[] objectList= new ObjectLoader[9];
+		public ObjectLoader[] objectList= new ObjectLoader[9];
 
-	public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
-	public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
-
-	/// <summary>
-	/// Shared palettes for artwork
-	/// </summary>
-	public PaletteLoader palLoader;
-
-	/// <summary>
-	/// The bytloader for bty files
-	/// </summary>
-	public BytLoader bytloader;
-		/// <summary>
-		/// The tex loader for textures
-		/// </summary>
-	public TextureLoader texLoader;
-		/// <summary>
-		/// The spell icons gr loader
-		/// </summary>
-	public GRLoader SpellIcons;
-		/// <summary>
-		/// The object art gr loader
-		/// </summary>
-	public GRLoader ObjectArt;
 
 		/// <summary>
-		/// The door art.
+		/// The music controller for the game
 		/// </summary>
-	public GRLoader DoorArt;
+		private MusicController mus;
 
-	/// <summary>
-	/// The tm object art.
-	/// </summary>
-	public GRLoader TmObjArt;
 
-	/// <summary>
-	/// The tm flat art.
-	/// </summary>
-	public GRLoader TmFlatArt;
 
-	/// <summary>
-	/// Small animations art.
-	/// </summary>
-	public GRLoader TmAnimo;
+		[Header("Property Lists")]
+		/// <summary>
+		/// The object master class for storing and reading object properties in an external file
+		/// </summary>
+		public ObjectMasters objectMaster;
 
-	/// <summary>
-	/// The lev ark file data.
-	/// </summary>
-	private char[] lev_ark_file_data;
+		/// <summary>
+		/// The critter properties from objects.dat
+		/// </summary>
+		public Critters critterData;
 
-	/// <summary>
-	/// The female armor
-	/// </summary>
-	public GRLoader armor_f;
 
-	/// <summary>
-	/// The male armor.
-	/// </summary>
-	public GRLoader armor_m;
-
-	/// <summary>
-	/// The cursors art
-	/// </summary>
-	public GRLoader grCursors;
-
-	/// <summary>
-	/// The health & mana flasks.
-	/// </summary>
-	public GRLoader grFlasks;
-
-	/// <summary>
-	/// The option menus
-	/// </summary>
-	public GRLoader grOptbtns;
-
-	/// <summary>
-	/// The Compass 
-	/// </summary>
-	public GRLoader grCompass;
-
-	/// <summary>
-	/// Cutscene data
-	/// </summary>
-	public CutsLoader cutsLoader;
-
-	public CritLoader[] critsLoader= new CritLoader[64];
-
-	/// <summary>
-	/// The object dat file
-	/// </summary>
-	public ObjectDatLoader objDat;
+		/// <summary>
+		/// The object dat file
+		/// </summary>
+		public ObjectDatLoader objDat;
 
 		/// <summary>
 		/// The common object properties for uw
 		/// </summary>
-	public CommonObjectDatLoader commonObject;
+		public CommonObjectDatLoader commonObject;
 
-	public ObjectPropLoader ShockObjProp;
+		public ObjectPropLoader ShockObjProp;
 
 		/// <summary>
 		/// The terrain data from terrain.dat
 		/// </summary>
-	public TerrainDatLoader terrainData;
+		public TerrainDatLoader terrainData;
 
 
-	/// <summary>
-	/// The weapon animation frames.
-	/// </summary>
-	public WeaponAnimation weaps;
-	//public WeaponAnimationPlayer WeaponAnim;
-	public WeaponsLoader weapongr;
 
-	public int difficulty=1; //1=standard, 0=easy.
 
-	public static bool LoadingObjects=false;
-
-	public struct bablGlobal
-	{
-		public int ConversationNo;
-		public int Size;
-		public int[] Globals;
-	};
-
-	public bablGlobal[] bGlobals;
-	public ConversationVM convVM;
-
-	public static bool WorldReRenderPending=false;
-	public static bool ObjectReRenderPending=false;
-	public static bool FullReRender=false;
-
-	public bool EnableTimerTriggers=true;
-	public float TimerRate = 1f;
-
-	public KeyBindings keybinds;
-
-	public event_processor events;
-
-	private int startX=-1; private int startY=-1;
-
-	public Material modelMaterial;
-
+		[Header("Paths")]
+		public string Lev_Ark_File_Selected = "Data\\Lev.ark";
+		public string SCD_Ark_File_Selected = "Data\\SCD.ark";
 		//Game paths
 		public string path_uw0;
 		public string path_uw1;
@@ -406,15 +263,153 @@ public class GameWorldController : UWEBase {
 		public string path_shock;
 		public string path_tnova;
 
-	
-	void LoadPath(string _RES)
-	{
-				//return;
-		//string fileName = Application.dataPath + "//..//" + game + "_path.txt";
-		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		string path="";
+		[Header("Material Lists")]
+		/// <summary>
+		/// The material master list for matching the texture list to materials.
+		/// </summary>
+		public Material[] MaterialMasterList=new Material[260];
 
-		 //fileReader.ReadLine().TrimEnd();
+		public Material[] SpecialMaterials=new Material[1];
+
+		/// <summary>
+		/// The materials for doors  (doors.gr)
+		/// </summary>
+		public Material[] MaterialDoors=new Material[13];
+
+		/// <summary>
+		/// The materials for tmobj + models (tmobj.gr)
+		/// </summary>
+		public Material[] MaterialObj=new Material[54];
+
+		/// <summary>
+		/// The default model material.
+		/// </summary>
+		public Material modelMaterial;
+
+
+		[Header("Nav Meshes")]
+		public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
+		public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
+
+
+		[Header("Art Loaders")]
+		/// <summary>
+		/// The bytloader for bty files
+		/// </summary>
+		public BytLoader bytloader;
+		/// <summary>
+		/// The tex loader for textures
+		/// </summary>
+		public TextureLoader texLoader;
+		/// <summary>
+		/// The spell icons gr loader
+		/// </summary>
+		public GRLoader SpellIcons;
+		/// <summary>
+		/// The object art gr loader
+		/// </summary>
+		public GRLoader ObjectArt;
+
+		/// <summary>
+		/// The door art.
+		/// </summary>
+		public GRLoader DoorArt;
+
+		/// <summary>
+		/// The tm object art.
+		/// </summary>
+		public GRLoader TmObjArt;
+
+		/// <summary>
+		/// The tm flat art.
+		/// </summary>
+		public GRLoader TmFlatArt;
+
+		/// <summary>
+		/// Small animations art.
+		/// </summary>
+		public GRLoader TmAnimo;
+
+		/// <summary>
+		/// The lev ark file data.
+		/// </summary>
+		private char[] lev_ark_file_data;
+
+		/// <summary>
+		/// The female armor
+		/// </summary>
+		public GRLoader armor_f;
+
+		/// <summary>
+		/// The male armor.
+		/// </summary>
+		public GRLoader armor_m;
+
+		/// <summary>
+		/// The cursors art
+		/// </summary>
+		public GRLoader grCursors;
+
+		/// <summary>
+		/// The health & mana flasks.
+		/// </summary>
+		public GRLoader grFlasks;
+
+		/// <summary>
+		/// The option menus
+		/// </summary>
+		public GRLoader grOptbtns;
+
+		/// <summary>
+		/// The Compass 
+		/// </summary>
+		public GRLoader grCompass;
+
+		/// <summary>
+		/// Cutscene data
+		/// </summary>
+		public CutsLoader cutsLoader;
+
+		public CritLoader[] critsLoader= new CritLoader[64];
+
+		/// <summary>
+		/// The weapon animation frames.
+		/// </summary>
+		public WeaponAnimation weaps;
+		//public WeaponAnimationPlayer WeaponAnim;
+		public WeaponsLoader weapongr;
+
+		public int difficulty=1; //1=standard, 0=easy.
+
+		public static bool LoadingObjects=false;
+
+		public struct bablGlobal
+		{
+				public int ConversationNo;
+				public int Size;
+				public int[] Globals;
+		};
+
+		public bablGlobal[] bGlobals;
+		public ConversationVM convVM;
+
+		public static bool WorldReRenderPending=false;
+		public static bool ObjectReRenderPending=false;
+		public static bool FullReRender=false;
+
+
+
+		public KeyBindings keybinds;
+
+		public event_processor events;
+
+		private int startX=-1; private int startY=-1;
+
+
+		void LoadPath(string _RES)
+		{
+				string path="";
+
 				switch(_RES)
 				{
 				case GAME_UWDEMO: path=GameWorldController.instance.path_uw0;break;
@@ -425,50 +420,50 @@ public class GameWorldController : UWEBase {
 						break;
 				}
 
-		Loader.BasePath= path; 
-		if (Loader.BasePath.EndsWith("\\") !=true)
-		{
-			Loader.BasePath = Loader.BasePath + "\\";
+				Loader.BasePath= path; 
+				if (Loader.BasePath.EndsWith("\\") !=true)
+				{
+						Loader.BasePath = Loader.BasePath + "\\";
+				}
 		}
-	}
 
-	/// <summary>
-	/// Awake this instance.
-	/// </summary>
-	/// Should be the very first script to run 
-	void Awake()
-	{
-		instance=this;
-		LoadConfigFile();
-		//LoadPath();
-		return;
-	}
+		/// <summary>
+		/// Awake this instance.
+		/// </summary>
+		/// Should be the very first script to run 
+		void Awake()
+		{
+				instance=this;
+				LoadConfigFile();
+				//LoadPath();
+				return;
+		}
 
 
-	void Start () {
-				
-		instance=this;
-		AtMainMenu=true;
-		return;
+		void Start () {
 
-	}
+				instance=this;
+				AtMainMenu=true;
+				return;
+
+		}
 
 		void LateUpdate()
 		{
-			if (WorldReRenderPending)
+				if (WorldReRenderPending)
 				{						
-				if ((FullReRender) && (!EditorMode))
-				{
-				//	currentTileMap().CleanUp(_RES);				
-				}
-				TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,GameWorldController.instance.SceneryModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList(), !FullReRender);
-				if(ObjectReRenderPending)
-				{								
-					ObjectReRenderPending=false;
-					ObjectLoader.RenderObjectList(CurrentObjectList(),currentTileMap(),LevelMarker().gameObject);
-				}
-				WorldReRenderPending=false;
-				FullReRender=false;
+						if ((FullReRender) && (!EditorMode))
+						{
+								//	currentTileMap().CleanUp(_RES);				
+						}
+						TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel,GameWorldController.instance.SceneryModel,_RES,currentTileMap(),GameWorldController.instance.CurrentObjectList(), !FullReRender);
+						if(ObjectReRenderPending)
+						{								
+								ObjectReRenderPending=false;
+								ObjectLoader.RenderObjectList(CurrentObjectList(),currentTileMap(),LevelMarker().gameObject);
+						}
+						WorldReRenderPending=false;
+						FullReRender=false;
 				}
 		}
 
@@ -514,10 +509,8 @@ public class GameWorldController : UWEBase {
 
 
 						palLoader = new PaletteLoader("data\\pals.dat",-1);
-						//palLoader.Path=Loader.BasePath + "data\\pals.dat";
-						//palLoader.LoadPalettes();
-						//Create palette cycles and store them in the palette array
 
+						//Create palette cycles and store them in the palette array
 						PaletteLoader palCycler = new PaletteLoader("data\\pals.dat",-1);
 
 						for (int c=0; c<=27;c++)
@@ -533,7 +526,7 @@ public class GameWorldController : UWEBase {
 										Palette.cyclePalette(palCycler.Palettes[0], 16, 7);//Reverse direction.
 										break;
 								}
-							paletteArray[c] = Palette.toImage(palCycler.Palettes[0]);			
+								paletteArray[c] = Palette.toImage(palCycler.Palettes[0]);			
 						}
 
 
@@ -565,11 +558,11 @@ public class GameWorldController : UWEBase {
 						break;
 				case GAME_UW2:
 						{
-							if (GameWorldController.instance.startLevel==0)
-							{//Avatar's bedroom
-									GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
-							}
-							break;
+								if (GameWorldController.instance.startLevel==0)
+								{//Avatar's bedroom
+										GameWorldController.instance.StartPos=new Vector3(23.43f, 3.95f,58.29f)	;
+								}
+								break;
 						}	
 				case GAME_UWDEMO:
 						GameWorldController.instance.StartPos=new Vector3(39.06f, 3.96f,3f)	;break;
@@ -671,73 +664,73 @@ public class GameWorldController : UWEBase {
 		/// Gets the current level model.
 		/// </summary>
 		/// <returns>The current level model gameobject</returns>
-	public GameObject getCurrentLevelModel()
-	{
-		//return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
-		return LevelModel;
-	}
-
-	/// <summary>
-	/// Updates the global shader parameter for the colorpalette shaders at set intervals. To enable texture animation
-	/// </summary>
-	void UpdateAnimation()
-	{
-		Shader.SetGlobalTexture ("_ColorPaletteIn",paletteArray[paletteIndex]);
-
-		if (paletteIndex<paletteArray.GetUpperBound(0))
+		public GameObject getCurrentLevelModel()
 		{
-			paletteIndex++;
-		}
-		else
-		{
-			paletteIndex=0;
+				//return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
+				return LevelModel;
 		}
 
-		//In Reverse
-
-		Shader.SetGlobalTexture ("_ColorPaletteInReverse",paletteArray[paletteIndexReverse]);
-		
-		if (paletteIndexReverse>0)
+		/// <summary>
+		/// Updates the global shader parameter for the colorpalette shaders at set intervals. To enable texture animation
+		/// </summary>
+		void UpdateAnimation()
 		{
-			paletteIndexReverse--;
-		}
-		else
-		{
-			paletteIndexReverse=paletteArray.GetUpperBound(0);
-		}
-		return;
-	}
+				Shader.SetGlobalTexture ("_ColorPaletteIn",paletteArray[paletteIndex]);
 
-	/// <summary>
-	/// inds a door in the tile pointed to by the two coordinates.
-	/// </summary>
-	/// <returns>The door.</returns>
-	/// <param name="x">The x coordinate.</param>
-	/// <param name="y">The y coordinate.</param>
-	public static GameObject findDoor(int x, int y)
-	{
-		return GameObject.Find ("door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
-	}
+				if (paletteIndex<paletteArray.GetUpperBound(0))
+				{
+						paletteIndex++;
+				}
+				else
+				{
+						paletteIndex=0;
+				}
 
-	/// <summary>
-	/// Finds the tile or wall at the specified coordinates.
-	/// </summary>
-	/// <returns>The tile.</returns>
-	/// <param name="x">The x coordinate.</param>
-	/// <param name="y">The y coordinate.</param>
-	/// <param name="surface">Surface.</param>
-	public static GameObject FindTile(int x, int y, int surface)
-	{
-		string tileName = GetTileName (x,y,surface);
-		Transform found = instance.getCurrentLevelModel().transform.FindChild (tileName);
-		if (found!=null)
-		{
-			return found.gameObject;
+				//In Reverse
+
+				Shader.SetGlobalTexture ("_ColorPaletteInReverse",paletteArray[paletteIndexReverse]);
+
+				if (paletteIndexReverse>0)
+				{
+						paletteIndexReverse--;
+				}
+				else
+				{
+						paletteIndexReverse=paletteArray.GetUpperBound(0);
+				}
+				return;
 		}
-		Debug.Log("Cannot find " + tileName);
-		return null;
-	}
-	
+
+		/// <summary>
+		/// inds a door in the tile pointed to by the two coordinates.
+		/// </summary>
+		/// <returns>The door.</returns>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		public static GameObject findDoor(int x, int y)
+		{
+				return GameObject.Find ("door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
+		}
+
+		/// <summary>
+		/// Finds the tile or wall at the specified coordinates.
+		/// </summary>
+		/// <returns>The tile.</returns>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="surface">Surface.</param>
+		public static GameObject FindTile(int x, int y, int surface)
+		{
+				string tileName = GetTileName (x,y,surface);
+				Transform found = instance.getCurrentLevelModel().transform.FindChild (tileName);
+				if (found!=null)
+				{
+						return found.gameObject;
+				}
+				Debug.Log("Cannot find " + tileName);
+				return null;
+		}
+
 		/// <summary>
 		/// Gets the gameobject name for the specified tile x,y and surface. Eg Wall_02_03, Tile_22_23
 		/// </summary>
@@ -746,193 +739,193 @@ public class GameWorldController : UWEBase {
 		/// <param name="y">The y coordinate.</param>
 		/// <param name="surface">Surface.</param>
 		/// Surfaces are 
-	public static string GetTileName(int x, int y, int surface)
-	{//Assumes we'll only ever need to deal with open/solid tiles with floors and ceilings.
-		string tileName;
-		string X; string Y;
-		X=x.ToString ("D2");
-		Y=y.ToString ("D2");
-		switch (surface)
-		{
-		case TileMap.SURFACE_WALL:  //SURFACE_WALL:
-		{
-			tileName= "Wall_" + X + "_" + Y;
-			break;
+		public static string GetTileName(int x, int y, int surface)
+		{//Assumes we'll only ever need to deal with open/solid tiles with floors and ceilings.
+				string tileName;
+				string X; string Y;
+				X=x.ToString ("D2");
+				Y=y.ToString ("D2");
+				switch (surface)
+				{
+				case TileMap.SURFACE_WALL:  //SURFACE_WALL:
+						{
+								tileName= "Wall_" + X + "_" + Y;
+								break;
+						}
+				case TileMap.SURFACE_CEIL: //SURFACE_CEIL:
+						{
+								tileName="Ceiling_" + X + "_" + Y;
+								break;
+						}
+				case TileMap.SURFACE_FLOOR:
+				case TileMap.SURFACE_SLOPE:
+				default:
+						{
+								tileName="Tile_" + X  + "_" + Y;
+								break;
+						}
+				}
+				return tileName;
 		}
-		case TileMap.SURFACE_CEIL: //SURFACE_CEIL:
-		{
-			tileName="Ceiling_" + X + "_" + Y;
-			break;
-		}
-		case TileMap.SURFACE_FLOOR:
-		case TileMap.SURFACE_SLOPE:
-		default:
-		{
-			tileName="Tile_" + X  + "_" + Y;
-			break;
-		}
-		}
-		return tileName;
-	}
-	
-	/// <summary>
-	/// Finds a tile in the current level by name
-	/// </summary>
-	/// <returns>The tile by name.</returns>
-	/// <param name="tileName">Tile name.</param>
-	public static GameObject FindTileByName(string tileName)
-	{
-		return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
-	}
-	
-	/// <summary>
-	/// Returns the transform of the levels object marker where objects are generated on.
-	/// </summary>
-	/// <returns>The marker.</returns>
-	public Transform LevelMarker()
-	{
-		return _ObjectMarker.transform;
-	}
 
-	/// <summary>
-	/// Switches the level to another one. Disables the map and level objects of the old one.
-	/// </summary>
-	/// <param name="newLevelNo">New level no.</param>
+		/// <summary>
+		/// Finds a tile in the current level by name
+		/// </summary>
+		/// <returns>The tile by name.</returns>
+		/// <param name="tileName">Tile name.</param>
+		public static GameObject FindTileByName(string tileName)
+		{
+				return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
+		}
+
+		/// <summary>
+		/// Returns the transform of the levels object marker where objects are generated on.
+		/// </summary>
+		/// <returns>The marker.</returns>
+		public Transform LevelMarker()
+		{
+				return _ObjectMarker.transform;
+		}
+
+		/// <summary>
+		/// Switches the level to another one. Disables the map and level objects of the old one.
+		/// </summary>
+		/// <param name="newLevelNo">New level no.</param>
 		/// 
 		public void SwitchLevel(short newLevelNo)
 		{
-			if (newLevelNo!=-1)
-			{
-				if(LevelNo==-1)
-				{//I'm at the main menu. Load up the file data now.
-					InitLevelData();
-				}
-
-				//Check loading
-				if (Tilemaps[newLevelNo]==null)
-				{//Data has not been loaded for this level
-					Tilemaps[newLevelNo]=new TileMap(newLevelNo);
-					
-					if (UWEBase._RES!=UWEBase.GAME_SHOCK)
-					{
-						Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
-						objectList[newLevelNo]=new ObjectLoader();
-						objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
-					}
-					else
-					{
-						Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
-						objectList[newLevelNo]=new ObjectLoader();
-						objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo],lev_ark_file_data);
-					}
-					if (UWEBase.EditorMode==false)
-					{
-						Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
-					}
-					Tilemaps[newLevelNo].CreateRooms();
-
-				}
-
-				if ((UWEBase._RES!=UWEBase.GAME_SHOCK) && (LevelNo!=-1))
+				if (newLevelNo!=-1)
 				{
-					//Call events for inventory objects on level transition.
-					foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
-					{
-						if (t.gameObject.GetComponent<object_base>()!=null)
-						{
-							t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
+						if(LevelNo==-1)
+						{//I'm at the main menu. Load up the file data now.
+								InitLevelData();
 						}
-					}
 
-				}
+						//Check loading
+						if (Tilemaps[newLevelNo]==null)
+						{//Data has not been loaded for this level
+								Tilemaps[newLevelNo]=new TileMap(newLevelNo);
 
-				if(LevelNo!=-1)
-				{//Changing from a level that has already loaded
-					//Update the positions of all object interactions in the level
-					//UpdatePositions();
-
-					if (UWEBase.EditorMode==false)
-					{
-						ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
-					}
-					//Store the state of the object list with just the objects in objects transform for when I re
-					
-				}
-
-
-				//Get my object info into the tile map.
-				LevelNo=newLevelNo;
-				switch(UWEBase._RES)
-				{
-				case GAME_SHOCK:
-						break;
-				default:
-						critsLoader= new CritLoader[64];//Clear out animations
-						if (UWEBase.EditorMode==false)
-						{
-							//Call events for inventory objects on level transition.
-							foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
-							{
-								if (t.gameObject.GetComponent<object_base>()!=null)
+								if (UWEBase._RES!=UWEBase.GAME_SHOCK)
 								{
-									t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+										Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
+										objectList[newLevelNo]=new ObjectLoader();
+										objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
 								}
-							}
+								else
+								{
+										Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
+										objectList[newLevelNo]=new ObjectLoader();
+										objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo],lev_ark_file_data);
+								}
+								if (UWEBase.EditorMode==false)
+								{
+										Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
+								}
+								Tilemaps[newLevelNo].CreateRooms();
+
 						}
-						break;
-				}
 
-				TileMapRenderer.GenerateLevelFromTileMap(LevelModel, SceneryModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo],false);
+						if ((UWEBase._RES!=UWEBase.GAME_SHOCK) && (LevelNo!=-1))
+						{
+								//Call events for inventory objects on level transition.
+								foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+								{
+										if (t.gameObject.GetComponent<object_base>()!=null)
+										{
+												t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
+										}
+								}
 
-				if ((startX !=-1) &&(startY!=-1))
-				{
-					float targetX=(float)startX*1.2f + 0.6f;
-					float targetY= (float)startY*1.2f + 0.6f;
-					float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
+						}
 
-					UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-					UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
-				}
-				startX=-1;startY=-1;
+						if(LevelNo!=-1)
+						{//Changing from a level that has already loaded
+								//Update the positions of all object interactions in the level
+								//UpdatePositions();
+
+								if (UWEBase.EditorMode==false)
+								{
+										ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+								}
+								//Store the state of the object list with just the objects in objects transform for when I re
+
+						}
 
 
-				switch(UWEBase._RES)
-				{
-					case GAME_SHOCK:
-						//break;
-					default:
-						ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
-						break;
-				}
-				
+						//Get my object info into the tile map.
+						LevelNo=newLevelNo;
+						switch(UWEBase._RES)
+						{
+						case GAME_SHOCK:
+								break;
+						default:
+								critsLoader= new CritLoader[64];//Clear out animations
+								if (UWEBase.EditorMode==false)
+								{
+										//Call events for inventory objects on level transition.
+										foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+										{
+												if (t.gameObject.GetComponent<object_base>()!=null)
+												{
+														t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+												}
+										}
+								}
+								break;
+						}
 
-				if ((bGenNavMeshes) && (!EditorMode))
-				{
-					GenerateNavmesh(NavRigLand);
-					GenerateNavmesh(NavRigWater);								
-				}
+						TileMapRenderer.GenerateLevelFromTileMap(LevelModel, SceneryModel,_RES,Tilemaps[newLevelNo],objectList[newLevelNo],false);
 
-				if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
-				{//Create shrine lava.
-					GameObject shrineLava = new GameObject();
-					shrineLava.transform.parent=SceneryModel.transform;
+						if ((startX !=-1) &&(startY!=-1))
+						{
+								float targetX=(float)startX*1.2f + 0.6f;
+								float targetY= (float)startY*1.2f + 0.6f;
+								float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
+
+								UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+								UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
+						}
+						startX=-1;startY=-1;
+
+
+						switch(UWEBase._RES)
+						{
+						case GAME_SHOCK:
+								//break;
+						default:
+								ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+								break;
+						}
+
+
+						if ((bGenNavMeshes) && (!EditorMode))
+						{
+								GenerateNavmesh(NavRigLand);
+								GenerateNavmesh(NavRigWater);								
+						}
+
+						if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
+						{//Create shrine lava.
+								GameObject shrineLava = new GameObject();
+								shrineLava.transform.parent=SceneryModel.transform;
 								shrineLava.transform.localPosition=new Vector3(-39f,39.61f,0.402f);
-					shrineLava.transform.localScale=new Vector3(6f,0.2f,4.8f);
-					shrineLava.AddComponent<ShrineLava>();
-					shrineLava.AddComponent<BoxCollider>();
-					shrineLava.GetComponent<BoxCollider>().isTrigger=true;
+								shrineLava.transform.localScale=new Vector3(6f,0.2f,4.8f);
+								shrineLava.AddComponent<ShrineLava>();
+								shrineLava.AddComponent<BoxCollider>();
+								shrineLava.GetComponent<BoxCollider>().isTrigger=true;
+						}
 				}
-			}
-			if ((_RES==GAME_UW2) && (EditorMode==false))
-			{
-				if (events!=null)
+				if ((_RES==GAME_UW2) && (EditorMode==false))
 				{
-					if (!LoadingGame)
-					{
-							events.ProcessEvents();					
-					}
+						if (events!=null)
+						{
+								if (!LoadingGame)
+								{
+										events.ProcessEvents();					
+								}
+						}
 				}
-			}
 		}
 
 		/// <summary>
@@ -943,17 +936,17 @@ public class GameWorldController : UWEBase {
 		/// <param name="newTileY">New tile y.</param>
 		public void SwitchLevel(short newLevelNo, short newTileX, short newTileY)
 		{
-			
-			//float targetX=(float)newTileX*1.2f + 0.6f;
-			//float targetY= (float)newTileY*1.2f + 0.6f;
-			//float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
 
-			//UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-			//UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);
-			
-			startX =newTileX;
-			startY =newTileY;
-			SwitchLevel(newLevelNo);
+				//float targetX=(float)newTileX*1.2f + 0.6f;
+				//float targetY= (float)newTileY*1.2f + 0.6f;
+				//float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
+
+				//UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+				//UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);
+
+				startX =newTileX;
+				startY =newTileY;
+				SwitchLevel(newLevelNo);
 		}
 
 		// This will regenerate the navigation mesh when called
@@ -974,40 +967,25 @@ public class GameWorldController : UWEBase {
 		}
 
 
-	/*
-	public void SwitchLevel(int newLevelNo)
-	{
-		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
-		{
-			if(WorldModel[i]==null)
-			{
-				WorldModel[i]=GameObject.Find("_Level" + i);
-			}
-			WorldModel[i].SetActive(i==newLevelNo);
-			LevelObjects[i].SetActive(i==newLevelNo);
-		}	
-		LevelNo=newLevelNo;
-	}*/
-
-	/// <summary>
-	/// Freezes the movement of the specified object if it has a rigid body attached.
-	/// </summary>
-	/// <param name="myObj">My object.</param>
-	public static void FreezeMovement(GameObject myObj)
-	{//Stop objects which can move in the 3d world from moving when they are in the inventory or containers.
-		Rigidbody rg = myObj.GetComponent<Rigidbody>();
-		if (rg!=null)
-		{
-			rg.useGravity=false;
-			rg.constraints = 
-					RigidbodyConstraints.FreezeRotationX 
-					| RigidbodyConstraints.FreezeRotationY 
-					| RigidbodyConstraints.FreezeRotationZ 
-					| RigidbodyConstraints.FreezePositionX 
-					| RigidbodyConstraints.FreezePositionY 
-					| RigidbodyConstraints.FreezePositionZ;
+		/// <summary>
+		/// Freezes the movement of the specified object if it has a rigid body attached.
+		/// </summary>
+		/// <param name="myObj">My object.</param>
+		public static void FreezeMovement(GameObject myObj)
+		{//Stop objects which can move in the 3d world from moving when they are in the inventory or containers.
+				Rigidbody rg = myObj.GetComponent<Rigidbody>();
+				if (rg!=null)
+				{
+						rg.useGravity=false;
+						rg.constraints = 
+								RigidbodyConstraints.FreezeRotationX 
+								| RigidbodyConstraints.FreezeRotationY 
+								| RigidbodyConstraints.FreezeRotationZ 
+								| RigidbodyConstraints.FreezePositionX 
+								| RigidbodyConstraints.FreezePositionY 
+								| RigidbodyConstraints.FreezePositionZ;
+				}
 		}
-	}
 
 		/// <summary>
 		/// Unfreeze the movement of the specified object if it has a rigid body attached.
@@ -1015,27 +993,34 @@ public class GameWorldController : UWEBase {
 		/// <param name="myObj">My object.</param>
 		public static void UnFreezeMovement(GameObject myObj)
 		{//Allow objects which can move in the 3d world to moving when they are released.
-			Rigidbody rg = myObj.GetComponent<Rigidbody>();
-			if (rg!=null)
-			{
-				rg.useGravity=true;
-				rg.constraints = 
-						RigidbodyConstraints.FreezeRotationX 
-						| RigidbodyConstraints.FreezeRotationY 
-						| RigidbodyConstraints.FreezeRotationZ;
-			}
+				Rigidbody rg = myObj.GetComponent<Rigidbody>();
+				if (rg!=null)
+				{
+						rg.useGravity=true;
+						rg.constraints = 
+								RigidbodyConstraints.FreezeRotationX 
+								| RigidbodyConstraints.FreezeRotationY 
+								| RigidbodyConstraints.FreezeRotationZ;
+				}
 		}
 
+		/// <summary>
+		/// Returns the music controller
+		/// </summary>
+		/// <returns>The mus.</returns>
 		public MusicController getMus()
 		{
-			if (mus==null)	
-			{
-				mus=GameObject.Find("_MusicController").GetComponent<MusicController>();
-			}
-			return mus;
+				if (mus==null)	
+				{
+						mus=GameObject.Find("_MusicController").GetComponent<MusicController>();
+				}
+				return mus;
 		}
 
-
+		/// <summary>
+		/// Returns the current tile map
+		/// </summary>
+		/// <returns>The tile map.</returns>
 		public TileMap currentTileMap()
 		{
 				if (LevelNo==-1)
@@ -1046,19 +1031,19 @@ public class GameWorldController : UWEBase {
 				{
 						return Tilemaps[LevelNo];				
 				}
-			
+
 		}
 
 		public AutoMap currentAutoMap()
 		{
-			if (LevelNo==-1)
-			{
-				return null;
-			}
-			else
-			{
-				return AutoMaps[LevelNo];				
-			}
+				if (LevelNo==-1)
+				{
+						return null;
+				}
+				else
+				{
+						return AutoMaps[LevelNo];				
+				}
 		}
 
 		/// <summary>
@@ -1066,65 +1051,69 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		public void PositionDetect()
 		{
-			if ((AtMainMenu==true) || (WindowDetect.InMap))
-			{
-					return;
-			}
-			if ((_RES!=GAME_UW1) && (_RES!=GAME_UWDEMO) && (_RES!=GAME_UW2) )
-			{
-					return;
-			}
-			TileMap.visitTileX =(short)(UWCharacter.Instance.transform.position.x/1.2f);
-			TileMap.visitTileY =(short)(UWCharacter.Instance.transform.position.z/1.2f);
-			UWCharacter.Instance.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
-
-			if (EditorMode)
-			{
-				if ((TileMap.visitedTileX != TileMap.visitTileX) || (TileMap.visitedTileY != TileMap.visitTileY)) 
+				if ((AtMainMenu==true) || (WindowDetect.InMap))
 				{
-					if(IngameEditor.FollowMeMode)
-					{
-						IngameEditor.UpdateFollowMeMode(TileMap.visitTileX,TileMap.visitTileY);
-					}
+						return;
 				}
-			}
-			//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-			UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
-			UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+				if ((_RES!=GAME_UW1) && (_RES!=GAME_UWDEMO) && (_RES!=GAME_UW2) )
+				{
+						return;
+				}
+				TileMap.visitTileX =(short)(UWCharacter.Instance.transform.position.x/1.2f);
+				TileMap.visitTileY =(short)(UWCharacter.Instance.transform.position.z/1.2f);
+				UWCharacter.Instance.room= currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
 
-			for (int x=-1; x<=1;x++)
-			{
-					for (int y=-1; y<=1;y++)
-					{
-							if
-									(
-									( 
-									(TileMap.visitTileX+x >=0 ) && (TileMap.visitTileX+x <=TileMap.TileMapSizeX )
-									)
-									&&
-									( 
-											(TileMap.visitTileY+y >=0 ) && (TileMap.visitTileY+y <=TileMap.TileMapSizeY)
-									)
-									)
-							{
-								currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
-							}
-					}	
-			}
-			TileMap.visitedTileX=TileMap.visitTileX;
-			TileMap.visitedTileY=TileMap.visitTileY;
+				if (EditorMode)
+				{
+						if ((TileMap.visitedTileX != TileMap.visitTileX) || (TileMap.visitedTileY != TileMap.visitTileY)) 
+						{
+								if(IngameEditor.FollowMeMode)
+								{
+										IngameEditor.UpdateFollowMeMode(TileMap.visitTileX,TileMap.visitTileY);
+								}
+						}
+				}
+				//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
+				UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+				UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+
+				for (int x=-1; x<=1;x++)
+				{
+						for (int y=-1; y<=1;y++)
+						{
+								if
+										(
+												( 
+														(TileMap.visitTileX+x >=0 ) && (TileMap.visitTileX+x <=TileMap.TileMapSizeX )
+												)
+												&&
+												( 
+														(TileMap.visitTileY+y >=0 ) && (TileMap.visitTileY+y <=TileMap.TileMapSizeY)
+												)
+										)
+								{
+										currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
+								}
+						}	
+				}
+				TileMap.visitedTileX=TileMap.visitTileX;
+				TileMap.visitedTileY=TileMap.visitTileY;
 		}
 
+		/// <summary>
+		/// Returns the current map object list
+		/// </summary>
+		/// <returns>The object list.</returns>
 		public ObjectLoader CurrentObjectList()
 		{
-			if (LevelNo==-1)
-			{
-				return null;
-			}
-			else
-			{
-				return objectList[LevelNo];
-			}
+				if (LevelNo==-1)
+				{
+						return null;
+				}
+				else
+				{
+						return objectList[LevelNo];
+				}
 		}
 
 		/// <summary>
@@ -1138,15 +1127,19 @@ public class GameWorldController : UWEBase {
 
 		}
 
-
+		/// <summary>
+		/// Moves to world and assigns it to the world object list.
+		/// </summary>
+		/// <returns>The to world.</returns>
+		/// <param name="obj">Object.</param>
 		public static ObjectInteraction MoveToWorld(ObjectInteraction obj)
 		{
-			//Add item to a free slot on the item list and point the instance back to this.
+				//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
 				obj.UpdatePosition();
 				if (ConversationVM.InConversation)
 				{
-					ConversationVM.BuildObjectList();//Reflect changes to object lists
+						ConversationVM.BuildObjectList();//Reflect changes to object lists
 				}
 
 				//obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
@@ -1160,27 +1153,36 @@ public class GameWorldController : UWEBase {
 		/// <param name="obj">Object.</param>
 		public static void MoveToInventory(GameObject obj)
 		{
-			MoveToInventory(obj.GetComponent<ObjectInteraction>());
+				MoveToInventory(obj.GetComponent<ObjectInteraction>());
 		}
 
+
+		/// <summary>
+		/// Moves an object to inventory and removes it from the world map instance
+		/// </summary>
+		/// <param name="obj">Object.</param>
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
-			obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
-			if (ConversationVM.InConversation)
-			{
-					ConversationVM.BuildObjectList();//Reflect changes to object lists
-			}
+				obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
+				if (ConversationVM.InConversation)
+				{
+						ConversationVM.BuildObjectList();//Reflect changes to object lists
+				}
 		}
 
+
+		/// <summary>
+		/// Updates the positions of all game objects
+		/// </summary>
 		public void UpdatePositions()
 		{
-			foreach (Transform t in GameWorldController.instance.LevelMarker()) 
-			{
-				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+				foreach (Transform t in GameWorldController.instance.LevelMarker()) 
 				{
-					t.gameObject.GetComponent<ObjectInteraction>().UpdatePosition();	
+						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
+								t.gameObject.GetComponent<ObjectInteraction>().UpdatePosition();	
+						}
 				}
-			}
 		}
 
 
@@ -1202,75 +1204,75 @@ public class GameWorldController : UWEBase {
 				//First update the object list so as to match indices properly
 				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 
-				 //First block is always here.
+				//First block is always here.
 				long AddressToCopyFrom=0;
 
 				//Read in the data for the 9 tile/object maps
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{
-					if (GameWorldController.instance.Tilemaps[l]!=null)
-					{
-						blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
-						blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
-					}///31752
-					else
-					{
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l* 4) + 2,32);
-						blockData[l].Data=CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
-						blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
-					}
+						if (GameWorldController.instance.Tilemaps[l]!=null)
+						{
+								blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
+								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
+						}///31752
+						else
+						{
+								AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l* 4) + 2,32);
+								blockData[l].Data=CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
+								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
+						}
 				}
 				//Read in the data for the animation overlays
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{					
-					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+9)* 4) + 2,32);
-					blockData[l+9].Data=CopyData(AddressToCopyFrom,64*6);
-					blockData[l+9].DataLen=blockData[l+9].Data.GetUpperBound(0)+1;
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+9)* 4) + 2,32);
+						blockData[l+9].Data=CopyData(AddressToCopyFrom,64*6);
+						blockData[l+9].DataLen=blockData[l+9].Data.GetUpperBound(0)+1;
 				}
 
 				//read in the texture maps
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{
-					if (GameWorldController.instance.Tilemaps[l]!=null)
-					{
-						blockData[l+18].Data= GameWorldController.instance.Tilemaps[l].TextureMapToBytes(); 
-						blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
-					}
-					else
-					{
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+18) * 4) + 2,32);
-						blockData[l+18].Data=CopyData(AddressToCopyFrom,0x7a);
-						blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
-					}					
+						if (GameWorldController.instance.Tilemaps[l]!=null)
+						{
+								blockData[l+18].Data= GameWorldController.instance.Tilemaps[l].TextureMapToBytes(); 
+								blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+						}
+						else
+						{
+								AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,((l+18) * 4) + 2,32);
+								blockData[l+18].Data=CopyData(AddressToCopyFrom,0x7a);
+								blockData[l+18].DataLen=blockData[l+18].Data.GetUpperBound(0)+1;
+						}					
 				}
 
 				//read in the auto maps
 				for (int l=0; l<=GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
 				{
-					blockData[l+27].Data=GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();
-					if (blockData[l+27].Data!=null)
-					{
-						blockData[l+27].DataLen=blockData[l+27].Data.GetUpperBound(0)+1;			
-					}
-					else
-					{
-						blockData[l+27].DataLen=0;		
-					}					
+						blockData[l+27].Data=GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();
+						if (blockData[l+27].Data!=null)
+						{
+								blockData[l+27].DataLen=blockData[l+27].Data.GetUpperBound(0)+1;			
+						}
+						else
+						{
+								blockData[l+27].DataLen=0;		
+						}					
 				}
 
 
 				//read in the auto maps notes
 				for (int l=0; l<=GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
 				{
-					blockData[l+36].Data=GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
-					if (blockData[l+36].Data!=null)
-					{
-						blockData[l+36].DataLen=blockData[l+36].Data.GetUpperBound(0)+1;			
-					}
-					else
-					{
-						blockData[l+36].DataLen=0;		
-					}	
+						blockData[l+36].Data=GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
+						if (blockData[l+36].Data!=null)
+						{
+								blockData[l+36].DataLen=blockData[l+36].Data.GetUpperBound(0)+1;			
+						}
+						else
+						{
+								blockData[l+36].DataLen=0;		
+						}	
 				}
 
 				blockData[0].Address=542;
@@ -1278,15 +1280,15 @@ public class GameWorldController : UWEBase {
 				//Work out the block addresses.
 				for (int i=1; i<blockData.GetUpperBound(0);i++)
 				{
-					if (blockData[i-1].DataLen!=0)
-					{
-						blockData[i].Address= prevAddress+blockData[i-1].DataLen;	
-						prevAddress=blockData[i].Address;
-					}
-					else
-					{
-						blockData[i].Address=0;	
-					}					
+						if (blockData[i-1].DataLen!=0)
+						{
+								blockData[i].Address= prevAddress+blockData[i-1].DataLen;	
+								prevAddress=blockData[i].Address;
+						}
+						else
+						{
+								blockData[i].Address=0;	
+						}					
 				}
 
 				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\lev.ark",FileMode.Create);
@@ -1296,179 +1298,30 @@ public class GameWorldController : UWEBase {
 				add_ptr+=DataLoader.WriteInt8(writer, 0);
 				for (int i=0; i<=blockData.GetUpperBound(0); i++)
 				{//write block addresses
-					add_ptr+=DataLoader.WriteInt32(writer, blockData[i].Address);		
+						add_ptr+=DataLoader.WriteInt32(writer, blockData[i].Address);		
 				}
 
 				for (long freespace=add_ptr; freespace<blockData[0].Address;freespace++)
 				{//write freespace
-					add_ptr+=DataLoader.WriteInt8(writer,0);
+						add_ptr+=DataLoader.WriteInt8(writer,0);
 				}
 
 				//Now be brave and write all my blocks!!!
 				for (int i=0; i<=blockData.GetUpperBound(0); i++)
 				{
-					if (blockData[i].Data!=null)
-					{
-						for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+						if (blockData[i].Data!=null)
 						{
-							add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
-						}	
-					}
+								for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+								{
+										add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
+								}	
+						}
 				}
 
 				file.Close();
 
 				return;
 		}
-
-
-		/*
-		/// <summary>
-		/// Writes a lev ark file based on the stored file
-		/// </summary>
-		public void WriteBackLevArkX(int slotNo)
-		{
-			ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());	
-			//Write back tile states
-			for (int l=0; l<=Tilemaps.GetUpperBound(0); l++)
-			{
-				if (GameWorldController.instance.Tilemaps[l] !=null)
-				{
-					for (int x=0; x<=TileMap.TileMapSizeX;x++)
-					{
-						for (int y=0; y<=TileMap.TileMapSizeY;y++)
-						{		
-							TileInfo t = Tilemaps[l].Tiles[x,y];
-
-							long addptr = t.address;
-
-							//Shift the bits to construct my data
-							int tileType = t.tileType;
-							int floorHeight = (t.floorHeight/2) << 4;
-
-
-							int ByteToWrite = tileType | floorHeight ;//| floorTexture | noMagic;//This will be set in the original data
-							lev_ark_file_data[addptr]= (char) ( lev_ark_file_data[addptr] | (char)(ByteToWrite) );
-
-							int floorTexture = t.floorTexture<<2;
-							int noMagic = t.noMagic << 6;
-
-							ByteToWrite= floorTexture | noMagic;
-							lev_ark_file_data[addptr+1]= (char) ( lev_ark_file_data[addptr+1] | (char)(ByteToWrite) );
-
-
-							ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
-							lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
-							lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
-						}	
-					}		
-				}			
-			}
-
-			//Write back object data
-			for (int l=0; l<=objectList.GetUpperBound(0); l++)
-			{
-				if (objectList[l]!=null)
-				{
-					long addptr = objectList[l].objectsAddress;
-					for (int o=0; o<=objectList[l].objInfo.GetUpperBound(0);o++)
-					{
-						ObjectLoaderInfo currobj= objectList[l].objInfo[o];
-						if (currobj!=null)
-						{
-							int ByteToWrite= (currobj.is_quant << 15) |
-											(currobj.invis << 14) |
-											(currobj.doordir << 13) |
-											(currobj.enchantment << 12) |
-											((currobj.flags & 0x0F) << 9) |
-											(currobj.item_id & 0x1FF) ;
-
-							lev_ark_file_data[addptr]=(char)(ByteToWrite & 0xFF);
-							lev_ark_file_data[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
-
-							ByteToWrite = ((currobj.x & 0x7) << 13) |
-											((currobj.y & 0x7) << 10) |
-											((currobj.heading & 0x7) << 7) |
-											((currobj.zpos & 0x7F));
-							lev_ark_file_data[addptr+2]=(char)(ByteToWrite & 0xFF);
-							lev_ark_file_data[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
-
-							ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
-											(currobj.quality & 0x3F); 
-							lev_ark_file_data[addptr+4]=(char)(ByteToWrite & 0xFF);
-							lev_ark_file_data[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);		
-							 
-							//objList[x].owner = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-							//objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
-							ByteToWrite = ((currobj.link & 0x3FF)<<6) |
-									(currobj.owner & 0x3F); 
-							lev_ark_file_data[addptr+6]=(char)(ByteToWrite & 0xFF);
-							lev_ark_file_data[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
-
-
-
-							if (o<256)			
-							{//Additional npc mobile data.
-								
-								lev_ark_file_data[addptr+0x8] = (char)(currobj.npc_hp & 0x8);
-								lev_ark_file_data[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
-										(currobj.npc_goal & 0xF));
-
-								lev_ark_file_data[addptr+0xd]= (char)
-										(
-										((currobj.npc_attitude & 0x3)<<14) |
-										((currobj.npc_talkedto & 0x1)<<13) |
-												currobj.npc_level & 0xF
-										);
-
-								lev_ark_file_data[addptr+0x16]= (char)(
-										((currobj.npc_xhome & 0x3F)<<10) |
-										((currobj.npc_yhome & 0x3F)<<4)
-								);
-
-								lev_ark_file_data[addptr+0x18]= (char)(
-										((currobj.npc_heading & 0xF)<<4) 
-								);
-
-								lev_ark_file_data[addptr+0x19]= (char)(
-										((currobj.npc_hunger & 0x3F)) 
-								);
-
-								lev_ark_file_data[addptr+0x1a]= (char)(
-										((currobj.npc_whoami & 0xFF)) 
-								);
-
-								addptr=addptr+8+19;	
-							}	
-							else
-							{													
-								addptr=addptr+8;
-							}
-						}
-					}
-				}
-			}
-
-
-				//To write map notes
-				//Produce the data as above
-				//Record the original addresses of the map notes.
-				//Create a new file.  (size of regular data (as far as first mapnotes address) + space needed for map notes)
-				//Edit the offsets in the new file to point to the map notes
-						//write the map notes.
-				//write the file to lev_ark.
-
-
-			//Write the array to file
-
-			byte[] dataToWrite = new byte[lev_ark_file_data.GetUpperBound(0)+1];
-			for (long i=0; i<=lev_ark_file_data.GetUpperBound(0);i++)
-			{
-					dataToWrite[i] = (byte)lev_ark_file_data[i];
-			}
-			File.WriteAllBytes(Loader.BasePath +  "save" + slotNo + "\\lev.ark" , dataToWrite);			
-		}
-		*/
 
 		/// <summary>
 		/// Inits the level data maps and textures.
@@ -1477,7 +1330,7 @@ public class GameWorldController : UWEBase {
 		{
 				// Path to lev.ark file to load
 				string Lev_Ark_File;
-				
+
 				switch (_RES)
 				{
 				case GAME_SHOCK:
@@ -1524,62 +1377,62 @@ public class GameWorldController : UWEBase {
 				//Load up my map materials
 				for (int i =0; i<=MaterialMasterList.GetUpperBound(0);i++)
 				{
-					MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
+						MaterialMasterList[i]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_" + i.ToString("d3"));
 						switch (MaterialMasterList[i].shader.name.ToUpper())
 						{
 						case "COLOURREPLACEMENT":
 						case "COLOURREPLACEMENTREVERSE":
-							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,1);//load a greyscale texture for use with the shader.
-							break;
+								MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,1);//load a greyscale texture for use with the shader.
+								break;
 						case "LEGACY SHADERS/BUMPED DIFFUSE":
 								{
-									Texture2D loadedTexture =  texLoader.LoadImageAt(i,2);//Get normal map for mod directory
-									MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
-									if (loadedTexture!=null)
-									{
-										MaterialMasterList[i].SetTexture("_BumpMap",TextureLoader.NormalMap(loadedTexture,TextureLoader.BumpMapStrength));						
-									}
+										Texture2D loadedTexture =  texLoader.LoadImageAt(i,2);//Get normal map for mod directory
+										MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
+										if (loadedTexture!=null)
+										{
+												MaterialMasterList[i].SetTexture("_BumpMap",TextureLoader.NormalMap(loadedTexture,TextureLoader.BumpMapStrength));						
+										}
 								}
-							break;
+								break;
 						default:
 								//Debug.Log(i + " is " + MaterialMasterList[i].shader.name);
-							MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
-							break;
+								MaterialMasterList[i].mainTexture= texLoader.LoadImageAt(i,0);
+								break;
 						}
 				}
 				if (_RES==GAME_UW1)
 				{
-					SpecialMaterials[0]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_224_maze");
-					SpecialMaterials[0].mainTexture=texLoader.LoadImageAt(224);
+						SpecialMaterials[0]=(Material)Resources.Load(_RES+"/Materials/textures/" + _RES + "_224_maze");
+						SpecialMaterials[0].mainTexture=texLoader.LoadImageAt(224);
 				}
 				MaterialObj = new Material[TmObjArt.NoOfFileImages()];
 
 				//Load the materials for the TMOBJ file
 				for (int i=0; i<=MaterialObj.GetUpperBound(0);i++)
 				{
-					MaterialObj[i]= (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + i.ToString("d2"));	
-					if (MaterialObj[i]!=null)
-					{
-						MaterialObj[i].mainTexture = TmObjArt.LoadImageAt(i);			
-					}					
+						MaterialObj[i]= (Material)Resources.Load(_RES+"/Materials/tmobj/tmobj_" + i.ToString("d2"));	
+						if (MaterialObj[i]!=null)
+						{
+								MaterialObj[i].mainTexture = TmObjArt.LoadImageAt(i);			
+						}					
 				}
 
 				switch (_RES)
 				{
-					case GAME_SHOCK:
+				case GAME_SHOCK:
 						break;
 
-					default:
-					//Load up my door texture
-					for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
+				default:
+						//Load up my door texture
+						for (int i =0; i<=MaterialDoors.GetUpperBound(0);i++)
 						{
-						MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
-						MaterialDoors[i].mainTexture = DoorArt.LoadImageAt(i);
+								MaterialDoors[i]= (Material)Resources.Load(_RES + "/Materials/doors/doors_" +i.ToString("d2") +"_material");	
+								MaterialDoors[i].mainTexture = DoorArt.LoadImageAt(i);
 						}
-					break;
+						break;
 
 				}
-	
+
 				//Load up my tile maps
 				//First read in my lev_ark file
 				switch(UWEBase._RES)
@@ -1611,85 +1464,85 @@ public class GameWorldController : UWEBase {
 						AutoMaps[0].InitAutoMapDemo();
 						break;
 				case GAME_UW1:
-					for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
-					{
-						AutoMaps[i]=new AutoMap();
-						AutoMaps[i].InitAutoMap(i,lev_ark_file_data);
-					}
-					break;
+						for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
+						{
+								AutoMaps[i]=new AutoMap();
+								AutoMaps[i].InitAutoMap(i,lev_ark_file_data);
+						}
+						break;
 				case GAME_UW2:
-					for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
-					{
-						AutoMaps[i]=new AutoMap();
-						AutoMaps[i].InitAutoMapUW2(i);
-					}
-					break;
+						for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
+						{
+								AutoMaps[i]=new AutoMap();
+								AutoMaps[i].InitAutoMapUW2(i);
+						}
+						break;
 				}
 
 				switch(_RES)
 				{
 				case GAME_UW2:
-					events= new event_processor();		
-					if (whatTheHellIsThatFileFor!=null)
-					{
-						whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected);
-					}
-					break;
+						events= new event_processor();		
+						if (whatTheHellIsThatFileFor!=null)
+						{
+								whatTheHellIsThatFileFor.DumpScdArkInfo(SCD_Ark_File_Selected);
+						}
+						break;
 				}
 		}
 
-	
+
 		/// <summary>
 		/// Inits the B globals.
 		/// </summary>
 		/// <param name="SlotNo">Slot no.</param>
 		public void InitBGlobals(int SlotNo)
 		{
-			char[] bglob_data;
-			if (SlotNo==0)	
-			{//Init from BABGLOBS.DAT. Initialise the data.
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
-				{
-					int NoOfSlots = bglob_data.GetUpperBound(0)/4;
-					int add_ptr=0;
-					bGlobals = new bablGlobal[NoOfSlots+1];
-					for (int i=0; i<=NoOfSlots;i++)
-					{
-						bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
-						bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
-						bGlobals[i].Globals = new int[bGlobals[i].Size];
-						add_ptr = add_ptr+4;
-					}
-				}	
-			}
-			else
-			{
-				int NoOfSlots=0;//Assumes the same no of slots that is in the babglobs is in bglobals.
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
-				{
-					NoOfSlots = bglob_data.GetUpperBound(0)/4;
-					NoOfSlots++;
-				}
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "Save" + SlotNo + "\\BGLOBALS.DAT", out bglob_data))
-				{
-					//int NoOfSlots = bglob_data.GetUpperBound(0)/4;
-					int add_ptr=0;
-					bGlobals = new bablGlobal[NoOfSlots];
-					for (int i=0; i<NoOfSlots;i++)
-					{
-										
-						bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
-						bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
-						bGlobals[i].Globals = new int[bGlobals[i].Size];
-						add_ptr+=4;
-						for (int g=0; g<bGlobals[i].Size; g++)
+				char[] bglob_data;
+				if (SlotNo==0)	
+				{//Init from BABGLOBS.DAT. Initialise the data.
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
 						{
-							bGlobals[i].Globals[g]=	(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);							
-							add_ptr = add_ptr+2;
-						}						
-					}
-				}		
-			}
+								int NoOfSlots = bglob_data.GetUpperBound(0)/4;
+								int add_ptr=0;
+								bGlobals = new bablGlobal[NoOfSlots+1];
+								for (int i=0; i<=NoOfSlots;i++)
+								{
+										bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
+										bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
+										bGlobals[i].Globals = new int[bGlobals[i].Size];
+										add_ptr = add_ptr+4;
+								}
+						}	
+				}
+				else
+				{
+						int NoOfSlots=0;//Assumes the same no of slots that is in the babglobs is in bglobals.
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
+						{
+								NoOfSlots = bglob_data.GetUpperBound(0)/4;
+								NoOfSlots++;
+						}
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "Save" + SlotNo + "\\BGLOBALS.DAT", out bglob_data))
+						{
+								//int NoOfSlots = bglob_data.GetUpperBound(0)/4;
+								int add_ptr=0;
+								bGlobals = new bablGlobal[NoOfSlots];
+								for (int i=0; i<NoOfSlots;i++)
+								{
+
+										bGlobals[i].ConversationNo =(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);
+										bGlobals[i].Size =(int)DataLoader.getValAtAddress(bglob_data,add_ptr+2,16);
+										bGlobals[i].Globals = new int[bGlobals[i].Size];
+										add_ptr+=4;
+										for (int g=0; g<bGlobals[i].Size; g++)
+										{
+												bGlobals[i].Globals[g]=	(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);							
+												add_ptr = add_ptr+2;
+										}						
+								}
+						}		
+				}
 		}
 
 		/// <summary>
@@ -1698,32 +1551,32 @@ public class GameWorldController : UWEBase {
 		/// <param name="SlotNo">Slot no.</param>
 		public void WriteBGlobals(int SlotNo)
 		{
-			int fileSize=0;
-			for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
-			{
-				fileSize+=4;	//No and size
-				fileSize+=bGlobals[c].Size * 2;				
-			}
-			//Create an output byte array
-			Byte[] output = new byte[fileSize];
-			int add_ptr=0;
-			for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
-			{
-				//Write Slot No
-				output[add_ptr]=(byte) (bGlobals[c].ConversationNo & 0xff);
-				output[add_ptr+1]=(byte)( (bGlobals[c].ConversationNo >>8) & 0xff);
-				//Write Size
-				output[add_ptr+2]=(byte)( bGlobals[c].Size & 0xff);
-				output[add_ptr+3]=(byte) ((bGlobals[c].Size >>8) & 0xff);
-				add_ptr=add_ptr+4;
-				for (int g = 0; g<=bGlobals[c].Globals.GetUpperBound(0); g++)
+				int fileSize=0;
+				for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
 				{
-					output[add_ptr]=(byte)( bGlobals[c].Globals[g] & 0xff);
-					output[add_ptr+1]=(byte) ((bGlobals[c].Globals[g] >>8) & 0xff);
-					add_ptr+=2;
+						fileSize+=4;	//No and size
+						fileSize+=bGlobals[c].Size * 2;				
 				}
-			}
-			File.WriteAllBytes(Loader.BasePath +  "save" + SlotNo + "\\BGLOBALS.DAT" , output);
+				//Create an output byte array
+				Byte[] output = new byte[fileSize];
+				int add_ptr=0;
+				for (int c=0; c<=bGlobals.GetUpperBound(0);c++)
+				{
+						//Write Slot No
+						output[add_ptr]=(byte) (bGlobals[c].ConversationNo & 0xff);
+						output[add_ptr+1]=(byte)( (bGlobals[c].ConversationNo >>8) & 0xff);
+						//Write Size
+						output[add_ptr+2]=(byte)( bGlobals[c].Size & 0xff);
+						output[add_ptr+3]=(byte) ((bGlobals[c].Size >>8) & 0xff);
+						add_ptr=add_ptr+4;
+						for (int g = 0; g<=bGlobals[c].Globals.GetUpperBound(0); g++)
+						{
+								output[add_ptr]=(byte)( bGlobals[c].Globals[g] & 0xff);
+								output[add_ptr+1]=(byte) ((bGlobals[c].Globals[g] >>8) & 0xff);
+								add_ptr+=2;
+						}
+				}
+				File.WriteAllBytes(Loader.BasePath +  "save" + SlotNo + "\\BGLOBALS.DAT" , output);
 
 		}
 
@@ -1735,51 +1588,56 @@ public class GameWorldController : UWEBase {
 		/// <param name="length">Length.</param>
 		public char[] CopyData(long address, long length)
 		{
-			char[] DataToCopy=new char[length];
+				char[] DataToCopy=new char[length];
 
-			for (int i=0; i<=DataToCopy.GetUpperBound(0);i++)
-			{
-				DataToCopy[i] = lev_ark_file_data[address+i];
-			}
-			return DataToCopy;
+				for (int i=0; i<=DataToCopy.GetUpperBound(0);i++)
+				{
+						DataToCopy[i] = lev_ark_file_data[address+i];
+				}
+				return DataToCopy;
 		}
 
 		/// <summary>
-		/// Switchs to a Terr nova map.
+		/// Switchs to a Terra nova map.
 		/// </summary>
 		/// <param name="levelFileName">Level file name.</param>
 		public void SwitchTNovaMap(string levelFileName)
 		{			
-			string path;
-			if (levelFileName=="")
-			{
-				path= NovaLevelSelect.MapSelected;
-			}
-			else
-			{
-				path=levelFileName;//Loader.BasePath + "MAPS\\roadmap.res";		
-			}
-			 
-			char[] archive_ark;
-			if (DataLoader.ReadStreamFile(path, out archive_ark))
-			{
-					DataLoader.Chunk lev_ark;
-					if (!DataLoader.LoadChunk(archive_ark, 86, out lev_ark ))
-					{
-						return;
-					}
-					UWCharacter.Instance.playerCam.GetComponent<Light>().range=200f;
-					UWCharacter.Instance.playerCam.farClipPlane=3000f;
-						UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
-					TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
+				string path;
+				if (levelFileName=="")
+				{
+						path= NovaLevelSelect.MapSelected;
+				}
+				else
+				{
+						path=levelFileName;//Loader.BasePath + "MAPS\\roadmap.res";		
+				}
 
-			}
+				char[] archive_ark;
+				if (DataLoader.ReadStreamFile(path, out archive_ark))
+				{
+						DataLoader.Chunk lev_ark;
+						if (!DataLoader.LoadChunk(archive_ark, 86, out lev_ark ))
+						{
+								return;
+						}
+						UWCharacter.Instance.playerCam.GetComponent<Light>().range=200f;
+						UWCharacter.Instance.playerCam.farClipPlane=3000f;
+						UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
+						TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);				
+
+				}
 		}
 
 
+
+		/// <summary>
+		/// Loads the config file.
+		/// </summary>
+		/// <returns><c>true</c>, if config file was loaded, <c>false</c> otherwise.</returns>
 		bool LoadConfigFile()
 		{
-			string fileName = Application.dataPath + "//..//config.ini";
+				string fileName = Application.dataPath + "//..//config.ini";
 				if (File.Exists(fileName))
 				{
 						string line;
@@ -1897,20 +1755,20 @@ public class GameWorldController : UWEBase {
 																		}
 																case "INFINITEMANA":
 																		{
-																			Magic.InfiniteMana	= (entries[1]=="1");
-																			break;
+																				Magic.InfiniteMana	= (entries[1]=="1");
+																				break;
 																		}
 
 																case "GODMODE":
 																		{
-																			UWCharacter.Invincible = (entries[1]=="1");
-																			break;
+																				UWCharacter.Invincible = (entries[1]=="1");
+																				break;
 																		}
 
 																case "CONTEXTUIENABLED":
 																		{
-																			WindowDetectUW.ContextUIEnabled = (entries[1]=="1");
-																			break;
+																				WindowDetectUW.ContextUIEnabled = (entries[1]=="1");
+																				break;
 																		}
 																}	
 														}		

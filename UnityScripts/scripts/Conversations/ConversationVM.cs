@@ -1464,7 +1464,7 @@ public class ConversationVM : UWEBase {
 												case "@GI": //Global integer
 														{
 																//FoundString= stack.at(value+1).ToString();
-																FoundString= stack.at(value).ToString();
+																FoundString= stack.at(value+1).ToString();
 																break;	
 														}
 												case "@SS": //Stack string
@@ -2471,7 +2471,6 @@ public class ConversationVM : UWEBase {
 										demanded.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 										SomethingGiven=true;
 										cn.AddItemToContainer(demanded.name);
-
 										//pcSlot.clear ();
 								}
 								SomethingGiven=true;
@@ -2497,6 +2496,7 @@ public class ConversationVM : UWEBase {
 						if (objsGiven[i]!=null)
 						{
 								GameWorldController.MoveToWorld(objsGiven[i]);
+								stack.Set(start+i , objsGiven[i].GetComponent<ObjectInteraction>().objectloaderinfo.index);//Update the object index in the stack so I keep track of it.
 						}
 				}
 				if (SomethingGiven==true)
@@ -3620,6 +3620,11 @@ return value: none
 				//parameters:   arg1: inventory object list pos (from take_from_npc_inv)
 				//description:  transfers item to player, per id (?)
 				//return value: 1: ok, 2: player has no space left
+				if (index>GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0))
+				{
+						Debug.Log("Index out of range in take_id_from_npc");
+						return 2;	
+				}
 				string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
 				int playerHasSpace=1;
 				Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
@@ -4184,10 +4189,16 @@ description:  places a generated object in underworld
 				//description:  sets quality for an item in inventory
 				//return value: none
 				//GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
-
-				if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
+				if (itemIndex<=GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0) )
 				{
-						GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
+						if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
+						{
+								GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality=(short)NewQuality;
+						}				
+				}
+				else
+				{
+						Debug.Log ("itemIndex out of range in set_inv_quality");
 				}
 		}
 

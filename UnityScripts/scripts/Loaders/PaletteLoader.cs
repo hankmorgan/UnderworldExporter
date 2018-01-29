@@ -103,6 +103,20 @@ public class PaletteLoader : ArtLoader {
 	}
 
 
-
-
+		/// <summary>
+		/// Returns a palette as an image.
+		/// </summary>
+		/// <returns>The to image.</returns>
+		/// <param name="PalIndex">Pal index.</param>
+		public Texture2D PaletteToImage(int PalIndex)
+		{
+			int height = 1;
+			int width = 256;
+			char[] imgData = new char[height*width];
+			for (int i=0;i<imgData.GetUpperBound(0);i++)
+			{
+					imgData[i] = (char)i;
+			}
+			return ArtLoader.Image(imgData,0,width,height,"name here", Palettes[PalIndex], true);
+		}
 }

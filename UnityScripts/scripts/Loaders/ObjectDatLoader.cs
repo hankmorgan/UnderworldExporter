@@ -74,7 +74,9 @@ public class ObjectDatLoader : Loader {
 04h 	2 	uint16 	HitPoints 	Average hit points.
 06h 	1 	uint8 	AttackPower 	Damage on attack.
 07h 	1 	 ?? 	 ?? 	 ??
-08h 	1 	uint8 	FluidAndRemains 	A combination of remains after death and the type of blood splatters this produces. Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
+08h 	1 	uint8 	FluidAndRemains 	A combination of remains after death and the type of blood splatters this produces.
+		Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. 
+		Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
 09h 	1 	uint8 	GeneralType 	An index into the strings on page 8, offset 370. This string is the generic name for the creature, like "a creature" for "a goblin" or "a rat" for "a giant rat".
 0Ah 	1 	uint8 	Passiveness 	Relative passiveness. 255 will never take a swing at you, even if you kill them.
 0Bh 	1 	 ?? 	 ?? 	 ??
@@ -201,14 +203,14 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].Level=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
 					critterStats[j].AvgHit=(short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 16);//Average Hitpoints
 					critterStats[j].AttackPower= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);//Attack power
-					critterStats[j].Remains=(int)DataLoader.getValAtAddress(obj_dat,add_ptr + 8, 8) & 0xF0;//Remains body
+					critterStats[j].Remains=(int)((DataLoader.getValAtAddress(obj_dat,add_ptr + 8, 8) & 0xF0) >> 4);//Remains body
 					critterStats[j].Blood=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
 					critterStats[j].Race= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//Uwformats calls this General Type
 					critterStats[j].Passive=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
 					critterStats[j].Defence=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
 					critterStats[j].Speed=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
 					critterStats[j].Poison=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8);//Poison Damage
-					critterStats[j].Category= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8);//Category
+					critterStats[j].Category= (int)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8) & 0x1F);//Category
 					critterStats[j].EquipDamage= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
 					
 					critterStats[j].AttackChanceToHit=new int[3];

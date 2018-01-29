@@ -138,6 +138,8 @@ public class Readable : object_base {
 												bowlObjectInt.ChangeType(283,16);
 												Destroy(bowlContainer);
 												bowl.AddComponent<Food>();
+												bowlObjectInt.isquant=1;
+												bowlObjectInt.link=1;
 												//bowl.GetComponent<Food>().Nutrition=5;
 												return true;
 										}

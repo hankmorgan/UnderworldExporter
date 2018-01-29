@@ -53,7 +53,6 @@ public override bool use ()
 								FishobjInt.UpdateAnimation();
 								//UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
 								UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
-								FishobjInt.isquant=1;
 							}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -83,13 +82,11 @@ public override bool use ()
 	GameObject CreateFish()
 	{
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(182,40,0,1,256);
-		GameObject fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-		fishy.name= ObjectLoader.UniqueObjectName(newobjt);
-		GameWorldController.MoveToInventory(fishy);
-		//newobjt.index= UWCharacter.Instance.playerInventory.ItemCounter++;
-		
-				//fishy.GetComponent<Food>().Nutrition=5;
-		return fishy;// ObjectInteraction.CreateNewObject(182).gameObject;
+		ObjectInteraction fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+		fishy.gameObject.name= ObjectLoader.UniqueObjectName(newobjt);
+		fishy.isquant=1;
+		GameWorldController.MoveToInventory(fishy.gameObject);
+		return fishy.gameObject;
 	}
 
 }
