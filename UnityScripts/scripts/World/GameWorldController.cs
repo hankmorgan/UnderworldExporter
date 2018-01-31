@@ -1467,14 +1467,14 @@ public class GameWorldController : UWEBase {
 						for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
 						{
 								AutoMaps[i]=new AutoMap();
-								AutoMaps[i].InitAutoMap(i,lev_ark_file_data);
+								AutoMaps[i].InitAutoMapUW1(i,lev_ark_file_data);
 						}
 						break;
 				case GAME_UW2:
 						for (int i=0; i<=AutoMaps.GetUpperBound(0); i++)
 						{
 								AutoMaps[i]=new AutoMap();
-								AutoMaps[i].InitAutoMapUW2(i);
+								AutoMaps[i].InitAutoMapUW2(i, lev_ark_file_data);
 						}
 						break;
 				}

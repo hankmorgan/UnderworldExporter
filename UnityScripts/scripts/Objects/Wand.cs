@@ -20,7 +20,7 @@ public class Wand : enchantment_base {
 			{
 				if(objInt().PickedUp)		
 				{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
-					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,513);
+					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink, 256);
 					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
 					objInt().link = newobjt.index;
 				}	

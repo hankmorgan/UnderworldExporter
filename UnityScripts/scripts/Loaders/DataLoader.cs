@@ -121,7 +121,10 @@ public class DataLoader :Loader {
 	public static char[] unpackUW2(char[] tmp, long address_pointer, ref int datalen)
 	{
 		long BlockLen = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
-		char[] buf = new char[BlockLen+100];
+		long NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
+		//char[] buf = new char[BlockLen+100];
+		char[] buf = new char[ Math.Max(NoOfSegs, BlockLen+100)];
+			
 		long upPtr=0;
 		datalen = 0;
 		address_pointer += 4;
@@ -146,8 +149,17 @@ public class DataLoader :Loader {
 					int	c = tmp[address_pointer++];
 
 					o |= (c&0xF0)<<4;
-					c = (c&15) + 3;
-					o = o+18;
+					//if((o&0x800) == 0x800)
+					//	{//Apparently I need to turn this to twos complement when the sign bit is set. 
+					///Possibly the code below is what achieves this?
+					//	o =(int) (o | 0xFFFFF000);
+					//	//o = 0 & 0x7ff;
+					//	}
+							
+
+					c = (c&15) + 3;						
+					o = o+18;								
+
 					if (o>upPtr)
 						{
 							o -= 0x1000;					
@@ -157,10 +169,22 @@ public class DataLoader :Loader {
 						{
 							o += 0x1000;					
 						}
-							
+
 					while(c-- >0)
-					{
-						buf[upPtr++]= buf[o++];
+					{					
+						if (o<0)
+						{
+							//int currentsegment = ((datalen/0x1000) + 1) * 0x1000;
+							//buf[upPtr++]= buf[buf.GetUpperBound(0) + o++];//This is probably very very wrong.
+							//buf[upPtr++]= buf[currentsegment + o++];//This is probably very very wrong.
+							buf[upPtr++] = (char)0;
+							o++;
+						}
+						else
+						{
+							buf[upPtr++]= buf[o++];								
+						}
+						
 						datalen++;    // = datalen+1;
 					}
 				}

@@ -73,6 +73,7 @@ public class MapInteraction : GuiBase {
 					for (int i=0 ; i < GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes.Count;i++)
 					{///Instantiates the map note template UI control.
 						GameObject myObj = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+						myObj.name = "_Map-Note Number " + i;
 						myObj.transform.parent= UWHUD.instance.MapPanel.transform;
 						myObj.GetComponent<Text>().text = GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NoteText;
 						myObj.GetComponent<RectTransform>().anchoredPosition= GameWorldController.instance.AutoMaps[MapInteraction.MapNo].MapNotes[i].NotePosition();

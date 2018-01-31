@@ -160,6 +160,57 @@ public class AutoMap : Loader {
 		/// </summary>
 		public static long[] AutomapNoteAddresses=new long[9];
 
+	void ProcessAutomap (char[] lev_ark, long automapAddress)
+	{
+		int z = 0;
+		for (int y = 0; y <= TileMap.TileMapSizeY; y++) {
+			for (int x = 0; x <= TileMap.TileMapSizeX; x++) {
+				short val = (short)DataLoader.getValAtAddress (lev_ark, automapAddress + z, 8);
+				//The automap contains one byte per tile, in the same order as the
+				//level tilemap. A valid value in the low nybble means the tile is displayed
+				//on the map. Valid values are the same as tile types:
+				Tiles [x, y].tileType = (short)(val & 0xf);
+				Tiles [x, y].DisplayType = (short)((val >> 4) & 0xf);
+				z++;
+			}
+		}
+	}
+
+	static void ProcessAutoMapNotes (int LevelNo, char[] lev_ark, long automapNotesAddress, long AUTOMAP_EOF_ADDRESS )
+	{
+		while (automapNotesAddress < AUTOMAP_EOF_ADDRESS) {
+			string NoteText = "";
+			bool terminated = false;
+			int PosX = 0;
+			int PosY = 0;
+			PosX = (int)DataLoader.getValAtAddress (lev_ark, automapNotesAddress + 0x32, 16);
+			PosY = (int)DataLoader.getValAtAddress (lev_ark, automapNotesAddress + 0x34, 16);
+			for (int c = 0; c <= 0x31; c++) {
+				if ((lev_ark [automapNotesAddress + c].ToString () != "\0") && (!terminated)) {
+					NoteText += lev_ark [automapNotesAddress + c];
+				}
+				else {
+					terminated = true;
+				}
+			}
+			if (NoteText == "") {
+				break;
+			}
+			if ((PosY <= 200) && (PosX <= 320)) {
+				MapNote newmapnote = new MapNote ();
+				newmapnote.PosX = PosX;
+				newmapnote.PosY = PosY;
+				//newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
+				newmapnote.NoteText = NoteText;
+				newmapnote.guid = System.Guid.NewGuid ();
+				GameWorldController.instance.AutoMaps [LevelNo].MapNotes.Add (newmapnote);
+			}
+			else {
+				break;
+			}
+			automapNotesAddress += 54;
+		}
+	}
 
 		public void InitAutoMapDemo()
 		{
@@ -167,13 +218,67 @@ public class AutoMap : Loader {
 			thisLevelNo=0;	
 		}
 
-		public void InitAutoMapUW2(int LevelNo)
+		public void InitAutoMapUW2(int LevelNo, char[] lev_ark)
 		{
-			MapNotes = new List<MapNote>();
-			thisLevelNo=LevelNo;	
+			//AutomapNoteAddresses=new long[72];
+			MapNotes = new List<MapNote>();			
+			thisLevelNo=LevelNo;
+
+			int datalen=0;
+			long automapAddress=0;
+			long automapNotesAddress=0;
+			long AUTOMAP_EOF_ADDRESS=0;
+
+			int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark,0,32);	
+
+			automapAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (160*4),32);	
+			
+			//Load Automap info
+			if (automapAddress!=0)
+			{
+				int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (160*4)+ (NoOfBlocks*4),32);
+				if (((compressionFlag>>1) & 0x1) == 1)
+				{//automap is compressed
+					char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapAddress, ref datalen );
+					ProcessAutomap (tmp_ark , 0);
+				}
+				else
+				{
+					ProcessAutomap (lev_ark , automapAddress);
+				}				
+			}
+			
+
+				automapNotesAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4),32);	
+				if (automapNotesAddress!=0)
+				{
+					int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
+					if (((compressionFlag>>1) & 0x1) == 1)
+					{//automap is compressed
+						//Debug.Log("compressed automap notes " + LevelNo +  " at " + automapNotesAddress);
+						char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
+						ProcessAutoMapNotes(LevelNo, tmp_ark,0, datalen);
+					}
+					else
+					{
+						long nextautomapNotesAddress= lev_ark.GetUpperBound(0);
+						if (LevelNo<72)
+						{
+							nextautomapNotesAddress = DataLoader.getValAtAddress(lev_ark,((LevelNo+1) * 4) + 6 + (240*4),32);			
+						}
+						Debug.Log("uncompressed automap notes " + LevelNo +  " at " + automapNotesAddress);
+						ProcessAutoMapNotes(LevelNo, lev_ark, automapAddress, nextautomapNotesAddress)	;
+					}
+				}
+
 		}
 
-		public void InitAutoMap(int LevelNo, char[] lev_ark)
+		/// <summary>
+		/// Inits the automap from a uw1 lev.ark file.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="lev_ark">Lev ark.</param>
+		public void InitAutoMapUW1(int LevelNo, char[] lev_ark)
 		{
 			MapNotes = new List<MapNote>();
 			thisLevelNo=LevelNo;
@@ -181,6 +286,9 @@ public class AutoMap : Loader {
 			long automapNotesAddress=0;
 			long AUTOMAP_EOF_ADDRESS=0;
 
+
+				//The order the automap notes are saved on file is different from the order of the level nos.
+				//Goes in order of when notes are added.
 				for (int au=0; au<=AutomapNoteAddresses.GetUpperBound(0); au++)
 				{
 					AutomapNoteAddresses[au]=DataLoader.getValAtAddress(lev_ark,((au+36) * 4) + 2 ,32);
@@ -189,82 +297,19 @@ public class AutoMap : Loader {
 				automapAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+27) * 4) + 2 ,32);
 				automapNotesAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+36) * 4) + 2 ,32);
 
-				AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo,lev_ark); // DataLoader.getValAtAddress(lev_ark,((LevelNo+1+36) * 4) + 2 ,32);	
+				AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo,lev_ark);	
 
 
 				//Load Automap info
 				if (automapAddress!=0)
 				{
-					switch(_RES)
-					{
-					case GAME_UW1:
-						{
-							int z=0;
-							for (int y=0; y<=TileMap.TileMapSizeY;y++)
-							{
-								for (int x=0; x<=TileMap.TileMapSizeX;x++)
-								{														
-									short val = (short)DataLoader.getValAtAddress(lev_ark,automapAddress+z,8);
-									//The automap contains one byte per tile, in the same order as the
-									//level tilemap. A valid value in the low nybble means the tile is displayed
-									//on the map. Valid values are the same as tile types:
-									Tiles[x,y].tileType=(short)(val & 0xf);
-									Tiles[x,y].DisplayType=(short)((val>>4) & 0xf);
-
-									z++;
-								}
-							}
-							break;
-						}	
-					}
+					ProcessAutomap (lev_ark , automapAddress);
 				}
 
 				if ((automapNotesAddress!=0) && (AUTOMAP_EOF_ADDRESS<=lev_ark.GetUpperBound(0)))
 				{
-						//long EOF_ADDRESS= lev_ark.GetUpperBound(0);
-
-						while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
-						{								
-							string NoteText ="";
-							bool terminated=false;
-							int PosX=0; int PosY=0;
-							PosX= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x32,16);
-							PosY= (int)DataLoader.getValAtAddress(lev_ark,automapNotesAddress+0x34,16);
-							for (int c=0; c<=0x31;c++)
-							{
-									if ((lev_ark[automapNotesAddress+c].ToString() != "\0") && (!terminated))
-									{
-											NoteText+=lev_ark[automapNotesAddress+c];
-									}
-									else
-									{
-											terminated=true;		
-									}
-							}
-							if (NoteText=="")
-							{
-								break;
-							}
-							if ( (PosY<=200) && (PosX<=320))
-							{
-								MapNote newmapnote = new MapNote();
-								newmapnote.PosX=PosX;
-								newmapnote.PosY=PosY;
-								//newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
-								newmapnote.NoteText= NoteText;
-								newmapnote.guid=System.Guid.NewGuid();
-								GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(newmapnote);	
-							}
-							else
-							{
-								break;
-							}
-
-
-							automapNotesAddress+=54;
-						}
+					ProcessAutoMapNotes (LevelNo, lev_ark, automapNotesAddress, AUTOMAP_EOF_ADDRESS);
 				}
-
 		}
 
 		/// <summary>
@@ -1227,6 +1272,7 @@ public class AutoMap : Loader {
 		/// </summary>
 		/// <returns>The display type.</returns>
 		/// <param name="t">T.</param>
+		/// TODO:Update for UW2
 		public static int GetDisplayType ( TileInfo t)
 		{
 				if (t.hasBridge)
@@ -1251,7 +1297,7 @@ public class AutoMap : Loader {
 				}
 		}
 
-		public static long GetFirstAutomapAddress()
+		/*public static long GetFirstAutomapAddress()
 		{
 				long min=AutomapNoteAddresses[0];
 				for (int i=0; i<=AutomapNoteAddresses.GetUpperBound(0);i++)
@@ -1262,7 +1308,7 @@ public class AutoMap : Loader {
 						}
 				}
 				return min;
-		}
+		}*/
 
 
 

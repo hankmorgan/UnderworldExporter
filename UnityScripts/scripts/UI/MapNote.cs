@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// Map note. Storage for map notes
 /// </summary>
-public class MapNote {
+public class MapNote : UWClass {
 		//public Vector2 NotePosition;
 		public string NoteText;
 		public System.Guid guid;
