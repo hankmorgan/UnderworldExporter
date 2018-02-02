@@ -18,16 +18,16 @@ public class GameSelect : GuiBase {
 
 	void CheckPath()
 	{
-				string Path="";
-				switch(RES)
-				{
-				case GAME_UWDEMO: Path=GameWorldController.instance.path_uw0;break;
-				case GAME_UW1: Path=GameWorldController.instance.path_uw1;break;
-				case GAME_UW2:Path=GameWorldController.instance.path_uw2;break;
-				case GAME_SHOCK:Path=GameWorldController.instance.path_shock;break;
-				case GAME_TNOVA:Path=GameWorldController.instance.path_tnova;break;
-					break;
-				}
+		string Path="";
+		switch(RES)
+		{
+		case GAME_UWDEMO: Path=GameWorldController.instance.path_uw0;break;
+		case GAME_UW1: Path=GameWorldController.instance.path_uw1;break;
+		case GAME_UW2:Path=GameWorldController.instance.path_uw2;break;
+		case GAME_SHOCK:Path=GameWorldController.instance.path_shock;break;
+		case GAME_TNOVA:Path=GameWorldController.instance.path_tnova;break;
+			break;
+		}
 
 		//string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
 		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);

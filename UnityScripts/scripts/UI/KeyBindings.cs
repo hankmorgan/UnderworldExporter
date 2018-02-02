@@ -169,7 +169,7 @@ public class KeyBindings : GuiBase {
 
 	public void ApplyBindings()
 	{
-		string fileName = Application.dataPath + "//..//bindings.txt";
+		/*string fileName = Application.dataPath + "//..//bindings.txt";
 		if (File.Exists(fileName))
 		{
 			string line;
@@ -206,7 +206,7 @@ public class KeyBindings : GuiBase {
 					}
 			}while (line != null);
 			fileReader.Close();		
-		}
+		}*/
 
 
 

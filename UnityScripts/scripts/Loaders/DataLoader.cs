@@ -145,20 +145,20 @@ public class DataLoader :Loader {
 				}
 				else
 				{//copy
-					int	o = tmp[address_pointer++];
-					int	c = tmp[address_pointer++];
+					int o = tmp[address_pointer++];
+					int c = tmp[address_pointer++];
 
-					o |= (c&0xF0)<<4;
+					o |= ((c&0xF0)<<4);
 					//if((o&0x800) == 0x800)
 					//	{//Apparently I need to turn this to twos complement when the sign bit is set. 
 					///Possibly the code below is what achieves this?
-					//	o =(int) (o | 0xFFFFF000);
+					//	o = (o | 0xFFFFF000);
 					//	//o = 0 & 0x7ff;
 					//	}
 							
 
-					c = (c&15) + 3;						
-					o = o+18;								
+					c = ((c&15) + 3);						
+					o = (o+18);								
 
 					if (o>upPtr)
 						{

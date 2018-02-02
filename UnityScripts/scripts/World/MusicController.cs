@@ -1,10 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 /// <summary>
 /// The music controller. Updates music tracks to play based on the state of the game world and player.
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public class MusicController : UWEBase {
+
+		public static string UW1Path;
+		public static string UW2Path;
+
+		public enum UW1MusicTracks
+		{
+			introduction = 1,	
+			darkabyss = 2,
+			descent = 3,
+			wanderer = 4,
+			battlefield = 5,
+			combat = 6,
+			injured = 7,
+			armed = 10,
+			victory = 11,
+			death = 12,
+			fleeing = 13,
+			mapslegends  = 15
+		};
+
+		public enum UW2MusicTracks
+		{
+			theme =1,
+			enemywounded =2,
+			combat=3,
+			dangeroussituation = 4,
+			armed =5,
+			victory = 6,
+			sewers = 7,
+			talorus =10,
+			prisontower = 11,
+			death = 12,
+			killorn = 13,
+			icecaverns = 14,
+			scintillus = 15,
+			castle = 16,
+			themeagain = 17,
+			introduction = 30,
+			trap = 31
+		};
 
 
 		public const int SOUND_EFFECT_FOOT_1=1;
@@ -101,7 +143,6 @@ public class MusicController : UWEBase {
 	/// </summary>
 	private int playing;
 	
-
 		/// <summary>
 		/// Is a special clip such as a fan fare being played.
 		/// </summary>
@@ -113,41 +154,41 @@ public class MusicController : UWEBase {
 	public AudioClip[] MainTrackList=new AudioClip[12];
 
 		/// <summary>
-		/// Array of the possible intro tracks
+		/// Array of the possible intro tracks (uw1)
 		/// </summary>
-	public int[] IntroTracks={0};
+		public int[] IntroTracks={(int)UW1MusicTracks.introduction};
 		/// <summary>
 		/// Array of the possible idle tracks
 		/// </summary>
-	public int[] IdleTracks={1,2,3};
+		public int[] IdleTracks={(int)UW1MusicTracks.darkabyss,(int)UW1MusicTracks.descent, (int)UW1MusicTracks.wanderer};
 		/// <summary>
 		/// Array of the possible combat tracks
 		/// </summary>
-	public int[] CombatTracks={4,5};
+		public int[] CombatTracks={(int)UW1MusicTracks.battlefield,(int)UW1MusicTracks.combat};
 		/// <summary>
 		/// Array of the possible injured tracks
 		/// </summary>
-	public int[] InjuredTracks={6};
+		public int[] InjuredTracks={(int)UW1MusicTracks.injured};
 		/// <summary>
 		/// Array of the possible weapon tracks
 		/// </summary>
-	public int[] WeaponTracks={7};
+		public int[] WeaponTracks={(int)UW1MusicTracks.armed};
 		/// <summary>
 		/// Array of the possible victory tracks
 		/// </summary>
-	public int[] VictoryTracks={8};
+		public int[] VictoryTracks={(int)UW1MusicTracks.victory};
 		/// <summary>
 		/// Array of the possible death tracks.
 		/// </summary>
-	public int[] DeathTracks = {9};
+		public int[] DeathTracks = {(int)UW1MusicTracks.death};
 		/// <summary>
 		/// Array of the possible  fleeing tracks.
 		/// </summary>
-	public int[] FleeingTracks={10};
+		public int[] FleeingTracks={(int)UW1MusicTracks.fleeing};
 		/// <summary>
 		/// Array of the possible automap tracks
 		/// </summary>
-	public int[] MapTracks={11};
+		public int[] MapTracks={(int)UW1MusicTracks.mapslegends};
 
 	/// <summary>
 	/// Array of possible end game tracks.
@@ -161,17 +202,114 @@ public class MusicController : UWEBase {
 
 	public AudioClip[] SoundEffects=new AudioClip[1];
 
-		private static bool ready;
+	private static bool ready;
+
+	public static MusicController instance;
+
+	void Awake()
+	{
+		instance=this;
+	}
+
 
 	void Start () {
 		Aud= this.GetComponent<AudioSource>();
+		//LoadAudioFileFromWWW();
+		//StartCoroutine(LoadAudioFileFromWWW("PSXUW1", 1));
 	}
 
-	public static void Begin()
+	public IEnumerator Begin()
 	{
+		yield return  LoadGameSoundTracks(_RES);			
 		ready=true;	
+		yield return 0;
 	}
 
+	public IEnumerator LoadGameSoundTracks(string GAME)
+	{				
+		switch (GAME)
+		{
+		case GAME_UW2:
+			SetTrackListsUW2();
+			for (int i = 1; i<=32;i++)
+			{
+				yield return (LoadAudioFileFromWWW(UW2Path, i));	
+			}
+			break;
+		default:	//UW1 Soundtracks
+			SetTrackListsUW1();
+			for (int i = 1; i<=15;i++)
+			{
+				yield return (LoadAudioFileFromWWW(UW1Path, i));	
+			}
+			break;
+		}
+		yield return 0;
+	}
+
+
+	IEnumerator LoadAudioFileFromWWW(string AudioBank, int FileTrackNumber)
+	{								
+		//string Path = Application.dataPath + "//..//..//UWSoundPack//" + AudioBank + "//" + FileTrackNumber.ToString("d2") + ".ogg";
+		string Path = AudioBank + FileTrackNumber.ToString("d2") + ".ogg";
+
+
+			if (File.Exists(Path))
+			//{
+					//Debug.Log("LoadAudioFileFromWWW : File not found : " + Path);
+			//}
+			//else
+			{
+				using (WWW download = new WWW("file://" + Path))
+					{
+							yield return download;
+
+							AudioClip clip = download.GetAudioClip(false);
+
+							if (clip!=null)
+							{
+								MainTrackList[FileTrackNumber] = clip;
+							}	
+					}	
+			}
+	}
+
+		/// <summary>
+		/// Sets the track lists for UW1
+		/// </summary>
+		void SetTrackListsUW1()
+		{
+				IntroTracks= new int[] {(int)UW1MusicTracks.introduction};
+				IdleTracks =new int[]{(int)UW1MusicTracks.darkabyss,(int)UW1MusicTracks.descent, (int)UW1MusicTracks.wanderer};
+				CombatTracks=new int[]{(int)UW1MusicTracks.battlefield,(int)UW1MusicTracks.combat};
+				InjuredTracks=new int[]{(int)UW1MusicTracks.injured};
+				WeaponTracks=new int[]{(int)UW1MusicTracks.armed};
+				VictoryTracks=new int[]{(int)UW1MusicTracks.victory};
+				DeathTracks = new int[]{(int)UW1MusicTracks.death};
+				FleeingTracks=new int[]{(int)UW1MusicTracks.fleeing};
+				MapTracks=new int[]{(int)UW1MusicTracks.mapslegends};	
+		}
+
+		void SetTrackListsUW2()
+		{
+				IntroTracks=new int[]{(int)UW2MusicTracks.introduction};
+				IdleTracks =new int[]{(int)UW2MusicTracks.castle,
+								(int)UW2MusicTracks.icecaverns, 
+								(int)UW2MusicTracks.sewers, 
+								(int)UW2MusicTracks.killorn, 
+								(int)UW2MusicTracks.prisontower,
+								(int)UW2MusicTracks.scintillus,
+								(int)UW2MusicTracks.talorus,
+								(int)UW2MusicTracks.theme				
+				};
+				CombatTracks=new int[]{(int)UW2MusicTracks.combat};
+				InjuredTracks=new int[]{(int)UW2MusicTracks.dangeroussituation};
+				WeaponTracks=new int[]{(int)UW2MusicTracks.armed};
+				VictoryTracks=new int[]{(int)UW2MusicTracks.victory};
+				DeathTracks = new int[]{(int)UW2MusicTracks.death};
+				FleeingTracks=new int[]{(int)UW2MusicTracks.trap};//?
+				MapTracks=new int[]{(int)UW2MusicTracks.castle};	
+		}
 
 	/// <summary>
 	/// Updates the state of the music based on the current world and player state.

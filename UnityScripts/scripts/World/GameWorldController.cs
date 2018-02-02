@@ -502,7 +502,7 @@ public class GameWorldController : UWEBase {
 						UWCharacter.Instance.speedMultiplier=20;
 						break;
 				default:
-						MusicController.Begin();
+						StartCoroutine(MusicController.instance.Begin());
 						objectMaster=new ObjectMasters();
 						objDat = new ObjectDatLoader();
 						commonObject= new CommonObjectDatLoader();
@@ -1768,6 +1768,17 @@ public class GameWorldController : UWEBase {
 																case "CONTEXTUIENABLED":
 																		{
 																				WindowDetectUW.ContextUIEnabled = (entries[1]=="1");
+																				break;
+																		}
+
+																case "UW1_SOUNDBANK":
+																		{
+																				MusicController.UW1Path=entries[1];
+																				break;
+																		}
+																case "UW2_SOUNDBANK":
+																		{
+																				MusicController.UW2Path=entries[1];
 																				break;
 																		}
 																}	
