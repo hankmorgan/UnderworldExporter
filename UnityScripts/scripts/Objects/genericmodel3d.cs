@@ -82,20 +82,22 @@ public class GenericModel3D : Model3D {
 
 		public override Material ModelMaterials (int meshNo)
 		{
+				int woodMaterial;
+				//return BenchVertices();
+				if (_RES==GAME_UW2)
+				{
+						woodMaterial =34;			
+				}
+				else
+				{
+						woodMaterial =30;			
+				}	
 				switch (objInt().item_id)
 				{
 				case 336://Bench
 				case 344://Table			
 						{
-								//return BenchVertices();
-								if (_RES==GAME_UW2)
-								{
-										return GameWorldController.instance.MaterialObj[34];			
-								}
-								else
-								{
-										return GameWorldController.instance.MaterialObj[30];			
-								}					
+							return GameWorldController.instance.MaterialObj[woodMaterial];								
 						}
 						//case 345://Beam
 						//{
@@ -106,14 +108,21 @@ public class GenericModel3D : Model3D {
 								switch(meshNo)		
 								{
 								case 0://Frame
-										return GameWorldController.instance.MaterialObj[34];
+										return GameWorldController.instance.MaterialObj[woodMaterial];			
 								default://cushion
-										return GameWorldController.instance.MaterialObj[38];
+										if (_RES==GAME_UW2)
+										{
+											return GameWorldController.instance.MaterialObj[38];		
+										}
+										else
+										{
+										return GameWorldController.instance.MaterialObj[woodMaterial];					
+										}										
 								}
 						}
 				case 350://Nightstand
 						{
-								return GameWorldController.instance.MaterialObj[34];	
+								return GameWorldController.instance.MaterialObj[woodMaterial];				
 						}
 				case 361://shelf
 						{

@@ -16,16 +16,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	// Use this for initialization
 	void Start () {
 		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-		//if (spriteSet==false)
-		//{
-		//	spriteSet=true;
-			//for (int i = 0; i<=sprites.GetUpperBound(0);i++)
-			//{
-				//sprites[i]=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + i.ToString ("D4"));
-			//	sprites[i] = GameWorldController.instance.TmAnimo.RequestSprite(i);
-			//}
-		//}
-		
+	
 		Go ();
 	}
 

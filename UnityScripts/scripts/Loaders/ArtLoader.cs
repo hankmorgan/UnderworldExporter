@@ -12,7 +12,7 @@ public class ArtLoader : Loader {
 	/// </summary>
 	protected bool LoadMod; 
 
-	public	const int BitMapHeaderSize=28;
+	public const byte BitMapHeaderSize=28;
 
 	/// <summary>
 	/// The complete image file 
@@ -22,7 +22,7 @@ public class ArtLoader : Loader {
 		/// <summary>
 		/// The palette no to use with this file.
 		/// </summary>
-	public int PaletteNo=0;
+	public short PaletteNo=0;
 
 	/// <summary>
 	/// Loads the image file into the buffer

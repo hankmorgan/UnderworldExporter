@@ -857,7 +857,18 @@ public class ObjectLoader : Loader {
 								{
 										if ((isTrigger(objList[i]) )|| (isTrap(objList[i]) || (isAlwaysInUse(objList[i]))))
 										{
-												objList[i].InUseFlag=1;
+												if (GameWorldController.instance.objectMaster.type[objList[i].item_id] != ObjectInteraction.A_SPELLTRAP)
+												{//To fix bug with level 3 of uw1. Junk objects on level map are spell traps.
+													objList[i].InUseFlag=1;		
+													if (objList[i].link!=0)
+													{
+														if (GameWorldController.instance.objectMaster.type[objList[objList[i].link].item_id]== ObjectInteraction.A_SPELLTRAP)
+														{
+															objList[objList[i].link].InUseFlag=1;	
+														}
+													}
+
+												}
 												if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)
 												{
 														if (objList[i].link!=0)
@@ -1502,6 +1513,10 @@ public class ObjectLoader : Loader {
 		/// <param name="index">Index.</param>
 		public static  ObjectInteraction getObjectIntAt (int index)
 		{
+			/*	if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance==null)
+				{
+						Debug.Log("Attempt to get null instance of object at " + index);
+				}*/
 			return GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
 		}
 
@@ -1556,11 +1571,17 @@ public class ObjectLoader : Loader {
 
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
+						if (i==718)
+						{
+								int a=0;
+								a++;
+						}
 				currObjList.objInfo[i].index=i;
 				bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
 				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
 				//GameWorldController.instance.objectMaster.type[objInt().item_id]
-				if ( ! ( (IsTriggerOrTrap) && (!OnMap) ) )
+				//	if ( ! ( (IsTriggerOrTrap) && (!OnMap) ) )
+				if ((OnMap)) 
 				{//Only clear nexts if the object is not an offmap trigger/trap
 						currObjList.objInfo[i].next=0;
 						if (currObjList.objInfo[i].instance!=null)
@@ -1789,13 +1810,13 @@ public class ObjectLoader : Loader {
 				{
 					ObjectInteraction itemObjInt= obj.GetComponent<ObjectInteraction>();
 					if (itemCounter==0)
-					{//First item link to the container
+					{//First item link to it from the container
 						cnObjInt.link=  itemObjInt.objectloaderinfo.index;		
 						cnObjInt.objectloaderinfo.link= itemObjInt.objectloaderinfo.index;	
 						PrevIndex=itemObjInt.objectloaderinfo.index;
 					}
 					else
-					{//next item next onto previous item.
+					{//the previous items next becomes this.
 						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
 						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
 						itemObjInt.next=0;//end for now.
@@ -1887,7 +1908,11 @@ public class ObjectLoader : Loader {
 							}
 						}
 					GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt,ref objInt.objectloaderinfo);
-				}	
+				}
+				else
+				{
+						Debug.Log("Unable to assign object to list " + objInt.name);
+				}
 				return index;
 		}
 

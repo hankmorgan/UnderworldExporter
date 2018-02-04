@@ -69,8 +69,9 @@ public class LightSource : object_base {
 					{
 						objInt().quality--;
 						LightTimer=LightTimerMax;
-						if (objInt().quality==0)
+						if (objInt().quality<=0)
 						{
+							objInt().quality=0;
 							SetOff();
 						}
 					}	

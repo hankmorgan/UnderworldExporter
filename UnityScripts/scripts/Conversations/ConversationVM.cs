@@ -800,7 +800,10 @@ public class ConversationVM : UWEBase {
 
 						case cnv_TSTNE:
 								{
+										//int val1 = stack.Pop();
+										//int val2 = stack.Pop();
 										if (stack.Pop()!=stack.Pop())
+										//if ((val1) != (val2))
 										{
 												stack.Push(1);
 										}
@@ -1464,7 +1467,7 @@ public class ConversationVM : UWEBase {
 												case "@GI": //Global integer
 														{
 																//FoundString= stack.at(value+1).ToString();
-																FoundString= stack.at(value+1).ToString();
+																FoundString= stack.at(value).ToString();
 																break;	
 														}
 												case "@SS": //Stack string
@@ -1522,7 +1525,7 @@ public class ConversationVM : UWEBase {
 		{
 				//if (func.functionName!="babl_menu")
 				//{
-				//Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
+					//Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
 				//}
 				switch (func.functionName.ToLower())
 				{
@@ -2359,17 +2362,20 @@ public class ConversationVM : UWEBase {
 				Debug.Log("X_skills (" + mode + "," + skillToChange + "," + val3 + "," + val4 +")");
 				if (_RES!=GAME_UW2)
 				{
-						if (mode==10001)
-						{					
-								Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange));
-								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
-						}
-						else
+						switch (mode)
 						{
-								Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange) + " " + mode);
+						case 10001:
+								Debug.Log("Returning skill " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange+1));
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						case 10000:
+								Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange+1) + " " + 6);
+								UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,6);
+								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
+						default:
+								Debug.Log("Possibly setting skill to " + UWCharacter.Instance.PlayerSkills.GetSkillName(skillToChange+1) + " " + mode);
 								UWCharacter.Instance.PlayerSkills.AdvanceSkill(skillToChange,mode);
 								return UWCharacter.Instance.PlayerSkills.GetSkill(skillToChange);
-						}		
+						}
 				}
 				else
 				{//In uw2 skill numbers are zero based?
@@ -3302,28 +3308,12 @@ public class ConversationVM : UWEBase {
 				//description:  unknown TODO
 				//return value: unknown
 
-
-
 				int ItemPos = stack.at(pTradeSlot);
-				/*	if (ItemPos>=TradeAreaOffset)
-			{
-					ItemPos = ItemPos - TradeAreaOffset -1;	
-			}
-			if (ItemPos<=0)
-			{
-				return 0;
-			}*/
 
-
-				//tradeSlotIndex--;//adjust to match my 0-based indices
-				//ObjectInteraction objInt =UWHUD.instance.playerTrade[ItemPos].GetGameObjectInteraction();
 				ObjectInteraction objInt = FindObjectInteractionInObjectList(ItemPos);
 
 				if (objInt != null)
 				{
-						//UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
-						//locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
-						//return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
 						int unitValue = GameWorldController.instance.commonObject.properties[objInt.item_id].Value;
 						int qty =objInt.GetQty(); 
 						if (pStrPtr>=0)
@@ -3539,14 +3529,18 @@ return value: none
 */
 
 
-				/*slotNo--;
-				//Debug.Log ("give_ptr_npc");
-				if  ( (slotNo<0) || (slotNo >3))
-				{
-						return;
-				}*/
-
+				bool ObjectMoved=false;
 				int slotNo = stack.at(ptrSlotNo);
+
+				int[]NearbyRefs = new int[4];
+				for (int i = 1; i<=NearbyRefs.GetUpperBound(0);i++)
+				{
+					if (stack.at(ptrSlotNo+i)>=1024)
+					{//Check for inventory objects in the nearby stack memory.
+					//This is because the object list is rebuilt if an object moves from the player inventory to the npc
+						NearbyRefs[i] = ptrSlotNo+i;	
+					}
+				}
 				Container cn =npc.gameObject.GetComponent<Container>();
 				GameObject objGiven= FindGameObjectInObjectList(slotNo);
 
@@ -3561,6 +3555,7 @@ return value: none
 								//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
 								cn.AddItemToContainer(objGiven.name);
 								GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+								ObjectMoved=true;
 								//UWHUD.instance.playerTrade[slotNo].clear ();
 
 								UWCharacter.Instance.playerInventory.Refresh();
@@ -3596,6 +3591,7 @@ return value: none
 												cn.AddItemToContainer(objGiven.name);
 												objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
 												GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
+												ObjectMoved=true;
 												UWCharacter.Instance.playerInventory.Refresh();
 												//UWHUD.instance.playerTrade[slotNo].clear ();
 										}
@@ -3604,6 +3600,18 @@ return value: none
 				}
 				//After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
 				stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
+				if (ObjectMoved)
+				{
+						Debug.Log("Moving object references");
+						for (int i=1; i<=NearbyRefs.GetUpperBound(0);i++)
+						{
+								if (NearbyRefs[i]!=0)
+								{
+										stack.Set(NearbyRefs[i], stack.at(NearbyRefs[i])-1);			
+								}
+							
+						}
+				}
 
 		}
 
@@ -3806,7 +3814,7 @@ return value: none
 		/// find the total number of matching items
 		/// keep a list of slots where they are found
 		/// keep a number of found slots.
-		public int find_barter_total( int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id )
+		public int find_barter_total( int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id )//TODO:I swapped ptrslot around with ptrcount.
 		{
 				/*
    id=0032 name="find_barter_total" ret_type=int
@@ -4014,7 +4022,7 @@ description:  places a generated object in underworld
 				{
 						if ((conv[currConv].functions[i].ID_or_Address==index) && (conv[currConv].functions[i].import_type==import_variable))
 						{
-								Debug.Log("Setting " + conv[currConv].functions[i].functionName + " to " + newValue + " was " + stack.at(index));
+								//Debug.Log("Setting " + conv[currConv].functions[i].functionName + " to " + newValue + " was " + stack.at(index));
 								return;
 						}
 				}

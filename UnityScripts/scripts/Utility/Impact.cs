@@ -75,7 +75,7 @@ public class Impact : object_base {
 		ObjectInteraction objInt = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ImpactPosition);
 		objInt.GetComponent<AnimationOverlay>().Looping=false;
 		objInt.GetComponent<AnimationOverlay>().StartFrame=StartFrame;
-		objInt.GetComponent<AnimationOverlay>().NoOfFrames=StartFrame-EndFrame;
+		objInt.GetComponent<AnimationOverlay>().NoOfFrames=EndFrame-StartFrame;
 		return objInt.gameObject;
 	}
 

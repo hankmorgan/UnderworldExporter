@@ -12,7 +12,7 @@ using RAIN.Navigation;
 /// </summary>
 public class ObjectInteraction : UWEBase {
 
-		//public int debugindex;
+		public int debugindex;
 		//public int canbeowned;
 
 		/// <summary>
@@ -313,6 +313,14 @@ public class ObjectInteraction : UWEBase {
 			{
 				UpdateAnimation();
 			}
+				if (objectloaderinfo!=null)
+				{
+						debugindex=objectloaderinfo.index;
+				}
+				else
+				{
+						debugindex=-1;
+				}
 		}
 
 		public void UpdateAnimation()
@@ -528,7 +536,7 @@ public class ObjectInteraction : UWEBase {
 					}
 				}
 			}
-
+			
 			if (item!=null)
 			{
 				return(item.PickupEvent());
@@ -2192,7 +2200,7 @@ public class ObjectInteraction : UWEBase {
 				}
 				else
 				{
-						if (link!=0)
+						if (link>=256)
 						{
 								//if (GameWorldController.instance.objectMaster.type[ GameWorldController.instance.CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
 								//{

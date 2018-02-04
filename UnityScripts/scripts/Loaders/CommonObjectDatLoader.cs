@@ -100,6 +100,16 @@ public class CommonObjectDatLoader : Loader {
 
 				//Fix some bugs caused by incorrect data in object settings
 				properties[302].FlagCanBePickedUp=0;//fountains
+				switch(_RES)
+				{
+					case GAME_UW2:
+						properties[290].FlagCanBePickedUp=0;//orbs
+						break;
+					default:
+						properties[279].FlagCanBePickedUp=0;//orbs
+						break;
+				}
+
 
 		}
 

@@ -798,6 +798,7 @@ public class GameWorldController : UWEBase {
 				{
 						if(LevelNo==-1)
 						{//I'm at the main menu. Load up the file data now.
+								critsLoader= new CritLoader[64];//Clear out animations
 								InitLevelData();
 						}
 
@@ -860,7 +861,7 @@ public class GameWorldController : UWEBase {
 						case GAME_SHOCK:
 								break;
 						default:
-								critsLoader= new CritLoader[64];//Clear out animations
+								//critsLoader= new CritLoader[64];//Clear out animations
 								if (UWEBase.EditorMode==false)
 								{
 										//Call events for inventory objects on level transition.
@@ -884,6 +885,7 @@ public class GameWorldController : UWEBase {
 								float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
 
 								UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+								Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
 								UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
 						}
 						startX=-1;startY=-1;

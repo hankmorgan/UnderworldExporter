@@ -10,7 +10,7 @@ public class PaletteLoader : ArtLoader {
 	public int NoOfPals=22;
 	public Palette GreyScale=null;
 
-	public PaletteLoader(string PathToResource , int chunkID)
+	public PaletteLoader(string PathToResource , short chunkID)
 	{
 		Path = Loader.BasePath+ PathToResource;
 		if (_RES==GAME_UW2)
