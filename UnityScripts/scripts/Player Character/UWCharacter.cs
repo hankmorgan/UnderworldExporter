@@ -265,7 +265,7 @@ public class UWCharacter : Character {
 	void SwimmingMode ()
 	{
 		playerCam.transform.localPosition = new Vector3 (playerCam.transform.localPosition.x, -0.8f, playerCam.transform.localPosition.z);
-		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 0.1f);//TODO:redo me
+		swimSpeedMultiplier = Mathf.Max ((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
 		SwimTimer = SwimTimer + Time.deltaTime;
 		//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
 		if (SwimTimer >= 05.0f + PlayerSkills.Swimming * 15.0f) {

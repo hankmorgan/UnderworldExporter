@@ -52,6 +52,10 @@ public class CnvStack {
 			instrp=0;
 			TopValue=0;
 			call_level=1;
+			for (int i=0; i<StackValues.GetUpperBound(0);i++)
+			{
+				StackValues[i]=0;
+			}
 		}
 
 		/// <summary>
@@ -63,12 +67,12 @@ public class CnvStack {
 				stackptr--;
 				if (stackptr>StackValues.GetUpperBound(0))
 				{
-						Debug.Log ("POP Stack out of bounds- At (" + stackptr + ")");
+						Debug.Log ("POP Stack out of bounds- At (" + stackptr + ") instrp:" + instrp);
 						return 0;
 				}
 				if (stackptr<0)
 				{
-						Debug.Log ("POP Stack out of bounds (neg)- At (" + stackptr + ")");
+						Debug.Log ("POP Stack out of bounds (neg)- At (" + stackptr + ") instrp:" + instrp);
 						return 0;
 				}
 				int popvalue = StackValues[stackptr];

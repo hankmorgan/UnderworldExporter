@@ -199,6 +199,7 @@ public class CutsAnimator : GuiBase {
 				TargetControl.material=UI_UNLIT;
 				cuts = new CutsLoader("cs403.n01");
 				mode=true;Reset=false;
+				looping=false;
 				TargetControl.texture = cuts.ImageCache[0];
 				StartCoroutine (cutscenerunner());		
 				break;
@@ -206,7 +207,7 @@ public class CutsAnimator : GuiBase {
 				TargetControl.material=UI_UNLIT;
 				cuts = new CutsLoader("cs403.n02");
 				TargetControl.texture = cuts.ImageCache[0];
-				looping=true;
+				looping=false;
 				mode=true;Reset=false;
 				StartCoroutine (cutscenerunner());		
 				break;

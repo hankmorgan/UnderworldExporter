@@ -311,7 +311,7 @@ public class Magic : UWEBase {
 				}
 				else
 				{
-						return caster.transform.forward;
+					return caster.transform.forward;		
 				}
 		}
 
@@ -807,11 +807,11 @@ public class Magic : UWEBase {
 							SetSpellCost(6);
 							if(_RES==GAME_UW2)
 							{
-								Cast_VasOrtGrav(caster,SpellEffect.UW2_Spell_Effect_SheetLightning);	
+								Cast_VasOrtGrav(caster,SpellEffect.UW2_Spell_Effect_SheetLightning, false);	
 							}
 							else
 							{
-								Cast_VasOrtGrav(caster,SpellEffect.UW1_Spell_Effect_SheetLightning);		
+								Cast_VasOrtGrav(caster,SpellEffect.UW1_Spell_Effect_SheetLightning, false);		
 							}
 							break;
 						}//VOG
@@ -1125,10 +1125,11 @@ public class Magic : UWEBase {
 		/// </summary>
 		/// <param name="caster">Caster.</param>
 		/// <param name="EffectID">Effect ID of the spell</param>
-		void Cast_VasOrtGrav(GameObject caster, int EffectID)
+		void Cast_VasOrtGrav(GameObject caster, int EffectID, bool CastFromWindow)
 		{//Sheet lightning
 				SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
 				spVOG.init (EffectID,caster);
+				spVOG.CastRaySource = CastFromWindow;
 				CastProjectile(caster, (SpellProp)spVOG);
 		}
 
@@ -3134,7 +3135,7 @@ public class Magic : UWEBase {
 				UWCharacter playerUWLocal = caster.GetComponent<UWCharacter>();
 				if (playerUWLocal !=null)
 				{
-						Ray ray = getRay (caster);
+						Ray ray = getRay (caster, spellprop.CastRaySource);
 						RaycastHit hit = new RaycastHit(); 
 						float dropRange=0.5f;
 						if (!Physics.Raycast(ray,out hit,dropRange))
@@ -3450,6 +3451,23 @@ public class Magic : UWEBase {
 						ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				}
 				return ray;
+		}
+
+		/// <summary>
+		/// Gets a raycast from the player
+		/// </summary>
+		/// <returns>The ray</returns>
+		/// <param name="caster">Caster.</param>
+		Ray getRay(GameObject caster, bool castFromWindow)
+		{
+				if ( ! castFromWindow)
+				{
+						return getRay(caster);
+				}
+				else
+				{
+					return Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));	
+				}
 		}
 
 
@@ -4121,7 +4139,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:						
 						if (SpellRule!=SpellRule_TargetVector)
 						{
-								Cast_VasOrtGrav(caster,EffectID);
+								Cast_VasOrtGrav(caster,EffectID, true);
 						}
 						else
 						{
@@ -5156,7 +5174,7 @@ public class Magic : UWEBase {
 						{
 								if (SpellRule!=SpellRule_TargetVector)
 								{
-										Cast_VasOrtGrav(caster,EffectID);
+										Cast_VasOrtGrav(caster,EffectID, true);
 								}
 								else
 								{

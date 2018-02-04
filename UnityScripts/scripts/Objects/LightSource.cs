@@ -148,45 +148,23 @@ public class LightSource : object_base {
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
 		PlayerInventory pInv = UWCharacter.Instance.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		InventorySlot invSlot = null;
-		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
-		{						
-			invSlot=UWHUD.instance.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
-		}
-		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))
-		{
-			invSlot=UWHUD.instance.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
-		}
-		else if ((pInv.sRightHand=="") || (pInv.sRightHand==this.name))
-		{
-			invSlot=UWHUD.instance.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
-		}
-		else if ((pInv.sLeftHand=="") || (pInv.sLeftHand==this.name))
-		{
-			invSlot=UWHUD.instance.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
-		}
+		GetInventorySlotForLightSource (pInv, ref invSlot);
 		if (invSlot != null)
 			{
 			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (objInt().link==1)) || (objInt().isEnchanted()==true))
 			{//Is a quantity of one or not a quantity/
-				pInv.RemoveItem(this.name);
-				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
-				objInt().inventorySlot=invSlot.slotIndex;
-				//IsOn=true;
-				objInt().item_id=objInt().item_id+4;
-				//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-				//Duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
-				objInt().InvDisplayIndex=objInt().item_id;
+					PutLightSourceInSlot (pInv, invSlot);
 			}
 			else
 			{//Clone the item and move it's clone to the inventory slot
-				GameObject split = Instantiate(this.gameObject);
-				split.name= split.name+"_"+ UWCharacter.Instance.summonCount++;
-				split.GetComponent<ObjectInteraction>().link=1;//Increment and decrement the object count as appropiate;
-				objInt().link--;
-				split.transform.parent=this.transform.parent;
-				//Activate the split instead
-				split.GetComponent<ObjectInteraction>().Use();
-				split.GetComponent<ObjectInteraction>().isquant=0;
+				if (objInt().GetItemType() != ObjectInteraction.REFILLABLE_LANTERN)
+				{
+					SplitLightSourceIntoSlot ();
+				}
+				else
+				{
+					PutLightSourceInSlot(pInv, invSlot);
+				}
 			}
 		}
 		else
@@ -195,6 +173,55 @@ public class LightSource : object_base {
 		}
 		objInt().RefreshAnim();
 		UWCharacter.Instance.playerInventory.UpdateLightSources();
+	}
+
+	void SplitLightSourceIntoSlot ()
+	{
+		GameObject split = Instantiate (this.gameObject);
+		split.name = split.name + "_" + UWCharacter.Instance.summonCount++;
+		split.GetComponent<ObjectInteraction> ().link = 1;
+		//Increment and decrement the object count as appropiate;
+		objInt ().link--;
+		if (objInt ().link < 0) {
+			objInt ().link = 0;
+		}
+		split.transform.parent = this.transform.parent;
+		//Activate the split instead
+		split.GetComponent<ObjectInteraction> ().Use ();
+		split.GetComponent<ObjectInteraction> ().isquant = 1;
+	}
+
+	void PutLightSourceInSlot (PlayerInventory pInv , InventorySlot invSlot)
+	{
+		pInv.RemoveItem (this.name);
+		pInv.SetObjectAtSlot (invSlot.slotIndex, this.name);
+		objInt ().inventorySlot = invSlot.slotIndex;
+		objInt ().item_id = objInt ().item_id + 4;
+		objInt ().InvDisplayIndex = objInt ().item_id;
+	}
+
+		/// <summary>
+		/// Gets the inventory slot for light source.
+		/// </summary>
+		/// <param name="pInv">P inv.</param>
+		/// <param name="invSlot">Inv slot.</param>
+	void GetInventorySlotForLightSource (PlayerInventory pInv, ref InventorySlot invSlot)
+	{
+		if ((pInv.sRightShoulder == "") || (pInv.sRightShoulder == this.name)) {
+			invSlot = UWHUD.instance.RightShoulder_Slot.gameObject.GetComponent<InventorySlot> ();
+		}
+		else
+			if ((pInv.sLeftShoulder == "") || (pInv.sLeftShoulder == this.name)) {
+				invSlot = UWHUD.instance.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot> ();
+			}
+			else
+				if ((pInv.sRightHand == "") || (pInv.sRightHand == this.name)) {
+					invSlot = UWHUD.instance.RightHand_Slot.gameObject.GetComponent<InventorySlot> ();
+				}
+				else
+					if ((pInv.sLeftHand == "") || (pInv.sLeftHand == this.name)) {
+						invSlot = UWHUD.instance.LeftHand_Slot.gameObject.GetComponent<InventorySlot> ();
+					}
 	}
 	
 	/// <summary>
@@ -207,6 +234,7 @@ public class LightSource : object_base {
 		//objInt().InvDisplayIndex=ItemIdOff;
 		objInt().item_id=objInt().item_id-4;
 		objInt().InvDisplayIndex=objInt().item_id;
+		objInt().WorldDisplayIndex=objInt().item_id;
 		objInt().isquant=1;
 		objInt().RefreshAnim();
 		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;

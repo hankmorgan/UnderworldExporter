@@ -4250,7 +4250,10 @@ public class TileMapRenderer : Loader{
 		}
 		else {
 			Tile.layer = LayerMask.NameToLayer ("Water");
-			AddWaterContact(Tile);
+			if (t.tileType!=TILE_SOLID)
+			{
+					AddWaterContact(Tile);					
+			}			
 		}
 	}
 

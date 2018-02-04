@@ -602,6 +602,7 @@ public class ConversationVM : UWEBase {
 				Time.timeScale=0.00f;
 				Teleport=false;
 				SettingUpFight=false;
+				StopAllCoroutines();
 				StartCoroutine(RunConversationVM(npc));
 		}
 
@@ -626,6 +627,9 @@ public class ConversationVM : UWEBase {
 				stack=new CnvStack(4096);
 				stack.set_stackp(200);//Skip over imported memory for the moment
 				stack.basep=0;
+				WaitingForInput=false;
+				WaitingForTyping=false;
+				WaitingForMore=false;
 
 				//Import the variables
 				ImportVariableMemory(npc);
@@ -823,6 +827,7 @@ public class ConversationVM : UWEBase {
 
 						case cnv_BEQ:
 								{
+										int origInstrp= stack.instrp;
 										if (stack.Pop() == 0)
 										{
 												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
@@ -832,11 +837,13 @@ public class ConversationVM : UWEBase {
 										{
 												stack.instrp++;	
 										}
+										//Debug.Log("BEQ to " + stack.instrp + " at " + origInstrp);
 										break;
 								}						
 
 						case cnv_BNE:
 								{
+										int origInstrp= stack.instrp;
 										if (stack.Pop() != 0)
 										{
 												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
@@ -845,12 +852,15 @@ public class ConversationVM : UWEBase {
 										{
 												stack.instrp++;	
 										}
+										//Debug.Log("BNE to " + stack.instrp + " at " + origInstrp);
 										break;
 								}						
 
 						case cnv_BRA:
 								{
+										int origInstrp= stack.instrp;
 										stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
+										//Debug.Log("BRA to " + stack.instrp + " at " + origInstrp);
 										/*int offset = conv[currConv].instuctions[stack.instrp+1];
 						if (offset >0)
 						{							
@@ -865,11 +875,13 @@ public class ConversationVM : UWEBase {
 
 						case cnv_CALL: // local function
 								{
+										int origInstrp= stack.instrp;
 										// stack value points to next instruction after call
 										//Debug.Log("inst=" + stack.instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[stack.instrp+1]-1));
 										stack.Push(stack.instrp+1);
 										stack.instrp = conv[currConv].instuctions[stack.instrp+1]-1;
 										stack.call_level++;
+										//Debug.Log("CALL to " + stack.instrp + " at " + origInstrp);
 										break;	
 								}
 
@@ -1286,9 +1298,10 @@ public class ConversationVM : UWEBase {
 										stack.Set(address,GameClock.game_min());break;
 								case "game_days":
 										stack.Set(address,GameClock.day());break;
-										//case "game_time"://What shou
+								case "game_time"://What shou
 										//stack.Set(address,GameClock.);
-										//break;
+										stack.Set(address,GameClock.second());break;
+										break;
 								case "riddlecounter":
 										stack.Set(address,0);break;
 								case "dungeon_level":
@@ -1354,7 +1367,7 @@ public class ConversationVM : UWEBase {
 								case "play_hunger":
 										stack.Set(address,UWCharacter.Instance.FoodLevel);break;
 								default:
-										//Debug.Log("uniplemented memory import " + conv[currConv].functions[i].functionName);
+										Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
 										break;
 
 								}
@@ -1365,9 +1378,6 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator say_op(int arg1)
 		{
-				//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
-				//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
-				//UWHUD.instance.Conversation_tl.Add ( StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n", NPC_SAY);
 				yield return StartCoroutine(say_op(arg1,NPC_SAY));
 				yield return 0;
 		}
@@ -1375,20 +1385,14 @@ public class ConversationVM : UWEBase {
 
 		IEnumerator say_op(int arg1, int PrintType)
 		{
-				//Debug.Log( stringcontrol.GetString(conv[currConv].StringBlock,arg1));
-				//Output.text += StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n";
-
-				///Sets the markup to colour the text based on print type.
-
-				//UWHUD.instance.Conversation_tl.Add ( Markup + StringController.instance.GetString(conv[currConv].StringBlock,arg1) + "\n" + "</color>");
 				yield return StartCoroutine(say_op(StringController.instance.GetString(conv[currConv].StringBlock,arg1),PrintType));
 				yield return 0;
-
 		}
 
 
 		IEnumerator say_op(string text, int PrintType)
 		{	
+				yield return new WaitForSecondsRealtime(0.2f);
 				if (text.Contains("@"))
 				{
 						text = TextSubstitute(text);
@@ -1466,8 +1470,18 @@ public class ConversationVM : UWEBase {
 														}
 												case "@GI": //Global integer
 														{
-																//FoundString= stack.at(value+1).ToString();
-																FoundString= stack.at(value).ToString();
+																Debug.Log("@GI String replacement");//Sometimes this works with val+1 other times val!!
+																//Shak works with val + 1
+																if (value < conv[currConv].NoOfImportedGlobals-conv[currConv].NoOfMemorySlots)
+																{
+																		FoundString= stack.at(value+1).ToString();		
+																}
+																else
+																{
+																		FoundString= stack.at(value).ToString();
+																}
+
+																//FoundString= stack.at(value).ToString();
 																break;	
 														}
 												case "@SS": //Stack string
@@ -2088,7 +2102,7 @@ public class ConversationVM : UWEBase {
 		public IEnumerator babl_menu(int Start)
 		{
 				UWHUD.instance.MessageScroll.Clear();
-				//PlayerInput.text="";
+				yield return new WaitForSecondsRealtime(0.2f);
 				usingBablF=false;
 				MaxAnswer=0;
 				int j=1;
@@ -2101,9 +2115,6 @@ public class ConversationVM : UWEBase {
 								{
 										TextLine=TextSubstitute(TextLine);
 								}
-								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",UWCharacter.Instance.CharName));
-								//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
-								//PlayerInput.text += (j++ + "." + StringController.instance.GetString(conv[currConv].StringBlock,stack.at(i))) + "\n";
 								UWHUD.instance.MessageScroll.Add(j++ + "." +  TextLine + "");//  \n
 
 								MaxAnswer++;
@@ -2131,9 +2142,7 @@ public class ConversationVM : UWEBase {
 		public IEnumerator babl_fmenu(int Start, int flagIndex)
 		{
 				UWHUD.instance.MessageScroll.Clear();
-				//Debug.Log("babl_fmenu - " + Start + " " + flagIndex);
-				//tl_input.Clear();
-				//PlayerInput.text="";
+				yield return new WaitForSecondsRealtime(0.2f);
 				usingBablF=true;
 				for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
 				{//Reset the answers array
@@ -2167,10 +2176,9 @@ public class ConversationVM : UWEBase {
 						}
 				}
 				yield return StartCoroutine(WaitForInput());
-				//tmp= StringController.instance.GetString (stringcontrol.GetString(conv[currConv].StringBlock,bablf_array[bablf_ans-1]);
-				//yield return StartCoroutine(say (tmp,PC_SAY));
+
 				yield return StartCoroutine(say_op(bablf_array[bablf_ans-1],PC_SAY));
-				//stack.result_register=bablf_array[bablf_ans-1];
+
 				stack.result_register=PlayerAnswer;
 				yield return 0;
 		}

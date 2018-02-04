@@ -156,8 +156,21 @@ public class Wand : enchantment_base {
 		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		base.InventoryEventOnLevelEnter ();
 			//Create a spell trap and store it on the map. This occurs before the list is rendered.
-		ObjectLoaderInfo newobj= ObjectLoader.newObject(390,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
-		//ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobj,GameWorldController.instance.LevelMarker().gameObject,new Vector3(99f*1.2f,0,99f*1.2f));
+				//Try and find an existing spell trap with the necessary qualities. If not found then create a new one
+				ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int i = 256; i<=objList.GetUpperBound(0);i++)
+				{
+						if (objList[i].item_id ==288 )//A spell
+						{
+								if (objList[i].link == SpellObjectLink)
+								{
+										objInt().link=i;
+										return;
+								}
+						}
+				}
+
+		ObjectLoaderInfo newobj= ObjectLoader.newObject(288,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
 		objInt().link = newobj.index;
 		}
 
@@ -176,11 +189,12 @@ public class Wand : enchantment_base {
 				{		
 					SpellObjectOwnerToCreate = spell.objInt().owner;	
 					SpellObjectQualityToCreate = spell.objInt().quality;
+					//SpellObjectLink = spell.objInt().link;
 					//SpellObjectLinkToCreate=spell.objInt().link;
 					//Flag the spell trap as not being in use and change it's type to a fist so it will not persist.
 					//Assumes spell traps are all stored off map
-					spell.objInt().objectloaderinfo.InUseFlag=0;
-					spell.objInt().objectloaderinfo.item_id=0;
+					//spell.objInt().objectloaderinfo.InUseFlag=0;
+					//spell.objInt().objectloaderinfo.item_id=0;
 				}
 			}
 			//SpellObjectOwnerToCreate 

@@ -864,13 +864,16 @@ public class GameWorldController : UWEBase {
 								//critsLoader= new CritLoader[64];//Clear out animations
 								if (UWEBase.EditorMode==false)
 								{
-										//Call events for inventory objects on level transition.
-										foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
+										if (LoadingGame==false)
 										{
-												if (t.gameObject.GetComponent<object_base>()!=null)
+												//Call events for inventory objects on level transition.
+												foreach (Transform t in GameWorldController.instance.InventoryMarker.transform) 
 												{
-														t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
-												}
+														if (t.gameObject.GetComponent<object_base>()!=null)
+														{
+																t.gameObject.GetComponent<object_base>().InventoryEventOnLevelEnter();
+														}
+												}		
 										}
 								}
 								break;
@@ -1539,7 +1542,11 @@ public class GameWorldController : UWEBase {
 										add_ptr+=4;
 										for (int g=0; g<bGlobals[i].Size; g++)
 										{
-												bGlobals[i].Globals[g]=	(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);							
+												bGlobals[i].Globals[g]=	(int)DataLoader.getValAtAddress(bglob_data,add_ptr,16);	
+												if (bGlobals[i].Globals[g]==65535)
+												{
+														bGlobals[i].Globals[g]=0;	
+												}
 												add_ptr = add_ptr+2;
 										}						
 								}

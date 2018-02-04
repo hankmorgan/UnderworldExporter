@@ -5,6 +5,8 @@ using System.Collections;
 /// </summary>
 public class SpellProp : UWClass {
 
+	/// Cast from center of window or from mouse position
+	public bool CastRaySource; //false use default	
 	///How much damage or the base value the spell applies.
 	public short BaseDamage;
 	///How long the spell effect lasts

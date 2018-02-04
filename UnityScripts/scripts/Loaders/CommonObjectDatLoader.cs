@@ -107,6 +107,7 @@ public class CommonObjectDatLoader : Loader {
 						break;
 					default:
 						properties[279].FlagCanBePickedUp=0;//orbs
+						properties[172].CanBelongTo =0;//Gold plate
 						break;
 				}
 

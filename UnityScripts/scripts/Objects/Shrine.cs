@@ -161,7 +161,7 @@ public class Shrine : Model3D {
 			answer="Charm";break;
 		case Mantra_ANRA ://Defense
 			playerSkills.AdvanceSkill(Skills.SkillDefense,SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillDefense)  );
-			answer="Anra";break;
+			answer="Defense";break;
 		case Mantra_LAHN ://Lore 
 			playerSkills.AdvanceSkill(Skills.SkillLore,SkillPointsToAdd + Skills.getSkillAttributeBonus(Skills.SkillLore));
 			answer="Lore";break;

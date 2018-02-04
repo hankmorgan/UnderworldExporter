@@ -1957,7 +1957,7 @@ public class TileMap : Loader {
 
 				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
 				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
-				{//prepopulate with existing data. Vanilla underworld will crash otherwise
+				{//prepopulate with existing file data. Vanilla underworld will crash otherwise
 					TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
 				}
 				//return TileMapData;

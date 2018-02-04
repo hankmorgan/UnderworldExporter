@@ -252,15 +252,15 @@ public class SaveGame : Loader {
 										case 0x66://Quest flags
 												{
 														int val = (int)DataLoader.getValAtAddress(buffer,i,32);
-														for (int b=31; b>=0;b--)
+														for (int b=0; b<=31;b++)
 														{//Check order here
-																if (((val<<b) & 0x1) == 1)
+																if (((val>>(b)) & 0x1) == 1)
 																{
-																	Quest.instance.QuestVariables[32-b]=1;
+																	Quest.instance.QuestVariables[b]=1;
 																}
 																else
 																{
-																	Quest.instance.QuestVariables[32-b]=0;	
+																	Quest.instance.QuestVariables[b]=0;	
 																}
 														}
 														break;

@@ -229,8 +229,8 @@ public class object_base : UWEBase {
 		}
 		if(CanBeOwned())
 		{
-			//if (((objInt().owner & 0x1f))!=0)
-			if ((objInt().owner < 31) && (objInt().owner >0))
+			if (((objInt().owner & 0x1f))!=0)
+			//if ((objInt().owner < 31) && (objInt().owner >0))
 			{
 				SignalTheft(UWCharacter.Instance.transform.position, objInt().owner , 4f);
 				objInt().owner=0;
@@ -638,8 +638,8 @@ public class object_base : UWEBase {
 		{
 			if (CanBeOwned())
 			{
-				//if (((objInt().owner & 0x1f))!=0)
-				if ((objInt().owner < 31) && (objInt().owner >0))
+				if (((objInt().owner & 0x1f))!=0)
+				//if ((objInt().owner < 31) && (objInt().owner >0))
 				{
 					return " belonging to"	+ StringController.instance.GetString(1,370+(objInt().owner & 0x1f) );//This is what uw formats says. I think this is wrong...
 				}

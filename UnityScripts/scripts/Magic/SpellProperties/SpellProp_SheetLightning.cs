@@ -13,8 +13,8 @@ public class SpellProp_SheetLightning : SpellProp_Fireball {
 		BaseDamage=8;
 		splashDamage=3;
 		splashDistance=1.0f;
-		impactFrameStart=62;
-		impactFrameEnd=62;
+		impactFrameStart=50;
+		impactFrameEnd=53;
 		spread=4;
 		noOfCasts=Random.Range(1,3);
 		SecondaryStartFrame=50;

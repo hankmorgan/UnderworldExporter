@@ -14,8 +14,12 @@ public class Model3D : object_base {
 		AdjustModelPos();
 		this.gameObject.layer = LayerMask.NameToLayer("MapMesh");
 		GameObject child = new GameObject();
-		child.transform.parent=this.transform;						
-		Generate3DModel (this.gameObject);
+		child.transform.parent=this.transform;	
+				if (this.GetComponent<MeshFilter>()==null)
+				{//doN'T RENDER A MODEL IF THIS IS A CLONE
+						Generate3DModel (this.gameObject);				
+				}
+		
 	}
 
 	void Generate3DModel (GameObject parent)

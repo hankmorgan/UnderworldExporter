@@ -145,7 +145,9 @@ public class Skills : MonoBehaviour {
 			case SkillAxe : Axe+=SkillPoints;Axe = Mathf.Min(30, Axe);break;
 			case SkillMace :  Mace+=SkillPoints;Mace = Mathf.Min(30, Mace);break;
 			case SkillMissile : Missile+=SkillPoints;Missile = Mathf.Min(30, Missile);break;
-			case SkillMana : ManaSkill+=SkillPoints;ManaSkill = Mathf.Min(30, ManaSkill);break;
+			case SkillMana : ManaSkill+=SkillPoints;ManaSkill = Mathf.Min(30, ManaSkill);
+						UWCharacter.Instance.PlayerMagic.MaxMana= ManaSkill*3;
+						break;
 			case SkillLore : Lore+=SkillPoints;Lore = Mathf.Min(30, Lore);break;
 			case SkillCasting : Casting+=SkillPoints;Casting = Mathf.Min(30, Casting);break;
 			case SkillTraps : Traps+=SkillPoints;Traps = Mathf.Min(30, Traps);break;

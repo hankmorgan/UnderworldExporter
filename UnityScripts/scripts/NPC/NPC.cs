@@ -160,7 +160,7 @@ public class NPC : MobileObject {
 		public string CurrentSpriteName="";
 		public Sprite currentSpriteLoaded;
 
-		public int Ammo=4;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+		public int Ammo=1;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 
 		private short StartingHP;
 

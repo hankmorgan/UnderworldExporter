@@ -285,20 +285,34 @@ public class AutoMap : Loader {
 			long automapAddress=0;
 			long automapNotesAddress=0;
 			long AUTOMAP_EOF_ADDRESS=0;
-
+				bool initAutoMaps=true;
 
 				//The order the automap notes are saved on file is different from the order of the level nos.
 				//Goes in order of when notes are added.
 				for (int au=0; au<=AutomapNoteAddresses.GetUpperBound(0); au++)
 				{
 					AutomapNoteAddresses[au]=DataLoader.getValAtAddress(lev_ark,((au+36) * 4) + 2 ,32);
+						if (AutomapNoteAddresses[au]!=0)
+						{
+								initAutoMaps=false;	
+						}
 				}
 
 				automapAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+27) * 4) + 2 ,32);
 				automapNotesAddress= DataLoader.getValAtAddress(lev_ark,((LevelNo+36) * 4) + 2 ,32);
 
 				AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo,lev_ark);	
-
+				if (initAutoMaps)
+				{//No notes have been made yet Init with some dummy data.
+						System.Guid guid = System.Guid.NewGuid();
+						MapNote newmapnote = new MapNote();
+						//newmapnote.NotePosition=pos;
+						newmapnote.PosX= 0;
+						newmapnote.PosY= 0;
+						newmapnote.NoteText= LevelNo.ToString();
+						newmapnote.guid=guid;
+						MapNotes.Add(newmapnote);
+				}
 
 				//Load Automap info
 				if (automapAddress!=0)
