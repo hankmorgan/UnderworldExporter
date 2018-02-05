@@ -425,7 +425,7 @@ public class InventorySlot : GuiBase {
 						{
 						ObjectInteraction objIntUsedOn = ObjectUsedOn.GetComponent<ObjectInteraction>();
 						//if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant() ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant())&&(ObjectUsedOn.GetComponent<ObjectInteraction>().link==1)) || (ObjectUsedOn.GetComponent<ObjectInteraction>().isEnchanted() ==true))
-						if ((!objIntUsedOn.IsStackable()) || ( (objIntUsedOn.IsStackable()) &&  (objIntUsedOn.GetQty()==1)))
+						if ((!objIntUsedOn.IsStackable()) || ( (objIntUsedOn.IsStackable()) &&  (objIntUsedOn.GetQty()<=1)))
 							{//Is either not a quant or is a quantity of 1
 							UWCharacter.Instance.playerInventory.ObjectInHand= ObjectUsedOn.name;
 							//UWHUD.instance.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;

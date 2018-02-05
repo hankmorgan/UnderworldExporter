@@ -146,7 +146,7 @@
 145	0	0	0	22	a_torch_torches	145	145	1	1	1	1
 146	0	0	0	22	a_candle	146	146	1	1	1	1
 147	0	0	0	22	a_taper	147	147	1	1	1	1
-148	0	0	0	22	a_lit_lantern	148	148	1	1	1	1
+148	0	0	0	88	a_lit_lantern	148	148	1	1	1	1
 149	0	0	0	22	a_lit_torch	149	149	1	1	1	1
 150	0	0	0	22	a_lit_candle	150	150	1	1	1	1
 151	0	0	0	22	a_lit_taper	151	151	1	1	1	1
@@ -285,7 +285,7 @@
 284	0	0	0	16	some_strong_thread_pieces_of_strong_thread	284	284	1	1	0	1
 285	0	0	0	16	dragon_scales_bunches_of_dragon_scales	285	285	0	1	0	1
 286	0	0	0	16	a_resilient_sphere_some_resilient_spheres	286	286	1	1	0	1
-287	0	0	0	16	a_standard	287	287	0	1	0	1
+287	0	0	0	16	a_standard	287	287	1	1	0	1
 288	0	0	0	99	a_spell	288	288	0	1	0	1
 289	0	0	0	94	a_bedroll	289	289	1	1	0	1
 290	0	0	0	81	a_silver_seed	290	290	1	1	1	1

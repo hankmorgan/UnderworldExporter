@@ -668,7 +668,7 @@ public class PlayerInventory : UWEBase {
 			bLeftRing=true;
 			return true;
 		}
-		Container backpack = GameObject.Find(this.currentContainer).GetComponent<Container>();
+		Container backpack = this.playerContainer;
 		for (int i =0; i<8;i++)
 		{
 			if (ObjectName == backpack.items[i])
@@ -679,8 +679,27 @@ public class PlayerInventory : UWEBase {
 				return true;
 			}
 		}
+	
+		foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
+				if (child.GetComponent<Container>()!=null)
+				{
+						Container cn = child.GetComponent<Container>();
+						if (cn!=null)
+						{
+								for (int i=0; i<=cn.items.GetUpperBound(0);i++)
+								{
+										if (cn.items[i] == ObjectName)
+										{
+												cn.items[i]="";
+												return true;
+										}
+								}
+						}
+
+				}
+		}
 		//Try and find it in the entire inventory
-		if (Container.RemoveItemFromSubContainers(playerContainer,ObjectName))
+		/*if (Container.RemoveItemFromSubContainers(playerContainer,ObjectName))
 		{
 			return true;
 		}
@@ -699,7 +718,7 @@ public class PlayerInventory : UWEBase {
 				}
 			}
 
-		}
+		}*/
 		return false;
 	}
 

@@ -27,7 +27,7 @@ public class Cutscene_Dream_7 : Cuts {
 
 
 
-				StringBlockNo=3105;//was 3104
+				StringBlockNo=3098;//was 3104
 				noOfSubs=3;
 				for (int i=0;i<noOfSubs;i++)
 				{

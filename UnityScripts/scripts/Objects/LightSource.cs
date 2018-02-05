@@ -42,12 +42,6 @@ public class LightSource : object_base {
 		/// Current time remaining on the light quality interval
 	public float LightTimer;
 
-	//protected override void Start ()
-	//{
-		//base.Start ();
-		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-		//duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
-	//}
 
 	/// <summary>
 	/// Ticks down the light source
@@ -143,7 +137,6 @@ public class LightSource : object_base {
 		}
 		LightTimer=LightTimerMax;		
 
-		//CheckReferences();
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
 		PlayerInventory pInv = UWCharacter.Instance.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
@@ -151,7 +144,7 @@ public class LightSource : object_base {
 		GetInventorySlotForLightSource (pInv, ref invSlot);
 		if (invSlot != null)
 			{
-			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (objInt().link==1)) || (objInt().isEnchanted()==true))
+			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (objInt().link<=1)) || (objInt().isEnchanted()==true))
 			{//Is a quantity of one or not a quantity/
 					PutLightSourceInSlot (pInv, invSlot);
 			}

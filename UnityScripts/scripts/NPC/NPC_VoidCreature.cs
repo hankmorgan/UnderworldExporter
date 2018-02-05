@@ -13,7 +13,7 @@ public class NPC_VoidCreature : NPC {
 
 		//int animToUse=0;
 		base.Start ();
-		playAnimation (GetAnimIndex() ,true);
+		playAnimation (GetAnimIndex() ,false);
 	}
 	
 	// Override update so NPC will do nothing

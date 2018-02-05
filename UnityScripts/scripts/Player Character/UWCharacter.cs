@@ -1120,7 +1120,10 @@ public class UWCharacter : Character {
 		UWHUD.instance.EnableDisableControl (UWHUD.instance.CutsceneFullPanel.gameObject, true);
 		//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 		incense.consumeObject ();
-		switch (Quest.instance.getIncenseDream ()) {
+		Cutscene_Incense d = UWHUD.instance.gameObject.AddComponent<Cutscene_Incense>();
+		UWHUD.instance.CutScenesFull.cs=d;
+		UWHUD.instance.CutScenesFull.Begin();
+/*		switch (Quest.instance.getIncenseDream ()) {
 		case 0:
 			UWHUD.instance.CutScenesFull.SetAnimationFile = "cs013_n01";
 			break;
@@ -1129,8 +1132,14 @@ public class UWCharacter : Character {
 			break;
 		case 2:
 			UWHUD.instance.CutScenesFull.SetAnimationFile = "cs015_n01";
-			break;
-		}
+			break;*/
+	//	}
+				/*
+						Cutscene_Dream_3 d3 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_3>();
+						UWHUD.instance.CutScenesFull.cs=d3;
+						UWHUD.instance.CutScenesFull.Begin();
+
+				 */
 	}
 
 	void DreamTravelToVoid()
