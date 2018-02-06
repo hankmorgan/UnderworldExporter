@@ -54,7 +54,7 @@ public class Potion : enchantment_base {
 
 	protected override int GetActualSpellIndex ()
 	{
-		return objInt().link - 527;
+		return objInt().link - 256;//527;
 	}
 
 

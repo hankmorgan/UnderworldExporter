@@ -104,4 +104,17 @@ public class ObjectLoaderInfo : UWClass {
 		public short[] NPC_DATA=new short[15];
 
 		public System.Guid guid;
+
+
+
+		/// <summary>
+		/// Gets the type of the item from object masters. UWE object type codes.
+		/// </summary>
+		/// <returns>The item type.</returns>
+		public int GetItemType()
+		{
+				return GameWorldController.instance.objectMaster.type[item_id];
+		}
+
+
 }

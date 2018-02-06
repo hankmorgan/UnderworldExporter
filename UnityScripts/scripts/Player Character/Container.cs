@@ -806,4 +806,46 @@ public class Container : object_base {
 		}
 			
 	}
+
+	public override bool DropEvent ()
+	{
+		base.DropEvent ();
+		for (short i=0; i<=items.GetUpperBound(0);i++)
+		{
+				if (items[i]!="")
+				{
+						GameObject obj =  GetGameObjectAt(i);
+						if (obj!=null)
+						{							
+								if (obj.GetComponent<object_base>()!=null)
+								{
+										obj.GetComponent<object_base>().DropEvent();
+								}
+						}
+				}
+		}
+		return true;
+	}
+
+
+	public override bool PickupEvent ()
+	{
+		base.PickupEvent();
+		for (short i=0; i<=items.GetUpperBound(0);i++)
+		{
+				if (items[i]!="")
+				{
+						GameObject obj =  GetGameObjectAt(i);
+						if (obj!=null)
+						{
+								if (obj.GetComponent<object_base>()!=null)
+								{
+										obj.GetComponent<object_base>().PickupEvent();
+								}
+						}
+				}
+		}
+		return true;
+	}
+
 }

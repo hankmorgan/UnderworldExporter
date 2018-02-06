@@ -2287,4 +2287,21 @@ public class ObjectInteraction : UWEBase {
 			return (GameWorldController.instance.objectMaster.isMoveable[item_id]==1);
 		}
 
+
+
+		public static string UniqueObjectName(ObjectInteraction currObj)
+		{//returns a unique name for the object
+				//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+				{
+				case ObjectInteraction.DOOR:
+				case ObjectInteraction.HIDDENDOOR:
+				case ObjectInteraction.PORTCULLIS:
+						return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
+				default:
+						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+ System.Guid.NewGuid();
+				}
+		}
+
+
 }

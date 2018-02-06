@@ -630,7 +630,8 @@ public class InventorySlot : GuiBase {
 						{
 								string ObjectName="";
 								string UseString="";
-								ObjectName=StringController.instance.GetSimpleObjectNameUW(objInt.item_id);
+								//ObjectName=StringController.instance.GetSimpleObjectNameUW(objInt.item_id);
+								ObjectName=objInt.GetComponent<object_base>().ContextMenuDesc(objInt.item_id);
 								if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 								{
 									switch (UWCharacter.InteractionMode)

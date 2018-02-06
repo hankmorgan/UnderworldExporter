@@ -530,6 +530,8 @@ public class SaveGame : Loader {
 								}
 							}
 
+							ObjectLoader.LinkObjectListWands (objLoader);
+
 						}
 
 						//Change the XOR Key back to D9
@@ -578,6 +580,7 @@ public class SaveGame : Loader {
 
 
 		}
+
 
 		/// <summary>
 		/// Calcs the active spell effect id in a player.dat file and returns the correct value for the spell.
@@ -1166,8 +1169,27 @@ public class SaveGame : Loader {
 				{
 						GameObject obj = GameObject.Find(inventoryObjects[o]);
 						if (obj!=null)
-						{
+						{							
 								ObjectInteraction currobj = obj.GetComponent<ObjectInteraction>();
+								if (currobj.GetItemType()==ObjectInteraction.WAND)
+								{
+										if (currobj.GetComponent<Wand>()!=null)
+										{
+												if (currobj.GetComponent<Wand>().linkedspell!=null)
+												{//This is a wand with a linked spell object.
+														string link = currobj.GetComponent<Wand>().linkedspell.name;
+														//For the index of the linked object in the list
+														for (int z=0; z<=inventoryObjects.GetUpperBound(0);z++)
+														{
+																if (link == inventoryObjects[z])
+																{
+																		currobj.link = z+1;
+																		break;
+																}
+														}
+												}												
+										}
+								}
 								int ByteToWrite= (currobj.isquant << 15) |
 										(currobj.invis << 14) |
 										(currobj.doordir << 13) |
@@ -1878,8 +1900,11 @@ public class SaveGame : Loader {
 								}
 								//Create the inventory objects
 								ObjectLoader.RenderObjectList(objLoader,GameWorldController.instance.currentTileMap(),GameWorldController.instance.InventoryMarker);
+
+								ObjectLoader.LinkObjectListWands (objLoader);//Link wands to their spell object
+
 								//Find any wands and move their spell objects to the gameworld to behave like UW1
-								for (int o=0; o<=objLoader.objInfo.GetUpperBound(0);o++)
+								/*for (int o=0; o<=objLoader.objInfo.GetUpperBound(0);o++)
 								{
 										if (objLoader.objInfo[o]!=null)
 										{
@@ -1916,7 +1941,7 @@ public class SaveGame : Loader {
 														}
 												}		
 										}
-								}
+								}*/
 
 
 								for (int j=931; j<969; j=j+2)

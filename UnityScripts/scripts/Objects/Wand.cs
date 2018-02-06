@@ -2,13 +2,18 @@
 using System.Collections;
 
 public class Wand : enchantment_base {
-	public int SpellObjectLink;
-	public int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
-	public int SpellObjectOwnerToCreate=0;
+	//public int SpellObjectLink;
+	//public int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
+	//public int SpellObjectOwnerToCreate=0;
+		//public int ActualSpell;
+
+	public a_spell linkedspell;
 
 	protected override void Start ()
 	{
 		base.Start ();
+		
+				/*
 		if (_RES==GAME_UW2)				
 		{
 			if (SpellObjectOwnerToCreate==-1)
@@ -27,12 +32,21 @@ public class Wand : enchantment_base {
 			}
 		}//UW2 stores enchantments on the player.dat. This is not properly implemented yet
 
-
-		if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+		if (! objInt().isEnchanted())
 		{
-			SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
-		}		
- 
+				if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
+				{
+						SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
+				}		
+		}
+		else
+		{
+			SpellObjectLink=0;
+		}
+
+		SetDisplayEnchantment();
+		ActualSpell=GetActualSpellIndex();
+		*/
 	}
 	
 	/// <summary>
@@ -49,6 +63,16 @@ public class Wand : enchantment_base {
 		*/
 	protected override int GetActualSpellIndex ()
 	{
+		if (linkedspell!=null)
+		{
+			return linkedspell.objInt().link-256;
+		}
+		else
+		{
+			return objInt().link-256;
+		}
+
+				/*
 		if (objInt().isEnchanted()==true)
 		{
 			if (objInt().link-512<63)
@@ -72,7 +96,7 @@ public class Wand : enchantment_base {
 
 			return SpellObjectLink-256;	//default
 			
-		}
+		}*/
 	}
 				
 
@@ -146,12 +170,13 @@ public class Wand : enchantment_base {
 		return true;
 	}
 
-
+		/*
 	/// <summary>
 	/// Creates a new spell trap in the object list
 	/// </summary>
 	public override void InventoryEventOnLevelEnter ()
 		{
+			
 		//objInt().isquant=0;
 		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
 		base.InventoryEventOnLevelEnter ();
@@ -173,8 +198,9 @@ public class Wand : enchantment_base {
 		ObjectLoaderInfo newobj= ObjectLoader.newObject(288,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
 		objInt().link = newobj.index;
 		}
+		*/
 
-
+		/*
 	public override void InventoryEventOnLevelExit ()
 		{
 		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
@@ -185,7 +211,7 @@ public class Wand : enchantment_base {
 			if (linked!=null)
 			{
 				a_spell spell = linked.GetComponent<a_spell>();
-						if (spell!=null)
+				if (spell!=null)
 				{		
 					SpellObjectOwnerToCreate = spell.objInt().owner;	
 					SpellObjectQualityToCreate = spell.objInt().quality;
@@ -199,5 +225,59 @@ public class Wand : enchantment_base {
 			}
 			//SpellObjectOwnerToCreate 
 		}
+		*/
+
+	public override bool DropEvent ()
+	{
+		if (objInt().enchantment==0)
+		{//Object links to a spell.
+			if (linkedspell !=null)
+			{
+				bool match =false;
+				//Try and find a spell already in the level that matches the characteristics of this spell
+				ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int i =0; i<=objList.GetUpperBound(0);i++)
+				{
+					if (objList[i].GetItemType()==ObjectInteraction.SPELL)
+					{												
+						if (objList[i].instance!=null)
+						{
+							if (objList[i].link == linkedspell.objInt().link)
+							{
+								Destroy(linkedspell.gameObject);
+								linkedspell = objList[i].instance.GetComponent<a_spell>();
+								objInt().link = i;
+								match=true;
+								break;	
+							}
+						}
+					}
+				}
+
+				if (!match)
+				{
+					linkedspell.gameObject.transform.parent=GameWorldController.instance.LevelMarker();
+					GameWorldController.MoveToWorld(linkedspell.gameObject);	
+				}
+			}				
+		}
+		return true;
+	}
+
+	public override bool PickupEvent ()
+	{
+		if (objInt().enchantment==0)
+		{//Object links to a spell.
+			if (linkedspell !=null)
+			{
+				GameObject clonelinkedspell = Object.Instantiate(linkedspell.gameObject);
+				clonelinkedspell.name = ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
+				clonelinkedspell.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+				linkedspell = clonelinkedspell.GetComponent<a_spell>();
+				//GameWorldController.MoveToInventory(clonelinkedspell.gameObject);
+			}
+		}
+		return true;
+	}
 
 }

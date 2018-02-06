@@ -28,6 +28,21 @@ using System.Collections;
 ///  Other objects may also carry spells in this way.
 /// 
 public class enchantment_base : object_base {
+	public string DisplayEnchantment;
+	
+	protected override void Start ()
+	{
+		SetDisplayEnchantment ();
+	}
+
+	public void SetDisplayEnchantment ()
+	{
+		DisplayEnchantment = StringController.instance.GetString (6, GetActualSpellIndex ());
+		if (DisplayEnchantment == "") 
+		{
+			DisplayEnchantment = "NONE";
+		}
+	}
 
 	public override bool use ()
 	{
@@ -98,14 +113,13 @@ public class enchantment_base : object_base {
 			switch(objInt().identity())
 			{
 			case ObjectInteraction.IdentificationFlags.Identified:
-					if (enchantmentname!="")
+					if (enchantmentname=="")
 					{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);					
+						enchantmentname = "UNNAMED";
 					}
-					else
-					{
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()))	;
-					}					
+					DisplayEnchantment = enchantmentname;
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);					
+				
 					break;
 			case ObjectInteraction.IdentificationFlags.Unidentified:
 			case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
@@ -131,5 +145,17 @@ public class enchantment_base : object_base {
 			break;			
 		}
 		return true;
-	}	
+	}
+
+
+	public override string ContextMenuDesc (int item_id)
+	{
+		switch (objInt().identity())
+		{
+		case ObjectInteraction.IdentificationFlags.Identified:
+			return StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + DisplayEnchantment;					
+		default:
+			return base.ContextMenuDesc (item_id);
+		}		
+	}
 }
