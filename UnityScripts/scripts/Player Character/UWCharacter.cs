@@ -9,21 +9,6 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
-		/// <summary>
-		/// The xor encryption key for the save file
-		/// </summary>
-		public int XorKey=0xD9;
-
-		public bool onIce;
-		public bool onIcePrev;
-		public Vector3 IceVelocity=Vector3.zero;
-
-		public bool decode=true;//decodes a save file
-		public bool recode=true;//recodes a save file at indextochange with newvalue
-		public bool recode_cheat=true;//recodes a save file into an all 30s character
-		public int IndexToRecode=0;
-		public int ValueToRecode=0;
-		public int game_time;
 
 		public const int CharClassFighter=0;
 		public const int CharClassMage=1;
@@ -34,103 +19,105 @@ public class UWCharacter : Character {
 		public const int CharClassRanger=6;
 		public const int CharClassShepard=7;
 
+		public static UWCharacter Instance;
 
-	//What magic spells are currently active on (and cast by) the player. (max 3)
-	//These are the ones that the player can see on the hud.
-	public static UWCharacter Instance;
+		[Header("Save game")]
+		/// <summary>
+		/// The xor encryption key for the save file
+		/// </summary>
+		public int XorKey=0xD9;
+		public bool decode=true;//decodes a save file
+		public bool recode=true;//recodes a save file at indextochange with newvalue
+		public bool recode_cheat=true;//recodes a save file into an all 30s character
+		public int IndexToRecode=0;
+		public int ValueToRecode=0;
 
-	public SpellEffect[] ActiveSpell=new SpellEffect[3]; 
-
-	//What effects and enchantments (eg from items are equipped on the player)
-	public SpellEffect[] PassiveSpell=new SpellEffect[10];
-
-	public int Body;//Which body/portrait this character has 
-
-	public int room;
-
+		[Header("Player Status")]
+		public bool onIce;
+		public bool onIcePrev;
+		public Vector3 IceVelocity=Vector3.zero;
+		//What magic spells are currently active on (and cast by) the player. (max 3)
+		//These are the ones that the player can see on the hud.
+		public SpellEffect[] ActiveSpell=new SpellEffect[3]; 
+		//What effects and enchantments (eg from items are equipped on the player)
+		public SpellEffect[] PassiveSpell=new SpellEffect[10];
+		public bool isSwimming;
+		public bool isFlying;
+		public bool isRoaming;
+		public bool isFloating;
+		public bool isWaterWalking;
+		public bool isTelekinetic;
+		public bool isLeaping;
+		public int StealthLevel; //The level of stealth the character has.
+		public int Resistance; //DR from spells.
+		public bool FireProof;//Takes no damage from lava
+		//Character Status
+		public int FoodLevel; //0-255 range.
+		public int Fatigue;   //0-29 range
+		//public bool Poisoned;
+		public short play_poison;
+		public bool Paralyzed;
+		public float lavaDamageTimer;//How long before applying lava damage
+		private bool InventoryReady=false;	
+	
+	[Header("Character Details")]
 	//Character related info
 	//Character Details
-
+	public int Body;//Which body/portrait this character has 
 	public int CharClass;
 	public int CharLevel;
 	public int EXP;
 	public int TrainingPoints;
 	public bool isFemale;
 	public bool isLefty;
-	public bool isSwimming;
-	public bool isFlying;
-	public bool isRoaming;
+
+
+	[Header("Speeds")]
 	public float flySpeed;
 	public float walkSpeed;
 	public float speedMultiplier=1.0f;
 	public float swimSpeedMultiplier=1.0f;//Is set to a fractional value when swimming.
 	public float SwimTimer =0.0f;	//How long has the player been swimming. Used to determine when to start applying damage.
 	public float SwimDamageTimer; //For timing out drowning damage.
-	public bool isFloating;
-	public bool isWaterWalking;
-	//public bool onGround;//Not currently used.
-	public bool isTelekinetic;
-	public bool isLeaping;
-	public int StealthLevel; //The level of stealth the character has.
-	
-	public int Resistance; //DR from spells.
-	public bool FireProof;//Takes no damage from lava
-	
-	//Character Status
-	public int FoodLevel; //0-255 range.
-	public int Fatigue;   //0-29 range
-	//public bool Poisoned;
-	public short play_poison;
-	public bool Paralyzed;
 
+
+		[Header("Character Modules")]
 	//Character skills
 	public Skills PlayerSkills;
-
 	//Magic system
 	public Magic PlayerMagic;
-
 	//Inventory System
-	public PlayerInventory playerInventory;
-	
+	public PlayerInventory playerInventory;	
 	//Combat System
 	public UWCombat PlayerCombat;
 
-	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
-
+	[Header("Teleportation")]
 	public short ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;//TODO change this to a search.
-
 	public Vector3 MoonGatePosition=Vector3.zero;
 	public short MoonGateLevel = 2;//Domain of the mountainmen
-
-	public float lavaDamageTimer;//How long before applying lava damage
-	//public string currRegion;
-	private bool InventoryReady=false;
-	public bool JustTeleported=false;
-	public Vector3 TeleportPosition;
 	public float teleportedTimer=0f;
-
+	public bool JustTeleported=false;
 		/// <summary>
 		/// The dream return position when you are dreaming in the void.
 		/// </summary>
-	public short DreamReturnTileX=0;
-	public short DreamReturnTileY=0;
-
+		public short DreamReturnTileX=0;
+		public short DreamReturnTileY=0;
 		/// <summary>
 		/// The dream return level when you are dreaming in the void.
 		/// </summary>
-	public short DreamReturnLevel=0;
+		public short DreamReturnLevel=0;
+		public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
+		public Vector3 TeleportPosition;
 
-	public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
+
 	public void Awake()
 	{
 		Instance=this;
-		//DontDestroyOnLoad(this);
 	}
 
 	public void Start()
 	{
-		//UWCharacter.Instance=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
@@ -138,17 +125,14 @@ public class UWCharacter : Character {
 
 	public override void Begin ()
 	{
-
 		base.Begin ();
 		if (_RES==GAME_SHOCK){return;}
 		InventoryReady=false;
-		//UWCharacter.Instance=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
 		Cursor.SetCursor (UWHUD.instance.CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		InteractionMode=UWCharacter.DefaultInteractionMode;
-
 
 		//Tells other objects about this component;
 
@@ -358,12 +342,13 @@ public class UWCharacter : Character {
 		}
 		if ((CurVIT<=0) && (GameWorldController.instance.getMus().Death==false))
 		{
-			PlayerDeath();
+			PlayerDeath();			
 			return;
 		}
 		if(GameWorldController.instance.getMus().Death==true)
 		{
 			//Still processing death.
+			isSwimming=false;
 			return;
 		}
 		if (playerCam.enabled==true)
@@ -1328,6 +1313,19 @@ public class UWCharacter : Character {
 				yield return new WaitForSeconds(3f);
 				UWHUD.instance.CutScenesFull.SetAnimationFile="Anim_Base";
 				UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
+		}
+
+
+		public static void ResetTrueMana ()
+		{
+				if (UWCharacter.Instance.PlayerMagic.MaxMana < UWCharacter.Instance.PlayerMagic.TrueMaxMana) 
+				{
+						UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerMagic.TrueMaxMana;
+						if (UWCharacter.Instance.PlayerMagic.CurMana == 0) 
+						{
+								UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana / 4;
+						}
+				}
 		}
 
 }

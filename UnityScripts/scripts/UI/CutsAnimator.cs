@@ -93,9 +93,14 @@ public class CutsAnimator : GuiBase {
 						PrevAnimation="x";
 						if (GameWorldController.instance.LevelNo!=UWCharacter.Instance.ResurrectLevel-1)
 						{
+							if (_RES==GAME_UW1)
+							{//Special case for the magic drain effect in UW1
+									UWCharacter.ResetTrueMana ();
+							}
 							GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel-1));
 						}
 						UWCharacter.Instance.gameObject.transform.position=UWCharacter.Instance.ResurrectPosition;
+						UWCharacter.Instance.isSwimming=false;TileMap.OnWater=false;
 						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 						break;
 					}

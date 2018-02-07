@@ -16,10 +16,31 @@ public class Equipment : object_base {
 
 	public int EquipIconIndex;
 
+	public string DisplayEnchantment;
+
+
+
+
+
+
+
 	protected override void Start ()
 	{
 		base.Start ();
 		UpdateQuality();
+		SetDisplayEnchantment ();
+	}
+
+	/// <summary>
+	/// Pulls in the enchantment name on this object for use in the context menu
+	/// </summary>
+	public void SetDisplayEnchantment ()
+	{
+		DisplayEnchantment = StringController.instance.GetString (6, GetActualSpellIndex ());
+		if (DisplayEnchantment == "") 
+		{
+				DisplayEnchantment = "NONE";
+		}
 	}
 
 	public virtual int GetActualSpellIndex()
@@ -124,6 +145,7 @@ public class Equipment : object_base {
 				{
 				case ObjectInteraction.IdentificationFlags.Identified:
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
+						SetDisplayEnchantment();
 						break;				
 				case ObjectInteraction.IdentificationFlags.Unidentified:
 				case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
@@ -274,6 +296,21 @@ public class Equipment : object_base {
 						return (short)(objInt().link-461);//Protection bonus starts at +3 why not					
 				}
 				return 0;	
+		}
+
+		public override string ContextMenuDesc (int item_id)
+		{
+				if (objInt().isEnchanted())
+				{
+						switch (objInt().identity())
+						{
+						case ObjectInteraction.IdentificationFlags.Identified:
+								return StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + DisplayEnchantment;					
+						default:
+								return base.ContextMenuDesc (item_id);
+						}		
+				}
+				return base.ContextMenuDesc (item_id);	
 		}
 
 

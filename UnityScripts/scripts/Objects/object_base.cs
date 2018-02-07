@@ -721,4 +721,20 @@ public class object_base : UWEBase {
 				return null;
 		}
 
+		/// <summary>
+		/// Event to occur when object moves to world object list
+		/// </summary>
+		public virtual void MoveToWorldEvent()
+		{
+				
+		}
+
+		/// <summary>
+		/// Event to occur when object moves to inventory object list
+		/// </summary>
+		public virtual void MoveToInventoryEvent()
+		{
+
+		}
+
 }

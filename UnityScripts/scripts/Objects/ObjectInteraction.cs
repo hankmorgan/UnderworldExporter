@@ -15,13 +15,10 @@ public class ObjectInteraction : UWEBase {
 		public int debugindex;
 		//public int canbeowned;
 
-		/// <summary>
-		/// The start position of the object when it became awake.
-		/// </summary>
-		private Vector3 startPos;
-		public AudioSource aud;
-		public Rigidbody rg; // = myObj.GetComponent<Rigidbody>();
+
+
 		public static bool PlaySoundEffects=true;
+
 
 		public const int NPC_TYPE =0;
 		public const int WEAPON =1;
@@ -273,6 +270,15 @@ public class ObjectInteraction : UWEBase {
 		public short tileX;	//Position of the object on the tilemap
 		public short tileY;
 
+		/// <summary>
+		/// The start position of the object when it became awake.
+		/// </summary>
+		private Vector3 startPos;
+
+		[Header("Links")]
+		public AudioSource aud;
+		public Rigidbody rg; 
+
 
 		public enum IdentificationFlags
 		{
@@ -292,18 +298,6 @@ public class ObjectInteraction : UWEBase {
 				{
 						sr.gameObject.SetActive(invis==0);			
 				}
-			
-
-			//if (PlaySoundEffects)
-			//{
-				//aud = this.GetComponent<AudioSource>();			
-			//}
-			//rg= this.GetComponent<Rigidbody>();
-			
-			//if (_RES!=GAME_SHOCK)
-			//{
-			//	canbeowned=GameWorldController.instance.commonObject.properties[item_id].CanBelongTo;	
-			//}
 			
 		}
 
@@ -1599,7 +1593,7 @@ public class ObjectInteraction : UWEBase {
 						}
 				case CLUTTER:
 						{
-							if ((objInt.isMagicallyEnchanted()) && (objInt.link!=0))
+							if ((objInt.isMagicallyEnchanted()) && (objInt.link>1))
 							{
 								myObj.AddComponent<Wand>();
 							}
@@ -2202,6 +2196,7 @@ public class ObjectInteraction : UWEBase {
 				{
 						if (link>=256)
 						{
+								
 								//if (GameWorldController.instance.objectMaster.type[ GameWorldController.instance.CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
 								//{
 										return true;

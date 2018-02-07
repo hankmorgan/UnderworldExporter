@@ -10,6 +10,8 @@ public class GameClock : UWEBase {
 	
 	public int[] gametimevals=new int[3]; //For save games.
 
+	public int game_time;
+
 	/// <summary>
 	/// How long has passed since the last clock tick
 	/// </summary>

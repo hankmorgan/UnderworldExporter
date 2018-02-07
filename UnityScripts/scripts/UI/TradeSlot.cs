@@ -111,20 +111,44 @@ public class TradeSlot : GuiBase {
 			//put the object in hand in this slot.
 			if (objectInSlot=="")
 			{//Empty slot
-				objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
-				UWCharacter.Instance.playerInventory.ObjectInHand="";
-				SlotImage.texture=UWHUD.instance.CursorIcon;
-				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
-				Selected=true;
+				GameObject objToMove = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
+				if (objToMove!=null)
+				{
+					if (objToMove.transform.parent != GameWorldController.instance.LevelMarker())
+					{//Object needs to be moved to world
+							objToMove.transform.parent= GameWorldController.instance.LevelMarker();
+							GameWorldController.MoveToWorld(objToMove);
+							ConversationVM.BuildObjectList();
+					}
+					objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
+					UWCharacter.Instance.playerInventory.ObjectInHand="";
+					SlotImage.texture=UWHUD.instance.CursorIcon;
+					UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
+					Selected=true;
+				}
 			}
 			else
 			{//Swap the objects
-				string tmp;
-				tmp = objectInSlot;
-				objectInSlot=UWCharacter.Instance.playerInventory.ObjectInHand;
-				SlotImage.texture=	UWHUD.instance.CursorIcon;
-				UWCharacter.Instance.playerInventory.ObjectInHand=tmp;
-				UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GameObject objInSlot = GetGameObjectInteraction().gameObject;
+				GameObject objInHand = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
+				if(objInSlot!=null)
+				{
+					objInSlot.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+					GameWorldController.MoveToInventory(objInSlot);//This will call rebuild list
+				}
+				if (objInHand!=null)
+				{
+					if (objInHand.transform.parent != GameWorldController.instance.LevelMarker())
+					{//Object needs to be moved to world
+						objInHand.transform.parent= GameWorldController.instance.LevelMarker();
+						GameWorldController.MoveToWorld(objInHand);						
+					}	
+				}
+				objectInSlot=objInHand.name;
+				SlotImage.texture = objInHand.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				UWHUD.instance.CursorIcon = objInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				UWCharacter.Instance.playerInventory.ObjectInHand=objInSlot.name;
+				ConversationVM.BuildObjectList();
 				Selected=true;
 			}
 		}
@@ -133,11 +157,18 @@ public class TradeSlot : GuiBase {
 			if (objectInSlot!="")
 			{
 				//Pickup the object in the slot
-				UWCharacter.Instance.playerInventory.SetObjectInHand(objectInSlot);
+				UWCharacter.Instance.playerInventory.SetObjectInHand(objectInSlot);				
 				UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				objectInSlot="";
 				SlotImage.texture=Blank;
 				Selected=false;
+				GameObject objToMove = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
+				if(objToMove!=null)
+				{
+					objToMove.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+					GameWorldController.MoveToInventory(objToMove);//This will call rebuild list
+					objToMove.GetComponent<object_base>().PickupEvent();
+				}
 			}
 			
 		}

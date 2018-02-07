@@ -3294,12 +3294,21 @@ public class ObjectLoader : Loader {
 										else {
 												int l = objLoader.objInfo [o].link;
 												if (l != 0) {
-														if (objLoader.objInfo [l].GetItemType () == ObjectInteraction.SPELL) {
-																if (objLoader.objInfo [l].instance != null) {
-																		if (objLoader.objInfo [l].instance.GetComponent<a_spell> () != null) {
-																				objLoader.objInfo [o].instance.GetComponent<Wand> ().linkedspell = objLoader.objInfo [l].instance.GetComponent<a_spell> ();
+														if (l <= objLoader.objInfo.GetUpperBound(0) )
+														{
+															if (objLoader.objInfo [l].GetItemType () == ObjectInteraction.SPELL) 
+																{
+																		if (objLoader.objInfo [l].instance != null) 
+																		{
+																				if (objLoader.objInfo [l].instance.GetComponent<a_spell> () != null) {
+																						objLoader.objInfo [o].instance.GetComponent<Wand> ().linkedspell = objLoader.objInfo [l].instance.GetComponent<a_spell> ();
+																				}
 																		}
-																}
+																}	
+														}
+														else
+														{
+																Debug.Log("wand link for " + o + " is out of range Link=" + l);
 														}
 												}
 										}

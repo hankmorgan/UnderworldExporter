@@ -171,7 +171,7 @@ public class LightSource : object_base {
 	void SplitLightSourceIntoSlot ()
 	{
 		GameObject split = Instantiate (this.gameObject);
-		split.name = split.name + "_" + UWCharacter.Instance.summonCount++;
+		split.name =  ObjectInteraction.UniqueObjectName(split.GetComponent<ObjectInteraction>());  //split.name + "_" + UWCharacter.Instance.summonCount++;
 		split.GetComponent<ObjectInteraction> ().link = 1;
 		//Increment and decrement the object count as appropiate;
 		objInt ().link--;

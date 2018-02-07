@@ -17,30 +17,6 @@ public class Character : UWEBase {
 	public const int InteractionModeInConversation=7; //For trading purposes.
 	public static int DefaultInteractionMode=InteractionModeUse;
 
-	//The storage location for container items.
-	//public static GameObject GameWorldController.instance.InventoryMarker;
-
-	//Reference to a C# version of the standard character controller.
-	public CharacterMotorC playerMotor;
-
-	public CharacterController playerController;
-
-	//Character Stats
-	public int MaxVIT;
-	public int CurVIT;
-
-	protected float pickupRange=2.5f;
-	protected float useRange=2.0f;
-	protected float talkRange=20.0f;
-	protected float lookRange=25.0f;
-
-	public static bool Invincible;
-
-	/// <summary>
-	/// The calculated detection range for when NPCs can first become aware of the PC.
-	/// </summary>
-	public float DetectionRange=6.0f;
-
 	/// <summary>
 	/// At what distance from the player is the AI awake for processing.
 	/// </summary>
@@ -57,51 +33,84 @@ public class Character : UWEBase {
 	public const float MinDetectionRange=0.2f;
 
 
+	//The storage location for container items.
+	//public static GameObject GameWorldController.instance.InventoryMarker;
+
+	//Reference to a C# version of the standard character controller.
+
+	[Header("Controllers")]
+	public CharacterMotorC playerMotor;
+	public CharacterController playerController;
+	public AudioSource aud;
+
+		[Header("Health")]
+	//Character Stats
+	public int MaxVIT;
+	public int CurVIT;
+
+		[Header("Interaction Ranges")]	
+	public float pickupRange=2.5f;
+	public float useRange=2.0f;
+	public float talkRange=20.0f;
+	public float lookRange=25.0f;
+	/// <summary>
+	/// The calculated detection range for when NPCs can first become aware of the PC.
+	/// </summary>
+	public float DetectionRange=6.0f;
+
+	public static bool Invincible;
+
 	//For controlling switching between mouse look and interaction
+	[Header("Mouselook")]	
 	public MouseLook XAxis;
 	public MouseLook YAxis;
 	public bool MouseLookEnabled;
 
+	[Header("Character")]	
 	//The player's name
 	public string CharName;
 
 	//Heading values for compass displays
+	[Header("Compass and Position")]	
 	public int currentHeading;
 	protected int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
+	//Camera direction for billboarding
+	public Vector3 dir;
+	public Vector3 dirForNPC; 
 
-		//Camera direction for billboarding
-		public Vector3 dir;
-		public Vector3 dirForNPC; 
-
+		[Header("Camera")]
 	//The camera attached to this gameobject
 	public Camera playerCam;
-
 	public Vector3 CameraPos;
 
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
 
+
+
+	[Header("AI")]
 		/// <summary>
 		/// Tracks the last enemy character to hit th eplayer.
 		/// </summary>
 	public GameObject LastEnemyToHitMe;
-
-		/// <summary>
-		/// Signals allied creatures to come help the player.
-		/// </summary>
-		public bool HelpMeMyFriends;
-
+	/// <summary>
+	/// Signals allied creatures to come help the player.
+	/// </summary>
+	public bool HelpMeMyFriends;
 	/// <summary>
 	/// The player has an active lightsource in use.
 	/// </summary>
 	public bool LightActive;
-
 	/// <summary>
 	/// The point enemies will aim at when trying to hit the player.
 	/// </summary>
 	public GameObject TargetPoint;
+		/// <summary>
+		/// The room index the player is in
+		/// </summary>
+	public int room;
 
-	public AudioSource aud;
+
 
 	public void ApplyDamage(int damage)
 	{

@@ -1721,6 +1721,10 @@ public class Magic : UWEBase {
 						{
 								if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo+1)
 								{//Teleport to level
+									if (_RES==GAME_UW1)
+									{//Special case for the magic drain effect in UW1
+											UWCharacter.ResetTrueMana ();
+									}
 									GameWorldController.instance.SwitchLevel((short)(playerUW.MoonGateLevel-1));
 								}
 								caster.transform.position = playerUW.MoonGatePosition;//Assumes moongate will be found!

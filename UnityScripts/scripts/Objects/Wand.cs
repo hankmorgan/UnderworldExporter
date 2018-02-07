@@ -9,9 +9,9 @@ public class Wand : enchantment_base {
 
 	public a_spell linkedspell;
 
-	protected override void Start ()
-	{
-		base.Start ();
+	//protected override void Start ()
+	//{
+	//	base.Start ();
 		
 				/*
 		if (_RES==GAME_UW2)				
@@ -47,7 +47,7 @@ public class Wand : enchantment_base {
 		SetDisplayEnchantment();
 		ActualSpell=GetActualSpellIndex();
 		*/
-	}
+//	}
 	
 	/// <summary>
 	/// Gets the actual spell index of the spell.
@@ -69,7 +69,19 @@ public class Wand : enchantment_base {
 		}
 		else
 		{
-			return objInt().link-256;
+						if (_RES!=GAME_UW2)
+						{
+								switch (objInt().link)		
+								{
+								case 579://frog
+								case 580://maze
+								case 581://hallucination
+										return objInt().link-368;	
+								default:
+										return objInt().link-256;	
+								}
+						}
+						return objInt().link-256;//Confirm mappings for UW2
 		}
 
 				/*
@@ -105,8 +117,14 @@ public class Wand : enchantment_base {
 
 	public override bool use ()
 	{
+
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
+			if ((!objInt().PickedUp))
+				{
+					return true;
+				}
+
 			if (objInt().quality >0)
 				{
 					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf, Magic.SpellRule_Immediate);
@@ -133,28 +151,28 @@ public class Wand : enchantment_base {
 
 	public override bool LookAt ()
 	{
-	string FormattedName="";
-				bool isIdentified=true;
-				switch(objInt().identity())
+		string FormattedName="";
+		bool isIdentified=true;
+		switch(objInt().identity())
+		{
+		case ObjectInteraction.IdentificationFlags.Identified:
+				FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
+				break;
+		case ObjectInteraction.IdentificationFlags.Unidentified:
+		case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
+				if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 				{
-				case ObjectInteraction.IdentificationFlags.Identified:
+						objInt().heading=7;
 						FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
-						break;
-				case ObjectInteraction.IdentificationFlags.Unidentified:
-				case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
-						if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
-						{
-								objInt().heading=7;
-								FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
-						}
-						else
-						{
-								isIdentified=false;
-								FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt());		
-						}	
-						break;
+				}
+				else
+				{
+						isIdentified=false;
+						FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt());		
 				}	
-	
+				break;
+		}	
+
 		if ((objInt().quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
 		{//TODO: is the quality here the quality on the wand or the quality on the spell object? Is this behaviour different in uw1 vs uw2
 			UWHUD.instance.MessageScroll.Add (FormattedName
@@ -227,7 +245,8 @@ public class Wand : enchantment_base {
 		}
 		*/
 
-	public override bool DropEvent ()
+
+	public override void MoveToWorldEvent ()
 	{
 		if (objInt().enchantment==0)
 		{//Object links to a spell.
@@ -261,10 +280,9 @@ public class Wand : enchantment_base {
 				}
 			}				
 		}
-		return true;
 	}
 
-	public override bool PickupEvent ()
+	public override void MoveToInventoryEvent ()
 	{
 		if (objInt().enchantment==0)
 		{//Object links to a spell.
@@ -277,7 +295,6 @@ public class Wand : enchantment_base {
 				//GameWorldController.MoveToInventory(clonelinkedspell.gameObject);
 			}
 		}
-		return true;
 	}
 
 }

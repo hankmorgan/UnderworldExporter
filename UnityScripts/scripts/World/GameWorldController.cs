@@ -1142,6 +1142,7 @@ public class GameWorldController : UWEBase {
 				//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
 				obj.UpdatePosition();
+				obj.GetComponent<object_base>().MoveToWorldEvent();
 				if (ConversationVM.InConversation)
 				{
 						ConversationVM.BuildObjectList();//Reflect changes to object lists
@@ -1169,6 +1170,7 @@ public class GameWorldController : UWEBase {
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
 				obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
+				obj.GetComponent<object_base>().MoveToInventoryEvent();
 				if (ConversationVM.InConversation)
 				{
 						ConversationVM.BuildObjectList();//Reflect changes to object lists

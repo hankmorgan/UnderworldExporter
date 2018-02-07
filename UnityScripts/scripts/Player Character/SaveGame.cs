@@ -327,7 +327,7 @@ public class SaveGame : Loader {
 													break;
 												}
 										case 0xCF  : ///   game time
-												UWCharacter.Instance.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+												GameClock.instance.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
 										case 0xD0: 
 												GameClock.instance.gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 										case 0xD1: 

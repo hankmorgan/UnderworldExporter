@@ -32,6 +32,7 @@ public class enchantment_base : object_base {
 	
 	protected override void Start ()
 	{
+		base.Start();
 		SetDisplayEnchantment ();
 	}
 

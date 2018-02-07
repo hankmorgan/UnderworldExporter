@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class a_teleport_trap : trap_base {
+
+
 /*
 0181  a_teleport trap
 	teleports the player to another level and tile; destination level is
@@ -53,14 +55,7 @@ public class a_teleport_trap : trap_base {
 			//Goto to another level
 			if (_RES==GAME_UW1)
 			{//Special case for the magic drain effect in UW1
-				if (UWCharacter.Instance.PlayerMagic.MaxMana<UWCharacter.Instance.PlayerMagic.TrueMaxMana)
-				{
-					UWCharacter.Instance.PlayerMagic.MaxMana=UWCharacter.Instance.PlayerMagic.TrueMaxMana;
-					if (UWCharacter.Instance.PlayerMagic.CurMana==0)
-					{
-						UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana/4;
-					}
-				}
+				UWCharacter.ResetTrueMana ();
 			}
 			UWCharacter.Instance.playerMotor.movement.velocity=Vector3.zero;
 			GameWorldController.instance.SwitchLevel((short)(objInt().zpos-1),objInt().quality,objInt().owner);

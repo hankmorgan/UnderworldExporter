@@ -1177,19 +1177,24 @@ public class ConversationVM : UWEBase {
 
 				///Give movement back to the player			
 				UWCharacter.Instance.playerMotor.enabled=true;
-				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+
+				Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
 
 				///Return any items in the trade area to their owner
 				for (int i =0; i <=3; i++)
 				{
-						TradeSlot npcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+						TradeSlot npcSlot = UWHUD.instance.playerTrade[i];
 						if (npcSlot.objectInSlot!="")
 						{///Moves the object to the players container or to the ground
 								if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 								{
 										npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 										cn.AddItemToContainer(npcSlot.objectInSlot);
+										GameObject itemAtSlot = npcSlot.GetGameObjectInteraction().gameObject;
+										itemAtSlot.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+										GameWorldController.MoveToInventory(itemAtSlot);
 										npcSlot.clear ();
+
 										UWCharacter.Instance.GetComponent<PlayerInventory>().Refresh ();
 								}
 								else
@@ -1197,8 +1202,12 @@ public class ConversationVM : UWEBase {
 										GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 										npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 										npcSlot.clear();
-										demanded.transform.parent=GameWorldController.instance.LevelMarker();
-										GameWorldController.MoveToWorld(demanded);//ok
+										if (demanded.transform.parent !=GameWorldController.instance.LevelMarker())
+										{
+												demanded.transform.parent=GameWorldController.instance.LevelMarker();
+												GameWorldController.MoveToWorld(demanded);
+										}
+
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
 								}
 						}
@@ -1470,16 +1479,16 @@ public class ConversationVM : UWEBase {
 														}
 												case "@GI": //Global integer
 														{
-																Debug.Log("@GI String replacement");//Sometimes this works with val+1 other times val!!
+																Debug.Log("@GI String replacement (" + value + ")");//Sometimes this works with val+1 other times val!!
 																//Shak works with val + 1
-																if (value < conv[currConv].NoOfImportedGlobals-conv[currConv].NoOfMemorySlots)
+																/*if (value < conv[currConv].NoOfMemorySlots - conv[currConv].NoOfImportedGlobals)
 																{
 																		FoundString= stack.at(value+1).ToString();		
 																}
 																else
-																{
+																{*/
 																		FoundString= stack.at(value).ToString();
-																}
+																//}
 
 																//FoundString= stack.at(value).ToString();
 																break;	
@@ -1531,7 +1540,7 @@ public class ConversationVM : UWEBase {
 								}
 						}		
 				}
-				return input;
+				return input.Replace("C2","");
 		}
 
 
@@ -2638,8 +2647,11 @@ public class ConversationVM : UWEBase {
 				else
 				{			
 						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
-						demanded.transform.parent = GameWorldController.instance.LevelMarker ();
-						GameWorldController.MoveToWorld (demanded);//ok
+						if (demanded.transform.parent!=GameWorldController.instance.LevelMarker ())
+						{//Items needs to be moved to world
+								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								GameWorldController.MoveToWorld (demanded);//ok	
+						}
 						demanded.transform.position = npc.NPC_Launcher.transform.position;
 						if (demanded.GetComponent<Container>())
 						{
@@ -2773,7 +2785,7 @@ public class ConversationVM : UWEBase {
    description:  declines trade offer (?)
 		*/
 
-				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn =  UWCharacter.Instance.playerInventory.GetCurrentContainer(); 
 				for (int i =0; i <=3; i++)
 				{
 						TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
@@ -2849,7 +2861,6 @@ public class ConversationVM : UWEBase {
 				{
 						yield return StartCoroutine (say_op (arg5));
 						//for the moment move to the player's backpack or if no room there drop them on the ground
-						//Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 						for (int i =0; i <=3; i++)
 						{
 								TakeFromNPC (npc,i);//Takes from the NPC slot if selected
@@ -2941,7 +2952,7 @@ public class ConversationVM : UWEBase {
 		/// Use only in bartering as this does not refer to the master object list!
 		private void TakeFromNPC (NPC npc, int SlotNo)
 		{
-				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
 				TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
 				//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected ()) {
@@ -2975,7 +2986,7 @@ public class ConversationVM : UWEBase {
 		/// <param name="slotNo">Slot no.</param>
 		void TakeFromPC (NPC npc, int slotNo)
 		{
-				Container cn = npc.GetComponent<Container> ();//GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn = npc.GetComponent<Container> ();
 				TradeSlot pcSlot = UWHUD.instance.playerTrade [slotNo];
 				if (pcSlot.isSelected ()) {
 						//Move the object to the container or to the ground
@@ -3005,7 +3016,7 @@ public class ConversationVM : UWEBase {
 		/// </summary>
 		void RestorePCsInventory (NPC npc)
 		{
-				Container cn = GameObject.Find (UWCharacter.Instance.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+				Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
 				for (int i = 0; i <= 3; i++) {
 						TradeSlot pcSlot = UWHUD.instance.playerTrade [i];
 						if (pcSlot.objectInSlot != "") {
@@ -3608,7 +3619,7 @@ return value: none
 				}
 				//After moving update my ptr to reflect the new object index assuming I've had to rebuild the list
 				stack.Set(ptrSlotNo, FindObjectIndexInObjectList(objGiven.name));
-				if (ObjectMoved)
+				/*if (ObjectMoved)
 				{
 						Debug.Log("Moving object references");
 						for (int i=1; i<=NearbyRefs.GetUpperBound(0);i++)
@@ -3619,7 +3630,7 @@ return value: none
 								}
 							
 						}
-				}
+				}*/
 
 		}
 

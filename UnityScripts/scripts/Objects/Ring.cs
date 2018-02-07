@@ -4,6 +4,8 @@ using System.Collections;
 public class Ring : Equipment {
 
 	public SpellEffect SpellEffectApplied;
+
+
 	
 	public override int GetActualSpellIndex ()
 	{
@@ -85,4 +87,5 @@ public class Ring : Equipment {
 	{
 		return DurabilityBonus();
 	}
+
 }
