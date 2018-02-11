@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 /// <summary>
 /// Door controller for manipulating doors
 /// </summary>
@@ -814,7 +815,9 @@ public class DoorControl : object_base {
 				int textureIndex=0;
 				//string DoorTexturePath="";
 			//Try and match up the door item id with a texture.
-
+				NavMeshObstacle navobs= myObj.AddComponent<NavMeshObstacle>();
+				navobs.center= new Vector3(-.4f, 0f, 0.5f);
+				navobs.size= new Vector3(0.8f, 0.1f, 1.1f);
 
 			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
 				{

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using RAIN.BehaviorTrees;
 using RAIN.Core;
 using RAIN.Minds;
+using UnityEngine.AI;
+
+
+
 /// <summary>
 /// NPC Properties and AI
 /// </summary>
@@ -29,7 +34,7 @@ public class NPC : MobileObject {
 
 
 
-		public int DebugRace;
+		//public int DebugRace;
 
 		//TODO: these need to match the UW npc_goals
 		//The behaviour trees need to be updated too.
@@ -84,25 +89,11 @@ public class NPC : MobileObject {
 
 		public int CurrentAttack;//What attack the NPC is currently executing.
 
-		//public int CalcFacingForDebug;
-
-		/// Object ID for the NPC
-		//private string NPC_ID;
 		public int NPC_IDi;
 
-		/// The animation that is currently set
-		//private string CurrentAnim="";
-
-		/// The animator that the NPC is using for it's animations
-		//private Animator anim;
 
 		public NPC_Animation newAnim;
 
-		/// For tracking the state of the NPC
-		//	public int currentState=-1;
-
-		/// Thinks this has to do with changing the NPC on the fly
-		//private string oldNPC_ID;
 
 		/// The animation index the NPC is facing
 		private short facingIndex;
@@ -119,7 +110,6 @@ public class NPC : MobileObject {
 		private Vector3 direction;	//vector between the player and the ai.
 		/// The angle to the character from the player.
 		private float angle;
-
 
 		///flags the NPC as dead so we can kill them off in the next frame
 		public bool NPC_DEAD;
@@ -146,7 +136,9 @@ public class NPC : MobileObject {
 		///To flag initiation of the player into the AI modules
 		//private static bool playerUWReady;
 		///AI module for the character.
-		private AIRig ai;	
+		//private AIRig ai;	
+
+		public NavMeshAgent Agent;
 
 		///Can the NPC fire off magic attacks.
 		//public bool MagicAttack;	
@@ -164,11 +156,24 @@ public class NPC : MobileObject {
 
 		private short StartingHP;
 
-		/*
-	void Awake () {
-		anim=GetComponentInChildren<Animator>();
-	}*/
+		public int DestTileX;
+		public int DestTileY;
+		//public bool ArrivedAtDestination;
+		//public bool TravellingToDestination;
 
+		public float WaitTimer=0f;
+
+
+		/*public struct PathCoord
+		{
+			public int tileX;
+			public int tileY;
+			public int Counter;
+			public bool tested;
+		};*/
+
+		//public List<PathCoord> PathSteps;
+		//public List<PathCoord> PathStepsFinal;
 
 		/// <summary>
 		/// Initialise some basic info for the NPC ai.
@@ -177,12 +182,6 @@ public class NPC : MobileObject {
 				base.Start();
 				NPC_IDi=objInt().item_id;
 				StartingHP=npc_hp;
-				//poisondamage = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].Poison;
-				//AttackPower = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackPower;
-				//AvgHit = GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AvgHit;
-				//height=GameWorldController.instance.commonObject.properties[NPC_IDi].height;
-				//radius=GameWorldController.instance.commonObject.properties[NPC_IDi].radius;
-
 				newAnim=this.gameObject.AddComponent<NPC_Animation>();
 				if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
 				{
@@ -190,15 +189,20 @@ public class NPC : MobileObject {
 				}
 				newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
 				newAnim.output=this.GetComponentInChildren<SpriteRenderer>();
-				DebugRace=GetRace();
 		}
 
 		void AI_INIT ()
 		{
-				if (ai == null) {
-						GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
+				//if (ai == null) {
+						if (Agent == null)
+						{
+								Agent = this.gameObject.AddComponent<NavMeshAgent>();
+								Agent.speed = 1.5f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
+						}
+
+					/*	GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
 						GameObject newObj = (GameObject)GameObject.Instantiate (myInstance);
-						//NPC_ID=objInt().item_id.ToString();
+
 						newObj.name = this.gameObject.name + "_AI";
 						newObj.transform.position = Vector3.zero;
 						newObj.transform.parent = this.gameObject.transform;
@@ -215,7 +219,7 @@ public class NPC : MobileObject {
 						{
 								Destroy(this.GetComponent<Animation>()) ;
 						}
-				}
+				}*/
 		}
 
 		/// <summary>
@@ -248,6 +252,7 @@ public class NPC : MobileObject {
 				objInt().objectloaderinfo.InUseFlag=0;
 				objInt().objectloaderinfo.npc_hp=0;
 				NPC_DEAD=true;//Tells the update to execute the NPC death animation
+				PerformDeathAnim();
 				//Dump npc inventory on the floor.
 				Container cnt = this.GetComponent<Container>();
 				if (cnt!=null)
@@ -293,7 +298,7 @@ public class NPC : MobileObject {
 		/// </summary>
 		public void SetupNPCInventory ()
 		{
-				if (_RES==GAME_UW1)
+				if (_RES!=GAME_UW2)
 				{
 						if (objInt().item_id==64)
 						{//Special case for rotworms.
@@ -334,12 +339,12 @@ public class NPC : MobileObject {
 				{
 				case GAME_UW1:
 						{
-								if (objInt().item_id==64)
+								/*if (objInt().item_id==64)
 								{//Drop a rotworm corpse
 										ObjectLoaderInfo newobjt= ObjectLoader.newObject(217,0,0,0,256);
 										ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,this.transform.position);
 										return false;	
-								}
+								}*/
 								switch (npc_whoami)
 								{
 								case 22: //The golem on level 6
@@ -440,13 +445,10 @@ public class NPC : MobileObject {
 										}
 										return false;												
 									}
-
 							}
 							break;
 						}
 				}
-
-
 				return false;
 		}
 
@@ -457,11 +459,19 @@ public class NPC : MobileObject {
 		/// AI is only active when the player is close.
 		protected virtual void  Update () {
 				if (EditorMode==true){return;}
+				if (WaitTimer>0)
+				{
+						WaitTimer = WaitTimer -Time.deltaTime;
+						if (WaitTimer<0)
+						{
+								WaitTimer=0;
+						}		
+				}
+
 				if (Frozen)
 				{//NPC will not move until timer is complete.
 						if (FrozenUpdate==0)
 						{
-								//anim.enabled=false;
 								newAnim.enabled=false;
 						}
 						else
@@ -470,309 +480,294 @@ public class NPC : MobileObject {
 						}
 				}
 
-
 				if (NPC_DEAD==true)
 				{//Set the AI death state
 						//Update the appearance of the NPC
 						UpdateSprite();
 						AI_INIT();
-						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
-						return;
-				}
-				//if (anim==null)
-				//{
-				//	anim=GetComponentInChildren<Animator>();
-				//}
-
-				//The AI is only active when the player is within a certain distance to the player camera.
-				if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=8)
-				{
-						if (objInt()!=null)
+						//ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
+						if (WaitTimer<=0)
 						{
-								AI_INIT ();
-								ai.AI.IsActive= Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=8;
-								//anim.enabled=true;		
-								//anim.enabled=false;		
-								newAnim.enabled=true;
-						}							
-				}
-				else
-				{
-						if (ai!=null)
-						{
-								ai.AI.IsActive=false;
+								DumpRemains();
 						}
-						//if (anim!=null)
-						//{
-						//	anim.enabled=false;		
-
-						//}
-						newAnim.enabled=false;
 						return;
 				}
 
-				//Decide what attack modes to use
-				switch (_RES)
-				{
-				case GAME_UW2:
-						{
-								ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
-								break;	
-						}
-				default:
-						{
-								switch (_objInt.item_id)
-								{
-								//Uses ranged weapons
-								case 70:
-								case 76:
-								case 77:
-								case 78:
-										if (
-												(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)>=2) 
-												&&
-												(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=8) 
-												&&
-												(Ammo>0)
-										)
-										{//Ranged attack if far away( but not too far away)
-												ai.AI.WorkingMemory.SetItem<int>("attackMode",1);	
-										}
-										else
-										{
-												ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
-										}
-										break;
-										//Uses magic attacks when not very near
-								case 75:
-								case 81:
-								case 106:
-								case 107:
-								case 108:
-								case 109:
-								case 115:
-								case 120://fire elemental
-								case 122:
-								case 123:	//tybal					
-										if (
-												(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)>=2) 
-												&&
-												(Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=8) 
-										)
-										{//Ranged attack if far away (but not too far)
-												ai.AI.WorkingMemory.SetItem<int>("attackMode",2);	
-												//SpellIndex= SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow for the moment..
-										}
-										else
-										{
-												ai.AI.WorkingMemory.SetItem<int>("attackMode",0);		
-										}
-										break;
-								default:
-										ai.AI.WorkingMemory.SetItem<int>("attackMode",0);	//Melee attack
-										break;
-								}
-								break;
-						}
-				}
+
+				UpdateNPCAWake ();
 
 
 				//Update the appearance of the NPC
 				UpdateSprite();
 
-				//Update GTarg
-				if (npc_gtarg<=1)//PC
-				{
-						gtargName="_Gronk";
-						if (gtarg==null)
-						{
-								gtarg=UWCharacter.Instance.transform.gameObject;				
-						}
-						else
-						{
-								if (gtarg.name!="_Gronk")
-								{
-										gtarg=UWCharacter.Instance.transform.gameObject;	
-								}
-						}
-				}
-				else
-				{
-						//Inbuilt NPC Gtargs not supported.
+				//Update the Goal Target of the NPC
+				UpdateGTarg ();
 
-						if (gtarg==null)
-						{
-								if (gtargName!="")
-								{
-										gtarg=GameObject.Find(gtargName);
-								}								
-						}
-						else
-						{
-								if (gtarg.name!=gtargName)
-								{
-										gtarg=GameObject.Find(gtargName);	
-								}
-						}
-						if(gtarg==null)
-						{//I no longer have a goal. Check what I was doing and revert to a different state.
-								//Cases
-
-								if ((npc_attitude>0) && (gtargName!="") && ((npc_goal==(short)npc_goals.npc_goal_attack_5) || (npc_goal==(short)npc_goals.npc_goal_attack_9)))
-								{//NPC Follower who has killed their target->Follow player.
-										npc_goal=(short)npc_goals.npc_goal_follow;
-										npc_gtarg=1;
-										gtarg=UWCharacter.Instance.transform.gameObject;
-								}
-
-								if ((npc_attitude==0) && (gtargName!="") && ((npc_goal==(short)npc_goals.npc_goal_attack_5) || (npc_goal==(short)npc_goals.npc_goal_attack_9)))
-								{//NPC Enemy who has defeated their attacker->Focus on player.
-										npc_goal=(short)npc_goals.npc_goal_attack_5;
-										npc_gtarg=1;	
-										gtarg=UWCharacter.Instance.transform.gameObject;
-								}
-						}
-
-				}
-
-				if (ai.AI.Navigator.CurrentPath!=null)
-				{//Turns the AI around on their route.
-						Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
-						NextPosition.y= this.transform.position.y;//AI is kept level.
-						ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",NextPosition);
-				}
+				//if (ai!=null)
+				//{
+				//		if (ai.AI.Navigator.CurrentPath!=null)
+				//		{//Turns the AI around on their route.
+				//				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
+				//				NextPosition.y= this.transform.position.y;//AI is kept level.
+				//				ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",NextPosition);
+				//		}
+				//}
 				if ((npc_hp<=0))
 				{//Begin death handling.
 						OnDeath();
 				}
 				else
 				{
-						//If the player comes close and I'm hostile. Make sure I go to combat mode.
-						if ((npc_attitude==0) && (Vector3.Distance(this.transform.position, UWCharacter.Instance.transform.position)<=UWCharacter.Instance.DetectionRange))		
+						UpdateGoals ();
+				}	
+
+		}
+
+	void UpdateNPCAWake ()
+	{
+		//The AI is only active when the player is within a certain distance to the player camera.
+		if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 8) {
+			if (objInt () != null) {
+				AI_INIT ();
+				//ai.AI.IsActive = Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 8;
+				newAnim.enabled = true;
+			}
+		}
+		else {
+			//if (ai != null) {
+			//	ai.AI.IsActive = false;
+			//}
+			newAnim.enabled = false;
+			return;
+		}
+	}
+
+	void UpdateGoals ()
+	{
+		if (Agent==null){return;}
+		//If the player comes close and I'm hostile. Make sure I go to combat mode.
+		if ((npc_attitude == 0) && (Vector3.Distance (this.transform.position, UWCharacter.Instance.transform.position) <= UWCharacter.Instance.DetectionRange)) {
+			npc_goal = (short)npc_goals.npc_goal_attack_5;
+			//Attack player
+			npc_gtarg = 1;
+		}
+		switch (npc_goal) 
+				{
+				case (short)npc_goals.npc_goal_want_to_talk:
+					{
+						//I just want to talk to you
+						//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
+						AnimRange= NPC.AI_RANGE_IDLE;
+						if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false)) 
 						{
-								npc_goal=(short)npc_goals.npc_goal_attack_5;	//Attack player
-								npc_gtarg=1;
-						}
-						switch (npc_goal)
-						{
-						case (short)npc_goals.npc_goal_want_to_talk://I just want to talk to you
-								ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
-								if ((UWCharacter.Instance.isRoaming==false) 
-										&& (ConversationVM.InConversation==false))
+								if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5) 
 								{
-										if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos)<=1.5)	
-										{
-												TalkTo();
-										}	
+										TalkTo ();
 								}
-								break;
-						case  (short)npc_goals.npc_goal_stand_still_0://Standing still
-						case  (short)npc_goals.npc_goal_stand_still_7:
-						case  (short)npc_goals.npc_goal_stand_still_11:
-						case  (short)npc_goals.npc_goal_stand_still_12:
-								ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
-								break;
+						}	
+						break;
+					}
 
-						case (short)npc_goals.npc_goal_wander_1://Wander randomly
-						case (short)npc_goals.npc_goal_wander_2:
-						case (short)npc_goals.npc_goal_wander_4:
-						case (short)npc_goals.npc_goal_wander_8:
-								ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_IDLERANDOM);						
+			
+		case (short)npc_goals.npc_goal_stand_still_0:
+		//Standing still
+		case (short)npc_goals.npc_goal_stand_still_7:
+		case (short)npc_goals.npc_goal_stand_still_11:
+		case (short)npc_goals.npc_goal_stand_still_12:
+						{
+								AnimRange= NPC.AI_RANGE_IDLE;
 								break;
-
-						case (short)npc_goals.npc_goal_attack_5://Attack target
-						case (short)npc_goals.npc_goal_attack_9:
-								ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-								if (Room()==UWCharacter.Instance.room)
+						}
+			//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
+			//break;
+		case (short)npc_goals.npc_goal_wander_1://Wander randomly		
+		case (short)npc_goals.npc_goal_wander_2:
+		case (short)npc_goals.npc_goal_wander_4:
+		case (short)npc_goals.npc_goal_wander_8:
+			//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_IDLERANDOM);
+						{
+								int tileX = (int)(transform.position.x/1.2f);
+								int tileY = (int)(transform.position.z/1.2f);
+								if (WaitTimer <=0)
 								{
-										Vector3 AB = this.transform.position - gtarg.transform.position;
-										if(AB.magnitude>1f)
-										{
-												Vector3 Movepos = gtarg.transform.position; //;+ (AB.normalized) ;
-												ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);		
-										}
-										else
-										{
-												ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",this.transform.position);	
-										}
-
-										//Vector3 Movepos = gtarg.transform.position + (0.10f * AB.normalized) ;
-
+									SetRandomDestination();
+								}
+								if ((DestTileX!=tileX) && (DestTileY != tileY))
+								{//I need to move to this tile.
+										AnimRange= NPC.AI_RANGE_MOVE;
+										Agent.destination= GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY);
+										Agent.isStopped=false;
 								}
 								else
-								{		//AI won't move to player position if they are in a different "room"
-										ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",this.transform.position);	
-								}	
+								{//I am at this tile. Stand idle for a random period of time
+									AnimRange= NPC.AI_RANGE_IDLE;	
+									if (WaitTimer==0)
+									{
+											WaitTimer = Random.Range(1f,10f);			
+									}
+									
+								}
 								break;
-
-						case (short)npc_goals.npc_goal_flee://Run away (morale failure)
-								ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FLEE);//Set to idle
-								break;
-
-						case (short)npc_goals.npc_goal_follow://Follow target
-
-								if (gtarg!=null)
+						}
+			
+		case (short)npc_goals.npc_goal_attack_5://Attack target		
+		case (short)npc_goals.npc_goal_attack_9:
+						{
+							//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_COMBAT);
+							
+							//Set to combat state.
+							if (Room () == UWCharacter.Instance.room) 
 								{
-										Vector3 ABf =this.transform.position - gtarg.transform.position;
-										Vector3 MoveposF = gtarg.transform.position + (0.9f * ABf.normalized) ;
-										ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
-										ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
+									Vector3 AB = this.transform.position - gtarg.transform.position;
+									if (AB.magnitude > 1f) 
+										{//AI needs to move into combat range
+											//Vector3 Movepos = gtarg.transform.position;
+												//if (AB.magnitude >3f)
+												//{
+														AnimRange=NPC.AI_RANGE_MOVE;
 
-										if (gtarg.name=="_Gronk")
-										{//Help out the player dynamically
-												if (UWCharacter.Instance.HelpMeMyFriends==true)
+												//}
+												//else
+												//{
+												//		AnimRange=NPC.AI_ANIM_COMBAT_IDLE;			
+												//}
+
+											
+											//;+ (AB.normalized) ;
+											//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", Movepos);
+												Agent.destination=gtarg.transform.position;
+												Agent.isStopped=false;
+										}
+									else 
+										{//AI is in range. Check if they are ready to execute an attack
+											//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", this.transform.position);
+												Agent.destination=this.transform.position;
+												Agent.isStopped=true;
+												//transform.LookAt(gtarg.transform.position);
+												transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dirForNPC);
+												if (WaitTimer <= 0f)
+												{//Init the attack anim
+														SetRandomAttack();	
+														WaitTimer = 4f;
+												}
+												else if ((WaitTimer<=3.6) && (WaitTimer>3))
 												{
-														UWCharacter.Instance.HelpMeMyFriends=false;
-														//If I'm not already busy with another NPC
-														if(UWCharacter.Instance.LastEnemyToHitMe!=null)
-														{
-																gtarg=UWCharacter.Instance.LastEnemyToHitMe;
-																npc_goal=(short)npc_goals.npc_goal_attack_5;
-																npc_gtarg=(short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-																gtargName=UWCharacter.Instance.LastEnemyToHitMe.name;																
-														}
+														ExecuteAttack();
+														WaitTimer =2f;
 												}
-												if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
-												{//slasher of veils in the void needs to get rowdy.
-														if (objInt().item_id==124)
-														{
-																npc_goal=(short)npc_goals.npc_goal_attack_5;
-																gtarg=UWCharacter.Instance.gameObject;
-														}
+												else if (WaitTimer <=1.6f)
+												{
+													AnimRange=NPC.AI_ANIM_COMBAT_IDLE;
+													//Wait out till the next attack	
 												}
+										}
+							}
+							else 
+								{
+									//AI won't move to player position if they are in a different "room"
+									//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", this.transform.position);
+										Agent.destination=this.transform.position;
+										Agent.isStopped=true;
+								}
+							break;
 
+						}
+
+		case (short)npc_goals.npc_goal_flee:
+						{
+								//Run away (morale failure)
+								//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_FLEE);
+								//TODO:get destination
+								//Set to idle
+								break;	
+						}
+
+		case (short)npc_goals.npc_goal_follow:
+						{
+								//Follow target
+								if (gtarg != null) {
+										Vector3 ABf = this.transform.position - gtarg.transform.position;
+										Vector3 Movepos = gtarg.transform.position + (0.9f * ABf.normalized);
+										Agent.destination=Movepos;
+										Agent.isStopped=false;
+										//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", MoveposF);
+										//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_FOLLOW);
+										//Set to idle										
+										if (gtarg.name == "_Gronk") {
+												//Help out the player dynamically
+												if (UWCharacter.Instance.HelpMeMyFriends == true) {
+														UWCharacter.Instance.HelpMeMyFriends = false;
+														//If I'm not already busy with another NPC
+														if (UWCharacter.Instance.LastEnemyToHitMe != null) 
+														{
+																gtarg = UWCharacter.Instance.LastEnemyToHitMe;
+																npc_goal = (short)npc_goals.npc_goal_attack_5;
+																npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction> ().objectloaderinfo.index;
+																gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
+														}
+												}
+												if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8)) 
+												{
+														//slasher of veils in the void needs to get rowdy.
+														if (objInt ().item_id == 124) {
+																npc_goal = (short)npc_goals.npc_goal_attack_5;
+																gtarg = UWCharacter.Instance.gameObject;
+														}
+												}
 										}
 								}
 								break;
 
 						}
-				}
-		}
 
-		/*
-		public void LateUpdate()
-		{
-				return;
-				if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
-			{
-					return;
-			}
-			if (sprt==null)
-			{
-				sprt=this.GetComponentInChildren<SpriteRenderer>();	
-			}
-				if (sprt.sprite==null)
-				{
-						return;
-				}
-			if(CurrentSpriteName != sprt.sprite.name)
-			{
-				CurrentSpriteName= sprt.sprite.name;
-				currentSpriteLoaded= GameWorldController.instance.critsLoader[NPC_IDi-64].RetrieveSpriteByName(CurrentSpriteName, CritterInfo.TranslateAnimToIndex(CritterInfo.TranslateAnimRangeToAnim(curranim)));
-			}
-			sprt.sprite=currentSpriteLoaded;
 		}
-	*/
+	}
+
+	void UpdateGTarg ()
+	{
+		//Update GTarg
+		if (npc_gtarg <= 1)//PC
+		 {
+			gtargName = "_Gronk";
+			if (gtarg == null) {
+				gtarg = UWCharacter.Instance.transform.gameObject;
+			}
+			else {
+				if (gtarg.name != "_Gronk") {
+					gtarg = UWCharacter.Instance.transform.gameObject;
+				}
+			}
+		}
+		else {
+			//Inbuilt NPC Gtargs not supported.
+			if (gtarg == null) {
+				if (gtargName != "") {
+					gtarg = GameObject.Find (gtargName);
+				}
+			}
+			else {
+				if (gtarg.name != gtargName) {
+					gtarg = GameObject.Find (gtargName);
+				}
+			}
+			if (gtarg == null) {
+				//I no longer have a goal. Check what I was doing and revert to a different state.
+				//Cases
+				if ((npc_attitude > 0) && (gtargName != "") && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9))) {
+					//NPC Follower who has killed their target->Follow player.
+					npc_goal = (short)npc_goals.npc_goal_follow;
+					npc_gtarg = 1;
+					gtarg = UWCharacter.Instance.transform.gameObject;
+				}
+				if ((npc_attitude == 0) && (gtargName != "") && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9))) {
+					//NPC Enemy who has defeated their attacker->Focus on player.
+					npc_goal = (short)npc_goals.npc_goal_attack_5;
+					npc_gtarg = 1;
+					gtarg = UWCharacter.Instance.transform.gameObject;
+				}
+			}
+		}
+	}
 
 		/// <summary>
 		/// Applies the attack to the NPC
@@ -824,11 +819,6 @@ public class NPC : MobileObject {
 										if (Col.gameObject.GetComponent<NPC>()!=null)
 										{
 												if (AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))
-														//if (
-														//	(AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))	
-														//	||
-														//	(AreNPCSAllied(Col.gameObject.GetComponent<NPC>(),this))	
-														//)
 												{
 														Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
 														Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
@@ -1050,50 +1040,50 @@ public class NPC : MobileObject {
 						}
 				case AI_ANIM_WALKING_FRONT:
 						{	
-								playAnimation(22,true);								
+								playAnimation(22,false);								
 								//playAnimation(NPC_ID +"_walking_front",CalcedFacing);
 								break;
 						}
 				case AI_ANIM_WALKING_FRONT_RIGHT:
 						{	
-								playAnimation(21,true);
+								playAnimation(21,false);
 								//			playAnimation(NPC_ID + "_walking_front_right",CalcedFacing);
 								break;
 						}
 				case AI_ANIM_WALKING_RIGHT:
 						{	
 
-								playAnimation(20,true);
+								playAnimation(20,false);
 								//playAnimation(NPC_ID + "_walking_right",CalcedFacing);
 								break;
 						}
 				case AI_ANIM_WALKING_REAR_RIGHT:
 						{	
-								playAnimation(19,true);								
+								playAnimation(19,false);								
 								//playAnimation(NPC_ID +"_walking_rear_right",CalcedFacing);
 								break;
 						}
 				case AI_ANIM_WALKING_REAR:
 						{	
-								playAnimation(18,true);								
+								playAnimation(18,false);								
 								//playAnimation(NPC_ID +"_walking_rear",CalcedFacing);
 								break;
 						}
 				case  AI_ANIM_WALKING_REAR_LEFT:
 						{	
-								playAnimation(25,true);								
+								playAnimation(25,false);								
 								//playAnimation(NPC_ID +"_walking_rear_left",CalcedFacing);
 								break;
 						}
 				case  AI_ANIM_WALKING_LEFT:
 						{	
-								playAnimation(24,true);								
+								playAnimation(24,false);								
 								//playAnimation(NPC_ID + "_walking_left",CalcedFacing);
 								break;
 						}
 				case AI_ANIM_WALKING_FRONT_LEFT:
 						{	
-								playAnimation(23,true);								
+								playAnimation(23,false);								
 								//playAnimation(NPC_ID + "_walking_front_left",CalcedFacing);
 								break;
 						}
@@ -1197,29 +1187,6 @@ public class NPC : MobileObject {
 				newAnim.Play(index,isConstantAnim);
 		}
 
-		/// <summary>
-		/// Checks if a new animation is needed and if so run it.
-		/// </summary>
-		/// <param name="pAnim">P animation.</param>
-		/// <param name="newState">New state.</param>
-		/// Obsolete. Used by the legacy animator
-		/*	void playAnimation(string pAnim, int newState)
-	{
-				return;
-				curranim=newState;
-		if (Frozen)
-		{
-			//anim.enabled=true;
-			FrozenUpdate=2;
-		}
-			if (GameWorldController.instance.critsLoader[NPC_IDi-64]==null)
-			{
-				GameWorldController.instance.critsLoader[NPC_IDi-64]= new CritLoader(NPC_IDi-64);
-			}
-		//currentState=newState;
-		//CurrentAnim=pAnim;
-		//anim.Play(pAnim);
-		}*/
 
 		/// <summary>
 		/// NPC tries to hit the player.
@@ -1233,8 +1200,6 @@ public class NPC : MobileObject {
 						return;
 				}
 				float weaponRange=1.5f;
-
-
 
 				//NPC tries to raycast at the player or object
 				Vector3 TargetingPoint;
@@ -1277,11 +1242,6 @@ public class NPC : MobileObject {
 										else
 										{
 												Impact.SpawnHitImpact(Impact.ImpactDamage(), GetImpactPoint(),46,50);
-												//if (ObjectInteraction.PlaySoundEffects)
-												//{
-												//		objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
-												//		objInt().aud.Play();
-												//}
 										}
 								}
 						}
@@ -1452,4 +1412,345 @@ public class NPC : MobileObject {
 				}
 
 		}
+
+		/*
+		public void CreateNPCPath(int EndTileX, int EndTileY, int StartTileX, int StartTileY)
+		{
+				TileMap tm = GameWorldController.instance.currentTileMap();
+				//PathSteps.Clear();
+				PathSteps= new List<PathCoord>();
+				PathStepsFinal= new List<PathCoord>();
+				AddStep(ref PathSteps, EndTileX, EndTileY,0);
+				bool PathFound=false;
+				int GiveUp=0;
+
+				while ((!PathFound) && (GiveUp <=64))
+				{						
+						for (int i =0; i<PathSteps.Count;i++)
+						{
+								if (!PathSteps[i].tested)
+								{
+										List<PathCoord> NeighbourSteps=AddNeighbourSteps(tm, PathSteps[i].tileX, PathSteps[i].tileY, GiveUp, StartTileX, StartTileY);
+										PathSteps[i].tested=true;
+										DeduplicateSteps(ref NeighbourSteps);		
+								}
+						}
+						//Check for path found.
+						PathFound=CheckPathFound(StartTileX, StartTileY);
+						GiveUp++;
+				}
+
+				if (PathFound==true)
+				{
+						PathStepsFinal.Add(PathSteps[PathSteps.Count-1]);
+						TracePathBack(PathSteps[PathSteps.Count-1]);
+				}
+				else
+				{
+						PathStepsFinal.Add (PathSteps[0]);//Just put in the first step
+				}
+		}
+
+	
+	List <PathCoord> AddNeighbourSteps (TileMap tm,int tileX, int tileY, int counter, int DestTileX, int DestTileY)
+	{
+		List<PathCoord> NeighbourSteps = new List<PathCoord>();
+		for (int x = -1; x <= 1; x++) 				
+			{
+			for (int y = -1; y <= 1; y++) 
+				{
+								if (
+										( (x==0) && ((y==1) || (y==-1) ) )
+										||
+										( (y==0) && ((x==1) || (x==-1) ) )
+								)
+				{
+					if (TileMap.ValidTile(x+tileX, y+tileY))
+					{
+						if (TileMap.isTileOpen(tm.Tiles[x+tileX, y+tileY].tileType))							
+						{
+							if (CanMoveBetweenTiles(tm, tileX,tileY, x+tileX, y+tileY))
+							{
+									AddStep(ref NeighbourSteps, x+tileX, x+tileY, counter );	
+									if 		(
+											(x+tileX==DestTileX)
+											&&
+											(x+tileX==DestTileX)
+											)
+												{
+													return NeighbourSteps;//Found a valid path.
+												}
+
+							}
+						}
+					}
+				}
+			}
+		}
+		return NeighbourSteps;
+	}
+
+	public void AddStep(ref List<PathCoord> ListToAdd, int tileX, int tileY, int counter)
+	{
+			PathCoord PathCoordToAdd = new PathCoord();
+			PathCoordToAdd.tileX = tileX;
+			PathCoordToAdd.tileY = tileY;
+			PathCoordToAdd.Counter = counter;
+			ListToAdd.Add (PathCoordToAdd);
+	}
+
+
+	bool CanMoveBetweenTiles (TileMap tm, int srcTileX, int srcTileY, int dstTileX, int dstTileY)
+	{
+			short srcTileType = tm.Tiles[srcTileX,srcTileY].tileType;
+			short dstTileType = tm.Tiles[dstTileX,dstTileY].tileType;
+
+			return true;
+	}
+
+	void DeduplicateSteps(ref List<PathCoord> neighbours)
+	{
+			for (int i=neighbours.Count-1; i >= 0; i--)	
+			{
+					for (int j = 0; j<PathSteps.Count; j++)
+					{
+							if (
+									(neighbours[i].tileX == PathSteps[j].tileX)
+									&&
+									(neighbours[i].tileY == PathSteps[j].tileY)
+							)
+							{
+									if (neighbours[i].Counter <= PathSteps[j].Counter)
+									{
+											neighbours.RemoveAt(i);
+									}
+							}
+					}
+			}
+	}
+
+	void AddStepsToPath(ref List<PathCoord> neighbours)
+	{
+		for (int i=0; i < neighbours.Count; i++)	
+		{
+				PathSteps.Add(neighbours[i]);
+		}
+	}
+
+	bool CheckPathFound (int destX, int destY)
+	{
+			for (int i=PathSteps.Count-1; i >= 0; i--)	
+			{
+					if (
+							(PathSteps[i].tileX == destX)
+							&&
+							(PathSteps[i].tileY == destY)
+					)
+					{
+							return true;
+					}
+
+			}
+			return false;
+	}
+
+		void TracePathBack (PathCoord step)
+		{
+				//PathCoord step = PathSteps[PathSteps.Count-1];
+				int Counter=step.Counter;
+				for (int x=-1; x<=1;x++)
+				{
+						for (int y=-1; y<=1;y++)
+						{
+
+								int stepFoundIndex = FindCoordInList(ref PathSteps, step.tileX, step.tileY);
+
+								if (stepFoundIndex!=-1)
+								{
+										if(PathSteps[stepFoundIndex].Counter < Counter)
+										{
+											PathStepsFinal.Add(PathSteps[stepFoundIndex]);
+											TracePathBack(PathSteps[stepFoundIndex]);	
+										}
+								}
+						}
+				}
+
+		}
+
+
+		int FindCoordInList (ref List<PathCoord> ListToSearch, int tileX, int tileY)
+		{
+				for (int i=0; i<ListToSearch.Count-1;i++)
+				{
+						if 
+								(
+								(ListToSearch[i].tileX==tileX)
+										&&
+								(ListToSearch[i].tileY==tileY)
+								)
+						{
+								//return ListToSearch[i];
+								return i;
+						}
+				}
+				return -1;
+		}
+
+
+		public Vector3 getPathDestinationVector()
+		{
+			return GameWorldController.instance.currentTileMap().getTileVector( PathStepsFinal[PathStepsFinal.Count-1].tileX , PathStepsFinal[PathStepsFinal.Count-1].tileY );
+		}
+		*/
+
+
+
+		void SetRandomAttack()
+		{
+				int AttackProb = Random.Range(1,100);
+				//NPC npc = ai.Body.GetComponent<NPC>();
+				int AccumulatedProb=0;
+				int AnimSelected=0;
+				for ( AnimSelected=0;AnimSelected<=GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackProbability.GetUpperBound(0);AnimSelected++)
+				{		
+						AccumulatedProb+=GameWorldController.instance.objDat.critterStats[NPC_IDi-64].AttackProbability[AnimSelected];
+						if (AttackProb<=AccumulatedProb)
+						{
+								CurrentAttack=AnimSelected;
+								break;
+						}
+				}
+
+				switch (AnimSelected)
+				{
+				case 1:
+						AnimRange=NPC.AI_ANIM_ATTACK_SLASH;break;
+				case 2:					
+						AnimRange=NPC.AI_ANIM_ATTACK_THRUST;break;
+				case 0:
+				default:
+						AnimRange=NPC.AI_ANIM_ATTACK_BASH;break;
+				}
+
+
+		}
+
+
+
+		void SetRandomDestination()
+		{
+				int distanceMultipler=1;//For frightened NPCs
+
+				if (npc_gtarg==6)
+				{
+						distanceMultipler=3;//Runs further away from it's current location.
+				}
+				//Get a random spot.
+				bool DestFound=false;
+				Vector3 curPos = transform.position;
+				Vector3 dest =curPos;
+				int tileX = (int)(curPos.x/1.2f);
+				int tileY = (int)(curPos.z/1.2f);
+				DestTileX =tileX;
+				DestTileY=tileY;
+				//int ValidRoom = npc.Room();
+				for (int i=0; i<5;i++)
+				{
+						DestTileX = tileX + Random.Range(-2*distanceMultipler,3*distanceMultipler);
+						DestTileY = tileY + Random.Range(-2*distanceMultipler,3*distanceMultipler);
+						//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
+						if (Room()== GameWorldController.instance.currentTileMap().GetRoom(DestTileX,DestTileY))
+						{
+								DestFound=true;
+								break;
+						}	
+						if (DestFound==false)
+						{
+								DestTileX=tileX;
+								DestTileY=tileY;
+						}
+				}
+
+				//Move back home if too far away
+				float xDist2=Mathf.Pow(DestTileX-npc_xhome,2f);
+				float yDist2=Mathf.Pow(DestTileY-npc_yhome,2f);
+				if (yDist2+xDist2>=10)
+				{
+					DestTileX=npc_xhome;
+					DestTileY=npc_yhome;							
+				}
+
+		}
+
+
+		void PerformDeathAnim()
+		{
+			AnimRange= NPC.AI_ANIM_DEATH;
+			MusicController.LastAttackCounter=0.0f;//Stops combat music unil the next time the player is hit
+			GameWorldController.instance.getMus().PlaySpecialClip(GameWorldController.instance.getMus().VictoryTracks); //plays the fanfare
+			WaitTimer =0.8f;
+		}
+
+
+		void DumpRemains()
+		{
+				//Spawn a bloodstain at this spot.
+				int bloodstain=-1;
+				//Nothing = 0x00, 
+				//RotwormCorpse = 0x20, //A??????
+				//Rubble = 0x40, 
+				//WoodChips = 0x60, 
+				//Bones = 0x80, 
+				//GreenBloodPool = 0xA0, 
+				//RedBloodPool = 0xC0, 
+				//RedBloodPoolGiantSpider = 0xE0. 
+
+				//switch (GameWorldController.instance.critterData.Remains[objInt.item_id-64])
+				switch (GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Remains)
+				{
+				case 0x2://Rotworm corpse
+						bloodstain=217;
+						break;
+				case 0x4://Rubble
+						bloodstain=218;
+						break;
+				case 0x6://Woodchips
+						bloodstain=219;
+						break;
+				case 0x8://Bones
+						bloodstain=220;
+						break;
+				case 0xA://Greenblood
+						bloodstain=221;
+						break;
+				case 0xC://Redblood
+						bloodstain=222;
+						break;
+				case 0xE://RedBloodPoolGiantSpider
+						bloodstain=223;
+						break;
+				case 0://Nothing
+						bloodstain=-1;
+						break;
+				default:
+						Debug.Log(this.name + " should drop " + GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Remains);
+						bloodstain=-1;
+						break;
+				}
+
+				if(bloodstain!=-1)
+				{
+						ObjectLoaderInfo newobjt= ObjectLoader.newObject(bloodstain,0,0,0,256);
+						ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,this.transform.position);
+						//ObjectInteraction remains = ObjectInteraction.CreateNewObject(bloodstain);						
+						//remains.gameObject.transform.parent=GameWorldController.instance.LevelMarker();
+						//GameWorldController.MoveToWorld(remains.gameObject);
+						//remains.transform.position=ai.Body.transform.position;
+				}
+
+				Destroy(this.gameObject);
+
+		}
+
 }

@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 /// <summary>
@@ -78,7 +78,7 @@ public class GameWorldController : UWEBase {
 				Ethereal8=72
 		};
 
-
+		public NavMeshSurface navmeshsurface;
 
 		[Header("Controls")]
 		public MouseLook MouseX;
@@ -91,6 +91,7 @@ public class GameWorldController : UWEBase {
 		/// Generate Nav meshes or not
 		/// </summary>
 		public bool bGenNavMeshes=true;
+		public int GenNavMeshNextFrame=-1;
 
 		/// <summary>
 		/// Enables texture animation effects
@@ -444,8 +445,28 @@ public class GameWorldController : UWEBase {
 
 				instance=this;
 				AtMainMenu=true;
+
+				//Debug.Log(navmeshsurface.GetComponent<NavMeshSurface>().layerMask.value);
 				return;
 
+		}
+
+		void Update()
+		{
+			if (GenNavMeshNextFrame>=0)
+			{
+				GenNavMeshNextFrame--;
+				if (GenNavMeshNextFrame ==1)
+				{
+					if ((bGenNavMeshes) && (!EditorMode))
+					{
+						GenNavMeshNextFrame=-1;
+						//GenerateNavmesh(NavRigLand);
+						//GenerateNavmesh(NavRigWater);
+						GenerateNavmesh(navmeshsurface,256);
+					}	
+				}
+			}
 		}
 
 		void LateUpdate()
@@ -722,7 +743,7 @@ public class GameWorldController : UWEBase {
 		public static GameObject FindTile(int x, int y, int surface)
 		{
 				string tileName = GetTileName (x,y,surface);
-				Transform found = instance.getCurrentLevelModel().transform.FindChild (tileName);
+				Transform found = instance.getCurrentLevelModel().transform.Find (tileName);
 				if (found!=null)
 				{
 						return found.gameObject;
@@ -775,7 +796,7 @@ public class GameWorldController : UWEBase {
 		/// <param name="tileName">Tile name.</param>
 		public static GameObject FindTileByName(string tileName)
 		{
-				return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
+				return instance.getCurrentLevelModel().transform.Find (tileName).gameObject;
 		}
 
 		/// <summary>
@@ -906,8 +927,10 @@ public class GameWorldController : UWEBase {
 
 						if ((bGenNavMeshes) && (!EditorMode))
 						{
-								GenerateNavmesh(NavRigLand);
-								GenerateNavmesh(NavRigWater);								
+								GenNavMeshNextFrame=5;//true;
+								//GenerateNavmesh(NavRigLand);
+								//GenerateNavmesh(NavRigWater);
+								GenerateNavmesh(navmeshsurface,256);
 						}
 
 						if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
@@ -970,6 +993,20 @@ public class GameWorldController : UWEBase {
 				NavRig.Awake();
 
 		}
+
+		void GenerateNavmesh(NavMeshSurface navmeshobj, int layer)
+		{
+				
+			//	if (navmeshobj.GetComponent<NavMeshSurface>()!=null)
+			//	{
+				//		Destroy(navmeshobj.GetComponent<NavMeshSurface>());
+				//}
+				//NavMeshSurface navmesh = navmeshobj.AddComponent<NavMeshSurface>();
+				//navmesh.layerMask = layer;
+				navmeshobj.BuildNavMesh();
+		}
+
+
 
 
 		/// <summary>

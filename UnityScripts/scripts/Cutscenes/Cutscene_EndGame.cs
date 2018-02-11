@@ -60,13 +60,13 @@ public class Cutscene_EndGame : Cuts {
 			ImageTimes[12]=74.8f;
 			ImageLoops[12]=-1;
 
-			ImageFrames[13] = "VictorySplash";
-			ImageTimes[13] = 90.6f;
-			ImageLoops[13]=-1;
+			//ImageFrames[13] = "VictorySplash";
+			//ImageTimes[13] = 90.6f;
+			//ImageLoops[13]=-1;
 
-			ImageFrames[14]="Anim_Base";//To finish.
-			ImageTimes[14] = 100.0f;
-			ImageLoops[14] = -1;
+			ImageFrames[13]="Anim_Base";//To finish.
+			ImageTimes[13] = 90.6f;//100.0f;
+			ImageLoops[13] = -1;
 
 			StringBlockNo=3073;
 			noOfSubs=20;

@@ -73,7 +73,7 @@ public class Action_Moving_Platform : MonoBehaviour {
 	public GameObject FindTile(int x, int y, int surface)
 	{
 		string tileName = GetTileName (x,y,surface);
-		return level.transform.FindChild (tileName).gameObject;
+		return level.transform.Find (tileName).gameObject;
 	}
 
 

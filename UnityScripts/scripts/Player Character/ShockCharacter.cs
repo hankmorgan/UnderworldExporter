@@ -70,7 +70,7 @@ public class ShockCharacter : MonoBehaviour {
 		//WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		
 		XAxis = GetComponent<MouseLook>();
-		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
+		YAxis =	transform.Find ("Main Camera").GetComponent<MouseLook>();
 		//Screen.lockCursor=true;
 		
 			//	MessageLog = (Text)GameObject.FindWithTag("MessageLog").GetComponent<Text>();

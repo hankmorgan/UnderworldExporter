@@ -150,6 +150,12 @@ public class Character : UWEBase {
 		dirForNPC.y=0.0f;
 				//dir.y = 0.0f;
 		CameraPos=Camera.main.transform.position;
+
+
+				if (transform.position.y <-10f)
+				{
+					this.transform.position = GameWorldController.instance.currentTileMap().getTileVector(TileMap.visitedTileX,TileMap.visitedTileY);
+				}
 	}
 
 	public void UseMode()
