@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using RAIN.BehaviorTrees;
-using RAIN.Core;
-using RAIN.Minds;
-using RAIN.Navigation;
+//using RAIN.BehaviorTrees;
+//using RAIN.Core;
+//using RAIN.Minds;
+//using RAIN.Navigation;
 
 /// <summary>
 /// Object interaction. Does a lot....
@@ -1015,6 +1015,7 @@ public class ObjectInteraction : UWEBase {
 				{
 					objInteract.aud=myObj.AddComponent<AudioSource>();
 					objInteract.aud.maxDistance=3f;//TODO:Tweak this distance
+					objInteract.aud.spatialBlend =1f;
 				}
 			return objInteract;
 		}
@@ -1247,7 +1248,7 @@ public class ObjectInteraction : UWEBase {
 						cap.radius=0.3f;
 						cap.height=0.7f;
 						cap.skinWidth=0.02f;
-						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.4f,0.2f);
+						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.3f,0.2f);
 						break;
 						//Small
 				case 64: //a_rotworm
@@ -1260,7 +1261,7 @@ public class ObjectInteraction : UWEBase {
 				case 122: //a_wisp
 						cap.isTrigger=false;
 						cap.center = new Vector3(0.0f, 0.3f, 0.0f);
-						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.2f,0.2f);
+						NpcLauncher.transform.localPosition=new Vector3(0.0f,0.15f,0.2f);
 						cap.radius=0.3f;
 						cap.height=0.6f;
 						cap.skinWidth=0.02f;
@@ -1268,6 +1269,31 @@ public class ObjectInteraction : UWEBase {
 				}
 
 				cap.stepOffset=0.1f;//Stop npcs from climbing over each other
+
+				//Set enemies who can cast spells.
+				//TODO: update for UW2
+				switch(objInt.item_id)
+					{
+					case 103: //a_mage
+					case 106: //a_mage
+					case 107: //a_mage
+					case 108: //a_mage
+					case 109: //a_mage
+					case 110: //a_ghoul
+					case 115: //a_mage
+					case 123: //tybal
+					case 75: //an_imp
+					case 81: //a_mongbat
+					case 102: //a_gazer
+					case 69: //a_acid_slug
+					case 122: //a_wisp
+							npc.MagicAttack=true;
+							break;
+					default:
+							npc.MagicAttack=false;
+							break;
+					}
+
 			return npc;
 		}
 
@@ -1328,7 +1354,7 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_talkedto=objI.npc_talkedto;      // is 1 when player already talked to npc
 						npc.npc_level=objI.npc_level;
 						npc.npc_name=objI.npc_name;       //    (not used in uw1)
-						npc.NavMeshRegion=NavMeshRegion;
+						//npc.NavMeshRegion=NavMeshRegion;
 						npc.npc_heading=objI.npc_heading;
 						npc.gtargName=gtargName;
 
@@ -2113,7 +2139,8 @@ public class ObjectInteraction : UWEBase {
 								}								
 							case 0x2c:
 								myObj.AddComponent<a_hack_trap_sleep>();break;
-
+							case 0x32:
+								myObj.AddComponent<a_do_trap_jailor>();break;
 							case 0x3F://end game sequence
 								myObj.AddComponent<a_do_trap_EndGame>();break;
 							case 0x36:

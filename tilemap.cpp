@@ -622,14 +622,24 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			fprintf(LOGFILE,"");
 		fileSize = getFileSize(file);
 		tmp_ark = new unsigned char[fileSize];
-		//tex_ark = new unsigned char[fileSize];
 		fread(tmp_ark, fileSize, 1,file);
-		//fread(tex_ark,fileSize,1,file);
 		fclose(file);  
 
 		address_pointer=0;
+		int datalentest = 0;
+		//unsigned char *dumplev_ark 
+		lev_ark = get_rwops_uw2dec(tmp_ark, 0, &datalentest);
+		//fprintf(LOGFILE, "begin test func\n");
+		//for (int i = 0; i < datalentest; i++)
+		//	{
+		//	fprintf(LOGFILE, "%c", dumplev_ark[i]);
+		//	}
+		//fprintf(LOGFILE, "\nEnd test func");
+		AddressOfBlockStart = 0;
+
+		
 		NoOfBlocks=getValAtAddress(tmp_ark,0,32);	
-					
+		/* begin test
 		address_pointer=6;
 
 		int compressionFlag=getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
@@ -645,6 +655,13 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			{
 			int datalen;
 			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
+			fprintf(LOGFILE, "begin imple func\n");
+			for (int i = 0; i < datalen; i++)
+				{
+				fprintf(LOGFILE, "%c", lev_ark[i]);
+				}
+			fprintf(LOGFILE, "\nEnd imple func");
+
 			address_pointer=address_pointer+4;
 			AddressOfBlockStart=0;
 			//ObjectsAddress=1024;
@@ -663,7 +680,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				lev_ark[j] = tmp_ark[i];
 				j++;
 				}
-			}	
+			} end test*/
 		
 		
 		//read in the textures
@@ -671,8 +688,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
 		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
 		fprintf(LOGFILE,"\nTextures address: %d", textureAddress);
-		compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
-		isCompressed =(compressionFlag>>1) & 0x01;
+		int compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+		int isCompressed = (compressionFlag >> 1) & 0x01;
 
 		if (isCompressed == 1)
 			{

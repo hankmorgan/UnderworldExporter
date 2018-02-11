@@ -232,6 +232,14 @@ public class object_base : UWEBase {
 			if (((objInt().owner & 0x1f))!=0)
 			//if ((objInt().owner < 31) && (objInt().owner >0))
 			{
+				if (_RES==GAME_UW1)
+				{
+					if ((objInt().owner==13) && (Quest.instance.QuestVariables[32] == 4))
+					{//Do not signal theft if the item belongs to a knight and the player is now a knight
+						objInt().owner=0;
+						return false;
+					}
+				}
 				SignalTheft(UWCharacter.Instance.transform.position, objInt().owner , 4f);
 				objInt().owner=0;
 			}	
@@ -300,8 +308,8 @@ public class object_base : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if message was failed, <c>false</c> otherwise.</returns>
 	public virtual bool FailMessage()
-	{
-		UWHUD.instance.MessageScroll.Add("You cannot use this. (Failmessage default)");
+	{//000~001~152~You cannot use that. \n
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_cannot_use_that_));
 		return false;
 	}
 

@@ -328,6 +328,22 @@ public class TileMap : Loader {
 				);	
 		}
 
+		/// <summary>
+		/// Gets the vector3 at the center of the tile specified.
+		/// </summary>
+		/// <returns>The tile vector.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public Vector3 getTileVector(int tileX,int tileY, float zpos)
+		{
+				return new Vector3( 
+						(((float)tileX) *1.2f) +0.6f, 
+						zpos,
+						(((float)tileY) *1.2f) +0.6f 
+				);	
+		}
+
+
 	
 		/// <summary>
 		/// Builds the UW 1 & 2 Tile map from the file data.

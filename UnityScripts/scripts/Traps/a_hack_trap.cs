@@ -27,6 +27,7 @@ public class a_hack_trap : trap_base {
 		//qual=41 is the vending machine spawning
 		//qual=42 is the vending machine sign (in uw1 is is the talking door!)
 		//qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
+		//qual=50 is to trigger the conversation with the troll #251 in tybals lair after you are imprisoned.
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{

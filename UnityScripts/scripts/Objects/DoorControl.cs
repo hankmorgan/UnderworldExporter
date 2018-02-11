@@ -59,6 +59,11 @@ public class DoorControl : object_base {
 			else
 			{
 				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,+1.1f,0f),0.1f));
+				NavMeshObstacle nmo = this.GetComponent<NavMeshObstacle>();
+				if (nmo!=null)
+				{
+						nmo.enabled = !state();
+				}
 			}	
 		}
 	}
@@ -370,6 +375,11 @@ public class DoorControl : object_base {
 				{
 					//objInt().flags=12;	
 					objInt().flags=4;
+					NavMeshObstacle nmo = this.GetComponent<NavMeshObstacle>();
+					if (nmo!=null)
+					{
+						nmo.enabled = !state();
+					}
 				}
 				else
 				{
@@ -468,60 +478,65 @@ public class DoorControl : object_base {
 				objInt().flags=0;
 				objInt().enchantment=0;
 				//state=false;
+				if (isPortcullis())
+				{
+						NavMeshObstacle nmo = this.GetComponent<NavMeshObstacle>();
+						if (nmo!=null)
+						{
+								nmo.enabled = !state();
+						}
+				}
 
-								if(objInt().link!=0)
-								{	//If it's link is to something that is not a lock then it is likely to be a trigger
-										if
-												(
-												(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
-												&&
-												(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.AN_OPEN_TRIGGER)
-												)
+				if(objInt().link!=0)
+				{	//If it's link is to something that is not a lock then it is likely to be a trigger
+						if
+								(
+								(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+								&&
+								(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.AN_OPEN_TRIGGER)
+								)
+						{
+							trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+							if (tb!=null)
+							{														
+								tb.Activate(this.gameObject);
+							}
+						}
+						else
+						{//The object is linked to a lock. The next of the lock is the use trigger to use here
+								ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
+								if (LockObj!=null)
+								{
+										int next= LockObj.next;
+
+										while (next!=0)
 										{
-											trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
-											if (tb!=null)
-											{														
-												tb.Activate(this.gameObject);
-											}
-										}
-										else
-										{//The object is linked to a lock. The next of the lock is the use trigger to use here
-												ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
-												if (LockObj!=null)
-												{
-														int next= LockObj.next;
+												
+												ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(next);
 
-														while (next!=0)
+												if (TriggerObject!=null)
+												{
+														next=0;
+														trigger_base tb= TriggerObject.GetComponent<trigger_base>();
+														if (tb!=null)
 														{
 																
-																ObjectInteraction TriggerObject= ObjectLoader.getObjectIntAt(next);
-
-																if (TriggerObject!=null)
+																if (tb.objInt().GetItemType()!=ObjectInteraction.AN_OPEN_TRIGGER)
 																{
-																		next=0;
-																		trigger_base tb= TriggerObject.GetComponent<trigger_base>();
-																		if (tb!=null)
-																		{
-																				
-																				if (tb.objInt().GetItemType()!=ObjectInteraction.AN_OPEN_TRIGGER)
-																				{
-																					tb.Activate(this.gameObject);											
-																				}											
-																				next = tb.objInt().next;
-																		}
-
-																}	
-																else
-																{
-																		next=0;
-																}
+																	tb.Activate(this.gameObject);											
+																}											
+																next = tb.objInt().next;
 														}
+
+												}	
+												else
+												{
+														next=0;
 												}
 										}
 								}
-
-
-
+						}
+				}
 			}
 		}
 	}
@@ -818,6 +833,7 @@ public class DoorControl : object_base {
 				NavMeshObstacle navobs= myObj.AddComponent<NavMeshObstacle>();
 				navobs.center= new Vector3(-.4f, 0f, 0.5f);
 				navobs.size= new Vector3(0.8f, 0.1f, 1.1f);
+
 
 			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
 				{

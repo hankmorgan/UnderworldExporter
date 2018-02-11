@@ -1299,7 +1299,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="TileName">Tile name.</param>
 		static void RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
 		{
-
+				
 				//Draw a cube with no slopes.
 				int NumberOfVisibleFaces=0;
 				//Get the number of faces

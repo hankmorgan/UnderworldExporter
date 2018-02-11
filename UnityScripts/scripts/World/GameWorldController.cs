@@ -78,7 +78,7 @@ public class GameWorldController : UWEBase {
 				Ethereal8=72
 		};
 
-		public NavMeshSurface navmeshsurface;
+
 
 		[Header("Controls")]
 		public MouseLook MouseX;
@@ -86,13 +86,6 @@ public class GameWorldController : UWEBase {
 
 
 		[Header("World Options")]
-
-		/// <summary>
-		/// Generate Nav meshes or not
-		/// </summary>
-		public bool bGenNavMeshes=true;
-		public int GenNavMeshNextFrame=-1;
-
 		/// <summary>
 		/// Enables texture animation effects
 		/// </summary>
@@ -289,8 +282,17 @@ public class GameWorldController : UWEBase {
 
 
 		[Header("Nav Meshes")]
-		public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
-		public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
+		/// <summary>
+		/// Generate Nav meshes or not
+		/// </summary>
+		public bool bGenNavMeshes=true;
+		public int GenNavMeshNextFrame=-1;
+		public NavMeshSurface NavMeshLand;
+		public NavMeshSurface NavMeshWater;
+		public NavMeshSurface NavMeshAir;
+		public NavMeshSurface NavMeshLava;
+		//public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
+		//public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
 
 
 		[Header("Art Loaders")]
@@ -453,21 +455,51 @@ public class GameWorldController : UWEBase {
 
 		void Update()
 		{
-			if (GenNavMeshNextFrame>=0)
+			if (GenNavMeshNextFrame>1)
 			{
 				GenNavMeshNextFrame--;
 				if (GenNavMeshNextFrame ==1)
 				{
+					GenNavMeshNextFrame=0;
 					if ((bGenNavMeshes) && (!EditorMode))
 					{
-						GenNavMeshNextFrame=-1;
-						//GenerateNavmesh(NavRigLand);
-						//GenerateNavmesh(NavRigWater);
-						GenerateNavmesh(navmeshsurface,256);
+						GenerateNavMeshes ();
 					}	
 				}
 			}
 		}
+
+	void GenerateNavMeshes ()
+	{
+		//GenNavMeshNextFrame = -1;
+		//GenerateNavmesh(NavRigLand);
+		//GenerateNavmesh(NavRigWater);
+		GenerateNavmesh (NavMeshLand);//Update nav mesh for the land
+		GenerateNavmesh (NavMeshWater);//For water
+		GenerateNavmesh (NavMeshAir);//for air
+		GenerateNavmesh (NavMeshLava);//for lava
+	}
+
+	void GenerateNavmesh(NavMeshSurface navmeshobj)
+	{
+		//	if (navmeshobj.GetComponent<NavMeshSurface>()!=null)
+		//	{
+		//		Destroy(navmeshobj.GetComponent<NavMeshSurface>());
+		//}
+		//NavMeshSurface navmesh = navmeshobj.AddComponent<NavMeshSurface>();
+		//navmesh.layerMask = layer;
+		//	navmeshobj.BuildNavMesh();
+				//navmeshobj.
+				if (navmeshobj.navMeshData==null)
+				{
+						navmeshobj.BuildNavMesh();					
+				}
+				else
+				{
+						navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
+				}
+		
+	}
 
 		void LateUpdate()
 		{
@@ -485,6 +517,10 @@ public class GameWorldController : UWEBase {
 						}
 						WorldReRenderPending=false;
 						FullReRender=false;
+						NavMeshLand.UpdateNavMesh(NavMeshLand.navMeshData);
+						NavMeshWater.UpdateNavMesh(NavMeshWater.navMeshData);
+						NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
+						NavMeshLava.UpdateNavMesh(NavMeshLava.navMeshData);
 				}
 		}
 
@@ -822,6 +858,10 @@ public class GameWorldController : UWEBase {
 								critsLoader= new CritLoader[64];//Clear out animations
 								InitLevelData();
 						}
+						//else
+						//{
+
+					//	}
 
 						//Check loading
 						if (Tilemaps[newLevelNo]==null)
@@ -927,10 +967,15 @@ public class GameWorldController : UWEBase {
 
 						if ((bGenNavMeshes) && (!EditorMode))
 						{
-								GenNavMeshNextFrame=5;//true;
+								//if (!GameWorldController.instance.AtMainMenu)
+								//{//Force the nav meshes to update in 5 frames time to fix bug with nav meshes of two levels merging.
+										GenNavMeshNextFrame=5;	
+								//}
+
 								//GenerateNavmesh(NavRigLand);
 								//GenerateNavmesh(NavRigWater);
-								GenerateNavmesh(navmeshsurface,256);
+								//GenerateNavmesh(navmeshsurface,256);
+								//GenerateNavMeshes();
 						}
 
 						if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))
@@ -978,7 +1023,7 @@ public class GameWorldController : UWEBase {
 		}
 
 		// This will regenerate the navigation mesh when called
-		void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)
+	/*	void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)
 		{//From Legacy.rivaltheory.com/forums/topics/runtime-navmesh-generation-and-path-finding-tutorial
 				int _threadcount=4;
 				// Unregister any navigation mesh we may already have (probably none if you are using this)
@@ -992,19 +1037,9 @@ public class GameWorldController : UWEBase {
 				NavRig.NavMesh.RegisterNavigationGraph();
 				NavRig.Awake();
 
-		}
+		}*/
 
-		void GenerateNavmesh(NavMeshSurface navmeshobj, int layer)
-		{
-				
-			//	if (navmeshobj.GetComponent<NavMeshSurface>()!=null)
-			//	{
-				//		Destroy(navmeshobj.GetComponent<NavMeshSurface>());
-				//}
-				//NavMeshSurface navmesh = navmeshobj.AddComponent<NavMeshSurface>();
-				//navmesh.layerMask = layer;
-				navmeshobj.BuildNavMesh();
-		}
+
 
 
 

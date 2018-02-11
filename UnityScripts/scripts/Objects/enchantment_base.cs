@@ -159,4 +159,10 @@ public class enchantment_base : object_base {
 			return base.ContextMenuDesc (item_id);
 		}		
 	}
+
+	public override float GetWeight ()
+	{
+		return (float)(GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f);
+	}
+
 }

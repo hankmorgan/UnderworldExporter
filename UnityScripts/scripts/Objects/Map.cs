@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Map : object_base {
 	//The inventory item
 	// Use this for initialization
-	protected override void Start ()
-	{
-		base.Start();
+	//protected override void Start ()
+	//{
+	//	base.Start();
 	//	objInt().isquant=0; 
-	}
+	//}
 
 	public override bool use ()
 	{
@@ -60,7 +60,7 @@ public class Map : object_base {
 		return true;
 	}
 
-	public override bool PickupEvent ()
+	/*public override bool PickupEvent ()
 	{//If this value is not set then then vanilla underworld will crash when loading a saved game while holding a map.
 		objInt().isquant=1;
 		return true;
@@ -70,5 +70,10 @@ public class Map : object_base {
 	{
 		objInt().isquant=0;
 		return true;
+	}*/
+
+	public override float GetWeight ()
+	{
+		return (float)(GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f);
 	}
 }

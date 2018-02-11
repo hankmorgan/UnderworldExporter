@@ -1064,6 +1064,7 @@ public class Magic : UWEBase {
 				}
 		}
 
+
 		/// <summary>
 		/// Casts electric/lightning bolt.
 		/// </summary>
@@ -1084,6 +1085,29 @@ public class Magic : UWEBase {
 						CastProjectile(caster, (SpellProp)spOG);
 				}
 		}
+
+
+		/// <summary>
+		/// Casts Acid
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		void Cast_Acid(GameObject caster, bool Ready, int EffectID)
+		{//Lightning Bolt
+				if (Ready==true)
+				{//Ready the spell to be cast.
+						//ReadiedSpell= "Ort Grav";
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
+				}
+				else
+				{
+						SpellProp_Acid spAc =new SpellProp_Acid();
+						spAc.init (EffectID,caster);
+						CastProjectile(caster, (SpellProp)spAc);
+				}
+		}
+
 
 		/// <summary>
 		/// Casts the fireball spell
@@ -3157,8 +3181,11 @@ public class Magic : UWEBase {
 										}
 										else
 										{
-											caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-											caster.GetComponent<AudioSource>().Play();	
+											if (!spellprop.silent)
+											{
+													caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+													caster.GetComponent<AudioSource>().Play();		
+											}
 										}		
 									}
 								}
@@ -3246,20 +3273,29 @@ public class Magic : UWEBase {
 			{
 				if (caster==UWCharacter.Instance.gameObject)
 				{
-					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-					UWCharacter.Instance.aud.Play();
+					if (!spellprop.silent)
+					{
+						UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+						UWCharacter.Instance.aud.Play();
+					}
 				}
 				else
 				{
 					if (caster.name.Contains("_NPC_Launcher"))
 					{
-						caster.transform.parent.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-						caster.transform.parent.GetComponent<AudioSource>().Play();		
+						if (!spellprop.silent)
+						{
+							caster.transform.parent.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+							caster.transform.parent.GetComponent<AudioSource>().Play();		
+						}
 					}
 					else
 					{
-						caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
-						caster.GetComponent<AudioSource>().Play();	
+						if (!spellprop.silent)
+						{
+							caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+							caster.GetComponent<AudioSource>().Play();	
+						}
 					}
 				}		
 			}
@@ -4183,6 +4219,21 @@ public class Magic : UWEBase {
 						SpellResultType=SpellResultNone;
 						break;
 
+				case SpellEffect.UW1_Spell_Effect_Acid_alt01:
+						{
+								if (SpellRule!=SpellRule_TargetVector)
+								{
+										Cast_Acid(caster,ready,EffectID);
+								}
+								else
+								{
+										SpellProp_Acid spAc =new SpellProp_Acid();
+										spAc.init (EffectID,caster);
+										CastProjectile(caster,GetBestSpellVector(caster), (SpellProp)spAc);
+								}
+								SpellResultType=SpellResultNone;
+								break;
+						}
 				case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
 				case SpellEffect.UW1_Spell_Effect_ElectricalBolt_alt01:						
 						{
@@ -4360,7 +4411,7 @@ public class Magic : UWEBase {
 
 
 				case SpellEffect.UW1_Spell_Effect_MassParalyze:
-				case SpellEffect.UW1_Spell_Effect_Acid_alt01:
+
 				case SpellEffect.UW1_Spell_Effect_LocalTeleport:
 						//Cast spell/no spell effect
 						SpellResultType=SpellResultNone;

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using RAIN.BehaviorTrees;
-using RAIN.Core;
-using RAIN.Minds;
+//using RAIN.BehaviorTrees;
+//using RAIN.Core;
+//using RAIN.Minds;
 using UnityEngine.AI;
 
 
@@ -32,7 +32,17 @@ public class NPC : MobileObject {
 				npc_goal_follow=3	
 		};
 
+		public enum AttackStages
+		{
+				AttackPosition = 0,
+				AttackAnimateMagic=1,
+				AttackAnimateMelee=2,
+				AttackExecute=3,
+				AttackWaitCycle = 4
+		};
+		public Vector3 destinationVector;
 
+		public AttackStages AttackState;
 
 		//public int DebugRace;
 
@@ -85,7 +95,7 @@ public class NPC : MobileObject {
 		///Multiple of 10 for dividing animations
 		///Angle index * Anim Range give AI_ANIM_X value to pick animation
 		public int AnimRange=1;
-		public int curranim=0;
+		//public int curranim=0;
 
 		public int CurrentAttack;//What attack the NPC is currently executing.
 
@@ -140,8 +150,12 @@ public class NPC : MobileObject {
 
 		public NavMeshAgent Agent;
 
+		float targetBaseOffset=0f;
+		float startBaseOffset=0f;
+		float floatTime =0f;
+
 		///Can the NPC fire off magic attacks.
-		//public bool MagicAttack;	
+		public bool MagicAttack;	
 		///Transform position to launch projectiles from
 		public GameObject NPC_Launcher; 
 		///What spell the NPC should cast if they have magicAttack==true
@@ -152,7 +166,7 @@ public class NPC : MobileObject {
 		public string CurrentSpriteName="";
 		public Sprite currentSpriteLoaded;
 
-		public int Ammo=1;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+		public int Ammo=0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 
 		private short StartingHP;
 
@@ -196,8 +210,66 @@ public class NPC : MobileObject {
 				//if (ai == null) {
 						if (Agent == null)
 						{
-								Agent = this.gameObject.AddComponent<NavMeshAgent>();
-								Agent.speed = 1.5f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
+						int agentId=GameWorldController.instance.NavMeshLand.agentTypeID;//default
+						Agent = this.gameObject.AddComponent<NavMeshAgent>();
+						Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
+						switch (_RES)
+						{
+						case GAME_UW2:
+								{
+										switch(objInt().item_id)
+										{
+										case 65://cave bat
+										case 66://vampire bat
+										case 71://mongbat
+										case 75://imp
+										case 93://spectre
+										case 98://dire ghost
+										case 102://haunt
+										case 105://lich
+										case 106://lich
+										case 107://lich
+										case 111://gazer	
+												agentId=GameWorldController.instance.NavMeshAir.agentTypeID;//flyer
+												break;
+										case 77://lurker
+										case 89://lurker
+												agentId=GameWorldController.instance.NavMeshWater.agentTypeID;//water
+												break;
+										case 96://Fire elemental
+												agentId=GameWorldController.instance.NavMeshLava.agentTypeID;
+												break;
+										}
+									break;
+								}
+							default:
+								{
+									switch (objInt().item_id)
+									{
+										case 66://bat
+										case 73://vampire bat
+										case 75://imp
+										case 81://mongbat
+										case 100://ghost
+										case 101://ghost
+										case 102://gazer
+										case 122://wisp
+										case 123://tybal
+											agentId=GameWorldController.instance.NavMeshAir.agentTypeID;//flyer
+											break;
+										case 87://lurker
+										case 116://deep lurker
+											agentId=GameWorldController.instance.NavMeshWater.agentTypeID;;//water
+											break;
+										case 120://fire elemental
+											agentId=GameWorldController.instance.NavMeshLava.agentTypeID;;
+											break;
+									}
+									break;
+								}
+							}
+						Agent.agentTypeID = agentId;
+								
 						}
 
 					/*	GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
@@ -545,12 +617,21 @@ public class NPC : MobileObject {
 	void UpdateGoals ()
 	{
 		if (Agent==null){return;}
+		if (!Agent.isOnNavMesh){return;}
+		if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
+
 		//If the player comes close and I'm hostile. Make sure I go to combat mode.
 		if ((npc_attitude == 0) && (Vector3.Distance (this.transform.position, UWCharacter.Instance.transform.position) <= UWCharacter.Instance.DetectionRange)) {
 			npc_goal = (short)npc_goals.npc_goal_attack_5;
 			//Attack player
 			npc_gtarg = 1;
 		}
+				if (targetBaseOffset!= Agent.baseOffset)
+				{
+						floatTime +=Time.deltaTime;
+						Agent.baseOffset = Mathf.Lerp(startBaseOffset, targetBaseOffset, floatTime );
+				}
+
 		switch (npc_goal) 
 				{
 				case (short)npc_goals.npc_goal_want_to_talk:
@@ -595,8 +676,23 @@ public class NPC : MobileObject {
 								if ((DestTileX!=tileX) && (DestTileY != tileY))
 								{//I need to move to this tile.
 										AnimRange= NPC.AI_RANGE_MOVE;
-										Agent.destination= GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY);
-										Agent.isStopped=false;
+										if (Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID)
+										{
+												float tileHeight= (float)GameWorldController.instance.currentTileMap().GetFloorHeight(tileX,tileY)  * 0.15f;
+												float zpos = Random.Range (tileHeight, 4f);
+												//AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
+												targetBaseOffset = zpos-tileHeight;
+												startBaseOffset = Agent.baseOffset;
+												floatTime = 0f;
+												AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY));	
+										}
+										else
+										{
+											AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY));	
+										}
+
+										//Agent.destination= GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY);
+										//Agent.isStopped=false;
 								}
 								else
 								{//I am at this tile. Stand idle for a random period of time
@@ -613,6 +709,87 @@ public class NPC : MobileObject {
 		case (short)npc_goals.npc_goal_attack_5://Attack target		
 		case (short)npc_goals.npc_goal_attack_9:
 						{
+								switch (AttackState)
+								{
+								case AttackStages.AttackPosition:
+										if (Room () == UWCharacter.Instance.room) 
+										{
+											Vector3 AB = this.transform.position - gtarg.transform.position;
+											if (AB.magnitude > 1f) 
+											{
+												if (AB.magnitude < 6f) 
+												{
+													if (MagicAttack)
+													{
+														AgentStand();
+														transform.LookAt(gtarg.transform.position);
+														AnimRange = NPC.AI_ANIM_ATTACK_SECONDARY;
+														AttackState = AttackStages.AttackAnimateMagic;
+														WaitTimer=0.8f;
+													}
+													else
+													{//Move to position
+														AgentMoveToPosition(gtarg.transform.position);
+														AnimRange = NPC.AI_RANGE_MOVE;
+													}
+												}
+												else
+												{
+													AgentMoveToPosition(gtarg.transform.position);
+													AnimRange = NPC.AI_RANGE_MOVE;		
+												}
+											}
+											else
+											{		
+												AgentStand();
+												transform.LookAt(gtarg.transform.position);
+												SetRandomAttack();
+												AttackState = AttackStages.AttackAnimateMelee;
+												WaitTimer=0.8f;
+											}
+										}
+										else
+										{
+											AgentStand();
+											AttackState=AttackStages.AttackWaitCycle;
+											WaitTimer=0.8f;
+										}
+										break;
+								case AttackStages.AttackAnimateMelee:
+										if (WaitTimer<=0.2f)
+										{
+											ExecuteAttack();
+											AttackState = AttackStages.AttackExecute;
+											WaitTimer=0.8f;
+										}
+										break;
+								case AttackStages.AttackAnimateMagic:
+										if (WaitTimer<=0.2f)
+										{
+											ExecuteMagicAttack();
+											AttackState = AttackStages.AttackExecute; 
+											WaitTimer=0.8f;
+										}
+										break;
+								case AttackStages.AttackExecute:
+										if (WaitTimer<=0.2f)
+										{
+												AttackState = AttackStages.AttackWaitCycle;
+												WaitTimer=0.8f;
+										}
+										break;
+								case AttackStages.AttackWaitCycle:
+										AnimRange = NPC.AI_ANIM_COMBAT_IDLE;
+										if (WaitTimer<=0.2f)
+										{
+												AttackState = AttackStages.AttackPosition;
+										}
+										break;
+								}
+
+
+								/*
+
 							//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_COMBAT);
 							
 							//Set to combat state.
@@ -620,31 +797,57 @@ public class NPC : MobileObject {
 								{
 									Vector3 AB = this.transform.position - gtarg.transform.position;
 									if (AB.magnitude > 1f) 
-										{//AI needs to move into combat range
-											//Vector3 Movepos = gtarg.transform.position;
-												//if (AB.magnitude >3f)
-												//{
+										{//AI needs to move into combat range or cast a ranged attack
+												if (MagicAttack)
+												{
+														if (AB.magnitude<=6)
+														{
+																AnimRange=NPC.AI_ANIM_ATTACK_SECONDARY;
+																WaitTimer=4f;
+														}
+														else
+														{
+																AnimRange=NPC.AI_RANGE_MOVE;
+														}
+												}
+												else
+												{
 														AnimRange=NPC.AI_RANGE_MOVE;
-
-												//}
-												//else
-												//{
-												//		AnimRange=NPC.AI_ANIM_COMBAT_IDLE;			
-												//}
-
+												}	
+												switch (AnimRange)
+												{
+												case NPC.AI_ANIM_ATTACK_SECONDARY:
+														Agent.destination=this.transform.position;
+														Agent.isStopped=true;
+														if (WaitTimer<=0.2f)
+														{//Attack executed move to next step
+																AnimRange=NPC.AI_RANGE_MOVE;
+																Agent.destination=gtarg.transform.position;
+																Agent.isStopped=false;	
+														}
+														else if (WaitTimer<0.6f)
+														{
+																ExecuteMagicAttack();
+																WaitTimer=0.2f;
+														}
+														break;
+												case NPC.AI_RANGE_MOVE:
+												default:
+														AgentMoveToPosition (gtarg.transform.position);
+														break;
+												}
 											
 											//;+ (AB.normalized) ;
 											//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", Movepos);
-												Agent.destination=gtarg.transform.position;
-												Agent.isStopped=false;
+
 										}
 									else 
 										{//AI is in range. Check if they are ready to execute an attack
 											//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", this.transform.position);
 												Agent.destination=this.transform.position;
 												Agent.isStopped=true;
-												//transform.LookAt(gtarg.transform.position);
-												transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dirForNPC);
+												transform.LookAt(gtarg.transform.position);
+												//transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dirForNPC);
 												if (WaitTimer <= 0f)
 												{//Init the attack anim
 														SetRandomAttack();	
@@ -666,9 +869,8 @@ public class NPC : MobileObject {
 								{
 									//AI won't move to player position if they are in a different "room"
 									//ai.AI.WorkingMemory.SetItem<Vector3> ("MoveTarget", this.transform.position);
-										Agent.destination=this.transform.position;
-										Agent.isStopped=true;
-								}
+										AgentStand ();
+								}*/
 							break;
 
 						}
@@ -722,6 +924,26 @@ public class NPC : MobileObject {
 
 		}
 	}
+
+	void AgentStand ()
+	{
+		if (Agent.isOnNavMesh)
+		{
+			destinationVector = this.transform.position;
+			Agent.destination = this.transform.position;
+			Agent.isStopped = true;
+		}
+	}
+
+		void AgentMoveToPosition(Vector3 dest)
+		{
+			if (Agent.isOnNavMesh)
+			{
+					destinationVector = dest;
+					Agent.destination=dest;
+					Agent.isStopped=false;	
+			}
+		}
 
 	void UpdateGTarg ()
 	{
@@ -1378,9 +1600,11 @@ public class NPC : MobileObject {
 
 		public int Room()
 		{
-				if (TileMap.ValidTile(objInt().tileX, objInt().tileY))
+				int tileX = (int)(transform.position.x/1.2f);
+				int tileY = (int)(transform.position.z/1.2f);
+				if (TileMap.ValidTile(tileX, tileY))
 				{
-						return GameWorldController.instance.currentTileMap().Tiles[objInt().tileX, objInt().tileY].roomRegion;
+						return GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].roomRegion;
 				}
 				else
 				{
@@ -1402,6 +1626,8 @@ public class NPC : MobileObject {
 				default:
 						switch(objInt().item_id)
 						{
+						case 69://Acid slug
+								return SpellEffect.UW1_Spell_Effect_Acid_alt01;
 						case 120://Fire elemental
 								return SpellEffect.UW1_Spell_Effect_Fireball_alt01;
 						case 123:

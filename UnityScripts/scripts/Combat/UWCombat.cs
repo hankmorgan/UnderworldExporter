@@ -117,9 +117,10 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
+					//Debug.Log("Hitting " + objInt.name);
 					switch (objInt.GetItemType())
 					{
-					case ObjectInteraction.NPC_TYPE:
+					case ObjectInteraction.NPC_TYPE:												
 						PC_Hits_NPC(UWCharacter.Instance,currWeapon,CurrentStrike,StrikeCharge,objInt.GetComponent<NPC>(), hit);
 						break;
 					default:

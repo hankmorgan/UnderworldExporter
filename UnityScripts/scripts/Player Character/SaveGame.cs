@@ -312,6 +312,38 @@ public class SaveGame : Loader {
 										case 0x8E:
 										case 0x8F:
 										case 0x90:
+										case 0x91:
+										case 0x92:
+										case 0x93:
+										case 0x94:
+										case 0x95:
+										case 0x96:
+										case 0x97:
+										case 0x98:
+										case 0x99:
+										case 0x9A:
+										case 0x9B:
+										case 0x9C:
+										case 0x9D:
+										case 0x9E:
+										case 0x9F:
+										case 0xA0:
+										case 0xA1:
+										case 0xA2:
+										case 0xA3:
+										case 0xA4:
+										case 0xA5:
+										case 0xA6:
+										case 0xA7:
+										case 0xA8:
+										case 0xA9:
+										case 0xAA:
+										case 0xAB:
+										case 0xAC:
+										case 0xAD:
+										case 0xAE:
+										case 0xAF:
+										case 0xB0:												
 												{
 													Quest.instance.variables[i-0x71]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
 													//break;
@@ -989,6 +1021,41 @@ public class SaveGame : Loader {
 								case 0x8E:
 								case 0x8F:
 								case 0x90:
+
+								case 0x91:
+								case 0x92:
+								case 0x93:
+								case 0x94:
+								case 0x95:
+								case 0x96:
+								case 0x97:
+								case 0x98:
+								case 0x99:
+								case 0x9A:
+								case 0x9B:
+								case 0x9C:
+								case 0x9D:
+								case 0x9E:
+								case 0x9F:
+								case 0xA0:
+								case 0xA1:
+								case 0xA2:
+								case 0xA3:
+								case 0xA4:
+								case 0xA5:
+								case 0xA6:
+								case 0xA7:
+								case 0xA8:
+								case 0xA9:
+								case 0xAA:
+								case 0xAB:
+								case 0xAC:
+								case 0xAD:
+								case 0xAE:
+								case 0xAF:
+								case 0xB0:							
+
+
 										{
 											DataLoader.WriteInt8(writer,Quest.instance.variables[i-0x71]);
 											break;

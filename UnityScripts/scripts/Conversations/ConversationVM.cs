@@ -1376,7 +1376,7 @@ public class ConversationVM : UWEBase {
 								case "play_hunger":
 										stack.Set(address,UWCharacter.Instance.FoodLevel);break;
 								default:
-										//Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
+										Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
 										break;
 
 								}

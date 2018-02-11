@@ -3,10 +3,11 @@ UnderworldExporter
  
 Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity. 
 
-Release 1.03
+Release 1.06
 
 
 Contents
+	0 - Notes on this release
 	1 - Game Support
 	2 - Installation and Configuration
 	3 - Controls 
@@ -14,6 +15,13 @@ Contents
 	5 - In-game editor
 	6 - Known issues and bugs
 	7 - Credits and acknowledgements
+
+0 - Notes on this release
+	- This release now uses Unity's built in AI instead of RainAI. Although AI behaviour in general is better there may still be unforeseen AI behaviour.
+	- This release is on an updated version of Unity from previous releases. 
+	- This release includes one major new feature. The ability to load a custom soundtrack. Please read below for details.
+	- Previous releases had serious bugs with regards to the saving of wand objects in the inventory. If you are continuing an old save then please throw your wands into the nearest pool of water.
+
 
 1 Games Supported
 
@@ -41,20 +49,38 @@ Contents
 		TNOVA is implemented as a side project map-viewer. There are no plans to develop this game any further.	
 		
 2 Installation and Configuration
-	The same executable is used for all games. 
-	Download the uwe.zip file and extract it to any location you wish. (eg c:\games\uwe\)
-	In the extracted folder open the config.ini file. 
 
-	For each game there is a different config variable for the game paths.  EG  Path_UW1 for Underworld 1. Edit the file path to match the folder where the original game is located.
-		Eg If the UW1 executable uw.exe is at c:\games\uw1\uw.exe then you should enter c:\games\uw1\ in the path file next to Path_UW1
-	Launch the exporter by running the uwe.exe executable.
-	When you launch the splash screen should detail the games found and the paths recorded for them. 
-	Click on a game icon to launch.
-		UW1 and UW2 will take you to the main menu.
-		UW0 will take you straight to the game world.
-		For SHOCK and TNOVA you can select a level to load from the drop down boxes.
+	2.1 Setup
+		The same executable is used for all games. 
+		
+		Download the uwe.zip file and extract it to any location you wish. (eg c:\games\uwe\)
+		
+		In the extracted folder open the config.ini file. 
 	
-	*If you own the gog.com versions you may need to extract the game files first. In the gog game folder find the file game.gog. Extract it using 7-zip or your file extractor of choice and point your paths to this extracted data.	
+		For each game there is a different config variable for the game paths.  EG  Path_UW1 for Underworld 1. Edit the file path to match the folder where the original game is located.
+		Eg If the UW1 executable uw.exe is at c:\games\uw1\uw.exe then you should enter c:\games\uw1\ in the path file next to Path_UW1
+		
+		Launch the exporter by running the uwe.exe executable.
+	
+		When you launch the splash screen should detail the games found and the paths recorded for them. 
+	
+		Click on a game icon to launch.
+			UW1 and UW2 will take you to the main menu.
+			UW0 will take you straight to the game world.
+			For SHOCK and TNOVA you can select a level to load from the drop down boxes.
+	
+	*If you own the gog.com versions you may need to extract the game files first. In the gog game folder find the file game.gog. Extract it using 7-zip or your file extractor of choice and point your paths to the game folders within this extracted data.	
+
+	2.2 Soundtrack
+		In release 1.05 the music files have been put into an external folder. This allows the use of custom soundtracks. A number of prebuilt sound tracks have been uploaded and these are
+	- The PSX release of the soundtrack
+	- An Sound blaster style soundtrack
+	- A midi soundtrack.
+
+To enable a sound track open config.ini and find the UW1_Soundbank setting. Enter the path to the folder containing the music.
+
+The music files must be in .ogg format and named 01.ogg to 15.ogg  Refer to the SB16 soundtrack for exact files to use.
+
 
 3  The following are the default controls
 

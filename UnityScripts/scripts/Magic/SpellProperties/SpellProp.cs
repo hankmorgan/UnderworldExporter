@@ -27,6 +27,8 @@ public class SpellProp : UWClass {
 	///What impact image is played on a miss.
 	public int impactFrameEnd;
 	public static UWCharacter playerUW;
+
+	public bool silent;
 	
 		public GameObject caster;
 
