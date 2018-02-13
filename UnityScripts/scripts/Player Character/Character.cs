@@ -315,4 +315,9 @@ public class Character : UWEBase {
 			}
 		}
 	}
+
+	public override Vector3 GetImpactPoint ()
+	{
+		return TargetPoint.transform.position;
+	}
 }

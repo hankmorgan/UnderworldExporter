@@ -21,9 +21,9 @@ public class CritLoader : ArtLoader {
 						ReadUW2AssocFile(CritterToLoad);	
 						return;
 				case GAME_UWDEMO:
-						assocpath =  "crit\\DASSOC.ANM"; break;
+						assocpath =  "CRIT" + sep + "DASSOC.ANM"; break;
 				default:
-						assocpath =  "crit\\ASSOC.ANM"; break;
+						assocpath =  "CRIT" + sep + "ASSOC.ANM"; break;
 				}
 				char[] assoc;
 				long AssocAddressPtr=256;
@@ -85,9 +85,9 @@ public class CritLoader : ArtLoader {
 				//Load the assoc file
 				long AssocAddressPtr=0;
 				if  ( 
-						( DataLoader.ReadStreamFile(BasePath + "crit\\AS.AN", out assoc) ) 
-						&& ( DataLoader.ReadStreamFile(BasePath + "crit\\pg.mp", out pgmp) ) 
-						&& ( DataLoader.ReadStreamFile(BasePath + "crit\\cr.AN", out cran) )  
+						( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "AS.AN", out assoc) ) 
+						&& ( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "PG.MP", out pgmp) ) 
+						&& ( DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "CR.AN", out cran) )  
 				)
 				{
 						for (int ass = 0 ; ass <=63 ; ass++)

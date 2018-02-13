@@ -62,15 +62,15 @@ public class CritterInfo : Loader {
 				//load in both page files.
 				if (pass==0)
 				{//CR{CRITTER file ID in octal}PAGE.N{Page}
-					DataLoader.ReadStreamFile(BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage0);
-					bool LoadMod=Directory.Exists(BasePath + "crit\\CR" + critterIDO  +"page_n0" + pass);
-					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "crit\\CR" + critterIDO  +"page_n0" + pass);
+					DataLoader.ReadStreamFile(BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE.N0" + pass,out FilePage0);
+					bool LoadMod=Directory.Exists(BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE_N0" + pass);
+					spriteIndex= ReadPageFile(FilePage0,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE_N0" + pass);
 				}
 				else
 				{
-					DataLoader.ReadStreamFile( BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass,out FilePage1);
-					bool LoadMod=Directory.Exists(BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass);
-					ReadPageFile(FilePage1,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "crit\\CR" + critterIDO  +"page.n0" + pass);
+					DataLoader.ReadStreamFile( BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE.N0" + pass,out FilePage1);
+					bool LoadMod=Directory.Exists(BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE.N0" + pass);
+					ReadPageFile(FilePage1,critter_id,pass,spriteIndex, AuxPalNo,LoadMod,BasePath + "CRIT" + sep + "CR" + critterIDO  +"PAGE.N0" + pass);
 				}
 			}
 		}
@@ -87,7 +87,7 @@ public class CritterInfo : Loader {
 				if ((int)DataLoader.getValAtAddress(PGMP, critter_id * 8 + i, 8) != 255)//Checks if a critter exists at this index in the page file.
 				{
 					string ExtractPageNoO = DecimalToOct (ExtractPageNo.ToString());
-					string fileCrit= BasePath + "\\Crit\\CR" + critterIDO + "." + ExtractPageNoO;
+					string fileCrit= BasePath + sep + "CRIT" + sep + "CR" + critterIDO + "." + ExtractPageNoO;
 					spriteIndex=ReadUW2PageFileData(assocData,palno,fileCrit,AnimInfo,spriteIndex,paletteToUse);
 					ExtractPageNo++;
 				}
@@ -265,9 +265,9 @@ public class CritterInfo : Loader {
 						bool ModFileIsLoaded=false;
 						if (LoadMod)
 						{
-							if (File.Exists(ModPath + "\\" + AuxPalNo + "\\" + i.ToString("d3") +".tga"))
+							if (File.Exists(ModPath + sep + AuxPalNo + sep + i.ToString("d3") +".tga"))
 								{
-									Texture2D tex= TGALoader.LoadTGA(ModPath + "\\" + AuxPalNo + "\\" + i.ToString("d3") +".tga");
+									Texture2D tex= TGALoader.LoadTGA(ModPath + sep + AuxPalNo + sep + i.ToString("d3") +".tga");
 									ModFileIsLoaded=true;
 									AnimInfo.animSprites[spriteIndex+ i]= Sprite.Create(tex,new Rect(0f,0f,tex.width,tex.height),new Vector2 (0.5f,0.0f));
 								}

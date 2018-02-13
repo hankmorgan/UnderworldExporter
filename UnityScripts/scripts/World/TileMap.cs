@@ -389,7 +389,7 @@ public class TileMap : Loader {
 								textureAddress = 0; //it's in a different file
 								address_pointer =0;
 								CEILING_HEIGHT=UW_CEILING_HEIGHT;
-								DataLoader.ReadStreamFile(Loader.BasePath + "Data\\level13.txm" , out tex_ark );
+								DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "LEVEL13.TXM" , out tex_ark );
 								break;
 						}
 

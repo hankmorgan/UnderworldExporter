@@ -27,7 +27,7 @@ public class CutsLoader : ArtLoader {
 
 		public CutsLoader(string File)
 		{
-			Path = "cuts\\" + File;
+			Path = "CUTS" + sep + File.ToUpper();
 			if (LoadImageFile())
 			{
 				ReadCutsFile(ref ImageFileData , UseAlpha(File),UseErrorHandling(File));

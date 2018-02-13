@@ -16,6 +16,9 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
+		public int MapMeshLayerMask=0;
+		public int DoorLayerMask=0;
+
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
 		public enum UW1_LevelNames
@@ -248,8 +251,8 @@ public class GameWorldController : UWEBase {
 
 
 		[Header("Paths")]
-		public string Lev_Ark_File_Selected = "Data\\Lev.ark";
-		public string SCD_Ark_File_Selected = "Data\\SCD.ark";
+		public string Lev_Ark_File_Selected = "";//"DATA\\Lev.ark";
+		public string SCD_Ark_File_Selected = "";//"DATA\\SCD.ark";
 		//Game paths
 		public string path_uw0;
 		public string path_uw1;
@@ -424,10 +427,11 @@ public class GameWorldController : UWEBase {
 				}
 
 				Loader.BasePath= path; 
-				if (Loader.BasePath.EndsWith("\\") !=true)
-				{
-						Loader.BasePath = Loader.BasePath + "\\";
-				}
+				Loader.sep = sep;
+			//	if (Loader.BasePath.EndsWith(sep.ToString()) !=true)
+			//	{
+			//			Loader.BasePath = Loader.BasePath + sep;
+			//	}
 		}
 
 		/// <summary>
@@ -437,6 +441,10 @@ public class GameWorldController : UWEBase {
 		void Awake()
 		{
 				instance=this;
+				sep = Path.AltDirectorySeparatorChar;
+				Lev_Ark_File_Selected = "DATA" + sep + "LEV.ARK";
+				SCD_Ark_File_Selected = "DATA" + sep + "SCD.ARK";
+
 				LoadConfigFile();
 				//LoadPath();
 				return;
@@ -447,7 +455,8 @@ public class GameWorldController : UWEBase {
 
 				instance=this;
 				AtMainMenu=true;
-
+				MapMeshLayerMask = 1 << LevelModel.layer;
+				DoorLayerMask = 1 << LayerMask.NameToLayer("Doors");
 				//Debug.Log(navmeshsurface.GetComponent<NavMeshSurface>().layerMask.value);
 				return;
 
@@ -545,13 +554,13 @@ public class GameWorldController : UWEBase {
 						UWCharacter.Instance.speedMultiplier=20;
 						break;
 				case GAME_SHOCK:
-						palLoader = new PaletteLoader("res\\data\\gamepal.res", 700);
+						palLoader = new PaletteLoader("res" + sep + "DATA" + sep + "GAMEPAL.RES", 700);
 						//palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
 						//palLoader.PaletteNo=700;
 						//palLoader.LoadPalettes();
 						texLoader=new TextureLoader();
 						objectMaster=new ObjectMasters();
-						ObjectArt=new GRLoader("res\\data\\objart.res",1350);
+						ObjectArt=new GRLoader("res" + sep + "DATA" + sep + "OBJART.RES",1350);
 						ShockObjProp= new ObjectPropLoader();
 						UWCharacter.Instance.XAxis.enabled=true;
 						UWCharacter.Instance.YAxis.enabled=true;
@@ -565,10 +574,10 @@ public class GameWorldController : UWEBase {
 						commonObject= new CommonObjectDatLoader();
 
 
-						palLoader = new PaletteLoader("data\\pals.dat",-1);
+						palLoader = new PaletteLoader("DATA" + sep + "PALS.DAT",-1);
 
 						//Create palette cycles and store them in the palette array
-						PaletteLoader palCycler = new PaletteLoader("data\\pals.dat",-1);
+						PaletteLoader palCycler = new PaletteLoader("DATA" + sep + "PALS.DAT",-1);
 
 						for (int c=0; c<=27;c++)
 						{
@@ -666,23 +675,23 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.Begin();
 						UWCharacter.Instance.Begin();
 						UWCharacter.Instance.playerInventory.Begin();
-						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						//convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						StringController.instance.LoadStringsPak(Loader.BasePath+"DATA" + sep + "STRINGS.PAK");
+						//convVM.LoadCnvArk(Loader.BasePath+"DATA\\cnv.ark");
 						break;
 				case GAME_UW2:
 						UWHUD.instance.Begin();
 						UWCharacter.Instance.Begin();
 						UWCharacter.Instance.playerInventory.Begin();
 						Quest.instance.QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
-						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						//convVM.LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");
+						StringController.instance.LoadStringsPak(Loader.BasePath+"DATA" + sep + "STRINGS.PAK");
+						//convVM.LoadCnvArkUW2(Loader.BasePath+"DATA\\cnv.ark");
 						break;		
 				default:
 						UWHUD.instance.Begin();
 						UWCharacter.Instance.Begin();
 						UWCharacter.Instance.playerInventory.Begin();
-						StringController.instance.LoadStringsPak(Loader.BasePath+"data\\strings.pak");
-						//convVM.LoadCnvArk(Loader.BasePath+"data\\cnv.ark");
+						StringController.instance.LoadStringsPak(Loader.BasePath+"DATA" + sep + "STRINGS.PAK");
+						//convVM.LoadCnvArk(Loader.BasePath+"DATA\\cnv.ark");
 						break;
 				}
 
@@ -1370,7 +1379,8 @@ public class GameWorldController : UWEBase {
 						}					
 				}
 
-				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\lev.ark",FileMode.Create);
+
+				FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK",FileMode.Create);
 				BinaryWriter writer= new BinaryWriter(file);
 				long add_ptr=0;
 				add_ptr+=DataLoader.WriteInt8(writer, 0x87);
@@ -1517,15 +1527,15 @@ public class GameWorldController : UWEBase {
 				switch(UWEBase._RES)
 				{
 				case GAME_SHOCK:
-						Lev_Ark_File = "res\\data\\archive.dat";
+						Lev_Ark_File = "RES" + sep + "DATA" + sep + "ARCHIVE.DAT";
 						break;	
 				case UWEBase.GAME_UWDEMO:
-						Lev_Ark_File = "Data\\level13.st";
+						Lev_Ark_File = "DATA" + sep + "LEVEL13.ST";
 						break;
 				case UWEBase.GAME_UW2:
 				case UWEBase.GAME_UW1:						
 				default:
-						Lev_Ark_File =  Lev_Ark_File_Selected; //"Data\\lev.ark";//Eventually this will be a save game.
+						Lev_Ark_File =  Lev_Ark_File_Selected; //"DATA\\lev.ark";//Eventually this will be a save game.
 						break;
 				}
 
@@ -1580,7 +1590,7 @@ public class GameWorldController : UWEBase {
 				char[] bglob_data;
 				if (SlotNo==0)	
 				{//Init from BABGLOBS.DAT. Initialise the data.
-						if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "BABGLOBS.DAT", out bglob_data))
 						{
 								int NoOfSlots = bglob_data.GetUpperBound(0)/4;
 								int add_ptr=0;
@@ -1597,12 +1607,12 @@ public class GameWorldController : UWEBase {
 				else
 				{
 						int NoOfSlots=0;//Assumes the same no of slots that is in the babglobs is in bglobals.
-						if (DataLoader.ReadStreamFile(Loader.BasePath + "data\\BABGLOBS.DAT", out bglob_data))
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "BABGLOBS.DAT", out bglob_data))
 						{
 								NoOfSlots = bglob_data.GetUpperBound(0)/4;
 								NoOfSlots++;
 						}
-						if (DataLoader.ReadStreamFile(Loader.BasePath + "Save" + SlotNo + "\\BGLOBALS.DAT", out bglob_data))
+						if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + SlotNo + sep + "BGLOBALS.DAT", out bglob_data))
 						{
 								//int NoOfSlots = bglob_data.GetUpperBound(0)/4;
 								int add_ptr=0;
@@ -1659,7 +1669,7 @@ public class GameWorldController : UWEBase {
 								add_ptr+=2;
 						}
 				}
-				File.WriteAllBytes(Loader.BasePath +  "save" + SlotNo + "\\BGLOBALS.DAT" , output);
+				File.WriteAllBytes(Loader.BasePath + "SAVE" + SlotNo + sep + "BGLOBALS.DAT" , output);
 
 		}
 
@@ -1720,7 +1730,7 @@ public class GameWorldController : UWEBase {
 		/// <returns><c>true</c>, if config file was loaded, <c>false</c> otherwise.</returns>
 		bool LoadConfigFile()
 		{
-				string fileName = Application.dataPath + "//..//config.ini";
+				string fileName = Application.dataPath + sep + ".." + sep + "config.ini";
 				if (File.Exists(fileName))
 				{
 						string line;

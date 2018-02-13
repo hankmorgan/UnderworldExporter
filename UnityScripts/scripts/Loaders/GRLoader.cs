@@ -45,41 +45,41 @@ public class GRLoader : ArtLoader {
 		public const int WEAPONS_GR = 31;
 
 	private string[] pathGR={
-				"Data\\3DWIN.GR",
-				"Data\\ANIMO.GR",
-				"Data\\ARMOR_F.GR",
-				"Data\\ARMOR_M.GR",
-				"Data\\BODIES.GR",
-				"Data\\BUTTONS.GR",
-				"Data\\CHAINS.GR",
-				"Data\\CHARHEAD.GR",
-				"Data\\CHRBTNS.GR",
-				"Data\\COMPASS.GR",
-				"Data\\CONVERSE.GR",
-				"Data\\CURSORS.GR",
-				"Data\\DOORS.GR",
-				"Data\\DRAGONS.GR",
-				"Data\\EYES.GR",
-				"Data\\FLASKS.GR",
-				"Data\\GENHEAD.GR",
-				"Data\\HEADS.GR",
-				"Data\\INV.GR",
-				"Data\\LFTI.GR",
-				"Data\\OBJECTS.GR",
-				"Data\\OPBTN.GR",
-				"Data\\OPTB.GR",
-				"Data\\OPTBTNS.GR",
-				"Data\\PANELS.GR",
-				"Data\\POWER.GR",
-				"Data\\QUEST.GR",
-				"Data\\SCRLEDGE.GR",
-				"Data\\SPELLS.GR",
-				"Data\\TMFLAT.GR",				
-				"Data\\TMOBJ.GR",
-				"Data\\WEAPONS.GR",
+				"DATA--3DWIN.GR",
+				"DATA--ANIMO.GR",
+				"DATA--ARMOR_F.GR",
+				"DATA--ARMOR_M.GR",
+				"DATA--BODIES.GR",
+				"DATA--BUTTONS.GR",
+				"DATA--CHAINS.GR",
+				"DATA--CHARHEAD.GR",
+				"DATA--CHRBTNS.GR",
+				"DATA--COMPASS.GR",
+				"DATA--CONVERSE.GR",
+				"DATA--CURSORS.GR",
+				"DATA--DOORS.GR",
+				"DATA--DRAGONS.GR",
+				"DATA--EYES.GR",
+				"DATA--FLASKS.GR",
+				"DATA--GENHEAD.GR",
+				"DATA--HEADS.GR",
+				"DATA--INV.GR",
+				"DATA--LFTI.GR",
+				"DATA--OBJECTS.GR",
+				"DATA--OPBTN.GR",
+				"DATA--OPTB.GR",
+				"DATA--OPTBTNS.GR",
+				"DATA--PANELS.GR",
+				"DATA--POWER.GR",
+				"DATA--QUEST.GR",
+				"DATA--SCRLEDGE.GR",
+				"DATA--SPELLS.GR",
+				"DATA--TMFLAT.GR",				
+				"DATA--TMOBJ.GR",
+				"DATA--WEAPONS.GR",
 		};
 
-	private string AuxPalPath = "DATA\\allpals.dat";
+	private string AuxPalPath = "DATA--ALLPALS.DAT";
 	bool useOverrideAuxPalIndex=false;
 	int OverrideAuxPalIndex=0;
 
@@ -93,6 +93,7 @@ public class GRLoader : ArtLoader {
 
 	public GRLoader(int File)
 	{
+		AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
 		useOverrideAuxPalIndex=false;
 		OverrideAuxPalIndex=0	;
 		FileToLoad=File;
@@ -163,7 +164,7 @@ public class GRLoader : ArtLoader {
 		}
 	}
 
-	public GRLoader(int File, string AuxPalToUse, int AuxPalIndex)
+	/*public GRLoader(int File, string AuxPalToUse, int AuxPalIndex)
 	{
 		if (AuxPalIndex!=-1)
 		{
@@ -173,18 +174,18 @@ public class GRLoader : ArtLoader {
 		AuxPalPath=AuxPalToUse;
 		FileToLoad=File;
 		LoadImageFile();
-	}
+	}*/
 
 	public override bool LoadImageFile ()
 	{
-		string ModPath= BasePath+pathGR[FileToLoad].Replace(".","_");	
+		string ModPath= BasePath+pathGR[FileToLoad].Replace("--", sep.ToString()).Replace(".","_");	
 		if (Directory.Exists(ModPath))
 		{
 			LoadMod=true;
 		}
-		if (!DataLoader.ReadStreamFile(BasePath+pathGR[FileToLoad], out ImageFileData))
+		if (!DataLoader.ReadStreamFile(BasePath+pathGR[FileToLoad].Replace("--",sep.ToString()), out ImageFileData))
 		{
-			Debug.Log("Unable to load " + BasePath+pathGR[FileToLoad]);
+			Debug.Log("Unable to load " + BasePath+pathGR[FileToLoad].Replace("--",sep.ToString()));
 			return false;
 		}
 		else
@@ -195,9 +196,9 @@ public class GRLoader : ArtLoader {
 				{//Load up modded image data at the path
 					for (int i=0; i<=ImageCache.GetUpperBound(0);i++)	
 					{
-						if (File.Exists(ModPath + "\\" + i.ToString("d3") + ".tga") )
+						if (File.Exists(ModPath + sep + i.ToString("d3") + ".tga") )
 						{
-							ImageCache[i]=TGALoader.LoadTGA(ModPath + "\\" + i.ToString("d3") + ".tga");
+							ImageCache[i]=TGALoader.LoadTGA(ModPath + sep + i.ToString("d3") + ".tga");
 						}		
 					}
 				}

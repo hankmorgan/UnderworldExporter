@@ -9,6 +9,7 @@ public class GameSelect : GuiBase {
 	public string RES;
 	public bool Game_Found;
 	public Text PathStatus;
+	public string exe;
 
 	public override void Start ()
 	{
@@ -32,14 +33,15 @@ public class GameSelect : GuiBase {
 		//string fileName = Application.dataPath + "//..//" + RES + "_path.txt";
 		//StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
 		//string Path= fileReader.ReadLine().TrimEnd();
-		Game_Found=(Directory.Exists(Path)) ;
+		//Game_Found=(File.Exists(Path + exe)) ;
+		Game_Found = (Directory.Exists(Path));
 		if (Game_Found)
 		{
-			PathStatus.text=RES + " folder found at " + Path; 
+			PathStatus.text=RES + " found at " + Path ;//+ exe; 
 		}
 		else
 		{
-			PathStatus.text=RES + " folder not found at " + Path; 	
+			PathStatus.text=RES + " not found at " + Path ;//+ exe; 	
 		}
 	}
 

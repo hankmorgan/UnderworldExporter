@@ -197,7 +197,7 @@ public class MainMenuHud : GuiBase {
 				for (int i=1; i<=4;i++)
 				{
 					char[] fileDesc;
-					if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
+					if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + i + sep + "DESC", out fileDesc))
 					{
 						saveNames[i-1]= new string(fileDesc);
 					}
@@ -260,8 +260,8 @@ public class MainMenuHud : GuiBase {
 
 			if (SlotNo==-1)
 			{//Speedstart
-				GameWorldController.instance.Lev_Ark_File_Selected="Data\\Lev.Ark";
-				GameWorldController.instance.SCD_Ark_File_Selected="Data\\scd.ark";
+				GameWorldController.instance.Lev_Ark_File_Selected="DATA" + sep + "LEV.ARK";
+				GameWorldController.instance.SCD_Ark_File_Selected="DATA" + sep + "SCD.ARK";
 				GameWorldController.instance.InitBGlobals(0);
 				GameClock.instance._day=0;
 				GameClock.instance._minute=51;
@@ -274,8 +274,8 @@ public class MainMenuHud : GuiBase {
 
 			//Load a save file
 			//Set the level file
-			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-			GameWorldController.instance.SCD_Ark_File_Selected="Save" + (SlotNo+1) + "\\scd.ark";
+			GameWorldController.instance.Lev_Ark_File_Selected="SAVE"+(SlotNo+1) + sep + "LEV.ARK";
+			GameWorldController.instance.SCD_Ark_File_Selected="SAVE" + (SlotNo+1) + sep + "SCD.ARK";
 			if (_RES!=GAME_UW2)
 			{
 				//Read in the character data

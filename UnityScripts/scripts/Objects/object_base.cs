@@ -546,10 +546,14 @@ public class object_base : UWEBase {
 		}
 
 
-		public virtual Vector3 GetImpactPoint()
-		{
-			return this.gameObject.transform.position;
-		}
+		//public virtual Vector3 GetImpactPoint()
+		//{
+		//	return this.gameObject.transform.position;
+		//}
+	public override Vector3 GetImpactPoint ()
+	{
+		return this.gameObject.transform.position;
+	}
 
 		public virtual GameObject GetImpactGameObject()
 		{

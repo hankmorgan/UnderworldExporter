@@ -164,9 +164,9 @@ public class ConversationVM : UWEBase {
 			switch(_RES)
 				{
 				case GAME_UW2:
-					LoadCnvArkUW2(Loader.BasePath+"data\\cnv.ark");break;
+					LoadCnvArkUW2(Loader.BasePath+"DATA" + sep +"CNV.ARK");break;
 				default:
-					LoadCnvArk(Loader.BasePath+"data\\cnv.ark");break;				
+					LoadCnvArk(Loader.BasePath+"DATA" + sep + "CNV.ARK");break;				
 				}
 			VMLoaded=true;
 		}
@@ -441,7 +441,7 @@ public class ConversationVM : UWEBase {
 				//}
 				//Write the result to file
 
-				TextWriter tw =new StreamWriter(Loader.BasePath + "\\conversation_debug.txt");
+				TextWriter tw =new StreamWriter(Loader.BasePath + sep + "conversation_debug.txt");
 				tw.Write(result);
 				tw.Close();
 		}
@@ -1376,7 +1376,7 @@ public class ConversationVM : UWEBase {
 								case "play_hunger":
 										stack.Set(address,UWCharacter.Instance.FoodLevel);break;
 								default:
-										Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
+										//Debug.Log("unimplemented memory import " + conv[currConv].functions[i].functionName);
 										break;
 
 								}

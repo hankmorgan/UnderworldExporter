@@ -126,7 +126,7 @@ public class ObjectDatLoader : Loader {
 		{
 			char[] obj_dat;
 			int add_ptr;
-			if (DataLoader.ReadStreamFile(BasePath+"\\data\\objects.dat",out obj_dat))
+			if (DataLoader.ReadStreamFile(BasePath+ sep + "DATA" + sep + "OBJECTS.DAT",out obj_dat))
 			{
 				add_ptr=2;
 				int j=0;

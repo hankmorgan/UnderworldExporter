@@ -556,7 +556,7 @@ public class UWCombat : Combat {
 				}
 				break;
 			case 1://Hit
-				Impact.SpawnHitImpact(Impact.ImpactBlood(),  npc.objInt().GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				Impact.SpawnHitImpact(Impact.ImpactBlood(),  npc.GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
 				if (ObjectInteraction.PlaySoundEffects)
 				{
 					npc.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
@@ -564,8 +564,8 @@ public class UWCombat : Combat {
 				}
 				break;
 			case 2://Crit
-				Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.objInt().GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
-				Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.objInt().GetImpactPoint()+Vector3.up*0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
+				Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint()+Vector3.up*0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());		
 				if (ObjectInteraction.PlaySoundEffects)
 				{
 					npc.objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_2];

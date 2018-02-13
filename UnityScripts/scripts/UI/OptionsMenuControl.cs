@@ -460,7 +460,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		for (int i=1; i<=4;i++)
 		{
 			char[] fileDesc;
-			if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + i + "\\desc", out fileDesc))
+			if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + i + sep + "DESC", out fileDesc))
 			{
 				saveNames[i-1]= new string(fileDesc);
 			}
@@ -582,9 +582,9 @@ public class OptionsMenuControl : GuiBase_Draggable {
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_impossible_you_are_between_worlds_));
 				return;
 			}
-				if (!Directory.Exists(Loader.BasePath + "save" + (SlotNo+1)))
+				if (!Directory.Exists(Loader.BasePath + "SAVE" + (SlotNo+1)))
 				{
-						Directory.CreateDirectory(Loader.BasePath + "save" + (SlotNo+1));
+						Directory.CreateDirectory(Loader.BasePath + "SAVE" + (SlotNo+1));
 				}
 
 			//Write lev.ark file and object lists
@@ -595,7 +595,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 			//Write a desc file
 			//File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
-			File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , SaveGame.SaveGameName(SlotNo+1));
+			File.WriteAllText(Loader.BasePath +  "SAVE" + (SlotNo+1) + sep + "DESC" , SaveGame.SaveGameName(SlotNo+1));
 			//Write a player.dat file
 			SaveGame.WritePlayerDat(SlotNo+1);
 			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_save_game_succeeded_));
@@ -618,8 +618,8 @@ public class OptionsMenuControl : GuiBase_Draggable {
 						GameWorldController.LoadingGame=true;
 			GameWorldController.instance.LevelNo=-1;
 			GameWorldController.instance.AtMainMenu=true;
-			GameWorldController.instance.Lev_Ark_File_Selected="Save"+(SlotNo+1) + "\\Lev.Ark";
-			GameWorldController.instance.SCD_Ark_File_Selected="Save" + (SlotNo+1) + "\\scd.ark";
+			GameWorldController.instance.Lev_Ark_File_Selected="SAVE"+(SlotNo+1) + sep +"LEV.ARK";
+			GameWorldController.instance.SCD_Ark_File_Selected="SAVE" + (SlotNo+1) + sep + "SCD.ARK";
 			//Read in the character data
 			//SaveGame.LoadPlayerDat(SlotNo+1);
 

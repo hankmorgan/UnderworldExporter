@@ -27,7 +27,7 @@ public class SaveGame : Loader {
 				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
 				UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);
 				UWCharacter.Instance.playerInventory.ContainerOffset=0;
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out buffer))
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out buffer))
 				{
 
 						TileMap.OnWater=false;
@@ -36,9 +36,9 @@ public class SaveGame : Loader {
 						int incrnum = 3;
 
 						//Write out the XOR values used in this file.
-						FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\xor.dat",FileMode.Create);
-						BinaryWriter writer= new BinaryWriter(file);
-
+						//FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\xor.dat",FileMode.Create);
+						//BinaryWriter writer= new BinaryWriter(file);
+						//
 						for(int i=1; i<=NoOfEncryptedBytes; i++)
 						{
 								if ((i==81) | (i==161))
@@ -47,11 +47,11 @@ public class SaveGame : Loader {
 								}
 								buffer[i] ^= (char)((xOrValue+incrnum) & 0xFF);
 
-								DataLoader.WriteInt8(writer,((xOrValue+incrnum) & 0xFF));
+								//DataLoader.WriteInt8(writer,((xOrValue+incrnum) & 0xFF));
 
 								incrnum += 3;
 						}
-						file.Close();
+						//file.Close();
 						//string Result="";
 						int runeOffset=0;
 						for (int i=1; i<=221;i++)
@@ -577,7 +577,7 @@ public class SaveGame : Loader {
 								{
 										dataToWrite[i] = (byte)buffer[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decod_" + slotNo + ".dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
 						}
 
 						/*	if (recode)//Rewrite the file with test value changes.
@@ -671,7 +671,7 @@ public class SaveGame : Loader {
 				//};
 
 	
-				FileStream file = File.Open(Loader.BasePath + "save" + slotNo + "\\playertmp.dat",FileMode.Create);
+				FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat",FileMode.Create);
 				BinaryWriter writer= new BinaryWriter(file);
 				int NoOfActiveEffects=0;
 				int runeOffset=0;
@@ -1291,7 +1291,7 @@ public class SaveGame : Loader {
 
 				char[] buffer;
 				//Reopen and encrypt the file
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\playertmp.dat", out buffer))
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "playertmp.dat", out buffer))
 				{
 						int xOrValue= (int)buffer[0];
 						int incrnum = 3;
@@ -1310,7 +1310,7 @@ public class SaveGame : Loader {
 						{
 								dataToWrite[i] = (byte)buffer[i];
 						}
-						File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\player.dat", dataToWrite);
+						File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", dataToWrite);
 
 				}				
 
@@ -1414,7 +1414,7 @@ public class SaveGame : Loader {
 
 				UWCharacter.Instance.JustTeleported=true;
 				UWCharacter.Instance.teleportedTimer=0f;
-				if (DataLoader.ReadStreamFile(Loader.BasePath + "save" + slotNo + "\\player.dat", out pDat))
+				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out pDat))
 				{
 					TileMap.OnWater=false;
 
@@ -1429,7 +1429,7 @@ public class SaveGame : Loader {
 								{
 										dataToWrite[i] = (byte)buffer[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo + "\\decode_" + slotNo + ".dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
 						}
 
 
@@ -1468,7 +1468,7 @@ public class SaveGame : Loader {
 								{
 										dataToWrite[i] = (byte)recodetest[i];
 								}
-								File.WriteAllBytes(Loader.BasePath + "save" + slotNo +"\\playerrecoded.dat", dataToWrite);
+								File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "playerrecoded.dat", dataToWrite);
 						}
 
 

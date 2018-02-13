@@ -25,7 +25,7 @@ public class DoorControl : object_base {
 		///Is the door spiked
 	public bool Spiked;//Probably on the lock object?
 		///Is it the player using the object or a trigger/trap.
-	private bool PlayerUse=false;
+	public bool PlayerUse=false;
 		///A trigger to activate when opened.
 	//public string UseLink;
 

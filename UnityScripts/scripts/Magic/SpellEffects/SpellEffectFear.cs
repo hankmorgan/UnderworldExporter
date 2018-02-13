@@ -40,6 +40,7 @@ public class SpellEffectFear : SpellEffect {
 
 				//Makes the NPC Run away
 				npc.npc_goal=(short)NPC.npc_goals.npc_goal_flee;
+				npc.WaitTimer=0f;
 				npc.npc_gtarg=1;
 				
 				WasActive=true;

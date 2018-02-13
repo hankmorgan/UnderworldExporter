@@ -17,4 +17,16 @@ public class UWEBase : MonoBehaviour {
 		public static string _RES= GAME_UW1;
 
 		public static bool EditorMode=false;
+
+		public static char sep;
+
+		/// <summary>
+		/// Gets the impact point of this object
+		/// </summary>
+		/// <returns>The impact point.</returns>
+		public virtual Vector3 GetImpactPoint()
+		{
+			return this.transform.position;	
+		}
+
 }

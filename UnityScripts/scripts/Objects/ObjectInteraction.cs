@@ -1141,7 +1141,7 @@ public class ObjectInteraction : UWEBase {
 				GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
 				NpcLauncher.transform.position=Vector3.zero; 
 				NpcLauncher.transform.parent=myObj.transform;
-				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.2f);
+				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.3f);
 				npc.NPC_Launcher=NpcLauncher;
 				GameObject newObj = new GameObject("_Sprite");
 				newObj.transform.parent=myObj.transform;
@@ -1395,12 +1395,19 @@ public class ObjectInteraction : UWEBase {
 	/// Gets the impact point location that will spawn blood when this object is hit.
 	/// </summary>
 	/// <returns>The impact point.</returns>
-	public virtual Vector3 GetImpactPoint()
+	public override Vector3 GetImpactPoint ()
 	{
 		object_base item;
 		item= this.GetComponent<object_base>();
 		return item.GetImpactPoint();
 	}
+		/*public virtual Vector3 GetImpactPoint()
+	{
+		object_base item;
+		item= this.GetComponent<object_base>();
+		return item.GetImpactPoint();
+	}*/
+
 
 
 		/// <summary>
@@ -1592,6 +1599,7 @@ public class ObjectInteraction : UWEBase {
 						}
 						else
 						{
+							objInt.isquant=0;
 							if ((objInt.isEnchanted()) && (objInt.link!=0))
 								{
 									myObj.AddComponent<MagicScroll>();

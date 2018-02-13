@@ -7,12 +7,12 @@ using System.IO;
 /// </summary>
 public class TextureLoader : ArtLoader {
 
-	private string pathTexW_UW0="DATA\\DW64.TR";
-	private string pathTexF_UW0="DATA\\DF32.TR";
-	private string pathTexW_UW1="DATA\\W64.TR";
-	private string pathTexF_UW1="DATA\\F32.TR";
-	private string pathTex_UW2 = "DATA\\T64.TR";
-	private string pathTex_SS1 = "RES\\DATA\\Texture.res";
+	private string pathTexW_UW0="DATA--DW64.TR";
+	private string pathTexF_UW0="DATA--DF32.TR";
+	private string pathTexW_UW1="DATA--W64.TR";
+	private string pathTexF_UW1="DATA--F32.TR";
+	private string pathTex_UW2 = "DATA--T64.TR";
+	private string pathTex_SS1 = "RES--DATA--Texture.res";
 
 	char[] texturebufferW;
 	char[] texturebufferF;
@@ -34,31 +34,31 @@ public class TextureLoader : ArtLoader {
 			case GAME_SHOCK:
 				break;
 			case GAME_UW2:
-				ModPathW= BasePath+ pathTex_UW2.Replace(".","_");	
+						ModPathW= BasePath+ pathTex_UW2.Replace(".","_").Replace("--",sep.ToString());	
 				if (Directory.Exists(ModPathW))
 				{
 					LoadMod=true;
 				}
 				break;				
 			case GAME_UWDEMO:
-				ModPathW= BasePath+ pathTexW_UW0.Replace(".","_");	
+						ModPathW= BasePath+ pathTexW_UW0.Replace(".","_").Replace("--",sep.ToString());	
 				if (Directory.Exists(ModPathW))
 				{
 					LoadMod=true;
 				}	
-				ModPathF= BasePath+ pathTexF_UW0.Replace(".","_");	
+						ModPathF= BasePath+ pathTexF_UW0.Replace(".","_").Replace("--",sep.ToString());	
 				if (Directory.Exists(ModPathF))
 				{
 					LoadMod=true;
 				}	
 				break;
 			case GAME_UW1:
-				ModPathW= BasePath+ pathTexW_UW1.Replace(".","_");	
+						ModPathW= BasePath+ pathTexW_UW1.Replace(".","_").Replace("--",sep.ToString());	
 				if (Directory.Exists(ModPathW))
 				{
 					LoadMod=true;
 				}	
-				ModPathF= BasePath+ pathTexF_UW1.Replace(".","_");	
+						ModPathF= BasePath+ pathTexF_UW1.Replace(".","_").Replace("--",sep.ToString());	
 				if (Directory.Exists(ModPathF))
 				{
 					LoadMod=true;
@@ -79,7 +79,7 @@ public class TextureLoader : ArtLoader {
 		case 1: // Palette cycled
 			return LoadImageAt (index,GameWorldController.instance.palLoader.GreyScale);
 		case 2://normal map
-			return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + "_normal.tga");
+			return TGALoader.LoadTGA(ModPathW + sep + index.ToString("d3") + "_normal.tga");
 		default:
 			return LoadImageAt (index,GameWorldController.instance.palLoader.Palettes[0]);
 		}
@@ -171,9 +171,9 @@ public class TextureLoader : ArtLoader {
 			{
 				if(LoadMod)
 				{
-					if (File.Exists(ModPathW + "\\" + index.ToString("d3") + ".tga") )	
+					if (File.Exists(ModPathW + sep + index.ToString("d3") + ".tga") )	
 					{
-						return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + ".tga");								
+						return TGALoader.LoadTGA(ModPathW + sep + index.ToString("d3") + ".tga");								
 					}
 				}	
 				if (texturesFLoaded==false)
@@ -211,9 +211,9 @@ public class TextureLoader : ArtLoader {
 					}
 					if(LoadMod)
 					{
-						if (File.Exists(ModPathW + "\\" + index.ToString("d3") + ".tga") )	
+						if (File.Exists(ModPathW + sep + index.ToString("d3") + ".tga") )	
 							{
-								return TGALoader.LoadTGA(ModPathW + "\\" + index.ToString("d3") + ".tga");								
+								return TGALoader.LoadTGA(ModPathW + sep + index.ToString("d3") + ".tga");								
 							}
 					}						
 					long textureOffset = DataLoader.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
@@ -234,9 +234,9 @@ public class TextureLoader : ArtLoader {
 					}
 					if(LoadMod)
 						{
-							if (File.Exists(ModPathF + "\\" + index.ToString("d3") + ".tga") )	
+							if (File.Exists(ModPathF + sep + index.ToString("d3") + ".tga") )	
 							{
-								return TGALoader.LoadTGA(ModPathF + "\\" + index.ToString("d3") + ".tga");								
+								return TGALoader.LoadTGA(ModPathF + sep + index.ToString("d3") + ".tga");								
 							}
 						}	
 					long textureOffset = DataLoader.getValAtAddress(texturebufferF, ((index-TextureSplit) * 4) + 4, 32);

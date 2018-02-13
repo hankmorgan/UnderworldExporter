@@ -300,11 +300,11 @@ public class Magic : UWEBase {
 				{
 						if (caster.GetComponent<NPC>().gtargName=="_Gronk")
 						{
-								return (UWCharacter.Instance.TargetPoint.transform.position- caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+							return (UWCharacter.Instance.GetImpactPoint()- caster.GetComponent<UWEBase>().GetImpactPoint()).normalized;
 						}
 						else
 						{
-								return (caster.GetComponent<NPC>().getGtarg().transform.position - caster.GetComponent<ObjectInteraction>().GetImpactPoint()).normalized;
+							return (caster.GetComponent<NPC>().getGtarg().transform.position - caster.GetComponent<UWEBase>().GetImpactPoint()).normalized;
 						}
 						//Get a vector between the npcs launcher and the player cam
 

@@ -38,7 +38,8 @@ public class DataLoader :Loader {
 		/// <param name="Path">Path.</param>
 		/// <param name="buffer">Buffer.</param>
 		public static bool ReadStreamFile(String Path, out char[] buffer)
-		{				
+		{			
+			Path = Path.Replace("--",sep.ToString());
 			if (!File.Exists(Path))
 			{
 				Debug.Log("DataLoader.ReadStreamFile : File not found : " + Path);
@@ -268,7 +269,7 @@ public class DataLoader :Loader {
 			}
 
 			//Write the data to a file.
-			WriteListToBytes(Output,Loader.BasePath + "data\\recodetest.dat" );
+			WriteListToBytes(Output,Loader.BasePath + "DATA" + sep + "recodetest.dat" );
 			char[] outchar = new char[Output.Count];
 			for (int i=0; i<Output.Count;i++)
 			{

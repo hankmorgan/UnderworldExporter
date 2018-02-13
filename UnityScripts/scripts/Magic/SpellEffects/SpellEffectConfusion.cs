@@ -35,7 +35,7 @@ public class SpellEffectConfusion : SpellEffect {
 					//npc.state=NPC.AI_STATE_IDLERANDOM;	//Temporarily just wander around
 					npc.npc_attitude=NPC.AI_ATTITUDE_UPSET;
 					//Makes the NPC wander around
-					npc.npc_goal=(short)NPC.npc_goals.npc_goal_wander_1;
+					npc.npc_goal=(short)NPC.npc_goals.npc_goal_wander_8;
 
 					WasActive=true;
 				}	

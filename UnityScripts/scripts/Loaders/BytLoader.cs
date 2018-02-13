@@ -25,16 +25,16 @@ public class BytLoader : ArtLoader {
 
 
 		private string[] FilePaths={
-			"Data\\BLNKMAP.BYT",
-			"Data\\CHARGEN.BYT",
-			"Data\\CONV.BYT",
-			"Data\\MAIN.BYT",
-			"Data\\OPSCR.BYT",
-		 	"Data\\PRES1.BYT",
-			"Data\\PRES2.BYT",
-			"Data\\WIN1.BYT",
-			"Data\\WIN2.BYT",
-			"Data\\PRESD.BYT"
+			"DATA--BLNKMAP.BYT",
+			"DATA--CHARGEN.BYT",
+			"DATA--CONV.BYT",
+			"DATA--MAIN.BYT",
+			"DATA--OPSCR.BYT",
+		 	"DATA--PRES1.BYT",
+			"DATA--PRES2.BYT",
+			"DATA--WIN1.BYT",
+			"DATA--WIN2.BYT",
+			"DATA--PRESD.BYT"
 		};
 
 		private int[] PaletteIndices=
@@ -67,6 +67,9 @@ public class BytLoader : ArtLoader {
 			0
 		};
 
+
+
+
 	/// <summary>
 	/// Loads the texture form a byt file
 	/// </summary>
@@ -87,13 +90,13 @@ public class BytLoader : ArtLoader {
 		case GAME_UW2:
 			{
 								
-				return  extractUW2Bitmap("data\\byt.ark", index, Alpha);
+				return  extractUW2Bitmap("DATA" + sep + "BYT.ARK", index, Alpha);
 			}
 		default:
 			{
-				if (File.Exists(BasePath +FilePaths[index].Replace(".","_") + "\\001.tga"))
+				if (File.Exists(BasePath +FilePaths[index].Replace("--", sep.ToString()).Replace(".","_") + sep + "001.tga"))
 				{
-					return TGALoader.LoadTGA(BasePath + FilePaths[index].Replace(".","_") + "\\001.tga")	;
+					return TGALoader.LoadTGA(BasePath + FilePaths[index].Replace("--", sep.ToString()).Replace(".","_") + sep + "001.tga")	;
 				}
 			if (currentIndex!=index)
 				{//Only load from disk if the image to bring back has changed.
@@ -112,9 +115,9 @@ public class BytLoader : ArtLoader {
 			//int i;
 			long NoOfTextures;
 
-				if (File.Exists(BasePath +path.Replace(".","_") + "\\" + index.ToString("d3") + ".tga"))
+				if (File.Exists(BasePath +path.Replace(".","_") + sep + index.ToString("d3") + ".tga"))
 				{
-					return TGALoader.LoadTGA(BasePath +path.Replace(".","_") + "\\" + index.ToString("d3") + ".tga")	;
+					return TGALoader.LoadTGA(BasePath +path.Replace(".","_") + sep + index.ToString("d3") + ".tga")	;
 				}
 
 			if (!DataLoader.ReadStreamFile(BasePath + path, out textureFile))
