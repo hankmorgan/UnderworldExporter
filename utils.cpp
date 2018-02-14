@@ -63,6 +63,135 @@ int getValAtCoordinate(int x, int y, int BlockStart,unsigned char *buffer,int si
 }
 
 
+// ua_uw2_import methods
+
+/*! the function reads in compressed blocks from uw2 .ark files and creates
+a SDL_RWops struct to transparently access it.
+
+The code was adapted from the LoW project: http://low.sourceforge.net/
+
+\param fd        an open .ark file
+\param blocknum  block number to read in
+\param destsize  number of bytes which should be read from the block
+*/
+unsigned char *get_rwops_uw2dec(unsigned char *buffer, unsigned int blocknum, int *datalen)
+	{
+	// read in number of blocks
+	*datalen = 0;
+	long addressPointer = 0; 
+	int nblocks = getValAtAddress(buffer, 0, 16); //fread16(fd);
+
+	// read in offset
+	addressPointer += blocknum * 4 + 6;
+	int offset = getValAtAddress(buffer, addressPointer, 32);
+
+	if (offset == 0)
+		return NULL; // no block
+
+	// read in flags
+	addressPointer = (blocknum + nblocks) * 4 + 6;
+	int flags = getValAtAddress(buffer, addressPointer, 32);  
+
+	// read in real block size
+	addressPointer = (blocknum + nblocks * 2) * 4 + 6;
+	int blocksize = getValAtAddress(buffer, addressPointer, 32);  
+	
+	// read in available block size
+	addressPointer = (blocknum + nblocks * 3) * 4 + 6;
+	int avail = getValAtAddress(buffer, addressPointer, 32);  //fread32(fd);
+
+
+	// read in source data
+	unsigned char *src = &buffer[offset]; //= new unsigned char[blocksize];
+	//addressPointer = offset;
+	//for (int i = 0; i < blocksize; i++)
+	//	{
+	//	src[i] = buffer[addressPointer + i];
+	//	}
+	long destsize = getValAtAddress(src, 0, 32) + 100;
+	
+		printf("uw2dec: reading in block %u:\n offset=%06x, flags=%u, blocksize=%04x, avail=%04x, destsize=%04x\n",
+			blocknum, offset, flags, blocksize, avail, destsize);
+
+	// allocate destination array
+	unsigned char *dest = new unsigned char[destsize];
+	//for (int i = 0; i < destsize; i++)
+	//	{
+	//	dest[i] = 0;
+	//	}
+
+	// decode uw2 compression scheme
+	if ((flags & 2) != 0)
+		{
+		// compressed data
+		unsigned char * ubuf = dest;
+		unsigned char * cp = &src[4];
+		unsigned char * ce = &src[blocksize];
+		unsigned char * up = ubuf;
+		unsigned char * ue = ubuf + destsize;
+
+		while (up<ue && cp<ce)
+			{
+			unsigned char bits = *cp++;
+
+			for (int i = 0; i<8; i++, bits >>= 1)
+				{
+				if (bits & 1)
+					{
+					*up++ = *cp++;
+					*datalen = *datalen + 1;
+					}
+				else
+					{
+					signed int m1 = *cp++; // m1: pos
+					signed int m2 = *cp++; // m2: run
+
+					m1 |= (m2 & 0xF0) << 4;
+
+					// correct for sign bit
+					if (m1 & 0x800)
+						m1 |= 0xFFFFF000;
+
+					// add offsets
+					m2 = (m2 & 0x0F) + 3;
+					m1 += 18;
+
+					if (m1 > up - ubuf)
+						printf("uw2dec: pos exceeds buffer!");
+
+					// adjust pos to current 4k segment
+					while (m1 < (up - ubuf - 0x1000))
+						m1 += 0x1000;
+
+					while (m2-- && up < ue)
+						{
+						*up++ = ubuf[m1++];
+						*datalen = *datalen + 1;
+						}
+						
+					}
+				if (up >= ue || cp >= ce)
+					break;
+				}
+			}
+
+		printf(" decoded %04x compressed bytes to %04x uncompressed data.\n",
+			cp - &src[4], up - ubuf);
+		}
+	else
+		{
+		// uncompressed
+		memcpy(dest, &src[0], blocksize);
+		*datalen = blocksize;
+
+		printf(" block was uncompressed.\n");
+		}
+
+	return dest;
+	}
+
+
+
 unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
   {
   
@@ -79,13 +208,13 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
     while(up < buf+len)
       {
 		int	bits = tmp[address_pointer++];
-		fprintf(LOGFILE, "\n\tBit Block %d at %d is %d", bitBlock++, address_pointer, bits);
+		//fprintf(LOGFILE, "\n\tBit Block %d at %d is %d", bitBlock++, address_pointer, bits);
 		for(int r=0; r<8; r++)
 		  {
 			if(bits&1)
 			{
 			//printf("transfer %d\ at %d\n", byte(base),base);
-			fprintf(LOGFILE, "\n\t\tTransferring from %d to %d Value %d", address_pointer, upPtr++, tmp[address_pointer]);
+			//fprintf(LOGFILE, "\n\t\tTransferring from %d to %d Value %d", address_pointer, upPtr++, tmp[address_pointer]);
 			*up++ = tmp[address_pointer++];
 			*datalen = *datalen+1;
 			}
@@ -104,7 +233,7 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
 				while(o < (up-buf-0x1000))
 					o += 0x1000;
 		 
-				fprintf(LOGFILE, "\n\t\tCopy Record C= %d  O=%d  (orig offset=%d)", c, o, OrigOffset);
+				//fprintf(LOGFILE, "\n\t\tCopy Record C= %d  O=%d  (orig offset=%d)", c, o, OrigOffset);
 				while(c--)
 					{
 					//if (o < 0)
@@ -112,7 +241,7 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
 					//	printf("Offset is less than 0!");
 					//	}
 					//fprintf(LOGFILE, "\n\t\t\tCopying Value %d from %d to %d ", buf[o], o, upPtr++);
-					fprintf(LOGFILE, "%d ", buf[o]);
+				//	fprintf(LOGFILE, "%d ", buf[o]);
 					*up++ = buf[o++];
 					*datalen = *datalen+1;
 					}

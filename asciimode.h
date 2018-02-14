@@ -30,5 +30,6 @@ void printFloorOrientations(tile LevelInfo[64][64], int LevelNo);
 void printCeilOrientations(tile LevelInfo[64][64], int LevelNo);
 void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 void printNonStaticTiles(tile LevelInfo[64][64], int LevelNo);
+void printIndexObjectList(tile LevelInfo[64][64], int LevelNo);
 //int isTrigger(ObjectItem currobj);
 #endif /* asciimode_h */

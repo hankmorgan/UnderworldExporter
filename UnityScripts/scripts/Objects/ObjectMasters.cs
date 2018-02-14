@@ -29,7 +29,7 @@ public class ObjectMasters {
 			break;
 
 		default:
-			Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_settings.txt");
+			Load(Application.dataPath + "//..//" + UWEBase._RES.ToLower() + "_object_settings.txt");
 			break;
 		}	
 	}

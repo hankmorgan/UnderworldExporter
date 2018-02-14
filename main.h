@@ -144,7 +144,7 @@ extern int CEILING_HEIGHT;
 #define ALPHA 1
 
 //Generate graphics in Greyscale for palette operations
-#define GREYSCALE 0
+#define GREYSCALE 1
 
 
 //Should graphics be actually extracted or should I just go through the motions?

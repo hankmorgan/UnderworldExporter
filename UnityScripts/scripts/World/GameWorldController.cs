@@ -499,14 +499,14 @@ public class GameWorldController : UWEBase {
 		//navmesh.layerMask = layer;
 		//	navmeshobj.BuildNavMesh();
 				//navmeshobj.
-				if (navmeshobj.navMeshData==null)
-				{
-						navmeshobj.BuildNavMesh();					
-				}
-				else
-				{
-						navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
-				}
+				//if (navmeshobj.navMeshData==null)
+				//{
+			navmeshobj.BuildNavMesh();					
+				//}
+				//else
+				//{
+				//		navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
+				//}
 		
 	}
 
@@ -984,7 +984,7 @@ public class GameWorldController : UWEBase {
 								//GenerateNavmesh(NavRigLand);
 								//GenerateNavmesh(NavRigWater);
 								//GenerateNavmesh(navmeshsurface,256);
-								//GenerateNavMeshes();
+								GenerateNavMeshes();
 						}
 
 						if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))

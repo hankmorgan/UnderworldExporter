@@ -681,8 +681,9 @@ public class NPC : MobileObject {
 				case npc_goals.npc_goal_stand_still_12:
 						{
 								AnimRange= NPC.AI_RANGE_IDLE;
-								if ((CurTileX!=DestTileX) && (CurTileY!=DestTileY))
+								if ((CurTileX!=npc_xhome) && (CurTileY!=npc_yhome))
 								{
+										DestTileX = npc_yhome; DestTileY = npc_yhome;
 										AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
 								}
 								break;

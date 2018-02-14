@@ -335,6 +335,8 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 	printRoomRegions(LevelInfo, LevelNo);
 
+	printIndexObjectList(LevelInfo, LevelNo);
+
 	//printRoomRegionsForNavmeshTagging(LevelInfo,objList, LevelNo);
 
 	if (game == SHOCK)
@@ -442,6 +444,23 @@ void printFlagsMap(tile LevelInfo[64][64], int LevelNo)
 			}
 		}
 	}
+
+void printIndexObjectList(tile LevelInfo[64][64], int LevelNo)
+	{
+	//Prints the tilemap 
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing object list indices for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			fprintf(LOGFILE, "%02d", LevelInfo[x][y].indexObjectList);
+			fprintf(LOGFILE, "\\");//delimiter.
+			}
+		}
+	}
+
 
 void printFloorHeights(tile LevelInfo[64][64], int LevelNo)
 	{

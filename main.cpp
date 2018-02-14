@@ -17,7 +17,7 @@
 #include "gamestrings.h"
 #include "gamegraphics.h"
 #include "Conversations.h"
-#include "fbxExport.h"
+//#include "fbxExport.h"
 #include "Unity.h"
 #include "hacking.h"
 
@@ -57,6 +57,24 @@ int main()
 	int BlocksToRepack = 80;//UW2 blocks to repack
 	int useTGA = 0;
 	FILE *f = NULL;
+
+
+	/*
+	if ((f = fopen("c:\\games\\uw2\\data\\lev.ark", "r")) == NULL)
+		{
+		printf("Could not open specified file\n");
+		return 0;
+		}
+
+	long fileSize = getFileSize(f);
+	unsigned char *tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1, f);
+	fclose(f);
+	int datalen = 0;
+	get_rwops_uw2dec(tmp_ark, 240, &datalen);
+
+	return 0;*/
+
 	if ((f = fopen("gamepaths.txt", "r")) == NULL)
 		{
 		printf("Could not open specified file\n");
@@ -89,14 +107,14 @@ int main()
 		path_target_platform[ln] = '\0';
 
 	fclose(f);
-	const char *uw_game_files[7];
+	const char *uw_game_files[6];
 	uw_game_files[0] = "Data\\LEV.ARK";
-	uw_game_files[1] = "Save0\\lev.ark";
-	uw_game_files[2] = "Save1\\lev.ark";
-	uw_game_files[3] = "Save2\\lev.ark";
-	uw_game_files[4] = "Save3\\lev.ark";
-	uw_game_files[5] = "Save4\\lev.ark";
-	uw_game_files[6] = "data\\cnv.ark";	//UW2 ark files.
+	//uw_game_files[1] = "Save0\\lev.ark";
+	uw_game_files[1] = "Save1\\lev.ark";
+	uw_game_files[2] = "Save2\\lev.ark";
+	uw_game_files[3] = "Save3\\lev.ark";
+	uw_game_files[4] = "Save4\\lev.ark";
+	uw_game_files[5] = "data\\cnv.ark";	//UW2 ark files.
 
 	const char *shock_game_files[9];
 	shock_game_files[0] = "res\\Data\\archive.dat";
@@ -511,7 +529,7 @@ int main()
 							case UW1:
 							case UW2:
 								printf("\nPick a level archive or save game to open\n");
-								for (int i = 0; i < 6; i++)
+								for (int i = 0; i < 5; i++)
 									{
 									printf("%d) %s\n", i, uw_game_files[i]);
 									}
@@ -1617,7 +1635,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 			case FBX_MODE:
 				CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
 				//printf("%d", LevelInfo[3][5].Render);
-				RenderFBXLevel(LevelInfo, objList, game);
+				//TODO: restore this for FBX RenderFBXLevel(LevelInfo, objList, game);
 				break;
 			case UNITY_MODE:
 				RenderUnityObjectList(game, LevelNo, LevelInfo, objList);

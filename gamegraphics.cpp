@@ -168,21 +168,21 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 		getPalette(PaletteFile, pal, p);
 
 //Not to cycle the palettes. To keep them synced I need 28 cycles? (4 water * 7 fire frames?)
-		for (int paletteFrame = 0; paletteFrame < 28; paletteFrame++)
+		for (int paletteFrame = 0; paletteFrame < 1; paletteFrame++)
 			{
 			//	CyclePalette(16, 22);//fire
 			//CyclePalette(48, 51);//water
-			cyclePalette(pal, 48, 4);
-			cyclePalette(pal, 16, 7);//Reverse direction.
+			//cyclePalette(pal, 48, 4);
+			//cyclePalette(pal, 16, 7);//Reverse direction.
 			char paletteOutname[256];
 			sprintf(paletteOutname, "Palette_%d_frame", p);
-			//writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
+			writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
 			}
 
 		}
 
 
-	//	getPalette(PaletteFile, pal, p);
+		//getPalette(PaletteFile, pal, p);
 
 	if (GREYSCALE == 1)
 		{
@@ -899,7 +899,16 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 	unsigned char *assocFile;
 	
 	pal = new palette[256];
-	getPalette(PaletteFile, pal, 0);//always palette 0?
+
+	if (GREYSCALE == 1)
+		{
+		getPaletteIndex(PaletteFile, pal, PaletteNo);
+		}
+	else
+		{
+		getPalette(PaletteFile, pal, PaletteNo);
+		}
+	//getPalette(PaletteFile, pal, 0);//always palette 0?
 
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
@@ -954,7 +963,7 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 			if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
 				{
 				//fprintf(LOGFILE, "\n\tAnim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
-				printf(" \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
+				//printf(" \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
 				fprintf(LOGFILE, " \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
 				ValidCount++;
 				}

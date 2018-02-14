@@ -1,3 +1,4 @@
+/*Release uncomment  remove all instances of this to restore fbx extract
 #include <fbxsdk.h>
 #include "tilemap.h"
 #include "gameobjects.h"
@@ -98,6 +99,8 @@ void CreateShockBridgeModel(FbxScene*& gScene);
 //FbxString* gAppPath = NULL;     // path where the application started
 
 /* Tab character ("\t") counter */
+
+/*Release uncomment
 int numTabs = 0;
 
 extern int iGame;
@@ -285,7 +288,7 @@ extern long UW_CEILING_HEIGHT;
 //	}
 
 
-
+/*Release uncomment
 bool InitializeSdkObjects(FbxManager*& pManager, FbxScene*& pScene)
 	{
 	//The first thing to do is to create the FBX Manager which is the object allocator for almost all the classes in the SDK
@@ -1413,6 +1416,7 @@ void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, sh
 void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName)
 	{
 	/* This is main version of this function*/
+/*Release uncomment
 	FbxVector4 lNormalXPos(1, 0, 0);
 	FbxVector4 lNormalXNeg(-1, 0, 0);
 	FbxVector4 lNormalYPos(0, 1, 0);
@@ -2020,6 +2024,7 @@ void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Wat
 	)
 	{
 	/* FBX Cube with Preset vertical UV settings*/
+/*Release uncomment
 	FbxVector4 lNormalXPos(1, 0, 0);
 	FbxVector4 lNormalXNeg(-1, 0, 0);
 	FbxVector4 lNormalYPos(0, 1, 0);
@@ -4342,7 +4347,8 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 void CreateFBXMaterials(FbxScene*& gScene, int game)
 	{
 	/*Populates the texture list for the fbx model file*/
-	FbxFileTexture* gTexture = NULL;
+/*Release uncomment
+FbxFileTexture* gTexture = NULL;
 	FbxSurfacePhong* gMaterial = NULL;
 	int NoOfMaterials = 0;
 	switch (game)
@@ -4661,6 +4667,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*
 				left side. east west door
 				*/
+/*Release uncomment
 				x1 = ((offX + DOORTHICKNESS + doorOffset));
 				y1 = ((y + 1)*BrushY);
 				z1 = BrushZ * (CEILING_HEIGHT + 1); //(offZ*BrushZ + doorHeight);
@@ -4694,6 +4701,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*
 				right side east west door
 				*/
+/*Release uncomment
 				x1 = ((offX + DOORTHICKNESS + doorOffset));
 				if (heading == EAST)
 					{
@@ -4727,6 +4735,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*
 				over the door, east west door
 				*/
+/*Release uncomment
 				tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
 				int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
 				if (currDoor.item_id == 334)
@@ -4784,6 +4793,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*Left Side. north south door*/
 				//left side
 				//east face 
+/*Release uncomment
 				if ((heading == NORTH) || (heading == SHOCK_NORTH))
 					{
 					x1 = (offX - DOORWIDTH);
@@ -4824,6 +4834,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*Right side. north south doorway*/
 				//right
 				//east face 
+/*Release uncomment
 				x1 = ((x + 1)*BrushX);
 				//north face 
 				y1 = (offY + DOORTHICKNESS + doorOffset);
@@ -4861,6 +4872,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 					-FrameSideY / BrushY, (((BrushY - DOORWIDTH) / 2) / BrushY) - (FrameSideY / BrushY));
 
 				/*Over the door North South*/
+/*Release uncomment
 				tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
 
 				int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
@@ -5091,6 +5103,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							tmpt.South = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
 							tmpt.North = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
 							*/
+/*Release uncomment
 							tmpt.wallTexture = objList[nextObj].texture;
 							tmpt.floorTexture = objList[nextObj].texture;
 							tmpt.shockCeilingTexture = objList[nextObj].texture;
@@ -5323,3 +5336,4 @@ void CreateShockBridgeModel(FbxScene*& gScene)
 		lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 		0, 54.0 / 64.0);
 	}
+	release uncomment*/
