@@ -3285,34 +3285,38 @@ public class ObjectLoader : Loader {
 		{
 				//Match wands to their spell links.
 				for (int o = 1; o <= objLoader.objInfo.GetUpperBound (0); o++) {
-						if (objLoader.objInfo [o].instance != null) {
-								if (objLoader.objInfo [o].instance.GetComponent<Wand> () != null) {
-										if (objLoader.objInfo [o].instance.enchantment == 1) {
-												//Object contains it's own enchantment with infinite charges
-												//DO NOTHING	
-										}
-										else {
-												int l = objLoader.objInfo [o].link;
-												if (l != 0) {
-														if (l <= objLoader.objInfo.GetUpperBound(0) )
-														{
-															if (objLoader.objInfo [l].GetItemType () == ObjectInteraction.SPELL) 
+						if (objLoader.objInfo[o]!=null)
+						{
+								if (objLoader.objInfo [o].instance != null) 
+								{
+										if (objLoader.objInfo [o].instance.GetComponent<Wand> () != null) {
+												if (objLoader.objInfo [o].instance.enchantment == 1) {
+														//Object contains it's own enchantment with infinite charges
+														//DO NOTHING	
+												}
+												else {
+														int l = objLoader.objInfo [o].link;
+														if (l != 0) {
+																if (l <= objLoader.objInfo.GetUpperBound(0) )
 																{
-																		if (objLoader.objInfo [l].instance != null) 
+																		if (objLoader.objInfo [l].GetItemType () == ObjectInteraction.SPELL) 
 																		{
-																				if (objLoader.objInfo [l].instance.GetComponent<a_spell> () != null) {
-																						objLoader.objInfo [o].instance.GetComponent<Wand> ().linkedspell = objLoader.objInfo [l].instance.GetComponent<a_spell> ();
+																				if (objLoader.objInfo [l].instance != null) 
+																				{
+																						if (objLoader.objInfo [l].instance.GetComponent<a_spell> () != null) {
+																								objLoader.objInfo [o].instance.GetComponent<Wand> ().linkedspell = objLoader.objInfo [l].instance.GetComponent<a_spell> ();
+																						}
 																				}
-																		}
-																}	
-														}
-														else
-														{
-																Debug.Log("wand link for " + o + " is out of range Link=" + l);
+																		}	
+																}
+																else
+																{
+																		Debug.Log("wand link for " + o + " is out of range Link=" + l);
+																}
 														}
 												}
 										}
-								}
+								}	
 						}
 				}
 		}

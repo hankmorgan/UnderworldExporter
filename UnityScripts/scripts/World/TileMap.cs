@@ -2364,4 +2364,18 @@ public class TileMap : Loader {
 				}
 				return false;
 		}
+
+
+		public string getSignature()
+		{
+			string signature="";
+			for (int x=0; x<TileMapSizeX; x++)
+			{
+				for (int y=0; y<TileMapSizeY; y++)
+				{
+					signature += Tiles[x,y].tileType.ToString() + Tiles[x,y].floorHeight.ToString();
+				}		
+			}
+			return signature;
+		}
 }

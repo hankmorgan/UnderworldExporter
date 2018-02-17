@@ -16,8 +16,6 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase {
 
-		public int MapMeshLayerMask=0;
-		public int DoorLayerMask=0;
 
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
@@ -158,6 +156,9 @@ public class GameWorldController : UWEBase {
 
 
 		public static bool LoadingGame=false;
+		public static bool NavMeshReady=false;
+		private static bool[] NavMeshesReady= new bool[4];
+		private static string LevelSignature;
 
 		/// <summary>
 		/// What level the player starts on in a quick start
@@ -294,6 +295,10 @@ public class GameWorldController : UWEBase {
 		public NavMeshSurface NavMeshWater;
 		public NavMeshSurface NavMeshAir;
 		public NavMeshSurface NavMeshLava;
+		public int MapMeshLayerMask=0;
+		public int DoorLayerMask=0;
+
+
 		//public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
 		//public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
 
@@ -462,9 +467,9 @@ public class GameWorldController : UWEBase {
 
 		}
 
-		void Update()
-		{
-			if (GenNavMeshNextFrame>1)
+		//void Update()
+		//{
+		/*	if (GenNavMeshNextFrame>1)
 			{
 				GenNavMeshNextFrame--;
 				if (GenNavMeshNextFrame ==1)
@@ -475,10 +480,10 @@ public class GameWorldController : UWEBase {
 						GenerateNavMeshes ();
 					}	
 				}
-			}
-		}
+			}*/
+		//}
 
-	void GenerateNavMeshes ()
+	/*void GenerateNavMeshes ()
 	{
 		//GenNavMeshNextFrame = -1;
 		//GenerateNavmesh(NavRigLand);
@@ -487,9 +492,41 @@ public class GameWorldController : UWEBase {
 		GenerateNavmesh (NavMeshWater);//For water
 		GenerateNavmesh (NavMeshAir);//for air
 		GenerateNavmesh (NavMeshLava);//for lava
-	}
+	}*/
 
-	void GenerateNavmesh(NavMeshSurface navmeshobj)
+		IEnumerator UpdateNavMeshes()
+		{		
+			NavMeshReady=false;
+			NavMeshesReady[0]=false;
+			NavMeshesReady[1]=false;
+			NavMeshesReady[2]=false;
+			NavMeshesReady[3]=false;
+			while (LoadingGame)
+			{
+					yield return new WaitForSeconds(0.1f);	
+			}
+			yield return new WaitForSeconds(0.5f);
+			StartCoroutine (GenerateNavmesh (NavMeshLand,0));//Update nav mesh for the land
+			StartCoroutine (GenerateNavmesh (NavMeshWater,1));//For water
+			StartCoroutine (GenerateNavmesh (NavMeshAir,2));//for air
+			StartCoroutine (GenerateNavmesh (NavMeshLava,3));//for lava
+
+			while (! (
+						(NavMeshesReady[0]) && 
+						(NavMeshesReady[1]) && 
+						(NavMeshesReady[2]) &&
+						(NavMeshesReady[3])
+					)
+				)
+			{
+				yield return new WaitForSeconds(0.1f);		
+			}
+			yield return new WaitForSeconds(0.5f);	
+			NavMeshReady=true;
+			yield return 0;
+		}
+
+	IEnumerator GenerateNavmesh(NavMeshSurface navmeshobj, int index)
 	{
 		//	if (navmeshobj.GetComponent<NavMeshSurface>()!=null)
 		//	{
@@ -499,15 +536,17 @@ public class GameWorldController : UWEBase {
 		//navmesh.layerMask = layer;
 		//	navmeshobj.BuildNavMesh();
 				//navmeshobj.
-				//if (navmeshobj.navMeshData==null)
-				//{
+			
+		if (navmeshobj.navMeshData==null)
+		{
 			navmeshobj.BuildNavMesh();					
-				//}
-				//else
-				//{
-				//		navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
-				//}
-		
+		}
+		else
+		{
+			navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
+		}
+		NavMeshesReady[index]=true;
+		yield return 0;
 	}
 
 		void LateUpdate()
@@ -978,13 +1017,20 @@ public class GameWorldController : UWEBase {
 						{
 								//if (!GameWorldController.instance.AtMainMenu)
 								//{//Force the nav meshes to update in 5 frames time to fix bug with nav meshes of two levels merging.
-										GenNavMeshNextFrame=5;	
+										//GenNavMeshNextFrame=5;	
 								//}
 
 								//GenerateNavmesh(NavRigLand);
 								//GenerateNavmesh(NavRigWater);
 								//GenerateNavmesh(navmeshsurface,256);
-								GenerateNavMeshes();
+								//GenerateNavMeshes();
+								string newSignature = GameWorldController.instance.currentTileMap().getSignature();
+								if (newSignature != LevelSignature)
+								{
+										//Debug.Log("Generating navmesh");
+										StartCoroutine (UpdateNavMeshes());		
+								}
+								LevelSignature =  newSignature;
 						}
 
 						if ((LevelNo==7) && (UWEBase._RES==UWEBase.GAME_UW1))

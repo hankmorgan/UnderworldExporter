@@ -213,6 +213,7 @@ public class NPC : MobileObject {
 		void AI_INIT ()
 		{
 				//if (ai == null) {
+				if (!GameWorldController.NavMeshReady){return;}
 				if (Agent == null)
 				{
 						int agentId=GameWorldController.instance.NavMeshLand.agentTypeID;//default
@@ -561,7 +562,7 @@ public class NPC : MobileObject {
 				{//Set the AI death state
 						//Update the appearance of the NPC
 						UpdateSprite();
-						AI_INIT();
+						//AI_INIT();
 						//ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 						if (WaitTimer<=0)
 						{
@@ -594,7 +595,7 @@ public class NPC : MobileObject {
 		void UpdateNPCAWake ()
 		{
 				//The AI is only active when the player is within a certain distance to the player camera.
-				if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 8) {
+				if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 10) {
 						if (objInt () != null) {
 								AI_INIT ();
 								//ai.AI.IsActive = Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 8;
@@ -642,7 +643,8 @@ public class NPC : MobileObject {
 		{
 				if (Agent==null){return;}
 				if (!Agent.isOnNavMesh){return;}
-				if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
+				//if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
+				if (!GameWorldController.NavMeshReady){return;}
 				CurTileX = (int)(transform.position.x/1.2f);
 				CurTileY = (int)(transform.position.z/1.2f);
 				//If the player comes close and I'm hostile. Make sure I go to combat mode.
@@ -681,9 +683,9 @@ public class NPC : MobileObject {
 				case npc_goals.npc_goal_stand_still_12:
 						{
 								AnimRange= NPC.AI_RANGE_IDLE;
-								if ((CurTileX!=npc_xhome) && (CurTileY!=npc_yhome))
-								{
-										DestTileX = npc_yhome; DestTileY = npc_yhome;
+								DestTileX = npc_xhome; DestTileY = npc_yhome;
+								if ((CurTileX!=npc_xhome) && (CurTileY!=npc_yhome))								
+								{										
 										AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
 								}
 								break;
@@ -727,6 +729,10 @@ public class NPC : MobileObject {
 							case npc_goals.npc_goal_stand_still_7:
 							case npc_goals.npc_goal_stand_still_11:
 							case npc_goals.npc_goal_stand_still_12:
+								if ((CurTileX!=npc_xhome) && (CurTileY!=npc_yhome))								
+								{	
+										NPCDoorUse ();
+								}
 								break;
 							default:
 								NPCDoorUse ();
@@ -1783,4 +1789,37 @@ public class NPC : MobileObject {
 
 		}
 
+		public static int findNpcByWhoAmI(int whoami)
+		{
+
+				ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+				for (int i=1; i<256;i++)
+				{
+						if (objList[i].npc_whoami==whoami)
+						{
+								return i;
+						}
+				}
+			return -1;
+		}
+
+
+		public static void SetNPCLocation(int index, int xhome, int yhome, NPC.npc_goals NewGoal)
+		{
+				if (index<0){return;}
+				ObjectInteraction obj=ObjectLoader.getObjectIntAt(index);
+				if (obj!=null)
+				{
+						NPC npc = obj.GetComponent<NPC>();
+						if (npc!=null)
+						{
+								npc.npc_xhome=(short)xhome;
+								npc.npc_yhome=(short)yhome;
+								if ((short)NewGoal>=0)
+								{
+										npc.npc_goal=(short)NewGoal;
+								}
+						}
+				}
+		}
 }
