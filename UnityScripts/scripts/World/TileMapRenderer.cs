@@ -160,7 +160,8 @@ public class TileMapRenderer : Loader{
 					tmp.VisibleFaces[vNORTH] = false;
 					tmp.VisibleFaces[vSOUTH] = false;
 					// top,east,bottom,west,north,south
-					RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
+					GameObject ceil = RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
+					//ceil.layer= LayerMask.NameToLayer ("UWObjects");
 				
 				//And at 99,99 for special stuff.
 				for (short x = TileMap.ObjectStorageTile-1; x <= TileMap.ObjectStorageTile+1; x++)
@@ -867,48 +868,47 @@ public class TileMapRenderer : Loader{
 		/// <param name="invert">If set to <c>true</c> invert.</param>
 		/// <param name="skipFloor">If set to <c>true</c> skip floor.</param>
 		/// <param name="skipCeil">If set to <c>true</c> skip ceil.</param>
-		public static void RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
+		public static GameObject RenderTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert, bool skipFloor, bool skipCeil)
 		{
 				//Picks the tile to render based on tile type/flags.
 				switch (t.tileType)
 				{
 				case TILE_SOLID:	//0
 						{	//solid
-								RenderSolidTile(parent, x, y, t, Water);
-								return;
+								return RenderSolidTile(parent, x, y, t, Water);
 						}
 				case TILE_OPEN:		//1
 						{//open
-								if (skipFloor != true) { RenderOpenTile( parent , x, y, t, Water, false); }	//floor
-								if ((skipCeil  != true)) { RenderOpenTile( parent , x, y, t, Water, true); }	//ceiling	
-								return;
+								if (skipFloor != true) { return RenderOpenTile( parent , x, y, t, Water, false); }	//floor
+								if ((skipCeil  != true)) { return RenderOpenTile( parent , x, y, t, Water, true); }	//ceiling	
+								break;
 						}
 				case TILE_DIAG_SE:
 						{//diag se
 								if (skipFloor != true) { RenderDiagSETile( parent , x, y, t, Water, false); }//floor
 								if ((skipCeil  != true)) { RenderDiagSETile( parent , x, y, t, Water, true); }
-								return;
+								return null;
 						}
 
 				case TILE_DIAG_SW:
 						{	//diag sw
 								if (skipFloor != true) { RenderDiagSWTile( parent , x, y, t, Water, false); }//floor
 								if ((skipCeil  != true)) { RenderDiagSWTile( parent , x, y, t, Water, true); }
-								return;
+								return null;
 						}
 
 				case TILE_DIAG_NE:
 						{	//diag ne
 								if (skipFloor != true) { RenderDiagNETile( parent , x, y, t, Water, invert); }//floor
 								if ((skipCeil  != true)) { RenderDiagNETile( parent , x, y, t, Water, true); }
-								return;
+								return null;
 						}
 
 				case TILE_DIAG_NW:
 						{//diag nw
 								if (skipFloor != true) { RenderDiagNWTile( parent , x, y, t, Water, invert); }//floor
 								if ((skipCeil  != true)) { RenderDiagNWTile( parent , x, y, t, Water, true); }
-								return;
+								return null;
 						}
 
 				case TILE_SLOPE_N:	//6
@@ -940,7 +940,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_SLOPE_S: //slope s	7
 						{
@@ -971,7 +971,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_SLOPE_E:		//slope e 8	
 						{
@@ -1002,7 +1002,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_SLOPE_W: 	//9
 						{ //slope w
@@ -1033,7 +1033,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_VALLEY_NW:
 						{	//valleyNw(a)
@@ -1064,7 +1064,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_VALLEY_NE:
 						{	//valleyne(b)
@@ -1095,7 +1095,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_VALLEY_SE:
 						{	//valleyse(c)
@@ -1126,7 +1126,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_VALLEY_SW:
 						{	//valleysw(d)
@@ -1157,7 +1157,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_RIDGE_SE:
 						{	//ridge se(f)
@@ -1188,7 +1188,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_RIDGE_SW:
 						{	//ridgesw(g)
@@ -1219,7 +1219,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_RIDGE_NW:
 						{	//ridgenw(h)
@@ -1250,7 +1250,7 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				case TILE_RIDGE_NE:
 						{	//ridgene(i)
@@ -1281,9 +1281,10 @@ public class TileMapRenderer : Loader{
 												break;
 										}
 								}
-								return;
+								return null;
 						}
 				}
+				return null;
 		}
 
 		/// <summary>
@@ -1297,7 +1298,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="Bottom">Bottom.</param>
 		/// <param name="Top">Top.</param>
 		/// <param name="TileName">Tile name.</param>
-		static void RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
+		static GameObject RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
 		{
 				
 				//Draw a cube with no slopes.
@@ -1491,6 +1492,7 @@ public class TileMapRenderer : Loader{
 						mc.sharedMesh=null;
 						mc.sharedMesh=mesh;	
 				}
+				return Tile;
 		}
 
 
@@ -1559,7 +1561,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="y">The y coordinate.</param>
 		/// <param name="t">T.</param>
 		/// <param name="Water">If set to <c>true</c> water.</param>
-		static void RenderSolidTile(GameObject parent, int x, int y, TileInfo t, bool Water)
+		static GameObject RenderSolidTile(GameObject parent, int x, int y, TileInfo t, bool Water)
 		{
 				if (t.Render == true)
 				{
@@ -1568,9 +1570,10 @@ public class TileMapRenderer : Loader{
 								string TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 								t.VisibleFaces[vTOP]=false;
 								t.VisibleFaces[vBOTTOM]=false;
-								RenderCuboid( parent, x, y, t, Water, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ , TileName);
+								return RenderCuboid( parent, x, y, t, Water, FLOOR_ADJ, CEILING_HEIGHT + CEIL_ADJ , TileName);
 						}
 				}
+			return null;
 		}
 
 
@@ -1583,7 +1586,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="t">T.</param>
 		/// <param name="Water">If set to <c>true</c> water.</param>
 		/// <param name="invert">If set to <c>true</c> invert.</param>
-		static void RenderOpenTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
+		static GameObject RenderOpenTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
 		{
 				if (t.Render == true){
 						string TileName = "";
@@ -1597,7 +1600,7 @@ public class TileMapRenderer : Loader{
 												//if (t.BullFrog)
 												//{
 												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-												RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
+												return RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
 												//}
 												//else
 												//{
@@ -1608,7 +1611,7 @@ public class TileMapRenderer : Loader{
 										else
 										{
 												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-												RenderCuboid(parent, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
+												return RenderCuboid(parent, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
 										}
 								}
 								else
@@ -1619,12 +1622,14 @@ public class TileMapRenderer : Loader{
 										t.VisibleFaces[vBOTTOM]=true;
 										t.VisibleFaces[vTOP]=false;
 										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-										RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TileName);
+										GameObject output = RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TileName);
 										t.VisibleFaces[vBOTTOM]=visB;
 										t.VisibleFaces[vTOP]=visT;
+										return output;
 								}
 						}
 				}
+				return null;
 		}
 
 

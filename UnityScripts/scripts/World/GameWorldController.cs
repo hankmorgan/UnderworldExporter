@@ -539,11 +539,15 @@ public class GameWorldController : UWEBase {
 			
 		if (navmeshobj.navMeshData==null)
 		{
-			navmeshobj.BuildNavMesh();					
+			navmeshobj.BuildNavMesh();			
 		}
 		else
 		{
-			navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
+			AsyncOperation task = navmeshobj.UpdateNavMesh(navmeshobj.navMeshData);
+			while (!task.isDone)
+			{
+					yield return new WaitForSeconds(0.1f);	
+			}			
 		}
 		NavMeshesReady[index]=true;
 		yield return 0;
@@ -1028,6 +1032,7 @@ public class GameWorldController : UWEBase {
 								if (newSignature != LevelSignature)
 								{
 										//Debug.Log("Generating navmesh");
+										NavMeshReady=false;
 										StartCoroutine (UpdateNavMeshes());		
 								}
 								LevelSignature =  newSignature;

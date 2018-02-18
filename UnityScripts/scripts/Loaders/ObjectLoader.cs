@@ -3309,10 +3309,10 @@ public class ObjectLoader : Loader {
 																				}
 																		}	
 																}
-																else
-																{
-																		Debug.Log("wand link for " + o + " is out of range Link=" + l);
-																}
+																//else
+																//{
+																		//Debug.Log("wand link for " + o + " is out of range Link=" + l);
+																//}
 														}
 												}
 										}

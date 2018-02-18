@@ -211,70 +211,19 @@ public class NPC : MobileObject {
 		}
 
 		void AI_INIT ()
-		{
+		{				
 				//if (ai == null) {
 				if (!GameWorldController.NavMeshReady){return;}
 				if (Agent == null)
 				{
 						int agentId=GameWorldController.instance.NavMeshLand.agentTypeID;//default
-						Agent = this.gameObject.AddComponent<NavMeshAgent>();
-						Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Speed / 12.0f));
-						switch (_RES)
-						{
-						case GAME_UW2:
-								{
-										switch(objInt().item_id)
-										{
-										case 65://cave bat
-										case 66://vampire bat
-										case 71://mongbat
-										case 75://imp
-										case 93://spectre
-										case 98://dire ghost
-										case 102://haunt
-										case 105://lich
-										case 106://lich
-										case 107://lich
-										case 111://gazer	
-												agentId=GameWorldController.instance.NavMeshAir.agentTypeID;//flyer
-												break;
-										case 77://lurker
-										case 89://lurker
-												agentId=GameWorldController.instance.NavMeshWater.agentTypeID;//water
-												break;
-										case 96://Fire elemental
-												agentId=GameWorldController.instance.NavMeshLava.agentTypeID;
-												break;
-										}
-										break;
-								}
-						default:
-								{
-										switch (objInt().item_id)
-										{
-										case 66://bat
-										case 73://vampire bat
-										case 75://imp
-										case 81://mongbat
-										case 100://ghost
-										case 101://ghost
-										case 102://gazer
-										case 122://wisp
-										case 123://tybal
-												agentId=GameWorldController.instance.NavMeshAir.agentTypeID;//flyer
-												break;
-										case 87://lurker
-										case 116://deep lurker
-												agentId=GameWorldController.instance.NavMeshWater.agentTypeID;;//water
-												break;
-										case 120://fire elemental
-												agentId=GameWorldController.instance.NavMeshLava.agentTypeID;;
-												break;
-										}
-										break;
-								}
+						NavMeshHit hit;
+						NavMesh.SamplePosition(this.transform.position, out hit, 0.1f, NavMesh.AllAreas );
+						if (hit.hit)
+						{//Tests if the npc in question is on the nav mesh
+								AddAgent (agentId);
 						}
-						Agent.agentTypeID = agentId;
+
 
 				}
 
@@ -299,6 +248,96 @@ public class NPC : MobileObject {
 						}
 				}*/
 		}
+
+	void AddAgent (int agentId)
+	{
+		Agent = this.gameObject.AddComponent<NavMeshAgent> ();
+		Agent.autoTraverseOffMeshLink = false;
+		Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Speed / 12.0f));
+		switch (_RES) {
+		case GAME_UW2: {
+			switch (objInt ().item_id) {
+			case 65:
+			//cave bat
+			case 66:
+			//vampire bat
+			case 71:
+			//mongbat
+			case 75:
+			//imp
+			case 93:
+			//spectre
+			case 98:
+			//dire ghost
+			case 102:
+			//haunt
+			case 105:
+			//lich
+			case 106:
+			//lich
+			case 107:
+			//lich
+			case 111:
+				//gazer	
+				agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
+				//flyer
+				break;
+			case 77:
+			//lurker
+			case 89:
+				//lurker
+				agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
+				//water
+				break;
+			case 96:
+				//Fire elemental
+				agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
+				break;
+			}
+			break;
+		}
+		default: {
+			switch (objInt ().item_id) {
+			case 66:
+			//bat
+			case 73:
+			//vampire bat
+			case 75:
+			//imp
+			case 81:
+			//mongbat
+			case 100:
+			//ghost
+			case 101:
+			//ghost
+			case 102:
+			//gazer
+			case 122:
+			//wisp
+			case 123:
+				//tybal
+				agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
+				//flyer
+				break;
+			case 87:
+			//lurker
+			case 116:
+				//deep lurker
+				agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
+				;
+				//water
+				break;
+			case 120:
+				//fire elemental
+				agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
+				;
+				break;
+			}
+			break;
+		}
+		}
+		Agent.agentTypeID = agentId;
+	}
 
 		/// <summary>
 		/// Raises the death events for the player.
@@ -639,9 +678,41 @@ public class NPC : MobileObject {
 				}
 		}
 
-		void UpdateGoals ()
+		/// <summary>
+		/// Updates the goals for NPCs that have no navmesh agent on them yet even though navmeshes are ready
+		/// </summary>
+		void UpdateGoalsForNonAgents()
 		{
-				if (Agent==null){return;}
+				switch ((npc_goals)npc_goal) 
+				{
+				case npc_goals.npc_goal_want_to_talk:
+						{
+								//I just want to talk to you
+								//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
+								AnimRange= NPC.AI_RANGE_IDLE;
+								if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false)) 
+								{
+										if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 1.5) 
+										{
+												TalkTo ();
+										}
+								}	
+								break;
+						}
+				default:
+						return;
+				}
+		}
+
+		void UpdateGoals ()
+		{				
+				if (Agent==null){
+						if (GameWorldController.NavMeshReady)
+						{
+								UpdateGoalsForNonAgents();
+						}
+						return;
+				}
 				if (!Agent.isOnNavMesh){return;}
 				//if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
 				if (!GameWorldController.NavMeshReady){return;}

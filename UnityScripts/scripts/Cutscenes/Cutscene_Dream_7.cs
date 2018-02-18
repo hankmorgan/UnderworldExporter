@@ -22,13 +22,13 @@ public class Cutscene_Dream_7 : Cuts {
 				ImageLoops[2] = -1;
 
 				ImageFrames[3]="Anim_Base";//To finish.
-				ImageTimes[3] = 22.2f;
+				ImageTimes[3] = 48f;
 				ImageLoops[3] = -1;
 
 
 
 				StringBlockNo=3098;//was 3104
-				noOfSubs=3;
+				noOfSubs=9;
 				for (int i=0;i<noOfSubs;i++)
 				{
 						SubsStringIndices[i]=i;
