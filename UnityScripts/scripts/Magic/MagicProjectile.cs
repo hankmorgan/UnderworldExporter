@@ -15,6 +15,8 @@ public class MagicProjectile : MobileObject {
 	///Spell properties object to define the behaviour of the projectile
 	public SpellProp spellprop; 
 	public Rigidbody rgd;
+
+	public bool DetonateNow;
 	/// <summary>
 	/// The Projectile hits something.
 	/// </summary>
@@ -40,49 +42,8 @@ public class MagicProjectile : MobileObject {
 		}
 		else
 		{
-			HasHit=true;
-
-			//Code to execute when a projectile hits a spot (for launching AOE effects)
-			spellprop.onImpact(this.transform);			
-
-			ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
-
-			if (objInt!=null)//Has the projectile hit anything
-			{
-				//Special code for magic spell direct hits.
-				spellprop.onHit(objInt);
-
-				//Applies damage
-				objInt.Attack(spellprop.BaseDamage,caster);
-
-				//Create a impact animation to illustrate the collision
-				if(objInt.GetHitFrameStart()>=0)
-				{
-					Impact.SpawnHitImpact(Impact.ImpactMagic(),objInt.GetImpactPoint(),objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());	
-				}
-			}
-			else
-			{
-				//Test if this is a player.
-				if (collision.gameObject.GetComponent<UWCharacter>()!=null)
-				{
-					collision.gameObject.GetComponent<UWCharacter>().ApplyDamage(spellprop.BaseDamage);
-					spellprop.onHitPlayer();
-				}
-				else
-				{
-					//Do a miss impact 
-					Impact.SpawnHitImpact(Impact.ImpactDamage(),this.transform.position,spellprop.impactFrameStart,spellprop.impactFrameEnd);					
-				}
-			}	
-
-			ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
-			if (objIntThis!=null)
-			{
-				objIntThis.objectloaderinfo.InUseFlag=0;//Free up object slot
-			}
+			Detonate (collision);
 		
-			DestroyObject(this.gameObject);
 		}
 	}
 
@@ -96,9 +57,54 @@ public class MagicProjectile : MobileObject {
 			x=rgd.velocity.x;
 			y=rgd.velocity.y;
 			z=rgd.velocity.z;
-		}			
+		}	
+		if (DetonateNow)
+		{
+			DestroyProjectile ();	
+		}
 	}
 
 
 	
+	void Detonate (Collision collision)
+	{
+		HasHit = true;
+		//Code to execute when a projectile hits a spot (for launching AOE effects)
+		spellprop.onImpact (this.transform);
+		ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction> ();
+		if (objInt != null)//Has the projectile hit anything
+		 {
+			//Special code for magic spell direct hits.
+			spellprop.onHit (objInt);
+			//Applies damage
+			objInt.Attack (spellprop.BaseDamage, caster);
+			//Create a impact animation to illustrate the collision
+			if (objInt.GetHitFrameStart () >= 0) {
+				Impact.SpawnHitImpact (Impact.ImpactMagic (), objInt.GetImpactPoint (), objInt.GetHitFrameStart (), objInt.GetHitFrameEnd ());
+			}
+		}
+		else {
+			//Test if this is a player.
+			if (collision.gameObject.GetComponent<UWCharacter> () != null) {
+				int ratio = UWCharacter.Instance.getSpellResistance (spellprop);
+				collision.gameObject.GetComponent<UWCharacter> ().ApplyDamage (spellprop.BaseDamage / ratio);
+				spellprop.onHitPlayer ();
+			}
+			else {
+				//Do a miss impact 
+				Impact.SpawnHitImpact (Impact.ImpactDamage (), this.transform.position, spellprop.impactFrameStart, spellprop.impactFrameEnd);
+			}
+		}
+		DestroyProjectile ();
+	}
+
+	void DestroyProjectile ()
+	{
+		ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction> ();
+		if (objIntThis != null) {
+			objIntThis.objectloaderinfo.InUseFlag = 0;
+			//Free up object slot
+		}
+		DestroyObject (this.gameObject);
+	}
 }

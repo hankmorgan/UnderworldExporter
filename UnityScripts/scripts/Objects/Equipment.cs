@@ -18,12 +18,6 @@ public class Equipment : object_base {
 
 	public string DisplayEnchantment;
 
-
-
-
-
-
-
 	protected override void Start ()
 	{
 		base.Start ();
@@ -122,7 +116,7 @@ public class Equipment : object_base {
 			//Do the result at the end of the animation.
 			if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
-								objInt().quality +=5; //objInt().quality+5;
+				objInt().quality +=5; //objInt().quality+5;
 				if (objInt().quality >63){objInt().quality=63;}
 				UWHUD.instance.MessageScroll.Add("You repair the item");
 			}		
@@ -183,6 +177,13 @@ public class Equipment : object_base {
 		/// <returns>The equipment condition string.</returns>
 		public virtual string GetEquipmentConditionString()
 		{
+				if (_RES==GAME_UW1)
+				{
+						if ((objInt().item_id==10) ||(objInt().item_id==55) || (objInt().item_id==47)|| (objInt().item_id==48)|| (objInt().item_id==49)|| (objInt().item_id==50))
+						{
+								return StringController.instance.GetString(5,10);	
+						}
+				}
 			if ((objInt().quality>0) && (objInt().quality<=15))
 			{//lowest
 				return StringController.instance.GetString(5,7);
@@ -198,12 +199,12 @@ public class Equipment : object_base {
 					//Medium
 				return StringController.instance.GetString(5,9);
 			}
-			else if ((objInt().quality>45) && (objInt().quality<=63))
+			else //if ((objInt().quality>45))// && (objInt().quality<=63))
 			{
 					//Best
 				return StringController.instance.GetString(5,10);
 			}
-		return "";
+		return " ";
 		}
 
 

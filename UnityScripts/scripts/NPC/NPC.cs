@@ -13,38 +13,6 @@ using UnityEngine.AI;
 /// </summary>
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject {
-		private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-
-		public enum npc_goals
-		{
-				npc_goal_stand_still_0= 0,
-				npc_goal_stand_still_7= 7,
-				npc_goal_stand_still_11= 11,
-				npc_goal_stand_still_12= 12,
-				npc_goal_want_to_talk =10,
-				npc_goal_goto_1=1,
-				npc_goal_wander_2=2,
-				npc_goal_wander_4=4,
-				npc_goal_wander_8=8,
-				npc_goal_attack_5=5,
-				npc_goal_attack_9=9,
-				npc_goal_flee=6,
-				npc_goal_follow=3	
-		};
-
-		public enum AttackStages
-		{
-				AttackPosition = 0,
-				AttackAnimateMagic=1,
-				AttackAnimateMelee=2,
-				AttackExecute=3,
-				AttackWaitCycle = 4
-		};
-		public Vector3 destinationVector;
-
-		public AttackStages AttackState;
-
-		//public int DebugRace;
 
 		//TODO: these need to match the UW npc_goals
 		//The behaviour trees need to be updated too.
@@ -91,20 +59,67 @@ public class NPC : MobileObject {
 		public const int AI_ANIM_COMBAT_IDLE =4000;
 		public const int AI_ANIM_ATTACK_SECONDARY =5000;
 
+		private static short[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
+
+		public enum NPCCategory
+		{			
+			ethereal = 0,
+			humanoid = 0x1,
+			flying = 0x2,
+			swimming = 0x03,
+			creeping = 0x4,
+			crawling = 0x5,
+			golem = 0x6,
+			human = 0x51
+		};
+
+		public enum npc_goals
+		{
+				npc_goal_stand_still_0= 0,
+				npc_goal_stand_still_7= 7,
+				npc_goal_stand_still_11= 11,
+				npc_goal_stand_still_12= 12,
+				npc_goal_want_to_talk =10,
+				npc_goal_goto_1=1,
+				npc_goal_wander_2=2,
+				npc_goal_wander_4=4,
+				npc_goal_wander_8=8,
+				npc_goal_attack_5=5,
+				npc_goal_attack_9=9,
+				npc_goal_flee=6,
+				npc_goal_follow=3	
+		};
+
+		public enum AttackStages
+		{
+				AttackPosition = 0,
+				AttackAnimateMagic=1,
+				AttackAnimateMelee=2,
+				AttackExecute=3,
+				AttackWaitCycle = 4
+		};
+
+		enum AgentMasks
+		{
+				LAND = 3,
+				WATER = 4,
+				LAVA = 5,
+				AIR = 6
+		};
+
+		[Header("Combat")]
+		public AttackStages AttackState;
+		public int CurrentAttack;//What attack the NPC is currently executing.
+
+
 		///Anim range defines which animation set to play.
 		///Multiple of 10 for dividing animations
 		///Angle index * Anim Range give AI_ANIM_X value to pick animation
+		/// 
+		[Header("Animation")]
 		public int AnimRange=1;
-		//public int curranim=0;
-
-		public int CurrentAttack;//What attack the NPC is currently executing.
-
 		public int NPC_IDi;
-
-
 		public NPC_Animation newAnim;
-
-
 		/// The animation index the NPC is facing
 		private short facingIndex;
 		/// Previous value for tracking changes
@@ -113,7 +128,6 @@ public class NPC : MobileObject {
 		private int PreviousAnimRange=-1;
 		/// The compass point (see heading array) the NPC is facing relative to the player
 		private short CalcedFacing;
-
 		///Integer representation of the current facing of the character. To match with animation angles
 		private short currentHeading;
 		//Direction between the player and the NPC for calculating relative angle
@@ -121,9 +135,13 @@ public class NPC : MobileObject {
 		/// The angle to the character from the player.
 		private float angle;
 
+		private SpriteRenderer sprt;
+		//public string CurrentSpriteName="";
+		//public Sprite currentSpriteLoaded;
+
+		[Header("Status")]
 		///flags the NPC as dead so we can kill them off in the next frame
 		public bool NPC_DEAD;
-
 		//Added by myself. This are set by spelleffects
 		///The NPC is poisoned
 		public bool Poisoned;
@@ -131,74 +149,48 @@ public class NPC : MobileObject {
 		public bool Frozen;
 		///Allows periodic updating of the NPC animation when frozen to support moving around them
 		public short FrozenUpdate=0;
-
 		//Enemy types.
 		///Undead Enemy flag
-		public bool isUndead; 
-
-		///Set state when not in combat or dying.
-		///TODO: The state should be replaced with a combination of the above variables and match what UW does.
-		//private int state=0; 
-
+		public bool isUndead=false; 
+		public bool isHumanoid=false;
 		///For storing spell effects applied to NPCs
 		public SpellEffect[] NPCStatusEffects=new SpellEffect[3];
-
-		///To flag initiation of the player into the AI modules
-		//private static bool playerUWReady;
-		///AI module for the character.
-		//private AIRig ai;	
-
-		public NavMeshAgent Agent;
-
-		float targetBaseOffset=0f;
-		float startBaseOffset=0f;
-		float floatTime =0f;
-
 		///Can the NPC fire off magic attacks.
 		public bool MagicAttack;	
 		///Transform position to launch projectiles from
 		public GameObject NPC_Launcher; 
-		///What spell the NPC should cast if they have magicAttack==true
-		//private int SpellIndex; 
-
-		private SpriteRenderer sprt;
-
-		public string CurrentSpriteName="";
-		public Sprite currentSpriteLoaded;
-
 		public int Ammo=0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+		public float WaitTimer=0f;
+
+		[Header("NavMesh")]
+		public NavMeshAgent Agent;
+		float targetBaseOffset=0f;
+		float startBaseOffset=0f;
+		float floatTime =0f;
+
+
+
 
 		private short StartingHP;
 
+		[Header("Positioning")]
 		public int CurTileX=0;
 		public int CurTileY=0;
 		public int prevTileX=-1;
 		public int prevTileY=-1;
-
 		public int DestTileX;
 		public int DestTileY;
-		//public bool ArrivedAtDestination;
-		//public bool TravellingToDestination;
-
-		public float WaitTimer=0f;
+		public Vector3 destinationVector;
 
 
-		/*public struct PathCoord
-		{
-			public int tileX;
-			public int tileY;
-			public int Counter;
-			public bool tested;
-		};*/
-
-		//public List<PathCoord> PathSteps;
-		//public List<PathCoord> PathStepsFinal;
 
 		/// <summary>
 		/// Initialise some basic info for the NPC ai.
 		/// </summary>
 		protected override void Start () {
 				base.Start();
+				//debugCategory=GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Category;
+				//debugPoison = GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Poison;
 				NPC_IDi=objInt().item_id;
 				StartingHP=npc_hp;
 				newAnim=this.gameObject.AddComponent<NPC_Animation>();
@@ -216,15 +208,17 @@ public class NPC : MobileObject {
 				if (!GameWorldController.NavMeshReady){return;}
 				if (Agent == null)
 				{
-						int agentId=GameWorldController.instance.NavMeshLand.agentTypeID;//default
+						Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(CurTileX, CurTileY);
+						//this.transform.position=pos;
 						NavMeshHit hit;
-						NavMesh.SamplePosition(this.transform.position, out hit, 0.1f, NavMesh.AllAreas );
+						int mask = (int)AgentMask();
+						mask = 1 << mask;
+						NavMesh.SamplePosition(pos, out hit, 0.2f, mask);// NavMesh.AllAreas
 						if (hit.hit)
 						{//Tests if the npc in question is on the nav mesh
-								AddAgent (agentId);
+							AddAgent (mask);	
+							Agent.Warp(pos);
 						}
-
-
 				}
 
 				/*	GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
@@ -249,95 +243,138 @@ public class NPC : MobileObject {
 				}*/
 		}
 
-	void AddAgent (int agentId)
+	void AddAgent (int mask)
 	{
-		Agent = this.gameObject.AddComponent<NavMeshAgent> ();
-		Agent.autoTraverseOffMeshLink = false;
-		Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Speed / 12.0f));
-		switch (_RES) {
-		case GAME_UW2: {
-			switch (objInt ().item_id) {
-			case 65:
-			//cave bat
-			case 66:
-			//vampire bat
-			case 71:
-			//mongbat
-			case 75:
-			//imp
-			case 93:
-			//spectre
-			case 98:
-			//dire ghost
-			case 102:
-			//haunt
-			case 105:
-			//lich
-			case 106:
-			//lich
-			case 107:
-			//lich
-			case 111:
-				//gazer	
-				agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
-				//flyer
-				break;
-			case 77:
-			//lurker
-			case 89:
-				//lurker
-				agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
-				//water
-				break;
-			case 96:
-				//Fire elemental
-				agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
-				break;
-			}
-			break;
-		}
-		default: {
-			switch (objInt ().item_id) {
-			case 66:
-			//bat
-			case 73:
-			//vampire bat
-			case 75:
-			//imp
-			case 81:
-			//mongbat
-			case 100:
-			//ghost
-			case 101:
-			//ghost
-			case 102:
-			//gazer
-			case 122:
-			//wisp
-			case 123:
-				//tybal
-				agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
-				//flyer
-				break;
-			case 87:
-			//lurker
-			case 116:
-				//deep lurker
-				agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
-				;
-				//water
-				break;
-			case 120:
-				//fire elemental
-				agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
-				;
-				break;
-			}
-			break;
-		}
-		}
-		Agent.agentTypeID = agentId;
+				int agentId	=GameWorldController.instance.NavMeshLand.agentTypeID;
+				Agent = this.gameObject.AddComponent<NavMeshAgent> ();
+				Agent.autoTraverseOffMeshLink = false;
+				Agent.speed = 2f * (((float)GameWorldController.instance.objDat.critterStats [objInt ().item_id - 64].Speed / 12.0f));
+
+				switch (_RES) {
+				case GAME_UW2: {
+								switch (objInt ().item_id) {
+								case 65://cave bat
+								case 66://vampire bat
+								case 71://mongbat
+								case 75://imp
+								case 93://spectre
+								case 98://dire ghost
+								case 102://haunt
+								case 105://lich
+								case 106://lich
+								case 107://lich
+								case 111://gazer	
+										agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
+										//agentId = GameWorldController.instance.NavMeshLand.agentTypeID;
+										break;
+								case 77://lurker
+								case 89://lurker
+										agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										//water
+										break;
+								case 96://Fire elemental				
+										agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										break;
+								//default:
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										break;
+								}
+								break;
+						}
+				default: {
+								switch (objInt ().item_id) {
+								case 66://bat
+								case 73://vampire bat
+								case 75://imp
+								case 81://mongbat
+								case 100://ghost
+								case 101://ghost
+								case 102://gazer
+								case 122://wisp
+								case 123://tybal
+										agentId = GameWorldController.instance.NavMeshAir.agentTypeID;
+										//agentId = GameWorldController.instance.NavMeshLand.agentTypeID;
+										//flyer
+										break;
+								case 87://lurker
+								case 116://deep lurker
+										agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										//water
+										break;
+								case 120:
+								//case 124://slasher
+										//fire elemental
+										agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										break;
+								//default:
+										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+										//break;
+								}
+								break;
+						}
+				}
+				Agent.agentTypeID = agentId;
+				Agent.areaMask = mask;
 	}
+
+
+		AgentMasks AgentMask ()
+		{
+				AgentMasks agentMask= AgentMasks.LAND;//land
+				switch (_RES) {
+				case GAME_UW2: {
+								switch (objInt ().item_id) {
+								case 65://cave bat
+								case 66://vampire bat
+								case 71://mongbat
+								case 75://imp
+								case 93://spectre
+								case 98://dire ghost
+								case 102://haunt
+								case 105://lich
+								case 106://lich
+								case 107://lich
+								case 111://gazer	
+										return AgentMasks.AIR;
+								case 77://lurker
+								case 89://lurker//water
+										return AgentMasks.WATER;
+								case 96://Fire elemental				
+										return AgentMasks.LAVA;
+								}
+								break;
+						}
+				default: {
+								switch (objInt ().item_id) {
+								case 66://bat
+								case 73://vampire bat
+								case 75://imp
+								case 81://mongbat
+								case 100://ghost
+								case 101://ghost
+								case 102://gazer
+								case 122://wisp
+								case 123://tybal
+										return AgentMasks.AIR;
+								case 87://lurker
+								case 116://deep lurker
+										return AgentMasks.WATER;
+								case 120:
+								//case 124://slasher
+										//fire elemental
+									return AgentMasks.LAVA;
+								}
+								break;
+						}
+				}
+				return agentMask;
+		}
+
+
 
 		/// <summary>
 		/// Raises the death events for the player.
@@ -388,19 +425,27 @@ public class NPC : MobileObject {
 				//Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
 				//EarthGolem = 0x11 (Only used for the earth golem),
 				//Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
-				switch(GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Category)
+				switch((NPCCategory)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Category)
 				{
-				case 0x0:
-				case 0x02:
+				//case 0x0:
+				//case 0x02:
+				case NPCCategory.ethereal:
+				case NPCCategory.flying:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3];break;
-				case 0x03:
+				//case 0x03:
+				case NPCCategory.swimming:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];break;
-				case 0x04:
-				case 0x05:
+				//case 0x04:
+				//case 0x05:
+				case NPCCategory.crawling:
+				case NPCCategory.creeping:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2];break;
-				case 0x11:
+				//case 0x11:
+				case NPCCategory.golem:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_RUMBLE];break;
-				case 0x01:
+				//case 0x01:
+				case NPCCategory.human:
+				case NPCCategory.humanoid:
 				default:
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1];break;								
 				}
@@ -601,8 +646,6 @@ public class NPC : MobileObject {
 				{//Set the AI death state
 						//Update the appearance of the NPC
 						UpdateSprite();
-						//AI_INIT();
-						//ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 						if (WaitTimer<=0)
 						{
 								DumpRemains();
@@ -610,6 +653,8 @@ public class NPC : MobileObject {
 						return;
 				}
 
+				CurTileX = (int)(transform.position.x/1.2f);
+				CurTileY = (int)(transform.position.z/1.2f);
 
 				UpdateNPCAWake ();
 
@@ -636,8 +681,10 @@ public class NPC : MobileObject {
 				//The AI is only active when the player is within a certain distance to the player camera.
 				if (Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 10) {
 						if (objInt () != null) {
-								AI_INIT ();
-								//ai.AI.IsActive = Vector3.Distance (this.transform.position, UWCharacter.Instance.CameraPos) <= 8;
+								if (TileMap.ValidTile(CurTileX,CurTileY))
+								{
+										AI_INIT ();
+								}
 								newAnim.enabled = true;
 						}
 				}
@@ -716,8 +763,6 @@ public class NPC : MobileObject {
 				if (!Agent.isOnNavMesh){return;}
 				//if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
 				if (!GameWorldController.NavMeshReady){return;}
-				CurTileX = (int)(transform.position.x/1.2f);
-				CurTileY = (int)(transform.position.z/1.2f);
 				//If the player comes close and I'm hostile. Make sure I go to combat mode.
 				if ((npc_attitude == 0) && (Vector3.Distance (this.transform.position, UWCharacter.Instance.transform.position) <= UWCharacter.Instance.DetectionRange)) {
 						npc_goal = (short)npc_goals.npc_goal_attack_5;
@@ -820,42 +865,63 @@ public class NPC : MobileObject {
 		/// </summary>
 	void NPCDoorUse ()
 	{
-				for (int x=-1; x<=1;x++)
+		//TODO:Make monster Types try and bash doors
+				//bool Action=false; //true for open, false to bash.
+		//Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
+		//Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
+		//Flying = 0x02 (Flying critters like bats and imps), 
+		//Swimming = 0x03 (Swimming critters like lurkers), 
+		//Creeping = 0x04 (Creeping critters like rats and spiders), 
+		//Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
+		//EarthGolem = 0x11 (Only used for the earth golem),
+		//Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
+		switch((NPCCategory)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Category)
+			{
+			 	//case 0x01:
+				//case 0x51:
+				case NPCCategory.human:
+				case NPCCategory.humanoid:
+					break;//can open door
+				default:
+				return;//cannot open door (in the future will attempt to bash if hostile)
+			}
+
+		for (int x=-1; x<=1;x++)
+		{
+				for (int y=-1; y<=1;y++)
 				{
-						for (int y=-1; y<=1;y++)
+						if (
+								((x == 0) && ((y==-1) || (y==1)))
+								||
+								((y == 0) && ((x==-1) || (x==1)))
+								||
+								((x==0) && (y==0))
+						)
 						{
-								if (
-										((x == 0) && ((y==-1) || (y==1)))
-										||
-										((y == 0) && ((x==-1) || (x==1)))
-										||
-										((x==0) && (y==0))
-								)
-								{
-										if (TileMap.ValidTile (CurTileX+x, CurTileY+y)) {
-												if (GameWorldController.instance.currentTileMap ().Tiles [CurTileX+x, CurTileY+y].isDoor) {
-														GameObject door= GameWorldController.findDoor (CurTileX+x, CurTileY+y);
-														if (door!=null)
-														{
-																DoorControl dc = door.GetComponent<DoorControl>();
-																if (dc != null) {
-																		if (dc.state () == false) {
-																				//door is closed
-																				if ((!dc.locked ()) && (!dc.Spiked)) {
-																						//and can be opened.
-																						if (dc.DoorBusy == false) {
-																								dc.PlayerUse = false;
-																								dc.Activate (this.gameObject);
-																						}
+								if (TileMap.ValidTile (CurTileX+x, CurTileY+y)) {
+										if (GameWorldController.instance.currentTileMap ().Tiles [CurTileX+x, CurTileY+y].isDoor) {
+												GameObject door= GameWorldController.findDoor (CurTileX+x, CurTileY+y);
+												if (door!=null)
+												{
+														DoorControl dc = door.GetComponent<DoorControl>();
+														if (dc != null) {
+																if (dc.state () == false) {
+																		//door is closed
+																		if ((!dc.locked ()) && (!dc.Spiked)) {
+																				//and can be opened.
+																				if (dc.DoorBusy == false) {
+																						dc.PlayerUse = false;
+																						dc.Activate (this.gameObject);
 																				}
 																		}
 																}
 														}
 												}
-										}	
-								}
-						}		
-				}
+										}
+								}	
+						}
+				}		
+		}
 
 	}
 
@@ -867,9 +933,9 @@ public class NPC : MobileObject {
 						SetRandomDestination ();
 				}
 				else {
-						DestTileX = npc_xhome;
-						DestTileY = npc_yhome;
-						if ((DestTileX == CurTileX) && (DestTileY == CurTileY)) {
+						if ((DestTileX == CurTileX) && (DestTileY == CurTileY)  && ((npc_goal == (short)npc_goals.npc_goal_goto_1))) {
+								DestTileX = npc_xhome;
+								DestTileY = npc_yhome;
 								npc_goal = (short)npc_goals.npc_goal_stand_still_0;
 						}
 				}
@@ -891,7 +957,8 @@ public class NPC : MobileObject {
 		{
 				switch (AttackState) {
 				case AttackStages.AttackPosition:
-						if (Room () == UWCharacter.Instance.room) {
+						//if (Room () == UWCharacter.Instance.room) {
+						if (true){
 								Vector3 AB = this.transform.position - gtarg.transform.position;
 								if (AB.magnitude > 1f) {
 										if (AB.magnitude < 6f) {
@@ -907,19 +974,23 @@ public class NPC : MobileObject {
 														else
 														{
 															//Move to position
-															AgentMoveToPosition (gtarg.transform.position);
-															AnimRange = NPC.AI_RANGE_MOVE;
+															AgentMoveToGtarg ();
 														}
 												}
 												else {
 														//Move to position
-														AgentMoveToPosition (gtarg.transform.position);
-														AnimRange = NPC.AI_RANGE_MOVE;
+														AgentMoveToGtarg ();
 												}
 										}
-										else {
-												AgentMoveToPosition (gtarg.transform.position);
-												AnimRange = NPC.AI_RANGE_MOVE;
+										else {//Player is not close enough for an attach.
+												if (AB.magnitude < 14f + (UWCharacter.Instance.DetectionRange)) 
+													{//I'm close enough to still want to hunt you down.
+														AgentMoveToGtarg ();
+													}
+												else
+													{
+														AgentStand();
+													}
 										}
 								}
 								else {
@@ -933,9 +1004,7 @@ public class NPC : MobileObject {
 										}
 										else
 										{
-											//Move to position
-											AgentMoveToPosition (gtarg.transform.position);
-											AnimRange = NPC.AI_RANGE_MOVE;
+												AgentMoveToGtarg ();
 										}
 	
 								}
@@ -975,20 +1044,25 @@ public class NPC : MobileObject {
 				}
 		}
 
+	void AgentMoveToGtarg ()
+	{
+		//Move to position
+		AgentMoveToPosition (gtarg.transform.position);
+		AnimRange = NPC.AI_RANGE_MOVE;
+	}
+
 		void AgentGotoDestTileXY (ref int DestinationX, ref int DestinationY, ref int tileX, ref int tileY )
 		{
 				if (Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID) {
 						float tileHeight = (float)GameWorldController.instance.currentTileMap ().GetFloorHeight (tileX, tileY) * 0.15f;//Of current tile
 						float zpos = Random.Range (tileHeight, 4f);
 						//AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
-						targetBaseOffset = zpos - tileHeight;
+						targetBaseOffset = 0.5f;//tileHeight + 0.2f ;//zpos - tileHeight;
 						startBaseOffset = Agent.baseOffset;
-						floatTime = 0f;
+						floatTime = 1f;
 						AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
 				}
-				else {
-						AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
-				}
+				AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
 		}
 
 		void AgentStand ()
@@ -1078,8 +1152,11 @@ public class NPC : MobileObject {
 		/// NPC becomes hostile on attack. 
 		public override bool ApplyAttack(short damage)
 		{
-				npc_hp=(short)(npc_hp-damage);
-				UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP );
+				if (! ( (_RES==GAME_UW1) && (objInt().item_id==124) ) )
+				{//Do not apply damage if attaching the slasher of veils.
+						npc_hp=(short)(npc_hp-damage);
+						UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP );	
+				}
 				return true;
 		}
 
@@ -1130,15 +1207,15 @@ public class NPC : MobileObject {
 										}
 								}
 						}
-						else
-						{//NPC attack
-								gtargName=source.name;
-								//Makes the targeted entity attack the object that attacked it.
-								npc_gtarg=999;
-								gtarg=source;
-								gtargName=source.name;
-								npc_goal=(short)npc_goals.npc_goal_attack_5;;				
-						}	
+						//else
+						//{//NPC attack
+						//		gtargName=source.name;
+						//		//Makes the targeted entity attack the object that attacked it.
+						//		npc_gtarg=999;
+						//		gtarg=source;
+						//		gtargName=source.name;
+						//		npc_goal=(short)npc_goals.npc_goal_attack_5;;				
+						//}	
 				}
 
 				ApplyAttack(damage);
@@ -1892,5 +1969,11 @@ public class NPC : MobileObject {
 								}
 						}
 				}
+		}
+
+
+		public short PoisonLevel()
+		{
+			return (short)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Poison;
 		}
 }

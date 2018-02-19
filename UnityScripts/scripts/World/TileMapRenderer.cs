@@ -1553,6 +1553,257 @@ public class TileMapRenderer : Loader{
 		}
 
 
+
+
+
+		/// <summary>
+		/// Renders the floor of a diag tile
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="Bottom">Bottom.</param>
+		/// <param name="Top">Top.</param>
+		/// <param name="TileName">Tile name.</param>
+		static GameObject RenderPrism(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
+		{
+
+				//Draw a cube with no slopes.
+				int NumberOfVisibleFaces=0;
+				//Get the number of faces
+				for (int i=0; i<6;i++)
+				{
+						if (t.VisibleFaces[i]==true)
+						{
+								NumberOfVisibleFaces++;
+						}
+				}
+				//Allocate enough verticea and UVs for the faces
+				Vector3[] verts =new Vector3[NumberOfVisibleFaces*4  ];
+				Vector2[] uvs =new Vector2[NumberOfVisibleFaces*4 ];
+				float floorHeight=(float)(Top*0.15f);
+				float baseHeight=(float)(Bottom*0.15f);
+				float dimX = t.DimX;
+				float dimY = t.DimY;
+
+				//Now create the mesh
+				GameObject Tile = new GameObject(TileName);
+				SetTileLayer (t, Tile);
+				Tile.transform.parent=parent.transform;
+				Tile.transform.position = new Vector3(x*1.2f,0.0f, y*1.2f);
+
+				Tile.transform.localRotation=Quaternion.Euler(0f,0f,0f);
+				MeshFilter mf = Tile.AddComponent<MeshFilter>();
+				MeshRenderer mr =Tile.AddComponent<MeshRenderer>();
+
+				Mesh mesh = new Mesh();
+				mesh.subMeshCount=NumberOfVisibleFaces;//Should be no of visible faces
+
+				Material[] MatsToUse=new Material[NumberOfVisibleFaces];
+				//Now allocate the visible faces to triangles.
+				int FaceCounter=0;//Tracks which number face we are now on.
+				float PolySize= Top-Bottom;
+				float uv0= (float)(Bottom*0.125f);
+				float uv1=(PolySize / 8.0f) + (uv0);
+				float offset=0f;
+				int vertCountOffset=0;
+				for (int i=0;i<6;i++)
+				{
+						if (t.VisibleFaces[i]==true)
+						{
+								switch(i)
+								{
+								case vTOP:
+										{
+											//Set the verts	
+											MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fSELF, t)];
+											verts[ 0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
+											verts[ 1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
+											verts[ 2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);
+											//Allocate UVs
+											uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+											uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,0.0f);
+											uvs[ 2+ (4*FaceCounter)]=new Vector2(1.0f*dimX,0.0f);
+											uvs[3+ (4*FaceCounter)]=new Vector2(1.0f*dimX,1.0f*dimY);
+											break;
+										}
+
+								case vNORTH:
+										{
+												//north wall vertices
+												offset = CalcCeilOffset(fNORTH, t);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fNORTH, t)];
+												verts[ 0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												verts[ 1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+												verts[ 2+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+												verts[ 3+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+
+												uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
+												uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
+												uvs[ 2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
+												uvs[ 3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
+
+
+												break;
+										}
+
+								case vWEST:
+										{
+												//west wall vertices
+												offset = CalcCeilOffset(fWEST, t);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fWEST, t)];
+												verts[ 0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+												verts[ 1+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, floorHeight);
+												verts[ 2+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+												verts[ 3+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
+												uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
+												uvs[ 2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
+												uvs[ 3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
+
+												break;
+										}
+
+								case vEAST:
+										{
+												//east wall vertices
+												offset = CalcCeilOffset(fEAST, t);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fEAST, t)];
+												verts[ 0+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												verts[ 1+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+												verts[ 2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
+												verts[ 3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
+												uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
+												uvs[ 2+ (4*FaceCounter)]=new Vector2(dimY,uv1-offset);
+												uvs[ 3+ (4*FaceCounter)]=new Vector2(dimY,uv0-offset);
+
+												break;
+										}
+
+								case vSOUTH:
+										{
+												offset = CalcCeilOffset(fSOUTH, t);
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[WallTexture(fSOUTH, t)];
+												//south wall vertices
+												verts[ 0+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												verts[ 1+ (4*FaceCounter)]=  new Vector3(0f,0f, floorHeight);
+												verts[ 2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, floorHeight);
+												verts[ 3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,uv0-offset);
+												uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,uv1-offset);
+												uvs[ 2+ (4*FaceCounter)]=new Vector2(dimX,uv1-offset);
+												uvs[ 3+ (4*FaceCounter)]=new Vector2(dimX,uv0-offset);
+
+												break;
+										}
+								case vBOTTOM:
+										{
+												//bottom wall vertices
+												MatsToUse[FaceCounter]=GameWorldController.instance.MaterialMasterList[FloorTexture(fCEIL, t)];
+												verts[ 0+ (4*FaceCounter)]=  new Vector3(0f,1.2f*dimY, baseHeight);
+												verts[ 1+ (4*FaceCounter)]=  new Vector3(0f,0f, baseHeight);
+												verts[ 2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0f, baseHeight);
+												verts[ 3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, baseHeight);
+												//Change default UVs
+												uvs[ 0+ (4*FaceCounter)]=new Vector2(0.0f,0.0f);
+												uvs[ 1 +(4*FaceCounter)]=new Vector2(0.0f,1.0f*dimY);
+												uvs[ 2+ (4*FaceCounter)]=new Vector2(dimX,1.0f*dimY);
+												uvs[ 3+ (4*FaceCounter)]=new Vector2(dimX,0.0f);
+												break;
+										}
+								}
+								FaceCounter++;
+						}
+				}
+
+				//Apply the uvs and create my tris
+				mesh.vertices = verts;
+				mesh.uv = uvs;
+				FaceCounter=0;
+				int curFace=0;
+				int [] tris;// = new int[6];
+
+				for (int i=0;i<6;i++)
+				{				
+						if (curFace == vTOP)
+						{
+								tris = new int[3];	
+						}
+						else
+						{
+								tris = new int[6];
+						}
+
+						if (t.VisibleFaces[i]==true)
+						{
+								if (i==vTOP)
+								{
+										switch (t.tileType)
+										{
+										case TILE_DIAG_NE:
+												tris[0]=1+(4*FaceCounter);
+												tris[1]=2+(4*FaceCounter);
+												tris[2]=3+(4*FaceCounter);
+												break;
+										case TILE_DIAG_SE:
+												tris[0]=0+(4*FaceCounter);
+												tris[1]=2+(4*FaceCounter);
+												tris[2]=3+(4*FaceCounter);
+												break;
+										case TILE_DIAG_SW:
+												tris[0]=0+(4*FaceCounter);
+												tris[1]=1+(4*FaceCounter);
+												tris[2]=3+(4*FaceCounter);
+												break;
+										case TILE_DIAG_NW:
+										default:
+												tris[0]=0+(4*FaceCounter);
+												tris[1]=1+(4*FaceCounter);
+												tris[2]=2+(4*FaceCounter);
+												break;
+										}
+
+										//tris[3]=0+(4*FaceCounter);
+										//tris[4]=2+(4*FaceCounter);
+										//tris[5]=3+(4*FaceCounter);
+										mesh.SetTriangles(tris,FaceCounter);											
+								}
+								else
+								{
+										tris[0]=0+(4*FaceCounter);
+										tris[1]=1+(4*FaceCounter);
+										tris[2]=2+(4*FaceCounter);
+										tris[3]=0+(4*FaceCounter);
+										tris[4]=2+(4*FaceCounter);
+										tris[5]=3+(4*FaceCounter);
+										mesh.SetTriangles(tris,FaceCounter);
+								}
+								FaceCounter++;
+								curFace++;
+						}
+				}
+
+				mr.materials= MatsToUse;//mats;
+				mesh.RecalculateNormals();
+				mesh.RecalculateBounds();
+				mf.mesh=mesh;
+				if (EnableCollision)
+				{
+						MeshCollider mc = Tile.AddComponent<MeshCollider>();
+						mc.sharedMesh=null;
+						mc.sharedMesh=mesh;	
+				}
+				return Tile;
+		}
+
+
+
+
+
 		/// <summary>
 		/// Renders a solid tile that files the entire tilespace
 		/// </summary>
@@ -1597,21 +1848,64 @@ public class TileMapRenderer : Loader{
 										//Bottom face 
 										if (t.TerrainChange)
 										{
-												//if (t.BullFrog)
-												//{
 												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 												return RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
-												//}
-												//else
-												//{
-												//		TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-												//		RenderCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TileName);
-												//}
 										}
 										else
 										{
 												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
 												return RenderCuboid(parent, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
+										}
+								}
+								else
+								{
+										//Ceiling version of the tile
+										bool visB= t.VisibleFaces[vBOTTOM];
+										bool visT= t.VisibleFaces[vTOP];
+										t.VisibleFaces[vBOTTOM]=true;
+										t.VisibleFaces[vTOP]=false;
+										TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+										GameObject output = RenderCuboid( parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TileName);
+										t.VisibleFaces[vBOTTOM]=visB;
+										t.VisibleFaces[vTOP]=visT;
+										return output;
+								}
+						}
+				}
+				return null;
+		}
+
+
+
+		/// <summary>
+		/// Renders an open tile with no slopes
+		/// </summary>
+		/// <param name="parent">Parent.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="t">T.</param>
+		/// <param name="Water">If set to <c>true</c> water.</param>
+		/// <param name="invert">If set to <c>true</c> invert.</param>
+		static GameObject RenderDiagOpenTile(GameObject parent, int x, int y, TileInfo t, bool Water, bool invert)
+		{
+				if (t.Render == true){
+						string TileName = "";
+						if (t.isWater == Water)
+						{
+								if (invert == false)
+								{
+										//Bottom face 
+										if (t.TerrainChange)
+										{
+												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+												//return RenderCuboid(parent,x, y, t, Water, -16, t.floorHeight, TileName);
+												return RenderPrism(parent,x, y, t, Water, -16, t.floorHeight, TileName);
+										}
+										else
+										{
+												TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
+												//return RenderCuboid(parent, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
+												return RenderPrism(parent, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
 										}
 								}
 								else
@@ -1666,7 +1960,7 @@ public class TileMapRenderer : Loader{
 										bool PreviousWest = t.VisibleFaces[vWEST];
 										t.VisibleFaces[vNORTH] = false;
 										t.VisibleFaces[vWEST] = false;
-										RenderOpenTile( parent , x, y, t, Water, false);
+										RenderDiagOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vNORTH] = PreviousNorth;
 										t.VisibleFaces[vWEST] = PreviousWest;
 								}
@@ -1714,7 +2008,8 @@ public class TileMapRenderer : Loader{
 										bool PreviousEast = t.VisibleFaces[vEAST];
 										t.VisibleFaces[vNORTH] = false;
 										t.VisibleFaces[vEAST] = false;
-										RenderOpenTile( parent , x, y, t, Water, false);
+										//RenderOpenTile( parent , x, y, t, Water, false);
+										RenderDiagOpenTile(parent , x, y, t, Water, false);
 										t.VisibleFaces[vNORTH] = PreviousNorth;
 										t.VisibleFaces[vEAST] = PreviousEast;
 								}
@@ -1761,7 +2056,8 @@ public class TileMapRenderer : Loader{
 										bool PreviousWest = t.VisibleFaces[vWEST];
 										t.VisibleFaces[vSOUTH] = false;
 										t.VisibleFaces[vWEST] = false;
-										RenderOpenTile( parent , x, y, t, Water, false);
+										//RenderOpenTile( parent , x, y, t, Water, false);
+										RenderDiagOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vSOUTH] = PreviousSouth;
 										t.VisibleFaces[vWEST] = PreviousWest;
 								}
@@ -1810,7 +2106,7 @@ public class TileMapRenderer : Loader{
 										bool PreviousEast = t.VisibleFaces[vEAST];
 										t.VisibleFaces[vSOUTH] = false;
 										t.VisibleFaces[vEAST] = false;
-										RenderOpenTile( parent , x, y, t, Water, false);
+										RenderDiagOpenTile( parent , x, y, t, Water, false);
 										t.VisibleFaces[vSOUTH] = PreviousSouth;
 										t.VisibleFaces[vEAST] = PreviousEast;
 								}

@@ -6,6 +6,7 @@ public class SpellProp_Resistance : SpellProp {
 	public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+		damagetype = DamageTypes.protection;
 		switch (effectId)
 		{
 			case SpellEffect.UW1_Spell_Effect_ResistBlows:

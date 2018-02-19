@@ -132,19 +132,19 @@ public class event_base : UWClass {
 					switch (LevelNo)
 					{
 					case 246://Prison tower area code -1
-							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Prison0) 
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNos.Prison0) 
 									&&
-									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Prison7));
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNos.Prison7));
 					
 					case 240://Talorus area code -1
-							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Talorus0) 
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNos.Talorus0) 
 									&&
-									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Talorus1));
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNos.Talorus1));
 							
 					case 254://Pits area code -1
-							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNames.Pits0) 
+							return ((levelNoToTest>=(int)GameWorldController.UW2_LevelNos.Pits0) 
 									&&
-									(levelNoToTest<=(int)GameWorldController.UW2_LevelNames.Pits2));
+									(levelNoToTest<=(int)GameWorldController.UW2_LevelNos.Pits2));
 
 					default:
 							return false;

@@ -11,6 +11,7 @@ public class SpellProp_Mind : SpellProp {
 		public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+		damagetype = DamageTypes.psychic;
 		switch (effectId)
 		{		
 		case SpellEffect.UW1_Spell_Effect_Paralyze:

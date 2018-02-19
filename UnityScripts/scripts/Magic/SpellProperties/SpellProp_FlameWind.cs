@@ -20,5 +20,6 @@ public class SpellProp_FlameWind : SpellProp_Fireball {
 		noOfCasts=Random.Range(2,5);
 		SecondaryStartFrame=31;
 		SecondaryEndFrame=35;
+		damagetype = DamageTypes.fire;
 	}
 }

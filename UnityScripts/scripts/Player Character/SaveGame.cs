@@ -210,6 +210,7 @@ public class SaveGame : Loader {
 										case 0x60  : ///    bits 2..5: play_poison and no of active effects
 												Quest.instance.IncenseDream=(int)(buffer[i] & 0x3);
 												UWCharacter.Instance.play_poison=(short)((buffer[i]>>2) & 0xf );
+												UWCharacter.Instance.poison_timer=30f;
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x61:
@@ -409,7 +410,7 @@ public class SaveGame : Loader {
 
 
 						//Reapply poisoning.
-						if (UWCharacter.Instance.play_poison!=0)
+						/*if (UWCharacter.Instance.play_poison!=0)
 						{
 							SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
 							p.counter=UWCharacter.Instance.play_poison;
@@ -418,7 +419,7 @@ public class SaveGame : Loader {
 						else
 						{//Make sure any poison is cured.
 							UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
-						}
+						}*/
 
 						GameClock.setUWTime( GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255 )  + (GameClock.instance.gametimevals[2] * 255 * 255 ));
 
@@ -1169,11 +1170,11 @@ public class SaveGame : Loader {
 								case 0x109: // LeftHand ignore
 										break;
 								case 0x10A: // leftRing
-										WriteInventoryIndex(writer, inventoryObjects,10);break;
+										WriteInventoryIndex(writer, inventoryObjects,9);break;
 								case 0x10B: // leftRing ignore
 										break;
 								case 0x10C: // rightRing
-										WriteInventoryIndex(writer, inventoryObjects,9);break;
+										WriteInventoryIndex(writer, inventoryObjects,10);break;
 								case 0x10D: // rightRing ignore
 										break;
 								case 0x10E: // Backpack0
@@ -1629,6 +1630,7 @@ public class SaveGame : Loader {
 												break;
 										case 0x61  : ///    bits 1..4 play_poison and no of active effects (unchecked)
 												UWCharacter.Instance.play_poison=(short)((buffer[i]>>1) & 0xF );
+												UWCharacter.Instance.poison_timer=30f;
 												effectCounter = ((int)buffer[i]>>6) & 0x3;
 												break;
 										case 0x64:
@@ -2107,7 +2109,7 @@ public class SaveGame : Loader {
 
 
 						//Reapply poisoning.
-						if (UWCharacter.Instance.play_poison!=0)
+					/*	if (UWCharacter.Instance.play_poison!=0)
 						{
 								SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
 								p.counter=UWCharacter.Instance.play_poison;
@@ -2116,7 +2118,7 @@ public class SaveGame : Loader {
 						else
 						{//Make sure any poison is cured.
 								UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
-						}
+						}*/
 
 						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
 
@@ -2140,7 +2142,19 @@ public class SaveGame : Loader {
 		/// <returns>The game name.</returns>
 		public static string SaveGameName(int slotNo)
 		{
-				return "Level " + GameWorldController.instance.LevelNo + " " + System.DateTime.Now;
+				if (_RES==GAME_UW2)
+				{
+						return "Level " + GameWorldController.instance.LevelNo + " " + System.DateTime.Now;		
+				}
+				else
+				{
+						return UW1LevelName(GameWorldController.instance.LevelNo) + " " + System.DateTime.Now;		
+				}
+		}
+
+		static string UW1LevelName(int levelNo)
+		{
+			return GameWorldController.UW1_LevelNames[levelNo];
 		}
 
 

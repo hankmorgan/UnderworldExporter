@@ -7,6 +7,7 @@ public class SpellProp_Movement : SpellProp {
 	public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+		damagetype = DamageTypes.mobility;
 				/*
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		SpellProp_Movement movement = new SpellProp_Movement();

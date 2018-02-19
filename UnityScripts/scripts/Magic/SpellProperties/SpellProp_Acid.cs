@@ -16,6 +16,7 @@ public class SpellProp_Acid : SpellProp {
 				spread=0;
 				noOfCasts=1;
 				silent=true;//no sound
+				damagetype = DamageTypes.acid;
 		}
 
 }

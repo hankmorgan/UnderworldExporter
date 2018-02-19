@@ -728,23 +728,23 @@ public class ObjectLoader : Loader {
 					int i=0;
 					for (int z=0x8; z<=0x1a;z++)
 					{
-						switch (z)
-						{
-						case 0xb:
+						//switch (z)
+						//{
+						/*case 0xb:
 						case 0xd:
 						case 0xf:
 						case 0x16:
-								objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
-								break;
+							//	objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
+							//	break;
 						case 0xb+1:
 						case 0xd+1:
 						case 0xf+1:
 						case 0x16+1:
-								break;
-						default:
+								break;*/
+						//default:
 								objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
-								break;								
-						}
+								//break;								
+						//}
 						
 					}
 					address_pointer=address_pointer+8+19;
@@ -1574,11 +1574,6 @@ public class ObjectLoader : Loader {
 
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
-						if (i==718)
-						{
-								int a=0;
-								a++;
-						}
 				currObjList.objInfo[i].index=i;
 				bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
 				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;

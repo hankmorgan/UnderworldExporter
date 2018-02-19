@@ -18,18 +18,18 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{//Apply to player
-			if (UWCharacter.Instance==null)
-			{
-				UWCharacter.Instance= this.GetComponent<UWCharacter>();
-			}
+			//if (UWCharacter.Instance==null)
+			//{
+			//	UWCharacter.Instance= this.GetComponent<UWCharacter>();
+			//}
 			//UWCharacter.Instance.Poisoned=true;
-			if (Value!=0)
-			{
-				UWCharacter.Instance.play_poison=Value;								
-			}
-		
+			//if (Value!=0)
+			//{
+			//	UWCharacter.Instance.play_poison += Value;		
+			//	UWCharacter.Instance.play_poison=(short)(Mathf.Min(15, UWCharacter.Instance.play_poison));//Is this the value the poison should apply?
+			//}
+			
 
-						//TODO:find out value to use here.
 		}
 		else
 		{
@@ -38,10 +38,9 @@ public class SpellEffectPoison : SpellEffect {
 				npc=this.GetComponent<NPC>();
 			}
 			npc.Poisoned=true;
+			DOT=(short)(Value/counter);//How many hp per tick gets knocked off the players/npcs health.
+			DOT= Value;
 		}
-
-		DOT=(short)(Value/counter);//How many hp per tick gets knocked off the players/npcs health.
-
 		base.ApplyEffect();
 	}
 
@@ -50,7 +49,7 @@ public class SpellEffectPoison : SpellEffect {
 		if (isNPC==false)
 		{
 			//UWCharacter.Instance.Poisoned=false;
-			UWCharacter.Instance.play_poison=0;
+			//UWCharacter.Instance.play_poison=0;
 		}
 		else
 		{
@@ -63,17 +62,16 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{
-			if (UWCharacter.Instance.play_poison!=0)
-			{
-				UWCharacter.Instance.CurVIT=UWCharacter.Instance.CurVIT-DOT;
-			}
+			//if (UWCharacter.Instance.play_poison!=0)
+			//{
+			//	UWCharacter.Instance.CurVIT=UWCharacter.Instance.CurVIT-DOT;
+			//}
 		}
 		else
 		{
 			if (npc.Poisoned==true)
 			{
 				npc.npc_hp=(short)(npc.npc_hp-DOT);
-				//UWCharacter.Instance.CurVIT=UWCharacter.Instance.CurVIT-10;
 			}
 		}
 
@@ -89,12 +87,13 @@ public class SpellEffectPoison : SpellEffect {
 				CancelEffect();
 			}
 		}
-		else
-		{
-			if ((UWCharacter.Instance.play_poison==0) && (Active==true))
-			{
-				CancelEffect();
-			}
-		}
+		//else
+		//{
+			//DOT = (short)(UWCharacter.Instance.play_poison * 5);
+			//if ((UWCharacter.Instance.play_poison==0) && (Active==true))
+			//{
+			//	CancelEffect();
+			//}
+		//}
 	}
 }

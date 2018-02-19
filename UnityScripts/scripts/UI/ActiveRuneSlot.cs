@@ -70,7 +70,7 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		{
 			return;
 		}
-		if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation)){return;}
+		if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation) || (UWCharacter.InteractionMode==UWCharacter.InteractionModeOptions)){return;}
 
 		if (UWCharacter.Instance.PlayerMagic.ReadiedSpell=="")
 		{

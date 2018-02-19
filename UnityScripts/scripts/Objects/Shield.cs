@@ -3,19 +3,10 @@ using System.Collections;
 
 public class Shield : Equipment {
 	public SpellEffect SpellEffectApplied;
-	//public int ProtectionBonus;
-	//public int ToughnessBonus;
 
 	public override int GetActualSpellIndex ()
 	{
-		//if (_RES==GAME_UW2)
-		//{
-			return objInt().link-240;
-		//}
-		//else
-		//{
-		//	return objInt().link-512;				
-		//}		
+		return objInt().link-240;
 	}
 
 
@@ -105,6 +96,32 @@ public class Shield : Equipment {
 		}
 		return true;
 	}
+
+
+		public override bool LookAt ()
+		{
+			if ( (_RES==GAME_UW1) && (objInt().item_id==Quest.TalismanShield))
+			{
+				objInt().heading=7;
+				switch(objInt().identity())
+				{
+				case ObjectInteraction.IdentificationFlags.Identified:
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_see_) +  StringController.instance.GetString(1,266));
+						break;
+				default:
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
+						break;
+				}
+				return true;
+			}
+			else
+			{
+				return base.LookAt ();				
+			}
+		}
+
+
+
 }
 
 

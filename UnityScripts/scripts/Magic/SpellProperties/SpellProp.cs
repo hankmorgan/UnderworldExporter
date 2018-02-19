@@ -5,6 +5,23 @@ using System.Collections;
 /// </summary>
 public class SpellProp : UWClass {
 
+
+	public enum DamageTypes
+	{
+		fire,
+		acid,
+		magic,
+		physcial,
+		electric,
+		poison,
+		aid,
+		psychic,
+		holy,
+		light,
+		protection,
+		mobility
+	};
+
 	/// Cast from center of window or from mouse position
 	public bool CastRaySource; //false use default	
 	///How much damage or the base value the spell applies.
@@ -30,7 +47,9 @@ public class SpellProp : UWClass {
 
 	public bool silent;
 	
-		public GameObject caster;
+	public GameObject caster;
+
+	public DamageTypes damagetype = DamageTypes.magic;
 
 		/// <summary>
 		/// Init the specified effectId.

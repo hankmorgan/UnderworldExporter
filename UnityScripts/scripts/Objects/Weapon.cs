@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Weapon : Equipment {
 
-	//public int AccuracyBonus;
-	//public int DamageBonus;
-
 	public override bool use ()
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand =="")
@@ -31,11 +28,6 @@ public class Weapon : Equipment {
 		//return false;
 	}
 
-	//public virtual void WeaponSelfDamage()
-	//{//Damage caused to the weapon when it hits something with heavy resistance.
-		//
-	//}
-
 	public override bool EquipEvent (short slotNo)
 	{
 		//UWCharacter.Instance.PlayerCombat.currWeapon= this;
@@ -50,33 +42,6 @@ public class Weapon : Equipment {
 				UWCharacter.Instance.PlayerCombat.currWeapon=(WeaponMelee)this;
 			}
 
-			/*if (objInt().isEnchanted()==true)
-			{
-				int EffectId = GetActualSpellIndex ();
-				switch (EffectId )
-				{
-				case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_Accuracy:
-				case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
-				case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
-					this.AccuracyBonus =  EffectId - 447;
-					break;
-				case SpellEffect.UW1_Spell_Effect_MinorDamage:
-				case SpellEffect.UW1_Spell_Effect_Damage:
-				case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
-				case SpellEffect.UW1_Spell_Effect_MajorDamage:
-				case SpellEffect.UW1_Spell_Effect_GreatDamage:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
-				case SpellEffect.UW1_Spell_Effect_TremendousDamage:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
-					this.DamageBonus = EffectId-455;
-					break;
-				}
-			}*/
 		}
 		return true;
 	}

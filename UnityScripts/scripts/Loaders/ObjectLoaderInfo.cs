@@ -101,7 +101,7 @@ public class ObjectLoaderInfo : UWClass {
 		public int TriggerAction;//Needs to be split into a property.
 		public int TriggerOnce;
 
-		public short[] NPC_DATA=new short[15];
+		public short[] NPC_DATA=new short[19];
 
 		public System.Guid guid;
 

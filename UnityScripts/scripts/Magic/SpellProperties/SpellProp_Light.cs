@@ -6,6 +6,7 @@ public class SpellProp_Light : SpellProp{
 		public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+				damagetype = DamageTypes.light;
 				this.counter=5;//Should counter be a function of the casters casting ability as this drives the stability of the spell.
 				switch(effectId)
 				{//TODO:Review these light values.

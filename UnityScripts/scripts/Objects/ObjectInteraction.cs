@@ -1281,6 +1281,7 @@ public class ObjectInteraction : UWEBase {
 					case 109: //a_mage
 					case 110: //a_ghoul
 					case 115: //a_mage
+					case 120: //A fire elemental
 					case 123: //tybal
 					case 75: //an_imp
 					case 81: //a_mongbat
@@ -1599,7 +1600,7 @@ public class ObjectInteraction : UWEBase {
 						}
 						else
 						{
-							objInt.isquant=0;
+							//objInt.isquant=0;
 							if ((objInt.isEnchanted()) && (objInt.link!=0))
 								{
 									myObj.AddComponent<MagicScroll>();
@@ -1667,11 +1668,11 @@ public class ObjectInteraction : UWEBase {
 						{
 							Boots b = myObj.AddComponent<Boots>();
 							b.UpdateQuality();
-							if ((currObj.item_id==47) && (_RES==GAME_UW1))										
-							{//Dragon skin boots special case when creating from a conversation.
-								currObj.link =  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
-								objInt.link =currObj.link;
-							}
+							//if ((currObj.item_id==47) && (_RES==GAME_UW1))										
+							//{//Dragon skin boots special case when creating from a conversation.
+							//	currObj.link =  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
+							//	objInt.link =currObj.link;
+							//}
 							break;								
 						}
 

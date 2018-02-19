@@ -3,15 +3,8 @@ using System.Collections;
 /// <summary>
 /// Mana regeneration
 /// </summary>
-public class SpellEffectRegenerationMana : SpellEffect {
-		///The amount of man per counter tick.
-		public int DOT; 
+public class SpellEffectRegenerationMana : SpellEffectRegeneration {
 
-		public override void ApplyEffect ()
-		{
-				DOT=Value/counter;
-				base.ApplyEffect ();
-		}
 
 		public override void EffectOverTime ()
 		{

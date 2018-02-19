@@ -172,23 +172,24 @@ public class WeaponMelee : Weapon {
 
 	public override bool LookAt ()
 	{
-				if ( (_RES==GAME_UW1) && (objInt().item_id==10))
+		if ( (_RES==GAME_UW1) && (objInt().item_id==Quest.TalismanSword))
+		{
+				objInt().heading=7;
+				switch(objInt().identity())
 				{
-						switch(objInt().identity())
-						{
-						case ObjectInteraction.IdentificationFlags.Identified:
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(4,StringController.str_you_see_) +  StringController.instance.GetString(4,268));
-							break;
-						default:
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
-							break;
-						}
-						return true;
+				case ObjectInteraction.IdentificationFlags.Identified:
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_see_) +  StringController.instance.GetString(1,268));
+					break;
+				default:
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + OwnershipString());		
+					break;
 				}
-				else
-				{
-					return base.LookAt ();				
-				}
+				return true;
+		}
+		else
+		{
+			return base.LookAt ();				
+		}
 		
 	}
 

@@ -3,9 +3,9 @@ using System.Collections;
 /// <summary>
 /// Player becomes fireproof.
 /// </summary>
-public class SpellEffectFlameproof : SpellEffect {
+public class SpellEffectFlameproof : SpellEffectImmunity {
 
-	public override void ApplyEffect ()
+	/*public override void ApplyEffect ()
 	{
 		UWCharacter.Instance.FireProof=true;
 		base.ApplyEffect ();
@@ -20,6 +20,6 @@ public class SpellEffectFlameproof : SpellEffect {
 	{
 		UWCharacter.Instance.FireProof=false;
 		base.CancelEffect ();
-	}
+	}*/
 
 }

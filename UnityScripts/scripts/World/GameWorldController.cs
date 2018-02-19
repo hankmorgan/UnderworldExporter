@@ -19,7 +19,7 @@ public class GameWorldController : UWEBase {
 
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
-		public enum UW1_LevelNames
+		public enum UW1_LevelNos
 		{
 				EntranceLevel=0,
 				MountainMen=1,
@@ -32,7 +32,19 @@ public class GameWorldController : UWEBase {
 				Ethereal=8
 		};
 
-		public enum UW2_LevelNames
+		public static string[] UW1_LevelNames = new string[]
+				{
+				"Outcast",
+				"Dwarf",
+				"Swamp",
+				"Knight",
+				"Seers",
+				"Tybal",
+				"Abyss",
+				"Void"
+				};
+
+		public enum UW2_LevelNos
 		{
 				Britannia0=0,	
 				Britannia1=1,
@@ -157,7 +169,7 @@ public class GameWorldController : UWEBase {
 
 		public static bool LoadingGame=false;
 		public static bool NavMeshReady=false;
-		private static bool[] NavMeshesReady= new bool[4];
+		public bool[] NavMeshesReady= new bool[4];
 		private static string LevelSignature;
 
 		/// <summary>
@@ -500,7 +512,7 @@ public class GameWorldController : UWEBase {
 			NavMeshesReady[0]=false;
 			NavMeshesReady[1]=false;
 			NavMeshesReady[2]=false;
-			NavMeshesReady[3]=false;
+			//NavMeshesReady[3]=false;
 			while (LoadingGame)
 			{
 					yield return new WaitForSeconds(0.1f);	
@@ -508,8 +520,9 @@ public class GameWorldController : UWEBase {
 			yield return new WaitForSeconds(0.5f);
 			StartCoroutine (GenerateNavmesh (NavMeshLand,0));//Update nav mesh for the land
 			StartCoroutine (GenerateNavmesh (NavMeshWater,1));//For water
-			StartCoroutine (GenerateNavmesh (NavMeshAir,2));//for air
-			StartCoroutine (GenerateNavmesh (NavMeshLava,3));//for lava
+			StartCoroutine (GenerateNavmesh (NavMeshLava,2));//for lava
+			StartCoroutine (GenerateNavmesh (NavMeshAir,3));//for air
+			
 
 			while (! (
 						(NavMeshesReady[0]) && 
@@ -521,7 +534,7 @@ public class GameWorldController : UWEBase {
 			{
 				yield return new WaitForSeconds(0.1f);		
 			}
-			yield return new WaitForSeconds(0.5f);	
+			yield return new WaitForSeconds(1.5f);	
 			NavMeshReady=true;
 			yield return 0;
 		}
@@ -571,7 +584,7 @@ public class GameWorldController : UWEBase {
 						FullReRender=false;
 						NavMeshLand.UpdateNavMesh(NavMeshLand.navMeshData);
 						NavMeshWater.UpdateNavMesh(NavMeshWater.navMeshData);
-						NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
+						//NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
 						NavMeshLava.UpdateNavMesh(NavMeshLava.navMeshData);
 				}
 		}
@@ -1001,7 +1014,7 @@ public class GameWorldController : UWEBase {
 								float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
 
 								UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-								Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
+								//Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
 								UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
 						}
 						startX=-1;startY=-1;
@@ -1013,6 +1026,7 @@ public class GameWorldController : UWEBase {
 								//break;
 						default:
 								ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+								CleanUpMagicProjectiles();
 								break;
 						}
 
@@ -1080,6 +1094,25 @@ public class GameWorldController : UWEBase {
 				startX =newTileX;
 				startY =newTileY;
 				SwitchLevel(newLevelNo);
+		}
+
+
+		static void CleanUpMagicProjectiles()
+		{
+			ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+			for (int i=0; i<=objList.GetUpperBound(0);i++)
+			{
+				if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
+				{
+					if (objList[i].instance!=null)
+					{
+						if (objList[i].instance.GetComponent<MagicProjectile>()!=null)
+						{
+							objList[i].instance.GetComponent<MagicProjectile>().DetonateNow=true;	
+						}
+					}
+				}
+			}
 		}
 
 		// This will regenerate the navigation mesh when called

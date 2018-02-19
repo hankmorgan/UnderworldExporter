@@ -616,6 +616,25 @@ public class UWCombat : Combat {
 					//apply equipment damage to a random piece of armour
 					playerUW.playerInventory.ApplyArmourDamage((short)Random.Range(0, npc.GetArmourDamage()+1));
 				}
+				if (npc.PoisonLevel()>0)
+				{//roll for poisoning.
+					if (!UWCharacter.Instance.isPoisonResistant())
+						{//Player has resistence against poisoning
+							int PoisonRoll = Random.Range(1,30);
+							if (PoisonRoll < npc.PoisonLevel())
+							{
+								int PoisonToAdd = Random.Range(1, npc.PoisonLevel()+1);
+								int newPlayPoison =(short)Mathf.Min(playerUW.play_poison + PoisonToAdd, 15);
+								UWCharacter.Instance.play_poison=(short)newPlayPoison;
+								if (UWCharacter.Instance.poison_timer==0)
+								{
+									UWCharacter.Instance.poison_timer=30f;	
+								}
+							}	
+						}
+
+				}
+
 				MusicController.LastAttackCounter=10.0f; //Ten more seconds of combat music
 				if (ObjectInteraction.PlaySoundEffects)
 				{

@@ -210,7 +210,7 @@ public class ObjectDatLoader : Loader {
 					critterStats[j].Defence=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
 					critterStats[j].Speed=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
 					critterStats[j].Poison=(int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8);//Poison Damage
-					critterStats[j].Category= (int)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8) & 0x1F);//Category
+					critterStats[j].Category= (int)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8) );//& 0x1F);//Category
 					critterStats[j].EquipDamage= (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
 					
 					critterStats[j].AttackChanceToHit=new int[3];

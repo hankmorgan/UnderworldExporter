@@ -237,8 +237,23 @@ public class LightSource : object_base {
 
 	public override bool LookAt()
 	{
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),lightStatusText()) + OwnershipString());
-		return true;
+				if ( (_RES==GAME_UW1) && ((objInt().item_id==Quest.TalismanTaper) || (objInt().item_id==Quest.TalismanTaperLit) ))
+				{
+						objInt().heading=7;
+						switch(objInt().identity())
+						{
+						case ObjectInteraction.IdentificationFlags.Identified:
+						default:
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_see_) +  StringController.instance.GetString(1,262));
+								break;
+						}
+						return true;
+				}
+				else
+				{
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),lightStatusText()) + OwnershipString());
+					return true;
+				}
 	}
 
 		/// <summary>

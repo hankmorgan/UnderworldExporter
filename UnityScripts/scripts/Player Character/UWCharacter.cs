@@ -50,12 +50,13 @@ public class UWCharacter : Character {
 		public bool isLeaping;
 		public int StealthLevel; //The level of stealth the character has.
 		public int Resistance; //DR from spells.
-		public bool FireProof;//Takes no damage from lava
+		//public bool FireProof;//Takes no damage from lava
 		//Character Status
 		public int FoodLevel; //0-255 range.
 		public int Fatigue;   //0-29 range
 		//public bool Poisoned;
 		public short play_poison;
+		public float poison_timer=30f;
 		public bool Paralyzed;
 		public float lavaDamageTimer;//How long before applying lava damage
 		private bool InventoryReady=false;	
@@ -98,17 +99,17 @@ public class UWCharacter : Character {
 	public short MoonGateLevel = 2;//Domain of the mountainmen
 	public float teleportedTimer=0f;
 	public bool JustTeleported=false;
-		/// <summary>
-		/// The dream return position when you are dreaming in the void.
-		/// </summary>
-		public short DreamReturnTileX=0;
-		public short DreamReturnTileY=0;
-		/// <summary>
-		/// The dream return level when you are dreaming in the void.
-		/// </summary>
-		public short DreamReturnLevel=0;
-		public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
-		public Vector3 TeleportPosition;
+	/// <summary>
+	/// The dream return position when you are dreaming in the void.
+	/// </summary>
+	public short DreamReturnTileX=0;
+	public short DreamReturnTileY=0;
+	/// <summary>
+	/// The dream return level when you are dreaming in the void.
+	/// </summary>
+	public short DreamReturnLevel=0;
+	public float DreamWorldTimer=30f;//Not sure what values controls the time spent in dream world
+	public Vector3 TeleportPosition;
 
 
 	public void Awake()
@@ -320,24 +321,18 @@ public class UWCharacter : Character {
 			}				
 		}
 		if( (PlayerInventory.Ready==true) && (InventoryReady=false))
-		{						
-			//if (!LevelSerializer.IsDeserializing)
-			//{
-				if ((playerInventory!=null))
+		{
+			if ((playerInventory!=null))
+			{
+				if (playerInventory.GetCurrentContainer()!=null)
 				{
-					if (playerInventory.GetCurrentContainer()!=null)
-					{
-							playerInventory.Refresh();
-							InventoryReady=true;				
-					}
-				}	
-			//}
+						playerInventory.Refresh();
+						InventoryReady=true;				
+				}
+			}	
 		}
 		if ((WindowDetectUW.WaitingForInput==true) && (Instrument.PlayingInstrument==false))//TODO:Make this cleaner!!
 		{//TODO: This should be in window detect
-			//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
-			//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
-			//UWHUD.instance.InputControl.selected=true;
 			UWHUD.instance.InputControl.Select();
 		}
 		if ((CurVIT<=0) && (GameWorldController.instance.getMus().Death==false))
@@ -364,6 +359,16 @@ public class UWCharacter : Character {
 				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,1.0f,playerCam.transform.localPosition.z);
 				swimSpeedMultiplier=1.0f;
 				SwimTimer=0.0f;
+			}
+		}
+		if (play_poison>0)
+		{
+			poison_timer-=Time.deltaTime;
+			if (poison_timer<=0)
+			{
+				poison_timer=30f;
+				CurVIT = CurVIT - 3;
+				play_poison--;
 			}
 		}
 		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) );
@@ -430,7 +435,7 @@ public class UWCharacter : Character {
 
 		if (TileMap.OnLava==true)
 		{
-			if(!FireProof)
+			if(! isFireProof() )
 			{
 				lavaDamageTimer+=Time.deltaTime;
 				if (lavaDamageTimer>=1.0f)//Take Damage every 1 second.
@@ -1316,16 +1321,144 @@ public class UWCharacter : Character {
 		}
 
 
+		/// <summary>
+		/// Resets the true mana to handle the magic drain effect in tybals layer of UW1
+		/// </summary>
 		public static void ResetTrueMana ()
 		{
-				if (UWCharacter.Instance.PlayerMagic.MaxMana < UWCharacter.Instance.PlayerMagic.TrueMaxMana) 
+			if (UWCharacter.Instance.PlayerMagic.MaxMana < UWCharacter.Instance.PlayerMagic.TrueMaxMana) 
+			{
+				UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerMagic.TrueMaxMana;
+				if (UWCharacter.Instance.PlayerMagic.CurMana == 0) 
 				{
-						UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerMagic.TrueMaxMana;
-						if (UWCharacter.Instance.PlayerMagic.CurMana == 0) 
-						{
-								UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana / 4;
-						}
+					UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana / 4;
 				}
+			}
+		}
+
+
+		/// <summary>
+		/// Checks if the player is poison resistant
+		/// </summary>
+		/// <returns><c>true</c>, if poison resistant, <c>false</c> otherwise.</returns>
+		public bool isPoisonResistant()
+		{				
+			return (this.gameObject.GetComponent<SpellEffectImmunityPoison>() !=null);
+		}
+
+		/// <summary>
+		/// Is the player flameproof
+		/// </summary>
+		/// <returns><c>true</c>, if fire proof was ised, <c>false</c> otherwise.</returns>
+		public bool isFireProof()
+		{
+			return (this.gameObject.GetComponent<SpellEffectFlameproof>() !=null);	
+		}
+
+		/// <summary>
+		///  Is the player magic resistant.
+		/// </summary>
+		/// <returns><c>true</c>, if magic resistant was ised, <c>false</c> otherwise.</returns>
+		public bool isMagicResistant()
+		{
+			return (this.gameObject.GetComponent<SpellEffectMagicResistant>() !=null);		
+		}
+
+		/// <summary>
+		/// Resurrects the player.
+		/// </summary>
+		public static void ResurrectPlayer ()
+		{
+				if (GameWorldController.instance.getMus () != null) 
+				{
+						GameWorldController.instance.getMus ().Death = false;
+						GameWorldController.instance.getMus ().Combat = false;
+						GameWorldController.instance.getMus ().Fleeing = false;
+						MusicController.LastAttackCounter = 0.0f;
+				}
+				UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
+				UWCharacter.Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
+
+				if (GameWorldController.instance.LevelNo != UWCharacter.Instance.ResurrectLevel - 1) 
+				{
+						if (_RES == GAME_UW1)
+						{
+								//Special case for the magic drain effect in UW1
+								UWCharacter.ResetTrueMana ();
+						}
+						GameWorldController.instance.SwitchLevel ((short)(UWCharacter.Instance.ResurrectLevel - 1));
+				}
+				UWCharacter.Instance.gameObject.transform.position = UWCharacter.Instance.ResurrectPosition;
+				UWCharacter.Instance.isSwimming = false;
+				UWCharacter.Instance.play_poison=0;
+				TileMap.OnWater = false;
+				TileMap.OnLava = false;
+				UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
+		}
+
+		/// <summary>
+		/// Gets the spell reduction of damage for magic spell types
+		/// </summary>
+		/// <returns>The spell resistance.</returns>
+		/// <param name="sp">Sp.</param>
+		public int getSpellResistance (SpellProp sp)
+		{
+				int ratio =1;
+				switch ((sp.damagetype))
+				{
+				case SpellProp.DamageTypes.fire:
+						{
+								if (isFireProof())
+								{
+										ratio++;	
+								}
+								if (isMagicResistant())
+								{
+										ratio++;
+								}
+								break;
+						}
+				case SpellProp.DamageTypes.poison:
+						{
+							if (isPoisonResistant())
+							{
+									ratio++;	
+							}
+							if (isMagicResistant())
+							{
+									ratio++;
+							}
+							break;
+						}
+				case SpellProp.DamageTypes.physcial:
+						{
+							if (isMagicResistant())
+							{
+									ratio++;
+							}
+							if(UWCharacter.Instance.Resistance>0)
+							{
+									ratio++;
+							}
+							break;
+						}
+				//case SpellProp.DamageTypes.acid:
+				//case SpellProp.DamageTypes.magic:W				
+				//case SpellProp.DamageTypes.electric:
+				//case SpellProp.DamageTypes.aid:
+				//case SpellProp.DamageTypes.psychic:
+				//case SpellProp.DamageTypes.holy:
+				//case SpellProp.DamageTypes.light:
+				//case SpellProp.DamageTypes.protection:
+				//case SpellProp.DamageTypes.mobility:
+				default:
+						if (isMagicResistant())
+						{
+								ratio++;
+						}
+						break;					
+				}
+				return ratio;
 		}
 
 }

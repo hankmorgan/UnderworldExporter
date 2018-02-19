@@ -12,5 +12,6 @@ public class SpellProp_ElectricBolt : SpellProp {
 		BaseDamage=8;
 		impactFrameStart=46;
 		impactFrameEnd=50;
+		damagetype = DamageTypes.electric;
 	}
 }

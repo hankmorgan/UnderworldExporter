@@ -80,28 +80,10 @@ public class CutsAnimator : GuiBase {
 				case "death_with_sapling"://Player will resurrect,
 				case "cs402.n01":
 					{
-						if (GameWorldController.instance.getMus()!=null)
-						{
-								GameWorldController.instance.getMus().Death=false;
-								GameWorldController.instance.getMus().Combat=false;
-								GameWorldController.instance.getMus().Fleeing=false;
-								MusicController.LastAttackCounter=0.0f;
-						}
-						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
-						UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-						SetAnimation= "Anim_Base";//Clears out the animation.
-						PrevAnimation="x";
-						if (GameWorldController.instance.LevelNo!=UWCharacter.Instance.ResurrectLevel-1)
-						{
-							if (_RES==GAME_UW1)
-							{//Special case for the magic drain effect in UW1
-									UWCharacter.ResetTrueMana ();
-							}
-							GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel-1));
-						}
-						UWCharacter.Instance.gameObject.transform.position=UWCharacter.Instance.ResurrectPosition;
-						UWCharacter.Instance.isSwimming=false;TileMap.OnWater=false;
-						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
+						SetAnimation = "Anim_Base";
+						//Clears out the animation.
+						PrevAnimation = "x";
+						UWCharacter.ResurrectPlayer ();
 						break;
 					}
 
@@ -144,6 +126,7 @@ public class CutsAnimator : GuiBase {
 						break;
 				}
 		}
+
 
 		void PlayAnimFile(string animName)
 		{			

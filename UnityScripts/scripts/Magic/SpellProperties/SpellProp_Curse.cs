@@ -12,5 +12,6 @@ public class SpellProp_Curse : SpellProp {
 		counter=10;
 		impactFrameStart=40;
 		impactFrameEnd=44;
+		damagetype = DamageTypes.psychic;
 	}
 }

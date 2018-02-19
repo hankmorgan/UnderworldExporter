@@ -28,15 +28,6 @@ public class TileMap : Loader {
 		public const short TILE_RIDGE_NW= 16;
 		public const short TILE_RIDGE_NE= 17;
 
-		/*const short NORTH =0;
-		const short SOUTH =1;
-		const short EAST=2;
-		const short WEST=3;
-		const short NORTHWEST=4;
-		const short NORTHEAST=5;
-		const short SOUTHWEST=6;
-		const short SOUTHEAST=7;*/
-
 		/// <summary>
 		/// The tile map size along the x axis
 		/// </summary>
@@ -97,20 +88,15 @@ public class TileMap : Loader {
 		public short SHOCK_CEILING_HEIGHT;
 		public short[] texture_map = new short[272];
 
-	//	private int currRoomIndex;//Used in merging regions together.
 
 		/// <summary>
 		/// Tile info storage class
 		/// </summary>
 		public TileInfo[,] Tiles=new TileInfo[TileMap.TileMapSizeX+1,TileMap.TileMapSizeY+1];
 
+
+
 		/// <summary>
-		/// The height of the max ceiling value for this level. Only used in SHOCK moving platform.
-		/// </summary>
-	//public int GlobalCeilingHeight = 32;
-
-
-	/// <summary>
 		/// The current tile X that the player is in
 		/// </summary>
 		public static short visitTileX;
@@ -149,7 +135,7 @@ public class TileMap : Loader {
 
 		public TileMap(short NewLevelNo)
 		{
-				thisLevelNo=NewLevelNo;
+			thisLevelNo=NewLevelNo;
 		}
 
 
@@ -563,7 +549,7 @@ public class TileMap : Loader {
 										CeilingTexture=(short)i;//texture_map[i];
 									}
 									if (
-												(LevelNo==(int)(GameWorldController.UW2_LevelNames.Ethereal4))
+												(LevelNo==(int)(GameWorldController.UW2_LevelNos.Ethereal4))
 												&& 
 												(i==16)
 												)
@@ -1976,6 +1962,13 @@ public class TileMap : Loader {
 				{//prepopulate with existing file data. Vanilla underworld will crash otherwise
 					TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
 				}
+				/*int[] debugdataorig = new int[19];
+				for (int q=0; q<=debugdataorig.GetUpperBound(0);q++)
+				{
+						debugdataorig[q] = (int)TileMapData[22864+0x8+q];
+				}*/
+
+
 				//return TileMapData;
 
 				long addptr=0;
@@ -2048,44 +2041,49 @@ public class TileMap : Loader {
 
 								if (o<256)			
 								{//Additional npc mobile data.
-										
+									//TODO:make sure every bit is fully copied across when not overwritten
+										/*int[] debugdata = new int[19];
+										for (int q=0; q<=debugdata.GetUpperBound(0);q++)
+										{
+												debugdata[q] = (int)TileMapData[addptr+0x8+q];
+										}
+										if (o==240)
+										{
+												int a=0;
+												a++;
+										}*/
 										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
 
-										TileMapData[addptr+0x9] = (char)(currobj.Projectile_Yaw);
+										TileMapData[addptr+0x9] = (char)((TileMapData[addptr+0x9] & 0xE0) | ((char)(currobj.Projectile_Yaw  & 0x1F )));
 
-										ByteToWrite=( (currobj.npc_gtarg & 0xFF) <<4  |
-												(currobj.npc_goal & 0xF));
+										ByteToWrite=( 
+												((currobj.npc_goal & 0xF))  |
+												((currobj.npc_gtarg & 0xFF) <<4)  |
+												( TileMapData[addptr+0xb+1] & 0xf0 )										
+										);
+
 										TileMapData[addptr+0xb] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0xb+1] = (char)((ByteToWrite>>8) & 0xFF);
 
-									//	TileMapData[addptr+0xb] = (char)( (currobj.npc_gtarg & 0xFF) <<4  |
-										//		(currobj.npc_goal & 0xF));
-
-
+										int val = (int)DataLoader.getValAtAddress(TileMapData,addptr+0xd,16);
+										val = val & 0x1ff0;
 										ByteToWrite=((currobj.npc_attitude & 0x3)<<14) |
 												((currobj.npc_talkedto & 0x1)<<13) |
-												(currobj.npc_level & 0xF);
+												(currobj.npc_level & 0xF)   
+												| val
+												;
+
 										TileMapData[addptr+0xd] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0xd+1] = (char)((ByteToWrite>>8) & 0xFF);
 
-										//TileMapData[addptr+0xd]= (char)
-										//		(
-										//				((currobj.npc_attitude & 0x3)<<14) |
-										//				((currobj.npc_talkedto & 0x1)<<13) |
-										//				(currobj.npc_level & 0xF)
-										//		);
-
-										TileMapData[addptr+0x14] = (char)(currobj.Projectile_Pitch);
+										TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
 
 										ByteToWrite=((currobj.npc_xhome & 0x3F)<<10) |
-												((currobj.npc_yhome & 0x3F)<<4);
+												((currobj.npc_yhome & 0x3F)<<4) |
+												( TileMapData[addptr+0x16] & 0xf  ) ;
 										TileMapData[addptr+0x16] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0x16+1] = (char)((ByteToWrite>>8) & 0xFF);
 										
-									//	TileMapData[addptr+0x16]= (char)(
-									//			((currobj.npc_xhome & 0x3F)<<10) |
-									//			((currobj.npc_yhome & 0x3F)<<4)
-									//	);
 
 										ByteToWrite=(TileMapData[addptr+0x18] & 0xE0)
 												|
@@ -2093,12 +2091,7 @@ public class TileMap : Loader {
 										TileMapData[addptr+0x18] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0x18+1] = (char)((ByteToWrite>>8) & 0xFF);
 
-										//TileMapData[addptr+0x18]= (char)(
-										//		(TileMapData[addptr+0x18] & 0xE0)
-										//		|
-										//		(currobj.npc_heading & 0x1F) 
-										//);
-
+	
 										TileMapData[addptr+0x19]= (char)(
 												((currobj.npc_hunger & 0x3F)) 
 										);
@@ -2377,5 +2370,19 @@ public class TileMap : Loader {
 				}		
 			}
 			return signature;
+		}
+
+
+		public int getTileAgentID(int tileX, int tileY)
+		{
+			if (Tiles[tileX,tileY].isWater)
+			{
+				return GameWorldController.instance.NavMeshWater.agentTypeID;
+			}
+			if (Tiles[tileX,tileY].isLava)
+			{
+				return GameWorldController.instance.NavMeshLava.agentTypeID;
+			}
+			return GameWorldController.instance.NavMeshLand.agentTypeID;
 		}
 }

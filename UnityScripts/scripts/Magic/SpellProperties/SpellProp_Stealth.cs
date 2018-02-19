@@ -6,6 +6,7 @@ public class SpellProp_Stealth : SpellProp {
 	public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+		damagetype = DamageTypes.aid;
 		switch(effectId)
 			{
 			case SpellEffect.UW1_Spell_Effect_Stealth:

@@ -168,4 +168,9 @@ public class Readable : object_base {
 		return "read";
 	}
 
+	public override float GetWeight ()
+	{
+		return GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f;
+	}
+
 }

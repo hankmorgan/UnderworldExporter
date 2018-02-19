@@ -471,15 +471,18 @@ public class WindowDetectUW : WindowDetect {
 
 								//if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
 								if  ( (Event.current.keyCode == KeyBindings.instance.ToggleMouseLook) && (WaitingForInput==false)  && (Event.current.type==EventType.KeyDown))
-								{			
-										if (UWCharacter.Instance.MouseLookEnabled==false)
-										{//Switch to mouse look.
-												SwitchToMouseLook ();
-										}
-										else
+								{		
+										if (UWCharacter.InteractionMode!=UWCharacter.InteractionModeOptions)
 										{
-												SwitchFromMouseLook ();
+												if (UWCharacter.Instance.MouseLookEnabled==false)
+												{//Switch to mouse look.
+														SwitchToMouseLook ();
+												}
+												else
+												{
+														SwitchFromMouseLook ();
 
+												}	
 										}
 								}
 						}

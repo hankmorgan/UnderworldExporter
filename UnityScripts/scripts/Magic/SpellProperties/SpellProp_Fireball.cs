@@ -22,6 +22,7 @@ public class SpellProp_Fireball : SpellProp {
 		impactFrameEnd=25;
 		SecondaryStartFrame=31;
 		SecondaryEndFrame=35;
+		damagetype = DamageTypes.fire;
 	}
 
 

@@ -1235,11 +1235,11 @@ public class Magic : UWEBase {
 		{//Cure Poison
 				//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 				//Get all instances of poison effect on the character and destroy them.
-				SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
-				for (int i =0; i<= seps.GetUpperBound(0);i++)
-				{
-						seps[i].CancelEffect();
-				}
+				//SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
+				//for (int i =0; i<= seps.GetUpperBound(0);i++)
+				//{
+				//		seps[i].CancelEffect();
+				//}
 				//playerUW.Poisoned=false;
 				playerUW.play_poison=0;
 		}
@@ -2092,6 +2092,24 @@ public class Magic : UWEBase {
 				sef.Go ();
 		}
 
+
+		/// <summary>
+		/// Casts the resist poison effect
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect I.</param>
+		/// <param name="EffectSlot">Effect slot.</param>
+		void Cast_ResistPoison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{//Eg resist blows, thick skin etc
+			SpellProp_ResistanceAgainstType resist = new SpellProp_ResistanceAgainstType();
+			resist.init (EffectID,caster);
+			SpellEffectImmunityPoison sef = (SpellEffectImmunityPoison)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectID);
+			sef.counter=resist.counter;
+			sef.Go ();
+		}
+
+
 		/// <summary>
 		/// Casts the mana spells
 		/// </summary>
@@ -2185,6 +2203,27 @@ public class Magic : UWEBase {
 				SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				lep.counter=movement.counter;
 				lep.Go ();
+		}
+
+
+		void Cast_ManaRegen(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{
+			SpellProp_Regen Regen = new SpellProp_Regen();
+			Regen.init (EffectID,caster);				
+			SpellEffect reg = (SpellEffectRegenerationMana)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+			reg.counter=Regen.counter;
+			reg.Value =Regen.BaseDamage;
+			reg.Go ();
+		}
+
+		void Cast_HealthRegen(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{
+			SpellProp_Regen Regen = new SpellProp_Regen();
+			Regen.init (EffectID,caster);				
+			SpellEffect reg = (SpellEffectRegenerationHealth)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+			reg.counter=Regen.counter;
+			reg.Value =Regen.BaseDamage;
+			reg.Go ();
 		}
 
 
@@ -2287,17 +2326,19 @@ public class Magic : UWEBase {
 		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Poison
-				SpellProp_Poison spp = new SpellProp_Poison();
-				spp.init (EffectID,caster);
-				SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
-				sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
-				sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
 				if (caster.name!=UWCharacter.Instance.name)
 				{
-						sep.isNPC=true;
+					SpellProp_Poison spp = new SpellProp_Poison();
+					spp.init (EffectID,caster);
+					SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+					sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
+					sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
+
+					sep.isNPC=true;
+					sep.Go ();
 				}
 				//	
-				sep.Go ();
+
 		}
 
 		/// <summary>
@@ -2535,42 +2576,42 @@ public class Magic : UWEBase {
 				//Check if player is in a certain location.
 				switch(GameWorldController.instance.LevelNo)
 				{
-				case (short)GameWorldController.UW2_LevelNames.Prison7:
+				case (short)GameWorldController.UW2_LevelNos.Prison7:
 						x0=27;y0=31;
 						x1=29;y1=35;
 						WorldBit=0;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Killorn1:
+				case (short)GameWorldController.UW2_LevelNos.Killorn1:
 						x0=28;y0=26;
 						x1=31;y1=30;
 						WorldBit=1;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Ice1:
+				case (short)GameWorldController.UW2_LevelNos.Ice1:
 						x0=18;y0=48;
 						x1=21;y1=51;
 						WorldBit=2;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Talorus0:
+				case (short)GameWorldController.UW2_LevelNos.Talorus0:
 						x0=56;y0=2;
 						x1=60;y1=6;
 						WorldBit=3;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Academy7:
+				case (short)GameWorldController.UW2_LevelNos.Academy7:
 						x0=35;y0=29;
 						x1=37;y1=32;
 						WorldBit=4;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Tomb0:
+				case (short)GameWorldController.UW2_LevelNos.Tomb0:
 						x0=23;y0=39;
 						x1=25;y1=41;
 						WorldBit=5;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Pits0:
+				case (short)GameWorldController.UW2_LevelNos.Pits0:
 						x0=28;y0=59;
 						x1=34;y1=61;
 						WorldBit=6;
 						break;
-				case (short)GameWorldController.UW2_LevelNames.Ethereal4:
+				case (short)GameWorldController.UW2_LevelNos.Ethereal4:
 						x0=29;y0=25;
 						x1=35;y1=31;
 						WorldBit=7;
@@ -3867,7 +3908,6 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_Flameproof:
 				case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
 				case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
-
 						{
 								switch(CastType)
 								{
@@ -3918,9 +3958,27 @@ public class Magic : UWEBase {
 
 						break;
 				case SpellEffect.UW1_Spell_Effect_PoisonResistance:
-						//player only
-						Debug.Log ("Poison Resistance enchantment");
-						SpellResultType=SpellResultNone;
+						{
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ResistPoison(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ResistPoison(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
+						}
 						break;
 				case SpellEffect.UW1_Spell_Effect_Speed:
 				case SpellEffect.UW1_Spell_Effect_Haste:
@@ -3950,37 +4008,83 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
 				case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
 						{
-								switch(CastType)
-								{
-								case SpellRule_Equipable:
-										if (PassiveArrayIndex!=-1)
-										{
-												Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-												SpellResultType=SpellResultPassive;
-										}
-										break;
-								case SpellRule_Consumable:
-								default:
-										if (ActiveArrayIndex!=-1)
-										{
-												Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-												SpellResultType=SpellResultActive;
-										}
-										break;
-								}
-								break;
+							switch(CastType)
+							{
+							case SpellRule_Equipable:
+									if (PassiveArrayIndex!=-1)
+									{
+											Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											SpellResultType=SpellResultPassive;
+									}
+									break;
+							case SpellRule_Consumable:
+							default:
+									if (ActiveArrayIndex!=-1)
+									{
+											Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											SpellResultType=SpellResultActive;
+									}
+									break;
+							}
+							break;
 						}
 
 				case SpellEffect.UW1_Spell_Effect_FreezeTime:
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 						{
-								switch(CastType)
+							switch(CastType)
+							{
+							case SpellRule_Equipable:
+									if (PassiveArrayIndex!=-1)
+									{
+										Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+										SpellResultType=SpellResultPassive;
+									}
+									break;
+							case SpellRule_Consumable:
+							default:
+									if (ActiveArrayIndex!=-1)
+									{
+										Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+										SpellResultType=SpellResultActive;
+									}
+									break;
+							}
+							break;
+						}
+						break;
+				case SpellEffect.UW1_Spell_Effect_Regeneration:
+						{
+							switch(CastType)
+							{
+							case SpellRule_Equipable:
+									if (PassiveArrayIndex!=-1)
+									{
+											Cast_HealthRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											SpellResultType=SpellResultPassive;
+									}
+									break;
+							case SpellRule_Consumable:
+							default:
+									if (ActiveArrayIndex!=-1)
+									{
+											Cast_HealthRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											SpellResultType=SpellResultActive;
+									}
+									break;
+							}
+							break;
+						}
+						break;
+				case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
+						{
+							switch(CastType)
 								{
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ManaRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3988,7 +4092,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ManaRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3996,19 +4100,8 @@ public class Magic : UWEBase {
 								break;
 						}
 						break;
-				case SpellEffect.UW1_Spell_Effect_Regeneration:
-						//player only
-						Debug.Log ("Regen enchantment");
-						SpellResultType=SpellResultNone;
-						break;
-				case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
-						//player only
-						Debug.Log ("mana regen enchantment");
-						SpellResultType=SpellResultNone;
-						break;
 				case SpellEffect.UW1_Spell_Effect_MazeNavigation:
 						//player only
-						//Debug.Log ("Maze Navigation enchantment");
 						if (PassiveArrayIndex!=-1)
 						{
 								Cast_MazeNavigation(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
@@ -4793,8 +4886,6 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt02:
 				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt03:
 				case SpellEffect.UW2_Spell_Effect_Restoration:
-				case SpellEffect.UW2_Spell_Effect_Regeneration_alt01:
-				case SpellEffect.UW2_Spell_Effect_Regeneration:
 				case SpellEffect.UW2_Spell_Effect_LesserHeal_alt05:
 				case SpellEffect.UW2_Spell_Effect_Heal_alt04:
 				case SpellEffect.UW2_Spell_Effect_GreaterHeal_alt04:
@@ -4804,6 +4895,30 @@ public class Magic : UWEBase {
 						SpellResultType=SpellResultNone;
 						break;
 					}
+				case SpellEffect.UW2_Spell_Effect_Regeneration_alt01:
+				case SpellEffect.UW2_Spell_Effect_Regeneration:
+					{
+							switch(CastType)
+							{
+							case SpellRule_Equipable:
+									if (PassiveArrayIndex!=-1)
+									{
+											Cast_HealthRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											SpellResultType=SpellResultPassive;
+									}
+									break;
+							case SpellRule_Consumable:
+							default:
+									if (ActiveArrayIndex!=-1)
+									{
+											Cast_HealthRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											SpellResultType=SpellResultActive;
+									}
+									break;
+							}
+							break;
+					}
+					break;
 
 				case SpellEffect.UW2_Spell_Effect_Invisibilty:
 				case SpellEffect.UW2_Spell_Effect_Stealth:
@@ -4985,10 +5100,6 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt01:
 				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt02:
 				case SpellEffect.UW2_Spell_Effect_ManaBoost_alt03:
-				case SpellEffect.UW2_Spell_Effect_RegainMana:
-				case SpellEffect.UW2_Spell_Effect_RegainMana_alt01:
-				case SpellEffect.UW2_Spell_Effect_RegainMana_alt02:
-				case SpellEffect.UW2_Spell_Effect_RegainMana_alt03:
 				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt04:
 				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt05:
 				case SpellEffect.UW2_Spell_Effect_RestoreMana_alt06:
@@ -5006,11 +5117,32 @@ public class Magic : UWEBase {
 					}
 
 				case SpellEffect.UW2_Spell_Effect_ManaRegeneration:
+				case SpellEffect.UW2_Spell_Effect_RegainMana:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt01:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt02:
+				case SpellEffect.UW2_Spell_Effect_RegainMana_alt03:
 						{
-							Debug.Log("mana regen");
-							SpellResultType=SpellResultNone;
-							break;		
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ManaRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ManaRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
+						break;
 
 				case SpellEffect.UW2_Spell_Effect_MapArea:
 				case SpellEffect.UW2_Spell_Effect_MapArea_alt01:

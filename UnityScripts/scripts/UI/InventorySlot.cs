@@ -25,8 +25,10 @@ public class InventorySlot : GuiBase {
 
 		public void BeginDrag()
 		{
-			if ((WindowDetectUW.WaitingForInput) || (ConversationVM.InConversation))
-			{return;}
+			if ((UWCharacter.Instance.isRoaming==true) || (Quest.instance.InDreamWorld) || (UWCharacter.InteractionMode==UWCharacter.InteractionModeOptions))
+			{//No inventory use
+					return;
+			}
 			if ( UWCharacter.Instance.playerInventory.ObjectInHand =="")
 			{
 				//InteractionModeValue=UWCharacter.InteractionMode;
@@ -83,7 +85,7 @@ public class InventorySlot : GuiBase {
 
 	void ClickEvent(int pointerID)
 	{
-		if ((UWCharacter.Instance.isRoaming==true) || (Quest.instance.InDreamWorld))
+		if ((UWCharacter.Instance.isRoaming==true) || (Quest.instance.InDreamWorld) || (UWCharacter.InteractionMode==UWCharacter.InteractionModeOptions))
 		{//No inventory use while using wizard eye.
 				return;
 		}

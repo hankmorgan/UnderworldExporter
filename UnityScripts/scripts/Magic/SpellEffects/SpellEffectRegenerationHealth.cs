@@ -3,15 +3,7 @@ using System.Collections;
 /// <summary>
 /// Regenerates Health
 /// </summary>
-public class SpellEffectRegenerationHealth : SpellEffect {
-	///The amount of health per counter tick.
-	public int DOT; 
-
-	public override void ApplyEffect ()
-	{
-		DOT=Value/counter;
-		base.ApplyEffect ();
-	}
+public class SpellEffectRegenerationHealth : SpellEffectRegeneration {
 
 	public override void EffectOverTime ()
 	{

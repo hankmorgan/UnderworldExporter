@@ -29,6 +29,7 @@ public class ShrineLava : UWEBase {
 				case Quest.TalismanShield:
 				case Quest.TalismanSword:
 				case Quest.TalismanTaper:
+				case Quest.TalismanTaperLit:
 				case Quest.TalismanWine:	
 						Quest.instance.TalismansRemaining--;
 						break;

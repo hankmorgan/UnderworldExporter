@@ -72,7 +72,7 @@ public class SpellProp_SummonMonster : SpellProp {
 		public override void init(int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
-		
+		damagetype = DamageTypes.aid;
 		//Pick a random npc from the list of npcs
 		RndNPC=NPCs[Random.Range(0,NPCs.GetUpperBound(0))];
 	}

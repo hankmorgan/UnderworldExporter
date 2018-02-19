@@ -6,6 +6,7 @@ public class SpellProp_Heal : SpellProp {
 	public override void init (int effectId, GameObject SpellCaster)
 	{
 		base.init (effectId,SpellCaster);
+		damagetype = DamageTypes.aid;
 				//TODO:Heal affected by caster ability
 				switch(_RES)
 				{

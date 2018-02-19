@@ -129,6 +129,7 @@ public class Quest : UWEBase {
 		/// Item id for the Taper of sacrifice
 		/// </summary>
 		public const int TalismanTaper=147;
+		public const int TalismanTaperLit=151;
 		/// <summary>
 		/// Item Id for the cup of wonder.
 		/// </summary>
