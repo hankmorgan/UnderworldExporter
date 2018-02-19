@@ -44,6 +44,11 @@ public class Palette : UWClass {
 	/// <returns>The image.</returns>
 	static public Texture2D toImage(Palette pal)
 	{
+				if (pal==null)
+				{
+						Debug.Log("Null Palette in cyclePalette");
+						return null;
+				}
 		//int pixelcount=0;
 		int height = 1; int width = 256;
 		Texture2D image = new Texture2D(width, height,TextureFormat.ARGB32,false);
@@ -78,6 +83,11 @@ public class Palette : UWClass {
 	public static void cyclePalette(Palette pal, int Start, int length )
 	{
 		/*Shifts the palette values around between the start and start+length. Used for texture animations and special effects*/
+				if (pal==null)
+				{
+						Debug.Log("Null Palette in cyclePalette");
+						return;
+				}
 		byte firstRed = pal.red[Start];
 		byte firstGreen = pal.green[Start];
 		byte firstBlue = pal.blue[Start];

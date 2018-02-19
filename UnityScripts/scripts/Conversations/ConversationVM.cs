@@ -2203,7 +2203,6 @@ public class ConversationVM : UWEBase {
 				PlayerInput.text=">";
 				InputField inputctrl=UWHUD.instance.InputControl;
 				inputctrl.gameObject.SetActive(true);
-				//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
 				inputctrl.contentType= InputField.ContentType.Standard;
@@ -2213,7 +2212,6 @@ public class ConversationVM : UWEBase {
 				yield return StartCoroutine(say_op (PlayerTypedAnswer,PC_SAY));
 				inputctrl.text="";
 				UWHUD.instance.MessageScroll.Clear ();
-				//stack.StringMemory=PlayerTypedAnswer;
 				stack.result_register= StringController.instance.AddString(conv[currConv].StringBlock,PlayerTypedAnswer);
 		}
 
@@ -3527,7 +3525,12 @@ public class ConversationVM : UWEBase {
 				//   id=002a name="remove_talker" ret_type=void
 				//parameters:   none
 				//		description:  removes npc the player is talking to (?)
+				if (npc.Agent!=null)
+				{
+						npc.Agent.enabled=false;
+				}
 				npc.gameObject.transform.position = UWCharacter.Instance.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+				//npc.objInt().objectloaderinfo.InUseFlag=0;
 		}
 
 

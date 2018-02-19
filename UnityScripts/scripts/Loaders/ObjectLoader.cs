@@ -1273,18 +1273,9 @@ public class ObjectLoader : Loader {
 				offY = (y*BrushY) + ((objList[index].y) * (BrushY / ResolutionXY));
 
 				float zpos = objList[index].zpos;
-				if (_RES!=GAME_SHOCK)
-				{
-					//if ((objList[index].item_id >= 328) && (objList[index].item_id <= 333))
-					//{//Open doors need to be adjusted down?
-						//zpos -= 24f;
-					//}	
-				}
-				//if (game==Loader.GAME_SHOCK)
-				//{
-				//	zpos= zpos- GameWorldController.instance.ShockObjProp.properties[objList[index].item_id].Offset;
-				//}
+
 				float ceil = tileMap.CEILING_HEIGHT;
+
 				offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
 				if ((game !=Loader.GAME_SHOCK) && (x<64) && (y<64))
 				{//Adjust zpos by a fraction for objects on sloped tiles.
@@ -1416,16 +1407,16 @@ public class ObjectLoader : Loader {
 												switch (game)
 												{
 												case Loader.GAME_SHOCK:
-														if (objList[index].x == 0){	offX = offX + 0.02f;	}
-														if (objList[index].x == 128){offX = offX - 0.02f;}
-														if (objList[index].y == 0){offY = offY + 0.02f;}
-														if (objList[index].y == 128){offY = offY - 0.02f;}
+														if (objList[index].x == 0){	offX = offX + 4f;	}
+														if (objList[index].x == 128){offX = offX - 4f;}
+														if (objList[index].y == 0){offY = offY + 4f;}
+														if (objList[index].y == 128){offY = offY - 3f;}
 														break;
 												default:
-														if (objList[index].x == 0){offX = offX + 0.02f;}
-														if (objList[index].x == 7){offX = offX - 0.02f;}
-														if (objList[index].y == 0){offY = offY + 0.02f;}
-														if (objList[index].y == 7){offY = offY - 0.02f;}
+														if (objList[index].x == 0){offX = offX + 4f;}
+														if (objList[index].x == 7){offX = offX - 4f;}
+														if (objList[index].y == 0){offY = offY + 4f;}
+														if (objList[index].y == 7){offY = offY - 4f;}
 														break;
 												}
 										}		
@@ -1815,6 +1806,10 @@ public class ObjectLoader : Loader {
 					}
 					else
 					{//the previous items next becomes this.
+										if(itemObjInt==null)
+										{
+												Debug.Log("null object on " + i + " for container " + cn.name);
+										} 
 						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
 						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
 						itemObjInt.next=0;//end for now.

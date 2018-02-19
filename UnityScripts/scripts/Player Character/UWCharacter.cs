@@ -485,10 +485,14 @@ public class UWCharacter : Character {
 	}
 
 
+		/// <summary>
+		/// Processes a pickup of quantity event
+		/// </summary>
+		/// <param name="quant">Quant.</param>
 	public void OnSubmitPickup(int quant)
 	{
 
-		InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
+		InputField inputctrl =UWHUD.instance.InputControl;
 
 		Time.timeScale=1.0f;
 		inputctrl.gameObject.SetActive(false);
@@ -496,7 +500,6 @@ public class UWCharacter : Character {
 		inputctrl.text="";
 		inputctrl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
-		//int quant= int.Parse(inputctrl.text);
 		if (quant==0)
 		{//cancel
 			QuantityObj=null;
@@ -511,7 +514,6 @@ public class UWCharacter : Character {
 				{
 				//split the obj.
 
-
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(QuantityObj.item_id,QuantityObj.quality,QuantityObj.owner,quant,256);
 				newobjt.is_quant=QuantityObj.isquant;
 				newobjt.flags=QuantityObj.flags;
@@ -522,10 +524,6 @@ public class UWCharacter : Character {
 				newobjt.InUseFlag=1;
 				QuantityObj.link-=quant;
 
-				//GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
-				//Split.GetComponent<ObjectInteraction>().link =quant;
-				//Split.name = Split.name+"_"+summonCount++;
-				//QuantityObj.link=QuantityObj.link-quant;
 				Pickup (Split, playerInventory);
 				ObjectInteraction.Split (Split,QuantityObj);
 				QuantityObj=null;//Clear out to avoid weirdness.
@@ -719,18 +717,13 @@ public class UWCharacter : Character {
 								//Debug.Log("attempting to pick up a quantity");
 
 								UWHUD.instance.MessageScroll.Set ("Move how many?");
-								InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.GetComponent<UIInput>();
+								InputField inputctrl =UWHUD.instance.InputControl;
 								inputctrl.gameObject.SetActive(true);
-								//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
 								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputCharacterQty;
 
+								inputctrl.text=objPicked.GetQty().ToString();//"1";
 
-								//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
-																//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
-								inputctrl.text="1";
-																//TODO: Fix me inputctrl.label.text="1";
-																//TODO: Fix me inputctrl.selected=true;
 								inputctrl.Select();
 								QuantityObj=objPicked;	
 								Time.timeScale=0.0f;

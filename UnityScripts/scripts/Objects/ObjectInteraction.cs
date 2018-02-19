@@ -264,7 +264,7 @@ public class ObjectInteraction : UWEBase {
 		/// The inventory slot that the object is in.
 		/// </summary>
 		public short inventorySlot=-1;
-		public short InUseFlag;
+	//	public short InUseFlag;
 
 		[Header("Positioning")]
 		public short tileX;	//Position of the object on the tilemap
@@ -1070,6 +1070,22 @@ public class ObjectInteraction : UWEBase {
 					)
 					&& 
 					(mergingInto.quality==mergingFrom.quality)
+					&& 
+						(
+							(  //Only merge keys if they have the same owner
+								(mergingInto.GetItemType() == ObjectInteraction.KEY)
+								&& 
+								(mergingFrom.GetItemType() == ObjectInteraction.KEY)
+								&&
+								(mergingInto.owner==mergingFrom.owner)  
+							)
+							||
+							(
+								(mergingInto.GetItemType() != ObjectInteraction.KEY)
+								||
+								(mergingFrom.GetItemType() != ObjectInteraction.KEY)
+							)
+						)
 			);
 		}
 

@@ -71,7 +71,7 @@ public class Shrine : Model3D {
 				WaitingForInput=true;
 				if (inputctrl==null)
 				{
-					inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
+					inputctrl =UWHUD.instance.InputControl;
 				}
 				UWHUD.instance.MessageScroll.Set("Chant the mantra");
 				inputctrl.gameObject.SetActive(true);

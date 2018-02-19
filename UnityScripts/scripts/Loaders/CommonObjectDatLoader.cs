@@ -64,7 +64,7 @@ public class CommonObjectDatLoader : Loader {
 				char[] comobj_dat;
 				//int add_ptr;
 				if (DataLoader.ReadStreamFile(BasePath+ sep + "DATA" + sep + "COMOBJ.DAT",out comobj_dat))
-							{
+						{
 						int len= (comobj_dat.GetUpperBound(0)-2)/11;
 						properties = new CommonObjectProperties[len];
 						int addressPtr = 2;//SKip first two bytes
@@ -95,6 +95,10 @@ public class CommonObjectDatLoader : Loader {
 						}
 
 					
+				}
+				else
+				{
+						return;
 				}
 
 

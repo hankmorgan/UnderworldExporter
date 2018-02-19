@@ -244,7 +244,7 @@ public class InventorySlot : GuiBase {
 
 			if ((SlotCategory != objInt.GetItemType()) && (SlotCategory!=-1))
 				{//Slot is not a general use one andThis item type does not go in this slot.
-					Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory + " at " + this.name);
+					//Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory + " at " + this.name);
 					DoNotPickup=true;
 				}
 
@@ -454,27 +454,18 @@ public class InventorySlot : GuiBase {
 							{
 								UWHUD.instance.MessageScroll.Set ("Move how many?");
 							}
-							//UWHUD.instance.MessageScroll.Set ("Move how many?");
-							InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.GetComponent<UIInput>();
-							//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+							InputField inputctrl =UWHUD.instance.InputControl;
+
 							inputctrl.gameObject.SetActive(true);
-						//	UIInput inputctrl =UWHUD.instance.InputControl;
-							inputctrl.text="1";
-														//TODO: Fix me inputctrl.label.text="1";
-														//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
-							//inputctrl.onEndEdit.RemoveAllListeners();
-							//inputctrl.onEndEdit.AddListener(delegate {
-							//		this.OnSubmitPickup();	
-							//} );
+							inputctrl.text=objIntUsedOn.GetQty().ToString();//"1";
+
 
 							inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 							inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputInventoryQty;
 
 							inputctrl.contentType= InputField.ContentType.IntegerNumber;
-
-														//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
-														//TODO: Fix me inputctrl.selected=true;
 							inputctrl.Select();
+
 							WindowDetect.WaitingForInput=true;
 							Time.timeScale=0.0f;
 							QuantityObj=ObjectUsedOn;
@@ -488,15 +479,9 @@ public class InventorySlot : GuiBase {
 
 	public void OnSubmitPickup(int quant)
 	{
-		//Debug.Log ("Value summited to slot");
-		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
+
 		InputField inputctrl =UWHUD.instance.InputControl;
-		//Debug.Log (inputctrl.text);
-		/*int quant=0;
-		if (int.TryParse(inputctrl.text,out quant)==false)
-		{
-			quant=0;
-		}*/
+
 		inputctrl.text="";
 		inputctrl.gameObject.SetActive(false);
 		WindowDetect.WaitingForInput=false;
@@ -508,9 +493,6 @@ public class InventorySlot : GuiBase {
 		}
 		else
 		{
-			//UWHUD.instance.MessageScroll.SetAnchorX(0.06f);
-			//UWHUD.instance.MessageScrollTemp.SetAnchorX(1.00f);
-			//UWHUD.instance.MessageScroll.Set(InventorySlot.TempLookAt);
 			UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
 		}
 

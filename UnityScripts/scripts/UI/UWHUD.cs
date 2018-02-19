@@ -32,6 +32,7 @@ public class UWHUD : HUD {
 		public GameObject MessageLogScrollEdgeRight;
 		public GameObject MessageScrollBackground;
 		public GameObject MessageScrollDrag;
+		public Text ErrorText;
 
 	[Header("Main Windows")]
 	public GameObject main_windowUW1;//The immersive heads up display for UW1

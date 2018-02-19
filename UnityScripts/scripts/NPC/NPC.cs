@@ -958,7 +958,7 @@ public class NPC : MobileObject {
 				switch (AttackState) {
 				case AttackStages.AttackPosition:
 						//if (Room () == UWCharacter.Instance.room) {
-						if (true){
+						if (gtarg!=null){
 								Vector3 AB = this.transform.position - gtarg.transform.position;
 								if (AB.magnitude > 1f) {
 										if (AB.magnitude < 6f) {

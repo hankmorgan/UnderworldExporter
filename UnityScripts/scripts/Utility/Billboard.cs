@@ -13,7 +13,8 @@ public class Billboard : MonoBehaviour
 				
 			if (UWCharacter.Instance.dir!=Vector3.zero)
 				{
-				transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dir,Vector3.up);						
+				//transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dir,Vector3.up);		
+				transform.rotation = Quaternion.LookRotation(UWCharacter.Instance.dirForNPC);						
 				}
 			
 		//based on http://answers.unity3d.com/questions/524087/tweaking-sprite-billboard.html

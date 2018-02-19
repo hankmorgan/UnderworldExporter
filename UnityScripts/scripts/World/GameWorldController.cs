@@ -24,7 +24,7 @@ public class GameWorldController : UWEBase {
 				EntranceLevel=0,
 				MountainMen=1,
 				Swamp=2,
-				Trolls=3,
+				Knights=3,
 				Catacombs=4,
 				Seers=5,
 				Tybal=6,
@@ -38,6 +38,7 @@ public class GameWorldController : UWEBase {
 				"Dwarf",
 				"Swamp",
 				"Knight",
+				"Tombs",
 				"Seers",
 				"Tybal",
 				"Abyss",
@@ -1306,6 +1307,7 @@ public class GameWorldController : UWEBase {
 		{
 				//Add item to a free slot on the item list and point the instance back to this.
 				ObjectLoader.AssignObjectToList(ref obj);
+				obj.next=0;
 				obj.UpdatePosition();
 				obj.GetComponent<object_base>().MoveToWorldEvent();
 				if (ConversationVM.InConversation)
