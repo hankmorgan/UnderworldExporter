@@ -289,8 +289,8 @@ public class NPC : MobileObject {
 								case 73://vampire bat
 								case 75://imp
 								case 81://mongbat
-								case 100://ghost
-								case 101://ghost
+								//case 100://ghost
+								//case 101://ghost
 								case 102://gazer
 								case 122://wisp
 								case 123://tybal
@@ -777,7 +777,7 @@ public class NPC : MobileObject {
 						&& 
 						(DistanceToGtarg <= UWCharacter.Instance.DetectionRange)
 						&&
-						(npc_gtarg<=1)
+						(npc_gtarg<=3)
 					) 
 					{
 						npc_goal = (short)npc_goals.npc_goal_attack_5;
@@ -1105,7 +1105,7 @@ public class NPC : MobileObject {
 		void UpdateGTarg ()
 		{
 				//Update GTarg
-				if (npc_gtarg <= 1)//PC
+				if (npc_gtarg <= 5)//PC
 				{
 						gtargName = "_Gronk";
 						if (gtarg == null) {
@@ -1215,11 +1215,14 @@ public class NPC : MobileObject {
 										{
 												if (AreNPCSAllied(this,Col.gameObject.GetComponent<NPC>()))
 												{
-														Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
-														Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
-														Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
-														Col.gameObject.GetComponent<NPC>().gtargName=gtarg.name;
-														Col.gameObject.GetComponent<NPC>().npc_goal=(short)npc_goals.npc_goal_attack_5;
+														if (Col.gameObject.GetComponent<NPC>().CanGetAngry())
+														{
+																Col.gameObject.GetComponent<NPC>().npc_attitude=0;//Make the npc angry with the player.
+																Col.gameObject.GetComponent<NPC>().npc_gtarg=1;
+																Col.gameObject.GetComponent<NPC>().gtarg=UWCharacter.Instance.gameObject;
+																Col.gameObject.GetComponent<NPC>().gtargName=gtarg.name;
+																Col.gameObject.GetComponent<NPC>().npc_goal=(short)npc_goals.npc_goal_attack_5;	
+														}
 												}
 										}
 								}
@@ -1236,6 +1239,25 @@ public class NPC : MobileObject {
 				}
 
 				ApplyAttack(damage);
+				return true;
+		}
+
+		/// <summary>
+		/// Determines whether this instance can get angry with the player
+		/// </summary>
+		/// <returns><c>true</c> if this instance can get angry; otherwise, <c>false</c>.</returns>
+		bool CanGetAngry()
+		{
+				switch(_RES)
+				{
+				case GAME_UW1:
+						if (npc_whoami==27)//Garamon will be friendly always as long as you don't directly attack him
+						{
+								return false;
+						}
+						break;
+				}
+
 				return true;
 		}
 
@@ -2001,31 +2023,43 @@ public class NPC : MobileObject {
 				{
 						if (Agent!=null)
 						{
-								NavMeshPath path = new NavMeshPath();
-								if (NavMesh.CalculatePath(this.transform.position, gtarg.transform.position, Agent.areaMask , path ))
+								if ((Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID))// || ((Agent.agentTypeID == GameWorldController.instance.NavMeshWater.agentTypeID)))
 								{
-										//Taken from
-										//https://forum.unity.com/threads/getting-the-distance-in-nav-mesh.315846/
-										float lng = 0.0f;
-
-										if ( path.status != NavMeshPathStatus.PathInvalid )
-										{
-												if (path.status == NavMeshPathStatus.PathPartial)
-												{//Add a penalty for incomplete routes
-														lng = 8f;
-												}
-
-												for ( int i = 1; i < path.corners.Length; ++i )
-												{
-														lng += Vector3.Distance( path.corners[i-1], path.corners[i] );
-												}
-										}
-
-										return lng;	
+										return (this.transform.position - gtarg.transform.position).magnitude;
 								}
+								else
+								{
+										NavMeshPath path = new NavMeshPath();
+										if (NavMesh.CalculatePath(this.transform.position, gtarg.transform.position, Agent.areaMask , path ))
+										{
+												//Taken from
+												//https://forum.unity.com/threads/getting-the-distance-in-nav-mesh.315846/
+												float lng = 0.0f;
+
+												if ( path.status != NavMeshPathStatus.PathInvalid )
+												{
+														if (path.status == NavMeshPathStatus.PathPartial)
+														{//Add a penalty for incomplete routes
+																lng = 8f;
+														}
+
+														for ( int i = 1; i < path.corners.Length; ++i )
+														{
+																lng += Vector3.Distance( path.corners[i-1], path.corners[i] );
+														}
+												}
+
+												return lng;	
+										}
+								}
+
+						}
+						else
+						{
+								return (this.transform.position - gtarg.transform.position).magnitude;//if no ai etc 			
 						}
 				}
+				return 1000f;//If no gtarg
 
-				return 1000;//if no ai etc 
 		}
 }
