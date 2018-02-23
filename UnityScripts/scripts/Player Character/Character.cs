@@ -58,6 +58,13 @@ public class Character : UWEBase {
 	/// </summary>
 	public float DetectionRange=6.0f;
 
+
+	/// <summary>
+	/// The base engagement range.
+	/// How close do you need to be to an npc for them to want to track you down
+	/// </summary>
+	public float BaseEngagementRange = 8;
+
 	public static bool Invincible;
 
 	//For controlling switching between mouse look and interaction

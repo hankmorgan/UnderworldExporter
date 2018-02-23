@@ -167,7 +167,7 @@ public class NPC : MobileObject {
 		float targetBaseOffset=0f;
 		float startBaseOffset=0f;
 		float floatTime =0f;
-
+		public float DistanceToGtarg;
 
 
 
@@ -763,14 +763,29 @@ public class NPC : MobileObject {
 				if (!Agent.isOnNavMesh){return;}
 				//if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
 				if (!GameWorldController.NavMeshReady){return;}
-				//If the player comes close and I'm hostile. Make sure I go to combat mode.
-				if ((npc_attitude == 0) && (Vector3.Distance (this.transform.position, UWCharacter.Instance.transform.position) <= UWCharacter.Instance.DetectionRange)) {
+				DistanceToGtarg = getDistanceToGtarg();
+
+				//if ((npc_attitude == 0) && (Vector3.Distance (this.transform.position, UWCharacter.Instance.transform.position) <= UWCharacter.Instance.DetectionRange)) {
+				if (//If the player comes close and I'm hostile. Make sure I go to combat mode.
+						(npc_attitude == 0)
+						&& 
+						(
+								(npc_goal!=(short)npc_goals.npc_goal_attack_5)
+								&&
+								(npc_goal!=(short)npc_goals.npc_goal_attack_9)
+						)
+						&& 
+						(DistanceToGtarg <= UWCharacter.Instance.DetectionRange)
+						&&
+						(npc_gtarg<=1)
+					) 
+					{
 						npc_goal = (short)npc_goals.npc_goal_attack_5;
 						//Attack player
 						npc_gtarg = 1;
-				}
+					}
 				if (targetBaseOffset!= Agent.baseOffset)
-				{
+				{//Raise or lower flying agents
 						floatTime +=Time.deltaTime;
 						Agent.baseOffset = Mathf.Lerp(startBaseOffset, targetBaseOffset, floatTime );
 				}
@@ -780,7 +795,6 @@ public class NPC : MobileObject {
 				case npc_goals.npc_goal_want_to_talk:
 						{
 								//I just want to talk to you
-								//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
 								AnimRange= NPC.AI_RANGE_IDLE;
 								if ((UWCharacter.Instance.isRoaming == false) && (ConversationVM.InConversation == false)) 
 								{
@@ -806,8 +820,6 @@ public class NPC : MobileObject {
 								}
 								break;
 						}
-						//ai.AI.WorkingMemory.SetItem<int> ("state", AI_STATE_STANDING);
-						//break;
 				case npc_goals.npc_goal_goto_1:	//Go to gtarg
 				case npc_goals.npc_goal_wander_2://Wander randomly	
 				case npc_goals.npc_goal_wander_4:
@@ -939,7 +951,7 @@ public class NPC : MobileObject {
 								npc_goal = (short)npc_goals.npc_goal_stand_still_0;
 						}
 				}
-				if ((DestTileX != CurTileX) && (DestTileY != CurTileY)) {
+				if ((DestTileX != CurTileX) || (DestTileY != CurTileY)) {
 						//I need to move to this tile.
 						AnimRange = NPC.AI_RANGE_MOVE;
 						AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
@@ -954,14 +966,14 @@ public class NPC : MobileObject {
 		}
 
 		void NPCCombatUpdate ()
-		{
+		{				
 				switch (AttackState) {
 				case AttackStages.AttackPosition:
 						//if (Room () == UWCharacter.Instance.room) {
 						if (gtarg!=null){
 								Vector3 AB = this.transform.position - gtarg.transform.position;
-								if (AB.magnitude > 1f) {
-										if (AB.magnitude < 6f) {
+								if (DistanceToGtarg > 1f) {
+										if (DistanceToGtarg < 6f) {//NPC is close to target.
 												if (MagicAttack) {
 														AgentStand ();
 														transform.LookAt (gtarg.transform.position);
@@ -983,12 +995,17 @@ public class NPC : MobileObject {
 												}
 										}
 										else {//Player is not close enough for an attach.
-												if (AB.magnitude < 14f + (UWCharacter.Instance.DetectionRange)) 
+												if (
+														(DistanceToGtarg < UWCharacter.Instance.BaseEngagementRange + UWCharacter.Instance.DetectionRange) 
+														||
+														((_RES==GAME_UW1) && (objInt().item_id==124))//Slasher will never give up.
+													)
 													{//I'm close enough to still want to hunt you down.
 														AgentMoveToGtarg ();
 													}
 												else
 													{
+														npc_goal = (short)(npc_goals.npc_goal_wander_8);
 														AgentStand();
 													}
 										}
@@ -1975,5 +1992,40 @@ public class NPC : MobileObject {
 		public short PoisonLevel()
 		{
 			return (short)GameWorldController.instance.objDat.critterStats[objInt().item_id-64].Poison;
+		}
+
+
+		public float getDistanceToGtarg()
+		{
+				if (gtarg!=null)
+				{
+						if (Agent!=null)
+						{
+								NavMeshPath path = new NavMeshPath();
+								if (NavMesh.CalculatePath(this.transform.position, gtarg.transform.position, Agent.areaMask , path ))
+								{
+										//Taken from
+										//https://forum.unity.com/threads/getting-the-distance-in-nav-mesh.315846/
+										float lng = 0.0f;
+
+										if ( path.status != NavMeshPathStatus.PathInvalid )
+										{
+												if (path.status == NavMeshPathStatus.PathPartial)
+												{//Add a penalty for incomplete routes
+														lng = 8f;
+												}
+
+												for ( int i = 1; i < path.corners.Length; ++i )
+												{
+														lng += Vector3.Distance( path.corners[i-1], path.corners[i] );
+												}
+										}
+
+										return lng;	
+								}
+						}
+				}
+
+				return 1000;//if no ai etc 
 		}
 }
