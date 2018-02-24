@@ -99,7 +99,7 @@ public class Instrument : object_base {
 					{									
 						int tileX=TileMap.visitTileX;
 						int tileY=TileMap.visitTileY;
-						if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
+						if (((tileX >=23) && (tileX<=27)) && ((tileY >=43) && (tileY<=45)))
 						{							
 							//create the cup of wonder.
 

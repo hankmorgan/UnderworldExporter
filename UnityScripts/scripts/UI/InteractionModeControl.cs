@@ -48,6 +48,10 @@ public class InteractionModeControl : GuiBase_Draggable {
 			}
 			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeOptions)
 			{
+								if (UWCharacter.Instance.MouseLookEnabled)
+								{
+										WindowDetectUW.SwitchFromMouseLook ();
+								}	
 				OptionsMenu.gameObject.SetActive(true);
 				OptionsMenu.initMenu();
 				this.gameObject.SetActive(false);
