@@ -227,7 +227,7 @@ public class AutoMap : Loader {
 			int datalen=0;
 			long automapAddress=0;
 			long automapNotesAddress=0;
-			long AUTOMAP_EOF_ADDRESS=0;
+			//long AUTOMAP_EOF_ADDRESS=0;
 
 			int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark,0,32);	
 

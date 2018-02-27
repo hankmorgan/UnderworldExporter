@@ -86,7 +86,7 @@ public class WindowDetect : GuiBase {
 	public static bool ContextUIUse=true;
 			
 
-	public virtual void Start()
+	public override void Start()
 	{
 		CursorPosition = new Rect(
 			0.0f,

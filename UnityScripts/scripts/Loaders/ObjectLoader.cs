@@ -1236,21 +1236,24 @@ public class ObjectLoader : Loader {
 		{
 				for (int i=0; i<=objList.GetUpperBound(0);i++)
 				{
-						if (objList[i].item_id==387)
+						if (objList[i]!=null)
 						{
-								if (objList[i].quality==0xE)
+								if (objList[i].item_id==387)
 								{
-										for (int x=objList[i].tileX-1; x <=objList[i].tileX+5;x++ )
+										if (objList[i].quality==0xE)
 										{
-												for (int y=objList[i].tileY-1; y <=objList[i].tileY+5;y++ )
+												for (int x=objList[i].tileX-1; x <=objList[i].tileX+5;x++ )
 												{
-														if (TileMap.ValidTile(x,y))
+														for (int y=objList[i].tileY-1; y <=objList[i].tileY+5;y++ )
 														{
-																LevelInfo[x,y].TerrainChange=true;
+																if (TileMap.ValidTile(x,y))
+																{
+																		LevelInfo[x,y].TerrainChange=true;
+																}
 														}
 												}
 										}
-								}
+								}		
 						}
 				}
 		}
@@ -1566,7 +1569,7 @@ public class ObjectLoader : Loader {
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
 				currObjList.objInfo[i].index=i;
-				bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
+				//bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
 				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
 				//GameWorldController.instance.objectMaster.type[objInt().item_id]
 				//	if ( ! ( (IsTriggerOrTrap) && (!OnMap) ) )

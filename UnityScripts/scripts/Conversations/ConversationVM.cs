@@ -827,7 +827,7 @@ public class ConversationVM : UWEBase {
 
 						case cnv_BEQ:
 								{
-										int origInstrp= stack.instrp;
+										//int origInstrp= stack.instrp;
 										if (stack.Pop() == 0)
 										{
 												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
@@ -843,7 +843,7 @@ public class ConversationVM : UWEBase {
 
 						case cnv_BNE:
 								{
-										int origInstrp= stack.instrp;
+										//int origInstrp= stack.instrp;
 										if (stack.Pop() != 0)
 										{
 												stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
@@ -858,7 +858,7 @@ public class ConversationVM : UWEBase {
 
 						case cnv_BRA:
 								{
-										int origInstrp= stack.instrp;
+										//int origInstrp= stack.instrp;
 										stack.instrp += conv[currConv].instuctions[stack.instrp+1];	
 										//Debug.Log("BRA to " + stack.instrp + " at " + origInstrp);
 										/*int offset = conv[currConv].instuctions[stack.instrp+1];
@@ -875,7 +875,7 @@ public class ConversationVM : UWEBase {
 
 						case cnv_CALL: // local function
 								{
-										int origInstrp= stack.instrp;
+										//int origInstrp= stack.instrp;
 										// stack value points to next instruction after call
 										//Debug.Log("inst=" + stack.instrp + "stack ptr" + stack.stackptr + " new inst=" + (conv[currConv].instuctions[stack.instrp+1]-1));
 										stack.Push(stack.instrp+1);
@@ -1310,7 +1310,6 @@ public class ConversationVM : UWEBase {
 								case "game_time"://What shou
 										//stack.Set(address,GameClock.);
 										stack.Set(address,GameClock.second());break;
-										break;
 								case "riddlecounter":
 										stack.Set(address,0);break;
 								case "dungeon_level":
@@ -3551,7 +3550,7 @@ return value: none
 */
 
 
-				bool ObjectMoved=false;
+				//bool ObjectMoved=false;
 				int slotNo = stack.at(ptrSlotNo);
 
 				int[]NearbyRefs = new int[4];
@@ -3577,7 +3576,7 @@ return value: none
 								//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
 								cn.AddItemToContainer(objGiven.name);
 								GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-								ObjectMoved=true;
+								//ObjectMoved=true;
 								//UWHUD.instance.playerTrade[slotNo].clear ();
 
 								UWCharacter.Instance.playerInventory.Refresh();
@@ -3613,7 +3612,7 @@ return value: none
 												cn.AddItemToContainer(objGiven.name);
 												objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
 												GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
-												ObjectMoved=true;
+												//ObjectMoved=true;
 												UWCharacter.Instance.playerInventory.Refresh();
 												//UWHUD.instance.playerTrade[slotNo].clear ();
 										}

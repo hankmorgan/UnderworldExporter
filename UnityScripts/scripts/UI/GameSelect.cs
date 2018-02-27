@@ -27,7 +27,6 @@ public class GameSelect : GuiBase {
 		case GAME_UW2:Path=GameWorldController.instance.path_uw2;break;
 		case GAME_SHOCK:Path=GameWorldController.instance.path_shock;break;
 		case GAME_TNOVA:Path=GameWorldController.instance.path_tnova;break;
-			break;
 		}
 
 		//string fileName = Application.dataPath + "//..//" + RES + "_path.txt";

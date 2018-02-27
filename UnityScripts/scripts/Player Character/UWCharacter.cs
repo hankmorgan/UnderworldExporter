@@ -9,7 +9,12 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
-
+		public string[] LayersForRay = new string[]{"Water","MapMesh","Lava","Ice"};
+		public Vector3 Rayposition ;//= //transform.position;
+		public Vector3 Raydirection = Vector3.down;
+		public float Raydistance = 1.0f;
+		int mask; //= LayerMask.GetMask(LayersForRay);
+	
 		public const int CharClassFighter=0;
 		public const int CharClassMage=1;
 		public const int CharClassBard=2;
@@ -33,9 +38,13 @@ public class UWCharacter : Character {
 		public int ValueToRecode=0;
 
 		[Header("Player Status")]
+		public int CurrentTerrain;
+		public TerrainDatLoader.TerrainTypes terrainType;
+		public bool Grounded;
 		public bool onIce;
 		public bool onIcePrev;
-		public Vector3 IceVelocity=Vector3.zero;
+		public bool onCurrent;
+		public Vector3 IceCurrentVelocity=Vector3.zero;
 		//What magic spells are currently active on (and cast by) the player. (max 3)
 		//These are the ones that the player can see on the hud.
 		public SpellEffect[] ActiveSpell=new SpellEffect[3]; 
@@ -92,6 +101,8 @@ public class UWCharacter : Character {
 	//Combat System
 	public UWCombat PlayerCombat;
 
+	public Feet playerFeet;
+
 	[Header("Teleportation")]
 	public short ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;//TODO change this to a search.
@@ -122,6 +133,7 @@ public class UWCharacter : Character {
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
+		mask = LayerMask.GetMask(LayersForRay);
 	}
 
 	public override void Begin ()
@@ -168,14 +180,26 @@ public class UWCharacter : Character {
 		UWHUD.instance.wpa.SetAnimation=-1;
 		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
-			if (ResurrectLevel!=0)
+			if (
+					(
+						ResurrectLevel != 0
+					) 
+					&&
+					(
+						!
+						( 
+							(_RES==GAME_UW1) 
+							&& 
+							(GameWorldController.instance.LevelNo == 8 ) //No resurrect in the void.
+						) 
+					)
+				)
 			{
 				UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs402.n01";//="Death_With_Sapling";
-				//this.transform.position=ResurrectPosition;
 			}
 			else
 			{
-				UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs403.n01";
+				UWHUD.instance.CutScenesSmall.anim.SetAnimation="cs403.n01";//Final death
 			}
 		}
 
@@ -291,16 +315,66 @@ public class UWCharacter : Character {
 			}
 			return;
 		}
+				Grounded =IsGrounded();
+		//if (onIce)
+		//{
+		//	if (onIcePrev==false)
+		//	{
+		//		IceCurrentVelocity = playerMotor.movement.velocity.normalized * 3f;
+		//	}
+		//	this.GetComponent<CharacterController> ().Move (new Vector3 (IceCurrentVelocity.x * Time.deltaTime* speedMultiplier, 0, IceCurrentVelocity.z * Time.deltaTime* speedMultiplier));	
+		//}
+		//onIcePrev = onIce;
+		//		if (onIce==false){IceCurrentVelocity=Vector3.zero;}
 
-		if (onIce)
-		{		
-			//if (onIcePrev==false)
-			//{
-			//	IceVelocity = playerMotor.movement.velocity.normalized * 2f;
-			//}
-			//playerMotor.movement.velocity=IceVelocity;//playerMotor.movement.velocity.normalized;
-		}
-		onIcePrev = onIce;
+	//	if (this.GetComponent<CharacterController>()!=null)
+		//{
+		//	Grounded= this.GetComponent<CharacterController>().isGrounded;
+		//}
+		switch(terrainType)
+			{//Check if the player is subject to a water current.
+			case TerrainDatLoader.TerrainTypes.Ice_wall:
+			case TerrainDatLoader.TerrainTypes.Ice_walls:
+				{
+					if (onIcePrev==false)
+					{
+						IceCurrentVelocity = playerMotor.movement.velocity.normalized * 3f;
+					}
+				onIce=true;
+				break;
+				}
+			case TerrainDatLoader.TerrainTypes.WaterFlowEast:
+				IceCurrentVelocity = new Vector3(.5f,0f,0f);onCurrent=true;isSwimming=true;onIce=false;break;
+			case TerrainDatLoader.TerrainTypes.WaterFlowWest:
+				IceCurrentVelocity = new Vector3(-.5f,0f,0f);onCurrent=true;isSwimming=true;onIce=false;break;
+			case TerrainDatLoader.TerrainTypes.WaterFlowNorth:
+				IceCurrentVelocity = new Vector3(0f,0f,.5f);onCurrent=true;isSwimming=true;onIce=false;break;
+			case TerrainDatLoader.TerrainTypes.WaterFlowSouth:
+				IceCurrentVelocity = new Vector3(0f,0f,-.5f);onCurrent=true;isSwimming=true;onIce=false;break;
+			case TerrainDatLoader.TerrainTypes.Water:
+			case TerrainDatLoader.TerrainTypes.Waterfall:
+				isSwimming=true;IceCurrentVelocity= Vector3.zero;onIce=false;break;
+			default:
+						if (IceCurrentVelocity !=Vector3.zero)
+						{
+								Debug.Log("cancelling ice velocity");
+						}
+				IceCurrentVelocity= Vector3.zero; isSwimming=false; onIce=false; break;
+			}
+
+			if ((isWaterWalking) || (Grounded==false))
+			{
+					isSwimming=false;
+					onIce=false;
+					IceCurrentVelocity=Vector3.zero;	
+			}
+			//if ((onCurrent) && (isSwimming))
+			if (IceCurrentVelocity!=Vector3.zero)
+			{
+				this.GetComponent<CharacterController> ().Move (new Vector3 (IceCurrentVelocity.x * Time.deltaTime* speedMultiplier, 0, IceCurrentVelocity.z * Time.deltaTime* speedMultiplier));					
+			}
+			onIcePrev=onIce;		
+
 
 		base.Update ();
 		if (EditorMode)
@@ -320,7 +394,7 @@ public class UWCharacter : Character {
 				this.transform.position= new Vector3(TeleportPosition.x, this.transform.position.y, TeleportPosition.z);
 			}				
 		}
-		if( (PlayerInventory.Ready==true) && (InventoryReady=false))
+		if( (PlayerInventory.Ready==true) && (InventoryReady==false))
 		{
 			if ((playerInventory!=null))
 			{
@@ -1453,5 +1527,61 @@ public class UWCharacter : Character {
 				}
 				return ratio;
 		}
+
+
+		void OnControllerColliderHit(ControllerColliderHit hit) {
+				if (onIce)
+				{
+						
+						//Debug.Log (hit.normal);
+						if (hit.normal.y < 1f)//Probably a wall
+						{
+						//Debug.Log(IceVelocity + " reflects to " +  Vector3.Reflect(UWCharacter.Instance.IceVelocity, hit.normal) + " using " + hit.normal + " " + hit.gameObject.name);
+							Vector3 reflected = Vector3.Reflect(UWCharacter.Instance.IceCurrentVelocity, hit.normal);
+							IceCurrentVelocity	=  new Vector3(reflected.x,0f, reflected.z);
+
+										//Vector3.Reflect(UWCharacter.Instance.IceCurrentVelocity, hit.normal);	
+						}
+						//if (hit.gameObject.name.Contains("Wall"))
+						//{
+
+						//}
+				}
+
+				//CurrentTerrain= GameWorldController.instance.currentTileMap().Tiles[TileMap.visitTileX,TileMap.visitTileY]
+
+		}
+
+
+		bool IsGrounded() {
+				//int waterLayer;
+				//int landLayer;
+				//int lavaLayer;
+				//int iceLayer;
+
+				//waterLayer=LayerMask.NameToLayer("Water");
+				//landLayer=LayerMask.NameToLayer("MapMesh");
+				//lavaLayer=LayerMask.NameToLayer("Lava");
+				//iceLayer=LayerMask.NameToLayer("Ice");
+
+				Rayposition = transform.position;
+						
+				RaycastHit hit ;
+				Physics.Raycast(Rayposition, Raydirection, out hit, Raydistance, mask);
+					//	1 << waterLayer | 1 << landLayer | 1 << lavaLayer | 1<<iceLayer
+				//);
+				//Debug.DrawRay(Rayposition, Raydirection, Color.green);
+
+				if (hit.collider != null) {
+						return true;
+				}
+				if (Grounded)
+				{
+						Debug.Log("moving from grounded to not grounded");
+				}
+
+				return false;
+		}
+
 
 }

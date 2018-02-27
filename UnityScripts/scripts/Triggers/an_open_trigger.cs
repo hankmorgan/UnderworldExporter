@@ -5,7 +5,7 @@ public class an_open_trigger : trigger_base {
 		
 	public override bool Activate (GameObject src)
 	{
-		int thisType=objInt().GetItemType();
+		//int thisType=objInt().GetItemType();
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
 		if (triggerObj!=null)
 		{

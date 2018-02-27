@@ -33,7 +33,7 @@ public class Dragons : GuiBase {
 		int[] currentFrames = new int[4];
 		int[] targetFrames = new int[4];
 		int[] AnimSequencePlaying = new int[4];
-		int[] AnimSequenceTransition = new int[4]; //sequence to move to when complete
+		//int[] AnimSequenceTransition = new int[4]; //sequence to move to when complete
 
 		public RawImage[] targetControls = new RawImage[6];//First four are controlled by the anim sequence
 

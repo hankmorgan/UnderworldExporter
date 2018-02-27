@@ -441,7 +441,6 @@ public class GameWorldController : UWEBase {
 				case GAME_UW2:path=GameWorldController.instance.path_uw2;break;
 				case GAME_SHOCK:path=GameWorldController.instance.path_shock;break;
 				case GAME_TNOVA:path=GameWorldController.instance.path_tnova;break;
-						break;
 				}
 
 				Loader.BasePath= path; 
@@ -480,8 +479,9 @@ public class GameWorldController : UWEBase {
 
 		}
 
-		//void Update()
-		//{
+		void Update()
+		{
+				PositionDetect();
 		/*	if (GenNavMeshNextFrame>1)
 			{
 				GenNavMeshNextFrame--;
@@ -494,7 +494,7 @@ public class GameWorldController : UWEBase {
 					}	
 				}
 			}*/
-		//}
+		}
 
 	/*void GenerateNavMeshes ()
 	{
@@ -777,8 +777,8 @@ public class GameWorldController : UWEBase {
 						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 						SwitchLevel(startLevel);
 				}
-				PositionDetect();
-				InvokeRepeating("PositionDetect",0.0f,0.02f);
+				//PositionDetect();
+				//InvokeRepeating("PositionDetect",0.0f,0.02f);
 				return;		
 		}
 
@@ -1245,8 +1245,8 @@ public class GameWorldController : UWEBase {
 						}
 				}
 				//currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-				UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
-				UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+				//UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
+				//UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
 
 				for (int x=-1; x<=1;x++)
 				{
@@ -1269,6 +1269,8 @@ public class GameWorldController : UWEBase {
 				}
 				TileMap.visitedTileX=TileMap.visitTileX;
 				TileMap.visitedTileY=TileMap.visitTileY;
+				UWCharacter.Instance.CurrentTerrain =currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].terrain;
+				UWCharacter.Instance.terrainType = TerrainDatLoader.getTerrain(UWCharacter.Instance.CurrentTerrain);
 		}
 
 		/// <summary>
@@ -1837,7 +1839,7 @@ public class GameWorldController : UWEBase {
 														{
 																string[] entries = line.Split('=');
 																//int val = 0;
-																string pathfound="";
+																//string pathfound="";
 																KeyCode keyCodeToUse;
 																KeyBindings.instance.chartoKeycode.TryGetValue(entries[1].ToLower(), out keyCodeToUse);
 

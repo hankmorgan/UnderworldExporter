@@ -209,6 +209,7 @@ public class Cuts : GuiBase {
 		MainMenuHud.instance.OpScr.SetActive(true);
 		MainMenuHud.instance.CharGen.SetActive(false);
 		MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
+		WindowDetectUW.SwitchFromMouseLook();
 		return;	
 	}
 }

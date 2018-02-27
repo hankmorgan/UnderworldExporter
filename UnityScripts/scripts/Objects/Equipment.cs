@@ -204,7 +204,7 @@ public class Equipment : object_base {
 					//Best
 				return StringController.instance.GetString(5,10);
 			}
-		return " ";
+		//return " ";
 		}
 
 

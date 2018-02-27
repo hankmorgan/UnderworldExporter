@@ -128,7 +128,7 @@ public class Model3D : object_base {
 		int tileY = objInt ().tileY;
 		int x = objInt ().x;
 		int y = objInt ().y;
-		int heading = objInt ().heading * 45;
+		//int heading = objInt ().heading * 45;
 		Vector3 objPos = this.transform.position;
 		Vector3 adjustment = Vector3.zero;
 		if (TileMap.ValidTile (tileX, tileY)) 

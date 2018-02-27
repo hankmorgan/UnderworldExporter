@@ -31,6 +31,7 @@ public class SaveGame : Loader {
 				{
 
 						TileMap.OnWater=false;
+						TileMap.OnIce=false;
 						int xOrValue= (int)buffer[0];
 						UWCharacter.Instance.XorKey=xOrValue;
 						int incrnum = 3;
@@ -1418,6 +1419,7 @@ public class SaveGame : Loader {
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out pDat))
 				{
 					TileMap.OnWater=false;
+					TileMap.OnIce=false;
 
 						byte MS = (byte)DataLoader.getValAtAddress(pDat,0,8);
 

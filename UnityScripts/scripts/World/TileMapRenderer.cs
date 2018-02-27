@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 /// Renders the tile map in 3d
 public class TileMapRenderer : Loader{
-		const bool debugtextures=false;
+		static bool debugtextures=false;
 		const int  TILE_SOLID= 0;
 		const int  TILE_OPEN= 1;
 
@@ -160,7 +160,8 @@ public class TileMapRenderer : Loader{
 					tmp.VisibleFaces[vNORTH] = false;
 					tmp.VisibleFaces[vSOUTH] = false;
 					// top,east,bottom,west,north,south
-					GameObject ceil = RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
+					//GameObject ceil = 
+										RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
 					//ceil.layer= LayerMask.NameToLayer ("UWObjects");
 				
 				//And at 99,99 for special stuff.
@@ -1608,7 +1609,7 @@ public class TileMapRenderer : Loader{
 				float uv0= (float)(Bottom*0.125f);
 				float uv1=(PolySize / 8.0f) + (uv0);
 				float offset=0f;
-				int vertCountOffset=0;
+				//int vertCountOffset=0;
 				for (int i=0;i<6;i++)
 				{
 						if (t.VisibleFaces[i]==true)

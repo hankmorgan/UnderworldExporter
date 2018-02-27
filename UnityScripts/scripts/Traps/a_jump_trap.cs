@@ -23,7 +23,8 @@ public class a_jump_trap : trap_base {
 			impact += dir.normalized * force / mass;
 	}
 
-	void Update(){
+
+	public override void Update(){
 			// apply the impact force:
 		if (impact.magnitude > 0.2) 
 			{

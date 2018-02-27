@@ -699,7 +699,7 @@ public class MainMenuHud : GuiBase {
 			MainMenuHud.instance.gameObject.SetActive(false);
 			if (EditorMode)
 			{
-				GameWorldController.instance.PositionDetect();
+				//GameWorldController.instance.PositionDetect();
 				UWHUD.instance.editor.SelectCurrentTile();
 			}
 			GameWorldController.LoadingGame=false;

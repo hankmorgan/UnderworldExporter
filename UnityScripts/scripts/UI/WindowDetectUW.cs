@@ -41,7 +41,7 @@ public class WindowDetectUW : WindowDetect {
 		/// <summary>
 		/// General Combat UI interface. Controls attack charging
 		/// </summary>
-		void Update ()
+		public override void Update ()
 		{
 				if ((UWCharacter.Instance.isRoaming==true) || (UWCharacter.Instance.CurVIT<0))
 				{//No inventory use while using wizard eye spell or dead.

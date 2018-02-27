@@ -217,7 +217,9 @@ public class DataLoader :Loader {
 			List<char> Output = new List<char>();
 			int addptr=0;
 			int bit=0;
-				int MatchingOffset; int PrevMatchingOffset=-1; int CopyRecordOffset=0;
+				int MatchingOffset; 
+				//int PrevMatchingOffset=-1; 
+				//int CopyRecordOffset=0;
 				int copycount=0; int HeaderIndex=0;
 			while (addptr<=srcData.GetUpperBound(0))
 			{

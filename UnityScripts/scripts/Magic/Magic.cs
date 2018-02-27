@@ -2658,7 +2658,7 @@ public class Magic : UWEBase {
 		/// <param name="EffectID">Effect I.</param>
 		void Cast_MapArea(GameObject caster,int EffectID)
 		{
-			GameWorldController.instance.PositionDetect();
+			//GameWorldController.instance.PositionDetect();
 			for (int x=-5; x<=5; x++)
 			{
 				for (int y=-5; y<=5; y++)
@@ -3955,8 +3955,6 @@ public class Magic : UWEBase {
 								}
 								break;
 						}
-
-						break;
 				case SpellEffect.UW1_Spell_Effect_PoisonResistance:
 						{
 								switch(CastType)
@@ -3979,7 +3977,6 @@ public class Magic : UWEBase {
 								}
 								break;
 						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_Speed:
 				case SpellEffect.UW1_Spell_Effect_Haste:
 						{
@@ -4053,7 +4050,6 @@ public class Magic : UWEBase {
 							}
 							break;
 						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_Regeneration:
 						{
 							switch(CastType)
@@ -4076,7 +4072,6 @@ public class Magic : UWEBase {
 							}
 							break;
 						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
 						{
 							switch(CastType)
@@ -4099,7 +4094,6 @@ public class Magic : UWEBase {
 								}
 								break;
 						}
-						break;
 				case SpellEffect.UW1_Spell_Effect_MazeNavigation:
 						//player only
 						if (PassiveArrayIndex!=-1)
@@ -4918,7 +4912,6 @@ public class Magic : UWEBase {
 							}
 							break;
 					}
-					break;
 
 				case SpellEffect.UW2_Spell_Effect_Invisibilty:
 				case SpellEffect.UW2_Spell_Effect_Stealth:
@@ -5142,7 +5135,6 @@ public class Magic : UWEBase {
 								}
 								break;
 						}
-						break;
 
 				case SpellEffect.UW2_Spell_Effect_MapArea:
 				case SpellEffect.UW2_Spell_Effect_MapArea_alt01:

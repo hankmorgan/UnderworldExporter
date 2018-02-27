@@ -114,7 +114,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	{
 		if (_RES==GAME_UW2)
 		{//Setup and crop the UW2 images into a useable format and order
-			Texture2D buttonbgart_80x65 = ArtLoader.CreateBlankImage(80,65);
+			//Texture2D buttonbgart_80x65 = ArtLoader.CreateBlankImage(80,65);
 			Texture2D buttonbgart_80x16 = ArtLoader.CreateBlankImage(80,16);
 			UW2Imgs= new Texture2D[63];
 			this.GetComponent<RawImage>().texture = GameWorldController.instance.grOptbtns.LoadImageAt(3);

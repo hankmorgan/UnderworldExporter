@@ -3,6 +3,32 @@ using System.Collections;
 
 public class TerrainDatLoader : Loader {
 
+		public enum TerrainTypes
+		{
+				Normal =0,
+				Ankh =2,
+				Stairsup = 3,
+				Stairsdown=4,
+				Pipe=5,
+				Grating=6,
+				Drain=7,
+				ChainedPrincess,
+				Window=9,
+				Tapestry=0xa,
+				Textured_door= 0xb,
+				Water = 0x10,
+				Lava = 0x20,
+				Waterfall =0x40,
+				Ice_wall =0xC0,
+				Ice_walls,
+				Lavafall  = 0x80,
+				IceNonSlip  =0xF8  , 
+				WaterFlowSouth = 72,
+				WaterFlowNorth = 80,//not yet seen in the wild
+				WaterFlowWest = 88,
+				WaterFlowEast = 96,
+				Unknown = -1
+		};
 
 		//public const int x;
 
@@ -26,6 +52,11 @@ public class TerrainDatLoader : Loader {
 		public const int Ice_walls= 0xE8;// (crumbling?)
 		public const int  Lavafall  = 0x80;   //  - UW2
 		public const int  IceNonSlip     =0xF8  ; //   - UW2
+
+		public const int WaterFlowSouth = 72;
+		public const int WaterFlowNorth = 80;
+		public const int WaterFlowWest = 88;
+		public const int WaterFlowEast = 96;
 
 		public int[] Terrain;
 
@@ -70,6 +101,62 @@ public class TerrainDatLoader : Loader {
 						}
 
 			}
+		}
+
+		public static TerrainTypes getTerrain (int terrainNo)
+		{
+				/*
+				Normal =0,
+				Ankh =2,
+				Stairsup = 3,
+				Stairsdown=4,
+				Pipe=5,
+				Grating=6,
+				Drain=7,
+				ChainedPrincess,
+				Window=9,
+				Tapestry=0xa,
+				Textured_door= 0xb,
+				Water = 0x10,
+				Lava = 0x20,
+				Waterfall =0x40,
+				Ice_wall =0xC0,
+				Ice_walls,
+				Lavafall  = 0x80,
+				IceNonSlip  =0xF8  , 
+				Unknown = -1
+*/
+				 
+				switch(terrainNo)
+				{
+				case Normal: return TerrainTypes.Normal;
+				case Ankh: return TerrainTypes.Ankh;
+				case Stairsup: return TerrainTypes.Stairsup;
+				case Stairsdown: return TerrainTypes.Stairsdown;
+				case Pipe: return TerrainTypes.Pipe;
+				case Grating: return TerrainTypes.Grating;
+				case Drain: return TerrainTypes.Drain;
+				case ChainedPrincess: return TerrainTypes.ChainedPrincess;
+				case Window: return TerrainTypes.Window;
+				case Tapestry: return TerrainTypes.Tapestry;
+				case Textured_door: return TerrainTypes.Textured_door;
+				case Water: return TerrainTypes.Water;
+				case Lava: return TerrainTypes.Lava;
+				case Waterfall: return TerrainTypes.Waterfall;
+				case Ice_wall: return TerrainTypes.Ice_wall;
+				case Ice_walls: return TerrainTypes.Ice_walls;
+				case Lavafall: return TerrainTypes.Lavafall;
+				case IceNonSlip: return TerrainTypes.IceNonSlip;	
+				case WaterFlowSouth: return TerrainTypes.WaterFlowSouth;	
+				case WaterFlowWest: return TerrainTypes.WaterFlowWest;
+				case WaterFlowEast: return TerrainTypes.WaterFlowEast;
+				case WaterFlowNorth: return TerrainTypes.WaterFlowNorth;
+				//case Unknown : 
+				default:
+					return TerrainTypes.Unknown;
+				}
+
+
 		}
 
 }

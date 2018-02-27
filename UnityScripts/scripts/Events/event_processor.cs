@@ -31,10 +31,10 @@ public class event_processor : UWClass {
 				for (int BlockNo=0;BlockNo<=events_blocks.GetUpperBound(0); BlockNo++)
 				{
 						long address_pointer=6;
-						int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (BlockNo*4) ,32);
+						//int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (BlockNo*4) ,32);
 						int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (BlockNo*4) ,32);
-						int isCompressed =(compressionFlag>>1) & 0x01;
-						long AddressOfBlockStart;
+						//int isCompressed =(compressionFlag>>1) & 0x01;
+						//long AddressOfBlockStart;
 						address_pointer=(BlockNo * 4) + 6;
 						if ((int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer,32)==0)
 						{
@@ -42,7 +42,7 @@ public class event_processor : UWClass {
 						}
 						long BlockStart = DataLoader.getValAtAddress(scd_ark_file_data, address_pointer, 32);
 						int j=0;
-						AddressOfBlockStart=0;
+						//AddressOfBlockStart=0;
 						address_pointer=0;//Since I am at the start of a fresh array.
 						scd_ark = new char[datalen];
 						for (long i = BlockStart; i < BlockStart + datalen; i++)

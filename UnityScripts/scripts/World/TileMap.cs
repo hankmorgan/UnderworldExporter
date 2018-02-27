@@ -117,7 +117,7 @@ public class TileMap : Loader {
 		/// <summary>
 		/// Is the player currently standing on solid ground
 		/// </summary>
-	public static bool OnGround=false;
+	//public static bool OnGround=false;
 		/// <summary>
 		/// Is the player currently standing(swimming) on water
 		/// </summary>
@@ -554,7 +554,7 @@ public class TileMap : Loader {
 												(i==16)
 												)
 									{//Not sure why this is an exceptional case!
-										CeilingTexture=CeilingTexture=(short)i;
+										CeilingTexture=(short)i;
 									}
 									break;
 								}
@@ -567,7 +567,7 @@ public class TileMap : Loader {
 						{
 								Tiles[x,y].tileX = x;
 								Tiles[x,y].tileY = y;
-								//Tiles[x,y].address = AddressOfBlockStart+address_pointer;
+
 								long FirstTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
 								long SecondTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
 								address_pointer=address_pointer+4;
@@ -579,10 +579,6 @@ public class TileMap : Loader {
 								//Turns out that shift is just a doubling!
 								Tiles[x,y].floorHeight  = (short)(Tiles[x,y].floorHeight*2); //remember to divide when writing this back.
 								Tiles[x,y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
-								//Tiles[x,y].noOfNeighbours=0;
-								//Tiles[x,y].tileTested = 0;
-							//	Tiles[x,y].TerrainChangeCount=0;
-								//Tiles[x,y].BullFrog = false;
 
 								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
 								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
@@ -594,21 +590,8 @@ public class TileMap : Loader {
 									case UWEBase.GAME_UW2:
 									default:
 											Tiles[x,y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
-											//if (LevelNo == 6)
-											//{//Tybals lair. Special case for the maze
-													//int val = (FirstTileInt >> 10) & 0x0F;
-													//if (((FirstTileInt >> 10) & 0x0F) == 4)
-													//{//Maze floor
-															//Tiles[x,y].floorTexture = 278;
-
-													//}
-											//}
 											Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
 											break;
-								
-										//Tiles[x,y].floorTexture = getFloorTexUw2()
-										//TODO:
-										//break;
 								}
 								if (Tiles[x,y].floorTexture<0)
 								{
@@ -636,9 +619,24 @@ public class TileMap : Loader {
 										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
 										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture+48]);
 										break;
-								}
+								}							
 
 								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) || (Tiles[x,y].isNothing));
+
+								switch(_RES)
+								{
+									case GAME_UWDEMO:
+									case GAME_UW1:
+										Tiles[x,y].terrain=GameWorldController.instance.terrainData.Terrain[ 46 + texture_map[Tiles[x,y].floorTexture+48]];
+										//GameWorldController.instance.terrainData.Terrain[256 + textureNo-210]
+										break;
+									case GAME_UW2:
+										Tiles[x,y].terrain=GameWorldController.instance.terrainData.Terrain[texture_map[Tiles[x,y].floorTexture]];
+										break;
+									default:
+										Tiles[x,y].terrain=0;
+										break;
+								}
 
 								//UW only has a single ceiling texture so this is ignored.
 								//Tiles[x,y].shockCeilingTexture = Tiles[x,y].floorTexture;					
@@ -1665,6 +1663,14 @@ public class TileMap : Loader {
 							GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Water
 								||
 							GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.Waterfall
+								||
+							GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.WaterFlowEast
+								||
+								GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.WaterFlowWest
+								||
+								GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.WaterFlowNorth
+								||
+								GameWorldController.instance.terrainData.Terrain[textureNo] == TerrainDatLoader.WaterFlowSouth
 						);
 
 				default:
@@ -2202,7 +2208,7 @@ public class TileMap : Loader {
 			}
 		}
 		
-			if (false)
+		/*	if (false)
 			{
 					
 			
@@ -2219,7 +2225,7 @@ public class TileMap : Loader {
 			}
 			writer.WriteLine(output);
 			writer.Close();
-			}
+			}*/
 
 		}
 

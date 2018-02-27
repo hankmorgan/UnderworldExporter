@@ -154,7 +154,7 @@ public class UWHUD : HUD {
 	bool CutSceneSmallEnabled=true;
 	bool CutSceneFullEnabled=true;
 	bool MapEnabled=false;
-	bool InteractionEnabled=true;
+	//bool InteractionEnabled=true;
 	public bool isRotating;
 
 
@@ -390,7 +390,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=true;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								InteractionEnabled=true;
+								//InteractionEnabled=true;
 								if (chains.ActiveControl>2)
 								{
 										chains.ActiveControl = ActivePanelMode;
@@ -412,7 +412,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=true;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								InteractionEnabled=true;
+								//InteractionEnabled=true;
 								if (chains.ActiveControl>2)
 								{
 										chains.ActiveControl = ActivePanelMode;
@@ -432,7 +432,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=true;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								InteractionEnabled=true;
+								//InteractionEnabled=true;
 								if (chains.ActiveControl>2)
 								{
 										chains.ActiveControl = ActivePanelMode;
@@ -459,7 +459,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=false;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								InteractionEnabled=false;
+								//InteractionEnabled=false;
 								if (_RES!=GAME_UW2)
 								{
 										GRLoader grConv = new GRLoader(GRLoader.CONVERSE_GR);
@@ -489,7 +489,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=false;
 								CutSceneFullEnabled=false;
 								MapEnabled=true;
-								InteractionEnabled=false;
+								//InteractionEnabled=false;
 								UpdatePanelStates();
 								break;
 						}	

@@ -63,14 +63,14 @@ public class a_hack_trap_qbert : a_hack_trap {
 				break;
 			case 32:
 			case 12:
-				GameWorldController.instance.PositionDetect();
+				//GameWorldController.instance.PositionDetect();
 				RandomTeleport(src);
 				break;
 			case 62:
 				BeginQbertPyramid();
 				break;
 			case 63:
-				GameWorldController.instance.PositionDetect();
+				//GameWorldController.instance.PositionDetect();
 				StepOnPyramid(TileMap.visitTileX, TileMap.visitTileY);
 				break;
 			default:

@@ -1865,7 +1865,7 @@ public class ObjectInteraction : UWEBase {
 
 								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
 								//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
-								float force;
+								//float force=0f;
 								switch(currObj.item_id)
 								{
 								case 20://fireball
@@ -1873,7 +1873,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Fireball spFB =new SpellProp_Fireball();
 												spFB.init (SpellEffect.UW1_Spell_Effect_Fireball,myObj);
 												mgp.spellprop=spFB;
-												force=spFB.Force;
+												//force=spFB.Force;
 												break;
 										}
 
@@ -1882,7 +1882,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Fireball spLN =new SpellProp_Fireball();
 												spLN.init (SpellEffect.UW1_Spell_Effect_ElectricalBolt,myObj);
 												mgp.spellprop=spLN;
-												force=spLN.Force;
+												//force=spLN.Force;
 												break;
 										}
 								case 22://acid
@@ -1890,7 +1890,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Acid spAC =new SpellProp_Acid();
 												spAC.init (SpellEffect.UW1_Spell_Effect_Acid_alt01,myObj);
 												mgp.spellprop=spAC;
-												force=spAC.Force;
+												//force=spAC.Force;
 												break;
 										}
 								case 23://magic missile
@@ -1899,13 +1899,13 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
 												spOJ.init (SpellEffect.UW1_Spell_Effect_MagicArrow,myObj);
 												mgp.spellprop=spOJ;
-												force=spOJ.Force;
+												//force=spOJ.Force;
 												break;
 										}
 								}
 
-										force =0;
-								Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
+										//force =0;
+								//Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
 								//myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
 							}
 							
@@ -2086,7 +2086,7 @@ public class ObjectInteraction : UWEBase {
 				//case ObjectInteraction.LOCK:
 					//	myObj.AddComponent<a_lock>();
 						//CreateSprite=false;
-						break;
+						//break;
 				case A_DO_TRAP:
 						{
 							switch (objInt.quality)	

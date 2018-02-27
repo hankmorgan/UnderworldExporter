@@ -30,7 +30,7 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 												(objList[i].instance.tileX>=minX)&&
 												(objList[i].instance.tileX<=maxX)&&
 												(objList[i].instance.tileY>=minY)&&
-												(objList[i].instance.tileY<=maxX)
+												(objList[i].instance.tileY<=maxY)
 												)
 										{
 												if (objList[i].instance.owner==63)

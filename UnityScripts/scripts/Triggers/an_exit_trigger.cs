@@ -14,7 +14,7 @@ public class an_exit_trigger : a_move_trigger {
 
 	}
 
-	void OnTriggerExit(Collider other)
+	protected override void OnTriggerExit(Collider other)
 	{
 		base.OnTriggerEnter(other);
 	}

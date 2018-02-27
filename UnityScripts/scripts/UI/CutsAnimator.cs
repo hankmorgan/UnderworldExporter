@@ -119,6 +119,7 @@ public class CutsAnimator : GuiBase {
 						MainMenuHud.instance.CharGen.SetActive(false);
 						MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
 						GameWorldController.instance.LevelNo=-1;
+						WindowDetectUW.SwitchFromMouseLook();
 						break;
 				default:
 						UWCharacter.Instance.playerCam.cullingMask=HudAnimation.NormalCullingMask;

@@ -11,7 +11,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	public bool Active=true;
 	SpriteRenderer image;
 	//static Sprite[] sprites=new Sprite[64];
-	static bool spriteSet = false;
+	//static bool spriteSet = false;
 	public bool Looping=true;
 	// Use this for initialization
 	void Start () {

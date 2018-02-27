@@ -196,14 +196,10 @@ public class Food : object_base {
 		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
 	{
-			int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
-			int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+		//	int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
+		//	int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
 			//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
 				int BaseStringNo=StringController.str__tasted_putrid_;
-				//if (_RES==GAME_UW2)
-				//{
-				//		BaseStringNo=187;
-				//}
 		if (objInt().quality == 0)
 			{
 				return StringController.instance.GetString (1,BaseStringNo);//worm
@@ -237,8 +233,8 @@ public class Food : object_base {
 		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
 	private string foodSmellText()//
 	{
-		int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
-		int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+		//int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
+		//int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
 		//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
 		if (objInt().quality == 0)
 		{

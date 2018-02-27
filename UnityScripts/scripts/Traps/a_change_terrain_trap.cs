@@ -15,7 +15,7 @@ The path to the sword hilt on Level3
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		int textureQuality = (objInt().quality >> 1) & 0xf;
 		for (short x=0; x<=objInt().x;x++)
 		{

@@ -257,7 +257,6 @@ public class NPC : MobileObject {
 								case 66://vampire bat
 								case 71://mongbat
 								case 75://imp
-								case 93://spectre
 								case 98://dire ghost
 								case 102://haunt
 								case 105://lich
@@ -279,7 +278,6 @@ public class NPC : MobileObject {
 										break;
 								//default:
 										//agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
-										break;
 								}
 								break;
 						}
@@ -332,7 +330,6 @@ public class NPC : MobileObject {
 								case 66://vampire bat
 								case 71://mongbat
 								case 75://imp
-								case 93://spectre
 								case 98://dire ghost
 								case 102://haunt
 								case 105://lich
@@ -1071,8 +1068,8 @@ public class NPC : MobileObject {
 		void AgentGotoDestTileXY (ref int DestinationX, ref int DestinationY, ref int tileX, ref int tileY )
 		{
 				if (Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID) {
-						float tileHeight = (float)GameWorldController.instance.currentTileMap ().GetFloorHeight (tileX, tileY) * 0.15f;//Of current tile
-						float zpos = Random.Range (tileHeight, 4f);
+						//float tileHeight = (float)GameWorldController.instance.currentTileMap ().GetFloorHeight (tileX, tileY) * 0.15f;//Of current tile
+						//float zpos = Random.Range (tileHeight, 4f);
 						//AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
 						targetBaseOffset = 0.5f;//tileHeight + 0.2f ;//zpos - tileHeight;
 						startBaseOffset = Agent.baseOffset;
@@ -1872,7 +1869,7 @@ public class NPC : MobileObject {
 				//Get a random spot.
 				bool DestFound=false;
 				Vector3 curPos = transform.position;
-				Vector3 dest =curPos;
+				//Vector3 dest =curPos;
 				int tileX = (int)(curPos.x/1.2f);
 				int tileY = (int)(curPos.z/1.2f);
 				DestTileX =tileX;
