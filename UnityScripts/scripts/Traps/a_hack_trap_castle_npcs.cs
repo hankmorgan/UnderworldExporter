@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// A hack trap castle npcs.
+/// </summary>
+/// Teleports npcs to their home positions after talking to british at the start of the game.
 public class a_hack_trap_castle_npcs : a_hack_trap {
 		/// <summary>
 		/// Britannia NPC who am i values

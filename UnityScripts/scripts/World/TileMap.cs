@@ -121,16 +121,16 @@ public class TileMap : Loader {
 		/// <summary>
 		/// Is the player currently standing(swimming) on water
 		/// </summary>
-	public static bool OnWater=false;
+	//public static bool OnWater=false;
 		/// <summary>
 		/// Is the player currently standing on lava.
 		/// </summary>
-	public static bool OnLava=false;
+	//public static bool OnLava=false;
 	//public GameObject feet;//For detecting the ground.
 		/// <summary>
 		///Is the player currently on Ice
 		/// </summary>
-		public static bool OnIce=false;
+		//public static bool OnIce=false;
 
 
 		public TileMap(short NewLevelNo)

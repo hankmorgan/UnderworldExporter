@@ -273,7 +273,7 @@ public class ObjectInteraction : UWEBase {
 		/// <summary>
 		/// The start position of the object when it became awake.
 		/// </summary>
-		private Vector3 startPos;
+		public Vector3 startPos;
 
 		[Header("Links")]
 		public AudioSource aud;

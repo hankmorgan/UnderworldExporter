@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class RuneSlot : GuiBase {
 
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 	public int SlotNumber;
 	private RawImage thisRune;
 	public bool isSet;
@@ -31,10 +31,9 @@ public class RuneSlot : GuiBase {
 			{
 					UWHUD.instance.runes[i].thisRune=UWHUD.instance.runes[i].gameObject.GetComponent<RawImage>();
 			}
-		if ((playerUW.PlayerMagic.PlayerRunes[i] != false))
+			if ((UWCharacter.Instance.PlayerMagic.PlayerRunes[i] != false))
 			{					
 				UWHUD.instance.runes[i].thisRune.texture=GameWorldController.instance.ObjectArt.LoadImageAt(232 + i);
-										//Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
 				UWHUD.instance.runes[i].isSet=true;
 			}
 			else
@@ -56,7 +55,7 @@ public class RuneSlot : GuiBase {
 		public void ClickEvent(int ptrID)
 	{
 
-		if (playerUW.PlayerMagic.PlayerRunes[SlotNumber] == false)
+		if (UWCharacter.Instance.PlayerMagic.PlayerRunes[SlotNumber] == false)
 		{
 			return;//Slot is unfilled
 		}
@@ -66,23 +65,23 @@ public class RuneSlot : GuiBase {
 			{//left click select the rune.
 				//add the rune to the first available active slot.
 				//If all the slots are in use then push the stack down.
-				if (playerUW.PlayerMagic.ActiveRunes[0]==-1)
+				if (UWCharacter.Instance.PlayerMagic.ActiveRunes[0]==-1)
 				{
-					playerUW.PlayerMagic.ActiveRunes[0]=SlotNumber;
+					UWCharacter.Instance.PlayerMagic.ActiveRunes[0]=SlotNumber;
 				}
-				else if(playerUW.PlayerMagic.ActiveRunes[1]==-1)
+				else if(UWCharacter.Instance.PlayerMagic.ActiveRunes[1]==-1)
 				{
-					playerUW.PlayerMagic.ActiveRunes[1]=SlotNumber;
+				UWCharacter.Instance.PlayerMagic.ActiveRunes[1]=SlotNumber;
 				}
-				else if(playerUW.PlayerMagic.ActiveRunes[2]==-1)
+				else if(UWCharacter.Instance.PlayerMagic.ActiveRunes[2]==-1)
 				{
-					playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
+					UWCharacter.Instance.PlayerMagic.ActiveRunes[2]=SlotNumber;
 				}
 				else
 				{//No free slot. Push everything down.
-					playerUW.PlayerMagic.ActiveRunes[0]=playerUW.PlayerMagic.ActiveRunes[1];
-					playerUW.PlayerMagic.ActiveRunes[1]=playerUW.PlayerMagic.ActiveRunes[2];
-					playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
+					UWCharacter.Instance.PlayerMagic.ActiveRunes[0]=UWCharacter.Instance.PlayerMagic.ActiveRunes[1];
+					UWCharacter.Instance.PlayerMagic.ActiveRunes[1]=UWCharacter.Instance.PlayerMagic.ActiveRunes[2];
+					UWCharacter.Instance.PlayerMagic.ActiveRunes[2]=SlotNumber;
 				}
 				ActiveRuneSlot.UpdateRuneSlots();
 			}
@@ -91,6 +90,5 @@ public class RuneSlot : GuiBase {
 				UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetSimpleObjectNameUW(232+SlotNumber));
 			}
 		}
-
 	}
 }

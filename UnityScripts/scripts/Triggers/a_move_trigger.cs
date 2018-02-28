@@ -41,11 +41,16 @@ A trigger that fires when the player character enters it
 					if (triggerObj.GetComponent<a_teleport_trap>() !=null)
 					{
 						if (triggerObj.GetComponent<a_teleport_trap>().objInt().zpos!=0)
-						{
-							//if (_RES==GAME_UW1)
-							//{
-							GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStair);
-							//}						
+						{							
+							switch(_RES)
+							{
+								case GAME_UW2:
+									GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStairUW2);		
+									break;
+								default:
+									GameWorldController.instance.currentAutoMap().MarkTileDisplayType(objInt().tileX, objInt().tileY, AutoMap.DisplayTypeStairUW1);		
+									break;
+							}	
 						}
 					}
 				}	
@@ -58,7 +63,9 @@ A trigger that fires when the player character enters it
 		Collider[] colliders=Physics.OverlapBox(this.transform.position, box.size/2);
 		for (int i=0; i<=colliders.GetUpperBound(0);i++)
 		{
-			if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
+			if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) 
+								//||  (colliders[i].gameObject.GetComponent<Feet>()!=null) 
+						)
 			{
 				playerStartedInTrigger=true;
 				break;

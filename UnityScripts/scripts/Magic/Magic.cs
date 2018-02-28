@@ -7,7 +7,7 @@ using System.Collections;
 
 public class Magic : UWEBase {
 		
-		public static UWCharacter playerUW;
+		//public static UWCharacter playerUW;
 
 		public const int SpellRule_Consumable=2;
 		public const int SpellRule_Equipable=1;
@@ -1167,17 +1167,17 @@ public class Magic : UWEBase {
 		{//Open
 				if (Ready==true)
 				{//Ready the spell to be cast.
-						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
+						UWCharacter.Instance.PlayerMagic.ReadiedSpell= "Ex Ylem";
 						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
 				else
 				{
-						playerUW.PlayerMagic.ReadiedSpell="";
+						UWCharacter.Instance.PlayerMagic.ReadiedSpell="";
 						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
-						float dropRange=playerUW.GetUseRange();
+						float dropRange=UWCharacter.Instance.GetUseRange();
 						if (Physics.Raycast(ray,out hit,dropRange))
 						{//The spell has hit something
 								DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
@@ -1203,17 +1203,17 @@ public class Magic : UWEBase {
 		{//Strengthen DOor
 				if (Ready==true)
 				{//Ready the spell to be cast.
-						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
+						UWCharacter.Instance.PlayerMagic.ReadiedSpell= "Sanct Jux";
 						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
 				else
 				{
-						playerUW.PlayerMagic.ReadiedSpell="";
+						UWCharacter.Instance.PlayerMagic.ReadiedSpell="";
 						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
-						float dropRange=playerUW.GetUseRange();
+						float dropRange=UWCharacter.Instance.GetUseRange();
 						if (Physics.Raycast(ray,out hit,dropRange))
 						{//The spell has hit something
 								DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
@@ -1240,8 +1240,8 @@ public class Magic : UWEBase {
 				//{
 				//		seps[i].CancelEffect();
 				//}
-				//playerUW.Poisoned=false;
-				playerUW.play_poison=0;
+				//UWCharacter.Instance.Poisoned=false;
+				UWCharacter.Instance.play_poison=0;
 		}
 
 		/// <summary>
@@ -1254,7 +1254,7 @@ public class Magic : UWEBase {
 				int effectSlot = CheckActiveSpellEffect(caster);
 				if (effectSlot!=-1)
 				{
-					Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,effectSlot);		
+					Cast_ResistanceAgainstType(caster,UWCharacter.Instance.ActiveSpell,EffectID,effectSlot);		
 				}
 				else
 				{
@@ -1414,7 +1414,7 @@ public class Magic : UWEBase {
 
 						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
 						//Assumes the npc is spawning in the region the player is in
-						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
+						string[] Regionarr=	UWCharacter.Instance.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
 						int levelno = GameWorldController.instance.LevelNo;
 						switch (Regionarr[0].ToUpper())
@@ -1739,26 +1739,22 @@ public class Magic : UWEBase {
 		/// Needs to know the position of the moonstone.
 		void Cast_VasRelPor(GameObject caster, int EffectID)
 		{//Gate Travel
-				if (playerUW!=null)
-				{
-						if (playerUW.MoonGateLevel != 0)
-						{
-								if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo+1)
-								{//Teleport to level
-									if (_RES==GAME_UW1)
-									{//Special case for the magic drain effect in UW1
-											UWCharacter.ResetTrueMana ();
-									}
-									GameWorldController.instance.SwitchLevel((short)(playerUW.MoonGateLevel-1));
-								}
-								caster.transform.position = playerUW.MoonGatePosition;//Assumes moongate will be found!
+			if (UWCharacter.Instance.MoonGateLevel != 0)
+			{
+					if (UWCharacter.Instance.MoonGateLevel != GameWorldController.instance.LevelNo+1)
+					{//Teleport to level
+						if (_RES==GAME_UW1)
+						{//Special case for the magic drain effect in UW1
+								UWCharacter.ResetTrueMana ();
 						}
-						else
-						{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_moonstone_is_not_available_));
-						}
-
-				}
+						GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.MoonGateLevel-1));
+					}
+					caster.transform.position = UWCharacter.Instance.MoonGatePosition;//Assumes moongate will be found!
+			}
+			else
+			{
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_moonstone_is_not_available_));
+			}
 		}
 
 
@@ -1915,7 +1911,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						InventorySpell=true;
-						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
+						UWCharacter.Instance.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
 						//UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 						UWHUD.instance.CursorIcon=GameWorldController.instance.grCursors.LoadImageAt(10);
 				}
@@ -1925,11 +1921,11 @@ public class Magic : UWEBase {
 						//Is this an inventory slot click or in the window
 						if (WindowDetect.CursorInMainWindow)
 						{
-								playerUW.PlayerMagic.ReadiedSpell="";		
+								UWCharacter.Instance.PlayerMagic.ReadiedSpell="";		
 								UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 								Ray ray = getRay (caster);
 								RaycastHit hit = new RaycastHit(); 
-								float dropRange=playerUW.GetUseRange();
+								float dropRange=UWCharacter.Instance.GetUseRange();
 								if (Physics.Raycast(ray,out hit,dropRange))	
 								{//The spell has hit something
 									ObjectInteraction objInt =hit.transform.gameObject.GetComponent<ObjectInteraction>();
@@ -2047,13 +2043,10 @@ public class Magic : UWEBase {
 				SpellProp_Heal healing= new SpellProp_Heal();
 				healing.init (EffectID,caster);
 				int HP = healing.BaseDamage;
-				if (playerUW!=null)
+				UWCharacter.Instance.CurVIT=UWCharacter.Instance.CurVIT+HP;
+				if (UWCharacter.Instance.CurVIT > UWCharacter.Instance.MaxVIT)
 				{
-						playerUW.CurVIT=playerUW.CurVIT+HP;
-						if (playerUW.CurVIT > playerUW.MaxVIT)
-						{
-								playerUW.CurVIT=playerUW.MaxVIT;
-						}
+						UWCharacter.Instance.CurVIT=UWCharacter.Instance.MaxVIT;
 				}
 		}
 
@@ -2121,13 +2114,10 @@ public class Magic : UWEBase {
 				SpellProp_Mana mn = new SpellProp_Mana();
 				mn.init (EffectID,caster);
 				int MP=mn.BaseDamage;
-				if (playerUW!=null)
+				UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.CurMana+MP;
+				if (UWCharacter.Instance.PlayerMagic.CurMana > UWCharacter.Instance.PlayerMagic.MaxMana)
 				{
-						playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.CurMana+MP;
-						if (playerUW.PlayerMagic.CurMana > playerUW.PlayerMagic.MaxMana)
-						{
-								playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.MaxMana;
-						}
+					UWCharacter.Instance.PlayerMagic.CurMana=UWCharacter.Instance.PlayerMagic.MaxMana;
 				}
 		}
 
@@ -3120,11 +3110,11 @@ public class Magic : UWEBase {
 		/// <param name="caster">Caster.</param>
 		int CheckActiveSpellEffect(GameObject caster)
 		{
-			if (playerUW!=null)
+			if (UWCharacter.Instance!=null)
 				{
 						for (int i =0;i<3;i++)
 						{
-								if (playerUW.ActiveSpell[i] == null)
+								if (UWCharacter.Instance.ActiveSpell[i] == null)
 								{
 										return i;
 								}
@@ -3144,11 +3134,11 @@ public class Magic : UWEBase {
 		/// <param name="caster">Caster.</param>
 		int CheckPassiveSpellEffectPC(GameObject caster)
 		{				
-			if (playerUW!=null)
+			if (UWCharacter.Instance!=null)
 				{
 						for (int i =0;i<10;i++)
 						{
-								if (playerUW.PassiveSpell[i] == null)
+								if (UWCharacter.Instance.PassiveSpell[i] == null)
 								{
 										return i;
 								}
@@ -3501,7 +3491,7 @@ public class Magic : UWEBase {
 					&&
 					(UWHUD.instance.window.JustClicked==false)
 					&&
-					((playerUW.PlayerCombat.AttackCharging==false) && (playerUW.PlayerCombat.AttackExecuting==false))
+					((UWCharacter.Instance.PlayerCombat.AttackCharging==false) && (UWCharacter.Instance.PlayerCombat.AttackExecuting==false))
 			)
 			{//Cast a spell or readies it.
 					if (ReadiedSpell=="")
@@ -3611,8 +3601,8 @@ public class Magic : UWEBase {
 
 			if (SpellRule!=SpellRule_TargetVector)
 			{	
-					ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
-					PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
+					ActiveArrayIndex= UWCharacter.Instance.PlayerMagic.CheckActiveSpellEffect(caster);
+					PassiveArrayIndex= UWCharacter.Instance.PlayerMagic.CheckPassiveSpellEffectPC(caster);
 
 					if (target!=null)
 					{
@@ -3692,7 +3682,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Light(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3700,7 +3690,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Light(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;	
@@ -3717,7 +3707,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Leap(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 										}
 										SpellResultType=SpellResultPassive;
 										break;
@@ -3725,7 +3715,7 @@ public class Magic : UWEBase {
 								default:								
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Leap(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3742,7 +3732,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_SlowFall(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_SlowFall(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3751,7 +3741,7 @@ public class Magic : UWEBase {
 										//Player only
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_SlowFall(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3772,7 +3762,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Levitate(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3780,7 +3770,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Levitate(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3798,7 +3788,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_WaterWalk(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3806,7 +3796,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_WaterWalk(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3830,7 +3820,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Resistance(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3838,7 +3828,7 @@ public class Magic : UWEBase {
 								default:								
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Resistance(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}						
 										break;
@@ -3862,7 +3852,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Stealth(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3870,7 +3860,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Stealth(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3888,7 +3878,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;	
 										}
 										break;
@@ -3897,7 +3887,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3914,7 +3904,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Flameproof(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3922,7 +3912,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Flameproof(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3940,7 +3930,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3948,7 +3938,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3962,7 +3952,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ResistPoison(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ResistPoison(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3970,7 +3960,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ResistPoison(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ResistPoison(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -3985,7 +3975,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Speed(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Speed(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -3993,7 +3983,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Speed(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4010,7 +4000,7 @@ public class Magic : UWEBase {
 							case SpellRule_Equipable:
 									if (PassiveArrayIndex!=-1)
 									{
-											Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											Cast_Telekinesis(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 											SpellResultType=SpellResultPassive;
 									}
 									break;
@@ -4018,7 +4008,7 @@ public class Magic : UWEBase {
 							default:
 									if (ActiveArrayIndex!=-1)
 									{
-											Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											Cast_Telekinesis(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 											SpellResultType=SpellResultActive;
 									}
 									break;
@@ -4035,7 +4025,7 @@ public class Magic : UWEBase {
 							case SpellRule_Equipable:
 									if (PassiveArrayIndex!=-1)
 									{
-										Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+										Cast_FreezeTime(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 										SpellResultType=SpellResultPassive;
 									}
 									break;
@@ -4043,7 +4033,7 @@ public class Magic : UWEBase {
 							default:
 									if (ActiveArrayIndex!=-1)
 									{
-										Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+										Cast_FreezeTime(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 										SpellResultType=SpellResultActive;
 									}
 									break;
@@ -4057,7 +4047,7 @@ public class Magic : UWEBase {
 							case SpellRule_Equipable:
 									if (PassiveArrayIndex!=-1)
 									{
-											Cast_HealthRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											Cast_HealthRegen (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 											SpellResultType=SpellResultPassive;
 									}
 									break;
@@ -4065,7 +4055,7 @@ public class Magic : UWEBase {
 							default:
 									if (ActiveArrayIndex!=-1)
 									{
-											Cast_HealthRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											Cast_HealthRegen (caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 											SpellResultType=SpellResultActive;
 									}
 									break;
@@ -4079,7 +4069,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ManaRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ManaRegen (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -4087,7 +4077,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ManaRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ManaRegen (caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4098,13 +4088,13 @@ public class Magic : UWEBase {
 						//player only
 						if (PassiveArrayIndex!=-1)
 						{
-								Cast_MazeNavigation(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								Cast_MazeNavigation(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 								SpellResultType=SpellResultPassive;
 						}
 						break;			
 				case SpellEffect.UW1_Spell_Effect_Hallucination:
 						//player only
-						Cast_Hallucination(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						Cast_Hallucination(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 						SpellResultType=SpellResultPassive;
 						break;
 				case SpellEffect.UW1_Spell_Effect_NightVision:
@@ -4116,7 +4106,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_NightVision(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_NightVision(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}	
 										break;
@@ -4124,7 +4114,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_NightVision(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_NightVision(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4150,7 +4140,7 @@ public class Magic : UWEBase {
 						case SpellRule_TargetSelf:
 								if (PassiveArrayIndex!=-1)
 								{
-										Cast_Poison (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+										Cast_Poison (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
 								}break;
 						}
 						break;
@@ -4173,7 +4163,7 @@ public class Magic : UWEBase {
 						case SpellRule_TargetSelf:
 								if (PassiveArrayIndex!=-1)
 								{
-										Cast_Paralyze (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+										Cast_Paralyze (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
 								}
 								break;
 						}
@@ -4375,7 +4365,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
 				case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
 						{
-								Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								Cast_RoamingSight(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 								SpellResultType=SpellResultNone;
 								break;
 						}
@@ -4469,7 +4459,7 @@ public class Magic : UWEBase {
 						//Affect player from cursed items
 						if (PassiveArrayIndex!=-1)
 						{
-							Cast_CursedItem(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							Cast_CursedItem(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 							SpellResultType=SpellResultPassive;
 														
 						}
@@ -4574,9 +4564,9 @@ public class Magic : UWEBase {
 				case SpellResultNone://No spell effect or unimplemented spell
 						return null;
 				case SpellResultPassive://Passive spell effect
-						return playerUW.PassiveSpell[PassiveArrayIndex];
+						return UWCharacter.Instance.PassiveSpell[PassiveArrayIndex];
 				case SpellResultActive://Active spell effect
-						return playerUW.ActiveSpell[ActiveArrayIndex];
+						return UWCharacter.Instance.ActiveSpell[ActiveArrayIndex];
 				default:
 						return null;
 				}
@@ -4602,8 +4592,8 @@ public class Magic : UWEBase {
 
 				if (SpellRule!=SpellRule_TargetVector)
 				{	
-						ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
-						PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
+						ActiveArrayIndex= UWCharacter.Instance.PlayerMagic.CheckActiveSpellEffect(caster);
+						PassiveArrayIndex= UWCharacter.Instance.PlayerMagic.CheckPassiveSpellEffectPC(caster);
 
 						if (target!=null)
 						{
@@ -4678,7 +4668,7 @@ public class Magic : UWEBase {
 						//Affect player from cursed items
 						if (PassiveArrayIndex!=-1)
 						{
-							Cast_CursedItem(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							Cast_CursedItem(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 							SpellResultType=SpellResultPassive;
 						}
 						break;
@@ -4732,7 +4722,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Flameproof(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -4740,7 +4730,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Flameproof(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4761,7 +4751,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Levitate(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -4769,7 +4759,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Levitate(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4787,7 +4777,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_SlowFall(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_SlowFall(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -4795,7 +4785,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_SlowFall(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4830,7 +4820,7 @@ public class Magic : UWEBase {
 										{
 												if (PassiveArrayIndex!=-1)
 												{
-														Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+														Cast_FreezeTime(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 														SpellResultType=SpellResultPassive;
 												}		
 										}
@@ -4839,7 +4829,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_FreezeTime(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4858,7 +4848,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_Hallucination:
 				case SpellEffect.UW2_Spell_Effect_Hallucination_alt01:
 						{
-							Cast_Hallucination(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+							Cast_Hallucination(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 							SpellResultType=SpellResultPassive;
 							break;	
 						}
@@ -4897,7 +4887,7 @@ public class Magic : UWEBase {
 							case SpellRule_Equipable:
 									if (PassiveArrayIndex!=-1)
 									{
-											Cast_HealthRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											Cast_HealthRegen (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 											SpellResultType=SpellResultPassive;
 									}
 									break;
@@ -4905,7 +4895,7 @@ public class Magic : UWEBase {
 							default:
 									if (ActiveArrayIndex!=-1)
 									{
-											Cast_HealthRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											Cast_HealthRegen (caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 											SpellResultType=SpellResultActive;
 									}
 									break;
@@ -4926,7 +4916,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Stealth(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Stealth(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -4934,7 +4924,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Stealth(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -4959,7 +4949,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Leap(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 										}
 										SpellResultType=SpellResultPassive;
 										break;
@@ -4967,7 +4957,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Leap(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5000,7 +4990,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Light(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -5008,7 +4998,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Light(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5058,7 +5048,7 @@ public class Magic : UWEBase {
 										{
 												if (PassiveArrayIndex!=-1)
 												{
-														Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+														Cast_ResistanceAgainstType(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 														SpellResultType=SpellResultPassive;
 												}
 												break;
@@ -5068,7 +5058,7 @@ public class Magic : UWEBase {
 										{
 												if (ActiveArrayIndex!=-1)
 												{
-														Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+														Cast_ResistanceAgainstType(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 														SpellResultType=SpellResultActive;
 												}
 												break;
@@ -5120,7 +5110,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ManaRegen (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ManaRegen (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -5128,7 +5118,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ManaRegen (caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ManaRegen (caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5158,7 +5148,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;	
 										}
 										break;
@@ -5166,7 +5156,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_ResistanceAgainstType(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5218,7 +5208,7 @@ public class Magic : UWEBase {
 								case SpellRule_TargetSelf:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Paralyze (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+												Cast_Paralyze (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
 										}
 										break;
 								}
@@ -5242,7 +5232,7 @@ public class Magic : UWEBase {
 								case SpellRule_TargetSelf:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Poison (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
+												Cast_Poison (caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=SpellResultPassive;
 										}
 										break;
 								}
@@ -5404,7 +5394,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_IronFlesh:
 					if (PassiveArrayIndex!=-1)
 					{
-						Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						Cast_Resistance(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 						SpellResultType=SpellResultPassive;
 					}
 
@@ -5423,7 +5413,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Resistance(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;
@@ -5431,7 +5421,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Resistance(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5452,7 +5442,7 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_RoamingSight_alt01:
 				case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
 						{
-							Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+							Cast_RoamingSight(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 							SpellResultType=SpellResultNone;
 							break;
 						}
@@ -5477,7 +5467,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_Speed(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_Speed(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;	
@@ -5485,7 +5475,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_Speed(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;	
@@ -5517,7 +5507,7 @@ public class Magic : UWEBase {
 							case SpellRule_Equipable:
 									if (PassiveArrayIndex!=-1)
 									{
-											Cast_Telekinesis(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+											Cast_Telekinesis(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 											SpellResultType=SpellResultPassive;
 									}
 									break;
@@ -5525,7 +5515,7 @@ public class Magic : UWEBase {
 							default:
 									if (ActiveArrayIndex!=-1)
 									{
-											Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+											Cast_Telekinesis(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 											SpellResultType=SpellResultActive;
 									}
 									break;
@@ -5595,7 +5585,7 @@ public class Magic : UWEBase {
 								case SpellRule_Equipable:
 										if (PassiveArrayIndex!=-1)
 										{
-												Cast_WaterWalk(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+												Cast_WaterWalk(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
 												SpellResultType=SpellResultPassive;
 										}
 										break;	
@@ -5603,7 +5593,7 @@ public class Magic : UWEBase {
 								default:
 										if (ActiveArrayIndex!=-1)
 										{
-												Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+												Cast_WaterWalk(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
 												SpellResultType=SpellResultActive;
 										}
 										break;
@@ -5622,9 +5612,9 @@ public class Magic : UWEBase {
 				case SpellResultNone://No spell effect or unimplemented spell
 						return null;
 				case SpellResultPassive://Passive spell effect
-						return playerUW.PassiveSpell[PassiveArrayIndex];
+						return UWCharacter.Instance.PassiveSpell[PassiveArrayIndex];
 				case SpellResultActive://Active spell effect
-						return playerUW.ActiveSpell[ActiveArrayIndex];
+						return UWCharacter.Instance.ActiveSpell[ActiveArrayIndex];
 				default:
 						return null;
 				}

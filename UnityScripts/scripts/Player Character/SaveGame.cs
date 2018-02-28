@@ -17,7 +17,7 @@ public class SaveGame : Loader {
 				int y_position=0;
 				int z_position=0;
 
-				//int[] gametimevals=new int[3];
+
 				int[] ActiveEffectIds=new int[3];
 				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
@@ -30,8 +30,8 @@ public class SaveGame : Loader {
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out buffer))
 				{
 
-						TileMap.OnWater=false;
-						TileMap.OnIce=false;
+						//TileMap.OnWater=false;
+						//TileMap.OnIce=false;
 						int xOrValue= (int)buffer[0];
 						UWCharacter.Instance.XorKey=xOrValue;
 						int incrnum = 3;
@@ -408,19 +408,6 @@ public class SaveGame : Loader {
 									UWCharacter.Instance.ActiveSpell[a].counter=ActiveEffectStability[a];		
 							}
 						}
-
-
-						//Reapply poisoning.
-						/*if (UWCharacter.Instance.play_poison!=0)
-						{
-							SpellEffectPoison p = (SpellEffectPoison)UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
-							p.counter=UWCharacter.Instance.play_poison;
-							p.DOT=(short)(p.Value/p.counter);//Recalculate the poison damage to reapply.									
-						}
-						else
-						{//Make sure any poison is cured.
-							UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
-						}*/
 
 						GameClock.setUWTime( GameClock.instance.gametimevals[0] + (GameClock.instance.gametimevals[1] * 255 )  + (GameClock.instance.gametimevals[2] * 255 * 255 ));
 
@@ -1400,7 +1387,7 @@ public class SaveGame : Loader {
 				int x_clock=1;
 
 
-				int[] gametimevals=new int[3];
+				//int[] gametimevals=new int[3];
 				int[] ActiveEffectIds=new int[3];
 				short[] ActiveEffectStability=new short[3];
 				int effectCounter=0;
@@ -1418,8 +1405,8 @@ public class SaveGame : Loader {
 				UWCharacter.Instance.teleportedTimer=0f;
 				if (DataLoader.ReadStreamFile(Loader.BasePath + "SAVE" + slotNo + sep + "PLAYER.DAT", out pDat))
 				{
-					TileMap.OnWater=false;
-					TileMap.OnIce=false;
+					//TileMap.OnWater=false;
+					//TileMap.OnIce=false;
 
 						byte MS = (byte)DataLoader.getValAtAddress(pDat,0,8);
 
@@ -1610,19 +1597,11 @@ public class SaveGame : Loader {
 												z_position=(int)DataLoader.getValAtAddress(buffer,i,16);break;
 										case 0x5C : ///   heading
 												{
-														float heading=(float)DataLoader.getValAtAddress(buffer,i,8);	
-
-														//heading=255f-heading;//reversed
-														//playerCam.transform.rotation=Vector3.zero;
-
-														//this.transform.Rotate(0f,heading*(255f/360f),0f,Space.World);
-														UWCharacter.Instance.transform.eulerAngles=new Vector3(0f,heading*(360f/255f),0f);
-														//playerCam.transform.localRotation.eulerAngles=Vector3.zero;
-														UWCharacter.Instance.playerCam.transform.localRotation=Quaternion.identity;
-														break;
+													float heading=(float)DataLoader.getValAtAddress(buffer,i,8);	
+													UWCharacter.Instance.transform.eulerAngles=new Vector3(0f,heading*(360f/255f),0f);
+													UWCharacter.Instance.playerCam.transform.localRotation=Quaternion.identity;
+													break;
 												}
-
-
 										case 0x5D  : ///   dungeon level									
 												GameWorldController.instance.startLevel=(short)(DataLoader.getValAtAddress(buffer,i,16) - 1);break;
 										case 0x5F:///High nibble is dungeon level+1 with the silver tree if planted
@@ -1888,6 +1867,15 @@ public class SaveGame : Loader {
 													break;
 												}
 										//x_clocks
+										case 0x36a: ///   game time
+												GameClock.instance.game_time=(int)DataLoader.getValAtAddress(buffer,i,32);break;
+										case 0x36b: 
+												GameClock.instance.gametimevals[0]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x36c: 
+												GameClock.instance.gametimevals[1]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+										case 0x36d: 
+												GameClock.instance.gametimevals[2]=(int)DataLoader.getValAtAddress(buffer,i,8);break;
+
 										case 0x36f://1 Castle events
 										case 0x370://2
 										case 0x371://3 DjinnCapture
@@ -1973,47 +1961,6 @@ public class SaveGame : Loader {
 								ObjectLoader.RenderObjectList(objLoader,GameWorldController.instance.currentTileMap(),GameWorldController.instance.InventoryMarker);
 
 								ObjectLoader.LinkObjectListWands (objLoader);//Link wands to their spell object
-
-								//Find any wands and move their spell objects to the gameworld to behave like UW1
-								/*for (int o=0; o<=objLoader.objInfo.GetUpperBound(0);o++)
-								{
-										if (objLoader.objInfo[o]!=null)
-										{
-												if ( 
-														( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.WAND )
-														||
-														(
-																( GameWorldController.instance.objectMaster.type[ objLoader.objInfo[o].item_id ] == ObjectInteraction.CLUTTER)
-																&&
-																(objLoader.objInfo[o].link!=0)
-														)
-												)
-												{
-														if ( objLoader.objInfo[o].enchantment == 0)
-														{//Enchantment is in a spell object link
-																ObjectLoaderInfo spellObj = objLoader.objInfo[ objLoader.objInfo[o].link ];
-																if (spellObj!=null)
-																{
-																		//Move it's spell object to the game world and destroy the instance of that object that is on the inventory marker
-																		//ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, spellObj.quality,spellObj.owner,spellObj.link,256);
-																		//ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
-																		Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
-																		wandInfo.SpellObjectOwnerToCreate= spellObj.owner;
-																		wandInfo.SpellObjectLink= spellObj.link;
-																		wandInfo.SpellObjectQualityToCreate= spellObj.quality;
-																		GameObject.Destroy(spellObj.instance.gameObject);
-																}	
-														}
-														else
-														{//enchantment is on the wand itself.
-															//Debug.Log("wand link is out of range")	;
-															Wand wandInfo = objLoader.objInfo[o].instance.GetComponent<Wand>();
-															wandInfo.SpellObjectOwnerToCreate= -1;
-														}
-												}		
-										}
-								}*/
-
 
 								for (int j=931; j<969; j=j+2)
 								{//Apply objects to slots
@@ -2122,7 +2069,7 @@ public class SaveGame : Loader {
 								UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);									
 						}*/
 
-						GameClock.setUWTime( gametimevals[0] + (gametimevals[1] * 255 )  + (gametimevals[2] * 255 * 255 ));
+						GameClock.setUWTime( GameClock.instance.gametimevals[0] + ( GameClock.instance.gametimevals[1] * 255 )  + ( GameClock.instance.gametimevals[2] * 255 * 255 ));
 
 						float Ratio=213f;
 						float VertAdjust = 0.3543672f;

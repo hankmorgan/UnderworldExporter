@@ -217,7 +217,8 @@ public class NPC : MobileObject {
 						if (hit.hit)
 						{//Tests if the npc in question is on the nav mesh
 							AddAgent (mask);	
-							Agent.Warp(pos);
+							//Agent.Warp(pos);
+							Agent.Warp (objInt().startPos);
 						}
 				}
 
@@ -1864,7 +1865,7 @@ public class NPC : MobileObject {
 
 				if (npc_gtarg==6)
 				{
-						distanceMultipler=3;//Runs further away from it's current location.
+						distanceMultipler=9;//Runs further away from it's current location.
 				}
 				//Get a random spot.
 				bool DestFound=false;
@@ -1877,18 +1878,21 @@ public class NPC : MobileObject {
 				//int ValidRoom = npc.Room();
 				for (int i=0; i<5;i++)
 				{
-						DestTileX = tileX + Random.Range(-2*distanceMultipler,3*distanceMultipler);
-						DestTileY = tileY + Random.Range(-2*distanceMultipler,3*distanceMultipler);
-						//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
-						if (Room()== GameWorldController.instance.currentTileMap().GetRoom(DestTileX,DestTileY))
+						DestTileX = tileX + Random.Range(-6*distanceMultipler,7*distanceMultipler);
+						DestTileY = tileY + Random.Range(-6*distanceMultipler,7*distanceMultipler);
+						if (TileMap.ValidTile(DestTileX, DestTileY))
 						{
+							//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
+							if (Room()== GameWorldController.instance.currentTileMap().GetRoom(DestTileX,DestTileY))
+							{
 								DestFound=true;
 								break;
-						}	
-						if (DestFound==false)
-						{
+							}	
+							if (DestFound==false)
+							{
 								DestTileX=tileX;
 								DestTileY=tileY;
+							}	
 						}
 				}
 

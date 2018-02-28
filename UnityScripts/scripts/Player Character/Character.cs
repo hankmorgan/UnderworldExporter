@@ -43,12 +43,15 @@ public class Character : UWEBase {
 	public CharacterController playerController;
 	public AudioSource aud;
 
-		[Header("Health")]
+	[Header("Health")]
 	//Character Stats
 	public int MaxVIT;
 	public int CurVIT;
 
-		[Header("Interaction Ranges")]	
+
+
+
+	[Header("Interaction Ranges")]	
 	public float pickupRange=2.5f;
 	public float useRange=2.0f;
 	public float talkRange=20.0f;

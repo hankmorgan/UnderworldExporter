@@ -24,10 +24,10 @@ public class TileContact : UWEBase {
 	}
 
 
-		protected virtual void TileContactEvent(Feet feet, Vector3 position)
-	{
+		//protected virtual void TileContactEvent(Feet feet, Vector3 position)
+	//{
 
-	}
+	//}
 
 	/// <summary>
 	/// Determines whether this object is a quest object or similar object that should not be destroyed by contact. If it is a container it will search to the container for a quest object.

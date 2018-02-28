@@ -7,8 +7,8 @@ public class Feet : UWEBase {
 		//BoxCollider bx;
 		//public Collider[] colliders;
 	//public TileMap tm;
-	public float currY;
-	public float fallSpeed;
+	//public float currY;
+	//public float fallSpeed;
 		/*int waterLayer;
 	int landLayer;
 	int lavaLayer;
@@ -154,36 +154,14 @@ public class Feet : UWEBase {
 		}*/
 	//}
 
-	void Update()
+/*	void Update()
 	{//http://forum.unity3d.com/threads/fall-damage-question.46101/
 		//onGround = TileMap.OnGround;
 		//veloY = UWCharacter.Instance.playerMotor.movement.velocity.y;
 	//	if (TileMap.OnGround==false)
 		//UWCharacter.Instance.Grounded=CheckIsGrounded();
-		if (UWCharacter.Instance.Grounded==false)
-		{
-			if (UWCharacter.Instance.playerMotor.movement.velocity.y < currY)
-			{
-				fallSpeed= Mathf.Max(-UWCharacter.Instance.playerMotor.movement.velocity.y, fallSpeed);
-				//UWCharacter.Instance.playerMotor.movement.velocity.y;
-			}
-			else
-			{
-				fallSpeed=0.0f;
-			}
-		}
-		else
-		{			
-			if (fallSpeed>0.0f)
-			{							
-				//Check fall damage.
-				//GameWorldController.instance.PositionDetect();//check where I am.
-				UWCharacter.Instance.onLanding(fallSpeed);
-				fallSpeed=0.0f;
-			}
-		}
-		currY =UWCharacter.Instance.playerMotor.movement.velocity.y;
-	}
+				FallDamageUpdate ();
+	}*/
 		/*
 		public bool CheckIsGrounded()
 		{
@@ -207,4 +185,26 @@ public class Feet : UWEBase {
 			return false;
 		}
 		*/
+
+	/*void FallDamageUpdate ()
+	{
+		if (UWCharacter.Instance.Grounded == false) {
+			if (UWCharacter.Instance.playerMotor.movement.velocity.y < currY) {
+				fallSpeed = Mathf.Max (-UWCharacter.Instance.playerMotor.movement.velocity.y, fallSpeed);
+				//UWCharacter.Instance.playerMotor.movement.velocity.y;
+			}
+			else {
+				fallSpeed = 0.0f;
+			}
+		}
+		else {
+			if (fallSpeed > 0.0f) {
+				//Check fall damage.
+				//GameWorldController.instance.PositionDetect();//check where I am.
+				UWCharacter.Instance.onLanding (fallSpeed);
+				fallSpeed = 0.0f;
+			}
+		}
+		currY = UWCharacter.Instance.playerMotor.movement.velocity.y;
+	}*/
 }

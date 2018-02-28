@@ -1311,11 +1311,11 @@ public class ObjectLoader : Loader {
 										offY = (y*BrushY) + 60f;//center in tile
 										if (objList[index].x == 0)
 										{
-												offX +=1;//was 4
+												offX +=6.5f;//was 4
 										}
 										if (objList[index].x == 7)
 										{
-												offX -=1;//was 4
+												offX -=6.5f;//was 4
 										}
 										break;
 								case ObjectInteraction.HEADINGNORTH:
@@ -1323,11 +1323,11 @@ public class ObjectLoader : Loader {
 										offX = (x*BrushX) +60f;
 										if (objList[index].y == 0)
 										{
-											offY +=1;//was 4
+											offY +=6.5f;//was 4
 										}
 										if (objList[index].y == 7)
 										{
-												offY -=1;//was 4
+												offY -=6.5f;//was 4
 										}
 										break;
 								}

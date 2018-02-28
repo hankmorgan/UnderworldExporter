@@ -31,6 +31,18 @@ public class AutoMap : Loader {
 		//BRIDGE   0x6
 		//LAVA     0xc
 
+		public const int DisplayTypeClear=0;  //uw1 + 2
+		public const int DisplayTypeWaterUW1=1;
+		public const int DisplayTypeWaterUW2=4;
+		public const int DisplayTypeLava=2;
+		public const int DisplayTypeDoorUW1=4;
+		public const int DisplayTypeDoorUW2=1;
+		public const int DisplayTypeBridge1UW1=9;
+		public const int DisplayTypeBridge2UW1=10;
+		public const int DisplayTypeBridgeUW2=6;
+		public const int DisplayTypeStairUW1=12;
+		public const int DisplayTypeStairUW2=3;
+
 		public const int TILE_SOLID=0;
 		public const int TILE_OPEN= 1;
 		public const int TILE_DIAG_SE= 2;
@@ -59,13 +71,7 @@ public class AutoMap : Loader {
 		const int SOUTHWEST=6;
 		const int SOUTHEAST=7;
 
-		public const int DisplayTypeClear=0;
-		public const int DisplayTypeWater=1;
-		public const int DisplayTypeLava=2;
-		public const int DisplayTypeDoor=4;
-		public const int DisplayTypeBridge1=9;
-		public const int DisplayTypeBridge2=10;
-		public const int DisplayTypeStair=12;
+
 
 		/// <summary>
 		/// The tile map size along the x axis
@@ -255,7 +261,6 @@ public class AutoMap : Loader {
 					int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
 					if (((compressionFlag>>1) & 0x1) == 1)
 					{//automap is compressed
-						//Debug.Log("compressed automap notes " + LevelNo +  " at " + automapNotesAddress);
 						char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
 						ProcessAutoMapNotes(LevelNo, tmp_ark,0, datalen);
 					}
@@ -326,6 +331,23 @@ public class AutoMap : Loader {
 				}
 		}
 
+		void WriteDebugMap()
+		{
+				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_automap_" + thisLevelNo + ".txt", false);	
+				string output="";
+				for (int y = TileMap.TileMapSizeY; y>=0; y--)
+				{
+						for (int x = 0; x<TileMap.TileMapSizeX; x++)
+						{
+								output+= Tiles[x,y].DisplayType + ",";
+						}
+						output+= "\n";
+				}
+				writer.Write(output);
+				writer.Close();
+		}
+
+
 		/// <summary>
 		/// Generates a tile map image for the automap for the specified level.
 		/// </summary>
@@ -335,6 +357,10 @@ public class AutoMap : Loader {
 		{
 				InitColours();
 
+				if (_RES==GAME_UW2)
+				{
+						WriteDebugMap();
+				}
 				///Sets the map no display
 				UWHUD.instance.LevelNoDisplay.text=(thisLevelNo+1).ToString();
 				///Uses a cursor icon to display the player.
@@ -1168,7 +1194,13 @@ public class AutoMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		private bool GetIsDoor(int tileX, int tileY)
 		{
-			return (Tiles[tileX,tileY].DisplayType==DisplayTypeDoor);
+			switch(_RES)
+			{
+			case GAME_UW2:
+					return (Tiles[tileX,tileY].DisplayType==DisplayTypeDoorUW2);
+			default:
+					return (Tiles[tileX,tileY].DisplayType==DisplayTypeDoorUW1);
+			}			
 		}
 
 
@@ -1181,7 +1213,14 @@ public class AutoMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		private bool GetIsWater(int tileX, int tileY)
 		{
-				return Tiles[tileX,tileY].DisplayType==DisplayTypeWater;
+				switch(_RES)
+				{
+					case GAME_UW2:
+						return Tiles[tileX,tileY].DisplayType==DisplayTypeWaterUW2;
+					default:
+						return Tiles[tileX,tileY].DisplayType==DisplayTypeWaterUW1;
+				}
+
 		}
 
 		/// <summary>
@@ -1205,7 +1244,14 @@ public class AutoMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		private bool GetIsBridge(int tileX, int tileY)
 		{
-			return (Tiles[tileX,tileY].DisplayType==DisplayTypeBridge1 || Tiles[tileX,tileY].DisplayType==DisplayTypeBridge2);
+				switch(_RES)
+				{
+				case GAME_UW2:
+						return Tiles[tileX,tileY].DisplayType==DisplayTypeBridgeUW2;
+				default:
+					return (Tiles[tileX,tileY].DisplayType==DisplayTypeBridge1UW1 || Tiles[tileX,tileY].DisplayType==DisplayTypeBridge2UW1);
+				}
+			
 		}
 
 
@@ -1217,7 +1263,13 @@ public class AutoMap : Loader {
 		/// <param name="tileY">Tile y.</param>
 		private bool GetIsStair(int tileX, int tileY)
 		{
-			return Tiles[tileX,tileY].DisplayType==DisplayTypeStair;
+			switch(_RES)
+			{
+			case GAME_UW2:
+				return Tiles[tileX,tileY].DisplayType==DisplayTypeStairUW2;
+			default:
+				return Tiles[tileX,tileY].DisplayType==DisplayTypeStairUW1;			
+			}			
 		}
 
 
@@ -1259,10 +1311,21 @@ public class AutoMap : Loader {
 					((tileY>=0) && (tileY<=TileMap.TileMapSizeY)))
 			{
 				Tiles[tileX,tileY].tileType=(short)Mark;
-				if (Tiles[tileX,tileY].DisplayType!=DisplayTypeStair)
+				switch(_RES)
 				{
-					Tiles[tileX,tileY].DisplayType=(short)DisplayType;				
-				}				
+				case GAME_UW2:
+					if (Tiles[tileX,tileY].DisplayType!=DisplayTypeStairUW2)
+					{
+						Tiles[tileX,tileY].DisplayType=(short)DisplayType;				
+					}
+					break;
+				default:
+					if (Tiles[tileX,tileY].DisplayType!=DisplayTypeStairUW1)
+					{
+						Tiles[tileX,tileY].DisplayType=(short)DisplayType;				
+					}
+					break;
+				}			
 			}
 		}
 
@@ -1291,11 +1354,25 @@ public class AutoMap : Loader {
 		{
 				if (t.hasBridge)
 				{
-					return DisplayTypeBridge1;
+						switch(_RES)
+						{
+						case GAME_UW2:
+							return DisplayTypeBridgeUW2;
+						default:
+							return DisplayTypeBridge1UW1;
+						}
+					
 				}
 				else if (t.isWater)
 				{
-					return DisplayTypeWater;
+					switch(_RES)
+					{
+					case GAME_UW2:
+						return DisplayTypeWaterUW2;
+					default:
+						return DisplayTypeWaterUW1;
+					}
+					
 				}
 				else if(t.isLava)
 				{
@@ -1303,7 +1380,14 @@ public class AutoMap : Loader {
 				}
 				else if (t.isDoor)
 				{
-					return DisplayTypeDoor;
+					switch(_RES)
+					{
+
+						case GAME_UW2:
+							return DisplayTypeDoorUW2;
+						default:
+							return DisplayTypeDoorUW1;
+					}					
 				}
 				else
 				{
