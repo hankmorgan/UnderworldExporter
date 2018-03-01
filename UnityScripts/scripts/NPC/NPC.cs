@@ -161,13 +161,13 @@ public class NPC : MobileObject {
 		public GameObject NPC_Launcher; 
 		public int Ammo=0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
 		public float WaitTimer=0f;
-
 		[Header("NavMesh")]
 		public NavMeshAgent Agent;
 		float targetBaseOffset=0f;
 		float startBaseOffset=0f;
 		float floatTime =0f;
 		public float DistanceToGtarg;
+		public bool ArrivedAtDestination;
 
 
 
@@ -200,6 +200,8 @@ public class NPC : MobileObject {
 				}
 				newAnim.critAnim= GameWorldController.instance.critsLoader[NPC_IDi-64].critter.AnimInfo;
 				newAnim.output=this.GetComponentInChildren<SpriteRenderer>();
+				DestTileX=objInt().tileX;
+				DestTileY=objInt().tileY;
 		}
 
 		void AI_INIT ()
@@ -804,21 +806,26 @@ public class NPC : MobileObject {
 								break;
 						}
 
+				case npc_goals.npc_goal_goto_1:	//Go to gtarg
 				case npc_goals.npc_goal_stand_still_0:
 						//Standing still
 				case npc_goals.npc_goal_stand_still_7:
 				case npc_goals.npc_goal_stand_still_11:
 				case npc_goals.npc_goal_stand_still_12:
-						{
-								AnimRange= NPC.AI_RANGE_IDLE;
+						{								
 								DestTileX = npc_xhome; DestTileY = npc_yhome;
-								if ((CurTileX!=npc_xhome) && (CurTileY!=npc_yhome))								
-								{										
-										AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
+								if ((CurTileX!=npc_xhome) || (CurTileY!=npc_yhome))								
+								{		
+									AnimRange= NPC.AI_RANGE_MOVE;
+									AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
+								}
+								else
+								{
+									AnimRange= NPC.AI_RANGE_IDLE;
+									AgentStand();
 								}
 								break;
-						}
-				case npc_goals.npc_goal_goto_1:	//Go to gtarg
+						}				
 				case npc_goals.npc_goal_wander_2://Wander randomly	
 				case npc_goals.npc_goal_wander_4:
 				case npc_goals.npc_goal_wander_8:
@@ -937,30 +944,54 @@ public class NPC : MobileObject {
 
 		void NPCWanderUpdate ()
 		{
-				CurTileX = (int)(transform.position.x / 1.2f);
-				CurTileY = (int)(transform.position.z / 1.2f);
-				if ((WaitTimer <= 0) && ((npc_goal != (short)npc_goals.npc_goal_goto_1))) {
-						SetRandomDestination ();
+				//CurTileX = (int)(transform.position.x / 1.2f);
+				//CurTileY = (int)(transform.position.z / 1.2f);
+				bool AtDestination = ((DestTileX == CurTileX) && (DestTileY == CurTileY)) ;
+
+				if (!AtDestination) 
+				{
+					//I need to move to this tile.
+					AnimRange = NPC.AI_RANGE_MOVE;
+					AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
+					ArrivedAtDestination=false;
 				}
-				else {
-						if ((DestTileX == CurTileX) && (DestTileY == CurTileY)  && ((npc_goal == (short)npc_goals.npc_goal_goto_1))) {
-								DestTileX = npc_xhome;
-								DestTileY = npc_yhome;
-								npc_goal = (short)npc_goals.npc_goal_stand_still_0;
+				else 
+				{		//I am at this tile. Stand idle for a random period of time
+					AnimRange = NPC.AI_RANGE_IDLE;
+					if (ArrivedAtDestination==false)
+					{
+						ArrivedAtDestination=true;
+						if (WaitTimer == 0) 
+						{
+							WaitTimer = Random.Range (1f, 10f);
+						}	
+					}
+				}
+
+
+				if (
+						(WaitTimer <= 0) //I am not waiting around.
+						&&
+						(AtDestination)//I am at my destination already.
+					) 
+					{
+						if (AnimRange==NPC.AI_RANGE_IDLE)
+						{//and I am idling.
+							SetRandomDestination ();
+							ArrivedAtDestination=false;
 						}
-				}
-				if ((DestTileX != CurTileX) || (DestTileY != CurTileY)) {
-						//I need to move to this tile.
-						AnimRange = NPC.AI_RANGE_MOVE;
-						AgentGotoDestTileXY (ref DestTileX, ref DestTileY, ref CurTileX, ref CurTileY);
-				}
-				else {
-						//I am at this tile. Stand idle for a random period of time
-						AnimRange = NPC.AI_RANGE_IDLE;
-						if (WaitTimer == 0) {
-								WaitTimer = Random.Range (1f, 10f);
-						}
-				}
+					}
+				//else 
+				//	{
+				//		if ((DestTileX == CurTileX) && (DestTileY == CurTileY)  && ((npc_goal == (short)npc_goals.npc_goal_goto_1))) 
+				//			{
+				//				DestTileX = npc_xhome;
+				//				DestTileY = npc_yhome;
+				//				npc_goal = (short)npc_goals.npc_goal_stand_still_0;
+				//				AnimRange = NPC.AI_RANGE_IDLE;
+				//			}
+				//	}
+
 		}
 
 		void NPCCombatUpdate ()
@@ -1068,15 +1099,16 @@ public class NPC : MobileObject {
 
 		void AgentGotoDestTileXY (ref int DestinationX, ref int DestinationY, ref int tileX, ref int tileY )
 		{
-				if (Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID) {
+				if (Agent.agentTypeID == GameWorldController.instance.NavMeshAir.agentTypeID) 
+					{
 						//float tileHeight = (float)GameWorldController.instance.currentTileMap ().GetFloorHeight (tileX, tileY) * 0.15f;//Of current tile
 						//float zpos = Random.Range (tileHeight, 4f);
 						//AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
 						targetBaseOffset = 0.5f;//tileHeight + 0.2f ;//zpos - tileHeight;
 						startBaseOffset = Agent.baseOffset;
 						floatTime = 1f;
-						AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
-				}
+						//AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
+					}
 				AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
 		}
 
@@ -1871,34 +1903,41 @@ public class NPC : MobileObject {
 				bool DestFound=false;
 				Vector3 curPos = transform.position;
 				//Vector3 dest =curPos;
-				int tileX = (int)(curPos.x/1.2f);
-				int tileY = (int)(curPos.z/1.2f);
-				DestTileX =tileX;
-				DestTileY=tileY;
+				//int tileX = (int)(curPos.x/1.2f);
+
+				//int tileY = (int)(curPos.z/1.2f);
+				//DestTileX =CurTileX;
+				//DestTileY=CurTileY;
 				//int ValidRoom = npc.Room();
-				for (int i=0; i<5;i++)
+				int candidateDestTileX;
+				int candidateDestTileY;
+				for (int i=0; i<25;i++)
 				{
-						DestTileX = tileX + Random.Range(-6*distanceMultipler,7*distanceMultipler);
-						DestTileY = tileY + Random.Range(-6*distanceMultipler,7*distanceMultipler);
-						if (TileMap.ValidTile(DestTileX, DestTileY))
+					//DestTileX = CurTileX + Random.Range(-6*distanceMultipler,7*distanceMultipler);
+					//DestTileY = CurTileY + Random.Range(-6*distanceMultipler,7*distanceMultipler);
+					candidateDestTileX = npc_xhome + Random.Range(-3*distanceMultipler,4*distanceMultipler);
+					candidateDestTileY = npc_yhome + Random.Range(-3*distanceMultipler,4*distanceMultipler);
+					if (TileMap.ValidTile(DestTileX, DestTileY))
+					{
+						//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
+						if (Room()== GameWorldController.instance.currentTileMap().GetRoom(candidateDestTileX,candidateDestTileY))
 						{
-							//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
-							if (Room()== GameWorldController.instance.currentTileMap().GetRoom(DestTileX,DestTileY))
-							{
-								DestFound=true;
-								break;
-							}	
-							if (DestFound==false)
-							{
-								DestTileX=tileX;
-								DestTileY=tileY;
-							}	
-						}
+							DestTileX = candidateDestTileX;
+							DestTileY = candidateDestTileY;
+							DestFound=true;
+							break;
+						}	
+						if (DestFound==false)
+						{
+							DestTileX=CurTileX;
+							DestTileY=CurTileY;
+						}	
+					}
 				}
 
 				//Move back home if too far away
-				float xDist2=Mathf.Pow(DestTileX-npc_xhome,2f);
-				float yDist2=Mathf.Pow(DestTileY-npc_yhome,2f);
+				float xDist2=Mathf.Pow(DestTileX-npc_xhome,5f);
+				float yDist2=Mathf.Pow(DestTileY-npc_yhome,5f);
 				if (yDist2+xDist2>=10)
 				{
 						DestTileX=npc_xhome;

@@ -690,7 +690,8 @@ public class MainMenuHud : GuiBase {
 			UWCharacter.Instance.transform.position= GameWorldController.instance.StartPos;
 			UWHUD.instance.gameObject.SetActive(true);
 			UWCharacter.Instance.playerController.enabled=true;
-			GameWorldController.instance.getMus().Death=false;
+			//GameWorldController.instance.getMus().Death=false;
+			UWCharacter.Instance.Death=false;
 			UWCharacter.Instance.playerMotor.enabled=true;
 			GameWorldController.instance.AtMainMenu=false;
 			UWCharacter.Instance.playerInventory.Refresh();

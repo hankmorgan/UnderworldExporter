@@ -51,6 +51,14 @@ public class UWCharacter : Character {
 		public bool Paralyzed;
 		public float currYVelocity;
 		public float fallSpeed;
+		/// <summary>
+		/// Is the player fleeing from combat (recently attacked and no weapon drawn)
+		/// </summary>
+		public bool Fleeing;
+		/// <summary>
+		/// Weapon drawn music
+		/// </summary>
+		public bool WeaponDrawn;
 
 		[Header("Player Health Status")]
 		//Character Status
@@ -60,7 +68,14 @@ public class UWCharacter : Character {
 		public float poison_timer=30f;
 		public float lavaDamageTimer;//How long before applying lava damage
 		private bool InventoryReady=false;	
-
+		/// <summary>
+		/// Player character near death.
+		/// </summary>
+		public bool Injured;
+		/// <summary>
+		/// PLayer character is death
+		/// </summary>
+		public bool Death;
 
 
 		[Header("Save game")]
@@ -181,7 +196,8 @@ public class UWCharacter : Character {
 				//mus.Death=true;
 				//TODO:Turn of the player camera
 				//UWCharacter.Instance.playerCam.cullingMask=31;
-				GameWorldController.instance.getMus().Death=true;
+				//GameWorldController.instance.getMus().Death=true;
+				Death=true;
 				UWCharacter.InteractionMode=InteractionModeUse;
 				UWHUD.instance.wpa.SetAnimation=-1;
 				if ( UWHUD.instance.CutScenesSmall!=null)
@@ -414,15 +430,15 @@ public class UWCharacter : Character {
 				{//TODO: This should be in window detect
 						UWHUD.instance.InputControl.Select();
 				}
-				if ((CurVIT<=0) && (GameWorldController.instance.getMus().Death==false))
+				if ((CurVIT<=0) && (Death==false))
 				{
 						PlayerDeath();			
 						return;
 				}
-				if(GameWorldController.instance.getMus().Death==true)
+				if(Death==true)
 				{
 						//Still processing death.
-						isSwimming=false;
+						//isSwimming=false;
 						return;
 				}
 				if (playerCam.enabled==true)
@@ -495,7 +511,8 @@ public class UWCharacter : Character {
 						playerMotor.movement.maxFallSpeed=0.0f;	
 				}
 
-				GameWorldController.instance.getMus().WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
+				//GameWorldController.instance.getMus().
+				WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
 
 				if (PlayerMagic.ReadiedSpell!="")
 				{//Player has a spell thats about to be cast. All other activity is ignored.	
@@ -1443,11 +1460,13 @@ public class UWCharacter : Character {
 		/// </summary>
 		public static void ResurrectPlayer ()
 		{
+				UWCharacter.Instance.Death=false;
+				UWCharacter.Instance.Fleeing=false;
 				if (GameWorldController.instance.getMus () != null) 
 				{
-						GameWorldController.instance.getMus ().Death = false;
+						//GameWorldController.instance.getMus ().Death = false;
 						GameWorldController.instance.getMus ().Combat = false;
-						GameWorldController.instance.getMus ().Fleeing = false;
+						//GameWorldController.instance.getMus ().Fleeing = false;
 						MusicController.LastAttackCounter = 0.0f;
 				}
 				UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;

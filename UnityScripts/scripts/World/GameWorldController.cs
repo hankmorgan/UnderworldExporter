@@ -924,10 +924,11 @@ public class GameWorldController : UWEBase {
 								critsLoader= new CritLoader[64];//Clear out animations
 								InitLevelData();
 						}
-						//else
-						//{
 
-					//	}
+						if (_RES==GAME_UW2)
+						{
+								getMus().ChangeTrackListForUW2(newLevelNo);	
+						}
 
 						//Check loading
 						if (Tilemaps[newLevelNo]==null)

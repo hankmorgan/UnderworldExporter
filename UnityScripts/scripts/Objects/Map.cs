@@ -35,9 +35,12 @@ public class Map : object_base {
 		UWCharacter.Instance.playerMotor.jumping.enabled=false;
 		MapInteraction.UpdateMap(GameWorldController.instance.LevelNo);
 		WindowDetectUW.InMap=true;
-		if  (GameWorldController.instance.getMus()!=null)
+		if (_RES!=GAME_UW2)
 		{
-			GameWorldController.instance.getMus().InMap=true;
+				if  (GameWorldController.instance.getMus()!=null)
+				{
+						GameWorldController.instance.getMus().InMap=true;
+				}	
 		}
 		UWHUD.instance.MessageScroll.Clear();
 		UWHUD.instance.ContextMenu.text="";

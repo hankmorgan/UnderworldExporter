@@ -67,7 +67,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap {
 		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Julia),25,43,NPC.npc_goals.npc_goal_wander_2);
 		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Dupre),21,42,NPC.npc_goals.npc_goal_wander_2);
 		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Iolo),22,51,NPC.npc_goals.npc_goal_wander_2);
-		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Nystrul),42,43,NPC.npc_goals.npc_goal_wander_2);//nyst
+		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Nystrul),42,43,NPC.npc_goals.npc_goal_goto_1);//nyst
 		NPC.SetNPCLocation(getNPC(BritanniaNPCS.Syria),42,36,NPC.npc_goals.npc_goal_wander_2);
 	}
 

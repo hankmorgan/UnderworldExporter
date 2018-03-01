@@ -126,7 +126,7 @@ public class a_pressure_trigger : trigger_base {
 			{
 				WeightOnTrigger+= colliders[i].gameObject.GetComponent<ObjectInteraction>().GetWeight();
 			}
-			else if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null)) //||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
+			else if( (colliders[i].gameObject.GetComponent<UWCharacter>()!=null) ||  (colliders[i].gameObject.GetComponent<Feet>()!=null) )
 			{
 				WeightOnTrigger+=5000;
 			}
