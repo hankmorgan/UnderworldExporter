@@ -924,7 +924,7 @@ public class NPC : MobileObject {
 														if (dc != null) {
 																if (dc.state () == false) {
 																		//door is closed
-																		if ((!dc.locked ()) && (!dc.Spiked)) {
+																			if ((!dc.locked ()) && (!dc.Spiked())) {
 																				//and can be opened.
 																				if (dc.DoorBusy == false) {
 																						dc.PlayerUse = false;

@@ -23,7 +23,7 @@ public class DoorControl : object_base {
 		///Sets if the lock can be picked.
 	public bool Pickable=true;
 		///Is the door spiked
-	public bool Spiked;//Probably on the lock object?
+	//public bool Spiked;//Probably on the lock object?
 		///Is it the player using the object or a trigger/trap.
 	public bool PlayerUse=false;
 		///A trigger to activate when opened.
@@ -288,12 +288,21 @@ public class DoorControl : object_base {
 		return true;
 	}
 	
+
+		/// <summary>
+		/// Tells if the door is spiked closed. Ie an npc cannot use it.
+		/// </summary>
+		public bool Spiked()
+		{
+			return (objInt().owner == 63);
+		}
+
 		/// <summary>
 		/// Spike this door. Blocks NPC from opening
 		/// </summary>
 	public bool Spike()
 	{//returns true if door becomes spiked
-		if (Spiked==false)
+		if (Spiked()==false)
 		{
 			//000~001~128~You can only spike closed doors.
 			//000~001~129~The door is now spiked closed.
@@ -302,8 +311,9 @@ public class DoorControl : object_base {
 			if (state()==false)
 			{//Closed door
 					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
-					Spiked=true;
-					//objIntUsed.consumeObject();			
+					//Spiked=true;
+					objInt().owner=63;
+		
 					return true;
 			}
 			else
@@ -368,6 +378,7 @@ public class DoorControl : object_base {
 					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),DoorTravelTime));
 				}
+				objInt().owner=0;
 				objInt().item_id+=8;
 				objInt().zpos+=24;
 				objInt().enchantment=1;
@@ -738,7 +749,12 @@ public class DoorControl : object_base {
 	{
 		if (isPortcullis()==false)
 		{
+
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),DoorQuality()));
+			if( (Spiked() )&& (_RES!=GAME_UW2))
+			{
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,131));
+			}
 		}
 		else
 		{
