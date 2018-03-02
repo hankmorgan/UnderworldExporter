@@ -570,11 +570,11 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="SlotNo">Slot no.</param>
 		private void SaveToSlot(int SlotNo)
 		{				
-				if (_RES==GAME_UW2)
-				{
-						UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
-						return;
-				}
+				//if (_RES==GAME_UW2)
+				//{
+				//		UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
+				//		return;
+				//}
 
 			//000~001~159~Impossible, you are between worlds. \n
 			if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==8))
@@ -582,22 +582,30 @@ public class OptionsMenuControl : GuiBase_Draggable {
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_impossible_you_are_between_worlds_));
 				return;
 			}
-				if (!Directory.Exists(Loader.BasePath + "SAVE" + (SlotNo+1)))
-				{
-						Directory.CreateDirectory(Loader.BasePath + "SAVE" + (SlotNo+1));
-				}
+			if (!Directory.Exists(Loader.BasePath + "SAVE" + (SlotNo+1)))
+			{
+					Directory.CreateDirectory(Loader.BasePath + "SAVE" + (SlotNo+1));
+			}
 
-			//Write lev.ark file and object lists
-			GameWorldController.instance.WriteBackLevArk(SlotNo+1);
-
-			//Write bglobals.dat
-			GameWorldController.instance.WriteBGlobals(SlotNo+1);
-
-			//Write a desc file
-			//File.WriteAllText(Loader.BasePath +  "save" + (SlotNo+1) + "\\desc" , "save"+SlotNo);
-			File.WriteAllText(Loader.BasePath +  "SAVE" + (SlotNo+1) + sep + "DESC" , SaveGame.SaveGameName(SlotNo+1));
-			//Write a player.dat file
-			SaveGame.WritePlayerDat(SlotNo+1);
+		
+		//Write a player.dat file
+			if (_RES==GAME_UW2)
+			{
+					SaveGame.WritePlayerDatUW2(SlotNo+1);	
+			}
+			else
+			{
+				//Write lev.ark file and object lists
+				GameWorldController.instance.WriteBackLevArk(SlotNo+1);
+				//Write bglobals.dat
+				GameWorldController.instance.WriteBGlobals(SlotNo+1);
+				//Write a desc file
+				File.WriteAllText(Loader.BasePath +  "SAVE" + (SlotNo+1) + sep + "DESC" , SaveGame.SaveGameName(SlotNo+1));
+				//Write player.dat
+				SaveGame.WritePlayerDatUW1(SlotNo+1);	
+					//	SaveGame.WritePlayerDatOriginal(SlotNo+1);	
+			}
+			
 			UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1,StringController.str_save_game_succeeded_));
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			ReturnToGame();
@@ -626,7 +634,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			if (_RES!=GAME_UW2)
 			{
 				//Read in the character data
-				SaveGame.LoadPlayerDat(SlotNo+1);
+				SaveGame.LoadPlayerDatUW1(SlotNo+1);
 			}
 			else
 			{

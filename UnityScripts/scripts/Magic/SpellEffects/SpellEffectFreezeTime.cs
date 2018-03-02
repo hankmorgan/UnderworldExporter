@@ -15,31 +15,33 @@ public class SpellEffectFreezeTime : SpellEffect {
 	public bool isNPC;
 	public override void ApplyEffect ()
 	{
-			if (isNPC)
+			/*if (isNPC)
 			{
 				this.GetComponent<NPC>().Frozen=true;
 			}
 			else
 				{//Player applies the effect to other npcs?
 						
-				}
+				}*/
+				UWCharacter.Instance.isTimeFrozen=true;
 
 		base.ApplyEffect ();
 	}
 
 	void Update()
 	{
-				if (isNPC==true)
-				{
-						this.GetComponent<NPC>().Frozen=true;				
-				}
+			//	if (isNPC==true)
+			//	{
+			//			this.GetComponent<NPC>().Frozen=true;				
+			//	}
+				UWCharacter.Instance.isTimeFrozen=true;
 		
 	}
 
 
 	public override void CancelEffect ()
 	{
-				if (isNPC==true)
+			/*	if (isNPC==true)
 				{
 						this.GetComponent<NPC>().Frozen=false;
 						//this.GetComponent<NPC>().CurrentAnim="";
@@ -64,8 +66,8 @@ public class SpellEffectFreezeTime : SpellEffect {
 										}
 								}
 						}
-				}
-
+				}*/
+				UWCharacter.Instance.isTimeFrozen=false;
 
 		base.CancelEffect ();
 	}

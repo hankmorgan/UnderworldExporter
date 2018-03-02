@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NPC_Animation : MonoBehaviour {
 		const float frameRate =0.2f;
-
+		public bool FreezeAnimFrame;
 		public int AnimationIndex;//Animation to display
 		public int AnimationPos;//Position in the animation.
 		public float animationCounter;
@@ -33,7 +33,14 @@ public class NPC_Animation : MonoBehaviour {
 					}					
 				}
 			}
-			AnimationPos++;
+			if ((FreezeAnimFrame) || (UWCharacter.Instance.isTimeFrozen))
+			{
+					AnimationPos=0;
+			}
+			else
+			{
+					AnimationPos++;					
+			}			
 			if ((AnimationPos>=critAnim.animIndices.GetUpperBound(1)) && (ConstantAnim==false))
 			{
 				AnimationPos=0;
@@ -58,6 +65,10 @@ public class NPC_Animation : MonoBehaviour {
 				{
 					output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos++]];//Start the animation.					
 				}				
+			}
+			if ((FreezeAnimFrame) || (UWCharacter.Instance.isTimeFrozen))
+			{
+				AnimationPos=0;
 			}
 		AnimationIndex=anim;
 	}

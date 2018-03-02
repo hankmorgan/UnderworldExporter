@@ -40,12 +40,6 @@ public class UWCharacter : Character {
 		public SpellEffect[] ActiveSpell=new SpellEffect[3]; 		//What effects and enchantments (eg from items are equipped on the player)
 		public SpellEffect[] PassiveSpell=new SpellEffect[10];
 		public bool isSwimming;
-		public bool isFlying;
-		public bool isRoaming;
-		public bool isFloating;
-		public bool isWaterWalking;
-		public bool isTelekinetic;
-		public bool isLeaping;
 		public int StealthLevel; //The level of stealth the character has.
 		public int Resistance; //DR from spells.
 		public bool Paralyzed;
@@ -59,6 +53,15 @@ public class UWCharacter : Character {
 		/// Weapon drawn music
 		/// </summary>
 		public bool WeaponDrawn;
+
+		[Header("Player Magic Status")]
+		public bool isFlying;
+		public bool isLeaping;
+		public bool isRoaming;
+		public bool isFloating;
+		public bool isWaterWalking;
+		public bool isTelekinetic;
+		public bool isTimeFrozen;
 
 		[Header("Player Health Status")]
 		//Character Status
@@ -478,7 +481,7 @@ public class UWCharacter : Character {
 						}
 				}
 
-				if (isFlying)
+				if ((isFlying) && (!Grounded))
 				{//Flying spell
 						FlyingMode ();
 				}

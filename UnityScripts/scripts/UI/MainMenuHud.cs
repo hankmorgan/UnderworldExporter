@@ -279,7 +279,7 @@ public class MainMenuHud : GuiBase {
 			if (_RES!=GAME_UW2)
 			{
 				//Read in the character data
-				SaveGame.LoadPlayerDat(SlotNo+1);
+				SaveGame.LoadPlayerDatUW1(SlotNo+1);
 			}
 			else
 			{

@@ -1298,7 +1298,7 @@ public class Magic : UWEBase {
 				long Key = Random.Range(1,200000);
 				timeFreezePlayer.Key=Key;
 				timeFreezePlayer.Go();
-				GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
+				/*GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
 				for (int i = 0; i<=npcs.GetUpperBound(0); i++)
 				{
 						if (npcs[i].GetComponent<SpellEffectFreezeTime>()==null)//Don't apply if they already have it
@@ -1320,7 +1320,7 @@ public class Magic : UWEBase {
 										npcs[i].GetComponent<SpellEffectFreezeTime>().counter=mind.counter;
 							}
 
-				}
+				}*/
 
 		}
 

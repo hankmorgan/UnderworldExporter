@@ -1666,10 +1666,10 @@ public class ObjectLoader : Loader {
 		/// Creates the new object list with just the items in the object marker.
 		/// </summary>
 		/// <returns>The inventory object list.</returns>
-		public static string[] UpdateInventoryObjectList()
+		public static string[] UpdateInventoryObjectList(out int NoOfInventoryItems)
 		{
 			PlayerInventory pInv = UWCharacter.Instance.playerInventory;
-			int NoOfInventoryItems=0;
+			NoOfInventoryItems=0;
 			GameObject Prev=null;
 			foreach (Transform child in GameWorldController.instance.InventoryMarker.transform) {
 				if (child!=null)

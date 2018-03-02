@@ -14,16 +14,6 @@ using UnityEngine.AI;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject {
 
-		//TODO: these need to match the UW npc_goals
-		//The behaviour trees need to be updated too.
-		public const int AI_STATE_IDLERANDOM = 0;
-		public const int AI_STATE_COMBAT = 1;
-		public const int AI_STATE_DYING = 2;
-		public const int AI_STATE_STANDING = 3;
-		public const int AI_STATE_WALKING = 4 ;
-		public const int AI_STATE_FLEE = 5 ;
-		public const int AI_STATE_FOLLOW = 6 ;
-
 		//attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 		public const int AI_ATTITUDE_HOSTILE = 0 ;
 		public const int AI_ATTITUDE_UPSET = 1 ;
@@ -145,8 +135,8 @@ public class NPC : MobileObject {
 		//Added by myself. This are set by spelleffects
 		///The NPC is poisoned
 		public bool Poisoned;
-		///The NPC is parlyzed or timestopped
-		public bool Frozen;
+		///The NPC is parlyzed 
+		public bool Paralyzed;
 		///Allows periodic updating of the NPC animation when frozen to support moving around them
 		public short FrozenUpdate=0;
 		//Enemy types.
@@ -621,7 +611,10 @@ public class NPC : MobileObject {
 		/// AI is only active when the player is close.
 		protected virtual void  Update () {
 				if (EditorMode==true){return;}
-				if (WaitTimer>0)
+
+				bool FreezeNpc=isNPCFrozen();
+				newAnim.FreezeAnimFrame = FreezeNpc;
+				if  ((WaitTimer>0) && (!FreezeNpc))
 				{
 						WaitTimer = WaitTimer -Time.deltaTime;
 						if (WaitTimer<0)
@@ -630,7 +623,14 @@ public class NPC : MobileObject {
 						}		
 				}
 
-				if (Frozen)
+				if (FreezeNpc)
+				{
+						if (Agent!=null)
+						{
+								AgentStand();		
+						}
+				}
+				/*if (Frozen)
 				{//NPC will not move until timer is complete.
 						if (FrozenUpdate==0)
 						{
@@ -640,13 +640,13 @@ public class NPC : MobileObject {
 						{
 								FrozenUpdate--;
 						}
-				}
+				}*/
 
 				if (NPC_DEAD==true)
 				{//Set the AI death state
 						//Update the appearance of the NPC
 						UpdateSprite();
-						if (WaitTimer<=0)
+						if ((WaitTimer<=0) && (!FreezeNpc))
 						{
 								DumpRemains();
 						}
@@ -655,6 +655,7 @@ public class NPC : MobileObject {
 
 				CurTileX = (int)(transform.position.x/1.2f);
 				CurTileY = (int)(transform.position.z/1.2f);
+
 
 				UpdateNPCAWake ();
 
@@ -667,11 +668,11 @@ public class NPC : MobileObject {
 
 				if ((npc_hp<=0))
 				{//Begin death handling.
-						OnDeath();
+					OnDeath();
 				}
 				else
 				{
-						UpdateGoals ();
+					UpdateGoals ();
 				}	
 
 		}
@@ -707,6 +708,7 @@ public class NPC : MobileObject {
 								if (UWCharacter.Instance.HelpMeMyFriends == true) {
 										UWCharacter.Instance.HelpMeMyFriends = false;
 										//If I'm not already busy with another NPC
+										//This will mean the NPC will turn on the player after combat?
 										if (UWCharacter.Instance.LastEnemyToHitMe != null) {
 												gtarg = UWCharacter.Instance.LastEnemyToHitMe;
 												npc_goal = (short)npc_goals.npc_goal_attack_5;
@@ -753,7 +755,8 @@ public class NPC : MobileObject {
 
 		void UpdateGoals ()
 		{				
-				if (Agent==null){
+				if (Agent==null)
+				{
 						if (GameWorldController.NavMeshReady)
 						{
 								UpdateGoalsForNonAgents();
@@ -761,6 +764,7 @@ public class NPC : MobileObject {
 						return;
 				}
 				if (!Agent.isOnNavMesh){return;}
+				if (isNPCFrozen()){return;}
 				//if (GameWorldController.instance.GenNavMeshNextFrame >0) {return;}//nav mesh update pending
 				if (!GameWorldController.NavMeshReady){return;}
 				DistanceToGtarg = getDistanceToGtarg();
@@ -1204,6 +1208,10 @@ public class NPC : MobileObject {
 						npc_hp=(short)(npc_hp-damage);
 						UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP );	
 				}
+				if(npc_hp<0)
+				{
+						npc_hp=0;
+				}
 				return true;
 		}
 
@@ -1221,21 +1229,18 @@ public class NPC : MobileObject {
 						if (source.name=="_Gronk")
 						{//PLayer attacked the npc
 								npc_attitude=0;//Make the npc angry with the player.
-								if(Frozen==false)
-								{	
-										//Assumes the player has attacked
-										npc_gtarg=1;
-										gtarg=UWCharacter.Instance.gameObject;
-										gtargName=gtarg.name;
-										npc_goal=(short)npc_goals.npc_goal_attack_5;
-										if (npc_hp<5)//Low health. 20% Chance for morale break
+								//Assumes the player has attacked
+								npc_gtarg=1;
+								gtarg=UWCharacter.Instance.gameObject;
+								gtargName=gtarg.name;
+								npc_goal=(short)npc_goals.npc_goal_attack_5;
+								if (npc_hp<5)//Low health. 20% Chance for morale break
+								{
+										if (Random.Range(0,5)>=4)
 										{
-												if (Random.Range(0,5)>=4)
-												{
-														UWCharacter.Instance.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther,-1);
-												}
+												UWCharacter.Instance.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther,-1);
 										}
-								}	
+								}
 
 								//Alert nearby npcs that i have been attacked.
 								//Will alert npcs of same item id or an allied type. (eg goblins & trolls)
@@ -1258,14 +1263,14 @@ public class NPC : MobileObject {
 								}
 						}
 						//else
-						//{//NPC attack
+						{
 						//		gtargName=source.name;
 						//		//Makes the targeted entity attack the object that attacked it.
 						//		npc_gtarg=999;
 						//		gtarg=source;
 						//		gtargName=source.name;
 						//		npc_goal=(short)npc_goals.npc_goal_attack_5;;				
-						//}	
+						}	
 				}
 
 				ApplyAttack(damage);
@@ -2101,5 +2106,14 @@ public class NPC : MobileObject {
 				}
 				return 1000f;//If no gtarg
 
+		}
+
+		/// <summary>
+		/// Is the NPC frozen or subject to time freeze
+		/// </summary>
+		/// <returns><c>true</c>, if NPC frozen was ised, <c>false</c> otherwise.</returns>
+		bool isNPCFrozen()
+		{
+			return (UWCharacter.Instance.isTimeFrozen || Paralyzed);
 		}
 }

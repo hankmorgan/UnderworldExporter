@@ -2047,29 +2047,19 @@ public class TileMap : Loader {
 
 								if (o<256)			
 								{//Additional npc mobile data.
-									//TODO:make sure every bit is fully copied across when not overwritten
-										/*int[] debugdata = new int[19];
-										for (int q=0; q<=debugdata.GetUpperBound(0);q++)
-										{
-												debugdata[q] = (int)TileMapData[addptr+0x8+q];
-										}
-										if (o==240)
-										{
-												int a=0;
-												a++;
-										}*/
+
 										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
-
 										TileMapData[addptr+0x9] = (char)((TileMapData[addptr+0x9] & 0xE0) | ((char)(currobj.Projectile_Yaw  & 0x1F )));
-
+										//+A is copied  unknown value
+										//+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
 										ByteToWrite=( 
 												((currobj.npc_goal & 0xF))  |
 												((currobj.npc_gtarg & 0xFF) <<4)  |
-												( TileMapData[addptr+0xb+1] & 0xf0 )										
+												( (TileMapData[addptr+0xb+1] & 0xf0) << 8 )										
 										);
-
 										TileMapData[addptr+0xb] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0xb+1] = (char)((ByteToWrite>>8) & 0xFF);
+
 
 										int val = (int)DataLoader.getValAtAddress(TileMapData,addptr+0xd,16);
 										val = val & 0x1ff0;

@@ -14,19 +14,24 @@ public class SpellEffectParalyze : SpellEffect {
 		{
 			if (isNPC==false)
 			{//Apply to player
-					if (UWCharacter.Instance==null)
-					{
-							UWCharacter.Instance= this.GetComponent<UWCharacter>();
-					}
+					//if (UWCharacter.Instance==null)
+					//{
+					//		UWCharacter.Instance= this.GetComponent<UWCharacter>();
+					//}
 					UWCharacter.Instance.Paralyzed=true;
 			}
 			else
 			{
 				if (npc==null)
 				{
-						npc=this.GetComponent<NPC>();
+					npc=this.GetComponent<NPC>();
+					npc.Paralyzed=true;	
 				}
-				this.GetComponent<NPC>().Frozen=true;
+				else
+				{
+					npc.Paralyzed=true;				
+				}
+				
 				//state = this.GetComponent<NPC>().state;
 				//anim = this.GetComponent<NPC>().anim;
 				//if (anim!=null)
@@ -46,14 +51,14 @@ public class SpellEffectParalyze : SpellEffect {
 			}
 			else
 			{
-				npc.Frozen=false;
+				npc.Paralyzed=false;
 				//npc.CurrentAnim="";
 				//npc.currentState=-1;
 				//npc.state=state;
-				if (anim!=null)
-				{
-					anim.enabled=true;
-				}
+				//if (anim!=null)
+				//{
+				//	anim.enabled=true;
+				//}
 			}
 			base.CancelEffect();
 		}
@@ -62,11 +67,19 @@ public class SpellEffectParalyze : SpellEffect {
 		{//Maintain the effect
 			if (isNPC==true)
 			{
-					npc.Frozen=true;
+				if (npc!=null)
+				{
+					npc.Paralyzed=true;			
+				}
+				else
+				{
+					npc=this.GetComponent<NPC>();
+					npc.Paralyzed=true;	
+				}
 			}
 			else
 			{
-					UWCharacter.Instance.Paralyzed=true;
+				UWCharacter.Instance.Paralyzed=true;
 			}
 		}
 
