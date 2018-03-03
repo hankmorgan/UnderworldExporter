@@ -28,7 +28,16 @@ public class DataLoader :Loader {
 				public char[] Data;
 				public long Address;
 				public long DataLen;
+				//UW2 specific
+				public int CompressionFlag;
+				public long ReservedSpace;
 		};
+
+		//Compression flags for UW2
+		public const int UW2_NOCOMPRESSION=0;
+		public const int UW2_SHOULDCOMPRESS=1;
+		public const int UW2_ISCOMPRESS=2;
+		public const int UW2_HASEXTRASPACE=4;
 
 
 		/// <summary>
@@ -746,6 +755,4 @@ public class DataLoader :Loader {
 
 				return 4;
 		}
-
-
 }

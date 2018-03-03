@@ -349,7 +349,6 @@ public class TileMap : Loader {
 				long OverlayAddress=0;
 				short x;	
 				short y;
-				//int i;
 				short CeilingTexture=0;
 				short textureMapSize=64;
 
@@ -412,8 +411,8 @@ public class TileMap : Loader {
 
 							address_pointer=6;
 
-							int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
-							int isCompressed =(compressionFlag>>1) & 0x01;
+							//int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32)  ;
+							int isCompressed =(  (  (int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32)      )    >>1) & 0x01;
 							address_pointer=(LevelNo * 4) + 6;
 							if ((int)DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
 							{
@@ -423,7 +422,6 @@ public class TileMap : Loader {
 							{
 								int datalen=0;
 								lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
-								//char[] packed = DataLoader.RepackUW2(lev_ark);
 								address_pointer=address_pointer+4;
 								AddressOfBlockStart=0;
 								address_pointer=0;
@@ -441,9 +439,11 @@ public class TileMap : Loader {
 									j++;
 								}
 							}
+
+								//Get the texture map data
 							textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
-							compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
-							isCompressed =(compressionFlag>>1) & 0x01;
+								//compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+							isCompressed =( ( (int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32)   )  >>1) & 0x01;
 
 							if (isCompressed == 1)
 							{
@@ -568,8 +568,8 @@ public class TileMap : Loader {
 								Tiles[x,y].tileX = x;
 								Tiles[x,y].tileY = y;
 
-								long FirstTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
-								long SecondTileInt = DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
+								int FirstTileInt = (int)DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
+								int SecondTileInt = (int)DataLoader.getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
 								address_pointer=address_pointer+4;
 
 								Tiles[x,y].tileType = getTile(FirstTileInt) ;
@@ -1053,13 +1053,13 @@ public class TileMap : Loader {
 
 		//***********************
 
-		short getTile(long tileData)
+		short getTile(int tileData)
 		{
 				//gets tile data at bits 0-3 of the tile data
 				return (short) (tileData & 0x0F);
 		}
 
-		short getHeight(long tileData)
+		short getHeight(int tileData)
 		{//gets height data at bits 4-7 of the tile data
 				return (short)((tileData & 0xF0) >> 4);
 		}
@@ -1955,6 +1955,43 @@ public class TileMap : Loader {
 		}
 
 
+		char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data)
+		{	
+				char[] lev_ark;
+				long address_pointer=0;
+				int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark_file_data,0,32);	
+
+				address_pointer=6;
+				int isCompressed =( ( (int)DataLoader.getValAtAddress(lev_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32)  ) >>1) & 0x01;
+
+				address_pointer=(LevelNo * 4) + 6;
+
+				if ((int)DataLoader.getValAtAddress(lev_ark_file_data,address_pointer,32)==0)
+				{
+						Debug.Log("This should not happen in getuw2tilemapbytes");
+						lev_ark= new char[1];
+						return lev_ark ;
+				}
+				if (isCompressed == 1)
+				{
+						int datalen=0;
+						lev_ark = DataLoader.unpackUW2(lev_ark_file_data,DataLoader.getValAtAddress(lev_ark_file_data,address_pointer,32), ref datalen);
+				}
+				else
+				{
+						int BlockStart = (int)DataLoader.getValAtAddress(lev_ark_file_data, address_pointer, 32);
+						lev_ark = new char[0x7c08];//Make sure this contains the object data as well.
+						int j=0;
+						for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
+						{
+								lev_ark[j] = lev_ark_file_data[i];
+								j++;
+						}
+				}
+				return lev_ark;
+		}
+
+
 		/// <summary>
 		/// Converts this tilemap/Objectlist into an array that can be written to file.
 		/// </summary>
@@ -1963,11 +2000,27 @@ public class TileMap : Loader {
 		{
 				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
 
-				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
-				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
-				{//prepopulate with existing file data. Vanilla underworld will crash otherwise
-					TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
+
+				switch(_RES)
+				{
+					case GAME_UW2:
+						{
+							TileMapData = GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data);
+							break;
+						}
+				default:
+						{
+							long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
+							for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
+							{//prepopulate with existing file data. Vanilla underworld will crash otherwise
+									TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
+							}
+							break;
+						}
+
 				}
+
+
 				/*int[] debugdataorig = new int[19];
 				for (int q=0; q<=debugdataorig.GetUpperBound(0);q++)
 				{

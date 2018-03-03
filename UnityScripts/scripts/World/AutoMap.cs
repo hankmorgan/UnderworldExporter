@@ -226,6 +226,7 @@ public class AutoMap : Loader {
 
 		public void InitAutoMapUW2(int LevelNo, char[] lev_ark)
 		{
+
 			//AutomapNoteAddresses=new long[72];
 			MapNotes = new List<MapNote>();			
 			thisLevelNo=LevelNo;
@@ -267,7 +268,7 @@ public class AutoMap : Loader {
 					else
 					{
 						long nextautomapNotesAddress= lev_ark.GetUpperBound(0);
-						if (LevelNo<72)
+						if (LevelNo<80)
 						{
 							nextautomapNotesAddress = DataLoader.getValAtAddress(lev_ark,((LevelNo+1) * 4) + 6 + (240*4),32);			
 						}

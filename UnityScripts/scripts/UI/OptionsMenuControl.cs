@@ -591,12 +591,20 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		//Write a player.dat file
 			if (_RES==GAME_UW2)
 			{
-					SaveGame.WritePlayerDatUW2(SlotNo+1);	
+					//Write lev.ark file and object lists
+					GameWorldController.instance.WriteBackLevArkUW2(SlotNo+1);
+					//Write bglobals.dat
+					GameWorldController.instance.WriteBGlobals(SlotNo+1);
+					//Write a desc file
+					File.WriteAllText(Loader.BasePath +  "SAVE" + (SlotNo+1) + sep + "DESC" , SaveGame.SaveGameName(SlotNo+1));
+					//Write player.dat
+					SaveGame.WritePlayerDatUW2(SlotNo+1);
+					//TODO:Write scd.ark
 			}
 			else
 			{
 				//Write lev.ark file and object lists
-				GameWorldController.instance.WriteBackLevArk(SlotNo+1);
+				GameWorldController.instance.WriteBackLevArkUW1(SlotNo+1);
 				//Write bglobals.dat
 				GameWorldController.instance.WriteBGlobals(SlotNo+1);
 				//Write a desc file

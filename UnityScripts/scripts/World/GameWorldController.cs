@@ -1104,15 +1104,18 @@ public class GameWorldController : UWEBase {
 			ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
 			for (int i=0; i<=objList.GetUpperBound(0);i++)
 			{
-				if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
+				if (objList[i]!=null)
 				{
-					if (objList[i].instance!=null)
-					{
-						if (objList[i].instance.GetComponent<MagicProjectile>()!=null)
+						if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
 						{
-							objList[i].instance.GetComponent<MagicProjectile>().DetonateNow=true;	
-						}
-					}
+								if (objList[i].instance!=null)
+								{
+										if (objList[i].instance.GetComponent<MagicProjectile>()!=null)
+										{
+												objList[i].instance.GetComponent<MagicProjectile>().DetonateNow=true;	
+										}
+								}
+						}	
 				}
 			}
 		}
@@ -1362,6 +1365,212 @@ public class GameWorldController : UWEBase {
 				}
 		}
 
+		/// <summary>
+		/// Writes a lev ark file based on a rebuilding of the data.
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+		/// 320 blocks
+		/// 80 level maps - to be decompressed
+		/// 80 texture maps - to copy
+		/// 80 automaps - to copy for the moment
+		/// 80 map notes - top copy for the moment
+		public void WriteBackLevArkUW2(int slotNo)
+		{
+				int NoOfBlocks=320;
+				DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
+
+				//First update the object list so as to match indices properly
+				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+
+				//First block is always here.
+				long AddressToCopyFrom=0;	
+				long ReadDataLen=0;
+
+				//Read in the data for the 80 tile/object maps
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{
+					blockData[l].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (NoOfBlocks*4),32);
+					blockData[l].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (NoOfBlocks*12),32);
+					if (GameWorldController.instance.Tilemaps[l]!=null)
+					{
+							blockData[l].CompressionFlag=DataLoader.UW2_NOCOMPRESSION;
+							blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
+							blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
+
+					}///31752
+					else
+					{//Copy data from file.
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6,32);
+						if (AddressToCopyFrom!=0)
+						{//Only copy a block with data										
+								blockData[l].Data=CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
+								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;		
+						}
+						else
+						{
+							blockData[l].DataLen=0;
+						}
+					}
+				}
+
+				//read in the texture maps
+				//TODO: At the moment this is just a straight copy of this information
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{		
+					AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (80*4),32);
+					blockData[l+80].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+					blockData[l+80].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (80*4)+ (NoOfBlocks*12),32);
+					ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (80*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)				
+					
+					if (AddressToCopyFrom!=0)
+					{
+							blockData[l+80].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+							blockData[l+80].DataLen=blockData[l+80].Data.GetUpperBound(0)+1;	
+					}
+					else
+					{
+							blockData[l+80].DataLen=0;
+					}
+				}
+
+				//read in the automaps
+				//TODO: At the moment this is just a straight copy of this information
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{		
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4),32);
+						blockData[l+160].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*4),32);
+						ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
+						blockData[l+160].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*12),32);
+
+						if (AddressToCopyFrom!=0)
+						{
+								blockData[l+160].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+								blockData[l+160].DataLen=blockData[l+160].Data.GetUpperBound(0)+1;	
+						}
+						else
+						{
+									blockData[l+160].DataLen=0;
+						}
+				}
+
+				//read in the automap notes
+				//TODO: At the moment this is just a straight copy of this information
+				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
+				{		
+						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4),32);
+						blockData[l+240].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);
+						ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
+						blockData[l+240].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*12),32);
+
+
+						if (AddressToCopyFrom!=0)
+						{
+								blockData[l+240].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+								blockData[l+240].DataLen=blockData[l+240].Data.GetUpperBound(0)+1;	
+						}
+						else
+						{
+								blockData[l+240].DataLen=0;
+						}
+				}
+
+
+				blockData[0].Address=5126;//This will always be the same.
+				long prevAddress=blockData[0].Address;
+				long prevSize = blockData[0].ReservedSpace;
+				//Work out the block addresses.
+				for (int i=1; i<blockData.GetUpperBound(0);i++)
+				{
+						if (blockData[i].DataLen!=0)//This block has data and needs to be written.
+						{
+								blockData[i].Address= prevAddress+prevSize;	
+								prevAddress=blockData[i].Address;
+								prevSize= blockData[i].ReservedSpace;
+						}
+						else
+						{
+								blockData[i].Address=0;	
+						}					
+				}
+
+
+
+				//Data is copied. now begin writing the output file
+				FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK",FileMode.Create);
+				BinaryWriter writer= new BinaryWriter(file);
+				long add_ptr=0;
+
+				add_ptr+=DataLoader.WriteInt8(writer, 0x40);
+				add_ptr+=DataLoader.WriteInt8(writer, 0x01);
+				add_ptr+=DataLoader.WriteInt8(writer, 0x0);//1
+				add_ptr+=DataLoader.WriteInt8(writer, 0x0);//2
+				add_ptr+=DataLoader.WriteInt8(writer, 0x0);//3
+				add_ptr+=DataLoader.WriteInt8(writer, 0x0);//4
+
+				//Now write block addresses
+				for (int i=0; i<320; i++)
+				{//write block addresses
+						add_ptr+=DataLoader.WriteInt32(writer, blockData[i].Address);		
+				}
+
+				//Now write compression flags
+				for (int i=320; i<640; i++)
+				{//write block compression flags
+						add_ptr+=DataLoader.WriteInt32(writer, blockData[i-320].CompressionFlag);		
+				}
+
+				//Now write data lengths
+				for (int i=960; i<1280; i++)
+				{//write block data lengths
+					add_ptr+=DataLoader.WriteInt32(writer, blockData[i-960].DataLen);		
+				}
+
+
+				for (int i=1280; i<1600; i++)
+				{//write block data reservations
+						add_ptr+=DataLoader.WriteInt32(writer, blockData[i-1280].ReservedSpace);		
+				}
+
+				for (long freespace=add_ptr; freespace<blockData[0].Address;freespace++)
+				{//write freespace to fill up to the final block.
+					add_ptr+=DataLoader.WriteInt8(writer,0);
+				}
+
+
+				//Now be brave and write all my blocks!!!
+				for (int i=0; i<=blockData.GetUpperBound(0); i++)
+				{
+					if (blockData[i].Data!=null)//?
+					{
+						if (add_ptr<blockData[i].Address)
+						{
+							while (add_ptr<blockData[i].Address)
+							{//Fill whitespace until next block address.
+								add_ptr+=DataLoader.WriteInt8(writer,0);
+							}
+						}
+						else
+						{
+							if (add_ptr>blockData[i].Address)
+							{
+								Debug.Log("Writing block " + i + " at " + add_ptr + " should be " + blockData[i].Address);
+							}	
+						}
+
+						for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+						{
+							add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
+						}	
+					}
+				}
+
+				file.Close();
+
+				return;
+
+
+
+		}
 
 		/// <summary>
 		/// Writes a lev ark file based on a rebuilding of the data.
@@ -1374,7 +1583,7 @@ public class GameWorldController : UWEBase {
 		///<9 blocks map notes>
 		///The remaining 9 x 10 blocks are unused.
 		/// 
-		public void WriteBackLevArk(int slotNo)
+		public void WriteBackLevArkUW1(int slotNo)
 		{
 				DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[45];
 
@@ -1399,6 +1608,7 @@ public class GameWorldController : UWEBase {
 								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
 						}
 				}
+
 				//Read in the data for the animation overlays
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{					
@@ -1456,7 +1666,7 @@ public class GameWorldController : UWEBase {
 				long prevAddress=blockData[0].Address;
 				//Work out the block addresses.
 				for (int i=1; i<blockData.GetUpperBound(0);i++)
-				{
+				{//This algorithm is probably wrong but only works because all blocks are in use!
 						if (blockData[i-1].DataLen!=0)
 						{
 								blockData[i].Address= prevAddress+blockData[i-1].DataLen;	
@@ -1521,9 +1731,9 @@ public class GameWorldController : UWEBase {
 						AutoMaps=new AutoMap[1];
 						break;
 				case GAME_UW2:
-						Tilemaps = new TileMap[72];//Not all are in use.
-						objectList=new ObjectLoader[72];
-						AutoMaps=new AutoMap[72];
+						Tilemaps = new TileMap[80];//Not all are in use.
+						objectList=new ObjectLoader[80];
+						AutoMaps=new AutoMap[80];
 						break;
 				case GAME_UW1:
 				default:
