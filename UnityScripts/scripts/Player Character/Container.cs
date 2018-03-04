@@ -5,6 +5,9 @@ public class Container : object_base {
 
 	public string[] items=new string[40];
 
+
+		public int LockObject;
+
 	/// <summary>
 	/// The capacity of the container
 	/// </summary>
@@ -728,6 +731,10 @@ public class Container : object_base {
 						if (ObjectLoader.GetItemTypeAt(objInt.link,objList) !=ObjectInteraction.LOCK)
 						{
 							cn.AddItemToContainer(ObjectLoader.UniqueObjectName(tmpobj));
+						}
+						else
+						{
+							cn.LockObject = objInt.link;//To preserve the containers lock.
 						}
 						while (tmpobj.next != 0)
 						{

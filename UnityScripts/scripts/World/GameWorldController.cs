@@ -966,16 +966,21 @@ public class GameWorldController : UWEBase {
 								}
 
 								if ((lev_ark_block.DataLen>0) && (tex_ark_block.DataLen>0)	)
-								{
-										//Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
-										Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block,ovl_ark_block);
-										objectList[newLevelNo]=new ObjectLoader();
-										objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_block);		
-								}
-								else
-								{//load an empty level
-										
-								}
+										{
+											Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block,ovl_ark_block);
+											objectList[newLevelNo]=new ObjectLoader();
+											objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_block);		
+										}
+										else
+										{//load an empty level
+											//TODO:
+										}
+
+												//Original version
+									//	Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
+									//	objectList[newLevelNo]=new ObjectLoader();
+									//	objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
+
 
 							}
 							else

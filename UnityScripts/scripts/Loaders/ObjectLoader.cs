@@ -166,6 +166,37 @@ public class ObjectLoader : Loader {
 			}
 		}
 
+
+
+		/// <summary>
+		/// Readies the object list. Requires the tilemap to be read in first
+		/// </summary>
+		/// <param name="tileMap">Tile map.</param>
+		/// <param name="lev_ark">Lev ark.</param>
+		/// <param name="game">Game.</param>
+		/// Original version
+		public void LoadObjectList(TileMap tileMap, char[] lev_ark)
+		{
+				Debug.Log("OLD VERSION OF LOADOBJECT LIST");
+				objInfo=new ObjectLoaderInfo[1024];
+				BuildObjectListUW(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, tileMap.thisLevelNo);
+
+				setObjectTileXY(1,tileMap.Tiles,objInfo);
+
+				setDoorBits(tileMap.Tiles,objInfo);
+				setElevatorBits(tileMap.Tiles,objInfo);
+				setTerrainChangeBits(tileMap.Tiles,objInfo);
+				SetBullFrog(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+				if (_RES==GAME_UW2)
+				{
+						setQbert(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+						FindOffMapOscillatorTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);
+						SetColourCyclingTiles(tileMap.Tiles,objInfo,tileMap.thisLevelNo);				
+				}
+		}
+
+
+
 		public void LoadObjectListShock(TileMap tileMap, char[] lev_ark)
 		{
 
@@ -651,7 +682,7 @@ public class ObjectLoader : Loader {
 		/// <param name="texture_map">Texture map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
-		void BuildObjectListUW_Old(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
+		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
 		{
 			int NoOfBlocks;
 			long AddressOfBlockStart;
@@ -1767,60 +1798,60 @@ public class ObjectLoader : Loader {
 		/// </summary>
 		public static void UpdateObjectList(TileMap currTileMap, ObjectLoader currObjList)
 		{
-			if (currObjList==null){return;}
-			int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
-			
-			//Update indices to match the array.
-			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
-			{
-				currObjList.objInfo[i].index=i;
-				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
-				if ((OnMap)) 
-				{//Only clear nexts if the object is not an offmap trigger/trap
-					currObjList.objInfo[i].next=0;
-					if (currObjList.objInfo[i].instance!=null)
-						{
-						currObjList.objInfo[i].instance.next=0;				
+				if (currObjList==null){return;}
+				int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
+
+				//Update indices to match the array.
+				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
+				{
+						currObjList.objInfo[i].index=i;
+						bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
+						if ((OnMap)) 
+						{//Only clear nexts if the object is not an offmap trigger/trap
+								currObjList.objInfo[i].next=0;
+								if (currObjList.objInfo[i].instance!=null)
+								{
+										currObjList.objInfo[i].instance.next=0;				
+								}
 						}
 				}
-			}
 
-			if (currTileMap!=null)
-			{
-					//Clear the tilemaps indexobjectlist
-				for (int x=0;x<=TileMap.TileMapSizeX;x++)
-					{
-						for (int y=0;y<=TileMap.TileMapSizeY;y++)
-							{
-								currTileMap.Tiles[x,y].indexObjectList=0;
-							}
-					}		
-			}
-
-			foreach (Transform t in GameWorldController.instance.LevelMarker()) 
-			{
-				if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+				if (currTileMap!=null)
 				{
-					ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
-					//Copy back the info stored on the object interaction to the lists.
-					if (objInt.objectloaderinfo==null)
+						//Clear the tilemaps indexobjectlist
+						for (int x=0;x<=TileMap.TileMapSizeX;x++)
 						{
-						objInt.objectloaderinfo=new ObjectLoaderInfo();
-						objInt.objectloaderinfo.InUseFlag=0;
-						objInt.objectloaderinfo.tileX=TileMap.ObjectStorageTile;
-						objInt.objectloaderinfo.tileY=TileMap.ObjectStorageTile;
+								for (int y=0;y<=TileMap.TileMapSizeY;y++)
+								{
+										currTileMap.Tiles[x,y].indexObjectList=0;
+								}
+						}		
+				}
+
+				foreach (Transform t in GameWorldController.instance.LevelMarker()) 
+				{
+						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
+								ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
+								//Copy back the info stored on the object interaction to the lists.
+								if (objInt.objectloaderinfo==null)
+								{
+										objInt.objectloaderinfo=new ObjectLoaderInfo();
+										objInt.objectloaderinfo.InUseFlag=0;
+										objInt.objectloaderinfo.tileX=TileMap.ObjectStorageTile;
+										objInt.objectloaderinfo.tileY=TileMap.ObjectStorageTile;
+								}
+								objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
+								if (objInt.objectloaderinfo.InUseFlag==1)
+								{										
+										if ((t.gameObject.GetComponent<Container>()!=null))
+										{//Rebuild container chain. THis seems to break vanilla games. (badobject warning?)
+											t.gameObject.GetComponent<ObjectInteraction>().link=0;
+											linkContainerContents(t.gameObject.GetComponent<Container>());
+										}
+										currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);	
+								}	
 						}
-					objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
-					if (objInt.objectloaderinfo.InUseFlag==1)
-						{
-							currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);	
-							if ((t.gameObject.GetComponent<Container>()!=null))
-							{//Rebuild container chain
-									linkContainerContents(t.gameObject.GetComponent<Container>());
-									t.gameObject.GetComponent<ObjectInteraction>().link=0;
-							}
-						}	
-					}
 				}
 
 				//rebuild the linked list
@@ -1834,19 +1865,21 @@ public class ObjectLoader : Loader {
 								{
 										if (nexts[x,y] == 0)		
 										{//This object is the first in the chain at this tile
-												currTileMap.Tiles[x,y].indexObjectList= i;
-												nexts[x,y] = i;
+													currTileMap.Tiles[x,y].indexObjectList= i;
+													nexts[x,y] = i;
 										}
 										else
 										{
-												currObjList.objInfo[nexts[x,y]].next = i;
-												currObjList.objInfo[nexts[x,y]].instance.next=i;
-												nexts[x,y] = i;
+													currObjList.objInfo[nexts[x,y]].next = i;
+													currObjList.objInfo[nexts[x,y]].instance.next=i;
+													nexts[x,y] = i;
 										}
 								}	
 						}
 				}
 		}
+
+
 
 
 		/// <summary>
@@ -1928,7 +1961,7 @@ public class ObjectLoader : Loader {
 
 
 		/// <summary>
-		/// Links the inventory list containers.
+		/// Links the inventory list containers on the player. Recursive
 		/// </summary>
 		/// <param name="cn">Cn.</param>
 		/// <param name="InventoryObjects">Inventory objects.</param>
@@ -1938,7 +1971,7 @@ public class ObjectLoader : Loader {
 			cn.gameObject.GetComponent<ObjectInteraction>().link=0;//Initially unlinked.
 			int index= System.Array.IndexOf(InventoryObjects,cn.name)+1;
 			GameObject prev=null;
-			//int newindex=index;
+
 			//For each spot in the container
 			for (short i=0; i<=cn.MaxCapacity();i++)
 			{
@@ -1972,6 +2005,11 @@ public class ObjectLoader : Loader {
 			}
 		}
 
+
+		/// <summary>
+		/// Re-Links the container contents when saving or leaving a level
+		/// </summary>
+		/// <param name="cn">Cn.</param>
 		static void linkContainerContents(Container cn)
 		{
 				if (cn==null)
@@ -1982,6 +2020,23 @@ public class ObjectLoader : Loader {
 			int itemCounter=0;
 			ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
 			int PrevIndex=cnObjInt.objectloaderinfo.index;
+				if (cn.LockObject!=0)
+				{
+						ObjectInteraction  lockObj = ObjectLoader.getObjectIntAt(cn.LockObject);
+						if (lockObj!=null)
+						{
+								if (lockObj.GetItemType()==ObjectInteraction.LOCK)		
+								{
+										itemCounter++;
+										cnObjInt.link=  lockObj.objectloaderinfo.index;		
+										cnObjInt.objectloaderinfo.link= lockObj.objectloaderinfo.index;	
+										PrevIndex=lockObj.objectloaderinfo.index;
+								}
+						}
+				}
+
+
+
 			for (short i=0; i<cn.GetCapacity();i++)
 			{
 				GameObject obj= cn.GetGameObjectAt(i);	
@@ -1996,10 +2051,10 @@ public class ObjectLoader : Loader {
 					}
 					else
 					{//the previous items next becomes this.
-										if(itemObjInt==null)
-										{
-												Debug.Log("null object on " + i + " for container " + cn.name);
-										} 
+						if(itemObjInt==null)
+						{
+								Debug.Log("null object on " + i + " for container " + cn.name);
+						} 
 						ObjectLoader.getObjectIntAt(PrevIndex).next=itemObjInt.objectloaderinfo.index;
 						ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next= itemObjInt.objectloaderinfo.index;
 						itemObjInt.next=0;//end for now.
@@ -2009,13 +2064,14 @@ public class ObjectLoader : Loader {
 					itemCounter++;
 					
 					//If a container then link its contents as well
-					if (obj.GetComponent<Container>()!=null)
-					{//Rebuild container chain
-						if (obj!=cn.gameObject)
-						{
-							linkContainerContents(obj.GetComponent<Container>());	
-						}						
-					}
+								//Is this still needed here????
+					//TEST	if (obj.GetComponent<Container>()!=null)
+					//TEST	{//Rebuild container chain
+					//TESTif (obj!=cn.gameObject)
+					//TEST{
+					//TESTlinkContainerContents(obj.GetComponent<Container>());	
+					//TEST	}						
+					//TEST}
 				}
 
 			}
@@ -2125,15 +2181,7 @@ public class ObjectLoader : Loader {
 			info.enchantment= objInt.enchantment;	//12
 			info.doordir= objInt.doordir;	//13
 			info.invis= objInt.invis;		//14
-			//if (objInt.isQuant())
-			//{
-				info.is_quant= objInt.isquant;	//15						
-			//}
-			//else
-			//{
-				//info.is_quant= 0;	//15	
-			//}
-
+			info.is_quant= objInt.isquant;	//15						
 
 			//info.texture= objInt.texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 			//(gravestone, picture, lever, switch, shelf, bridge, ..)

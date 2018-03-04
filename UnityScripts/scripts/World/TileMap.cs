@@ -521,8 +521,10 @@ public class TileMap : Loader {
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
 		/// See uw-formats.txt for file specs
-		public bool BuildTileMapUW_OLD(char[] lev_ark, int LevelNo)
+		/// Old version
+		public bool BuildTileMapUW(char[] lev_ark, int LevelNo)
 		{
+				Debug.Log("OLD VERSION OF LOADTILEMAP");
 				char[] tex_ark=new char[1]; 
 				char[] tmp_ark=new char[1];
 				int NoOfBlocks;
@@ -2128,7 +2130,7 @@ public class TileMap : Loader {
 		}
 
 
-		char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data, out long datalen)
+	/*	char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data, out long datalen)
 		{	
 				char[] lev_ark;
 				long address_pointer=0;
@@ -2163,7 +2165,7 @@ public class TileMap : Loader {
 						}
 				}
 				return lev_ark;
-		}
+		}*/
 
 
 		/// <summary>
@@ -2172,28 +2174,33 @@ public class TileMap : Loader {
 		/// <returns>The map to bytes.</returns>
 		public char[] TileMapToBytes(char[] lev_ark_file_data, out long datalen)
 		{
+				 
 				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
 
+				DataLoader.UWBlock uwdata = new DataLoader.UWBlock();
 
-				switch(_RES)
-				{
-					case GAME_UW2:
-						{
-							TileMapData = GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
-							break;
-						}
-				default:
-						{
-							datalen=31752;
-							long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
-							for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
-							{//prepopulate with existing file data. Vanilla underworld will crash otherwise
-									TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
-							}
-							break;
-						}
+				//switch(_RES)
+				//{
+				//	case GAME_UW2:
+				//		{
 
-				}
+							DataLoader.LoadUWBlock(lev_ark_file_data, thisLevelNo, 31752, out uwdata)  ;
+							TileMapData= uwdata.Data; //GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
+							datalen = uwdata.DataLen;
+			//				//break;
+			//			}
+			//	default:
+			//			{
+			//				datalen=31752;
+			//				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
+			//				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
+			//				{//prepopulate with existing file data. Vanilla underworld will crash otherwise
+			//						TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
+			//				}
+			//				break;
+			//			}
+				//
+			//	}
 
 
 				/*int[] debugdataorig = new int[19];
@@ -2235,6 +2242,7 @@ public class TileMap : Loader {
 						}	
 				}	
 
+		
 
 				//return TileMapData;
 				//char[] ObjectListData= new char[256*27 + 768*8];
@@ -2307,7 +2315,7 @@ public class TileMap : Loader {
 												( TileMapData[addptr+0x16] & 0xf  ) ;
 										TileMapData[addptr+0x16] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0x16+1] = (char)((ByteToWrite>>8) & 0xFF);
-										
+
 
 										ByteToWrite=(TileMapData[addptr+0x18] & 0xE0)
 												|
@@ -2315,7 +2323,7 @@ public class TileMap : Loader {
 										TileMapData[addptr+0x18] = (char)(ByteToWrite & 0xFF);
 										TileMapData[addptr+0x18+1] = (char)((ByteToWrite>>8) & 0xFF);
 
-	
+
 										TileMapData[addptr+0x19]= (char)(
 												((currobj.npc_hunger & 0x3F)) 
 										);
@@ -2330,7 +2338,8 @@ public class TileMap : Loader {
 								{													
 										addptr=addptr+8;
 								}
-						}
+						}	
+
 				}
 
 
