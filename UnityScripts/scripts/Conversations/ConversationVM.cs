@@ -273,7 +273,7 @@ public class ConversationVM : UWEBase {
 						{
 								if (isCompressed == 1)
 								{
-										int datalen=0;
+										long datalen=0;
 										char[] cnv_ark = DataLoader.unpackUW2(tmp_ark, add_ptr, ref datalen);
 										add_ptr=0;
 										/*

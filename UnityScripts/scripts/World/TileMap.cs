@@ -72,12 +72,18 @@ public class TileMap : Loader {
 		const short fTOP =2;
 		const short fBOTTOM= 1;
 
+		public const int UW1_TEXTUREMAPSIZE=64;
+		public const int UW2_TEXTUREMAPSIZE=70;
+		public const int UWDEMO_TEXTUREMAPSIZE=63;
+
+		public const int UW1_NO_OF_LEVELS=9;
+		public const int UW2_NO_OF_LEVELS=80;
 
 		public struct Overlay{
-				public short index;
-				public short unk1;
-				public short tileX;
-				public short tileY;
+				public int index;
+				public int unk1;
+				public int tileX;
+				public int tileY;
 		};
 
 		public Overlay[] Overlays=new Overlay[64];
@@ -330,6 +336,183 @@ public class TileMap : Loader {
 		}
 
 
+
+		public bool BuildTileMapUW(int levelNo, DataLoader.UWBlock lev_ark, DataLoader.UWBlock tex_ark, DataLoader.UWBlock ovl_ark)
+		{
+				//int NoOfBlocks;
+				//long AddressOfBlockStart;
+				long address_pointer=0;
+				//long textureAddress=0;
+
+				//short x;	
+				//short y;
+				short CeilingTexture=0;
+
+				short textureMapSize=64;//Different for UW2
+
+				UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
+
+				CEILING_HEIGHT=UW_CEILING_HEIGHT;
+
+				for  (short x=0; x<=TileMap.TileMapSizeX;x++)
+				{
+						for (short y=0; y<=TileMap.TileMapSizeY;y++)
+						{
+								Tiles[x,y] =new TileInfo();
+						}
+				}
+
+
+				BuildTextureMap (tex_ark, ref CeilingTexture, levelNo );
+
+				for (short y=0; y<=TileMap.TileMapSizeY;y++)
+				{
+						for (short x=0; x<=TileMap.TileMapSizeX;x++)
+						{
+								Tiles[x,y].tileX = x;
+								Tiles[x,y].tileY = y;
+
+								int FirstTileInt = (int)DataLoader.getValAtAddress(lev_ark,(address_pointer+0),16);
+								int SecondTileInt = (int)DataLoader.getValAtAddress(lev_ark,(address_pointer+2),16);
+								address_pointer=address_pointer+4;
+
+								Tiles[x,y].tileType = getTile(FirstTileInt) ;
+								Tiles[x,y].floorHeight = getHeight(FirstTileInt) ;
+								//Tiles[x,y].trueHeight=Tiles[x,y].floorHeight;//Save this value before shifting.
+								//Tiles[x,y].floorHeight = ((Tiles[x,y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
+								//Turns out that shift is just a doubling!
+								Tiles[x,y].floorHeight  = (short)(Tiles[x,y].floorHeight*2); //remember to divide when writing this back.
+								Tiles[x,y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
+
+								Tiles[x,y].flags =(short)((FirstTileInt>>7) & 0x3);
+								Tiles[x,y].noMagic =(short)( (FirstTileInt>>14) & 0x1);
+								Tiles[x,y].doorBit =(short)( (FirstTileInt>>15) & 0x1);
+
+								switch (UWEBase._RES)
+								{
+								case UWEBase.GAME_UWDEMO://uwdemo
+								case UWEBase.GAME_UW1:	//uw1
+								case UWEBase.GAME_UW2:
+								default:
+										Tiles[x,y].floorTexture = getFloorTex(lev_ark.Data, FirstTileInt);
+										Tiles[x,y].wallTexture = getWallTex(lev_ark.Data, SecondTileInt);
+										break;
+								}
+								if (Tiles[x,y].floorTexture<0)
+								{
+										Tiles[x,y].floorTexture=0;
+								}
+								if (Tiles[x,y].floorTexture>=262)
+								{
+										Tiles[x,y].floorTexture=0;
+								}		
+								if (Tiles[x,y].wallTexture>=256)
+								{
+										Tiles[x,y].wallTexture =0;
+								}	
+
+								switch(_RES)
+								{
+								case GAME_UW2:
+										Tiles[x,y].isIce=isTextureIce(texture_map[Tiles[x,y].floorTexture]);
+										Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture]); //lookup into terrain.dat
+										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture]);
+										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture]);
+										break;
+								default:
+										Tiles[x,y].isWater=isTextureWater(texture_map[Tiles[x,y].floorTexture+48]); //lookup into terrain.dat
+										Tiles[x,y].isLava=isTextureLava(texture_map[Tiles[x,y].floorTexture+48]);
+										Tiles[x,y].isNothing = isTextureNothing(texture_map[Tiles[x,y].floorTexture+48]);
+										break;
+								}							
+
+								Tiles[x,y].isLand= ! ( (Tiles[x,y].isWater) || (Tiles[x,y].isLava) || (Tiles[x,y].isNothing));
+
+								switch(_RES)
+								{
+									case GAME_UWDEMO:
+									case GAME_UW1:
+										Tiles[x,y].terrain=GameWorldController.instance.terrainData.Terrain[ 46 + texture_map[Tiles[x,y].floorTexture+48]];
+										//GameWorldController.instance.terrainData.Terrain[256 + textureNo-210]
+										break;
+									case GAME_UW2:
+										Tiles[x,y].terrain=GameWorldController.instance.terrainData.Terrain[texture_map[Tiles[x,y].floorTexture]];
+										break;
+									default:
+										Tiles[x,y].terrain=0;
+										break;
+								}
+
+								//UW only has a single ceiling texture so this is ignored.	
+								Tiles[x,y].shockCeilingTexture=CeilingTexture;
+								//There is only one possible steepness in UW so I set it's properties to match a similar tile in shock.
+								if (Tiles[x,y].tileType >=2)
+								{
+										Tiles[x,y].shockSteep = 1;
+										Tiles[x,y].shockSteep =(short)( ((Tiles[x,y].shockSteep  <<3) >> 2)*8 >>3 );	//Shift copied from shock
+										Tiles[x,y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;
+								}
+								else
+								{
+										Tiles[x,y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;	
+								}
+								//Different textures on solid tiles faces
+								Tiles[x,y].North = Tiles[x,y].wallTexture;
+								Tiles[x,y].South = Tiles[x,y].wallTexture;
+								Tiles[x,y].East = Tiles[x,y].wallTexture;
+								Tiles[x,y].West = Tiles[x,y].wallTexture;
+								Tiles[x,y].Top = Tiles[x,y].floorTexture; 
+								Tiles[x,y].Bottom = Tiles[x,y].floorTexture; 
+								Tiles[x,y].Diagonal = Tiles[x,y].wallTexture;
+
+								//First index of the linked list of objects.
+								Tiles[x,y].indexObjectList = getObject(SecondTileInt);
+								Tiles[x,y].Render=true;		
+								Tiles[x,y].DimX=1;			
+								Tiles[x,y].DimY=1;			
+								Tiles[x,y].Grouped=false;	
+
+								for (int v = 0; v < 6; v++)
+								{
+										Tiles[x,y].VisibleFaces[v]=true;
+										Tiles[x,y].VisibleFaces[v]=true;
+								}
+								Tiles[x,y].waterRegion= 0;
+								Tiles[x,y].landRegion = 0;//including connected bridges.
+								Tiles[x,y].lavaRegion = 0;
+						}
+				}
+
+				SetTileMapWallFacesUW ();
+
+
+				//if (OverlayAddress!=0)
+				if (_RES==GAME_UW1)
+				{
+						if (ovl_ark.DataLen!=0)
+						{//read in the next 64 entries of length 6 bytes	
+								long OverlayAddress=0;
+								for (int overlayIndex=0; overlayIndex<64; overlayIndex++ )
+								{
+										Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(ovl_ark,OverlayAddress,16);
+										Overlays[overlayIndex].unk1 = (int)DataLoader.getValAtAddress(ovl_ark,OverlayAddress+2,16);
+										Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(ovl_ark,OverlayAddress+4,8);
+										Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(ovl_ark,OverlayAddress+5,8);
+										OverlayAddress+=6;
+								}
+						}	
+				}
+
+
+
+				return true;
+		}
+
+
+
+
+
+
 	
 		/// <summary>
 		/// Builds the UW 1 & 2 Tile map from the file data.
@@ -338,7 +521,7 @@ public class TileMap : Loader {
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
 		/// See uw-formats.txt for file specs
-		public bool BuildTileMapUW(char[] lev_ark, int LevelNo)
+		public bool BuildTileMapUW_OLD(char[] lev_ark, int LevelNo)
 		{
 				char[] tex_ark=new char[1]; 
 				char[] tmp_ark=new char[1];
@@ -420,7 +603,7 @@ public class TileMap : Loader {
 							}
 							if (isCompressed == 1)
 							{
-								int datalen=0;
+								long datalen=0;
 								lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
 								address_pointer=address_pointer+4;
 								AddressOfBlockStart=0;
@@ -441,13 +624,13 @@ public class TileMap : Loader {
 							}
 
 								//Get the texture map data
-							textureAddress=DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
+							textureAddress=DataLoader.getValAtAddress(tmp_ark,6 + (LevelNo * 4)  + (UW2_NO_OF_LEVELS*4),32);	
 								//compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
-							isCompressed =( ( (int)DataLoader.getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32)   )  >>1) & 0x01;
+							isCompressed =( ( (int)DataLoader.getValAtAddress(tmp_ark,6 + (LevelNo * 4) + (UW2_NO_OF_LEVELS*4)+ (NoOfBlocks*4),32)   )  >>1) & 0x01;
 
 							if (isCompressed == 1)
 							{
-									int datalen=0;
+									long datalen=0;
 									tex_ark = DataLoader.unpackUW2(tmp_ark, textureAddress, ref datalen);
 									textureAddress=-1;
 							}
@@ -589,8 +772,8 @@ public class TileMap : Loader {
 									case UWEBase.GAME_UW1:	//uw1
 									case UWEBase.GAME_UW2:
 									default:
-											Tiles[x,y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
-											Tiles[x,y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
+											Tiles[x,y].floorTexture = getFloorTex(lev_ark,  FirstTileInt);
+											Tiles[x,y].wallTexture = getWallTex(lev_ark,  SecondTileInt);
 											break;
 								}
 								if (Tiles[x,y].floorTexture<0)
@@ -671,29 +854,19 @@ public class TileMap : Loader {
 								Tiles[x,y].DimX=1;			
 								Tiles[x,y].DimY=1;			
 								Tiles[x,y].Grouped=false;	
-								//Tiles[x,y].VisibleFaces = 63;
+
 								for (int v = 0; v < 6; v++)
 								{
 										Tiles[x,y].VisibleFaces[v]=true;
 										Tiles[x,y].VisibleFaces[v]=true;
 								}
-								//Restore this when texturesmasters is loaded.
-								//Tiles[x,y].isWater = (textureMasters[Tiles[x,y].floorTexture].water == 1) && ((Tiles[x,y].tileType !=0) && (ENABLE_WATER==1));
-								//Tiles[x,y].isLava = (textureMasters[Tiles[x,y].floorTexture].lava == 1) && ((Tiles[x,y].tileType != 0));
 								Tiles[x,y].waterRegion= 0;
 								Tiles[x,y].landRegion = 0;//including connected bridges.
 								Tiles[x,y].lavaRegion = 0;
-
-								//Force off water to save on compile time during testing.
-								//Tiles[x,y].isWater=0;
-								//Tiles[x,y].TerrainChange=0;
-								//Tiles[x,y].hasElevator=0;
 						}
 				}
 
 				SetTileMapWallFacesUW ();
-
-
 
 
 				if (OverlayAddress!=0)
@@ -1064,7 +1237,7 @@ public class TileMap : Loader {
 				return (short)((tileData & 0xF0) >> 4);
 		}
 
-		short getFloorTex(char[] buffer, long textureOffset, long tileData)
+		short getFloorTex(char[] buffer, long tileData)
 		{//gets floor texture data at bits 10-13 of the tile data
 
 				return (short)((tileData >>10) & 0x0F);
@@ -1074,7 +1247,7 @@ public class TileMap : Loader {
 				//	return ((tileData >>10) & 0x0F);	//was	11
 		}
 
-		short getWallTex(char[] buffer, long textureOffset, long tileData)
+		short getWallTex(char[] buffer, long tileData)
 		{
 				//gets wall texture data at bits 0-5 (+16) of the tile data(2nd part)
 				//return ((tileData >>17)& 0x3F);
@@ -1955,12 +2128,12 @@ public class TileMap : Loader {
 		}
 
 
-		char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data)
+		char[] GetUW2TileMapBytes(int LevelNo, char[] lev_ark_file_data, out long datalen)
 		{	
 				char[] lev_ark;
 				long address_pointer=0;
 				int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark_file_data,0,32);	
-
+				datalen=0;
 				address_pointer=6;
 				int isCompressed =( ( (int)DataLoader.getValAtAddress(lev_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32)  ) >>1) & 0x01;
 
@@ -1974,11 +2147,12 @@ public class TileMap : Loader {
 				}
 				if (isCompressed == 1)
 				{
-						int datalen=0;
+						//long datalen=0;
 						lev_ark = DataLoader.unpackUW2(lev_ark_file_data,DataLoader.getValAtAddress(lev_ark_file_data,address_pointer,32), ref datalen);
 				}
 				else
 				{
+						datalen = 0x7c08;
 						int BlockStart = (int)DataLoader.getValAtAddress(lev_ark_file_data, address_pointer, 32);
 						lev_ark = new char[0x7c08];//Make sure this contains the object data as well.
 						int j=0;
@@ -1996,7 +2170,7 @@ public class TileMap : Loader {
 		/// Converts this tilemap/Objectlist into an array that can be written to file.
 		/// </summary>
 		/// <returns>The map to bytes.</returns>
-		public char[] TileMapToBytes(char[] lev_ark_file_data)
+		public char[] TileMapToBytes(char[] lev_ark_file_data, out long datalen)
 		{
 				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
 
@@ -2005,11 +2179,12 @@ public class TileMap : Loader {
 				{
 					case GAME_UW2:
 						{
-							TileMapData = GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data);
+							TileMapData = GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
 							break;
 						}
 				default:
 						{
+							datalen=31752;
 							long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
 							for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
 							{//prepopulate with existing file data. Vanilla underworld will crash otherwise
@@ -2434,4 +2609,99 @@ public class TileMap : Loader {
 			}
 			return GameWorldController.instance.NavMeshLand.agentTypeID;
 		}
+
+	void BuildTextureMap (DataLoader.UWBlock tex_ark, ref short CeilingTexture, int LevelNo)
+	{
+			short textureMapSize;//=UW1_TEXTUREMAPSIZE;
+			switch(_RES)
+			{
+			case GAME_UW2:
+					textureMapSize=UW2_TEXTUREMAPSIZE;
+					break;
+			case GAME_UWDEMO:						
+					textureMapSize=UWDEMO_TEXTUREMAPSIZE;
+					break;
+			default:
+					textureMapSize=UW1_TEXTUREMAPSIZE;
+					break;
+			}
+		int offset = 0;
+		for (int i = 0; i < textureMapSize; i++)//256
+		 {
+			//TODO: Only use this for texture lookups.
+			switch (UWEBase._RES) {
+			case UWEBase.GAME_UWDEMO: {
+				if (i < 48)//Wall textures
+				 {
+					texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark, offset, 16);
+					//(i * 2)
+					offset = offset + 2;
+				}
+				else
+					if (i <= 57)//Floor textures are 49 to 56, ceiling is 57
+					 {
+						texture_map [i] = (short)(DataLoader.getValAtAddress (tex_ark, offset, 16) + 48);
+						//(i * 2)
+						offset = offset + 2;
+						if (i == 57) {
+							CeilingTexture = (short)i;
+						}
+					}
+					else {
+						//door textures are int 8s
+						texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark, offset, 8);
+						//+210; //(i * 1)
+						offset++;
+					}
+				break;
+			}
+			case UWEBase.GAME_UW1: {
+				if (i < 48)//Wall textures
+				 {
+					texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark, offset, 16);
+					offset = offset + 2;
+				}
+				else
+					if (i <= 57)//Floor textures are 49 to 56, ceiling is 57
+					 {
+						texture_map [i] = (short)(DataLoader.getValAtAddress (tex_ark, offset, 16) + 210);
+						offset = offset + 2;
+						if (i == 57) {
+							CeilingTexture = (short)i;
+						}
+					}
+					else {
+						//door textures are int 8s
+						texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark, offset, 8);
+						//+210; //(i * 1)
+						offset++;
+					}
+				break;
+			}
+			case UWEBase.GAME_UW2://uw2
+			 {
+					if (i < 64) {
+						texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark, offset, 16);
+						//tmp //textureAddress+//(i*2)
+						offset = offset + 2;
+					}
+					else {
+						//door textures
+						texture_map [i] = (short)DataLoader.getValAtAddress (tex_ark,offset, 8);
+						//tmp //textureAddress+//(i*2)
+						offset++;
+					}
+				}
+				if (i == 0xf) {
+					CeilingTexture = (short)i;
+					//texture_map[i];
+				}
+				if ((LevelNo == (int)(GameWorldController.UW2_LevelNos.Ethereal4)) && (i == 16)) {
+					//Not sure why this is an exceptional case!
+					CeilingTexture = (short)i;
+				}
+				break;
+			}
+		}
+	}
 }

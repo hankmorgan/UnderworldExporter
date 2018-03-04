@@ -51,7 +51,7 @@ public class LightSource : object_base {
 		{
 			if (objInt().PickedUp==false)
 			{
-				SetOff ();
+			//		SetOff ();
 			}
 			else
 			{
@@ -70,7 +70,6 @@ public class LightSource : object_base {
 						}
 					}	
 				}
-
 			}
 		}
 	}
@@ -321,5 +320,15 @@ public class LightSource : object_base {
 		{
 			return GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;	
 		}
+
+	public override bool DropEvent ()
+	{
+		if (IsOn())
+		{
+				SetOff();
+				return true;
+		}
+		return false;
+	}
 
 }

@@ -75,7 +75,7 @@ public class ObjectLoaderInfo : UWClass {
 		public short tileX;	//Position of the object on the tilemap
 		public short tileY;
 		public long address;
-		public short AlreadyRendered;
+		//public short AlreadyRendered;
 		public short DeathWatched;
 
 

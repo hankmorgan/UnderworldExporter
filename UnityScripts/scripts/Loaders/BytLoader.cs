@@ -132,7 +132,7 @@ public class BytLoader : ArtLoader {
 					int isCompressed =(compressionFlag>>1) & 0x01;
 					if (isCompressed==1)	
 					{
-						int datalen=0;
+						long datalen=0;
 						return Image(DataLoader.unpackUW2(textureFile,textureOffset,ref datalen),0,320,200,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteIndicesUW2[index]],Alpha);
 					}
 					else

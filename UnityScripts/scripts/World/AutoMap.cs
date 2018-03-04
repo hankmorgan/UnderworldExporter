@@ -231,7 +231,7 @@ public class AutoMap : Loader {
 			MapNotes = new List<MapNote>();			
 			thisLevelNo=LevelNo;
 
-			int datalen=0;
+			long datalen=0;
 			long automapAddress=0;
 			long automapNotesAddress=0;
 			//long AUTOMAP_EOF_ADDRESS=0;

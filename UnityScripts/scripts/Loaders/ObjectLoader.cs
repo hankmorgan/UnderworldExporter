@@ -146,7 +146,7 @@ public class ObjectLoader : Loader {
 		/// <param name="tileMap">Tile map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="game">Game.</param>
-		public void LoadObjectList(TileMap tileMap, char[] lev_ark)
+		public void LoadObjectList(TileMap tileMap, DataLoader.UWBlock lev_ark)
 		{
 
 			objInfo=new ObjectLoaderInfo[1024];
@@ -417,6 +417,213 @@ public class ObjectLoader : Loader {
 
 
 
+		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, DataLoader.UWBlock lev_ark, int LevelNo)
+		{
+				long address_pointer=0;
+				objectsAddress=(64*64*4);
+				for (int x=0; x<1024;x++)
+				{	//read in master object list
+						objList[x]=new ObjectLoaderInfo();
+						objList[x].parentList=this;
+						objList[x].guid=System.Guid.NewGuid();
+						objList[x].index = x; 
+						objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
+						objList[x].tileX=TileMap.ObjectStorageTile;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+						objList[x].tileY=TileMap.ObjectStorageTile;
+						objList[x].levelno = (short)LevelNo ;	
+						objList[x].next=0;
+						objList[x].address = objectsAddress+address_pointer;
+						objList[x].invis = 0;
+						//objList[x].AlreadyRendered=0;
+
+						objList[x].item_id = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
+						if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES== GAME_UWDEMO)))//Fixed for bugged out of range items
+						{
+								objList[x].item_id=0;
+						}
+						//printf("Item ID %d %d\n",x, objList[x].item_id);
+						objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
+						objList[x].enchantment = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
+						objList[x].doordir  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
+						objList[x].invis  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
+						objList[x].is_quant = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
+
+						//position at +2
+						objList[x].zpos = (short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
+						//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+						objList[x].heading = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+
+						objList[x].y = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
+						objList[x].x = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
+
+						//+4
+						objList[x].quality =(short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
+						objList[x].next = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
+
+						//+6
+						objList[x].owner = (short)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+						objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+
+						if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
+						{
+								objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
+						}
+
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_MOVING_DOOR)		
+						{
+								//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
+								//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
+								//it should be in
+								objList[x].item_id= 320+ objList[x].owner;
+								switch (objList[x].item_id)
+								{//closed doors
+								case 320:
+								case 321:
+								case 322:
+								case 323:
+								case 324:
+								case 325:							
+								case 327://secret door
+										objList[x].item_id+=8;
+										//objList[x].zpos-=24;
+										objList[x].flags=5;
+										objList[x].enchantment=1;
+										objList[x].owner=0;
+										break;
+
+								case 326://Portcullis
+										objList[x].item_id+=8;
+										//objList[x].zpos-=24;
+										objList[x].flags=4;
+										objList[x].enchantment=1;
+										objList[x].owner=0;
+										break;
+										//open doors
+								case 328:
+								case 329:
+								case 330:
+								case 331:
+								case 332:
+								case 333:
+								case 335://Open secret door
+								case 334://open portcullis
+										objList[x].item_id-=8;
+										//objList[x].zpos-=24;
+										objList[x].flags=0;
+										objList[x].enchantment=0;
+										objList[x].owner=0;
+										break;
+								}
+						}
+
+						//Some of this stuff should move to obj_base
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BRIDGE)
+						{
+								if (objList[x].flags >= 2)
+								{//267 + textureIndex;
+										if (_RES == GAME_UW2)
+										{
+												objList[x].texture = texture_map[objList[x].flags - 2];	//Sets the texture for bridge
+										}
+										else
+										{
+												objList[x].texture =texture_map[objList[x].flags - 2 + 48];	//Sets the texture for bridge
+										}
+								}
+								else
+								{
+										objList[x].texture = 267 + (objList[x].flags & 0x3F);//267 is an offset into my own textures config file.
+								}
+						}
+
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BUTTON)
+						{
+								objList[x].texture = objList[x].flags;
+						}
+
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.GRAVE)
+						{
+								objList[x].texture = objList[x].flags+28;
+						}
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
+						{
+								//objList[x].x = 4;
+								//objList[x].y = 4;
+						}
+						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP)
+						{
+								//bits 1-5 of the quality field is the floor texture.
+								if (_RES == GAME_UW1)
+								{
+										int textureQuality = (objList[x].quality >> 1) & 0xf;
+										if (textureQuality == 10)
+										{
+												//Weird glitch texture
+												//textureQuality=-1;
+												//textureQuality = textureQuality - 10;
+												objList[x].texture = -1;
+										}
+										else if (textureQuality > 10)
+										{
+												//textureQuality=8;//Always seems to be this texture.
+												//textureQuality = -1;//use the texture already there?
+												objList[x].texture = -1;//texture_map[(textureQuality)+48];//-1 to reuse the existing texture
+										}
+										else
+										{
+												objList[x].texture = texture_map[(textureQuality)+48];
+										}
+										if (objList[x].zpos > 96)
+										{
+												//cap the zpos height at this
+												objList[x].zpos = 96;
+										}
+								}					
+						}
+						if (x<256)	
+						{
+								//mobile objects		
+								objList[x].npc_hp =(short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
+
+								objList[x].npc_goal =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
+								objList[x].npc_gtarg =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
+
+								objList[x].npc_level =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
+
+								objList[x].npc_talkedto =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
+								objList[x].npc_attitude = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+
+								objList[x].npc_voidanim=(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
+
+								objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
+								objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
+
+								objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
+								objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
+
+								objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+
+								objList[x].Projectile_Yaw =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+								objList[x].Projectile_Pitch = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+
+
+								int i=0;
+								for (int z=0x8; z<=0x1a;z++)
+								{
+									objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
+								}
+								address_pointer=address_pointer+8+19;
+						}
+						else
+						{
+								//Static Objects
+								address_pointer=address_pointer+8;
+						}
+				}
+		}
+
+
+
 
 
 
@@ -444,7 +651,7 @@ public class ObjectLoader : Loader {
 		/// <param name="texture_map">Texture map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
-		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
+		void BuildObjectListUW_Old(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
 		{
 			int NoOfBlocks;
 			long AddressOfBlockStart;
@@ -481,9 +688,9 @@ public class ObjectLoader : Loader {
 					{
 							tmp_ark[i] = lev_ark[i];
 					}				
-					address_pointer=6;
+					//address_pointer=6;
 					NoOfBlocks=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
-					int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) ,32);
+					int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,6 + (LevelNo*4) + (NoOfBlocks*4)   ,32);
 					int isCompressed =(compressionFlag>>1) & 0x01;
 
 					//long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
@@ -494,7 +701,7 @@ public class ObjectLoader : Loader {
 					}
 					if (isCompressed == 1)
 					{
-						int datalen=0;
+						long datalen=0;
 						lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
 					}
 					else
@@ -533,7 +740,7 @@ public class ObjectLoader : Loader {
 				objList[x].address = objectsAddress+address_pointer;
 
 				objList[x].invis = 0;
-				objList[x].AlreadyRendered=0;
+				//objList[x].AlreadyRendered=0;
 
 				objList[x].item_id = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 				if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES== GAME_UWDEMO)))//Fixed for bugged out of range items
@@ -1561,49 +1768,30 @@ public class ObjectLoader : Loader {
 		public static void UpdateObjectList(TileMap currTileMap, ObjectLoader currObjList)
 		{
 			if (currObjList==null){return;}
-			//TileMap currTileMap= GameWorldController.instance.currentTileMap();
-			//ObjectLoader currObjList = GameWorldController.instance.CurrentObjectList();
 			int[,] nexts= new int[64,64]; //What was the last object found at this tile for next assignments.
+			
 			//Update indices to match the array.
-
 			for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 			{
 				currObjList.objInfo[i].index=i;
-				//bool IsTriggerOrTrap = isTrap(currObjList.objInfo[i]) || isTrigger(currObjList.objInfo[i] );
 				bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
-				//GameWorldController.instance.objectMaster.type[objInt().item_id]
-				//	if ( ! ( (IsTriggerOrTrap) && (!OnMap) ) )
 				if ((OnMap)) 
 				{//Only clear nexts if the object is not an offmap trigger/trap
-						currObjList.objInfo[i].next=0;
-						if (currObjList.objInfo[i].instance!=null)
+					currObjList.objInfo[i].next=0;
+					if (currObjList.objInfo[i].instance!=null)
 						{
-								//currObjList.objInfo[i].instance.debugindex=i;
-							currObjList.objInfo[i].instance.next=0;				
+						currObjList.objInfo[i].instance.next=0;				
 						}
 				}
-			/*	switch(GameWorldController.instance.objectMaster.type[currObjList.objInfo[i].item_id])
-				{
-				case ObjectInteraction.LOCK:
-				case ObjectInteraction.A_USE_TRIGGER:
-						//The next of theses is sometimes a trigger.
-						break;
-				default:
-						currObjList.objInfo[i].next=0;
-						if (currObjList.objInfo[i].instance!=null)
-						{
-								//currObjList.objInfo[i].instance.debugindex=i;
-								currObjList.objInfo[i].instance.next=0;				
-						}
-						break;
-				}*/
 			}
 
 			if (currTileMap!=null)
 			{
 					//Clear the tilemaps indexobjectlist
-					for (int x=0;x<=TileMap.TileMapSizeX;x++){
-						for (int y=0;y<=TileMap.TileMapSizeY;y++){
+				for (int x=0;x<=TileMap.TileMapSizeX;x++)
+					{
+						for (int y=0;y<=TileMap.TileMapSizeY;y++)
+							{
 								currTileMap.Tiles[x,y].indexObjectList=0;
 							}
 					}		
@@ -1630,7 +1818,6 @@ public class ObjectLoader : Loader {
 							{//Rebuild container chain
 									linkContainerContents(t.gameObject.GetComponent<Container>());
 									t.gameObject.GetComponent<ObjectInteraction>().link=0;
-									//objInt.objectloaderinfo.link=0;
 							}
 						}	
 					}

@@ -92,6 +92,21 @@ public class DataLoader :Loader {
 				return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1 ;		//24 was 32
 		}
 
+
+		/// <summary>
+		/// Gets the value at the specified address in the file buffer and performs any necessary -endian conversions
+		/// </summary>
+		/// <returns>The value at address.</returns>
+		/// <param name="buffer">Buffer.</param>
+		/// <param name="Address">Address.</param>
+		/// <param name="size">Size of the data in bits</param>
+		public static long getValAtAddress(UWBlock buffer, long Address, int size)
+			{//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
+				return getValAtAddress(buffer.Data,Address,size);
+			}
+
+
+
 		/// <summary>
 		/// Gets the value at the specified address in the file buffer and performs any necessary -endian conversions
 		/// </summary>
@@ -129,7 +144,7 @@ public class DataLoader :Loader {
 		/// <param name="datalen">Datalen.</param>
 		/// Robbed and changed slightly from the Labyrinth of Worlds implementation project.
 		///This decompresses UW2 blocks.
-	public static char[] unpackUW2(char[] tmp, long address_pointer, ref int datalen)
+	public static char[] unpackUW2(char[] tmp, long address_pointer, ref long datalen)
 	{
 		long BlockLen = (int)DataLoader.getValAtAddress(tmp,address_pointer,32);	//lword(base);
 		long NoOfSegs = ((BlockLen / 0x1000) + 1) * 0x1000;
@@ -754,5 +769,74 @@ public class DataLoader :Loader {
 				writer.Write(valOut);
 
 				return 4;
+		}
+
+
+
+		/// <summary>
+		/// Loads the UW block.
+		/// </summary>
+		/// <returns><c>true</c>, if UW block was loaded, <c>false</c> otherwise.</returns>
+		/// <param name="arkData">Ark data.</param>
+		/// <param name="blockNo">Block no.</param>
+		/// <param name="targetDataLen">Target data length.</param>
+		/// <param name="uwb">Uwb.</param>
+		public static bool LoadUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
+		{		
+			uwb = new UWBlock();		
+			int NoOfBlocks =  (int)DataLoader.getValAtAddress(arkData,0,32);
+			switch (_RES)
+			{
+			case GAME_UW2:
+				{//6 + block *4 + (noOfBlocks*type)
+					uwb.Address=(int)DataLoader.getValAtAddress(arkData, 6 + (blockNo*4) ,32)  ;
+					uwb.CompressionFlag =(int)DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*4) ,32)  ;
+					uwb.DataLen =DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*8)  ,32)  ;
+					uwb.ReservedSpace =DataLoader.getValAtAddress(arkData, 6 +  (blockNo*4)  + (NoOfBlocks*12)  ,32)  ;	
+					if (uwb.Address!=0)
+					{
+						if (((uwb.CompressionFlag >>1) & 0x01) == 1)
+						{//data is compressed;
+							uwb.Data = unpackUW2(arkData,uwb.Address,ref uwb.DataLen);	
+							return true;
+						}
+						else
+						{
+							uwb.Data = new char[uwb.DataLen];
+							int b=0;
+							for (long i=uwb.Address; i<uwb.Address+uwb.DataLen;i++)	
+							{//Copy the data to the block.
+								uwb.Data[b++]= arkData[i];														
+							}
+							return true;
+						}
+					}
+					else
+					{
+						uwb.DataLen = 0;
+						return false;
+					}
+				}
+			default:
+				{
+					uwb.Address =  DataLoader.getValAtAddress(arkData,(blockNo * 4) + 2,32);	
+					if (uwb.Address!=0)
+					{
+						uwb.Data = new char[targetDataLen];
+						uwb.DataLen = targetDataLen;
+						int b=0;
+						for (long i=uwb.Address; i<uwb.Address+uwb.DataLen;i++)	
+						{//Copy the data to the block.
+								uwb.Data[b++]= arkData[i];														
+						}
+						return true;
+					}
+					else
+					{
+						uwb.DataLen = 0;
+						return false;
+					}
+				}
+			}
 		}
 }

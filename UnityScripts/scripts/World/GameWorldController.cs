@@ -933,25 +933,62 @@ public class GameWorldController : UWEBase {
 						//Check loading
 						if (Tilemaps[newLevelNo]==null)
 						{//Data has not been loaded for this level
-								Tilemaps[newLevelNo]=new TileMap(newLevelNo);
+							Tilemaps[newLevelNo]=new TileMap(newLevelNo);
 
-								if (UWEBase._RES!=UWEBase.GAME_SHOCK)
+							if (UWEBase._RES!=UWEBase.GAME_SHOCK)
+							{
+								DataLoader.UWBlock lev_ark_block=new DataLoader.UWBlock();
+								DataLoader.UWBlock tex_ark_block=new DataLoader.UWBlock();
+								DataLoader.UWBlock ovl_ark_block=new DataLoader.UWBlock();
+								
+								//Load the tile and object blocks
+								DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+
+								if(_RES==GAME_UW1)
+								{//Load the overlays.
+									DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 9,  0x180, out ovl_ark_block );	
+								}
+
+								//Load the texture maps
+								switch(_RES)
 								{
-										Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
+								case GAME_UWDEMO:
+										DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "LEVEL13.TXM" , out tex_ark_block.Data );
+										tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
+										break;										
+								case GAME_UW2:
+										DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 80,  -1, out tex_ark_block );
+										break;
+								case GAME_UW1:
+								default:
+										DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 18,  0x7a, out tex_ark_block );
+										break;
+								}
+
+								if ((lev_ark_block.DataLen>0) && (tex_ark_block.DataLen>0)	)
+								{
+										//Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
+										Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block,ovl_ark_block);
 										objectList[newLevelNo]=new ObjectLoader();
-										objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
+										objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_block);		
 								}
 								else
-								{
-										Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
-										objectList[newLevelNo]=new ObjectLoader();
-										objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo],lev_ark_file_data);
+								{//load an empty level
+										
 								}
-								if (UWEBase.EditorMode==false)
-								{
-										Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
-								}
-								Tilemaps[newLevelNo].CreateRooms();
+
+							}
+							else
+							{
+									Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
+									objectList[newLevelNo]=new ObjectLoader();
+									objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo],lev_ark_file_data);
+							}
+							if (UWEBase.EditorMode==false)
+							{
+									Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
+							}
+							Tilemaps[newLevelNo].CreateRooms();
 
 						}
 
@@ -1380,6 +1417,8 @@ public class GameWorldController : UWEBase {
 				DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
 
 				//First update the object list so as to match indices properly
+				//This is causing a badobjectlist error in vanilla uw2.
+			
 				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 
 				//First block is always here.
@@ -1389,22 +1428,30 @@ public class GameWorldController : UWEBase {
 				//Read in the data for the 80 tile/object maps
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{
-					blockData[l].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (NoOfBlocks*4),32);
-					blockData[l].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (NoOfBlocks*12),32);
+					blockData[l].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,6 + (l * 4) + (NoOfBlocks*4), 32);
+					blockData[l].DataLen =DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4)  + (NoOfBlocks*8), 32);
+					blockData[l].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4)  + (NoOfBlocks*12), 32);
 					if (GameWorldController.instance.Tilemaps[l]!=null)
 					{
+							long UnPackDatalen=0;
 							blockData[l].CompressionFlag=DataLoader.UW2_NOCOMPRESSION;
-							blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
-							blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
+							blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);							
+							//blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;//32279;//
 
+							blockData[l].DataLen = UnPackDatalen;
+
+							//if (blockData[l].ReservedSpace< blockData[l].DataLen)
+							//{
+								//Debug.Log("Changing reserved space for block " + l + " to datalen was " + blockData[l].ReservedSpace + " now "  + blockData[l].DataLen );
+								//blockData[l].ReservedSpace= blockData[l].DataLen;			
+							//}
 					}///31752
 					else
 					{//Copy data from file.
 						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6,32);
 						if (AddressToCopyFrom!=0)
 						{//Only copy a block with data										
-								blockData[l].Data=CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
-								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;		
+							blockData[l].Data=CopyData(AddressToCopyFrom, blockData[l].ReservedSpace);//31752
 						}
 						else
 						{
@@ -1449,7 +1496,7 @@ public class GameWorldController : UWEBase {
 						}
 						else
 						{
-									blockData[l+160].DataLen=0;
+								blockData[l+160].DataLen=0;
 						}
 				}
 
@@ -1477,7 +1524,7 @@ public class GameWorldController : UWEBase {
 
 				blockData[0].Address=5126;//This will always be the same.
 				long prevAddress=blockData[0].Address;
-				long prevSize = blockData[0].ReservedSpace;
+				long prevSize = Math.Max(blockData[0].ReservedSpace, blockData[0].DataLen );
 				//Work out the block addresses.
 				for (int i=1; i<blockData.GetUpperBound(0);i++)
 				{
@@ -1485,7 +1532,7 @@ public class GameWorldController : UWEBase {
 						{
 								blockData[i].Address= prevAddress+prevSize;	
 								prevAddress=blockData[i].Address;
-								prevSize= blockData[i].ReservedSpace;
+								prevSize= Math.Max(blockData[i].ReservedSpace, blockData[i].DataLen );
 						}
 						else
 						{
@@ -1557,7 +1604,8 @@ public class GameWorldController : UWEBase {
 							}	
 						}
 
-						for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+						//for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+						for (long a =0; a<blockData[i].DataLen; a++)
 						{
 							add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
 						}	
@@ -1598,7 +1646,8 @@ public class GameWorldController : UWEBase {
 				{
 						if (GameWorldController.instance.Tilemaps[l]!=null)
 						{
-								blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data);							
+								long UnPackDatalen=0;
+								blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data,out UnPackDatalen);							
 								blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;
 						}///31752
 						else

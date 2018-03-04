@@ -47,7 +47,7 @@ public class WhatTheHellIsSCD_ARK : UWEBase {
 
 						long address_pointer=6;
 						int compressionFlag=(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
-						int datalen =(int)DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (LevelNo*4) ,32);
+						long datalen =DataLoader.getValAtAddress(scd_ark_file_data,address_pointer + (NoOfBlocks*4*2) + (LevelNo*4) ,32);
 						int isCompressed =(compressionFlag>>1) & 0x01;
 						long AddressOfBlockStart;
 						address_pointer=(LevelNo * 4) + 6;

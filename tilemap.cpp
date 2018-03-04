@@ -628,7 +628,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		address_pointer=0;
 		int datalentest = 0;
 		//unsigned char *dumplev_ark 
-		lev_ark = get_rwops_uw2dec(tmp_ark, 0, &datalentest);
+		//lev_ark = get_rwops_uw2dec(tmp_ark, 0, &datalentest);
 		//fprintf(LOGFILE, "begin test func\n");
 		//for (int i = 0; i < datalentest; i++)
 		//	{
@@ -639,7 +639,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 
 		
 		NoOfBlocks=getValAtAddress(tmp_ark,0,32);	
-		/* begin test
+		 //begin test
 		address_pointer=6;
 
 		int compressionFlag=getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
@@ -680,7 +680,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				lev_ark[j] = tmp_ark[i];
 				j++;
 				}
-			} end test*/
+			} //end test*/
 		
 		
 		//read in the textures
@@ -688,8 +688,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
 		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
 		fprintf(LOGFILE,"\nTextures address: %d", textureAddress);
-		int compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
-		int isCompressed = (compressionFlag >> 1) & 0x01;
+		compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+		isCompressed = (compressionFlag >> 1) & 0x01;
 
 		if (isCompressed == 1)
 			{
