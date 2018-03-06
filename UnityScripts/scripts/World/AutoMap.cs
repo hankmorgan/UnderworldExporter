@@ -259,22 +259,24 @@ public class AutoMap : Loader {
 				automapNotesAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4),32);	
 				if (automapNotesAddress!=0)
 				{
-					int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
-					if (((compressionFlag>>1) & 0x1) == 1)
-					{//automap is compressed
-						char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
-						ProcessAutoMapNotes(LevelNo, tmp_ark,0, datalen);
-					}
-					else
-					{
-						long nextautomapNotesAddress= lev_ark.GetUpperBound(0);
-						if (LevelNo<80)
-						{
-							nextautomapNotesAddress = DataLoader.getValAtAddress(lev_ark,((LevelNo+1) * 4) + 6 + (240*4),32);			
-						}
-						Debug.Log("uncompressed automap notes " + LevelNo +  " at " + automapNotesAddress);
-						ProcessAutoMapNotes(LevelNo, lev_ark, automapAddress, nextautomapNotesAddress)	;
-					}
+					DataLoader.UWBlock noteblock;
+					DataLoader.LoadUWBlock(lev_ark,(LevelNo * 4) + 6 + (240*4), 0, out noteblock);
+				//	int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
+					//if (((compressionFlag>>1) & 0x1) == 1)
+					//{//automap is compressed
+					//	char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
+						ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);
+					//}
+					//else
+					//{
+					//	long nextautomapNotesAddress= lev_ark.GetUpperBound(0);
+					//	if (LevelNo<80)
+					//	{
+					//		nextautomapNotesAddress = DataLoader.getValAtAddress(lev_ark,((LevelNo+1) * 4) + 6 + (240*4),32);			
+					//	}
+					//	Debug.Log("uncompressed automap notes " + LevelNo +  " at " + automapNotesAddress);
+					//	ProcessAutoMapNotes(LevelNo, lev_ark, automapAddress, nextautomapNotesAddress)	;
+				//	}
 				}
 
 		}

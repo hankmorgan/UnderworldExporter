@@ -23,6 +23,18 @@ public class Bridge : map_object {
 			bx.center=new Vector3(0.08f, 0.006f, 0.08f);	
 			bx.size=new Vector3(1.2f, 0.18f, 1.2f);
 		}
+		if (
+				(objInt().tileX<=TileMap.TileMapSizeX)
+				&&
+				(objInt().tileY<=TileMap.TileMapSizeY)
+			)
+			{
+				int TextureIndex=  (objInt().enchantment<<3) | objInt().flags & 0x3F;
+				if (TextureIndex<2)
+				{//Only flag the normal briges as such.
+						GameWorldController.instance.currentTileMap().Tiles[objInt().tileX,objInt().tileY].hasBridge=true;				
+				}
+			}
 	}
 
 		/// <summary>

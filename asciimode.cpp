@@ -701,110 +701,118 @@ void PrintUWObjects(ObjectItem objList[1600])
 	//Prints the object debug info for UW.
 	for (int x = 0; x < 1024; x++)
 		{
-		//if (objList[x].InUseFlag == 1)
-		//{
-		UniqueObjectName(objList[x]);
-		fprintf(LOGFILE,"\n\nIndex: %d", objList[x].index);
-		fprintf(LOGFILE, "\n\nAddress: %d", objList[x].address);
-		fprintf(LOGFILE,"\tName: %s", UniqueObjectName(objList[x]));
-		if (objectMasters[objList[x].item_id].isSet == 1)
-			{
-			fprintf(LOGFILE,"\n\tObject Type : %d %s", objList[x].item_id, objectMasters[objList[x].item_id].desc);
-			}
-		else
-			{
-			fprintf(LOGFILE,"\n\tObject Type : %d %s", objList[x].item_id, "Unknown or bugged");
-			}
-		fprintf(LOGFILE,"\n\tLocation Tile(%d,%d) Position(%d,%d,%d) Heading (%d)", objList[x].tileX, objList[x].tileY, objList[x].x, objList[x].y, objList[x].zpos, objList[x].heading);
-		fprintf(LOGFILE,"\n\tIn use %d", objList[x].InUseFlag);
-		fprintf(LOGFILE,"\n\tFlags: %d", objList[x].flags);
-		fprintf(LOGFILE,"\n\t\tEnchantment: %d", objList[x].enchantment);
-		fprintf(LOGFILE,"\n\t\tDoordir : %d", objList[x].doordir);
-		fprintf(LOGFILE,"\n\t\tInvis : %d", objList[x].invis);
-		fprintf(LOGFILE,"\n\t\tIs Quant : %d", objList[x].is_quant);
+		//if (objList[x].item_id != 0)
+		//	{
 
-		fprintf(LOGFILE,"\n\tQuality : %d", objList[x].quality);
-		fprintf(LOGFILE,"\n\tNext : %d", objList[x].next);
 
-		fprintf(LOGFILE,"\n\tOwner : %d", objList[x].owner);
-		if (objList[x].is_quant == 1)
-			{
-			if (objList[x].link > 512)
+			UniqueObjectName(objList[x]);
+
+			fprintf(LOGFILE, "\n\nIndex: %d", objList[x].index);			
+			fprintf(LOGFILE, "\tName: %s", UniqueObjectName(objList[x]));
+			//if (objList[x].InUseFlag == 1)
+			//	{
+				fprintf(LOGFILE, "\tAddress: %d", objList[x].address);
+				fprintf(LOGFILE, "\tNext : %d", objList[x].next);
+			//	}
+			if (objectMasters[objList[x].item_id].isSet == 1)
 				{
-				fprintf(LOGFILE,"\n\tSpecial Property : %d", objList[x].link);
-				fprintf(LOGFILE,"\tless 512 is %d : ", objList[x].link - 512);
+				fprintf(LOGFILE, "\n\tObject Type : %d %s", objList[x].item_id, objectMasters[objList[x].item_id].desc);
 				}
 			else
 				{
-				fprintf(LOGFILE,"\n\tQuantity : %d", objList[x].link);
+				fprintf(LOGFILE, "\n\tObject Type : %d %s", objList[x].item_id, "Unknown or bugged");
+				}
+			fprintf(LOGFILE, "\n\tLocation Tile(%d,%d) Position(%d,%d,%d) Heading (%d)", objList[x].tileX, objList[x].tileY, objList[x].x, objList[x].y, objList[x].zpos, objList[x].heading);
+			fprintf(LOGFILE, "\n\tIn use %d", objList[x].InUseFlag);
+			fprintf(LOGFILE, "\n\tFlags: %d", objList[x].flags);
+			fprintf(LOGFILE, "\n\t\tEnchantment: %d", objList[x].enchantment);
+			fprintf(LOGFILE, "\n\t\tDoordir : %d", objList[x].doordir);
+			fprintf(LOGFILE, "\n\t\tInvis : %d", objList[x].invis);
+			fprintf(LOGFILE, "\n\t\tIs Quant : %d", objList[x].is_quant);
+
+			fprintf(LOGFILE, "\n\tQuality : %d", objList[x].quality);
+			
+
+			fprintf(LOGFILE, "\n\tOwner : %d", objList[x].owner);
+			if (objList[x].is_quant == 1)
+				{
+				if (objList[x].link > 512)
+					{
+					fprintf(LOGFILE, "\n\tSpecial Property : %d", objList[x].link);
+					fprintf(LOGFILE, "\tless 512 is %d : ", objList[x].link - 512);
+					}
+				else
+					{
+					fprintf(LOGFILE, "\n\tQuantity : %d", objList[x].link);
+					}
+
+				}
+			else
+				{
+				fprintf(LOGFILE, "\n\tSpecial Link : %d", objList[x].link);
 				}
 
-			}
-		else
-			{
-			fprintf(LOGFILE,"\n\tSpecial Link : %d", objList[x].link);
-			}
+			if (objList[x].texture > -1)
+				{
+				printf("\n\tTexture: %d", objList[x].texture);
+				}
+			//if (objList[x].npc_whoami >=0)
+			if (x < 256)
+				{
+				fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);
+				fprintf(LOGFILE, "\n\tNPC Goal : %d ", objList[x].npc_goal);
+				fprintf(LOGFILE, "\n\tNPC GTarg : %d ", objList[x].npc_gtarg);
+				fprintf(LOGFILE, "\n\tNPC Level : %d ", objList[x].npc_level);
+				fprintf(LOGFILE, "\n\tNPC TalkedTo : %d ", objList[x].npc_talkedto);
+				fprintf(LOGFILE, "\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+				fprintf(LOGFILE, "\n\tNPC yHome : %d ", objList[x].npc_yhome);
+				fprintf(LOGFILE, "\n\tNPC xHome : %d ", objList[x].npc_xhome);
+				fprintf(LOGFILE, "\n\tNPC Heading : %d ", objList[x].npc_heading);
+				fprintf(LOGFILE, "\n\tNPC Hunger : %d ", objList[x].npc_hunger);
+				fprintf(LOGFILE, "\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
 
-		if (objList[x].texture > -1)
-			{
-			printf("\n\tTexture: %d" , objList[x].texture );
-			}
-		//if (objList[x].npc_whoami >=0)
-		if (x<256)
-			{
-			fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);
-			fprintf(LOGFILE, "\n\tNPC Goal : %d ", objList[x].npc_goal);
-			fprintf(LOGFILE, "\n\tNPC GTarg : %d ", objList[x].npc_gtarg);
-			fprintf(LOGFILE, "\n\tNPC Level : %d ", objList[x].npc_level);
-			fprintf(LOGFILE, "\n\tNPC TalkedTo : %d ", objList[x].npc_talkedto);
-			fprintf(LOGFILE, "\n\tNPC Attitude : %d ", objList[x].npc_attitude);
-			fprintf(LOGFILE, "\n\tNPC yHome : %d ", objList[x].npc_yhome);
-			fprintf(LOGFILE, "\n\tNPC xHome : %d ", objList[x].npc_xhome);
-			fprintf(LOGFILE, "\n\tNPC Heading : %d ", objList[x].npc_heading);
-			fprintf(LOGFILE, "\n\tNPC Hunger : %d ", objList[x].npc_hunger);
-			fprintf(LOGFILE,"\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
+				fprintf(LOGFILE, "\n\tProjectile Yaw: %d ", objList[x].projectile_yaw);
+				fprintf(LOGFILE, "\n\tProjectile Pitch: %d ", objList[x].projectile_pitch);
 
-			fprintf(LOGFILE, "\n\tProjectile Yaw: %d ", objList[x].projectile_yaw);
-			fprintf(LOGFILE, "\n\tProjectile Pitch: %d ", objList[x].projectile_pitch);
-
-			//fprintf(LOGFILE,"\n\tNPC Death Quest variable : %d ", objList[x].npc_deathVariable);
+				//fprintf(LOGFILE,"\n\tNPC Death Quest variable : %d ", objList[x].npc_deathVariable);
 
 
-			/*
+				/*
 
-			objList[x].npc_hp = getValAtAddress(lev_ark, objectsAddress + address_pointer + 8, 8);
+				objList[x].npc_hp = getValAtAddress(lev_ark, objectsAddress + address_pointer + 8, 8);
 
-			objList[x].npc_goal = getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16) & 0xF;
-			objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16)>>4 & 0xFF);
+				objList[x].npc_goal = getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16) & 0xF;
+				objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16)>>4 & 0xFF);
 
-			objList[x].npc_level = getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) & 0xF;
+				objList[x].npc_level = getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) & 0xF;
 
-			objList[x].npc_talkedto = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16)>>13 & 0x1);
-			objList[x].npc_attitude = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) >> 14 & 0x3);
+				objList[x].npc_talkedto = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16)>>13 & 0x1);
+				objList[x].npc_attitude = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) >> 14 & 0x3);
 
-			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 4 & 0xF);
-			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 10 & 0xF);
+				objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 4 & 0xF);
+				objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 10 & 0xF);
 
-			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 24, 16) >> 4 & 0xF);
-			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 25, 16)  & 0x3F);
+				objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 24, 16) >> 4 & 0xF);
+				objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 25, 16)  & 0x3F);
 
 
-*/
-			}
+				*/
+				}
 
-		if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) 
-			|| (objectMasters[objList[x].item_id].type == TMAP_CLIP)
-			|| (objectMasters[objList[x].item_id].type == BRIDGE)
-			|| (objectMasters[objList[x].item_id].type == BUTTON)
-			)
-			{
-			fprintf(LOGFILE, "\n\tTexture: %d", objList[x].texture);
-			}
-		if (objectMasters[objList[x].item_id].type == A_SPELLTRAP)
-			{
-			fprintf(LOGFILE, "\n\tEffectID: %d", ((objList[x].quality & 0xf) << 4) | (objList[x].owner & 0xf));
-//((objInt.Quality & 0xf)<<4) | (objInt.Owner & 0xf)
-			}
+			if ((objectMasters[objList[x].item_id].type == TMAP_SOLID)
+				|| (objectMasters[objList[x].item_id].type == TMAP_CLIP)
+				|| (objectMasters[objList[x].item_id].type == BRIDGE)
+				|| (objectMasters[objList[x].item_id].type == BUTTON)
+				)
+				{
+				fprintf(LOGFILE, "\n\tTexture: %d", objList[x].texture);
+				}
+			if (objectMasters[objList[x].item_id].type == A_SPELLTRAP)
+				{
+				fprintf(LOGFILE, "\n\tEffectID: %d", ((objList[x].quality & 0xf) << 4) | (objList[x].owner & 0xf));
+				//((objInt.Quality & 0xf)<<4) | (objInt.Owner & 0xf)
+				}
+			//}
 		}
 	//}
 	}

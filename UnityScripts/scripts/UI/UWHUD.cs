@@ -647,7 +647,10 @@ public class UWHUD : HUD {
 		/// <param name="targetState">If set to <c>true</c> target state.</param>
 		public void EnableDisableControl(GameObject control, bool targetState)
 		{
-				control.SetActive(targetState);
+				if (control!=null)
+				{
+						control.SetActive(targetState);	
+				}
 		}
 
 }

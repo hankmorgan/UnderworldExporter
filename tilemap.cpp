@@ -654,6 +654,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		if (isCompressed == 1)
 			{
 			int datalen;
+			fprintf(LOGFILE, "\nTilemap address: %d", getValAtAddress(tmp_ark, address_pointer, 32));
 			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			fprintf(LOGFILE, "begin imple func\n");
 			for (int i = 0; i < datalen; i++)
@@ -671,6 +672,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			{
 			//fprintf(LOGFILE,"uncompressed? what do i do here???");
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
+			fprintf(LOGFILE, "\nTilemap address: %d", BlockStart);
 			int j=0;
 			AddressOfBlockStart=0;
 			address_pointer = 0;

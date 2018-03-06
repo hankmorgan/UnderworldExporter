@@ -116,5 +116,42 @@ public class ObjectLoaderInfo : UWClass {
 				return GameWorldController.instance.objectMaster.type[item_id];
 		}
 
+		/// <summary>
+		/// resets all properties to zero to maintain compatability with UW2
+		/// </summary>
+		public void CleanUp()
+		{
+			//TODO:test if this is needed for mobile objects as well.
+			item_id=0;
+			flags=0;
+			enchantment=0;
+			doordir=0;
+			invis=0;
+			is_quant=0;
+			zpos=0;
+			x=0;
+			y=0;
+			heading=0;
+			quality=0;
+			next=0;
+			owner=0;
+			link=0;
+		}
 
+
+
+		public void Set()
+		{
+			InUseFlag=1;
+		}
+
+		public void Unset()
+		{
+			InUseFlag=0;	
+		}
+
+		public bool isInUse()
+		{
+			return (InUseFlag==1);
+		}
 }

@@ -2179,38 +2179,10 @@ public class TileMap : Loader {
 
 				DataLoader.UWBlock uwdata = new DataLoader.UWBlock();
 
-				//switch(_RES)
-				//{
-				//	case GAME_UW2:
-				//		{
 
-							DataLoader.LoadUWBlock(lev_ark_file_data, thisLevelNo, 31752, out uwdata)  ;
-							TileMapData= uwdata.Data; //GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
-							datalen = uwdata.DataLen;
-			//				//break;
-			//			}
-			//	default:
-			//			{
-			//				datalen=31752;
-			//				long AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark_file_data,(thisLevelNo * 4) + 2,32);
-			//				for (long i=0; i<=TileMapData.GetUpperBound(0);i++)
-			//				{//prepopulate with existing file data. Vanilla underworld will crash otherwise
-			//						TileMapData[i]= lev_ark_file_data[AddressOfBlockStart+i];
-			//				}
-			//				break;
-			//			}
-				//
-			//	}
-
-
-				/*int[] debugdataorig = new int[19];
-				for (int q=0; q<=debugdataorig.GetUpperBound(0);q++)
-				{
-						debugdataorig[q] = (int)TileMapData[22864+0x8+q];
-				}*/
-
-
-				//return TileMapData;
+				DataLoader.LoadUWBlock(lev_ark_file_data, thisLevelNo, 31752, out uwdata)  ;
+				TileMapData= uwdata.Data; //GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
+				datalen = uwdata.DataLen;
 
 				long addptr=0;
 				for (int y=0; y<=TileMap.TileMapSizeY;y++)
@@ -2241,12 +2213,6 @@ public class TileMap : Loader {
 								addptr +=4;
 						}	
 				}	
-
-		
-
-				//return TileMapData;
-				//char[] ObjectListData= new char[256*27 + 768*8];
-
 				for (int o=0; o<=GameWorldController.instance.objectList[thisLevelNo].objInfo.GetUpperBound(0);o++)
 				{
 						ObjectLoaderInfo currobj= GameWorldController.instance.objectList[thisLevelNo].objInfo[o];
@@ -2343,6 +2309,34 @@ public class TileMap : Loader {
 				}
 
 
+				addptr=0x7300;//mobile object list
+				int f=0;
+				for (int i=0; i<254; i++)
+				{						
+						int ByteToWrite= GameWorldController.instance.objectList[thisLevelNo].FreeMobileList[f];
+						TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
+						TileMapData[addptr+1] = (char)((ByteToWrite>>8) & 0xFF);
+						f++;
+						addptr+=2;
+				}
+
+				addptr=0x74fc;//static object list
+				f=0;
+				for (int i=0; i<768; i++)
+				{						
+						int ByteToWrite= GameWorldController.instance.objectList[thisLevelNo].FreeStaticList[f];
+						TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
+						TileMapData[addptr+1] = (char)((ByteToWrite>>8) & 0xFF);
+						f++;
+						addptr+=2;
+				}
+
+				//Now write the counts of free objects
+				TileMapData[0x7c02] = (char)( GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile & 0xFF);
+				TileMapData[0x7c03] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile>>8) & 0xFF);
+
+				TileMapData[0x7c04] = (char)(GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic & 0xFF);
+				TileMapData[0x7c05] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic>>8) & 0xFF);
 
 			return TileMapData;
 		}

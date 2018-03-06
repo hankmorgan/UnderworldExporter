@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class ObjectLoader : Loader {
 		const int UWDEMO =0;
@@ -114,18 +115,35 @@ public class ObjectLoader : Loader {
 		const int  BRIDGE_SIDE_TEXTURE= 5;
 		const int  BRIDGE_SIDE_TEXTURE_SOURCE =6;
 
+		/// <summary>
+		/// The free list to show which objects should exist.
+		/// </summary>
+		//short[] freeList = new int[256+768];
 
 		/// <summary>
 		/// Address in the file where the data is kept.
 		/// </summary>
-		public long objectsAddress;
+		//public long objectsAddress;
 
 
 		/// <summary>
 		/// The game objects currently in use.
 		/// </summary>
-		//public ObjectInteraction[] ObjectInteractions;
 		public ObjectLoaderInfo[] objInfo;
+
+		/// <summary>
+		/// The no of in use mobile objects in the object list.
+		/// </summary>
+		public int NoOfFreeMobile;
+
+		/// <summary>
+		/// The no of in use static objects in the object list.
+		/// </summary>
+		public int NoOfFreeStatic;
+
+		public int[]FreeMobileList= new int[254];
+		public int[]FreeStaticList= new int[768];
+
 
 
 		struct xrefTable
@@ -167,6 +185,18 @@ public class ObjectLoader : Loader {
 		}
 
 
+/*		/// <summary>
+		/// Flags objects as being in use based on the freelist in the lev.ark file
+		/// </summary>
+		/// <param name="objList">Object list.</param>
+		void setInUseFlag( ObjectLoaderInfo[] objList)
+		{
+			for (int i=2; i<=freeList.GetUpperBound(0);i++)
+			{
+				objList[i].InUseFlag= freeList[i];
+			}
+		}
+*/
 
 		/// <summary>
 		/// Readies the object list. Requires the tilemap to be read in first
@@ -448,24 +478,31 @@ public class ObjectLoader : Loader {
 
 
 
+		/// <summary>
+		/// Builds the object list for UW
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
+		/// <param name="texture_map">Texture map.</param>
+		/// <param name="lev_ark">Lev ark.</param>
+		/// <param name="LevelNo">Level no.</param>
 		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, DataLoader.UWBlock lev_ark, int LevelNo)
 		{
 				long address_pointer=0;
-				objectsAddress=(64*64*4);
+				long objectsAddress=(64*64*4);
 				for (int x=0; x<1024;x++)
 				{	//read in master object list
 						objList[x]=new ObjectLoaderInfo();
 						objList[x].parentList=this;
 						objList[x].guid=System.Guid.NewGuid();
 						objList[x].index = x; 
-						objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
+						//free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 						objList[x].tileX=TileMap.ObjectStorageTile;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
 						objList[x].tileY=TileMap.ObjectStorageTile;
 						objList[x].levelno = (short)LevelNo ;	
 						objList[x].next=0;
 						objList[x].address = objectsAddress+address_pointer;
 						objList[x].invis = 0;
-						//objList[x].AlreadyRendered=0;
 
 						objList[x].item_id = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 						if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES== GAME_UWDEMO)))//Fixed for bugged out of range items
@@ -651,17 +688,67 @@ public class ObjectLoader : Loader {
 								address_pointer=address_pointer+8;
 						}
 				}
+
+
+				NoOfFreeMobile = (int)DataLoader.getValAtAddress(lev_ark, 0x7c02,16);
+				NoOfFreeStatic = (int)DataLoader.getValAtAddress(lev_ark, 0x7c04,16);
+				for (int i=0; i<=objList.GetUpperBound(0);i++)
+				{
+						if (i>2)
+						{
+								objList[i].InUseFlag = 1;	//Assume in use unless informed otherwise in the next loop.			
+						}
+					
+				}
+
+				objectsAddress= 0x7300; //location of the mobile object free list
+				address_pointer=0;
+				for (int i=0; i<=NoOfFreeMobile;i++)
+				{
+					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
+					objList[freed].InUseFlag = 0;
+					address_pointer+=2;
+				}
+
+				objectsAddress= 0x74fc; //location of the static object free list
+				address_pointer=0;
+				for (int i=0; i<=NoOfFreeStatic;i++)
+				{
+					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
+					objList[freed].InUseFlag = 0;
+					address_pointer+=2;
+				}
+
+
+			/*	for (int i=2; i<254+768;i++)//Skip over objects 0 and 1
+				{
+					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
+					bool valid = ( ( (i<256) && ( i<NoOfFreeMobile) ) ||  ( (i>=256) && ( i-256<NoOfFreeStatic) ) );
+
+					if (valid)
+					{
+						if ((freed<objList.GetUpperBound(0)) && (freed>=0))
+						{
+							objList[freed].InUseFlag = 0;				
+						}
+						else
+						{
+							Debug.Log("Object index out of range in free list " + freed + " at offset " + (objectsAddress+address_pointer) );
+						}
+					}									
+
+					address_pointer+=2;
+				}
+				StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);	
+				string output="";
+				for (int i=0; i<=objList.GetUpperBound(0);i++)//Skip over objects 0 and 1
+				{
+						output = output +  i + "=" + objList[i].InUseFlag + "\n";
+				}
+				writer.Write(output);
+				writer.Close();*/
+
 		}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -682,11 +769,13 @@ public class ObjectLoader : Loader {
 		/// <param name="texture_map">Texture map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
+		/// DO NOT USE!
 		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
 		{
+			Debug.Log("OLD VERSION OF BuildObjectListUW");
 			int NoOfBlocks;
 			long AddressOfBlockStart;
-			
+			long objectsAddress;
 			long address_pointer;
 			//char[] graves;
 
@@ -763,7 +852,7 @@ public class ObjectLoader : Loader {
 				objList[x].parentList=this;
 				objList[x].guid=System.Guid.NewGuid();
 				objList[x].index = x; 
-				objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
+				//free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 				objList[x].tileX=TileMap.ObjectStorageTile;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
 				objList[x].tileY=TileMap.ObjectStorageTile;
 				objList[x].levelno = (short)LevelNo ;	
@@ -1044,8 +1133,8 @@ public class ObjectLoader : Loader {
 										{
 												objList[nextObj].tileX=x;
 												objList[nextObj].tileY=y;
-												objList[nextObj].InUseFlag = 1;
-												if ((isContainer(objList[nextObj])) || (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.NPC_TYPE))
+												//objList[nextObj].InUseFlag = 1;
+											/*Free	if ((isContainer(objList[nextObj])) || (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.NPC_TYPE))
 												{
 														SetContainerInUse(game, LevelInfo,objList, objList[nextObj].index);
 												}
@@ -1079,7 +1168,7 @@ public class ObjectLoader : Loader {
 														LevelInfo[x,y].hasBridge=true;				
 													}
 													
-												}
+												} FREE */
 
 												nextObj=objList[nextObj].next;
 										}
@@ -1087,7 +1176,7 @@ public class ObjectLoader : Loader {
 						}
 				}
 
-				for (int i = 0; i < 1024;i++)
+		/*		for (int i = 0; i < 1024;i++)
 				{//Make sure triggers, traps and special items are created.
 						if (objList[i]!=null)
 						{
@@ -1121,11 +1210,15 @@ public class ObjectLoader : Loader {
 										}
 								}	
 						}
-				}
+				}*/
 
 		}
 
-
+		/// <summary>
+		/// Is the object a container.
+		/// </summary>
+		/// <returns><c>true</c>, if container was ised, <c>false</c> otherwise.</returns>
+		/// <param name="currobj">Currobj.</param>
 	public static bool isContainer(ObjectLoaderInfo currobj)
 	{
 		return  ((GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CONTAINER) || (GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CORPSE));
@@ -1244,7 +1337,8 @@ public class ObjectLoader : Loader {
 
 		void SetContainerInUse(int game, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int index)
 		{
-				
+				Debug.Log("SetContainerInUse. Is no longer in use..");
+				return;
 				//Take a container/npc and set inuseflag for it contents. 
 				ObjectLoaderInfo currobj = objList[index];
 				//currobj.InUseFlag == 1;
@@ -1805,6 +1899,10 @@ public class ObjectLoader : Loader {
 				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
 				{
 						currObjList.objInfo[i].index=i;
+						if ((_RES==GAME_UW2) && (currObjList.objInfo[i].InUseFlag==0) && (i>2))
+						{
+								currObjList.objInfo[i].CleanUp();	
+						}
 						bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
 						if ((OnMap)) 
 						{//Only clear nexts if the object is not an offmap trigger/trap
@@ -1877,6 +1975,46 @@ public class ObjectLoader : Loader {
 								}	
 						}
 				}
+
+
+				//Count the number of freeobjects in the mobile and static lists and update these lists as needed
+			
+
+				int newFreeMobileObjectCount=0;
+				int newFreeStaticObjectCount=0;
+				for (int o =2; o<256; o++)
+				{
+						if (currObjList.objInfo[o].InUseFlag == 0)
+						{//Store that the object slot is free in the array.								
+								currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
+						}
+				}
+				for (int o =256; o<= currObjList.objInfo.GetUpperBound(0); o++)
+				{
+						if (currObjList.objInfo[o].InUseFlag == 0)
+						{//Store that the object slot is free in the array.								
+								currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
+						}
+				}
+
+
+				if (newFreeMobileObjectCount>0)
+				{
+						newFreeMobileObjectCount--;		
+				}
+				if (newFreeStaticObjectCount>0)
+				{
+						newFreeStaticObjectCount--;		
+				}
+				Debug.Log(
+						" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
+						" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
+				);
+				currObjList.NoOfFreeMobile= newFreeMobileObjectCount;
+				currObjList.NoOfFreeStatic= newFreeStaticObjectCount;
+
+
+
 		}
 
 
@@ -2161,6 +2299,10 @@ public class ObjectLoader : Loader {
 		/// <returns>The free slot.</returns>
 		public bool getFreeSlot(int startIndex, out int index)
 		{
+			if (startIndex<2)
+			{
+					startIndex=2;
+			}
 			for (int i=startIndex; i<=objInfo.GetUpperBound(0);i++)
 			{
 				if(objInfo[i].InUseFlag==0)	
@@ -2182,24 +2324,13 @@ public class ObjectLoader : Loader {
 			info.doordir= objInt.doordir;	//13
 			info.invis= objInt.invis;		//14
 			info.is_quant= objInt.isquant;	//15						
-
-			//info.texture= objInt.texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
-			//(gravestone, picture, lever, switch, shelf, bridge, ..)
-
 			info.zpos= objInt.zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
 			info.heading= objInt.heading;	//        7- 9   3   "heading"   Heading (*45 deg)
 			info.x= objInt.x; //   10-12   3   "ypos"      Object Y position (0-7)
 			info.y= objInt.y; //  13-15   3   "xpos"      Object X position (0-7)
-			//0004 quality / chain
 			info.quality= objInt.quality;	//;     0- 5   6   "quality"   Quality
 			info.next= objInt.next; //    6-15   10  "next"      Index of next object in chain
-
-			//0006 link / special
-			//     0- 5   6   "owner"     Owner / special
-
 			info.owner= objInt.owner;	//Also special
-			//     6-15   10  (*)         Quantity / special link / special property
-
 			info.link= objInt.link	;	//also quantity	
 			
 			info.tileX=objInt.tileX;
@@ -2211,39 +2342,22 @@ public class ObjectLoader : Loader {
 						MobileObject npc = objInt.GetComponent<MobileObject>();
 						if (npc!=null)
 						{
-								//The values stored in the NPC info area (19 bytes) contain infos for
-								//critters unique to each object.
-								//0008 
-								info.npc_hp=npc.npc_hp;	//0-7
-								//0009	
-								//blank?
-								//000a   
-								//blank?
-								//000b   Int16      
-								info.npc_goal=npc.npc_goal;	//0-3
-								info.npc_gtarg=npc.npc_gtarg;    //4-11   
-								//000d        
-								info.npc_level=(short)npc.npc_level;	//0-3
-								info.npc_talkedto=npc.npc_talkedto;   //13     
-								info.npc_attitude=npc.npc_attitude;	//14-15
-								//000f    
-								//info.npc_height=npc.npc_height ;//6- 12 ?
-								//0016  
+								info.npc_hp=npc.npc_hp;
+								info.npc_goal=npc.npc_goal;	
+								info.npc_gtarg=npc.npc_gtarg; 
+								info.npc_level=(short)npc.npc_level;
+								info.npc_talkedto=npc.npc_talkedto;  
+								info.npc_attitude=npc.npc_attitude;
 								info.npc_voidanim=npc.npc_voidanim;
-								info.npc_yhome=npc.npc_yhome;	// 4-9    
-								info.npc_xhome=npc.npc_xhome; // 10-15  
-								//0018   0010   Int8   0-4:   npc_heading?
+								info.npc_yhome=npc.npc_yhome; 
+								info.npc_xhome=npc.npc_xhome;
 								info.npc_heading=npc.npc_heading;
-								//   0019      Int8   0-6:   
-								info.npc_hunger=npc.npc_hunger; //(?)
-								//001a   0012   Int8          
+								info.npc_hunger=npc.npc_hunger; 
 								info.npc_whoami=npc.npc_whoami;
-
 								info.npc_health=npc.npc_health;
 								info.npc_arms=npc.npc_arms;
 								info.npc_power = npc.npc_power;
 								info.npc_name = npc.npc_name;	
-
 								info.Projectile_Pitch=npc.Projectile_Pitch;
 								info.Projectile_Yaw=npc.Projectile_Yaw;
 						}
@@ -3450,9 +3564,13 @@ public class ObjectLoader : Loader {
 		}
 
 
-
+		/// <summary>
+		/// Sets the door bits so I know if the tile contains a door..
+		/// </summary>
+		/// <param name="LevelInfo">Level info.</param>
+		/// <param name="objList">Object list.</param>
 		void setDoorBits(TileInfo[,] LevelInfo,ObjectLoaderInfo[] objList)
-		{//So I know if the tile contains a door.
+		{//
 				ObjectLoaderInfo currObj;
 				for (short x=0; x<64;x++)
 				{
@@ -3478,16 +3596,16 @@ public class ObjectLoader : Loader {
 														//LevelInfo[x,y].DoorIndex = currObj.index;
 														//Put it's lock into use if it exists.
 														//I'm ignoring for the moment but it is here for compatability to vanilla.
-														if (currObj.link!=0)
-														{
-																if (objList[currObj.link].InUseFlag==0)
-																{
-																		objList[currObj.link].InUseFlag=1;	
-																		objList[currObj.link].tileX=TileMap.ObjectStorageTile;
-																		objList[currObj.link].tileY=TileMap.ObjectStorageTile;	
-																}
-
-														}
+														//FREE	if (currObj.link!=0)
+														//FREE	{
+														//FREE	if (objList[currObj.link].InUseFlag==0)
+														//FREE	{
+														//FREE			objList[currObj.link].InUseFlag=1;	
+														//FREE			objList[currObj.link].tileX=TileMap.ObjectStorageTile;
+														//FREE			objList[currObj.link].tileY=TileMap.ObjectStorageTile;	
+														//FREE	}
+														//FREE
+														//FREE}
 														//	}
 														break;
 												}
@@ -3508,10 +3626,12 @@ public class ObjectLoader : Loader {
 		}
 
 
-
+		/// <summary>
+		/// Match wands to their spell links..
+		/// </summary>
+		/// <param name="objLoader">Object loader.</param>
 		static public void LinkObjectListWands (ObjectLoader objLoader)
 		{
-				//Match wands to their spell links.
 				for (int o = 1; o <= objLoader.objInfo.GetUpperBound (0); o++) {
 						if (objLoader.objInfo[o]!=null)
 						{

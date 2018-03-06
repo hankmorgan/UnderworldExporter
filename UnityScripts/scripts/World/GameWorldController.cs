@@ -1386,6 +1386,10 @@ public class GameWorldController : UWEBase {
 		{//Break the instance back to the object list
 				obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
 				obj.GetComponent<object_base>().MoveToInventoryEvent();
+				if (_RES==GAME_UW2)
+				{
+						obj.objectloaderinfo.CleanUp();	
+				}
 				if (ConversationVM.InConversation)
 				{
 						ConversationVM.BuildObjectList();//Reflect changes to object lists
@@ -1421,9 +1425,7 @@ public class GameWorldController : UWEBase {
 				int NoOfBlocks=320;
 				DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
 
-				//First update the object list so as to match indices properly
-				//This is causing a badobjectlist error in vanilla uw2.
-			
+				//First update the object list so as to match indices properly	
 				ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 
 				//First block is always here.
@@ -1442,9 +1444,7 @@ public class GameWorldController : UWEBase {
 							blockData[l].CompressionFlag=DataLoader.UW2_NOCOMPRESSION;
 							blockData[l].Data= GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);							
 							//blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;//32279;//
-
 							blockData[l].DataLen = UnPackDatalen;
-
 							//if (blockData[l].ReservedSpace< blockData[l].DataLen)
 							//{
 								//Debug.Log("Changing reserved space for block " + l + " to datalen was " + blockData[l].ReservedSpace + " now "  + blockData[l].DataLen );
@@ -1486,44 +1486,83 @@ public class GameWorldController : UWEBase {
 				}
 
 				//read in the automaps
-				//TODO: At the moment this is just a straight copy of this information
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{		
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4),32);
-						blockData[l+160].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*4),32);
-						ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
-						blockData[l+160].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*12),32);
-
-						if (AddressToCopyFrom!=0)
+						if (GameWorldController.instance.AutoMaps[l]!=null)
 						{
-								blockData[l+160].Data=CopyData(AddressToCopyFrom,ReadDataLen);
-								blockData[l+160].DataLen=blockData[l+160].Data.GetUpperBound(0)+1;	
+								blockData[l+160].CompressionFlag=DataLoader.UW2_NOCOMPRESSION;
+								blockData[l+160].Data= GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();						
+								blockData[l+160].DataLen=blockData[l+160].Data.GetUpperBound(0)+1;
+								blockData[l+160].ReservedSpace = blockData[l+160].DataLen;
 						}
 						else
-						{
-								blockData[l+160].DataLen=0;
+						{//Just copy the data from the old ark to the new ark
+							AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4),32);
+							blockData[l+160].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*4),32);
+							ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
+							blockData[l+160].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (160*4)+ (NoOfBlocks*12),32);
+
+							if (AddressToCopyFrom!=0)
+								{
+									blockData[l+160].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+									blockData[l+160].DataLen=blockData[l+160].Data.GetUpperBound(0)+1;	
+								}
+							else
+								{
+									blockData[l+160].DataLen=0;
+								}	
 						}
 				}
+
 
 				//read in the automap notes
 				//TODO: At the moment this is just a straight copy of this information
 				for (int l=0; l<=GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
 				{		
-						AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4),32);
-						blockData[l+240].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);
-						ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
-						blockData[l+240].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*12),32);
+						if (GameWorldController.instance.AutoMaps[l]!=null)
+						{								
+								blockData[l+240].Data= GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
+								if (blockData[l+240].Data!=null)
+								{
+										blockData[l+240].CompressionFlag=DataLoader.UW2_NOCOMPRESSION;
+										blockData[l+240].DataLen=blockData[l+240].Data.GetUpperBound(0)+1;
+										blockData[l+240].ReservedSpace = blockData[l+240].DataLen;	
+								}
+								else
+								{//just copy
+										AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4),32);
+										blockData[l+240].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);
+										ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
+										blockData[l+240].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*12),32);
+										if (AddressToCopyFrom!=0)
+										{
+												blockData[l+240].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+												blockData[l+240].DataLen=blockData[l+240].Data.GetUpperBound(0)+1;	
+										}
+										else
+										{
+												blockData[l+240].DataLen=0;
+										}	
+								}
 
-
-						if (AddressToCopyFrom!=0)
-						{
-								blockData[l+240].Data=CopyData(AddressToCopyFrom,ReadDataLen);
-								blockData[l+240].DataLen=blockData[l+240].Data.GetUpperBound(0)+1;	
 						}
 						else
-						{
-								blockData[l+240].DataLen=0;
+						{//just copy.
+								AddressToCopyFrom =  DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4),32);
+								blockData[l+240].CompressionFlag =(int)DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);
+								ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4) + (NoOfBlocks*8)  ,32); //+ (NoOfBlocks*4)
+								blockData[l+240].ReservedSpace =DataLoader.getValAtAddress(lev_ark_file_data,(l * 4) + 6 + (240*4)+ (NoOfBlocks*12),32);
+								if (AddressToCopyFrom!=0)
+								{
+										blockData[l+240].Data=CopyData(AddressToCopyFrom,ReadDataLen);
+										blockData[l+240].DataLen=blockData[l+240].Data.GetUpperBound(0)+1;	
+								}
+								else
+								{
+										blockData[l+240].DataLen=0;
+								}	
 						}
+
 				}
 
 
