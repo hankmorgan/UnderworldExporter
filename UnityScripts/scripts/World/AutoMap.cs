@@ -261,11 +261,15 @@ public class AutoMap : Loader {
 				{
 					DataLoader.UWBlock noteblock;
 					DataLoader.LoadUWBlock(lev_ark,(LevelNo * 4) + 6 + (240*4), 0, out noteblock);
+						if (noteblock.Data!=null)
+						{
+								ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);		
+						}
 				//	int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
 					//if (((compressionFlag>>1) & 0x1) == 1)
 					//{//automap is compressed
 					//	char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
-						ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);
+						//ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);
 					//}
 					//else
 					//{

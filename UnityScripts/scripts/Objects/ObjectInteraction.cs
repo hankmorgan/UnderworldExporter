@@ -13,9 +13,6 @@ using UnityEngine.UI;
 public class ObjectInteraction : UWEBase {
 
 		public int debugindex;
-		//public int canbeowned;
-
-
 
 		public static bool PlaySoundEffects=true;
 
@@ -307,13 +304,184 @@ public class ObjectInteraction : UWEBase {
 			{
 				UpdateAnimation();
 			}
-				if (objectloaderinfo!=null)
+			if (objectloaderinfo!=null)
+			{
+					debugindex=objectloaderinfo.index;
+			}
+			else
+			{
+					debugindex=-1;
+			}
+
+
+				//if (this.transform.parent==GameWorldController.instance.LevelMarker())
+				//{
+						
+/*					if (PickedUp==false)
+					{
+							short currTileX=tileX;
+							short currTileY=tileY;	
+							UpdatePosition();
+							if ((currTileX!=tileX) || (currTileY!=tileY))
+							{
+								UpdateLinkedList(this, currTileX, currTileY, tileX, tileY);
+							}	
+					}*/
+
+				//}
+
+		}
+
+		/// <summary>
+		/// Updates the linked list as objects move.
+		/// </summary>
+		/// <param name="obj">Object.</param>
+		/// <param name="oldTileX">Old tile x.</param>
+		/// <param name="oldTileY">Old tile y.</param>
+		/// <param name="newTileX">New tile x.</param>
+		/// <param name="newTileY">New tile y.</param>
+		public static void UpdateLinkedList(ObjectInteraction obj, int oldTileX, int oldTileY, int newTileX, int newTileY)
+		{
+				return;
+				bool MovingFromValidTile = TileMap.ValidTile(oldTileX,oldTileY);
+				bool MovingToValidTile = TileMap.ValidTile(newTileX,newTileY);
+
+				if (MovingFromValidTile && MovingToValidTile)
 				{
-						debugindex=objectloaderinfo.index;
+						Debug.Log("Object traversing " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")" );
+						TileInfo tOld = GameWorldController.instance.currentTileMap().Tiles[oldTileX, oldTileY];		
+						TileInfo tNew = GameWorldController.instance.currentTileMap().Tiles[newTileX, newTileY];
+						MoveFromLinkedListChain (obj, tOld);
+						MoveToLinkedListChain (obj, tNew);
+						return;
 				}
-				else
+
+				if (!MovingToValidTile && MovingFromValidTile)
+				{//Object is probably moving off map.
+						Debug.Log("Object moving off map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")" );
+						TileInfo tOld = GameWorldController.instance.currentTileMap().Tiles[oldTileX, oldTileY];	
+						MoveFromLinkedListChain (obj, tOld);
+						obj.next=0;
+						return;
+				}
+			
+				if (MovingToValidTile && !MovingFromValidTile)
+				{//Object moving from inv to world
+						Debug.Log("Object moving on map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")" );
+						TileInfo tNew = GameWorldController.instance.currentTileMap().Tiles[newTileX, newTileY];
+						MoveToLinkedListChain (obj, tNew);	
+						return;
+				}
+			//This should probably not happen.
+				if (
+						((newTileX==99) && (newTileY==99) && (oldTileX==-1) && (oldTileY==-1))//load game player inventory
+						||
+						((newTileX==99) && (newTileY==99) && (oldTileX==99) && (oldTileY==99))//Moving from offmap to inventory.
+				)
+
 				{
-						debugindex=-1;
+						return;
+				}
+				Debug.Log("Object moving to/from invalid tile " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")" );
+
+
+
+		}
+
+		public static void MoveToLinkedListChain (ObjectInteraction obj, TileInfo tNew)
+		{
+				if (tNew.indexObjectList == 0) 
+				{
+						tNew.indexObjectList = obj.objectloaderinfo.index;
+						Debug.Log("Putting " + obj.name + " at head of tile (" + tNew.tileX +	"," + tNew.tileY +")");
+				}
+				else 
+				{
+						//Traverse the object list to it's end and add the object to the last obj
+						int index = tNew.indexObjectList;
+						int breaker=0;
+						while ((index != 0)  && (breaker<=1024))
+						{
+								ObjectInteraction objChain = ObjectLoader.getObjectIntAt (index);
+								if (objChain != null) 
+								{
+										if (objChain.objectloaderinfo.index !=obj.objectloaderinfo.index)
+										{
+												if (objChain.next == 0) 
+												{
+														//End of chai												
+														Debug.Log("Chaining " + obj.name + " to " + objChain.name);
+														objChain.next = obj.objectloaderinfo.index;
+														index = 0;
+												}
+												else 
+												{
+														//Find next obj
+														index = objChain.next;
+												}	
+										}
+										else
+										{//Obj is already in this chain. No action needed.
+												Debug.Log ("object already in chain");
+												index=0;		
+										}
+
+								}
+								else 
+								{
+										Debug.Log ("Null object in chain");
+										index = 0;
+								}
+								breaker++;
+						}
+						if (breaker>=1024)
+						{
+								Debug.Log("This chain looped " + breaker + " times"+ obj.name);
+						}
+				}
+		}
+
+		static void MoveFromLinkedListChain (ObjectInteraction obj, TileInfo tOld)
+		{
+				if (tOld.indexObjectList == obj.objectloaderinfo.index) 
+				{
+						//Remove from the head of it's previous list
+						tOld.indexObjectList = obj.next;
+						Debug.Log("Removing " + obj.name + " at head of tile (" + tOld.tileX +	"," + tOld.tileY +")");
+				}
+				else 
+				{
+						int breaker=0;
+						int index = tOld.indexObjectList;
+						while ((index != 0)  && (breaker<=1024))
+						{
+								ObjectInteraction objChain = ObjectLoader.getObjectIntAt (index);
+								if (objChain.next == obj.objectloaderinfo.index) 
+								{
+										//Found the object that links to this object. Set it's next to the that of the moving object
+										Debug.Log("DeChaining " + obj.name + " from " + objChain.name);
+										objChain.next = obj.next;
+										index = 0;
+								}
+								else 
+								{
+										if (index!=objChain.next)
+										{
+												index = objChain.next;		
+										}
+										else
+										{
+												Debug.Log("possibly looping chaing");
+												index= 0;
+										}
+
+								}
+								breaker++;
+						}
+						if (breaker>=1024)
+						{
+							Debug.Log("This chain looped " + breaker + " times (MoveFromLinkedListChain)");
+						}
 				}
 		}
 
@@ -784,6 +952,10 @@ public class ObjectInteraction : UWEBase {
 				}
 				UWCharacter.Instance.playerInventory.Refresh();
 				objectloaderinfo.InUseFlag=0;//Free up the slot
+				//if (PickedUp==false)
+				//{
+				//	UpdateLinkedList(this, tileX,tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
+				//}
 				Destroy (this.gameObject);
 			}
 			else
@@ -1377,11 +1549,28 @@ public class ObjectInteraction : UWEBase {
 
 						npc.Projectile_Pitch=objI.Projectile_Pitch;
 						npc.Projectile_Yaw=objI.Projectile_Yaw;
+						npc.npc_height = objI.npc_height;
 
-						for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
-						{
-							npc.NPC_DATA[i]=objI.NPC_DATA[i];
-						}
+						npc.MobileUnk00 = objI.MobileUnk00;
+						npc.MobileUnk01 = objI.MobileUnk01;
+						npc.MobileUnk02 = objI.MobileUnk02;
+						npc.MobileUnk03 = objI.MobileUnk03;
+						npc.MobileUnk04 = objI.MobileUnk04;
+						npc.MobileUnk05 = objI.MobileUnk05;
+						npc.MobileUnk06 = objI.MobileUnk06;
+						npc.MobileUnk07 = objI.MobileUnk07;
+						npc.MobileUnk08 = objI.MobileUnk08;
+						npc.MobileUnk09 = objI.MobileUnk09;
+						npc.MobileUnk10 = objI.MobileUnk10;
+						npc.MobileUnk11 = objI.MobileUnk11;
+						npc.MobileUnk12 = objI.MobileUnk12;
+						npc.MobileUnk13 = objI.MobileUnk13;
+						npc.MobileUnk14 = objI.MobileUnk14;
+
+					//	for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
+					//	{
+					//		npc.NPC_DATA[i]=objI.NPC_DATA[i];
+					//	}
 				}
 		}
 
@@ -1453,11 +1642,21 @@ public class ObjectInteraction : UWEBase {
 			{
 					return;
 			}
+
+				//if (ObjectLoader.isMobile(objectloaderinfo))
+				//{
+				//		return;
+				//}
 			tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
 			tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
 
+
 			//float dist =Vector3.Distance(this.transform.position,startPos);
-			if ((Vector3.Distance(this.transform.position,startPos)>0.2f) && (tileX!=TileMap.ObjectStorageTile))
+			if (
+						//(Vector3.Distance(this.transform.position,startPos)>0.2f)
+						//&& 
+						(tileX!=TileMap.ObjectStorageTile)
+				)
 			//if ((tileX!=TileMap.ObjectStorageTile))
 			/*	{//No movement or not on the map Just update heading.
 					if (
@@ -1488,8 +1687,12 @@ public class ObjectInteraction : UWEBase {
 					case HIDDENDOOR:
 						break;
 					default:
-						zpos =(short)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
-						zpos=(short)Mathf.Min(Mathf.Ceil(zpos), 128f);
+						short newzpos =(short)((((this.transform.localPosition.y*100f)/15f)/ ceil)*128f);
+						newzpos=(short)Mathf.Min(Mathf.Ceil(newzpos), 128f);
+							if (Mathf.Abs(newzpos-zpos)>2)
+							{//To avoid drift. Only update zpos if moved by more than 2 units.
+									zpos=newzpos;	
+							}
 						break;
 					}
 				
@@ -1511,8 +1714,7 @@ public class ObjectInteraction : UWEBase {
 			objectloaderinfo.y=y;
 			objectloaderinfo.zpos=zpos;
 			objectloaderinfo.tileX=tileX;
-			objectloaderinfo.tileY=tileY;
-			
+			objectloaderinfo.tileY=tileY;			
 			startPos=this.transform.position;
 		}
 
@@ -1841,6 +2043,10 @@ public class ObjectInteraction : UWEBase {
 				case DREAM_PLANT:
 						myObj.AddComponent<DreamPlant>();
 						break;
+				case FORCEFIELD:
+						myObj.AddComponent<forcefield>();
+						break;
+
 				//case BENCH:
 				//		myObj.AddComponent<bench>();
 				//		CreateSprite=false;
@@ -2097,10 +2303,14 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_do_trap_platform>();break;
 							case 0x5://A trespass trap
 								myObj.AddComponent<a_hack_trap_trespass>();break;
+							case 0x12://Scint 5 puzzle reset
+								myObj.AddComponent<a_hack_trap_scintpuzzlereset>();break;
 							case 0xA://Bonus object trap
 								myObj.AddComponent<a_hack_trap_class_item>();break;
 							case 0xE://colour cycle a room in talorus
 								myObj.AddComponent<a_hack_trap_colour_cycle>();break;
+							case 0x1a://Forcefield in scint 5										
+								myObj.AddComponent<a_hack_trap_forcefield>(); break;
 							case 0x1E://Avatar is a coward.
 								myObj.AddComponent<a_hack_trap_coward>();break;
 							case 0x14://Terraform puzzle on scintilus 
@@ -2349,6 +2559,5 @@ public class ObjectInteraction : UWEBase {
 						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+ System.Guid.NewGuid();
 				}
 		}
-
 
 }

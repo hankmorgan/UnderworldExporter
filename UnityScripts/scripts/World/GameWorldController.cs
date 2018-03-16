@@ -1354,12 +1354,21 @@ public class GameWorldController : UWEBase {
 		public static ObjectInteraction MoveToWorld(ObjectInteraction obj)
 		{
 				//Add item to a free slot on the item list and point the instance back to this.
-				ObjectLoader.AssignObjectToList(ref obj);
-				obj.next=0;
 				obj.UpdatePosition();
+				if (obj.transform.parent == GameWorldController.instance.LevelMarker())
+				{
+						Debug.Log("Moving to world when object is already in world " + obj.name);
+				}
+				ObjectLoader.AssignObjectToList(ref obj);
+			//	ObjectInteraction.UpdateLinkedList(obj, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile, obj.tileX, obj.tileY);
+				//obj.next=0;
+				//obj.UpdatePosition();
+				//obj.tileX=-1;
+				//obj.tileY=-1;//Force an update to linked list.
 				obj.GetComponent<object_base>().MoveToWorldEvent();
 				if (ConversationVM.InConversation)
 				{
+						Debug.Log("Use of MoveToWorld in conversation. Review usage to avoid object list corruption! " + obj.name);
 						ConversationVM.BuildObjectList();//Reflect changes to object lists
 				}
 
@@ -1385,11 +1394,12 @@ public class GameWorldController : UWEBase {
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
 				obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
-				obj.GetComponent<object_base>().MoveToInventoryEvent();
 				if (_RES==GAME_UW2)
 				{
-						obj.objectloaderinfo.CleanUp();	
+						ObjectLoaderInfo.CleanUp(obj.objectloaderinfo);
 				}
+				obj.GetComponent<object_base>().MoveToInventoryEvent();
+				//ObjectInteraction.UpdateLinkedList(obj, obj.tileX, obj.tileY, TileMap.ObjectStorageTile,TileMap.ObjectStorageTile);
 				if (ConversationVM.InConversation)
 				{
 						ConversationVM.BuildObjectList();//Reflect changes to object lists
@@ -1647,11 +1657,19 @@ public class GameWorldController : UWEBase {
 								Debug.Log("Writing block " + i + " at " + add_ptr + " should be " + blockData[i].Address);
 							}	
 						}
-
+								Debug.Log("Writing block " + i + " datalen " +blockData[i].DataLen + " ubound=" + blockData[i].Data.GetUpperBound(0));
 						//for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+							int blockUbound = blockData[i].Data.GetUpperBound(0);
 						for (long a =0; a<blockData[i].DataLen; a++)
 						{
-							add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);
+							if (a<=blockUbound)		
+							{
+								add_ptr+=DataLoader.WriteInt8(writer,(long)blockData[i].Data[a]);					
+							}
+							else
+							{
+								add_ptr+=DataLoader.WriteInt8(writer,0);
+							}							
 						}	
 					}
 				}

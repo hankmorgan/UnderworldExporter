@@ -85,8 +85,21 @@ public class a_set_variable_trap : a_variable_trap {
 				operation = "or";
 				break;
 			case 5://XOR
-				Quest.instance.variables[objInt().zpos] ^= VariableValue();
-				operation = "xor";
+					{
+						if (_RES==GAME_UW2)
+						{
+							if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+							{
+								Quest.instance.variables[objInt().zpos] ^= VariableValue();
+								operation = "xor";
+							}	
+						}
+						else
+						{
+							Quest.instance.variables[objInt().zpos] ^= VariableValue();
+							operation = "xor";
+						}
+					}
 				break;
 			case 6://Shift left
 				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);

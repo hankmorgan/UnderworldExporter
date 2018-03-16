@@ -555,6 +555,7 @@ public class ConversationVM : UWEBase {
 						{
 								GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
 								npcPortrait.texture= grCharHead.LoadImageAt((npc.npc_whoami-1));
+								npc.SetupNPCInventory();
 								break;
 						}
 				default:
@@ -1549,7 +1550,7 @@ public class ConversationVM : UWEBase {
 		{
 				//if (func.functionName!="babl_menu")
 				//{
-					//Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
+				//	Debug.Log("Calling " + func.functionName + " at " + stack.instrp);		
 				//}
 				switch (func.functionName.ToLower())
 				{
@@ -2617,7 +2618,7 @@ public class ConversationVM : UWEBase {
 				GameObject demanded = npc.GetComponent<Container> ().GetGameObjectAt ((short)index);
 				if (Container.GetFreeSlot (PlayerContainer) != -1)//Is there space in the container.
 				{
-						demanded.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
+						/*demanded.transform.parent = UWCharacter.Instance.playerInventory.InventoryMarker.transform;
 						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
 						PlayerContainer.AddItemToContainer (demanded.name);
 						if (demanded.GetComponent<Container>())
@@ -2641,6 +2642,9 @@ public class ConversationVM : UWEBase {
 						demanded.GetComponent<ObjectInteraction> ().PickedUp = true;
 						GameWorldController.MoveToInventory(demanded);
 						UWCharacter.Instance.GetComponent<PlayerInventory> ().Refresh ();
+						*/
+						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
+						UWCharacter.Instance.Pickup(demanded.GetComponent<ObjectInteraction>(),UWCharacter.Instance.playerInventory);
 						return 1;
 				}
 				else
@@ -3902,9 +3906,11 @@ return value: none
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1,256);
 				newobjt.is_quant=1;
 				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+				//GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
+				ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
 				npc.GetComponent<Container>().AddItemToContainer(myObj.name);
 				return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+
 		}
 
 

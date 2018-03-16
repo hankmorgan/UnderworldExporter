@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Object loader info.
+/// </summary>
+/// Basically what gets written and read to and from lev.ark files.
+/// Used to create instances of objectinteractions.
 public class ObjectLoaderInfo : UWClass {
 		
 		public int index;	//it's own index in case I need to find myself.
@@ -13,77 +18,67 @@ public class ObjectLoaderInfo : UWClass {
 
 		public int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number
 		//(gravestone, picture, lever, switch, shelf, bridge, ..)
+		//This variable is uses for shorthand usage of this property
 
-		public short zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-		public short heading;	//        7- 9   3   "heading"   Heading (*45 deg)
-		public short x; //   10-12   3   "ypos"      Object Y position (0-7)
-		public short y; //  13-15   3   "xpos"      Object X position (0-7)
-		//0004 quality / chain
-		public short quality;	//;     0- 5   6   "quality"   Quality
-		public int next; //    6-15   10  "next"      Index of next object in chain
+		public short zpos;   
+		public short heading;	
+		public short x; 
+		public short y; 
+		public short quality;	
+		public int next; 
+		public short owner;
+		public int link	;
 
-		//0006 link / special
-		//     0- 5   6   "owner"     Owner / special
-
-		public short owner;	//Also special
-		//     6-15   10  (*)         Quantity / special link / special property
-
-		public int link	;	//also quantity
-
-		//The values stored in the NPC info area (19 bytes) contain infos for
-		//critters unique to each object.
-		//0008 
-		public short npc_hp;	//0-7
-		//0009	
-		//blank?
-		//000a   
-		//blank?
-		//000b   Int16      
-		public short npc_goal;	//0-3
-		public short npc_gtarg;    //4-11   
-		//000d        
-		public short npc_level;	//0-3
-		public short npc_talkedto;   //13     
-		public short npc_attitude;	//14-15
-		//000f    
-		public short npc_height ;//6- 12 ?
-		//0016  
-		public short npc_voidanim; //0-3 
-		public short npc_yhome;	// 4-9    
-		public short npc_xhome; // 10-15  
-		//0018   0010   Int8   0-4:   npc_heading?
+		public short npc_hp;
+		public short Projectile_Yaw;
+		public short MobileUnk00;
+		public short MobileUnk01;
+		public short npc_goal;	
+		public short npc_gtarg;
+		public short MobileUnk02;
+		public short npc_level;	
+		public short MobileUnk03;
+		public short MobileUnk04;
+		public short npc_talkedto;       
+		public short npc_attitude;	
+		public short MobileUnk05;
+		public short npc_height;
+		public short MobileUnk06;
+		public short MobileUnk07;
+		public short MobileUnk08;
+		public short MobileUnk09;
+		public short Projectile_Pitch;
+		public short MobileUnk10;
+		public short npc_voidanim; 
+		public short MobileUnk11;
+		public short MobileUnk12;
+		public short npc_yhome;	 
+		public short npc_xhome; 
 		public short npc_heading;
-		//   0019      Int8   0-6:   
-		public short npc_hunger; //(?)
-		//001a   0012   Int8          
+		public short MobileUnk13;
+		public short npc_hunger;
+		public short MobileUnk14;
 		public short npc_whoami;
 
-		public short npc_health=0;
+		//Where are these values set???
+		public short npc_health=0;//Is this poisoning?
 		public short npc_arms=0;
 		public short npc_power = 0;
 		public short npc_name = 0;
 
-		//Projectiles are stored in the mobile object area.
-		//The following properties are currently known
-		public short Projectile_Yaw;
-		public short Projectile_Pitch;
 
-	
 		//My additions
-		public short InUseFlag;
-		public short levelno;
+		public short InUseFlag;//Based on values and no of values in the mobile and static free lists.
+		public short levelno;//Use for unique naming of the object
 		public short tileX;	//Position of the object on the tilemap
 		public short tileY;
 		public long address;
-		//public short AlreadyRendered;
-		public short DeathWatched;
 
 
 		public ObjectInteraction instance;
 		public ObjectLoader parentList;
 
-		//Shock specific stuff
-		//TODO:Split UW specific and Shock specific out in to subclasses?
+		//SShock specific stuff
 		public int ObjectClass;
 		public int ObjectSubClass;
 		public int ObjectSubClassIndex;
@@ -101,8 +96,12 @@ public class ObjectLoaderInfo : UWClass {
 		public int TriggerAction;//Needs to be split into a property.
 		public int TriggerOnce;
 
-		public short[] NPC_DATA=new short[19];
+		//public short[] NPC_DATA=new short[19];
 
+
+		/// <summary>
+		/// The GUID of this object instance. To guarantee unique object names.
+		/// </summary>
 		public System.Guid guid;
 
 
@@ -119,23 +118,24 @@ public class ObjectLoaderInfo : UWClass {
 		/// <summary>
 		/// resets all properties to zero to maintain compatability with UW2
 		/// </summary>
-		public void CleanUp()
+		public static void CleanUp(ObjectLoaderInfo obj)
 		{
 			//TODO:test if this is needed for mobile objects as well.
-			item_id=0;
-			flags=0;
-			enchantment=0;
-			doordir=0;
-			invis=0;
-			is_quant=0;
-			zpos=0;
-			x=0;
-			y=0;
-			heading=0;
-			quality=0;
-			next=0;
-			owner=0;
-			link=0;
+
+				obj.item_id=0;
+				obj.flags=0;
+				obj.enchantment=0;
+				obj.doordir=0;
+				obj.invis=0;
+				obj.is_quant=0;
+				obj.zpos=0;
+				obj.x=0;
+				obj.y=0;
+				obj.heading=0;
+				obj.quality=0;
+				obj.next=0;
+				obj.owner=0;
+				obj.link=0;
 		}
 
 

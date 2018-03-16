@@ -839,4 +839,62 @@ public class DataLoader :Loader {
 				}
 			}
 		}
+
+
+		/// <summary>
+		/// Extracts the specified number of bits from the position in the value.
+		/// </summary>
+		/// <returns>The bits.</returns>
+		/// <param name="value">Value.</param>
+		/// <param name="From">From.</param>
+		/// <param name="Length">Length.</param>
+		public static int ExtractBits(int value, int From, int Length)
+		{
+			int mask = getMask (Length);
+			return ( value >> From ) & (mask);
+		}
+
+	/// <summary>
+	/// Gets a bit mask of the specified length.
+	/// </summary>
+	/// <returns>The mask.</returns>
+	/// <param name="Length">Length.</param>
+	static int getMask (int Length)
+	{
+		int mask = 0;
+		for (int i = 0; i < Length; i++) {
+			mask = (mask << 1) | 1;
+		}
+		return mask;
+	}
+
+		/// <summary>
+		/// Insert the bits into the value.
+		/// </summary>
+		/// <returns>The bits.</returns>
+		/// <param name="valueToChange">Value to change.</param>
+		/// <param name="valueToInsert">Value to insert.</param>
+		/// <param name="From">From.</param>
+		/// <param name="Length">Length.</param>
+	public static int InsertBits(int valueToChange, int valueToInsert, int From, int Length)
+	{
+		int mask=0;
+		for (int i=0; i<32;i++)//Create a 32 bit mask
+		{
+			if ((i>=From) && (i<From+Length))
+			{//Mask in a 1
+				mask = (mask << 1) | 1;			
+			}
+			else
+			{//Mask in a zero
+				mask = (mask << 1) | 0;			
+			}
+		}
+		valueToChange = valueToChange & mask;//Clear out the existing bits in the space to be changed;
+		valueToInsert = valueToInsert & getMask(Length);//Make sure only the require bits are inserted.
+		valueToChange = valueToInsert << From;
+
+		return valueToChange;
+	}
 }
+

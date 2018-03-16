@@ -38,7 +38,7 @@ public class trigger_base : object_base {
 		//Debug.Log(TriggerRepeat);
 		if (TriggerRepeat==0)
 		{
-			this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
+			
 			if (src!=null)
 			{
 				if (src.GetComponent<ObjectInteraction>()!=null)
@@ -49,6 +49,8 @@ public class trigger_base : object_base {
 					}
 				}	
 			}
+			objInt().objectloaderinfo.InUseFlag=0;
+			//ObjectInteraction.UpdateLinkedList(objInt(),objInt().tileX,objInt().tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
 			Destroy (this.gameObject);
 		}
 	}

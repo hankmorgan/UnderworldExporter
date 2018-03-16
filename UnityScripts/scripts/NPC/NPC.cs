@@ -611,7 +611,6 @@ public class NPC : MobileObject {
 		/// AI is only active when the player is close.
 		protected virtual void  Update () {
 				if (EditorMode==true){return;}
-
 				bool FreezeNpc=isNPCFrozen();
 				newAnim.FreezeAnimFrame = FreezeNpc;
 				if  ((WaitTimer>0) && (!FreezeNpc))
@@ -1916,12 +1915,12 @@ public class NPC : MobileObject {
 				//int ValidRoom = npc.Room();
 				int candidateDestTileX;
 				int candidateDestTileY;
-				for (int i=0; i<25;i++)
+				for (int i=0; i<6;i++)
 				{
 					//DestTileX = CurTileX + Random.Range(-6*distanceMultipler,7*distanceMultipler);
 					//DestTileY = CurTileY + Random.Range(-6*distanceMultipler,7*distanceMultipler);
-					candidateDestTileX = npc_xhome + Random.Range(-3*distanceMultipler,4*distanceMultipler);
-					candidateDestTileY = npc_yhome + Random.Range(-3*distanceMultipler,4*distanceMultipler);
+					candidateDestTileX = npc_xhome + Random.Range(-2*distanceMultipler,3*distanceMultipler);
+					candidateDestTileY = npc_yhome + Random.Range(-2*distanceMultipler,3*distanceMultipler);
 					if (TileMap.ValidTile(DestTileX, DestTileY))
 					{
 						//if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)

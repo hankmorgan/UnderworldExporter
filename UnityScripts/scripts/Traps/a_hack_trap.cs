@@ -7,12 +7,13 @@ public class a_hack_trap : trap_base {
 		//qual=10  is probably the awarding of class specific items at the start fof the game
 		//qual = 12 is an oscillator row of tiles (i think)  -unimplemented
 		//qual = 14 cycles wall/floro colours in a room in talours
+		//qual = 18 Scintillus 5 switch puzzle reset
 		//qual=20 used for rising platforms on level 42 (scintilus)
 		//qual=21 is the moving switches in loths tomb.  -unimplemented
 		//qual=23 is a variant of the tmap change
-		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti.
-			
+		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti.			
 		//qual=25 is the bly scup chamber puzzle
+		//qual=26 is the force field on scint level 5
 		//qual=27 Removes the link from the target object   
 		//qual=28 is change tmap objects to use a different texture
 		//Qual=29 is randomly flick buttons. (talorus 1)

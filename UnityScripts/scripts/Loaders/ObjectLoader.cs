@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-public class ObjectLoader : Loader {
+public class ObjectLoader : DataLoader {
 		const int UWDEMO =0;
 		const int  UW1= 1;
 		const int  UW2 =2;
@@ -116,11 +116,6 @@ public class ObjectLoader : Loader {
 		const int  BRIDGE_SIDE_TEXTURE_SOURCE =6;
 
 		/// <summary>
-		/// The free list to show which objects should exist.
-		/// </summary>
-		//short[] freeList = new int[256+768];
-
-		/// <summary>
 		/// Address in the file where the data is kept.
 		/// </summary>
 		//public long objectsAddress;
@@ -144,8 +139,6 @@ public class ObjectLoader : Loader {
 		public int[]FreeMobileList= new int[254];
 		public int[]FreeStaticList= new int[768];
 
-
-
 		struct xrefTable
 		{
 				public short tileX;// position
@@ -164,7 +157,7 @@ public class ObjectLoader : Loader {
 		/// <param name="tileMap">Tile map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="game">Game.</param>
-		public void LoadObjectList(TileMap tileMap, DataLoader.UWBlock lev_ark)
+		public void LoadObjectList(TileMap tileMap, UWBlock lev_ark)
 		{
 
 			objInfo=new ObjectLoaderInfo[1024];
@@ -205,11 +198,11 @@ public class ObjectLoader : Loader {
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="game">Game.</param>
 		/// Original version
-		public void LoadObjectList(TileMap tileMap, char[] lev_ark)
+		public void LoadObjectList_OLD(TileMap tileMap, char[] lev_ark)
 		{
 				Debug.Log("OLD VERSION OF LOADOBJECT LIST");
 				objInfo=new ObjectLoaderInfo[1024];
-				BuildObjectListUW(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, tileMap.thisLevelNo);
+				BuildObjectListUW__OLD(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, tileMap.thisLevelNo);
 
 				setObjectTileXY(1,tileMap.Tiles,objInfo);
 
@@ -257,12 +250,12 @@ public class ObjectLoader : Loader {
 
 				//unsigned char *archive_ark;	//the full file.
 
-				DataLoader.Chunk xref_ark;		//The crossref table
-				DataLoader.Chunk mst_ark;		//The master table
+				Chunk xref_ark;		//The crossref table
+				Chunk mst_ark;		//The master table
 
 
 
-				if (!DataLoader.LoadChunk(archive_ark,LevelNo*100+4009,out xref_ark ))
+				if (!LoadChunk(archive_ark,LevelNo*100+4009,out xref_ark ))
 				{
 					return false;
 				}
@@ -277,11 +270,11 @@ public class ObjectLoader : Loader {
 				//Read in the xref table
 				for (i=0;i<xref_ark.chunkUnpackedLength/10;i++)
 				{
-					xref[i].tileX= (short)DataLoader.getValAtAddress(xref_ark.data,xref_ptr+0,16);
-					xref[i].tileY =(short)DataLoader.getValAtAddress(xref_ark.data,xref_ptr+2,16);	
-					xref[i].MstIndex =(int)DataLoader.getValAtAddress(xref_ark.data,xref_ptr+4,16);	
-					xref[i].next = (int)DataLoader.getValAtAddress(xref_ark.data,xref_ptr+6,16);
-					xref[i].nextTile = (int)DataLoader.getValAtAddress(xref_ark.data,xref_ptr+8,16);
+					xref[i].tileX= (short)getValAtAddress(xref_ark.data,xref_ptr+0,16);
+					xref[i].tileY =(short)getValAtAddress(xref_ark.data,xref_ptr+2,16);	
+					xref[i].MstIndex =(int)getValAtAddress(xref_ark.data,xref_ptr+4,16);	
+					xref[i].next = (int)getValAtAddress(xref_ark.data,xref_ptr+6,16);
+					xref[i].nextTile = (int)getValAtAddress(xref_ark.data,xref_ptr+8,16);
 					if (xref[i].nextTile!= i)
 					{//object extends over many tiles
 						xref[i].duplicate =1;
@@ -290,7 +283,7 @@ public class ObjectLoader : Loader {
 					xref_ptr+=10;
 				}
 
-				if (!DataLoader.LoadChunk(archive_ark,LevelNo*100+4008,out mst_ark ))
+				if (!LoadChunk(archive_ark,LevelNo*100+4008,out mst_ark ))
 				{
 						return false;
 				}
@@ -299,7 +292,7 @@ public class ObjectLoader : Loader {
 				//now run through the master table and process the duplicates flag
 				for (i=0;i<mst_ark.chunkUnpackedLength/27;i++)
 				{
-						xref_ptr= (int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+5,16);
+						xref_ptr= (int)getValAtAddress(mst_ark.data,mstaddress_pointer+5,16);
 						if (xref[xref_ptr].duplicate == 1)
 						{
 								//picks the first duplicate found to show any others will be pushed aside.
@@ -330,7 +323,7 @@ public class ObjectLoader : Loader {
 				for (i=0; i < mst_ark.chunkUnpackedLength/27; i++)
 				{
 
-						xref_ptr =(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+5,16);
+						xref_ptr =(int)getValAtAddress(mst_ark.data,mstaddress_pointer+5,16);
 						int MasterIndex=xref[xref_ptr].MstIndex ;
 						objList[MasterIndex].index=MasterIndex;
 						objList[MasterIndex].link =0;
@@ -342,7 +335,7 @@ public class ObjectLoader : Loader {
 						objList[MasterIndex].y = 0;
 						objList[MasterIndex].zpos =0;
 						objList[MasterIndex].address=mstaddress_pointer;
-						InUseFlag=(short)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer,8);
+						InUseFlag=(short)getValAtAddress(mst_ark.data,mstaddress_pointer,8);
 						objList[MasterIndex].InUseFlag = InUseFlag;
 
 						objList[MasterIndex].levelno = (short)LevelNo ;
@@ -351,14 +344,14 @@ public class ObjectLoader : Loader {
 						objList[MasterIndex].next =xref[xref[xref_ptr].next].MstIndex  ;
 						objList[MasterIndex].parentList=this;
 
-						ObjectClass =(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+1,8);
+						ObjectClass =(int)getValAtAddress(mst_ark.data,mstaddress_pointer+1,8);
 						objList[MasterIndex].ObjectClass = ObjectClass;
-						ObjectSubClass=(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+2,8);
+						ObjectSubClass=(int)getValAtAddress(mst_ark.data,mstaddress_pointer+2,8);
 						objList[MasterIndex].ObjectSubClass = ObjectSubClass;
-						int SubClassLink =(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+3,16);
+						int SubClassLink =(int)getValAtAddress(mst_ark.data,mstaddress_pointer+3,16);
 
 						//Subclass per sspecs is  a link to the sub table. not the class it self. For that we need the object type.
-						ObjectSubClassIndex =(int)DataLoader.getValAtAddress(mst_ark.data,mstaddress_pointer+20,8);	
+						ObjectSubClassIndex =(int)getValAtAddress(mst_ark.data,mstaddress_pointer+20,8);	
 
 						objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
 						int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
@@ -367,17 +360,17 @@ public class ObjectLoader : Loader {
 
 								objList[MasterIndex].item_id = LookupIndex;
 
-								objList[MasterIndex].x = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 11, 8);
-								objList[MasterIndex].y = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 13, 8);
-								objList[MasterIndex].zpos = (short)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 15, 8);
+								objList[MasterIndex].x = (short)getValAtAddress(mst_ark.data, mstaddress_pointer + 11, 8);
+								objList[MasterIndex].y = (short)getValAtAddress(mst_ark.data, mstaddress_pointer + 13, 8);
+								objList[MasterIndex].zpos = (short)getValAtAddress(mst_ark.data, mstaddress_pointer + 15, 8);
 
-								objList[MasterIndex].Angle1 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 16, 8);
-								objList[MasterIndex].Angle2 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 17, 8);
-								objList[MasterIndex].Angle3 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 18, 8);
+								objList[MasterIndex].Angle1 = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 16, 8);
+								objList[MasterIndex].Angle2 = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 17, 8);
+								objList[MasterIndex].Angle3 = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 18, 8);
 
-								objList[MasterIndex].sprite = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 23, 8);
-								objList[MasterIndex].State = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 23, 8);
-								objList[MasterIndex].unk1 = (int)DataLoader.getValAtAddress(mst_ark.data, mstaddress_pointer + 24, 8);
+								objList[MasterIndex].sprite = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 23, 8);
+								objList[MasterIndex].State = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 23, 8);
+								objList[MasterIndex].unk1 = (int)getValAtAddress(mst_ark.data, mstaddress_pointer + 24, 8);
 
 								//fprintf(LOGFILE,"InUse = %d\n", objList[MasterIndex].InUseFlag);
 								//fprintf(LOGFILE,"\tAIIndex = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 19, 8));
@@ -486,12 +479,18 @@ public class ObjectLoader : Loader {
 		/// <param name="texture_map">Texture map.</param>
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
-		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, DataLoader.UWBlock lev_ark, int LevelNo)
+		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, UWBlock lev_ark, int LevelNo)
 		{
 				long address_pointer=0;
 				long objectsAddress=(64*64*4);
 				for (int x=0; x<1024;x++)
 				{	//read in master object list
+						int[] Vals= new int[4];
+						//Read in the 4 x int 16s that comprise the static object
+						for (int i=0; i<=Vals.GetUpperBound(0); i++)
+						{
+							Vals[i] =(int)getValAtAddress(lev_ark,objectsAddress+address_pointer+(i*2),16);
+						}
 						objList[x]=new ObjectLoaderInfo();
 						objList[x].parentList=this;
 						objList[x].guid=System.Guid.NewGuid();
@@ -503,183 +502,140 @@ public class ObjectLoader : Loader {
 						objList[x].next=0;
 						objList[x].address = objectsAddress+address_pointer;
 						objList[x].invis = 0;
+						//objList[x].item_id = (int)(getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
+						objList[x].item_id = (int)ExtractBits(Vals[0], 0, 9);
 
-						objList[x].item_id = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 						if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES== GAME_UWDEMO)))//Fixed for bugged out of range items
 						{
+								//Debug.Log("Out of range object " + objList[x].item_id + " at index " + x);
 								objList[x].item_id=0;
 						}
-						//printf("Item ID %d %d\n",x, objList[x].item_id);
-						objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
-						objList[x].enchantment = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
-						objList[x].doordir  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
-						objList[x].invis  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
-						objList[x].is_quant = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
+						//objList[x].flags  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
+						objList[x].flags  =  (short)(ExtractBits(Vals[0],9,3));
+
+						//objList[x].enchantment = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
+						objList[x].enchantment = (short)(ExtractBits(Vals[0],12,1));
+
+						//objList[x].doordir  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
+						objList[x].doordir  =  (short)(ExtractBits(Vals[0],13,1));
+
+						//objList[x].invis  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
+						objList[x].invis  = (short)(ExtractBits(Vals[0],14,1));
+
+						//objList[x].is_quant = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
+						objList[x].is_quant = (short)(ExtractBits(Vals[0],15,1));
 
 						//position at +2
-						objList[x].zpos = (short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
-						//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
-						objList[x].heading = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+						//objList[x].zpos = (short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
+						objList[x].zpos = (short)(ExtractBits(Vals[1],0,7));	//bits 0-6 
 
-						objList[x].y = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
-						objList[x].x = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
+						//objList[x].heading = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+						objList[x].heading = (short)(ExtractBits(Vals[1],7,3)); //bits 7-9
+
+						//objList[x].y = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
+						objList[x].y = (short)(ExtractBits(Vals[1],10,3)); //bits 7-9	//bits 10-12
+
+						//objList[x].x = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
+						objList[x].x = (short)(ExtractBits(Vals[1],13,3));	//bits 13-15
 
 						//+4
-						objList[x].quality =(short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
-						objList[x].next = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
+						//objList[x].quality =(short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
+						objList[x].quality =(short)(ExtractBits(Vals[2],0,6));
+						//objList[x].next = (int)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
+						objList[x].next = (short)(ExtractBits(Vals[2],6,10));
 
 						//+6
-						objList[x].owner = (short)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-						objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+						//objList[x].owner = (short)(getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+						objList[x].owner = (short)(ExtractBits(Vals[3],0,6));//bits 0-5
+						//objList[x].link = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+						objList[x].link = (short)(ExtractBits(Vals[3],6,10)); //bits 6-15
 
-						if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
-						{
-								objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
-						}
 
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_MOVING_DOOR)		
-						{
-								//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
-								//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
-								//it should be in
-								objList[x].item_id= 320+ objList[x].owner;
-								switch (objList[x].item_id)
-								{//closed doors
-								case 320:
-								case 321:
-								case 322:
-								case 323:
-								case 324:
-								case 325:							
-								case 327://secret door
-										objList[x].item_id+=8;
-										//objList[x].zpos-=24;
-										objList[x].flags=5;
-										objList[x].enchantment=1;
-										objList[x].owner=0;
-										break;
 
-								case 326://Portcullis
-										objList[x].item_id+=8;
-										//objList[x].zpos-=24;
-										objList[x].flags=4;
-										objList[x].enchantment=1;
-										objList[x].owner=0;
-										break;
-										//open doors
-								case 328:
-								case 329:
-								case 330:
-								case 331:
-								case 332:
-								case 333:
-								case 335://Open secret door
-								case 334://open portcullis
-										objList[x].item_id-=8;
-										//objList[x].zpos-=24;
-										objList[x].flags=0;
-										objList[x].enchantment=0;
-										objList[x].owner=0;
-										break;
-								}
-						}
+						HandleMovingDoors (objList, x);
 
-						//Some of this stuff should move to obj_base
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BRIDGE)
-						{
-								if (objList[x].flags >= 2)
-								{//267 + textureIndex;
-										if (_RES == GAME_UW2)
-										{
-												objList[x].texture = texture_map[objList[x].flags - 2];	//Sets the texture for bridge
-										}
-										else
-										{
-												objList[x].texture =texture_map[objList[x].flags - 2 + 48];	//Sets the texture for bridge
-										}
-								}
-								else
-								{
-										objList[x].texture = 267 + (objList[x].flags & 0x3F);//267 is an offset into my own textures config file.
-								}
-						}
+						SetObjectTextureValue (objList, texture_map, x);
 
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BUTTON)
-						{
-								objList[x].texture = objList[x].flags;
-						}
 
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.GRAVE)
-						{
-								objList[x].texture = objList[x].flags+28;
-						}
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
-						{
-								//objList[x].x = 4;
-								//objList[x].y = 4;
-						}
-						if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP)
-						{
-								//bits 1-5 of the quality field is the floor texture.
-								if (_RES == GAME_UW1)
-								{
-										int textureQuality = (objList[x].quality >> 1) & 0xf;
-										if (textureQuality == 10)
-										{
-												//Weird glitch texture
-												//textureQuality=-1;
-												//textureQuality = textureQuality - 10;
-												objList[x].texture = -1;
-										}
-										else if (textureQuality > 10)
-										{
-												//textureQuality=8;//Always seems to be this texture.
-												//textureQuality = -1;//use the texture already there?
-												objList[x].texture = -1;//texture_map[(textureQuality)+48];//-1 to reuse the existing texture
-										}
-										else
-										{
-												objList[x].texture = texture_map[(textureQuality)+48];
-										}
-										if (objList[x].zpos > 96)
-										{
-												//cap the zpos height at this
-												objList[x].zpos = 96;
-										}
-								}					
-						}
 						if (x<256)	
 						{
 								//mobile objects		
-								objList[x].npc_hp =(short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
+								objList[x].npc_hp =(short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
 
-								objList[x].npc_goal =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
-								objList[x].npc_gtarg =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
+								int val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
+								//objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+								objList[x].Projectile_Yaw =(short) (ExtractBits(val, 0, 5));
+								//objList[x].MobileUnk00 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)>>5 & 0x7 );
+								objList[x].MobileUnk00 = (short) (ExtractBits(val, 5, 3));
 
-								objList[x].npc_level =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
+								objList[x].MobileUnk01 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
 
-								objList[x].npc_talkedto =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
-								objList[x].npc_attitude = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16);
+								//objList[x].npc_goal =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
+								objList[x].npc_goal =(short) (ExtractBits(val, 0, 4));
+								//objList[x].npc_gtarg =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
+								objList[x].npc_gtarg = (short) (ExtractBits(val, 4, 8));
+								//objList[x].MobileUnk02 =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 12 & 0xF);
+								objList[x].MobileUnk02 = (short) (ExtractBits(val, 12, 4));
 
-								objList[x].npc_voidanim=(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16);
+								//objList[x].npc_level =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
+								objList[x].npc_level =(short) (ExtractBits(val, 0, 4));
+								//objList[x].MobileUnk03 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 8) >> 4) & 0x1FF);
+								objList[x].MobileUnk03 = (short) (ExtractBits(val, 4, 8));
+								objList[x].MobileUnk04 = (short) (ExtractBits(val, 12, 1));
+								//objList[x].npc_talkedto =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
+								objList[x].npc_talkedto =(short) (ExtractBits(val, 13, 1));
+								//objList[x].npc_attitude = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+								objList[x].npc_attitude = (short) (ExtractBits(val, 14, 2));
 
-								objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
-								objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xf, 16);
+								//objList[x].MobileUnk05= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) & 0x3F);
+								objList[x].MobileUnk05=  (short) (ExtractBits(val, 0, 6));
+								//objList[x].npc_height = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 6) & 0x7F);//was this wrong?
+								objList[x].npc_height = (short) (ExtractBits(val, 6, 7));
+								//objList[x].MobileUnk06 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 13) & 0x7);
+								objList[x].MobileUnk06 = (short) (ExtractBits(val, 13, 3));
 
-								objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
-								objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
+								//objList[x].MobileUnk07 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x10, 8));
+								objList[x].MobileUnk07 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x11, 8));
+								objList[x].MobileUnk08 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x12, 8));
+								objList[x].MobileUnk09 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x13, 8));
 
-								objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8);
+							//	objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+								objList[x].Projectile_Pitch =  (short) (ExtractBits(val, 0, 7));
+								//objList[x].MobileUnk11 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) >>6 ) & 0x3);
+								objList[x].MobileUnk10 = (short) (ExtractBits(val, 7, 1));
 
-								objList[x].Projectile_Yaw =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-								objList[x].Projectile_Pitch = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8);																
+								//objList[x].npc_voidanim=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
+								objList[x].npc_voidanim= (short) (ExtractBits(val, 0, 4));
+								//objList[x].MobileUnk12 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8)>>3 & 0x1F );
+								objList[x].MobileUnk11 = (short) (ExtractBits(val, 4, 4));
 
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16);		
+								//objList[x].MobileUnk13=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) & 0x7);
+								objList[x].MobileUnk12=(short) (ExtractBits(val, 0, 4));
+								//objList[x].npc_yhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
+								objList[x].npc_yhome =(short) (ExtractBits(val, 4, 6));
+								//objList[x].npc_xhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
+								objList[x].npc_xhome =(short) (ExtractBits(val, 10, 6));
 
-								int i=0;
-								for (int z=0x8; z<=0x1a;z++)
-								{
-									objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
-								}
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8);
+								//objList[x].npc_heading =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
+								objList[x].npc_heading =(short) (ExtractBits(val, 0, 5));
+								//objList[x].MobileUnk14 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)>>4) & 0x7 );
+								objList[x].MobileUnk13 = (short) (ExtractBits(val, 5, 3));
+
+								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8);
+								//objList[x].npc_hunger = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
+								objList[x].npc_hunger = (short) (ExtractBits(val, 0, 6));
+								//objList[x].MobileUnk14 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8)>>7) & 0x3 );
+								objList[x].MobileUnk14 = (short) (ExtractBits(val, 6, 2));
+
+								objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+
 								address_pointer=address_pointer+8+19;
 						}
 						else
@@ -690,39 +646,68 @@ public class ObjectLoader : Loader {
 				}
 
 
-				NoOfFreeMobile = (int)DataLoader.getValAtAddress(lev_ark, 0x7c02,16);
-				NoOfFreeStatic = (int)DataLoader.getValAtAddress(lev_ark, 0x7c04,16);
-				for (int i=0; i<=objList.GetUpperBound(0);i++)
-				{
-						if (i>2)
-						{
-								objList[i].InUseFlag = 1;	//Assume in use unless informed otherwise in the next loop.			
-						}
-					
-				}
-
-				objectsAddress= 0x7300; //location of the mobile object free list
-				address_pointer=0;
-				for (int i=0; i<=NoOfFreeMobile;i++)
-				{
-					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
-					objList[freed].InUseFlag = 0;
-					address_pointer+=2;
-				}
-
-				objectsAddress= 0x74fc; //location of the static object free list
-				address_pointer=0;
-				for (int i=0; i<=NoOfFreeStatic;i++)
-				{
-					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
-					objList[freed].InUseFlag = 0;
-					address_pointer+=2;
-				}
+				BuildFreeObjectLists (objList, lev_ark, ref address_pointer, ref objectsAddress);
 
 
-			/*	for (int i=2; i<254+768;i++)//Skip over objects 0 and 1
+		}
+
+
+		/// <summary>
+		/// Builds the free object lists in order to identify which objects need to be created
+		/// </summary>
+		/// <param name="objList">Object list.</param>
+		/// <param name="lev_ark">Lev ark.</param>
+		/// <param name="address_pointer">Address pointer.</param>
+		/// <param name="objectsAddress">Objects address.</param>
+	void BuildFreeObjectLists (ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
+	{
+		NoOfFreeMobile = (int)getValAtAddress (lev_ark, 0x7c02, 16);
+		NoOfFreeStatic = (int)getValAtAddress (lev_ark, 0x7c04, 16);
+		//	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
+		for (int i = 0; i <= objList.GetUpperBound (0); i++) {
+			if (i > 2) {
+				objList [i].InUseFlag = 1;
+				//Assume in use unless informed otherwise in the next loop.			
+			}
+		}
+		objectsAddress = 0x7300;
+		//location of the mobile object free list
+		address_pointer = 0;
+		StreamWriter writer = new StreamWriter (Application.dataPath + "//..//_objInUse_At_Load_ark.txt", false);
+		string output = "Mobile List\n";
+		for (int i = 0; i <= NoOfFreeMobile; i++) {
+			int freed = (int)getValAtAddress (lev_ark, objectsAddress + address_pointer, 16);
+			objList [freed].InUseFlag = 0;
+			output = output + "Mobile Free:" + i + " = " + freed + "\n";
+			address_pointer += 2;
+		}
+		output = output + "Count:" + NoOfFreeMobile + "\n";
+		for (int i = NoOfFreeMobile + 1; i < 254; i++) {
+			int freed = (int)getValAtAddress (lev_ark, objectsAddress + address_pointer, 16);
+			output = output + "Mobile Junk:" + i + " = " + freed + "\n";
+			address_pointer += 2;
+		}
+		output = output + "Static List\n";
+		objectsAddress = 0x74fc;
+		//location of the static object free list
+		address_pointer = 0;
+		for (int i = 0; i <= NoOfFreeStatic; i++) {
+			int freed = (int)getValAtAddress (lev_ark, objectsAddress + address_pointer, 16);
+			objList [freed].InUseFlag = 0;
+			output = output + "Static Free:" + i + " = " + freed + "\n";
+			address_pointer += 2;
+		}
+		output = output + "Count (static):" + NoOfFreeStatic + "\n";
+		for (int i = NoOfFreeStatic + 1; i < 768; i++) {
+			int freed = (int)getValAtAddress (lev_ark, objectsAddress + address_pointer, 16);
+			output = output + "Static Junk:" + i + " = " + freed + "\n";
+			address_pointer += 2;
+		}
+		writer.Write (output);
+		writer.Close ();
+		/*	for (int i=2; i<254+768;i++)//Skip over objects 0 and 1
 				{
-					int freed =	(int)DataLoader.getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
+					int freed =	(int)getValAtAddress(lev_ark, objectsAddress+address_pointer,16);
 					bool valid = ( ( (i<256) && ( i<NoOfFreeMobile) ) ||  ( (i>=256) && ( i-256<NoOfFreeStatic) ) );
 
 					if (valid)
@@ -746,10 +731,7 @@ public class ObjectLoader : Loader {
 						output = output +  i + "=" + objList[i].InUseFlag + "\n";
 				}
 				writer.Write(output);
-				writer.Close();*/
-
-		}
-
+				writer.Close();*/}
 
 
 
@@ -770,7 +752,7 @@ public class ObjectLoader : Loader {
 		/// <param name="lev_ark">Lev ark.</param>
 		/// <param name="LevelNo">Level no.</param>
 		/// DO NOT USE!
-		void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
+		void BuildObjectListUW__OLD(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList,short[] texture_map, char[] lev_ark, int LevelNo)
 		{
 			Debug.Log("OLD VERSION OF BuildObjectListUW");
 			int NoOfBlocks;
@@ -780,7 +762,7 @@ public class ObjectLoader : Loader {
 			//char[] graves;
 
 			//Load in the grave information
-			//DataLoader.ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
+			//ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
 			switch (_RES)
 			{
 			case GAME_UWDEMO:
@@ -792,9 +774,9 @@ public class ObjectLoader : Loader {
 			case GAME_UW1:	//Underworld 1
 				{					
 				//Get the number of blocks in this file.
-				NoOfBlocks =  (int)DataLoader.getValAtAddress(lev_ark,0,32);
+				NoOfBlocks =  (int)getValAtAddress(lev_ark,0,32);
 				//Get the first map block
-				AddressOfBlockStart = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);
+				AddressOfBlockStart = getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);
 				objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
 				
 				address_pointer =0;
@@ -809,24 +791,24 @@ public class ObjectLoader : Loader {
 							tmp_ark[i] = lev_ark[i];
 					}				
 					//address_pointer=6;
-					NoOfBlocks=(int)DataLoader.getValAtAddress(tmp_ark,0,32);
-					int compressionFlag=(int)DataLoader.getValAtAddress(tmp_ark,6 + (LevelNo*4) + (NoOfBlocks*4)   ,32);
+					NoOfBlocks=(int)getValAtAddress(tmp_ark,0,32);
+					int compressionFlag=(int)getValAtAddress(tmp_ark,6 + (LevelNo*4) + (NoOfBlocks*4)   ,32);
 					int isCompressed =(compressionFlag>>1) & 0x01;
 
 					//long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
 					address_pointer=(LevelNo * 4) + 6;
-					if (DataLoader.getValAtAddress(tmp_ark,address_pointer,32)==0)
+					if (getValAtAddress(tmp_ark,address_pointer,32)==0)
 					{
 						return;
 					}
 					if (isCompressed == 1)
 					{
 						long datalen=0;
-						lev_ark = DataLoader.unpackUW2(tmp_ark,DataLoader.getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
+						lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32), ref datalen);
 					}
 					else
 					{//
-						int BlockStart = (int)DataLoader.getValAtAddress(tmp_ark, address_pointer, 32);
+						int BlockStart = (int)getValAtAddress(tmp_ark, address_pointer, 32);
 						int j = 0;
 						AddressOfBlockStart = 0;
 						lev_ark = new char[0x7c08];
@@ -862,35 +844,35 @@ public class ObjectLoader : Loader {
 				objList[x].invis = 0;
 				//objList[x].AlreadyRendered=0;
 
-				objList[x].item_id = (int)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
+				objList[x].item_id = (int)(getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 				if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES== GAME_UWDEMO)))//Fixed for bugged out of range items
 				{
 						objList[x].item_id=0;
 				}
 				//printf("Item ID %d %d\n",x, objList[x].item_id);
-				objList[x].flags  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
-				objList[x].enchantment = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
-				objList[x].doordir  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
-				objList[x].invis  = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
-				objList[x].is_quant = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
+				objList[x].flags  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
+				objList[x].enchantment = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
+				objList[x].doordir  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
+				objList[x].invis  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
+				objList[x].is_quant = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
 
 				//position at +2
-				objList[x].zpos = (short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
-				//objList[x].heading =  45 * (int)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
-				objList[x].heading = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+				objList[x].zpos = (short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
+				//objList[x].heading =  45 * (int)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+				objList[x].heading = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
 
-				objList[x].y = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
-				objList[x].x = (short)(((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
+				objList[x].y = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
+				objList[x].x = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
 
 				//+4
-				objList[x].quality =(short)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
-				objList[x].next = (int)((DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
+				objList[x].quality =(short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
+				objList[x].next = (int)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
 
 				//+6
 
-				objList[x].owner = (short)(DataLoader.getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+				objList[x].owner = (short)(getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
 
-				objList[x].link = (int)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+				objList[x].link = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
 
 				if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
 				{
@@ -987,7 +969,7 @@ public class ObjectLoader : Loader {
 					objList[x].texture = objList[x].flags+28;
 					//if (objList[x].link >= 512)
 					//{
-					//	objList[x].DeathWatched = (short)DataLoader.getValAtAddress(graves, objList[x].link - 512, 8);
+					//	objList[x].DeathWatched = (short)getValAtAddress(graves, objList[x].link - 512, 8);
 					//}
 				}
 				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
@@ -1028,40 +1010,40 @@ public class ObjectLoader : Loader {
 				if (x<256)	
 				{
 					//mobile objects		
-					objList[x].npc_hp =(short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
+					objList[x].npc_hp =(short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
 
-					objList[x].npc_goal =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
-					objList[x].npc_gtarg =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
+					objList[x].npc_goal =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
+					objList[x].npc_gtarg =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
 
-					objList[x].npc_level =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
+					objList[x].npc_level =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
 
-					objList[x].npc_talkedto =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
-					objList[x].npc_attitude = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+					objList[x].npc_talkedto =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
+					objList[x].npc_attitude = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
 
-					objList[x].npc_voidanim=(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
+					objList[x].npc_voidanim=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
 
-					objList[x].npc_yhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
-					objList[x].npc_xhome =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
+					objList[x].npc_yhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
+					objList[x].npc_xhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
 
-					objList[x].npc_heading =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
-					objList[x].npc_hunger = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
+					objList[x].npc_heading =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
+					objList[x].npc_hunger = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
 
-					objList[x].npc_whoami = (short)DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+					objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
 					
-					objList[x].Projectile_Yaw =(short) (DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-					objList[x].Projectile_Pitch = (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+					objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+					objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
 
 
-					int i=0;
-					for (int z=0x8; z<=0x1a;z++)
-					{
+					//int i=0;
+					//for (int z=0x8; z<=0x1a;z++)
+				//	{
 						//switch (z)
 						//{
 						/*case 0xb:
 						case 0xd:
 						case 0xf:
 						case 0x16:
-							//	objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
+							//	objList[x].NPC_DATA[i++]= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
 							//	break;
 						case 0xb+1:
 						case 0xd+1:
@@ -1069,11 +1051,11 @@ public class ObjectLoader : Loader {
 						case 0x16+1:
 								break;*/
 						//default:
-								objList[x].NPC_DATA[i++]= (short)(DataLoader.getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
+								//objList[x].NPC_DATA[i++]= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
 								//break;								
 						//}
 						
-					}
+					//}
 					address_pointer=address_pointer+8+19;
 				}
 				else
@@ -1084,6 +1066,127 @@ public class ObjectLoader : Loader {
 			}
 	}
 
+	static void HandleMovingDoors (ObjectLoaderInfo[] objList, int x)
+	{
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_MOVING_DOOR) {
+			//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
+			//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
+			//it should be in
+			objList [x].item_id = 320 + objList [x].owner;
+			switch (objList [x].item_id) {
+			//closed doors
+			case 320:
+			case 321:
+			case 322:
+			case 323:
+			case 324:
+			case 325:
+			case 327:
+				//secret door
+				objList [x].item_id += 8;
+				//objList[x].zpos-=24;
+				objList [x].flags = 5;
+				objList [x].enchantment = 1;
+				objList [x].owner = 0;
+				break;
+			case 326:
+				//Portcullis
+				objList [x].item_id += 8;
+				//objList[x].zpos-=24;
+				objList [x].flags = 4;
+				objList [x].enchantment = 1;
+				objList [x].owner = 0;
+				break;
+			//open doors
+			case 328:
+			case 329:
+			case 330:
+			case 331:
+			case 332:
+			case 333:
+			case 335:
+			//Open secret door
+			case 334:
+				//open portcullis
+				objList [x].item_id -= 8;
+				//objList[x].zpos-=24;
+				objList [x].flags = 0;
+				objList [x].enchantment = 0;
+				objList [x].owner = 0;
+				break;
+			}
+		}
+	}
+		/// <summary>
+		/// Sets the object texture value.
+		/// </summary>
+		/// <param name="objList">Object list.</param>
+		/// <param name="texture_map">Texture map.</param>
+		/// <param name="x">The x coordinate.</param>
+	static void SetObjectTextureValue (ObjectLoaderInfo[] objList, short[] texture_map, int x)
+	{
+
+			if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
+			{
+					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. 
+			}
+
+		//Some of this stuff should move to obj_base
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.BRIDGE) {
+			if (objList [x].flags >= 2) {
+				//267 + textureIndex;
+				if (_RES == GAME_UW2) {
+					objList [x].texture = texture_map [objList [x].flags - 2];
+					//Sets the texture for bridge
+				}
+				else {
+					objList [x].texture = texture_map [objList [x].flags - 2 + 48];
+					//Sets the texture for bridge
+				}
+			}
+			else {
+				objList [x].texture = 267 + (objList [x].flags & 0x3F);
+				//267 is an offset into my own textures config file.
+			}
+		}
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.BUTTON) {
+			objList [x].texture = objList [x].flags;
+		}
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.GRAVE) {
+			objList [x].texture = objList [x].flags + 28;
+		}
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
+		 {
+			//objList[x].x = 4;
+			//objList[x].y = 4;
+		}
+		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP) {
+			//bits 1-5 of the quality field is the floor texture.
+			if (_RES == GAME_UW1) {
+				int textureQuality = (objList [x].quality >> 1) & 0xf;
+				if (textureQuality == 10) {
+					//Weird glitch texture
+					//textureQuality=-1;
+					//textureQuality = textureQuality - 10;
+					objList [x].texture = -1;
+				}
+				else
+					if (textureQuality > 10) {
+						//textureQuality=8;//Always seems to be this texture.
+						//textureQuality = -1;//use the texture already there?
+						objList [x].texture = -1;
+						//texture_map[(textureQuality)+48];//-1 to reuse the existing texture
+					}
+					else {
+						objList [x].texture = texture_map [(textureQuality) + 48];
+					}
+				if (objList [x].zpos > 96) {
+					//cap the zpos height at this
+					objList [x].zpos = 96;
+				}
+			}
+		}
+	}
 
 	public static string UniqueObjectName(ObjectLoaderInfo currObj)
 	{//returns a unique name for the object
@@ -1334,6 +1437,11 @@ public class ObjectLoader : Loader {
 			}
 		}
 
+
+		public static bool isMobile(ObjectLoaderInfo currobj)
+		{
+				return (currobj.index<256);
+		}
 
 		void SetContainerInUse(int game, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int index)
 		{
@@ -1901,7 +2009,7 @@ public class ObjectLoader : Loader {
 						currObjList.objInfo[i].index=i;
 						if ((_RES==GAME_UW2) && (currObjList.objInfo[i].InUseFlag==0) && (i>2))
 						{
-								currObjList.objInfo[i].CleanUp();	
+								ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);	
 						}
 						bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
 						if ((OnMap)) 
@@ -1909,7 +2017,7 @@ public class ObjectLoader : Loader {
 								currObjList.objInfo[i].next=0;
 								if (currObjList.objInfo[i].instance!=null)
 								{
-										currObjList.objInfo[i].instance.next=0;				
+									currObjList.objInfo[i].instance.next=0;				
 								}
 						}
 				}
@@ -1944,17 +2052,22 @@ public class ObjectLoader : Loader {
 								{										
 										if ((t.gameObject.GetComponent<Container>()!=null))
 										{//Rebuild container chain. THis seems to break vanilla games. (badobject warning?)
-											t.gameObject.GetComponent<ObjectInteraction>().link=0;
+												t.gameObject.GetComponent<ObjectInteraction>().link=0;//TEST 
 											linkContainerContents(t.gameObject.GetComponent<Container>());
 										}
-										currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);	
+										currObjList.CopyDataToList(objInt,ref objInt.objectloaderinfo);			
 								}	
+								else
+								{
+										Debug.Log(objInt.name + " exists but is flagged as not in use");
+								}
+
 						}
 				}
 
 				//rebuild the linked list
 				for (int i =0; i<=	currObjList.objInfo.GetUpperBound(0);i++ )
-				{
+				{						
 						int x= currObjList.objInfo[i].tileX;
 						int y=currObjList.objInfo[i].tileY;
 						if (currObjList.objInfo[i].InUseFlag==1)
@@ -1977,26 +2090,35 @@ public class ObjectLoader : Loader {
 				}
 
 
-				//Count the number of freeobjects in the mobile and static lists and update these lists as needed
-			
-
+				//Count the number of freeobjects in the mobile and static lists and update these lists as needed			
+				currObjList.FreeMobileList= new int[254];
+				currObjList.FreeStaticList= new int[768];
 				int newFreeMobileObjectCount=0;
 				int newFreeStaticObjectCount=0;
 				for (int o =2; o<256; o++)
 				{
-						if (currObjList.objInfo[o].InUseFlag == 0)
-						{//Store that the object slot is free in the array.								
-								currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
-						}
+					if (currObjList.objInfo[o].InUseFlag == 0)
+					{//Store that the object slot is free in the array.			
+						currObjList.objInfo[o].instance=null;
+						currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
+					}
 				}
 				for (int o =256; o<= currObjList.objInfo.GetUpperBound(0); o++)
 				{
 						if (currObjList.objInfo[o].InUseFlag == 0)
-						{//Store that the object slot is free in the array.								
+						{//Store that the object slot is free in the array.	
+								currObjList.objInfo[o].instance=null;
 								currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
 						}
 				}
 
+				for (int o=2; o<currObjList.objInfo.GetUpperBound(0);o++)
+						{
+							if (currObjList.objInfo[o].instance!=null)
+							{
+								currObjList.CopyDataToList(currObjList.objInfo[o].instance,ref currObjList.objInfo[o]);			
+							}
+						}
 
 				if (newFreeMobileObjectCount>0)
 				{
@@ -2239,7 +2361,8 @@ public class ObjectLoader : Loader {
 				//Check if objINt is an npc
 				if ((objInt.GetComponent<NPC>()==null))
 				{
-					startindex= 256;
+					startindex=256;//start of static list
+					//	startindex=979;
 				}
 				//find a free slot in the list.
 				if(GameWorldController.instance.CurrentObjectList().getFreeSlot(startindex, out index))
@@ -2358,8 +2481,26 @@ public class ObjectLoader : Loader {
 								info.npc_arms=npc.npc_arms;
 								info.npc_power = npc.npc_power;
 								info.npc_name = npc.npc_name;	
+								info.npc_health = npc.npc_height;
 								info.Projectile_Pitch=npc.Projectile_Pitch;
 								info.Projectile_Yaw=npc.Projectile_Yaw;
+
+								info.MobileUnk00 = npc.MobileUnk00;
+								info.MobileUnk01 = npc.MobileUnk01;
+								info.MobileUnk02 = npc.MobileUnk02;
+								info.MobileUnk03 = npc.MobileUnk03;
+								info.MobileUnk04 = npc.MobileUnk04;
+								info.MobileUnk05 = npc.MobileUnk05;
+								info.MobileUnk06 = npc.MobileUnk06;
+								info.MobileUnk07 = npc.MobileUnk07;
+								info.MobileUnk08 = npc.MobileUnk08;
+								info.MobileUnk09 = npc.MobileUnk09;
+								info.MobileUnk10 = npc.MobileUnk10;
+								info.MobileUnk11 = npc.MobileUnk11;
+								info.MobileUnk12 = npc.MobileUnk12;
+								info.MobileUnk13 = npc.MobileUnk13;
+								info.MobileUnk14 = npc.MobileUnk14;
+
 						}
 				}
 
@@ -2508,8 +2649,8 @@ public class ObjectLoader : Loader {
 			//sub_ark=new unsigned char[chunkUnpackedLength];
 			//fprintf(LOGFILE,"\nLoading Chunk at %d\n",blockAddress);
 			//LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
-			DataLoader.Chunk sub_ark;
-			if (!DataLoader.LoadChunk(archive_ark, BlockNo, out sub_ark))
+			Chunk sub_ark;
+			if (!LoadChunk(archive_ark, BlockNo, out sub_ark))
 			{
 				return false;
 			}
@@ -2525,9 +2666,9 @@ public class ObjectLoader : Loader {
 							{
 							case SOFTWARE_LOGS:
 									{
-												objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+6,8);	//Software version
-												objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+7,8) + 2488;	//Chunk containing log
-												objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+8,8);	//Level No of Chunk
+												objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]=(int)getValAtAddress(sub_ark.data,add_ptr+6,8);	//Software version
+												objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]=(int)getValAtAddress(sub_ark.data,add_ptr+7,8) + 2488;	//Chunk containing log
+												objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]=(int)getValAtAddress(sub_ark.data,add_ptr+8,8);	//Level No of Chunk
 										//fprintf(LOGFILE,"\tSoftware Properties\n");
 										//fprintf(LOGFILE,"\t\tVersion %d",objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]);
 										//fprintf(LOGFILE,"\tLog Chunk %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]);
@@ -2568,15 +2709,15 @@ public class ObjectLoader : Loader {
 																	int[] fontID = { 4, 7, 0, 10 };
 																	//float[] scale= { 1.0f, 0.75f, 0.5f, 0.25f };
 																	//fprintf(LOGFILE,"Words:");
-																		objList[objIndex].shockProperties[WORDS_STRING_NO] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 6, 16);
+																		objList[objIndex].shockProperties[WORDS_STRING_NO] = (int)getValAtAddress(sub_ark.data, add_ptr + 6, 16);
 																		//fprintf(LOGFILE,"\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark.data, add_ptr + 6, 16));
-																		int FontNSize = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 8, 16);
+																		int FontNSize = (int)getValAtAddress(sub_ark.data, add_ptr + 8, 16);
 																	//fprintf(LOGFILE,"\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);
 																	objList[objIndex].shockProperties[WORDS_FONT] = fontID[FontNSize & 0x03] + 602;
 																	//fprintf(LOGFILE,"\nSize %d ", fontID[FontNSize>>4 & 0x03]);
 																	objList[objIndex].shockProperties[WORDS_SIZE] = fontID[FontNSize >> 4 & 0x03];
 																	//fprintf(LOGFILE,"\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-																		objList[objIndex].shockProperties[WORDS_COLOUR] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
+																		objList[objIndex].shockProperties[WORDS_COLOUR] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
 																		//fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark.data, add_ptr + 6, 16));
 																		//fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark.data, add_ptr + 8, 16));
 																		//fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark.data, add_ptr + 0xA, 16));
@@ -2588,22 +2729,22 @@ public class ObjectLoader : Loader {
 													case 8:
 													case 9:
 															//fprintf(LOGFILE,"Screens:");
-																objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 6, 16);
-																objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 8, 16);
-																objList[objIndex].shockProperties[SCREEN_START] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
+																objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = (int)getValAtAddress(sub_ark.data, add_ptr + 6, 16);
+																objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = (int)getValAtAddress(sub_ark.data, add_ptr + 8, 16);
+																objList[objIndex].shockProperties[SCREEN_START] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
 															//fprintf(LOGFILE,"\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
 															//fprintf(LOGFILE,"\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
 															//fprintf(LOGFILE,"\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
 															if ((objList[objIndex].shockProperties[SCREEN_START] >= 248) && (objList[objIndex].shockProperties[SCREEN_START] <= 255))
 															{//Survellance
 																	//unsigned char *sur_ark;
-																		DataLoader.Chunk sur_ark;
-																		if (DataLoader.LoadChunk(archive_ark,levelNo * 100 + SURVELLANCE_OFFSET,out sur_ark))
+																		Chunk sur_ark;
+																		if (LoadChunk(archive_ark,levelNo * 100 + SURVELLANCE_OFFSET,out sur_ark))
 																		{
 																				
 																				//fprintf(LOGFILE, "\n\tSurvellance Chunk at %d\n", blockAddress);
 																				//LoadShockChunk(blockAddress, chunkType, archive_ark, sur_ark, chunkPackedLength, chunkUnpackedLength);
-																				objList[objIndex].shockProperties[SCREEN_SURVEILLANCE_TARGET] = (int)DataLoader.getValAtAddress(sur_ark.data, (objList[objIndex].shockProperties[SCREEN_START]-248)*2, 16);
+																				objList[objIndex].shockProperties[SCREEN_SURVEILLANCE_TARGET] = (int)getValAtAddress(sur_ark.data, (objList[objIndex].shockProperties[SCREEN_START]-248)*2, 16);
 																				//fprintf(LOGFILE, "\tSurveillance item id: %d", objList[objIndex].shockProperties[SCREEN_SURVEILLANCE_TARGET]);
 																					
 																		}
@@ -2620,11 +2761,11 @@ public class ObjectLoader : Loader {
 													}
 													break;
 											case 7:	//bridges etc
-														int val =  (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x8, 8);
+														int val =  (int)getValAtAddress(sub_ark.data, add_ptr + 0x8, 8);
 													objList[objIndex].shockProperties[BRIDGE_X_SIZE] = val & 0xF;
 													objList[objIndex].shockProperties[BRIDGE_Y_SIZE] = (val >>4) & 0xF;
-													objList[objIndex].shockProperties[BRIDGE_HEIGHT] =  (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x9, 8);
-													val =  (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xA, 8);
+													objList[objIndex].shockProperties[BRIDGE_HEIGHT] =  (int)getValAtAddress(sub_ark.data, add_ptr + 0x9, 8);
+													val =  (int)getValAtAddress(sub_ark.data, add_ptr + 0xA, 8);
 													objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] = (val >> 7) & 0x1;
 													if (objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE]==1)//Retrieve from texture map
 													{
@@ -2635,7 +2776,7 @@ public class ObjectLoader : Loader {
 															objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE] = val & 0x7F;
 													}
 
-													val =  (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xB, 8);
+													val =  (int)getValAtAddress(sub_ark.data, add_ptr + 0xB, 8);
 													objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] = (val >> 7) & 0x1;
 													if (objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 1)//Retrieve from texture map
 													{
@@ -2672,10 +2813,10 @@ public class ObjectLoader : Loader {
 									{
 											if (objList[objIndex].item_id == 191)	//Brief case contents
 											{
-														objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x6, 16);
-														objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x8, 16);
-														objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
-														objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
+														objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x6, 16);
+														objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x8, 16);
+														objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
+														objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
 												//	fprintf(LOGFILE,"\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
 													//fprintf(LOGFILE,"\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
 													//fprintf(LOGFILE,"\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
@@ -2698,7 +2839,7 @@ public class ObjectLoader : Loader {
 												//fprintf(LOGFILE,"\tFail Message:%d",getValAtAddress(sub_ark.data,add_ptr+10,16));
 
 												//TODO:Sort out the trigger action variable into a property
-											objList[objIndex].TriggerAction = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+6,16);
+											objList[objIndex].TriggerAction = (int)getValAtAddress(sub_ark.data,add_ptr+6,16);
 											getShockButtons(LevelInfo,sub_ark,add_ptr,objList,objIndex);
 											return true;
 											//break;
@@ -2707,7 +2848,7 @@ public class ObjectLoader : Loader {
 									{
 												//TODO: Sort out locking state 
 											//fprintf(LOGFILE,"\n\tDoor Properties\n");
-											//	int crossref = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 6, 16);
+											//	int crossref = (int)getValAtAddress(sub_ark.data, add_ptr + 6, 16);
 										//	if (crossref != 0)
 											//{
 											//		objList[objIndex].SHOCKLocked  = 1;	// = crossref;	
@@ -2728,11 +2869,11 @@ public class ObjectLoader : Loader {
 							case	TRAPS_MARKERS: //and triggers too
 									{
 												//TODO: Fix conditions and trigger once values
-												objList[objIndex].conditions[0] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+8,8);
-												objList[objIndex].conditions[1] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+9,8);
-												objList[objIndex].conditions[2] =  (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+10,8);
-												objList[objIndex].conditions[3] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+11,8);
-												objList[objIndex].TriggerOnce = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+7,8);
+												objList[objIndex].conditions[0] = (int)getValAtAddress(sub_ark.data,add_ptr+8,8);
+												objList[objIndex].conditions[1] = (int)getValAtAddress(sub_ark.data,add_ptr+9,8);
+												objList[objIndex].conditions[2] =  (int)getValAtAddress(sub_ark.data,add_ptr+10,8);
+												objList[objIndex].conditions[3] = (int)getValAtAddress(sub_ark.data,add_ptr+11,8);
+												objList[objIndex].TriggerOnce = (int)getValAtAddress(sub_ark.data,add_ptr+7,8);
 											//objList[objIndex].TriggerOnceGlobal = 0;
 											//fprintf(LOGFILE,"\tConditions: %d",objList[objIndex].conditions[0]);
 											//fprintf(LOGFILE,",%d",objList[objIndex].conditions[1]);
@@ -2743,8 +2884,8 @@ public class ObjectLoader : Loader {
 											//fprintf(LOGFILE,"\tObject is at address %d\n", objList[objIndex].address);
 											if (  GameWorldController.instance.objectMaster.type[objList[objIndex].item_id] == ObjectInteraction.SHOCK_TRIGGER_REPULSOR)
 											{
-														objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 21, 8);
-														objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 24, 8);
+														objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 21, 8);
+														objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)getValAtAddress(sub_ark.data, add_ptr + 24, 8);
 													//fprintf(LOGFILE,"\tRepulsor Upwards Displacement is %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE]);
 													if (objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] == 1)
 													{
@@ -2766,15 +2907,15 @@ public class ObjectLoader : Loader {
 										}
 											case CONTAINERS_CORPSES:
 											//fprintf(LOGFILE,"\n\tContainer Properties\n");
-										objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x6, 16);
-										objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x8, 16);
-										objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
-										objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] =(int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
-										objList[objIndex].shockProperties[CONTAINER_WIDTH] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xE, 8);
-										objList[objIndex].shockProperties[CONTAINER_HEIGHT] =(int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xF, 8);
-										objList[objIndex].shockProperties[CONTAINER_DEPTH] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 8);
-										objList[objIndex].shockProperties[CONTAINER_TOP] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x11, 8);
-										objList[objIndex].shockProperties[CONTAINER_SIDE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x12, 8);
+										objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x6, 16);
+										objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x8, 16);
+										objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xA, 16);
+										objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] =(int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
+										objList[objIndex].shockProperties[CONTAINER_WIDTH] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xE, 8);
+										objList[objIndex].shockProperties[CONTAINER_HEIGHT] =(int)getValAtAddress(sub_ark.data, add_ptr + 0xF, 8);
+										objList[objIndex].shockProperties[CONTAINER_DEPTH] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 8);
+										objList[objIndex].shockProperties[CONTAINER_TOP] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x11, 8);
+										objList[objIndex].shockProperties[CONTAINER_SIDE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 8);
 											//fprintf(LOGFILE,"\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
 											//fprintf(LOGFILE,"\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
 											//fprintf(LOGFILE,"\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
@@ -2809,12 +2950,12 @@ public class ObjectLoader : Loader {
 
 
 
-		void getShockTriggerAction(TileInfo[,] LevelInfo,DataLoader.Chunk sub_ark, int add_ptr, xrefTable[] xRef, ObjectLoaderInfo[] objList, int objIndex)
+		void getShockTriggerAction(TileInfo[,] LevelInfo,Chunk sub_ark, int add_ptr, xrefTable[] xRef, ObjectLoaderInfo[] objList, int objIndex)
 		{
 				//Look up what a trigger does in system shock. Different trigger types activate other triggers/ do things in different ways.
 				//short PrintDebug = 1;// (objList[objIndex].item_id == 384);
 				//fprintf(LOGFILE,"",UniqueObjectName(objList[objIndex]));	//Weirdness with garbage info getting printed out?
-				int TriggerType =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+6,8);
+				int TriggerType =(int)getValAtAddress(sub_ark.data,add_ptr+6,8);
 				objList[objIndex].TriggerAction = TriggerType;
 				switch (TriggerType)
 				{ 
@@ -2838,9 +2979,9 @@ public class ObjectLoader : Loader {
 				case ObjectInteraction.ACTION_TRANSPORT_LEVEL:
 						{//Sends the player to the specified position in the level.
 
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+12,16);	//Target X of teleport
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+16,16); //Target Y of teleport
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z]= (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+20,16);	//Target Z of teleport
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)getValAtAddress(sub_ark.data,add_ptr+12,16);	//Target X of teleport
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] =(int)getValAtAddress(sub_ark.data,add_ptr+16,16); //Target Y of teleport
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z]= (int)getValAtAddress(sub_ark.data,add_ptr+20,16);	//Target Z of teleport
 
 								/*if (PrintDebug==1)
 								{
@@ -2873,7 +3014,7 @@ public class ObjectLoader : Loader {
 										//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
 										//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 								}*/
-								objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+16,16);	//Target Health
+								objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] =(int)getValAtAddress(sub_ark.data,add_ptr+16,16);	//Target Health
 								break;
 						}
 				case ObjectInteraction.ACTION_CLONE:
@@ -2903,11 +3044,11 @@ public class ObjectLoader : Loader {
 
 
 								}*/
-								objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =	(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xC,16);	//obj to transport
-								objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0E,16);		//Delete flag
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);	//Target X
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16);	//Target Y
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16);	//Target z
+								objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =	(int)getValAtAddress(sub_ark.data,add_ptr+0xC,16);	//obj to transport
+								objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)getValAtAddress(sub_ark.data,add_ptr+0x0E,16);		//Delete flag
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);	//Target X
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] =(int)getValAtAddress(sub_ark.data,add_ptr+0x14,16);	//Target Y
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16);	//Target z
 
 								break;
 						}
@@ -2934,10 +3075,10 @@ public class ObjectLoader : Loader {
 					fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
 					fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/					
 							//	}
-								objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xC,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x12,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] =(int)getValAtAddress(sub_ark.data,add_ptr+0xC,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION]=(int)getValAtAddress(sub_ark.data,add_ptr+0x12,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=(int)getValAtAddress(sub_ark.data,add_ptr+0x14,16);
 
 								break;
 						}
@@ -2946,14 +3087,14 @@ public class ObjectLoader : Loader {
 								//000C	int16	1st object to activate.
 								//000E	int16	Delay before activating object 1.
 								//0010	...	Up to 4 objects and delays stored here.	
-								objList[objIndex].shockProperties[0] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xC,16)		;					
-								objList[objIndex].shockProperties[1] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xe,16)		;
-								objList[objIndex].shockProperties[2] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16)		;
-								objList[objIndex].shockProperties[3] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x12,16)		;
-								objList[objIndex].shockProperties[4] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16)		;
-								objList[objIndex].shockProperties[5] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x16,16)		;
-								objList[objIndex].shockProperties[6] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16)		;
-								objList[objIndex].shockProperties[7] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x1A,16)		;
+								objList[objIndex].shockProperties[0] = (int)getValAtAddress(sub_ark.data,add_ptr+0xC,16)		;					
+								objList[objIndex].shockProperties[1] = (int)getValAtAddress(sub_ark.data,add_ptr+0xe,16)		;
+								objList[objIndex].shockProperties[2] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16)		;
+								objList[objIndex].shockProperties[3] = (int)getValAtAddress(sub_ark.data,add_ptr+0x12,16)		;
+								objList[objIndex].shockProperties[4] = (int)getValAtAddress(sub_ark.data,add_ptr+0x14,16)		;
+								objList[objIndex].shockProperties[5] = (int)getValAtAddress(sub_ark.data,add_ptr+0x16,16)		;
+								objList[objIndex].shockProperties[6] = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16)		;
+								objList[objIndex].shockProperties[7] = (int)getValAtAddress(sub_ark.data,add_ptr+0x1A,16)		;
 								/*if (PrintDebug==1)
 								{	
 										//fprintf(LOGFILE,"\tACTION_ACTIVATE for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2988,13 +3129,13 @@ public class ObjectLoader : Loader {
 								//000E	int16	Control point 2
 								//	...	?
 
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+12,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+14,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 16, 16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 22, 8);//22,24,23,25
-								objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 23, 8);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 24, 8);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 25, 8);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= (int)getValAtAddress(sub_ark.data,add_ptr+12,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	=(int)getValAtAddress(sub_ark.data,add_ptr+14,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP] = (int)getValAtAddress(sub_ark.data, add_ptr + 16, 16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 22, 8);//22,24,23,25
+								objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 23, 8);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 24, 8);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 25, 8);
 								/*if (PrintDebug==1)
 								{
 										fprintf(LOGFILE,"\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
@@ -3059,14 +3200,14 @@ public class ObjectLoader : Loader {
 								//000C	int16	1st object to activate.?
 								//000E	int16	Delay before activating object 1.?
 
-								objList[objIndex].shockProperties[0] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
-								objList[objIndex].shockProperties[1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xe, 16);
-								objList[objIndex].shockProperties[2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
-								objList[objIndex].shockProperties[3] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
-								objList[objIndex].shockProperties[4] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x14, 16);
-								objList[objIndex].shockProperties[5] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x16, 16);
-								objList[objIndex].shockProperties[6] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x18, 16);
-								objList[objIndex].shockProperties[7] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x1A, 16);
+								objList[objIndex].shockProperties[0] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
+								objList[objIndex].shockProperties[1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xe, 16);
+								objList[objIndex].shockProperties[2] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
+								objList[objIndex].shockProperties[3] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
+								objList[objIndex].shockProperties[4] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x14, 16);
+								objList[objIndex].shockProperties[5] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x16, 16);
+								objList[objIndex].shockProperties[6] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x18, 16);
+								objList[objIndex].shockProperties[7] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x1A, 16);
 								/*if (PrintDebug == 1)
 								{
 										fprintf(LOGFILE,"\tACTION_TIMER (i think) for %s\n", UniqueObjectName(objList[objIndex]));
@@ -3083,8 +3224,8 @@ public class ObjectLoader : Loader {
 								//000C	int16	Trigger 1
 								//0010	int16	Trigger 2
 
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,16);	
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);	
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = (int)getValAtAddress(sub_ark.data,add_ptr+0x0C,16);	
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);	
 								/*if (PrintDebug==1)
 								{
 										fprintf(LOGFILE,"\tACTION_CHOICE for %s\n",UniqueObjectName(objList[objIndex]));
@@ -3121,7 +3262,7 @@ public class ObjectLoader : Loader {
 			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
 			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
 								//}			
-						objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,16)+2441;
+						objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =(int)getValAtAddress(sub_ark.data,add_ptr+0x0C,16)+2441;
 
 								break;
 
@@ -3166,8 +3307,8 @@ public class ObjectLoader : Loader {
 						}
 				case ObjectInteraction.ACTION_AWAKEN:
 						{//Wakes up sleeping drones in between the two control points and sends them after you. (maybe)
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
 								/*if (PrintDebug == 1)
 								{
 										fprintf(LOGFILE,"\tACTION_AWAKEN for %s\n", UniqueObjectName(objList[objIndex]));
@@ -3182,8 +3323,8 @@ public class ObjectLoader : Loader {
 								//16 Trap message offset in Chunk 2151 
 								//000C	int16	"Success" message
 								//0010	int16	"Fail" message
-								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=(int)getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=(int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);
 								/*if (PrintDebug==1)
 								{
 										fprintf(LOGFILE,"\tACTION_MESSAGE for %s\n",UniqueObjectName(objList[objIndex]));
@@ -3209,9 +3350,9 @@ public class ObjectLoader : Loader {
 								//0014		??
 								//0018		??	
 
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,32);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x12,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]=(int)getValAtAddress(sub_ark.data,add_ptr+0x0C,32);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=(int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]=(int)getValAtAddress(sub_ark.data,add_ptr+0x12,16);
 							/*	if (PrintDebug==1)
 								{
 										fprintf(LOGFILE,"\tACTION_SPAWN for %s\n",UniqueObjectName(objList[objIndex]));
@@ -3238,8 +3379,8 @@ public class ObjectLoader : Loader {
 								//0010	int8	New type.
 								//0012		??
 
-								objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
-								objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,8);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =(int)getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
+								objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =(int)getValAtAddress(sub_ark.data,add_ptr+0x10,8);
 								/*if (PrintDebug==1)
 								{
 										fprintf(LOGFILE,"\tACTION_CHANGE_TYPE for %s\n",UniqueObjectName(objList[objIndex]));
@@ -3290,7 +3431,7 @@ public class ObjectLoader : Loader {
 
 
 
-		void getShockButtons(TileInfo[,] LevelInfo,DataLoader.Chunk sub_ark,int add_ptr, ObjectLoaderInfo[] objList, int objIndex)
+		void getShockButtons(TileInfo[,] LevelInfo,Chunk sub_ark,int add_ptr, ObjectLoaderInfo[] objList, int objIndex)
 		{
 				//I'm keeping this seperate from trigger action retrieval for the moment.
 
@@ -3320,23 +3461,23 @@ public class ObjectLoader : Loader {
 										//fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n", getValAtAddress(sub_ark, add_ptr + 0x12, 16));
 										//fprintf(LOGFILE,"\t\tOptional Message:%d\n", getValAtAddress(sub_ark, add_ptr + 0x14, 16));
 										//DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x14, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0xC, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x12, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x14, 16);
 										break;
 								}
 						case ObjectInteraction.ACTION_ACTIVATE:
 								{	//Assume same behaviour as a trigger?
 										//fprintf(LOGFILE,"Switch:Action_Activate\n");
-										objList[objIndex].shockProperties[0] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xC,16)		;					
-										objList[objIndex].shockProperties[1] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0xe,16)		;
-										objList[objIndex].shockProperties[2] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16)		;
-										objList[objIndex].shockProperties[3] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x12,16)		;
-										objList[objIndex].shockProperties[4] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16)		;
-										objList[objIndex].shockProperties[5] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x16,16)		;
-										objList[objIndex].shockProperties[6] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16)		;
-										objList[objIndex].shockProperties[7] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x1A,16)		;				
+										objList[objIndex].shockProperties[0] = (int)getValAtAddress(sub_ark.data,add_ptr+0xC,16)		;					
+										objList[objIndex].shockProperties[1] = (int)getValAtAddress(sub_ark.data,add_ptr+0xe,16)		;
+										objList[objIndex].shockProperties[2] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16)		;
+										objList[objIndex].shockProperties[3] = (int)getValAtAddress(sub_ark.data,add_ptr+0x12,16)		;
+										objList[objIndex].shockProperties[4] = (int)getValAtAddress(sub_ark.data,add_ptr+0x14,16)		;
+										objList[objIndex].shockProperties[5] = (int)getValAtAddress(sub_ark.data,add_ptr+0x16,16)		;
+										objList[objIndex].shockProperties[6] = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16)		;
+										objList[objIndex].shockProperties[7] = (int)getValAtAddress(sub_ark.data,add_ptr+0x1A,16)		;				
 										break;
 								}
 						case ObjectInteraction.ACTION_MOVING_PLATFORM:
@@ -3348,23 +3489,23 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.ACTION_CHOICE:
 								{
 										//fprintf(LOGFILE,"Switch:Action_Choice\n");
-										objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 16);
 										break;
 								}
 						case ObjectInteraction.ACTION_LIGHTING:
 								{	
 										//fprintf(LOGFILE,"Switch:Action_Lighting\n");
-										objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 12, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 12, 16);
 										if (objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] <= 3)
 										{	//seems to be a special case?
 												objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = objIndex;
 										}
-										objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 14, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 22, 8);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 24, 8);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 23, 8);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 25, 8);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 14, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 22, 8);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = (int)getValAtAddress(sub_ark.data, add_ptr + 24, 8);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 23, 8);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = (int)getValAtAddress(sub_ark.data, add_ptr + 25, 8);
 										//fprintf(LOGFILE,"\t\tControl point 1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
 										//fprintf(LOGFILE,"\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
 										//fprintf(LOGFILE,"\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
@@ -3376,8 +3517,8 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.ACTION_CHANGE_TYPE:
 								{
 										//fprintf(LOGFILE,"Switch:Action_Change_Type\n");
-										objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 0x10, 8);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x0C, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = (int)getValAtAddress(sub_ark.data, add_ptr + 0x10, 8);
 										//fprintf(LOGFILE, "\t\tObject to change:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
 										//fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
 										break;
@@ -3385,8 +3526,8 @@ public class ObjectLoader : Loader {
 						case ObjectInteraction.ACTION_CHANGE_STATE:
 								{
 										//fprintf(LOGFILE, "Switch:Action_Change_State\n");
-										objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 12, 16);
-										objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)DataLoader.getValAtAddress(sub_ark.data, add_ptr + 16, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = (int)getValAtAddress(sub_ark.data, add_ptr + 12, 16);
+										objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = (int)getValAtAddress(sub_ark.data, add_ptr + 16, 16);
 										//fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
 										//fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
 										//DebugPrintTriggerVals(sub_ark, add_ptr, 30);
@@ -3395,8 +3536,8 @@ public class ObjectLoader : Loader {
 						default:	
 								{
 										//fprintf(LOGFILE,"Switch:Default\n");
-										objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+12,16);
-										objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER_2] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+16,16);
+										objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] = (int)getValAtAddress(sub_ark.data,add_ptr+12,16);
+										objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER_2] = (int)getValAtAddress(sub_ark.data,add_ptr+16,16);
 										break;
 								}
 						}
@@ -3420,28 +3561,28 @@ public class ObjectLoader : Loader {
 						//0010  int16 Y of target Cyberspace
 						//0014  int16 Z of target Cyberspace
 						//0018  int16 Level (Cyberspace)
-						objList[objIndex].shockProperties[0] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16); 
-						objList[objIndex].shockProperties[1] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16); 
-						objList[objIndex].shockProperties[2] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16); 
-						objList[objIndex].shockProperties[3] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16); 
+						objList[objIndex].shockProperties[0] = (int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16); 
+						objList[objIndex].shockProperties[1] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16); 
+						objList[objIndex].shockProperties[2] = (int)getValAtAddress(sub_ark.data,add_ptr+0x14,16); 
+						objList[objIndex].shockProperties[3] = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16); 
 						//fprintf(LOGFILE,"\tCyberspace (%d,%d,%d @ %d)\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[1],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[3]);
 						return;
 				}
 
 				if((objList[objIndex].ObjectSubClass==2) && (objList[objIndex].ObjectSubClassIndex>=1))
 				{//Fixup station/energy station
-						objList[objIndex].shockProperties[0]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16);   //Amount of charge?/? always 255
-						objList[objIndex].shockProperties[1]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);	//Security level?? //reuse timer??
+						objList[objIndex].shockProperties[0]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16);   //Amount of charge?/? always 255
+						objList[objIndex].shockProperties[1]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);	//Security level?? //reuse timer??
 						//fprintf(LOGFILE,"\tEnergy Charge: %d %d\n",objList[objIndex].shockProperties[0] ,objList[objIndex].shockProperties[1] );
 						return;
 				}
 				if((objList[objIndex].ObjectSubClass==3) && (objList[objIndex].ObjectSubClassIndex<=3))
 				{	
 						//puzzle panels. need to see them in the wild before I know what other stuff does
-						objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
+						objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=(int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
 
 						//if bit 28 is set (0x10000000) it is a block puzzle, else it is a wire puzzle.
-						objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE]= ((int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,8)>>28) & 0x01;
+						objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE]= ((int)getValAtAddress(sub_ark.data,add_ptr+0x10,8)>>28) & 0x01;
 						if (objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE] == 1)
 						{
 							//	fprintf(LOGFILE,"\tPuzzle panel: Type is block\n");
@@ -3466,11 +3607,11 @@ public class ObjectLoader : Loader {
 						//	    Levels with a 1 in the "shaft" field but not in the "Actual" field
 						//	     give a "Shaft damage: Unable to go there" message.
 
-						objList[objIndex].shockProperties[0]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16);//elevator panel ids
-						objList[objIndex].shockProperties[1]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0E,16);
-						objList[objIndex].shockProperties[2]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x12,16);
-						objList[objIndex].shockProperties[3]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16);//bitfields for access
-						objList[objIndex].shockProperties[4]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x1A,16);
+						objList[objIndex].shockProperties[0]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16);//elevator panel ids
+						objList[objIndex].shockProperties[1]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x0E,16);
+						objList[objIndex].shockProperties[2]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x12,16);
+						objList[objIndex].shockProperties[3]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16);//bitfields for access
+						objList[objIndex].shockProperties[4]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x1A,16);
 						//fprintf(LOGFILE,"\tElevator to one of %d, %d or %d panels on other levels\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[2]);
 						//fprintf(LOGFILE,"\tAccesable levels actual:%d shaft:%d\n",objList[objIndex].shockProperties[3],objList[objIndex].shockProperties[4]);
 
@@ -3483,21 +3624,21 @@ public class ObjectLoader : Loader {
 						//000C	int16	Combination in BCD
 						//000E  int16 Map Object to trigger
 						//0018  int16 Map Object to Extra Trigger (?)
-						int combo =(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
+						int combo =(int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
 						int value = 
 								(combo & 0x0F) * 1
 								+(combo>>4 & 0x0F) * 10
 								+(combo>>8 & 0x0F) * 100;
 						objList[objIndex].shockProperties[BUTTON_PROPERTY_COMBO]  =value;	// getValAtAddress(sub_ark,add_ptr+0x0c,16);
 
-						objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0E,16);
-						objList[objIndex].shockProperties[3]  = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16);	//extra trigger?
+						objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x0E,16);
+						objList[objIndex].shockProperties[3]  = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16);	//extra trigger?
 						//fprintf(LOGFILE,"\tNumber pad. Combo is %d, Triggers %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_COMBO],objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] );
 						return;
 				}
 
 				//unknown object if all other tests fail. set the usual trigger value and keep an eye on this statement in debugging.
-				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=(int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
+				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=(int)getValAtAddress(sub_ark.data,add_ptr+0x0c,16);
 				/*	shockProperties[0]  = getValAtAddress(sub_ark,add_ptr+0x0c,16);   
 	shockProperties[1]  = getValAtAddress(sub_ark,add_ptr+0x10,16);	
 	shockProperties[2]  = getValAtAddress(sub_ark,add_ptr+0x12,16);
@@ -3518,20 +3659,20 @@ public class ObjectLoader : Loader {
 
 
 
-		void setElevatorProperties(TileInfo[,]LevelInfo,DataLoader.Chunk sub_ark,int add_ptr, ObjectLoaderInfo[] objList, int objIndex)
+		void setElevatorProperties(TileInfo[,]LevelInfo,Chunk sub_ark,int add_ptr, ObjectLoaderInfo[] objList, int objIndex)
 		{
-
+				
 				//000C	int16	Tile x coord of platform
 				//0010	int16	Tile y coord of platform
 				//0014	int16	Target floor height
 				//0016	int16	Target ceiling height
 				//0018	int16	Speed
 
-				objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
-				objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x10,16);
-				objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x14,16);	//5
-				objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x16,16);	//6
-				objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = (int)DataLoader.getValAtAddress(sub_ark.data,add_ptr+0x18,16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = (int)getValAtAddress(sub_ark.data,add_ptr+0x0C,16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = (int)getValAtAddress(sub_ark.data,add_ptr+0x10,16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] = (int)getValAtAddress(sub_ark.data,add_ptr+0x14,16);	//5
+				objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING] = (int)getValAtAddress(sub_ark.data,add_ptr+0x16,16);	//6
+				objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = (int)getValAtAddress(sub_ark.data,add_ptr+0x18,16);
 				//LevelInfo[objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]][objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]].hasElevator =1;
 
 				//short ceilingFlag = (objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING]<=SHOCK_CEILING_HEIGHT);

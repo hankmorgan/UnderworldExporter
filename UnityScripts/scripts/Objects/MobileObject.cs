@@ -21,6 +21,24 @@ public class MobileObject : object_base {
 		public short npc_talkedto;      // is 1 when player already talked to npc
 		public short npc_level;
 		public short npc_name;       //    (not used in uw1)
+		public short npc_height;
+		//Unknown/research
+		public short MobileUnk00;
+		public short MobileUnk01;
+		public short MobileUnk02;
+		public short MobileUnk03;
+		public short MobileUnk04;
+		public short MobileUnk05;
+		public short MobileUnk06;
+		public short MobileUnk07;
+		public short MobileUnk08;
+		public short MobileUnk09;
+		public short MobileUnk10;
+		public short MobileUnk11;
+		public short MobileUnk12;
+		public short MobileUnk13;
+		public short MobileUnk14;
+
 
 		[Header("AI Target")]
 		public GameObject gtarg;

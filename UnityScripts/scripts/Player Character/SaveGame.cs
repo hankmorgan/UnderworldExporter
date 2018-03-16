@@ -1013,7 +1013,13 @@ public class SaveGame : Loader {
 									DataLoader.WriteInt16(writer,Quest.instance.variables[variableCounter++]);
 									break;
 								}
-						case 0x1D2+1: break;
+						case 0x1D2+1: 
+								break;
+						case 0x23a://Scint level 5 switches
+								{
+									DataLoader.WriteInt8(writer,Quest.instance.ScintLvl5Switches);
+									break;
+								}
 						case  0x2fb : //dream return position x
 								DataLoader.WriteInt16(writer,(int)(dreamReturn.x*Ratio));	
 								break;
@@ -1566,13 +1572,18 @@ public class SaveGame : Loader {
 							case 0x1F6:  //126
 							case 0x1F8:  //Variable 127
 									{
-											Quest.instance.variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,8);
-											break;
+										Quest.instance.variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,8);
+										break;
 									}
 							case 0x1D2:  //Variable 108 //Int 16 used in qbert
 									{
-											Quest.instance.variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,16);
-											break;
+										Quest.instance.variables[VariableCounter++]= (int)DataLoader.getValAtAddress(buffer,i,16);
+										break;
+									}
+								case 0x23a:
+									{
+										Quest.instance.ScintLvl5Switches= (int)DataLoader.getValAtAddress(buffer,i,8);
+										break;
 									}
 							case  0x2fb : ///   x-position in level
 									x_position_dream= (int)DataLoader.getValAtAddress(buffer,i,16);break;

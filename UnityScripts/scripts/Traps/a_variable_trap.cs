@@ -33,7 +33,11 @@ public class a_variable_trap : trap_base {
 
 	public override void PostActivate (object_base src)
 	{
-		//Do nothing. Stop trap from destroying itself.
+		int TriggerRepeat = (objInt().flags>>1) & 0x1;
+		if (TriggerRepeat==1)
+		{
+				DestroyTrap (src);
+		}
 	}
 
 		/// <summary>

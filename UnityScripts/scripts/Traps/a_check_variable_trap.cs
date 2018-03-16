@@ -44,6 +44,7 @@ the left, right, center button combination on Level3.
 		if (check_variable_trap())
 		{
 			TriggerNext(triggerX,triggerY,State);
+			PostActivate(src);
 		}
 		else
 		{
@@ -67,6 +68,24 @@ the left, right, center button combination on Level3.
 		}
 	}
 
+		/// <summary>
+		/// The Comparison value the trap checks against
+		/// </summary>
+		/// <returns>The value.</returns>
+	int ComparisonValue ()
+	{
+		int cmp = 0;
+		for (int i = objInt ().zpos; i <= objInt ().zpos + objInt ().heading; i++) {
+			if (objInt ().x != 0)
+				cmp += Quest.instance.variables [i];
+			else {
+				cmp <<= 3;
+				cmp |= (Quest.instance.variables [i] & 0x7);
+			}
+		}
+		return cmp;
+	}
+
 	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
 		//CheckReferences();
@@ -74,7 +93,7 @@ the left, right, center button combination on Level3.
 		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
 
 		//Stuff to happen after the trap has fired.
-		PostActivate(src);
+		//PostActivate(src);
 		return true;
 	}
 
@@ -102,21 +121,14 @@ the left, right, center button combination on Level3.
 					case 31:								
 						//return VariableValue()==Quest.instance.DjinnCapture;	
 						return VariableValue()==Quest.instance.x_clocks[objInt().zpos-16];	
+					case 32:
+						Debug.Log("Checking lvl 5 scint switches");
+						return Quest.instance.ScintLvl5Switches == 7;		
 				}
 			}
 		if (objInt().heading!=0)
 			{
-				int cmp = 0;
-				for(int i=objInt().zpos; i<=objInt().zpos+objInt().heading; i++)
-				{								
-					if (objInt().x != 0)
-						cmp += Quest.instance.variables[i];
-					else
-					{
-						cmp <<= 3;
-						cmp |= (Quest.instance.variables[i]  & 0x7);
-					}
-				}
+				int cmp = ComparisonValue ();
 				Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());
 				return cmp == VariableValue();
 				

@@ -2175,13 +2175,17 @@ public class TileMap : Loader {
 		public char[] TileMapToBytes(char[] lev_ark_file_data, out long datalen)
 		{
 				 
-				char[] TileMapData= new char[31752];///[(TileMapSizeX+1)*(TileMapSizeY+1)*4  +  256*27 + 768*8];//Size of tilemap + object list
+				char[] TileMapData= new char[31752];//Size of tilemap + object list
 
 				DataLoader.UWBlock uwdata = new DataLoader.UWBlock();
 
-
 				DataLoader.LoadUWBlock(lev_ark_file_data, thisLevelNo, 31752, out uwdata)  ;
-				TileMapData= uwdata.Data; //GetUW2TileMapBytes(thisLevelNo,lev_ark_file_data, out datalen);
+
+				for (int i=0x7afc; i<31752;i++)//07afc
+				{
+					TileMapData[i]= uwdata.Data[i]; 		
+				}
+
 				datalen = uwdata.DataLen;
 
 				long addptr=0;
@@ -2205,10 +2209,13 @@ public class TileMap : Loader {
 								ByteToWrite= floorTexture | noMagic | DoorBit;
 								TileMapData[addptr+1]= (char)(ByteToWrite);
 
+								//if ((x==19) && (y==48))
+							//	{
+										ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
+										TileMapData[addptr+2]=(char)(ByteToWrite & 0xFF);
+										TileMapData[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);	
+								//}
 
-								ByteToWrite = ((t.indexObjectList & 0x3FF) <<6) | (t.wallTexture & 0x3F);
-								TileMapData[addptr+2]=(char)(ByteToWrite & 0xFF);
-								TileMapData[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
 
 								addptr +=4;
 						}	
@@ -2218,91 +2225,146 @@ public class TileMap : Loader {
 						ObjectLoaderInfo currobj= GameWorldController.instance.objectList[thisLevelNo].objInfo[o];
 						if (currobj!=null)
 						{
-								int ByteToWrite= (currobj.is_quant << 15) |
-										(currobj.invis << 14) |
-										(currobj.doordir << 13) |
-										(currobj.enchantment << 12) |
-										((currobj.flags & 0x07) << 9) |
-										(currobj.item_id & 0x1FF) ;
-
-								TileMapData[addptr]=(char)(ByteToWrite & 0xFF);
-								TileMapData[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
-
-								ByteToWrite = ((currobj.x & 0x7) << 13) |
-										((currobj.y & 0x7) << 10) |
-										((currobj.heading & 0x7) << 7) |
-										((currobj.zpos & 0x7F));
-								TileMapData[addptr+2]=(char)(ByteToWrite & 0xFF);
-								TileMapData[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
-
-								ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
-										(currobj.quality & 0x3F); 
-								TileMapData[addptr+4]=(char)(ByteToWrite & 0xFF);
-								TileMapData[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);		
-
-								ByteToWrite = ((currobj.link & 0x3FF)<<6) |
-										(currobj.owner & 0x3F); 
-								TileMapData[addptr+6]=(char)(ByteToWrite & 0xFF);
-								TileMapData[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
-
-
-
-								if (o<256)			
-								{//Additional npc mobile data.
-
-										TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
-										TileMapData[addptr+0x9] = (char)((TileMapData[addptr+0x9] & 0xE0) | ((char)(currobj.Projectile_Yaw  & 0x1F )));
-										//+A is copied  unknown value
-										//+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
-										ByteToWrite=( 
-												((currobj.npc_goal & 0xF))  |
-												((currobj.npc_gtarg & 0xFF) <<4)  |
-												( (TileMapData[addptr+0xb+1] & 0xf0) << 8 )										
-										);
-										TileMapData[addptr+0xb] = (char)(ByteToWrite & 0xFF);
-										TileMapData[addptr+0xb+1] = (char)((ByteToWrite>>8) & 0xFF);
-
-
-										int val = (int)DataLoader.getValAtAddress(TileMapData,addptr+0xd,16);
-										val = val & 0x1ff0;
-										ByteToWrite=((currobj.npc_attitude & 0x3)<<14) |
-												((currobj.npc_talkedto & 0x1)<<13) |
-												(currobj.npc_level & 0xF)   
-												| val
-												;
-
-										TileMapData[addptr+0xd] = (char)(ByteToWrite & 0xFF);
-										TileMapData[addptr+0xd+1] = (char)((ByteToWrite>>8) & 0xFF);
-
-										TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
-
-										ByteToWrite=((currobj.npc_xhome & 0x3F)<<10) |
-												((currobj.npc_yhome & 0x3F)<<4) |
-												( TileMapData[addptr+0x16] & 0xf  ) ;
-										TileMapData[addptr+0x16] = (char)(ByteToWrite & 0xFF);
-										TileMapData[addptr+0x16+1] = (char)((ByteToWrite>>8) & 0xFF);
-
-
-										ByteToWrite=(TileMapData[addptr+0x18] & 0xE0)
-												|
-												(currobj.npc_heading & 0x1F) ;
-										TileMapData[addptr+0x18] = (char)(ByteToWrite & 0xFF);
-										TileMapData[addptr+0x18+1] = (char)((ByteToWrite>>8) & 0xFF);
-
-
-										TileMapData[addptr+0x19]= (char)(
-												((currobj.npc_hunger & 0x3F)) 
-										);
-
-										TileMapData[addptr+0x1a]= (char)(
-												((currobj.npc_whoami & 0xFF)) 
-										);
-
-										addptr=addptr+8+19;	
-								}	
+							/*	if (currobj.instance!=null)
+								{
+										if (currobj.instance.transform.parent == GameWorldController.instance.InventoryMarker.transform)
+										{
+												Debug.Log("Trying to save object that is in inventory list" + currobj.instance.name);
+										}									
+								}
 								else
-								{													
-										addptr=addptr+8;
+								{
+										if (currobj.InUseFlag==1)
+										{
+												Debug.Log("Trying to save in use object that has no current instance:" + o);		
+										}
+								}	*/
+
+								if (IsObjectFree(o))
+								{
+										TileMapData[addptr]=(char)0;
+										TileMapData[addptr+1]=(char)0;
+										TileMapData[addptr+2]=(char)0;
+										TileMapData[addptr+3]=(char)0;
+										TileMapData[addptr+4]=(char)0;
+										TileMapData[addptr+5]=(char)0;
+										TileMapData[addptr+6]=(char)0;
+										TileMapData[addptr+7]=(char)0;
+										if (o<256)
+										{
+												TileMapData[addptr+8]=(char)0;
+												TileMapData[addptr+9]=(char)0;
+												TileMapData[addptr+10]=(char)0;
+												TileMapData[addptr+11]=(char)0;
+												TileMapData[addptr+12]=(char)0;
+												TileMapData[addptr+13]=(char)0;
+												TileMapData[addptr+14]=(char)0;
+												TileMapData[addptr+15]=(char)0;
+												TileMapData[addptr+16]=(char)0;
+												TileMapData[addptr+17]=(char)0;
+												TileMapData[addptr+18]=(char)0;
+												TileMapData[addptr+19]=(char)0;
+												TileMapData[addptr+20]=(char)0;
+												TileMapData[addptr+21]=(char)0;
+												TileMapData[addptr+22]=(char)0;
+												TileMapData[addptr+23]=(char)0;
+												TileMapData[addptr+24]=(char)0;
+												TileMapData[addptr+25]=(char)0;
+												TileMapData[addptr+26]=(char)0;
+												addptr=addptr+8+19;	
+										}
+										else
+										{
+												addptr=addptr+8;	
+										}
+								}
+								else
+								{
+									int ByteToWrite= (currobj.is_quant << 15) |
+											(currobj.invis << 14) |
+											(currobj.doordir << 13) |
+											(currobj.enchantment << 12) |
+											((currobj.flags & 0x07) << 9) |
+											(currobj.item_id & 0x1FF) ;
+
+									TileMapData[addptr]=(char)(ByteToWrite & 0xFF);
+									TileMapData[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
+
+									ByteToWrite = ((currobj.x & 0x7) << 13) |
+											((currobj.y & 0x7) << 10) |
+											((currobj.heading & 0x7) << 7) |
+											((currobj.zpos & 0x7F));
+									TileMapData[addptr+2]=(char)(ByteToWrite & 0xFF);
+									TileMapData[addptr+3]=(char)((ByteToWrite>>8) & 0xFF);
+
+									ByteToWrite = (((int)currobj.next & 0x3FF)<<6) |
+											(currobj.quality & 0x3F); 
+									TileMapData[addptr+4]=(char)(ByteToWrite & 0xFF);
+									TileMapData[addptr+5]=(char)((ByteToWrite>>8) & 0xFF);	
+
+									ByteToWrite = ((currobj.link & 0x3FF)<<6) |
+											(currobj.owner & 0x3F); 
+									TileMapData[addptr+6]=(char)(ByteToWrite & 0xFF);
+									TileMapData[addptr+7]=(char)((ByteToWrite>>8) & 0xFF);	
+
+
+									if (o<256)			
+									{//Additional npc mobile data.
+
+											TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
+											TileMapData[addptr+0x9] = (char)((TileMapData[addptr+0x9] & 0xE0) | ((char)(currobj.Projectile_Yaw  & 0x1F )));
+											//+A is copied  unknown value
+											//+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
+											ByteToWrite=( 
+													((currobj.npc_goal & 0xF))  |
+													((currobj.npc_gtarg & 0xFF) <<4)  |
+													( (TileMapData[addptr+0xb+1] & 0xf0) << 8 )										
+											);
+											TileMapData[addptr+0xb] = (char)(ByteToWrite & 0xFF);
+											TileMapData[addptr+0xb+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+
+											int val = (int)DataLoader.getValAtAddress(TileMapData,addptr+0xd,16);
+											val = val & 0x1ff0;
+											ByteToWrite=((currobj.npc_attitude & 0x3)<<14) |
+													((currobj.npc_talkedto & 0x1)<<13) |
+													(currobj.npc_level & 0xF)   
+													| val
+													;
+
+											TileMapData[addptr+0xd] = (char)(ByteToWrite & 0xFF);
+											TileMapData[addptr+0xd+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+											TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
+
+											ByteToWrite=((currobj.npc_xhome & 0x3F)<<10) |
+													((currobj.npc_yhome & 0x3F)<<4) |
+													( TileMapData[addptr+0x16] & 0xf  ) ;
+											TileMapData[addptr+0x16] = (char)(ByteToWrite & 0xFF);
+											TileMapData[addptr+0x16+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+
+											ByteToWrite=(TileMapData[addptr+0x18] & 0xE0)
+													|
+													(currobj.npc_heading & 0x1F) ;
+											TileMapData[addptr+0x18] = (char)(ByteToWrite & 0xFF);
+											TileMapData[addptr+0x18+1] = (char)((ByteToWrite>>8) & 0xFF);
+
+
+											TileMapData[addptr+0x19]= (char)(
+													((currobj.npc_hunger & 0x3F)) 
+											);
+
+											TileMapData[addptr+0x1a]= (char)(
+													((currobj.npc_whoami & 0xFF)) 
+											);
+
+											addptr=addptr+8+19;	
+									}	
+									else
+									{													
+											addptr=addptr+8;
+									}
 								}
 						}	
 
@@ -2311,7 +2373,7 @@ public class TileMap : Loader {
 
 				addptr=0x7300;//mobile object list
 				int f=0;
-				for (int i=0; i<254; i++)
+				for (int i=0; i<=GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile; i++)
 				{						
 						int ByteToWrite= GameWorldController.instance.objectList[thisLevelNo].FreeMobileList[f];
 						TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
@@ -2322,7 +2384,7 @@ public class TileMap : Loader {
 
 				addptr=0x74fc;//static object list
 				f=0;
-				for (int i=0; i<768; i++)
+				for (int i=0; i<=GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic; i++)
 				{						
 						int ByteToWrite= GameWorldController.instance.objectList[thisLevelNo].FreeStaticList[f];
 						TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
@@ -2339,6 +2401,33 @@ public class TileMap : Loader {
 				TileMapData[0x7c05] = (char)((GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic>>8) & 0xFF);
 
 			return TileMapData;
+		}
+
+		bool IsObjectFree(int index)
+		{
+				
+				if (index<256)//mobile list
+				{
+						for (int i=2; i<=GameWorldController.instance.objectList[thisLevelNo].NoOfFreeMobile;i++)
+						{
+								if (index == GameWorldController.instance.objectList[thisLevelNo].FreeMobileList[i])
+								{//obj is on free list
+										return true;
+								}
+						}
+				}
+				else
+				{//static
+						for (int i=0; i<=GameWorldController.instance.objectList[thisLevelNo].NoOfFreeStatic;i++)
+						{
+							if (index == GameWorldController.instance.objectList[thisLevelNo].FreeStaticList[i])
+							{//obj is on free list
+									return true;
+							}
+						}
+				}
+
+				return false;
 		}
 
 		/// <summary>

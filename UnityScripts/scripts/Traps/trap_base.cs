@@ -65,19 +65,23 @@ public class trap_base : object_base {
 		int TriggerRepeat = (objInt().flags) & 0x1;
 		if (TriggerRepeat==0)
 		{
-			this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
-			if (src!=null)
-			{
-				if (src.GetComponent<ObjectInteraction>()!=null)
-				{//Clear the link to the trigger/trap from the source if it is destroyed.
-					if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
-					{	
-						src.GetComponent<ObjectInteraction>().link=0;
-					}
-				}		
-			}
-			Destroy (this.gameObject);
+			DestroyTrap (src);
 		}
+	}
+
+	protected void DestroyTrap (object_base src)
+	{
+		if (src != null) {
+			if (src.GetComponent<ObjectInteraction> () != null) {
+				//Clear the link to the trigger/trap from the source if it is destroyed.
+				if (src.GetComponent<ObjectInteraction> ().link == this.gameObject.GetComponent<ObjectInteraction> ().objectloaderinfo.index) {
+					src.GetComponent<ObjectInteraction> ().link = 0;
+				}
+			}
+		}
+		objInt ().objectloaderinfo.InUseFlag = 0;
+		//ObjectInteraction.UpdateLinkedList (objInt (), objInt ().tileX, objInt ().tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
+		Destroy (this.gameObject);
 	}
 
 		/// <summary>

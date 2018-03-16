@@ -623,6 +623,24 @@ void PrintObjectsByTile(tile LevelInfo[64][64], ObjectItem objList[1600], int Le
 	int x; int y;
 	fprintf(LOGFILE,"\nPrint out objects by Tile for level :%d\n", LevelNo);
 
+	for (x = 0; x < 64; x++)
+		{
+		for (y = 0; y < 64; y++)
+			{
+			if (LevelInfo[x][y].indexObjectList != 0)
+				{
+				fprintf(LOGFILE, "\n Tile %d,%d\n\t", x, y);
+					long nextShockObj = printObject(objList[LevelInfo[x][y].indexObjectList]);
+					while (nextShockObj != 0)
+						{
+						fprintf(LOGFILE, "\n\t");
+						nextShockObj = printObject(objList[nextShockObj]);			
+						}
+				}
+			}
+		}
+
+
 	for (y = 63; y >= 0; y--)
 		{
 		fprintf(LOGFILE,"\n");
@@ -699,10 +717,12 @@ void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int L
 void PrintUWObjects(ObjectItem objList[1600])
 	{
 	//Prints the object debug info for UW.
+	long RelativeAddress = 0x4000;
 	for (int x = 0; x < 1024; x++)
 		{
 		//if (objList[x].item_id != 0)
 		//	{
+		
 
 
 			UniqueObjectName(objList[x]);
@@ -711,7 +731,8 @@ void PrintUWObjects(ObjectItem objList[1600])
 			fprintf(LOGFILE, "\tName: %s", UniqueObjectName(objList[x]));
 			//if (objList[x].InUseFlag == 1)
 			//	{
-				fprintf(LOGFILE, "\tAddress: %d", objList[x].address);
+				//fprintf(LOGFILE, "\tAddress: %d", objList[x].address);
+			fprintf(LOGFILE, "\tOffset: %d", RelativeAddress);
 				fprintf(LOGFILE, "\tNext : %d", objList[x].next);
 			//	}
 			if (objectMasters[objList[x].item_id].isSet == 1)
@@ -757,6 +778,15 @@ void PrintUWObjects(ObjectItem objList[1600])
 				printf("\n\tTexture: %d", objList[x].texture);
 				}
 			//if (objList[x].npc_whoami >=0)
+			if (x < 256)
+				{
+				RelativeAddress += 27;
+				}
+			else
+				{
+				RelativeAddress += 8;
+				}
+
 			if (x < 256)
 				{
 				fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);

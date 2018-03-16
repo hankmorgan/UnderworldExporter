@@ -87,6 +87,7 @@ using System.Collections;
 /// 64: Is mors dead
 /// 65: Pits related (checked by dorstag)
 /// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
+/// 104: Set when you enter scintilus level 5 (hooked variable)
 /// 106: Meet mors gothi and got the book
 /// 107: Set after freeing praetor loth
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
@@ -222,6 +223,11 @@ public class Quest : UWEBase {
 	/// </summary>
 	public bool InDreamWorld=false;
 
+		/// <summary>
+		/// The scint lvl5 switches.
+		/// </summary>
+		public int ScintLvl5Switches=0;
+
 	/// <summary>
 	/// The x clocks tracks progress during the game and is used in firing events
 	/// </summary>
@@ -284,7 +290,7 @@ public class Quest : UWEBase {
 
 
 		/// <summary>
-		/// Hooks certain quest variables into the xclock.
+		/// Hooks certain quest variables into the xclock and quest variables.
 		/// </summary>
 		/// <returns><c>true</c>, if clock hook was xed, <c>false</c> otherwise.</returns>
 		/// <param name="index">Index.</param>
@@ -335,7 +341,24 @@ public class Quest : UWEBase {
 
 					return true;
 					}
-				case 51://This changes a quest variable!
+				case 32://Switches on scintilus level 5
+						{
+							
+							if (operation==5)//xor
+							{
+								Debug.Log("Scintillus switch = " + index + " xor'ing " + value);
+								ScintLvl5Switches ^= value;
+								return true;
+							}
+							else
+							{
+								Debug.Log("Unimplemented operation for Scintillus switch = " + index + " bit " + value);
+								return false;
+							}
+							
+						}
+				case 51://This changes a quest variable! Find out and document the variable in question.
+				case 104://Used in scintilus level 5.
 					{
 						Debug.Log("quest/variable = " + index + " set to " + value);
 						Quest.instance.QuestVariables[index]=value;
