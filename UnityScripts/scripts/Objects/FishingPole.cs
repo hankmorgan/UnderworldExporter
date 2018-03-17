@@ -82,7 +82,7 @@ public override bool use ()
 	GameObject CreateFish()
 	{
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(182,40,0,1,256);
-		ObjectInteraction fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+		ObjectInteraction fishy = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
 		fishy.gameObject.name= ObjectLoader.UniqueObjectName(newobjt);
 		fishy.isquant=1;
 		GameWorldController.MoveToInventory(fishy.gameObject);

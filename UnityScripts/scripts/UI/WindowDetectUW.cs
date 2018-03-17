@@ -338,17 +338,16 @@ public class WindowDetectUW : WindowDetect {
 										droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 										droppedItem.GetComponent<ObjectInteraction>().Drop();
 										droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
+										GameWorldController.MoveToWorld(droppedItem);
+										droppedItem.transform.parent = GameWorldController.instance.DynamicObjectMarker();
 
 										if (droppedItem.GetComponent<Container>()!=null)
 										{//Set the picked up flag recursively for container items.
 												Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(),false);
-												Container.SetItemsParent(droppedItem.GetComponent<Container>(),GameWorldController.instance.LevelMarker());
+												Container.SetItemsParent(droppedItem.GetComponent<Container>(),GameWorldController.instance.DynamicObjectMarker());
 												Container.SetItemsPosition (droppedItem.GetComponent<Container>(),UWCharacter.Instance.playerInventory.InventoryMarker.transform.position);
 										}
 										droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//UWCharacter.Instance.transform.position;
-
-										droppedItem.transform.parent = GameWorldController.instance.LevelMarker();
-										GameWorldController.MoveToWorld(droppedItem);
 
 										GameWorldController.UnFreezeMovement(droppedItem);
 										if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.4f)

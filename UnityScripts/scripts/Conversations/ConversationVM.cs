@@ -1203,9 +1203,9 @@ public class ConversationVM : UWEBase {
 										GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
 										npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 										npcSlot.clear();
-										if (demanded.transform.parent !=GameWorldController.instance.LevelMarker())
+										if (demanded.transform.parent !=GameWorldController.instance.DynamicObjectMarker())
 										{
-												demanded.transform.parent=GameWorldController.instance.LevelMarker();
+												//demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 												GameWorldController.MoveToWorld(demanded);
 										}
 
@@ -2488,7 +2488,7 @@ public class ConversationVM : UWEBase {
 								if (demanded!=null)
 								{
 										ClearTradeSlotWithObject(slotNo);
-										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										//demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 										//GameWorldController.MoveToWorld(demanded);//ok
 										objsGiven[i]=demanded;//These have to be moved to world after this function ends or else the master list will get messed up
 										demanded.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
@@ -2503,7 +2503,7 @@ public class ConversationVM : UWEBase {
 								if (demanded!=null)
 								{
 										ClearTradeSlotWithObject(slotNo);
-										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										//demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 										//GameWorldController.MoveToWorld(demanded);//ok
 										objsGiven[i]=demanded;//These have to be moved to world after this function ends or else the master list will get messed up
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
@@ -2650,9 +2650,9 @@ public class ConversationVM : UWEBase {
 				else
 				{			
 						npc.GetComponent<Container> ().RemoveItemFromContainer (demanded.name);
-						if (demanded.transform.parent!=GameWorldController.instance.LevelMarker ())
+						if (demanded.transform.parent!=GameWorldController.instance.DynamicObjectMarker ())
 						{//Items needs to be moved to world
-								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								//demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
 								GameWorldController.MoveToWorld (demanded);//ok	
 						}
 						demanded.transform.position = npc.NPC_Launcher.transform.position;
@@ -2804,7 +2804,7 @@ public class ConversationVM : UWEBase {
 								else
 								{
 										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-										demanded.transform.parent=GameWorldController.instance.LevelMarker();
+										//demanded.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 										GameWorldController.MoveToWorld(demanded);//ok
 										demanded.transform.position=npc.NPC_Launcher.transform.position;
 										pcSlot.clear();
@@ -2974,7 +2974,7 @@ public class ConversationVM : UWEBase {
 						}
 						else {
 								GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								//demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
 								demanded.transform.position = npc.NPC_Launcher.transform.position;
 								npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
 								npcSlot.clear ();
@@ -2998,7 +2998,7 @@ public class ConversationVM : UWEBase {
 
 								//Move to the inventory room
 								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								//demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
 								GameWorldController.MoveToWorld(demanded);//ok
 								cn.AddItemToContainer (demanded.name);
 								demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
@@ -3006,7 +3006,7 @@ public class ConversationVM : UWEBase {
 						}
 						else {
 								GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-								demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+								//demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
 								demanded.transform.position = npc.NPC_Launcher.transform.position;
 								GameWorldController.MoveToWorld(demanded);//ok
 								pcSlot.clear ();
@@ -3035,7 +3035,7 @@ public class ConversationVM : UWEBase {
 										GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 										//npc.GetComponent<Container> ().RemoveItemFromContainer (pcSlot.objectInSlot);
 										pcSlot.clear ();
-										demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+										//demanded.transform.parent = GameWorldController.instance.DynamicObjectMarker ();
 										demanded.transform.position = npc.NPC_Launcher.transform.position;
 										GameWorldController.MoveToWorld(demanded);//ok
 								}
@@ -3401,7 +3401,7 @@ public class ConversationVM : UWEBase {
 				//description:  sets attitude for a whole race (?)
 				//Seems to set attitude for all npcs with the whoami of the same value.
 				//Debug.Log ("set_race_attitude " + attitude);
-				/*	NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+				/*	NPC[] foundNPCs=GameWorldController.instance.DynamicObjectMarker().GetComponentsInChildren<NPC>();
 			for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
 			{
 				if (foundNPCs[i].npc_whoami== npc.npc_whoami)
@@ -3449,7 +3449,7 @@ public class ConversationVM : UWEBase {
 		public void set_attitude(int attitude, int target_whoami)
 		{
 
-				NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+				NPC[] foundNPCs=GameWorldController.instance.DynamicObjectMarker().GetComponentsInChildren<NPC>();
 				for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
 				{
 						if (foundNPCs[i].npc_whoami == target_whoami)
@@ -3578,7 +3578,7 @@ return value: none
 						if ((Quantity==-1))
 						{
 								ClearTradeSlotWithObject(slotNo);
-								objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;
+								objGiven.transform.parent=GameWorldController.instance.DynamicObjectMarker().transform;
 								//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
 								cn.AddItemToContainer(objGiven.name);
 								GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
@@ -3616,7 +3616,7 @@ return value: none
 												ClearTradeSlotWithObject(slotNo);
 												//cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
 												cn.AddItemToContainer(objGiven.name);
-												objGiven.transform.parent=GameWorldController.instance.LevelMarker().transform;						
+												objGiven.transform.parent=GameWorldController.instance.DynamicObjectMarker().transform;						
 												GameWorldController.MoveToWorld(objGiven.GetComponent<ObjectInteraction>());
 												//ObjectMoved=true;
 												UWCharacter.Instance.playerInventory.Refresh();
@@ -3701,7 +3701,7 @@ return value: none
 				else
 				{
 						playerHasSpace=2;
-						obj.transform.parent=GameWorldController.instance.LevelMarker();
+						obj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 
 						obj.transform.position=npc.NPC_Launcher.transform.position;
 						npc.GetComponent<Container>().RemoveItemFromContainer(obj.name);
@@ -3905,7 +3905,7 @@ return value: none
 
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_id,0,0,1,256);
 				newobjt.is_quant=1;
-				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+				GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 				//GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
 				ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
 				npc.GetComponent<Container>().AddItemToContainer(myObj.name);
@@ -3940,7 +3940,7 @@ description:  places a generated object in underworld
 						GameObject obj = objInt.gameObject;
 
 						obj.transform.position=GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
-						//obj.transform.parent=GameWorldController.instance.LevelMarker();
+						//obj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 						//GameWorldController.MoveToWorld(obj);
 						//npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
 						//UWHUD.instance.npcTrade[invSlot].clear();
@@ -4186,7 +4186,7 @@ description:  places a generated object in underworld
 				{
 						ObjectLoaderInfo objNew= ObjectLoader.newObject(Random.Range(120,122),36,27,0,1);
 						Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(tileX[i],tileY[i]);
-						ObjectInteraction objI= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), objNew, GameWorldController.instance.LevelMarker().gameObject,pos);
+						ObjectInteraction objI= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), objNew,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,pos);
 						objI.GetComponent<NPC>().npc_attitude=0;
 						objI.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_attack_5;
 						objI.GetComponent<NPC>().npc_hp=49;

@@ -314,7 +314,7 @@ public class ObjectInteraction : UWEBase {
 			}
 
 
-				//if (this.transform.parent==GameWorldController.instance.LevelMarker())
+				//if (this.transform.parent==GameWorldController.instance.DynamicObjectMarker())
 				//{
 						
 /*					if (PickedUp==false)
@@ -904,7 +904,7 @@ public class ObjectInteraction : UWEBase {
 					}
 
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject(lstOutput[i],40,0,0,256);
-					GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+					GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 					GameWorldController.MoveToInventory(Created);
 					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 					if (Created != null) {
@@ -1720,7 +1720,7 @@ public class ObjectInteraction : UWEBase {
 
 
 
-		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, GameObject parent, Vector3 position)
+		public static ObjectInteraction CreateNewObject (TileMap tm, ObjectLoaderInfo currObj, ObjectLoaderInfo[] objList, GameObject parent, Vector3 position)
 		{//TODO: Make sure all object creation uses this function!
 
 				GameObject myObj = new GameObject (ObjectLoader.UniqueObjectName(currObj));
@@ -1846,7 +1846,7 @@ public class ObjectInteraction : UWEBase {
 						}
 				case CLUTTER:
 						{
-							if ((objInt.isMagicallyEnchanted()) && (objInt.link>1))
+							if ((objInt.isMagicallyEnchanted(currObj, objList)) && (objInt.link>1))
 							{
 								myObj.AddComponent<Wand>();
 							}
@@ -2305,6 +2305,8 @@ public class ObjectInteraction : UWEBase {
 								myObj.AddComponent<a_hack_trap_trespass>();break;
 							case 0x12://Scint 5 puzzle reset
 								myObj.AddComponent<a_hack_trap_scintpuzzlereset>();break;
+							case 0x13:
+								myObj.AddComponent<a_hack_trap_scintplatformreset>();break;		
 							case 0xA://Bonus object trap
 								myObj.AddComponent<a_hack_trap_class_item>();break;
 							case 0xE://colour cycle a room in talorus
@@ -2448,22 +2450,37 @@ public class ObjectInteraction : UWEBase {
 		/// Is the object an enchanted object or does it link to something
 		/// </summary>
 		/// <returns><c>true</c>, if magically enchanted was ised, <c>false</c> otherwise.</returns>
-		public bool isMagicallyEnchanted()
+		public bool isMagicallyEnchanted(ObjectLoaderInfo currObj, ObjectLoaderInfo[] objList)
 		{
+				if (isquant==1)
+				{
+						return false;
+				}
 				if (enchantment==1)
 				{
 						return true;
 				}
 				else
 				{
-						if (link>=256)
+						if (currObj.link>0)
 						{
+								if (currObj.link<=objList.GetUpperBound(0))
+								{
+										if ((objList[currObj.link].GetItemType()==ObjectInteraction.SPELL) && (objList[currObj.link].InUseFlag==1))
+										{
+												return true;
+										}
+								}
+						}
+
+					//	if (link>=256)
+						//{
 								
 								//if (GameWorldController.instance.objectMaster.type[ GameWorldController.instance.CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
 								//{
 										return true;
 								//}
-						}
+						//}
 				}
 				return false;
 					
@@ -2559,5 +2576,6 @@ public class ObjectInteraction : UWEBase {
 						return GameWorldController.instance.objectMaster.desc[currObj.item_id]+ System.Guid.NewGuid();
 				}
 		}
+
 
 }

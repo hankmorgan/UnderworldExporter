@@ -114,9 +114,9 @@ public class TradeSlot : GuiBase {
 				GameObject objToMove = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 				if (objToMove!=null)
 				{
-					if (objToMove.transform.parent != GameWorldController.instance.LevelMarker())
+					if (objToMove.transform.parent != GameWorldController.instance.DynamicObjectMarker())
 					{//Object needs to be moved to world
-							objToMove.transform.parent= GameWorldController.instance.LevelMarker();
+							//objToMove.transform.parent= GameWorldController.instance.DynamicObjectMarker();
 							GameWorldController.MoveToWorld(objToMove);
 							ConversationVM.BuildObjectList();
 					}
@@ -138,9 +138,9 @@ public class TradeSlot : GuiBase {
 				}
 				if (objInHand!=null)
 				{
-					if (objInHand.transform.parent != GameWorldController.instance.LevelMarker())
+					if (objInHand.transform.parent != GameWorldController.instance.DynamicObjectMarker())
 					{//Object needs to be moved to world
-						objInHand.transform.parent= GameWorldController.instance.LevelMarker();
+						//objInHand.transform.parent= GameWorldController.instance.DynamicObjectMarker();
 						GameWorldController.MoveToWorld(objInHand);						
 					}	
 				}

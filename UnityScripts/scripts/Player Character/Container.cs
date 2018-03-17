@@ -387,7 +387,7 @@ public class Container : object_base {
 				if (item != null)
 				{
 					item.transform.parent=Parent;
-					if (Parent == GameWorldController.instance.LevelMarker())
+					if (Parent == GameWorldController.instance.DynamicObjectMarker())
 					{
 						GameWorldController.MoveToWorld(item);
 					}

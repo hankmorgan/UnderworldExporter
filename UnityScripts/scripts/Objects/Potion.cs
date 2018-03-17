@@ -17,20 +17,21 @@ public class Potion : enchantment_base {
 			switch (objInt().item_id)
 			{
 			case 184 :// a_mushroom
-				UseString=232;
+				UseString=StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_;
 				index=SpellEffect.UW1_Spell_Effect_Hallucination;//Tripping
 				break;
 			case 185 :// a_toadstool
-				UseString=231;
+				UseString=StringController.str_the_toadstool_tastes_odd_and_you_begin_to_feel_ill_;
 				index=SpellEffect.UW1_Spell_Effect_Poison;//Poisoning
 				break;
 			case 186 :// a_bottle_of_ale_bottles_of_ale
-				UseString=239;
+				UseString=StringController.str_you_drink_the_dark_ale_;
 				index=base.GetActualSpellIndex();
 				break;
 			case 187 :// a_red_potion
 			case 188 :// a_green_potion
-				UseString=240;
+			default:
+				UseString=StringController.str_you_quaff_the_potion_in_one_gulp_;
 				index=GetActualSpellIndex();
 				break;
 			}

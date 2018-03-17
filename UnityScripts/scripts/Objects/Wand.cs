@@ -26,7 +26,7 @@ public class Wand : enchantment_base {
 				if(objInt().PickedUp)		
 				{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink, 256);
-					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.LevelMarker().gameObject, GameWorldController.instance.LevelMarker().position );
+					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.DynamicObjectMarker().position );
 					objInt().link = newobjt.index;
 				}	
 			}
@@ -73,6 +73,8 @@ public class Wand : enchantment_base {
 						{
 								switch (objInt().link)		
 								{
+								//TODO:Figure out the range here!
+
 								case 579://frog
 								case 580://maze
 								case 581://hallucination
@@ -81,7 +83,17 @@ public class Wand : enchantment_base {
 										return objInt().link-256;	
 								}
 						}
-						return objInt().link-256;//Confirm mappings for UW2
+						else
+						{//TODO:Figure out the range here!
+								switch (objInt().link)		
+								{
+								case 576://altara
+										return objInt().link-368;	
+								default:
+										return objInt().link-256;	
+								}
+						}
+					//	return objInt().link-256;//Confirm mappings for UW2
 		}
 
 				/*
@@ -124,19 +136,28 @@ public class Wand : enchantment_base {
 				{
 					return true;
 				}
+						if (((objInt().item_id>=156) && (objInt().item_id<=159)))
+						{	
+								return true;//Don't use broken wands
+						}
 
+				if (GetActualSpellIndex()<0)
+				{//Break invalid wands
+						if (((objInt().item_id>=152) && (objInt().item_id<=155)))
+						{										
+							BreakWand ();
+						}
+						return true;
+				}
 			if (objInt().quality >0)
 				{
 					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf, Magic.SpellRule_Immediate);
 					if (objInt().isEnchanted()==false)
 						{
 						objInt().quality--;
-						if ((objInt().quality ==0) && ((objInt().item_id>=152) || (objInt().item_id<=155)))
+						if ( (objInt().quality ==0) && (  (objInt().item_id>=152) && (objInt().item_id<=155) ) )
 						{										
-							objInt().item_id = objInt().item_id+4;//Become a broken wand.
-							objInt().InvDisplayIndex=objInt().InvDisplayIndex+4;
-							objInt().WorldDisplayIndex=objInt().WorldDisplayIndex+4;
-							objInt().RefreshAnim();
+							BreakWand ();
 						}
 					}
 				}
@@ -148,6 +169,15 @@ public class Wand : enchantment_base {
 		}		
 	}
 
+	void BreakWand ()
+	{
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_with_a_loud_snap_the_wand_cracks_));
+		objInt ().item_id = objInt ().item_id + 4;
+		//Become a broken wand.
+		objInt ().InvDisplayIndex = objInt ().InvDisplayIndex + 4;
+		objInt ().WorldDisplayIndex = objInt ().WorldDisplayIndex + 4;
+		objInt ().RefreshAnim ();
+	}
 
 	public override bool LookAt ()
 	{
@@ -275,7 +305,7 @@ public class Wand : enchantment_base {
 
 				if (!match)
 				{
-					linkedspell.gameObject.transform.parent=GameWorldController.instance.LevelMarker();
+					//linkedspell.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 					GameWorldController.MoveToWorld(linkedspell.gameObject);	
 				}
 			}				
@@ -295,6 +325,11 @@ public class Wand : enchantment_base {
 				//GameWorldController.MoveToInventory(clonelinkedspell.gameObject);
 			}
 		}
+	}
+
+	public override string UseVerb ()
+	{
+		return "cast";
 	}
 
 }

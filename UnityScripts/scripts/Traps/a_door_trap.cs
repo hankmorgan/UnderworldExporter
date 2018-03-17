@@ -35,7 +35,7 @@ Opens the door that is in the targeted tile.
 						newobjt.y=lockToCopy.y;
 						newobjt.next=DC.objInt().link;//To allow proper triggering of traps
 						newobjt.InUseFlag=1;
-						GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+												GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 						DC.objInt().link=newobjt.index;	//Point the lock at this new lock							
 					}	
 				}

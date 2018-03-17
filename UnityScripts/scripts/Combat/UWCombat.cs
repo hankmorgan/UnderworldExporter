@@ -440,7 +440,7 @@ public class UWCombat : Combat {
 				{
 					launchedItem = currentAmmo.gameObject;
 					UWCharacter.Instance.playerInventory.RemoveItem(currentAmmo.name);	
-					launchedItem.transform.parent=GameWorldController.instance.LevelMarker();
+					//launchedItem.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 					GameWorldController.MoveToWorld(launchedItem);
 					launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);
 					launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world	
@@ -448,7 +448,7 @@ public class UWCombat : Combat {
 				else
 				{//reduce this quantity by one and create a copy in the world
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject( currWeaponRanged.AmmoType(),40,0,1,256);
-					launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange-0.1f)).gameObject;
+					launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange-0.1f)).gameObject;
 					currentAmmo.consumeObject();
 				}
 				launchedItem.GetComponent<ObjectInteraction>().isquant=1;

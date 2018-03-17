@@ -357,7 +357,7 @@ public class Quest : UWEBase {
 							}
 							
 						}
-				case 51://This changes a quest variable! Find out and document the variable in question.
+				case 51://This changes a quest variable! Find out and document the variable in question. (scint lvl 1 arrow trap)
 				case 104://Used in scintilus level 5.
 					{
 						Debug.Log("quest/variable = " + index + " set to " + value);

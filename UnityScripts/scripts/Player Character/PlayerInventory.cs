@@ -1069,7 +1069,7 @@ public class PlayerInventory : UWEBase {
 							if (obj.gameObject.GetComponent<ObjectInteraction>().quality<=0)
 							{
 								playerUW.playerInventory.ClearSlot((short)PieceToDamage);
-								obj.transform.parent=GameWorldController.instance.LevelMarker().transform;
+								obj.transform.parent=GameWorldController.instance.DynamicObjectMarker().transform;
 								obj.transform.position=playerUW.transform.position;
 								GameWorldController.MoveToWorld(obj.GetComponent<ObjectInteraction>());
 								GameWorldController.UnFreezeMovement(obj);

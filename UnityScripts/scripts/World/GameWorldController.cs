@@ -167,7 +167,6 @@ public class GameWorldController : UWEBase {
 		/// </summary>	
 		public short LevelNo;
 
-
 		public static bool LoadingGame=false;
 		public static bool NavMeshReady=false;
 		public bool[] NavMeshesReady= new bool[4];
@@ -182,8 +181,11 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		public Vector3 StartPos=new Vector3(38f, 4f, 2.7f);
 
-
-
+		/// <summary>
+		/// Create object reports
+		/// </summary>
+		public bool CreateReports;
+		public bool ShowOnlyInUse;
 
 		[Header("Palettes")]
 		/// <summary>
@@ -260,9 +262,6 @@ public class GameWorldController : UWEBase {
 		/// The terrain data from terrain.dat
 		/// </summary>
 		public TerrainDatLoader terrainData;
-
-
-
 
 		[Header("Paths")]
 		public string Lev_Ark_File_Selected = "";//"DATA\\Lev.ark";
@@ -579,7 +578,7 @@ public class GameWorldController : UWEBase {
 						if(ObjectReRenderPending)
 						{								
 								ObjectReRenderPending=false;
-								ObjectLoader.RenderObjectList(CurrentObjectList(),currentTileMap(),LevelMarker().gameObject);
+								ObjectLoader.RenderObjectList(CurrentObjectList(),currentTileMap(),DynamicObjectMarker().gameObject);
 						}
 						WorldReRenderPending=false;
 						FullReRender=false;
@@ -905,7 +904,7 @@ public class GameWorldController : UWEBase {
 		/// Returns the transform of the levels object marker where objects are generated on.
 		/// </summary>
 		/// <returns>The marker.</returns>
-		public Transform LevelMarker()
+		public Transform DynamicObjectMarker()
 		{
 				return _ObjectMarker.transform;
 		}
@@ -970,6 +969,10 @@ public class GameWorldController : UWEBase {
 											Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block,ovl_ark_block);
 											objectList[newLevelNo]=new ObjectLoader();
 											objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_block);		
+											if (CreateReports)
+											{
+												CreateObjectReport(objectList[newLevelNo].objInfo);
+											}
 										}
 										else
 										{//load an empty level
@@ -1069,7 +1072,7 @@ public class GameWorldController : UWEBase {
 						case GAME_SHOCK:
 								//break;
 						default:
-								ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],LevelMarker().gameObject);
+								ObjectLoader.RenderObjectList(objectList[newLevelNo],Tilemaps[newLevelNo],DynamicObjectMarker().gameObject);
 								CleanUpMagicProjectiles();
 								break;
 						}
@@ -1143,6 +1146,7 @@ public class GameWorldController : UWEBase {
 
 		static void CleanUpMagicProjectiles()
 		{
+			return;
 			ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
 			for (int i=0; i<=objList.GetUpperBound(0);i++)
 			{
@@ -1355,10 +1359,11 @@ public class GameWorldController : UWEBase {
 		{
 				//Add item to a free slot on the item list and point the instance back to this.
 				obj.UpdatePosition();
-				if (obj.transform.parent == GameWorldController.instance.LevelMarker())
-				{
-						Debug.Log("Moving to world when object is already in world " + obj.name);
-				}
+				//if (obj.transform.parent == GameWorldController.instance.DynamicObjectMarker())
+				//{
+				//		Debug.Log("Moving to world when object is already in world " + obj.name);
+				//}
+				obj.transform.parent = GameWorldController.instance.DynamicObjectMarker();
 				ObjectLoader.AssignObjectToList(ref obj);
 			//	ObjectInteraction.UpdateLinkedList(obj, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile, obj.tileX, obj.tileY);
 				//obj.next=0;
@@ -1394,7 +1399,8 @@ public class GameWorldController : UWEBase {
 		public static void MoveToInventory(ObjectInteraction obj)
 		{//Break the instance back to the object list
 				obj.objectloaderinfo.InUseFlag=0;//This frees up the slot to be replaced with another item.	
-				if (_RES==GAME_UW2)
+				obj.objectloaderinfo.instance=null;
+				if (_RES==GAME_UW2)//Does this need to be done for uw1 as well.
 				{
 						ObjectLoaderInfo.CleanUp(obj.objectloaderinfo);
 				}
@@ -1412,7 +1418,7 @@ public class GameWorldController : UWEBase {
 		/// </summary>
 		public void UpdatePositions()
 		{
-				foreach (Transform t in GameWorldController.instance.LevelMarker()) 
+				foreach (Transform t in GameWorldController.instance.DynamicObjectMarker()) 
 				{
 						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
 						{
@@ -2284,6 +2290,16 @@ public class GameWorldController : UWEBase {
 																				MusicController.UW2Path=entries[1];
 																				break;
 																		}
+																case "GENREPORT":
+																		{
+																				CreateReports= (entries[1]=="1");
+																				break;
+																		}
+																case "SHOWINUSE"://only show inuse objects in reports
+																		{
+																				ShowOnlyInUse =  (entries[1]=="1");
+																				break;
+																		}
 																}	
 														}		
 												}
@@ -2299,6 +2315,54 @@ public class GameWorldController : UWEBase {
 				{
 						return false;
 				}
+		}
+
+
+
+		void CreateObjectReport(ObjectLoaderInfo[] objList)
+		{
+			StreamWriter writer = new StreamWriter( Application.dataPath + "//..//_objectreport.xml");
+				writer.WriteLine("<ObjectReport>");
+				for (int o=0; o<=objList.GetUpperBound(0);o++)
+				{
+						if ( ( (objList[o].InUseFlag == 0) && (!ShowOnlyInUse) ) || (objList[o].InUseFlag == 1)  )
+						{
+								writer.WriteLine("\t<Object>");
+								writer.WriteLine("\t\t<ObjectName>" + ObjectLoader.UniqueObjectNameEditor(objList[o]) +  "</ObjectName>");
+								writer.WriteLine("\t\t<Index>" + o +  "</Index>");
+								writer.WriteLine("\t\t<Address>" + objList[o].address +  "</Address>");
+								writer.WriteLine("\t\t<StaticProperties>"); 
+								writer.WriteLine("\t\t\t<ItemID>" + objList[o].InUseFlag+"</ItemID>"); 
+								writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag+"</InUse>"); 
+								writer.WriteLine("\t\t\t<Flags>" + objList[o].InUseFlag+"</Flags>"); 
+								writer.WriteLine("\t\t\t<Enchant>" + objList[o].InUseFlag+"</Enchant>"); 
+								writer.WriteLine("\t\t\t<DoorDir>" + objList[o].InUseFlag+"</DoorDir>"); 
+								writer.WriteLine("\t\t\t<Invis>" + objList[o].InUseFlag+"</Invis>"); 
+								writer.WriteLine("\t\t\t<IsQuant>" + objList[o].InUseFlag+"</IsQuant>"); 
+								writer.WriteLine("\t\t\t<Texture>" + objList[o].texture+"</Texture>"); 
+								writer.WriteLine("\t\t\t<Position>"); 
+								writer.WriteLine("\t\t\t\t<tileX>" + objList[o].tileX + "</tileX>");
+								writer.WriteLine("\t\t\t\t<tileY>" + objList[o].tileY + "</tileY>");
+								writer.WriteLine("\t\t\t\t<xpos>" + objList[o].x + "</xpos>");
+								writer.WriteLine("\t\t\t\t<ypos>" + objList[o].y + "</ypos>");
+								writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");
+								writer.WriteLine("\t\t\t</Position>"); 
+								writer.WriteLine("\t\t\t<Quality>" + objList[o].quality+"</Quality>");
+								writer.WriteLine("\t\t\t<Next>" + objList[o].next+"</Next>");
+								writer.WriteLine("\t\t\t<Owner>" + objList[o].owner+"</Owner>");
+								writer.WriteLine("\t\t\t<Link>" + objList[o].link+"</Link>");
+								writer.WriteLine("\t\t</StaticProperties>"); 
+								if (o<256)
+								{//mobile info
+
+								}
+								writer.WriteLine("\t</Object>");	
+						}
+
+				}
+
+				writer.WriteLine("</ObjectReport>");
+				writer.Close();
 		}
 
 }

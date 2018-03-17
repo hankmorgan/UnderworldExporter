@@ -221,19 +221,27 @@ public class TileMapRenderer : Loader{
 				{
 						if (objList.objInfo[i]!=null)
 						{
-						if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
-						{
-								if (level.Tiles[objList.objInfo[i].tileX,objList.objInfo[i].tileY].tileType!=TILE_SOLID)
-								{
-										RenderDoorwayFront(Parent,level,objList,objList.objInfo[i]);
-										RenderDoorwayRear(Parent,level,objList,objList.objInfo[i]);
-								}
-						}
+							if (((objList.objInfo[i].item_id>=320) && (objList.objInfo[i].item_id<=335)) && (objList.objInfo[i].InUseFlag==1))
+							{
+									RenderDoor (Parent, level, objList, i);
+							}
 						}
 				}
 
 		}
 
+	public static void RenderDoor (GameObject Parent, TileMap level, ObjectLoader objList,int i)
+	{
+		if (level.Tiles [objList.objInfo [i].tileX, objList.objInfo [i].tileY].tileType != TILE_SOLID) {
+			float floorheight = (float)level.Tiles [objList.objInfo [i].tileX, objList.objInfo [i].tileY].floorHeight * 0.15f;
+			int BridgeIndex = ObjectLoader.findObjectByTypeInTile (objList.objInfo, objList.objInfo [i].tileX, objList.objInfo [i].tileY, ObjectInteraction.BRIDGE);
+			if (BridgeIndex != -1) {
+				floorheight = ObjectLoader.CalcObjectXYZ (_RES, level, level.Tiles, objList.objInfo, BridgeIndex, objList.objInfo [i].tileX, objList.objInfo [i].tileY, 0).y;
+			}
+			RenderDoorwayFront (Parent, level, objList, objList.objInfo [i], floorheight);
+			RenderDoorwayRear (Parent, level, objList, objList.objInfo [i], floorheight);
+		}
+	}
 
 		/// <summary>
 		/// Renders the doorway frame from the rear
@@ -242,14 +250,14 @@ public class TileMapRenderer : Loader{
 		/// <param name="level">Level.</param>
 		/// <param name="objList">Object list.</param>
 		/// <param name="currDoor">Curr door.</param>
-		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
+		public static void RenderDoorwayRear(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor, float floorHeight)
 		{
 				Material[] MatsToUse = new Material[1];
 				for (int j = 0; j<=MatsToUse.GetUpperBound(0);j++)
 				{
 						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];				
 				}
-				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				//float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 
 				//Uv ratios across the x axis of the door
 				float uvXPos1 = 0f;
@@ -317,7 +325,7 @@ public class TileMapRenderer : Loader{
 				//y1 = -doorthickness /2f;
 				x0 = -doorwidth /2f;
 				x1 = +doorwidth /2f;
-				z0 = 0f+ floorheight + doorheight;
+				z0 = 0f+ floorHeight + doorheight;
 				z1 = CEILING_HEIGHT*0.15f;
 				//1.2
 				Vector3[] overHead = new Vector3[4];
@@ -404,7 +412,7 @@ public class TileMapRenderer : Loader{
 		/// <param name="level">Level.</param>
 		/// <param name="objList">Object list.</param>
 		/// <param name="currDoor">Curr door.</param>
-		public static void RenderDoorwayFront(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor)
+		public static void RenderDoorwayFront(GameObject Parent, TileMap level, ObjectLoader objList, ObjectLoaderInfo currDoor, float floorHeight)
 		{
 
 				Material[] MatsToUse = new Material[1];
@@ -413,8 +421,16 @@ public class TileMapRenderer : Loader{
 						MatsToUse[j]= GameWorldController.instance.MaterialMasterList[ GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.tileX,currDoor.tileY].wallTexture]];
 				}
 				//Door params
-				float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				//float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
+				//if (level.Tiles[currDoor.tileX,currDoor.tileY].hasBridge)
+				//{						
+/*						int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList.objInfo, currDoor.tileX, currDoor.tileY, ObjectInteraction.BRIDGE);
+						if (BridgeIndex!=-1)
+						{
+								floorheight = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, BridgeIndex, currDoor.tileX,currDoor.tileY,0).y;		
+						}*/
 
+				//}
 				//Uv ratios across the x axis of the door
 				float uvXPos1 = 0f;
 				float uvXPos2 = uvXPos1 + doorSideWidth/ 1.2f;
@@ -487,7 +503,7 @@ public class TileMapRenderer : Loader{
 				//y1 = -doorthickness /2f;
 				x0 = -doorwidth /2f;
 				x1 = +doorwidth /2f;
-				z0 = 0f+ floorheight + doorheight;
+				z0 = 0f+ floorHeight + doorheight;
 				z1 = CEILING_HEIGHT*0.15f;
 				//1.2
 				Vector3[] overHead = new Vector3[4];
@@ -574,7 +590,7 @@ public class TileMapRenderer : Loader{
 				//Some filler
 				Vector3[] filler= new Vector3[12];
 				int v=0;
-				position = new Vector3(position.x,floorheight,position.z);
+				position = new Vector3(position.x,floorHeight,position.z);
 				UVs= new Vector2[12];
 				UVs[0]= new Vector2(0,0f);
 				UVs[1]= new Vector2(0,1);

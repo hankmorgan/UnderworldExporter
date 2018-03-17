@@ -1119,7 +1119,7 @@ public class IngameEditor : GuiBase_Draggable {
 						(long)currObj.index, (short)currObj.tileX, 
 						(short)currObj.tileY,0);
 				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
-						currObj,GameWorldController.instance.LevelMarker().gameObject, 
+								currObj  ,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject, 
 						pos );
 			}
 			else
@@ -1134,7 +1134,7 @@ public class IngameEditor : GuiBase_Draggable {
 							(long)currObj.index, (short)currObj.tileX, 
 							(short)currObj.tileY,0);
 					ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
-							currObj,GameWorldController.instance.LevelMarker().gameObject, 
+							currObj,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject, 
 							pos );
 				}
 			}

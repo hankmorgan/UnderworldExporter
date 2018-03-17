@@ -11,6 +11,7 @@ public class SpellEffectSpeed : SpellEffect {
 	public override void ApplyEffect ()
 		{
 			UWCharacter.Instance.speedMultiplier=speedMultiplier;
+			UWCharacter.Instance.isSpeeding=true;
 			base.ApplyEffect ();
 		}
 
@@ -18,13 +19,15 @@ public class SpellEffectSpeed : SpellEffect {
 	{
 		if(Active)
 		{
-		UWCharacter.Instance.speedMultiplier=speedMultiplier;			
+		UWCharacter.Instance.speedMultiplier=speedMultiplier;
+		UWCharacter.Instance.isSpeeding=true;
 		}			
 	}
 
 	public override void CancelEffect ()
 	{
 		UWCharacter.Instance.speedMultiplier=1.0f;
+		UWCharacter.Instance.isSpeeding=false;
 		base.CancelEffect ();		
 	}
 }

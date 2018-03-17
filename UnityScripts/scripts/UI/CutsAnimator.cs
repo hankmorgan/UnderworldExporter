@@ -99,7 +99,7 @@ public class CutsAnimator : GuiBase {
 						foreach (Transform child in GameWorldController.instance.LevelModel.transform) {
 								GameObject.Destroy(child.gameObject);
 						}
-						foreach (Transform child in GameWorldController.instance.LevelMarker()) {
+						foreach (Transform child in GameWorldController.instance.DynamicObjectMarker()) {
 								GameObject.Destroy(child.gameObject);
 						}
 						foreach (Transform child in GameWorldController.instance.SceneryModel.transform) {

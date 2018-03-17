@@ -364,10 +364,14 @@ public class AutoMap : Loader {
 		{
 				InitColours();
 
-				if (_RES==GAME_UW2)
+				//if (_RES==GAME_UW2)
+				//{
+				if (GameWorldController.instance.CreateReports)
 				{
 						WriteDebugMap();
 				}
+						
+				//}
 				///Sets the map no display
 				UWHUD.instance.LevelNoDisplay.text=(thisLevelNo+1).ToString();
 				///Uses a cursor icon to display the player.

@@ -64,15 +64,17 @@ public class ShrineLava : UWEBase {
 				slasherPos=slasher.transform.position;
 			}
 			ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0,256);
-			GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,
-			GameWorldController.instance.LevelMarker().gameObject,
-			GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-			GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
+			GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+				newobjt,
+				GameWorldController.instance.CurrentObjectList().objInfo,
+				GameWorldController.instance.DynamicObjectMarker().gameObject,
+				GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());
 			myObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
 
 			//GameObject myInstance = Resources.Load("Models/MoonGate") as GameObject;
 			//GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);		
-			//newObj.transform.parent=GameWorldController.instance.LevelMarker();
+			//newObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 		//	GameWorldController.MoveToWorld(newObj);
 			//newObj.transform.localPosition=this.transform.position+new Vector3(0.0f,0.5f,0.0f);
 			Quaternion playerRot = UWCharacter.Instance.transform.rotation;

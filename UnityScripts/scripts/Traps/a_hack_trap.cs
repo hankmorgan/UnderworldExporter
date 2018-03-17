@@ -8,6 +8,7 @@ public class a_hack_trap : trap_base {
 		//qual = 12 is an oscillator row of tiles (i think)  -unimplemented
 		//qual = 14 cycles wall/floro colours in a room in talours
 		//qual = 18 Scintillus 5 switch puzzle reset
+		//qual = 19 scintullus 7 platform puzzle reset
 		//qual=20 used for rising platforms on level 42 (scintilus)
 		//qual=21 is the moving switches in loths tomb.  -unimplemented
 		//qual=23 is a variant of the tmap change

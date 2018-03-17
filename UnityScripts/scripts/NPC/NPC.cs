@@ -474,7 +474,7 @@ public class NPC : MobileObject {
 										{
 												newobjt.is_quant=0;
 										}
-										newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
+										newobjt.instance = ObjectInteraction.CreateNewObject (GameWorldController.instance.currentTileMap (), newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
 										cnt.AddItemToContainer (newobjt.instance.name);
 								}
 						}
@@ -494,7 +494,7 @@ public class NPC : MobileObject {
 								/*if (objInt().item_id==64)
 								{//Drop a rotworm corpse
 										ObjectLoaderInfo newobjt= ObjectLoader.newObject(217,0,0,0,256);
-										ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,this.transform.position);
+										ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.DynamicObjectMarker().gameObject,this.transform.position);
 										return false;	
 								}*/
 								switch (npc_whoami)
@@ -1734,7 +1734,7 @@ public class NPC : MobileObject {
 
 						ObjectLoaderInfo newobjt = ObjectLoader.newObject(16,0,0,1,256);
 						newobjt.is_quant=1;
-						GameObject launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
+						GameObject launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,ray.GetPoint(dropRange-0.1f)).gameObject;
 
 						GameWorldController.UnFreezeMovement(launchedItem);
 						Vector3 ThrowDir = TargetingVector;
@@ -2009,9 +2009,9 @@ public class NPC : MobileObject {
 				if(bloodstain!=-1)
 				{
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject(bloodstain,0,0,0,256);
-						ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,this.transform.position);
+						ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,this.transform.position);
 						//ObjectInteraction remains = ObjectInteraction.CreateNewObject(bloodstain);						
-						//remains.gameObject.transform.parent=GameWorldController.instance.LevelMarker();
+						//remains.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 						//GameWorldController.MoveToWorld(remains.gameObject);
 						//remains.transform.position=ai.Body.transform.position;
 				}

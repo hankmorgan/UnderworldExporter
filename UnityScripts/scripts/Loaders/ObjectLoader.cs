@@ -1204,16 +1204,9 @@ public class ObjectLoader : DataLoader {
 
 		public static string UniqueObjectNameEditor(ObjectLoaderInfo currObj)
 		{//returns a shorter unique name for the object editor
-				//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
-				switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
-				{
-				//case ObjectInteraction.DOOR:
-				//case ObjectInteraction.HIDDENDOOR:
-				//case ObjectInteraction.PORTCULLIS:
-				//		return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
-				default:
-					return GameWorldController.instance.objectMaster.desc[currObj.item_id] +"_"+currObj.index.ToString("d4");// + "_" + currObj.guid.ToString();
-				}
+			//StringController.instance.GetSimpleObjectNameUW(objList[o].item_id)
+			//	return GameWorldController.instance.objectMaster.desc[currObj.item_id] +"_"+currObj.index.ToString("d4");// + "_" + currObj.guid.ToString();
+			return StringController.instance.GetSimpleObjectNameUW(currObj.item_id) +"_"+currObj.index.ToString("d4");
 		}
 
 		/// <summary>
@@ -1782,6 +1775,11 @@ public class ObjectLoader : DataLoader {
 										//Doors will always go at the tile height.
 										int newZpos=tileMap.Tiles[x,y].floorHeight * 4;
 										offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
+										int BridgeIndex = ObjectLoader.findObjectByTypeInTile (objList, objList[index].tileX, objList[index].tileY, ObjectInteraction.BRIDGE);
+										if (BridgeIndex != -1) {
+											offZ = ObjectLoader.CalcObjectXYZ (_RES, tileMap, LevelInfo, objList, BridgeIndex, objList[index].tileX, objList[index].tileY, 0).y*100;
+										}
+
 
 										switch (objList[index].heading*45)
 										{//Move the object position so it can located in the right position in the centre of the frame.
@@ -1838,6 +1836,10 @@ public class ObjectLoader : DataLoader {
 										if (objList[index].x == 7){offX = offX - 1.5f;}
 										if (objList[index].y == 0){offY = offY + 1.5f;}
 										if (objList[index].y == 7){offY = offY - 1.5f;}
+										if (zpos==127)
+										{
+											offZ -=25f;
+										}
 										break;
 								}
 
@@ -1910,11 +1912,11 @@ public class ObjectLoader : DataLoader {
 							position = CalcObjectXYZ(_RES,tilemap,tilemap.Tiles,instance.objInfo,i,instance.objInfo[i].tileX,instance.objInfo[i].tileY,1);
 						}
 					
-					instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i],parent,position);
-										if(parent==GameWorldController.instance.InventoryMarker)
-										{//FOr inventory objects spawned
-												instance.objInfo[i].instance.PickedUp=true;	
-										}
+						instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i], instance.objInfo, parent, position);
+						if(parent==GameWorldController.instance.InventoryMarker)
+						{//FOr inventory objects spawned
+								instance.objInfo[i].instance.PickedUp=true;	
+						}
 					}
 				}
 			}
@@ -2034,7 +2036,7 @@ public class ObjectLoader : DataLoader {
 						}		
 				}
 
-				foreach (Transform t in GameWorldController.instance.LevelMarker()) 
+				foreach (Transform t in GameWorldController.instance.DynamicObjectMarker()) 
 				{
 						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
 						{
@@ -3810,5 +3812,23 @@ public class ObjectLoader : DataLoader {
 				}
 		}
 
+
+		public static int findObjectByTypeInTile(ObjectLoaderInfo[] objList, short tileX, short tileY, int itemType)
+		{
+				for (int i=0; i<=objList.GetUpperBound(0);i++)
+				{
+						if (
+								(objList[i].tileX == tileX)
+								&&
+								(objList[i].tileY == tileY)
+								&&
+								(objList[i].GetItemType() == itemType)
+						)
+						{
+								return i;	
+						}
+				}
+				return -1;
+		}
 
 }

@@ -1358,7 +1358,7 @@ public class Magic : UWEBase {
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,1,256);
 						newobjt.is_quant=1;
 						newobjt.InUseFlag=1;
-						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
+						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
 				}
 		}
 
@@ -1398,13 +1398,13 @@ public class Magic : UWEBase {
 						myObj.layer=LayerMask.NameToLayer("NPCs");
 						myObj.tag="NPCs";
 						myObj.transform.position = ray.GetPoint(dropRange);
-						myObj.transform.parent = GameWorldController.instance.LevelMarker();
+						myObj.transform.parent = GameWorldController.instance.DynamicObjectMarker();
 						GameWorldController.MoveToWorld(myObj);*/
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0,2);
-						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
+						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
 						myObj.GetComponent<NPC>().npc_gtarg= (short)gtarg;
 						myObj.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_follow;
 						myObj.GetComponent<NPC>().npc_hp=GameWorldController.instance.objDat.critterStats[spKM.RndNPC-64].AvgHit;
@@ -1982,14 +1982,14 @@ public class Magic : UWEBase {
 					myObj.layer=LayerMask.NameToLayer("UWObjects");
 					myObj.transform.position=pos;
 					myObj.transform.Rotate(-90,0,0);
-					myObj.transform.parent=GameWorldController.instance.LevelMarker();
+					myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 					GameWorldController.MoveToWorld(myObj);
 					ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
 					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 					*/
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0,256);
-					GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, pos).gameObject;
+								GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
 					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(),0,0,0);
 					newobjt.InUseFlag=1;
 					//TODO: Fix this
@@ -2281,7 +2281,7 @@ public class Magic : UWEBase {
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
-				myObj.transform.parent=GameWorldController.instance.LevelMarker();
+				myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 				GameWorldController.MoveToWorld(myObj);
 				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_393",true);
 				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 393, 393, 393,ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
@@ -2300,7 +2300,7 @@ public class Magic : UWEBase {
 
 */
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0,256);
-				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,pos);
+				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,pos);
 				newobjt.InUseFlag=1;
 
 				//000~001~276~The Rune of Warding is placed. \n
@@ -3363,10 +3363,10 @@ public class Magic : UWEBase {
 						oli.flags=3;
 						oli.quality=60;
 						oli.InUseFlag=1;
-						GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.LevelMarker().gameObject,Location).gameObject;
+						GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject,Location).gameObject;
 						projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 						//projectile.name = "MagicProjectile_" + SummonCount++;
-						projectile.transform.parent=GameWorldController.instance.LevelMarker();
+						projectile.transform.parent=GameWorldController.instance.DynamicObjectMarker();
 						//GameWorldController.MoveToWorld(projectile); //not needed since slot already assigned above.
 						//ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 

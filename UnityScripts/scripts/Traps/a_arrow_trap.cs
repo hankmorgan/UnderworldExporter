@@ -19,7 +19,7 @@ public class a_arrow_trap : trap_base {
 		int item_index=  (objInt().quality << 5) | objInt().owner;
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
-		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject, this.transform.position).gameObject;
+				GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
 		if (objInt().tileX ==TileMap.ObjectStorageTile)
 		{
 			Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(triggerX,triggerY);

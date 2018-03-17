@@ -45,6 +45,7 @@ public class UWCharacter : Character {
 		public bool Paralyzed;
 		public float currYVelocity;
 		public float fallSpeed;
+		public float braking;
 		/// <summary>
 		/// Is the player fleeing from combat (recently attacked and no weapon drawn)
 		/// </summary>
@@ -59,6 +60,7 @@ public class UWCharacter : Character {
 		public bool isLeaping;
 		public bool isRoaming;
 		public bool isFloating;
+		public bool isSpeeding;
 		public bool isWaterWalking;
 		public bool isTelekinetic;
 		public bool isTimeFrozen;
@@ -349,6 +351,8 @@ public class UWCharacter : Character {
 				case TerrainDatLoader.TerrainTypes.Lavafall:
 						{
 								onLava=true;
+								onIce=false;
+								isSwimming=false;
 								break;
 						}
 				case TerrainDatLoader.TerrainTypes.Ice_wall:
@@ -360,6 +364,7 @@ public class UWCharacter : Character {
 								}
 								onIce=true;
 								onLava=false;
+								isSwimming=false;
 								break;
 						}
 				case TerrainDatLoader.TerrainTypes.WaterFlowEast:
@@ -376,9 +381,16 @@ public class UWCharacter : Character {
 				default:
 						if (IceCurrentVelocity !=Vector3.zero)
 						{
-								Debug.Log("cancelling ice velocity");
+								braking += Time.deltaTime;
+								//Debug.Log("cancelling ice velocity");
+								IceCurrentVelocity = Vector3.Lerp(IceCurrentVelocity, Vector3.zero, braking);
 						}
-						IceCurrentVelocity= Vector3.zero; isSwimming=false; onIce=false;onLava=false; break;
+						else
+						{
+								braking =0f;
+						}
+						//IceCurrentVelocity= Vector3.zero; 
+						isSwimming=false; onIce=false;onLava=false; break;
 				}
 
 				if ((isWaterWalking) || (Grounded==false) || (onBridge) )
@@ -397,7 +409,6 @@ public class UWCharacter : Character {
 						this.GetComponent<CharacterController> ().Move (new Vector3 (IceCurrentVelocity.x * Time.deltaTime* speedMultiplier, 0, IceCurrentVelocity.z * Time.deltaTime* speedMultiplier));					
 				}
 				onIcePrev=onIce;		
-
 
 				base.Update ();
 
@@ -513,6 +524,10 @@ public class UWCharacter : Character {
 				{
 						playerMotor.movement.maxFallSpeed=0.0f;	
 				}
+				if ((!isSpeeding) && (!onIce))
+				{
+					speedMultiplier=1f;
+				}
 
 				//GameWorldController.instance.getMus().
 				WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
@@ -621,7 +636,7 @@ public class UWCharacter : Character {
 								newobjt.enchantment=QuantityObj.enchantment;
 								newobjt.doordir=QuantityObj.doordir;
 								newobjt.invis=QuantityObj.invis;
-								ObjectInteraction Split =ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.LevelMarker().gameObject,QuantityObj.transform.position);
+								ObjectInteraction Split =ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,QuantityObj.transform.position);
 								newobjt.InUseFlag=1;
 								QuantityObj.link-=quant;
 

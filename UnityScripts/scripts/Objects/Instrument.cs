@@ -104,7 +104,7 @@ public class Instrument : object_base {
 							//create the cup of wonder.
 
 							ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0,256);
-							GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+														GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 							GameWorldController.MoveToInventory(cup);
 							ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
 

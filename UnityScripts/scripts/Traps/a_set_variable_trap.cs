@@ -109,7 +109,7 @@ public class a_set_variable_trap : a_variable_trap {
 				break;
 
 			}
-			Debug.Log (this.name  + "Operation + " + operation + "Variable " + objInt().zpos + " was " + OrigValue + " now =" + Quest.instance.variables[objInt().zpos] + " using varvalue" + VariableValue());
+			Debug.Log (this.name  + "Operation + " + operation + " Variable " + objInt().zpos + " was " + OrigValue + " now =" + Quest.instance.variables[objInt().zpos] + " using varvalue" + VariableValue());
 		}
 		else
 		{//Bitwise operations on bitfield

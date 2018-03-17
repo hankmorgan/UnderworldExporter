@@ -98,7 +98,12 @@ The path to the sword hilt on Level3
 								DestroyDoorPortion("rear_over_" + doorname);
 								DestroyDoorPortion("rear_rightside_" + doorname);	
 								DestroyDoorPortion(doorname);
-								TileMapRenderer.RenderDoorwayFront(
+														TileMapRenderer.RenderDoor(
+																GameWorldController.instance.DynamicObjectMarker().gameObject,
+																GameWorldController.instance.currentTileMap(),
+																GameWorldController.instance.CurrentObjectList(),
+																door.GetComponent<ObjectInteraction>().objectloaderinfo.index);
+/*								TileMapRenderer.RenderDoorwayFront(
 								GameWorldController.instance.LevelModel,
 													GameWorldController.instance.currentTileMap(),
 													GameWorldController.instance.CurrentObjectList(),
@@ -109,10 +114,11 @@ The path to the sword hilt on Level3
 												GameWorldController.instance.currentTileMap(),
 												GameWorldController.instance.CurrentObjectList(),
 												door.GetComponent<ObjectInteraction>().objectloaderinfo
-													);
+													);*/
 								Vector3 objPos = door.transform.position;
 								ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
 																door.GetComponent<ObjectInteraction>().objectloaderinfo,
+																GameWorldController.instance.CurrentObjectList().objInfo,
 																GameWorldController.instance.LevelModel,objPos
 														);
 
