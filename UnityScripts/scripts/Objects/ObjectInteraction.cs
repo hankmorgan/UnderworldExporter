@@ -146,6 +146,8 @@ public class ObjectInteraction : UWEBase {
 		public const int DREAM_PLANT = 125;
 		public const int BED = 126;
 		public const int ARROW = 127;
+		public const int A_PROXIMITY_TRAP = 128;
+
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
 	public const int 	SHOCK_TRIGGER_NULL		=	1001	;//Not set off automatically, must be explicitly activated by a switch or another trigger
@@ -2264,7 +2266,12 @@ public class ObjectInteraction : UWEBase {
 						CreateSprite=false;
 						break;
 				case UNIMPLEMENTED_TRAP:
+						Debug.Log("Unimplemented trap " + myObj.name);
 						myObj.AddComponent<trap_base>();
+						CreateSprite=false;
+						break;
+				case A_PROXIMITY_TRAP:
+						myObj.AddComponent<a_proximity_trap>();
 						CreateSprite=false;
 						break;
 				case TMAP_CLIP:

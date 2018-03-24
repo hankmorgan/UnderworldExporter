@@ -8,6 +8,7 @@ A trigger that fires when the player character enters it
 	//public bool playerStartedInTrigger=false;
 	
 	protected Vector3 boxDimensions= new Vector3(1.2f,1.2f,1.2f);
+	protected Vector3 boxCenter= Vector3.zero;
 	//protected short TriggerReady=5;
 	//protected bool startPosTested=false;
 	public bool playerStartedInTrigger=false;
@@ -20,6 +21,7 @@ A trigger that fires when the player character enters it
 		base.Start ();
 		box=this.gameObject.AddComponent<BoxCollider>();
 		box.size = boxDimensions;//new Vector3(1.2f, 1.2f, 1.2f);
+		box.center=boxCenter;
 		box.isTrigger=true;
 
 		CheckPlayerStart();

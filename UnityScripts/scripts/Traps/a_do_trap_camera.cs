@@ -30,7 +30,7 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
+		//Debug.Log (this.name);
 		StartCoroutine (ActivateCamera());
 	}
 
@@ -40,7 +40,9 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 		UWCharacter.Instance.playerCam.enabled=false;
 		cam.enabled=true;
 		lt.enabled=true;
+		UWCharacter.Instance.isRoaming=true;
 		yield return new WaitForSeconds(5.0f);
+		UWCharacter.Instance.isRoaming=false;
 		cam.enabled=false;
 		lt.enabled=false;
 		UWCharacter.Instance.playerCam.tag="MainCamera";

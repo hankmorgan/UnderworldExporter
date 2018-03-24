@@ -5240,9 +5240,25 @@ public class Magic : UWEBase {
 						}
 				case SpellEffect.UW2_Spell_Effect_PoisonResistance:
 						{
-							Debug.Log ("Poison Resistance enchantment");
-							SpellResultType=SpellResultNone;
-							break;
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_ResistPoison(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
+												SpellResultType=SpellResultPassive;
+										}
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_ResistPoison(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;
 						}
 
 				case SpellEffect.UW2_Spell_Effect_PoisonWeapon:

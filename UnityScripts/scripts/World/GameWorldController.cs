@@ -1060,9 +1060,9 @@ public class GameWorldController : UWEBase {
 								float targetY= (float)startY*1.2f + 0.6f;
 								float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX,startY)))*0.15f;
 
-								UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
+								UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.1f,targetY);
 								//Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
-								UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);	
+								UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.1f,targetY);	
 						}
 						startX=-1;startY=-1;
 
@@ -2332,13 +2332,13 @@ public class GameWorldController : UWEBase {
 								writer.WriteLine("\t\t<Index>" + o +  "</Index>");
 								writer.WriteLine("\t\t<Address>" + objList[o].address +  "</Address>");
 								writer.WriteLine("\t\t<StaticProperties>"); 
-								writer.WriteLine("\t\t\t<ItemID>" + objList[o].InUseFlag+"</ItemID>"); 
+								writer.WriteLine("\t\t\t<ItemID>" + objList[o].item_id+"</ItemID>"); 
 								writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag+"</InUse>"); 
-								writer.WriteLine("\t\t\t<Flags>" + objList[o].InUseFlag+"</Flags>"); 
-								writer.WriteLine("\t\t\t<Enchant>" + objList[o].InUseFlag+"</Enchant>"); 
-								writer.WriteLine("\t\t\t<DoorDir>" + objList[o].InUseFlag+"</DoorDir>"); 
-								writer.WriteLine("\t\t\t<Invis>" + objList[o].InUseFlag+"</Invis>"); 
-								writer.WriteLine("\t\t\t<IsQuant>" + objList[o].InUseFlag+"</IsQuant>"); 
+								writer.WriteLine("\t\t\t<Flags>" + objList[o].flags+"</Flags>"); 
+								writer.WriteLine("\t\t\t<Enchant>" + objList[o].enchantment+"</Enchant>"); 
+								writer.WriteLine("\t\t\t<DoorDir>" + objList[o].doordir+"</DoorDir>"); 
+								writer.WriteLine("\t\t\t<Invis>" + objList[o].invis+"</Invis>"); 
+								writer.WriteLine("\t\t\t<IsQuant>" + objList[o].is_quant+"</IsQuant>"); 
 								writer.WriteLine("\t\t\t<Texture>" + objList[o].texture+"</Texture>"); 
 								writer.WriteLine("\t\t\t<Position>"); 
 								writer.WriteLine("\t\t\t\t<tileX>" + objList[o].tileX + "</tileX>");
@@ -2354,7 +2354,38 @@ public class GameWorldController : UWEBase {
 								writer.WriteLine("\t\t</StaticProperties>"); 
 								if (o<256)
 								{//mobile info
-
+										writer.WriteLine("\t\t<MobileProperties>"); 
+										writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
+										writer.WriteLine("\t\t\t<Projectile_Yaw>" + objList[o].Projectile_Yaw + "</Projectile_Yaw>");
+										writer.WriteLine("\t\t\t<MobileUnk00>" + objList[o].MobileUnk00 + "</MobileUnk00>");
+										writer.WriteLine("\t\t\t<MobileUnk01>" + objList[o].MobileUnk01 + "</MobileUnk01>");
+										writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
+										writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
+										writer.WriteLine("\t\t\t<MobileUnk02>" + objList[o].MobileUnk02 + "</MobileUnk02>");
+										writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");
+										writer.WriteLine("\t\t\t<MobileUnk03>" + objList[o].MobileUnk03 + "</MobileUnk03>");
+										writer.WriteLine("\t\t\t<MobileUnk04>" + objList[o].MobileUnk04 + "</MobileUnk04>");
+										writer.WriteLine("\t\t\t<npc_talkedto>" + objList[o].npc_talkedto+ "</npc_talkedto>");
+										writer.WriteLine("\t\t\t<npc_attitude>" + objList[o].npc_attitude + "</npc_attitude>");
+										writer.WriteLine("\t\t\t<MobileUnk05>" + objList[o].MobileUnk05 + "</MobileUnk05>");
+										writer.WriteLine("\t\t\t<npc_height>" + objList[o].npc_height + "</npc_height>");
+										writer.WriteLine("\t\t\t<MobileUnk06>" + objList[o].MobileUnk06 + "</MobileUnk06>");
+										writer.WriteLine("\t\t\t<MobileUnk07>" + objList[o].MobileUnk07 + "</MobileUnk07>");
+										writer.WriteLine("\t\t\t<MobileUnk08>" + objList[o].MobileUnk08 + "</MobileUnk08>");
+										writer.WriteLine("\t\t\t<MobileUnk09>" + objList[o].MobileUnk09 + "</MobileUnk09>");
+										writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
+										writer.WriteLine("\t\t\t<MobileUnk10>" + objList[o].MobileUnk10 + "</MobileUnk10>");
+										writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
+										writer.WriteLine("\t\t\t<MobileUnk11>" + objList[o].MobileUnk11 + "</MobileUnk11>");
+										writer.WriteLine("\t\t\t<MobileUnk12>" + objList[o].MobileUnk12 + "</MobileUnk12>");
+										writer.WriteLine("\t\t\t<npc_yhome>" + objList[o].npc_yhome + "</npc_yhome>");
+										writer.WriteLine("\t\t\t<npc_xhome>" + objList[o].npc_xhome + "</npc_xhome>");
+										writer.WriteLine("\t\t\t<npc_heading>" + objList[o].npc_heading + "</npc_heading>");
+										writer.WriteLine("\t\t\t<MobileUnk13>" + objList[o].MobileUnk13 + "</MobileUnk13>");
+										writer.WriteLine("\t\t\t<npc_hunger>" + objList[o].npc_hunger + "</npc_hunger>");
+										writer.WriteLine("\t\t\t<MobileUnk14>" + objList[o].MobileUnk14 + "</MobileUnk14>");
+										writer.WriteLine("\t\t\t<npc_whoami>" + objList[o].npc_whoami + "</npc_whoami>");
+										writer.WriteLine("\t\t</MobileProperties>"); 
 								}
 								writer.WriteLine("\t</Object>");	
 						}
