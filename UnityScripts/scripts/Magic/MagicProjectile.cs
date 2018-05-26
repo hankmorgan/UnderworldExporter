@@ -51,8 +51,9 @@ public class MagicProjectile : MobileObject {
 	{
 		if (rgd!=null)
 		{
-			Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
-			Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
+						//TODO:Figure out properly
+			//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
+			//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
 
 			x=rgd.velocity.x;
 			y=rgd.velocity.y;

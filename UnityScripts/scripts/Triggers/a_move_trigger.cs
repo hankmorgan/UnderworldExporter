@@ -26,6 +26,11 @@ A trigger that fires when the player character enters it
 
 		CheckPlayerStart();
 
+		if (objInt().flags ==0)		
+		{
+			Debug.Log(this.name + " Move trigger with flags = 0. Should this trigger fire when moved into?");
+		}
+
 		//Check if this trap points to a teleport trap that goes to another level
 		if ( (objInt().tileX<TileMap.TileMapSizeX) && (objInt().tileY<TileMap.TileMapSizeY))
 		{
@@ -75,7 +80,7 @@ A trigger that fires when the player character enters it
 		if (playerStartedInTrigger!=true)
 		{
 			if (((other.name==UWCharacter.Instance.name) || (other.name=="Feet")) && (!GameWorldController.EditorMode) && (Quest.instance.InDreamWorld==false))
-			{				
+			{	
 				Activate (other.gameObject);
 			}	
 		}	
