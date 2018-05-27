@@ -30,8 +30,8 @@ public class ObjectLoaderInfo : UWClass {
 		public int link	;
 
 		public short npc_hp;
-		public short Projectile_Yaw;
-		public short MobileUnk00;
+		public short Projectile_Yaw;//this might be wrong
+		public short MissileHeading; //heading of the bouncing missile
 		public short MobileUnk01;
 		public short npc_goal;	
 		public short npc_gtarg;

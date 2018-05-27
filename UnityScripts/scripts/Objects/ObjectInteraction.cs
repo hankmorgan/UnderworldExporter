@@ -147,6 +147,7 @@ public class ObjectInteraction : UWEBase {
 		public const int BED = 126;
 		public const int ARROW = 127;
 		public const int A_PROXIMITY_TRAP = 128;
+		public const int BOUNCING_PROJECTILE = 129;
 
 			/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
 	public const int	SHOCK_TRIGGER_ENTRY		=	1000;	//Player enters trigger's tile
@@ -1553,7 +1554,7 @@ public class ObjectInteraction : UWEBase {
 						npc.Projectile_Yaw=objI.Projectile_Yaw;
 						npc.npc_height = objI.npc_height;
 
-						npc.MobileUnk00 = objI.MobileUnk00;
+						npc.MissileHeading = objI.MissileHeading;
 						npc.MobileUnk01 = objI.MobileUnk01;
 						npc.MobileUnk02 = objI.MobileUnk02;
 						npc.MobileUnk03 = objI.MobileUnk03;
@@ -2073,7 +2074,7 @@ public class ObjectInteraction : UWEBase {
 
 								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
 								//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
-								//float force=0f;
+								float force=0f;
 								switch(currObj.item_id)
 								{
 								case 20://fireball
@@ -2081,7 +2082,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Fireball spFB =new SpellProp_Fireball();
 												spFB.init (SpellEffect.UW1_Spell_Effect_Fireball,myObj);
 												mgp.spellprop=spFB;
-												//force=spFB.Force;
+												force=spFB.Force;
 												break;
 										}
 
@@ -2090,7 +2091,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Fireball spLN =new SpellProp_Fireball();
 												spLN.init (SpellEffect.UW1_Spell_Effect_ElectricalBolt,myObj);
 												mgp.spellprop=spLN;
-												//force=spLN.Force;
+												force=spLN.Force;
 												break;
 										}
 								case 22://acid
@@ -2098,7 +2099,7 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_Acid spAC =new SpellProp_Acid();
 												spAC.init (SpellEffect.UW1_Spell_Effect_Acid_alt01,myObj);
 												mgp.spellprop=spAC;
-												//force=spAC.Force;
+												force=spAC.Force;
 												break;
 										}
 								case 23://magic missile
@@ -2107,19 +2108,23 @@ public class ObjectInteraction : UWEBase {
 												SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
 												spOJ.init (SpellEffect.UW1_Spell_Effect_MagicArrow,myObj);
 												mgp.spellprop=spOJ;
-												//force=spOJ.Force;
+												force=spOJ.Force;
 												break;
 										}
 								}
 
 										//force =0;
-								//Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
-								//myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
+								Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
+								myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
 							}
 							
 							break;	
 						}
-
+				case BOUNCING_PROJECTILE:
+						{
+							myObj.AddComponent<BouncingProjectile>();
+							break;
+						}
 				case BUTTON:
 						myObj.AddComponent<ButtonHandler>();
 						RemoveBillboard=true;

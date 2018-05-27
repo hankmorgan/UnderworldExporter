@@ -23,7 +23,7 @@ public class MobileObject : object_base {
 		public short npc_name;       //    (not used in uw1)
 		public short npc_height;
 		//Unknown/research
-		public short MobileUnk00;
+		public short MissileHeading;
 		public short MobileUnk01;
 		public short MobileUnk02;
 		public short MobileUnk03;

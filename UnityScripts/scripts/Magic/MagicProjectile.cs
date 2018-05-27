@@ -42,12 +42,11 @@ public class MagicProjectile : MobileObject {
 		}
 		else
 		{
-			Detonate (collision);
-		
+			Detonate (collision);		
 		}
 	}
 
-	public void Update()
+	public virtual void Update()
 	{
 		if (rgd!=null)
 		{
@@ -67,7 +66,7 @@ public class MagicProjectile : MobileObject {
 
 
 	
-	void Detonate (Collision collision)
+	protected virtual void Detonate (Collision collision)
 	{
 		HasHit = true;
 		//Code to execute when a projectile hits a spot (for launching AOE effects)
@@ -99,7 +98,7 @@ public class MagicProjectile : MobileObject {
 		DestroyProjectile ();
 	}
 
-	void DestroyProjectile ()
+	protected virtual void DestroyProjectile ()
 	{
 		ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction> ();
 		if (objIntThis != null) {

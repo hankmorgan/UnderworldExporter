@@ -566,7 +566,7 @@ public class ObjectLoader : DataLoader {
 								//objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
 								objList[x].Projectile_Yaw =(short) (ExtractBits(val, 0, 5));
 								//objList[x].MobileUnk00 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)>>5 & 0x7 );
-								objList[x].MobileUnk00 = (short) (ExtractBits(val, 5, 3));
+								objList[x].MissileHeading = (short) (ExtractBits(val, 5, 3));
 
 								objList[x].MobileUnk01 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
 
@@ -2487,7 +2487,7 @@ public class ObjectLoader : DataLoader {
 								info.Projectile_Pitch=npc.Projectile_Pitch;
 								info.Projectile_Yaw=npc.Projectile_Yaw;
 
-								info.MobileUnk00 = npc.MobileUnk00;
+								info.MissileHeading = npc.MissileHeading;
 								info.MobileUnk01 = npc.MobileUnk01;
 								info.MobileUnk02 = npc.MobileUnk02;
 								info.MobileUnk03 = npc.MobileUnk03;

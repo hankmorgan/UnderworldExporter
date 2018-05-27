@@ -27,7 +27,7 @@
 26	0	0	0	1	a_crossbow	26	26	1	1	0	1
 27	0	0	0	112	a_homing_dart	27	27	1	1	0	1
 28	0	0	0	112	a_snowball	28	28	1	1	0	1
-29	0	0	0	112	a_fireball	29	29	1	1	0	1
+29	0	0	0	129	a_fireball	29	29	1	1	0	1
 30	0	0	0	112	a_satellite	30	30	1	1	0	1
 31	0	0	0	1	a_jeweled_bow	31	31	1	1	0	1
 32	0	0	0	2	a_leather_vest	32	32	1	1	0	1
@@ -412,8 +412,8 @@
 411	0	0	0	69	unknown	411	411	0	0	0	1
 412	0	0	0	69	unknown	412	412	0	0	0	1
 413	0	0	0	69	unknown	413	413	0	0	0	1
-414	0	0	0	69	a_flam_rune	414	414	0	0	0	1
-415	0	0	0	69	a_tym_rune	415	415	0	0	0	1
+414	0	0	0	46	a_flam_rune	414	414	0	0	0	1
+415	0	0	0	46	a_tym_rune	415	415	0	0	0	1
 416	0	0	0	54	a_move_trigger	416	416	0	0	0	1
 417	0	0	0	55	a_pick_up_trigger	417	417	0	0	0	1
 418	0	0	0	56	a_use_trigger	418	418	0	0	0	1
