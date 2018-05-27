@@ -1036,7 +1036,9 @@ public class SaveGame : Loader {
 								WriteGameOptions(writer);
 								break;
 								//}
-
+						case 0x306://paralyze timer
+								DataLoader.WriteInt8(writer,(int)UWCharacter.Instance.ParalyzeTimer);
+								break;
 						case 0x361://Item Ids of arena warriors.
 						case 0x362:
 						case 0x363:
@@ -1598,7 +1600,11 @@ public class SaveGame : Loader {
 									//		MusicController.PlayMusic=( ( ( val>>2 ) & 0x1 ) == 1 );
 											break;
 									//}
-
+							case 0x306:
+									{//Timer for paralyzed effect
+										UWCharacter.Instance.ParalyzeTimer= (short)(DataLoader.getValAtAddress(buffer,i,8));
+										break;
+									}
 							case 0x361://Item Ids of arena warriors.
 							case 0x362:
 							case 0x363:

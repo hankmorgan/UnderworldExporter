@@ -43,6 +43,7 @@ public class UWCharacter : Character {
 		public int StealthLevel; //The level of stealth the character has.
 		public int Resistance; //DR from spells.
 		public bool Paralyzed;
+		public float ParalyzeTimer=0f;
 		public float currYVelocity;
 		public float fallSpeed;
 		public float braking;
@@ -454,6 +455,19 @@ public class UWCharacter : Character {
 						//Still processing death.
 						//isSwimming=false;
 						return;
+				}
+				if (_RES==GAME_UW2)
+				{
+					if (ParalyzeTimer > 0)
+						{
+							ParalyzeTimer-=Time.deltaTime;
+						}
+					if (ParalyzeTimer <0)
+						{
+							ParalyzeTimer=0;
+						}
+
+					Paralyzed = (ParalyzeTimer !=0);
 				}
 				if (playerCam.enabled==true)
 				{

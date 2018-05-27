@@ -89,14 +89,6 @@ public class SpellProp : UWClass {
 	}
 
 
-	/// <summary>
-	/// Special code for when the player trips this spell. Used in rune traps (UW2)
-	/// </summary>
-	public virtual void onImpactPlayer()
-	{
-			
-	}
-
 
 	/* ************Sample enchantment Code *********************
 	public override void onHit (ObjectInteraction objInt)

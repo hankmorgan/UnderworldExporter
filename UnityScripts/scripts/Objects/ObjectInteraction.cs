@@ -2207,7 +2207,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_WARD_TRAP:
 						myObj.AddComponent<a_ward_trap>();
-						CreateSprite=false;
+						if (_RES!=GAME_UW2){CreateSprite=false;}
 						break;
 				case A_TELL_TRAP:
 						myObj.AddComponent<a_tell_trap>();

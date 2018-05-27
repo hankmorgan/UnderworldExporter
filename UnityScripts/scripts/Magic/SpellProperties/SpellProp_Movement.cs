@@ -14,7 +14,7 @@ public class SpellProp_Movement : SpellProp {
 		movement.init(EffectID);
 		*/
 		//leap, slowfall, speed, waterwalking, flight
-
+		if (_RES==GAME_UW2){Debug.Log("Unimplemented spell prop for Uw2");}
 		switch (effectId)
 			{
 			case SpellEffect.UW1_Spell_Effect_Leap:
