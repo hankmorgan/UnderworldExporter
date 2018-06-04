@@ -23,7 +23,7 @@ public class MobileObject : object_base {
 		public short npc_name;       //    (not used in uw1)
 		public short npc_height;
 		//Unknown/research
-		public short MissileHeading;
+
 		public short MobileUnk01;
 		public short MobileUnk02;
 		public short MobileUnk03;
@@ -49,7 +49,8 @@ public class MobileObject : object_base {
 		//Projectiles are stored in the mobile object area.
 		//The following properties are currently known
 		[Header("Projectile")]
-		public short Projectile_Yaw;
+		public short MissileHeadingMajor;
+		public short MissileHeadingMinor;
 		public short Projectile_Pitch;
 
 		[Header("RawData")]

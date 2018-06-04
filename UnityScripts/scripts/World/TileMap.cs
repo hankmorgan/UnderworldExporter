@@ -2312,7 +2312,7 @@ public class TileMap : Loader {
 									{//Additional npc mobile data.
 
 											TileMapData[addptr+0x8] = (char)(currobj.npc_hp);
-											TileMapData[addptr+0x9] = (char)((TileMapData[addptr+0x9] & 0xE0) | ((char)(currobj.Projectile_Yaw  & 0x1F )));
+											TileMapData[addptr+0x9] = (char)((currobj.MissileHeadingMajor & 0xE0) | ((char)(currobj.MissileHeadingMinor  & 0x1F )));
 											//+A is copied  unknown value
 											//+B   bits 0-3 npc_goal, 4-11 npc_gtarg, 12-15 is unknown but needs to be copied to prevent npcs duplicating.
 											ByteToWrite=( 

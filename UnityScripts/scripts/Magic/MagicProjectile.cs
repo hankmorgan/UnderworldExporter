@@ -48,16 +48,37 @@ public class MagicProjectile : MobileObject {
 
 	public virtual void Update()
 	{
-		if (rgd!=null)
-		{
-						//TODO:Figure out properly
-			//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
-			//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
+		//Update the projectile position based on various factors
+		//Missile position is based on a cardinal compass heading n,ne,e,se etc and a clockwise rotation of 0 to 31 units to the next heading.
+		npc_xhome = (short)(transform.position.x/1.2f);
+		npc_yhome = (short)(transform.position.z/1.2f);
 
-			x=rgd.velocity.x;
-			y=rgd.velocity.y;
-			z=rgd.velocity.z;
-		}	
+		//if (rgd==null)
+		//{//Use the stored values for motion control instead of the applied force.
+			Vector3 dir;
+			Quaternion deflection = Quaternion.AngleAxis(45f * (float)(MissileHeadingMinor)/32f,Vector3.up);
+			switch (MissileHeadingMajor)
+			{
+			case 1: //ne
+					dir = new Vector3(1f,0f,1f);break;//ok
+			case 2: //e
+					dir = new Vector3(1f,0f,0f);break;//ok
+			case 3: //se
+					dir = new Vector3(1f,0f,-1f);break;//ok
+			case 4: //s
+					dir = new Vector3(0f,0f,-1f);break;
+			case 5: //sw
+					dir = new Vector3(-1f,0f,-1f);break;
+			case 6: //w
+					dir = new Vector3(-1f,0f,0f);break; //ok
+			case 7: //nw						
+					dir = new Vector3(-1f,0f,1f);break;//ok
+			default: //north
+			case 0:
+					dir = new Vector3(0f,0f,1f);break;//ok
+			}
+			this.transform.Translate (deflection * dir * Time.deltaTime);
+		//}	
 		if (DetonateNow)
 		{
 			DestroyProjectile ();	

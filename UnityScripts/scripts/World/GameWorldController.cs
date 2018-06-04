@@ -2356,8 +2356,8 @@ public class GameWorldController : UWEBase {
 								{//mobile info
 										writer.WriteLine("\t\t<MobileProperties>"); 
 										writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
-										writer.WriteLine("\t\t\t<Projectile_Yaw>" + objList[o].Projectile_Yaw + "</Projectile_Yaw>");
-										writer.WriteLine("\t\t\t<MissileHeading>" + objList[o].MissileHeading + "</MissileHeading>");
+										writer.WriteLine("\t\t\t<MissileHeadingMinor>" + objList[o].MissileHeadingMinor + "</MissileHeadingMinor>");
+										writer.WriteLine("\t\t\t<MissileHeadingMajor>" + objList[o].MissileHeadingMajor + "</MissileHeadingMajor>");
 										writer.WriteLine("\t\t\t<MobileUnk01>" + objList[o].MobileUnk01 + "</MobileUnk01>");
 										writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
 										writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");

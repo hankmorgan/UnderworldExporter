@@ -26,7 +26,8 @@ public class DataLoader :Loader {
 		public struct UWBlock
 		{
 				public char[] Data;
-				public long Address;
+				public long Address; //The file address of the block
+
 				public long DataLen;
 				//UW2 specific
 				public int CompressionFlag;

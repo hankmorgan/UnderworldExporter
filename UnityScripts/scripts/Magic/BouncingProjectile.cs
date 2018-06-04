@@ -19,10 +19,10 @@ public class BouncingProjectile : MagicProjectile {
 		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
 	}
 
-	public override void Update ()
+	/*public override void Update ()
 	{
 				Vector3 dir;
-				switch (MissileHeading)
+				switch (MissileHeadingMajor)
 				{
 				case 1: //ne
 						dir = new Vector3(1f,0f,1f);break;//ok
@@ -43,8 +43,7 @@ public class BouncingProjectile : MagicProjectile {
 						dir = new Vector3(0f,0f,1f);break;//ok
 				}
 				this.transform.Translate (dir * Time.deltaTime);
-
-		}
+		}*/
 
 
 	protected override void DestroyProjectile ()
@@ -57,25 +56,25 @@ public class BouncingProjectile : MagicProjectile {
 	void reflectprojectile()
 	{
 		HasHit=false;
-		switch (MissileHeading)	
+		switch (MissileHeadingMajor)	
 		{//Proper behaviour here will need to reflect based on what is being reflected against rather than just reverse course.
 		case 1: //ne
-				MissileHeading = 5;break;//ok
+				MissileHeadingMajor = 5;break;//ok
 		case 2: //e
-				MissileHeading = 6;break;//ok
+				MissileHeadingMajor = 6;break;//ok
 		case 3: //se
-				MissileHeading = 7;break;//ok
+				MissileHeadingMajor = 7;break;//ok
 		case 4: //s
-				MissileHeading = 0;break;
+				MissileHeadingMajor = 0;break;
 		case 5: //sw
-				MissileHeading = 1;break;
+				MissileHeadingMajor = 1;break;
 		case 6: //w
-				MissileHeading = 2;break; //ok
+				MissileHeadingMajor = 2;break; //ok
 		case 7: //nw						
-				MissileHeading = 3;break;//ok
+				MissileHeadingMajor = 3;break;//ok
 		default: //north
 		case 0:
-				MissileHeading = 4;break;//ok
+				MissileHeadingMajor = 4;break;//ok
 		}
 	}
 }

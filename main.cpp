@@ -605,7 +605,7 @@ int main()
 									printf("40 - 47 Academy\n");
 									printf("48 - 51 Tomb\n");
 									printf("56 - 58 Pits\n");
-									printf("64 - 72 Void (65 is stickman level)\n");
+									printf("64 - 72 Void (65 is stickman level, 66 scint vault)\n");
 									printf(">");
 									scanf("%d", &levelNo);
 									if (!(

@@ -3400,7 +3400,7 @@ public class Magic : UWEBase {
 						if (Caster.name!=UWCharacter.Instance.name)
 						{
 								projectile.transform.position=Caster.transform.position;
-								projectile.transform.rotation=Caster.transform.rotation;
+								//projectile.transform.rotation=Caster.transform.rotation;
 						}	
 						else
 						{
@@ -3448,10 +3448,58 @@ public class Magic : UWEBase {
 				//It is like converting the Vector3.forward to transform.forward
 				direction = projectile.transform.TransformDirection( direction.normalized );
 				//End	
+				Debug.Log(direction);
+				Debug.Log (Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up ));
+				//TEST   projectile.GetComponent<Rigidbody>().AddForce(direction*force);
 
-				projectile.GetComponent<Rigidbody>().AddForce(direction*force);
+				projectile.transform.rotation = Quaternion.identity;
+				float projectileAngle = Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up );
+				MagicProjectile mgp = projectile.GetComponent<MagicProjectile>();
+				if (mgp!=null)
+				{
+						if ((projectileAngle >=0) && (projectileAngle<45))
+						{
+								mgp.MissileHeadingMajor = 0;//North
+								mgp.MissileHeadingMinor = (short)((projectileAngle/45) * 32);
+						}
+						else if ((projectileAngle >=45) && (projectileAngle<90))
+						{
+								mgp.MissileHeadingMajor = 1;//North east
+								mgp.MissileHeadingMinor = (short)(((projectileAngle-45)/45) * 32);
+						}
+						else if ((projectileAngle >=90) && (projectileAngle<135))
+						{
+								mgp.MissileHeadingMajor = 2;//east
+								mgp.MissileHeadingMinor = (short)(((projectileAngle-90)/45) * 32);
+						}
+						else if ((projectileAngle >=135) && (projectileAngle<=180))
+						{
+								mgp.MissileHeadingMajor = 3;//south east
+								mgp.MissileHeadingMinor = (short)(((projectileAngle-135)/45) * 32);
+						}
+						//negative angles
+						else if ((projectileAngle <0) && (projectileAngle>=-45))
+						{
+								mgp.MissileHeadingMajor = 7;//North west
+								mgp.MissileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle)/45) * 32)) );
+						}
+						else if ((projectileAngle <-45) && (projectileAngle>=-90))
+						{
+								mgp.MissileHeadingMajor = 6;//west
+								mgp.MissileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-45)/45) * 32) ));
+						}
+						else if ((projectileAngle <-90) && (projectileAngle>=-135))
+						{
+								mgp.MissileHeadingMajor = 5;//south west
+								mgp.MissileHeadingMinor =(short)( 32 -  Mathf.Abs( (((-projectileAngle-90)/45) * 32) ));
+						}
+						else if ((projectileAngle <-135) && (projectileAngle>=-180))
+						{
+								mgp.MissileHeadingMajor = 4;//south
+								mgp.MissileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-135)/45) * 32)));
+						}
 
-
+					}
 
 
 				//	projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);

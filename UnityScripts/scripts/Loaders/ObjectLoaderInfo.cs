@@ -30,8 +30,8 @@ public class ObjectLoaderInfo : UWClass {
 		public int link	;
 
 		public short npc_hp;
-		public short Projectile_Yaw;//this might be wrong
-		public short MissileHeading; //heading of the bouncing missile
+		public short MissileHeadingMinor;//defection to the right of the missile from the major heading.
+		public short MissileHeadingMajor; //Cardinal direction 0 to 7 of the missile. North = 0 turning clockwise to North west = 7
 		public short MobileUnk01;
 		public short npc_goal;	
 		public short npc_gtarg;
@@ -48,7 +48,7 @@ public class ObjectLoaderInfo : UWClass {
 		public short MobileUnk08;
 		public short MobileUnk09;
 		public short Projectile_Pitch;
-		public short MobileUnk10;
+		public short MobileUnk10; //sign bit for pitch = 1 is down. 0 = up?
 		public short npc_voidanim; 
 		public short MobileUnk11;
 		public short MobileUnk12;

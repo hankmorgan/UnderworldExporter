@@ -500,7 +500,7 @@ public class ObjectLoader : DataLoader {
 						objList[x].tileY=TileMap.ObjectStorageTile;
 						objList[x].levelno = (short)LevelNo ;	
 						objList[x].next=0;
-						objList[x].address = objectsAddress+address_pointer;
+						objList[x].address =  lev_ark.Address + objectsAddress+address_pointer;
 						objList[x].invis = 0;
 						//objList[x].item_id = (int)(getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 						objList[x].item_id = (int)ExtractBits(Vals[0], 0, 9);
@@ -564,9 +564,9 @@ public class ObjectLoader : DataLoader {
 
 								int val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
 								//objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-								objList[x].Projectile_Yaw =(short) (ExtractBits(val, 0, 5));
+								objList[x].MissileHeadingMinor = (short)(ExtractBits(val, 0, 5));
 								//objList[x].MobileUnk00 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)>>5 & 0x7 );
-								objList[x].MissileHeading = (short) (ExtractBits(val, 5, 3));
+								objList[x].MissileHeadingMajor = (short)(ExtractBits(val, 5, 3));
 
 								objList[x].MobileUnk01 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
 
@@ -1030,7 +1030,7 @@ public class ObjectLoader : DataLoader {
 
 					objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
 					
-					objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+					objList[x].MissileHeadingMinor =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
 					objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
 
 
@@ -2485,9 +2485,9 @@ public class ObjectLoader : DataLoader {
 								info.npc_name = npc.npc_name;	
 								info.npc_health = npc.npc_height;
 								info.Projectile_Pitch=npc.Projectile_Pitch;
-								info.Projectile_Yaw=npc.Projectile_Yaw;
+								info.MissileHeadingMinor=npc.MissileHeadingMinor;
 
-								info.MissileHeading = npc.MissileHeading;
+								info.MissileHeadingMajor = npc.MissileHeadingMajor;
 								info.MobileUnk01 = npc.MobileUnk01;
 								info.MobileUnk02 = npc.MobileUnk02;
 								info.MobileUnk03 = npc.MobileUnk03;

@@ -1551,10 +1551,10 @@ public class ObjectInteraction : UWEBase {
 						npc.gtargName=gtargName;
 
 						npc.Projectile_Pitch=objI.Projectile_Pitch;
-						npc.Projectile_Yaw=objI.Projectile_Yaw;
+						npc.MissileHeadingMinor=objI.MissileHeadingMinor;
 						npc.npc_height = objI.npc_height;
 
-						npc.MissileHeading = objI.MissileHeading;
+						npc.MissileHeadingMajor = objI.MissileHeadingMajor;
 						npc.MobileUnk01 = objI.MobileUnk01;
 						npc.MobileUnk02 = objI.MobileUnk02;
 						npc.MobileUnk03 = objI.MobileUnk03;
@@ -2060,6 +2060,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case A_MAGIC_PROJECTILE:
 						{
+							skipRotate=true;
 							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
 							SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 							if (GameWorldController.LoadingObjects)
@@ -2067,9 +2068,9 @@ public class ObjectInteraction : UWEBase {
 								BoxCollider box = myObj.GetComponent<BoxCollider>();
 								box.size = new Vector3(0.2f,0.2f,0.2f);
 								box.center= new Vector3(0.0f,0.1f,0.0f);
-								Rigidbody rgd = myObj.GetComponent<Rigidbody>();
-								rgd.freezeRotation =true;
-								mgp.rgd=rgd;
+								//Rigidbody rgd = myObj.GetComponent<Rigidbody>();
+							//	rgd.freezeRotation =true;
+								//mgp.rgd=rgd;
 								//GameWorldController.UnFreezeMovement(myObj);
 
 								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
@@ -2114,14 +2115,15 @@ public class ObjectInteraction : UWEBase {
 								}
 
 										//force =0;
-								Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
-								myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
+								//Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
+								//myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
 							}
 							
 							break;	
 						}
 				case BOUNCING_PROJECTILE:
 						{
+							skipRotate=true;
 							myObj.AddComponent<BouncingProjectile>();
 							break;
 						}

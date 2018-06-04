@@ -731,8 +731,8 @@ void PrintUWObjects(ObjectItem objList[1600])
 			fprintf(LOGFILE, "\tName: %s", UniqueObjectName(objList[x]));
 			//if (objList[x].InUseFlag == 1)
 			//	{
-				//fprintf(LOGFILE, "\tAddress: %d", objList[x].address);
-			fprintf(LOGFILE, "\tOffset: %d", RelativeAddress);
+			fprintf(LOGFILE, "\tAbsolute Address: %d", objList[x].address);
+			fprintf(LOGFILE, "\tOffset in block: %d", RelativeAddress);
 				fprintf(LOGFILE, "\tNext : %d", objList[x].next);
 			//	}
 			if (objectMasters[objList[x].item_id].isSet == 1)
