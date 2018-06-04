@@ -1549,12 +1549,12 @@ public class ObjectInteraction : UWEBase {
 						//npc.NavMeshRegion=NavMeshRegion;
 						npc.npc_heading=objI.npc_heading;
 						npc.gtargName=gtargName;
-
+						npc.Projectile_Speed = objI.Projectile_Speed;
 						npc.Projectile_Pitch=objI.Projectile_Pitch;
-						npc.MissileHeadingMinor=objI.MissileHeadingMinor;
+						npc.ProjectileHeadingMinor=objI.ProjectileHeadingMinor;
 						npc.npc_height = objI.npc_height;
 
-						npc.MissileHeadingMajor = objI.MissileHeadingMajor;
+						npc.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
 						npc.MobileUnk01 = objI.MobileUnk01;
 						npc.MobileUnk02 = objI.MobileUnk02;
 						npc.MobileUnk03 = objI.MobileUnk03;
@@ -1564,7 +1564,7 @@ public class ObjectInteraction : UWEBase {
 						npc.MobileUnk07 = objI.MobileUnk07;
 						npc.MobileUnk08 = objI.MobileUnk08;
 						npc.MobileUnk09 = objI.MobileUnk09;
-						npc.MobileUnk10 = objI.MobileUnk10;
+						npc.Projectile_Sign = objI.Projectile_Sign;
 						npc.MobileUnk11 = objI.MobileUnk11;
 						npc.MobileUnk12 = objI.MobileUnk12;
 						npc.MobileUnk13 = objI.MobileUnk13;

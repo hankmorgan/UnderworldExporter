@@ -22,7 +22,7 @@ public class BouncingProjectile : MagicProjectile {
 	/*public override void Update ()
 	{
 				Vector3 dir;
-				switch (MissileHeadingMajor)
+				switch (ProjectileHeadingMajor)
 				{
 				case 1: //ne
 						dir = new Vector3(1f,0f,1f);break;//ok
@@ -56,25 +56,25 @@ public class BouncingProjectile : MagicProjectile {
 	void reflectprojectile()
 	{
 		HasHit=false;
-		switch (MissileHeadingMajor)	
+		switch (ProjectileHeadingMajor)	
 		{//Proper behaviour here will need to reflect based on what is being reflected against rather than just reverse course.
 		case 1: //ne
-				MissileHeadingMajor = 5;break;//ok
+				ProjectileHeadingMajor = 5;break;//ok
 		case 2: //e
-				MissileHeadingMajor = 6;break;//ok
+				ProjectileHeadingMajor = 6;break;//ok
 		case 3: //se
-				MissileHeadingMajor = 7;break;//ok
+				ProjectileHeadingMajor = 7;break;//ok
 		case 4: //s
-				MissileHeadingMajor = 0;break;
+				ProjectileHeadingMajor = 0;break;
 		case 5: //sw
-				MissileHeadingMajor = 1;break;
+				ProjectileHeadingMajor = 1;break;
 		case 6: //w
-				MissileHeadingMajor = 2;break; //ok
+				ProjectileHeadingMajor = 2;break; //ok
 		case 7: //nw						
-				MissileHeadingMajor = 3;break;//ok
+				ProjectileHeadingMajor = 3;break;//ok
 		default: //north
 		case 0:
-				MissileHeadingMajor = 4;break;//ok
+				ProjectileHeadingMajor = 4;break;//ok
 		}
 	}
 }

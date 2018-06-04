@@ -33,7 +33,6 @@ public class MobileObject : object_base {
 		public short MobileUnk07;
 		public short MobileUnk08;
 		public short MobileUnk09;
-		public short MobileUnk10;
 		public short MobileUnk11;
 		public short MobileUnk12;
 		public short MobileUnk13;
@@ -49,9 +48,11 @@ public class MobileObject : object_base {
 		//Projectiles are stored in the mobile object area.
 		//The following properties are currently known
 		[Header("Projectile")]
-		public short MissileHeadingMajor;
-		public short MissileHeadingMinor;
+		public short ProjectileHeadingMajor;
+		public short ProjectileHeadingMinor;
+		public short Projectile_Speed;
 		public short Projectile_Pitch;
+		public short Projectile_Sign;
 
 		[Header("RawData")]
 		public short[] NPC_DATA=new short[19];

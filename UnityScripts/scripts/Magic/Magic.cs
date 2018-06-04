@@ -3224,7 +3224,7 @@ public class Magic : UWEBase {
 								{
 										GameObject projectile = CreateMagicProjectile(ray.GetPoint(dropRange/2.0f), caster,spellprop);
 										projectile.transform.rotation=Quaternion.LookRotation(ray.direction.normalized);
-										LaunchProjectile(projectile,ray,dropRange,spellprop.Force,spellprop.spread);										
+										LaunchMagicProjectile(projectile,spellprop.spread);										
 								}
 
 								UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
@@ -3238,7 +3238,8 @@ public class Magic : UWEBase {
 						for (int i=0;i<spellprop.noOfCasts;i++)
 						{
 							GameObject projectile = CreateMagicProjectile(caster.GetComponent<ObjectInteraction>().GetImpactPoint(), caster.GetComponent<ObjectInteraction>().GetImpactGameObject(),spellprop);
-							LaunchProjectile(projectile,spellprop.Force);
+							//projectile.transform.rotation=Quaternion.LookRotation(ray.direction.normalized);
+							LaunchMagicProjectile(projectile,spellprop.spread);
 						}
 						return true;
 				}
@@ -3259,7 +3260,7 @@ public class Magic : UWEBase {
 				{
 						direction = (target.transform.position-caster.transform.position);
 						direction.Normalize();
-						//LaunchProjectile(projectile,spellprop.Force,direction);	
+						//LaunchMagicProjectile(projectile,spellprop.Force,direction);	
 				}
 				else
 				{
@@ -3286,7 +3287,8 @@ public class Magic : UWEBase {
 						direction = projectile.transform.TransformDirection( direction.normalized );
 						//End	
 				}
-				LaunchProjectile(projectile,spellprop.Force,direction);	
+				projectile.transform.rotation = Quaternion.LookRotation(direction);
+				LaunchMagicProjectile(projectile,spellprop.spread);	
 				return true;
 		}	
 
@@ -3332,7 +3334,9 @@ public class Magic : UWEBase {
 			}
 			if (projectile!=null)
 			{
-					LaunchProjectile(projectile,spellprop.Force,targetV);	
+					//LaunchMagicProjectile(projectile,spellprop.Force,targetV);
+					projectile.transform.rotation = Quaternion.LookRotation(targetV);
+					LaunchMagicProjectile(projectile, spellprop.spread);
 			}
 			
 			return true;
@@ -3421,7 +3425,8 @@ public class Magic : UWEBase {
 		/// <param name="dropRange">How far away from the caster to launch</param>
 		/// <param name="force">Force of the projectile</param>
 		/// <param name="spread">Spread radius</param>
-		void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
+		//void LaunchMagicProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
+		void LaunchMagicProjectile(GameObject projectile, float spread)
 		{
 				//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
 			//	Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
@@ -3448,55 +3453,72 @@ public class Magic : UWEBase {
 				//It is like converting the Vector3.forward to transform.forward
 				direction = projectile.transform.TransformDirection( direction.normalized );
 				//End	
-				Debug.Log(direction);
-				Debug.Log (Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up ));
+				//Debug.Log(direction);
+				//Debug.Log (Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up ));
 				//TEST   projectile.GetComponent<Rigidbody>().AddForce(direction*force);
 
 				projectile.transform.rotation = Quaternion.identity;
 				float projectileAngle = Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up );
+				//Debug.Log(projectileAngle);
+				//float projectilePitchAngle = Vector3.SignedAngle(new Vector3(direction.x, 0f, direction.y) , direction,  Vector3.right);
+				//float projectilePitchAngle = Vector3.SignedAngle(Vector3.zero,  new Vector3(0f,direction.y, 0f),  Vector3.right);
+
+
 				MagicProjectile mgp = projectile.GetComponent<MagicProjectile>();
 				if (mgp!=null)
 				{
+						mgp.Projectile_Pitch=0;
+						if (direction.y <0)
+						{
+								mgp.Projectile_Sign = 0;
+						}
+						else
+						{
+								mgp.Projectile_Sign = 1;	
+						}
+
+						//mgp.Projectile_Pitch = (short)((projectilePitchAngle /90f) * 7f);
+						mgp.Projectile_Pitch = (short)(Mathf.Abs((direction.y * 7)));
 						if ((projectileAngle >=0) && (projectileAngle<45))
 						{
-								mgp.MissileHeadingMajor = 0;//North
-								mgp.MissileHeadingMinor = (short)((projectileAngle/45) * 32);
+								mgp.ProjectileHeadingMajor = 0;//North
+								mgp.ProjectileHeadingMinor = (short)((projectileAngle/45) * 32);
 						}
 						else if ((projectileAngle >=45) && (projectileAngle<90))
 						{
-								mgp.MissileHeadingMajor = 1;//North east
-								mgp.MissileHeadingMinor = (short)(((projectileAngle-45)/45) * 32);
+								mgp.ProjectileHeadingMajor = 1;//North east
+								mgp.ProjectileHeadingMinor = (short)(((projectileAngle-45)/45) * 32);
 						}
 						else if ((projectileAngle >=90) && (projectileAngle<135))
 						{
-								mgp.MissileHeadingMajor = 2;//east
-								mgp.MissileHeadingMinor = (short)(((projectileAngle-90)/45) * 32);
+								mgp.ProjectileHeadingMajor = 2;//east
+								mgp.ProjectileHeadingMinor = (short)(((projectileAngle-90)/45) * 32);
 						}
 						else if ((projectileAngle >=135) && (projectileAngle<=180))
 						{
-								mgp.MissileHeadingMajor = 3;//south east
-								mgp.MissileHeadingMinor = (short)(((projectileAngle-135)/45) * 32);
+								mgp.ProjectileHeadingMajor = 3;//south east
+								mgp.ProjectileHeadingMinor = (short)(((projectileAngle-135)/45) * 32);
 						}
 						//negative angles
 						else if ((projectileAngle <0) && (projectileAngle>=-45))
 						{
-								mgp.MissileHeadingMajor = 7;//North west
-								mgp.MissileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle)/45) * 32)) );
+								mgp.ProjectileHeadingMajor = 7;//North west
+								mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle)/45) * 32)) );
 						}
 						else if ((projectileAngle <-45) && (projectileAngle>=-90))
 						{
-								mgp.MissileHeadingMajor = 6;//west
-								mgp.MissileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-45)/45) * 32) ));
+								mgp.ProjectileHeadingMajor = 6;//west
+								mgp.ProjectileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-45)/45) * 32) ));
 						}
 						else if ((projectileAngle <-90) && (projectileAngle>=-135))
 						{
-								mgp.MissileHeadingMajor = 5;//south west
-								mgp.MissileHeadingMinor =(short)( 32 -  Mathf.Abs( (((-projectileAngle-90)/45) * 32) ));
+								mgp.ProjectileHeadingMajor = 5;//south west
+								mgp.ProjectileHeadingMinor =(short)( 32 -  Mathf.Abs( (((-projectileAngle-90)/45) * 32) ));
 						}
 						else if ((projectileAngle <-135) && (projectileAngle>=-180))
 						{
-								mgp.MissileHeadingMajor = 4;//south
-								mgp.MissileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-135)/45) * 32)));
+								mgp.ProjectileHeadingMajor = 4;//south
+								mgp.ProjectileHeadingMinor = (short)(32 -  Mathf.Abs( (((-projectileAngle-135)/45) * 32)));
 						}
 
 					}
@@ -3510,10 +3532,10 @@ public class Magic : UWEBase {
 		/// </summary>
 		/// <param name="projectile">Projectile.</param>
 		/// <param name="force">Force to apply to the projectile</param>
-		void LaunchProjectile(GameObject projectile, float force)
-		{//Launch directly forward
-				projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward*force);
-		}
+		//void LaunchMagicProjectile(GameObject projectile, float force)
+		//{//Launch directly forward
+		//		projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward*force);
+		//}
 
 		/// <summary>
 		/// Launchs the projectile along the specified vector
@@ -3521,10 +3543,10 @@ public class Magic : UWEBase {
 		/// <param name="projectile">Projectile.</param>
 		/// <param name="force">Force.</param>
 		/// <param name="direction">Direction to launch the projectile in</param>
-		void LaunchProjectile (GameObject projectile, float force, Vector3 direction)
-		{
-				projectile.GetComponent<Rigidbody>().AddForce (direction*force);
-		}
+		//void LaunchMagicProjectile (GameObject projectile, float force, Vector3 direction)
+		//{
+		//		projectile.GetComponent<Rigidbody>().AddForce (direction*force);
+		//}
 
 		/// <summary>
 		/// Handles pressing Q to cast the current spell runes

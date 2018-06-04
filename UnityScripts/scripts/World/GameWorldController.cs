@@ -2356,8 +2356,8 @@ public class GameWorldController : UWEBase {
 								{//mobile info
 										writer.WriteLine("\t\t<MobileProperties>"); 
 										writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
-										writer.WriteLine("\t\t\t<MissileHeadingMinor>" + objList[o].MissileHeadingMinor + "</MissileHeadingMinor>");
-										writer.WriteLine("\t\t\t<MissileHeadingMajor>" + objList[o].MissileHeadingMajor + "</MissileHeadingMajor>");
+										writer.WriteLine("\t\t\t<ProjectileHeadingMinor>" + objList[o].ProjectileHeadingMinor + "</ProjectileHeadingMinor>");
+										writer.WriteLine("\t\t\t<ProjectileHeadingMajor>" + objList[o].ProjectileHeadingMajor + "</ProjectileHeadingMajor>");
 										writer.WriteLine("\t\t\t<MobileUnk01>" + objList[o].MobileUnk01 + "</MobileUnk01>");
 										writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
 										writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
@@ -2373,8 +2373,9 @@ public class GameWorldController : UWEBase {
 										writer.WriteLine("\t\t\t<MobileUnk07>" + objList[o].MobileUnk07 + "</MobileUnk07>");
 										writer.WriteLine("\t\t\t<MobileUnk08>" + objList[o].MobileUnk08 + "</MobileUnk08>");
 										writer.WriteLine("\t\t\t<MobileUnk09>" + objList[o].MobileUnk09 + "</MobileUnk09>");
+										writer.WriteLine("\t\t\t<Projectile_Speed>" + objList[o].Projectile_Speed + "</Projectile_Speed>");
 										writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
-										writer.WriteLine("\t\t\t<MobileUnk10>" + objList[o].MobileUnk10 + "</MobileUnk10>");
+										writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
 										writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
 										writer.WriteLine("\t\t\t<MobileUnk11>" + objList[o].MobileUnk11 + "</MobileUnk11>");
 										writer.WriteLine("\t\t\t<MobileUnk12>" + objList[o].MobileUnk12 + "</MobileUnk12>");

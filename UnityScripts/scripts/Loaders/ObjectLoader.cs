@@ -564,9 +564,9 @@ public class ObjectLoader : DataLoader {
 
 								int val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
 								//objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-								objList[x].MissileHeadingMinor = (short)(ExtractBits(val, 0, 5));
+								objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 5));
 								//objList[x].MobileUnk00 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)>>5 & 0x7 );
-								objList[x].MissileHeadingMajor = (short)(ExtractBits(val, 5, 3));
+								objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 3));
 
 								objList[x].MobileUnk01 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
 
@@ -604,9 +604,10 @@ public class ObjectLoader : DataLoader {
 
 								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8);
 							//	objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
-								objList[x].Projectile_Pitch =  (short) (ExtractBits(val, 0, 7));
+								objList[x].Projectile_Speed =  (short) (ExtractBits(val, 0, 4));
+								objList[x].Projectile_Pitch =  (short) (ExtractBits(val, 4, 3));
 								//objList[x].MobileUnk11 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) >>6 ) & 0x3);
-								objList[x].MobileUnk10 = (short) (ExtractBits(val, 7, 1));
+								objList[x].Projectile_Sign = (short) (ExtractBits(val, 7, 1));
 
 								val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8);																
 								//objList[x].npc_voidanim=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
@@ -1030,8 +1031,10 @@ public class ObjectLoader : DataLoader {
 
 					objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
 					
-					objList[x].MissileHeadingMinor =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-					objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
+					objList[x].ProjectileHeadingMinor =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
+								//Projectile_Speed
+
+				  
 
 
 					//int i=0;
@@ -2485,9 +2488,10 @@ public class ObjectLoader : DataLoader {
 								info.npc_name = npc.npc_name;	
 								info.npc_health = npc.npc_height;
 								info.Projectile_Pitch=npc.Projectile_Pitch;
-								info.MissileHeadingMinor=npc.MissileHeadingMinor;
+								info.Projectile_Speed = npc.Projectile_Speed;
+								info.ProjectileHeadingMinor=npc.ProjectileHeadingMinor;
 
-								info.MissileHeadingMajor = npc.MissileHeadingMajor;
+								info.ProjectileHeadingMajor = npc.ProjectileHeadingMajor;
 								info.MobileUnk01 = npc.MobileUnk01;
 								info.MobileUnk02 = npc.MobileUnk02;
 								info.MobileUnk03 = npc.MobileUnk03;
@@ -2497,7 +2501,7 @@ public class ObjectLoader : DataLoader {
 								info.MobileUnk07 = npc.MobileUnk07;
 								info.MobileUnk08 = npc.MobileUnk08;
 								info.MobileUnk09 = npc.MobileUnk09;
-								info.MobileUnk10 = npc.MobileUnk10;
+								info.Projectile_Sign = npc.Projectile_Sign;
 								info.MobileUnk11 = npc.MobileUnk11;
 								info.MobileUnk12 = npc.MobileUnk12;
 								info.MobileUnk13 = npc.MobileUnk13;
