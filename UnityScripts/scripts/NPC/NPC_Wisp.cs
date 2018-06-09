@@ -17,7 +17,7 @@ public class NPC_Wisp : NPC {
 	/// <summary>
 	/// NPC Door update is not required.
 	/// </summary>
-	protected override void Update ()
+	public override void Update() 
 	{
 		//base.Update ();
 	}

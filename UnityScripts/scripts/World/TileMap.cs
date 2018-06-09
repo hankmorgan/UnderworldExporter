@@ -348,7 +348,7 @@ public class TileMap : Loader {
 				//short y;
 				short CeilingTexture=0;
 
-				short textureMapSize=64;//Different for UW2
+				//short textureMapSize=64;//Different for UW2
 
 				UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 

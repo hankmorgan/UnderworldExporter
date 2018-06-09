@@ -17,7 +17,7 @@ public class NPC_VoidCreature : NPC {
 	}
 	
 	// Override update so NPC will do nothing
-	protected override void Update ()
+	public override void Update() 
 	{
 
 	}

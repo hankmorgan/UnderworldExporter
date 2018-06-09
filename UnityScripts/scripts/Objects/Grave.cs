@@ -14,7 +14,7 @@ public class Grave : Model3D {
 		CreateGrave(this.gameObject,objInt());
 	}*/
 
-	void Update()
+	public override void Update() 
 	{
 		if (LookingAt)
 		{

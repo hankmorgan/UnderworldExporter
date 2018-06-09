@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MobileObject : object_base {
 		
-		//NPC Properties from Underworld
+/*		//NPC Properties from Underworld
 		[Header("UW Properties")]
 		public short npc_whoami;
 		public short npc_voidanim;
@@ -52,9 +52,9 @@ public class MobileObject : object_base {
 		public short ProjectileHeadingMinor;
 		public short Projectile_Speed;
 		public short Projectile_Pitch;
-		public short Projectile_Sign;
+		public short Projectile_Sign;*/
 
-		[Header("RawData")]
-		public short[] NPC_DATA=new short[19];
+		//[Header("RawData")]
+		//public short[] NPC_DATA=new short[19];
 
 }

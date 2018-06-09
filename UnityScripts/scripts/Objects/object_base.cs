@@ -6,8 +6,61 @@ using UnityEngine.UI;
 /// Works hand in hand with ObjectInteraction
 /// </summary>
 public class object_base : UWEBase {
+		//float timeforce=0;
+		//Mobile object information.
+		//Moved here to properly support objects that are in motion.
+		[Header("UW Properties")]
+		public short npc_whoami;
+		public short npc_voidanim;
+		public short npc_xhome;        //  x coord of home tile
+		public short npc_yhome;        //  y coord of home tile
+		public short npc_hunger;
+		public short npc_health;
+		public short npc_hp;
+		public short npc_arms;          // (not used in uw1)
+		public short npc_power;
+		public short npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+		public short npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+		public short npc_gtarg;         //goal target; 1:player
+		public short npc_heading;
+		public short npc_talkedto;      // is 1 when player already talked to npc
+		public short npc_level;
+		public short npc_name;       //    (not used in uw1)
+		public short npc_height;
+		//Unknown/research
 
-	
+		public short MobileUnk01;
+		public short MobileUnk02;
+		public short MobileUnk03;
+		public short MobileUnk04;
+		public short MobileUnk05;
+		public short MobileUnk06;
+		public short MobileUnk07;
+		public short MobileUnk08;
+		public short MobileUnk09;
+		public short MobileUnk11;
+		public short MobileUnk12;
+		public short MobileUnk13;
+		public short MobileUnk14;
+
+
+		[Header("AI Target")]
+		public GameObject gtarg;
+		public string gtargName;
+
+
+
+		//Projectiles are stored in the mobile object area.
+		//The following properties are currently known
+		[Header("Projectile")]
+		public short ProjectileHeadingMajor;
+		public short ProjectileHeadingMinor;
+		public short Projectile_Speed;
+		public short Projectile_Pitch;
+		public short Projectile_Sign;
+
+
+
 	
 	//The Object interaction that is on this object.
 	protected ObjectInteraction _objInt;
@@ -625,6 +678,26 @@ public class object_base : UWEBase {
 		}
 
 		/// <summary>
+		/// Event to raise when object is saved.
+		/// </summary>
+		public virtual void OnSaveObjectEvent()
+		{
+			//TODO:objects which are in motion (eg projectiles) will be updated to move between the mobile and static object lists as appropiate
+				//as well as update their positioning values.
+
+				/*
+				 if object is in motion
+				 	Reset rotation if needed.
+				 	get direction along xy and z planes
+				 	convert to mobile object files.
+				 	ensure object is in mobile object list
+				 else
+				 	ensure object is in static object list.
+				 	clear values as needed
+				 */ 
+		}
+
+		/// <summary>
 		/// Determines whether this object type can be picked up regardless of what is set in common object properties.
 		/// </summary>
 		/// <returns><c>true</c> if this instance can be picked up; otherwise, <c>false</c>.</returns>
@@ -747,6 +820,145 @@ public class object_base : UWEBase {
 		public virtual void MoveToInventoryEvent()
 		{
 
+		}
+
+
+		public virtual void Update()
+		{
+				//Uncomment this code to watch objects fly off in different directions!
+				/*				if  (this.name=="_Gronk")
+				{
+						return;
+				}
+				if (this.transform.parent!=GameWorldController.instance.DynamicObjectMarker())
+				{
+						return;
+				}
+				if (objInt().debugindex>256) 
+				{
+						return;
+				}
+				//Update the projectile position based on various factors
+				//Missile position is based on a cardinal compass heading n,ne,e,se etc and a clockwise rotation of 0 to 31 units to the next heading.
+				npc_xhome = (short)(transform.position.x/1.2f);
+				npc_yhome = (short)(transform.position.z/1.2f);
+
+				//if (rgd==null)
+				//{//Use the stored values for motion control instead of the applied force.
+				Vector3 dir;
+				Quaternion deflectionXY = Quaternion.AngleAxis(45f * (float)(ProjectileHeadingMinor)/32f,Vector3.up);
+				//Quaternion deflectionZ;
+				float z;
+				if (Projectile_Sign == 0) 
+				{//projectile goes down
+						//deflectionZ = Quaternion.AngleAxis(-90f * (float)(Projectile_Pitch)/7f,Vector3.right);
+						z = -1 * ( (float)(Projectile_Pitch)/7f) ;
+				}
+				else
+				{//projectile goes up
+						//deflectionZ = Quaternion.AngleAxis(+90f * (float)(Projectile_Pitch)/7f,Vector3.right);	
+						z = +1 * ((float)(Projectile_Pitch)/7f) ;
+				}
+				switch (ProjectileHeadingMajor)
+				{
+				case 1: //ne
+						dir = new Vector3(1f,z,1f);break;//ok
+				case 2: //e
+						dir = new Vector3(1f,z,0f);break;//ok
+				case 3: //se
+						dir = new Vector3(1f,z,-1f);break;//ok
+				case 4: //s
+						dir = new Vector3(0f,z,-1f);break;
+				case 5: //sw
+						dir = new Vector3(-1f,z,-1f);break;
+				case 6: //w
+						dir = new Vector3(-1f,z,0f);break; //ok
+				case 7: //nw						
+						dir = new Vector3(-1f,z,1f);break;//ok
+				default: //north
+				case 0:
+						dir = new Vector3(0f,z,1f);break;//ok
+				}
+				//this.transform.Translate (deflectionXY * dir * Time.deltaTime);
+				timeforce+=Time.deltaTime;
+				if (timeforce >=1f)
+				{
+						timeforce=0f;
+						if (this.GetComponent<Rigidbody>()!=null)						
+						{
+								this.GetComponent<Rigidbody>().AddForce(deflectionXY * dir );
+						}	
+				}*/
+			
+		}
+
+		/// <summary>
+		/// Converts the properties in the mobile object values to a vector
+		/// </summary>
+		/// <returns>The properties to vector.</returns>
+		/// <param name="obj">Object.</param>
+		/// Assumes object has no rotation.
+		public static Vector3 ProjectilePropsToVector (object_base obj)
+		{
+				Vector3 dir;
+				Quaternion deflectionXY = Quaternion.AngleAxis (45f * (float)(obj.ProjectileHeadingMinor) / 32f, Vector3.up);
+				//Quaternion deflectionZ;
+				float z;
+				if (obj.Projectile_Sign == 0) 
+				{
+						//projectile goes down
+						z = -1 * ((float)(obj.Projectile_Pitch) / 7f);
+				}
+				else 
+				{
+						//projectile goes up
+						z = +1 * ((float)(obj.Projectile_Pitch) / 7f);
+				}
+				switch (obj.ProjectileHeadingMajor) 
+				{
+				case 1:
+						//ne
+						dir = new Vector3 (1f, z, 1f);
+						break;
+						//ok
+				case 2:
+						//e
+						dir = new Vector3 (1f, z, 0f);
+						break;
+						//ok
+				case 3:
+						//se
+						dir = new Vector3 (1f, z, -1f);
+						break;
+						//ok
+				case 4:
+						//s
+						dir = new Vector3 (0f, z, -1f);
+						break;
+				case 5:
+						//sw
+						dir = new Vector3 (-1f, z, -1f);
+						break;
+				case 6:
+						//w
+						dir = new Vector3 (-1f, z, 0f);
+						break;
+						//ok
+				case 7:
+						//nw						
+						dir = new Vector3 (-1f, z, 1f);
+						break;
+						//ok
+				default:
+						//north
+				case 0:
+						dir = new Vector3 (0f, z, 1f);
+						break;
+						//ok
+				}
+
+			//	Debug.Log(deflectionXY*dir);
+				return deflectionXY * dir ;
 		}
 
 }

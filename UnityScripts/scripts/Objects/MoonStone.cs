@@ -17,8 +17,9 @@ public class MoonStone : object_base {
 		/// </summary>
 		/// TODO: only update when position changes?
 		/// Or find when on spell cast or Update when leaving level.
-	void Update()
+	public override void Update() 
 	{
+		base.Update();
 		if (objInt().PickedUp==false)
 		{
 			UWCharacter.Instance.MoonGateLevel = (short)(GameWorldController.instance.LevelNo+1);

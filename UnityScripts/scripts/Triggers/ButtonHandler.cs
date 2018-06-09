@@ -81,7 +81,7 @@ public class ButtonHandler : Decal {
 		}
 	}
 
-		void Update()
+		public override void Update() 
 		{
 				if (isRotarySwitch()==false)
 				{

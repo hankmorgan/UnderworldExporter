@@ -129,8 +129,9 @@ public class Instrument : object_base {
 		/// <summary>
 		/// Plays the notes to match the keys pressed
 		/// </summary>
-	void Update()
+	public override void Update() 
 	{
+		base.Update();
 		if ((PlayingInstrument == true) && (CurrentInstrument==this.name))
 		{
 			MusicInstrumentInteaction();			

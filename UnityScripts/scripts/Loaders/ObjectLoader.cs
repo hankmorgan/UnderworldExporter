@@ -2043,6 +2043,14 @@ public class ObjectLoader : DataLoader {
 				{
 						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
 						{
+								t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
+						}
+				}
+
+				foreach (Transform t in GameWorldController.instance.DynamicObjectMarker()) 
+				{
+						if (t.gameObject.GetComponent<ObjectInteraction>()!=null)
+						{
 								ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
 								//Copy back the info stored on the object interaction to the lists.
 								if (objInt.objectloaderinfo==null)
@@ -2464,10 +2472,10 @@ public class ObjectLoader : DataLoader {
 			info.tileX=objInt.tileX;
 			info.tileY=objInt.tileY;
 
-				//Npcs specific
+				//mobile object specific
 				if (info.index<256)
 				{
-						MobileObject npc = objInt.GetComponent<MobileObject>();
+						object_base npc = objInt.GetComponent<object_base>();
 						if (npc!=null)
 						{
 								info.npc_hp=npc.npc_hp;

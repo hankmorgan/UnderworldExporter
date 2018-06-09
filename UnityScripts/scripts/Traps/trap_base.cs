@@ -115,7 +115,7 @@ public class trap_base : object_base {
 		}
 
 
-		public virtual void Update()
+		public override void Update() 
 		{
 			if (ExecuteNow)
 			{

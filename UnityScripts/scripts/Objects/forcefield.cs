@@ -20,7 +20,7 @@ public class forcefield : object_base {
 	}
 
 
-	void Update()
+	public override void Update() 
 	{
 		bx.enabled=true;
 		if (_RES==GAME_UW2)

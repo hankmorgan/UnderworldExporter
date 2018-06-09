@@ -1526,7 +1526,7 @@ public class ObjectInteraction : UWEBase {
 		/// <param name="myObj">My object.</param>
 		/// <param name="objInt">Object int.</param>
 		/// <param name="objI">Object i.</param>
-		public static void SetNPCProps(GameObject myObj, MobileObject npc, ObjectInteraction objInt, ObjectLoaderInfo objI, string NavMeshRegion,string gtargName)
+		public static void SetMobileProps(GameObject myObj, object_base npc, ObjectInteraction objInt, ObjectLoaderInfo objI)
 		{
 				//NPC npc = myObj.GetComponent<NPC>();
 				if (npc!=null)
@@ -1548,7 +1548,7 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_name=objI.npc_name;       //    (not used in uw1)
 						//npc.NavMeshRegion=NavMeshRegion;
 						npc.npc_heading=objI.npc_heading;
-						npc.gtargName=gtargName;
+						//npc.gtargName=gtargName;
 						npc.Projectile_Speed = objI.Projectile_Speed;
 						npc.Projectile_Pitch=objI.Projectile_Pitch;
 						npc.ProjectileHeadingMinor=objI.ProjectileHeadingMinor;
@@ -1755,6 +1755,7 @@ public class ObjectInteraction : UWEBase {
 				objInt.tileY=currObj.tileY;
 				objInt.objectloaderinfo = currObj;//link back to the list directly.
 				objInt.next=currObj.next;
+
 				//For now just generic.
 				switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
 				{
@@ -1765,7 +1766,7 @@ public class ObjectInteraction : UWEBase {
 						npc = CreateNPC(myObj,objInt,currObj);
 						//CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
 						//SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
-						SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+						//SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 						Container.PopulateContainer(myObj.AddComponent<Container>(),objInt,currObj.parentList);
 						break;	
 					}
@@ -1776,7 +1777,7 @@ public class ObjectInteraction : UWEBase {
 				case NPC_VOID:
 						{
 							NPC_VoidCreature npc = myObj.AddComponent<NPC_VoidCreature>();
-							SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+							//SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 							break;	
 						}
 				case HIDDENDOOR:
@@ -2062,7 +2063,7 @@ public class ObjectInteraction : UWEBase {
 						{
 							skipRotate=true;
 							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
-							SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
+							//SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 							if (GameWorldController.LoadingObjects)
 							{
 								BoxCollider box = myObj.GetComponent<BoxCollider>();
@@ -2409,6 +2410,35 @@ public class ObjectInteraction : UWEBase {
 						break;
 				}
 
+				if (parent.transform == GameWorldController.instance.DynamicObjectMarker())
+				{
+						if (currObj.index<256)//this is a mobile object
+						{
+								if (GameWorldController.instance.objectMaster.type[currObj.item_id] != NPC_TYPE)
+								{
+										skipRotate =true;
+								}
+							SetMobileProps(myObj,myObj.GetComponent<object_base>(),objInt,currObj);
+								if (myObj.GetComponent<Rigidbody>()!=null)
+								{
+										switch (GameWorldController.instance.objectMaster.type[currObj.item_id])
+										{
+										case NPC_TYPE:
+										case A_MAGIC_PROJECTILE:
+										case BOUNCING_PROJECTILE:
+												break;
+										default:
+												GameWorldController.UnFreezeMovement(myObj);
+
+												myObj.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
+												myObj.GetComponent<Rigidbody>().AddForce(150f *  object_base.ProjectilePropsToVector(myObj.GetComponent<object_base>()));													
+												break;
+										}
+								}
+						}
+				}
+
+
 				if((CreateSprite) || (EditorMode))
 				{
 						//GameObject SpriteObj =
@@ -2591,5 +2621,12 @@ public class ObjectInteraction : UWEBase {
 				}
 		}
 
+		/// <summary>
+		/// Event to raise when the object is saved
+		/// </summary>
+		public void OnSaveObjectEvent()
+		{
+			this.GetComponent<object_base>().OnSaveObjectEvent();		
+		}
 
 }

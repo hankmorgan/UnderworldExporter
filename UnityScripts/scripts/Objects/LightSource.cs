@@ -46,7 +46,8 @@ public class LightSource : object_base {
 	/// <summary>
 	/// Ticks down the light source
 	/// </summary>
-	void Update () {
+	public override void Update()  {
+		base.Update();
 		if (IsOn()==true)
 		{
 			if (objInt().PickedUp==false)

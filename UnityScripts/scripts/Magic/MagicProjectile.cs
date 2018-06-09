@@ -46,7 +46,9 @@ public class MagicProjectile : MobileObject {
 		}
 	}
 
-	public virtual void Update()
+
+
+	public override void Update()
 	{
 		//Update the projectile position based on various factors
 		//Missile position is based on a cardinal compass heading n,ne,e,se etc and a clockwise rotation of 0 to 31 units to the next heading.
@@ -55,44 +57,7 @@ public class MagicProjectile : MobileObject {
 
 		//if (rgd==null)
 		//{//Use the stored values for motion control instead of the applied force.
-			Vector3 dir;
-			Quaternion deflectionXY = Quaternion.AngleAxis(45f * (float)(ProjectileHeadingMinor)/32f,Vector3.up);
-				//Quaternion deflectionZ;
-				float z;
-				if (Projectile_Sign == 0) 
-				{//projectile goes down
-						//deflectionZ = Quaternion.AngleAxis(-90f * (float)(Projectile_Pitch)/7f,Vector3.right);
-						z = -1 * ( (float)(Projectile_Pitch)/7f) ;
-				}
-				else
-				{//projectile goes up
-						//deflectionZ = Quaternion.AngleAxis(+90f * (float)(Projectile_Pitch)/7f,Vector3.right);	
-						z = +1 * ((float)(Projectile_Pitch)/7f) ;
-				}
-			switch (ProjectileHeadingMajor)
-			{
-			case 1: //ne
-					dir = new Vector3(1f,z,1f);break;//ok
-			case 2: //e
-					dir = new Vector3(1f,z,0f);break;//ok
-			case 3: //se
-					dir = new Vector3(1f,z,-1f);break;//ok
-			case 4: //s
-					dir = new Vector3(0f,z,-1f);break;
-			case 5: //sw
-					dir = new Vector3(-1f,z,-1f);break;
-			case 6: //w
-					dir = new Vector3(-1f,z,0f);break; //ok
-			case 7: //nw						
-					dir = new Vector3(-1f,z,1f);break;//ok
-			default: //north
-			case 0:
-					dir = new Vector3(0f,z,1f);break;//ok
-			}
-
-
-			this.transform.Translate (deflectionXY * dir * Time.deltaTime);
-
+			this.transform.Translate (ProjectilePropsToVector(this) * Time.deltaTime);
 		//}	
 		if (DetonateNow)
 		{

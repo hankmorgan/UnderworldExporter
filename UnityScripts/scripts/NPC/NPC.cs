@@ -609,7 +609,7 @@ public class NPC : MobileObject {
 		/// Update the NPC state, AI and animations
 		/// </summary>
 		/// AI is only active when the player is close.
-		protected virtual void  Update () {
+		public override void Update() {
 				if (EditorMode==true){return;}
 				bool FreezeNpc=isNPCFrozen();
 				newAnim.FreezeAnimFrame = FreezeNpc;

@@ -16,7 +16,7 @@ public class NPC_Door : NPC {
 	/// <summary>
 	/// NPC Door update is not required.
 	/// </summary>
-	protected override void Update ()
+	public override void Update() 
 	{
 		//base.Update ();
 	}

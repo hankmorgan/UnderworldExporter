@@ -55,7 +55,7 @@ public class trigger_base : object_base {
 		}
 	}
 
-	public virtual void Update()
+	public override void Update() 
 	{
 		if(TriggerMeNow)
 		{
