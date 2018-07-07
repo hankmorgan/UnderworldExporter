@@ -991,6 +991,14 @@ public class Magic : UWEBase {
 							}							
 							break;
 						}//vpy
+
+
+						//Special non rune spells that are readied
+				case "Deadly Seeker":
+						{
+							Cast_DeadlySeeker(caster,false,SpellEffect.UW2_Spell_Effect_DeadlySeeker);
+							break;
+						}
 				default:
 						{
 							Debug.Log("Unknown spell cast:" + MagicWords);
@@ -1156,6 +1164,30 @@ public class Magic : UWEBase {
 				spVOG.CastRaySource = CastFromWindow;
 				CastProjectile(caster, (SpellProp)spVOG);
 		}
+
+
+		/// <summary>
+		/// Casts the deadly seeker homing spell
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect I.</param>
+		void Cast_DeadlySeeker(GameObject caster, bool Ready, int EffectID)
+		{
+			if (Ready==true)
+			{//Ready the spell to be cast.
+						ReadiedSpell= "Deadly Seeker";
+					UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
+			}
+			else
+			{
+				SpellProp_Homing spPF =new SpellProp_Homing();
+				spPF.init (EffectID,caster);
+				spPF.caster=caster;
+				CastProjectile(caster, (SpellProp)spPF);
+			}
+		}
+
 
 		/// <summary>
 		/// Casts the magic open
@@ -2499,7 +2531,7 @@ public class Magic : UWEBase {
 		/// <param name="caster">Caster.</param>
 		/// <param name="hit">RayCast to the found npc for line of sight tests</param>
 		/// <param name="isUndead">0=Any NPCs, 1=Just Undead, 2=Except Undead</param>
-		NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit, int isUndead)
+		public static NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit, int isUndead)
 		{//TODO: is it better to just pick an enemy and just try and launch an invisible projectile at them.
 				//isUndead param
 				//0 = any npc
@@ -2552,6 +2584,29 @@ public class Magic : UWEBase {
 
 				return null;
 		}
+
+
+
+		/// <summary>
+		/// Gets a random npc target around the caster
+		/// </summary>
+		/// <returns>The NPC target random.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="range">How wide an area to search</param>
+		public static NPC GetNPCTargetRandom(GameObject caster, float range)
+		{
+				foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,range))
+				{
+						bool ValidNPCtype=false;
+						if (Col.gameObject.GetComponent<NPC>()!=null)
+						{
+							return Col.gameObject.GetComponent<NPC>();
+						}
+				}
+
+				return null;
+		}
+
 
 
 		/// <summary>
@@ -3428,41 +3483,19 @@ public class Magic : UWEBase {
 		//void LaunchMagicProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
 		void LaunchMagicProjectile(GameObject projectile, float spread)
 		{
-				//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
-			//	Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
-
-				//From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
-				//Start
-
-				//  Try this one first, before using the second one
-				//  The Ray-hits will form a ring
-				//float randomRadius = spread;            
-				//  The Ray-hits will be in a circular area
-				float randomRadius = Random.Range( 0, spread );        
-
+				float randomRadius = Random.Range( 0, spread ); 
 				float randomAngle = Random.Range ( 0, 2 * Mathf.PI );
 
-				//Calculating the raycast direction
+				//Calculating the  direction
 				Vector3 direction = new Vector3(
 						randomRadius * Mathf.Cos( randomAngle ),
 						randomRadius * Mathf.Sin( randomAngle ),
 						10f
 				);
-				//direction= ray.direction+direction;
-				//Make the direction match the transform
-				//It is like converting the Vector3.forward to transform.forward
-				direction = projectile.transform.TransformDirection( direction.normalized );
-				//End	
-				//Debug.Log(direction);
-				//Debug.Log (Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up ));
-				//TEST   projectile.GetComponent<Rigidbody>().AddForce(direction*force);
 
+				direction = projectile.transform.TransformDirection( direction.normalized );
 				projectile.transform.rotation = Quaternion.identity;
 				float projectileAngle = Vector3.SignedAngle(Vector3.forward, new Vector3( direction.x, 0f,direction.z), Vector3.up );
-				//Debug.Log(projectileAngle);
-				//float projectilePitchAngle = Vector3.SignedAngle(new Vector3(direction.x, 0f, direction.y) , direction,  Vector3.right);
-				//float projectilePitchAngle = Vector3.SignedAngle(Vector3.zero,  new Vector3(0f,direction.y, 0f),  Vector3.right);
-
 
 				MagicProjectile mgp = projectile.GetComponent<MagicProjectile>();
 				if (mgp!=null)
@@ -3523,6 +3556,14 @@ public class Magic : UWEBase {
 
 					}
 
+				if (mgp.spellprop.homing)
+				{
+					mgp.BeginHoming();
+				}
+				if (mgp.spellprop.hasTrail)
+				{
+						mgp.BeginVapourTrail();
+				}
 
 				//	projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 		}
@@ -4747,9 +4788,26 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_DeadlySeeker_alt01:
 						{
 							//Wand of deadly seeker. A homing missile
-							Debug.Log("wand of deadly seeker");
-							SpellResultType=SpellResultNone;
-							break;
+							//Debug.Log("wand of deadly seeker");
+							//SpellResultType=SpellResultNone;
+							//break;
+								{
+										if (SpellRule!=SpellRule_TargetVector)
+										{
+												Cast_DeadlySeeker(caster,ready,EffectID);
+										}
+										else
+										{
+												SpellProp_Homing spPF =new SpellProp_Homing();
+												spPF.init (EffectID,caster);
+												spPF.caster=caster;
+												CastProjectile(caster,GetBestSpellVector(caster),(SpellProp)spPF);
+										}
+										SpellResultType=SpellResultNone;
+										break;	
+								}
+
+
 						}
 
 				case SpellEffect.UW2_Spell_Effect_Charm:

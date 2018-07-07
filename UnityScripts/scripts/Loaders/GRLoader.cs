@@ -264,7 +264,7 @@ public class GRLoader : ArtLoader {
 						auxPalIndex=OverrideAuxPalIndex;
 					}
 					datalen = (int)DataLoader.getValAtAddress(ImageFileData,imageOffset+4,16);
-					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
+					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,(datalen+5)*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
 					auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
@@ -284,7 +284,7 @@ public class GRLoader : ArtLoader {
 						auxPalIndex=OverrideAuxPalIndex;
 					}
 					datalen = (int)DataLoader.getValAtAddress(ImageFileData, imageOffset + 4, 16);
-					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,datalen*2)];
+					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,(5+datalen)*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
 					auxpal =PaletteLoader.LoadAuxilaryPal(BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
@@ -328,8 +328,11 @@ public class GRLoader : ArtLoader {
 			NoOfNibbles=NoOfNibbles*2;
 			while (NoOfNibbles > 1)
 			{
-				OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);		//High nibble
-				OutputData[i + 1] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8)) & 0xf);	//Low nibble
+				if (add_ptr<=InputData.GetUpperBound(0))
+				{
+					OutputData[i] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F);		//High nibble
+					OutputData[i + 1] = (char)((DataLoader.getValAtAddress(InputData, add_ptr, 8)) & 0xf);	//Low nibble							
+				}
 				i=i+2;
 				add_ptr++;
 				NoOfNibbles = NoOfNibbles-2;

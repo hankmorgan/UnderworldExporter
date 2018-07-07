@@ -9,6 +9,8 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
+		public GameObject toTest;
+		public float angle;
 		public string[] LayersForRay = new string[]{"Water","MapMesh","Lava","Ice"};
 		public Vector3 Rayposition ;//= //transform.position;
 		public Vector3 Raydirection = Vector3.down;
@@ -342,6 +344,13 @@ public class UWCharacter : Character {
 								FlyingMode();
 						}
 						return;
+				}
+				if (toTest !=null)
+				{
+						Vector3 dstPosition = new Vector3(toTest.transform.position.x,0,toTest.transform.position.z);
+						Vector3 srcPosition = new Vector3(this.transform.position.x,0,this.transform.position.z);
+						angle = Mathf.Atan2(dstPosition.z-srcPosition.z, dstPosition.x-srcPosition.x)*180 / Mathf.PI;	
+						angle+=180f;
 				}
 
 				Grounded =IsGrounded();

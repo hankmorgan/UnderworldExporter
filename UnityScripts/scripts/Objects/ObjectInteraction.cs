@@ -2063,61 +2063,103 @@ public class ObjectInteraction : UWEBase {
 						{
 							skipRotate=true;
 							MagicProjectile mgp= myObj.AddComponent<MagicProjectile>();
-							//SetNPCProps(myObj,(MobileObject)mgp,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
 							if (GameWorldController.LoadingObjects)
 							{
 								BoxCollider box = myObj.GetComponent<BoxCollider>();
 								box.size = new Vector3(0.2f,0.2f,0.2f);
 								box.center= new Vector3(0.0f,0.1f,0.0f);
-								//Rigidbody rgd = myObj.GetComponent<Rigidbody>();
-							//	rgd.freezeRotation =true;
-								//mgp.rgd=rgd;
-								//GameWorldController.UnFreezeMovement(myObj);
-
-								//Projectile_Yaw=(short)((rgd.velocity.y * 128f) +128); 
-								//Projectile_Pitch=(short)((rgd.velocity.x * 128f) +128); 
-								float force=0f;
-								switch(currObj.item_id)
+								switch (_RES)
 								{
-								case 20://fireball
+								case GAME_UW2:
 										{
-												SpellProp_Fireball spFB =new SpellProp_Fireball();
-												spFB.init (SpellEffect.UW1_Spell_Effect_Fireball,myObj);
-												mgp.spellprop=spFB;
-												force=spFB.Force;
-												break;
-										}
+												switch(currObj.item_id)
+												{
+												case 20://fireball
+														{
+																SpellProp_Fireball spFB =new SpellProp_Fireball();
+																spFB.init (SpellEffect.UW2_Spell_Effect_Fireball,myObj);
+																mgp.spellprop=spFB;
+																break;
+														}
+												case 21://lightning
+														{
+																SpellProp_Fireball spLN =new SpellProp_Fireball();
+																spLN.init (SpellEffect.UW2_Spell_Effect_ElectricalBolt,myObj);
+																mgp.spellprop=spLN;
+																break;
+														}
+												case 22://acid
+														{
+																SpellProp_Acid spAC =new SpellProp_Acid();
+																spAC.init (SpellEffect.UW2_Spell_Effect_Acid_alt01,myObj);
+																mgp.spellprop=spAC;
+																break;
+														}
+												case 27://Homing dart/deadly seeker
+																{
+																		SpellProp_Homing spHm =new SpellProp_Homing();
+																		spHm.init (SpellEffect.UW2_Spell_Effect_DeadlySeeker,myObj);
+																		mgp.spellprop=spHm;
+																		break;	
+																}
+												case 23://magic missile
+												default:
+														{
+																SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+																spOJ.init (SpellEffect.UW2_Spell_Effect_MagicArrow,myObj);
+																mgp.spellprop=spOJ;
+																break;
+														}
+												}
 
-								case 21://lightning
-										{
-												SpellProp_Fireball spLN =new SpellProp_Fireball();
-												spLN.init (SpellEffect.UW1_Spell_Effect_ElectricalBolt,myObj);
-												mgp.spellprop=spLN;
-												force=spLN.Force;
 												break;
 										}
-								case 22://acid
-										{
-												SpellProp_Acid spAC =new SpellProp_Acid();
-												spAC.init (SpellEffect.UW1_Spell_Effect_Acid_alt01,myObj);
-												mgp.spellprop=spAC;
-												force=spAC.Force;
-												break;
-										}
-								case 23://magic missile
 								default:
 										{
-												SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
-												spOJ.init (SpellEffect.UW1_Spell_Effect_MagicArrow,myObj);
-												mgp.spellprop=spOJ;
-												force=spOJ.Force;
+												switch(currObj.item_id)
+												{
+												case 20://fireball
+														{
+																SpellProp_Fireball spFB =new SpellProp_Fireball();
+																spFB.init (SpellEffect.UW1_Spell_Effect_Fireball,myObj);
+																mgp.spellprop=spFB;
+																break;
+														}
+												case 21://lightning
+														{
+																SpellProp_Fireball spLN =new SpellProp_Fireball();
+																spLN.init (SpellEffect.UW1_Spell_Effect_ElectricalBolt,myObj);
+																mgp.spellprop=spLN;
+																break;
+														}
+												case 22://acid
+														{
+																SpellProp_Acid spAC =new SpellProp_Acid();
+																spAC.init (SpellEffect.UW1_Spell_Effect_Acid_alt01,myObj);
+																mgp.spellprop=spAC;
+																break;
+														}
+												case 23://magic missile
+												default:
+														{
+																SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+																spOJ.init (SpellEffect.UW1_Spell_Effect_MagicArrow,myObj);
+																mgp.spellprop=spOJ;
+																break;
+														}
+												}
 												break;
 										}
-								}
 
-										//force =0;
-								//Vector3 direction =new Vector3( ((float)currObj.Projectile_Pitch-128f)/128f, ((float)currObj.Projectile_Yaw-128f)/128f);
-								//myObj.GetComponent<Rigidbody>().AddForce(direction*force);	
+								}
+								if (mgp.spellprop.homing)
+								{
+										mgp.BeginHoming();
+								}
+								if (mgp.spellprop.hasTrail)
+								{
+										mgp.BeginVapourTrail();
+								}
 							}
 							
 							break;	

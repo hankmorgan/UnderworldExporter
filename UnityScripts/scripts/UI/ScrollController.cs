@@ -89,7 +89,7 @@ public class ScrollController : GuiBase {
 
 
 	public void ListAdd(string text)
-	{
+	{			
 		if (ptr==MaxEntries)		
 		{			
 			for (int i=0;i<txtToDisplay.GetUpperBound(0);i++)
@@ -113,9 +113,9 @@ public class ScrollController : GuiBase {
 			result = result+ txtToDisplay[i] + "\n";
 		}
 		NewUIOUt.text=result;
-				if (useDragon)
-				{
-					Dragons.MoveScroll();
-				}
+		if (useDragon)
+		{
+			Dragons.MoveScroll();
+		}
 	}
 }

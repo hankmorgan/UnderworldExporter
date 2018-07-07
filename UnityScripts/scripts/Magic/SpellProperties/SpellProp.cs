@@ -45,6 +45,10 @@ public class SpellProp : UWClass {
 	public int impactFrameEnd;
 	public static UWCharacter playerUW;
 
+	//Does the projectile home in on a target.
+	public bool homing = false;
+	public bool hasTrail =false;
+
 	public bool silent;
 	
 	public GameObject caster;

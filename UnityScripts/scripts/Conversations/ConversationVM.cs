@@ -1404,6 +1404,10 @@ public class ConversationVM : UWEBase {
 		IEnumerator say_op(string text, int PrintType)
 		{	
 				yield return new WaitForSecondsRealtime(0.2f);
+				if (text.Trim()=="")
+				{
+						yield return 0;	
+				}
 				if (text.Contains("@"))
 				{
 						text = TextSubstitute(text);
@@ -1412,27 +1416,29 @@ public class ConversationVM : UWEBase {
 
 				for (int s=0; s<= Lines.GetUpperBound(0);s++)
 				{//Lines
-						string [] Paragraphs = Lines[s].Split(new string [] {"\\m"}, System.StringSplitOptions.None);
-
-						for (int i=0; i<=Paragraphs.GetUpperBound(0);i++)
+						if (Lines[s].Trim()!="")
 						{
-								string Markup="";
-								switch (PrintType)
-								{
-								case PC_SAY:
-										Markup="<color=red>";break;//[FF0000]
-								case PRINT_SAY:
-										Markup="<color=purple>";break;//[000000]
-								default:
-										Markup="<color=black>";break;//[00FF00]
-								}	
-								UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
-								if (i<Paragraphs.GetUpperBound(0))
-								{
-										UWHUD.instance.Conversation_tl.Add ("<color=white>MORE</color>");
-										yield return StartCoroutine(WaitForMore());	
-								}
+								string [] Paragraphs = Lines[s].Split(new string [] {"\\m"}, System.StringSplitOptions.None);
 
+								for (int i=0; i<=Paragraphs.GetUpperBound(0);i++)
+								{
+										string Markup="";
+										switch (PrintType)
+										{
+										case PC_SAY:
+												Markup="<color=red>";break;//[FF0000]
+										case PRINT_SAY:
+												Markup="<color=purple>";break;//[000000]
+										default:
+												Markup="<color=black>";break;//[00FF00]
+										}	
+										UWHUD.instance.Conversation_tl.Add ( Markup + Paragraphs[i] + "</color>" ); //\n	
+										if (i<Paragraphs.GetUpperBound(0))
+										{
+												UWHUD.instance.Conversation_tl.Add ("<color=white>MORE</color>");
+												yield return StartCoroutine(WaitForMore());	
+										}
+								}	
 						}
 				}
 
@@ -1444,6 +1450,152 @@ public class ConversationVM : UWEBase {
 
 
 		string TextSubstitute(string input)
+		{
+				//X: source of variable to substitute, one of these: GSP
+				//G: game global variable
+				//S: stack variable
+				//P: pointer variable
+				//Y: type of variable, one of these: SI
+				//S: value is a string number into current string block
+				//I: value is an integer value
+				//<num>: decimal value
+				//<extension>: format: C<number>: use array index <number>
+
+				string RegExForFindingReplacements = "([@][GSP][SI])([0-9]*)([S][I])?([0-9]*)?([C][0-9]*)?";
+						//"(@)([GSP])([SI])([0-9])*([S][I][0-9]*)*([C][0-9])*";
+				//string RegExForFindingReplacementsTypes = "(@)([GSP])([SI])";
+
+				MatchCollection matches= Regex.Matches(input, RegExForFindingReplacements);
+				for (int sm = 0; sm<matches.Count; sm++)
+				{		
+						string ReplacementString=matches[sm].Value;
+						if (matches[sm].Success)
+						{
+								string ReplacementType = "";
+								int ReplacementValue =0;
+								string OffsetType = "";
+								int OffsetValue =0;
+								string formatting = "";
+								string FoundString ="";
+
+								for (int sg =0; sg<matches[sm].Groups.Count;sg++)
+								{
+										if (matches[sm].Groups[sg].Success)
+										{
+												switch (sg)
+												{
+												case 1:	//Replacement Type
+														ReplacementType = matches[sm].Groups[sg].Value;break;
+												case 2:	//Replacement value
+														{
+																int val=0;
+																if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+																{
+																		ReplacementValue=val;	
+																}
+																else
+																{
+																		ReplacementValue=0;
+																}
+																break;
+														}
+												case 3:	//Offset Type (should only be SI?)
+														OffsetType = matches[sm].Groups[sg].Value;break;
+												case 4:	//Offset value
+														{
+																int val=0;
+																if (int.TryParse(matches[sm].Groups[sg].Value, out val))
+																{
+																		OffsetValue=val;	
+																}
+																else
+																{
+																		OffsetValue=0;
+																}
+																break;
+														}
+												case 5:	//formatting specifier (unimplemented
+														formatting = matches[sm].Groups[sg].Value;break;
+												}
+										}
+
+										//Debug.Log("group " + matches[sm].Groups[sg].Success + " " + matches[sm].Groups[sg].Value);
+								}
+
+
+
+								//Now replace
+								switch (ReplacementType)
+								{
+								case "@GS": //Global string.
+										{
+												FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(ReplacementValue));
+												break;
+										}
+								case "@GI": //Global integer
+										{
+												Debug.Log("@GI String replacement (" + ReplacementValue + ")");//Sometimes this works with val+1 other times val!!
+												FoundString= stack.at(ReplacementValue).ToString();
+												break;	
+										}
+								case "@SS": //Stack string
+										{
+												if (OffsetValue!=0)
+												{
+														int actualptr = stack.at(stack.basep+OffsetValue);
+														FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+actualptr));			
+												}
+												else
+												{
+														FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.basep+ReplacementValue));			
+												}
+											
+											break;	
+										}
+								case "@SI": //Stack integer
+										{//TODO: this +1 behaves inconsistently. UW1 or UW2 difference???
+												if (_RES==GAME_UW2)
+												{
+														FoundString= stack.at(stack.basep+ReplacementValue).ToString();	
+												}
+												else
+												{
+														FoundString= stack.at(stack.basep+ReplacementValue+1).ToString();//Skip over 1 for basepointer	
+												}
+
+												break;	
+										}
+
+								case "@PS": //Pointer string
+										{
+												FoundString= StringController.instance.GetString(conv[currConv].StringBlock,stack.at(stack.at(stack.basep+ReplacementValue)));
+												break;	
+										}
+								case "@PI": //Pointer integer
+										{
+											if (ReplacementValue <0)
+											{
+												FoundString= stack.at(stack.at(stack.basep+ReplacementValue-1)).ToString();//-1 for params
+											}
+											else
+											{
+												FoundString= stack.at(stack.at(stack.basep+ReplacementValue)).ToString();	
+											}
+											break;	
+										}
+								}
+								if (FoundString!="")
+								{									
+									input=input.Replace(ReplacementString,FoundString);
+								}	
+						}
+				}
+
+
+				return input;
+		}
+
+	/*	string TextSubstitute(string input)
 		{
 				//X: source of variable to substitute, one of these: GSP
 				//G: game global variable
@@ -1489,10 +1641,10 @@ public class ConversationVM : UWEBase {
 																}
 																else
 																{*/
-																		FoundString= stack.at(value).ToString();
+		/*	here																		FoundString= stack.at(value).ToString();
 																//}
 
-																//FoundString= stack.at(value).ToString();
+															//FoundString= stack.at(value).ToString();
 																break;	
 														}
 												case "@SS": //Stack string
@@ -1543,7 +1695,7 @@ public class ConversationVM : UWEBase {
 						}		
 				}
 				return input.Replace("C2","");
-		}
+		}*/
 
 
 		IEnumerator run_imported_function(ImportedFunctions func, NPC npc)

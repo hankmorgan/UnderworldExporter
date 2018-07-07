@@ -621,12 +621,18 @@ public class UWHUD : HUD {
 					EnableDisableControl(MessageLogScrollEdgeLeft, false);
 					EnableDisableControl(MessageLogScrollEdgeRight, false);
 					EnableDisableControl(MessageScrollBackground, false);
+					EnableDisableControl(activeRunes[0].gameObject,false);
+					EnableDisableControl(activeRunes[1].gameObject,false);
+					EnableDisableControl(activeRunes[2].gameObject,false);
 				}
 				else
 				{
 						EnableDisableControl(MessageLogScrollEdgeLeft, true);
 						EnableDisableControl(MessageLogScrollEdgeRight, true);
 						EnableDisableControl(MessageScrollBackground, true);
+						EnableDisableControl(activeRunes[0].gameObject,true);
+						EnableDisableControl(activeRunes[1].gameObject,true);
+						EnableDisableControl(activeRunes[2].gameObject,true);
 						if (_RES==GAME_UW2)
 						{
 								MessageScrollBackground.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 208.68f);
