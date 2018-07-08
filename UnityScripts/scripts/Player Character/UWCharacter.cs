@@ -9,6 +9,12 @@ using System.IO;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
+		public const float baseJumpHeight = 0.2f;
+		public const float extraJumpHeight =0.8f;
+		public const float extraJumpHeightLeap =1.2f;
+
+
+
 		public GameObject toTest;
 		public float angle;
 		public string[] LayersForRay = new string[]{"Water","MapMesh","Lava","Ice"};
@@ -49,6 +55,8 @@ public class UWCharacter : Character {
 		public float currYVelocity;
 		public float fallSpeed;
 		public float braking;
+		public float bounceMult = 1f;
+		public Vector3 BounceMovement;
 		/// <summary>
 		/// Is the player fleeing from combat (recently attacked and no weapon drawn)
 		/// </summary>
@@ -67,6 +75,8 @@ public class UWCharacter : Character {
 		public bool isWaterWalking;
 		public bool isTelekinetic;
 		public bool isTimeFrozen;
+		public bool isLucky;
+		public bool isBouncy;
 
 		[Header("Player Health Status")]
 		//Character Status
@@ -355,72 +365,102 @@ public class UWCharacter : Character {
 
 				Grounded =IsGrounded();
 
-				switch(terrainType)
-				{//Check if the player is subject to a water current.
-				case TerrainDatLoader.TerrainTypes.Lava:
-				case TerrainDatLoader.TerrainTypes.Lavafall:
-						{
-								onLava=true;
-								onIce=false;
-								isSwimming=false;
-								break;
-						}
-				case TerrainDatLoader.TerrainTypes.Ice_wall:
-				case TerrainDatLoader.TerrainTypes.Ice_walls:
-						{
-								if (onIcePrev==false)
+						switch(terrainType)
+						{//Check if the player is subject to a water current.
+						case TerrainDatLoader.TerrainTypes.Lava:
+						case TerrainDatLoader.TerrainTypes.Lavafall:
 								{
-										IceCurrentVelocity = playerMotor.movement.velocity.normalized * 3f;
+										onLava=true;
+										onIce=false;
+										isSwimming=false;
+										break;
 								}
-								onIce=true;
-								onLava=false;
-								isSwimming=false;
-								break;
+						case TerrainDatLoader.TerrainTypes.Ice_wall:
+						case TerrainDatLoader.TerrainTypes.Ice_walls:
+								{
+										if (onIcePrev==false)
+										{
+												IceCurrentVelocity = playerMotor.movement.velocity.normalized * 3f;
+										}
+										onIce=true;
+										onLava=false;
+										isSwimming=false;
+										break;
+								}
+						case TerrainDatLoader.TerrainTypes.WaterFlowEast:
+								IceCurrentVelocity = new Vector3(.5f,0f,0f);isSwimming=true;onIce=false;onLava=false;break;
+						case TerrainDatLoader.TerrainTypes.WaterFlowWest:
+								IceCurrentVelocity = new Vector3(-.5f,0f,0f);isSwimming=true;onIce=false;onLava=false;break;
+						case TerrainDatLoader.TerrainTypes.WaterFlowNorth:
+								IceCurrentVelocity = new Vector3(0f,0f,.5f);isSwimming=true;onIce=false;onLava=false;break;
+						case TerrainDatLoader.TerrainTypes.WaterFlowSouth:
+								IceCurrentVelocity = new Vector3(0f,0f,-.5f);isSwimming=true;onIce=false;onLava=false;break;
+						case TerrainDatLoader.TerrainTypes.Water:
+						case TerrainDatLoader.TerrainTypes.Waterfall:
+								isSwimming=true;IceCurrentVelocity= Vector3.zero;onIce=false;onLava=false;break;
+						default:
+								if (IceCurrentVelocity !=Vector3.zero)
+								{
+										braking += Time.deltaTime;
+										//Debug.Log("cancelling ice velocity");
+										IceCurrentVelocity = Vector3.Lerp(IceCurrentVelocity, Vector3.zero, braking);
+								}
+								else
+								{
+										braking =0f;
+								}
+								//IceCurrentVelocity= Vector3.zero; 
+								isSwimming=false; onIce=false;onLava=false; break;
 						}
-				case TerrainDatLoader.TerrainTypes.WaterFlowEast:
-						IceCurrentVelocity = new Vector3(.5f,0f,0f);isSwimming=true;onIce=false;onLava=false;break;
-				case TerrainDatLoader.TerrainTypes.WaterFlowWest:
-						IceCurrentVelocity = new Vector3(-.5f,0f,0f);isSwimming=true;onIce=false;onLava=false;break;
-				case TerrainDatLoader.TerrainTypes.WaterFlowNorth:
-						IceCurrentVelocity = new Vector3(0f,0f,.5f);isSwimming=true;onIce=false;onLava=false;break;
-				case TerrainDatLoader.TerrainTypes.WaterFlowSouth:
-						IceCurrentVelocity = new Vector3(0f,0f,-.5f);isSwimming=true;onIce=false;onLava=false;break;
-				case TerrainDatLoader.TerrainTypes.Water:
-				case TerrainDatLoader.TerrainTypes.Waterfall:
-						isSwimming=true;IceCurrentVelocity= Vector3.zero;onIce=false;onLava=false;break;
-				default:
-						if (IceCurrentVelocity !=Vector3.zero)
-						{
-								braking += Time.deltaTime;
-								//Debug.Log("cancelling ice velocity");
-								IceCurrentVelocity = Vector3.Lerp(IceCurrentVelocity, Vector3.zero, braking);
-						}
-						else
-						{
-								braking =0f;
-						}
-						//IceCurrentVelocity= Vector3.zero; 
-						isSwimming=false; onIce=false;onLava=false; break;
-				}
 
-				if ((isWaterWalking) || (Grounded==false) || (onBridge) )
-				{
-						isSwimming=false;
-						onIce=false;
-						IceCurrentVelocity=Vector3.zero;	
-				}
-				if ((Grounded==false) || (onBridge))
-				{
-						onLava=false;
-				}
+						if ((isWaterWalking) || (Grounded==false) || (onBridge) )
+						{
+								isSwimming=false;
+								onIce=false;
+								IceCurrentVelocity=Vector3.zero;	
+						}
+						if ((Grounded==false) || (onBridge))
+						{
+								onLava=false;
+						}	
+
+
+
 
 				if (IceCurrentVelocity!=Vector3.zero)
 				{
-						this.GetComponent<CharacterController> ().Move (new Vector3 (IceCurrentVelocity.x * Time.deltaTime* speedMultiplier, 0, IceCurrentVelocity.z * Time.deltaTime* speedMultiplier));					
+						this.GetComponent<CharacterController> ().Move (
+								new Vector3 (
+										IceCurrentVelocity.x * Time.deltaTime* speedMultiplier, 
+										IceCurrentVelocity.y * Time.deltaTime, 
+										IceCurrentVelocity.z * Time.deltaTime* speedMultiplier
+										)
+						);					
 				}
-				onIcePrev=onIce;		
+				onIcePrev=onIce;
+
 
 				base.Update ();
+
+				FallDamageUpdate();
+
+				if (isBouncy)
+				{
+						bounceMult=2;
+				}
+				else
+				{
+						bounceMult=1;
+				}
+				if (BounceMovement.magnitude >0)
+				{
+					playerController.Move (BounceMovement * Time.deltaTime);
+					BounceMovement.y -= 20f*Time.deltaTime;
+					if (BounceMovement.y<0)
+					{
+						BounceMovement=Vector3.zero;
+					}
+				}
 
 				if (EditorMode)
 				{
@@ -535,12 +575,14 @@ public class UWCharacter : Character {
 				}
 
 				if (isLeaping)
-				{//Jump spell
-						playerMotor.jumping.baseHeight=1.2f;
+				{//Jump spell						
+						playerMotor.jumping.baseHeight= baseJumpHeight;
+						playerMotor.jumping.extraHeight = extraJumpHeightLeap;
 				}
 				else
 				{
-						playerMotor.jumping.baseHeight=0.6f;
+						playerMotor.jumping.baseHeight = baseJumpHeight;
+						playerMotor.jumping.extraHeight = extraJumpHeight;
 				}
 
 				if (isRoaming)
@@ -595,7 +637,7 @@ public class UWCharacter : Character {
 						lavaDamageTimer=0;
 				}
 
-				FallDamageUpdate();
+
 
 				//Calculate how visible the player is.
 				if (LightActive)//The player has a light and is therefore visible at max range.
@@ -1617,10 +1659,31 @@ public class UWCharacter : Character {
 								{
 										Vector3 reflected = Vector3.Reflect(UWCharacter.Instance.IceCurrentVelocity, hit.normal);
 										IceCurrentVelocity	=  new Vector3(reflected.x,0f, reflected.z);
-								}		
+								}
 						}
 				}
-		}
+				else
+				{
+						if (isBouncy)	
+						{
+								if (hit.normal.y ==1f)
+								{
+										if (BounceMovement ==Vector3.zero)
+										{
+												if (hit.controller.velocity.y<-0.3f)
+												{
+														BounceMovement = new Vector3(hit.controller.velocity.x,-hit.controller.velocity.y,hit.controller.velocity.z) * bounceMult; // Vector3.Reflect(hit.controller.velocity, hit.normal) * bounceMult;	
+												}		
+										}				
+								}
+								if (hit.collider.name=="Tile_00_00")
+								{
+										BounceMovement=Vector3.zero;
+								}	
+						}
+					
+				}
+			}
 
 		/// <summary>
 		/// Determines whether this instance is grounded.
@@ -1670,10 +1733,12 @@ public class UWCharacter : Character {
 				if (fallSpeed > 0.0f) 
 				{
 					//Check fall damage.
-					onLanding (fallSpeed);
+					onLanding (fallSpeed);					
+
 					fallSpeed = 0.0f;
 				}
 			}
 			currYVelocity = playerMotor.movement.velocity.y;
 		}
+
 }

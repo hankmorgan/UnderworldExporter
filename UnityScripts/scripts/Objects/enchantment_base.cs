@@ -28,12 +28,15 @@ using System.Collections;
 ///  Other objects may also carry spells in this way.
 /// 
 public class enchantment_base : object_base {
+	[Header("Enchantment Properties")]
 	public string DisplayEnchantment;
-	
+	public int SpellIndex;
+
 	protected override void Start ()
 	{
 		base.Start();
 		SetDisplayEnchantment ();
+		SpellIndex = GetActualSpellIndex();
 	}
 
 	public void SetDisplayEnchantment ()

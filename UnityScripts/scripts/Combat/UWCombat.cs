@@ -507,7 +507,10 @@ public class UWCombat : Combat {
 
 			int toHit = Mathf.Max(npc.GetDefence() - attackScore,0);
 			//Difficulty is either 1 for standard or 0 for easy.
-			int roll = Mathf.Max(30,Random.Range(-1,31) + ( 5 * (1- GameWorldController.instance.difficulty) )  );//-1 is critical miss. 30 is always hit
+			//int roll = Mathf.Max(30,Random.Range(-1,31) + ( 5 * (1- GameWorldController.instance.difficulty) )  );//-1 is critical miss. 30 is always hit
+			
+			int roll  =  Mathf.Min(30, Skills.DiceRoll(-1,31) + ( 5 * (1- GameWorldController.instance.difficulty) ) );
+			
 			int HitRollResult=0;
 			if (((roll >= toHit) || (roll>=30)) && (roll>-1))
 			{

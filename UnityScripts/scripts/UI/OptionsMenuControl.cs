@@ -655,6 +655,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			UWHUD.instance.gameObject.SetActive(true);
 			UWCharacter.Instance.playerController.enabled=true;
 			UWCharacter.Instance.playerMotor.enabled=true;
+			UWCharacter.Instance.playerMotor.movement.velocity=Vector3.zero;
 			GameWorldController.instance.AtMainMenu=false;
 			UWCharacter.Instance.playerInventory.Refresh();
 			UWCharacter.Instance.playerInventory.UpdateLightSources();

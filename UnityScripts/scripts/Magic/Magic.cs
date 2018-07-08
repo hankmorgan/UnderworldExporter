@@ -2228,6 +2228,41 @@ public class Magic : UWEBase {
 		}
 
 
+		/// <summary>
+		/// Casts the luck spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
+		void Cast_Luck(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{
+				SpellProp_Luck luck = new SpellProp_Luck();
+				luck.init (EffectID,caster);				
+				SpellEffect lep = (SpellEffectLucky)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+				lep.counter=luck.counter;
+				lep.Go ();
+		}
+
+
+		/// <summary>
+		/// Casts the bounce spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
+		void Cast_Bounce(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{
+				SpellProp_Bounce bounce = new SpellProp_Bounce();
+				bounce.init (EffectID,caster);				
+				SpellEffect lep = (SpellEffectBounce)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+
+				lep.counter=bounce.counter;
+				lep.Go ();
+		}
+
+
 		void Cast_ManaRegen(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 			SpellProp_Regen Regen = new SpellProp_Regen();
@@ -2929,7 +2964,17 @@ public class Magic : UWEBase {
 								case SpellEffect.UW2_Spell_Effect_Cursed_alt15:
 										ActiveSpellArray[index]=caster.AddComponent<SpellEffectCurse>();
 										break;	
-										
+						
+								case SpellEffect.UW2_Spell_Effect_Luck_alt01:
+								case SpellEffect.UW2_Spell_Effect_Luck_alt02:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectLucky>();
+										break;	
+
+								case SpellEffect.UW2_Spell_Effect_Bouncing:
+								case SpellEffect.UW2_Spell_Effect_Bouncing_alt01:
+								case SpellEffect.UW2_Spell_Effect_Bounce_alt01:
+										ActiveSpellArray[index]=caster.AddComponent<SpellEffectBounce>();
+										break;	
 					default:
 						Debug.Log ("effect Id is " + EffectID);
 						ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
@@ -4740,10 +4785,26 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_Bouncing:
 				case SpellEffect.UW2_Spell_Effect_Bouncing_alt01:
 				case SpellEffect.UW2_Spell_Effect_Bounce_alt01:
-						{//A bouncing spell. Not sure what this does
-							Debug.Log("BOOOOUNCCCEEEE!!!!");
-							SpellResultType=SpellResultNone;
-							break;
+						{//A bouncing spell. Makes the player bounce higher when jumping
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Bounce(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
+										}
+										SpellResultType=SpellResultPassive;
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Bounce(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;	
 						}
 
 				case SpellEffect.UW2_Spell_Effect_CurePoison:
@@ -5162,9 +5223,25 @@ public class Magic : UWEBase {
 				case SpellEffect.UW2_Spell_Effect_Luck_alt01:
 				case SpellEffect.UW2_Spell_Effect_Luck_alt02:
 						{
-							Debug.Log("lucky");
-							SpellResultType=SpellResultNone;
-							break;		
+								switch(CastType)
+								{
+								case SpellRule_Equipable:
+										if (PassiveArrayIndex!=-1)
+										{
+												Cast_Luck(caster,UWCharacter.Instance.PassiveSpell,EffectID,PassiveArrayIndex);
+										}
+										SpellResultType=SpellResultPassive;
+										break;
+								case SpellRule_Consumable:
+								default:
+										if (ActiveArrayIndex!=-1)
+										{
+												Cast_Luck(caster,UWCharacter.Instance.ActiveSpell,EffectID,ActiveArrayIndex);
+												SpellResultType=SpellResultActive;
+										}
+										break;
+								}
+								break;	
 						}
 
 				case SpellEffect.UW2_Spell_Effect_MagicProtection:

@@ -326,4 +326,28 @@ public class Skills : MonoBehaviour {
 		int SkillDiff= Mathf.Max(0,GoverningSkill-currentSkillScore);
 		return SkillDiff / 5;
 	}
+
+
+		/// <summary>
+		/// Rolls the dice on any skill check or combat swing.
+		/// </summary>
+		/// <returns>The roll.</returns>
+		/// <param name="critter">Critter.</param>
+		/// <param name="minRoll">Minimum roll.</param>
+		/// <param name="MaxRoll">Max roll.</param>
+		public static int DiceRoll(int minRoll, int MaxRoll)
+		{
+
+			if (UWCharacter.Instance.isLucky)
+			{//Give a +5 bonus to all rolls.
+				int roll= Random.Range(minRoll,MaxRoll);
+				roll = Mathf.Min(roll+5, MaxRoll);
+				return roll;
+			}
+			else
+			{
+				return Random.Range(minRoll,MaxRoll);			
+			}
+			
+		}
 }

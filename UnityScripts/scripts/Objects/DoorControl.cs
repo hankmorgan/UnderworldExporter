@@ -251,7 +251,7 @@ public class DoorControl : object_base {
 					{
 					if (Pickable==true)
 						{
-							if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Random.Range(1,25)))
+							if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Skills.DiceRoll(1,25)))
 							{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
 							UnlockDoor(true);
