@@ -70,17 +70,19 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		
 		if (MoveItem)
 		{
-			if (this.gameObject.transform.position.x>=100.0f)
+           if (this.gameObject.transform.position.x >= 100.0f) 
 			{//If the object is off map use the triggerX and Y to calculate a suitable spawning point.
-				cloneObj.transform.position = new Vector3( 
-						(((float)triggerX) *1.2f + 0.6f), 
-						(float)GameWorldController.instance.currentTileMap().GetFloorHeight(triggerX,triggerY)/6.666f,
-						(((float)triggerY) *1.2f  + 0.6f) 
-				);
+             /*cloneObj.transform.position = new Vector3( 
+                     (((float)triggerX) *1.2f + 0.6f), 
+                     (float)GameWorldController.instance.currentTileMap().GetFloorHeight(triggerX,triggerY)/6.666f,
+                     (((float)triggerY) *1.2f  + 0.6f) */
+                     cloneObj.transform.position = GameWorldController.instance.currentTileMap().getTileVector(triggerX, triggerY);
+               // );
 			}
 			else
 			{
-				cloneObj.transform.position = this.gameObject.transform.position;
+                Vector3 newpos = GameWorldController.instance.currentTileMap().getTileVector(triggerX, triggerY);
+                cloneObj.transform.position = new Vector3(newpos.x, this.gameObject.transform.position.y, newpos.z);// this.gameObject.transform.position;
 			}	
 		}
 		

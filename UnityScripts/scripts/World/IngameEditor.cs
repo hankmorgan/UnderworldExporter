@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class IngameEditor : GuiBase_Draggable {
-
+        public Camera OverheadCam;
 		public static int TileX=0;
 		public static int TileY=0;
 
@@ -99,9 +99,9 @@ public class IngameEditor : GuiBase_Draggable {
 						UpdateNPCGoals();
 				}
 				//Initiliase Item Ids
-				for (int i=0; i<=GameWorldController.instance.objectMaster.desc.GetUpperBound(0);i++)
+				for (int i=0; i<=GameWorldController.instance.objectMaster.objProp.GetUpperBound(0);i++)
 				{
-					ObjectItemIds.options.Add(new Dropdown.OptionData(GameWorldController.instance.objectMaster.desc[i]));	
+					ObjectItemIds.options.Add(new Dropdown.OptionData(GameWorldController.instance.objectMaster.objProp[i].desc));	
 				}
 		}
 
@@ -1058,7 +1058,7 @@ public class IngameEditor : GuiBase_Draggable {
 						}
 				}
 
-			switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+			switch(currObj.GetItemType())
 			{
 				case ObjectInteraction.LOCK:
 				case ObjectInteraction.A_USE_TRIGGER:
@@ -1139,6 +1139,79 @@ public class IngameEditor : GuiBase_Draggable {
 				}
 			}
 		}
+
+    public void ToggleCamera()
+    {
+        if ( ! OverheadCam.gameObject.activeInHierarchy )
+        {
+           if (GameWorldController.instance.ceiling != null)
+            {
+                GameWorldController.instance.ceiling.SetActive(false);
+            }
+            OverheadCam.gameObject.SetActive(true);
+            UWCharacter.Instance.playerCam.tag = "Untagged";
+            UWCharacter.Instance.playerCam.enabled = false;
+            OverheadCam.tag = "MainCamera";
+        }
+        else
+        {           
+            if (GameWorldController.instance.ceiling != null)
+            {
+                GameWorldController.instance.ceiling.SetActive(true);
+            }
+            OverheadCam.gameObject.SetActive(false);
+            UWCharacter.Instance.playerCam.tag = "MainCamera";
+            UWCharacter.Instance.playerCam.enabled = true;
+            OverheadCam.tag = "Untagged";
+        }
+    }
+
+    void OnGUI()
+    {
+        if (OverheadCam.gameObject.activeInHierarchy)
+        {            
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                if (Input.GetAxis("Mouse ScrollWheel") <= 0)
+                {
+                    OverheadCam.orthographicSize += 1;
+                }
+                else
+                {
+                    OverheadCam.orthographicSize -= 1;
+                }
+            }
+            if (OverheadCam.orthographicSize <= 0)
+            {
+                OverheadCam.orthographicSize = 1;
+            }
+        }
+    }
+
+
+    public override void Update()
+    {
+        base.Update();
+        if (OverheadCam.gameObject.activeInHierarchy)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                OverheadCam.gameObject.transform.Translate(new Vector3(10 * Time.deltaTime, 0, 0));
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                OverheadCam.gameObject.transform.Translate(new Vector3(-10 * Time.deltaTime, 0, 0));
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                OverheadCam.gameObject.transform.Translate(new Vector3(0, -10 * Time.deltaTime, 0));
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                OverheadCam.gameObject.transform.Translate(new Vector3(0, 10 * Time.deltaTime, 0));
+            }
+        }
+    }
 
 }
 

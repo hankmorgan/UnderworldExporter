@@ -642,7 +642,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 		{//Make sure triggers, traps and special items are created.
 			if (objList[i]!=null)
 			{
-				if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.MOONGATE)
+				if (objList[i].GetItemType() == ObjectInteraction.MOONGATE)
 				{
 					if ((objList[i].tileX == tileX) && (objList[i].tileY == tileY))
 					{

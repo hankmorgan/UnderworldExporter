@@ -126,7 +126,11 @@ public class Character : UWEBase {
 	{
 		if (!Invincible)
 		{
-				CurVIT=CurVIT-damage;	
+			CurVIT=CurVIT-damage;	
+		}
+		else
+		{
+			Debug.Log("Invincible character damage is " + damage );
 		}
 		//Applies damage to the player.
 		
@@ -211,7 +215,6 @@ public class Character : UWEBase {
 						int tileY=int.Parse(tilenamePortions[2]);
 						if (IngameEditor.FollowMeMode)	
 						{
-
 							IngameEditor.UpdateFollowMeMode(tileX,tileY);	
 						}
 						else
@@ -264,7 +267,7 @@ public class Character : UWEBase {
 					}
 					else
 					{//Object cannot be picked up. Try and use it instead
-						if (objPicked.CanBeUsed)
+						if (objPicked.isUsable())
 						{
 							UseMode();
 						}							

@@ -218,65 +218,87 @@ public class Wand : enchantment_base {
 		return true;
 	}
 
-		/*
-	/// <summary>
-	/// Creates a new spell trap in the object list
-	/// </summary>
-	public override void InventoryEventOnLevelEnter ()
-		{
-			
-		//objInt().isquant=0;
-		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
-		base.InventoryEventOnLevelEnter ();
-			//Create a spell trap and store it on the map. This occurs before the list is rendered.
-				//Try and find an existing spell trap with the necessary qualities. If not found then create a new one
-				ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
-				for (int i = 256; i<=objList.GetUpperBound(0);i++)
-				{
-						if (objList[i].item_id ==288 )//A spell
-						{
-								if (objList[i].link == SpellObjectLink)
-								{
-										objInt().link=i;
-										return;
-								}
-						}
-				}
+    /*
+/// <summary>
+/// Creates a new spell trap in the object list
+/// </summary>
+public override void InventoryEventOnLevelEnter ()
+    {
 
-		ObjectLoaderInfo newobj= ObjectLoader.newObject(288,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
-		objInt().link = newobj.index;
-		}
-		*/
+    //objInt().isquant=0;
+    if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
+    base.InventoryEventOnLevelEnter ();
+        //Create a spell trap and store it on the map. This occurs before the list is rendered.
+            //Try and find an existing spell trap with the necessary qualities. If not found then create a new one
+            ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+            for (int i = 256; i<=objList.GetUpperBound(0);i++)
+            {
+                    if (objList[i].item_id ==288 )//A spell
+                    {
+                            if (objList[i].link == SpellObjectLink)
+                            {
+                                    objInt().link=i;
+                                    return;
+                            }
+                    }
+            }
 
-		/*
-	public override void InventoryEventOnLevelExit ()
-		{
-		if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
-		//Store the spell properties so I can create it in the next level. 
-		base.InventoryEventOnLevelExit ();
-		//objInt().isquant=0;
-		GameObject linked = ObjectLoader.getGameObjectAt(objInt().link);
-			if (linked!=null)
-			{
-				a_spell spell = linked.GetComponent<a_spell>();
-				if (spell!=null)
-				{		
-					SpellObjectOwnerToCreate = spell.objInt().owner;	
-					SpellObjectQualityToCreate = spell.objInt().quality;
-					//SpellObjectLink = spell.objInt().link;
-					//SpellObjectLinkToCreate=spell.objInt().link;
-					//Flag the spell trap as not being in use and change it's type to a fist so it will not persist.
-					//Assumes spell traps are all stored off map
-					//spell.objInt().objectloaderinfo.InUseFlag=0;
-					//spell.objInt().objectloaderinfo.item_id=0;
-				}
-			}
-			//SpellObjectOwnerToCreate 
-		}
-		*/
+    ObjectLoaderInfo newobj= ObjectLoader.newObject(288,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
+    objInt().link = newobj.index;
+    }
+    */
+
+    public override void InventoryEventOnLevelExit()
+    {
+        base.InventoryEventOnLevelExit();
+        if (_RES == GAME_UW2)
+        {
+            if (GameWorldController.instance.LevelNo == 42)
+            {
+                //make sure the wand of telekinesis is removed from the player as long as the player is not holding it in there hand
+                if((SpellIndex == 295) && (linkedspell == null))
+                {
+                    if (this.name !=UWCharacter.Instance.playerInventory.ObjectInHand)
+                    {
+                        UWCharacter.Instance.playerInventory.RemoveItem(this.name);
+                        //Remove object and place at 29,29
+                        GameWorldController.MoveToWorld(objInt());
+                        this.transform.position = GameWorldController.instance.currentTileMap().getTileVector(29, 29);
+                    }   
+                }
+            }
+        }
+    }
+
+    /*
+public override void InventoryEventOnLevelExit ()
+    {
+    if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
+    //Store the spell properties so I can create it in the next level. 
+    base.InventoryEventOnLevelExit ();
+    //objInt().isquant=0;
+    GameObject linked = ObjectLoader.getGameObjectAt(objInt().link);
+        if (linked!=null)
+        {
+            a_spell spell = linked.GetComponent<a_spell>();
+            if (spell!=null)
+            {		
+                SpellObjectOwnerToCreate = spell.objInt().owner;	
+                SpellObjectQualityToCreate = spell.objInt().quality;
+                //SpellObjectLink = spell.objInt().link;
+                //SpellObjectLinkToCreate=spell.objInt().link;
+                //Flag the spell trap as not being in use and change it's type to a fist so it will not persist.
+                //Assumes spell traps are all stored off map
+                //spell.objInt().objectloaderinfo.InUseFlag=0;
+                //spell.objInt().objectloaderinfo.item_id=0;
+            }
+        }
+        //SpellObjectOwnerToCreate 
+    }
+    */
 
 
-	public override void MoveToWorldEvent ()
+    public override void MoveToWorldEvent ()
 	{
 		if (objInt().enchantment==0)
 		{//Object links to a spell.

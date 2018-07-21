@@ -194,14 +194,14 @@ public class object_base : UWEBase {
 		//CheckReferences();
 		if (UWCharacter.Instance.playerInventory.ObjectInHand =="")
 		{
-			if ((objInt().CanBeUsed==true) && (objInt().PickedUp==true))
+			if ((objInt().isUsable()==true) && (objInt().PickedUp==true))
 			{
 				BecomeObjectInHand();
 				return true;
 			}
 			else
 			{
-				if(objInt().CanBeUsed==true)				
+				if(objInt().isUsable())				
 				{//Hope this does'nt mess up everything!
 					if ((objInt().link != 0) && (objInt().isQuant()==false) && (objInt().enchantment==0))
 					{//Not a quantity or an enchanted item.

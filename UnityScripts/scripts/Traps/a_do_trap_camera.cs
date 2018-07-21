@@ -12,14 +12,23 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	private Camera cam;
 	private Light lt;
-
-	protected override void Start ()
+    private Rect window_uw1 = new Rect(0.163f, 0.335f, 0.54f, 0.572f);
+    private Rect window_uw2 = new Rect(0.05f, 0.28f, 0.655f, 0.64f);
+    private Rect fullscreen = new Rect(0f, 0f, 1f, 1f);
+    protected override void Start ()
 	{
 		base.Start ();
 
 		cam = this.gameObject.AddComponent<Camera>();
 		cam.tag="MainCamera";
-		cam.rect=new Rect(0.163f,0.335f,0.54f,0.572f);
+        switch (_RES)
+        {
+            case GAME_UW2:
+                cam.rect = window_uw2;break;//new Rect(0.05f, 0.28f, 0.655f, 0.64f);
+            default:
+                cam.rect = window_uw1;break;//new Rect(0.163f, 0.335f, 0.54f, 0.572f);break;
+        }
+		
 		cam.depth=100;
 		cam.enabled=false;
 		lt=this.gameObject.AddComponent<Light>();
@@ -27,6 +36,29 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 		lt.enabled=false;
 
 	}
+
+    /// <summary>
+    ///Ensure the correct window size is used
+    /// </summary>
+    private void SetWindowRect()
+    {
+        if (UWHUD.instance.window.FullScreen == true)
+        {
+            cam.rect = fullscreen;
+        }
+        else
+        {
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    cam.rect = window_uw2; break;
+                default:
+                    cam.rect = window_uw1; break;
+            }
+        }
+
+
+}
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -36,6 +68,7 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	IEnumerator ActivateCamera()
 	{
+        SetWindowRect();
 		UWCharacter.Instance.playerCam.tag="Untagged";
 		UWCharacter.Instance.playerCam.enabled=false;
 		cam.enabled=true;

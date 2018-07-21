@@ -19,7 +19,7 @@ public class a_ward_trap : trap_base {
 				{
 						bx=this.gameObject.AddComponent<BoxCollider>();	
 				}
-				bx.size=new Vector3(0.2f,0.2f,0.2f);
+				bx.size=new Vector3(0.35f,0.35f,0.35f);
 				bx.center=new Vector3(0.0f,0.1f,0.0f);
 				bx.isTrigger=true;
 				switch (_RES)
@@ -87,7 +87,7 @@ public class a_ward_trap : trap_base {
 						UWCharacter.Instance.ApplyDamage(spellprop.BaseDamage);
 					}
 					spellprop.onHitPlayer();
-								objInt().consumeObject();
+					objInt().consumeObject();
 				}
 				else
 				{

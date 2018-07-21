@@ -188,7 +188,7 @@ public class TMAP : object_base {
 			//BoxCollider bx = myObj.AddComponent<BoxCollider>();
 			bx.size=new Vector3(1.25f,1.25f,0.1f);
 			bx.center=new Vector3(0.0f,0.65f,0.0f);
-			if (GameWorldController.instance.objectMaster.type[objInt.item_id]==ObjectInteraction.TMAP_CLIP)
+			if (objInt.GetItemType()==ObjectInteraction.TMAP_CLIP)
 			{
 					bx.isTrigger=true;
 			}

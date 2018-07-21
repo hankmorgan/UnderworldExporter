@@ -25,7 +25,7 @@ public class Orb : object_base {
 			ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(objInt().link);
 			if (objIntLink!=null)
 			{
-				switch (GameWorldController.instance.objectMaster.type[objIntLink.item_id])
+				switch (objIntLink.GetItemType())
 				{
 				case ObjectInteraction.A_LOOK_TRIGGER:
 					return objIntLink.GetComponent<trigger_base>().Activate(this.gameObject);					
@@ -44,7 +44,7 @@ public class Orb : object_base {
 				ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(objInt().link);
 				if (objIntLink!=null)
 				{
-					switch (GameWorldController.instance.objectMaster.type[objIntLink.item_id])
+					switch (objIntLink.GetItemType())
 					{
 					case ObjectInteraction.A_USE_TRIGGER:
 						return objIntLink.GetComponent<trigger_base>().Activate(this.gameObject);																										

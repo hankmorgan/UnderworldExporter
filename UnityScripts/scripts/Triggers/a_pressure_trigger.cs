@@ -99,7 +99,7 @@ public class a_pressure_trigger : trigger_base {
 		PreviousWeightOnTrigger=WeightOnTrigger;
 		//Debug.Log("starting weight is " + PreviousWeightOnTrigger);
 
-		if ( GameWorldController.instance.objectMaster.type[GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].item_id]== ObjectInteraction.A_DOOR_TRAP)
+		if ( GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].GetItemType()== ObjectInteraction.A_DOOR_TRAP)
 		{					
 			ObjectInteraction objDoorTrap=	ObjectLoader.getObjectIntAt(objInt().link);
 

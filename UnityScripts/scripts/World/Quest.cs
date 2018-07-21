@@ -360,9 +360,17 @@ public class Quest : UWEBase {
 				case 51://This changes a quest variable! Find out and document the variable in question. (scint lvl 1 arrow trap)
 				case 104://Used in scintilus level 5.
 					{
-						Debug.Log("quest/variable = " + index + " set to " + value);
-						Quest.instance.QuestVariables[index]=value;
-						return true;
+						if (GameWorldController.instance.LevelNo == 40)
+						{
+							Debug.Log("special case quest/variable scint lvl 1 = " + index + "," + value);
+							return false;
+						}
+						else
+						{
+								Debug.Log("quest/variable = " + index + " set to " + value);
+								Quest.instance.QuestVariables[index]=value;
+								return true;	
+						}
 					}
 			}
 		return false;

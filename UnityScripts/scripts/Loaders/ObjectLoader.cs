@@ -875,7 +875,7 @@ public class ObjectLoader : DataLoader {
 
 				objList[x].link = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
 
-				if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
+				if ((objList[x].GetItemType() == ObjectInteraction.TMAP_SOLID) || (objList[x].GetItemType() == ObjectInteraction.TMAP_CLIP))
 				{
 						objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				}
@@ -894,7 +894,7 @@ public class ObjectLoader : DataLoader {
 						break;
 					}
 				}*/
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_MOVING_DOOR)		
+				if (objList[x].GetItemType() == ObjectInteraction.A_MOVING_DOOR)		
 				{
 					//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
 					//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
@@ -941,7 +941,7 @@ public class ObjectLoader : DataLoader {
 					}
 				}
 
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BRIDGE)
+				if (objList[x].GetItemType() == ObjectInteraction.BRIDGE)
 				{
 					if (objList[x].flags >= 2)
 					{//267 + textureIndex;
@@ -960,12 +960,12 @@ public class ObjectLoader : DataLoader {
 					}
 				}
 
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.BUTTON)
+				if (objList[x].GetItemType() == ObjectInteraction.BUTTON)
 				{
 					objList[x].texture = objList[x].flags;
 				}
 
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.GRAVE)
+				if (objList[x].GetItemType() == ObjectInteraction.GRAVE)
 				{
 					objList[x].texture = objList[x].flags+28;
 					//if (objList[x].link >= 512)
@@ -973,12 +973,12 @@ public class ObjectLoader : DataLoader {
 					//	objList[x].DeathWatched = (short)getValAtAddress(graves, objList[x].link - 512, 8);
 					//}
 				}
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
+				if (objList[x].GetItemType() == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
 				{
 					objList[x].x = 4;
 					objList[x].y = 4;
 				}
-				if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP)
+				if (objList[x].GetItemType() == ObjectInteraction.A_CHANGE_TERRAIN_TRAP)
 				{
 					//bits 1-5 of the quality field is the floor texture.
 					if (_RES == GAME_UW1)
@@ -1071,7 +1071,7 @@ public class ObjectLoader : DataLoader {
 
 	static void HandleMovingDoors (ObjectLoaderInfo[] objList, int x)
 	{
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_MOVING_DOOR) {
+		if (objList[x].GetItemType()  == ObjectInteraction.A_MOVING_DOOR) {
 			//Moving doors have the following properties. The 320+owner is the door type that it is moving from.
 			//To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
 			//it should be in
@@ -1129,13 +1129,13 @@ public class ObjectLoader : DataLoader {
 	static void SetObjectTextureValue (ObjectLoaderInfo[] objList, short[] texture_map, int x)
 	{
 
-			if ((GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_SOLID) || (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.TMAP_CLIP))
+			if ((objList[x].GetItemType() == ObjectInteraction.TMAP_SOLID) || (objList[x].GetItemType() == ObjectInteraction.TMAP_CLIP))
 			{
 					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. 
 			}
 
 		//Some of this stuff should move to obj_base
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.BRIDGE) {
+		if (objList[x].GetItemType() == ObjectInteraction.BRIDGE) {
 			if (objList [x].flags >= 2) {
 				//267 + textureIndex;
 				if (_RES == GAME_UW2) {
@@ -1152,18 +1152,18 @@ public class ObjectLoader : DataLoader {
 				//267 is an offset into my own textures config file.
 			}
 		}
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.BUTTON) {
+		if (objList[x].GetItemType() == ObjectInteraction.BUTTON) {
 			objList [x].texture = objList [x].flags;
 		}
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.GRAVE) {
+		if (objList[x].GetItemType() == ObjectInteraction.GRAVE) {
 			objList [x].texture = objList [x].flags + 28;
 		}
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
+		if (objList[x].GetItemType() == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
 		 {
 			//objList[x].x = 4;
 			//objList[x].y = 4;
 		}
-		if (GameWorldController.instance.objectMaster.type [objList [x].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP) {
+		if (objList[x].GetItemType() == ObjectInteraction.A_CHANGE_TERRAIN_TRAP) {
 			//bits 1-5 of the quality field is the floor texture.
 			if (_RES == GAME_UW1) {
 				int textureQuality = (objList [x].quality >> 1) & 0xf;
@@ -1194,14 +1194,14 @@ public class ObjectLoader : DataLoader {
 	public static string UniqueObjectName(ObjectLoaderInfo currObj)
 	{//returns a unique name for the object
 		//"%s_%02d_%02d_%02d_%04d\0", GameWorldController.instance.objectMaster[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
-		switch(GameWorldController.instance.objectMaster.type[currObj.item_id])
+		switch(currObj.GetItemType())
 		{
 		case ObjectInteraction.DOOR:
 		case ObjectInteraction.HIDDENDOOR:
 		case ObjectInteraction.PORTCULLIS:
 			return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3") ;
 		default:
-			return GameWorldController.instance.objectMaster.desc[currObj.item_id]+"_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno.ToString("d2")+"_"+currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+			return currObj.getDesc() + "_"+currObj.tileX.ToString("d2")+"_"+currObj.tileY.ToString("d2")+"_"+currObj.levelno.ToString("d2")+"_"+currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
 		}
 	}
 
@@ -1320,7 +1320,7 @@ public class ObjectLoader : DataLoader {
 		/// <param name="currobj">Currobj.</param>
 	public static bool isContainer(ObjectLoaderInfo currobj)
 	{
-		return  ((GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CONTAINER) || (GameWorldController.instance.objectMaster.type[currobj.item_id] == ObjectInteraction.CORPSE));
+		return  ((currobj.GetItemType() == ObjectInteraction.CONTAINER) || (currobj.GetItemType() == ObjectInteraction.CORPSE));
 	}
 
 		/// <summary>
@@ -1334,7 +1334,7 @@ public class ObjectLoader : DataLoader {
 		{
 				return true;	
 		}
-		switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+		switch(currobj.GetItemType())
 		{	
 		case ObjectInteraction.TMAP_CLIP:
 		case ObjectInteraction.TMAP_SOLID:
@@ -1357,7 +1357,7 @@ public class ObjectLoader : DataLoader {
 
 		public static  bool isAlwaysInUse(ObjectLoaderInfo currobj)
 		{//Objects that will always be generated.
-			switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+			switch(currobj.GetItemType())
 			{	
 			case ObjectInteraction.SPELL:
 			case ObjectInteraction.LOCK:
@@ -1369,7 +1369,7 @@ public class ObjectLoader : DataLoader {
 
 		public static  bool isTrigger(ObjectLoaderInfo currobj)
 		{//Tells if the object is a trigger that can set of a trap.
-				switch(GameWorldController.instance.objectMaster.type[currobj.item_id] )
+				switch(currobj.GetItemType())
 				{
 				case  ObjectInteraction.A_MOVE_TRIGGER :
 				case  ObjectInteraction.A_PICK_UP_TRIGGER :
@@ -1396,7 +1396,7 @@ public class ObjectLoader : DataLoader {
 
 		public static bool isTrap(ObjectLoaderInfo currobj)
 		{
-			switch (GameWorldController.instance.objectMaster.type[currobj.item_id] )
+			switch (currobj.GetItemType())
 			{
 			case ObjectInteraction.A_DAMAGE_TRAP :
 			case ObjectInteraction.A_TELEPORT_TRAP :
@@ -1439,39 +1439,39 @@ public class ObjectLoader : DataLoader {
 				return (currobj.index<256);
 		}
 
-		void SetContainerInUse(int game, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int index)
-		{
-				Debug.Log("SetContainerInUse. Is no longer in use..");
-				return;
-				//Take a container/npc and set inuseflag for it contents. 
-				ObjectLoaderInfo currobj = objList[index];
-				//currobj.InUseFlag == 1;
-				objList[index].InUseFlag=1;
-				if (currobj.link != 0)
-				{//Object has contents.
-						ObjectLoaderInfo tmpObj = objList[currobj.link];//Get the first item in the contents.
-						objList[tmpObj.index].InUseFlag=1;
-						if ((isContainer(tmpObj)) || (GameWorldController.instance.objectMaster.type[tmpObj.item_id] == ObjectInteraction.NPC_TYPE))
-						{//If the first item is a container recursively set it's flag
-								SetContainerInUse(game, LevelInfo, objList, tmpObj.index);
-						}
-						//Now loop through the linked list.
-						if (tmpObj.next > 0)
-						{
-								while (tmpObj.next > 0)
-								{
-										tmpObj = objList[tmpObj.next];
-										objList[tmpObj.index].InUseFlag = 1;
-										//if the next object is a countainer loop through it.
-										if ((isContainer(tmpObj)) || (GameWorldController.instance.objectMaster.type[tmpObj.item_id] == ObjectInteraction.NPC_TYPE))
-										{//If the first item is a container recursively set it's flag
-												SetContainerInUse(game,LevelInfo, objList, tmpObj.index);
-										}
-								}
-						}
-						tmpObj.InUseFlag = 1;
-				}
-		}
+		//void SetContainerInUse(int game, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int index)
+		//{
+		//		Debug.Log("SetContainerInUse. Is no longer in use..");
+		//		return;
+		//		//Take a container/npc and set inuseflag for it contents. 
+		//		ObjectLoaderInfo currobj = objList[index];
+		//		//currobj.InUseFlag == 1;
+		//		objList[index].InUseFlag=1;
+		//		if (currobj.link != 0)
+		//		{//Object has contents.
+		//				ObjectLoaderInfo tmpObj = objList[currobj.link];//Get the first item in the contents.
+		//				objList[tmpObj.index].InUseFlag=1;
+		//				if ((isContainer(tmpObj)) || (GameWorldController.instance.objectMaster.type[tmpObj.item_id] == ObjectInteraction.NPC_TYPE))
+		//				{//If the first item is a container recursively set it's flag
+		//						SetContainerInUse(game, LevelInfo, objList, tmpObj.index);
+		//				}
+		//				//Now loop through the linked list.
+		//				if (tmpObj.next > 0)
+		//				{
+		//						while (tmpObj.next > 0)
+		//						{
+		//								tmpObj = objList[tmpObj.next];
+		//								objList[tmpObj.index].InUseFlag = 1;
+		//								//if the next object is a countainer loop through it.
+		//								if ((isContainer(tmpObj)) || (GameWorldController.instance.objectMaster.type[tmpObj.item_id] == ObjectInteraction.NPC_TYPE))
+		//								{//If the first item is a container recursively set it's flag
+		//										SetContainerInUse(game,LevelInfo, objList, tmpObj.index);
+		//								}
+		//						}
+		//				}
+		//				tmpObj.InUseFlag = 1;
+		//		}
+		//}
 
 		///
 
@@ -1489,11 +1489,11 @@ public class ObjectLoader : DataLoader {
 						do  
 						{
 						if (
-							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_DO_TRAP ) && (currObj.quality==3))
+							((currObj.GetItemType() == ObjectInteraction.A_DO_TRAP ) && (currObj.quality==3))
 							|| 
-							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.AN_OSCILLATOR ))
+							((currObj.GetItemType() == ObjectInteraction.AN_OSCILLATOR ))
 							|| 
-							((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_PIT_TRAP ))
+							((currObj.GetItemType() == ObjectInteraction.A_PIT_TRAP ))
 							)
 							{
 								//LevelInfo[x,y].hasElevator= true;
@@ -1524,7 +1524,7 @@ public class ObjectLoader : DataLoader {
 										currObj = objList[LevelInfo[x,y].indexObjectList];
 										do  
 										{
-												if (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.A_CHANGE_TERRAIN_TRAP )
+												if (currObj.GetItemType() == ObjectInteraction.A_CHANGE_TERRAIN_TRAP )
 												{
 														LevelInfo[x,y].TerrainChange= true;
 														//LevelInfo[x,y].TerrainChangeIndex = currObj.index;
@@ -1736,7 +1736,7 @@ public class ObjectLoader : DataLoader {
 				}
 				if ((x<64) && (y<64))
 				{
-						switch (GameWorldController.instance.objectMaster.type[objList[index].item_id])
+						switch (objList[index].GetItemType())
 						{
 						case ObjectInteraction.TMAP_CLIP:
 						case ObjectInteraction.TMAP_SOLID:
@@ -1968,7 +1968,7 @@ public class ObjectLoader : DataLoader {
 		/// <param name="index">Index.</param>
 		public static int GetItemTypeAt(int index)
 		{
-			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index).item_id];
+			return getObjectInfoAt(index).GetItemType();
 		}
 
 		/// <summary>
@@ -1979,8 +1979,8 @@ public class ObjectLoader : DataLoader {
 		/// <param name="objList">Object list.</param>
 		public static int GetItemTypeAt(int index, ObjectLoader objList)
 		{
-			return GameWorldController.instance.objectMaster.type[getObjectInfoAt(index,objList).item_id];
-		}
+            return getObjectInfoAt(index, objList).GetItemType();
+        }
 
 
 		/// <summary>
@@ -2626,15 +2626,15 @@ public class ObjectLoader : DataLoader {
 		int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex)
 		{//Find the specified object in the array of shock objectmasters
 			
-			for (int i=0;i<=GameWorldController.instance.objectMaster.objClass.GetUpperBound(0);i++)
+			for (int i=0;i<=GameWorldController.instance.objectMaster.objProp.GetUpperBound(0);i++)
 			{
 						
 				if (
-					(GameWorldController.instance.objectMaster.objClass[i] == objClass)
+					(GameWorldController.instance.objectMaster.objProp[i].objClass == objClass)
 					&&
-					(GameWorldController.instance.objectMaster.objSubClass[i] == objSubClass)
+					(GameWorldController.instance.objectMaster.objProp[i].objSubClass== objSubClass)
 					&&
-					(GameWorldController.instance.objectMaster.objSubClassIndex[i] == objSubClassIndex)
+					(GameWorldController.instance.objectMaster.objProp[i].objSubClassIndex == objSubClassIndex)
 				)
 				{
 					return i;
@@ -2896,7 +2896,7 @@ public class ObjectLoader : DataLoader {
 											//fprintf(LOGFILE,"\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
 											//objList[objIndex].address = blockAddress+add_ptr;
 											//fprintf(LOGFILE,"\tObject is at address %d\n", objList[objIndex].address);
-											if (  GameWorldController.instance.objectMaster.type[objList[objIndex].item_id] == ObjectInteraction.SHOCK_TRIGGER_REPULSOR)
+											if ( objList[objIndex].GetItemType() == ObjectInteraction.SHOCK_TRIGGER_REPULSOR)
 											{
 														objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = (int)getValAtAddress(sub_ark.data, add_ptr + 21, 8);
 														objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = (int)getValAtAddress(sub_ark.data, add_ptr + 24, 8);
@@ -3736,9 +3736,9 @@ public class ObjectLoader : DataLoader {
 										currObj = objList[LevelInfo[x,y].indexObjectList];
 										do  
 										{
-												if ((GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.DOOR ) 
-														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.HIDDENDOOR )
-														|| (GameWorldController.instance.objectMaster.type[objList[currObj.index].item_id] == ObjectInteraction.PORTCULLIS))
+												if ((objList[currObj.index].GetItemType() == ObjectInteraction.DOOR ) 
+														|| (objList[currObj.index].GetItemType() == ObjectInteraction.HIDDENDOOR )
+														|| (objList[currObj.index].GetItemType() == ObjectInteraction.PORTCULLIS))
 												{
 														//if (currObj.Angle1 >0)
 														//	{

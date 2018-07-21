@@ -161,7 +161,7 @@ public class TileMapRenderer : Loader{
 					tmp.VisibleFaces[vSOUTH] = false;
 					// top,east,bottom,west,north,south
 					//GameObject ceil = 
-										RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
+					GameWorldController.instance.ceiling = RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);	
 					//ceil.layer= LayerMask.NameToLayer ("UWObjects");
 				
 				//And at 99,99 for special stuff.
@@ -691,7 +691,7 @@ public class TileMapRenderer : Loader{
 				{
 						if (objList.objInfo[i]!=null)
 						{
-							if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
+							if ((objList.objInfo[i].GetItemType()==ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag==1))
 							{
 									Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 									//position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
@@ -787,7 +787,7 @@ public class TileMapRenderer : Loader{
 						if (objList.objInfo[i] !=null)
 						{						
 						
-						if ((GameWorldController.instance.objectMaster.type[objList.objInfo[i].item_id]==ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag==1) && (objList.objInfo[i].invis==0))
+						if ((objList.objInfo[i].GetItemType()==ObjectInteraction.BRIDGE) && (objList.objInfo[i].InUseFlag==1) && (objList.objInfo[i].invis==0))
 						{
 								Vector3 position = ObjectLoader.CalcObjectXYZ(_RES,level,level.Tiles,objList.objInfo,i,(int)objList.objInfo[i].tileX,(int)objList.objInfo[i].tileY,0);
 								position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
@@ -1317,6 +1317,13 @@ public class TileMapRenderer : Loader{
 		/// <param name="TileName">Tile name.</param>
 		static GameObject RenderCuboid(GameObject parent, int x, int y, TileInfo t, bool Water, int Bottom, int Top, string TileName)
 		{
+            if (UWEBase.EditorMode)
+            {
+                if (t.tileType == TILE_SOLID)
+                    {//Make sure this is not the ceiling
+                        t.VisibleFaces[vTOP] = true;
+                    }                
+            }
 				
 				//Draw a cube with no slopes.
 				int NumberOfVisibleFaces=0;
@@ -1375,8 +1382,12 @@ public class TileMapRenderer : Loader{
 													MatsToUse[FaceCounter]=GameWorldController.instance.SpecialMaterials[0];
 												}
 											}
+                                            if ((t.tileType == TILE_SOLID) && (UWEBase.EditorMode))
+                                            {
+                                                MatsToUse[FaceCounter] = GameWorldController.instance.Jorge;
+                                            }
 
-											verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
+                            verts[0+ (4*FaceCounter)]=  new Vector3(0.0f, 0.0f,floorHeight);
 											verts[1+ (4*FaceCounter)]=  new Vector3(0.0f, 1.2f*dimY, floorHeight);
 											verts[2+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,1.2f*dimY, floorHeight);
 											verts[3+ (4*FaceCounter)]=  new Vector3(-1.2f*dimX,0.0f, floorHeight);

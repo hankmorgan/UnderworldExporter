@@ -851,7 +851,7 @@ public class DoorControl : object_base {
 				navobs.size= new Vector3(0.8f, 0.1f, 1.1f);
 
 
-			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
+			switch  (objInt.GetItemType())
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
@@ -895,8 +895,8 @@ public class DoorControl : object_base {
 
 			myObj.layer=LayerMask.NameToLayer("Doors");
 			GameObject newObj;
-			switch  (GameWorldController.instance.objectMaster.type[objInt.item_id])
-				{
+			switch  (objInt.GetItemType())
+                {
 				case ObjectInteraction.PORTCULLIS:
 						{
 						newObj = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("Models/Portcullis"));
@@ -1143,7 +1143,7 @@ public class DoorControl : object_base {
 
 		public override string ContextMenuDesc (int item_id)
 		{
-				switch  (GameWorldController.instance.objectMaster.type[item_id])
+				switch  (objInt().GetItemType())
 				{
 					case ObjectInteraction.HIDDENDOOR:
 						if (state()==false)//Closed and probably hidden
@@ -1161,7 +1161,7 @@ public class DoorControl : object_base {
 
 	public override string ContextMenuUsedDesc ()
 	{
-		switch  (GameWorldController.instance.objectMaster.type[objInt().item_id])
+		switch  (objInt().GetItemType())
 		{
 		case ObjectInteraction.HIDDENDOOR:
 			if (state()==false)//Closed and probably hidden

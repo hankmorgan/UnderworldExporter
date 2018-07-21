@@ -15,7 +15,7 @@ using UnityEngine.UI;
 /// </summary>
 
 public class GameWorldController : UWEBase {
-
+    public GameObject ceiling;
 
 		public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;
 
@@ -280,11 +280,16 @@ public class GameWorldController : UWEBase {
 		public Material[] MaterialMasterList=new Material[260];
 
 		public Material[] SpecialMaterials=new Material[1];
+    
+    /// <summary>
+    /// Default material for the editor
+    /// </summary>
+        public Material Jorge;
 
-		/// <summary>
-		/// The materials for doors  (doors.gr)
-		/// </summary>
-		public Material[] MaterialDoors=new Material[13];
+        /// <summary>
+        /// The materials for doors  (doors.gr)
+        /// </summary>
+        public Material[] MaterialDoors=new Material[13];
 
 		/// <summary>
 		/// The materials for tmobj + models (tmobj.gr)
@@ -582,10 +587,13 @@ public class GameWorldController : UWEBase {
 						}
 						WorldReRenderPending=false;
 						FullReRender=false;
-						NavMeshLand.UpdateNavMesh(NavMeshLand.navMeshData);
-						NavMeshWater.UpdateNavMesh(NavMeshWater.navMeshData);
-						//NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
-						NavMeshLava.UpdateNavMesh(NavMeshLava.navMeshData);
+                        if (!IngameEditor.EditorMode)
+                        {
+                            NavMeshLand.UpdateNavMesh(NavMeshLand.navMeshData);
+                            NavMeshWater.UpdateNavMesh(NavMeshWater.navMeshData);
+                            //NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
+                            NavMeshLava.UpdateNavMesh(NavMeshLava.navMeshData);
+                        }
 				}
 		}
 
@@ -997,7 +1005,6 @@ public class GameWorldController : UWEBase {
 									Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
 							}
 							Tilemaps[newLevelNo].CreateRooms();
-
 						}
 
 						if ((UWEBase._RES!=UWEBase.GAME_SHOCK) && (LevelNo!=-1))
@@ -1010,17 +1017,16 @@ public class GameWorldController : UWEBase {
 												t.gameObject.GetComponent<object_base>().InventoryEventOnLevelExit();
 										}
 								}
-
 						}
 
 						if(LevelNo!=-1)
 						{//Changing from a level that has already loaded
-								//Update the positions of all object interactions in the level
-								//UpdatePositions();
+						//Update the positions of all object interactions in the level
+						//UpdatePositions();
 
 								if (UWEBase.EditorMode==false)
 								{
-										ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
+									ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());		
 								}
 								//Store the state of the object list with just the objects in objects transform for when I re
 

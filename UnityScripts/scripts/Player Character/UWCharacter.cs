@@ -253,6 +253,10 @@ public class UWCharacter : Character {
 
 		public override float GetUseRange ()
 		{
+        if (EditorMode)
+        {
+            return 100;
+        }
 				if (isTelekinetic==true)
 				{
 						return useRange*8.0f;
@@ -919,7 +923,7 @@ public class UWCharacter : Character {
 										else
 										{//000~001~096~You cannot pick that up.
 												//Object cannot be picked up. Try and use it instead
-												if (objPicked.CanBeUsed)
+												if (objPicked.isUsable())
 												{
 														UseMode();
 														UWHUD.instance.window.UWWindowWait (1.0f);

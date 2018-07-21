@@ -129,7 +129,10 @@ the left, right, center button combination on Level3.
 		if (objInt().heading!=0)
 			{
 				int cmp = ComparisonValue ();
-				Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());
+				if (cmp == VariableValue())
+				{
+					Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());	
+				}				
 				return cmp == VariableValue();
 				
 			}

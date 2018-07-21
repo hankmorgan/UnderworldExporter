@@ -105,7 +105,7 @@ A trigger that fires when the player character enters it
 				{//Make sure triggers, traps and special items are created.
 					if (objList[i]!=null)
 					{
-						if (GameWorldController.instance.objectMaster.type[objList[i].item_id] == ObjectInteraction.MOONGATE)
+						if (objList[i].GetItemType() == ObjectInteraction.MOONGATE)
 						{
 							if ((objList[i].tileX == objInt().tileX) && (objList[i].tileY == objInt().tileY))
 							{
