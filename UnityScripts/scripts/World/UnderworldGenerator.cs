@@ -7,7 +7,8 @@ public class UnderworldGenerator : UWEBase {
     public Text output;
     public int[,] RoomMap = new int[64, 64];
     public static UnderworldGenerator instance;
-    
+    private int ConnectorCount = 1;
+
     struct Room
     {
         public int index;
@@ -16,16 +17,19 @@ public class UnderworldGenerator : UWEBase {
         public int dimX;//Dimensions of room
         public int dimY;
         public int[] ConnectedRooms; //Indices of rooms connected to this room (direct or indirect)
+        public int[] BuiltConnections; //What connections are made by virtue of a corridor intersecting this room.
     };
 
     struct Connector
     {
+        public int index;
         public int StartRoom;
         public int EndRoom;
         public int startX;
         public int startY;
         public int endX;
         public int endY;
+        public int[] ConnectedRooms; //What rooms are connected to this corridor.        
     };
 
     Room[] rooms;
@@ -66,9 +70,11 @@ public class UnderworldGenerator : UWEBase {
         for (int i=0; i<=validRooms;i++)
         {
             rooms[i].ConnectedRooms = new int[validRooms+1];
+            rooms[i].BuiltConnections = new int[validRooms + 1];
             for (int j=0; j<=rooms[i].ConnectedRooms.GetUpperBound(0);j++)
             {
-                rooms[i].ConnectedRooms[j] = -1;
+                rooms[i].ConnectedRooms[j] = 0;
+                rooms[i].BuiltConnections[j] = 0;
             }
             rooms[i].ConnectedRooms[i] = i;//always connect to itself
         }
@@ -134,13 +140,13 @@ public class UnderworldGenerator : UWEBase {
         {
             for (int x = 0; x <= 63; x++)
             {
-                if (RoomMap[x, y]!=-1)
+                if (RoomMap[x, y]>=0)
                 {
                     output.text = output.text + RoomMap[x, y];
                 }
                 else
                 {
-                    output.text = output.text + 'x';
+                    output.text = output.text + -RoomMap[x, y];
                 }                
             }
             output.text = output.text + "\n";
@@ -188,9 +194,11 @@ public class UnderworldGenerator : UWEBase {
             //TODO:create the actual corridor link
            // Debug.Log("Connecting " + startRoom + " to " + endRoom);
             Connector con = new Connector();
+            con.index = ConnectorCount++;
             con.StartRoom = startRoom;
             con.EndRoom = endRoom;
-
+            con.ConnectedRooms = new int[NoOfRooms + 1];
+            con.ConnectedRooms[con.StartRoom] = con.StartRoom; //Always connected to itself.
             con.startX = Random.Range(rooms[con.StartRoom].x, rooms[con.StartRoom].x + rooms[con.StartRoom].dimX);
             con.startY = Random.Range(rooms[con.StartRoom].y, rooms[con.StartRoom].y + rooms[con.StartRoom].dimY);
             con.endX = Random.Range(rooms[con.EndRoom].x, rooms[con.EndRoom].x + rooms[con.EndRoom].dimX);
@@ -270,16 +278,23 @@ public class UnderworldGenerator : UWEBase {
     {
         foreach (Connector con in Connectors)
         {
+            
             //Run a path between start and end.
             int curX = con.startX; int curY = con.startY;
             int dirX; int dirY;
+            if (rooms[con.StartRoom].BuiltConnections[con.EndRoom] == con.EndRoom)
+            {//A connection already exists.
+                curX = con.endX;
+                curY = con.endY;
+            }
             while (curX != con.endX || curY != con.endY)
             {
-                int moveX = 0; int moveY = 0;
+                int moveX = 0; int moveY = 0;//How far is to be moved in the x/y axis.
                 int diffX = con.endX - curX;
                 int diffY = con.endY - curY;
-                bool MoveOnX = false; bool MoveOnY = false;
+                int MoveAbs = 0;    //The movement distance choosen.
 
+                //Pick how far will be moved in each axis
                 if (diffX != 0)
                 {
                     moveX = Random.Range(1, Mathf.Abs(diffX) + 1);
@@ -288,55 +303,100 @@ public class UnderworldGenerator : UWEBase {
                 {
                     moveY = Random.Range(1, Mathf.Abs(diffY) + 1);
                 }
-
+                //Pick the step direction for x/y
                 if (diffX >= 0) { dirX = 1; } else { dirX = -1; }
                 if (diffY >= 0) { dirY = 1; } else { dirY = -1; }
-
+               
                 if (moveX != 0 && moveY != 0)
                 {//move in a random non-zero axis
                     if (Random.Range(0, 2) == 1)
                     {//move x
-                        MoveOnX = true;
+                        MoveAbs = moveX;
+                        dirY = 0;
                     }
                     else
                     {//move 
-                        MoveOnY = true;
+                        MoveAbs = moveY;
+                        dirX = 0;
                     }
                 }
                 else if (moveX != 0)
                 {//move on x axis
-                    MoveOnX = true;
+                   // MoveOnX = true;
+                    MoveAbs = moveX;
+                    dirY = 0;
                 }
                 else
                 {//move on y axis
-                    MoveOnY = true;
+                    //MoveOnY = true;
+                    MoveAbs = moveY;
+                    dirX = 0;
                 }
-
-                if (MoveOnX)
+                
+                for (int x= 1; x<=Mathf.Abs(MoveAbs);x++)
                 {
-                    for (int x= 1; x<=Mathf.Abs(moveX);x++)
+                    curX += dirX;
+                    curY += dirY;
+                    if (RoomMap[curX, curY] == 0)
                     {
-                        curX +=dirX;
-                        if (RoomMap[curX, curY] ==0)
-                        {
-                            RoomMap[curX, curY] = -1;
-                        }                        
-                        if (curX == con.endX) { break; }
+                        RoomMap[curX, curY] = - con.index;//Connectors are negative numbers
                     }
-                }
-                if (MoveOnY)
-                {
-                    for (int y = 1; y <= Mathf.Abs(moveY); y++)
-                    {
-                        curY+=dirY;
-                        if (RoomMap[curX, curY] == 0)
-                        {
-                            RoomMap[curX, curY] = -1;
+                    else if(RoomMap[curX, curY] > 0)
+                    {//I've hit another room. Set a built connection between start and this room
+                        int roomReached = RoomMap[curX, curY];
+                        rooms[roomReached].BuiltConnections[con.StartRoom] = con.StartRoom;
+                        rooms[con.StartRoom].BuiltConnections[roomReached] = roomReached;
+                        ConnectAll(con.StartRoom, roomReached);
+                        if (rooms[roomReached].BuiltConnections[con.EndRoom] == con.EndRoom)
+                        {//there is a built connection to the target. Stop traversing.
+                            curX = con.endX;
+                            curY = con.endY;
+                            break;
                         }
-                        if (curY==con.endY ) { break; }
+                    } 
+                    else
+                    {//I've hit a corridor. Check if that corridor connects to where I want to be.
+                        int foundcorridor = Mathf.Abs(RoomMap[curX, curY]);
+                        for (int c = 1; c <= Connectors[foundcorridor].ConnectedRooms.GetUpperBound(0); c++)
+                        {
+                            ConnectAll(Connectors[foundcorridor].ConnectedRooms[c], con.StartRoom);
+                        }
+                        //Mark both corridors as being connected.
+                        /*Connectors[foundcorridor].ConnectedRooms[con.StartRoom] = con.StartRoom;
+                        //each connection already on this corridor is now connected to the corridor being created.
+                        for ( int c=1; c<= Connectors[foundcorridor].ConnectedRooms.GetUpperBound(0);c++)
+                        {
+                            if (Connectors[foundcorridor].ConnectedRooms[c]!=0)
+                            {//Copy each connected room on the found corridor to the corrider being created.
+                                con.ConnectedRooms[Connectors[foundcorridor].ConnectedRooms[c]] = Connectors[foundcorridor].ConnectedRooms[c];
+                                rooms[con.StartRoom].BuiltConnections[con.EndRoom] = con.EndRoom;
+                                rooms[con.EndRoom].BuiltConnections[con.StartRoom] = con.StartRoom;
+                            }
+                        }
+                        for (int c = 1; c <= con.ConnectedRooms.GetUpperBound(0); c++)
+                        {//Copy each connected room on the created corridor to the found corrid.
+                            if (con.ConnectedRooms[c]!=0)
+                            {
+                                Connectors[foundcorridor].ConnectedRooms[c] = c;
+                                rooms[con.StartRoom].BuiltConnections[c] = c;
+                                rooms[con.EndRoom].BuiltConnections[c] = c;
+                            }
+                        }*/
+
+                        if (Connectors[foundcorridor].ConnectedRooms[con.EndRoom] == con.EndRoom)
+                        {//I've reached the target room because it connects to my destination via this corridor
+                            curX = con.endX;
+                            curY = con.endY;
+                            break;
+                        }
                     }
+                    //Stop when reached the target x&y                       
+                    if ((curX == con.endX) && (dirX != 0)) { break; }
+                    if ((curY == con.endY) && (dirY != 0)) { break; }
                 }
             }
+            rooms[con.StartRoom].BuiltConnections[con.EndRoom] = con.EndRoom;
+            rooms[con.EndRoom].BuiltConnections[con.StartRoom] = con.StartRoom;
         }
 
     }
@@ -346,8 +406,16 @@ public class UnderworldGenerator : UWEBase {
         TileMap tm = new TileMap(levelNo);
         tm.texture_map = new short[TileMap.UW1_TEXTUREMAPSIZE];
         for (short t=0; t<=tm.texture_map.GetUpperBound(0); t++)
-        {
-            tm.texture_map[t] = t;
+        {//Some quick and dirty values
+            if (t<=57)
+            {
+                tm.texture_map[t] = t;
+            }
+            else
+            {
+                tm.texture_map[t] =(short)( t - 57);
+            }
+            
         }
         tm.Tiles = new TileInfo[64, 64];
         tm.CEILING_HEIGHT = ((128 >> 2) * 8 >> 3);
@@ -393,8 +461,9 @@ public class UnderworldGenerator : UWEBase {
                 if (RoomMap[x,y] !=0)
                 {                   
                     Tiles[x, y].tileType = TileMap.TILE_OPEN;
-                    Tiles[x, y].floorHeight = 15;
+                    Tiles[x, y].floorHeight = 16;
                     Tiles[x, y].VisibleFaces[TileMap.vBOTTOM] = false;
+                    Tiles[x, y].floorTexture = (short)Mathf.Min(Mathf.Abs(RoomMap[x, y]),10);
                     ////Floor textures are 49 to 56             
                 }
                // return;
@@ -402,4 +471,36 @@ public class UnderworldGenerator : UWEBase {
         }
        tm.SetTileMapWallFacesUW();
     }
+
+    void ConnectAll(int src, int dst )
+    {
+        foreach (Connector con in Connectors)
+        {
+            //for (int c= 1;c<=con.ConnectedRooms.GetUpperBound(0);c++)
+            // {
+            // If a connector connects to src then it must also connect to dst.
+            if (con.ConnectedRooms[src] == src)
+            {
+                con.ConnectedRooms[dst] = dst;
+            }
+            if (con.ConnectedRooms[dst] == dst)
+            {
+                con.ConnectedRooms[src] = src; 
+            }            //}
+        }
+
+        for (int r=1;r<=rooms.GetUpperBound(0);r++)
+        {             
+            if(rooms[r].BuiltConnections[src]==src)
+            {
+                rooms[r].BuiltConnections[dst] = dst; 
+            }
+
+            if (rooms[r].BuiltConnections[dst] == dst)
+            {
+                rooms[r].BuiltConnections[src] = src; 
+            }
+        }
+    }
+
 }
