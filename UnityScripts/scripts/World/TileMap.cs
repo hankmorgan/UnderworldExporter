@@ -483,7 +483,9 @@ public class TileMap : Loader {
 						}
 				}
 
-				SetTileMapWallFacesUW ();
+               // UnderworldGenerator.instance.RoomsToTileMap(this, Tiles);
+
+                SetTileMapWallFacesUW ();
 
 
 				//if (OverlayAddress!=0)
@@ -2756,7 +2758,7 @@ public class TileMap : Loader {
 					offset = offset + 2;
 				}
 				else
-					if (i <= 57)//Floor textures are 49 to 56, ceiling is 57
+					if (i <= 57)//Floor textures are 48 to 56, ceiling is 57
 					 {
 						texture_map [i] = (short)(DataLoader.getValAtAddress (tex_ark, offset, 16) + 210);
 						offset = offset + 2;
