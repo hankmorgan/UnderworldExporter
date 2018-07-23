@@ -4,11 +4,6 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class UnderworldGenerator : UWEBase {
-    public Text output;
-    public int[,] RoomMap = new int[64, 64];
-    public static UnderworldGenerator instance;
-    private int ConnectorCount = 1;
-
     struct Room
     {
         public int index;
@@ -32,31 +27,48 @@ public class UnderworldGenerator : UWEBase {
         public int[] ConnectedRooms; //What rooms are connected to this corridor.        
     };
 
+    public Text output;
+    public int Seed;
+    public int[,] RoomMap;//= new int[64, 64];
+    public static UnderworldGenerator instance;
+    private int ConnectorCount = 1;
+
     Room[] rooms;
     List<Connector> Connectors = new List<Connector>();
-
     public int NoOfRooms = 4;
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
+        instance = this;
+    }
+
+    public void GenerateLevel(int levelseed)
+    {
+        Seed = levelseed;
+        ConnectorCount = 1;
+        RoomMap = new int[64, 64];
+        Connectors = new List<Connector>();
+        Random.InitState(levelseed);
+        NoOfRooms = Random.Range(1, 26);
         instance = this;
         //Randomly place
         int RoomsLeft = NoOfRooms;
         int NoOfAttempts = NoOfRooms * 8;//Try each room 8 times.
         int RoomIndex = 1;
-        int validRooms=0;
-        rooms = new Room[NoOfRooms+1];
-        while( (RoomsLeft>0) && (NoOfAttempts >0))
+        int validRooms = 0;
+        rooms = new Room[NoOfRooms + 1];
+        while ((RoomsLeft > 0) && (NoOfAttempts > 0))
         {
             //Generate a room
-            Room newroom = RandomRoom();             
+            Room newroom = RandomRoom();
             //check collision on room.
             if (!DoesRoomCollide(newroom))
             {
-               // Debug.Log("Placing Room " + RoomIndex + " at " + newroom.x + "," + newroom.y + " (" +newroom.dimX + "," + newroom.dimY + ")");
+                // Debug.Log("Placing Room " + RoomIndex + " at " + newroom.x + "," + newroom.y + " (" +newroom.dimX + "," + newroom.dimY + ")");
                 rooms[RoomIndex] = newroom;
-                newroom.index = RoomIndex++;
-                PlaceRoom(newroom);
+                rooms[RoomIndex].index = RoomIndex;
+                PlaceRoom(rooms[RoomIndex]);
+                RoomIndex++;
                 RoomsLeft--;
                 validRooms++;
             }
@@ -65,13 +77,13 @@ public class UnderworldGenerator : UWEBase {
                 NoOfAttempts++;
             }
         }
-        
+
         //Set no of connected rooms
-        for (int i=0; i<=validRooms;i++)
+        for (int i = 0; i <= validRooms; i++)
         {
-            rooms[i].ConnectedRooms = new int[validRooms+1];
+            rooms[i].ConnectedRooms = new int[validRooms + 1];
             rooms[i].BuiltConnections = new int[validRooms + 1];
-            for (int j=0; j<=rooms[i].ConnectedRooms.GetUpperBound(0);j++)
+            for (int j = 0; j <= rooms[i].ConnectedRooms.GetUpperBound(0); j++)
             {
                 rooms[i].ConnectedRooms[j] = 0;
                 rooms[i].BuiltConnections[j] = 0;
@@ -80,10 +92,7 @@ public class UnderworldGenerator : UWEBase {
         }
 
         FillConnectedRooms(validRooms);
-
         PlaceConnectors();
-
-
         PrintRoomConnections();
         PrintRooms();
     }
@@ -142,11 +151,11 @@ public class UnderworldGenerator : UWEBase {
             {
                 if (RoomMap[x, y]>=0)
                 {
-                    output.text = output.text + RoomMap[x, y];
+                    output.text = output.text + RoomMap[x, y] +",";
                 }
                 else
                 {
-                    output.text = output.text + -RoomMap[x, y];
+                    output.text = output.text + -RoomMap[x, y] + ",";
                 }                
             }
             output.text = output.text + "\n";
@@ -346,44 +355,31 @@ public class UnderworldGenerator : UWEBase {
                         int roomReached = RoomMap[curX, curY];
                         rooms[roomReached].BuiltConnections[con.StartRoom] = con.StartRoom;
                         rooms[con.StartRoom].BuiltConnections[roomReached] = roomReached;
-                        ConnectAll(con.StartRoom, roomReached);
-                        if (rooms[roomReached].BuiltConnections[con.EndRoom] == con.EndRoom)
-                        {//there is a built connection to the target. Stop traversing.
-                            curX = con.endX;
-                            curY = con.endY;
-                            break;
+                        if ((roomReached != con.StartRoom) && (roomReached!=con.EndRoom))
+                        {
+                            int[] testedRooms = new int[NoOfRooms + 1];
+                            if (AreRoomsConnected(rooms[roomReached], rooms[con.EndRoom], ref testedRooms))
+                            {//there is a built connection to the target. Stop traversing.
+                                curX = con.endX;
+                                curY = con.endY;
+                                break;
+                            }
                         }
                     } 
                     else
                     {//I've hit a corridor. Check if that corridor connects to where I want to be.
-                        int foundcorridor = Mathf.Abs(RoomMap[curX, curY]);
-                        for (int c = 1; c <= Connectors[foundcorridor].ConnectedRooms.GetUpperBound(0); c++)
-                        {
-                            ConnectAll(Connectors[foundcorridor].ConnectedRooms[c], con.StartRoom);
-                        }
-                        //Mark both corridors as being connected.
-                        /*Connectors[foundcorridor].ConnectedRooms[con.StartRoom] = con.StartRoom;
-                        //each connection already on this corridor is now connected to the corridor being created.
-                        for ( int c=1; c<= Connectors[foundcorridor].ConnectedRooms.GetUpperBound(0);c++)
-                        {
-                            if (Connectors[foundcorridor].ConnectedRooms[c]!=0)
-                            {//Copy each connected room on the found corridor to the corrider being created.
-                                con.ConnectedRooms[Connectors[foundcorridor].ConnectedRooms[c]] = Connectors[foundcorridor].ConnectedRooms[c];
-                                rooms[con.StartRoom].BuiltConnections[con.EndRoom] = con.EndRoom;
-                                rooms[con.EndRoom].BuiltConnections[con.StartRoom] = con.StartRoom;
-                            }
-                        }
-                        for (int c = 1; c <= con.ConnectedRooms.GetUpperBound(0); c++)
-                        {//Copy each connected room on the created corridor to the found corrid.
-                            if (con.ConnectedRooms[c]!=0)
-                            {
-                                Connectors[foundcorridor].ConnectedRooms[c] = c;
-                                rooms[con.StartRoom].BuiltConnections[c] = c;
-                                rooms[con.EndRoom].BuiltConnections[c] = c;
-                            }
-                        }*/
+                        int foundcorridor = Mathf.Abs(RoomMap[curX, curY]) - 1;
+                        Room FoundStartRoom = rooms[Connectors[foundcorridor].StartRoom];
+                        Room FoundEndRoom = rooms[Connectors[foundcorridor].EndRoom];
+                        //Add connections to start and end of found corridor
+                        rooms[con.StartRoom].BuiltConnections[FoundStartRoom.index] = FoundStartRoom.index;
+                        rooms[con.StartRoom].BuiltConnections[FoundEndRoom.index] = FoundEndRoom.index;
+                        FoundStartRoom.BuiltConnections[con.StartRoom] = con.StartRoom;
+                        FoundEndRoom.BuiltConnections[con.StartRoom] = con.StartRoom;
 
-                        if (Connectors[foundcorridor].ConnectedRooms[con.EndRoom] == con.EndRoom)
+                        //if (Connectors[foundcorridor].ConnectedRooms[con.EndRoom] == con.EndRoom)
+                        int[] testedRooms = new int[NoOfRooms + 1];
+                        if (AreRoomsConnected(rooms[Connectors[foundcorridor].StartRoom], rooms[con.EndRoom], ref testedRooms))
                         {//I've reached the target room because it connects to my destination via this corridor
                             curX = con.endX;
                             curY = con.endY;
@@ -472,35 +468,70 @@ public class UnderworldGenerator : UWEBase {
        tm.SetTileMapWallFacesUW();
     }
 
-    void ConnectAll(int src, int dst )
+    //void ConnectAll(int src, int dst )
+    //{
+    //    foreach (Connector con in Connectors)
+    //    {
+    //        //for (int c= 1;c<=con.ConnectedRooms.GetUpperBound(0);c++)
+    //        // {
+    //        // If a connector connects to src then it must also connect to dst.
+    //        if (con.ConnectedRooms[src] == src)
+    //        {
+    //            con.ConnectedRooms[dst] = dst;
+    //        }
+    //        if (con.ConnectedRooms[dst] == dst)
+    //        {
+    //            con.ConnectedRooms[src] = src; 
+    //        }            //}
+    //    }
+
+    //    for (int r=1;r<=rooms.GetUpperBound(0);r++)
+    //    {             
+    //        if(rooms[r].BuiltConnections[src]==src)
+    //        {
+    //            rooms[r].BuiltConnections[dst] = dst; 
+    //        }
+
+    //        if (rooms[r].BuiltConnections[dst] == dst)
+    //        {
+    //            rooms[r].BuiltConnections[src] = src; 
+    //        }
+    //    }
+    //}
+
+
+    bool AreRoomsConnected(Room src, Room dst, ref int[] testedRooms)
     {
-        foreach (Connector con in Connectors)
+        bool result = false;
+        testedRooms[src.index] = src.index;
+
+        if (src.BuiltConnections[dst.index] == dst.index)
+        {//rooms are connected
+            return true;
+        }
+
+        //Check each conected room to the current room to see if they are connected to the destination
+        for (int c = 1; c <= src.ConnectedRooms.GetUpperBound(0); c++)
         {
-            //for (int c= 1;c<=con.ConnectedRooms.GetUpperBound(0);c++)
-            // {
-            // If a connector connects to src then it must also connect to dst.
-            if (con.ConnectedRooms[src] == src)
+            
+            if (
+                (c!= src.index) //Not the room we are already in
+                &&
+                (src.ConnectedRooms[c] == c)    //Is a connected room
+                &&
+                (testedRooms[c]!=c)  //not already tested
+                )
             {
-                con.ConnectedRooms[dst] = dst;
-            }
-            if (con.ConnectedRooms[dst] == dst)
-            {
-                con.ConnectedRooms[src] = src; 
-            }            //}
-        }
-
-        for (int r=1;r<=rooms.GetUpperBound(0);r++)
-        {             
-            if(rooms[r].BuiltConnections[src]==src)
-            {
-                rooms[r].BuiltConnections[dst] = dst; 
-            }
-
-            if (rooms[r].BuiltConnections[dst] == dst)
-            {
-                rooms[r].BuiltConnections[src] = src; 
+                if (AreRoomsConnected( rooms[src.ConnectedRooms[c]] , dst, ref testedRooms ))
+                {
+                    result = true;
+                    break;
+                }
             }
         }
+
+
+        return result;
     }
 
 }

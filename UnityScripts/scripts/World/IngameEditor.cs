@@ -77,6 +77,8 @@ public class IngameEditor : GuiBase_Draggable {
 		public InputField npc_attitude;
 		public InputField npc_talkedto;
 
+        public InputField seed;
+
 
 		public static bool FollowMeMode=false;
 
@@ -1213,6 +1215,18 @@ public class IngameEditor : GuiBase_Draggable {
         }
     }
 
+
+    public void GenerateRandomLevel()
+    {
+        int levelseed = 0;
+        if (int.TryParse(seed.text, out levelseed))
+        {
+            UnderworldGenerator.instance.GenerateLevel(levelseed);
+            UnderworldGenerator.instance.RoomsToTileMap(GameWorldController.instance.currentTileMap(), GameWorldController.instance.currentTileMap().Tiles);
+            GameWorldController.WorldReRenderPending = true;
+            GameWorldController.FullReRender = true;
+        }
+    }
 }
 
 

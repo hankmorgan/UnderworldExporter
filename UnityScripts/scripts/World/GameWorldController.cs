@@ -597,6 +597,10 @@ public class GameWorldController : UWEBase
                 //NavMeshAir.UpdateNavMesh(NavMeshAir.navMeshData);
                 NavMeshLava.UpdateNavMesh(NavMeshLava.navMeshData);
             }
+            else
+            {
+                IngameEditor.instance.RefreshTileMap();
+            }
         }
     }
 
@@ -979,6 +983,7 @@ public class GameWorldController : UWEBase
                     {
                         if (EnableUnderworldGenerator)
                         {
+                            UnderworldGenerator.instance.GenerateLevel(UnderworldGenerator.instance.Seed);
                             Tilemaps[newLevelNo] = UnderworldGenerator.instance.CreateTileMap(newLevelNo);
                         }
                         else
