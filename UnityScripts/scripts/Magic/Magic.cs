@@ -2632,7 +2632,7 @@ public class Magic : UWEBase {
 		{
 				foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,range))
 				{
-						bool ValidNPCtype=false;
+						//bool ValidNPCtype=false;
 						if (Col.gameObject.GetComponent<NPC>()!=null)
 						{
 							return Col.gameObject.GetComponent<NPC>();
