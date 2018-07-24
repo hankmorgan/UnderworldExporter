@@ -18,4 +18,5 @@ public class GeneratorClasses : UWClass {
     {
         BaseHeight = Random.Range(0, 9) * 2;//Only multiple of two allowed. Range from 0 to 16
     }
+
 }

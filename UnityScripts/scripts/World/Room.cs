@@ -39,5 +39,4 @@ public class Room : GeneratorClasses {
         base.StyleArea();
     }
 
-
 }
