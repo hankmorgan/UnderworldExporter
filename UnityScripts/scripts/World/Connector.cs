@@ -173,7 +173,10 @@ public class Connector : GeneratorClasses {
                     change = 0;
                 }
                 accum += change;//Accumulate the new change
-
+                if (change!=0)
+                {//Prevent diagonals on risers
+                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag = false;
+                }
                 //Change by the new increase.    
                 UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight += change;
 

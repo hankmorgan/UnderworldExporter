@@ -55,6 +55,21 @@ public class UnderworldGenerator : UWEBase {
         {
             Connectors[i].StyleArea();//Fill room contents
         }
+
+
+        for (int x = 2; x < 62; x++)
+        {
+            for (int y = 2; y < 62; y++)
+            {
+                //Set up diagonal tiles
+                if (mappings[x,y].isDiag)
+                {
+                    PlaceDiagonal(x, y);
+                }
+            }
+        }
+
+
         StyleJunctions();//Make some junctions look nice.
 
         PrintRoomConnections();
@@ -281,17 +296,17 @@ public class UnderworldGenerator : UWEBase {
     /// </summary>
     void PlaceConnectors()
     {
-        int x = Connectors.Count;
+        int ccount = Connectors.Count;
        // foreach (Connector con in Connectors)
-       for (int cc =0; cc<x; cc++)
+       for (int cc =0; cc< ccount; cc++)
         {
             PlaceConnector(cc);
         }
 
-       //Now smooth all the connects
-        x = Connectors.Count;
+        //Now smooth all the connects
+        ccount = Connectors.Count;
         // foreach (Connector con in Connectors)
-        for (int cc = 0; cc < x; cc++)
+        for (int cc = 0; cc < ccount; cc++)
         {            
            Connectors[cc].FixConnectorHeight();
         }
@@ -301,8 +316,8 @@ public class UnderworldGenerator : UWEBase {
     {
         //Run a path between start and end.
         int curX = Connectors[cc].startX; int curY = Connectors[cc].startY;
-        Connectors[cc].AddPathStep(curX, curY);
-        int dirX; int dirY;
+        Connectors[cc].AddPathStep(curX, curY);//Flag the first step/beginning point
+
         if (rooms[Connectors[cc].StartRoom].BuiltConnections[Connectors[cc].EndRoom] == Connectors[cc].EndRoom)
         {//A connection already exists.
 
@@ -311,138 +326,29 @@ public class UnderworldGenerator : UWEBase {
         }
         while (curX != Connectors[cc].endX || curY != Connectors[cc].endY)
         {
-            int moveX = 0; int moveY = 0;//How far is to be moved in the x/y axis.
+            
             int diffX = Connectors[cc].endX - curX;
             int diffY = Connectors[cc].endY - curY;
-            int MoveAbs = 0;    //The movement distance choosen.
+            
 
-            //Pick how far will be moved in each axis
-            if (diffX != 0)
-            {
-                moveX = Random.Range(1, Mathf.Abs(diffX) + 1);
-            }
-            if (diffY != 0)
-            {
-                moveY = Random.Range(1, Mathf.Abs(diffY) + 1);
-            }
-            //Pick the step direction for x/y
-            if (diffX >= 0) { dirX = 1; } else { dirX = -1; }
-            if (diffY >= 0) { dirY = 1; } else { dirY = -1; }
-
-            if (moveX != 0 && moveY != 0)
-            {//move in a random non-zero axis
-                if (Random.Range(0, 2) == 1)
-                {//move x
-                    MoveAbs = moveX;
-                    dirY = 0;
+            if ((diffX != 0) && (diffY != 0))
+            {//I can move diagonally
+                switch (Random.Range(1,4))
+                {
+                    case 1: //Try and move diagonally
+                        MoveAlongDiag(cc, ref curX, ref curY, diffX, diffY);
+                        break;
+                    default: //move randomly on xy
+                        MoveAlongXYOnly(cc, ref curX, ref curY, diffX, diffY);
+                        break;
                 }
-                else
-                {//move 
-                    MoveAbs = moveY;
-                    dirX = 0;
-                }
-            }
-            else if (moveX != 0)
-            {//move on x axis
-             // MoveOnX = true;
-                MoveAbs = moveX;
-                dirY = 0;
             }
             else
-            {//move on y axis
-             //MoveOnY = true;
-                MoveAbs = moveY;
-                dirX = 0;
-            }
-
-            //Perform the move for however many steps are randomly picked
-            for (int x = 1; x <= Mathf.Abs(MoveAbs); x++)
             {
-                curX += dirX;
-                curY += dirY;
-                Connectors[cc].AddPathStep(curX, curY);
-                if (mappings[curX, curY].RoomMap == 0)
-                {
-                    mappings[curX, curY].RoomMap = -Connectors[cc].index;//Connectors are negative numbers
-                    mappings[curX, curY].TileLayoutMap = TileMap.TILE_OPEN;
-                }
-                else if (mappings[curX, curY].RoomMap > 0)
-                {//I've hit another room. Set a built connection between start and this room
-                    int roomReached = mappings[curX, curY].RoomMap;
-                    rooms[roomReached].BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
-                    Connectors[cc].Start().BuiltConnections[roomReached] = roomReached;
-                    if ((roomReached != Connectors[cc].StartRoom) && (roomReached != Connectors[cc].EndRoom))
-                    {//Check if the room I've reached has connected to my target room. If so stop connecting
-                        int[] testedRooms = new int[NoOfRooms + 1];
-                        if (AreRoomsConnected(rooms[roomReached], Connectors[cc].End(), ref testedRooms))
-                        {//there is a built connection to the target. Stop traversing.                                
-                            Connectors[cc].SetEnd(curX, curY);
-                            Connectors[cc].EndRoom = roomReached;//Change the room I have reached for smoothing out the slopes
-                            curX = Connectors[cc].endX;
-                            curY = Connectors[cc].endY;
-                            break;
-                        }
-                        else
-                        {
-                            //Room is not the one I want. 
-                            //End my path but create a new connector from this room to the want I want to go to.
-                            Connector NewCon = new Connector(ConnectorCount++, roomReached, Connectors[cc].EndRoom, NoOfRooms, rooms, Connectors);
-                            Connectors.Add(NewCon);
-                            PlaceConnector(NewCon.index - 1);
-
-                            //End my previous connector
-                            Connectors[cc].SetEnd(curX, curY);
-                            Connectors[cc].EndRoom = roomReached;//Change the room I have reached for smoothing out the slopes
-                            curX = Connectors[cc].endX;
-                            curY = Connectors[cc].endY;
-                        }
-                    }
-                }
-                else
-                {//I've hit a corridor. Check if that corridor connects to where I want to be.
-                    mappings[curX, curY].JunctionMap = mappings[curX, curY].JunctionMap + 1;
-                    int foundcorridor = Mathf.Abs(mappings[curX, curY].RoomMap) - 1;
-                    Room FoundStartRoom = rooms[Connectors[foundcorridor].StartRoom];
-                    Room FoundEndRoom = rooms[Connectors[foundcorridor].EndRoom];
-                    //Add connections to start and end of found corridor
-                    Connectors[cc].Start().BuiltConnections[FoundStartRoom.index] = FoundStartRoom.index;
-                    Connectors[cc].Start().BuiltConnections[FoundEndRoom.index] = FoundEndRoom.index;
-                    FoundStartRoom.BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
-                    FoundEndRoom.BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
-
-                    int[] testedRooms = new int[NoOfRooms + 1];
-                    if (AreRoomsConnected(rooms[Connectors[foundcorridor].StartRoom], Connectors[cc].End(), ref testedRooms))
-                    {//I've reached the target room because it connects to my destination via this corridor
-                        Connectors[cc].SetEnd(curX, curY);
-                        curX = Connectors[cc].endX;
-                        curY = Connectors[cc].endY;
-                        break;
-                    }
-                    else
-                    {//This connector is not the one I want to find. I stop my connector here and start a new one from this spot. 
-                        Connector NewCon = new Connector(ConnectorCount++, Connectors[cc].StartRoom, Connectors[cc].EndRoom, NoOfRooms, rooms,Connectors);
-                        NewCon.ParentConnector = cc;
-                        NewCon.startX = curX; NewCon.startY = curY;//Resume the old path.
-                        NewCon.endX = Connectors[cc].endX; NewCon.endY = Connectors[cc].endY;
-                        Connectors.Add(NewCon);
-                        PlaceConnector(NewCon.index-1);
-
-                        //End my previous connector
-                        Connectors[cc].SetEnd(curX, curY);
-                        curX = Connectors[cc].endX;
-                        curY = Connectors[cc].endY;
-
-                    }
-                }
-                //if ((curX== Connectors[cc].endX) && (curY == Connectors[cc].endY) && (Connectors[cc].actualEndX!=-1) && (Connectors[cc].actualEndY != -1))
-                if (Connectors[cc].AtFinalDest(curX, curY))
-                {//actually reached my destination without hitting any other room.
-                    Connectors[cc].SetEnd();
-                }
-                //Stop when reached the target x&y                       
-                if ((curX == Connectors[cc].endX) && (dirX != 0)) { break; }
-                if ((curY == Connectors[cc].endY) && (dirY != 0)) { break; }
+                MoveAlongXYOnly(cc, ref curX, ref curY, diffX, diffY);
             }
+
+            
         }
         rooms[Connectors[cc].StartRoom].BuiltConnections[Connectors[cc].EndRoom] = Connectors[cc].EndRoom;
         rooms[Connectors[cc].EndRoom].BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
@@ -453,6 +359,197 @@ public class UnderworldGenerator : UWEBase {
         if (Connectors[cc].actualEndY == -1)
         {
             Connectors[cc].actualEndY = Connectors[cc].endY;
+        }
+    }
+
+
+    private void MoveAlongDiag(int cc, ref int curX, ref int curY, int diffX, int diffY)
+    {
+        int dirX; int dirY;
+        int moveX = 0; int moveY = 0;//How far is to be moved in the x/y axis.
+        int MoveAbs = 0;    //The movement distance choosen.   
+        int Diag = Mathf.Min(Mathf.Abs(diffX), Mathf.Abs(diffY));//This is the max distance the diag can go in an axis
+        MoveAbs = Random.Range(1, Diag);
+
+        //Pick the step direction for x/y
+        if (diffX >= 0) { dirX = +1; } else { dirX = -1; }
+        if (diffY >= 0) { dirY = +1; } else { dirY = -1; }
+        for (int x = 0; x < MoveAbs * 2; x++)
+        {
+            if (x % 2 == 0)
+            {
+                moveX = 1;
+                moveY = 0;
+            }
+            else
+            {
+                moveX = 0;
+                moveY = 1;
+            }
+            MoveAlongXYOnly(cc, ref curX, ref curY, dirX * moveX, dirY * moveY);
+            if ((curX >= 0) && (curY >= 0) && (curX < 64) && (curY < 64))
+            {
+                UnderworldGenerator.instance.mappings[curX, curY].isDiag = true;
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cc"></param>
+    /// Corridor being traversed
+    /// <param name="curX"></param>
+    /// <param name="curY"></param>
+    /// <param name="dirX"></param>
+    /// <param name="dirY"></param>
+    /// <param name="diffX"></param>
+    /// <param name="diffY"></param>
+    private void MoveAlongXYOnly(int cc, ref int curX, ref int curY, int diffX, int diffY)
+    {
+        int dirX; int dirY;
+        int moveX = 0; int moveY = 0;//How far is to be moved in the x/y axis.
+        int MoveAbs = 0;    //The movement distance choosen.
+        //Pick how far will be moved in each axis
+        if (diffX != 0)
+        {
+            moveX = Random.Range(1, Mathf.Abs(diffX) + 1);
+        }
+        if (diffY != 0)
+        {
+            moveY = Random.Range(1, Mathf.Abs(diffY) + 1);
+        }
+        //Pick the step direction for x/y
+        if (diffX >= 0) { dirX = 1; } else { dirX = -1; }
+        if (diffY >= 0) { dirY = 1; } else { dirY = -1; }
+
+        if (moveX != 0 && moveY != 0)
+        {//move in a random non-zero axis
+            if (Random.Range(0, 2) == 1)
+            {//move x
+                MoveAbs = moveX;
+                dirY = 0;
+            }
+            else
+            {//move 
+                MoveAbs = moveY;
+                dirX = 0;
+            }
+        }
+        else if (moveX != 0)
+        {//move on x axis
+            MoveAbs = moveX;
+            dirY = 0;
+        }
+        else
+        {//move on y axis
+         //MoveOnY = true;
+            MoveAbs = moveY;
+            dirX = 0;
+        }
+
+        MoveAlongPath(cc, ref curX, ref curY, dirX, dirY, MoveAbs);
+    }
+
+    private void MoveAlongPath(int cc, ref int curX, ref int curY, int dirX, int dirY, int MoveAbs)
+    {
+        //Perform the move for however many steps are randomly picked
+        for (int x = 1; x <= Mathf.Abs(MoveAbs); x++)
+        {
+            curX += dirX;
+            curY += dirY;
+            if ((curX >=64) || (curY>=64) || (curX < 0) || (curY < 0))
+            {
+                Debug.Log("Connector " + cc + " has attempted to exit the world");
+                //End my previous connector
+                Connectors[cc].SetEnd(curX, curY);
+                curX = Connectors[cc].endX;
+                curY = Connectors[cc].endY;
+                return;
+            }
+            Connectors[cc].AddPathStep(curX, curY);
+            if (mappings[curX, curY].RoomMap == 0)
+            {
+                mappings[curX, curY].RoomMap = -Connectors[cc].index;//Connectors are negative numbers
+                mappings[curX, curY].TileLayoutMap = TileMap.TILE_OPEN;
+            }
+            else if (mappings[curX, curY].RoomMap > 0)
+            {//I've hit another room. Set a built connection between start and this room
+                int roomReached = mappings[curX, curY].RoomMap;
+                rooms[roomReached].BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
+                Connectors[cc].Start().BuiltConnections[roomReached] = roomReached;
+                if ((roomReached != Connectors[cc].StartRoom) && (roomReached != Connectors[cc].EndRoom))
+                {//Check if the room I've reached has connected to my target room. If so stop connecting
+                    int[] testedRooms = new int[NoOfRooms + 1];
+                    if (AreRoomsConnected(rooms[roomReached], Connectors[cc].End(), ref testedRooms))
+                    {//there is a built connection to the target. Stop traversing.                                
+                        Connectors[cc].SetEnd(curX, curY);
+                        Connectors[cc].EndRoom = roomReached;//Change the room I have reached for smoothing out the slopes
+                        curX = Connectors[cc].endX;
+                        curY = Connectors[cc].endY;
+                        break;
+                    }
+                    else
+                    {
+                        //Room is not the one I want. 
+                        //End my path but create a new connector from this room to the want I want to go to.
+                        Connector NewCon = new Connector(ConnectorCount++, roomReached, Connectors[cc].EndRoom, NoOfRooms, rooms, Connectors);
+                        Connectors.Add(NewCon);
+                        PlaceConnector(NewCon.index - 1);
+
+                        //End my previous connector
+                        Connectors[cc].SetEnd(curX, curY);
+                        Connectors[cc].EndRoom = roomReached;//Change the room I have reached for smoothing out the slopes
+                        curX = Connectors[cc].endX;
+                        curY = Connectors[cc].endY;
+                    }
+                }
+            }
+            else
+            {//I've hit a corridor. Check if that corridor connects to where I want to be.
+                mappings[curX, curY].JunctionMap = mappings[curX, curY].JunctionMap + 1;
+                int foundcorridor = Mathf.Abs(mappings[curX, curY].RoomMap) - 1;
+                Room FoundStartRoom = rooms[Connectors[foundcorridor].StartRoom];
+                Room FoundEndRoom = rooms[Connectors[foundcorridor].EndRoom];
+                //Add connections to start and end of found corridor
+                Connectors[cc].Start().BuiltConnections[FoundStartRoom.index] = FoundStartRoom.index;
+                Connectors[cc].Start().BuiltConnections[FoundEndRoom.index] = FoundEndRoom.index;
+                FoundStartRoom.BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
+                FoundEndRoom.BuiltConnections[Connectors[cc].StartRoom] = Connectors[cc].StartRoom;
+
+                int[] testedRooms = new int[NoOfRooms + 1];
+                if (AreRoomsConnected(rooms[Connectors[foundcorridor].StartRoom], Connectors[cc].End(), ref testedRooms))
+                {//I've reached the target room because it connects to my destination via this corridor
+                    Connectors[cc].SetEnd(curX, curY);
+                    curX = Connectors[cc].endX;
+                    curY = Connectors[cc].endY;
+                    break;
+                }
+                else
+                {//This connector is not the one I want to find. I stop my connector here and start a new one from this spot. 
+                    Connector NewCon = new Connector(ConnectorCount++, Connectors[cc].StartRoom, Connectors[cc].EndRoom, NoOfRooms, rooms, Connectors);
+                    NewCon.ParentConnector = cc;
+                    NewCon.startX = curX; NewCon.startY = curY;//Resume the old path.
+                    NewCon.endX = Connectors[cc].endX; NewCon.endY = Connectors[cc].endY;
+                    Connectors.Add(NewCon);
+                    PlaceConnector(NewCon.index - 1);
+
+                    //End my previous connector
+                    Connectors[cc].SetEnd(curX, curY);
+                    curX = Connectors[cc].endX;
+                    curY = Connectors[cc].endY;
+
+                }
+            }
+            //if ((curX== Connectors[cc].endX) && (curY == Connectors[cc].endY) && (Connectors[cc].actualEndX!=-1) && (Connectors[cc].actualEndY != -1))
+            if (Connectors[cc].AtFinalDest(curX, curY))
+            {//actually reached my destination without hitting any other room.
+                Connectors[cc].SetEnd();
+            }
+            //Stop when reached the target x&y                       
+            if ((curX == Connectors[cc].endX) && (dirX != 0)) { break; }
+            if ((curY == Connectors[cc].endY) && (dirY != 0)) { break; }
         }
     }
 
@@ -594,6 +691,68 @@ public class UnderworldGenerator : UWEBase {
     void StyleJunctions()
     {
         //Turn found junctions of corridors into something nicer.
+    }
+
+    void PlaceDiagonal(int x, int y)
+    {
+        //A diagonal is place based on the tiles surrounding it.
+        //000
+        //1D0
+        //111 
+        //where x= solid, d is diagonal and 0 is a diag open to the sw. Diag tiles are treats as being solids.
+        if (mappings[x,y].RoomMap > 0) { return; }
+ 
+
+        for (int i=2; i<=5;i++)
+        {
+            switch (i)
+            {//TODO:support sloped neighbour tiles.
+                case TileMap.TILE_DIAG_NE:
+                    {//If tiles to the s and w is solid then this the tile to the south and west can be a diag.
+                        if (mappings[x, y - 1].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x, y - 1, i, -1, -1,mappings[x,y].FloorHeight); }
+                        if (mappings[x -1, y ].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x-1, y, i, -1, -1, mappings[x, y].FloorHeight); }
+                        break;
+                    }
+                case TileMap.TILE_DIAG_NW:
+                    {
+                        if (mappings[x, y - 1].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x, y - 1, i, +1, -1, mappings[x, y].FloorHeight); }
+                        if (mappings[x + 1, y].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x + 1, y, i, +1, -1, mappings[x, y].FloorHeight); }
+                        break;
+                    }
+                case TileMap.TILE_DIAG_SE:
+                    {
+                        if (mappings[x, y + 1].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x, y + 1, i, -1, +1, mappings[x, y].FloorHeight); }
+                        if (mappings[x - 1, y].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x - 1, y, i, -1, +1, mappings[x, y].FloorHeight); }
+                        break;
+                    }
+                case TileMap.TILE_DIAG_SW:
+                    {
+                        if (mappings[x, y + 1].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x, y + 1, i, +1, +1, mappings[x, y].FloorHeight); }
+                        if (mappings[x + 1, y].TileLayoutMap == TileMap.TILE_SOLID) { TurnTileDiag(x + 1, y, i, +1, +1, mappings[x, y].FloorHeight); }
+                        break;
+                    }
+            }
+        }
+    }
+
+    void TurnTileDiag(int x, int y, int newTileType, int dirX, int dirY,int Height)
+    {
+        if (mappings[x,y].TileLayoutMap==TileMap.TILE_SOLID)
+        {
+            if (
+                (mappings[x+0, y+dirY].TileLayoutMap == TileMap.TILE_SOLID)
+                &&
+                (mappings[x+dirX, y+0].TileLayoutMap == TileMap.TILE_SOLID)
+                )
+            {//If what is behind this tile is a solid wall then change the tile.
+                mappings[x, y].TileLayoutMap = newTileType;
+                mappings[x, y].FloorHeight = Height;
+            }           
+        }
+        else
+        {//This tile has already been changed to something else. Play it safe and make it an open tile
+            mappings[x, y].TileLayoutMap = TileMap.TILE_OPEN;
+        }
     }
     
 }

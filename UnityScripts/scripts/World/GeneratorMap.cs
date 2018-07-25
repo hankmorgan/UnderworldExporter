@@ -11,6 +11,7 @@ public class GeneratorMap : GeneratorClasses {
     public int FloorHeight;//Unimplemented.
     public int FloorTexture;
     public int WallTexture;
+    public bool isDiag; //Is the tile a candidate for a diagonal tile
 
 
 }
