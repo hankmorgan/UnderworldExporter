@@ -1225,6 +1225,11 @@ public class IngameEditor : GuiBase_Draggable {
             UnderworldGenerator.instance.RoomsToTileMap(GameWorldController.instance.currentTileMap(), GameWorldController.instance.currentTileMap().Tiles);
             GameWorldController.WorldReRenderPending = true;
             GameWorldController.FullReRender = true;
+
+            float targetX = (float)UnderworldGenerator.instance.startX * 1.2f + 0.6f;
+            float targetY = (float)UnderworldGenerator.instance.startY * 1.2f + 0.6f;
+            float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(UnderworldGenerator.instance.startX, UnderworldGenerator.instance.startY))) * 0.15f;
+            UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
         }
     }
 }

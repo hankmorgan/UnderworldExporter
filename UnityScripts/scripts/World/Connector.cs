@@ -148,49 +148,92 @@ public class Connector : GeneratorClasses {
         SetTargetHeight();
         Debug.Log("Smoothing connector " + index + " from room " + StartRoom + " to " + EndRoom + " height " + BaseHeight + " to " + TargetHeight);
         int accum=0;
+        int PathLength = PathTakenX.Count;//How much of the path is left to use.
+        bool UseSlopes = true;
+        if (Random.Range(0, 2) == 1) { UseSlopes = true; }
         for (int i = 0; i<PathTakenX.Count;i++)
-        {
+        {           
             if (UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].RoomMap != StartRoom)
             {//Only climb when outside the start room
                 int change = 0;
+                int stepSize = 2;
+                int tileType = TileMap.TILE_OPEN;
+
                 //Add accumulated height changes to this start height.
                 UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight = BaseHeight + accum;
 
                 int heightAtStep = UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight;
+               // if (heightAtStep == TargetHeight)
+               // {
+                   // break;//No more work required.
+               // }
 
-                //Check where the step is now in relation to the target.
-                if (heightAtStep < TargetHeight)
-                {//increase height
-                    change = change + 2;
-                }
-                else if (heightAtStep > TargetHeight)
-                {//decrease height
-                    change = change - 2;
+                if ((PathLength - 1 < Mathf.Abs(TargetHeight - heightAtStep)))
+                    {
+                    stepSize = 4; //if the distance left is not enough to reach the end then take larger steps
+                    tileType = TileMap.TILE_OPEN;
+                    }
+                //If there is more than enough steps between the current step and the end left then take a random chance to actually use the step
+                if (PathLength > Mathf.Abs(TargetHeight - heightAtStep))
+                {
+                    //random chance or not at all if a diagonal.
+                    if  ( (Random.Range(0,2) == 1) && ( !UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag))
+                    {//Take the step
+                        AddConnectorStep(ref accum, i, ref change, stepSize, tileType);
+                    }
                 }
                 else
-                {
-                    //Future random wobble.
-                    change = 0;
-                }
-                accum += change;//Accumulate the new change
-                if (change!=0)
-                {//Prevent diagonals on risers
-                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag = false;
-                }
-                //Change by the new increase.    
-                UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight += change;
-
-                //Clamp heights          
-                if (UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight < 0)
-                {
-                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight = 0;
+                {//Always take the step if not enough distance or on a diagonal
+                    AddConnectorStep(ref accum, i, ref change, stepSize, tileType);
                 }
 
-                if (UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight > 16)
-                {
-                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight = 16;
+                if ((UseSlopes) && (change!=0) && (!UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag) && (stepSize==2))
+                {//I've decided to use slopes and the tile is not a diagonal.
+                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isSlope = UseSlopes;
                 }
+
+                PathLength--;
             }
+        }
+    }
+
+    private void AddConnectorStep(ref int accum, int stepNo, ref int change, int stepSize, int TileType)
+    {
+        int heightAtStep = UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight;
+        //Check where the step is now in relation to the target.
+        if (heightAtStep < TargetHeight)
+        {//increase height
+            change = change + stepSize;
+        }
+        else if (heightAtStep > TargetHeight)
+        {//decrease height
+            change = change - stepSize;
+        }
+        else
+        {
+            //Future random wobble.
+            change = 0;
+        }
+        accum += change;//Accumulate the new change
+        if (change != 0)
+        {//Prevent diagonals on risers
+            UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].isDiag = false;
+        }
+        //Change by the new increase.    
+        UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight += change;
+        
+        //Set the tile type.
+        UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].TileLayoutMap = TileType;
+
+        //Clamp heights          
+        if (UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight < 0)
+        {
+            UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight = 0;
+        }
+
+        if (UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight > 24)
+        {
+            UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight = 24;
         }
     }
 }

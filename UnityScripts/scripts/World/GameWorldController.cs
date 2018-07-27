@@ -985,6 +985,8 @@ public class GameWorldController : UWEBase
                         {
                             UnderworldGenerator.instance.GenerateLevel(UnderworldGenerator.instance.Seed);
                             Tilemaps[newLevelNo] = UnderworldGenerator.instance.CreateTileMap(newLevelNo);
+                            startX = UnderworldGenerator.instance.startX;
+                            startY = UnderworldGenerator.instance.startY;
                         }
                         else
                         {
@@ -1093,6 +1095,10 @@ public class GameWorldController : UWEBase
                 UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
                 //Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
                 UWCharacter.Instance.TeleportPosition = new Vector3(targetX, Height + 0.1f, targetY);
+                if (EnableUnderworldGenerator)
+                {
+                    GameWorldController.instance.StartPos = UWCharacter.Instance.transform.position;
+                }
             }
             startX = -1; startY = -1;
 

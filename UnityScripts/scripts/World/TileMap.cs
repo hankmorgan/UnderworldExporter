@@ -48,10 +48,10 @@ public class TileMap : Loader {
 		public const short SURFACE_WALL = 3;
 		public const short SURFACE_SLOPE = 4;
 
-		const short SLOPE_BOTH_PARALLEL= 0;
-		const short SLOPE_BOTH_OPPOSITE= 1;
-		const short SLOPE_FLOOR_ONLY =2;
-		const short SLOPE_CEILING_ONLY= 3;
+        public const short SLOPE_BOTH_PARALLEL= 0;
+        public const short SLOPE_BOTH_OPPOSITE= 1;
+		public const short SLOPE_FLOOR_ONLY =2;
+        public const short SLOPE_CEILING_ONLY= 3;
 
 		//Visible faces indices. Used in sorting tile visiblity.
 		public const short vTOP =0;
