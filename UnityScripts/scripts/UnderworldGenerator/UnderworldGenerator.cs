@@ -46,8 +46,8 @@ public class UnderworldGenerator : UWEBase {
 
         int validRooms = CreateRooms();
         ConnectAllRooms(validRooms); //make sure all rooms on the map are connected in some way
-        PlaceConnectors();//Place corridors on the map. Not all calculated connectors will be placed
-
+        
+        //Init the player start tile
         startX = rooms[1].x;
         startY = rooms[1].y;
 
@@ -55,11 +55,15 @@ public class UnderworldGenerator : UWEBase {
         {
             rooms[i].StyleArea();//Fill room contents
         }
+
+        PlaceConnectors();//Place corridors on the map. Not all calculated connectors will be placed
+
+
+        
         for (int i = 0; i < Connectors.Count; i++)
         {
             Connectors[i].StyleArea();//Fill room contents
         }
-
 
         for (int x = 2; x < 62; x++)
         {
@@ -77,14 +81,13 @@ public class UnderworldGenerator : UWEBase {
         {
             for (int y = 2; y < 62; y++)
             {
-                //Set up diagonal tiles
+                //Set up sloped tiles
                 if (mappings[x, y].isSlope)
                 {
                     PlaceSlope(x, y);
                 }
             }
         }
-
 
         StyleJunctions();//Make some junctions look nice.
 
@@ -547,7 +550,7 @@ public class UnderworldGenerator : UWEBase {
                 else
                 {//This connector is not the one I want to find. I stop my connector here and start a new one from this spot. 
                     Connector NewCon = new Connector(ConnectorCount++, Connectors[cc].StartRoom, Connectors[cc].EndRoom, NoOfRooms, rooms, Connectors);
-                    NewCon.ParentConnector = cc;
+                    NewCon.ParentConnector = cc;//Flags that this connector is starting from another connector
                     NewCon.startX = curX; NewCon.startY = curY;//Resume the old path.
                     NewCon.endX = Connectors[cc].endX; NewCon.endY = Connectors[cc].endY;
                     Connectors.Add(NewCon);
@@ -800,6 +803,10 @@ public class UnderworldGenerator : UWEBase {
         heights[1] = thisHeight - getHeight(x -1, y);
         heights[2] = thisHeight - getHeight(x , y + 1);
         heights[3] = thisHeight - getHeight(x , y - 1);
+        if (x==27 && y==61)
+        {
+            Debug.Log("Here");
+        }
 
         if (OpenTiles[0] && OpenTiles[1])
         {//test east west scenarios.

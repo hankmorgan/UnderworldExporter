@@ -13,10 +13,14 @@ public class GeneratorClasses : UWClass {
 
     }
 
-
     protected virtual void SetBaseHeight()
     {
         BaseHeight = Random.Range(0, 13) * 2;//Only multiple of two allowed. Range from 0 to 24
+    }
+
+    protected bool RandomPercent(int percent)
+    {
+        return (percent >= Random.Range(1, 101));
     }
 
 }

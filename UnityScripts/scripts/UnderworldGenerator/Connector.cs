@@ -104,28 +104,28 @@ public class Connector : GeneratorClasses {
     protected override void SetBaseHeight()
     {//Use the base height of the start room.
         //In future this could also be withing a step or two of the start room to give the starting step or slope
-        if (ParentConnector ==-1)
-        {
-            BaseHeight = roomList[StartRoom].BaseHeight;
-        }
-        else
-        {//starting from another corridor
+      //  if (ParentConnector ==-1)
+       // {
+       //     BaseHeight = roomList[StartRoom].BaseHeight;
+       // }
+       // else
+       // {//starting from another corridor
             BaseHeight = UnderworldGenerator.instance.mappings[startX, startY].FloorHeight;
-        }
+       // }
         
     }
 
     public void SetTargetHeight()
     {
 
-        if (ParentConnector == -1)
-        { //Set the height the corridor will end at. Uses the actual end x&y so as to interest at the height of it's end junction,
+        //if (ParentConnector == -1)
+       // { //Set the height the corridor will end at. Uses the actual end x&y so as to interest at the height of it's end junction,
             TargetHeight = UnderworldGenerator.instance.mappings[actualEndX, actualEndY].FloorHeight;
-        }
-        else
-        {
-            TargetHeight = roomList[EndRoom].BaseHeight;
-        }          
+       // }
+       // else
+       // {
+       //     TargetHeight = roomList[EndRoom].BaseHeight;
+      //  }          
            
     }
 
@@ -152,29 +152,33 @@ public class Connector : GeneratorClasses {
         bool UseSlopes = true;
         if (Random.Range(0, 2) == 1) { UseSlopes = true; }
         for (int i = 0; i<PathTakenX.Count;i++)
-        {           
-            if (UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].RoomMap != StartRoom)
-            {//Only climb when outside the start room
+        {
+             if ((UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].RoomMap != StartRoom) || (true))
+            //Only climb when outside the start room
+            {
                 int change = 0;
                 int stepSize = 2;
                 int tileType = TileMap.TILE_OPEN;
+                
+                if ((PathTakenX[i]==50) && (PathTakenY[i]==59))
+                {
+                    Debug.Log("here");
+                }
 
                 //Add accumulated height changes to this start height.
-                UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight = BaseHeight + accum;
+                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight = BaseHeight + accum;
 
                 int heightAtStep = UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].FloorHeight;
-               // if (heightAtStep == TargetHeight)
-               // {
-                   // break;//No more work required.
-               // }
+                int heightremain = Mathf.Abs(heightAtStep - TargetHeight) / 2;
 
-                if ((PathLength - 1 < Mathf.Abs(TargetHeight - heightAtStep)))
+                if (PathLength + 1 < heightremain)
                     {
                     stepSize = 4; //if the distance left is not enough to reach the end then take larger steps
                     tileType = TileMap.TILE_OPEN;
+                    UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag = false;
                     }
                 //If there is more than enough steps between the current step and the end left then take a random chance to actually use the step
-                if (PathLength > Mathf.Abs(TargetHeight - heightAtStep))
+                if (PathLength > heightremain + 1)
                 {
                     //random chance or not at all if a diagonal.
                     if  ( (Random.Range(0,2) == 1) && ( !UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag))
@@ -190,10 +194,9 @@ public class Connector : GeneratorClasses {
                 if ((UseSlopes) && (change!=0) && (!UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isDiag) && (stepSize==2))
                 {//I've decided to use slopes and the tile is not a diagonal.
                     UnderworldGenerator.instance.mappings[PathTakenX[i], PathTakenY[i]].isSlope = UseSlopes;
-                }
-
-                PathLength--;
+                }               
             }
+            PathLength--;
         }
     }
 

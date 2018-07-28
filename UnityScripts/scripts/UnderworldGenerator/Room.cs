@@ -36,7 +36,15 @@ public class Room : GeneratorClasses {
     /// </summary>
     public override void StyleArea()
     {
-        base.StyleArea();
+      /*  CaveStyler cs = new CaveStyler();
+        int[,] result = cs.Style(dimX,dimY);
+        
+        for (int xPos=0; xPos <= result.GetUpperBound(0); xPos++)
+        {
+            for (int yPos = 0; yPos <= result.GetUpperBound(1); yPos++)
+            {
+                UnderworldGenerator.instance.mappings[x + xPos, y + yPos].TileLayoutMap = result[xPos, yPos];
+            }
+        }*/
     }
-
 }
