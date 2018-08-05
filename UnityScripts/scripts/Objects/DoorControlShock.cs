@@ -30,9 +30,9 @@ public class DoorControlShock : MonoBehaviour {
 
 	void setSprite(int index)
 	{
-		Sprite Image=new Sprite();
-		Image=Resources.Load <Sprite> ("Doors/" + DoorSpriteIndex + "/" + DoorSpriteIndex + "_" + index.ToString ("D4"));
-		sc.sprite=Image;
+		//Sprite Image=new Sprite();
+		//Image=Resources.Load <Sprite> ("Doors/" + DoorSpriteIndex + "/" + DoorSpriteIndex + "_" + index.ToString ("D4"));
+		//sc.sprite=Image;
 	}
 
 	public void Activate()

@@ -6,7 +6,7 @@ using UnityEngine;
 /// A connecting passage betweent rooms.
 /// </summary>
 public class Connector : GeneratorClasses {
-
+/*
             
         public int StartRoom;
         public int EndRoom;
@@ -238,5 +238,5 @@ public class Connector : GeneratorClasses {
         {
             UnderworldGenerator.instance.mappings[PathTakenX[stepNo], PathTakenY[stepNo]].FloorHeight = 24;
         }
-    }
+    }*/
 }

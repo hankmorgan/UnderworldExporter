@@ -89,22 +89,23 @@ public class IngameEditor : GuiBase_Draggable {
 
 		public override void Start ()
 		{
-				base.Start();	
-				if (GameWorldController.instance.LevelNo!=-1)
-				{
-						SwitchPanel(0);//Tilemap
-						UpdateFloorTexturesDropDown();
-						UpdateWallTexturesDropDown();
-						UpdateDoorTexturesGrid();
-						RefreshTileMap();
-						RefreshTileInfo();
-						UpdateNPCGoals();
-				}
-				//Initiliase Item Ids
-				for (int i=0; i<=GameWorldController.instance.objectMaster.objProp.GetUpperBound(0);i++)
-				{
-					ObjectItemIds.options.Add(new Dropdown.OptionData(GameWorldController.instance.objectMaster.objProp[i].desc));	
-				}
+			base.Start();
+            seed.text = UnderworldGenerator.instance.Seed.ToString();
+			if (GameWorldController.instance.LevelNo!=-1)
+			{
+					SwitchPanel(0);//Tilemap
+					UpdateFloorTexturesDropDown();
+					UpdateWallTexturesDropDown();
+					UpdateDoorTexturesGrid();
+					RefreshTileMap();
+					RefreshTileInfo();
+					UpdateNPCGoals();
+			}
+			//Initiliase Item Ids
+			for (int i=0; i<=GameWorldController.instance.objectMaster.objProp.GetUpperBound(0);i++)
+			{
+				ObjectItemIds.options.Add(new Dropdown.OptionData(GameWorldController.instance.objectMaster.objProp[i].desc));	
+			}
 		}
 
 		void UpdateObjectsDropDown()

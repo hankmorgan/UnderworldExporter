@@ -6,19 +6,9 @@ public class GeneratorClasses : UWClass {
 
     public int index;
     public int Style;//Unimplemented. What type of room is created. Eg cave, throne room, treasure room, pit, monster lair,
-    public int BaseHeight;//Starting height for this area.
+ 
 
-    public virtual void StyleArea()
-    {
-
-    }
-
-    protected virtual void SetBaseHeight()
-    {
-        BaseHeight = Random.Range(0, 13) * 2;//Only multiple of two allowed. Range from 0 to 24
-    }
-
-    protected bool RandomPercent(int percent)
+    public static bool RandomPercent(int percent)
     {
         return (percent >= Random.Range(1, 101));
     }
