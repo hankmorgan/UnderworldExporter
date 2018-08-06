@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class ObjectInteraction : UWEBase
 {
 
-    public int debugindex;
+    //public int debugindex;
 
     public static bool PlaySoundEffects = true;
 
@@ -149,6 +149,7 @@ public class ObjectInteraction : UWEBase
     public const int ARROW = 127;
     public const int A_PROXIMITY_TRAP = 128;
     public const int BOUNCING_PROJECTILE = 129;
+    public const int MAPPIECE = 130;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -310,14 +311,14 @@ public class ObjectInteraction : UWEBase
         {
             UpdateAnimation();
         }
-        if (objectloaderinfo != null)
-        {
-            debugindex = objectloaderinfo.index;
-        }
-        else
-        {
-            debugindex = -1;
-        }
+        //if (objectloaderinfo != null)
+        //{
+        //    debugindex = objectloaderinfo.index;
+        //}
+       // else
+        //{
+        //    debugindex = -1;
+       // }
 
 
         //if (this.transform.parent==GameWorldController.instance.DynamicObjectMarker())
@@ -1155,6 +1156,9 @@ public class ObjectInteraction : UWEBase
         objInteract.owner = (short)currObj.owner;
         objInteract.flags = (short)currObj.flags;
 
+        objInteract.InvDisplayIndex = GameWorldController.instance.objectMaster.objProp[currObj.item_id].InventoryIndex;
+        objInteract.WorldDisplayIndex = GameWorldController.instance.objectMaster.objProp[currObj.item_id].WorldIndex;
+
         if (objInteract.isMoveable())
         {
             //objInteract.CanBePickedUp=true;
@@ -1758,6 +1762,7 @@ public class ObjectInteraction : UWEBase
         //  currObj.is_quant, currObj.enchantment, currObj.flags, currObj.InUseFlag
         //   );
 
+        
         objInt.objectloaderinfo = currObj;
         currObj.instance = objInt;
         objInt.link = currObj.link;
@@ -2070,6 +2075,9 @@ public class ObjectInteraction : UWEBase
                 break;
             case FORCEFIELD:
                 myObj.AddComponent<forcefield>();
+                break;
+            case MAPPIECE:
+                myObj.AddComponent<MapPiece>();
                 break;
 
             //case BENCH:
@@ -2722,7 +2730,7 @@ public class ObjectInteraction : UWEBase
 
     public bool UseSprite()
     {
-        return GameWorldController.instance.objectMaster.objProp[item_id].useSprite == 1;
+        return GameWorldController.instance.objectMaster.objProp[item_id].useSprite == 0;
     }
 
     public string getDesc()

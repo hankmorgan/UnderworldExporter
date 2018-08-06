@@ -15,7 +15,7 @@ public class Region : GeneratorClasses {
     protected const int OPEN = 1;
 
     public GeneratorMap[,] Map;//Map of tiles within the region
-   // public int[,] RegionMap; //Map of subregions
+
     public int MapWidth { get; set; }
     public int MapHeight { get; set; }
     public int originX { get; set; }
@@ -23,8 +23,11 @@ public class Region : GeneratorClasses {
 
     public int BaseHeight;//Starting height for this area.
 
-    struct RoomCandidate
+    public Region ParentRegion;
+
+    protected struct RoomCandidate
     {
+        public int index;
         public int x;
         public int y;
         public int dimX;
@@ -45,16 +48,18 @@ public class Region : GeneratorClasses {
         //Generate(0);
     }
 
-    public Region(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions)
+    public Region(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions, Region Parent)
     {       
-        InitRegion(index, RegionLayer, x, y, width, height);
+        InitRegion(index, RegionLayer, x, y, width, height,Parent);
         Generate(NoOfSubRegions);
         BuildSubRegions(NoOfSubRegions);
+
     }
 
-    protected void InitRegion(int index, int RegionLayer, int x, int y, int width, int height)
+    protected void InitRegion(int index, int RegionLayer, int x, int y, int width, int height, Region Parent)
     {
         Debug.Log("Region " + RegionType() + " "  + index + " at " + x + "," + y + " " + width + "x" + height);
+        ParentRegion = Parent;
         RegionIndex = index;
         layer = RegionLayer;
         originX = x;
@@ -115,19 +120,17 @@ public class Region : GeneratorClasses {
     /// <param name="NoOfSubRegions"></param>
     public virtual void FillSubRegionLarge(int NoOfSubRegions)
     {
-        int NoOfNewSubRegions = Random.Range(0,5);
-        NoOfNewSubRegions = Random.Range(0,6);
-        switch (Random.Range(0,3))
+        int NoOfNewSubRegions = Random.Range(1,26);
+        switch (Random.Range(0, 4))
         {
             case 0://A solid fill
-                SubRegions.Add(new Region(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions)); break;
+                SubRegions.Add(new Region(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions,this)); break;
             case 1://A single room with sub regions.
-                SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions)); break;
-            case 2:
+                SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions, this)); break;
+            case 3:
             default://A cave
-                SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions)); break;
-                
-        }        
+                SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, 1, 1, 62, 62, NoOfNewSubRegions, this)); break;
+        }
     }
 
     public virtual void FillSubRegionMedium(int NoOfSubRegions)
@@ -144,10 +147,10 @@ public class Region : GeneratorClasses {
                 switch (Random.Range (0,2))
                 {
                     case 0:
-                        SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 5))); break;
+                        SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 10), this)); break;
                     case 1:
                     default:                        
-                         SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 5))); break;
+                         SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 10), this)); break;
                 }
                 NoOfSubRegions--;
             }
@@ -168,10 +171,10 @@ public class Region : GeneratorClasses {
                 switch (Random.Range(0, 2))
                 {
                     case 0:
-                        SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 5))); break;
+                        SubRegions.Add(new RoomRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, 0, this)); break;
                     case 1:
                     default:
-                        SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, Random.Range(0, 5))); break;
+                        SubRegions.Add(new CaveRegion(UnderworldGenerator.RegionIndex++, layer + 1, roomCand.x, roomCand.y, roomCand.dimX, roomCand.dimY, 0, this)); break;
                 }
                 NoOfSubRegions--;
             }
@@ -180,9 +183,9 @@ public class Region : GeneratorClasses {
 
 
 
-    RoomCandidate NewRoom(int MaxX, int MaxY, int MaxDimX,int MaxDimY, int MinDimX, int MinDimY)
+    protected RoomCandidate NewRoom(int MaxX, int MaxY, int MaxDimX,int MaxDimY, int MinDimX, int MinDimY)
     {
-        RoomCandidate roomCand;
+        RoomCandidate roomCand =new RoomCandidate();
         if (MinDimX >= MaxDimX) { MinDimX = MaxDimX - 1; }
         if (MinDimY >= MaxDimY) { MinDimY = MaxDimY - 1; }
 
@@ -202,11 +205,11 @@ public class Region : GeneratorClasses {
     }
 
 
-  bool DoesRoomCollide(RoomCandidate candidate)
+  protected bool DoesRoomCollide(RoomCandidate candidate)
   {
-      for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= 63; x++)
+      for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= Map.GetUpperBound(0); x++)
       {
-          for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= 63; y++)
+          for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= Map.GetUpperBound(1); y++)
           {
               if (Map[x, y].RoomMap != 0)
               {//Space already contains a room.
@@ -217,11 +220,11 @@ public class Region : GeneratorClasses {
       return false;
   }
 
-    void PlaceRoom(RoomCandidate candidate, int roomIndex)
+    protected void PlaceRoom(RoomCandidate candidate, int roomIndex)
     {
-        for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= 63; x++)
+        for (int x = candidate.x; x <= candidate.x + candidate.dimX && x <= Map.GetUpperBound(0); x++)
         {
-            for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= 63; y++)
+            for (int y = candidate.y; y <= candidate.y + candidate.dimY && y <= Map.GetUpperBound(1); y++)
             {
                 Map[x, y].RoomMap = roomIndex;
             }

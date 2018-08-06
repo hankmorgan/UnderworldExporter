@@ -43,8 +43,9 @@ public class GRLoader : ArtLoader {
 		public const int TMFLAT_GR = 29;
 		public const int TMOBJ_GR = 30;
 		public const int WEAPONS_GR = 31;
+        public const int GEMPT_GR = 32;
 
-	private string[] pathGR={
+    private string[] pathGR={
 				"DATA--3DWIN.GR",
 				"DATA--ANIMO.GR",
 				"DATA--ARMOR_F.GR",
@@ -77,7 +78,8 @@ public class GRLoader : ArtLoader {
 				"DATA--TMFLAT.GR",				
 				"DATA--TMOBJ.GR",
 				"DATA--WEAPONS.GR",
-		};
+                "DATA--GEMPT.GR"
+        };
 
 	private string AuxPalPath = "DATA--ALLPALS.DAT";
 	bool useOverrideAuxPalIndex=false;
@@ -88,15 +90,27 @@ public class GRLoader : ArtLoader {
 	int NoOfImages;
 
 	protected Texture2D[] ImageCache=new Texture2D[1];
-	 
-	//protected Vector2[] HotSpot= new Vector2[1];
 
-	public GRLoader(int File)
+    //protected Vector2[] HotSpot= new Vector2[1];
+
+    public GRLoader(int File, int PalToUse)
+    {
+        AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
+        useOverrideAuxPalIndex = false;
+        OverrideAuxPalIndex = 0;
+        FileToLoad = File;
+        PaletteNo = (short)PalToUse;
+        LoadImageFile();
+    }
+
+
+    public GRLoader(int File)
 	{
 		AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
 		useOverrideAuxPalIndex=false;
 		OverrideAuxPalIndex=0	;
 		FileToLoad=File;
+        PaletteNo = 0;
 		LoadImageFile();
 	}
 
@@ -149,11 +163,11 @@ public class GRLoader : ArtLoader {
 								char[] outputImg;
 								//  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
 								UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
-								ImageCache[i]=ArtLoader.Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+								ImageCache[i]=ArtLoader.Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true);
 							}
 							else
 							{//Uncompressed
-								ImageCache[i]= ArtLoader.Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[0],true);
+								ImageCache[i]= ArtLoader.Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true);
 							}
 						}
 					}

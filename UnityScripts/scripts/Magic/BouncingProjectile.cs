@@ -19,32 +19,6 @@ public class BouncingProjectile : MagicProjectile {
 		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
 	}
 
-	/*public override void Update ()
-	{
-				Vector3 dir;
-				switch (ProjectileHeadingMajor)
-				{
-				case 1: //ne
-						dir = new Vector3(1f,0f,1f);break;//ok
-				case 2: //e
-						dir = new Vector3(1f,0f,0f);break;//ok
-				case 3: //se
-						dir = new Vector3(1f,0f,-1f);break;//ok
-				case 4: //s
-						dir = new Vector3(0f,0f,-1f);break;
-				case 5: //sw
-						dir = new Vector3(-1f,0f,-1f);break;
-				case 6: //w
-						dir = new Vector3(-1f,0f,0f);break; //ok
-				case 7: //nw						
-						dir = new Vector3(-1f,0f,1f);break;//ok
-				default: //north
-				case 0:
-						dir = new Vector3(0f,0f,1f);break;//ok
-				}
-				this.transform.Translate (dir * Time.deltaTime);
-		}*/
-
 
 	protected override void DestroyProjectile ()
 	{

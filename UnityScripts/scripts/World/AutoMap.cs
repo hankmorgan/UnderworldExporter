@@ -203,15 +203,16 @@ public class AutoMap : Loader {
 				break;
 			}
 			if ((PosY <= 200) && (PosX <= 320)) {
-				MapNote newmapnote = new MapNote ();
-				newmapnote.PosX = PosX;
-				newmapnote.PosY = PosY;
-				//newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
-				newmapnote.NoteText = NoteText;
-				newmapnote.guid = System.Guid.NewGuid ();
-				GameWorldController.instance.AutoMaps [LevelNo].MapNotes.Add (newmapnote);
+				//MapNote newmapnote = new MapNote (PosX, PosY, NoteText);
+				//newmapnote.PosX = PosX;
+				//newmapnote.PosY = PosY;
+				////newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
+				//newmapnote.NoteText = NoteText;
+				//newmapnote.guid = System.Guid.NewGuid ();
+				GameWorldController.instance.AutoMaps [LevelNo].MapNotes.Add (new MapNote(PosX, PosY, NoteText));
 			}
-			else {
+			else
+            {
 				break;
 			}
 			automapNotesAddress += 54;
@@ -238,8 +239,12 @@ public class AutoMap : Loader {
 
 			int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark,0,32);	
 
-			automapAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (160*4),32);	
-			
+			automapAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (160*4),32);
+        if (automapAddress !=0)
+        {
+            Debug.Log("automap for " + LevelNo + " at " + automapAddress);
+        }
+        
 			//Load Automap info
 			if (automapAddress!=0)
 			{
@@ -259,28 +264,15 @@ public class AutoMap : Loader {
 				automapNotesAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4),32);	
 				if (automapNotesAddress!=0)
 				{
-					DataLoader.UWBlock noteblock;
-					DataLoader.LoadUWBlock(lev_ark,(LevelNo * 4) + 6 + (240*4), 0, out noteblock);
-						if (noteblock.Data!=null)
-						{
-								ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);		
-						}
-				//	int compressionFlag=(int)DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (240*4)+ (NoOfBlocks*4),32);	
-					//if (((compressionFlag>>1) & 0x1) == 1)
-					//{//automap is compressed
-					//	char[] tmp_ark = DataLoader.unpackUW2(lev_ark, automapNotesAddress, ref datalen );
-						//ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);
-					//}
-					//else
-					//{
-					//	long nextautomapNotesAddress= lev_ark.GetUpperBound(0);
-					//	if (LevelNo<80)
-					//	{
-					//		nextautomapNotesAddress = DataLoader.getValAtAddress(lev_ark,((LevelNo+1) * 4) + 6 + (240*4),32);			
-					//	}
-					//	Debug.Log("uncompressed automap notes " + LevelNo +  " at " + automapNotesAddress);
-					//	ProcessAutoMapNotes(LevelNo, lev_ark, automapAddress, nextautomapNotesAddress)	;
-				//	}
+
+                    Debug.Log("automap notes for " + LevelNo + " at " + automapAddress);
+
+                    DataLoader.UWBlock noteblock;
+					DataLoader.LoadUWBlock(lev_ark,LevelNo+240, 0, out noteblock);
+					if (noteblock.Data!=null)
+					{
+						ProcessAutoMapNotes(LevelNo, noteblock.Data,0, datalen);		
+					}
 				}
 
 		}
@@ -316,14 +308,15 @@ public class AutoMap : Loader {
 				AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo,lev_ark);	
 				if (initAutoMaps)
 				{//No notes have been made yet Init with some dummy data.
-						System.Guid guid = System.Guid.NewGuid();
-						MapNote newmapnote = new MapNote();
-						//newmapnote.NotePosition=pos;
-						newmapnote.PosX= 0;
-						newmapnote.PosY= 0;
-						newmapnote.NoteText= LevelNo.ToString();
-						newmapnote.guid=guid;
-						MapNotes.Add(newmapnote);
+						//System.Guid guid = System.Guid.NewGuid();
+      //      //new MapNote((int)pos.x, (int)(pos.y + 100f), MapNoteInput.text);
+      //                  MapNote newmapnote = new MapNote(0, 0, LevelNo.ToString());
+      //                  //newmapnote.NotePosition=pos;
+      //                  newmapnote.PosX= 0;
+						//newmapnote.PosY= 0;
+						//newmapnote.NoteText= LevelNo.ToString();
+						//newmapnote.guid=guid;
+						MapNotes.Add(new MapNote(0, 0, LevelNo.ToString()));
 				}
 
 				//Load Automap info
@@ -372,8 +365,7 @@ public class AutoMap : Loader {
 				}
 						
 				//}
-				///Sets the map no display
-				UWHUD.instance.LevelNoDisplay.text=(thisLevelNo+1).ToString();
+
 				///Uses a cursor icon to display the player.
 				Texture2D playerPosIcon;
 				switch (_RES)

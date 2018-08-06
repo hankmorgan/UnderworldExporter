@@ -32,19 +32,21 @@ public class Map : object_base {
 		/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
 	public bool OpenMap()
 	{
-		UWCharacter.Instance.playerMotor.jumping.enabled=false;
+        WindowDetectUW.InMap = true;
+        UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
+        UWCharacter.Instance.playerMotor.jumping.enabled=false;
 		MapInteraction.UpdateMap(GameWorldController.instance.LevelNo);
-		WindowDetectUW.InMap=true;
+		
 		if (_RES!=GAME_UW2)
 		{
 				if  (GameWorldController.instance.getMus()!=null)
 				{
 						GameWorldController.instance.getMus().InMap=true;
-				}	
+				}            
 		}
 		UWHUD.instance.MessageScroll.Clear();
 		UWHUD.instance.ContextMenu.text="";
-		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
+		
 
 		return true;
 	}

@@ -123,8 +123,12 @@ public class UWHUD : HUD {
 	public Texture2D  MapQuill;
 	public Texture2D  MapQuillWriting;
 	public Texture2D  MapEraser;
+    public RectTransform MapUp;
+    public RectTransform MapDown;
+    public RectTransform MapEraserButton;
+    public RectTransform MapClose;
 
-	[Header("Magic")]
+    [Header("Magic")]
 	public ActiveRuneSlot[] activeRunes;
 	public RuneSlot[] runes;
 	public SpellEffectsDisplay[] spelleffectdisplay;
@@ -332,7 +336,13 @@ public class UWHUD : HUD {
 						SetUIElementPosition(npcTrade[2], 16f,16f, new Vector2(81.5f, 163.2f) );
 						SetUIElementPosition(npcTrade[3], 16f,16f, new Vector2(102f, 163.2f) );
 
-						break;
+
+                        //Automap
+                        SetUIElementPosition(MapDown, 30f, 30f, new Vector2(145f, 85f));
+                        SetUIElementPosition(MapUp, 30f, 30f, new Vector2(145f, -85f));
+                        SetUIElementPosition(MapEraserButton, 30f, 30f, new Vector2(120f, -25f));
+                        SetUIElementPosition(MapClose, 30f, 60f, new Vector2(120f,-55f));                
+                break;
 					}
 		}
 

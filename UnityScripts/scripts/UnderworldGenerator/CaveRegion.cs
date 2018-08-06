@@ -16,9 +16,9 @@ public class CaveRegion: Region
     int borderfloodIndex = 1;
     List<int> floodSizes = new List<int>();
 
-    public CaveRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions)
+    public CaveRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions, Region Parent)
     {
-        InitRegion(index, RegionLayer, x, y, width, height);
+        InitRegion(index, RegionLayer, x, y, width, height, Parent);
         Generate(NoOfSubRegions);
         BuildSubRegions(NoOfSubRegions);
     }
@@ -37,6 +37,13 @@ public class CaveRegion: Region
         if (layer > 1)
         {//This is not at the top layer so I need to remove the outer tiles to avoid a block surrounding the cave.
             //TODO: Only do this depending on what the parent layer is like.
+            if (ParentRegion!=null)
+            {
+                if (ParentRegion.RegionType() == "Base")
+                {//Do not clean up the border if in the middle of a solid region such as the base region
+                    return;
+                }
+            }
             CleanUpBorder();
         }
     }

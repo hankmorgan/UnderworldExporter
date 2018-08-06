@@ -38,7 +38,7 @@ public class UnderworldGenerator : UWEBase {
         mappings = new GeneratorMap[64, 64];
         Random.InitState(levelseed);
 
-        Region newMap = new Region(RegionIndex++, 0, 0, 0, 64, 64, Random.Range(3,10)); //Top layer starts off with a single large region and a number of sub regions
+        Region newMap = new Region(RegionIndex++, 0, 0, 0, 64, 64, Random.Range(3,26),null); //Top layer starts off with a single large region and a number of sub regions
         mappings = newMap.GetEntireMap();
     }
 

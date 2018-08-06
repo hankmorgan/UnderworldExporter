@@ -82,6 +82,10 @@ public class MagicProjectile : MobileObject {
 		{//Prevents the caster from hitting themselves
 			return;
 		}
+        if (collision.gameObject.GetComponent<AnimationOverlay>())
+        {//This projectile has hit an animation.
+            return;
+        }
 		if (HasHit==true)
 		{//Only impact once.
 			return;

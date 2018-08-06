@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class RoomRegion : Region
 {
-    public RoomRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions)
+    public RoomRegion(int index, int RegionLayer, int x, int y, int width, int height, int NoOfSubRegions, Region Parent)
     {
-        InitRegion(index, RegionLayer, x, y, width, height);
+        InitRegion(index, RegionLayer, x, y, width, height,Parent);
         Generate(NoOfSubRegions);
         BuildSubRegions(NoOfSubRegions);
     }
