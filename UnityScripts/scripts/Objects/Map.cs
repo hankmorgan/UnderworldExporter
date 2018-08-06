@@ -17,7 +17,7 @@ public class Map : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			return OpenMap();
+			return OpenMap(GameWorldController.instance.LevelNo);
 		}
 		else
 		{
@@ -26,16 +26,17 @@ public class Map : object_base {
 	}
 
 
-		/// <summary>
-		/// Opens the map UI
-		/// </summary>
-		/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
-	public bool OpenMap()
+	/// <summary>
+	/// Opens the map UI
+	/// </summary>
+	/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
+	public bool OpenMap(int levelno)
 	{
+        Time.timeScale = 0f;
         WindowDetectUW.InMap = true;
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
         UWCharacter.Instance.playerMotor.jumping.enabled=false;
-		MapInteraction.UpdateMap(GameWorldController.instance.LevelNo);
+		MapInteraction.UpdateMap(levelno);
 		
 		if (_RES!=GAME_UW2)
 		{

@@ -37,9 +37,22 @@ public class MapInteraction : GuiBase {
 
     private GRLoader gempt;
 
+    /// <summary>
+    /// Initialise the button art
+    /// </summary>
     private void Awake()
         {
         instance = this;
+        if (_RES !=GAME_UW2) {
+            for (int i = 0; i <= MapSelectButtons.GetUpperBound(0); i++)
+            {
+                if (MapSelectButtons[i] != null)
+                {
+                    UWHUD.instance.EnableDisableControl(MapSelectButtons[i].gameObject,false);
+                }
+            }
+            return;
+        }
         if (gempt == null)
         {
             gempt = new GRLoader(GRLoader.GEMPT_GR, 3);
@@ -93,7 +106,8 @@ public class MapInteraction : GuiBase {
     
     public void MapClose()
 		{
-			WindowDetect.InMap=false;
+            Time.timeScale = 1f;
+            WindowDetect.InMap=false;
 			UWCharacter.Instance.playerMotor.jumping.enabled=true;
 			InventorySlot.Hovering=false;
 			if  (GameWorldController.instance.getMus()!=null)
@@ -129,7 +143,7 @@ public class MapInteraction : GuiBase {
 		}
 
 		/// <summary>
-		/// Updates the map.
+		/// Updates the map for the specified level no
 		/// </summary>
 		/// <param name="LevelNo">Level no.</param>
 		public static void UpdateMap(int LevelNo)
@@ -137,8 +151,7 @@ public class MapInteraction : GuiBase {
 			WindowDetect.InMap=true;//turns on blocking collider.
             instance.CurrentWorld = MapInteraction.GetWorld(LevelNo);
         ///Sets the map no display
-        // UWHUD.instance.LevelNoDisplay.text = ((LevelNo + 1) - instance.CurrentWorld).ToString();
-        UWHUD.instance.LevelNoDisplay.text = (1+(LevelNo-(int)instance.CurrentWorld)).ToString() + " " + instance.CurrentWorld;
+        UWHUD.instance.LevelNoDisplay.text = (1+(LevelNo-(int)instance.CurrentWorld)).ToString() + " " + instance.CurrentWorld + " (" + LevelNo + ")";
         if (_RES==GAME_UW2)
             {
                 for (int i=0; i<= instance.MapSelectButtons.GetUpperBound(0);i++)
@@ -236,6 +249,9 @@ public class MapInteraction : GuiBase {
 				}		
 		}
 
+        /// <summary>
+        /// Saves the note when player has completed writing
+        /// </summary>
 		public void OnNoteComplete()
 		{
 				InteractionMode=MapInteractionNormal;
@@ -247,13 +263,7 @@ public class MapInteraction : GuiBase {
 				{
 					//System.Guid guid = System.Guid.NewGuid();
 					MapNote newmapnote = new MapNote((int)pos.x, (int)(pos.y + 100f), MapNoteInput.text);
-     //               //newmapnote.NotePosition=pos;
-     //               newmapnote.PosX= (int)pos.x;
-					//newmapnote.PosY= (int)(pos.y+100f);
-					//newmapnote.NoteText= MapNoteInput.text;
-					//newmapnote.guid=guid;
 					mapNoteCurrent.GetComponent<ContentSizeFitter>().horizontalFit= ContentSizeFitter.FitMode.PreferredSize;
-					//mapNoteCurrent.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 					GameWorldController.instance.AutoMaps[MapNo].MapNotes.Add(newmapnote);
 					mapNoteCurrent.GetComponent<MapNoteId>().guid= newmapnote.guid;								
 				}
@@ -276,6 +286,11 @@ public class MapInteraction : GuiBase {
 			}
 		}
 
+    /// <summary>
+    /// Gets what world is associated with the current level
+    /// </summary>
+    /// <param name="levelNo"></param>
+    /// <returns></returns>
     public static Worlds GetWorld(int levelNo)
     {
         if (_RES != GAME_UW2) { return Worlds.Britannia; }
@@ -340,6 +355,11 @@ public class MapInteraction : GuiBase {
 
     }
 
+    /// <summary>
+    /// Gets the maximum no of levels for the current world.
+    /// </summary>
+    /// <param name="levelNo"></param>
+    /// <returns></returns>
     int MaxWorld(int levelNo)
     {
         Worlds world = GetWorld(levelNo);

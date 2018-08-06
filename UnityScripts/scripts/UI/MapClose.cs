@@ -4,8 +4,9 @@ using System.Collections;
 public class MapClose : MonoBehaviour {
 
 	public void OnClick()
-	{				
-		WindowDetect.InMap=false;
+	{
+        Time.timeScale = 1f;
+        WindowDetect.InMap=false;
 		if  (GameWorldController.instance.getMus()!=null)
 		{
 			GameWorldController.instance.getMus().InMap=false;

@@ -42,8 +42,9 @@ public class AutoMap : Loader {
 		public const int DisplayTypeBridgeUW2=6;
 		public const int DisplayTypeStairUW1=12;
 		public const int DisplayTypeStairUW2=3;
+        public const int DisplayTypeIce = 12;
 
-		public const int TILE_SOLID=0;
+        public const int TILE_SOLID=0;
 		public const int TILE_OPEN= 1;
 		public const int TILE_DIAG_SE= 2;
 		public const int TILE_DIAG_SW =3;
@@ -145,7 +146,8 @@ public class AutoMap : Loader {
 		/// 79,52,27
 		/// 70,41,24
 		public static Color[] StairsTileColour=new Color[2];
-		/// <summary>
+		
+    /// <summary>
 		/// Wall border colour.
 		/// </summary>
 		/// RBG is
@@ -161,10 +163,20 @@ public class AutoMap : Loader {
 		public static Color[] Background = new Color[1];
 
 
-		/// <summary>
-		/// The automap note addresses. These need to change dynamically.
-		/// </summary>
-		public static long[] AutomapNoteAddresses=new long[9];
+    /// <summary>
+    /// The icy tile colour.
+    /// </summary>
+    /// RGB as follows
+    /// 48,144,182
+    /// 25,182,252
+    /// 24,116,167
+    public static Color[] IceTileColour = new Color[3];
+
+
+    /// <summary>
+    /// The automap note addresses. These need to change dynamically.
+    /// </summary>
+    public static long[] AutomapNoteAddresses=new long[9];
 
 	void ProcessAutomap (char[] lev_ark, long automapAddress)
 	{
@@ -240,10 +252,10 @@ public class AutoMap : Loader {
 			int NoOfBlocks=(int)DataLoader.getValAtAddress(lev_ark,0,32);	
 
 			automapAddress = DataLoader.getValAtAddress(lev_ark,(LevelNo * 4) + 6 + (160*4),32);
-        if (automapAddress !=0)
-        {
-            Debug.Log("automap for " + LevelNo + " at " + automapAddress);
-        }
+        //if (automapAddress !=0)
+        //{
+        //    Debug.Log("automap for " + LevelNo + " at " + automapAddress);
+        //}
         
 			//Load Automap info
 			if (automapAddress!=0)
@@ -265,7 +277,7 @@ public class AutoMap : Loader {
 				if (automapNotesAddress!=0)
 				{
 
-                    Debug.Log("automap notes for " + LevelNo + " at " + automapAddress);
+                   // Debug.Log("automap notes for " + LevelNo + " at " + automapAddress);
 
                     DataLoader.UWBlock noteblock;
 					DataLoader.LoadUWBlock(lev_ark,LevelNo+240, 0, out noteblock);
@@ -339,8 +351,10 @@ public class AutoMap : Loader {
 				{
 						for (int x = 0; x<TileMap.TileMapSizeX; x++)
 						{
-								output+= Tiles[x,y].DisplayType + ",";
-						}
+                            //float angle = Mathf.Atan2(y - 31, x - 31) * 180.0f / Mathf.PI;
+                            // output += Tiles[x,y].DisplayType + ",";
+                            output += Tiles[x, y].DisplayType + ",";
+                        }
 						output+= "\n";
 				}
 				writer.Write(output);
@@ -401,7 +415,7 @@ public class AutoMap : Loader {
 								if ((GetTileRender(i,j)==1) && (GetTileVisited(i,j)))
 								{
 										//fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
-										fillTile(output,i,j,TileSize,TileSize,OpenTileColour,WaterTileColour,LavaTileColour,BridgeTileColour);
+										fillTile(output,i,j,TileSize,TileSize,OpenTileColour,WaterTileColour,LavaTileColour,BridgeTileColour,IceTileColour);
 								}
 						}
 				}
@@ -523,7 +537,7 @@ public class AutoMap : Loader {
 		/// <param name="WaterColour">Water colour.</param>
 		/// <param name="LavaColour">Lava colour.</param>
 		/// <param name="BridgeColour">Bridge colour.</param>
-		private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour,Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour )
+		private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour,Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour, Color[] IceColour )
 		{
 				Color[] TileColorPrimary;
 				Color TileColorSecondary;
@@ -548,7 +562,12 @@ public class AutoMap : Loader {
 						TileColorPrimary=StairsTileColour;
 						TileColorSecondary=Color.clear;
 				}
-				else
+				else if (GetIsIce(TileX,TileY) == true)
+                {
+                        TileColorPrimary = IceColour;
+                        TileColorSecondary = Color.clear;
+                }                
+                else
 				{
 						TileColorPrimary=GroundColour;
 						TileColorSecondary=Color.clear;
@@ -1085,14 +1104,24 @@ public class AutoMap : Loader {
 				LavaTileColour[0].r=115f/255f;LavaTileColour[0].g=23f/255f;LavaTileColour[0].b=27f/255f;LavaTileColour[0].a=1f;
 				LavaTileColour[1].r=78f/255f;LavaTileColour[1].g=15f/255f;LavaTileColour[1].b=14f/255f;LavaTileColour[1].a=1f;
 
-				/// <summary>
-				/// The bridge tile colour.
-				/// </summary>
-				/// RGB is 
-				/// 64,28,0
-				/// 59,23,0
-				/// 74,28,0
-				BridgeTileColour[0].r=64f/255f;BridgeTileColour[0].g=28f/255f;BridgeTileColour[0].b=0f/255f;BridgeTileColour[0].a=1f;
+        //Ice tile
+        /// RGB as follows
+        /// 48,144,182
+        /// 25,182,252
+        /// 24,116,167
+        IceTileColour[0].r = 48f / 255f; IceTileColour[0].g = 144f / 255f; IceTileColour[0].b = 182f / 255f; IceTileColour[0].a= 1f;
+        IceTileColour[1].r = 25f / 255f; IceTileColour[1].g = 182f / 255f; IceTileColour[1].b = 252f / 255f; IceTileColour[1].a = 1f;
+        IceTileColour[2].r = 24f / 255f; IceTileColour[2].g = 116f / 255f; IceTileColour[2].b = 167f / 255f; IceTileColour[2].a = 1f;
+
+
+        /// <summary>
+        /// The bridge tile colour.
+        /// </summary>
+        /// RGB is 
+        /// 64,28,0
+        /// 59,23,0
+        /// 74,28,0
+        BridgeTileColour[0].r=64f/255f;BridgeTileColour[0].g=28f/255f;BridgeTileColour[0].b=0f/255f;BridgeTileColour[0].a=1f;
 				BridgeTileColour[1].r=59f/255f;BridgeTileColour[1].g=23f/255f;BridgeTileColour[1].b=0f/255f;BridgeTileColour[1].a=1f;
 				BridgeTileColour[2].r=74f/255f;BridgeTileColour[2].g=28f/255f;BridgeTileColour[2].b=0f/255f;BridgeTileColour[2].a=1f;
 				/// <summary>
@@ -1238,14 +1267,25 @@ public class AutoMap : Loader {
 			return Tiles[tileX,tileY].DisplayType==DisplayTypeLava;
 		}
 
-		/// <summary>
-		/// Gets if the tile is a bridge.
-		/// </summary>
-		/// <returns><c>true</c>, if is bridge was gotten, <c>false</c> otherwise.</returns>
-		/// <param name="LevelNo">Level no.</param>
-		/// <param name="tileX">Tile x.</param>
-		/// <param name="tileY">Tile y.</param>
-		private bool GetIsBridge(int tileX, int tileY)
+        /// <summary>
+        /// Is the tile Ice
+        /// </summary>
+        /// <param name="tileX"></param>
+        /// <param name="tileY"></param>
+        /// <returns></returns>
+        private bool GetIsIce(int tileX, int tileY)
+        {
+            return Tiles[tileX, tileY].DisplayType == DisplayTypeIce;
+        }
+
+    /// <summary>
+    /// Gets if the tile is a bridge.
+    /// </summary>
+    /// <returns><c>true</c>, if is bridge was gotten, <c>false</c> otherwise.</returns>
+    /// <param name="LevelNo">Level no.</param>
+    /// <param name="tileX">Tile x.</param>
+    /// <param name="tileY">Tile y.</param>
+    private bool GetIsBridge(int tileX, int tileY)
 		{
 				switch(_RES)
 				{
