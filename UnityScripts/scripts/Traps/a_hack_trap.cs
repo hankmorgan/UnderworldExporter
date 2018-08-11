@@ -28,6 +28,7 @@ public class a_hack_trap : trap_base {
 		//qual=40 is the vending machine selection
 		//qual=41 is the vending machine spawning
 		//qual=42 is the vending machine sign (in uw1 is is the talking door!)
+        //qual=43 is to change the goal of a (type) of Npc. Used in Tombs level 1 by the skeletons who attack when you pick up the map piece 
 		//qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
 		//qual=50 is to trigger the conversation with the troll #251 in tybals lair after you are imprisoned.
 

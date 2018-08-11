@@ -26,7 +26,7 @@ public class ButtonHandler : Decal {
 
 	// Use this for initialization
 	protected override void Start () {
-		base.Start();
+		//base.Start();
 		BoxCollider bx = this.GetComponent<BoxCollider>();
 		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
 				bx.center= new Vector3(0f, 0.16f, 0f);

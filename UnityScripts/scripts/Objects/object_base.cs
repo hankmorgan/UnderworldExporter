@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// Works hand in hand with ObjectInteraction
 /// </summary>
 public class object_base : UWEBase {
+    public bool testUse=false;
 		//float timeforce=0;
 		//Mobile object information.
 		//Moved here to properly support objects that are in motion.
@@ -825,6 +826,11 @@ public class object_base : UWEBase {
 
 		public virtual void Update()
 		{
+            if (testUse)
+            {
+                testUse = false;
+                use();
+            }
 				//Uncomment this code to watch objects fly off in different directions!
 				/*				if  (this.name=="_Gronk")
 				{

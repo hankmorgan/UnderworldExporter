@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class Container : object_base {
+public class Container : UWEBase {
+    //The Object interaction that is on this object.
+    protected ObjectInteraction _objInt;
 
-	public string[] items=new string[40];
-
-
-		public int LockObject;
+    public string[] items=new string[40];
+    
+	public int LockObject;
 
 	/// <summary>
 	/// The capacity of the container
 	/// </summary>
-	public int Capacity;
+	//public int Capacity;
 
 	// <summary>
 	// What objects the container accepts
@@ -455,7 +456,7 @@ public class Container : object_base {
 	}
 
 
-	public override bool use ()
+	public bool use ()
 	{
 		GameObject ObjectInHand=UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 		//TODO:add object to container or open container.
@@ -518,9 +519,9 @@ public class Container : object_base {
 		}
 	}
 
-	public override float GetWeight ()
+	public float GetWeight (float containerObjWeight)
 	{//Get the weight of all items in the container
-		float answer=base.GetWeight();//The container has it's own weight as well.
+		float answer= containerObjWeight;//The container has it's own weight as well.
 		for (short i=0; i<=MaxCapacity();i++)
 		{
 			if (GetItemAt(i)!="")
@@ -541,12 +542,12 @@ public class Container : object_base {
 
 	public float GetBaseWeight()
 	{//What weight is the container itself.
-		return base.GetWeight();
+		return this.GetComponent<object_base>().GetWeight();
 	}
 
 	public float GetCapacity()
 	{
-		return (float)(Capacity);
+		return (float)(items.GetUpperBound(0));
 	}
 
 	public float GetFreeCapacity()
@@ -555,7 +556,7 @@ public class Container : object_base {
 		{
 			return 999;
 		}
-		return GetCapacity() - GetWeight() - GetBaseWeight();
+		return GetCapacity() - this.GetComponent<object_base>().GetWeight() - GetBaseWeight();
 	}
 
 	public static bool TestContainerRules(Container cn, int SlotIndex, bool Swapping)
@@ -688,15 +689,7 @@ public class Container : object_base {
 		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
 	}*/
 
-	public override string UseVerb ()
-	{
-		return "open";
-	}
 
-	public override string UseObjectOnVerb_Inv ()
-	{
-		return "place object in bag";
-	}
 
 	public static void removeFromContainer(Container cn, string objectName)
 		{	//Only removes from the top level container cn	
@@ -718,7 +711,7 @@ public class Container : object_base {
 		public static void PopulateContainer(Container cn, ObjectInteraction objInt, ObjectLoader objList)
 		{
 				//cn.ObjectsAccepted=-1;//For now default to accept all
-				cn.Capacity=40;
+				//cn.Capacity=40;
 				for (int i =0; i<=cn.MaxCapacity();i++)
 				{//init the variables.
 						if (cn.items[i]==null)
@@ -814,9 +807,8 @@ public class Container : object_base {
 			
 	}
 
-	public override bool DropEvent ()
-	{
-		base.DropEvent ();
+	public bool DropEvent ()
+	{		
 		for (short i=0; i<=items.GetUpperBound(0);i++)
 		{
 				if (items[i]!="")
@@ -835,9 +827,8 @@ public class Container : object_base {
 	}
 
 
-	public override bool PickupEvent ()
-	{
-		base.PickupEvent();
+	public  bool PickupEvent ()
+	{		
 		for (short i=0; i<=items.GetUpperBound(0);i++)
 		{
 				if (items[i]!="")
@@ -854,5 +845,15 @@ public class Container : object_base {
 		}
 		return true;
 	}
+
+
+    public ObjectInteraction objInt()
+    {
+        if (_objInt == null)
+        {
+            _objInt = this.GetComponent<ObjectInteraction>();
+        }
+        return _objInt; //this.gameObject.GetComponent<ObjectInteraction>();
+    }
 
 }

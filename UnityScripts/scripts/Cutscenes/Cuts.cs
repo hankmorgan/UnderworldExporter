@@ -212,4 +212,18 @@ public class Cuts : GuiBase {
 		WindowDetectUW.SwitchFromMouseLook();
 		return;	
 	}
+
+    protected void SyncSubtitles()
+    {
+        //Sync my subtitle times to my audio times.
+        for (int i = 0; i <= AudioTimes.GetUpperBound(0); i++)
+        {
+            SubsTimes[i] = AudioTimes[i];
+            AudioClip x = (AudioClip)Resources.Load(AudioClipName[i]);
+            if (x != null)
+            {
+                SubsDuration[i] = x.length;
+            }
+        }
+    }
 }

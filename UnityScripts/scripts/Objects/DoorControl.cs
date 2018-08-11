@@ -11,7 +11,7 @@ public class DoorControl : object_base {
 	//public bool locked;
 
 		///What keys can open this
-	//public int KeyIndex; THis is the same as objInt.link
+	public int KeyIndex; //THis is the same as objInt.link
 		///True for open, false for closed.
 	//public bool state;	
 
@@ -49,8 +49,13 @@ public class DoorControl : object_base {
 	public const float DefaultDoorTravelTime=1.3f;
 
 	protected override void Start ()
-	{	
-		if (state())
+	{
+        ObjectInteraction doorlock = getLockObjInt();
+        if (doorlock!=null)
+        {
+            KeyIndex = doorlock.link & 0x3F;
+        }
+        if (state())
 		{//Make sure it is open
 			if (isPortcullis()==false)
 			{

@@ -3401,7 +3401,7 @@ public class ConversationVM : UWEBase {
 						{
 								Container npcCont = npc.gameObject.GetComponent<Container>();
 
-								for ( short i=0; i<npcCont.Capacity; i++)
+								for ( short i=0; i<=npcCont.items.GetUpperBound(0); i++)
 								{
 										GameObject obj = npcCont.GetGameObjectAt(i);
 										if (obj!=null)

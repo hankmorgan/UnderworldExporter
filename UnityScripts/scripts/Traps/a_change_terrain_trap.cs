@@ -99,7 +99,7 @@ The path to the sword hilt on Level3
 								DestroyDoorPortion("rear_rightside_" + doorname);	
 								DestroyDoorPortion(doorname);
 								TileMapRenderer.RenderDoor(
-										GameWorldController.instance.DynamicObjectMarker().gameObject,
+										GameWorldController.instance.SceneryModel.gameObject,
 										GameWorldController.instance.currentTileMap(),
 										GameWorldController.instance.CurrentObjectList(),
 										door.GetComponent<ObjectInteraction>().objectloaderinfo.index);

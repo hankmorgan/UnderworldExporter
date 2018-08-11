@@ -5821,7 +5821,50 @@ public class Magic : UWEBase {
 								}
 								break;
 						}
-				default:						
+
+            case 224://Game intro as far as "the next morning"
+                Debug.Log("cutscene" + EffectID); break;
+            case 225://Gem rising over building after the next morning
+                Debug.Log("cutscene" + EffectID); break;
+            case 226://End game
+                Debug.Log("cutscene" + EffectID); break;
+            case 227: //A fade to black
+                Debug.Log("cutscene" + EffectID); break;
+            case 228://Perhaps you see thy future here on a green background
+                {
+                    Cutscene_SeeThyFuture cs = UWHUD.instance.gameObject.AddComponent<Cutscene_SeeThyFuture>();
+                    UWHUD.instance.CutScenesFull.cs = cs;
+                    UWHUD.instance.CutScenesFull.Begin();
+                    break;
+                }
+            case 229://peace such as this (cs034)
+                {
+                    Cutscene_PeaceSuchAsThis cs = UWHUD.instance.gameObject.AddComponent<Cutscene_PeaceSuchAsThis>();
+                    UWHUD.instance.CutScenesFull.cs = cs;
+                    UWHUD.instance.CutScenesFull.Begin();
+                    break;
+                }
+            case 230://Guardian taunt on tombs 1
+                {
+                    Cutscene_AllWhoOppose cs = UWHUD.instance.gameObject.AddComponent<Cutscene_AllWhoOppose>();
+                    UWHUD.instance.CutScenesFull.cs = cs;
+                    UWHUD.instance.CutScenesFull.Begin();
+                    break;
+                }
+            case 231://this world is mine (cs034)
+                {
+                    Cutscene_ThisWorldIsMine cs = UWHUD.instance.gameObject.AddComponent<Cutscene_ThisWorldIsMine>();
+                    UWHUD.instance.CutScenesFull.cs = cs;
+                    UWHUD.instance.CutScenesFull.Begin();
+                    break;
+                }
+            case 232://fade to black. //When owner of calling spelltrap is 24 this will play a dream??
+                Debug.Log("cutscene" + EffectID); break;
+            case 233://game splash
+                Debug.Log("cutscene" + EffectID); break;
+            case 234://game credits
+                Debug.Log("cutscene" + EffectID); break;
+            default:						
 					Debug.Log ("Unimplemented effect Id is " + EffectID + " caster =" + caster + " target =" + target);
 					SpellResultType=SpellResultNone;
 					break;

@@ -5,59 +5,59 @@ using System.Linq;
 public class Barrel : Container {
 
 
-	protected override void Start ()
+	protected void Start ()
 	{
-		base.Start ();
+		//base.Start ();
 
-				this.gameObject.layer = LayerMask.NameToLayer("MapMesh");
-				Rigidbody rgd = this.GetComponent<Rigidbody>();
-				if (rgd!=null)
-				{
-						DestroyImmediate (rgd);
-				}
-				BoxCollider box = this.GetComponent<BoxCollider>();
-				if (box!=null)
-				{
-						DestroyImmediate (box);
-				}
+			this.gameObject.layer = LayerMask.NameToLayer("MapMesh");
+			Rigidbody rgd = this.GetComponent<Rigidbody>();
+			if (rgd!=null)
+			{
+					DestroyImmediate (rgd);
+			}
+			BoxCollider box = this.GetComponent<BoxCollider>();
+			if (box!=null)
+			{
+					DestroyImmediate (box);
+			}
 
-				MeshFilter meshF = this.gameObject.AddComponent<MeshFilter>();
-				MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
-				Material[] mats = new Material[NoOfMeshes()];
-				Mesh mesh = new Mesh();
+			MeshFilter meshF = this.gameObject.AddComponent<MeshFilter>();
+			MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
+			Material[] mats = new Material[NoOfMeshes()];
+			Mesh mesh = new Mesh();
 
 
-				mesh.subMeshCount = NoOfMeshes();				
+			mesh.subMeshCount = NoOfMeshes();				
 
-				mesh.vertices = ModelVertices();
+			mesh.vertices = ModelVertices();
 
-				Vector2[] uvs = ModelUVs(mesh.vertices);
+			Vector2[] uvs = ModelUVs(mesh.vertices);
 
-				for (int i=0; i<NoOfMeshes();i++)
-				{
-						mesh.SetTriangles(ModelTriangles(i),i);	
-						mats[i] = ModelMaterials(i);
-						//mr.material.SetColor("_Color",ModelColour(0));
-						mats[i].SetColor("_Color",ModelColour(i));
-				}	
-				if (uvs.GetUpperBound(0)>0)
-				{
-						mesh.uv= uvs;
-				}
+			for (int i=0; i<NoOfMeshes();i++)
+			{
+					mesh.SetTriangles(ModelTriangles(i),i);	
+					mats[i] = ModelMaterials(i);
+					//mr.material.SetColor("_Color",ModelColour(0));
+					mats[i].SetColor("_Color",ModelColour(i));
+			}	
+			if (uvs.GetUpperBound(0)>0)
+			{
+					mesh.uv= uvs;
+			}
 
-				mr.materials=mats;
-				for (int i=0; i<NoOfMeshes();i++)
-				{
-						mr.materials[i].SetColor("_Color",ModelColour(i));
-				}
+			mr.materials=mats;
+			for (int i=0; i<NoOfMeshes();i++)
+			{
+					mr.materials[i].SetColor("_Color",ModelColour(i));
+			}
 
-				meshF.mesh = mesh;
-				mesh.RecalculateNormals(); 
-				mesh.RecalculateBounds();
+			meshF.mesh = mesh;
+			mesh.RecalculateNormals(); 
+			mesh.RecalculateBounds();
 
-				MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
-				mc.sharedMesh=null;
-				mc.sharedMesh=mesh;	
+			MeshCollider mc = this.gameObject.	AddComponent<MeshCollider>();
+			mc.sharedMesh=null;
+			mc.sharedMesh=mesh;	
 	}
 
 

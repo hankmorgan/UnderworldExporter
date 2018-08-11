@@ -1819,18 +1819,25 @@ public class ObjectInteraction : UWEBase
                 break;
             case CONTAINER:
                 {
+                    myObj.AddComponent<container_obj>();//placeholder obj base to allow interaction.
+                    if ((currObj.item_id >= 128) && (currObj.item_id <= 142))
+                    {
+                        
+                    }
                     switch (objInt.item_id)
                     {
                         case 349://Chest variant
-                            Container.PopulateContainer(myObj.AddComponent<Chest>(), objInt, currObj.parentList); CreateSprite = false; break;
+                            myObj.AddComponent<Chest>();
+                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         case 347://barrel variant
-                            Container.PopulateContainer(myObj.AddComponent<Barrel>(), objInt, currObj.parentList); CreateSprite = false; break;
+                            myObj.AddComponent<Barrel>();
+                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         default:
-                            Container.PopulateContainer(myObj.AddComponent<Container>(), objInt, currObj.parentList); break;
-                    }
-                    if ((currObj.item_id >= 128) && (currObj.item_id <= 142))
-                    {
-                        myObj.GetComponent<Container>().Capacity = GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity;
+                            myObj.AddComponent<Container>();
+                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); break;
                     }
                     break;
                 }
@@ -2393,6 +2400,8 @@ public class ObjectInteraction : UWEBase
                             myObj.AddComponent<a_hack_trap_scintpuzzlereset>(); break;
                         case 0x13:
                             myObj.AddComponent<a_hack_trap_scintplatformreset>(); break;
+                        case 0x15:
+                            myObj.AddComponent<a_hack_trap_button_mover>(); break;
                         case 0xA://Bonus object trap
                             myObj.AddComponent<a_hack_trap_class_item>(); break;
                         case 0xE://colour cycle a room in talorus
@@ -2460,6 +2469,8 @@ public class ObjectInteraction : UWEBase
                                 }
                                 break;
                             }
+                        case 0x2b:
+                            myObj.AddComponent<a_hack_trap_change_goal>();break;
                         case 0x2c:
                             myObj.AddComponent<a_hack_trap_sleep>(); break;
                         case 0x32:

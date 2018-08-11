@@ -6,9 +6,14 @@ using System.Collections;
 /// Guess
 public class DoorKey : object_base {
 	///This should match the doors it is opening. Also index into look descriptions
-	//public int KeyId;
+	public int KeyId;
 
-	public override bool use ()
+    protected override void Start()
+    {
+        KeyId = objInt().owner;
+    }
+
+    public override bool use ()
 	{
 		if (objInt().PickedUp==true)
 		{
