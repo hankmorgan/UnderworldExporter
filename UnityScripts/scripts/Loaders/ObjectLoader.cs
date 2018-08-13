@@ -1925,8 +1925,9 @@ public class ObjectLoader : DataLoader {
 			}
 
 				ObjectLoader.LinkObjectListWands (instance);//Link wands to their spell objects
+                ObjectLoader.LinkObjectListPotions(instance);
 
-				GameWorldController.LoadingObjects=false;
+                GameWorldController.LoadingObjects=false;
 		}
 
 
@@ -3824,8 +3825,50 @@ public class ObjectLoader : DataLoader {
 				}
 		}
 
+    /// <summary>
+    /// Match wands to their spell links..
+    /// </summary>
+    /// <param name="objLoader">Object loader.</param>
+    static public void LinkObjectListPotions(ObjectLoader objLoader)
+    {
+        for (int o = 1; o <= objLoader.objInfo.GetUpperBound(0); o++)
+        {
+            if (objLoader.objInfo[o] != null)
+            {
+                if (objLoader.objInfo[o].instance != null)
+                {
+                    if (objLoader.objInfo[o].instance.GetComponent<Potion>() != null)
+                    {
+                        if (objLoader.objInfo[o].instance.isquant == 1)
+                        {
+                            //Object contains it's own enchantment with infinite charges
+                            //DO NOTHING	
+                        }
+                        else
+                        {
+                            int l = objLoader.objInfo[o].link;
+                            if (l != 0)
+                            {
+                                if (l <= objLoader.objInfo.GetUpperBound(0))
+                                {
+                                    if ((objLoader.objInfo[l].GetItemType() == ObjectInteraction.SPELL) || (objLoader.objInfo[l].GetItemType() == ObjectInteraction.A_DAMAGE_TRAP))
+                                    {
+                                        if (objLoader.objInfo[l].instance != null)
+                                        {
+                                            objLoader.objInfo[o].instance.GetComponent<Potion>().linked = objLoader.objInfo[l].instance;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-		public static int findObjectByTypeInTile(ObjectLoaderInfo[] objList, short tileX, short tileY, int itemType)
+
+    public static int findObjectByTypeInTile(ObjectLoaderInfo[] objList, short tileX, short tileY, int itemType)
 		{
 				for (int i=0; i<=objList.GetUpperBound(0);i++)
 				{

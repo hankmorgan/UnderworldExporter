@@ -1286,7 +1286,6 @@ public class UWCharacter : Character {
 		void IncenseDream (ObjectInteraction incense)
 		{
 				UWHUD.instance.EnableDisableControl (UWHUD.instance.CutsceneFullPanel.gameObject, true);
-				//UWHUD.instance.CutScenesFull.SetAnimationFile="FadeToBlackSleep";
 				incense.consumeObject ();
 				Cutscene_Incense d = UWHUD.instance.gameObject.AddComponent<Cutscene_Incense>();
 				UWHUD.instance.CutScenesFull.cs=d;

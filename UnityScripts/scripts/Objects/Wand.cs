@@ -2,53 +2,9 @@
 using System.Collections;
 
 public class Wand : enchantment_base {
-	//public int SpellObjectLink;
-	//public int SpellObjectQualityToCreate=0;//To persist the spell trap between levels.
-	//public int SpellObjectOwnerToCreate=0;
-		//public int ActualSpell;
 
 	public a_spell linkedspell;
 
-	//protected override void Start ()
-	//{
-	//	base.Start ();
-		
-				/*
-		if (_RES==GAME_UW2)				
-		{
-			if (SpellObjectOwnerToCreate==-1)
-			{//This is  wand with infinite charges. Does not use a spell object for it's enchantment.
-				//Debug.Log("linking wand " + this.name + " to an existing spell");
-				//SpellObjectLink = ObjectLoader.getObjectIntAt(objInt().link).link;
-			}
-			else
-			{
-				if(objInt().PickedUp)		
-				{//A wand and spell in the inventory loaded from a playerdat file. Need to create it's spell object now
-					ObjectLoaderInfo newobjt= ObjectLoader.newObject(288, SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink, 256);
-					ObjectInteraction spell = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,  GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.DynamicObjectMarker().position );
-					objInt().link = newobjt.index;
-				}	
-			}
-		}//UW2 stores enchantments on the player.dat. This is not properly implemented yet
-
-		if (! objInt().isEnchanted())
-		{
-				if (ObjectLoader.getObjectIntAt(objInt().link)!=null)
-				{
-						SpellObjectLink=ObjectLoader.getObjectIntAt(objInt().link).link;
-				}		
-		}
-		else
-		{
-			SpellObjectLink=0;
-		}
-
-		SetDisplayEnchantment();
-		ActualSpell=GetActualSpellIndex();
-		*/
-//	}
-	
 	/// <summary>
 	/// Gets the actual spell index of the spell.
 	/// </summary>
@@ -69,67 +25,35 @@ public class Wand : enchantment_base {
 		}
 		else
 		{
-						if (_RES!=GAME_UW2)
-						{
-								switch (objInt().link)		
-								{
-								//TODO:Figure out the range here!
-
-								case 579://frog
-								case 580://maze
-								case 581://hallucination
-										return objInt().link-368;	
-								default:
-										return objInt().link-256;	
-								}
-						}
-						else
-						{//TODO:Figure out the range here!
-								switch (objInt().link)		
-								{
-								case 576://altara
-										return objInt().link-368;	
-								default:
-										return objInt().link-256;	
-								}
-						}
-					//	return objInt().link-256;//Confirm mappings for UW2
-		}
-
-				/*
-		if (objInt().isEnchanted()==true)
-		{
-			if (objInt().link-512<63)
+			if (_RES!=GAME_UW2)
 			{
-					return objInt().link-512+256;
-			}
-			else
-			{
-					return objInt().link-512+144;
-			}
-		}
-		else
-		{
-			if (_RES==GAME_UW2)
-			{
-				if (SpellObjectLink-256>=320)	
+				switch (objInt().link)		
 				{
-					return SpellObjectLink-368;
+				//TODO:Figure out the range here!
+
+				case 579://frog
+				case 580://maze
+				case 581://hallucination
+						return objInt().link-368;	
+				default:
+						return objInt().link-256;	
 				}
 			}
-
-			return SpellObjectLink-256;	//default
-			
-		}*/
+			else
+			{//TODO:Figure out the range here!
+				switch (objInt().link)		
+				{
+				case 576://altara
+					return objInt().link-368;	
+				default:
+					return objInt().link-256;	
+				}
+			}
+		}
 	}
-				
-
-//}
-
 
 	public override bool use ()
 	{
-
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if ((!objInt().PickedUp))
@@ -218,36 +142,6 @@ public class Wand : enchantment_base {
 		return true;
 	}
 
-    /*
-/// <summary>
-/// Creates a new spell trap in the object list
-/// </summary>
-public override void InventoryEventOnLevelEnter ()
-    {
-
-    //objInt().isquant=0;
-    if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
-    base.InventoryEventOnLevelEnter ();
-        //Create a spell trap and store it on the map. This occurs before the list is rendered.
-            //Try and find an existing spell trap with the necessary qualities. If not found then create a new one
-            ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
-            for (int i = 256; i<=objList.GetUpperBound(0);i++)
-            {
-                    if (objList[i].item_id ==288 )//A spell
-                    {
-                            if (objList[i].link == SpellObjectLink)
-                            {
-                                    objInt().link=i;
-                                    return;
-                            }
-                    }
-            }
-
-    ObjectLoaderInfo newobj= ObjectLoader.newObject(288,SpellObjectQualityToCreate,SpellObjectOwnerToCreate, SpellObjectLink,256 );
-    objInt().link = newobj.index;
-    }
-    */
-
     public override void InventoryEventOnLevelExit()
     {
         base.InventoryEventOnLevelExit();
@@ -269,34 +163,6 @@ public override void InventoryEventOnLevelEnter ()
             }
         }
     }
-
-    /*
-public override void InventoryEventOnLevelExit ()
-    {
-    if (_RES==GAME_UW2){return;}//UW2 stores enchantments on the player.dat. This is not implemented yet
-    //Store the spell properties so I can create it in the next level. 
-    base.InventoryEventOnLevelExit ();
-    //objInt().isquant=0;
-    GameObject linked = ObjectLoader.getGameObjectAt(objInt().link);
-        if (linked!=null)
-        {
-            a_spell spell = linked.GetComponent<a_spell>();
-            if (spell!=null)
-            {		
-                SpellObjectOwnerToCreate = spell.objInt().owner;	
-                SpellObjectQualityToCreate = spell.objInt().quality;
-                //SpellObjectLink = spell.objInt().link;
-                //SpellObjectLinkToCreate=spell.objInt().link;
-                //Flag the spell trap as not being in use and change it's type to a fist so it will not persist.
-                //Assumes spell traps are all stored off map
-                //spell.objInt().objectloaderinfo.InUseFlag=0;
-                //spell.objInt().objectloaderinfo.item_id=0;
-            }
-        }
-        //SpellObjectOwnerToCreate 
-    }
-    */
-
 
     public override void MoveToWorldEvent ()
 	{

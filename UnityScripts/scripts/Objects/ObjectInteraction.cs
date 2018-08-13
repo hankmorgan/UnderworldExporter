@@ -150,6 +150,7 @@ public class ObjectInteraction : UWEBase
     public const int A_PROXIMITY_TRAP = 128;
     public const int BOUNCING_PROJECTILE = 129;
     public const int MAPPIECE = 130;
+    public const int SPECIAL_EFFECT = 131;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -1828,11 +1829,11 @@ public class ObjectInteraction : UWEBase
                     {
                         case 349://Chest variant
                             myObj.AddComponent<Chest>();
-                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            myObj.GetComponent<Container>().items = new string[40];
                             Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         case 347://barrel variant
                             myObj.AddComponent<Barrel>();
-                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            myObj.GetComponent<Container>().items = new string[40];
                             Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         default:
                             myObj.AddComponent<Container>();
@@ -2351,6 +2352,10 @@ public class ObjectInteraction : UWEBase
                 myObj.AddComponent<a_skill_trap>();
                 CreateSprite = false;
                 break;
+            case SPECIAL_EFFECT:
+                myObj.AddComponent<a_special_effect_trap>();
+                CreateSprite = false;
+                break;
             case UNIMPLEMENTED_TRAP:
                 Debug.Log("Unimplemented trap " + myObj.name);
                 myObj.AddComponent<trap_base>();
@@ -2440,6 +2445,8 @@ public class ObjectInteraction : UWEBase
                             myObj.AddComponent<a_hack_trap_light_recharge>(); break;
                         case 0x24://Move castlenpcs
                             myObj.AddComponent<a_hack_trap_castle_npcs>(); break;
+                        case 0x26://Spoil potion
+                            myObj.AddComponent<a_hack_trap_spoil_potion>();break;
                         case 0x27://Change visiblity of linked item
                             myObj.AddComponent<a_hack_trap_visibility>(); break;
                         case 0x28:

@@ -7,13 +7,14 @@ public class CutsAnimator : GuiBase {
 		public bool Reset;
 		public int frameIndex;
 		public Texture2D anim_base;//Transparent image
-		public Texture2D black; 
-		public RawImage TargetControl;
+		public Texture2D black;
+        public Texture2D red;
+        public Texture2D orange;
+        public RawImage TargetControl;
 		public string SetAnimation="";
 		public string PrevAnimation="";
 		bool mode;//True if using cs file
 		public bool looping;
-		//BytLoader bty;
 		CutsLoader cuts;
 		public Material UI_UNLIT;//Special material for transparency issues.
 
@@ -86,7 +87,6 @@ public class CutsAnimator : GuiBase {
 						UWCharacter.ResurrectPlayer ();
 						break;
 					}
-
 				case "death"://PLayer is dying and will not resurrect.
 				case "cs403.n01":
 					SetAnimation="cs403.n02";
@@ -136,9 +136,12 @@ public class CutsAnimator : GuiBase {
 			frameIndex=0;	
 			StopAllCoroutines();
 			switch (SetAnimation.ToLower())
-			{	
-			
-			case "fadetoblacksleep":
+			{
+            case "fadetored":
+                TargetControl.material = UI_UNLIT;
+                TargetControl.texture = red;
+                break;
+            case "fadetoblacksleep":
 				TargetControl.material=UI_UNLIT;
 				TargetControl.texture=black;
 				break;	

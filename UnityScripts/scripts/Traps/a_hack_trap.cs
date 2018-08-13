@@ -19,11 +19,12 @@ public class a_hack_trap : trap_base {
 		//qual=28 is change tmap objects to use a different texture
 		//Qual=29 is randomly flick buttons. (talorus 1)
 		//qual=30 if the avatar is a coward trap in the pits
-		//qual=31 something in the arena of fire?
-		//qual =32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
-		//qual = 33 is used to recycle empty bottles! 
+		//qual=31 something in the arena of fire? unimplemented
+		//qual=32 is the qbert puzzle in the void. - Used on both the pyramid and the teleports that take you to it (from red hell at least)
+		//qual=33 is used to recycle empty bottles! 
 		//qual=35 is recharge light crystals	
-		//qual =36. Called after first LB conversation. Moves all NPCs to their proper locations. Possibly used to manage schedules. Only implemented for the first xclock 
+		//qual=36. Called after first LB conversation. Moves all NPCs to their proper locations. Possibly used to manage schedules. Only implemented for the first xclock 
+        //qual=38 Used in the tombs to swap your potion of cure poison with a potion of poison (via a linked damage trap)
 		//qual=39 is change object visability
 		//qual=40 is the vending machine selection
 		//qual=41 is the vending machine spawning

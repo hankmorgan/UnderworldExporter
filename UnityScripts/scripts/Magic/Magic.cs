@@ -3490,9 +3490,9 @@ public class Magic : UWEBase {
 						{
 								mgp.caster=Caster;
 						}
-						//TODO: Make magic projectiles flight work off yaw and pitch values instead of forces.
+
 						BoxCollider box = projectile.GetComponent<BoxCollider>();
-						box.size = new Vector3(0.2f,0.2f,0.2f);
+						box.size = new Vector3(0.1f,0.1f,0.1f);
 						box.center= new Vector3(0.0f,0.1f,0.0f);
 						Rigidbody rgd = projectile.GetComponent<Rigidbody>();
 						rgd.freezeRotation =true;

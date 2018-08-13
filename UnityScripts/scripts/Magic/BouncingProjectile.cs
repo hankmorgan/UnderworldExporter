@@ -11,7 +11,7 @@ public class BouncingProjectile : MagicProjectile {
 		spellprop = spf;
 		this.gameObject.layer = LayerMask.NameToLayer("MagicProjectile");
 		BoxCollider box = this.gameObject.GetComponent<BoxCollider>();
-		box.size = new Vector3(0.2f,0.2f,0.2f);
+		box.size = new Vector3(0.1f,0.1f,0.1f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
 
 		rgd = this.gameObject.GetComponent<Rigidbody>();

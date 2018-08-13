@@ -78,7 +78,7 @@ public class Impact : object_base {
             objInt.GetComponent<AnimationOverlay>().Looping = false;
             objInt.GetComponent<AnimationOverlay>().StartFrame = StartFrame;
             objInt.GetComponent<AnimationOverlay>().NoOfFrames = EndFrame - StartFrame;
-
+            objInt.gameObject.layer = LayerMask.NameToLayer("Animation");
             return objInt.gameObject;
         }
         else

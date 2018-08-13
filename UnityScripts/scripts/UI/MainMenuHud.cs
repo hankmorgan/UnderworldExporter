@@ -99,8 +99,7 @@ public class MainMenuHud : GuiBase {
 					UWHUD.instance.CutScenesFull.End();
 					Cutscene_Splash ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
 					UWHUD.instance.CutScenesFull.cs=ci;
-					UWHUD.instance.CutScenesFull.Begin();
-					
+					UWHUD.instance.CutScenesFull.Begin();					
 			}
 		}
 
