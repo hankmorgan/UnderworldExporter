@@ -38,11 +38,16 @@ public class Palette : UWClass {
 		return new Color32(red[pixel], green[pixel],blue[pixel], alpha);
 	}
 
-	/// <summary>
-	/// Converts the palette to an image.
-	/// </summary>
-	/// <returns>The image.</returns>
-	static public Texture2D toImage(Palette pal)
+    public Color32 ColorAtPixelAlpha(byte pixel,byte alpha)
+    {
+        return new Color32(red[pixel], green[pixel], blue[pixel], alpha);
+    }
+
+    /// <summary>
+    /// Converts the palette to an image.
+    /// </summary>
+    /// <returns>The image.</returns>
+    static public Texture2D toImage(Palette pal)
 	{
 				if (pal==null)
 				{

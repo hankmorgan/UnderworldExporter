@@ -151,6 +151,7 @@ public class ObjectInteraction : UWEBase
     public const int BOUNCING_PROJECTILE = 129;
     public const int MAPPIECE = 130;
     public const int SPECIAL_EFFECT = 131;
+    public const int DRINK = 132;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -1322,8 +1323,7 @@ public class ObjectInteraction : UWEBase
     /// </summary>
     /// <returns><c>true</c>, if type was changed, <c>false</c> otherwise.</returns>
     /// <param name="newID">New ID.</param>
-    /// <param name="newType">New type.</param>
-    public virtual bool ChangeType(int newID, int newType)
+    public virtual bool ChangeType(int newID)
     {//Changes the type of the object. Eg when destroyed and it needs to become debris.
         item_id = newID;
         WorldDisplayIndex = newID;
@@ -1878,6 +1878,7 @@ public class ObjectInteraction : UWEBase
                 myObj.AddComponent<RuneBag>();
                 break;
             case FOOD:
+            case DRINK:
                 {
                     myObj.AddComponent<Food>();
                     break;

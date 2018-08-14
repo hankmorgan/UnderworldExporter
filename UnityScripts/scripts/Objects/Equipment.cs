@@ -226,7 +226,7 @@ public class Equipment : object_base {
 		if (objInt().quality<=0)
 		{
 			UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(objInt().item_id) + " was destroyed");
-			ChangeType(208,23);//Change to debris.
+			ChangeType(208);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
 			if (this.GetComponent<Weapon>())
 			{

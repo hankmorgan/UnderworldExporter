@@ -58,13 +58,13 @@ public class Coin : object_base {
 		case 161://a Coin
 			if (objInt().GetQty ()>1)
 			{
-				ChangeType(160,objInt().GetItemType());
+				ChangeType(160);
 			}
 			break;
 		case 160://A stack of coins.
 			if (objInt().GetQty ()==1)
 			{
-				ChangeType(161,objInt().GetItemType());
+				ChangeType(161);
 			}
 			break;
 		}

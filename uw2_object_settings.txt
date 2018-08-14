@@ -185,9 +185,9 @@
 184	0	0	0	24	a_pastry&pastries	184	184	1	1	0	1
 185	0	0	0	24	a_mushroom	185	185	1	1	0	1
 186	0	0	0	24	a_honeycomb	186	186	1	1	0	1
-187	0	0	0	24	a_bottle_of_ale&bottles_of_ale	187	187	1	1	0	1
-188	0	0	0	24	a_bottle_of_water&bottles_of_water	188	188	1	1	0	1
-189	0	0	0	24	a_bottle_of_wine&bottles_of_wine	189	189	1	1	0	1
+187	0	0	0	132	a_bottle_of_ale&bottles_of_ale	187	187	1	1	0	1
+188	0	0	0	132	a_bottle_of_water&bottles_of_water	188	188	1	1	0	1
+189	0	0	0	132	a_bottle_of_wine&bottles_of_wine	189	189	1	1	0	1
 190	0	0	0	24	some_meat-on-a-stick&pieces_of_meat-on-a-stick	190	190	1	1	0	1
 191	0	0	0	24	a_nutritious_wafer	191	191	1	1	0	1
 192	0	0	0	24	a_plant	192	192	1	1	0	1
@@ -311,7 +311,7 @@
 310	0	0	0	11	a_scroll	310	310	1	1	0	1
 311	0	0	0	11	a_scroll	311	311	1	1	0	1
 312	0	0	0	11	a_book	312	312	1	1	0	1
-313	0	0	0	69	a_bit_of_a_map	313	313	1	1	0	1
+313	0	0	0	130	a_bit_of_a_map	313	313	1	1	0	1
 314	0	0	0	28	a_map	314	314	1	1	0	1
 315	0	0	0	23	a_dead_plant	315	315	0	0	0	1
 316	0	0	0	23	a_dead_plant	316	316	0	0	0	1
@@ -355,7 +355,7 @@
 354	0	0	0	8	a_switch&switches	354	354	1	0	0	1
 355	0	0	0	68	a_painting	355	355	0	0	0	1
 356	0	0	0	7	a_bridge	356	356	1	0	0	1
-357	0	0	0	18	a_gravestone	357	357	1	0	0	1
+357	0	0	0	84	a_gravestone	357	357	1	0	0	1
 358	0	0	0	10	some_writing	358	358	1	0	0	1
 359	0	0	0	126	a_bed	359	359	1	0	0	1
 360	0	0	0	108	a_large_blackrock_gem	360	360	0	0	0	1
@@ -386,7 +386,7 @@
 385	0	0	0	38	a_teleport_trap	385	385	0	0	0	1
 386	0	0	0	39	a_arrow_trap	386	386	0	0	0	1
 387	0	0	0	40	a_hack_trap	387	387	0	0	0	1
-388	0	0	0	121	a_special_effects_trap	388	388	0	0	0	1
+388	0	0	0	131	a_special_effects_trap	388	388	0	0	0	1
 389	0	0	0	42	a_change_terrain_trap	389	389	0	0	0	1
 390	0	0	0	43	a_spelltrap	390	390	0	0	0	1
 391	0	0	0	44	a_create_object_trap	391	391	0	0	0	1

@@ -1331,7 +1331,7 @@ public class SaveGame : Loader
             }*/
 
             //File.WriteAllBytes(Loader.BasePath + "save4\\player.dat", (byte)recodetest);
-            /*if (UWCharacter.Instance.recode)
+            if (UWCharacter.Instance.recode)
             {
                     if (UWCharacter.Instance.recode_cheat)
                     {
@@ -1353,7 +1353,7 @@ public class SaveGame : Loader
                             dataToWrite[i] = (byte)recodetest[i];
                     }
                     File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "playerrecoded.dat", dataToWrite);
-            }*/
+            }
 
 
             //Load some common items for uw1/2

@@ -138,8 +138,15 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-				Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + objInt().zpos + " (" + Quest.instance.variables[objInt().zpos] + ")" );
-				return VariableValue()==Quest.instance.variables[objInt().zpos];
+				Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + objInt().zpos + " (" + Quest.instance.variables[objInt().zpos] + ")" );
+                switch (objInt().zpos)
+                {
+                    case 117:
+                        return true;//Fix bug on tombs final level
+                    default:
+                        return VariableValue() == Quest.instance.variables[objInt().zpos];
+                }
+				
 			}
 		}
 

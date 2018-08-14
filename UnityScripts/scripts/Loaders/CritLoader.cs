@@ -8,42 +8,50 @@ using System.Collections;
 /// Loads the basic animation frames for npcs
 public class CritLoader : ArtLoader {
 
-		public CritterInfo critter;// =new CritterInfo[64];
-
-		public CritLoader(int CritterToLoad)
-		{				
-				//pal.LoadPalettes();
-				//Load the assoc file
-				string assocpath;
-				switch (_RES)
-				{
-				case GAME_UW2:
-						ReadUW2AssocFile(CritterToLoad);	
-						return;
-				case GAME_UWDEMO:
-						assocpath =  "CRIT" + sep + "DASSOC.ANM"; break;
-				default:
-						assocpath =  "CRIT" + sep + "ASSOC.ANM"; break;
-				}
-				char[] assoc;
-				long AssocAddressPtr=256;
-				if (DataLoader.ReadStreamFile(BasePath + assocpath, out assoc))
-				{
-						for (int ass = 0 ; ass <=63 ; ass++)
-						{
-								int FileID= (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
-								int auxPal = (int)DataLoader.getValAtAddress(assoc,AssocAddressPtr++,8);
-								if (ass==CritterToLoad)
-								{
-										critter= new CritterInfo(FileID,  GameWorldController.instance.palLoader.Palettes[0], auxPal);						
-								}				
-						}
-				}
-		}
+	public CritterInfo critter;// =new CritterInfo[64];
 
 
+	public CritLoader(int CritterToLoad)
+    {
+        if (xfer==null)
+        {
+            xfer = new XFerLoader();
+        }
+          //Load the assoc file
+        switch (_RES)
+        {
+            case GAME_UW2:
+                ReadUW2AssocFile(CritterToLoad);
+                return;
+            case GAME_UWDEMO:
+                ReadUw1AssocFile(CritterToLoad, "CRIT" + sep + "DASSOC.ANM");
+                return;
+            default:
+                ReadUw1AssocFile(CritterToLoad, "CRIT" + sep + "ASSOC.ANM");
+                return;
+        }        
+    }
 
-		public Sprite RetrieveSpriteByName(string AnimToFind, int currentAnimNo)
+    private void ReadUw1AssocFile(int CritterToLoad, string assocpath)
+    {
+        char[] assoc;
+        long AssocAddressPtr = 256;
+        if (DataLoader.ReadStreamFile(BasePath + assocpath, out assoc))
+        {
+            for (int ass = 0; ass <= 63; ass++)
+            {
+                int FileID = (int)DataLoader.getValAtAddress(assoc, AssocAddressPtr++, 8);
+                int auxPal = (int)DataLoader.getValAtAddress(assoc, AssocAddressPtr++, 8);
+                if (ass == CritterToLoad)
+                {
+                    critter = new CritterInfo(FileID, GameWorldController.instance.palLoader.Palettes[0], auxPal);
+                }
+            }
+        }
+    }
+
+
+    public Sprite RetrieveSpriteByName(string AnimToFind, int currentAnimNo)
 		{
 				int index=-1;
 				//I will know my animation mode from the npcs so i just need to iterate through the animation

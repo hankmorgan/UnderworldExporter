@@ -210,7 +210,6 @@ public class Wand : enchantment_base {
 				clonelinkedspell.name = ObjectInteraction.UniqueObjectName(clonelinkedspell.GetComponent<ObjectInteraction>());
 				clonelinkedspell.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 				linkedspell = clonelinkedspell.GetComponent<a_spell>();
-				//GameWorldController.MoveToInventory(clonelinkedspell.gameObject);
 			}
 		}
 	}

@@ -20,7 +20,7 @@ public class a_hack_trap_recycle : a_hack_trap {
 							object_base bottle = colliders[i].gameObject.GetComponent<object_base>();
 							Destroy(bottle);
 							colliders[i].gameObject.AddComponent<Coin>();
-							colliders[i].gameObject.GetComponent<ObjectInteraction>().ChangeType(160,0);
+							colliders[i].gameObject.GetComponent<ObjectInteraction>().ChangeType(160);
 						}
 				}
 		}

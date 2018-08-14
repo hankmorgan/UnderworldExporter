@@ -91,103 +91,191 @@ public class Food : object_base {
 		}
 	}
 
+    public  bool Drink()
+    {
+        return true;
+    }
 
-	public override bool Eat()
-	{//TODO:Implement drag and drop feeding.
 
+    public override bool Eat()
+	{
 		if (Nutrition()+UWCharacter.Instance.FoodLevel>=255)
 		{
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_are_too_full_to_eat_that_now_));
 			return false;
 		}
 		else
-		{
-			UWCharacter.Instance.FoodLevel = Nutrition()+UWCharacter.Instance.FoodLevel;
-			switch (objInt().item_id)//TODO:update for UW2
-				{
-				case 192://plants
-				case 207:	
-				case 212:
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_the_plant_is_plain_tasting_but_nourishing_));
-						break;	
-				case 217://Dead rotworm
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,234));
-					break;
-				case 283://Rotworm stew
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,235));
-					break;
-				default:
-					UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
-					break;
-				}
-			if (ObjectInteraction.PlaySoundEffects)
-			{
-				switch (Random.Range(1,3))
-				{
-				case 1:
-					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1];break;
-				case 2:
-					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2];break;
-				default:
-					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3];break;
-				}				
-				UWCharacter.Instance.aud.Play();		
-			}
+        {
+            UWCharacter.Instance.FoodLevel = Nutrition() + UWCharacter.Instance.FoodLevel;
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    TasteUW2();break;
+                default:
+                    TasteUW1();break;
+            }
+            
+            if (ObjectInteraction.PlaySoundEffects)
+            {
+                switch(objInt().GetItemType())
+                {
+                    case ObjectInteraction.DRINK:
+                        DrinkSoundEffects(); break;
+                    default:
+                        EatSoundEffects();break;
+                }                
+            }
 
-			if (_RES==GAME_UW2)
-			{//Some food items leave left overs
-					int LeftOverToCreate=-1;
-					switch (objInt().item_id)
-					{
+            if (_RES == GAME_UW2)
+            {//Some food items leave left overs
+                LeftOvers();
+            }
+            objInt().consumeObject();//destroy and remove from inventory/world.
 
-					case 176:
-					case 177://meat
-						LeftOverToCreate=197;break;
-					case 186://honeycomb
-						LeftOverToCreate=210;break;
-					case 187:								
-					case 188:
-					case 189://bottles.
-							LeftOverToCreate=317;break;
-					}
+            return true; //Food was eaten.
+        }
+    }
 
-					if (LeftOverToCreate!=-1)
-					{
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject( LeftOverToCreate,40,0,0,256);
-						newobjt.InUseFlag=1;
-										ObjectInteraction created=ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
-						GameWorldController.MoveToWorld(created.gameObject);
-						UWCharacter.Instance.playerInventory.ObjectInHand=created.name;
-						UWHUD.instance.CursorIcon= created.GetInventoryDisplay().texture;
-						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
-					}
-			}
-			objInt().consumeObject();//destroy and remove from inventory/world.
+    private static void EatSoundEffects()
+    {
+        switch (Random.Range(1, 3))
+        {
+            case 1:
+                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1]; break;
+            case 2:
+                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2]; break;
+            default:
+                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3]; break;
+        }
+        UWCharacter.Instance.aud.Play();
+    }
 
-			return true; //Food was eaten.
-		}
-	}
+    private static void DrinkSoundEffects()
+    {//Play Sound effects for drinkg
+        Debug.Log("Glug glug");
+    }
 
-	public override bool LookAt()
-	{
-		//Code for when looking at food. Should one day return quantity and smell properly
+    /// <summary>
+    /// Prints the taste message for UW1 and processes additional food effects
+    /// </summary>
+    private void TasteUW1()
+    {
+        switch (objInt().item_id)
+        {
+            case 184:// a_mushroom
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_));
+                UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW1_Spell_Effect_Hallucination, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                break;
+            case 185:// a_toadstool
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_toadstool_tastes_odd_and_you_begin_to_feel_ill_));
+                UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW1_Spell_Effect_Poison, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                break;
+            case 186:// a_bottle_of_ale_bottles_of_ale
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_drink_the_dark_ale_));
+                break;
+            case 192://plants
+            case 207:
+            case 212:
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_plant_is_plain_tasting_but_nourishing_));
+                break;
+            case 217://Dead rotworm
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 234));
+                break;
+            case 283://Rotworm stew
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 235));
+                break;
+            default:
+                UWHUD.instance.MessageScroll.Add("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
+                break;
+        }
+    }
 
-		switch(objInt().item_id)
-		{
-			case 191://Wine of compassion
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,StringController.str_you_see_) + " " + StringController.instance.GetString(1,264));
-				break;
-			case 192://plants
-			case 207:	
-			case 212:
-			case 217://Dead Rotworm
-				return base.LookAt();
-			default:		
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()) + OwnershipString());		
-				break;
-		}
-		return true;
-	}
+
+    private void TasteUW2()
+    {
+        switch (objInt().item_id)
+        {
+            case 185:// a_mushroom
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_));
+                UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW2_Spell_Effect_Hallucination, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                break;
+            default:
+                UWHUD.instance.MessageScroll.Add("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
+                break;
+        }
+    }
+
+    private void LeftOvers()
+    {
+        int LeftOverToCreate = -1;
+        switch (objInt().item_id)
+        {
+
+            case 176:
+            case 177://meat
+                LeftOverToCreate = 197; break;
+            case 186://honeycomb
+                LeftOverToCreate = 210; break;
+            case 187:
+            case 188:
+            case 189://bottles.
+                LeftOverToCreate = 317; break;
+        }
+
+        if (LeftOverToCreate != -1)
+        {
+            ObjectLoaderInfo newobjt = ObjectLoader.newObject(LeftOverToCreate, 40, 0, 0, 256);
+            newobjt.InUseFlag = 1;
+            ObjectInteraction created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+            GameWorldController.MoveToWorld(created.gameObject);
+            UWCharacter.Instance.playerInventory.ObjectInHand = created.name;
+            UWHUD.instance.CursorIcon = created.GetInventoryDisplay().texture;
+            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+        }
+    }
+
+    public override bool LookAt()
+    {
+        if (objInt().GetItemType() == ObjectInteraction.DRINK)
+        {
+            return base.LookAt();
+        }
+        //Code for when looking at food. Should one day return quantity and smell properly
+        switch (_RES)
+        {
+            case GAME_UW2:
+                switch (objInt().item_id)
+                {
+                    case 192://plants
+                        return base.LookAt();
+                    default:
+                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(), foodSmellText()) + OwnershipString());
+                        break;
+                }
+                break;   
+
+            case GAME_UW1:
+            default:
+                {
+                    switch (objInt().item_id)
+                    {
+                        case 191://Wine of compassion
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_see_) + " " + StringController.instance.GetString(1, 264));
+                            break;
+                        case 192://plants
+                        case 207:
+                        case 212:
+                        case 217://Dead Rotworm
+                            return base.LookAt();
+                        default:
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(), foodSmellText()) + OwnershipString());
+                            break;
+                    }
+                    break;
+                }            
+        }
+        return true;
+    }
 
 		/// <summary>
 		/// The quality string of the food. Eg is it disgusting or not etc.
@@ -268,7 +356,7 @@ public class Food : object_base {
 		objInt().quality-=damage;
 		if (objInt().quality<=0)
 		{
-			ChangeType(213,23);//Change to debris.
+			ChangeType(213);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
 			objInt().objectloaderinfo.InUseFlag=0;
 			Destroy(this);//Kill me now.
@@ -276,9 +364,14 @@ public class Food : object_base {
 		return true;
 	}
 
-
-		public override string UseVerb ()
-		{
-			return "eat";
-		}
+	public override string UseVerb ()
+	{
+        switch (objInt().GetItemType())
+        {
+        case ObjectInteraction.DRINK:
+            return "drink";
+        default:
+            return "eat";
+        }			
+	}
 }

@@ -27,7 +27,7 @@ public class MagicScroll : enchantment_base {
 		objInt().quality-=damage;
 		if (objInt().quality<=0)
 		{
-			ChangeType(213,23);//Change to debris.
+			ChangeType(213);//Change to debris.
 			this.gameObject.AddComponent<enchantment_base>();//Add a generic object base for behaviour. THis is the famous magic debris
 			Destroy(this);//Remove the potion enchantment.
 		}

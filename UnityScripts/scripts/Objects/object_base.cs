@@ -432,9 +432,10 @@ public class object_base : UWEBase {
 		/// <returns><c>true</c>, if type was changed, <c>false</c> otherwise.</returns>
 		/// <param name="newID">New ID.</param>
 		/// <param name="itemType">Item type.</param>
-	public virtual bool ChangeType(int newID, int itemType)
+        /// You must manually remove the existing object_base from this object when calling this
+	public virtual bool ChangeType(int newID)
 	{
-		objInt().ChangeType(newID,objInt().GetItemType());
+		objInt().ChangeType(newID);
 		return true;		
 	}
 

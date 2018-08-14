@@ -135,7 +135,7 @@ public class Readable : object_base {
 												mushroom.consumeObject();
 
 												ObjectInteraction bowlObjectInt =bowl.GetComponent<ObjectInteraction>();
-												bowlObjectInt.ChangeType(283,16);
+												bowlObjectInt.ChangeType(283);
 												Destroy(bowlContainer);
 												bowl.AddComponent<Food>();
 												bowlObjectInt.isquant=1;
