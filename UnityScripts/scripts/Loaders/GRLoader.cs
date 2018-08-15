@@ -91,8 +91,6 @@ public class GRLoader : ArtLoader {
 
 	protected Texture2D[] ImageCache=new Texture2D[1];
 
-    //protected Vector2[] HotSpot= new Vector2[1];
-
     public GRLoader(int File, int PalToUse)
     {
         AuxPalPath = AuxPalPath.Replace("--", sep.ToString());
@@ -163,11 +161,11 @@ public class GRLoader : ArtLoader {
 								char[] outputImg;
 								//  UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
 								UncompressBitmap(art_ark.data,textureOffset+BitMapHeaderSize, out outputImg,Height*Width);
-								ImageCache[i]=ArtLoader.Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true);
+								ImageCache[i]=ArtLoader.Image(outputImg,0,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true,xfer);
 							}
 							else
 							{//Uncompressed
-								ImageCache[i]= ArtLoader.Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true);
+								ImageCache[i]= ArtLoader.Image(art_ark.data,textureOffset+BitMapHeaderSize,Width,Height,"namehere",GameWorldController.instance.palLoader.Palettes[PaletteNo],true, xfer);
 							}
 						}
 					}
@@ -264,7 +262,7 @@ public class GRLoader : ArtLoader {
 		case 0x4://8 bit uncompressed
 				{
 					imageOffset = imageOffset + 5;
-					ImageCache[index] =  Image(ImageFileData,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteNo],Alpha);				
+					ImageCache[index] =  Image(ImageFileData,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteNo],Alpha, xfer);				
 					return ImageCache[index];
 				}
 		case 0x8://4 bit run-length
@@ -281,10 +279,10 @@ public class GRLoader : ArtLoader {
 					imgNibbles = new char[Mathf.Max(BitMapWidth*BitMapHeight*2,(datalen+5)*2)];
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-					auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-					outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4);
-					//rawOut.texture= Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,true);
-					ImageCache[index] =  Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha);
+                    //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
+                    int[] aux =PaletteLoader.LoadAuxilaryPalIndices(Loader.BasePath+ AuxPalPath,auxPalIndex);
+                    outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight,4, aux);
+					ImageCache[index] =  Image(outputImg,0, BitMapWidth, BitMapHeight,"name_goes_here", GameWorldController.instance.palLoader.Palettes[PaletteNo], Alpha, xfer);
 					return ImageCache[index] ;
 				}
 		case 0xA://4 bit uncompressed//Same as above???
@@ -302,7 +300,7 @@ public class GRLoader : ArtLoader {
 					imageOffset = imageOffset + 6;	//Start of raw data.
 					copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
 					auxpal =PaletteLoader.LoadAuxilaryPal(BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-					ImageCache[index] =  Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha);
+					ImageCache[index] =  Image(imgNibbles,0, BitMapWidth, BitMapHeight,"name_goes_here",auxpal,Alpha, xfer);
 					return ImageCache[index];
 				}
 				//break;
@@ -318,7 +316,7 @@ public class GRLoader : ArtLoader {
 						BitMapHeight = 112;
 						}
 					imageOffset = DataLoader.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
-					ImageCache[index] =  Image(ImageFileData,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteNo],Alpha);
+					ImageCache[index] =  Image(ImageFileData,imageOffset, BitMapWidth, BitMapHeight,"name_goes_here",GameWorldController.instance.palLoader.Palettes[PaletteNo],Alpha, xfer);
 					return ImageCache[index];
 				}
 			break;
@@ -368,7 +366,7 @@ public class GRLoader : ArtLoader {
 		/// <param name="imageHeight">Image height.</param>
 		/// <param name="BitSize">Bit size.</param>
 		/// This code from underworld adventures
-		char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize)
+		char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize, int[] auxpal)
 		//, palette *auxpal, int index, int BitSize, char OutFileName[255])
 		{
 			char[] outputImg= new char[imageWidth*imageHeight];
@@ -412,7 +410,7 @@ public class GRLoader : ArtLoader {
 							}
 							for (int i = 0; i < count; i++)
 							{
-								outputImg[curr_pxl++] = nibble;
+								outputImg[curr_pxl++] = (char)auxpal[nibble];
 							}
 							if (repeatcount == 0 )
 							{					
@@ -438,7 +436,7 @@ public class GRLoader : ArtLoader {
 							{
 								//get nibble for the palette;
 								nibble = getNibble(imageData, ref add_ptr);
-								outputImg[curr_pxl++] = nibble;
+								outputImg[curr_pxl++] = (char)auxpal[nibble];
 							}
 							state = repeat_record_start;
 							break;

@@ -13,10 +13,10 @@ public class CritLoader : ArtLoader {
 
 	public CritLoader(int CritterToLoad)
     {
-        if (xfer==null)
-        {
-            xfer = new XFerLoader();
-        }
+        //if (xfer==null)
+        //{
+        //    xfer = new XFerLoader();
+        //}
           //Load the assoc file
         switch (_RES)
         {

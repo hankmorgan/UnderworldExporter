@@ -10,8 +10,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 	public int NoOfFrames=5;
 	public bool Active=true;
 	SpriteRenderer image;
-	//static Sprite[] sprites=new Sprite[64];
-	//static bool spriteSet = false;
+
 	public bool Looping=true;
 	// Use this for initialization
 	void Start () {
@@ -37,22 +36,17 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 		{
 			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
-	//	image.sprite=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + index.ToString ("D4"));
+
         if (image!=null)
             {
                 image.sprite = GameWorldController.instance.TmAnimo.RequestSprite(index);//sprites[index];
             }
-       // else
-        //    {
-         //       Debug.Log("sprite not available for " + this.name);
-        //    }
 		
 	}
 	
 	public IEnumerator Animate()
 	{//Note is it likely that the owner value in the object is the animation frame we are on.
-
-		LoadAnimo (FrameNo);
+        LoadAnimo (FrameNo);
 		//the count down of the sad butterfly like existance of an impact.
 		while (Active==true)
 		{

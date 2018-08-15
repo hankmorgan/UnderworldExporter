@@ -10,7 +10,6 @@ public class NPC_Animation : MonoBehaviour {
 
 		public CritterAnimInfo critAnim;
 		public SpriteRenderer output;
-		//public int prevIndex;
 		public bool ConstantAnim; //Is this anim continuouse or periodic. (ie hold on final frame.
 
 	// Update is called once per frame
@@ -23,8 +22,8 @@ public class NPC_Animation : MonoBehaviour {
 			{
 				if (critAnim.animIndices[AnimationIndex,AnimationPos]!=-1)
 				{
-					output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos]];						
-				}
+					output.sprite= critAnim.animSprites[critAnim.animIndices[AnimationIndex,AnimationPos]];	
+                }
 				else
 				{
 					if (ConstantAnim==false)
@@ -45,11 +44,12 @@ public class NPC_Animation : MonoBehaviour {
 			{
 				AnimationPos=0;
 			}
-			//if ((critAnim.animIndices[AnimationIndex,AnimationPos] == -1) && (ConstantAnim==true))
-			//{
-			//	AnimationPos=0;	
-			//}
-		}	
+            
+            //if ((critAnim.animIndices[AnimationIndex,AnimationPos] == -1) && (ConstantAnim==true))
+            //{
+            //	AnimationPos=0;	
+            //}
+        }	
 
 	}
 

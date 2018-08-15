@@ -313,7 +313,7 @@ public class CritterInfo : Loader
 
                         //****************************
 
-                        Texture2D imgData = ArtLoader.Image(outputImg, 0, BitMapWidth, BitMapHeight, "namehere", pal, true);
+                        Texture2D imgData = ArtLoader.Image(outputImg, 0, BitMapWidth, BitMapHeight, "namehere", pal, true, true);
                         CropImageData(ref imgData, pal);
 
                         AnimInfo.animSprites[spriteIndex + i] = Sprite.Create(imgData, new Rect(0f, 0f, imgData.width, imgData.height), new Vector2(0.5f, 0.0f));
@@ -818,8 +818,7 @@ public class CritterInfo : Loader
                             BitMapWidth = MaxWidth;
                             BitMapHeight = MaxHeight;
 
-                           // Texture2D imgData = ArtLoader.Image(outputImg, 0, BitMapWidth, BitMapHeight, "namehere", pal, true);
-                            Texture2D imgData = ArtLoader.ImageXFER(outputImg, 0, BitMapWidth, BitMapHeight, "namehere", pal, true, ArtLoader.xfer);
+                            Texture2D imgData = ArtLoader.Image(outputImg, 0, BitMapWidth, BitMapHeight, "namehere", pal, true, true);
                             CropImageData(ref imgData, pal);
                             AnimInfo.animSprites[spriteIndex++] = Sprite.Create(imgData, new Rect(0f, 0f, imgData.width, imgData.height), new Vector2(0.5f, 0.0f));
                         }

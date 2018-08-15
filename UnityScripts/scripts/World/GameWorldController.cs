@@ -671,12 +671,12 @@ public class GameWorldController : UWEBase
                 bytloader = new BytLoader();
 
                 texLoader = new TextureLoader();
-                ObjectArt = new GRLoader(GRLoader.OBJECTS_GR);
+                ObjectArt = new GRLoader(GRLoader.OBJECTS_GR);ObjectArt.xfer = true;
                 SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
                 DoorArt = new GRLoader(GRLoader.DOORS_GR);
                 TmObjArt = new GRLoader(GRLoader.TMOBJ_GR);
                 TmFlatArt = new GRLoader(GRLoader.TMFLAT_GR);
-                TmAnimo = new GRLoader(GRLoader.ANIMO_GR);
+                TmAnimo = new GRLoader(GRLoader.ANIMO_GR); TmAnimo.xfer = true;
                 armor_f = new GRLoader(GRLoader.ARMOR_F_GR);
                 armor_m = new GRLoader(GRLoader.ARMOR_M_GR);
                 grCursors = new GRLoader(GRLoader.CURSORS_GR);

@@ -10,7 +10,7 @@ public class a_hack_trap : trap_base {
 		//qual = 18 Scintillus 5 switch puzzle reset
 		//qual = 19 scintullus 7 platform puzzle reset
 		//qual=20 used for rising platforms on level 42 (scintilus)
-		//qual=21 is the moving switches in loths tomb.  -unimplemented
+		//qual=21 is the moving switches in loths tomb.  
 		//qual=23 is a variant of the tmap change
 		//qual=24 is the same id as the bullfrog trap. Used in lvl 42 scint and the pits to change graffiti.			
 		//qual=25 is the bly scup chamber puzzle

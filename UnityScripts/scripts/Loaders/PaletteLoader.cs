@@ -80,9 +80,22 @@ public class PaletteLoader : ArtLoader {
 		}
 	}
 
+    public static int[] LoadAuxilaryPalIndices(string auxPalPath, int auxPalIndex)
+    {
+        char[] palf;
+        int[] auxpal = new int[16];
 
+        if (DataLoader.ReadStreamFile(auxPalPath, out palf))
+        {
+            for (int j = 0; j < 16; j++)
+            {               
+                auxpal[j] = (int)DataLoader.getValAtAddress(palf, auxPalIndex * 16 + j, 8);
+            }
+        }
+        return auxpal;
+    }
 
-	public static Palette LoadAuxilaryPal(string auxPalPath, Palette gamepal, int auxPalIndex)
+    public static Palette LoadAuxilaryPal(string auxPalPath, Palette gamepal, int auxPalIndex)
 	{
 		char[] palf;
 		Palette auxpal = new Palette();

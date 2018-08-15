@@ -14,9 +14,9 @@ public class ArtLoader : Loader
     protected bool LoadMod;
 
     /// <summary>
-    /// The transparencies file
+    /// Load an approximation of xfer.dat transparency
     /// </summary>
-    public static XFerLoader xfer;
+    public bool xfer;
 
     public const byte BitMapHeaderSize = 28;
 
@@ -80,23 +80,22 @@ public class ArtLoader : Loader
     /// <param name="Alpha">If set to <c>true</c> alpha.</param>
     public static Texture2D Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha)
     {
-        //int pixelcount=0;
-        Texture2D image = new Texture2D(width, height, TextureFormat.ARGB32, false);
-        Color32[] imageColors = new Color32[width * height];
-        long counter = 0;
-        for (int iRow = height - 1; iRow >= 0; iRow--)
-        {
-            for (int j = (iRow * width); j < (iRow * width) + width; j++)
-            {
-                byte pixel = (byte)DataLoader.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
-                imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha); //new Color32(blue, green, red, alpha);
-            }
-        }
-        image.filterMode = FilterMode.Point;
-        //image.alphaIsTransparency=Alpha;
-        image.SetPixels32(imageColors);
-        image.Apply();
-        return image;
+        return Image(databuffer, dataOffSet, width, height, imageName, pal, Alpha, false);
+        //Texture2D image = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        //Color32[] imageColors = new Color32[width * height];
+        //long counter = 0;
+        //for (int iRow = height - 1; iRow >= 0; iRow--)
+        //{
+        //    for (int j = (iRow * width); j < (iRow * width) + width; j++)
+        //    {
+        //        byte pixel = (byte)DataLoader.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
+        //        imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha); //new Color32(blue, green, red, alpha);
+        //    }
+        //}
+        //image.filterMode = FilterMode.Point;
+        //image.SetPixels32(imageColors);
+        //image.Apply();
+        //return image;
     }
 
 
@@ -110,12 +109,8 @@ public class ArtLoader : Loader
     /// <param name="imageName">Image name.</param>
     /// <param name="pal">Pal.</param>
     /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-    public static Texture2D ImageXFER(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, XFerLoader xFer)
+    public static Texture2D Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER)
     {
-        if (xfer == null)
-        {
-            xfer = new XFerLoader();
-        }
         Texture2D image = new Texture2D(width, height, TextureFormat.ARGB32, false);
         Color32[] imageColors = new Color32[width * height];
         long counter = 0;
@@ -124,48 +119,38 @@ public class ArtLoader : Loader
             for (int j = (iRow * width); j < (iRow * width) + width; j++)
             {
                 byte pixel = (byte)DataLoader.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
-                int p = (int)(pixel);
-                //if (p >= 256)
-                 //   {
-                 switch (p)
+                
+                if (useXFER)
                 {
-                    case 0xFC://white
-                        imageColors[counter++] = new Color32(204,204,220, 40); break;
-                    default:
-                        imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha);break;
+                    int p = (int)(pixel);
+                    switch (p)
+                    {
+                        case 0xf9:
+                        case 0xf0://red
+                            imageColors[counter++] = new Color32(252, 56, 76, 40); break;
+                        case 0xf4://blue
+                            imageColors[counter++] = new Color32(92, 92, 252, 40); break;
+                        case 0xf8://green
+                            imageColors[counter++] = new Color32(96, 172, 84, 40); break;
+                        //case 0xfb://white
+                        case 0xfc://white
+                            imageColors[counter++] = new Color32(204, 204, 220, 40); break;
+                        case 0xfd://black???
+                            imageColors[counter++] = new Color32(4, 4, 4, 40); break;
+                        case 0:
+                            imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha); break;
+                        default:
+                            imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha); break;
+                    }
                 }
-                    /* 0x0080      fade to red
-                     0x0100      fade to green
-                     0x0180      fade to blue
-                     0x0200      fade to white
-                     0x0280      fade to black*/
-                  //  imageColors[counter++] = pal.ColorAtPixelAlpha((byte)xfer.auxPalVal[pixel],25);
-                  //  }
-              //  else
-                //    {
-                    
-                 //   }
-                //switch ((int)pixel)
-                //{
-                //    case 0xf0://   fade to red
-                //        imageColors[counter++] = pal.ColorAtPixelAlpha((byte)xFer.auxPalVal[0, 0], (byte)100); break;
-                //    case 0xf4://   fade to blue
-                //        imageColors[counter++] = pal.ColorAtPixelAlpha((byte)xFer.auxPalVal[1, 0], (byte)100); break;
-                //    case 0xf8://  fade to green
-                //        imageColors[counter++] = pal.ColorAtPixelAlpha((byte)xFer.auxPalVal[2, 0], (byte)100); break;
-                //    case 0xfc://???? fade to white                            
-                //        imageColors[counter++] = pal.ColorAtPixelAlpha((byte)xFer.auxPalVal[3, 0], (byte)100); break;
-                //    //case ???? fade to black
-                //    default:
-                       
-                //        break;
-                //}
-
+                else
+                {
+                    imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha);
+                }
 
             }
         }
         image.filterMode = FilterMode.Point;
-        //image.alphaIsTransparency=Alpha;
         image.SetPixels32(imageColors);
         image.Apply();
         return image;
