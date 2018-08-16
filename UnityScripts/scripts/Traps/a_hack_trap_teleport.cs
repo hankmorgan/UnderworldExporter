@@ -16,8 +16,10 @@ public class a_hack_trap_teleport : a_hack_trap {
 
 	short[] DestinationLevels = {8,16,24,32,40,56,48,68};
 	short[] DestinationTileX = {33,27,18,31,4,59,32,33};
-	short[] DestinationTileY = {32,34,40,31,38,20,32,4};
-		//TODO: destination heights.
+	short[] DestinationTileY = {32,34,39,31,38,20,32,4};
+    //TODO: destination heights.
+
+    public static a_hack_trap_teleport instance;
 
 //Probably used to teleport to an other world possible based on the state of the other gem hack trap and probably based on the players position.
 
@@ -31,6 +33,7 @@ public class a_hack_trap_teleport : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
+        instance = this;
 		if (Quest.instance.x_clocks[1]<4)
 		{
 			availableWorlds[PrisonTower]=true;
@@ -70,6 +73,9 @@ public class a_hack_trap_teleport : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
+
+        return;//This trap is just a placeholder as teleportation is now handled by a UI button that calls the TravelDirect function below
+        
 		int xPos = src.objInt().x;
 		int yPos = src.objInt().y;
 		int variable = Quest.instance.variables[6];
@@ -171,7 +177,7 @@ public class a_hack_trap_teleport : a_hack_trap {
 		}
 	}
 
-	public bool CheckWorldAvailabilty( int world)
+	public bool CheckWorldAvailabilty(int world)
 	{
 		return (availableWorlds[world]);
 	}
@@ -193,4 +199,47 @@ public class a_hack_trap_teleport : a_hack_trap {
 	{
 	//no deletion
 	}
+
+    public override void Update()
+    {
+        base.Update();
+        if (
+            (TileMap.visitTileX>=26)
+            &&
+            (TileMap.visitTileX <= 30)
+            &&
+           (TileMap.visitTileY >= 38)
+            &&
+            (TileMap.visitTileY <= 42)
+            )
+        {            
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject,
+                UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CONV
+                && UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CUTS_FULL
+                && UWCharacter.InteractionMode != UWCharacter.InteractionModeOptions
+                );
+        }
+        else
+        {
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject, false);
+        }
+    }
+
+
+    public void TravelDirect(int World)
+    {
+        if (CheckWorldAvailabilty(World))
+        {
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject, false);
+            UWCharacter.Instance.JustTeleported = true;
+            UWCharacter.Instance.teleportedTimer =0f;
+            GameWorldController.instance.SwitchLevel(DestinationLevels[World], DestinationTileX[World], DestinationTileY[World]);
+        }
+        else
+        {
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 348));
+        }
+    }
+
+
 }

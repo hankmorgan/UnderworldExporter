@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class a_set_variable_trap : a_variable_trap {
-	/*
+    /*
 018d  a_set variable trap
 	sets a game variable; fields "quality", "owner" and "ypos" are
 	combined to form a "value" that is used as variable index later:
@@ -31,9 +31,14 @@ public class a_set_variable_trap : a_variable_trap {
 	is bit 7 of the bit field
 */
 
+    protected override void Start()
+    {
+        base.Start();
+        Debug.Log(this.name + " will set " + objInt().zpos);
+    }
 
 
-	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
+    public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		string operation="";
 		int OrigValue=0;

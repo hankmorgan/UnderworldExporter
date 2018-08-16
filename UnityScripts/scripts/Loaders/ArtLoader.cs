@@ -132,7 +132,8 @@ public class ArtLoader : Loader
                             imageColors[counter++] = new Color32(92, 92, 252, 40); break;
                         case 0xf8://green
                             imageColors[counter++] = new Color32(96, 172, 84, 40); break;
-                        //case 0xfb://white
+                        case 0xfb://used by shadow beast?
+                            imageColors[counter++] = new Color32(4, 4, 4, 40); break;
                         case 0xfc://white
                             imageColors[counter++] = new Color32(204, 204, 220, 40); break;
                         case 0xfd://black???

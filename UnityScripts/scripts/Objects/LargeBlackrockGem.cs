@@ -4,20 +4,6 @@ using System.Linq;
 
 public class LargeBlackrockGem : Model3D {
 
-
-
-	/*protected override void Start ()
-	{
-		return;//this gets in the way for the moment!
-		GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cylinder); 
-		SpriteController.name = this.name + "_model";
-		SpriteController.transform.position = this.transform.position;
-		SpriteController.transform.rotation=this.transform.rotation;
-		SpriteController.transform.parent = this.transform;
-		//SpriteController.transform.localScale=new Vector3(0.5f,0.5f,0.1f);
-		SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
-	}*/
-
 	public override bool use ()
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
@@ -45,8 +31,9 @@ public class LargeBlackrockGem : Model3D {
 					Quest.instance.QuestVariables[130] |= bitField;
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338));				
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338+Quest.instance.x_clocks[2]));
-					objI.consumeObject();						
-				}
+                    CameraShake.instance.shakeDuration = Quest.instance.x_clocks[2] * 0.2f;
+                    objI.consumeObject(); 
+                }
 				else
 				{
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,347));

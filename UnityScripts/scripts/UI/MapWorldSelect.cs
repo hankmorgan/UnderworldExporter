@@ -8,6 +8,7 @@ public class MapWorldSelect : GuiBase {
 
     public Texture2D ButtonOff;
     public Texture2D ButtonOn;
+    public int teleportWorldIndex = 0;
 
     public void OnClick()
     {
@@ -23,6 +24,11 @@ public class MapWorldSelect : GuiBase {
     public void SetOff()
     {
         this.GetComponent<RawImage>().texture = ButtonOff;
+    }
+
+    public void TravelToWorld()
+    {
+        a_hack_trap_teleport.instance.TravelDirect(teleportWorldIndex);
     }
 
 }

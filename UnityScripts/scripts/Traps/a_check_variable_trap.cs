@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class a_check_variable_trap :a_variable_trap {
-	//public int xpos;
-	/*
+    //public int xpos;
+    /*
 	 * Per uw-formats.txt
   018e  a_check variable trap
          the "value" from the set variable trap (018d) is also used here.
@@ -38,7 +38,13 @@ the left, right, center button combination on Level3.
 
 */
 
-	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
+    protected override void Start()
+    {
+        base.Start();
+        Debug.Log(this.name + " will check " + objInt().zpos);
+    }
+
+    public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		//Debug.Log (this.name);
 		if (check_variable_trap())

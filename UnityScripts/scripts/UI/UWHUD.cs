@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class UWHUD : HUD {
 
+
 	public const int HUD_MODE_INVENTORY =0;
 	public const int HUD_MODE_STATS =1;
 	public const int HUD_MODE_RUNES =2;
@@ -16,6 +17,7 @@ public class UWHUD : HUD {
 	public const int HUD_MODE_CUTS_SMALL =5;
 	public const int HUD_MODE_CUTS_FULL =6;
 
+    public int CURRENT_HUD_MODE = 0;
 
 	public static UWHUD instance;
 
@@ -127,6 +129,7 @@ public class UWHUD : HUD {
     public RectTransform MapDown;
     public RectTransform MapEraserButton;
     public RectTransform MapClose;
+    public RectTransform WorldSelect;
 
     [Header("Magic")]
 	public ActiveRuneSlot[] activeRunes;
@@ -179,6 +182,7 @@ public class UWHUD : HUD {
 		public InteractionModeControl InteractionControlUW2;
 		public RawImage InteractionControlUW2BG;
 
+       
 
 
 		void Awake()
@@ -386,7 +390,7 @@ public class UWHUD : HUD {
 		/// <param name="ActivePanelMode">Active panel mode.</param>
 		public void RefreshPanels(int ActivePanelMode)
 		{
-				
+            CURRENT_HUD_MODE = ActivePanelMode;		
 					switch (ActivePanelMode)
 						{
 						case -1:
