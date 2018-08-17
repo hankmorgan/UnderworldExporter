@@ -5,7 +5,8 @@ public class CritterAnimInfo {
 	public const int NoOfAnims=44;
 	public string[,] animSequence;
 	public int[,] animIndices;
-	public Sprite[] animSprites;
+    //public ArtLoader.RawImageData[,] animSprites;
+    public Sprite[] animSprites;
 	public string[] animName;
 
 	public CritterAnimInfo()

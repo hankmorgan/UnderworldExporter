@@ -47,6 +47,22 @@ public class GameWorldController : UWEBase
                 "Void"
             };
 
+    /// <summary>
+    /// First index of the level no for a world
+    /// </summary>
+    public enum Worlds
+    {
+        Britannia = 0,
+        PrisonTower = 8,
+        Killorn = 16,
+        Ice = 24,
+        Talorus = 32,
+        Academy = 40,
+        Tomb = 48,
+        Pits = 56,
+        Ethereal = 64
+    };
+
     public enum UW2_LevelNos
     {
         Britannia0 = 0,
@@ -2433,5 +2449,74 @@ public class GameWorldController : UWEBase
         writer.WriteLine("</ObjectReport>");
         writer.Close();
     }
+
+    /// <summary>
+    /// Gets what world is associated with the current level
+    /// </summary>
+    /// <param name="levelNo"></param>
+    /// <returns></returns>
+    public static Worlds GetWorld(int levelNo)
+    {
+        if (_RES != GAME_UW2) { return Worlds.Britannia; }
+        switch ((UW2_LevelNos)levelNo)
+        {
+            case UW2_LevelNos.Britannia0:
+            case UW2_LevelNos.Britannia1:
+            case UW2_LevelNos.Britannia2:
+            case UW2_LevelNos.Britannia3:
+            case UW2_LevelNos.Britannia4:
+                return Worlds.Britannia;
+            case UW2_LevelNos.Prison0:
+            case UW2_LevelNos.Prison1:
+            case UW2_LevelNos.Prison2:
+            case UW2_LevelNos.Prison3:
+            case UW2_LevelNos.Prison4:
+            case UW2_LevelNos.Prison5:
+            case UW2_LevelNos.Prison6:
+            case UW2_LevelNos.Prison7:
+                return Worlds.PrisonTower;
+            case UW2_LevelNos.Killorn0:
+            case UW2_LevelNos.Killorn1:
+                return Worlds.Killorn;
+            case UW2_LevelNos.Ice0:
+            case UW2_LevelNos.Ice1:
+                return Worlds.Ice;
+            case UW2_LevelNos.Talorus0:
+            case UW2_LevelNos.Talorus1:
+                return Worlds.Talorus;
+            case UW2_LevelNos.Academy0:
+            case UW2_LevelNos.Academy1:
+            case UW2_LevelNos.Academy2:
+            case UW2_LevelNos.Academy3:
+            case UW2_LevelNos.Academy4:
+            case UW2_LevelNos.Academy5:
+            case UW2_LevelNos.Academy6:
+            case UW2_LevelNos.Academy7:
+                return Worlds.Academy;
+            case UW2_LevelNos.Tomb0:
+            case UW2_LevelNos.Tomb1:
+            case UW2_LevelNos.Tomb2:
+            case UW2_LevelNos.Tomb3:
+                return Worlds.Tomb;
+            case UW2_LevelNos.Pits0:
+            case UW2_LevelNos.Pits1:
+            case UW2_LevelNos.Pits2:
+                return Worlds.Pits;
+            case UW2_LevelNos.Ethereal0:
+            case UW2_LevelNos.Ethereal1:
+            case UW2_LevelNos.Ethereal2:
+            case UW2_LevelNos.Ethereal3:
+            case UW2_LevelNos.Ethereal4:
+            case UW2_LevelNos.Ethereal5:
+            case UW2_LevelNos.Ethereal6:
+            case UW2_LevelNos.Ethereal7:
+            case UW2_LevelNos.Ethereal8:
+                return Worlds.Ethereal;
+            default:
+                Debug.Log("Unknown level/world");
+                return Worlds.Ethereal;
+        }
+    }
+
 
 }

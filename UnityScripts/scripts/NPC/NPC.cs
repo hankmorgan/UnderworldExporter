@@ -1,12 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using RAIN.BehaviorTrees;
-//using RAIN.Core;
-//using RAIN.Minds;
 using UnityEngine.AI;
-
-
 
 /// <summary>
 /// NPC Properties and AI
@@ -2115,4 +2110,110 @@ public class NPC : MobileObject {
 		{
 			return (UWCharacter.Instance.isTimeFrozen || Paralyzed);
 		}
+
+
+    /// <summary>
+    /// Tries to return the proper portrait for a UW2 NPC since the logic behind the allocation of char heads is unclear.
+    /// </summary>
+    /// <returns>The Portrait</returns>
+    public Texture2D UW2NPCPortrait()
+    {
+        switch(npc_whoami)
+        {
+            case 1: //goblin guard
+            case 2: //goblin
+            case 3: //Borne
+            case 4: //Garg
+            case 5: //goblin armorer
+            case 6: //Bishop
+            case 7: //Marcus
+            case 8: //Felix
+            case 9: //goblin guard
+            case 10: //goblin guard
+            case 11: //Freemis
+            case 12: //goblin guard
+            case 13: //goblin guard
+            case 14: //goblin guard
+            case 15: //goblin guard
+            case 16: //Milenus
+            case 17: //Janar
+            case 24: //Molloy
+            case 25: //Helena
+            case 26: //Trystero
+            case 27: //Trystero
+            case 28: //Reef
+            case 29: //Lethe
+            case 30: //Morphius
+            case 31: //Lord Umbria
+            case 32: //Praecor Loth
+            case 34: //Silanus
+            case 41: //Lobar
+            case 42: //Kintara
+            case 43: //Ogri
+            case 44: //Mystell
+            case 45: //Altara
+            case 46: //Jerry the Rat
+            case 47: //Mors Gotha
+            case 48: //wisp
+            case 49: //Relk
+            case 50: //Lord Thibris
+            case 51: //soldier
+            case 52: //Chirl
+            case 56: //Aron
+            case 57: //Bishay
+            case 72: //Mokpo
+            case 73: //Beatrice
+            case 74: //Sentinel 868
+            case 75: //guard
+            case 81: //Prinx
+            case 82: //Mystell
+            case 88: //Elster
+            case 96: //Zoranthus
+            case 97: //Zogith
+            case 98: //Zaria
+            case 99: //Dorstag
+            case 100: //Krilner
+            case 101: //Blog
+            case 105: //Merzan
+            case 128: //Fissif
+            case 129: //guard
+            case 130: //Nystul
+            case 131: //Charles
+            case 132: //Dupre
+            case 133: //Geoffrey
+            case 134: //Iolo
+            case 135: //Julia
+            case 136: //Miranda
+            case 137: //Nanna
+            case 138: //Nell
+            case 139: //Nelson
+            case 140: //Patterson
+            case 141: //Lady Tory
+            case 142: //Lord British
+            case 143: //Feridwyn
+            case 145: //The Listener
+            case 146: //The Dripper
+            case 149: //guard
+            case 152: //Bliy Skup Ductosnore
+            case 153: //Vorz Ductosnore
+            case 156: //Historian
+            case 168: //Syria
+                {//Head is in charheads
+                    GRLoader grCharHead = new GRLoader(GRLoader.CHARHEAD_GR);
+                    return grCharHead.LoadImageAt((npc_whoami - 1));
+                }
+            default:
+                {//Head is in genheads
+                 //head in genhead.gr
+                    int HeadToUse = objInt().item_id - 64;
+                    if (HeadToUse > 59)
+                    {
+                        HeadToUse = 0;
+                    }
+                    GRLoader grGenHead = new GRLoader(GRLoader.GHED_GR);
+                    return grGenHead.LoadImageAt(HeadToUse);
+                }
+        }
+    }
+
 }

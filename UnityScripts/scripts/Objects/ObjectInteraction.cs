@@ -1347,7 +1347,7 @@ public class ObjectInteraction : UWEBase
         myObj.tag = "NPCs";
         NPC npc = myObj.AddComponent<NPC>();
         //Probably only need to add this when an NPC supports ranged attacks?
-        GameObject NpcLauncher = new GameObject(myObj.name + "_NPC_Launcher");
+        GameObject NpcLauncher = new GameObject("_NPC_Launcher");
         NpcLauncher.transform.position = Vector3.zero;
         NpcLauncher.transform.parent = myObj.transform;
         NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.3f);

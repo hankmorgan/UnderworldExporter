@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MapWorldSelect : GuiBase {
-    public MapInteraction.Worlds world;
+    public GameWorldController.Worlds world;
 
     public Texture2D ButtonOff;
     public Texture2D ButtonOn;

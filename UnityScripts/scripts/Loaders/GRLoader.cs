@@ -44,6 +44,7 @@ public class GRLoader : ArtLoader {
 		public const int TMOBJ_GR = 30;
 		public const int WEAPONS_GR = 31;
         public const int GEMPT_GR = 32;
+        public const int GHED_GR = 33;
 
     private string[] pathGR={
 				"DATA--3DWIN.GR",
@@ -78,7 +79,8 @@ public class GRLoader : ArtLoader {
 				"DATA--TMFLAT.GR",				
 				"DATA--TMOBJ.GR",
 				"DATA--WEAPONS.GR",
-                "DATA--GEMPT.GR"
+                "DATA--GEMPT.GR",
+                "DATA--GHED.GR"
         };
 
 	private string AuxPalPath = "DATA--ALLPALS.DAT";
@@ -176,17 +178,6 @@ public class GRLoader : ArtLoader {
 		}
 	}
 
-	/*public GRLoader(int File, string AuxPalToUse, int AuxPalIndex)
-	{
-		if (AuxPalIndex!=-1)
-		{
-			useOverrideAuxPalIndex=true;
-			//OverrideAuxPalIndex=OverrideAuxPalIndex	;
-		}
-		AuxPalPath=AuxPalToUse;
-		FileToLoad=File;
-		LoadImageFile();
-	}*/
 
 	public override bool LoadImageFile ()
 	{

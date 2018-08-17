@@ -5,20 +5,6 @@ using UnityEngine.EventSystems;
 
 public class MapInteraction : GuiBase {
     
-        //Index of the first level no for a world
-        public enum Worlds
-        {
-            Britannia = 0,
-            PrisonTower = 8,
-            Killorn = 16,
-            Ice = 24,
-            Talorus = 32,
-            Academy = 40,
-            Tomb = 48,
-            Pits = 56,
-            Ethereal = 64
-        };
-
      public MapWorldSelect[] MapSelectButtons = new MapWorldSelect[9];
 
         public const int MapInteractionNormal=0;
@@ -31,7 +17,7 @@ public class MapInteraction : GuiBase {
 		private Vector2 pos;
 		public static Vector2 CursorPos; //at start of typing
 		public static int InteractionMode; //0 = normal. 1 = delete note. 2 =writing
-        public Worlds CurrentWorld = Worlds.Britannia;   //What world we are in.  
+        public GameWorldController.Worlds CurrentWorld = GameWorldController.Worlds.Britannia;   //What world we are in.  
 
         public static MapInteraction instance;
 
@@ -63,39 +49,39 @@ public class MapInteraction : GuiBase {
             {
                 switch (MapSelectButtons[i].world)
                 {
-                    case Worlds.Britannia:
+                    case GameWorldController.Worlds.Britannia:
                         MapSelectButtons[i].ButtonOff = GRLoader.CreateBlankImage(29, 29);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(16);
                         break;
-                    case Worlds.PrisonTower:
+                    case GameWorldController.Worlds.PrisonTower:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(0);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(8);
                         break;
-                    case Worlds.Killorn:
+                    case GameWorldController.Worlds.Killorn:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(1);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(9);
                         break;
-                    case Worlds.Ice:
+                    case GameWorldController.Worlds.Ice:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(2);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(10);
                         break;
-                    case Worlds.Talorus:
+                    case GameWorldController.Worlds.Talorus:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(3);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(11);
                         break;
-                    case Worlds.Academy:
+                    case GameWorldController.Worlds.Academy:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(4);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(12);
                         break;
-                    case Worlds.Pits:
+                    case GameWorldController.Worlds.Pits:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(6);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(14);
                         break;
-                    case Worlds.Tomb:
+                    case GameWorldController.Worlds.Tomb:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(5);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(13);
                         break;
-                    case Worlds.Ethereal:
+                    case GameWorldController.Worlds.Ethereal:
                         MapSelectButtons[i].ButtonOff = gempt.LoadImageAt(7);
                         MapSelectButtons[i].ButtonOn = gempt.LoadImageAt(15);
                         break;
@@ -149,7 +135,7 @@ public class MapInteraction : GuiBase {
 		public static void UpdateMap(int LevelNo)
 		{
 			WindowDetect.InMap=true;//turns on blocking collider.
-            instance.CurrentWorld = MapInteraction.GetWorld(LevelNo);
+            instance.CurrentWorld = GameWorldController.GetWorld(LevelNo);
         ///Sets the map no display
         UWHUD.instance.LevelNoDisplay.text = (1+(LevelNo-(int)instance.CurrentWorld)).ToString() + " " + instance.CurrentWorld + " (" + LevelNo + ")";
         if (_RES==GAME_UW2)
@@ -286,74 +272,7 @@ public class MapInteraction : GuiBase {
 			}
 		}
 
-    /// <summary>
-    /// Gets what world is associated with the current level
-    /// </summary>
-    /// <param name="levelNo"></param>
-    /// <returns></returns>
-    public static Worlds GetWorld(int levelNo)
-    {
-        if (_RES != GAME_UW2) { return Worlds.Britannia; }
-        switch ((GameWorldController.UW2_LevelNos)levelNo)
-        {
-            case GameWorldController.UW2_LevelNos.Britannia0:
-            case GameWorldController.UW2_LevelNos.Britannia1:
-            case GameWorldController.UW2_LevelNos.Britannia2:
-            case GameWorldController.UW2_LevelNos.Britannia3:
-            case GameWorldController.UW2_LevelNos.Britannia4:
-                return Worlds.Britannia;
-            case GameWorldController.UW2_LevelNos.Prison0:
-            case GameWorldController.UW2_LevelNos.Prison1:
-            case GameWorldController.UW2_LevelNos.Prison2:
-            case GameWorldController.UW2_LevelNos.Prison3:
-            case GameWorldController.UW2_LevelNos.Prison4:
-            case GameWorldController.UW2_LevelNos.Prison5:
-            case GameWorldController.UW2_LevelNos.Prison6:
-            case GameWorldController.UW2_LevelNos.Prison7:
-                return Worlds.PrisonTower;
-            case GameWorldController.UW2_LevelNos.Killorn0:
-            case GameWorldController.UW2_LevelNos.Killorn1:
-                return Worlds.Killorn;
-            case GameWorldController.UW2_LevelNos.Ice0:
-            case GameWorldController.UW2_LevelNos.Ice1:
-                return Worlds.Ice;
-            case GameWorldController.UW2_LevelNos.Talorus0:
-            case GameWorldController.UW2_LevelNos.Talorus1:
-                return Worlds.Talorus;
-            case GameWorldController.UW2_LevelNos.Academy0:
-            case GameWorldController.UW2_LevelNos.Academy1:
-            case GameWorldController.UW2_LevelNos.Academy2:
-            case GameWorldController.UW2_LevelNos.Academy3:
-            case GameWorldController.UW2_LevelNos.Academy4:
-            case GameWorldController.UW2_LevelNos.Academy5:
-            case GameWorldController.UW2_LevelNos.Academy6:
-            case GameWorldController.UW2_LevelNos.Academy7:
-                return Worlds.Academy;
-            case GameWorldController.UW2_LevelNos.Tomb0:
-            case GameWorldController.UW2_LevelNos.Tomb1:
-            case GameWorldController.UW2_LevelNos.Tomb2:
-            case GameWorldController.UW2_LevelNos.Tomb3:
-                return Worlds.Tomb;
-            case GameWorldController.UW2_LevelNos.Pits0:
-            case GameWorldController.UW2_LevelNos.Pits1:
-            case GameWorldController.UW2_LevelNos.Pits2:
-                return Worlds.Pits;
-            case GameWorldController.UW2_LevelNos.Ethereal0:
-            case GameWorldController.UW2_LevelNos.Ethereal1:
-            case GameWorldController.UW2_LevelNos.Ethereal2:
-            case GameWorldController.UW2_LevelNos.Ethereal3:
-            case GameWorldController.UW2_LevelNos.Ethereal4:
-            case GameWorldController.UW2_LevelNos.Ethereal5:
-            case GameWorldController.UW2_LevelNos.Ethereal6:
-            case GameWorldController.UW2_LevelNos.Ethereal7:
-            case GameWorldController.UW2_LevelNos.Ethereal8:
-                return Worlds.Ethereal;
-            default:
-                Debug.Log("Unknown level/world");
-                return Worlds.Ethereal;
-        }
 
-    }
 
     /// <summary>
     /// Gets the maximum no of levels for the current world.
@@ -362,10 +281,10 @@ public class MapInteraction : GuiBase {
     /// <returns></returns>
     int MaxWorld(int levelNo)
     {
-        Worlds world = GetWorld(levelNo);
+        GameWorldController.Worlds world = GameWorldController.GetWorld(levelNo);
         switch (world)
         {
-            case Worlds.Britannia:
+            case GameWorldController.Worlds.Britannia:
                 if (_RES==GAME_UW2)
                 {
                     return (int)(GameWorldController.UW2_LevelNos.Britannia4);
@@ -374,21 +293,21 @@ public class MapInteraction : GuiBase {
                 {
                     return GameWorldController.instance.AutoMaps.GetUpperBound(0);
                 }
-            case Worlds.PrisonTower:
+            case GameWorldController.Worlds.PrisonTower:
                 return (int)(GameWorldController.UW2_LevelNos.Prison7);
-            case Worlds.Killorn:
+            case GameWorldController.Worlds.Killorn:
                 return (int)(GameWorldController.UW2_LevelNos.Killorn1);
-            case Worlds.Ice:
+            case GameWorldController.Worlds.Ice:
                 return (int)(GameWorldController.UW2_LevelNos.Ice1);
-            case Worlds.Talorus:
+            case GameWorldController.Worlds.Talorus:
                 return (int)(GameWorldController.UW2_LevelNos.Talorus1);
-            case Worlds.Academy:
+            case GameWorldController.Worlds.Academy:
                 return (int)(GameWorldController.UW2_LevelNos.Academy7);
-            case Worlds.Tomb:
+            case GameWorldController.Worlds.Tomb:
                 return (int)(GameWorldController.UW2_LevelNos.Tomb3);
-            case Worlds.Pits:
+            case GameWorldController.Worlds.Pits:
                 return (int)(GameWorldController.UW2_LevelNos.Pits2);
-            case Worlds.Ethereal:
+            case GameWorldController.Worlds.Ethereal:
                 //return (int)(GameWorldController.UW2_LevelNos.Ethereal8);
             default:
                 return GameWorldController.instance.AutoMaps.GetUpperBound(0);

@@ -8,15 +8,16 @@ public class forcefield : object_base {
 	
 	protected override void Start ()
 	{
-		base.Start ();
-	
-		bx = this.gameObject.AddComponent<BoxCollider>();
+		base.Start ();	
+		bx = this.gameObject.GetComponent<BoxCollider>();
+        if (bx==null)
+        {
+            bx = this.gameObject.AddComponent<BoxCollider>();
+        }
 		bx.size=new Vector3(1.2f,5f,1.2f);
-		bx.center= new Vector3(0f,2.5f,0f);
+        //TODO: Make this fit the level properly
+        bx.center= new Vector3(0f,2.5f,0f);
 		this.gameObject.layer= LayerMask.NameToLayer("MapMesh");
-		//this.gameObject.AddComponent<NavMeshObstacle>();
-		
-
 	}
 
 

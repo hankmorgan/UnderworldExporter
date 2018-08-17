@@ -30,6 +30,16 @@ public class ArtLoader : Loader
     /// </summary>
     public short PaletteNo = 0;
 
+    ///// <summary>
+    ///// A raw cached greyscale image that is awaiting a palette operation.
+    ///// </summary>
+    //public struct RawImageData
+    //{
+    //    public char[] Data;
+    //    public int Width;
+    //    public int Height;
+    //}
+
     /// <summary>
     /// Loads the image file into the buffer
     /// </summary>
