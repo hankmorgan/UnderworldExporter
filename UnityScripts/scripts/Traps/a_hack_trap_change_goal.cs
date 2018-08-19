@@ -20,5 +20,4 @@ public class a_hack_trap_change_goal : a_hack_trap {
             }
         }
     }
-
 }

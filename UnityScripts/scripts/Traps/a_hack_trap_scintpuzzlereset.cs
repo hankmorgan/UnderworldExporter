@@ -14,6 +14,8 @@ public class a_hack_trap_scintpuzzlereset : a_hack_trap {
 
 	public override void PostActivate (object_base src)
 	{
-				//do not destroy
-	}
+        //do not destroy
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -4,14 +4,13 @@ using System.Collections;
 public class a_pit_trap : trap_base {
 
 
-		//Quality or some portion of it appears (first 4 bits?) to define the texture of the tile to create at the base.
-		//Owner does the same for the top??
-		//ZPos is likely the height of the floor.
+	//Quality or some portion of it appears (first 4 bits?) to define the texture of the tile to create at the base.
+	//Owner does the same for the top??
+	//ZPos is likely the height of the floor.
 
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//Debug.Log (this.name);
 		int tileXToChange=triggerX; 
 		int tileYToChange=triggerY;
 		GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
@@ -37,6 +36,7 @@ public class a_pit_trap : trap_base {
 		//Do not destroy
 	public override void PostActivate (object_base src)
 	{
-
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

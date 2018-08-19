@@ -18,7 +18,7 @@ owner = 0 damage trap
 owner != 0 poison trap
 */
 
-		//Question to answer. What impact does the flags value have?
+	//Question to answer. What impact does the flags value have?
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -40,7 +40,7 @@ owner != 0 poison trap
 					UWCharacter.Instance.play_poison =(short) Random.Range(1,6);
 					if (UWCharacter.Instance.poison_timer==0)
 					{
-							UWCharacter.Instance.poison_timer=30f;	
+						UWCharacter.Instance.poison_timer=30f;	
 					}
 				}	
 			}	

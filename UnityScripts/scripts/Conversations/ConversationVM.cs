@@ -1278,7 +1278,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         if (Teleport)
         {
-            if (TeleportLevel != GameWorldController.instance.LevelNo)
+            if (TeleportLevel == GameWorldController.instance.LevelNo)
             {//stay on this level
                 float targetX = (float)TeleportTileX * 1.2f + 0.6f;
                 float targetY = (float)TeleportTileY * 1.2f + 0.6f;

@@ -2,18 +2,13 @@
 using System.Collections;
 
 public class a_teleport_trap : trap_base {
-
-
+    
 /*
 0181  a_teleport trap
 	teleports the player to another level and tile; destination level is
 	given by "zpos" (0 means current level), tile x/y coordinates
 	are given in "quality" and "owner" fields.
 */
-	//public int levelNo;
-	//public float targetX;
-	//public float targetY;
-	//public float targetZ;
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -69,13 +64,14 @@ public class a_teleport_trap : trap_base {
         }
 	}
 
-		public void ExecuteForUWDemo()
-		{//IN the UW demo the level transition 
-				UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
-		}
+	public void ExecuteForUWDemo()
+	{//IN the UW demo the level transition 
+			UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
+	}
 
 	public override void PostActivate (object_base src)
 	{//Prevent deletion of the trap
-
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -1443,6 +1443,8 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.A_SKILL_TRAP:
             case ObjectInteraction.A_NULL_TRAP:
             case ObjectInteraction.UNIMPLEMENTED_TRAP:
+            case ObjectInteraction.A_PROXIMITY_TRAP:
+            case ObjectInteraction.A_BRIDGE_TRAP:
                 {
                     return true;
                 }

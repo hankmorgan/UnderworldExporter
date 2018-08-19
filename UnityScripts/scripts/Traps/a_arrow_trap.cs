@@ -50,17 +50,22 @@ public class a_arrow_trap : trap_base {
 		pd.AttackScore=15;//down the middle.
 	}
 
-	public override void PostActivate (object_base src)
-	{
-		if ((int)(src.flags & 0x1) ==1)
-		{
-				//Do not delete as src trap/trigger is set to repeat
-		}
-		else
-		{
-				base.PostActivate (src);				
-		}		
-	}
+    //public override void PostActivate (object_base src)
+    //{
+    //Debug.Log("Overridden PostActivate to test " + this.name);
+    //base.PostActivate(src);
+    //      if ((int)(src.flags & 0x1) ==1)
+    //{
+    //		//Do not delete as src trap/trigger is set to repeat
+    //}
+    //else
+    //{
+    //		base.PostActivate (src);				
+    //}		
+    //}
 
-
+    public override bool WillFireRepeatedly()
+    {//Looks like arrow traps will always repeat. Behaviour is controlled by trigger?
+        return true;
+    }
 }

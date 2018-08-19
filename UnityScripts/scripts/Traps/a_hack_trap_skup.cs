@@ -94,7 +94,8 @@ public class a_hack_trap_skup : a_hack_trap {
 	{
 		if (skupSpawned)
 		{
-				base.PostActivate (src);				
-		}
+            Debug.Log("Overridden PostActivate to test " + this.name);
+            base.PostActivate(src);
+        }
 	}
 }

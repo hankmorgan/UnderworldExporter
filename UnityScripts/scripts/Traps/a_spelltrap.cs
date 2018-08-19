@@ -4,20 +4,9 @@ using System.Collections;
 public class a_spelltrap : trap_base {
     //0186  a_spelltrap
     //	fields "quality" and "owner" determine spell type.
-    //public int effectID;
-
-    //protected override void Start()
-    //{
-    //    base.Start();
-    //    effectID = GetSpellIndex();
-    //}
-
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log (this.name);
-		//int spellindex = ((quality & 0xf)<<4) | (owner & 0xf) ;
-		//	Debug.Log ("casting spelleffect " + spellindex);
 		UWCharacter.Instance.PlayerMagic.CastEnchantment(this.gameObject,null,GetSpellIndex(),Magic.SpellRule_TargetVector, Magic.SpellRule_Immediate);
 	}
 

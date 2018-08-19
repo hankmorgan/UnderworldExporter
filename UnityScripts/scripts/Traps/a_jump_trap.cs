@@ -85,7 +85,8 @@ public class a_jump_trap : trap_base
 
     public override void PostActivate(object_base src)
     {//do not delete
-
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
     }
 
     protected virtual void OnTriggerEnter(Collider other)

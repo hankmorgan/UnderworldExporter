@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class trigger_base : object_base {
+public class trigger_base : traptrigger_base {
 
-	//public string TrapObject;//The next trap to activte
-	//public int state;
-
-		/// <summary>
-		/// The trigger me now. Fire off the trigger to test it's operation.
-		/// </summary>
-		public bool TriggerMeNow=false;
+	/// <summary>
+	/// The trigger me now. Fire off the trigger to test it's operation.
+	/// </summary>
+	public bool TriggerMeNow=false;
 
 	protected override void Start ()
 	{
@@ -22,22 +19,28 @@ public class trigger_base : object_base {
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
-			if (triggerObj.GetComponent<trap_base>() !=null)
-			{
-				triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);	
-			}
+            if (WillFire())
+            {
+                if (triggerObj.GetComponent<trap_base>() != null)
+                {
+                    triggerObj.GetComponent<trap_base>().Activate(this, quality, owner, flags);
+                }
+            }
+            else
+            {
+                Debug.Log(this.name + " will not trigger due to flag.");
+            }
 		}
-
 		PostActivate(src);
 		return true;
 	}
 
 	public virtual void PostActivate(GameObject src)
 	{
-		int TriggerRepeat = (flags>>1) & 0x1;
-		//Debug.Log(TriggerRepeat);
-		if (TriggerRepeat==0)
-		{			
+		//int TriggerRepeat = (flags>>1) & 0x1;
+
+        if ( !WillFireRepeatedly() )
+		{
 			if (src!=null)
 			{
 				if (src.GetComponent<ObjectInteraction>()!=null)

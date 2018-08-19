@@ -88,9 +88,9 @@ A trigger that fires when the player character enters it
 
 	public override bool Activate (GameObject src)
 	{
-        if ( ((flags >> 2) & 0x1)  == 0)
+        if (!WillFire())
         {
-            Debug.Log(this.name + " will not fire due to flag[3] == 0");
+            Debug.Log(this.name + " will not fire due to flags");
             return false;
         }
 		if (_RES==GAME_UW2)

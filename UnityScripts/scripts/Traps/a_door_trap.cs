@@ -9,7 +9,6 @@ Opens the door that is in the targeted tile.
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//Debug.Log (this.name);
 		GameObject door = GameWorldController.findDoor(triggerX,triggerY);
 
 		if (door!=null)
@@ -48,10 +47,7 @@ Opens the door that is in the targeted tile.
 						linkedObj.objectloaderinfo.InUseFlag=0;
 						Destroy(linkedObj);		
 					}
-
 				}
-
-
 				break;
 
 			case 1://try open
@@ -92,7 +88,6 @@ Opens the door that is in the targeted tile.
 				}				
 				break;
 			}
-
 		}
 		else
 		{
@@ -102,6 +97,7 @@ Opens the door that is in the targeted tile.
 
 	public override void PostActivate (object_base src)
 	{//To stop destruction of trap
-
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

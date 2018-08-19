@@ -3,7 +3,7 @@ using System.Collections;
 
 public class a_hack_trap_coward : a_hack_trap {
 
-	//Used when the avatar flees the arena 
+	//Used when the avatar flees the arena in the pits of carnage
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -45,13 +45,12 @@ public class a_hack_trap_coward : a_hack_trap {
 			{
 				Quest.instance.FightingInArena=false;
 			}
-		}
-		
+		}		
 	}
-
 
 	public override void PostActivate (object_base src)
 	{
-
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -14,13 +14,9 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-	Debug.Log (this.name);
-	GameObject platformTile= GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);//Var.FindTile (Var.triggerX,Var.triggerY,1);
-	//Get the height of the tile
-	
-	
-	//if (flags==7)
-	if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight>=18)	
+	    GameObject platformTile= GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);//Var.FindTile (Var.triggerX,Var.triggerY,1);
+
+        if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight>=18)	
 		{
 			//Move the tile to the bottom
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.3f*7f,0f) ,0.7f));
@@ -55,8 +51,9 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 		platform.position = EndPos;
 		}
 
-		public override void PostActivate (object_base src)
-		{//Do not destroy.
-
-		}
+	public override void PostActivate (object_base src)
+	{//Do not destroy.
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -20,5 +20,4 @@ public class a_skill_trap : trap_base {
 		Debug.Log(this.name + " called with params q=" + quality + " o=" + owner);
 		base.ExecuteTrap (src, triggerX, triggerY, State);
 	}
-
 }

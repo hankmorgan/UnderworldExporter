@@ -35,7 +35,8 @@ public class an_inventory_trap : trap_base {
 
 	public override void PostActivate (object_base src)
 	{//Do not destroy.
-
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
 	}
 
 }

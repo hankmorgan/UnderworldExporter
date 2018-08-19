@@ -28,7 +28,6 @@ public class a_hack_trap_terraform_puzzle : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//base.ExecuteTrap (src, triggerX, triggerY, State);
 		//change the x columns first
 		if (xpos != 0)
 		{

@@ -145,6 +145,7 @@ public class ObjectInteraction : UWEBase
     public const int MAPPIECE = 130;
     public const int SPECIAL_EFFECT = 131;
     public const int DRINK = 132;
+    public const int A_BRIDGE_TRAP = 133;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -2391,6 +2392,10 @@ public class ObjectInteraction : UWEBase
                 break;
             case A_PROXIMITY_TRAP:
                 myObj.AddComponent<a_proximity_trap>();
+                CreateSprite = false;
+                break;
+            case A_BRIDGE_TRAP:
+                myObj.AddComponent<a_bridge_trap>();
                 CreateSprite = false;
                 break;
             case TMAP_CLIP:

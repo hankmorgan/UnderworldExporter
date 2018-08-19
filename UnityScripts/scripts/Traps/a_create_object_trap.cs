@@ -25,29 +25,25 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		string created="";
-		//if (quality <= Random.Range(1,41)) //100% chance when quality is zero.
-		//{
-			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(link);
-			if (objToClone !=null)
-			{
-			  	GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);
-				LastObjectCreated=NewObject.name;
-				created=NewObject.name;
-				if (objToClone.GetComponent<Container>()!=null)
-				{//Clone the items on this object
-					for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
+		ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(link);
+		if (objToClone !=null)
+		{
+			GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);
+			LastObjectCreated=NewObject.name;
+			created=NewObject.name;
+			if (objToClone.GetComponent<Container>()!=null)
+			{//Clone the items on this object
+				for (short i=0; i<= objToClone.GetComponent<Container>().MaxCapacity();i++)		
+				{
+				if (objToClone.GetComponent<Container>().GetItemAt(i)!="")
 					{
-					if (objToClone.GetComponent<Container>().GetItemAt(i)!="")
-						{
-							GameObject obj = objToClone.GetComponent<Container>().GetGameObjectAt(i);	
-							GameObject CloneContainerItem = CloneObject(obj.GetComponent<ObjectInteraction>(),triggerX,triggerY,false);
-							NewObject.GetComponent<Container>().items[i] = CloneContainerItem.name;
-						}						
-					}
+					GameObject obj = objToClone.GetComponent<Container>().GetGameObjectAt(i);	
+					GameObject CloneContainerItem = CloneObject(obj.GetComponent<ObjectInteraction>(),triggerX,triggerY,false);
+					NewObject.GetComponent<Container>().items[i] = CloneContainerItem.name;
+					}						
 				}
 			}
-		//}
-	//Debug.Log (this.name + " " + created);
+		}
 	}
 
 	public GameObject CloneObject(ObjectInteraction objToClone, int triggerX, int triggerY, bool MoveItem)
@@ -57,11 +53,11 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 		ObjectLoaderInfo objI ;
 		if (objToClone.GetComponent<NPC>()!=null)
 		{
-				objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,2);	
+			objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,2);	
 		}
 		else
 		{
-				objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,256);	
+			objI=  ObjectLoader.newObject(objToClone.item_id,objToClone.quality,objToClone.quality, objToClone.link,256);	
 		}
 
 		objI.instance= cloneObj.GetComponent<ObjectInteraction>();

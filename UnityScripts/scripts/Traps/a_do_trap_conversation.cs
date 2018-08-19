@@ -5,15 +5,12 @@ using System.Collections;
 /// </summary>
 public class a_do_trap_conversation : a_hack_trap {
 
-
 	protected override void Start ()
 	{
 		base.Start ();
 		//Set up this talking door!
 		NPC_Door np =this.gameObject.AddComponent<NPC_Door>();
 		np.npc_whoami=25;
-		//this.gameObject.AddComponent<Conversation_25>();
-
 	}
 
 	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
@@ -28,16 +25,12 @@ public class a_do_trap_conversation : a_hack_trap {
 				return np.TalkTo();
 			}
 		}
-
 		return false;
 	}
 
-
-
 	public override void PostActivate (object_base src)	
 	{//Do not destroy
-
-	}
-
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }
-

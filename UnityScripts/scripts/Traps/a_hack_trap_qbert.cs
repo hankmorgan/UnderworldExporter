@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Trap used to control the qbert puzzle in the ethereal void.
+/// </summary>
 public class a_hack_trap_qbert : a_hack_trap {
 		const int QbertColourRed=0;
 		const int QbertColourGreen=1; //unused?
@@ -11,8 +13,6 @@ public class a_hack_trap_qbert : a_hack_trap {
 		const int QbertColourWhite=6;
 
 		//const int CompletedPyramid=3569;
-		//Trap used to control the qbert puzzle in the ethereal void.
-		//qual=32
 
 		//Takes a couple of parameters.
 		//Owner = 0 //entrance teleport to pyramid from red hell. tells game you need to set a red pyramid.
@@ -23,7 +23,6 @@ public class a_hack_trap_qbert : a_hack_trap {
 		//owner = 16 //used in leaving the pyramid area and the sigil
 		//Onwer = 32 //randomly takes you to a moongate of the same colour or to the matching zone for this moongate.
 		//Owner = 63 //Used in stepping on the pyramid, Most steps point to one of two traps with this owner value.
-
 
 		//game variables 101 to 108 are used for this trap
 		//These variables track the state of the puzzle
@@ -371,27 +370,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 			SetWallColour(49,55,colourToSet);
 
-
-			/*SetWallColour(46,51,colourToSet);
-			SetWallColour(46,52,colourToSet);
-
-			SetWallColour(47,51,colourToSet);
-			SetWallColour(47,52,colourToSet);
-			SetWallColour(47,53,colourToSet);
-
-			SetWallColour(48,51,colourToSet);
-			SetWallColour(48,52,colourToSet);
-			SetWallColour(48,53,colourToSet);
-			SetWallColour(49,53,colourToSet);
-
-			SetWallColour(50,51,colourToSet);
-			SetWallColour(50,52,colourToSet);
-			SetWallColour(50,53,colourToSet);
-			SetWallColour(50,53,colourToSet);
-			SetWallColour(50,53,colourToSet);*/
-
 			GameWorldController.instance.currentTileMap().SetTileMapWallFacesUW();
-	
 				 
 			DestroyTile(45,51);
 
@@ -585,37 +564,6 @@ public class a_hack_trap_qbert : a_hack_trap {
 			return Sequence;
 		}
 
-		/*bool isQbertSolved(int colourToTest)
-		{
-				int[] sequence = getColourSequence();
-				for (int i=0; i<sequence.GetUpperBound(0);i++)//No need to test last colour
-				{
-					if (sequence[i]==colourToTest)
-					{
-						if (i<sequence.GetUpperBound(0)-1)
-						{//Colour is not the last one in the sequence. Assume solved
-								return true;
-						}
-						else
-						{//Colour is last in sequence. Check flag value
-							if (Quest.instance.variables[108]== CompletedPyramid)
-							{
-								return true;
-							}
-							else
-							{
-								return false;
-							}
-						}
-					}
-				}
-				//the colour was not found. Assume unsolved.
-				return false;
-		}*/
-
-
-
-
 	void TeleportToLocation(int levelNo, int tileX, int tileY)
 	{
 		if (GameWorldController.instance.LevelNo!=levelNo)
@@ -659,6 +607,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 	public override void PostActivate (object_base src)
 	{
-
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -82,8 +82,11 @@ the left, right, center button combination on Level3.
 		int cmp = 0;
 		for (int i = zpos; i <= zpos + heading; i++) {
 			if (xpos != 0)
-				cmp += Quest.instance.variables [i];
-			else {
+            {
+                cmp += Quest.instance.variables[i];
+            }				
+			else
+            {
 				cmp <<= 3;
 				cmp |= (Quest.instance.variables [i] & 0x7);
 			}
@@ -91,72 +94,68 @@ the left, right, center button combination on Level3.
 		return cmp;
 	}
 
+    /// <summary>
+    /// Resumption of the execution chain is handled by the execution of the trap.
+    /// </summary>
+    /// <param name="src"></param>
+    /// <param name="triggerX"></param>
+    /// <param name="triggerY"></param>
+    /// <param name="State"></param>
+    /// <returns></returns>
 	public override bool Activate (object_base src,int triggerX, int triggerY, int State)
 	{
-		//CheckReferences();
-		//Do what it needs to do.
-		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
-
-		//Stuff to happen after the trap has fired.
-		//PostActivate(src);
+		ExecuteTrap(this, triggerX,triggerY, State);//The next in the chain for this trap is handled by the execute action.
 		return true;
 	}
 
 
 	bool check_variable_trap()
 	{//Based on what uw-formats says. Seems to work okay.
-			if (_RES==GAME_UW2)
-			{//Some variables in UW2 seem to map to x_clock values
-				switch (zpos)
-				{
-					case 17://castle events
-					case 18://This is tested					
-					case 19://Djinn capture
-					case 20://The following are untested
-					case 21:
-					case 22:
-					case 23:
-					case 24:
-					case 25:
-					case 26:
-					case 27:
-					case 28:
-					case 29:
-					case 30:
-					case 31:								
-						//return VariableValue()==Quest.instance.DjinnCapture;	
-						return VariableValue()==Quest.instance.x_clocks[zpos-16];	
-					case 32:
-						Debug.Log("Checking lvl 5 scint switches");
-						return Quest.instance.ScintLvl5Switches == 7;		
-				}
+		if (_RES==GAME_UW2)
+		{//Some variables in UW2 seem to map to x_clock values
+			switch (zpos)
+			{
+				case 17://castle events
+				case 18://This is tested					
+				case 19://Djinn capture
+				case 20://The following are untested
+				case 21:
+				case 22:
+				case 23:
+				case 24:
+				case 25:
+				case 26:
+				case 27:
+				case 28:
+				case 29:
+				case 30:
+				case 31:								
+					//return VariableValue()==Quest.instance.DjinnCapture;	
+					return VariableValue()==Quest.instance.x_clocks[zpos-16];	
+				case 32:
+					Debug.Log("Checking lvl 5 scint switches");
+					return Quest.instance.ScintLvl5Switches == 7;		
 			}
+		}
 		if (heading!=0)
 			{
-				int cmp = ComparisonValue ();
-				if (cmp == VariableValue())
-				{
-					Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());	
-				}				
-				return cmp == VariableValue();
-				
+			    int cmp = ComparisonValue ();
+			    if (cmp == VariableValue())
+			    {
+				    Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());	
+			    }				
+			    return cmp == VariableValue();				
 			}
 		else
 			{//Is this right?
-				Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
+			    Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
                 switch (zpos)
                 {
                     case 117:
                         return true;//Fix bug on tombs final level
                     default:
                         return VariableValue() == Quest.instance.variables[zpos];
-                }
-				
+                }				
 			}
 		}
-
-
-
-
-
 }

@@ -38,6 +38,10 @@ public class a_hack_trap_button_mover : a_hack_trap {
         }
     }
 
+    /// <summary>
+    /// Begin moving the button. 
+    /// </summary>
+    /// <param name="index"></param>
     void MoveButton(int index)
     {
         if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance != null)
@@ -55,6 +59,11 @@ public class a_hack_trap_button_mover : a_hack_trap {
         
     }
 
+    /// <summary>
+    /// Move the button to the new z position
+    /// </summary>
+    /// <param name="NewZpos"></param>
+    /// <param name="buttonToMove"></param>
     void MoveButton(short NewZpos, ObjectInteraction buttonToMove)
     {
         buttonToMove.zpos = NewZpos;
@@ -65,7 +74,8 @@ public class a_hack_trap_button_mover : a_hack_trap {
 
     public override void PostActivate(object_base src)
     {
-
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
     }
 
 }

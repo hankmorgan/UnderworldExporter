@@ -7,7 +7,7 @@ public class a_do_trap_emeraldpuzzle : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-			Debug.Log (this.name);
+		Debug.Log (this.name);
 		if (hasExecuted==false)
 		{
 			//Check if 4 emeralds on on top of the plinths.
@@ -22,22 +22,8 @@ public class a_do_trap_emeraldpuzzle : a_hack_trap {
 
 	private void CreateRuneStone(int ItemID)
 	{
-		//string Item= ItemID.ToString("000");
-
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(ItemID,0,0,1,256);
-				GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,new Vector3(64.5f,4.0f,24.5f)).gameObject;
-
-
-		//GameObject myObj=  new GameObject("SummonedObject_" + UWCharacter.Instance.PlayerMagic.SummonCount++);
-		//myObj.layer=LayerMask.NameToLayer("UWObjects");
-		//myObj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-		//GameWorldController.MoveToWorld(myObj);
-		//ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_224",true);
-		//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 224, ItemID, ItemID, ObjectInteraction.RUNE, 224, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		
-		//myObj.AddComponent<RuneStone>();
-
-		//myObj.transform.position = new Vector3(64.5f,4.0f,24.5f);
+		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,new Vector3(64.5f,4.0f,24.5f)).gameObject;
 		GameWorldController.UnFreezeMovement(myObj);
 	}
 
@@ -81,7 +67,8 @@ public class a_do_trap_emeraldpuzzle : a_hack_trap {
 
 	public override void PostActivate (object_base src)
 	{
-	//Stop trap from destroying itself.
-
-	}
+        //Stop trap from destroying itself.
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

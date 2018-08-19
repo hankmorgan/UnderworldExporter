@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class a_hack_trap_unlink : a_hack_trap {
-		//Removes the link on the target object.
+	//Removes the link on the target object.
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		ObjectInteraction objToUnlink = ObjectLoader.getObjectIntAt(link);

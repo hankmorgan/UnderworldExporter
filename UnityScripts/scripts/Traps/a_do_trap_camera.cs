@@ -34,7 +34,6 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 		lt=this.gameObject.AddComponent<Light>();
 		lt.range=8;
 		lt.enabled=false;
-
 	}
 
     /// <summary>
@@ -62,7 +61,6 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//Debug.Log (this.name);
 		StartCoroutine (ActivateCamera());
 	}
 
@@ -84,6 +82,8 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	public override void PostActivate (object_base src)
 	{
-		//Stop camera from destroying itself
-	}
+        //Stop camera from destroying itself
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 }

@@ -24,12 +24,9 @@ public class a_hack_trap_teleport : a_hack_trap {
 
 //Probably used to teleport to an other world possible based on the state of the other gem hack trap and probably based on the players position.
 
-		//One thing to note: there is an invisible rotary switch near this trap. Making this visible and using changes the available face
-		//on the gem and what level you can go to.
-		//It's linked to the variable no 6 via a set_variable_trap. Seems like that variable controls what level the teleport goes to. 
-
-
-		// this has a quality of 55d
+//One thing to note: there is an invisible rotary switch near this trap. Making this visible and using changes the available face
+//on the gem and what level you can go to.
+//It's linked to the variable no 6 via a set_variable_trap. Seems like that variable controls what level the teleport goes to. 
 
 	protected override void Start ()
 	{
@@ -77,52 +74,51 @@ public class a_hack_trap_teleport : a_hack_trap {
 
         return;//This trap is just a placeholder as teleportation is now handled by a UI button that calls the TravelDirect function below
         
-		int OxPos = src.xpos;
-		int OyPos = src.ypos;
-		int variable = Quest.instance.variables[6];
+		//////////int OxPos = src.xpos;
+		//////////int OyPos = src.ypos;
+		//////////int variable = Quest.instance.variables[6];
 
-				//x and y positions are as follows.
-				//2,7
-				//7,3
-				//5,6
-				//7,4
-				//6,0
-				//1,6
-				if (TestPosXY(OxPos, OyPos, 2,7))
-				{
-					//Debug.Log("Found 2,7");
-					TravelToWorlds(variable, Tomb, Pits);
-				}
-				else if (TestPosXY(OxPos, OyPos, 7,3))
-				{
-					//	Debug.Log("Found 7,3");
-					TravelToWorlds(variable,Scintillus, Pits);
-				}
-				else if (TestPosXY(OxPos, OyPos, 5,6))
-				{//Always prison tower
-						//Debug.Log("Found 5,6");
-					//Debug.Log("Travel to world " + PrisonTower);
-					TravelToWorlds(variable, PrisonTower , PrisonTower);
-				}
-				else if (TestPosXY(OxPos, OyPos, 7,4))
-				{//Kilhorn and Ice caverns
-					TravelToWorlds(variable,Killorn,IceCaverns);
-				}
-				else if (TestPosXY(OxPos, OyPos, 6,0))
-				{
-						//Debug.Log("Found 6,0");
-					TravelToWorlds(variable,Talorus,Scintillus);
-				}
-				else if (TestPosXY(OxPos, OyPos, 1,6))
-				{
-						//Debug.Log("Found 4,6");
-					TravelToWorlds(variable, Tomb,EtherealVoid);
-				}
-				else
-				{
-					Debug.Log("Unable to match a move trigger");
-				}
-
+		//////////		//x and y positions are as follows.
+		//////////		//2,7
+		//////////		//7,3
+		//////////		//5,6
+		//////////		//7,4
+		//////////		//6,0
+		//////////		//1,6
+		//////////		if (TestPosXY(OxPos, OyPos, 2,7))
+		//////////		{
+		//////////			//Debug.Log("Found 2,7");
+		//////////			TravelToWorlds(variable, Tomb, Pits);
+		//////////		}
+		//////////		else if (TestPosXY(OxPos, OyPos, 7,3))
+		//////////		{
+		//////////			//	Debug.Log("Found 7,3");
+		//////////			TravelToWorlds(variable,Scintillus, Pits);
+		//////////		}
+		//////////		else if (TestPosXY(OxPos, OyPos, 5,6))
+		//////////		{//Always prison tower
+		//////////				//Debug.Log("Found 5,6");
+		//////////			//Debug.Log("Travel to world " + PrisonTower);
+		//////////			TravelToWorlds(variable, PrisonTower , PrisonTower);
+		//////////		}
+		//////////		else if (TestPosXY(OxPos, OyPos, 7,4))
+		//////////		{//Kilhorn and Ice caverns
+		//////////			TravelToWorlds(variable,Killorn,IceCaverns);
+		//////////		}
+		//////////		else if (TestPosXY(OxPos, OyPos, 6,0))
+		//////////		{
+		//////////				//Debug.Log("Found 6,0");
+		//////////			TravelToWorlds(variable,Talorus,Scintillus);
+		//////////		}
+		//////////		else if (TestPosXY(OxPos, OyPos, 1,6))
+		//////////		{
+		//////////				//Debug.Log("Found 4,6");
+		//////////			TravelToWorlds(variable, Tomb,EtherealVoid);
+		//////////		}
+		//////////		else
+		//////////		{
+		//////////			Debug.Log("Unable to match a move trigger");
+		//////////		}
 	}
 
 
@@ -143,12 +139,10 @@ public class a_hack_trap_teleport : a_hack_trap {
 		{
 			if (CheckWorldAvailabilty(world1))	
 			{
-				//Debug.Log("Travel to world " + world1);
 				WorldToGoto=world1;				
 			}
 			else if (CheckWorldAvailabilty(world2))	
 			{
-				//Debug.Log("Travel to world " + world2);
 				WorldToGoto=world2;			
 			}	
 		}
@@ -156,12 +150,10 @@ public class a_hack_trap_teleport : a_hack_trap {
 		{
 			if (CheckWorldAvailabilty(world2))	
 			{
-				//Debug.Log("Travel to world " + world2);
 				WorldToGoto=world2;
 			}	
 			else if (CheckWorldAvailabilty(world1))	
 			{
-					//Debug.Log("Travel to world " + world1);
 				WorldToGoto=world1;
 			}	
 		}
@@ -198,8 +190,9 @@ public class a_hack_trap_teleport : a_hack_trap {
 
 	public override void PostActivate (object_base src)
 	{
-	//no deletion
-	}
+        Debug.Log("Overridden PostActivate to test " + this.name);
+        base.PostActivate(src);
+    }
 
 
     /// <summary>
@@ -248,6 +241,4 @@ public class a_hack_trap_teleport : a_hack_trap {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 348));
         }
     }
-
-
 }

@@ -38,7 +38,4 @@ public class a_hack_trap : trap_base {
 	{
 		Debug.Log ("Hack Trap " + this.name);
 	}
-
-
-
 }
