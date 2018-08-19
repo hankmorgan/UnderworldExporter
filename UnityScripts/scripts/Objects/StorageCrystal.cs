@@ -81,7 +81,7 @@ public class StorageCrystal : object_base {
 		{
 			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 			{
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,352)  + BuildCrystalName(objInt().quality));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,352)  + BuildCrystalName(quality));
 				return true;
 			}						
 		}

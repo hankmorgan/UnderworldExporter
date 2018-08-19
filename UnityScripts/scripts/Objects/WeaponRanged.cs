@@ -9,13 +9,13 @@ public class WeaponRanged : Weapon {
 
 		public int AmmoType()
 		{
-			return GameWorldController.instance.objDat.rangedStats[objInt().item_id-24].ammo;	
+			return GameWorldController.instance.objDat.rangedStats[item_id-24].ammo;	
 		}
 
 
 		public int Damage()
 		{
-			return GameWorldController.instance.objDat.rangedStats[objInt().item_id-24].damage;	
+			return GameWorldController.instance.objDat.rangedStats[item_id-24].damage;	
 		}
 }
 

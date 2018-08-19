@@ -26,7 +26,7 @@ public class MoonGate : Model3D {
 
 	public override Color ModelColour (int meshNo)
 	{
-		return GameWorldController.instance.palLoader.Palettes[0].ColorAtPixel((byte)(objInt().link-512),false);
+		return GameWorldController.instance.palLoader.Palettes[0].ColorAtPixel((byte)(link-512),false);
 	}
 
 	public override Vector2[] ModelUVs (Vector3[] verts)

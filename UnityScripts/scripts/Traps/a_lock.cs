@@ -32,13 +32,13 @@ Not really used by uwexporter but does exist in UW. Created here for compatabilt
 		//Debug.Log(this.name + " called by " +src.name);
 				//LockObject.flags = (short)(LockObject.flags | 0x1);
 
-				if ((objInt().flags & 0x1) == 1)
+				if ((flags & 0x1) == 1)
 				{//locked
-					objInt().flags = (short)(objInt().flags & 0xE);	
+					flags = (short)(flags & 0xE);	
 				}
 				else
 				{
-					objInt().flags = (short)(objInt().flags | 0x1);
+					flags = (short)(flags | 0x1);
 				}
 	}
 

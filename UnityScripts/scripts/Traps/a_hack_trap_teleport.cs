@@ -15,8 +15,9 @@ public class a_hack_trap_teleport : a_hack_trap {
 	const int EtherealVoid=7;
 
 	short[] DestinationLevels = {8,16,24,32,40,56,48,68};
-	short[] DestinationTileX = {33,27,18,31,4,59,32,33};
+	short[] DestinationTileX = {33,27,18,32,4,59,32,33};
 	short[] DestinationTileY = {32,34,39,31,38,20,32,4};
+    short[] DestinationFloorHeight = { -1, -1, -1, 24, -1, -1, -1, -1 };
     //TODO: destination heights.
 
     public static a_hack_trap_teleport instance;
@@ -76,8 +77,8 @@ public class a_hack_trap_teleport : a_hack_trap {
 
         return;//This trap is just a placeholder as teleportation is now handled by a UI button that calls the TravelDirect function below
         
-		int xPos = src.objInt().x;
-		int yPos = src.objInt().y;
+		int OxPos = src.xpos;
+		int OyPos = src.ypos;
 		int variable = Quest.instance.variables[6];
 
 				//x and y positions are as follows.
@@ -87,32 +88,32 @@ public class a_hack_trap_teleport : a_hack_trap {
 				//7,4
 				//6,0
 				//1,6
-				if (TestPosXY(xPos,yPos, 2,7))
+				if (TestPosXY(OxPos, OyPos, 2,7))
 				{
 					//Debug.Log("Found 2,7");
 					TravelToWorlds(variable, Tomb, Pits);
 				}
-				else if (TestPosXY(xPos,yPos, 7,3))
+				else if (TestPosXY(OxPos, OyPos, 7,3))
 				{
 					//	Debug.Log("Found 7,3");
 					TravelToWorlds(variable,Scintillus, Pits);
 				}
-				else if (TestPosXY(xPos,yPos, 5,6))
+				else if (TestPosXY(OxPos, OyPos, 5,6))
 				{//Always prison tower
 						//Debug.Log("Found 5,6");
 					//Debug.Log("Travel to world " + PrisonTower);
 					TravelToWorlds(variable, PrisonTower , PrisonTower);
 				}
-				else if (TestPosXY(xPos,yPos, 7,4))
+				else if (TestPosXY(OxPos, OyPos, 7,4))
 				{//Kilhorn and Ice caverns
 					TravelToWorlds(variable,Killorn,IceCaverns);
 				}
-				else if (TestPosXY(xPos,yPos, 6,0))
+				else if (TestPosXY(OxPos, OyPos, 6,0))
 				{
 						//Debug.Log("Found 6,0");
 					TravelToWorlds(variable,Talorus,Scintillus);
 				}
-				else if (TestPosXY(xPos,yPos, 1,6))
+				else if (TestPosXY(OxPos, OyPos, 1,6))
 				{
 						//Debug.Log("Found 4,6");
 					TravelToWorlds(variable, Tomb,EtherealVoid);
@@ -200,17 +201,21 @@ public class a_hack_trap_teleport : a_hack_trap {
 	//no deletion
 	}
 
+
+    /// <summary>
+    /// Shows or hides the world select UI element
+    /// </summary>
     public override void Update()
     {
         base.Update();
         if (
-            (TileMap.visitTileX>=26)
+            (TileMap.visitTileX>=27)
             &&
-            (TileMap.visitTileX <= 30)
+            (TileMap.visitTileX <= 29)
             &&
-           (TileMap.visitTileY >= 38)
+           (TileMap.visitTileY >= 39)
             &&
-            (TileMap.visitTileY <= 42)
+            (TileMap.visitTileY <= 41)
             )
         {            
             UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject,
@@ -225,15 +230,18 @@ public class a_hack_trap_teleport : a_hack_trap {
         }
     }
 
-
+    /// <summary>
+    /// Sends the player to the specified world if the game allows it based on the stored game variables
+    /// </summary>
+    /// <param name="World"></param>
     public void TravelDirect(int World)
     {
         if (CheckWorldAvailabilty(World))
         {
             UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject, false);
             UWCharacter.Instance.JustTeleported = true;
-            UWCharacter.Instance.teleportedTimer =0f;
-            GameWorldController.instance.SwitchLevel(DestinationLevels[World], DestinationTileX[World], DestinationTileY[World]);
+            UWCharacter.Instance.teleportedTimer = 0f;
+            GameWorldController.instance.SwitchLevel(DestinationLevels[World], DestinationTileX[World], DestinationTileY[World], DestinationFloorHeight[World]);
         }
         else
         {

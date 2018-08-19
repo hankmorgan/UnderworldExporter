@@ -92,10 +92,10 @@ public class Instrument : object_base {
 			//354237875
 			if (_RES==GAME_UW1)
 			{				
-				if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
+				if ((NoteRecord=="354237875") && (item_id==292))//Flute only
 				{
 					//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-					if ((GameWorldController.instance.LevelNo==2) && (Quest.instance.isCupFound==false) && (objInt().item_id==292))
+					if ((GameWorldController.instance.LevelNo==2) && (Quest.instance.isCupFound==false) && (item_id==292))
 					{									
 						int tileX=TileMap.visitTileX;
 						int tileY=TileMap.visitTileY;

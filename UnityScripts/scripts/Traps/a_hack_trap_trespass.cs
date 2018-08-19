@@ -7,10 +7,10 @@ public class a_hack_trap_trespass : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		//Debug.Log("A trespass trap " + objInt().owner + " "  + this.name );
-		if (((objInt().owner & 0x1f))!=0)
+		//Debug.Log("A trespass trap " + owner + " "  + this.name );
+		if (((owner & 0x1f))!=0)
 		{
-			SignalTheft(UWCharacter.Instance.transform.position, objInt().owner,7f);
+			SignalTheft(UWCharacter.Instance.transform.position, owner,7f);
 		}	
 	}
 

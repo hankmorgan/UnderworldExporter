@@ -9,7 +9,7 @@ public class TMAP : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[objInt().owner];
+		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[owner];
 		CreateTMAP(this.gameObject,TextureIndex);	
 	}
 
@@ -22,9 +22,9 @@ public class TMAP : object_base {
 			UWHUD.instance.CutScenesSmall.anim.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 			UWHUD.instance.CutScenesSmall.anim.looping=true;
 		}
-		if (objInt().link != 0)
+		if (link != 0)
 		{
-			GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+			GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 			if (triggerObj!=null)
 				{
 				ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -46,9 +46,9 @@ public class TMAP : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			if (objInt().link != 0)
+			if (link != 0)
 			{
-				GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+				GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 				if (triggerObj!=null)
 				{
 					ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -75,9 +75,9 @@ public class TMAP : object_base {
 		{
 			if (ObjectUsed.GetComponent<ObjectInteraction>().item_id==231)//The key of infinity.
 			{
-				if (objInt().link != 0)
+				if (link != 0)
 				{
-					GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+					GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 					if (triggerObj!=null)
 					{
 						ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
@@ -146,7 +146,7 @@ public class TMAP : object_base {
 			ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
 			TileMap tm = GameWorldController.instance.currentTileMap();
 				float doorFrameOffsetX=0f;float doorFrameOffsetY=0f;
-				if (tm.Tiles[objInt.tileX, objInt.tileY].isDoor)
+				if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
 				{
 						switch (objInt.heading * 45)
 						{

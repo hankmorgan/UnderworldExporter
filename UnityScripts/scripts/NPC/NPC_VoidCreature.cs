@@ -86,7 +86,7 @@ public class NPC_VoidCreature : NPC {
 								index=34;break;
 						}
 						/*return index;
-						switch (objInt().item_id)
+						switch (item_id)
 						{
 						case 79: //spiral, bat and
 								{
@@ -146,7 +146,7 @@ public class NPC_VoidCreature : NPC {
 
 				/*
 				int index=256;
-				switch (objInt().item_id)
+				switch (item_id)
 				{
 				case 79: //spiral, bat and hellhound
 						{

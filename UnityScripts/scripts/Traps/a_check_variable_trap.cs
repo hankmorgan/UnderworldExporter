@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class a_check_variable_trap :a_variable_trap {
-    //public int xpos;
     /*
 	 * Per uw-formats.txt
   018e  a_check variable trap
@@ -41,7 +40,7 @@ the left, right, center button combination on Level3.
     protected override void Start()
     {
         base.Start();
-        Debug.Log(this.name + " will check " + objInt().zpos);
+        Debug.Log(this.name + " will check " + zpos);
     }
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
@@ -56,7 +55,7 @@ the left, right, center button combination on Level3.
 		{
 			if (_RES==GAME_UW2)	
 			{//If linked to a null trap in UW2 the next of the null trap will act as a "false" action.
-				ObjectInteraction nullObj= ObjectLoader.getObjectIntAt(objInt().link);
+				ObjectInteraction nullObj= ObjectLoader.getObjectIntAt(link);
 				//if (triggerObj.tileX==TileMap.ObjectStorageTile)
 				if(nullObj.GetItemType()==ObjectInteraction.A_NULL_TRAP)
 				{
@@ -81,8 +80,8 @@ the left, right, center button combination on Level3.
 	int ComparisonValue ()
 	{
 		int cmp = 0;
-		for (int i = objInt ().zpos; i <= objInt ().zpos + objInt ().heading; i++) {
-			if (objInt ().x != 0)
+		for (int i = zpos; i <= zpos + heading; i++) {
+			if (xpos != 0)
 				cmp += Quest.instance.variables [i];
 			else {
 				cmp <<= 3;
@@ -108,7 +107,7 @@ the left, right, center button combination on Level3.
 	{//Based on what uw-formats says. Seems to work okay.
 			if (_RES==GAME_UW2)
 			{//Some variables in UW2 seem to map to x_clock values
-				switch (objInt().zpos)
+				switch (zpos)
 				{
 					case 17://castle events
 					case 18://This is tested					
@@ -126,13 +125,13 @@ the left, right, center button combination on Level3.
 					case 30:
 					case 31:								
 						//return VariableValue()==Quest.instance.DjinnCapture;	
-						return VariableValue()==Quest.instance.x_clocks[objInt().zpos-16];	
+						return VariableValue()==Quest.instance.x_clocks[zpos-16];	
 					case 32:
 						Debug.Log("Checking lvl 5 scint switches");
 						return Quest.instance.ScintLvl5Switches == 7;		
 				}
 			}
-		if (objInt().heading!=0)
+		if (heading!=0)
 			{
 				int cmp = ComparisonValue ();
 				if (cmp == VariableValue())
@@ -144,13 +143,13 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-				Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + objInt().zpos + " (" + Quest.instance.variables[objInt().zpos] + ")" );
-                switch (objInt().zpos)
+				Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
+                switch (zpos)
                 {
                     case 117:
                         return true;//Fix bug on tombs final level
                     default:
-                        return VariableValue() == Quest.instance.variables[objInt().zpos];
+                        return VariableValue() == Quest.instance.variables[zpos];
                 }
 				
 			}

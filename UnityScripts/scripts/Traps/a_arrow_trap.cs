@@ -16,11 +16,11 @@ public class a_arrow_trap : trap_base {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		int item_index=  (objInt().quality << 5) | objInt().owner;
+		int item_index=  (quality << 5) | owner;
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
-		if (objInt().tileX ==TileMap.ObjectStorageTile)
+		if (ObjectTileX == TileMap.ObjectStorageTile)
 		{
 			Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(triggerX,triggerY);
 			pos = new Vector3(pos.x,this.transform.position.y,pos.z);
@@ -38,7 +38,7 @@ public class a_arrow_trap : trap_base {
 
 		GameWorldController.UnFreezeMovement(myObj);
 		myObj.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.Continuous;
-		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 20.0f *((float)(objInt().owner)));
+		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 20.0f *((float)(owner)));
 		
 		GameObject myObjChild = new GameObject(myObj.name + "_damage");
 		myObjChild.transform.position =myObj.transform.position;
@@ -52,7 +52,7 @@ public class a_arrow_trap : trap_base {
 
 	public override void PostActivate (object_base src)
 	{
-		if ((int)(src.objInt().flags & 0x1) ==1)
+		if ((int)(src.flags & 0x1) ==1)
 		{
 				//Do not delete as src trap/trigger is set to repeat
 		}

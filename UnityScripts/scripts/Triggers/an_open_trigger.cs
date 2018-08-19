@@ -6,19 +6,19 @@ public class an_open_trigger : trigger_base {
 	public override bool Activate (GameObject src)
 	{
 		//int thisType=objInt().GetItemType();
-		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+		GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
 			if (triggerObj.GetComponent<trap_base>() !=null)
 			{
-				triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
+				triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);	
 			}
 		}
 
 		//Open/Close trigers may have additional triggers that fire off as well
-				if (ObjectLoader.GetItemTypeAt(objInt().next) != ObjectInteraction.A_CLOSE_TRIGGER)
+				if (ObjectLoader.GetItemTypeAt(next) != ObjectInteraction.A_CLOSE_TRIGGER)
 				{
-						triggerObj = ObjectLoader.getGameObjectAt(objInt().next);
+						triggerObj = ObjectLoader.getGameObjectAt(next);
 						if (triggerObj!=null)
 						{
 								if (triggerObj.GetComponent<trigger_base>() !=null)

@@ -2012,9 +2012,9 @@ public class SaveGame : Loader
                 //bits 0-6 
                 objLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 7) & 0x07);
                 //bits 7-9
-                objLoader.objInfo[x].y = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 10) & 0x07);
+                objLoader.objInfo[x].ypos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 10) & 0x07);
                 //bits 10-12
-                objLoader.objInfo[x].x = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 13) & 0x07);
+                objLoader.objInfo[x].xpos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 13) & 0x07);
                 //bits 13-15
                 //+4
                 objLoader.objInfo[x].quality = (short)((DataLoader.getValAtAddress(buffer, i + 4, 16)) & 0x3F);
@@ -2232,7 +2232,7 @@ public class SaveGame : Loader
                 int ByteToWrite = (currobj.isquant << 15) | (currobj.invis << 14) | (currobj.doordir << 13) | (currobj.enchantment << 12) | ((currobj.flags & 0x07) << 9) | (currobj.item_id & 0x1FF);
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
-                ByteToWrite = ((currobj.x & 0x7) << 13) | ((currobj.y & 0x7) << 10) | ((currobj.heading & 0x7) << 7) | ((currobj.zpos & 0x7F));
+                ByteToWrite = ((currobj.xpos & 0x7) << 13) | ((currobj.ypos & 0x7) << 10) | ((currobj.heading & 0x7) << 7) | ((currobj.zpos & 0x7F));
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
                 ByteToWrite = (((int)currobj.next & 0x3FF) << 6) | (currobj.quality & 0x3F);
@@ -3148,8 +3148,8 @@ public class SaveGame : Loader
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));
                 DataLoader.WriteInt8(writer, ((ByteToWrite >> 8) & 0xFF));
 
-                ByteToWrite = ((currobj.x & 0x7) << 13) |
-                        ((currobj.y & 0x7) << 10) |
+                ByteToWrite = ((currobj.xpos & 0x7) << 13) |
+                        ((currobj.ypos & 0x7) << 10) |
                         ((currobj.heading & 0x7) << 7) |
                         ((currobj.zpos & 0x7F));
                 DataLoader.WriteInt8(writer, (ByteToWrite & 0xFF));

@@ -24,7 +24,7 @@ public class Potion : enchantment_base
                         objInt().consumeObject();
                         return true;
                     default://A spell trap
-                        UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, linked.gameObject.GetComponent<a_spell>().objInt().link - 256, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                        UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, linked.gameObject.GetComponent<a_spell>().link - 256, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
                         objInt().consumeObject();
                         return true;
                 }
@@ -60,14 +60,14 @@ public class Potion : enchantment_base
         }
         else
         {
-            return objInt().link - 256;//527;
+            return link - 256;//527;
         }        
     }
 
     public override bool ApplyAttack(short damage)
     {
-        objInt().quality -= damage;
-        if (objInt().quality <= 0)
+        quality -= damage;
+        if (quality <= 0)
         {
             ChangeType(213);//Change to debris.
             this.gameObject.AddComponent<enchantment_base>();//Add a generic object base for behaviour. THis is the famous magic debris
@@ -87,7 +87,7 @@ public class Potion : enchantment_base
     //To support potions that are linked to spells/damage traps
     public override void MoveToWorldEvent()
     {
-        if ((objInt().isquant == 0) && (objInt().link < 256) && (objInt().link > 0))
+        if ((isquant == 0) && (link < 256) && (link > 0))
         {//Object links to a spell.
             if (linked != null)
             {
@@ -104,7 +104,7 @@ public class Potion : enchantment_base
                             {
                                 Destroy(linked.gameObject);
                                 linked = objList[i].instance;
-                                objInt().link = i;
+                                link = i;
                                 match = true;
                                 break;
                             }

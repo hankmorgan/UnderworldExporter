@@ -19,7 +19,7 @@ public class a_teleport_trap : trap_base {
 	{
 		if (_RES==GAME_UWDEMO)
 		{
-			if (objInt().zpos!=0)
+			if (zpos!=0)
 			{
 				ExecuteForUWDemo();
 				return;
@@ -37,15 +37,15 @@ public class a_teleport_trap : trap_base {
 			return;
 		}
 
-		float targetX=(float)objInt().quality*1.2f + 0.6f;
-		float targetY= (float)objInt().owner*1.2f + 0.6f;
+		float targetX=(float)quality*1.2f + 0.6f;
+		float targetY= (float)owner*1.2f + 0.6f;
 
 
 		UWCharacter.Instance.JustTeleported=true;	
 		UWCharacter.Instance.teleportedTimer=0f;
-		if (objInt().zpos==0)
+		if (zpos==0)
 		{//Stay on this level.
-			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(objInt().quality,objInt().owner)))*0.15f;
+			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(quality,owner)))*0.15f;
 			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 			UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;
 		}
@@ -58,8 +58,15 @@ public class a_teleport_trap : trap_base {
 				UWCharacter.ResetTrueMana ();
 			}
 			UWCharacter.Instance.playerMotor.movement.velocity=Vector3.zero;
-			GameWorldController.instance.SwitchLevel((short)(objInt().zpos-1),objInt().quality,objInt().owner);
-		}
+            if ((xpos & 0x1)==1)
+            {//Teleport above ground and drop down into level
+                GameWorldController.instance.SwitchLevel((short)(zpos - 1), quality, owner, 24);
+            }
+            else
+            {
+                GameWorldController.instance.SwitchLevel((short)(zpos - 1), quality, owner);
+            }            
+        }
 	}
 
 		public void ExecuteForUWDemo()

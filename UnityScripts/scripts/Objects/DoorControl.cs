@@ -59,7 +59,7 @@ public class DoorControl : object_base {
 		{//Make sure it is open
 			if (isPortcullis()==false)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,0.01f));
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * doordirection() * OpenRotation,0.01f));
 			}
 			else
 			{
@@ -76,7 +76,7 @@ public class DoorControl : object_base {
 
 		public bool isPortcullis()
 		{
-			switch (objInt().item_id)	
+			switch (item_id)	
 			{
 				case 326:
 				case 334:
@@ -93,20 +93,20 @@ public class DoorControl : object_base {
 		/// TODO: The portcullis on lvl 7 of the prison tower is linked to a door trap rather than a lock. 
 		ObjectInteraction getLockObjInt()
 		{
-			if(objInt().link==0)
+			if(link==0)
 			{
 					return null;
 			}
 			else
 			{
-				if (ObjectLoader.GetItemTypeAt(objInt().link) == ObjectInteraction.LOCK)
+				if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.LOCK)
 				{
-					return ObjectLoader.getObjectIntAt(objInt().link);	
+					return ObjectLoader.getObjectIntAt(link);	
 				}
 				else
 				{//Try and find in the chain of execution.						
 					return null;
-					//return FindObjectInChain(objInt().link, ObjectInteraction.LOCK);
+					//return FindObjectInChain(link, ObjectInteraction.LOCK);
 				}					
 			}
 		}
@@ -116,7 +116,7 @@ public class DoorControl : object_base {
 		/// </summary>
 		public bool state()
 		{
-				switch (objInt().item_id)	
+				switch (item_id)	
 				{
 				case 320:
 				case 321:
@@ -162,9 +162,9 @@ public class DoorControl : object_base {
 	{
 		trigger_base trigger=null;
 		//If a door has a link and the link is to something that is not a lock then it is a trigger that I need to activae
-		if(objInt().link !=0)
+		if(link !=0)
 		{
-			ObjectInteraction linkedObject = ObjectLoader.getObjectIntAt(objInt().link);
+			ObjectInteraction linkedObject = ObjectLoader.getObjectIntAt(link);
 			if (linkedObject!=null)
 			{
 				if (linkedObject.GetItemType()!= ObjectInteraction.LOCK)
@@ -224,7 +224,7 @@ public class DoorControl : object_base {
 								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 								return false;
 						}
-						if((doorlock.link & 0x3F)==dk.objInt().owner)//This is a valid key for the door.
+						if((doorlock.link & 0x3F)==dk.owner)//This is a valid key for the door.
 						{
 							ToggleLock(true);
 								if (locked()==true)
@@ -239,7 +239,7 @@ public class DoorControl : object_base {
 						}
 					else
 						{
-						if (objInt().link==53)
+						if (link==53)
 							{//There is no lock
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 							}
@@ -299,7 +299,7 @@ public class DoorControl : object_base {
 		/// </summary>
 		public bool Spiked()
 		{
-			return (objInt().owner == 63);
+			return (owner == 63);
 		}
 
 		/// <summary>
@@ -317,7 +317,7 @@ public class DoorControl : object_base {
 			{//Closed door
 					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
 					//Spiked=true;
-					objInt().owner=63;
+					owner=63;
 		
 					return true;
 			}
@@ -372,7 +372,7 @@ public class DoorControl : object_base {
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
 						objInt().aud.Play();		
 					}
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * OpenRotation,DoorTravelTime));
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordirection() * OpenRotation,DoorTravelTime));
 				}
 				else
 				{
@@ -383,14 +383,14 @@ public class DoorControl : object_base {
 					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),DoorTravelTime));
 				}
-				objInt().owner=0;
-				objInt().item_id+=8;
-				objInt().zpos+=24;
-				objInt().enchantment=1;
+				owner=0;
+				item_id+=8;
+				zpos+=24;
+				enchantment=1;
 				if (isPortcullis())
 				{
-					//objInt().flags=12;	
-					objInt().flags=4;
+					//flags=12;	
+					flags=4;
 					NavMeshObstacle nmo = this.GetComponent<NavMeshObstacle>();
 					if (nmo!=null)
 					{
@@ -399,22 +399,22 @@ public class DoorControl : object_base {
 				}
 				else
 				{
-					//objInt().flags=13;	
-					objInt().flags=5;	
+					//flags=13;	
+					flags=5;	
 				}
 				
 				//state=true;
-				if(objInt().link!=0)
+				if(link!=0)
 					{	//If it's link is to something that is not a lock then it is likely to be a trigger
 						if (
 								(
-										(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+										(ObjectLoader.GetItemTypeAt(link) != ObjectInteraction.LOCK)
 										&&
-										(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.A_CLOSE_TRIGGER)
+										(ObjectLoader.GetItemTypeAt(link) != ObjectInteraction.A_CLOSE_TRIGGER)
 								)
 							)
 						{
-							trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+							trigger_base tb= ObjectLoader.getObjectIntAt(link).GetComponent<trigger_base>();
 							if (tb!=null)
 							{
 								tb.Activate(this.gameObject);
@@ -422,7 +422,7 @@ public class DoorControl : object_base {
 						}
 						else
 						{//The object is linked to a lock. The next of the lock is the use trigger to use here
-							ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
+							ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(link);
 							if (LockObj!=null)
 							{
 								int next= LockObj.next;
@@ -445,7 +445,7 @@ public class DoorControl : object_base {
 												{
 													tb.Activate(this.gameObject);											
 												}
-											next = tb.objInt().next;
+											next = tb.next;
 										}	
 									}	
 									else
@@ -478,7 +478,7 @@ public class DoorControl : object_base {
 						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
 						objInt().aud.Play();		
 					}
-					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordir() * CloseRotation,DoorTravelTime));
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordirection() * CloseRotation,DoorTravelTime));
 				}
 				else
 				{
@@ -489,10 +489,10 @@ public class DoorControl : object_base {
 					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),DoorTravelTime));
 				}
-				objInt().item_id-=8;
-				objInt().zpos-=24;
-				objInt().flags=0;
-				objInt().enchantment=0;
+				item_id-=8;
+				zpos-=24;
+				flags=0;
+				enchantment=0;
 				//state=false;
 				if (isPortcullis())
 				{
@@ -503,16 +503,16 @@ public class DoorControl : object_base {
 						}
 				}
 
-				if(objInt().link!=0)
+				if(link!=0)
 				{	//If it's link is to something that is not a lock then it is likely to be a trigger
 						if
 								(
-								(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.LOCK)
+								(ObjectLoader.GetItemTypeAt(link) != ObjectInteraction.LOCK)
 								&&
-								(ObjectLoader.GetItemTypeAt(objInt().link) != ObjectInteraction.AN_OPEN_TRIGGER)
+								(ObjectLoader.GetItemTypeAt(link) != ObjectInteraction.AN_OPEN_TRIGGER)
 								)
 						{
-							trigger_base tb= ObjectLoader.getObjectIntAt(objInt().link).GetComponent<trigger_base>();
+							trigger_base tb= ObjectLoader.getObjectIntAt(link).GetComponent<trigger_base>();
 							if (tb!=null)
 							{														
 								tb.Activate(this.gameObject);
@@ -520,7 +520,7 @@ public class DoorControl : object_base {
 						}
 						else
 						{//The object is linked to a lock. The next of the lock is the use trigger to use here
-								ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(objInt().link);
+								ObjectInteraction LockObj = ObjectLoader.getObjectIntAt(link);
 								if (LockObj!=null)
 								{
 										int next= LockObj.next;
@@ -541,7 +541,7 @@ public class DoorControl : object_base {
 																{
 																	tb.Activate(this.gameObject);											
 																}											
-																next = tb.objInt().next;
+																next = tb.next;
 														}
 
 												}	
@@ -561,9 +561,9 @@ public class DoorControl : object_base {
 		/// <summary>
 		/// Returns the multiplier for the door rotation
 		/// </summary>
-	int doordir()
+	int doordirection()
 	{
-		if (objInt().doordir==0)
+		if (doordir==0)
 		{
 			return 1;
 		}
@@ -711,8 +711,8 @@ public class DoorControl : object_base {
 			{
 				damage= (short) (damage/DR());
 			}
-		objInt().quality=(short)(objInt().quality-damage);
-		if ((objInt().quality<=0))
+		quality=(short)(quality-damage);
+		if ((quality<=0))
 			{
 				//locked=false;
 				UnlockDoor(true);
@@ -727,7 +727,7 @@ public class DoorControl : object_base {
 	/// </summary>
 	private short DR()
 	{
-		switch (objInt().item_id)
+		switch (item_id)
 		{
 		case 320://0
 		case 327:
@@ -776,24 +776,24 @@ public class DoorControl : object_base {
 	private string DoorQuality()
 	{//TODO:The figures here are based on food quality levels!
 		
-		if (objInt().quality == 0)
+		if (quality == 0)
 		{
 			return StringController.instance.GetString (5,0);//brken
 		}
-				if ((objInt().quality >=1) && (objInt().quality <15))
+				if ((quality >=1) && (quality <15))
 		{
 			return StringController.instance.GetString (5,1);//badly damaged
 		}
-				if ((objInt().quality >=15) && (objInt().quality <32))
+				if ((quality >=15) && (quality <32))
 		{
 			return StringController.instance.GetString (5,2);//damaged
 		}
-				if ((objInt().quality >=32) && (objInt().quality <=40))
+				if ((quality >=32) && (quality <=40))
 		{
 			return StringController.instance.GetString (5,3);//sturdy
 		}
 		
-				if ((objInt().quality >40) && (objInt().quality <48))
+				if ((quality >40) && (quality <48))
 		{
 			return StringController.instance.GetString (5,4);//massive?
 		}
@@ -860,9 +860,9 @@ public class DoorControl : object_base {
 				{
 				case ObjectInteraction.HIDDENDOOR:
 						{
-							if (objInt.tileX<=TileMap.TileMapSizeX)
+							if (objInt.ObjectTileX <= TileMap.TileMapSizeX)
 							{
-								textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture;
+								textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.ObjectTileX, objInt.ObjectTileY].wallTexture;
 							}
 							else
 							{
@@ -956,8 +956,8 @@ public class DoorControl : object_base {
 				//Allocate enough verticea and UVs for the faces
 				Vector3[] verts =new Vector3[6*4];
 				Vector2[] uvs =new Vector2[6*4];
-				int tileX=dc.objInt().tileX;
-				int tileY=dc.objInt().tileY;
+				int tileX=dc.ObjectTileX;
+				int tileY=dc.ObjectTileY;
 				if (tileX==TileMap.ObjectStorageTile){return;}
 				//int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
 				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
@@ -1136,7 +1136,7 @@ public class DoorControl : object_base {
 				//nmc.sharedMesh=mesh;		
 				float ResolutionZ = 128.0f;
 				float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
-				int newZpos=GameWorldController.instance.currentTileMap().Tiles[dc.objInt().tileX,dc.objInt().tileY].floorHeight * 4;
+				int newZpos=GameWorldController.instance.currentTileMap().Tiles[dc.ObjectTileX, dc.ObjectTileY].floorHeight * 4;
 				float BrushZ = 15f;
 				float offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
 				offZ= offZ/100.0f;

@@ -6,7 +6,7 @@ public class Shield : Equipment {
 
 	public override int GetActualSpellIndex ()
 	{
-		return objInt().link-240;
+		return link-240;
 	}
 
 
@@ -100,9 +100,9 @@ public class Shield : Equipment {
 
 		public override bool LookAt ()
 		{
-			if ( (_RES==GAME_UW1) && (objInt().item_id==Quest.TalismanShield))
+			if ( (_RES==GAME_UW1) && (item_id==Quest.TalismanShield))
 			{
-				objInt().heading=7;
+				heading=7;
 				switch(objInt().identity())
 				{
 				case ObjectInteraction.IdentificationFlags.Identified:

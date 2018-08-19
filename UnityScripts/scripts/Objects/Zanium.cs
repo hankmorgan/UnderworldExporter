@@ -12,10 +12,10 @@ public class Zanium : object_base {
 	public void SuckUpZanium()
 	{
 		//
-	 	ObjectInteraction someZanium=UWCharacter.Instance.playerInventory.findObjInteractionByID(objInt().item_id);
+	 	ObjectInteraction someZanium=UWCharacter.Instance.playerInventory.findObjInteractionByID(item_id);
 		if (someZanium!=null)
 		{//Add the zanium to the pile
-			someZanium.link += objInt().link;
+			someZanium.link += link;
 			someZanium.isquant=1;
 			objInt().consumeObject();
 			UWCharacter.Instance.playerInventory.Refresh();//Update the display

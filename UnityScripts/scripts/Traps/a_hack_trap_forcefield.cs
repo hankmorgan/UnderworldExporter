@@ -30,8 +30,8 @@ public class a_hack_trap_forcefield : a_hack_trap {
 								GameWorldController.instance.currentTileMap().Tiles,
 								GameWorldController.instance.CurrentObjectList().objInfo,
 								forcefieldtoMove.objectloaderinfo.index,
-								forcefieldtoMove.tileX,
-								forcefieldtoMove.tileY,
+								forcefieldtoMove.ObjectTileX,
+								forcefieldtoMove.ObjectTileY,
 								1
 						);
 				}
@@ -49,14 +49,14 @@ public class a_hack_trap_forcefield : a_hack_trap {
 		{
       if ((objList[i].InUseFlag==1) && (objList[i].instance!=null) && objList[i].item_id==365)
 			{
-								if (
-										(objList[i].instance.tileX== objInt().tileX)
-										&&
-										(objList[i].instance.tileY== objInt().tileY)
-								)
-								{
-										return objList[i].instance;
-								}
+				if (
+						(objList[i].instance.ObjectTileX == ObjectTileX)
+						&&
+						(objList[i].instance.ObjectTileY == ObjectTileY)
+				)
+				{
+						return objList[i].instance;
+				}
 			}
 		}
 		return null;

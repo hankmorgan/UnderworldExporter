@@ -8,13 +8,13 @@ public class Food : object_base {
 	{
 		base.Start();
 		//Fix to repair invalid food properties.
-		if  ((objInt().isquant==0) && (objInt().link<=1))
+		if  ((isquant==0) && (link<=1))
 		{
-			if ((objInt().item_id>=176) && (objInt().item_id<=192))
+			if ((item_id>=176) && (item_id<=192))
 			{
 					//Debug.Log("Fixing food item " + this.name);
-					objInt().isquant=1;
-					objInt().link=1;	
+					isquant=1;
+					link=1;	
 			}
 		}
 	}
@@ -32,7 +32,7 @@ public class Food : object_base {
 						}
 				default:
 						{//TODO:Identify the proper values to use here (5 is still to be figured out)
-								switch (objInt().item_id)	
+								switch (item_id)	
 								{
 								case 176://a_piece_of_meat_pieces_of_meat
 										return 16;
@@ -67,7 +67,7 @@ public class Food : object_base {
 		{//Eat if no object in hand or if the object in hand is this item.
 						
 								
-			switch(objInt().item_id)
+			switch(item_id)
 			{
 			case 191://Wine of compassion.
 				if (_RES==GAME_UW1)
@@ -160,7 +160,7 @@ public class Food : object_base {
     /// </summary>
     private void TasteUW1()
     {
-        switch (objInt().item_id)
+        switch (item_id)
         {
             case 184:// a_mushroom
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_));
@@ -193,7 +193,7 @@ public class Food : object_base {
 
     private void TasteUW2()
     {
-        switch (objInt().item_id)
+        switch (item_id)
         {
             case 185:// a_mushroom
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_));
@@ -208,7 +208,7 @@ public class Food : object_base {
     private void LeftOvers()
     {
         int LeftOverToCreate = -1;
-        switch (objInt().item_id)
+        switch (item_id)
         {
 
             case 176:
@@ -244,7 +244,7 @@ public class Food : object_base {
         switch (_RES)
         {
             case GAME_UW2:
-                switch (objInt().item_id)
+                switch (item_id)
                 {
                     case 192://plants
                         return base.LookAt();
@@ -257,7 +257,7 @@ public class Food : object_base {
             case GAME_UW1:
             default:
                 {
-                    switch (objInt().item_id)
+                    switch (item_id)
                     {
                         case 191://Wine of compassion
                             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_see_) + " " + StringController.instance.GetString(1, 264));
@@ -284,27 +284,27 @@ public class Food : object_base {
 		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
 	{
-		//	int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
-		//	int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+		//	int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+		//	int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
 			//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
 				int BaseStringNo=StringController.str__tasted_putrid_;
-		if (objInt().quality == 0)
+		if (quality == 0)
 			{
 				return StringController.instance.GetString (1,BaseStringNo);//worm
 			}
-		if ((objInt().quality >=1) && (objInt().quality <15))
+		if ((quality >=1) && (quality <15))
 			{
 				return StringController.instance.GetString (1,BaseStringNo+1);//rotten
 			}
-		if ((objInt().quality >=15) && (objInt().quality <32))
+		if ((quality >=15) && (quality <32))
 			{
 				return StringController.instance.GetString (1,BaseStringNo+2);//smelly
 			}
-		if ((objInt().quality >=32) && (objInt().quality <40))
+		if ((quality >=32) && (quality <40))
 			{
 				return StringController.instance.GetString (1,BaseStringNo+3);//day old
 			}
-		if ((objInt().quality >=40) && (objInt().quality <48))
+		if ((quality >=40) && (quality <48))
 			{
 				return StringController.instance.GetString (1,BaseStringNo+4);//fresh
 			}
@@ -321,27 +321,27 @@ public class Food : object_base {
 		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
 	private string foodSmellText()//
 	{
-		//int QualityClass= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityClass;
-		//int QualityType= GameWorldController.instance.commonObject.properties[objInt().item_id].QualityType;
+		//int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+		//int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
 		//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
-		if (objInt().quality == 0)
+		if (quality == 0)
 		{
 				return StringController.instance.GetString (5,18);//worm
 		}
-		if ((objInt().quality >=1) && (objInt().quality <15))
+		if ((quality >=1) && (quality <15))
 		{
 				return StringController.instance.GetString (5,19);//rotten
 		}
-		if ((objInt().quality >=15) && (objInt().quality <32))
+		if ((quality >=15) && (quality <32))
 		{
 				return StringController.instance.GetString (5,20);//smelly
 		}
-		if ((objInt().quality >=32) && (objInt().quality <40))
+		if ((quality >=32) && (quality <40))
 		{
 				return StringController.instance.GetString (5,21);//day old
 		}
 
-		if ((objInt().quality >=40) && (objInt().quality <48))
+		if ((quality >=40) && (quality <48))
 		{
 				return StringController.instance.GetString (5,22);//fresh
 		}
@@ -353,8 +353,8 @@ public class Food : object_base {
 
 	public override bool ApplyAttack (short damage)
 	{
-		objInt().quality-=damage;
-		if (objInt().quality<=0)
+		quality-=damage;
+		if (quality<=0)
 		{
 			ChangeType(213);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour

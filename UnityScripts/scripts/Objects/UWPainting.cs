@@ -48,7 +48,7 @@ public class UWPainting : Model3D {
 		{
 		//GameWorldController.instance.TmObjArt.RequestSprite(SpriteIndex);
 		case 0://Canvas
-			return GameWorldController.instance.MaterialObj[42 + (objInt().flags & 0x07)];			
+			return GameWorldController.instance.MaterialObj[42 + (flags & 0x07)];			
 		case 1://Frame
 			return GameWorldController.instance.MaterialObj[38];
 		}

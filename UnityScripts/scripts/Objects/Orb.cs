@@ -20,9 +20,9 @@ public class Orb : object_base {
 
 	public override bool LookAt ()
 	{
-		if (objInt().link!=0)
+		if (link!=0)
 		{
-			ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(objInt().link);
+			ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(link);
 			if (objIntLink!=null)
 			{
 				switch (objIntLink.GetItemType())
@@ -39,9 +39,9 @@ public class Orb : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			if (objInt().link!=0)
+			if (link!=0)
 			{
-				ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(objInt().link);
+				ObjectInteraction objIntLink = ObjectLoader.getObjectIntAt(link);
 				if (objIntLink!=null)
 				{
 					switch (objIntLink.GetItemType())

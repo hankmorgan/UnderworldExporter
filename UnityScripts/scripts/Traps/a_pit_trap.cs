@@ -20,13 +20,13 @@ public class a_pit_trap : trap_base {
 			TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
 			if (tileToChange.floorHeight==0)
 			{//create a tile at the floor height
-				tileToChange.floorHeight=(short)(objInt().zpos>>2);
-				tileToChange.floorTexture =(short)(objInt().owner & 0xf);
+				tileToChange.floorHeight=(short)(zpos>>2);
+				tileToChange.floorTexture =(short)(owner & 0xf);
 			}
 			else
 			{
 				tileToChange.floorHeight=0;	
-				tileToChange.floorTexture =(short)(objInt().quality & 0xf);
+				tileToChange.floorTexture =(short)(quality & 0xf);
 			}
 			tileToChange.TileNeedsUpdate();
 			Destroy (tile);

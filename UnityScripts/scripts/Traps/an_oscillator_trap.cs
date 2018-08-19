@@ -57,16 +57,16 @@ public class an_oscillator_trap : trap_base {
 		{
 				return;
 		}
-		if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2>=objInt().owner)
+		if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2>=owner)
 		{
-			objInt().x=0;	
+			xpos=0;	
 		}
-		else if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2<= objInt().quality )
+		else if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight/2<= quality )
 		{
-			objInt().x=1;	
+			xpos = 1;	
 		}
 
-		if (objInt().x==1)
+		if (xpos == 1)
 		{//moving up
 			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight+=2;		
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.3f,0f) ,0.1f));

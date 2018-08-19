@@ -130,7 +130,7 @@ public class Character : UWEBase {
 		}
 		else
 		{
-			Debug.Log("Invincible character damage is " + damage );
+			//Debug.Log("Invincible character damage is " + damage );
 		}
 		//Applies damage to the player.
 		

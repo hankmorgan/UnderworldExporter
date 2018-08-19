@@ -16,7 +16,7 @@ public class LightSource : object_base {
 	/// Is the light active
 	public bool IsOn()
 		{
-			switch (objInt().item_id)
+			switch (item_id)
 			{
 				case 144:
 				case 145:
@@ -57,16 +57,16 @@ public class LightSource : object_base {
 			else
 			{
 				if (Duration()!=0)
-				//if (objInt().item_id!=151)
+				//if (item_id!=151)
 				{//The taper never runs out
 					LightTimer-=Time.deltaTime;
 					if (LightTimer<=0)
 					{
-						objInt().quality--;
+						quality--;
 						LightTimer=LightTimerMax;
-						if (objInt().quality<=0)
+						if (quality<=0)
 						{
-							objInt().quality=0;
+							quality=0;
 							SetOff();
 						}
 					}	
@@ -114,7 +114,7 @@ public class LightSource : object_base {
 			switch (objIntUsed.GetItemType())
 			{
 			case ObjectInteraction.OIL:
-				if (objInt().item_id==149)//Lit torch
+				if (item_id==149)//Lit torch
 				{
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_think_it_is_a_bad_idea_to_add_oil_to_the_lit_torch_));	
 					return true ;
@@ -130,7 +130,7 @@ public class LightSource : object_base {
 		/// </summary>
 	public void SetOn()
 	{		
-		if (objInt().quality<=0)
+		if (quality<=0)
 		{//000~001~124~That light is already used up. \n
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_that_light_is_already_used_up_));
 			return;
@@ -144,7 +144,7 @@ public class LightSource : object_base {
 		GetInventorySlotForLightSource (pInv, ref invSlot);
 		if (invSlot != null)
 			{
-			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (objInt().link<=1)) || (objInt().isEnchanted()==true))
+			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (link<=1)) || (objInt().isEnchanted()==true))
 			{//Is a quantity of one or not a quantity/
 					PutLightSourceInSlot (pInv, invSlot);
 			}
@@ -174,9 +174,9 @@ public class LightSource : object_base {
 		split.name =  ObjectInteraction.UniqueObjectName(split.GetComponent<ObjectInteraction>());  //split.name + "_" + UWCharacter.Instance.summonCount++;
 		split.GetComponent<ObjectInteraction> ().link = 1;
 		//Increment and decrement the object count as appropiate;
-		objInt ().link--;
-		if (objInt ().link < 0) {
-			objInt ().link = 0;
+		link--;
+		if (link < 0) {
+			link = 0;
 		}
 		split.transform.parent = this.transform.parent;
 		//Activate the split instead
@@ -188,9 +188,9 @@ public class LightSource : object_base {
 	{
 		pInv.RemoveItem (this.name);
 		pInv.SetObjectAtSlot (invSlot.slotIndex, this.name);
-		objInt ().inventorySlot = invSlot.slotIndex;
-		objInt ().item_id = objInt ().item_id + 4;
-		objInt ().InvDisplayIndex = objInt ().item_id;
+		objInt().inventorySlot = invSlot.slotIndex;
+		item_id = item_id + 4;
+		objInt().InvDisplayIndex = item_id;
 	}
 
 		/// <summary>
@@ -223,23 +223,23 @@ public class LightSource : object_base {
 	public void SetOff()
 	{
 		//IsOn=false;
-		//objInt().item_id=ItemIdOff;
+		//item_id=ItemIdOff;
 		//objInt().InvDisplayIndex=ItemIdOff;
-		objInt().item_id=objInt().item_id-4;
-		objInt().InvDisplayIndex=objInt().item_id;
-		objInt().WorldDisplayIndex=objInt().item_id;
-		objInt().isquant=1;
+		item_id=item_id-4;
+		objInt().InvDisplayIndex=item_id;
+		objInt().WorldDisplayIndex=item_id;
+		isquant=1;
 		objInt().RefreshAnim();
-		//Brightness=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness;
-		//duration=GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;
+		//Brightness=GameWorldController.instance.objDat.lightSourceStats[item_id-144].brightness;
+		//duration=GameWorldController.instance.objDat.lightSourceStats[item_id-144].duration;
 		UWCharacter.Instance.playerInventory.UpdateLightSources();
 	}
 
 	public override bool LookAt()
 	{
-				if ( (_RES==GAME_UW1) && ((objInt().item_id==Quest.TalismanTaper) || (objInt().item_id==Quest.TalismanTaperLit) ))
+				if ( (_RES==GAME_UW1) && ((item_id==Quest.TalismanTaper) || (item_id==Quest.TalismanTaperLit) ))
 				{
-						objInt().heading=7;
+						heading=7;
 						switch(objInt().identity())
 						{
 						case ObjectInteraction.IdentificationFlags.Identified:
@@ -263,24 +263,24 @@ public class LightSource : object_base {
 	private string lightStatusText()
 	{//The quality string of the light Eg is it spent or not.
 
-			if (objInt().quality == 0)
+			if (quality == 0)
 			{
 				return StringController.instance.GetString (5,60);//burned out
 			}
-			if ((objInt().quality >=1) && (objInt().quality <15))
+			if ((quality >=1) && (quality <15))
 			{
 				return StringController.instance.GetString (5,61);//nearly spent
 			}
-			if ((objInt().quality >=15) && (objInt().quality <32))
+			if ((quality >=15) && (quality <32))
 			{
 				return StringController.instance.GetString (5,62);//half burned
 			}
-			if ((objInt().quality >=32) && (objInt().quality <49))
+			if ((quality >=32) && (quality <49))
 			{
 				return StringController.instance.GetString (5,63);//somewhat used
 			}
 
-			if ((objInt().quality >=50) && (objInt().quality <64))
+			if ((quality >=50) && (quality <64))
 			{
 				return StringController.instance.GetString (5,64);//hardly used
 			}
@@ -314,12 +314,12 @@ public class LightSource : object_base {
 
 		public float Brightness()
 		{
-			return (float)GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].brightness * 1.5f;		
+			return (float)GameWorldController.instance.objDat.lightSourceStats[item_id-144].brightness * 1.5f;		
 		}
 
 		public int Duration()
 		{
-			return GameWorldController.instance.objDat.lightSourceStats[objInt().item_id-144].duration;	
+			return GameWorldController.instance.objDat.lightSourceStats[item_id-144].duration;	
 		}
 
 	public override bool DropEvent ()

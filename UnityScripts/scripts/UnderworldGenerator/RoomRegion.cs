@@ -62,11 +62,11 @@ public class RoomRegion : Region
       /*  CaveStyler cs = new CaveStyler();
         int[,] result = cs.Style(dimX,dimY);
         
-        for (int xPos=0; xPos <= result.GetUpperBound(0); xPos++)
+        for (int OxPos=0; OxPos <= result.GetUpperBound(0); OxPos++)
         {
-            for (int yPos = 0; yPos <= result.GetUpperBound(1); yPos++)
+            for (int OyPos = 0; OyPos <= result.GetUpperBound(1); OyPos++)
             {
-                UnderworldGenerator.instance.mappings[x + xPos, y + yPos].TileLayoutMap = result[xPos, yPos];
+                UnderworldGenerator.instance.mappings[x + OxPos, y + OyPos].TileLayoutMap = result[OxPos, OyPos];
             }
         }*/
     //}

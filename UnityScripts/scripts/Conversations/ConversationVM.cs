@@ -469,7 +469,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         if (npc.npc_whoami == 0)
         {
-            currConv = 256 + (npc.objInt().item_id - 64);
+            currConv = 256 + (npc.item_id - 64);
             npcname = StringController.instance.GetSimpleObjectNameUW(npc.objInt());
         }
         else
@@ -568,7 +568,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     //else
                     //{
                     //    //head in genhead.gr
-                    //    int HeadToUse = npc.objInt().item_id - 64;
+                    //    int HeadToUse = npc.item_id - 64;
                     //    if (HeadToUse > 59)
                     //    {
                     //        HeadToUse = 0;
@@ -588,7 +588,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     else
                     {
                         //head in genhead.gr
-                        int HeadToUse = npc.objInt().item_id - 64;
+                        int HeadToUse = npc.item_id - 64;
                         if (HeadToUse > 59)
                         {
                             HeadToUse = 0;
@@ -3265,7 +3265,7 @@ return value appears to have something to do with if the door is broken or not.
                     DC.CloseDoor(DoorControl.DefaultDoorTravelTime);
                     DC.LockDoor();
                 }
-                if (DC.objInt().quality == 0)
+                if (DC.quality == 0)
                 {
                     return 0;
                 }

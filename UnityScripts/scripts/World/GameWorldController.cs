@@ -450,7 +450,7 @@ public class GameWorldController : UWEBase
 
     public event_processor events;
 
-    private int startX = -1; private int startY = -1;
+    private int startX = -1; private int startY = -1; private int StartHeight = -1;
 
 
     void LoadPath(string _RES)
@@ -1029,13 +1029,6 @@ public class GameWorldController : UWEBase
                     {//load an empty level
                      //TODO:
                     }
-
-                    //Original version
-                    //	Tilemaps[newLevelNo].BuildTileMapUW(lev_ark_file_data, newLevelNo);
-                    //	objectList[newLevelNo]=new ObjectLoader();
-                    //	objectList[newLevelNo].LoadObjectList( Tilemaps[newLevelNo],lev_ark_file_data);	
-
-
                 }
                 else
                 {
@@ -1107,10 +1100,20 @@ public class GameWorldController : UWEBase
             {
                 float targetX = (float)startX * 1.2f + 0.6f;
                 float targetY = (float)startY * 1.2f + 0.6f;
-                float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
 
-                UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
-                //Debug.Log("Spawning at " + UWCharacter.Instance.transform.position);
+                float Height;//= ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
+                if (StartHeight == -1)
+                {
+                    Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
+                }
+                else
+                {
+                    Height = (float)StartHeight * 0.15f;
+                }
+
+
+                UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
+               // Debug.Log("Spawning at " + UWCharacter.Instance.transform.position + " using floorheight " + GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY));
                 UWCharacter.Instance.TeleportPosition = new Vector3(targetX, Height + 0.1f, targetY);
                 if (EnableUnderworldGenerator)
                 {
@@ -1133,19 +1136,9 @@ public class GameWorldController : UWEBase
 
             if ((bGenNavMeshes) && (!EditorMode))
             {
-                //if (!GameWorldController.instance.AtMainMenu)
-                //{//Force the nav meshes to update in 5 frames time to fix bug with nav meshes of two levels merging.
-                //GenNavMeshNextFrame=5;	
-                //}
-
-                //GenerateNavmesh(NavRigLand);
-                //GenerateNavmesh(NavRigWater);
-                //GenerateNavmesh(navmeshsurface,256);
-                //GenerateNavMeshes();
                 string newSignature = GameWorldController.instance.currentTileMap().getSignature();
                 if (newSignature != LevelSignature)
                 {
-                    //Debug.Log("Generating navmesh");
                     NavMeshReady = false;
                     StartCoroutine(UpdateNavMeshes());
                 }
@@ -1183,19 +1176,26 @@ public class GameWorldController : UWEBase
     /// <param name="newTileY">New tile y.</param>
     public void SwitchLevel(short newLevelNo, short newTileX, short newTileY)
     {
-
-        //float targetX=(float)newTileX*1.2f + 0.6f;
-        //float targetY= (float)newTileY*1.2f + 0.6f;
-        //float Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(newTileX,newTileY)))*0.15f;
-
-        //UWCharacter.Instance.transform.position=new Vector3(targetX,Height+0.05f,targetY);
-        //UWCharacter.Instance.TeleportPosition=new Vector3(targetX,Height+0.05f,targetY);
-
         startX = newTileX;
         startY = newTileY;
+        StartHeight = -1;
         SwitchLevel(newLevelNo);
     }
 
+    /// <summary>
+    /// Switchs the level and puts the player at the specified height
+    /// </summary>
+    /// <param name="newLevelNo"></param>
+    /// <param name="newTileX"></param>
+    /// <param name="newTileY"></param>
+    /// <param name="newStartHeight"></param>
+    public void SwitchLevel(short newLevelNo, short newTileX, short newTileY, short newStartHeight)
+    {
+        startX = newTileX;
+        startY = newTileY;
+        StartHeight = newStartHeight;
+        SwitchLevel(newLevelNo);
+    }
 
     static void CleanUpMagicProjectiles()
     {
@@ -2396,8 +2396,8 @@ public class GameWorldController : UWEBase
                 writer.WriteLine("\t\t\t<Position>");
                 writer.WriteLine("\t\t\t\t<tileX>" + objList[o].tileX + "</tileX>");
                 writer.WriteLine("\t\t\t\t<tileY>" + objList[o].tileY + "</tileY>");
-                writer.WriteLine("\t\t\t\t<xpos>" + objList[o].x + "</xpos>");
-                writer.WriteLine("\t\t\t\t<ypos>" + objList[o].y + "</ypos>");
+                writer.WriteLine("\t\t\t\t<xpos>" + objList[o].xpos + "</xpos>");
+                writer.WriteLine("\t\t\t\t<ypos>" + objList[o].ypos + "</ypos>");
                 writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");
                 writer.WriteLine("\t\t\t</Position>");
                 writer.WriteLine("\t\t\t<Quality>" + objList[o].quality + "</Quality>");

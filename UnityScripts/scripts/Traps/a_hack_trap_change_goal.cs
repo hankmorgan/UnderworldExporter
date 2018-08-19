@@ -14,9 +14,9 @@ public class a_hack_trap_change_goal : a_hack_trap {
         NPC[] foundNPCs = GameWorldController.instance.DynamicObjectMarker().GetComponentsInChildren<NPC>();
         for (int i = 0; i < foundNPCs.GetUpperBound(0); i++)
         {            
-            if (foundNPCs[i].npc_whoami == objInt().zpos)
+            if (foundNPCs[i].npc_whoami == zpos)
             {
-                foundNPCs[i].npc_goal= (short)objInt().owner;
+                foundNPCs[i].npc_goal= (short)owner;
             }
         }
     }

@@ -21,10 +21,10 @@ public class a_text_string_trap : trap_base {
 				switch (_RES)
 				{
 				case GAME_UW2:
-					StringNo=(32*objInt().quality + objInt().owner);//I hope.
+					StringNo=(32*quality + owner);//I hope.
 					break;
 				default:
-					StringNo=(64*GameWorldController.instance.LevelNo)+objInt().owner;	
+					StringNo=(64*GameWorldController.instance.LevelNo)+owner;	
 					break;
 				}
 
@@ -33,7 +33,7 @@ public class a_text_string_trap : trap_base {
 
 	public override void PostActivate (object_base src)
 	{//Do not destroy.
-		if (((objInt().flags >> 2) & 0x1) ==1)
+		if (((flags >> 2) & 0x1) ==1)
 		{
 			//This string will trigger only once and will destroy all triggers linked to it as well as itself
 			ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;

@@ -9,8 +9,8 @@ public class Sign : Decal {
 		BoxCollider bx = this.GetComponent<BoxCollider>();
 		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
 		bx.center= new Vector3(0.0f,0.15f,0.0f);
-		//setSprite(this.GetComponentInChildren<SpriteRenderer>(),_RES + "/Sprites/tmobj/tmobj_" + (20 + (objInt().flags & 0x07)));
-		setSpriteTMOBJ(this.GetComponentInChildren<SpriteRenderer>(),(20 + (objInt().flags & 0x07)));
+		//setSprite(this.GetComponentInChildren<SpriteRenderer>(),_RES + "/Sprites/tmobj/tmobj_" + (20 + (flags & 0x07)));
+		setSpriteTMOBJ(this.GetComponentInChildren<SpriteRenderer>(),(20 + (flags & 0x07)));
 	}
 
 
@@ -32,14 +32,14 @@ public class Sign : Decal {
 		case GAME_UW2:
 			{
 				//TODO: Need to figure out how the "sign/writing/plaque" etc prefix works
-				if (objInt().isquant==1)
+				if (isquant==1)
 				{//This is a normal sign
-						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,link - 0x200));
 						return true;		
 				}
 				else
 				{//This is linked to a trigger that spouts some nonsense.
-					ObjectInteraction linkObj = ObjectLoader.getObjectIntAt(objInt().link);
+					ObjectInteraction linkObj = ObjectLoader.getObjectIntAt(link);
 					if (linkObj!=null)
 					{
 						switch (linkObj.GetItemType())
@@ -59,7 +59,7 @@ public class Sign : Decal {
 			}
 		default:
 			{
-				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().link - 0x200));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,link - 0x200));
 				return true;								
 			}
 

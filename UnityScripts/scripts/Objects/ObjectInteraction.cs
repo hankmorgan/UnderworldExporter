@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-//using RAIN.BehaviorTrees;
-//using RAIN.Core;
-//using RAIN.Minds;
-//using RAIN.Navigation;
 
 /// <summary>
 /// Object interaction. Does a lot....
@@ -13,10 +9,7 @@ using UnityEngine.UI;
 public class ObjectInteraction : UWEBase
 {
 
-    //public int debugindex;
-
     public static bool PlaySoundEffects = true;
-
 
     public const int NPC_TYPE = 0;
     public const int WEAPON = 1;
@@ -208,7 +201,7 @@ public class ObjectInteraction : UWEBase
 
     //UW Props
 
-    [Header("UW Properties")]
+    [Header("UW Static Properties")]
     public int item_id; //0-8
     public short flags; //9-12
     public short enchantment;   //12
@@ -218,8 +211,8 @@ public class ObjectInteraction : UWEBase
 
     public short zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
     public short heading;   //        7- 9   3   "heading"   Heading (*45 deg)
-    public short x; //   10-12   3   "ypos"      Object Y position (0-7)
-    public short y; //  13-15   3   "xpos"      Object X position (0-7)
+    public short xpos; //   10-12   3   "ypos"      Object Y position (0-7)
+    public short ypos; //  13-15   3   "xpos"      Object X position (0-7)
                     //0004 quality / chain
     public short quality;   //;     0- 5   6   "quality"   Quality
     public int next; //    6-15   10  "next"      Index of next object in chain
@@ -230,6 +223,50 @@ public class ObjectInteraction : UWEBase
     public int link;    //also quantity
 
 
+    //Mobile object information.
+    //Moved here to properly support objects that are in motion.
+    [Header("UW Mobile Properties")]
+    public short npc_whoami;
+    public short npc_voidanim;
+    public short npc_xhome;        //  x coord of home tile
+    public short npc_yhome;        //  y coord of home tile
+    public short npc_hunger;
+    public short npc_health;
+    public short npc_hp;
+    public short npc_arms;          // (not used in uw1)
+    public short npc_power;
+    public short npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+    public short npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+    public short npc_gtarg;         //goal target; 1:player
+    public short npc_heading;
+    public short npc_talkedto;      // is 1 when player already talked to npc
+    public short npc_level;
+    public short npc_name;       //    (not used in uw1)
+    public short npc_height;
+
+    //Unknown/research
+    public short MobileUnk01;
+    public short MobileUnk02;
+    public short MobileUnk03;
+    public short MobileUnk04;
+    public short MobileUnk05;
+    public short MobileUnk06;
+    public short MobileUnk07;
+    public short MobileUnk08;
+    public short MobileUnk09;
+    public short MobileUnk11;
+    public short MobileUnk12;
+    public short MobileUnk13;
+    public short MobileUnk14;
+
+    //Projectiles are stored in the mobile object area.
+    //The following properties are currently known
+    [Header("Projectile")]
+    public short ProjectileHeadingMajor;
+    public short ProjectileHeadingMinor;
+    public short Projectile_Speed;
+    public short Projectile_Pitch;
+    public short Projectile_Sign;
 
     [Header("Display Settings")]
     /// <summary>
@@ -271,8 +308,8 @@ public class ObjectInteraction : UWEBase
     //	public short InUseFlag;
 
     [Header("Positioning")]
-    public short tileX; //Position of the object on the tilemap
-    public short tileY;
+    public short ObjectTileX; //Position of the object on the tilemap
+    public short ObjectTileY;
 
     /// <summary>
     /// The start position of the object when it became awake.
@@ -696,11 +733,11 @@ public class ObjectInteraction : UWEBase
     {
         object_base item = null;
         item = this.GetComponent<object_base>();
-        if (TileMap.ValidTile(tileX, tileY))
+        if (TileMap.ValidTile(ObjectTileX, ObjectTileY))
         {
-            if (GameWorldController.instance.currentTileMap().Tiles[tileX, tileY].PressureTriggerIndex != 0)
+            if (GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex != 0)
             {
-                ObjectInteraction obj = ObjectLoader.getObjectIntAt(GameWorldController.instance.currentTileMap().Tiles[tileX, tileY].PressureTriggerIndex);
+                ObjectInteraction obj = ObjectLoader.getObjectIntAt(GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex);
                 if (obj.GetComponent<a_pressure_trigger>() != null)
                 {
                     obj.GetComponent<a_pressure_trigger>().ReleaseWeightFrom();
@@ -1544,55 +1581,45 @@ public class ObjectInteraction : UWEBase
     /// <param name="myObj">My object.</param>
     /// <param name="objInt">Object int.</param>
     /// <param name="objI">Object i.</param>
-    public static void SetMobileProps(GameObject myObj, object_base npc, ObjectInteraction objInt, ObjectLoaderInfo objI)
+    public static void SetMobileProps(GameObject myObj, ObjectInteraction objInt, ObjectLoaderInfo objI)
     {
-        //NPC npc = myObj.GetComponent<NPC>();
-        if (npc != null)
-        {
-            npc.npc_whoami = objI.npc_whoami;
-            npc.npc_voidanim = objI.npc_voidanim;
-            npc.npc_xhome = objI.npc_xhome;        //  x coord of home tile
-            npc.npc_yhome = objI.npc_yhome;        //  y coord of home tile
-            npc.npc_hunger = objI.npc_hunger;
-            npc.npc_health = objI.npc_health;
-            npc.npc_hp = objI.npc_hp;
-            npc.npc_arms = objI.npc_arms;          // (not used in uw1)
-            npc.npc_power = objI.npc_power;
-            npc.npc_goal = objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-            npc.npc_attitude = objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-            npc.npc_gtarg = objI.npc_gtarg;         //goal target; 1:player
-            npc.npc_talkedto = objI.npc_talkedto;      // is 1 when player already talked to npc
-            npc.npc_level = objI.npc_level;
-            npc.npc_name = objI.npc_name;       //    (not used in uw1)
-                                                //npc.NavMeshRegion=NavMeshRegion;
-            npc.npc_heading = objI.npc_heading;
-            //npc.gtargName=gtargName;
-            npc.Projectile_Speed = objI.Projectile_Speed;
-            npc.Projectile_Pitch = objI.Projectile_Pitch;
-            npc.ProjectileHeadingMinor = objI.ProjectileHeadingMinor;
-            npc.npc_height = objI.npc_height;
+        objInt.npc_whoami = objI.npc_whoami;
+        objInt.npc_voidanim = objI.npc_voidanim;
+        objInt.npc_xhome = objI.npc_xhome;        //  x coord of home tile
+        objInt.npc_yhome = objI.npc_yhome;        //  y coord of home tile
+        objInt.npc_hunger = objI.npc_hunger;
+        objInt.npc_health = objI.npc_health;
+        objInt.npc_hp = objI.npc_hp;
+        objInt.npc_arms = objI.npc_arms;          // (not used in uw1)
+        objInt.npc_power = objI.npc_power;
+        objInt.npc_goal = objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+        objInt.npc_attitude = objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+        objInt.npc_gtarg = objI.npc_gtarg;         //goal target; 1:player
+        objInt.npc_talkedto = objI.npc_talkedto;      // is 1 when player already talked to npc
+        objInt.npc_level = objI.npc_level;
+        objInt.npc_name = objI.npc_name;       //    (not used in uw1)
+        objInt.npc_heading = objI.npc_heading;
+        objInt.Projectile_Speed = objI.Projectile_Speed;
+        objInt.Projectile_Pitch = objI.Projectile_Pitch;
+        objInt.ProjectileHeadingMinor = objI.ProjectileHeadingMinor;
+        objInt.npc_height = objI.npc_height;
 
-            npc.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
-            npc.MobileUnk01 = objI.MobileUnk01;
-            npc.MobileUnk02 = objI.MobileUnk02;
-            npc.MobileUnk03 = objI.MobileUnk03;
-            npc.MobileUnk04 = objI.MobileUnk04;
-            npc.MobileUnk05 = objI.MobileUnk05;
-            npc.MobileUnk06 = objI.MobileUnk06;
-            npc.MobileUnk07 = objI.MobileUnk07;
-            npc.MobileUnk08 = objI.MobileUnk08;
-            npc.MobileUnk09 = objI.MobileUnk09;
-            npc.Projectile_Sign = objI.Projectile_Sign;
-            npc.MobileUnk11 = objI.MobileUnk11;
-            npc.MobileUnk12 = objI.MobileUnk12;
-            npc.MobileUnk13 = objI.MobileUnk13;
-            npc.MobileUnk14 = objI.MobileUnk14;
+        objInt.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
+        objInt.MobileUnk01 = objI.MobileUnk01;
+        objInt.MobileUnk02 = objI.MobileUnk02;
+        objInt.MobileUnk03 = objI.MobileUnk03;
+        objInt.MobileUnk04 = objI.MobileUnk04;
+        objInt.MobileUnk05 = objI.MobileUnk05;
+        objInt.MobileUnk06 = objI.MobileUnk06;
+        objInt.MobileUnk07 = objI.MobileUnk07;
+        objInt.MobileUnk08 = objI.MobileUnk08;
+        objInt.MobileUnk09 = objI.MobileUnk09;
+        objInt.Projectile_Sign = objI.Projectile_Sign;
+        objInt.MobileUnk11 = objI.MobileUnk11;
+        objInt.MobileUnk12 = objI.MobileUnk12;
+        objInt.MobileUnk13 = objI.MobileUnk13;
+        objInt.MobileUnk14 = objI.MobileUnk14;
 
-            //	for (int i=0; i<=objI.NPC_DATA.GetUpperBound(0); i++)
-            //	{
-            //		npc.NPC_DATA[i]=objI.NPC_DATA[i];
-            //	}
-        }
     }
 
 
@@ -1669,15 +1696,15 @@ public class ObjectInteraction : UWEBase
         //{
         //		return;
         //}
-        tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x / 1.2f);
-        tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z / 1.2f);
+        ObjectTileX = (short)Mathf.FloorToInt(this.transform.localPosition.x / 1.2f);
+        ObjectTileY = (short)Mathf.FloorToInt(this.transform.localPosition.z / 1.2f);
 
 
         //float dist =Vector3.Distance(this.transform.position,startPos);
         if (
                     //(Vector3.Distance(this.transform.position,startPos)>0.2f)
                     //&& 
-                    (tileX != TileMap.ObjectStorageTile)
+                    (ObjectTileX != TileMap.ObjectStorageTile)
             )
         //if ((tileX!=TileMap.ObjectStorageTile))
         /*	{//No movement or not on the map Just update heading.
@@ -1694,13 +1721,13 @@ public class ObjectInteraction : UWEBase
             //Updates the tilex & tileY,
             //tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
             //tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
-            if ((tileX > TileMap.TileMapSizeX) | (tileX < 0))
+            if ((ObjectTileX > TileMap.TileMapSizeX) | (ObjectTileX < 0))
             {//Object is off map.
-                tileX = TileMap.ObjectStorageTile;
+                ObjectTileX = TileMap.ObjectStorageTile;
             }
-            if ((tileY > TileMap.TileMapSizeX) | (tileY < 0))
+            if ((ObjectTileY > TileMap.TileMapSizeX) | (ObjectTileY < 0))
             {
-                tileY = TileMap.ObjectStorageTile;
+                ObjectTileY = TileMap.ObjectStorageTile;
             }
             //updates the x,y and zpos
             switch (GetItemType())
@@ -1718,25 +1745,25 @@ public class ObjectInteraction : UWEBase
                     break;
             }
 
-            if ((tileX < TileMap.ObjectStorageTile) && (tileY < TileMap.ObjectStorageTile))
+            if ((ObjectTileX < TileMap.ObjectStorageTile) && (ObjectTileY < TileMap.ObjectStorageTile))
             {//Update x & y
              //Remove corner
-                float offX = (this.transform.position.x) - ((float)(tileX * 1.2f));
-                x = (short)(7f * (offX / 1.2f));
+                float offX = (this.transform.position.x) - ((float)(ObjectTileX * 1.2f));
+                xpos = (short)(7f * (offX / 1.2f));
 
-                float offY = (this.transform.position.z) - ((float)(tileY * 1.2f));
-                y = (short)(7f * (offY / 1.2f));
+                float offY = (this.transform.position.z) - ((float)(ObjectTileY * 1.2f));
+                ypos = (short)(7f * (offY / 1.2f));
             }
             //updates the heading.
             heading = (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y / 45f);
 
         }
         objectloaderinfo.heading = heading;
-        objectloaderinfo.x = x;
-        objectloaderinfo.y = y;
+        objectloaderinfo.xpos = xpos;
+        objectloaderinfo.ypos = ypos;
         objectloaderinfo.zpos = zpos;
-        objectloaderinfo.tileX = tileX;
-        objectloaderinfo.tileY = tileY;
+        objectloaderinfo.tileX = ObjectTileX;
+        objectloaderinfo.tileY = ObjectTileY;
         startPos = this.transform.position;
     }
 
@@ -1773,13 +1800,13 @@ public class ObjectInteraction : UWEBase
         objInt.invis = currObj.invis;
         //objInt.texture=currObj.texture;
         objInt.zpos = currObj.zpos;
-        objInt.x = currObj.x;
-        objInt.y = currObj.y;
+        objInt.xpos = currObj.xpos;
+        objInt.ypos = currObj.ypos;
         objInt.heading = currObj.heading;
         objInt.zpos = currObj.zpos;
         objInt.owner = currObj.owner;
-        objInt.tileX = currObj.tileX;
-        objInt.tileY = currObj.tileY;
+        objInt.ObjectTileX = currObj.tileX;
+        objInt.ObjectTileY = currObj.tileY;
         objInt.objectloaderinfo = currObj;//link back to the list directly.
         objInt.next = currObj.next;
 
@@ -2508,7 +2535,7 @@ public class ObjectInteraction : UWEBase
                 {
                     skipRotate = true;
                 }
-                SetMobileProps(myObj, myObj.GetComponent<object_base>(), objInt, currObj);
+                SetMobileProps(myObj, objInt, currObj);
                 if (myObj.GetComponent<Rigidbody>() != null)
                 {
                     switch (currObj.GetItemType())
@@ -2705,7 +2732,7 @@ public class ObjectInteraction : UWEBase
             case ObjectInteraction.DOOR:
             case ObjectInteraction.HIDDENDOOR:
             case ObjectInteraction.PORTCULLIS:
-                return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3");
+                return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
             default:
                 return currObj.getDesc() + System.Guid.NewGuid();
         }

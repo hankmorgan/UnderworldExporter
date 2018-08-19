@@ -9,7 +9,7 @@ public class Ring : Equipment {
 	
 	public override int GetActualSpellIndex ()
 	{
-		return objInt().link-512;
+		return link-512;
 	}
 
 	public override bool EquipEvent (short slotNo)
@@ -62,7 +62,7 @@ public class Ring : Equipment {
 
 	public override bool UnEquipEvent (short slotNo)
 	{
-		if (((slotNo ==9) || (slotNo ==10)) && (objInt().item_id!=54))//Not the ring of humility
+		if (((slotNo ==9) || (slotNo ==10)) && (item_id!=54))//Not the ring of humility
 		{
 		if (SpellEffectApplied!=null)
 			{
@@ -90,9 +90,9 @@ public class Ring : Equipment {
 
 		public override bool LookAt ()
 		{
-				if ( (_RES==GAME_UW1) && (objInt().item_id==Quest.TalismanRing))
+				if ( (_RES==GAME_UW1) && (item_id==Quest.TalismanRing))
 				{
-						objInt().heading=7;
+						heading=7;
 						switch(objInt().identity())
 						{
 						case ObjectInteraction.IdentificationFlags.Identified:

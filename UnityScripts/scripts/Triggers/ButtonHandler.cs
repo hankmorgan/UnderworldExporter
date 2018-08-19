@@ -30,7 +30,7 @@ public class ButtonHandler : Decal {
 		BoxCollider bx = this.GetComponent<BoxCollider>();
 		bx.size= new Vector3(0.3f, 0.3f, 0.1f);
 				bx.center= new Vector3(0f, 0.16f, 0f);
-		objInt().flags=objInt().flags;
+		flags=flags;
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//
 		//Var=GetComponent<ObjectVariables>();
@@ -40,16 +40,16 @@ public class ButtonHandler : Decal {
 		if (isRotarySwitch()==false)
 		{
 			//set sprites ids
-			if ((objInt().item_id >= 368) && (objInt().item_id <= 375))
+			if ((item_id >= 368) && (item_id <= 375))
 			{//is an off version 
-				itemdIDOff=objInt().item_id-368;
-				itemdIDOn=objInt().item_id-368+8;	
+				itemdIDOff=item_id-368;
+				itemdIDOn=item_id-368+8;	
 				isOn=false;
 			}
 			else
 			{
-				itemdIDOff=objInt().item_id-368-8;
-				itemdIDOn=objInt().item_id-368;	
+				itemdIDOff=item_id-368-8;
+				itemdIDOn=item_id-368;	
 				isOn=true;
 			}
 			if (isOn==true)
@@ -65,7 +65,7 @@ public class ButtonHandler : Decal {
 		{
 			//Populate the array of item ids
 						int StartImageId;
-						if (objInt().item_id==353)
+						if (item_id==353)
 						{
 								StartImageId=4;	
 						}
@@ -77,7 +77,7 @@ public class ButtonHandler : Decal {
 						{
 								RotaryImageIDs[i] =StartImageId+i;	
 						}
-			setRotarySprite(objInt().flags);
+			setRotarySprite(flags);
 		}
 	}
 
@@ -96,9 +96,9 @@ public class ButtonHandler : Decal {
 				}
 				else
 				{
-						if(currentItemID!= objInt().flags)
+						if(currentItemID!= flags)
 						{
-							setRotarySprite(objInt().flags);
+							setRotarySprite(flags);
 						}
 				}
 		}
@@ -108,7 +108,7 @@ public class ButtonHandler : Decal {
 		{
 				//353
 				//354
-				switch(objInt().item_id)
+				switch(item_id)
 				{
 				case 353:
 				case 354:
@@ -122,7 +122,7 @@ public class ButtonHandler : Decal {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-			if (objInt().invis==0)
+			if (invis==0)
 			{
 				return Activate (this.gameObject);								
 			}
@@ -141,8 +141,8 @@ public class ButtonHandler : Decal {
 	{
 	//public void LookAt()
 		//Generally gives the object description but depending on the trigger target type it may activate (lookat trigger)
-						//GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
-		GameObject triggerObj= ObjectLoader.getGameObjectAt(objInt().link);
+						//GameObject triggerObj= ObjectLoader.getObjectIntAt(link).gameObject;
+		GameObject triggerObj= ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
 			ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
@@ -167,14 +167,14 @@ public class ButtonHandler : Decal {
 
 	public override bool Activate(GameObject src)
 	{
-		if (objInt().link!=0)
+		if (link!=0)
 		{
 		
-		if (ObjectLoader.getGameObjectAt(objInt().link)==null)
+		if (ObjectLoader.getGameObjectAt(link)==null)
 			{
 				return false;
 			}
-			GameObject triggerObj= ObjectLoader.getObjectIntAt(objInt().link).gameObject;
+			GameObject triggerObj= ObjectLoader.getObjectIntAt(link).gameObject;
 			if (triggerObj==null)
 			{
 				return true;//Cannot activate.
@@ -193,19 +193,19 @@ public class ButtonHandler : Decal {
 				{
 					triggerObj.GetComponent<trigger_base>().Activate(this.gameObject);		
 				}
-					//triggerObj.GetComponent<trigger_base>().objInt().flags=objInt().flags;//Not sure this needs to be done?				
+					//triggerObj.GetComponent<trigger_base>().flags=flags;//Not sure this needs to be done?				
 			}
 		}
 
 		if (isRotarySwitch())
 		{
-			if (objInt().flags == 7)
+			if (flags == 7)
 			{
-				objInt().flags=0;
+				flags=0;
 			}
 			else
 			{
-				objInt().flags++;
+				flags++;
 			}	
 		}
 
@@ -215,18 +215,18 @@ public class ButtonHandler : Decal {
 			{
 				isOn=true;
 				setSprite(itemdIDOn);
-				objInt().item_id+=8;
+				item_id+=8;
 			}
 			else
 			{
 				isOn=false;
 				setSprite(itemdIDOff);
-				objInt().item_id-=8;
+				item_id-=8;
 			}
 		}
 		else
 		{
-			setRotarySprite(objInt().flags);
+			setRotarySprite(flags);
 		}
 		return true;
 	}
@@ -241,7 +241,7 @@ public class ButtonHandler : Decal {
 	public void setSprite(int SpriteID)
 	{
 			//UW1/Sprites/tmflat/tmflat_00%02d
-		if (objInt().invis==0)
+		if (invis==0)
 		{
 			setSpriteTMFLAT ( this.GetComponentInChildren<SpriteRenderer>(), SpriteID);//Loads the sprite.;//Assigns the sprite to the object.			
 			currentItemID=SpriteID;	
@@ -252,7 +252,7 @@ public class ButtonHandler : Decal {
 
 	public void setRotarySprite(int spriteId)
 	{
-		if (objInt().invis==0)
+		if (invis==0)
 		{
 		setSpriteTMOBJ (this.GetComponentInChildren<SpriteRenderer>(), RotaryImageIDs[spriteId] );
 		currentItemID=spriteId;

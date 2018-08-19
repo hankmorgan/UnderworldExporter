@@ -25,9 +25,9 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		string created="";
-		//if (objInt().quality <= Random.Range(1,41)) //100% chance when quality is zero.
+		//if (quality <= Random.Range(1,41)) //100% chance when quality is zero.
 		//{
-			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(objInt().link);
+			ObjectInteraction objToClone = ObjectLoader.getObjectIntAt(link);
 			if (objToClone !=null)
 			{
 			  	GameObject NewObject = CloneObject (objToClone,triggerX,triggerY,true);

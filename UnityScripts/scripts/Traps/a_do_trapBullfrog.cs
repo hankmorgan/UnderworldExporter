@@ -33,7 +33,7 @@ public class a_do_trapBullfrog : a_hack_trap {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		//Debug.Log (this.name);
-		switch (objInt().owner)
+		switch (owner)
 		{
 		case 0://Raise tile
 			//Debug.Log ("Raise tile (" + (BaseX+targetX) + "," + (BaseY +targetY) + ")");

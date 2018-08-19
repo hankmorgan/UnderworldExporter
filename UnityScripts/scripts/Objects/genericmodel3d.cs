@@ -10,7 +10,7 @@ public class GenericModel3D : Model3D {
 
 		public override int[] ModelTriangles (int meshNo)
 		{
-			switch (objInt().item_id)
+			switch (item_id)
 			{
 			case 336://Bench
 				{
@@ -43,7 +43,7 @@ public class GenericModel3D : Model3D {
 		public override Vector3[] ModelVertices ()
 		{
 				//		return new int[]{4,7,6,4,6,5,6,7,2,7,3,2,5,2,1,5,6,2,7,0,3,7,4,0,4,1,0,4,5,1,0,1,2,0,2,3,8,18,21,8,19,18,8,21,19,19,21,18,15,25,24,15,24,27,15,24,25,15,27,24,26,15,25,15,26,14,14,13,15,13,12,15,13,26,25,13,25,12,9,8,10,10,8,11,9,20,19,9,19,8,11,8,15,12,11,15,22,23,24,22,24,27,31,22,27,31,27,30,31,30,23,23,30,24,17,21,18,17,16,21,16,28,29,16,29,21,30,27,21,30,21,29,28,17,29,17,18,29,20,10,19,10,11,19}.Reverse().ToArray();
-				switch (objInt().item_id)
+				switch (item_id)
 				{
 				case 336://Bench
 						{
@@ -92,7 +92,7 @@ public class GenericModel3D : Model3D {
 				{
 						woodMaterial =30;			
 				}	
-				switch (objInt().item_id)
+				switch (item_id)
 				{
 				case 336://Bench
 				case 344://Table			
@@ -134,7 +134,7 @@ public class GenericModel3D : Model3D {
 
 		public override float TextureScaling ()
 		{
-				switch (objInt().item_id)
+				switch (item_id)
 				{
 				case 336://Bench
 				case 344://table
@@ -155,7 +155,7 @@ public class GenericModel3D : Model3D {
 
 		public override int NoOfMeshes ()
 		{
-				switch (objInt().item_id)
+				switch (item_id)
 				{
 				case 348://chair
 						return 2;

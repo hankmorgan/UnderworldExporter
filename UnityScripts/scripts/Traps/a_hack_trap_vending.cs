@@ -6,12 +6,12 @@ public class a_hack_trap_vending : a_hack_trap {
 		//spawns vending selection
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{//4.4
-		Vector3 spawn = GameWorldController.instance.currentTileMap().getTileVector(objInt().tileX, objInt().tileY);
+		Vector3 spawn = GameWorldController.instance.currentTileMap().getTileVector(ObjectTileX, ObjectTileY);
 		spawn = new Vector3(spawn.x,4.4f,spawn.z);
 		int ItemStringIndex=0;
 		int Price=0;
 
-		switch (Quest.instance.variables[objInt().owner])
+		switch (Quest.instance.variables[owner])
 		{
 		case 0://fish
 				ItemStringIndex=182;
@@ -49,7 +49,7 @@ public class a_hack_trap_vending : a_hack_trap {
 				return;
 		}
 
-		if(CheckPrice(Price, objInt().tileX, objInt().tileY))
+		if(CheckPrice(Price, ObjectTileX, ObjectTileY))
 		{//price check
 			ObjectLoaderInfo newobjt= ObjectLoader.newObject( ItemStringIndex,40,0,0,256);
 			newobjt.InUseFlag=1;

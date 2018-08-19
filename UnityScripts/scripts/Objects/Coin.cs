@@ -33,11 +33,11 @@ public class Coin : object_base {
 	public override int AliasItemId ()
 	{
 				
-		if (objInt().item_id==160)
+		if (item_id==160)
 		{
 			return 161;
 		}
-		else if (objInt().item_id==161)
+		else if (item_id==161)
 		{
 			return 160;
 		}
@@ -53,7 +53,7 @@ public class Coin : object_base {
 	private void ChangeCoinType()
 	{//THis is not vanilla behaviour!
 		//CheckReferences ();
-	switch (objInt().item_id)
+	switch (item_id)
 		{
 		case 161://a Coin
 			if (objInt().GetQty ()>1)

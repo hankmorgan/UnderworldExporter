@@ -18,10 +18,10 @@ public class a_variable_trap : trap_base {
 	//	base.Start();
 		//Init the variables
 
-		//VariableIndex=objInt().zpos;
+		//VariableIndex=zpos;
 
 
-	//	//heading = objInt().heading;
+	//	//heading = heading;
 	//}
 
 	protected override void Start ()
@@ -33,7 +33,7 @@ public class a_variable_trap : trap_base {
 
 	public override void PostActivate (object_base src)
 	{
-		int TriggerRepeat = (objInt().flags>>1) & 0x1;
+		int TriggerRepeat = (flags>>1) & 0x1;
 		if (TriggerRepeat==1)
 		{
 				DestroyTrap (src);
@@ -46,7 +46,7 @@ public class a_variable_trap : trap_base {
 		/// <returns>The value.</returns>
 	public virtual int VariableValue()
 	{
-		return ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
+		return ((quality & 0x3f)<<8) | (((owner & 0x1f) << 3) | (ypos & 0x7));
 	}
 
 }

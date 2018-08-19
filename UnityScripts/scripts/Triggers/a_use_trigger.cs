@@ -13,17 +13,17 @@ public class a_use_trigger : trigger_base {
 				GameObject triggerObj=null;
 				if (mode)
 				{
-						triggerObj= ObjectLoader.getGameObjectAt(objInt().link);	
+						triggerObj= ObjectLoader.getGameObjectAt(link);	
 				}
 				else
 				{
-					if (objInt().next!=0)		
+					if (next!=0)		
 					{
-						triggerObj= ObjectLoader.getGameObjectAt((int)objInt().next);	
+						triggerObj= ObjectLoader.getGameObjectAt((int)next);	
 					}
 					else
 					{
-						triggerObj= ObjectLoader.getGameObjectAt(objInt().link);	
+						triggerObj= ObjectLoader.getGameObjectAt(link);	
 					}
 				}
 
@@ -31,7 +31,7 @@ public class a_use_trigger : trigger_base {
 				{
 						if (triggerObj.GetComponent<trap_base>() !=null)
 						{
-							triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
+							triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);	
 						}
 						if (triggerObj.GetComponent<trigger_base>() !=null)
 						{

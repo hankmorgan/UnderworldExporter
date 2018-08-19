@@ -24,15 +24,15 @@ public class Bridge : map_object {
 			bx.size=new Vector3(1.2f, 0.18f, 1.2f);
 		}
 		if (
-				(objInt().tileX<=TileMap.TileMapSizeX)
+				(ObjectTileX <= TileMap.TileMapSizeX)
 				&&
-				(objInt().tileY<=TileMap.TileMapSizeY)
+				(ObjectTileY <= TileMap.TileMapSizeY)
 			)
 			{
-				int TextureIndex=  (objInt().enchantment<<3) | objInt().flags & 0x3F;
+				int TextureIndex=  (enchantment<<3) | flags & 0x3F;
 				if (TextureIndex<2)
 				{//Only flag the normal briges as such.
-						GameWorldController.instance.currentTileMap().Tiles[objInt().tileX,objInt().tileY].hasBridge=true;				
+						GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].hasBridge=true;				
 				}
 			}
 	}
@@ -46,15 +46,15 @@ public class Bridge : map_object {
 		/// Examples: the tile puzzle in level6 seers and the Goblin shower in the tower in UW2
 	public override bool LookAt ()
 	{
-		if(objInt().invis==0)	
+		if(invis==0)	
 		{
-			if ( ( (objInt().enchantment<<3) | objInt().flags)<2)
+			if ( ( (enchantment<<3) | flags)<2)
 			{
 					return base.LookAt ();
 			}
 			else
 			{
-					int TextureIndex=(objInt().enchantment<<3) | objInt().flags & 0x3F;
+					int TextureIndex=(enchantment<<3) | flags & 0x3F;
 					//Return material description
 					UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
 					return true;
@@ -72,9 +72,9 @@ public class Bridge : map_object {
 		/// Used in the tile puzzle on the Level 6-seers
 	public override bool use ()
 	{
-		if (objInt().flags >= 2)
+		if (flags >= 2)
 			{				
-				GameObject obj = ObjectLoader.getGameObjectAt(objInt().link);
+				GameObject obj = ObjectLoader.getGameObjectAt(link);
 				if (obj!=null)
 				{
 					if (obj.GetComponent<trigger_base>()!=null)

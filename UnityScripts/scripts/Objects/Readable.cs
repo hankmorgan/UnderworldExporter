@@ -8,7 +8,7 @@ public class Readable : object_base {
 	{
 	if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
 		{
-			if ((_RES=="UW1") && (objInt().link== 769))
+			if ((_RES=="UW1") && (link== 769))
 			{//Special case for Rotworm stew recipe
 				return MixRotwormStew();
 			}
@@ -38,14 +38,14 @@ public class Readable : object_base {
 			{
 			if (objInt().PickedUp==true)
 				{
-				if ((UWEBase._RES== UWEBase.GAME_UW1) && (objInt().link==520))
+				if ((UWEBase._RES== UWEBase.GAME_UW1) && (link==520))
 				{//Special case. Chasm of fire map.
 					UWHUD.instance.CutScenesSmall.anim.SetAnimation ="cs410.n01";
 					UWHUD.instance.CutScenesSmall.anim.looping=true;
 				}
 				else
 				{
-					UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (3,objInt().link - 0x200));
+					UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (3,link - 0x200));
 				}
 				return true;
 			}
@@ -58,7 +58,7 @@ public class Readable : object_base {
 
 		default: 
 			{
-			UWHUD.instance.MessageScroll.Add ("READABLE TYPE NOT FOUND! (" + objInt().item_id +")");
+			UWHUD.instance.MessageScroll.Add ("READABLE TYPE NOT FOUND! (" + item_id +")");
 			return false;
 			}
 		}
@@ -170,7 +170,7 @@ public class Readable : object_base {
 
 	public override float GetWeight ()
 	{
-		return GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f;
+		return GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f;
 	}
 
 }

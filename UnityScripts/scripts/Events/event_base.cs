@@ -192,7 +192,7 @@ public class event_base : UWClass {
 										if (objList[o].instance.GetComponent<NPC>().npc_whoami == WhoAmI)
 										{
 												objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
-												if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+												if (objList[o].instance.ObjectTileX != TileMap.ObjectStorageTile)
 												{
 														NoOfNpcs++;		
 												}
@@ -212,7 +212,7 @@ public class event_base : UWClass {
 										{
 												if (objList[o].instance.GetComponent<NPC>().npc_whoami == WhoAmI)
 												{
-														if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+														if (objList[o].instance.ObjectTileX != TileMap.ObjectStorageTile)
 														{
 														result[i++] = objList[o].instance.GetComponent<NPC>();
 														}
@@ -248,7 +248,7 @@ public class event_base : UWClass {
 										if (objList[o].instance.GetComponent<NPC>().GetRace() == Race)
 										{
 												objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
-												if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+												if (objList[o].instance.ObjectTileX != TileMap.ObjectStorageTile)
 												{
 														NoOfNpcs++;		
 												}		
@@ -269,7 +269,7 @@ public class event_base : UWClass {
 											if (objList[o].instance.GetComponent<NPC>().GetRace() == Race)
 											{
 													//objList[o].instance.GetComponent<NPC>().objInt().UpdatePosition();//Only bring back on-map npcs
-													if (objList[o].instance.tileX!=TileMap.ObjectStorageTile)
+													if (objList[o].instance.ObjectTileX != TileMap.ObjectStorageTile)
 													{
 																result[i++]	= objList[o].instance.GetComponent<NPC>();
 													}		

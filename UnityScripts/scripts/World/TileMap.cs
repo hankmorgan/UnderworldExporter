@@ -2293,8 +2293,8 @@ public class TileMap : Loader {
 									TileMapData[addptr]=(char)(ByteToWrite & 0xFF);
 									TileMapData[addptr+1]=(char)((ByteToWrite>>8) & 0xFF);
 
-									ByteToWrite = ((currobj.x & 0x7) << 13) |
-											((currobj.y & 0x7) << 10) |
+									ByteToWrite = ((currobj.xpos & 0x7) << 13) |
+											((currobj.ypos & 0x7) << 10) |
 											((currobj.heading & 0x7) << 7) |
 											((currobj.zpos & 0x7F));
 									TileMapData[addptr+2]=(char)(ByteToWrite & 0xFF);

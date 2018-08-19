@@ -890,8 +890,8 @@ public class IngameEditor : GuiBase_Draggable {
 			ObjectTileX.text=currObj.tileX.ToString();
 			ObjectTileY.text=currObj.tileY.ToString();
 
-			ObjectXPos.text=currObj.x.ToString();
-			ObjectYPos.text=currObj.y.ToString();
+			ObjectXPos.text=currObj.xpos.ToString();
+			ObjectYPos.text=currObj.ypos.ToString();
 			ObjectZPos.text=currObj.zpos.ToString();
 
 			MobileObjectDetailsPanel.gameObject.SetActive((currObj.index<=255));
@@ -1098,13 +1098,13 @@ public class IngameEditor : GuiBase_Draggable {
 
 			if (int.TryParse(ObjectXPos.text, out val))
 			{
-				currObj.x= (short)(val & 0x7);
-				ObjectXPos.text=currObj.x.ToString();
+				currObj.xpos = (short)(val & 0x7);
+				ObjectXPos.text=currObj.xpos.ToString();
 			}
 			if (int.TryParse(ObjectYPos.text, out val))
 			{
-				currObj.y= (short)(val & 0x7);
-				ObjectYPos.text=currObj.y.ToString();
+				currObj.ypos = (short)(val & 0x7);
+				ObjectYPos.text=currObj.ypos.ToString();
 			}
 			if (int.TryParse(ObjectZPos.text, out val))
 			{

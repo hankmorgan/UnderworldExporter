@@ -22,7 +22,7 @@ public class Armour : Equipment {
 	/// <returns>The actual spell index.</returns>
 	public override int GetActualSpellIndex ()
 	{
-		int index =objInt().link-256+16;
+		int index =link-256+16;
 		if (_RES==GAME_UW2)
 		{
 			if ((index >=325) && (index<=326))
@@ -40,20 +40,20 @@ public class Armour : Equipment {
 	
 	public override void UpdateQuality ()
 	{
-		int itemIndex= objInt().item_id-32;
+		int itemIndex= item_id-32;
 				
 		if ((itemIndex<15))
 		{//Armor pieces
-			if ((objInt().quality>0) && (objInt().quality<=15))
+			if ((quality>0) && (quality<=15))
 			{
 					//Shit quality
 					EquipIconIndex=  itemIndex;
 			}
-			else if ((objInt().quality>15) && (objInt().quality<=30))
+			else if ((quality>15) && (quality<=30))
 			{//bashed about
 					EquipIconIndex=  itemIndex + (1*15);
 			}
-			else if ((objInt().quality>30) && (objInt().quality<=45))
+			else if ((quality>30) && (quality<=45))
 			{//medium
 					EquipIconIndex=  itemIndex + (2*15);
 			}
@@ -65,7 +65,7 @@ public class Armour : Equipment {
 		}
 		else
 		{//Crowns and dragonskin boots
-			EquipIconIndex= 60+ (objInt().item_id-47);
+			EquipIconIndex= 60+ (item_id-47);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class Armour : Equipment {
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
 			UpdateQuality();
-			if ((objInt().isEnchanted()==true) || ((_RES==GAME_UW1) && (objInt().item_id==47)))
+			if ((objInt().isEnchanted()==true) || ((_RES==GAME_UW1) && (item_id==47)))
 			{//Is magic or the dragonskin boots
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)
@@ -147,13 +147,13 @@ public class Armour : Equipment {
 
 	public override short getDurability ()
 	{
-		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability+ DurabilityBonus());	
+		return (short)(GameWorldController.instance.objDat.armourStats[item_id-32].durability+ DurabilityBonus());	
 	}
 
 
 	public override short getDefence()
 	{
-		return (short)(GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection+ProtectionBonus());
+		return (short)(GameWorldController.instance.objDat.armourStats[item_id-32].protection+ProtectionBonus());
 	}
 
 }

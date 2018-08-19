@@ -7,8 +7,8 @@ public class a_hack_trap_colour_cycle : a_hack_trap {
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		TileMap tm = GameWorldController.instance.currentTileMap();
-		short maxTexture=objInt().quality;
-		short minTexture=objInt().owner;
+		short maxTexture=quality;
+		short minTexture=owner;
 		for (int x = triggerX; x<=triggerX+4;x++)
 		{
 				for (int y = triggerY; y<=triggerY+4;y++)

@@ -10,7 +10,7 @@ public class Map : object_base {
 	//protected override void Start ()
 	//{
 	//	base.Start();
-	//	objInt().isquant=0; 
+	//	isquant=0; 
 	//}
 
 	public override bool use ()
@@ -54,7 +54,7 @@ public class Map : object_base {
 
 	public override bool LookAt()
 	{//Generic description of the map
-		objInt().isquant=0; //quick bug fix
+		isquant=0; //quick bug fix
 			if (objInt().PickedUp==true)
 			{
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + "\n" + StringController.instance.GetString(1,151));
@@ -68,18 +68,18 @@ public class Map : object_base {
 
 	/*public override bool PickupEvent ()
 	{//If this value is not set then then vanilla underworld will crash when loading a saved game while holding a map.
-		objInt().isquant=1;
+		isquant=1;
 		return true;
 	}
 
 	public override bool DropEvent ()
 	{
-		objInt().isquant=0;
+		isquant=0;
 		return true;
 	}*/
 
 	public override float GetWeight ()
 	{
-		return (float)(GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f);
+		return (float)(GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f);
 	}
 }

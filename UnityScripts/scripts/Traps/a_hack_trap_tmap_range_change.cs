@@ -10,10 +10,10 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-				int minX= Mathf.Min (triggerX, src.objInt().tileX);
-				int minY= Mathf.Min (triggerY, src.objInt().tileY);
-				int maxX= Mathf.Max (triggerX, src.objInt().tileX);
-				int maxY= Mathf.Max (triggerY, src.objInt().tileY);
+				int minX= Mathf.Min (triggerX, src.ObjectTileX);
+				int minY= Mathf.Min (triggerY, src.ObjectTileY);
+				int maxX= Mathf.Max (triggerX, src.ObjectTileX);
+				int maxY= Mathf.Max (triggerY, src.ObjectTileY);
 				//Ignore the range for the moment.
 				minX=0;
 				minY=0;
@@ -27,10 +27,10 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 								if (objList[i].instance!=null)
 								{
 										if (
-												(objList[i].instance.tileX>=minX)&&
-												(objList[i].instance.tileX<=maxX)&&
-												(objList[i].instance.tileY>=minY)&&
-												(objList[i].instance.tileY<=maxY)
+												(objList[i].instance.ObjectTileX >= minX)&&
+												(objList[i].instance.ObjectTileX <= maxX)&&
+												(objList[i].instance.ObjectTileY >= minY)&&
+												(objList[i].instance.ObjectTileY <= maxY)
 												)
 										{
 												if (objList[i].instance.owner==63)
@@ -38,8 +38,8 @@ public class a_hack_trap_tmap_range_change : a_hack_trap {
 														TMAP tmap= objList[i].instance.GetComponent<TMAP>();
 														if (tmap!=null)
 														{
-																tmap.objInt().owner=(short)(40+objInt().owner);	
-																tmap.TextureIndex=GameWorldController.instance.currentTileMap().texture_map[40+objInt().owner];
+																tmap.owner=(short)(40+owner);	
+																tmap.TextureIndex=GameWorldController.instance.currentTileMap().texture_map[40+owner];
 																TMAP.CreateTMAP(tmap.gameObject, tmap.TextureIndex );		
 														}
 												}

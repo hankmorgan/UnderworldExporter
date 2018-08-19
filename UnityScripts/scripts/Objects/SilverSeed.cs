@@ -7,11 +7,11 @@ public class SilverSeed : object_base {
 	public override bool PickupEvent ()
 	{
 		base.PickupEvent ();
-		if (objInt().item_id==458)
+		if (item_id==458)
 		{//The seed is a sapling
 			//Turn it into a seed.
 			//objInt().ChangeType(290,objInt().GetItemType());
-			objInt().item_id=290;
+			item_id=290;
 			objInt().WorldDisplayIndex=290;
 			objInt().InvDisplayIndex=290;
 			AnimationOverlay animo =this.GetComponent<AnimationOverlay>();
@@ -38,11 +38,11 @@ public class SilverSeed : object_base {
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
-		if ((objInt().item_id==290) && (objInt().PickedUp==true))
+		if ((item_id==290) && (objInt().PickedUp==true))
 			{
 				//I'll test positioning later. For now just place it at the players position
 				//Turn it into a sapling.
-				objInt().item_id=458;
+				item_id=458;
 				objInt().WorldDisplayIndex=458;
 				objInt().InvDisplayIndex=458;
 				AnimationOverlay animo =this.GetComponent<AnimationOverlay>();

@@ -43,7 +43,7 @@ public class Grave : Model3D {
 		//UWHUD.instance.CutScenesSmall.TargetControl.texture=GameWorldController.instance.cutsLoader.LoadImageAt(GraveID());
 		UWHUD.instance.CutScenesSmall.anim.SetAnimation= "Grave_" + GraveID();
 		//LookingAt=true;timeOut=0f;
-		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().link-512));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, link-512));
 		return true;
 	}
 
@@ -54,9 +54,9 @@ public class Grave : Model3D {
 		if (_RES!=GAME_UW2)
 		{
 				DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "GRAVE.DAT", out graves);
-				if (objInt().link >= 512)
+				if (link >= 512)
 				{
-						return (short)DataLoader.getValAtAddress(graves, objInt().link - 512, 8)-1;
+						return (short)DataLoader.getValAtAddress(graves, link - 512, 8)-1;
 				}		
 		}
 		return 0;
@@ -101,7 +101,7 @@ public class Grave : Model3D {
 					ObjectInteraction trigObj =GameWorldController.instance.CurrentObjectList().objInfo[495].instance; // GameObject.Find ("a_move_trigger_54_52_04_0495");
 					if (trigObj!=null)
 					{					
-						objInt().link++;//Update the grave description
+						link++;//Update the grave description
 						objIntUsed.consumeObject ();
 						trigObj.GetComponent<trigger_base>().Activate(this.gameObject);
 						Quest.instance.isGaramonBuried=true;
@@ -240,9 +240,9 @@ public class Grave : Model3D {
 		switch (meshNo)
 		{
 		case 0://headstone
-			return GameWorldController.instance.MaterialObj[objInt().flags+28];
+			return GameWorldController.instance.MaterialObj[flags+28];
 		case 1://Trim
-			return GameWorldController.instance.MaterialObj[objInt().flags+28];
+			return GameWorldController.instance.MaterialObj[flags+28];
 		}
 		return base.ModelMaterials (meshNo);
 	}

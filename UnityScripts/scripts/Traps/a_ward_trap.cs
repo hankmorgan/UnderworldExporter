@@ -26,7 +26,7 @@ public class a_ward_trap : trap_base {
 				{
 				case GAME_UW2:
 						{
-							switch (objInt().item_id)
+							switch (item_id)
 							{
 							case 414: //flam trap
 									{
@@ -43,7 +43,7 @@ public class a_ward_trap : trap_base {
 												break;	
 										}
 							default:
-									Debug.Log ("unimplemented ward trap type " + objInt().item_id);
+									Debug.Log ("unimplemented ward trap type " + item_id);
 									break;
 							}
 								break;
@@ -66,15 +66,12 @@ public class a_ward_trap : trap_base {
 
 			if (npc!=null)//Has the collision hit an npc
 			{
-				//spellprop.init(SpellEffect.UW1_Spell_Effect_RuneofWarding,UWCharacter.Instance.gameObject);
 				if(spellprop.BaseDamage!=0)
 				{
 					npc.ApplyAttack(spellprop.BaseDamage);
 				}
 				spellprop.onImpact(npc.transform);
 				spellprop.onHit(npc.gameObject.GetComponent<ObjectInteraction>());
-				//this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
-				//Destroy (this.gameObject);
 				objInt().consumeObject();
 
 			}

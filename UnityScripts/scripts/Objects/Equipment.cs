@@ -39,7 +39,7 @@ public class Equipment : object_base {
 
 	public virtual int GetActualSpellIndex()
 	{
-		return objInt().link-256;
+		return link-256;
 	}
 
 	public override bool use ()
@@ -116,8 +116,8 @@ public class Equipment : object_base {
 			//Do the result at the end of the animation.
 			if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
-				objInt().quality +=5; //objInt().quality+5;
-				if (objInt().quality >63){objInt().quality=63;}
+				quality +=5; //quality+5;
+				if (quality >63){quality=63;}
 				UWHUD.instance.MessageScroll.Add("You repair the item");
 			}		
 			else
@@ -146,7 +146,7 @@ public class Equipment : object_base {
 						//Try and re-id using lore skill
 						if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 						{
-							objInt().heading=7;
+							heading=7;
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()) + OwnershipString());
 						}
 						else
@@ -179,27 +179,27 @@ public class Equipment : object_base {
 		{
 				if (_RES==GAME_UW1)
 				{
-						if ((objInt().item_id==10) ||(objInt().item_id==55) || (objInt().item_id==47)|| (objInt().item_id==48)|| (objInt().item_id==49)|| (objInt().item_id==50))
+						if ((item_id==10) ||(item_id==55) || (item_id==47)|| (item_id==48)|| (item_id==49)|| (item_id==50))
 						{
 								return StringController.instance.GetString(5,10);	
 						}
 				}
-			if ((objInt().quality>0) && (objInt().quality<=15))
+			if ((quality>0) && (quality<=15))
 			{//lowest
 				return StringController.instance.GetString(5,7);
 			}
-			else if ((objInt().quality>15) && (objInt().quality<=30))
+			else if ((quality>15) && (quality<=30))
 			{
 				//Low quality
 				return StringController.instance.GetString(5,8);
 
 			}
-			else if ((objInt().quality>30) && (objInt().quality<=45))
+			else if ((quality>30) && (quality<=45))
 			{
 					//Medium
 				return StringController.instance.GetString(5,9);
 			}
-			else //if ((objInt().quality>45))// && (objInt().quality<=63))
+			else //if ((quality>45))// && (quality<=63))
 			{
 					//Best
 				return StringController.instance.GetString(5,10);
@@ -215,17 +215,17 @@ public class Equipment : object_base {
 	{
 		if (_RES==GAME_UW1)
 		{
-			if ((objInt().item_id==10) ||(objInt().item_id==55) || (objInt().item_id==47)|| (objInt().item_id==48)|| (objInt().item_id==49)|| (objInt().item_id==50))
+			if ((item_id==10) ||(item_id==55) || (item_id==47)|| (item_id==48)|| (item_id==49)|| (item_id==50))
 			{//No damage to sword of justice shield of valor, dragonskin boots or crowns.
 				return;
 			}
 		}
 		short equipBefore=(short)EquipIconIndex;
-		objInt().quality-=damage;
+		quality-=damage;
 		UpdateQuality();	
-		if (objInt().quality<=0)
+		if (quality<=0)
 		{
-			UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(objInt().item_id) + " was destroyed");
+			UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(item_id) + " was destroyed");
 			ChangeType(208);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
 			if (this.GetComponent<Weapon>())
@@ -237,7 +237,7 @@ public class Equipment : object_base {
 		{
 			if (equipBefore!=EquipIconIndex)
 			{
-				UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(objInt().item_id) + " was damaged");						
+				UWHUD.instance.MessageScroll.Add("Your " + StringController.instance.GetSimpleObjectNameUW(item_id) + " was damaged");						
 			}
 		}
 
@@ -250,13 +250,13 @@ public class Equipment : object_base {
 		/// <returns>The defence.</returns>
 		public virtual short getDefence()
 		{
-				return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].protection;	
+				return GameWorldController.instance.objDat.armourStats[item_id-32].protection;	
 		}
 
 		public virtual short getDurability()
 		{
 			return (short)(0+DurabilityBonus());
-			//return GameWorldController.instance.objDat.armourStats[objInt().item_id-32].durability;	
+			//return GameWorldController.instance.objDat.armourStats[item_id-32].durability;	
 		}
 
 
@@ -266,7 +266,7 @@ public class Equipment : object_base {
 		/// <returns>The bonus.</returns>
 		public short DurabilityBonus()
 		{
-				switch(objInt().link)
+				switch(link)
 				{
 				case SpellEffect.UW1_Spell_Effect_MinorToughness:
 				case SpellEffect.UW1_Spell_Effect_Toughness:
@@ -276,7 +276,7 @@ public class Equipment : object_base {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 				case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-						return (short)(objInt().link-472);//Toughness bonus starts at +3 why not					
+						return (short)(link-472);//Toughness bonus starts at +3 why not					
 				}
 				return 0;	
 		}
@@ -284,7 +284,7 @@ public class Equipment : object_base {
 
 		public short ProtectionBonus()
 		{
-				switch(objInt().link)
+				switch(link)
 				{
 				case SpellEffect.UW1_Spell_Effect_MinorProtection:
 				case SpellEffect.UW1_Spell_Effect_Protection:
@@ -294,7 +294,7 @@ public class Equipment : object_base {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 				case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-						return (short)(objInt().link-461);//Protection bonus starts at +3 why not					
+						return (short)(link-461);//Protection bonus starts at +3 why not					
 				}
 				return 0;	
 		}

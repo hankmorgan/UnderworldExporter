@@ -30,14 +30,14 @@ public class Lantern : LightSource {
 				}
 				else
 				{
-					if (objInt().quality==64)
+					if (quality==64)
 					{
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_the_lantern_is_already_full_));
 					}
 					else
 					{
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_adding_oil_you_refuel_the_lantern_));
-						objInt().quality = 64;
+						quality = 64;
 						objIntUsed.consumeObject();
 					}
 				}

@@ -19,12 +19,12 @@ public class trigger_base : object_base {
 
 	public override bool Activate (GameObject src)
 	{
-		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+		GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
 			if (triggerObj.GetComponent<trap_base>() !=null)
 			{
-				triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);	
+				triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);	
 			}
 		}
 
@@ -34,11 +34,10 @@ public class trigger_base : object_base {
 
 	public virtual void PostActivate(GameObject src)
 	{
-		int TriggerRepeat = (objInt().flags>>1) & 0x1;
+		int TriggerRepeat = (flags>>1) & 0x1;
 		//Debug.Log(TriggerRepeat);
 		if (TriggerRepeat==0)
-		{
-			
+		{			
 			if (src!=null)
 			{
 				if (src.GetComponent<ObjectInteraction>()!=null)
@@ -50,7 +49,6 @@ public class trigger_base : object_base {
 				}	
 			}
 			objInt().objectloaderinfo.InUseFlag=0;
-			//ObjectInteraction.UpdateLinkedList(objInt(),objInt().tileX,objInt().tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
 			Destroy (this.gameObject);
 		}
 	}
@@ -63,7 +61,5 @@ public class trigger_base : object_base {
 			Activate(this.gameObject);
 		}
 	}
-
-
 }
 

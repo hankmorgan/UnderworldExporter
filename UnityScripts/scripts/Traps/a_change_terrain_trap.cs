@@ -16,10 +16,10 @@ The path to the sword hilt on Level3
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		//Debug.Log (this.name);
-		int textureQuality = (objInt().quality >> 1) & 0xf;
-		for (short x=0; x<=objInt().x;x++)
+		int textureQuality = (quality >> 1) & 0xf;
+		for (short x=0; x<=xpos; x++)
 		{
-			for (short y=0; y<=objInt().y;y++)
+			for (short y=0; y<=ypos; y++)
 			{
 					short tileXToChange=(short)(x+triggerX); 
 					short tileYToChange=(short)(y +triggerY);
@@ -50,22 +50,22 @@ The path to the sword hilt on Level3
 						{
 							tileToChange.VisibleFaces[v]=true;		
 						}
-						short tileTypeToChangeTo = (short)(objInt().quality & 0x01);
-						short newTileHeight;// = (short)(objInt().zpos>>2);
-						if (objInt().zpos ==120)
+						short tileTypeToChangeTo = (short)(quality & 0x01);
+						short newTileHeight;// = (short)(zpos>>2);
+						if (zpos ==120)
 						{//If at this height use the trigger zpos for height instead.
-							newTileHeight=(short)(src.objInt().zpos>>2);
+							newTileHeight=(short)(src.zpos>>2);
 						}
 						else
 						{
-							newTileHeight = (short)(objInt().zpos>>2);		
+							newTileHeight = (short)(zpos>>2);		
 						}
 						short newWallTexture = tileToChange.wallTexture;
 						if (_RES==GAME_UW2)
 						{//Also the owner can be used to change wall texture. This means changing it's neighours.
-							if (objInt().owner<63)
+							if (owner<63)
 							{
-								newWallTexture=objInt().owner;
+								newWallTexture=owner;
 							}
 						}												
 
@@ -134,12 +134,12 @@ The path to the sword hilt on Level3
 	
 		GameWorldController.WorldReRenderPending=true;
 			
-	//	if ((objInt().owner<63) && (_RES==GAME_UW2))
+	//	if ((owner<63) && (_RES==GAME_UW2))
 	//	{
 			//Now force re-render the tiles and their neighbours
-			for (int x=-1; x<=objInt().x+1;x++)
+			for (int x=-1; x<=xpos + 1;x++)
 			{
-				for (int y=-1; y<=objInt().y+1;y++)
+				for (int y=-1; y<=ypos + 1;y++)
 				{
 					int tileXToChange=x+triggerX; 
 					int tileYToChange=y +triggerY;

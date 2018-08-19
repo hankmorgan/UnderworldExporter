@@ -29,8 +29,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The slash damage</returns>
 		public short GetSlash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropSlash(objInt().item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Slash+DamageBonus());
+			//return GameWorldController.instance.weaponprops.getPropSlash(item_id);
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Slash+DamageBonus());
 		}
 
 		/// <summary>
@@ -39,8 +39,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bash damage</returns>
 		public short GetBash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropBash(objInt().item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Bash+DamageBonus());
+			//return GameWorldController.instance.weaponprops.getPropBash(item_id);
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Bash+DamageBonus());
 		}
 
 		/// <summary>
@@ -49,8 +49,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The stab damage</returns>
 		public short GetStab()
 		{
-			//return GameWorldController.instance.weaponprops.getPropStab(objInt().item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Stab+DamageBonus());
+			//return GameWorldController.instance.weaponprops.getPropStab(item_id);
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Stab+DamageBonus());
 		}
 
 
@@ -60,8 +60,8 @@ public class WeaponMelee : Weapon {
 		/// <returns>The durability.</returns>
 		public override short getDurability()
 		{
-			//return GameWorldController.instance.weaponprops.getPropDurability(objInt().item_id);	
-			return (short)(GameWorldController.instance.objDat.weaponStats[objInt().item_id].Durability+DurabilityBonus());
+			//return GameWorldController.instance.weaponprops.getPropDurability(item_id);	
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Durability+DurabilityBonus());
 		}
 
 
@@ -101,23 +101,23 @@ public class WeaponMelee : Weapon {
 		/// <returns>The skill.</returns>
 		public int GetSkill()
 		{
-			//return GameWorldController.instance.weaponprops.getPropSkill(objInt().item_id);
-			return GameWorldController.instance.objDat.weaponStats[objInt().item_id].Skill;
+			//return GameWorldController.instance.weaponprops.getPropSkill(item_id);
+			return GameWorldController.instance.objDat.weaponStats[item_id].Skill;
 		}
 
 
 	public override void UpdateQuality ()
 	{
-		if ((objInt().quality>0) && (objInt().quality<=15))
+		if ((quality>0) && (quality<=15))
 		{
 				//Shit quality
 			EquipIconIndex=  4;
 		}
-		else if ((objInt().quality>15) && (objInt().quality<=30))
+		else if ((quality>15) && (quality<=30))
 		{//bashed about
 			EquipIconIndex=  3;
 		}
-		else if ((objInt().quality>30) && (objInt().quality<=45))
+		else if ((quality>30) && (quality<=45))
 		{//medium
 			EquipIconIndex=  2;
 		}
@@ -133,7 +133,7 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bonus.</returns>
 	public short DamageBonus()
 	{
-		switch(objInt().link)
+		switch(link)
 		{
 			case SpellEffect.UW1_Spell_Effect_MinorDamage:
 			case SpellEffect.UW1_Spell_Effect_Damage:
@@ -143,7 +143,7 @@ public class WeaponMelee : Weapon {
 			case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
 			case SpellEffect.UW1_Spell_Effect_TremendousDamage:
 			case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
-				return (short)(objInt().link-453);//Damage bonus starts at +3 why not					
+				return (short)(link-453);//Damage bonus starts at +3 why not					
 		}
 		return 0;
 	}
@@ -155,7 +155,7 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bonus.</returns>
 		public short AccuracyBonus()
 		{
-			switch(objInt().link)
+			switch(link)
 			{
 				case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
 				case SpellEffect.UW1_Spell_Effect_Accuracy:
@@ -165,16 +165,16 @@ public class WeaponMelee : Weapon {
 				case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
 				case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
 				case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
-					return (short)(objInt().link-445); 
+					return (short)(link-445); 
 			}
 			return 0;
 		}
 
 	public override bool LookAt ()
 	{
-		if ( (_RES==GAME_UW1) && (objInt().item_id==Quest.TalismanSword))
+		if ( (_RES==GAME_UW1) && (item_id==Quest.TalismanSword))
 		{
-				objInt().heading=7;
+				heading=7;
 				switch(objInt().identity())
 				{
 				case ObjectInteraction.IdentificationFlags.Identified:

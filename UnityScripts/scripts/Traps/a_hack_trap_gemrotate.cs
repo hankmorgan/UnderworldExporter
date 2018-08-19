@@ -10,13 +10,15 @@ public class a_hack_trap_gemrotate : a_hack_trap {
 
 		//Probably changes variable no 6 to set what is reachable. There is probably another value that sets what levels are available..
 	int prevWorld=-1;
-	public LargeBlackrockGem gem;
+	public static LargeBlackrockGem gem;
 
 	protected override void Start ()
 	{
 		base.Start ();
-		//Quest.instance.variables[6]=0;
-		gem = FindObjectOfType<LargeBlackrockGem>();
+        if (gem==null)
+        {
+            gem = FindObjectOfType<LargeBlackrockGem>();
+        }		
 		UpdateGemFace();
 	}
 

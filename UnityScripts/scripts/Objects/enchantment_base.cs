@@ -69,7 +69,7 @@ public class enchantment_base : object_base {
 	protected virtual int GetActualSpellIndex()
 	{
 		//Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
-		int index=objInt().link-512;
+		int index=link-512;
 		if ( objInt().GetItemType() != ObjectInteraction.RING)
 		{
 			if (index<63)
@@ -95,7 +95,7 @@ public class enchantment_base : object_base {
 		{
 			return base.LookAt();
 		}
-		switch (objInt().item_id)
+		switch (item_id)
 		{	
 		case 54: //Ring of humility
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
@@ -129,7 +129,7 @@ public class enchantment_base : object_base {
 			case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
 					if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
-						objInt().heading=7;
+						heading=7;
 						if (enchantmentname!="")
 						{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + enchantmentname);										
@@ -165,7 +165,7 @@ public class enchantment_base : object_base {
 
 	public override float GetWeight ()
 	{
-		return (float)(GameWorldController.instance.commonObject.properties[objInt().item_id].mass * 0.1f);
+		return (float)(GameWorldController.instance.commonObject.properties[item_id].mass * 0.1f);
 	}
 
 }

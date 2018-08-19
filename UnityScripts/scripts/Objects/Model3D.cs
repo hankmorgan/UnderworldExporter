@@ -124,11 +124,11 @@ public class Model3D : object_base {
 	protected void AdjustModelPos ()
 	{
 		//Line up decals to walls where the decal is set to be on an edge.
-		int tileX = objInt ().tileX;
-		int tileY = objInt ().tileY;
-		int x = objInt ().x;
-		int y = objInt ().y;
-		//int heading = objInt ().heading * 45;
+		int tileX = ObjectTileX;
+		int tileY = ObjectTileY;
+		int x = xpos;
+		int y = ypos;
+		//int heading = heading * 45;
 		Vector3 objPos = this.transform.position;
 		Vector3 adjustment = Vector3.zero;
 		if (TileMap.ValidTile (tileX, tileY)) 

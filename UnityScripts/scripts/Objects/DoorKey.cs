@@ -10,7 +10,7 @@ public class DoorKey : object_base {
 
     protected override void Start()
     {
-        KeyId = objInt().owner;
+        KeyId = owner;
     }
 
     public override bool use ()
@@ -39,7 +39,7 @@ public class DoorKey : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,objInt().owner+100));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,owner+100));
 		}
 		else
 		{

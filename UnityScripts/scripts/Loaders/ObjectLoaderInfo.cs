@@ -23,8 +23,8 @@ public class ObjectLoaderInfo : UWClass
 
     public short zpos;
     public short heading;
-    public short x;
-    public short y;
+    public short xpos;
+    public short ypos;
     public short quality;
     public int next;
     public short owner;
@@ -131,8 +131,8 @@ public class ObjectLoaderInfo : UWClass
         obj.invis = 0;
         obj.is_quant = 0;
         obj.zpos = 0;
-        obj.x = 0;
-        obj.y = 0;
+        obj.xpos = 0;
+        obj.ypos = 0;
         obj.heading = 0;
         obj.quality = 0;
         obj.next = 0;

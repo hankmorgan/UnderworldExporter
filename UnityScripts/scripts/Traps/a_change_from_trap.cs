@@ -19,9 +19,9 @@ public class a_change_from_trap : trap_base {
 				//return;
 				//TileMap curr = GameWorldController.instance.currentTileMap();
 				ObjectInteraction ChangeTo=null;
-				if (objInt().link!=0)
+				if (link!=0)
 				{
-						ChangeTo = GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].instance;								
+						ChangeTo = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;								
 				}
 				if (ChangeTo==null)
 				{
@@ -30,19 +30,19 @@ public class a_change_from_trap : trap_base {
 
 				short NewTileFloorTexture =(short)( ChangeTo.heading |  (((ChangeTo.zpos >> 4) & 0x1 ) << 3));
 
-				short tileFloorCriteria = (short)( objInt().heading |  (((objInt().zpos >> 4) & 0x1 ) << 3));
+				short tileFloorCriteria = (short)( heading |  (((zpos >> 4) & 0x1 ) << 3));
 
 				for (int x=0; x<=63; x++)
 				{
 						for (int y=0; y<=63; y++)
 						{
 								//	if (ChangeTo.quality<63)
-								if (objInt().quality==GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture )										
+								if (quality==GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture )										
 								{//This is probably a seperate test to the floor texture test above.
 
 										GameWorldController.instance.currentTileMap().Tiles[x,y].wallTexture=ChangeTo.quality;
 
-										if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture ==  tileFloorCriteria)//==objInt().heading)
+										if ( GameWorldController.instance.currentTileMap().Tiles[x,y].floorTexture ==  tileFloorCriteria)//==heading)
 										{	//Putting this in this block could be wrong as well.
 												if ( GameWorldController.instance.currentTileMap().Tiles[x,y].Render)
 												{

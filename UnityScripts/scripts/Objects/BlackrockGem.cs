@@ -7,7 +7,7 @@ public class BlackrockGem : object_base {
 	public override bool LookAt ()
 	{
 		string lookdesc;
-		if (objInt().owner==1)
+		if (owner==1)
 		{
 			lookdesc=StringController.instance.GetString(1,StringController.str_you_see_) 
 				+ " a " 

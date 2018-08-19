@@ -11,7 +11,7 @@ public class map_object : object_base {
 	protected override void Start ()
 	{
 		base.Start();
-		if (objInt().invis==0)
+		if (invis==0)
 		{
 			foreach (Transform t in GameWorldController.instance.SceneryModel.transform)
 			{

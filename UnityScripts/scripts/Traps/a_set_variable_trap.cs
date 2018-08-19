@@ -34,7 +34,7 @@ public class a_set_variable_trap : a_variable_trap {
     protected override void Start()
     {
         base.Start();
-        Debug.Log(this.name + " will set " + objInt().zpos);
+        Debug.Log(this.name + " will set " + zpos);
     }
 
 
@@ -42,66 +42,66 @@ public class a_set_variable_trap : a_variable_trap {
 	{
 		string operation="";
 		int OrigValue=0;
-		if (objInt().zpos!=0)
+		if (zpos!=0)
 		{//Variable Operations
-			OrigValue=Quest.instance.variables[objInt().zpos];
-			switch(objInt().heading)
+			OrigValue=Quest.instance.variables[zpos];
+			switch(heading)
 			{
 			case 0://Add
 				if (_RES==GAME_UW2)
 				{
-					if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					if ( ! Quest.instance.x_clock_hook( zpos, VariableValue(),heading ) )
 					{
-						Quest.instance.variables[objInt().zpos] += VariableValue();
+						Quest.instance.variables[zpos] += VariableValue();
 						operation = "add";	
 					}
 				}
 				else
 				{
-					Quest.instance.variables[objInt().zpos] += VariableValue();
+					Quest.instance.variables[zpos] += VariableValue();
 					operation = "add";	
 				}
 				break;
 			case 1://Sub
-				Quest.instance.variables[objInt().zpos] -= VariableValue();
+				Quest.instance.variables[zpos] -= VariableValue();
 				operation = "Sub";
 				break;
 			case 2://Set
 				if  (_RES==GAME_UW2)
 				{//Some variables in UW2 are actually pointers to the mysterious x_clock
-					if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+					if ( ! Quest.instance.x_clock_hook( zpos, VariableValue(),heading ) )
 					{
-						Quest.instance.variables[objInt().zpos] = VariableValue();						
+						Quest.instance.variables[zpos] = VariableValue();						
 						operation = "Set";
 					}
 				}
 				else
 				{
-					Quest.instance.variables[objInt().zpos] = VariableValue();						
+					Quest.instance.variables[zpos] = VariableValue();						
 					operation = "Set";
 				}	
 				break;
 			case 3://AND
-				Quest.instance.variables[objInt().zpos] &= VariableValue();
+				Quest.instance.variables[zpos] &= VariableValue();
 				operation = "And";
 				break;
 			case 4://OR
-				Quest.instance.variables[objInt().zpos] |= VariableValue();
+				Quest.instance.variables[zpos] |= VariableValue();
 				operation = "or";
 				break;
 			case 5://XOR
 					{
 						if (_RES==GAME_UW2)
 						{
-							if ( ! Quest.instance.x_clock_hook( objInt().zpos, VariableValue(),objInt().heading ) )
+							if ( ! Quest.instance.x_clock_hook( zpos, VariableValue(),heading ) )
 							{
-								Quest.instance.variables[objInt().zpos] ^= VariableValue();
+								Quest.instance.variables[zpos] ^= VariableValue();
 								operation = "xor";
 							}	
 						}
 						else
 						{
-							Quest.instance.variables[objInt().zpos] ^= VariableValue();
+							Quest.instance.variables[zpos] ^= VariableValue();
 							operation = "xor";
 						}
 					}
@@ -109,17 +109,17 @@ public class a_set_variable_trap : a_variable_trap {
 			case 6://Shift left
 				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
 				//Quest.instance.variables[VariableIndex] = Quest.instance.variables[VariableIndex]<<VariableValue);
-				Quest.instance.variables[objInt().zpos] =	Quest.instance.variables[objInt().zpos] * (2*VariableValue()) & 63;
+				Quest.instance.variables[zpos] =	Quest.instance.variables[zpos] * (2*VariableValue()) & 63;
 				operation = "shl";
 				break;
 
 			}
-			Debug.Log (this.name  + "Operation + " + operation + " Variable " + objInt().zpos + " was " + OrigValue + " now =" + Quest.instance.variables[objInt().zpos] + " using varvalue" + VariableValue());
+			Debug.Log (this.name  + "Operation + " + operation + " Variable " + zpos + " was " + OrigValue + " now =" + Quest.instance.variables[zpos] + " using varvalue" + VariableValue());
 		}
 		else
 		{//Bitwise operations on bitfield
 			Debug.Log("Bitwise set variable. Not implemented yet");
-			switch(objInt().heading)
+			switch(heading)
 			{
 			case 0://Set
 				
@@ -154,9 +154,9 @@ public class a_set_variable_trap : a_variable_trap {
 		switch(_RES)
 		{
 		case GAME_UW2:
-				return objInt().owner;
+				return owner;
 		default:
-				return ((objInt().quality & 0x3f)<<8) | (((objInt().owner & 0x1f) << 3) | (objInt().y & 0x7));
+				return ((quality & 0x3f)<<8) | (((owner & 0x1f) << 3) | (ypos & 0x7));
 		}	
 	}
 }

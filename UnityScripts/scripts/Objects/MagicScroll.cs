@@ -24,8 +24,8 @@ public class MagicScroll : enchantment_base {
 
 	public override bool ApplyAttack (short damage)
 	{
-		objInt().quality-=damage;
-		if (objInt().quality<=0)
+		quality-=damage;
+		if (quality<=0)
 		{
 			ChangeType(213);//Change to debris.
 			this.gameObject.AddComponent<enchantment_base>();//Add a generic object base for behaviour. THis is the famous magic debris

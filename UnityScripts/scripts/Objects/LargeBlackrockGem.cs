@@ -4,7 +4,30 @@ using System.Linq;
 
 public class LargeBlackrockGem : Model3D {
 
-	public override bool use ()
+    private void Awake()
+    {
+        a_hack_trap_gemrotate.gem = this;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        //Initialise the gem face
+        for (int i = 0; i <= 7; i++)
+        {
+            if (i == Quest.instance.variables[6])
+            {
+                this.GetComponent<MeshRenderer>().materials[i].SetColor("_Color", Color.white);
+            }
+            else
+            {
+                this.GetComponent<MeshRenderer>().materials[i].SetColor("_Color", Color.blue);
+            }
+        }
+    }
+
+    public override bool use ()
 	{
 		if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
 		{

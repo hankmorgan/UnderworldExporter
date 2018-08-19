@@ -43,9 +43,6 @@ public class TileMapRenderer : Loader{
 		const int vNORTH= 4;
 		const int vSOUTH= 5;
 
-		//public const int LayerFloor=0;
-		//public const int LayerCeil=1;
-		
 
 		//BrushFaces
 		const int fSELF =128;

@@ -244,36 +244,36 @@ public class Container : UWEBase {
 									ObjectInteraction objSpilled= Spilled.GetComponent<ObjectInteraction>();
 									Spilled.transform.position=this.transform.position;
 									objSpilled.UpdatePosition();
-									switch(tm.Tiles[objInt.tileX,objInt.tileY].tileType)
+									switch(tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].tileType)
 									{
 									case TileMap.TILE_OPEN:
 									case TileMap.TILE_SLOPE_N:
 									case TileMap.TILE_SLOPE_S:
 									case TileMap.TILE_SLOPE_E:
 									case TileMap.TILE_SLOPE_W:
-										objSpilled.x  =(short)Random.Range(1,7);	
-										objSpilled.y  =(short)Random.Range(1,7);
+										objSpilled.xpos = (short)Random.Range(1,7);	
+										objSpilled.ypos = (short)Random.Range(1,7);
 										break;
 									case TileMap.TILE_DIAG_SE:
-										objSpilled.x  =(short)Random.Range(1,7);
-										objSpilled.y  =(short)Random.Range(0,objSpilled.x);
+										objSpilled.xpos = (short)Random.Range(1,7);
+										objSpilled.ypos = (short)Random.Range(0,objSpilled.xpos);
 										break;
 									case TileMap.TILE_DIAG_SW:
-										objSpilled.x  =(short)Random.Range(1,7);
-										objSpilled.y  =(short)Random.Range(1,7-objSpilled.x);
+										objSpilled.xpos = (short)Random.Range(1,7);
+										objSpilled.ypos = (short)Random.Range(1,7-objSpilled.xpos);
 										break;
 									case TileMap.TILE_DIAG_NE:
-										objSpilled.x  =(short)Random.Range(1,7);
-										objSpilled.y  =(short)Random.Range(8-objSpilled.x, 8);
+										objSpilled.xpos = (short)Random.Range(1,7);
+										objSpilled.ypos = (short)Random.Range(8-objSpilled.xpos, 8);
 										break;
 									case TileMap.TILE_DIAG_NW:
-										objSpilled.x  =(short)Random.Range(1,7);
-										objSpilled.y  =(short)Random.Range(objSpilled.x, 8);
+										objSpilled.xpos = (short)Random.Range(1,7);
+										objSpilled.ypos = (short)Random.Range(objSpilled.xpos, 8);
 										break;
 									}
-									objSpilled.zpos=(short)(tm.Tiles[objInt.tileX,objInt.tileY].floorHeight*4);
-									objSpilled.objectloaderinfo.x=objSpilled.x;
-									objSpilled.objectloaderinfo.y=objSpilled.y;
+									objSpilled.zpos=(short)(tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].floorHeight*4);
+									objSpilled.objectloaderinfo.xpos = objSpilled.xpos;
+									objSpilled.objectloaderinfo.ypos = objSpilled.ypos;
 									objSpilled.objectloaderinfo.zpos=objSpilled.zpos;
 									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, this.objInt().objectloaderinfo.tileX,this.objInt().objectloaderinfo.tileY,0);									
 									RemoveItemFromContainer(i);
@@ -686,7 +686,7 @@ public class Container : UWEBase {
 
 	/*public override string getEquipString ()
 	{//Assumes no container is generated as an opened one.
-		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
+		return GameWorldController.instance.objectMaster.particle[item_id+1];
 	}*/
 
 
@@ -761,33 +761,22 @@ public class Container : UWEBase {
 		/// <returns>The container equip display.</returns>
 	public Sprite GetContainerEquipDisplay ()
 	{	
-		//switch(_RES)
-		//{
-		//case GAME_UWDEMO:
-		//case GAME_UW1:
-				//{
-					switch(objInt().item_id)
-						{
-						case 128://Sack
-						case 130://pack
-						case 132://box
-						case 134://pouch
-						case 136://Map case
-						case 138://gold coffer
-								{
-									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id+1);	
-								}
-						default:
-								{
-									return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);
-								}
-						}						
-				//}
-		//default://
-			//	{
-				//	return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);					
-				//}
-		//}
+		switch(objInt().item_id)
+			{
+			case 128://Sack
+			case 130://pack
+			case 132://box
+			case 134://pouch
+			case 136://Map case
+			case 138://gold coffer
+					{
+						return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id +1);	
+					}
+			default:
+					{
+						return GameWorldController.instance.ObjectArt.RequestSprite(objInt().item_id);
+					}
+			}						
 	}
 
 	/// <summary>
@@ -802,9 +791,8 @@ public class Container : UWEBase {
 		}
 		else
 		{
-			return GameWorldController.instance.objDat.containerStats[objInt().item_id-128].objectsMask;
-		}
-			
+			return GameWorldController.instance.objDat.containerStats[objInt().item_id -128].objectsMask;
+		}			
 	}
 
 	public bool DropEvent ()

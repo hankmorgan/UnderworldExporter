@@ -9,9 +9,9 @@ public class a_timer_trigger : trigger_base {
 	protected override void Start ()
 	{
 		base.Start();
-		if (objInt().zpos!=0)
+		if (zpos!=0)
 		{
-			interval=(float)objInt().zpos;
+			interval=(float)zpos;
 		}
 		else
 		{
@@ -49,10 +49,10 @@ public class a_timer_trigger : trigger_base {
 				{
 					return true;
 				}
-		GameObject triggerObj = ObjectLoader.getGameObjectAt(objInt().link);
+		GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (this, objInt().quality,objInt().owner,objInt().flags);
+			triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);
 		}
 
 		PostActivate(src);

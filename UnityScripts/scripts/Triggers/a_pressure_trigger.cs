@@ -74,10 +74,10 @@ public class a_pressure_trigger : trigger_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		IsReleaseTrigger = ((objInt().item_id==437) || (objInt().item_id==421));
+		IsReleaseTrigger = ((item_id==437) || (item_id==421));
 						
-		TileXToWatch=objInt().tileX;
-		TileYToWatch=objInt().tileY;
+		TileXToWatch=ObjectTileX;
+		TileYToWatch=ObjectTileY;
 		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
 		TileVector=new Vector3(TileVector.x,this.transform.position.y,TileVector.z);
 		//int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
@@ -99,9 +99,9 @@ public class a_pressure_trigger : trigger_base {
 		PreviousWeightOnTrigger=WeightOnTrigger;
 		//Debug.Log("starting weight is " + PreviousWeightOnTrigger);
 
-		if ( GameWorldController.instance.CurrentObjectList().objInfo[objInt().link].GetItemType()== ObjectInteraction.A_DOOR_TRAP)
+		if ( GameWorldController.instance.CurrentObjectList().objInfo[link].GetItemType()== ObjectInteraction.A_DOOR_TRAP)
 		{					
-			ObjectInteraction objDoorTrap=	ObjectLoader.getObjectIntAt(objInt().link);
+			ObjectInteraction objDoorTrap=	ObjectLoader.getObjectIntAt(link);
 
 			if (objDoorTrap!=null)
 			{
@@ -199,7 +199,7 @@ public class a_pressure_trigger : trigger_base {
 		/// <param name="newTexture">New texture.</param>
 	public void UpdateTileTexture(int newTexture)
 	{//Question. Is the texture map always 7 & 8??
-				if (objInt().x==3)
+				if (xpos == 3)
 				{//TODO:confirm this behaviour is consistent
 						return;
 				}

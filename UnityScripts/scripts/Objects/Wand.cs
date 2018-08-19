@@ -21,32 +21,32 @@ public class Wand : enchantment_base {
 	{
 		if (linkedspell!=null)
 		{
-			return linkedspell.objInt().link-256;
+			return linkedspell.link-256;
 		}
 		else
 		{
 			if (_RES!=GAME_UW2)
 			{
-				switch (objInt().link)		
+				switch (link)		
 				{
 				//TODO:Figure out the range here!
 
 				case 579://frog
 				case 580://maze
 				case 581://hallucination
-						return objInt().link-368;	
+						return link-368;	
 				default:
-						return objInt().link-256;	
+						return link-256;	
 				}
 			}
 			else
 			{//TODO:Figure out the range here!
-				switch (objInt().link)		
+				switch (link)		
 				{
 				case 576://altara
-					return objInt().link-368;	
+					return link-368;	
 				default:
-					return objInt().link-256;	
+					return link-256;	
 				}
 			}
 		}
@@ -60,26 +60,26 @@ public class Wand : enchantment_base {
 				{
 					return true;
 				}
-						if (((objInt().item_id>=156) && (objInt().item_id<=159)))
+						if (((item_id>=156) && (item_id<=159)))
 						{	
 								return true;//Don't use broken wands
 						}
 
 				if (GetActualSpellIndex()<0)
 				{//Break invalid wands
-						if (((objInt().item_id>=152) && (objInt().item_id<=155)))
+						if (((item_id>=152) && (item_id<=155)))
 						{										
 							BreakWand ();
 						}
 						return true;
 				}
-			if (objInt().quality >0)
+			if (quality >0)
 				{
 					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf, Magic.SpellRule_Immediate);
 					if (objInt().isEnchanted()==false)
 						{
-						objInt().quality--;
-						if ( (objInt().quality ==0) && (  (objInt().item_id>=152) && (objInt().item_id<=155) ) )
+						quality--;
+						if ( (quality ==0) && (  (item_id>=152) && (item_id<=155) ) )
 						{										
 							BreakWand ();
 						}
@@ -96,11 +96,11 @@ public class Wand : enchantment_base {
 	void BreakWand ()
 	{
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_with_a_loud_snap_the_wand_cracks_));
-		objInt ().item_id = objInt ().item_id + 4;
+		item_id = item_id + 4;
 		//Become a broken wand.
-		objInt ().InvDisplayIndex = objInt ().InvDisplayIndex + 4;
-		objInt ().WorldDisplayIndex = objInt ().WorldDisplayIndex + 4;
-		objInt ().RefreshAnim ();
+		objInt().InvDisplayIndex = objInt().InvDisplayIndex + 4;
+		objInt().WorldDisplayIndex = objInt().WorldDisplayIndex + 4;
+		objInt().RefreshAnim ();
 	}
 
 	public override bool LookAt ()
@@ -116,7 +116,7 @@ public class Wand : enchantment_base {
 		case ObjectInteraction.IdentificationFlags.PartiallyIdentified:
 				if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 				{
-						objInt().heading=7;
+						heading=7;
 						FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
 				}
 				else
@@ -127,11 +127,11 @@ public class Wand : enchantment_base {
 				break;
 		}	
 
-		if ((objInt().quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
+		if ((quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
 		{//TODO: is the quality here the quality on the wand or the quality on the spell object? Is this behaviour different in uw1 vs uw2
 			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "
-				+ objInt().quality 
+				+ quality 
 				+ " charges remaining.");
 		}
 		else
@@ -166,7 +166,7 @@ public class Wand : enchantment_base {
 
     public override void MoveToWorldEvent ()
 	{
-		if (objInt().enchantment==0)
+		if (enchantment==0)
 		{//Object links to a spell.
 			if (linkedspell !=null)
 			{
@@ -179,11 +179,11 @@ public class Wand : enchantment_base {
 					{												
 						if (objList[i].instance!=null)
 						{
-							if (objList[i].link == linkedspell.objInt().link)
+							if (objList[i].link == linkedspell.link)
 							{
 								Destroy(linkedspell.gameObject);
 								linkedspell = objList[i].instance.GetComponent<a_spell>();
-								objInt().link = i;
+								link = i;
 								match=true;
 								break;	
 							}
@@ -202,7 +202,7 @@ public class Wand : enchantment_base {
 
 	public override void MoveToInventoryEvent ()
 	{
-		if (objInt().enchantment==0)
+		if (enchantment==0)
 		{//Object links to a spell.
 			if (linkedspell !=null)
 			{

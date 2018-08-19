@@ -31,8 +31,8 @@ public class trap_base : object_base {
 
 	public virtual void TriggerNext(int triggerX, int triggerY, int State)
 	{
-		if(objInt().link==0){return;}
-		GameObject triggerObj= ObjectLoader.getGameObjectAt(objInt().link); // GameObject.Find (TriggerObject);
+		if(link==0){return;}
+		GameObject triggerObj= ObjectLoader.getGameObjectAt(link); // GameObject.Find (TriggerObject);
 		if (triggerObj!=null)
 		{
 			trigger_base trig= triggerObj.GetComponent<trigger_base>();
@@ -61,8 +61,8 @@ public class trap_base : object_base {
 	public virtual void PostActivate(object_base src)
 	{
 		//Destruction of traps is probably controlled by the trigger.
-		//int TriggerRepeat = (objInt().flags>>1) & 0x1;
-		int TriggerRepeat = (objInt().flags) & 0x1;
+		//int TriggerRepeat = (flags>>1) & 0x1;
+		int TriggerRepeat = (flags) & 0x1;
 		if (TriggerRepeat==0)
 		{
 			DestroyTrap (src);
@@ -79,8 +79,8 @@ public class trap_base : object_base {
 				}
 			}
 		}
-		objInt ().objectloaderinfo.InUseFlag = 0;
-		//ObjectInteraction.UpdateLinkedList (objInt (), objInt ().tileX, objInt ().tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
+		objInt().objectloaderinfo.InUseFlag = 0;
+		//ObjectInteraction.UpdateLinkedList (objInt(), objInt().tileX, objInt().tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
 		Destroy (this.gameObject);
 	}
 

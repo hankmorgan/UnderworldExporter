@@ -48,7 +48,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		switch (objInt().owner)
+		switch (owner)
 		{
 			case 0://Exit from zones to pyramid
 			case 1:
@@ -56,7 +56,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 			case 3:
 			case 4:
 			case 5:
-				ExitToPyramid(objInt().owner);
+				ExitToPyramid(owner);
 				break;
 			case 16:
 				LeaveArea();
@@ -74,7 +74,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 				StepOnPyramid(TileMap.visitTileX, TileMap.visitTileY);
 				break;
 			default:
-				UWHUD.instance.MessageScroll.Add("Unimplemented qbert destination " + objInt().owner);
+				UWHUD.instance.MessageScroll.Add("Unimplemented qbert destination " + owner);
 				break;
 		}
 	}
@@ -121,7 +121,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 	void RandomTeleport(object_base src)
 	{
 		ObjectInteraction obj=null;
-		if (FindMoongateInTile((int)src.objInt().tileX,(int)src.objInt().tileY,out obj))
+		if (FindMoongateInTile((int)src.ObjectTileX, (int)src.ObjectTileY, out obj))
 		{//not all teleport locations are confirmed!
 		switch (obj.link)
 			{

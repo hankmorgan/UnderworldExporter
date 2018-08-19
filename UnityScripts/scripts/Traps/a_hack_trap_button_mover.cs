@@ -10,7 +10,7 @@ public class a_hack_trap_button_mover : a_hack_trap {
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {//950-954-- not sure yet if this is the correct behaviour to hard code indices
-        switch (src.objInt().owner)
+        switch (src.owner)
         {
             case 1://moves buttons 1/2
                 MoveButton(950);
@@ -33,7 +33,7 @@ public class a_hack_trap_button_mover : a_hack_trap {
                 MoveButton(950);
                 break;
             default:
-                Debug.Log("unknown switch to move " + src.objInt().owner);
+                Debug.Log("unknown switch to move " + src.owner);
                 break;
         }
     }
@@ -43,13 +43,13 @@ public class a_hack_trap_button_mover : a_hack_trap {
         if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance != null)
         {
             ObjectInteraction button = GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
-            if (button.zpos == objInt().zpos)
+            if (button.zpos == zpos)
             {
-                MoveButton((short)(objInt().zpos + objInt().owner), button);
+                MoveButton((short)(zpos + owner), button);
             }
             else
             {//Move back
-                MoveButton(objInt().zpos , button);
+                MoveButton(zpos , button);
             }
         }
         
@@ -59,7 +59,7 @@ public class a_hack_trap_button_mover : a_hack_trap {
     {
         buttonToMove.zpos = NewZpos;
         buttonToMove.objectloaderinfo.zpos = NewZpos;
-        Vector3 newPos = ObjectLoader.CalcObjectXYZ(_RES, GameWorldController.instance.currentTileMap(), GameWorldController.instance.currentTileMap().Tiles, GameWorldController.instance.CurrentObjectList().objInfo, buttonToMove.objectloaderinfo.index, buttonToMove.tileX, buttonToMove.tileY, 0);
+        Vector3 newPos = ObjectLoader.CalcObjectXYZ(_RES, GameWorldController.instance.currentTileMap(), GameWorldController.instance.currentTileMap().Tiles, GameWorldController.instance.CurrentObjectList().objInfo, buttonToMove.objectloaderinfo.index, buttonToMove.ObjectTileX, buttonToMove.ObjectTileY, 0);
         buttonToMove.transform.position = newPos;
     }
 

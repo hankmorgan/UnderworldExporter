@@ -30,29 +30,29 @@ public class a_hack_trap_terraform_puzzle : a_hack_trap {
 	{
 		//base.ExecuteTrap (src, triggerX, triggerY, State);
 		//change the x columns first
-		if (objInt().x!=0)
+		if (xpos != 0)
 		{
-			ChangeColumn(triggerX,triggerY,0,objInt().x);
+			ChangeColumn(triggerX,triggerY,0,xpos);
 		}
 
-		if (objInt().y!=0)
+		if (ypos != 0)
 		{
-			ChangeColumn(triggerX,triggerY,1,objInt().y);
+			ChangeColumn(triggerX,triggerY,1,ypos);
 		}
 
-		if (objInt().heading!=0)
+		if (heading!=0)
 		{
-			ChangeColumn(triggerX,triggerY,2,objInt().heading);
+			ChangeColumn(triggerX,triggerY,2,heading);
 		}
 
-		if ((objInt().zpos & 0x7)!=0)
+		if ((zpos & 0x7)!=0)
 		{
-			ChangeColumn(triggerX,triggerY,3,(objInt().zpos & 0x7));
+			ChangeColumn(triggerX,triggerY,3,(zpos & 0x7));
 		}
 
-		if (((objInt().zpos>>3) & 0x7)!=0)
+		if (((zpos>>3) & 0x7)!=0)
 		{
-			ChangeColumn(triggerX,triggerY,4,((objInt().zpos>>3) & 0x7));
+			ChangeColumn(triggerX,triggerY,4,((zpos>>3) & 0x7));
 		}
 
 	}
@@ -68,13 +68,13 @@ public class a_hack_trap_terraform_puzzle : a_hack_trap {
 			if(tileFlag ==1)//This tile will change
 			{
 			int tileY = baseY+ (i*3);					
-				if (GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight/2==objInt().owner-2)
+				if (GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight/2==owner-2)
 				{
 					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=4;	
 				}
 				else
 				{
-					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=(short)((objInt().owner-2)*2);
+					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=(short)((owner-2)*2);
 					if ((TileMap.visitTileX == tileX) && (TileMap.visitTileY==tileY))
 					{
 						UWCharacter.Instance.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);

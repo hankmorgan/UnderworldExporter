@@ -19,11 +19,11 @@ public class a_special_effect_trap : trap_base {
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        switch (objInt().quality)
+        switch (quality)
         {
             case 4:
                 //Call a camera shake effect
-                CameraShake.instance.shakeDuration = objInt().owner * 0.2f;
+                CameraShake.instance.shakeDuration = owner * 0.2f;
                 break;
             case 5:
                 StartCoroutine(Flash("FadeToRed"));

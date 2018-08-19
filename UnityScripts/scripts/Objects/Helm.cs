@@ -5,7 +5,7 @@ public class Helm : Armour {
 
 	public override int GetActualSpellIndex ()
 	{
-		return objInt().link-512;
+		return link-512;
 	}
 
 }
