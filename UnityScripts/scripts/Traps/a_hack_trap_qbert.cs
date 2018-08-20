@@ -592,7 +592,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 			{
 				if (objList[i].GetItemType() == ObjectInteraction.MOONGATE)
 				{
-					if ((objList[i].tileX == tileX) && (objList[i].tileY == tileY))
+					if ((objList[i].ObjectTileX == tileX) && (objList[i].ObjectTileY == tileY))
 					{
 						obj= objList[i].instance;
 						return true;

@@ -23,8 +23,15 @@ public class map_object : object_base {
 			}
 		}
 		else
-		{//Make this bridge use it's box collider for collision
+		{//Make this object use it's box collider for collision
 			this.gameObject.layer=LayerMask.NameToLayer("MapMesh");
 		}
 	}
+
+    public override void DestroyEvent()
+    {
+        base.DestroyEvent();
+        Destroy(ModelInstance);
+    }
+
 }

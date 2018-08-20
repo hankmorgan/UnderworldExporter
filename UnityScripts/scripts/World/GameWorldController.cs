@@ -2394,8 +2394,8 @@ public class GameWorldController : UWEBase
                 writer.WriteLine("\t\t\t<IsQuant>" + objList[o].is_quant + "</IsQuant>");
                 writer.WriteLine("\t\t\t<Texture>" + objList[o].texture + "</Texture>");
                 writer.WriteLine("\t\t\t<Position>");
-                writer.WriteLine("\t\t\t\t<tileX>" + objList[o].tileX + "</tileX>");
-                writer.WriteLine("\t\t\t\t<tileY>" + objList[o].tileY + "</tileY>");
+                writer.WriteLine("\t\t\t\t<ObjectTileX>" + objList[o].ObjectTileX + "</ObjectTileX>");
+                writer.WriteLine("\t\t\t\t<ObjectTileY>" + objList[o].ObjectTileY + "</ObjectTileY>");
                 writer.WriteLine("\t\t\t\t<xpos>" + objList[o].xpos + "</xpos>");
                 writer.WriteLine("\t\t\t\t<ypos>" + objList[o].ypos + "</ypos>");
                 writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");

@@ -72,8 +72,8 @@ public class ObjectLoaderInfo : UWClass
     //My additions
     public short InUseFlag;//Based on values and no of values in the mobile and static free lists.
     public short levelno;//Use for unique naming of the object
-    public short tileX; //Position of the object on the tilemap
-    public short tileY;
+    public short ObjectTileX; //Position of the object on the tilemap
+    public short ObjectTileY;
     public long address;
 
 

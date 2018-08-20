@@ -1998,8 +1998,8 @@ public class SaveGame : Loader
                 objLoader.objInfo[x].index = x;
                 objLoader.objInfo[x].guid = System.Guid.NewGuid();
                 objLoader.objInfo[x].parentList = objLoader;
-                objLoader.objInfo[x].tileX = TileMap.ObjectStorageTile;
-                objLoader.objInfo[x].tileY = TileMap.ObjectStorageTile;
+                objLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
+                objLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
                 objLoader.objInfo[x].InUseFlag = 1;
                 objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer, i + 0, 16)) & 0x1FF;
                 objLoader.objInfo[x].flags = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 9) & 0x07);

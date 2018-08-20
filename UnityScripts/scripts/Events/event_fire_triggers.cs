@@ -14,7 +14,7 @@ public class event_fire_triggers : event_base {
 				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
 				for (int o=256; o<=objList.GetUpperBound(0);o++)
 				{
-						if ( (objList[o].tileX==eventTileX) && (objList[o].tileY==eventTileY) && (objList[o].instance!=null))
+						if ( (objList[o].ObjectTileX == eventTileX) && (objList[o].ObjectTileY == eventTileY) && (objList[o].instance!=null))
 						{
 								if (ObjectLoader.isTrigger(objList[o]))
 								{

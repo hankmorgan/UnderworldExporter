@@ -809,13 +809,13 @@ public class IngameEditor : GuiBase_Draggable {
 				float targetY= (float)TileY*1.2f + 0.6f;
 				if (ObjectDetailsPanel.gameObject.activeInHierarchy)
 				{
-						if (currObj.tileX!=99)
+						if (currObj.ObjectTileX != 99)
 						{
-								targetX=(float)currObj.tileX*1.2f + 0.6f;	
+								targetX=(float)currObj.ObjectTileX * 1.2f + 0.6f;	
 						}
-						if (currObj.tileY!=99)
+						if (currObj.ObjectTileY != 99)
 						{
-								targetY=(float)currObj.tileY*1.2f + 0.6f;	
+								targetY=(float)currObj.ObjectTileY * 1.2f + 0.6f;	
 						}
 
 				}
@@ -887,8 +887,8 @@ public class IngameEditor : GuiBase_Draggable {
 			{
 				currObj.instance.UpdatePosition();
 			}
-			ObjectTileX.text=currObj.tileX.ToString();
-			ObjectTileY.text=currObj.tileY.ToString();
+			ObjectTileX.text=currObj.ObjectTileX.ToString();
+			ObjectTileY.text=currObj.ObjectTileY.ToString();
 
 			ObjectXPos.text=currObj.xpos.ToString();
 			ObjectYPos.text=currObj.ypos.ToString();
@@ -1081,8 +1081,8 @@ public class IngameEditor : GuiBase_Draggable {
 				{
 					val=TileMap.ObjectStorageTile;
 				}
-				currObj.tileX= (short)(val);
-				ObjectTileX.text=currObj.tileX.ToString();
+				currObj.ObjectTileX = (short)(val);
+				ObjectTileX.text=currObj.ObjectTileX.ToString();
 			}
 
 			if (int.TryParse(ObjectTileY.text, out val))
@@ -1091,8 +1091,8 @@ public class IngameEditor : GuiBase_Draggable {
 				{
 					val=TileMap.ObjectStorageTile;
 				}
-				currObj.tileY= (short)(val);
-				ObjectTileY.text=currObj.tileY.ToString();
+				currObj.ObjectTileY = (short)(val);
+				ObjectTileY.text=currObj.ObjectTileY.ToString();
 			}
 
 
@@ -1119,23 +1119,23 @@ public class IngameEditor : GuiBase_Draggable {
 						GameWorldController.instance.currentTileMap(), 
 						GameWorldController.instance.currentTileMap().Tiles, 
 						GameWorldController.instance.CurrentObjectList().objInfo, 
-						(long)currObj.index, (short)currObj.tileX, 
-						(short)currObj.tileY,0);
+						(long)currObj.index, (short)currObj.ObjectTileX, 
+						(short)currObj.ObjectTileY, 0);
 				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
 								currObj  ,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject, 
 						pos );
 			}
 			else
 			{
-				if (currObj.tileX<=TileMap.TileMapSizeX)//A object is brought from off map.
+				if (currObj.ObjectTileX <= TileMap.TileMapSizeX)//A object is brought from off map.
 				{
 					currObj.InUseFlag=1;
 					Vector3 pos = ObjectLoader.CalcObjectXYZ(_RES,
 							GameWorldController.instance.currentTileMap(), 
 							GameWorldController.instance.currentTileMap().Tiles, 
 							GameWorldController.instance.CurrentObjectList().objInfo, 
-							(long)currObj.index, (short)currObj.tileX, 
-							(short)currObj.tileY,0);
+							(long)currObj.index, (short)currObj.ObjectTileX, 
+							(short)currObj.ObjectTileY, 0);
 					ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
 							currObj,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject, 
 							pos );

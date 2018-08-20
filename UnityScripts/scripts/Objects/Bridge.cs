@@ -10,14 +10,16 @@ public class Bridge : map_object {
 	//public int TextureIndex;
 	//public string UseLink;//A trigger to fire when used.
 
-
-
-
-
 	protected override void Start ()
-	{
-		base.Start ();
-		BoxCollider bx = this.GetComponent<BoxCollider>();
+	{		
+        if (invis==0)
+        {
+            TileMapRenderer.RenderBridge(GameWorldController.instance.SceneryModel, GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList(), objInt().objectloaderinfo.index);
+        }
+
+        base.Start();
+
+        BoxCollider bx = this.GetComponent<BoxCollider>();
 		if (bx!=null)
 		{
 			bx.center=new Vector3(0.08f, 0.006f, 0.08f);	
@@ -54,7 +56,7 @@ public class Bridge : map_object {
 			}
 			else
 			{
-					int TextureIndex=(enchantment<<3) | flags & 0x3F;
+					int TextureIndex=(enchantment<<3) | flags & 0x3F; //<--Is this correct. Flags is only 3 bits long!
 					//Return material description
 					UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
 					return true;

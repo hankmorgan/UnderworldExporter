@@ -13,7 +13,7 @@ public class event_scheduled : event_base {
 				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
 				for (int o=256; o<=objList.GetUpperBound(0);o++)
 				{
-						if ( (objList[o].tileX==eventTileX) && (objList[o].tileY==eventTileY) && (objList[o].instance!=null))
+						if ( (objList[o].ObjectTileX == eventTileX) && (objList[o].ObjectTileY == eventTileY) && (objList[o].instance!=null))
 						{
 								if (objList[o].instance.GetItemType()==ObjectInteraction.A_SCHEDULED_TRIGGER)	
 								{

@@ -987,6 +987,7 @@ public class ObjectInteraction : UWEBase
     {
         if ((isQuant() == false) || ((isQuant()) && (link == 1)) || (isEnchanted() == true))
         {//the last of the item or is not a quantity;
+            this.GetComponent<object_base>().DestroyEvent();
             Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
             //Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
             if (!cn.RemoveItemFromContainer(this.name))
@@ -1000,10 +1001,6 @@ public class ObjectInteraction : UWEBase
             }
             UWCharacter.Instance.playerInventory.Refresh();
             objectloaderinfo.InUseFlag = 0;//Free up the slot
-                                           //if (PickedUp==false)
-                                           //{
-                                           //	UpdateLinkedList(this, tileX,tileY, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile);
-                                           //}
             Destroy(this.gameObject);
         }
         else
@@ -1763,8 +1760,8 @@ public class ObjectInteraction : UWEBase
         objectloaderinfo.xpos = xpos;
         objectloaderinfo.ypos = ypos;
         objectloaderinfo.zpos = zpos;
-        objectloaderinfo.tileX = ObjectTileX;
-        objectloaderinfo.tileY = ObjectTileY;
+        objectloaderinfo.ObjectTileX = ObjectTileX;
+        objectloaderinfo.ObjectTileY = ObjectTileY;
         startPos = this.transform.position;
     }
 
@@ -1806,8 +1803,8 @@ public class ObjectInteraction : UWEBase
         objInt.heading = currObj.heading;
         objInt.zpos = currObj.zpos;
         objInt.owner = currObj.owner;
-        objInt.ObjectTileX = currObj.tileX;
-        objInt.ObjectTileY = currObj.tileY;
+        objInt.ObjectTileX = currObj.ObjectTileX;
+        objInt.ObjectTileY = currObj.ObjectTileY;
         objInt.objectloaderinfo = currObj;//link back to the list directly.
         objInt.next = currObj.next;
 

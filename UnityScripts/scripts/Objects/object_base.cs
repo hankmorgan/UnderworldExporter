@@ -1345,4 +1345,12 @@ return false;*/
         return deflectionXY * dir;
     }
 
+    /// <summary>
+    /// Event to call when the object is destroyed fully.
+    /// </summary>
+    public virtual void DestroyEvent()
+    {
+
+    }
+
 }

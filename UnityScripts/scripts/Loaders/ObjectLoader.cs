@@ -340,8 +340,8 @@ public class ObjectLoader : DataLoader
             objList[MasterIndex].InUseFlag = InUseFlag;
 
             objList[MasterIndex].levelno = (short)LevelNo;
-            objList[MasterIndex].tileX = xref[xref_ptr].tileX;
-            objList[MasterIndex].tileY = xref[xref_ptr].tileY;
+            objList[MasterIndex].ObjectTileX = xref[xref_ptr].tileX;
+            objList[MasterIndex].ObjectTileY = xref[xref_ptr].tileY;
             objList[MasterIndex].next = xref[xref[xref_ptr].next].MstIndex;
             objList[MasterIndex].parentList = this;
 
@@ -497,8 +497,8 @@ public class ObjectLoader : DataLoader
             objList[x].guid = System.Guid.NewGuid();
             objList[x].index = x;
             //free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
-            objList[x].tileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-            objList[x].tileY = TileMap.ObjectStorageTile;
+            objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+            objList[x].ObjectTileY = TileMap.ObjectStorageTile;
             objList[x].levelno = (short)LevelNo;
             objList[x].next = 0;
             objList[x].address = lev_ark.Address + objectsAddress + address_pointer;
@@ -841,8 +841,8 @@ public class ObjectLoader : DataLoader
             objList[x].guid = System.Guid.NewGuid();
             objList[x].index = x;
             //free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
-            objList[x].tileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-            objList[x].tileY = TileMap.ObjectStorageTile;
+            objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+            objList[x].ObjectTileY = TileMap.ObjectStorageTile;
             objList[x].levelno = (short)LevelNo;
             objList[x].next = 0;
             objList[x].address = objectsAddress + address_pointer;
@@ -1219,9 +1219,9 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.DOOR:
             case ObjectInteraction.HIDDENDOOR:
             case ObjectInteraction.PORTCULLIS:
-                return "door_" + currObj.tileX.ToString("d3") + "_" + currObj.tileY.ToString("d3");
+                return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
             default:
-                return currObj.getDesc() + "_" + currObj.tileX.ToString("d2") + "_" + currObj.tileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
         }
     }
 
@@ -1250,8 +1250,8 @@ public class ObjectLoader : DataLoader
                     long nextObj = LevelInfo[x, y].indexObjectList;
                     while (nextObj != 0)
                     {
-                        objList[nextObj].tileX = x;
-                        objList[nextObj].tileY = y;
+                        objList[nextObj].ObjectTileX = x;
+                        objList[nextObj].ObjectTileY = y;
                         //objList[nextObj].InUseFlag = 1;
                         /*Free	if ((isContainer(objList[nextObj])) || (GameWorldController.instance.objectMaster.type[objList[nextObj].item_id] == ObjectInteraction.NPC_TYPE))
                             {
@@ -1521,8 +1521,8 @@ public class ObjectLoader : DataLoader
                             //LevelInfo[x,y].hasElevator= true;
                             LevelInfo[x, y].TerrainChange = true;
                             //LevelInfo[x,y].ElevatorIndex = currObj.index;
-                            currObj.tileX = x;
-                            currObj.tileY = y;
+                            currObj.ObjectTileX = x;
+                            currObj.ObjectTileY = y;
                             break;
                         }
                         currObj = objList[currObj.next];
@@ -1570,8 +1570,8 @@ public class ObjectLoader : DataLoader
                                     }
                                 }
                             }
-                            currObj.tileX = x;
-                            currObj.tileY = y;
+                            currObj.ObjectTileX = x;
+                            currObj.ObjectTileY = y;
                             //break;
                         }
                         currObj = objList[currObj.next];
@@ -1700,9 +1700,9 @@ public class ObjectLoader : DataLoader
                 {
                     if (objList[i].quality == 0xE)
                     {
-                        for (int x = objList[i].tileX - 1; x <= objList[i].tileX + 5; x++)
+                        for (int x = objList[i].ObjectTileX - 1; x <= objList[i].ObjectTileX + 5; x++)
                         {
-                            for (int y = objList[i].tileY - 1; y <= objList[i].tileY + 5; y++)
+                            for (int y = objList[i].ObjectTileY - 1; y <= objList[i].ObjectTileY + 5; y++)
                             {
                                 if (TileMap.ValidTile(x, y))
                                 {
@@ -1800,10 +1800,10 @@ public class ObjectLoader : DataLoader
                         //Doors will always go at the tile height.
                         int newZpos = tileMap.Tiles[x, y].floorHeight * 4;
                         offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[index].tileX, objList[index].tileY, ObjectInteraction.BRIDGE);
+                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[index].ObjectTileX, objList[index].ObjectTileY, ObjectInteraction.BRIDGE);
                         if (BridgeIndex != -1)
                         {
-                            offZ = ObjectLoader.CalcObjectXYZ(_RES, tileMap, LevelInfo, objList, BridgeIndex, objList[index].tileX, objList[index].tileY, 0).y * 100;
+                            offZ = ObjectLoader.CalcObjectXYZ(_RES, tileMap, LevelInfo, objList, BridgeIndex, objList[index].ObjectTileX, objList[index].ObjectTileY, 0).y * 100;
                         }
 
 
@@ -1811,25 +1811,25 @@ public class ObjectLoader : DataLoader
                         {//Move the object position so it can located in the right position in the centre of the frame.
                             case ObjectInteraction.HEADINGWEST:
                                 {
-                                    offY = (objList[index].tileY * BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
+                                    offY = (objList[index].ObjectTileY * BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
                                     //offY = (((float)(objList[index].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
                                     break;
                                 }
                             case ObjectInteraction.HEADINGEAST:
                                 {
-                                    offY = (objList[index].tileY * BrushY + ((BrushY - DOORWIDTH) / 2f));
+                                    offY = (objList[index].ObjectTileY * BrushY + ((BrushY - DOORWIDTH) / 2f));
                                     //offY = ((float)objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
                                     break;
                                 }
                             case ObjectInteraction.HEADINGNORTH:
                                 {
-                                    offX = (objList[index].tileX * BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
+                                    offX = (objList[index].ObjectTileX * BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
                                     //offX = ((float)objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
                                     break;
                                 }
                             case ObjectInteraction.HEADINGSOUTH:
                                 {
-                                    offX = (objList[index].tileX * BrushX + ((BrushX - DOORWIDTH) / 2f));
+                                    offX = (objList[index].ObjectTileX * BrushX + ((BrushX - DOORWIDTH) / 2f));
                                     //offX = ((float)objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
                                     break;
                                 }
@@ -1936,7 +1936,7 @@ public class ObjectLoader : DataLoader
                     }
                     else
                     {
-                        position = CalcObjectXYZ(_RES, tilemap, tilemap.Tiles, instance.objInfo, i, instance.objInfo[i].tileX, instance.objInfo[i].tileY, 1);
+                        position = CalcObjectXYZ(_RES, tilemap, tilemap.Tiles, instance.objInfo, i, instance.objInfo[i].ObjectTileX, instance.objInfo[i].ObjectTileY, 1);
                     }
 
                     instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i], instance.objInfo, parent, position);
@@ -2041,7 +2041,7 @@ public class ObjectLoader : DataLoader
             {
                 ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
             }
-            bool OnMap = currObjList.objInfo[i].tileX != TileMap.ObjectStorageTile;
+            bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
             if ((OnMap))
             {//Only clear nexts if the object is not an offmap trigger/trap
                 currObjList.objInfo[i].next = 0;
@@ -2082,8 +2082,8 @@ public class ObjectLoader : DataLoader
                 {
                     objInt.objectloaderinfo = new ObjectLoaderInfo();
                     objInt.objectloaderinfo.InUseFlag = 0;
-                    objInt.objectloaderinfo.tileX = TileMap.ObjectStorageTile;
-                    objInt.objectloaderinfo.tileY = TileMap.ObjectStorageTile;
+                    objInt.objectloaderinfo.ObjectTileX = TileMap.ObjectStorageTile;
+                    objInt.objectloaderinfo.ObjectTileY = TileMap.ObjectStorageTile;
                 }
                 objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
                 if (objInt.objectloaderinfo.InUseFlag == 1)
@@ -2106,8 +2106,8 @@ public class ObjectLoader : DataLoader
         //rebuild the linked list
         for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
         {
-            int x = currObjList.objInfo[i].tileX;
-            int y = currObjList.objInfo[i].tileY;
+            int x = currObjList.objInfo[i].ObjectTileX;
+            int y = currObjList.objInfo[i].ObjectTileY;
             if (currObjList.objInfo[i].InUseFlag == 1)
             {
                 if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
@@ -2496,8 +2496,8 @@ public class ObjectLoader : DataLoader
         info.owner = objInt.owner;  //Also special
         info.link = objInt.link;    //also quantity	
 
-        info.tileX = objInt.ObjectTileX;
-        info.tileY = objInt.ObjectTileY;
+        info.ObjectTileX = objInt.ObjectTileX;
+        info.ObjectTileY = objInt.ObjectTileY;
 
         //mobile object specific
         if (info.index < 256)
@@ -2573,8 +2573,8 @@ public class ObjectLoader : DataLoader
                 GameWorldController.instance.CurrentObjectList().objInfo[index].doordir = 0;
                 GameWorldController.instance.CurrentObjectList().objInfo[index].is_quant = 0;
                 GameWorldController.instance.CurrentObjectList().objInfo[index].enchantment = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].tileX = TileMap.ObjectStorageTile;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].tileY = TileMap.ObjectStorageTile;
+                GameWorldController.instance.CurrentObjectList().objInfo[index].ObjectTileX = TileMap.ObjectStorageTile;
+                GameWorldController.instance.CurrentObjectList().objInfo[index].ObjectTileY = TileMap.ObjectStorageTile;
                 GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag = 1;
                 GameWorldController.instance.CurrentObjectList().objInfo[index].index = index;
                 return GameWorldController.instance.CurrentObjectList().objInfo[index];
@@ -2597,8 +2597,8 @@ public class ObjectLoader : DataLoader
             objI.doordir = 0;
             objI.is_quant = 0;
             objI.enchantment = 0;
-            objI.tileX = TileMap.ObjectStorageTile;
-            objI.tileY = TileMap.ObjectStorageTile;
+            objI.ObjectTileX = TileMap.ObjectStorageTile;
+            objI.ObjectTileY = TileMap.ObjectStorageTile;
             objI.InUseFlag = 1;
             objI.index = index;
             return objI;
@@ -3901,9 +3901,11 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
             if (
-                    (objList[i].tileX == tileX)
+                    (objList[i].InUseFlag !=0)
                     &&
-                    (objList[i].tileY == tileY)
+                    (objList[i].ObjectTileX == tileX)
+                    &&
+                    (objList[i].ObjectTileY == tileY)
                     &&
                     (objList[i].GetItemType() == itemType)
             )

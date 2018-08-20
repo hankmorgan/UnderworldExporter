@@ -275,7 +275,7 @@ public class Container : UWEBase {
 									objSpilled.objectloaderinfo.xpos = objSpilled.xpos;
 									objSpilled.objectloaderinfo.ypos = objSpilled.ypos;
 									objSpilled.objectloaderinfo.zpos=objSpilled.zpos;
-									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, this.objInt().objectloaderinfo.tileX,this.objInt().objectloaderinfo.tileY,0);									
+									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, this.objInt().objectloaderinfo.ObjectTileX, this.objInt().objectloaderinfo.ObjectTileY, 0);									
 									RemoveItemFromContainer(i);
 									Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
 									GameWorldController.UnFreezeMovement(Spilled);

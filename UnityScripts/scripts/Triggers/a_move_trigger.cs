@@ -104,7 +104,7 @@ A trigger that fires when the player character enters it
 					{
 						if (objList[i].GetItemType() == ObjectInteraction.MOONGATE)
 						{
-							if ((objList[i].tileX == ObjectTileX) && (objList[i].tileY == ObjectTileY))
+							if ((objList[i].ObjectTileX == ObjectTileX) && (objList[i].ObjectTileY == ObjectTileY))
 							{
 								if (objList[i].instance.invis==1)
 								{//No teleporting on an invisible moon gate in this level.
