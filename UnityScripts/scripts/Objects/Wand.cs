@@ -157,7 +157,7 @@ public class Wand : enchantment_base {
                         UWCharacter.Instance.playerInventory.RemoveItem(this.name);
                         //Remove object and place at 29,29
                         GameWorldController.MoveToWorld(objInt());
-                        this.transform.position = GameWorldController.instance.currentTileMap().getTileVector(29, 29);
+                        this.transform.position = CurrentTileMap().getTileVector(29, 29);
                     }   
                 }
             }
@@ -172,7 +172,7 @@ public class Wand : enchantment_base {
 			{
 				bool match =false;
 				//Try and find a spell already in the level that matches the characteristics of this spell
-				ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+				ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
 				for (int i =0; i<=objList.GetUpperBound(0);i++)
 				{
 					if (objList[i].GetItemType()==ObjectInteraction.SPELL)

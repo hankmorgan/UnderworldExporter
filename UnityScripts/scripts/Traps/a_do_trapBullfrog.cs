@@ -16,7 +16,7 @@ public class a_do_trapBullfrog : a_hack_trap
 
     protected override void Start()
     {
-        tm = GameWorldController.instance.currentTileMap();
+        tm = CurrentTileMap();
     }
 
 
@@ -61,8 +61,8 @@ public class a_do_trapBullfrog : a_hack_trap
             for (int y = 0; y < 8; y++)
             {
                 GameObject platformTile = GameWorldController.FindTile((BaseX + x), (BaseY + y), TileMap.SURFACE_FLOOR);
-                GameWorldController.instance.currentTileMap().Tiles[BaseX + x, BaseY + y].floorHeight = 8;//heights[targetX+x,targetY+y];
-                GameWorldController.instance.currentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
+                CurrentTileMap().Tiles[BaseX + x, BaseY + y].floorHeight = 8;//heights[targetX+x,targetY+y];
+                CurrentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
                 Destroy(platformTile);
             }
         }
@@ -81,8 +81,8 @@ public class a_do_trapBullfrog : a_hack_trap
                     if (((tm.Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight < 20) && (dir == +1)) || ((tm.Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight > 2) && (dir == -1)))
                     {
                         GameObject platformTile = GameWorldController.FindTile((BaseX + targetX + x), (BaseY + targetY + y), TileMap.SURFACE_FLOOR);
-                        GameWorldController.instance.currentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight += (short)(dir * 2);
-                        GameWorldController.instance.currentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
+                        CurrentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight += (short)(dir * 2);
+                        CurrentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
                         Destroy(platformTile);
                     }
                 }
@@ -99,8 +99,8 @@ public class a_do_trapBullfrog : a_hack_trap
                         {
                             //Raise or lower by 1
                             GameObject platformTile = GameWorldController.FindTile((BaseX + targetX + x), (BaseY + targetY + y), TileMap.SURFACE_FLOOR);
-                            GameWorldController.instance.currentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight += (short)dir;
-                            GameWorldController.instance.currentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
+                            CurrentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].floorHeight += (short)dir;
+                            CurrentTileMap().Tiles[BaseX + targetX + x, BaseY + targetY + y].TileNeedsUpdate();
                             Destroy(platformTile);
                         }
                     }

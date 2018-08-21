@@ -240,7 +240,7 @@ public class event_processor : UWClass {
 																								case event_action.RowTypeEvent:
 																										{
 																												//Fire the events in this block!
-																												ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+																												ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 																												int eventTileX=events_blocks[b].event_actions[r+eventNo].EventTileX;
 																												int eventTileY=events_blocks[b].event_actions[r+eventNo].EventTileY;
 																												for (int o=256; o<=objList.GetUpperBound(0);o++)

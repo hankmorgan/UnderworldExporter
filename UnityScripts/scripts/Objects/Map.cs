@@ -40,9 +40,9 @@ public class Map : object_base {
 		
 		if (_RES!=GAME_UW2)
 		{
-				if  (GameWorldController.instance.getMus()!=null)
+				if  (MusicController.instance!=null)
 				{
-						GameWorldController.instance.getMus().InMap=true;
+						MusicController.instance.InMap=true;
 				}            
 		}
 		UWHUD.instance.MessageScroll.Clear();

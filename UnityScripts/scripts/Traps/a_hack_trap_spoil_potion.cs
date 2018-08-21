@@ -35,7 +35,7 @@ public class a_hack_trap_spoil_potion : a_hack_trap {
 
         ObjectLoaderInfo newobjt = ObjectLoader.newObject(384, 40, 1, 0, 256);
         newobjt.InUseFlag = 1;
-        ObjectInteraction created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+        ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         GameWorldController.MoveToInventory(created);
         created.transform.parent = GameWorldController.instance.InventoryMarker.transform;
         obj.GetComponent<Potion>().linked = created;

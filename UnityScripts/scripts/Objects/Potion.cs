@@ -93,7 +93,7 @@ public class Potion : enchantment_base
             {
                 bool match = false;
                 //Try and find a spell already in the level that matches the characteristics of this spell
-                ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+                ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
                 for (int i = 0; i <= objList.GetUpperBound(0); i++)
                 {
                     if (objList[i].GetItemType() == linked.GetItemType())//Find a matching item type

@@ -153,6 +153,7 @@ public class TerrainDatLoader : Loader {
 				case WaterFlowNorth: return TerrainTypes.WaterFlowNorth;
 				//case Unknown : 
 				default:
+                    Debug.Log("terrain unknown:" + terrainNo);
 					return TerrainTypes.Unknown;
 				}
 

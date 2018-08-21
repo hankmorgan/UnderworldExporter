@@ -45,7 +45,7 @@ public class a_bridge_trap : trap_base {
             if (TileMap.ValidTile(tileX, tileY))
             {
                 //Create a bridge at this tile. Only if no bridge is already there.
-                if (ObjectLoader.findObjectByTypeInTile(GameWorldController.instance.CurrentObjectList().objInfo, (short)tileX, (short)tileY, ObjectInteraction.BRIDGE) == -1)
+                if (ObjectLoader.findObjectByTypeInTile(CurrentObjectList().objInfo, (short)tileX, (short)tileY, ObjectInteraction.BRIDGE) == -1)
                 {
                     ObjectLoaderInfo newObj = ObjectLoader.newObject(356, 40, 0, 0, 256);
                     newObj.xpos = 4; newObj.ypos = 4; newObj.zpos = zpos;
@@ -55,10 +55,8 @@ public class a_bridge_trap : trap_base {
                     newObj.heading = heading;
                     newObj.ObjectTileX = (short)tileX;
                     newObj.ObjectTileY = (short)tileY;
-                    Vector3 pos = ObjectLoader.CalcObjectXYZ(_RES, GameWorldController.instance.currentTileMap(),
-                        GameWorldController.instance.currentTileMap().Tiles,
-                        GameWorldController.instance.CurrentObjectList().objInfo, newObj.index, newObj.ObjectTileX, newObj.ObjectTileY, 0);
-                    ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newObj, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.LevelModel, pos);
+                    Vector3 pos = ObjectLoader.CalcObjectXYZ(newObj.index, 0);
+                    ObjectInteraction.CreateNewObject(CurrentTileMap(), newObj, CurrentObjectList().objInfo, GameWorldController.instance.LevelModel, pos);
                 }
             }
         }
@@ -105,7 +103,7 @@ public class a_bridge_trap : trap_base {
             int tileY = triggerY + dirY * i;
             if (TileMap.ValidTile(tileX, tileY))
             {
-                int index = ObjectLoader.findObjectByTypeInTile(GameWorldController.instance.CurrentObjectList().objInfo, (short)tileX, (short)tileY, ObjectInteraction.BRIDGE);
+                int index = ObjectLoader.findObjectByTypeInTile(CurrentObjectList().objInfo, (short)tileX, (short)tileY, ObjectInteraction.BRIDGE);
                 //Create a bridge at this tile. Only if no bridge is already there.
                 if (index != -1)
                 {

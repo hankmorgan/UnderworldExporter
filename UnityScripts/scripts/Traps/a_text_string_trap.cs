@@ -40,7 +40,7 @@ public class a_text_string_trap : trap_base {
     //       if (((flags >> 2) & 0x1) ==1)
     //	{
     //		//This string will trigger only once and will destroy all triggers linked to it as well as itself
-    //		ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+    //		ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
     //		for (int i =256; i<=objList.GetUpperBound(0);i++ )
     //		{
     //			if (objList[i].instance!=null)

@@ -9,7 +9,7 @@ public class TMAP : object_base {
 	protected override void Start ()
 	{
 		base.Start ();
-		TextureIndex=GameWorldController.instance.currentTileMap().texture_map[owner];
+		TextureIndex=CurrentTileMap().texture_map[owner];
 		CreateTMAP(this.gameObject,TextureIndex);	
 	}
 
@@ -144,7 +144,7 @@ public class TMAP : object_base {
 				Destroy(myObj.transform.GetChild(0).gameObject);
 			}
 			ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
-			TileMap tm = GameWorldController.instance.currentTileMap();
+			TileMap tm = CurrentTileMap();
 				float doorFrameOffsetX=0f;float doorFrameOffsetY=0f;
 				if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
 				{

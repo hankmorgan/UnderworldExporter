@@ -40,7 +40,7 @@ public class a_teleport_trap : trap_base {
 		UWCharacter.Instance.teleportedTimer=0f;
 		if (zpos==0)
 		{//Stay on this level.
-			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(quality,owner)))*0.15f;
+			float Height = ((float)(CurrentTileMap().GetFloorHeight(quality,owner)))*0.15f;
 			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 			UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;
 		}

@@ -16,20 +16,20 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 	{
 	    GameObject platformTile= GameWorldController.FindTile (triggerX,triggerY,TileMap.SURFACE_FLOOR);//Var.FindTile (Var.triggerX,Var.triggerY,1);
 
-        if (GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight>=18)	
+        if (CurrentTileMap().Tiles[triggerX,triggerY].floorHeight>=18)	
 		{
 			//Move the tile to the bottom
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.3f*7f,0f) ,0.7f));
 			flags=(short)State;
 			//state = 1;
-			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight=2;
+			CurrentTileMap().Tiles[triggerX,triggerY].floorHeight=2;
 		}
 		else
 		{
 			//Go up a step.
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.3f,0f) ,0.1f));
 			//flags=State;
-			GameWorldController.instance.currentTileMap().Tiles[triggerX,triggerY].floorHeight += 2;
+			CurrentTileMap().Tiles[triggerX,triggerY].floorHeight += 2;
 		}
 		flags=(short)State;
 	}

@@ -44,9 +44,9 @@ public class a_hack_trap_button_mover : a_hack_trap {
     /// <param name="index"></param>
     void MoveButton(int index)
     {
-        if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance != null)
+        if (CurrentObjectList().objInfo[index].instance != null)
         {
-            ObjectInteraction button = GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+            ObjectInteraction button = CurrentObjectList().objInfo[index].instance;
             if (button.zpos == zpos)
             {
                 MoveButton((short)(zpos + owner), button);
@@ -68,7 +68,7 @@ public class a_hack_trap_button_mover : a_hack_trap {
     {
         buttonToMove.zpos = NewZpos;
         buttonToMove.objectloaderinfo.zpos = NewZpos;
-        Vector3 newPos = ObjectLoader.CalcObjectXYZ(_RES, GameWorldController.instance.currentTileMap(), GameWorldController.instance.currentTileMap().Tiles, GameWorldController.instance.CurrentObjectList().objInfo, buttonToMove.objectloaderinfo.index, buttonToMove.ObjectTileX, buttonToMove.ObjectTileY, 0);
+        Vector3 newPos = ObjectLoader.CalcObjectXYZ(buttonToMove.objectloaderinfo.index, 0);
         buttonToMove.transform.position = newPos;
     }
 

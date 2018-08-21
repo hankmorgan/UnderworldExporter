@@ -48,7 +48,7 @@ public class a_hack_trap_scintplatformreset : a_hack_trap
     void UpdateTile(int tileXToChange, int tileYToChange, short newFloorTexture)
     {
 
-        TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange, tileYToChange];
+        TileInfo tileToChange = CurrentTileMap().Tiles[tileXToChange, tileYToChange];
         if (tileToChange.floorTexture != newFloorTexture)
         {
             GameObject tile = GameWorldController.FindTile(tileXToChange, tileYToChange, TileMap.SURFACE_FLOOR);

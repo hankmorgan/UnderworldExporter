@@ -8,7 +8,7 @@ public class a_hack_trap_vending : a_hack_trap
 {
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        Vector3 spawn = GameWorldController.instance.currentTileMap().getTileVector(ObjectTileX, ObjectTileY);
+        Vector3 spawn = CurrentTileMap().getTileVector(ObjectTileX, ObjectTileY);
         spawn = new Vector3(spawn.x, 4.4f, spawn.z);
         int ItemStringIndex = 0;
         int Price = 0;
@@ -56,7 +56,7 @@ public class a_hack_trap_vending : a_hack_trap
         {//price check
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(ItemStringIndex, 40, 0, 0, 256);
             newobjt.InUseFlag = 1;
-            GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, spawn)).gameObject);
+            UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, spawn)).gameObject);
         }
     }
 
@@ -71,7 +71,7 @@ public class a_hack_trap_vending : a_hack_trap
     bool CheckPrice(int TargetPrice, int triggerX, int triggerY)
     {
         Vector3 ContactArea = new Vector3(0.59f, 0.15f, 0.59f);
-        Collider[] colliders = Physics.OverlapBox(GameWorldController.instance.currentTileMap().getTileVector(triggerX, triggerY), ContactArea);
+        Collider[] colliders = Physics.OverlapBox(CurrentTileMap().getTileVector(triggerX, triggerY), ContactArea);
         for (int i = 0; i <= colliders.GetUpperBound(0); i++)
         {
             if (colliders[i].gameObject.GetComponent<ObjectInteraction>() != null)

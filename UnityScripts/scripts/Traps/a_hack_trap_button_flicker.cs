@@ -8,7 +8,7 @@ public class a_hack_trap_button_flicker : a_hack_trap {
 	protected override void Start ()
 	{
 		base.Start ();
-		objList =GameWorldController.instance.CurrentObjectList().objInfo;
+		objList =CurrentObjectList().objInfo;
 	}
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)

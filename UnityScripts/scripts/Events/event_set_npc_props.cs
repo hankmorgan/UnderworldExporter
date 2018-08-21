@@ -30,7 +30,7 @@ public class event_set_npc_props : event_base {
 				if (npc!=null)
 				{
 						
-						Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(homeX,homeY);
+						Vector3 pos = CurrentTileMap().getTileVector(homeX,homeY);
 						for (int i=0; i<=npc.GetUpperBound(0);i++)
 						{
 							npc[i].transform.position=pos;

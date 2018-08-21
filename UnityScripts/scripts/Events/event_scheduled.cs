@@ -10,7 +10,7 @@ public class event_scheduled : event_base {
 				int eventTileX = RawData[3];
 				int eventTileY = RawData[4];
 
-				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 				for (int o=256; o<=objList.GetUpperBound(0);o++)
 				{
 						if ( (objList[o].ObjectTileX == eventTileX) && (objList[o].ObjectTileY == eventTileY) && (objList[o].instance!=null))

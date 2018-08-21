@@ -96,9 +96,9 @@ public class MapInteraction : GuiBase {
             WindowDetect.InMap=false;
 			UWCharacter.Instance.playerMotor.jumping.enabled=true;
 			InventorySlot.Hovering=false;
-			if  (GameWorldController.instance.getMus()!=null)
+			if  (MusicController.instance!=null)
 			{
-			GameWorldController.instance.getMus().InMap=false;
+			MusicController.instance.InMap=false;
 			}
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;

@@ -45,7 +45,7 @@ public class an_oscillator_trap : trap_base
     {
         TileXToWatch = triggerX;
         TileYToWatch = triggerY;
-        TileVector = GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch, TileYToWatch);
+        TileVector = CurrentTileMap().getTileVector(TileXToWatch, TileYToWatch);
 
         if (platformTile == null)
         {
@@ -55,20 +55,20 @@ public class an_oscillator_trap : trap_base
         {
             return;
         }
-        if (GameWorldController.instance.currentTileMap().Tiles[triggerX, triggerY].floorHeight / 2 >= owner)
+        if (CurrentTileMap().Tiles[triggerX, triggerY].floorHeight / 2 >= owner)
         {
             xpos = 0;
         }
-        else if (GameWorldController.instance.currentTileMap().Tiles[triggerX, triggerY].floorHeight / 2 <= quality)
+        else if (CurrentTileMap().Tiles[triggerX, triggerY].floorHeight / 2 <= quality)
         {
             xpos = 1;
         }
 
         if (xpos == 1)
         {//moving up
-            GameWorldController.instance.currentTileMap().Tiles[triggerX, triggerY].floorHeight += 2;
+            CurrentTileMap().Tiles[triggerX, triggerY].floorHeight += 2;
             StartCoroutine(MoveTile(platformTile.transform, new Vector3(0f, 0.3f, 0f), 0.1f));
-            if (GameWorldController.instance.currentTileMap().Tiles[triggerX, triggerY].floorHeight >= 30)
+            if (CurrentTileMap().Tiles[triggerX, triggerY].floorHeight >= 30)
             {
                 if (
                         (TileMap.visitTileX == triggerX)
@@ -82,7 +82,7 @@ public class an_oscillator_trap : trap_base
         }
         else
         {//moving down
-            GameWorldController.instance.currentTileMap().Tiles[triggerX, triggerY].floorHeight -= 2;
+            CurrentTileMap().Tiles[triggerX, triggerY].floorHeight -= 2;
             StartCoroutine(MoveTile(platformTile.transform, new Vector3(0f, -0.3f, 0f), 0.1f));
         }
     }
@@ -95,7 +95,7 @@ public class an_oscillator_trap : trap_base
         Vector3 StartPos = platform.position;
         Vector3 EndPos = StartPos + dist;
         this.transform.position = StartPos;
-        TileVector = GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch, TileYToWatch);
+        TileVector = CurrentTileMap().getTileVector(TileXToWatch, TileYToWatch);
         colliders = Physics.OverlapBox(TileVector, ContactArea);
         while (index < 1.0f)
         {
@@ -133,7 +133,7 @@ public class an_oscillator_trap : trap_base
                 if (colliders[i].gameObject.GetComponent<ObjectInteraction>().isMoveable())
                 {
                     Vector3 objPosition = colliders[i].gameObject.transform.position;
-                    GameWorldController.UnFreezeMovement(colliders[i].gameObject);
+                    UnFreezeMovement(colliders[i].gameObject);
                     colliders[i].gameObject.transform.position = new Vector3(objPosition.x, Height, objPosition.z);
                 }
             }

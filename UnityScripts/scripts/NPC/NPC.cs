@@ -201,7 +201,7 @@ public class NPC : MobileObject
         if (!GameWorldController.NavMeshReady) { return; }
         if (Agent == null)
         {
-            Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(CurTileX, CurTileY);
+            Vector3 pos = CurrentTileMap().getTileVector(CurTileX, CurTileY);
             //this.transform.position=pos;
             NavMeshHit hit;
             int mask = (int)AgentMask();
@@ -245,15 +245,15 @@ public class NPC : MobileObject
                         case 77://lurker
                         case 89://lurker
                             agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                             //water
                             break;
                         case 96://Fire elemental				
                             agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                             break;
                             //default:
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                     }
                     break;
                 }
@@ -277,17 +277,17 @@ public class NPC : MobileObject
                         case 87://lurker
                         case 116://deep lurker
                             agentId = GameWorldController.instance.NavMeshWater.agentTypeID;
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                             //water
                             break;
                         case 120:
                             //case 124://slasher
                             //fire elemental
                             agentId = GameWorldController.instance.NavMeshLava.agentTypeID;
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                             break;
                             //default:
-                            //agentId = GameWorldController.instance.currentTileMap().getTileAgentID(CurTileX,CurTileY);
+                            //agentId = CurrentTileMap().getTileAgentID(CurTileX,CurTileY);
                             //break;
                     }
                     break;
@@ -411,23 +411,23 @@ public class NPC : MobileObject
             //case 0x02:
             case NPCCategory.ethereal:
             case NPCCategory.flying:
-                objInt().aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3]; break;
+                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3]; break;
             //case 0x03:
             case NPCCategory.swimming:
-                objInt().aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1]; break;
+                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1]; break;
             //case 0x04:
             //case 0x05:
             case NPCCategory.crawling:
             case NPCCategory.creeping:
-                objInt().aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2]; break;
+                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2]; break;
             //case 0x11:
             case NPCCategory.golem:
-                objInt().aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_RUMBLE]; break;
+                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_RUMBLE]; break;
             //case 0x01:
             case NPCCategory.human:
             case NPCCategory.humanoid:
             default:
-                objInt().aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1]; break;
+                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1]; break;
         }
         if (ObjectInteraction.PlaySoundEffects)
         {
@@ -467,7 +467,7 @@ public class NPC : MobileObject
                     {
                         newobjt.is_quant = 0;
                     }
-                    newobjt.instance = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
+                    newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
                     cnt.AddItemToContainer(newobjt.instance.name);
                 }
             }
@@ -487,7 +487,7 @@ public class NPC : MobileObject
                     /*if (item_id==64)
                     {//Drop a rotworm corpse
                             ObjectLoaderInfo newobjt= ObjectLoader.newObject(217,0,0,0,256);
-                            ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt, GameWorldController.instance.DynamicObjectMarker().gameObject,this.transform.position);
+                            ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt, GameWorldController.instance.DynamicObjectMarker().gameObject,this.transform.position);
                             return false;	
                     }*/
                     switch (npc_whoami)
@@ -923,7 +923,7 @@ public class NPC : MobileObject
                 {
                     if (TileMap.ValidTile(CurTileX + x, CurTileY + y))
                     {
-                        if (GameWorldController.instance.currentTileMap().Tiles[CurTileX + x, CurTileY + y].isDoor)
+                        if (CurrentTileMap().Tiles[CurTileX + x, CurTileY + y].isDoor)
                         {
                             GameObject door = GameWorldController.findDoor(CurTileX + x, CurTileY + y);
                             if (door != null)
@@ -1128,13 +1128,13 @@ public class NPC : MobileObject
         {
             //float tileHeight = (float)GameWorldController.instance.currentTileMap ().GetFloorHeight (tileX, tileY) * 0.15f;//Of current tile
             //float zpos = Random.Range (tileHeight, 4f);
-            //AgentMoveToPosition( GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
+            //AgentMoveToPosition( CurrentTileMap().getTileVector(DestTileX, DestTileY,zpos));	
             targetBaseOffset = 0.5f;//tileHeight + 0.2f ;//zpos - tileHeight;
             startBaseOffset = Agent.baseOffset;
             floatTime = 1f;
             //AgentMoveToPosition (GameWorldController.instance.currentTileMap ().getTileVector (DestTileX, DestTileY));
         }
-        AgentMoveToPosition(GameWorldController.instance.currentTileMap().getTileVector(DestTileX, DestTileY));
+        AgentMoveToPosition(CurrentTileMap().getTileVector(DestTileX, DestTileY));
     }
 
     void AgentStand()
@@ -1768,9 +1768,9 @@ public class NPC : MobileObject
 
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(16, 0, 0, 1, 256);
             newobjt.is_quant = 1;
-            GameObject launchedItem = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
+            GameObject launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
 
-            GameWorldController.UnFreezeMovement(launchedItem);
+            UnFreezeMovement(launchedItem);
             Vector3 ThrowDir = TargetingVector;
             ///Apply the force along the direction of the ray that the player has targetted along.
             launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir * force);
@@ -1862,7 +1862,7 @@ public class NPC : MobileObject
         int tileY = (int)(transform.position.z / 1.2f);
         if (TileMap.ValidTile(tileX, tileY))
         {
-            return GameWorldController.instance.currentTileMap().Tiles[tileX, tileY].roomRegion;
+            return CurrentTileMap().Tiles[tileX, tileY].roomRegion;
         }
         else
         {
@@ -1957,8 +1957,8 @@ public class NPC : MobileObject
             candidateDestTileY = npc_yhome + Random.Range(-2 * distanceMultipler, 3 * distanceMultipler);
             if (TileMap.ValidTile(DestTileX, DestTileY))
             {
-                //if (GameWorldController.instance.currentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
-                if (Room() == GameWorldController.instance.currentTileMap().GetRoom(candidateDestTileX, candidateDestTileY))
+                //if (CurrentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
+                if (Room() == CurrentTileMap().GetRoom(candidateDestTileX, candidateDestTileY))
                 {
                     DestTileX = candidateDestTileX;
                     DestTileY = candidateDestTileY;
@@ -1989,7 +1989,7 @@ public class NPC : MobileObject
     {
         AnimRange = NPC.AI_ANIM_DEATH;
         MusicController.LastAttackCounter = 0.0f;//Stops combat music unil the next time the player is hit
-        GameWorldController.instance.getMus().PlaySpecialClip(GameWorldController.instance.getMus().VictoryTracks); //plays the fanfare
+        MusicController.instance.PlaySpecialClip(MusicController.instance.VictoryTracks); //plays the fanfare
         WaitTimer = 0.8f;
     }
 
@@ -2043,7 +2043,7 @@ public class NPC : MobileObject
         if (bloodstain != -1)
         {
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(bloodstain, 0, 0, 0, 256);
-            ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position);
+            ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position);
             //ObjectInteraction remains = ObjectInteraction.CreateNewObject(bloodstain);						
             //remains.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
             //GameWorldController.MoveToWorld(remains.gameObject);
@@ -2057,7 +2057,7 @@ public class NPC : MobileObject
     public static int findNpcByWhoAmI(int whoami)
     {
 
-        ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         for (int i = 1; i < 256; i++)
         {
             if (objList[i].npc_whoami == whoami)

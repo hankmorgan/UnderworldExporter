@@ -94,7 +94,7 @@ public class TextureMapButton : GuiBase {
 			tex = (Texture2D)GameWorldController.instance.MaterialDoors[newTextureValue].mainTexture;
 			break;
 		}
-		GameWorldController.instance.currentTileMap().texture_map[SelectedTextureMapIndex]=(short)newTextureValue;
+		CurrentTileMap().texture_map[SelectedTextureMapIndex]=(short)newTextureValue;
 		selectedButton.img.texture=tex;
 		selectedButton.TextureIndex=newTextureValue;
 		GameWorldController.WorldReRenderPending=true;

@@ -38,10 +38,10 @@ A trigger that fires when the player character enters it
 							switch(_RES)
 							{
 								case GAME_UW2:
-									GameWorldController.instance.currentAutoMap().MarkTileDisplayType(ObjectTileX, ObjectTileY, AutoMap.DisplayTypeStairUW2);		
+                                    CurrentAutoMap().MarkTileDisplayType(ObjectTileX, ObjectTileY, AutoMap.DisplayTypeStairUW2);		
 									break;
 								default:
-									GameWorldController.instance.currentAutoMap().MarkTileDisplayType(ObjectTileX, ObjectTileY, AutoMap.DisplayTypeStairUW1);		
+                                    CurrentAutoMap().MarkTileDisplayType(ObjectTileX, ObjectTileY, AutoMap.DisplayTypeStairUW1);		
 									break;
 							}	
 						}
@@ -97,7 +97,7 @@ A trigger that fires when the player character enters it
 		{//Check for moongates in this tile to support qbert in UW2.
 			if(GameWorldController.instance.LevelNo==68)
 			{
-				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 				for (int i = 0; i < 1024;i++)
 				{//Make sure triggers, traps and special items are created.
 					if (objList[i]!=null)

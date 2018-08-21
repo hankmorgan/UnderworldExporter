@@ -14,7 +14,7 @@ public class Bridge : map_object {
 	{		
         if (invis==0)
         {
-            TileMapRenderer.RenderBridge(GameWorldController.instance.SceneryModel, GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList(), objInt().objectloaderinfo.index);
+            TileMapRenderer.RenderBridge(GameWorldController.instance.SceneryModel, CurrentTileMap(), CurrentObjectList(), objInt().objectloaderinfo.index);
         }
 
         base.Start();
@@ -34,7 +34,7 @@ public class Bridge : map_object {
 				int TextureIndex=  (enchantment<<3) | flags & 0x3F;
 				if (TextureIndex<2)
 				{//Only flag the normal briges as such.
-						GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].hasBridge=true;				
+						CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].hasBridge=true;				
 				}
 			}
 	}

@@ -56,7 +56,7 @@ public class a_hack_trap_skup : a_hack_trap {
 	int TestObjectAtTile(int tileX, int tileY, int ObjectToFind, int QualityToFind)
 	{
 		Vector3 ContactArea= new Vector3(0.59f,0.15f,0.59f);
-		Collider[] colliders = Physics.OverlapBox(GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY), ContactArea);
+		Collider[] colliders = Physics.OverlapBox(CurrentTileMap().getTileVector(tileX,tileY), ContactArea);
 		for (int i=0; i<=colliders.GetUpperBound(0);i++)
 		{
 			if (colliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)

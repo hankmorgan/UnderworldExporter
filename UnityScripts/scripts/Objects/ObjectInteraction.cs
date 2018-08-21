@@ -396,8 +396,8 @@ public class ObjectInteraction : UWEBase
         if (MovingFromValidTile && MovingToValidTile)
         {
             Debug.Log("Object traversing " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tOld = GameWorldController.instance.currentTileMap().Tiles[oldTileX, oldTileY];
-            TileInfo tNew = GameWorldController.instance.currentTileMap().Tiles[newTileX, newTileY];
+            TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
+            TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
             MoveFromLinkedListChain(obj, tOld);
             MoveToLinkedListChain(obj, tNew);
             return;
@@ -406,7 +406,7 @@ public class ObjectInteraction : UWEBase
         if (!MovingToValidTile && MovingFromValidTile)
         {//Object is probably moving off map.
             Debug.Log("Object moving off map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tOld = GameWorldController.instance.currentTileMap().Tiles[oldTileX, oldTileY];
+            TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
             MoveFromLinkedListChain(obj, tOld);
             obj.next = 0;
             return;
@@ -415,7 +415,7 @@ public class ObjectInteraction : UWEBase
         if (MovingToValidTile && !MovingFromValidTile)
         {//Object moving from inv to world
             Debug.Log("Object moving on map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tNew = GameWorldController.instance.currentTileMap().Tiles[newTileX, newTileY];
+            TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
             MoveToLinkedListChain(obj, tNew);
             return;
         }
@@ -736,9 +736,9 @@ public class ObjectInteraction : UWEBase
         item = this.GetComponent<object_base>();
         if (TileMap.ValidTile(ObjectTileX, ObjectTileY))
         {
-            if (GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex != 0)
+            if (CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex != 0)
             {
-                ObjectInteraction obj = ObjectLoader.getObjectIntAt(GameWorldController.instance.currentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex);
+                ObjectInteraction obj = ObjectLoader.getObjectIntAt(CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].PressureTriggerIndex);
                 if (obj.GetComponent<a_pressure_trigger>() != null)
                 {
                     obj.GetComponent<a_pressure_trigger>().ReleaseWeightFrom();
@@ -951,7 +951,7 @@ public class ObjectInteraction : UWEBase
                 }
 
                 ObjectLoaderInfo newobjt = ObjectLoader.newObject(lstOutput[i], 40, 0, 0, 256);
-                GameObject Created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+                GameObject Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
                 GameWorldController.MoveToInventory(Created);
                 UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
                 if (Created != null)
@@ -1202,7 +1202,7 @@ public class ObjectInteraction : UWEBase
             objInteract.rg = myObj.AddComponent<Rigidbody>();
 
             objInteract.rg.angularDrag = 0.0f;
-            GameWorldController.FreezeMovement(myObj);
+            FreezeMovement(myObj);
         }
 
         /*   if (objInteract.GetItemType() != ObjectInteraction.ANIMATION)
@@ -1636,7 +1636,7 @@ public class ObjectInteraction : UWEBase
                 {
                     if (aud != null)
                     {
-                        aud.clip = GameWorldController.instance.getMus().SoundEffects[0];
+                        aud.clip = MusicController.instance.SoundEffects[0];
                         aud.Play();
                     }
                 }
@@ -1715,7 +1715,7 @@ public class ObjectInteraction : UWEBase
             }
         else*/
         {
-            float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
+            float ceil = CurrentTileMap().CEILING_HEIGHT;
             //Updates the tilex & tileY,
             //tileX = (short)Mathf.FloorToInt(this.transform.localPosition.x/1.2f);
             //tileY = (short)Mathf.FloorToInt(this.transform.localPosition.z/1.2f);
@@ -2431,6 +2431,8 @@ public class ObjectInteraction : UWEBase
                             myObj.AddComponent<a_do_trap_platform>(); break;
                         case 0x5://A trespass trap
                             myObj.AddComponent<a_hack_trap_trespass>(); break;
+                        case 0x11://Floor collapse trap
+                            myObj.AddComponent < a_hack_trap_floorcollapse>(); break;
                         case 0x12://Scint 5 puzzle reset
                             myObj.AddComponent<a_hack_trap_scintpuzzlereset>(); break;
                         case 0x13:
@@ -2547,7 +2549,7 @@ public class ObjectInteraction : UWEBase
                         case BOUNCING_PROJECTILE:
                             break;
                         default:
-                            GameWorldController.UnFreezeMovement(myObj);
+                            UnFreezeMovement(myObj);
 
                             myObj.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
                             myObj.GetComponent<Rigidbody>().AddForce(150f * object_base.ProjectilePropsToVector(myObj.GetComponent<object_base>()));
@@ -2639,7 +2641,7 @@ public class ObjectInteraction : UWEBase
             //	if (link>=256)
             //{
 
-            //if (GameWorldController.instance.objectMaster.type[ GameWorldController.instance.CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
+            //if (GameWorldController.instance.objectMaster.type[ CurrentObjectList().objInfo[link].item_id]==ObjectInteraction.SPELL)
             //{
             return true;
             //}

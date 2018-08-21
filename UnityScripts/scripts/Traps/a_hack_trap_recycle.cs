@@ -7,7 +7,7 @@ public class a_hack_trap_recycle : a_hack_trap
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
         Vector3 ContactArea = new Vector3(0.59f, 0.15f, 0.59f);
-        Collider[] colliders = Physics.OverlapBox(GameWorldController.instance.currentTileMap().getTileVector(ObjectTileX, ObjectTileY), ContactArea);
+        Collider[] colliders = Physics.OverlapBox(CurrentTileMap().getTileVector(ObjectTileX, ObjectTileY), ContactArea);
         for (int i = 0; i <= colliders.GetUpperBound(0); i++)
         {
             if (colliders[i].gameObject.GetComponent<ObjectInteraction>() != null)

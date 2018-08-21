@@ -70,7 +70,7 @@ public class Feet : UWEBase {
 			{
 				if (TileMap.OnWater==false)
 				{
-					UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_WATER_LAND_1];
+					UWCharacter.Instance.aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_WATER_LAND_1];
 					UWCharacter.Instance.aud.Play();
 				}
 				TileMap.OnWater=true;

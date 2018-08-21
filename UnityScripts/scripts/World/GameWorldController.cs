@@ -109,9 +109,7 @@ public class GameWorldController : UWEBase
         Ethereal7 = 71,
         Ethereal8 = 72
     };
-
-
-
+        
 
     [Header("Controls")]
     public MouseLook MouseX;
@@ -335,10 +333,6 @@ public class GameWorldController : UWEBase
     public int DoorLayerMask = 0;
 
 
-    //public RAIN.Navigation.NavMesh.NavMeshRig NavRigLand;
-    //public RAIN.Navigation.NavMesh.NavMeshRig NavRigWater;//To implement for create npc
-
-
     [Header("Art Loaders")]
     /// <summary>
     /// The bytloader for bty files
@@ -376,11 +370,6 @@ public class GameWorldController : UWEBase
     /// Small animations art.
     /// </summary>
     public GRLoader TmAnimo;
-
-    /// <summary>
-    /// The lev ark file data.
-    /// </summary>
-    private char[] lev_ark_file_data;
 
     /// <summary>
     /// The female armor
@@ -506,30 +495,7 @@ public class GameWorldController : UWEBase
     void Update()
     {
         PositionDetect();
-        /*	if (GenNavMeshNextFrame>1)
-			{
-				GenNavMeshNextFrame--;
-				if (GenNavMeshNextFrame ==1)
-				{
-					GenNavMeshNextFrame=0;
-					if ((bGenNavMeshes) && (!EditorMode))
-					{
-						GenerateNavMeshes ();
-					}	
-				}
-			}*/
     }
-
-    /*void GenerateNavMeshes ()
-	{
-		//GenNavMeshNextFrame = -1;
-		//GenerateNavmesh(NavRigLand);
-		//GenerateNavmesh(NavRigWater);
-		GenerateNavmesh (NavMeshLand);//Update nav mesh for the land
-		GenerateNavmesh (NavMeshWater);//For water
-		GenerateNavmesh (NavMeshAir);//for air
-		GenerateNavmesh (NavMeshLava);//for lava
-	}*/
 
     IEnumerator UpdateNavMeshes()
     {
@@ -566,15 +532,6 @@ public class GameWorldController : UWEBase
 
     IEnumerator GenerateNavmesh(NavMeshSurface navmeshobj, int index)
     {
-        //	if (navmeshobj.GetComponent<NavMeshSurface>()!=null)
-        //	{
-        //		Destroy(navmeshobj.GetComponent<NavMeshSurface>());
-        //}
-        //NavMeshSurface navmesh = navmeshobj.AddComponent<NavMeshSurface>();
-        //navmesh.layerMask = layer;
-        //	navmeshobj.BuildNavMesh();
-        //navmeshobj.
-
         if (navmeshobj.navMeshData == null)
         {
             navmeshobj.BuildNavMesh();
@@ -597,13 +554,13 @@ public class GameWorldController : UWEBase
         {
             if ((FullReRender) && (!EditorMode))
             {
-                //	currentTileMap().CleanUp(_RES);				
+                //	CurrentTileMap().CleanUp(_RES);				
             }
-            TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel, GameWorldController.instance.SceneryModel, _RES, currentTileMap(), GameWorldController.instance.CurrentObjectList(), !FullReRender);
+            TileMapRenderer.GenerateLevelFromTileMap(GameWorldController.instance.LevelModel, GameWorldController.instance.SceneryModel, _RES, CurrentTileMap(), CurrentObjectList(), !FullReRender);
             if (ObjectReRenderPending)
             {
                 ObjectReRenderPending = false;
-                ObjectLoader.RenderObjectList(CurrentObjectList(), currentTileMap(), DynamicObjectMarker().gameObject);
+                ObjectLoader.RenderObjectList(CurrentObjectList(), CurrentTileMap(), DynamicObjectMarker().gameObject);
             }
             WorldReRenderPending = false;
             FullReRender = false;
@@ -799,7 +756,7 @@ public class GameWorldController : UWEBase
             UWCharacter.Instance.playerMotor.enabled = false;
             UWCharacter.Instance.transform.position = Vector3.zero;
 
-            getMus().InIntro = true;
+            MusicController.instance.InIntro = true;
         }
         else
         {
@@ -808,8 +765,6 @@ public class GameWorldController : UWEBase
             UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
             SwitchLevel(startLevel);
         }
-        //PositionDetect();
-        //InvokeRepeating("PositionDetect",0.0f,0.02f);
         return;
     }
 
@@ -958,7 +913,7 @@ public class GameWorldController : UWEBase
 
             if (_RES == GAME_UW2)
             {
-                getMus().ChangeTrackListForUW2(newLevelNo);
+                MusicController.instance.ChangeTrackListForUW2(newLevelNo);
             }
 
             //Check loading
@@ -973,11 +928,11 @@ public class GameWorldController : UWEBase
                     DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();
 
                     //Load the tile and object blocks
-                    DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+                    DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
 
                     if (_RES == GAME_UW1)
                     {//Load the overlays.
-                        DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 9, 0x180, out ovl_ark_block);
+                        DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 9, 0x180, out ovl_ark_block);
                     }
 
                     //Load the texture maps
@@ -988,11 +943,11 @@ public class GameWorldController : UWEBase
                             tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
                             break;
                         case GAME_UW2:
-                            DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 80, -1, out tex_ark_block);
+                            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 80, -1, out tex_ark_block);
                             break;
                         case GAME_UW1:
                         default:
-                            DataLoader.LoadUWBlock(lev_ark_file_data, newLevelNo + 18, 0x7a, out tex_ark_block);
+                            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 18, 0x7a, out tex_ark_block);
                             break;
                     }
 
@@ -1032,9 +987,9 @@ public class GameWorldController : UWEBase
                 }
                 else
                 {
-                    Tilemaps[newLevelNo].BuildTileMapShock(lev_ark_file_data, newLevelNo);
+                    Tilemaps[newLevelNo].BuildTileMapShock(LevArk.lev_ark_file_data, newLevelNo);
                     objectList[newLevelNo] = new ObjectLoader();
-                    objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo], lev_ark_file_data);
+                    objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo], LevArk.lev_ark_file_data);
                 }
                 if (UWEBase.EditorMode == false)
                 {
@@ -1057,15 +1012,11 @@ public class GameWorldController : UWEBase
 
             if (LevelNo != -1)
             {//Changing from a level that has already loaded
-             //Update the positions of all object interactions in the level
-             //UpdatePositions();
 
                 if (UWEBase.EditorMode == false)
                 {
-                    ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
+                    ObjectLoader.UpdateObjectList(CurrentTileMap(), CurrentObjectList());
                 }
-                //Store the state of the object list with just the objects in objects transform for when I re
-
             }
 
 
@@ -1076,7 +1027,6 @@ public class GameWorldController : UWEBase
                 case GAME_SHOCK:
                     break;
                 default:
-                    //critsLoader= new CritLoader[64];//Clear out animations
                     if (UWEBase.EditorMode == false)
                     {
                         if (LoadingGame == false)
@@ -1111,7 +1061,6 @@ public class GameWorldController : UWEBase
                     Height = (float)StartHeight * 0.15f;
                 }
 
-
                 UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
                // Debug.Log("Spawning at " + UWCharacter.Instance.transform.position + " using floorheight " + GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY));
                 UWCharacter.Instance.TeleportPosition = new Vector3(targetX, Height + 0.1f, targetY);
@@ -1129,14 +1078,13 @@ public class GameWorldController : UWEBase
                 //break;
                 default:
                     ObjectLoader.RenderObjectList(objectList[newLevelNo], Tilemaps[newLevelNo], DynamicObjectMarker().gameObject);
-                    CleanUpMagicProjectiles();
+                    //CleanUpMagicProjectiles();
                     break;
             }
 
-
             if ((bGenNavMeshes) && (!EditorMode))
             {
-                string newSignature = GameWorldController.instance.currentTileMap().getSignature();
+                string newSignature = CurrentTileMap().getSignature();
                 if (newSignature != LevelSignature)
                 {
                     NavMeshReady = false;
@@ -1197,27 +1145,27 @@ public class GameWorldController : UWEBase
         SwitchLevel(newLevelNo);
     }
 
-    static void CleanUpMagicProjectiles()
-    {
-        return;
-        ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
-        for (int i = 0; i <= objList.GetUpperBound(0); i++)
-        {
-            if (objList[i] != null)
-            {
-                if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
-                {
-                    if (objList[i].instance != null)
-                    {
-                        if (objList[i].instance.GetComponent<MagicProjectile>() != null)
-                        {
-                            objList[i].instance.GetComponent<MagicProjectile>().DetonateNow = true;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //static void CleanUpMagicProjectiles()
+    //{
+    //    return;
+    //    ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
+    //    for (int i = 0; i <= objList.GetUpperBound(0); i++)
+    //    {
+    //        if (objList[i] != null)
+    //        {
+    //            if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
+    //            {
+    //                if (objList[i].instance != null)
+    //                {
+    //                    if (objList[i].instance.GetComponent<MagicProjectile>() != null)
+    //                    {
+    //                        objList[i].instance.GetComponent<MagicProjectile>().DetonateNow = true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     // This will regenerate the navigation mesh when called
     /*	void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)
@@ -1239,87 +1187,20 @@ public class GameWorldController : UWEBase
 
 
 
+    ///// <summary>
+    ///// Returns the music controller
+    ///// </summary>
+    ///// <returns>The mus.</returns>
+    //public MusicController getMus()
+    //{
+    //    if (mus == null)
+    //    {
+    //        mus = GameObject.Find("_MusicController").GetComponent<MusicController>();
+    //    }
+    //    return mus;
+    //}
 
-
-    /// <summary>
-    /// Freezes the movement of the specified object if it has a rigid body attached.
-    /// </summary>
-    /// <param name="myObj">My object.</param>
-    public static void FreezeMovement(GameObject myObj)
-    {//Stop objects which can move in the 3d world from moving when they are in the inventory or containers.
-        Rigidbody rg = myObj.GetComponent<Rigidbody>();
-        if (rg != null)
-        {
-            rg.useGravity = false;
-            rg.constraints =
-                    RigidbodyConstraints.FreezeRotationX
-                    | RigidbodyConstraints.FreezeRotationY
-                    | RigidbodyConstraints.FreezeRotationZ
-                    | RigidbodyConstraints.FreezePositionX
-                    | RigidbodyConstraints.FreezePositionY
-                    | RigidbodyConstraints.FreezePositionZ;
-        }
-    }
-
-    /// <summary>
-    /// Unfreeze the movement of the specified object if it has a rigid body attached.
-    /// </summary>
-    /// <param name="myObj">My object.</param>
-    public static void UnFreezeMovement(GameObject myObj)
-    {//Allow objects which can move in the 3d world to moving when they are released.
-        Rigidbody rg = myObj.GetComponent<Rigidbody>();
-        if (rg != null)
-        {
-            rg.useGravity = true;
-            rg.constraints =
-                    RigidbodyConstraints.FreezeRotationX
-                    | RigidbodyConstraints.FreezeRotationY
-                    | RigidbodyConstraints.FreezeRotationZ;
-        }
-    }
-
-    /// <summary>
-    /// Returns the music controller
-    /// </summary>
-    /// <returns>The mus.</returns>
-    public MusicController getMus()
-    {
-        if (mus == null)
-        {
-            mus = GameObject.Find("_MusicController").GetComponent<MusicController>();
-        }
-        return mus;
-    }
-
-    /// <summary>
-    /// Returns the current tile map
-    /// </summary>
-    /// <returns>The tile map.</returns>
-    public TileMap currentTileMap()
-    {
-        if (LevelNo == -1)
-        {
-            return null;
-        }
-        else
-        {
-            return Tilemaps[LevelNo];
-        }
-
-    }
-
-    public AutoMap currentAutoMap()
-    {
-        if (LevelNo == -1)
-        {
-            return null;
-        }
-        else
-        {
-            return AutoMaps[LevelNo];
-        }
-    }
-
+ 
     /// <summary>
     /// Detects where the player currently is an updates their swimming state and auto map as needed.
     /// </summary>
@@ -1335,7 +1216,7 @@ public class GameWorldController : UWEBase
         }
         TileMap.visitTileX = (short)(UWCharacter.Instance.transform.position.x / 1.2f);
         TileMap.visitTileY = (short)(UWCharacter.Instance.transform.position.z / 1.2f);
-        UWCharacter.Instance.room = currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
+        UWCharacter.Instance.room = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
 
         if (EditorMode)
         {
@@ -1347,7 +1228,7 @@ public class GameWorldController : UWEBase
                 }
             }
         }
-        //currentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
+        //CurrentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
         //UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
         //UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
 
@@ -1356,41 +1237,26 @@ public class GameWorldController : UWEBase
             for (int y = -1; y <= 1; y++)
             {
                 if
+                    (
                         (
-                                (
-                                        (TileMap.visitTileX + x >= 0) && (TileMap.visitTileX + x <= TileMap.TileMapSizeX)
-                                )
-                                &&
-                                (
-                                        (TileMap.visitTileY + y >= 0) && (TileMap.visitTileY + y <= TileMap.TileMapSizeY)
-                                )
+                                (TileMap.visitTileX + x >= 0) && (TileMap.visitTileX + x <= TileMap.TileMapSizeX)
                         )
+                        &&
+                        (
+                                (TileMap.visitTileY + y >= 0) && (TileMap.visitTileY + y <= TileMap.TileMapSizeY)
+                        )
+                    )
                 {
-                    currentAutoMap().MarkTile(TileMap.visitTileX + x, TileMap.visitTileY + y, currentTileMap().Tiles[TileMap.visitTileX + x, TileMap.visitTileY + y].tileType, AutoMap.GetDisplayType(currentTileMap().Tiles[TileMap.visitTileX + x, TileMap.visitTileY + y]));
+                    CurrentAutoMap().MarkTile(TileMap.visitTileX + x, TileMap.visitTileY + y, CurrentTileMap().Tiles[TileMap.visitTileX + x, TileMap.visitTileY + y].tileType, AutoMap.GetDisplayType(CurrentTileMap().Tiles[TileMap.visitTileX + x, TileMap.visitTileY + y]));
                 }
             }
         }
         TileMap.visitedTileX = TileMap.visitTileX;
         TileMap.visitedTileY = TileMap.visitTileY;
-        UWCharacter.Instance.CurrentTerrain = currentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].terrain;
+        UWCharacter.Instance.CurrentTerrain = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].terrain;
         UWCharacter.Instance.terrainType = TerrainDatLoader.getTerrain(UWCharacter.Instance.CurrentTerrain);
     }
 
-    /// <summary>
-    /// Returns the current map object list
-    /// </summary>
-    /// <returns>The object list.</returns>
-    public ObjectLoader CurrentObjectList()
-    {
-        if (LevelNo == -1)
-        {
-            return null;
-        }
-        else
-        {
-            return objectList[LevelNo];
-        }
-    }
 
     /// <summary>
     /// Moves the object to the game world where it will be managed by the objectloader list
@@ -1480,406 +1346,6 @@ public class GameWorldController : UWEBase
         }
     }
 
-    /// <summary>
-    /// Writes a lev ark file based on a rebuilding of the data.
-    /// </summary>
-    /// <param name="slotNo">Slot no.</param>
-    /// 320 blocks
-    /// 80 level maps - to be decompressed
-    /// 80 texture maps - to copy
-    /// 80 automaps - to copy for the moment
-    /// 80 map notes - top copy for the moment
-    public void WriteBackLevArkUW2(int slotNo)
-    {
-        int NoOfBlocks = 320;
-        DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[NoOfBlocks];
-
-        //First update the object list so as to match indices properly	
-        ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
-
-        //First block is always here.
-        long AddressToCopyFrom = 0;
-        long ReadDataLen = 0;
-
-        //Read in the data for the 80 tile/object maps
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            blockData[l].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 4), 32);
-            blockData[l].DataLen = DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 8), 32);
-            blockData[l].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, 6 + (l * 4) + (NoOfBlocks * 12), 32);
-            if (GameWorldController.instance.Tilemaps[l] != null)
-            {
-                long UnPackDatalen = 0;
-                blockData[l].CompressionFlag = DataLoader.UW2_NOCOMPRESSION;
-                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);
-                //blockData[l].DataLen=blockData[l].Data.GetUpperBound(0)+1;//32279;//
-                blockData[l].DataLen = UnPackDatalen;
-                //if (blockData[l].ReservedSpace< blockData[l].DataLen)
-                //{
-                //Debug.Log("Changing reserved space for block " + l + " to datalen was " + blockData[l].ReservedSpace + " now "  + blockData[l].DataLen );
-                //blockData[l].ReservedSpace= blockData[l].DataLen;			
-                //}
-            }///31752
-            else
-            {//Copy data from file.
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6, 32);
-                if (AddressToCopyFrom != 0)
-                {//Only copy a block with data										
-                    blockData[l].Data = CopyData(AddressToCopyFrom, blockData[l].ReservedSpace);//31752
-                }
-                else
-                {
-                    blockData[l].DataLen = 0;
-                }
-            }
-        }
-
-        //read in the texture maps
-        //TODO: At the moment this is just a straight copy of this information
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4), 32);
-            blockData[l + 80].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 4), 32);
-            blockData[l + 80].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 12), 32);
-            ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (80 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)				
-
-            if (AddressToCopyFrom != 0)
-            {
-                blockData[l + 80].Data = CopyData(AddressToCopyFrom, ReadDataLen);
-                blockData[l + 80].DataLen = blockData[l + 80].Data.GetUpperBound(0) + 1;
-            }
-            else
-            {
-                blockData[l + 80].DataLen = 0;
-            }
-        }
-
-        //read in the automaps
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            if (GameWorldController.instance.AutoMaps[l] != null)
-            {
-                blockData[l + 160].CompressionFlag = DataLoader.UW2_NOCOMPRESSION;
-                blockData[l + 160].Data = GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();
-                blockData[l + 160].DataLen = blockData[l + 160].Data.GetUpperBound(0) + 1;
-                blockData[l + 160].ReservedSpace = blockData[l + 160].DataLen;
-            }
-            else
-            {//Just copy the data from the old ark to the new ark
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4), 32);
-                blockData[l + 160].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 4), 32);
-                ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                blockData[l + 160].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (160 * 4) + (NoOfBlocks * 12), 32);
-
-                if (AddressToCopyFrom != 0)
-                {
-                    blockData[l + 160].Data = CopyData(AddressToCopyFrom, ReadDataLen);
-                    blockData[l + 160].DataLen = blockData[l + 160].Data.GetUpperBound(0) + 1;
-                }
-                else
-                {
-                    blockData[l + 160].DataLen = 0;
-                }
-            }
-        }
-
-
-        //read in the automap notes
-        //TODO: At the moment this is just a straight copy of this information
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            if (GameWorldController.instance.AutoMaps[l] != null)
-            {
-                blockData[l + 240].Data = GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
-                if (blockData[l + 240].Data != null)
-                {
-                    blockData[l + 240].CompressionFlag = DataLoader.UW2_NOCOMPRESSION;
-                    blockData[l + 240].DataLen = blockData[l + 240].Data.GetUpperBound(0) + 1;
-                    blockData[l + 240].ReservedSpace = blockData[l + 240].DataLen;
-                }
-                else
-                {//just copy
-                    AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
-                    blockData[l + 240].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
-                    ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                    blockData[l + 240].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
-                    if (AddressToCopyFrom != 0)
-                    {
-                        blockData[l + 240].Data = CopyData(AddressToCopyFrom, ReadDataLen);
-                        blockData[l + 240].DataLen = blockData[l + 240].Data.GetUpperBound(0) + 1;
-                    }
-                    else
-                    {
-                        blockData[l + 240].DataLen = 0;
-                    }
-                }
-
-            }
-            else
-            {//just copy.
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4), 32);
-                blockData[l + 240].CompressionFlag = (int)DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 4), 32);
-                ReadDataLen = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 8), 32); //+ (NoOfBlocks*4)
-                blockData[l + 240].ReservedSpace = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 6 + (240 * 4) + (NoOfBlocks * 12), 32);
-                if (AddressToCopyFrom != 0)
-                {
-                    blockData[l + 240].Data = CopyData(AddressToCopyFrom, ReadDataLen);
-                    blockData[l + 240].DataLen = blockData[l + 240].Data.GetUpperBound(0) + 1;
-                }
-                else
-                {
-                    blockData[l + 240].DataLen = 0;
-                }
-            }
-
-        }
-
-
-        blockData[0].Address = 5126;//This will always be the same.
-        long prevAddress = blockData[0].Address;
-        long prevSize = Math.Max(blockData[0].ReservedSpace, blockData[0].DataLen);
-        //Work out the block addresses.
-        for (int i = 1; i < blockData.GetUpperBound(0); i++)
-        {
-            if (blockData[i].DataLen != 0)//This block has data and needs to be written.
-            {
-                blockData[i].Address = prevAddress + prevSize;
-                prevAddress = blockData[i].Address;
-                prevSize = Math.Max(blockData[i].ReservedSpace, blockData[i].DataLen);
-            }
-            else
-            {
-                blockData[i].Address = 0;
-            }
-        }
-
-
-
-        //Data is copied. now begin writing the output file
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK", FileMode.Create);
-        BinaryWriter writer = new BinaryWriter(file);
-        long add_ptr = 0;
-
-        add_ptr += DataLoader.WriteInt8(writer, 0x40);
-        add_ptr += DataLoader.WriteInt8(writer, 0x01);
-        add_ptr += DataLoader.WriteInt8(writer, 0x0);//1
-        add_ptr += DataLoader.WriteInt8(writer, 0x0);//2
-        add_ptr += DataLoader.WriteInt8(writer, 0x0);//3
-        add_ptr += DataLoader.WriteInt8(writer, 0x0);//4
-
-        //Now write block addresses
-        for (int i = 0; i < 320; i++)
-        {//write block addresses
-            add_ptr += DataLoader.WriteInt32(writer, blockData[i].Address);
-        }
-
-        //Now write compression flags
-        for (int i = 320; i < 640; i++)
-        {//write block compression flags
-            add_ptr += DataLoader.WriteInt32(writer, blockData[i - 320].CompressionFlag);
-        }
-
-        //Now write data lengths
-        for (int i = 960; i < 1280; i++)
-        {//write block data lengths
-            add_ptr += DataLoader.WriteInt32(writer, blockData[i - 960].DataLen);
-        }
-
-
-        for (int i = 1280; i < 1600; i++)
-        {//write block data reservations
-            add_ptr += DataLoader.WriteInt32(writer, blockData[i - 1280].ReservedSpace);
-        }
-
-        for (long freespace = add_ptr; freespace < blockData[0].Address; freespace++)
-        {//write freespace to fill up to the final block.
-            add_ptr += DataLoader.WriteInt8(writer, 0);
-        }
-
-
-        //Now be brave and write all my blocks!!!
-        for (int i = 0; i <= blockData.GetUpperBound(0); i++)
-        {
-            if (blockData[i].Data != null)//?
-            {
-                if (add_ptr < blockData[i].Address)
-                {
-                    while (add_ptr < blockData[i].Address)
-                    {//Fill whitespace until next block address.
-                        add_ptr += DataLoader.WriteInt8(writer, 0);
-                    }
-                }
-                else
-                {
-                    if (add_ptr > blockData[i].Address)
-                    {
-                        Debug.Log("Writing block " + i + " at " + add_ptr + " should be " + blockData[i].Address);
-                    }
-                }
-                Debug.Log("Writing block " + i + " datalen " + blockData[i].DataLen + " ubound=" + blockData[i].Data.GetUpperBound(0));
-                //for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
-                int blockUbound = blockData[i].Data.GetUpperBound(0);
-                for (long a = 0; a < blockData[i].DataLen; a++)
-                {
-                    if (a <= blockUbound)
-                    {
-                        add_ptr += DataLoader.WriteInt8(writer, (long)blockData[i].Data[a]);
-                    }
-                    else
-                    {
-                        add_ptr += DataLoader.WriteInt8(writer, 0);
-                    }
-                }
-            }
-        }
-
-        file.Close();
-
-        return;
-
-
-
-    }
-
-    /// <summary>
-    /// Writes a lev ark file based on a rebuilding of the data.
-    /// </summary>
-    /// <param name="slotNo">Slot no.</param>
-    ///<9 blocks level tilemap/master object list>
-    ///<9 blocks object animation overlay info>
-    ///<9 blocks texture mapping>
-    ///<9 blocks automap infos>
-    ///<9 blocks map notes>
-    ///The remaining 9 x 10 blocks are unused.
-    /// 
-    public void WriteBackLevArkUW1(int slotNo)
-    {
-        DataLoader.UWBlock[] blockData = new DataLoader.UWBlock[45];
-
-        //First update the object list so as to match indices properly
-        ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
-
-        //First block is always here.
-        long AddressToCopyFrom = 0;
-
-        //Read in the data for the 9 tile/object maps
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            if (GameWorldController.instance.Tilemaps[l] != null)
-            {
-                long UnPackDatalen = 0;
-                blockData[l].Data = GameWorldController.instance.Tilemaps[l].TileMapToBytes(lev_ark_file_data, out UnPackDatalen);
-                blockData[l].DataLen = blockData[l].Data.GetUpperBound(0) + 1;
-            }///31752
-            else
-            {
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, (l * 4) + 2, 32);
-                blockData[l].Data = CopyData(AddressToCopyFrom, 31752);//TileMap.TileMapSizeX*TileMap.TileMapSizeY*4  +  256*27 + 768*8);	
-                blockData[l].DataLen = blockData[l].Data.GetUpperBound(0) + 1;
-            }
-        }
-
-        //Read in the data for the animation overlays
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, ((l + 9) * 4) + 2, 32);
-            blockData[l + 9].Data = CopyData(AddressToCopyFrom, 64 * 6);
-            blockData[l + 9].DataLen = blockData[l + 9].Data.GetUpperBound(0) + 1;
-        }
-
-        //read in the texture maps
-        for (int l = 0; l <= GameWorldController.instance.Tilemaps.GetUpperBound(0); l++)
-        {
-            if (GameWorldController.instance.Tilemaps[l] != null)
-            {
-                blockData[l + 18].Data = GameWorldController.instance.Tilemaps[l].TextureMapToBytes();
-                blockData[l + 18].DataLen = blockData[l + 18].Data.GetUpperBound(0) + 1;
-            }
-            else
-            {
-                AddressToCopyFrom = DataLoader.getValAtAddress(lev_ark_file_data, ((l + 18) * 4) + 2, 32);
-                blockData[l + 18].Data = CopyData(AddressToCopyFrom, 0x7a);
-                blockData[l + 18].DataLen = blockData[l + 18].Data.GetUpperBound(0) + 1;
-            }
-        }
-
-        //read in the auto maps
-        for (int l = 0; l <= GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
-        {
-            blockData[l + 27].Data = GameWorldController.instance.AutoMaps[l].AutoMapVisitedToBytes();
-            if (blockData[l + 27].Data != null)
-            {
-                blockData[l + 27].DataLen = blockData[l + 27].Data.GetUpperBound(0) + 1;
-            }
-            else
-            {
-                blockData[l + 27].DataLen = 0;
-            }
-        }
-
-
-        //read in the auto maps notes
-        for (int l = 0; l <= GameWorldController.instance.AutoMaps.GetUpperBound(0); l++)
-        {
-            blockData[l + 36].Data = GameWorldController.instance.AutoMaps[l].AutoMapNotesToBytes();
-            if (blockData[l + 36].Data != null)
-            {
-                blockData[l + 36].DataLen = blockData[l + 36].Data.GetUpperBound(0) + 1;
-            }
-            else
-            {
-                blockData[l + 36].DataLen = 0;
-            }
-        }
-
-        blockData[0].Address = 542;
-        long prevAddress = blockData[0].Address;
-        //Work out the block addresses.
-        for (int i = 1; i < blockData.GetUpperBound(0); i++)
-        {//This algorithm is probably wrong but only works because all blocks are in use!
-            if (blockData[i - 1].DataLen != 0)
-            {
-                blockData[i].Address = prevAddress + blockData[i - 1].DataLen;
-                prevAddress = blockData[i].Address;
-            }
-            else
-            {
-                blockData[i].Address = 0;
-            }
-        }
-
-
-        FileStream file = File.Open(Loader.BasePath + "SAVE" + slotNo + sep + "LEV.ARK", FileMode.Create);
-        BinaryWriter writer = new BinaryWriter(file);
-        long add_ptr = 0;
-        add_ptr += DataLoader.WriteInt8(writer, 0x87);
-        add_ptr += DataLoader.WriteInt8(writer, 0);
-        for (int i = 0; i <= blockData.GetUpperBound(0); i++)
-        {//write block addresses
-            add_ptr += DataLoader.WriteInt32(writer, blockData[i].Address);
-        }
-
-        for (long freespace = add_ptr; freespace < blockData[0].Address; freespace++)
-        {//write freespace
-            add_ptr += DataLoader.WriteInt8(writer, 0);
-        }
-
-        //Now be brave and write all my blocks!!!
-        for (int i = 0; i <= blockData.GetUpperBound(0); i++)
-        {
-            if (blockData[i].Data != null)
-            {
-                for (long a = 0; a <= blockData[i].Data.GetUpperBound(0); a++)
-                {
-                    add_ptr += DataLoader.WriteInt8(writer, (long)blockData[i].Data[a]);
-                }
-            }
-        }
-
-        file.Close();
-
-        return;
-    }
 
     /// <summary>
     /// Inits the level data maps and textures.
@@ -2008,7 +1474,7 @@ public class GameWorldController : UWEBase
                 break;
         }
 
-        if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out lev_ark_file_data))
+        if (!DataLoader.ReadStreamFile(Loader.BasePath + Lev_Ark_File, out LevArk.lev_ark_file_data))
         {
             Debug.Log(Loader.BasePath + Lev_Ark_File + "File not loaded");
             Application.Quit();
@@ -2025,14 +1491,14 @@ public class GameWorldController : UWEBase
                 for (int i = 0; i <= AutoMaps.GetUpperBound(0); i++)
                 {
                     AutoMaps[i] = new AutoMap();
-                    AutoMaps[i].InitAutoMapUW1(i, lev_ark_file_data);
+                    AutoMaps[i].InitAutoMapUW1(i, LevArk.lev_ark_file_data);
                 }
                 break;
             case GAME_UW2:
                 for (int i = 0; i <= AutoMaps.GetUpperBound(0); i++)
                 {
                     AutoMaps[i] = new AutoMap();
-                    AutoMaps[i].InitAutoMapUW2(i, lev_ark_file_data);
+                    AutoMaps[i].InitAutoMapUW2(i, LevArk.lev_ark_file_data);
                 }
                 break;
         }
@@ -2141,24 +1607,7 @@ public class GameWorldController : UWEBase
         File.WriteAllBytes(Loader.BasePath + "SAVE" + SlotNo + sep + "BGLOBALS.DAT", output);
 
     }
-
-    /// <summary>
-    /// Copies the data from the cached lev ark file to a new array;
-    /// </summary>
-    /// <returns>The data.</returns>
-    /// <param name="address">Address.</param>
-    /// <param name="length">Length.</param>
-    public char[] CopyData(long address, long length)
-    {
-        char[] DataToCopy = new char[length];
-
-        for (int i = 0; i <= DataToCopy.GetUpperBound(0); i++)
-        {
-            DataToCopy[i] = lev_ark_file_data[address + i];
-        }
-        return DataToCopy;
-    }
-
+    
     /// <summary>
     /// Switchs to a Terra nova map.
     /// </summary>
@@ -2371,7 +1820,10 @@ public class GameWorldController : UWEBase
     }
 
 
-
+    /// <summary>
+    /// Creates a report of the objects in the level in an xml format
+    /// </summary>
+    /// <param name="objList"></param>
     void CreateObjectReport(ObjectLoaderInfo[] objList)
     {
         StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");
@@ -2450,12 +1902,12 @@ public class GameWorldController : UWEBase
         writer.Close();
     }
 
-    /// <summary>
-    /// Gets what world is associated with the current level
-    /// </summary>
-    /// <param name="levelNo"></param>
-    /// <returns></returns>
-    public static Worlds GetWorld(int levelNo)
+        /// <summary>
+        /// Gets what world is associated with the current level
+        /// </summary>
+        /// <param name="levelNo"></param>
+        /// <returns></returns>
+        public static Worlds GetWorld(int levelNo)
     {
         if (_RES != GAME_UW2) { return Worlds.Britannia; }
         switch ((UW2_LevelNos)levelNo)
@@ -2517,6 +1969,4 @@ public class GameWorldController : UWEBase
                 return Worlds.Ethereal;
         }
     }
-
-
 }

@@ -175,6 +175,7 @@ public class ObjectLoader : DataLoader
             setQbert(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
             FindOffMapOscillatorTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
             SetColourCyclingTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
+            SetFloorCollapseTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
         }
     }
 
@@ -1529,13 +1530,17 @@ public class ObjectLoader : DataLoader
                     } while (currObj.index != 0);
                 }
             }
-
         }
-
     }
 
+    /// <summary>
+    /// To i.d. that the tile terrains changes and I can later render both versions of the tile.
+    /// </summary>
+    /// <param name="LevelInfo"></param>
+    /// <param name="objList"></param>
+    /// Does not support off map terrain change traps.
     void setTerrainChangeBits(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList)
-    {//So I know that the tile terrains changes and I can later render both versions of the tile.
+    {
         ObjectLoaderInfo currObj;
         for (short x = 0; x < 64; x++)
         {
@@ -1584,9 +1589,6 @@ public class ObjectLoader : DataLoader
     }
 
 
-
-
-
     void SetBullFrog(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int LevelNo)
     {
         //Special UW1 case for the bullfrog puzzle
@@ -1603,6 +1605,40 @@ public class ObjectLoader : DataLoader
             }
         }
     }
+
+    /// <summary>
+    /// Sets the tiles that contain a floor collapse hack trap
+    /// </summary>
+    /// <param name="LevelInfo"></param>
+    /// <param name="objList"></param>
+    /// <param name="LevelNo"></param>
+    void SetFloorCollapseTiles(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, int LevelNo)
+    {
+        for (int i=256; i<=objList.GetUpperBound(0);i++)
+        {
+            ObjectLoaderInfo currobj = objList[i];
+            if ((currobj.link>0) && (currobj.link<= objList.GetUpperBound(0)))
+            {
+                ObjectLoaderInfo linkobj = objList[currobj.link];
+                if (isTrigger(currobj) && (linkobj.item_id==387) && (linkobj.quality==17))
+                {
+                    //Flag each tile in a 20 tile block as being a tile change tile
+                    int triggerX = currobj.quality; int triggerY = currobj.owner;
+                    for (int x=-10; x<=10; x++)
+                    {
+                        for (int y = -10; y <= 10; y++)
+                        {
+                            if (TileMap.ValidTile(triggerX+x, triggerY+y))
+                            {
+                                LevelInfo[triggerX + x, triggerY + y].TerrainChange = true;
+                            }
+                        }
+                    }
+                }
+            }            
+        }
+    }
+
 
     /// <summary>
     /// Sets the qbert tiles that will change with the pyramid.
@@ -1716,31 +1752,39 @@ public class ObjectLoader : DataLoader
         }
     }
 
-    ///calczyz
-    ///  float *offX, float *offY, float *offZ,
-    public static Vector3 CalcObjectXYZ(string game, TileMap tileMap, TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, long index, int x, int y, short WallAdjust)
-    {
+    /// <summary>
+    /// Calculates the position in world space of the object at ObjectIndex in the current object list
+    /// </summary>
+     /// <param name="ObjectIndex"></param>
+    /// <param name="WallAdjust"></param>
+    /// <returns></returns>
+    public static Vector3 CalcObjectXYZ( int ObjectIndex, short WallAdjust)
+    {//?
+        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
+        TileMap tileMap = CurrentTileMap();
+        int x = objList[ObjectIndex].ObjectTileX;
+        int y = objList[ObjectIndex].ObjectTileY;
         float offX = 0f; float offY = 0f; float offZ = 0f;
         float ResolutionXY = 7.0f;  // A tile has a 7x7 grid for object positioning.
         float ResolutionZ = 128.0f; //UW has 127 posible z positions for an object in tile.
-        if (game == Loader.GAME_SHOCK) { ResolutionXY = 256.0f; ResolutionZ = 256.0f; } //Shock has more "z" in it.
+        if (_RES == GAME_SHOCK) { ResolutionXY = 256.0f; ResolutionZ = 256.0f; } //Shock has more "z" in it.
 
         float BrushX = 120f;
         float BrushY = 120f;
         float BrushZ = 15f;
-        float objX = (float)objList[index].xpos;
-        float objY = (float)objList[index].ypos;
-        offX = (x * BrushX) + ((objList[index].xpos) * (BrushX / ResolutionXY));
-        offY = (y * BrushY) + ((objList[index].ypos) * (BrushY / ResolutionXY));
+        float objX = (float)objList[ObjectIndex].xpos;
+        float objY = (float)objList[ObjectIndex].ypos;
+        offX = (x * BrushX) + ((objList[ObjectIndex].xpos) * (BrushX / ResolutionXY));
+        offY = (y * BrushY) + ((objList[ObjectIndex].ypos) * (BrushY / ResolutionXY));
 
-        float zpos = objList[index].zpos;
+        float zpos = objList[ObjectIndex].zpos;
 
         float ceil = tileMap.CEILING_HEIGHT;
 
         offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
-        if ((game != Loader.GAME_SHOCK) && (x < 64) && (y < 64))
+        if ((_RES != GAME_SHOCK) && (x < 64) && (y < 64))
         {//Adjust zpos by a fraction for objects on sloped tiles.
-            switch (LevelInfo[x, y].tileType)
+            switch (tileMap.Tiles[x, y].tileType)
             {
                 case TileMap.TILE_SLOPE_N:
                     offZ += objY * (48.0f / BrushZ);
@@ -1758,20 +1802,20 @@ public class ObjectLoader : DataLoader
         }
         if ((x < 64) && (y < 64))
         {
-            switch (objList[index].GetItemType())
+            switch (objList[ObjectIndex].GetItemType())
             {
                 case ObjectInteraction.TMAP_CLIP:
                 case ObjectInteraction.TMAP_SOLID:
-                    switch (objList[index].heading * 45)
+                    switch (objList[ObjectIndex].heading * 45)
                     {
                         case ObjectInteraction.HEADINGWEST:
                         case ObjectInteraction.HEADINGEAST:
                             offY = (y * BrushY) + 60f;//center in tile
-                            if (objList[index].xpos == 0)
+                            if (objList[ObjectIndex].xpos == 0)
                             {
                                 offX += 6.5f;//was 4
                             }
-                            if (objList[index].xpos == 7)
+                            if (objList[ObjectIndex].xpos == 7)
                             {
                                 offX -= 6.5f;//was 4
                             }
@@ -1779,11 +1823,11 @@ public class ObjectLoader : DataLoader
                         case ObjectInteraction.HEADINGNORTH:
                         case ObjectInteraction.HEADINGSOUTH:
                             offX = (x * BrushX) + 60f;
-                            if (objList[index].ypos == 0)
+                            if (objList[ObjectIndex].ypos == 0)
                             {
                                 offY += 6.5f;//was 4
                             }
-                            if (objList[index].ypos == 7)
+                            if (objList[ObjectIndex].ypos == 7)
                             {
                                 offY -= 6.5f;//was 4
                             }
@@ -1800,44 +1844,44 @@ public class ObjectLoader : DataLoader
                         //Doors will always go at the tile height.
                         int newZpos = tileMap.Tiles[x, y].floorHeight * 4;
                         offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
-                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[index].ObjectTileX, objList[index].ObjectTileY, ObjectInteraction.BRIDGE);
+                        int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList, objList[ObjectIndex].ObjectTileX, objList[ObjectIndex].ObjectTileY, ObjectInteraction.BRIDGE);
                         if (BridgeIndex != -1)
-                        {
-                            offZ = ObjectLoader.CalcObjectXYZ(_RES, tileMap, LevelInfo, objList, BridgeIndex, objList[index].ObjectTileX, objList[index].ObjectTileY, 0).y * 100;
+                        {//Adjust for possible bridges in this tile. If so the door goes at the bridge height
+                            offZ = ObjectLoader.CalcObjectXYZ( BridgeIndex, 0).y * 100;
                         }
 
 
-                        switch (objList[index].heading * 45)
+                        switch (objList[ObjectIndex].heading * 45)
                         {//Move the object position so it can located in the right position in the centre of the frame.
                             case ObjectInteraction.HEADINGWEST:
                                 {
-                                    offY = (objList[index].ObjectTileY * BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
-                                    //offY = (((float)(objList[index].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
+                                    offY = (objList[ObjectIndex].ObjectTileY * BrushY + DOORWIDTH + ((BrushY - DOORWIDTH) / 2f));
+                                    //offY = (((float)(objList[ObjectIndex].tileY)*BrushY) + BrushY + ((BrushY - DOORWIDTH) / 2f)); 
                                     break;
                                 }
                             case ObjectInteraction.HEADINGEAST:
                                 {
-                                    offY = (objList[index].ObjectTileY * BrushY + ((BrushY - DOORWIDTH) / 2f));
-                                    //offY = ((float)objList[index].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
+                                    offY = (objList[ObjectIndex].ObjectTileY * BrushY + ((BrushY - DOORWIDTH) / 2f));
+                                    //offY = ((float)objList[ObjectIndex].tileY*BrushY + ((BrushY - DOORWIDTH) / 2f)) ;
                                     break;
                                 }
                             case ObjectInteraction.HEADINGNORTH:
                                 {
-                                    offX = (objList[index].ObjectTileX * BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
-                                    //offX = ((float)objList[index].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
+                                    offX = (objList[ObjectIndex].ObjectTileX * BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
+                                    //offX = ((float)objList[ObjectIndex].tileX*BrushX + DOORWIDTH + ((BrushX - DOORWIDTH) / 2f));
                                     break;
                                 }
                             case ObjectInteraction.HEADINGSOUTH:
                                 {
-                                    offX = (objList[index].ObjectTileX * BrushX + ((BrushX - DOORWIDTH) / 2f));
-                                    //offX = ((float)objList[index].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
+                                    offX = (objList[ObjectIndex].ObjectTileX * BrushX + ((BrushX - DOORWIDTH) / 2f));
+                                    //offX = ((float)objList[ObjectIndex].tileX*BrushX + ((BrushX - DOORWIDTH) / 2f)) ;
                                     break;
                                 }
                         }
-                        if (objList[index].xpos == 0) { offX = offX + 2f; }
-                        if (objList[index].xpos == 7) { offX = offX - 2f; }
-                        if (objList[index].ypos == 0) { offY = offY + 2f; }
-                        if (objList[index].ypos == 7) { offY = offY - 2f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 2f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 2f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 2f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 2f; }
                         break;
                     }
                 case ObjectInteraction.A_MOVE_TRIGGER:
@@ -1846,7 +1890,7 @@ public class ObjectLoader : DataLoader
                         {
                             if (tileMap.Tiles[x, y].TerrainChange == false)
                             {
-                                if (objList[index].zpos < tileMap.Tiles[x, y].floorHeight * 4)
+                                if (objList[ObjectIndex].zpos < tileMap.Tiles[x, y].floorHeight * 4)
                                 {
                                     int newZpos = tileMap.Tiles[x, y].floorHeight * 4;
                                     offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
@@ -1858,10 +1902,10 @@ public class ObjectLoader : DataLoader
                 case ObjectInteraction.BUTTON:
                 case ObjectInteraction.SIGN:
                     {//TODO: make this based on heading so as to support angled walls									
-                        if (objList[index].xpos == 0) { offX = offX + 1.5f; }
-                        if (objList[index].xpos == 7) { offX = offX - 1.5f; }
-                        if (objList[index].ypos == 0) { offY = offY + 1.5f; }
-                        if (objList[index].ypos == 7) { offY = offY - 1.5f; }
+                        if (objList[ObjectIndex].xpos == 0) { offX = offX + 1.5f; }
+                        if (objList[ObjectIndex].xpos == 7) { offX = offX - 1.5f; }
+                        if (objList[ObjectIndex].ypos == 0) { offY = offY + 1.5f; }
+                        if (objList[ObjectIndex].ypos == 7) { offY = offY - 1.5f; }
                         if (zpos == 127)
                         {
                             offZ -= 25f;
@@ -1875,19 +1919,19 @@ public class ObjectLoader : DataLoader
                     {
                         if (WallAdjust == 1)
                         {//Adjust the object x,y to avoid clipping into walls.
-                            switch (game)
+                            switch (_RES)
                             {
                                 case Loader.GAME_SHOCK:
-                                    if (objList[index].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[index].xpos == 128) { offX = offX - 4f; }
-                                    if (objList[index].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[index].ypos == 128) { offY = offY - 3f; }
+                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
+                                    if (objList[ObjectIndex].xpos == 128) { offX = offX - 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
+                                    if (objList[ObjectIndex].ypos == 128) { offY = offY - 3f; }
                                     break;
                                 default:
-                                    if (objList[index].xpos == 0) { offX = offX + 4f; }
-                                    if (objList[index].xpos == 7) { offX = offX - 4f; }
-                                    if (objList[index].ypos == 0) { offY = offY + 4f; }
-                                    if (objList[index].ypos == 7) { offY = offY - 4f; }
+                                    if (objList[ObjectIndex].xpos == 0) { offX = offX + 4f; }
+                                    if (objList[ObjectIndex].xpos == 7) { offX = offX - 4f; }
+                                    if (objList[ObjectIndex].ypos == 0) { offY = offY + 4f; }
+                                    if (objList[ObjectIndex].ypos == 7) { offY = offY - 4f; }
                                     break;
                             }
                         }
@@ -1936,7 +1980,7 @@ public class ObjectLoader : DataLoader
                     }
                     else
                     {
-                        position = CalcObjectXYZ(_RES, tilemap, tilemap.Tiles, instance.objInfo, i, instance.objInfo[i].ObjectTileX, instance.objInfo[i].ObjectTileY, 1);
+                        position = CalcObjectXYZ(i, 1);
                     }
 
                     instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i], instance.objInfo, parent, position);
@@ -1962,13 +2006,13 @@ public class ObjectLoader : DataLoader
     /// <param name="index">Index.</param>
     public static ObjectLoaderInfo getObjectInfoAt(int index)
     {
-        return GameWorldController.instance.CurrentObjectList().objInfo[index];
+        return CurrentObjectList().objInfo[index];
     }
 
 
     public static ObjectLoaderInfo getObjectInfoAt(int index, ObjectLoader objList)
     {
-        //return GameWorldController.instance.CurrentObjectList().objInfo[index];
+        //return CurrentObjectList().objInfo[index];
         return objList.objInfo[index];
     }
 
@@ -1980,11 +2024,11 @@ public class ObjectLoader : DataLoader
     /// <param name="index">Index.</param>
     public static ObjectInteraction getObjectIntAt(int index)
     {
-        /*	if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance==null)
+        /*	if (CurrentObjectList().objInfo[index].instance==null)
             {
                     Debug.Log("Attempt to get null instance of object at " + index);
             }*/
-        return GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+        return CurrentObjectList().objInfo[index].instance;
     }
 
     /// <summary>
@@ -2015,9 +2059,9 @@ public class ObjectLoader : DataLoader
     /// <param name="index">Index.</param>
     public static GameObject getGameObjectAt(int index)
     {
-        if (GameWorldController.instance.CurrentObjectList().objInfo[index].instance != null)
+        if (CurrentObjectList().objInfo[index].instance != null)
         {
-            return GameWorldController.instance.CurrentObjectList().objInfo[index].instance.gameObject;
+            return CurrentObjectList().objInfo[index].instance.gameObject;
         }
         else
         {
@@ -2385,7 +2429,7 @@ public class ObjectLoader : DataLoader
     /// <param name="tileY">Tile y.</param>
     public static int GetTileIndexNext(int tileX, int tileY)
     {
-        return GameWorldController.instance.currentTileMap().Tiles[tileX, tileY].indexObjectList;
+        return CurrentTileMap().Tiles[tileX, tileY].indexObjectList;
     }
 
 
@@ -2405,10 +2449,10 @@ public class ObjectLoader : DataLoader
                              //	startindex=979;
         }
         //find a free slot in the list.
-        if (GameWorldController.instance.CurrentObjectList().getFreeSlot(startindex, out index))
+        if (CurrentObjectList().getFreeSlot(startindex, out index))
         {
             //Assign and return the reference
-            objInt.objectloaderinfo = GameWorldController.instance.CurrentObjectList().objInfo[index];
+            objInt.objectloaderinfo = CurrentObjectList().objInfo[index];
             objInt.objectloaderinfo.InUseFlag = 1;
             objInt.objectloaderinfo.index = index;
             //Debug.Log("Assigning "+ objInt.name + " to index " + index);
@@ -2432,8 +2476,8 @@ public class ObjectLoader : DataLoader
                         }
                         else
                         {
-                            GameWorldController.instance.CurrentObjectList().objInfo[prevLink].next = newlink;
-                            GameWorldController.instance.CurrentObjectList().objInfo[prevLink].instance.next = newlink;
+                            CurrentObjectList().objInfo[prevLink].next = newlink;
+                            CurrentObjectList().objInfo[prevLink].instance.next = newlink;
                             prevLink = newlink;
 
                         }
@@ -2447,7 +2491,7 @@ public class ObjectLoader : DataLoader
                     objInt.link = 0;//No contents
                 }
             }
-            GameWorldController.instance.CurrentObjectList().CopyDataToList(objInt, ref objInt.objectloaderinfo);
+            CurrentObjectList().CopyDataToList(objInt, ref objInt.objectloaderinfo);
         }
         else
         {
@@ -2557,27 +2601,27 @@ public class ObjectLoader : DataLoader
         int index = 0;
         if (startIndex >= 0)
         {
-            if (GameWorldController.instance.CurrentObjectList().getFreeSlot(startIndex, out index))
+            if (CurrentObjectList().getFreeSlot(startIndex, out index))
             {
-                GameWorldController.instance.CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();
-                GameWorldController.instance.CurrentObjectList().objInfo[index].quality = (short)quality;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].flags = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].owner = (short)owner;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].item_id = item_id;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].next = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].link = link;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].zpos = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].xpos = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].ypos = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].invis = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].doordir = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].is_quant = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].enchantment = 0;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].ObjectTileX = TileMap.ObjectStorageTile;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].ObjectTileY = TileMap.ObjectStorageTile;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].InUseFlag = 1;
-                GameWorldController.instance.CurrentObjectList().objInfo[index].index = index;
-                return GameWorldController.instance.CurrentObjectList().objInfo[index];
+                CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();
+                CurrentObjectList().objInfo[index].quality = (short)quality;
+                CurrentObjectList().objInfo[index].flags = 0;
+                CurrentObjectList().objInfo[index].owner = (short)owner;
+                CurrentObjectList().objInfo[index].item_id = item_id;
+                CurrentObjectList().objInfo[index].next = 0;
+                CurrentObjectList().objInfo[index].link = link;
+                CurrentObjectList().objInfo[index].zpos = 0;
+                CurrentObjectList().objInfo[index].xpos = 0;
+                CurrentObjectList().objInfo[index].ypos = 0;
+                CurrentObjectList().objInfo[index].invis = 0;
+                CurrentObjectList().objInfo[index].doordir = 0;
+                CurrentObjectList().objInfo[index].is_quant = 0;
+                CurrentObjectList().objInfo[index].enchantment = 0;
+                CurrentObjectList().objInfo[index].ObjectTileX = TileMap.ObjectStorageTile;
+                CurrentObjectList().objInfo[index].ObjectTileY = TileMap.ObjectStorageTile;
+                CurrentObjectList().objInfo[index].InUseFlag = 1;
+                CurrentObjectList().objInfo[index].index = index;
+                return CurrentObjectList().objInfo[index];
             }
         }
         else

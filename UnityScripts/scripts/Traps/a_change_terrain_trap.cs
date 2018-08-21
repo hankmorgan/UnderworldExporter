@@ -26,7 +26,7 @@ The path to the sword hilt on Level3
 					GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
 					if (tile!=null)
 					{
-						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
+						TileInfo tileToChange = CurrentTileMap().Tiles[tileXToChange,tileYToChange];
 						//Destroy (tile);
 						
 						switch (_RES)
@@ -38,7 +38,7 @@ The path to the sword hilt on Level3
 							if (textureQuality<10)
 							{
 								tileToChange.floorTexture=(short)textureQuality;//+48;
-									//tileToChange.floorTexture=GameWorldController.instance.currentTileMap().texture_map[textureQuality+48];
+									//tileToChange.floorTexture=CurrentTileMap().texture_map[textureQuality+48];
 							}
 							break;
 						}
@@ -75,7 +75,7 @@ The path to the sword hilt on Level3
 
 						////tileToChange.floorHeight=newTileHeight;	
 						//tileToChange.floorHeight=tileToChange.floorHeight;//DOUBLE CHECK THIS
-						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
+						tileToChange.isWater=TileMap.isTextureWater(CurrentTileMap().texture_map[ tileToChange.floorTexture]);
 						//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);
 						tileToChange.TileNeedsUpdate();
 						TileMapRenderer.UpdateTile(tileXToChange,tileYToChange, tileTypeToChangeTo, newTileHeight,tileToChange.floorTexture, newWallTexture ,false );
@@ -100,25 +100,25 @@ The path to the sword hilt on Level3
 								DestroyDoorPortion(doorname);
 								TileMapRenderer.RenderDoor(
 										GameWorldController.instance.SceneryModel.gameObject,
-										GameWorldController.instance.currentTileMap(),
-										GameWorldController.instance.CurrentObjectList(),
+										CurrentTileMap(),
+										CurrentObjectList(),
 										door.GetComponent<ObjectInteraction>().objectloaderinfo.index);
 /*								TileMapRenderer.RenderDoorwayFront(
 								GameWorldController.instance.LevelModel,
-													GameWorldController.instance.currentTileMap(),
-													GameWorldController.instance.CurrentObjectList(),
+													CurrentTileMap(),
+													CurrentObjectList(),
 													door.GetComponent<ObjectInteraction>().objectloaderinfo
 													);
 								TileMapRenderer.RenderDoorwayRear(
 												GameWorldController.instance.LevelModel,
-												GameWorldController.instance.currentTileMap(),
-												GameWorldController.instance.CurrentObjectList(),
+												CurrentTileMap(),
+												CurrentObjectList(),
 												door.GetComponent<ObjectInteraction>().objectloaderinfo
 													);*/
 								Vector3 objPos = door.transform.position;
-								ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+								ObjectInteraction.CreateNewObject(CurrentTileMap(),
 																door.GetComponent<ObjectInteraction>().objectloaderinfo,
-																GameWorldController.instance.CurrentObjectList().objInfo,
+																CurrentObjectList().objInfo,
 																GameWorldController.instance.LevelModel,objPos
 														);
 
@@ -151,13 +151,13 @@ The path to the sword hilt on Level3
 					}
 					if ( (tileXToChange >=0) && (tileXToChange <=63) &&  (tileYToChange >=0) && (tileYToChange <=63))
 					{
-						TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];	
+						TileInfo tileToChange = CurrentTileMap().Tiles[tileXToChange,tileYToChange];	
 						tileToChange.Render=true;
 						for (int v=0;v<6;v++)
 						{
 							tileToChange.VisibleFaces[v]=true;		
 						}
-						tileToChange.isWater=TileMap.isTextureWater(GameWorldController.instance.currentTileMap().texture_map[ tileToChange.floorTexture]);
+						tileToChange.isWater=TileMap.isTextureWater(CurrentTileMap().texture_map[ tileToChange.floorTexture]);
 						//TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,tileXToChange,tileYToChange,tileToChange,tileToChange.isWater,false,false,true);											
 						tileToChange.TileNeedsUpdate();
 					}

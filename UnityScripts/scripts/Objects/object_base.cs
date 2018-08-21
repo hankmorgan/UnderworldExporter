@@ -1157,7 +1157,7 @@ return false;*/
     {
         if (link != 0)
         {
-            ObjectInteraction objLink = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;
+            ObjectInteraction objLink = CurrentObjectList().objInfo[link].instance;
             if (objLink != null)
             {
                 if (objLink.GetItemType() == ObjectInteraction.A_DELETE_OBJECT_TRAP)

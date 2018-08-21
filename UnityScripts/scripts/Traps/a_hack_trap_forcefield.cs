@@ -23,15 +23,7 @@ public class a_hack_trap_forcefield : a_hack_trap
                 forcefieldtoMove.zpos = 127;
                 forcefieldtoMove.objectloaderinfo.zpos = 127;
             }
-            forcefieldtoMove.transform.position = ObjectLoader.CalcObjectXYZ(_RES,
-                    GameWorldController.instance.currentTileMap(),
-                    GameWorldController.instance.currentTileMap().Tiles,
-                    GameWorldController.instance.CurrentObjectList().objInfo,
-                    forcefieldtoMove.objectloaderinfo.index,
-                    forcefieldtoMove.ObjectTileX,
-                    forcefieldtoMove.ObjectTileY,
-                    1
-            );
+            forcefieldtoMove.transform.position = ObjectLoader.CalcObjectXYZ(forcefieldtoMove.objectloaderinfo.index, 1);
         }
     }
 
@@ -43,7 +35,7 @@ public class a_hack_trap_forcefield : a_hack_trap
 
     ObjectInteraction findForceField()
     {
-        ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         for (int i = 256; i <= objList.GetUpperBound(0); i++)
         {
             if ((objList[i].InUseFlag == 1) && (objList[i].instance != null) && objList[i].item_id == 365)

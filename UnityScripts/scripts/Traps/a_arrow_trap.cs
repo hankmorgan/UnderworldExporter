@@ -19,10 +19,10 @@ public class a_arrow_trap : trap_base {
 		int item_index=  (quality << 5) | owner;
 
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
-		GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
+		GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
 		if (ObjectTileX == TileMap.ObjectStorageTile)
 		{
-			Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(triggerX,triggerY);
+			Vector3 pos = CurrentTileMap().getTileVector(triggerX,triggerY);
 			pos = new Vector3(pos.x,this.transform.position.y,pos.z);
 			myObj.transform.position=pos;
 		}
@@ -36,7 +36,7 @@ public class a_arrow_trap : trap_base {
 			myObj.AddComponent<Rigidbody>();
 		}
 
-		GameWorldController.UnFreezeMovement(myObj);
+		UnFreezeMovement(myObj);
 		myObj.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.Continuous;
 		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 20.0f *((float)(owner)));
 		

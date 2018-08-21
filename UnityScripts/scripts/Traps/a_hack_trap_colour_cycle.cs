@@ -7,7 +7,7 @@ public class a_hack_trap_colour_cycle : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        TileMap tm = GameWorldController.instance.currentTileMap();
+        TileMap tm = CurrentTileMap();
         short maxTexture = quality;
         short minTexture = owner;
         for (int x = triggerX; x <= triggerX + 4; x++)
@@ -29,7 +29,7 @@ public class a_hack_trap_colour_cycle : a_hack_trap
                 }
             }
         }
-        GameWorldController.instance.currentTileMap().SetTileMapWallFacesUW();
+        CurrentTileMap().SetTileMapWallFacesUW();
         //Tell the tells and their neighbours to rerender.
         for (int x = triggerX - 1; x <= triggerX + 5; x++)
         {

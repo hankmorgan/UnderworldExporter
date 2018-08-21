@@ -1390,7 +1390,7 @@ public class Magic : UWEBase {
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( 176 + Random.Range(0,7),40,0,1,256);
 						newobjt.is_quant=1;
 						newobjt.InUseFlag=1;
-						GameWorldController.UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
+						UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
 				}
 		}
 
@@ -1436,7 +1436,7 @@ public class Magic : UWEBase {
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
 
 						ObjectLoaderInfo newobjt= ObjectLoader.newObject( spKM.RndNPC,0,0,0,2);
-						GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
+						GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
 						myObj.GetComponent<NPC>().npc_gtarg= (short)gtarg;
 						myObj.GetComponent<NPC>().npc_goal=(short)NPC.npc_goals.npc_goal_follow;
 						myObj.GetComponent<NPC>().npc_hp=GameWorldController.instance.objDat.critterStats[spKM.RndNPC-64].AvgHit;
@@ -1465,7 +1465,7 @@ public class Magic : UWEBase {
 						ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, goal, 1, gtarg, 0, 4, 0, targetName, navMeshName);
 
 						*/
-						GameWorldController.UnFreezeMovement(myObj);
+						UnFreezeMovement(myObj);
 				}
 		}
 
@@ -1998,7 +1998,7 @@ public class Magic : UWEBase {
 			//TODO:reimplement this.
 			//Possible spawn boulders with temporary damage effects???
 			//TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
-			TileMap tm = GameWorldController.instance.currentTileMap();
+			TileMap tm = CurrentTileMap();
 			for (int i =0 ; i <= Random.Range(1,4);i++)			
 			{
 				//	int boulderTypeOffset=Random.Range(0,4);
@@ -2021,7 +2021,7 @@ public class Magic : UWEBase {
 					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 					*/
 					ObjectLoaderInfo newobjt= ObjectLoader.newObject( 386,40,0,0,256);
-								GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
+								GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
 					myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(),0,0,0);
 					newobjt.InUseFlag=1;
 					//TODO: Fix this
@@ -2367,7 +2367,7 @@ public class Magic : UWEBase {
 
 */
 				ObjectLoaderInfo newobjt= ObjectLoader.newObject(393,40,0,0,256);
-				ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,pos);
+				ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,pos);
 				newobjt.InUseFlag=1;
 
 				//000~001~276~The Rune of Warding is placed. \n
@@ -2745,7 +2745,7 @@ public class Magic : UWEBase {
 				{
 					if (TileMap.ValidTile(TileMap.visitTileX+x, TileMap.visitTileY+y))
 					{
-						GameWorldController.instance.currentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, GameWorldController.instance.currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(GameWorldController.instance.currentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
+						CurrentAutoMap().MarkTile(TileMap.visitTileX+x, TileMap.visitTileY+y, CurrentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y].tileType, AutoMap.GetDisplayType(CurrentTileMap().Tiles[TileMap.visitTileX+x,TileMap.visitTileY+y]) );												
 					}
 				}		
 			}
@@ -3307,14 +3307,14 @@ public class Magic : UWEBase {
 									{
 										if (caster==UWCharacter.Instance.gameObject)
 										{
-											UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+											UWCharacter.Instance.aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
 											UWCharacter.Instance.aud.Play();
 										}
 										else
 										{
 											if (!spellprop.silent)
 											{
-													caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+													caster.GetComponent<AudioSource>().clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
 													caster.GetComponent<AudioSource>().Play();		
 											}
 										}		
@@ -3408,7 +3408,7 @@ public class Magic : UWEBase {
 				{
 					if (!spellprop.silent)
 					{
-						UWCharacter.Instance.aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+						UWCharacter.Instance.aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
 						UWCharacter.Instance.aud.Play();
 					}
 				}
@@ -3418,7 +3418,7 @@ public class Magic : UWEBase {
 					{
 						if (!spellprop.silent)
 						{
-							caster.transform.parent.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+							caster.transform.parent.GetComponent<AudioSource>().clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
 							caster.transform.parent.GetComponent<AudioSource>().Play();		
 						}
 					}
@@ -3426,7 +3426,7 @@ public class Magic : UWEBase {
 					{
 						if (!spellprop.silent)
 						{
-							caster.GetComponent<AudioSource>().clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
+							caster.GetComponent<AudioSource>().clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP]	;
 							caster.GetComponent<AudioSource>().Play();	
 						}
 					}
@@ -3454,10 +3454,10 @@ public class Magic : UWEBase {
 		{//Creates the projectile.
 				int index;
 				//Create an object info
-				GameWorldController.instance.CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
+				CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
 				if (index!=-1)
 				{
-						ObjectLoaderInfo oli = GameWorldController.instance.CurrentObjectList().objInfo[index];
+						ObjectLoaderInfo oli = CurrentObjectList().objInfo[index];
 						oli.guid=System.Guid.NewGuid();
 						oli.item_id=spellprop.ProjectileItemId;
 						oli.invis=0;
@@ -3467,7 +3467,7 @@ public class Magic : UWEBase {
 						oli.flags=3;
 						oli.quality=60;
 						oli.InUseFlag=1;
-						GameObject projectile = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),oli,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject,Location).gameObject;
+						GameObject projectile = ObjectInteraction.CreateNewObject(CurrentTileMap(),oli,CurrentObjectList().objInfo,GameWorldController.instance.DynamicObjectMarker().gameObject,Location).gameObject;
 						projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 						//projectile.name = "MagicProjectile_" + SummonCount++;
 						projectile.transform.parent=GameWorldController.instance.DynamicObjectMarker();
@@ -3497,7 +3497,7 @@ public class Magic : UWEBase {
 						Rigidbody rgd = projectile.GetComponent<Rigidbody>();
 						rgd.freezeRotation =true;
 						mgp.rgd=rgd;
-						GameWorldController.UnFreezeMovement(projectile);
+						UnFreezeMovement(projectile);
 						rgd.useGravity=false;
 
 						rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;

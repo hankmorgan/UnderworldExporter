@@ -18,7 +18,7 @@ public class a_hack_trap_tmap_range_change : a_hack_trap
         minY = 0;
         maxX = 63;
         maxY = 63;
-        ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
             if ((objList[i].item_id == 366) || (objList[i].item_id == 367))
@@ -38,7 +38,7 @@ public class a_hack_trap_tmap_range_change : a_hack_trap
                             if (tmap != null)
                             {
                                 tmap.owner = (short)(40 + owner);
-                                tmap.TextureIndex = GameWorldController.instance.currentTileMap().texture_map[40 + owner];
+                                tmap.TextureIndex = CurrentTileMap().texture_map[40 + owner];
                                 TMAP.CreateTMAP(tmap.gameObject, tmap.TextureIndex);
                             }
                         }

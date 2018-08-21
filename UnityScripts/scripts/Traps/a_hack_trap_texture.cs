@@ -20,7 +20,7 @@ public class a_hack_trap_texture : a_hack_trap {
 				if (tmap!=null)
 				{
 					tmap.owner=owner;	
-					tmap.TextureIndex=GameWorldController.instance.currentTileMap().texture_map[owner];
+					tmap.TextureIndex=CurrentTileMap().texture_map[owner];
 					TMAP.CreateTMAP(obj, tmap.TextureIndex );
 				}
 				else

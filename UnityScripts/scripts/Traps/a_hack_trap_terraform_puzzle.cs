@@ -67,19 +67,19 @@ public class a_hack_trap_terraform_puzzle : a_hack_trap {
 			if(tileFlag ==1)//This tile will change
 			{
 			int tileY = baseY+ (i*3);					
-				if (GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight/2==owner-2)
+				if (CurrentTileMap().Tiles[tileX,tileY].floorHeight/2==owner-2)
 				{
-					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=4;	
+					CurrentTileMap().Tiles[tileX,tileY].floorHeight=4;	
 				}
 				else
 				{
-					GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight=(short)((owner-2)*2);
+					CurrentTileMap().Tiles[tileX,tileY].floorHeight=(short)((owner-2)*2);
 					if ((TileMap.visitTileX == tileX) && (TileMap.visitTileY==tileY))
 					{
-						UWCharacter.Instance.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+						UWCharacter.Instance.transform.position = CurrentTileMap().getTileVector(tileX,tileY);
 					}
 				}
-				GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
+				CurrentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
 				GameObject tileToDestroy= GameWorldController.FindTile(tileX,tileY,TileMap.SURFACE_FLOOR);
 				if (tileToDestroy!=null)
 				{

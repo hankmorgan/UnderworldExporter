@@ -141,11 +141,11 @@ public class Food : object_base {
         switch (Random.Range(1, 3))
         {
             case 1:
-                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_1]; break;
+                UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_EAT_1]; break;
             case 2:
-                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_2]; break;
+                UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_EAT_2]; break;
             default:
-                UWCharacter.Instance.aud.clip = GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_EAT_3]; break;
+                UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_EAT_3]; break;
         }
         UWCharacter.Instance.aud.Play();
     }
@@ -226,7 +226,7 @@ public class Food : object_base {
         {
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(LeftOverToCreate, 40, 0, 0, 256);
             newobjt.InUseFlag = 1;
-            ObjectInteraction created = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+            ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
             GameWorldController.MoveToWorld(created.gameObject);
             UWCharacter.Instance.playerInventory.ObjectInHand = created.name;
             UWHUD.instance.CursorIcon = created.GetInventoryDisplay().texture;

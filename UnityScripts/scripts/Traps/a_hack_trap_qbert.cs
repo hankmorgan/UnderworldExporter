@@ -275,8 +275,8 @@ public class a_hack_trap_qbert : a_hack_trap {
 			setPreviousTileXY(tileX,tileY);
 			int nextColour = getNextColour(tileX,tileY);
 
-			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorTexture=(short)nextColour;
-			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
+			CurrentTileMap().Tiles[tileX,tileY].floorTexture=(short)nextColour;
+			CurrentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
 			GameObject tile = GameWorldController.FindTile(tileX,tileY,TileMap.SURFACE_FLOOR);
 			Destroy(tile);
 			
@@ -297,44 +297,44 @@ public class a_hack_trap_qbert : a_hack_trap {
 				//TODO:Update the walls of the pyramid here!
 				SetPyramidWallColour(ColourTestPassed);
 				Debug.Log("Moongate spawned");
-				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.setInvis(0);
+				CurrentObjectList().objInfo[974].instance.setInvis(0);
 				//Change the owner and quality of the telport trap at 973 based on the colour
 				switch(ColourTestPassed)
 				{
 				case QbertColourBlue:
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=4;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=16;
+						CurrentObjectList().objInfo[973].instance.quality=4;
+						CurrentObjectList().objInfo[973].instance.owner=16;
 						break;
 				case QbertColourYellow:
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=4;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=28;
+						CurrentObjectList().objInfo[973].instance.quality=4;
+						CurrentObjectList().objInfo[973].instance.owner=28;
 						break;
 				case QbertColourPurple:
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=4;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=22;
+						CurrentObjectList().objInfo[973].instance.quality=4;
+						CurrentObjectList().objInfo[973].instance.owner=22;
 						break;
 				case QbertColourRed:
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=4;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=4;
+						CurrentObjectList().objInfo[973].instance.quality=4;
+						CurrentObjectList().objInfo[973].instance.owner=4;
 						break;
 				case QbertColourWhite:
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=4;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=40;
+						CurrentObjectList().objInfo[973].instance.quality=4;
+						CurrentObjectList().objInfo[973].instance.owner=40;
 						break;
 				case QbertColourOrange://Takes you to shrine.
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.quality=32;
-						GameWorldController.instance.CurrentObjectList().objInfo[973].instance.owner=25;
+						CurrentObjectList().objInfo[973].instance.quality=32;
+						CurrentObjectList().objInfo[973].instance.owner=25;
 						break;						
 				}
 				if (ColourSequence.GetUpperBound(0)>=4)
 				{//All normal sequences found and the pyramid has been solved at least once. Allow access to the orange pyramid
 					Quest.instance.variables[105]=5;
-					GameWorldController.instance.CurrentObjectList().objInfo[666].instance.setInvis(0); //my code is evil...
+					CurrentObjectList().objInfo[666].instance.setInvis(0); //my code is evil...
 				}	
 			}
 			else
 			{
-				GameWorldController.instance.CurrentObjectList().objInfo[974].instance.setInvis(1);
+				CurrentObjectList().objInfo[974].instance.setInvis(1);
 				Debug.Log("Moongate despawned");
 			}
 			//}
@@ -370,7 +370,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 			SetWallColour(49,55,colourToSet);
 
-			GameWorldController.instance.currentTileMap().SetTileMapWallFacesUW();
+			CurrentTileMap().SetTileMapWallFacesUW();
 				 
 			DestroyTile(45,51);
 
@@ -396,13 +396,13 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 		void SetWallColour(int tileX, int tileY,int colourToSet)
 		{
-			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].wallTexture=(short)colourToSet;
+			CurrentTileMap().Tiles[tileX,tileY].wallTexture=(short)colourToSet;
 				//Assumes tile is destroyed in destroytile below to trigger re-render
 		}
 
 		void DestroyTile(int tileX, int tileY)
 		{
-			GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
+			CurrentTileMap().Tiles[tileX,tileY].TileNeedsUpdate();
 			GameObject tile = GameWorldController.FindTile(tileX,tileY,TileMap.SURFACE_FLOOR);
 			if (tile!=null)
 			{
@@ -530,7 +530,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 		/// <param name="tileY">Tile y.</param>
 		int getFloorTexture(int tileX, int tileY)
 		{
-			return GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorTexture;
+			return CurrentTileMap().Tiles[tileX,tileY].floorTexture;
 		}
 
 
@@ -576,7 +576,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 			float targetX=(float)tileX*1.2f + 0.6f;
 			float targetY= (float)tileY*1.2f + 0.6f;
 
-			float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(tileX,tileY)))*0.15f;
+			float Height = ((float)(CurrentTileMap().GetFloorHeight(tileX,tileY)))*0.15f;
 			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.3f,targetY);
 			UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;	
 		}
@@ -585,7 +585,7 @@ public class a_hack_trap_qbert : a_hack_trap {
 
 	bool FindMoongateInTile(int tileX, int tileY, out ObjectInteraction obj)
 	{
-		ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+		ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 		for (int i = 0; i < 1024;i++)
 		{//Make sure triggers, traps and special items are created.
 			if (objList[i]!=null)

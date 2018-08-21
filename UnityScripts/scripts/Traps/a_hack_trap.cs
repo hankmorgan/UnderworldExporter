@@ -7,6 +7,7 @@ public class a_hack_trap : trap_base {
     //qual=10  is probably the awarding of class specific items at the start fof the game
     //qual = 12 is an oscillator row of tiles (i think)  -unimplemented
     //qual = 14 cycles wall/floro colours in a room in talours
+    //qual = 17 is used to collapse cracked ice floors (linked to timer triggers)
     //qual = 18 Scintillus 5 switch puzzle reset
     //qual = 19 scintullus 7 platform puzzle reset
     //qual=20 used for rising platforms on level 42 (scintilus)
@@ -36,6 +37,6 @@ public class a_hack_trap : trap_base {
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		Debug.Log ("Hack Trap " + this.name);
+		Debug.Log ("Hack Trap " + objInt().objectloaderinfo.index + " qual = " + quality + " triggers:" + triggerX + "," + triggerY);
 	}
 }

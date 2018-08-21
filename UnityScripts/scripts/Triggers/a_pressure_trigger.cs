@@ -78,10 +78,10 @@ public class a_pressure_trigger : trigger_base {
 						
 		TileXToWatch=ObjectTileX;
 		TileYToWatch=ObjectTileY;
-		TileVector=GameWorldController.instance.currentTileMap().getTileVector(TileXToWatch,TileYToWatch);
+		TileVector=CurrentTileMap().getTileVector(TileXToWatch,TileYToWatch);
 		TileVector=new Vector3(TileVector.x,this.transform.position.y,TileVector.z);
-		//int currentFloorTexture=GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
-		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
+		//int currentFloorTexture=CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
+		CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
 
 		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
 		WeightOnTrigger=0f;		
@@ -99,7 +99,7 @@ public class a_pressure_trigger : trigger_base {
 		PreviousWeightOnTrigger=WeightOnTrigger;
 		//Debug.Log("starting weight is " + PreviousWeightOnTrigger);
 
-		if ( GameWorldController.instance.CurrentObjectList().objInfo[link].GetItemType()== ObjectInteraction.A_DOOR_TRAP)
+		if ( CurrentObjectList().objInfo[link].GetItemType()== ObjectInteraction.A_DOOR_TRAP)
 		{					
 			ObjectInteraction objDoorTrap=	ObjectLoader.getObjectIntAt(link);
 
@@ -163,7 +163,7 @@ public class a_pressure_trigger : trigger_base {
 		/// </summary>
 	public void PutWeightOn()
 	{
-		//UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
+		//UpdateTileTexture(CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture+1);
 		UpdateTileTexture(8);
 		if (door!=null)
 		{
@@ -180,7 +180,7 @@ public class a_pressure_trigger : trigger_base {
 		/// </summary>
 	public void ReleaseWeightFrom()
 	{
-		//UpdateTileTexture(GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
+		//UpdateTileTexture(CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture-1);
 		UpdateTileTexture(7);
 		if (door!=null)
 		{
@@ -203,8 +203,8 @@ public class a_pressure_trigger : trigger_base {
 				{//TODO:confirm this behaviour is consistent
 						return;
 				}
-		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;	
-		GameWorldController.instance.currentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
+		CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture = (short)newTexture;	
+		CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].TileNeedsUpdate();
 		GameObject tileToDestroy= GameWorldController.FindTile(TileXToWatch,TileYToWatch,TileMap.SURFACE_FLOOR);
 		if (tileToDestroy!=null)
 		{

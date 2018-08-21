@@ -167,9 +167,9 @@ public class Character : UWEBase {
 
 				if (transform.position.y <-10f)
 				{
-						if (GameWorldController.instance.currentTileMap()!=null)
+						if (CurrentTileMap()!=null)
 						{
-								this.transform.position = GameWorldController.instance.currentTileMap().getTileVector(TileMap.visitedTileX,TileMap.visitedTileY);			
+								this.transform.position = CurrentTileMap().getTileVector(TileMap.visitedTileX,TileMap.visitedTileY);			
 						}					
 				}
 	}
@@ -291,7 +291,7 @@ public class Character : UWEBase {
 		pInv.ObjectInHand=objPicked.transform.name;
 		if (objPicked.GetComponent<Rigidbody>() !=null)
 		{								
-			GameWorldController.FreezeMovement(objPicked.gameObject);
+			FreezeMovement(objPicked.gameObject);
 		}
 
 		objPicked.transform.position=GameWorldController.instance.InventoryMarker.transform.position;

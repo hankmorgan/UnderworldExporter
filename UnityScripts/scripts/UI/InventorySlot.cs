@@ -519,7 +519,7 @@ public class InventorySlot : GuiBase {
 				objI.link=objI.link-quant;
 				ObjectLoaderInfo newObj = ObjectLoader.newObject(objI.item_id,objI.quality,objI.owner,quant,-1);
 				newObj.is_quant=1;
-				ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newObj,GameWorldController.instance.CurrentObjectList().objInfo,GameWorldController.instance.InventoryMarker,GameWorldController.instance.InventoryMarker.transform.position);
+				ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(CurrentTileMap(),newObj,CurrentObjectList().objInfo,GameWorldController.instance.InventoryMarker,GameWorldController.instance.InventoryMarker.transform.position);
 				GameWorldController.MoveToInventory(NewObjI);
 				UWCharacter.Instance.playerInventory.ObjectInHand= NewObjI.name;
 				UWHUD.instance.CursorIcon=NewObjI.GetInventoryDisplay().texture;

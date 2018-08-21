@@ -52,7 +52,7 @@ public class Instrument : object_base {
 		UWCharacter.Instance.playerMotor.enabled=false;
 		PlayingInstrument=true;
 		CurrentInstrument=this.name;
-		GameWorldController.instance.getMus().Stop ();
+		MusicController.instance.Stop ();
 		NoteRecord="";
 		//000~001~250~You play the instrument.  (Use 0-9 to play, or ESC to return to game)
 		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
@@ -88,7 +88,7 @@ public class Instrument : object_base {
 			WindowDetectUW.WaitingForInput=false;
 			UWCharacter.Instance.playerMotor.enabled=true;
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_put_the_instrument_down_));
-			GameWorldController.instance.getMus().Resume();
+			MusicController.instance.Resume();
 			//354237875
 			if (_RES==GAME_UW1)
 			{				
@@ -104,7 +104,7 @@ public class Instrument : object_base {
 							//create the cup of wonder.
 
 							ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0,256);
-														GameObject cup = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+														GameObject cup = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 							GameWorldController.MoveToInventory(cup);
 							ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
 
@@ -161,8 +161,8 @@ public class Instrument : object_base {
 		//From
 		//http://answers.unity3d.com/questions/141771/whats-a-good-way-to-do-dynamically-generated-music.html
 
-				GameWorldController.instance.getMus().MusicalInstruments.pitch=Mathf.Pow(2.0f, ((float)note)/12.0f);
-				GameWorldController.instance.getMus().MusicalInstruments.Play();
+				MusicController.instance.MusicalInstruments.pitch=Mathf.Pow(2.0f, ((float)note)/12.0f);
+				MusicController.instance.MusicalInstruments.Play();
 				//this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
 		//this.GetComponent<AudioSource>().Play();
 	}

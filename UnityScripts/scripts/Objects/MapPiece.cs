@@ -47,10 +47,10 @@ public class MapPiece : Map {
                     float angle = Mathf.Atan2 (y-31,x-31) * 180.0f / Mathf.PI;
 
                     //Check the angle between the map point and the center versus the bitfield controlling which sections get copied.
-                    if (TestAngleAgainstBitField(angle, link & 0xFF, x, y))
+                    if (TestAngleAgainstBitField(angle, link & 0xFF, x, y) || ((link >= 512)))
                     {
-                        if (dst.Tiles[x, y].DisplayType == 0)
-                        {//Don't overwrite already visited tiles.
+                        if (src.Tiles[x, y].DisplayType != 0)
+                        {//Don't overwrite already visited tiles with blank information
                             dst.Tiles[x, y].DisplayType = src.Tiles[x, y].DisplayType;
                             dst.Tiles[x, y].tileType = src.Tiles[x, y].tileType;
                         }
@@ -61,7 +61,7 @@ public class MapPiece : Map {
             {
                 float angle = Mathf.Atan2(src.MapNotes[i].PosY - 100, src.MapNotes[i].PosX - 100) * 180.0f / Mathf.PI;
 
-                if (TestAngleAgainstBitField(angle, link & 0xFF, (int)(src.MapNotes[i].PosX * 0.32f), (int)(src.MapNotes[i].PosY * 0.32f)))
+                if ((TestAngleAgainstBitField(angle, link & 0xFF, (int)(src.MapNotes[i].PosX * 0.32f), (int)(src.MapNotes[i].PosY * 0.32f)) || ((link >= 512))))
                 {
                     dst.MapNotes.Add(new MapNote(src.MapNotes[i].PosX, src.MapNotes[i].PosY, src.MapNotes[i].NoteText));
                 }

@@ -608,9 +608,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         UWCharacter.Instance.playerMotor.enabled = false;
 
         ///Sets the music to the conversation theme
-        if (GameWorldController.instance.getMus() != null)
+        if (MusicController.instance != null)
         {
-            GameWorldController.instance.getMus().GetComponent<MusicController>().InMap = true;
+            MusicController.instance.InMap = true;
         }
         //lastObjectTraded=null;
 
@@ -1250,9 +1250,9 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         UWHUD.instance.MessageScroll.Clear();
 
         UWCharacter.InteractionMode = UWCharacter.InteractionModeTalk;
-        if (GameWorldController.instance.getMus() != null)
+        if (MusicController.instance != null)
         {
-            GameWorldController.instance.getMus().InMap = false;
+            MusicController.instance.InMap = false;
         }
         if (UWCharacter.Instance.playerInventory.ObjectInHand != "")
         {
@@ -1282,7 +1282,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             {//stay on this level
                 float targetX = (float)TeleportTileX * 1.2f + 0.6f;
                 float targetY = (float)TeleportTileY * 1.2f + 0.6f;
-                float Height = ((float)(GameWorldController.instance.currentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY))) * 0.15f;
+                float Height = ((float)(CurrentTileMap().GetFloorHeight(TeleportTileX, TeleportTileY))) * 0.15f;
                 UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.1f, targetY);
                 UWCharacter.Instance.TeleportPosition = UWCharacter.Instance.transform.position;
             }
@@ -3336,7 +3336,7 @@ return value appears to have something to do with if the door is broken or not.
     }
     else
     {//Item is in the object masterlist
-        obj = GameWorldController.instance.CurrentObjectList().objInfo[pos].instance;
+        obj = CurrentObjectList().objInfo[pos].instance;
     }	*/
 
         obj = FindObjectInteractionInObjectList(pos);
@@ -3839,12 +3839,12 @@ return value: none
         //parameters:   arg1: inventory object list pos (from take_from_npc_inv)
         //description:  transfers item to player, per id (?)
         //return value: 1: ok, 2: player has no space left
-        if (index > GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0))
+        if (index > CurrentObjectList().objInfo.GetUpperBound(0))
         {
             Debug.Log("Index out of range in take_id_from_npc");
             return 2;
         }
-        string ItemName = GameWorldController.instance.CurrentObjectList().objInfo[index].instance.name;
+        string ItemName = CurrentObjectList().objInfo[index].instance.name;
         int playerHasSpace = 1;
         Container playerContainer = UWCharacter.Instance.gameObject.GetComponent<Container>();
         //Container npcContainer = npc.GetComponent<Container>();
@@ -4089,7 +4089,7 @@ return value: 1 when found (?)
 
         ObjectLoaderInfo newobjt = ObjectLoader.newObject(item_id, 0, 0, 1, 256);
         newobjt.is_quant = 1;
-        GameObject myObj = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), newobjt, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+        GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
         //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
         ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj.name);
@@ -4117,13 +4117,13 @@ description:  places a generated object in underworld
  used in Judy's conversation, #23
 
     */
-        ObjectInteraction objInt = GameWorldController.instance.CurrentObjectList().objInfo[index].instance;
+        ObjectInteraction objInt = CurrentObjectList().objInfo[index].instance;
         if (objInt != null)
         {
             //string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
             GameObject obj = objInt.gameObject;
 
-            obj.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX, tileY);
+            obj.transform.position = CurrentTileMap().getTileVector(tileX, tileY);
             //obj.transform.parent=GameWorldController.instance.DynamicObjectMarker();
             //GameWorldController.MoveToWorld(obj);
             //npc.GetComponent<Container>().RemoveItemFromContainer(objInt.name);
@@ -4284,7 +4284,7 @@ description:  places a generated object in underworld
     void teleport_talker(NPC npc, int tileY, int tileX)
     {
         Debug.Log("moving " + npc.name + " to " + tileX + " " + tileY);
-        npc.transform.position = GameWorldController.instance.currentTileMap().getTileVector(tileX, tileY);
+        npc.transform.position = CurrentTileMap().getTileVector(tileX, tileY);
     }
 
     /// <summary>
@@ -4369,8 +4369,8 @@ description:  places a generated object in underworld
         for (int i = 0; i < NoOfFighters; i++)
         {
             ObjectLoaderInfo objNew = ObjectLoader.newObject(Random.Range(120, 122), 36, 27, 0, 1);
-            Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(tileX[i], tileY[i]);
-            ObjectInteraction objI = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(), objNew, GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
+            Vector3 pos = CurrentTileMap().getTileVector(tileX[i], tileY[i]);
+            ObjectInteraction objI = ObjectInteraction.CreateNewObject(CurrentTileMap(), objNew, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
             objI.GetComponent<NPC>().npc_attitude = 0;
             objI.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
             objI.GetComponent<NPC>().npc_hp = 49;
@@ -4410,11 +4410,11 @@ description:  places a generated object in underworld
         //description:  sets quality for an item in inventory
         //return value: none
         //GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
-        if (itemIndex <= GameWorldController.instance.CurrentObjectList().objInfo.GetUpperBound(0))
+        if (itemIndex <= CurrentObjectList().objInfo.GetUpperBound(0))
         {
-            if (GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance != null)
+            if (CurrentObjectList().objInfo[itemIndex].instance != null)
             {
-                GameWorldController.instance.CurrentObjectList().objInfo[itemIndex].instance.quality = (short)NewQuality;
+                CurrentObjectList().objInfo[itemIndex].instance.quality = (short)NewQuality;
             }
         }
         else
@@ -4427,10 +4427,10 @@ description:  places a generated object in underworld
 
     public static void BuildObjectList()
     {
-        ObjectLoader.UpdateObjectList(GameWorldController.instance.currentTileMap(), GameWorldController.instance.CurrentObjectList());
+        ObjectLoader.UpdateObjectList(CurrentTileMap(), CurrentObjectList());
         int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
         ObjectMasterList = new string[1024 + noOfInventoryItems + 1];
-        ObjectLoaderInfo[] objList = GameWorldController.instance.CurrentObjectList().objInfo;
+        ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
         for (int i = 0; i < 1024; i++)
         {
             if (objList[i].instance != null)

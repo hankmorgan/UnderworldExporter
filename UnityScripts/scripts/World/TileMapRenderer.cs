@@ -230,6 +230,14 @@ public class TileMapRenderer : Loader
 
     }
 
+
+    /// <summary>
+    /// Begins rendering a door way.
+    /// </summary>
+    /// <param name="Parent"></param>
+    /// <param name="level"></param>
+    /// <param name="objList"></param>
+    /// <param name="i"></param>
     public static void RenderDoor(GameObject Parent, TileMap level, ObjectLoader objList, int i)
     {
         if (level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].tileType != TILE_SOLID)
@@ -237,8 +245,8 @@ public class TileMapRenderer : Loader
             float floorheight = (float)level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].floorHeight * 0.15f;
             int BridgeIndex = ObjectLoader.findObjectByTypeInTile(objList.objInfo, objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY, ObjectInteraction.BRIDGE);
             if (BridgeIndex != -1)
-            {
-                floorheight = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, BridgeIndex, objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY, 0).y;
+            {//Take into account if the door is over a bridge.
+                floorheight = ObjectLoader.CalcObjectXYZ(BridgeIndex, 0).y;
             }
             RenderDoorwayFront(Parent, level, objList, objList.objInfo[i], floorheight);
             RenderDoorwayRear(Parent, level, objList, objList.objInfo[i], floorheight);
@@ -257,7 +265,7 @@ public class TileMapRenderer : Loader
         Material[] MatsToUse = new Material[1];
         for (int j = 0; j <= MatsToUse.GetUpperBound(0); j++)
         {
-            MatsToUse[j] = GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
+            MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
         //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
 
@@ -268,7 +276,7 @@ public class TileMapRenderer : Loader
         float uvXPos4 = 1f; // or 1.2f/1.2f
 
         //positions
-        Vector3 position = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, currDoor.index, currDoor.ObjectTileX, currDoor.ObjectTileY, 0);
+        Vector3 position = ObjectLoader.CalcObjectXYZ(currDoor.index, 0);
         //center in the tile and at the bottom of the map.
         switch (currDoor.heading * 45)
         {
@@ -420,7 +428,7 @@ public class TileMapRenderer : Loader
         Material[] MatsToUse = new Material[1];
         for (int j = 0; j <= MatsToUse.GetUpperBound(0); j++)
         {
-            MatsToUse[j] = GameWorldController.instance.MaterialMasterList[GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
+            MatsToUse[j] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CurrentTileMap().Tiles[currDoor.ObjectTileX, currDoor.ObjectTileY].wallTexture]];
         }
         //Door params
         //float floorheight =(float) level.Tiles[currDoor.tileX,currDoor.tileY].floorHeight * 0.15f;
@@ -441,7 +449,7 @@ public class TileMapRenderer : Loader
 
         //Vector3 doorposition;
         //positions
-        Vector3 position = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, currDoor.index, currDoor.ObjectTileX, currDoor.ObjectTileY, 0);
+        Vector3 position = ObjectLoader.CalcObjectXYZ(currDoor.index, 0);
         //doorposition=position;
         //center in the tile and at the bottom of the map.
         switch (currDoor.heading * 45)
@@ -695,7 +703,7 @@ public class TileMapRenderer : Loader
             {
                 if ((objList.objInfo[i].GetItemType() == ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag == 1))
                 {
-                    Vector3 position = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, i, (int)objList.objInfo[i].ObjectTileX, (int)objList.objInfo[i].ObjectTileY, 0);
+                    Vector3 position = ObjectLoader.CalcObjectXYZ( i, 0);
                     //position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
                     Vector3[] Verts = new Vector3[24];
                     Vector2[] UVs = new Vector2[24];
@@ -808,7 +816,7 @@ public class TileMapRenderer : Loader
     /// <param name="TextureIndex">When -1 use default rules for texturing otherwise use the specified index</param>
     public static void RenderBridge(GameObject Parent, TileMap level, ObjectLoader objList, int i)
     {
-        Vector3 position = ObjectLoader.CalcObjectXYZ(_RES, level, level.Tiles, objList.objInfo, i, (int)objList.objInfo[i].ObjectTileX, (int)objList.objInfo[i].ObjectTileY, 0);
+        Vector3 position = ObjectLoader.CalcObjectXYZ(i, 0);
         position = new Vector3(objList.objInfo[i].ObjectTileX * 1.2f + 1.2f / 2f, position.y, objList.objInfo[i].ObjectTileY * 1.2f + 1.2f / 2f);
         Vector3[] Verts = new Vector3[24];
         Vector2[] UVs = new Vector2[24];
@@ -864,11 +872,11 @@ public class TileMapRenderer : Loader
         {
             if (_RES == GAME_UW2)
             {
-                TextureIndex = GameWorldController.instance.currentTileMap().texture_map[TextureIndex - 2];
+                TextureIndex = CurrentTileMap().texture_map[TextureIndex - 2];
             }
             else
             {
-                TextureIndex = GameWorldController.instance.currentTileMap().texture_map[TextureIndex - 2 + 48];
+                TextureIndex = CurrentTileMap().texture_map[TextureIndex - 2 + 48];
             }
             tmobj = GameWorldController.instance.MaterialMasterList[TextureIndex];
         }
@@ -3295,7 +3303,7 @@ public class TileMapRenderer : Loader
         {
             return wallTexture;
         }
-        return GameWorldController.instance.currentTileMap().texture_map[wallTexture];
+        return CurrentTileMap().texture_map[wallTexture];
     }
 
     /// <summary>
@@ -3313,7 +3321,7 @@ public class TileMapRenderer : Loader
         }
         if (face == fCEIL)
         {
-            floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.shockCeilingTexture];
+            floorTexture = CurrentTileMap().texture_map[t.shockCeilingTexture];
         }
         else
         {
@@ -3322,11 +3330,11 @@ public class TileMapRenderer : Loader
             {
                 case GAME_SHOCK:
                 case GAME_UW2:
-                    floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture];
+                    floorTexture = CurrentTileMap().texture_map[t.floorTexture];
                     //floorTexture = t.floorTexture;
                     break;
                 default:
-                    floorTexture = GameWorldController.instance.currentTileMap().texture_map[t.floorTexture + 48];
+                    floorTexture = CurrentTileMap().texture_map[t.floorTexture + 48];
                     break;
             }
 
@@ -3353,7 +3361,7 @@ public class TileMapRenderer : Loader
             }
             else
             {
-                float shock_ceil =GameWorldController.instance.currentTileMap().SHOCK_CEILING_HEIGHT;
+                float shock_ceil =CurrentTileMap().SHOCK_CEILING_HEIGHT;
                 float floorOffset = shock_ceil - ceilOffset - 8;  //The floor of the tile if it is 1 texture tall.
                 while (floorOffset >= 8)  //Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
                 {
@@ -3385,7 +3393,7 @@ public class TileMapRenderer : Loader
                 case fNORTH:
                     ceilOffset = (int)t.shockNorthCeilHeight; break;
             }
-            float shock_ceil = GameWorldController.instance.currentTileMap().SHOCK_CEILING_HEIGHT;
+            float shock_ceil = CurrentTileMap().SHOCK_CEILING_HEIGHT;
             float floorOffset = shock_ceil - ceilOffset - 8;  //The floor of the tile if it is 1 texture tall.
             while (floorOffset >= 8)  //Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
             {
@@ -4412,7 +4420,7 @@ public class TileMapRenderer : Loader
         bool ReRenderNeighbours = false;
         //= GameWorldController.FindTile(TileX,TileX,TileMap.SURFACE_FLOOR);
         //Update entered info
-        //TileInfo tileToChange= GameWorldController.instance.currentTileMap().Tiles[TileX,TileY];
+        //TileInfo tileToChange= CurrentTileMap().Tiles[TileX,TileY];
 
         if (RenderImmediate)
         {
@@ -4424,66 +4432,66 @@ public class TileMapRenderer : Loader
             case TileMap.TILE_SLOPE_W:
             case TileMap.TILE_SLOPE_N:
             case TileMap.TILE_SLOPE_S:
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].shockSteep = 1;
+                CurrentTileMap().Tiles[TileX, TileY].shockSteep = 1;
                 break;
         }
 
-        GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].tileType = NewTileType;
+        CurrentTileMap().Tiles[TileX, TileY].tileType = NewTileType;
         //int FloorHeight=0;
         //if (int.TryParse(TileHeightDetails.text,out FloorHeight))
         //{
-        GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].floorHeight = NewFloorHeight; //FloorHeight*2;	
+        CurrentTileMap().Tiles[TileX, TileY].floorHeight = NewFloorHeight; //FloorHeight*2;	
                                                                                                         //}
 
-        GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].floorTexture = NewFloorTexture;
-        //int ActualTextureIndex= GameWorldController.instance.currentTileMap().texture_map[FloorTextureSelect.value+48];
-        //GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
-        //GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
-        //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],GameWorldController.instance.currentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
+        CurrentTileMap().Tiles[TileX, TileY].floorTexture = NewFloorTexture;
+        //int ActualTextureIndex= CurrentTileMap().texture_map[FloorTextureSelect.value+48];
+        //CurrentTileMap().Tiles[TileX,TileY].isWater=TileMap.isTextureWater(ActualTextureIndex);
+        //CurrentTileMap().Tiles[TileX,TileY].isLava=TileMap.isTextureLava(ActualTextureIndex);
+        //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],CurrentTileMap().Tiles[TileX,TileY].isWater,false,false,true);
 
-        if (GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].wallTexture != NewWallTexture)
+        if (CurrentTileMap().Tiles[TileX, TileY].wallTexture != NewWallTexture)
         {
-            if (GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].tileType == TileMap.TILE_SOLID)
+            if (CurrentTileMap().Tiles[TileX, TileY].tileType == TileMap.TILE_SOLID)
             {
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].North = NewWallTexture;
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].South = NewWallTexture;
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].East = NewWallTexture;
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].West = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY].North = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY].South = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY].East = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY].West = NewWallTexture;
             }
-            GameWorldController.instance.currentTileMap().Tiles[TileX, TileY].wallTexture = NewWallTexture;
+            CurrentTileMap().Tiles[TileX, TileY].wallTexture = NewWallTexture;
 
             if (TileY > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
+             //if (CurrentTileMap().Tiles[TileX,TileY-1].tileType>TileMap.TILE_SOLID)
              //{
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY - 1].North = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY - 1].North = NewWallTexture;
                 ReRenderNeighbours = true;
                 //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (GameWorldController.instance.currentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
+             //if (CurrentTileMap().Tiles[TileX,TileY+1].tileType>TileMap.TILE_SOLID)
              //{
-                GameWorldController.instance.currentTileMap().Tiles[TileX, TileY + 1].South = NewWallTexture;
+                CurrentTileMap().Tiles[TileX, TileY + 1].South = NewWallTexture;
                 ReRenderNeighbours = true;
                 //}
             }
 
             if (TileX > 0)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (GameWorldController.instance.currentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
+             //if (CurrentTileMap().Tiles[TileX-1,TileY].tileType>TileMap.TILE_SOLID)
              //{
-                GameWorldController.instance.currentTileMap().Tiles[TileX - 1, TileY].East = NewWallTexture;
+                CurrentTileMap().Tiles[TileX - 1, TileY].East = NewWallTexture;
                 ReRenderNeighbours = true;
                 //}
             }
 
             if (TileY < TileMap.TileMapSizeY)
             {//Change its neighbour, only if the neighbour is not a solid
-             //if (GameWorldController.instance.currentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
+             //if (CurrentTileMap().Tiles[TileX+1,TileY].tileType>TileMap.TILE_SOLID)
              //{
-                GameWorldController.instance.currentTileMap().Tiles[TileX + 1, TileY].West = NewWallTexture;
+                CurrentTileMap().Tiles[TileX + 1, TileY].West = NewWallTexture;
                 ReRenderNeighbours = true;
                 //}
             }
@@ -4493,8 +4501,8 @@ public class TileMapRenderer : Loader
 
         if (RenderImmediate)
         {
-            //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,GameWorldController.instance.currentTileMap().Tiles[TileX,TileY],true,false,false,true);
-            TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, GameWorldController.instance.currentTileMap().Tiles[TileX, TileY], false, false, false, true);
+            //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX,TileY,CurrentTileMap().Tiles[TileX,TileY],true,false,false,true);
+            TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX, TileY, CurrentTileMap().Tiles[TileX, TileY], false, false, false, true);
         }
 
 
@@ -4513,8 +4521,8 @@ public class TileMapRenderer : Loader
                                 if (RenderImmediate)
                                 {
                                     DestroyTile(x + TileX, y + TileY);
-                                    //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,GameWorldController.instance.currentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
-                                    TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, GameWorldController.instance.currentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
+                                    //TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel,TileX+y,TileY+y,CurrentTileMap().Tiles[TileX+x,TileY+y],true,false,false,true);
+                                    TileMapRenderer.RenderTile(GameWorldController.instance.LevelModel, TileX + x, TileY + y, CurrentTileMap().Tiles[TileX + x, TileY + y], false, false, false, true);
                                 }
                             }
                         }
@@ -4540,7 +4548,7 @@ public class TileMapRenderer : Loader
     public static void DestroyTile(int x, int y)
     {
         GameObject tileSelected;
-        switch (GameWorldController.instance.currentTileMap().Tiles[x, y].tileType)
+        switch (CurrentTileMap().Tiles[x, y].tileType)
         {
             case TileMap.TILE_SOLID:
                 tileSelected = GameWorldController.FindTile(x, y, TileMap.SURFACE_FLOOR);

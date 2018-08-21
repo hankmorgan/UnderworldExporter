@@ -16,11 +16,11 @@ public class a_change_from_trap : trap_base
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
         //return;
-        //TileMap curr = GameWorldController.instance.currentTileMap();
+        //TileMap curr = CurrentTileMap();
         ObjectInteraction ChangeTo = null;
         if (link != 0)
         {
-            ChangeTo = GameWorldController.instance.CurrentObjectList().objInfo[link].instance;
+            ChangeTo = CurrentObjectList().objInfo[link].instance;
         }
         if (ChangeTo == null)
         {
@@ -36,30 +36,30 @@ public class a_change_from_trap : trap_base
             for (int y = 0; y <= 63; y++)
             {
                 //	if (ChangeTo.quality<63)
-                if (quality == GameWorldController.instance.currentTileMap().Tiles[x, y].wallTexture)
+                if (quality == CurrentTileMap().Tiles[x, y].wallTexture)
                 {//This is probably a seperate test to the floor texture test above.
 
-                    GameWorldController.instance.currentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality;
+                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality;
 
-                    if (GameWorldController.instance.currentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)
+                    if (CurrentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)
                     {   //Putting this in this block could be wrong as well.
-                        if (GameWorldController.instance.currentTileMap().Tiles[x, y].Render)
+                        if (CurrentTileMap().Tiles[x, y].Render)
                         {
                             for (int v = 0; v < 6; v++)
                             {
-                                GameWorldController.instance.currentTileMap().Tiles[x, y].VisibleFaces[v] = true;
-                                GameWorldController.instance.currentTileMap().Tiles[x, y].VisibleFaces[v] = true;
+                                CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
+                                CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
                             }
                         }
 
-                        GameWorldController.instance.currentTileMap().Tiles[x, y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
+                        CurrentTileMap().Tiles[x, y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
                         if (ChangeTo.owner < 10)
                         {
-                            GameWorldController.instance.currentTileMap().Tiles[x, y].tileType = (short)ChangeTo.owner;
+                            CurrentTileMap().Tiles[x, y].tileType = (short)ChangeTo.owner;
                         }
                         if (ChangeTo.zpos < 15)
                         {
-                            GameWorldController.instance.currentTileMap().Tiles[x, y].floorHeight = ChangeTo.zpos;
+                            CurrentTileMap().Tiles[x, y].floorHeight = ChangeTo.zpos;
                         }
                     }//end floor texture criteria.
                 }
@@ -67,7 +67,7 @@ public class a_change_from_trap : trap_base
         }
         //Re-render the level to see the changes
         //TODO:make this a tile based update rather than a full redraw.
-        GameWorldController.instance.currentTileMap().SetTileMapWallFacesUW();//Update neighbour wall faces
+        CurrentTileMap().SetTileMapWallFacesUW();//Update neighbour wall faces
         GameWorldController.WorldReRenderPending = true;//Request a world redraw at the next lateupdate.
         GameWorldController.FullReRender = true;
     }

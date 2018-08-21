@@ -57,16 +57,16 @@ public class ShrineLava : UWEBase {
 		IEnumerator SuckItAvatar()
 		{
 				//Spawn a moon gate at the center of the lava
-			ObjectInteraction slasher = GameWorldController.instance.CurrentObjectList().objInfo[129].instance;//GameObject.Find("slasher_of_veils_32_33_07_0129");//Assumes slasher will be at this index.
+			ObjectInteraction slasher = CurrentObjectList().objInfo[129].instance;//GameObject.Find("slasher_of_veils_32_33_07_0129");//Assumes slasher will be at this index.
 			Vector3 slasherPos=Vector3.zero;
 			if (slasher!=null)
 			{
 				slasherPos=slasher.transform.position;
 			}
 			ObjectLoaderInfo newobjt= ObjectLoader.newObject(346,0,0,0,256);
-			GameObject myObj= ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),
+			GameObject myObj= ObjectInteraction.CreateNewObject(CurrentTileMap(),
 				newobjt,
-				GameWorldController.instance.CurrentObjectList().objInfo,
+				CurrentObjectList().objInfo,
 				GameWorldController.instance.DynamicObjectMarker().gameObject,
 				GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 				GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>());

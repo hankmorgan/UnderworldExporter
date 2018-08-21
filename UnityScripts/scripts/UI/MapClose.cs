@@ -7,9 +7,9 @@ public class MapClose : MonoBehaviour {
 	{
         Time.timeScale = 1f;
         WindowDetect.InMap=false;
-		if  (GameWorldController.instance.getMus()!=null)
+		if  (MusicController.instance!=null)
 		{
-			GameWorldController.instance.getMus().InMap=false;
+			MusicController.instance.InMap=false;
 		}
 		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 	}

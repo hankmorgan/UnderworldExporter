@@ -98,7 +98,7 @@ public class Grave : Model3D {
 					//000~001~134~You thoughtfully give the bones a final resting place.
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_thoughtfully_give_the_bones_a_final_resting_place_));
 
-					ObjectInteraction trigObj =GameWorldController.instance.CurrentObjectList().objInfo[495].instance; // GameObject.Find ("a_move_trigger_54_52_04_0495");
+					ObjectInteraction trigObj =CurrentObjectList().objInfo[495].instance; // GameObject.Find ("a_move_trigger_54_52_04_0495");
 					if (trigObj!=null)
 					{					
 						link++;//Update the grave description

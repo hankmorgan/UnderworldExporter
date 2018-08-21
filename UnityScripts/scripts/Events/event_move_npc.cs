@@ -12,7 +12,7 @@ public class event_move_npc : event_base {
 		int tileX=RawData[3];
 		int tileY=RawData[4];
 		int WhoAmI= RawData[6];
-		Vector3 pos = GameWorldController.instance.currentTileMap().getTileVector(tileX,tileY);
+		Vector3 pos = CurrentTileMap().getTileVector(tileX,tileY);
 
 		NPC[] npc = findNPC(WhoAmI);
 		if (npc!=null)

@@ -727,7 +727,7 @@ public class SaveGame : Loader
         //update inventory linking
         int NoOfInventoryItems = 0;
         string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out NoOfInventoryItems);
-        Vector3 dreamReturn = GameWorldController.instance.currentTileMap().getTileVector(UWCharacter.Instance.DreamReturnTileX, UWCharacter.Instance.DreamReturnTileY);
+        Vector3 dreamReturn = CurrentTileMap().getTileVector(UWCharacter.Instance.DreamReturnTileX, UWCharacter.Instance.DreamReturnTileY);
 
         //Write the MS Key
         DataLoader.WriteInt8(writer, UWCharacter.Instance.XorKey);
@@ -2028,7 +2028,7 @@ public class SaveGame : Loader
                 x++;
             }
             //Create the inventory objects
-            ObjectLoader.RenderObjectList(objLoader, GameWorldController.instance.currentTileMap(), GameWorldController.instance.InventoryMarker);
+            ObjectLoader.RenderObjectList(objLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
             ObjectLoader.LinkObjectListWands(objLoader);
             ObjectLoader.LinkObjectListPotions(objLoader);
             for (int j = lBoundSlots; j < uBoundSlots; j = j + 2)

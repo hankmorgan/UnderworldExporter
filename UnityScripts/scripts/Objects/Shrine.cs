@@ -254,7 +254,7 @@ public class Shrine : Model3D {
 			Shrine.HasGivenKey=true;
 			//create the key of truth.
 			ObjectLoaderInfo newobjt= ObjectLoader.newObject(225,0,0,0,256);
-						GameObject key = ObjectInteraction.CreateNewObject(GameWorldController.instance.currentTileMap(),newobjt,GameWorldController.instance.CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+						GameObject key = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
 			GameWorldController.MoveToInventory(key);
 			ObjectInteraction myObjInt = key.GetComponent<ObjectInteraction>();
 

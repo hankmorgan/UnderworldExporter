@@ -16,7 +16,7 @@ public class a_pit_trap : trap_base {
 		GameObject tile = GameWorldController.FindTile(tileXToChange,tileYToChange,TileMap.SURFACE_FLOOR);
 		if (tile!=null)
 		{
-			TileInfo tileToChange = GameWorldController.instance.currentTileMap().Tiles[tileXToChange,tileYToChange];
+			TileInfo tileToChange = CurrentTileMap().Tiles[tileXToChange,tileYToChange];
 			if (tileToChange.floorHeight==0)
 			{//create a tile at the floor height
 				tileToChange.floorHeight=(short)(zpos>>2);

@@ -369,7 +369,7 @@ public class DoorControl : object_base {
 				{
 					if (ObjectInteraction.PlaySoundEffects)
 					{
-						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
+						objInt().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
 						objInt().aud.Play();		
 					}
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordirection() * OpenRotation,DoorTravelTime));
@@ -378,7 +378,7 @@ public class DoorControl : object_base {
 				{
 					if (ObjectInteraction.PlaySoundEffects)
 					{
-						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
+						objInt().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
 						objInt().aud.Play();		
 					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),DoorTravelTime));
@@ -475,7 +475,7 @@ public class DoorControl : object_base {
 				{
 					if (ObjectInteraction.PlaySoundEffects)
 					{
-						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
+						objInt().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_DOOR_MOVE];
 						objInt().aud.Play();		
 					}
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * doordirection() * CloseRotation,DoorTravelTime));
@@ -484,7 +484,7 @@ public class DoorControl : object_base {
 				{
 					if (ObjectInteraction.PlaySoundEffects)
 					{
-						objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
+						objInt().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_PORTCULLIS];
 						objInt().aud.Play();		
 					}
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),DoorTravelTime));
@@ -668,7 +668,7 @@ public class DoorControl : object_base {
 		{
 			if (ObjectInteraction.PlaySoundEffects)
 			{
-				objInt().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_DOOR_FINISH];
+				objInt().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_DOOR_FINISH];
 				objInt().aud.Play();		
 			}
 		}
@@ -862,14 +862,14 @@ public class DoorControl : object_base {
 						{
 							if (objInt.ObjectTileX <= TileMap.TileMapSizeX)
 							{
-								textureIndex = 	GameWorldController.instance.currentTileMap().Tiles[objInt.ObjectTileX, objInt.ObjectTileY].wallTexture;
+								textureIndex = 	CurrentTileMap().Tiles[objInt.ObjectTileX, objInt.ObjectTileY].wallTexture;
 							}
 							else
 							{
 								textureIndex=0;
 							}
 							
-							//textureIndex = GameWorldController.instance.currentTileMap().texture_map[GameWorldController.instance.currentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
+							//textureIndex = CurrentTileMap().texture_map[CurrentTileMap().Tiles[objInt.tileX,objInt.tileY].wallTexture];
 							//DoorTexturePath = _RES +"/materials/tmap/" + _RES + "_" + textureIndex.ToString("d3");
 							break;	
 						}
@@ -886,11 +886,11 @@ public class DoorControl : object_base {
 						}
 								if (_RES==GAME_UW2)
 								{
-										textureIndex= GameWorldController.instance.currentTileMap().texture_map[64+doorIndex];	
+										textureIndex= CurrentTileMap().texture_map[64+doorIndex];	
 								}
 								else
 								{
-										textureIndex= GameWorldController.instance.currentTileMap().texture_map[58+doorIndex];	
+										textureIndex= CurrentTileMap().texture_map[58+doorIndex];	
 								}
 						
 						//DoorTexturePath =  _RES + "/textures/doors/doors_" +textureIndex.ToString("d2") +"_material";		
@@ -950,7 +950,7 @@ public class DoorControl : object_base {
 				//move the secret door to the bottom so I can match the uvs properly. I think
 				dc.transform.position = new Vector3(dc.transform.position.x,0f,dc.transform.position.z);
 
-				textureIndex=GameWorldController.instance.currentTileMap().texture_map[textureIndex];
+				textureIndex=CurrentTileMap().texture_map[textureIndex];
 				//Draw a cube with no slopes.
 				int NumberOfVisibleFaces=6;
 				//Allocate enough verticea and UVs for the faces
@@ -959,9 +959,9 @@ public class DoorControl : object_base {
 				int tileX=dc.ObjectTileX;
 				int tileY=dc.ObjectTileY;
 				if (tileX==TileMap.ObjectStorageTile){return;}
-				//int iDC_Floorheight=GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
-				float Top =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
-				float Bottom =GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //GameWorldController.instance.currentTileMap().Tiles[tileX,tileY].floorHeight;
+				//int iDC_Floorheight=CurrentTileMap().Tiles[tileX,tileY].floorHeight;
+				float Top =CurrentTileMap().Tiles[tileX,tileY].floorHeight+7; // 7f; //- iDC_Floorheight;
+				float Bottom =CurrentTileMap().Tiles[tileX,tileY].floorHeight;//=-16f;//- iDC_Floorheight; //CurrentTileMap().Tiles[tileX,tileY].floorHeight;
 				float floorHeight=(float)(Top*0.15f);
 				float baseHeight=(float)(Bottom*0.15f);
 				float dimX = 1;
@@ -1135,8 +1135,8 @@ public class DoorControl : object_base {
 				//nmc.isTrigger=false;
 				//nmc.sharedMesh=mesh;		
 				float ResolutionZ = 128.0f;
-				float ceil = GameWorldController.instance.currentTileMap().CEILING_HEIGHT;
-				int newZpos=GameWorldController.instance.currentTileMap().Tiles[dc.ObjectTileX, dc.ObjectTileY].floorHeight * 4;
+				float ceil = CurrentTileMap().CEILING_HEIGHT;
+				int newZpos=CurrentTileMap().Tiles[dc.ObjectTileX, dc.ObjectTileY].floorHeight * 4;
 				float BrushZ = 15f;
 				float offZ = ((newZpos / ResolutionZ) * (ceil)) * BrushZ;
 				offZ= offZ/100.0f;

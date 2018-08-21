@@ -224,8 +224,8 @@ public class Container : UWEBase {
 
 		public void SpillContents()
 		{
-				TileMap tm =GameWorldController.instance.currentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
-				GameWorldController.FreezeMovement(this.gameObject);
+				TileMap tm =CurrentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
+				FreezeMovement(this.gameObject);
 				ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 				objInt.UpdatePosition();
 				objInt.SetWorldDisplay(objInt.GetEquipDisplay());	
@@ -275,10 +275,10 @@ public class Container : UWEBase {
 									objSpilled.objectloaderinfo.xpos = objSpilled.xpos;
 									objSpilled.objectloaderinfo.ypos = objSpilled.ypos;
 									objSpilled.objectloaderinfo.zpos=objSpilled.zpos;
-									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(_RES,tm,tm.Tiles,GameWorldController.instance.CurrentObjectList().objInfo, objSpilled.objectloaderinfo.index, this.objInt().objectloaderinfo.ObjectTileX, this.objInt().objectloaderinfo.ObjectTileY, 0);									
+									objSpilled.transform.position=ObjectLoader.CalcObjectXYZ(objSpilled.objectloaderinfo.index, 0);									
 									RemoveItemFromContainer(i);
 									Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-									GameWorldController.UnFreezeMovement(Spilled);
+									UnFreezeMovement(Spilled);
 								}
 						}
 				}
@@ -287,8 +287,8 @@ public class Container : UWEBase {
 	public void SpillContentsX()
 	{//Removes the contents of a container out in the real world.
 		int counter;
-		TileMap tm =GameWorldController.instance.currentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
-		GameWorldController.FreezeMovement(this.gameObject);
+		TileMap tm =CurrentTileMap(); //GameObject.Find("Tilemap").GetComponent<TileMap>();
+		FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
 		for (short i=0; i<=MaxCapacity ();i++)
@@ -318,18 +318,18 @@ public class Container : UWEBase {
 					RemoveItemFromContainer(i);
 					Spilled.transform.position=randomPoint;
 					Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-					GameWorldController.UnFreezeMovement(Spilled);
+					UnFreezeMovement(Spilled);
 				}
 				else
 				{//No where to put the item. Put it at the containers position.
 					RemoveItemFromContainer(i);
 					Spilled.transform.position=this.transform.position;
 					Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-					GameWorldController.UnFreezeMovement(Spilled);
+					UnFreezeMovement(Spilled);
 				}
 			}
 		}
-		GameWorldController.UnFreezeMovement(this.gameObject);
+		UnFreezeMovement(this.gameObject);
 	}
 
 

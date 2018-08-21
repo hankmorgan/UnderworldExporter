@@ -12,7 +12,7 @@ public class TileContactWater : TileContact {
 				GameObject splash = Impact.SpawnHitImpact(453, position, 36, 40);
 				if (ObjectInteraction.PlaySoundEffects)
 				{
-					splash.GetComponent<ObjectInteraction>().aud.clip=GameWorldController.instance.getMus().SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
+					splash.GetComponent<ObjectInteraction>().aud.clip=MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
 					splash.GetComponent<ObjectInteraction>().aud.Play();
 				}	
 				DestroyObject(obj);

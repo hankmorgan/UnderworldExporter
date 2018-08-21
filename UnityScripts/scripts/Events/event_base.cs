@@ -182,7 +182,7 @@ public class event_base : UWClass {
 		public NPC[] findNPC(int WhoAmI)
 		{
 				int NoOfNpcs=0;
-				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 				for (int o=0; o<=256;o++)
 				{
 						if (objList[o].instance!=null)
@@ -238,7 +238,7 @@ public class event_base : UWClass {
 		public NPC[] findRace(int Race)
 		{
 				int NoOfNpcs=0;
-				ObjectLoaderInfo[] objList=GameWorldController.instance.CurrentObjectList().objInfo;
+				ObjectLoaderInfo[] objList=CurrentObjectList().objInfo;
 				for (int o=0; o<=256;o++)
 				{
 						if (objList[o].instance!=null)
