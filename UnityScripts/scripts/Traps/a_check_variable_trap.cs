@@ -148,11 +148,11 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-			    Debug.Log(this.name + " comparing " + VariableValue() + " to quest variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
+			    Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
                 switch (zpos)
                 {
                     case 117:
-                        return true;//Fix bug on tombs final level
+                        return true;//Fix bug on tombs final level. Should this be a test against quest vars instead???
                     default:
                         return VariableValue() == Quest.instance.variables[zpos];
                 }				

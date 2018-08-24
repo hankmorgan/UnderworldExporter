@@ -41,7 +41,7 @@ public class a_teleport_trap : trap_base {
 		if (zpos==0)
 		{//Stay on this level.
 			float Height = ((float)(CurrentTileMap().GetFloorHeight(quality,owner)))*0.15f;
-			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.3f,targetY);
+			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.5f,targetY);
 			UWCharacter.Instance.TeleportPosition=UWCharacter.Instance.transform.position;
 		}
 		else
@@ -68,10 +68,4 @@ public class a_teleport_trap : trap_base {
 	{//IN the UW demo the level transition 
 			UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
 	}
-
-	public override void PostActivate (object_base src)
-	{//Prevent deletion of the trap
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
-    }
 }

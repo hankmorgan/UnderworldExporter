@@ -33,10 +33,27 @@ public class a_hack_trap : trap_base {
     //qual=43 is to change the goal of a (type) of Npc. Used in Tombs level 1 by the skeletons who attack when you pick up the map piece 
     //qual=44 is a go to sleep trap used by "bridge based" beds. (eg prison tower straw beds)
     //qual=50 is to trigger the conversation with the troll #251 in tybals lair after you are imprisoned.
-    //qual=62 is used in Kilorn 1 for an unknown purpose (located right at entrance to level)
+    //qual=62 is used in Britannia, prison tower and Kilorn 1 for an unknown purpose . 
+    //      In Britannia where is is triggered by quest variables 109 and 112
+    //      which are have you talked to british and have you been arrested
+    //      possibly this trap is related to these events. 
+    //      The britannia traps link to LBs index and the avatars index "1" (maybe used to manipulate the player/npc in certain scenarios)
+    //      In the kilorn and the prison tower the move triggers that call it are disabled. THey are linked to one of the humans
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
 		Debug.Log ("Hack Trap " + objInt().objectloaderinfo.index + " qual = " + quality + " triggers:" + triggerX + "," + triggerY);
 	}
+
+    protected override void Start()
+    {
+        if( 
+            ((GameWorldController.instance.LevelNo!=0)  && (GameWorldController.instance.LevelNo != 16))
+            && (quality==62)
+            )
+        {
+            Debug.Log("oh hey another instance of that hack trap I'm trying to figure out");
+        }
+         
+    }
 }

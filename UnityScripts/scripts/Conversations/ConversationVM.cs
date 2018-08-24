@@ -4284,7 +4284,8 @@ description:  places a generated object in underworld
     void teleport_talker(NPC npc, int tileY, int tileX)
     {
         Debug.Log("moving " + npc.name + " to " + tileX + " " + tileY);
-        npc.transform.position = CurrentTileMap().getTileVector(tileX, tileY);
+        //npc.transform.position = CurrentTileMap().getTileVector(tileX, tileY);
+        npc.Agent.Warp(CurrentTileMap().getTileVector(tileX, tileY));
     }
 
     /// <summary>

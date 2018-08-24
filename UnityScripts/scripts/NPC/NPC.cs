@@ -652,6 +652,7 @@ public class NPC : MobileObject
 
         UpdateNPCAWake();
 
+        UpdateSpecialNPCBehaviours();
 
         //Update the appearance of the NPC
         UpdateSprite();
@@ -668,6 +669,22 @@ public class NPC : MobileObject
             UpdateGoals();
         }
 
+    }
+
+    void UpdateSpecialNPCBehaviours()
+    {
+        if (_RES==GAME_UW2)
+        {
+            if (npc_whoami==142) //Lord British
+            if (GameWorldController.instance.LevelNo == 0)
+            {
+                if (Quest.instance.QuestVariables[112]==1)//Avatar has been fighting
+                    {//Make sure I move to the correct location to talk to the avatar.
+                        npc_xhome = 40;
+                        npc_yhome = 38;
+                    }
+            }
+        }
     }
 
     void UpdateNPCAWake()
@@ -2084,6 +2101,24 @@ public class NPC : MobileObject
                 {
                     npc.npc_goal = (short)NewGoal;
                 }
+            }
+        }
+    }
+
+    public static void SetNPCAttitudeGoal(int index,  NPC.npc_goals NewGoal, short NewAttitude)
+    {
+        if (index < 0) { return; }
+        ObjectInteraction obj = ObjectLoader.getObjectIntAt(index);
+        if (obj != null)
+        {
+            NPC npc = obj.GetComponent<NPC>();
+            if (npc != null)
+            {
+                if ((short)NewGoal >= 0)
+                {
+                    npc.npc_goal = (short)NewGoal;
+                }
+                npc.npc_attitude = NewAttitude;
             }
         }
     }

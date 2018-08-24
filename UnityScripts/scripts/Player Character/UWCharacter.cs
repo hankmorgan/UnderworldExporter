@@ -219,6 +219,28 @@ public class UWCharacter : Character
         Death = true;
         UWCharacter.InteractionMode = InteractionModeUse;
         UWHUD.instance.wpa.SetAnimation = -1;
+        switch (_RES)
+        {
+            case GAME_UW2:
+                DeathHandlingUW2(); break;
+            default:
+                DeathHandlingUW1(); break;
+        }
+
+
+        //Cancel the spell
+        if (PlayerMagic.ReadiedSpell != "")
+        {
+            PlayerMagic.ReadiedSpell = "";
+            UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+        }
+    }
+
+    /// <summary>
+    /// Death handling rules for UW1
+    /// </summary>
+    private void DeathHandlingUW1()
+    {
         if (UWHUD.instance.CutScenesSmall != null)
         {
             if (
@@ -231,7 +253,7 @@ public class UWCharacter : Character
                             (
                                     (_RES == GAME_UW1)
                                     &&
-                                    (GameWorldController.instance.LevelNo == 8) //No resurrect in the void.
+                                    (GameWorldController.instance.LevelNo == 8) //No resurrect in the ethereal void.
                             )
                     )
             )
@@ -243,13 +265,161 @@ public class UWCharacter : Character
                 UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
             }
         }
+    }
+    /// <summary>
+    /// Death handling rules for UW2
+    /// </summary>
+    private void DeathHandlingUW2()
+    {
+        //If you are killed by a "ally" npc in castle british you will resurrect in jail (quest 112)
+        //      (if you have yet to talk to british at start of game you won't be let out)
+        //If you are killed by an enemy npc in castle british you will die.
+        //If you die while in an alternate dimension you will spawn in the gem chamber.
 
-        //Cancel the spell
-        if (PlayerMagic.ReadiedSpell != "")
+        switch (GameWorldController.instance.LevelNo)
         {
-            PlayerMagic.ReadiedSpell = "";
-            UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+            case 0://Britannia castle
+                {
+                    if (WasIKilledByAFriend())
+                    {
+                        Quest.instance.QuestVariables[112] = 1;
+                    }
+                    if (Quest.instance.QuestVariables[112] == 1)
+                    {//You have been fighting your allies. You will awake in jail
+                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";                            
+                        return;
+                    }
+                    else
+                    {
+                        UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
+                        return;
+                    }
+                }
+            case 1://Britannia sewer
+            case 2:
+            case 3:
+            case 4:
+                //You're gonna die down here
+                    UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs403.n01";//Final death
+                    return;
+            default://resurrect in gem chamber
+                UWHUD.instance.CutScenesSmall.anim.SetAnimation = "uw2resurrecttransition";
+                return;
         }
+    }
+
+    bool WasIKilledByAFriend()
+    {
+        if (LastEnemyToHitMe != null)
+        {
+            if (LastEnemyToHitMe.GetComponent<NPC>() != null)
+            {
+                int whoami = LastEnemyToHitMe.GetComponent<NPC>().npc_whoami;
+                switch (whoami)
+                {
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.MaleGuard:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Nystrul:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Charles:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Dupre:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Geoffrey:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Iolo:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Julia:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Miranda:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Nanna:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Nell:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Nelson:
+
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Tory:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.LordBritish:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Feridwyn:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.FemaleGuard:
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Syria:
+                        return true;
+                    case (int)a_hack_trap_castle_npcs.BritanniaNPCS.Patterson:
+                        //TODO:Check what happens if patterson kills you before you unmask him as the traitor
+                        return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Resurrects the player.
+    /// </summary>
+    public static void ResurrectPlayerUW1()
+    {
+        ResurrectCommon();
+
+        if (GameWorldController.instance.LevelNo != UWCharacter.Instance.ResurrectLevel - 1)
+        {
+            if (_RES == GAME_UW1)
+            {
+                //Special case for the magic drain effect in UW1
+                UWCharacter.ResetTrueMana();
+            }
+            GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel - 1));
+        }
+        UWCharacter.Instance.gameObject.transform.position = UWCharacter.Instance.ResurrectPosition;
+
+    }
+
+    /// <summary>
+    /// Common steps in resurrection.
+    /// </summary>
+    private static void ResurrectCommon()
+    {
+        UWCharacter.Instance.Death = false;
+        UWCharacter.Instance.Fleeing = false;
+        if (MusicController.instance != null)
+        {
+            MusicController.instance.Combat = false;
+            MusicController.LastAttackCounter = 0.0f;
+        }
+        UWCharacter.Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
+        UWCharacter.Instance.isSwimming = false;
+        UWCharacter.Instance.play_poison = 0;
+        UWCharacter.Instance.CurVIT = Random.Range(UWCharacter.Instance.MaxVIT/2, UWCharacter.Instance.MaxVIT);
+    }
+
+    public static void ResurrectPlayerUW2()
+    {
+        //If you are killed by a "ally" npc in castle british you will resurrect in jail (quest 112)
+        //      (if you have yet to talk to british at start of game you won't be let out)
+        //If you are killed by an enemy npc in castle british you will die.
+        //If you die while in an alternate dimension you will spawn in the gem chamber.
+        ResurrectCommon();
+        switch (GameWorldController.instance.LevelNo)
+        {
+            case 0://resurrect in jail
+                float targetX = (float)42 * 1.2f + 0.6f;
+                float targetY = (float)38 * 1.2f + 0.6f;
+                float Height = ((float)(CurrentTileMap().GetFloorHeight(42, 38))) * 0.15f;
+                UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.3f, targetY);
+                a_hack_trap_castle_npcs.MakeEveryoneFriendly();
+                //Move lord british
+                ObjectInteraction obj = ObjectLoader.getObjectIntAt(NPC.findNpcByWhoAmI(142));
+                if (obj!=null)
+                {
+                    NPC npc = obj.GetComponent<NPC>();
+                    if (npc != null)
+                    {
+                        // npc.transform.position = CurrentTileMap().getTileVector(42, 35);
+                        npc.Agent.Warp(CurrentTileMap().getTileVector(42, 35));
+                    }
+                }
+                else
+                {
+                    Debug.Log("Lord British is missing. This should not happen.");
+                }               
+                //008~009~004~You awaken in jail. \n
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, 4));
+                break;
+            default://resurrect in the gem chamber
+                GameWorldController.instance.SwitchLevel((short)4, 30, 39);//TODO:confirm exact co-ords
+                break;
+        }
+
     }
 
     public override float GetUseRange()
@@ -1554,39 +1724,7 @@ case 2:
         return (this.gameObject.GetComponent<SpellEffectMagicResistant>() != null);
     }
 
-    /// <summary>
-    /// Resurrects the player.
-    /// </summary>
-    public static void ResurrectPlayer()
-    {
-        UWCharacter.Instance.Death = false;
-        UWCharacter.Instance.Fleeing = false;
-        if (MusicController.instance != null)
-        {
-            //GameWorldController.instance.getMus ().Death = false;
-            MusicController.instance.Combat = false;
-            //GameWorldController.instance.getMus ().Fleeing = false;
-            MusicController.LastAttackCounter = 0.0f;
-        }
-        UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
-        UWCharacter.Instance.playerCam.cullingMask = HudAnimation.NormalCullingMask;
 
-        if (GameWorldController.instance.LevelNo != UWCharacter.Instance.ResurrectLevel - 1)
-        {
-            if (_RES == GAME_UW1)
-            {
-                //Special case for the magic drain effect in UW1
-                UWCharacter.ResetTrueMana();
-            }
-            GameWorldController.instance.SwitchLevel((short)(UWCharacter.Instance.ResurrectLevel - 1));
-        }
-        UWCharacter.Instance.gameObject.transform.position = UWCharacter.Instance.ResurrectPosition;
-        UWCharacter.Instance.isSwimming = false;
-        UWCharacter.Instance.play_poison = 0;
-        //TileMap.OnWater = false;
-        //TileMap.OnLava = false;
-        UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
-    }
 
     /// <summary>
     /// Gets the spell reduction of damage for magic spell types
