@@ -21,7 +21,6 @@ public class a_teleport_trap : trap_base {
 			}
 				//Special case for the UW Demo.
 		}
-		//Debug.Log (this.name);
 		if (EditorMode)
 		{
 			return;
@@ -34,11 +33,17 @@ public class a_teleport_trap : trap_base {
 
 		float targetX=(float)quality*1.2f + 0.6f;
 		float targetY= (float)owner*1.2f + 0.6f;
+        //Heading
+        //0=north
+        //1=northeast 
+        //2=east and so on
+        UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, ((float)heading*45f), 0f);
+        UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
 
-
-		UWCharacter.Instance.JustTeleported=true;	
+        UWCharacter.Instance.JustTeleported=true;	
 		UWCharacter.Instance.teleportedTimer=0f;
-		if (zpos==0)
+
+        if (zpos==0)
 		{//Stay on this level.
 			float Height = ((float)(CurrentTileMap().GetFloorHeight(quality,owner)))*0.15f;
 			UWCharacter.Instance.transform.position = new Vector3(targetX,Height+0.5f,targetY);
@@ -68,4 +73,9 @@ public class a_teleport_trap : trap_base {
 	{//IN the UW demo the level transition 
 			UWHUD.instance.MessageScroll.Add("You have reached level 2 of the Underworld. This level is not in the demo.");
 	}
+
+    public override bool WillFireRepeatedly()
+    {
+        return true;
+    }
 }

@@ -18,4 +18,14 @@ public class event_remove_npc : event_base {
 			}
 		}
 	}
+
+    public override string EventName()
+    {
+        return "Remove_NPC";
+    }
+
+    public override string summary()
+    {
+        return base.summary() + "\n\t\tWhoAmI=" + (int)RawData[4];
+    }
 }

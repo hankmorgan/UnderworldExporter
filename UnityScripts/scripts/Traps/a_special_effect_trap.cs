@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 /// Quality appears to control what happens
 ///     q=1 to 3, 9 appear to do nothing (at least when trap is off map)
+///     q=2 plays the guardian laughing sound effect.
 ///     q=4 is an earthquake
 ///     q=5 is a red flash 
 ///     q=6 is a black flash
@@ -21,15 +22,22 @@ public class a_special_effect_trap : trap_base {
     {
         switch (quality)
         {
+            case 2://guardian laugh
+                {
+                    UWCharacter.Instance.aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_GUARDIAN_LAUGH_1];
+                    UWCharacter.Instance.aud.Play();
+                    break;
+                }
             case 4:
                 //Call a camera shake effect
-                CameraShake.instance.shakeDuration = owner * 0.2f;
+                //CameraShake.instance.shakeDuration = owner * 0.2f;
+                CameraShake.instance.ShakeEarthQuake(owner * 0.2f);
                 break;
             case 5:
                 StartCoroutine(Flash("FadeToRed"));
                 break;
             default:
-                Debug.Log("special effect " + this.name);
+                Debug.Log("unimplemented special effect " + this.name + " q=" +  quality);
                 break;
         }        
     }

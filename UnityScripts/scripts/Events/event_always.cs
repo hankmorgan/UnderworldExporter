@@ -14,4 +14,9 @@ public class event_always : event_base {
 		}
 	}
 
+    public override string EventName()
+    {
+        return "event_always";
+    }
+
 }

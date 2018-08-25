@@ -413,6 +413,7 @@ public class UWCharacter : Character
                     Debug.Log("Lord British is missing. This should not happen.");
                 }               
                 //008~009~004~You awaken in jail. \n
+                //This message is supposed to be called by a scheduled trigger.
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, 4));
                 break;
             default://resurrect in the gem chamber
@@ -612,6 +613,14 @@ public class UWCharacter : Character
 
         if (IceCurrentVelocity != Vector3.zero)
         {
+            if (onIce)
+            {
+                if (!aud.isPlaying)
+                {
+                    aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ICE_SLIDE];
+                    aud.Play();
+                }
+            }
             this.GetComponent<CharacterController>().Move(
                     new Vector3(
                             IceCurrentVelocity.x * Time.deltaTime * speedMultiplier,

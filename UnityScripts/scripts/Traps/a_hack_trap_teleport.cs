@@ -241,4 +241,9 @@ public class a_hack_trap_teleport : a_hack_trap {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 348));
         }
     }
+
+    public override bool WillFireRepeatedly()
+    {
+        return true;
+    }
 }

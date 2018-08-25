@@ -95,6 +95,8 @@ public class MusicController : UWEBase
     public const int SOUND_EFFECT_BANG = 40;
     public const int SOUND_EFFECT_FOOT_GRAVELLY = 47;
     public const int SOUND_EFFECT_FOOT_ICE = 48;
+    public const int SOUND_EFFECT_GUARDIAN_LAUGH_1 = 49;
+    public const int SOUND_EFFECT_GUARDIAN_LAUGH_2 = 50;
 
     public static bool PlayMusic = true;
 

@@ -8,11 +8,11 @@ public class CameraShake : UWEBase
     public Transform camTransform;
 
     // How long the object should shake for.
-    public float shakeDuration = 0f;
+    private float shakeDuration = 0f;
 
     // Amplitude of the shake. A larger value shakes the camera harder.
-    public float shakeAmount = 0.7f;
-    public float decreaseFactor = 1.0f;
+    private float shakeAmount = 0.7f;
+    private float decreaseFactor = 1.0f;
 
     Vector3 originalPos;
 
@@ -25,6 +25,18 @@ public class CameraShake : UWEBase
         {
             camTransform = GetComponent(typeof(Transform)) as Transform;
         }
+    }
+
+    public void ShakeEarthQuake(float duration)
+    {
+        shakeAmount = 0.7f;
+        shakeDuration = duration;
+    }
+
+    public void ShakeCombat(float duration)
+    {
+        shakeAmount = 0.1f;
+        shakeDuration = duration;
     }
 
     void OnEnable()

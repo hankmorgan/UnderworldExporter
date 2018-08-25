@@ -14,17 +14,6 @@ public class a_variable_trap : trap_base
     //public int VariableValue;	//((currObj.owner & 0x7) <<3) | (currObj.y )) or maybe 
     //public int heading;
 
-    //protected override void Start ()
-    //{
-    //	base.Start();
-    //Init the variables
-
-    //VariableIndex=zpos;
-
-
-    //	//heading = heading;
-    //}
-
     protected override void Start()
     {
         base.Start();

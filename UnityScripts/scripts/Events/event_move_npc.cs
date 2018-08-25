@@ -25,5 +25,15 @@ public class event_move_npc : event_base {
 			}
 		}
 	}
+
+    public override string EventName()
+    {
+        return "Move_NPC";
+    }
+
+    public override string summary()
+    {
+        return base.summary() + "\n\t\tTileX=" + (int)RawData[3] + ",TileY=" + (int)RawData[4] +"WhoAmI=" + (int)RawData[6];
+    }
 }
 

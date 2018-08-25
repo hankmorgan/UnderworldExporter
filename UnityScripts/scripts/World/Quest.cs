@@ -80,7 +80,7 @@ using System.Collections;
 /// 54: Checked by Mors Gotha? related to keep crashing
 /// 55: Banner of Killorn returned (based on Scd.ark research)
 /// 58: Set when meeting bishop. Bishop tells you about altara
-/// 
+/// 60: Possible prison tower variable. used in check trap on second highest level
 /// 61: You've brought water to Josie
 /// 
 /// 63: Blog has given you the gem
@@ -96,7 +96,7 @@ using System.Collections;
 /// 114: checked when talking to LB. The servants are restless
 /// 115: checked when talking to LB. The servants are on strike
 /// 116: The strike has been called off.
-/// 
+/// 117: Mors has been defeated in Kilorn
 /// 118: The wisps tell you about the trilikisssss2
 /// 119: Fizzit the thief surrenders
 /// 120: checked by miranda?
@@ -246,7 +246,7 @@ public class Quest : UWEBase {
 		/// 11 - Go see Nelson
 		/// 12 - Patterson goes postal
 		/// 13 - Patterson is dead
-		/// 14 - Gem is weak
+		/// 14 - Gem is weak/Mors is in killorn(?)
 		/// 15 - Nystrul wants to see you again re endgame
 		/// 16 - Nystrul questions have been answered Mars Gotha comes
 	/// 2=Nystrul and blackrock gems treated

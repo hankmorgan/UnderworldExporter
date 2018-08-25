@@ -35,13 +35,19 @@ public class a_check_variable_trap :a_variable_trap {
 Examples of usage
 the left, right, center button combination on Level3.
 
+        Theory
+        in uw2 the xpos value appears to control how the variables are tested.
+        bits = ?  look at game variables?
+        bits = ?  look at quest variables?
+        bit = ? look at xclock?
+
 */
 
-    protected override void Start()
-    {
-        base.Start();
-        Debug.Log(this.name + " will check " + zpos);
-    }
+    //protected override void Start()
+    //{
+    //    base.Start();
+    //    Debug.Log(this.name + " will check " + zpos);
+    //}
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
@@ -148,14 +154,29 @@ the left, right, center button combination on Level3.
 			}
 		else
 			{//Is this right?
-			    Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
-                switch (zpos)
-                {
-                    case 117:
-                        return true;//Fix bug on tombs final level. Should this be a test against quest vars instead???
-                    default:
-                        return VariableValue() == Quest.instance.variables[zpos];
-                }				
+                //if (_RES==GAME_UW2)
+                //{
+                    //Debug.Log(this.name + " comparing " + VariableValue() + " to quest " + zpos + " (" + Quest.instance.QuestVariables[zpos] + ")");
+                    //return VariableValue() == Quest.instance.QuestVariables[zpos];
+                //}
+                //else
+                //{
+                    Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")");
+                    return VariableValue() == Quest.instance.variables[zpos];
+                //}
+			    ////Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
+       //         switch (zpos)
+       //         {
+       //             case 117:
+       //                 return true;//Fix bug on tombs final level. Should this be a test against quest vars instead???
+       //             default:
+       //                 return VariableValue() == Quest.instance.variables[zpos];
+       //         }				
 			}
 		}
+
+    public override bool WillFireRepeatedly()
+    {
+        return true;//test this?
+    }
 }

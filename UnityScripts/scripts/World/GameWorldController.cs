@@ -969,7 +969,7 @@ public class GameWorldController : UWEBase
                         objectList[newLevelNo].LoadObjectList(Tilemaps[newLevelNo], lev_ark_block);
                         if (CreateReports)
                         {
-                            CreateObjectReport(objectList[newLevelNo].objInfo);
+                            CreateObjectReport(objectList[newLevelNo].objInfo, newLevelNo);
                         }
                         if (EnableUnderworldGenerator)
                         {
@@ -1019,9 +1019,9 @@ public class GameWorldController : UWEBase
                 }
             }
 
-
             //Get my object info into the tile map.
             LevelNo = newLevelNo;
+
             switch (UWEBase._RES)
             {
                 case GAME_SHOCK:
@@ -1824,90 +1824,99 @@ public class GameWorldController : UWEBase
     /// Creates a report of the objects in the level in an xml format
     /// </summary>
     /// <param name="objList"></param>
-    void CreateObjectReport(ObjectLoaderInfo[] objList)
+    void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo)
     {
-        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");
-        writer.WriteLine("<ObjectReport>");
+        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");//, true);
+        writer.WriteLine("<ObjectReport level =" + ReportLevelNo + "> ");
+        //writer.WriteLine("\t<level>" + ReportLevelNo + "</level>");
         for (int o = 0; o <= objList.GetUpperBound(0); o++)
         {
             if (((objList[o].InUseFlag == 0) && (!ShowOnlyInUse)) || (objList[o].InUseFlag == 1))
             {
-                writer.WriteLine("\t<Object>");
-                writer.WriteLine("\t\t<ObjectName>" + ObjectLoader.UniqueObjectNameEditor(objList[o]) + "</ObjectName>");
-                writer.WriteLine("\t\t<Index>" + o + "</Index>");
-                writer.WriteLine("\t\t<Address>" + objList[o].address + "</Address>");
-                writer.WriteLine("\t\t<StaticProperties>");
-                writer.WriteLine("\t\t\t<ItemID>" + objList[o].item_id + "</ItemID>");
-                writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag + "</InUse>");
-                writer.WriteLine("\t\t\t<Flags>" + objList[o].flags + "</Flags>");
-                writer.WriteLine("\t\t\t<Enchant>" + objList[o].enchantment + "</Enchant>");
-                writer.WriteLine("\t\t\t<DoorDir>" + objList[o].doordir + "</DoorDir>");
-                writer.WriteLine("\t\t\t<Invis>" + objList[o].invis + "</Invis>");
-                writer.WriteLine("\t\t\t<IsQuant>" + objList[o].is_quant + "</IsQuant>");
-                writer.WriteLine("\t\t\t<Texture>" + objList[o].texture + "</Texture>");
-                writer.WriteLine("\t\t\t<Position>");
-                writer.WriteLine("\t\t\t\t<ObjectTileX>" + objList[o].ObjectTileX + "</ObjectTileX>");
-                writer.WriteLine("\t\t\t\t<ObjectTileY>" + objList[o].ObjectTileY + "</ObjectTileY>");
-                writer.WriteLine("\t\t\t\t<xpos>" + objList[o].xpos + "</xpos>");
-                writer.WriteLine("\t\t\t\t<ypos>" + objList[o].ypos + "</ypos>");
-                writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");
-                writer.WriteLine("\t\t\t</Position>");
-                writer.WriteLine("\t\t\t<Quality>" + objList[o].quality + "</Quality>");
-                writer.WriteLine("\t\t\t<Next>" + objList[o].next + "</Next>");
-                writer.WriteLine("\t\t\t<Owner>" + objList[o].owner + "</Owner>");
-                writer.WriteLine("\t\t\t<Link>" + objList[o].link + "</Link>");
-                writer.WriteLine("\t\t</StaticProperties>");
-                if (o < 256)
-                {//mobile info
-                    writer.WriteLine("\t\t<MobileProperties>");
-                    writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
-                    writer.WriteLine("\t\t\t<ProjectileHeadingMinor>" + objList[o].ProjectileHeadingMinor + "</ProjectileHeadingMinor>");
-                    writer.WriteLine("\t\t\t<ProjectileHeadingMajor>" + objList[o].ProjectileHeadingMajor + "</ProjectileHeadingMajor>");
-                    writer.WriteLine("\t\t\t<MobileUnk01>" + objList[o].MobileUnk01 + "</MobileUnk01>");
-                    writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
-                    writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
-                    writer.WriteLine("\t\t\t<MobileUnk02>" + objList[o].MobileUnk02 + "</MobileUnk02>");
-                    writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");
-                    writer.WriteLine("\t\t\t<MobileUnk03>" + objList[o].MobileUnk03 + "</MobileUnk03>");
-                    writer.WriteLine("\t\t\t<MobileUnk04>" + objList[o].MobileUnk04 + "</MobileUnk04>");
-                    writer.WriteLine("\t\t\t<npc_talkedto>" + objList[o].npc_talkedto + "</npc_talkedto>");
-                    writer.WriteLine("\t\t\t<npc_attitude>" + objList[o].npc_attitude + "</npc_attitude>");
-                    writer.WriteLine("\t\t\t<MobileUnk05>" + objList[o].MobileUnk05 + "</MobileUnk05>");
-                    writer.WriteLine("\t\t\t<npc_height>" + objList[o].npc_height + "</npc_height>");
-                    writer.WriteLine("\t\t\t<MobileUnk06>" + objList[o].MobileUnk06 + "</MobileUnk06>");
-                    writer.WriteLine("\t\t\t<MobileUnk07>" + objList[o].MobileUnk07 + "</MobileUnk07>");
-                    writer.WriteLine("\t\t\t<MobileUnk08>" + objList[o].MobileUnk08 + "</MobileUnk08>");
-                    writer.WriteLine("\t\t\t<MobileUnk09>" + objList[o].MobileUnk09 + "</MobileUnk09>");
-                    writer.WriteLine("\t\t\t<Projectile_Speed>" + objList[o].Projectile_Speed + "</Projectile_Speed>");
-                    writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
-                    writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
-                    writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
-                    writer.WriteLine("\t\t\t<MobileUnk11>" + objList[o].MobileUnk11 + "</MobileUnk11>");
-                    writer.WriteLine("\t\t\t<MobileUnk12>" + objList[o].MobileUnk12 + "</MobileUnk12>");
-                    writer.WriteLine("\t\t\t<npc_yhome>" + objList[o].npc_yhome + "</npc_yhome>");
-                    writer.WriteLine("\t\t\t<npc_xhome>" + objList[o].npc_xhome + "</npc_xhome>");
-                    writer.WriteLine("\t\t\t<npc_heading>" + objList[o].npc_heading + "</npc_heading>");
-                    writer.WriteLine("\t\t\t<MobileUnk13>" + objList[o].MobileUnk13 + "</MobileUnk13>");
-                    writer.WriteLine("\t\t\t<npc_hunger>" + objList[o].npc_hunger + "</npc_hunger>");
-                    writer.WriteLine("\t\t\t<MobileUnk14>" + objList[o].MobileUnk14 + "</MobileUnk14>");
-                    writer.WriteLine("\t\t\t<npc_whoami>" + objList[o].npc_whoami + "</npc_whoami>");
-                    writer.WriteLine("\t\t</MobileProperties>");
-                }
-                writer.WriteLine("\t</Object>");
+               // if
+                //((objList[o].GetItemType() == ObjectInteraction.A_CHECK_VARIABLE_TRAP)||(objList[o].GetItemType() == ObjectInteraction.A_SET_VARIABLE_TRAP))
+               // {
+                    WriteObjectXML(objList, writer, o);
+               // }               
             }
-
         }
 
         writer.WriteLine("</ObjectReport>");
         writer.Close();
     }
 
-        /// <summary>
-        /// Gets what world is associated with the current level
-        /// </summary>
-        /// <param name="levelNo"></param>
-        /// <returns></returns>
-        public static Worlds GetWorld(int levelNo)
+    private static void WriteObjectXML(ObjectLoaderInfo[] objList, StreamWriter writer, int o)
+    {
+        writer.WriteLine("\t<Object>");
+        writer.WriteLine("\t\t<ObjectName>" + ObjectLoader.UniqueObjectNameEditor(objList[o]) + "</ObjectName>");
+        writer.WriteLine("\t\t<Index>" + o + "</Index>");
+        writer.WriteLine("\t\t<Address>" + objList[o].address + "</Address>");
+        writer.WriteLine("\t\t<StaticProperties>");
+        writer.WriteLine("\t\t\t<ItemID>" + objList[o].item_id + "</ItemID>");
+        writer.WriteLine("\t\t\t<InUse>" + objList[o].InUseFlag + "</InUse>");
+        writer.WriteLine("\t\t\t<Flags>" + objList[o].flags + "</Flags>");
+        writer.WriteLine("\t\t\t<Enchant>" + objList[o].enchantment + "</Enchant>");
+        writer.WriteLine("\t\t\t<DoorDir>" + objList[o].doordir + "</DoorDir>");
+        writer.WriteLine("\t\t\t<Invis>" + objList[o].invis + "</Invis>");
+        writer.WriteLine("\t\t\t<IsQuant>" + objList[o].is_quant + "</IsQuant>");
+        writer.WriteLine("\t\t\t<Texture>" + objList[o].texture + "</Texture>");
+        writer.WriteLine("\t\t\t<Position>");
+        writer.WriteLine("\t\t\t\t<ObjectTileX>" + objList[o].ObjectTileX + "</ObjectTileX>");
+        writer.WriteLine("\t\t\t\t<ObjectTileY>" + objList[o].ObjectTileY + "</ObjectTileY>");
+        writer.WriteLine("\t\t\t\t<xpos>" + objList[o].xpos + "</xpos>");
+        writer.WriteLine("\t\t\t\t<ypos>" + objList[o].ypos + "</ypos>");
+        writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");
+        writer.WriteLine("\t\t\t</Position>");
+        writer.WriteLine("\t\t\t<Quality>" + objList[o].quality + "</Quality>");
+        writer.WriteLine("\t\t\t<Next>" + objList[o].next + "</Next>");
+        writer.WriteLine("\t\t\t<Owner>" + objList[o].owner + "</Owner>");
+        writer.WriteLine("\t\t\t<Link>" + objList[o].link + "</Link>");
+        writer.WriteLine("\t\t</StaticProperties>");
+        if (o < 256)
+        {//mobile info
+            writer.WriteLine("\t\t<MobileProperties>");
+            writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
+            writer.WriteLine("\t\t\t<ProjectileHeadingMinor>" + objList[o].ProjectileHeadingMinor + "</ProjectileHeadingMinor>");
+            writer.WriteLine("\t\t\t<ProjectileHeadingMajor>" + objList[o].ProjectileHeadingMajor + "</ProjectileHeadingMajor>");
+            writer.WriteLine("\t\t\t<MobileUnk01>" + objList[o].MobileUnk01 + "</MobileUnk01>");
+            writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
+            writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
+            writer.WriteLine("\t\t\t<MobileUnk02>" + objList[o].MobileUnk02 + "</MobileUnk02>");
+            writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");
+            writer.WriteLine("\t\t\t<MobileUnk03>" + objList[o].MobileUnk03 + "</MobileUnk03>");
+            writer.WriteLine("\t\t\t<MobileUnk04>" + objList[o].MobileUnk04 + "</MobileUnk04>");
+            writer.WriteLine("\t\t\t<npc_talkedto>" + objList[o].npc_talkedto + "</npc_talkedto>");
+            writer.WriteLine("\t\t\t<npc_attitude>" + objList[o].npc_attitude + "</npc_attitude>");
+            writer.WriteLine("\t\t\t<MobileUnk05>" + objList[o].MobileUnk05 + "</MobileUnk05>");
+            writer.WriteLine("\t\t\t<npc_height>" + objList[o].npc_height + "</npc_height>");
+            writer.WriteLine("\t\t\t<MobileUnk06>" + objList[o].MobileUnk06 + "</MobileUnk06>");
+            writer.WriteLine("\t\t\t<MobileUnk07>" + objList[o].MobileUnk07 + "</MobileUnk07>");
+            writer.WriteLine("\t\t\t<MobileUnk08>" + objList[o].MobileUnk08 + "</MobileUnk08>");
+            writer.WriteLine("\t\t\t<MobileUnk09>" + objList[o].MobileUnk09 + "</MobileUnk09>");
+            writer.WriteLine("\t\t\t<Projectile_Speed>" + objList[o].Projectile_Speed + "</Projectile_Speed>");
+            writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
+            writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
+            writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
+            writer.WriteLine("\t\t\t<MobileUnk11>" + objList[o].MobileUnk11 + "</MobileUnk11>");
+            writer.WriteLine("\t\t\t<MobileUnk12>" + objList[o].MobileUnk12 + "</MobileUnk12>");
+            writer.WriteLine("\t\t\t<npc_yhome>" + objList[o].npc_yhome + "</npc_yhome>");
+            writer.WriteLine("\t\t\t<npc_xhome>" + objList[o].npc_xhome + "</npc_xhome>");
+            writer.WriteLine("\t\t\t<npc_heading>" + objList[o].npc_heading + "</npc_heading>");
+            writer.WriteLine("\t\t\t<MobileUnk13>" + objList[o].MobileUnk13 + "</MobileUnk13>");
+            writer.WriteLine("\t\t\t<npc_hunger>" + objList[o].npc_hunger + "</npc_hunger>");
+            writer.WriteLine("\t\t\t<MobileUnk14>" + objList[o].MobileUnk14 + "</MobileUnk14>");
+            writer.WriteLine("\t\t\t<npc_whoami>" + objList[o].npc_whoami + "</npc_whoami>");
+            writer.WriteLine("\t\t</MobileProperties>");
+        }
+        writer.WriteLine("\t</Object>");
+    }
+
+    /// <summary>
+    /// Gets what world is associated with the current level
+    /// </summary>
+    /// <param name="levelNo"></param>
+    /// <returns></returns>
+    public static Worlds GetWorld(int levelNo)
     {
         if (_RES != GAME_UW2) { return Worlds.Britannia; }
         switch ((UW2_LevelNos)levelNo)

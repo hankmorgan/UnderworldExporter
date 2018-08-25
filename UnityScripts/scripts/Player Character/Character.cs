@@ -132,10 +132,12 @@ public class Character : UWEBase {
 		{
 			//Debug.Log("Invincible character damage is " + damage );
 		}
-		//Applies damage to the player.
-		
-		//TODO:Check the players armour and apply damage on a crit			
-	}
+        //Applies damage to the player.
+
+        //TODO:Check the players armour and apply damage on a crit			
+        //CameraShake.instance.shakeDuration = 0.2f;
+        CameraShake.instance.ShakeCombat(0.2f);
+    }
 
 	//Damage from a known source
 	public void ApplyDamage(int damage, GameObject src)

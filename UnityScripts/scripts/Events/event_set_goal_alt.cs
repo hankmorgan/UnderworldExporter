@@ -10,4 +10,9 @@ public class event_set_goal_alt : event_set_goal {
 			base.Process();
 		}
 	}
+
+    public override string EventName()
+    {
+        return "set_goal_alt";
+    }
 }

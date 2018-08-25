@@ -41,10 +41,10 @@ public class a_hack_trap_gemrotate : a_hack_trap
             Quest.instance.variables[6] = 0;
         }
 
-        if (prevWorld != Quest.instance.variables[6])
-        {
-            Debug.Log("Now serving world " + Quest.instance.variables[6]);
-        }
+        //if (prevWorld != Quest.instance.variables[6])
+        //{
+        //    Debug.Log("Now serving world " + Quest.instance.variables[6]);
+        //}
         UpdateGemFace();
 
         prevWorld = Quest.instance.variables[6];
@@ -74,9 +74,8 @@ public class a_hack_trap_gemrotate : a_hack_trap
         }
     }
 
-    public override void PostActivate(object_base src)
+    public override bool WillFireRepeatedly()
     {
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
+        return true;
     }
 }

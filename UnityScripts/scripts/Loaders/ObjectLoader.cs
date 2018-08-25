@@ -1221,6 +1221,15 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.HIDDENDOOR:
             case ObjectInteraction.PORTCULLIS:
                 return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
+            case ObjectInteraction.NPC_TYPE:
+                if (currObj.npc_whoami!=0)
+                {
+                    return StringController.instance.GetString(7, currObj.npc_whoami + 16) +"_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString(); 
+                }
+                else
+                {
+                    return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                }
             default:
                 return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
         }
@@ -1630,7 +1639,10 @@ public class ObjectLoader : DataLoader
                         {
                             if (TileMap.ValidTile(triggerX+x, triggerY+y))
                             {
-                                LevelInfo[triggerX + x, triggerY + y].TerrainChange = true;
+                                if (LevelInfo[triggerX + x, triggerY + y].tileType == TileMap.TILE_OPEN)
+                                {
+                                    LevelInfo[triggerX + x, triggerY + y].TerrainChange = true;
+                                }                                
                             }
                         }
                     }

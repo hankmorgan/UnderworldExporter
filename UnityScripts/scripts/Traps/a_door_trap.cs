@@ -95,9 +95,14 @@ Opens the door that is in the targeted tile.
 		}
 	}
 
-	public override void PostActivate (object_base src)
-	{//To stop destruction of trap
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
+	//public override void PostActivate (object_base src)
+	//{//To stop destruction of trap
+ //       Debug.Log("Overridden PostActivate to test " + this.name);
+ //       base.PostActivate(src);
+ //   }
+
+    public override bool WillFireRepeatedly()
+    {
+        return true;
     }
 }

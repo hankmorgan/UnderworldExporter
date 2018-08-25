@@ -9,6 +9,7 @@ using UnityEngine.AI;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject
 {
+    public string debugname;
 
     //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
     public const int AI_ATTITUDE_HOSTILE = 0;
@@ -180,6 +181,14 @@ public class NPC : MobileObject
     protected override void Start()
     {
         base.Start();
+        if (npc_whoami != 0)
+        {
+            debugname = StringController.instance.GetString(7, npc_whoami + 16);
+        }
+        else
+        {
+            debugname = StringController.instance.GetSimpleObjectNameUW(item_id);
+        }
         //debugCategory=GameWorldController.instance.objDat.critterStats[item_id-64].Category;
         //debugPoison = GameWorldController.instance.objDat.critterStats[item_id-64].Poison;
         NPC_IDi = item_id;
@@ -537,6 +546,19 @@ public class NPC : MobileObject
                     }
                     switch (npc_whoami)
                     {
+                        case 47://Mors gothri in Kilhorn
+                            if (Quest.instance.QuestVariables[117] ==0)
+                            {
+                                Quest.instance.QuestVariables[117] = 1;
+                                npc_hp = 50;//restore health.
+                                npc_goal = (short)NPC.npc_goals.npc_goal_stand_still_0;
+                                npc_attitude = NPC.AI_ATTITUDE_UPSET;
+                                TalkTo();
+                                return true;
+                            }
+
+                            break;
+
                         case 58://Brain creatures in Kilhorn
                             Quest.instance.QuestVariables[50] = 1;
                             return false;
@@ -605,6 +627,7 @@ public class NPC : MobileObject
     public override void Update()
     {
         if (EditorMode == true) { return; }
+        if (ConversationVM.InConversation) { return; }
         bool FreezeNpc = isNPCFrozen();
         newAnim.FreezeAnimFrame = FreezeNpc;
         if ((WaitTimer > 0) && (!FreezeNpc))

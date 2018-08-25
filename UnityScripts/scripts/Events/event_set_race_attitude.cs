@@ -19,4 +19,14 @@ public class event_set_race_attitude : event_base {
 			}	
 		}
 	}
+
+    public override string EventName()
+    {
+        return "set_race_attitude";
+    }
+
+    public override string summary()
+    {
+        return base.summary() + "\n\t\tRace=" + (int)RawData[4] + ",Attitude=" + (int)RawData[5];
+    }
 }

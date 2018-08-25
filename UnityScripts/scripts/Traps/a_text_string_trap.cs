@@ -34,6 +34,18 @@ public class a_text_string_trap : trap_base {
         base.PostActivate(src);
     }
 
+    public override bool WillFireRepeatedly()
+    {
+        if (((flags >> 2) & 0x1) == 1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //public override void PostActivate (object_base src)
     //{//Do not destroy.
     //       Debug.Log("Overridden PostActivate to test " + this.name);

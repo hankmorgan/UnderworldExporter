@@ -111,6 +111,7 @@ public class trap_base : traptrigger_base
             }
         }
         objInt().objectloaderinfo.InUseFlag = 0;
+        Debug.Log("Destroying Trap: " + this.name);
         Destroy(this.gameObject);
     }
 
@@ -153,4 +154,6 @@ public class trap_base : traptrigger_base
             ExecuteTrap(this, 0, 0, 0);
         }
     }
+
+
 }

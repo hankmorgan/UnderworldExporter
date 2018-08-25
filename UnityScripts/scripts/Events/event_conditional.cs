@@ -33,4 +33,17 @@ public class event_conditional : event_base {
 		//preent destruction of the event.
 	}
 
+    public override string EventName()
+    {
+        return "Conditional";
+    }
+
+
+    public override string summary()
+    {
+        int isQuest = RawData[4] ;
+        int variable = RawData[3];
+        int targetValue = RawData[8];
+        return base.summary() + "\n\t\tIsQuest=" + isQuest + ",Variable=" + variable + ",TargetValue=" + targetValue;
+    }
 }

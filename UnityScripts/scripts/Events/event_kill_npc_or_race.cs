@@ -27,4 +27,22 @@ public class event_kill_npc_or_race : event_base {
 			}
 		}
 	}
+
+    public override string EventName()
+    {
+        return "Kill_NPC_Or_Race";
+    }
+
+    public override string summary()
+    {
+        bool isNPC = (RawData[5] == 1);
+        if (isNPC)
+        {
+            return base.summary() + "\n\t\tIsNPC=" + (int)RawData[5] + ",WhoAmI=" + (int)RawData[4];
+        }
+        else
+        {
+            return base.summary() + "\n\t\tIsNPC=" + (int)RawData[5] + ",Race=" + (int)RawData[4];
+        }
+    }
 }

@@ -16,7 +16,11 @@ A trigger that fires when the player character enters it
 	protected override void Start ()
 	{				
 		base.Start ();
-		box=this.gameObject.AddComponent<BoxCollider>();
+		box=this.gameObject.GetComponent<BoxCollider>();
+        if (box==null)
+        {
+            box = this.gameObject.AddComponent<BoxCollider>();
+        }
 		box.size = boxDimensions;//new Vector3(1.2f, 1.2f, 1.2f);
 		box.center=boxCenter;
 		box.isTrigger=true;

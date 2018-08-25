@@ -20,9 +20,13 @@ public class an_inventory_trap : trap_base {
 		ObjectInteraction foundObjInt = UWCharacter.Instance.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)
 		{
-			//Debug.Log("Inventory trap " + this.name + " found " + foundObjInt.name);
+			Debug.Log("Inventory trap " + this.name + " found " + foundObjInt.name);
 			ObjectFound=true;
 		}
+        else
+        {
+           // Debug.Log("Inventory trap did not find item of id =" + itemToFind);
+        }
 	}
 
 	public override void TriggerNext (int triggerX, int triggerY, int State)
@@ -33,10 +37,10 @@ public class an_inventory_trap : trap_base {
 		}
 	}
 
-	public override void PostActivate (object_base src)
-	{//Do not destroy.
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
-	}
+	//public override void PostActivate (object_base src)
+	//{//Do not destroy.
+ //       Debug.Log("Overridden PostActivate to test " + this.name);
+ //       base.PostActivate(src);
+	//}
 
 }
