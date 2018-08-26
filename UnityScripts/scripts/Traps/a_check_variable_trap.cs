@@ -51,8 +51,38 @@ the left, right, center button combination on Level3.
 
     public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
+
+        bool result = false;
+
+        switch(_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch (xpos)
+                    {//In UW2 xpos controls what set of variables is looked at/
+                        case 4://A game var list
+                            result = Check_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
+                            break;
+                        case 5://A bit field list
+                            result = Check_Variables(Quest.instance.BitVariables, zpos, heading, this, "bitvars");
+                            break;
+                        case 6://A quest flag list
+                              result = Check_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
+                            break;
+                        default://TODO: Xclock must be used here as well But what value?
+                            Debug.Log("unknown usage of check trap " + xpos + " " + this.name);
+                            break;
+                    }
+                    break;
+                }
+            default:
+                {
+                    result = Check_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
+                    break;
+                }
+        }
 		//Debug.Log (this.name);
-		if (check_variable_trap())
+		if (result)
 		{
 			TriggerNext(triggerX,triggerY,State);
 			PostActivate(src);
@@ -62,7 +92,6 @@ the left, right, center button combination on Level3.
 			if (_RES==GAME_UW2)	
 			{//If linked to a null trap in UW2 the next of the null trap will act as a "false" action.
 				ObjectInteraction nullObj= ObjectLoader.getObjectIntAt(link);
-				//if (triggerObj.tileX==TileMap.ObjectStorageTile)
 				if(nullObj.GetItemType()==ObjectInteraction.A_NULL_TRAP)
 				{
 					ObjectInteraction triggerObj = ObjectLoader.getObjectIntAt(nullObj.next);
@@ -115,63 +144,21 @@ the left, right, center button combination on Level3.
 	}
 
 
-	bool check_variable_trap()
-	{//Based on what uw-formats says. Seems to work okay.
-		if (_RES==GAME_UW2)
-		{//Some variables in UW2 seem to map to x_clock values
-			switch (zpos)
+    static bool Check_Variables(int[] vars, int index, int operation, a_check_variable_trap trap, string debugname)
+    {//Based on what uw-formats says. Seems to work okay.
+		if (operation!=0)
 			{
-				case 17://castle events
-				case 18://This is tested					
-				case 19://Djinn capture
-				case 20://The following are untested
-				case 21:
-				case 22:
-				case 23:
-				case 24:
-				case 25:
-				case 26:
-				case 27:
-				case 28:
-				case 29:
-				case 30:
-				case 31:								
-					//return VariableValue()==Quest.instance.DjinnCapture;	
-					return VariableValue()==Quest.instance.x_clocks[zpos-16];	
-				case 32:
-					Debug.Log("Checking lvl 5 scint switches");
-					return Quest.instance.ScintLvl5Switches == 7;		
-			}
-		}
-		if (heading!=0)
-			{
-			    int cmp = ComparisonValue ();
-			    if (cmp == VariableValue())
+			    int cmp = trap.ComparisonValue ();
+			    if (cmp == trap.VariableValue())
 			    {
-				    Debug.Log (this.name + " cmp = " + cmp + " value=" + VariableValue());	
+				    Debug.Log (debugname + " cmp = " + cmp + " value=" + trap.VariableValue());	
 			    }				
-			    return cmp == VariableValue();				
+			    return cmp == trap.VariableValue();				
 			}
 		else
 			{//Is this right?
-                //if (_RES==GAME_UW2)
-                //{
-                    //Debug.Log(this.name + " comparing " + VariableValue() + " to quest " + zpos + " (" + Quest.instance.QuestVariables[zpos] + ")");
-                    //return VariableValue() == Quest.instance.QuestVariables[zpos];
-                //}
-                //else
-                //{
-                    Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")");
-                    return VariableValue() == Quest.instance.variables[zpos];
-                //}
-			    ////Debug.Log(this.name + " comparing " + VariableValue() + " to variable " + zpos + " (" + Quest.instance.variables[zpos] + ")" );
-       //         switch (zpos)
-       //         {
-       //             case 117:
-       //                 return true;//Fix bug on tombs final level. Should this be a test against quest vars instead???
-       //             default:
-       //                 return VariableValue() == Quest.instance.variables[zpos];
-       //         }				
+                Debug.Log(debugname + ": Comparing " + trap.VariableValue() + " to variable " + index + " which is currently =" + vars[index]);
+                return trap.VariableValue() == vars[index];
 			}
 		}
 

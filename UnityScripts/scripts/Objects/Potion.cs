@@ -13,6 +13,7 @@ public class Potion : enchantment_base
 
     public override bool use()
     {
+        if (ConversationVM.InConversation) { return false; }
         if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
         {
             if (linked != null)

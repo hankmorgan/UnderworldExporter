@@ -50,7 +50,27 @@ public class a_hack_trap_castle_npcs : a_hack_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        Debug.Log("Moving everyone Xclock is " + Quest.instance.x_clocks[1]);
+        switch(Quest.instance.x_clocks[0])
+        {
+            case 0:
+                EventsAtXClock0();
+                break;
+            default:
+                Debug.Log("what happens now???");
+                break;
+        }
+    }
+    
+    void EventsAtXClock0()
+    {
+        //Play Cutscene for Guardian taunt.
+        //This is probably called by some other means in vanilla but it is convenient to do so here.
+        Cutscene_TauntBritish cs = UWHUD.instance.gameObject.AddComponent<Cutscene_TauntBritish>();
+        UWHUD.instance.CutScenesFull.cs = cs;
+        UWHUD.instance.CutScenesFull.Begin();
+
+        //Move NPCS at Xclock 0
+        //Debug.Log("Moving everyone Xclock is " + Quest.instance.x_clocks[1]);
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Nell), 43, 49, NPC.npc_goals.npc_goal_wander_2);
         NPC.SetNPCLocation(227, 42, 35, NPC.npc_goals.npc_goal_wander_2);//a guard
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Charles), 36, 51, NPC.npc_goals.npc_goal_wander_2);
@@ -72,7 +92,7 @@ public class a_hack_trap_castle_npcs : a_hack_trap
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Nystrul), 42, 43, NPC.npc_goals.npc_goal_goto_1);//nyst
         NPC.SetNPCLocation(getNPC(BritanniaNPCS.Syria), 42, 36, NPC.npc_goals.npc_goal_wander_2);
     }
-    
+
     /// <summary>
     /// Finds the first instance of the specified NPC by whoami
     /// </summary>

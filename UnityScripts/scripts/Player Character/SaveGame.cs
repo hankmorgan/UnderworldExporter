@@ -724,6 +724,7 @@ public class SaveGame : Loader
         //int runeOffset=0;
         int QuestCounter = 0;
         int variableCounter = 0;
+        int bitVariableCounter = 0;
         //update inventory linking
         int NoOfInventoryItems = 0;
         string[] inventoryObjects = ObjectLoader.UpdateInventoryObjectList(out NoOfInventoryItems);
@@ -810,7 +811,6 @@ public class SaveGame : Loader
                         DataLoader.WriteInt8(writer, val);
                         break;
                     }
-                    break;
                 case 0x66: // hand, Gender & body, and class
                     {
                         WritePlayerClass(writer);
@@ -870,6 +870,16 @@ public class SaveGame : Loader
                 case 0xEF:  //Quest 136
                 case 0xF0:  //Quest 137
                 case 0xF1:  //Quest 138
+                            //Additional quests
+                case 0xF2:  //Quest 139
+                case 0xF3:  //Quest 140
+                case 0xF4:  //Quest 141
+                case 0xF5:  //Quest 142
+                case 0xF6:  //Quest 143
+                case 0xF7:  //Quest 144
+                case 0xF8:  //Quest 145
+                case 0xF9:  //Quest 146
+
                     {//TODO:These quests are not tested.
                         DataLoader.WriteInt8(writer, Quest.instance.QuestVariables[128 + (i - 0xE7)]);
                         break;
@@ -1016,10 +1026,80 @@ public class SaveGame : Loader
                     }
                 case 0x1D2 + 1:
                     break;
-                case 0x23a://Scint level 5 switches
+
+                case 0x1FA:   //Bit Var 0
+                case 0x1FC:   //Bit Var 1
+                case 0x1FE:   //Bit Var 2
+                case 0x200:   //Bit Var 3
+                case 0x202:   //Bit Var 4
+                case 0x204:   //Bit Var 5
+                case 0x206:   //Bit Var 6
+                case 0x208:   //Bit Var 7
+                case 0x20A:   //Bit Var 8
+                case 0x20C:   //Bit Var 9
+                case 0x20E:   //Bit Var 10
+                case 0x210:   //Bit Var 11
+                case 0x212:   //Bit Var 12
+                case 0x214:   //Bit Var 13
+                case 0x216:   //Bit Var 14
+                case 0x218:   //Bit Var 15
+                case 0x21A:   //Bit Var 16
+                case 0x21C:   //Bit Var 17
+                case 0x21E:   //Bit Var 18
+                case 0x220:   //Bit Var 19
+                case 0x222:   //Bit Var 20
+                case 0x224:   //Bit Var 21
+                case 0x226:   //Bit Var 22
+                case 0x228:   //Bit Var 23
+                case 0x22A:   //Bit Var 24
+                case 0x22C:   //Bit Var 25
+                case 0x22E:   //Bit Var 26
+                case 0x230:   //Bit Var 27
+                case 0x232:   //Bit Var 28
+                case 0x234:   //Bit Var 29
+                case 0x236:   //Bit Var 30
+                case 0x238:   //Bit Var 31
+                case 0x23A:   //Bit Var 32
+                    DataLoader.WriteInt8(writer, Quest.instance.BitVariables[bitVariableCounter++]);
+                    break;
+                    //Skip over for bit vars
+                case 0x1FA + 1:
+                case 0x1FC + 1:
+                case 0x1FE + 1:
+                case 0x200 + 1:
+                case 0x202 + 1:
+                case 0x204 + 1:
+                case 0x206 + 1:
+                case 0x208 + 1:
+                case 0x20A + 1:
+                case 0x20C + 1:
+                case 0x20E + 1:
+                case 0x210 + 1:
+                case 0x212 + 1:
+                case 0x214 + 1:
+                case 0x216 + 1:
+                case 0x218 + 1:
+                case 0x21A + 1:
+                case 0x21C + 1:
+                case 0x21E + 1:
+                case 0x220 + 1:
+                case 0x222 + 1:
+                case 0x224 + 1:
+                case 0x226 + 1:
+                case 0x228 + 1:
+                case 0x22A + 1:
+                case 0x22C + 1:
+                case 0x22E + 1:
+                case 0x230 + 1:
+                case 0x232 + 1:
+                case 0x234 + 1:
+                case 0x236 + 1:
+                case 0x238 + 1:
+                case 0x23A + 1:
                     {
-                        DataLoader.WriteInt8(writer, Quest.instance.ScintLvl5Switches);
+                        //End skip over for bit vars
                         break;
+
                     }
                 case 0x2fb: //dream return position x
                     DataLoader.WriteInt16(writer, (int)(dreamReturn.x * Ratio));
@@ -1299,6 +1379,7 @@ public class SaveGame : Loader
         int effectCounter = 0;
         int QuestCounter = 0;
         int VariableCounter = 0;
+        int BitVariableCounter = 0;
         int arena = 0;
 
         ResetUI();
@@ -1600,11 +1681,83 @@ public class SaveGame : Loader
                             Quest.instance.variables[VariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 16);
                             break;
                         }
-                    case 0x23a:
+
+
+                    //Bit Variables
+                    case 0x1FA:   //Bit Var 0
+                    case 0x1FC:   //Bit Var 1
+                    case 0x1FE:   //Bit Var 2
+                    case 0x200:   //Bit Var 3
+                    case 0x202:   //Bit Var 4
+                    case 0x204:   //Bit Var 5
+                    case 0x206:   //Bit Var 6
+                    case 0x208:   //Bit Var 7
+                    case 0x20A:   //Bit Var 8
+                    case 0x20C:   //Bit Var 9
+                    case 0x20E:   //Bit Var 10
+                    case 0x210:   //Bit Var 11
+                    case 0x212:   //Bit Var 12
+                    case 0x214:   //Bit Var 13
+                    case 0x216:   //Bit Var 14
+                    case 0x218:   //Bit Var 15
+                    case 0x21A:   //Bit Var 16
+                    case 0x21C:   //Bit Var 17
+                    case 0x21E:   //Bit Var 18
+                    case 0x220:   //Bit Var 19
+                    case 0x222:   //Bit Var 20
+                    case 0x224:   //Bit Var 21
+                    case 0x226:   //Bit Var 22
+                    case 0x228:   //Bit Var 23
+                    case 0x22A:   //Bit Var 24
+                    case 0x22C:   //Bit Var 25
+                    case 0x22E:   //Bit Var 26
+                    case 0x230:   //Bit Var 27
+                    case 0x232:   //Bit Var 28
+                    case 0x234:   //Bit Var 29
+                    case 0x236:   //Bit Var 30
+                    case 0x238:   //Bit Var 31
+                    case 0x23A:   //Bit Var 32
                         {
-                            Quest.instance.ScintLvl5Switches = (int)DataLoader.getValAtAddress(buffer, i, 8);
+                            Quest.instance.BitVariables[BitVariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 16);
                             break;
                         }
+                    //Skip for bit variables
+                    case 0x1FA + 1:
+                    case 0x1FC + 1:
+                    case 0x1FE + 1:
+                    case 0x200 + 1:
+                    case 0x202 + 1:
+                    case 0x204 + 1:
+                    case 0x206 + 1:
+                    case 0x208 + 1:
+                    case 0x20A + 1:
+                    case 0x20C + 1:
+                    case 0x20E + 1:
+                    case 0x210 + 1:
+                    case 0x212 + 1:
+                    case 0x214 + 1:
+                    case 0x216 + 1:
+                    case 0x218 + 1:
+                    case 0x21A + 1:
+                    case 0x21C + 1:
+                    case 0x21E + 1:
+                    case 0x220 + 1:
+                    case 0x222 + 1:
+                    case 0x224 + 1:
+                    case 0x226 + 1:
+                    case 0x228 + 1:
+                    case 0x22A + 1:
+                    case 0x22C + 1:
+                    case 0x22E + 1:
+                    case 0x230 + 1:
+                    case 0x232 + 1:
+                    case 0x234 + 1:
+                    case 0x236 + 1:
+                    case 0x238 + 1:
+                    case 0x23A + 1:
+                        {//end skip for bit variables
+                            break;
+                        }   
                     case 0x2fb: ///   x-position in level
                         x_position_dream = (int)DataLoader.getValAtAddress(buffer, i, 16); break;
                     case 0x2fd: ///   y-position

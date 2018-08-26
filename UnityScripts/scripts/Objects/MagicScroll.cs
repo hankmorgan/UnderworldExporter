@@ -4,7 +4,8 @@ using System.Collections;
 public class MagicScroll : enchantment_base {
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+        if (ConversationVM.InConversation) { return false; }
+        if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable );
 			objInt().consumeObject();

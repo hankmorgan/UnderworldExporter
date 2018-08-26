@@ -243,13 +243,10 @@ public class GameWorldController : UWEBase
     /// </summary>
     public ObjectLoader[] objectList = new ObjectLoader[9];
 
-
     /// <summary>
     /// The music controller for the game
     /// </summary>
     private MusicController mus;
-
-
 
     [Header("Property Lists")]
     /// <summary>
@@ -927,8 +924,18 @@ public class GameWorldController : UWEBase
                     DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();
                     DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();
 
-                    //Load the tile and object blocks
-                    DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+                    if (_RES==GAME_UWDEMO)
+                    {//In UWDemo there is no block structure. Just copy the data directly.
+                        lev_ark_block = new DataLoader.UWBlock();
+                        lev_ark_block.DataLen = 0x7c06;
+                        lev_ark_block.Data = LevArk.lev_ark_file_data;
+                    }
+                    else
+                    {
+                        //Load the tile and object blocks
+                        DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+                    }
+
 
                     if (_RES == GAME_UW1)
                     {//Load the overlays.

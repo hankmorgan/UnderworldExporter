@@ -3523,11 +3523,23 @@ return value appears to have something to do with if the door is broken or not.
             int qty = objInt.GetQty();
             if (pStrPtr >= 0)
             {
+                string objName = "";
+                if (objInt.GetComponent<enchantment_base>())
+                {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for deadly seeker
+                    string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
+                    objName= StringController.instance.GetSimpleObjectNameUW(objInt) + " of " + DisplayEnchantment;
+                }
+                else
+                {
+                    objName = StringController.instance.GetSimpleObjectNameUW(objInt);
+                }
+                
+                //Add temporary string to string controller
                 stack.Set(
                         pStrPtr,
                         StringController.instance.AddString(
                                 conv[currConv].StringBlock,
-                                StringController.instance.GetSimpleObjectNameUW(objInt)));
+                                objName));
             }
 
             return unitValue * qty;
@@ -3553,11 +3565,12 @@ return value appears to have something to do with if the door is broken or not.
      //return value: returns 1 when the string was found, 0 when not
         string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
         string String1 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString1));
-        if (String1 == "")
+        Debug.Log("checking to see if " + String1 + " contains " + String2);
+        if (String2 == "")
         {
             return 0;//no cheating...
         }
-        if (String2.ToUpper().Contains(String1.ToUpper()))
+        if (String1.ToUpper().Contains(String2.ToUpper()))//I flipped these for zoranthus. Not sure what I will break here...
         {
             return 1;
         }

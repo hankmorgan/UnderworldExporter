@@ -54,7 +54,8 @@ public class Wand : enchantment_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+        if (ConversationVM.InConversation) { return false; }
+        if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			if ((!objInt().PickedUp))
 				{

@@ -50,6 +50,7 @@ public class enchantment_base : object_base {
 
 	public override bool use ()
 	{
+        if (ConversationVM.InConversation) { return false; }
 		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
 		{
 			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Equipable);

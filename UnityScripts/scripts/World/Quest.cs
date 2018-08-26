@@ -56,7 +56,7 @@ using System.Collections;
 /// 24: You have won a duel in the arena
 /// 25: You have defeated Zaria in the pits
 /// 26: You know about the magic scepter (for the Zoranthus)
-/// 27: You know about the sigil of binding(by bringing the scepter to zorantus)
+/// 27: You know about the sigil of binding/got the djinn bottle(by bringing the scepter to zorantus)
 /// 28: Took Krilner as a slave
 /// 29: You know Dorstag has the gem(?)
 /// 30: Dorstag refused your challenge(?)
@@ -87,7 +87,7 @@ using System.Collections;
 /// 64: Is mors dead
 /// 65: Pits related (checked by dorstag)
 /// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
-/// 104: Set when you enter scintilus level 5 (hooked variable)
+/// 104: Set when you enter scintilus level 5 (set by variable trap)
 /// 106: Meet mors gothi and got the book
 /// 107: Set after freeing praetor loth
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
@@ -103,7 +103,7 @@ using System.Collections;
 /// 121: You have defeated Dorstag
 /// 122: You have killed the bly scup ductosnore
 /// 123: Relk is dead
-/// 128: 0-128 bit field of where the lines of power have been broken. NEed to fix string replacement to implement.
+/// 128: 0-128 bit field of where the lines of power have been broken.
 /// 129: How many enemies killed in the pits (also xclock 14)
 /// 131: You are told that you are in the prison tower =1  
 /// 	You are told you are in kilhorn keep =3
@@ -114,265 +114,258 @@ using System.Collections;
 /// 134: The password for the prison tower (random value)
 /// 135: Checked by goblin in sewers  (no of worms killed on level. At more than 8 they give you fish)
 /// 143: Set to 33 after first LB conversation. Set to 3 during endgame (is this what triggers the cutscenes?)
-public class Quest : UWEBase {
+public class Quest : UWEBase
+{
+    /// <summary>
+    /// The quest variable integers
+    /// </summary>
+    /// Typically these are for story advancement and conversations.
+    public int[] QuestVariables = new int[256];
+
+    /// <summary>
+    /// The game Variables for the check/set variable traps
+    /// </summary>
+    /// Typically these are used for traps/triggers/switches.
+    public int[] variables = new int[127];
+
+    /// <summary>
+    /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
+    /// </summary>
+    public int[] BitVariables = new int[64];
+
+    /// <summary>
+    /// The x clocks tracks progress during the game and is used in firing events.
+    /// </summary>
+    /// The xclock is a range of 16 variables. When references by traps they index is -16 to get the below values.
+    /// The X Clock is tied closely to SCD.ark and the scheduled events within that file.
+    /// 1=Miranda conversations & related events in the castle
+    ///     1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)
+    ///     2 - After you visited another world.  (variable 17 is set to 16), dupre is tempted
+    ///     3 - servants getting restless
+    ///     4 - concerned about water, dupre is annoyed by patterson
+    ///     5 - Dupre is bored / dupre is fetching water
+    ///     7 - Miranda wants to talk to you pre tori murder
+    ///     8 - tori is murdered
+    ///     9 - Charles finds a key
+    ///     11 - Go see Nelson
+    ///     12 - Patterson goes postal
+    ///     13 - Patterson is dead
+    ///     14 - Gem is weak/Mors is in killorn(?)
+    ///     15 - Nystrul wants to see you again re endgame
+    ///     16 - Nystrul questions have been answered Mars Gotha comes
+    /// 2=Nystrul and blackrock gems treated
+    /// 14=Tracks no of enemies killed in pits. Does things like update graffiti.
+    /// 15=Used in multiple convos. Possibly tells the game to process a change when updated?
+    public int[] x_clocks = new int[16];
 
 
+    /// <summary>
+    /// Item ID for the sword of justice
+    /// </summary>
+    public const int TalismanSword = 10;
+    /// <summary>
+    /// Item ID for the shield of valor
+    /// </summary>
+    public const int TalismanShield = 55;
+    /// <summary>
+    /// Item id for the Taper of sacrifice
+    /// </summary>
+    public const int TalismanTaper = 147;
+    public const int TalismanTaperLit = 151;
+    /// <summary>
+    /// Item Id for the cup of wonder.
+    /// </summary>
+    public const int TalismanCup = 174;
+    /// <summary>
+    /// Item ID for the book of honesty
+    /// </summary>
+    public const int TalismanBook = 310;
+    /// <summary>
+    /// Item Id for the wine of compassion.
+    /// </summary>
+    public const int TalismanWine = 191;
+    /// <summary>
+    /// Item ID for the ring of humility
+    /// </summary>
+    public const int TalismanRing = 54;
+    /// <summary>
+    /// Item ID for the standard of honour.
+    /// </summary>
+    public const int TalismanHonour = 287;
 
-		/// <summary>
-		/// Item ID for the sword of justice
-		/// </summary>
-		public const int TalismanSword=10;
-		/// <summary>
-		/// Item ID for the shield of valor
-		/// </summary>
-		public const int TalismanShield=55;
-		/// <summary>
-		/// Item id for the Taper of sacrifice
-		/// </summary>
-		public const int TalismanTaper=147;
-		public const int TalismanTaperLit=151;
-		/// <summary>
-		/// Item Id for the cup of wonder.
-		/// </summary>
-		public const int TalismanCup =174;
-		/// <summary>
-		/// Item ID for the book of honesty
-		/// </summary>
-		public const int TalismanBook=310;
-		/// <summary>
-		/// Item Id for the wine of compassion.
-		/// </summary>
-		public const int TalismanWine=191;
-		/// <summary>
-		/// Item ID for the ring of humility
-		/// </summary>
-		public const int TalismanRing=54;
-		/// <summary>
-		/// Item ID for the standard of honour.
-		/// </summary>
-		public const int TalismanHonour=287;
+    /// <summary>
+    /// The no of talismans to still be cast into abyss in order to complete the game.
+    /// </summary>
+    public int TalismansRemaining; //= new bool[8];
 
-		/// <summary>
-		/// The quest variable integers
-		/// </summary>
-	public int[] QuestVariables=new int[256];
+    /// <summary>
+    /// Tracks which garamon dream we are at.
+    /// </summary>
+    public int GaramonDream;//The next dream to play
 
-	/// <summary>
-	/// The no of talismans to still be cast into abyss in order to complete the game.
-	/// </summary>
-	public int TalismansRemaining; //= new bool[8];
+    /// <summary>
+    /// Tracks which incense dream we are at
+    /// </summary>
+    public int IncenseDream;
 
-		/// <summary>
-		/// Tracks which garamon dream we are at.
-		/// </summary>
-	public int GaramonDream;//The next dreams to play
-		/// <summary>
-		/// Tracks which incense dream we are at
-		/// </summary>
-	public int IncenseDream;
+    /// <summary>
+    /// Tracks the last day that there was a garamon dream.
+    /// </summary>
+    public int DayGaramonDream = -1;
 
-	/// <summary>
-	/// Tracks the last day that there was a garamon dream.
-	/// </summary>
-	public int DayGaramonDream=-1;
+    /// <summary>
+    /// Is the orb on tybals level destroyed.
+    /// </summary>
+    public bool isOrbDestroyed;
 
-		/// <summary>
-		/// Is tybal dead.
-		/// </summary>
-	//public bool isTybalDead;
+    /// <summary>
+    /// Has Garamon been buried. If so talismans can now be sacrificed.
+    /// </summary>
+    public bool isGaramonBuried;
 
-		/// <summary>
-		/// Is the orb on tybals level destroyed.
-		/// </summary>
-		public bool isOrbDestroyed;
+    /// <summary>
+    /// Is the cup of wonder found.
+    /// </summary>
+    public bool isCupFound;
 
-		/// <summary>
-		/// Has Garamon been buried. If so talismans can now be sacrificed.
-		/// </summary>
-		public bool isGaramonBuried;
+    /// <summary>
+    /// Is the player fighting in arena.
+    /// </summary>
+    public bool FightingInArena = false;
 
+    /// <summary>
+    /// The arena opponents item ids
+    /// </summary>
+    public int[] ArenaOpponents = new int[5];
 
-		/// <summary>
-		/// Is the cup of wonder found.
-		/// </summary>
-		public bool isCupFound;
+    /// <summary>
+    /// Has the player eaten a dream plant.
+    /// </summary>
+    public bool DreamPlantEaten = false;
 
-	/// <summary>
-	/// The game Variables for the check/set variable traps
-	/// </summary>
-	public int[] variables = new int[127];
+    /// <summary>
+    /// Is the player in the dream world
+    /// </summary>
+    public bool InDreamWorld = false;
 
-		/// <summary>
-		/// Is the player fighting in arena.
-		/// </summary>
-	public bool FightingInArena=false;
+    public static Quest instance;
 
-		/// <summary>
-		/// The arena opponents item ids
-		/// </summary>
-	public int[] ArenaOpponents =new int[5];
+    void Awake()
+    {
+        instance = this;
+    }
 
-
-	/// <summary>
-	/// Has the player eaten a dream plant.
-	/// </summary>
-	public bool DreamPlantEaten=false;
-
-	/// <summary>
-	/// Is the player in the dream world
-	/// </summary>
-	public bool InDreamWorld=false;
-
-		/// <summary>
-		/// The scint lvl5 switches.
-		/// </summary>
-		public int ScintLvl5Switches=0;
-
-	/// <summary>
-	/// The x clocks tracks progress during the game and is used in firing events
-	/// </summary>
-	/// My original theory was this was related to game variables but this no longer seems to hold true. The xclock values are stored in player.dat
-	/// Possibly these are hard coded events related to game progress. Some gamevariables seem to act as pointers to x_clocks
-	/// Some known values
-	/// 1=Miranda conversations & related events in the castle
-		/// 1 - Nystrul is curious about exploration.Set after entering lvl 1 from the route downwards. (set variable traps 17 may be related)
-		/// 2 - After you visited another world.  (variable 17 is set to 16), dupre is tempted
-		/// 3 - servants getting restless
-		/// 4 - concerned about water, dupre is annoyed by patterson
-		/// 5 - Dupre is bored / dupre is fetching water
-		/// 7 - Miranda wants to talk to you pre tori murder
-		/// 8 - tori is murdered
-		/// 9 - Charles finds a key
-		/// 11 - Go see Nelson
-		/// 12 - Patterson goes postal
-		/// 13 - Patterson is dead
-		/// 14 - Gem is weak/Mors is in killorn(?)
-		/// 15 - Nystrul wants to see you again re endgame
-		/// 16 - Nystrul questions have been answered Mars Gotha comes
-	/// 2=Nystrul and blackrock gems treated
-	/// 14= Track no of enemies killed in pits
-	/// 15=Used in multiple convos. Possibly tells the game to process a change
-	public int[] x_clocks=new int[16];
-
-	public static Quest instance;
-
-	void Awake()
-	{
-		instance=this;
-	}
-
-	void Start()
-	{
-		switch (_RES)
-		{
-		case GAME_UW2:
-			QuestVariables=new int[147];
-			break;
-		default:					
-			QuestVariables=new int[36];
-			break;
-		}
-	}
+    void Start()
+    {
+        switch (_RES)
+        {
+            case GAME_UW2:
+                QuestVariables = new int[147];
+                break;
+            default:
+                QuestVariables = new int[36];
+                break;
+        }
+    }
 
 
-	/// <summary>
-	/// Gets the next incense dream
-	/// </summary>
-	/// <returns>The incense dream.</returns>
-	public int getIncenseDream()
-	{
-		if (IncenseDream>=3)
-		{//Loop around
-			IncenseDream=0;
-		}
-		return IncenseDream++;
-	}
+    /// <summary>
+    /// Gets the next incense dream
+    /// </summary>
+    /// <returns>The incense dream.</returns>
+    public int getIncenseDream()
+    {
+        if (IncenseDream >= 3)
+        {//Loop around
+            IncenseDream = 0;
+        }
+        return IncenseDream++;
+    }
 
 
-		/// <summary>
-		/// Hooks certain quest variables into the xclock and quest variables.
-		/// </summary>
-		/// <returns><c>true</c>, if clock hook was xed, <c>false</c> otherwise.</returns>
-		/// <param name="index">Index.</param>
-		/// <param name="value">Value.</param>
-		/// <param name="operation">Operation.</param>
-		public bool x_clock_hook(int index,int value,int operation)
-		{
-			switch (index)
-			{
-				case 17://Alias for x_clock 1
-				case 18:
-				case 19://Djinn capture
-				case 20:
-				case 21:
-				case 22:
-				case 23:
-				case 24:
-				case 25:
-				case 26:
-				case 27:
-				case 28:
-				case 29:
-				case 30:
-				case 31:
-					{
-						switch(operation)
-						{
+    ///// <summary>
+    ///// Hooks certain quest variables into the xclock and quest variables.
+    ///// </summary>
+    ///// <returns><c>true</c>, if clock hook was xed, <c>false</c> otherwise.</returns>
+    ///// <param name="index">Index.</param>
+    ///// <param name="value">Value.</param>
+    ///// <param name="operation">Operation.</param>
+    //public bool x_clock_hook(int index, int value, int operation)
+    //{
+    //    switch (index)
+    //    {
+    //        case 17://Alias for x_clock 1
+    //        case 18:
+    //        case 19://Djinn capture
+    //        case 20:
+    //        case 21:
+    //        case 22:
+    //        case 23:
+    //        case 24:
+    //        case 25:
+    //        case 26:
+    //        case 27:
+    //        case 28:
+    //        case 29:
+    //        case 30:
+    //        case 31:
+    //            {
+    //                switch (operation)
+    //                {
 
-						case 0://add
-							{
-								x_clocks[index-16]+=value;	
-								Debug.Log("x_clock_hook = " + index + " incremented by " + value + " to " + x_clocks[index-16]);		
-								return true;												
-							}
+    //                    case 0://add
+    //                        {
+    //                            x_clocks[index - 16] += value;
+    //                            Debug.Log("x_clock_hook = " + index + " incremented by " + value + " to " + x_clocks[index - 16]);
+    //                            return true;
+    //                        }
 
-						case 2: //set
-							if (x_clocks[index-16]< value)
-							{
-								x_clocks[index-16]=value;
-								Debug.Log("x_clock_hook = " + index + " set to " + value);		
-							}
-							else
-							{
-								Debug.Log("x_clock_hook (skipped) = " + index + " set to " + value);	
-							}
-							return true;
-						}
+    //                    case 2: //set
+    //                        if (x_clocks[index - 16] < value)
+    //                        {
+    //                            x_clocks[index - 16] = value;
+    //                            Debug.Log("x_clock_hook = " + index + " set to " + value);
+    //                        }
+    //                        else
+    //                        {
+    //                            Debug.Log("x_clock_hook (skipped) = " + index + " set to " + value);
+    //                        }
+    //                        return true;
+    //                }
 
-					return true;
-					}
-				case 32://Switches on scintilus level 5
-						{
-							
-							if (operation==5)//xor
-							{
-								Debug.Log("Scintillus switch = " + index + " xor'ing " + value);
-								ScintLvl5Switches ^= value;
-								return true;
-							}
-							else
-							{
-								Debug.Log("Unimplemented operation for Scintillus switch = " + index + " bit " + value);
-								return false;
-							}
-							
-						}
-				case 51://This changes a quest variable! Find out and document the variable in question. (scint lvl 1 arrow trap)
-				case 104://Used in scintilus level 5.
-					{
-						if (GameWorldController.instance.LevelNo == 40)
-						{
-							Debug.Log("special case quest/variable scint lvl 1 = " + index + "," + value);
-							return false;
-						}
-						else
-						{
-								Debug.Log("quest/variable = " + index + " set to " + value);
-								Quest.instance.QuestVariables[index]=value;
-								return true;	
-						}
-					}
-			}
-		return false;
-		}
+    //                return true;
+    //            }
+    //        case 32://Switches on scintilus level 5
+    //            {
+    //                if (operation == 5)//xor
+    //                {
+    //                    Debug.Log("Scintillus switch = " + index + " xor'ing " + value);
+    //                   // ScintLvl5Switches ^= value;
+    //                    return true;
+    //                }
+    //                else
+    //                {
+    //                    Debug.Log("Unimplemented operation for Scintillus switch = " + index + " bit " + value);
+    //                    return false;
+    //                }
+
+    //            }
+    //        case 51://This changes a quest variable! Find out and document the variable in question. (scint lvl 1 arrow trap)
+    //        case 104://Used in scintilus level 5.
+    //            {
+    //                if (GameWorldController.instance.LevelNo == 40)
+    //                {
+    //                    Debug.Log("special case quest/variable scint lvl 1 = " + index + "," + value);
+    //                    return false;
+    //                }
+    //                else
+    //                {
+    //                    Debug.Log("quest/variable = " + index + " set to " + value);
+    //                    Quest.instance.QuestVariables[index] = value;
+    //                    return true;
+    //                }
+    //            }
+    //    }
+    //    return false;
+    //}
 }

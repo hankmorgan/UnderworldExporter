@@ -53,6 +53,9 @@ public class a_set_variable_trap : a_variable_trap
         {
             switch (xpos)
             {
+                case 1://Bit Variables
+                    Set_Variables(Quest.instance.BitVariables, zpos, heading, this, "bitvars");
+                    break;
                 case 0://game variables 
                     Set_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
                     break;
@@ -67,19 +70,10 @@ public class a_set_variable_trap : a_variable_trap
                     else
                     {
                         Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().objectloaderinfo.index);
-                    }
-                    
+                    }                    
                     break;
-                    //Set_Variables(Quest.instance.x_clocks, zpos & 0x1F, heading, this);
-                    //if (Quest.instance.x_clocks[zpos & 0x1F]< VariableValue())
-                    //{
-                    //Debug.Log("XClock + " + (zpos & 0x1F) + " Operation " + heading);
-                    //Quest.instance.x_clocks[zpos & 0x1F] = VariableValue();
-                    //}
-                    //break;
-                case 1://unknown
                 default:
-                    Debug.Log("unknown usage of set trap");
+                    Debug.Log("unknown usage of set trap " + xpos + " " + this.name);
                     break;
             }
         }
