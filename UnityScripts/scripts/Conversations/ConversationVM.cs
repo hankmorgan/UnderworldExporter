@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 public class ConversationVM : UWEBase
 {
 
-
     //TODO:Make sure pickups support containers
 
     /// Is the user entering a quantity
@@ -532,7 +531,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 
         ///Clear the trade slots for the npcs
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             UWHUD.instance.npcTrade[i++].clear();
         }
@@ -1200,7 +1199,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
 
         ///Return any items in the trade area to their owner
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot npcSlot = UWHUD.instance.playerTrade[i];
             if (npcSlot.objectInSlot != "")
@@ -1233,7 +1232,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
 
         ///Return any items in the trade area to their owner
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             UWHUD.instance.npcTrade[i].clear();
         }
@@ -2617,7 +2616,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     public int show_inv(int startObjectPos, int startObjectIDs)
     {
         int j = 0;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];
             if (pcSlot.isSelected())
@@ -2889,7 +2888,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         {
             if (cn.GetItemAt(i) != "")
             {
-                if (itemCount <= 3)
+                if (itemCount <= TradeSlot.TradeSlotUBound)
                 {//Just take the first four items
                     ObjectInteraction itemToTrade = cn.GetGameObjectAt(i).GetComponent<ObjectInteraction>(); //GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
                     TradeSlot ts = UWHUD.instance.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
@@ -2930,7 +2929,7 @@ description:  judges current trade (using the "appraise" skill) and prints resul
         //Debug.Log ("Do Judgment");
 
         int playerObjectCount = 0; int npcObjectCount = 0;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot npcSlot = UWHUD.instance.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
@@ -2966,7 +2965,7 @@ description:  declines trade offer (?)
 */
 
         Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
             if (pcSlot.objectInSlot != "")
@@ -2989,7 +2988,7 @@ description:  declines trade offer (?)
             }
         }
 
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {//Clear out the trade slots.
             UWHUD.instance.npcTrade[i].clear();
         }
@@ -3201,7 +3200,7 @@ return value: returns 1 when player persuaded the NPC, 0 else
     void RestorePCsInventory(NPC npc)
     {
         Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];
             if (pcSlot.objectInSlot != "")
@@ -3941,7 +3940,7 @@ return value: none
      //	description:  searches for item in barter area
      //	return value: returns pos in inventory object list, or 0 if not found
      // if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             if (UWHUD.instance.playerTrade[i].isSelected())
             {
@@ -4046,7 +4045,7 @@ return value: 1 when found (?)
         stack.Set(ptrNoOfSlots, 0);
         stack.Set(ptrCount, 0);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             if (UWHUD.instance.playerTrade[i].isSelected())
             {
@@ -4498,7 +4497,7 @@ description:  places a generated object in underworld
     {
         string objName = ObjectMasterList[index];
         if (objName == "") { return null; }
-        for (int i = 0; i <= UWHUD.instance.playerTrade.GetUpperBound(0); i++)
+        for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             if (UWHUD.instance.playerTrade[i].objectInSlot == objName)
             {

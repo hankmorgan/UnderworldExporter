@@ -417,6 +417,8 @@ public class UWCharacter : Character
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(9, 4));
                 break;
             default://resurrect in the gem chamber
+                //000~001~361~You regain awareness in the cavern containing the pulsating blackrock gem. \n
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 361));
                 GameWorldController.instance.SwitchLevel((short)4, 30, 39);//TODO:confirm exact co-ords
                 break;
         }
@@ -607,10 +609,7 @@ public class UWCharacter : Character
         {
             onLava = false;
         }
-
-
-
-
+        
         if (IceCurrentVelocity != Vector3.zero)
         {
             if (onIce)

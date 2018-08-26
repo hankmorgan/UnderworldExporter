@@ -76,7 +76,7 @@ using System.Collections;
 /// 48: You have dreamed about the void
 /// 49: Bishop tells you about the gem.
 /// 50: The keep is going to crash.
-/// 
+/// 51: You have visited the ice caves (britannia becomes icy)
 /// 54: Checked by Mors Gotha? related to keep crashing
 /// 55: Banner of Killorn returned (based on Scd.ark research)
 /// 58: Set when meeting bishop. Bishop tells you about altara
@@ -91,7 +91,7 @@ using System.Collections;
 /// 106: Meet mors gothi and got the book
 /// 107: Set after freeing praetor loth
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
-/// 110: Checked when talking to LB. The guardians forces are attacking
+/// 110: Checked when talking to LB and Dupre. The guardians forces are attacking
 /// 112: checked when talking to LB. You have been fighting with the others
 /// 114: checked when talking to LB. The servants are restless
 /// 115: checked when talking to LB. The servants are on strike
@@ -266,7 +266,7 @@ public class Quest : UWEBase {
 		switch (_RES)
 		{
 		case GAME_UW2:
-			QuestVariables=new int[200];//TODO:Figure out how many variables UW2 needs
+			QuestVariables=new int[147];
 			break;
 		default:					
 			QuestVariables=new int[36];

@@ -1826,18 +1826,18 @@ public class GameWorldController : UWEBase
     /// <param name="objList"></param>
     void CreateObjectReport(ObjectLoaderInfo[] objList, int ReportLevelNo)
     {
-        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");//, true);
+        StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_objectreport.xml");// true);
         writer.WriteLine("<ObjectReport level =" + ReportLevelNo + "> ");
         //writer.WriteLine("\t<level>" + ReportLevelNo + "</level>");
         for (int o = 0; o <= objList.GetUpperBound(0); o++)
         {
             if (((objList[o].InUseFlag == 0) && (!ShowOnlyInUse)) || (objList[o].InUseFlag == 1))
             {
-               // if
+                //if
                 //((objList[o].GetItemType() == ObjectInteraction.A_CHECK_VARIABLE_TRAP)||(objList[o].GetItemType() == ObjectInteraction.A_SET_VARIABLE_TRAP))
-               // {
+                //{
                     WriteObjectXML(objList, writer, o);
-               // }               
+                //}               
             }
         }
 
@@ -1863,6 +1863,7 @@ public class GameWorldController : UWEBase
         writer.WriteLine("\t\t\t<Position>");
         writer.WriteLine("\t\t\t\t<ObjectTileX>" + objList[o].ObjectTileX + "</ObjectTileX>");
         writer.WriteLine("\t\t\t\t<ObjectTileY>" + objList[o].ObjectTileY + "</ObjectTileY>");
+        writer.WriteLine("\t\t\t\t<heading>" + objList[o].heading + "</heading>");
         writer.WriteLine("\t\t\t\t<xpos>" + objList[o].xpos + "</xpos>");
         writer.WriteLine("\t\t\t\t<ypos>" + objList[o].ypos + "</ypos>");
         writer.WriteLine("\t\t\t\t<zpos>" + objList[o].zpos + "</zpos>");

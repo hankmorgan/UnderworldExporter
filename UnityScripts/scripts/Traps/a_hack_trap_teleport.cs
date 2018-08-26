@@ -188,12 +188,6 @@ public class a_hack_trap_teleport : a_hack_trap {
 		}
 	}
 
-	public override void PostActivate (object_base src)
-	{
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
-    }
-
 
     /// <summary>
     /// Shows or hides the world select UI element
@@ -210,7 +204,19 @@ public class a_hack_trap_teleport : a_hack_trap {
             &&
             (TileMap.visitTileY <= 41)
             )
-        {            
+        {        
+            for (int i=1; i<=UWHUD.instance.InWorldGemSelect.GetUpperBound(0);i++)
+            {//Skip britannia.
+                if (availableWorlds[i-1])
+                {
+                    UWHUD.instance.InWorldGemSelect[i].SetOn();
+                }
+                else
+                {
+                    UWHUD.instance.InWorldGemSelect[i].SetOff();
+                }
+            }
+
             UWHUD.instance.EnableDisableControl(UWHUD.instance.WorldSelect.gameObject,
                 UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CONV
                 && UWHUD.instance.CURRENT_HUD_MODE != UWHUD.HUD_MODE_CUTS_FULL

@@ -4,8 +4,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class TradeSlot : GuiBase {
+    public static int TradeSlotUBound = 3;//5 for UW2 0,1,2,3
 
-	public bool PlayerSlot=false;
+    public bool PlayerSlot=false;
 	public int SlotNo;
 	//static UWCharacter UWCharacter.Instance;
 	//static PlayerInventory pInv;
@@ -29,6 +30,10 @@ public class TradeSlot : GuiBase {
 	public override void Start()
 	{
 		base.Start();
+        if (_RES==GAME_UW2)
+        {
+            TradeSlotUBound = 5;
+        }
 		SlotImage=this.GetComponent<RawImage>();
 		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
 		//IndicatorSelected = Resources.Load<Texture2D>(_RES +"/HUD/Cursors/cursors_0018");

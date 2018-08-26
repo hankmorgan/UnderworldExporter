@@ -1450,6 +1450,15 @@ public class SaveGame : Loader
                     case 0xEF:  //Quest 136
                     case 0xF0:  //Quest 137
                     case 0xF1:  //Quest 138
+                                //Additional quests
+                    case 0xF2:  //Quest 139
+                    case 0xF3:  //Quest 140
+                    case 0xF4:  //Quest 141
+                    case 0xF5:  //Quest 142
+                    case 0xF6:  //Quest 143
+                    case 0xF7:  //Quest 144
+                    case 0xF8:  //Quest 145
+                    case 0xF9:  //Quest 146
                         {//TODO:These quests are not tested.
                             Quest.instance.QuestVariables[i - 103] = (int)DataLoader.getValAtAddress(buffer, i, 8);
                             break;
