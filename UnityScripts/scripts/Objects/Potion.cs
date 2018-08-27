@@ -61,7 +61,7 @@ public class Potion : enchantment_base
         }
         else
         {
-            return link - 256;//527;
+            return base.GetActualSpellIndex(); //link - 256;//527;
         }        
     }
 

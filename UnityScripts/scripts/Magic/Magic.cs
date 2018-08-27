@@ -227,6 +227,10 @@ public class Magic : UWEBase
                 }
         }//magicwords
 
+        if (_RES==GAME_UW2)
+        {
+            TestSpellLevel--;//UW2 seems to have different rules here. To confirm
+        }
         if (Mathf.Max(Mathf.Round(casterUW.CharLevel / 2), 1) < TestSpellLevel)
         {//Not experienced enough
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_are_not_experienced_enough_to_cast_spells_of_that_circle_));
@@ -959,6 +963,7 @@ public class Magic : UWEBase
                     if (_RES == GAME_UW2)
                     {
                         Cast_ResistanceSpells(caster, SpellEffect.UW2_Spell_Effect_IronFlesh);
+                        IronFleshXClock();
                     }
                     else
                     {
@@ -5620,6 +5625,10 @@ public class Magic : UWEBase
                 if (PassiveArrayIndex != -1)
                 {
                     Cast_Resistance(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex);
+                    if (EffectID == SpellEffect.UW2_Spell_Effect_IronFlesh)
+                    {
+                        IronFleshXClock();
+                    }
                     SpellResultType = SpellResultPassive;
                 }
 
@@ -5885,6 +5894,19 @@ public class Magic : UWEBase
                 return UWCharacter.Instance.ActiveSpell[ActiveArrayIndex];
             default:
                 return null;
+        }
+    }
+
+    /// <summary>
+    /// Ironflesh is used to capture the djinn
+    /// </summary>
+    void IronFleshXClock()
+    {
+        if (Quest.instance.x_clocks[3]==4)
+        {
+            Quest.instance.x_clocks[3] = 5;
+            //000~001~335~The baked mud hardens into a clear glaze. \n
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 335));
         }
     }
 }

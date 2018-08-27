@@ -146,6 +146,7 @@ public class ObjectInteraction : UWEBase
     public const int SPECIAL_EFFECT = 131;
     public const int DRINK = 132;
     public const int A_BRIDGE_TRAP = 133;
+    public const int A_DJINN_BOTTLE = 134;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -2112,6 +2113,9 @@ public class ObjectInteraction : UWEBase
                 break;
             case MAPPIECE:
                 myObj.AddComponent<MapPiece>();
+                break;
+            case A_DJINN_BOTTLE:
+                myObj.AddComponent<DjinnBottle>();
                 break;
 
             //case BENCH:

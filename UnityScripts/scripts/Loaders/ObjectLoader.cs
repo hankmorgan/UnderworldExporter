@@ -1220,19 +1220,26 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.DOOR:
             case ObjectInteraction.HIDDENDOOR:
             case ObjectInteraction.PORTCULLIS:
-                return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
+                {
+                    return "door_" + currObj.ObjectTileX.ToString("d3") + "_" + currObj.ObjectTileY.ToString("d3");
+                }                
             case ObjectInteraction.NPC_TYPE:
-                if (currObj.npc_whoami!=0)
                 {
-                    return StringController.instance.GetString(7, currObj.npc_whoami + 16) +"_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString(); 
-                }
-                else
-                {
-                    return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                    string npcname = StringController.instance.GetString(7, currObj.npc_whoami + 16);
+                    if ((currObj.npc_whoami != 0) && (npcname != ""))
+                    {
+                        return npcname + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                    }
+                    else
+                    {
+                        return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                    }
                 }
             default:
-                return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
-        }
+                {
+                    return currObj.getDesc() + "_" + currObj.ObjectTileX.ToString("d2") + "_" + currObj.ObjectTileY.ToString("d2") + "_" + currObj.levelno.ToString("d2") + "_" + currObj.index.ToString("d4") + "_" + currObj.guid.ToString();
+                }                
+        }       
     }
 
     public static string UniqueObjectNameEditor(ObjectLoaderInfo currObj)

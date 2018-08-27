@@ -4620,7 +4620,7 @@ public class TileMapRenderer : Loader
             Tile.layer = LayerMask.NameToLayer("Water");
             if (t.tileType != TILE_SOLID)
             {
-                AddWaterContact(Tile);
+                AddWaterContact(Tile, t);
             }
         }
     }
@@ -4849,8 +4849,16 @@ public class TileMapRenderer : Loader
 
 
 
-    static void AddWaterContact(GameObject tile)
+    static void AddWaterContact(GameObject tile, TileInfo t)
     {
+        if (_RES==GAME_UW2)
+        {
+            if (FloorTexture(fTOP, t) ==193)
+            {
+                tile.AddComponent<TileContactMud>();
+                return;
+            }           
+        }
         tile.AddComponent<TileContactWater>();
     }
 

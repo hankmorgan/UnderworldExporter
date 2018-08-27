@@ -60,6 +60,18 @@ the left, right, center button combination on Level3.
                 {
                     switch (xpos)
                     {//In UW2 xpos controls what set of variables is looked at/
+                        case 3: //An xclock list
+                            {
+                                if (zpos - 16 >= 0)
+                                {
+                                    result= Check_Variables(Quest.instance.x_clocks, zpos - 16, heading, this, "xclocks");
+                                }
+                                else
+                                {
+                                    Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().objectloaderinfo.index);
+                                }
+                                break;
+                            }
                         case 4://A game var list
                             result = Check_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
                             break;
@@ -69,7 +81,7 @@ the left, right, center button combination on Level3.
                         case 6://A quest flag list
                               result = Check_Variables(Quest.instance.QuestVariables, zpos, heading, this, "questvars");
                             break;
-                        default://TODO: Xclock must be used here as well But what value?
+                        default:
                             Debug.Log("unknown usage of check trap " + xpos + " " + this.name);
                             break;
                     }

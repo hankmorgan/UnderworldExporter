@@ -16,6 +16,7 @@ public class CameraShake : UWEBase
 
     Vector3 originalPos;
 
+    public bool shaking = false;
     public static CameraShake instance;
 
     void Awake()
@@ -29,12 +30,14 @@ public class CameraShake : UWEBase
 
     public void ShakeEarthQuake(float duration)
     {
+        if (shaking) { return; }//Don't add more shake
         shakeAmount = 0.7f;
         shakeDuration = duration;
     }
 
     public void ShakeCombat(float duration)
     {
+        if (shaking) { return; }//Don't add more shake
         shakeAmount = 0.1f;
         shakeDuration = duration;
     }
@@ -48,12 +51,14 @@ public class CameraShake : UWEBase
     {
         if (shakeDuration > 0)
         {
+            shaking = true;
             camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
         else
         {
+            shaking = false;
             shakeDuration = 0f;
             camTransform.localPosition = originalPos;
         }

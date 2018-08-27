@@ -3526,8 +3526,9 @@ return value appears to have something to do with if the door is broken or not.
                 string objName = "";
                 if (objInt.GetComponent<enchantment_base>())
                 {//This is done so Zoranthus can id the scepter of deadly seeker properly. He searches for deadly seeker
-                    string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
-                    objName= StringController.instance.GetSimpleObjectNameUW(objInt) + " of " + DisplayEnchantment;
+                    //string DisplayEnchantment = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
+                    //objName= StringController.instance.GetSimpleObjectNameUW(objInt) + " of " + DisplayEnchantment;
+                    objName = objInt.GetComponent<enchantment_base>().DisplayEnchantment;
                 }
                 else
                 {
@@ -3565,12 +3566,12 @@ return value appears to have something to do with if the door is broken or not.
      //return value: returns 1 when the string was found, 0 when not
         string String2 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString2));
         string String1 = StringController.instance.GetString(conv[currConv].StringBlock, stack.at(pString1));
-        Debug.Log("checking to see if " + String1 + " contains " + String2);
-        if (String2 == "")
+        Debug.Log("checking to see if " + String2 + " contains " + String1);
+        if (String1.Trim() == "")
         {
             return 0;//no cheating...
         }
-        if (String1.ToUpper().Contains(String2.ToUpper()))//I flipped these for zoranthus. Not sure what I will break here...
+        if (String2.ToUpper().Contains(String1.ToUpper())) 
         {
             return 1;
         }

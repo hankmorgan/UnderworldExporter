@@ -14,9 +14,6 @@ public class UWCharacter : Character
     public const float extraJumpHeight = 0.8f;
     public const float extraJumpHeightLeap = 1.2f;
 
-
-
-    public GameObject toTest;
     public float angle;
     public string[] LayersForRay = new string[] { "Water", "MapMesh", "Lava", "Ice" };
     public Vector3 Rayposition;//= //transform.position;
@@ -541,16 +538,150 @@ public class UWCharacter : Character
             }
             return;
         }
-        if (toTest != null)
-        {
-            Vector3 dstPosition = new Vector3(toTest.transform.position.x, 0, toTest.transform.position.z);
-            Vector3 srcPosition = new Vector3(this.transform.position.x, 0, this.transform.position.z);
-            angle = Mathf.Atan2(dstPosition.z - srcPosition.z, dstPosition.x - srcPosition.x) * 180 / Mathf.PI;
-            angle += 180f;
-        }
 
+        //Check if player is on ground.
         Grounded = IsGrounded();
 
+        if (_RES==GAME_UW2)
+        {//Currents only occur in UW2.
+            TerrainAndCurrentsUpdate();
+        }        
+
+        base.Update();
+
+        FallDamageUpdate();
+
+        if (_RES==GAME_UW2)
+        {
+            BounceUpdate();//For handling the bounce spell
+        }        
+
+        if (EditorMode)
+        {
+            CurVIT = MaxVIT;
+        }
+
+        TeleportUpdate();//Control positioning after teleportation.
+
+        InventoryUpdate();//Update inventory display
+
+        if ((WindowDetectUW.WaitingForInput == true) && (Instrument.PlayingInstrument == false))//TODO:Make this cleaner!!
+        {//TODO: This should be in window detect
+            UWHUD.instance.InputControl.Select();
+        }
+        if ((CurVIT <= 0) && (Death == false))
+        {
+            PlayerDeath();
+            return;
+        }
+
+        if (Death == true)
+        {
+            //Still processing death.
+            return;
+        }
+        if (_RES == GAME_UW2)
+        {
+            ParalyzeUpdate();
+        }
+        if (playerCam.enabled == true)
+        {
+            SwimUpdate();
+        }
+        if (play_poison > 0)
+        {
+            PoisonUpdate();
+        }
+
+        playerMotor.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
+
+        if (_RES == GAME_UW2)
+        {
+            DreamWorldUpdate();
+        }
+
+        if ((isFlying) && (!Grounded))
+        {//Flying spell
+            FlyingMode();
+        }
+        else
+        {
+            if (isFloating)
+            {
+                playerMotor.movement.maxFallSpeed = 0.1f;//Default
+            }
+            else
+            {
+                playerMotor.movement.maxFallSpeed = 20.0f;//Default
+                playerMotor.movement.maxForwardSpeed = walkSpeed * speedMultiplier * swimSpeedMultiplier;
+                playerMotor.movement.maxSidewaysSpeed = playerMotor.movement.maxForwardSpeed * 2 / 3;
+                playerMotor.movement.maxBackwardsSpeed = playerMotor.movement.maxForwardSpeed / 3;
+            }
+        }
+
+        if (isLeaping)
+        {//Jump spell						
+            playerMotor.jumping.baseHeight = baseJumpHeight;
+            playerMotor.jumping.extraHeight = extraJumpHeightLeap;
+        }
+        else
+        {
+            playerMotor.jumping.baseHeight = baseJumpHeight;
+            playerMotor.jumping.extraHeight = extraJumpHeight;
+        }
+
+        if (isRoaming)//Magic eye spell
+        {
+            playerMotor.movement.maxFallSpeed = 0.0f;
+        }
+        if ((!isSpeeding) && (!onIce))
+        {
+            speedMultiplier = 1f;
+        }
+
+        //MusicController.instance.
+        WeaponDrawn = (InteractionMode == UWCharacter.InteractionModeAttack);
+
+        if (PlayerMagic.ReadiedSpell != "")
+        {//Player has a spell thats about to be cast. All other activity is ignored.	
+            SpellMode();
+            return;
+        }
+
+        if (UWHUD.instance.window.JustClicked == false)
+        {
+            if (Paralyzed == false)
+            {
+                PlayerCombat.PlayerCombatIdle();
+            }
+        }
+
+
+        if (onLava == true)
+        {
+            OnLavaUpdate();
+        }
+        else
+        {
+            lavaDamageTimer = 0;
+        }
+
+        //Calculate how visible the player is.
+        if (LightActive)//The player has a light and is therefore visible at max range.
+        {
+            DetectionRange = BaseDetectionRange;
+        }
+        else
+        {//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
+            DetectionRange = MinDetectionRange + ((BaseDetectionRange - MinDetectionRange) * ((30.0f - (GetBaseStealthLevel() + StealthLevel)) / 30.0f));
+        }
+    }
+
+    /// <summary>
+    /// Updates the player if they are subject to ice, water currents and the like.
+    /// </summary>
+    private void TerrainAndCurrentsUpdate()
+    {
         switch (terrainType)
         {//Check if the player is subject to a water current.
             case TerrainDatLoader.TerrainTypes.Lava:
@@ -609,7 +740,7 @@ public class UWCharacter : Character
         {
             onLava = false;
         }
-        
+
         if (IceCurrentVelocity != Vector3.zero)
         {
             if (onIce)
@@ -629,12 +760,123 @@ public class UWCharacter : Character
             );
         }
         onIcePrev = onIce;
+    }
+
+    /// <summary>
+    /// Update the player when on lava
+    /// </summary>
+    private void OnLavaUpdate()
+    {
+        if (!isFireProof())
+        {
+            lavaDamageTimer += Time.deltaTime;
+            if (lavaDamageTimer >= 1.0f)//Take Damage every 1 second.
+            {
+                ApplyDamage(10);
+                lavaDamageTimer = 0.0f;
+            }
+        }
+        if (_RES == GAME_UW2)
+        {//Stepped in Lava after covering in basilisk oil.
+            if (Quest.instance.x_clocks[3] == 3)
+            {
+                Quest.instance.x_clocks[3] = 4;
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 334));
+            }
+        }
+    }
 
 
-        base.Update();
+    //Update the player when dreaming of the etheral void.
+    private void DreamWorldUpdate()
+    {
+        if (Quest.instance.InDreamWorld)
+        {
+            isFlying = true;
+            DreamWorldTimer -= Time.deltaTime;
+            if (DreamWorldTimer < 0)
+            {
+                DreamTravelFromVoid();
+            }
+        }
+    }
 
-        FallDamageUpdate();
+    private void PoisonUpdate()
+    {
+        poison_timer -= Time.deltaTime;
+        if (poison_timer <= 0)
+        {
+            poison_timer = 30f;
+            CurVIT = CurVIT - 3;
+            play_poison--;
+        }
+    }
 
+    /// <summary>
+    /// Update some swiming related items.
+    /// </summary>
+    private void SwimUpdate()
+    {
+        if (isSwimming == true)
+        {
+            playerMotor.jumping.enabled = false;
+            SwimmingMode();
+        }
+        else
+        {//0.9198418f
+            playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
+            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
+            swimSpeedMultiplier = 1.0f;
+            SwimTimer = 0.0f;
+        }
+    }
+
+    private void ParalyzeUpdate()
+    {
+        if (ParalyzeTimer > 0)
+        {
+            ParalyzeTimer -= Time.deltaTime;
+        }
+        if (ParalyzeTimer < 0)
+        {
+            ParalyzeTimer = 0;
+        }
+        Paralyzed = (ParalyzeTimer != 0);
+    }
+
+    private void InventoryUpdate()
+    {
+        if ((PlayerInventory.Ready == true) && (InventoryReady == false))
+        {
+            if ((playerInventory != null))
+            {
+                if (playerInventory.GetCurrentContainer() != null)
+                {
+                    playerInventory.Refresh();
+                    InventoryReady = true;
+                }
+            }
+        }
+    }
+
+    private void TeleportUpdate()
+    {
+        if ((JustTeleported))
+        {
+            teleportedTimer += Time.deltaTime;
+            if (teleportedTimer >= 0.1f)
+            {
+                JustTeleported = false;
+            }
+            else
+            {
+                this.transform.position = new Vector3(TeleportPosition.x, this.transform.position.y, TeleportPosition.z);
+            }
+        }
+    }
+
+    private void BounceUpdate()
+    {
         if (isBouncy)
         {
             bounceMult = 2;
@@ -651,193 +893,6 @@ public class UWCharacter : Character
             {
                 BounceMovement = Vector3.zero;
             }
-        }
-
-        if (EditorMode)
-        {
-            CurVIT = MaxVIT;
-        }
-
-        if ((JustTeleported))
-        {
-            teleportedTimer += Time.deltaTime;
-            if (teleportedTimer >= 0.1f)
-            {
-                JustTeleported = false;
-            }
-            else
-            {
-                this.transform.position = new Vector3(TeleportPosition.x, this.transform.position.y, TeleportPosition.z);
-            }
-        }
-        if ((PlayerInventory.Ready == true) && (InventoryReady == false))
-        {
-            if ((playerInventory != null))
-            {
-                if (playerInventory.GetCurrentContainer() != null)
-                {
-                    playerInventory.Refresh();
-                    InventoryReady = true;
-                }
-            }
-        }
-        if ((WindowDetectUW.WaitingForInput == true) && (Instrument.PlayingInstrument == false))//TODO:Make this cleaner!!
-        {//TODO: This should be in window detect
-            UWHUD.instance.InputControl.Select();
-        }
-        if ((CurVIT <= 0) && (Death == false))
-        {
-            PlayerDeath();
-            return;
-        }
-        if (Death == true)
-        {
-            //Still processing death.
-            //isSwimming=false;
-            return;
-        }
-        if (_RES == GAME_UW2)
-        {
-            if (ParalyzeTimer > 0)
-            {
-                ParalyzeTimer -= Time.deltaTime;
-            }
-            if (ParalyzeTimer < 0)
-            {
-                ParalyzeTimer = 0;
-            }
-
-            Paralyzed = (ParalyzeTimer != 0);
-        }
-        if (playerCam.enabled == true)
-        {
-            if (isSwimming == true)
-            {
-                playerMotor.jumping.enabled = false;
-                SwimmingMode();
-            }
-            else
-            {//0.9198418f
-                playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
-                playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
-                swimSpeedMultiplier = 1.0f;
-                SwimTimer = 0.0f;
-            }
-        }
-        if (play_poison > 0)
-        {
-            poison_timer -= Time.deltaTime;
-            if (poison_timer <= 0)
-            {
-                poison_timer = 30f;
-                CurVIT = CurVIT - 3;
-                play_poison--;
-            }
-        }
-        playerMotor.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation));
-
-        if (Quest.instance.InDreamWorld)
-        {
-            isFlying = true;
-            DreamWorldTimer -= Time.deltaTime;
-            if (DreamWorldTimer < 0)
-            {
-                DreamTravelFromVoid();
-            }
-        }
-
-        if ((isFlying) && (!Grounded))
-        {//Flying spell
-            FlyingMode();
-        }
-        else
-        {
-            if (isFloating)
-            {
-                playerMotor.movement.maxFallSpeed = 0.1f;//Default
-            }
-            else
-            {
-                playerMotor.movement.maxFallSpeed = 20.0f;//Default
-                playerMotor.movement.maxForwardSpeed = walkSpeed * speedMultiplier * swimSpeedMultiplier;
-                playerMotor.movement.maxSidewaysSpeed = playerMotor.movement.maxForwardSpeed * 2 / 3;
-                playerMotor.movement.maxBackwardsSpeed = playerMotor.movement.maxForwardSpeed / 3;
-            }
-        }
-
-        if (isLeaping)
-        {//Jump spell						
-            playerMotor.jumping.baseHeight = baseJumpHeight;
-            playerMotor.jumping.extraHeight = extraJumpHeightLeap;
-        }
-        else
-        {
-            playerMotor.jumping.baseHeight = baseJumpHeight;
-            playerMotor.jumping.extraHeight = extraJumpHeight;
-        }
-
-        if (isRoaming)
-        {
-            playerMotor.movement.maxFallSpeed = 0.0f;
-        }
-        if ((!isSpeeding) && (!onIce))
-        {
-            speedMultiplier = 1f;
-        }
-
-        //MusicController.instance.
-        WeaponDrawn = (InteractionMode == UWCharacter.InteractionModeAttack);
-
-        if (PlayerMagic.ReadiedSpell != "")
-        {//Player has a spell thats about to be cast. All other activity is ignored.	
-            SpellMode();
-            return;
-        }
-
-        if (UWHUD.instance.window.JustClicked == false)
-        {
-            if (Paralyzed == false)
-            {
-                PlayerCombat.PlayerCombatIdle();
-            }
-        }
-
-
-        if (onLava == true)
-        {
-            if (!isFireProof())
-            {
-                lavaDamageTimer += Time.deltaTime;
-                if (lavaDamageTimer >= 1.0f)//Take Damage every 1 second.
-                {
-                    ApplyDamage(10);
-                    lavaDamageTimer = 0.0f;
-                }
-            }
-            if (_RES == GAME_UW2)
-            {//Stepped in Lava after covering in basilisk oil.
-                if (Quest.instance.x_clocks[3] == 3)
-                {
-                    Quest.instance.x_clocks[3] = 4;
-                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 334));
-                }
-            }
-        }
-        else
-        {
-            lavaDamageTimer = 0;
-        }
-
-
-
-        //Calculate how visible the player is.
-        if (LightActive)//The player has a light and is therefore visible at max range.
-        {
-            DetectionRange = BaseDetectionRange;
-        }
-        else
-        {//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
-            DetectionRange = MinDetectionRange + ((BaseDetectionRange - MinDetectionRange) * ((30.0f - (GetBaseStealthLevel() + StealthLevel)) / 30.0f));
         }
     }
 

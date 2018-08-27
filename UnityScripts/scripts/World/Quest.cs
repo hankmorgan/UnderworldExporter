@@ -154,6 +154,12 @@ public class Quest : UWEBase
     ///     15 - Nystrul wants to see you again re endgame
     ///     16 - Nystrul questions have been answered Mars Gotha comes
     /// 2=Nystrul and blackrock gems treated
+    /// 3=Djinn Capture
+    ///     2 = balisk oil is in the mud
+    ///     3 = bathed in oil
+    ///     4 = baked in lava
+    ///     5 = iron flesh cast (does not need to be still on when you break the bottle)
+    ///     6 = djinn captured in body
     /// 14=Tracks no of enemies killed in pits. Does things like update graffiti.
     /// 15=Used in multiple convos. Possibly tells the game to process a change when updated?
     public int[] x_clocks = new int[16];

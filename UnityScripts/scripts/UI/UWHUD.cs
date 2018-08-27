@@ -127,6 +127,9 @@ public class UWHUD : HUD
     public Text RightShoulder_Qty;
     public Text[] Backpack_Slot_Qty = new Text[8];
 
+    public ScrollButtonInventory InvUp;
+    public ScrollButtonInventory InvDown;
+
 
     [Header("Buttons and Labels")]
     public chains ChainsControl;
@@ -229,6 +232,12 @@ public class UWHUD : HUD
         MapPanel.transform.SetAsLastSibling();
         ConversationPanel.transform.SetAsLastSibling();
 
+        GRLoader grButtons = new GRLoader(GRLoader.BUTTONS_GR);
+        if (grButtons!=null)
+        {
+            InvUp.GetComponent<RawImage>().texture = grButtons.LoadImageAt(27);
+            InvDown.GetComponent<RawImage>().texture = grButtons.LoadImageAt(28);
+        }
 
 
         switch (_RES)
