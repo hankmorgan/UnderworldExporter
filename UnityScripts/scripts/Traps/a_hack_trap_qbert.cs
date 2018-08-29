@@ -605,9 +605,8 @@ public class a_hack_trap_qbert : a_hack_trap {
 	}
 
 
-	public override void PostActivate (object_base src)
-	{
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
+    public override bool WillFireRepeatedly()
+    {
+        return true;
     }
 }

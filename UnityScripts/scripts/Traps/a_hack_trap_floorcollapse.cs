@@ -46,7 +46,8 @@ public class a_hack_trap_floorcollapse : a_hack_trap {
                         {
                             tileToChange.VisibleFaces[v] = true;
                         }
-                        tileToChange.isWater = TileMap.isTextureWater(CurrentTileMap().texture_map[tileToChange.floorTexture]);
+                        //water x tileToChange.isWater = TileMap.isTextureWater(CurrentTileMap().texture_map[tileToChange.floorTexture]);
+                        //Water x tileToChange.terrain= GameWorldController.instance.terrainData.Terrain[CurrentTileMap().texture_map[tileToChange.floorTexture]];
                         GameObject tile = GameWorldController.FindTile(TileMap.visitTileX, TileMap.visitTileY, TileMap.SURFACE_FLOOR);
                         if (tile != null)
                         {

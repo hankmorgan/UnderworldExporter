@@ -45,14 +45,22 @@ public class a_timer_trigger : trigger_base {
 		//Override to supress debug messages.
 	public override bool Activate (GameObject src)
 	{
-				if (EditorMode)
-				{
-					return true;
-				}
+		if (EditorMode)
+		{
+			return true;
+		}
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(link);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (this, quality,owner,flags);
+            if (triggerObj.GetComponent<trap_base>()!=null)
+            {
+                triggerObj.GetComponent<trap_base>().Activate(this, quality, owner, flags);
+            }
+            else
+            {
+                Debug.Log("null trap on " + this.name);
+            }
+			
 		}
 
 		PostActivate(src);

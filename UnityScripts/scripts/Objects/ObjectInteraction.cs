@@ -380,61 +380,58 @@ public class ObjectInteraction : UWEBase
 
     }
 
-    /// <summary>
-    /// Updates the linked list as objects move.
-    /// </summary>
-    /// <param name="obj">Object.</param>
-    /// <param name="oldTileX">Old tile x.</param>
-    /// <param name="oldTileY">Old tile y.</param>
-    /// <param name="newTileX">New tile x.</param>
-    /// <param name="newTileY">New tile y.</param>
-    public static void UpdateLinkedList(ObjectInteraction obj, int oldTileX, int oldTileY, int newTileX, int newTileY)
-    {
-        return;
-        bool MovingFromValidTile = TileMap.ValidTile(oldTileX, oldTileY);
-        bool MovingToValidTile = TileMap.ValidTile(newTileX, newTileY);
+    ///// <summary>
+    ///// Updates the linked list as objects move.
+    ///// </summary>
+    ///// <param name="obj">Object.</param>
+    ///// <param name="oldTileX">Old tile x.</param>
+    ///// <param name="oldTileY">Old tile y.</param>
+    ///// <param name="newTileX">New tile x.</param>
+    ///// <param name="newTileY">New tile y.</param>
+    //public static void UpdateLinkedList(ObjectInteraction obj, int oldTileX, int oldTileY, int newTileX, int newTileY)
+    //{
+    //    return;
+    //    bool MovingFromValidTile = TileMap.ValidTile(oldTileX, oldTileY);
+    //    bool MovingToValidTile = TileMap.ValidTile(newTileX, newTileY);
 
-        if (MovingFromValidTile && MovingToValidTile)
-        {
-            Debug.Log("Object traversing " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
-            TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
-            MoveFromLinkedListChain(obj, tOld);
-            MoveToLinkedListChain(obj, tNew);
-            return;
-        }
+    //    if (MovingFromValidTile && MovingToValidTile)
+    //    {
+    //        Debug.Log("Object traversing " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
+    //        TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
+    //        TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
+    //        MoveFromLinkedListChain(obj, tOld);
+    //        MoveToLinkedListChain(obj, tNew);
+    //        return;
+    //    }
 
-        if (!MovingToValidTile && MovingFromValidTile)
-        {//Object is probably moving off map.
-            Debug.Log("Object moving off map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
-            MoveFromLinkedListChain(obj, tOld);
-            obj.next = 0;
-            return;
-        }
+    //    if (!MovingToValidTile && MovingFromValidTile)
+    //    {//Object is probably moving off map.
+    //        Debug.Log("Object moving off map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
+    //        TileInfo tOld = CurrentTileMap().Tiles[oldTileX, oldTileY];
+    //        MoveFromLinkedListChain(obj, tOld);
+    //        obj.next = 0;
+    //        return;
+    //    }
 
-        if (MovingToValidTile && !MovingFromValidTile)
-        {//Object moving from inv to world
-            Debug.Log("Object moving on map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-            TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
-            MoveToLinkedListChain(obj, tNew);
-            return;
-        }
-        //This should probably not happen.
-        if (
-                ((newTileX == 99) && (newTileY == 99) && (oldTileX == -1) && (oldTileY == -1))//load game player inventory
-                ||
-                ((newTileX == 99) && (newTileY == 99) && (oldTileX == 99) && (oldTileY == 99))//Moving from offmap to inventory.
-        )
+    //    if (MovingToValidTile && !MovingFromValidTile)
+    //    {//Object moving from inv to world
+    //        Debug.Log("Object moving on map " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
+    //        TileInfo tNew = CurrentTileMap().Tiles[newTileX, newTileY];
+    //        MoveToLinkedListChain(obj, tNew);
+    //        return;
+    //    }
+    //    //This should probably not happen.
+    //    if (
+    //            ((newTileX == 99) && (newTileY == 99) && (oldTileX == -1) && (oldTileY == -1))//load game player inventory
+    //            ||
+    //            ((newTileX == 99) && (newTileY == 99) && (oldTileX == 99) && (oldTileY == 99))//Moving from offmap to inventory.
+    //    )
 
-        {
-            return;
-        }
-        Debug.Log("Object moving to/from invalid tile " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
-
-
-
-    }
+    //    {
+    //        return;
+    //    }
+    //    Debug.Log("Object moving to/from invalid tile " + obj.name + "Tiles(" + oldTileX + "," + oldTileY + ") to (" + newTileX + "," + newTileY + ")");
+    //}
 
     public static void MoveToLinkedListChain(ObjectInteraction obj, TileInfo tNew)
     {
@@ -1241,10 +1238,10 @@ public class ObjectInteraction : UWEBase
         //Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
         //}
 
-        if (PlaySoundEffects)
+        if ((PlaySoundEffects) && (!ObjectLoader.isTrap(currObj) && (!ObjectLoader.isTrigger(currObj))))
         {
             objInteract.aud = myObj.AddComponent<AudioSource>();
-            objInteract.aud.maxDistance = 3f;//TODO:Tweak this distance
+            objInteract.aud.maxDistance = 1f;//TODO:Tweak this distance
             objInteract.aud.spatialBlend = 1f;
         }
         return objInteract;
@@ -1780,7 +1777,7 @@ public class ObjectInteraction : UWEBase
         myObj.transform.Rotate(0.0f, 0.0f, 0.0f);//Initial rotation.
         myObj.transform.parent = parent.transform;
         myObj.layer = LayerMask.NameToLayer("UWObjects");
-        ObjectMasters objM = GameWorldController.instance.objectMaster;
+        //ObjectMasters objM = GameWorldController.instance.objectMaster;
         ObjectInteraction objInt = CreateObjectInteraction(myObj, 0.5f, 0.5f, 0.5f, currObj);
 
         //objM.objProp[currObj.item_id].WorldIndex, objM.objProp[currObj.item_id].InventoryIndex, objM.objProp[currObj.item_id].InventoryIndex, objM.objProp[currObj.item_id].type, 
@@ -1814,9 +1811,10 @@ public class ObjectInteraction : UWEBase
         {
             case NPC_TYPE:
                 {
-                    NPC npc;
+                    //NPC npc;
                     CreateSprite = false;
-                    npc = CreateNPC(myObj, objInt, currObj);
+                    //npc = 
+                    CreateNPC(myObj, objInt, currObj);
                     //CreateNPC(myObj,currObj.item_id.ToString(),"UW1/Sprites/Objects/OBJECTS_" + currObj.item_id.ToString() ,currObj.npc_whoami);
                     //SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
                     //SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
@@ -1829,7 +1827,8 @@ public class ObjectInteraction : UWEBase
                 break;
             case NPC_VOID:
                 {
-                    NPC_VoidCreature npc = myObj.AddComponent<NPC_VoidCreature>();
+                   // NPC_VoidCreature npc = 
+                    myObj.AddComponent<NPC_VoidCreature>();
                     //SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
                     break;
                 }
@@ -2651,8 +2650,6 @@ public class ObjectInteraction : UWEBase
             //}
             //}
         }
-        return false;
-
     }
 
     /// <summary>

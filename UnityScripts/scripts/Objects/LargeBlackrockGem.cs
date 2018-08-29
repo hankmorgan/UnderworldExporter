@@ -54,7 +54,6 @@ public class LargeBlackrockGem : Model3D {
 					Quest.instance.QuestVariables[130] |= bitField;
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338));				
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338+Quest.instance.x_clocks[2]));
-                    //CameraShake.instance.shakeDuration = Quest.instance.x_clocks[2] * 0.2f;
                     CameraShake.instance.ShakeEarthQuake(Quest.instance.x_clocks[2] * 0.2f);
                     objI.consumeObject(); 
                 }

@@ -156,7 +156,8 @@ public class MagicProjectile : MobileObject {
 			objIntThis.objectloaderinfo.InUseFlag = 0;
 			//Free up object slot
 		}
-		DestroyObject (this.gameObject);
+        Object.Destroy(this.gameObject);
+		//DestroyObject (this.gameObject);
 	}
 
 
@@ -176,7 +177,7 @@ public class MagicProjectile : MobileObject {
 		{
 			yield return new WaitForSeconds(0.1f);
 			//Find target
-			RaycastHit hit = new RaycastHit();
+			//RaycastHit hit = new RaycastHit();
 			if (target==null)
 			{
 					NPC npc = Magic.GetNPCTargetRandom(this.gameObject, 5f);

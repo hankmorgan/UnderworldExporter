@@ -14,7 +14,6 @@ public class UWCharacter : Character
     public const float extraJumpHeight = 0.8f;
     public const float extraJumpHeightLeap = 1.2f;
 
-    public float angle;
     public string[] LayersForRay = new string[] { "Water", "MapMesh", "Lava", "Ice" };
     public Vector3 Rayposition;//= //transform.position;
     public Vector3 Raydirection = Vector3.down;
@@ -45,7 +44,29 @@ public class UWCharacter : Character
     [Header("Player Movement Status")]
     public SpellEffect[] ActiveSpell = new SpellEffect[3];      //What effects and enchantments (eg from items are equipped on the player)
     public SpellEffect[] PassiveSpell = new SpellEffect[10];
-    public bool isSwimming;
+    private bool _isSwimming;
+    public bool isSwimming
+    {
+        get
+        {
+            return _isSwimming;
+        }
+        set
+        {
+            if (!_isSwimming)
+            {     
+                //Player is not already swimming          
+                if (value == true)
+                {
+                    //Play splash effect
+                    PlaySplashSound();
+                }
+            }
+            _isSwimming = value;
+
+        }
+
+    }
     public int StealthLevel; //The level of stealth the character has.
     public int Resistance; //DR from spells.
     public bool Paralyzed;
@@ -171,6 +192,7 @@ public class UWCharacter : Character
         YAxis.enabled = false;
         MouseLookEnabled = false;
         mask = LayerMask.GetMask(LayersForRay);
+        StartCoroutine(playfootsteps());
     }
 
     public override void Begin()
@@ -488,9 +510,15 @@ public class UWCharacter : Character
         }
     }
 
+
+    /// <summary>
+    /// Management of the character when in water.
+    /// </summary>
     void SwimmingMode()
     {
-        playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, -0.8f, playerCam.transform.localPosition.z);
+        
+        float bob = -0.8f + (0.1f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f))))); 
+        playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
         SwimTimer = SwimTimer + Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
@@ -509,19 +537,31 @@ public class UWCharacter : Character
         }
         if (ObjectInteraction.PlaySoundEffects)
         {
-            if (!aud.isPlaying)
+            if (!footsteps.isPlaying)
             {
-                switch (Random.Range(1, 3))
-                {
-                    case 1:
-                        aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
-                        break;
-                    case 2:
-                    default:
-                        aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_2];
-                        break;
-                }
-                aud.Play();
+                //switch (Random.Range(1, 3))
+                //{
+                //    case 1:
+                footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
+                //        break;
+                //    case 2:
+                //    default:
+                //        aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_2];//Enter water
+                //        break;
+                //}
+                footsteps.Play();
+            }
+        }
+    }
+
+    void PlaySplashSound()
+    {
+        if (ObjectInteraction.PlaySoundEffects)
+        {
+            if (!footsteps.isPlaying)
+            {
+                footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_2];
+                footsteps.Play();
             }
         }
     }
@@ -542,10 +582,9 @@ public class UWCharacter : Character
         //Check if player is on ground.
         Grounded = IsGrounded();
 
-        if (_RES==GAME_UW2)
-        {//Currents only occur in UW2.
-            TerrainAndCurrentsUpdate();
-        }        
+
+        TerrainAndCurrentsUpdate();
+    
 
         base.Update();
 
@@ -1958,6 +1997,41 @@ case 2:
             }
         }
         currYVelocity = playerMotor.movement.velocity.y;
+    }
+
+
+    /// <summary>
+    /// Plays sound effects for foot steps.
+    /// </summary>
+    /// <returns></returns>
+    ///     public const int SOUND_EFFECT_FOOT_1 = 1;
+    ///     public const int SOUND_EFFECT_FOOT_2 = 2;
+    ///     public const int SOUND_EFFECT_FOOT_GRAVELLY = 47;
+    ///     public const int SOUND_EFFECT_FOOT_ICE = 48;
+
+    IEnumerator playfootsteps()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.4f);
+            if (Grounded && playerMotor.movement.velocity.magnitude != 0)
+            {
+                if (!footsteps.isPlaying)
+                {
+                    if (step)
+                    {
+                        footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_FOOT_1];
+                        step = false;
+                    }
+                    else
+                    {
+                        footsteps.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_FOOT_2];
+                        step = true;
+                    }                   
+                    footsteps.Play();   
+                }
+            }
+        }
     }
 
 }

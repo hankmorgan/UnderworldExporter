@@ -1420,6 +1420,7 @@ public class ObjectLoader : DataLoader
             case ObjectInteraction.A_PRESSURE_TRIGGER:
             case ObjectInteraction.A_CLOSE_TRIGGER:
             case ObjectInteraction.AN_ENTER_TRIGGER:
+            case ObjectInteraction.A_PROXIMITY_TRAP:
                 {
                     return true;
                 }

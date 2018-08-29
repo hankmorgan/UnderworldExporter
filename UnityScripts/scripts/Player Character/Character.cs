@@ -42,6 +42,8 @@ public class Character : UWEBase {
 	public CharacterMotorC playerMotor;
 	public CharacterController playerController;
 	public AudioSource aud;
+    public AudioSource footsteps;
+    public bool step = true;
 
 	[Header("Health")]
 	//Character Stats
@@ -118,7 +120,7 @@ public class Character : UWEBase {
 		/// <summary>
 		/// The room index the player is in
 		/// </summary>
-	public int room;
+	//public int room;
 
 
 

@@ -13,7 +13,7 @@ public class UnderworldGenerator : UWEBase {
     public int Seed;
 
     public static UnderworldGenerator instance;
-    private int ConnectorCount = 1;
+    //private int ConnectorCount = 1;
 
    // Room[] rooms;
    // List<Connector> Connectors = new List<Connector>();
@@ -34,7 +34,7 @@ public class UnderworldGenerator : UWEBase {
     public void GenerateLevel(int levelseed)
     {
         Seed = levelseed;
-        ConnectorCount = 1;
+        //ConnectorCount = 1;
         mappings = new GeneratorMap[64, 64];
         Random.InitState(levelseed);
 
@@ -626,66 +626,30 @@ public class UnderworldGenerator : UWEBase {
     public void RoomsToTileMap(TileMap tm, TileInfo[,] Tiles)
     {
        // PrintRooms();
-        for (int x = 0; x <= 63; x++)
+        for (short x = 0; x <= 63; x++)
         {
-            for (int y = 0; y <= 63; y++)
+            for (short y = 0; y <= 63; y++)
             {
-                Tiles[x, y] = new TileInfo();
-                Tiles[x, y].tileX = (short)x;
-                Tiles[x, y].tileY = (short)y;
-                Tiles[x, y].ceilingHeight = 0;
-                Tiles[x, y].indexObjectList = 0;
-                Tiles[x, y].floorHeight = 30;
-                //Tiles[x, y].tileType = TileMap.TILE_SOLID;
-                Tiles[x, y].tileType = (short)mappings[x, y].TileLayoutMap;
-                Tiles[x, y].shockSlopeFlag = TileMap.SLOPE_FLOOR_ONLY;
-                Tiles[x, y].doorBit = 0;
-                Tiles[x, y].DimX = 1;
-                Tiles[x, y].DimY = 1;
-                Tiles[x, y].Render = true;
-                Tiles[x, y].Grouped = false;
-
-                for (int v = 0; v < 6; v++)
-                {
-                    Tiles[x, y].VisibleFaces[v] = true;
-                    Tiles[x, y].VisibleFaces[v] = true;
-                }
-                Tiles[x, y].floorTexture = 1;// (short)Random.Range(48, 57);
-                Tiles[x, y].wallTexture = 1;// (short)Random.Range(0, 48);
-                Tiles[x, y].North = Tiles[x, y].wallTexture;
-                Tiles[x, y].South = Tiles[x, y].wallTexture;
-                Tiles[x, y].East = Tiles[x, y].wallTexture;
-                Tiles[x, y].West = Tiles[x, y].wallTexture;
-                Tiles[x, y].Top = Tiles[x, y].floorTexture;
-                Tiles[x, y].Bottom = Tiles[x, y].floorTexture;
-                Tiles[x, y].Diagonal = Tiles[x, y].wallTexture;
+                short newtiletype = (short)mappings[x, y].TileLayoutMap;
+                short newfloorHeight = 30;
+                short newfloorTexture=1;
+                short newwallTexture=1;
+                short newceilingHeight = 0;
+                short newFlags=0;
+                short newnoMagic=0;
+                short newdoorBit=0;
+                int newindexObjectList = 0;
 
                 if (mappings[x, y].TileLayoutMap != TileMap.TILE_SOLID)
                 {
-                    switch (Tiles[x, y].tileType)
-                    {
-                        case TileMap.TILE_SLOPE_E:
-                        case TileMap.TILE_SLOPE_W:
-                        case TileMap.TILE_SLOPE_N:
-                        case TileMap.TILE_SLOPE_S:
-                            Tiles[x, y].shockSteep = 2;
-                            break;
-                    }
-
-                    //Tiles[x, y].tileType = (short)mappings[x, y].TileLayoutMap;
-                    // if (mappings[x, y].RoomMap>0) //this is a room
-                    //{
-                    Tiles[x, y].floorHeight = (short)mappings[x, y].FloorHeight; //16;
-                                                                                 // }
-                                                                                 //  else
-                                                                                 // {
-                                                                                 // Tiles[x, y].floorHeight = (short)mappings[x, y].FloorHeight; //(short)Connectors[ Mathf.Abs(mappings[x, y].RoomMap)-1].BaseHeight; //16;
-                                                                                 //  }
-                    Tiles[x, y].VisibleFaces[TileMap.vBOTTOM] = false;
-                    Tiles[x, y].floorTexture = (short)Mathf.Min(Mathf.Abs(mappings[x, y].RoomMap), 10);
-                    ////Floor textures are 49 to 56             
+                    newfloorHeight = (short)mappings[x, y].FloorHeight; //16;
+                    newfloorTexture = (short)Mathf.Min(Mathf.Abs(mappings[x, y].RoomMap), 10);        
                 }
-                // return;
+
+                Tiles[x, y] = new TileInfo(tm, x, y, newtiletype, 
+                    newfloorHeight, newceilingHeight, 
+                    newfloorTexture,newwallTexture,0,
+                    newFlags,newnoMagic,newdoorBit,newindexObjectList);
             }
         }
         tm.SetTileMapWallFacesUW();//Update so walls display correctly

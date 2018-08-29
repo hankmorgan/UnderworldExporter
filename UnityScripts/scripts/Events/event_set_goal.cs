@@ -44,8 +44,8 @@ public class event_set_goal : event_always
     public override string summary()
     {
         bool isNPC = RawData[3] == 0;
-        int newGoal = RawData[5];
-        int gtarg = RawData[6];
+        //int newGoal = RawData[5];
+        //int gtarg = RawData[6];
         if (isNPC)
         {
             return base.summary() + "\n\t\tWhoAmI=" + (int)RawData[4] + ",Goal=" + (int)RawData[5] + ",GTarg=" + (int)RawData[6];

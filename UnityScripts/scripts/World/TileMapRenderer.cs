@@ -137,32 +137,23 @@ public class TileMapRenderer : Loader
         {
             if (!UpdateOnly)
             {
-                TileInfo tmp = new TileInfo();
                 //Ceiling
-                tmp.tileType = 1;
-                tmp.Render = true;
-                tmp.isWater = false;
-                tmp.tileX = 0;
-                tmp.tileY = 0;
+                TileInfo tmp = new TileInfo(Level, 0,0,TILE_OPEN,
+                    0,0, 
+                    0,0, Level.Tiles[0, 0].shockCeilingTexture,
+                    0,0,0,0);   
                 tmp.DimX = TileMap.TileMapSizeX + 1;
                 tmp.DimY = TileMap.TileMapSizeY + 1;
                 tmp.ceilingHeight = 0;
                 tmp.floorTexture = Level.Tiles[0, 0].shockCeilingTexture;
                 tmp.shockCeilingTexture = Level.Tiles[0, 0].shockCeilingTexture;
-                tmp.East = Level.Tiles[0, 0].shockCeilingTexture;//CAULK;
-                tmp.West = Level.Tiles[0, 0].shockCeilingTexture;//CAULK;
-                tmp.North = Level.Tiles[0, 0].shockCeilingTexture;//CAULK;
-                tmp.South = Level.Tiles[0, 0].shockCeilingTexture;//CAULK;
                 tmp.VisibleFaces[vTOP] = false;
                 tmp.VisibleFaces[vEAST] = false;
                 tmp.VisibleFaces[vBOTTOM] = true;
                 tmp.VisibleFaces[vWEST] = false;
                 tmp.VisibleFaces[vNORTH] = false;
                 tmp.VisibleFaces[vSOUTH] = false;
-                // top,east,bottom,west,north,south
-                //GameObject ceil = 
                 GameWorldController.instance.ceiling = RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
-                //ceil.layer= LayerMask.NameToLayer ("UWObjects");
 
                 //And at 99,99 for special stuff.
                 for (short x = TileMap.ObjectStorageTile - 1; x <= TileMap.ObjectStorageTile + 1; x++)
@@ -192,7 +183,6 @@ public class TileMapRenderer : Loader
                 case GAME_SHOCK:
                     break;
                 default:
-                   // RenderBridges(sceneryParent, Level, objList);
                     RenderPillars(sceneryParent, Level, objList);
                     RenderDoorways(sceneryParent, Level, objList);
                     break;
@@ -227,9 +217,7 @@ public class TileMapRenderer : Loader
                 }
             }
         }
-
     }
-
 
     /// <summary>
     /// Begins rendering a door way.

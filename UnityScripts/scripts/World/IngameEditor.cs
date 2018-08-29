@@ -685,9 +685,9 @@ public class IngameEditor : GuiBase_Draggable
         if (FloorTextureSelected != -1)
         {
             CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].floorTexture = (short)(FloorTextureSelected);
-            int ActualTextureIndex = CurrentTileMap().texture_map[FloorTextureSelected + 48];
-            CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].isWater = TileMap.isTextureWater(ActualTextureIndex);
-            CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].isLava = TileMap.isTextureLava(ActualTextureIndex);
+            //int ActualTextureIndex = CurrentTileMap().texture_map[FloorTextureSelected + 48];
+            //water x CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].isWater = TileMap.isTextureWater(ActualTextureIndex);
+            //CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].isLava = TileMap.isTextureLava(ActualTextureIndex);
         }
         if (CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].wallTexture != WallTextureSelected)
         {

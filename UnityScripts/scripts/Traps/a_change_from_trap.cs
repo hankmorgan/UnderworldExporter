@@ -39,30 +39,32 @@ public class a_change_from_trap : trap_base
                 if (quality == CurrentTileMap().Tiles[x, y].wallTexture)
                 {//This is probably a seperate test to the floor texture test above.
 
-                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality;
-
-                    if (CurrentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)
-                    {   //Putting this in this block could be wrong as well.
-                        if (CurrentTileMap().Tiles[x, y].Render)
-                        {
-                            for (int v = 0; v < 6; v++)
-                            {
-                                CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
-                                CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
-                            }
-                        }
-
-                        CurrentTileMap().Tiles[x, y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
-                        if (ChangeTo.owner < 10)
-                        {
-                            CurrentTileMap().Tiles[x, y].tileType = (short)ChangeTo.owner;
-                        }
-                        if (ChangeTo.zpos < 15)
-                        {
-                            CurrentTileMap().Tiles[x, y].floorHeight = ChangeTo.zpos;
-                        }
-                    }//end floor texture criteria.
+                    CurrentTileMap().Tiles[x, y].wallTexture = ChangeTo.quality; 
                 }
+
+                if (CurrentTileMap().Tiles[x, y].floorTexture == tileFloorCriteria)//==heading)
+                {   //Putting this in this block could be wrong as well.
+                    if (CurrentTileMap().Tiles[x, y].Render)
+                    {
+                        for (int v = 0; v < 6; v++)
+                        {
+                            CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
+                            CurrentTileMap().Tiles[x, y].VisibleFaces[v] = true;
+                        }
+                    }
+
+                    CurrentTileMap().Tiles[x, y].floorTexture = NewTileFloorTexture;//ChangeTo.heading;
+                    if (ChangeTo.owner < 10)
+                    {
+                        CurrentTileMap().Tiles[x, y].tileType = (short)ChangeTo.owner;
+                    }
+                    if (ChangeTo.zpos < 15)
+                    {
+                        CurrentTileMap().Tiles[x, y].floorHeight = ChangeTo.zpos;
+                    }
+                }//end floor texture criteria.
+
+
             }
         }
         //Re-render the level to see the changes

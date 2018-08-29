@@ -11,7 +11,7 @@ public class a_hack_trap_gemrotate : a_hack_trap
     //This has a quality of 54d
 
     //Changes variable no 6 to set what is reachable. 
-    int prevWorld = -1;
+    //int prevWorld = -1;
     public static LargeBlackrockGem gem;
 
     protected override void Start()
@@ -47,7 +47,7 @@ public class a_hack_trap_gemrotate : a_hack_trap
         //}
         UpdateGemFace();
 
-        prevWorld = Quest.instance.variables[6];
+        //prevWorld = Quest.instance.variables[6];
     }
 
     /// <summary>

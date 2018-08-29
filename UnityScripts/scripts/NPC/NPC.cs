@@ -1112,7 +1112,6 @@ public class NPC : MobileObject
                         {
                             AgentMoveToGtarg();
                         }
-
                     }
                 }
                 else

@@ -47,8 +47,6 @@ public class a_set_variable_trap : a_variable_trap
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {
-        int[] vars;
-        vars = Quest.instance.variables;
         if (_RES == GAME_UW2)
         {
             switch (xpos)
@@ -81,11 +79,16 @@ public class a_set_variable_trap : a_variable_trap
         {
             Set_Variables(Quest.instance.variables, zpos, heading, this, "gamevars");
         }
-
-
-
     }
 
+    /// <summary>
+    /// Sets/changes the variables in the variable array.
+    /// </summary>
+    /// <param name="vars"></param>
+    /// <param name="index"></param>
+    /// <param name="operation"></param>
+    /// <param name="trap"></param>
+    /// <param name="debugname"></param>
     static void Set_Variables(int[] vars, int index, int operation, a_set_variable_trap trap, string debugname)
     {
         string op = "";

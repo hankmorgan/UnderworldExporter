@@ -936,7 +936,6 @@ public class GameWorldController : UWEBase
                         DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
                     }
 
-
                     if (_RES == GAME_UW1)
                     {//Load the overlays.
                         DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 9, 0x180, out ovl_ark_block);
@@ -1002,7 +1001,7 @@ public class GameWorldController : UWEBase
                 {
                     Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
                 }
-                Tilemaps[newLevelNo].CreateRooms();
+                //Tilemaps[newLevelNo].CreateRooms();
             }
 
             if ((UWEBase._RES != UWEBase.GAME_SHOCK) && (LevelNo != -1))
@@ -1223,7 +1222,7 @@ public class GameWorldController : UWEBase
         }
         TileMap.visitTileX = (short)(UWCharacter.Instance.transform.position.x / 1.2f);
         TileMap.visitTileY = (short)(UWCharacter.Instance.transform.position.z / 1.2f);
-        UWCharacter.Instance.room = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
+        //UWCharacter.Instance.room = CurrentTileMap().Tiles[TileMap.visitTileX, TileMap.visitTileY].roomRegion;
 
         if (EditorMode)
         {

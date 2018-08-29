@@ -1026,7 +1026,7 @@ public class StringController : UWEBase
     }
 
     /// <summary>
-    /// Adds a string to string block and return a memory location for it.
+    /// Adds a string to string block and return a memory location for it. Used in the conversation vm
     /// </summary>
     /// <returns>The string.</returns>
     /// <param name="BlockNo">Block no.</param>

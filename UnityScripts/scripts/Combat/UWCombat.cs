@@ -4,6 +4,8 @@ using System.Collections;
 public class UWCombat : Combat
 {
 
+    public static UWCombat instance;
+
     /// The melee weapon currently held by the player.
     public WeaponMelee currWeapon;
     /// The current ranged weapon held by the player
@@ -15,6 +17,12 @@ public class UWCombat : Combat
     private string CurrentStrike;
 
     private short CurrentStrikeAnimation;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
 
     public override void PlayerCombatIdle()
     {
@@ -389,11 +397,11 @@ public class UWCombat : Combat
             }
             else if (Camera.main.ScreenToViewportPoint(Input.mousePosition).y > 0.333f)
             {
-                return 4;//Slash
+                return 0;//Slash
             }
             else
             {
-                return 0;//stab
+                 return 4;//stab
             }
         }
         else
@@ -563,7 +571,7 @@ public class UWCombat : Combat
                 Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());
                 if (ObjectInteraction.PlaySoundEffects)
                 {
-                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_1];
+                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[GetHitSound()];
                     npc.objInt().aud.Play();
                 }
                 break;
@@ -572,7 +580,7 @@ public class UWCombat : Combat
                 Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint() + Vector3.up * 0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());
                 if (ObjectInteraction.PlaySoundEffects)
                 {
-                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_HIT_2];
+                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[GetHitSound()];
                     npc.objInt().aud.Play();
                 }
                 break;
@@ -703,5 +711,17 @@ public class UWCombat : Combat
             }
         }
         return BaseDamage;
+    }
+
+    static int GetHitSound()
+    {
+        if (instance.currWeapon!=null)
+        {
+            return Random.Range(7, 9);
+        }
+        else
+        {
+            return Random.Range(3, 5);//Punch sounds.
+        }
     }
 }

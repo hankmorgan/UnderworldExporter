@@ -1153,9 +1153,7 @@ public class SaveGame : Loader
                 case 0x37c://14
                            //case 0x37d://15 -- This could be wrong.
                     {//The mysterious x_clocks
-                     //Quest.instance.x_clocks[x_clock++]=(int)DataLoader.getValAtAddress(buffer,i,8);
                         DataLoader.WriteInt8(writer, Quest.instance.x_clocks[1 + i - 0x36f]); break;
-                        break;
                     }
                 case 0x3A3: // Helm (all of these subsequent values are indices into the object list 
                     WriteInventoryIndex(writer, inventoryObjects, 0); break;

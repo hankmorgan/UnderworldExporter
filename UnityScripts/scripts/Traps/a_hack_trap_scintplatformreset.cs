@@ -53,7 +53,7 @@ public class a_hack_trap_scintplatformreset : a_hack_trap
         {
             GameObject tile = GameWorldController.FindTile(tileXToChange, tileYToChange, TileMap.SURFACE_FLOOR);
             tileToChange.TileNeedsUpdate();
-            tileToChange.isWater = false;
+            //Water xtileToChange.isWater = false;
             TileMapRenderer.UpdateTile(tileXToChange, tileYToChange, tileToChange.tileType, 18, newFloorTexture, tileToChange.wallTexture, false);
             Destroy(tile);
         }
