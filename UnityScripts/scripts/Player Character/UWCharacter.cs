@@ -40,6 +40,7 @@ public class UWCharacter : Character
     public bool onLava;
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
+    public Vector3 CameraLocalPos;
 
     [Header("Player Movement Status")]
     public SpellEffect[] ActiveSpell = new SpellEffect[3];      //What effects and enchantments (eg from items are equipped on the player)
@@ -514,11 +515,11 @@ public class UWCharacter : Character
     /// <summary>
     /// Management of the character when in water.
     /// </summary>
-    void SwimmingMode()
-    {
-        
-        float bob = -0.8f + (0.1f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f))))); 
+    void SwimmingEffects()
+    {        
+        float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
         playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
+        CameraLocalPos = new Vector3(-2.890434f, playerCam.transform.localPosition.z, 0.3800246f) ;
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
         SwimTimer = SwimTimer + Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
@@ -535,8 +536,9 @@ public class UWCharacter : Character
         {
             SwimDamageTimer = 0.0f;
         }
+
         if (ObjectInteraction.PlaySoundEffects)
-        {
+        {//Play splashing sounds.
             if (!footsteps.isPlaying)
             {
                 //switch (Random.Range(1, 3))
@@ -713,7 +715,7 @@ public class UWCharacter : Character
         else
         {//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
             DetectionRange = MinDetectionRange + ((BaseDetectionRange - MinDetectionRange) * ((30.0f - (GetBaseStealthLevel() + StealthLevel)) / 30.0f));
-        }
+        }        
     }
 
     /// <summary>
@@ -859,12 +861,13 @@ public class UWCharacter : Character
         if (isSwimming == true)
         {
             playerMotor.jumping.enabled = false;
-            SwimmingMode();
+            SwimmingEffects();
         }
         else
         {//0.9198418f
             playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
             playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
+            CameraLocalPos = new Vector3(-2.890434f, playerCam.transform.localPosition.z, 0.3800246f);
             swimSpeedMultiplier = 1.0f;
             SwimTimer = 0.0f;
         }

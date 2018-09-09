@@ -193,7 +193,7 @@ public class TileMap : Loader
         }
         else
         {
-            Debug.Log("invalid tile for height at " + tileX + "," + tileY);
+           // Debug.Log("invalid tile for height at " + tileX + "," + tileY);
             return 0;
         }
     }

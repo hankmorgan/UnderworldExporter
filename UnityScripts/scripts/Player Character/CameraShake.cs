@@ -14,7 +14,7 @@ public class CameraShake : UWEBase
     private float shakeAmount = 0.7f;
     private float decreaseFactor = 1.0f;
 
-    Vector3 originalPos;
+    //Vector3 originalPos;
 
     public bool shaking = false;
     public static CameraShake instance;
@@ -42,25 +42,28 @@ public class CameraShake : UWEBase
         shakeDuration = duration;
     }
 
-    void OnEnable()
-    {
-        originalPos = camTransform.localPosition;
-    }
+   // void OnEnable()
+    //{
+       // originalPos = camTransform.localPosition;
+   // }
 
     void Update()
     {
         if (shakeDuration > 0)
         {
             shaking = true;
-            camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+            camTransform.localPosition =UWCharacter.Instance.CameraLocalPos + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
         else
         {
+            if (shaking)
+            {
+                camTransform.localPosition = UWCharacter.Instance.CameraLocalPos;//originalPos;
+            }
             shaking = false;
-            shakeDuration = 0f;
-            camTransform.localPosition = originalPos;
+            shakeDuration = 0f;            
         }
     }
 }

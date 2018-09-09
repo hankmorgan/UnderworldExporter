@@ -1414,18 +1414,21 @@ public class GameWorldController : UWEBase
                 case "COLOURREPLACEMENTREVERSE":
                     MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 1);//load a greyscale texture for use with the shader.
                     break;
-                case "LEGACY SHADERS/BUMPED DIFFUSE":
-                    {
-                        Texture2D loadedTexture = texLoader.LoadImageAt(i, 2);//Get normal map for mod directory
-                        MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
-                        if (loadedTexture != null)
-                        {
-                            MaterialMasterList[i].SetTexture("_BumpMap", TextureLoader.NormalMap(loadedTexture, TextureLoader.BumpMapStrength));
-                        }
-                    }
-                    break;
+                case "BASICUWSHADER":
+                    MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
+                    break;  
+                //case "LEGACY SHADERS/BUMPED DIFFUSE":
+                //    {
+                //        Texture2D loadedTexture = texLoader.LoadImageAt(i, 2);//Get normal map for mod directory
+                //        MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
+                //        if (loadedTexture != null)
+                //        {
+                //            MaterialMasterList[i].SetTexture("_BumpMap", TextureLoader.NormalMap(loadedTexture, TextureLoader.BumpMapStrength));
+                //        }
+                //    }
+                //    break;
                 default:
-                    //Debug.Log(i + " is " + MaterialMasterList[i].shader.name);
+                    Debug.Log(i + " is " + MaterialMasterList[i].shader.name);
                     MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
                     break;
             }
