@@ -3424,16 +3424,22 @@ public class Magic : UWEBase
                 {
                     if (!spellprop.silent)
                     {
-                        caster.transform.parent.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
-                        caster.transform.parent.GetComponent<AudioSource>().Play();
+                        if (caster.GetComponent<AudioSource>() != null)
+                        {
+                            caster.transform.parent.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
+                            caster.transform.parent.GetComponent<AudioSource>().Play();
+                        }
                     }
                 }
                 else
                 {
                     if (!spellprop.silent)
                     {
-                        caster.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
-                        caster.GetComponent<AudioSource>().Play();
+                        if (caster.GetComponent<AudioSource>()!=null)
+                        {
+                            caster.GetComponent<AudioSource>().clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_ZAP];
+                            caster.GetComponent<AudioSource>().Play();
+                        }
                     }
                 }
             }

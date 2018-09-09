@@ -696,6 +696,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
     /// Although the tile map renderer supports tiles of size X*Y I'm only smart enought to optimise the tilemap into strips of X*1 or Y*1 !!
     public void CleanUp(string game)
     {
+        if (!GameWorldController.instance.DoCleanUp) { return; }
         int x; int y;
 
         for (x = 0; x <= TileMap.TileMapSizeX; x++)

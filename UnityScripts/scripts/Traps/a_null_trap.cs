@@ -12,9 +12,4 @@ public class a_null_trap : trap_base
 
     }
 
-    public override void PostActivate(object_base src)
-    {
-        Debug.Log("Overridden PostActivate to test " + this.name);
-        base.PostActivate(src);
-    }
 }

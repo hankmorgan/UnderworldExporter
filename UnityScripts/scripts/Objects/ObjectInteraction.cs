@@ -2444,6 +2444,8 @@ public class ObjectInteraction : UWEBase
                             myObj.AddComponent<a_hack_trap_button_mover>(); break;
                         case 0xA://Bonus object trap
                             myObj.AddComponent<a_hack_trap_class_item>(); break;
+                        case 0xC://
+                            myObj.AddComponent<a_hack_trap_platformwave>(); break;
                         case 0xE://colour cycle a room in talorus
                             myObj.AddComponent<a_hack_trap_colour_cycle>(); break;
                         case 0x1a://Forcefield in scint 5										

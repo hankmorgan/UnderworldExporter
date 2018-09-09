@@ -457,27 +457,30 @@ public class NPC : MobileObject
             }
         }
         Container cnt = this.GetComponent<Container>();
-        if (cnt.CountItems() == 0)
+        if (cnt!=null)
         {
-            //Populate the container with a loot list
-            for (int i = 0; i <= GameWorldController.instance.objDat.critterStats[item_id - 64].Loot.GetUpperBound(0); i++)
+            if (cnt.CountItems() == 0)
             {
-                if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
+                //Populate the container with a loot list
+                for (int i = 0; i <= GameWorldController.instance.objDat.critterStats[item_id - 64].Loot.GetUpperBound(0); i++)
                 {
-                    int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
-                    ObjectLoaderInfo newobjt = ObjectLoader.newObject(itemid, Random.Range(1, 41), 0, 0, 256);
-                    if (itemid == 16)//Sling stone.
+                    if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                     {
-                        newobjt.is_quant = 1;
-                        newobjt.link = Random.Range(1, 10);
-                        newobjt.quality = 40;
+                        int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
+                        ObjectLoaderInfo newobjt = ObjectLoader.newObject(itemid, Random.Range(1, 41), 0, 0, 256);
+                        if (itemid == 16)//Sling stone.
+                        {
+                            newobjt.is_quant = 1;
+                            newobjt.link = Random.Range(1, 10);
+                            newobjt.quality = 40;
+                        }
+                        else
+                        {
+                            newobjt.is_quant = 0;
+                        }
+                        newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
+                        cnt.AddItemToContainer(newobjt.instance.name);
                     }
-                    else
-                    {
-                        newobjt.is_quant = 0;
-                    }
-                    newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
-                    cnt.AddItemToContainer(newobjt.instance.name);
                 }
             }
         }

@@ -212,6 +212,13 @@ public class TileInfo : Loader
                 break;
         }
 
+        if (_RES==GAME_UWDEMO)
+        {//texture_map[t.floorTexture + 48];
+            if (map.texture_map[floorTexture + 48] == 56)
+            {
+                _terrain = TerrainDatLoader.Water;
+            }
+        }
         //There is only one possible steepness in UW so I set it's properties to match a similar tile in shock.
         shockSlopeFlag = TileMap.SLOPE_FLOOR_ONLY;
         if (tileType >= 2)

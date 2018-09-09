@@ -17,6 +17,7 @@ using UnityEngine.UI;
 public class GameWorldController : UWEBase
 {
     public bool EnableUnderworldGenerator = false;
+    public bool DoCleanUp = true;
     public GameObject ceiling;
 
     public WhatTheHellIsSCD_ARK whatTheHellIsThatFileFor;

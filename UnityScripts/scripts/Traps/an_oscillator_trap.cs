@@ -66,24 +66,29 @@ public class an_oscillator_trap : trap_base
 
         if (xpos == 1)
         {//moving up
-            CurrentTileMap().Tiles[triggerX, triggerY].floorHeight += 2;
-            StartCoroutine(MoveTile(platformTile.transform, new Vector3(0f, 0.3f, 0f), 0.1f));
-            if (CurrentTileMap().Tiles[triggerX, triggerY].floorHeight >= 30)
-            {
-                if (
-                        (TileMap.visitTileX == triggerX)
-                        &&
-                        (TileMap.visitTileY == triggerY)
-                )
-                {//Kill the player if they are in the tile  (ouch my head)
-                    UWCharacter.Instance.CurVIT -= 1000;
-                }
-            }
+            MoveTileUp(triggerX, triggerY);
         }
         else
         {//moving down
             CurrentTileMap().Tiles[triggerX, triggerY].floorHeight -= 2;
             StartCoroutine(MoveTile(platformTile.transform, new Vector3(0f, -0.3f, 0f), 0.1f));
+        }
+    }
+
+    private void MoveTileUp(int triggerX, int triggerY)
+    {
+        CurrentTileMap().Tiles[triggerX, triggerY].floorHeight += 2;
+        StartCoroutine(MoveTile(platformTile.transform, new Vector3(0f, 0.3f, 0f), 0.1f));
+        if (CurrentTileMap().Tiles[triggerX, triggerY].floorHeight >= 30)
+        {
+            if (
+                    (TileMap.visitTileX == triggerX)
+                    &&
+                    (TileMap.visitTileY == triggerY)
+            )
+            {//Kill the player if they are in the tile  (ouch my head)
+                UWCharacter.Instance.CurVIT -= 1000;
+            }
         }
     }
 
@@ -131,5 +136,10 @@ public class an_oscillator_trap : trap_base
                 }
             }
         }
+    }
+
+    public override bool WillFireRepeatedly()
+    {
+        return true;
     }
 }

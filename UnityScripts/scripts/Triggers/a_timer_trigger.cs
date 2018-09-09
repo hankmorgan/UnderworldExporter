@@ -56,10 +56,10 @@ public class a_timer_trigger : trigger_base {
             {
                 triggerObj.GetComponent<trap_base>().Activate(this, quality, owner, flags);
             }
-            else
-            {
-                Debug.Log("null trap on " + this.name);
-            }
+           // else
+            //{
+                   //Debug.Log("null trap on " + this.name);                 
+            //}
 			
 		}
 
