@@ -30,11 +30,13 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnWritePDat = new System.Windows.Forms.Button();
+            this.btnWritePDatUW2 = new System.Windows.Forms.Button();
+            this.btnLoadPDatUW2 = new System.Windows.Forms.Button();
+            this.txtCharName = new System.Windows.Forms.TextBox();
+            this.btnWritePDatUW1 = new System.Windows.Forms.Button();
             this.grdPlayerDat = new System.Windows.Forms.DataGridView();
             this.PDatValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLoadPDatUW1 = new System.Windows.Forms.Button();
-            this.txtCharName = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPlayerDat)).BeginInit();
@@ -51,8 +53,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnWritePDatUW2);
+            this.tabPage1.Controls.Add(this.btnLoadPDatUW2);
             this.tabPage1.Controls.Add(this.txtCharName);
-            this.tabPage1.Controls.Add(this.btnWritePDat);
+            this.tabPage1.Controls.Add(this.btnWritePDatUW1);
             this.tabPage1.Controls.Add(this.grdPlayerDat);
             this.tabPage1.Controls.Add(this.btnLoadPDatUW1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
@@ -63,15 +67,42 @@
             this.tabPage1.Text = "UW PlayerDat";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // btnWritePDat
+            // btnWritePDatUW2
             // 
-            this.btnWritePDat.Location = new System.Drawing.Point(6, 46);
-            this.btnWritePDat.Name = "btnWritePDat";
-            this.btnWritePDat.Size = new System.Drawing.Size(90, 34);
-            this.btnWritePDat.TabIndex = 3;
-            this.btnWritePDat.Text = "WritePDat";
-            this.btnWritePDat.UseVisualStyleBackColor = true;
-            this.btnWritePDat.Click += new System.EventHandler(this.btnWritePDat_Click);
+            this.btnWritePDatUW2.Location = new System.Drawing.Point(6, 351);
+            this.btnWritePDatUW2.Name = "btnWritePDatUW2";
+            this.btnWritePDatUW2.Size = new System.Drawing.Size(90, 34);
+            this.btnWritePDatUW2.TabIndex = 6;
+            this.btnWritePDatUW2.Text = "WritePDat";
+            this.btnWritePDatUW2.UseVisualStyleBackColor = true;
+            this.btnWritePDatUW2.Click += new System.EventHandler(this.btnWritePDatUW2_Click);
+            // 
+            // btnLoadPDatUW2
+            // 
+            this.btnLoadPDatUW2.Location = new System.Drawing.Point(6, 311);
+            this.btnLoadPDatUW2.Name = "btnLoadPDatUW2";
+            this.btnLoadPDatUW2.Size = new System.Drawing.Size(90, 34);
+            this.btnLoadPDatUW2.TabIndex = 5;
+            this.btnLoadPDatUW2.Text = "LoadPDat";
+            this.btnLoadPDatUW2.UseVisualStyleBackColor = true;
+            this.btnLoadPDatUW2.Click += new System.EventHandler(this.btnLoadPDatUW2_Click);
+            // 
+            // txtCharName
+            // 
+            this.txtCharName.Location = new System.Drawing.Point(531, 4);
+            this.txtCharName.Name = "txtCharName";
+            this.txtCharName.Size = new System.Drawing.Size(160, 22);
+            this.txtCharName.TabIndex = 4;
+            // 
+            // btnWritePDatUW1
+            // 
+            this.btnWritePDatUW1.Location = new System.Drawing.Point(6, 46);
+            this.btnWritePDatUW1.Name = "btnWritePDatUW1";
+            this.btnWritePDatUW1.Size = new System.Drawing.Size(90, 34);
+            this.btnWritePDatUW1.TabIndex = 3;
+            this.btnWritePDatUW1.Text = "WritePDat";
+            this.btnWritePDatUW1.UseVisualStyleBackColor = true;
+            this.btnWritePDatUW1.Click += new System.EventHandler(this.btnWritePDat_Click);
             // 
             // grdPlayerDat
             // 
@@ -101,13 +132,6 @@
             this.btnLoadPDatUW1.UseVisualStyleBackColor = true;
             this.btnLoadPDatUW1.Click += new System.EventHandler(this.btnLoadPDatUW1_Click);
             // 
-            // txtCharName
-            // 
-            this.txtCharName.Location = new System.Drawing.Point(531, 4);
-            this.txtCharName.Name = "txtCharName";
-            this.txtCharName.Size = new System.Drawing.Size(160, 22);
-            this.txtCharName.TabIndex = 4;
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -132,8 +156,10 @@
         private System.Windows.Forms.DataGridView grdPlayerDat;
         private System.Windows.Forms.DataGridViewTextBoxColumn PDatValue;
         private System.Windows.Forms.Button btnLoadPDatUW1;
-        private System.Windows.Forms.Button btnWritePDat;
+        private System.Windows.Forms.Button btnWritePDatUW1;
         private System.Windows.Forms.TextBox txtCharName;
+        private System.Windows.Forms.Button btnWritePDatUW2;
+        private System.Windows.Forms.Button btnLoadPDatUW2;
     }
 }
 

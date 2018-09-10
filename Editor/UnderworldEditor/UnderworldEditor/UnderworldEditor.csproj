@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="playerdat.cs" />
+    <Compile Include="PlayerDatNames.cs" />
     <Compile Include="util.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>

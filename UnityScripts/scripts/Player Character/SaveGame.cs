@@ -1416,7 +1416,7 @@ public class SaveGame : Loader
                     {
                             for (int r=31; r<=53;r++)
                             {
-                                    buffer[r]=(char)30;
+                                    buffer[r]=(char)0;
                             }
                     }
                     else

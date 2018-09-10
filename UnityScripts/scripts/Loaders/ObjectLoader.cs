@@ -1615,12 +1615,20 @@ public class ObjectLoader : DataLoader
             {
                 for (int y = 48; y < 56; y++)
                 {
-                    //LevelInfo[x,y].BullFrog=true;
-                    //LevelInfo[x,y].hasElevator=true;
                     LevelInfo[x, y].TerrainChange = true;
                 }
             }
         }
+        else if ((_RES == GAME_UW2) && (LevelNo == 64))
+        {//platform wave
+            LevelInfo[10, 49].TerrainChange = true;
+            LevelInfo[10, 50].TerrainChange = true;
+            LevelInfo[10, 51].TerrainChange = true;
+            LevelInfo[10, 45].TerrainChange = true;
+            LevelInfo[10, 46].TerrainChange = true;
+            LevelInfo[10, 47].TerrainChange = true;
+        }
+
     }
 
     /// <summary>
@@ -1833,11 +1841,11 @@ public class ObjectLoader : DataLoader
                             offY = (y * BrushY) + 60f;//center in tile
                             if (objList[ObjectIndex].xpos == 0)
                             {
-                                offX += 6.5f;//was 4
+                                offX += 1.0f;//was 6.5
                             }
                             if (objList[ObjectIndex].xpos == 7)
                             {
-                                offX -= 6.5f;//was 4
+                                offX -= 1.0f;//was 6.5
                             }
                             break;
                         case ObjectInteraction.HEADINGNORTH:
@@ -1845,11 +1853,11 @@ public class ObjectLoader : DataLoader
                             offX = (x * BrushX) + 60f;
                             if (objList[ObjectIndex].ypos == 0)
                             {
-                                offY += 6.5f;//was 4
+                                offY += 1.0f;//was 6.5
                             }
                             if (objList[ObjectIndex].ypos == 7)
                             {
-                                offY -= 6.5f;//was 4
+                                offY -= 1.0f;//was 6.5
                             }
                             break;
                     }

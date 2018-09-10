@@ -204,7 +204,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     fread(textureFile, fileSize, 1,file);
 	fclose(file); 
 
-
+	//long PrevAddress = 0;
 
 	switch (FileType)
 	{
@@ -262,8 +262,11 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			for (i = 0; i < NoOfTextures; i++)
 			{
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
+				//textureOffset = 679 + i * 1000;
+
 				int BitMapWidth = getValAtAddress(textureFile,textureOffset+1, 8);
 				int BitMapHeight = getValAtAddress(textureFile, textureOffset+2, 8);
+				fprintf(LOGFILE, "\tImage %d \t %d\n", i, textureOffset);
 				if (MaxHeight < BitMapHeight)
 					{MaxHeight=BitMapHeight;
 					}
@@ -279,9 +282,9 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				switch (getValAtAddress(textureFile, textureOffset, 8))
 					{
 					case 0x4://8 bit uncompressed
-						fprintf(LOGFILE,"8 bit uncompressed\n");
-						fprintf(LOGFILE,"Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
-						fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+						//fprintf(LOGFILE,"8 bit uncompressed\n");
+						//fprintf(LOGFILE,"Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
+						//fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						textureOffset = textureOffset + 5;
 						if (useTGA==1)
 							{
@@ -381,6 +384,15 @@ int palAddr = paletteNo * 256;
 		i++;
 	}
 
+	unsigned char *xfer;
+	filePal = fopen("c:\\games\\uw2\\data\\xfer.dat", "rb");
+	 fileSizePal = getFileSize(filePal);
+	xfer = new unsigned char[fileSizePal];
+	fread(xfer , fileSizePal, 1, filePal);
+	unsigned char *xferOut = new unsigned char[fileSizePal*16];
+
+	fclose(filePal);
+	writeTGA(xfer, 0, fileSizePal, 1, 0, pal, "xferpal.tga",0);
 return;
 }
 
@@ -1153,8 +1165,15 @@ int MaxHotSpotY=0;
 		int AddressPointer;
 
 		pal = new palette[256];
-		getPalette(PaletteFile, pal, 0);//always palette 0?
-
+		//getPalette(PaletteFile, pal, 0);//always palette 0?
+		if (GREYSCALE == 1)
+			{
+			getPaletteIndex(PaletteFile, pal, 0);
+			}
+		else
+			{
+			getPalette(PaletteFile, pal, 0);
+			}
 
 		long fileSize;
 		unsigned char *assocFile;
@@ -1583,6 +1602,7 @@ printf("%s\n", filePathIn);
 
 	// load remaining pages into memory
 	filesize -= ftell(fd);
+	if (filesize < 0){ return 0; }
 	pages = new Uint8[filesize];
 	fread(pages, filesize, 1, fd);
 	fprintf(LOGFILE,"All pages read into memory\n");

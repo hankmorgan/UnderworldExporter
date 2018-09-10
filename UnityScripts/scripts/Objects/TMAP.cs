@@ -147,25 +147,26 @@ public class TMAP : object_base
         ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
         TileMap tm = CurrentTileMap();
         float doorFrameOffsetX = 0f; float doorFrameOffsetY = 0f;
-        if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
-        {
-            switch (objInt.heading * 45)
-            {
-                case ObjectInteraction.HEADINGSOUTH:
-                    doorFrameOffsetX = -.06f;
-                    break;
-                case ObjectInteraction.HEADINGNORTH:
-                    doorFrameOffsetX = +.06f;
-                    break;
-                case ObjectInteraction.HEADINGWEST:
-                    doorFrameOffsetY = -.06f;
-                    break;
-                case ObjectInteraction.HEADINGEAST:
-                    doorFrameOffsetY = +.06f;
-                    break;
+        //TODO:This should only apply when the door occupies the same space as the tmap.
+        //if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
+        //{
+        //    switch (objInt.heading * 45)
+        //    {
+        //        case ObjectInteraction.HEADINGSOUTH:
+        //            doorFrameOffsetX = -.06f;
+        //            break;
+        //        case ObjectInteraction.HEADINGNORTH:
+        //            doorFrameOffsetX = +.06f;
+        //            break;
+        //        case ObjectInteraction.HEADINGWEST:
+        //            doorFrameOffsetY = -.06f;
+        //            break;
+        //        case ObjectInteraction.HEADINGEAST:
+        //            doorFrameOffsetY = +.06f;
+        //            break;
 
-            }
-        }
+        //    }
+        //}
 
         GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Quad);
         SpriteController.name = "_quad"; // myObj.name + "_quad";

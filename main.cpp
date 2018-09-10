@@ -417,6 +417,185 @@ int main()
 	uw1_cuts_alpha[45] = 0;
 	uw1_cuts_alpha[46] = 0;
 
+	char *uw2_cuts_file[57];
+	uw2_cuts_file[0] = "cuts\\CS000.N00";
+	uw2_cuts_file[1] = "cuts\\CS000.N01";
+	uw2_cuts_file[2] = "cuts\\CS000.N02";
+	uw2_cuts_file[3] = "cuts\\CS000.N03";
+	uw2_cuts_file[4] = "cuts\\CS000.N04";
+	uw2_cuts_file[5] = "cuts\\CS000.N05";
+	uw2_cuts_file[6] = "cuts\\CS000.N06";
+	uw2_cuts_file[7] = "cuts\\CS000.N07";
+	uw2_cuts_file[8] = "cuts\\CS000.N10";
+	uw2_cuts_file[9] = "cuts\\CS000.N11";
+	uw2_cuts_file[10] = "cuts\\CS000.N12";
+	uw2_cuts_file[11] = "cuts\\CS000.N13";
+	uw2_cuts_file[12] = "cuts\\CS000.N14";
+	uw2_cuts_file[13] = "cuts\\CS000.N15";
+	uw2_cuts_file[14] = "cuts\\CS001.N00";
+	uw2_cuts_file[15] = "cuts\\CS001.N01";
+	uw2_cuts_file[16] = "cuts\\CS001.N02";
+	uw2_cuts_file[17] = "cuts\\CS001.N03";
+	uw2_cuts_file[18] = "cuts\\CS001.N04";
+	uw2_cuts_file[19] = "cuts\\CS001.N05";
+	uw2_cuts_file[20] = "cuts\\CS002.N00";
+	uw2_cuts_file[21] = "cuts\\CS002.N01";
+	uw2_cuts_file[22] = "cuts\\CS002.N02";
+	uw2_cuts_file[23] = "cuts\\CS002.N03";
+	uw2_cuts_file[24] = "cuts\\CS002.N04";
+	uw2_cuts_file[25] = "cuts\\CS002.N05";
+	uw2_cuts_file[26] = "cuts\\CS002.N06";
+	uw2_cuts_file[27] = "cuts\\CS002.N07";
+	uw2_cuts_file[28] = "cuts\\CS002.N10";
+	uw2_cuts_file[29] = "cuts\\CS004.N00";
+	uw2_cuts_file[30] = "cuts\\CS005.N00";
+	uw2_cuts_file[31] = "cuts\\CS006.N00";
+	uw2_cuts_file[32] = "cuts\\CS007.N00";
+	uw2_cuts_file[33] = "cuts\\CS011.N00";
+	uw2_cuts_file[34] = "cuts\\CS011.N01";
+	uw2_cuts_file[35] = "cuts\\CS012.N00";
+	uw2_cuts_file[36] = "cuts\\CS012.N01";
+	uw2_cuts_file[37] = "cuts\\CS030.N00";
+	uw2_cuts_file[38] = "cuts\\CS030.N01";
+	uw2_cuts_file[39] = "cuts\\CS031.N00";
+	uw2_cuts_file[40] = "cuts\\CS031.N01";
+	uw2_cuts_file[41] = "cuts\\CS032.N00";
+	uw2_cuts_file[42] = "cuts\\CS032.N01";
+	uw2_cuts_file[43] = "cuts\\CS033.N00";
+	uw2_cuts_file[44] = "cuts\\CS033.N01";
+	uw2_cuts_file[45] = "cuts\\CS034.N00";
+	uw2_cuts_file[46] = "cuts\\CS034.N01";
+	uw2_cuts_file[47] = "cuts\\CS035.N00";
+	uw2_cuts_file[48] = "cuts\\CS035.N01";
+	uw2_cuts_file[49] = "cuts\\CS036.N00";
+	uw2_cuts_file[50] = "cuts\\CS036.N01";
+	uw2_cuts_file[51] = "cuts\\CS037.N01";
+	uw2_cuts_file[52] = "cuts\\CS040.N00";
+	uw2_cuts_file[53] = "cuts\\CS040.N01";
+	uw2_cuts_file[54] = "cuts\\CS403.N00";
+	uw2_cuts_file[55] = "cuts\\CS403.N01";
+	uw2_cuts_file[56] = "cuts\\CS403.N02";
+
+	int uw2_cuts_alpha[57];
+	uw2_cuts_alpha[0] = 0;
+	uw2_cuts_alpha[1] = 0;
+	uw2_cuts_alpha[2] = 0;
+	uw2_cuts_alpha[3] = 0;
+	uw2_cuts_alpha[4] = 0;
+	uw2_cuts_alpha[5] = 0;
+	uw2_cuts_alpha[6] = 0;
+	uw2_cuts_alpha[7] = 0;
+	uw2_cuts_alpha[8] = 0;
+	uw2_cuts_alpha[9] = 0;
+	uw2_cuts_alpha[10] = 0;
+	uw2_cuts_alpha[11] = 0;
+	uw2_cuts_alpha[12] = 0;
+	uw2_cuts_alpha[13] = 0;
+	uw2_cuts_alpha[14] = 0;
+	uw2_cuts_alpha[15] = 0;
+	uw2_cuts_alpha[16] = 0;
+	uw2_cuts_alpha[17] = 0;
+	uw2_cuts_alpha[18] = 0;
+	uw2_cuts_alpha[19] = 0;
+	uw2_cuts_alpha[20] = 0;
+	uw2_cuts_alpha[21] = 0;
+	uw2_cuts_alpha[22] = 0;
+	uw2_cuts_alpha[23] = 0;
+	uw2_cuts_alpha[24] = 0;
+	uw2_cuts_alpha[25] = 0;
+	uw2_cuts_alpha[26] = 0;
+	uw2_cuts_alpha[27] = 0;
+	uw2_cuts_alpha[28] = 0;
+	uw2_cuts_alpha[29] = 0;
+	uw2_cuts_alpha[30] = 0;
+	uw2_cuts_alpha[31] = 0;
+	uw2_cuts_alpha[32] = 0;
+	uw2_cuts_alpha[33] = 0;
+	uw2_cuts_alpha[34] = 0;
+	uw2_cuts_alpha[35] = 0;
+	uw2_cuts_alpha[36] = 0;
+	uw2_cuts_alpha[37] = 0;
+	uw2_cuts_alpha[38] = 0;
+	uw2_cuts_alpha[39] = 0;
+	uw2_cuts_alpha[40] = 0;
+	uw2_cuts_alpha[41] = 0;
+	uw2_cuts_alpha[42] = 0;
+	uw2_cuts_alpha[43] = 0;
+	uw2_cuts_alpha[44] = 0;
+	uw2_cuts_alpha[45] = 0;
+	uw2_cuts_alpha[46] = 0;
+	uw2_cuts_alpha[47] = 0;
+	uw2_cuts_alpha[48] = 0;
+	uw2_cuts_alpha[49] = 0;
+	uw2_cuts_alpha[50] = 0;
+	uw2_cuts_alpha[51] = 0;
+	uw2_cuts_alpha[52] = 0;
+	uw2_cuts_alpha[53] = 0;
+	uw2_cuts_alpha[54] = 0;
+	uw2_cuts_alpha[55] = 0;
+	uw2_cuts_alpha[56] = 0;
+
+
+	char *uw2_cuts_out_file[57];
+	uw2_cuts_out_file[0] = "CS000_N00";
+	uw2_cuts_out_file[1] = "CS000_N01";
+	uw2_cuts_out_file[2] = "CS000_N02";
+	uw2_cuts_out_file[3] = "CS000_N03";
+	uw2_cuts_out_file[4] = "CS000_N04";
+	uw2_cuts_out_file[5] = "CS000_N05";
+	uw2_cuts_out_file[6] = "CS000_N06";
+	uw2_cuts_out_file[7] = "CS000_N07";
+	uw2_cuts_out_file[8] = "CS000_N10";
+	uw2_cuts_out_file[9] = "CS000_N11";
+	uw2_cuts_out_file[10] = "CS000_N12";
+	uw2_cuts_out_file[11] = "CS000_N13";
+	uw2_cuts_out_file[12] = "CS000_N14";
+	uw2_cuts_out_file[13] = "CS000_N15";
+	uw2_cuts_out_file[14] = "CS001_N00";
+	uw2_cuts_out_file[15] = "CS001_N01";
+	uw2_cuts_out_file[16] = "CS001_N02";
+	uw2_cuts_out_file[17] = "CS001_N03";
+	uw2_cuts_out_file[18] = "CS001_N04";
+	uw2_cuts_out_file[19] = "CS001_N05";
+	uw2_cuts_out_file[20] = "CS002_N00";
+	uw2_cuts_out_file[21] = "CS002_N01";
+	uw2_cuts_out_file[22] = "CS002_N02";
+	uw2_cuts_out_file[23] = "CS002_N03";
+	uw2_cuts_out_file[24] = "CS002_N04";
+	uw2_cuts_out_file[25] = "CS002_N05";
+	uw2_cuts_out_file[26] = "CS002_N06";
+	uw2_cuts_out_file[27] = "CS002_N07";
+	uw2_cuts_out_file[28] = "CS002_N10";
+	uw2_cuts_out_file[29] = "CS004_N00";
+	uw2_cuts_out_file[30] = "CS005_N00";
+	uw2_cuts_out_file[31] = "CS006_N00";
+	uw2_cuts_out_file[32] = "CS007_N00";
+	uw2_cuts_out_file[33] = "CS011_N00";
+	uw2_cuts_out_file[34] = "CS011_N01";
+	uw2_cuts_out_file[35] = "CS012_N00";
+	uw2_cuts_out_file[36] = "CS012_N01";
+	uw2_cuts_out_file[37] = "CS030_N00";
+	uw2_cuts_out_file[38] = "CS030_N01";
+	uw2_cuts_out_file[39] = "CS031_N00";
+	uw2_cuts_out_file[40] = "CS031_N01";
+	uw2_cuts_out_file[41] = "CS032_N00";
+	uw2_cuts_out_file[42] = "CS032_N01";
+	uw2_cuts_out_file[43] = "CS033_N00";
+	uw2_cuts_out_file[44] = "CS033_N01";
+	uw2_cuts_out_file[45] = "CS034_N00";
+	uw2_cuts_out_file[46] = "CS034_N01";
+	uw2_cuts_out_file[47] = "CS035_N00";
+	uw2_cuts_out_file[48] = "CS035_N01";
+	uw2_cuts_out_file[49] = "CS036_N00";
+	uw2_cuts_out_file[50] = "CS036_N01";
+	uw2_cuts_out_file[51] = "CS037_N01";
+	uw2_cuts_out_file[52] = "CS040_N00";
+	uw2_cuts_out_file[53] = "CS040_N01";
+	uw2_cuts_out_file[54] = "CS403_N00";
+	uw2_cuts_out_file[55] = "CS403_N01";
+	uw2_cuts_out_file[56] = "CS403_N02";
+
+
 	const char *shock_graphics_file[18];
 	shock_graphics_file[0] = "res\\DATA\\OBJART.RES";
 	shock_graphics_file[1] = "RES\\DATA\\OBJART2.RES";
@@ -989,7 +1168,7 @@ int main()
 						}
 					else
 						{
-						/*
+						
 						printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
 						scanf("%s", TempOutFileName);
 						switch (game)
@@ -1004,7 +1183,7 @@ int main()
 									sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
 									break;
 							}
-							*/
+							
 						}
 					//printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
 					//scanf("%d", &useTGA);
@@ -1154,6 +1333,21 @@ int main()
 								load_cuts_anim(inFile, uw1_cuts_out_file[i], useTGA, false, uw1_cuts_alpha[i]);
 								}							
 							}						
+						break;
+					case UW2:
+						for (int i = 28; i < 57; i++)
+							{
+							char inFile[255];
+							sprintf(inFile, "%s\\%s", path_uw2, uw2_cuts_file[i], 1);
+							//if (i == 17)
+							//	{
+							//	load_cuts_anim(inFile, uw2_cuts_out_file[i], useTGA, true, uw2_cuts_alpha[i]);
+							//	}
+							//else
+							//	{
+								load_cuts_anim(inFile, uw2_cuts_out_file[i], useTGA, false, uw2_cuts_alpha[i]);
+							//	}
+							}
 						break;
 					case SHOCK:
 						ExtractShockCutscenes(Graphics_File, Graphics_Pal, critPal, OutFileName, 0);//Bitmap only so far

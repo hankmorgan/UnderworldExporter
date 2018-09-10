@@ -641,6 +641,11 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		NoOfBlocks=getValAtAddress(tmp_ark,0,32);	
 		 //begin test
 		address_pointer=6;
+		for (int i = 0; i < NoOfBlocks; i++)
+			{			
+			fprintf(LOGFILE, "Block %d at %d\n", i, getValAtAddress(tmp_ark, (i * 4) + 6,32));
+			}
+
 
 		int compressionFlag=getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) + (LevelNo*4) ,32);
 		int isCompressed =(compressionFlag>>1) & 0x01;
