@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnderworldEditor", "UnderworldEditor\UnderworldEditor.csproj", "{BABC145D-4A93-4AAF-B6A7-00FE094436EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BABC145D-4A93-4AAF-B6A7-00FE094436EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BABC145D-4A93-4AAF-B6A7-00FE094436EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BABC145D-4A93-4AAF-B6A7-00FE094436EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BABC145D-4A93-4AAF-B6A7-00FE094436EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACA62938-E10F-41A2-B1C4-04523CE04E32}
+	EndGlobalSection
+EndGlobal
