@@ -57,5 +57,81 @@ namespace UnderworldEditor
             File.WriteAllBytes(Path, bytes);
         }
 
-        }//end class
+
+        /// <summary>
+        /// Gets the value at the specified address in the file buffer and performs any necessary -endian conversions
+        /// </summary>
+        /// <returns>The value at address.</returns>
+        /// <param name="buffer">Buffer.</param>
+        /// <param name="Address">Address.</param>
+        /// <param name="size">Size of the data in bits</param>
+        public static long getValAtAddress(char[] buffer, long Address, int size)
+        {//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
+            switch (size)
+            {
+                case 8:
+                    { return buffer[Address]; }
+                case 16:
+                    { return ConvertInt16(buffer[Address], buffer[Address + 1]); }
+                case 24:
+                    { return ConvertInt24(buffer[Address], buffer[Address + 1], buffer[Address + 2]); }
+                case 32:    //may be buggy!
+                    { return ConvertInt32(buffer[Address], buffer[Address + 1], buffer[Address + 2], buffer[Address + 3]); }
+                default:
+                    {
+                        return 0;
+                    }
+            }
+        }
+
+
+        public static long ConvertInt16(char Byte1, char Byte2)
+        {
+            int b1 = (int)Byte1;
+            int b2 = (int)Byte2;
+            return Byte2 << 8 | Byte1;
+        }
+
+        public static long ConvertInt24(char Byte1, char Byte2, char Byte3)
+        {
+            return Byte3 << 16 | Byte2 << 8 | Byte1;
+        }
+
+        public static long ConvertInt32(char Byte1, char Byte2, char Byte3, char Byte4)
+        {
+            return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;      //24 was 32
+        }
+
+
+        /// <summary>
+        /// Extracts the specified number of bits from the position in the value.
+        /// </summary>
+        /// <returns>The bits.</returns>
+        /// <param name="value">Value.</param>
+        /// <param name="From">From.</param>
+        /// <param name="Length">Length.</param>
+        public static int ExtractBits(int value, int From, int Length)
+        {
+            int mask = getMask(Length);
+            return (value >> From) & (mask);
+        }
+
+
+        /// <summary>
+        /// Gets a bit mask of the specified length.
+        /// </summary>
+        /// <returns>The mask.</returns>
+        /// <param name="Length">Length.</param>
+        static int getMask(int Length)
+        {
+            int mask = 0;
+            for (int i = 0; i < Length; i++)
+            {
+                mask = (mask << 1) | 1;
+            }
+            return mask;
+        }
+
+
+    }//end class
 }
