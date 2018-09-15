@@ -34,9 +34,19 @@ namespace UnderworldEditor
             char[] buffer = playerdat.LoadPlayerDatUW1("c:\\games\\uw1\\save1\\player.dat");
             PopulateValuesToGrid(buffer, curgame);
             objects.InitObjectList(buffer, InventoryOffsetUW1);
+            PopulateItemIDList(curgame);
             PopulateUI(buffer, curgame);            
             PopulateInventorySelectButtons(InventoryOffsetUW1);
             isLoading = false;
+        }
+
+        void PopulateItemIDList(int game)
+        {
+        for (int i =0; i<=464;i++)
+            {
+                CmbItem_ID.Items.Add(i + "-" + objects.ObjectName(i,game));
+            }
+
         }
 
         private void btnLoadPDatUW2_Click(object sender, EventArgs e)
@@ -45,6 +55,7 @@ namespace UnderworldEditor
             curgame = 2;
             char[] buffer = playerdat.LoadPlayerDatUW2("c:\\games\\uw2\\save1\\player.dat");
             PopulateValuesToGrid(buffer, curgame);
+            PopulateItemIDList(curgame);
             objects.InitObjectList(buffer, InventoryOffsetUW2);
             PopulateUI(buffer, curgame);            
             PopulateInventorySelectButtons(InventoryOffsetUW2);
@@ -198,7 +209,7 @@ namespace UnderworldEditor
             {
                 case 1://uw1
                     {
-                        NumEXP.Value = Util.getValAtAddress(buffer, 0x4F, 32);
+                        NumEXP.Value = Util.getValAtAddress(buffer, 0x4F, 32)/10;
                         break;
                     }//end switch uw1
                 case 2:
@@ -317,11 +328,24 @@ namespace UnderworldEditor
         {
             TreeNode node = TreeInventory.SelectedNode;
             int index;
+            if (node.Tag == null) { return; }
             if (int.TryParse(node.Tag.ToString(), out index))
-            {
+            {                
                 if (index>0)
                 {
-                    MessageBox.Show("populate info on object " + index);
+                    objects.ObjectInfo obj = objects.objList[index];
+                    CmbItem_ID.Text = obj.item_id + "-" + objects.ObjectName(obj.item_id,curgame);
+
+                    ChkEnchanted.Checked = (obj.enchantment == 1);
+                    ChkIsQuant.Checked = (obj.is_quant == 1);
+                    ChkDoorDir.Checked = (obj.doordir == 1);
+                    ChkInvis.Checked = (obj.invis == 1);
+
+                    NumFlags.Value = obj.flags;
+                    NumQuality.Value = obj.quality;
+                    NumOwner.Value = obj.owner;
+                    NumNext.Value = obj.next;
+                    NumLink.Value = obj.link;
                 }
             }
         }
