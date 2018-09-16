@@ -18,17 +18,26 @@ namespace UnderworldEditor
         const int InventoryOffsetUW2 = 0x3E3;
         const int InventorySlotOffsetUW1 = 0xf8;
         const int InventorySlotOffsetUW2 = 0x3A3;
+        const int SkillsOffsetUW1 = 0x1F;
+        const int SkillsOffsetUW2 = 31;
 
+        Util.UWBlock[] uwblocks;
+        char[] levarkbuffer;
         int curgame;
+        //RenderForm form3d;
 
         public main()
         {
-            InitializeComponent();
-            GrdPlayerDat.RowHeadersWidth = 100;
+            //form3d = new RenderForm("SharpDX - MiniCube Direct3D11");
+            //form3d.ClientSize = new Size(1024, 1024);
+            InitializeComponent();           
+
         }
+
 
         private void btnLoadPDatUW1_Click(object sender, EventArgs e)
         {
+            
             isLoading = true;
             curgame = 1;
             char[] buffer = playerdat.LoadPlayerDatUW1("c:\\games\\uw1\\save1\\player.dat");
@@ -36,7 +45,7 @@ namespace UnderworldEditor
             objects.InitObjectList(buffer, InventoryOffsetUW1);
             PopulateItemIDList(curgame);
             PopulateUI(buffer, curgame);            
-            PopulateInventorySelectButtons(InventoryOffsetUW1);
+            //PopulateInventorySelectButtons(InventoryOffsetUW1);
             isLoading = false;
         }
 
@@ -44,7 +53,7 @@ namespace UnderworldEditor
         {
         for (int i =0; i<=464;i++)
             {
-                CmbItem_ID.Items.Add(i + "-" + objects.ObjectName(i,game));
+                CmbPdatItem_ID.Items.Add(i + "-" + objects.ObjectName(i,game));
             }
 
         }
@@ -58,7 +67,7 @@ namespace UnderworldEditor
             PopulateItemIDList(curgame);
             objects.InitObjectList(buffer, InventoryOffsetUW2);
             PopulateUI(buffer, curgame);            
-            PopulateInventorySelectButtons(InventoryOffsetUW2);
+            //PopulateInventorySelectButtons(InventoryOffsetUW2);
             isLoading = false;
         }
 
@@ -177,6 +186,10 @@ namespace UnderworldEditor
                 {
                     PopulateLinkedNode(newnode, objects.objList[index].link);
                 }
+                else
+                {
+                    PopulateMagicLink(newnode, index);
+                }
             }
         }
 
@@ -190,11 +203,29 @@ namespace UnderworldEditor
                 {
                     PopulateLinkedNode(newnode, objects.objList[index].link);
                 }
+                else
+                {
+                    PopulateMagicLink(newnode, index);
+                }
                 index = objects.objList[index].next;
             }
         }
 
-            private void PopulateCharName(char[] buffer)
+        private void PopulateMagicLink(TreeNode node, int index)
+        {
+            //if (objects.objList[index].enchantment == 1 && objects.objList[index].is_quant == 0)
+            if ((objects.objList[index].is_quant == 0) && (objects.objList[index].link > 0))
+            {
+                int linked = objects.objList[index].link;
+                if (linked <= objects.objList.GetUpperBound(0))
+                {
+                    TreeNode newnode =node.Nodes.Add(objects.ObjectName(objects.objList[linked].item_id, curgame));
+                    newnode.Tag = index;
+                }
+            }
+        }
+
+        private void PopulateCharName(char[] buffer)
         {
             TxtCharName.Text = "";
             for (int i = 1; i < 14; i++)
@@ -210,6 +241,11 @@ namespace UnderworldEditor
                 case 1://uw1
                     {
                         NumEXP.Value = Util.getValAtAddress(buffer, 0x4F, 32)/10;
+                        GrdSkills.Rows.Clear();
+                        for (int i = SkillsOffsetUW1; i<= 0x35;i++)
+                        {
+                           //add rows
+                        }
                         break;
                     }//end switch uw1
                 case 2:
@@ -230,8 +266,7 @@ namespace UnderworldEditor
                 DataGridViewRow row = GrdPlayerDat.Rows[rowId];
                 row.Cells[0].Value = (int)buffer[i];
                 row.HeaderCell.Value = playerdat.FieldName(i, game);
-            }
-              
+            }              
         }
 
         private void PopulateInventorySelectButtons(int Offset)
@@ -300,7 +335,7 @@ namespace UnderworldEditor
         private void grdPlayerDat_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            
+            if (e.RowIndex < 0) { return; }
             if (senderGrid.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell &&
                 e.RowIndex >= 0)
             {
@@ -334,19 +369,93 @@ namespace UnderworldEditor
                 if (index>0)
                 {
                     objects.ObjectInfo obj = objects.objList[index];
-                    CmbItem_ID.Text = obj.item_id + "-" + objects.ObjectName(obj.item_id,curgame);
-
-                    ChkEnchanted.Checked = (obj.enchantment == 1);
-                    ChkIsQuant.Checked = (obj.is_quant == 1);
-                    ChkDoorDir.Checked = (obj.doordir == 1);
-                    ChkInvis.Checked = (obj.invis == 1);
-
-                    NumFlags.Value = obj.flags;
-                    NumQuality.Value = obj.quality;
-                    NumOwner.Value = obj.owner;
-                    NumNext.Value = obj.next;
-                    NumLink.Value = obj.link;
+                    PopulateObjectUI(obj, CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir,ChkPdatInvis, NumPdatXpos, NumPdatYPos,NumPdatZpos,NumPdatHeading,NumPdatFlags,NumPdatQuality,NumPdatOwner,NumPdatNext,NumPdatLink  );
                 }
+            }
+        }
+
+        private void PopulateObjectUI(objects.ObjectInfo obj, 
+            ComboBox cmbItem_ID, 
+            CheckBox chkEnchanted,
+            CheckBox chkIsQuant,
+            CheckBox chkDoorDir,
+            CheckBox chkInvis,
+            NumericUpDown numXpos,
+            NumericUpDown numYpos,
+            NumericUpDown numZpos,
+            NumericUpDown numHeading,
+            NumericUpDown numFlags,
+            NumericUpDown numQuality,
+            NumericUpDown numOwner,
+            NumericUpDown numNext,
+            NumericUpDown numLink
+            )
+        {
+            cmbItem_ID.Text = obj.item_id + "-" + objects.ObjectName(obj.item_id, curgame);
+
+            chkEnchanted.Checked = (obj.enchantment == 1);
+            chkIsQuant.Checked = (obj.is_quant == 1);
+            chkDoorDir.Checked = (obj.doordir == 1);
+            chkInvis.Checked = (obj.invis == 1);
+
+            numXpos.Value = obj.xpos;
+            numYpos.Value = obj.ypos;
+            numZpos.Value = obj.zpos;
+            numHeading.Value = obj.heading;
+
+            numFlags.Value = obj.flags;
+            numQuality.Value = obj.quality;
+            numOwner.Value = obj.owner;
+            numNext.Value = obj.next;
+            numLink.Value = obj.link;
+        }
+
+        private void btnLoadUW1LevArk_Click(object sender, EventArgs e)
+        {
+            if (Util.ReadStreamFile("c:\\games\\uw1\\data\\lev.ark", out levarkbuffer))
+            {
+                int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
+                uwblocks = new Util.UWBlock[NoOfBlocks];
+                TreeUWBlocks.Nodes.Clear();
+                for (int i=0; i<= uwblocks.GetUpperBound(0); i++)
+                {
+                    if (i <=8)
+                    {
+                        if (Util.LoadUWBlock(levarkbuffer, i, UWBlockSizes(i), out uwblocks[i], 1))
+                        {
+                            if (uwblocks[i].DataLen > 0)
+                            {
+                                TreeNode node = TreeUWBlocks.Nodes.Add("Block #" + i);
+                                node.Tag = i;
+                            }
+                        }
+                    }
+
+                }
+            }//end readstreamfile
+
+        }
+
+        int UWBlockSizes(int blockNo)
+        {
+            if (blockNo<=8)
+            {
+                return 0x7c06;
+            }
+            else
+            { return 0; }
+        }
+
+        private void TreeUWBlocks_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            GrdLevArkRaw.Rows.Clear();
+            int blockno = int.Parse(e.Node.Tag.ToString());
+
+            for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
+            {
+                int rowId = GrdLevArkRaw.Rows.Add();
+                DataGridViewRow row = GrdLevArkRaw.Rows[rowId];
+                row.Cells[0].Value = (int)uwblocks[blockno].Data[i];
             }
         }
     }
