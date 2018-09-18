@@ -2057,6 +2057,7 @@ public class SaveGame : Loader
         int val = (int)DataLoader.getValAtAddress(buffer, i, 8);
         ObjectInteraction.PlaySoundEffects = ((val & 0x1) == 1);
         MusicController.PlayMusic = (((val >> 2) & 0x1) == 1);
+        GameWorldController.instance.difficulty = (int)DataLoader.getValAtAddress(buffer, i-1, 8) & 0x1;
     }
 
     /// <summary>

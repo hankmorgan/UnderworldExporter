@@ -48,6 +48,7 @@
     <Compile Include="objects.cs" />
     <Compile Include="playerdat.cs" />
     <Compile Include="PlayerDatNames.cs" />
+    <Compile Include="TileMap.cs" />
     <Compile Include="util.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>

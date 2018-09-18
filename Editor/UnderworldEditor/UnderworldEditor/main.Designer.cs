@@ -28,37 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Helm");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Chest");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Gloves");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Leggings");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Boots");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("TopRightShoulder");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("RightHand");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("LeftHand");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("LeftRing");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("BackPack0");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("BackPack1");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("BackPack2");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("BackPack3");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("BackPack4");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("BackPack5");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("BackPack6");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("BackPack7");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Helm");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Chest");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Gloves");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Leggings");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Boots");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("TopRightShoulder");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("RightHand");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("LeftHand");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("LeftRing");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("BackPack0");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("BackPack1");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("BackPack2");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("BackPack3");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("BackPack4");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("BackPack5");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("BackPack6");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("BackPack7");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PlayerDat = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.Character = new System.Windows.Forms.TabPage();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.GrdSkills = new System.Windows.Forms.DataGridView();
@@ -95,10 +91,10 @@
             this.NumPdatOwner = new System.Windows.Forms.NumericUpDown();
             this.NumPdatNext = new System.Windows.Forms.NumericUpDown();
             this.NumPdatQuality = new System.Windows.Forms.NumericUpDown();
-            this.NumPdatYPos = new System.Windows.Forms.NumericUpDown();
-            this.NumPdatXpos = new System.Windows.Forms.NumericUpDown();
-            this.NumPdatHeading = new System.Windows.Forms.NumericUpDown();
-            this.NumPdatZpos = new System.Windows.Forms.NumericUpDown();
+            this.NumPInvYPos = new System.Windows.Forms.NumericUpDown();
+            this.NumPInvXpos = new System.Windows.Forms.NumericUpDown();
+            this.NumPInvHeading = new System.Windows.Forms.NumericUpDown();
+            this.NumPInvZpos = new System.Windows.Forms.NumericUpDown();
             this.ChkPdatIsQuant = new System.Windows.Forms.CheckBox();
             this.ChkPdatInvis = new System.Windows.Forms.CheckBox();
             this.ChkPdatDoorDir = new System.Windows.Forms.CheckBox();
@@ -117,14 +113,36 @@
             this.BtnWritePDatUW1 = new System.Windows.Forms.Button();
             this.BtnLoadPDatUW1 = new System.Windows.Forms.Button();
             this.LevArk = new System.Windows.Forms.TabPage();
-            this.btnLoadUW1LevArk = new System.Windows.Forms.Button();
-            this.TreeUWBlocks = new System.Windows.Forms.TreeView();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.GrdLevArkRaw = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLoadUW1LevArk = new System.Windows.Forms.Button();
+            this.TreeUWBlocks = new System.Windows.Forms.TreeView();
+            this.NumCurHP = new System.Windows.Forms.NumericUpDown();
+            this.NumMaxHP = new System.Windows.Forms.NumericUpDown();
+            this.NumMaxMana = new System.Windows.Forms.NumericUpDown();
+            this.NumCurMana = new System.Windows.Forms.NumericUpDown();
+            this.NumFatigue = new System.Windows.Forms.NumericUpDown();
+            this.NumHunger = new System.Windows.Forms.NumericUpDown();
+            this.NumCharLevel = new System.Windows.Forms.NumericUpDown();
+            this.NumSkillPoints = new System.Windows.Forms.NumericUpDown();
+            this.NumDungeonLevel = new System.Windows.Forms.NumericUpDown();
+            this.NumPDatXPos = new System.Windows.Forms.NumericUpDown();
+            this.NumPDatZPos = new System.Windows.Forms.NumericUpDown();
+            this.NumPDatYPos = new System.Windows.Forms.NumericUpDown();
+            this.NumPDatHeading = new System.Windows.Forms.NumericUpDown();
+            this.label33 = new System.Windows.Forms.Label();
+            this.ChkLeftHanded = new System.Windows.Forms.CheckBox();
+            this.ChkIsFemale = new System.Windows.Forms.CheckBox();
+            this.NumBody = new System.Windows.Forms.NumericUpDown();
+            this.CmbCharClass = new System.Windows.Forms.ComboBox();
+            this.ChkDifficulty = new System.Windows.Forms.CheckBox();
+            this.TreeTiles = new System.Windows.Forms.TreeView();
+            this.NumTileType = new System.Windows.Forms.NumericUpDown();
+            this.lblCurrentTile = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -139,17 +157,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatOwner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatQuality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatYPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatXpos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatHeading)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatZpos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvYPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvXpos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvHeading)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvZpos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatFlags)).BeginInit();
             this.RawData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdPlayerDat)).BeginInit();
             this.LevArk.SuspendLayout();
             this.tabControl3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCurHP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumMaxHP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumMaxMana)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCurMana)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFatigue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumHunger)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCharLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSkillPoints)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDungeonLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatXPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatZPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatYPos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatHeading)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumBody)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileType)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -192,11 +226,20 @@
             // 
             // Character
             // 
-            this.Character.Controls.Add(this.label32);
-            this.Character.Controls.Add(this.label31);
-            this.Character.Controls.Add(this.label30);
+            this.Character.Controls.Add(this.ChkDifficulty);
+            this.Character.Controls.Add(this.CmbCharClass);
+            this.Character.Controls.Add(this.NumBody);
+            this.Character.Controls.Add(this.ChkIsFemale);
+            this.Character.Controls.Add(this.ChkLeftHanded);
+            this.Character.Controls.Add(this.NumSkillPoints);
+            this.Character.Controls.Add(this.NumCharLevel);
+            this.Character.Controls.Add(this.NumHunger);
+            this.Character.Controls.Add(this.NumFatigue);
+            this.Character.Controls.Add(this.NumMaxMana);
+            this.Character.Controls.Add(this.NumCurMana);
+            this.Character.Controls.Add(this.NumMaxHP);
+            this.Character.Controls.Add(this.NumCurHP);
             this.Character.Controls.Add(this.groupBox3);
-            this.Character.Controls.Add(this.label29);
             this.Character.Controls.Add(this.label28);
             this.Character.Controls.Add(this.groupBox2);
             this.Character.Controls.Add(this.label27);
@@ -220,42 +263,21 @@
             this.Character.Text = "Character";
             this.Character.UseVisualStyleBackColor = true;
             // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(131, 85);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(80, 17);
-            this.label32.TabIndex = 35;
-            this.label32.Text = "Handeness";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(3, 85);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(56, 17);
-            this.label31.TabIndex = 34;
-            this.label31.Text = "Gender";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(131, 53);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(54, 17);
-            this.label30.TabIndex = 33;
-            this.label30.Text = "Portrait";
-            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.NumPDatHeading);
+            this.groupBox3.Controls.Add(this.label33);
+            this.groupBox3.Controls.Add(this.NumPDatYPos);
+            this.groupBox3.Controls.Add(this.NumPDatZPos);
+            this.groupBox3.Controls.Add(this.NumPDatXPos);
+            this.groupBox3.Controls.Add(this.NumDungeonLevel);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Location = new System.Drawing.Point(12, 260);
+            this.groupBox3.Location = new System.Drawing.Point(12, 196);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(188, 100);
+            this.groupBox3.Size = new System.Drawing.Size(242, 177);
             this.groupBox3.TabIndex = 32;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Location";
@@ -263,7 +285,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(-3, 60);
+            this.label20.Location = new System.Drawing.Point(6, 117);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(39, 17);
             this.label20.TabIndex = 22;
@@ -272,7 +294,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(-2, 77);
+            this.label19.Location = new System.Drawing.Point(6, 86);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(39, 17);
             this.label19.TabIndex = 21;
@@ -281,7 +303,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(-2, 43);
+            this.label18.Location = new System.Drawing.Point(7, 63);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(40, 17);
             this.label18.TabIndex = 20;
@@ -290,25 +312,16 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(-4, 25);
+            this.label16.Location = new System.Drawing.Point(6, 28);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(100, 17);
             this.label16.TabIndex = 19;
             this.label16.Text = "DungeonLevel";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(302, 70);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(61, 17);
-            this.label29.TabIndex = 29;
-            this.label29.Text = "Difficulty";
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(440, 53);
+            this.label28.Location = new System.Drawing.Point(440, 116);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(55, 17);
             this.label28.TabIndex = 28;
@@ -354,7 +367,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(131, 145);
+            this.label27.Location = new System.Drawing.Point(18, 176);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(72, 17);
             this.label27.TabIndex = 26;
@@ -382,7 +395,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(302, 53);
+            this.label25.Location = new System.Drawing.Point(302, 116);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(55, 17);
             this.label25.TabIndex = 23;
@@ -391,7 +404,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(440, 33);
+            this.label24.Location = new System.Drawing.Point(440, 53);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(68, 17);
             this.label24.TabIndex = 22;
@@ -400,7 +413,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(302, 33);
+            this.label23.Location = new System.Drawing.Point(302, 53);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(63, 17);
             this.label23.TabIndex = 21;
@@ -427,7 +440,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 145);
+            this.label17.Location = new System.Drawing.Point(18, 145);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(76, 17);
             this.label17.TabIndex = 15;
@@ -436,7 +449,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 53);
+            this.label15.Location = new System.Drawing.Point(19, 90);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(40, 17);
             this.label15.TabIndex = 13;
@@ -445,7 +458,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 33);
+            this.label14.Location = new System.Drawing.Point(19, 47);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(42, 17);
             this.label14.TabIndex = 12;
@@ -453,20 +466,20 @@
             // 
             // NumEXP
             // 
-            this.NumEXP.Location = new System.Drawing.Point(134, 111);
+            this.NumEXP.Location = new System.Drawing.Point(86, 116);
             this.NumEXP.Maximum = new decimal(new int[] {
             32000,
             0,
             0,
             0});
             this.NumEXP.Name = "NumEXP";
-            this.NumEXP.Size = new System.Drawing.Size(120, 22);
+            this.NumEXP.Size = new System.Drawing.Size(100, 22);
             this.NumEXP.TabIndex = 11;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 116);
+            this.label2.Location = new System.Drawing.Point(19, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 17);
             this.label2.TabIndex = 10;
@@ -475,7 +488,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(18, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 9;
@@ -506,10 +519,10 @@
             this.Inv.Controls.Add(this.NumPdatOwner);
             this.Inv.Controls.Add(this.NumPdatNext);
             this.Inv.Controls.Add(this.NumPdatQuality);
-            this.Inv.Controls.Add(this.NumPdatYPos);
-            this.Inv.Controls.Add(this.NumPdatXpos);
-            this.Inv.Controls.Add(this.NumPdatHeading);
-            this.Inv.Controls.Add(this.NumPdatZpos);
+            this.Inv.Controls.Add(this.NumPInvYPos);
+            this.Inv.Controls.Add(this.NumPInvXpos);
+            this.Inv.Controls.Add(this.NumPInvHeading);
+            this.Inv.Controls.Add(this.NumPInvZpos);
             this.Inv.Controls.Add(this.ChkPdatIsQuant);
             this.Inv.Controls.Add(this.ChkPdatInvis);
             this.Inv.Controls.Add(this.ChkPdatDoorDir);
@@ -671,53 +684,53 @@
             this.NumPdatQuality.Size = new System.Drawing.Size(69, 22);
             this.NumPdatQuality.TabIndex = 11;
             // 
-            // NumPdatYPos
+            // NumPInvYPos
             // 
-            this.NumPdatYPos.Location = new System.Drawing.Point(441, 158);
-            this.NumPdatYPos.Maximum = new decimal(new int[] {
+            this.NumPInvYPos.Location = new System.Drawing.Point(441, 158);
+            this.NumPInvYPos.Maximum = new decimal(new int[] {
             32000,
             0,
             0,
             0});
-            this.NumPdatYPos.Name = "NumPdatYPos";
-            this.NumPdatYPos.Size = new System.Drawing.Size(71, 22);
-            this.NumPdatYPos.TabIndex = 10;
+            this.NumPInvYPos.Name = "NumPInvYPos";
+            this.NumPInvYPos.Size = new System.Drawing.Size(71, 22);
+            this.NumPInvYPos.TabIndex = 10;
             // 
-            // NumPdatXpos
+            // NumPInvXpos
             // 
-            this.NumPdatXpos.Location = new System.Drawing.Point(307, 158);
-            this.NumPdatXpos.Maximum = new decimal(new int[] {
+            this.NumPInvXpos.Location = new System.Drawing.Point(307, 158);
+            this.NumPInvXpos.Maximum = new decimal(new int[] {
             32000,
             0,
             0,
             0});
-            this.NumPdatXpos.Name = "NumPdatXpos";
-            this.NumPdatXpos.Size = new System.Drawing.Size(71, 22);
-            this.NumPdatXpos.TabIndex = 9;
+            this.NumPInvXpos.Name = "NumPInvXpos";
+            this.NumPInvXpos.Size = new System.Drawing.Size(71, 22);
+            this.NumPInvXpos.TabIndex = 9;
             // 
-            // NumPdatHeading
+            // NumPInvHeading
             // 
-            this.NumPdatHeading.Location = new System.Drawing.Point(307, 130);
-            this.NumPdatHeading.Maximum = new decimal(new int[] {
+            this.NumPInvHeading.Location = new System.Drawing.Point(307, 130);
+            this.NumPInvHeading.Maximum = new decimal(new int[] {
             32000,
             0,
             0,
             0});
-            this.NumPdatHeading.Name = "NumPdatHeading";
-            this.NumPdatHeading.Size = new System.Drawing.Size(70, 22);
-            this.NumPdatHeading.TabIndex = 8;
+            this.NumPInvHeading.Name = "NumPInvHeading";
+            this.NumPInvHeading.Size = new System.Drawing.Size(70, 22);
+            this.NumPInvHeading.TabIndex = 8;
             // 
-            // NumPdatZpos
+            // NumPInvZpos
             // 
-            this.NumPdatZpos.Location = new System.Drawing.Point(440, 130);
-            this.NumPdatZpos.Maximum = new decimal(new int[] {
+            this.NumPInvZpos.Location = new System.Drawing.Point(440, 130);
+            this.NumPInvZpos.Maximum = new decimal(new int[] {
             32000,
             0,
             0,
             0});
-            this.NumPdatZpos.Name = "NumPdatZpos";
-            this.NumPdatZpos.Size = new System.Drawing.Size(72, 22);
-            this.NumPdatZpos.TabIndex = 7;
+            this.NumPInvZpos.Name = "NumPInvZpos";
+            this.NumPInvZpos.Size = new System.Drawing.Size(72, 22);
+            this.NumPInvZpos.TabIndex = 7;
             // 
             // ChkPdatIsQuant
             // 
@@ -778,61 +791,61 @@
             // 
             this.TreeInventory.Location = new System.Drawing.Point(7, 3);
             this.TreeInventory.Name = "TreeInventory";
-            treeNode19.Name = "Helml";
-            treeNode19.Text = "Helm";
-            treeNode20.Name = "Chest";
-            treeNode20.Text = "Chest";
-            treeNode21.Name = "Gloves";
-            treeNode21.Text = "Gloves";
-            treeNode22.Name = "Leggings";
-            treeNode22.Text = "Leggings";
-            treeNode23.Name = "Boots";
-            treeNode23.Text = "Boots";
-            treeNode24.Name = "TopRightShoulder";
-            treeNode24.Text = "TopRightShoulder";
-            treeNode25.Name = "TopLeftShoulder";
-            treeNode25.Text = "TopLeftShoulder";
-            treeNode26.Name = "RightHand";
-            treeNode26.Text = "RightHand";
-            treeNode27.Name = "LeftHand";
-            treeNode27.Text = "LeftHand";
-            treeNode28.Name = "RightRing";
-            treeNode28.Text = "LeftRing";
-            treeNode29.Name = "BackPack0";
-            treeNode29.Text = "BackPack0";
-            treeNode30.Name = "BackPack1";
-            treeNode30.Text = "BackPack1";
-            treeNode31.Name = "BackPack2";
-            treeNode31.Text = "BackPack2";
-            treeNode32.Name = "BackPack3";
-            treeNode32.Text = "BackPack3";
-            treeNode33.Name = "BackPack4";
-            treeNode33.Text = "BackPack4";
-            treeNode34.Name = "BackPack5";
-            treeNode34.Text = "BackPack5";
-            treeNode35.Name = "BackPack6";
-            treeNode35.Text = "BackPack6";
-            treeNode36.Name = "BackPack7";
-            treeNode36.Text = "BackPack7";
+            treeNode1.Name = "Helml";
+            treeNode1.Text = "Helm";
+            treeNode2.Name = "Chest";
+            treeNode2.Text = "Chest";
+            treeNode3.Name = "Gloves";
+            treeNode3.Text = "Gloves";
+            treeNode4.Name = "Leggings";
+            treeNode4.Text = "Leggings";
+            treeNode5.Name = "Boots";
+            treeNode5.Text = "Boots";
+            treeNode6.Name = "TopRightShoulder";
+            treeNode6.Text = "TopRightShoulder";
+            treeNode7.Name = "TopLeftShoulder";
+            treeNode7.Text = "TopLeftShoulder";
+            treeNode8.Name = "RightHand";
+            treeNode8.Text = "RightHand";
+            treeNode9.Name = "LeftHand";
+            treeNode9.Text = "LeftHand";
+            treeNode10.Name = "RightRing";
+            treeNode10.Text = "LeftRing";
+            treeNode11.Name = "BackPack0";
+            treeNode11.Text = "BackPack0";
+            treeNode12.Name = "BackPack1";
+            treeNode12.Text = "BackPack1";
+            treeNode13.Name = "BackPack2";
+            treeNode13.Text = "BackPack2";
+            treeNode14.Name = "BackPack3";
+            treeNode14.Text = "BackPack3";
+            treeNode15.Name = "BackPack4";
+            treeNode15.Text = "BackPack4";
+            treeNode16.Name = "BackPack5";
+            treeNode16.Text = "BackPack5";
+            treeNode17.Name = "BackPack6";
+            treeNode17.Text = "BackPack6";
+            treeNode18.Name = "BackPack7";
+            treeNode18.Text = "BackPack7";
             this.TreeInventory.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode22,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28,
-            treeNode29,
-            treeNode30,
-            treeNode31,
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35,
-            treeNode36});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17,
+            treeNode18});
             this.TreeInventory.Size = new System.Drawing.Size(208, 355);
             this.TreeInventory.TabIndex = 0;
             this.TreeInventory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeInventory_AfterSelect);
@@ -944,26 +957,8 @@
             this.LevArk.Name = "LevArk";
             this.LevArk.Size = new System.Drawing.Size(962, 445);
             this.LevArk.TabIndex = 1;
-            this.LevArk.Text = "tabPage1";
+            this.LevArk.Text = "LevArk";
             this.LevArk.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadUW1LevArk
-            // 
-            this.btnLoadUW1LevArk.Location = new System.Drawing.Point(104, 404);
-            this.btnLoadUW1LevArk.Name = "btnLoadUW1LevArk";
-            this.btnLoadUW1LevArk.Size = new System.Drawing.Size(86, 38);
-            this.btnLoadUW1LevArk.TabIndex = 1;
-            this.btnLoadUW1LevArk.Text = "Load UW1 LevArk";
-            this.btnLoadUW1LevArk.UseVisualStyleBackColor = true;
-            this.btnLoadUW1LevArk.Click += new System.EventHandler(this.btnLoadUW1LevArk_Click);
-            // 
-            // TreeUWBlocks
-            // 
-            this.TreeUWBlocks.Location = new System.Drawing.Point(4, 4);
-            this.TreeUWBlocks.Name = "TreeUWBlocks";
-            this.TreeUWBlocks.Size = new System.Drawing.Size(187, 393);
-            this.TreeUWBlocks.TabIndex = 0;
-            this.TreeUWBlocks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeUWBlocks_AfterSelect);
             // 
             // tabControl3
             // 
@@ -978,6 +973,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblCurrentTile);
+            this.tabPage1.Controls.Add(this.NumTileType);
+            this.tabPage1.Controls.Add(this.TreeTiles);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -1024,6 +1022,272 @@
             this.Column1.HeaderText = "Value";
             this.Column1.Name = "Column1";
             // 
+            // btnLoadUW1LevArk
+            // 
+            this.btnLoadUW1LevArk.Location = new System.Drawing.Point(105, 400);
+            this.btnLoadUW1LevArk.Name = "btnLoadUW1LevArk";
+            this.btnLoadUW1LevArk.Size = new System.Drawing.Size(86, 38);
+            this.btnLoadUW1LevArk.TabIndex = 1;
+            this.btnLoadUW1LevArk.Text = "Load UW1 LevArk";
+            this.btnLoadUW1LevArk.UseVisualStyleBackColor = true;
+            this.btnLoadUW1LevArk.Click += new System.EventHandler(this.btnLoadUW1LevArk_Click);
+            // 
+            // TreeUWBlocks
+            // 
+            this.TreeUWBlocks.Location = new System.Drawing.Point(4, 4);
+            this.TreeUWBlocks.Name = "TreeUWBlocks";
+            this.TreeUWBlocks.Size = new System.Drawing.Size(187, 390);
+            this.TreeUWBlocks.TabIndex = 0;
+            this.TreeUWBlocks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeUWBlocks_AfterSelect);
+            // 
+            // NumCurHP
+            // 
+            this.NumCurHP.Location = new System.Drawing.Point(368, 8);
+            this.NumCurHP.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumCurHP.Name = "NumCurHP";
+            this.NumCurHP.Size = new System.Drawing.Size(66, 22);
+            this.NumCurHP.TabIndex = 36;
+            // 
+            // NumMaxHP
+            // 
+            this.NumMaxHP.Location = new System.Drawing.Point(514, 11);
+            this.NumMaxHP.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumMaxHP.Name = "NumMaxHP";
+            this.NumMaxHP.Size = new System.Drawing.Size(66, 22);
+            this.NumMaxHP.TabIndex = 37;
+            // 
+            // NumMaxMana
+            // 
+            this.NumMaxMana.Location = new System.Drawing.Point(514, 51);
+            this.NumMaxMana.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumMaxMana.Name = "NumMaxMana";
+            this.NumMaxMana.Size = new System.Drawing.Size(66, 22);
+            this.NumMaxMana.TabIndex = 39;
+            // 
+            // NumCurMana
+            // 
+            this.NumCurMana.Location = new System.Drawing.Point(368, 48);
+            this.NumCurMana.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumCurMana.Name = "NumCurMana";
+            this.NumCurMana.Size = new System.Drawing.Size(66, 22);
+            this.NumCurMana.TabIndex = 38;
+            // 
+            // NumFatigue
+            // 
+            this.NumFatigue.Location = new System.Drawing.Point(514, 116);
+            this.NumFatigue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumFatigue.Name = "NumFatigue";
+            this.NumFatigue.Size = new System.Drawing.Size(66, 22);
+            this.NumFatigue.TabIndex = 40;
+            // 
+            // NumHunger
+            // 
+            this.NumHunger.Location = new System.Drawing.Point(368, 116);
+            this.NumHunger.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumHunger.Name = "NumHunger";
+            this.NumHunger.Size = new System.Drawing.Size(66, 22);
+            this.NumHunger.TabIndex = 41;
+            // 
+            // NumCharLevel
+            // 
+            this.NumCharLevel.Location = new System.Drawing.Point(132, 143);
+            this.NumCharLevel.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.NumCharLevel.Name = "NumCharLevel";
+            this.NumCharLevel.Size = new System.Drawing.Size(54, 22);
+            this.NumCharLevel.TabIndex = 42;
+            // 
+            // NumSkillPoints
+            // 
+            this.NumSkillPoints.Location = new System.Drawing.Point(132, 176);
+            this.NumSkillPoints.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumSkillPoints.Name = "NumSkillPoints";
+            this.NumSkillPoints.Size = new System.Drawing.Size(54, 22);
+            this.NumSkillPoints.TabIndex = 43;
+            // 
+            // NumDungeonLevel
+            // 
+            this.NumDungeonLevel.Location = new System.Drawing.Point(135, 28);
+            this.NumDungeonLevel.Maximum = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            this.NumDungeonLevel.Name = "NumDungeonLevel";
+            this.NumDungeonLevel.Size = new System.Drawing.Size(101, 22);
+            this.NumDungeonLevel.TabIndex = 23;
+            // 
+            // NumPDatXPos
+            // 
+            this.NumPDatXPos.Location = new System.Drawing.Point(135, 58);
+            this.NumPDatXPos.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.NumPDatXPos.Name = "NumPDatXPos";
+            this.NumPDatXPos.Size = new System.Drawing.Size(101, 22);
+            this.NumPDatXPos.TabIndex = 24;
+            // 
+            // NumPDatZPos
+            // 
+            this.NumPDatZPos.Location = new System.Drawing.Point(135, 117);
+            this.NumPDatZPos.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.NumPDatZPos.Name = "NumPDatZPos";
+            this.NumPDatZPos.Size = new System.Drawing.Size(101, 22);
+            this.NumPDatZPos.TabIndex = 25;
+            // 
+            // NumPDatYPos
+            // 
+            this.NumPDatYPos.Location = new System.Drawing.Point(135, 86);
+            this.NumPDatYPos.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.NumPDatYPos.Name = "NumPDatYPos";
+            this.NumPDatYPos.Size = new System.Drawing.Size(101, 22);
+            this.NumPDatYPos.TabIndex = 26;
+            // 
+            // NumPDatHeading
+            // 
+            this.NumPDatHeading.Location = new System.Drawing.Point(135, 147);
+            this.NumPDatHeading.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumPDatHeading.Name = "NumPDatHeading";
+            this.NumPDatHeading.Size = new System.Drawing.Size(101, 22);
+            this.NumPDatHeading.TabIndex = 28;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(6, 147);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(61, 17);
+            this.label33.TabIndex = 27;
+            this.label33.Text = "Heading";
+            // 
+            // ChkLeftHanded
+            // 
+            this.ChkLeftHanded.AutoSize = true;
+            this.ChkLeftHanded.Location = new System.Drawing.Point(201, 117);
+            this.ChkLeftHanded.Name = "ChkLeftHanded";
+            this.ChkLeftHanded.Size = new System.Drawing.Size(75, 21);
+            this.ChkLeftHanded.TabIndex = 44;
+            this.ChkLeftHanded.Text = "Is Lefty";
+            this.ChkLeftHanded.UseVisualStyleBackColor = true;
+            // 
+            // ChkIsFemale
+            // 
+            this.ChkIsFemale.AutoSize = true;
+            this.ChkIsFemale.Location = new System.Drawing.Point(201, 89);
+            this.ChkIsFemale.Name = "ChkIsFemale";
+            this.ChkIsFemale.Size = new System.Drawing.Size(90, 21);
+            this.ChkIsFemale.TabIndex = 45;
+            this.ChkIsFemale.Text = "Is Female";
+            this.ChkIsFemale.UseVisualStyleBackColor = true;
+            // 
+            // NumBody
+            // 
+            this.NumBody.Location = new System.Drawing.Point(108, 88);
+            this.NumBody.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.NumBody.Name = "NumBody";
+            this.NumBody.Size = new System.Drawing.Size(78, 22);
+            this.NumBody.TabIndex = 46;
+            // 
+            // CmbCharClass
+            // 
+            this.CmbCharClass.FormattingEnabled = true;
+            this.CmbCharClass.Items.AddRange(new object[] {
+            "Fighter",
+            "Mage",
+            "Bard",
+            "Tinker",
+            "Druid",
+            "Paladin",
+            "Ranger",
+            "Shepard"});
+            this.CmbCharClass.Location = new System.Drawing.Point(94, 47);
+            this.CmbCharClass.Name = "CmbCharClass";
+            this.CmbCharClass.Size = new System.Drawing.Size(160, 24);
+            this.CmbCharClass.TabIndex = 47;
+            // 
+            // ChkDifficulty
+            // 
+            this.ChkDifficulty.AutoSize = true;
+            this.ChkDifficulty.Location = new System.Drawing.Point(201, 154);
+            this.ChkDifficulty.Name = "ChkDifficulty";
+            this.ChkDifficulty.Size = new System.Drawing.Size(118, 21);
+            this.ChkDifficulty.TabIndex = 48;
+            this.ChkDifficulty.Text = "Easy Difficulty";
+            this.ChkDifficulty.UseVisualStyleBackColor = true;
+            // 
+            // TreeTiles
+            // 
+            this.TreeTiles.Location = new System.Drawing.Point(4, 7);
+            this.TreeTiles.Name = "TreeTiles";
+            this.TreeTiles.Size = new System.Drawing.Size(239, 399);
+            this.TreeTiles.TabIndex = 0;
+            this.TreeTiles.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeTiles_AfterSelect);
+            // 
+            // NumTileType
+            // 
+            this.NumTileType.Location = new System.Drawing.Point(289, 38);
+            this.NumTileType.Name = "NumTileType";
+            this.NumTileType.Size = new System.Drawing.Size(120, 22);
+            this.NumTileType.TabIndex = 1;
+            // 
+            // lblCurrentTile
+            // 
+            this.lblCurrentTile.AutoSize = true;
+            this.lblCurrentTile.Location = new System.Drawing.Point(289, 7);
+            this.lblCurrentTile.Name = "lblCurrentTile";
+            this.lblCurrentTile.Size = new System.Drawing.Size(82, 17);
+            this.lblCurrentTile.TabIndex = 2;
+            this.lblCurrentTile.Text = "Current Tile";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1050,17 +1314,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatOwner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatNext)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatQuality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatYPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatXpos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatHeading)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumPdatZpos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvYPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvXpos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvHeading)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPInvZpos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumPdatFlags)).EndInit();
             this.RawData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdPlayerDat)).EndInit();
             this.LevArk.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCurHP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumMaxHP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumMaxMana)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCurMana)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFatigue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumHunger)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumCharLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumSkillPoints)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDungeonLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatXPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatZPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatYPos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumPDatHeading)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumBody)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileType)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1081,11 +1362,11 @@
         private System.Windows.Forms.CheckBox ChkPdatDoorDir;
         private System.Windows.Forms.CheckBox ChkPdatEnchanted;
         private System.Windows.Forms.CheckBox ChkPdatInvis;
-        private System.Windows.Forms.NumericUpDown NumPdatZpos;
+        private System.Windows.Forms.NumericUpDown NumPInvZpos;
         private System.Windows.Forms.CheckBox ChkPdatIsQuant;
-        private System.Windows.Forms.NumericUpDown NumPdatYPos;
-        private System.Windows.Forms.NumericUpDown NumPdatXpos;
-        private System.Windows.Forms.NumericUpDown NumPdatHeading;
+        private System.Windows.Forms.NumericUpDown NumPInvYPos;
+        private System.Windows.Forms.NumericUpDown NumPInvXpos;
+        private System.Windows.Forms.NumericUpDown NumPInvHeading;
         private System.Windows.Forms.NumericUpDown NumPdatQuality;
         private System.Windows.Forms.NumericUpDown NumPdatNext;
         private System.Windows.Forms.NumericUpDown NumPdatOwner;
@@ -1121,13 +1402,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtCharName;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
@@ -1146,6 +1423,28 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView GrdLevArkRaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.NumericUpDown NumMaxMana;
+        private System.Windows.Forms.NumericUpDown NumCurMana;
+        private System.Windows.Forms.NumericUpDown NumMaxHP;
+        private System.Windows.Forms.NumericUpDown NumCurHP;
+        private System.Windows.Forms.NumericUpDown NumHunger;
+        private System.Windows.Forms.NumericUpDown NumFatigue;
+        private System.Windows.Forms.NumericUpDown NumCharLevel;
+        private System.Windows.Forms.NumericUpDown NumSkillPoints;
+        private System.Windows.Forms.NumericUpDown NumPDatYPos;
+        private System.Windows.Forms.NumericUpDown NumPDatZPos;
+        private System.Windows.Forms.NumericUpDown NumPDatXPos;
+        private System.Windows.Forms.NumericUpDown NumDungeonLevel;
+        private System.Windows.Forms.NumericUpDown NumPDatHeading;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.CheckBox ChkLeftHanded;
+        private System.Windows.Forms.CheckBox ChkIsFemale;
+        private System.Windows.Forms.NumericUpDown NumBody;
+        private System.Windows.Forms.ComboBox CmbCharClass;
+        private System.Windows.Forms.CheckBox ChkDifficulty;
+        private System.Windows.Forms.TreeView TreeTiles;
+        private System.Windows.Forms.NumericUpDown NumTileType;
+        private System.Windows.Forms.Label lblCurrentTile;
     }
 }
 

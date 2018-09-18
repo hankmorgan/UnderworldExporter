@@ -79,8 +79,9 @@ public class DataLoader :Loader {
 
 		public static long ConvertInt16( char Byte1,  char Byte2)
 		{
-				//return Byte1 << 8 | Byte2 ;
-				return Byte2 << 8 | Byte1 ;
+        int b1 = (int)Byte1;
+        int b2 = (int)Byte2;
+        return Byte2 << 8 | Byte1 ;
 		}
 
 		public static long ConvertInt24( char Byte1,  char Byte2,  char Byte3)
