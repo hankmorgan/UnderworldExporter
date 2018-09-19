@@ -29,6 +29,7 @@ namespace UnderworldEditor
         //RenderForm form3d;
         private objects pdatObjects;
         private TileMap tilemap;
+        private objects worldObjects;
 
         public main()
         {
@@ -39,19 +40,7 @@ namespace UnderworldEditor
         }
 
 
-        private void btnLoadPDatUW1_Click(object sender, EventArgs e)
-        {
-            
-            isLoading = true;
-            curgame = GAME_UW1;
-            char[] buffer = playerdat.LoadPlayerDatUW1("c:\\games\\uw1\\save1\\player.dat");
-            PopulateValuesToGrid(buffer, curgame);
-            pdatObjects = new objects();
-            pdatObjects.InitInventoryObjectList(buffer, InventoryOffsetUW1);
-            PopulateItemIDList(curgame);
-            PopulateUI(buffer, curgame, pdatObjects.objList);            
-            isLoading = false;
-        }
+
 
         void PopulateItemIDList(int game)
         {
@@ -60,41 +49,6 @@ namespace UnderworldEditor
                 CmbPdatItem_ID.Items.Add(i + "-" + objects.ObjectName(i,game));
             }
 
-        }
-
-        private void btnLoadPDatUW2_Click(object sender, EventArgs e)
-        {
-            isLoading = true;
-            curgame = GAME_UW2;
-            char[] buffer = playerdat.LoadPlayerDatUW2("c:\\games\\uw2\\save1\\player.dat");
-            PopulateValuesToGrid(buffer, curgame);
-            PopulateItemIDList(curgame);
-            pdatObjects = new objects();
-            pdatObjects.InitInventoryObjectList(buffer, InventoryOffsetUW2);
-            PopulateUI(buffer, curgame, pdatObjects.objList);            
-            //PopulateInventorySelectButtons(InventoryOffsetUW2);
-            isLoading = false;
-        }
-
-        /// <summary>
-        /// Write the info in the raw grid back to the player dat file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnWritePDatUW1_Click(object sender, EventArgs e)
-        {
-            char[] buffer = GetValuesFromGrid();
-            playerdat.EncryptDecryptUW1(buffer, buffer[0]);
-            Util.WriteStreamFile("c:\\games\\uw1\\save1\\PLAYER.DAT", buffer);
-        }
-
-
-
-        private void btnWritePDatUW2_Click(object sender, EventArgs e)
-        {
-            char[] buffer = GetValuesFromGrid();
-            buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
-            Util.WriteStreamFile("c:\\games\\uw2\\save1\\PLAYER.DAT", buffer);
         }
 
         private void PopulateUI(char[] buffer,int game, objects.ObjectInfo[] objList)
@@ -113,75 +67,75 @@ namespace UnderworldEditor
            
             TreeNode tvn = TreeInventory.Nodes.Add("Helm");
             int objIndex = (int)Util.getValAtAddress(buffer, offset+0, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Chest");
             objIndex = (int)Util.getValAtAddress(buffer, offset +2, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Gloves");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 4, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Leggings");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 6, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Boots");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 8, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Right Shoulder");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 10, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Left Shoulder");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 12, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Right Hand");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 14, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Left Hand");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 16, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Right Ring");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 18, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("Left Ring");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 20, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
 
             tvn = TreeInventory.Nodes.Add("BackPack0");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 22, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack1");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 24, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack2");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 26, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack3");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 28, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack4");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 30, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack5");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 32, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack6");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 34, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
             tvn = TreeInventory.Nodes.Add("BackPack7");
             objIndex = (int)Util.getValAtAddress(buffer, offset + 36, 16) >> 6;
-            PopulateNode(tvn, objIndex, objList);
+            PopulateInventoryNode(tvn, objIndex, objList);
         }
 
-        void PopulateNode(TreeNode node, int index, objects.ObjectInfo[] objList)
+        void PopulateInventoryNode(TreeNode node, int index, objects.ObjectInfo[] objList)
         {
             if (index!=0)
             {
@@ -189,16 +143,35 @@ namespace UnderworldEditor
                 newnode.Tag = index;
                 if (objects.isContainer(objList[index].item_id))
                 {
-                    PopulateLinkedNode(newnode, objList[index].link, objList);
+                    PopulateLinkedInventoryNode(newnode, objList[index].link, objList);
                 }
                 else
                 {
-                    PopulateMagicLink(newnode, index,objList);
+                    PopulateInventoryMagicLink(newnode, index,objList);
                 }
             }
         }
 
-        void PopulateLinkedNode(TreeNode node, int index, objects.ObjectInfo[] objList)
+        void PopulateWorldNode(TreeNode node, int index, objects.ObjectInfo[] objList)
+        {           
+            while (index!=0)
+            {
+                TreeNode newnode = node.Nodes.Add(index + ". " +objects.ObjectName(objList[index].item_id, curgame));
+                newnode.Tag = index;
+                if (objects.isContainer(objList[index].item_id))
+                {
+                    PopulateLinkedInventoryNode(newnode, objList[index].link, objList);
+                }
+                index = objList[index].next;
+                //else
+                //{
+                //    PopulateInventoryMagicLink(newnode, index, objList);
+                //}
+            }
+        }
+
+
+        void PopulateLinkedInventoryNode(TreeNode node, int index, objects.ObjectInfo[] objList)
         {
             while (index!=0)
             {
@@ -206,17 +179,17 @@ namespace UnderworldEditor
                 newnode.Tag = index;
                 if (objects.isContainer(objList[index].item_id))
                 {
-                    PopulateLinkedNode(newnode, objList[index].link,objList);
+                    PopulateLinkedInventoryNode(newnode, objList[index].link,objList);
                 }
                 else
                 {
-                    PopulateMagicLink(newnode, index, objList);
+                    PopulateInventoryMagicLink(newnode, index, objList);
                 }
                 index = objList[index].next;
             }
         }
 
-        private void PopulateMagicLink(TreeNode node, int index, objects.ObjectInfo[] objList)
+        private void PopulateInventoryMagicLink(TreeNode node, int index, objects.ObjectInfo[] objList)
         {
             //if (objects.objList[index].enchantment == 1 && objects.objList[index].is_quant == 0)
             if ((objList[index].is_quant == 0) && (objList[index].link > 0))
@@ -494,33 +467,7 @@ namespace UnderworldEditor
             numLink.Value = obj.link;
         }
 
-        private void btnLoadUW1LevArk_Click(object sender, EventArgs e)
-        {
-            if (Util.ReadStreamFile("c:\\games\\uw1\\data\\lev.ark", out levarkbuffer))
-            {
-                int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
-                uwblocks = new Util.UWBlock[NoOfBlocks];
-                TreeUWBlocks.Nodes.Clear();
-                for (int i=0; i<= uwblocks.GetUpperBound(0); i++)
-                {
-                    if (i <=8)
-                    {
-                        if (Util.LoadUWBlock(levarkbuffer, i, UWBlockSizes(i), out uwblocks[i], 1))
-                        {
-                            if (uwblocks[i].DataLen > 0)
-                            {
-                                TreeNode node = TreeUWBlocks.Nodes.Add("Block #" + i);
-                                node.Tag = i;
-                            }
-                        }
-                    }
-
-                }
-            }//end readstreamfile
-
-        }
-
-        int UWBlockSizes(int blockNo)
+         int UWBlockSizes(int blockNo)
         {
             if (blockNo<=8)
             {
@@ -553,6 +500,29 @@ namespace UnderworldEditor
                     ynode.Tag = x + "," + y;
                 }
             }
+
+            worldObjects = new objects();
+            worldObjects.InitWorldObjectList(uwblocks[blockno].Data, 64*64*4);
+            TreeWorldObjects.Nodes.Clear();
+            for (int i=0; i<=worldObjects.objList.GetUpperBound(0);i++)
+            {
+                TreeNode newnode = TreeWorldObjects.Nodes.Add(i + ". " + objects.ObjectName(worldObjects.objList[i].item_id,curgame));
+                 newnode.Tag = i;
+            }
+
+            TreeWorldByTile.Nodes.Clear();
+            for (int x = 0; x <= 63; x++)
+            {
+                
+                for (int y = 0; y <= 63; y++)
+                {
+                    if (tilemap.Tiles[x,y].indexObjectList!=0)
+                    {
+                        TreeNode xynode = TreeWorldByTile.Nodes.Add(x + "," + y);
+                        PopulateWorldNode(xynode, tilemap.Tiles[x, y].indexObjectList, worldObjects.objList);
+                    }
+                }
+            }
         }
 
         private void TreeTiles_AfterSelect(object sender, TreeViewEventArgs e)
@@ -568,8 +538,122 @@ namespace UnderworldEditor
                     if (int.TryParse(Y, out y))
                     {
                         lblCurrentTile.Text = "Current Tile " + x + "," + y + " " + TreeTiles.SelectedNode.Tag.ToString();
-                        NumTileType.Value = tilemap.Tiles[x, y].tileType;
+                        CmbTileType.Text = TileMap.GetTileTypeText(tilemap.Tiles[x, y].tileType);
+                        NumFloorHeight.Value = tilemap.Tiles[x, y].floorHeight;
+                        NumFloorTexture.Value = tilemap.Tiles[x, y].floorTexture;
+                        NumWallTexture.Value = tilemap.Tiles[x, y].wallTexture;
+                        NumIndexObjectList.Value = tilemap.Tiles[x, y].indexObjectList;
                     }
+                }
+            }
+        }
+
+        private void loadPlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isLoading = true;
+            curgame = GAME_UW1;
+            char[] buffer = playerdat.LoadPlayerDatUW1("c:\\games\\uw1\\save1\\player.dat");
+            PopulateValuesToGrid(buffer, curgame);
+            pdatObjects = new objects();
+            pdatObjects.InitInventoryObjectList(buffer, InventoryOffsetUW1);
+            PopulateItemIDList(curgame);
+            PopulateUI(buffer, curgame, pdatObjects.objList);
+            isLoading = false;
+        }
+
+        private void writePlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            char[] buffer = GetValuesFromGrid();
+            playerdat.EncryptDecryptUW1(buffer, buffer[0]);
+            Util.WriteStreamFile("c:\\games\\uw1\\save1\\PLAYER.DAT", buffer);
+        }
+
+        private void loadPlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            isLoading = true;
+            curgame = GAME_UW2;
+            char[] buffer = playerdat.LoadPlayerDatUW2("c:\\games\\uw2\\save1\\player.dat");
+            PopulateValuesToGrid(buffer, curgame);
+            PopulateItemIDList(curgame);
+            pdatObjects = new objects();
+            pdatObjects.InitInventoryObjectList(buffer, InventoryOffsetUW2);
+            PopulateUI(buffer, curgame, pdatObjects.objList);
+            //PopulateInventorySelectButtons(InventoryOffsetUW2);
+            isLoading = false;
+        }
+
+        private void writePlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            char[] buffer = GetValuesFromGrid();
+            buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
+            Util.WriteStreamFile("c:\\games\\uw2\\save1\\PLAYER.DAT", buffer);
+        }
+
+        private void LoadLevArkUW1_Click(object sender, EventArgs e)
+        {
+            if (Util.ReadStreamFile("c:\\games\\uw1\\data\\lev.ark", out levarkbuffer))
+            {
+                int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
+                uwblocks = new Util.UWBlock[NoOfBlocks];
+                TreeUWBlocks.Nodes.Clear();
+                for (int i = 0; i <= uwblocks.GetUpperBound(0); i++)
+                {
+                    if (i <= 8)
+                    {
+                        if (Util.LoadUWBlock(levarkbuffer, i, UWBlockSizes(i), out uwblocks[i], 1))
+                        {
+                            if (uwblocks[i].DataLen > 0)
+                            {
+                                TreeNode node = TreeUWBlocks.Nodes.Add("Block #" + i);
+                                node.Tag = i;
+                            }
+                        }
+                    }
+
+                }
+            }//end readstreamfile
+        }
+
+        private void TreeWorldObjects_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = TreeWorldObjects.SelectedNode;
+            int index;
+            if (node.Tag == null) { return; }
+            if (int.TryParse(node.Tag.ToString(), out index))
+            {
+                if (index > 0)
+                {
+                    objects.ObjectInfo obj = worldObjects.objList[index];
+                    PopulateObjectUI(obj, 
+                        CmbWorldItem_ID, ChkWorldEnchanted, 
+                        ChkWorldIsQuant, ChkWorldDoorDir, 
+                        ChkWorldInvis, NumWorldXPos,
+                        NumWorldYPos, NumWorldZpos, 
+                        NumWorldHeading, NumWorldFlags, 
+                        NumWorldQuality, NumWorldOwner, 
+                        NumWorldNext, NumWorldLink);
+                }
+            }
+        }
+
+        private void TreeWorldByTile_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = TreeWorldByTile.SelectedNode;
+            int index;
+            if (node.Tag == null) { return; }
+            if (int.TryParse(node.Tag.ToString(), out index))
+            {
+                if (index > 0)
+                {
+                    objects.ObjectInfo obj = worldObjects.objList[index];
+                    PopulateObjectUI(obj,
+                        CmbWorldItem_ID, ChkWorldEnchanted,
+                        ChkWorldIsQuant, ChkWorldDoorDir,
+                        ChkWorldInvis, NumWorldXPos,
+                        NumWorldYPos, NumWorldZpos,
+                        NumWorldHeading, NumWorldFlags,
+                        NumWorldQuality, NumWorldOwner,
+                        NumWorldNext, NumWorldLink);
                 }
             }
         }
