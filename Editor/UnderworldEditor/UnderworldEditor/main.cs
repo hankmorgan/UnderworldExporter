@@ -30,6 +30,7 @@ namespace UnderworldEditor
         private objects pdatObjects;
         private TileMap tilemap;
         private objects worldObjects;
+        private UWStrings UWGameStrings;
 
         public main()
         {
@@ -467,31 +468,62 @@ namespace UnderworldEditor
             numLink.Value = obj.link;
         }
 
-         int UWBlockSizes(int blockNo)
+         int UWBlockSizes(int blockno)
         {
-            if (blockNo<=8)
+            if (blockno<=8)
             {
                 return 0x7c06;
             }
+            if (blockno <= 17)
+            {
+                return 0x0180;
+            }
+            if (blockno <= 28)
+            {
+                return 0x7a;
+            }
+            if (blockno <= 39)
+            {
+                return 0x1000;
+            }
             else
-            { return 0; }
+            {
+                return 0;
+            }
+           // if (blockno <= 48)
+            //{
+           //     return 0;//TODO:This block is of variable size
+            //}
         }
 
         private void TreeUWBlocks_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (e.Node.Tag == null) { return; }
             int blockno = int.Parse(e.Node.Tag.ToString());
-            GrdLevArkRaw.Rows.Clear();
-            tilemap = new TileMap();            
-            tilemap.InitTileMap(uwblocks[blockno].Data, 0);
-            //////for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
-            //////{
-            //////    int rowId = GrdLevArkRaw.Rows.Add();
-            //////    DataGridViewRow row = GrdLevArkRaw.Rows[rowId];
-            //////    row.Cells[0].Value = (int)uwblocks[blockno].Data[i];
-            //////}
+            GrdLevArkRaw.Rows.Clear();            
+            switch (uwblocks[blockno].ContentType)
+            {
+                case Util.ContentTypes.TileMap:                    
+                    LoadTileMap(blockno);
+                    break;
+                default:
+                    FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
+                    break;
+            }            
+        }
+
+        private void LoadTileMap(int blockno)
+        {
+            tilemap = new TileMap();
+            tilemap.InitTileMap(uwblocks[blockno].Data, 0,blockno, curgame);
+            if (curgame == 1)
+            {
+                short ceiling = 0;
+                tilemap.BuildTextureMap(uwblocks[blockno + 9].Data, ref ceiling, curgame);
+            }
             //Temporarily output to treeview for testing.
             TreeTiles.Nodes.Clear();
-            for (int x=0; x<=63;x++)
+            for (int x = 0; x <= 63; x++)
             {
                 TreeNode xnode = TreeTiles.Nodes.Add("X=" + x);
                 for (int y = 0; y <= 63; y++)
@@ -502,26 +534,35 @@ namespace UnderworldEditor
             }
 
             worldObjects = new objects();
-            worldObjects.InitWorldObjectList(uwblocks[blockno].Data, 64*64*4);
+            worldObjects.InitWorldObjectList(uwblocks[blockno].Data, 64 * 64 * 4);
             TreeWorldObjects.Nodes.Clear();
-            for (int i=0; i<=worldObjects.objList.GetUpperBound(0);i++)
+            for (int i = 0; i <= worldObjects.objList.GetUpperBound(0); i++)
             {
-                TreeNode newnode = TreeWorldObjects.Nodes.Add(i + ". " + objects.ObjectName(worldObjects.objList[i].item_id,curgame));
-                 newnode.Tag = i;
+                TreeNode newnode = TreeWorldObjects.Nodes.Add(i + ". " + objects.ObjectName(worldObjects.objList[i].item_id, curgame));
+                newnode.Tag = i;
             }
 
             TreeWorldByTile.Nodes.Clear();
             for (int x = 0; x <= 63; x++)
             {
-                
                 for (int y = 0; y <= 63; y++)
                 {
-                    if (tilemap.Tiles[x,y].indexObjectList!=0)
+                    if (tilemap.Tiles[x, y].indexObjectList != 0)
                     {
                         TreeNode xynode = TreeWorldByTile.Nodes.Add(x + "," + y);
                         PopulateWorldNode(xynode, tilemap.Tiles[x, y].indexObjectList, worldObjects.objList);
                     }
                 }
+            }
+        }
+
+        private void FillRawDataForLevArk(int blockno)
+        {
+            for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
+            {
+                int rowId = GrdLevArkRaw.Rows.Add();
+                DataGridViewRow row = GrdLevArkRaw.Rows[rowId];
+                row.Cells[0].Value = (int)uwblocks[blockno].Data[i];
             }
         }
 
@@ -596,20 +637,33 @@ namespace UnderworldEditor
                 int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
                 uwblocks = new Util.UWBlock[NoOfBlocks];
                 TreeUWBlocks.Nodes.Clear();
+                TreeNode TileMapNodes = TreeUWBlocks.Nodes.Add("Tilemaps");
+                TreeNode OverlayMapNodes = TreeUWBlocks.Nodes.Add("Overlays");
+                TreeNode TextureMapNodes = TreeUWBlocks.Nodes.Add("TextureMaps");
+                TreeNode AutoMapNodes = TreeUWBlocks.Nodes.Add("AutoMaps");
+                TreeNode AutoMapNotesNodes = TreeUWBlocks.Nodes.Add("AutoMapNotes");//These are variable sizes
                 for (int i = 0; i <= uwblocks.GetUpperBound(0); i++)
                 {
-                    if (i <= 8)
+                    if (Util.LoadUWBlock(levarkbuffer, i, UWBlockSizes(i), out uwblocks[i], 1))
                     {
-                        if (Util.LoadUWBlock(levarkbuffer, i, UWBlockSizes(i), out uwblocks[i], 1))
+                        uwblocks[i].ContentType = Util.GetUW1LevArkContentType(i);
+                        TreeNode node;
+                        switch (uwblocks[i].ContentType)
                         {
-                            if (uwblocks[i].DataLen > 0)
-                            {
-                                TreeNode node = TreeUWBlocks.Nodes.Add("Block #" + i);
-                                node.Tag = i;
-                            }
-                        }
+                            case Util.ContentTypes.AnimationOverlay:
+                                node = OverlayMapNodes.Nodes.Add("Block #" + i); break;
+                            case Util.ContentTypes.AutoMap:
+                                node = AutoMapNodes.Nodes.Add("Block #" + i); break;
+                            case Util.ContentTypes.AutoMapNotes:
+                                node = AutoMapNotesNodes.Nodes.Add("Block #" + i); break;
+                            case Util.ContentTypes.TextureMap:;
+                                node = TextureMapNodes.Nodes.Add("Block #" + i); break;
+                            case Util.ContentTypes.TileMap:
+                            default:
+                                node = TileMapNodes.Nodes.Add("Block #" + i);break;
+                        } 
+                         node.Tag = i; 
                     }
-
                 }
             }//end readstreamfile
         }
@@ -656,6 +710,12 @@ namespace UnderworldEditor
                         NumWorldNext, NumWorldLink);
                 }
             }
+        }
+
+        private void main_Load(object sender, EventArgs e)
+        {
+            UWGameStrings = new UWStrings();
+            UWGameStrings.LoadStringsPak("c:\\games\\uw1\\data\\strings.pak", 1, GrdStrings);
         }
     }
 }

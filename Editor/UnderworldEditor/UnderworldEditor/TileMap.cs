@@ -27,6 +27,10 @@ namespace UnderworldEditor
         public const short TILE_RIDGE_NW = 16;
         public const short TILE_RIDGE_NE = 17;
 
+        public const int UW1_TEXTUREMAPSIZE = 64;
+        public const int UW2_TEXTUREMAPSIZE = 70;
+        public const int UWDEMO_TEXTUREMAPSIZE = 63;
+
 
         public struct TileInfo
         {
@@ -46,8 +50,17 @@ namespace UnderworldEditor
 
         public TileInfo[,] Tiles;
 
-        public void InitTileMap(char[] lev_ark, int address_pointer)
+
+        public int[] texture_map;
+
+        public void InitTileMap(char[] lev_ark, int address_pointer, int thisblock, int game)
         {
+           // if (game == 1)//uw1
+           // {
+                //OverlayBlock = TileMapBlock + 9;
+                //TextureMapBlock = TileMapBlock + 18;
+                //AutoMapBlock = TileMapBlock + 27;
+           // }            
             Tiles = new TileInfo[64, 64];
             for (short y = 0; y <= 63; y++)
             {
@@ -57,6 +70,83 @@ namespace UnderworldEditor
                     int SecondTileInt = (int)Util.getValAtAddress(lev_ark, (address_pointer + 2), 16);
                     Tiles[x, y] = BuildTileInfo(x, y, FirstTileInt, SecondTileInt, 0);//TODO:Texturemappings
                     address_pointer = address_pointer + 4;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Builds a texture map from file data
+        /// </summary>
+        /// <param name="tex_ark"></param>
+        /// <param name="CeilingTexture"></param>
+       public void BuildTextureMap(char[] tex_ark, ref short CeilingTexture, int game)
+        {
+            short textureMapSize;//=UW1_TEXTUREMAPSIZE;
+            switch (game)
+            {
+                case 2:
+                    textureMapSize = UW2_TEXTUREMAPSIZE;
+                    break;
+                //case GAME_UWDEMO:
+                //    textureMapSize = UWDEMO_TEXTUREMAPSIZE;
+                //    break;
+                default:
+                    textureMapSize = UW1_TEXTUREMAPSIZE;
+                    break;
+            }
+            int offset = 0;
+            for (int i = 0; i < textureMapSize; i++)//256
+            {
+                switch (game)
+                {
+                    case 1:
+                        {
+                            if (i < 48)//Wall textures
+                            {
+                                texture_map[i] = (short)Util.getValAtAddress(tex_ark, offset, 16);
+                                offset = offset + 2;
+                            }
+                            else
+                                if (i <= 57)//Floor textures are 48 to 56, ceiling is 57
+                            {
+                                texture_map[i] = (short)(Util.getValAtAddress(tex_ark, offset, 16) + 210);
+                                offset = offset + 2;
+                                if (i == 57)
+                                {
+                                    CeilingTexture = (short)i;
+                                }
+                            }
+                            else
+                            {
+                                texture_map[i] = (short)Util.getValAtAddress(tex_ark, offset, 8);
+                                offset++;
+                            }
+                            break;
+                        }
+                    case 2://uw2
+                        {
+                            if (i < 64)
+                            {
+                                texture_map[i] = (short)Util.getValAtAddress(tex_ark, offset, 16);
+                                offset = offset + 2;
+                            }
+                            else
+                            {
+                                //door textures
+                                texture_map[i] = (short)Util.getValAtAddress(tex_ark, offset, 8);
+                                offset++;
+                            }
+                        }
+                        if (i == 0xf)
+                        {
+                            CeilingTexture = (short)i;
+                        }
+                        //if ((LevelNo == (int)(GameWorldController.UW2_LevelNos.Ethereal4)) && (i == 16))
+                        //{
+                        //    //Not sure why this is an exceptional case!
+                        //    CeilingTexture = (short)i;
+                        //}
+                        break;
                 }
             }
         }

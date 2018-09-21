@@ -10,6 +10,22 @@ namespace UnderworldEditor
 {
     class Util
     {
+
+        public enum ContentTypes
+        {
+            TileMap,
+            TextureMap,
+            AutoMap,
+            AutoMapNotes,
+            Conversation,
+            ImageTR,
+            ImageGR,
+            Text,
+            DataTable,
+            AnimationOverlay,
+            Unknown
+        }
+
         /// <summary>
         /// UW block structure for .ark files.
         /// </summary>
@@ -22,6 +38,8 @@ namespace UnderworldEditor
             //UW2 specific
             public int CompressionFlag;
             public long ReservedSpace;
+
+            public ContentTypes ContentType; 
         };
 
 
@@ -300,6 +318,32 @@ namespace UnderworldEditor
                 }
             }
             return buf;
+        }
+
+
+        public static ContentTypes GetUW1LevArkContentType(int blockno)
+        {
+            if (blockno <=8)
+            {
+                return ContentTypes.TileMap;
+            }
+            if (blockno<=17)
+            {
+                return ContentTypes.AnimationOverlay;
+            }
+            if (blockno<=28)
+            {
+                return ContentTypes.TextureMap;
+            }
+            if (blockno<=39)
+            {
+                return ContentTypes.AutoMap;
+            }
+            if (blockno<=48)
+            {
+                return ContentTypes.AutoMapNotes;
+            }
+            return ContentTypes.Unknown;
         }
 
 
