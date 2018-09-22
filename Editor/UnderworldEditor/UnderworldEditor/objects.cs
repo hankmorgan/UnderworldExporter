@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UnderworldEditor
 {
-    class objects
+    public class objects
     {
         public struct ObjectInfo
         {

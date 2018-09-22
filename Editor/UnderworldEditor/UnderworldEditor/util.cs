@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace UnderworldEditor
 {
-    class Util
+    public class Util
     {
 
         public enum ContentTypes
@@ -345,6 +345,35 @@ namespace UnderworldEditor
             }
             return ContentTypes.Unknown;
         }
+
+        public static int UWBlockSizes(int blockno)
+        {
+            if (blockno <= 8)
+            {
+                return 0x7c06;
+            }
+            if (blockno <= 17)
+            {
+                return 0x0180;
+            }
+            if (blockno <= 28)
+            {
+                return 0x7a;
+            }
+            if (blockno <= 39)
+            {
+                return 0x1000;
+            }
+            else
+            {
+                return 0;
+            }
+            // if (blockno <= 48)
+            //{
+            //     return 0;//TODO:This block is of variable size
+            //}
+        }
+
 
 
     }//end class

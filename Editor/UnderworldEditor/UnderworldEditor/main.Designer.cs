@@ -28,24 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Helm");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Chest");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Gloves");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Leggings");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Boots");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("TopRightShoulder");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("RightHand");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("LeftHand");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("LeftRing");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("BackPack0");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("BackPack1");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("BackPack2");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("BackPack3");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("BackPack4");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("BackPack5");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("BackPack6");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("BackPack7");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Helm");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Chest");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Gloves");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Leggings");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Boots");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("TopRightShoulder");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("RightHand");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("LeftHand");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("LeftRing");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("BackPack0");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("BackPack1");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("BackPack2");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("BackPack3");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("BackPack4");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("BackPack5");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("BackPack6");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("BackPack7");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
+            treeNode39});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PlayerDat = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -133,6 +137,12 @@
             this.TreeUWBlocks = new System.Windows.Forms.TreeView();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.LblMappedFloorTexture = new System.Windows.Forms.Label();
             this.TreeTiles = new System.Windows.Forms.TreeView();
             this.NumIndexObjectList = new System.Windows.Forms.NumericUpDown();
             this.NumWallTexture = new System.Windows.Forms.NumericUpDown();
@@ -173,9 +183,16 @@
             this.ChkWorldEnchanted = new System.Windows.Forms.CheckBox();
             this.NumWorldFlags = new System.Windows.Forms.NumericUpDown();
             this.CmbWorldItem_ID = new System.Windows.Forms.ComboBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.GrdLevArkRaw = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.GrdStrings = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,12 +201,11 @@
             this.uW2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW2 = new System.Windows.Forms.ToolStripMenuItem();
             this.WritePDatUW2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.GrdStrings = new System.Windows.Forms.DataGridView();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImgOut = new System.Windows.Forms.PictureBox();
+            this.loadStringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadArtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TreeArt = new System.Windows.Forms.TreeView();
+            this.NumTextureSelect = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -251,9 +267,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldFlags)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).BeginInit();
+            this.tabPage10.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTextureSelect)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -261,6 +280,7 @@
             this.tabControl1.Controls.Add(this.PlayerDat);
             this.tabControl1.Controls.Add(this.LevArk);
             this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
@@ -1094,45 +1114,43 @@
             // 
             this.TreeInventory.Location = new System.Drawing.Point(7, 3);
             this.TreeInventory.Name = "TreeInventory";
-            treeNode19.Name = "Helml";
-            treeNode19.Text = "Helm";
-            treeNode20.Name = "Chest";
-            treeNode20.Text = "Chest";
-            treeNode21.Name = "Gloves";
-            treeNode21.Text = "Gloves";
-            treeNode22.Name = "Leggings";
-            treeNode22.Text = "Leggings";
-            treeNode23.Name = "Boots";
-            treeNode23.Text = "Boots";
-            treeNode24.Name = "TopRightShoulder";
-            treeNode24.Text = "TopRightShoulder";
-            treeNode25.Name = "TopLeftShoulder";
-            treeNode25.Text = "TopLeftShoulder";
-            treeNode26.Name = "RightHand";
-            treeNode26.Text = "RightHand";
-            treeNode27.Name = "LeftHand";
-            treeNode27.Text = "LeftHand";
-            treeNode28.Name = "RightRing";
-            treeNode28.Text = "LeftRing";
-            treeNode29.Name = "BackPack0";
-            treeNode29.Text = "BackPack0";
-            treeNode30.Name = "BackPack1";
-            treeNode30.Text = "BackPack1";
-            treeNode31.Name = "BackPack2";
-            treeNode31.Text = "BackPack2";
-            treeNode32.Name = "BackPack3";
-            treeNode32.Text = "BackPack3";
-            treeNode33.Name = "BackPack4";
-            treeNode33.Text = "BackPack4";
-            treeNode34.Name = "BackPack5";
-            treeNode34.Text = "BackPack5";
-            treeNode35.Name = "BackPack6";
-            treeNode35.Text = "BackPack6";
-            treeNode36.Name = "BackPack7";
-            treeNode36.Text = "BackPack7";
+            treeNode21.Name = "Helml";
+            treeNode21.Text = "Helm";
+            treeNode22.Name = "Chest";
+            treeNode22.Text = "Chest";
+            treeNode23.Name = "Gloves";
+            treeNode23.Text = "Gloves";
+            treeNode24.Name = "Leggings";
+            treeNode24.Text = "Leggings";
+            treeNode25.Name = "Boots";
+            treeNode25.Text = "Boots";
+            treeNode26.Name = "TopRightShoulder";
+            treeNode26.Text = "TopRightShoulder";
+            treeNode27.Name = "TopLeftShoulder";
+            treeNode27.Text = "TopLeftShoulder";
+            treeNode28.Name = "RightHand";
+            treeNode28.Text = "RightHand";
+            treeNode29.Name = "LeftHand";
+            treeNode29.Text = "LeftHand";
+            treeNode30.Name = "RightRing";
+            treeNode30.Text = "LeftRing";
+            treeNode31.Name = "BackPack0";
+            treeNode31.Text = "BackPack0";
+            treeNode32.Name = "BackPack1";
+            treeNode32.Text = "BackPack1";
+            treeNode33.Name = "BackPack2";
+            treeNode33.Text = "BackPack2";
+            treeNode34.Name = "BackPack3";
+            treeNode34.Text = "BackPack3";
+            treeNode35.Name = "BackPack4";
+            treeNode35.Text = "BackPack4";
+            treeNode36.Name = "BackPack5";
+            treeNode36.Text = "BackPack5";
+            treeNode37.Name = "BackPack6";
+            treeNode37.Text = "BackPack6";
+            treeNode38.Name = "BackPack7";
+            treeNode38.Text = "BackPack7";
             this.TreeInventory.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
             treeNode21,
             treeNode22,
             treeNode23,
@@ -1148,7 +1166,9 @@
             treeNode33,
             treeNode34,
             treeNode35,
-            treeNode36});
+            treeNode36,
+            treeNode37,
+            treeNode38});
             this.TreeInventory.Size = new System.Drawing.Size(208, 355);
             this.TreeInventory.TabIndex = 0;
             this.TreeInventory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeInventory_AfterSelect);
@@ -1261,6 +1281,12 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label44);
+            this.tabPage1.Controls.Add(this.label43);
+            this.tabPage1.Controls.Add(this.label42);
+            this.tabPage1.Controls.Add(this.label41);
+            this.tabPage1.Controls.Add(this.label40);
+            this.tabPage1.Controls.Add(this.LblMappedFloorTexture);
             this.tabPage1.Controls.Add(this.TreeTiles);
             this.tabPage1.Controls.Add(this.NumIndexObjectList);
             this.tabPage1.Controls.Add(this.NumWallTexture);
@@ -1276,6 +1302,60 @@
             this.tabPage1.Text = "Tiles";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(173, 212);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(75, 17);
+            this.label44.TabIndex = 15;
+            this.label44.Text = "Object List";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(168, 155);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(87, 17);
+            this.label43.TabIndex = 14;
+            this.label43.Text = "Wall Texture";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(168, 113);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(92, 17);
+            this.label42.TabIndex = 13;
+            this.label42.Text = "Floor Texture";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(168, 74);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(49, 17);
+            this.label41.TabIndex = 12;
+            this.label41.Text = "Height";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(165, 43);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(40, 17);
+            this.label40.TabIndex = 11;
+            this.label40.Text = "Type";
+            // 
+            // LblMappedFloorTexture
+            // 
+            this.LblMappedFloorTexture.AutoSize = true;
+            this.LblMappedFloorTexture.Location = new System.Drawing.Point(420, 111);
+            this.LblMappedFloorTexture.Name = "LblMappedFloorTexture";
+            this.LblMappedFloorTexture.Size = new System.Drawing.Size(139, 17);
+            this.LblMappedFloorTexture.TabIndex = 10;
+            this.LblMappedFloorTexture.Text = "MappedFloorTexture";
+            // 
             // TreeTiles
             // 
             this.TreeTiles.Location = new System.Drawing.Point(3, 3);
@@ -1286,7 +1366,7 @@
             // 
             // NumIndexObjectList
             // 
-            this.NumIndexObjectList.Location = new System.Drawing.Point(246, 195);
+            this.NumIndexObjectList.Location = new System.Drawing.Point(274, 208);
             this.NumIndexObjectList.Maximum = new decimal(new int[] {
             1024,
             0,
@@ -1298,21 +1378,21 @@
             // 
             // NumWallTexture
             // 
-            this.NumWallTexture.Location = new System.Drawing.Point(246, 151);
+            this.NumWallTexture.Location = new System.Drawing.Point(274, 155);
             this.NumWallTexture.Name = "NumWallTexture";
             this.NumWallTexture.Size = new System.Drawing.Size(120, 22);
             this.NumWallTexture.TabIndex = 6;
             // 
             // NumFloorTexture
             // 
-            this.NumFloorTexture.Location = new System.Drawing.Point(247, 111);
+            this.NumFloorTexture.Location = new System.Drawing.Point(273, 111);
             this.NumFloorTexture.Name = "NumFloorTexture";
             this.NumFloorTexture.Size = new System.Drawing.Size(120, 22);
             this.NumFloorTexture.TabIndex = 5;
             // 
             // NumFloorHeight
             // 
-            this.NumFloorHeight.Location = new System.Drawing.Point(246, 74);
+            this.NumFloorHeight.Location = new System.Drawing.Point(272, 74);
             this.NumFloorHeight.Name = "NumFloorHeight";
             this.NumFloorHeight.Size = new System.Drawing.Size(120, 22);
             this.NumFloorHeight.TabIndex = 4;
@@ -1331,7 +1411,7 @@
             "TILE_SLOPE_S",
             "TILE_SLOPE_E",
             "TILE_SLOPE_W"});
-            this.CmbTileType.Location = new System.Drawing.Point(246, 43);
+            this.CmbTileType.Location = new System.Drawing.Point(272, 43);
             this.CmbTileType.Name = "CmbTileType";
             this.CmbTileType.Size = new System.Drawing.Size(121, 24);
             this.CmbTileType.TabIndex = 3;
@@ -1700,6 +1780,24 @@
             this.CmbWorldItem_ID.Size = new System.Drawing.Size(205, 24);
             this.CmbWorldItem_ID.TabIndex = 26;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(832, 406);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "TextureMaps";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Location = new System.Drawing.Point(4, 25);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(832, 406);
+            this.tabPage8.TabIndex = 4;
+            this.tabPage8.Text = "AutoMaps";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.GrdLevArkRaw);
@@ -1728,6 +1826,52 @@
             this.Column1.HeaderText = "Value";
             this.Column1.Name = "Column1";
             // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.GrdStrings);
+            this.tabPage9.Location = new System.Drawing.Point(4, 25);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(986, 441);
+            this.tabPage9.TabIndex = 2;
+            this.tabPage9.Text = "Strings";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // GrdStrings
+            // 
+            this.GrdStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrdStrings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column2,
+            this.Column4});
+            this.GrdStrings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GrdStrings.Location = new System.Drawing.Point(0, 0);
+            this.GrdStrings.Name = "GrdStrings";
+            this.GrdStrings.RowTemplate.Height = 24;
+            this.GrdStrings.Size = new System.Drawing.Size(986, 441);
+            this.GrdStrings.TabIndex = 0;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Key";
+            this.Column2.Name = "Column2";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Text";
+            this.Column4.Name = "Column4";
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.NumTextureSelect);
+            this.tabPage10.Controls.Add(this.TreeArt);
+            this.tabPage10.Controls.Add(this.ImgOut);
+            this.tabPage10.Location = new System.Drawing.Point(4, 25);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(986, 441);
+            this.tabPage10.TabIndex = 3;
+            this.tabPage10.Text = "Images";
+            this.tabPage10.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1745,7 +1889,9 @@
             this.uW1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadPDatUW1,
             this.WritePDatUW1,
-            this.LoadLevArkUW1});
+            this.LoadLevArkUW1,
+            this.loadStringsToolStripMenuItem,
+            this.loadArtFileToolStripMenuItem});
             this.uW1ToolStripMenuItem.Name = "uW1ToolStripMenuItem";
             this.uW1ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.uW1ToolStripMenuItem.Text = "UW1";
@@ -1794,56 +1940,56 @@
             this.WritePDatUW2.Text = "Write Player Dat";
             this.WritePDatUW2.Click += new System.EventHandler(this.writePlayerDatToolStripMenuItem1_Click);
             // 
-            // tabPage7
+            // ImgOut
             // 
-            this.tabPage7.Location = new System.Drawing.Point(4, 25);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(832, 406);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "TextureMaps";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.ImgOut.Image = ((System.Drawing.Image)(resources.GetObject("ImgOut.Image")));
+            this.ImgOut.InitialImage = ((System.Drawing.Image)(resources.GetObject("ImgOut.InitialImage")));
+            this.ImgOut.Location = new System.Drawing.Point(326, 6);
+            this.ImgOut.Name = "ImgOut";
+            this.ImgOut.Size = new System.Drawing.Size(256, 256);
+            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgOut.TabIndex = 50;
+            this.ImgOut.TabStop = false;
             // 
-            // tabPage8
+            // loadStringsToolStripMenuItem
             // 
-            this.tabPage8.Location = new System.Drawing.Point(4, 25);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(832, 406);
-            this.tabPage8.TabIndex = 4;
-            this.tabPage8.Text = "AutoMaps";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            this.loadStringsToolStripMenuItem.Name = "loadStringsToolStripMenuItem";
+            this.loadStringsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.loadStringsToolStripMenuItem.Text = "Load Strings";
+            this.loadStringsToolStripMenuItem.Click += new System.EventHandler(this.loadStringsToolStripMenuItem_Click);
             // 
-            // tabPage9
+            // loadArtFileToolStripMenuItem
             // 
-            this.tabPage9.Controls.Add(this.GrdStrings);
-            this.tabPage9.Location = new System.Drawing.Point(4, 25);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(986, 441);
-            this.tabPage9.TabIndex = 2;
-            this.tabPage9.Text = "Strings";
-            this.tabPage9.UseVisualStyleBackColor = true;
+            this.loadArtFileToolStripMenuItem.Name = "loadArtFileToolStripMenuItem";
+            this.loadArtFileToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.loadArtFileToolStripMenuItem.Text = "Load Art Files";
+            this.loadArtFileToolStripMenuItem.Click += new System.EventHandler(this.loadArtFileToolStripMenuItem_Click);
             // 
-            // GrdStrings
+            // TreeArt
             // 
-            this.GrdStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GrdStrings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column2,
-            this.Column4});
-            this.GrdStrings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GrdStrings.Location = new System.Drawing.Point(0, 0);
-            this.GrdStrings.Name = "GrdStrings";
-            this.GrdStrings.RowTemplate.Height = 24;
-            this.GrdStrings.Size = new System.Drawing.Size(986, 441);
-            this.GrdStrings.TabIndex = 0;
+            this.TreeArt.Location = new System.Drawing.Point(7, 4);
+            this.TreeArt.Name = "TreeArt";
+            treeNode39.Name = "Node1";
+            treeNode39.Text = "Wall & Floor Textures(2 files)";
+            treeNode40.Name = "Node0";
+            treeNode40.Text = "Textures";
+            this.TreeArt.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode40});
+            this.TreeArt.Size = new System.Drawing.Size(282, 437);
+            this.TreeArt.TabIndex = 51;
+            this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
             // 
-            // Column2
+            // NumTextureSelect
             // 
-            this.Column2.HeaderText = "Key";
-            this.Column2.Name = "Column2";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Text";
-            this.Column4.Name = "Column4";
+            this.NumTextureSelect.Location = new System.Drawing.Point(326, 269);
+            this.NumTextureSelect.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.NumTextureSelect.Name = "NumTextureSelect";
+            this.NumTextureSelect.Size = new System.Drawing.Size(256, 22);
+            this.NumTextureSelect.TabIndex = 52;
             // 
             // main
             // 
@@ -1924,10 +2070,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldFlags)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
+            this.tabPage10.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTextureSelect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1939,9 +2088,7 @@
         private System.Windows.Forms.TabPage PlayerDat;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage Inv;
-        private System.Windows.Forms.TreeView TreeInventory;
         private System.Windows.Forms.TabPage RawData;
-        private System.Windows.Forms.DataGridView GrdPlayerDat;
         private System.Windows.Forms.DataGridViewTextBoxColumn PDatValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn Commands;
         private System.Windows.Forms.Label label6;
@@ -1957,10 +2104,8 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown NumEXP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TxtCharName;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label27;
@@ -1969,30 +2114,11 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridView GrdSkills;
         private System.Windows.Forms.DataGridViewTextBoxColumn SkillName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TabPage LevArk;
-        private System.Windows.Forms.NumericUpDown NumMaxMana;
-        private System.Windows.Forms.NumericUpDown NumCurMana;
-        private System.Windows.Forms.NumericUpDown NumMaxHP;
-        private System.Windows.Forms.NumericUpDown NumCurHP;
-        private System.Windows.Forms.NumericUpDown NumHunger;
-        private System.Windows.Forms.NumericUpDown NumFatigue;
-        private System.Windows.Forms.NumericUpDown NumCharLevel;
-        private System.Windows.Forms.NumericUpDown NumSkillPoints;
-        private System.Windows.Forms.NumericUpDown NumPDatYPos;
-        private System.Windows.Forms.NumericUpDown NumPDatZPos;
-        private System.Windows.Forms.NumericUpDown NumPDatXPos;
-        private System.Windows.Forms.NumericUpDown NumDungeonLevel;
-        private System.Windows.Forms.NumericUpDown NumPDatHeading;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.CheckBox ChkLeftHanded;
-        private System.Windows.Forms.CheckBox ChkIsFemale;
-        private System.Windows.Forms.NumericUpDown NumBody;
-        private System.Windows.Forms.ComboBox CmbCharClass;
-        private System.Windows.Forms.CheckBox ChkDifficulty;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem uW1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LoadPDatUW1;
@@ -2002,19 +2128,11 @@
         private System.Windows.Forms.ToolStripMenuItem LoadPDatUW2;
         private System.Windows.Forms.ToolStripMenuItem WritePDatUW2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TreeView TreeUWBlocks;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label lblCurrentTile;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView GrdLevArkRaw;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.ComboBox CmbTileType;
-        private System.Windows.Forms.NumericUpDown NumWallTexture;
-        private System.Windows.Forms.NumericUpDown NumFloorTexture;
-        private System.Windows.Forms.NumericUpDown NumFloorHeight;
-        private System.Windows.Forms.NumericUpDown NumIndexObjectList;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
@@ -2026,20 +2144,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown NumPdatLink;
-        private System.Windows.Forms.NumericUpDown NumPdatOwner;
-        private System.Windows.Forms.NumericUpDown NumPdatNext;
-        private System.Windows.Forms.NumericUpDown NumPdatQuality;
-        private System.Windows.Forms.NumericUpDown NumPInvYPos;
-        private System.Windows.Forms.NumericUpDown NumPInvXpos;
-        private System.Windows.Forms.NumericUpDown NumPInvHeading;
-        private System.Windows.Forms.NumericUpDown NumPInvZpos;
-        private System.Windows.Forms.CheckBox ChkPdatIsQuant;
-        private System.Windows.Forms.CheckBox ChkPdatInvis;
-        private System.Windows.Forms.CheckBox ChkPdatDoorDir;
-        private System.Windows.Forms.CheckBox ChkPdatEnchanted;
-        private System.Windows.Forms.NumericUpDown NumPdatFlags;
-        private System.Windows.Forms.ComboBox CmbPdatItem_ID;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
@@ -2051,34 +2155,91 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.NumericUpDown NumWorldLink;
-        private System.Windows.Forms.NumericUpDown NumWorldOwner;
-        private System.Windows.Forms.NumericUpDown NumWorldNext;
-        private System.Windows.Forms.NumericUpDown NumWorldQuality;
-        private System.Windows.Forms.NumericUpDown NumWorldYPos;
-        private System.Windows.Forms.NumericUpDown NumWorldXPos;
-        private System.Windows.Forms.NumericUpDown NumWorldHeading;
-        private System.Windows.Forms.NumericUpDown NumWorldZpos;
-        private System.Windows.Forms.CheckBox ChkWorldInvis;
-        private System.Windows.Forms.CheckBox ChkWorldDoorDir;
-        private System.Windows.Forms.CheckBox ChkWorldEnchanted;
-        private System.Windows.Forms.NumericUpDown NumWorldFlags;
-        private System.Windows.Forms.ComboBox CmbWorldItem_ID;
-        private System.Windows.Forms.TreeView TreeTiles;
         private System.Windows.Forms.TabControl tabControl4;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TreeView TreeWorldObjects;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TreeView TreeWorldByTile;
         private System.Windows.Forms.TreeView TreeTrapsTriggers;
-        private System.Windows.Forms.CheckBox ChkWorldIsQuant;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.DataGridView GrdStrings;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label40;
+        public System.Windows.Forms.NumericUpDown NumEXP;
+        public System.Windows.Forms.TextBox TxtCharName;
+        public System.Windows.Forms.DataGridView GrdSkills;
+        public System.Windows.Forms.NumericUpDown NumMaxMana;
+        public System.Windows.Forms.NumericUpDown NumCurMana;
+        public System.Windows.Forms.NumericUpDown NumMaxHP;
+        public System.Windows.Forms.NumericUpDown NumCurHP;
+        public System.Windows.Forms.NumericUpDown NumHunger;
+        public System.Windows.Forms.NumericUpDown NumFatigue;
+        public System.Windows.Forms.NumericUpDown NumCharLevel;
+        public System.Windows.Forms.NumericUpDown NumSkillPoints;
+        public System.Windows.Forms.NumericUpDown NumPDatYPos;
+        public System.Windows.Forms.NumericUpDown NumPDatZPos;
+        public System.Windows.Forms.NumericUpDown NumPDatXPos;
+        public System.Windows.Forms.NumericUpDown NumDungeonLevel;
+        public System.Windows.Forms.NumericUpDown NumPDatHeading;
+        public System.Windows.Forms.CheckBox ChkLeftHanded;
+        public System.Windows.Forms.CheckBox ChkIsFemale;
+        public System.Windows.Forms.NumericUpDown NumBody;
+        public System.Windows.Forms.ComboBox CmbCharClass;
+        public System.Windows.Forms.CheckBox ChkDifficulty;
+        public System.Windows.Forms.DataGridView GrdPlayerDat;
+        public System.Windows.Forms.TreeView TreeInventory;
+        public System.Windows.Forms.NumericUpDown NumPdatLink;
+        public System.Windows.Forms.NumericUpDown NumPdatOwner;
+        public System.Windows.Forms.NumericUpDown NumPdatNext;
+        public System.Windows.Forms.NumericUpDown NumPdatQuality;
+        public System.Windows.Forms.NumericUpDown NumPInvYPos;
+        public System.Windows.Forms.NumericUpDown NumPInvXpos;
+        public System.Windows.Forms.NumericUpDown NumPInvHeading;
+        public System.Windows.Forms.NumericUpDown NumPInvZpos;
+        public System.Windows.Forms.CheckBox ChkPdatIsQuant;
+        public System.Windows.Forms.CheckBox ChkPdatInvis;
+        public System.Windows.Forms.CheckBox ChkPdatDoorDir;
+        public System.Windows.Forms.CheckBox ChkPdatEnchanted;
+        public System.Windows.Forms.NumericUpDown NumPdatFlags;
+        public System.Windows.Forms.ComboBox CmbPdatItem_ID;
+        public System.Windows.Forms.TreeView TreeUWBlocks;
+        public System.Windows.Forms.DataGridView GrdLevArkRaw;
+        public System.Windows.Forms.ComboBox CmbTileType;
+        public System.Windows.Forms.NumericUpDown NumWallTexture;
+        public System.Windows.Forms.NumericUpDown NumFloorTexture;
+        public System.Windows.Forms.NumericUpDown NumFloorHeight;
+        public System.Windows.Forms.NumericUpDown NumIndexObjectList;
+        public System.Windows.Forms.TreeView TreeTiles;
+        public System.Windows.Forms.Label LblMappedFloorTexture;
+        public System.Windows.Forms.TreeView TreeWorldByTile;
+        public System.Windows.Forms.TreeView TreeWorldObjects;
+        public System.Windows.Forms.Label lblCurrentTile;
+        public System.Windows.Forms.NumericUpDown NumWorldLink;
+        public System.Windows.Forms.NumericUpDown NumWorldOwner;
+        public System.Windows.Forms.NumericUpDown NumWorldNext;
+        public System.Windows.Forms.NumericUpDown NumWorldQuality;
+        public System.Windows.Forms.NumericUpDown NumWorldYPos;
+        public System.Windows.Forms.NumericUpDown NumWorldXPos;
+        public System.Windows.Forms.NumericUpDown NumWorldHeading;
+        public System.Windows.Forms.NumericUpDown NumWorldZpos;
+        public System.Windows.Forms.CheckBox ChkWorldInvis;
+        public System.Windows.Forms.CheckBox ChkWorldDoorDir;
+        public System.Windows.Forms.CheckBox ChkWorldEnchanted;
+        public System.Windows.Forms.NumericUpDown NumWorldFlags;
+        public System.Windows.Forms.ComboBox CmbWorldItem_ID;
+        public System.Windows.Forms.CheckBox ChkWorldIsQuant;
+        private System.Windows.Forms.TabPage tabPage10;
+        public System.Windows.Forms.PictureBox ImgOut;
+        private System.Windows.Forms.ToolStripMenuItem loadStringsToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown NumTextureSelect;
+        private System.Windows.Forms.TreeView TreeArt;
+        private System.Windows.Forms.ToolStripMenuItem loadArtFileToolStripMenuItem;
     }
 }
 

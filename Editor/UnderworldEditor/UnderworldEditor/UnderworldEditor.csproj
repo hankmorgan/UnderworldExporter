@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtLoader.cs" />
+    <Compile Include="Palette.cs" />
+    <Compile Include="PaletteLoader.cs" />
+    <Compile Include="PlayerDatUI.cs" />
+    <Compile Include="TextureLoader.cs" />
+    <Compile Include="TileMapUI.cs" />
     <Compile Include="UWStrings.cs" />
     <Compile Include="objects.cs" />
     <Compile Include="playerdat.cs" />

@@ -8,7 +8,7 @@ using System.IO;
 
 namespace UnderworldEditor
 {
-    class UWStrings
+    public class UWStrings
     {
         //These are common strings that are different in UW1 and UW2
         public static int str_it_looks_to_be_that_of_ = 22;

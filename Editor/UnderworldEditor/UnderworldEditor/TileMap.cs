@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UnderworldEditor
 {
-    class TileMap
+    public class TileMap
     {
         public const short TILE_SOLID = 0;
         public const short TILE_OPEN = 1;
@@ -31,6 +31,16 @@ namespace UnderworldEditor
         public const int UW2_TEXTUREMAPSIZE = 70;
         public const int UWDEMO_TEXTUREMAPSIZE = 63;
 
+        //BrushFaces
+        public const int fSELF = 128;
+        public const int fCEIL = 64;
+        public const int fNORTH = 32;
+        public const int fSOUTH = 16;
+        public const int fEAST = 8;
+        public const int fWEST = 4;
+        public const int fTOP = 2;
+        public const int fBOTTOM = 1;
+
 
         public struct TileInfo
         {
@@ -45,15 +55,20 @@ namespace UnderworldEditor
             public short doorBit;
             public short wallTexture;
             public int indexObjectList; //Points to a linked list of objects in the objects block
+                                        
+            public short North; public short South;
+            public short East; public short West;
             //etc
         };
 
         public TileInfo[,] Tiles;
 
 
-        public int[] texture_map;
+        public short[] texture_map = new short[272];
 
-        public void InitTileMap(char[] lev_ark, int address_pointer, int thisblock, int game)
+        public short ceilingtexture;
+
+        public void InitTileMap(char[] lev_ark, int address_pointer, int thisblock)
         {
            // if (game == 1)//uw1
            // {
@@ -72,6 +87,7 @@ namespace UnderworldEditor
                     address_pointer = address_pointer + 4;
                 }
             }
+            SetTileMapWallFacesUW();
         }
 
         /// <summary>
@@ -79,12 +95,12 @@ namespace UnderworldEditor
         /// </summary>
         /// <param name="tex_ark"></param>
         /// <param name="CeilingTexture"></param>
-       public void BuildTextureMap(char[] tex_ark, ref short CeilingTexture, int game)
+       public void BuildTextureMap(char[] tex_ark, ref short CeilingTexture)
         {
             short textureMapSize;//=UW1_TEXTUREMAPSIZE;
-            switch (game)
+            switch (main.curgame)
             {
-                case 2:
+                case main.GAME_UW2:
                     textureMapSize = UW2_TEXTUREMAPSIZE;
                     break;
                 //case GAME_UWDEMO:
@@ -97,9 +113,9 @@ namespace UnderworldEditor
             int offset = 0;
             for (int i = 0; i < textureMapSize; i++)//256
             {
-                switch (game)
+                switch (main.curgame)
                 {
-                    case 1:
+                    case main.GAME_UW1:
                         {
                             if (i < 48)//Wall textures
                             {
@@ -123,7 +139,7 @@ namespace UnderworldEditor
                             }
                             break;
                         }
-                    case 2://uw2
+                    case main.GAME_UW2://uw2
                         {
                             if (i < 64)
                             {
@@ -247,7 +263,145 @@ namespace UnderworldEditor
             }
         }
 
-    }
+        /// <summary>
+        /// Gets the wall texture for the specified face
+        /// </summary>
+        /// <returns>The texture.</returns>
+        /// <param name="face">Face.</param>
+        /// <param name="t">T.</param>
+        public int GetMappedWallTexture(int face, TileInfo t)
+        {
+            int wallTexture;
+            wallTexture = t.wallTexture;
+            switch (face)
+            {
+                case fSOUTH:
+                    wallTexture = t.South;
+                    break;
+                case fNORTH:
+                    wallTexture = t.North;
+                    break;
+                case fEAST:
+                    wallTexture = t.East;
+                    break;
+                case fWEST:
+                    wallTexture = t.West;
+                    break;
+            }
+            if ((wallTexture < 0) || (wallTexture > 512))
+            {
+                wallTexture = 0;
+            }
+            return texture_map[wallTexture];
+        }
+
+        /// <summary>
+        /// Returns the floor texture from the texture map.
+        /// </summary>
+        /// <returns>The texture.</returns>
+        /// <param name="face">Face.</param>
+        /// <param name="t">T.</param>
+        public int GetMappedFloorTexture(int face, TileInfo t)
+        {
+            int floorTexture;
+
+            if (face == fCEIL)
+            {
+                floorTexture = texture_map[ceilingtexture];
+            }
+            else
+            {
+                //floorTexture = t.floorTexture;
+                switch (main.curgame)
+                {
+                    case main.GAME_UW2:
+                        floorTexture = texture_map[t.floorTexture];
+                          break;
+                    default:
+                        floorTexture = texture_map[t.floorTexture + 48];
+                        break;
+                }
+
+            }
+
+            if ((floorTexture < 0) || (floorTexture > 512))
+            {
+                floorTexture = 0;
+            }
+            return floorTexture;
+        }
+
+
+        /// <summary>
+        /// Creates the tile map wall textures for each north, south, east and west faces
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        public void SetTileMapWallFacesUW()
+        {
+            short x; short y;
+            for (y = 0; y <= 63; y++)
+            {
+                for (x = 0; x <= 63; x++)
+                {
+                    SetTileWallFacesUW(x, y);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the tile wall faces for the selected tile
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        public void SetTileWallFacesUW(short x, short y)
+        {
+            if (Tiles[x, y].tileType >= 0)//was just solid only. Note: If textures are all wrong it's probably caused here!
+            {
+                //assign it's north texture
+                if (y < 63)
+                {
+                    Tiles[x, y].North = Tiles[x, y + 1].wallTexture;
+                }
+                else
+                {
+                    Tiles[x, y].North = -1;
+                }
+                //assign it's southern
+                if (y > 0)
+                {
+                    Tiles[x, y].South = Tiles[x, y - 1].wallTexture;
+                }
+                else
+                {
+                    Tiles[x, y].South = -1;
+                }
+                //it's east
+                if (x < 63)
+                {
+                    Tiles[x, y].East = Tiles[x + 1, y].wallTexture;
+                }
+                else
+                {
+                    Tiles[x, y].East = -1;
+                }
+                //assign it's West
+                if (x > 0)
+                {
+                    Tiles[x, y].West = Tiles[x - 1, y].wallTexture;
+                }
+                else
+                {
+                    Tiles[x, y].West = -1;
+                }
+            }
+        }
+
+
+
+
+    }//end class  
+
 
 }
 
