@@ -11,6 +11,7 @@ namespace UnderworldEditor
 {
     public class ArtLoader
     {
+        public Bitmap[] ImageCache;
         public const byte BitMapHeaderSize = 28;
 
         /// <summary>
@@ -73,12 +74,12 @@ namespace UnderworldEditor
         /// <param name="Alpha">If set to <c>true</c> alpha.</param>
         public static Bitmap Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER)
         {
-            Bitmap image = new Bitmap(width, height,System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-             Byte[] imageColors = new Byte[width * height*4];
-            
+            Bitmap image = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Byte[] imageColors = new Byte[width * height * 4];
+
             long counter = 0;
-             for (int iRow = 0; iRow < height; iRow++)
-            {                
+            for (int iRow = 0; iRow < height; iRow++)
+            {
                 for (int j = (iRow * width); j < (iRow * width) + width; j++)
                 {
                     byte pixel = (byte)Util.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
@@ -95,7 +96,7 @@ namespace UnderworldEditor
             // image.SetPixels32(imageColors);
             //image.Apply();
             //return image;
-            return CopyDataToBitmap(imageColors,height,width);
+            return CopyDataToBitmap(imageColors, height, width);
         }
 
         /// <summary>
@@ -103,11 +104,11 @@ namespace UnderworldEditor
         /// Purpose: Given the pixel data return a bitmap of size [352,288],PixelFormat=24RGB 
         /// </summary>
         /// <param name="data">Byte array with pixel data</param>
-        public static Bitmap CopyDataToBitmap(byte[] data,int height, int width)
+        public static Bitmap CopyDataToBitmap(byte[] data, int height, int width)
         {
             //Here create the Bitmap to the know height, width and format
             Bitmap bmp = new Bitmap(height, width, PixelFormat.Format32bppRgb);
-            
+
             //Create a BitmapData and Lock all pixels to be written 
             BitmapData bmpData = bmp.LockBits(
                                  new Rectangle(0, 0, bmp.Width, bmp.Height),
@@ -341,6 +342,18 @@ namespace UnderworldEditor
         }
 
 
+        public static Bitmap Palette(Palette pal)
+        {
+            char[] paldata = new char[256*64];
+            for (int j=0; j<64;j++)
+            {
+                for (int i = 0; i < 256; i++)
+                {
+                    paldata[j*256 + i] = (char)i;
+                }
+            }
+
+            return Image(paldata, 0,64, 256, "name", pal, true);        }
 
     }//end class
 }

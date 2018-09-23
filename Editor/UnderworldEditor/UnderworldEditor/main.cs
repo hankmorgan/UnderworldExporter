@@ -33,6 +33,8 @@ namespace UnderworldEditor
         public UWStrings UWGameStrings;
 
         TextureLoader tex = new TextureLoader();
+        private int CurrentImageNo;
+        private int CurrentPalettePixel=0;
 
         public main()
         {
@@ -249,8 +251,10 @@ namespace UnderworldEditor
             curgame = main.GAME_UW1;
 
             PaletteLoader.LoadPalettes("c:\\games\\uw1\\data\\pals.dat");
-            
-            
+            PicPalette.Image = ArtLoader.Palette(PaletteLoader.Palettes[0]);
+
+            PopulateTextureTree();
+
         }
 
         private void loadStringsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -262,27 +266,84 @@ namespace UnderworldEditor
         private void TreeArt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeArt.SelectedNode;
+            CurrentImageNo = -1;
             int index;
             if (node.Tag == null) { return; }
             if (int.TryParse(node.Tag.ToString(), out index))
             {
                ImgOut.Image = tex.LoadImageAt(index);
+               CurrentImageNo = index;
             }
         }
 
-        private void loadArtFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PopulateTextureTree()
         {
             TreeArt.Nodes.Clear();
+
             TreeNode texnode = TreeArt.Nodes.Add("Textures");
-            TreeNode walltex =texnode.Nodes.Add("Wall Textures");
+            TreeNode walltex = texnode.Nodes.Add("Wall Textures");
             int noofwalltex = 210;
-            for (int i=0; i<noofwalltex;i++)
+            for (int i = 0; i < noofwalltex; i++)
             {
-                TreeNode newnode =walltex.Nodes.Add("#" + i );
+                TreeNode newnode = walltex.Nodes.Add("#" + i);
                 newnode.Tag = i;
             }
             TreeNode floortex = texnode.Nodes.Add("Floor Textures");
+        }
 
+        private void ImgOut_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (CurrentImageNo!=-1)
+            {
+                // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
+                int x = e.Location.X / 4;
+                int y = ( e.Location.Y) / 4;
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y, CurrentPalettePixel);
+            }
+        }
+
+        private void BtnImgSave_Click(object sender, EventArgs e)
+        {
+            ArtUI.SaveData(tex.texturebufferW);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Turns the selected image int a representation of the palette
+            int x = 0;int y = 0;
+            for (int counter = 0; counter < 256; counter++)
+            {
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+1, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+2, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+3, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 4, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 5, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 6, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 7, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+8, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 9, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 10, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 11, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 12, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 13, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 14, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 15, counter);
+
+                x++;
+                if (x >= 64)
+                {
+                    x = 0;
+                    y = y +16;
+                }
+            }
+        }
+
+        private void PicPalette_MouseClick(object sender, MouseEventArgs e)
+        {
+           // int x = e.Location.X / 4;
+            //int y = (e.Location.Y) / 4;
+            CurrentPalettePixel = e.Location.X / 2;
         }
     }
 }

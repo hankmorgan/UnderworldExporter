@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtLoader.cs" />
+    <Compile Include="ArtUI.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="PaletteLoader.cs" />
     <Compile Include="PlayerDatUI.cs" />
