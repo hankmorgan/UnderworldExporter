@@ -29,6 +29,10 @@ namespace UnderworldEditor
         //RenderForm form3d;
         public objects pdatObjects;
         public TileMap tilemap;
+        public int curTileX; public int curTileY;
+        public int CurPDatObject;
+        public int CurWorldObject;
+
         public objects worldObjects;
         public UWStrings UWGameStrings;
 
@@ -71,17 +75,88 @@ namespace UnderworldEditor
 
         private void TreeInventory_AfterSelect(object sender, TreeViewEventArgs e)
         {
+           
             TreeNode node = TreeInventory.SelectedNode;
             int index;
             if (node.Tag == null) { return; }
+            
             if (int.TryParse(node.Tag.ToString(), out index))
             {                
                 if (index>0)
                 {
+                    isLoading = true;
+                    CurPDatObject = index;
                     objects.ObjectInfo obj = pdatObjects.objList[index];
                     PopulateObjectUI(obj, CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir,ChkPdatInvis, NumPInvXpos, NumPInvYPos,NumPInvZpos,NumPInvHeading,NumPdatFlags,NumPdatQuality,NumPdatOwner,NumPdatNext,NumPdatLink  );
+                    isLoading = false;
                 }
             }
+        }
+
+
+        public void UpdateObjectUIChange(char[] TileMapData, objects.ObjectInfo obj,
+            ComboBox cmbItem_ID,
+            CheckBox chkEnchanted,
+            CheckBox chkIsQuant,
+            CheckBox chkDoorDir,
+            CheckBox chkInvis,
+            NumericUpDown numXpos,
+            NumericUpDown numYpos,
+            NumericUpDown numZpos,
+            NumericUpDown numHeading,
+            NumericUpDown numFlags,
+            NumericUpDown numQuality,
+            NumericUpDown numOwner,
+            NumericUpDown numNext,
+            NumericUpDown numLink
+            )
+        {
+            //Update the object with the selected info
+            obj.item_id = cmbItem_ID.SelectedIndex;
+            cmbItem_ID.Text = obj.item_id + "-" + objects.ObjectName(obj.item_id, curgame);
+
+            if (chkEnchanted.Checked) { obj.enchantment = 1; } else { obj.enchantment = 0; }
+            if (chkIsQuant.Checked) { obj.is_quant = 1; } else { obj.is_quant = 0; };
+            if (chkDoorDir.Checked) { obj.doordir = 1; } else { obj.doordir = 0; };
+            if (chkInvis.Checked) { obj.invis = 1; } else { obj.invis = 0; };
+
+            obj.xpos = (short)numXpos.Value ;
+            obj.ypos = (short)numYpos.Value ;
+            obj.zpos= (short)numZpos.Value;
+            obj.heading= (short)numHeading.Value;
+
+            obj.flags= (short)numFlags.Value;
+            obj.quality= (short)numQuality.Value;
+            obj.owner= (short)numOwner.Value;
+            obj.next= (short)numNext.Value;
+            obj.link= (short)numLink.Value  ;
+            long addptr = obj.FileAddress;
+            int ByteToWrite = (obj.is_quant << 15) |
+                (obj.invis << 14) |
+                (obj.doordir << 13) |
+                (obj.enchantment << 12) |
+                ((obj.flags & 0x07) << 9) |
+                (obj.item_id & 0x1FF);
+
+            TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+
+            ByteToWrite = ((obj.xpos & 0x7) << 13) |
+                    ((obj.ypos & 0x7) << 10) |
+                    ((obj.heading & 0x7) << 7) |
+                    ((obj.zpos & 0x7F));
+            TileMapData[addptr + 2] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 3] = (char)((ByteToWrite >> 8) & 0xFF);
+
+            ByteToWrite = (((int)obj.next & 0x3FF) << 6) |
+                    (obj.quality & 0x3F);
+            TileMapData[addptr + 4] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 5] = (char)((ByteToWrite >> 8) & 0xFF);
+
+            ByteToWrite = ((obj.link & 0x3FF) << 6) |
+                    (obj.owner & 0x3F);
+            TileMapData[addptr + 6] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 7] = (char)((ByteToWrite >> 8) & 0xFF);
         }
 
         public void PopulateObjectUI(objects.ObjectInfo obj, 
@@ -180,6 +255,11 @@ namespace UnderworldEditor
         private void LoadLevArkUW1_Click(object sender, EventArgs e)
         {
             curgame = 1;
+            if (UWGameStrings==null)
+            {
+                UWGameStrings = new UWStrings();
+                UWGameStrings.LoadStringsPak("c:\\games\\uw1\\data\\strings.pak", 1, GrdStrings);
+            }
             if (Util.ReadStreamFile("c:\\games\\uw1\\data\\lev.ark", out levarkbuffer))
             {
                 int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
@@ -344,6 +424,42 @@ namespace UnderworldEditor
            // int x = e.Location.X / 4;
             //int y = (e.Location.Y) / 4;
             CurrentPalettePixel = e.Location.X / 2;
+        }
+
+
+        private void BtnSaveTileMap_Click(object sender, EventArgs e)
+        {
+            Util.WriteStreamFile("c:\\games\\uw1\\save1\\lev.ark", levarkbuffer);
+        }
+
+        private void BtnApplyTileChanges_Click(object sender, EventArgs e)
+        {
+            TileMapUI.ApplyTileChanges(curTileX, curTileY, this);
+        }
+
+        private void uW1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadStringsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (UWGameStrings == null)
+            {
+                UWGameStrings = new UWStrings();
+                UWGameStrings.LoadStringsPak("c:\\games\\uw2\\data\\strings.pak", 1, GrdStrings);
+            }
+        }
+
+        private void PInvValueChanged(object sender, EventArgs e)
+        {
+            if (isLoading) { return; }
+            //Update object at address
+            char[] buffer= PlayerDatUI.GetValuesFromPDatGrid(this);
+            UpdateObjectUIChange(buffer, pdatObjects.objList[CurPDatObject], CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir, ChkPdatInvis, NumPInvXpos, NumPInvYPos, NumPInvZpos, NumPInvHeading, NumPdatFlags, NumPdatQuality, NumPdatOwner, NumPdatNext, NumPdatLink);
+            isLoading = true;
+            PlayerDatUI.PopulatePDatValuesToGrid(buffer, this);
+            isLoading = false;
         }
     }
 }

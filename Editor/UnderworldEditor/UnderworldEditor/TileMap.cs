@@ -44,12 +44,14 @@ namespace UnderworldEditor
 
         public struct TileInfo
         {
+            public long FileAddress;//Where this tile is located on file.
             public int tileX;
             public int tileY;
             public short tileType;  //What type of tile I am.
             public short floorHeight;   //How high is the floor.
-            public short unk1;
-            public short unk2;
+            public short flags;
+            //public short unk1;
+            //public short unk2;
             public short floorTexture;
             public short noMagic;
             public short doorBit;
@@ -68,7 +70,7 @@ namespace UnderworldEditor
 
         public short ceilingtexture;
 
-        public void InitTileMap(char[] lev_ark, int address_pointer, int thisblock)
+        public void InitTileMap(char[] lev_ark, int address_pointer, int thisblock, long BlockAddress)
         {
            // if (game == 1)//uw1
            // {
@@ -83,7 +85,8 @@ namespace UnderworldEditor
                 {
                     int FirstTileInt = (int)Util.getValAtAddress(lev_ark, (address_pointer + 0), 16);
                     int SecondTileInt = (int)Util.getValAtAddress(lev_ark, (address_pointer + 2), 16);
-                    Tiles[x, y] = BuildTileInfo(x, y, FirstTileInt, SecondTileInt, 0);//TODO:Texturemappings
+                    Tiles[x, y] = BuildTileInfo(x, y, FirstTileInt, SecondTileInt, ceilingtexture);//TODO:Texturemappings
+                    Tiles[x, y].FileAddress = BlockAddress + address_pointer;
                     address_pointer = address_pointer + 4;
                 }
             }
@@ -196,11 +199,12 @@ namespace UnderworldEditor
             ti.tileType = newtiletype;
             ti.tileX = X;
             ti.tileY = Y;
-            ti.floorHeight = newfloorHeight;
+            ti.floorHeight = newfloorHeight;                       
+            ti.flags = newFlags;
             ti.floorTexture = newfloorTexture;
-            ti.wallTexture = newwallTexture;
             ti.noMagic = newnoMagic;
             ti.doorBit = newdoorBit;
+            ti.wallTexture = newwallTexture;
             ti.indexObjectList = newindexObjectList;
             return ti;
         }
@@ -232,10 +236,8 @@ namespace UnderworldEditor
             return (short)(tileData >> 6);
         }
 
-
         public static string GetTileTypeText(int tiletype)
         {
-
             switch (tiletype)
             {
                 case TILE_SOLID:
@@ -262,6 +264,37 @@ namespace UnderworldEditor
                     return "";
             }
         }
+
+        public static int GetTileTypeInt(string tiletype)
+        {
+
+            switch (tiletype)
+            {
+                case "TILE_SOLID":
+                    return TILE_SOLID;
+                case "TILE_OPEN":
+                    return TILE_OPEN;
+                case "TILE_DIAG_SE":
+                    return TILE_DIAG_SE;
+                case "TILE_DIAG_SW":
+                    return TILE_DIAG_SW;
+                case "TILE_DIAG_NE":
+                    return TILE_DIAG_NE;
+                case "TILE_DIAG_NW":
+                    return TILE_DIAG_NW;
+                case "TILE_SLOPE_N":
+                    return TILE_SLOPE_N;
+                case "TILE_SLOPE_S":
+                    return TILE_SLOPE_S;
+                case "TILE_SLOPE_E":
+                    return TILE_SLOPE_E;
+                case "TILE_SLOPE_W":
+                    return TILE_SLOPE_W;
+                default:
+                    return 0;
+            }
+        }
+
 
         /// <summary>
         /// Gets the wall texture for the specified face

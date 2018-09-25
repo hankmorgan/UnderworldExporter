@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Helm");
-            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Chest");
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Gloves");
-            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Leggings");
-            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Boots");
-            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("TopRightShoulder");
-            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
-            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("RightHand");
-            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("LeftHand");
-            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("LeftRing");
-            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("BackPack0");
-            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("BackPack1");
-            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("BackPack2");
-            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("BackPack3");
-            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("BackPack4");
-            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("BackPack5");
-            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("BackPack6");
-            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("BackPack7");
-            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
-            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
-            treeNode61});
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Helm");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Chest");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Gloves");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Leggings");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Boots");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("TopRightShoulder");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("RightHand");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("LeftHand");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("LeftRing");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("BackPack0");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("BackPack1");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("BackPack2");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("BackPack3");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("BackPack4");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("BackPack5");
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("BackPack6");
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("BackPack7");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
+            treeNode59});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PlayerDat = new System.Windows.Forms.TabPage();
@@ -137,6 +137,14 @@
             this.TreeUWBlocks = new System.Windows.Forms.TreeView();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BtnSaveTileMap = new System.Windows.Forms.Button();
+            this.BtnApplyTileChanges = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.NumDoorBit = new System.Windows.Forms.NumericUpDown();
+            this.NumNoMagic = new System.Windows.Forms.NumericUpDown();
+            this.NumTileFlags = new System.Windows.Forms.NumericUpDown();
             this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -193,6 +201,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.PicPalette = new System.Windows.Forms.PictureBox();
             this.BtnImgSave = new System.Windows.Forms.Button();
             this.TreeArt = new System.Windows.Forms.TreeView();
@@ -207,7 +216,9 @@
             this.uW2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW2 = new System.Windows.Forms.ToolStripMenuItem();
             this.WritePDatUW2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.loadLevArkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadStringsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadArtFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -248,6 +259,9 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).BeginInit();
@@ -857,7 +871,7 @@
             this.groupBox4.Controls.Add(this.CmbPdatItem_ID);
             this.groupBox4.Location = new System.Drawing.Point(221, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(411, 304);
+            this.groupBox4.Size = new System.Drawing.Size(411, 352);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Inventory Object Details";
@@ -963,6 +977,7 @@
             this.NumPdatLink.Name = "NumPdatLink";
             this.NumPdatLink.Size = new System.Drawing.Size(67, 22);
             this.NumPdatLink.TabIndex = 39;
+            this.NumPdatLink.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPdatOwner
             // 
@@ -975,6 +990,7 @@
             this.NumPdatOwner.Name = "NumPdatOwner";
             this.NumPdatOwner.Size = new System.Drawing.Size(67, 22);
             this.NumPdatOwner.TabIndex = 38;
+            this.NumPdatOwner.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPdatNext
             // 
@@ -987,6 +1003,7 @@
             this.NumPdatNext.Name = "NumPdatNext";
             this.NumPdatNext.Size = new System.Drawing.Size(68, 22);
             this.NumPdatNext.TabIndex = 37;
+            this.NumPdatNext.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPdatQuality
             // 
@@ -999,6 +1016,7 @@
             this.NumPdatQuality.Name = "NumPdatQuality";
             this.NumPdatQuality.Size = new System.Drawing.Size(69, 22);
             this.NumPdatQuality.TabIndex = 36;
+            this.NumPdatQuality.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPInvYPos
             // 
@@ -1011,6 +1029,7 @@
             this.NumPInvYPos.Name = "NumPInvYPos";
             this.NumPInvYPos.Size = new System.Drawing.Size(71, 22);
             this.NumPInvYPos.TabIndex = 35;
+            this.NumPInvYPos.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPInvXpos
             // 
@@ -1023,6 +1042,7 @@
             this.NumPInvXpos.Name = "NumPInvXpos";
             this.NumPInvXpos.Size = new System.Drawing.Size(71, 22);
             this.NumPInvXpos.TabIndex = 34;
+            this.NumPInvXpos.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPInvHeading
             // 
@@ -1035,6 +1055,7 @@
             this.NumPInvHeading.Name = "NumPInvHeading";
             this.NumPInvHeading.Size = new System.Drawing.Size(70, 22);
             this.NumPInvHeading.TabIndex = 33;
+            this.NumPInvHeading.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPInvZpos
             // 
@@ -1047,6 +1068,7 @@
             this.NumPInvZpos.Name = "NumPInvZpos";
             this.NumPInvZpos.Size = new System.Drawing.Size(72, 22);
             this.NumPInvZpos.TabIndex = 32;
+            this.NumPInvZpos.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // ChkPdatIsQuant
             // 
@@ -1057,6 +1079,7 @@
             this.ChkPdatIsQuant.TabIndex = 31;
             this.ChkPdatIsQuant.Text = "Is Quant";
             this.ChkPdatIsQuant.UseVisualStyleBackColor = true;
+            this.ChkPdatIsQuant.CheckedChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // ChkPdatInvis
             // 
@@ -1067,6 +1090,7 @@
             this.ChkPdatInvis.TabIndex = 30;
             this.ChkPdatInvis.Text = "Invisible";
             this.ChkPdatInvis.UseVisualStyleBackColor = true;
+            this.ChkPdatInvis.CheckedChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // ChkPdatDoorDir
             // 
@@ -1077,6 +1101,7 @@
             this.ChkPdatDoorDir.TabIndex = 29;
             this.ChkPdatDoorDir.Text = "Door Dir";
             this.ChkPdatDoorDir.UseVisualStyleBackColor = true;
+            this.ChkPdatDoorDir.CheckedChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // ChkPdatEnchanted
             // 
@@ -1087,6 +1112,7 @@
             this.ChkPdatEnchanted.TabIndex = 28;
             this.ChkPdatEnchanted.Text = "Enchanted";
             this.ChkPdatEnchanted.UseVisualStyleBackColor = true;
+            this.ChkPdatEnchanted.CheckedChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // NumPdatFlags
             // 
@@ -1094,6 +1120,7 @@
             this.NumPdatFlags.Name = "NumPdatFlags";
             this.NumPdatFlags.Size = new System.Drawing.Size(78, 22);
             this.NumPdatFlags.TabIndex = 27;
+            this.NumPdatFlags.ValueChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // CmbPdatItem_ID
             // 
@@ -1102,6 +1129,8 @@
             this.CmbPdatItem_ID.Name = "CmbPdatItem_ID";
             this.CmbPdatItem_ID.Size = new System.Drawing.Size(205, 24);
             this.CmbPdatItem_ID.TabIndex = 26;
+            this.CmbPdatItem_ID.SelectedIndexChanged += new System.EventHandler(this.PInvValueChanged);
+            this.CmbPdatItem_ID.TextChanged += new System.EventHandler(this.PInvValueChanged);
             // 
             // label6
             // 
@@ -1116,61 +1145,61 @@
             // 
             this.TreeInventory.Location = new System.Drawing.Point(7, 3);
             this.TreeInventory.Name = "TreeInventory";
-            treeNode63.Name = "Helml";
-            treeNode63.Text = "Helm";
-            treeNode64.Name = "Chest";
-            treeNode64.Text = "Chest";
-            treeNode65.Name = "Gloves";
-            treeNode65.Text = "Gloves";
-            treeNode66.Name = "Leggings";
-            treeNode66.Text = "Leggings";
-            treeNode67.Name = "Boots";
-            treeNode67.Text = "Boots";
-            treeNode68.Name = "TopRightShoulder";
-            treeNode68.Text = "TopRightShoulder";
-            treeNode69.Name = "TopLeftShoulder";
-            treeNode69.Text = "TopLeftShoulder";
-            treeNode70.Name = "RightHand";
-            treeNode70.Text = "RightHand";
-            treeNode71.Name = "LeftHand";
-            treeNode71.Text = "LeftHand";
-            treeNode72.Name = "RightRing";
-            treeNode72.Text = "LeftRing";
-            treeNode73.Name = "BackPack0";
-            treeNode73.Text = "BackPack0";
-            treeNode74.Name = "BackPack1";
-            treeNode74.Text = "BackPack1";
-            treeNode75.Name = "BackPack2";
-            treeNode75.Text = "BackPack2";
-            treeNode76.Name = "BackPack3";
-            treeNode76.Text = "BackPack3";
-            treeNode77.Name = "BackPack4";
-            treeNode77.Text = "BackPack4";
-            treeNode78.Name = "BackPack5";
-            treeNode78.Text = "BackPack5";
-            treeNode79.Name = "BackPack6";
-            treeNode79.Text = "BackPack6";
-            treeNode80.Name = "BackPack7";
-            treeNode80.Text = "BackPack7";
+            treeNode41.Name = "Helml";
+            treeNode41.Text = "Helm";
+            treeNode42.Name = "Chest";
+            treeNode42.Text = "Chest";
+            treeNode43.Name = "Gloves";
+            treeNode43.Text = "Gloves";
+            treeNode44.Name = "Leggings";
+            treeNode44.Text = "Leggings";
+            treeNode45.Name = "Boots";
+            treeNode45.Text = "Boots";
+            treeNode46.Name = "TopRightShoulder";
+            treeNode46.Text = "TopRightShoulder";
+            treeNode47.Name = "TopLeftShoulder";
+            treeNode47.Text = "TopLeftShoulder";
+            treeNode48.Name = "RightHand";
+            treeNode48.Text = "RightHand";
+            treeNode49.Name = "LeftHand";
+            treeNode49.Text = "LeftHand";
+            treeNode50.Name = "RightRing";
+            treeNode50.Text = "LeftRing";
+            treeNode51.Name = "BackPack0";
+            treeNode51.Text = "BackPack0";
+            treeNode52.Name = "BackPack1";
+            treeNode52.Text = "BackPack1";
+            treeNode53.Name = "BackPack2";
+            treeNode53.Text = "BackPack2";
+            treeNode54.Name = "BackPack3";
+            treeNode54.Text = "BackPack3";
+            treeNode55.Name = "BackPack4";
+            treeNode55.Text = "BackPack4";
+            treeNode56.Name = "BackPack5";
+            treeNode56.Text = "BackPack5";
+            treeNode57.Name = "BackPack6";
+            treeNode57.Text = "BackPack6";
+            treeNode58.Name = "BackPack7";
+            treeNode58.Text = "BackPack7";
             this.TreeInventory.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode63,
-            treeNode64,
-            treeNode65,
-            treeNode66,
-            treeNode67,
-            treeNode68,
-            treeNode69,
-            treeNode70,
-            treeNode71,
-            treeNode72,
-            treeNode73,
-            treeNode74,
-            treeNode75,
-            treeNode76,
-            treeNode77,
-            treeNode78,
-            treeNode79,
-            treeNode80});
+            treeNode41,
+            treeNode42,
+            treeNode43,
+            treeNode44,
+            treeNode45,
+            treeNode46,
+            treeNode47,
+            treeNode48,
+            treeNode49,
+            treeNode50,
+            treeNode51,
+            treeNode52,
+            treeNode53,
+            treeNode54,
+            treeNode55,
+            treeNode56,
+            treeNode57,
+            treeNode58});
             this.TreeInventory.Size = new System.Drawing.Size(208, 355);
             this.TreeInventory.TabIndex = 0;
             this.TreeInventory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeInventory_AfterSelect);
@@ -1283,6 +1312,14 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.BtnSaveTileMap);
+            this.tabPage1.Controls.Add(this.BtnApplyTileChanges);
+            this.tabPage1.Controls.Add(this.label47);
+            this.tabPage1.Controls.Add(this.label46);
+            this.tabPage1.Controls.Add(this.label45);
+            this.tabPage1.Controls.Add(this.NumDoorBit);
+            this.tabPage1.Controls.Add(this.NumNoMagic);
+            this.tabPage1.Controls.Add(this.NumTileFlags);
             this.tabPage1.Controls.Add(this.label44);
             this.tabPage1.Controls.Add(this.label43);
             this.tabPage1.Controls.Add(this.label42);
@@ -1304,10 +1341,93 @@
             this.tabPage1.Text = "Tiles";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // BtnSaveTileMap
+            // 
+            this.BtnSaveTileMap.Location = new System.Drawing.Point(560, 286);
+            this.BtnSaveTileMap.Name = "BtnSaveTileMap";
+            this.BtnSaveTileMap.Size = new System.Drawing.Size(83, 45);
+            this.BtnSaveTileMap.TabIndex = 23;
+            this.BtnSaveTileMap.Text = "Save Tile Map";
+            this.BtnSaveTileMap.UseVisualStyleBackColor = true;
+            this.BtnSaveTileMap.Click += new System.EventHandler(this.BtnSaveTileMap_Click);
+            // 
+            // BtnApplyTileChanges
+            // 
+            this.BtnApplyTileChanges.Location = new System.Drawing.Point(462, 286);
+            this.BtnApplyTileChanges.Name = "BtnApplyTileChanges";
+            this.BtnApplyTileChanges.Size = new System.Drawing.Size(75, 45);
+            this.BtnApplyTileChanges.TabIndex = 22;
+            this.BtnApplyTileChanges.Text = "Apply Changes";
+            this.BtnApplyTileChanges.UseVisualStyleBackColor = true;
+            this.BtnApplyTileChanges.Click += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(171, 330);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(75, 17);
+            this.label47.TabIndex = 21;
+            this.label47.Text = "No Magic?";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(171, 286);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(63, 17);
+            this.label46.TabIndex = 20;
+            this.label46.Text = "DoorBit?";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(168, 244);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(77, 17);
+            this.label45.TabIndex = 19;
+            this.label45.Text = "Tile Flags?";
+            // 
+            // NumDoorBit
+            // 
+            this.NumDoorBit.Location = new System.Drawing.Point(274, 326);
+            this.NumDoorBit.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumDoorBit.Name = "NumDoorBit";
+            this.NumDoorBit.Size = new System.Drawing.Size(120, 22);
+            this.NumDoorBit.TabIndex = 18;
+            // 
+            // NumNoMagic
+            // 
+            this.NumNoMagic.Location = new System.Drawing.Point(274, 282);
+            this.NumNoMagic.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumNoMagic.Name = "NumNoMagic";
+            this.NumNoMagic.Size = new System.Drawing.Size(120, 22);
+            this.NumNoMagic.TabIndex = 17;
+            // 
+            // NumTileFlags
+            // 
+            this.NumTileFlags.Location = new System.Drawing.Point(274, 240);
+            this.NumTileFlags.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.NumTileFlags.Name = "NumTileFlags";
+            this.NumTileFlags.Size = new System.Drawing.Size(120, 22);
+            this.NumTileFlags.TabIndex = 16;
+            // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(173, 212);
+            this.label44.Location = new System.Drawing.Point(168, 198);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(75, 17);
             this.label44.TabIndex = 15;
@@ -1368,7 +1488,7 @@
             // 
             // NumIndexObjectList
             // 
-            this.NumIndexObjectList.Location = new System.Drawing.Point(274, 208);
+            this.NumIndexObjectList.Location = new System.Drawing.Point(274, 196);
             this.NumIndexObjectList.Maximum = new decimal(new int[] {
             1024,
             0,
@@ -1387,14 +1507,14 @@
             // 
             // NumFloorTexture
             // 
-            this.NumFloorTexture.Location = new System.Drawing.Point(273, 111);
+            this.NumFloorTexture.Location = new System.Drawing.Point(274, 111);
             this.NumFloorTexture.Name = "NumFloorTexture";
             this.NumFloorTexture.Size = new System.Drawing.Size(120, 22);
             this.NumFloorTexture.TabIndex = 5;
             // 
             // NumFloorHeight
             // 
-            this.NumFloorHeight.Location = new System.Drawing.Point(272, 74);
+            this.NumFloorHeight.Location = new System.Drawing.Point(274, 74);
             this.NumFloorHeight.Name = "NumFloorHeight";
             this.NumFloorHeight.Size = new System.Drawing.Size(120, 22);
             this.NumFloorHeight.TabIndex = 4;
@@ -1413,9 +1533,9 @@
             "TILE_SLOPE_S",
             "TILE_SLOPE_E",
             "TILE_SLOPE_W"});
-            this.CmbTileType.Location = new System.Drawing.Point(272, 43);
+            this.CmbTileType.Location = new System.Drawing.Point(274, 43);
             this.CmbTileType.Name = "CmbTileType";
-            this.CmbTileType.Size = new System.Drawing.Size(121, 24);
+            this.CmbTileType.Size = new System.Drawing.Size(119, 24);
             this.CmbTileType.TabIndex = 3;
             // 
             // lblCurrentTile
@@ -1876,6 +1996,16 @@
             this.tabPage10.Text = "Images";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(326, 268);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 43);
+            this.button1.TabIndex = 54;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PicPalette
             // 
             this.PicPalette.Location = new System.Drawing.Point(295, 357);
@@ -1900,12 +2030,12 @@
             // 
             this.TreeArt.Location = new System.Drawing.Point(7, 4);
             this.TreeArt.Name = "TreeArt";
-            treeNode61.Name = "Node1";
-            treeNode61.Text = "Wall & Floor Textures(2 files)";
-            treeNode62.Name = "Node0";
-            treeNode62.Text = "Textures";
+            treeNode59.Name = "Node1";
+            treeNode59.Text = "Wall & Floor Textures(2 files)";
+            treeNode60.Name = "Node0";
+            treeNode60.Text = "Textures";
             this.TreeArt.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode62});
+            treeNode60});
             this.TreeArt.Size = new System.Drawing.Size(282, 437);
             this.TreeArt.TabIndex = 51;
             this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
@@ -1945,6 +2075,7 @@
             this.uW1ToolStripMenuItem.Name = "uW1ToolStripMenuItem";
             this.uW1ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.uW1ToolStripMenuItem.Text = "UW1";
+            this.uW1ToolStripMenuItem.Click += new System.EventHandler(this.uW1ToolStripMenuItem_Click);
             // 
             // LoadPDatUW1
             // 
@@ -1984,7 +2115,10 @@
             // 
             this.uW2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadPDatUW2,
-            this.WritePDatUW2});
+            this.WritePDatUW2,
+            this.loadLevArkToolStripMenuItem,
+            this.loadStringsToolStripMenuItem1,
+            this.loadArtFilesToolStripMenuItem});
             this.uW2ToolStripMenuItem.Name = "uW2ToolStripMenuItem";
             this.uW2ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.uW2ToolStripMenuItem.Text = "UW2";
@@ -2003,15 +2137,24 @@
             this.WritePDatUW2.Text = "Write Player Dat";
             this.WritePDatUW2.Click += new System.EventHandler(this.writePlayerDatToolStripMenuItem1_Click);
             // 
-            // button1
+            // loadLevArkToolStripMenuItem
             // 
-            this.button1.Location = new System.Drawing.Point(326, 268);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 43);
-            this.button1.TabIndex = 54;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.loadLevArkToolStripMenuItem.Name = "loadLevArkToolStripMenuItem";
+            this.loadLevArkToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.loadLevArkToolStripMenuItem.Text = "Load LevArk";
+            // 
+            // loadStringsToolStripMenuItem1
+            // 
+            this.loadStringsToolStripMenuItem1.Name = "loadStringsToolStripMenuItem1";
+            this.loadStringsToolStripMenuItem1.Size = new System.Drawing.Size(192, 26);
+            this.loadStringsToolStripMenuItem1.Text = "Load Strings";
+            this.loadStringsToolStripMenuItem1.Click += new System.EventHandler(this.loadStringsToolStripMenuItem1_Click);
+            // 
+            // loadArtFilesToolStripMenuItem
+            // 
+            this.loadArtFilesToolStripMenuItem.Name = "loadArtFilesToolStripMenuItem";
+            this.loadArtFilesToolStripMenuItem.Size = new System.Drawing.Size(192, 26);
+            this.loadArtFilesToolStripMenuItem.Text = "Load Art Files";
             // 
             // main
             // 
@@ -2070,6 +2213,9 @@
             this.tabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).EndInit();
@@ -2264,6 +2410,17 @@
         private System.Windows.Forms.Button BtnImgSave;
         private System.Windows.Forms.PictureBox PicPalette;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.NumericUpDown NumDoorBit;
+        public System.Windows.Forms.NumericUpDown NumNoMagic;
+        public System.Windows.Forms.NumericUpDown NumTileFlags;
+        private System.Windows.Forms.Button BtnApplyTileChanges;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Button BtnSaveTileMap;
+        private System.Windows.Forms.ToolStripMenuItem loadLevArkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadStringsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem loadArtFilesToolStripMenuItem;
     }
 }
 

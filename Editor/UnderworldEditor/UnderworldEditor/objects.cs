@@ -25,22 +25,30 @@ namespace UnderworldEditor
             public int next;
             public short owner;
             public int link;
+            public long FileAddress;
         }
 
         public ObjectInfo[] objList;
 
         public void InitInventoryObjectList(char[]buffer, int offset)
         {
-            int NoOfItems = (buffer.GetUpperBound(0) - offset) / 8;
-            objList = new ObjectInfo[NoOfItems+2];
-            for (int i=0; i<= NoOfItems; i++)
+            int NoOfItems = ((buffer.GetUpperBound(0) - offset) / 8) + 1;
+            if(offset== buffer.GetUpperBound(0))
+            { NoOfItems = 0; }
+            if (NoOfItems==0)
             {
-                objList[i] = initObject(buffer, offset + (i * 8));
-                objList[i].index = i;
+                objList = null;
+                return;
+            }
+            objList = new ObjectInfo[NoOfItems+1];
+            for (int i=0; i< NoOfItems ; i++)
+            {
+                objList[i+1] = initObject(buffer, offset + (i * 8));
+                objList[i+1].index = i;
             }
         }
 
-        public void InitWorldObjectList(char[] buffer, int offset)
+        public void InitWorldObjectList(char[] buffer, int offset, long blockaddress)
         {
             int NoOfItems = 1024;
             objList = new ObjectInfo[1025];
@@ -48,6 +56,7 @@ namespace UnderworldEditor
             for (int i = 0; i <= NoOfItems; i++)
             {
                 objList[i] = initObject(buffer, offset + objectaddress);
+                objList[i].FileAddress = blockaddress + objectaddress + offset;
                 objList[i].index = i;
                 if (i<=255)
                 {
@@ -71,6 +80,7 @@ namespace UnderworldEditor
             {
                 Vals[i] = (int)Util.getValAtAddress(buffer, objectsAddress + (i * 2), 16);
             }
+            newObj.FileAddress = objectsAddress;
             //postion at +1
             newObj.item_id = (int)Util.ExtractBits(Vals[0], 0, 9);
             newObj.flags = (short)(Util.ExtractBits(Vals[0], 9, 3));

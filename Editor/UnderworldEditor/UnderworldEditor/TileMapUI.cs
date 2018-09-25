@@ -30,7 +30,7 @@ namespace UnderworldEditor
         public static void LoadTileMap(int blockno, main MAIN)
         {
             MAIN.tilemap = new TileMap();
-            MAIN.tilemap.InitTileMap(MAIN.uwblocks[blockno].Data, 0, blockno);
+            MAIN.tilemap.InitTileMap(MAIN.uwblocks[blockno].Data, 0, blockno, MAIN.uwblocks[blockno].Address);
             if (main.curgame == 1)
             {
                 MAIN.tilemap.BuildTextureMap(MAIN.uwblocks[blockno + 18].Data, ref MAIN.tilemap.ceilingtexture);
@@ -48,7 +48,7 @@ namespace UnderworldEditor
             }
 
             MAIN.worldObjects = new objects();
-            MAIN.worldObjects.InitWorldObjectList(MAIN.uwblocks[blockno].Data, 64 * 64 * 4);
+            MAIN.worldObjects.InitWorldObjectList(MAIN.uwblocks[blockno].Data, 64 * 64 * 4 , MAIN.uwblocks[blockno].Address);
             MAIN.TreeWorldObjects.Nodes.Clear();
             for (int i = 0; i <= MAIN.worldObjects.objList.GetUpperBound(0); i++)
             {
@@ -83,6 +83,8 @@ namespace UnderworldEditor
                 {
                     if (int.TryParse(Y, out y))
                     {
+                        MAIN.curTileX = x;
+                        MAIN.curTileY = y;
                         MAIN.lblCurrentTile.Text = "Current Tile " + x + "," + y + " " + MAIN.TreeTiles.SelectedNode.Tag.ToString();
                         MAIN.CmbTileType.Text = TileMap.GetTileTypeText(MAIN.tilemap.Tiles[x, y].tileType);
                         MAIN.NumFloorHeight.Value = MAIN.tilemap.Tiles[x, y].floorHeight;
@@ -92,6 +94,9 @@ namespace UnderworldEditor
                         int actualtexture = MAIN.tilemap.GetMappedFloorTexture(TileMap.fSELF, MAIN.tilemap.Tiles[x, y]);
                         MAIN.LblMappedFloorTexture.Text = actualtexture.ToString()
                             + " " + MAIN.UWGameStrings.GetTextureName(actualtexture, main.curgame);
+                        MAIN.NumTileFlags.Value = MAIN.tilemap.Tiles[x, y].flags;
+                        MAIN.NumDoorBit.Value = MAIN.tilemap.Tiles[x, y].doorBit;
+                        MAIN.NumNoMagic.Value = MAIN.tilemap.Tiles[x, y].noMagic;
                     }
                 }
             }
@@ -109,6 +114,39 @@ namespace UnderworldEditor
                 MAIN.NumWorldHeading, MAIN.NumWorldFlags,
                 MAIN.NumWorldQuality, MAIN.NumWorldOwner,
                 MAIN.NumWorldNext, MAIN.NumWorldLink);
+        }
+
+        public static void ApplyTileChanges(int x, int y, main MAIN)
+        {
+            TileMap.TileInfo t = MAIN.tilemap.Tiles[x, y];
+
+            t.tileType = (short)TileMap.GetTileTypeInt(MAIN.CmbTileType.Text);
+            t.floorHeight = (short)MAIN.NumFloorHeight.Value;
+            t.flags = (short)MAIN.NumTileFlags.Value;
+            t.floorTexture = (short)MAIN.NumFloorTexture.Value;
+            t.noMagic = (short)MAIN.NumNoMagic.Value;
+            t.doorBit = (short)MAIN.NumDoorBit.Value;
+            t.indexObjectList = (short)MAIN.NumIndexObjectList.Value;
+            t.wallTexture = (short)MAIN.NumWallTexture.Value;
+
+
+
+            //Shift the bits to construct my data
+            int tileType = t.tileType;
+            int floorHeight = (t.floorHeight / 2) << 4;
+
+            int ByteToWrite = tileType | floorHeight;//| floorTexture | noMagic;//This will be set in the original data
+            MAIN.levarkbuffer[t.FileAddress] = (char)(ByteToWrite);
+            int flags = t.flags & 0x3;
+            int floorTexture = t.floorTexture << 2;
+            int noMagic = t.noMagic << 6;
+            int DoorBit = t.doorBit << 7;
+            ByteToWrite = floorTexture | noMagic | DoorBit | flags;
+            MAIN.levarkbuffer[t.FileAddress + 1] = (char)(ByteToWrite);
+
+            ByteToWrite = ((t.indexObjectList & 0x3FF) << 6) | (t.wallTexture & 0x3F);
+            MAIN.levarkbuffer[t.FileAddress + 2] = (char)(ByteToWrite & 0xFF);
+            MAIN.levarkbuffer[t.FileAddress + 3] = (char)((ByteToWrite >> 8) & 0xFF);
         }
 
 
