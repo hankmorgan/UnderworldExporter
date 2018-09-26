@@ -26,6 +26,9 @@ namespace UnderworldEditor
         public Util.UWBlock[] uwblocks;
         public char[] levarkbuffer;
         public static int curgame;
+        public static string basepath;
+        public static int curslot=-1;
+
         //RenderForm form3d;
         public objects pdatObjects;
         public TileMap tilemap;
@@ -51,8 +54,7 @@ namespace UnderworldEditor
             {
                 cmb.Items.Add(i + "-" + objects.ObjectName(i, curgame));
             }
-        }                      
-
+        }     
 
         private void txtCharName_TextChanged(object sender, EventArgs e)
         {
@@ -228,39 +230,38 @@ namespace UnderworldEditor
             TileMapUI.LoadTileInfoFromSelectedNode(this);
         }
 
-        private void loadPlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PlayerDatUI.LoadUW1PDat(this);
-        }
-
         private void writePlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
             playerdat.EncryptDecryptUW1(buffer, buffer[0]);
-            Util.WriteStreamFile("c:\\games\\uw1\\save1\\PLAYER.DAT", buffer);
+            Util.WriteStreamFile(main.basepath + "\\save"+ curslot + "\\PLAYER.DAT", buffer);
         }
 
-        private void loadPlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            PlayerDatUI.LoadUW2PDat(this);
-        }
         
         private void writePlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
             buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
-            Util.WriteStreamFile("c:\\games\\uw2\\save1\\PLAYER.DAT", buffer);
+            Util.WriteStreamFile(main.basepath + "\\save" + curslot + "\\PLAYER.DAT", buffer);
         }
 
-        private void LoadLevArkUW1_Click(object sender, EventArgs e)
+        private void LoadUWLevArk(int option)
         {
-            curgame = 1;
-            if (UWGameStrings==null)
+            string filename = "\\save" + option + "\\lev.ark";
+            switch (option)
+            {
+                case 0:
+                default:
+                    filename = "\\data\\lev.ark";
+                    break;
+            }
+
+            if (UWGameStrings == null)
             {
                 UWGameStrings = new UWStrings();
-                UWGameStrings.LoadStringsPak("c:\\games\\uw1\\data\\strings.pak", 1, GrdStrings);
+                UWGameStrings.LoadStringsPak(main.basepath + "\\data\\strings.pak", 1, GrdStrings);
             }
-            if (Util.ReadStreamFile("c:\\games\\uw1\\data\\lev.ark", out levarkbuffer))
+            if (Util.ReadStreamFile(main.basepath + filename, out levarkbuffer))
             {
                 int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
                 uwblocks = new Util.UWBlock[NoOfBlocks];
@@ -272,9 +273,9 @@ namespace UnderworldEditor
                 TreeNode AutoMapNotesNodes = TreeUWBlocks.Nodes.Add("AutoMapNotes");//These are variable sizes
                 for (int i = 0; i <= uwblocks.GetUpperBound(0); i++)
                 {
-                    if (Util.LoadUWBlock(levarkbuffer, i, Util.UWBlockSizes(i), out uwblocks[i], 1))
+                    if (Util.LoadUWBlock(levarkbuffer, i, Util.UWBlockSizes(i), out uwblocks[i]))
                     {
-                        uwblocks[i].ContentType = Util.GetUW1LevArkContentType(i);
+                        uwblocks[i].ContentType = Util.GetUWLevArkContentType(i);
                         TreeNode node;
                         switch (uwblocks[i].ContentType)
                         {
@@ -284,18 +285,18 @@ namespace UnderworldEditor
                                 node = AutoMapNodes.Nodes.Add("Block #" + i); break;
                             case Util.ContentTypes.AutoMapNotes:
                                 node = AutoMapNotesNodes.Nodes.Add("Block #" + i); break;
-                            case Util.ContentTypes.TextureMap:;
+                            case Util.ContentTypes.TextureMap:
                                 node = TextureMapNodes.Nodes.Add("Block #" + i); break;
                             case Util.ContentTypes.TileMap:
                             default:
-                                node = TileMapNodes.Nodes.Add("Block #" + i);break;
-                        } 
-                         node.Tag = i; 
+                                node = TileMapNodes.Nodes.Add("Block #" + i); break;
+                        }
+                        node.Tag = i;
                     }
                 }
             }//end readstreamfile
         }
-
+ 
         private void TreeWorldObjects_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeWorldObjects.SelectedNode;
@@ -328,20 +329,14 @@ namespace UnderworldEditor
 
         private void main_Load(object sender, EventArgs e)
         {
-            curgame = main.GAME_UW1;
-
-            PaletteLoader.LoadPalettes("c:\\games\\uw1\\data\\pals.dat");
+            FrmSelect frm = new FrmSelect();
+            frm.ShowDialog();
+            PaletteLoader.LoadPalettes(main.basepath + "\\data\\pals.dat");
             PicPalette.Image = ArtLoader.Palette(PaletteLoader.Palettes[0]);
-
             PopulateTextureTree();
 
         }
 
-        private void loadStringsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UWGameStrings = new UWStrings();
-            UWGameStrings.LoadStringsPak("c:\\games\\uw1\\data\\strings.pak", 1, GrdStrings);
-        }
 
         private void TreeArt_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -359,32 +354,73 @@ namespace UnderworldEditor
         private void PopulateTextureTree()
         {
             TreeArt.Nodes.Clear();
-
-            TreeNode texnode = TreeArt.Nodes.Add("Textures");
-            TreeNode walltex = texnode.Nodes.Add("Wall Textures");
-            int noofwalltex = 210;
-            for (int i = 0; i < noofwalltex; i++)
+            switch (curgame)
             {
-                TreeNode newnode = walltex.Nodes.Add("#" + i);
-                newnode.Tag = i;
+                case GAME_UW1:
+                    {
+                        TreeNode texnode = TreeArt.Nodes.Add("Textures");
+                        TreeNode walltex = texnode.Nodes.Add("Wall Textures");
+                        int noofwalltex = 210;
+                        for (int i = 0; i < noofwalltex; i++)
+                        {
+                            TreeNode newnode = walltex.Nodes.Add("#" + i);
+                            newnode.Tag = i;
+                        }
+                        TreeNode floortex = texnode.Nodes.Add("Floor Textures");
+                        for (int i = 210; i <= 260; i++)
+                        {
+                            TreeNode newnode = floortex.Nodes.Add("#" + i);
+                            newnode.Tag = i;
+                        }
+                        break;
+                    }
+                case GAME_UW2:
+                    {
+                        TreeNode texnode = TreeArt.Nodes.Add("Textures");
+                        int noofwalltex = 256;
+                        for (int i = 0; i < noofwalltex; i++)
+                        {
+                            TreeNode newnode = texnode.Nodes.Add("#" + i);
+                            newnode.Tag = i;
+                        }
+                        break;
+                    }
             }
-            TreeNode floortex = texnode.Nodes.Add("Floor Textures");
+
         }
 
         private void ImgOut_MouseClick(object sender, MouseEventArgs e)
         {
+            int factor = 4;
             if (CurrentImageNo!=-1)
             {
+                if (main.curgame==GAME_UW1)
+                {
+                    if (CurrentImageNo>=210)
+                    {//Editing a 32x32 floor texture
+                        factor = 8;
+                    }
+                }
                 // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
-                int x = e.Location.X / 4;
-                int y = ( e.Location.Y) / 4;
+                int x = e.Location.X / factor;
+                int y = ( e.Location.Y) / factor;
                 ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y, CurrentPalettePixel);
             }
         }
 
         private void BtnImgSave_Click(object sender, EventArgs e)
         {
-            ArtUI.SaveData(tex.texturebufferW);
+            switch (main.curgame)
+            {
+                case GAME_UW1:
+                    ArtUI.SaveTextureData(tex.texturebufferW,true);
+                    ArtUI.SaveTextureData(tex.texturebufferF,false);
+                    break;
+                case GAME_UW2:
+                    ArtUI.SaveTextureData(tex.texturebufferW,false);
+                    break;
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -437,11 +473,6 @@ namespace UnderworldEditor
             TileMapUI.ApplyTileChanges(curTileX, curTileY, this);
         }
 
-        private void uW1ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loadStringsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (UWGameStrings == null)
@@ -460,6 +491,100 @@ namespace UnderworldEditor
             isLoading = true;
             PlayerDatUI.PopulatePDatValuesToGrid(buffer, this);
             isLoading = false;
+        }
+
+        private void slot1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (curgame==GAME_UW1)
+            {
+                PlayerDatUI.LoadUW1PDat(this, 1);
+            }
+            else
+            {
+                PlayerDatUI.LoadUW2PDat(this, 1);
+            }           
+        }
+
+        private void slot2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (curgame == GAME_UW1)
+            {
+                PlayerDatUI.LoadUW1PDat(this, 2);
+            }
+            else
+            {
+                PlayerDatUI.LoadUW2PDat(this, 2);
+            }
+        }
+
+        private void slot3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (curgame == GAME_UW1)
+            {
+                PlayerDatUI.LoadUW1PDat(this, 3);
+            }
+            else
+            {
+                PlayerDatUI.LoadUW2PDat(this, 3);
+            }
+        }
+
+        private void slot4ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (curgame == GAME_UW1)
+            {
+                PlayerDatUI.LoadUW1PDat(this, 4);
+            }
+            else
+            {
+                PlayerDatUI.LoadUW2PDat(this, 4);
+            }
+        }
+
+ 
+        private void stringsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UWGameStrings = new UWStrings();
+            UWGameStrings.LoadStringsPak(main.basepath + "\\data\\strings.pak", curgame, GrdStrings);
+        }
+
+        private void dataLevarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUWLevArk(0);
+        }
+
+        private void save1LevarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUWLevArk(1);
+        }
+
+        private void save2LevarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUWLevArk(2);
+        }
+
+        private void save3LevarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUWLevArk(3);
+        }
+
+        private void save4LevarkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadUWLevArk(4);
+        }
+
+        private void repackUW2DataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (main.curgame==GAME_UW2)
+            {
+                //TODO: port file repacker utililty.
+                //Create a new uwblocks array of size 320
+                //Uncompress the first 80 and store appropiate flags
+                //Copy the remaining 240 blocks.
+                //Recalculate the block addresses for all blocks
+                //Write all data to file.
+                //Sounds easy doesn't it.
+            }
         }
     }
 }

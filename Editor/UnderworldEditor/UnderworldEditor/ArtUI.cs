@@ -30,9 +30,24 @@ namespace UnderworldEditor
             img.Image = artfile.ImageCache[imageNo];
         }
 
-        public static void SaveData(char[] artfile)
+        public static void SaveTextureData(char[] artfile, bool IsUW1Wall)
         {
-            Util.WriteStreamFile("c:\\games\\uw1\\data\\W64_test.TR", artfile);
+            switch (main.curgame)
+            {
+                case main.GAME_UW1:
+                    if (IsUW1Wall)
+                    {
+                        Util.WriteStreamFile(main.basepath + "\\data\\W64_test.TR", artfile);
+                    }
+                    else
+                    {
+                        Util.WriteStreamFile(main.basepath + "\\data\\F64_test.TR", artfile);
+                    }                    
+                    break;
+                case main.GAME_UW2:
+                    Util.WriteStreamFile(main.basepath + "\\data\\T64_test.TR", artfile);
+                    break;
+            }           
         }
 
     }//endclass

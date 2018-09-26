@@ -174,13 +174,13 @@ namespace UnderworldEditor
         /// <param name="blockNo">Block no.</param>
         /// <param name="targetDataLen">Target data length.</param>
         /// <param name="uwb">Uwb.</param>
-        public static bool LoadUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb, int game)
+        public static bool LoadUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
         {
             uwb = new UWBlock();
             int NoOfBlocks = (int)getValAtAddress(arkData, 0, 32);
-            switch (game)
+            switch (main.curgame)
             {
-                case 2:
+                case main.GAME_UW2:
                     {//6 + block *4 + (noOfBlocks*type)
                         uwb.Address = (int)getValAtAddress(arkData, 6 + (blockNo * 4), 32);
                         uwb.CompressionFlag = (int)getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 4), 32);
@@ -321,28 +321,59 @@ namespace UnderworldEditor
         }
 
 
-        public static ContentTypes GetUW1LevArkContentType(int blockno)
+        public static ContentTypes GetUWLevArkContentType(int blockno)
         {
-            if (blockno <=8)
+            if (main.curgame==main.GAME_UW1)
             {
-                return ContentTypes.TileMap;
+                if (blockno <= 8)
+                {
+                    return ContentTypes.TileMap;
+                }
+                if (blockno <= 17)
+                {
+                    return ContentTypes.AnimationOverlay;
+                }
+                if (blockno <= 28)
+                {
+                    return ContentTypes.TextureMap;
+                }
+                if (blockno <= 39)
+                {
+                    return ContentTypes.AutoMap;
+                }
+                if (blockno <= 48)
+                {
+                    return ContentTypes.AutoMapNotes;
+                }
             }
-            if (blockno<=17)
+            else
             {
-                return ContentTypes.AnimationOverlay;
+                /*
+                        0.. 79  level maps
+      80..159  texture mappings
+     160..239  automap infos
+     240..319  map notes
+                 */
+                if (blockno <= 79)
+                {
+                    return ContentTypes.TileMap;
+                }
+                if (blockno <= 159)
+                {
+                    return ContentTypes.TextureMap;
+                }
+                if (blockno <= 239)
+                {
+                    return ContentTypes.AutoMap;
+                }
+                if (blockno <= 319)
+                {
+                    return ContentTypes.AutoMapNotes;
+                }
+
+
             }
-            if (blockno<=28)
-            {
-                return ContentTypes.TextureMap;
-            }
-            if (blockno<=39)
-            {
-                return ContentTypes.AutoMap;
-            }
-            if (blockno<=48)
-            {
-                return ContentTypes.AutoMapNotes;
-            }
+ 
             return ContentTypes.Unknown;
         }
 

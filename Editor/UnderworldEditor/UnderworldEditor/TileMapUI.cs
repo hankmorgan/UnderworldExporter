@@ -29,22 +29,30 @@ namespace UnderworldEditor
 
         public static void LoadTileMap(int blockno, main MAIN)
         {
+            MAIN.TreeTiles.Nodes.Clear();
             MAIN.tilemap = new TileMap();
+            if (MAIN.uwblocks[blockno].DataLen < 0x7c06)
+            {
+                return;
+            }
             MAIN.tilemap.InitTileMap(MAIN.uwblocks[blockno].Data, 0, blockno, MAIN.uwblocks[blockno].Address);
             if (main.curgame == 1)
             {
                 MAIN.tilemap.BuildTextureMap(MAIN.uwblocks[blockno + 18].Data, ref MAIN.tilemap.ceilingtexture);
             }
             //Temporarily output to treeview for testing.
-            MAIN.TreeTiles.Nodes.Clear();
+           // MAIN.txtMap.Text = "";
             for (int x = 0; x <= 63; x++)
             {
-                TreeNode xnode = MAIN.TreeTiles.Nodes.Add("X=" + x);
+               
+               TreeNode xnode = MAIN.TreeTiles.Nodes.Add("X=" + x);
                 for (int y = 0; y <= 63; y++)
                 {
                     TreeNode ynode = xnode.Nodes.Add("Y=" + y);
                     ynode.Tag = x + "," + y;
+                    //MAIN.txtMap.Text += MAIN.tilemap.Tiles[x, y].tileType;
                 }
+                //MAIN.txtMap.Text += "\n";
             }
 
             MAIN.worldObjects = new objects();
@@ -148,7 +156,6 @@ namespace UnderworldEditor
             MAIN.levarkbuffer[t.FileAddress + 2] = (char)(ByteToWrite & 0xFF);
             MAIN.levarkbuffer[t.FileAddress + 3] = (char)((ByteToWrite >> 8) & 0xFF);
         }
-
 
     }
 }

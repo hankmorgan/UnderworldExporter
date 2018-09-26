@@ -33,7 +33,7 @@ namespace UnderworldEditor
         public void InitInventoryObjectList(char[]buffer, int offset)
         {
             int NoOfItems = ((buffer.GetUpperBound(0) - offset) / 8) + 1;
-            if(offset== buffer.GetUpperBound(0))
+            if(offset== buffer.GetUpperBound(0)+1)
             { NoOfItems = 0; }
             if (NoOfItems==0)
             {

@@ -9,11 +9,12 @@ namespace UnderworldEditor
 {
     class PlayerDatUI
     {
-        public static void LoadUW1PDat(main MAIN)
+        public static void LoadUW1PDat(main MAIN, int slot)
         {
+            main.curslot = slot;
             main.isLoading = true;
             main.curgame = main.GAME_UW1;
-            char[] buffer = playerdat.LoadPlayerDatUW1("c:\\games\\uw1\\save1\\player.dat");
+            char[] buffer = playerdat.LoadPlayerDatUW1(main.basepath + "\\save" + slot + "\\player.dat");//"c:\\games\\uw1\\save1\\player.dat");
             PopulatePDatValuesToGrid(buffer,MAIN);
             MAIN.pdatObjects = new objects();
             MAIN.pdatObjects.InitInventoryObjectList(buffer, main.InventoryOffsetUW1);
@@ -22,11 +23,12 @@ namespace UnderworldEditor
             main.isLoading = false;
         }
 
-        public static void LoadUW2PDat(main MAIN)
+        public static void LoadUW2PDat(main MAIN, int slot)
         {
+            main.curslot = slot;
             main.isLoading = true;
             main.curgame = main.GAME_UW2;
-            char[] buffer = playerdat.LoadPlayerDatUW2("c:\\games\\uw2\\save1\\player.dat");
+            char[] buffer = playerdat.LoadPlayerDatUW2(main.basepath + "\\save" + slot + "\\player.dat");
             PopulatePDatValuesToGrid(buffer, MAIN);
             MAIN.pdatObjects = new objects();
             MAIN.pdatObjects.InitInventoryObjectList(buffer, main.InventoryOffsetUW2);

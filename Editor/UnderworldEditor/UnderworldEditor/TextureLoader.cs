@@ -30,7 +30,6 @@ namespace UnderworldEditor
 
         public const float BumpMapStrength = 1f;
 
-
         public TextureLoader()
         {
             ImageCache = new Bitmap[261];
@@ -65,7 +64,7 @@ namespace UnderworldEditor
                         }
                         if (texturesFLoaded == false)
                         {
-                            if (!Util.ReadStreamFile("c:\\games\\uw2\\" + pathTex_UW2, out texturebufferT))
+                            if (!Util.ReadStreamFile(main.basepath + "\\" + pathTex_UW2, out texturebufferT))
                             {
                                 return base.LoadImageAt(index);
                             }
@@ -91,7 +90,7 @@ namespace UnderworldEditor
                         {//Wall textures
                             if (texturesWLoaded == false)
                             {
-                                if (!Util.ReadStreamFile("c:\\games\\uw1\\" + pathTexW_UW1, out texturebufferW))
+                                if (!Util.ReadStreamFile(main.basepath + "\\" + pathTexW_UW1, out texturebufferW))
                                 {
                                     return base.LoadImageAt(index);
                                 }
@@ -109,7 +108,7 @@ namespace UnderworldEditor
                         {//Floor textures (to match my list of textures)
                             if (texturesFLoaded == false)
                             {
-                                if (!Util.ReadStreamFile("c:\\games\\uw1\\" + pathTexF_UW1, out texturebufferF))
+                                if (!Util.ReadStreamFile(main.basepath + "\\" + pathTexF_UW1, out texturebufferF))
                                 {
                                     return base.LoadImageAt(index);
                                 }
@@ -120,7 +119,8 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            return Image(texturebufferF, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
+                            ImageCache[index] = Image(texturebufferF, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
+                            return ImageCache[index];
                         }
                     }//end switch	
             }
