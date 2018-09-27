@@ -196,6 +196,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.GrdLevArkRaw = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.txtMap = new System.Windows.Forms.TextBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.GrdStrings = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -221,12 +223,9 @@
             this.save2LevarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.save3LevarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.save4LevarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repackUW2DataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.txtMap = new System.Windows.Forms.TextBox();
-            this.repackUW2DataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -291,13 +290,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldFlags)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).BeginInit();
+            this.tabPage11.SuspendLayout();
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).BeginInit();
             this.tabPage10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.tabPage11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1958,6 +1957,27 @@
             this.Column1.HeaderText = "Value";
             this.Column1.Name = "Column1";
             // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.txtMap);
+            this.tabPage11.Location = new System.Drawing.Point(4, 25);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(832, 406);
+            this.tabPage11.TabIndex = 5;
+            this.tabPage11.Text = "MapView";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // txtMap
+            // 
+            this.txtMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMap.Location = new System.Drawing.Point(3, 3);
+            this.txtMap.Multiline = true;
+            this.txtMap.Name = "txtMap";
+            this.txtMap.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMap.Size = new System.Drawing.Size(826, 400);
+            this.txtMap.TabIndex = 0;
+            // 
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.GrdStrings);
@@ -2148,49 +2168,55 @@
             this.save3LevarkToolStripMenuItem,
             this.save4LevarkToolStripMenuItem});
             this.mainLevArkToolStripMenuItem.Name = "mainLevArkToolStripMenuItem";
-            this.mainLevArkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.mainLevArkToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
             this.mainLevArkToolStripMenuItem.Text = "Load LevArk";
             // 
             // dataLevarkToolStripMenuItem
             // 
             this.dataLevarkToolStripMenuItem.Name = "dataLevarkToolStripMenuItem";
-            this.dataLevarkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.dataLevarkToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.dataLevarkToolStripMenuItem.Text = "Data\\Lev.ark";
             this.dataLevarkToolStripMenuItem.Click += new System.EventHandler(this.dataLevarkToolStripMenuItem_Click);
             // 
             // save1LevarkToolStripMenuItem
             // 
             this.save1LevarkToolStripMenuItem.Name = "save1LevarkToolStripMenuItem";
-            this.save1LevarkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.save1LevarkToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.save1LevarkToolStripMenuItem.Text = "Save1\\Lev.ark";
             this.save1LevarkToolStripMenuItem.Click += new System.EventHandler(this.save1LevarkToolStripMenuItem_Click);
             // 
             // save2LevarkToolStripMenuItem
             // 
             this.save2LevarkToolStripMenuItem.Name = "save2LevarkToolStripMenuItem";
-            this.save2LevarkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.save2LevarkToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.save2LevarkToolStripMenuItem.Text = "Save2\\Lev.ark";
             this.save2LevarkToolStripMenuItem.Click += new System.EventHandler(this.save2LevarkToolStripMenuItem_Click);
             // 
             // save3LevarkToolStripMenuItem
             // 
             this.save3LevarkToolStripMenuItem.Name = "save3LevarkToolStripMenuItem";
-            this.save3LevarkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.save3LevarkToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.save3LevarkToolStripMenuItem.Text = "Save3\\Lev.ark";
             this.save3LevarkToolStripMenuItem.Click += new System.EventHandler(this.save3LevarkToolStripMenuItem_Click);
             // 
             // save4LevarkToolStripMenuItem
             // 
             this.save4LevarkToolStripMenuItem.Name = "save4LevarkToolStripMenuItem";
-            this.save4LevarkToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.save4LevarkToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.save4LevarkToolStripMenuItem.Text = "Save4\\Lev.ark";
             this.save4LevarkToolStripMenuItem.Click += new System.EventHandler(this.save4LevarkToolStripMenuItem_Click);
+            // 
+            // repackUW2DataToolStripMenuItem
+            // 
+            this.repackUW2DataToolStripMenuItem.Name = "repackUW2DataToolStripMenuItem";
+            this.repackUW2DataToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.repackUW2DataToolStripMenuItem.Text = "Repack UW2 Data";
+            this.repackUW2DataToolStripMenuItem.Click += new System.EventHandler(this.repackUW2DataToolStripMenuItem_Click);
             // 
             // otherResourcesToolStripMenuItem
             // 
             this.otherResourcesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stringsToolStripMenuItem,
-            this.texturesToolStripMenuItem});
+            this.stringsToolStripMenuItem});
             this.otherResourcesToolStripMenuItem.Name = "otherResourcesToolStripMenuItem";
             this.otherResourcesToolStripMenuItem.Size = new System.Drawing.Size(128, 24);
             this.otherResourcesToolStripMenuItem.Text = "Other Resources";
@@ -2201,40 +2227,6 @@
             this.stringsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.stringsToolStripMenuItem.Text = "Strings";
             this.stringsToolStripMenuItem.Click += new System.EventHandler(this.stringsToolStripMenuItem_Click);
-            // 
-            // texturesToolStripMenuItem
-            // 
-            this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
-            this.texturesToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.texturesToolStripMenuItem.Text = "Textures";
-            // 
-            // tabPage11
-            // 
-            this.tabPage11.Controls.Add(this.txtMap);
-            this.tabPage11.Location = new System.Drawing.Point(4, 25);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(832, 406);
-            this.tabPage11.TabIndex = 5;
-            this.tabPage11.Text = "MapView";
-            this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // txtMap
-            // 
-            this.txtMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMap.Location = new System.Drawing.Point(3, 3);
-            this.txtMap.Multiline = true;
-            this.txtMap.Name = "txtMap";
-            this.txtMap.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMap.Size = new System.Drawing.Size(826, 400);
-            this.txtMap.TabIndex = 0;
-            // 
-            // repackUW2DataToolStripMenuItem
-            // 
-            this.repackUW2DataToolStripMenuItem.Name = "repackUW2DataToolStripMenuItem";
-            this.repackUW2DataToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.repackUW2DataToolStripMenuItem.Text = "Repack UW2 Data";
-            this.repackUW2DataToolStripMenuItem.Click += new System.EventHandler(this.repackUW2DataToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -2318,6 +2310,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldFlags)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).EndInit();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
             this.tabPage10.ResumeLayout(false);
@@ -2325,8 +2319,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2507,7 +2499,6 @@
         private System.Windows.Forms.ToolStripMenuItem save4LevarkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otherResourcesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stringsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage11;
         public System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.ToolStripMenuItem repackUW2DataToolStripMenuItem;

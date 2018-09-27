@@ -235,6 +235,49 @@ namespace UnderworldEditor
         }
 
 
+
+        /// <summary>
+        /// Loads the UW block.
+        /// </summary>
+        /// <returns><c>true</c>, if UW block was loaded, <c>false</c> otherwise.</returns>
+        /// <param name="arkData">Ark data.</param>
+        /// <param name="blockNo">Block no.</param>
+        /// <param name="targetDataLen">Target data length.</param>
+        /// <param name="uwb">Uwb.</param>
+        public static bool CopyUWBlock(char[] arkData, int blockNo, long targetDataLen, out UWBlock uwb)
+        {
+            uwb = new UWBlock();
+            int NoOfBlocks = (int)getValAtAddress(arkData, 0, 32);
+            switch (main.curgame)
+            {
+                case main.GAME_UW2:
+                    {//6 + block *4 + (noOfBlocks*type)
+                        uwb.Address = (int)getValAtAddress(arkData, 6 + (blockNo * 4), 32);
+                        uwb.CompressionFlag = (int)getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 4), 32);
+                        uwb.DataLen = getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 8), 32);
+                        uwb.ReservedSpace = getValAtAddress(arkData, 6 + (blockNo * 4) + (NoOfBlocks * 12), 32);
+                        if (uwb.Address != 0)
+                        {
+                            uwb.Data = new char[uwb.DataLen];
+                            int b = 0;
+                            for (long i = uwb.Address; i < uwb.Address + uwb.DataLen; i++)
+                            {//Copy the data to the block.
+                                uwb.Data[b++] = arkData[i];
+                            }
+                            return true;
+                        }
+                        else
+                        {
+                            uwb.Data = new char[0];
+                            uwb.DataLen = 0;
+                            return false;
+                        }
+                    }                    
+            }
+            return false;
+        }
+
+
         /// <summary>
         /// Unpacks the Uw2 compressed blocks
         /// </summary>
@@ -405,6 +448,58 @@ namespace UnderworldEditor
             //}
         }
 
+
+        /// <summary>
+        /// Writes an int8 to a file
+        /// </summary>
+        /// <param name="writer">Writer.</param>
+        /// <param name="val">Value.</param>
+        public static long WriteInt8(BinaryWriter writer, long val)
+        {
+            byte valOut = (byte)(val & 0xff);
+            writer.Write(valOut);
+
+            return 1;
+        }
+
+
+        /// <summary>
+        /// Writes an int16 to a file
+        /// </summary>
+        /// <param name="writer">Writer.</param>
+        /// <param name="val">Value.</param>
+        public static long WriteInt16(BinaryWriter writer, long val)
+        {
+            byte valOut = (byte)(val & 0xff);
+            writer.Write(valOut);
+
+            valOut = (byte)(val >> 8 & 0xff);
+            writer.Write(valOut);
+
+            return 2;
+        }
+
+        /// <summary>
+        /// Writes an int32 to file
+        /// </summary>
+        /// <param name="writer">Writer.</param>
+        /// <param name="val">Value.</param>
+        public static long WriteInt32(BinaryWriter writer, long val)
+        {
+            byte valOut = (byte)(val & 0xff);
+            writer.Write(valOut);
+
+            valOut = (byte)(val >> 8 & 0xff);
+            writer.Write(valOut);
+
+            valOut = (byte)(val >> 16 & 0xff);
+            writer.Write(valOut);
+
+            valOut = (byte)(val >> 24 & 0xff);
+            writer.Write(valOut);
+
+            return 4;
+        }
 
 
     }//end class

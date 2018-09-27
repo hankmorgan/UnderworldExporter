@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace UnderworldEditor
 {
@@ -35,10 +36,10 @@ namespace UnderworldEditor
         public int curTileX; public int curTileY;
         public int CurPDatObject;
         public int CurWorldObject;
-
+        string curlevarkfile;
         public objects worldObjects;
         public UWStrings UWGameStrings;
-
+        public GRLoader[] grfile =new GRLoader[33];
         TextureLoader tex = new TextureLoader();
         private int CurrentImageNo;
         private int CurrentPalettePixel=0;
@@ -47,7 +48,11 @@ namespace UnderworldEditor
         {
             InitializeComponent();    
         }
-
+        
+        /// <summary>
+        /// Initialise the list of object item names 
+        /// </summary>
+        /// <param name="cmb"></param>
         public static void PopulateItemIDList(ComboBox cmb)
         {
         for (int i =0; i<=464;i++)
@@ -56,11 +61,21 @@ namespace UnderworldEditor
             }
         }     
 
+        /// <summary>
+        /// Handle the changing of the character nae
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtCharName_TextChanged(object sender, EventArgs e)
         {
             PlayerDatUI.ChangeCharName(this);
         } 
         
+        /// <summary>
+        /// Handles changes of raw data and reflect it back to the ui
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GrdPlayerDat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (!isLoading)
@@ -74,10 +89,14 @@ namespace UnderworldEditor
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Handles selection of an item in the inventory tree.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeInventory_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-           
+        {           
             TreeNode node = TreeInventory.SelectedNode;
             int index;
             if (node.Tag == null) { return; }
@@ -95,7 +114,25 @@ namespace UnderworldEditor
             }
         }
 
-
+        /// <summary>
+        /// Handles the change of object properties
+        /// </summary>
+        /// <param name="TileMapData"></param>
+        /// <param name="obj"></param>
+        /// <param name="cmbItem_ID"></param>
+        /// <param name="chkEnchanted"></param>
+        /// <param name="chkIsQuant"></param>
+        /// <param name="chkDoorDir"></param>
+        /// <param name="chkInvis"></param>
+        /// <param name="numXpos"></param>
+        /// <param name="numYpos"></param>
+        /// <param name="numZpos"></param>
+        /// <param name="numHeading"></param>
+        /// <param name="numFlags"></param>
+        /// <param name="numQuality"></param>
+        /// <param name="numOwner"></param>
+        /// <param name="numNext"></param>
+        /// <param name="numLink"></param>
         public void UpdateObjectUIChange(char[] TileMapData, objects.ObjectInfo obj,
             ComboBox cmbItem_ID,
             CheckBox chkEnchanted,
@@ -161,6 +198,24 @@ namespace UnderworldEditor
             TileMapData[addptr + 7] = (char)((ByteToWrite >> 8) & 0xFF);
         }
 
+        /// <summary>
+        /// Fill in the information for the references object information.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="cmbItem_ID"></param>
+        /// <param name="chkEnchanted"></param>
+        /// <param name="chkIsQuant"></param>
+        /// <param name="chkDoorDir"></param>
+        /// <param name="chkInvis"></param>
+        /// <param name="numXpos"></param>
+        /// <param name="numYpos"></param>
+        /// <param name="numZpos"></param>
+        /// <param name="numHeading"></param>
+        /// <param name="numFlags"></param>
+        /// <param name="numQuality"></param>
+        /// <param name="numOwner"></param>
+        /// <param name="numNext"></param>
+        /// <param name="numLink"></param>
         public void PopulateObjectUI(objects.ObjectInfo obj, 
             ComboBox cmbItem_ID, 
             CheckBox chkEnchanted,
@@ -198,7 +253,11 @@ namespace UnderworldEditor
         }
 
 
-
+        /// <summary>
+        /// Controls selection of a lev.ark block and view its content.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeUWBlocks_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Tag == null) { return; }
@@ -215,6 +274,10 @@ namespace UnderworldEditor
             }            
         }
 
+        /// <summary>
+        /// Fills raw data to grid.
+        /// </summary>
+        /// <param name="blockno"></param>
         private void FillRawDataForLevArk(int blockno)
         {
             for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
@@ -225,11 +288,21 @@ namespace UnderworldEditor
             }
         }
 
+        /// <summary>
+        /// Loads tile info.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeTiles_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TileMapUI.LoadTileInfoFromSelectedNode(this);
         }
 
+        /// <summary>
+        /// Saves the current uw1 save file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void writePlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
@@ -237,7 +310,11 @@ namespace UnderworldEditor
             Util.WriteStreamFile(main.basepath + "\\save"+ curslot + "\\PLAYER.DAT", buffer);
         }
 
-        
+        /// <summary>
+        /// Saves the current uw2 save file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void writePlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
@@ -245,6 +322,10 @@ namespace UnderworldEditor
             Util.WriteStreamFile(main.basepath + "\\save" + curslot + "\\PLAYER.DAT", buffer);
         }
 
+        /// <summary>
+        /// Loads a lev.ark file from the game data or a save file
+        /// </summary>
+        /// <param name="option"></param>
         private void LoadUWLevArk(int option)
         {
             string filename = "\\save" + option + "\\lev.ark";
@@ -263,6 +344,7 @@ namespace UnderworldEditor
             }
             if (Util.ReadStreamFile(main.basepath + filename, out levarkbuffer))
             {
+                curlevarkfile = main.basepath + filename;
                 int NoOfBlocks = (int)Util.getValAtAddress(levarkbuffer, 0, 16);
                 uwblocks = new Util.UWBlock[NoOfBlocks];
                 TreeUWBlocks.Nodes.Clear();
@@ -297,6 +379,11 @@ namespace UnderworldEditor
             }//end readstreamfile
         }
  
+        /// <summary>
+        /// Handles selection of a world object from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeWorldObjects_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeWorldObjects.SelectedNode;
@@ -310,9 +397,12 @@ namespace UnderworldEditor
                 }
             }
         }
-
-
-
+        
+        /// <summary>
+        /// Handles selection of an object by tile.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeWorldByTile_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeWorldByTile.SelectedNode;
@@ -327,6 +417,11 @@ namespace UnderworldEditor
             }
         }
 
+        /// <summary>
+        /// Load events. Calls the file selection dialog.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void main_Load(object sender, EventArgs e)
         {
             FrmSelect frm = new FrmSelect();
@@ -337,20 +432,77 @@ namespace UnderworldEditor
 
         }
 
-
+        /// <summary>
+        /// Handles selection of an art file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TreeArt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeArt.SelectedNode;
-            CurrentImageNo = -1;
-            int index;
-            if (node.Tag == null) { return; }
-            if (int.TryParse(node.Tag.ToString(), out index))
+            if (node.Parent!=null)
             {
-               ImgOut.Image = tex.LoadImageAt(index);
-               CurrentImageNo = index;
+                string partext = node.Parent.Text.ToUpper();
+                switch(partext)
+                {
+                    case "TEXTURES":
+                    case "WALL TEXTURES":
+                    case "FLOOR TEXTURES":
+                        {//loading a texture
+                            CurrentImageNo = -1;
+                            int index;
+                            if (node.Tag == null) { return; }
+                            if (int.TryParse(node.Tag.ToString(), out index))
+                            {
+                                ImgOut.Image = tex.LoadImageAt(index);
+                                CurrentImageNo = index;
+                            }
+                            break;
+                        }
+                    case "GRAPHIC RESOURCES":
+                        {
+                            int index;
+                            if (node.Tag == null) { return; }
+                            if (int.TryParse(node.Tag.ToString(), out index))
+                            {
+                                if (grfile[index]==null)
+                                {//Load the gr file and populate the tree.
+                                    grfile[index] = new GRLoader(main.basepath + "\\data\\" + node.Text);
+                                    for (int i=0; i<=grfile[index].ImageCache.GetUpperBound(0);i++)
+                                    {
+                                        TreeNode img = node.Nodes.Add(i.ToString());
+                                        img.Tag = i;
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                    default:
+                        if (partext.ToUpper().Contains(".GR"))
+                        {
+                            int parentindex;
+                            if (node.Parent.Tag == null) { return; }
+                            if (int.TryParse(node.Parent.Tag.ToString(), out parentindex))
+                            {
+                                int index;
+                                if (node.Tag == null) { return; }
+                                if (int.TryParse(node.Tag.ToString(), out index))
+                                {
+                                    //load the gr file
+                                    ImgOut.Image = grfile[parentindex].LoadImageAt(index);
+                                }
+                            }
+                        }
+                        break;
+                }
             }
+
         }
 
+        /// <summary>
+        /// Handles loading the selection lists for textures.
+        /// </summary>
         private void PopulateTextureTree()
         {
             TreeArt.Nodes.Clear();
@@ -386,9 +538,25 @@ namespace UnderworldEditor
                         break;
                     }
             }
-
+            //Add nodes for all .gr files
+            TreeNode grhead = TreeArt.Nodes.Add("Graphic Resources");
+            DirectoryInfo dir = new DirectoryInfo(basepath + "\\data");
+            if (dir!=null)
+            {
+                FileInfo[] grFiles= dir.GetFiles("*.gr");
+                for (int i = 0; i <= grFiles.GetUpperBound(0); i++)
+                {
+                    TreeNode gr = grhead.Nodes.Add(grFiles[i].Name);
+                    gr.Tag = i;
+                }
+            }
         }
 
+        /// <summary>
+        /// Handles the clicking of a pixel on the image display
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImgOut_MouseClick(object sender, MouseEventArgs e)
         {
             int factor = 4;
@@ -408,6 +576,12 @@ namespace UnderworldEditor
             }
         }
 
+
+        /// <summary>
+        /// Handles saving of changes of the image data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnImgSave_Click(object sender, EventArgs e)
         {
             switch (main.curgame)
@@ -455,6 +629,11 @@ namespace UnderworldEditor
             }
         }
 
+        /// <summary>
+        /// Handles selection of a palette colour.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PicPalette_MouseClick(object sender, MouseEventArgs e)
         {
            // int x = e.Location.X / 4;
@@ -463,25 +642,31 @@ namespace UnderworldEditor
         }
 
 
+        /// <summary>
+        /// Handles saving of the lev.ark file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSaveTileMap_Click(object sender, EventArgs e)
         {
-            Util.WriteStreamFile("c:\\games\\uw1\\save1\\lev.ark", levarkbuffer);
+            Util.WriteStreamFile(curlevarkfile, levarkbuffer);
         }
 
+        /// <summary>
+        /// Store changed tile info to the map.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnApplyTileChanges_Click(object sender, EventArgs e)
         {
             TileMapUI.ApplyTileChanges(curTileX, curTileY, this);
         }
 
-        private void loadStringsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (UWGameStrings == null)
-            {
-                UWGameStrings = new UWStrings();
-                UWGameStrings.LoadStringsPak("c:\\games\\uw2\\data\\strings.pak", 1, GrdStrings);
-            }
-        }
-
+        /// <summary>
+        /// Handle changing of a value in the player inventory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PInvValueChanged(object sender, EventArgs e)
         {
             if (isLoading) { return; }
@@ -493,6 +678,11 @@ namespace UnderworldEditor
             isLoading = false;
         }
 
+        /// <summary>
+        /// Loads save 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void slot1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (curgame==GAME_UW1)
@@ -505,6 +695,11 @@ namespace UnderworldEditor
             }           
         }
 
+        /// <summary>
+        /// Loads save 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void slot2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (curgame == GAME_UW1)
@@ -517,6 +712,11 @@ namespace UnderworldEditor
             }
         }
 
+        /// <summary>
+        /// Loads save 3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void slot3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (curgame == GAME_UW1)
@@ -529,6 +729,11 @@ namespace UnderworldEditor
             }
         }
 
+        /// <summary>
+        /// Loads save 4
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void slot4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (curgame == GAME_UW1)
@@ -541,49 +746,203 @@ namespace UnderworldEditor
             }
         }
 
- 
+        /// <summary>
+        /// Loads the current games strings file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stringsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UWGameStrings = new UWStrings();
             UWGameStrings.LoadStringsPak(main.basepath + "\\data\\strings.pak", curgame, GrdStrings);
         }
 
+        /// <summary>
+        /// Load the lev.ark from gamedata
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataLevarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadUWLevArk(0);
         }
 
+        /// <summary>
+        /// Loads the lev.ark from save 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void save1LevarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadUWLevArk(1);
         }
 
+        /// <summary>
+        /// Loads the lev.ark from save 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void save2LevarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadUWLevArk(2);
         }
 
+        /// <summary>
+        /// Loads the lev.ark from save 3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void save3LevarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadUWLevArk(3);
         }
 
+        /// <summary>
+        /// Loads the lev.ark from save 4
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void save4LevarkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadUWLevArk(4);
         }
 
+        /// <summary>
+        /// Repacks a UW2 lev.ark file into a new uncompressed file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void repackUW2DataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {            
             if (main.curgame==GAME_UW2)
             {
-                //TODO: port file repacker utililty.
+               char[] lev_ark;
+               if(! Util.ReadStreamFile(basepath + "\\data\\lev.ark", out lev_ark))
+               {
+                return;
+               }
+                int BlocksToRepack = 80;//A value of higher than this will crash the dos game.
                 //Create a new uwblocks array of size 320
+                Util.UWBlock[] blockData = new Util.UWBlock[320];
                 //Uncompress the first 80 and store appropiate flags
-                //Copy the remaining 240 blocks.
-                //Recalculate the block addresses for all blocks
+                long NewAddress=0;
+                for (int x=0; x<= blockData.GetUpperBound(0);x++)
+                {
+                    long currAddress = Util.getValAtAddress(lev_ark, 6 + (x * 4), 32);
+                    if (x==0)
+                    { NewAddress = currAddress; }
+                    int compressionFlag = (int)Util.getValAtAddress(lev_ark, 6 + (1 * (320 * 4)) + (x * 4), 32);
+                    int DataSizeVal = (int)Util.getValAtAddress(lev_ark, 6 + (2 * (320 * 4)) + (x * 4), 32);
+                    int DataAvail = (int)Util.getValAtAddress(lev_ark, 6 + (3 * (320 * 4)) + (x * 4), 32);
+                    int isCompressed = (compressionFlag >> 1) & 0x01;
+                    if (x< BlocksToRepack)
+                    {//a tile map block
+                        blockData[x] = new Util.UWBlock();
+                        if (isCompressed == 1)
+                        {                           
+                            Util.LoadUWBlock(lev_ark, x, 0, out blockData[x]);
+                            blockData[x].Address = NewAddress;
+                            blockData[x].CompressionFlag = 0;
+                            //uwblocks[x].DataLen = DataSizeVal;  
+                        }
+                        else
+                        {
+                            //Copy block
+                            Util.CopyUWBlock(lev_ark, x, 0, out blockData[x]);
+                            blockData[x].Address = NewAddress;                            
+                        }
+                    }
+                    else
+                    {
+                        //Copy block
+                        Util.CopyUWBlock(lev_ark, x, 0, out blockData[x]);
+                        blockData[x].Address = NewAddress;
+                    }
+                    if (blockData[x].DataLen == 0)
+                    {
+                        blockData[x].Address = 0;
+                    }
+                    NewAddress = NewAddress + blockData[x].DataLen;
+                }
                 //Write all data to file.
-                //Sounds easy doesn't it.
+                FileStream file = File.Open(basepath + "\\Data\\NEW LEV.ARK", FileMode.Create);
+                BinaryWriter writer = new BinaryWriter(file);
+                long add_ptr = 0;
+
+                add_ptr += Util.WriteInt8(writer, 0x40);
+                add_ptr += Util.WriteInt8(writer, 0x01);
+                add_ptr += Util.WriteInt8(writer, 0x0);//1
+                add_ptr += Util.WriteInt8(writer, 0x0);//2
+                add_ptr += Util.WriteInt8(writer, 0x0);//3
+                add_ptr += Util.WriteInt8(writer, 0x0);//4
+
+                //Now write block addresses
+                for (int i = 0; i < 320; i++)
+                {//write block addresses
+                    add_ptr += Util.WriteInt32(writer, blockData[i].Address);
+                }
+
+                //Now write compression flags
+                for (int i = 320; i < 640; i++)
+                {//write block compression flags
+                    add_ptr += Util.WriteInt32(writer, blockData[i - 320].CompressionFlag);
+                }
+
+                //Now write data lengths
+                for (int i = 960; i < 1280; i++)
+                {//write block data lengths
+                    add_ptr += Util.WriteInt32(writer, blockData[i - 960].DataLen);
+                }
+
+
+                for (int i = 1280; i < 1600; i++)
+                {//write block data reservations
+                    add_ptr += Util.WriteInt32(writer, blockData[i - 1280].ReservedSpace);
+                }
+
+                for (long freespace = add_ptr; freespace < blockData[0].Address; freespace++)
+                {//write freespace to fill up to the final block.
+                    add_ptr += Util.WriteInt8(writer, 0);
+                }
+
+
+                //Now be brave and write all my blocks!!!
+                for (int i = 0; i <= blockData.GetUpperBound(0); i++)
+                {
+                    if (blockData[i].Data != null)//?
+                    {
+                        if (add_ptr < blockData[i].Address)
+                        {
+                            while (add_ptr < blockData[i].Address)
+                            {//Fill whitespace until next block address.
+                                add_ptr += Util.WriteInt8(writer, 0);
+                            }
+                        }
+                        else
+                        {
+                            if ((add_ptr > blockData[i].Address) && (blockData[i].Address!=0))
+                            {
+                                MessageBox.Show("Writing block " + i + " at " + add_ptr + " should be " + blockData[i].Address);
+                            }
+                        }
+                       // Debug.Log("Writing block " + i + " datalen " + blockData[i].DataLen + " ubound=" + blockData[i].Data.GetUpperBound(0));
+                        //for (long a =0; a<=blockData[i].Data.GetUpperBound(0); a++)
+                        int blockUbound = blockData[i].Data.GetUpperBound(0);
+                        for (long a = 0; a < blockData[i].DataLen; a++)
+                        {
+                            if (a <= blockUbound)
+                            {
+                                add_ptr += Util.WriteInt8(writer, (long)blockData[i].Data[a]);
+                            }
+                            else
+                            {
+                                add_ptr += Util.WriteInt8(writer, 0);
+                            }
+                        }
+                    }
+                }
+                file.Close();
+                MessageBox.Show("Underworld 2 lev.ark has been repacked. Use this file at your own risk");
             }
         }
     }

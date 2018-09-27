@@ -80,8 +80,8 @@ namespace UnderworldEditor
             long counter = 0;
             for (int iRow = 0; iRow < height; iRow++)
             {
-                for (int j = (iRow * width); j < (iRow * width) + width; j++)
-                {
+               for (int j = (iRow * width); j < (iRow * width) + width; j++)
+               {
                     byte pixel = (byte)Util.getValAtAddress(databuffer, dataOffSet + (long)j, 8);
                     Color col = pal.ColorAtPixel(pixel, Alpha);
                     //imageColors[counter++] = pal.ColorAtPixel(pixel, Alpha);
@@ -96,7 +96,7 @@ namespace UnderworldEditor
             // image.SetPixels32(imageColors);
             //image.Apply();
             //return image;
-            return CopyDataToBitmap(imageColors, height, width);
+            return CopyDataToBitmap(imageColors, width, height);
         }
 
         /// <summary>

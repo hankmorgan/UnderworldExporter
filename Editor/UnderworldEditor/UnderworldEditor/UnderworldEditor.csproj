@@ -54,6 +54,7 @@
     <Compile Include="FrmSelect.Designer.cs">
       <DependentUpon>FrmSelect.cs</DependentUpon>
     </Compile>
+    <Compile Include="GRLoader.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="PaletteLoader.cs" />
     <Compile Include="PlayerDatUI.cs" />
