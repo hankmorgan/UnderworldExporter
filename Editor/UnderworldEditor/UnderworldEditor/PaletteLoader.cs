@@ -28,6 +28,37 @@ namespace UnderworldEditor
             LoadPalettes("c:\\games\\uw1\\data\\pals.dat");
         }
 
+        public static int GetNearestColour(Color ColourToMatch, Palette pal)
+        {
+            int nearest =0;
+            int nearestindex = 0;
+            int newred = ColourToMatch.R;
+            int newgreen = ColourToMatch.G;
+            int newblue = ColourToMatch.B;
+
+            for (int i=0; i<=pal.red.GetUpperBound(0);i++)
+            {
+                int diff = Math.Abs((int)pal.red[i] - newred) 
+                    + Math.Abs((int)pal.green[i] - newgreen) 
+                    + Math.Abs((int)pal.blue[i] - newblue);
+                if (i==0)
+                {
+                    nearest = diff;
+                    nearestindex = 0;
+                }
+                else
+                {
+                    if (diff<nearest)
+                    {
+                        nearest = diff;
+                        nearestindex = i;
+                    }
+                }  
+            }
+            return nearestindex;
+        }
+
+
 
         public static void LoadPalettes(string Path)
         {
@@ -113,7 +144,9 @@ namespace UnderworldEditor
             {
                 imgData[i] = (char)i;
             }
-            return ArtLoader.Image(imgData, 0, width, height, "name here", Palettes[PalIndex], true);
+            BitmapUW output= ArtLoader.Image(imgData, 0,0, width, height, "name here", Palettes[PalIndex], true, BitmapUW.ImageTypes.Palette);
+            return output.image;
+
         }
     }
 

@@ -12,22 +12,29 @@ namespace UnderworldEditor
     class ArtUI
     {
 
-        public static void setPixelAtLocation(TextureLoader artfile, int imageNo, PictureBox img, int x, int y, int newpixel)
+        public static void setPixelAtLocation(TextureLoader artfile, BitmapUW currentimg, PictureBox img, int x, int y, int newpixel)
         {
             if (artfile == null) { return; }
             if (img.Image == null) { return; }
-            //(Bitmap)(img.Image).SetPixel(x, y, PaletteLoader.Palettes[0].ColorAtPixel(50, false));
-            artfile.ImageCache[imageNo].SetPixel(x, y, PaletteLoader.Palettes[0].ColorAtPixel((byte)newpixel, false));
-            switch (main.curgame)
+            artfile.ImageCache[currentimg.ImageNo].image.SetPixel(x, y, PaletteLoader.Palettes[0].ColorAtPixel((byte)newpixel, false));
+            switch (main.CurrentImage.ImageType)
             {
-                case main.GAME_UW1:
-                    if (imageNo<210)
+                case BitmapUW.ImageTypes.Texture:
                     {
-                        artfile.texturebufferW[artfile.OffsetT[imageNo] + y * 64 + x] = (char)newpixel;
+                        switch (main.curgame)
+                        {
+                            case main.GAME_UW1:
+                                if (currentimg.ImageNo < 210)
+                                {
+                                    artfile.texturebufferW[artfile.OffsetT[currentimg.ImageNo] + y * 64 + x] = (char)newpixel;
+                                }
+                                break;
+                        }
+                        main.CurrentImage = artfile.ImageCache[currentimg.ImageNo];
+                        img.Image = main.CurrentImage.image;
+                        break;
                     }
-                    break;
-            }            
-            img.Image = artfile.ImageCache[imageNo];
+            }
         }
 
         public static void SaveTextureData(char[] artfile, bool IsUW1Wall)
@@ -37,15 +44,15 @@ namespace UnderworldEditor
                 case main.GAME_UW1:
                     if (IsUW1Wall)
                     {
-                        Util.WriteStreamFile(main.basepath + "\\data\\W64_test.TR", artfile);
+                        Util.WriteStreamFile(main.basepath + "\\data\\W64.TR", artfile);
                     }
                     else
                     {
-                        Util.WriteStreamFile(main.basepath + "\\data\\F64_test.TR", artfile);
+                        Util.WriteStreamFile(main.basepath + "\\data\\F64.TR", artfile);
                     }                    
                     break;
                 case main.GAME_UW2:
-                    Util.WriteStreamFile(main.basepath + "\\data\\T64_test.TR", artfile);
+                    Util.WriteStreamFile(main.basepath + "\\data\\T64.TR", artfile);
                     break;
             }           
         }

@@ -123,19 +123,19 @@ namespace UnderworldEditor
             else
             {
                 NoOfImages = (int)Util.getValAtAddress(ImageFileData, 1, 16);
-                ImageCache = new Bitmap[NoOfImages];
+                ImageCache = new BitmapUW[NoOfImages];
                 ImageFileDataLoaded = true;
                 return true;
             }
         }
 
 
-        public override Bitmap LoadImageAt(int index)
+        public override BitmapUW LoadImageAt(int index)
         {
             return LoadImageAt(index, true);
         }
 
-        public override Bitmap LoadImageAt(int index, bool Alpha)
+        public override BitmapUW LoadImageAt(int index, bool Alpha)
         {
             if (ImageFileDataLoaded == false)
             {
@@ -172,7 +172,7 @@ namespace UnderworldEditor
                 case 0x4://8 bit uncompressed
                     {
                         imageOffset = imageOffset + 5;
-                        ImageCache[index] = Image(ImageFileData, imageOffset, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha);
+                        ImageCache[index] = Image(ImageFileData, imageOffset,index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
                         return ImageCache[index];
                     }
                 case 0x8://4 bit run-length
@@ -192,7 +192,7 @@ namespace UnderworldEditor
                         //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
                         int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
                         outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4, aux);
-                        ImageCache[index] = Image(outputImg, 0, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha);
+                        ImageCache[index] = Image(outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
                         return ImageCache[index];
                     }
                 case 0xA://4 bit uncompressed//Same as above???
@@ -210,7 +210,7 @@ namespace UnderworldEditor
                         imageOffset = imageOffset + 6;  //Start of raw data.
                         copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
                         auxpal = PaletteLoader.LoadAuxilaryPal(main.basepath + AuxPalPath, PaletteLoader.Palettes[PaletteNo], auxPalIndex);
-                        ImageCache[index] = Image(imgNibbles, 0, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha);
+                        ImageCache[index] = Image(imgNibbles, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha, BitmapUW.ImageTypes.FourBitUncompress);
                         return ImageCache[index];
                     }
                 //break;
@@ -218,7 +218,7 @@ namespace UnderworldEditor
                     //Check to see if the file is panels.gr
                     if (FileName.ToUpper().EndsWith("PANELS.GR"))
                     {
-                        return new Bitmap(2, 2);
+                        if (index >= 4) { return base.LoadImageAt(0); } //new Bitmap(2, 2);
                         BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
                         BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
                         if (main.curgame == main.GAME_UW2)
@@ -227,13 +227,13 @@ namespace UnderworldEditor
                             BitMapHeight = 112;
                         }
                         imageOffset = Util.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
-                        ImageCache[index] = Image(ImageFileData, imageOffset, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha);
+                        ImageCache[index] = Image(ImageFileData, imageOffset, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
                         return ImageCache[index];
                     }
                     break;
             }
 
-            return new Bitmap(2, 2);
+            return base.LoadImageAt(0);
         }
 
         /// <summary>

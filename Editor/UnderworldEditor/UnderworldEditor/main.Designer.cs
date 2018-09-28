@@ -49,7 +49,6 @@
             System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
             System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
             treeNode19});
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PlayerDat = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -203,11 +202,11 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.ImgOut = new PictureBoxWithInterpolationMode();
             this.button1 = new System.Windows.Forms.Button();
             this.PicPalette = new System.Windows.Forms.PictureBox();
             this.BtnImgSave = new System.Windows.Forms.Button();
             this.TreeArt = new System.Windows.Forms.TreeView();
-            this.ImgOut = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -226,6 +225,8 @@
             this.repackUW2DataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.BtnImport = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -294,8 +295,8 @@
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).BeginInit();
             this.tabPage10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -2013,11 +2014,12 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.BtnImport);
+            this.tabPage10.Controls.Add(this.ImgOut);
             this.tabPage10.Controls.Add(this.button1);
             this.tabPage10.Controls.Add(this.PicPalette);
             this.tabPage10.Controls.Add(this.BtnImgSave);
             this.tabPage10.Controls.Add(this.TreeArt);
-            this.tabPage10.Controls.Add(this.ImgOut);
             this.tabPage10.Location = new System.Drawing.Point(4, 25);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
@@ -2025,6 +2027,18 @@
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Images";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // ImgOut
+            // 
+            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.ImgOut.Location = new System.Drawing.Point(325, 6);
+            this.ImgOut.Name = "ImgOut";
+            this.ImgOut.Size = new System.Drawing.Size(256, 256);
+            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgOut.TabIndex = 55;
+            this.ImgOut.TabStop = false;
+            this.ImgOut.Click += new System.EventHandler(this.ImgOut_Click);
+            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
             // 
             // button1
             // 
@@ -2069,18 +2083,6 @@
             this.TreeArt.Size = new System.Drawing.Size(282, 437);
             this.TreeArt.TabIndex = 51;
             this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
-            // 
-            // ImgOut
-            // 
-            this.ImgOut.Image = ((System.Drawing.Image)(resources.GetObject("ImgOut.Image")));
-            this.ImgOut.InitialImage = ((System.Drawing.Image)(resources.GetObject("ImgOut.InitialImage")));
-            this.ImgOut.Location = new System.Drawing.Point(326, 6);
-            this.ImgOut.Name = "ImgOut";
-            this.ImgOut.Size = new System.Drawing.Size(256, 256);
-            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgOut.TabIndex = 50;
-            this.ImgOut.TabStop = false;
-            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
             // 
             // menuStrip1
             // 
@@ -2224,9 +2226,23 @@
             // stringsToolStripMenuItem
             // 
             this.stringsToolStripMenuItem.Name = "stringsToolStripMenuItem";
-            this.stringsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.stringsToolStripMenuItem.Size = new System.Drawing.Size(129, 26);
             this.stringsToolStripMenuItem.Text = "Strings";
             this.stringsToolStripMenuItem.Click += new System.EventHandler(this.stringsToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // BtnImport
+            // 
+            this.BtnImport.Location = new System.Drawing.Point(408, 268);
+            this.BtnImport.Name = "BtnImport";
+            this.BtnImport.Size = new System.Drawing.Size(75, 43);
+            this.BtnImport.TabIndex = 56;
+            this.BtnImport.Text = "Import";
+            this.BtnImport.UseVisualStyleBackColor = true;
+            this.BtnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // main
             // 
@@ -2315,8 +2331,8 @@
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
             this.tabPage10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -2473,7 +2489,6 @@
         public System.Windows.Forms.ComboBox CmbWorldItem_ID;
         public System.Windows.Forms.CheckBox ChkWorldIsQuant;
         private System.Windows.Forms.TabPage tabPage10;
-        public System.Windows.Forms.PictureBox ImgOut;
         private System.Windows.Forms.TreeView TreeArt;
         private System.Windows.Forms.Button BtnImgSave;
         private System.Windows.Forms.PictureBox PicPalette;
@@ -2502,6 +2517,9 @@
         private System.Windows.Forms.TabPage tabPage11;
         public System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.ToolStripMenuItem repackUW2DataToolStripMenuItem;
+        private PictureBoxWithInterpolationMode ImgOut;
+        private System.Windows.Forms.Button BtnImport;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

@@ -32,10 +32,10 @@ namespace UnderworldEditor
 
         public TextureLoader()
         {
-            ImageCache = new Bitmap[261];
+            ImageCache = new BitmapUW[261];
         }
 
-        public override Bitmap LoadImageAt(int index)
+        public override BitmapUW LoadImageAt(int index)
         {
             return LoadImageAt(index, PaletteLoader.Palettes[0]);
         }
@@ -47,7 +47,7 @@ namespace UnderworldEditor
         /// <param name="index">Index.</param>
         /// <param name="palToUse">Pal to use.</param>
         /// If the index is greater than 209 I return a floor texture.
-        public Bitmap LoadImageAt(int index, Palette palToUse)
+        public BitmapUW LoadImageAt(int index, Palette palToUse)
         {
             if (main.curgame == main.GAME_UW2)
             {
@@ -75,7 +75,7 @@ namespace UnderworldEditor
                         }
                         long textureOffset = Util.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
                         OffsetT[index] = textureOffset;
-                        ImageCache[index] = Image(texturebufferT, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
+                        ImageCache[index] = Image(texturebufferT, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                         return ImageCache[index];
                     }
 
@@ -101,7 +101,7 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            ImageCache[index] = Image(texturebufferW, textureOffset, 64, 64, "name_goes_here", palToUse, false);
+                            ImageCache[index] = Image(texturebufferW, textureOffset, index, 64, 64, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                             return ImageCache[index];
                         }
                         else
@@ -119,7 +119,7 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            ImageCache[index] = Image(texturebufferF, textureOffset, FloorDim, FloorDim, "name_goes_here", palToUse, false);
+                            ImageCache[index] = Image(texturebufferF, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                             return ImageCache[index];
                         }
                     }//end switch	

@@ -40,15 +40,34 @@ namespace UnderworldEditor
         public objects worldObjects;
         public UWStrings UWGameStrings;
         public GRLoader[] grfile =new GRLoader[33];
+        public BytLoader bytfile;
         TextureLoader tex = new TextureLoader();
-        private int CurrentImageNo;
+        public static BitmapUW CurrentImage;
+        //private int CurrentImageNo;
         private int CurrentPalettePixel=0;
+
+
 
         public main()
         {
             InitializeComponent();    
         }
-        
+
+        /// <summary>
+        /// Load events. Calls the file selection dialog.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void main_Load(object sender, EventArgs e)
+        {
+            FrmSelect frm = new FrmSelect();
+            frm.ShowDialog();
+            PaletteLoader.LoadPalettes(main.basepath + "\\data\\pals.dat");
+            PicPalette.Image = ArtLoader.Palette(PaletteLoader.Palettes[0]).image;
+            PopulateTextureTree();
+        }
+
+
         /// <summary>
         /// Initialise the list of object item names 
         /// </summary>
@@ -418,21 +437,6 @@ namespace UnderworldEditor
         }
 
         /// <summary>
-        /// Load events. Calls the file selection dialog.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void main_Load(object sender, EventArgs e)
-        {
-            FrmSelect frm = new FrmSelect();
-            frm.ShowDialog();
-            PaletteLoader.LoadPalettes(main.basepath + "\\data\\pals.dat");
-            PicPalette.Image = ArtLoader.Palette(PaletteLoader.Palettes[0]);
-            PopulateTextureTree();
-
-        }
-
-        /// <summary>
         /// Handles selection of an art file.
         /// </summary>
         /// <param name="sender"></param>
@@ -440,6 +444,7 @@ namespace UnderworldEditor
         private void TreeArt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeArt.SelectedNode;
+
             if (node.Parent!=null)
             {
                 string partext = node.Parent.Text.ToUpper();
@@ -449,13 +454,11 @@ namespace UnderworldEditor
                     case "WALL TEXTURES":
                     case "FLOOR TEXTURES":
                         {//loading a texture
-                            CurrentImageNo = -1;
                             int index;
                             if (node.Tag == null) { return; }
                             if (int.TryParse(node.Tag.ToString(), out index))
                             {
-                                ImgOut.Image = tex.LoadImageAt(index);
-                                CurrentImageNo = index;
+                                CurrentImage = tex.LoadImageAt(index);
                             }
                             break;
                         }
@@ -475,7 +478,34 @@ namespace UnderworldEditor
                                     }
                                 }
                             }
-
+                            break;
+                        }
+                    case "BITMAP RESOURCES":
+                        {
+                            int index;
+                            if (node.Tag == null) { return; }
+                            if (int.TryParse(node.Tag.ToString(), out index))
+                            {
+                                if (bytfile == null)
+                                {
+                                    bytfile = new BytLoader();
+                                }
+                                CurrentImage = bytfile.LoadImageAt(index);
+                            }
+                            break;
+                        }
+                    case "BYT.ARK":
+                        {
+                            int index;
+                            if (node.Tag == null) { return; }
+                            if (int.TryParse(node.Tag.ToString(), out index))
+                            {
+                                if (bytfile == null)
+                                {
+                                    bytfile = new BytLoader();
+                                }
+                                CurrentImage = bytfile.LoadImageAt(index);
+                            }
                             break;
                         }
                     default:
@@ -490,14 +520,17 @@ namespace UnderworldEditor
                                 if (int.TryParse(node.Tag.ToString(), out index))
                                 {
                                     //load the gr file
-                                    ImgOut.Image = grfile[parentindex].LoadImageAt(index);
+                                    CurrentImage = grfile[parentindex].LoadImageAt(index);
                                 }
                             }
                         }
                         break;
                 }
             }
-
+            if (CurrentImage!=null)
+            {
+                ImgOut.Image = CurrentImage.image;
+            }
         }
 
         /// <summary>
@@ -550,6 +583,30 @@ namespace UnderworldEditor
                     gr.Tag = i;
                 }
             }
+
+            //Add nodes for all .byt files
+            TreeNode grbyt = TreeArt.Nodes.Add("Bitmap Resources");
+            if (main.curgame == main.GAME_UW1)
+            {
+                for (int i = 0; i <= BytLoader.FilePaths.GetUpperBound(0); i++)
+                {
+                    TreeNode gr = grbyt.Nodes.Add(BytLoader.FilePaths[i]);
+                    gr.Tag = i;
+                }
+            }
+            if (main.curgame == main.GAME_UW2)
+            {
+                TreeNode gr = grbyt.Nodes.Add("BYT.ARK");
+                for (int i=0; i<=9;i++)
+                {
+                    TreeNode grx = gr.Nodes.Add(i.ToString());
+                    grx.Tag = i;
+                }
+                
+            }
+
+
+
         }
 
         /// <summary>
@@ -559,21 +616,24 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void ImgOut_MouseClick(object sender, MouseEventArgs e)
         {
-            int factor = 4;
-            if (CurrentImageNo!=-1)
-            {
-                if (main.curgame==GAME_UW1)
-                {
-                    if (CurrentImageNo>=210)
-                    {//Editing a 32x32 floor texture
-                        factor = 8;
-                    }
-                }
-                // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
-                int x = e.Location.X / factor;
-                int y = ( e.Location.Y) / factor;
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y, CurrentPalettePixel);
-            }
+            int factorX = 4;
+            int factorY = 4;
+            if (CurrentImage == null) { return; }
+            factorX = ImgOut.Width / CurrentImage.image.Width;
+            factorY = ImgOut.Height / CurrentImage.image.Height;
+
+            //if (main.curgame==GAME_UW1)
+            //{
+            //    if (CurrentImageNo>=210)
+            //    {//Editing a 32x32 floor texture
+            //        factor = 8;
+            //    }
+            //}
+            // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
+            int x = e.Location.X / factorX;
+            int y = ( e.Location.Y) / factorY;
+            ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, CurrentPalettePixel);
+ 
         }
 
 
@@ -584,11 +644,18 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void BtnImgSave_Click(object sender, EventArgs e)
         {
+            if (CurrentImage.ImageType != BitmapUW.ImageTypes.Texture) { return; }
             switch (main.curgame)
             {
                 case GAME_UW1:
-                    ArtUI.SaveTextureData(tex.texturebufferW,true);
-                    ArtUI.SaveTextureData(tex.texturebufferF,false);
+                    if (tex.texturebufferW!=null)
+                    {
+                        ArtUI.SaveTextureData(tex.texturebufferW, true);
+                    }
+                    if (tex.texturebufferF!=null)
+                    {
+                        ArtUI.SaveTextureData(tex.texturebufferF, false);
+                    }                    
                     break;
                 case GAME_UW2:
                     ArtUI.SaveTextureData(tex.texturebufferW,false);
@@ -603,22 +670,22 @@ namespace UnderworldEditor
             int x = 0;int y = 0;
             for (int counter = 0; counter < 256; counter++)
             {
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+1, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+2, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+3, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 4, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 5, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 6, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 7, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y+8, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 9, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 10, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 11, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 12, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 13, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 14, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImageNo, ImgOut, x, y + 15, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+1, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+2, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+3, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 4, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 5, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 6, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 7, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+8, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 9, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 10, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 11, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 12, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 13, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 14, counter);
+                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 15, counter);
 
                 x++;
                 if (x >= 64)
@@ -944,6 +1011,34 @@ namespace UnderworldEditor
                 file.Close();
                 MessageBox.Show("Underworld 2 lev.ark has been repacked. Use this file at your own risk");
             }
+        }
+
+        private void ImgOut_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void BtnImport_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            
+            if (result==DialogResult.OK)
+            {
+                Bitmap jr = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);               
+                if ((jr.Width !=CurrentImage.image.Width) || (jr.Height!= CurrentImage.image.Height))
+                {
+                    jr = ArtLoader.Resize(jr, CurrentImage.image.Width, CurrentImage.image.Height);
+                }
+                ImgOut.Image = jr;
+                for (int x = 0; x < jr.Width; x++)
+                {
+                    for (int y = 0; y < jr.Width; y++)
+                    {
+                        //Get nearest palette to color
+                        ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), CurrentImage.ImagePalette));
+                    }
+                }
+            } 
         }
     }
 }

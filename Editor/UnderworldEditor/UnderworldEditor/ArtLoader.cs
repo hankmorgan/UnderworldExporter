@@ -11,7 +11,8 @@ namespace UnderworldEditor
 {
     public class ArtLoader
     {
-        public Bitmap[] ImageCache;
+        public bool DataLoaded;
+        public BitmapUW[] ImageCache;
         public const byte BitMapHeaderSize = 28;
 
         /// <summary>
@@ -30,9 +31,11 @@ namespace UnderworldEditor
         /// </summary>
         /// <returns>The <see cref="UnityEngine.Texture2D"/>.</returns>
         /// <param name="index">Index.</param>
-        public virtual Bitmap LoadImageAt(int index)
+        public virtual BitmapUW LoadImageAt(int index)
         {
-            return new Bitmap(2, 2);
+            BitmapUW newimg = new BitmapUW();
+            newimg.image = new Bitmap(2, 2);
+            return newimg;
         }
 
         /// <summary>
@@ -40,9 +43,11 @@ namespace UnderworldEditor
         /// </summary>
         /// <returns>The <see cref="UnityEngine.Texture2D"/>.</returns>
         /// <param name="index">Index.</param>
-        public virtual Bitmap LoadImageAt(int index, bool Alpha)
+        public virtual BitmapUW LoadImageAt(int index, bool Alpha)
         {
-            return new Bitmap(1, 1);
+            BitmapUW newimg = new BitmapUW();
+            newimg.image = new Bitmap(2, 2);
+            return newimg;
         }
 
 
@@ -56,9 +61,9 @@ namespace UnderworldEditor
         /// <param name="imageName">Image name.</param>
         /// <param name="pal">Pal.</param>
         /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-        public static Bitmap Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha)
+        public static BitmapUW Image(char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, BitmapUW.ImageTypes imgType)
         {
-            return Image(databuffer, dataOffSet, width, height, imageName, pal, Alpha, false);
+            return Image(databuffer, dataOffSet, index, width, height, imageName, pal, Alpha, false, imgType);
         }
 
 
@@ -72,8 +77,13 @@ namespace UnderworldEditor
         /// <param name="imageName">Image name.</param>
         /// <param name="pal">Pal.</param>
         /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-        public static Bitmap Image(char[] databuffer, long dataOffSet, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER)
+        public static BitmapUW Image(char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER, BitmapUW.ImageTypes imgType)
         {
+            BitmapUW imgUW = new BitmapUW();
+            imgUW.FileOffset = dataOffSet;
+            imgUW.ImageType = imgType;
+            imgUW.ImagePalette = pal;
+            imgUW.ImageNo = index;
             Bitmap image = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Byte[] imageColors = new Byte[width * height * 4];
 
@@ -96,7 +106,8 @@ namespace UnderworldEditor
             // image.SetPixels32(imageColors);
             //image.Apply();
             //return image;
-            return CopyDataToBitmap(imageColors, width, height);
+            imgUW.image = CopyDataToBitmap(imageColors, width, height);
+            return imgUW;
         }
 
         /// <summary>
@@ -342,7 +353,7 @@ namespace UnderworldEditor
         }
 
 
-        public static Bitmap Palette(Palette pal)
+        public static BitmapUW Palette(Palette pal)
         {
             char[] paldata = new char[256*64];
             for (int j=0; j<64;j++)
@@ -352,8 +363,20 @@ namespace UnderworldEditor
                     paldata[j*256 + i] = (char)i;
                 }
             }
+            return Image(paldata, 0, 0 ,64, 256, "name", pal, true, BitmapUW.ImageTypes.Palette);
+        }
 
-            return Image(paldata, 0,64, 256, "name", pal, true);        }
+        public static Bitmap Resize(Bitmap imgToResize, int Width, int Height)
+        {
+            Bitmap b = new Bitmap(Width, Height);
+            using (Graphics g = Graphics.FromImage((Image)b))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(imgToResize, 0, 0, Width, Height);
+            }
+            return b;
+        }
+
 
     }//end class
 }
