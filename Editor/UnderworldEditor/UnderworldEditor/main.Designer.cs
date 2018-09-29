@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Helm");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Chest");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Gloves");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Leggings");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Boots");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("TopRightShoulder");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("RightHand");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("LeftHand");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("LeftRing");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("BackPack0");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("BackPack1");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("BackPack2");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("BackPack3");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("BackPack4");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("BackPack5");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("BackPack6");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("BackPack7");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
-            treeNode19});
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Helm");
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Chest");
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Gloves");
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Leggings");
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("Boots");
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("TopRightShoulder");
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("TopLeftShoulder");
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("RightHand");
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("LeftHand");
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("LeftRing");
+            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("BackPack0");
+            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("BackPack1");
+            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("BackPack2");
+            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("BackPack3");
+            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("BackPack4");
+            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("BackPack5");
+            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("BackPack6");
+            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("BackPack7");
+            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("Wall & Floor Textures(2 files)");
+            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("Textures", new System.Windows.Forms.TreeNode[] {
+            treeNode99});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PlayerDat = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -202,10 +202,15 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.ImgOut = new PictureBoxWithInterpolationMode();
-            this.button1 = new System.Windows.Forms.Button();
-            this.PicPalette = new System.Windows.Forms.PictureBox();
+            this.PicSelectedColour = new System.Windows.Forms.Panel();
+            this.label48 = new System.Windows.Forms.Label();
+            this.NumZoom = new System.Windows.Forms.NumericUpDown();
             this.BtnImgSave = new System.Windows.Forms.Button();
+            this.BtnImport = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.PicColour = new PictureBoxWithInterpolationMode();
+            this.PicPalette = new PictureBoxWithInterpolationMode();
+            this.ImgOut = new PictureBoxWithInterpolationMode();
             this.TreeArt = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -226,7 +231,8 @@
             this.otherResourcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.BtnImport = new System.Windows.Forms.Button();
+            this.BtnExportImg = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -295,8 +301,11 @@
             this.tabPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).BeginInit();
             this.tabPage10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
+            this.PicSelectedColour.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicColour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -310,7 +319,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(994, 470);
+            this.tabControl1.Size = new System.Drawing.Size(1134, 637);
             this.tabControl1.TabIndex = 2;
             // 
             // PlayerDat
@@ -319,7 +328,7 @@
             this.PlayerDat.Location = new System.Drawing.Point(4, 25);
             this.PlayerDat.Name = "PlayerDat";
             this.PlayerDat.Padding = new System.Windows.Forms.Padding(3);
-            this.PlayerDat.Size = new System.Drawing.Size(986, 441);
+            this.PlayerDat.Size = new System.Drawing.Size(1126, 608);
             this.PlayerDat.TabIndex = 0;
             this.PlayerDat.Text = "UW PlayerDat";
             this.PlayerDat.UseVisualStyleBackColor = true;
@@ -335,7 +344,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(980, 435);
+            this.tabControl2.Size = new System.Drawing.Size(1120, 602);
             this.tabControl2.TabIndex = 10;
             // 
             // Character
@@ -371,7 +380,7 @@
             this.Character.Controls.Add(this.TxtCharName);
             this.Character.Location = new System.Drawing.Point(4, 25);
             this.Character.Name = "Character";
-            this.Character.Size = new System.Drawing.Size(972, 406);
+            this.Character.Size = new System.Drawing.Size(1112, 573);
             this.Character.TabIndex = 2;
             this.Character.Text = "Character";
             this.Character.UseVisualStyleBackColor = true;
@@ -848,7 +857,7 @@
             this.Inv.Location = new System.Drawing.Point(4, 25);
             this.Inv.Name = "Inv";
             this.Inv.Padding = new System.Windows.Forms.Padding(3);
-            this.Inv.Size = new System.Drawing.Size(972, 406);
+            this.Inv.Size = new System.Drawing.Size(1112, 573);
             this.Inv.TabIndex = 0;
             this.Inv.Text = "Inventory";
             // 
@@ -1154,61 +1163,61 @@
             // 
             this.TreeInventory.Location = new System.Drawing.Point(7, 3);
             this.TreeInventory.Name = "TreeInventory";
-            treeNode1.Name = "Helml";
-            treeNode1.Text = "Helm";
-            treeNode2.Name = "Chest";
-            treeNode2.Text = "Chest";
-            treeNode3.Name = "Gloves";
-            treeNode3.Text = "Gloves";
-            treeNode4.Name = "Leggings";
-            treeNode4.Text = "Leggings";
-            treeNode5.Name = "Boots";
-            treeNode5.Text = "Boots";
-            treeNode6.Name = "TopRightShoulder";
-            treeNode6.Text = "TopRightShoulder";
-            treeNode7.Name = "TopLeftShoulder";
-            treeNode7.Text = "TopLeftShoulder";
-            treeNode8.Name = "RightHand";
-            treeNode8.Text = "RightHand";
-            treeNode9.Name = "LeftHand";
-            treeNode9.Text = "LeftHand";
-            treeNode10.Name = "RightRing";
-            treeNode10.Text = "LeftRing";
-            treeNode11.Name = "BackPack0";
-            treeNode11.Text = "BackPack0";
-            treeNode12.Name = "BackPack1";
-            treeNode12.Text = "BackPack1";
-            treeNode13.Name = "BackPack2";
-            treeNode13.Text = "BackPack2";
-            treeNode14.Name = "BackPack3";
-            treeNode14.Text = "BackPack3";
-            treeNode15.Name = "BackPack4";
-            treeNode15.Text = "BackPack4";
-            treeNode16.Name = "BackPack5";
-            treeNode16.Text = "BackPack5";
-            treeNode17.Name = "BackPack6";
-            treeNode17.Text = "BackPack6";
-            treeNode18.Name = "BackPack7";
-            treeNode18.Text = "BackPack7";
+            treeNode81.Name = "Helml";
+            treeNode81.Text = "Helm";
+            treeNode82.Name = "Chest";
+            treeNode82.Text = "Chest";
+            treeNode83.Name = "Gloves";
+            treeNode83.Text = "Gloves";
+            treeNode84.Name = "Leggings";
+            treeNode84.Text = "Leggings";
+            treeNode85.Name = "Boots";
+            treeNode85.Text = "Boots";
+            treeNode86.Name = "TopRightShoulder";
+            treeNode86.Text = "TopRightShoulder";
+            treeNode87.Name = "TopLeftShoulder";
+            treeNode87.Text = "TopLeftShoulder";
+            treeNode88.Name = "RightHand";
+            treeNode88.Text = "RightHand";
+            treeNode89.Name = "LeftHand";
+            treeNode89.Text = "LeftHand";
+            treeNode90.Name = "RightRing";
+            treeNode90.Text = "LeftRing";
+            treeNode91.Name = "BackPack0";
+            treeNode91.Text = "BackPack0";
+            treeNode92.Name = "BackPack1";
+            treeNode92.Text = "BackPack1";
+            treeNode93.Name = "BackPack2";
+            treeNode93.Text = "BackPack2";
+            treeNode94.Name = "BackPack3";
+            treeNode94.Text = "BackPack3";
+            treeNode95.Name = "BackPack4";
+            treeNode95.Text = "BackPack4";
+            treeNode96.Name = "BackPack5";
+            treeNode96.Text = "BackPack5";
+            treeNode97.Name = "BackPack6";
+            treeNode97.Text = "BackPack6";
+            treeNode98.Name = "BackPack7";
+            treeNode98.Text = "BackPack7";
             this.TreeInventory.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12,
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17,
-            treeNode18});
+            treeNode81,
+            treeNode82,
+            treeNode83,
+            treeNode84,
+            treeNode85,
+            treeNode86,
+            treeNode87,
+            treeNode88,
+            treeNode89,
+            treeNode90,
+            treeNode91,
+            treeNode92,
+            treeNode93,
+            treeNode94,
+            treeNode95,
+            treeNode96,
+            treeNode97,
+            treeNode98});
             this.TreeInventory.Size = new System.Drawing.Size(208, 355);
             this.TreeInventory.TabIndex = 0;
             this.TreeInventory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeInventory_AfterSelect);
@@ -1217,7 +1226,7 @@
             // 
             this.Runes.Location = new System.Drawing.Point(4, 25);
             this.Runes.Name = "Runes";
-            this.Runes.Size = new System.Drawing.Size(972, 406);
+            this.Runes.Size = new System.Drawing.Size(1112, 573);
             this.Runes.TabIndex = 3;
             this.Runes.Text = "Runes";
             this.Runes.UseVisualStyleBackColor = true;
@@ -1226,7 +1235,7 @@
             // 
             this.GameVars.Location = new System.Drawing.Point(4, 25);
             this.GameVars.Name = "GameVars";
-            this.GameVars.Size = new System.Drawing.Size(972, 406);
+            this.GameVars.Size = new System.Drawing.Size(1112, 573);
             this.GameVars.TabIndex = 4;
             this.GameVars.Text = "Game Variables";
             this.GameVars.UseVisualStyleBackColor = true;
@@ -1237,7 +1246,7 @@
             this.RawData.Location = new System.Drawing.Point(4, 25);
             this.RawData.Name = "RawData";
             this.RawData.Padding = new System.Windows.Forms.Padding(3);
-            this.RawData.Size = new System.Drawing.Size(972, 406);
+            this.RawData.Size = new System.Drawing.Size(1112, 573);
             this.RawData.TabIndex = 1;
             this.RawData.Text = "Raw Data";
             this.RawData.UseVisualStyleBackColor = true;
@@ -1276,7 +1285,7 @@
             this.LevArk.Controls.Add(this.tableLayoutPanel1);
             this.LevArk.Location = new System.Drawing.Point(4, 25);
             this.LevArk.Name = "LevArk";
-            this.LevArk.Size = new System.Drawing.Size(986, 441);
+            this.LevArk.Size = new System.Drawing.Size(1126, 608);
             this.LevArk.TabIndex = 1;
             this.LevArk.Text = "LevArk";
             this.LevArk.UseVisualStyleBackColor = true;
@@ -1293,7 +1302,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(986, 441);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 608);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // TreeUWBlocks
@@ -1301,7 +1310,7 @@
             this.TreeUWBlocks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TreeUWBlocks.Location = new System.Drawing.Point(3, 3);
             this.TreeUWBlocks.Name = "TreeUWBlocks";
-            this.TreeUWBlocks.Size = new System.Drawing.Size(134, 435);
+            this.TreeUWBlocks.Size = new System.Drawing.Size(154, 602);
             this.TreeUWBlocks.TabIndex = 1;
             this.TreeUWBlocks.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeUWBlocks_AfterSelect);
             // 
@@ -1314,10 +1323,10 @@
             this.tabControl3.Controls.Add(this.tabPage3);
             this.tabControl3.Controls.Add(this.tabPage11);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl3.Location = new System.Drawing.Point(143, 3);
+            this.tabControl3.Location = new System.Drawing.Point(163, 3);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(840, 435);
+            this.tabControl3.Size = new System.Drawing.Size(960, 602);
             this.tabControl3.TabIndex = 3;
             // 
             // tabPage1
@@ -1346,7 +1355,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(832, 406);
+            this.tabPage1.Size = new System.Drawing.Size(952, 573);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tiles";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1564,7 +1573,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(832, 406);
+            this.tabPage2.Size = new System.Drawing.Size(952, 573);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Objects";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1916,7 +1925,7 @@
             // 
             this.tabPage7.Location = new System.Drawing.Point(4, 25);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(832, 406);
+            this.tabPage7.Size = new System.Drawing.Size(952, 573);
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "TextureMaps";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1925,7 +1934,7 @@
             // 
             this.tabPage8.Location = new System.Drawing.Point(4, 25);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(832, 406);
+            this.tabPage8.Size = new System.Drawing.Size(952, 573);
             this.tabPage8.TabIndex = 4;
             this.tabPage8.Text = "AutoMaps";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1935,7 +1944,7 @@
             this.tabPage3.Controls.Add(this.GrdLevArkRaw);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(832, 406);
+            this.tabPage3.Size = new System.Drawing.Size(952, 573);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "RawData";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1964,7 +1973,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 25);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(832, 406);
+            this.tabPage11.Size = new System.Drawing.Size(952, 573);
             this.tabPage11.TabIndex = 5;
             this.tabPage11.Text = "MapView";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1976,7 +1985,7 @@
             this.txtMap.Multiline = true;
             this.txtMap.Name = "txtMap";
             this.txtMap.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMap.Size = new System.Drawing.Size(826, 400);
+            this.txtMap.Size = new System.Drawing.Size(946, 567);
             this.txtMap.TabIndex = 0;
             // 
             // tabPage9
@@ -1984,7 +1993,7 @@
             this.tabPage9.Controls.Add(this.GrdStrings);
             this.tabPage9.Location = new System.Drawing.Point(4, 25);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(986, 441);
+            this.tabPage9.Size = new System.Drawing.Size(1126, 608);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "Strings";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1999,7 +2008,7 @@
             this.GrdStrings.Location = new System.Drawing.Point(0, 0);
             this.GrdStrings.Name = "GrdStrings";
             this.GrdStrings.RowTemplate.Height = 24;
-            this.GrdStrings.Size = new System.Drawing.Size(986, 441);
+            this.GrdStrings.Size = new System.Drawing.Size(1126, 608);
             this.GrdStrings.TabIndex = 0;
             // 
             // Column2
@@ -2014,73 +2023,143 @@
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.BtnImport);
+            this.tabPage10.Controls.Add(this.PicSelectedColour);
             this.tabPage10.Controls.Add(this.ImgOut);
-            this.tabPage10.Controls.Add(this.button1);
-            this.tabPage10.Controls.Add(this.PicPalette);
-            this.tabPage10.Controls.Add(this.BtnImgSave);
             this.tabPage10.Controls.Add(this.TreeArt);
             this.tabPage10.Location = new System.Drawing.Point(4, 25);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(986, 441);
+            this.tabPage10.Size = new System.Drawing.Size(1126, 608);
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Images";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
-            // ImgOut
+            // PicSelectedColour
             // 
-            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.ImgOut.Location = new System.Drawing.Point(325, 6);
-            this.ImgOut.Name = "ImgOut";
-            this.ImgOut.Size = new System.Drawing.Size(256, 256);
-            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgOut.TabIndex = 55;
-            this.ImgOut.TabStop = false;
-            this.ImgOut.Click += new System.EventHandler(this.ImgOut_Click);
-            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
+            this.PicSelectedColour.BackColor = System.Drawing.Color.Transparent;
+            this.PicSelectedColour.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicSelectedColour.Controls.Add(this.BtnExportImg);
+            this.PicSelectedColour.Controls.Add(this.label48);
+            this.PicSelectedColour.Controls.Add(this.NumZoom);
+            this.PicSelectedColour.Controls.Add(this.BtnImgSave);
+            this.PicSelectedColour.Controls.Add(this.BtnImport);
+            this.PicSelectedColour.Controls.Add(this.button1);
+            this.PicSelectedColour.Controls.Add(this.PicColour);
+            this.PicSelectedColour.Controls.Add(this.PicPalette);
+            this.PicSelectedColour.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PicSelectedColour.Location = new System.Drawing.Point(3, 532);
+            this.PicSelectedColour.Name = "PicSelectedColour";
+            this.PicSelectedColour.Size = new System.Drawing.Size(1120, 73);
+            this.PicSelectedColour.TabIndex = 58;
             // 
-            // button1
+            // label48
             // 
-            this.button1.Location = new System.Drawing.Point(326, 268);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 43);
-            this.button1.TabIndex = 54;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(625, 6);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(44, 17);
+            this.label48.TabIndex = 64;
+            this.label48.Text = "Zoom";
             // 
-            // PicPalette
+            // NumZoom
             // 
-            this.PicPalette.Location = new System.Drawing.Point(295, 357);
-            this.PicPalette.Name = "PicPalette";
-            this.PicPalette.Size = new System.Drawing.Size(512, 64);
-            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicPalette.TabIndex = 53;
-            this.PicPalette.TabStop = false;
-            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
+            this.NumZoom.Location = new System.Drawing.Point(675, 4);
+            this.NumZoom.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NumZoom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumZoom.Name = "NumZoom";
+            this.NumZoom.Size = new System.Drawing.Size(51, 22);
+            this.NumZoom.TabIndex = 63;
+            this.NumZoom.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumZoom.ValueChanged += new System.EventHandler(this.NumZoom_ValueChanged);
             // 
             // BtnImgSave
             // 
-            this.BtnImgSave.Location = new System.Drawing.Point(506, 268);
+            this.BtnImgSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnImgSave.Location = new System.Drawing.Point(893, 0);
             this.BtnImgSave.Name = "BtnImgSave";
-            this.BtnImgSave.Size = new System.Drawing.Size(75, 43);
-            this.BtnImgSave.TabIndex = 52;
+            this.BtnImgSave.Size = new System.Drawing.Size(75, 71);
+            this.BtnImgSave.TabIndex = 62;
             this.BtnImgSave.Text = "Save Changes";
             this.BtnImgSave.UseVisualStyleBackColor = true;
             this.BtnImgSave.Click += new System.EventHandler(this.BtnImgSave_Click);
             // 
+            // BtnImport
+            // 
+            this.BtnImport.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnImport.Location = new System.Drawing.Point(968, 0);
+            this.BtnImport.Name = "BtnImport";
+            this.BtnImport.Size = new System.Drawing.Size(75, 71);
+            this.BtnImport.TabIndex = 61;
+            this.BtnImport.Text = "Import";
+            this.BtnImport.UseVisualStyleBackColor = true;
+            this.BtnImport.Click += new System.EventHandler(this.BtnImport_Click);
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.Location = new System.Drawing.Point(1043, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 71);
+            this.button1.TabIndex = 60;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // PicColour
+            // 
+            this.PicColour.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicColour.Location = new System.Drawing.Point(522, 4);
+            this.PicColour.Name = "PicColour";
+            this.PicColour.Size = new System.Drawing.Size(64, 64);
+            this.PicColour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicColour.TabIndex = 59;
+            this.PicColour.TabStop = false;
+            // 
+            // PicPalette
+            // 
+            this.PicPalette.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicPalette.Location = new System.Drawing.Point(3, 3);
+            this.PicPalette.Name = "PicPalette";
+            this.PicPalette.Size = new System.Drawing.Size(512, 64);
+            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicPalette.TabIndex = 58;
+            this.PicPalette.TabStop = false;
+            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
+            // 
+            // ImgOut
+            // 
+            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.ImgOut.Location = new System.Drawing.Point(170, 3);
+            this.ImgOut.Name = "ImgOut";
+            this.ImgOut.Size = new System.Drawing.Size(512, 512);
+            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgOut.TabIndex = 55;
+            this.ImgOut.TabStop = false;
+            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
+            // 
             // TreeArt
             // 
-            this.TreeArt.Location = new System.Drawing.Point(7, 4);
+            this.TreeArt.Location = new System.Drawing.Point(3, 3);
             this.TreeArt.Name = "TreeArt";
-            treeNode19.Name = "Node1";
-            treeNode19.Text = "Wall & Floor Textures(2 files)";
-            treeNode20.Name = "Node0";
-            treeNode20.Text = "Textures";
+            treeNode99.Name = "Node1";
+            treeNode99.Text = "Wall & Floor Textures(2 files)";
+            treeNode100.Name = "Node0";
+            treeNode100.Text = "Textures";
             this.TreeArt.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode20});
-            this.TreeArt.Size = new System.Drawing.Size(282, 437);
+            treeNode100});
+            this.TreeArt.Size = new System.Drawing.Size(161, 512);
             this.TreeArt.TabIndex = 51;
             this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
             // 
@@ -2093,7 +2172,7 @@
             this.otherResourcesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(994, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1134, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -2234,21 +2313,27 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // BtnImport
+            // BtnExportImg
             // 
-            this.BtnImport.Location = new System.Drawing.Point(408, 268);
-            this.BtnImport.Name = "BtnImport";
-            this.BtnImport.Size = new System.Drawing.Size(75, 43);
-            this.BtnImport.TabIndex = 56;
-            this.BtnImport.Text = "Import";
-            this.BtnImport.UseVisualStyleBackColor = true;
-            this.BtnImport.Click += new System.EventHandler(this.BtnImport_Click);
+            this.BtnExportImg.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnExportImg.Location = new System.Drawing.Point(818, 0);
+            this.BtnExportImg.Name = "BtnExportImg";
+            this.BtnExportImg.Size = new System.Drawing.Size(75, 71);
+            this.BtnExportImg.TabIndex = 65;
+            this.BtnExportImg.Text = "Export Image";
+            this.BtnExportImg.UseVisualStyleBackColor = true;
+            this.BtnExportImg.Click += new System.EventHandler(this.BtnExportImg_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "png";
+            this.saveFileDialog1.Filter = "(*.png)|*.png";
             // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 498);
+            this.ClientSize = new System.Drawing.Size(1134, 665);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "main";
@@ -2331,8 +2416,12 @@
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
             this.tabPage10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
+            this.PicSelectedColour.ResumeLayout(false);
+            this.PicSelectedColour.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicColour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -2490,9 +2579,6 @@
         public System.Windows.Forms.CheckBox ChkWorldIsQuant;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.TreeView TreeArt;
-        private System.Windows.Forms.Button BtnImgSave;
-        private System.Windows.Forms.PictureBox PicPalette;
-        private System.Windows.Forms.Button button1;
         public System.Windows.Forms.NumericUpDown NumDoorBit;
         public System.Windows.Forms.NumericUpDown NumNoMagic;
         public System.Windows.Forms.NumericUpDown NumTileFlags;
@@ -2518,8 +2604,17 @@
         public System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.ToolStripMenuItem repackUW2DataToolStripMenuItem;
         private PictureBoxWithInterpolationMode ImgOut;
-        private System.Windows.Forms.Button BtnImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Panel PicSelectedColour;
+        private PictureBoxWithInterpolationMode PicPalette;
+        private PictureBoxWithInterpolationMode PicColour;
+        private System.Windows.Forms.Button BtnImgSave;
+        private System.Windows.Forms.Button BtnImport;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.NumericUpDown NumZoom;
+        private System.Windows.Forms.Button BtnExportImg;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

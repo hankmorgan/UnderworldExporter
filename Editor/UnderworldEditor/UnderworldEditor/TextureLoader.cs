@@ -75,7 +75,7 @@ namespace UnderworldEditor
                         }
                         long textureOffset = Util.getValAtAddress(texturebufferT, ((index) * 4) + 4, 32);
                         OffsetT[index] = textureOffset;
-                        ImageCache[index] = Image(texturebufferT, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
+                        ImageCache[index] = Image(this, texturebufferT, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                         return ImageCache[index];
                     }
 
@@ -101,7 +101,7 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferW, (index * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            ImageCache[index] = Image(texturebufferW, textureOffset, index, 64, 64, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
+                            ImageCache[index] = Image(this, texturebufferW, textureOffset, index, 64, 64, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                             return ImageCache[index];
                         }
                         else
@@ -119,7 +119,7 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            ImageCache[index] = Image(texturebufferF, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
+                            ImageCache[index] = Image(this, texturebufferF, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
                             return ImageCache[index];
                         }
                     }//end switch	

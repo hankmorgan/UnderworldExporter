@@ -26,7 +26,7 @@ namespace UnderworldEditor
 
         string FileName;
 
-        private int currentIndex = -1;
+        //private int currentIndex = -1;
 
         public static string[] FilePaths ={
             "BLNKMAP.BYT",
@@ -93,17 +93,21 @@ namespace UnderworldEditor
             {
                 case main.GAME_UW2:
                     {
-                        return extractUW2Bitmap(main.basepath + "\\DATA\\BYT.ARK", index, Alpha);
+                        ImageCache[index] = extractUW2Bitmap(main.basepath + "\\DATA\\BYT.ARK", index, Alpha);
+                        return ImageCache[index];
                     }
                 default:
                     {
-                        if (currentIndex != index)
-                        {//Only load from disk if the image to bring back has changed.
-                            DataLoaded = false;
+                        if (!DataLoaded)
+                        {
                             FileName = main.basepath + "\\data\\" + FilePaths[index];
                             LoadImageFile();
+                            DataLoaded = true;
                         }
-                        return Image(ImageFileData, 0, 0, 320, 200, "name_goes_here", PaletteLoader.Palettes[PaletteIndices[index]], Alpha, BitmapUW.ImageTypes.Byt);
+                        if (ImageCache == null) { ImageCache = new BitmapUW[1]; }
+
+                        ImageCache[0] = Image(this,ImageFileData, 0, 0, 320, 200, "name_goes_here", PaletteLoader.Palettes[PaletteIndices[index]], Alpha, BitmapUW.ImageTypes.Byt);
+                        return ImageCache[0];
                     }
             }
         }
@@ -120,6 +124,8 @@ namespace UnderworldEditor
             // Get the size of the file in bytes
 
             NoOfTextures = Util.getValAtAddress(textureFile, 0, 8);
+            if (ImageCache == null)
+            { ImageCache = new BitmapUW[NoOfTextures + 1]; }
             long textureOffset = (int)Util.getValAtAddress(textureFile, (index * 4) + 6, 32);
             if (textureOffset != 0)
             {
@@ -128,11 +134,11 @@ namespace UnderworldEditor
                 if (isCompressed == 1)
                 {
                     long datalen = 0;
-                    return Image(Util.unpackUW2(textureFile, textureOffset, ref datalen), 0, index, 320, 200, "namehere", PaletteLoader.Palettes[PaletteIndicesUW2[index]], Alpha, BitmapUW.ImageTypes.Byt);
+                    return Image(this, Util.unpackUW2(textureFile, textureOffset, ref datalen), 0, index, 320, 200, "namehere", PaletteLoader.Palettes[PaletteIndicesUW2[index]], Alpha, BitmapUW.ImageTypes.Byt);
                 }
                 else
                 {
-                    return Image(textureFile, textureOffset, index, 320, 200, "name_goes_here", PaletteLoader.Palettes[PaletteIndicesUW2[index]], Alpha, BitmapUW.ImageTypes.Byt);
+                    return Image(this, textureFile, textureOffset, index, 320, 200, "name_goes_here", PaletteLoader.Palettes[PaletteIndicesUW2[index]], Alpha, BitmapUW.ImageTypes.Byt);
                 }
             }
             return null;

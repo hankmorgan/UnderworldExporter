@@ -13,78 +13,6 @@ namespace UnderworldEditor
         const int repeat_record = 1;
         const int run_record = 2;
 
-        public const int ThreeDWIN_GR = 0;
-        public const int ANIMO_GR = 1;
-        public const int ARMOR_F_GR = 2;
-        public const int ARMOR_M_GR = 3;
-        public const int BODIES_GR = 4;
-        public const int BUTTONS_GR = 5;
-        public const int CHAINS_GR = 6;
-        public const int CHARHEAD_GR = 7;
-        public const int CHRBTNS_GR = 8;
-        public const int COMPASS_GR = 9;
-        public const int CONVERSE_GR = 10;
-        public const int CURSORS_GR = 11;
-        public const int DOORS_GR = 12;
-        public const int DRAGONS_GR = 13;
-        public const int EYES_GR = 14;
-        public const int FLASKS_GR = 15;
-        public const int GENHEAD_GR = 16;
-        public const int HEADS_GR = 17;
-        public const int INV_GR = 18;
-        public const int LFTI_GR = 19;
-        public const int OBJECTS_GR = 20;
-        public const int OPBTN_GR = 21;
-        public const int OPTB_GR = 22;
-        public const int OPTBTNS_GR = 23;
-        public const int PANELS_GR = 24;
-        public const int POWER_GR = 25;
-        public const int QUEST_GR = 26;
-        public const int SCRLEDGE_GR = 27;
-        public const int SPELLS_GR = 28;
-        public const int TMFLAT_GR = 29;
-        public const int TMOBJ_GR = 30;
-        public const int WEAPONS_GR = 31;
-        public const int GEMPT_GR = 32;
-        public const int GHED_GR = 33;
-
-        private string[] pathGR ={
-                "\\DATA\\3DWIN.GR",
-                "\\DATA\\ANIMO.GR",
-                "\\DATA\\ARMOR_F.GR",
-                "\\DATA\\ARMOR_M.GR",
-                "\\DATA\\BODIES.GR",
-                "\\DATA\\BUTTONS.GR",
-                "\\DATA\\CHAINS.GR",
-                "\\DATA\\CHARHEAD.GR",
-                "\\DATA\\CHRBTNS.GR",
-                "\\DATA\\COMPASS.GR",
-                "\\DATA\\CONVERSE.GR",
-                "\\DATA\\CURSORS.GR",
-                "\\DATA\\DOORS.GR",
-                "\\DATA\\DRAGONS.GR",
-                "\\DATA\\EYES.GR",
-                "\\DATA\\FLASKS.GR",
-                "\\DATA\\GENHEAD.GR",
-                "\\DATA\\HEADS.GR",
-                "\\DATA\\INV.GR",
-                "\\DATA\\LFTI.GR",
-                "\\DATA\\OBJECTS.GR",
-                "\\DATA\\OPBTN.GR",
-                "\\DATA\\OPTB.GR",
-                "\\DATA\\OPTBTNS.GR",
-                "\\DATA\\PANELS.GR",
-                "\\DATA\\POWER.GR",
-                "\\DATA\\QUEST.GR",
-                "\\DATA\\SCRLEDGE.GR",
-                "\\DATA\\SPELLS.GR",
-                "\\DATA\\TMFLAT.GR",
-                "\\DATA\\TMOBJ.GR",
-                "\\DATA\\WEAPONS.GR",
-                "\\DATA\\GEMPT.GR",
-                "\\DATA\\GHED.GR"
-        };
-
         private string AuxPalPath = "\\DATA\\ALLPALS.DAT";
         bool useOverrideAuxPalIndex = false;
         int OverrideAuxPalIndex = 0;
@@ -92,18 +20,6 @@ namespace UnderworldEditor
         public string FileName;
         private bool ImageFileDataLoaded;
         int NoOfImages;
-
-        //protected Bitmap[] ImageCache = new Bitmap[1];
-
-        //public GRLoader(int File, int PalToUse)
-        //{           
-        //    useOverrideAuxPalIndex = false;
-        //    OverrideAuxPalIndex = 0;
-        //    FileToLoad = File;
-        //    PaletteNo = (short)PalToUse;
-        //    LoadImageFile();
-        //}
-
 
         public GRLoader(string filename)
         {
@@ -158,25 +74,25 @@ namespace UnderworldEditor
             {//Image out of range
                 return base.LoadImageAt(index);
             }
-            int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
-            int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
-            int datalen;
-            Palette auxpal;
-            int auxPalIndex;
-            char[] imgNibbles;
-            char[] outputImg;
 
 
             switch (Util.getValAtAddress(ImageFileData, imageOffset, 8))//File type
             {
                 case 0x4://8 bit uncompressed
                     {
+                        int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
+                        int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
                         imageOffset = imageOffset + 5;
-                        ImageCache[index] = Image(ImageFileData, imageOffset,index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
+                        ImageCache[index] = Image(this, ImageFileData, imageOffset,index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
                         return ImageCache[index];
                     }
                 case 0x8://4 bit run-length
                     {
+                        char[] imgNibbles;
+                        int auxPalIndex;
+                        int datalen;
+                        int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
+                        int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
                         if (!useOverrideAuxPalIndex)
                         {
                             auxPalIndex = (int)Util.getValAtAddress(ImageFileData, imageOffset + 3, 8);
@@ -191,12 +107,20 @@ namespace UnderworldEditor
                         copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
                         //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
                         int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
-                        outputImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4, aux);
-                        ImageCache[index] = Image(outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
+                        char[] RawImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4);
+                        char[] outputImg = ApplyAuxPal(RawImg, aux);
+                        ImageCache[index] = Image(this, outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
+                        ImageCache[index].UncompressedData = RawImg;
+                        ImageCache[index].SetAuxPalRef(aux);
                         return ImageCache[index];
                     }
-                case 0xA://4 bit uncompressed//Same as above???
+                case 0xA://4 bit uncompressed
                     {
+                        char[] imgNibbles;
+                        int auxPalIndex;
+                        int datalen;
+                        int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
+                        int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
                         if (!useOverrideAuxPalIndex)
                         {
                             auxPalIndex = (int)Util.getValAtAddress(ImageFileData, imageOffset + 3, 8);
@@ -209,31 +133,54 @@ namespace UnderworldEditor
                         imgNibbles = new char[Math.Max(BitMapWidth * BitMapHeight * 2, (5 + datalen) * 2)];
                         imageOffset = imageOffset + 6;  //Start of raw data.
                         copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-                        auxpal = PaletteLoader.LoadAuxilaryPal(main.basepath + AuxPalPath, PaletteLoader.Palettes[PaletteNo], auxPalIndex);
-                        ImageCache[index] = Image(imgNibbles, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", auxpal, Alpha, BitmapUW.ImageTypes.FourBitUncompress);
+                        //Palette auxpal = PaletteLoader.LoadAuxilaryPal(main.basepath + AuxPalPath, PaletteLoader.Palettes[PaletteNo], auxPalIndex);
+                        int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
+                        char[] outputImg = ApplyAuxPal(imgNibbles, aux);                        
+                        ImageCache[index] = Image(this, outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitUncompress);
+                        ImageCache[index].UncompressedData = imgNibbles;
+                        ImageCache[index].SetAuxPalRef(aux);
                         return ImageCache[index];
                     }
                 //break;
                 default:
-                    //Check to see if the file is panels.gr
-                    if (FileName.ToUpper().EndsWith("PANELS.GR"))
                     {
-                        if (index >= 4) { return base.LoadImageAt(0); } //new Bitmap(2, 2);
-                        BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
-                        BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
-                        if (main.curgame == main.GAME_UW2)
-                        {
-                            BitMapWidth = 79;
-                            BitMapHeight = 112;
+                        int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
+                        int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
+                        if (FileName.ToUpper().EndsWith("PANELS.GR"))
+                        {//Check to see if the file is panels.gr
+                            if (index >= 4) { return base.LoadImageAt(0); } //new Bitmap(2, 2);
+                            BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
+                            BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
+                            if (main.curgame == main.GAME_UW2)
+                            {
+                                BitMapWidth = 79;
+                                BitMapHeight = 112;
+                            }
+                            imageOffset = Util.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
+                            ImageCache[index] = Image(this, ImageFileData, imageOffset, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
+                            return ImageCache[index];
                         }
-                        imageOffset = Util.getValAtAddress(ImageFileData, (index * 4) + 3, 32);
-                        ImageCache[index] = Image(ImageFileData, imageOffset, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.EightBitUncompressed);
-                        return ImageCache[index];
-                    }
-                    break;
+                        break;
+                    }  
             }
 
             return base.LoadImageAt(0);
+        }
+
+        /// <summary>
+        /// Applys an auxillary palette to raw image data.
+        /// </summary>
+        /// <param name="Img"></param>
+        /// <param name="auxpal"></param>
+        /// <returns></returns>
+        char[] ApplyAuxPal(char[] Img, int[] auxpal)
+        {
+            char[] output = new char[Img.GetUpperBound(0) + 1];
+            for (int i=0; i<=Img.GetUpperBound(0);i++)
+            {
+                output[i] = (char)auxpal[Img[i]];
+            }
+            return output;
         }
 
         /// <summary>
@@ -277,7 +224,7 @@ namespace UnderworldEditor
         /// <param name="imageHeight">Image height.</param>
         /// <param name="BitSize">Bit size.</param>
         /// This code from underworld adventures
-        char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize, int[] auxpal)
+        char[] DecodeRLEBitmap(char[] imageData, int datalen, int imageWidth, int imageHeight, int BitSize)
         //, palette *auxpal, int index, int BitSize, char OutFileName[255])
         {
             char[] outputImg = new char[imageWidth * imageHeight];
@@ -321,7 +268,7 @@ namespace UnderworldEditor
                             }
                             for (int i = 0; i < count; i++)
                             {
-                                outputImg[curr_pxl++] = (char)auxpal[nibble];
+                                outputImg[curr_pxl++] = nibble;
                             }
                             if (repeatcount == 0)
                             {
@@ -347,7 +294,7 @@ namespace UnderworldEditor
                             {
                                 //get nibble for the palette;
                                 nibble = getNibble(imageData, ref add_ptr);
-                                outputImg[curr_pxl++] = (char)auxpal[nibble];
+                                outputImg[curr_pxl++] = nibble;
                             }
                             state = repeat_record_start;
                             break;

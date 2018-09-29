@@ -12,13 +12,14 @@ namespace UnderworldEditor
     public class ArtLoader
     {
         public bool DataLoaded;
+        public bool Modified = false;
         public BitmapUW[] ImageCache;
         public const byte BitMapHeaderSize = 28;
 
         /// <summary>
         /// The complete image file 
         /// </summary>
-        protected char[] ImageFileData;
+        public char[] ImageFileData;
 
         /// <summary>
         /// The palette no to use with this file.
@@ -61,9 +62,9 @@ namespace UnderworldEditor
         /// <param name="imageName">Image name.</param>
         /// <param name="pal">Pal.</param>
         /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-        public static BitmapUW Image(char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, BitmapUW.ImageTypes imgType)
+        public static BitmapUW Image(ArtLoader instance, char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, BitmapUW.ImageTypes imgType)
         {
-            return Image(databuffer, dataOffSet, index, width, height, imageName, pal, Alpha, false, imgType);
+            return Image(instance, databuffer, dataOffSet, index, width, height, imageName, pal, Alpha, false, imgType);
         }
 
 
@@ -77,9 +78,10 @@ namespace UnderworldEditor
         /// <param name="imageName">Image name.</param>
         /// <param name="pal">Pal.</param>
         /// <param name="Alpha">If set to <c>true</c> alpha.</param>
-        public static BitmapUW Image(char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER, BitmapUW.ImageTypes imgType)
+        public static BitmapUW Image(ArtLoader instance, char[] databuffer, long dataOffSet, int index, int width, int height, string imageName, Palette pal, bool Alpha, bool useXFER, BitmapUW.ImageTypes imgType)
         {
             BitmapUW imgUW = new BitmapUW();
+            imgUW.artdata = instance;
             imgUW.FileOffset = dataOffSet;
             imgUW.ImageType = imgType;
             imgUW.ImagePalette = pal;
@@ -363,8 +365,26 @@ namespace UnderworldEditor
                     paldata[j*256 + i] = (char)i;
                 }
             }
-            return Image(paldata, 0, 0 ,64, 256, "name", pal, true, BitmapUW.ImageTypes.Palette);
+            return Image(null, paldata, 0, 0, 256, 64, "name", pal, true, BitmapUW.ImageTypes.Palette);
         }
+
+        public static BitmapUW Palette(Palette pal,int[] auxPal)
+        {
+
+            int width = (auxPal.GetUpperBound(0) + 1) ;
+            char[] paldata = new char[width * 64];
+            {
+                for (int j = 0; j < 64; j++)
+                {
+                    for (int i = 0; i < width; i++)
+                    {
+                       paldata[j * width + i] = (char)auxPal[i];                      
+                    }
+                }
+                return Image(null, paldata, 0, 0, width, 64, "name", pal, true, BitmapUW.ImageTypes.Palette);
+            }
+        }
+
 
         public static Bitmap Resize(Bitmap imgToResize, int Width, int Height)
         {

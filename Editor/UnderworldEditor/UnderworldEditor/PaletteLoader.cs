@@ -144,7 +144,7 @@ namespace UnderworldEditor
             {
                 imgData[i] = (char)i;
             }
-            BitmapUW output= ArtLoader.Image(imgData, 0,0, width, height, "name here", Palettes[PalIndex], true, BitmapUW.ImageTypes.Palette);
+            BitmapUW output= ArtLoader.Image(null, imgData, 0,0, width, height, "name here", Palettes[PalIndex], true, BitmapUW.ImageTypes.Palette);
             return output.image;
 
         }

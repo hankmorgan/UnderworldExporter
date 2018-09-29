@@ -40,7 +40,7 @@ namespace UnderworldEditor
         public objects worldObjects;
         public UWStrings UWGameStrings;
         public GRLoader[] grfile =new GRLoader[33];
-        public BytLoader bytfile;
+        public BytLoader[] bytfile;
         TextureLoader tex = new TextureLoader();
         public static BitmapUW CurrentImage;
         //private int CurrentImageNo;
@@ -486,11 +486,11 @@ namespace UnderworldEditor
                             if (node.Tag == null) { return; }
                             if (int.TryParse(node.Tag.ToString(), out index))
                             {
-                                if (bytfile == null)
+                                if (bytfile[index] == null)
                                 {
-                                    bytfile = new BytLoader();
+                                    bytfile[index] = new BytLoader();
                                 }
-                                CurrentImage = bytfile.LoadImageAt(index);
+                                CurrentImage = bytfile[index].LoadImageAt(index);
                             }
                             break;
                         }
@@ -500,11 +500,11 @@ namespace UnderworldEditor
                             if (node.Tag == null) { return; }
                             if (int.TryParse(node.Tag.ToString(), out index))
                             {
-                                if (bytfile == null)
+                                if (bytfile[0] == null)
                                 {
-                                    bytfile = new BytLoader();
+                                    bytfile[0] = new BytLoader();
                                 }
-                                CurrentImage = bytfile.LoadImageAt(index);
+                                CurrentImage = bytfile[0].LoadImageAt(index);
                             }
                             break;
                         }
@@ -530,6 +530,9 @@ namespace UnderworldEditor
             if (CurrentImage!=null)
             {
                 ImgOut.Image = CurrentImage.image;
+                PicPalette.Image = ArtLoader.Palette(CurrentImage.ImagePalette, CurrentImage.PaletteRef).image;
+                ImgOut.Width = CurrentImage.image.Width * (int)NumZoom.Value;
+                ImgOut.Height = CurrentImage.image.Height * (int)NumZoom.Value;
             }
         }
 
@@ -588,11 +591,14 @@ namespace UnderworldEditor
             TreeNode grbyt = TreeArt.Nodes.Add("Bitmap Resources");
             if (main.curgame == main.GAME_UW1)
             {
+                int NoOfBytFiles = 0;
                 for (int i = 0; i <= BytLoader.FilePaths.GetUpperBound(0); i++)
                 {
                     TreeNode gr = grbyt.Nodes.Add(BytLoader.FilePaths[i]);
                     gr.Tag = i;
+                    NoOfBytFiles++;
                 }
+                bytfile = new BytLoader[NoOfBytFiles + 1];
             }
             if (main.curgame == main.GAME_UW2)
             {
@@ -602,11 +608,8 @@ namespace UnderworldEditor
                     TreeNode grx = gr.Nodes.Add(i.ToString());
                     grx.Tag = i;
                 }
-                
+                bytfile = new BytLoader[1];
             }
-
-
-
         }
 
         /// <summary>
@@ -616,11 +619,10 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void ImgOut_MouseClick(object sender, MouseEventArgs e)
         {
-            int factorX = 4;
-            int factorY = 4;
+
             if (CurrentImage == null) { return; }
-            factorX = ImgOut.Width / CurrentImage.image.Width;
-            factorY = ImgOut.Height / CurrentImage.image.Height;
+
+
 
             //if (main.curgame==GAME_UW1)
             //{
@@ -630,9 +632,9 @@ namespace UnderworldEditor
             //    }
             //}
             // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
-            int x = e.Location.X / factorX;
-            int y = ( e.Location.Y) / factorY;
-            ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, CurrentPalettePixel);
+            int x = (int)(e.Location.X / NumZoom.Value);
+            int y = (int)(( e.Location.Y) / NumZoom.Value);
+            ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, CurrentPalettePixel);
  
         }
 
@@ -644,24 +646,62 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void BtnImgSave_Click(object sender, EventArgs e)
         {
-            if (CurrentImage.ImageType != BitmapUW.ImageTypes.Texture) { return; }
-            switch (main.curgame)
+            //if (CurrentImage.ImageType != BitmapUW.ImageTypes.Texture) { return; }
+            //Loop through all art loaders and see if they need modifiying.
+
+            if (tex!=null)
             {
-                case GAME_UW1:
-                    if (tex.texturebufferW!=null)
+                if (tex.Modified)
+                {
+                    switch (main.curgame)
                     {
-                        ArtUI.SaveTextureData(tex.texturebufferW, true);
+                        case GAME_UW1:
+                            if (tex.texturebufferW != null)
+                            {
+                                ArtUI.SaveTextureData(tex.texturebufferW, true);
+                            }
+                            if (tex.texturebufferF != null)
+                            {
+                                ArtUI.SaveTextureData(tex.texturebufferF, false);
+                            }
+                            break;
+                        case GAME_UW2:
+                            ArtUI.SaveTextureData(tex.texturebufferW, false);
+                            break;
                     }
-                    if (tex.texturebufferF!=null)
-                    {
-                        ArtUI.SaveTextureData(tex.texturebufferF, false);
-                    }                    
-                    break;
-                case GAME_UW2:
-                    ArtUI.SaveTextureData(tex.texturebufferW,false);
-                    break;
+                }
             }
-            
+            for (int i=0; i<=grfile.GetUpperBound(0);i++)
+            {
+                if (grfile[i]!=null)
+                {
+                    if (grfile[i].Modified)
+                    {
+                        //do saving of a .gr file                        
+                    }
+                }
+            }
+
+            if (bytfile!=null)
+            {
+                if (curgame==GAME_UW1)
+                {
+                    for (int i = 0; i <= bytfile.GetUpperBound(0); i++)
+                    {
+                        if (bytfile[i] != null)
+                        {
+                            if (bytfile[i].ImageCache != null)
+                            {
+                                if (bytfile[i].ImageCache[0].Modified)
+                                {
+                                    //Save this .byt file
+                                    ArtUI.SaveBytDataUW1(bytfile[i].ImageFileData, "\\Data\\" + BytLoader.FilePaths[i]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -670,22 +710,22 @@ namespace UnderworldEditor
             int x = 0;int y = 0;
             for (int counter = 0; counter < 256; counter++)
             {
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+1, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+2, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+3, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 4, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 5, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 6, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 7, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y+8, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 9, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 10, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 11, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 12, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 13, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 14, counter);
-                ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y + 15, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+1, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+2, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+3, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 4, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 5, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 6, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 7, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+8, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 9, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 10, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 11, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 12, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 13, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 14, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 15, counter);
 
                 x++;
                 if (x >= 64)
@@ -703,9 +743,27 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void PicPalette_MouseClick(object sender, MouseEventArgs e)
         {
+            
            // int x = e.Location.X / 4;
             //int y = (e.Location.Y) / 4;
-            CurrentPalettePixel = e.Location.X / 2;
+            if (CurrentImage!=null)
+            {
+                PictureBoxWithInterpolationMode pic = (PictureBoxWithInterpolationMode)sender;
+                int ctrlwidth = pic.Size.Width;
+                int RefPalSize = CurrentImage.PaletteRef.GetUpperBound(0) + 1;
+                int ratio = ctrlwidth / RefPalSize;
+                int currentpixel = e.Location.X / ratio;
+                CurrentPalettePixel = CurrentImage.PaletteRef[currentpixel];
+                 Bitmap selectedbmp = new Bitmap(2, 2);
+                for (int x =0; x< selectedbmp.Width; x++)
+                {
+                    for (int y = 0; y < selectedbmp.Height; y++)
+                    {
+                        selectedbmp.SetPixel(x, y, CurrentImage.ImagePalette.ColorAtPixel((byte)CurrentPalettePixel, true));                                               
+                    }
+                }
+                PicColour.Image = selectedbmp;
+            }            
         }
 
 
@@ -1013,11 +1071,6 @@ namespace UnderworldEditor
             }
         }
 
-        private void ImgOut_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void BtnImport_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
@@ -1029,16 +1082,35 @@ namespace UnderworldEditor
                 {
                     jr = ArtLoader.Resize(jr, CurrentImage.image.Width, CurrentImage.image.Height);
                 }
-                ImgOut.Image = jr;
+                
                 for (int x = 0; x < jr.Width; x++)
                 {
-                    for (int y = 0; y < jr.Width; y++)
+                    for (int y = 0; y < jr.Height; y++)
                     {
                         //Get nearest palette to color
-                        ArtUI.setPixelAtLocation(tex, CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), CurrentImage.ImagePalette));
+                        ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), CurrentImage.ImagePalette));
                     }
                 }
+                ImgOut.Image = CurrentImage.image;
             } 
+        }
+
+        private void NumZoom_ValueChanged(object sender, EventArgs e)
+        {
+            if (CurrentImage!=null)
+            {
+                ImgOut.Height = CurrentImage.image.Height * (int)NumZoom.Value;
+                ImgOut.Width = CurrentImage.image.Width * (int)NumZoom.Value;
+            }
+        }
+
+        private void BtnExportImg_Click(object sender, EventArgs e)
+        {
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                ImgOut.Image.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+            }            
         }
     }
 }
