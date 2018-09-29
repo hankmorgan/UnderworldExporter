@@ -13,6 +13,19 @@ namespace UnderworldEditor
         public byte[] blue = new byte[256];
         public byte[] green = new byte[256];
 
+        public Palette()
+        {
+            
+        }
+
+        public Palette(int size)
+        {
+         red = new byte[size];
+         blue = new byte[size];
+         green = new byte[size];
+        }
+
+
         /// <summary>
         /// Returns the color for the specified palette index. 
         /// </summary>

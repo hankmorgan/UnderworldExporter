@@ -15,6 +15,7 @@ namespace UnderworldEditor
         public bool Modified = false;
         public BitmapUW[] ImageCache;
         public const byte BitMapHeaderSize = 28;
+        public BitmapUW.ImageTypes ImageType;//The primary image type of this file.
 
         /// <summary>
         /// The complete image file 
@@ -36,7 +37,10 @@ namespace UnderworldEditor
         {
             BitmapUW newimg = new BitmapUW();
             newimg.image = new Bitmap(2, 2);
-            return newimg;
+            newimg.ImagePalette = PaletteLoader.Palettes[0];
+            ImageCache[index] = newimg;
+            ImageCache[index].UncompressedData = new char[4];
+            return ImageCache[index];
         }
 
         /// <summary>
@@ -86,6 +90,10 @@ namespace UnderworldEditor
             imgUW.ImageType = imgType;
             imgUW.ImagePalette = pal;
             imgUW.ImageNo = index;
+            if (instance != null)
+            {
+                instance.ImageType = imgType;
+            }
             Bitmap image = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             Byte[] imageColors = new Byte[width * height * 4];
 

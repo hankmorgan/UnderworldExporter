@@ -444,7 +444,7 @@ namespace UnderworldEditor
         private void TreeArt_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = TreeArt.SelectedNode;
-
+            BtnRepack4Bit.Enabled = false;
             if (node.Parent!=null)
             {
                 string partext = node.Parent.Text.ToUpper();
@@ -521,6 +521,13 @@ namespace UnderworldEditor
                                 {
                                     //load the gr file
                                     CurrentImage = grfile[parentindex].LoadImageAt(index);
+                                    switch (CurrentImage.ImageType)
+                                    {
+                                        case BitmapUW.ImageTypes.FourBitRunLength:
+                                        case BitmapUW.ImageTypes.FourBitUncompress:
+                                            BtnRepack4Bit.Enabled = true;
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -533,6 +540,7 @@ namespace UnderworldEditor
                 PicPalette.Image = ArtLoader.Palette(CurrentImage.ImagePalette, CurrentImage.PaletteRef).image;
                 ImgOut.Width = CurrentImage.image.Width * (int)NumZoom.Value;
                 ImgOut.Height = CurrentImage.image.Height * (int)NumZoom.Value;
+                LblImageDetails.Text = CurrentImage.image.Height + "x" + CurrentImage.image.Width + "\n" + CurrentImage.ImageType.ToString();
             }
         }
 
@@ -677,7 +685,15 @@ namespace UnderworldEditor
                 {
                     if (grfile[i].Modified)
                     {
-                        //do saving of a .gr file                        
+                        //do saving of a .gr file      
+                        switch (grfile[i].ImageType)
+                        {
+                            case BitmapUW.ImageTypes.EightBitUncompressed:
+                                ArtUI.SaveBytDataUW1(grfile[i].ImageFileData, grfile[i].FileName.Replace(main.basepath, ""));
+                                break;
+                            default://4 bit formats (convert to 8 bits?)
+                                break;
+                        }                        
                     }
                 }
             }
@@ -1077,7 +1093,8 @@ namespace UnderworldEditor
             
             if (result==DialogResult.OK)
             {
-                Bitmap jr = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);               
+                Bitmap jr = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
+                Palette FinalPal = CurrentImage.GetFinalPallette();
                 if ((jr.Width !=CurrentImage.image.Width) || (jr.Height!= CurrentImage.image.Height))
                 {
                     jr = ArtLoader.Resize(jr, CurrentImage.image.Width, CurrentImage.image.Height);
@@ -1088,7 +1105,7 @@ namespace UnderworldEditor
                     for (int y = 0; y < jr.Height; y++)
                     {
                         //Get nearest palette to color
-                        ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), CurrentImage.ImagePalette));
+                        ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), FinalPal));
                     }
                 }
                 ImgOut.Image = CurrentImage.image;
@@ -1111,6 +1128,17 @@ namespace UnderworldEditor
             {
                 ImgOut.Image.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
             }            
+        }
+
+        private void BtnRepack4Bit_Click(object sender, EventArgs e)
+        {
+
+            if (CurrentImage!=null)
+            {
+                GRLoader X = (GRLoader)CurrentImage.artdata;
+                X.Convert();
+            }
+
         }
     }
 }

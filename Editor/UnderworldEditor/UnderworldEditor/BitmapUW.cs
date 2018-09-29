@@ -17,6 +17,7 @@ namespace UnderworldEditor
         public long FileOffset;
         public int ImageNo;
         public ArtLoader artdata;
+        public int AuxPalNo = 0;
         public enum ImageTypes
         {
             Texture,
@@ -46,6 +47,18 @@ namespace UnderworldEditor
         public void SetAuxPalRef(int[] aux)
         {
             PaletteRef = aux;
+        }
+
+        public Palette GetFinalPallette()
+        {
+            Palette final=new Palette(PaletteRef.GetUpperBound(0)+1);
+            for (int i=0; i<= PaletteRef.GetUpperBound(0);i++)
+            {
+                final.red[i] = ImagePalette.red[PaletteRef[i]];
+                final.green[i] = ImagePalette.green[PaletteRef[i]];
+                final.blue[i] = ImagePalette.blue[PaletteRef[i]];
+            }
+            return final;
         }
 
     }

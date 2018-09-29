@@ -21,6 +21,8 @@ namespace UnderworldEditor
         private bool ImageFileDataLoaded;
         int NoOfImages;
 
+       
+
         public GRLoader(string filename)
         {
             useOverrideAuxPalIndex = false;
@@ -108,10 +110,11 @@ namespace UnderworldEditor
                         //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
                         int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
                         char[] RawImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4);
-                        char[] outputImg = ApplyAuxPal(RawImg, aux);
-                        ImageCache[index] = Image(this, outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
-                        ImageCache[index].UncompressedData = RawImg;
+                        char[] OutputImg = ApplyAuxPal(RawImg, aux);
+                        ImageCache[index] = Image(this, OutputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
+                        ImageCache[index].UncompressedData = OutputImg;
                         ImageCache[index].SetAuxPalRef(aux);
+                        ImageCache[index].AuxPalNo = auxPalIndex;
                         return ImageCache[index];
                     }
                 case 0xA://4 bit uncompressed
@@ -135,10 +138,11 @@ namespace UnderworldEditor
                         copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
                         //Palette auxpal = PaletteLoader.LoadAuxilaryPal(main.basepath + AuxPalPath, PaletteLoader.Palettes[PaletteNo], auxPalIndex);
                         int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
-                        char[] outputImg = ApplyAuxPal(imgNibbles, aux);                        
-                        ImageCache[index] = Image(this, outputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitUncompress);
-                        ImageCache[index].UncompressedData = imgNibbles;
+                        char[] OutputImg = ApplyAuxPal(imgNibbles, aux);                        
+                        ImageCache[index] = Image(this, OutputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitUncompress);
+                        ImageCache[index].UncompressedData = OutputImg;
                         ImageCache[index].SetAuxPalRef(aux);
+                        ImageCache[index].AuxPalNo = auxPalIndex;
                         return ImageCache[index];
                     }
                 //break;
@@ -352,5 +356,97 @@ namespace UnderworldEditor
             addr_ptr = addr_ptr + 1;
             return n1;
         }
+
+
+        /// <summary>
+        /// Converts an eight bit stream of image data into a 4 bit one in nibbles.
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        public static char[] ImgToNibbles(BitmapUW img , out int NoOfNibbles)
+        {
+            int imgsize = img.image.Height * img.image.Width;
+            char[] nibbles = new char[(imgsize / 2)+1];
+            NoOfNibbles = 0;
+            int counter = 0;
+            for (int i=0; i< imgsize; i++ )
+            {
+                int curbyte = img.artdata.ImageFileData[img.FileOffset +i];
+                if (i % 2 ==1)
+                {//odd nibble
+                    nibbles[counter] = (char)((nibbles[counter]) | (char)(curbyte & 0xf));
+                    counter++;
+                    NoOfNibbles++;
+                }
+                else
+                {//even nibble
+                    nibbles[counter] = (char)((curbyte << 4) & 0xf0);
+                    NoOfNibbles++;
+                }
+            }           
+            return nibbles;
+        }
+
+        public void Convert()
+        {
+            //THIS DOES NOT WORK. Underworld will crash when file is converted. Exporter can open correctly!
+            return;
+            int[] FileSizes = new int[NoOfImages];
+            //Get size of file data required.
+            int FileSizeNeeded = 3 + (NoOfImages+1) * 4 ;
+            //Converts the current 4 bit .gr file into an 8 bit uncompressed one. 
+            //Load all images in files. This will give the uncompressed data in 8 bit format
+            for (int i=0;i<=ImageCache.GetUpperBound(0);i++)
+            {
+                if (ImageCache[i]==null)
+                {
+                    LoadImageAt(i);
+                }
+                if (ImageCache[i]!=null)
+                {
+                    FileSizes[i] = (ImageCache[i].image.Height * ImageCache[i].image.Width) + 5;
+                }
+                else
+                {
+                    FileSizes[i] = 4 + 5;
+                }
+                
+                FileSizeNeeded += FileSizes[i];
+            }
+
+            char[] Output = new char[FileSizeNeeded];
+            //Write file header
+            Output[0] = ImageFileData[0];//type
+            Output[1] = ImageFileData[1];//no of images
+            Output[2] = ImageFileData[2];
+            int addptr = 3;
+            int fileOffset = 3 + (NoOfImages+1) * 4;            
+            for (int i=0; i<NoOfImages;i++)
+            {
+                Util.StoreInt32(Output, addptr, fileOffset);
+                fileOffset += FileSizes[i];
+                addptr += 4;
+            }
+            addptr = 3 + (NoOfImages + 1) * 4; 
+            //Now write files  
+            for (int i = 0; i < NoOfImages; i++)
+            {
+                Output[addptr++] = (char)0x4;//Imagetype
+                Output[addptr++] = (char)ImageCache[i].image.Width;
+                Output[addptr++] = (char)ImageCache[i].image.Height;                
+                Util.StoreInt16(Output, addptr, ImageCache[i].UncompressedData.GetUpperBound(0)+1);
+                addptr += 2;
+                //      Image Data
+                for (int j=0;j<=ImageCache[i].UncompressedData.GetUpperBound(0);j++)
+                {
+                    Output[addptr++] = ImageCache[i].UncompressedData[j];
+                }
+            }
+
+            //Save the file
+            Util.WriteStreamFile(FileName, Output);          
+
+        }
+
     }
 }

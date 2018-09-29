@@ -77,9 +77,7 @@ namespace UnderworldEditor
                 return false;
             }
         }
-
-
-
+        
         public static void WriteStreamFile(String Path, char[] buffer)
         {
             byte[] bytes = new byte[buffer.GetUpperBound(0)+1];
@@ -479,6 +477,16 @@ namespace UnderworldEditor
             return 2;
         }
 
+        public static void StoreInt16(char[] buffer, int address, long val)
+        {
+            char valOut = (char)(val & 0xff);
+            buffer[address] = valOut;
+
+            valOut = (char)(val >> 8 & 0xff);
+            buffer[address + 1] = valOut;
+        }
+
+
         /// <summary>
         /// Writes an int32 to file
         /// </summary>
@@ -501,6 +509,20 @@ namespace UnderworldEditor
             return 4;
         }
 
+        public static void StoreInt32(char[] buffer, int address, long val)
+        {
+            char valOut = (char)(val & 0xff);
+            buffer[address] = valOut;
+
+            valOut = (char)(val >> 8 & 0xff);
+            buffer[address+1] = valOut;
+
+            valOut = (char)(val >> 16 & 0xff);
+            buffer[address+2] = valOut;
+
+            valOut = (char)(val >> 24 & 0xff);
+            buffer[address+3] = valOut;
+        }
 
     }//end class
 }

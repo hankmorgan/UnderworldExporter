@@ -16,7 +16,7 @@ namespace UnderworldEditor
         {
             if (currentimg.artdata == null) { return; }
             if (img.Image == null) { return; }
-            currentimg.artdata.ImageCache[currentimg.ImageNo].image.SetPixel(x, y, PaletteLoader.Palettes[0].ColorAtPixel((byte)newpixel, false));
+            currentimg.artdata.ImageCache[currentimg.ImageNo].image.SetPixel(x, y, currentimg.ImagePalette.ColorAtPixel((byte)newpixel, false));
             currentimg.Modified = true;
             switch (main.CurrentImage.ImageType)
             {
@@ -39,23 +39,31 @@ namespace UnderworldEditor
                         }
                         break;
                     }
-                case BitmapUW.ImageTypes.Byt:
+                case BitmapUW.ImageTypes.Byt:               
                     {
                         switch (main.curgame)
                         {
                             case main.GAME_UW1:
                                 {
                                     BytLoader byt = (BytLoader)currentimg.artdata;
-                                    byt.ImageFileData[0 + y * 320 + x] = (char)newpixel;
+                                    byt.ImageFileData[currentimg.FileOffset + y * (currentimg.image.Width) + x] = (char)newpixel;
                                     currentimg.artdata.Modified = true;
                                     break;
                                 }
                         }
                         break;
                     }
+                case BitmapUW.ImageTypes.EightBitUncompressed:
+                    {
+                        GRLoader gr = (GRLoader)currentimg.artdata;
+                        gr.ImageFileData[currentimg.FileOffset + y * (currentimg.image.Width) + x] = (char)newpixel;
+                        currentimg.artdata.Modified = true;
+                        break;
+                    }
                 default:
                     {
-                       // img.Image = main.CurrentImage.image;
+                        
+                    // img.Image = main.CurrentImage.image;
                         break;
                     }
             }
