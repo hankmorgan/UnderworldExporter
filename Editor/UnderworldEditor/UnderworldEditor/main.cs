@@ -14,6 +14,7 @@ namespace UnderworldEditor
 {
     public partial class main : Form
     {
+        public static main instance;
         public const int GAME_UW1 = 1;
         public const int GAME_UW2 = 2;
         public static bool isLoading = false;
@@ -50,7 +51,8 @@ namespace UnderworldEditor
 
         public main()
         {
-            InitializeComponent();    
+            InitializeComponent();
+            instance = this;
         }
 
         /// <summary>
@@ -689,6 +691,9 @@ namespace UnderworldEditor
                         switch (grfile[i].ImageType)
                         {
                             case BitmapUW.ImageTypes.EightBitUncompressed:
+                                ArtUI.SaveBytDataUW1(grfile[i].ImageFileData, grfile[i].FileName.Replace(main.basepath, ""));
+                                break;
+                            case BitmapUW.ImageTypes.FourBitUncompress:
                                 ArtUI.SaveBytDataUW1(grfile[i].ImageFileData, grfile[i].FileName.Replace(main.basepath, ""));
                                 break;
                             default://4 bit formats (convert to 8 bits?)

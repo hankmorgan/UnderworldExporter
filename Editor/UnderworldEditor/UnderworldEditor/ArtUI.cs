@@ -60,6 +60,26 @@ namespace UnderworldEditor
                         currentimg.artdata.Modified = true;
                         break;
                     }
+                case BitmapUW.ImageTypes.FourBitUncompress:
+                    {
+                        GRLoader gr = (GRLoader)currentimg.artdata;
+                        int Offset =  y * (currentimg.image.Width) + x;
+                        long NibbleAddress = currentimg.FileOffset + (Offset / 2);
+                        int HiOrLow = Offset % 2;
+                        if (HiOrLow==1)
+                        {//low nibble
+                            gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] & 0xF0);
+                            gr.ImageFileData[NibbleAddress] =(char)( gr.ImageFileData[NibbleAddress] | ((char)newpixel & 0xf));
+                        }
+                        else
+                        {
+                            gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] & 0x0F);
+                            gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] | ((char)(newpixel<<4) & 0xf0));
+                        }
+                       
+                        currentimg.artdata.Modified = true;
+                        break;
+                    }
                 default:
                     {
                         
