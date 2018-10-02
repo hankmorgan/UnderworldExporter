@@ -113,7 +113,9 @@ namespace UnderworldEditor
 
         public static void PopulateWorldObjects(int index, main MAIN)
         {
+            main.isLoading = true;
             objects.ObjectInfo obj = MAIN.worldObjects.objList[index];
+            MAIN.CurWorldObject = index;
             MAIN.PopulateObjectUI(obj,
                 MAIN.CmbWorldItem_ID, MAIN.ChkWorldEnchanted,
                 MAIN.ChkWorldIsQuant, MAIN.ChkWorldDoorDir,
@@ -122,6 +124,7 @@ namespace UnderworldEditor
                 MAIN.NumWorldHeading, MAIN.NumWorldFlags,
                 MAIN.NumWorldQuality, MAIN.NumWorldOwner,
                 MAIN.NumWorldNext, MAIN.NumWorldLink);
+            main.isLoading = false;
         }
 
         public static void ApplyTileChanges(int x, int y, main MAIN)

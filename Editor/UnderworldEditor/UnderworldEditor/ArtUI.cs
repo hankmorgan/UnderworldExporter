@@ -12,12 +12,12 @@ namespace UnderworldEditor
     class ArtUI
     {
 
-        public static void setPixelAtLocation(BitmapUW currentimg, PictureBox img, int x, int y, int newpixel)
+        public static void setPixelAtLocation(BitmapUW currentimg, PictureBox img, int x, int y, int newpixel, int auxpixel)
         {
             if (currentimg.artdata == null) { return; }
             if (img.Image == null) { return; }
             currentimg.artdata.ImageCache[currentimg.ImageNo].image.SetPixel(x, y, currentimg.ImagePalette.ColorAtPixel((byte)newpixel, false));
-            currentimg.Modified = true;
+            
             switch (main.CurrentImage.ImageType)
             {
                 case BitmapUW.ImageTypes.Texture:
@@ -69,24 +69,32 @@ namespace UnderworldEditor
                         if (HiOrLow==1)
                         {//low nibble
                             gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] & 0xF0);
-                            gr.ImageFileData[NibbleAddress] =(char)( gr.ImageFileData[NibbleAddress] | ((char)newpixel & 0xf));
+                            gr.ImageFileData[NibbleAddress] =(char)( gr.ImageFileData[NibbleAddress] | ((char)auxpixel & 0xf));
                         }
                         else
                         {
                             gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] & 0x0F);
-                            gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] | ((char)(newpixel<<4) & 0xf0));
+                            gr.ImageFileData[NibbleAddress] = (char)(gr.ImageFileData[NibbleAddress] | ((char)(auxpixel<<4) & 0xf0));
                         }
                        
                         currentimg.artdata.Modified = true;
                         break;
                     }
+                //case BitmapUW.ImageTypes.FourBitRunLength:
+                //    {
+                        //GRLoader gr = (GRLoader)currentimg.artdata;
+                        //currentimg.UncompressedData[y * (currentimg.image.Width) + x] = (char)auxpixel;
+                        //currentimg.artdata.Modified = true;                        
+                //        break;
+                //    }
                 default:
                     {
-                        
+                        return;
                     // img.Image = main.CurrentImage.image;
-                        break;
+                        //break;
                     }
             }
+            currentimg.Modified = true;
             main.CurrentImage = currentimg.artdata.ImageCache[currentimg.ImageNo];
             img.Image = main.CurrentImage.image;
 

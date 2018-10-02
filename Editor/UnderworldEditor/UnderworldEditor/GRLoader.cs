@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace UnderworldEditor
 {
@@ -20,8 +21,6 @@ namespace UnderworldEditor
         public string FileName;
         private bool ImageFileDataLoaded;
         int NoOfImages;
-
-
 
         public GRLoader(string filename)
         {
@@ -46,7 +45,6 @@ namespace UnderworldEditor
                 return true;
             }
         }
-
 
         public override BitmapUW LoadImageAt(int index)
         {
@@ -92,7 +90,7 @@ namespace UnderworldEditor
                     {
                         char[] imgNibbles;
                         int auxPalIndex;
-                        int datalen;
+                       
                         int BitMapWidth = (int)Util.getValAtAddress(ImageFileData, imageOffset + 1, 8);
                         int BitMapHeight = (int)Util.getValAtAddress(ImageFileData, imageOffset + 2, 8);
                         if (!useOverrideAuxPalIndex)
@@ -103,17 +101,15 @@ namespace UnderworldEditor
                         {
                             auxPalIndex = OverrideAuxPalIndex;
                         }
-                        datalen = (int)Util.getValAtAddress(ImageFileData, imageOffset + 4, 16);
+                        int datalen = (int)Util.getValAtAddress(ImageFileData, imageOffset + 4, 16);
                         imgNibbles = new char[Math.Max(BitMapWidth * BitMapHeight * 2, (datalen + 5) * 2)];
                         imageOffset = imageOffset + 6;  //Start of raw data.
                         copyNibbles(ImageFileData, ref imgNibbles, datalen, imageOffset);
-                        //auxpal =PaletteLoader.LoadAuxilaryPal(Loader.BasePath+ AuxPalPath,GameWorldController.instance.palLoader.Palettes[PaletteNo],auxPalIndex);
-                        int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
+                         int[] aux = PaletteLoader.LoadAuxilaryPalIndices(main.basepath + AuxPalPath, auxPalIndex);
                         char[] RawImg = DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, 4);
-                        EncodeRLEBitMap(RawImg);
                         char[] OutputImg = ApplyAuxPal(RawImg, aux);
                         ImageCache[index] = Image(this, OutputImg, 0, index, BitMapWidth, BitMapHeight, "name_goes_here", PaletteLoader.Palettes[PaletteNo], Alpha, BitmapUW.ImageTypes.FourBitRunLength);
-                        ImageCache[index].UncompressedData = OutputImg;
+                        ImageCache[index].UncompressedData = RawImg;
                         ImageCache[index].SetAuxPalRef(aux);
                         ImageCache[index].AuxPalNo = auxPalIndex;
                         return ImageCache[index];
@@ -249,7 +245,7 @@ namespace UnderworldEditor
                     case repeat_record_start:
                         {
                             count = getcount(imageData, ref add_ptr, BitSize);
-                            main.instance.TxtDebug.Text += "\nStart:" + count;
+                            //main.instance.TxtDebug.Text += "\nStart:" + count;
                             if (count == 1)
                             {
                                 state = run_record;
@@ -257,7 +253,7 @@ namespace UnderworldEditor
                             else if (count == 2)
                             {
                                 repeatcount = getcount(imageData, ref add_ptr, BitSize) - 1;
-                                main.instance.TxtDebug.Text += "\n\tRepeat count Start: " + repeatcount;
+                               // main.instance.TxtDebug.Text += "\n\tRepeat count Start: " + repeatcount;
                                 state = repeat_record_start;
                             }
                             else
@@ -274,10 +270,10 @@ namespace UnderworldEditor
                             {
                                 count = imageWidth * imageHeight - curr_pxl;
                             }
-                            main.instance.TxtDebug.Text += "\nRepeat:" + count;
+                            //main.instance.TxtDebug.Text += "\nRepeat:" + count;
                             for (int i = 0; i < count; i++)
                             {
-                                main.instance.TxtDebug.Text += "\n\tRepeat Pixel: " + (int)nibble;
+                               // main.instance.TxtDebug.Text += "\n\tRepeat Pixel: " + (int)nibble;
                                 outputImg[curr_pxl++] = nibble;
                             }
                             if (repeatcount == 0)
@@ -300,12 +296,12 @@ namespace UnderworldEditor
                             {
                                 count = imageWidth * imageHeight - curr_pxl;
                             }
-                            main.instance.TxtDebug.Text += "\nRun:" + count;
+                            //main.instance.TxtDebug.Text += "\nRun:" + count;
                             for (int i = 0; i < count; i++)
                             {
                                 //get nibble for the palette;
                                 nibble = getNibble(imageData, ref add_ptr);
-                                main.instance.TxtDebug.Text += "\n\tCopy Pixel: " + (int)nibble;
+                                //main.instance.TxtDebug.Text += "\n\tCopy Pixel: " + (int)nibble;
                                 outputImg[curr_pxl++] = nibble;
                             }
                             state = repeat_record_start;
@@ -319,7 +315,7 @@ namespace UnderworldEditor
         public char[] EncodeRLEBitMap(char[] img)
         {
             List<char> data = new List<char>();
-            main.instance.TxtDebug.Text += "\n\n\nEncoding";
+            //main.instance.TxtDebug.Text += "\n\n\nEncoding";
            int i = 0;
             int state = repeat_record;
             int FoundNoOfRepeats = 0;
@@ -340,7 +336,7 @@ namespace UnderworldEditor
                     case 2://Char only appears 2 times. This is a run record until the next repeat.
                         if (state==run_record)
                         {//previous was already a run record. Insert count to signify this.
-                            main.instance.TxtDebug.Text += "\nRun Count 1";
+                           // main.instance.TxtDebug.Text += "\nRun Count 1";
                             data.Add((char)1);//flag the data begins with a run record.
                         }
                         state = run_record;
@@ -349,20 +345,22 @@ namespace UnderworldEditor
                         {
                             copycount = nextrepeat-i;
                             CreateCount(data, copycount);
-                            main.instance.TxtDebug.Text += "\nRun " + copycount + " times\n";
+                            //main.instance.TxtDebug.Text += "\nRun " + copycount + " times\n";
                             for (int x=i; x< nextrepeat && x<=img.GetUpperBound(0);x++)
                             {
-                                main.instance.TxtDebug.Text += "\n\t Running " + (int)img[x];
+                                data.Add(img[x]);
+                                //main.instance.TxtDebug.Text += "\n\t Running " + (int)img[x];
                             }
                         }
                         else
                         {//Run till end of file
                             copycount = img.GetUpperBound(0)+1 - i;
                             CreateCount(data, copycount);
-                            main.instance.TxtDebug.Text += "\nRun " + copycount + " times (til end)";
+                            //main.instance.TxtDebug.Text += "\nRun " + copycount + " times (til end)";
                             for (int x = i; x <= img.GetUpperBound(0); x++)
                             {
-                                main.instance.TxtDebug.Text += "\n\t Running " + (int)img[x];
+                                data.Add(img[x]);
+                                //main.instance.TxtDebug.Text += "\n\t Running " + (int)img[x];
                             }
                         }
                         break;
@@ -382,25 +380,26 @@ namespace UnderworldEditor
                                     data.Add((char)2);//flag the data begins with a repeat record.
                                     //data.Add((char)(FoundNoOfRepeats));
                                     CreateCount(data, FoundNoOfRepeats);
-                                    main.instance.TxtDebug.Text += "\nRepeat Count (2)";
+                                   // main.instance.TxtDebug.Text += "\nRepeat Count (2)";
                                 }
                             }
                             FoundNoOfRepeats--;
                             state = repeat_record;
 
-                            main.instance.TxtDebug.Text += "\nRepeat " + curchar + " " + copycount + " times";
+                            //main.instance.TxtDebug.Text += "\nRepeat " + curchar + " " + copycount + " times";
                             CreateCount(data, copycount);
-                            for (int x = 0; x < copycount && x <= img.GetUpperBound(0); x++)
-                            {
-                                main.instance.TxtDebug.Text += "\n\t Repeating " + curchar;
-                            }
+                            data.Add((char)curchar);
+                           // for (int x = 0; x < copycount && x <= img.GetUpperBound(0); x++)
+                           // {
+                               // main.instance.TxtDebug.Text += "\n\t Repeating " + curchar;
+                          //  }
                             break;
                         }
                 }
 
                 i = i + copycount; 
             }
-            return data.ToArray();//TODO turn this array of 8 bit chars into 4 bit nibbles.
+            return DataToNibbles( data.ToArray() );
         }
         
         /// <summary>
@@ -411,6 +410,28 @@ namespace UnderworldEditor
         void CreateCount(List<char> data, int count)
         {
             //TODO.
+           // 1 word count : [w0]     0-15                     , with(w0) != 0
+      //2 word count :   0  [w1] [w2]  0-255              , with(w1 << 4 | w2) != 0
+     // 3 word count :   0    0    0  [w3] [w4] [w5]    0-4095
+            if (count < 16)
+            {
+                data.Add((char)count);
+            }
+            else if(count<255)
+            {
+                data.Add((char)0);
+                data.Add((char)((count & 0xf0) >>4));
+                data.Add((char)(count & 0x0f));
+            }
+            else //count <4095
+            {
+                data.Add((char)0);
+                data.Add((char)0);
+                data.Add((char)0);
+                data.Add((char)((count & 0xf00) >> 8));
+                data.Add((char)((count & 0xf0) >> 4));
+                data.Add((char)(count & 0x0f));
+            }
         }
 
         /// <summary>
@@ -517,28 +538,72 @@ namespace UnderworldEditor
         /// </summary>
         /// <param name="img"></param>
         /// <returns></returns>
-        public static char[] ImgToNibbles(BitmapUW img , out int NoOfNibbles)
+        public static char[] DataToNibbles(char[] data)
         {
-            int imgsize = img.image.Height * img.image.Width;
-            char[] nibbles = new char[(imgsize / 2)+1];
-            NoOfNibbles = 0;
+            int datasize = data.GetUpperBound(0) + 1;
+            int imgsize = datasize / 2 + datasize % 2;
+            char[] nibbles = new char[imgsize];
             int counter = 0;
-            for (int i=0; i< imgsize; i++ )
+            for (int i=0; i<= data.GetUpperBound(0); i++ )
             {
-                int curbyte = img.artdata.ImageFileData[img.FileOffset +i];
+                int curbyte = data[i];
                 if (i % 2 ==1)
                 {//odd nibble
                     nibbles[counter] = (char)((nibbles[counter]) | (char)(curbyte & 0xf));
                     counter++;
-                    NoOfNibbles++;
                 }
                 else
                 {//even nibble
                     nibbles[counter] = (char)((curbyte << 4) & 0xf0);
-                    NoOfNibbles++;
                 }
             }           
             return nibbles;
+        }
+
+        public void Save4Bit()
+        {
+            return; // and this does not work either!!!
+            //Copy unmodified files.
+            char[] output = new char[128000];
+            //Allocate space for file header
+            int curFileOffset = 1 + 2 + (NoOfImages * 4);
+            int FileOffsetPtr = 0;
+            output[0] = ImageFileData[0];//type
+            output[1] = ImageFileData[1];//no of images
+            output[2] = ImageFileData[2];
+            for (int i = 0; i < NoOfImages; i++)
+            {
+                if (ImageCache[i]==null)
+                {
+                    LoadImageAt(i);
+                }
+            }
+            for (int i=0; i<NoOfImages;i++)
+            {
+                Util.StoreInt32(output, 3 + FileOffsetPtr, curFileOffset);
+                FileOffsetPtr += 4;
+                {//This is my new image. encode and store
+                    char[] newdata = EncodeRLEBitMap(ImageCache[i].UncompressedData);
+                    output[curFileOffset++] = (char)8;
+                    output[curFileOffset++] = (char)ImageCache[i].image.Width;
+                    output[curFileOffset++] = (char)ImageCache[i].image.Height;
+                    output[curFileOffset++] = (char)ImageCache[i].AuxPalNo;
+                    Util.StoreInt16(output, curFileOffset, newdata.GetUpperBound(0) + 1);
+                    curFileOffset += 2;
+                    for (int j=0;j<=newdata.GetUpperBound(0);j++)
+                    {
+                        output[curFileOffset++] = newdata[j];
+                    }
+                }
+            }
+
+            char[] final = new char[curFileOffset + 1];
+            for (int i=0; i<=final.GetUpperBound(0);i++)
+            {
+                final[i] = output[i];
+            }
+            Util.WriteStreamFile(FileName, final);
+           
         }
 
         public void Convert()

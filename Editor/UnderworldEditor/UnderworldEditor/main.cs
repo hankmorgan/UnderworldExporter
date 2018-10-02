@@ -46,6 +46,7 @@ namespace UnderworldEditor
         public static BitmapUW CurrentImage;
         //private int CurrentImageNo;
         private int CurrentPalettePixel=0;
+        private int CurrentRefPixel = 0;
 
 
 
@@ -349,11 +350,11 @@ namespace UnderworldEditor
         /// <param name="option"></param>
         private void LoadUWLevArk(int option)
         {
+            main.PopulateItemIDList(CmbWorldItem_ID);
             string filename = "\\save" + option + "\\lev.ark";
             switch (option)
             {
                 case 0:
-                default:
                     filename = "\\data\\lev.ark";
                     break;
             }
@@ -631,9 +632,6 @@ namespace UnderworldEditor
         {
 
             if (CurrentImage == null) { return; }
-
-
-
             //if (main.curgame==GAME_UW1)
             //{
             //    if (CurrentImageNo>=210)
@@ -644,7 +642,7 @@ namespace UnderworldEditor
             // MessageBox.Show(e.Location.X / 4 +","+ (ImgOut.Height-e.Location.Y) / 4);
             int x = (int)(e.Location.X / NumZoom.Value);
             int y = (int)(( e.Location.Y) / NumZoom.Value);
-            ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, CurrentPalettePixel);
+            ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, CurrentPalettePixel, CurrentRefPixel);
  
         }
 
@@ -697,6 +695,7 @@ namespace UnderworldEditor
                                 ArtUI.SaveBytDataUW1(grfile[i].ImageFileData, grfile[i].FileName.Replace(main.basepath, ""));
                                 break;
                             default://4 bit formats (convert to 8 bits?)
+                                grfile[i].Save4Bit();
                                 break;
                         }                        
                     }
@@ -727,34 +726,34 @@ namespace UnderworldEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Turns the selected image int a representation of the palette
-            int x = 0;int y = 0;
-            for (int counter = 0; counter < 256; counter++)
-            {
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+1, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+2, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+3, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 4, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 5, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 6, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 7, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+8, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 9, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 10, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 11, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 12, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 13, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 14, counter);
-                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 15, counter);
+            ////Turns the selected image int a representation of the palette
+            //int x = 0;int y = 0;
+            //for (int counter = 0; counter < 256; counter++)
+            //{
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, counter, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+1, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+2, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+3, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 4, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 5, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 6, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 7, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+8, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 9, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 10, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 11, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 12, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 13, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 14, counter);
+            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 15, counter);
 
-                x++;
-                if (x >= 64)
-                {
-                    x = 0;
-                    y = y +16;
-                }
-            }
+            //    x++;
+            //    if (x >= 64)
+            //    {
+            //        x = 0;
+            //        y = y +16;
+            //    }
+            //}
         }
 
         /// <summary>
@@ -763,8 +762,7 @@ namespace UnderworldEditor
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PicPalette_MouseClick(object sender, MouseEventArgs e)
-        {
-            
+        {            
            // int x = e.Location.X / 4;
             //int y = (e.Location.Y) / 4;
             if (CurrentImage!=null)
@@ -773,8 +771,8 @@ namespace UnderworldEditor
                 int ctrlwidth = pic.Size.Width;
                 int RefPalSize = CurrentImage.PaletteRef.GetUpperBound(0) + 1;
                 int ratio = ctrlwidth / RefPalSize;
-                int currentpixel = e.Location.X / ratio;
-                CurrentPalettePixel = CurrentImage.PaletteRef[currentpixel];
+                CurrentRefPixel = e.Location.X / ratio;
+                CurrentPalettePixel = CurrentImage.PaletteRef[CurrentRefPixel];
                  Bitmap selectedbmp = new Bitmap(2, 2);
                 for (int x =0; x< selectedbmp.Width; x++)
                 {
@@ -787,16 +785,6 @@ namespace UnderworldEditor
             }            
         }
 
-
-        /// <summary>
-        /// Handles saving of the lev.ark file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnSaveTileMap_Click(object sender, EventArgs e)
-        {
-            Util.WriteStreamFile(curlevarkfile, levarkbuffer);
-        }
 
         /// <summary>
         /// Store changed tile info to the map.
@@ -1109,8 +1097,9 @@ namespace UnderworldEditor
                 {
                     for (int y = 0; y < jr.Height; y++)
                     {
+                        int nearest = PaletteLoader.GetNearestColour(jr.GetPixel(x, y), FinalPal);
                         //Get nearest palette to color
-                        ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, PaletteLoader.GetNearestColour(jr.GetPixel(x, y), FinalPal));
+                        ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, nearest, nearest);
                     }
                 }
                 ImgOut.Image = CurrentImage.image;
@@ -1137,13 +1126,33 @@ namespace UnderworldEditor
 
         private void BtnRepack4Bit_Click(object sender, EventArgs e)
         {
-
             if (CurrentImage!=null)
             {
                 GRLoader X = (GRLoader)CurrentImage.artdata;
                 X.Convert();
             }
+        }
 
+        private void WorldObjChange(object sender, EventArgs e)
+        {
+            //Handle changes to world inventory.
+            if (isLoading) { return; }
+            //Update object at address
+            UpdateObjectUIChange(levarkbuffer,
+                worldObjects.objList[CurWorldObject], 
+                CmbWorldItem_ID, ChkWorldEnchanted, ChkWorldIsQuant, ChkWorldDoorDir, ChkWorldInvis,
+                NumWorldXPos, NumWorldYPos, NumWorldZpos, NumWorldHeading,
+                NumWorldFlags, NumWorldQuality, NumWorldOwner,
+                NumWorldNext, NumWorldLink);
+        }
+
+        private void saveLevArkChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (levarkbuffer!=null)
+            {
+                Util.WriteStreamFile(curlevarkfile, levarkbuffer);
+                MessageBox.Show("File Saved!");
+            }
         }
     }
 }
