@@ -125,5 +125,25 @@ namespace UnderworldEditor
             }           
         }
 
+
+        public static Bitmap UWMap(TileMap tm, TextureLoader tex)
+        {           
+
+            Bitmap output = new Bitmap(64* TextureLoader.LOWRESSIZE, 64* TextureLoader.LOWRESSIZE);
+            System.Drawing.Graphics display = Graphics.FromImage(output);
+            for (int x = 0; x <= 63 ; x++)
+            {
+                for (int y = 0; y <=63; y++)
+                {
+                    if ((tm.Tiles[x, y].Render) && (tm.Tiles[x, y].tileType !=0))
+                    {
+                        int floortex = TileMap.FloorTextureMapped(tm, TileMap.fTOP, tm.Tiles[x, y], main.curgame);
+                        display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63-y) * TextureLoader.LOWRESSIZE);
+                    }
+                }
+            }
+            return output;
+        }
+
     }//endclass
 }

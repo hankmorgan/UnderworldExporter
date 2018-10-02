@@ -60,6 +60,7 @@ namespace UnderworldEditor
                                         
             public short North; public short South;
             public short East; public short West;
+            public bool Render;
             //etc
         };
 
@@ -87,10 +88,12 @@ namespace UnderworldEditor
                     int SecondTileInt = (int)Util.getValAtAddress(lev_ark, (address_pointer + 2), 16);
                     Tiles[x, y] = BuildTileInfo(x, y, FirstTileInt, SecondTileInt, ceilingtexture);//TODO:Texturemappings
                     Tiles[x, y].FileAddress = BlockAddress + address_pointer;
+                    Tiles[x, y].Render = true;
                     address_pointer = address_pointer + 4;
                 }
             }
             SetTileMapWallFacesUW();
+            Cleanup();
         }
 
         /// <summary>
@@ -431,10 +434,114 @@ namespace UnderworldEditor
         }
 
 
+        /// <summary>
+        /// Returns the floor texture from the texture map.
+        /// </summary>
+        /// <returns>The texture.</returns>
+        /// <param name="face">Face.</param>
+        /// <param name="t">T.</param>
+        public static int FloorTextureMapped(TileMap tm, int face, TileInfo t, int game)
+        {
+            int floorTexture;
+            if (face == fCEIL)
+            {
+                floorTexture = tm.texture_map[tm.ceilingtexture];
+            }
+            else
+            {
+                //floorTexture = t.floorTexture;
+                switch (game)
+                {
+                   // case GAME_SHOCK:
+                    case 2:
+                        floorTexture = tm.texture_map[t.floorTexture];
+                        //floorTexture = t.floorTexture;
+                        break;
+                    default:
+                        floorTexture = tm.texture_map[t.floorTexture + 48];
+                        break;
+                }
+            }
+
+            if ((floorTexture < 0) || (floorTexture > 512))
+            {
+                floorTexture = 0;
+            }
+            return floorTexture;
+        }
+
+        void Cleanup()
+        {
+            for (int x = 0; x <= 63; x++)
+            {
+                for (int y = 0; y <= 63; y++)
+                {
+                    //lets test this tile for visibility
+                    //A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
+                    if ((Tiles[x, y].tileType == 0) && (Tiles[x, y].indexObjectList == 0))
+                    {
+                        switch (y)
+                        {
+                            case 0: //bottom row
+                                switch (x)
+                                {
+                                    case 0: //bl corner
+                                        if ((Tiles[x + 1, y].tileType == 0) && (Tiles[x, y + 1].tileType == 0) )
+                                        { Tiles[x, y].Render = false; ; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    case 63://br corner
+                                        if ((Tiles[x - 1, y].tileType == 0) && (Tiles[x, y + 1].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    default: // invert t
+                                        if ((Tiles[x + 1, y].tileType == 0) && (Tiles[x, y + 1].tileType == 0) && (Tiles[x + 1, y].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                }
+                                break;
+                            case 63: //Top row
+                                switch (x)
+                                {
+                                    case 0: //tl corner
+                                        if ((Tiles[x + 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    case 63://tr corner
+                                        if ((Tiles[x - 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    default: //  t
+                                        if ((Tiles[x + 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0) && (Tiles[x - 1, y].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                }
+                                break;
+                            default: //
+                                switch (x)
+                                {
+                                    case 0:     //left edge
+                                        if ((Tiles[x, y + 1].tileType == 0) && (Tiles[x + 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    case 63:  //right edge
+                                        if ((Tiles[x, y + 1].tileType == 0) && (Tiles[x - 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                    default:        //+
+                                        if ((Tiles[x, y + 1].tileType == 0) && (Tiles[x + 1, y].tileType == 0) && (Tiles[x, y - 1].tileType == 0) && (Tiles[x - 1, y].tileType == 0))
+                                        { Tiles[x, y].Render = false; break; }
+                                        else { Tiles[x, y].Render = true; break; }
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
     }//end class  
 
 
-}
 

@@ -40,6 +40,10 @@ namespace UnderworldEditor
             {
                 MAIN.tilemap.BuildTextureMap(MAIN.uwblocks[blockno + 18].Data, ref MAIN.tilemap.ceilingtexture);
             }
+            else
+            {
+                MAIN.tilemap.BuildTextureMap(MAIN.uwblocks[blockno + 80].Data, ref MAIN.tilemap.ceilingtexture);
+            }
             //Temporarily output to treeview for testing.
            // MAIN.txtMap.Text = "";
             for (int x = 0; x <= 63; x++)
@@ -76,6 +80,12 @@ namespace UnderworldEditor
                     }
                 }
             }
+            
+            MAIN.PicMap.Image = ArtUI.UWMap(MAIN.tilemap, MAIN.tex);
+
+            MAIN.PicMap.Height = 64 * (int)MAIN.numMapZoom.Value;
+            MAIN.PicMap.Width = 64 * (int)MAIN.numMapZoom.Value;
+
         }
 
 

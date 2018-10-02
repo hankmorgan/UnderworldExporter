@@ -42,7 +42,7 @@ namespace UnderworldEditor
         public UWStrings UWGameStrings;
         public GRLoader[] grfile =new GRLoader[33];
         public BytLoader[] bytfile;
-        TextureLoader tex = new TextureLoader();
+        public TextureLoader tex = new TextureLoader();
         public static BitmapUW CurrentImage;
         //private int CurrentImageNo;
         private int CurrentPalettePixel=0;
@@ -288,7 +288,7 @@ namespace UnderworldEditor
             switch (uwblocks[blockno].ContentType)
             {
                 case Util.ContentTypes.TileMap:                    
-                    TileMapUI.LoadTileMap(blockno,this);
+                    TileMapUI.LoadTileMap(blockno,this);                    
                     break;
                 default:
                     FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
@@ -1153,6 +1153,12 @@ namespace UnderworldEditor
                 Util.WriteStreamFile(curlevarkfile, levarkbuffer);
                 MessageBox.Show("File Saved!");
             }
+        }
+
+        private void numMapZoom_ValueChanged(object sender, EventArgs e)
+        {
+            PicMap.Height = 64 * (int)numMapZoom.Value;
+            PicMap.Width = 64 * (int)numMapZoom.Value;
         }
     }
 }

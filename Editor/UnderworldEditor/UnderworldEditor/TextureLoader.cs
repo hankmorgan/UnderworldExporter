@@ -9,7 +9,7 @@ namespace UnderworldEditor
 {
     public class TextureLoader: ArtLoader
     {
-        
+        public const int LOWRESSIZE = 16;
         private string pathTexW_UW0 = "DATA\\DW64.TR";
         private string pathTexF_UW0 = "DATA\\DF32.TR";
         private string pathTexW_UW1 = "DATA\\W64.TR";
@@ -30,9 +30,12 @@ namespace UnderworldEditor
 
         public const float BumpMapStrength = 1f;
 
+        private Bitmap[] imageCacheLowRes;
+
         public TextureLoader()
         {
             ImageCache = new BitmapUW[261];
+            imageCacheLowRes = new Bitmap[261];
         }
 
         public override BitmapUW LoadImageAt(int index)
@@ -119,11 +122,22 @@ namespace UnderworldEditor
                             }
                             long textureOffset = Util.getValAtAddress(texturebufferF, ((index - TextureSplit) * 4) + 4, 32);
                             OffsetT[index] = textureOffset;
-                            ImageCache[index] = Image(this, texturebufferF, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);
+                            ImageCache[index] = Image(this, texturebufferF, textureOffset, index, FloorDim, FloorDim, "name_goes_here", palToUse, false, BitmapUW.ImageTypes.Texture);                            
                             return ImageCache[index];
                         }
                     }//end switch	
             }
         }
+         
+         public Bitmap LowResAt(int index)
+        {
+            if (imageCacheLowRes[index] == null)
+            {
+                BitmapUW tmp = LoadImageAt(index);
+                imageCacheLowRes[index]= ArtLoader.Resize(tmp.image, LOWRESSIZE, LOWRESSIZE);
+            }
+            return imageCacheLowRes[index];
+        }
+
     }//end class
 }
