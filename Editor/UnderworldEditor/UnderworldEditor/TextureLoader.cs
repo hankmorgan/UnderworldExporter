@@ -32,10 +32,66 @@ namespace UnderworldEditor
 
         private Bitmap[] imageCacheLowRes;
 
+        public Bitmap MaskNE;
+        public Bitmap MaskNW;
+        public Bitmap MaskSE;
+        public Bitmap MaskSW;
+
+
         public TextureLoader()
         {
             ImageCache = new BitmapUW[261];
             imageCacheLowRes = new Bitmap[261];
+
+            MaskNE = new Bitmap(LOWRESSIZE, LOWRESSIZE);
+            for (int x=0; x<LOWRESSIZE;x++)
+            {
+                for (int y=0; y<LOWRESSIZE;y++)
+                {
+                    if (x < y)
+                    {
+                        MaskNE.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            MaskNW = new Bitmap(LOWRESSIZE, LOWRESSIZE);
+            for (int x = 0; x < LOWRESSIZE; x++)
+            {
+                for (int y = 0; y < LOWRESSIZE; y++)
+                {
+                    if (LOWRESSIZE - x < y)
+                    {
+                        MaskNW.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+
+            MaskSW = new Bitmap(LOWRESSIZE, LOWRESSIZE);
+            for (int x = 0; x < LOWRESSIZE; x++)
+            {
+                for (int y = 0; y < LOWRESSIZE; y++)
+                {
+                    if (x > y)
+                    {
+                        MaskSW.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            MaskSE = new Bitmap(LOWRESSIZE, LOWRESSIZE);
+            for (int x = 0; x < LOWRESSIZE; x++)
+            {
+                for (int y = 0; y < LOWRESSIZE; y++)
+                {
+                    if (LOWRESSIZE - x > y)
+                    {
+                        MaskSE.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
         }
 
         public override BitmapUW LoadImageAt(int index)

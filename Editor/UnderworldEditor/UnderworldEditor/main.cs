@@ -310,15 +310,15 @@ namespace UnderworldEditor
             }
         }
 
-        /// <summary>
-        /// Loads tile info.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TreeTiles_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            TileMapUI.LoadTileInfoFromSelectedNode(this);
-        }
+        ///// <summary>
+        ///// Loads tile info.
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void TreeTiles_AfterSelect(object sender, TreeViewEventArgs e)
+        //{
+        //    TileMapUI.LoadTileInfoFromSelectedNode(this);
+        //}
 
         /// <summary>
         /// Saves the current uw1 save file.
@@ -793,7 +793,10 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void BtnApplyTileChanges_Click(object sender, EventArgs e)
         {
-            TileMapUI.ApplyTileChanges(curTileX, curTileY, this);
+            if (!isLoading)
+            {
+                TileMapUI.ApplyTileChanges(curTileX, curTileY, this);
+            }            
         }
 
         /// <summary>
@@ -1159,6 +1162,16 @@ namespace UnderworldEditor
         {
             PicMap.Height = 64 * (int)numMapZoom.Value;
             PicMap.Width = 64 * (int)numMapZoom.Value;
+        }
+
+
+
+        private void PicMap_MouseClick(object sender, MouseEventArgs e)
+        {
+            int x = (int)((e.Location.X) / numMapZoom.Value);
+            int y = (int)((e.Location.Y) / numMapZoom.Value);
+           // MessageBox.Show(x + "," +(64- y));
+            TileMapUI.LoadInfoForTileXY(this, x, 63-y);
         }
     }
 }

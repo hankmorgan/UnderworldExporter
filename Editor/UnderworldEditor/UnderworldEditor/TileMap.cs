@@ -470,9 +470,16 @@ namespace UnderworldEditor
             return floorTexture;
         }
 
-        void Cleanup()
+        public void Cleanup()
         {
             for (int x = 0; x <= 63; x++)
+            {
+                for (int y = 0; y <= 63; y++)
+                {
+                    Tiles[x, y].Render = true;
+                }
+            }
+        for (int x = 0; x <= 63; x++)
             {
                 for (int y = 0; y <= 63; y++)
                 {

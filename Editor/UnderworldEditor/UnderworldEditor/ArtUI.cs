@@ -131,6 +131,7 @@ namespace UnderworldEditor
 
             Bitmap output = new Bitmap(64* TextureLoader.LOWRESSIZE, 64* TextureLoader.LOWRESSIZE);
             System.Drawing.Graphics display = Graphics.FromImage(output);
+            display.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             for (int x = 0; x <= 63 ; x++)
             {
                 for (int y = 0; y <=63; y++)
@@ -138,7 +139,33 @@ namespace UnderworldEditor
                     if ((tm.Tiles[x, y].Render) && (tm.Tiles[x, y].tileType !=0))
                     {
                         int floortex = TileMap.FloorTextureMapped(tm, TileMap.fTOP, tm.Tiles[x, y], main.curgame);
-                        display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63-y) * TextureLoader.LOWRESSIZE);
+                        switch (tm.Tiles[x, y].tileType)
+                        {
+                            case TileMap.TILE_SOLID:
+                                break;
+                            case TileMap.TILE_DIAG_NE:
+                                display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                display.DrawImage(tex.MaskNE, x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                break;
+                            case TileMap.TILE_DIAG_NW:
+                                display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                display.DrawImage(tex.MaskNW, x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                break;
+                            case TileMap.TILE_DIAG_SW:
+                                display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                display.DrawImage(tex.MaskSW, x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                break;
+                            case TileMap.TILE_DIAG_SE:
+                                display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                display.DrawImage(tex.MaskSE, x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                break;
+
+                            default:
+                                display.DrawImage(tex.LowResAt(floortex), x * TextureLoader.LOWRESSIZE, (63 - y) * TextureLoader.LOWRESSIZE);
+                                break;
+                        }
+                        
+                       
                     }
                 }
             }
