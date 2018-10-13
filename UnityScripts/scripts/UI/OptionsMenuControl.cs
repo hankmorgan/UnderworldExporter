@@ -409,6 +409,7 @@ public class OptionsMenuControl : GuiBase_Draggable
         InteractionMenu.gameObject.SetActive(true);
         UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
         InteractionModeControl.UpdateNow = true;
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.InteractionControlUW2BG.gameObject,false);
         this.gameObject.SetActive(false);
         Time.timeScale = 1.0f;
     }

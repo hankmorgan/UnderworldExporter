@@ -136,6 +136,32 @@
             this.TreeUWBlocks = new System.Windows.Forms.TreeView();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.PicMap = new PictureBoxWithInterpolationMode();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label49 = new System.Windows.Forms.Label();
+            this.numMapZoom = new System.Windows.Forms.NumericUpDown();
+            this.BtnApplyTileChanges = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.NumDoorBit = new System.Windows.Forms.NumericUpDown();
+            this.NumNoMagic = new System.Windows.Forms.NumericUpDown();
+            this.NumTileFlags = new System.Windows.Forms.NumericUpDown();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.LblMappedFloorTexture = new System.Windows.Forms.Label();
+            this.NumIndexObjectList = new System.Windows.Forms.NumericUpDown();
+            this.NumWallTexture = new System.Windows.Forms.NumericUpDown();
+            this.NumFloorTexture = new System.Windows.Forms.NumericUpDown();
+            this.NumFloorHeight = new System.Windows.Forms.NumericUpDown();
+            this.CmbTileType = new System.Windows.Forms.ComboBox();
+            this.lblCurrentTile = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -179,7 +205,6 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.TxtDebug = new System.Windows.Forms.TextBox();
             this.PicSelectedColour = new System.Windows.Forms.Panel();
             this.BtnRepack4Bit = new System.Windows.Forms.Button();
             this.LblImageDetails = new System.Windows.Forms.Label();
@@ -189,7 +214,10 @@
             this.BtnImgSave = new System.Windows.Forms.Button();
             this.BtnImport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.PicColour = new PictureBoxWithInterpolationMode();
+            this.PicPalette = new PictureBoxWithInterpolationMode();
             this.TreeArt = new System.Windows.Forms.TreeView();
+            this.ImgOut = new PictureBoxWithInterpolationMode();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -211,35 +239,6 @@
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.BtnApplyTileChanges = new System.Windows.Forms.Button();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.NumDoorBit = new System.Windows.Forms.NumericUpDown();
-            this.NumNoMagic = new System.Windows.Forms.NumericUpDown();
-            this.NumTileFlags = new System.Windows.Forms.NumericUpDown();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.LblMappedFloorTexture = new System.Windows.Forms.Label();
-            this.NumIndexObjectList = new System.Windows.Forms.NumericUpDown();
-            this.NumWallTexture = new System.Windows.Forms.NumericUpDown();
-            this.NumFloorTexture = new System.Windows.Forms.NumericUpDown();
-            this.NumFloorHeight = new System.Windows.Forms.NumericUpDown();
-            this.CmbTileType = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.PicMap = new PictureBoxWithInterpolationMode();
-            this.PicColour = new PictureBoxWithInterpolationMode();
-            this.PicPalette = new PictureBoxWithInterpolationMode();
-            this.ImgOut = new PictureBoxWithInterpolationMode();
-            this.lblCurrentTile = new System.Windows.Forms.Label();
-            this.numMapZoom = new System.Windows.Forms.NumericUpDown();
-            this.label49 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -280,6 +279,19 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMapZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFloorHeight)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -302,23 +314,10 @@
             this.tabPage10.SuspendLayout();
             this.PicSelectedColour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).BeginInit();
-            this.menuStrip1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFloorHeight)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicColour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMapZoom)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1351,6 +1350,316 @@
             this.tabPage1.Text = "Tiles";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.37844F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.62157F));
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(946, 567);
+            this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.PicMap);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(262, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(681, 561);
+            this.panel1.TabIndex = 24;
+            // 
+            // PicMap
+            // 
+            this.PicMap.BackColor = System.Drawing.Color.Transparent;
+            this.PicMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicMap.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicMap.Location = new System.Drawing.Point(3, 3);
+            this.PicMap.Name = "PicMap";
+            this.PicMap.Size = new System.Drawing.Size(640, 640);
+            this.PicMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicMap.TabIndex = 4;
+            this.PicMap.TabStop = false;
+            this.PicMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicMap_MouseClick);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 561F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(253, 561);
+            this.tableLayoutPanel3.TabIndex = 11;
+            // 
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.label49);
+            this.panel2.Controls.Add(this.numMapZoom);
+            this.panel2.Controls.Add(this.BtnApplyTileChanges);
+            this.panel2.Controls.Add(this.label47);
+            this.panel2.Controls.Add(this.label46);
+            this.panel2.Controls.Add(this.label45);
+            this.panel2.Controls.Add(this.NumDoorBit);
+            this.panel2.Controls.Add(this.NumNoMagic);
+            this.panel2.Controls.Add(this.NumTileFlags);
+            this.panel2.Controls.Add(this.label44);
+            this.panel2.Controls.Add(this.label43);
+            this.panel2.Controls.Add(this.label42);
+            this.panel2.Controls.Add(this.label41);
+            this.panel2.Controls.Add(this.label40);
+            this.panel2.Controls.Add(this.LblMappedFloorTexture);
+            this.panel2.Controls.Add(this.NumIndexObjectList);
+            this.panel2.Controls.Add(this.NumWallTexture);
+            this.panel2.Controls.Add(this.NumFloorTexture);
+            this.panel2.Controls.Add(this.NumFloorHeight);
+            this.panel2.Controls.Add(this.CmbTileType);
+            this.panel2.Controls.Add(this.lblCurrentTile);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(245, 522);
+            this.panel2.TabIndex = 27;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(15, 408);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(44, 17);
+            this.label49.TabIndex = 42;
+            this.label49.Text = "Zoom";
+            // 
+            // numMapZoom
+            // 
+            this.numMapZoom.Location = new System.Drawing.Point(114, 404);
+            this.numMapZoom.Maximum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.numMapZoom.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMapZoom.Name = "numMapZoom";
+            this.numMapZoom.Size = new System.Drawing.Size(120, 22);
+            this.numMapZoom.TabIndex = 41;
+            this.numMapZoom.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.numMapZoom.ValueChanged += new System.EventHandler(this.numMapZoom_ValueChanged);
+            // 
+            // BtnApplyTileChanges
+            // 
+            this.BtnApplyTileChanges.Location = new System.Drawing.Point(115, 359);
+            this.BtnApplyTileChanges.Name = "BtnApplyTileChanges";
+            this.BtnApplyTileChanges.Size = new System.Drawing.Size(120, 24);
+            this.BtnApplyTileChanges.TabIndex = 40;
+            this.BtnApplyTileChanges.Text = "Apply Changes";
+            this.BtnApplyTileChanges.UseVisualStyleBackColor = true;
+            this.BtnApplyTileChanges.Click += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(12, 326);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(75, 17);
+            this.label47.TabIndex = 39;
+            this.label47.Text = "No Magic?";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(12, 282);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(63, 17);
+            this.label46.TabIndex = 38;
+            this.label46.Text = "DoorBit?";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(9, 240);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(77, 17);
+            this.label45.TabIndex = 37;
+            this.label45.Text = "Tile Flags?";
+            // 
+            // NumDoorBit
+            // 
+            this.NumDoorBit.Location = new System.Drawing.Point(115, 322);
+            this.NumDoorBit.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumDoorBit.Name = "NumDoorBit";
+            this.NumDoorBit.Size = new System.Drawing.Size(120, 22);
+            this.NumDoorBit.TabIndex = 36;
+            this.NumDoorBit.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // NumNoMagic
+            // 
+            this.NumNoMagic.Location = new System.Drawing.Point(115, 278);
+            this.NumNoMagic.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumNoMagic.Name = "NumNoMagic";
+            this.NumNoMagic.Size = new System.Drawing.Size(120, 22);
+            this.NumNoMagic.TabIndex = 35;
+            this.NumNoMagic.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // NumTileFlags
+            // 
+            this.NumTileFlags.Location = new System.Drawing.Point(115, 236);
+            this.NumTileFlags.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.NumTileFlags.Name = "NumTileFlags";
+            this.NumTileFlags.Size = new System.Drawing.Size(120, 22);
+            this.NumTileFlags.TabIndex = 34;
+            this.NumTileFlags.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(9, 194);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(75, 17);
+            this.label44.TabIndex = 33;
+            this.label44.Text = "Object List";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(9, 151);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(87, 17);
+            this.label43.TabIndex = 32;
+            this.label43.Text = "Wall Texture";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(9, 109);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(92, 17);
+            this.label42.TabIndex = 31;
+            this.label42.Text = "Floor Texture";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(9, 70);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(49, 17);
+            this.label41.TabIndex = 30;
+            this.label41.Text = "Height";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(6, 39);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(40, 17);
+            this.label40.TabIndex = 29;
+            this.label40.Text = "Type";
+            // 
+            // LblMappedFloorTexture
+            // 
+            this.LblMappedFloorTexture.AutoSize = true;
+            this.LblMappedFloorTexture.Location = new System.Drawing.Point(6, 132);
+            this.LblMappedFloorTexture.Name = "LblMappedFloorTexture";
+            this.LblMappedFloorTexture.Size = new System.Drawing.Size(139, 17);
+            this.LblMappedFloorTexture.TabIndex = 28;
+            this.LblMappedFloorTexture.Text = "MappedFloorTexture";
+            // 
+            // NumIndexObjectList
+            // 
+            this.NumIndexObjectList.Location = new System.Drawing.Point(115, 192);
+            this.NumIndexObjectList.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.NumIndexObjectList.Name = "NumIndexObjectList";
+            this.NumIndexObjectList.Size = new System.Drawing.Size(120, 22);
+            this.NumIndexObjectList.TabIndex = 27;
+            this.NumIndexObjectList.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // NumWallTexture
+            // 
+            this.NumWallTexture.Location = new System.Drawing.Point(115, 151);
+            this.NumWallTexture.Name = "NumWallTexture";
+            this.NumWallTexture.Size = new System.Drawing.Size(120, 22);
+            this.NumWallTexture.TabIndex = 26;
+            this.NumWallTexture.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // NumFloorTexture
+            // 
+            this.NumFloorTexture.Location = new System.Drawing.Point(115, 107);
+            this.NumFloorTexture.Name = "NumFloorTexture";
+            this.NumFloorTexture.Size = new System.Drawing.Size(120, 22);
+            this.NumFloorTexture.TabIndex = 25;
+            this.NumFloorTexture.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // NumFloorHeight
+            // 
+            this.NumFloorHeight.Location = new System.Drawing.Point(115, 70);
+            this.NumFloorHeight.Name = "NumFloorHeight";
+            this.NumFloorHeight.Size = new System.Drawing.Size(120, 22);
+            this.NumFloorHeight.TabIndex = 24;
+            this.NumFloorHeight.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // CmbTileType
+            // 
+            this.CmbTileType.FormattingEnabled = true;
+            this.CmbTileType.Items.AddRange(new object[] {
+            "TILE_SOLID",
+            "TILE_OPEN",
+            "TILE_DIAG_SE",
+            "TILE_DIAG_SW",
+            "TILE_DIAG_NE",
+            "TILE_DIAG_NW",
+            "TILE_SLOPE_N",
+            "TILE_SLOPE_S",
+            "TILE_SLOPE_E",
+            "TILE_SLOPE_W"});
+            this.CmbTileType.Location = new System.Drawing.Point(115, 39);
+            this.CmbTileType.Name = "CmbTileType";
+            this.CmbTileType.Size = new System.Drawing.Size(119, 24);
+            this.CmbTileType.TabIndex = 23;
+            this.CmbTileType.SelectedIndexChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
+            // 
+            // lblCurrentTile
+            // 
+            this.lblCurrentTile.AutoSize = true;
+            this.lblCurrentTile.Location = new System.Drawing.Point(3, 8);
+            this.lblCurrentTile.Name = "lblCurrentTile";
+            this.lblCurrentTile.Size = new System.Drawing.Size(82, 17);
+            this.lblCurrentTile.TabIndex = 22;
+            this.lblCurrentTile.Text = "Current Tile";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tabControl4);
@@ -1801,7 +2110,6 @@
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.TxtDebug);
             this.tabPage10.Controls.Add(this.PicSelectedColour);
             this.tabPage10.Controls.Add(this.TreeArt);
             this.tabPage10.Controls.Add(this.ImgOut);
@@ -1812,15 +2120,6 @@
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Images";
             this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // TxtDebug
-            // 
-            this.TxtDebug.Location = new System.Drawing.Point(694, 6);
-            this.TxtDebug.Multiline = true;
-            this.TxtDebug.Name = "TxtDebug";
-            this.TxtDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtDebug.Size = new System.Drawing.Size(353, 276);
-            this.TxtDebug.TabIndex = 59;
             // 
             // PicSelectedColour
             // 
@@ -1940,6 +2239,27 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // PicColour
+            // 
+            this.PicColour.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicColour.Location = new System.Drawing.Point(522, 4);
+            this.PicColour.Name = "PicColour";
+            this.PicColour.Size = new System.Drawing.Size(64, 64);
+            this.PicColour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicColour.TabIndex = 59;
+            this.PicColour.TabStop = false;
+            // 
+            // PicPalette
+            // 
+            this.PicPalette.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicPalette.Location = new System.Drawing.Point(3, 3);
+            this.PicPalette.Name = "PicPalette";
+            this.PicPalette.Size = new System.Drawing.Size(512, 64);
+            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicPalette.TabIndex = 58;
+            this.PicPalette.TabStop = false;
+            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
+            // 
             // TreeArt
             // 
             this.TreeArt.Location = new System.Drawing.Point(3, 3);
@@ -1953,6 +2273,17 @@
             this.TreeArt.Size = new System.Drawing.Size(161, 512);
             this.TreeArt.TabIndex = 51;
             this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
+            // 
+            // ImgOut
+            // 
+            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.ImgOut.Location = new System.Drawing.Point(170, 3);
+            this.ImgOut.Name = "ImgOut";
+            this.ImgOut.Size = new System.Drawing.Size(512, 512);
+            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgOut.TabIndex = 55;
+            this.ImgOut.TabStop = false;
+            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
             // 
             // menuStrip1
             // 
@@ -2117,348 +2448,6 @@
             this.saveFileDialog1.DefaultExt = "png";
             this.saveFileDialog1.Filter = "(*.png)|*.png";
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.37844F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.62157F));
-            this.tableLayoutPanel2.Controls.Add(this.panel1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(946, 567);
-            this.tableLayoutPanel2.TabIndex = 5;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(252, 561);
-            this.tableLayoutPanel3.TabIndex = 11;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.label49);
-            this.panel2.Controls.Add(this.numMapZoom);
-            this.panel2.Controls.Add(this.BtnApplyTileChanges);
-            this.panel2.Controls.Add(this.label47);
-            this.panel2.Controls.Add(this.label46);
-            this.panel2.Controls.Add(this.label45);
-            this.panel2.Controls.Add(this.NumDoorBit);
-            this.panel2.Controls.Add(this.NumNoMagic);
-            this.panel2.Controls.Add(this.NumTileFlags);
-            this.panel2.Controls.Add(this.label44);
-            this.panel2.Controls.Add(this.label43);
-            this.panel2.Controls.Add(this.label42);
-            this.panel2.Controls.Add(this.label41);
-            this.panel2.Controls.Add(this.label40);
-            this.panel2.Controls.Add(this.LblMappedFloorTexture);
-            this.panel2.Controls.Add(this.NumIndexObjectList);
-            this.panel2.Controls.Add(this.NumWallTexture);
-            this.panel2.Controls.Add(this.NumFloorTexture);
-            this.panel2.Controls.Add(this.NumFloorHeight);
-            this.panel2.Controls.Add(this.CmbTileType);
-            this.panel2.Controls.Add(this.lblCurrentTile);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(245, 522);
-            this.panel2.TabIndex = 27;
-            // 
-            // BtnApplyTileChanges
-            // 
-            this.BtnApplyTileChanges.Location = new System.Drawing.Point(115, 359);
-            this.BtnApplyTileChanges.Name = "BtnApplyTileChanges";
-            this.BtnApplyTileChanges.Size = new System.Drawing.Size(120, 24);
-            this.BtnApplyTileChanges.TabIndex = 40;
-            this.BtnApplyTileChanges.Text = "Apply Changes";
-            this.BtnApplyTileChanges.UseVisualStyleBackColor = true;
-            this.BtnApplyTileChanges.Click += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(12, 326);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(75, 17);
-            this.label47.TabIndex = 39;
-            this.label47.Text = "No Magic?";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(12, 282);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(63, 17);
-            this.label46.TabIndex = 38;
-            this.label46.Text = "DoorBit?";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(9, 240);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(77, 17);
-            this.label45.TabIndex = 37;
-            this.label45.Text = "Tile Flags?";
-            // 
-            // NumDoorBit
-            // 
-            this.NumDoorBit.Location = new System.Drawing.Point(115, 322);
-            this.NumDoorBit.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumDoorBit.Name = "NumDoorBit";
-            this.NumDoorBit.Size = new System.Drawing.Size(120, 22);
-            this.NumDoorBit.TabIndex = 36;
-            this.NumDoorBit.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // NumNoMagic
-            // 
-            this.NumNoMagic.Location = new System.Drawing.Point(115, 278);
-            this.NumNoMagic.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumNoMagic.Name = "NumNoMagic";
-            this.NumNoMagic.Size = new System.Drawing.Size(120, 22);
-            this.NumNoMagic.TabIndex = 35;
-            this.NumNoMagic.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // NumTileFlags
-            // 
-            this.NumTileFlags.Location = new System.Drawing.Point(115, 236);
-            this.NumTileFlags.Maximum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.NumTileFlags.Name = "NumTileFlags";
-            this.NumTileFlags.Size = new System.Drawing.Size(120, 22);
-            this.NumTileFlags.TabIndex = 34;
-            this.NumTileFlags.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(9, 194);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(75, 17);
-            this.label44.TabIndex = 33;
-            this.label44.Text = "Object List";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(9, 151);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(87, 17);
-            this.label43.TabIndex = 32;
-            this.label43.Text = "Wall Texture";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(9, 109);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(92, 17);
-            this.label42.TabIndex = 31;
-            this.label42.Text = "Floor Texture";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(9, 70);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(49, 17);
-            this.label41.TabIndex = 30;
-            this.label41.Text = "Height";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(6, 39);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(40, 17);
-            this.label40.TabIndex = 29;
-            this.label40.Text = "Type";
-            // 
-            // LblMappedFloorTexture
-            // 
-            this.LblMappedFloorTexture.AutoSize = true;
-            this.LblMappedFloorTexture.Location = new System.Drawing.Point(6, 132);
-            this.LblMappedFloorTexture.Name = "LblMappedFloorTexture";
-            this.LblMappedFloorTexture.Size = new System.Drawing.Size(139, 17);
-            this.LblMappedFloorTexture.TabIndex = 28;
-            this.LblMappedFloorTexture.Text = "MappedFloorTexture";
-            // 
-            // NumIndexObjectList
-            // 
-            this.NumIndexObjectList.Location = new System.Drawing.Point(115, 192);
-            this.NumIndexObjectList.Maximum = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
-            this.NumIndexObjectList.Name = "NumIndexObjectList";
-            this.NumIndexObjectList.Size = new System.Drawing.Size(120, 22);
-            this.NumIndexObjectList.TabIndex = 27;
-            this.NumIndexObjectList.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // NumWallTexture
-            // 
-            this.NumWallTexture.Location = new System.Drawing.Point(115, 151);
-            this.NumWallTexture.Name = "NumWallTexture";
-            this.NumWallTexture.Size = new System.Drawing.Size(120, 22);
-            this.NumWallTexture.TabIndex = 26;
-            this.NumWallTexture.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // NumFloorTexture
-            // 
-            this.NumFloorTexture.Location = new System.Drawing.Point(115, 107);
-            this.NumFloorTexture.Name = "NumFloorTexture";
-            this.NumFloorTexture.Size = new System.Drawing.Size(120, 22);
-            this.NumFloorTexture.TabIndex = 25;
-            this.NumFloorTexture.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // NumFloorHeight
-            // 
-            this.NumFloorHeight.Location = new System.Drawing.Point(115, 70);
-            this.NumFloorHeight.Name = "NumFloorHeight";
-            this.NumFloorHeight.Size = new System.Drawing.Size(120, 22);
-            this.NumFloorHeight.TabIndex = 24;
-            this.NumFloorHeight.ValueChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // CmbTileType
-            // 
-            this.CmbTileType.FormattingEnabled = true;
-            this.CmbTileType.Items.AddRange(new object[] {
-            "TILE_SOLID",
-            "TILE_OPEN",
-            "TILE_DIAG_SE",
-            "TILE_DIAG_SW",
-            "TILE_DIAG_NE",
-            "TILE_DIAG_NW",
-            "TILE_SLOPE_N",
-            "TILE_SLOPE_S",
-            "TILE_SLOPE_E",
-            "TILE_SLOPE_W"});
-            this.CmbTileType.Location = new System.Drawing.Point(115, 39);
-            this.CmbTileType.Name = "CmbTileType";
-            this.CmbTileType.Size = new System.Drawing.Size(119, 24);
-            this.CmbTileType.TabIndex = 23;
-            this.CmbTileType.SelectedIndexChanged += new System.EventHandler(this.BtnApplyTileChanges_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.PicMap);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(261, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(682, 561);
-            this.panel1.TabIndex = 24;
-            // 
-            // PicMap
-            // 
-            this.PicMap.BackColor = System.Drawing.Color.Transparent;
-            this.PicMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicMap.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicMap.Location = new System.Drawing.Point(3, 3);
-            this.PicMap.Name = "PicMap";
-            this.PicMap.Size = new System.Drawing.Size(640, 640);
-            this.PicMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicMap.TabIndex = 4;
-            this.PicMap.TabStop = false;
-            this.PicMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicMap_MouseClick);
-            // 
-            // PicColour
-            // 
-            this.PicColour.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicColour.Location = new System.Drawing.Point(522, 4);
-            this.PicColour.Name = "PicColour";
-            this.PicColour.Size = new System.Drawing.Size(64, 64);
-            this.PicColour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicColour.TabIndex = 59;
-            this.PicColour.TabStop = false;
-            // 
-            // PicPalette
-            // 
-            this.PicPalette.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicPalette.Location = new System.Drawing.Point(3, 3);
-            this.PicPalette.Name = "PicPalette";
-            this.PicPalette.Size = new System.Drawing.Size(512, 64);
-            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicPalette.TabIndex = 58;
-            this.PicPalette.TabStop = false;
-            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
-            // 
-            // ImgOut
-            // 
-            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.ImgOut.Location = new System.Drawing.Point(170, 3);
-            this.ImgOut.Name = "ImgOut";
-            this.ImgOut.Size = new System.Drawing.Size(512, 512);
-            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgOut.TabIndex = 55;
-            this.ImgOut.TabStop = false;
-            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
-            // 
-            // lblCurrentTile
-            // 
-            this.lblCurrentTile.AutoSize = true;
-            this.lblCurrentTile.Location = new System.Drawing.Point(3, 8);
-            this.lblCurrentTile.Name = "lblCurrentTile";
-            this.lblCurrentTile.Size = new System.Drawing.Size(82, 17);
-            this.lblCurrentTile.TabIndex = 22;
-            this.lblCurrentTile.Text = "Current Tile";
-            // 
-            // numMapZoom
-            // 
-            this.numMapZoom.Location = new System.Drawing.Point(114, 404);
-            this.numMapZoom.Maximum = new decimal(new int[] {
-            32,
-            0,
-            0,
-            0});
-            this.numMapZoom.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numMapZoom.Name = "numMapZoom";
-            this.numMapZoom.Size = new System.Drawing.Size(120, 22);
-            this.numMapZoom.TabIndex = 41;
-            this.numMapZoom.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numMapZoom.ValueChanged += new System.EventHandler(this.numMapZoom_ValueChanged);
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(15, 408);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(44, 17);
-            this.label49.TabIndex = 42;
-            this.label49.Text = "Zoom";
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2515,6 +2504,20 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMapZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumFloorHeight)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -2536,29 +2539,14 @@
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
             this.tabPage10.ResumeLayout(false);
-            this.tabPage10.PerformLayout();
             this.PicSelectedColour.ResumeLayout(false);
             this.PicSelectedColour.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumDoorBit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumNoMagic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumTileFlags)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumIndexObjectList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumWallTexture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFloorTexture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumFloorHeight)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicColour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numMapZoom)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2729,7 +2717,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label LblImageDetails;
         private System.Windows.Forms.Button BtnRepack4Bit;
-        public System.Windows.Forms.TextBox TxtDebug;
         private System.Windows.Forms.ToolStripMenuItem saveLevArkChangesToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panel1;

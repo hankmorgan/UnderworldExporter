@@ -190,6 +190,7 @@ namespace UnderworldEditor
             if (imageCacheLowRes[index] == null)
             {
                 BitmapUW tmp = LoadImageAt(index);
+                tmp.image.RotateFlip(RotateFlipType.RotateNoneFlipY);
                 imageCacheLowRes[index]= ArtLoader.Resize(tmp.image, LOWRESSIZE, LOWRESSIZE);
             }
             return imageCacheLowRes[index];

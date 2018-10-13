@@ -2277,6 +2277,13 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     teleport_player(stack.at(args[0]), stack.at(args[1]), stack.at(args[2]));
                     break;
                 }
+            case "pause":
+                {
+                    int[] args = new int[1];
+                    args[0] = stack.at(stack.stackptr - 2);//ptr to value
+                    yield return StartCoroutine(pause(stack.at(args[0])));
+                    break;
+                }
             default:
                 {
                     Debug.Log("Conversation : " + npc.npc_whoami + "unimplemented function " + func.functionName + " instr at " + stack.instrp);
@@ -2285,6 +2292,17 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         }
         yield return 0;
     }
+
+    /// <summary>
+    /// Waits for a number of seconds
+    /// </summary>
+    /// <param name="waittime"></param>
+    /// <returns></returns>
+    public IEnumerator pause(int waittime)
+    {
+        yield return new WaitForSecondsRealtime((float)waittime);
+    }
+
 
     public IEnumerator babl_menu(int Start)
     {

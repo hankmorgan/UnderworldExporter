@@ -84,7 +84,7 @@ public class TileInfo : Loader
     public short roomRegion;    //Index to the contigous room that the tile is part of.
     public short tileX;
     public short tileY;
-    public short Flags;//UW Tile flags
+    public short flags;//UW Tile flags
     public short noMagic;//Only seems to matter on Level 9 and possibly where there is water? UPDATE>Possible bug in reading data. Retest this.
 
     //Shock Specific Stuff
@@ -176,7 +176,7 @@ public class TileInfo : Loader
         floorTexture = newfloorTexture;
         wallTexture = newwallTexture;
         shockCeilingTexture = newceilTexture;
-        Flags = newFlags;
+        flags = newFlags;
         noMagic = newnoMagic;
         doorBit = newdoorBit;
         indexObjectList = newindexObjectList;

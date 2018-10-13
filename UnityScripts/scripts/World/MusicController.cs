@@ -66,6 +66,8 @@ public class MusicController : UWEBase
             trap = 31
     };*/
 
+    int currenttrack=-1;
+
 
     public const int SOUND_EFFECT_FOOT_1 = 1;
     public const int SOUND_EFFECT_FOOT_2 = 2;
@@ -414,11 +416,15 @@ public class MusicController : UWEBase
         if (PlayMusic)
         {
             int rnd = Random.Range(0, tracklist.GetUpperBound(0) + 1);
-            Aud.clip = MainTrackList[(int)tracklist[rnd]];
-            if (Stopped == false)
+            if ((int)tracklist[rnd] != currenttrack)
             {
-                Aud.Play();
+                Aud.clip = MainTrackList[(int)tracklist[rnd]];
+                if (Stopped == false)
+                {
+                    Aud.Play();
+                }
             }
+            currenttrack = (int)tracklist[rnd];
         }
         else
         {
