@@ -439,6 +439,7 @@ public class WindowDetectUW : WindowDetect
     {//Controls switching between Mouselook and interaction and sets the cursor icon
         if (GameWorldController.instance.AtMainMenu)
         {
+            DrawCursor();
             return;
         }
         if (ConversationVM.InConversation == true)
@@ -481,7 +482,6 @@ public class WindowDetectUW : WindowDetect
                         else
                         {
                             SwitchFromMouseLook();
-
                         }
                     }
                 }
@@ -491,6 +491,7 @@ public class WindowDetectUW : WindowDetect
             if (UWCharacter.Instance.MouseLookEnabled == false)
             {
                 DrawCursor();
+               // UWHUD.instance.MessageScroll.Add(Time.time.ToString());
             }
             else
             {
@@ -540,9 +541,7 @@ public class WindowDetectUW : WindowDetect
                             OnClick(-2);
                             UWWindowWait(1.0f);
                         }
-
                     }
-
                 }
                 else
                 {//Combat mouse clicks
@@ -576,15 +575,17 @@ public class WindowDetectUW : WindowDetect
 
     public void DrawCursor()
     {
-        if ((WindowDetectUW.InMap == true) && (MapInteraction.InteractionMode == 2))
-        {
-            CursorPosition.center = MapInteraction.CursorPos + MapInteraction.caretAdjustment;
-        }
-        else
-        {
-            CursorPosition.center = Event.current.mousePosition;
-        }
-        GUI.DrawTexture(CursorPosition, UWHUD.instance.CursorIcon);
+        //if ((WindowDetectUW.InMap == true) && (MapInteraction.InteractionMode == 2))
+        //{
+        //    CursorPosition.center = MapInteraction.CursorPos + MapInteraction.caretAdjustment;
+        //}
+        //else
+        //{
+        //    CursorPosition.center = Event.current.mousePosition;
+        //}
+        //GUI.DrawTexture(CursorPosition, UWHUD.instance.CursorIcon);
+        //Cursor.SetCursor(UWHUD.instance.CursorIcon, new Vector2(0.5f,0.5f), CursorMode.Auto);
+        Cursor.SetCursor(UWHUD.instance.CursorIcon, new Vector2(0.5f, 0.5f), CursorMode.Auto);        
     }
 
     public static void SwitchToMouseLook()
@@ -593,7 +594,7 @@ public class WindowDetectUW : WindowDetect
         UWCharacter.Instance.XAxis.enabled = true;
         UWCharacter.Instance.MouseLookEnabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;        
         UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIcon;
     }
 
@@ -603,6 +604,10 @@ public class WindowDetectUW : WindowDetect
         UWCharacter.Instance.YAxis.enabled = false;
         UWCharacter.Instance.MouseLookEnabled = false;
         Cursor.lockState = CursorLockMode.None;
+        if (!GameWorldController.instance.AtMainMenu)
+        {
+            Cursor.visible = true;            
+        }
         UWHUD.instance.MouseLookCursor.texture = UWHUD.instance.CursorIconBlank;
         //UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
     }

@@ -287,7 +287,7 @@ public class ObjectInteraction : UWEBase
     public bool ignoreSprite;//For button handlers that do their own sprite work.
 
     //Display controls
-    private SpriteRenderer sr = null;
+    public SpriteRenderer ObjectSprite = null;
     //public bool isAnimated;
     public bool animationStarted;
 
@@ -336,11 +336,11 @@ public class ObjectInteraction : UWEBase
     {
         //isAnimated=false;
         animationStarted = false;
-        sr = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+       // sr = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         startPos = this.transform.position;
-        if (sr != null)
+        if (ObjectSprite != null)
         {
-            sr.gameObject.SetActive(invis == 0);
+            ObjectSprite.gameObject.SetActive(invis == 0);
         }
 
     }
@@ -532,20 +532,20 @@ public class ObjectInteraction : UWEBase
 
     public void UpdateAnimation()
     {
-        if (sr == null)
+        if (ObjectSprite == null)
         {
-            sr = this.GetComponentInChildren<SpriteRenderer>();
+            ObjectSprite = this.GetComponentInChildren<SpriteRenderer>();
         }
-        if (sr != null)
+        if (ObjectSprite != null)
         {
             //sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
             switch (_RES)
             {
                 case GAME_SHOCK:
-                    sr.sprite = GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex, GameWorldController.instance.ShockObjProp.properties[item_id].Offset);
+                    ObjectSprite.sprite = GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex, GameWorldController.instance.ShockObjProp.properties[item_id].Offset);
                     break;
                 default:
-                    sr.sprite = GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex);
+                    ObjectSprite.sprite = GameWorldController.instance.ObjectArt.RequestSprite(WorldDisplayIndex);
                     break;
             }
 
@@ -577,14 +577,14 @@ public class ObjectInteraction : UWEBase
 
     public Sprite GetWorldDisplay()
     {
-        return sr.sprite;
+        return ObjectSprite.sprite;
     }
 
     public void SetWorldDisplay(Sprite NewSprite)
     {
-        if (sr != null)
+        if (ObjectSprite != null)
         {
-            sr.sprite = NewSprite;
+            ObjectSprite.sprite = NewSprite;
         }
     }
 
@@ -1101,24 +1101,24 @@ public class ObjectInteraction : UWEBase
     /// <param name="myObj">My object.</param>
     /// <param name="AssetPath">Asset path.</param>
     /// <param name="BillBoard">If set to <c>true</c> bill board.</param>
-    public static GameObject CreateObjectGraphics(GameObject myObj, string AssetPath, bool BillBoard)
+    public static SpriteRenderer CreateObjectGraphics(GameObject myObj, string AssetPath, bool BillBoard)
     {
         //Create a sprite.
         GameObject SpriteController = new GameObject("_sprite");
         SpriteController.transform.position = myObj.transform.position;
-        SpriteRenderer mysprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
+        SpriteRenderer newsprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
         Sprite image = Resources.Load<Sprite>(AssetPath);//Loads the sprite.
-        mysprite.sprite = image;//Assigns the sprite to the object.
+        newsprite.sprite = image;//Assigns the sprite to the object.
         SpriteController.transform.parent = myObj.transform;
         SpriteController.transform.Rotate(0f, 0f, 0f);
         SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
-        mysprite.material = Resources.Load<Material>("Materials/SpriteShader");
+        newsprite.material = Resources.Load<Material>("Materials/SpriteShader");
         //Create a billboard script for display
         if (BillBoard)
         {
             SpriteController.AddComponent<Billboard>();
         }
-        return SpriteController;
+        return newsprite;
     }
 
 
@@ -1402,24 +1402,100 @@ public class ObjectInteraction : UWEBase
 
         mysprite.material = Resources.Load<Material>("Materials/SpriteShader");
 
-        CharacterController cap = myObj.AddComponent<CharacterController>();
-        cap = myObj.GetComponent<CharacterController>();
-        switch (objInt.item_id)
-        {//TODO:These are UW1 settings
-            case 97: //a_ghost
-            case 99: //a_ghoul
-            case 100: //a_ghost
-            case 101: //a_ghost
-            case 105: //a_dark_ghoul
-            case 110: //a_ghoul	
-            case 113: //a_dire_ghost
-                npc.isUndead = true;
-                break;
-        }
+        //CharacterController cap
+        //cap = myObj.GetComponent<CharacterController>();
+        npc.CharController = myObj.AddComponent<CharacterController>();
+        SetUndeadNPCS(objInt, npc);
 
+        SetNPCSizes(objInt, npc, NpcLauncher);
+
+        npc.CharController.stepOffset = 0.1f;//Stop npcs from climbing over each other
+
+        SetMagicAttackNPCs(objInt, npc);
+
+        return npc;
+    }
+
+    private static void SetNPCSizes(ObjectInteraction objInt, NPC npc, GameObject NpcLauncher)
+    {
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch (objInt.item_id)
+                    {
+                        //big
+                        case 91: //a_human
+                        case 92: //a_great_troll
+                        case 93: //a_spectre
+                        case 94: //a_hordling
+                        case 95: //an_earth_golem
+                        case 96: //a_fire_elemental
+                        case 97: //an_ice_golem
+                        case 98: //a_dire_ghost
+                        case 99: //a_reaper
+                        case 100: //a_despoiler
+                        case 101: //a_metal_golem
+                        case 102: //a_haunt
+                        case 103: //a_dire_reaper
+                        case 104: //a_destroyer
+                        case 105: //a_liche
+                        case 106: //a_liche
+                        case 107: //a_liche
+                        case 108: //a_human
+                        case 110: //a_fighter
+                        case 112: //a_human
+                        case 113: //a_human
+                        case 114: //a_human
+                        case 115: //a_human
+                        case 116: //a_human
+                        case 117: //a_human
+                        case 118: //a_human
+                        case 119: //a_human
+                        case 120: //a_human
+                        case 121: //a_human
+                        case 122: //a_human
+                        case 123: //a_human
+                        case 124: //etherealvoidshit
+                        case 125: //etherealvoidshit
+                        case 126: //a_human
+                        case 127: //an_adventurer
+                            SetBigNPC(npc, NpcLauncher);
+                            break;                        
+                        //medium
+                        case 71: //a_mongbat
+                        case 75: //an_imp
+                        case 76: //a_giant_spider
+                        case 77: //a_lurker
+                        case 81: //a_snow_cat
+                        case 84: //a_Talorid
+                        case 87: //a_trilkhun&trilkhai
+                        case 88: //a_brain_creature
+                        case 89: //a_deep_lurker
+                        case 90: //a_dread_spider
+                        case 109: //a_vorz
+                        case 111: //a_gazer
+                            SetMediumNPC(npc, NpcLauncher);
+                            break;
+                        //small
+                        case 64: //a_rotworm
+                        case 65: //a_cave_bat
+                        case 66: //a_vampire_bat
+                        case 67: //a_giant_tan_rat
+                        case 68: //a_giant_grey_rat
+                        case 69: //a_flesh_slug
+                        case 70: //an_acid_slug
+                        case 78: //a_bloodworm
+                        case 80: //a_white_worm
+                        case 86: //a_wolf_spider
+                            SetSmallNPC(npc, NpcLauncher);
+                            break;
+                    }
+                    break;
+                }
+        }
         switch (objInt.item_id)
         {
-
             //Big
             case 70: //a_goblin
             case 71: //a_goblin
@@ -1468,12 +1544,7 @@ public class ObjectInteraction : UWEBase
             case 124: //slasher_of_veils
             case 125: //unknown
             case 126: //unknown
-                cap.isTrigger = false;
-                cap.center = new Vector3(0.0f, 0.55f, 0.0f);
-                cap.radius = 0.3f;
-                cap.height = 1.0f;
-                cap.skinWidth = 0.02f;
-                NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.2f);
+                SetBigNPC(npc, NpcLauncher);
                 break;
 
             //Medium
@@ -1485,12 +1556,7 @@ public class ObjectInteraction : UWEBase
             case 83: //a_wolf_spider
             case 92: //a_dread_spider
             case 102: //a_gazer
-                cap.isTrigger = false;
-                cap.center = new Vector3(0.0f, 0.3f, 0.0f);
-                cap.radius = 0.3f;
-                cap.height = 0.7f;
-                cap.skinWidth = 0.02f;
-                NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.3f, 0.2f);
+                SetMediumNPC(npc, NpcLauncher);
                 break;
             //Small
             case 64: //a_rotworm
@@ -1501,43 +1567,144 @@ public class ObjectInteraction : UWEBase
             case 82: //a_bloodworm
             case 87: //a_lurker
             case 122: //a_wisp
-                cap.isTrigger = false;
-                cap.center = new Vector3(0.0f, 0.3f, 0.0f);
-                NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.15f, 0.2f);
-                cap.radius = 0.3f;
-                cap.height = 0.6f;
-                cap.skinWidth = 0.02f;
+                SetSmallNPC(npc, NpcLauncher);
                 break;
         }
+    }
 
-        cap.stepOffset = 0.1f;//Stop npcs from climbing over each other
+    private static void SetSmallNPC(NPC npc, GameObject NpcLauncher)
+    {
+        npc.CharController.isTrigger = false;
+        npc.CharController.center = new Vector3(0.0f, 0.3f, 0.0f);
+        NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.15f, 0.2f);
+        npc.CharController.radius = 0.3f;
+        npc.CharController.height = 0.6f;
+        npc.CharController.skinWidth = 0.02f;
+    }
 
+    private static void SetMediumNPC(NPC npc, GameObject NpcLauncher)
+    {
+        npc.CharController.isTrigger = false;
+        npc.CharController.center = new Vector3(0.0f, 0.3f, 0.0f);
+        npc.CharController.radius = 0.3f;
+        npc.CharController.height = 0.7f;
+        npc.CharController.skinWidth = 0.02f;
+        NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.3f, 0.2f);
+    }
+
+    private static void SetBigNPC(NPC npc, GameObject NpcLauncher)
+    {
+        npc.CharController.isTrigger = false;
+        npc.CharController.center = new Vector3(0.0f, 0.55f, 0.0f);
+        npc.CharController.radius = 0.3f;
+        npc.CharController.height = 1.0f;
+        npc.CharController.skinWidth = 0.02f;
+        NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.2f);
+    }
+
+    /// <summary>
+    /// Sets which enemies can cast magic attacks
+    /// </summary>
+    /// <param name="objInt"></param>
+    /// <param name="npc"></param>
+    private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
+    {
         //Set enemies who can cast spells.
         //TODO: update for UW2
-        switch (objInt.item_id)
+        switch (_RES)
         {
-            case 103: //a_mage
-            case 106: //a_mage
-            case 107: //a_mage
-            case 108: //a_mage
-            case 109: //a_mage
-            case 110: //a_ghoul
-            case 115: //a_mage
-            case 120: //A fire elemental
-            case 123: //tybal
-            case 75: //an_imp
-            case 81: //a_mongbat
-            case 102: //a_gazer
-            case 69: //a_acid_slug
-            case 122: //a_wisp
-                npc.MagicAttack = true;
+            case GAME_UW2:
+                {
+                    switch (objInt.item_id)
+                    {
+                        case 75: //an_imp
+                        case 88: //a_brain_creature
+                        case 96: //a_fire_elemental
+                        case 104: //a_destroyer
+                        case 105: //a_liche
+                        case 106: //a_liche
+                        case 107: //a_liche
+                        case 111: //a_gazer
+                        case 117: //a_human
+                            npc.MagicAttack = true;
+                            break;
+                        default:
+                            npc.MagicAttack = false;
+                            break;
+                    }
                 break;
+                }
             default:
-                npc.MagicAttack = false;
+                {
+                    switch (objInt.item_id)
+                    {
+                        case 103: //a_mage
+                        case 106: //a_mage
+                        case 107: //a_mage
+                        case 108: //a_mage
+                        case 109: //a_mage
+                        case 110: //a_ghoul
+                        case 115: //a_mage
+                        case 120: //A fire elemental
+                        case 123: //tybal
+                        case 75: //an_imp
+                        case 81: //a_mongbat
+                        case 102: //a_gazer
+                        case 69: //a_acid_slug
+                        case 122: //a_wisp
+                            npc.MagicAttack = true;
+                            break;
+                        default:
+                            npc.MagicAttack = false;
+                            break;
+                    }
+                    break;
+                }
+        }
+    }
+
+    /// <summary>
+    /// Checks and set if the NPC is one of the undead types.
+    /// </summary>
+    /// <param name="objInt"></param>
+    /// <param name="npc"></param>
+    private static void SetUndeadNPCS(ObjectInteraction objInt, NPC npc)
+    {
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch (objInt.item_id)
+                    { 
+                    case 72: //a_skeleton
+                    case 85: //a_ghost
+                    case 93: //a_spectre
+                    case 105: //a_liche
+                    case 106: //a_liche
+                    case 107: //a_liche
+                        npc.isUndead = true;
+                        break;
+                    }
                 break;
+                }
+            default:
+                {
+                    switch (objInt.item_id)
+                    {
+                        case 97: //a_ghost
+                        case 99: //a_ghoul
+                        case 100: //a_ghost
+                        case 101: //a_ghost
+                        case 105: //a_dark_ghoul
+                        case 110: //a_ghoul	
+                        case 113: //a_dire_ghost
+                            npc.isUndead = true;
+                            break;
+                    }
+                    break;
+                }
         }
 
-        return npc;
     }
 
     /*	public static void SetNPCProps(GameObject myObj, 
@@ -2568,7 +2735,7 @@ public class ObjectInteraction : UWEBase
         if ((CreateSprite) || (EditorMode))
         {
             //GameObject SpriteObj =
-            ObjectInteraction.CreateObjectGraphics(myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, !RemoveBillboard);
+            objInt.ObjectSprite= ObjectInteraction.CreateObjectGraphics(myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, !RemoveBillboard);
         }
 
 
@@ -2718,9 +2885,9 @@ public class ObjectInteraction : UWEBase
     {
         invis = val;
         //Debug.Log(this.name + " has it's visiblity changed to " + val);
-        if (sr != null)
+        if (ObjectSprite != null)
         {
-            sr.gameObject.SetActive(val == 0);
+            ObjectSprite.gameObject.SetActive(val == 0);
         }
     }
 

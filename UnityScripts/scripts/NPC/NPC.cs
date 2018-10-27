@@ -11,46 +11,13 @@ public class NPC : MobileObject
 {
     public string debugname;
 
+    public CharacterController CharController;
+    
     //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
     public const int AI_ATTITUDE_HOSTILE = 0;
     public const int AI_ATTITUDE_UPSET = 1;
     public const int AI_ATTITUDE_MELLOW = 2;
     public const int AI_ATTITUDE_FRIENDLY = 3;
-
-    //Animations are clasified by number
-    public const int AI_RANGE_IDLE = 1;
-    public const int AI_RANGE_MOVE = 10;
-
-    public const int AI_ANIM_IDLE_FRONT = 1;
-    public const int AI_ANIM_IDLE_FRONT_RIGHT = 2;
-    public const int AI_ANIM_IDLE_RIGHT = 3;
-    public const int AI_ANIM_IDLE_REAR_RIGHT = 4;
-    public const int AI_ANIM_IDLE_REAR = 5;
-    public const int AI_ANIM_IDLE_REAR_LEFT = 6;
-    public const int AI_ANIM_IDLE_LEFT = 7;
-    public const int AI_ANIM_IDLE_FRONT_LEFT = 8;
-
-    public const int AI_ANIM_WALKING_FRONT = 10;
-    public const int AI_ANIM_WALKING_FRONT_RIGHT = 20;
-    public const int AI_ANIM_WALKING_RIGHT = 30;
-    public const int AI_ANIM_WALKING_REAR_RIGHT = 40;
-    public const int AI_ANIM_WALKING_REAR = 50;
-    public const int AI_ANIM_WALKING_REAR_LEFT = 60;
-    public const int AI_ANIM_WALKING_LEFT = 70;
-    public const int AI_ANIM_WALKING_FRONT_LEFT = 80;
-
-    public const int AI_ANIM_DEATH = 100;
-    public const int AI_ANIM_ATTACK_BASH = 1000;
-    public const int AI_ANIM_ATTACK_SLASH = 2000;
-    public const int AI_ANIM_ATTACK_THRUST = 3000;
-    public const int AI_ANIM_COMBAT_IDLE = 4000;
-    public const int AI_ANIM_ATTACK_SECONDARY = 5000;
-
-    private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
-
-    [Header("AI Target")]
-    public GameObject gtarg;
-    public string gtargName;
 
     public enum NPCCategory
     {
@@ -98,10 +65,45 @@ public class NPC : MobileObject
         AIR = 6
     };
 
+
+    //Animations are clasified by number
+    public const int AI_RANGE_IDLE = 1;
+    public const int AI_RANGE_MOVE = 10;
+
+    public const int AI_ANIM_IDLE_FRONT = 1;
+    public const int AI_ANIM_IDLE_FRONT_RIGHT = 2;
+    public const int AI_ANIM_IDLE_RIGHT = 3;
+    public const int AI_ANIM_IDLE_REAR_RIGHT = 4;
+    public const int AI_ANIM_IDLE_REAR = 5;
+    public const int AI_ANIM_IDLE_REAR_LEFT = 6;
+    public const int AI_ANIM_IDLE_LEFT = 7;
+    public const int AI_ANIM_IDLE_FRONT_LEFT = 8;
+
+    public const int AI_ANIM_WALKING_FRONT = 10;
+    public const int AI_ANIM_WALKING_FRONT_RIGHT = 20;
+    public const int AI_ANIM_WALKING_RIGHT = 30;
+    public const int AI_ANIM_WALKING_REAR_RIGHT = 40;
+    public const int AI_ANIM_WALKING_REAR = 50;
+    public const int AI_ANIM_WALKING_REAR_LEFT = 60;
+    public const int AI_ANIM_WALKING_LEFT = 70;
+    public const int AI_ANIM_WALKING_FRONT_LEFT = 80;
+
+    public const int AI_ANIM_DEATH = 100;
+    public const int AI_ANIM_ATTACK_BASH = 1000;
+    public const int AI_ANIM_ATTACK_SLASH = 2000;
+    public const int AI_ANIM_ATTACK_THRUST = 3000;
+    public const int AI_ANIM_COMBAT_IDLE = 4000;
+    public const int AI_ANIM_ATTACK_SECONDARY = 5000;
+
+    private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
+
+    [Header("AI Target")]
+    public GameObject gtarg;
+    public string gtargName;
+
     [Header("Combat")]
     public AttackStages AttackState;
     public int CurrentAttack;//What attack the NPC is currently executing.
-
 
     ///Anim range defines which animation set to play.
     ///Multiple of 10 for dividing animations
@@ -124,11 +126,6 @@ public class NPC : MobileObject
     //Direction between the player and the NPC for calculating relative angle
     private Vector3 direction;  //vector between the player and the ai.
                                 /// The angle to the character from the player.
-    private float angle;
-
-    private SpriteRenderer sprt;
-    //public string CurrentSpriteName="";
-    //public Sprite currentSpriteLoaded;
 
     [Header("Status")]
     ///flags the NPC as dead so we can kill them off in the next frame
@@ -159,9 +156,6 @@ public class NPC : MobileObject
     float floatTime = 0f;
     public float DistanceToGtarg;
     public bool ArrivedAtDestination;
-
-
-
     private short StartingHP;
 
     [Header("Positioning")]
@@ -172,8 +166,6 @@ public class NPC : MobileObject
     public int DestTileX;
     public int DestTileY;
     public Vector3 destinationVector;
-
-
 
     /// <summary>
     /// Initialise some basic info for the NPC ai.
@@ -1453,7 +1445,7 @@ public class NPC : MobileObject
         //Get the relative vector between the player and the npc.
         direction = UWCharacter.Instance.gameObject.transform.position - this.gameObject.transform.position;
         //Convert the direction into an angle.
-        angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         //Get the relative compass heading of the NPC.
         currentHeading = CompassHeadings[(int)Mathf.Round(((this.gameObject.transform.eulerAngles.y % 360) / 45f))];
@@ -1706,7 +1698,7 @@ public class NPC : MobileObject
 
     protected void playAnimation(int index, bool isConstantAnim)
     {
-        newAnim.Play(index, isConstantAnim);
+        newAnim.Play(index, isConstantAnim);        
     }
 
 
@@ -1921,8 +1913,23 @@ public class NPC : MobileObject
         switch (_RES)
         {
             case GAME_UW2:
-                return SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow 
-
+                switch (item_id)
+                {                    
+                    case 88: //a_brain_creature
+                        return SpellEffect.UW2_Spell_Effect_MindBlast;
+                    case 96: //a_fire_elemental
+                    case 104: //a_destroyer
+                        return SpellEffect.UW2_Spell_Effect_Fireball_alt01;
+                    case 105: //a_liche//Confirm these?
+                    case 106: //a_liche
+                    case 107: //a_liche
+                        return SpellEffect.UW2_Spell_Effect_Lightning_alt05;
+                    case 75: //an_imp
+                    case 111: //a_gazer
+                    case 117: //a_human
+                    default:
+                        return SpellEffect.UW2_Spell_Effect_MagicArrow_alt01;//Magic arrow 
+                }  
             default:
                 switch (item_id)
                 {
@@ -1930,7 +1937,7 @@ public class NPC : MobileObject
                         return SpellEffect.UW1_Spell_Effect_Acid_alt01;
                     case 120://Fire elemental
                         return SpellEffect.UW1_Spell_Effect_Fireball_alt01;
-                    case 123:
+                    case 123://Tybal
                         return SpellEffect.UW1_Spell_Effect_SheetLightning_alt01;
                     default:
                         return SpellEffect.UW1_Spell_Effect_MagicArrow_alt01;//Magic arrow 

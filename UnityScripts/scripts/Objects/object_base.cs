@@ -216,10 +216,6 @@ public class object_base : UWEBase
         }
     }
 
-    
-
- 
-
 
     //Mobile Properties
     public short npc_whoami

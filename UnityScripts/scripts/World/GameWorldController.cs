@@ -36,17 +36,17 @@ public class GameWorldController : UWEBase
     };
 
     public static string[] UW1_LevelNames = new string[]
-            {
-                "Outcast",
-                "Dwarf",
-                "Swamp",
-                "Knight",
-                "Tombs",
-                "Seers",
-                "Tybal",
-                "Abyss",
-                "Void"
-            };
+    {
+        "Outcast",
+        "Dwarf",
+        "Swamp",
+        "Knight",
+        "Tombs",
+        "Seers",
+        "Tybal",
+        "Abyss",
+        "Void"
+    };
 
     /// <summary>
     /// First index of the level no for a world
@@ -115,7 +115,6 @@ public class GameWorldController : UWEBase
     [Header("Controls")]
     public MouseLook MouseX;
     public MouseLook MouseY;
-
 
     [Header("World Options")]
     /// <summary>

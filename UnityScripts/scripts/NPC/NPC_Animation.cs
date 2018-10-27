@@ -2,15 +2,15 @@
 using System.Collections;
 
 public class NPC_Animation : MonoBehaviour {
-		const float frameRate =0.2f;
-		public bool FreezeAnimFrame;
-		public int AnimationIndex;//Animation to display
-		public int AnimationPos;//Position in the animation.
-		public float animationCounter;
+	const float frameRate =0.2f;
+	public bool FreezeAnimFrame;
+	public int AnimationIndex;//Animation to display
+	public int AnimationPos;//Position in the animation.
+	public float animationCounter;
 
-		public CritterAnimInfo critAnim;
-		public SpriteRenderer output;
-		public bool ConstantAnim; //Is this anim continuouse or periodic. (ie hold on final frame.
+	public CritterAnimInfo critAnim;
+	public SpriteRenderer output;
+	public bool ConstantAnim; //Is this anim continuouse or periodic. (ie hold on final frame.
 
 	// Update is called once per frame
 	void Update () {
@@ -28,17 +28,17 @@ public class NPC_Animation : MonoBehaviour {
 				{
 					if (ConstantAnim==false)
 					{
-							AnimationPos=0;
+						AnimationPos=0;
 					}					
 				}
 			}
 			if ((FreezeAnimFrame) || (UWCharacter.Instance.isTimeFrozen))
 			{
-					AnimationPos=0;
+				AnimationPos=0;
 			}
 			else
 			{
-					AnimationPos++;					
+				AnimationPos++;					
 			}			
 			if ((AnimationPos>=critAnim.animIndices.GetUpperBound(1)) && (ConstantAnim==false))
 			{
@@ -54,8 +54,7 @@ public class NPC_Animation : MonoBehaviour {
 	}
 
 	public void Play(int anim, bool isConstant)
-	{
-			
+	{			
 		if (anim!=AnimationIndex)
 			{//A new animation
 				ConstantAnim=isConstant;
