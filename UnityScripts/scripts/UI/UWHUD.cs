@@ -371,6 +371,22 @@ public class UWHUD : HUD
     }
 
 
+    private void Update()
+    {
+        //Updating of the mouse cursors
+        if (!UWCharacter.Instance.MouseLookEnabled || GameWorldController.instance.AtMainMenu)
+        {
+            FreeLookCursor.enabled = true;
+            //FreeLookCursor.texture = UWHUD.instance.CursorIcon;
+            FreeLookCursor.transform.position = Input.mousePosition;
+        }   
+        else
+        {
+            FreeLookCursor.enabled = false;
+        }
+        MouseLookCursor.enabled = UWCharacter.Instance.MouseLookEnabled;
+    }
+
 
     static void SetUIElementPosition(RectTransform rectT, float height, float width, Vector2 anchorPos)
     {

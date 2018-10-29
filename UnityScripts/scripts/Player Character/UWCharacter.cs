@@ -1383,76 +1383,158 @@ public class UWCharacter : Character
     /// </summary>
     /// <param name="xp">Xp.</param>
     public void AddXP(int xp)
-    {
-        EXP += xp;
-        if (EXP <= 600)
-        {//1
-            SetCharLevel(1);
-        }
-        else if (EXP <= 1200)
-        {//2
-            SetCharLevel(2);
-        }
-        else if (EXP <= 1800)
-        {//3
-            SetCharLevel(3);
-        }
-        else if (EXP <= 2400)
-        {//4
-            SetCharLevel(4);
-        }
-        else if (EXP <= 3000)
-        {//5
-            SetCharLevel(5);
-        }
-        else if (EXP <= 3600)
-        {//6
-            SetCharLevel(6);
-        }
-        else if (EXP <= 4200)
-        {//7
-            SetCharLevel(7);
-        }
-        else if (EXP <= 4800)
-        {//8
-            SetCharLevel(8);
-        }
-        else if (EXP <= 5400)
-        {//9
-            SetCharLevel(9);
-        }
-        else if (EXP <= 6000)
-        {//10
-            SetCharLevel(10);
-        }
-        else if (EXP <= 6600)
-        {//11
-            SetCharLevel(11);
-        }
-        else if (EXP <= 7200)
-        {//12
-            SetCharLevel(12);
-        }
-        else if (EXP <= 7800)
-        {//13
-            SetCharLevel(13);
-        }
-        else if (EXP <= 8400)
-        {//14
-            SetCharLevel(14);
-        }
-        else if (EXP <= 9000)
-        {//15
-            SetCharLevel(15);
-        }
-        else if (EXP <= 9600)
-        {
-            SetCharLevel(16);
-        }
-        else
-        {
-            EXP = 9600;
-            SetCharLevel(16);
+    {//TODO:These are UW1 level thresholds        
+        switch (_RES)
+        {            
+            case GAME_UW2:
+                {
+                    int curskillthreashold = EXP % 150;
+                    int newskillthreashold = (EXP + xp) % 150;
+                    EXP += xp;
+                    if (EXP <= 50)
+                    {//1
+                        SetCharLevel(1);
+                    }
+                    else if (EXP <= 100)
+                    {//2
+                        SetCharLevel(2);
+                    }
+                    else if (EXP <= 150)
+                    {//3
+                        SetCharLevel(3);
+                    }
+                    else if (EXP <= 200)
+                    {//4
+                        SetCharLevel(4);
+                    }
+                    else if (EXP <= 300)
+                    {//5
+                        SetCharLevel(5);
+                    }
+                    else if (EXP <= 400)
+                    {//6
+                        SetCharLevel(6);
+                    }
+                    else if (EXP <= 600)
+                    {//7
+                        SetCharLevel(7);
+                    }
+                    else if (EXP <= 800)
+                    {//8
+                        SetCharLevel(8);
+                    }
+                    else if (EXP <= 1200)
+                    {//9
+                        SetCharLevel(9);
+                    }
+                    else if (EXP <= 1600)
+                    {//10
+                        SetCharLevel(10);
+                    }
+                    else if (EXP <= 2400)
+                    {//11
+                        SetCharLevel(11);
+                    }
+                    else if (EXP <= 3200)
+                    {//12
+                        SetCharLevel(12);
+                    }
+                    else if (EXP <= 4800)
+                    {//13
+                        SetCharLevel(13);
+                    }
+                    else if (EXP <= 6400)
+                    {//14
+                        SetCharLevel(14);
+                    }
+                    else if (EXP < 65535)
+                    {
+                        SetCharLevel(15);
+                        if (newskillthreashold>curskillthreashold)
+                        {//Additional skill point every 150 exp per mitch aigner
+                            TrainingPoints++;
+                        }
+                    }
+                    else
+                    {
+                        EXP = 65535;
+                    }
+                    break;
+                }
+            default:
+                {
+                EXP += xp;
+                if (EXP <= 600)
+                        {//1
+                            SetCharLevel(1);
+                        }
+                        else if (EXP <= 1200)
+                        {//2
+                            SetCharLevel(2);
+                        }
+                        else if (EXP <= 1800)
+                        {//3
+                            SetCharLevel(3);
+                        }
+                        else if (EXP <= 2400)
+                        {//4
+                            SetCharLevel(4);
+                        }
+                        else if (EXP <= 3000)
+                        {//5
+                            SetCharLevel(5);
+                        }
+                        else if (EXP <= 3600)
+                        {//6
+                            SetCharLevel(6);
+                        }
+                        else if (EXP <= 4200)
+                        {//7
+                            SetCharLevel(7);
+                        }
+                        else if (EXP <= 4800)
+                        {//8
+                            SetCharLevel(8);
+                        }
+                        else if (EXP <= 5400)
+                        {//9
+                            SetCharLevel(9);
+                        }
+                        else if (EXP <= 6000)
+                        {//10
+                            SetCharLevel(10);
+                        }
+                        else if (EXP <= 6600)
+                        {//11
+                            SetCharLevel(11);
+                        }
+                        else if (EXP <= 7200)
+                        {//12
+                            SetCharLevel(12);
+                        }
+                        else if (EXP <= 7800)
+                        {//13
+                            SetCharLevel(13);
+                        }
+                        else if (EXP <= 8400)
+                        {//14
+                            SetCharLevel(14);
+                        }
+                        else if (EXP <= 9000)
+                        {//15
+                            SetCharLevel(15);
+                        }
+                        else if (EXP <= 9600)
+                        {
+                            SetCharLevel(16);
+                        }
+                        else
+                        {
+                            EXP = 9600;//Cap XP in UW1
+                            SetCharLevel(16);
+                        }
+                    break;
+                }
         }
     }
 

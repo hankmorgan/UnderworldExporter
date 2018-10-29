@@ -958,7 +958,7 @@ public class PlayerInventory : UWEBase
         switch (_RES)
         {
             case GAME_UW2:
-                CarryWeight = playerUW.PlayerSkills.STR * 3.0f;
+                CarryWeight = playerUW.PlayerSkills.STR * 2.5f;//estimate
                 break;
             default:
                 CarryWeight = playerUW.PlayerSkills.STR * 2.0f;

@@ -328,21 +328,29 @@ namespace UnderworldEditor
         private void writePlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
-            playerdat.EncryptDecryptUW1(buffer, buffer[0]);
+            if (curgame==GAME_UW2)
+            {
+                buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
+            }
+            else
+            {
+                playerdat.EncryptDecryptUW1(buffer, buffer[0]);
+            }
+            
             Util.WriteStreamFile(main.basepath + "\\save"+ curslot + "\\PLAYER.DAT", buffer);
         }
 
-        /// <summary>
-        /// Saves the current uw2 save file.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void writePlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
-            buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
-            Util.WriteStreamFile(main.basepath + "\\save" + curslot + "\\PLAYER.DAT", buffer);
-        }
+        /////// <summary>
+        /////// Saves the current uw2 save file.
+        /////// </summary>
+        /////// <param name="sender"></param>
+        /////// <param name="e"></param>
+        ////private void writePlayerDatToolStripMenuItem1_Click(object sender, EventArgs e)
+        ////{
+        ////    char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
+        ////    buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
+        ////    Util.WriteStreamFile(main.basepath + "\\save" + curslot + "\\PLAYER.DAT", buffer);
+        ////}
 
         /// <summary>
         /// Loads a lev.ark file from the game data or a save file

@@ -764,7 +764,7 @@ public class SaveGame : Loader
                 case 0x4D + 1:
                     break;
                 case 0x4F: ///   experience in 0.1 points
-                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP); break;
+                    DataLoader.WriteInt32(writer, UWCharacter.Instance.EXP*10); break;
                 case 0x4F + 1:
                 case 0x4F + 2:
                 case 0x4F + 3:
@@ -1452,7 +1452,7 @@ public class SaveGame : Loader
                         //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
                         break;
                     case 0x4F: ///   experience in 0.1 points
-                        UWCharacter.Instance.EXP = (int)DataLoader.getValAtAddress(buffer, i, 32); break;
+                        UWCharacter.Instance.EXP = (int)(DataLoader.getValAtAddress(buffer, i, 32) *0.1f); break;
                     case 0x53: // skillpoints available to spend
                         UWCharacter.Instance.TrainingPoints = (int)buffer[i]; break;
                     case 0x55: ///   x-position in level

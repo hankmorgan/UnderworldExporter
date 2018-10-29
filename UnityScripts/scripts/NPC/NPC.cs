@@ -51,7 +51,7 @@ public class NPC : MobileObject
     public enum AttackStages
     {
         AttackPosition = 0,
-        AttackAnimateMagic = 1,
+        AttackAnimateRanged = 1,
         AttackAnimateMelee = 2,
         AttackExecute = 3,
         AttackWaitCycle = 4
@@ -140,11 +140,12 @@ public class NPC : MobileObject
     //Enemy types.
     ///Undead Enemy flag
     public bool isUndead = false;
-    public bool isHumanoid = false;
     ///For storing spell effects applied to NPCs
     public SpellEffect[] NPCStatusEffects = new SpellEffect[3];
     ///Can the NPC fire off magic attacks.
     public bool MagicAttack;
+    ///Can the NPC fire off ranged attacks.
+    public bool RangeAttack;
     ///Transform position to launch projectiles from
     public GameObject NPC_Launcher;
     public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
@@ -1040,13 +1041,14 @@ public class NPC : MobileObject
         //	}
 
     }
-
+    /// <summary>
+    /// Processes NPC Combat activitity
+    /// </summary>
     void NPCCombatUpdate()
     {
         switch (AttackState)
         {
             case AttackStages.AttackPosition:
-                //if (Room () == UWCharacter.Instance.room) {
                 if (gtarg != null)
                 {
                     Vector3 AB = this.transform.position - gtarg.transform.position;
@@ -1054,14 +1056,14 @@ public class NPC : MobileObject
                     {
                         if (DistanceToGtarg < 6f)
                         {//NPC is close to target.
-                            if (MagicAttack)
+                            if (MagicAttack || RangeAttack)
                             {
                                 AgentStand();
                                 transform.LookAt(gtarg.transform.position);
                                 if (AgentCanAttack(NPC_Launcher.transform.position, gtarg.GetComponent<UWEBase>().GetImpactPoint(), gtarg, AB.magnitude))
                                 {
                                     AnimRange = NPC.AI_ANIM_ATTACK_SECONDARY;
-                                    AttackState = AttackStages.AttackAnimateMagic;
+                                    AttackState = AttackStages.AttackAnimateRanged;
                                     WaitTimer = 0.8f;
                                 }
                                 else
@@ -1077,7 +1079,7 @@ public class NPC : MobileObject
                             }
                         }
                         else
-                        {//Player is not close enough for an attach.
+                        {//Player is not close enough for an attack.
                             if (
                                     (DistanceToGtarg < UWCharacter.Instance.BaseEngagementRange + UWCharacter.Instance.DetectionRange)
                                     ||
@@ -1124,10 +1126,17 @@ public class NPC : MobileObject
                     WaitTimer = 0.8f;
                 }
                 break;
-            case AttackStages.AttackAnimateMagic:
+            case AttackStages.AttackAnimateRanged:
                 if (WaitTimer <= 0.2f)
                 {
-                    ExecuteMagicAttack();
+                    if (MagicAttack)
+                    {
+                        ExecuteMagicAttack();
+                    }
+                    else if(RangeAttack)
+                    {
+                        ExecuteRangedAttack();
+                    }                    
                     AttackState = AttackStages.AttackExecute;
                     WaitTimer = 0.8f;
                 }
@@ -1799,8 +1808,8 @@ public class NPC : MobileObject
         if (!Physics.Raycast(ray, out hit, dropRange))
         {///Checks No object interferes with the launch
             float force = 100f * Vector3.Distance(TargetingPoint, NPC_Launcher.transform.position);
-
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(16, 0, 0, 1, 256);
+            int projectiletype = RangedAttackProjectile();
+            ObjectLoaderInfo newobjt = ObjectLoader.newObject(projectiletype, 0, 0, 1, 256);
             newobjt.is_quant = 1;
             GameObject launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
 
@@ -1814,12 +1823,38 @@ public class NPC : MobileObject
             ///Appends ProjectileDamage to the projectile to act as the damage delivery method.
             ProjectileDamage pd = myObjChild.AddComponent<ProjectileDamage>();
             pd.Source = this.gameObject;
-            pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[0].damage;//sling damage.
+            pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[projectiletype-16].damage;//sling damage.
             pd.AttackCharge = 100f;
             pd.AttackScore = GetAttack();//Assuming there is no special ranged attack score?
             pd.ArmourDamage = GetArmourDamage();
             Ammo--;
         }
+    }
+
+    /// <summary>
+    /// Returns the type of projectile this npc will fire in a ranged attack
+    /// </summary>
+    /// <returns></returns>
+    int RangedAttackProjectile()
+    {
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch(item_id)
+                    {//TODO:ID more values
+                        case 110://iolo
+                            return 21;
+                        case 20://yeti snowball
+                            return 28;
+                        default:
+                            return 16;
+                    }
+                }
+            default://UW1 npcs only launch slingstones
+                return 16;
+        }
+       
     }
 
     public override string ContextMenuDesc(int item_id)

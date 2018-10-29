@@ -1406,13 +1406,10 @@ public class ObjectInteraction : UWEBase
         //cap = myObj.GetComponent<CharacterController>();
         npc.CharController = myObj.AddComponent<CharacterController>();
         SetUndeadNPCS(objInt, npc);
-
         SetNPCSizes(objInt, npc, NpcLauncher);
-
         npc.CharController.stepOffset = 0.1f;//Stop npcs from climbing over each other
-
         SetMagicAttackNPCs(objInt, npc);
-
+        SetRangeAttackNPCs(objInt, npc);
         return npc;
     }
 
@@ -1425,6 +1422,13 @@ public class ObjectInteraction : UWEBase
                     switch (objInt.item_id)
                     {
                         //big
+                        case 72:// a_skeleton
+                        case 73:// a_goblin
+                        case 74:// a_goblin
+                        case 79://  a_stickman
+                        case 82: //a_yeti & yeti
+                        case 83:// a_headless & headlesses
+                        case 85:// a_ghost
                         case 91: //a_human
                         case 92: //a_great_troll
                         case 93: //a_spectre
@@ -1490,86 +1494,94 @@ public class ObjectInteraction : UWEBase
                         case 86: //a_wolf_spider
                             SetSmallNPC(npc, NpcLauncher);
                             break;
+                        default:
+                            Debug.Log("unimplemented npc");break;
+                    }
+                    break;
+                }
+            default:
+                {
+
+                    switch (objInt.item_id)
+                    {
+                        //Big
+                        case 70: //a_goblin
+                        case 71: //a_goblin
+                        case 74: //a_skeleton
+                        case 76: //a_goblin
+                        case 77: //a_goblin
+                        case 78: //a_goblin
+                        case 79: //etherealvoidcreatures
+                        case 80: //a_goblin
+                        case 84: //a_mountainman_mountainmen
+                        case 85: //a_green_lizardman_green_lizardmen
+                        case 86: //a_mountainman_mountainmen
+                        case 88: //a_red_lizardman_red_lizardmen
+                        case 89: //a_gray_lizardman_red_lizardmen
+                        case 90: //an_outcast
+                        case 91: //a_headless_headlesses
+                        case 93: //a_fighter
+                        case 94: //a_fighter
+                        case 95: //a_fighter
+                        case 96: //a_troll
+                        case 97: //a_ghost
+                        case 98: //a_fighter
+                        case 99: //a_ghoul
+                        case 100: //a_ghost
+                        case 101: //a_ghost
+                        case 103: //a_mage
+                        case 104: //a_fighter
+                        case 105: //a_dark_ghoul
+                        case 106: //a_mage
+                        case 107: //a_mage
+                        case 108: //a_mage
+                        case 109: //a_mage
+                        case 110: //a_ghoul
+                        case 111: //a_feral_troll
+                        case 112: //a_great_troll
+                        case 113: //a_dire_ghost
+                        case 114: //an_earth_golem
+                        case 115: //a_mage
+                        case 116: //a_deep_lurker
+                        case 117: //a_shadow_beast
+                        case 118: //a_reaper
+                        case 119: //a_stone_golem
+                        case 120: //a_fire_elemental
+                        case 121: //a_metal_golem
+                        case 123: //tybal
+                        case 124: //slasher_of_veils
+                        case 125: //unknown
+                        case 126: //unknown
+                            SetBigNPC(npc, NpcLauncher);
+                            break;
+
+                        //Medium
+                        case 68: //a_giant_spider
+                        case 67: //a_giant_rat
+                        case 72: //a_giant_rat
+                        case 75: //an_imp
+                        case 81: //a_mongbat
+                        case 83: //a_wolf_spider
+                        case 92: //a_dread_spider
+                        case 102: //a_gazer
+                            SetMediumNPC(npc, NpcLauncher);
+                            break;
+                        //Small
+                        case 64: //a_rotworm
+                        case 65: //a_flesh_slug
+                        case 66: //a_cave_bat
+                        case 69: //a_acid_slug
+                        case 73: //a_vampire_bat
+                        case 82: //a_bloodworm
+                        case 87: //a_lurker
+                        case 122: //a_wisp
+                            SetSmallNPC(npc, NpcLauncher);
+                            break;
                     }
                     break;
                 }
         }
-        switch (objInt.item_id)
-        {
-            //Big
-            case 70: //a_goblin
-            case 71: //a_goblin
-            case 74: //a_skeleton
-            case 76: //a_goblin
-            case 77: //a_goblin
-            case 78: //a_goblin
-            case 79: //etherealvoidcreatures
-            case 80: //a_goblin
-            case 84: //a_mountainman_mountainmen
-            case 85: //a_green_lizardman_green_lizardmen
-            case 86: //a_mountainman_mountainmen
-            case 88: //a_red_lizardman_red_lizardmen
-            case 89: //a_gray_lizardman_red_lizardmen
-            case 90: //an_outcast
-            case 91: //a_headless_headlesses
-            case 93: //a_fighter
-            case 94: //a_fighter
-            case 95: //a_fighter
-            case 96: //a_troll
-            case 97: //a_ghost
-            case 98: //a_fighter
-            case 99: //a_ghoul
-            case 100: //a_ghost
-            case 101: //a_ghost
-            case 103: //a_mage
-            case 104: //a_fighter
-            case 105: //a_dark_ghoul
-            case 106: //a_mage
-            case 107: //a_mage
-            case 108: //a_mage
-            case 109: //a_mage
-            case 110: //a_ghoul
-            case 111: //a_feral_troll
-            case 112: //a_great_troll
-            case 113: //a_dire_ghost
-            case 114: //an_earth_golem
-            case 115: //a_mage
-            case 116: //a_deep_lurker
-            case 117: //a_shadow_beast
-            case 118: //a_reaper
-            case 119: //a_stone_golem
-            case 120: //a_fire_elemental
-            case 121: //a_metal_golem
-            case 123: //tybal
-            case 124: //slasher_of_veils
-            case 125: //unknown
-            case 126: //unknown
-                SetBigNPC(npc, NpcLauncher);
-                break;
 
-            //Medium
-            case 68: //a_giant_spider
-            case 67: //a_giant_rat
-            case 72: //a_giant_rat
-            case 75: //an_imp
-            case 81: //a_mongbat
-            case 83: //a_wolf_spider
-            case 92: //a_dread_spider
-            case 102: //a_gazer
-                SetMediumNPC(npc, NpcLauncher);
-                break;
-            //Small
-            case 64: //a_rotworm
-            case 65: //a_flesh_slug
-            case 66: //a_cave_bat
-            case 69: //a_acid_slug
-            case 73: //a_vampire_bat
-            case 82: //a_bloodworm
-            case 87: //a_lurker
-            case 122: //a_wisp
-                SetSmallNPC(npc, NpcLauncher);
-                break;
-        }
     }
 
     private static void SetSmallNPC(NPC npc, GameObject NpcLauncher)
@@ -1602,12 +1614,52 @@ public class ObjectInteraction : UWEBase
         NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.2f);
     }
 
-    /// <summary>
-    /// Sets which enemies can cast magic attacks
-    /// </summary>
-    /// <param name="objInt"></param>
-    /// <param name="npc"></param>
-    private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
+    private static void SetRangeAttackNPCs(ObjectInteraction objInt, NPC npc)
+    {
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch (objInt.item_id)
+                    {
+                        case 73: //a_goblin
+                        case 74: //a_goblin
+                        case 82: //yeti
+                        case 110: //fighter
+                            npc.RangeAttack = true;
+                            break;
+                        default:
+                            npc.RangeAttack = false;
+                            break;
+                    }
+                    break;
+                }
+            default:
+                {
+                    switch (objInt.item_id)
+                    {
+                        case 70: //a_goblin
+                        case 71: //a_goblin
+                        case 76: //a_goblin
+                        case 77: //a_goblin
+                        case 78: //a_goblin
+                            npc.RangeAttack = true;
+                            break;
+                        default:
+                            npc.RangeAttack = false;
+                            break;
+                    }
+                    break;
+                }
+        }
+    }
+
+        /// <summary>
+        /// Sets which enemies can cast magic attacks
+        /// </summary>
+        /// <param name="objInt"></param>
+        /// <param name="npc"></param>
+        private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
     {
         //Set enemies who can cast spells.
         //TODO: update for UW2

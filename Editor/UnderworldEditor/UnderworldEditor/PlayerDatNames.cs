@@ -404,6 +404,8 @@ namespace UnderworldEditor
                 case 57: return "max. Mana";
                 case 58: return "play_hunger";
                 case 59: return "fatigue";
+                case 0x4D:
+                case 0x4E: return "weight";
                 default:
                     return "UNIMPLEMENTED";
             }

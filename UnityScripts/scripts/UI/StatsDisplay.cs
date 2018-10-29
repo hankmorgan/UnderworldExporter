@@ -28,8 +28,29 @@ public class StatsDisplay : GuiBase_Draggable {
 	string tmpSkillNames;
 	string tmpSkillValues;
 
-	// Update is called once per frame
-		public override void Update ()
+    public override void Start()
+    {
+        base.Start();
+        if (_RES==GAME_UW2)
+        {
+            CharName.color = Color.white;
+            CharClass.color = Color.white;
+
+            CharClassLevel.color = Color.white;
+            CharStr.color = Color.white;
+            CharDex.color = Color.white;
+            CharInt.color = Color.white;
+            CharVIT.color = Color.white;
+            CharMana.color = Color.white;
+            CharEXP.color = Color.white;            
+            CharSkills.color = Color.white;
+            CharSkillLevels.color = Color.white;
+        }
+ 
+    }
+
+    // Update is called once per frame
+    public override void Update ()
 		{
 			base.Update();
 			if (!GameWorldController.instance.AtMainMenu)

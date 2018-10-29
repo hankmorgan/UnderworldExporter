@@ -145,7 +145,7 @@ public class TMAP : object_base
             Destroy(myObj.transform.GetChild(0).gameObject);
         }
         ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
-        TileMap tm = CurrentTileMap();
+       // TileMap tm = CurrentTileMap();
         float doorFrameOffsetX = 0f; float doorFrameOffsetY = 0f;
         //TODO:This should only apply when the door occupies the same space as the tmap.
         //if (tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].isDoor)
