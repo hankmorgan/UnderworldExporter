@@ -585,7 +585,7 @@ public class WindowDetectUW : WindowDetect
         //}
         //GUI.DrawTexture(CursorPosition, UWHUD.instance.CursorIcon);
         //Cursor.SetCursor(UWHUD.instance.CursorIcon, new Vector2(0.5f,0.5f), CursorMode.Auto);
-        Cursor.SetCursor(UWHUD.instance.CursorIcon, new Vector2(0.5f, 0.5f), CursorMode.Auto);        
+        Cursor.SetCursor(UWHUD.instance.CursorIcon, new Vector2(UWHUD.instance.CursorIcon.width/2, UWHUD.instance.CursorIcon.height / 2), CursorMode.Auto);        
     }
 
     public static void SwitchToMouseLook()

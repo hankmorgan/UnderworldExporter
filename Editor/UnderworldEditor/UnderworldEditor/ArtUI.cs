@@ -26,16 +26,24 @@ namespace UnderworldEditor
                         switch (main.curgame)
                         {
                             case main.GAME_UW1:
-                                if (currentimg.ImageNo < 210)
                                 {
-                                    texdata.texturebufferW[currentimg.FileOffset + y * 64 + x] = (char)newpixel;
+                                    if (currentimg.ImageNo < 210)
+                                    {
+                                        texdata.texturebufferW[currentimg.FileOffset + y * 64 + x] = (char)newpixel;
+                                    }
+                                    else
+                                    {
+                                        texdata.texturebufferF[currentimg.FileOffset + y * 32 + x] = (char)newpixel;
+                                    }
+                                    currentimg.artdata.Modified = true;
+                                    break;
                                 }
-                                else
+                            case main.GAME_UW2:
                                 {
-                                    texdata.texturebufferF[currentimg.FileOffset + y * 32 + x] = (char)newpixel;
+                                    texdata.texturebufferT[currentimg.FileOffset + y * 64 + x] = (char)newpixel;
+                                    currentimg.artdata.Modified = true;
+                                    break;
                                 }
-                                currentimg.artdata.Modified = true;
-                                break;
                         }
                         break;
                     }

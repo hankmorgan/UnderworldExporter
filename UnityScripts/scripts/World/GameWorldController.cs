@@ -627,11 +627,11 @@ public class GameWorldController : UWEBase
                     {
                         case GAME_UW2:
                             Palette.cyclePalette(palCycler.Palettes[0], 224, 16);
-                            Palette.cyclePalette(palCycler.Palettes[0], 3, 6);
+                            Palette.cyclePaletteReverse(palCycler.Palettes[0], 3, 6);
                             break;
                         default:
-                            Palette.cyclePalette(palCycler.Palettes[0], 48, 4);
-                            Palette.cyclePalette(palCycler.Palettes[0], 16, 7);//Reverse direction.
+                            Palette.cyclePalette(palCycler.Palettes[0], 48, 16);//Forward
+                            Palette.cyclePaletteReverse(palCycler.Palettes[0], 16, 7);//Reverse direction.
                             break;
                     }
                     paletteArray[c] = Palette.toImage(palCycler.Palettes[0]);

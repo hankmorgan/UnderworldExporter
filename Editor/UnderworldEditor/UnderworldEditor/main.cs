@@ -674,7 +674,7 @@ namespace UnderworldEditor
                             }
                             break;
                         case GAME_UW2:
-                            ArtUI.SaveTextureData(tex.texturebufferW, false);
+                            ArtUI.SaveTextureData(tex.texturebufferT, false);
                             break;
                     }
                 }
@@ -726,34 +726,35 @@ namespace UnderworldEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ////Turns the selected image int a representation of the palette
-            //int x = 0;int y = 0;
-            //for (int counter = 0; counter < 256; counter++)
-            //{
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, counter, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+1, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+2, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+3, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 4, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 5, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 6, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 7, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y+8, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 9, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 10, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 11, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 12, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 13, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 14, counter);
-            //    ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 15, counter);
+            //Turns the selected image int a representation of the palette
+            int x = 0; int y = 0;
+            tex.Modified = true;
+            for (int counter = 0; counter < 256; counter++)
+            {
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 1, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 2, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 3, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 4, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 5, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 6, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 7, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 8, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 9, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 10, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 11, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 12, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 13, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 14, counter, counter);
+                ArtUI.setPixelAtLocation(CurrentImage, ImgOut, x, y + 15, counter, counter);
 
-            //    x++;
-            //    if (x >= 64)
-            //    {
-            //        x = 0;
-            //        y = y +16;
-            //    }
-            //}
+                x++;
+                if (x >= 64)
+                {
+                    x = 0;
+                    y = y + 16;
+                }
+            }
         }
 
         /// <summary>

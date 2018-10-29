@@ -85,14 +85,9 @@ public class Palette : UWClass {
 	/// <param name="pal">Pal.</param>
 	/// <param name="Start">Start.</param>
 	/// <param name="length">Length.</param>
-	public static void cyclePalette(Palette pal, int Start, int length )
+	public static void cyclePalette(Palette pal, int Start, int length)
 	{
 		/*Shifts the palette values around between the start and start+length. Used for texture animations and special effects*/
-				if (pal==null)
-				{
-						Debug.Log("Null Palette in cyclePalette");
-						return;
-				}
 		byte firstRed = pal.red[Start];
 		byte firstGreen = pal.green[Start];
 		byte firstBlue = pal.blue[Start];
@@ -106,5 +101,30 @@ public class Palette : UWClass {
 		pal.green[Start + length - 1] = firstGreen;
 		pal.blue[Start + length - 1] = firstBlue;
 	}
+
+
+    public static void cyclePaletteReverse(Palette pal, int Start, int length)
+    {
+        byte nextRed = pal.red[Start];
+        byte nextGreen = pal.green[Start];
+        byte nextBlue = pal.blue[Start];
+
+        for (int i = Start; i < Start+length ; i++)
+        {
+            byte tmpRed = pal.red[i + 1];
+            byte tmpGreen = pal.green[i + 1];
+            byte tmpBlue = pal.blue[i + 1];
+            pal.red[i + 1] = nextRed;
+            pal.green[i+1] = nextGreen;
+            pal.blue[i+1] = nextBlue;
+            nextRed = tmpRed;
+            nextGreen = tmpGreen;
+            nextBlue = tmpBlue;
+        }
+        pal.red[Start] = nextRed;
+        pal.green[Start] = nextGreen;
+        pal.blue[Start] = nextBlue;
+    }
+
 
 }
