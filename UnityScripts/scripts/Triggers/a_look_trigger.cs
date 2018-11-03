@@ -15,7 +15,7 @@ public class a_look_trigger : trigger_base {
     {
         if (zpos>0)
         {
-            if (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillSearch) + 13 < zpos)
+            if (UWCharacter.Instance.PlayerSkills.GetSkill(Skills.SkillSearch) + Random.Range(0,16) <= zpos)
             {
                 Debug.Log("unable to activate look trigger due to skills");
                 return false;

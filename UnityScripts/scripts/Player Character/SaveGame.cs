@@ -1026,43 +1026,139 @@ public class SaveGame : Loader
                     }
                 case 0x1D2 + 1:
                     break;
+                //Bit variables 0 to 127
+                case 0x1FA:
+                case 0x1FC:
+                case 0x1FE:
+                case 0x200:
+                case 0x202:
+                case 0x204:
+                case 0x206:
+                case 0x208:
+                case 0x20A:
+                case 0x20C:
+                case 0x20E:
+                case 0x210:
+                case 0x212:
+                case 0x214:
+                case 0x216:
+                case 0x218:
+                case 0x21A:
+                case 0x21C:
+                case 0x21E:
+                case 0x220:
+                case 0x222:
+                case 0x224:
+                case 0x226:
+                case 0x228:
+                case 0x22A:
+                case 0x22C:
+                case 0x22E:
+                case 0x230:
+                case 0x232:
+                case 0x234:
+                case 0x236:
+                case 0x238:
+                case 0x23A:
+                case 0x23C:
+                case 0x23E:
+                case 0x240:
+                case 0x242:
+                case 0x244:
+                case 0x246:
+                case 0x248:
+                case 0x24A:
+                case 0x24C:
+                case 0x24E:
+                case 0x250:
+                case 0x252:
+                case 0x254:
+                case 0x256:
+                case 0x258:
+                case 0x25A:
+                case 0x25C:
+                case 0x25E:
+                case 0x260:
+                case 0x262:
+                case 0x264:
+                case 0x266:
+                case 0x268:
+                case 0x26A:
+                case 0x26C:
+                case 0x26E:
+                case 0x270:
+                case 0x272:
+                case 0x274:
+                case 0x276:
+                case 0x278:
+                case 0x27A:
+                case 0x27C:
+                case 0x27E:
+                case 0x280:
+                case 0x282:
+                case 0x284:
+                case 0x286:
+                case 0x288:
+                case 0x28A:
+                case 0x28C:
+                case 0x28E:
+                case 0x290:
+                case 0x292:
+                case 0x294:
+                case 0x296:
+                case 0x298:
+                case 0x29A:
+                case 0x29C:
+                case 0x29E:
+                case 0x2A0:
+                case 0x2A2:
+                case 0x2A4:
+                case 0x2A6:
+                case 0x2A8:
+                case 0x2AA:
+                case 0x2AC:
+                case 0x2AE:
+                case 0x2B0:
+                case 0x2B2:
+                case 0x2B4:
+                case 0x2B6:
+                case 0x2B8:
+                case 0x2BA:
+                case 0x2BC:
+                case 0x2BE:
+                case 0x2C0:
+                case 0x2C2:
+                case 0x2C4:
+                case 0x2C6:
+                case 0x2C8:
+                case 0x2CA:
+                case 0x2CC:
+                case 0x2CE:
+                case 0x2D0:
+                case 0x2D2:
+                case 0x2D4:
+                case 0x2D6:
+                case 0x2D8:
+                case 0x2DA:
+                case 0x2DC:
+                case 0x2DE:
+                case 0x2E0:
+                case 0x2E2:
+                case 0x2E4:
+                case 0x2E6:
+                case 0x2E8:
+                case 0x2EA:
+                case 0x2EC:
+                case 0x2EE:
+                case 0x2F0:
+                case 0x2F2:
+                case 0x2F4:
+                case 0x2F6:
+                case 0x2F8://end bit variables
 
-                case 0x1FA:   //Bit Var 0
-                case 0x1FC:   //Bit Var 1
-                case 0x1FE:   //Bit Var 2
-                case 0x200:   //Bit Var 3
-                case 0x202:   //Bit Var 4
-                case 0x204:   //Bit Var 5
-                case 0x206:   //Bit Var 6
-                case 0x208:   //Bit Var 7
-                case 0x20A:   //Bit Var 8
-                case 0x20C:   //Bit Var 9
-                case 0x20E:   //Bit Var 10
-                case 0x210:   //Bit Var 11
-                case 0x212:   //Bit Var 12
-                case 0x214:   //Bit Var 13
-                case 0x216:   //Bit Var 14
-                case 0x218:   //Bit Var 15
-                case 0x21A:   //Bit Var 16
-                case 0x21C:   //Bit Var 17
-                case 0x21E:   //Bit Var 18
-                case 0x220:   //Bit Var 19
-                case 0x222:   //Bit Var 20
-                case 0x224:   //Bit Var 21
-                case 0x226:   //Bit Var 22
-                case 0x228:   //Bit Var 23
-                case 0x22A:   //Bit Var 24
-                case 0x22C:   //Bit Var 25
-                case 0x22E:   //Bit Var 26
-                case 0x230:   //Bit Var 27
-                case 0x232:   //Bit Var 28
-                case 0x234:   //Bit Var 29
-                case 0x236:   //Bit Var 30
-                case 0x238:   //Bit Var 31
-                case 0x23A:   //Bit Var 32
                     DataLoader.WriteInt8(writer, Quest.instance.BitVariables[bitVariableCounter++]);
                     break;
-                    //Skip over for bit vars
+                //Skip over for bit vars
                 case 0x1FA + 1:
                 case 0x1FC + 1:
                 case 0x1FE + 1:
@@ -1096,6 +1192,101 @@ public class SaveGame : Loader
                 case 0x236 + 1:
                 case 0x238 + 1:
                 case 0x23A + 1:
+                case 0x23C + 1:
+                case 0x23E + 1:
+                case 0x240 + 1:
+                case 0x242 + 1:
+                case 0x244 + 1:
+                case 0x246 + 1:
+                case 0x248 + 1:
+                case 0x24A + 1:
+                case 0x24C + 1:
+                case 0x24E + 1:
+                case 0x250 + 1:
+                case 0x252 + 1:
+                case 0x254 + 1:
+                case 0x256 + 1:
+                case 0x258 + 1:
+                case 0x25A + 1:
+                case 0x25C + 1:
+                case 0x25E + 1:
+                case 0x260 + 1:
+                case 0x262 + 1:
+                case 0x264 + 1:
+                case 0x266 + 1:
+                case 0x268 + 1:
+                case 0x26A + 1:
+                case 0x26C + 1:
+                case 0x26E + 1:
+                case 0x270 + 1:
+                case 0x272 + 1:
+                case 0x274 + 1:
+                case 0x276 + 1:
+                case 0x278 + 1:
+                case 0x27A + 1:
+                case 0x27C + 1:
+                case 0x27E + 1:
+                case 0x280 + 1:
+                case 0x282 + 1:
+                case 0x284 + 1:
+                case 0x286 + 1:
+                case 0x288 + 1:
+                case 0x28A + 1:
+                case 0x28C + 1:
+                case 0x28E + 1:
+                case 0x290 + 1:
+                case 0x292 + 1:
+                case 0x294 + 1:
+                case 0x296 + 1:
+                case 0x298 + 1:
+                case 0x29A + 1:
+                case 0x29C + 1:
+                case 0x29E + 1:
+                case 0x2A0 + 1:
+                case 0x2A2 + 1:
+                case 0x2A4 + 1:
+                case 0x2A6 + 1:
+                case 0x2A8 + 1:
+                case 0x2AA + 1:
+                case 0x2AC + 1:
+                case 0x2AE + 1:
+                case 0x2B0 + 1:
+                case 0x2B2 + 1:
+                case 0x2B4 + 1:
+                case 0x2B6 + 1:
+                case 0x2B8 + 1:
+                case 0x2BA + 1:
+                case 0x2BC + 1:
+                case 0x2BE + 1:
+                case 0x2C0 + 1:
+                case 0x2C2 + 1:
+                case 0x2C4 + 1:
+                case 0x2C6 + 1:
+                case 0x2C8 + 1:
+                case 0x2CA + 1:
+                case 0x2CC + 1:
+                case 0x2CE + 1:
+                case 0x2D0 + 1:
+                case 0x2D2 + 1:
+                case 0x2D4 + 1:
+                case 0x2D6 + 1:
+                case 0x2D8 + 1:
+                case 0x2DA + 1:
+                case 0x2DC + 1:
+                case 0x2DE + 1:
+                case 0x2E0 + 1:
+                case 0x2E2 + 1:
+                case 0x2E4 + 1:
+                case 0x2E6 + 1:
+                case 0x2E8 + 1:
+                case 0x2EA + 1:
+                case 0x2EC + 1:
+                case 0x2EE + 1:
+                case 0x2F0 + 1:
+                case 0x2F2 + 1:
+                case 0x2F4 + 1:
+                case 0x2F6 + 1:
+                case 0x2F8 + 1:
                     {
                         //End skip over for bit vars
                         break;
@@ -1682,39 +1873,134 @@ public class SaveGame : Loader
 
 
                     //Bit Variables
-                    case 0x1FA:   //Bit Var 0
-                    case 0x1FC:   //Bit Var 1
-                    case 0x1FE:   //Bit Var 2
-                    case 0x200:   //Bit Var 3
-                    case 0x202:   //Bit Var 4
-                    case 0x204:   //Bit Var 5
-                    case 0x206:   //Bit Var 6
-                    case 0x208:   //Bit Var 7
-                    case 0x20A:   //Bit Var 8
-                    case 0x20C:   //Bit Var 9
-                    case 0x20E:   //Bit Var 10
-                    case 0x210:   //Bit Var 11
-                    case 0x212:   //Bit Var 12
-                    case 0x214:   //Bit Var 13
-                    case 0x216:   //Bit Var 14
-                    case 0x218:   //Bit Var 15
-                    case 0x21A:   //Bit Var 16
-                    case 0x21C:   //Bit Var 17
-                    case 0x21E:   //Bit Var 18
-                    case 0x220:   //Bit Var 19
-                    case 0x222:   //Bit Var 20
-                    case 0x224:   //Bit Var 21
-                    case 0x226:   //Bit Var 22
-                    case 0x228:   //Bit Var 23
-                    case 0x22A:   //Bit Var 24
-                    case 0x22C:   //Bit Var 25
-                    case 0x22E:   //Bit Var 26
-                    case 0x230:   //Bit Var 27
-                    case 0x232:   //Bit Var 28
-                    case 0x234:   //Bit Var 29
-                    case 0x236:   //Bit Var 30
-                    case 0x238:   //Bit Var 31
-                    case 0x23A:   //Bit Var 32
+                    case 0x1FA:
+                    case 0x1FC:
+                    case 0x1FE:
+                    case 0x200:
+                    case 0x202:
+                    case 0x204:
+                    case 0x206:
+                    case 0x208:
+                    case 0x20A:
+                    case 0x20C:
+                    case 0x20E:
+                    case 0x210:
+                    case 0x212:
+                    case 0x214:
+                    case 0x216:
+                    case 0x218:
+                    case 0x21A:
+                    case 0x21C:
+                    case 0x21E:
+                    case 0x220:
+                    case 0x222:
+                    case 0x224:
+                    case 0x226:
+                    case 0x228:
+                    case 0x22A:
+                    case 0x22C:
+                    case 0x22E:
+                    case 0x230:
+                    case 0x232:
+                    case 0x234:
+                    case 0x236:
+                    case 0x238:
+                    case 0x23A:
+                    case 0x23C:
+                    case 0x23E:
+                    case 0x240:
+                    case 0x242:
+                    case 0x244:
+                    case 0x246:
+                    case 0x248:
+                    case 0x24A:
+                    case 0x24C:
+                    case 0x24E:
+                    case 0x250:
+                    case 0x252:
+                    case 0x254:
+                    case 0x256:
+                    case 0x258:
+                    case 0x25A:
+                    case 0x25C:
+                    case 0x25E:
+                    case 0x260:
+                    case 0x262:
+                    case 0x264:
+                    case 0x266:
+                    case 0x268:
+                    case 0x26A:
+                    case 0x26C:
+                    case 0x26E:
+                    case 0x270:
+                    case 0x272:
+                    case 0x274:
+                    case 0x276:
+                    case 0x278:
+                    case 0x27A:
+                    case 0x27C:
+                    case 0x27E:
+                    case 0x280:
+                    case 0x282:
+                    case 0x284:
+                    case 0x286:
+                    case 0x288:
+                    case 0x28A:
+                    case 0x28C:
+                    case 0x28E:
+                    case 0x290:
+                    case 0x292:
+                    case 0x294:
+                    case 0x296:
+                    case 0x298:
+                    case 0x29A:
+                    case 0x29C:
+                    case 0x29E:
+                    case 0x2A0:
+                    case 0x2A2:
+                    case 0x2A4:
+                    case 0x2A6:
+                    case 0x2A8:
+                    case 0x2AA:
+                    case 0x2AC:
+                    case 0x2AE:
+                    case 0x2B0:
+                    case 0x2B2:
+                    case 0x2B4:
+                    case 0x2B6:
+                    case 0x2B8:
+                    case 0x2BA:
+                    case 0x2BC:
+                    case 0x2BE:
+                    case 0x2C0:
+                    case 0x2C2:
+                    case 0x2C4:
+                    case 0x2C6:
+                    case 0x2C8:
+                    case 0x2CA:
+                    case 0x2CC:
+                    case 0x2CE:
+                    case 0x2D0:
+                    case 0x2D2:
+                    case 0x2D4:
+                    case 0x2D6:
+                    case 0x2D8:
+                    case 0x2DA:
+                    case 0x2DC:
+                    case 0x2DE:
+                    case 0x2E0:
+                    case 0x2E2:
+                    case 0x2E4:
+                    case 0x2E6:
+                    case 0x2E8:
+                    case 0x2EA:
+                    case 0x2EC:
+                    case 0x2EE:
+                    case 0x2F0:
+                    case 0x2F2:
+                    case 0x2F4:
+                    case 0x2F6:
+                    case 0x2F8://end bit variables
                         {
                             Quest.instance.BitVariables[BitVariableCounter++] = (int)DataLoader.getValAtAddress(buffer, i, 16);
                             break;
@@ -1753,6 +2039,101 @@ public class SaveGame : Loader
                     case 0x236 + 1:
                     case 0x238 + 1:
                     case 0x23A + 1:
+                    case 0x23C + 1:
+                    case 0x23E + 1:
+                    case 0x240 + 1:
+                    case 0x242 + 1:
+                    case 0x244 + 1:
+                    case 0x246 + 1:
+                    case 0x248 + 1:
+                    case 0x24A + 1:
+                    case 0x24C + 1:
+                    case 0x24E + 1:
+                    case 0x250 + 1:
+                    case 0x252 + 1:
+                    case 0x254 + 1:
+                    case 0x256 + 1:
+                    case 0x258 + 1:
+                    case 0x25A + 1:
+                    case 0x25C + 1:
+                    case 0x25E + 1:
+                    case 0x260 + 1:
+                    case 0x262 + 1:
+                    case 0x264 + 1:
+                    case 0x266 + 1:
+                    case 0x268 + 1:
+                    case 0x26A + 1:
+                    case 0x26C + 1:
+                    case 0x26E + 1:
+                    case 0x270 + 1:
+                    case 0x272 + 1:
+                    case 0x274 + 1:
+                    case 0x276 + 1:
+                    case 0x278 + 1:
+                    case 0x27A + 1:
+                    case 0x27C + 1:
+                    case 0x27E + 1:
+                    case 0x280 + 1:
+                    case 0x282 + 1:
+                    case 0x284 + 1:
+                    case 0x286 + 1:
+                    case 0x288 + 1:
+                    case 0x28A + 1:
+                    case 0x28C + 1:
+                    case 0x28E + 1:
+                    case 0x290 + 1:
+                    case 0x292 + 1:
+                    case 0x294 + 1:
+                    case 0x296 + 1:
+                    case 0x298 + 1:
+                    case 0x29A + 1:
+                    case 0x29C + 1:
+                    case 0x29E + 1:
+                    case 0x2A0 + 1:
+                    case 0x2A2 + 1:
+                    case 0x2A4 + 1:
+                    case 0x2A6 + 1:
+                    case 0x2A8 + 1:
+                    case 0x2AA + 1:
+                    case 0x2AC + 1:
+                    case 0x2AE + 1:
+                    case 0x2B0 + 1:
+                    case 0x2B2 + 1:
+                    case 0x2B4 + 1:
+                    case 0x2B6 + 1:
+                    case 0x2B8 + 1:
+                    case 0x2BA + 1:
+                    case 0x2BC + 1:
+                    case 0x2BE + 1:
+                    case 0x2C0 + 1:
+                    case 0x2C2 + 1:
+                    case 0x2C4 + 1:
+                    case 0x2C6 + 1:
+                    case 0x2C8 + 1:
+                    case 0x2CA + 1:
+                    case 0x2CC + 1:
+                    case 0x2CE + 1:
+                    case 0x2D0 + 1:
+                    case 0x2D2 + 1:
+                    case 0x2D4 + 1:
+                    case 0x2D6 + 1:
+                    case 0x2D8 + 1:
+                    case 0x2DA + 1:
+                    case 0x2DC + 1:
+                    case 0x2DE + 1:
+                    case 0x2E0 + 1:
+                    case 0x2E2 + 1:
+                    case 0x2E4 + 1:
+                    case 0x2E6 + 1:
+                    case 0x2E8 + 1:
+                    case 0x2EA + 1:
+                    case 0x2EC + 1:
+                    case 0x2EE + 1:
+                    case 0x2F0 + 1:
+                    case 0x2F2 + 1:
+                    case 0x2F4 + 1:
+                    case 0x2F6 + 1:
+                    case 0x2F8 + 1:
                         {//end skip for bit variables
                             break;
                         }   

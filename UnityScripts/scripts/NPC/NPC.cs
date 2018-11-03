@@ -148,7 +148,7 @@ public class NPC : MobileObject
     public bool RangeAttack;
     ///Transform position to launch projectiles from
     public GameObject NPC_Launcher;
-    public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+   // public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
     public float WaitTimer = 0f;
     [Header("NavMesh")]
     public NavMeshAgent Agent;
@@ -1792,12 +1792,7 @@ public class NPC : MobileObject
             return;
         }
         Vector3 TargetingPoint;
-        //if (gtarg.name=="_Gronk")
-        //{//Try and hit the player
-        //		TargetingPoint=UWCharacter.Instance.TargetPoint.transform.position;
-        //}
-        //else
-        //{//Trying to hit an object						
+					
         TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	
                                                                         //}
         Vector3 TargetingVector = (TargetingPoint - NPC_Launcher.transform.position).normalized;
@@ -1810,24 +1805,27 @@ public class NPC : MobileObject
             float force = 100f * Vector3.Distance(TargetingPoint, NPC_Launcher.transform.position);
             int projectiletype = RangedAttackProjectile();
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(projectiletype, 0, 0, 1, 256);
-            newobjt.is_quant = 1;
-            GameObject launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
+            if (newobjt!=null)
+            {
+                newobjt.is_quant = 1;
+                GameObject launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
 
-            UnFreezeMovement(launchedItem);
-            Vector3 ThrowDir = TargetingVector;
-            ///Apply the force along the direction of the ray that the player has targetted along.
-            launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir * force);
-            GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
-            myObjChild.transform.position = launchedItem.transform.position;
-            myObjChild.transform.parent = launchedItem.transform;
-            ///Appends ProjectileDamage to the projectile to act as the damage delivery method.
-            ProjectileDamage pd = myObjChild.AddComponent<ProjectileDamage>();
-            pd.Source = this.gameObject;
-            pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[projectiletype-16].damage;//sling damage.
-            pd.AttackCharge = 100f;
-            pd.AttackScore = GetAttack();//Assuming there is no special ranged attack score?
-            pd.ArmourDamage = GetArmourDamage();
-            Ammo--;
+                UnFreezeMovement(launchedItem);
+                Vector3 ThrowDir = TargetingVector;
+                ///Apply the force along the direction of the ray that the player has targetted along.
+                launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir * force);
+                GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
+                myObjChild.transform.position = launchedItem.transform.position;
+                myObjChild.transform.parent = launchedItem.transform;
+                ///Appends ProjectileDamage to the projectile to act as the damage delivery method.
+                ProjectileDamage pd = myObjChild.AddComponent<ProjectileDamage>();
+                pd.Source = this.gameObject;
+                pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[projectiletype - 16].damage;//sling damage.
+                pd.AttackCharge = 100f;
+                pd.AttackScore = GetAttack();//Assuming there is no special ranged attack score?
+                pd.ArmourDamage = GetArmourDamage();
+               
+            }
         }
     }
 

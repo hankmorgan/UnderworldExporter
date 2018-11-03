@@ -126,12 +126,12 @@ public class Quest : UWEBase
     /// The game Variables for the check/set variable traps
     /// </summary>
     /// Typically these are used for traps/triggers/switches.
-    public int[] variables = new int[127];
+    public int[] variables = new int[128];
 
     /// <summary>
     /// Additional variables in UW2. Possibly these are all bit fields hence the name Only known usage is the scintillus 5 switch puzzle
     /// </summary>
-    public int[] BitVariables = new int[64];
+    public int[] BitVariables = new int[128];
 
     /// <summary>
     /// The x clocks tracks progress during the game and is used in firing events.
