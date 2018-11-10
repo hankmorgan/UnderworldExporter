@@ -71,6 +71,7 @@ public class Character : UWEBase {
 	public float BaseEngagementRange = 8;
 
 	public static bool Invincible;
+    public static bool AutoKeyUse;
 
 	//For controlling switching between mouse look and interaction
 	[Header("Mouselook")]	

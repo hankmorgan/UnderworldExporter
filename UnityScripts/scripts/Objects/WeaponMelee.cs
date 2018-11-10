@@ -16,10 +16,10 @@ public class WeaponMelee : Weapon {
 		if (objInt().isEnchanted()==true)
 		{
 			int EffectId = GetActualSpellIndex ();
-			if (EffectId<=447)
-			{//Not a standard effect
+			//if (EffectId<=447)
+			//{//Not a standard effect
 				UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(UWCharacter.Instance.gameObject,target,EffectId,Magic.SpellRule_TargetOther,Magic.SpellRule_Immediate);
-			}
+			//}
 		}
 	}
 

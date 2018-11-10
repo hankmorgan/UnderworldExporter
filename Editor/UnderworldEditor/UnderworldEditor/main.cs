@@ -1182,5 +1182,7 @@ namespace UnderworldEditor
            // MessageBox.Show(x + "," +(64- y));
             TileMapUI.LoadInfoForTileXY(this, x, 63-y);
         }
+
+
     }
 }

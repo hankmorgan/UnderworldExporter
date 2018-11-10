@@ -2543,6 +2543,16 @@ public class Magic : UWEBase
         sep.Go();
     }
 
+    public void Cast_StoneStrike(GameObject caster, GameObject target, int effectID)
+    {
+        if (Random.Range(1,6)> 4)
+        {//1 in 5 hits will cast
+            SpellEffectPetrified sep = target.AddComponent<SpellEffectPetrified>();
+            sep.counter = (short)Random.Range(5,15);
+            sep.Go();
+        }
+    }
+
     /* Utility code for Spells*/
 
     /// <summary>
@@ -5724,7 +5734,7 @@ public class Magic : UWEBase
                 }
             case SpellEffect.UW2_Spell_Effect_StoneStrike:
                 {
-                    Debug.Log("stone strike");
+                    Cast_StoneStrike(caster,target, EffectID);
                     SpellResultType = SpellResultNone;
                     break;
                 }

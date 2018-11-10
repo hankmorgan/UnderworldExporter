@@ -1405,11 +1405,11 @@ public class ObjectInteraction : UWEBase
         //CharacterController cap
         //cap = myObj.GetComponent<CharacterController>();
         npc.CharController = myObj.AddComponent<CharacterController>();
-        SetUndeadNPCS(objInt, npc);
+        //SetUndeadNPCS(objInt, npc);
         SetNPCSizes(objInt, npc, NpcLauncher);
         npc.CharController.stepOffset = 0.1f;//Stop npcs from climbing over each other
-        SetMagicAttackNPCs(objInt, npc);
-        SetRangeAttackNPCs(objInt, npc);
+        //SetMagicAttackNPCs(objInt, npc);
+        //SetRangeAttackNPCs(objInt, npc);
         return npc;
     }
 
@@ -1614,150 +1614,33 @@ public class ObjectInteraction : UWEBase
         NpcLauncher.transform.localPosition = new Vector3(0.0f, 0.5f, 0.2f);
     }
 
-    private static void SetRangeAttackNPCs(ObjectInteraction objInt, NPC npc)
-    {
-        switch (_RES)
-        {
-            case GAME_UW2:
-                {
-                    switch (objInt.item_id)
-                    {
-                        case 73: //a_goblin
-                        case 74: //a_goblin
-                        case 82: //yeti
-                        case 110: //fighter
-                            npc.RangeAttack = true;
-                            break;
-                        default:
-                            npc.RangeAttack = false;
-                            break;
-                    }
-                    break;
-                }
-            default:
-                {
-                    switch (objInt.item_id)
-                    {
-                        case 70: //a_goblin
-                        case 71: //a_goblin
-                        case 76: //a_goblin
-                        case 77: //a_goblin
-                        case 78: //a_goblin
-                            npc.RangeAttack = true;
-                            break;
-                        default:
-                            npc.RangeAttack = false;
-                            break;
-                    }
-                    break;
-                }
-        }
-    }
+    //private static void SetRangeAttackNPCs(ObjectInteraction objInt, NPC npc)
+    //{
 
-        /// <summary>
-        /// Sets which enemies can cast magic attacks
-        /// </summary>
-        /// <param name="objInt"></param>
-        /// <param name="npc"></param>
-        private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
-    {
-        //Set enemies who can cast spells.
-        //TODO: update for UW2
-        switch (_RES)
-        {
-            case GAME_UW2:
-                {
-                    switch (objInt.item_id)
-                    {
-                        case 75: //an_imp
-                        case 88: //a_brain_creature
-                        case 96: //a_fire_elemental
-                        case 104: //a_destroyer
-                        case 105: //a_liche
-                        case 106: //a_liche
-                        case 107: //a_liche
-                        case 111: //a_gazer
-                        case 117: //a_human
-                            npc.MagicAttack = true;
-                            break;
-                        default:
-                            npc.MagicAttack = false;
-                            break;
-                    }
-                break;
-                }
-            default:
-                {
-                    switch (objInt.item_id)
-                    {
-                        case 103: //a_mage
-                        case 106: //a_mage
-                        case 107: //a_mage
-                        case 108: //a_mage
-                        case 109: //a_mage
-                        case 110: //a_ghoul
-                        case 115: //a_mage
-                        case 120: //A fire elemental
-                        case 123: //tybal
-                        case 75: //an_imp
-                        case 81: //a_mongbat
-                        case 102: //a_gazer
-                        case 69: //a_acid_slug
-                        case 122: //a_wisp
-                            npc.MagicAttack = true;
-                            break;
-                        default:
-                            npc.MagicAttack = false;
-                            break;
-                    }
-                    break;
-                }
-        }
-    }
+    //}
 
-    /// <summary>
-    /// Checks and set if the NPC is one of the undead types.
-    /// </summary>
-    /// <param name="objInt"></param>
-    /// <param name="npc"></param>
-    private static void SetUndeadNPCS(ObjectInteraction objInt, NPC npc)
-    {
-        switch (_RES)
-        {
-            case GAME_UW2:
-                {
-                    switch (objInt.item_id)
-                    { 
-                    case 72: //a_skeleton
-                    case 85: //a_ghost
-                    case 93: //a_spectre
-                    case 105: //a_liche
-                    case 106: //a_liche
-                    case 107: //a_liche
-                        npc.isUndead = true;
-                        break;
-                    }
-                break;
-                }
-            default:
-                {
-                    switch (objInt.item_id)
-                    {
-                        case 97: //a_ghost
-                        case 99: //a_ghoul
-                        case 100: //a_ghost
-                        case 101: //a_ghost
-                        case 105: //a_dark_ghoul
-                        case 110: //a_ghoul	
-                        case 113: //a_dire_ghost
-                            npc.isUndead = true;
-                            break;
-                    }
-                    break;
-                }
-        }
+    //    /// <summary>
+    //    /// Sets which enemies can cast magic attacks
+    //    /// </summary>
+    //    /// <param name="objInt"></param>
+    //    /// <param name="npc"></param>
+    //    private static void SetMagicAttackNPCs(ObjectInteraction objInt, NPC npc)
+    //{
+    //    //Set enemies who can cast spells.
+    //    //TODO: update for UW2
+ 
+    //}
 
-    }
+    ///// <summary>
+    ///// Checks and set if the NPC is one of the undead types.
+    ///// </summary>
+    ///// <param name="objInt"></param>
+    ///// <param name="npc"></param>
+    //private static void SetUndeadNPCS(ObjectInteraction objInt, NPC npc)
+    //{
+ 
+
+    //}
 
     /*	public static void SetNPCProps(GameObject myObj, 
 				int npc_whoami, int npc_xhome, int npc_yhome,

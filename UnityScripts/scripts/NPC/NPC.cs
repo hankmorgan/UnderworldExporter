@@ -45,7 +45,8 @@ public class NPC : MobileObject
         npc_goal_attack_5 = 5,
         npc_goal_attack_9 = 9,
         npc_goal_flee = 6,
-        npc_goal_follow = 3
+        npc_goal_follow = 3,
+        npc_goal_petrified =15
     };
 
     public enum AttackStages
@@ -139,13 +140,142 @@ public class NPC : MobileObject
     public short FrozenUpdate = 0;
     //Enemy types.
     ///Undead Enemy flag
-    public bool isUndead = false;
+    public bool isUndead
+    {
+        get
+        {
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    {
+                        switch (item_id)
+                        {
+                            case 72: //a_skeleton
+                            case 85: //a_ghost
+                            case 93: //a_spectre
+                            case 105: //a_liche
+                            case 106: //a_liche
+                            case 107: //a_liche
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                default:
+                    {
+                        switch (item_id)
+                        {
+                            case 97: //a_ghost
+                            case 99: //a_ghoul
+                            case 100: //a_ghost
+                            case 101: //a_ghost
+                            case 105: //a_dark_ghoul
+                            case 110: //a_ghoul	
+                            case 113: //a_dire_ghost
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+            }
+        }
+    }
+
     ///For storing spell effects applied to NPCs
     public SpellEffect[] NPCStatusEffects = new SpellEffect[3];
-    ///Can the NPC fire off magic attacks.
-    public bool MagicAttack;
-    ///Can the NPC fire off ranged attacks.
-    public bool RangeAttack;
+
+    /// <summary>
+    /// Can the NPC fire off magic attacks.
+    /// </summary>
+    public bool MagicAttack
+    {
+        get
+        {
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    {
+                        switch (item_id)
+                        {
+                            case 75: //an_imp
+                            case 88: //a_brain_creature
+                            case 96: //a_fire_elemental
+                            case 104: //a_destroyer
+                            case 105: //a_liche
+                            case 111: //a_gazer
+                            case 117: //a_human
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                default:
+                    {
+                        switch (item_id)
+                        {
+                            case 103: //a_mage
+                            case 106: //a_mage
+                            case 107: //a_mage
+                            case 108: //a_mage
+                            case 109: //a_mage
+                            case 110: //a_ghoul
+                            case 115: //a_mage
+                            case 120: //A fire elemental
+                            case 123: //tybal
+                            case 75: //an_imp
+                            case 81: //a_mongbat
+                            case 102: //a_gazer
+                            case 69: //a_acid_slug
+                            case 122: //a_wisp
+                                return  true;
+                            default:
+                                return false;
+                        }
+                    }
+            }
+        }        
+    }
+
+    /// <summary>
+    /// Can the NPC fire off ranged attacks.
+    /// </summary>
+    public bool RangeAttack
+    {
+        get
+        {
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    {
+                        switch (item_id)
+                        {
+                            case 73: //a_goblin
+                            case 74: //a_goblin
+                            case 82: //yeti
+                            case 110: //fighter
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                default:
+                    {
+                        switch (item_id)
+                        {
+                            case 70: //a_goblin
+                            case 71: //a_goblin
+                            case 76: //a_goblin
+                            case 77: //a_goblin
+                            case 78: //a_goblin
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+            }
+        }
+    }
+
     ///Transform position to launch projectiles from
     public GameObject NPC_Launcher;
    // public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
@@ -195,6 +325,12 @@ public class NPC : MobileObject
         newAnim.output = this.GetComponentInChildren<SpriteRenderer>();
         DestTileX = ObjectTileX;
         DestTileY = ObjectTileY;
+        if (npc_goal == (short)npc_goals.npc_goal_petrified)
+        {
+            SpellEffectPetrified sep = this.gameObject.AddComponent<SpellEffectPetrified>();
+            sep.counter = npc_gtarg;
+            sep.Go();
+        }
     }
 
     void AI_INIT()
@@ -624,6 +760,8 @@ public class NPC : MobileObject
     {
         if (EditorMode == true) { return; }
         if (ConversationVM.InConversation) { return; }
+
+        //TODO:Check if frozen npcs should behave like petrified (stone struck) ones.
         bool FreezeNpc = isNPCFrozen();
         newAnim.FreezeAnimFrame = FreezeNpc;
         if ((WaitTimer > 0) && (!FreezeNpc))
@@ -888,7 +1026,11 @@ public class NPC : MobileObject
                     NPCFollow();
                     break;
                 }
-
+            case npc_goals.npc_goal_petrified:
+                {
+                    AgentStand();
+                    break;
+                }
         }
 
         if (
@@ -1303,12 +1445,15 @@ public class NPC : MobileObject
         {
             if (source.name == "_Gronk")
             {//PLayer attacked the npc
-                npc_attitude = 0;//Make the npc angry with the player.
-                                 //Assumes the player has attacked
-                npc_gtarg = 1;
-                gtarg = UWCharacter.Instance.gameObject;
-                gtargName = gtarg.name;
-                npc_goal = (short)npc_goals.npc_goal_attack_5;
+                if (npc_goal!=(short)npc_goals.npc_goal_petrified)
+                {
+                    npc_attitude = 0;//Make the npc angry with the player.
+                                     //Assumes the player has attacked
+                    npc_gtarg = 1;
+                    gtarg = UWCharacter.Instance.gameObject;
+                    gtargName = gtarg.name;
+                    npc_goal = (short)npc_goals.npc_goal_attack_5;
+                }
                 if (npc_hp < 5)//Low health. 20% Chance for morale break
                 {
                     if (Random.Range(0, 5) >= 4)
@@ -1329,8 +1474,8 @@ public class NPC : MobileObject
                             {
                                 Col.gameObject.GetComponent<NPC>().npc_attitude = 0;//Make the npc angry with the player.
                                 Col.gameObject.GetComponent<NPC>().npc_gtarg = 1;
-                                Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
-                                Col.gameObject.GetComponent<NPC>().gtargName = gtarg.name;
+                               //Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
+                                //Col.gameObject.GetComponent<NPC>().gtargName = gtarg.name;
                                 Col.gameObject.GetComponent<NPC>().npc_goal = (short)npc_goals.npc_goal_attack_5;
                             }
                         }
@@ -1358,6 +1503,8 @@ public class NPC : MobileObject
     /// <returns><c>true</c> if this instance can get angry; otherwise, <c>false</c>.</returns>
     bool CanGetAngry()
     {
+        if (npc_goal == (short)npc_goals.npc_goal_petrified)
+        { return false; }
         switch (_RES)
         {
             case GAME_UW1:
@@ -1952,11 +2099,8 @@ public class NPC : MobileObject
                         return SpellEffect.UW2_Spell_Effect_MindBlast;
                     case 96: //a_fire_elemental
                     case 104: //a_destroyer
+                    case 105: //a_liche//
                         return SpellEffect.UW2_Spell_Effect_Fireball_alt01;
-                    case 105: //a_liche//Confirm these?
-                    case 106: //a_liche
-                    case 107: //a_liche
-                        return SpellEffect.UW2_Spell_Effect_Lightning_alt05;
                     case 75: //an_imp
                     case 111: //a_gazer
                     case 117: //a_human

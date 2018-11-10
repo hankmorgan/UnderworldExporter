@@ -1811,6 +1811,11 @@ public class GameWorldController : UWEBase
                                             ShowOnlyInUse = (entries[1] == "1");
                                             break;
                                         }
+                                    case "AUTOKEYUSE":
+                                        {
+                                            UWCharacter.AutoKeyUse = (entries[1] == "1");
+                                            break;
+                                        }
                                 }
                             }
                         }

@@ -5,16 +5,10 @@ using UnityEngine.AI;
 /// Door controller for manipulating doors
 /// </summary>
 public class DoorControl : object_base {
-	///The damage resistance of the door.
-	//public int DR;
-		///Is the door locked
-	//public bool locked;
 
 		///What keys can open this
 	public int KeyIndex; //THis is the same as objInt.link
 		///True for open, false for closed.
-	//public bool state;	
-
 
 		///Special cases. Sets direction of opening
 	//public bool isPortcullis;
@@ -22,12 +16,10 @@ public class DoorControl : object_base {
 	public bool DoorBusy;
 		///Sets if the lock can be picked.
 	public bool Pickable=true;
-		///Is the door spiked
+	///Is the door spiked
 	//public bool Spiked;//Probably on the lock object?
-		///Is it the player using the object or a trigger/trap.
+	///Is it the player using the object or a trigger/trap.
 	public bool PlayerUse=false;
-		///A trigger to activate when opened.
-	//public string UseLink;
 
 	//Visible faces indices
 	const int vTOP =0;
@@ -174,7 +166,6 @@ public class DoorControl : object_base {
 			}
 		}
 
-
 		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
 		{
 			ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
@@ -190,12 +181,29 @@ public class DoorControl : object_base {
 		else
 		{//Normal Usage
 			PlayerUse=true;
-			Activate(this.gameObject);
+            if ((UWCharacter.AutoKeyUse) && (locked()))
+            {//Try each key in the players inventory to see if it can open the door
+                foreach (Transform t in GameWorldController.instance.InventoryMarker.transform)
+                {
+                    if (t.gameObject.GetComponent<DoorKey>() != null)
+                    {
+                        DoorKey key = t.gameObject.GetComponent<DoorKey>();
+                        if (key.KeyId == KeyIndex)
+                        {
+                            ActivateByObject(key.gameObject);
+                            if (trigger != null)
+                            {
+                                trigger.Activate(this.gameObject);
+                            }
+                            PlayerUse = false;
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            Activate(this.gameObject);			
 			PlayerUse=false;
-			//if (trigger!=null)
-			//{
-			//	trigger.Activate();
-			//}
 			return true;
 		}
 	}

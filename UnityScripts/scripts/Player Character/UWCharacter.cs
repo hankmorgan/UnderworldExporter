@@ -40,7 +40,25 @@ public class UWCharacter : Character
     public bool onLava;
     public bool onBridge;
     public Vector3 IceCurrentVelocity = Vector3.zero;
-    public Vector3 CameraLocalPos;
+    public Vector3 CameraLocalPos
+    {
+        get
+        {
+            if(isSwimming)
+            {
+                //float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
+                return new Vector3(0f,
+                    -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f))))),
+                    0.38f);
+            }
+            else
+            {
+                return new Vector3(0f, 0.91f, 0.38f);
+            }
+        }
+    }
+    
+
 
     [Header("Player Movement Status")]
     public SpellEffect[] ActiveSpell = new SpellEffect[3];      //What effects and enchantments (eg from items are equipped on the player)
@@ -504,7 +522,7 @@ public class UWCharacter : Character
             this.GetComponent<CharacterController>().Move(new Vector3(0, 0.2f * Time.deltaTime * speedMultiplier, 0));
         }
         else
-                if (((Input.GetKeyDown(KeyBindings.instance.FlyDown)) || (Input.GetKey(KeyBindings.instance.FlyDown))) && (WindowDetectUW.WaitingForInput == false))
+        if (((Input.GetKeyDown(KeyBindings.instance.FlyDown)) || (Input.GetKey(KeyBindings.instance.FlyDown))) && (WindowDetectUW.WaitingForInput == false))
         {
             //Fly down
             this.GetComponent<CharacterController>().Move(new Vector3(0, -0.2f * Time.deltaTime * speedMultiplier, 0));
@@ -517,9 +535,13 @@ public class UWCharacter : Character
     /// </summary>
     void SwimmingEffects()
     {        
-        float bob = -0.8f + (0.05f * Mathf.Sin((Mathf.Deg2Rad * (360f * (SwimTimer % 1f)))));
-        playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
-        CameraLocalPos = new Vector3(-2.890434f, playerCam.transform.localPosition.z, 0.3800246f) ;
+        if (UWCharacter.InteractionMode==  InteractionModeAttack)
+        {
+            UWCharacter.InteractionMode = InteractionModeWalk;
+        }
+
+        // playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, bob, playerCam.transform.localPosition.z);
+        playerCam.transform.localPosition = CameraLocalPos + CameraShake.CurrentShake;
         swimSpeedMultiplier = Mathf.Max((float)(PlayerSkills.Swimming / 30.0f), 0.3f);//TODO:redo me
         SwimTimer = SwimTimer + Time.deltaTime;
         //Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
@@ -866,8 +888,7 @@ public class UWCharacter : Character
         else
         {//0.9198418f
             playerMotor.jumping.enabled = ((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!ConversationVM.InConversation) && (!WindowDetectUW.InMap));
-            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
-            CameraLocalPos = new Vector3(-2.890434f, playerCam.transform.localPosition.z, 0.3800246f);
+            playerCam.transform.localPosition = CameraLocalPos + CameraShake.CurrentShake;//new Vector3(playerCam.transform.localPosition.x, 1.0f, playerCam.transform.localPosition.z);
             swimSpeedMultiplier = 1.0f;
             SwimTimer = 0.0f;
         }
