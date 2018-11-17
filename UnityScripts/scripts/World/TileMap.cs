@@ -80,10 +80,13 @@ public class TileMap : Loader
     public const int UW1_NO_OF_LEVELS = 9;
     public const int UW2_NO_OF_LEVELS = 80;
 
-    public struct Overlay
+    /// <summary>
+    /// Animation overlay. Controls how long an animated effect appears for.
+    /// </summary>
+    public struct Overlay  
     {
-        public int index;
-        public int unk1;
+        public int link;
+        public int duration;
         public int tileX;
         public int tileY;
     };
@@ -344,21 +347,43 @@ public class TileMap : Loader
 
 
         //if (OverlayAddress!=0)
-        if (_RES == GAME_UW1)
+        switch (_RES)
         {
-            if (ovl_ark.DataLen != 0)
-            {//read in the next 64 entries of length 6 bytes	
-                long OverlayAddress = 0;
-                for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
+            case GAME_UW1:
                 {
-                    Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress, 16);
-                    Overlays[overlayIndex].unk1 = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 2, 16);
-                    Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 4, 8);
-                    Overlays[overlayIndex].index = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 5, 8);
-                    OverlayAddress += 6;
+                    if (ovl_ark.DataLen != 0)
+                    {//read in the next 64 entries of length 6 bytes	
+                        long OverlayAddress = 0;
+                        for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
+                        {
+                            Overlays[overlayIndex].link = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress, 16) & 0x3ff;
+                            Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 2, 16);
+                            Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 4, 8);
+                            Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 5, 8);
+                            OverlayAddress += 6;
+                        }
+                    }
+                    break;
                 }
-            }
+            case GAME_UW2:
+                {
+                    long OverlayAddress = 31752;
+                    for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
+                    {
+                        if (OverlayAddress + 5 <= lev_ark.Data.GetUpperBound(0))
+                        {
+                            Overlays[overlayIndex].link = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16) & 0x3ff;
+                            Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 2, 16);
+                            Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 4, 8);
+                            Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 5, 8);
+                        }
+                        OverlayAddress += 6;
+                    }
+                    break;
+                }
+
         }
+
         return true;
     }
 
@@ -1786,10 +1811,10 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         int OverlayAddress = 0;
         for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
         {
-            OverLayData[OverlayAddress + 0] = (char)(Overlays[overlayIndex].index & 0xFF);
-            OverLayData[OverlayAddress + 1] = (char)((Overlays[overlayIndex].index >> 8) & 0xFF);
-            OverLayData[OverlayAddress + 2] = (char)(Overlays[overlayIndex].unk1 & 0xFF);
-            OverLayData[OverlayAddress + 3] = (char)((Overlays[overlayIndex].unk1 >> 8) & 0xFF);
+            OverLayData[OverlayAddress + 0] = (char)(Overlays[overlayIndex].link & 0xFF);
+            OverLayData[OverlayAddress + 1] = (char)((Overlays[overlayIndex].link >> 8) & 0xFF);
+            OverLayData[OverlayAddress + 2] = (char)(Overlays[overlayIndex].duration & 0xFF);
+            OverLayData[OverlayAddress + 3] = (char)((Overlays[overlayIndex].duration >> 8) & 0xFF);
             OverLayData[OverlayAddress + 4] = (char)(Overlays[overlayIndex].tileX & 0xFF);
             OverLayData[OverlayAddress + 5] = (char)(Overlays[overlayIndex].tileY & 0xFF);
             OverlayAddress += 6;

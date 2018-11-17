@@ -138,7 +138,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PicMap = new PictureBoxWithInterpolationMode();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label49 = new System.Windows.Forms.Label();
@@ -214,10 +213,7 @@
             this.BtnImgSave = new System.Windows.Forms.Button();
             this.BtnImport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.PicColour = new PictureBoxWithInterpolationMode();
-            this.PicPalette = new PictureBoxWithInterpolationMode();
             this.TreeArt = new System.Windows.Forms.TreeView();
-            this.ImgOut = new PictureBoxWithInterpolationMode();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uW1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadPDatUW1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -239,6 +235,12 @@
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.BtnCopyLevArkRaw = new System.Windows.Forms.Button();
+            this.PicMap = new PictureBoxWithInterpolationMode();
+            this.PicColour = new PictureBoxWithInterpolationMode();
+            this.PicPalette = new PictureBoxWithInterpolationMode();
+            this.ImgOut = new PictureBoxWithInterpolationMode();
+            this.lblRawDataAddress = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -281,7 +283,6 @@
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMapZoom)).BeginInit();
@@ -314,10 +315,11 @@
             this.tabPage10.SuspendLayout();
             this.PicSelectedColour.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicColour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1376,19 +1378,6 @@
             this.panel1.Size = new System.Drawing.Size(681, 561);
             this.panel1.TabIndex = 24;
             // 
-            // PicMap
-            // 
-            this.PicMap.BackColor = System.Drawing.Color.Transparent;
-            this.PicMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicMap.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicMap.Location = new System.Drawing.Point(3, 3);
-            this.PicMap.Name = "PicMap";
-            this.PicMap.Size = new System.Drawing.Size(640, 640);
-            this.PicMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicMap.TabIndex = 4;
-            this.PicMap.TabStop = false;
-            this.PicMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicMap_MouseClick);
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
@@ -2049,6 +2038,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblRawDataAddress);
+            this.tabPage3.Controls.Add(this.BtnCopyLevArkRaw);
             this.tabPage3.Controls.Add(this.GrdLevArkRaw);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
@@ -2067,6 +2058,7 @@
             this.GrdLevArkRaw.Location = new System.Drawing.Point(4, 4);
             this.GrdLevArkRaw.Name = "GrdLevArkRaw";
             this.GrdLevArkRaw.RowTemplate.Height = 24;
+            this.GrdLevArkRaw.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GrdLevArkRaw.Size = new System.Drawing.Size(697, 385);
             this.GrdLevArkRaw.TabIndex = 0;
             // 
@@ -2239,27 +2231,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // PicColour
-            // 
-            this.PicColour.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicColour.Location = new System.Drawing.Point(522, 4);
-            this.PicColour.Name = "PicColour";
-            this.PicColour.Size = new System.Drawing.Size(64, 64);
-            this.PicColour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicColour.TabIndex = 59;
-            this.PicColour.TabStop = false;
-            // 
-            // PicPalette
-            // 
-            this.PicPalette.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.PicPalette.Location = new System.Drawing.Point(3, 3);
-            this.PicPalette.Name = "PicPalette";
-            this.PicPalette.Size = new System.Drawing.Size(512, 64);
-            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PicPalette.TabIndex = 58;
-            this.PicPalette.TabStop = false;
-            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
-            // 
             // TreeArt
             // 
             this.TreeArt.Location = new System.Drawing.Point(3, 3);
@@ -2273,17 +2244,6 @@
             this.TreeArt.Size = new System.Drawing.Size(161, 512);
             this.TreeArt.TabIndex = 51;
             this.TreeArt.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeArt_AfterSelect);
-            // 
-            // ImgOut
-            // 
-            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.ImgOut.Location = new System.Drawing.Point(170, 3);
-            this.ImgOut.Name = "ImgOut";
-            this.ImgOut.Size = new System.Drawing.Size(512, 512);
-            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImgOut.TabIndex = 55;
-            this.ImgOut.TabStop = false;
-            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
             // 
             // menuStrip1
             // 
@@ -2448,6 +2408,69 @@
             this.saveFileDialog1.DefaultExt = "png";
             this.saveFileDialog1.Filter = "(*.png)|*.png";
             // 
+            // BtnCopyLevArkRaw
+            // 
+            this.BtnCopyLevArkRaw.Location = new System.Drawing.Point(720, 22);
+            this.BtnCopyLevArkRaw.Name = "BtnCopyLevArkRaw";
+            this.BtnCopyLevArkRaw.Size = new System.Drawing.Size(88, 48);
+            this.BtnCopyLevArkRaw.TabIndex = 1;
+            this.BtnCopyLevArkRaw.Text = "Copy to Clipboard";
+            this.BtnCopyLevArkRaw.UseVisualStyleBackColor = true;
+            this.BtnCopyLevArkRaw.Click += new System.EventHandler(this.BtnCopyLevArkRaw_Click);
+            // 
+            // PicMap
+            // 
+            this.PicMap.BackColor = System.Drawing.Color.Transparent;
+            this.PicMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicMap.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicMap.Location = new System.Drawing.Point(3, 3);
+            this.PicMap.Name = "PicMap";
+            this.PicMap.Size = new System.Drawing.Size(640, 640);
+            this.PicMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicMap.TabIndex = 4;
+            this.PicMap.TabStop = false;
+            this.PicMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicMap_MouseClick);
+            // 
+            // PicColour
+            // 
+            this.PicColour.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicColour.Location = new System.Drawing.Point(522, 4);
+            this.PicColour.Name = "PicColour";
+            this.PicColour.Size = new System.Drawing.Size(64, 64);
+            this.PicColour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicColour.TabIndex = 59;
+            this.PicColour.TabStop = false;
+            // 
+            // PicPalette
+            // 
+            this.PicPalette.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.PicPalette.Location = new System.Drawing.Point(3, 3);
+            this.PicPalette.Name = "PicPalette";
+            this.PicPalette.Size = new System.Drawing.Size(512, 64);
+            this.PicPalette.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicPalette.TabIndex = 58;
+            this.PicPalette.TabStop = false;
+            this.PicPalette.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PicPalette_MouseClick);
+            // 
+            // ImgOut
+            // 
+            this.ImgOut.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.ImgOut.Location = new System.Drawing.Point(170, 3);
+            this.ImgOut.Name = "ImgOut";
+            this.ImgOut.Size = new System.Drawing.Size(512, 512);
+            this.ImgOut.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ImgOut.TabIndex = 55;
+            this.ImgOut.TabStop = false;
+            this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
+            // 
+            // lblRawDataAddress
+            // 
+            this.lblRawDataAddress.AutoSize = true;
+            this.lblRawDataAddress.Location = new System.Drawing.Point(728, 106);
+            this.lblRawDataAddress.Name = "lblRawDataAddress";
+            this.lblRawDataAddress.Size = new System.Drawing.Size(0, 17);
+            this.lblRawDataAddress.TabIndex = 2;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2506,7 +2529,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -2535,6 +2557,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldZpos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumWorldFlags)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrdLevArkRaw)).EndInit();
             this.tabPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GrdStrings)).EndInit();
@@ -2542,11 +2565,12 @@
             this.PicSelectedColour.ResumeLayout(false);
             this.PicSelectedColour.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumZoom)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PicMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicColour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicPalette)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImgOut)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2744,6 +2768,8 @@
         public System.Windows.Forms.Label lblCurrentTile;
         private System.Windows.Forms.Label label49;
         public System.Windows.Forms.NumericUpDown numMapZoom;
+        private System.Windows.Forms.Button BtnCopyLevArkRaw;
+        private System.Windows.Forms.Label lblRawDataAddress;
     }
 }
 

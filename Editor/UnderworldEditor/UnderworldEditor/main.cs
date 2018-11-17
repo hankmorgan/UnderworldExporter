@@ -288,7 +288,8 @@ namespace UnderworldEditor
             switch (uwblocks[blockno].ContentType)
             {
                 case Util.ContentTypes.TileMap:                    
-                    TileMapUI.LoadTileMap(blockno,this);                    
+                    TileMapUI.LoadTileMap(blockno,this);
+                    FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
                     break;
                 default:
                     FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
@@ -302,6 +303,7 @@ namespace UnderworldEditor
         /// <param name="blockno"></param>
         private void FillRawDataForLevArk(int blockno)
         {
+            lblRawDataAddress.Text = uwblocks[blockno].Address.ToString();
             for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
             {
                 int rowId = GrdLevArkRaw.Rows.Add();
@@ -1183,6 +1185,11 @@ namespace UnderworldEditor
             TileMapUI.LoadInfoForTileXY(this, x, 63-y);
         }
 
-
+        private void BtnCopyLevArkRaw_Click(object sender, EventArgs e)
+        {
+            DataObject dataObj = GrdLevArkRaw.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
+        }
     }
 }
