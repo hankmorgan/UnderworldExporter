@@ -14,7 +14,7 @@ public class InteractionModeControlItem : GuiBase {
 
 	public void OnClick()
 	{
-		if ((UWCharacter.Instance.playerInventory.ObjectInHand!="") || (ConversationVM.InConversation) || (WindowDetect.WaitingForInput))
+		if ((CurrentObjectInHand!=null) || (ConversationVM.InConversation) || (WindowDetect.WaitingForInput))
 		{
 			return;
 		}

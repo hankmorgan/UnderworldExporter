@@ -45,7 +45,7 @@ public class TMAP : object_base
 
     public override bool use()
     {
-        if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+        if (CurrentObjectInHand == null)
         {
             if (link != 0)
             {
@@ -66,15 +66,15 @@ public class TMAP : object_base
         }
         else
         {
-            return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+            return ActivateByObject(CurrentObjectInHand);
         }
     }
 
-    public override bool ActivateByObject(GameObject ObjectUsed)
+    public override bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
         if ((UWEBase._RES == UWEBase.GAME_UW1) && (TextureIndex == 47))//The door to the base of the abyss.
         {
-            if (ObjectUsed.GetComponent<ObjectInteraction>().item_id == 231)//The key of infinity.
+            if (ObjectUsed.item_id == 231)//The key of infinity.
             {
                 if (link != 0)
                 {
@@ -87,8 +87,8 @@ public class TMAP : object_base
                             )
                         {
                             objIntTrigger.GetComponent<trigger_base>().Activate(this.gameObject);
-                            UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                            UWCharacter.Instance.playerInventory.ObjectInHand = "";
+                            //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                            CurrentObjectInHand = null;
                             return true;
                         }
                     }
@@ -122,18 +122,16 @@ public class TMAP : object_base
     {
         if (TextureIndex == 47)//The door to the base of the abyss.
         {
-            ObjectInteraction ObjIntInHand = UWCharacter.Instance.playerInventory.GetObjIntInHand();
-            if (ObjIntInHand != null)
+           // ObjectInteraction ObjIntInHand = CurrentObjectInHand;
+            if (CurrentObjectInHand != null)
             {
-                switch (ObjIntInHand.item_id)
+                switch (CurrentObjectInHand.item_id)
                 {
                     case 231:
                         return "unlock the shrine";
                 }
             }
         }
-
-
         return base.UseObjectOnVerb_Inv();
     }
 

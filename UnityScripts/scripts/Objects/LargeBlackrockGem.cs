@@ -29,9 +29,9 @@ public class LargeBlackrockGem : Model3D {
 
     public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand!="")
+		if (CurrentObjectInHand!=null)
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 		else
 		{
@@ -39,29 +39,29 @@ public class LargeBlackrockGem : Model3D {
 		}
 	}
 
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
-		ObjectInteraction objI=ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objI!=null)
+		//ObjectInteraction objI=ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null)
 		{
-			if (objI.GetItemType()==ObjectInteraction.A_BLACKROCK_GEM)
+			if (ObjectUsed.GetItemType()==ObjectInteraction.A_BLACKROCK_GEM)
 			{
-				if (objI.owner==1)
+				if (ObjectUsed.owner==1)
 				{	
-					int thisGemIndex= objI.item_id-280;
+					int thisGemIndex= ObjectUsed.item_id-280;
 					int bitField = (1<<thisGemIndex);
 					Quest.instance.x_clocks[2]++;
 					Quest.instance.QuestVariables[130] |= bitField;
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338));				
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,338+Quest.instance.x_clocks[2]));
                     CameraShake.instance.ShakeEarthQuake(Quest.instance.x_clocks[2] * 0.2f);
-                    objI.consumeObject(); 
+                    ObjectUsed.consumeObject(); 
                 }
 				else
 				{
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,347));
 				}				
-				UWCharacter.Instance.playerInventory.ObjectInHand="";
+				CurrentObjectInHand=null;
 				return true;
 			}
 		}

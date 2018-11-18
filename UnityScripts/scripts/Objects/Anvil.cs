@@ -9,7 +9,7 @@ public class Anvil : object_base {
 	/// Actual anvil repairs handled by Equipment
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			BecomeObjectInHand();
 			UWHUD.instance.MessageScroll.Set("Use Anvil on what?");
@@ -17,7 +17,7 @@ public class Anvil : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}		
 	}
 

@@ -37,7 +37,7 @@ public class Orb : object_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			if (link!=0)
 			{
@@ -54,26 +54,26 @@ public class Orb : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 
 		return LookAt();
 	}
 
 
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objIntUsed != null) 
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null) 
 		{
-			switch (objIntUsed.GetItemType())
+			switch (ObjectUsed.GetItemType())
 			{
 				case ObjectInteraction.AN_ORB_ROCK:
 				{
 					if ((_RES==GAME_UW1) && (GameWorldController.instance.LevelNo==6))
 					{
-						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						UWCharacter.Instance.playerInventory.ObjectInHand="";
+						//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+						CurrentObjectInHand=null;
 						OrbRock.DestroyOrb(objInt());
 						return true;
 					}

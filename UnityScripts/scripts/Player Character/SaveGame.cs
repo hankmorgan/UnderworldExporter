@@ -1522,18 +1522,18 @@ public class SaveGame : Loader
 
     static void WriteInventoryIndex(BinaryWriter writer, string[] InventoryObjects, short slotIndex)
     {
-        string itemAtSlot = "";
+        ObjectInteraction itemAtSlot = null;
         if (slotIndex <= 10)
         {
-            itemAtSlot = UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex);
+            itemAtSlot = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(slotIndex);
         }
         else
         {
             itemAtSlot = UWCharacter.Instance.playerInventory.playerContainer.GetItemAt((short)(slotIndex - 11));
         }
-        if (itemAtSlot != "")
+        if (itemAtSlot != null)
         {
-            int index = ((System.Array.IndexOf(InventoryObjects, itemAtSlot) + 1) << 6);//64
+            int index = ((System.Array.IndexOf(InventoryObjects, itemAtSlot.name) + 1) << 6);//64
             DataLoader.WriteInt16(writer, index);
         }
         else
@@ -2492,20 +2492,20 @@ public class SaveGame : Loader
     /// </summary>
     static void ResetInventory()
     {
-        UWCharacter.Instance.playerInventory.sHelm = "";
-        UWCharacter.Instance.playerInventory.sChest = "";
-        UWCharacter.Instance.playerInventory.sGloves = "";
-        UWCharacter.Instance.playerInventory.sLegs = "";
-        UWCharacter.Instance.playerInventory.sBoots = "";
-        UWCharacter.Instance.playerInventory.sRightShoulder = "";
-        UWCharacter.Instance.playerInventory.sLeftShoulder = "";
-        UWCharacter.Instance.playerInventory.sRightHand = "";
-        UWCharacter.Instance.playerInventory.sLeftHand = "";
-        UWCharacter.Instance.playerInventory.sRightRing = "";
-        UWCharacter.Instance.playerInventory.sLeftRing = "";
+        UWCharacter.Instance.playerInventory.sHelm = null;
+        UWCharacter.Instance.playerInventory.sChest = null;
+        UWCharacter.Instance.playerInventory.sGloves = null;
+        UWCharacter.Instance.playerInventory.sLegs = null;
+        UWCharacter.Instance.playerInventory.sBoots = null;
+        UWCharacter.Instance.playerInventory.sRightShoulder = null;
+        UWCharacter.Instance.playerInventory.sLeftShoulder = null;
+        UWCharacter.Instance.playerInventory.sRightHand = null;
+        UWCharacter.Instance.playerInventory.sLeftHand = null;
+        UWCharacter.Instance.playerInventory.sRightRing = null;
+        UWCharacter.Instance.playerInventory.sLeftRing = null;
         for (int c = 0; c <= UWCharacter.Instance.playerInventory.playerContainer.items.GetUpperBound(0); c++)
         {
-            UWCharacter.Instance.playerInventory.playerContainer.items[c] = "";
+            UWCharacter.Instance.playerInventory.playerContainer.items[c] = null;
         }
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
@@ -2577,14 +2577,17 @@ public class SaveGame : Loader
             {
                 //Apply objects to slots
                 int index = ((int)DataLoader.getValAtAddress(buffer, j, 16) >> 6);
-                string item_name;
+                ObjectInteraction item; 
+                //string item_name;
                 if (index != 0)
                 {
-                    item_name = ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
+                    item = objLoader.objInfo[index].instance;
+                    //item_name = ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
                 }
                 else
                 {
-                    item_name = "";
+                    item = null;
+                    //item_name = "";
                 }
 
                 switch ((InventorySlotsOffsets)(j))
@@ -2592,108 +2595,108 @@ public class SaveGame : Loader
                     case InventorySlotsOffsets.UW1Helm:
                     case InventorySlotsOffsets.UW2Helm:
                         //Helm
-                        UWCharacter.Instance.playerInventory.sHelm = item_name;
+                        UWCharacter.Instance.playerInventory.sHelm = item;
                         break;
                     //case 250:
                     case InventorySlotsOffsets.UW1Chest:
                     case InventorySlotsOffsets.UW2Chest:
                         //Chest
-                        UWCharacter.Instance.playerInventory.sChest = item_name;
+                        UWCharacter.Instance.playerInventory.sChest = item;
                         break;
                     //case 252:
                     case InventorySlotsOffsets.UW1Gloves:
                     case InventorySlotsOffsets.UW2Gloves:
                         //gloves
-                        UWCharacter.Instance.playerInventory.sGloves = item_name;
+                        UWCharacter.Instance.playerInventory.sGloves = item;
                         break;
                     //case 254:
                     case InventorySlotsOffsets.UW1Leggings:
                     case InventorySlotsOffsets.UW2Leggings:
                         //Leggings
-                        UWCharacter.Instance.playerInventory.sLegs = item_name;
+                        UWCharacter.Instance.playerInventory.sLegs = item;
                         break;
                     //case 256:
                     case InventorySlotsOffsets.UW1Boots:
                     case InventorySlotsOffsets.UW2Boots:
                         //boots
-                        UWCharacter.Instance.playerInventory.sBoots = item_name;
+                        UWCharacter.Instance.playerInventory.sBoots = item;
                         break;
                     //case 258:
                     case InventorySlotsOffsets.UW1RightShoulder:
                     case InventorySlotsOffsets.UW2RightShoulder:
                         //  is the top right shoulder.
-                        UWCharacter.Instance.playerInventory.sRightShoulder = item_name;
+                        UWCharacter.Instance.playerInventory.sRightShoulder = item;
                         break;
                     //case 260:
                     case InventorySlotsOffsets.UW1LeftShoulder:
                     case InventorySlotsOffsets.UW2LeftShoulder:
                         // is the top left shoulder.
-                        UWCharacter.Instance.playerInventory.sLeftShoulder = item_name;
+                        UWCharacter.Instance.playerInventory.sLeftShoulder = item;
                         break;
                     //case 262:
                     case InventorySlotsOffsets.UW1RightHand:
                     case InventorySlotsOffsets.UW2RightHand:
                         //  is the right hand.
-                        UWCharacter.Instance.playerInventory.sRightHand = item_name;
+                        UWCharacter.Instance.playerInventory.sRightHand = item;
                         break;
                     //case 264:
                     case InventorySlotsOffsets.UW1LeftHand:
                     case InventorySlotsOffsets.UW2LeftHand:
                         //  is the left hand.
-                        UWCharacter.Instance.playerInventory.sLeftHand = item_name;
+                        UWCharacter.Instance.playerInventory.sLeftHand = item;
                         break;
                     //case 266:
                     case InventorySlotsOffsets.UW1RightRing:
                     case InventorySlotsOffsets.UW2RightRing:
                         //  is the right ring.
-                        UWCharacter.Instance.playerInventory.sRightRing = item_name;
+                        UWCharacter.Instance.playerInventory.sRightRing = item;
                         break;
                     //case 268:
                     case InventorySlotsOffsets.UW1LeftRing:
                     case InventorySlotsOffsets.UW2LeftRing:
                         //  is the left ring .
-                        UWCharacter.Instance.playerInventory.sLeftRing = item_name;
+                        UWCharacter.Instance.playerInventory.sLeftRing = item;
                         break;
                     //case 270:
                     case InventorySlotsOffsets.UW1Backpack0:
                     case InventorySlotsOffsets.UW2Backpack0:
                         //  is the backpack slots 1.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[0] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[0] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack1:
                     case InventorySlotsOffsets.UW2Backpack1:
                         //  is the backpack slots 2.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[1] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[1] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack2:
                     case InventorySlotsOffsets.UW2Backpack2:
                         //  is the backpack slots 3.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[2] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[2] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack3:
                     case InventorySlotsOffsets.UW2Backpack3:
                         //  is the backpack slots 4.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[3] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[3] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack4:
                     case InventorySlotsOffsets.UW2Backpack4:
                         //  is the backpack slots 5.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[4] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[4] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack5:
                     case InventorySlotsOffsets.UW2Backpack5:
                         //  is the backpack slots 6.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[5] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[5] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack6:
                     case InventorySlotsOffsets.UW2Backpack6:
                         //  is the backpack slots 7.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[6] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[6] = item;
                         break;
                     case InventorySlotsOffsets.UW1Backpack7:
                     case InventorySlotsOffsets.UW2Backpack7:
                         //  is the backpack slots 8.
-                        UWCharacter.Instance.playerInventory.playerContainer.items[7] = item_name;
+                        UWCharacter.Instance.playerInventory.playerContainer.items[7] = item;
                         break;
                 }
             }
@@ -2701,10 +2704,10 @@ public class SaveGame : Loader
             //Reapply effects from enchanted items by recalling the equip event.
             for (short s = 0; s <= 10; s++)
             {
-                GameObject obj = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(s);
+                ObjectInteraction obj = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(s);
                 if (obj != null)
                 {
-                    obj.GetComponent<ObjectInteraction>().Equip(s);
+                    obj.Equip(s);
                 }
             }
         }

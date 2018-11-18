@@ -2012,10 +2012,10 @@ public class ObjectLoader : DataLoader
                     }
 
                     instance.objInfo[i].instance = ObjectInteraction.CreateNewObject(tilemap, instance.objInfo[i], instance.objInfo, parent, position);
-                    if (parent == GameWorldController.instance.InventoryMarker)
-                    {//FOr inventory objects spawned
-                        instance.objInfo[i].instance.PickedUp = true;
-                    }
+                    //FIELD PICKUP if (parent == GameWorldController.instance.InventoryMarker)
+                    //FIELD PICKUP {//FOr inventory objects spawned
+                    //FIELD PICKUP  instance.objInfo[i].instance.PickedUp = true;
+                    //FIELD PICKUP }
                 }
             }
         }
@@ -2260,7 +2260,7 @@ public class ObjectLoader : DataLoader
     {
         PlayerInventory pInv = UWCharacter.Instance.playerInventory;
         NoOfInventoryItems = 0;
-        GameObject Prev = null;
+        ObjectInteraction Prev = null;
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
         {
             if (child != null)
@@ -2276,18 +2276,18 @@ public class ObjectLoader : DataLoader
         //First add the objects on the paperdoll to the so that they are first.
         for (short s = 0; s <= 18; s++)
         {
-            string objName = "";
+            ObjectInteraction obj = null;
             if (s <= 10)//Paperdoll objects
             {
-                objName = pInv.GetObjectAtSlot(s);
+                obj = pInv.GetObjectIntAtSlot(s);
             }
             else
             {
-                objName = pInv.playerContainer.GetItemAt((short)(s - 11));
+                obj = pInv.playerContainer.GetItemAt((short)(s - 11));
             }
-            if (objName != "")
+            if (obj != null)
             {
-                InventoryObjects[i++] = objName;
+                InventoryObjects[i++] = obj.name;
             }
         }
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
@@ -2306,14 +2306,14 @@ public class ObjectLoader : DataLoader
 
         for (int s = 0; s <= 18; s++)
         {
-            GameObject obj;
+            ObjectInteraction obj;
             if (s <= 10)//Paperdoll objects
             {
-                obj = pInv.GetGameObjectAtSlot(s);
+                obj = pInv.GetObjectIntAtSlot(s);
             }
             else
             {
-                obj = pInv.playerContainer.GetGameObjectAt((short)(s - 11));
+                obj = pInv.playerContainer.GetItemAt((short)(s - 11));
             }
             if (obj != null)
             {
@@ -2342,37 +2342,37 @@ public class ObjectLoader : DataLoader
         bool cnLinked = false;
         cn.gameObject.GetComponent<ObjectInteraction>().link = 0;//Initially unlinked.
         int index = System.Array.IndexOf(InventoryObjects, cn.name) + 1;
-        GameObject prev = null;
+        ObjectInteraction prev = null;
 
         //For each spot in the container
         for (short i = 0; i <= cn.MaxCapacity(); i++)
         {
             //Get the item name in the container
-            string itemname = cn.GetItemAt(i);
-            if (itemname != "")
+            ObjectInteraction item = cn.GetItemAt(i);
+            if (item != null)
             {
                 //Get the object
-                GameObject obj = GameObject.Find(itemname);
-                if (obj != null)
-                {
-                    index = System.Array.IndexOf(InventoryObjects, obj.name) + 1;
+                //GameObject obj = GameObject.Find(itemname);
+                //if (obj != null)
+                //{
+                    index = System.Array.IndexOf(InventoryObjects, item.name) + 1;
                     if (cnLinked == false)
                     {//The container is first linked to this object							
                         cn.gameObject.GetComponent<ObjectInteraction>().link = index;
                         cnLinked = true;
-                        prev = obj;
+                        prev = item;
                     }
                     else
                     {//The object needs to be a next of the previous object
                      //index= System.Array.IndexOf(InventoryObjects,obj.name);
                         prev.GetComponent<ObjectInteraction>().next = index;
-                        prev = obj;
+                        prev = item;
                     }
-                    if (obj.GetComponent<Container>() != null)
+                    if (item.GetComponent<Container>() != null)
                     {//if a container then link the items in that container.
-                        linkInventoryContainers(obj.GetComponent<Container>(), ref InventoryObjects);
+                        linkInventoryContainers(item.GetComponent<Container>(), ref InventoryObjects);
                     }
-                }
+               // }
             }
         }
     }
@@ -2406,15 +2406,13 @@ public class ObjectLoader : DataLoader
                 }
             }
         }
-
-
-
+        
         for (short i = 0; i < cn.GetCapacity(); i++)
         {
-            GameObject obj = cn.GetGameObjectAt(i);
-            if (obj != null)
+            ObjectInteraction itemObjInt = cn.GetItemAt(i);
+            if (itemObjInt != null)
             {
-                ObjectInteraction itemObjInt = obj.GetComponent<ObjectInteraction>();
+                //ObjectInteraction itemObjInt = obj.GetComponent<ObjectInteraction>();
                 if (itemCounter == 0)
                 {//First item link to it from the container
                     cnObjInt.link = itemObjInt.objectloaderinfo.index;
@@ -2445,7 +2443,6 @@ public class ObjectLoader : DataLoader
                 //TEST	}						
                 //TEST}
             }
-
         }
     }
 
@@ -2491,10 +2488,10 @@ public class ObjectLoader : DataLoader
                 int prevLink = index;
                 for (short i = 0; i <= cn.GetCapacity(); i++)
                 {
-                    GameObject obj = cn.GetGameObjectAt(i);
-                    if (obj != null)
+                    ObjectInteraction objI  = cn.GetItemAt(i);
+                    if (objI != null)
                     {
-                        ObjectInteraction objI = obj.GetComponent<ObjectInteraction>();
+                        //ObjectInteraction objI = obj.GetComponent<ObjectInteraction>();
                         int newlink = AssignObjectToList(ref objI);
                         if (itemCounter == 0)
                         {//First object											

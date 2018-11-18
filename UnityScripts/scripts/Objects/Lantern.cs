@@ -13,15 +13,15 @@ public class Lantern : LightSource {
 	/// <c>false</c>
 	/// <param name="ObjectUsed">Object used.</param>
 	/// Using oil on the lantern increases it's quality.
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
 		//000~001~178~You think it is a bad idea to add oil to the lit lantern. \n
 		//000~001~179~Adding oil, you refuel the lantern. \n
 		//000~001~180~The lantern is already full. \n
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objIntUsed != null) 
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null) 
 		{
-			switch (objIntUsed.GetItemType())
+			switch (ObjectUsed.GetItemType())
 			{
 			case ObjectInteraction.OIL:
 				if (IsOn()==true)
@@ -38,11 +38,11 @@ public class Lantern : LightSource {
 					{
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_adding_oil_you_refuel_the_lantern_));
 						quality = 64;
-						objIntUsed.consumeObject();
+                        ObjectUsed.consumeObject();
 					}
 				}
-				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				UWCharacter.Instance.playerInventory.ObjectInHand="";
+				//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+				CurrentObjectInHand=null;
 				return true;
 			default:
 				return base.ActivateByObject(ObjectUsed);
@@ -54,7 +54,7 @@ public class Lantern : LightSource {
 
 	public override string UseObjectOnVerb_Inv ()
 	{
-		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
+		ObjectInteraction ObjIntInHand=CurrentObjectInHand;
 		if (ObjIntInHand!=null)
 		{
 			switch (ObjIntInHand.GetItemType())	

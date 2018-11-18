@@ -6,7 +6,7 @@ public class ReadableTrap : object_base {
 	//Explodes in your face book.	public override bool use ()
 	public override bool use ()
 	{
-	if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+	if (CurrentObjectInHand == null)
 		{
 			UWHUD.instance.MessageScroll.Add ("The book explodes in your face!");
 			UWCharacter.Instance.ApplyDamage(Random.Range (1,20));
@@ -16,7 +16,7 @@ public class ReadableTrap : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 }

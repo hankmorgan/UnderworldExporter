@@ -51,14 +51,14 @@ public class enchantment_base : object_base {
 	public override bool use ()
 	{
         if (ConversationVM.InConversation) { return false; }
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Equipable);
 			return true;
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}	
 	}
 

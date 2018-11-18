@@ -13,7 +13,8 @@ public class WeaponMelee : Weapon {
 	/// <param name="target">The entity that is hit by the weapon</param>
 	public virtual void onHit(GameObject target)
 	{
-		if (objInt().isEnchanted()==true)
+        if (target == null) { return; }
+		if (objInt().isEnchanted==true)
 		{
 			int EffectId = GetActualSpellIndex ();
 			//if (EffectId<=447)

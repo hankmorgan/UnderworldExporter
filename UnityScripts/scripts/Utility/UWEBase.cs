@@ -23,6 +23,28 @@ public class UWEBase : MonoBehaviour
     public static char sep;
 
     /// <summary>
+    /// Returns or sets the object that the player is holding.
+    /// </summary>
+    public static ObjectInteraction CurrentObjectInHand
+    {
+        get
+        {
+            if (UWCharacter.Instance != null)
+            {
+                if (UWCharacter.Instance.playerInventory != null)
+                {
+                    return UWCharacter.Instance.playerInventory.ObjectInHand;
+                }
+            }
+            return null;
+        }
+        set
+        {
+            UWCharacter.Instance.playerInventory.ObjectInHand = value;
+        }     
+    }
+
+    /// <summary>
     /// Gets the impact point of this object
     /// </summary>
     /// <returns>The impact point.</returns>
@@ -30,6 +52,7 @@ public class UWEBase : MonoBehaviour
     {
         return this.transform.position;
     }
+
 
 
 
@@ -53,6 +76,11 @@ public class UWEBase : MonoBehaviour
         }
     }
 
+    public static void FreezeMovement(ObjectInteraction myObj)
+    {
+        FreezeMovement(myObj.gameObject);
+    }
+
     /// <summary>
     /// Unfreeze the movement of the specified object if it has a rigid body attached.
     /// </summary>
@@ -68,6 +96,11 @@ public class UWEBase : MonoBehaviour
                     | RigidbodyConstraints.FreezeRotationY
                     | RigidbodyConstraints.FreezeRotationZ;
         }
+    }
+
+    public static void UnFreezeMovement(ObjectInteraction myObj)
+    {
+        UnFreezeMovement(myObj.gameObject);
     }
 
 

@@ -245,7 +245,7 @@ public class Character : UWEBase {
 	public virtual void PickupMode (int ptrId)
 	{//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
-		if (pInv.ObjectInHand=="")//Player is not holding anything.
+		if (pInv.ObjectInHand==null)//Player is not holding anything.
 		{//Find the object within the pickup range.
 			Ray ray ;
 			if (MouseLookEnabled==true)
@@ -263,7 +263,7 @@ public class Character : UWEBase {
 				objPicked=hit.transform.GetComponent<ObjectInteraction>();
 				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 				{
-					if (objPicked.CanBePickedUp()==true)
+					if (objPicked.CanBePickedUp==true)
 					{
 						if (ptrId==-2)
 						{
@@ -272,7 +272,7 @@ public class Character : UWEBase {
 					}
 					else
 					{//Object cannot be picked up. Try and use it instead
-						if (objPicked.isUsable())
+						if (objPicked.isUsable)
 						{
 							UseMode();
 						}							
@@ -285,15 +285,15 @@ public class Character : UWEBase {
 	public virtual ObjectInteraction Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
 	{//completes the pickup.
 
-		objPicked.PickedUp=true;
-		if (objPicked.GetComponent<Container>()!=null)
+        //FIELD PICKUP objPicked.PickedUp=true;
+        if (objPicked.GetComponent<Container>()!=null)
 		{
 			Container.SetPickedUpFlag(objPicked.GetComponent<Container>(),true);
 			Container.SetItemsParent(objPicked.GetComponent<Container>(),GameWorldController.instance.InventoryMarker.transform);
 			Container.SetItemsPosition (objPicked.GetComponent<Container>(),GameWorldController.instance.InventoryMarker.transform.position);
 		}
-		UWHUD.instance.CursorIcon=objPicked.GetInventoryDisplay().texture;
-		pInv.ObjectInHand=objPicked.transform.name;
+		//UWHUD.instance.CursorIcon=objPicked.GetInventoryDisplay().texture;
+		pInv.ObjectInHand=objPicked;
 		if (objPicked.GetComponent<Rigidbody>() !=null)
 		{								
 			FreezeMovement(objPicked.gameObject);
@@ -302,7 +302,7 @@ public class Character : UWEBase {
 		objPicked.transform.position=GameWorldController.instance.InventoryMarker.transform.position;
 		objPicked.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 		GameWorldController.MoveToInventory(objPicked);
-		pInv.ObjectInHand=objPicked.transform.name;
+		pInv.ObjectInHand=objPicked;
 		objPicked.Pickup();
 		return objPicked;
 

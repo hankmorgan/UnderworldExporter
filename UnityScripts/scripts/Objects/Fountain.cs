@@ -6,9 +6,9 @@ public class Fountain : object_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
-			if ((objInt().isEnchanted()==true) &&(link>=512))
+			if ((objInt().isEnchanted) &&(link>=512))
 			{
 				UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,link-512,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
 			}
@@ -17,13 +17,13 @@ public class Fountain : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());		
+			return ActivateByObject(CurrentObjectInHand);		
 		}
 	}
 
 
-		public override string UseVerb ()
-		{
-			return "drink";
-		}
+	public override string UseVerb ()
+	{
+		return "drink";
+	}
 }

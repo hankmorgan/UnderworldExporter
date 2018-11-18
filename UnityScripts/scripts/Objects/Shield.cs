@@ -15,7 +15,7 @@ public class Shield : Equipment {
 		if (((slotNo ==7) && (UWCharacter.Instance.isLefty==true)) || ((slotNo ==8) && (UWCharacter.Instance.isLefty==false)))//Only on off hand
 		{
 			UpdateQuality();
-			if (objInt().isEnchanted()==true)
+			if (objInt().isEnchanted==true)
 			{
 				switch(_RES)
 				{

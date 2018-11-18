@@ -749,7 +749,7 @@ public class StringController : UWEBase
     {//Eventually this will return things like proper quants etc.
         string output = GetString(4, objInt.item_id);
 
-        if ((objInt.isQuant() == true) && (objInt.isEnchanted() == false))
+        if ((objInt.isQuant == true) && (objInt.isEnchanted == false))
         {
             if (output.Contains("&"))
             {
@@ -796,7 +796,7 @@ public class StringController : UWEBase
 
         string output = GetString(4, objInt.item_id);
 
-        if ((objInt.isQuant() == true) && (objInt.isEnchanted() == false))
+        if ((objInt.isQuant == true) && (objInt.isEnchanted == false))
         {
             if (output.Contains("&"))
             {//string is split into a singular and plural
@@ -842,7 +842,7 @@ public class StringController : UWEBase
         {
             output = "";
         }
-        if ((objInt.isQuant() == true) && (output.Contains("&")) && (objInt.isEnchanted() == false))
+        if ((objInt.isQuant == true) && (output.Contains("&")) && (objInt.isEnchanted == false))
         {
             if (objInt.link > 1)
             {//Plural description

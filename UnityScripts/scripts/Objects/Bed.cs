@@ -6,14 +6,14 @@ public class Bed : Model3D {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			UWCharacter.Instance.Sleep();
 			return true;
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 

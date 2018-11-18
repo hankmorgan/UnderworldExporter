@@ -9,7 +9,7 @@ public class LockPick : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if(UWCharacter.Instance.playerInventory.ObjectInHand=="")
+			if(CurrentObjectInHand==null)
 			{
 				BecomeObjectInHand();
 				UWHUD.instance.MessageScroll.Set ( StringController.instance.GetString(1,8));
@@ -17,7 +17,7 @@ public class LockPick : object_base {
 			}
 			else
 			{
-				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(CurrentObjectInHand);
 			}
 		}
 	else

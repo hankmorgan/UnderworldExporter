@@ -44,9 +44,9 @@ public class Equipment : object_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
+		if (CurrentObjectInHand !=null)
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 		else
 		{
@@ -62,12 +62,12 @@ public class Equipment : object_base {
 		/// <c>false</c>
 		/// <param name="ObjectUsed">Object used.</param>
 		/// Handles anvil usage
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objIntUsed != null) 
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null) 
 		{
-			switch (objIntUsed.GetItemType())
+			switch (ObjectUsed.GetItemType())
 			{
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
@@ -127,13 +127,13 @@ public class Equipment : object_base {
 			UpdateQuality();
 		}
 		//cancel the repair 
-		UWCharacter.Instance.playerInventory.ObjectInHand="";
-		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
+		CurrentObjectInHand=null;
+		//UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 	}
 
 	public override bool LookAt ()
 	{
-		if (objInt().isEnchanted()==true)
+		if (objInt().isEnchanted==true)
 		{
 			switch(objInt().identity())
 				{
@@ -301,7 +301,7 @@ public class Equipment : object_base {
 
 		public override string ContextMenuDesc (int item_id)
 		{
-				if (objInt().isEnchanted())
+				if (objInt().isEnchanted)
 				{
 						switch (objInt().identity())
 						{

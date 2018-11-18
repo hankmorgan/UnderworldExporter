@@ -476,16 +476,16 @@ public class UWCharacter : Character
         else
         {
 
-            if (playerInventory.GetObjectInHand() == "")
+            if (playerInventory.ObjectInHand == null)
             {
                 return useRange;
             }
             else
             {//Test if this is a pole. If so extend the use range by a small amount.
-                ObjectInteraction objIntInHand = playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
-                if (objIntInHand != null)
+                //ObjectInteraction objIntInHand = playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+                if (playerInventory.ObjectInHand != null)
                 {
-                    switch (objIntInHand.GetItemType())
+                    switch (playerInventory.ObjectInHand.GetItemType())
                     {
                         case ObjectInteraction.POLE:
                             return useRange * 2;
@@ -1168,7 +1168,7 @@ public class UWCharacter : Character
     {
         //Picks up the clicked object in the view.
         PlayerInventory pInv = this.GetComponent<PlayerInventory>();
-        if (pInv.ObjectInHand == "")//Player is not holding anything.
+        if (pInv.ObjectInHand == null)//Player is not holding anything.
         {//Find the object within the pickup range.
             Ray ray;
             if (MouseLookEnabled == true)
@@ -1186,7 +1186,7 @@ public class UWCharacter : Character
                 objPicked = hit.transform.GetComponent<ObjectInteraction>();
                 if (objPicked != null)//Only objects with ObjectInteraction can be picked.
                 {
-                    if (objPicked.CanBePickedUp() == true)
+                    if (objPicked.CanBePickedUp == true)
                     {
                         //check for weight
                         if (objPicked.GetWeight() > playerInventory.getEncumberance())
@@ -1198,7 +1198,7 @@ public class UWCharacter : Character
                         {
                             //right click check for quant.
                             //Pickup if either not a quantity or is a quantity of one.
-                            if ((objPicked.isQuant() == false) || ((objPicked.isQuant()) && (objPicked.link == 1)) || (objPicked.isEnchanted()))
+                            if ((objPicked.isQuant == false) || ((objPicked.isQuant) && (objPicked.link == 1)) || (objPicked.isEnchanted))
                             {
                                 objPicked = Pickup(objPicked, pInv);
                             }
@@ -1228,7 +1228,7 @@ public class UWCharacter : Character
                     else
                     {//000~001~096~You cannot pick that up.
                      //Object cannot be picked up. Try and use it instead
-                        if (objPicked.isUsable())
+                        if (objPicked.isUsable)
                         {
                             UseMode();
                             UWHUD.instance.window.UWWindowWait(1.0f);

@@ -6,13 +6,13 @@ public class RuneBag : object_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+		if (CurrentObjectInHand == null)
 		{
 			return Activate (this.gameObject);
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 
@@ -31,23 +31,23 @@ public class RuneBag : object_base {
 	}
 
 
-	public override bool ActivateByObject(GameObject ObjectUsed)
+	public override bool ActivateByObject(ObjectInteraction ObjectUsed)
 	{
 		//Test for a valid rune being used on the bag and if so add the rune to the players inventory.
 		if(ObjectUsed.GetComponent<RuneStone>() !=null)
 		{
-			UWCharacter.Instance.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
-			//Add rune to rune bag and destroy the original object.
-			ObjectUsed.GetComponent<ObjectInteraction>().consumeObject();
-			UWCharacter.Instance.playerInventory.ObjectInHand="";
-			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+			UWCharacter.Instance.PlayerMagic.PlayerRunes[ObjectUsed.item_id-232]=true;
+            //Add rune to rune bag and destroy the original object.
+            ObjectUsed.consumeObject();
+			CurrentObjectInHand=null;
+			//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			return true;
 		}
 		else
 		{
 			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
 			{
-				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
+				return ObjectUsed.FailMessage();
 			}
 			else
 			{
@@ -63,10 +63,10 @@ public class RuneBag : object_base {
 
 	public override string UseObjectOnVerb_Inv ()
 	{
-		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
-		if (ObjIntInHand!=null)
+		//ObjectInteraction ObjIntInHand=CurrentObjectInHand;
+		if (CurrentObjectInHand != null)
 		{
-			switch (ObjIntInHand.GetItemType())	
+			switch (CurrentObjectInHand.GetItemType())	
 			{
 			case ObjectInteraction.RUNE:
 				return "place rune in bag";

@@ -5,7 +5,7 @@ public class Weapon : Equipment {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand =="")
+		if (CurrentObjectInHand == null)
 		{
 			if (((this.objInt().inventorySlot==7) && (UWCharacter.Instance.isLefty==false)) || ((this.objInt().inventorySlot==8) && (UWCharacter.Instance.isLefty==true)))
 			{
@@ -19,11 +19,11 @@ public class Weapon : Equipment {
 				}
 			}
 			InteractionModeControl.UpdateNow=true;
-						return true;
+			return true;
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 		//return false;
 	}

@@ -64,7 +64,7 @@ public class Shrine : Model3D {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			if (WaitingForInput==false)
 			{
@@ -86,7 +86,7 @@ public class Shrine : Model3D {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());			
+			return ActivateByObject(CurrentObjectInHand);			
 		}
 	}
 
@@ -254,16 +254,15 @@ public class Shrine : Model3D {
 			Shrine.HasGivenKey=true;
 			//create the key of truth.
 			ObjectLoaderInfo newobjt= ObjectLoader.newObject(225,0,0,0,256);
-						GameObject key = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-			GameWorldController.MoveToInventory(key);
-			ObjectInteraction myObjInt = key.GetComponent<ObjectInteraction>();
+            ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+			GameWorldController.MoveToInventory(myObjInt);
 
 
 			/*ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
 			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 			GameWorldController.MoveToInventory(myObjInt.gameObject);*/
-			UWCharacter.Instance.playerInventory.ObjectInHand=myObjInt.name;
-			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+			CurrentObjectInHand=myObjInt;
+			//UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 			InteractionModeControl.UpdateNow=true;
 		}

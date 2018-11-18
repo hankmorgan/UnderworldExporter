@@ -6,13 +6,13 @@ public class DreamPlant : object_base {
 
 	public override bool use ()
 	{	
-		if ((UWCharacter.Instance.playerInventory.ObjectInHand=="") || (UWCharacter.Instance.playerInventory.ObjectInHand==this.name))
+		if ((CurrentObjectInHand==null) || (CurrentObjectInHand==this))
 		{
 			return Eat();
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 

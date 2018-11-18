@@ -245,7 +245,7 @@ public class WindowDetectUW : WindowDetect
             return;
         }
 
-        if ((ContextUIEnabled) && (ContextUIUse) && (UWCharacter.Instance.playerInventory.ObjectInHand == ""))
+        if ((ContextUIEnabled) && (ContextUIUse) && (CurrentObjectInHand == null))
         {//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
             if ((object_base.UseAvail) && (ptrID == -1))//Use on left click
             {
@@ -269,7 +269,7 @@ public class WindowDetectUW : WindowDetect
                 UWCharacter.Instance.TalkMode();
                 break;
             case UWCharacter.InteractionModePickup://Pickup
-                if (UWCharacter.Instance.gameObject.GetComponent<PlayerInventory>().ObjectInHand != "")
+                if (CurrentObjectInHand != null)
                 {
                     UWWindowWait(1.0f);
                     ThrowObjectInHand();
@@ -285,7 +285,7 @@ public class WindowDetectUW : WindowDetect
             case UWCharacter.InteractionModeAttack: //attack
                 break;
             case UWCharacter.InteractionModeUse://Use
-                if (UWCharacter.Instance.gameObject.GetComponent<PlayerInventory>().ObjectInHand != "")
+                if (CurrentObjectInHand != null)
                 {
                     UWCharacter.Instance.UseMode();
                 }
@@ -303,7 +303,7 @@ public class WindowDetectUW : WindowDetect
     protected override void ThrowObjectInHand()
     {
         base.ThrowObjectInHand();
-        if (UWCharacter.Instance.playerInventory.GetObjectInHand() != "")
+        if (CurrentObjectInHand != null)
         {//The player is holding something
             if (UWCharacter.Instance.playerInventory.JustPickedup == false)//To prevent the click event dropping an object immediately after pickup
             {
@@ -333,10 +333,10 @@ public class WindowDetectUW : WindowDetect
 
                     //Get the object being dropped and moved towards the end of the ray
 
-                    GameObject droppedItem = UWCharacter.Instance.playerInventory.GetGameObjectInHand(); //GameObject.Find(UWCharacter.Instance.playerInventory.ObjectInHand);
+                    GameObject droppedItem = CurrentObjectInHand.gameObject; //GameObject.Find(CurrentObjectInHand);
 
 
-                    droppedItem.GetComponent<ObjectInteraction>().PickedUp = false; //Back in the real world
+                    //FIELD PICKUP droppedItem.GetComponent<ObjectInteraction>().PickedUp = false; //Back in the real world
                     droppedItem.GetComponent<ObjectInteraction>().Drop();
                     droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
                     GameWorldController.MoveToWorld(droppedItem);
@@ -362,8 +362,9 @@ public class WindowDetectUW : WindowDetect
                     }
 
                     //Clear the object and reset the cursor
-                    UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                    UWCharacter.Instance.playerInventory.SetObjectInHand("");
+                    //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                    //UWCharacter.Instance.playerInventory.SetObjectInHand("");
+                    CurrentObjectInHand = null;
                 }
 
             }

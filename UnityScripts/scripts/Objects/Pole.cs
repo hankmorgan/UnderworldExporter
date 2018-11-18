@@ -9,14 +9,14 @@ public class Pole : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+			if (CurrentObjectInHand==null)
 			{
 				BecomeObjectInHand();
 				return true;
 			}
 			else
 			{
-				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(CurrentObjectInHand);
 			}			
 		}
 		else

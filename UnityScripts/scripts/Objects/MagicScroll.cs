@@ -5,7 +5,7 @@ public class MagicScroll : enchantment_base {
 	public override bool use ()
 	{
         if (ConversationVM.InConversation) { return false; }
-        if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+        if (CurrentObjectInHand==null)
 		{
 			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable );
 			objInt().consumeObject();
@@ -13,7 +13,7 @@ public class MagicScroll : enchantment_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}		
 	}
 

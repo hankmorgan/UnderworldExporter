@@ -166,12 +166,12 @@ public class DoorControl : object_base {
 			}
 		}
 
-		if (UWCharacter.Instance.playerInventory.ObjectInHand !="")
+		if (CurrentObjectInHand !=null)
 		{
-			ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			ActivateByObject(CurrentObjectInHand);
 			//Clear the object in hand
-			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-			UWCharacter.Instance.playerInventory.ObjectInHand="";
+			//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+			CurrentObjectInHand=null;
 			if (trigger!=null)
 			{
 				trigger.Activate(this.gameObject);
@@ -190,7 +190,7 @@ public class DoorControl : object_base {
                         DoorKey key = t.gameObject.GetComponent<DoorKey>();
                         if (key.KeyId == KeyIndex)
                         {
-                            ActivateByObject(key.gameObject);
+                            ActivateByObject(key.objInt());
                             if (trigger != null)
                             {
                                 trigger.Activate(this.gameObject);
@@ -208,13 +208,13 @@ public class DoorControl : object_base {
 		}
 	}
 
-	public override bool ActivateByObject(GameObject ObjectUsed)
+	public override bool ActivateByObject(ObjectInteraction ObjectUsed)
 	{//Code for handling otherobjects used on this object
 	//Doors can be used by keys, picks and spikes.
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objIntUsed != null) 
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null) 
 		{
-			switch (objIntUsed.GetItemType())
+			switch (ObjectUsed.GetItemType())
 				{
 				case ObjectInteraction.KEY: //Key
 				DoorKey dk = ObjectUsed.GetComponent<DoorKey>();
@@ -286,7 +286,7 @@ public class DoorControl : object_base {
 					{
 						if(Spike())
 						{
-							objIntUsed.consumeObject();
+                            ObjectUsed.consumeObject();
 						}
 						break;
 					}
@@ -827,10 +827,10 @@ public class DoorControl : object_base {
 
 	public override string UseObjectOnVerb_World ()
 	{
-		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
-		if (ObjIntInHand!=null)
+		//ObjectInteraction ObjIntInHand=CurrentObjectInHand;
+		if (CurrentObjectInHand != null)
 		{
-			switch (ObjIntInHand.GetItemType())	
+			switch (CurrentObjectInHand.GetItemType())	
 			{
 			case ObjectInteraction.KEY:
 				return "turn key in lock";

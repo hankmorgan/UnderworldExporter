@@ -86,7 +86,7 @@ public class StorageCrystal : object_base
     {
         if (objInt().PickedUp)
         {
-            if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+            if (CurrentObjectInHand == null)
             {
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 352) + DisplayName);
                 return true;

@@ -14,7 +14,7 @@ public class Potion : enchantment_base
     public override bool use()
     {
         if (ConversationVM.InConversation) { return false; }
-        if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+        if (CurrentObjectInHand == null)
         {
             if (linked != null)
             {
@@ -43,7 +43,7 @@ public class Potion : enchantment_base
         }
         else
         {
-            return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+            return ActivateByObject(CurrentObjectInHand);
         }
     }
 

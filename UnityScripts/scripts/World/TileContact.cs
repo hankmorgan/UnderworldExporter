@@ -74,7 +74,7 @@ public class TileContact : UWEBase
             Container cn = obj.GetComponent<Container>();
             for (int i = 0; i <= UW1_Protected_items.GetUpperBound(0); i++)
             {
-                if (cn.findItemOfType(UW1_Protected_items[i]) != "")
+                if (cn.findItemOfType(UW1_Protected_items[i]) != null)
                 {
                     return false;
                 }

@@ -6,8 +6,7 @@ using UnityEngine.UI;
 /// Object interaction. Does a lot....
 /// Use for common object actions. Weight, qty, type, how to display the object. 
 /// </summary>
-public class ObjectInteraction : UWEBase
-{
+public class ObjectInteraction : UWEBase{
 
     public static bool PlaySoundEffects = true;
 
@@ -292,7 +291,7 @@ public class ObjectInteraction : UWEBase
     public bool animationStarted;
 
 
-    [Header("Interaction Options")]
+    
     /// <summary>
     /// Indicates if the object can be used.
     /// </summary>
@@ -301,8 +300,18 @@ public class ObjectInteraction : UWEBase
     /// <summary>
     /// Tells if object is in the inventory or in the open world in case there is different behaviours needed depending on the case.
     /// </summary>
-    public bool PickedUp;
-
+    public bool PickedUp
+    {
+        get
+        {
+            return this.gameObject.transform.parent.gameObject == GameWorldController.instance.InventoryMarker;
+        }
+        set
+        {
+            Debug.Log("obsolete pickup");
+        }
+    }
+    [Header("Interaction Options")]
     /// <summary>
     /// The inventory slot that the object is in.
     /// </summary>
@@ -551,7 +560,7 @@ public class ObjectInteraction : UWEBase
 
             if (inventorySlot != -1)
             {
-                UWCharacter.Instance.playerInventory.Refresh(inventorySlot);
+                UWCharacter.Instance.playerInventory.Refresh();
             }
             animationStarted = true;
         }
@@ -623,7 +632,7 @@ public class ObjectInteraction : UWEBase
         item = this.GetComponent<object_base>();
         if (item != null)
         {
-            return item.GetContextMenuText(item_id, isUsable() && WindowDetect.ContextUIUse, CanBePickedUp() && WindowDetect.ContextUIUse, ((UWCharacter.Instance.playerInventory.ObjectInHand) != "" && (UWCharacter.InteractionMode != UWCharacter.InteractionModePickup)));
+            return item.GetContextMenuText(item_id, isUsable && WindowDetect.ContextUIUse, CanBePickedUp && WindowDetect.ContextUIUse, ((CurrentObjectInHand) != null && (UWCharacter.InteractionMode != UWCharacter.InteractionModePickup)));
         }
         else
         {
@@ -701,20 +710,19 @@ public class ObjectInteraction : UWEBase
     public bool Use()
     {//Code to activate objects by type.
      //Objects will return true if they have done everything that needs to be done and false if they expect the calling code to do something instead.
-        GameObject ObjectInHand = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
-        object_base item = this.GetComponent<object_base>();//Base object class
-
-        if (ObjectInHand != null)
+        //GameObject ObjectInHand = CurrentObjectInHand;        
+        if (CurrentObjectInHand != null)
         {
             //First do a combineobject test. This will implement object combinatiosn defined by UW1/2
-            GameObject combined = CombineObject(this.gameObject, ObjectInHand);
+            ObjectInteraction combined = CombineObject(this, CurrentObjectInHand);
             if (combined != null)
             {
-                UWCharacter.Instance.playerInventory.ObjectInHand = combined.name;
+                CurrentObjectInHand = combined;
                 return true;
             }
         }
 
+        object_base item = this.GetComponent<object_base>();//Base object class
         if (item != null)
         {
             return item.use();
@@ -855,15 +863,15 @@ public class ObjectInteraction : UWEBase
     /// <returns>The object.</returns>
     /// <param name="InputObject1">Input object 1.</param>
     /// <param name="InputObject2">Input object 2.</param>
-    public GameObject CombineObject(GameObject InputObject1, GameObject InputObject2)
+    public ObjectInteraction CombineObject(ObjectInteraction InputObject1, ObjectInteraction InputObject2)
     {
         int[] lstInput1 = new int[8];
         int[] lstInput2 = new int[8];
         int[] lstOutput = new int[8];
         int[] lstDestroy1 = new int[8];
         int[] lstDestroy2 = new int[8];
-        int ItemID1 = InputObject1.GetComponent<ObjectInteraction>().item_id;
-        int ItemID2 = InputObject2.GetComponent<ObjectInteraction>().item_id;
+        int ItemID1 = InputObject1.item_id;
+        int ItemID2 = InputObject2.item_id;
         bool Destroyed1 = false;
         bool Destroyed2 = false;
         //UW1 List
@@ -941,23 +949,23 @@ public class ObjectInteraction : UWEBase
 
                 if (Destroyed1 == true)
                 {
-                    InputObject1.GetComponent<ObjectInteraction>().consumeObject();
+                    InputObject1.consumeObject();
                 }
                 if (Destroyed2 == true)
                 {
-                    InputObject2.GetComponent<ObjectInteraction>().consumeObject();
+                    InputObject2.consumeObject();
                 }
 
                 ObjectLoaderInfo newobjt = ObjectLoader.newObject(lstOutput[i], 40, 0, 0, 256);
-                GameObject Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
+                ObjectInteraction Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
                 GameWorldController.MoveToInventory(Created);
                 UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
-                if (Created != null)
-                {
-                    Created.GetComponent<ObjectInteraction>().UpdateAnimation();
-                    Created.GetComponent<ObjectInteraction>().PickedUp = true;
-                    UWHUD.instance.CursorIcon = Created.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-                }
+                //if (Created != null)
+                //{
+                    Created.UpdateAnimation();
+                    //FIELD PICKUP Created.GetComponent<ObjectInteraction>().PickedUp = true;
+                    //UWHUD.instance.CursorIcon = Created.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+                //}
                 InteractionModeControl.UpdateNow = true;
                 return Created;
 
@@ -983,19 +991,19 @@ public class ObjectInteraction : UWEBase
     /// </summary>
     public void consumeObject()
     {
-        if ((isQuant() == false) || ((isQuant()) && (link == 1)) || (isEnchanted() == true))
+        if ((isQuant == false) || ((isQuant) && (link == 1)) || (isEnchanted))
         {//the last of the item or is not a quantity;
             this.GetComponent<object_base>().DestroyEvent();
             Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
             //Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
-            if (!cn.RemoveItemFromContainer(this.name))
+            if (!cn.RemoveItemFromContainer(this))
             {//Try and remove from the paperdoll if not found in the current container.
-                UWCharacter.Instance.playerInventory.RemoveItemFromEquipment(this.name);
+                UWCharacter.Instance.playerInventory.RemoveItemFromEquipment(this);
             }
-            if (UWCharacter.Instance.playerInventory.ObjectInHand == this.name)
+            if (CurrentObjectInHand == this)
             {
-                UWCharacter.Instance.playerInventory.ObjectInHand = "";//Make sure there is not instance of this object in the players hand	
-                UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                CurrentObjectInHand = null;//Make sure there is not instance of this object in the players hand	
+               // UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
             }
             UWCharacter.Instance.playerInventory.Refresh();
             objectloaderinfo.InUseFlag = 0;//Free up the slot
@@ -1067,13 +1075,13 @@ public class ObjectInteraction : UWEBase
     /// <returns>The qty.</returns>
     public int GetQty()
     {//Gets the true quantity of this object
-        if ((isEnchanted() == true) || (this.GetComponent<Readable>() != null))
+        if ((isEnchanted) || (this.GetComponent<Readable>() != null))
         {
             return 1;
         }
         else
         {
-            if (isQuant() == true)
+            if (isQuant == true)
             {
                 return link;
             }
@@ -1164,7 +1172,7 @@ public class ObjectInteraction : UWEBase
         if (
                 (box == null)
                 && (objInteract.GetItemType() != ObjectInteraction.NPC_TYPE)
-                && (objInteract.isUsable())
+                && (objInteract.isUsable)
             )
         {
             //add a mesh for interaction
@@ -1276,7 +1284,7 @@ public class ObjectInteraction : UWEBase
     /// <returns><c>true</c> if this instance is stackable; otherwise, <c>false</c>.</returns>
     public bool IsStackable()
     {//An object is stackable if it has the isQuant flag and is not enchanted.
-        return ((isQuant()) && (!isEnchanted()));
+        return ((isQuant) && (!isEnchanted));
     }
 
     /// <summary>
@@ -1956,15 +1964,15 @@ public class ObjectInteraction : UWEBase
                     {
                         case 349://Chest variant
                             myObj.AddComponent<Chest>();
-                            myObj.GetComponent<Container>().items = new string[40];
+                            myObj.GetComponent<Container>().items = new ObjectInteraction[40];
                             Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         case 347://barrel variant
                             myObj.AddComponent<Barrel>();
-                            myObj.GetComponent<Container>().items = new string[40];
+                            myObj.GetComponent<Container>().items = new ObjectInteraction[40];
                             Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); CreateSprite = false; break;
                         default:
                             myObj.AddComponent<Container>();
-                            myObj.GetComponent<Container>().items = new string[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                            myObj.GetComponent<Container>().items = new ObjectInteraction[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
                             Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList); break;
                     }
                     break;
@@ -1984,7 +1992,7 @@ public class ObjectInteraction : UWEBase
                 else
                 {
                     //objInt.isquant=0;
-                    if ((objInt.isEnchanted()) && (objInt.link != 0))
+                    if ((objInt.isEnchanted) && (objInt.link != 0))
                     {
                         myObj.AddComponent<MagicScroll>();
                     }
@@ -2101,13 +2109,17 @@ public class ObjectInteraction : UWEBase
             case LOCKPICK:
                 myObj.AddComponent<LockPick>();
                 break;
-            case SILVERSEED:
-                myObj.AddComponent<SilverSeed>();
+            case SILVERSEED:                               
                 if (currObj.item_id == 458)
                 {
+                    myObj.AddComponent<SilverTree>();
                     UWCharacter.Instance.ResurrectPosition = myObj.transform.position;
+                    AddAnimation = true;
                 }
-                AddAnimation = true;
+                else
+                {
+                    myObj.AddComponent<SilverSeed>();
+                }               
                 break;
             case GRAVE:
                 myObj.AddComponent<Grave>();
@@ -2713,7 +2725,16 @@ public class ObjectInteraction : UWEBase
             AnimationOverlay ao = myObj.AddComponent<AnimationOverlay>();
             ao.StartFrame = currObj.StartFrameValue();
             ao.NoOfFrames = currObj.useSpriteValue();
-            ao.Looping = looping;
+            //ao.Looping = looping;
+            if (looping)
+            {//These will be ignored by the animation if an overlay entry already exists in the overlay data.
+                ao.StartingDuration = 65535;
+            }
+            else
+            {
+                ao.StartingDuration = ao.NoOfFrames;
+            }
+            
         }
         return objInt;
     }
@@ -2760,9 +2781,12 @@ public class ObjectInteraction : UWEBase
     /// Returns the enchantment flag as a bool
     /// </summary>
     /// <returns><c>true</c>, if enchanted was ised, <c>false</c> otherwise.</returns>
-    public bool isEnchanted()
+    public bool isEnchanted
     {
-        return (enchantment == 1);
+        get
+        {
+            return (enchantment == 1);
+        }        
     }
 
     /// <summary>
@@ -2773,9 +2797,12 @@ public class ObjectInteraction : UWEBase
     //property. If the value is < 512 or 0x0200 it gives the number of stacked
     //items present. Identical objects may be stacked up to 256 objects at a
     //time. The field name "quantity" is used for this.
-    public bool isQuant()
+    public bool isQuant    
     {
-        return ((isquant == 1) && (link < 512));
+        get
+        {
+            return ((isquant == 1) && (link < 512));
+        }        
     }
 
 
@@ -2783,9 +2810,12 @@ public class ObjectInteraction : UWEBase
     /// Determines whether this instance can be picked up.
     /// </summary>
     /// <returns><c>true</c> if this instance can be picked up; otherwise, <c>false</c>.</returns>
-    public bool CanBePickedUp()
+    public bool CanBePickedUp
     {
-        return (GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp == 1 || this.GetComponent<object_base>().CanBePickedUp());
+        get
+        {
+            return (GameWorldController.instance.commonObject.properties[item_id].FlagCanBePickedUp == 1 || this.GetComponent<object_base>().CanBePickedUp());
+        }        
     }
 
 
@@ -2855,9 +2885,13 @@ public class ObjectInteraction : UWEBase
         this.GetComponent<object_base>().OnSaveObjectEvent();
     }
 
-    public bool isUsable()
+    public bool isUsable
     {
-        return GameWorldController.instance.objectMaster.objProp[item_id].isUseable == 1;
+        get
+        {
+            return GameWorldController.instance.objectMaster.objProp[item_id].isUseable == 1;
+        }
+        
     }
 
     /// <summary>

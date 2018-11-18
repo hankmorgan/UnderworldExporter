@@ -7,7 +7,7 @@ public override bool use ()
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+			if (CurrentObjectInHand==null)
 			{
 				GoFish();
 				return true;
@@ -45,15 +45,14 @@ public override bool use ()
 						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= UWCharacter.Instance.playerInventory.getEncumberance())
 						{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_catch_a_lovely_fish_));
-							GameObject fishy = CreateFish();
-							UWCharacter.Instance.playerInventory.ObjectInHand=fishy.name;
-							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
-							if (FishobjInt!=null)
-							{
-								FishobjInt.UpdateAnimation();
+                            ObjectInteraction FishobjInt = CreateFish();
+							CurrentObjectInHand= FishobjInt;
+                            //if (FishobjInt!=null)
+							//{
+								//FishobjInt.UpdateAnimation();
 								//UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
-								UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
-							}
+								//UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
+							//}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
@@ -79,14 +78,14 @@ public override bool use ()
 	/// Creates the fish that the player has caught.
 	/// </summary>
 	/// <returns>The fish.</returns>
-	GameObject CreateFish()
+	ObjectInteraction CreateFish()
 	{
 		ObjectLoaderInfo newobjt= ObjectLoader.newObject(182,40,0,1,256);
 		ObjectInteraction fishy = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
 		fishy.gameObject.name= ObjectLoader.UniqueObjectName(newobjt);
 		fishy.isquant=1;
 		GameWorldController.MoveToInventory(fishy.gameObject);
-		return fishy.gameObject;
+		return fishy;
 	}
 
 }

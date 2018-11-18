@@ -18,6 +18,34 @@ public class UWCombat : Combat
 
     private short CurrentStrikeAnimation;
 
+    int DamageImpactStart
+    {
+        get
+        {
+            switch(_RES)
+            {
+                case GAME_UW2:
+                    return 43;
+                default:
+                    return 46;
+            }
+        }
+    }
+
+    int DamageImpactEnd
+    {
+        get
+        {
+            switch (_RES)
+            {
+                case GAME_UW2:
+                    return 47;
+                default:
+                    return 50;
+            }
+        }
+    }
+
     private void Awake()
     {
         instance = this;
@@ -133,14 +161,14 @@ public class UWCombat : Combat
                             PC_Hits_NPC(UWCharacter.Instance, currWeapon, CurrentStrike, StrikeCharge, objInt.GetComponent<NPC>(), hit);
                             break;
                         default:
-                            Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin + hit.point) / 2f, 46, 50);
+                            Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin + hit.point) / 2f, DamageImpactStart, DamageImpactEnd);
                             objInt.Attack((short)GetPlayerBaseDamage(currWeapon, CurrentStrike), UWCharacter.Instance.gameObject);
                             break;
                     }
                 }
                 else
                 {//Probably hit a wall or tile floor
-                    Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin + hit.point) / 2f, 46, 50);
+                    Impact.SpawnHitImpact(Impact.ImpactDamage(), (ray.origin + hit.point) / 2f, DamageImpactStart, DamageImpactEnd);
                     if (currWeapon != null)
                     {
                         short durability = currWeapon.getDurability();
@@ -448,11 +476,11 @@ public class UWCombat : Combat
                 if (currentAmmo.GetQty() == 1)
                 {
                     launchedItem = currentAmmo.gameObject;
-                    UWCharacter.Instance.playerInventory.RemoveItem(currentAmmo.name);
+                    UWCharacter.Instance.playerInventory.RemoveItem(currentAmmo);
                     //launchedItem.transform.parent=GameWorldController.instance.DynamicObjectMarker();
                     GameWorldController.MoveToWorld(launchedItem);
                     launchedItem.transform.position = ray.GetPoint(dropRange - 0.1f);
-                    launchedItem.GetComponent<ObjectInteraction>().PickedUp = false;    //Back in the real world	
+                    //FIELD PICKUP launchedItem.GetComponent<ObjectInteraction>().PickedUp = false;    //Back in the real world	
                 }
                 else
                 {//reduce this quantity by one and create a copy in the world

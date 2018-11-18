@@ -16,7 +16,7 @@ public class Ring : Equipment {
 	{
 		if ((slotNo ==9) || (slotNo ==10))
 		{
-			if (objInt().isEnchanted()==true)
+			if (objInt().isEnchanted==true)
 			{
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)

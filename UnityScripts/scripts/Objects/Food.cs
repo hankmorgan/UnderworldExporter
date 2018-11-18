@@ -63,9 +63,8 @@ public class Food : object_base {
 
 	public override bool use ()
 	{
-		if ((UWCharacter.Instance.playerInventory.ObjectInHand=="") || (UWCharacter.Instance.playerInventory.ObjectInHand==this.name))
-		{//Eat if no object in hand or if the object in hand is this item.
-						
+		if ((CurrentObjectInHand==null) || (CurrentObjectInHand==this.objInt()))
+		{//Eat if no object in hand or if the object in hand is this item.			
 								
 			switch(item_id)
 			{
@@ -87,7 +86,7 @@ public class Food : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 
@@ -228,8 +227,8 @@ public class Food : object_base {
             newobjt.InUseFlag = 1;
             ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
             GameWorldController.MoveToWorld(created.gameObject);
-            UWCharacter.Instance.playerInventory.ObjectInHand = created.name;
-            UWHUD.instance.CursorIcon = created.GetInventoryDisplay().texture;
+            CurrentObjectInHand = created;
+            //UWHUD.instance.CursorIcon = created.GetInventoryDisplay().texture;
             UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
         }
     }

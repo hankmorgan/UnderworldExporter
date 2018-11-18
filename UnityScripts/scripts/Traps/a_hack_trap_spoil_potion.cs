@@ -19,7 +19,7 @@ public class a_hack_trap_spoil_potion : a_hack_trap {
                 ObjectInteraction obj = child.gameObject.GetComponent<ObjectInteraction>();
                 if (obj.GetItemType()==ObjectInteraction.POTIONS)
                 {
-                    if ((obj.link == 529) && (obj.enchantment ==1))
+                    if ((obj.link == 529) && (obj.enchantment ==1) && (obj.GetComponent<Potion>().linked == null))
                     {
                         SpoilPotion(obj);
                     }

@@ -85,6 +85,7 @@ public class TileMap : Loader
     /// </summary>
     public struct Overlay  
     {
+        public int header;
         public int link;
         public int duration;
         public int tileX;
@@ -356,10 +357,19 @@ public class TileMap : Loader
                         long OverlayAddress = 0;
                         for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
                         {
-                            Overlays[overlayIndex].link = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress, 16) & 0x3ff;
+                            Overlays[overlayIndex].header = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress, 16);
+                            Overlays[overlayIndex].link = (int)(DataLoader.getValAtAddress(ovl_ark, OverlayAddress, 16) >> 6) & 0x3ff;
                             Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 2, 16);
                             Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 4, 8);
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 5, 8);
+                            if (Overlays[overlayIndex].link!=0)
+                            {
+                                Debug.Log("Overlay at " + OverlayAddress
+                                    + " obj " + Overlays[overlayIndex].link
+                                    + " for " + Overlays[overlayIndex].duration
+                                    + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                                    + " header :" + Overlays[overlayIndex].header);
+                            }                            
                             OverlayAddress += 6;
                         }
                     }
@@ -372,10 +382,19 @@ public class TileMap : Loader
                     {
                         if (OverlayAddress + 5 <= lev_ark.Data.GetUpperBound(0))
                         {
-                            Overlays[overlayIndex].link = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16) & 0x3ff;
+                            Overlays[overlayIndex].header = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16);
+                            Overlays[overlayIndex].link = (int)(DataLoader.getValAtAddress(lev_ark, OverlayAddress, 16)>> 6) & 0x3ff;
                             Overlays[overlayIndex].duration = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 2, 16);
                             Overlays[overlayIndex].tileX = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 4, 8);
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 5, 8);
+                            if (Overlays[overlayIndex].link != 0)
+                            {
+                                Debug.Log("Overlay at " + OverlayAddress 
+                                    + " obj " + Overlays[overlayIndex].link 
+                                    + " for " + Overlays[overlayIndex].duration 
+                                    + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                                    + " header :" + Overlays[overlayIndex].header);
+                            }
                         }
                         OverlayAddress += 6;
                     }
@@ -1811,8 +1830,9 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
         int OverlayAddress = 0;
         for (int overlayIndex = 0; overlayIndex < 64; overlayIndex++)
         {
-            OverLayData[OverlayAddress + 0] = (char)(Overlays[overlayIndex].link & 0xFF);
-            OverLayData[OverlayAddress + 1] = (char)((Overlays[overlayIndex].link >> 8) & 0xFF);
+            int link = Overlays[overlayIndex].link << 6;
+            OverLayData[OverlayAddress + 0] = (char)(link & 0xFF);
+            OverLayData[OverlayAddress + 1] = (char)((link >> 8) & 0xFF);
             OverLayData[OverlayAddress + 2] = (char)(Overlays[overlayIndex].duration & 0xFF);
             OverLayData[OverlayAddress + 3] = (char)((Overlays[overlayIndex].duration >> 8) & 0xFF);
             OverLayData[OverlayAddress + 4] = (char)(Overlays[overlayIndex].tileX & 0xFF);

@@ -8,7 +8,7 @@ public class Leech : object_base {
 
 public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf,Magic.SpellRule_Consumable);
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_the_leeches_remove_the_poison_as_well_as_some_of_your_skin_and_blood_));
@@ -18,7 +18,7 @@ public override bool use ()
 		}
 		else
 		{
-			return ActivateByObject (UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject (CurrentObjectInHand);
 		}
 	}
 }

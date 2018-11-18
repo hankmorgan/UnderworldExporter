@@ -65,14 +65,14 @@ public class Grave : Model3D {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+		if (CurrentObjectInHand==null)
 		{
 			return LookAt ();
 		}
 		else
 		{
 			//TODO: if garamons bones activate something special.
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 			//return UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 	}
@@ -84,15 +84,15 @@ public class Grave : Model3D {
 		/// <c>false</c>
 		/// <param name="ObjectUsed">Object used.</param>
 		/// Special case here for Garamon's grave. Activates a hard coded trigger
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-			if (GraveID()==5)
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (GraveID()==5)
 			{//Garamon's grave
 			//Activates a trigger a_move_trigger_54_52_04_0495 (selected by unknown means)
-			if (objIntUsed.item_id==198)//Bones
+			if (ObjectUsed.item_id==198)//Bones
 				{
-					if (objIntUsed.quality==63)
+					if (ObjectUsed.quality==63)
 					{//Garamons bones
 					//Arise Garamon.
 					//000~001~134~You thoughtfully give the bones a final resting place.
@@ -102,11 +102,11 @@ public class Grave : Model3D {
 					if (trigObj!=null)
 					{					
 						link++;//Update the grave description
-						objIntUsed.consumeObject ();
+                        ObjectUsed.consumeObject ();
 						trigObj.GetComponent<trigger_base>().Activate(this.gameObject);
 						Quest.instance.isGaramonBuried=true;
-						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						UWCharacter.Instance.playerInventory.ObjectInHand="";	
+						//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+						CurrentObjectInHand=null;	
 						//Garamon does not initiate conversation normally so I force the conversation.
 						GameObject garamon = GameObject.Find(a_create_object_trap.LastObjectCreated);
 						if (garamon!=null)
@@ -117,8 +117,8 @@ public class Grave : Model3D {
 							}
 						}
 					}
-					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-					UWCharacter.Instance.playerInventory.ObjectInHand="";	
+					//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+					CurrentObjectInHand=null;	
 					
 					return true;
 					}
@@ -126,31 +126,31 @@ public class Grave : Model3D {
 					{//Regular bones
 						//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
-						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						UWCharacter.Instance.playerInventory.ObjectInHand="";
+						//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+						CurrentObjectInHand=null;
 						return true;
 					}
 				}
 			else
 				{
-				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
+				return ObjectUsed.FailMessage();
 				}
 			}
 		else
 		{
-			if ((objIntUsed.item_id==198) && (objIntUsed.quality==63))//Garamons Bones used on the wrong grave
+			if ((ObjectUsed.item_id==198) && (ObjectUsed.quality==63))//Garamons Bones used on the wrong grave
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
-				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				UWCharacter.Instance.playerInventory.ObjectInHand="";
+				//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+				CurrentObjectInHand=null;
 				return true;
 			}
 			else
 			{
-				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				UWCharacter.Instance.playerInventory.ObjectInHand="";
-				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
+				//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
+				CurrentObjectInHand=null;
+				return ObjectUsed.FailMessage();
 			}
 		}
 	}
@@ -158,10 +158,10 @@ public class Grave : Model3D {
 
 	public override string UseObjectOnVerb_World ()
 	{
-		ObjectInteraction ObjIntInHand=UWCharacter.Instance.playerInventory.GetObjIntInHand();
-		if (ObjIntInHand!=null)
+		//ObjectInteraction ObjIntInHand=CurrentObjectInHand;
+		if (CurrentObjectInHand != null)
 		{
-			switch (ObjIntInHand.item_id)	
+			switch (CurrentObjectInHand.item_id)	
 			{
 			case 198://Bones
 				return "bury remains";

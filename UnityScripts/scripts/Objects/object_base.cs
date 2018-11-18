@@ -524,7 +524,7 @@ public class object_base : UWEBase
     {
         //CheckReferences();
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + OwnershipString());
-        if ((link != 0) && (objInt().isQuant() == false) && (enchantment == 0))
+        if ((link != 0) && (objInt().isQuant == false) && (enchantment == 0))
         {
             if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.A_LOOK_TRIGGER)
             {
@@ -543,14 +543,14 @@ public class object_base : UWEBase
     /// </summary>
     /// <returns><c>true</c>, if by object was activated, <c>false</c> otherwise.</returns>
     /// <param name="ObjectUsed">Object used.</param>
-    public virtual bool ActivateByObject(GameObject ObjectUsed)
+    public virtual bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
         //CheckReferences();
         if (UWCharacter.InteractionMode == UWCharacter.InteractionModeUse)
         {
             FailMessage();
             UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-            UWCharacter.Instance.playerInventory.ObjectInHand = "";
+            CurrentObjectInHand = null;
             return true;
         }
         else
@@ -565,19 +565,26 @@ public class object_base : UWEBase
     /// Checks if the player is already holding something or using something else on this object.
     public virtual bool use()
     {
-        //CheckReferences();
-        if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+        if (CurrentObjectInHand == null)
         {
-            if ((objInt().isUsable() == true) && (objInt().PickedUp == true))
+            if ((objInt().isUsable == true) && (objInt().PickedUp == true))
             {
                 BecomeObjectInHand();
                 return true;
             }
             else
             {
-                if (objInt().isUsable())
+                if (objInt().isUsable)
                 {//Hope this does'nt mess up everything!
-                    if ((link != 0) && (objInt().isQuant() == false) && (enchantment == 0))
+                    if (
+                        (
+                        (link != 0) && (objInt().isQuant == false) 
+                        ||
+                        (link == 1) && (objInt().isQuant)
+                        )
+                        && 
+                        (enchantment == 0)
+                        )
                     {//Not a quantity or an enchanted item.
                         if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.A_USE_TRIGGER)
                         {
@@ -590,7 +597,7 @@ public class object_base : UWEBase
         }
         else
         {
-            return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+            return ActivateByObject(CurrentObjectInHand);
         }
     }
 
@@ -614,8 +621,8 @@ public class object_base : UWEBase
     /// </summary>
     public void BecomeObjectInHand()
     {//In order to use it.
-        UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
-        UWCharacter.Instance.playerInventory.ObjectInHand = this.name;
+        //UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
+        CurrentObjectInHand = this.objInt();
         UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
         InteractionModeControl.UpdateNow = true;
     }
@@ -646,7 +653,7 @@ public class object_base : UWEBase
     /// If object has a pickup link then the object referenced is activated
     public virtual bool PickupEvent()
     {
-        if ((link != 0) && (objInt().isQuant() == false) && (enchantment == 0))
+        if ((link != 0) && (objInt().isQuant == false) && (enchantment == 0))
         {
             if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.A_PICK_UP_TRIGGER)
             {
@@ -886,7 +893,7 @@ return false;*/
                 PickAvail = false;
             }
         }
-        if ((UWCharacter.InteractionMode == UWCharacter.InteractionModePickup) && (UWCharacter.Instance.playerInventory.ObjectInHand != ""))
+        if ((UWCharacter.InteractionMode == UWCharacter.InteractionModePickup) && (CurrentObjectInHand != null))
         {//I'm actually throwing something.
             UseAvail = false;
             UseableDesc = "";

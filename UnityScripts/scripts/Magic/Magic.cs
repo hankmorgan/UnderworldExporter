@@ -51,7 +51,7 @@ public class Magic : UWEBase
 
 
     ///For spells cast on objects in slots
-    public GameObject ObjectInSlot;
+    public ObjectInteraction ObjectInSlot;
     ///Flags a spell as castable on inventory.
     public bool InventorySpell;
 
@@ -1981,12 +1981,12 @@ public class Magic : UWEBase
                 {
                     ReadiedSpell = "";
                     UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                    ObjectInteraction objInt = ObjectInSlot.GetComponent<ObjectInteraction>();
-                    if (objInt != null)
+                    //ObjectInteraction objInt = ObjectInSlot.GetComponent<ObjectInteraction>();
+                    if (ObjectInSlot != null)
                     {
                         //objInt.isIdentified=true;
-                        objInt.heading = 7;
-                        objInt.LookDescription();
+                        ObjectInSlot.heading = 7;
+                        ObjectInSlot.LookDescription();
                     }
                 }
             }

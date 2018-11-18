@@ -77,7 +77,7 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+		if (CurrentObjectInHand == null)
 		{
 			if (objInt().PickedUp==false)
 			{
@@ -100,18 +100,18 @@ public class LightSource : object_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
 
 
-	public override bool ActivateByObject (GameObject ObjectUsed)
+	public override bool ActivateByObject (ObjectInteraction ObjectUsed)
 	{
 		//000~001~182~You think it is a bad idea to add oil to the lit torch. \n
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-		if (objIntUsed != null) 
+		//ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (ObjectUsed != null) 
 		{
-			switch (objIntUsed.GetItemType())
+			switch (ObjectUsed.GetItemType())
 			{
 			case ObjectInteraction.OIL:
 				if (item_id==149)//Lit torch
@@ -144,7 +144,7 @@ public class LightSource : object_base {
 		GetInventorySlotForLightSource (pInv, ref invSlot);
 		if (invSlot != null)
 			{
-			if   ((objInt().isQuant()==false) || ((objInt().isQuant()) && (link<=1)) || (objInt().isEnchanted()==true))
+			if   ((objInt().isQuant==false) || ((objInt().isQuant) && (link<=1)) || (objInt().isEnchanted))
 			{//Is a quantity of one or not a quantity/
 					PutLightSourceInSlot (pInv, invSlot);
 			}
@@ -186,8 +186,8 @@ public class LightSource : object_base {
 
 	void PutLightSourceInSlot (PlayerInventory pInv , InventorySlot invSlot)
 	{
-		pInv.RemoveItem (this.name);
-		pInv.SetObjectAtSlot (invSlot.slotIndex, this.name);
+		pInv.RemoveItem (this.objInt());
+		pInv.SetObjectAtSlot (invSlot.slotIndex, objInt());
 		objInt().inventorySlot = invSlot.slotIndex;
 		item_id = item_id + 4;
 		objInt().InvDisplayIndex = item_id;
@@ -200,19 +200,19 @@ public class LightSource : object_base {
 		/// <param name="invSlot">Inv slot.</param>
 	void GetInventorySlotForLightSource (PlayerInventory pInv, ref InventorySlot invSlot)
 	{
-		if ((pInv.sRightShoulder == "") || (pInv.sRightShoulder == this.name)) {
+		if ((pInv.sRightShoulder == this.objInt())) {
 			invSlot = UWHUD.instance.RightShoulder_Slot.gameObject.GetComponent<InventorySlot> ();
 		}
 		else
-			if ((pInv.sLeftShoulder == "") || (pInv.sLeftShoulder == this.name)) {
+			if ((pInv.sLeftShoulder == this.objInt())) {
 				invSlot = UWHUD.instance.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot> ();
 			}
 			else
-				if ((pInv.sRightHand == "") || (pInv.sRightHand == this.name)) {
+				if ((pInv.sRightHand == this.objInt())) {
 					invSlot = UWHUD.instance.RightHand_Slot.gameObject.GetComponent<InventorySlot> ();
 				}
 				else
-					if ((pInv.sLeftHand == "") || (pInv.sLeftHand == this.name)) {
+					if ((pInv.sLeftHand == this.objInt())) {
 						invSlot = UWHUD.instance.LeftHand_Slot.gameObject.GetComponent<InventorySlot> ();
 					}
 	}

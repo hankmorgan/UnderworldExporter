@@ -26,13 +26,12 @@ public class forcefield : object_base {
 		bx.enabled=true;
 		if (_RES==GAME_UW2)
 		{
-			GameObject objInHands;
-			objInHands=UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(4);
-			if (objInHands !=null)
+            ObjectInteraction objInGloveSlot = UWCharacter.Instance.playerInventory.GetObjectIntAtSlot(4);
+			if (objInGloveSlot != null)
 			{
-				if (objInHands.GetComponent<ObjectInteraction>().item_id == 51)
+				if (objInGloveSlot.item_id == 51)
 				{//Fraznium gloves
-						bx.enabled = false;	
+					bx.enabled = false;	
 				}
 			}
 		}

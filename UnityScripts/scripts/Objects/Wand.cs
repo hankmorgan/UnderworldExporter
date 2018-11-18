@@ -55,7 +55,7 @@ public class Wand : enchantment_base {
 	public override bool use ()
 	{
         if (ConversationVM.InConversation) { return false; }
-        if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+        if (CurrentObjectInHand==null)
 		{
 			if ((!objInt().PickedUp))
 				{
@@ -77,7 +77,7 @@ public class Wand : enchantment_base {
 			if (quality >0)
 				{
 					UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf, Magic.SpellRule_Immediate);
-					if (objInt().isEnchanted()==false)
+					if (objInt().isEnchanted==false)
 						{
 						quality--;
 						if ( (quality ==0) && (  (item_id>=152) && (item_id<=155) ) )
@@ -90,7 +90,7 @@ public class Wand : enchantment_base {
 		}
 		else
 		{
-			return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(CurrentObjectInHand);
 		}		
 	}
 
@@ -128,7 +128,7 @@ public class Wand : enchantment_base {
 				break;
 		}	
 
-		if ((quality>0) && (objInt().isEnchanted()==false) && (isIdentified))
+		if ((quality>0) && (objInt().isEnchanted==false) && (isIdentified))
 		{//TODO: is the quality here the quality on the wand or the quality on the spell object? Is this behaviour different in uw1 vs uw2
 			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "
@@ -153,9 +153,9 @@ public class Wand : enchantment_base {
                 //make sure the wand of telekinesis is removed from the player as long as the player is not holding it in there hand
                 if((SpellIndex == 295) && (linkedspell == null))
                 {
-                    if (this.name !=UWCharacter.Instance.playerInventory.ObjectInHand)
+                    if (this.objInt() != CurrentObjectInHand)
                     {
-                        UWCharacter.Instance.playerInventory.RemoveItem(this.name);
+                        UWCharacter.Instance.playerInventory.RemoveItem(this.objInt());
                         //Remove object and place at 29,29
                         GameWorldController.MoveToWorld(objInt());
                         this.transform.position = CurrentTileMap().getTileVector(29, 29);

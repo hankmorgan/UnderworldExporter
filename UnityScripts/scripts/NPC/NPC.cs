@@ -608,7 +608,7 @@ public class NPC : MobileObject
                             newobjt.is_quant = 0;
                         }
                         newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
-                        cnt.AddItemToContainer(newobjt.instance.name);
+                        cnt.AddItemToContainer(newobjt.instance);
                     }
                 }
             }

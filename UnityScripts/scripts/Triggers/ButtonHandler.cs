@@ -107,7 +107,7 @@ public class ButtonHandler : Decal
 
     public override bool use()
     {
-        if (UWCharacter.Instance.playerInventory.ObjectInHand == "")
+        if (CurrentObjectInHand == null)
         {
             if (invis == 0)
             {
@@ -120,7 +120,7 @@ public class ButtonHandler : Decal
         }
         else
         {
-            return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+            return ActivateByObject(CurrentObjectInHand);
         }
     }
 
@@ -239,22 +239,22 @@ public class ButtonHandler : Decal
     }
 
 
-    public override bool ActivateByObject(GameObject ObjectUsed)
+    public override bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
-        ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
-        if (objIntUsed != null)
+        //ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+        if (ObjectUsed != null)
         {
-            switch (objIntUsed.GetItemType())
+            switch (ObjectUsed.GetItemType())
             {
                 case ObjectInteraction.POLE:
-                    UWCharacter.Instance.playerInventory.ObjectInHand = "";
-                    UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                    CurrentObjectInHand = null;
+                    //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
                     UWHUD.instance.MessageScroll.Set(StringController.instance.GetString(1, StringController.str_using_the_pole_you_trigger_the_switch_));
                     return Activate(this.gameObject);
                 default:
-                    UWCharacter.Instance.playerInventory.ObjectInHand = "";
-                    UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                    objIntUsed.FailMessage();
+                    CurrentObjectInHand = null;
+                    //UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                    ObjectUsed.FailMessage();
                     return false;
             }
         }
@@ -264,10 +264,10 @@ public class ButtonHandler : Decal
 
     public override string UseObjectOnVerb_World()
     {
-        ObjectInteraction ObjIntInHand = UWCharacter.Instance.playerInventory.GetObjIntInHand();
-        if (ObjIntInHand != null)
+        //ObjectInteraction ObjIntInHand = UWCharacter.Instance.playerInventory.GetObjIntInHand();
+        if (CurrentObjectInHand != null)
         {
-            switch (ObjIntInHand.GetItemType())
+            switch (CurrentObjectInHand.GetItemType())
             {
                 case ObjectInteraction.POLE:
                     return "trigger with pole";

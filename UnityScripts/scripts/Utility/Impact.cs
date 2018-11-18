@@ -75,9 +75,10 @@ public class Impact : object_base {
         if (newobjt!=null)
         {
             ObjectInteraction objInt = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ImpactPosition);
-            objInt.GetComponent<AnimationOverlay>().Looping = false;
+            //objInt.GetComponent<AnimationOverlay>().Looping = false;
             objInt.GetComponent<AnimationOverlay>().StartFrame = StartFrame;
             objInt.GetComponent<AnimationOverlay>().NoOfFrames = EndFrame - StartFrame;
+            objInt.GetComponent<AnimationOverlay>().StartingDuration = objInt.GetComponent<AnimationOverlay>().NoOfFrames;
             objInt.gameObject.layer = LayerMask.NameToLayer("Animation");
             return objInt.gameObject;
         }

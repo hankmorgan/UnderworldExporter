@@ -23,7 +23,7 @@ public class Instrument : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (UWCharacter.Instance.playerInventory.ObjectInHand=="")
+			if (CurrentObjectInHand==null)
 			{
 				if (PlayingInstrument==false)
 				{
@@ -33,7 +33,7 @@ public class Instrument : object_base {
 			}
 			else
 			{
-				return ActivateByObject(UWCharacter.Instance.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(CurrentObjectInHand);
 			}
 		}
 		else
@@ -104,15 +104,15 @@ public class Instrument : object_base {
 							//create the cup of wonder.
 
 							ObjectLoaderInfo newobjt= ObjectLoader.newObject(174,0,0,0,256);
-														GameObject cup = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position).gameObject;
-							GameWorldController.MoveToInventory(cup);
-							ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
+                            ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
+							GameWorldController.MoveToInventory(myObjInt);
+							//ObjectInteraction myObjInt = cup.GetComponent<ObjectInteraction>();
 
 							/*	ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
 							myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
 							GameWorldController.MoveToInventory(myObjInt.gameObject);*/
-							UWCharacter.Instance.playerInventory.ObjectInHand=myObjInt.name;
-							UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+							CurrentObjectInHand=myObjInt;
+							//UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
 							Quest.instance.isCupFound=true;

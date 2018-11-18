@@ -98,7 +98,7 @@ public class ShockCharacter : MonoBehaviour {
 		{
 			InvMarker=GameWorldController.instance.InventoryMarker;//InvMarker=GameObject.Find ("InventoryMarker");
 		}
-		if (pInv.ObjectInHand=="")//Player is not holding anything.
+		if (pInv.ObjectInHand==null)//Player is not holding anything.
 		{//Find the object within the pickup range.
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
@@ -109,9 +109,9 @@ public class ShockCharacter : MonoBehaviour {
 				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 				{
 					//MessageLog.text = "You pick up a " + hit.transform.name;
-					CursorIcon=objPicked.GetInventoryDisplay().texture;
+					//CursorIcon=objPicked.GetInventoryDisplay().texture;
 					//CurrObjectSprite=objPicked.InventoryString;
-					pInv.ObjectInHand=hit.transform.name;
+					pInv.ObjectInHand= objPicked;
 					pInv.JustPickedup=true;//To stop me throwing it away immediately.
 					objPicked.transform.position = InvMarker.transform.position;
 				}
