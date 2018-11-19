@@ -244,6 +244,11 @@ public class GameWorldController : UWEBase
     public ObjectLoader[] objectList = new ObjectLoader[9];
 
     /// <summary>
+    /// Object list for the player inventory.
+    /// </summary>
+    public ObjectLoader inventoryLoader = new ObjectLoader();
+
+    /// <summary>
     /// The music controller for the game
     /// </summary>
     private MusicController mus;

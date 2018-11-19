@@ -219,7 +219,7 @@ public class PlayerInventory : UWEBase
         set
         {
             _sRightShoulder = value;
-            DisplayGameObject(_sLeftHand, UWHUD.instance.RightShoulder_Slot, UWHUD.instance.RightShoulder_Qty, false);
+            DisplayGameObject(_sRightShoulder, UWHUD.instance.RightShoulder_Slot, UWHUD.instance.RightShoulder_Qty, false);
         }
     }
 

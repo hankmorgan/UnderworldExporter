@@ -4,8 +4,7 @@ using System.IO;
 using UnityEngine.UI;
 
 public class SaveGame : Loader
-{
-
+{     
     public enum InventorySlotsOffsets
     {
         UW1Helm = 248,
@@ -50,6 +49,7 @@ public class SaveGame : Loader
 
     };
 
+    
 
     private const float Ratio = 213f;
     private const float VertAdjust = 0.3543672f;
@@ -2528,51 +2528,51 @@ public class SaveGame : Loader
         //Stored in much the same way as an linked object list is.
         //Inventory list
         int NoOfItems = (buffer.GetUpperBound(0) - StartOffset) / 8;
-        ObjectLoader objLoader = new ObjectLoader();
-        objLoader.objInfo = new ObjectLoaderInfo[NoOfItems + 2];
+
+        GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems + 2];
         int x = 1;
         if (buffer.GetUpperBound(0) >= StartOffset)
         {
             int i = StartOffset;
             while (i < buffer.GetUpperBound(0))
             {
-                objLoader.objInfo[x] = new ObjectLoaderInfo();
-                objLoader.objInfo[x].index = x;
-                objLoader.objInfo[x].guid = System.Guid.NewGuid();
-                objLoader.objInfo[x].parentList = objLoader;
-                objLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
-                objLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
-                objLoader.objInfo[x].InUseFlag = 1;
-                objLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer, i + 0, 16)) & 0x1FF;
-                objLoader.objInfo[x].flags = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 9) & 0x07);
-                objLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 12) & 0x01);
-                objLoader.objInfo[x].doordir = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 13) & 0x01);
-                objLoader.objInfo[x].invis = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 14) & 0x01);
-                objLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 15) & 0x01);
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo();
+                GameWorldController.instance.inventoryLoader.objInfo[x].index = x;
+                GameWorldController.instance.inventoryLoader.objInfo[x].guid = System.Guid.NewGuid();
+                GameWorldController.instance.inventoryLoader.objInfo[x].parentList = GameWorldController.instance.inventoryLoader;
+                GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
+                GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
+                GameWorldController.instance.inventoryLoader.objInfo[x].InUseFlag = 1;
+                GameWorldController.instance.inventoryLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer, i + 0, 16)) & 0x1FF;
+                GameWorldController.instance.inventoryLoader.objInfo[x].flags = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 9) & 0x07);
+                GameWorldController.instance.inventoryLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 12) & 0x01);
+                GameWorldController.instance.inventoryLoader.objInfo[x].doordir = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 13) & 0x01);
+                GameWorldController.instance.inventoryLoader.objInfo[x].invis = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 14) & 0x01);
+                GameWorldController.instance.inventoryLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 15) & 0x01);
                 //position at +2
-                objLoader.objInfo[x].zpos = (short)((DataLoader.getValAtAddress(buffer, i + 2, 16)) & 0x7F);
+                GameWorldController.instance.inventoryLoader.objInfo[x].zpos = (short)((DataLoader.getValAtAddress(buffer, i + 2, 16)) & 0x7F);
                 //bits 0-6 
-                objLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 7) & 0x07);
+                GameWorldController.instance.inventoryLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 7) & 0x07);
                 //bits 7-9
-                objLoader.objInfo[x].ypos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 10) & 0x07);
+                GameWorldController.instance.inventoryLoader.objInfo[x].ypos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 10) & 0x07);
                 //bits 10-12
-                objLoader.objInfo[x].xpos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 13) & 0x07);
+                GameWorldController.instance.inventoryLoader.objInfo[x].xpos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 13) & 0x07);
                 //bits 13-15
                 //+4
-                objLoader.objInfo[x].quality = (short)((DataLoader.getValAtAddress(buffer, i + 4, 16)) & 0x3F);
-                objLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer, i + 4, 16) >> 6) & 0x3FF);
+                GameWorldController.instance.inventoryLoader.objInfo[x].quality = (short)((DataLoader.getValAtAddress(buffer, i + 4, 16)) & 0x3F);
+                GameWorldController.instance.inventoryLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer, i + 4, 16) >> 6) & 0x3FF);
                 //+6
-                objLoader.objInfo[x].owner = (short)(DataLoader.getValAtAddress(buffer, i + 6, 16) & 0x3F);
+                GameWorldController.instance.inventoryLoader.objInfo[x].owner = (short)(DataLoader.getValAtAddress(buffer, i + 6, 16) & 0x3F);
                 //bits 0-5
-                objLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF);
+                GameWorldController.instance.inventoryLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF);
                 //bits 6-15
                 i = i + 8;
                 x++;
             }
             //Create the inventory objects
-            ObjectLoader.RenderObjectList(objLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
-            ObjectLoader.LinkObjectListWands(objLoader);
-            ObjectLoader.LinkObjectListPotions(objLoader);
+            ObjectLoader.RenderObjectList(GameWorldController.instance.inventoryLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
+            ObjectLoader.LinkObjectListWands(GameWorldController.instance.inventoryLoader);
+            ObjectLoader.LinkObjectListPotions(GameWorldController.instance.inventoryLoader);
             for (int j = lBoundSlots; j < uBoundSlots; j = j + 2)
             {
                 //Apply objects to slots
@@ -2581,7 +2581,7 @@ public class SaveGame : Loader
                 //string item_name;
                 if (index != 0)
                 {
-                    item = objLoader.objInfo[index].instance;
+                    item = GameWorldController.instance.inventoryLoader.objInfo[index].instance;
                     //item_name = ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
                 }
                 else

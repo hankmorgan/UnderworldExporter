@@ -108,7 +108,8 @@ public class AnimationOverlay : UWEBase {
 	public void Go()
 	{
 		FrameNo=StartFrame;
-		StartCoroutine (Animate());
+        LoadAnimo(StartFrame);
+        StartCoroutine (Animate());
 	}
 
 	public void Stop()

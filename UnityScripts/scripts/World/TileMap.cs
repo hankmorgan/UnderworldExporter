@@ -364,11 +364,11 @@ public class TileMap : Loader
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(ovl_ark, OverlayAddress + 5, 8);
                             if (Overlays[overlayIndex].link!=0)
                             {
-                                Debug.Log("Overlay at " + OverlayAddress
-                                    + " obj " + Overlays[overlayIndex].link
-                                    + " for " + Overlays[overlayIndex].duration
-                                    + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
-                                    + " header :" + Overlays[overlayIndex].header);
+                               // Debug.Log("Overlay at " + OverlayAddress
+                                //    + " obj " + Overlays[overlayIndex].link
+                               //     + " for " + Overlays[overlayIndex].duration
+                               //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                               //     + " header :" + Overlays[overlayIndex].header);
                             }                            
                             OverlayAddress += 6;
                         }
@@ -389,11 +389,11 @@ public class TileMap : Loader
                             Overlays[overlayIndex].tileY = (int)DataLoader.getValAtAddress(lev_ark, OverlayAddress + 5, 8);
                             if (Overlays[overlayIndex].link != 0)
                             {
-                                Debug.Log("Overlay at " + OverlayAddress 
-                                    + " obj " + Overlays[overlayIndex].link 
-                                    + " for " + Overlays[overlayIndex].duration 
-                                    + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
-                                    + " header :" + Overlays[overlayIndex].header);
+                               // Debug.Log("Overlay at " + OverlayAddress 
+                               //     + " obj " + Overlays[overlayIndex].link 
+                               //     + " for " + Overlays[overlayIndex].duration 
+                               //     + " tile " + Overlays[overlayIndex].tileX + "," + Overlays[overlayIndex].tileY
+                                //    + " header :" + Overlays[overlayIndex].header);
                             }
                         }
                         OverlayAddress += 6;
