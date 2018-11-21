@@ -160,9 +160,17 @@ public class ConversationVM : UWEBase
     /// The answer from the bablf_menu
     public static int bablf_ans = 0;
 
+    public static ConversationVM instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
 
     public void InitConvVM()
     {
+        
         switch (_RES)
         {
             case GAME_UW2:
@@ -2310,6 +2318,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         usingBablF = false;
         MaxAnswer = 0;
         int j = 1;
+        for (int i=0;i<=UWHUD.instance.ConversationOptions.GetUpperBound(0);i++)
+        {
+            UWHUD.instance.ConversationOptions[i].SetText("");
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[i],false);
+        }
         for (int i = Start; i <= stack.Upperbound(); i++)
         {
             if (stack.at(i) > 0)
@@ -2319,8 +2332,10 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                 {
                     TextLine = TextSubstitute(TextLine);
                 }
-                UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");//  \n
-
+                //UWHUD.instance.MessageScroll.Add(j + "." + TextLine + "");//  \n
+                UWHUD.instance.ConversationOptions[j-1].SetText(j + "." + TextLine + "");
+                UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j-1], true);
+                j++;
                 MaxAnswer++;
             }
             else
@@ -2345,6 +2360,11 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
     public IEnumerator babl_fmenu(int Start, int flagIndex)
     {
+        for (int i = 0; i <= UWHUD.instance.ConversationOptions.GetUpperBound(0); i++)
+        {
+            UWHUD.instance.ConversationOptions[i].SetText("");
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[i], false);
+        }
         UWHUD.instance.MessageScroll.Clear();
         yield return new WaitForSecondsRealtime(0.2f);
         usingBablF = true;
@@ -2370,7 +2390,10 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
                     bablf_array[j - 1] = stack.at(i);
                     //tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
-                    UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
+                   // UWHUD.instance.MessageScroll.Add(j++ + "." + TextLine + "");
+                    UWHUD.instance.ConversationOptions[j - 1].SetText(j + "." + TextLine + "");
+                    UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j - 1], true);
+                    j++;
                     MaxAnswer++;
                 }
             }
@@ -2456,6 +2479,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         if (WaitingForInput)
         {
+            if (CurrentObjectInHand != null) { return; }//no conversation options allowed while holding an item
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 CheckAnswer(1);
@@ -2498,7 +2522,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// Sets the PlayerAnswer variable for checking within the conversations
     /// </summary>
     /// <param name="AnswerNo">The answer number from the menu entered by the player</param>
-    private void CheckAnswer(int AnswerNo)
+    public void CheckAnswer(int AnswerNo)
     {
         if (usingBablF == false)
         {
@@ -2834,6 +2858,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     }
                 }
             }
+            CurrentObjectInHand = demanded;
+            GameWorldController.MoveToInventory(demanded);
 
 
             return 2;

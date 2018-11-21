@@ -96,6 +96,8 @@ public class UWHUD : HUD
     public GameObject UW1NPCTradeArea;
     public GameObject UW1ConversationPaperBackground;
 
+    public ConversationButton[] ConversationOptions = new ConversationButton[5];
+
 
 
     [Header("Inventory")]

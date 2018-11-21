@@ -38,7 +38,7 @@ using System.Collections;
 /// 3: PT related - Bishop is dead
 /// 
 /// 6: Helena asks you to speak to praetor loth
-/// 7: Set after freeing praetor loth/characters now know about this object
+/// 7: Set after freeing praetor loth/characters now know about the horn
 /// 8:  Kintara tells you about Javra
 /// 9:  Lobar tells you about the "virtues"
 /// 10: PT related

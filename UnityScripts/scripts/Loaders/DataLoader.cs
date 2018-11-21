@@ -173,6 +173,10 @@ public class DataLoader :Loader {
 				}
 				else
 				{//copy
+                    if (address_pointer >=tmp.GetUpperBound(0))
+                    {
+                        return buf;//no more data.
+                    }
 					int o = tmp[address_pointer++];
 					int c = tmp[address_pointer++];
 
