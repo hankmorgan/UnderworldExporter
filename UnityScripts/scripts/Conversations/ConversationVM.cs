@@ -609,6 +609,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
 
         UWHUD.instance.MessageScroll.Clear();
+        ClearConversationOptions();
+
         /*End UI Setup*/
 
         ///Cancels player movement
@@ -645,8 +647,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <returns>The conversation V.</returns>
     private IEnumerator RunConversationVM(NPC npc)
     {
-
-
         //basep = 0;
         //stack.result_register = 1;//Set a default value
         bool finished = false;
@@ -659,7 +659,6 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
 
         //Import the variables
         ImportVariableMemory(npc);
-
 
         // execute one instruction
         //switch(code[stack.instrp])
@@ -1199,7 +1198,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             }
         }
 
-
+        ClearConversationOptions();
 
         ///Give movement back to the player			
         UWCharacter.Instance.playerMotor.enabled = true;
@@ -2318,11 +2317,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         usingBablF = false;
         MaxAnswer = 0;
         int j = 1;
-        for (int i=0;i<=UWHUD.instance.ConversationOptions.GetUpperBound(0);i++)
-        {
-            UWHUD.instance.ConversationOptions[i].SetText("");
-            UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[i],false);
-        }
+        ClearConversationOptions();
         for (int i = Start; i <= stack.Upperbound(); i++)
         {
             if (stack.at(i) > 0)
@@ -2333,8 +2328,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                     TextLine = TextSubstitute(TextLine);
                 }
                 //UWHUD.instance.MessageScroll.Add(j + "." + TextLine + "");//  \n
-                UWHUD.instance.ConversationOptions[j-1].SetText(j + "." + TextLine + "");
-                UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j-1], true);
+                UWHUD.instance.ConversationOptions[j - 1].SetText(j + "." + TextLine + "");
+                UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[j - 1], true);
                 j++;
                 MaxAnswer++;
             }
@@ -2350,6 +2345,18 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         yield return 0;
     }
 
+    /// <summary>
+    /// Removes and disables conversation option text
+    /// </summary>
+    private static void ClearConversationOptions()
+    {
+        for (int i = 0; i <= UWHUD.instance.ConversationOptions.GetUpperBound(0); i++)
+        {
+            UWHUD.instance.ConversationOptions[i].SetText("");
+            UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[i], false);
+        }
+    }
+
 
     /// <summary>
     /// Dialog menu with choices that may or may not show based on the flags
@@ -2360,11 +2367,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
     public IEnumerator babl_fmenu(int Start, int flagIndex)
     {
-        for (int i = 0; i <= UWHUD.instance.ConversationOptions.GetUpperBound(0); i++)
-        {
-            UWHUD.instance.ConversationOptions[i].SetText("");
-            UWHUD.instance.EnableDisableControl(UWHUD.instance.ConversationOptions[i], false);
-        }
+        ClearConversationOptions();
         UWHUD.instance.MessageScroll.Clear();
         yield return new WaitForSecondsRealtime(0.2f);
         usingBablF = true;

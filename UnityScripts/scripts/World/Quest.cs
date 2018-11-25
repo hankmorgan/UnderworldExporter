@@ -38,7 +38,7 @@ using System.Collections;
 /// 3: PT related - Bishop is dead
 /// 
 /// 6: Helena asks you to speak to praetor loth
-/// 7: Set after freeing praetor loth/characters now know about the horn
+/// 7: Loth is dead
 /// 8:  Kintara tells you about Javra
 /// 9:  Lobar tells you about the "virtues"
 /// 10: PT related
@@ -89,7 +89,7 @@ using System.Collections;
 /// 68: You have given the answers to nystrul and the invasion (endgame) has begun.
 /// 104: Set when you enter scintilus level 5 (set by variable trap)
 /// 106: Meet mors gothi and got the book
-/// 107: Set after freeing praetor loth
+/// 107: Set after freeing praetor loth and you/others now know about the horn.
 /// 109: Set to 1 after first LB conversation. All castle occupants check this on first talk.
 /// 110: Checked when talking to LB and Dupre. The guardians forces are attacking
 /// 112: checked when talking to LB. You have been fighting with the others

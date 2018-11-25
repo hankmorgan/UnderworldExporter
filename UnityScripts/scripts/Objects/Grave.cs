@@ -7,12 +7,7 @@ public class Grave : Model3D {
 	//public int GraveID;
 	bool LookingAt;
 	float timeOut=0f;
-	/*protected override void Start ()
-	{
-		base.Start ();
-		//GraveID=  objInt().objectloaderinfo.DeathWatched;//seriously?????? Need to make this better. Look at BuildObjectList
-		CreateGrave(this.gameObject,objInt());
-	}*/
+
 
 	public override void Update() 
 	{
@@ -23,7 +18,6 @@ public class Grave : Model3D {
 			{
 				LookingAt=false;
 				UWHUD.instance.CutScenesSmall.anim.SetAnimation="Anim_Base";
-							//	UWHUD.instance.CutScenesSmall.TargetControl.texture=UWHUD.instance.CutScenesSmall.anim_base
 			}
 		}
 	}
@@ -35,14 +29,7 @@ public class Grave : Model3D {
 	/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public override bool LookAt ()
 	{
-		//CheckReferences();
-		//UWHUD.instance.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
-//				UWHUD.instance.mainwindow_art.mainTexture= GameWorldController.instance.cutsLoader.
-
-		//GameWorldController.instance.cutsLoader= new CutsLoader("cs401.n01");
-		//UWHUD.instance.CutScenesSmall.TargetControl.texture=GameWorldController.instance.cutsLoader.LoadImageAt(GraveID());
 		UWHUD.instance.CutScenesSmall.anim.SetAnimation= "Grave_" + GraveID();
-		//LookingAt=true;timeOut=0f;
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, link-512));
 		return true;
 	}
@@ -71,9 +58,7 @@ public class Grave : Model3D {
 		}
 		else
 		{
-			//TODO: if garamons bones activate something special.
 			return ActivateByObject(CurrentObjectInHand);
-			//return UWCharacter.Instance.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 	}
 
@@ -98,14 +83,13 @@ public class Grave : Model3D {
 					//000~001~134~You thoughtfully give the bones a final resting place.
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,StringController.str_you_thoughtfully_give_the_bones_a_final_resting_place_));
 
-					ObjectInteraction trigObj =CurrentObjectList().objInfo[495].instance; // GameObject.Find ("a_move_trigger_54_52_04_0495");
+					ObjectInteraction trigObj =CurrentObjectList().objInfo[495].instance; 
 					if (trigObj!=null)
 					{					
 						link++;//Update the grave description
                         ObjectUsed.consumeObject ();
 						trigObj.GetComponent<trigger_base>().Activate(this.gameObject);
 						Quest.instance.isGaramonBuried=true;
-						//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						CurrentObjectInHand=null;	
 						//Garamon does not initiate conversation normally so I force the conversation.
 						GameObject garamon = GameObject.Find(a_create_object_trap.LastObjectCreated);
@@ -117,16 +101,13 @@ public class Grave : Model3D {
 							}
 						}
 					}
-					//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-					CurrentObjectInHand=null;	
-					
+					CurrentObjectInHand=null;						
 					return true;
 					}
 					else
 					{//Regular bones
 						//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
-						//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						CurrentObjectInHand=null;
 						return true;
 					}
@@ -142,13 +123,11 @@ public class Grave : Model3D {
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
-				//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				CurrentObjectInHand=null;
 				return true;
 			}
 			else
 			{
-				//UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				CurrentObjectInHand=null;
 				return ObjectUsed.FailMessage();
 			}
@@ -158,7 +137,6 @@ public class Grave : Model3D {
 
 	public override string UseObjectOnVerb_World ()
 	{
-		//ObjectInteraction ObjIntInHand=CurrentObjectInHand;
 		if (CurrentObjectInHand != null)
 		{
 			switch (CurrentObjectInHand.item_id)	
@@ -172,35 +150,7 @@ public class Grave : Model3D {
 	}
 
 
-	/*	public static void CreateGrave(GameObject myObj, ObjectInteraction objInt)
-		{//TODO:make this a properly texture model as part of map generation.
-			myObj.layer=LayerMask.NameToLayer("MapMesh");
-
-			GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cube); 
-			SpriteController.name = myObj.name + "_cube";
-			SpriteController.transform.position = myObj.transform.position;
-			SpriteController.transform.rotation=myObj.transform.rotation;
-			SpriteController.transform.parent = myObj.transform;
-			SpriteController.transform.localScale=new Vector3(0.5f,0.5f,0.1f);
-			SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
-
-			MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
-			mr.material= GameWorldController.instance.MaterialObj[objInt.flags+28]; //(Material)Resources.Load (_RES+ "/Materials/tmobj/tmobj_" + objInt.flags+28);
-			//mr.material.mainTexture= GameWorldController.instance.TmObjArt.LoadImageAt(objInt.flags+28);
-			BoxCollider bx = myObj.GetComponent<BoxCollider>();
-			bx.center= new Vector3(0.0f,0.25f,0.0f);
-			bx.size=new Vector3(0.5f,0.5f,0.1f);
-			bx.isTrigger=false;
-
-			bx=SpriteController.GetComponent<BoxCollider>();
-			bx.enabled=false;
-			Component.DestroyImmediate (bx);
-		}*/
-
-
-
-
-		/***************************Model definition*******************/
+	/***************************Model definition*******************/
 
 	public override int NoOfMeshes ()
 	{

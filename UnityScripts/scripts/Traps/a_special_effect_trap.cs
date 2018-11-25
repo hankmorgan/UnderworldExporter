@@ -31,7 +31,7 @@ public class a_special_effect_trap : trap_base {
             case 4:
                 //Call a camera shake effect
                 //CameraShake.instance.shakeDuration = owner * 0.2f;
-                CameraShake.instance.ShakeEarthQuake(owner * 0.2f);
+                CameraShake.instance.ShakeEarthQuake(owner * 0.05f);
                 break;
             case 5:
                 StartCoroutine(Flash("FadeToRed"));

@@ -678,6 +678,21 @@ public class NPC : MobileObject
                     }
                     switch (npc_whoami)
                     {
+                        case 32://Killing Praceor Loth 
+                            //This variable is normally set by his final conversation but will also happen when you murder him.
+                            //Also used to trigger earthquake effect.
+                            {
+                                Quest.instance.QuestVariables[7] = 1;
+                                ObjectInteraction trigObj = CurrentObjectList().objInfo[961].instance;
+                                if (trigObj !=null)
+                                {
+                                    if (trigObj.GetComponent<trigger_base>()!=null)
+                                    {
+                                        trigObj.GetComponent<trigger_base>().Activate(null);//trigger the enter trigger that causes the earth quake.
+                                    }
+                                }
+                                break;
+                            }
                         case 47://Mors gothri in Kilhorn
                             if (Quest.instance.QuestVariables[117] ==0)
                             {
