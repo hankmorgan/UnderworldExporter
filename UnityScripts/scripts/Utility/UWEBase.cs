@@ -20,7 +20,13 @@ public class UWEBase : MonoBehaviour
 
     public static bool EditorMode = false;
 
-    public static char sep;
+    public static char sep
+    {
+        get
+        {
+            return Loader.sep;
+        }
+    }
 
     /// <summary>
     /// Returns or sets the object that the player is holding.

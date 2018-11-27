@@ -472,7 +472,7 @@ public class GameWorldController : UWEBase
     void Awake()
     {
         instance = this;
-        sep = Path.AltDirectorySeparatorChar;
+        UWClass.sep = Path.AltDirectorySeparatorChar;
         Lev_Ark_File_Selected = "DATA" + sep + "LEV.ARK";
         SCD_Ark_File_Selected = "DATA" + sep + "SCD.ARK";
 

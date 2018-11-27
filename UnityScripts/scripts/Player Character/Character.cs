@@ -2,56 +2,81 @@
 using System.Collections;
 using UnityEngine.UI;
 public class Character : UWEBase {
-	/*Base Character Class*/
+    /*Base Character Class*/
 
-	//What interaction mode are we in and various ranges
-	public static int InteractionMode;
+    //What interaction mode are we in and various ranges
+    public static int InteractionMode;
 
-	public const int InteractionModeWalk=6;
-	public const int InteractionModeOptions=0;
-	public const int InteractionModeTalk=1;
-	public const int InteractionModePickup=2;
-	public const int InteractionModeLook=3;
-	public const int InteractionModeAttack=4;
-	public const int InteractionModeUse=5;
-	public const int InteractionModeInConversation=7; //For trading purposes.
-	public static int DefaultInteractionMode=InteractionModeUse;
+    public const int InteractionModeWalk = 6;
+    public const int InteractionModeOptions = 0;
+    public const int InteractionModeTalk = 1;
+    public const int InteractionModePickup = 2;
+    public const int InteractionModeLook = 3;
+    public const int InteractionModeAttack = 4;
+    public const int InteractionModeUse = 5;
+    public const int InteractionModeInConversation = 7; //For trading purposes.
+    public static int DefaultInteractionMode = InteractionModeUse;
 
-	/// <summary>
-	/// At what distance from the player is the AI awake for processing.
-	/// </summary>
-	public const float BaseAIWakeRange=8.0f;
+    /// <summary>
+    /// At what distance from the player is the AI awake for processing.
+    /// </summary>
+    public const float BaseAIWakeRange = 8.0f;
 
-	/// <summary>
-	/// The base detection range for hostile AI who are not currently targetting the player.
-	/// </summary>
-	public const float BaseDetectionRange=6.0f;
+    /// <summary>
+    /// The base detection range for hostile AI who are not currently targetting the player.
+    /// </summary>
+    public const float BaseDetectionRange = 6.0f;
 
-	/// <summary>
-	/// The minimum detection range a player can achieve
-	/// </summary>
-	public const float MinDetectionRange=0.2f;
+    /// <summary>
+    /// The minimum detection range a player can achieve
+    /// </summary>
+    public const float MinDetectionRange = 0.2f;
 
 
-	//The storage location for container items.
-	//public static GameObject GameWorldController.instance.InventoryMarker;
+    //The storage location for container items.
+    //public static GameObject GameWorldController.instance.InventoryMarker;
 
-	//Reference to a C# version of the standard character controller.
+    //Reference to a C# version of the standard character controller.
 
-	[Header("Controllers")]
-	public CharacterMotorC playerMotor;
-	public CharacterController playerController;
-	public AudioSource aud;
+    [Header("Controllers")]
+    public CharacterMotorC playerMotor;
+    public CharacterController playerController;
+    public AudioSource aud;
     public AudioSource footsteps;
     public bool step = true;
 
-	[Header("Health")]
-	//Character Stats
-	public int MaxVIT;
-	public int CurVIT;
-
-
-
+    [Header("Health")]
+    [SerializeField]
+    private int _MaxVit;
+    /// <summary>
+    /// Get or Set Player vitality.
+    /// </summary>
+    public int MaxVIT
+    {
+        get
+        {
+            return _MaxVit;
+        }
+        set
+        {
+            _MaxVit = value;
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();     
+        }
+    }
+    [SerializeField]
+    private int _CurVit;
+    public int CurVIT
+    {
+        get
+        {
+            return _CurVit;
+        }
+        set
+        {
+            _CurVit = value;
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
+        }
+    }
 
 	[Header("Interaction Ranges")]	
 	public float pickupRange=2.5f;

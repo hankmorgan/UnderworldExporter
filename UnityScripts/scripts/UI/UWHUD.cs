@@ -176,8 +176,8 @@ public class UWHUD : HUD
 
 
     [Header("Indicators")]
-    public RawImage FlaskHealth;
-    public RawImage FlaskMana;
+    public HealthFlask FlaskHealth;
+    public HealthFlask FlaskMana;
     public Eyes MonsterEyes;
     public Compass HudCompass;
     public Power powergem;

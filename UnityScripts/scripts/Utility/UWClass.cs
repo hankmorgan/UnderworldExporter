@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class UWClass  {
-		
-	public const string GAME_UWDEMO = "UW0";
+    public static char sep;//File name seperator for linux/windows support
+
+    public const string GAME_UWDEMO = "UW0";
 	public const string GAME_UW1 = "UW1";
 	public const string GAME_UW2 = "UW2";
 	public const string GAME_SHOCK = "SHOCK";

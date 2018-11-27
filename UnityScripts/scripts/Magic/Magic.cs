@@ -41,14 +41,39 @@ public class Magic : UWEBase
     public static bool InfiniteMana;
 
     ///How much mana the player can have
-    public int MaxMana;
+   [SerializeField]
+    private int _MaxMana;
+    public int MaxMana
+    {
+        get
+        {
+            return _MaxMana;
+        }
+        set
+        {
+            _MaxMana = value;
+            UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
+        }
+    }
     ///How much mana the player currently has
-    public int CurMana;
+    private int _CurMana;
+    public int CurMana
+    {
+        get
+        {
+            return _CurMana;
+        }
+        set
+        {
+            _CurMana = value;
+            UWHUD.instance.FlaskMana.UpdateFlaskDisplay();
+        }
+    }
     ///The true max mana the character has when their mana is drained.
     public int TrueMaxMana;
+    
     ///The mana cost of the next spell the player will cast
     public int SpellCost;
-
 
     ///For spells cast on objects in slots
     public ObjectInteraction ObjectInSlot;

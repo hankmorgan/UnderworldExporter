@@ -120,7 +120,31 @@ public class UWCharacter : Character
     //Character Status
     public int FoodLevel; //0-255 range.
     public int Fatigue;   //0-29 range
-    public short play_poison;
+    [SerializeField]   
+    private short _play_poison;
+    /// <summary>
+    /// How badly poisoned is the player. The higher the value the longer poison ticks down for.
+    /// </summary>
+    public short play_poison
+    {
+        get
+        {
+            return _play_poison;
+        }
+        set
+        {
+            if (_play_poison==0 && value !=0)
+            {//Clears poisoning on the flask.
+                UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(true);
+            }
+            else if (_play_poison !=0 && value ==0)
+            {//Sets poisoning on the flask
+                UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
+            }
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
+        }
+    }
+
     public float poison_timer = 30f;
     public float lavaDamageTimer;//How long before applying lava damage
     private bool InventoryReady = false;

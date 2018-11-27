@@ -13,82 +13,85 @@ public class HealthFlask : GuiBase_Draggable {
 	private float PreviousMaxLevel;
 
 	public bool isHealthDisplay;
-	private bool Poisoned;
+    //private bool Poisoned;
 
-
-		public override void Start ()
+	public override void Start ()
+	{
+		for (int i=0; i<=LevelImages.GetUpperBound(0);i++)
 		{
-			for (int i=0; i<=LevelImages.GetUpperBound(0);i++)
+			if (isHealthDisplay)
 			{
-				if (isHealthDisplay)
-				{
-					LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i);					
-				}
-				else
-				{
-					LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(25+i);					
-				}
-			}
-			this.GetComponent<RawImage>().texture=GameWorldController.instance.grFlasks.LoadImageAt(75);			
-		}
-
-	public override void Update ()
-		{
-		base.Update();
-		if (isHealthDisplay==true)
-		{//Health flask
-			Level=UWCharacter.Instance.CurVIT;
-			MaxLevel=UWCharacter.Instance.MaxVIT;
-		}
-		else
-		{//mana flask
-			Level=UWCharacter.Instance.PlayerMagic.CurMana;
-			MaxLevel=UWCharacter.Instance.PlayerMagic.MaxMana;
-		}
-
-		if ((isHealthDisplay) && ((UWCharacter.Instance.play_poison!= 0) !=Poisoned))
-		{
-			Poisoned = UWCharacter.Instance.play_poison!=0;
-			UpdatePoisonDisplay();
-		}
-
-		if ((Level!=PreviousLevel) || (MaxLevel!=PreviousMaxLevel))
-		{
-			PreviousLevel=Level;
-			PreviousMaxLevel=MaxLevel;
-			if (MaxLevel>0)
-			{
-				FlaskLevel = (Level/MaxLevel) * 13.0f; 
-				
-				for (int i = 0; i <13; i++)
-				{
-					LevelImages[i].enabled=(i<FlaskLevel);
-				}
+				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i);					
 			}
 			else
 			{
-				for (int i = 0; i <13; i++)
-				{
-					LevelImages[i].enabled=false;
-				}
+				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(25+i);					
 			}
 		}
+		this.GetComponent<RawImage>().texture=GameWorldController.instance.grFlasks.LoadImageAt(75);			
 	}
 
+	//public override void Update ()
+    //{
+    //    base.Update();
+    //    UpdateFlaskDisplay();
+    //}
 
-	void UpdatePoisonDisplay()
+    public void UpdateFlaskDisplay()
+    {
+        if (isHealthDisplay == true)
+        {//Health flask
+            Level = UWCharacter.Instance.CurVIT;
+            MaxLevel = UWCharacter.Instance.MaxVIT;
+        }
+        else
+        {//mana flask
+            Level = UWCharacter.Instance.PlayerMagic.CurMana;
+            MaxLevel = UWCharacter.Instance.PlayerMagic.MaxMana;
+        }
+
+        //if ((isHealthDisplay) && ((UWCharacter.Instance.play_poison != 0) != Poisoned))
+        //{
+        //    Poisoned = UWCharacter.Instance.play_poison != 0;
+        //    UpdatePoisonDisplay();
+        //}
+
+        if ((Level != PreviousLevel) || (MaxLevel != PreviousMaxLevel))
+        {
+            PreviousLevel = Level;
+            PreviousMaxLevel = MaxLevel;
+            if (MaxLevel > 0)
+            {
+                FlaskLevel = (Level / MaxLevel) * 13.0f;
+
+                for (int i = 0; i < 13; i++)
+                {
+                    LevelImages[i].enabled = (i < FlaskLevel);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 13; i++)
+                {
+                    LevelImages[i].enabled = false;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Changes the health display with the green poisoned one.
+    /// </summary>
+    public void UpdatePoisonDisplay(bool newState)
 	{
-		//Debug.Log("Updating poison display");
 		for (int i = 0; i <13; i++)
 		{
-			if (Poisoned==true)
+			if (newState==true)
 			{//Load the poisoned versions of the flask images.
-				//LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
 				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i+50);
 			}
 			else
 			{//Load the healthy versions of the flask images.
-				//LevelImages[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/Flask/Flasks_"+ (i).ToString("0000"));
 				LevelImages[i].texture=GameWorldController.instance.grFlasks.LoadImageAt(i);
 			}
 		}
