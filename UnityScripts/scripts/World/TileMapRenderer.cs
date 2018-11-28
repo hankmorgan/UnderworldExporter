@@ -4578,6 +4578,11 @@ public class TileMapRenderer : Loader
         }
     }
 
+    /// <summary>
+    /// Set the gameobject layer that this tile uses.
+    /// </summary>
+    /// <param name="t"></param>
+    /// <param name="Tile"></param>
     static void SetTileLayer(TileInfo t, GameObject Tile)
     {
         if (t.isWater == false)
@@ -4615,7 +4620,12 @@ public class TileMapRenderer : Loader
 
 
 
-
+    /// <summary>
+    /// Renders a Terra Nova Strike Force Centauri tilemap.
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="data"></param>
+    /// <returns></returns>
     public static bool RenderTNovaMap(Transform parent, char[] data)
     {
         short[,] height = new short[513, 513];
@@ -4836,7 +4846,11 @@ public class TileMapRenderer : Loader
     }
 
 
-
+    /// <summary>
+    /// Add a trigger component that allows watery surfaces to react to items been thrown on them.
+    /// </summary>
+    /// <param name="tile"></param>
+    /// <param name="t"></param>
     static void AddWaterContact(GameObject tile, TileInfo t)
     {
         if (_RES==GAME_UW2)
@@ -4850,6 +4864,10 @@ public class TileMapRenderer : Loader
         tile.AddComponent<TileContactWater>();
     }
 
+    /// <summary>
+    /// Adds a trigger component that makes lava tiles react to the player/objects coming into contact with them
+    /// </summary>
+    /// <param name="tile"></param>
     static void AddLavaContact(GameObject tile)
     {
         tile.AddComponent<TileContactLava>();

@@ -8,8 +8,7 @@ using System.Collections;
 /// Events that occur when objects come into contact with the world tiles
 public class TileContact : UWEBase
 {
-
-
+    
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<ObjectInteraction>() != null)
@@ -24,13 +23,7 @@ public class TileContact : UWEBase
 
     }
 
-
-    //protected virtual void TileContactEvent(Feet feet, Vector3 position)
-    //{
-
-    //}
-
-    /// <summary>
+     /// <summary>
     /// Determines whether this object is a quest object or similar object that should not be destroyed by contact. If it is a container it will search to the container for a quest object.
     /// </summary>
     /// <returns><c>true</c> if this instance is object quest related the specified obj; otherwise, <c>false</c>.</returns>

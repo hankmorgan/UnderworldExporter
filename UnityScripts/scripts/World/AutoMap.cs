@@ -5,9 +5,12 @@ using UnityEngine.UI;
 using System.Text;
 using System.IO;
 
+/// <summary>
+/// Game automap display information.
+/// </summary>
 public class AutoMap : Loader
 {
-
+    //Per uwformats.txt
     //level tilemap. A valid value in the low nybble means the tile is displayed
     //on the map. Valid values are the same as tile types:
     //SOLID    0x0
@@ -74,16 +77,29 @@ public class AutoMap : Loader
     const int SOUTHEAST = 7;
 
 
-
     /// <summary>
     /// The tile map size along the x axis
     /// </summary>
-    public const int TileMapSizeX = 63; //0 to 63
+    // public const int TileMapSizeX = 63; //0 to 63
+    int TileMapSizeX
+    {
+        get
+        {
+            return TileMap.TileMapSizeX;
+        }
+    }
 
     /// <summary>
     /// The tile map size along the y axis.
     /// </summary>
-    public const int TileMapSizeY = 63; //0 to 63
+    //public const int TileMapSizeY = 63; //0 to 63
+    int TileMapSizeY
+    {
+        get
+        {
+            return TileMap.TileMapSizeY;
+        }
+    }
 
     public struct AutoMapTile
     {
@@ -197,6 +213,16 @@ public class AutoMap : Loader
         }
     }
 
+    /// <summary>
+    /// Read in the automap note texture
+    /// </summary>
+    /// <param name="LevelNo"></param>
+    /// <param name="lev_ark"></param>
+    /// <param name="automapNotesAddress"></param>
+    /// <param name="AUTOMAP_EOF_ADDRESS"></param>
+    /// Automaps are not necessarily stored in the same order as the tile maps. 
+    /// EOF_Address is used to tell the loader when to 
+    /// stop reading in data.
     static void ProcessAutoMapNotes(int LevelNo, char[] lev_ark, long automapNotesAddress, long AUTOMAP_EOF_ADDRESS)
     {
         while (automapNotesAddress < AUTOMAP_EOF_ADDRESS)
@@ -223,32 +249,33 @@ public class AutoMap : Loader
                 break;
             }
             if ((PosY <= 200) && (PosX <= 320))
-            {
-                //MapNote newmapnote = new MapNote (PosX, PosY, NoteText);
-                //newmapnote.PosX = PosX;
-                //newmapnote.PosY = PosY;
-                ////newmapnote.NotePosition=new Vector2((float)PosX,(float)PosY-100f);
-                //newmapnote.NoteText = NoteText;
-                //newmapnote.guid = System.Guid.NewGuid ();
+            {//Add a new note on the map notes list.
                 GameWorldController.instance.AutoMaps[LevelNo].MapNotes.Add(new MapNote(PosX, PosY, NoteText));
             }
             else
             {
                 break;
             }
-            automapNotesAddress += 54;
+            automapNotesAddress += 54;//Each note is this long in data.
         }
     }
 
+    /// <summary>
+    /// Create special automap for the demo.
+    /// </summary>
     public void InitAutoMapDemo()
     {
         MapNotes = new List<MapNote>();
         thisLevelNo = 0;
     }
 
+    /// <summary>
+    /// Load UW2 automaps from compressed data.
+    /// </summary>
+    /// <param name="LevelNo"></param>
+    /// <param name="lev_ark"></param>
     public void InitAutoMapUW2(int LevelNo, char[] lev_ark)
     {
-
         //AutomapNoteAddresses=new long[72];
         MapNotes = new List<MapNote>();
         thisLevelNo = LevelNo;
@@ -261,11 +288,6 @@ public class AutoMap : Loader
         int NoOfBlocks = (int)DataLoader.getValAtAddress(lev_ark, 0, 32);
 
         automapAddress = DataLoader.getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (160 * 4), 32);
-        //if (automapAddress !=0)
-        //{
-        //    Debug.Log("automap for " + LevelNo + " at " + automapAddress);
-        //}
-
         //Load Automap info
         if (automapAddress != 0)
         {
@@ -281,13 +303,9 @@ public class AutoMap : Loader
             }
         }
 
-
         automapNotesAddress = DataLoader.getValAtAddress(lev_ark, (LevelNo * 4) + 6 + (240 * 4), 32);
         if (automapNotesAddress != 0)
         {
-
-            // Debug.Log("automap notes for " + LevelNo + " at " + automapAddress);
-
             DataLoader.UWBlock noteblock;
             DataLoader.LoadUWBlock(lev_ark, LevelNo + 240, 0, out noteblock);
             if (noteblock.Data != null)
@@ -328,15 +346,7 @@ public class AutoMap : Loader
 
         AUTOMAP_EOF_ADDRESS = getNextAutomapBlock(LevelNo, lev_ark);
         if (initAutoMaps)
-        {//No notes have been made yet Init with some dummy data.
-         //System.Guid guid = System.Guid.NewGuid();
-         //      //new MapNote((int)pos.x, (int)(pos.y + 100f), MapNoteInput.text);
-         //                  MapNote newmapnote = new MapNote(0, 0, LevelNo.ToString());
-         //                  //newmapnote.NotePosition=pos;
-         //                  newmapnote.PosX= 0;
-         //newmapnote.PosY= 0;
-         //newmapnote.NoteText= LevelNo.ToString();
-         //newmapnote.guid=guid;
+        {//No notes have been made yet so Init with some dummy data.
             MapNotes.Add(new MapNote(0, 0, LevelNo.ToString()));
         }
 
@@ -352,6 +362,9 @@ public class AutoMap : Loader
         }
     }
 
+    /// <summary>
+    /// Output a map for debugging.
+    /// </summary>
     void WriteDebugMap()
     {
         StreamWriter writer = new StreamWriter(Application.dataPath + "//..//_automap_" + thisLevelNo + ".txt", false);
@@ -363,7 +376,7 @@ public class AutoMap : Loader
                 //float angle = Mathf.Atan2(y - 31, x - 31) * 180.0f / Mathf.PI;
                 //if (angle < 0) { angle += 360f; }
                 //output += angle + ",";
-               // output += Tiles[x, y].tileType + ",";
+                // output += Tiles[x, y].tileType + ",";
                 output += Tiles[x, y].DisplayType + ",";
                 //output += CurrentTileMap().Tiles[x, y].terrain + ",";
             }
@@ -375,24 +388,19 @@ public class AutoMap : Loader
 
 
     /// <summary>
-    /// Generates a tile map image for the automap for the specified level.
+    /// Generates a tile map texture image for the automap for the specified level.
     /// </summary>
     /// <returns>The map image.</returns>
     /// <param name="LevelNo">Level no.</param>
     public Texture2D TileMapImage()
     {
         InitColours();
-
-        //if (_RES==GAME_UW2)
-        //{
         if (GameWorldController.instance.CreateReports)
         {
             WriteDebugMap();
         }
 
-        //}
-
-        ///Uses a cursor icon to display the player.
+        ///Uses a cursor icon to display the player position.
         Texture2D playerPosIcon;
         switch (_RES)
         {
@@ -404,13 +412,12 @@ public class AutoMap : Loader
                 playerPosIcon = GameWorldController.instance.grCursors.LoadImageAt(18);
                 break;
         }
-
-
+        
         ///Creates a blank texture2D of 64x64*TileSize in ARGB32 format.
         Texture2D output = new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
         output.filterMode = FilterMode.Point;
         output.wrapMode = TextureWrapMode.Clamp;
-        //Init the tile map as blank first
+        //Init the tile map as a blank map first
         for (int i = 0; i < TileMap.TileMapSizeX; i++)
         {
             for (int j = TileMap.TileMapSizeY; j > 0; j--)
@@ -419,14 +426,13 @@ public class AutoMap : Loader
             }
         }
 
-        ///Fills in the tile background colour first
+        //Fills in the tile background colour first
         for (int i = 0; i < TileMap.TileMapSizeX; i++)
         {
             for (int j = TileMap.TileMapSizeY; j > 0; j--)
             {//If the tile has been visited and can be rendered.
                 if ((GetTileRender(i, j) == 1) && (GetTileVisited(i, j)))
                 {
-                    //fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
                     fillTile(output, i, j, TileSize, TileSize, OpenTileColour, WaterTileColour, LavaTileColour, BridgeTileColour, IceTileColour);
                 }
             }
@@ -441,9 +447,7 @@ public class AutoMap : Loader
                     switch (GetTileType(i, j))
                     {
                         case TILE_SOLID://Solid
-                            {
-                                //DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
-                                //output.SetPixel(i, j, Color.blackblack);
+                            {//no need to draw
                                 break;
                             }
                         case TILE_OPEN://Open
@@ -453,19 +457,16 @@ public class AutoMap : Loader
                         case TILE_SLOPE_N:
                             {
                                 DrawOpenTile(output, i, j, TileSize, TileSize, BorderColour);
-                                //output.SetPixel(i, j, Color.white);
                                 break;
                             }
                         case TILE_DIAG_NE:
                             {
-                                //DrawLine (output,i,j,TileSize,TileSize,Color.black,NORTHEAST);
                                 DrawDiagNE(output, i, j, TileSize, TileSize, BorderColour);
                                 break;
                             }
                         case TILE_DIAG_SE:
                             {
-                                //DrawLine (output,i,j,TileSize,TileSize,Color.black,SOUTHEAST);
-                                DrawDiagSE(output, i, j, TileSize, TileSize, BorderColour);
+                                 DrawDiagSE(output, i, j, TileSize, TileSize, BorderColour);
                                 break;
                             }
                         case TILE_DIAG_NW:
@@ -480,8 +481,7 @@ public class AutoMap : Loader
                             }
                         default:
                             {
-                                //DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
-                                //	output.SetPixel(i, j, Color.red);
+                                //no need to draw
                                 break;
                             }
                     }
@@ -489,11 +489,11 @@ public class AutoMap : Loader
                 else
                 {
                     DrawSolidTile(output, i, j, TileSize, TileSize, Background);
-                    //output.SetPixel(i, j, Color.clear);
                 }
             }
         }
 
+        //Draw door ways
         for (int i = 0; i < TileMap.TileMapSizeX; i++)
         {
             for (int j = TileMap.TileMapSizeY; j > 0; j--)
@@ -510,7 +510,7 @@ public class AutoMap : Loader
         }
 
 
-        ///Only displays the player if they are on the same map as the one being rendered
+        //Only displays the player if they are on the same map as the one being rendered
         if (thisLevelNo == GameWorldController.instance.LevelNo)
         {
             Color[] defaultColour = playerPosIcon.GetPixels();
@@ -1469,9 +1469,15 @@ public class AutoMap : Loader
 
 
 
+    /// <summary>
+    /// UW does not store map notes in order or with a fixed size.
+    /// In order to find the proper length of an automap note block I need to find the next block address in the file so I know where to stop reading data
+    /// </summary>
+    /// <param name="thisLevelNo"></param>
+    /// <param name="lev_ark"></param>
+    /// <returns></returns>
     public static long getNextAutomapBlock(int thisLevelNo, char[] lev_ark)
-    {//UW does not store map notes in order. In order to find the proper length of an automap note block I need to find the minimum next block address
-
+    {
         long thisAddress = AutomapNoteAddresses[thisLevelNo];
         long selectedAddress = lev_ark.GetUpperBound(0);
         for (int i = 0; i <= AutomapNoteAddresses.GetUpperBound(0); i++)
@@ -1487,7 +1493,10 @@ public class AutoMap : Loader
         return selectedAddress;
     }
 
-
+    /// <summary>
+    /// Converts an Automap into a byte array for saving.
+    /// </summary>
+    /// <returns></returns>
     public char[] AutoMapVisitedToBytes()
     {
         char[] AutoMapData = new char[(TileMapSizeX + 1) * (TileMapSizeY + 1)];
@@ -1509,10 +1518,13 @@ public class AutoMap : Loader
         return AutoMapData;
     }
 
+
+    /// <summary>
+    /// Converts the automap into a byte array for saving.
+    /// </summary>
+    /// <returns></returns>
     public char[] AutoMapNotesToBytes()
     {
-        //return null;
-        //char[] TileMapData= new char[TileMapSizeX*TileMapSizeY];	
         if (MapNotes.Count > 0)
         {
             int add_ptr = 0;
@@ -1571,7 +1583,5 @@ public class AutoMap : Loader
         {
             return null;
         }
-
     }
-
 }

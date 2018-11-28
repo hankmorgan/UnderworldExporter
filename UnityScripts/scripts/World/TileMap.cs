@@ -10,6 +10,8 @@ using System.IO;
 /// </summary>
 public class TileMap : Loader
 {
+
+    //Tile Types for UW1 & 2 and SS1. Note the diag tiles are flipped around in SS1.
     public const short TILE_SOLID = 0;
     public const short TILE_OPEN = 1;
     public const short TILE_DIAG_SE = 2;
@@ -40,7 +42,7 @@ public class TileMap : Loader
     public const short TileMapSizeY = 63; //0 to 63
 
     /// <summary>
-    /// The object storage tile location where non map objects are kept.
+    /// Locaton X and Y of the object storage tile location where non map objects are kept.
     /// </summary>
     public const short ObjectStorageTile = 99;
 
@@ -54,7 +56,7 @@ public class TileMap : Loader
     public const short SLOPE_FLOOR_ONLY = 2;
     public const short SLOPE_CEILING_ONLY = 3;
 
-    //Visible faces indices. Used in sorting tile visiblity.
+    //Visible faces indices. Used in sorting tile surface visiblity.
     public const short vTOP = 0;
     public const short vEAST = 1;
     public const short vBOTTOM = 2;
@@ -92,12 +94,19 @@ public class TileMap : Loader
         public int tileY;
     };
 
+    /// <summary>
+    /// Lists of overlays for controlling animated items.
+    /// </summary>
     public Overlay[] Overlays = new Overlay[64];
 
     public short thisLevelNo; //The number of this level
     public short UW_CEILING_HEIGHT;
     public short CEILING_HEIGHT;
     public short SHOCK_CEILING_HEIGHT;
+
+    /// <summary>
+    /// The texture indices for the current map.
+    /// </summary>
     public short[] texture_map = new short[272];
 
 
@@ -115,11 +124,11 @@ public class TileMap : Loader
     /// </summary>
     public static short visitTileY;
 
-    /// The tile X that the player was in the previously
+    /// The tile X that the player was in the previous frame
     /// </summary>
     public static short visitedTileX;
     /// <summary>
-    /// The current tile Y that the player was in the previously
+    /// The current tile Y that the player was in the previous frame
     /// </summary>
     public static short visitedTileY;
 

@@ -3,12 +3,28 @@ using System.Collections;
 
 public class TileInfo : Loader
 {
+    /// <summary>
+    /// Reference to the tilemap containing this tile
+    /// </summary>
     public TileMap map;
-    public short tileType;  //What type of tile I am.
-    public short floorHeight;   //How high is the floor.
-    public short ceilingHeight; //Constant in UW. Variable in shock
 
-    //Index into the texture map table
+    /// <summary>
+    /// What type of tile I am.
+    /// </summary>
+    public short tileType;
+
+    /// <summary>
+    /// How high is the floor.
+    /// </summary>
+    public short floorHeight;
+
+    /// <summary>
+    /// How low is the ceiling
+    /// </summary>
+    /// Constant in UW. Variable in shock
+    public short ceilingHeight;
+
+    //Index into the texture map table for the actual floor texture of this tile.
     private short _floorTexture;
     public short floorTexture
     {
@@ -19,22 +35,67 @@ public class TileInfo : Loader
         set
         {
             _floorTexture = value;
-
             UpdateTerrain();
         }
     }
 
+    /// <summary>
+    /// Index into texture map for the wall texture presented to other tiles by this tile.
+    /// </summary>
     public short wallTexture;
-    public int indexObjectList; //Points to a linked list of objects in the objects block
+
+    /// <summary>
+    /// /Points to a linked list of objects in the objects block
+    /// </summary>
+    public int indexObjectList; 
+    /// <summary>
+    /// Does this tile contain a door per uw-formats.txt
+    /// </summary>
     public short doorBit;
+    /// <summary>
+    /// Set when ever a tile does contain a door regardless of the door bit above.
+    /// </summary>
     public bool isDoor;
-    public bool Render=true;     //If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
-    public short DimX = 1;          //The dimensions (in tilesize) of this tile. 1 for a regular tile. 
-    public short DimY = 1;          //>1 for when it is a group in which case we do not render it but only render it parent til
-    public bool Grouped=false;        // when I group a set of tiles this indicates the tile is a child of a group.
-    public bool[] VisibleFaces = { true, true, true, true, true, true };// new bool[6];   //Which faces are visible on a block. 
-    public short North; public short South;
-    public short East; public short West;
+    /// <summary>
+    /// If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
+    /// </summary>
+    public bool Render=true;
+    /// <summary>
+    ///  The dimensions on the x-axis of this tile. 1 for a regular tile.
+    /// </summary>
+    public short DimX = 1;
+    /// <summary>
+    /// The dimensions on the y-axis of this tile. 1 for a regular tile.
+    /// </summary>
+    public short DimY = 1;
+    /// <summary>
+    /// indicates the tile is a child of a group pareted by a tile of DimX>1 or DimY>1
+    /// </summary>
+    public bool Grouped=false;
+    /// <summary>
+    /// Which faces are visible on a tile. Used to reduce mesh complexity.
+    /// </summary>
+    public bool[] VisibleFaces = { true, true, true, true, true, true };
+    /// <summary>
+    /// The texture to display on the north face of the tile
+    /// </summary>
+    /// Based on the actual wall texture value of the tile located in that direction 
+    public short North;
+    /// <summary>
+    /// The texture to display on the south face of the tile
+    /// </summary>
+    /// Based on the actual wall texture value of the tile located in that direction 
+    public short South;
+    /// <summary>
+    /// The texture to display on the east face of the tile
+    /// </summary>
+    /// Based on the actual wall texture value of the tile located in that direction 
+    public short East;
+    /// <summary>
+    /// The texture to display on the west face of the tile
+    /// </summary>
+    /// Based on the actual wall texture value of the tile located in that direction 
+    public short West;
 
     /// <summary>
     /// Is the terrain land?
@@ -78,14 +139,38 @@ public class TileInfo : Loader
             return TileMap.isTerrainLava(terrain);
         }
     }
-    
-    public bool hasBridge; //Set when the tile contains a bridge.
-    public bool isNothing; //Set when the tile has the nothing textures
-    public short roomRegion;    //Index to the contigous room that the tile is part of.
+    /// <summary>
+    /// Set when the tile contains a bridge.
+    /// </summary>
+    public bool hasBridge;
+    /// <summary>
+    /// Set when the tile has the nothing textures
+    /// </summary>
+    public bool isNothing;
+    /// <summary>
+    /// Index to the contigous room area that the tile is part of.
+    /// </summary>
+    /// Used for AI decision making
+    public short roomRegion;  
+    /// <summary>
+    /// The x position of this tile
+    /// </summary>
     public short tileX;
+    /// <summary>
+    /// The y position of this tile.
+    /// </summary>
     public short tileY;
-    public short flags;//UW Tile flags
-    public short noMagic;//Only seems to matter on Level 9 and possibly where there is water? UPDATE>Possible bug in reading data. Retest this.
+
+    /// <summary>
+    /// UW Tile flags - Unknown purpose
+    /// </summary>
+    public short flags;
+
+    /// <summary>
+    /// Only seems to matter on Level 9 and possibly where there is water? 
+    /// UPDATE>Possible bug in reading data. Retest this. TODO:
+    /// </summary>
+    public short noMagic;
 
     //Shock Specific Stuff
     public short shockSlopeFlag;    //For controlling ceiling slopes for shock.
@@ -101,17 +186,24 @@ public class TileInfo : Loader
     public short shockEastCeilHeight; public short shockWestCeilHeight;
     public short shockFloorOrientation; public short shockCeilOrientation;
 
-    public bool TerrainChange;  //Indicates that the tile can change into another type of tile or moves in someway.
+
+    /// <summary>
+    /// Indicates that the tile can change into another type of tile or moves in someway. Eg change terrain trap.
+    /// </summary>
+    /// Used to prevent cleanup of this tile.
+    public bool TerrainChange;  //
 
     public int[] SHOCKSTATE = new int[4];   //These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.
 
+    /// <summary>
+    /// Indicates the tile needs to be redrawn.
+    /// </summary>
     public bool NeedsReRender = false;
-
 
     /// <summary>
     /// Does the tile contain a pressure trigger. Used to test pickups of objects from the tile.
     /// </summary>
-    public int PressureTriggerIndex = 0;
+    public short PressureTriggerIndex = 0;
 
     //The terrain on the tile. Result will change when the floor texture is updated.
     private int _terrain;
@@ -245,30 +337,53 @@ public class TileInfo : Loader
 
     }
 
+    /// <summary>
+    /// gets tile data at bits 0-3 of the tile data
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <returns></returns>
     short getTile(int tileData)
     {
-        //gets tile data at bits 0-3 of the tile data
         return (short)(tileData & 0x0F);
     }
 
+    /// <summary>
+    /// gets height data at bits 4-7 of the tile data
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <returns></returns>
     short getHeight(int tileData)
-    {//gets height data at bits 4-7 of the tile data
+    {
         return (short)((tileData & 0xF0) >> 4);
     }
 
+    /// <summary>
+    /// gets floor texture data at bits 10-13 of the tile data
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <returns></returns>
     short getFloorTex(long tileData)
-    {//gets floor texture data at bits 10-13 of the tile data
+    {
         return (short)((tileData >> 10) & 0x0F);
     }
 
+    /// <summary>
+    /// Gets the wall texture data
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <returns></returns>
     short getWallTex(long tileData)
     {
         return (short)(tileData & 0x3F);
     }
 
+    /// <summary>
+    /// gets object data at bits 6-15 (+16) of the tile data(2nd part)
+    /// </summary>
+    /// <param name="tileData"></param>
+    /// <returns></returns>
     short getObject(long tileData)
     {
-        //gets object data at bits 6-15 (+16) of the tile data(2nd part)
         return (short)(tileData >> 6);
     }
 

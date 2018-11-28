@@ -81,7 +81,7 @@ public class a_pressure_trigger : trigger_base {
 		TileVector=CurrentTileMap().getTileVector(TileXToWatch,TileYToWatch);
 		TileVector=new Vector3(TileVector.x,this.transform.position.y,TileVector.z);
 		//int currentFloorTexture=CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].floorTexture;
-		CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=objInt().objectloaderinfo.index;
+		CurrentTileMap().Tiles[TileXToWatch,TileYToWatch].PressureTriggerIndex=(short)objInt().objectloaderinfo.index;
 
 		colliders= Physics.OverlapBox(TileVector, new Vector3(0.4f,0.1f,0.4f));
 		WeightOnTrigger=0f;		

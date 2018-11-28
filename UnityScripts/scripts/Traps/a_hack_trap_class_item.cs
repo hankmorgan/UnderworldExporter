@@ -3,7 +3,7 @@ using System.Collections;
 
 public class a_hack_trap_class_item : a_hack_trap
 {
-    //Turns item at index 995 in britannia castle into a class specific item.
+    //Turns the item at index 995 in britannia castle into a class specific item.
 
     public override void ExecuteTrap(object_base src, int triggerX, int triggerY, int State)
     {

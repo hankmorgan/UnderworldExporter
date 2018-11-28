@@ -34,7 +34,7 @@ public class Bridge : map_object {
 				int TextureIndex=  (enchantment<<3) | flags & 0x3F;
 				if (TextureIndex<2)
 				{//Only flag the normal briges as such.
-						CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].hasBridge=true;				
+					CurrentTileMap().Tiles[ObjectTileX, ObjectTileY].hasBridge=true;				
 				}
 			}
 	}

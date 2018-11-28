@@ -5,9 +5,6 @@ public class ClearRunes : GuiBase {
 	//Removes the runes that the character has selected.
 	public void OnClick()
 	{
-			
-		//Debug.Log("Clearing Runes - find player");
-		//UWCharacter playerUW= GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		if (UWCharacter.Instance!=null)
 		{
 			//Debug.Log("Clearing Runes");

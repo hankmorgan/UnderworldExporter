@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Controls throwing objects into water
+/// </summary>
 public class TileContactWater : TileContact {
 
     protected override void TileContactEvent (ObjectInteraction obj, Vector3 position)
@@ -27,6 +30,10 @@ public class TileContactWater : TileContact {
         }
     }
 
+    /// <summary>
+    /// Gets the appropiate water splash
+    /// </summary>
+    /// <returns></returns>
     int splashanimstart()
     {
         switch(_RES)

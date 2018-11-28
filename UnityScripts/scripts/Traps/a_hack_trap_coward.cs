@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_hack_trap_coward : a_hack_trap {
-
-	//Used when the avatar flees the arena in the pits of carnage
+/// <summary>
+/// Used when the avatar flees the arena in the pits of carnage and ends combat with hostile duelists
+/// </summary>
+public class a_hack_trap_coward : a_hack_trap {	
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{

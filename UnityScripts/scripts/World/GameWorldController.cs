@@ -902,65 +902,43 @@ public class GameWorldController : UWEBase
     /// Switches the level to another one. Disables the map and level objects of the old one.
     /// </summary>
     /// <param name="newLevelNo">New level no.</param>
-    /// 
     public void SwitchLevel(short newLevelNo)
     {
         if (newLevelNo != -1)
         {
             if (LevelNo == -1)
             {//I'm at the main menu. Load up the file data now.
-                critsLoader = new CritLoader[64];//Clear out animations
+                critsLoader = new CritLoader[64];//Clear out npc animations
+                //Initialise various objects as appropiate for the current game.
                 InitLevelData();
             }
 
             if (_RES == GAME_UW2)
-            {
+            {//Set the game to use UW2 music.
                 MusicController.instance.ChangeTrackListForUW2(newLevelNo);
             }
 
             //Check loading
             if (Tilemaps[newLevelNo] == null)
-            {//Data has not been loaded for this level
+            {//Data has not been loaded for this level yet
                 Tilemaps[newLevelNo] = new TileMap(newLevelNo);
 
                 if (UWEBase._RES != UWEBase.GAME_SHOCK)
                 {
-                    DataLoader.UWBlock lev_ark_block = new DataLoader.UWBlock();
-                    DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();
-                    DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();
+                    DataLoader.UWBlock lev_ark_block = new DataLoader.UWBlock();//Data containing tilemap.
+                    DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();//Data containing texture map
+                    DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();//Data containing animation overlays
 
-                    if (_RES==GAME_UWDEMO)
-                    {//In UWDemo there is no block structure. Just copy the data directly.
-                        lev_ark_block = new DataLoader.UWBlock();
-                        lev_ark_block.DataLen = 0x7c06;
-                        lev_ark_block.Data = LevArk.lev_ark_file_data;
-                    }
-                    else
-                    {
-                        //Load the tile and object blocks
-                        DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
-                    }
+                    //Load Lev.ark data for the objects and tile map
+                    lev_ark_block = LoadLevArkBlock(newLevelNo);
 
                     if (_RES == GAME_UW1)
                     {//Load the overlays.
                         DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 9, 0x180, out ovl_ark_block);
                     }
 
-                    //Load the texture maps
-                    switch (_RES)
-                    {
-                        case GAME_UWDEMO:
-                            DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "LEVEL13.TXM", out tex_ark_block.Data);
-                            tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
-                            break;
-                        case GAME_UW2:
-                            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 80, -1, out tex_ark_block);
-                            break;
-                        case GAME_UW1:
-                        default:
-                            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 18, 0x7a, out tex_ark_block);
-                            break;
-                    }
+                    //Load lev.ark data fror the texture map.
+                    tex_ark_block = LoadTexArkBlock(newLevelNo, tex_ark_block);
 
                     if ((lev_ark_block.DataLen > 0) && (tex_ark_block.DataLen > 0))
                     {
@@ -974,10 +952,12 @@ public class GameWorldController : UWEBase
                         else
                         {
                             Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block, ovl_ark_block);
-                        }                        
-                        
+                        }
+
+                        //Load game objects from the levark data
                         objectList[newLevelNo] = new ObjectLoader();
                         objectList[newLevelNo].LoadObjectList(Tilemaps[newLevelNo], lev_ark_block);
+
                         if (CreateReports)
                         {
                             CreateObjectReport(objectList[newLevelNo].objInfo, newLevelNo);
@@ -997,21 +977,21 @@ public class GameWorldController : UWEBase
                     }
                 }
                 else
-                {
+                {//Build a SS1 level.
                     Tilemaps[newLevelNo].BuildTileMapShock(LevArk.lev_ark_file_data, newLevelNo);
                     objectList[newLevelNo] = new ObjectLoader();
                     objectList[newLevelNo].LoadObjectListShock(Tilemaps[newLevelNo], LevArk.lev_ark_file_data);
                 }
+
                 if (UWEBase.EditorMode == false)
-                {
-                    Tilemaps[newLevelNo].CleanUp(_RES);//I can reduce the tile map complexity after I know about what tiles change due to objects									
+                {//Reduce complexity of the level geometry.
+                    Tilemaps[newLevelNo].CleanUp(_RES);
                 }
-                //Tilemaps[newLevelNo].CreateRooms();
             }
 
             if ((UWEBase._RES != UWEBase.GAME_SHOCK) && (LevelNo != -1))
             {
-                //Call events for inventory objects on level transition.
+                //Call special events for inventory objects on level transition out of the current level.
                 foreach (Transform t in GameWorldController.instance.InventoryMarker.transform)
                 {
                     if (t.gameObject.GetComponent<object_base>() != null)
@@ -1022,15 +1002,14 @@ public class GameWorldController : UWEBase
             }
 
             if (LevelNo != -1)
-            {//Changing from a level that has already loaded
-
+            {//When changing from a level that has already loaded
                 if (UWEBase.EditorMode == false)
                 {
                     ObjectLoader.UpdateObjectList(CurrentTileMap(), CurrentObjectList());
                 }
             }
 
-            //Get my object info into the tile map.
+            //Tell the game we are now using the new level no.
             LevelNo = newLevelNo;
 
             switch (UWEBase._RES)
@@ -1042,7 +1021,7 @@ public class GameWorldController : UWEBase
                     {
                         if (LoadingGame == false)
                         {
-                            //Call events for inventory objects on level transition.
+                            //Call events for inventory objects on level transition into a new level.
                             foreach (Transform t in GameWorldController.instance.InventoryMarker.transform)
                             {
                                 if (t.gameObject.GetComponent<object_base>() != null)
@@ -1055,33 +1034,11 @@ public class GameWorldController : UWEBase
                     break;
             }
 
+            //Render the tile map based on the loaded data.
             TileMapRenderer.GenerateLevelFromTileMap(LevelModel, SceneryModel, _RES, Tilemaps[newLevelNo], objectList[newLevelNo], false);
 
-            if ((startX != -1) && (startY != -1))
-            {
-                float targetX = (float)startX * 1.2f + 0.6f;
-                float targetY = (float)startY * 1.2f + 0.6f;
-
-                float Height;//= ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
-                if (StartHeight == -1)
-                {
-                    Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
-                }
-                else
-                {
-                    Height = (float)StartHeight * 0.15f;
-                }
-
-                UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
-               // Debug.Log("Spawning at " + UWCharacter.Instance.transform.position + " using floorheight " + GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY));
-                UWCharacter.Instance.TeleportPosition = new Vector3(targetX, Height + 0.1f, targetY);
-                if (EnableUnderworldGenerator)
-                {
-                    GameWorldController.instance.StartPos = UWCharacter.Instance.transform.position;
-                }
-            }
-            startX = -1; startY = -1;
-
+            //Positions the character on the new level map.
+            PlaceCharacter(newLevelNo);
 
             switch (UWEBase._RES)
             {
@@ -1089,10 +1046,10 @@ public class GameWorldController : UWEBase
                 //break;
                 default:
                     ObjectLoader.RenderObjectList(objectList[newLevelNo], Tilemaps[newLevelNo], DynamicObjectMarker().gameObject);
-                    //CleanUpMagicProjectiles();
                     break;
             }
 
+            //Update nav meshes when the "signature" of the level loaded is different from the previous one.
             if ((bGenNavMeshes) && (!EditorMode))
             {
                 string newSignature = CurrentTileMap().getSignature();
@@ -1105,14 +1062,8 @@ public class GameWorldController : UWEBase
             }
 
             if ((LevelNo == 7) && (UWEBase._RES == UWEBase.GAME_UW1))
-            {//Create shrine lava.
-                GameObject shrineLava = new GameObject();
-                shrineLava.transform.parent = SceneryModel.transform;
-                shrineLava.transform.localPosition = new Vector3(-39f, 39.61f, 0.402f);
-                shrineLava.transform.localScale = new Vector3(6f, 0.2f, 4.8f);
-                shrineLava.AddComponent<ShrineLava>();
-                shrineLava.AddComponent<BoxCollider>();
-                shrineLava.GetComponent<BoxCollider>().isTrigger = true;
+            {//Create the special lava for the UW1 endgame.
+                CreateShrineLava();
             }
         }
         if ((_RES == GAME_UW2) && (EditorMode == false))
@@ -1125,6 +1076,102 @@ public class GameWorldController : UWEBase
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Create shrine lava for the abyss in UW1.
+    /// </summary>
+    private void CreateShrineLava()
+    {        
+        GameObject shrineLava = new GameObject();
+        shrineLava.transform.parent = SceneryModel.transform;
+        shrineLava.transform.localPosition = new Vector3(-39f, 39.61f, 0.402f);
+        shrineLava.transform.localScale = new Vector3(6f, 0.2f, 4.8f);
+        shrineLava.AddComponent<ShrineLava>();
+        shrineLava.AddComponent<BoxCollider>();
+        shrineLava.GetComponent<BoxCollider>().isTrigger = true;
+    }
+
+    /// <summary>
+    /// Positions the character on the map.
+    /// </summary>
+    /// <param name="newLevelNo"></param>
+    private void PlaceCharacter(short newLevelNo)
+    {
+        if ((startX != -1) && (startY != -1))
+        {
+            float targetX = (float)startX * 1.2f + 0.6f;
+            float targetY = (float)startY * 1.2f + 0.6f;
+            float Height;
+            if (StartHeight == -1)
+            {
+                Height = ((float)(GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY))) * 0.15f;
+            }
+            else
+            {
+                Height = (float)StartHeight * 0.15f;
+            }
+
+            UWCharacter.Instance.transform.position = new Vector3(targetX, Height + 0.5f, targetY);
+            // Debug.Log("Spawning at " + UWCharacter.Instance.transform.position + " using floorheight " + GameWorldController.instance.Tilemaps[newLevelNo].GetFloorHeight(startX, startY));
+            UWCharacter.Instance.TeleportPosition = new Vector3(targetX, Height + 0.1f, targetY);
+            if (EnableUnderworldGenerator)
+            {
+                GameWorldController.instance.StartPos = UWCharacter.Instance.transform.position;
+            }
+        }
+        startX = -1; startY = -1;
+    }
+
+    /// <summary>
+    /// Loads texture map data blocks
+    /// </summary>
+    /// <param name="newLevelNo"></param>
+    /// <param name="tex_ark_block"></param>
+    /// <returns></returns>
+    private static DataLoader.UWBlock LoadTexArkBlock(short newLevelNo, DataLoader.UWBlock tex_ark_block)
+    {
+        //Load the texture maps
+        switch (_RES)
+        {
+            case GAME_UWDEMO:
+                DataLoader.ReadStreamFile(Loader.BasePath + "DATA" + sep + "LEVEL13.TXM", out tex_ark_block.Data);
+                tex_ark_block.DataLen = tex_ark_block.Data.GetUpperBound(0);
+                break;
+            case GAME_UW2:
+                DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 80, -1, out tex_ark_block);
+                break;
+            case GAME_UW1:
+            default:
+                DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 18, 0x7a, out tex_ark_block);
+                break;
+        }
+
+        return tex_ark_block;
+    }
+
+
+    /// <summary>
+    /// Loads the LevArk Block Data
+    /// </summary>
+    /// <param name="newLevelNo"></param>
+    /// <returns>Raw Lev Ark Data</returns>
+    private static DataLoader.UWBlock LoadLevArkBlock(short newLevelNo)
+    {
+        DataLoader.UWBlock lev_ark_block;
+        if (_RES == GAME_UWDEMO)
+        {//In UWDemo there is no block structure. Just copy the data directly from file.
+            lev_ark_block = new DataLoader.UWBlock();
+            lev_ark_block.DataLen = 0x7c06;
+            lev_ark_block.Data = LevArk.lev_ark_file_data;
+        }
+        else
+        {
+            //Load the tile and object blocks
+            DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo, 0x7c06, out lev_ark_block);
+        }
+
+        return lev_ark_block;
     }
 
     /// <summary>
@@ -1156,63 +1203,7 @@ public class GameWorldController : UWEBase
         SwitchLevel(newLevelNo);
     }
 
-    //static void CleanUpMagicProjectiles()
-    //{
-    //    return;
-    //    ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;
-    //    for (int i = 0; i <= objList.GetUpperBound(0); i++)
-    //    {
-    //        if (objList[i] != null)
-    //        {
-    //            if (objList[i].GetItemType() == ObjectInteraction.A_MAGIC_PROJECTILE)
-    //            {
-    //                if (objList[i].instance != null)
-    //                {
-    //                    if (objList[i].instance.GetComponent<MagicProjectile>() != null)
-    //                    {
-    //                        objList[i].instance.GetComponent<MagicProjectile>().DetonateNow = true;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
-    // This will regenerate the navigation mesh when called
-    /*	void GenerateNavmesh(RAIN.Navigation.NavMesh.NavMeshRig NavRig)
-		{//From Legacy.rivaltheory.com/forums/topics/runtime-navmesh-generation-and-path-finding-tutorial
-				int _threadcount=4;
-				// Unregister any navigation mesh we may already have (probably none if you are using this)
-				NavRig.NavMesh.UnregisterNavigationGraph();
-				NavRig.NavMesh.Size = 20;
-				//float startTime = Time.time;
-				NavRig.NavMesh.StartCreatingContours(_threadcount);
-				NavRig.NavMesh.CreateAllContours();
-				//float endTime = Time.time;
-				//Debug.Log("NavMesh generated in " + (endTime - startTime) + "s");
-				NavRig.NavMesh.RegisterNavigationGraph();
-				NavRig.Awake();
-
-		}*/
-
-
-
-
-    ///// <summary>
-    ///// Returns the music controller
-    ///// </summary>
-    ///// <returns>The mus.</returns>
-    //public MusicController getMus()
-    //{
-    //    if (mus == null)
-    //    {
-    //        mus = GameObject.Find("_MusicController").GetComponent<MusicController>();
-    //    }
-    //    return mus;
-    //}
-
- 
-    /// <summary>
+     /// <summary>
     /// Detects where the player currently is an updates their swimming state and auto map as needed.
     /// </summary>
     public void PositionDetect()
@@ -1239,9 +1230,6 @@ public class GameWorldController : UWEBase
                 }
             }
         }
-        //CurrentTileMap().SetTileVisited(TileMap.visitTileX,TileMap.visitTileY);
-        //UWCharacter.Instance.isSwimming=((TileMap.OnWater) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
-        //UWCharacter.Instance.onIce=((TileMap.OnIce) && (!UWCharacter.Instance.isWaterWalking) && (!GameWorldController.EditorMode)) ;
 
         for (int x = -1; x <= 1; x++)
         {
@@ -1275,9 +1263,7 @@ public class GameWorldController : UWEBase
     /// <param name="obj">Object.</param>
     public static void MoveToWorld(GameObject obj)
     {
-        //Debug.Log(obj.name + "is moved to world");
         MoveToWorld(obj.GetComponent<ObjectInteraction>());
-
     }
 
     /// <summary>
@@ -1359,7 +1345,7 @@ public class GameWorldController : UWEBase
 
 
     /// <summary>
-    /// Inits the level data maps and textures.
+    /// Inits the level object data, maps and textures objects as required by each game.
     /// </summary>
     void InitLevelData()
     {
@@ -1389,9 +1375,7 @@ public class GameWorldController : UWEBase
                 AutoMaps = new AutoMap[9];
                 break;
         }
-
-
-
+        
         switch (UWEBase._RES)
         {
             case UWEBase.GAME_SHOCK:

@@ -45,29 +45,7 @@ public class MusicController : UWEBase
         UW2trap = 31
     };
 
-    /*	public enum UW2MusicTracks
-    {
-            theme =1,
-            enemywounded =2,
-            combat=3,
-            dangeroussituation = 4,
-            armed =5,
-            victory = 6,
-            sewers = 7,
-            talorus =10,
-            prisontower = 11,
-            death = 12,
-            killorn = 13,
-            icecaverns = 14,
-            scintillus = 15,
-            castle = 16,
-            themeagain = 17,
-            introduction = 30,
-            trap = 31
-    };*/
-
     int currenttrack=-1;
-
 
     public const int SOUND_EFFECT_FOOT_1 = 1;
     public const int SOUND_EFFECT_FOOT_2 = 2;

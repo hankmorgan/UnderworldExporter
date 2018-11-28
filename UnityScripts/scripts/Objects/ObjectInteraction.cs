@@ -1929,7 +1929,8 @@ public class ObjectInteraction : UWEBase{
                     //SetNPCProps(myObj, currObj.npc_whoami,currObj.npc_xhome,currObj.npc_yhome,currObj.npc_hunger,currObj.npc_health,currObj.npc_hp,currObj.npc_arms,currObj.npc_power,currObj.npc_goal,currObj.npc_attitude,currObj.npc_gtarg,currObj.npc_talkedto,currObj.npc_level,currObj.npc_name,"", tm.GetTileRegionName(currObj.tileX,currObj.tileY));
                     //SetNPCProps(myObj,(MobileObject)npc,objInt,currObj, tm.GetTileRegionName(currObj.tileX,currObj.tileY),"");
                     //HERE Container.PopulateContainer(myObj.AddComponent<Container>(), objInt, currObj.parentList);
-                    Container cont = myObj.AddComponent<Container>();
+                    //Container cont = 
+                        myObj.AddComponent<Container>();
                     break;
                 }
             case NPC_WISP:
@@ -1964,7 +1965,8 @@ public class ObjectInteraction : UWEBase{
                                 myObj.AddComponent<Chest>();
                                 myObj.GetComponent<Container>().items = new ObjectInteraction[40];
                                 //here Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList);
-                                Container cont = myObj.AddComponent<Container>();
+                               // Container cont =
+                                    myObj.AddComponent<Container>();
                                 CreateSprite = false; break;
                             }
                         case 347://barrel variant
@@ -1972,14 +1974,16 @@ public class ObjectInteraction : UWEBase{
                                 myObj.AddComponent<Barrel>();
                                 myObj.GetComponent<Container>().items = new ObjectInteraction[40];
                                 //here Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList);
-                                Container cont = myObj.AddComponent<Container>();
+                               // Container cont = 
+                                    myObj.AddComponent<Container>();
                                 CreateSprite = false; break;
                             }
                         default:
                             {
                                 myObj.AddComponent<Container>();
                                 myObj.GetComponent<Container>().items = new ObjectInteraction[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
-                                Container cont = myObj.AddComponent<Container>();
+                                //Container cont = 
+                                myObj.AddComponent<Container>();
                                 //here Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList);
                                 break;
                             }
