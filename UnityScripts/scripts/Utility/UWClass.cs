@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class UWClass  {
     public static char sep;//File name seperator for linux/windows support
@@ -33,6 +34,12 @@ public class UWClass  {
     public static AutoMap CurrentAutoMap()
     {
         return UWEBase.CurrentAutoMap();
+    }
+
+
+    public static string CleanPath(string PathIn)
+    {
+       return PathIn.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) + Path.DirectorySeparatorChar;
     }
 
 

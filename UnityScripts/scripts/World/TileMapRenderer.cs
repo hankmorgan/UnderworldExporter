@@ -4689,8 +4689,6 @@ public class TileMapRenderer : Loader
         {
             for (int sectionY = 0; sectionY < 8; sectionY++)
             {
-
-
                 for (int x = sectionX * 64; x < (sectionX + 1) * 64; x++)
                 {//Count my textures
                     for (int y = sectionY * 64; y < (sectionY + 1) * 64; y++)
@@ -4751,11 +4749,12 @@ public class TileMapRenderer : Loader
 
                         float cornerX = (float)x * brushSize;
                         float cornerY = (float)y * brushSize;
+
                         verts[0 + (4 * FaceCounter)] = new Vector3(cornerX + 0.0f, cornerY + 0.0f, heights[0]);
                         verts[1 + (4 * FaceCounter)] = new Vector3(cornerX + 0.0f, cornerY + brushSize, heights[1]);
                         verts[2 + (4 * FaceCounter)] = new Vector3(cornerX + brushSize, cornerY + brushSize, heights[2]);
                         verts[3 + (4 * FaceCounter)] = new Vector3(cornerX + brushSize, cornerY + 0.0f, heights[3]);
-
+                        //Debug.Log(0 + (4 * FaceCounter) + " = " + heights[0] + "," + heights[1] + "," + heights[2] + "," + heights[3]);
                         switch (rotation[x, y])
                         {
                             case 1://ok

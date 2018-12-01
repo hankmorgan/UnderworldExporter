@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
+
 public class ScrollController : GuiBase {
 /*
  * API for controlling how text is displayed on the ui scroll
@@ -13,53 +15,57 @@ public class ScrollController : GuiBase {
 
 	//public UITextList uiIn;
 	public Text NewUIOUt;
+    public TextMeshProUGUI TextOutput;
 	public int ptr;
 	public int MaxEntries;
 
 	public bool useDragon;
 
-	public void Add(string WhatToSay)
-	{
-		if (WhatToSay==null)
-		{
-			WhatToSay="";
-		}
-		WhatToSay=	WhatToSay.Replace("\\n","\n");
-		WhatToSay=WhatToSay.TrimEnd();
-		string[] Paragraphs = WhatToSay.Split(new string [] {"\n"}, System.StringSplitOptions.None);
-		
-		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
-		{
-			/*string[] StrWords = Paragraphs[i].Split(new char [] {' '});
-			int colCounter=0;
-			string Output="";
-			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
-			{
-				if (StrWords[j].Length+colCounter+1>LineWidth)
-				{
-					colCounter=0; 
-					ListAdd(Output);
-					Output=StrWords[j] + " ";
-					colCounter= StrWords[j].Length+1;
-				}	
-				else
-				{
-					Output = Output + StrWords[j] + " ";
-					colCounter= colCounter+StrWords[j].Length + 1;
-				}
-			}*/
-			ListAdd (Paragraphs[i]);
-			//ListAdd(Output );
-			//if (i < Paragraphs.GetUpperBound(0))
-			//{//TODO:Pause for more when not the last paragraph. 
-			//	ListAdd("[MORE]-");
-			//}
-		}
-	//NewUIOUt.text=uiIn.textLabel.text;
-				PrintList();
-	}
+    /// <summary>
+    /// Add a string to the list in a specified colour.
+    /// </summary>
+    /// <param name="WhatToSay"></param>
+    /// <param name="ColourToUse"></param>
+    public void Add(string WhatToSay, string ColourToUse)
+    {
+        string[] Paragraphs = ParseParagraphs(ref WhatToSay);
 
-	public void Set(string text)
+        for (int i = 0; i <= Paragraphs.GetUpperBound(0); i++)
+        {
+            ListAdd(ColourToUse+ Paragraphs[i] + "</color>");
+        }
+        PrintList();
+    }
+
+    /// <summary>
+    /// Add a string to the output.
+    /// </summary>
+    /// <param name="WhatToSay"></param>
+    public void Add(string WhatToSay)
+    {
+        string[] Paragraphs = ParseParagraphs(ref WhatToSay);
+
+        for (int i = 0; i <= Paragraphs.GetUpperBound(0); i++)
+        {
+            ListAdd(Paragraphs[i]);
+        }
+        PrintList();
+    }
+
+    private string[] ParseParagraphs(ref string WhatToSay)
+    {
+        if (WhatToSay == null)
+        {
+            WhatToSay = "";
+        }
+        WhatToSay = SplitText(WhatToSay);
+        WhatToSay = WhatToSay.Replace("\\n", "\n");
+        WhatToSay = WhatToSay.TrimEnd();
+        string[] Paragraphs = WhatToSay.Split(new string[] { "\n" }, System.StringSplitOptions.None);
+        return Paragraphs;
+    }
+
+    public void Set(string text)
 	{//Clears all text and sets the only text on the control
 		Clear();
 		Add(text);
@@ -68,7 +74,14 @@ public class ScrollController : GuiBase {
 
 	public void DirectSet(string text)
 	{
-		NewUIOUt.text=text;	
+        if (NewUIOUt !=null)
+        {
+            NewUIOUt.text = text;
+        }
+		if (TextOutput!=null)
+        {
+            TextOutput.text = text;
+        }
 	}
 
 	public void Clear()
@@ -80,9 +93,9 @@ public class ScrollController : GuiBase {
 			txtToDisplay[i] ="";
 		}
 		ptr=0;
-		//PrintList();
-		NewUIOUt.text="";
-			
+        //PrintList();
+        //NewUIOUt.text="";
+        DirectSet("");			
 	}
 
 
@@ -112,10 +125,41 @@ public class ScrollController : GuiBase {
 		{
 			result = result+ txtToDisplay[i] + "\n";
 		}
-		NewUIOUt.text=result;
+        DirectSet(result);
 		if (useDragon)
 		{
 			Dragons.MoveScroll();
 		}
 	}
+
+    /// <summary>
+    /// Split text up into additional lines if they go over the line width of the controller
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    string SplitText(string text)
+    {
+        if (text.Length<=LineWidth)
+        {
+            return text;
+        }
+        else
+        {
+            //Find the last whitespace in the string before linewidth
+            int index = text.Substring(0, LineWidth).LastIndexOf(" ");
+            char[] chars = text.ToCharArray();
+            chars[index] =  '\n';
+            text = new string(chars);
+            if (text.Length - LineWidth > LineWidth)
+            {
+                //there is still more characters. Split them up and append to end of current line
+                return text.Substring(0, LineWidth) + SplitText(text.Substring(LineWidth));
+            }
+            else
+            {
+                return text;
+            }
+        }
+    }
+
 }

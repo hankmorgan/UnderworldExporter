@@ -1455,10 +1455,12 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         default:
                             Markup = "<color=black>"; break;//[00FF00]
                     }
-                    UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
+                   // UWHUD.instance.Conversation_tl.Add(Markup + Paragraphs[i] + "</color>"); //\n	
+                    UWHUD.instance.Conversation_tl.Add(Paragraphs[i],Markup); //\n	
                     if (i < Paragraphs.GetUpperBound(0))
                     {
-                        UWHUD.instance.Conversation_tl.Add("<color=white>MORE</color>");
+                        //UWHUD.instance.Conversation_tl.Add("<color=white>MORE</color>");
+                        UWHUD.instance.Conversation_tl.Add("MORE", "<color=white>");
                         yield return StartCoroutine(WaitForMore());
                     }
                 }

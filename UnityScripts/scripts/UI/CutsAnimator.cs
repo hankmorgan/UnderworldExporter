@@ -125,11 +125,11 @@ public class CutsAnimator : GuiBase
                 {
                     GameWorldController.instance.objectList[x] = null;
                 }
-                MainMenuHud.instance.gameObject.SetActive(true);
-                MainMenuHud.instance.MenuMode = 0;
-                MainMenuHud.instance.OpScr.SetActive(true);
-                MainMenuHud.instance.CharGen.SetActive(false);
-                MainMenuHud.instance.ButtonClickMainMenu(4);//reset menu
+                UWHUD.instance.mainmenu.gameObject.SetActive(true);
+                UWHUD.instance.mainmenu.MenuMode = 0;
+                UWHUD.instance.mainmenu.OpScr.SetActive(true);
+                UWHUD.instance.mainmenu.CharGen.SetActive(false);
+                UWHUD.instance.mainmenu.ButtonClickMainMenu(4);//reset menu
                 GameWorldController.instance.LevelNo = -1;
                 WindowDetectUW.SwitchFromMouseLook();
                 break;

@@ -459,10 +459,6 @@ public class GameWorldController : UWEBase
 
         Loader.BasePath = path;
         Loader.sep = sep;
-        //	if (Loader.BasePath.EndsWith(sep.ToString()) !=true)
-        //	{
-        //			Loader.BasePath = Loader.BasePath + sep;
-        //	}
     }
 
     /// <summary>
@@ -749,7 +745,7 @@ public class GameWorldController : UWEBase
         }
 
         if (AtMainMenu)
-        {
+        {            
             SwitchLevel(-1);//Turn off all level maps
             UWHUD.instance.CutsceneFullPanel.SetActive(true);
             UWHUD.instance.mainmenu.gameObject.SetActive(true);
@@ -1693,27 +1689,27 @@ public class GameWorldController : UWEBase
                                         }
                                     case "PATH_UW0":
                                         {
-                                            path_uw0 = entries[1];
+                                            path_uw0 = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "PATH_UW1":
                                         {
-                                            path_uw1 = entries[1];
+                                            path_uw1 = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "PATH_UW2":
                                         {
-                                            path_uw2 = entries[1];
+                                            path_uw2 = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "PATH_SHOCK":
                                         {
-                                            path_shock = entries[1];
+                                            path_shock = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "PATH_TNOVA":
                                         {
-                                            path_tnova = entries[1];
+                                            path_tnova = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
 
@@ -1782,12 +1778,12 @@ public class GameWorldController : UWEBase
 
                                     case "UW1_SOUNDBANK":
                                         {
-                                            MusicController.UW1Path = entries[1];
+                                            MusicController.UW1Path = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "UW2_SOUNDBANK":
                                         {
-                                            MusicController.UW2Path = entries[1];
+                                            MusicController.UW2Path = UWClass.CleanPath(entries[1]);
                                             break;
                                         }
                                     case "GENREPORT":

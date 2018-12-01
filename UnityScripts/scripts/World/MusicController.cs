@@ -237,7 +237,6 @@ public class MusicController : UWEBase
 
     IEnumerator LoadAudioFileFromWWW(string AudioBank, int FileTrackNumber)
     {
-        //string Path = Application.dataPath + "//..//..//UWSoundPack//" + AudioBank + "//" + FileTrackNumber.ToString("d2") + ".ogg";
         string Path = AudioBank + FileTrackNumber.ToString("d2") + ".ogg";
 
 
