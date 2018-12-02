@@ -167,7 +167,8 @@ public class Food : object_base {
                 break;
             case 185:// a_toadstool
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_toadstool_tastes_odd_and_you_begin_to_feel_ill_));
-                UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW1_Spell_Effect_Poison, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                //UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW1_Spell_Effect_Poison, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
+                UWCharacter.Instance.play_poison += 2;
                 break;
             case 186:// a_bottle_of_ale_bottles_of_ale
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_drink_the_dark_ale_));

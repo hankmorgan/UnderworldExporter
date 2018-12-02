@@ -141,7 +141,8 @@ public class UWCharacter : Character
             {//Sets poisoning on the flask
                 UWHUD.instance.FlaskHealth.UpdatePoisonDisplay(false);
             }
-            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();
+            _play_poison = value;
+            UWHUD.instance.FlaskHealth.UpdateFlaskDisplay();            
         }
     }
 

@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Used by the editor to change a wall texture.
+/// </summary>
 public class TextureMapButton : GuiBase {
 	
 	public const short TextureTypeFloor=0;

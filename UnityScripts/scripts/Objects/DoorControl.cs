@@ -1191,4 +1191,14 @@ public class DoorControl : object_base {
 	}
 
 
+    /// <summary>
+    /// inds a door in the tile pointed to by the two coordinates.
+    /// </summary>
+    /// <returns>The door.</returns>
+    /// <param name="x">The x coordinate.</param>
+    /// <param name="y">The y coordinate.</param>
+    public static GameObject findDoor(int x, int y)
+    {
+        return GameObject.Find("door_" + x.ToString("D3") + "_" + y.ToString("D3"));
+    }
 }

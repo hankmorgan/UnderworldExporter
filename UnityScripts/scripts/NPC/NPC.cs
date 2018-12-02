@@ -1118,7 +1118,7 @@ public class NPC : MobileObject
                     {
                         if (CurrentTileMap().Tiles[CurTileX + x, CurTileY + y].isDoor)
                         {
-                            GameObject door = GameWorldController.findDoor(CurTileX + x, CurTileY + y);
+                            GameObject door = DoorControl.findDoor(CurTileX + x, CurTileY + y);
                             if (door != null)
                             {
                                 DoorControl dc = door.GetComponent<DoorControl>();

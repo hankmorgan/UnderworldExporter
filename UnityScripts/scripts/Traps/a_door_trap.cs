@@ -9,7 +9,7 @@ Opens the door that is in the targeted tile.
 
 	public override void ExecuteTrap (object_base src, int triggerX, int triggerY, int State)
 	{
-		GameObject door = GameWorldController.findDoor(triggerX,triggerY);
+		GameObject door = DoorControl.findDoor(triggerX,triggerY);
 
 		if (door!=null)
 		{

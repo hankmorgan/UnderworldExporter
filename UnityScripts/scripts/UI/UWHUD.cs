@@ -56,6 +56,8 @@ public class UWHUD : HUD
     //Hud elements for run time loading
     public RawImage mapBackground;
     public RawImage mainwindow_art;
+    public GameObject SpeedStartButton;
+    public GameObject EditorButton;
 
     [Header("TopLevelUIs")]
     public GameObject gameUi;
@@ -98,7 +100,7 @@ public class UWHUD : HUD
 
     public ConversationButton[] ConversationOptions = new ConversationButton[5];
 
-
+    
 
     [Header("Inventory")]
     public RawImage playerBody;
@@ -198,6 +200,8 @@ public class UWHUD : HUD
     void Awake()
     {
         instance = this;
+        EnableDisableControl(SpeedStartButton, Application.isEditor);
+        EnableDisableControl(EditorButton, Application.isEditor);
     }
 
 
@@ -241,6 +245,11 @@ public class UWHUD : HUD
             InvDown.GetComponent<RawImage>().texture = grButtons.LoadImageAt(28);
         }
 
+        if (_RES==GAME_UW2)
+        {//Set line width of message scroll for UW2.
+            MessageScroll.LineWidth = 54;
+            Conversation_tl.LineWidth = 48;
+        }
 
         switch (_RES)
         {

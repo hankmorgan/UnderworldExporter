@@ -329,8 +329,14 @@ public class Character : UWEBase {
 		GameWorldController.MoveToInventory(objPicked);
 		pInv.ObjectInHand=objPicked;
 		objPicked.Pickup();
+        if (WindowDetectUW.ContextUIEnabled)
+        {
+            if(MouseLookEnabled)
+            {
+                WindowDetectUW.SwitchFromMouseLook();
+            }
+        }
 		return objPicked;
-
 	}
 
 

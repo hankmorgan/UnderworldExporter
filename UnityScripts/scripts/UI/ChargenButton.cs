@@ -6,18 +6,26 @@ public class ChargenButton :  GuiBase{
 
 		public Text ButtonText;
 		public RawImage ButtonImage;//The image displayed if this is a character portrait button.
-
 		public Texture2D ButtonOff;
-		//public int ButtonOffIndex;
 		public Texture2D ButtonOn;
-		//public int ButtonOnIndex;
 		public RawImage ButtonBG;
 		public int Value;
 		public MainMenuHud SubmitTarget;
 		static GRLoader ButtonLoader;
 
+    public override void Start()
+    {
+        base.Start();
+        if (_RES==GAME_UW2)
+        {
+            if (ButtonText!=null)
+            {
+                ButtonText.color = Color.white;
+            }            
+        }
+    }
 
-		public void OnHoverEnter()
+    public void OnHoverEnter()
 		{
 			ButtonBG.texture = ButtonOn; // ButtonLoader.LoadImageAt(ButtonOnIndex,false);
 		}
@@ -31,8 +39,5 @@ public class ChargenButton :  GuiBase{
 		{
 			SubmitTarget.ButtonClickMainMenu(Value);
 		}
-
-
-
 
 }

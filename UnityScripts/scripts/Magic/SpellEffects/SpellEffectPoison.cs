@@ -18,19 +18,20 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{//Apply to player
-			//if (UWCharacter.Instance==null)
-			//{
-			//	UWCharacter.Instance= this.GetComponent<UWCharacter>();
-			//}
-			//UWCharacter.Instance.Poisoned=true;
-			//if (Value!=0)
-			//{
-			//	UWCharacter.Instance.play_poison += Value;		
-			//	UWCharacter.Instance.play_poison=(short)(Mathf.Min(15, UWCharacter.Instance.play_poison));//Is this the value the poison should apply?
-			//}
-			
+           // UWCharacter.Instance.play_poison += Value;
+            //if (UWCharacter.Instance==null)
+            //{
+            //	UWCharacter.Instance= this.GetComponent<UWCharacter>();
+            //}
+            //UWCharacter.Instance.Poisoned=true;
+            //if (Value!=0)
+            //{
+            //	UWCharacter.Instance.play_poison += Value;		
+            //	UWCharacter.Instance.play_poison=(short)(Mathf.Min(15, UWCharacter.Instance.play_poison));//Is this the value the poison should apply?
+            //}
 
-		}
+
+        }
 		else
 		{
 			if (npc==null)

@@ -84,7 +84,7 @@ public class a_change_terrain_trap : trap_base
 
                     if (tileToChange.isDoor)
                     {//The door may be rendered
-                        GameObject door = GameWorldController.findDoor(tileToChange.tileX, tileToChange.tileY);
+                        GameObject door = DoorControl.findDoor(tileToChange.tileX, tileToChange.tileY);
                         if (door != null)
                         {
                             string doorname = ObjectLoader.UniqueObjectName(door.GetComponent<ObjectInteraction>().objectloaderinfo);

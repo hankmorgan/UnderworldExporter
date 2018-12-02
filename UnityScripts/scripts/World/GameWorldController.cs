@@ -428,22 +428,57 @@ public class GameWorldController : UWEBase
         public int[] Globals;
     };
 
+    /// <summary>
+    /// Conversation Global data
+    /// </summary>
     public bablGlobal[] bGlobals;
+
+    /// <summary>
+    /// The virtual machine that runs conversations.
+    /// </summary>
     public ConversationVM convVM;
 
+    /// <summary>
+    /// Does the world need to be redrawn (partially or completely.
+    /// </summary>
     public static bool WorldReRenderPending = false;
+    /// <summary>
+    /// Does the game objects need to be redrawn. Used by the in game editor.
+    /// </summary>
     public static bool ObjectReRenderPending = false;
+    /// <summary>
+    /// Force the entire world to be redrawn
+    /// </summary>
     public static bool FullReRender = false;
 
-
-
+    /// <summary>
+    /// Key bindings for the game.
+    /// </summary>
     public KeyBindings keybinds;
 
+    /// <summary>
+    /// Event engine for running scd.ark events.
+    /// </summary>
     public event_processor events;
 
-    private int startX = -1; private int startY = -1; private int StartHeight = -1;
+    /// <summary>
+    /// Starting X position on the map.
+    /// </summary>
+    private int startX = -1;
+    /// <summary>
+    /// Starting Y position on the map
+    /// </summary>
+    private int startY = -1;
+    /// <summary>
+    /// Starting height on the map.
+    /// </summary>
+    private int StartHeight = -1;
 
 
+    /// <summary>
+    /// Load the appropiate game path fro the selected _RES
+    /// </summary>
+    /// <param name="_RES"></param>
     void LoadPath(string _RES)
     {
         string path = "";
@@ -458,7 +493,7 @@ public class GameWorldController : UWEBase
         }
 
         Loader.BasePath = path;
-        Loader.sep = sep;
+        //Loader.sep = sep;
     }
 
     /// <summary>
@@ -468,6 +503,7 @@ public class GameWorldController : UWEBase
     void Awake()
     {
         instance = this;
+        //Set the seperator in file paths.
         UWClass.sep = Path.AltDirectorySeparatorChar;
         Lev_Ark_File_Selected = "DATA" + sep + "LEV.ARK";
         SCD_Ark_File_Selected = "DATA" + sep + "SCD.ARK";
@@ -480,14 +516,8 @@ public class GameWorldController : UWEBase
 
     void Start()
     {
-
         instance = this;
         AtMainMenu = true;
-        MapMeshLayerMask = 1 << LevelModel.layer;
-        DoorLayerMask = 1 << LayerMask.NameToLayer("Doors");
-        //Debug.Log(navmeshsurface.GetComponent<NavMeshSurface>().layerMask.value);
-        return;
-
     }
 
     void Update()
@@ -495,13 +525,18 @@ public class GameWorldController : UWEBase
         PositionDetect();
     }
 
+
+    /// <summary>
+    /// Generate NAV meshes for the map.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator UpdateNavMeshes()
     {
         NavMeshReady = false;
-        NavMeshesReady[0] = false;
-        NavMeshesReady[1] = false;
-        NavMeshesReady[2] = false;
-        //NavMeshesReady[3]=false;
+        NavMeshesReady[0] = false;//land
+        NavMeshesReady[1] = false;//water
+        NavMeshesReady[2] = false;//lava
+        //NavMeshesReady[3]=false;//air
         while (LoadingGame)
         {
             yield return new WaitForSeconds(0.1f);
@@ -528,6 +563,12 @@ public class GameWorldController : UWEBase
         yield return 0;
     }
 
+    /// <summary>
+    /// Build a Nav Mesh for the specified layer.
+    /// </summary>
+    /// <param name="navmeshobj"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
     IEnumerator GenerateNavmesh(NavMeshSurface navmeshobj, int index)
     {
         if (navmeshobj.navMeshData == null)
@@ -549,7 +590,7 @@ public class GameWorldController : UWEBase
     void LateUpdate()
     {
         if (WorldReRenderPending)
-        {
+        {//Level Needs redrawing.
             if ((FullReRender) && (!EditorMode))
             {
                 //	CurrentTileMap().CleanUp(_RES);				
@@ -588,6 +629,11 @@ public class GameWorldController : UWEBase
         UWClass._RES = res;//game;
         keybinds.ApplyBindings();//Applies keybinds to certain controls
 
+
+        //Set some layers for the AI to use to detect walls and doors.
+        MapMeshLayerMask = 1 << LevelModel.layer;
+        DoorLayerMask = 1 << LayerMask.NameToLayer("Doors");
+
         switch (res)
         {
             case GAME_TNOVA:
@@ -598,9 +644,6 @@ public class GameWorldController : UWEBase
                 break;
             case GAME_SHOCK:
                 palLoader = new PaletteLoader("res" + sep + "DATA" + sep + "GAMEPAL.RES", 700);
-                //palLoader.Path=Loader.BasePath + "res\\data\\gamepal.res";
-                //palLoader.PaletteNo=700;
-                //palLoader.LoadPalettes();
                 texLoader = new TextureLoader();
                 objectMaster = new ObjectMasters();
                 ObjectArt = new GRLoader("res" + sep + "DATA" + sep + "OBJART.RES", 1350);
@@ -615,15 +658,12 @@ public class GameWorldController : UWEBase
                 objectMaster = new ObjectMasters();
                 objDat = new ObjectDatLoader();
                 commonObject = new CommonObjectDatLoader();
-
-
                 palLoader = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
-
                 //Create palette cycles and store them in the palette array
                 PaletteLoader palCycler = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
 
                 for (int c = 0; c <= 27; c++)
-                {
+                {//Create palette cycles
                     switch (_RES)
                     {
                         case GAME_UW2:
@@ -639,8 +679,8 @@ public class GameWorldController : UWEBase
                 }
 
 
+                //Create art loaders
                 bytloader = new BytLoader();
-
                 texLoader = new TextureLoader();
                 ObjectArt = new GRLoader(GRLoader.OBJECTS_GR);ObjectArt.xfer = true;
                 SpellIcons = new GRLoader(GRLoader.SPELLS_GR);
@@ -659,9 +699,8 @@ public class GameWorldController : UWEBase
                 break;
         }
 
-
         switch (_RES)
-        {
+        {//Set Start Positions
             case GAME_SHOCK:
             case GAME_TNOVA:
                 break;
@@ -684,7 +723,6 @@ public class GameWorldController : UWEBase
                     break;
                 }
         }
-
 
         switch (res)
         {
@@ -719,7 +757,6 @@ public class GameWorldController : UWEBase
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
                 StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
-                //convVM.LoadCnvArk(Loader.BasePath+"DATA\\cnv.ark");
                 break;
             case GAME_UW2:
                 UWHUD.instance.Begin();
@@ -727,14 +764,12 @@ public class GameWorldController : UWEBase
                 UWCharacter.Instance.playerInventory.Begin();
                 Quest.instance.QuestVariables = new int[250];//UW has a lot more quests. This value needs to be confirmed.
                 StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
-                //convVM.LoadCnvArkUW2(Loader.BasePath+"DATA\\cnv.ark");
                 break;
             default:
                 UWHUD.instance.Begin();
                 UWCharacter.Instance.Begin();
                 UWCharacter.Instance.playerInventory.Begin();
                 StringController.instance.LoadStringsPak(Loader.BasePath + "DATA" + sep + "STRINGS.PAK");
-                //convVM.LoadCnvArk(Loader.BasePath+"DATA\\cnv.ark");
                 break;
         }
 
@@ -753,8 +788,7 @@ public class GameWorldController : UWEBase
             UWCharacter.Instance.playerController.enabled = false;
             UWCharacter.Instance.playerMotor.enabled = false;
             UWCharacter.Instance.transform.position = Vector3.zero;
-
-            MusicController.instance.InIntro = true;
+            MusicController.instance.InIntro = true;//Set music state.
         }
         else
         {
@@ -767,15 +801,14 @@ public class GameWorldController : UWEBase
     }
 
 
-    /// <summary>
-    /// Gets the current level model.
-    /// </summary>
-    /// <returns>The current level model gameobject</returns>
-    public GameObject getCurrentLevelModel()
-    {
-        //return GameWorldController.instance.WorldModel[LevelNo].transform.FindChild("Level" + LevelNo + "_model").gameObject;
-        return LevelModel;
-    }
+    ///// <summary>
+    ///// Gets the current level model.
+    ///// </summary>
+    ///// <returns>The current level model gameobject</returns>
+    //public GameObject getCurrentLevelModel()
+    //{
+    //    return LevelModel;
+    //}
 
     /// <summary>
     /// Updates the global shader parameter for the colorpalette shaders at set intervals. To enable texture animation
@@ -792,32 +825,21 @@ public class GameWorldController : UWEBase
         {
             paletteIndex = 0;
         }
+        ////In Reverse
 
-        //In Reverse
+        //Shader.SetGlobalTexture("_ColorPaletteInReverse", paletteArray[paletteIndexReverse]);
 
-        Shader.SetGlobalTexture("_ColorPaletteInReverse", paletteArray[paletteIndexReverse]);
-
-        if (paletteIndexReverse > 0)
-        {
-            paletteIndexReverse--;
-        }
-        else
-        {
-            paletteIndexReverse = paletteArray.GetUpperBound(0);
-        }
+        //if (paletteIndexReverse > 0)
+        //{
+        //    paletteIndexReverse--;
+        //}
+        //else
+        //{
+        //    paletteIndexReverse = paletteArray.GetUpperBound(0);
+        //}
         return;
     }
 
-    /// <summary>
-    /// inds a door in the tile pointed to by the two coordinates.
-    /// </summary>
-    /// <returns>The door.</returns>
-    /// <param name="x">The x coordinate.</param>
-    /// <param name="y">The y coordinate.</param>
-    public static GameObject findDoor(int x, int y)
-    {
-        return GameObject.Find("door_" + x.ToString("D3") + "_" + y.ToString("D3"));
-    }
 
     /// <summary>
     /// Finds the tile or wall at the specified coordinates.
@@ -829,7 +851,7 @@ public class GameWorldController : UWEBase
     public static GameObject FindTile(int x, int y, int surface)
     {
         string tileName = GetTileName(x, y, surface);
-        Transform found = instance.getCurrentLevelModel().transform.Find(tileName);
+        Transform found = GameWorldController.instance.LevelModel.transform.Find(tileName);
         if (found != null)
         {
             return found.gameObject;
@@ -882,7 +904,7 @@ public class GameWorldController : UWEBase
     /// <param name="tileName">Tile name.</param>
     public static GameObject FindTileByName(string tileName)
     {
-        return instance.getCurrentLevelModel().transform.Find(tileName).gameObject;
+        return instance.LevelModel.transform.Find(tileName).gameObject;
     }
 
     /// <summary>
@@ -1392,7 +1414,14 @@ public class GameWorldController : UWEBase
         //Load up my map materials
         for (int i = 0; i <= MaterialMasterList.GetUpperBound(0); i++)
         {
-            MaterialMasterList[i] = (Material)Resources.Load(_RES + "/Materials/textures/" + _RES + "_" + i.ToString("d3"));
+            if (File.Exists(texLoader.ModPath(i)))
+            {
+                MaterialMasterList[i] = (Material)Resources.Load("Materials/ModShaders/" + _RES + "_" + i.ToString("d3"));
+            }
+            else
+            {
+                MaterialMasterList[i] = (Material)Resources.Load(_RES + "/Materials/textures/" + _RES + "_" + i.ToString("d3"));
+            }            
             switch (MaterialMasterList[i].shader.name.ToUpper())
             {
                 case "COLOURREPLACEMENT":
@@ -1401,17 +1430,17 @@ public class GameWorldController : UWEBase
                     break;
                 case "BASICUWSHADER":
                     MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
-                    break;  
-                //case "LEGACY SHADERS/BUMPED DIFFUSE":
-                //    {
-                //        Texture2D loadedTexture = texLoader.LoadImageAt(i, 2);//Get normal map for mod directory
-                //        MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
-                //        if (loadedTexture != null)
-                //        {
-                //            MaterialMasterList[i].SetTexture("_BumpMap", TextureLoader.NormalMap(loadedTexture, TextureLoader.BumpMapStrength));
-                //        }
-                //    }
-                //    break;
+                    break;
+                case "LEGACY SHADERS/BUMPED DIFFUSE":
+                    {
+                        Texture2D loadedTexture = texLoader.LoadImageAt(i, 2);//Get normal map from mod directory
+                        MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
+                        if (loadedTexture != null)
+                        {
+                            MaterialMasterList[i].SetTexture("_BumpMap", TextureLoader.NormalMap(loadedTexture, TextureLoader.BumpMapStrength));
+                        }
+                    }
+                    break;
                 default:
                     Debug.Log(i + " is " + MaterialMasterList[i].shader.name);
                     MaterialMasterList[i].mainTexture = texLoader.LoadImageAt(i, 0);
