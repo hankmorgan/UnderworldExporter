@@ -939,7 +939,7 @@ public class Magic : UWEBase
             case "Ort An Quas"://Reveal
                 {
                     SetSpellCost(7);
-                    Debug.Log(MagicWords + " Reveal Cast");
+                    Cast_Reveal(caster);
                     break;
                 }//OAQ
                  //8th Circle
@@ -1028,6 +1028,11 @@ public class Magic : UWEBase
             case "Deadly Seeker":
                 {
                     Cast_DeadlySeeker(caster, false, SpellEffect.UW2_Spell_Effect_DeadlySeeker);
+                    break;
+                }
+            case "Enchantment":
+                {
+                    Cast_Enchantment(caster, ready, SpellEffect.UW2_Spell_Effect_Enchantment);
                     break;
                 }
             default:
@@ -1975,7 +1980,6 @@ public class Magic : UWEBase
         {//Ready the spell to be cast.
             InventorySpell = true;
             UWCharacter.Instance.PlayerMagic.ReadiedSpell = "Ort Wis Ylem";
-            //UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
             UWHUD.instance.CursorIcon = GameWorldController.instance.grCursors.LoadImageAt(10);
         }
         else
@@ -1996,7 +2000,6 @@ public class Magic : UWEBase
                     {
                         objInt.heading = 7;
                         objInt.LookDescription();
-                        //objInt.isIdentified=true;
                     }
                 }
             }
@@ -2006,10 +2009,8 @@ public class Magic : UWEBase
                 {
                     ReadiedSpell = "";
                     UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-                    //ObjectInteraction objInt = ObjectInSlot.GetComponent<ObjectInteraction>();
                     if (ObjectInSlot != null)
                     {
-                        //objInt.isIdentified=true;
                         ObjectInSlot.heading = 7;
                         ObjectInSlot.LookDescription();
                     }
@@ -2017,6 +2018,176 @@ public class Magic : UWEBase
             }
         }
     }
+
+
+    /// <summary>
+    /// Enchants an object with a minor spell.
+    /// </summary>
+    /// <param name="caster">Caster.</param>
+    /// <param name="Ready">If set to <c>true</c> ready.</param>
+    /// <param name="EffectID">Effect ID of the spell</param>
+    void Cast_Enchantment(GameObject caster, bool Ready, int EffectID)
+    {
+        if (Ready == true)
+        {//Ready the spell to be cast.
+            InventorySpell = true;
+            UWCharacter.Instance.PlayerMagic.ReadiedSpell = "Enchantment";
+            UWHUD.instance.CursorIcon = GameWorldController.instance.grCursors.LoadImageAt(10);
+        }
+        else
+        {
+            InventorySpell = false;
+            //Is this an inventory slot click or in the window
+            if (WindowDetect.CursorInMainWindow)
+            {
+                UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
+                UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                Ray ray = getRay(caster);
+                RaycastHit hit = new RaycastHit();
+                float dropRange = UWCharacter.Instance.GetUseRange();
+                if (Physics.Raycast(ray, out hit, dropRange))
+                {//The spell has hit something
+                    ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
+                    if (objInt != null)
+                    {
+                        //Enchant object
+                        EnchantObject(ObjectInSlot);
+                    }
+                }
+            }
+            else
+            {
+                if (ObjectInSlot != null)
+                {
+                    ReadiedSpell = "";
+                    UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                    if (ObjectInSlot != null)
+                    {
+                        //enchant object
+                        EnchantObject(ObjectInSlot);
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Apply the enchantment to an object
+    /// </summary>
+    /// <param name="obj"></param>
+    void EnchantObject(ObjectInteraction obj)
+    {
+
+        if (obj.link==0)
+        {
+            InitialEnchantObject(obj);
+            return;
+        }
+        if (obj.enchantment ==1)
+        {
+            IncreaseEnchantment(obj);
+        }
+
+    }
+
+    /// <summary>
+    /// Adds the first enchantement to an inventory object.
+    /// </summary>
+    /// <param name="obj"></param>
+    void InitialEnchantObject(ObjectInteraction obj)
+    {
+        int enchant = 0;
+        switch(obj.GetItemType())
+        {
+            case ObjectInteraction.ARMOUR:
+            case ObjectInteraction.HELM:
+            case ObjectInteraction.GLOVES:
+            case ObjectInteraction.SHIELD:
+                if (Random.Range(0,2)==0)
+                {
+                    enchant = 464 + 240;                    
+                }
+                else
+                {
+                    enchant = 472 + 240;
+                }
+                break;
+            case ObjectInteraction.WEAPON:
+                if (Random.Range(0, 2) == 0)
+                {
+                    enchant = 448 + 240;
+                }
+                else
+                {
+                    enchant = 456 + 240;
+                }
+                 break;
+            default:
+                //000~001~300~You cannot enchant that. \n
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
+                return;
+        }
+
+        if (obj.link>0)
+        {
+            //000~001~300~You cannot enchant that. \n
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 300));
+            return;
+        }
+        else
+        {
+            obj.link = enchant;
+            obj.enchantment = 1;
+            if (obj.GetComponent<Equipment>() != null)
+            {
+                obj.GetComponent<Equipment>().SetDisplayEnchantment();
+            }
+            
+            //000~001~301~You have enchanted the
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 301) + StringController.instance.GetObjectNounUW(obj));
+        }
+    }
+
+    /// <summary>
+    /// Improves (to a limit) the enchantment level of an object
+    /// </summary>
+    /// <param name="obj"></param>
+    void IncreaseEnchantment(ObjectInteraction obj)
+    {
+        if((obj.link>=464+240) && (obj.link <=479+240))
+            {
+            bool safetoenchant = false;
+            if ((obj.link >= 464 + 240) && (obj.link < 464 + 240 + 2))
+            {//is between minor and additional
+                safetoenchant = true;
+            }
+            else if ((obj.link >= 472 + 240) && (obj.link < 472 + 240 + 2))
+            {
+                safetoenchant = true;
+            }
+            else if ((obj.link >= 448 + 240) && (obj.link < 448 + 240 + 2))
+            {
+                safetoenchant = true;
+            }
+            else if ((obj.link >= 456 + 240) && (obj.link < 456 + 240 + 2))
+            {
+                safetoenchant = true;
+            }
+            if (safetoenchant)
+            {
+                obj.link++;
+            }
+            else
+            {
+                //000~001~318~Your attempt to enchant the
+                //000~001~319~destroys it in a blaze of fire! \n
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 318) + StringController.instance.GetObjectNounUW(obj) + StringController.instance.GetString(1, 319));
+                obj.consumeObject();
+                UWCharacter.Instance.CurVIT -= Random.Range(10, 30);
+            }
+        }
+    }
+
 
     /// <summary>
     /// Casts tremor
@@ -2348,6 +2519,28 @@ public class Magic : UWEBase
         srs.Go();
     }
 
+    /// <summary>
+    /// Spell that activates look triggers in it's vicinity.
+    /// </summary>
+    /// <param name="caster"></param>
+    void Cast_Reveal(GameObject caster)
+    {
+        foreach (Collider Col in Physics.OverlapSphere(caster.transform.position, 5.0f))
+        {
+            if (Col.gameObject.GetComponent<ObjectInteraction>() != null)
+            {
+                ObjectInteraction objint = Col.gameObject.GetComponent<ObjectInteraction>();
+                if(objint.isquant==0 && objint.link>0)
+                {
+                    ObjectInteraction objLink = ObjectLoader.getObjectIntAt(objint.link);
+                    if (objLink.GetItemType()==ObjectInteraction.A_LOOK_TRIGGER)
+                    {
+                        objLink.GetComponent<a_look_trigger>().ForceActivate(objLink.gameObject);
+                    }
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// Casts the stealth spells (generic)
@@ -4672,28 +4865,40 @@ public class Magic : UWEBase
                 break;
             case SpellEffect.UW1_Spell_Effect_RemoveTrap:
             case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
-
+                {
+                    Debug.Log("Removetrap");
+                    SpellResultType = SpellResultNone;
+                    break;
+                }
             /*?*/
 
             case SpellEffect.UW1_Spell_Effect_SetGuard://?
-
-            //Cursed items? Apply spell effect to playe
-
+                //Cursed items? Apply spell effect to playe
+                {
+                    Debug.Log("Setguard");
+                    SpellResultType = SpellResultNone;
+                    break;
+                }
 
 
 
             case SpellEffect.UW1_Spell_Effect_Reveal_alt01:
-
-
-
-            /*test*/
             case SpellEffect.UW1_Spell_Effect_Reveal:
-
+                {
+                    Cast_Reveal(caster);
+                    SpellResultType = SpellResultNone;
+                    break;
+                }
             /*Blank*/
 
 
 
             case SpellEffect.UW1_Spell_Effect_MassParalyze:
+                {
+                    Debug.Log("mass paralyze");
+                    SpellResultType = SpellResultNone;
+                    break;
+                }
 
             case SpellEffect.UW1_Spell_Effect_LocalTeleport:
                 //Cast spell/no spell effect
@@ -5254,10 +5459,16 @@ public class Magic : UWEBase
 
 
             case SpellEffect.UW2_Spell_Effect_NameEnchantment:
-            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:
-            case SpellEffect.UW2_Spell_Effect_Enchantment_alt01:
+            case SpellEffect.UW2_Spell_Effect_NameEnchantment_alt01:            
                 {
                     Cast_NameEnchantment(caster, ready, EffectID);
+                    SpellResultType = SpellResultNone;
+                    break;
+                }
+
+            case SpellEffect.UW2_Spell_Effect_Enchantment_alt01:
+                {
+                    Cast_Enchantment(caster, ready, EffectID);
                     SpellResultType = SpellResultNone;
                     break;
                 }
@@ -5708,7 +5919,7 @@ public class Magic : UWEBase
             case SpellEffect.UW2_Spell_Effect_Reveal:
             case SpellEffect.UW2_Spell_Effect_Reveal_alt01:
                 {
-                    Debug.Log("reveal");
+                    Cast_Reveal(caster);
                     SpellResultType = SpellResultNone;
                     break;
                 }

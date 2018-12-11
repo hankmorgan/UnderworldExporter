@@ -329,17 +329,21 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void writePlayerDatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
-            if (curgame==GAME_UW2)
+            if (MessageBox.Show(this, "Confirm File Save?","Save Player.dat", MessageBoxButtons.YesNo)==DialogResult.Yes)
             {
-                buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
+                char[] buffer = PlayerDatUI.GetValuesFromPDatGrid(this);
+                if (curgame == GAME_UW2)
+                {
+                    buffer = playerdat.EncryptDecryptUW2(buffer, (byte)buffer[0]);
+                }
+                else
+                {
+                    playerdat.EncryptDecryptUW1(buffer, buffer[0]);
+                }
+
+                Util.WriteStreamFile(main.basepath + "\\save" + curslot + "\\PLAYER.DAT", buffer);
             }
-            else
-            {
-                playerdat.EncryptDecryptUW1(buffer, buffer[0]);
-            }
-            
-            Util.WriteStreamFile(main.basepath + "\\save"+ curslot + "\\PLAYER.DAT", buffer);
+
         }
 
         /////// <summary>

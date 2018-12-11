@@ -3,9 +3,16 @@ using System.Collections;
 
 public class Helm : Armour {
 
-	public override int GetActualSpellIndex ()
-	{
-		return link-512;
+    public override int GetActualSpellIndex()
+    {
+        if (link - 512 < 256)
+        {
+            return link - 240;
+        }
+        else
+        {
+            return link - 512;
+        }		
 	}
 
 }

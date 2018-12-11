@@ -15,14 +15,21 @@ public class Map : object_base {
 
 	public override bool use ()
 	{
-		if (CurrentObjectInHand==null)
-		{
-			return OpenMap(GameWorldController.instance.LevelNo);
-		}
-		else
-		{
-			return ActivateByObject(CurrentObjectInHand);
-		}
+        if (objInt().PickedUp)
+        {
+            if (CurrentObjectInHand == null)
+            {
+                return OpenMap(GameWorldController.instance.LevelNo);
+            }
+            else
+            {
+                return ActivateByObject(CurrentObjectInHand);
+            }
+        }
+        else
+        {
+            return false;
+        }
 	}
 
 

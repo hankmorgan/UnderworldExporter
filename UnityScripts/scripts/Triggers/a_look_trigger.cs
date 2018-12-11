@@ -23,4 +23,13 @@ public class a_look_trigger : trigger_base {
         }
         return base.Activate(src);
     }
+
+    /// <summary>
+    /// Force the trigger to fire regardless of skill( used for reveal spell)
+    /// </summary>
+    /// <param name="src"></param>
+    public void ForceActivate(GameObject src)
+    {
+        base.Activate(src);
+    }
 }
