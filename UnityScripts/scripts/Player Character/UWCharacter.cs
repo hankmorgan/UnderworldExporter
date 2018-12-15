@@ -10,9 +10,10 @@ The basic character. Stats and interaction.
  */
 public class UWCharacter : Character
 {
+    //Jump defaults
     public const float baseJumpHeight = 0.2f;
     public const float extraJumpHeight = 0.8f;
-    public const float extraJumpHeightLeap = 1.2f;
+    public const float extraJumpHeightLeap = 1.6f;
 
     public string[] LayersForRay = new string[] { "Water", "MapMesh", "Lava", "Ice" };
     public Vector3 Rayposition;//= //transform.position;
@@ -113,7 +114,55 @@ public class UWCharacter : Character
     public bool isWaterWalking;
     public bool isTelekinetic;
     public bool isTimeFrozen;
-    public bool isLucky;
+    public enum LuckState
+    {
+        Cursed,
+        Neutral,
+        Lucky
+    };
+
+    [SerializeField]
+    LuckState _IsLucky= LuckState.Neutral;
+    public LuckState isLucky
+    {
+        get
+        {
+            return _IsLucky;
+        }
+        set
+        {
+            {
+                switch(_IsLucky)
+                {
+                    case LuckState.Cursed:
+                        {
+                            switch (value)
+                            {
+                                case LuckState.Cursed:break;
+                                case LuckState.Neutral:
+                                case LuckState.Lucky: _IsLucky = LuckState.Neutral;  break;                              
+                            }
+                            break;
+                        }
+                    case LuckState.Neutral:
+                        {
+                            _IsLucky = value;
+                            break;
+                        }
+                    case LuckState.Lucky:
+                        {
+                            switch (value)
+                            {
+                                case LuckState.Cursed: _IsLucky = LuckState.Neutral; break;
+                                case LuckState.Neutral:
+                                case LuckState.Lucky: _IsLucky = value; break;
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+    }
     public bool isBouncy;
 
     [Header("Player Health Status")]

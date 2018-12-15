@@ -328,26 +328,37 @@ public class Skills : MonoBehaviour {
 	}
 
 
-		/// <summary>
-		/// Rolls the dice on any skill check or combat swing.
-		/// </summary>
-		/// <returns>The roll.</returns>
-		/// <param name="critter">Critter.</param>
-		/// <param name="minRoll">Minimum roll.</param>
-		/// <param name="MaxRoll">Max roll.</param>
-		public static int DiceRoll(int minRoll, int MaxRoll)
-		{
+    /// <summary>
+    /// Rolls the dice on any skill check or combat swing.
+    /// </summary>
+    /// <returns>The roll.</returns>
+    /// <param name="critter">Critter.</param>
+    /// <param name="minRoll">Minimum roll.</param>
+    /// <param name="MaxRoll">Max roll.</param>
+    public static int DiceRoll(int minRoll, int MaxRoll)
+    {
 
-			if (UWCharacter.Instance.isLucky)
-			{//Give a +5 bonus to all rolls.
-				int roll= Random.Range(minRoll,MaxRoll);
-				roll = Mathf.Min(roll+5, MaxRoll);
-				return roll;
-			}
-			else
-			{
-				return Random.Range(minRoll,MaxRoll);			
-			}
-			
-		}
+        switch (UWCharacter.Instance.isLucky)
+        {
+            case UWCharacter.LuckState.Cursed:
+                {//Give a -5 penalty to all rolls.
+                    int roll = Random.Range(minRoll, MaxRoll)-5;
+                    if (roll < 0) { roll = 0; }
+                    roll = Mathf.Min(roll, MaxRoll);
+                    return roll;
+                }
+            case UWCharacter.LuckState.Lucky:
+                {//Give a +5 bonus to all rolls.
+                    int roll = Random.Range(minRoll, MaxRoll);
+                    roll = Mathf.Min(roll + 5, MaxRoll);
+                    return roll;
+                }
+            case UWCharacter.LuckState.Neutral:
+            default:
+                {
+                    return Random.Range(minRoll, MaxRoll);
+                }
+        }
+    }
+
 }

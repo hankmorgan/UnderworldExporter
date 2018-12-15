@@ -257,7 +257,7 @@ public class TileMap : Loader
     public int GetTileType(int tileX, int tileY)
     {
         //if ((tileX>TileMap.TileMapSizeX) || (tileY>TileMap.TileMapSizeY) || (tileX<0) || (tileY<0))
-        if (TileMap.ValidTile(tileX, tileY))
+        if (!TileMap.ValidTile(tileX, tileY))
         {//Assume out of bounds is solid
             return TILE_SOLID;
         }

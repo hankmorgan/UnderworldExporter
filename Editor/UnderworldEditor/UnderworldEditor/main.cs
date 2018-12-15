@@ -155,7 +155,7 @@ namespace UnderworldEditor
         /// <param name="numOwner"></param>
         /// <param name="numNext"></param>
         /// <param name="numLink"></param>
-        public void UpdateObjectUIChange(char[] TileMapData, objects.ObjectInfo obj,
+        public void UpdateObjectUIChange(char[] TileMapData, objects objlist, int index,
             ComboBox cmbItem_ID,
             CheckBox chkEnchanted,
             CheckBox chkIsQuant,
@@ -173,49 +173,49 @@ namespace UnderworldEditor
             )
         {
             //Update the object with the selected info
-            obj.item_id = cmbItem_ID.SelectedIndex;
-            cmbItem_ID.Text = obj.item_id + "-" + objects.ObjectName(obj.item_id, curgame);
+            objlist.objList[index].item_id = cmbItem_ID.SelectedIndex;
+            cmbItem_ID.Text = objlist.objList[index].item_id + "-" + objects.ObjectName(objlist.objList[index].item_id, curgame);
 
-            if (chkEnchanted.Checked) { obj.enchantment = 1; } else { obj.enchantment = 0; }
-            if (chkIsQuant.Checked) { obj.is_quant = 1; } else { obj.is_quant = 0; };
-            if (chkDoorDir.Checked) { obj.doordir = 1; } else { obj.doordir = 0; };
-            if (chkInvis.Checked) { obj.invis = 1; } else { obj.invis = 0; };
+            if (chkEnchanted.Checked) { objlist.objList[index].enchantment = 1; } else { objlist.objList[index].enchantment = 0; }
+            if (chkIsQuant.Checked) { objlist.objList[index].is_quant = 1; } else { objlist.objList[index].is_quant = 0; };
+            if (chkDoorDir.Checked) { objlist.objList[index].doordir = 1; } else { objlist.objList[index].doordir = 0; };
+            if (chkInvis.Checked) { objlist.objList[index].invis = 1; } else { objlist.objList[index].invis = 0; };
 
-            obj.xpos = (short)numXpos.Value ;
-            obj.ypos = (short)numYpos.Value ;
-            obj.zpos= (short)numZpos.Value;
-            obj.heading= (short)numHeading.Value;
+            objlist.objList[index].xpos = (short)numXpos.Value ;
+            objlist.objList[index].ypos = (short)numYpos.Value ;
+            objlist.objList[index].zpos= (short)numZpos.Value;
+            objlist.objList[index].heading= (short)numHeading.Value;
 
-            obj.flags= (short)numFlags.Value;
-            obj.quality= (short)numQuality.Value;
-            obj.owner= (short)numOwner.Value;
-            obj.next= (short)numNext.Value;
-            obj.link= (short)numLink.Value  ;
-            long addptr = obj.FileAddress;
-            int ByteToWrite = (obj.is_quant << 15) |
-                (obj.invis << 14) |
-                (obj.doordir << 13) |
-                (obj.enchantment << 12) |
-                ((obj.flags & 0x07) << 9) |
-                (obj.item_id & 0x1FF);
+            objlist.objList[index].flags= (short)numFlags.Value;
+            objlist.objList[index].quality= (short)numQuality.Value;
+            objlist.objList[index].owner= (short)numOwner.Value;
+            objlist.objList[index].next= (short)numNext.Value;
+            objlist.objList[index].link= (short)numLink.Value  ;
+            long addptr = objlist.objList[index].FileAddress;
+            int ByteToWrite = (objlist.objList[index].is_quant << 15) |
+                (objlist.objList[index].invis << 14) |
+                (objlist.objList[index].doordir << 13) |
+                (objlist.objList[index].enchantment << 12) |
+                ((objlist.objList[index].flags & 0x07) << 9) |
+                (objlist.objList[index].item_id & 0x1FF);
 
             TileMapData[addptr] = (char)(ByteToWrite & 0xFF);
             TileMapData[addptr + 1] = (char)((ByteToWrite >> 8) & 0xFF);
 
-            ByteToWrite = ((obj.xpos & 0x7) << 13) |
-                    ((obj.ypos & 0x7) << 10) |
-                    ((obj.heading & 0x7) << 7) |
-                    ((obj.zpos & 0x7F));
+            ByteToWrite = ((objlist.objList[index].xpos & 0x7) << 13) |
+                    ((objlist.objList[index].ypos & 0x7) << 10) |
+                    ((objlist.objList[index].heading & 0x7) << 7) |
+                    ((objlist.objList[index].zpos & 0x7F));
             TileMapData[addptr + 2] = (char)(ByteToWrite & 0xFF);
             TileMapData[addptr + 3] = (char)((ByteToWrite >> 8) & 0xFF);
 
-            ByteToWrite = (((int)obj.next & 0x3FF) << 6) |
-                    (obj.quality & 0x3F);
+            ByteToWrite = (((int)objlist.objList[index].next & 0x3FF) << 6) |
+                    (objlist.objList[index].quality & 0x3F);
             TileMapData[addptr + 4] = (char)(ByteToWrite & 0xFF);
             TileMapData[addptr + 5] = (char)((ByteToWrite >> 8) & 0xFF);
 
-            ByteToWrite = ((obj.link & 0x3FF) << 6) |
-                    (obj.owner & 0x3F);
+            ByteToWrite = ((objlist.objList[index].link & 0x3FF) << 6) |
+                    (objlist.objList[index].owner & 0x3F);
             TileMapData[addptr + 6] = (char)(ByteToWrite & 0xFF);
             TileMapData[addptr + 7] = (char)((ByteToWrite >> 8) & 0xFF);
         }
@@ -824,7 +824,7 @@ namespace UnderworldEditor
             if (isLoading) { return; }
             //Update object at address
             char[] buffer= PlayerDatUI.GetValuesFromPDatGrid(this);
-            UpdateObjectUIChange(buffer, pdatObjects.objList[CurPDatObject], CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir, ChkPdatInvis, NumPInvXpos, NumPInvYPos, NumPInvZpos, NumPInvHeading, NumPdatFlags, NumPdatQuality, NumPdatOwner, NumPdatNext, NumPdatLink);
+            UpdateObjectUIChange(buffer, pdatObjects, CurPDatObject, CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir, ChkPdatInvis, NumPInvXpos, NumPInvYPos, NumPInvZpos, NumPInvHeading, NumPdatFlags, NumPdatQuality, NumPdatOwner, NumPdatNext, NumPdatLink);
             isLoading = true;
             PlayerDatUI.PopulatePDatValuesToGrid(buffer, this);
             isLoading = false;
@@ -1157,7 +1157,7 @@ namespace UnderworldEditor
             if (isLoading) { return; }
             //Update object at address
             UpdateObjectUIChange(levarkbuffer,
-                worldObjects.objList[CurWorldObject], 
+                worldObjects, CurWorldObject, 
                 CmbWorldItem_ID, ChkWorldEnchanted, ChkWorldIsQuant, ChkWorldDoorDir, ChkWorldInvis,
                 NumWorldXPos, NumWorldYPos, NumWorldZpos, NumWorldHeading,
                 NumWorldFlags, NumWorldQuality, NumWorldOwner,

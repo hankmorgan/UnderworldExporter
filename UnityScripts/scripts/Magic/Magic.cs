@@ -2437,15 +2437,15 @@ public class Magic : UWEBase
     /// <param name="ActiveSpellArray">Active spell array.</param>
     /// <param name="EffectID">Effect ID of the spell</param>
     /// <param name="EffectSlot">Effect slot.</param>
-    void Cast_Luck(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+    void Cast_Luck(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot, UWCharacter.LuckState newluckstate)
     {
         SpellProp_Luck luck = new SpellProp_Luck();
         luck.init(EffectID, caster);
-        SpellEffect lep = (SpellEffectLucky)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+        SpellEffectLucky lep = (SpellEffectLucky)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
         lep.counter = luck.counter;
+        lep.NewState = newluckstate;// UWCharacter.LuckState.Lucky;
         lep.Go();
     }
-
 
     /// <summary>
     /// Casts the bounce spell (generic)
@@ -3178,8 +3178,9 @@ public class Magic : UWEBase
                         case SpellEffect.UW2_Spell_Effect_RoamingSight_alt02:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectRoamingSight>();
                             break;
-
-                        case SpellEffect.UW2_Spell_Effect_Curse:
+                        case SpellEffect.UW2_Spell_Effect_Curse:                       
+                            ActiveSpellArray[index] = caster.AddComponent<SpellEffectLucky>();
+                            break;
                         case SpellEffect.UW2_Spell_Effect_Cursed:
                         case SpellEffect.UW2_Spell_Effect_Cursed_alt01:
                         case SpellEffect.UW2_Spell_Effect_Cursed_alt02:
@@ -3404,6 +3405,9 @@ public class Magic : UWEBase
                         case SpellEffect.UW1_Spell_Effect_Curse:
                         case SpellEffect.UW1_Spell_Effect_Curse_alt01:
                         case SpellEffect.UW1_Spell_Effect_Curse_alt02:
+                            ActiveSpellArray[index] = caster.AddComponent<SpellEffectLucky>();
+                            break;
+
                         case SpellEffect.UW1_Spell_Effect_Cursed:
                         case SpellEffect.UW1_Spell_Effect_Cursed_alt01:
                         case SpellEffect.UW1_Spell_Effect_Cursed_alt02:
@@ -3420,7 +3424,7 @@ public class Magic : UWEBase
                         case SpellEffect.UW1_Spell_Effect_Cursed_alt14:
                         case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
                         case SpellEffect.UW1_Spell_Effect_Cursed_alt16:
-                            ActiveSpellArray[index] = caster.AddComponent<SpellEffectCurse>();
+                            ActiveSpellArray[index] = caster.AddComponent<SpellEffectCurse>();//Cursed equipment?
                             break;
                         default:
                             Debug.Log("effect Id is " + EffectID);
@@ -4832,10 +4836,25 @@ public class Magic : UWEBase
             case SpellEffect.UW1_Spell_Effect_Curse:
             case SpellEffect.UW1_Spell_Effect_Curse_alt01:
             case SpellEffect.UW1_Spell_Effect_Curse_alt02:
-
                 {
-                    Cast_Curse(caster, EffectID);
-                    SpellResultType = SpellResultNone;
+                    switch (CastType)
+                    {
+                        case SpellRule_Equipable:
+                            if (PassiveArrayIndex != -1)
+                            {
+                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex, UWCharacter.LuckState.Cursed);
+                            }
+                            SpellResultType = SpellResultPassive;
+                            break;
+                        case SpellRule_Consumable:
+                        default:
+                            if (ActiveArrayIndex != -1)
+                            {
+                                Cast_Luck(caster, UWCharacter.Instance.ActiveSpell, EffectID, ActiveArrayIndex, UWCharacter.LuckState.Cursed);
+                                SpellResultType = SpellResultActive;
+                            }
+                            break;
+                    }
                     break;
                 }
 
@@ -5069,11 +5088,26 @@ public class Magic : UWEBase
                     SpellResultType = SpellResultNone;
                     break;
                 }
-
             case SpellEffect.UW2_Spell_Effect_Curse:
                 {
-                    Cast_Curse(caster, EffectID);
-                    SpellResultType = SpellResultNone;
+                    switch (CastType)
+                    {
+                        case SpellRule_Equipable:
+                            if (PassiveArrayIndex != -1)
+                            {
+                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex, UWCharacter.LuckState.Lucky);
+                            }
+                            SpellResultType = SpellResultPassive;
+                            break;
+                        case SpellRule_Consumable:
+                        default:
+                            if (ActiveArrayIndex != -1)
+                            {
+                                Cast_Luck(caster, UWCharacter.Instance.ActiveSpell, EffectID, ActiveArrayIndex, UWCharacter.LuckState.Lucky);
+                                SpellResultType = SpellResultActive;
+                            }
+                            break;
+                    }
                     break;
                 }
             case SpellEffect.UW2_Spell_Effect_Cursed:
@@ -5489,7 +5523,7 @@ public class Magic : UWEBase
                         case SpellRule_Equipable:
                             if (PassiveArrayIndex != -1)
                             {
-                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex);
+                                Cast_Luck(caster, UWCharacter.Instance.PassiveSpell, EffectID, PassiveArrayIndex,UWCharacter.LuckState.Lucky);
                             }
                             SpellResultType = SpellResultPassive;
                             break;
@@ -5497,7 +5531,7 @@ public class Magic : UWEBase
                         default:
                             if (ActiveArrayIndex != -1)
                             {
-                                Cast_Luck(caster, UWCharacter.Instance.ActiveSpell, EffectID, ActiveArrayIndex);
+                                Cast_Luck(caster, UWCharacter.Instance.ActiveSpell, EffectID, ActiveArrayIndex, UWCharacter.LuckState.Lucky);
                                 SpellResultType = SpellResultActive;
                             }
                             break;

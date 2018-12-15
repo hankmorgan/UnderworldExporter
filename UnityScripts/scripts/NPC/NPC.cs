@@ -46,7 +46,9 @@ public class NPC : MobileObject
         npc_goal_attack_9 = 9,
         npc_goal_flee = 6,
         npc_goal_follow = 3,
-        npc_goal_petrified =15
+        npc_goal_petrified =15,
+        npc_goal_unk13 = 13,
+        npc_goal_unk14 = 14
     };
 
     public enum AttackStages
@@ -278,8 +280,15 @@ public class NPC : MobileObject
 
     ///Transform position to launch projectiles from
     public GameObject NPC_Launcher;
-   // public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+    // public int Ammo = 0;//How many ranged attacks can this NPC execute. (ie how much ammo can it spawn)
+    /// <summary>
+    /// How long the npc waits before moving on.
+    /// </summary>
     public float WaitTimer = 0f;
+    /// <summary>
+    /// How long it has taken to reach the destination.
+    /// </summary>
+    public float TravelTimer = 0f;
     [Header("NavMesh")]
     public NavMeshAgent Agent;
     float targetBaseOffset = 0f;
@@ -1046,6 +1055,11 @@ public class NPC : MobileObject
                     AgentStand();
                     break;
                 }
+            default:
+                {
+                    Debug.Log("Unimplemented goal " + npc_goal);
+                    break;
+                }
         }
 
         if (
@@ -1149,10 +1163,12 @@ public class NPC : MobileObject
 
     void NPCWanderUpdate()
     {
-        //CurTileX = (int)(transform.position.x / 1.2f);
-        //CurTileY = (int)(transform.position.z / 1.2f);
         bool AtDestination = ((DestTileX == CurTileX) && (DestTileY == CurTileY));
-
+        TravelTimer += Time.deltaTime;
+        if (TravelTimer >= 20f && AtDestination ==false)
+        {
+            AtDestination = true;
+        }
         if (!AtDestination)
         {
             //I need to move to this tile.
@@ -1162,13 +1178,20 @@ public class NPC : MobileObject
         }
         else
         {       //I am at this tile. Stand idle for a random period of time
-            AnimRange = NPC.AI_RANGE_IDLE;
-            if (ArrivedAtDestination == false)
+            if (npc_goal==(short)npc_goals.npc_goal_flee)
             {
-                ArrivedAtDestination = true;
-                if (WaitTimer == 0)
+                SetRandomDestination();
+            }
+            else
+            {
+                AnimRange = NPC.AI_RANGE_IDLE;
+                if (ArrivedAtDestination == false)
                 {
-                    WaitTimer = Random.Range(1f, 10f);
+                    ArrivedAtDestination = true;
+                    if (WaitTimer == 0)
+                    {
+                        WaitTimer = Random.Range(1f, 10f);
+                    }
                 }
             }
         }
@@ -1186,17 +1209,6 @@ public class NPC : MobileObject
                 ArrivedAtDestination = false;
             }
         }
-        //else 
-        //	{
-        //		if ((DestTileX == CurTileX) && (DestTileY == CurTileY)  && ((npc_goal == (short)npc_goals.npc_goal_goto_1))) 
-        //			{
-        //				DestTileX = npc_xhome;
-        //				DestTileY = npc_yhome;
-        //				npc_goal = (short)npc_goals.npc_goal_stand_still_0;
-        //				AnimRange = NPC.AI_RANGE_IDLE;
-        //			}
-        //	}
-
     }
     /// <summary>
     /// Processes NPC Combat activitity
@@ -2169,49 +2181,45 @@ public class NPC : MobileObject
     }
 
 
-
+    /// <summary>
+    /// Sets a random locaton for the NPC to move to.
+    /// </summary>
     void SetRandomDestination()
     {
         int distanceMultipler = 1;//For frightened NPCs
-
-        if (npc_gtarg == 6)
+        TravelTimer = 0f;
+        if (npc_goal == 6)
         {
-            distanceMultipler = 9;//Runs further away from it's current location.
+            distanceMultipler = 6;//Runs further away from it's current location.
         }
         //Get a random spot.
         bool DestFound = false;
         Vector3 curPos = transform.position;
-        //Vector3 dest =curPos;
-        //int tileX = (int)(curPos.x/1.2f);
 
-        //int tileY = (int)(curPos.z/1.2f);
-        //DestTileX =CurTileX;
-        //DestTileY=CurTileY;
-        //int ValidRoom = npc.Room();
         int candidateDestTileX;
         int candidateDestTileY;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 30; i++)
         {
-            //DestTileX = CurTileX + Random.Range(-6*distanceMultipler,7*distanceMultipler);
-            //DestTileY = CurTileY + Random.Range(-6*distanceMultipler,7*distanceMultipler);
             candidateDestTileX = npc_xhome + Random.Range(-2 * distanceMultipler, 3 * distanceMultipler);
             candidateDestTileY = npc_yhome + Random.Range(-2 * distanceMultipler, 3 * distanceMultipler);
             if (TileMap.ValidTile(DestTileX, DestTileY))
             {
+                //&& (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID)
                 //if (CurrentTileMap().GetTileType(newTileX,newTileY) != TileMap.TILE_SOLID)
-                if (Room() == CurrentTileMap().GetRoom(candidateDestTileX, candidateDestTileY))
+                if ( ( Room() == CurrentTileMap().GetRoom(candidateDestTileX, candidateDestTileY) ) && (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID))
+                //if (CurrentTileMap().GetTileType(candidateDestTileX, candidateDestTileY) != TileMap.TILE_SOLID)
                 {
                     DestTileX = candidateDestTileX;
                     DestTileY = candidateDestTileY;
                     DestFound = true;
                     break;
                 }
-                if (DestFound == false)
-                {
-                    DestTileX = CurTileX;
-                    DestTileY = CurTileY;
-                }
             }
+        }
+        if (DestFound == false)
+        {
+            DestTileX = CurTileX;
+            DestTileY = CurTileY;
         }
 
         //Move back home if too far away

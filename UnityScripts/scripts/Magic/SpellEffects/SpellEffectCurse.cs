@@ -5,4 +5,5 @@ public class SpellEffectCurse : SpellEffect {
 
 //What does this do?  Reduce defences?
 		public bool isNPC;
+//Curse NPC version. See spelleffectluck for effect on player
 }
