@@ -2951,7 +2951,7 @@ public class SaveGame : Loader
                 int byteToWrite = 0;
 
                 switch (UWCharacter.Instance.ActiveSpell[e].EffectID)
-                {//Fix spell effects that do not work with the nibble swap 
+                {//Fix spell effects that do not work with the nibble swap //TODO:check if the right effect ids are in use
                     case SpellEffect.UW1_Spell_Effect_Speed:
                         effectId = 178; break;
                     case SpellEffect.UW1_Spell_Effect_Telekinesis:

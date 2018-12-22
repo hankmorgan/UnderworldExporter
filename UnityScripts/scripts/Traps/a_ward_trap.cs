@@ -10,7 +10,7 @@ public class a_ward_trap : trap_base
 	 */
 
     public SpellProp spellprop;//The spell properties of the ward.
-
+    public bool CanHitPlayer = true;
     protected override void Start()
     {
         base.Start();
@@ -54,6 +54,7 @@ public class a_ward_trap : trap_base
                     SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
                     spIJ.init(SpellEffect.UW1_Spell_Effect_RuneofWarding, UWCharacter.Instance.gameObject);
                     spellprop = spIJ;
+                    CanHitPlayer = false;
                     break;
                 }
         }
@@ -77,19 +78,22 @@ public class a_ward_trap : trap_base
         }
         else
         {
-            if (other.gameObject.GetComponent<UWCharacter>())
+            if (other.gameObject.GetComponent<UWCharacter>() )
             {
-                if (spellprop.BaseDamage != 0)
+                if (CanHitPlayer)
                 {
-                    UWCharacter.Instance.ApplyDamage(spellprop.BaseDamage);
+                    if (spellprop.BaseDamage != 0)
+                    {
+                        UWCharacter.Instance.ApplyDamage(spellprop.BaseDamage);
+                    }
+                    spellprop.onHitPlayer();
+                    objInt().consumeObject();
                 }
-                spellprop.onHitPlayer();
-                objInt().consumeObject();
             }
             else
             {
                 if (_RES == GAME_UW2)
-                {
+                {//An object has been thrown at the trap to consume it.
                     objInt().consumeObject();
                 }
             }

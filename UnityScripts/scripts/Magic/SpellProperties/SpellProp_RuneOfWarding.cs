@@ -5,7 +5,7 @@ public class SpellProp_RuneOfWarding : SpellProp {
 	//Rune of Warding
 	public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId,SpellCaster);
+		base.init (effectId,SpellCaster);        
 		//ProjectileSprite = _RES +"/Sprites/Objects/Objects_020";
 		//Force=200.0f;
 		BaseDamage=15;
@@ -22,7 +22,7 @@ public class SpellProp_RuneOfWarding : SpellProp {
 		//Debug.Log(Vector3.Angle (TrapPosition, PlayerPosition));
 		//Announce to the player the ward has gone off.
 		//000~001~245~Your Rune of Warding has been set off 
-		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_your_rune_of_warding_has_been_set_off_) + Compass.getCompassHeading(playerUW.gameObject,tf.gameObject));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_your_rune_of_warding_has_been_set_off_) + Compass.getCompassHeading(UWCharacter.Instance.gameObject,tf.gameObject));
 	}
 	/*
 	public override void onImpactPlayer ()

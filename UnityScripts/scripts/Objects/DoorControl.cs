@@ -323,11 +323,10 @@ public class DoorControl : object_base {
 			//000~001~131~The door is spiked.
 			if (state()==false)
 			{//Closed door
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
-					//Spiked=true;
-					owner=63;
-		
-					return true;
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
+				//Spiked=true;
+				owner=63;		
+				return true;
 			}
 			else
 			{

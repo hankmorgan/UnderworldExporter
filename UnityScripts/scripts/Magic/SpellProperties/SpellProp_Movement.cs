@@ -37,7 +37,8 @@ public class SpellProp_Movement : SpellProp {
 			case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
 					counter = 4;break;
 			case SpellEffect.UW1_Spell_Effect_Speed:
-			case SpellEffect.UW1_Spell_Effect_Haste:
+            case SpellEffect.UW1_Spell_Effect_Speed_alt01:
+            case SpellEffect.UW1_Spell_Effect_Haste:
 					Speed=1.2f; counter=6;break;
 
 				default:

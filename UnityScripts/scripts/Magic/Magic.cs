@@ -1272,7 +1272,6 @@ public class Magic : UWEBase
         if (Ready == true)
         {//Ready the spell to be cast.
             UWCharacter.Instance.PlayerMagic.ReadiedSpell = "Sanct Jux";
-            //UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
             UWHUD.instance.CursorIcon = GameWorldController.instance.grCursors.LoadImageAt(10);
         }
         else
@@ -3305,6 +3304,7 @@ public class Magic : UWEBase
                             //Todo
                             break;
                         case SpellEffect.UW1_Spell_Effect_Speed:
+                        case SpellEffect.UW1_Spell_Effect_Speed_alt01:
                         case SpellEffect.UW1_Spell_Effect_Haste:
                             ActiveSpellArray[index] = caster.AddComponent<SpellEffectSpeed>();
                             //Todo
@@ -4368,6 +4368,7 @@ public class Magic : UWEBase
                     break;
                 }
             case SpellEffect.UW1_Spell_Effect_Speed:
+            case SpellEffect.UW1_Spell_Effect_Speed_alt01:
             case SpellEffect.UW1_Spell_Effect_Haste:
                 {
                     switch (CastType)

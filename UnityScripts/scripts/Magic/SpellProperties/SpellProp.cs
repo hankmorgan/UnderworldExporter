@@ -43,8 +43,7 @@ public class SpellProp : UWClass {
 	public int impactFrameStart;
 	///What impact image is played on a miss.
 	public int impactFrameEnd;
-	public static UWCharacter playerUW;
-
+	
 	//Does the projectile home in on a target.
 	public bool homing = false;
 	public bool hasTrail =false;
