@@ -17,7 +17,7 @@ namespace UnderworldEditor
         public static main instance;
         public const int GAME_UW1 = 1;
         public const int GAME_UW2 = 2;
-        public static bool isLoading = false;
+        public static bool isLoading = true;
         public const int InventoryOffsetUW1 = 0x138;
         public const int InventoryOffsetUW2 = 0x3E3;
         public const int InventorySlotOffsetUW1 = 0xf8;
@@ -68,6 +68,7 @@ namespace UnderworldEditor
             PaletteLoader.LoadPalettes(main.basepath + "\\data\\pals.dat");
             PicPalette.Image = ArtLoader.Palette(PaletteLoader.Palettes[0]).image;
             PopulateTextureTree();
+            isLoading = true;
         }
 
 
@@ -1194,6 +1195,41 @@ namespace UnderworldEditor
             DataObject dataObj = GrdLevArkRaw.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
+        }
+
+        private void NumCurHP_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeCurHP(this);
+        }
+
+        private void NumMaxHP_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeMaxHP(this);
+        }
+
+        private void NumCurMana_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeCurMana(this);
+        }
+
+        private void NumMaxMana_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeMaxMana(this);
+        }
+
+        private void NumHunger_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeHunger(this);
+        }
+
+        private void NumFatigue_ValueChanged(object sender, EventArgs e)
+        {
+            PlayerDatUI.ChangeFatigue(this);
+        }
+
+        private void GrdSkills_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            PlayerDatUI.UpdateSkills(this);
         }
     }
 }

@@ -301,7 +301,6 @@ namespace UnderworldEditor
         {
             if (!main.isLoading)
             {
-                //Debug.Print(TxtCharName.Text);
                 char[] namechars = MAIN.TxtCharName.Text.ToCharArray();
                 for (int i = 0; i < 13; i++)
                 {
@@ -314,6 +313,85 @@ namespace UnderworldEditor
                         MAIN.GrdPlayerDat.Rows[i + 1].Cells[0].Value = 0;
 
                     }
+                }
+            }
+        }
+
+
+        public static void ChangeCurHP(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                if (main.curgame == main.GAME_UW1)
+                {//UW1 uses a duplicate value
+                    MAIN.GrdPlayerDat.Rows[0xDD].Cells[0].Value = MAIN.NumCurHP.Value;
+                }
+                MAIN.GrdPlayerDat.Rows[0x36].Cells[0].Value = MAIN.NumCurHP.Value;
+            }
+        }
+
+        public static void ChangeMaxHP(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                MAIN.GrdPlayerDat.Rows[0x37].Cells[0].Value = MAIN.NumMaxHP.Value;
+            }
+        }
+
+        public static void ChangeCurMana(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                MAIN.GrdPlayerDat.Rows[0x38].Cells[0].Value = MAIN.NumCurMana.Value;
+            }
+        }
+
+        public static void ChangeMaxMana(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                MAIN.GrdPlayerDat.Rows[0x39].Cells[0].Value = MAIN.NumMaxMana.Value;
+            }
+        }
+
+        public static void ChangeHunger(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                MAIN.GrdPlayerDat.Rows[0x3A].Cells[0].Value = MAIN.NumHunger.Value;
+            }
+        }
+
+        public static void ChangeFatigue(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                MAIN.GrdPlayerDat.Rows[0x3B].Cells[0].Value = MAIN.NumHunger.Value;
+            }
+        }
+
+        public static void UpdateSkills(main MAIN)
+        {
+            if (!main.isLoading)
+            {
+                int j = 0;
+                for (int i = 0x1f; i <= 0x35; i++)
+                {
+                    int cellvalue = 0;
+                    if (!int.TryParse(MAIN.GrdSkills.Rows[j].Cells[1].Value.ToString() , out cellvalue))
+                    {
+                        MAIN.GrdSkills.Rows[j].Cells[1].Value = 0;
+                        cellvalue = 0;
+                    }
+                    if (cellvalue>30)
+                    {
+                        MAIN.GrdSkills.Rows[j].Cells[1].Value = 30;
+                    }
+                    if (cellvalue < 0)
+                    {
+                        MAIN.GrdSkills.Rows[j].Cells[1].Value = 0;
+                    }
+                    MAIN.GrdPlayerDat.Rows[i].Cells[0].Value = MAIN.GrdSkills.Rows[j++].Cells[1].Value;
                 }
             }
         }

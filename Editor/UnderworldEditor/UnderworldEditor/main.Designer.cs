@@ -53,6 +53,7 @@
             this.PlayerDat = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.Character = new System.Windows.Forms.TabPage();
+            this.label50 = new System.Windows.Forms.Label();
             this.ChkDifficulty = new System.Windows.Forms.CheckBox();
             this.CmbCharClass = new System.Windows.Forms.ComboBox();
             this.NumBody = new System.Windows.Forms.NumericUpDown();
@@ -80,8 +81,6 @@
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.GrdSkills = new System.Windows.Forms.DataGridView();
-            this.SkillName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -197,6 +196,8 @@
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblRawDataAddress = new System.Windows.Forms.Label();
+            this.BtnCopyLevArkRaw = new System.Windows.Forms.Button();
             this.GrdLevArkRaw = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage9 = new System.Windows.Forms.TabPage();
@@ -235,12 +236,12 @@
             this.stringsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.BtnCopyLevArkRaw = new System.Windows.Forms.Button();
+            this.SkillName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PicMap = new PictureBoxWithInterpolationMode();
             this.PicColour = new PictureBoxWithInterpolationMode();
             this.PicPalette = new PictureBoxWithInterpolationMode();
             this.ImgOut = new PictureBoxWithInterpolationMode();
-            this.lblRawDataAddress = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.PlayerDat.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -362,6 +363,7 @@
             // 
             // Character
             // 
+            this.Character.Controls.Add(this.label50);
             this.Character.Controls.Add(this.ChkDifficulty);
             this.Character.Controls.Add(this.CmbCharClass);
             this.Character.Controls.Add(this.NumBody);
@@ -397,6 +399,15 @@
             this.Character.TabIndex = 2;
             this.Character.Text = "Character";
             this.Character.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(323, 376);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(365, 17);
+            this.label50.TabIndex = 49;
+            this.label50.Text = "Not all controls work. Use raw data to edit specific values";
             // 
             // ChkDifficulty
             // 
@@ -492,6 +503,7 @@
             this.NumHunger.Name = "NumHunger";
             this.NumHunger.Size = new System.Drawing.Size(66, 22);
             this.NumHunger.TabIndex = 41;
+            this.NumHunger.ValueChanged += new System.EventHandler(this.NumHunger_ValueChanged);
             // 
             // NumFatigue
             // 
@@ -504,6 +516,7 @@
             this.NumFatigue.Name = "NumFatigue";
             this.NumFatigue.Size = new System.Drawing.Size(66, 22);
             this.NumFatigue.TabIndex = 40;
+            this.NumFatigue.ValueChanged += new System.EventHandler(this.NumFatigue_ValueChanged);
             // 
             // NumMaxMana
             // 
@@ -516,6 +529,7 @@
             this.NumMaxMana.Name = "NumMaxMana";
             this.NumMaxMana.Size = new System.Drawing.Size(66, 22);
             this.NumMaxMana.TabIndex = 39;
+            this.NumMaxMana.ValueChanged += new System.EventHandler(this.NumMaxMana_ValueChanged);
             // 
             // NumCurMana
             // 
@@ -528,6 +542,7 @@
             this.NumCurMana.Name = "NumCurMana";
             this.NumCurMana.Size = new System.Drawing.Size(66, 22);
             this.NumCurMana.TabIndex = 38;
+            this.NumCurMana.ValueChanged += new System.EventHandler(this.NumCurMana_ValueChanged);
             // 
             // NumMaxHP
             // 
@@ -540,6 +555,7 @@
             this.NumMaxHP.Name = "NumMaxHP";
             this.NumMaxHP.Size = new System.Drawing.Size(66, 22);
             this.NumMaxHP.TabIndex = 37;
+            this.NumMaxHP.ValueChanged += new System.EventHandler(this.NumMaxHP_ValueChanged);
             // 
             // NumCurHP
             // 
@@ -552,6 +568,7 @@
             this.NumCurHP.Name = "NumCurHP";
             this.NumCurHP.Size = new System.Drawing.Size(66, 22);
             this.NumCurHP.TabIndex = 36;
+            this.NumCurHP.ValueChanged += new System.EventHandler(this.NumCurHP_ValueChanged);
             // 
             // groupBox3
             // 
@@ -692,7 +709,7 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(589, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(238, 362);
+            this.groupBox2.Size = new System.Drawing.Size(252, 362);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Skills";
@@ -705,24 +722,14 @@
             this.GrdSkills.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SkillName,
             this.Value});
-            this.GrdSkills.Location = new System.Drawing.Point(7, 22);
+            this.GrdSkills.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GrdSkills.Location = new System.Drawing.Point(3, 18);
             this.GrdSkills.Name = "GrdSkills";
             this.GrdSkills.RowHeadersVisible = false;
             this.GrdSkills.RowTemplate.Height = 24;
-            this.GrdSkills.Size = new System.Drawing.Size(225, 327);
+            this.GrdSkills.Size = new System.Drawing.Size(246, 341);
             this.GrdSkills.TabIndex = 0;
-            // 
-            // SkillName
-            // 
-            this.SkillName.HeaderText = "Skill";
-            this.SkillName.Name = "SkillName";
-            this.SkillName.ReadOnly = true;
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            this.Value.ReadOnly = true;
+            this.GrdSkills.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdSkills_CellValueChanged);
             // 
             // label1
             // 
@@ -775,36 +782,36 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(440, 53);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(68, 17);
+            this.label24.Size = new System.Drawing.Size(72, 17);
             this.label24.TabIndex = 22;
-            this.label24.Text = "MaxMana";
+            this.label24.Text = "Max Mana";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(302, 53);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(63, 17);
+            this.label23.Size = new System.Drawing.Size(43, 17);
             this.label23.TabIndex = 21;
-            this.label23.Text = "curMana";
+            this.label23.Text = "Mana";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(440, 11);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(52, 17);
+            this.label22.Size = new System.Drawing.Size(56, 17);
             this.label22.TabIndex = 20;
-            this.label22.Text = "MaxHP";
+            this.label22.Text = "Max HP";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(302, 9);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(49, 17);
+            this.label21.Size = new System.Drawing.Size(27, 17);
             this.label21.TabIndex = 19;
-            this.label21.Text = "CurHP";
+            this.label21.Text = "HP";
             // 
             // label17
             // 
@@ -861,6 +868,7 @@
             this.TxtCharName.Name = "TxtCharName";
             this.TxtCharName.Size = new System.Drawing.Size(160, 22);
             this.TxtCharName.TabIndex = 8;
+            this.TxtCharName.TextChanged += new System.EventHandler(this.txtCharName_TextChanged);
             // 
             // Inv
             // 
@@ -1273,11 +1281,12 @@
             this.GrdPlayerDat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PDatValue,
             this.Commands});
-            this.GrdPlayerDat.Location = new System.Drawing.Point(20, 6);
+            this.GrdPlayerDat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GrdPlayerDat.Location = new System.Drawing.Point(3, 3);
             this.GrdPlayerDat.Name = "GrdPlayerDat";
             this.GrdPlayerDat.RowHeadersWidth = 300;
             this.GrdPlayerDat.RowTemplate.Height = 24;
-            this.GrdPlayerDat.Size = new System.Drawing.Size(668, 364);
+            this.GrdPlayerDat.Size = new System.Drawing.Size(1106, 567);
             this.GrdPlayerDat.TabIndex = 3;
             // 
             // PDatValue
@@ -2048,6 +2057,24 @@
             this.tabPage3.Text = "RawData";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // lblRawDataAddress
+            // 
+            this.lblRawDataAddress.AutoSize = true;
+            this.lblRawDataAddress.Location = new System.Drawing.Point(728, 106);
+            this.lblRawDataAddress.Name = "lblRawDataAddress";
+            this.lblRawDataAddress.Size = new System.Drawing.Size(0, 17);
+            this.lblRawDataAddress.TabIndex = 2;
+            // 
+            // BtnCopyLevArkRaw
+            // 
+            this.BtnCopyLevArkRaw.Location = new System.Drawing.Point(720, 22);
+            this.BtnCopyLevArkRaw.Name = "BtnCopyLevArkRaw";
+            this.BtnCopyLevArkRaw.Size = new System.Drawing.Size(88, 48);
+            this.BtnCopyLevArkRaw.TabIndex = 1;
+            this.BtnCopyLevArkRaw.Text = "Copy to Clipboard";
+            this.BtnCopyLevArkRaw.UseVisualStyleBackColor = true;
+            this.BtnCopyLevArkRaw.Click += new System.EventHandler(this.BtnCopyLevArkRaw_Click);
+            // 
             // GrdLevArkRaw
             // 
             this.GrdLevArkRaw.AllowUserToAddRows = false;
@@ -2408,15 +2435,16 @@
             this.saveFileDialog1.DefaultExt = "png";
             this.saveFileDialog1.Filter = "(*.png)|*.png";
             // 
-            // BtnCopyLevArkRaw
+            // SkillName
             // 
-            this.BtnCopyLevArkRaw.Location = new System.Drawing.Point(720, 22);
-            this.BtnCopyLevArkRaw.Name = "BtnCopyLevArkRaw";
-            this.BtnCopyLevArkRaw.Size = new System.Drawing.Size(88, 48);
-            this.BtnCopyLevArkRaw.TabIndex = 1;
-            this.BtnCopyLevArkRaw.Text = "Copy to Clipboard";
-            this.BtnCopyLevArkRaw.UseVisualStyleBackColor = true;
-            this.BtnCopyLevArkRaw.Click += new System.EventHandler(this.BtnCopyLevArkRaw_Click);
+            this.SkillName.HeaderText = "Skill";
+            this.SkillName.Name = "SkillName";
+            this.SkillName.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
             // 
             // PicMap
             // 
@@ -2462,14 +2490,6 @@
             this.ImgOut.TabIndex = 55;
             this.ImgOut.TabStop = false;
             this.ImgOut.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ImgOut_MouseClick);
-            // 
-            // lblRawDataAddress
-            // 
-            this.lblRawDataAddress.AutoSize = true;
-            this.lblRawDataAddress.Location = new System.Drawing.Point(728, 106);
-            this.lblRawDataAddress.Name = "lblRawDataAddress";
-            this.lblRawDataAddress.Size = new System.Drawing.Size(0, 17);
-            this.lblRawDataAddress.TabIndex = 2;
             // 
             // main
             // 
@@ -2608,8 +2628,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SkillName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TabPage LevArk;
         private System.Windows.Forms.Label label33;
@@ -2770,6 +2788,9 @@
         public System.Windows.Forms.NumericUpDown numMapZoom;
         private System.Windows.Forms.Button BtnCopyLevArkRaw;
         private System.Windows.Forms.Label lblRawDataAddress;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SkillName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
     }
 }
 

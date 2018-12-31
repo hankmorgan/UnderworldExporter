@@ -1286,7 +1286,8 @@ public class Magic : UWEBase
                 DoorControl dc = hit.transform.gameObject.GetComponent<DoorControl>();
                 if (dc != null)
                 {
-                    dc.Spike();
+                    // dc.Spike();      
+                    dc.quality = (short)(Mathf.Min(40, dc.quality + 10));
                 }
             }
         }
@@ -1583,17 +1584,17 @@ public class Magic : UWEBase
             poison.init(EffectID, caster);
             //Apply a impact effect to the npc
             Impact.SpawnHitImpact(Impact.ImpactMagic(), npc.GetImpactPoint(), poison.impactFrameStart, poison.impactFrameEnd);
+            npc.ApplyAttack((short)((poison.BaseDamage / poison.counter)),caster);
 
-
-            int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
-            if (EffectSlot != -1)
-            {
-                SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
-                sep.Value = poison.BaseDamage;
-                sep.counter = poison.counter;
-                sep.isNPC = true;
-                sep.Go();
-            }
+            //int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+            //if (EffectSlot != -1)
+            //{
+            //    SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
+            //    sep.Value = poison.BaseDamage;
+            //    sep.counter = poison.counter;
+            //    sep.isNPC = true;
+            //    sep.Go();
+            //}
         }
     }
 
@@ -2606,18 +2607,19 @@ public class Magic : UWEBase
     /// <param name="EffectSlot">Effect slot.</param>
     public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
     {//Poison
-        if (caster.name != UWCharacter.Instance.name)
-        {
-            SpellProp_Poison spp = new SpellProp_Poison();
-            spp.init(EffectID, caster);
-            SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
-            sep.Value = spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
-            sep.counter = spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
+     //if (caster.name != UWCharacter.Instance.name)
+     //{
+     //    SpellProp_Poison spp = new SpellProp_Poison();
+     //    spp.init(EffectID, caster);
+     //    SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+     //    sep.Value = spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
+     //    sep.counter = spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
 
-            sep.isNPC = true;
-            sep.Go();
-        }
+        //    sep.isNPC = true;
+        //    sep.Go();
+        //}
         //	
+        Cast_NoxYlem(caster, EffectID);
 
     }
 
@@ -4319,7 +4321,6 @@ public class Magic : UWEBase
                     }
                     break;
                 }
-
 
             //Magic
             case SpellEffect.UW1_Spell_Effect_MagicProtection:

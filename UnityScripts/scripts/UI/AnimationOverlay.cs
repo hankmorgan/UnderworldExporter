@@ -46,20 +46,12 @@ public class AnimationOverlay : UWEBase {
     {
         get
         {
-           if (OverlayIndex!=0)
+            if (CurrentTileMap().Overlays[OverlayIndex].duration<65535)
             {
-                if (CurrentTileMap().Overlays[OverlayIndex].duration<65535)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return false;
             }
-           else
+            else
             {
-               // Debug.Log("No overlay found for this " + name);
                 return true;
             }
         }
