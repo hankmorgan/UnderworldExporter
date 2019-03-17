@@ -96,10 +96,10 @@ public class UWCharacter : Character
     public float braking;
     public float bounceMult = 1f;
     public Vector3 BounceMovement;
-    /// <summary>
-    /// Is the player fleeing from combat (recently attacked and no weapon drawn)
-    /// </summary>
-    public bool Fleeing;
+    // <summary>
+    // Is the player fleeing from combat (recently attacked and no weapon drawn)
+    // </summary>
+    //public bool Fleeing;
     /// <summary>
     /// Weapon drawn music
     /// </summary>
@@ -201,7 +201,13 @@ public class UWCharacter : Character
     /// <summary>
     /// Player character near death.
     /// </summary>
-    public bool Injured;
+    public bool Injured
+    {
+        get
+        {
+            return UWCharacter.Instance.CurVIT <= 10;
+        }
+    }
     /// <summary>
     /// PLayer character is death
     /// </summary>
@@ -482,7 +488,7 @@ public class UWCharacter : Character
     private static void ResurrectCommon()
     {
         UWCharacter.Instance.Death = false;
-        UWCharacter.Instance.Fleeing = false;
+        //UWCharacter.Instance.Fleeing = false;
         if (MusicController.instance != null)
         {
             MusicController.instance.Combat = false;
@@ -1354,12 +1360,27 @@ public class UWCharacter : Character
         {
             FoodLevel = 0;
         }
+        if (FoodLevel < 10 && UWCharacter.AutoEat)
+        {
+           AutoEatFood();//automatically eat some food
+        }
         if (FoodLevel < 3)
         {
-            ApplyDamage(1);//Starving damage.
+            ApplyDamage(1);//Starvation damage.
         }
     }
 
+    /// <summary>
+    /// Automatically eats food when hungry.
+    /// </summary>
+    void AutoEatFood()
+    {
+        ObjectInteraction foodtoeat = UWCharacter.Instance.playerInventory.playerContainer.findItemOfCategory(ObjectInteraction.FOOD);
+        if (foodtoeat !=null)
+        {
+            foodtoeat.Use();
+        }
+    }
 
     public string GetFedStatus()
     {//Returns the string representing the players hunger.

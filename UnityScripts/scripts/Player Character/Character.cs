@@ -97,9 +97,10 @@ public class Character : UWEBase {
 
 	public static bool Invincible;
     public static bool AutoKeyUse;
+    public static bool AutoEat;
 
-	//For controlling switching between mouse look and interaction
-	[Header("Mouselook")]	
+    //For controlling switching between mouse look and interaction
+    [Header("Mouselook")]	
 	public MouseLook XAxis;
 	public MouseLook YAxis;
 	public bool MouseLookEnabled;

@@ -702,6 +702,42 @@ public class Container : UWEBase
         }
         return null;
     }
+
+
+    /// <summary>
+    /// Finds the first item of a particular category in the container.
+    /// </summary>
+    /// <returns>The name of the object that matches the itemid</returns>
+    /// <param name="itemid">Itemid.</param>
+    public ObjectInteraction findItemOfCategory(int Category)
+    {
+        for (short i = 0; i <= MaxCapacity(); i++)
+        {
+            ObjectInteraction obj = GetItemAt(i);
+            if (obj != null)
+            {
+                if (obj.GetItemType() == Category)
+                {
+                    return obj;
+                }
+                else
+                {
+                    if (obj.GetItemType() == ObjectInteraction.CONTAINER)
+                    {
+                        ObjectInteraction ans = obj.GetComponent<Container>().findItemOfCategory(Category);
+                        if (ans != null)
+                        {
+                            return ans;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
+
     /// <summary>
     /// Counts the number of items in the container..
     /// </summary>

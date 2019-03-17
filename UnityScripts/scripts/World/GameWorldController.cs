@@ -1830,6 +1830,11 @@ public class GameWorldController : UWEBase
                                             UWCharacter.AutoKeyUse = (entries[1] == "1");
                                             break;
                                         }
+                                    case "AUTOEAT":
+                                        {
+                                            UWCharacter.AutoEat = (entries[1] == "1");
+                                            break;
+                                        }
                                 }
                             }
                         }

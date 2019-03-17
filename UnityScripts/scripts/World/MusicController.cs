@@ -192,6 +192,8 @@ public class MusicController : UWEBase
 
     public static MusicController instance;
 
+    public static NPC_Audio npc_audio = new NPC_Audio();
+
     void Awake()
     {
         instance = this;
@@ -312,22 +314,22 @@ public class MusicController : UWEBase
             InIntro = false;
             Combat = true;
         }
-        if ((UWCharacter.Instance.CurVIT <= 10) && (Combat == true))
-        {
-            UWCharacter.Instance.Injured = true;
-        }
-        else
-        {
-            UWCharacter.Instance.Injured = false;
-        }
-        if ((Combat == true) && (UWCharacter.Instance.WeaponDrawn == false))
-        {
-            UWCharacter.Instance.Fleeing = true;
-        }
-        else
-        {
-            UWCharacter.Instance.Fleeing = false;
-        }
+        //if ((UWCharacter.Instance.CurVIT <= 10) && (Combat == true))
+        //{
+        //    UWCharacter.Instance.Injured = true;
+        //}
+        //else
+        //{
+        //    UWCharacter.Instance.Injured = false;
+        //}
+        //if ((Combat == true) && (UWCharacter.Instance.WeaponDrawn == false))
+        //{
+        //    UWCharacter.Instance.Fleeing = true;
+        //}
+        //else
+        //{
+        //    UWCharacter.Instance.Fleeing = false;
+        //}
         if (SpecialClip == true)
         {
             if (Aud.isPlaying == false)
@@ -459,11 +461,11 @@ public class MusicController : UWEBase
         {
             return MUS_MAP;
         }
-        else if (UWCharacter.Instance.Injured)
+        else if (UWCharacter.Instance.Injured && Combat)
         {
             return MUS_INJURED;
         }
-        else if (UWCharacter.Instance.Fleeing)
+        else if (UWCharacter.Instance.WeaponDrawn == false && Combat)
         {
             return MUS_FLEEING;
         }
