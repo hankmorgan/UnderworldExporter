@@ -5,6 +5,7 @@ Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity.
 
 Release 1.09
 
+*On Hiatus until Winter 2019
 
 Contents
 	0 - Notes on this release
