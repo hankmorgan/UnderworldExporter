@@ -328,7 +328,7 @@ public class Magic : UWEBase
         }
         if (caster.GetComponent<NPC>() != null)
         {
-            if (caster.GetComponent<NPC>().gtargName == "_Gronk")
+            if (caster.GetComponent<NPC>().gtarg == UWCharacter.Instance.gameObject)
             {
                 return (UWCharacter.Instance.GetImpactPoint() - caster.GetComponent<UWEBase>().GetImpactPoint()).normalized;
             }

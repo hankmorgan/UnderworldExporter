@@ -13,7 +13,7 @@ public class ScrollButtonInventory : Scrollbutton
     public void OnClick()
     {
         ScrollValue = (short)(ScrollValue + stepSize);
-        int noOfItems = UWCharacter.Instance.playerInventory.GetCurrentContainer().CountItems();
+        int noOfItems = UWCharacter.Instance.playerInventory.currentContainer.CountItems();
         MaxScrollValue = (short)(Mathf.Max((((noOfItems)/ 4)-1) * 4,8));
         if (ScrollValue > MaxScrollValue)
         {

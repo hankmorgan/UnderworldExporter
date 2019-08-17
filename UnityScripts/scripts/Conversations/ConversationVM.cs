@@ -1203,7 +1203,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         ///Give movement back to the player			
         UWCharacter.Instance.playerMotor.enabled = true;
 
-        Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+        Container cn = UWCharacter.Instance.playerInventory.currentContainer;
 
         ///Return any items in the trade area to their owner
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
@@ -2983,7 +2983,7 @@ parameters:   none
 description:  declines trade offer (?)
 */
 
-        Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+        Container cn = UWCharacter.Instance.playerInventory.currentContainer;
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
@@ -3150,7 +3150,7 @@ return value: returns 1 when player persuaded the NPC, 0 else
     /// Use only in bartering as this does not refer to the master object list!
     private void TakeFromNPC(NPC npc, int SlotNo)
     {
-        Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+        Container cn = UWCharacter.Instance.playerInventory.currentContainer;
         TradeSlot npcSlot = UWHUD.instance.npcTrade[SlotNo];
         //GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
         if (npcSlot.isSelected())
@@ -3217,7 +3217,7 @@ return value: returns 1 when player persuaded the NPC, 0 else
     /// </summary>
     void RestorePCsInventory(NPC npc)
     {
-        Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+        Container cn = UWCharacter.Instance.playerInventory.currentContainer;
         for (int i = 0; i <= TradeSlot.TradeSlotUBound; i++)
         {
             TradeSlot pcSlot = UWHUD.instance.playerTrade[i];
@@ -3644,8 +3644,8 @@ return value appears to have something to do with if the door is broken or not.
                     if (attitude == 0)
                     {
                         Col.gameObject.GetComponent<NPC>().npc_gtarg = 5;
-                        Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
-                        Col.gameObject.GetComponent<NPC>().gtargName = UWCharacter.Instance.gameObject.name;
+                        //XG  Col.gameObject.GetComponent<NPC>().gtarg = UWCharacter.Instance.gameObject;
+                        //Col.gameObject.GetComponent<NPC>().gtargName = UWCharacter.Instance.gameObject.name;
                         Col.gameObject.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_attack_5;
                     }
                 }

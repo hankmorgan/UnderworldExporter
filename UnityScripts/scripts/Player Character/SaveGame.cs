@@ -2715,7 +2715,7 @@ public class SaveGame : Loader
 
     static void ResetUI()
     {
-        UWCharacter.Instance.playerInventory.currentContainer = "_Gronk";
+        UWCharacter.Instance.playerInventory.currentContainer = UWCharacter.Instance.playerInventory.playerContainer; // "_Gronk";
         UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture = UWCharacter.Instance.playerInventory.Blank;
         UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(false);
         UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);

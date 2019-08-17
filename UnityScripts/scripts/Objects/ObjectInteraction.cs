@@ -994,7 +994,7 @@ public class ObjectInteraction : UWEBase{
         if ((isQuant == false) || ((isQuant) && (link == 1)) || (isEnchanted))
         {//the last of the item or is not a quantity;
             this.GetComponent<object_base>().DestroyEvent();
-            Container cn = UWCharacter.Instance.playerInventory.GetCurrentContainer();
+            Container cn = UWCharacter.Instance.playerInventory.currentContainer;
             //Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
             if (!cn.RemoveItemFromContainer(this))
             {//Try and remove from the paperdoll if not found in the current container.

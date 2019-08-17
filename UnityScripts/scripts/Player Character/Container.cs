@@ -31,7 +31,7 @@ public class Container : UWEBase
     /// <summary>
     /// What container is above this one. For passing objects out of the container in the inventory
     /// </summary>
-    public string ContainerParent;
+    public Container ContainerParent;
 
    // public ObjectLoader objList;
 
@@ -238,15 +238,14 @@ public class Container : UWEBase
             this.isOpenOnPanel = true;
             ContainerParent = UWCharacter.Instance.playerInventory.currentContainer;
         }
-        UWCharacter.Instance.playerInventory.currentContainer = this.name;
-        if (UWCharacter.Instance.playerInventory.currentContainer == "")
+        UWCharacter.Instance.playerInventory.currentContainer = this;
+        if (UWCharacter.Instance.playerInventory.currentContainer == null)
         {
-            UWCharacter.Instance.playerInventory.currentContainer = UWCharacter.Instance.name;
-            this.ContainerParent = UWCharacter.Instance.name;
+            UWCharacter.Instance.playerInventory.currentContainer = UWCharacter.Instance.playerInventory.playerContainer;// UWCharacter.Instance.name;
+            this.ContainerParent = UWCharacter.Instance.playerInventory.playerContainer;// UWCharacter.Instance.name;
         }
         for (short i = 0; i < 8; i++)
         {
-            //string sItem = GetItemAt(i);
             UWCharacter.Instance.playerInventory.SetObjectAtSlot((short)(i + 11), GetItemAt(i));
         }
         UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
@@ -542,7 +541,7 @@ public class Container : UWEBase
                 else
                 {
                     //Remove to prevent item duplication
-                    removeFromContainer(UWCharacter.Instance.playerInventory.GetCurrentContainer(), CurrentObjectInHand);
+                    removeFromContainer(UWCharacter.Instance.playerInventory.currentContainer, CurrentObjectInHand);
                 }
                 CurrentObjectInHand = null;
                 //UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;

@@ -100,9 +100,31 @@ public class NPC : MobileObject
 
     private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
 
-    [Header("AI Target")]
-    public GameObject gtarg;
-    public string gtargName;
+   // [Header("AI Target")]
+   /// <summary>
+   /// An object representing the npc_gtarg
+   /// </summary>
+    public GameObject gtarg
+    {
+        get
+        {
+            if (npc_gtarg<5)
+            {
+                return UWCharacter.Instance.gameObject;
+            }
+            else
+            {
+                if (npc_gtarg<256)
+                {
+                    if (CurrentObjectList().objInfo[npc_gtarg].instance!=null)
+                    {
+                        return CurrentObjectList().objInfo[npc_gtarg].instance.gameObject;
+                    }                   
+                }
+                return null;
+            }            
+        }
+    }
 
     [Header("Combat")]
     public AttackStages AttackState;
@@ -908,19 +930,20 @@ public class NPC : MobileObject
                     //This will mean the NPC will turn on the player after combat?
                     if (UWCharacter.Instance.LastEnemyToHitMe != null)
                     {
-                        gtarg = UWCharacter.Instance.LastEnemyToHitMe;
+                        //XG gtarg = UWCharacter.Instance.LastEnemyToHitMe;
                         npc_goal = (short)npc_goals.npc_goal_attack_5;
                         npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
-                        gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
+                        //gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
                     }
                 }
                 if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
                 {
-                    //slasher of veils in the void needs to get rowdy.
+                    //slasher of veils in the void needs to get rowdy. Otherwise he is passive when this level loas
                     if (item_id == 124)
                     {
                         npc_goal = (short)npc_goals.npc_goal_attack_5;
-                        gtarg = UWCharacter.Instance.gameObject;
+                        npc_gtarg = 1;
+                        //XG gtarg = UWCharacter.Instance.gameObject;
                     }
                 }
             }
@@ -1374,53 +1397,54 @@ public class NPC : MobileObject
         //Update GTarg
         if (npc_gtarg <= 5)//PC
         {
-            gtargName = "_Gronk";
-            if (gtarg == null)
-            {
-                gtarg = UWCharacter.Instance.transform.gameObject;
-            }
-            else
-            {
-                if (gtarg.name != "_Gronk")
-                {
-                    gtarg = UWCharacter.Instance.transform.gameObject;
-                }
-            }
+            //gtarg = UWCharacter.Instance.transform.gameObject;
+            ////////gtargName = "_Gronk";
+            //////if (gtarg == null)
+            //////{
+            //////    gtarg = UWCharacter.Instance.transform.gameObject;
+            //////}
+            //////else
+            //////{
+            //////    if (gtarg.name != "_Gronk")
+            //////    {
+            //////        gtarg = UWCharacter.Instance.transform.gameObject;
+            //////    }
+            //////}
         }
         else
         {
-            //Inbuilt NPC Gtargs not supported.
+            //////////Inbuilt NPC Gtargs not supported.
+            ////////if (gtarg == null)
+            ////////{
+            ////////    if (gtargName != "")
+            ////////    {
+            ////////        gtarg = GameObject.Find(gtargName);
+            ////////    }
+            ////////}
+            ////////else
+            ////////{
+            ////////    if (gtarg.name != gtargName)
+            ////////    {
+            ////////        gtarg = GameObject.Find(gtargName);
+            ////////    }
+            ////////}
             if (gtarg == null)
             {
-                if (gtargName != "")
-                {
-                    gtarg = GameObject.Find(gtargName);
-                }
-            }
-            else
-            {
-                if (gtarg.name != gtargName)
-                {
-                    gtarg = GameObject.Find(gtargName);
-                }
-            }
-            if (gtarg == null)
-            {
-                //I no longer have a goal. Check what I was doing and revert to a different state.
+                //I no longer have a goal target. Check what I was doing and revert to a different state.
                 //Cases
-                if ((npc_attitude > 0) && (gtargName != "") && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
+                if ((npc_attitude > 0) && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
                 {
                     //NPC Follower who has killed their target->Follow player.
                     npc_goal = (short)npc_goals.npc_goal_follow;
                     npc_gtarg = 1;
-                    gtarg = UWCharacter.Instance.transform.gameObject;
+                    //XG gtarg = UWCharacter.Instance.transform.gameObject;
                 }
-                if ((npc_attitude == 0) && (gtargName != "") && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
+                if ((npc_attitude == 0) && ((npc_goal == (short)npc_goals.npc_goal_attack_5) || (npc_goal == (short)npc_goals.npc_goal_attack_9)))
                 {
                     //NPC Enemy who has defeated their attacker->Focus on player.
                     npc_goal = (short)npc_goals.npc_goal_attack_5;
                     npc_gtarg = 1;
-                    gtarg = UWCharacter.Instance.transform.gameObject;
+                    //XG gtarg = UWCharacter.Instance.transform.gameObject;
                 }
             }
         }
@@ -1477,8 +1501,8 @@ public class NPC : MobileObject
                     npc_attitude = 0;//Make the npc angry with the player.
                                      //Assumes the player has attacked
                     npc_gtarg = 1;
-                    gtarg = UWCharacter.Instance.gameObject;
-                    gtargName = gtarg.name;
+                    //XG gtarg = UWCharacter.Instance.gameObject;
+                    //gtargName = gtarg.name;
                     npc_goal = (short)npc_goals.npc_goal_attack_5;
                 }
                 if (npc_hp < 5)//Low health. 20% Chance for morale break

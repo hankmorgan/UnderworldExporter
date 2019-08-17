@@ -555,14 +555,12 @@ public class UWCharacter : Character
         }
         else
         {
-
             if (playerInventory.ObjectInHand == null)
             {
                 return useRange;
             }
             else
             {//Test if this is a pole. If so extend the use range by a small amount.
-                //ObjectInteraction objIntInHand = playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
                 if (playerInventory.ObjectInHand != null)
                 {
                     switch (playerInventory.ObjectInHand.GetItemType())
@@ -595,7 +593,7 @@ public class UWCharacter : Character
         playerMotor.movement.maxForwardSpeed = flySpeed * speedMultiplier;
         playerMotor.movement.maxSidewaysSpeed = playerMotor.movement.maxForwardSpeed * 2 / 3;
         playerMotor.movement.maxBackwardsSpeed = playerMotor.movement.maxForwardSpeed / 3;
-        //if (((Input.GetKeyDown (KeyCode.R)) || (Input.GetKey (KeyCode.R))) && (WindowDetectUW.WaitingForInput == false)) {
+
         if (((Input.GetKeyDown(KeyBindings.instance.FlyUp)) || (Input.GetKey(KeyBindings.instance.FlyUp))) && (WindowDetectUW.WaitingForInput == false))
         {
             //Fly up
@@ -686,9 +684,7 @@ public class UWCharacter : Character
         //Check if player is on ground.
         Grounded = IsGrounded();
 
-
-        TerrainAndCurrentsUpdate();
-    
+        TerrainAndCurrentsUpdate();    
 
         base.Update();
 
@@ -993,7 +989,7 @@ public class UWCharacter : Character
         {
             if ((playerInventory != null))
             {
-                if (playerInventory.GetCurrentContainer() != null)
+                if (playerInventory.currentContainer != null)
                 {
                     playerInventory.Refresh();
                     InventoryReady = true;
@@ -1691,7 +1687,6 @@ public class UWCharacter : Character
                 {
                     if (IsGaramonTime())
                     {//PLay a garamon dream
-                     //PlayGaramonDream(Quest.instance.GaramonDream++);	
                         UWHUD.instance.MessageScroll.Add("You dream of the guardian");
                     }
                     else
@@ -1765,6 +1760,11 @@ public class UWCharacter : Character
         }
     }
 
+
+    /// <summary>
+    /// Play the dream that happens when you sleep after sniffing incense.
+    /// </summary>
+    /// <param name="incense"></param>
     void IncenseDream(ObjectInteraction incense)
     {
         UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject, true);
@@ -1772,25 +1772,12 @@ public class UWCharacter : Character
         Cutscene_Incense d = UWHUD.instance.gameObject.AddComponent<Cutscene_Incense>();
         UWHUD.instance.CutScenesFull.cs = d;
         UWHUD.instance.CutScenesFull.Begin();
-        /*		switch (Quest.instance.getIncenseDream ()) {
-case 0:
-    UWHUD.instance.CutScenesFull.SetAnimationFile = "cs013_n01";
-    break;
-case 1:
-    UWHUD.instance.CutScenesFull.SetAnimationFile = "cs014_n01";
-    break;
-case 2:
-    UWHUD.instance.CutScenesFull.SetAnimationFile = "cs015_n01";
-    break;*/
-        //	}
-        /*
-                Cutscene_Dream_3 d3 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_3>();
-                UWHUD.instance.CutScenesFull.cs=d3;
-                UWHUD.instance.CutScenesFull.Begin();
+     }
 
-         */
-    }
 
+    /// <summary>
+    /// Special dream after taking a dream plant that teleports you to the dreamworld.
+    /// </summary>
     void DreamTravelToVoid()
     {
         //Record the players position.	
@@ -1805,6 +1792,9 @@ case 2:
         Quest.instance.QuestVariables[48] = 1;
     }
 
+    /// <summary>
+    /// Returns you from the void when your dream is finished.
+    /// </summary>
     void DreamTravelFromVoid()
     {
         Quest.instance.InDreamWorld = false;
@@ -1813,6 +1803,10 @@ case 2:
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 25));
     }
 
+
+    /// <summary>
+    /// Regenerates the characters stats when sleeping and advances game world
+    /// </summary>
     void SleepRegen()
     {
         for (int i = UWCharacter.Instance.Fatigue; i < 29; i = i + 3)//Sleep restores at a rate of 3 points per hour
@@ -1846,31 +1840,42 @@ case 2:
         }
     }
 
+    /// <summary>
+    /// Determines if hostile monsters are in the area of the player.
+    /// </summary>
+    /// <returns></returns>
     private bool CheckForMonsters()
     {//Finds monsters in the area.
+        foreach (Collider Col in Physics.OverlapSphere(this.transform.position, 10.0f))
+        {
+            if (Col.gameObject.GetComponent<NPC>() != null)
+            {
+                NPC npc = Col.gameObject.GetComponent<NPC>();
+                if (npc.npc_attitude == NPC.AI_ATTITUDE_HOSTILE)
+                {
+                    return true;
+                }               
+            }
+        }
         return false;
     }
 
+
+    /// <summary>
+    /// CHecks if we are due for a dream from garamon.
+    /// </summary>
+    /// Each time you get a garamon dreamer the appointment is advanced + 1 days. 
+    /// <returns></returns>
     private bool IsGaramonTime()
-    {//Is it time for a garamon dream
-     //if (Quest.instance.isTybalDead)
-     //{
+    {
         if (Quest.instance.GaramonDream == 6)
         {
             return true;//All done.
         }
         if (Quest.instance.GaramonDream == 7)
         {
-            return true;//Tybal is dead. Time to play a dream.
+            return true;//Tybal is dead. Time to play a special dream to refflect that.
         }
-        //}
-        //else
-        //{
-        //	if (Quest.instance.GaramonDream>7)
-        //	{
-        //		return false;//All done until tybal is dead.
-        //	}	
-        //}
 
         if (GameClock.day() >= Quest.instance.DayGaramonDream)
         {
@@ -1882,6 +1887,10 @@ case 2:
         }
     }
 
+    /// <summary>
+    /// Play the next Garamon Dream.
+    /// </summary>
+    /// <param name="dreamIndex"></param>
     void PlayGaramonDream(int dreamIndex)
     {
         int DaysToWait = 0;
@@ -1953,6 +1962,11 @@ case 2:
         Quest.instance.DayGaramonDream = GameClock.day() + DaysToWait;
     }
 
+    /// <summary>
+    /// Restores health and mana when the character wakes up
+    /// </summary>
+    /// Rise and Shine Sunshine
+    /// <param name="sunshine"></param>
     static void RestoreHealthMana(UWCharacter sunshine)
     {
         sunshine.CurVIT += Random.Range(1, 40);
@@ -1968,12 +1982,20 @@ case 2:
         }
     }
 
+    /// <summary>
+    /// Wakes up the player and tells them how they slept.
+    /// </summary>
+    /// <param name="sunshine"></param>
     public static void WakeUp(UWCharacter sunshine)
     {//Todo: Test the quality of the sleep and check for monster interuption.
         RestoreHealthMana(sunshine);
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 18));
     }
 
+    /// <summary>
+    /// Special screen effect for sleep.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SleepDelay()
     {
         UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject, true);
@@ -2163,10 +2185,6 @@ case 2:
             }
             return true;
         }
-        //if (Grounded)
-        //{
-        //	Debug.Log("moving from grounded to not grounded");
-        //}
         return false;
     }
 
@@ -2234,5 +2252,4 @@ case 2:
             }
         }
     }
-
 }

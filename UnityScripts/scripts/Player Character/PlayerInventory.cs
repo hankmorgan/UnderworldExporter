@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 public class PlayerInventory : UWEBase
 {
-     //public int ItemCounter=0;
-    //public int game;
     /// <summary>
     /// What is the current active object held by the player
     /// </summary>
@@ -30,7 +28,6 @@ public class PlayerInventory : UWEBase
         }
     }
     
-
     public bool JustPickedup; //Has the player just picked something up.
                              
     public ObjectInteraction _sHelm;
@@ -255,7 +252,7 @@ public class PlayerInventory : UWEBase
     private ObjectInteraction[] LightGameObjects = new ObjectInteraction[4];
 
     //public bool atTopLevel;
-    public string currentContainer;
+    public Container currentContainer;
     private UWCharacter playerUW;
 
     public Texture2D Blank;
@@ -692,14 +689,20 @@ public class PlayerInventory : UWEBase
                     setBackPack(slotIndex - 11, sObject);
                     //sBackPack[slotIndex - 11] = sObject;
                     //bBackPack[slotIndex - 11] = true;
-                    Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
-                    cn.items[ContainerOffset + slotIndex - 11] = sObject;
+                    //Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
+                    //cn.items[ContainerOffset + slotIndex - 11] = sObject;
+                    currentContainer.items[ContainerOffset + slotIndex - 11] = sObject;
                     PutItemAwayEvent(slotIndex);
                 }
                 break;
         }
     }
 
+
+    /// <summary>
+    /// Clears the specified container slot
+    /// </summary>
+    /// <param name="slotIndex"></param>
     public void ClearSlot(short slotIndex)
     {
         switch (slotIndex)
@@ -767,57 +770,13 @@ public class PlayerInventory : UWEBase
                 break;
         }
     }
+ 
 
-   /* public void Refresh(int slotIndex)
-    {//Force a refresh of a specific slot
-        switch (slotIndex)
-        {
-            case 0://Helm
-                bHelm = true;
-                break;
-            case 1://Chest
-                bChest = true;
-                break;
-            case 2://Leggings
-                bLegs = true;
-                break;
-            case 3://Boots
-                bBoots = true;
-                break;
-            case 4://Gloves
-                bGloves = true;
-                break;
-            case 5://ShoulderRight
-                bRightShoulder = true;
-                break;
-            case 6://ShoulderLeft
-                bLeftShoulder = true;
-                break;
-            case 7://HandRight
-                bRightHand = true;
-                break;
-            case 8://HandLeft
-                bLeftHand = true;
-                break;
-            case 9://RingRight
-                bRightRing = true;
-                break;
-            case 10://RingLeft
-                bLeftRing = true;
-                break;
-            default://Inventory Slots 0-7		
-                if ((slotIndex >= 11) && (slotIndex <= 18))
-                {
-                    bBackPack[slotIndex - 11] = true;
-                }
-                break;
-        }
-    }*/
-
+    /// <summary>
+    /// Force a full refresh of inventory display
+    /// </summary>
     public void Refresh()
-    {//Force a full refresh of inventory display
-        Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
-
+    {
         sHelm = sHelm;
         sChest = sChest;
         sLegs = sLegs;
@@ -832,17 +791,7 @@ public class PlayerInventory : UWEBase
         sLeftRing = sLeftRing;
         for (short i = 11; i <= 18; i++)
         {
-            //if (cn.GetItemAt((short)(ContainerOffset + i - 11))!=null)
-           // {
-                // sBackPack[i - 11] = cn.GetItemAt((short)(ContainerOffset + i - 11));
-                setBackPack(i - 11, cn.GetItemAt((short)(ContainerOffset + i - 11)));
-            //}
-            //else
-            //{
-            //   setBackPack(i - 11, null);
-                //sBackPack[i - 11] = null;
-            //}           
-            //bBackPack[i - 11] = true;
+            setBackPack(i - 11, currentContainer.GetItemAt((short)(ContainerOffset + i - 11)));
         }
         if (UWHUD.instance.Encumberance.enabled == true)
         {
@@ -852,48 +801,41 @@ public class PlayerInventory : UWEBase
     }
 
 
+    /// <summary>
+    /// Swaps two objects with each other
+    /// </summary>
+    /// <param name="ObjInSlot"></param>
+    /// <param name="slotIndex"></param>
+    /// <param name="cObjectInHand"></param>
     public void SwapObjects(ObjectInteraction ObjInSlot, short slotIndex, ObjectInteraction cObjectInHand)
-    {//Swaps specified game object as the slot wth the passed object
-     //Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
-        Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
-        //cn.RemoveItemFromContainer(cObjectInHand);
-        //cn.RemoveItemFromContainer(ObjInSlot.name);//removed this when adding equip events.
+    {
         RemoveItem(ObjInSlot);
         SetObjectAtSlot(slotIndex, cObjectInHand);
         if (slotIndex >= 11)
         {
-            cn.AddItemToContainer(cObjectInHand, ContainerOffset + slotIndex - 11);
+            currentContainer.AddItemToContainer(cObjectInHand, ContainerOffset + slotIndex - 11);
         }
         ObjectInHand = ObjInSlot;
-        //UWHUD.instance.CursorIcon = ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-        //playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
         Refresh();
     }
 
-
+    /// <summary>
+    /// Removes item from the paperdoll and/or the player inventory.
+    /// </summary>
+    /// <param name="ObjectToRemove"></param>
+    /// <returns></returns>
     public bool RemoveItem(ObjectInteraction ObjectToRemove)
-    {//Removes the item from the paperdoll and/or the player inventory.
-        //string ObjectName = "";
-       // if (ObjectToRemove !=null)
-        //{
-       //     ObjectName = ObjectToRemove.name;
-       // } 
-        //else
-        //{
-        //    return false;
-        //}
+    {
         if (sHelm == ObjectToRemove)
         {
             UnEquipItemEvent(0);
             sHelm = null;
-            //bHelm = true;
             return true;
         }
         if (sChest == ObjectToRemove)
         {
             UnEquipItemEvent(1);
             sChest = null;
-            //bChest = true;
             return true;
         }
 
@@ -901,7 +843,6 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(2);
             sLegs = null;
-            //bLegs = true;
             return true;
         }
 
@@ -909,7 +850,6 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(3);
             sBoots = null;
-            //bBoots = true;
             return true;
         }
 
@@ -917,23 +857,18 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(4);
             sGloves = null;
-            //bGloves = true;
             return true;
         }
 
         if (sRightShoulder == ObjectToRemove)
         {
-            //UnEquipItemEvent(5);
             sRightShoulder = null;
-            //bRightShoulder = true;
             return true;
         }
 
         if (sLeftShoulder == ObjectToRemove)
         {
-            //UnEquipItemEvent(6);
             sLeftShoulder = null;
-            //bLeftShoulder = true;
             return true;
         }
 
@@ -941,7 +876,6 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(7);
             sRightHand = null;
-            //bRightHand = true;
             return true;
         }
 
@@ -949,7 +883,6 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(8);
             sLeftHand = null;
-            //bLeftHand = true;
             return true;
         }
 
@@ -957,7 +890,6 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(9);
             sRightRing = null;
-            //bRightRing = true;
             return true;
         }
 
@@ -965,9 +897,9 @@ public class PlayerInventory : UWEBase
         {
             UnEquipItemEvent(10);
             sLeftRing = null;
-            //bLeftRing = true;
             return true;
         }
+
         Container backpack = this.playerContainer;
         for (int i = 0; i < 8; i++)
         {
@@ -976,16 +908,14 @@ public class PlayerInventory : UWEBase
                 if (ObjectToRemove == backpack.items[i])
                 {
                     backpack.items[i] = null;
-                    //sBackPack[i] = null;
                     setBackPack(i, null);
-                    //bBackPack[i] = true;
                     return true;
                 }
             }
         }
 
         foreach (Transform child in GameWorldController.instance.InventoryMarker.transform)
-        {
+        {//Remove from subcontainers if the object is still not found
             if (child.GetComponent<Container>() != null)
             {
                 Container cn = child.GetComponent<Container>();
@@ -1002,27 +932,6 @@ public class PlayerInventory : UWEBase
                 }
             }
         }
-        //Try and find it in the entire inventory
-        /*if (Container.RemoveItemFromSubContainers(playerContainer,ObjectName))
-		{
-			return true;
-		}
-		//Try and find it as a container subitem on the paperdoll slots.
-		for( int i=0; i<=10;i++)
-		{
-			GameObject obj = GetGameObjectAtSlot(i);
-			if (obj!=null)
-			{
-				if (obj.GetComponent<Container>()!=null)
-				{
-					if (Container.RemoveItemFromSubContainers(obj.GetComponent<Container>(),ObjectName))
-					{
-						return true;
-					} 
-				}
-			}
-
-		}*/
         return false;
     }
 
@@ -1168,26 +1077,22 @@ public class PlayerInventory : UWEBase
         ObjectInHand = obj;
     }*/
 
-    public Container GetCurrentContainer()
-    {
-        return GameObject.Find(currentContainer).GetComponent<Container>();
-    }
+    //public Container GetCurrentContainer()
+    //{
+    //    return GameObject.Find(currentContainer).GetComponent<Container>();
+    //}
 
-    public GameObject GetGameObject(string name)
-    {
-        return GameObject.Find(name);
-    }
+    //public GameObject GetGameObject(string name)
+    //{
+    //    return GameObject.Find(name);
+    //}
 
     public void PutItemAwayEvent(short slotNo)
     {
         ObjectInteraction objInt = GetObjectIntAtSlot(slotNo);
         if (objInt != null)
         {
-            //ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
-           // if (objInt != null)
-            //{
-                objInt.PutItemAway(slotNo);
-           // }
+            objInt.PutItemAway(slotNo);
         }
     }
 

@@ -272,7 +272,7 @@ public class InventorySlot : GuiBase
         {
             if (DoNotPickup == false)
             {
-                if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(), slotIndex, false))
+                if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.currentContainer, slotIndex, false))
                 {
                     UWCharacter.Instance.playerInventory.SetObjectAtSlot(slotIndex, CurrentObjectInHand);
                     //UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
@@ -292,7 +292,7 @@ public class InventorySlot : GuiBase
                     //No effect occurred. Swap the two objects.
                     if (DoNotPickup == false)
                     {
-                        if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(), slotIndex, true))
+                        if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.currentContainer, slotIndex, true))
                         {
                             UWCharacter.Instance.playerInventory.SwapObjects(ObjectUsedOn, slotIndex, CurrentObjectInHand);
                         }
@@ -306,8 +306,8 @@ public class InventorySlot : GuiBase
                     //UWCharacter.Instance.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
                     if (this.slotIndex >= 11)
                     {
-                        Container cn = GameObject.Find(UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
-                        cn.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
+                        //Container cn = GameObject.Find(UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
+                        UWCharacter.Instance.playerInventory.currentContainer.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
                     }
                     UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
                 }
@@ -364,7 +364,6 @@ public class InventorySlot : GuiBase
         //Code for when I right click in pickup mode.
         if (UWCharacter.Instance.playerInventory.GetObjectAtSlot(slotIndex) != null)
         {//Special case for opening containers in pickup mode.
-         //ObjectUsedOn = UWCharacter.Instance.playerInventory.GetGameObjectAtSlot(slotIndex);
             if ((CurrentObjectInHand == null))
             {
                 if (ObjectUsedOn.GetComponent<Container>() != null)
@@ -374,11 +373,9 @@ public class InventorySlot : GuiBase
                         return;
                     }
                     CurrentObjectInHand = ObjectUsedOn.GetComponent<ObjectInteraction>();
-                    //UWHUD.instance.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
                     if (this.slotIndex >= 11)
                     {
-                        //Container cn = //;GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-                        UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
+                        UWCharacter.Instance.playerInventory.currentContainer.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
                     }
                     UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
                     return;
@@ -390,11 +387,10 @@ public class InventorySlot : GuiBase
         {
             if (DoNotPickup == false)
             {
-                if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(), slotIndex, false))
+                if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.currentContainer, slotIndex, false))
                 {
                     UWCharacter.Instance.playerInventory.SetObjectAtSlot(slotIndex, CurrentObjectInHand);
-                    //UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-                    CurrentObjectInHand = null;// .ObjectInHand="";
+                    CurrentObjectInHand = null;
                 }
             }
         }
@@ -416,7 +412,7 @@ public class InventorySlot : GuiBase
                     {
                         //TODO: Make sure this works with Equipment slots
                         //No effect occurred. Swap the two objects.
-                        if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.GetCurrentContainer(), slotIndex, true))
+                        if (Container.TestContainerRules(UWCharacter.Instance.playerInventory.currentContainer, slotIndex, true))
                         {
                             UWCharacter.Instance.playerInventory.SwapObjects(ObjectUsedOn, slotIndex, CurrentObjectInHand);
                             UWCharacter.Instance.playerInventory.Refresh();
@@ -437,7 +433,7 @@ public class InventorySlot : GuiBase
                             //UWHUD.instance.CursorIcon= objIntUsedOn.GetInventoryDisplay ().texture;
                             if (this.slotIndex >= 11)
                             {
-                                UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
+                                UWCharacter.Instance.playerInventory.currentContainer.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
                             }
                             UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
                         }
@@ -511,7 +507,7 @@ public class InventorySlot : GuiBase
                 //UWHUD.instance.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
                 if (this.slotIndex >= 11)
                 {
-                    UWCharacter.Instance.playerInventory.GetCurrentContainer().RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
+                    UWCharacter.Instance.playerInventory.currentContainer.RemoveItemFromContainer(UWCharacter.Instance.playerInventory.ContainerOffset + this.slotIndex - 11);
                 }
                 UWCharacter.Instance.playerInventory.ClearSlot(this.slotIndex);
             }
