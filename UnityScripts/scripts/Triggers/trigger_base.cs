@@ -64,5 +64,20 @@ public class trigger_base : traptrigger_base {
 			Activate(this.gameObject);
 		}
 	}
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        if (link != 0)
+        {
+            GameObject target = ObjectLoader.getGameObjectAt(link);
+            if (target != null)
+            {
+                Gizmos.DrawLine(transform.position, target.transform.position);
+            }
+        }
+    }
+
 }
 

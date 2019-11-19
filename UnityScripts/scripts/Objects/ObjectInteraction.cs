@@ -2122,6 +2122,12 @@ public class ObjectInteraction : UWEBase{
             case LOCKPICK:
                 myObj.AddComponent<LockPick>();
                 break;
+
+            case LOCK:
+                myObj.AddComponent<a_lock> ();
+                CreateSprite = false;
+                break;
+
             case SILVERSEED:                               
                 if (currObj.item_id == 458)
                 {
@@ -2690,9 +2696,11 @@ public class ObjectInteraction : UWEBase{
                 }
             }
         }
+#if (UNITY_EDITOR)
+        CreateSprite = true;//always create a sprite in editor mode.
+#endif
 
-
-        if ((CreateSprite) || (EditorMode))
+        if ((CreateSprite) || (EditorMode) )
         {
             //GameObject SpriteObj =
             objInt.ObjectSprite= ObjectInteraction.CreateObjectGraphics(myObj, _RES + "/Sprites/Objects/Objects_" + currObj.item_id, !RemoveBillboard);

@@ -276,4 +276,19 @@ public class ButtonHandler : Decal
 
         return base.UseObjectOnVerb_Inv();
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        if (link != 0)
+        {
+            GameObject target = ObjectLoader.getGameObjectAt(link);
+            if (target != null)
+            {
+                Gizmos.DrawLine(transform.position, target.transform.position);
+            }
+        }
+    }
+
 }

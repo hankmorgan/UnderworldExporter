@@ -21,4 +21,5 @@ public class traptrigger_base : object_base {
     {
         return ((flags >> 1) & 0x1) == 1;
     }
+
 }

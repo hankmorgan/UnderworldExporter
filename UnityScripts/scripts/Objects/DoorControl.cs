@@ -103,10 +103,26 @@ public class DoorControl : object_base {
 			}
 		}
 
-		/// <summary>
-		/// Is the door opened or closed. Determined by item id
-		/// </summary>
-		public bool state()
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+
+        if (link != 0)
+        {
+            GameObject target = ObjectLoader.getGameObjectAt(link);
+            if (target != null)
+            {
+                Gizmos.DrawLine(transform.position, target.transform.position);
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Is the door opened or closed. Determined by item id
+    /// </summary>
+    public bool state()
 		{
 				switch (item_id)	
 				{
