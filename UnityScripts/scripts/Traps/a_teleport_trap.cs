@@ -78,4 +78,18 @@ public class a_teleport_trap : trap_base {
     {
         return true;
     }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        if (zpos==0)
+        {
+            float targetX = (float)quality * 1.2f + 0.6f;
+            float targetY = (float)owner * 1.2f + 0.6f;
+            Vector3 pos = CurrentTileMap().getTileVector(quality, owner);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, pos);
+        }
+
+    }
 }

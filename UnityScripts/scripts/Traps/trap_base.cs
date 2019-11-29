@@ -155,7 +155,7 @@ public class trap_base : traptrigger_base
         }
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
 

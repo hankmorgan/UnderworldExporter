@@ -3,27 +3,28 @@ using System.Collections;
 using System.Text;
 using System.IO;
 
+/// <summary>
+/// Generic Object behaviour settings. Eg can it be moved what sprite to use etc.
+/// </summary>
 public class ObjectMasters {
-	//An implementation of the similar system for the exporter
-	//public string PathToConfig;
+
     public struct ObjectProperties
     {
-        public int index;// = new int[500];
-        public int objClass;// = new int[500];   //For Shock
-        public int objSubClass;// = new int[500];
-        public int objSubClassIndex;// = new int[500];
-        public int type;// = new int[500];   //from above
-        public string desc;// = new string[500];
-        public int WorldIndex;// = new int[500];
-        public int isUseable;// = new int[500];
-        public int isMoveable;// = new int[500];
-        public int InventoryIndex;// = new int[500];
+        public int index;
+        public int objClass;
+        public int objSubClass;
+        public int objSubClassIndex;
+        public int type;
+        public string desc;//description to use for the gameobject name
+        public int WorldIndex;//What sprite to use when the object appears in gane
+        public bool isUseable;
+        public bool isMoveable;
+        public int InventoryIndex;
         public int startFrame;// = new int[500];//Start frame for animated objects.
         public int useSprite;// = new int[500];//Uses a sprite and also the no of anim frames for animated objects.
     };
 
     public ObjectProperties[] objProp;
-
 
 	public ObjectMasters()
 	{
@@ -33,52 +34,1043 @@ public class ObjectMasters {
 		{
 		case Loader.GAME_UWDEMO:
 		case Loader.GAME_UW1:
-			Load(Application.dataPath + "//..//uw1_object_settings.txt");//Shared settings
+            initUW1ObjectProps();
 			break;
-
 		default:
-			Load(Application.dataPath + "//..//" + UWEBase._RES.ToLower() + "_object_settings.txt");
-			break;
+            initUW2ObjectProps();
+            break;
 		}	
 	}
 
-	private bool Load(string fileName)
-	{
-		int i=0;
-		string line;
-		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		//string PreviousKey="";
-		//string PreviousValue="";
-		using (fileReader)
-		{
-			// While there's lines left in the text file, do this:
-			do
-			{
-				line = fileReader.ReadLine();
-				if (line != null)
-				{
-					string[] entries = line.Split('\t');
-					if (entries.Length > 0)
-					{
-						objProp[i].index = int.Parse(entries[0]);
-                        objProp[i].objClass= int.Parse(entries[1]);  //For Shock
-                        objProp[i].objSubClass= int.Parse(entries[2]);
-                        objProp[i].objSubClassIndex= int.Parse(entries[3]);
-                        objProp[i].type =  int.Parse (entries[4]);
-                        objProp[i].desc= entries[5];
-                        objProp[i].WorldIndex= int.Parse (entries[6]);
-                        objProp[i].InventoryIndex= int.Parse (entries[7]);
-                        objProp[i].isUseable= int.Parse(entries[8]);
-                        objProp[i].isMoveable= int.Parse(entries[9]);
-                        objProp[i].startFrame= int.Parse(entries[10]);
-                        objProp[i].useSprite= int.Parse(entries[11]);
-						i++;
-					}
-				}
-			}
-			while (line != null);
-			fileReader.Close();
-			return true;
-		}
-	}
+	//private bool Load(string fileName)
+	//{
+	//	int i=0;
+	//	string line;
+	//	StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
+	//	//string PreviousKey="";
+	//	//string PreviousValue="";
+	//	using (fileReader)
+	//	{
+	//		// While there's lines left in the text file, do this:
+	//		do
+	//		{
+	//			line = fileReader.ReadLine();
+	//			if (line != null)
+	//			{
+	//				string[] entries = line.Split('\t');
+	//				if (entries.Length > 0)
+	//				{
+	//					objProp[i].index = int.Parse(entries[0]);
+ //                       objProp[i].objClass= int.Parse(entries[1]);  //For Shock
+ //                       objProp[i].objSubClass= int.Parse(entries[2]);
+ //                       objProp[i].objSubClassIndex= int.Parse(entries[3]);
+ //                       objProp[i].type =  int.Parse (entries[4]);
+ //                       objProp[i].desc= entries[5];
+ //                       objProp[i].WorldIndex= int.Parse (entries[6]);
+ //                       objProp[i].InventoryIndex= int.Parse (entries[7]);
+ //                       objProp[i].isUseable= int.Parse(entries[8]);
+ //                       objProp[i].isMoveable= int.Parse(entries[9]);
+ //                       objProp[i].startFrame= int.Parse(entries[10]);
+ //                       objProp[i].useSprite= int.Parse(entries[11]);
+	//					i++;
+	//				}
+	//			}
+	//		}
+	//		while (line != null);
+	//		fileReader.Close();
+	//		return true;
+	//	}
+	//}
+
+
+    /// <summary>
+    /// Set up properties.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="objClass"></param>
+    /// <param name="objSubClass"></param>
+    /// <param name="objSubClassIndex"></param>
+    /// <param name="type"></param>
+    /// <param name="desc"></param>
+    /// <param name="WorldIndex"></param>
+    /// <param name="InventoryIndex"></param>
+    /// <param name="isUseable"></param>
+    /// <param name="isMoveable"></param>
+    /// <param name="startFrame"></param>
+    /// <param name="useSprite"></param>
+    void InitObj(
+        int index,
+        int objClass,
+        int objSubClass,
+        int objSubClassIndex,
+        int type,
+        string desc,
+        int WorldIndex,
+        int InventoryIndex,
+        bool isUseable,
+        bool isMoveable,
+        int startFrame,
+        int useSprite)
+    {
+        objProp[index].index = index;
+        objProp[index].objClass = objClass;  //For Shock
+        objProp[index].objSubClass = objSubClass;
+        objProp[index].objSubClassIndex = objSubClassIndex;
+        objProp[index].type = type;
+        objProp[index].desc = desc;
+        objProp[index].WorldIndex = WorldIndex;
+        objProp[index].InventoryIndex = InventoryIndex;
+        objProp[index].isUseable = isUseable;
+        objProp[index].isMoveable = isMoveable;
+        objProp[index].startFrame = startFrame;
+        objProp[index].useSprite = useSprite;
+    }
+
+
+
+    /// <summary>
+    /// Initialises the object settings for UW1.
+    /// </summary>
+    void initUW1ObjectProps()
+    {
+        InitObj(0, 0, 0, 0, ObjectInteraction.WEAPON, "a_hand_axe", 0, 0, true, true, 0, 1);
+        InitObj(1, 0, 0, 0, ObjectInteraction.WEAPON, "a_battle_axe", 1, 1, true, true, 0, 1);
+        InitObj(2, 0, 0, 0, ObjectInteraction.WEAPON, "an_axe", 2, 2, true, true, 0, 1);
+        InitObj(3, 0, 0, 0, ObjectInteraction.WEAPON, "a_dagger", 3, 3, true, true, 0, 1);
+        InitObj(4, 0, 0, 0, ObjectInteraction.WEAPON, "a_shortsword", 4, 4, true, true, 0, 1);
+        InitObj(5, 0, 0, 0, ObjectInteraction.WEAPON, "a_longsword", 5, 5, true, true, 0, 1);
+        InitObj(6, 0, 0, 0, ObjectInteraction.WEAPON, "a_broadsword", 6, 6, true, true, 0, 1);
+        InitObj(7, 0, 0, 0, ObjectInteraction.WEAPON, "a_cudgel", 7, 7, true, true, 0, 1);
+        InitObj(8, 0, 0, 0, ObjectInteraction.WEAPON, "a_light_mace", 8, 8, true, true, 0, 1);
+        InitObj(9, 0, 0, 0, ObjectInteraction.WEAPON, "a_mace", 9, 9, true, true, 0, 1);
+        InitObj(10, 0, 0, 0, ObjectInteraction.WEAPON, "a_shiny_sword", 10, 10, true, true, 0, 1);
+        InitObj(11, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_axe", 11, 11, true, true, 0, 1);
+        InitObj(12, 0, 0, 0, ObjectInteraction.WEAPON, "a_black_sword", 12, 12, true, true, 0, 1);
+        InitObj(13, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_sword", 13, 13, true, true, 0, 1);
+        InitObj(14, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_mace", 14, 14, true, true, 0, 1);
+        InitObj(15, 0, 0, 0, ObjectInteraction.WEAPON, "a_fist", 15, 15, true, true, 0, 1);
+        InitObj(16, 0, 0, 0, ObjectInteraction.INVENTORY, "a_sling_stone", 16, 16, true, true, 0, 1);
+        InitObj(17, 0, 0, 0, ObjectInteraction.INVENTORY, "a_crossbow_bolt", 17, 17, true, true, 0, 1);
+        InitObj(18, 0, 0, 0, ObjectInteraction.ARROW, "an_arrow", 18, 18, true, true, 0, 1);
+        InitObj(19, 0, 0, 0, ObjectInteraction.INVENTORY, "a_stone", 19, 19, true, true, 0, 1);
+        InitObj(20, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_fireball", 20, 20, true, true, 0, 1);
+        InitObj(21, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_lightning_bolt", 21, 21, true, true, 0, 1);
+        InitObj(22, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "acid", 22, 22, true, true, 0, 1);
+        InitObj(23, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_magic_missile", 23, 23, true, true, 0, 1);
+        InitObj(24, 0, 0, 0, ObjectInteraction.WEAPON, "a_sling", 24, 24, true, true, 0, 1);
+        InitObj(25, 0, 0, 0, ObjectInteraction.WEAPON, "a_bow", 25, 25, true, true, 0, 1);
+        InitObj(26, 0, 0, 0, ObjectInteraction.WEAPON, "a_crossbow", 26, 26, true, true, 0, 1);
+        InitObj(27, 0, 0, 0, ObjectInteraction.WEAPON, "unknown", 27, 27, true, true, 0, 1);
+        InitObj(28, 0, 0, 0, ObjectInteraction.WEAPON, "unknown", 28, 28, true, true, 0, 1);
+        InitObj(29, 0, 0, 0, ObjectInteraction.WEAPON, "unknown", 29, 29, true, true, 0, 1);
+        InitObj(30, 0, 0, 0, ObjectInteraction.WEAPON, "unknown", 30, 30, true, true, 0, 1);
+        InitObj(31, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_bow", 31, 31, true, true, 0, 1);
+        InitObj(32, 0, 0, 0, ObjectInteraction.ARMOUR, "a_leather_vest", 32, 32, true, true, 0, 1);
+        InitObj(33, 0, 0, 0, ObjectInteraction.ARMOUR, "a_mail_shirt", 33, 33, true, true, 0, 1);
+        InitObj(34, 0, 0, 0, ObjectInteraction.ARMOUR, "a_breastplate", 34, 34, true, true, 0, 1);
+        InitObj(35, 0, 0, 0, ObjectInteraction.LEGGINGS, "leather_leggings_pairs_of_leather_leggings", 35, 35, true, true, 0, 1);
+        InitObj(36, 0, 0, 0, ObjectInteraction.LEGGINGS, "mail_leggings_pairs_of_mail_leggings", 36, 36, true, true, 0, 1);
+        InitObj(37, 0, 0, 0, ObjectInteraction.LEGGINGS, "plate_leggings_pairs_of_plate_leggings", 37, 37, true, true, 0, 1);
+        InitObj(38, 0, 0, 0, ObjectInteraction.GLOVES, "leather_gloves_pairs_of_leather_gloves", 38, 38, true, true, 0, 1);
+        InitObj(39, 0, 0, 0, ObjectInteraction.GLOVES, "chain_gauntlets_pairs_of_chain_gauntlets", 39, 39, true, true, 0, 1);
+        InitObj(40, 0, 0, 0, ObjectInteraction.GLOVES, "plate_gauntlets_pairs_of_plate_gauntlets", 40, 40, true, true, 0, 1);
+        InitObj(41, 0, 0, 0, ObjectInteraction.BOOT, "leather_boots_pairs_of_leather_boots", 41, 41, true, true, 0, 1);
+        InitObj(42, 0, 0, 0, ObjectInteraction.BOOT, "chain_boots_pairs_of_chain_boots", 42, 42, true, true, 0, 1);
+        InitObj(43, 0, 0, 0, ObjectInteraction.BOOT, "plate_boots_pairs_of_plate_boots", 43, 43, true, true, 0, 1);
+        InitObj(44, 0, 0, 0, ObjectInteraction.HELM, "a_leather_cap", 44, 44, true, true, 0, 1);
+        InitObj(45, 0, 0, 0, ObjectInteraction.HELM, "a_chain_cowl", 45, 45, true, true, 0, 1);
+        InitObj(46, 0, 0, 0, ObjectInteraction.HELM, "a_helmet", 46, 46, true, true, 0, 1);
+        InitObj(47, 0, 0, 0, ObjectInteraction.BOOT, "a_pair_of_dragon_skin_boots_pairs_of_dragon_skin_boots", 47, 47, true, true, 0, 1);
+        InitObj(48, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 48, 48, true, true, 0, 1);
+        InitObj(49, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 49, 49, true, true, 0, 1);
+        InitObj(50, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 50, 50, true, true, 0, 1);
+        InitObj(51, 0, 0, 0, ObjectInteraction.RING, "unknownring1", 51, 51, true, true, 0, 1);
+        InitObj(52, 0, 0, 0, ObjectInteraction.RING, "unknownring2", 52, 52, true, true, 0, 1);
+        InitObj(53, 0, 0, 0, ObjectInteraction.RING, "unknownring3", 53, 53, true, true, 0, 1);
+        InitObj(54, 0, 0, 0, ObjectInteraction.RING, "an_iron_ring", 54, 54, true, true, 0, 1);
+        InitObj(55, 0, 0, 0, ObjectInteraction.SHIELD, "a_shiny_shield", 55, 55, true, true, 0, 1);
+        InitObj(56, 0, 0, 0, ObjectInteraction.RING, "a_gold_ring", 56, 56, true, true, 0, 1);
+        InitObj(57, 0, 0, 0, ObjectInteraction.RING, "a_silver_ring", 57, 57, true, true, 0, 1);
+        InitObj(58, 0, 0, 0, ObjectInteraction.RING, "a_red_ring", 58, 58, true, true, 0, 1);
+        InitObj(59, 0, 0, 0, ObjectInteraction.SHIELD, "a_tower_shield", 59, 59, true, true, 0, 1);
+        InitObj(60, 0, 0, 0, ObjectInteraction.SHIELD, "a_wooden_shield", 60, 60, true, true, 0, 1);
+        InitObj(61, 0, 0, 0, ObjectInteraction.SHIELD, "a_small_shield", 61, 61, true, true, 0, 1);
+        InitObj(62, 0, 0, 0, ObjectInteraction.SHIELD, "a_buckler", 62, 62, true, true, 0, 1);
+        InitObj(63, 0, 0, 0, ObjectInteraction.SHIELD, "a_jeweled_shield", 63, 63, true, true, 0, 1);
+        InitObj(64, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_rotworm", 64, 64, true, false, 0, 1);
+        InitObj(65, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_flesh_slug", 65, 65, true, false, 0, 1);
+        InitObj(66, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_cave_bat", 66, 66, true, false, 0, 1);
+        InitObj(67, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_rat", 67, 67, true, false, 0, 1);
+        InitObj(68, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_spider", 68, 68, true, false, 0, 1);
+        InitObj(69, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_acid_slug", 69, 69, true, false, 0, 1);
+        InitObj(70, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 70, 70, true, false, 0, 1);
+        InitObj(71, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 71, 71, true, false, 0, 1);
+        InitObj(72, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_rat", 72, 72, true, false, 0, 1);
+        InitObj(73, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_vampire_bat", 73, 73, true, false, 0, 1);
+        InitObj(74, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_skeleton", 74, 74, true, false, 0, 1);
+        InitObj(75, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_imp", 75, 75, true, false, 0, 1);
+        InitObj(76, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 76, 76, true, false, 0, 1);
+        InitObj(77, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 77, 77, true, false, 0, 1);
+        InitObj(78, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 78, 78, true, false, 0, 1);
+        InitObj(79, 0, 0, 0, ObjectInteraction.NPC_VOID, "etherealvoidcreatures", 79, 79, true, false, 0, 1);
+        InitObj(80, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 80, 80, true, false, 0, 1);
+        InitObj(81, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mongbat", 81, 81, true, false, 0, 1);
+        InitObj(82, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_bloodworm", 82, 82, true, false, 0, 1);
+        InitObj(83, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_wolf_spider", 83, 83, true, false, 0, 1);
+        InitObj(84, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mountainman_mountainmen", 84, 84, true, false, 0, 1);
+        InitObj(85, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_green_lizardman_green_lizardmen", 85, 85, true, false, 0, 1);
+        InitObj(86, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mountainman_mountainmen", 86, 86, true, false, 0, 1);
+        InitObj(87, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_lurker", 87, 87, true, false, 0, 1);
+        InitObj(88, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_red_lizardman_red_lizardmen", 88, 88, true, false, 0, 1);
+        InitObj(89, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_gray_lizardman_red_lizardmen", 89, 89, true, false, 0, 1);
+        InitObj(90, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_outcast", 90, 90, true, false, 0, 1);
+        InitObj(91, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_headless_headlesses", 91, 91, true, false, 0, 1);
+        InitObj(92, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dread_spider", 92, 92, true, false, 0, 1);
+        InitObj(93, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 93, 93, true, false, 0, 1);
+        InitObj(94, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 94, 94, true, false, 0, 1);
+        InitObj(95, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 95, 95, true, false, 0, 1);
+        InitObj(96, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_troll", 96, 96, true, false, 0, 1);
+        InitObj(97, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghost", 97, 97, true, false, 0, 1);
+        InitObj(98, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 98, 98, true, false, 0, 1);
+        InitObj(99, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghoul", 99, 99, true, false, 0, 1);
+        InitObj(100, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghost", 100, 100, true, false, 0, 1);
+        InitObj(101, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghost", 101, 101, true, false, 0, 1);
+        InitObj(102, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_gazer", 102, 102, true, false, 0, 1);
+        InitObj(103, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 103, 103, true, false, 0, 1);
+        InitObj(104, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 104, 104, true, false, 0, 1);
+        InitObj(105, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dark_ghoul", 105, 105, true, false, 0, 1);
+        InitObj(106, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 106, 106, true, false, 0, 1);
+        InitObj(107, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 107, 107, true, false, 0, 1);
+        InitObj(108, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 108, 108, true, false, 0, 1);
+        InitObj(109, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 109, 109, true, false, 0, 1);
+        InitObj(110, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghoul", 110, 110, true, false, 0, 1);
+        InitObj(111, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_feral_troll", 111, 111, true, false, 0, 1);
+        InitObj(112, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_great_troll", 112, 112, true, false, 0, 1);
+        InitObj(113, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dire_ghost", 113, 113, true, false, 0, 1);
+        InitObj(114, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_earth_golem", 114, 114, true, false, 0, 1);
+        InitObj(115, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mage", 115, 115, true, false, 0, 1);
+        InitObj(116, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_deep_lurker", 116, 116, true, false, 0, 1);
+        InitObj(117, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_shadow_beast", 117, 117, true, false, 0, 1);
+        InitObj(118, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_reaper", 118, 118, true, false, 0, 1);
+        InitObj(119, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_stone_golem", 119, 119, true, false, 0, 1);
+        InitObj(120, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fire_elemental", 120, 120, true, false, 0, 1);
+        InitObj(121, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_metal_golem", 121, 121, true, false, 0, 1);
+        InitObj(122, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_wisp", 122, 122, true, false, 0, 1);
+        InitObj(123, 0, 0, 0, ObjectInteraction.NPC_TYPE, "tybal", 123, 123, true, false, 0, 1);
+        InitObj(124, 0, 0, 0, ObjectInteraction.NPC_TYPE, "slasher_of_veils", 124, 124, true, false, 0, 1);
+        InitObj(125, 0, 0, 0, ObjectInteraction.NPC_VOID, "etherealvoidcreatures", 125, 125, true, false, 0, 1);
+        InitObj(126, 0, 0, 0, ObjectInteraction.NPC_VOID, "etherealvoidcreatures", 126, 126, true, false, 0, 1);
+        InitObj(127, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_adventurer", 127, 127, true, false, 0, 1);
+        InitObj(128, 0, 0, 0, ObjectInteraction.CONTAINER, "a_sack", 128, 128, true, true, 0, 1);
+        InitObj(129, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_sack", 129, 129, true, true, 0, 1);
+        InitObj(130, 0, 0, 0, ObjectInteraction.CONTAINER, "a_pack", 130, 130, true, true, 0, 1);
+        InitObj(131, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_pack", 131, 131, true, true, 0, 1);
+        InitObj(132, 0, 0, 0, ObjectInteraction.CONTAINER, "a_box_boxes", 132, 132, true, true, 0, 1);
+        InitObj(133, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_box_open_boxes", 133, 133, true, true, 0, 1);
+        InitObj(134, 0, 0, 0, ObjectInteraction.CONTAINER, "a_pouch_pouches", 134, 134, true, true, 0, 1);
+        InitObj(135, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_pouch_pouches", 135, 135, true, true, 0, 1);
+        InitObj(136, 0, 0, 0, ObjectInteraction.CONTAINER, "a_map_case", 136, 136, true, true, 0, 1);
+        InitObj(137, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_map_case", 137, 137, true, true, 0, 1);
+        InitObj(138, 0, 0, 0, ObjectInteraction.CONTAINER, "a_gold_coffer", 138, 138, true, true, 0, 1);
+        InitObj(139, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_gold_coffer", 139, 139, true, true, 0, 1);
+        InitObj(140, 0, 0, 0, ObjectInteraction.CONTAINER, "an_urn", 140, 140, true, true, 0, 1);
+        InitObj(141, 0, 0, 0, ObjectInteraction.CONTAINER, "a_quiver", 141, 141, true, true, 0, 1);
+        InitObj(142, 0, 0, 0, ObjectInteraction.CONTAINER, "a_bowl", 142, 142, true, true, 0, 1);
+        InitObj(143, 0, 0, 0, ObjectInteraction.RUNEBAG, "a_rune_bag", 143, 143, true, true, 0, 1);
+        InitObj(144, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lantern", 144, 144, true, true, 1, 1);
+        InitObj(145, 0, 0, 0, ObjectInteraction.TORCH, "a_torch_torches", 145, 145, true, true, 1, 1);
+        InitObj(146, 0, 0, 0, ObjectInteraction.TORCH, "a_candle", 146, 146, true, true, 1, 1);
+        InitObj(147, 0, 0, 0, ObjectInteraction.TORCH, "a_taper", 147, 147, true, true, 1, 1);
+        InitObj(148, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lit_lantern", 148, 148, true, true, 1, 1);
+        InitObj(149, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_torch", 149, 149, true, true, 1, 1);
+        InitObj(150, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_candle", 150, 150, true, true, 1, 1);
+        InitObj(151, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_taper", 151, 151, true, true, 1, 1);
+        InitObj(152, 0, 0, 0, ObjectInteraction.CLUTTER, "a_wand", 152, 152, true, true, 0, 1);
+        InitObj(153, 0, 0, 0, ObjectInteraction.CLUTTER, "a_wand", 153, 153, true, true, 0, 1);
+        InitObj(154, 0, 0, 0, ObjectInteraction.CLUTTER, "a_wand", 154, 154, true, true, 0, 1);
+        InitObj(155, 0, 0, 0, ObjectInteraction.CLUTTER, "a_wand", 155, 155, true, true, 0, 1);
+        InitObj(156, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_wand", 156, 156, true, true, 0, 1);
+        InitObj(157, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_wand", 157, 157, true, true, 0, 1);
+        InitObj(158, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_wand", 158, 158, true, true, 0, 1);
+        InitObj(159, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_wand", 159, 159, true, true, 0, 1);
+        InitObj(160, 0, 0, 0, ObjectInteraction.TREASURE, "a_coin", 160, 160, true, true, 0, 1);
+        InitObj(161, 0, 0, 0, ObjectInteraction.TREASURE, "a_gold_coin", 161, 161, true, true, 0, 1);
+        InitObj(162, 0, 0, 0, ObjectInteraction.INVENTORY, "a_ruby_rubies", 162, 162, true, true, 0, 1);
+        InitObj(163, 0, 0, 0, ObjectInteraction.INVENTORY, "a_red_gem", 163, 163, true, true, 0, 1);
+        InitObj(164, 0, 0, 0, ObjectInteraction.INVENTORY, "a_small_blue_gem", 164, 164, true, true, 0, 1);
+        InitObj(165, 0, 0, 0, ObjectInteraction.INVENTORY, "a_large_blue_gem", 165, 165, true, true, 0, 1);
+        InitObj(166, 0, 0, 0, ObjectInteraction.INVENTORY, "a_sapphire", 166, 166, true, true, 0, 1);
+        InitObj(167, 0, 0, 0, ObjectInteraction.INVENTORY, "an_emerald", 167, 167, true, true, 0, 1);
+        InitObj(168, 0, 0, 0, ObjectInteraction.INVENTORY, "an_amulet", 168, 168, true, true, 0, 1);
+        InitObj(169, 0, 0, 0, ObjectInteraction.INVENTORY, "a_goblet", 169, 169, true, true, 0, 1);
+        InitObj(170, 0, 0, 0, ObjectInteraction.CLUTTER, "a_sceptre", 170, 170, true, true, 0, 1);
+        InitObj(171, 0, 0, 0, ObjectInteraction.INVENTORY, "a_gold_chain", 171, 171, true, true, 0, 1);
+        InitObj(172, 0, 0, 0, ObjectInteraction.INVENTORY, "a_gold_plate", 172, 172, true, true, 0, 1);
+        InitObj(173, 0, 0, 0, ObjectInteraction.INVENTORY, "an_ankh_pendant", 173, 173, true, true, 0, 1);
+        InitObj(174, 0, 0, 0, ObjectInteraction.INVENTORY, "a_shiny_cup", 174, 174, true, true, 0, 1);
+        InitObj(175, 0, 0, 0, ObjectInteraction.INVENTORY, "a_large_gold_nugget", 175, 175, true, true, 0, 1);
+        InitObj(176, 0, 0, 0, ObjectInteraction.FOOD, "a_piece_of_meat_pieces_of_meat", 176, 176, true, true, 0, 1);
+        InitObj(177, 0, 0, 0, ObjectInteraction.FOOD, "a_loaf_of_bread_loaves_of_bread", 177, 177, true, true, 0, 1);
+        InitObj(178, 0, 0, 0, ObjectInteraction.FOOD, "a_piece_of_cheese_pieces_of_cheese", 178, 178, true, true, 0, 1);
+        InitObj(179, 0, 0, 0, ObjectInteraction.FOOD, "an_apple", 179, 179, true, true, 0, 1);
+        InitObj(180, 0, 0, 0, ObjectInteraction.FOOD, "an_ear_of_corn_ears_of_corn", 180, 180, true, true, 0, 1);
+        InitObj(181, 0, 0, 0, ObjectInteraction.FOOD, "a_loaf_of_bread_loaves_of_bread", 181, 181, true, true, 0, 1);
+        InitObj(182, 0, 0, 0, ObjectInteraction.FOOD, "a_fish_fish", 182, 182, true, true, 0, 1);
+        InitObj(183, 0, 0, 0, ObjectInteraction.FOOD, "some_popcorn_bunches_of_popcorn", 183, 183, true, true, 0, 1);
+        InitObj(184, 0, 0, 0, ObjectInteraction.FOOD, "a_mushroom", 184, 184, true, true, 0, 1);
+        InitObj(185, 0, 0, 0, ObjectInteraction.FOOD, "a_toadstool", 185, 185, true, true, 0, 1);
+        InitObj(186, 0, 0, 0, ObjectInteraction.DRINK, "a_bottle_of_ale_bottles_of_ale", 186, 186, true, true, 0, 1);
+        InitObj(187, 0, 0, 0, ObjectInteraction.POTIONS, "a_red_potion", 187, 187, true, true, 0, 1);
+        InitObj(188, 0, 0, 0, ObjectInteraction.POTIONS, "a_green_potion", 188, 188, true, true, 0, 1);
+        InitObj(189, 0, 0, 0, ObjectInteraction.DRINK, "a_bottle_of_water_bottles_of_water", 189, 189, true, true, 0, 1);
+        InitObj(190, 0, 0, 0, ObjectInteraction.DRINK, "a_flask_of_port_flasks_of_port", 190, 190, true, true, 0, 1);
+        InitObj(191, 0, 0, 0, ObjectInteraction.FOOD, "a_bottle_of_wine_bottles_of_wine", 191, 191, true, true, 0, 1);
+        InitObj(192, 0, 0, 0, ObjectInteraction.FOOD, "a_plant", 192, 192, true, true, 0, 1);
+        InitObj(193, 0, 0, 0, ObjectInteraction.SCENERY, "some_grass_bunches_of_grass", 193, 193, false, false, 0, 1);
+        InitObj(194, 0, 0, 0, ObjectInteraction.CLUTTER, "a_skull", 194, 194, true, true, 0, 1);
+        InitObj(195, 0, 0, 0, ObjectInteraction.CLUTTER, "a_skull", 195, 195, true, true, 0, 1);
+        InitObj(196, 0, 0, 0, ObjectInteraction.CLUTTER, "a_bone", 196, 196, true, true, 0, 1);
+        InitObj(197, 0, 0, 0, ObjectInteraction.CLUTTER, "a_bone", 197, 197, true, true, 0, 1);
+        InitObj(198, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_bones_piles_of_bones", 198, 198, true, true, 0, 1);
+        InitObj(199, 0, 0, 0, ObjectInteraction.CLUTTER, "some_vines_bunches_of_vines", 199, 199, true, true, 0, 1);
+        InitObj(200, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_axe", 200, 200, true, true, 0, 1);
+        InitObj(201, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_sword", 201, 201, true, true, 0, 1);
+        InitObj(202, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_mace", 202, 202, true, true, 0, 1);
+        InitObj(203, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_shield", 203, 203, true, true, 0, 1);
+        InitObj(204, 0, 0, 0, ObjectInteraction.CLUTTER, "a_piece_of_wood_pieces_of_wood", 204, 204, true, true, 0, 1);
+        InitObj(205, 0, 0, 0, ObjectInteraction.CLUTTER, "a_piece_of_wood_pieces_of_wood", 205, 205, true, true, 0, 1);
+        InitObj(206, 0, 0, 0, ObjectInteraction.FOOD, "a_plant", 206, 206, true, true, 0, 1);
+        InitObj(207, 0, 0, 0, ObjectInteraction.FOOD, "a_plant", 207, 207, true, true, 0, 1);
+        InitObj(208, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris_piles_of_debris", 208, 208, true, true, 0, 1);
+        InitObj(209, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris_piles_of_debris", 209, 209, true, true, 0, 1);
+        InitObj(210, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris_piles_of_debris", 210, 210, true, true, 0, 1);
+        InitObj(211, 0, 0, 0, ObjectInteraction.SCENERY, "a_stalactite", 211, 211, false, false, 0, 1);
+        InitObj(212, 0, 0, 0, ObjectInteraction.FOOD, "a_plant", 212, 212, true, true, 0, 1);
+        InitObj(213, 0, 0, 0, ObjectInteraction.SCENERY, "a_pile_of_debris_piles_of_debris", 213, 213, true, true, 0, 1);
+        InitObj(214, 0, 0, 0, ObjectInteraction.SCENERY, "a_pile_of_debris_piles_of_debris", 214, 214, true, true, 0, 1);
+        InitObj(215, 0, 0, 0, ObjectInteraction.ANVIL, "an_anvil", 215, 215, true, true, 0, 1);
+        InitObj(216, 0, 0, 0, ObjectInteraction.POLE, "a_pole", 216, 216, true, true, 0, 1);
+        InitObj(217, 0, 0, 0, ObjectInteraction.FOOD, "a_dead_rotworm", 217, 217, true, true, 0, 1);
+        InitObj(218, 0, 0, 0, ObjectInteraction.PARTICLE, "some_rubble_piles_of_rubble", 218, 218, true, false, 0, 1);
+        InitObj(219, 0, 0, 0, ObjectInteraction.PARTICLE, "a_pile_of_wood_chips_piles_of_wood_chips", 219, 219, true, false, 0, 1);
+        InitObj(220, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_bones_piles_of_bones", 220, 220, true, true, 0, 1);
+        InitObj(221, 0, 0, 0, ObjectInteraction.SCENERY, "a_blood_stain", 221, 221, false, false, 0, 1);
+        InitObj(222, 0, 0, 0, ObjectInteraction.SCENERY, "a_blood_stain", 222, 222, false, false, 0, 1);
+        InitObj(223, 0, 0, 0, ObjectInteraction.SCENERY, "a_blood_stain", 223, 223, false, false, 0, 1);
+        InitObj(224, 0, 0, 0, ObjectInteraction.INVENTORY, "a_runestone", 224, 224, true, true, 0, 1);
+        InitObj(225, 0, 0, 0, ObjectInteraction.CLUTTER, "the_Key_of_Truth", 225, 225, true, true, 0, 1);
+        InitObj(226, 0, 0, 0, ObjectInteraction.CLUTTER, "the_Key_of_Love", 226, 226, true, true, 0, 1);
+        InitObj(227, 0, 0, 0, ObjectInteraction.CLUTTER, "the_Key_of_Courage", 227, 227, true, true, 0, 1);
+        InitObj(228, 0, 0, 0, ObjectInteraction.CLUTTER, "a_two_part_key", 228, 228, true, true, 0, 1);
+        InitObj(229, 0, 0, 0, ObjectInteraction.CLUTTER, "a_two_part_key", 229, 229, true, true, 0, 1);
+        InitObj(230, 0, 0, 0, ObjectInteraction.CLUTTER, "a_two_part_key", 230, 230, true, true, 0, 1);
+        InitObj(231, 0, 0, 0, ObjectInteraction.CLUTTER, "the_Key_of_Infinity", 231, 231, true, true, 0, 1);
+        InitObj(232, 0, 0, 0, ObjectInteraction.RUNE, "an_An_stone", 224, 232, true, true, 0, 1);
+        InitObj(233, 0, 0, 0, ObjectInteraction.RUNE, "a_Bet_stone", 224, 233, true, true, 0, 1);
+        InitObj(234, 0, 0, 0, ObjectInteraction.RUNE, "a_Corp_stone", 224, 234, true, true, 0, 1);
+        InitObj(235, 0, 0, 0, ObjectInteraction.RUNE, "a_Des_stone", 224, 235, true, true, 0, 1);
+        InitObj(236, 0, 0, 0, ObjectInteraction.RUNE, "an_Ex_stone", 224, 236, true, true, 0, 1);
+        InitObj(237, 0, 0, 0, ObjectInteraction.RUNE, "a_Flam_stone", 224, 237, true, true, 0, 1);
+        InitObj(238, 0, 0, 0, ObjectInteraction.RUNE, "a_Grav_stone", 224, 238, true, true, 0, 1);
+        InitObj(239, 0, 0, 0, ObjectInteraction.RUNE, "a_Hur_stone", 224, 239, true, true, 0, 1);
+        InitObj(240, 0, 0, 0, ObjectInteraction.RUNE, "an_In_stone", 224, 240, true, true, 0, 1);
+        InitObj(241, 0, 0, 0, ObjectInteraction.RUNE, "a_Jux_stone", 224, 241, true, true, 0, 1);
+        InitObj(242, 0, 0, 0, ObjectInteraction.RUNE, "a_Kal_stone", 224, 242, true, true, 0, 1);
+        InitObj(243, 0, 0, 0, ObjectInteraction.RUNE, "a_Lor_stone", 224, 243, true, true, 0, 1);
+        InitObj(244, 0, 0, 0, ObjectInteraction.RUNE, "a_Mani_stone", 224, 244, true, true, 0, 1);
+        InitObj(245, 0, 0, 0, ObjectInteraction.RUNE, "a_Nox_stone", 224, 245, true, true, 0, 1);
+        InitObj(246, 0, 0, 0, ObjectInteraction.RUNE, "an_Ort_stone", 224, 246, true, true, 0, 1);
+        InitObj(247, 0, 0, 0, ObjectInteraction.RUNE, "a_Por_stone", 224, 247, true, true, 0, 1);
+        InitObj(248, 0, 0, 0, ObjectInteraction.RUNE, "a_Quas_stone", 224, 248, true, true, 0, 1);
+        InitObj(249, 0, 0, 0, ObjectInteraction.RUNE, "a_Rel_stone", 224, 249, true, true, 0, 1);
+        InitObj(250, 0, 0, 0, ObjectInteraction.RUNE, "a_Sanct_stone", 224, 250, true, true, 0, 1);
+        InitObj(251, 0, 0, 0, ObjectInteraction.RUNE, "a_Tym_stone", 224, 251, true, true, 0, 1);
+        InitObj(252, 0, 0, 0, ObjectInteraction.RUNE, "an_Uus_stone", 224, 252, true, true, 0, 1);
+        InitObj(253, 0, 0, 0, ObjectInteraction.RUNE, "a_Vas_stone", 224, 253, true, true, 0, 1);
+        InitObj(254, 0, 0, 0, ObjectInteraction.RUNE, "a_Wis_stone", 224, 254, true, true, 0, 1);
+        InitObj(255, 0, 0, 0, ObjectInteraction.RUNE, "a_Ylem_stone", 224, 255, true, true, 0, 1);
+        InitObj(256, 0, 0, 0, ObjectInteraction.KEY, "a_key", 256, 256, true, true, 0, 1);
+        InitObj(257, 0, 0, 0, ObjectInteraction.LOCKPICK, "a_lockpick", 257, 257, true, true, 0, 1);
+        InitObj(258, 0, 0, 0, ObjectInteraction.KEY, "a_key", 258, 258, true, true, 0, 1);
+        InitObj(259, 0, 0, 0, ObjectInteraction.KEY, "a_key", 259, 259, true, true, 0, 1);
+        InitObj(260, 0, 0, 0, ObjectInteraction.KEY, "a_key", 260, 260, true, true, 0, 1);
+        InitObj(261, 0, 0, 0, ObjectInteraction.KEY, "a_key", 261, 261, true, true, 0, 1);
+        InitObj(262, 0, 0, 0, ObjectInteraction.KEY, "a_key", 262, 262, true, true, 0, 1);
+        InitObj(263, 0, 0, 0, ObjectInteraction.KEY, "a_key", 263, 263, true, true, 0, 1);
+        InitObj(264, 0, 0, 0, ObjectInteraction.KEY, "a_key", 264, 264, true, true, 0, 1);
+        InitObj(265, 0, 0, 0, ObjectInteraction.KEY, "a_key", 265, 265, true, true, 0, 1);
+        InitObj(266, 0, 0, 0, ObjectInteraction.KEY, "a_key", 266, 266, true, true, 0, 1);
+        InitObj(267, 0, 0, 0, ObjectInteraction.KEY, "a_key", 267, 267, true, true, 0, 1);
+        InitObj(268, 0, 0, 0, ObjectInteraction.KEY, "a_key", 268, 268, true, true, 0, 1);
+        InitObj(269, 0, 0, 0, ObjectInteraction.KEY, "a_key", 269, 269, true, true, 0, 1);
+        InitObj(270, 0, 0, 0, ObjectInteraction.KEY, "a_key", 270, 270, true, true, 0, 1);
+        InitObj(271, 0, 0, 0, ObjectInteraction.LOCK, "a_lock", 271, 271, true, true, 0, 1);
+        InitObj(272, 0, 0, 0, ObjectInteraction.INVENTORY, "a_picture_of_Tom", 272, 272, true, true, 0, 1);
+        InitObj(273, 0, 0, 0, ObjectInteraction.INVENTORY, "a_crystal_splinter", 273, 273, true, true, 0, 1);
+        InitObj(274, 0, 0, 0, ObjectInteraction.AN_ORB_ROCK, "an_orb_rock", 274, 274, true, true, 0, 1);
+        InitObj(275, 0, 0, 0, ObjectInteraction.INVENTORY, "the_Gem_Cutter_of_Coulnes", 275, 275, false, true, 0, 1);
+        InitObj(276, 0, 0, 0, ObjectInteraction.AN_EXPLODING_BOOK, "a_book", 276, 276, true, true, 0, 1);
+        InitObj(277, 0, 0, 0, ObjectInteraction.INVENTORY, "a_block_of_burning_incense_blocks_of_burning_incense", 277, 277, true, true, 0, 1);
+        InitObj(278, 0, 0, 0, ObjectInteraction.INVENTORY, "a_block_of_incense_blocks_of_incense", 278, 278, true, true, 0, 1);
+        InitObj(279, 0, 0, 0, ObjectInteraction.ORB, "an_orb", 279, 279, true, true, 0, 1);
+        InitObj(280, 0, 0, 0, ObjectInteraction.INVENTORY, "a_broken_blade", 280, 280, true, true, 0, 1);
+        InitObj(281, 0, 0, 0, ObjectInteraction.INVENTORY, "a_broken_hilt", 281, 281, true, true, 0, 1);
+        InitObj(282, 0, 0, 0, ObjectInteraction.INVENTORY, "a_figurine", 282, 282, true, true, 0, 1);
+        InitObj(283, 0, 0, 0, ObjectInteraction.FOOD, "some_rotworm_stew_servings_of_rotworm_stew", 283, 283, true, true, 0, 1);
+        InitObj(284, 0, 0, 0, ObjectInteraction.INVENTORY, "some_strong_thread_pieces_of_strong_thread", 284, 284, true, true, 0, 1);
+        InitObj(285, 0, 0, 0, ObjectInteraction.INVENTORY, "dragon_scales_bunches_of_dragon_scales", 285, 285, false, true, 0, 1);
+        InitObj(286, 0, 0, 0, ObjectInteraction.INVENTORY, "a_resilient_sphere_some_resilient_spheres", 286, 286, true, true, 0, 1);
+        InitObj(287, 0, 0, 0, ObjectInteraction.INVENTORY, "a_standard", 287, 287, true, true, 0, 1);
+        InitObj(288, 0, 0, 0, ObjectInteraction.SPELL, "a_spell", 288, 288, false, true, 0, 1);
+        InitObj(289, 0, 0, 0, ObjectInteraction.BEDROLL, "a_bedroll", 289, 289, true, true, 0, 1);
+        InitObj(290, 0, 0, 0, ObjectInteraction.SILVERSEED, "a_silver_seed", 290, 290, true, true, 1, 1);
+        InitObj(291, 0, 0, 0, ObjectInteraction.INSTRUMENT, "a_mandolin", 291, 291, true, true, 0, 1);
+        InitObj(292, 0, 0, 0, ObjectInteraction.INSTRUMENT, "a_flute", 292, 292, true, true, 0, 1);
+        InitObj(293, 0, 0, 0, ObjectInteraction.LEECH, "some_leeches_bunches_of_leeches", 293, 293, true, true, 0, 1);
+        InitObj(294, 0, 0, 0, ObjectInteraction.MOONSTONE, "a_moonstone", 294, 294, true, true, 0, 1);
+        InitObj(295, 0, 0, 0, ObjectInteraction.SPIKE, "a_spike", 295, 295, true, true, 0, 1);
+        InitObj(296, 0, 0, 0, ObjectInteraction.INVENTORY, "a_rock_hammer", 296, 296, true, true, 0, 1);
+        InitObj(297, 0, 0, 0, ObjectInteraction.ZANIUM, "a_glowing_rock", 297, 297, true, true, 1, 1);
+        InitObj(298, 0, 0, 0, ObjectInteraction.INVENTORY, "a_campfire", 298, 298, false, false, 1, 1);
+        InitObj(299, 0, 0, 0, ObjectInteraction.FISHING_POLE, "a_fishing_pole", 299, 299, true, true, 0, 1);
+        InitObj(300, 0, 0, 0, ObjectInteraction.INVENTORY, "a_medallion", 300, 300, true, true, 0, 1);
+        InitObj(301, 0, 0, 0, ObjectInteraction.OIL, "an_oil_flask", 301, 301, true, true, 0, 1);
+        InitObj(302, 0, 0, 0, ObjectInteraction.FOUNTAIN, "a_fountain", 302, 302, true, true, 0, 1);
+        InitObj(303, 0, 0, 0, ObjectInteraction.SCENERY, "a_cauldron", 303, 303, false, true, 0, 1);
+        InitObj(304, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 304, 304, true, true, 0, 1);
+        InitObj(305, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 305, 305, true, true, 0, 1);
+        InitObj(306, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 306, 306, true, true, 0, 1);
+        InitObj(307, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 307, 307, true, true, 0, 1);
+        InitObj(308, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 308, 308, true, true, 0, 1);
+        InitObj(309, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 309, 309, true, true, 0, 1);
+        InitObj(310, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 310, 310, true, true, 0, 1);
+        InitObj(311, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 311, 311, true, true, 0, 1);
+        InitObj(312, 0, 0, 0, ObjectInteraction.SCROLL, "a_scroll", 312, 312, true, true, 0, 1);
+        InitObj(313, 0, 0, 0, ObjectInteraction.SCROLL, "a_scroll", 313, 313, true, true, 0, 1);
+        InitObj(314, 0, 0, 0, ObjectInteraction.SCROLL, "a_scroll", 314, 314, true, true, 0, 1);
+        InitObj(315, 0, 0, 0, ObjectInteraction.MAP, "a_map", 315, 315, true, true, 0, 1);
+        InitObj(316, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 316, 316, true, true, 0, 1);
+        InitObj(317, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 317, 317, true, true, 0, 1);
+        InitObj(318, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 318, 318, true, true, 0, 1);
+        InitObj(319, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 319, 319, true, true, 0, 1);
+        InitObj(320, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 320, 320, true, false, 0, 1);
+        InitObj(321, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 321, 321, true, false, 0, 1);
+        InitObj(322, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 322, 322, true, false, 0, 1);
+        InitObj(323, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 323, 323, true, false, 0, 1);
+        InitObj(324, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 324, 324, true, false, 0, 1);
+        InitObj(325, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 325, 325, true, false, 0, 1);
+        InitObj(326, 0, 0, 0, ObjectInteraction.PORTCULLIS, "a_portcullis_portcullises", 326, 326, true, false, 0, 1);
+        InitObj(327, 0, 0, 0, ObjectInteraction.HIDDENDOOR, "a_secret_door", 327, 327, true, false, 0, 1);
+        InitObj(328, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 328, 328, true, false, 0, 1);
+        InitObj(329, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 329, 329, true, false, 0, 1);
+        InitObj(330, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 330, 330, true, false, 0, 1);
+        InitObj(331, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 331, 331, true, false, 0, 1);
+        InitObj(332, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 332, 332, true, false, 0, 1);
+        InitObj(333, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 333, 333, true, false, 0, 1);
+        InitObj(334, 0, 0, 0, ObjectInteraction.PORTCULLIS, "an_open_portcullis", 334, 334, true, true, 0, 1);
+        InitObj(335, 0, 0, 0, ObjectInteraction.HIDDENDOOR, "a_secret_door", 335, 335, true, true, 0, 1);
+        InitObj(336, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_bench_benches", 336, 336, false, true, 0, 1);
+        InitObj(337, 0, 0, 0, ObjectInteraction.ARROW, "an_arrow", 337, 337, true, true, 0, 1);
+        InitObj(338, 0, 0, 0, ObjectInteraction.PARTICLE, "a_crossbow_bolt", 338, 338, true, true, 0, 1);
+        InitObj(339, 0, 0, 0, ObjectInteraction.BOULDER, "a_large_boulder", 339, 339, true, false, 0, 1);
+        InitObj(340, 0, 0, 0, ObjectInteraction.BOULDER, "a_large_boulder", 340, 340, true, false, 0, 1);
+        InitObj(341, 0, 0, 0, ObjectInteraction.BOULDER, "a_boulder", 341, 341, true, false, 0, 1);
+        InitObj(342, 0, 0, 0, ObjectInteraction.BOULDER, "a_small_boulder", 342, 342, true, false, 0, 1);
+        InitObj(343, 0, 0, 0, ObjectInteraction.SHRINE, "a_shrine", 343, 343, true, false, 0, 1);
+        InitObj(344, 0, 0, 0, ObjectInteraction.CLUTTER, "a_table", 344, 344, false, false, 0, 1);
+        InitObj(345, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_beam", 345, 345, false, false, 0, 1);
+        InitObj(346, 0, 0, 0, ObjectInteraction.MOONGATE, "a_moongate", 346, 346, false, false, 0, 1);
+        InitObj(347, 0, 0, 0, ObjectInteraction.CONTAINER, "a_barrel", 347, 347, true, false, 0, 1);
+        InitObj(348, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_chair", 348, 348, true, false, 0, 1);
+        InitObj(349, 0, 0, 0, ObjectInteraction.CONTAINER, "a_chest", 349, 349, true, false, 0, 1);
+        InitObj(350, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_nightstand", 350, 350, true, false, 0, 1);
+        InitObj(351, 0, 0, 0, ObjectInteraction.PARTICLE, "a_lotus_turbo_esprit", 351, 351, true, false, 0, 1);
+        InitObj(352, 0, 0, 0, ObjectInteraction.PILLAR, "a_pillar", 352, 352, true, false, 0, 0);
+        InitObj(353, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 353, 353, true, false, 0, 0);
+        InitObj(354, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch_switches", 354, 354, true, false, 0, 0);
+        InitObj(355, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 355, 355, true, true, 0, 1);
+        InitObj(356, 0, 0, 0, ObjectInteraction.BRIDGE, "a_bridge", 356, 356, true, true, 0, 1);
+        InitObj(357, 0, 0, 0, ObjectInteraction.GRAVE, "a_gravestone", 357, 357, true, true, 0, 1);
+        InitObj(358, 0, 0, 0, ObjectInteraction.SIGN, "some_writing", 358, 358, true, false, 0, 0);
+        InitObj(359, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 359, 359, true, true, 0, 1);
+        InitObj(360, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 360, 360, true, true, 0, 1);
+        InitObj(361, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 361, 361, true, true, 0, 1);
+        InitObj(362, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 362, 362, true, true, 0, 1);
+        InitObj(363, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 363, 363, true, true, 0, 1);
+        InitObj(364, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 364, 364, true, true, 0, 1);
+        InitObj(365, 0, 0, 0, ObjectInteraction.FORCEFIELD, "force_field", 365, 365, true, true, 0, 1);
+        InitObj(366, 0, 0, 0, ObjectInteraction.TMAP_SOLID, "special_tmap_obj", 366, 366, false, false, 0, 0);
+        InitObj(367, 0, 0, 0, ObjectInteraction.TMAP_CLIP, "special_tmap_obj", 367, 367, false, false, 0, 0);
+        InitObj(368, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 368, 368, true, false, 0, 0);
+        InitObj(369, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 369, 369, true, false, 0, 0);
+        InitObj(370, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 370, 370, true, false, 0, 0);
+        InitObj(371, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 371, 371, true, false, 0, 0);
+        InitObj(372, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 372, 372, true, false, 0, 0);
+        InitObj(373, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 373, 373, true, false, 0, 0);
+        InitObj(374, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 374, 374, true, false, 0, 0);
+        InitObj(375, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 375, 375, true, false, 0, 0);
+        InitObj(376, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 376, 376, true, false, 0, 0);
+        InitObj(377, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 377, 377, true, false, 0, 0);
+        InitObj(378, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 378, 378, true, false, 0, 0);
+        InitObj(379, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 379, 379, true, false, 0, 0);
+        InitObj(380, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 380, 380, true, false, 0, 0);
+        InitObj(381, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 381, 381, true, false, 0, 0);
+        InitObj(382, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 382, 382, true, false, 0, 0);
+        InitObj(383, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 383, 383, true, false, 0, 0);
+        InitObj(384, 0, 0, 0, ObjectInteraction.A_DAMAGE_TRAP, "a_damage_trap", 384, 384, false, false, 0, 1);
+        InitObj(385, 0, 0, 0, ObjectInteraction.A_TELEPORT_TRAP, "a_teleport_trap", 385, 385, false, false, 0, 1);
+        InitObj(386, 0, 0, 0, ObjectInteraction.A_ARROW_TRAP, "a_arrow_trap", 386, 386, false, false, 0, 1);
+        InitObj(387, 0, 0, 0, ObjectInteraction.A_DO_TRAP, "a_do_trap", 387, 387, false, false, 0, 1);
+        InitObj(388, 0, 0, 0, ObjectInteraction.A_PIT_TRAP, "a_pit_trap", 388, 388, false, false, 0, 1);
+        InitObj(389, 0, 0, 0, ObjectInteraction.A_CHANGE_TERRAIN_TRAP, "a_change_terrain_trap", 389, 389, false, false, 0, 1);
+        InitObj(390, 0, 0, 0, ObjectInteraction.A_SPELLTRAP, "a_spelltrap", 390, 390, false, false, 0, 1);
+        InitObj(391, 0, 0, 0, ObjectInteraction.A_CREATE_OBJECT_TRAP, "a_create_object_trap", 391, 391, false, false, 0, 1);
+        InitObj(392, 0, 0, 0, ObjectInteraction.A_DOOR_TRAP, "a_door_trap", 392, 392, false, false, 0, 1);
+        InitObj(393, 0, 0, 0, ObjectInteraction.A_WARD_TRAP, "a_ward_trap", 393, 393, false, false, 0, 1);
+        InitObj(394, 0, 0, 0, ObjectInteraction.A_TELL_TRAP, "a_tell_trap", 394, 394, false, false, 0, 1);
+        InitObj(395, 0, 0, 0, ObjectInteraction.A_DELETE_OBJECT_TRAP, "a_delete_object_trap", 395, 395, false, false, 0, 1);
+        InitObj(396, 0, 0, 0, ObjectInteraction.AN_INVENTORY_TRAP, "an_inventory_trap", 396, 396, false, false, 0, 1);
+        InitObj(397, 0, 0, 0, ObjectInteraction.A_SET_VARIABLE_TRAP, "a_set_variable_trap", 397, 397, false, false, 0, 1);
+        InitObj(398, 0, 0, 0, ObjectInteraction.A_CHECK_VARIABLE_TRAP, "a_check_variable_trap", 398, 398, false, false, 0, 1);
+        InitObj(399, 0, 0, 0, ObjectInteraction.A_COMBINATION_TRAP, "a_combination_trap", 399, 399, false, false, 0, 1);
+        InitObj(400, 0, 0, 0, ObjectInteraction.A_TEXT_STRING_TRAP, "a_text_string_trap", 400, 400, false, false, 0, 1);
+        InitObj(401, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 401, 401, true, true, 0, 1);
+        InitObj(402, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 402, 402, true, true, 0, 1);
+        InitObj(403, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 403, 403, true, true, 0, 1);
+        InitObj(404, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 404, 404, true, true, 0, 1);
+        InitObj(405, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 405, 405, true, true, 0, 1);
+        InitObj(406, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 406, 406, true, true, 0, 1);
+        InitObj(407, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 407, 407, true, true, 0, 1);
+        InitObj(408, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 408, 408, true, true, 0, 1);
+        InitObj(409, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 409, 409, true, true, 0, 1);
+        InitObj(410, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 410, 410, true, true, 0, 1);
+        InitObj(411, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 411, 411, true, true, 0, 1);
+        InitObj(412, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 412, 412, true, true, 0, 1);
+        InitObj(413, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 413, 413, true, true, 0, 1);
+        InitObj(414, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 414, 414, true, true, 0, 1);
+        InitObj(415, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 415, 415, true, true, 0, 1);
+        InitObj(416, 0, 0, 0, ObjectInteraction.A_MOVE_TRIGGER, "a_move_trigger", 416, 416, false, false, 0, 1);
+        InitObj(417, 0, 0, 0, ObjectInteraction.A_PICK_UP_TRIGGER, "a_pick_up_trigger", 417, 417, false, false, 0, 1);
+        InitObj(418, 0, 0, 0, ObjectInteraction.A_USE_TRIGGER, "a_use_trigger", 418, 418, false, false, 0, 1);
+        InitObj(419, 0, 0, 0, ObjectInteraction.A_LOOK_TRIGGER, "a_look_trigger", 419, 419, false, false, 0, 1);
+        InitObj(420, 0, 0, 0, ObjectInteraction.A_STEP_ON_TRIGGER, "a_step_on_trigger", 420, 420, false, false, 0, 1);
+        InitObj(421, 0, 0, 0, ObjectInteraction.AN_OPEN_TRIGGER, "an_open_trigger", 421, 421, false, false, 0, 1);
+        InitObj(422, 0, 0, 0, ObjectInteraction.AN_UNLOCK_TRIGGER, "an_unlock_trigger", 422, 422, false, false, 0, 1);
+        InitObj(423, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 423, 423, true, true, 0, 1);
+        InitObj(424, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 424, 424, true, true, 0, 1);
+        InitObj(425, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 425, 425, true, true, 0, 1);
+        InitObj(426, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 426, 426, true, true, 0, 1);
+        InitObj(427, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 427, 427, true, true, 0, 1);
+        InitObj(428, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 428, 428, true, true, 0, 1);
+        InitObj(429, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 429, 429, true, true, 0, 1);
+        InitObj(430, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 430, 430, true, true, 0, 1);
+        InitObj(431, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 431, 431, true, true, 0, 1);
+        InitObj(432, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 432, 432, true, true, 0, 1);
+        InitObj(433, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 433, 433, true, true, 0, 1);
+        InitObj(434, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 434, 434, true, true, 0, 1);
+        InitObj(435, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 435, 435, true, true, 0, 1);
+        InitObj(436, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 436, 436, true, true, 0, 1);
+        InitObj(437, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 437, 437, true, true, 0, 1);
+        InitObj(438, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 438, 438, true, true, 0, 1);
+        InitObj(439, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 439, 439, true, true, 0, 1);
+        InitObj(440, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 440, 440, true, true, 0, 1);
+        InitObj(441, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 441, 441, true, true, 0, 1);
+        InitObj(442, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 442, 442, true, true, 0, 1);
+        InitObj(443, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 443, 443, true, true, 0, 1);
+        InitObj(444, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 444, 444, true, true, 0, 1);
+        InitObj(445, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 445, 445, true, true, 0, 1);
+        InitObj(446, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 446, 446, true, true, 0, 1);
+        InitObj(447, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 447, 447, true, true, 0, 1);
+        InitObj(448, 0, 0, 0, ObjectInteraction.ANIMATION, "some_blood", 448, 448, true, true, 0, 4);
+        InitObj(449, 0, 0, 0, ObjectInteraction.ANIMATION, "a_mist_cloud", 449, 449, true, true, 17, 4);
+        InitObj(450, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 450, 450, true, true, 21, 5);
+        InitObj(451, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 451, 451, true, true, 26, 5);
+        InitObj(452, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 452, 452, true, true, 31, 4);
+        InitObj(453, 0, 0, 0, ObjectInteraction.ANIMATION, "a_splash_splashes", 453, 453, true, true, 36, 4);
+        InitObj(454, 0, 0, 0, ObjectInteraction.ANIMATION, "a_splash_splahes", 454, 454, true, true, 36, 4);
+        InitObj(455, 0, 0, 0, ObjectInteraction.ANIMATION, "a_spell_effect", 455, 455, true, true, 40, 4);
+        InitObj(456, 0, 0, 0, ObjectInteraction.ANIMATION, "some_smoke", 456, 456, true, true, 9, 4);
+        InitObj(457, 0, 0, 0, ObjectInteraction.ANIMATION, "a_fountain", 457, 457, false, true, 5, 4);
+        InitObj(458, 0, 0, 0, ObjectInteraction.SILVERSEED, "a_silver_tree", 458, 458, true, true, 13, 4);
+        InitObj(459, 0, 0, 0, ObjectInteraction.ANIMATION, "some_damage", 459, 459, true, true, 45, 4);
+        InitObj(460, 0, 0, 0, ObjectInteraction.SCENERY, "unknown", 460, 460, true, true, 0, 1);
+        InitObj(461, 0, 0, 0, ObjectInteraction.SOUND, "a_sound_source", 461, 461, true, true, 0, 1);
+        InitObj(462, 0, 0, 0, ObjectInteraction.CLUTTER, "some_changing_terrain", 462, 462, true, true, 0, 1);
+        InitObj(463, 0, 0, 0, ObjectInteraction.A_MOVING_DOOR, "a_moving_door", 463, 463, true, true, 0, 1);
+        InitObj(464, 0, 0, 0, ObjectInteraction.CLUTTER, "outofrange", 463, 463, true, true, 0, 1);
+
+
+    }
+
+    /// <summary>
+    /// Initialises the object settings for UW2.
+    /// </summary>
+    void initUW2ObjectProps()
+    {
+        InitObj(0, 0, 0, 0, ObjectInteraction.WEAPON, "a_hand_axe", 0, 0, true, true, 0, 1);
+        InitObj(1, 0, 0, 0, ObjectInteraction.WEAPON, "a_battle_axe", 1, 1, true, true, 0, 1);
+        InitObj(2, 0, 0, 0, ObjectInteraction.WEAPON, "an_axe", 2, 2, true, true, 0, 1);
+        InitObj(3, 0, 0, 0, ObjectInteraction.WEAPON, "a_dagger", 3, 3, true, true, 0, 1);
+        InitObj(4, 0, 0, 0, ObjectInteraction.WEAPON, "a_shortsword", 4, 4, true, true, 0, 1);
+        InitObj(5, 0, 0, 0, ObjectInteraction.WEAPON, "a_longsword", 5, 5, true, true, 0, 1);
+        InitObj(6, 0, 0, 0, ObjectInteraction.WEAPON, "a_broadsword", 6, 6, true, true, 0, 1);
+        InitObj(7, 0, 0, 0, ObjectInteraction.WEAPON, "a_cudgel", 7, 7, true, true, 0, 1);
+        InitObj(8, 0, 0, 0, ObjectInteraction.WEAPON, "a_light_mace", 8, 8, true, true, 0, 1);
+        InitObj(9, 0, 0, 0, ObjectInteraction.WEAPON, "a_mace", 9, 9, true, true, 0, 1);
+        InitObj(10, 0, 0, 0, ObjectInteraction.WEAPON, "a_jewelled_dagger", 10, 10, true, true, 0, 1);
+        InitObj(11, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_axe", 11, 11, true, true, 0, 1);
+        InitObj(12, 0, 0, 0, ObjectInteraction.WEAPON, "a_black_sword", 12, 12, true, true, 0, 1);
+        InitObj(13, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_sword", 13, 13, true, true, 0, 1);
+        InitObj(14, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_mace", 14, 14, true, true, 0, 1);
+        InitObj(15, 0, 0, 0, ObjectInteraction.WEAPON, "a_fist", 15, 15, true, true, 0, 1);
+        InitObj(16, 0, 0, 0, ObjectInteraction.INVENTORY, "a_sling_stone", 16, 16, true, true, 0, 1);
+        InitObj(17, 0, 0, 0, ObjectInteraction.ARROW, "a_crossbow_bolt", 17, 17, true, true, 0, 1);
+        InitObj(18, 0, 0, 0, ObjectInteraction.ARROW, "an_arrow", 18, 18, true, true, 0, 1);
+        InitObj(19, 0, 0, 0, ObjectInteraction.INVENTORY, "a_skull", 19, 19, true, true, 0, 1);
+        InitObj(20, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_fireball", 20, 20, true, true, 0, 1);
+        InitObj(21, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_lightning_bolt", 21, 21, true, true, 0, 1);
+        InitObj(22, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "acid", 22, 22, true, true, 0, 1);
+        InitObj(23, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_magic_arrow", 23, 23, true, true, 0, 1);
+        InitObj(24, 0, 0, 0, ObjectInteraction.WEAPON, "a_sling", 24, 24, true, true, 0, 1);
+        InitObj(25, 0, 0, 0, ObjectInteraction.WEAPON, "a_bow", 25, 25, true, true, 0, 1);
+        InitObj(26, 0, 0, 0, ObjectInteraction.WEAPON, "a_crossbow", 26, 26, true, true, 0, 1);
+        InitObj(27, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_homing_dart", 27, 27, true, true, 0, 1);
+        InitObj(28, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_snowball", 28, 28, true, true, 0, 1);
+        InitObj(29, 0, 0, 0, ObjectInteraction.BOUNCING_PROJECTILE, "a_fireball", 29, 29, true, true, 0, 1);
+        InitObj(30, 0, 0, 0, ObjectInteraction.A_MAGIC_PROJECTILE, "a_satellite", 30, 30, true, true, 0, 1);
+        InitObj(31, 0, 0, 0, ObjectInteraction.WEAPON, "a_jeweled_bow", 31, 31, true, true, 0, 1);
+        InitObj(32, 0, 0, 0, ObjectInteraction.ARMOUR, "a_leather_vest", 32, 32, true, true, 0, 1);
+        InitObj(33, 0, 0, 0, ObjectInteraction.ARMOUR, "a_mail_shirt", 33, 33, true, true, 0, 1);
+        InitObj(34, 0, 0, 0, ObjectInteraction.ARMOUR, "a_breastplate", 34, 34, true, true, 0, 1);
+        InitObj(35, 0, 0, 0, ObjectInteraction.LEGGINGS, "leather_leggings&pairs_of_leather_leggings", 35, 35, true, true, 0, 1);
+        InitObj(36, 0, 0, 0, ObjectInteraction.LEGGINGS, "mail_leggings&pairs_of_mail_leggings", 36, 36, true, true, 0, 1);
+        InitObj(37, 0, 0, 0, ObjectInteraction.LEGGINGS, "plate_leggings&pairs_of_plate_leggings", 37, 37, true, true, 0, 1);
+        InitObj(38, 0, 0, 0, ObjectInteraction.GLOVES, "leather_gloves&pairs_of_leather_gloves", 38, 38, true, true, 0, 1);
+        InitObj(39, 0, 0, 0, ObjectInteraction.GLOVES, "chain_gauntlets&pairs_of_chain_gauntlets", 39, 39, true, true, 0, 1);
+        InitObj(40, 0, 0, 0, ObjectInteraction.GLOVES, "plate_gauntlets&pairs_of_plate_gauntlets", 40, 40, true, true, 0, 1);
+        InitObj(41, 0, 0, 0, ObjectInteraction.BOOT, "leather_boots&pairs_of_leather_boots", 41, 41, true, true, 0, 1);
+        InitObj(42, 0, 0, 0, ObjectInteraction.BOOT, "chain_boots&pairs_of_chain_boots", 42, 42, true, true, 0, 1);
+        InitObj(43, 0, 0, 0, ObjectInteraction.BOOT, "plate_boots&pairs_of_plate_boots", 43, 43, true, true, 0, 1);
+        InitObj(44, 0, 0, 0, ObjectInteraction.HELM, "a_leather_cap", 44, 44, true, true, 0, 1);
+        InitObj(45, 0, 0, 0, ObjectInteraction.HELM, "a_chain_cowl", 45, 45, true, true, 0, 1);
+        InitObj(46, 0, 0, 0, ObjectInteraction.HELM, "a_helmet", 46, 46, true, true, 0, 1);
+        InitObj(47, 0, 0, 0, ObjectInteraction.BOOT, "a_pair_of_swamp_boots&pairs_of_swamp_boots", 47, 47, true, true, 0, 1);
+        InitObj(48, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 48, 48, true, true, 0, 1);
+        InitObj(49, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 49, 49, true, true, 0, 1);
+        InitObj(50, 0, 0, 0, ObjectInteraction.HELM, "a_crown", 50, 50, true, true, 0, 1);
+        InitObj(51, 0, 0, 0, ObjectInteraction.GLOVES, "fraznium_gauntlets&pairs_of_fraznium_gauntlets", 51, 51, true, true, 0, 1);
+        InitObj(52, 0, 0, 0, ObjectInteraction.HELM, "a_fraznium_circlet", 52, 52, true, true, 0, 1);
+        InitObj(53, 0, 0, 0, ObjectInteraction.RING, "a_Guardian_signet_ring", 53, 53, true, true, 0, 1);
+        InitObj(54, 0, 0, 0, ObjectInteraction.RING, "a_strange_artifact", 54, 54, true, true, 0, 1);
+        InitObj(55, 0, 0, 0, ObjectInteraction.RING, "a_copper_ring", 55, 55, true, true, 0, 1);
+        InitObj(56, 0, 0, 0, ObjectInteraction.RING, "a_gold_ring", 56, 56, true, true, 0, 1);
+        InitObj(57, 0, 0, 0, ObjectInteraction.RING, "a_silver_ring", 57, 57, true, true, 0, 1);
+        InitObj(58, 0, 0, 0, ObjectInteraction.RING, "a_red_ring", 58, 58, true, true, 0, 1);
+        InitObj(59, 0, 0, 0, ObjectInteraction.SHIELD, "a_tower_shield", 59, 59, true, true, 0, 1);
+        InitObj(60, 0, 0, 0, ObjectInteraction.SHIELD, "a_wooden_shield", 60, 60, true, true, 0, 1);
+        InitObj(61, 0, 0, 0, ObjectInteraction.SHIELD, "a_small_shield", 61, 61, true, true, 0, 1);
+        InitObj(62, 0, 0, 0, ObjectInteraction.SHIELD, "a_buckler", 62, 62, true, true, 0, 1);
+        InitObj(63, 0, 0, 0, ObjectInteraction.SHIELD, "a_jeweled_shield", 63, 63, true, true, 0, 1);
+        InitObj(64, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_rotworm", 64, 64, true, false, 0, 1);
+        InitObj(65, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_cave_bat", 65, 65, true, false, 0, 1);
+        InitObj(66, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_vampire_bat", 66, 66, true, false, 0, 1);
+        InitObj(67, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_tan_rat", 67, 67, true, false, 0, 1);
+        InitObj(68, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_grey_rat", 68, 68, true, false, 0, 1);
+        InitObj(69, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_flesh_slug", 69, 69, true, false, 0, 1);
+        InitObj(70, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_acid_slug", 70, 70, true, false, 0, 1);
+        InitObj(71, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_mongbat", 71, 71, true, false, 0, 1);
+        InitObj(72, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_skeleton", 72, 72, true, false, 0, 1);
+        InitObj(73, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 73, 73, true, false, 0, 1);
+        InitObj(74, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_goblin", 74, 74, true, false, 0, 1);
+        InitObj(75, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_imp", 75, 75, true, false, 0, 1);
+        InitObj(76, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_giant_spider", 76, 76, true, false, 0, 1);
+        InitObj(77, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_lurker", 77, 77, true, false, 0, 1);
+        InitObj(78, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_bloodworm", 78, 78, true, false, 0, 1);
+        InitObj(79, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_stickman", 79, 79, true, false, 0, 1);
+        InitObj(80, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_white_worm", 80, 80, true, false, 0, 1);
+        InitObj(81, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_snow_cat", 81, 81, true, false, 0, 1);
+        InitObj(82, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_yeti&yeti", 82, 82, true, false, 0, 1);
+        InitObj(83, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_headless&headlesses", 83, 83, true, false, 0, 1);
+        InitObj(84, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_Talorid", 84, 84, true, false, 0, 1);
+        InitObj(85, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_ghost", 85, 85, true, false, 0, 1);
+        InitObj(86, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_wolf_spider", 86, 86, true, false, 0, 1);
+        InitObj(87, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_trilkhun&trilkhai", 87, 87, true, false, 0, 1);
+        InitObj(88, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_brain_creature", 88, 88, true, false, 0, 1);
+        InitObj(89, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_deep_lurker", 89, 89, true, false, 0, 1);
+        InitObj(90, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dread_spider", 90, 90, true, false, 0, 1);
+        InitObj(91, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 91, 91, true, false, 0, 1);
+        InitObj(92, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_great_troll", 92, 92, true, false, 0, 1);
+        InitObj(93, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_spectre", 93, 93, true, false, 0, 1);
+        InitObj(94, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_hordling", 94, 94, true, false, 0, 1);
+        InitObj(95, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_earth_golem", 95, 95, true, false, 0, 1);
+        InitObj(96, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fire_elemental", 96, 96, true, false, 0, 1);
+        InitObj(97, 0, 0, 0, ObjectInteraction.NPC_TYPE, "an_ice_golem", 97, 97, true, false, 0, 1);
+        InitObj(98, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dire_ghost", 98, 98, true, false, 0, 1);
+        InitObj(99, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_reaper", 99, 99, true, false, 0, 1);
+        InitObj(100, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_despoiler", 100, 100, true, false, 0, 1);
+        InitObj(101, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_metal_golem", 101, 101, true, false, 0, 1);
+        InitObj(102, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_haunt", 102, 102, true, false, 0, 1);
+        InitObj(103, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_dire_reaper", 103, 103, true, false, 0, 1);
+        InitObj(104, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_destroyer", 104, 104, true, false, 0, 1);
+        InitObj(105, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_liche", 105, 105, true, false, 0, 1);
+        InitObj(106, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_liche", 106, 106, true, false, 0, 1);
+        InitObj(107, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_liche", 107, 107, true, false, 0, 1);
+        InitObj(108, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 108, 108, true, false, 0, 1);
+        InitObj(109, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_vorz", 109, 109, true, false, 0, 1);
+        InitObj(110, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_fighter", 110, 110, true, false, 0, 1);
+        InitObj(111, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_gazer", 111, 111, true, false, 0, 1);
+        InitObj(112, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 112, 112, true, false, 0, 1);
+        InitObj(113, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 113, 113, true, false, 0, 1);
+        InitObj(114, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 114, 114, true, false, 0, 1);
+        InitObj(115, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 115, 115, true, false, 0, 1);
+        InitObj(116, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 116, 116, true, false, 0, 1);
+        InitObj(117, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 117, 117, true, false, 0, 1);
+        InitObj(118, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 118, 118, true, false, 0, 1);
+        InitObj(119, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 119, 119, true, false, 0, 1);
+        InitObj(120, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 120, 120, true, false, 0, 1);
+        InitObj(121, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 121, 121, true, false, 0, 1);
+        InitObj(122, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 122, 122, true, false, 0, 1);
+        InitObj(123, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 123, 123, true, false, 0, 1);
+        InitObj(124, 0, 0, 0, ObjectInteraction.NPC_VOID, "etherealvoidshit", 124, 124, true, false, 0, 1);
+        InitObj(125, 0, 0, 0, ObjectInteraction.NPC_VOID, "etherealvoidshit", 125, 125, true, false, 0, 1);
+        InitObj(126, 0, 0, 0, ObjectInteraction.NPC_TYPE, "a_human", 126, 126, true, false, 0, 1);
+        InitObj(127, 0, 0, 0, ObjectInteraction.CLUTTER, "an_adventurer", 127, 127, true, false, 0, 1);
+        InitObj(128, 0, 0, 0, ObjectInteraction.CONTAINER, "a_sack", 128, 128, true, true, 0, 1);
+        InitObj(129, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_sack", 129, 129, true, true, 0, 1);
+        InitObj(130, 0, 0, 0, ObjectInteraction.CONTAINER, "a_pack", 130, 130, true, true, 0, 1);
+        InitObj(131, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_pack", 131, 131, true, true, 0, 1);
+        InitObj(132, 0, 0, 0, ObjectInteraction.CONTAINER, "a_box&boxes", 132, 132, true, true, 0, 1);
+        InitObj(133, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_box&open_boxes", 133, 133, true, true, 0, 1);
+        InitObj(134, 0, 0, 0, ObjectInteraction.CONTAINER, "a_pouch&pouches", 134, 134, true, true, 0, 1);
+        InitObj(135, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_pouch&pouches", 135, 135, true, true, 0, 1);
+        InitObj(136, 0, 0, 0, ObjectInteraction.CONTAINER, "a_map_case", 136, 136, true, true, 0, 1);
+        InitObj(137, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_map_case", 137, 137, true, true, 0, 1);
+        InitObj(138, 0, 0, 0, ObjectInteraction.CONTAINER, "a_gold_coffer", 138, 138, true, true, 0, 1);
+        InitObj(139, 0, 0, 0, ObjectInteraction.CONTAINER, "an_open_gold_coffer", 139, 139, true, true, 0, 1);
+        InitObj(140, 0, 0, 0, ObjectInteraction.CONTAINER, "a_key_ring", 140, 140, true, true, 0, 1);
+        InitObj(141, 0, 0, 0, ObjectInteraction.CONTAINER, "a_quiver", 141, 141, true, true, 0, 1);
+        InitObj(142, 0, 0, 0, ObjectInteraction.CONTAINER, "a_bowl", 142, 142, true, true, 0, 1);
+        InitObj(143, 0, 0, 0, ObjectInteraction.RUNEBAG, "a_rune_bag", 143, 143, true, true, 0, 1);
+        InitObj(144, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lantern", 144, 144, true, true, 0, 1);
+        InitObj(145, 0, 0, 0, ObjectInteraction.TORCH, "a_torch&torches", 145, 145, true, true, 0, 1);
+        InitObj(146, 0, 0, 0, ObjectInteraction.TORCH, "a_candle", 146, 146, true, true, 0, 1);
+        InitObj(147, 0, 0, 0, ObjectInteraction.TORCH, "a_light-sphere", 147, 147, true, true, 0, 1);
+        InitObj(148, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lit_lantern", 148, 148, true, true, 0, 1);
+        InitObj(149, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_torch", 149, 149, true, true, 0, 1);
+        InitObj(150, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_candle", 150, 150, true, true, 0, 1);
+        InitObj(151, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_light-sphere", 151, 151, true, true, 0, 1);
+        InitObj(152, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 152, 152, true, true, 0, 1);
+        InitObj(153, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 153, 153, true, true, 0, 1);
+        InitObj(154, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 154, 154, true, true, 0, 1);
+        InitObj(155, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 155, 155, true, true, 0, 1);
+        InitObj(156, 0, 0, 0, ObjectInteraction.WAND, "a_broken_wand", 156, 156, true, true, 0, 1);
+        InitObj(157, 0, 0, 0, ObjectInteraction.WAND, "a_broken_wand", 157, 157, true, true, 0, 1);
+        InitObj(158, 0, 0, 0, ObjectInteraction.WAND, "a_broken_wand", 158, 158, true, true, 0, 1);
+        InitObj(159, 0, 0, 0, ObjectInteraction.WAND, "a_broken_wand", 159, 159, true, true, 0, 1);
+        InitObj(160, 0, 0, 0, ObjectInteraction.TREASURE, "a_coin", 160, 160, true, true, 0, 1);
+        InitObj(161, 0, 0, 0, ObjectInteraction.A_STORAGECRYSTAL, "a_storage_crystal", 161, 161, true, true, 0, 1);
+        InitObj(162, 0, 0, 0, ObjectInteraction.PARTICLE, "a_ruby&rubies", 162, 162, true, true, 0, 1);
+        InitObj(163, 0, 0, 0, ObjectInteraction.PARTICLE, "a_red_gem", 163, 163, true, true, 0, 1);
+        InitObj(164, 0, 0, 0, ObjectInteraction.PARTICLE, "a_small_blue_gem", 164, 164, true, true, 0, 1);
+        InitObj(165, 0, 0, 0, ObjectInteraction.PARTICLE, "a_large_blue_gem", 165, 165, true, true, 0, 1);
+        InitObj(166, 0, 0, 0, ObjectInteraction.PARTICLE, "a_sapphire", 166, 166, true, true, 0, 1);
+        InitObj(167, 0, 0, 0, ObjectInteraction.PARTICLE, "an_emerald", 167, 167, true, true, 0, 1);
+        InitObj(168, 0, 0, 0, ObjectInteraction.PARTICLE, "a_black_pearl", 168, 168, true, true, 0, 1);
+        InitObj(169, 0, 0, 0, ObjectInteraction.PARTICLE, "a_goblet", 169, 169, true, true, 0, 1);
+        InitObj(170, 0, 0, 0, ObjectInteraction.CLUTTER, "a_sceptre", 170, 170, true, true, 0, 1);
+        InitObj(171, 0, 0, 0, ObjectInteraction.PARTICLE, "a_black_stone", 171, 171, true, true, 0, 1);
+        InitObj(172, 0, 0, 0, ObjectInteraction.PARTICLE, "a_white_stone", 172, 172, true, true, 0, 1);
+        InitObj(173, 0, 0, 0, ObjectInteraction.PARTICLE, "a_grey_stone", 173, 173, true, true, 0, 1);
+        InitObj(174, 0, 0, 0, ObjectInteraction.PARTICLE, "a_delgnigzator", 174, 174, true, true, 0, 1);
+        InitObj(175, 0, 0, 0, ObjectInteraction.A_POCKETWATCH, "a_pocketwatch&pocketwatches", 175, 175, true, true, 0, 1);
+        InitObj(176, 0, 0, 0, ObjectInteraction.FOOD, "a_piece_of_meat&pieces_of_meat", 176, 176, true, true, 0, 1);
+        InitObj(177, 0, 0, 0, ObjectInteraction.FOOD, "a_piece_of_meat&pieces_of_meat", 177, 177, true, true, 0, 1);
+        InitObj(178, 0, 0, 0, ObjectInteraction.FOOD, "a_piece_of_cheese&pieces_of_cheese", 178, 178, true, true, 0, 1);
+        InitObj(179, 0, 0, 0, ObjectInteraction.FOOD, "an_apple", 179, 179, true, true, 0, 1);
+        InitObj(180, 0, 0, 0, ObjectInteraction.FOOD, "an_ear_of_corn&ears_of_corn", 180, 180, true, true, 0, 1);
+        InitObj(181, 0, 0, 0, ObjectInteraction.FOOD, "a_loaf_of_bread&loaves_of_bread", 181, 181, true, true, 0, 1);
+        InitObj(182, 0, 0, 0, ObjectInteraction.FOOD, "a_fish&fish", 182, 182, true, true, 0, 1);
+        InitObj(183, 0, 0, 0, ObjectInteraction.FOOD, "some_popcorn&bunches_of_popcorn", 183, 183, true, true, 0, 1);
+        InitObj(184, 0, 0, 0, ObjectInteraction.FOOD, "a_pastry&pastries", 184, 184, true, true, 0, 1);
+        InitObj(185, 0, 0, 0, ObjectInteraction.FOOD, "a_mushroom", 185, 185, true, true, 0, 1);
+        InitObj(186, 0, 0, 0, ObjectInteraction.FOOD, "a_honeycomb", 186, 186, true, true, 0, 1);
+        InitObj(187, 0, 0, 0, ObjectInteraction.DRINK, "a_bottle_of_ale&bottles_of_ale", 187, 187, true, true, 0, 1);
+        InitObj(188, 0, 0, 0, ObjectInteraction.DRINK, "a_bottle_of_water&bottles_of_water", 188, 188, true, true, 0, 1);
+        InitObj(189, 0, 0, 0, ObjectInteraction.DRINK, "a_bottle_of_wine&bottles_of_wine", 189, 189, true, true, 0, 1);
+        InitObj(190, 0, 0, 0, ObjectInteraction.FOOD, "some_meat-on-a-stick&pieces_of_meat-on-a-stick", 190, 190, true, true, 0, 1);
+        InitObj(191, 0, 0, 0, ObjectInteraction.FOOD, "a_nutritious_wafer", 191, 191, true, true, 0, 1);
+        InitObj(192, 0, 0, 0, ObjectInteraction.FOOD, "a_plant", 192, 192, true, true, 0, 1);
+        InitObj(193, 0, 0, 0, ObjectInteraction.PARTICLE, "some_grass&bunches_of_grass", 193, 193, false, false, 0, 1);
+        InitObj(194, 0, 0, 0, ObjectInteraction.CLUTTER, "a_skull", 194, 194, true, true, 0, 1);
+        InitObj(195, 0, 0, 0, ObjectInteraction.CLUTTER, "a_skull", 195, 195, true, true, 0, 1);
+        InitObj(196, 0, 0, 0, ObjectInteraction.CLUTTER, "a_bone", 196, 196, true, true, 0, 1);
+        InitObj(197, 0, 0, 0, ObjectInteraction.CLUTTER, "a_bone", 197, 197, true, true, 0, 1);
+        InitObj(198, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_bones&piles_of_bones", 198, 198, true, true, 0, 1);
+        InitObj(199, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_dagger", 199, 199, true, true, 0, 1);
+        InitObj(200, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_sword", 200, 200, true, true, 0, 1);
+        InitObj(201, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_axe", 201, 201, true, true, 0, 1);
+        InitObj(202, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_mace", 202, 202, true, true, 0, 1);
+        InitObj(203, 0, 0, 0, ObjectInteraction.CLUTTER, "a_broken_shield", 203, 203, true, true, 0, 1);
+        InitObj(204, 0, 0, 0, ObjectInteraction.CLUTTER, "a_piece_of_wood&pieces_of_wood", 204, 204, true, true, 0, 1);
+        InitObj(205, 0, 0, 0, ObjectInteraction.CLUTTER, "a_piece_of_wood&pieces_of_wood", 205, 205, true, true, 0, 1);
+        InitObj(206, 0, 0, 0, ObjectInteraction.CLUTTER, "a_plant", 206, 206, true, true, 0, 1);
+        InitObj(207, 0, 0, 0, ObjectInteraction.CLUTTER, "a_plant", 207, 207, true, true, 0, 1);
+        InitObj(208, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris&piles_of_debris", 208, 208, false, false, 0, 1);
+        InitObj(209, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris&piles_of_debris", 209, 209, false, false, 0, 1);
+        InitObj(210, 0, 0, 0, ObjectInteraction.CLUTTER, "a_lump_of_wax&lumps_of_wax", 210, 210, false, false, 0, 1);
+        InitObj(211, 0, 0, 0, ObjectInteraction.CLUTTER, "a_stalactite", 211, 211, false, false, 0, 1);
+        InitObj(212, 0, 0, 0, ObjectInteraction.CLUTTER, "a_plant", 212, 212, true, true, 0, 1);
+        InitObj(213, 0, 0, 0, ObjectInteraction.CLUTTER, "an_icicle", 213, 213, false, false, 0, 1);
+        InitObj(214, 0, 0, 0, ObjectInteraction.CLUTTER, "a_pile_of_debris&piles_of_debris", 214, 214, false, false, 0, 1);
+        InitObj(215, 0, 0, 0, ObjectInteraction.ANVIL, "an_anvil", 215, 215, true, false, 0, 1);
+        InitObj(216, 0, 0, 0, ObjectInteraction.POLE, "a_pole", 216, 216, true, true, 0, 1);
+        InitObj(217, 0, 0, 0, ObjectInteraction.PARTICLE, "a_plant", 217, 217, true, true, 0, 1);
+        InitObj(218, 0, 0, 0, ObjectInteraction.PARTICLE, "a_plant", 218, 218, true, true, 0, 1);
+        InitObj(219, 0, 0, 0, ObjectInteraction.PARTICLE, "some_rubble&piles_of_rubble", 219, 219, false, false, 0, 1);
+        InitObj(220, 0, 0, 0, ObjectInteraction.PARTICLE, "a_pile_of_wood_chips&piles_of_wood_chips", 220, 220, false, false, 0, 1);
+        InitObj(221, 0, 0, 0, ObjectInteraction.PARTICLE, "a_pile_of_bones&piles_of_bones", 221, 221, false, false, 0, 1);
+        InitObj(222, 0, 0, 0, ObjectInteraction.PARTICLE, "a_blood_stain", 222, 222, false, false, 0, 1);
+        InitObj(223, 0, 0, 0, ObjectInteraction.PARTICLE, "a_blood_stain", 223, 223, false, false, 0, 1);
+        InitObj(224, 0, 0, 0, ObjectInteraction.INVENTORY, "a_runestone", 224, 224, true, true, 0, 1);
+        InitObj(225, 0, 0, 0, ObjectInteraction.POTIONS, "a_black_potion", 225, 225, true, true, 0, 1);
+        InitObj(226, 0, 0, 0, ObjectInteraction.POTIONS, "a_purple_potion", 226, 226, true, true, 0, 1);
+        InitObj(227, 0, 0, 0, ObjectInteraction.POTIONS, "a_yellow_potion", 227, 227, true, true, 0, 1);
+        InitObj(228, 0, 0, 0, ObjectInteraction.POTIONS, "a_green_potion", 228, 228, true, true, 0, 1);
+        InitObj(229, 0, 0, 0, ObjectInteraction.POTIONS, "a_red_potion", 229, 229, true, true, 0, 1);
+        InitObj(230, 0, 0, 0, ObjectInteraction.POTIONS, "a_colorless_potion", 230, 230, true, true, 0, 1);
+        InitObj(231, 0, 0, 0, ObjectInteraction.POTIONS, "a_brown_potion", 231, 231, true, true, 0, 1);
+        InitObj(232, 0, 0, 0, ObjectInteraction.RUNE, "an_An_stone", 224, 232, true, true, 0, 1);
+        InitObj(233, 0, 0, 0, ObjectInteraction.RUNE, "a_Bet_stone", 224, 233, true, true, 0, 1);
+        InitObj(234, 0, 0, 0, ObjectInteraction.RUNE, "a_Corp_stone", 224, 234, true, true, 0, 1);
+        InitObj(235, 0, 0, 0, ObjectInteraction.RUNE, "a_Des_stone", 224, 235, true, true, 0, 1);
+        InitObj(236, 0, 0, 0, ObjectInteraction.RUNE, "an_Ex_stone", 224, 236, true, true, 0, 1);
+        InitObj(237, 0, 0, 0, ObjectInteraction.RUNE, "a_Flam_stone", 224, 237, true, true, 0, 1);
+        InitObj(238, 0, 0, 0, ObjectInteraction.RUNE, "a_Grav_stone", 224, 238, true, true, 0, 1);
+        InitObj(239, 0, 0, 0, ObjectInteraction.RUNE, "a_Hur_stone", 224, 239, true, true, 0, 1);
+        InitObj(240, 0, 0, 0, ObjectInteraction.RUNE, "an_In_stone", 224, 240, true, true, 0, 1);
+        InitObj(241, 0, 0, 0, ObjectInteraction.RUNE, "a_Jux_stone", 224, 241, true, true, 0, 1);
+        InitObj(242, 0, 0, 0, ObjectInteraction.RUNE, "a_Kal_stone", 224, 242, true, true, 0, 1);
+        InitObj(243, 0, 0, 0, ObjectInteraction.RUNE, "a_Lor_stone", 224, 243, true, true, 0, 1);
+        InitObj(244, 0, 0, 0, ObjectInteraction.RUNE, "a_Mani_stone", 224, 244, true, true, 0, 1);
+        InitObj(245, 0, 0, 0, ObjectInteraction.RUNE, "a_Nox_stone", 224, 245, true, true, 0, 1);
+        InitObj(246, 0, 0, 0, ObjectInteraction.RUNE, "an_Ort_stone", 224, 246, true, true, 0, 1);
+        InitObj(247, 0, 0, 0, ObjectInteraction.RUNE, "a_Por_stone", 224, 247, true, true, 0, 1);
+        InitObj(248, 0, 0, 0, ObjectInteraction.RUNE, "a_Quas_stone", 224, 248, true, true, 0, 1);
+        InitObj(249, 0, 0, 0, ObjectInteraction.RUNE, "a_Rel_stone", 224, 249, true, true, 0, 1);
+        InitObj(250, 0, 0, 0, ObjectInteraction.RUNE, "a_Sanct_stone", 224, 250, true, true, 0, 1);
+        InitObj(251, 0, 0, 0, ObjectInteraction.RUNE, "a_Tym_stone", 224, 251, true, true, 0, 1);
+        InitObj(252, 0, 0, 0, ObjectInteraction.RUNE, "an_Uus_stone", 224, 252, true, true, 0, 1);
+        InitObj(253, 0, 0, 0, ObjectInteraction.RUNE, "a_Vas_stone", 224, 253, true, true, 0, 1);
+        InitObj(254, 0, 0, 0, ObjectInteraction.RUNE, "a_Wis_stone", 224, 254, true, true, 0, 1);
+        InitObj(255, 0, 0, 0, ObjectInteraction.RUNE, "a_Ylem_stone", 224, 255, true, true, 0, 1);
+        InitObj(256, 0, 0, 0, ObjectInteraction.PARTICLE, "a_curious_implement", 256, 256, true, true, 0, 1);
+        InitObj(257, 0, 0, 0, ObjectInteraction.LOCKPICK, "a_lockpick", 257, 257, true, true, 0, 1);
+        InitObj(258, 0, 0, 0, ObjectInteraction.KEY, "a_key", 258, 258, true, true, 0, 1);
+        InitObj(259, 0, 0, 0, ObjectInteraction.KEY, "a_key", 259, 259, true, true, 0, 1);
+        InitObj(260, 0, 0, 0, ObjectInteraction.KEY, "a_key", 260, 260, true, true, 0, 1);
+        InitObj(261, 0, 0, 0, ObjectInteraction.KEY, "a_key", 261, 261, true, true, 0, 1);
+        InitObj(262, 0, 0, 0, ObjectInteraction.KEY, "a_key", 262, 262, true, true, 0, 1);
+        InitObj(263, 0, 0, 0, ObjectInteraction.KEY, "a_key", 263, 263, true, true, 0, 1);
+        InitObj(264, 0, 0, 0, ObjectInteraction.KEY, "a_key", 264, 264, true, true, 0, 1);
+        InitObj(265, 0, 0, 0, ObjectInteraction.KEY, "a_key", 265, 265, true, true, 0, 1);
+        InitObj(266, 0, 0, 0, ObjectInteraction.KEY, "a_key", 266, 266, true, true, 0, 1);
+        InitObj(267, 0, 0, 0, ObjectInteraction.KEY, "a_key", 267, 267, true, true, 0, 1);
+        InitObj(268, 0, 0, 0, ObjectInteraction.KEY, "a_key", 268, 268, true, true, 0, 1);
+        InitObj(269, 0, 0, 0, ObjectInteraction.KEY, "a_key", 269, 269, true, true, 0, 1);
+        InitObj(270, 0, 0, 0, ObjectInteraction.KEY, "a_key", 270, 270, true, true, 0, 1);
+        InitObj(271, 0, 0, 0, ObjectInteraction.LOCK, "a_lock", 271, 271, true, false, 0, 1);
+        InitObj(272, 0, 0, 0, ObjectInteraction.PARTICLE, "an_eyeball", 272, 272, false, true, 0, 1);
+        InitObj(273, 0, 0, 0, ObjectInteraction.PARTICLE, "a_horn", 273, 273, true, true, 0, 1);
+        InitObj(274, 0, 0, 0, ObjectInteraction.WAND, "a_pearl-tipped_rod&pearl-tipped_rods", 274, 274, false, true, 0, 1);
+        InitObj(275, 0, 0, 0, ObjectInteraction.PARTICLE, "a_black_eggshell&black_eggshells", 275, 275, false, true, 0, 1);
+        InitObj(276, 0, 0, 0, ObjectInteraction.DREAM_PLANT, "a_plant", 276, 276, true, true, 0, 1);
+        InitObj(277, 0, 0, 0, ObjectInteraction.PARTICLE, "a_serpent_statue&serpent_statues", 277, 277, false, true, 0, 1);
+        InitObj(278, 0, 0, 0, ObjectInteraction.A_DJINN_BOTTLE, "a_bottle", 278, 278, true, true, 0, 1);
+        InitObj(279, 0, 0, 0, ObjectInteraction.PARTICLE, "an_amethyst_rod&amethyst_rods", 279, 279, true, true, 0, 1);
+        InitObj(280, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 280, 280, true, true, 0, 1);
+        InitObj(281, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 281, 281, true, true, 0, 1);
+        InitObj(282, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 282, 282, true, true, 0, 1);
+        InitObj(283, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 283, 283, true, true, 0, 1);
+        InitObj(284, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 284, 284, true, true, 0, 1);
+        InitObj(285, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 285, 285, true, true, 0, 1);
+        InitObj(286, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 286, 286, true, true, 0, 1);
+        InitObj(287, 0, 0, 0, ObjectInteraction.A_BLACKROCK_GEM, "a_blackrock_gem", 287, 287, true, true, 0, 1);
+        InitObj(288, 0, 0, 0, ObjectInteraction.SPELL, "a_spell", 288, 288, true, true, 0, 1);
+        InitObj(289, 0, 0, 0, ObjectInteraction.BEDROLL, "a_bedroll", 289, 289, true, true, 0, 1);
+        InitObj(290, 0, 0, 0, ObjectInteraction.ORB, "an_orb", 290, 290, true, true, 0, 1);
+        InitObj(291, 0, 0, 0, ObjectInteraction.INSTRUMENT, "a_mandolin", 291, 291, true, true, 0, 1);
+        InitObj(292, 0, 0, 0, ObjectInteraction.INSTRUMENT, "a_flute", 292, 292, true, true, 0, 1);
+        InitObj(293, 0, 0, 0, ObjectInteraction.LEECH, "some_leeches&bunches_of_leeches", 293, 293, true, true, 0, 1);
+        InitObj(294, 0, 0, 0, ObjectInteraction.MOONSTONE, "a_moonstone", 294, 294, true, true, 0, 1);
+        InitObj(295, 0, 0, 0, ObjectInteraction.FORCEFIELD, "a_force_field", 295, 295, false, true, 0, 1);
+        InitObj(296, 0, 0, 0, ObjectInteraction.INVENTORY, "a_rock_hammer", 296, 296, true, true, 0, 1);
+        InitObj(297, 0, 0, 0, ObjectInteraction.INVENTORY, "a_resilient_sphere", 297, 297, false, true, 0, 1);
+        InitObj(298, 0, 0, 0, ObjectInteraction.INVENTORY, "a_campfire", 298, 298, false, false, 0, 1);
+        InitObj(299, 0, 0, 0, ObjectInteraction.FISHING_POLE, "a_fishing_pole", 299, 299, true, true, 0, 1);
+        InitObj(300, 0, 0, 0, ObjectInteraction.INVENTORY, "some_thread&pieces_of_thread", 300, 300, true, true, 0, 1);
+        InitObj(301, 0, 0, 0, ObjectInteraction.OIL, "an_oil_flask", 301, 301, true, true, 0, 1);
+        InitObj(302, 0, 0, 0, ObjectInteraction.FOUNTAIN, "a_fountain", 302, 302, true, true, 0, 1);
+        InitObj(303, 0, 0, 0, ObjectInteraction.PARTICLE, "a_banner", 303, 303, true, true, 0, 1);
+        InitObj(304, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 304, 304, true, true, 0, 1);
+        InitObj(305, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 305, 305, true, true, 0, 1);
+        InitObj(306, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 306, 306, true, true, 0, 1);
+        InitObj(307, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 307, 307, true, true, 0, 1);
+        InitObj(308, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 308, 308, true, true, 0, 1);
+        InitObj(309, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 309, 309, true, true, 0, 1);
+        InitObj(310, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 310, 310, true, true, 0, 1);
+        InitObj(311, 0, 0, 0, ObjectInteraction.BOOK, "a_scroll", 311, 311, true, true, 0, 1);
+        InitObj(312, 0, 0, 0, ObjectInteraction.BOOK, "a_book", 312, 312, true, true, 0, 1);
+        InitObj(313, 0, 0, 0, ObjectInteraction.MAPPIECE, "a_bit_of_a_map", 313, 313, true, true, 0, 1);
+        InitObj(314, 0, 0, 0, ObjectInteraction.MAP, "a_map", 314, 314, true, true, 0, 1);
+        InitObj(315, 0, 0, 0, ObjectInteraction.CLUTTER, "a_dead_plant", 315, 315, false, false, 0, 1);
+        InitObj(316, 0, 0, 0, ObjectInteraction.CLUTTER, "a_dead_plant", 316, 316, false, false, 0, 1);
+        InitObj(317, 0, 0, 0, ObjectInteraction.INVENTORY, "a_bottle", 317, 317, true, true, 0, 1);
+        InitObj(318, 0, 0, 0, ObjectInteraction.CLUTTER, "a_stick", 318, 318, true, true, 0, 1);
+        InitObj(319, 0, 0, 0, ObjectInteraction.CLUTTER, "a_resilient_sphere", 319, 319, true, true, 0, 1);
+        InitObj(320, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 320, 320, true, false, 0, 1);
+        InitObj(321, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 321, 321, true, false, 0, 1);
+        InitObj(322, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 322, 322, true, false, 0, 1);
+        InitObj(323, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 323, 323, true, false, 0, 1);
+        InitObj(324, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 324, 324, true, false, 0, 1);
+        InitObj(325, 0, 0, 0, ObjectInteraction.DOOR, "a_door", 325, 325, true, false, 0, 1);
+        InitObj(326, 0, 0, 0, ObjectInteraction.PORTCULLIS, "a_portcullis&portcullises", 326, 326, true, false, 0, 1);
+        InitObj(327, 0, 0, 0, ObjectInteraction.HIDDENDOOR, "a_secret_door", 327, 327, true, false, 0, 1);
+        InitObj(328, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 328, 328, true, false, 0, 1);
+        InitObj(329, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 329, 329, true, false, 0, 1);
+        InitObj(330, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 330, 330, true, false, 0, 1);
+        InitObj(331, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 331, 331, true, false, 0, 1);
+        InitObj(332, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 332, 332, true, false, 0, 1);
+        InitObj(333, 0, 0, 0, ObjectInteraction.DOOR, "an_open_door", 333, 333, true, false, 0, 1);
+        InitObj(334, 0, 0, 0, ObjectInteraction.PORTCULLIS, "an_open_portcullis", 334, 334, true, false, 0, 1);
+        InitObj(335, 0, 0, 0, ObjectInteraction.HIDDENDOOR, "a_secret_door", 335, 335, true, false, 0, 1);
+        InitObj(336, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_bench&benches", 336, 336, false, false, 0, 1);
+        InitObj(337, 0, 0, 0, ObjectInteraction.ARROW, "an_arrow", 337, 337, false, false, 0, 1);
+        InitObj(338, 0, 0, 0, ObjectInteraction.ARROW, "a_crossbow_bolt", 338, 338, false, false, 0, 1);
+        InitObj(339, 0, 0, 0, ObjectInteraction.BOULDER, "a_large_boulder", 339, 339, true, false, 0, 1);
+        InitObj(340, 0, 0, 0, ObjectInteraction.BOULDER, "a_large_boulder", 340, 340, true, false, 0, 1);
+        InitObj(341, 0, 0, 0, ObjectInteraction.BOULDER, "a_boulder", 341, 341, true, false, 0, 1);
+        InitObj(342, 0, 0, 0, ObjectInteraction.BOULDER, "a_small_boulder", 342, 342, true, false, 0, 1);
+        InitObj(343, 0, 0, 0, ObjectInteraction.SHRINE, "a_shrine", 343, 343, true, false, 0, 1);
+        InitObj(344, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_table", 344, 344, false, false, 0, 1);
+        InitObj(345, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_beam", 345, 345, false, false, 0, 1);
+        InitObj(346, 0, 0, 0, ObjectInteraction.MOONGATE, "a_moongate", 346, 346, false, false, 0, 1);
+        InitObj(347, 0, 0, 0, ObjectInteraction.CONTAINER, "a_barrel", 347, 347, true, false, 0, 1);
+        InitObj(348, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_chair", 348, 348, true, false, 0, 1);
+        InitObj(349, 0, 0, 0, ObjectInteraction.CONTAINER, "a_chest", 349, 349, true, false, 0, 1);
+        InitObj(350, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_nightstand", 350, 350, false, false, 0, 1);
+        InitObj(351, 0, 0, 0, ObjectInteraction.TREASURE, "a_lotus_turbo_esprit", 351, 351, true, false, 0, 1);
+        InitObj(352, 0, 0, 0, ObjectInteraction.PILLAR, "a_pillar", 352, 352, true, false, 0, 1);
+        InitObj(353, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 353, 353, true, false, 0, 1);
+        InitObj(354, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch&switches", 354, 354, true, false, 0, 1);
+        InitObj(355, 0, 0, 0, ObjectInteraction.UW_PAINTING, "a_painting", 355, 355, false, false, 0, 1);
+        InitObj(356, 0, 0, 0, ObjectInteraction.BRIDGE, "a_bridge", 356, 356, true, false, 0, 1);
+        InitObj(357, 0, 0, 0, ObjectInteraction.GRAVE, "a_gravestone", 357, 357, true, false, 0, 1);
+        InitObj(358, 0, 0, 0, ObjectInteraction.SIGN, "some_writing", 358, 358, true, false, 0, 1);
+        InitObj(359, 0, 0, 0, ObjectInteraction.BED, "a_bed", 359, 359, true, false, 0, 1);
+        InitObj(360, 0, 0, 0, ObjectInteraction.A_LARGE_BLACKROCK_GEM, "a_large_blackrock_gem", 360, 360, false, false, 0, 1);
+        InitObj(361, 0, 0, 0, ObjectInteraction.A_3D_MODEL, "a_shelf", 361, 361, false, false, 0, 1);
+        InitObj(362, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 362, 362, true, false, 0, 1);
+        InitObj(363, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 363, 363, true, false, 0, 1);
+        InitObj(364, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 364, 364, true, false, 0, 1);
+        InitObj(365, 0, 0, 0, ObjectInteraction.FORCEFIELD, "force_field", 365, 365, false, false, 0, 1);
+        InitObj(366, 0, 0, 0, ObjectInteraction.TMAP_SOLID, "special_tmap_obj", 366, 366, true, false, 0, 1);
+        InitObj(367, 0, 0, 0, ObjectInteraction.TMAP_CLIP, "special_tmap_obj", 367, 367, true, false, 0, 1);
+        InitObj(368, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 368, 368, true, false, 0, 1);
+        InitObj(369, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 369, 369, true, false, 0, 1);
+        InitObj(370, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 370, 370, true, false, 0, 1);
+        InitObj(371, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 371, 371, true, false, 0, 1);
+        InitObj(372, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 372, 372, true, false, 0, 1);
+        InitObj(373, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 373, 373, true, false, 0, 1);
+        InitObj(374, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 374, 374, true, false, 0, 1);
+        InitObj(375, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 375, 375, true, false, 0, 1);
+        InitObj(376, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 376, 376, true, false, 0, 1);
+        InitObj(377, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 377, 377, true, false, 0, 1);
+        InitObj(378, 0, 0, 0, ObjectInteraction.BUTTON, "a_button", 378, 378, true, false, 0, 1);
+        InitObj(379, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 379, 379, true, false, 0, 1);
+        InitObj(380, 0, 0, 0, ObjectInteraction.BUTTON, "a_switch", 380, 380, true, false, 0, 1);
+        InitObj(381, 0, 0, 0, ObjectInteraction.BUTTON, "a_lever", 381, 381, true, false, 0, 1);
+        InitObj(382, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 382, 382, true, false, 0, 1);
+        InitObj(383, 0, 0, 0, ObjectInteraction.BUTTON, "a_pull_chain", 383, 383, true, false, 0, 1);
+        InitObj(384, 0, 0, 0, ObjectInteraction.A_DAMAGE_TRAP, "a_damage_trap", 384, 384, false, false, 0, 1);
+        InitObj(385, 0, 0, 0, ObjectInteraction.A_TELEPORT_TRAP, "a_teleport_trap", 385, 385, false, false, 0, 1);
+        InitObj(386, 0, 0, 0, ObjectInteraction.A_ARROW_TRAP, "a_arrow_trap", 386, 386, false, false, 0, 1);
+        InitObj(387, 0, 0, 0, ObjectInteraction.A_DO_TRAP, "a_hack_trap", 387, 387, false, false, 0, 1);
+        InitObj(388, 0, 0, 0, ObjectInteraction.SPECIAL_EFFECT, "a_special_effects_trap", 388, 388, false, false, 0, 1);
+        InitObj(389, 0, 0, 0, ObjectInteraction.A_CHANGE_TERRAIN_TRAP, "a_change_terrain_trap", 389, 389, false, false, 0, 1);
+        InitObj(390, 0, 0, 0, ObjectInteraction.A_SPELLTRAP, "a_spelltrap", 390, 390, false, false, 0, 1);
+        InitObj(391, 0, 0, 0, ObjectInteraction.A_CREATE_OBJECT_TRAP, "a_create_object_trap", 391, 391, false, false, 0, 1);
+        InitObj(392, 0, 0, 0, ObjectInteraction.A_DOOR_TRAP, "a_door_trap", 392, 392, false, false, 0, 1);
+        InitObj(393, 0, 0, 0, ObjectInteraction.A_WARD_TRAP, "a_ward_trap", 393, 393, false, false, 0, 1);
+        InitObj(394, 0, 0, 0, ObjectInteraction.A_SKILL_TRAP, "a_skill_trap", 394, 394, false, false, 0, 1);
+        InitObj(395, 0, 0, 0, ObjectInteraction.A_DELETE_OBJECT_TRAP, "a_delete_object_trap", 395, 395, false, false, 0, 1);
+        InitObj(396, 0, 0, 0, ObjectInteraction.AN_INVENTORY_TRAP, "an_inventory_trap", 396, 396, false, false, 0, 1);
+        InitObj(397, 0, 0, 0, ObjectInteraction.A_SET_VARIABLE_TRAP, "a_set_variable_trap", 397, 397, false, false, 0, 1);
+        InitObj(398, 0, 0, 0, ObjectInteraction.A_CHECK_VARIABLE_TRAP, "a_check_variable_trap", 398, 398, false, false, 0, 1);
+        InitObj(399, 0, 0, 0, ObjectInteraction.A_NULL_TRAP, "a_null_trap", 399, 399, false, false, 0, 1);
+        InitObj(400, 0, 0, 0, ObjectInteraction.A_TEXT_STRING_TRAP, "a_text_string_trap", 400, 400, false, false, 0, 1);
+        InitObj(401, 0, 0, 0, ObjectInteraction.AN_EXPERIENCE_TRAP, "an_experience_trap", 401, 401, false, false, 0, 1);
+        InitObj(402, 0, 0, 0, ObjectInteraction.A_JUMP_TRAP, "a_jump_trap", 402, 402, false, false, 0, 1);
+        InitObj(403, 0, 0, 0, ObjectInteraction.A_CHANGE_FROM_TRAP, "a_change_from_trap", 403, 403, false, false, 0, 1);
+        InitObj(404, 0, 0, 0, ObjectInteraction.A_CHANGE_TO_TRAP, "a_change_to_trap", 404, 404, false, false, 0, 1);
+        InitObj(405, 0, 0, 0, ObjectInteraction.AN_OSCILLATOR, "an_oscillator_trap", 405, 405, false, false, 0, 1);
+        InitObj(406, 0, 0, 0, ObjectInteraction.A_PROXIMITY_TRAP, "a_proximity_trap", 406, 406, false, false, 0, 1);
+        InitObj(407, 0, 0, 0, ObjectInteraction.A_PIT_TRAP, "a_pit_trap", 407, 407, false, false, 0, 1);
+        InitObj(408, 0, 0, 0, ObjectInteraction.A_BRIDGE_TRAP, "a_bridge_trap", 408, 408, false, false, 0, 1);
+        InitObj(409, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 409, 409, false, false, 0, 1);
+        InitObj(410, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 410, 410, false, false, 0, 1);
+        InitObj(411, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 411, 411, false, false, 0, 1);
+        InitObj(412, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 412, 412, false, false, 0, 1);
+        InitObj(413, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 413, 413, false, false, 0, 1);
+        InitObj(414, 0, 0, 0, ObjectInteraction.A_WARD_TRAP, "a_flam_rune", 414, 414, false, false, 0, 1);
+        InitObj(415, 0, 0, 0, ObjectInteraction.A_WARD_TRAP, "a_tym_rune", 415, 415, false, false, 0, 1);
+        InitObj(416, 0, 0, 0, ObjectInteraction.A_MOVE_TRIGGER, "a_move_trigger", 416, 416, false, false, 0, 1);
+        InitObj(417, 0, 0, 0, ObjectInteraction.A_PICK_UP_TRIGGER, "a_pick_up_trigger", 417, 417, false, false, 0, 1);
+        InitObj(418, 0, 0, 0, ObjectInteraction.A_USE_TRIGGER, "a_use_trigger", 418, 418, false, false, 0, 1);
+        InitObj(419, 0, 0, 0, ObjectInteraction.A_LOOK_TRIGGER, "a_look_trigger", 419, 419, false, false, 0, 1);
+        InitObj(420, 0, 0, 0, ObjectInteraction.A_PRESSURE_TRIGGER, "a_pressure_trigger", 420, 420, false, false, 0, 1);
+        InitObj(421, 0, 0, 0, ObjectInteraction.A_PRESSURE_TRIGGER, "a_pressure_release_trigger", 421, 421, false, false, 0, 1);
+        InitObj(422, 0, 0, 0, ObjectInteraction.AN_ENTER_TRIGGER, "an_enter_trigger", 422, 422, false, false, 0, 1);
+        InitObj(423, 0, 0, 0, ObjectInteraction.AN_EXIT_TRIGGER, "an_exit_trigger", 423, 423, false, false, 0, 1);
+        InitObj(424, 0, 0, 0, ObjectInteraction.AN_UNLOCK_TRIGGER, "an_unlock_trigger", 424, 424, false, false, 0, 1);
+        InitObj(425, 0, 0, 0, ObjectInteraction.A_TIMER_TRIGGER, "a_timer_trigger", 425, 425, false, false, 0, 1);
+        InitObj(426, 0, 0, 0, ObjectInteraction.AN_OPEN_TRIGGER, "an_open_trigger", 426, 426, false, false, 0, 1);
+        InitObj(427, 0, 0, 0, ObjectInteraction.A_CLOSE_TRIGGER, "a_close_trigger", 427, 427, false, false, 0, 1);
+        InitObj(428, 0, 0, 0, ObjectInteraction.A_SCHEDULED_TRIGGER, "a_scheduled_trigger", 428, 428, false, false, 0, 1);
+        InitObj(429, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 429, 429, false, false, 0, 1);
+        InitObj(430, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 430, 430, false, false, 0, 1);
+        InitObj(431, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 431, 431, false, false, 0, 1);
+        InitObj(432, 0, 0, 0, ObjectInteraction.A_MOVE_TRIGGER, "a_move_trigger", 432, 432, false, false, 0, 1);
+        InitObj(433, 0, 0, 0, ObjectInteraction.A_PICK_UP_TRIGGER, "a_pick_up_trigger", 433, 433, false, false, 0, 1);
+        InitObj(434, 0, 0, 0, ObjectInteraction.A_USE_TRIGGER, "a_use_trigger", 434, 434, false, false, 0, 1);
+        InitObj(435, 0, 0, 0, ObjectInteraction.A_LOOK_TRIGGER, "a_look_trigger", 435, 435, false, false, 0, 1);
+        InitObj(436, 0, 0, 0, ObjectInteraction.A_PRESSURE_TRIGGER, "a_pressure_trigger", 436, 436, false, false, 0, 1);
+        InitObj(437, 0, 0, 0, ObjectInteraction.A_PRESSURE_TRIGGER, "a_pressure_release_trigger", 437, 437, false, false, 0, 1);
+        InitObj(438, 0, 0, 0, ObjectInteraction.AN_ENTER_TRIGGER, "an_enter_trigger", 438, 438, false, false, 0, 1);
+        InitObj(439, 0, 0, 0, ObjectInteraction.AN_EXIT_TRIGGER, "an_exit_trigger", 439, 439, false, false, 0, 1);
+        InitObj(440, 0, 0, 0, ObjectInteraction.AN_UNLOCK_TRIGGER, "an_unlock_trigger", 440, 440, false, false, 0, 1);
+        InitObj(441, 0, 0, 0, ObjectInteraction.A_TIMER_TRIGGER, "a_timer_trigger", 441, 441, false, false, 0, 1);
+        InitObj(442, 0, 0, 0, ObjectInteraction.AN_OPEN_TRIGGER, "an_open_trigger", 442, 442, false, false, 0, 1);
+        InitObj(443, 0, 0, 0, ObjectInteraction.A_CLOSE_TRIGGER, "a_close_trigger", 443, 443, false, false, 0, 1);
+        InitObj(444, 0, 0, 0, ObjectInteraction.A_SCHEDULED_TRIGGER, "a_scheduled_trigger", 444, 444, false, false, 0, 1);
+        InitObj(445, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 445, 445, false, false, 0, 1);
+        InitObj(446, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 446, 446, false, false, 0, 1);
+        InitObj(447, 0, 0, 0, ObjectInteraction.PARTICLE, "unknown", 447, 447, false, false, 0, 1);
+        InitObj(448, 0, 0, 0, ObjectInteraction.ANIMATION, "some_blood", 448, 448, false, false, 0, 4);
+        InitObj(449, 0, 0, 0, ObjectInteraction.ANIMATION, "a_mist_cloud", 449, 449, true, true, 15, 4);
+        InitObj(450, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 450, 450, false, false, 19, 5);
+        InitObj(451, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 451, 451, false, false, 24, 4);
+        InitObj(452, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 452, 452, false, false, 29, 4);
+        InitObj(453, 0, 0, 0, ObjectInteraction.ANIMATION, "lightning", 453, 453, false, false, 1, 1);
+        InitObj(454, 0, 0, 0, ObjectInteraction.A_SPLASH, "a_splash&splashes", 454, 454, false, false, 34, 4);
+        InitObj(455, 0, 0, 0, ObjectInteraction.ANIMATION, "some_spacey_twinkles", 455, 455, false, false, 38, 4);
+        InitObj(456, 0, 0, 0, ObjectInteraction.ANIMATION, "some_smoke", 456, 456, false, false, 9, 2);
+        InitObj(457, 0, 0, 0, ObjectInteraction.ANIMATION, "a_fountain", 457, 457, false, false, 5, 4);
+        InitObj(458, 0, 0, 0, ObjectInteraction.ANIMATION, "some_frost", 458, 458, false, false, 11, 4);
+        InitObj(459, 0, 0, 0, ObjectInteraction.ANIMATION, "a_flash", 459, 459, false, false, 43, 4);
+        InitObj(460, 0, 0, 0, ObjectInteraction.ANIMATION, "lightning", 460, 460, false, false, 48, 4);
+        InitObj(461, 0, 0, 0, ObjectInteraction.NPC_WISP, "a_wisp", 461, 461, true, false, 52, 4);
+        InitObj(462, 0, 0, 0, ObjectInteraction.ANIMATION, "a_vapor_trail", 462, 462, false, false, 56, 6);
+        InitObj(463, 0, 0, 0, ObjectInteraction.A_MOVING_DOOR, "a_moving_door", 463, 463, true, true, 0, 1);
+    }
+
 }

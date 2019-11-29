@@ -185,7 +185,15 @@ public class Barrel : Container {
 
 	public virtual Material ModelMaterials(int meshNo)
 	{
-		return GameWorldController.instance.modelMaterial;
+        switch (_RES)
+        {
+            case GAME_UW2:
+                return GameWorldController.instance.MaterialObj[38];
+            default:
+                return GameWorldController.instance.MaterialObj[30];
+        }
+       
+		//return GameWorldController.instance.modelMaterial;
 	}
 
 }

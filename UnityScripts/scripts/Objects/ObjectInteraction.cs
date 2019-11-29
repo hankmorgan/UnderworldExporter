@@ -146,6 +146,7 @@ public class ObjectInteraction : UWEBase{
     public const int DRINK = 132;
     public const int A_BRIDGE_TRAP = 133;
     public const int A_DJINN_BOTTLE = 134;
+    public const int A_SPLASH = 135;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -1115,8 +1116,8 @@ public class ObjectInteraction : UWEBase{
         GameObject SpriteController = new GameObject("_sprite");
         SpriteController.transform.position = myObj.transform.position;
         SpriteRenderer newsprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
-        Sprite image = Resources.Load<Sprite>(AssetPath);//Loads the sprite.
-        newsprite.sprite = image;//Assigns the sprite to the object.
+        //?Sprite image = Resources.Load<Sprite>(AssetPath);//Loads the sprite.
+        //?newsprite.sprite = image;//Assigns the sprite to the object.
         SpriteController.transform.parent = myObj.transform;
         SpriteController.transform.Rotate(0f, 0f, 0f);
         SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -2545,6 +2546,10 @@ public class ObjectInteraction : UWEBase{
                 myObj.AddComponent<object_base>();
                 AddAnimation = true;
                 break;
+            case A_SPLASH:
+                myObj.AddComponent<a_splash>();
+                AddAnimation = true;
+                break;
             case BRIDGE:
                 myObj.AddComponent<Bridge>();
                 CreateSprite = false;
@@ -2878,8 +2883,8 @@ public class ObjectInteraction : UWEBase{
     }
 
     public bool isMoveable()
-    {//GameWorldController.instance.objectMaster
-        return (GameWorldController.instance.objectMaster.objProp[item_id].isMoveable == 1);
+    {
+        return GameWorldController.instance.objectMaster.objProp[item_id].isMoveable;
     }
 
 
@@ -2910,7 +2915,7 @@ public class ObjectInteraction : UWEBase{
     {
         get
         {
-            return GameWorldController.instance.objectMaster.objProp[item_id].isUseable == 1;
+            return GameWorldController.instance.objectMaster.objProp[item_id].isUseable;
         }
         
     }

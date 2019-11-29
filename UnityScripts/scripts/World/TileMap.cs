@@ -319,6 +319,17 @@ public class TileMap : Loader
     /// <returns>The tile vector.</returns>
     /// <param name="tileX">Tile x.</param>
     /// <param name="tileY">Tile y.</param>
+    public Vector3 getTileVector(float tileX, float tileY)
+    {
+        return getTileVector((int)tileX, (int)tileY);
+    }
+
+    /// <summary>
+    /// Gets the vector3 at the center of the tile specified.
+    /// </summary>
+    /// <returns>The tile vector.</returns>
+    /// <param name="tileX">Tile x.</param>
+    /// <param name="tileY">Tile y.</param>
     public Vector3 getTileVector(int tileX, int tileY, float zpos)
     {
         return new Vector3(
