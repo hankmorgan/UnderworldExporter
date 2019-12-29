@@ -12,7 +12,24 @@ public class NPC : MobileObject
     public string debugname;
 
     public CharacterController CharController;
-    
+
+    /// <summary>
+    /// Controller for NPC audio and ambient sounds
+    /// </summary>
+    public NPC_Audio npc_aud;
+
+    public AudioSource audMovement; //AudioSource for walking & running based actions.
+    public AudioSource audCombat; //Audiosource for combat actions performed by the npc
+    public AudioSource audVoice; //Audiosource for spoken actions. Eg alerts and barks. Idle noises.
+    public AudioSource audPhysical //AudioSource for impacts on the NPC. Eg if the player hits the npc the impact sound will come from here.
+    {
+        get
+        {
+            return objInt().aud;
+        }
+    }
+    bool step;
+
     //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
     public const int AI_ATTITUDE_HOSTILE = 0;
     public const int AI_ATTITUDE_UPSET = 1;
@@ -343,8 +360,7 @@ public class NPC : MobileObject
         {
             debugname = StringController.instance.GetSimpleObjectNameUW(item_id);
         }
-        //debugCategory=GameWorldController.instance.objDat.critterStats[item_id-64].Category;
-        //debugPoison = GameWorldController.instance.objDat.critterStats[item_id-64].Poison;
+
         NPC_IDi = item_id;
         StartingHP = npc_hp;
         newAnim = this.gameObject.AddComponent<NPC_Animation>();
@@ -362,6 +378,32 @@ public class NPC : MobileObject
             sep.counter = npc_gtarg;
             sep.Go();
         }
+
+        //Start the NPC audio controller.
+        audMovement = this.gameObject.AddComponent<AudioSource>();
+        audMovement.maxDistance = 1;
+        audMovement.spatialBlend = 1;
+        audMovement.rolloffMode = AudioRolloffMode.Linear;
+        audMovement.minDistance = 1;
+        audMovement.maxDistance = 4;
+
+        audCombat = this.gameObject.AddComponent<AudioSource>();
+        audCombat.maxDistance = 1;
+        audCombat.spatialBlend = 1;
+        audCombat.rolloffMode = AudioRolloffMode.Linear;
+        audCombat.minDistance = 1;
+        audCombat.maxDistance = 4;
+
+        audVoice = this.gameObject.AddComponent<AudioSource>();
+        audVoice.maxDistance = 1;
+        audVoice.spatialBlend = 1;
+        audVoice.rolloffMode = AudioRolloffMode.Linear;
+        audVoice.minDistance = 1;
+        audVoice.maxDistance = 4;
+
+        npc_aud = new NPC_Audio(this, audMovement, audCombat,audVoice, objInt().aud);
+        StartCoroutine(playfootsteps());
+        StartCoroutine(playIdleBarks());
     }
 
     void AI_INIT()
@@ -566,42 +608,44 @@ public class NPC : MobileObject
         }
         UWCharacter.Instance.AddXP(GameWorldController.instance.objDat.critterStats[item_id - 64].Exp);
 
-        //Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
-        //Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
-        //Flying = 0x02 (Flying critters like bats and imps), 
-        //Swimming = 0x03 (Swimming critters like lurkers), 
-        //Creeping = 0x04 (Creeping critters like rats and spiders), 
-        //Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
-        //EarthGolem = 0x11 (Only used for the earth golem),
-        //Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
-        switch ((NPCCategory)GameWorldController.instance.objDat.critterStats[item_id - 64].Category)
-        {
-            //case 0x0:
-            //case 0x02:
-            case NPCCategory.ethereal:
-            case NPCCategory.flying:
-                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3]; break;
-            //case 0x03:
-            case NPCCategory.swimming:
-                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1]; break;
-            //case 0x04:
-            //case 0x05:
-            case NPCCategory.crawling:
-            case NPCCategory.creeping:
-                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2]; break;
-            //case 0x11:
-            case NPCCategory.golem:
-                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_RUMBLE]; break;
-            //case 0x01:
-            case NPCCategory.human:
-            case NPCCategory.humanoid:
-            default:
-                objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1]; break;
-        }
-        if (ObjectInteraction.PlaySoundEffects)
-        {
-            objInt().aud.Play();
-        }
+        npc_aud.PlayDeathSound();
+
+        ////////Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
+        ////////Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
+        ////////Flying = 0x02 (Flying critters like bats and imps), 
+        ////////Swimming = 0x03 (Swimming critters like lurkers), 
+        ////////Creeping = 0x04 (Creeping critters like rats and spiders), 
+        ////////Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
+        ////////EarthGolem = 0x11 (Only used for the earth golem),
+        ////////Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
+        //////switch ((NPCCategory)GameWorldController.instance.objDat.critterStats[item_id - 64].Category)
+        //////{
+        //////    //case 0x0:
+        //////    //case 0x02:
+        //////    case NPCCategory.ethereal:
+        //////    case NPCCategory.flying:
+        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3]; break;
+        //////    //case 0x03:
+        //////    case NPCCategory.swimming:
+        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1]; break;
+        //////    //case 0x04:
+        //////    //case 0x05:
+        //////    case NPCCategory.crawling:
+        //////    case NPCCategory.creeping:
+        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2]; break;
+        //////    //case 0x11:
+        //////    case NPCCategory.golem:
+        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_RUMBLE]; break;
+        //////    //case 0x01:
+        //////    case NPCCategory.human:
+        //////    case NPCCategory.humanoid:
+        //////    default:
+        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1]; break;
+        //////}
+        //if (ObjectInteraction.PlaySoundEffects)
+        //{
+        //    objInt().aud.Play();
+        //}
     }
 
     /// <summary>
@@ -918,7 +962,7 @@ public class NPC : MobileObject
             Vector3 ABf = this.transform.position - gtarg.transform.position;
             Vector3 Movepos = gtarg.transform.position + (0.9f * ABf.normalized);
             Agent.destination = Movepos;
-            Agent.isStopped = false;
+            Agent.isStopped = false;            
             //Set to idle										
             if (gtarg.name == "_Gronk")
             {
@@ -2254,10 +2298,11 @@ public class NPC : MobileObject
             DestTileX = npc_xhome;
             DestTileY = npc_yhome;
         }
-
     }
 
-
+    /// <summary>
+    /// Changes to the npcs death animation.
+    /// </summary>
     void PerformDeathAnim()
     {
         AnimRange = NPC.AI_ANIM_DEATH;
@@ -2543,6 +2588,66 @@ public class NPC : MobileObject
                     GRLoader grGenHead = new GRLoader(GRLoader.GHED_GR);
                     return grGenHead.LoadImageAt(HeadToUse);
                 }
+        }
+    }
+
+
+
+    /// <summary>
+    /// Play the walking sounds for the npc.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator playfootsteps()
+    {//WIP!!
+        while (true)
+        {
+            yield return new WaitForSeconds(0.4f);
+            if (Agent != null)
+            {
+                if (Agent.isOnNavMesh && Agent.velocity.magnitude != 0)
+                {
+                    if (newAnim.enabled)//AI is awake
+                    {
+                        if (!audMovement.isPlaying)
+                        {
+                            if (step)
+                            {
+                                npc_aud.PlayWalkingSound_1();
+                                step = false;
+                            }
+                            else
+                            {
+                                npc_aud.PlayWalkingSound_2();
+                                step = true;
+                            }
+                            //audMovement.Play();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Play the walking sounds for the npc.
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator playIdleBarks()
+    {//WIP!!
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(2f,20f));
+            if (Agent != null)
+            {
+                if (newAnim.enabled)//AI is awake
+                {
+                    if (!audVoice.isPlaying)
+                    {
+                        npc_aud.PlayIdleSound();
+                        //audVoice.Play();
+                    }
+                }              
+            }
         }
     }
 }

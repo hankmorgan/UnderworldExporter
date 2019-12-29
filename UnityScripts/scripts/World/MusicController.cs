@@ -139,6 +139,9 @@ public class MusicController : UWEBase
     /// </summary>
     public AudioClip[] MainTrackList = new AudioClip[32];
 
+
+    public AudioClip[] TestAudioClips = new AudioClip[6]; //bank of test sound clips.
+
     /// <summary>
     /// Array of the possible intro tracks (uw1)
     /// </summary>
@@ -192,7 +195,6 @@ public class MusicController : UWEBase
 
     public static MusicController instance;
 
-    public static NPC_Audio npc_audio = new NPC_Audio();
 
     void Awake()
     {

@@ -844,16 +844,16 @@ public class UWCharacter : Character
                     break;
                 }
             case TerrainDatLoader.TerrainTypes.WaterFlowEast:
-                IceCurrentVelocity = new Vector3(.5f, 0f, 0f); isSwimming = true; onIce = false; onLava = false; break;
+                IceCurrentVelocity = new Vector3(.5f, 0f, 0f); isSwimming = IsGrounded(); onIce = false; onLava = false; break;
             case TerrainDatLoader.TerrainTypes.WaterFlowWest:
-                IceCurrentVelocity = new Vector3(-.5f, 0f, 0f); isSwimming = true; onIce = false; onLava = false; break;
+                IceCurrentVelocity = new Vector3(-.5f, 0f, 0f); isSwimming = IsGrounded(); onIce = false; onLava = false; break;
             case TerrainDatLoader.TerrainTypes.WaterFlowNorth:
-                IceCurrentVelocity = new Vector3(0f, 0f, .5f); isSwimming = true; onIce = false; onLava = false; break;
+                IceCurrentVelocity = new Vector3(0f, 0f, .5f); isSwimming = IsGrounded(); onIce = false; onLava = false; break;
             case TerrainDatLoader.TerrainTypes.WaterFlowSouth:
-                IceCurrentVelocity = new Vector3(0f, 0f, -.5f); isSwimming = true; onIce = false; onLava = false; break;
+                IceCurrentVelocity = new Vector3(0f, 0f, -.5f); isSwimming = IsGrounded(); onIce = false; onLava = false; break;
             case TerrainDatLoader.TerrainTypes.Water:
             case TerrainDatLoader.TerrainTypes.Waterfall:
-                isSwimming = true; IceCurrentVelocity = Vector3.zero; onIce = false; onLava = false; break;
+                isSwimming = IsGrounded(); IceCurrentVelocity = Vector3.zero; onIce = false; onLava = false; break;
             default:
                 if (IceCurrentVelocity != Vector3.zero)
                 {

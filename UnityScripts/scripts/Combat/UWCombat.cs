@@ -588,29 +588,17 @@ public class UWCombat : Combat
         switch (HitRollResult)
         {
             case 0: //Miss
-                    //Impact.SpawnHitImpact(hit.transform.name + "_impact", npc.objInt().GetImpactPoint(),46,50);
-                if (ObjectInteraction.PlaySoundEffects)
-                {
-                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_MELEE_MISS_2];
-                    npc.objInt().aud.Play();
-                }
+                //Impact.SpawnHitImpact(hit.transform.name + "_impact", npc.objInt().GetImpactPoint(),46,50);
+                npc.npc_aud.PlayCombatMissed();
                 break;
             case 1://Hit
                 Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());
-                if (ObjectInteraction.PlaySoundEffects)
-                {
-                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[GetHitSound()];
-                    npc.objInt().aud.Play();
-                }
+                npc.npc_aud.PlayCombatHit(GetHitSound());
                 break;
             case 2://Crit
                 Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint(), npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());
                 Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint() + Vector3.up * 0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());
-                if (ObjectInteraction.PlaySoundEffects)
-                {
-                    npc.objInt().aud.clip = MusicController.instance.SoundEffects[GetHitSound()];
-                    npc.objInt().aud.Play();
-                }
+                npc.npc_aud.PlayCombatHit(GetHitSound());
                 break;
         }
 

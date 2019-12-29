@@ -329,7 +329,7 @@ public class ObjectInteraction : UWEBase{
     public Vector3 startPos;
 
     [Header("Links")]
-    public AudioSource aud;
+    public AudioSource aud;//Audio Source for common sounds.
     public Rigidbody rg;
 
 
@@ -344,9 +344,7 @@ public class ObjectInteraction : UWEBase{
 
     void Start()
     {
-        //isAnimated=false;
         animationStarted = false;
-       // sr = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         startPos = this.transform.position;
         if (ObjectSprite != null)
         {
@@ -1116,8 +1114,6 @@ public class ObjectInteraction : UWEBase{
         GameObject SpriteController = new GameObject("_sprite");
         SpriteController.transform.position = myObj.transform.position;
         SpriteRenderer newsprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
-        //?Sprite image = Resources.Load<Sprite>(AssetPath);//Loads the sprite.
-        //?newsprite.sprite = image;//Assigns the sprite to the object.
         SpriteController.transform.parent = myObj.transform;
         SpriteController.transform.Rotate(0f, 0f, 0f);
         SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
@@ -2702,7 +2698,7 @@ public class ObjectInteraction : UWEBase{
             }
         }
 #if (UNITY_EDITOR)
-        CreateSprite = true;//always create a sprite in editor mode.
+        CreateSprite = CreateSprite || (ObjectLoader.isTrap(currObj) || ObjectLoader.isTrigger(currObj) );//always create a sprite in editor mode for traps & triggers
 #endif
 
         if ((CreateSprite) || (EditorMode) )

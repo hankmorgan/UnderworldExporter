@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class a_splash : object_base {
 
-    public AudioSource aud;
+    //public AudioSource aud;
 	// Use this for initialization
 
-    protected override void Start()
+    public override void InitSound()
     {
-        base.Start();
-        aud = this.GetComponent<AudioSource>();
-        aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
-        aud.playOnAwake = false;
-        aud.loop = true;        
-        aud.volume = 0.1f;
-        aud.maxDistance = 10f;
-        aud.rolloffMode = AudioRolloffMode.Linear;
-        aud.Play();
-    }
+        base.InitSound();
 
+        //aud = this.GetComponent<AudioSource>();
+        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
+        objInt().aud.playOnAwake = false;
+        objInt().aud.loop = true;
+        objInt().aud.volume = 0.1f;
+        objInt().aud.maxDistance = 10f;
+        objInt().aud.rolloffMode = AudioRolloffMode.Linear;
+        objInt().aud.Play();
+    }
 
 }

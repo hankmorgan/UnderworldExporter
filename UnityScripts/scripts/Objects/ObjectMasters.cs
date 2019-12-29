@@ -586,8 +586,8 @@ public class ObjectMasters {
         InitObj(450, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 450, 450, true, true, 21, 5);
         InitObj(451, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 451, 451, true, true, 26, 5);
         InitObj(452, 0, 0, 0, ObjectInteraction.ANIMATION, "an_explosion", 452, 452, true, true, 31, 4);
-        InitObj(453, 0, 0, 0, ObjectInteraction.ANIMATION, "a_splash_splashes", 453, 453, true, true, 36, 4);
-        InitObj(454, 0, 0, 0, ObjectInteraction.ANIMATION, "a_splash_splahes", 454, 454, true, true, 36, 4);
+        InitObj(453, 0, 0, 0, ObjectInteraction.A_SPLASH, "a_splash_splashes", 453, 453, true, true, 36, 4);
+        InitObj(454, 0, 0, 0, ObjectInteraction.A_SPLASH, "a_splash_splahes", 454, 454, true, true, 36, 4);
         InitObj(455, 0, 0, 0, ObjectInteraction.ANIMATION, "a_spell_effect", 455, 455, true, true, 40, 4);
         InitObj(456, 0, 0, 0, ObjectInteraction.ANIMATION, "some_smoke", 456, 456, true, true, 9, 4);
         InitObj(457, 0, 0, 0, ObjectInteraction.ANIMATION, "a_fountain", 457, 457, false, true, 5, 4);

@@ -474,17 +474,16 @@ public class object_base : UWEBase
     /// <returns>The object interaction.</returns>
     public ObjectInteraction objInt()
     {
-        //CheckReferences();
         if (_objInt == null)
         {
             _objInt = this.GetComponent<ObjectInteraction>();
         }
-        return _objInt; //this.gameObject.GetComponent<ObjectInteraction>();
+        return _objInt;
     }
 
     protected virtual void Start()
     {
-
+        InitSound();
     }
 
     /// <summary>
@@ -1352,6 +1351,14 @@ return false;*/
     /// Event to call when the object is destroyed fully.
     /// </summary>
     public virtual void DestroyEvent()
+    {
+
+    }
+
+    /// <summary>
+    /// Sound effect initialisation for the object.
+    /// </summary>
+    public virtual void InitSound()
     {
 
     }
