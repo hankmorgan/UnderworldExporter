@@ -84,12 +84,11 @@ public class NPC_Audio : UWClass {
         audMovement = audMovementInstance;
         audCombat = audCombatInstance;
         audVoice = audVoiceInstance;
-        //SoundWalk = MusicController.SOUND_EFFECT_FOOT_1;
     }
 
 
     /// <summary>
-    /// PLay the sound clip on the npc
+    /// Play the sound clip on the npc
     /// </summary>
     /// <param name="npc"></param>
     /// <param name="clip"></param>
@@ -105,7 +104,7 @@ public class NPC_Audio : UWClass {
     }
 
     /// <summary>
-    /// PLay the sound clip on the npc
+    /// Play the sound clip on the npc
     /// </summary>
     /// <param name="npc"></param>
     /// <param name="clip"></param>
