@@ -32,7 +32,7 @@ Contents
 	1.1 Ultima Underworld 1 (UW1).
 		UW1 is fully supported and can be completed from start to finish. Save games are both forward and backwardly compatable with the original dos version.
 
-	1.2 Ultima Undeworld 1 Demo Version (UW0)
+	1.2 Ultima Underworld 1 Demo Version (UW0)
 		UW0 is a freely available demo of the first level of UW1. It is fully supported with the following exceptions:
 			-The rolling demo is not supported.
 			-Weapon animations are not currently working (combat still works)
@@ -43,7 +43,7 @@ Contents
 	1.4 System Shock 1 (SHOCK)
 		SHOCK is currently enabled in a map viewer mode. Developement of any SS1 focused releases has been postponed pending completion of Underworld 1&2.
 		
-	1.4 Terra Nove Strike Force Centrauri (TNOVA)
+	1.4 Terra Nove Strike Force Centauri (TNOVA)
 		TNOVA is implemented as a side project map-viewer. There are no plans to develop this game any further.	
 		
 2 Installation and Configuration
@@ -83,7 +83,7 @@ The music files must be in .ogg format and named 01.ogg to 15.ogg  Refer to the 
 3  The following are the default controls
 
 	Movement - WASD
-	Jump - Spare
+	Jump - Space
 	Toggle mouselook* - E
 	Cast selected spell* - Q
 	Toggle fullscreen* - F  (some ui elements are draggable in fullscreen mode)
