@@ -124,14 +124,14 @@ public class PlayerInventory : UWEBase
             }
             set
             {
-                _sHelm = value;
+                _sGloves = value;
                 if (playerUW.isFemale == true)
                 {
-                    DisplayGameObject(_sHelm, UWHUD.instance.Gloves_f_Slot, null, true);
+                    DisplayGameObject(_sGloves, UWHUD.instance.Gloves_f_Slot, null, true);
                 }
                 else
                 {
-                    DisplayGameObject(_sHelm, UWHUD.instance.Gloves_m_Slot, null, true);
+                    DisplayGameObject(_sGloves, UWHUD.instance.Gloves_m_Slot, null, true);
                 }
             }
     }

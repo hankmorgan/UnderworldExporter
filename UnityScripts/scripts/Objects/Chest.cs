@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Linq;
 
-public class Chest : Barrel {
+public class Chest : Model3D {
 
-	protected override int NoOfMeshes ()
+    public override int NoOfMeshes ()
 	{
 		return 2;
 	}
 	
-	protected override int[] ModelTriangles (int meshNo)
+	public override int[] ModelTriangles (int meshNo)
 	{
 		switch(meshNo)
 		{
@@ -22,7 +22,7 @@ public class Chest : Barrel {
 	}
 
 
-	protected override Vector3[] ModelVertices ()
+    public override Vector3[] ModelVertices ()
 	{
 		Vector3[] ModelVerts = new Vector3[68];
 		ModelVerts[0] = new Vector3(-0.0625f,0f,-0.1835938f);

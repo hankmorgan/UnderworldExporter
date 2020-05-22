@@ -1955,6 +1955,7 @@ public class ObjectInteraction : UWEBase{
             case CONTAINER:
                 {
                     myObj.AddComponent<container_obj>();//placeholder obj base to allow interaction.
+                    myObj.AddComponent<Container>();
                     switch (objInt.item_id)
                     {
                         case 349://Chest variant
@@ -1977,10 +1978,9 @@ public class ObjectInteraction : UWEBase{
                             }
                         default:
                             {
-                                myObj.AddComponent<Container>();
                                 myObj.GetComponent<Container>().items = new ObjectInteraction[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
                                 //Container cont = 
-                                myObj.AddComponent<Container>();
+                                //myObj.AddComponent<Container>();
                                 //here Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList);
                                 break;
                             }
