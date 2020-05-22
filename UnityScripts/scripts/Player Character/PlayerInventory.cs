@@ -279,7 +279,7 @@ public class PlayerInventory : UWEBase
             //bBackPack[i] = true;
             setBackPack(i, null);
         }
-        UWHUD.instance.Encumberance.text = Mathf.Round(getEncumberance()).ToString();
+        UWHUD.instance.Encumberance.text = getEncumberance().ToString();
         if (playerUW.isFemale)
         {
             //UWHUD.instance.playerBody.texture =(Texture2D)Resources.Load(_RES +"/Hud/Bodies/bodies_" + (5+playerUW.Body).ToString("0000"));		
@@ -795,7 +795,7 @@ public class PlayerInventory : UWEBase
         }
         if (UWHUD.instance.Encumberance.enabled == true)
         {
-            UWHUD.instance.Encumberance.text = Mathf.Round(getEncumberance()).ToString();
+            UWHUD.instance.Encumberance.text = getEncumberance().ToString();
         }
         UpdateLightSources();
     }
@@ -1144,16 +1144,20 @@ public class PlayerInventory : UWEBase
     }
 
 
-
+    /// <summary>
+    /// What remaining weight the player can carry.
+    /// </summary>
+    /// <returns></returns>
     public float getEncumberance()
-    {//What remaining weight the player can carry.
+    {
 
         float InventoryWeight = getInventoryWeight();
         float CarryWeight = 0f;
         switch (_RES)
         {
             case GAME_UW2:
-                CarryWeight = playerUW.PlayerSkills.STR * 2.5f;//estimate
+                //IN UW2 Weight is calcuated based on the a base carry weight of 300  + str * 13. In units of 0.1 stones
+                CarryWeight = (300f + (playerUW.PlayerSkills.STR * 13f)) * 0.1f;//estimate
                 break;
             default:
                 CarryWeight = playerUW.PlayerSkills.STR * 2.0f;
@@ -1164,41 +1168,39 @@ public class PlayerInventory : UWEBase
     }
 
 
+    /// <summary>
+    /// Returns the first instance of a particular Item id in the players inventory
+    /// </summary>
+    /// <param name="item_id">Item ID to find</param>
+    /// <returns></returns>
     public ObjectInteraction findObjInteractionByID(int item_id)
-    {//Returns the first instance of a particular Item id in the players inventory
+    {
         for (int i = 0; i <= 10; i++)
         {//Search the paperdoll slots first.
             ObjectInteraction objInt = GetObjectIntAtSlot(i);
-            //if (obj != null)
-            //{
-                //ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
-                if (objInt != null)
+            //ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+            if (objInt != null)
+            {
+                if (objInt.item_id == item_id)
                 {
-                    if (objInt.item_id == item_id)
+                    return objInt;
+                }
+                else
+                {
+                    if (objInt.GetItemType() == ObjectInteraction.CONTAINER)
                     {
-                        return objInt;
-                    }
-                    else
-                    {
-                        if (objInt.GetItemType() == ObjectInteraction.CONTAINER)
+                        ObjectInteraction find2 = objInt.GetComponent<Container>().findItemOfType(item_id);
+                        if (find2 != null)
                         {
-                            ObjectInteraction find2 = objInt.GetComponent<Container>().findItemOfType(item_id);
-                            if (find2 != null)
+                            if (find2.item_id == item_id)
                             {
-                                //GameObject obj2 = GameObject.Find(find2);
-                                //ObjectInteraction objInt2 = obj2.GetComponent<ObjectInteraction>();
-                                //if (objInt2 != null)
-                                //{
-                                    if (find2.item_id == item_id)
-                                    {
-                                        return find2;
-                                    }
-                               // }
+                                return find2;
                             }
                         }
                     }
                 }
-           // }
+            }
+
         }
         //playerUW.GetComponent<Container>();
         ObjectInteraction find = playerContainer.findItemOfType(item_id);

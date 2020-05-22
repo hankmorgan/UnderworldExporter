@@ -50,24 +50,25 @@ public class SaveGame : Loader
     };
 
     
-
+    /// <summary>
+    /// Ratio of UNITY co-ordinates to Tile co-ordinates
+    /// </summary>
     private const float Ratio = 213f;
+
+    //Adjustment of players vertial postion in Unity to UW co-ordinates
     private const float VertAdjust = 0.3543672f;
 
     private const int NoOfEncryptedBytes = 0xD2;//218;		//219
-                                                /// <summary>
-                                                /// Loads the player dat file into the current character
-                                                /// </summary>
-                                                /// <param name="slotNo">Slot no.</param>
+
+    /// <summary>
+    /// Loads the player dat file into the current character
+    /// </summary>
+    /// <param name="slotNo">Slot no.</param>
     public static void LoadPlayerDatUW1(int slotNo)
     {
-        char[] buffer;
-        //int x_position=0;
-        //int y_position=0;
-        //int z_position=0;
+        char[] buffer;//File data
 
-
-        int[] ActiveEffectIds = new int[3];
+        int[] ActiveEffectIds = new int[3]; //array of spell effects currently applied to the player.
         short[] ActiveEffectStability = new short[3];
         int effectCounter = 0;
 
@@ -1641,6 +1642,7 @@ public class SaveGame : Loader
                     case 0x4D: ///   weight in 0.1 stones
                         //Or STR * 2; safe to ignore?
                         //testvalue=(int)DataLoader.getValAtAddress(buffer,i,16);break;
+                        Debug.Log("Weight value is " + (int)DataLoader.getValAtAddress(buffer, i, 16) + " str = " + UWCharacter.Instance.PlayerSkills.STR);
                         break;
                     case 0x4F: ///   experience in 0.1 points
                         UWCharacter.Instance.EXP = (int)(DataLoader.getValAtAddress(buffer, i, 32) *0.1f); break;
@@ -2713,6 +2715,10 @@ public class SaveGame : Loader
         }
     }
 
+
+    /// <summary>
+    /// Re-initialise the UI when loading a new game.
+    /// </summary>
     static void ResetUI()
     {
         UWCharacter.Instance.playerInventory.currentContainer = UWCharacter.Instance.playerInventory.playerContainer; // "_Gronk";
