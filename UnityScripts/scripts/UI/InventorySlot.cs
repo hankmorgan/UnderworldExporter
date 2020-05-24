@@ -30,8 +30,11 @@ public class InventorySlot : GuiBase
         }
         if (CurrentObjectInHand == null)
         {
-            UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
-            InteractionModeControl.UpdateNow = true;
+            if (!ConversationVM.InConversation)
+            {
+                UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
+                InteractionModeControl.UpdateNow = true;
+            }
             ClickEvent(-2);
         }
     }
@@ -411,7 +414,9 @@ public class InventorySlot : GuiBase
                         {
                             if (ConversationVM.InConversation == true)
                             {
-                                InventorySlot.TempLookAt = UWHUD.instance.MessageScroll.NewUIOUt.text;
+                                //InventorySlot.TempLookAt = UWHUD.instance.MessageScroll.NewUIOUt.text;
+                                //UWHUD.instance.MessageScroll.NewUIOUt.text = "";
+                                UWHUD.instance.ConversationButtonParent.SetActive(false);
                                 UWHUD.instance.MessageScroll.Set("Move how many?");
                                 ConversationVM.EnteringQty = true;
                             }
@@ -462,7 +467,9 @@ public class InventorySlot : GuiBase
         }
         else
         {
-            UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
+            UWHUD.instance.ConversationButtonParent.SetActive(true);
+            UWHUD.instance.MessageScroll.Set("");
+           // UWHUD.instance.MessageScroll.NewUIOUt.text = InventorySlot.TempLookAt;//Restore original text
         }
 
         if (quant == 0)

@@ -81,11 +81,8 @@ public class TradeSlot : GuiBase {
 		if (objInt!=null)
 		{
 			TradeSlot.LookingAt=true;
-			//UWHUD.instance.MessageScroll.SetAnchorX(1.0f);//Move off screen.
 			TradeSlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
-			//UWHUD.instance.MessageScrollTemp.SetAnchorX(0.06f);
 			StartCoroutine(ClearTempLookAt());
-			//UWHUD.instance.MessageScrollTemp.Set (StringController.instance.GetFormattedObjectNameUW(objInt));
 		}
 	}
 
@@ -103,9 +100,6 @@ public class TradeSlot : GuiBase {
 			Time.timeScale=1.0f;//just in case a conversations is ended while looking.
 		}
 				UWHUD.instance.MessageScroll.NewUIOUt.text=TradeSlot.TempLookAt;
-		//UWHUD.instance.MessageScroll.SetAnchorX(0.06f);
-		//UWHUD.instance.MessageScrollTemp.SetAnchorX(1.00f);
-		//UWHUD.instance.MessageScrollTemp.Set("");
 	}
 
 	public void PlayerSlotLeftClick()
@@ -117,26 +111,21 @@ public class TradeSlot : GuiBase {
 			//put the object in hand in this slot.
 			if (objectInSlot==null)
 			{//Empty slot
-				//GameObject objToMove = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 				if (CurrentObjectInHand != null)
 				{
 					if (CurrentObjectInHand.transform.parent != GameWorldController.instance.DynamicObjectMarker())
 					{//Object needs to be moved to world
-							//objToMove.transform.parent= GameWorldController.instance.DynamicObjectMarker();
 							GameWorldController.MoveToWorld(CurrentObjectInHand);
 							ConversationVM.BuildObjectList();
 					}
 					objectInSlot= CurrentObjectInHand;
-					CurrentObjectInHand=null;
-					SlotImage.texture=UWHUD.instance.CursorIcon;
-					//UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
+                    SlotImage.texture = UWHUD.instance.CursorIcon;
+                    CurrentObjectInHand =null;
 					Selected=true;
 				}
 			}
 			else
 			{//Swap the objects
-				//GameObject objInSlot = GetGameObjectInteraction().gameObject;
-				//GameObject objInHand = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 				if(objIntAtSlot != null)
 				{
                     objIntAtSlot.transform.parent=GameWorldController.instance.InventoryMarker.transform;
@@ -146,13 +135,11 @@ public class TradeSlot : GuiBase {
 				{
 					if (CurrentObjectInHand.transform.parent != GameWorldController.instance.DynamicObjectMarker())
 					{//Object needs to be moved to world
-						//objInHand.transform.parent= GameWorldController.instance.DynamicObjectMarker();
 						GameWorldController.MoveToWorld(CurrentObjectInHand);						
 					}	
 				}
 				objectInSlot= CurrentObjectInHand;
 				SlotImage.texture = CurrentObjectInHand.GetInventoryDisplay().texture;
-                //UWHUD.instance.CursorIcon = objInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
                 CurrentObjectInHand = objIntAtSlot;
 				ConversationVM.BuildObjectList();
 				Selected=true;
@@ -163,13 +150,10 @@ public class TradeSlot : GuiBase {
 			if (objectInSlot!=null)
 			{
 				//Pickup the object in the slot
-				//UWCharacter.Instance.playerInventory.SetObjectInHand(objectInSlot);
                 CurrentObjectInHand = objIntAtSlot;
-                //UWHUD.instance.CursorIcon= UWCharacter.Instance.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
                 objectInSlot = null;
 				SlotImage.texture=Blank;
 				Selected=false;
-				//GameObject objToMove = UWCharacter.Instance.playerInventory.GetGameObjectInHand();
 				if(CurrentObjectInHand != null)
 				{
                     CurrentObjectInHand.transform.parent=GameWorldController.instance.InventoryMarker.transform;
@@ -205,12 +189,11 @@ public class TradeSlot : GuiBase {
 	}
 
 
-		public void OnClick(BaseEventData evnt)
-		{
-				PointerEventData pntr = (PointerEventData)evnt;
-				//Debug.Log (pnt.pointerId);
-				ClickEvent(pntr.pointerId);
-		}
+	public void OnClick(BaseEventData evnt)
+	{
+		PointerEventData pntr = (PointerEventData)evnt;
+		ClickEvent(pntr.pointerId);
+	}
 
 	public void ClickEvent(int ptrID)
 	{
@@ -259,14 +242,9 @@ public class TradeSlot : GuiBase {
 	{
 		if (isSelected())
 		{
-			//GameObject obj = GameObject.Find (objectInSlot);
 			if (objectInSlot != null)
 			{
-				//ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
-				//if (objInt!=null)
-				//{
-					return objectInSlot.item_id;
-				//}
+			    return objectInSlot.item_id;
 			}
 		}
 		return 0;
@@ -274,19 +252,6 @@ public class TradeSlot : GuiBase {
 
 	public ObjectInteraction GetGameObjectInteraction()
 	{
-        Debug.Log("REMOVE3");
-		//GameObject obj = GameObject.Find (objectInSlot);
-		//if (objectInSlot != null)
-		//{
-			return objectInSlot;
-		//}
-		//else
-		//{
-		//	return null;
-		//}
+		return objectInSlot;
 	}
-	//void OnDoubleClick () 
-	//{
-	//	Debug.Log ("Doubleclick");
-	//}
 }

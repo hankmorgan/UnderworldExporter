@@ -98,6 +98,7 @@ public class UWHUD : HUD
     public GameObject UW1NPCTradeArea;
     public GameObject UW1ConversationPaperBackground;
 
+    public GameObject ConversationButtonParent;
     public ConversationButton[] ConversationOptions = new ConversationButton[5];
 
     

@@ -1959,23 +1959,17 @@ public class NPC : MobileObject
     public void ExecuteAttack()
     {
         if (ConversationVM.InConversation) { return; }
-
+        if (UWCharacter.Instance.Death)//Don't attack if the player character is dead.
+            { return; }
         if (gtarg == null)
         {
             return;
         }
         float weaponRange = 1.5f;
 
-        //NPC tries to raycast at the player or object
-        Vector3 TargetingPoint;
-        //if (gtarg.name=="_Gronk")
-        //{//Try and hit the player
-        //		TargetingPoint=UWCharacter.Instance.TargetPoint.transform.position;
-        //}
-        //else
-        //{//Trying to hit an object						
-        TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	
-                                                                        //}
+
+        Vector3 TargetingPoint;					
+        TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	                                                                        //}
 
         Ray ray = new Ray(NPC_Launcher.transform.position, TargetingPoint - NPC_Launcher.transform.position);
 
@@ -2017,6 +2011,8 @@ public class NPC : MobileObject
     /// </summary>
     public void ExecuteMagicAttack()
     {
+        if (UWCharacter.Instance.Death)//Don't attack if the player character is dead.
+        { return; }
         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) > 8)
         {
             return;
@@ -2029,6 +2025,8 @@ public class NPC : MobileObject
     /// </summary>
     public void ExecuteRangedAttack()
     {
+        if (UWCharacter.Instance.Death)//Don't attack if the player character is dead.
+        { return; }
         if (Vector3.Distance(this.transform.position, UWCharacter.Instance.CameraPos) > 8)
         {
             return;

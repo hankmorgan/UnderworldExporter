@@ -5,7 +5,7 @@ public class Helm : Armour {
 
     public override int GetActualSpellIndex()
     {
-        if (link - 512 < 256)
+        if (link - 512 >= 256) //?Is this right??
         {
             return link - 240;
         }

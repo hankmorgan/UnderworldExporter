@@ -209,7 +209,7 @@ public class UWCharacter : Character
         }
     }
     /// <summary>
-    /// PLayer character is death
+    /// PLayer character is dead
     /// </summary>
     public bool Death;
 
