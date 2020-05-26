@@ -156,6 +156,7 @@ public class GameWorldController : UWEBase
     public GameObject LevelModel;
 
     public GameObject TNovaLevelModel;
+    public Terrain TNovaTerrain;
 
     /// <summary>
     /// The level model parent object
@@ -1656,9 +1657,10 @@ public class GameWorldController : UWEBase
                 return;
             }
             UWCharacter.Instance.playerCam.GetComponent<Light>().range = 200f;
-            UWCharacter.Instance.playerCam.farClipPlane = 3000f;
+            UWCharacter.Instance.playerCam.farClipPlane = 30000f;
             UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
-            TileMapRenderer.RenderTNovaMap(TNovaLevelModel.transform, lev_ark.data);
+            
+            TileMapRenderer.RenderTNovaMapTerrain(TNovaLevelModel.transform, lev_ark.data);
 
         }
     }

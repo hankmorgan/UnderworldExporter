@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq; // used for Sum of array
 
 /// <summary>
 /// Tile map renderer.
@@ -138,10 +139,10 @@ public class TileMapRenderer : Loader
             if (!UpdateOnly)
             {
                 //Ceiling
-                TileInfo tmp = new TileInfo(Level, 0,0,TILE_OPEN,
-                    0,0, 
-                    0,0, Level.Tiles[0, 0].shockCeilingTexture,
-                    0,0,0,0);   
+                TileInfo tmp = new TileInfo(Level, 0, 0, TILE_OPEN,
+                    0, 0,
+                    0, 0, Level.Tiles[0, 0].shockCeilingTexture,
+                    0, 0, 0, 0);
                 tmp.DimX = TileMap.TileMapSizeX + 1;
                 tmp.DimY = TileMap.TileMapSizeY + 1;
                 tmp.ceilingHeight = 0;
@@ -691,7 +692,7 @@ public class TileMapRenderer : Loader
             {
                 if ((objList.objInfo[i].GetItemType() == ObjectInteraction.PILLAR) && (objList.objInfo[i].InUseFlag == 1))
                 {
-                    Vector3 position = ObjectLoader.CalcObjectXYZ( i, 0);
+                    Vector3 position = ObjectLoader.CalcObjectXYZ(i, 0);
                     //position =new Vector3( objList.objInfo[i].tileX*1.2f + 1.2f / 2f,position.y, objList.objInfo[i].tileY*1.2f + 1.2f / 2f);
                     Vector3[] Verts = new Vector3[24];
                     Vector2[] UVs = new Vector2[24];
@@ -855,7 +856,7 @@ public class TileMapRenderer : Loader
         }
         Material tmobj;
 
-        int TextureIndex= (objList.objInfo[i].enchantment << 3) | objList.objInfo[i].flags & 0x3F;//<--Is this correct. Flags is only 3 bits long!
+        int TextureIndex = (objList.objInfo[i].enchantment << 3) | objList.objInfo[i].flags & 0x3F;//<--Is this correct. Flags is only 3 bits long!
         if (TextureIndex >= 2)
         {
             if (_RES == GAME_UW2)
@@ -4429,7 +4430,7 @@ public class TileMapRenderer : Loader
         //if (int.TryParse(TileHeightDetails.text,out FloorHeight))
         //{
         CurrentTileMap().Tiles[TileX, TileY].floorHeight = NewFloorHeight; //FloorHeight*2;	
-                                                                                                        //}
+                                                                           //}
 
         CurrentTileMap().Tiles[TileX, TileY].floorTexture = NewFloorTexture;
         //int ActualTextureIndex= CurrentTileMap().texture_map[FloorTextureSelect.value+48];
@@ -4619,6 +4620,153 @@ public class TileMapRenderer : Loader
     }
 
 
+    public static bool RenderTNovaMapTerrain(Transform parent, char[] data)
+    {
+
+       // GameWorldController.instance.TNovaTerrain.terrainData = new TerrainData();
+        GameWorldController.instance.TNovaTerrain.terrainData.heightmapResolution = 513;
+
+        //Load the heights
+        float[,] height = GameWorldController.instance.TNovaTerrain.terrainData.GetHeights(0, 0, 513, 513); //new float[513, 513];
+        short[,] texture = new short[513, 513];
+        short[,] rotation = new short[513, 513];
+        long address_pointer = 0;
+        address_pointer = 0;
+        int meshcount = 1;
+        float maxHeight = 0; float minHeight = 0;
+
+
+
+        for (int x = 0; x <= height.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y <= height.GetUpperBound(1); y++)
+            {
+                meshcount++;
+                int byte0 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Texture
+                int byte1 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Rotation and part of height
+                int byte2 = (int)DataLoader.getValAtAddress(data, address_pointer++, 8);//Object object list index?
+
+                if (byte0 > 191)
+                    byte0 = byte0 - 64;
+                if (byte0 > 127)
+                    byte0 = byte0 - 128;
+                if (byte0 > 63)
+                    byte0 = byte0 - 64;
+
+                texture[x, y] = (short)byte0;
+
+                //byte1 =byte1 & 0xF0;         //AND with 11110000b: remove shadow+rotation in lower half of byte
+                rotation[x, y] = (short)((byte1 & 0x0F) >> 2);
+
+                height[x, y] = (float)((byte2 << 4) | ((byte1 & 0xF0) >> 4));
+                if (byte2 > 0x7F)            //negative height
+                { height[x, y] = (float)(height[x, y] - 4096); }
+                //height[x,y] =height[x,y] + 2048;
+                if ((x == 0) && (y == 0))
+                {
+                    maxHeight = (float)height[x, y];
+                    minHeight = (float)height[x, y];
+                }
+                if (height[x, y] > maxHeight)
+                {
+                    maxHeight = (float)height[x, y];
+                }
+                if (height[x, y] < minHeight)
+                {
+                    minHeight = (float)height[x, y]; 
+                }
+
+            }
+        }
+
+        for (int x = 0; x <= height.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y <= height.GetUpperBound(1); y++)
+            {
+                //float cos = Mathf.Cos(x);
+                //float sin = -Mathf.Sin(x);
+                height[x, y] = (height[x, y] + 4096) / 10000;
+            }
+        }
+
+        // float[, ,] splatMapData = new float[GameWorldController.instance.TNovaTerrain.terrainData.alphamapWidth, GameWorldController.instance.TNovaTerrain.terrainData.alphamapHeight,
+
+        
+        // Get a reference to the terrain data
+        TerrainData terrainData = GameWorldController.instance.TNovaTerrain.terrainData;
+
+        // Splatmap data is stored internally as a 3d array of floats, so declare a new empty array ready for your custom splatmap data:
+        float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];
+
+        for (int y = 0; y < terrainData.alphamapHeight; y++)
+        {
+            for (int x = 0; x < terrainData.alphamapWidth; x++)
+            {
+                // Normalise x/y coordinates to range 0-1 
+                float y_01 = (float)y / (float)terrainData.alphamapHeight;
+                float x_01 = (float)x / (float)terrainData.alphamapWidth;
+
+                // Sample the height at this location (note GetHeight expects int coordinates corresponding to locations in the heightmap array)
+                //float terrainheight = terrainData.GetHeight(Mathf.RoundToInt(y_01 * terrainData.heightmapHeight), Mathf.RoundToInt(x_01 * terrainData.heightmapWidth));
+
+                // Calculate the normal of the terrain (note this is in normalised coordinates relative to the overall terrain dimensions)
+                Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
+
+                // Calculate the steepness of the terrain
+                float steepness = terrainData.GetSteepness(y_01, x_01);
+
+                // Setup an array to record the mix of texture weights at this point
+                float[] splatWeights = new float[terrainData.alphamapLayers];
+
+                // CHANGE THE RULES BELOW TO SET THE WEIGHTS OF EACH TEXTURE ON WHATEVER RULES YOU WANT
+                int choice = Random.Range(0, 6);
+
+                splatWeights[choice] = 1f;
+       
+
+                // Texture[1] is stronger at lower altitudes
+               // splatWeights[1] = Mathf.Clamp01((terrainData.heightmapHeight - height));
+
+                // Texture[2] stronger on flatter terrain
+                // Note "steepness" is unbounded, so we "normalise" it by dividing by the extent of heightmap height and scale factor
+                // Subtract result from 1.0 to give greater weighting to flat surfaces
+               // splatWeights[2] = 1.0f - Mathf.Clamp01(steepness * steepness / (terrainData.heightmapHeight / 5.0f));
+
+                // Texture[3] increases with height but only on surfaces facing positive Z axis 
+               // splatWeights[3] = height * Mathf.Clamp01(normal.z);
+
+                // Sum of all textures weights must add to 1, so calculate normalization factor from sum of weights
+                float z = splatWeights.Sum();
+
+                // Loop through each terrain texture
+                for (int i = 0; i < terrainData.alphamapLayers; i++)
+                {
+
+                    // Normalize so that sum of all texture weights = 1
+                    splatWeights[i] /= z;
+
+                    // Assign this point to the splatmap array
+                    splatmapData[x, y, i] = splatWeights[i];
+                }
+            }
+        }
+
+        // Finally assign the new splatmap to the terrainData:
+        terrainData.SetAlphamaps(0, 0, splatmapData);
+
+
+
+
+
+
+
+
+        GameWorldController.instance.TNovaTerrain.terrainData.SetHeights(0 ,0, height);
+
+        return true;
+    }
+
+
 
     /// <summary>
     /// Renders a Terra Nova Strike Force Centauri tilemap.
@@ -4628,11 +4776,19 @@ public class TileMapRenderer : Loader
     /// <returns></returns>
     public static bool RenderTNovaMap(Transform parent, char[] data)
     {
+
+//BlockSize * No of Blocks must equal 512, setting values too extremely may cause performance issues!
+        const int NoOfBlocks = 8;
+        const int BlockSize = 64;
+
+
         short[,] height = new short[513, 513];
         short[,] texture = new short[513, 513];
         short[,] rotation = new short[513, 513];
         short[] textureCount = new short[64];
         short[] textureUsage = new short[64];
+
+
 
         float brushSize = 12f;
 
@@ -4682,16 +4838,13 @@ public class TileMapRenderer : Loader
         }
 
 
-
-
-        //Debug.Log("max=" + maxHeight + " min=" + minHeight);
-        for (int sectionX = 0; sectionX < 8; sectionX++)
+        for (int sectionX = 0; sectionX < NoOfBlocks; sectionX++)
         {
-            for (int sectionY = 0; sectionY < 8; sectionY++)
+            for (int sectionY = 0; sectionY < NoOfBlocks; sectionY++)
             {
-                for (int x = sectionX * 64; x < (sectionX + 1) * 64; x++)
+                for (int x = sectionX * BlockSize; x < (sectionX + 1) * BlockSize; x++)
                 {//Count my textures
-                    for (int y = sectionY * 64; y < (sectionY + 1) * 64; y++)
+                    for (int y = sectionY * BlockSize; y < (sectionY + 1) * BlockSize; y++)
                     {
                         textureCount[texture[x, y]]++;//Tracks how many of each texture there is
                     }
@@ -4724,19 +4877,20 @@ public class TileMapRenderer : Loader
 
                 MeshFilter mf = Tile.AddComponent<MeshFilter>();
                 MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
+
                 //  MeshCollider mc = Tile.AddComponent<MeshCollider>();
                 // mc.sharedMesh=null;
                 Mesh mesh = new Mesh();
-                meshcount = 64 * 64;
-                // mesh.subMeshCount=64;//meshcount;//Should be no of visible faces
+                mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+                meshcount = BlockSize * BlockSize;
                 mesh.subMeshCount = textureUsageCounter;
                 Vector3[] verts = new Vector3[meshcount * 4];
                 Vector2[] uvs = new Vector2[meshcount * 4];
 
                 int FaceCounter = 0;
-                for (int x = sectionX * 64; x < (sectionX + 1) * 64; x++)
+                for (int x = sectionX * BlockSize; x < (sectionX + 1) * BlockSize; x++)
                 {
-                    for (int y = sectionY * 64; y < (sectionY + 1) * 64; y++)
+                    for (int y = sectionY * BlockSize; y < (sectionY + 1) * BlockSize; y++)
                     {
                         // textureCount[texture[x,y]]++;//Tracks how many of each texture there is
                         float[] heights = new float[4];
@@ -4812,9 +4966,9 @@ public class TileMapRenderer : Loader
                         int[] tris = new int[textureCount[t] * 6];
                         FaceCounter = 0;
                         int triCounter = 0;
-                        for (int x = sectionX * 64; x < (sectionX + 1) * 64; x++)
+                        for (int x = sectionX * BlockSize; x < (sectionX + 1) * BlockSize; x++)
                         {
-                            for (int y = sectionY * 64; y < (sectionY + 1) * 64; y++)
+                            for (int y = sectionY * BlockSize; y < (sectionY + 1) * BlockSize; y++)
                             {
                                 if (texture[x, y] == t)
                                 {//This mesh uses the texture.
@@ -4838,6 +4992,7 @@ public class TileMapRenderer : Loader
                 mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
                 mf.mesh = mesh;
+
             }
         }
 
