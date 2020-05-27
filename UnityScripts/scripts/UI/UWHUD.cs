@@ -196,7 +196,7 @@ public class UWHUD : HUD
     public RawImage InteractionControlUW2BG;
 
 
-
+    public RawImage test;
 
     void Awake()
     {

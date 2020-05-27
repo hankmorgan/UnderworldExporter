@@ -733,9 +733,10 @@ public class GameWorldController : UWEBase
                 bGenNavMeshes = false;
                 UWHUD.instance.gameObject.SetActive(false);
                 UWHUD.instance.window.SetFullScreen();
-                UWCharacter.Instance.isFlying = true;
+                //UWCharacter.Instance.isFlying = true;
                 UWCharacter.Instance.playerMotor.enabled = true;
                 UWCharacter.Instance.playerCam.backgroundColor = Color.white;
+                UWCharacter.Instance.transform.position = new Vector3(128f, 256f, 128f);
                 SwitchTNovaMap("");
                 return;
             case GAME_SHOCK:
@@ -1656,9 +1657,9 @@ public class GameWorldController : UWEBase
             {
                 return;
             }
-            UWCharacter.Instance.playerCam.GetComponent<Light>().range = 200f;
+            UWCharacter.Instance.playerCam.GetComponent<Light>().range = 2000f;
             UWCharacter.Instance.playerCam.farClipPlane = 30000f;
-            UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
+           // UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
             
             TileMapRenderer.RenderTNovaMapTerrain(TNovaLevelModel.transform, lev_ark.data);
 

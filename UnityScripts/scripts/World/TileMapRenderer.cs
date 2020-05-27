@@ -4620,23 +4620,26 @@ public class TileMapRenderer : Loader
     }
 
 
+
+    /// <summary>
+    /// Renders a Terra Nova map using the Unity Terrain System
+    /// </summary>
+    /// <param name="parent"></param>
+    /// <param name="data"></param>
+    /// Limit of 32 textures in a terrain so rotation is not implemented.
+    /// <returns></returns>
     public static bool RenderTNovaMapTerrain(Transform parent, char[] data)
     {
-
-       // GameWorldController.instance.TNovaTerrain.terrainData = new TerrainData();
-        GameWorldController.instance.TNovaTerrain.terrainData.heightmapResolution = 513;
-
-        //Load the heights
+        //Load the heights from tnova data
         float[,] height = GameWorldController.instance.TNovaTerrain.terrainData.GetHeights(0, 0, 513, 513); //new float[513, 513];
         short[,] texture = new short[513, 513];
         short[,] rotation = new short[513, 513];
         long address_pointer = 0;
+        int[] textureCounter = new int[64];
         address_pointer = 0;
         int meshcount = 1;
         float maxHeight = 0; float minHeight = 0;
-
-
-
+        
         for (int x = 0; x <= height.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= height.GetUpperBound(1); y++)
@@ -4654,8 +4657,11 @@ public class TileMapRenderer : Loader
                     byte0 = byte0 - 64;
 
                 texture[x, y] = (short)byte0;
+                textureCounter[byte0]++;
 
                 //byte1 =byte1 & 0xF0;         //AND with 11110000b: remove shadow+rotation in lower half of byte
+
+                //UNITY has a limit of 32 textures in terrains. ignore rotation for the moment.
                 rotation[x, y] = (short)((byte1 & 0x0F) >> 2);
 
                 height[x, y] = (float)((byte2 << 4) | ((byte1 & 0xF0) >> 4));
@@ -4673,7 +4679,7 @@ public class TileMapRenderer : Loader
                 }
                 if (height[x, y] < minHeight)
                 {
-                    minHeight = (float)height[x, y]; 
+                    minHeight = (float)height[x, y];
                 }
 
             }
@@ -4683,18 +4689,47 @@ public class TileMapRenderer : Loader
         {
             for (int y = 0; y <= height.GetUpperBound(1); y++)
             {
-                //float cos = Mathf.Cos(x);
-                //float sin = -Mathf.Sin(x);
-                height[x, y] = (height[x, y] + 4096) / 10000;
+                height[x, y] = (height[x, y] + 4096) / 8192;//keep heights between 0.0 and 1.0
             }
         }
-
-        // float[, ,] splatMapData = new float[GameWorldController.instance.TNovaTerrain.terrainData.alphamapWidth, GameWorldController.instance.TNovaTerrain.terrainData.alphamapHeight,
-
         
-        // Get a reference to the terrain data
-        TerrainData terrainData = GameWorldController.instance.TNovaTerrain.terrainData;
+        int totaltextures = 0;
+        for (int i = 0; i <= textureCounter.GetUpperBound(0); i++)
+        {
+            if (textureCounter[i] > 0)
+            {
+                totaltextures++;
+            }
+        }
+        Debug.Log("Total textures for map is " + totaltextures);
 
+        int[] textureMap = new int[totaltextures + 1];
+        int counter=0;
+        for (int i = 0; i < 64; i++)
+        {
+            if (textureCounter[i] > 0)
+            {
+                textureMap[counter] = i;//store texture no in map.
+                textureCounter[i] = counter++;//store map address in the counter array
+            }
+        }
+        
+        //TODO: link the webpage where I scrobbed this code from.
+
+        // Get a reference to the terrain data
+        //GameWorldController.instance.TNovaTerrain.terrainData = new TerrainData();
+        TerrainData terrainData = GameWorldController.instance.TNovaTerrain.terrainData;
+        terrainData.heightmapResolution = 513;
+        //Load terrain textures
+        SplatPrototype[] tex = new SplatPrototype[totaltextures + 1];
+        for (int i = 0; i <=textureMap.GetUpperBound(0); i++)
+        {
+            tex[i] = new SplatPrototype();
+            tex[i].texture = (Texture2D)Resources.Load("Nova/Textures/" + textureMap[i]);   //Sets the texture
+            tex[i].tileSize = new Vector2(1, 1);    //Sets the size of the texture
+        }
+        terrainData.splatPrototypes = tex;
+ 
         // Splatmap data is stored internally as a 3d array of floats, so declare a new empty array ready for your custom splatmap data:
         float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];
 
@@ -4705,35 +4740,17 @@ public class TileMapRenderer : Loader
                 // Normalise x/y coordinates to range 0-1 
                 float y_01 = (float)y / (float)terrainData.alphamapHeight;
                 float x_01 = (float)x / (float)terrainData.alphamapWidth;
-
-                // Sample the height at this location (note GetHeight expects int coordinates corresponding to locations in the heightmap array)
-                //float terrainheight = terrainData.GetHeight(Mathf.RoundToInt(y_01 * terrainData.heightmapHeight), Mathf.RoundToInt(x_01 * terrainData.heightmapWidth));
-
+                
                 // Calculate the normal of the terrain (note this is in normalised coordinates relative to the overall terrain dimensions)
-                Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
+                // Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
 
                 // Calculate the steepness of the terrain
-                float steepness = terrainData.GetSteepness(y_01, x_01);
+                // float steepness = terrainData.GetSteepness(y_01, x_01);
 
                 // Setup an array to record the mix of texture weights at this point
-                float[] splatWeights = new float[terrainData.alphamapLayers];
+                float[] splatWeights = new float[terrainData.alphamapLayers+1];
 
-                // CHANGE THE RULES BELOW TO SET THE WEIGHTS OF EACH TEXTURE ON WHATEVER RULES YOU WANT
-                int choice = Random.Range(0, 6);
-
-                splatWeights[choice] = 1f;
-       
-
-                // Texture[1] is stronger at lower altitudes
-               // splatWeights[1] = Mathf.Clamp01((terrainData.heightmapHeight - height));
-
-                // Texture[2] stronger on flatter terrain
-                // Note "steepness" is unbounded, so we "normalise" it by dividing by the extent of heightmap height and scale factor
-                // Subtract result from 1.0 to give greater weighting to flat surfaces
-               // splatWeights[2] = 1.0f - Mathf.Clamp01(steepness * steepness / (terrainData.heightmapHeight / 5.0f));
-
-                // Texture[3] increases with height but only on surfaces facing positive Z axis 
-               // splatWeights[3] = height * Mathf.Clamp01(normal.z);
+                splatWeights[textureCounter[texture[x, y]]] = 1f;
 
                 // Sum of all textures weights must add to 1, so calculate normalization factor from sum of weights
                 float z = splatWeights.Sum();
@@ -4753,11 +4770,6 @@ public class TileMapRenderer : Loader
 
         // Finally assign the new splatmap to the terrainData:
         terrainData.SetAlphamaps(0, 0, splatmapData);
-
-
-
-
-
 
 
 
