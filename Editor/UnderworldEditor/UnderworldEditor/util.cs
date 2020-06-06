@@ -59,7 +59,8 @@ namespace UnderworldEditor
                 buffer = null;
                 return false;
             }
-            FileStream fs = File.OpenRead(Path);
+
+            Stream fs = File.Open(Path,FileMode.Open,FileAccess.ReadWrite);
             if (fs.CanRead)
             {
                 buffer = new char[fs.Length];

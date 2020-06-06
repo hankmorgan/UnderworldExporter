@@ -131,7 +131,7 @@ namespace UnderworldEditor
                     isLoading = true;
                     CurPDatObject = index;
                     objects.ObjectInfo obj = pdatObjects.objList[index];
-                    PopulateObjectUI(obj, CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir,ChkPdatInvis, NumPInvXpos, NumPInvYPos,NumPInvZpos,NumPInvHeading,NumPdatFlags,NumPdatQuality,NumPdatOwner,NumPdatNext,NumPdatLink  );
+                    PopulateObjectStaticUI(obj, CmbPdatItem_ID, ChkPdatEnchanted, ChkPdatIsQuant, ChkPdatDoorDir,ChkPdatInvis, NumPInvXpos, NumPInvYPos,NumPInvZpos,NumPInvHeading,NumPdatFlags,NumPdatQuality,NumPdatOwner,NumPdatNext,NumPdatLink  );
                     isLoading = false;
                 }
             }
@@ -192,6 +192,7 @@ namespace UnderworldEditor
             objlist.objList[index].owner= (short)numOwner.Value;
             objlist.objList[index].next= (short)numNext.Value;
             objlist.objList[index].link= (short)numLink.Value  ;
+
             long addptr = objlist.objList[index].FileAddress;
             int ByteToWrite = (objlist.objList[index].is_quant << 15) |
                 (objlist.objList[index].invis << 14) |
@@ -222,6 +223,138 @@ namespace UnderworldEditor
         }
 
         /// <summary>
+        /// Store changes to mobile data values
+        /// </summary>
+        /// <param name="TileMapData"></param>
+        /// <param name="objlist"></param>
+        /// <param name="index"></param>
+        /// <param name="npc_hp"></param>
+        public void UpdateMobileObjectUIChange(main MAIN, char[] TileMapData, objects objlist, int index )
+        {
+            objects.ObjectInfo obj = objlist.objList[index];
+            //populate mobile data
+            obj.npc_hp= (short)MAIN.numNPC_HP.Value;
+            obj.projectile0x9 = (short)MAIN.numProjectile0x9.Value  ;
+            obj.Unknown0xA = (short)MAIN.numUnknown0xA.Value ;
+            obj.npc_goal = (short)MAIN.numnpc_goal.Value  ;
+            obj.npc_gtarg = (short)MAIN.numnpc_gtarg.Value  ;
+            obj.Unknown0xB = (short)MAIN.numUnknown0xB.Value  ;
+            obj.npc_level = (short)MAIN.numnpc_level.Value ;
+            obj.unknown_4_11_0xD = (short)MAIN.numunknown_4_11_0xD.Value  ;
+            obj.unknown_12_0xD = (short)MAIN.numunknown_12_0xD.Value  ;
+            obj.npc_talked_to = (short)MAIN.numnpc_talked_to.Value  ;
+            obj.npc_attitude = (short)MAIN.numnpc_attitude.Value  ;
+            obj.unknown_0_5_0xF = (short)MAIN.numunknown_0_5_0xF.Value  ;
+            obj.npc_height = (short)MAIN.numnpc_height.Value ;
+            obj.unknown_13_15_0xF = (short)MAIN.numunknown_13_15_0xF.Value  ;
+            obj.unknown_0x11 = (short)MAIN.numunknown_0x11.Value ;
+            obj.unknown_0x12 = (short)MAIN.numunknown_0x12.Value ;
+            obj.unknown_0_6_0x13 = (short)MAIN.numunknown_0_6_0x13.Value ;
+            obj.unknown_7_7_0x13 = (short)MAIN.numunknown_7_7_0x13.Value ;
+            obj.unknown_0x14 = (short)MAIN.numunknown_0x14.Value ;
+            obj.unknown_0x15 = (short)MAIN.numunknown_0x15.Value ;
+            obj.unknown_0_3_0x16 = (short)MAIN.numunknown_0_3_0x16.Value ;
+            obj.npc_yhome = (short)MAIN.numnpc_yhome.Value ;
+            obj.npc_xhome = (short)MAIN.numnpc_xhome.Value ;
+            obj.npc_heading = (short)MAIN.numnpc_heading.Value;
+            obj.unknown_5_7_0x18 = (short)MAIN.numunknown_5_7_0x18.Value;
+            obj.npc_hunger = (short)MAIN.numnpc_hunger.Value ;
+            obj.unknown_7_7_0x19 = (short)MAIN.numunknown_7_7_0x19.Value ;
+            obj.npc_whoami = (short)MAIN.numnpc_whoami.Value ;
+
+
+
+            long addptr = obj.FileAddress;
+            //0x8
+            int ByteToWrite = obj.npc_hp;
+            TileMapData[addptr + 0x8] = (char)(ByteToWrite & 0xFF);
+
+            //0x9
+            ByteToWrite = obj.projectile0x9;
+            TileMapData[addptr + 0x9] = (char)(ByteToWrite & 0xFF);
+           
+            //0xA
+            ByteToWrite = obj.Unknown0xA;
+            TileMapData[addptr + 0xA] = (char)(ByteToWrite & 0xFF);
+
+
+            //0xB
+            ByteToWrite = (
+                ((obj.npc_goal & 0xF)) |
+                ((obj.npc_gtarg & 0xFF) << 4) |
+                ((obj.Unknown0xB << 12))
+                    );
+           
+            TileMapData[addptr + 0xb] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 0xb + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+            
+            //0xD
+            ByteToWrite = ((obj.npc_level & 0xFF)) |
+                ((obj.unknown_4_11_0xD & 0xFF) << 4) |
+                ((obj.unknown_12_0xD & 0x1)) << 12 |
+                ((obj.npc_talked_to & 0x1)) << 13|
+                ((obj.npc_attitude & 0x3)) << 14;
+
+            TileMapData[addptr + 0xd] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 0xd + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+
+            //0xF
+            ByteToWrite = ((obj.unknown_0_5_0xF & 0x3F)) |
+                ((obj.npc_height & 0x7F) << 6) |
+                ((obj.unknown_13_15_0xF & 0x7) << 13);
+
+
+            TileMapData[addptr + 0xf] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 0xf + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+            
+            //0x11
+            ByteToWrite = obj.unknown_0x11;
+            TileMapData[addptr + 0x11] = (char)(ByteToWrite & 0xFF);
+
+            //0x12
+            ByteToWrite = obj.unknown_0x12;
+            TileMapData[addptr + 0x12] = (char)(ByteToWrite & 0xFF);
+
+            //0x13
+            ByteToWrite = (obj.unknown_0_6_0x13 & 0x7F) |
+                   ((obj.unknown_7_7_0x13 & 0x1) << 7);
+            TileMapData[addptr + 0x13] = (char)(ByteToWrite & 0xFF);
+
+            //0x14
+            ByteToWrite = obj.unknown_0x14;
+            TileMapData[addptr + 0x14] = (char)(ByteToWrite & 0xFF);
+
+            //0x15
+            ByteToWrite = obj.unknown_0x15;
+            TileMapData[addptr + 0x15] = (char)(ByteToWrite & 0xFF);
+
+            //0x16
+            ByteToWrite = (obj.unknown_0_3_0x16 & 0xF) |
+                    ((obj.npc_yhome & 0x3f)<<4) |
+                    ((obj.npc_xhome & 0x3f)<<10);
+            TileMapData[addptr + 0x16] = (char)(ByteToWrite & 0xFF);
+            TileMapData[addptr + 0x16 + 1] = (char)((ByteToWrite >> 8) & 0xFF);
+
+            //0x18
+            ByteToWrite = (obj.npc_heading & 0x1F) |
+                   ((obj.unknown_5_7_0x18 & 0x7) << 5);
+            TileMapData[addptr + 0x19] = (char)(ByteToWrite & 0xFF);
+
+
+            //0x19
+            ByteToWrite = (obj.npc_hunger & 0x7F) |
+                   ((obj.unknown_7_7_0x19 & 0x1) << 7);
+            TileMapData[addptr + 0x19] = (char)(ByteToWrite & 0xFF);
+
+
+            //0x1a
+            ByteToWrite = obj.npc_whoami;
+            TileMapData[addptr + 0x1a] = (char)(ByteToWrite & 0xFF);
+        }
+
+
+
+        /// <summary>
         /// Fill in the information for the references object information.
         /// </summary>
         /// <param name="obj"></param>
@@ -239,7 +372,7 @@ namespace UnderworldEditor
         /// <param name="numOwner"></param>
         /// <param name="numNext"></param>
         /// <param name="numLink"></param>
-        public void PopulateObjectUI(objects.ObjectInfo obj, 
+        public void PopulateObjectStaticUI(objects.ObjectInfo obj, 
             ComboBox cmbItem_ID, 
             CheckBox chkEnchanted,
             CheckBox chkIsQuant,
@@ -285,33 +418,78 @@ namespace UnderworldEditor
         {
             if (e.Node.Tag == null) { return; }
             int blockno = int.Parse(e.Node.Tag.ToString());
-            GrdLevArkRaw.Rows.Clear();            
+            //GrdLevArkRaw.Rows.Clear();            
             switch (uwblocks[blockno].ContentType)
             {
                 case Util.ContentTypes.TileMap:                    
                     TileMapUI.LoadTileMap(blockno,this);
-                    FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
+                    //FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
+                    //for (int i = 0; i <= worldObjects.objList.GetUpperBound(0); i++)
+                    //{//objlist.objList[index].item_id + "-" + objects.ObjectName(objlist.objList[index].item_id, curgame);
+                    //    //DataGridViewRow row = GrdLevArkRaw.Rows[(int)worldObjects.objList[i].LocalBlockAddress];
+                    //    //row.HeaderCell.Value = worldObjects.objList[i].index + " " + objects.ObjectName(worldObjects.objList[i].item_id, curgame);
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress, worldObjects.objList[i].index + " " + objects.ObjectName(worldObjects.objList[i].item_id, curgame) + "(" + i + ")");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 1, "+1h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 2, "+2h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 3, "+3h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 4, "+4h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 5, "+5h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 6, "+6h");
+                    //    SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 7, "+7h");
+                    //    if (i<256)
+                    //    {
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 8, "+8h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 9, "+9");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 10, "+Ah");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 11, "+Bh");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 12, "+Ch");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 13, "+Dh");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 14, "+Eh");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 15, "+Fh");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 16, "+10h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 17, "+11h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 18, "+12h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 19, "+13h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 20, "+14h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 21, "+15h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 22, "+16h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 23, "+17h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 24, "+18h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 25, "+19h");
+                    //        SetRowHeader((int)worldObjects.objList[i].LocalBlockAddress + 26, "+1Ah");
+                    //    }
+                    //
+                    //}
+
                     break;
                 default:
-                    FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
+                    //FillRawDataForLevArk(blockno);//no raw data loaded for tilemap due to slow loading speed
                     break;
             }            
         }
 
+        //void SetRowHeader(int rowNo, string HeaderText)
+        //{
+        //    DataGridViewRow row = GrdLevArkRaw.Rows[rowNo];
+        //    row.HeaderCell.Value = HeaderText;
+
+        //}
+
         /// <summary>
         /// Fills raw data to grid.
         /// </summary>
-        /// <param name="blockno"></param>
-        private void FillRawDataForLevArk(int blockno)
-        {
-            lblRawDataAddress.Text = uwblocks[blockno].Address.ToString();
-            for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
-            {
-                int rowId = GrdLevArkRaw.Rows.Add();
-                DataGridViewRow row = GrdLevArkRaw.Rows[rowId];
-                row.Cells[0].Value = (int)uwblocks[blockno].Data[i];
-            }
-        }
+        /// <param name = "blockno" ></ param >
+        //private void FillRawDataForLevArk(int blockno)
+        //{
+        //    lblRawDataAddress.Text = uwblocks[blockno].Address.ToString();
+        //    for (int i = 0; i <= uwblocks[blockno].Data.GetUpperBound(0); i++)
+        //    {
+        //        int rowId = GrdLevArkRaw.Rows.Add();
+        //        DataGridViewRow row = GrdLevArkRaw.Rows[rowId];
+        //        row.Cells[0].Value = (int)uwblocks[blockno].Data[i];
+        //        row.HeaderCell.Value = i.ToString() + "d";
+        //    }
+        //}
 
         ///// <summary>
         ///// Loads tile info.
@@ -423,6 +601,7 @@ namespace UnderworldEditor
         /// <param name="e"></param>
         private void TreeWorldObjects_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            isLoading = true;
             TreeNode node = TreeWorldObjects.SelectedNode;
             int index;
             if (node.Tag == null) { return; }
@@ -433,6 +612,7 @@ namespace UnderworldEditor
                     TileMapUI.PopulateWorldObjects(index,this);
                 }
             }
+            isLoading = false;
         }
         
         /// <summary>
@@ -1105,7 +1285,16 @@ namespace UnderworldEditor
             
             if (result==DialogResult.OK)
             {
-                Bitmap jr = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
+                Bitmap jr;
+                try
+                {
+                    jr = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
+                }
+                catch 
+                {
+                    MessageBox.Show("unable to open image");
+                    return;
+                }
                 Palette FinalPal = CurrentImage.GetFinalPallette();
                 if ((jr.Width !=CurrentImage.image.Width) || (jr.Height!= CurrentImage.image.Height))
                 {
@@ -1163,6 +1352,7 @@ namespace UnderworldEditor
                 NumWorldXPos, NumWorldYPos, NumWorldZpos, NumWorldHeading,
                 NumWorldFlags, NumWorldQuality, NumWorldOwner,
                 NumWorldNext, NumWorldLink);
+                
         }
 
         private void saveLevArkChangesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1190,12 +1380,12 @@ namespace UnderworldEditor
             TileMapUI.LoadInfoForTileXY(this, x, 63-y);
         }
 
-        private void BtnCopyLevArkRaw_Click(object sender, EventArgs e)
-        {
-            DataObject dataObj = GrdLevArkRaw.GetClipboardContent();
-            if (dataObj != null)
-                Clipboard.SetDataObject(dataObj);
-        }
+        //private void BtnCopyLevArkRaw_Click(object sender, EventArgs e)
+        //{
+        //    DataObject dataObj = GrdLevArkRaw.GetClipboardContent();
+        //    if (dataObj != null)
+        //        Clipboard.SetDataObject(dataObj);
+        //}
 
         private void NumCurHP_ValueChanged(object sender, EventArgs e)
         {
@@ -1231,5 +1421,35 @@ namespace UnderworldEditor
         {
             PlayerDatUI.UpdateSkills(this);
         }
+
+        private void numNPC_HP_ValueChanged(object sender, EventArgs e)
+        {
+            if (isLoading) { return; }
+
+
+            UpdateObjectUIChange(levarkbuffer,
+    worldObjects, CurWorldObject,
+    CmbWorldItem_ID, ChkWorldEnchanted, ChkWorldIsQuant, ChkWorldDoorDir, ChkWorldInvis,
+    NumWorldXPos, NumWorldYPos, NumWorldZpos, NumWorldHeading,
+    NumWorldFlags, NumWorldQuality, NumWorldOwner,
+    NumWorldNext, NumWorldLink);
+
+        }
+
+        private void MobileObjChanged(object sender, EventArgs e)
+        {
+            if (isLoading==false)
+            {
+                UpdateMobileObjectUIChange(this,levarkbuffer, worldObjects, CurWorldObject);
+            }
+        }
+
+        //private void btnJumpToRawData_Click(object sender, EventArgs e)
+        //{
+        //    tabLevArk.SelectedIndex = 4;
+        //     GrdLevArkRaw.CurrentCell = GrdLevArkRaw[0,(int)worldObjects.objList[CurWorldObject].LocalBlockAddress];
+        //    //worldObjects, CurWorldObject,
+
+        //}
     }
 }

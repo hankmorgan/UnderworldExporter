@@ -107,7 +107,7 @@ namespace UnderworldEditor
         //}
 
         public static void LoadInfoForTileXY(main MAIN, int x, int y)
-        {
+        {         
             main.isLoading = true;
             MAIN.curTileX = x;
             MAIN.curTileY = y;
@@ -131,7 +131,8 @@ namespace UnderworldEditor
             main.isLoading = true;
             objects.ObjectInfo obj = MAIN.worldObjects.objList[index];
             MAIN.CurWorldObject = index;
-            MAIN.PopulateObjectUI(obj,
+            MAIN.lblOffset.Text = "Location : " + obj.FileAddress + "d";
+            MAIN.PopulateObjectStaticUI(obj,
                 MAIN.CmbWorldItem_ID, MAIN.ChkWorldEnchanted,
                 MAIN.ChkWorldIsQuant, MAIN.ChkWorldDoorDir,
                 MAIN.ChkWorldInvis, MAIN.NumWorldXPos,
@@ -139,6 +140,51 @@ namespace UnderworldEditor
                 MAIN.NumWorldHeading, MAIN.NumWorldFlags,
                 MAIN.NumWorldQuality, MAIN.NumWorldOwner,
                 MAIN.NumWorldNext, MAIN.NumWorldLink);
+            if (index<256)
+            {
+                //populate mobile data
+                MAIN.numNPC_HP.Value = obj.npc_hp;
+
+                MAIN.numProjectile0x9.Value = obj.projectile0x9;
+
+                MAIN.numUnknown0xA.Value = obj.Unknown0xA;
+
+                MAIN.numnpc_goal.Value = obj.npc_goal;
+                MAIN.numnpc_gtarg.Value = obj.npc_gtarg;
+                MAIN.numUnknown0xB.Value = obj.Unknown0xB;
+
+                MAIN.numnpc_level.Value = obj.npc_level;
+                MAIN.numunknown_4_11_0xD.Value = obj.unknown_4_11_0xD;
+                MAIN.numunknown_12_0xD.Value = obj.unknown_12_0xD;
+                MAIN.numnpc_talked_to.Value = obj.npc_talked_to;
+                MAIN.numnpc_attitude.Value = obj.npc_attitude;
+
+                MAIN.numunknown_0_5_0xF.Value = obj.unknown_0_5_0xF;
+                MAIN.numnpc_height.Value = obj.npc_height;
+                MAIN.numunknown_13_15_0xF.Value = obj.unknown_13_15_0xF;
+
+                MAIN.numunknown_0x11.Value = obj.unknown_0x11;
+                MAIN.numunknown_0x12.Value = obj.unknown_0x12;
+
+                MAIN.numunknown_0_6_0x13.Value = obj.unknown_0_6_0x13;
+                MAIN.numunknown_7_7_0x13.Value = obj.unknown_7_7_0x13;
+
+                MAIN.numunknown_0x14.Value = obj.unknown_0x14;
+
+                MAIN.numunknown_0x15.Value = obj.unknown_0x15;
+
+                MAIN.numunknown_0_3_0x16.Value = obj.unknown_0_3_0x16;
+                MAIN.numnpc_yhome.Value = obj.npc_yhome;
+                MAIN.numnpc_xhome.Value = obj.npc_xhome;
+
+                MAIN.numnpc_heading.Value = obj.npc_heading;
+                MAIN.numunknown_5_7_0x18.Value = obj.unknown_5_7_0x18;
+
+                MAIN.numnpc_hunger.Value = obj.npc_hunger;
+                MAIN.numunknown_7_7_0x19.Value = obj.unknown_7_7_0x19;
+
+                MAIN.numnpc_whoami.Value = obj.npc_whoami;
+            }
             main.isLoading = false;
         }
 
