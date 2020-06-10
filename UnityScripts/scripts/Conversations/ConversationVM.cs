@@ -631,6 +631,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
         Teleport = false;
         SettingUpFight = false;
         StopAllCoroutines();
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.FreeLookCursor.gameObject, false);
         StartCoroutine(RunConversationVM(npc));
     }
 
@@ -649,6 +650,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     {
         //basep = 0;
         //stack.result_register = 1;//Set a default value
+        
         bool finished = false;
         stack = new CnvStack(4096);
         stack.set_stackp(200);//Skip over imported memory for the moment
@@ -1132,6 +1134,8 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
     /// </summary>
     public IEnumerator EndConversation(NPC npc)
     {
+
+        UWHUD.instance.EnableDisableControl(UWHUD.instance.FreeLookCursor.gameObject, true);
 
         //Copy back private variables to the globals file.
 

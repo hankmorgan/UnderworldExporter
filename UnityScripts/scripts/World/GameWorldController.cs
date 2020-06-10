@@ -630,7 +630,6 @@ public class GameWorldController : UWEBase
         UWClass._RES = res;//game;
         keybinds.ApplyBindings();//Applies keybinds to certain controls
 
-
         //Set some layers for the AI to use to detect walls and doors.
         MapMeshLayerMask = 1 << LevelModel.layer;
         DoorLayerMask = 1 << LayerMask.NameToLayer("Doors");
@@ -1659,8 +1658,8 @@ public class GameWorldController : UWEBase
             }
             UWCharacter.Instance.playerCam.GetComponent<Light>().range = 2000f;
             UWCharacter.Instance.playerCam.farClipPlane = 30000f;
-           // UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
-            
+            // UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
+            TNovaTerrain.gameObject.SetActive(true);
             TileMapRenderer.RenderTNovaMapTerrain(TNovaLevelModel.transform, lev_ark.data);
 
         }

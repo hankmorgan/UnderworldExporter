@@ -117,9 +117,18 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			yield return new WaitForSeconds(cs.getAudioTime (i)-currTime);
 			currTime =cs.getAudioTime (i);
-			aud.clip = Resources.Load <AudioClip>(cs.getAudioClip(i));
-			aud.loop=false;
-			aud.Play();
+            //New runtime.voc loading
+            VocLoader voc = new VocLoader(cs.getAudioClip(i), "VocClip_" + i);
+            if (voc!=null)
+            {
+                if (voc.Audio!=null)
+                {
+                    aud.clip = voc.Audio;
+                    //aud.clip = Resources.Load <AudioClip>(cs.getAudioClip(i));
+                    aud.loop = false;
+                    aud.Play();
+                }
+            }
 		}
 	}
   

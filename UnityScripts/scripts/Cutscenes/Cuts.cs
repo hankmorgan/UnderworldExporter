@@ -219,11 +219,22 @@ public class Cuts : GuiBase {
         for (int i = 0; i <= AudioTimes.GetUpperBound(0); i++)
         {
             SubsTimes[i] = AudioTimes[i];
-            AudioClip x = (AudioClip)Resources.Load(AudioClipName[i]);
-            if (x != null)
+            if (AudioClipName[i]!=null)
             {
-                SubsDuration[i] = x.length;
+                VocLoader voc = new VocLoader(AudioClipName[i], "VocClip_" + i);
+                if (voc != null)
+                {
+                    if (voc.Audio != null)
+                    {
+                        SubsDuration[i] = voc.Audio.length;
+                    }
+                }
             }
+            // AudioClip x = (AudioClip)Resources.Load(AudioClipName[i]);
+            //if (x != null)
+           // {
+            //    SubsDuration[i] = x.length;
+           // }
         }
     }
 }
