@@ -116,7 +116,7 @@ public class ContainerOpened : GuiBase_Draggable
                 return;
             }
             //Move the contents out of the container into the parent.
-            Container CurrentContainer = UWCharacter.Instance.playerInventory.currentContainer; //GameObject.Find(UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
+            //Container CurrentContainer = UWCharacter.Instance.playerInventory.currentContainer; //GameObject.Find(UWCharacter.Instance.playerInventory.currentContainer).GetComponent<Container>();
             Container DestinationContainer = UWCharacter.Instance.playerInventory.currentContainer.ContainerParent; //GameObject.Find(CurrentContainer.ContainerParent).GetComponent<Container>();
             if (Container.TestContainerRules(DestinationContainer, 11, false))
             {

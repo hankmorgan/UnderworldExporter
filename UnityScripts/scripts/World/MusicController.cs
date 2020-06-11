@@ -208,9 +208,9 @@ public class MusicController : UWEBase
         //LoadAudioFileFromWWW();
         //StartCoroutine(LoadAudioFileFromWWW("PSXUW1", 1));
 
-        VocLoader test = new VocLoader("c:\\games\\uw1\\sound\\01.voc", "00_voc");
-        Aud.clip = test.Audio;
-        Aud.Play();
+        //VocLoader test = new VocLoader("c:\\games\\uw1\\sound\\01.voc", "00_voc");
+        //Aud.clip = test.Audio;
+        //Aud.Play();
 
     }
 

@@ -39,7 +39,11 @@ public override bool use ()
 			{
 				if (CurrentTileMap().Tiles[tileX+x,tileY+y].isWater)
 				{
-					if (Random.Range (0,10)>=7)
+                    //Per disassembly fishing uses the Track Skill to see if the player actually catches something.
+                    //I think the track skill plus 7 must beat the random roll to catch a fish
+                    //The below is almost the vanilla behaviour except I don't know what the random roll range is.
+                    
+					if (Random.Range (0,30)<=UWCharacter.Instance.PlayerSkills.Track + 7)
 					{//catch something or test for encumerance
 						//000~001~099~You catch a lovely fish.
 						if ((GameWorldController.instance.commonObject.properties[182].mass*0.1f) <= UWCharacter.Instance.playerInventory.getEncumberance())
@@ -47,13 +51,6 @@ public override bool use ()
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_catch_a_lovely_fish_));
                             ObjectInteraction FishobjInt = CreateFish();
 							CurrentObjectInHand= FishobjInt;
-                            //if (FishobjInt!=null)
-							//{
-								//FishobjInt.UpdateAnimation();
-								//UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
-								//UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
-							//}
-
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 							InteractionModeControl.UpdateNow=true;
 						}

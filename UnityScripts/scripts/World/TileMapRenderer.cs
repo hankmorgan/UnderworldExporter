@@ -4738,8 +4738,8 @@ public class TileMapRenderer : Loader
             for (int x = 0; x < terrainData.alphamapWidth; x++)
             {
                 // Normalise x/y coordinates to range 0-1 
-                float y_01 = (float)y / (float)terrainData.alphamapHeight;
-                float x_01 = (float)x / (float)terrainData.alphamapWidth;
+                //float y_01 = (float)y / (float)terrainData.alphamapHeight;
+                //float x_01 = (float)x / (float)terrainData.alphamapWidth;
                 
                 // Calculate the normal of the terrain (note this is in normalised coordinates relative to the overall terrain dimensions)
                 // Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
