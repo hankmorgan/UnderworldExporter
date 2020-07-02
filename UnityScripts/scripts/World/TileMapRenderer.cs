@@ -4639,7 +4639,7 @@ public class TileMapRenderer : Loader
         address_pointer = 0;
         int meshcount = 1;
         float maxHeight = 0; float minHeight = 0;
-        
+
         for (int x = 0; x <= height.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= height.GetUpperBound(1); y++)
@@ -4692,7 +4692,7 @@ public class TileMapRenderer : Loader
                 height[x, y] = (height[x, y] + 4096) / 8192;//keep heights between 0.0 and 1.0
             }
         }
-        
+
         int totaltextures = 0;
         for (int i = 0; i <= textureCounter.GetUpperBound(0); i++)
         {
@@ -4704,7 +4704,7 @@ public class TileMapRenderer : Loader
         Debug.Log("Total textures for map is " + totaltextures);
 
         int[] textureMap = new int[totaltextures + 1];
-        int counter=0;
+        int counter = 0;
         for (int i = 0; i < 64; i++)
         {
             if (textureCounter[i] > 0)
@@ -4713,7 +4713,19 @@ public class TileMapRenderer : Loader
                 textureCounter[i] = counter++;//store map address in the counter array
             }
         }
-        
+        //int j = 0;
+        //Texture2D[] allnovatextures = GetTNovaTextures();
+        //for (int x = 0; x < 4; x++)
+        //{
+        //    for (int y = 0; y < 4; y++)
+        //    {
+        //        // UWHUD.instance.test.texture = 
+        //        GameWorldController.instance.allnova[j++] = TNovaMegaTexure(texture, rotation, allnovatextures, 128, 128, x * 128, y * 128);
+        //    }
+        //}
+
+
+
         //TODO: link the webpage where I scrobbed this code from.
 
         // Get a reference to the terrain data
@@ -4722,14 +4734,14 @@ public class TileMapRenderer : Loader
         terrainData.heightmapResolution = 513;
         //Load terrain textures
         SplatPrototype[] tex = new SplatPrototype[totaltextures + 1];
-        for (int i = 0; i <=textureMap.GetUpperBound(0); i++)
+        for (int i = 0; i <= textureMap.GetUpperBound(0); i++)
         {
             tex[i] = new SplatPrototype();
             tex[i].texture = (Texture2D)Resources.Load("Nova/Textures/" + textureMap[i]);   //Sets the texture
-            tex[i].tileSize = new Vector2(1, 1);    //Sets the size of the texture
+            tex[i].tileSize = new Vector2(1, 1);    //Sets the size of the texture            
         }
         terrainData.splatPrototypes = tex;
- 
+
         // Splatmap data is stored internally as a 3d array of floats, so declare a new empty array ready for your custom splatmap data:
         float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];
 
@@ -4740,7 +4752,7 @@ public class TileMapRenderer : Loader
                 // Normalise x/y coordinates to range 0-1 
                 //float y_01 = (float)y / (float)terrainData.alphamapHeight;
                 //float x_01 = (float)x / (float)terrainData.alphamapWidth;
-                
+
                 // Calculate the normal of the terrain (note this is in normalised coordinates relative to the overall terrain dimensions)
                 // Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
 
@@ -4748,7 +4760,7 @@ public class TileMapRenderer : Loader
                 // float steepness = terrainData.GetSteepness(y_01, x_01);
 
                 // Setup an array to record the mix of texture weights at this point
-                float[] splatWeights = new float[terrainData.alphamapLayers+1];
+                float[] splatWeights = new float[terrainData.alphamapLayers + 1];
 
                 splatWeights[textureCounter[texture[x, y]]] = 1f;
 
@@ -4773,9 +4785,50 @@ public class TileMapRenderer : Loader
 
 
 
-        GameWorldController.instance.TNovaTerrain.terrainData.SetHeights(0 ,0, height);
+        GameWorldController.instance.TNovaTerrain.terrainData.SetHeights(0, 0, height);
 
         return true;
+    }
+
+    private static Texture2D TNovaMegaTexure(short[,] texture, short[,] rotation, Texture2D[] alltext , int SizeX, int SizeY ,int offsetX, int offsetY)
+    {
+       // Texture2D[] alltext = GetTNovaTextures();
+        Texture2D test = new Texture2D(SizeX * 64, SizeY * 64);
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int y = 0; y < SizeY; y++)
+            {
+                test.SetPixels(x * 64, y * 64, 64, 64, alltext[texture[x + offsetX, y + offsetY] + ((rotation[x + offsetX , y + offsetY]) * 64)].GetPixels());
+            }
+        }
+        test.Apply();
+        return test;
+        //UWHUD.instance.test.texture = test;
+    }
+
+    private static Texture2D[] GetTNovaTextures()
+    {
+        Texture2D[] alltext = new Texture2D[64 * 4];
+        for (int i = 0; i < 64; i++)
+        {//rot =0
+            alltext[i] = ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + i), false);
+        }
+        for (int i = 64; i < 128; i++)
+        {//rot =1
+            alltext[i] = (Texture2D)Resources.Load("Nova/Textures/" + (i - 64));
+        }
+
+        for (int i = 128; i < 192; i++)
+        {//rot =2
+            alltext[i] = ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 128)), true);
+        }
+
+        for (int i = 192; i < 256; i++)
+        {//rot =3
+            alltext[i] = ArtLoader.rotateTexture(ArtLoader.rotateTexture((Texture2D)Resources.Load("Nova/Textures/" + (i - 192)), true), true);
+        }
+
+        return alltext;
     }
 
 

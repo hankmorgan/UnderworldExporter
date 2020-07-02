@@ -185,7 +185,7 @@ public class MusicController : UWEBase
     public UWMusicTracks[] EndGameTracks = { UWMusicTracks.UW1wanderer };
 
     private bool StopProcessing;
-    private AudioSource Aud;
+    public AudioSource Aud;
 
     public AudioSource MusicalInstruments;
 

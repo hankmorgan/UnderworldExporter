@@ -24,41 +24,53 @@ public class Food : object_base {
 		/// </summary>
 		public int Nutrition()
 		{
-				switch (_RES)	
-				{
-				case GAME_UW2:
-						{
-							return 16;
-						}
-				default:
-						{//TODO:Identify the proper values to use here (5 is still to be figured out)
-								switch (item_id)	
-								{
-								case 176://a_piece_of_meat_pieces_of_meat
-										return 16;
-								case 177://a_loaf_of_bread_loaves_of_bread	
-										return 16;
-								case 178://a_piece_of_cheese_pieces_of_cheese	
-										return 5;
-								case 179://an_apple	
-										return 6;
-								case 180://an_ear_of_corn_ears_of_corn	
-										return 5;
-								case 181://a_loaf_of_bread_loaves_of_bread	
-										return 16;
-								case 182://a_fish_fish	
-										return 16;
-								case 183://some_popcorn_bunches_of_popcorn
-										return 5;
-								case 184://a_mushroom	
-										return 5;
-								case 185://a_toadstool	
-										return 5;
-								}
-								break;
-						}
-				}
-			return 16;
+        if ((item_id >=176) && ((item_id <=192)))
+        {
+            Debug.Log(this.name + " provides nutrition of " + GameWorldController.instance.objDat.nutritionStats[item_id - 176].FoodValue);
+            return GameWorldController.instance.objDat.nutritionStats[item_id - 176].FoodValue;
+        }
+        else
+        {
+            Debug.Log("unimplemented food nutrition value");
+            return 16;
+        }
+
+
+				//switch (_RES)	
+				//{
+				//case GAME_UW2:
+				//		{
+				//			return 16;
+				//		}
+				//default:
+				//		{//TODO:Identify the proper values to use here (5 is still to be figured out)
+				//				switch (item_id)	
+				//				{
+				//				case 176://a_piece_of_meat_pieces_of_meat
+				//						return 16;
+				//				case 177://a_loaf_of_bread_loaves_of_bread	
+				//						return 16;
+				//				case 178://a_piece_of_cheese_pieces_of_cheese	
+				//						return 5;
+				//				case 179://an_apple	
+				//						return 6;
+				//				case 180://an_ear_of_corn_ears_of_corn	
+				//						return 5;
+				//				case 181://a_loaf_of_bread_loaves_of_bread	
+				//						return 16;
+				//				case 182://a_fish_fish	
+				//						return 16;
+				//				case 183://some_popcorn_bunches_of_popcorn
+				//						return 5;
+				//				case 184://a_mushroom	
+				//						return 5;
+				//				case 185://a_toadstool	
+				//						return 5;
+				//				}
+				//				break;
+				//		}
+				//}
+			//return 16;
 		}
 
 	public override bool use ()

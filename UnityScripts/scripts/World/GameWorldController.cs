@@ -16,6 +16,8 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase
 {
+    //public Texture2D[] allnova;
+
     public bool EnableUnderworldGenerator = false;
     public bool DoCleanUp = true;
     public GameObject ceiling;
@@ -1645,7 +1647,7 @@ public class GameWorldController : UWEBase
         }
         else
         {
-            path = levelFileName;//Loader.BasePath + "MAPS\\roadmap.res";		
+            path = levelFileName;		
         }
 
         char[] archive_ark;
@@ -1658,10 +1660,23 @@ public class GameWorldController : UWEBase
             }
             UWCharacter.Instance.playerCam.GetComponent<Light>().range = 2000f;
             UWCharacter.Instance.playerCam.farClipPlane = 30000f;
-            // UWCharacter.Instance.playerCam.renderingPath = RenderingPath.DeferredShading;
             TNovaTerrain.gameObject.SetActive(true);
             TileMapRenderer.RenderTNovaMapTerrain(TNovaLevelModel.transform, lev_ark.data);
+        }
 
+        //Try and play sound file from a tnova res file
+        char[] sound_ark;
+        if (DataLoader.ReadStreamFile("C:\\Games\\Terra Nova\\CD\\Terra_Nova\\SPEECH\\RESBRK01.RES", out sound_ark))
+        {
+            DataLoader.Chunk voc_file;
+            if (!DataLoader.LoadChunk(sound_ark, 3308, out voc_file))
+            {
+                return;
+            }
+            VocLoader voc = new VocLoader(voc_file.data, "tnova");
+            MusicController.instance.Aud.clip = voc.Audio;
+            MusicController.instance.Aud.loop = true;
+            MusicController.instance.Aud.Play();
         }
     }
 

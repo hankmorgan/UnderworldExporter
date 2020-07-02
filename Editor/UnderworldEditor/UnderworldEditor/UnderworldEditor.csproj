@@ -50,6 +50,12 @@
     <Compile Include="ArtUI.cs" />
     <Compile Include="BitmapUW.cs" />
     <Compile Include="BytLoader.cs" />
+    <Compile Include="frmRES.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRES.Designer.cs">
+      <DependentUpon>frmRES.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSelect.cs">
       <SubType>Form</SubType>
     </Compile>

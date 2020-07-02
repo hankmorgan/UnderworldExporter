@@ -511,8 +511,8 @@ public class ArtLoader : Loader
     /// <returns></returns>
     public static Texture2D rotateTexture(Texture2D originalTexture, bool clockwise)
     {
-        Color32[] original = originalTexture.GetPixels32();
-        Color32[] rotated = new Color32[original.Length];
+        Color[] original = originalTexture.GetPixels();
+        Color[] rotated = new Color[original.Length];
         int w = originalTexture.width;
         int h = originalTexture.height;
 
@@ -528,8 +528,8 @@ public class ArtLoader : Loader
             }
         }
 
-        Texture2D rotatedTexture = new Texture2D(h, w, originalTexture.format,false);
-        rotatedTexture.SetPixels32(rotated);
+        Texture2D rotatedTexture = new Texture2D(h, w, TextureFormat.ARGB32,false);
+        rotatedTexture.SetPixels(rotated);
         rotatedTexture.Apply();
         return rotatedTexture;
     }
