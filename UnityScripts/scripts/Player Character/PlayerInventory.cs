@@ -1343,14 +1343,14 @@ public class PlayerInventory : UWEBase
                 case 4://Gloves		
                     if (obj.GetComponent<Armour>() != null)
                     {
-                        return obj.GetComponent<Armour>().getDefence();
+                        return obj.GetComponent<Armour>().Protection();
                     }
                     break;
                 case 5://rings
                     {
                         if (obj.GetComponent<Ring>() != null)
                         {
-                            return obj.GetComponent<Ring>().getDefence();
+                            return obj.GetComponent<Ring>().Protection();
                         }
                         break;
                     }
@@ -1363,7 +1363,7 @@ public class PlayerInventory : UWEBase
                     {
                         if (obj.GetComponent<Shield>() != null)
                         {
-                            return obj.GetComponent<Shield>().getDefence();
+                            return obj.GetComponent<Shield>().Protection();
                         }
                     }
                     break;
@@ -1376,7 +1376,7 @@ public class PlayerInventory : UWEBase
                     {
                         if (obj.GetComponent<Shield>() != null)
                         {
-                            return obj.GetComponent<Shield>().getDefence();
+                            return obj.GetComponent<Shield>().Protection();
                         }
                     }
                     break;

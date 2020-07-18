@@ -77,7 +77,7 @@ public class Skills : UWEBase {
     /// <param name="skillValue"></param>
     /// <param name="targetValue"></param>
     /// <returns></returns>
-    public SkillRollResult SkillRoll(int skillValue, int targetValue)
+    public static SkillRollResult SkillRoll(int skillValue, int targetValue)
     {
         int score = (skillValue - targetValue) + Random.Range(0, 30); //0 to 29;
         if (score < 0x1d)

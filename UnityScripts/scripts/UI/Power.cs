@@ -62,8 +62,6 @@ public class Power : GuiBase {
 				{
 					RepeatCounter=0;
 					uiPowerGem.texture=PowerGemArt[index];
-										//Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ index.ToString("0000"));
-					//CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
 		}
@@ -84,17 +82,15 @@ public class Power : GuiBase {
 	/// </summary>
 	public void UpdateMaxCharge()
 	{
-		//uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
-				if (_RES!=GAME_UW2)
-				{
-						uiPowerGem.texture=PowerGemArt[10+RepeatCounter];		
-				}
-				else
-				{
-						uiPowerGem.texture=PowerGemArt[10];
-				}
+		if (_RES!=GAME_UW2)
+		{
+				uiPowerGem.texture=PowerGemArt[10+RepeatCounter];		
+		}
+		else
+		{
+				uiPowerGem.texture=PowerGemArt[10];
+		}
 
-		//CurrentPower=_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)
 		{

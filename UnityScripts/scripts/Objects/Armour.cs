@@ -6,12 +6,6 @@ using System.Collections;
 /// Wearable armour
 /// Contains the string paths for the paperdoll graphics
 public class Armour : Equipment {
-	//public int Protection;
-	//public string ArmourEquipString;
-	
-	/// The image to display when worn.
-	/// Takes the image from the Equip[Gender][Quality] strings
-	//public Texture2D EquipDisplay;
 
 	/// Permanent spell effect applied by the spell
 	public SpellEffect SpellEffectApplied;
@@ -33,11 +27,6 @@ public class Armour : Equipment {
 		return index;
 	}
 
-	//protected override void Start () {
-	//	base.Start ();
-	//	UpdateQuality();
-	//}
-	
 	public override void UpdateQuality ()
 	{
 		int itemIndex= item_id-32;
@@ -151,9 +140,14 @@ public class Armour : Equipment {
 	}
 
 
-	public override short getDefence()
+	public override short Protection()
 	{
-		return (short)(GameWorldController.instance.objDat.armourStats[item_id-32].protection+ProtectionBonus());
-	}
+        //Per disassembly calculation for base protection offered by armour is
+        // 1 + ((quality X protection stat)>>6)
+        return (short)(1 + ((GameWorldController.instance.objDat.armourStats[item_id - 32].protection * quality) >> 6) + ProtectionBonus());
+
+        //return (short)(Game
+        //WorldController.instance.objDat.armourStats[item_id-32].protection+ProtectionBonus());
+    }
 
 }

@@ -134,19 +134,49 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bonus.</returns>
 	public short DamageBonus()
 	{
-		switch(link)
-		{
-			case SpellEffect.UW1_Spell_Effect_MinorDamage:
-			case SpellEffect.UW1_Spell_Effect_Damage:
-			case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
-			case SpellEffect.UW1_Spell_Effect_MajorDamage:
-			case SpellEffect.UW1_Spell_Effect_GreatDamage:
-			case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
-			case SpellEffect.UW1_Spell_Effect_TremendousDamage:
-			case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
-				return (short)(link-453);//Damage bonus starts at +3 why not					
-		}
-		return 0;
+        switch(_RES)
+        {
+
+            case GAME_UW2:
+                {
+
+                    switch(link)
+                    {
+                        case SpellEffect.UW2_Spell_Effect_MinorDamage:
+                        case SpellEffect.UW2_Spell_Effect_MajorDamage:
+                        case SpellEffect.UW2_Spell_Effect_GreatDamage:
+                        case SpellEffect.UW2_Spell_Effect_UnsurpassedDamage:
+                            {
+                                int bonus = link - SpellEffect.UW2_Spell_Effect_MinorDamage;
+                                bonus = (bonus << 1) + 1;
+                                return (short)bonus;
+                            }
+                    }
+                    break;
+                }
+            default:
+                {
+                    switch(link)
+                    {
+                        case SpellEffect.UW1_Spell_Effect_MinorDamage:
+                        case SpellEffect.UW1_Spell_Effect_Damage:
+                        case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
+                        case SpellEffect.UW1_Spell_Effect_MajorDamage:
+                        case SpellEffect.UW1_Spell_Effect_GreatDamage:
+                        case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
+                        case SpellEffect.UW1_Spell_Effect_TremendousDamage:
+                        case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
+                            {
+                                int bonus = link - SpellEffect.UW1_Spell_Effect_MinorDamage;
+                                bonus = (bonus << 1) + 1;
+                                return (short)bonus;
+                            }
+                    }
+                    break;
+                }
+
+        }
+	    return 0;
 	}
 
 
@@ -156,18 +186,50 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bonus.</returns>
 		public short AccuracyBonus()
 		{
-			switch(link)
-			{
-				case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_Accuracy:
-				case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
-				case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
-				case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
-				case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
-				case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
-					return (short)(link-445); 
-			}
+        switch (_RES)
+        {
+            case GAME_UW2:
+                {
+                    switch(link)
+                    {
+                        case SpellEffect.UW2_Spell_Effect_MinorAccuracy:
+                        case SpellEffect.UW2_Spell_Effect_MajorAccuracy:
+                        case SpellEffect.UW2_Spell_Effect_GreatAccuracy:
+                        case SpellEffect.UW2_Spell_Effect_UnsurpassedAccuracy:
+                            {
+                                int bonus = link - SpellEffect.UW2_Spell_Effect_MinorAccuracy;
+                                bonus = (bonus << 1) + 1;
+                                return (short)bonus;
+                            }
+                    }
+
+                break;
+                }
+
+            default:
+                {
+                    switch (link)
+                    {//Note I have only confirmed this math in UW2 where there is not as many enchantments.
+                        case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_Accuracy:
+                        case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
+                        case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
+                            {
+                                int bonus = link - SpellEffect.UW1_Spell_Effect_MinorAccuracy;
+                                bonus = (bonus << 1) + 1;
+                                return (short)bonus;
+                            }
+                    }
+
+                    break;
+                }
+
+        }
+
 			return 0;
 		}
 

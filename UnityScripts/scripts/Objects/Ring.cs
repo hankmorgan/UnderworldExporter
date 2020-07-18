@@ -78,7 +78,7 @@ public class Ring : Equipment {
 		return false;
 	}
 
-	public override short getDefence ()
+	public override short Protection ()
 	{
 		return ProtectionBonus();
 	}
