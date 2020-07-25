@@ -2140,7 +2140,7 @@ public class NPC : MobileObject
 
     public int GetAttack()
     {
-        return GameWorldController.instance.objDat.critterStats[item_id - 64].AttackPower;
+        return GameWorldController.instance.objDat.critterStats[item_id - 64].Dexterity;
     }
 
     public int GetDamage()

@@ -9,15 +9,17 @@ public class ObjectDatLoader : Loader
         //0000   Int8   damage modifier for Slash attack
         //0001   Int8   damage modifier for Bash attack
         //0002   Int8   damage modifier for Stab attack
-        //0003   int8   unk 
+        //0003   int8   used in attack charge calculations  (min charge?)
         //0004   int8   attackSpeed - how quickly an attack charge builds up.
-        //0005   int8  unk
+        //0005   int8   used in attack charge calculations  (max charge?)
         //0006   Int8   skill type (3: sword, 4: axe, 5: mace, 6: unarmed)
         //0007   Int8   durability	
         public short Slash;
         public short Bash;
         public short Stab;
+        public short MinCharge;
         public short WeaponSpeed;
+        public short MaxCharge;
         public short Skill;
         public short Durability;
     };
@@ -75,10 +77,10 @@ public class ObjectDatLoader : Loader
         /*
 00h 	1 	uint8 	Level 	Level of the creature.
 01h 	3 	 ?? 	 ?? 	 ??
-04h 	2 	uint16 	HitPoints 	Average hit points. <is this meant to be uint8
-maybe 05h  uint8 NPC_POWER?????
-06h 	1 	uint8 	AttackPower 	Damage on attack.
-07h 	1 	 ?? 	 ?? 	 ??
+04h 	1 	uint8 	HitPoints 	Average hit points. <is this meant to be uint8
+05h     1    uint8 Strength  - for the player these values are copied at save load into the table.
+06h 	1 	uint8 	Dexterity
+07h 	1 	 uint8	 Intelligence)
 08h 	1 	uint8 	FluidAndRemains 	A combination of remains after death and the type of blood splatters this produces.
 Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. 
 Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
@@ -99,7 +101,9 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 */
         public int Level;
         public short AvgHit;//Is this defence?????
-        public int AttackPower;
+        public int Strength;
+        public int Dexterity;
+        public int Intelligence;
         public int Remains;
         public int Blood;
         public int Race;
@@ -147,7 +151,9 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 weaponStats[j].Slash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
                 weaponStats[j].Bash = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 1, 8);
                 weaponStats[j].Stab = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 2, 8);
+                weaponStats[j].MinCharge = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 3, 8);
                 weaponStats[j].WeaponSpeed = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 8);
+                weaponStats[j].MaxCharge = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 5, 8);
                 weaponStats[j].Skill = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);
                 weaponStats[j].Durability = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 7, 8);
                 add_ptr = add_ptr + 8;
@@ -170,6 +176,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
              //rangedStats[j].ammo=0x10 + ((((int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) >> 9) & 0x7F));
              //rangedStats[j].ammo= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr, 16) ;
              //rangedStats[j].durability= (int)DataLoader.getValAtAddress(obj_dat,  add_ptr + 2, 8);
+                rangedStats[j].damage = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
                 rangedStats[j].ammo = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 2, 8) + 16;//an index into the ranged table+16;
                 add_ptr = add_ptr + 3;
                 j++;
@@ -224,11 +231,17 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             for (int i = 0; i < 64; i++)
             {//Critters
                 critterStats[j].Level = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0, 8);//Level
-                critterStats[j].AvgHit = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 16);//Average Hitpoints
-                critterStats[j].AttackPower = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);//Attack power
+                critterStats[j].AvgHit = (short)DataLoader.getValAtAddress(obj_dat, add_ptr + 4, 8);//Average Hitpoints - changed from uint16 to uint8
+
+                critterStats[j].Strength = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 5, 8); //Base damage calculations
+                critterStats[j].Dexterity = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 6, 8);// attackscore calculations
+                critterStats[j].Intelligence = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 7, 8); //need to id usages. probably magic spell attacks
+
                 critterStats[j].Remains = (int)((DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0xF0) >> 4);//Remains body
                 critterStats[j].Blood = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 8, 8) & 0x0F;//Remains blood
+
                 critterStats[j].Race = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 9, 8);//Uwformats calls this General Type
+
                 critterStats[j].Passive = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
                 critterStats[j].Defence = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
                 critterStats[j].Speed = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed

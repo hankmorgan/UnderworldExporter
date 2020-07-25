@@ -532,6 +532,44 @@ public class UWCombat : Combat
 
     //Combat calcs
 
+    /// <summary>
+    /// Calculate the attack charge to be applied to player attack damage.
+    /// </summary>
+    /// <param name="Strikecharge"></param>
+    /// <param name="MinCharge"></param>
+    /// <param name="MaxCharge"></param>
+    /// <param name="BaseDamage"></param>
+    public static short CalcAttackChargeDamage(short Strikecharge, short MinCharge, short MaxCharge, short BaseDamage)
+    {
+        short result;
+        result = (short)(MaxCharge - MinCharge);
+        result = (short)((result * Strikecharge) / 100);
+        result = (short)(MinCharge + result);
+        result = (short)((BaseDamage*result) >> 7);
+        return result;
+    }
+
+
+    /// <summary>
+    /// In UW2 damage seems to be divided by 6 and in that many times a 1-6 damage roll is ran. If there is a remainder then a 1-remainder damage roll is made
+    /// </summary>
+    /// <param name="NoOfRolls"></param>
+    /// <param name="Die"></param>
+    /// <returns></returns>
+    public static short DamageRoll(short NoOfRolls, short Die)
+    {
+        short result = 0;
+        if (Die == 0 || NoOfRolls == 0)
+        {
+            return 0;
+        }
+        for (int i =0; i<NoOfRolls;i++)
+        {
+            result += (short)Random.Range(1, Die + 1);
+        }
+        return result;
+    }
+
 
     /// <summary>
     /// Combat calculations for PC hitting an NPC
@@ -546,6 +584,8 @@ public class UWCombat : Combat
 
         int flankingbonus = 0; //need to calcu but depending on relative headings between attacker and defender.
         int magicbonus = 0;//currently unknown what provides this but is calculated by casting/5 + 0xA when set.
+        short MinCharge;
+        short MaxCharge;
 
         if (currentWeapon != null)
         {
@@ -555,23 +595,27 @@ public class UWCombat : Combat
                 attackScore += 7;
             }
             attackScore += currentWeapon.AccuracyBonus();//Given by the accuracy enchantments. Note in vanilla UW2 accuracy actually increases damage and not attack score. This is fixed here.
+
+            MinCharge = currentWeapon.GetMinCharge();
+            MaxCharge = currentWeapon.GetMaxCharge();
         }
         else
         {
 
             //use the unarmed calculations
-            // attackScore = playerUW.PlayerSkills.GetSkill(Skills.SkillAttack) / 2 + playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed);
             attackScore = (playerUW.PlayerSkills.GetSkill(Skills.SkillAttack) >> 1) + playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) + (playerUW.PlayerSkills.DEX / 7) + magicbonus + flankingbonus;
             if (GameWorldController.instance.difficulty == 0)
             {//bonus of 7 for easy difficulty
                 attackScore += 7;
             }
+            MinCharge = WeaponMelee.GetMeleeMinCharge();
+            MaxCharge = WeaponMelee.GetMeleeMaxCharge();
         }
         
 
         //Get base damage 
         int BaseSwingDamage = GetPlayerBaseDamage(currentWeapon, StrikeName);
-        int basePower = (short)(GameWorldController.instance.objDat.critterStats[63].AttackPower / 9); //the player is actually a critter 
+        int basePower = (short)(GameWorldController.instance.objDat.critterStats[63].Strength / 9); //the player is actually a critter so power in this case is their STR.
         int WeaponBonusDamage = 0;
         if (currentWeapon != null)
         {
@@ -579,20 +623,32 @@ public class UWCombat : Combat
         }
         else
         {//unarmed
-            basePower = (short)(GameWorldController.instance.objDat.critterStats[63].AttackPower / 6); //the player is actually a critter 
+            basePower = (short)(GameWorldController.instance.objDat.critterStats[63].Strength / 6); //the player is actually a critter so power in this case is their STR.
             basePower += (playerUW.PlayerSkills.GetSkill(Skills.SkillUnarmed) / 5);
         }
+        
 
         //scale base damage by charge. Min damage is always 2.
-        //Need to do more research on the impact of attack charge on damage.
-       short Damage = (short)(Mathf.Max(((float)(basePower + BaseSwingDamage + WeaponBonusDamage)) * (StrikeCharge / 100f), 2));
+        short Damage =(short)(basePower + BaseSwingDamage + WeaponBonusDamage);
+
+        // damage % 6 no of 1D6s to calculate the actual damage and then add the remainder as a final roll 1-remainder
+        Damage = (short)(DamageRoll((short)(Damage / 6), 6) + DamageRoll(1, (short)(Damage % 6)));
+
+        //Damage is scaled by the amount of weapon charge built up.
+        Damage = CalcAttackChargeDamage((short)StrikeCharge, MinCharge, MaxCharge, Damage);
+
+        //And a flat flanking bonus (that is yet to be calculated)
+        Damage += (short)flankingbonus;
+
+        //Min damage will be 2.
+        Damage = (short)(Mathf.Max(Damage, 2));
 
         Skills.SkillRollResult rollresult = Skills.SkillRoll(attackScore, npc.GetDefence());
 
         bool CriticalHit = false;
         if (rollresult == Skills.SkillRollResult.CriticalSuccess)
         {
-            //based on dissasembly a crit is a 50:50 chance after the critical roll.
+            //based on dissasembly a crit is a 50:50 chance after the critical roll is scored
 
             //seems to be a 50:50 chance for a crit which gives double damage.
             //(48+(rng 0-30)) >>5
@@ -604,8 +660,8 @@ public class UWCombat : Combat
         {
             case Skills.SkillRollResult.CriticalSuccess:
             case Skills.SkillRollResult.Success:
-                {   
-
+                {
+                    Debug.Log("Base Damage = " + ((short)(basePower + BaseSwingDamage + WeaponBonusDamage)) + " Final Damage = " + Damage);
                     if (CriticalHit)
                     {
                         Impact.SpawnHitImpact(Impact.ImpactBlood(), npc.GetImpactPoint() + Vector3.up * 0.1f, npc.objInt().GetHitFrameStart(), npc.objInt().GetHitFrameEnd());

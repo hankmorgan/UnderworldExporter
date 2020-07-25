@@ -30,8 +30,7 @@ public class WeaponMelee : Weapon {
 		/// <returns>The slash damage</returns>
 		public short GetSlash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropSlash(item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Slash+DamageBonus());
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Slash);
 		}
 
 		/// <summary>
@@ -40,8 +39,7 @@ public class WeaponMelee : Weapon {
 		/// <returns>The bash damage</returns>
 		public short GetBash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropBash(item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Bash+DamageBonus());
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Bash);
 		}
 
 		/// <summary>
@@ -50,8 +48,7 @@ public class WeaponMelee : Weapon {
 		/// <returns>The stab damage</returns>
 		public short GetStab()
 		{
-			//return GameWorldController.instance.weaponprops.getPropStab(item_id);
-			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Stab+DamageBonus());
+			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Stab);
 		}
 
 
@@ -61,7 +58,6 @@ public class WeaponMelee : Weapon {
 		/// <returns>The durability.</returns>
 		public override short getDurability()
 		{
-			//return GameWorldController.instance.weaponprops.getPropDurability(item_id);	
 			return (short)(GameWorldController.instance.objDat.weaponStats[item_id].Durability+DurabilityBonus());
 		}
 
@@ -72,7 +68,6 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee slash.</returns>
 		public static short getMeleeSlash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropSlash(15);	
 			return GameWorldController.instance.objDat.weaponStats[15].Slash;
 		}
 
@@ -82,7 +77,6 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee bash.</returns>
 		public static short getMeleeBash()
 		{
-			//return GameWorldController.instance.weaponprops.getPropBash(15);		
 			return GameWorldController.instance.objDat.weaponStats[15].Bash;
 		}
 
@@ -92,7 +86,6 @@ public class WeaponMelee : Weapon {
 		/// <returns>The melee stab.</returns>
 		public static short getMeleeStab()
 		{
-			//return GameWorldController.instance.weaponprops.getPropStab(15);	
 			return GameWorldController.instance.objDat.weaponStats[15].Stab;
 		}
 
@@ -106,27 +99,48 @@ public class WeaponMelee : Weapon {
 			return GameWorldController.instance.objDat.weaponStats[item_id].Skill;
 		}
 
+        public short GetMinCharge()
+        {
+            return (short)(GameWorldController.instance.objDat.weaponStats[item_id].MinCharge );
+        }
 
-	public override void UpdateQuality ()
-	{
-		if ((quality>0) && (quality<=15))
-		{
-				//Shit quality
-			EquipIconIndex=  4;
-		}
-		else if ((quality>15) && (quality<=30))
-		{//bashed about
-			EquipIconIndex=  3;
-		}
-		else if ((quality>30) && (quality<=45))
-		{//medium
-			EquipIconIndex=  2;
-		}
-		else
-		{//best
-			EquipIconIndex=  1;
-		}
-	}
+        public short GetMaxCharge()
+        {
+            return (short)(GameWorldController.instance.objDat.weaponStats[item_id].MaxCharge );
+        }
+
+
+
+        public static short GetMeleeMinCharge()
+        {
+            return (short)(GameWorldController.instance.objDat.weaponStats[15].MinCharge);
+        }
+
+        public static short GetMeleeMaxCharge()
+        {
+            return (short)(GameWorldController.instance.objDat.weaponStats[15].MaxCharge);
+        }
+
+        public override void UpdateQuality ()
+	    {
+		    if ((quality>0) && (quality<=15))
+		    {
+				    //Shit quality
+			    EquipIconIndex=  4;
+		    }
+		    else if ((quality>15) && (quality<=30))
+		    {//bashed about
+			    EquipIconIndex=  3;
+		    }
+		    else if ((quality>30) && (quality<=45))
+		    {//medium
+			    EquipIconIndex=  2;
+		    }
+		    else
+		    {//best
+			    EquipIconIndex=  1;
+		    }
+	    }
 
 		/// <summary>
 		/// Returns the damage bonus provided by the weapons enchantment

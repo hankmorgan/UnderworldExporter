@@ -80,26 +80,31 @@ public class Skills : UWEBase {
     public static SkillRollResult SkillRoll(int skillValue, int targetValue)
     {
         int score = (skillValue - targetValue) + Random.Range(0, 30); //0 to 29;
+        
         if (score < 0x1d)
         {
             if (score < 0x10)
             {
                 if (score < 3)
                 {
+                    Debug.Log("Skill roll " + skillValue + " vs " + targetValue + " Score = " + score + " (CritFail)");
                     return SkillRollResult.CriticalFailure;//0xffff //critical failure
                 }
                 else
                 {
+                    Debug.Log("Skill roll " + skillValue + " vs " + targetValue + " Score = " + score + " (Fail)");
                     return SkillRollResult.Failure; //failure
                 }
             }
             else
             {
+                Debug.Log("Skill roll " + skillValue + " vs " + targetValue + " Score = " + score + " (Success)");
                 return SkillRollResult.Success; //sucess
             }
         }
         else
         { //more than 29
+            Debug.Log("Skill roll " + skillValue + " vs " + targetValue + " Score = " + score + " (CritSuccess)");
             return SkillRollResult.CriticalSuccess; //critical sucess
         }
     }

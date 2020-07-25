@@ -2268,7 +2268,9 @@ public class SaveGame : Loader
             switch (i)
             {
                 case 0x1F://Strength
-                    UWCharacter.Instance.PlayerSkills.STR = (int)buffer[i]; break;
+                    UWCharacter.Instance.PlayerSkills.STR = (int)buffer[i];
+                    GameWorldController.instance.objDat.critterStats[63].Strength = UWCharacter.Instance.PlayerSkills.STR;
+                    break;
                 case 0x20://Dex
                     UWCharacter.Instance.PlayerSkills.DEX = (int)buffer[i]; break;
                 case 0x21: ///    Intelligence
