@@ -15,7 +15,7 @@ public class DoorControl : object_base {
 		///Is the door opening or closing. Used to keep if flying off it's hinges!
 	public bool DoorBusy;
 		///Sets if the lock can be picked.
-	public bool Pickable=true;
+	//public bool Pickable=true;
 	///Is the door spiked
 	//public bool Spiked;//Probably on the lock object?
 	///Is it the player using the object or a trigger/trap.
@@ -277,27 +277,78 @@ public class DoorControl : object_base {
 					}					
 					break;
 				case ObjectInteraction.LOCKPICK:	//lockpick
-					{
-					if (Pickable==true)
-						{
-							if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Skills.DiceRoll(1,25)))
-							{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
-							UnlockDoor(true);
-							}
-						else
-							{														
-							//Debug.Log ("Picklock failed!");
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
-							//objIntUsed.consumeObject();
-							}
-						}
-					else
-						{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
-						}
-					break;
-					}
+                    {
+                        //lock pick skill check is based on the zpos of the "lock" object * 3 vs the players (lockpick skill + 1)
+                        //Locks cannot be picked if the zpos is 0xE or greater. In either case the skillcheck is attempted.
+                        ObjectInteraction LockObject = getLockObjInt();
+                        if (LockObject != null)
+                        {
+                            int skillvalue = UWCharacter.Instance.PlayerSkills.PickLock + 1;
+                            int targetvalue = LockObject.zpos * 3;
+                            Skills.SkillRollResult skillroll = Skills.SkillRoll(skillvalue, targetvalue);
+
+                            if (LockObject.zpos>=0xE)
+                            {//unpickable
+                               if (skillroll == Skills.SkillRollResult.CriticalFailure)
+                                {
+                                    BreakLockPick(ObjectUsed);
+                                }
+                                else
+                                {
+                                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_lockpicking_attempt_failed_));
+                                }
+                            }
+                            else
+                            {
+                                switch(skillroll)
+                                {
+                                    case Skills.SkillRollResult.CriticalFailure:
+                                        {
+                                            BreakLockPick(ObjectUsed);
+                                            break;
+                                        }
+                                    case Skills.SkillRollResult.Failure:
+                                        {
+                                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_lockpicking_attempt_failed_));
+                                            break;
+                                        }
+                                    case Skills.SkillRollResult.Success:
+                                    case Skills.SkillRollResult.CriticalSuccess:
+                                        {
+                                            UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
+                                            UnlockDoor(true);
+                                            break;
+                                        }
+                                }
+                            }                            
+                        }
+                        else
+                        {
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 3));//There is no lock on that.
+                        }
+                    }
+                    break;
+					//{
+					//if (Pickable==true)
+					//	{
+					//		if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillPicklock, Skills.DiceRoll(1,25)))
+					//		{
+					//		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_you_succeed_in_picking_the_lock_));
+					//		UnlockDoor(true);
+					//		}
+					//	else
+					//		{														
+					//		//Debug.Log ("Picklock failed!");
+					//		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
+					//		//objIntUsed.consumeObject();
+					//		}
+					//	}
+					//else
+					//	{
+					//		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,StringController.str_your_lockpicking_attempt_failed_));
+					//	}
+					//break;
+					//}
 				case ObjectInteraction.SPIKE:
 					{
 						if(Spike())
@@ -316,12 +367,26 @@ public class DoorControl : object_base {
 		}
 		return true;
 	}
-	
 
-		/// <summary>
-		/// Tells if the door is spiked closed. Ie an npc cannot use it.
-		/// </summary>
-		public bool Spiked()
+    private static void BreakLockPick(ObjectInteraction ObjectUsed)
+    {
+        //pick break
+        if (_RES == GAME_UW2)
+        {
+            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, 134));
+        }
+        else
+        {
+            UWHUD.instance.MessageScroll.Add("You broke your pick. \n"); //string is hard coded in uw1??
+        }
+        ObjectUsed.consumeObject();
+    }
+
+
+    /// <summary>
+    /// Tells if the door is spiked closed. Ie an npc cannot use it.
+    /// </summary>
+    public bool Spiked()
 		{
 			return (owner == 63);
 		}

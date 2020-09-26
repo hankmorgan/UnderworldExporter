@@ -3076,7 +3076,8 @@ public class SaveGame : Loader
         DataLoader.WriteInt16(writer, (int)(UWCharacter.Instance.transform.position.z * Ratio));
         DataLoader.WriteInt16(writer, (int)((UWCharacter.Instance.transform.position.y - VertAdjust) * (Ratio)));
         DataLoader.WriteInt8(writer, 0);
-        DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f)));
+        // DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f)));
+        DataLoader.WriteInt8(writer, (int)(UWCharacter.Instance.HeadingFull));
         DataLoader.WriteInt8(writer, GameWorldController.instance.LevelNo + 1);
     }
 
@@ -3330,8 +3331,8 @@ public class SaveGame : Loader
                         break;
                     case 0x5C: ///   heading
                         {
-                            float heading = UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f);
-                            DataLoader.WriteInt8(writer, (int)heading); break;
+                            //float heading = UWCharacter.Instance.transform.eulerAngles.y * (255f / 360f);
+                            DataLoader.WriteInt8(writer, UWCharacter.Instance.HeadingFull); break;
                             //break;
                         }
                     case 0x5D: ///   dungeon level										

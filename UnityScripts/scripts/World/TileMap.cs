@@ -1745,7 +1745,7 @@ Tiles[x,y].shockSouthCeilHeight =LevelInfo[x,y-1].ceilingHeight - LevelInfo[x,y-
 
                         //TileMapData[addptr+0x14] =  (char)((TileMapData[addptr+0x14] & 0xC0) | (char)(currobj.Projectile_Pitch & 0x3F));
 
-                        TileMapData[addptr + 0x14] = (char)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x3) << 4) | (currobj.Projectile_Speed & 0xf));
+                        TileMapData[addptr + 0x14] = (char)(((currobj.Projectile_Sign << 7) & 0x1) | ((currobj.Projectile_Pitch & 0x7) << 4) | (currobj.Projectile_Speed & 0xf));
 
                         ByteToWrite = ((currobj.npc_xhome & 0x3F) << 10) |
                                 ((currobj.npc_yhome & 0x3F) << 4) |

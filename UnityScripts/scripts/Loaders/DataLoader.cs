@@ -765,25 +765,38 @@ public class DataLoader :Loader {
 		}
 
 
-		/// <summary>
-		/// Extracts the specified number of bits from the position in the value.
-		/// </summary>
-		/// <returns>The bits.</returns>
-		/// <param name="value">Value.</param>
-		/// <param name="From">From.</param>
-		/// <param name="Length">Length.</param>
-		public static int ExtractBits(int value, int From, int Length)
-		{
-			int mask = getMask (Length);
-			return ( value >> From ) & (mask);
-		}
+		///// <summary>
+		///// Extracts the specified number of bits from the position in the value.
+		///// </summary>
+		///// <returns>The bits.</returns>
+		///// <param name="value">Value.</param>
+		///// <param name="From">From.</param>
+		///// <param name="Length">Length.</param>
+		//public static int ExtractBits_Old(int value, int From, int Length,int break)
+		//{
+		//	int mask = getMask (Length);
+		//	return ( value >> From ) & (mask);
+		//}
 
-	/// <summary>
-	/// Gets a bit mask of the specified length.
-	/// </summary>
-	/// <returns>The mask.</returns>
-	/// <param name="Length">Length.</param>
-	static int getMask (int Length)
+    /// <summary>
+    /// Extracts the specified masked bits from the position in the value.
+    /// </summary>
+    /// <returns>The bits.</returns>
+    /// <param name="value">Value.</param>
+    /// <param name="From">From.</param>
+    /// <param name="Length">Length.</param>
+    public static int ExtractBits(int value, int Shift, int Mask)
+    {
+        return (value >> Shift) & (Mask);
+    }
+
+
+    /// <summary>
+    /// Gets a bit mask of the specified length.
+    /// </summary>
+    /// <returns>The mask.</returns>
+    /// <param name="Length">Length.</param>
+    static int getMask (int Length)
 	{
 		int mask = 0;
 		for (int i = 0; i < Length; i++) {

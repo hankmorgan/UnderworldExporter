@@ -58,7 +58,16 @@ public class UWCharacter : Character
             }
         }
     }
-    
+    /// <summary>
+    ///  Conversion of player transform into UW heading value for the save file.
+    /// </summary>
+    public int HeadingFull
+    {
+        get
+        {
+            return (int)(this.transform.eulerAngles.y * (255f / 360f));
+        }
+    }
 
 
     [Header("Player Movement Status")]
@@ -525,8 +534,14 @@ public class UWCharacter : Character
                     NPC npc = obj.GetComponent<NPC>();
                     if (npc != null)
                     {
-                        // npc.transform.position = CurrentTileMap().getTileVector(42, 35);
-                        npc.Agent.Warp(CurrentTileMap().getTileVector(42, 35));
+                        if (npc.Agent==null)
+                        {
+                            npc.transform.position = CurrentTileMap().getTileVector(42, 35);
+                        }
+                        else
+                        {
+                            npc.Agent.Warp(CurrentTileMap().getTileVector(42, 35));
+                        }                        
                     }
                 }
                 else

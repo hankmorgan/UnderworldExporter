@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 
 public class ObjectLoader : DataLoader
 {
@@ -497,60 +496,38 @@ public class ObjectLoader : DataLoader
             objList[x].parentList = this;
             objList[x].guid = System.Guid.NewGuid();
             objList[x].index = x;
-            //free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
             objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
             objList[x].ObjectTileY = TileMap.ObjectStorageTile;
             objList[x].levelno = (short)LevelNo;
             objList[x].next = 0;
             objList[x].address = lev_ark.Address + objectsAddress + address_pointer;
             objList[x].invis = 0;
-            //objList[x].item_id = (int)(getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
-            objList[x].item_id = (int)ExtractBits(Vals[0], 0, 9);
+            objList[x].item_id = (int)ExtractBits(Vals[0], 0, 0x1FF);
 
             if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES == GAME_UWDEMO)))//Fixed for bugged out of range items
             {
-                //Debug.Log("Out of range object " + objList[x].item_id + " at index " + x);
                 objList[x].item_id = 0;
             }
-            //objList[x].flags  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x07);
-            objList[x].flags = (short)(ExtractBits(Vals[0], 9, 3));
-
-            //objList[x].enchantment = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01);
+            
+            objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
             objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
-
-            //objList[x].doordir  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01);
             objList[x].doordir = (short)(ExtractBits(Vals[0], 13, 1));
-
-            //objList[x].invis  = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01);
             objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
-
-            //objList[x].is_quant = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01);
             objList[x].is_quant = (short)(ExtractBits(Vals[0], 15, 1));
 
             //position at +2
-            //objList[x].zpos = (short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F);	//bits 0-6 
-            objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 7));  //bits 0-6 
-
-            //objList[x].heading = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
-            objList[x].heading = (short)(ExtractBits(Vals[1], 7, 3)); //bits 7-9
-
-            //objList[x].y = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07);	//bits 10-12
-            objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 3)); //bits 7-9	//bits 10-12
-
-            //objList[x].x = (short)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07);	//bits 13-15
-            objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 3));    //bits 13-15
+            objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
+            objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
+            objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 0x7)); //bits 7-9	//bits 10-12
+            objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 0x7));    //bits 13-15
 
             //+4
-            //objList[x].quality =(short)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F);
-            objList[x].quality = (short)(ExtractBits(Vals[2], 0, 6));
-            //objList[x].next = (int)((getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF);
-            objList[x].next = (short)(ExtractBits(Vals[2], 6, 10));
+            objList[x].quality = (short)(ExtractBits(Vals[2], 0, 0x3f));
+            objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
 
             //+6
-            //objList[x].owner = (short)(getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-            objList[x].owner = (short)(ExtractBits(Vals[3], 0, 6));//bits 0-5
-                                                                   //objList[x].link = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
-            objList[x].link = (short)(ExtractBits(Vals[3], 6, 10)); //bits 6-15
+            objList[x].owner = (short)(ExtractBits(Vals[3], 0, 0x3f));//bits 0-5
+            objList[x].link = (short)(ExtractBits(Vals[3], 6, 0x3FF)); //bits 6-15
 
             HandleMovingDoors(objList, x);
 
@@ -562,77 +539,59 @@ public class ObjectLoader : DataLoader
                 objList[x].npc_hp = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
 
                 int val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
-                //objList[x].Projectile_Yaw =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)  & 0x1F);
-                objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 5));
-                //objList[x].MobileUnk00 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8)>>5 & 0x7 );
-                objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 3));
+                objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
+                objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
 
-                objList[x].MobileUnk01 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
+                objList[x].MobileUnk_0xA = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
+                if (objList[x].MobileUnk_0xA > 0)
+                {
+                    Debug.Log("Usage of UNK 0xA in object no " + x + " value = " + objList[x].MobileUnk_0xA);
+                }
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16);
-                //objList[x].npc_goal =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
-                objList[x].npc_goal = (short)(ExtractBits(val, 0, 4));
-                //objList[x].npc_gtarg =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
-                objList[x].npc_gtarg = (short)(ExtractBits(val, 4, 8));
-                //objList[x].MobileUnk02 =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 12 & 0xF);
-                objList[x].MobileUnk02 = (short)(ExtractBits(val, 12, 4));
+                objList[x].npc_goal = (short)(ExtractBits(val, 0, 0xF));
+                objList[x].npc_gtarg = (short)(ExtractBits(val, 4, 0xFF));
+                objList[x].MobileUnk_0xB_12_F = (short)(ExtractBits(val, 12, 0xF));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16);
-                //objList[x].npc_level =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
-                objList[x].npc_level = (short)(ExtractBits(val, 0, 4));
-                //objList[x].MobileUnk03 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 8) >> 4) & 0x1FF);
-                objList[x].MobileUnk03 = (short)(ExtractBits(val, 4, 8));
-                objList[x].MobileUnk04 = (short)(ExtractBits(val, 12, 1));
-                //objList[x].npc_talkedto =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
+                objList[x].npc_level = (short)(ExtractBits(val, 0, 0xF));
+                objList[x].MobileUnk_0xD_4_FF = (short)(ExtractBits(val, 4, 0xff));
+                objList[x].MobileUnk_0xD_12_1 = (short)(ExtractBits(val, 12, 1));
                 objList[x].npc_talkedto = (short)(ExtractBits(val, 13, 1));
-                //objList[x].npc_attitude = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
-                objList[x].npc_attitude = (short)(ExtractBits(val, 14, 2));
+                objList[x].npc_attitude = (short)(ExtractBits(val, 14, 0x3));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xf, 16);
-                //objList[x].MobileUnk05= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) & 0x3F);
-                objList[x].MobileUnk05 = (short)(ExtractBits(val, 0, 6));
+                objList[x].MobileUnk_0xF_0_3F = (short)(ExtractBits(val, 0, 0x3F));
                 //objList[x].npc_height = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 6) & 0x7F);//was this wrong?
-                objList[x].npc_height = (short)(ExtractBits(val, 6, 7));
-                //objList[x].MobileUnk06 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 13) & 0x7);
-                objList[x].MobileUnk06 = (short)(ExtractBits(val, 13, 3));
+                objList[x].npc_height = (short)(ExtractBits(val, 6, 0x3f));//Double check this!!
+                objList[x].MobileUnk_0xF_C_F = (short)(ExtractBits(val, 0xC, 0xF));//Possibly used as a look up in to NPC charge modifiers?
 
                 //objList[x].MobileUnk07 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x10, 8));
-                objList[x].MobileUnk07 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x11, 8));
-                objList[x].MobileUnk08 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x12, 8));
-                objList[x].MobileUnk09 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x13, 8));
+                objList[x].MobileUnk_0x11 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x11, 8));
+                objList[x].ProjectileSourceID = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x12, 8));
+                objList[x].MobileUnk_0x13 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x13, 8));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8);
-                //	objList[x].Projectile_Pitch = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) & 0x3F);
-                objList[x].Projectile_Speed = (short)(ExtractBits(val, 0, 4));
-                objList[x].Projectile_Pitch = (short)(ExtractBits(val, 4, 3));
-                //objList[x].MobileUnk11 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8) >>6 ) & 0x3);
+                objList[x].Projectile_Speed = (short)(ExtractBits(val, 0, 0xF));
+                objList[x].Projectile_Pitch = (short)(ExtractBits(val, 4, 0x7));
                 objList[x].Projectile_Sign = (short)(ExtractBits(val, 7, 1));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8);
-                //objList[x].npc_voidanim=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
-                objList[x].npc_voidanim = (short)(ExtractBits(val, 0, 4));
-                //objList[x].MobileUnk12 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8)>>3 & 0x1F );
-                objList[x].MobileUnk11 = (short)(ExtractBits(val, 4, 4));
+                objList[x].npc_voidanim = (short)(ExtractBits(val, 0, 0x7));
+                objList[x].MobileUnk_0x15_4_1F = (short)(ExtractBits(val, 4, 0x1F));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16);
-                //objList[x].MobileUnk13=(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) & 0x7);
-                objList[x].MobileUnk12 = (short)(ExtractBits(val, 0, 4));
-                //objList[x].npc_yhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
-                objList[x].npc_yhome = (short)(ExtractBits(val, 4, 6));
-                //objList[x].npc_xhome =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
-                objList[x].npc_xhome = (short)(ExtractBits(val, 10, 6));
+                objList[x].MobileUnk_0x16_0_F = (short)(ExtractBits(val, 0, 0xF));
+                objList[x].npc_yhome = (short)(ExtractBits(val, 4, 0x3f));
+                objList[x].npc_xhome = (short)(ExtractBits(val, 10, 0x3f));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8);
-                //objList[x].npc_heading =(short) (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)  & 0x1F);
-                objList[x].npc_heading = (short)(ExtractBits(val, 0, 5));
-                //objList[x].MobileUnk14 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8)>>4) & 0x7 );
-                objList[x].MobileUnk13 = (short)(ExtractBits(val, 5, 3));
+                objList[x].npc_heading = (short)(ExtractBits(val, 0, 0x1F));
+                objList[x].MobileUnk_0x18_5_7 = (short)(ExtractBits(val, 5, 0x7));
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8);
-                //objList[x].npc_hunger = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
-                objList[x].npc_hunger = (short)(ExtractBits(val, 0, 6));
-                //objList[x].MobileUnk14 = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8)>>7) & 0x3 );
-                objList[x].MobileUnk14 = (short)(ExtractBits(val, 6, 2));
+                objList[x].npc_hunger = (short)(ExtractBits(val, 0, 0x3f));
+                objList[x].MobileUnk_0x19_6_3 = (short)(ExtractBits(val, 6, 0x3));
 
                 objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
 
@@ -2593,21 +2552,20 @@ public class ObjectLoader : DataLoader
             info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
 
             info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
-            info.MobileUnk01 = objInt.MobileUnk01;
-            info.MobileUnk02 = objInt.MobileUnk02;
-            info.MobileUnk03 = objInt.MobileUnk03;
-            info.MobileUnk04 = objInt.MobileUnk04;
-            info.MobileUnk05 = objInt.MobileUnk05;
-            info.MobileUnk06 = objInt.MobileUnk06;
-            info.MobileUnk07 = objInt.MobileUnk07;
-            info.MobileUnk08 = objInt.MobileUnk08;
-            info.MobileUnk09 = objInt.MobileUnk09;
+            info.MobileUnk_0xA = objInt.MobileUnk_0xA;
+            info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
+            info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
+            info.MobileUnk_0xD_12_1 = objInt.MobileUnk_0xD_12_1;
+            info.MobileUnk_0xF_0_3F = objInt.MobileUnk_0xF_0_3F;
+            info.MobileUnk_0xF_C_F = objInt.MobileUnk_0xF_C_F;
+            info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
+            info.ProjectileSourceID = objInt.ProjectileSourceID;
+            info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
             info.Projectile_Sign = objInt.Projectile_Sign;
-            info.MobileUnk11 = objInt.MobileUnk11;
-            info.MobileUnk12 = objInt.MobileUnk12;
-            info.MobileUnk13 = objInt.MobileUnk13;
-            info.MobileUnk14 = objInt.MobileUnk14;
-
+            info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
+            info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
+            info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
+            info.MobileUnk_0x19_6_3 = objInt.MobileUnk_0x19_6_3;
         }
 
 

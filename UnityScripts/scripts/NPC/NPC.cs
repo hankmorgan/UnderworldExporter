@@ -1995,7 +1995,7 @@ public class NPC : MobileObject
                     }
                     else if (hit.transform.GetComponent<ObjectInteraction>() != null)
                     {
-                        short attackDamage = (short)Random.Range(1, GetDamage() + 1);
+                        short attackDamage = (short)Random.Range(1, CurrentAttackDamage + 1);
                         hit.transform.GetComponent<ObjectInteraction>().Attack(attackDamage, this.gameObject);
                     }
                     else
@@ -2048,6 +2048,7 @@ public class NPC : MobileObject
             if (newobjt!=null)
             {
                 newobjt.is_quant = 1;
+                newobjt.ProjectileSourceID = ObjectIndex;
                 GameObject launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
 
                 UnFreezeMovement(launchedItem);
@@ -2062,8 +2063,8 @@ public class NPC : MobileObject
                 pd.Source = this.gameObject;
                 pd.Damage = (short)GameWorldController.instance.objDat.rangedStats[projectiletype - 16].damage;//sling damage.
                 pd.AttackCharge = 100f;
-                pd.AttackScore = GetAttack();//Assuming there is no special ranged attack score?
-                pd.ArmourDamage = GetArmourDamage();
+                pd.AttackScore = Dexterity;//Assuming there is no special ranged attack score?
+                pd.ArmourDamage = EquipDamage;
                
             }
         }
@@ -2138,24 +2139,58 @@ public class NPC : MobileObject
     }
 
 
-    public int GetAttack()
+    public int Dexterity
     {
-        return GameWorldController.instance.objDat.critterStats[item_id - 64].Dexterity;
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].Dexterity;
+        }        
     }
 
-    public int GetDamage()
+    public int Strength
     {
-        return GameWorldController.instance.objDat.critterStats[item_id - 64].AttackDamage[CurrentAttack];
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].Strength;
+        }
     }
 
-    public int GetDefence()
+    public int Intelligence
+    {
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].Intelligence;
+        }
+    }
+
+
+    public int CurrentAttackDamage
+    {
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].AttackDamage[CurrentAttack];
+        }        
+    }
+
+    public int CurrentAttackScore
+    {
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].AttackChanceToHit[CurrentAttack];
+        }
+    }
+
+    public int Defence()
     {
         return GameWorldController.instance.objDat.critterStats[item_id - 64].Defence;
     }
 
-    public int GetArmourDamage()
+    public int EquipDamage
     {
-        return GameWorldController.instance.objDat.critterStats[item_id - 64].EquipDamage;
+        get
+        {
+            return GameWorldController.instance.objDat.critterStats[item_id - 64].EquipDamage;
+        }        
     }
 
     public int GetRace()

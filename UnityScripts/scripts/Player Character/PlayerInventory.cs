@@ -1220,20 +1220,19 @@ public class PlayerInventory : UWEBase
     }
 
     /// <summary>
-    /// Gets the armour score of all equiped armour plus the players toughness bonus
+    /// Gets the armour score of all equiped armour
     /// </summary>
     /// <returns>The armour score.</returns>
-    public short getArmourScore()
+    public short ArmourProtection
     {
-        //Get helm defence
-        short result = 0;
-
-        result += getDefenceAtSlot(0);
-        result += getDefenceAtSlot(1);
-        result += getDefenceAtSlot(2);
-        result += getDefenceAtSlot(3);
-        result += getDefenceAtSlot(4);
-        return (short)(result + UWCharacter.Instance.Resistance);
+        get
+        {
+            return (short)(getDefenceAtSlot(0) +
+                getDefenceAtSlot(1) +
+                getDefenceAtSlot(2) +
+                getDefenceAtSlot(3) +
+                getDefenceAtSlot(4));
+        }
     }
 
     /// <summary>

@@ -26,6 +26,14 @@ public class object_base : UWEBase
     //Static Properties
 
 
+    public short ObjectIndex
+    {
+        get
+        {
+            return (short)objInt().ObjectIndex;
+        }
+    }
+
     public int item_id
     {
         get

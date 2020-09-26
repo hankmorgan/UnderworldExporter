@@ -33,33 +33,33 @@ public class ObjectLoaderInfo : UWClass
     public short npc_hp;
     public short ProjectileHeadingMinor;//defection to the right of the missile from the major heading.
     public short ProjectileHeadingMajor; //Cardinal direction 0 to 7 of the missile. North = 0 turning clockwise to North west = 7
-    public short MobileUnk01;
+    public short MobileUnk_0xA;
     public short npc_goal;
     public short npc_gtarg;
-    public short MobileUnk02;
+    public short MobileUnk_0xB_12_F;
     public short npc_level;
-    public short MobileUnk03;
-    public short MobileUnk04;
+    public short MobileUnk_0xD_4_FF;
+    public short MobileUnk_0xD_12_1;
     public short npc_talkedto;
     public short npc_attitude;
-    public short MobileUnk05;
+    public short MobileUnk_0xF_0_3F;
     public short npc_height;
-    public short MobileUnk06;
-    public short MobileUnk07;
-    public short MobileUnk08;
-    public short MobileUnk09;
+    public short MobileUnk_0xF_C_F;
+    public short MobileUnk_0x11;
+    public short ProjectileSourceID;
+    public short MobileUnk_0x13;
     public short Projectile_Speed;
     public short Projectile_Pitch;
     public short Projectile_Sign; //sign bit for pitch = 1 is up. 0 = down?
     public short npc_voidanim;
-    public short MobileUnk11;
-    public short MobileUnk12;
+    public short MobileUnk_0x15_4_1F;
+    public short MobileUnk_0x16_0_F;
     public short npc_yhome;
     public short npc_xhome;
     public short npc_heading;
-    public short MobileUnk13;
+    public short MobileUnk_0x18_5_7;
     public short npc_hunger;
-    public short MobileUnk14;
+    public short MobileUnk_0x19_6_3;
     public short npc_whoami;
 
     //Where are these values set???

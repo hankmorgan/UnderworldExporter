@@ -140,7 +140,7 @@ public class Compass : GuiBase_Draggable
                 case WEST:
                 case EAST:
                     {
-                        comp.texture = CompassPoles[0];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0000");
+                        comp.texture = CompassPoles[0];
                         break;
                     }
                 case NORTHWEST:
@@ -148,7 +148,7 @@ public class Compass : GuiBase_Draggable
                 case SOUTHEAST:
                 case SOUTHWEST:
                     {
-                        comp.texture = CompassPoles[2];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0002");
+                        comp.texture = CompassPoles[2];
                         break;
                     }
                 case NORTHNORTHWEST:
@@ -156,12 +156,12 @@ public class Compass : GuiBase_Draggable
                 case SOUTHSOUTHEAST:
                 case WESTSOUTHWEST:
                     {
-                        comp.texture = CompassPoles[1];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0001");
+                        comp.texture = CompassPoles[1];
                         break;
                     }
                 default:
                     {
-                        comp.texture = CompassPoles[3];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0003");
+                        comp.texture = CompassPoles[3];
                         break;
                     }
 
