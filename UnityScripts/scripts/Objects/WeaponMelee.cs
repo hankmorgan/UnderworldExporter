@@ -270,5 +270,10 @@ public class WeaponMelee : Weapon {
 		
 	}
 
+    public override int repairEstimate()
+    {
+        return GameWorldController.instance.objDat.weaponStats[item_id].Durability;
+    }
+
 }
 

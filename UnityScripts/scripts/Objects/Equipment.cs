@@ -65,7 +65,40 @@ public class Equipment : object_base
                 case ObjectInteraction.ANVIL: //ANVIL
                     {
                         //Do a difficulty check and prompt for approval.
-                        UWHUD.instance.MessageScroll.Set("[placeholder]You think it will be hard/easy to repair this item. Press Y or N followed by enter to proceed");
+                        int RepairDifficulty = repairEstimate();
+                        int estimateStringNo=0;
+                        int repairStringOffset = StringController.str_you_think_it_will_be_;
+                        if (_RES==GAME_UW2)
+                        {
+                            repairStringOffset = 231;
+                        }
+                        if (RepairDifficulty == -1)
+                        {
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_cannot_repair_that_));
+                            return true;
+                        }
+                        else
+                        {
+                            int estimate = RepairDifficulty - UWCharacter.Instance.PlayerSkills.Repair + 0xF;
+                            if (estimate>=0x1E)
+                                {
+                                estimate = 4;
+                                }
+                            else
+                            {
+                                estimate = (estimate / 0xA) + 1;
+                            }
+                            estimateStringNo += repairStringOffset + estimate + 3 ;
+                        }
+                        
+
+                        string question = StringController.instance.GetString(1, repairStringOffset)
+                            + StringController.instance.GetString(1, estimateStringNo)
+                            + StringController.instance.GetString(1, repairStringOffset + 1)
+                            + StringController.instance.GetSimpleObjectNameUW(item_id)
+                            + StringController.instance.GetString(1,StringController.str__make_an_attempt_ ); 
+
+                        UWHUD.instance.MessageScroll.Set(question);
                         InputField inputctrl = UWHUD.instance.InputControl;
                         inputctrl.gameObject.SetActive(true);
                         inputctrl.gameObject.GetComponent<InputHandler>().target = this.gameObject;
@@ -103,26 +136,82 @@ public class Equipment : object_base
         {
             //do the repair 
             //Play the cutscene.
-            UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs404.n01";
-            //TODO:At the moment it suceeds but in future implement failures and breakages.
-            //Find out what the story with the sword of justice is?
-            //Do the result at the end of the animation.
-            if (UWCharacter.Instance.PlayerSkills.TrySkill(Skills.SkillRepair, 0))
+            switch (_RES)
             {
-                quality += 5; //quality+5;
-                if (quality > 63) { quality = 63; }
-                UWHUD.instance.MessageScroll.Add("You repair the item");
+                case GAME_UW2:
+                    //todo
+                    break;
+                default:
+                    UWHUD.instance.CutScenesSmall.anim.SetAnimation = "cs404.n01";
+                    break;
+            }          
+
+            int RepairDifficulty = repairEstimate();
+
+            Skills.SkillRollResult result = Skills.SkillRoll(UWCharacter.Instance.PlayerSkills.Repair, RepairDifficulty);
+
+            switch (result)
+            {
+                case Skills.SkillRollResult.CriticalFailure://attempt fails. dice roll of 0-63. If repair skill is lower than result damage item by another roll (0-7)+4;
+                    {
+                        if (Random.Range(0,64) >= UWCharacter.Instance.PlayerSkills.Repair)
+                        {
+                            int damage = Random.Range(0, 7) + 4;
+                            quality = (short)(quality - (short)damage);
+                            if (quality>0)
+                            {
+                                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_damaged_the_) + StringController.instance.GetSimpleObjectNameUW(item_id));
+                            }
+                        }
+                    }
+                    break;
+                case Skills.SkillRollResult.Failure://attempt fails. no change to item.
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetSimpleObjectNameUW(item_id) );
+                    break;
+                case Skills.SkillRollResult.Success://repair up to (repair skill/5+3)
+                    int newQuality = (UWCharacter.Instance.PlayerSkills.Repair / 5 + 3);
+                    if(quality>= newQuality)
+                    {
+                        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_your_attempt_has_no_effect_on_the_) + StringController.instance.GetSimpleObjectNameUW(item_id)) ;
+                    }
+                    else
+                    {
+                        quality = (short)newQuality;
+                        if (quality > 63)
+                        {
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetSimpleObjectNameUW(item_id) );
+                            quality = 63;
+                        }
+                        else
+                        {
+                            UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_partially_repaired_the_) + StringController.instance.GetSimpleObjectNameUW(item_id)) ;
+                        }
+                    }
+
+
+                    break;
+                case Skills.SkillRollResult.CriticalSuccess://fully repair the item.
+                    quality = 63;
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,StringController.str_you_have_fully_repaired_the_) + StringController.instance.GetSimpleObjectNameUW(item_id) );
+                    break;
+
+            }
+
+
+            if (quality <= 0)
+            {
+                //destroy the item.
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_destroyed_the_) + StringController.instance.GetSimpleObjectNameUW(item_id));
+                objInt().consumeObject();//ToDO: Create DEBRIS                
             }
             else
             {
-                UWHUD.instance.MessageScroll.Add("You fail to repair the item");
-            }
-            UpdateQuality();
+                UpdateQuality();
+            }            
         }
         //cancel the repair 
         CurrentObjectInHand = null;
-        //UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
-    }
+     }
 
     public override bool LookAt()
     {

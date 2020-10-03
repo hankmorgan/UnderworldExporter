@@ -1371,4 +1371,14 @@ return false;*/
 
     }
 
+    /// <summary>
+    /// Difficuly level for repair.
+    /// For armour and weapons return item durability.
+    /// </summary>
+    /// <returns></returns>
+    public virtual int repairEstimate()
+    {
+        return -1;
+    }
+
 }

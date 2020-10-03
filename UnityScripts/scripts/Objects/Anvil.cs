@@ -26,4 +26,10 @@ public class Anvil : object_base {
 	{
 		return "repair";
 	}
+
+    public override bool FailMessage()
+    {
+        UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_cannot_repair_that_));          
+        return true;
+    }
 }

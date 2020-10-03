@@ -150,4 +150,9 @@ public class Armour : Equipment {
         //WorldController.instance.objDat.armourStats[item_id-32].protection+ProtectionBonus());
     }
 
+    public override int repairEstimate()
+    {
+        return (short)(GameWorldController.instance.objDat.armourStats[item_id - 32].durability);
+    }
+
 }
