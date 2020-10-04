@@ -18,6 +18,11 @@ public class ScrollController : GuiBase {
     public TextMeshProUGUI TextOutput;
 	public int ptr;
 	public int MaxEntries;
+    
+    /// <summary>
+    /// The input ctrl to include with this text box
+    /// </summary>
+    public InputField InputCtrl;
 
 	public bool useDragon;
 
@@ -86,15 +91,11 @@ public class ScrollController : GuiBase {
 
 	public void Clear()
 	{
-		//uiIn.Clear();//Clear the input list control
-		//uiIn.textLabel.text="";
 		for (int i=0;i<=txtToDisplay.GetUpperBound(0);i++)
 		{
 			txtToDisplay[i] ="";
 		}
 		ptr=0;
-        //PrintList();
-        //NewUIOUt.text="";
         DirectSet("");			
 	}
 
@@ -114,16 +115,54 @@ public class ScrollController : GuiBase {
 		else
 		{
 			txtToDisplay[ptr++] = text;		
-		}
-		
+		}		
 	}
 
 	public void PrintList()
 	{
 		string result="";
-		for (int i=0;i<ptr;i++)
+        string input = "";
+        if ((InputCtrl !=null))
+        {
+            input = InputCtrl.text;
+            if (InputCtrl.gameObject.GetComponent<InputHandler>() != null)
+            {
+                if (InputCtrl.gameObject.GetComponent<InputHandler>().currentInputMode == InputHandler.InputAnvil)//limit value to Y/N
+                {
+                    if (input.Length>=1)
+                    {
+                        string lastChar = input.Substring(input.Length - 1);
+                        if (lastChar.ToUpper() == "Y")
+                        {
+                            input = "Yes";
+                            InputCtrl.text = "Y";
+                        }
+                        else
+                        {
+                            input = "No";
+                            InputCtrl.text = "N";
+                        }
+                    }
+                    else
+                    {
+                        input = "No";
+                        InputCtrl.text = "N";
+                    }
+                }                  
+            }
+        }
+
+        for (int i=0;i<ptr;i++)
 		{
-			result = result+ txtToDisplay[i] + "\n";
+            if (i==ptr-1)
+            {
+                result = result + txtToDisplay[i] + " " + input + "\n";
+            }
+            else
+            {
+                result = result + txtToDisplay[i] + "\n";
+            }
+			
 		}
         DirectSet(result);
 		if (useDragon)
@@ -160,6 +199,24 @@ public class ScrollController : GuiBase {
                 return text;
             }
         }
+    }
+
+    /// <summary>
+    /// Refreshes the text displayed when the input control value changes
+    /// </summary>
+    public void InputCtrlChange()
+    {
+        //if(InputCtrl!=null)
+        //{
+        //    if (InputCtrl.gameObject.GetComponent<InputHandler>()!=null)
+        //    {
+        //        if (InputCtrl.gameObject.GetComponent<InputHandler>().currentInputMode == InputHandler.InputAnvil)//limit value to Y/N
+        //        {
+        //            string LastChar = InputCtrl.text.Substring()
+        //        }
+        //    }
+        //}
+        PrintList();
     }
 
 }

@@ -428,11 +428,8 @@ public class InventorySlot : GuiBase
 
                             inputctrl.gameObject.SetActive(true);
                             inputctrl.text = objIntUsedOn.GetQty().ToString();//"1";
-
-
                             inputctrl.gameObject.GetComponent<InputHandler>().target = this.gameObject;
                             inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode = InputHandler.InputInventoryQty;
-
                             inputctrl.contentType = InputField.ContentType.IntegerNumber;
                             inputctrl.Select();
 

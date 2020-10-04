@@ -78,6 +78,7 @@ public class Shrine : Model3D {
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
 				inputctrl.contentType= InputField.ContentType.Standard;
+                inputctrl.text = "";
 				inputctrl.Select();
 				Time.timeScale=0.0f;
 				WindowDetect.WaitingForInput=true;

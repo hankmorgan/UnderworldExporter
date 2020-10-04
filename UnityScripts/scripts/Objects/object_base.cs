@@ -552,10 +552,17 @@ public class object_base : UWEBase
     /// <param name="ObjectUsed">Object used.</param>
     public virtual bool ActivateByObject(ObjectInteraction ObjectUsed)
     {
-        //CheckReferences();
         if (UWCharacter.InteractionMode == UWCharacter.InteractionModeUse)
         {
-            FailMessage();
+            switch (ObjectUsed.GetItemType())
+                {
+                case ObjectInteraction.ANVIL:
+                    UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_cannot_repair_that_));
+                    break;
+                default:
+                    FailMessage();
+                    break;
+                }            
             UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
             CurrentObjectInHand = null;
             return true;

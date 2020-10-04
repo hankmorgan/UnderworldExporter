@@ -12,6 +12,7 @@ public class Anvil : object_base {
 		if (CurrentObjectInHand==null)
 		{
 			BecomeObjectInHand();
+            UWCharacter.InteractionMode = UWCharacter.InteractionModeUse;
 			UWHUD.instance.MessageScroll.Set("Use Anvil on what?");
 			return true;
 		}

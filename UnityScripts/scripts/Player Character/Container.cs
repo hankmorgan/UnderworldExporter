@@ -514,6 +514,16 @@ public class Container : UWEBase
                 }
             }
 
+            //Special item cases
+            switch (CurrentObjectInHand.GetItemType())
+            {
+                case ObjectInteraction.ANVIL://Fix to stop in use anvils from being added to inventory.
+                    CurrentObjectInHand.FailMessage();
+                    UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                    CurrentObjectInHand = null;
+                    return true;
+            }
+
             if (Container.TestContainerRules(this, 11, false) == false)
             {
                 Valid = false;
@@ -605,6 +615,13 @@ public class Container : UWEBase
         if (CurrentObjectInHand == null)
         {
             return true;
+        }
+        else
+        {
+            if(CurrentObjectInHand.CanBePickedUp==false)
+            {
+                return false;
+            }
         }
         //Test the various rules for this slot
         ObjectInteraction objInt = CurrentObjectInHand;
