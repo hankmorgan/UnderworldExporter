@@ -228,9 +228,8 @@ public class InventorySlot : GuiBase
             //Special case Eating food dropped on helm slot
             if (SlotCategory == HELM)
             {
-                if (CurrentObjectInHand.GetItemType() == ObjectInteraction.FOOD)
-                {
-                    CurrentObjectInHand.Use();
+                if(CurrentObjectInHand.Eat())
+                {//True is returned if some eating action has taken place.
                     DoNotPickup = true;
                     return;
                 }

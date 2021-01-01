@@ -147,6 +147,7 @@ public class ObjectInteraction : UWEBase{
     public const int A_BRIDGE_TRAP = 133;
     public const int A_DJINN_BOTTLE = 134;
     public const int A_SPLASH = 135;
+    public const int A_CANDLE = 136;
 
     /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 1000 to keep them seperate from the above*/
     public const int SHOCK_TRIGGER_ENTRY = 1000;    //Player enters trigger's tile
@@ -638,6 +639,19 @@ public class ObjectInteraction : UWEBase{
         if (item != null)
         {
             return item.use();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool Eat()
+    {
+        object_base item = this.GetComponent<object_base>();//Base object class
+        if (item != null)
+        {
+            return item.Eat();
         }
         else
         {
@@ -1910,8 +1924,11 @@ public class ObjectInteraction : UWEBase{
                     }
                 }
                 break;
-            case TORCH:
+            case TORCH:            
                 myObj.AddComponent<LightSource>();
+                break;
+            case A_CANDLE:
+                myObj.AddComponent<a_candle>();
                 break;
             case REFILLABLE_LANTERN:
                 myObj.AddComponent<Lantern>();

@@ -102,10 +102,10 @@ public class Food : object_base {
 		}
 	}
 
-    public  bool Drink()
-    {
-        return true;
-    }
+    //public  bool Drink()
+    //{
+    //    return true;
+    //}
 
 
     public override bool Eat()

@@ -753,11 +753,11 @@ public class ObjectMasters {
         InitObj(143, 0, 0, 0, ObjectInteraction.RUNEBAG, "a_rune_bag", 143, 143, true, true, 0, 1);
         InitObj(144, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lantern", 144, 144, true, true, 0, 1);
         InitObj(145, 0, 0, 0, ObjectInteraction.TORCH, "a_torch&torches", 145, 145, true, true, 0, 1);
-        InitObj(146, 0, 0, 0, ObjectInteraction.TORCH, "a_candle", 146, 146, true, true, 0, 1);
+        InitObj(146, 0, 0, 0, ObjectInteraction.A_CANDLE, "a_candle", 146, 146, true, true, 0, 1);
         InitObj(147, 0, 0, 0, ObjectInteraction.TORCH, "a_light-sphere", 147, 147, true, true, 0, 1);
         InitObj(148, 0, 0, 0, ObjectInteraction.REFILLABLE_LANTERN, "a_lit_lantern", 148, 148, true, true, 0, 1);
         InitObj(149, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_torch", 149, 149, true, true, 0, 1);
-        InitObj(150, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_candle", 150, 150, true, true, 0, 1);
+        InitObj(150, 0, 0, 0, ObjectInteraction.A_CANDLE, "a_lit_candle", 150, 150, true, true, 0, 1);
         InitObj(151, 0, 0, 0, ObjectInteraction.TORCH, "a_lit_light-sphere", 151, 151, true, true, 0, 1);
         InitObj(152, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 152, 152, true, true, 0, 1);
         InitObj(153, 0, 0, 0, ObjectInteraction.WAND, "a_wand", 153, 153, true, true, 0, 1);
