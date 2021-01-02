@@ -1843,9 +1843,13 @@ public class ObjectInteraction : UWEBase{
                 myObj.AddComponent<RuneBag>();
                 break;
             case FOOD:
-            case DRINK:
                 {
                     myObj.AddComponent<Food>();
+                    break;
+                }
+            case DRINK:
+                {
+                    myObj.AddComponent<Drink>();
                     break;
                 }
             case CLUTTER:

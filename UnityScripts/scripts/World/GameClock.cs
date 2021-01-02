@@ -124,11 +124,7 @@ public class GameClock : UWEBase {
 					}
 				}
 			}
-
-
-
 		}
-
 	}
 
 	/// <summary>

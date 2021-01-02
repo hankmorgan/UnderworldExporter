@@ -132,10 +132,17 @@ public class SaveGame : Loader
                             Quest.instance.isCupFound = ((((int)DataLoader.getValAtAddress(buffer, i, 8) >> 6) & 0x1) == 1);
                             break;
                         }
-                    case 0x63:
+                    case 0x62://intoxication and is garamon buried.
                         {
-                            Quest.instance.isGaramonBuried = ((int)buffer[i] == 28); break;
+                            int val = ((int)DataLoader.getValAtAddress(buffer, i, 16));
+                            UWCharacter.Instance.Intoxication = (val >> 4) & 0x3f;
+                            Quest.instance.isGaramonBuried = ((val >> 10) & 0x3) == 3;
+                            break;
                         }
+                    //case 0x63:
+                    //    {
+                    //      //  Quest.instance.isGaramonBuried = ((buffer[i] >> 2) & 0x3) == 3 ; break;
+                    //    }
 
                     case 0x65: // hand, Gender & body, and class
                         break;
@@ -266,12 +273,16 @@ public class SaveGame : Loader
 
             if (UWCharacter.Instance.decode)
             {
+                StreamWriter output = new StreamWriter(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".csv");
+
                 //write out decrypted file for analysis
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
                     dataToWrite[i] = (byte)buffer[i];
+                    output.WriteLine((byte)buffer[i]);
                 }
+                output.Close();
                 File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
             }
 
@@ -432,6 +443,18 @@ public class SaveGame : Loader
                             val = val | 64;     // bit 6 is the cup found.
                         }
                         DataLoader.WriteInt8(writer, val);
+                        break;
+                    }
+                case 0x64://intoxication and is garamon buried.
+                    {
+                        int val = 0;
+                        //player intoxication
+                        val |= (UWCharacter.Instance.Intoxication << 4);
+                        DataLoader.WriteInt16(writer, val);
+                        if (Quest.instance.isGaramonBuried)
+                        {
+                            val |= 0xC00;
+                        }
                         break;
                     }
                 case 0x63: //Is garamon buried
@@ -793,6 +816,9 @@ public class SaveGame : Loader
                     }
                 case 0x61: ///    bits 1..4 play_poison and no of active effects (unchecked)//This differs from uw1 so it needs to be tested properly
                     DataLoader.WriteInt8(writer, (((NoOfActiveEffects & 0x3) << 5)) | (UWCharacter.Instance.play_poison << 1));
+                    break;
+                case 0x62:                   
+                    DataLoader.WriteInt8(writer, UWCharacter.Instance.Intoxication<<6);
                     break;
                 case 0x64:
                     {
@@ -1585,11 +1611,14 @@ public class SaveGame : Loader
             if (UWCharacter.Instance.decode)
             {
                 //write out decrypted file for analysis
+                StreamWriter output = new StreamWriter(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".csv");
                 byte[] dataToWrite = new byte[buffer.GetUpperBound(0) + 1];
                 for (long i = 0; i <= buffer.GetUpperBound(0); i++)
                 {
                     dataToWrite[i] = (byte)buffer[i];
+                    output.WriteLine((byte)buffer[i]);
                 }
+                output.Close();
                 File.WriteAllBytes(Loader.BasePath + "SAVE" + slotNo + sep + "decode_" + slotNo + ".dat", dataToWrite);
             }
             /*for (int c=0; c<=pDat.GetUpperBound(0);c++)
@@ -1659,6 +1688,9 @@ public class SaveGame : Loader
                         UWCharacter.Instance.play_poison = (short)((buffer[i] >> 1) & 0xF);
                         UWCharacter.Instance.poison_timer = 30f;
                         effectCounter = ((int)buffer[i] >> 6) & 0x3;
+                        break;
+                    case 0x62://alco
+                        UWCharacter.Instance.Intoxication = ((int)DataLoader.getValAtAddress(buffer, i, 16) >> 6) & 0x3f;
                         break;
                     case 0x64:
                         Quest.instance.DreamPlantEaten = (1 == (((int)buffer[i]) & 0x1));

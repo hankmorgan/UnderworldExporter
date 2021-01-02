@@ -545,7 +545,7 @@ public class ObjectLoader : DataLoader
                 objList[x].MobileUnk_0xA = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
                 if (objList[x].MobileUnk_0xA > 0)
                 {
-                    Debug.Log("Usage of UNK 0xA in object no " + x + " value = " + objList[x].MobileUnk_0xA);
+                   // Debug.Log("Usage of UNK 0xA in object no " + x + " value = " + objList[x].MobileUnk_0xA);
                 }
 
                 val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16);

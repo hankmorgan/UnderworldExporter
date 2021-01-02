@@ -2,13 +2,16 @@
 using System.Collections;
 
 public class Food : object_base {
-	/*Food items*/
+    /*Food items*/
+    public int DebugNutrition;
+
 
 	protected override void Start ()
 	{
 		base.Start();
-		//Fix to repair invalid food properties.
-		if  ((isquant==0) && (link<=1))
+
+        //Fix to repair invalid food properties.
+        if  ((isquant==0) && (link<=1))
 		{
 			if ((item_id>=176) && (item_id<=192))
 			{
@@ -34,44 +37,7 @@ public class Food : object_base {
             Debug.Log("unimplemented food nutrition value");
             return 16;
         }
-
-
-				//switch (_RES)	
-				//{
-				//case GAME_UW2:
-				//		{
-				//			return 16;
-				//		}
-				//default:
-				//		{//TODO:Identify the proper values to use here (5 is still to be figured out)
-				//				switch (item_id)	
-				//				{
-				//				case 176://a_piece_of_meat_pieces_of_meat
-				//						return 16;
-				//				case 177://a_loaf_of_bread_loaves_of_bread	
-				//						return 16;
-				//				case 178://a_piece_of_cheese_pieces_of_cheese	
-				//						return 5;
-				//				case 179://an_apple	
-				//						return 6;
-				//				case 180://an_ear_of_corn_ears_of_corn	
-				//						return 5;
-				//				case 181://a_loaf_of_bread_loaves_of_bread	
-				//						return 16;
-				//				case 182://a_fish_fish	
-				//						return 16;
-				//				case 183://some_popcorn_bunches_of_popcorn
-				//						return 5;
-				//				case 184://a_mushroom	
-				//						return 5;
-				//				case 185://a_toadstool	
-				//						return 5;
-				//				}
-				//				break;
-				//		}
-				//}
-			//return 16;
-		}
+    }
 
 	public override bool use ()
 	{
@@ -101,12 +67,6 @@ public class Food : object_base {
 			return ActivateByObject(CurrentObjectInHand);
 		}
 	}
-
-    //public  bool Drink()
-    //{
-    //    return true;
-    //}
-
 
     public override bool Eat()
 	{
@@ -211,13 +171,23 @@ public class Food : object_base {
                 UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_mushroom_causes_your_head_to_spin_and_your_vision_to_blur_));
                 UWCharacter.Instance.PlayerMagic.CastEnchantment(UWCharacter.Instance.gameObject, null, SpellEffect.UW2_Spell_Effect_Hallucination, Magic.SpellRule_TargetSelf, Magic.SpellRule_Consumable);
                 break;
+            case 206://a_plant
+                //000~001~251~Although you have to eat around the thorny flowers, the plant is quite good. \n
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_although_you_have_to_eat_around_the_thorny_flowers_the_plant_is_quite_good_));
+                break;
+            case 207://a_plant
+                UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_the_plant_is_plain_tasting_but_nourishing_));
+                break;
             default:
                 UWHUD.instance.MessageScroll.Add("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
                 break;
         }
     }
 
-    private void LeftOvers()
+    /// <summary>
+    /// Spawn leftovers after eating in UW2
+    /// </summary>
+    protected void LeftOvers()
     {
         int LeftOverToCreate = -1;
         switch (item_id)
@@ -239,9 +209,8 @@ public class Food : object_base {
             ObjectLoaderInfo newobjt = ObjectLoader.newObject(LeftOverToCreate, 40, 0, 0, 256);
             newobjt.InUseFlag = 1;
             ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
-            GameWorldController.MoveToWorld(created.gameObject);
+            GameWorldController.MoveToInventory(created.gameObject);
             CurrentObjectInHand = created;
-            //UWHUD.instance.CursorIcon = created.GetInventoryDisplay().texture;
             UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
         }
     }
@@ -296,10 +265,10 @@ public class Food : object_base {
 		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
 	{
-		//	int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
-		//	int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
-			//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
-				int BaseStringNo=StringController.str__tasted_putrid_;
+		int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+		int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
+	    Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
+		int BaseStringNo=StringController.str__tasted_putrid_;
 		if (quality == 0)
 			{
 				return StringController.instance.GetString (1,BaseStringNo);//worm
@@ -333,9 +302,9 @@ public class Food : object_base {
 		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
 	private string foodSmellText()//
 	{
-		//int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
-		//int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
-		//Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
+		int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
+		int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
+		Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);				
 		if (quality == 0)
 		{
 				return StringController.instance.GetString (5,18);//worm

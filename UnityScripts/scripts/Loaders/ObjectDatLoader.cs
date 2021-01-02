@@ -220,7 +220,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             j = 0;
             for (int i = 0; i < 16; i++)
             {//Light sources
-                nutritionStats[j].FoodValue = (int)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
+                nutritionStats[j].FoodValue = (int)(sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
                 add_ptr = add_ptr + 1;
                 j++;
             }

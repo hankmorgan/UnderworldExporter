@@ -178,6 +178,8 @@ public class UWCharacter : Character
     //Character Status
     public int FoodLevel; //0-255 range.
     public int Fatigue;   //0-29 range
+    public int Intoxication; //0-63 range
+
     [SerializeField]   
     private short _play_poison;
     /// <summary>
