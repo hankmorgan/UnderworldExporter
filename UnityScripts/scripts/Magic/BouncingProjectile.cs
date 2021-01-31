@@ -30,25 +30,26 @@ public class BouncingProjectile : MagicProjectile {
 	void reflectprojectile()
 	{
 		HasHit=false;
-		switch (ProjectileHeadingMajor)	
-		{//Proper behaviour here will need to reflect based on what is being reflected against rather than just reverse course.
-		case 1: //ne
-				ProjectileHeadingMajor = 5;break;//ok
-		case 2: //e
-				ProjectileHeadingMajor = 6;break;//ok
-		case 3: //se
-				ProjectileHeadingMajor = 7;break;//ok
-		case 4: //s
-				ProjectileHeadingMajor = 0;break;
-		case 5: //sw
-				ProjectileHeadingMajor = 1;break;
-		case 6: //w
-				ProjectileHeadingMajor = 2;break; //ok
-		case 7: //nw						
-				ProjectileHeadingMajor = 3;break;//ok
-		default: //north
-		case 0:
-				ProjectileHeadingMajor = 4;break;//ok
-		}
+        Debug.Log("Bouncing Projectile to reimplement!");
+		//switch (ProjectileHeadingMajor)	
+		//{//Proper behaviour here will need to reflect based on what is being reflected against rather than just reverse course.
+		//case 1: //ne
+		//		ProjectileHeadingMajor = 5;break;//ok
+		//case 2: //e
+		//		ProjectileHeadingMajor = 6;break;//ok
+		//case 3: //se
+		//		ProjectileHeadingMajor = 7;break;//ok
+		//case 4: //s
+		//		ProjectileHeadingMajor = 0;break;
+		//case 5: //sw
+		//		ProjectileHeadingMajor = 1;break;
+		//case 6: //w
+		//		ProjectileHeadingMajor = 2;break; //ok
+		//case 7: //nw						
+		//		ProjectileHeadingMajor = 3;break;//ok
+		//default: //north
+		//case 0:
+		//		ProjectileHeadingMajor = 4;break;//ok
+		//}
 	}
 }

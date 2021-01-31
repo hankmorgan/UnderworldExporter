@@ -213,72 +213,270 @@ public class ObjectInteraction : UWEBase{
     //UW Props
 
     //[Header("UW Static Properties")]
-    public int item_id; //0-8
-    public short flags; //9-12
-    public short enchantment;   //12
-    public short doordir;   //13index
-    public short invis;     //14
-    public short isquant;   //15
+    public int item_id //0-8
+    {
+        get { return objectloaderinfo.item_id;   }
+        set { objectloaderinfo.item_id = value;  }
+    }
 
-    public short zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-    public short heading;   //        7- 9   3   "heading"   Heading (*45 deg)
-    public short xpos; //   10-12   3   "ypos"      Object Y position (0-7)
-    public short ypos; //  13-15   3   "xpos"      Object X position (0-7)
-                    //0004 quality / chain
-    public short quality;   //;     0- 5   6   "quality"   Quality
-    public int next; //    6-15   10  "next"      Index of next object in chain
-                     //0006 link / special
-                     //     0- 5   6   "owner"     Owner / special
-    public short owner; //Also special
-                        //     6-15   10  (*)         Quantity / special link / special property
-    public int link;    //also quantity
+
+    public short flags//; //9-11
+    {
+        get { return objectloaderinfo.flags; }
+        set { objectloaderinfo.flags = value; }
+    }
+
+    public short enchantment  //12
+    {
+        get { return objectloaderinfo.enchantment;   }
+        set { objectloaderinfo.enchantment = value;  }
+    }
+
+    public short doordir   //13index
+    {
+        get { return objectloaderinfo.doordir; }
+        set { objectloaderinfo.doordir = value; }
+    }
+
+    public short invis     //14
+    {
+        get { return objectloaderinfo.invis; }
+        set { objectloaderinfo.invis = value; }
+    }
+
+
+    public short isquant   //15
+    {
+        get { return objectloaderinfo.is_quant; }
+        set { objectloaderinfo.is_quant = value; }
+    }
+
+    public short zpos //;    //  0- 6   7   "zpos"      Object Z position (0-127)
+    {
+        get { return objectloaderinfo.zpos; }
+        set { objectloaderinfo.zpos = value; }
+    }
+
+    public short heading//;   //        7- 9   3   "heading"   Heading (*45 deg)
+    {
+        get { return objectloaderinfo.heading; }
+        set { objectloaderinfo.heading = value; }
+    }
+
+    public short xpos//; //   10-12   3   "ypos"      Object Y position (0-7)
+    {
+        get { return objectloaderinfo.xpos; }
+        set { objectloaderinfo.xpos = value; }
+    }
+
+
+    public short ypos//; //  13-15   3   "xpos"      Object X position (0-7)
+    {
+        get { return objectloaderinfo.ypos; }
+        set { objectloaderinfo.ypos = value; }
+    }
+
+
+    //0004 quality / chain
+    public short quality//;   //;     0- 5   6   "quality"   Quality
+    {
+        get { return objectloaderinfo.quality; }
+        set { objectloaderinfo.quality = value; }
+    }
+
+    public int next//; //    6-15   10  "next"      Index of next object in chain
+    {
+        get { return objectloaderinfo.next; }
+        set { objectloaderinfo.next = value; }
+    }
+
+    //0006 link / special
+    //     0- 5   6   "owner"     Owner / special
+    public short owner//; //Also special
+                      //     6-15   10  (*)         Quantity / special link / special property
+    {
+        get { return objectloaderinfo.owner; }
+        set { objectloaderinfo.owner = value; }
+    }
+    public int link//;    //also quantity
+    {
+        get { return objectloaderinfo.link; }
+        set { objectloaderinfo.link = value; }
+    }
 
 
     //Mobile object information.
     //Moved here to properly support objects that are in motion.
-    [Header("UW Mobile Properties")]
-    public short npc_whoami;
-    public short npc_voidanim;
-    public short npc_xhome;        //  x coord of home tile
-    public short npc_yhome;        //  y coord of home tile
-    public short npc_hunger;
+   // [Header("UW Mobile Properties")]
+    public short npc_whoami
+    {
+        get { return objectloaderinfo.npc_whoami; }
+        set { objectloaderinfo.npc_whoami = value; }
+    }
+
+    public short npc_voidanim
+    {
+        get { return objectloaderinfo.npc_voidanim; }
+        set { objectloaderinfo.npc_voidanim = value; }
+    }
+    public short npc_xhome        //  x coord of home tile
+    {
+        get { return objectloaderinfo.npc_xhome; }
+        set { objectloaderinfo.npc_xhome = value; }
+    }
+    public short npc_yhome        //  y coord of home tile
+    {
+        get { return objectloaderinfo.npc_yhome; }
+        set { objectloaderinfo.npc_yhome = value; }
+    }
+    public short npc_hunger
+    {
+        get { return objectloaderinfo.npc_hunger; }
+        set { objectloaderinfo.npc_hunger = value; }
+    }
     public short npc_health;
-    public short npc_hp;
+    public short npc_hp
+    {
+        get { return objectloaderinfo.npc_hp; }
+        set { objectloaderinfo.npc_hp = value; }
+    }
     public short npc_arms;          // (not used in uw1)
     public short npc_power;
-    public short npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-    public short npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-    public short npc_gtarg;         //goal target; 1:player
-    public short npc_heading;
-    public short npc_talkedto;      // is 1 when player already talked to npc
-    public short npc_level;
+    public short npc_goal          // goal that NPC has; 5:kill player 6:? 9:?
+    {
+        get { return objectloaderinfo.npc_goal; }
+        set { objectloaderinfo.npc_goal= value; }
+    }
+
+    public short npc_attitude       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+    {
+        get { return objectloaderinfo.npc_attitude; }
+        set { objectloaderinfo.npc_attitude = value; }
+    }
+
+    public short npc_gtarg         //goal target; 1:player
+    {
+        get { return objectloaderinfo.npc_gtarg; }
+        set { objectloaderinfo.npc_gtarg = value; }
+    }
+
+    public short npc_heading
+    {
+        get { return objectloaderinfo.npc_heading; }
+        set { objectloaderinfo.npc_heading = value; }
+    }
+
+    public short npc_talkedto      // is 1 when player already talked to npc
+    {
+        get { return objectloaderinfo.npc_talkedto; }
+        set { objectloaderinfo.npc_talkedto = value; }
+    }
+
+    public short npc_level
+    {
+        get { return objectloaderinfo.npc_level; }
+        set { objectloaderinfo.npc_level = value; }
+    }
     public short npc_name;       //    (not used in uw1)
     public short npc_height;
 
     //Unknown/research
-    public short MobileUnk_0xA;
-    public short MobileUnk_0xB_12_F;
-    public short MobileUnk_0xD_4_FF;
-    public short MobileUnk_0xD_12_1;
-    public short MobileUnk_0xF_0_3F;
-    public short MobileUnk_0xF_C_F;
-    public short MobileUnk_0x11;
-    public short ProjectileSourceID;
-    public short MobileUnk_0x13;
-    public short MobileUnk_0x15_4_1F;
-    public short MobileUnk_0x16_0_F;
-    public short MobileUnk_0x18_5_7;
-    public short MobileUnk_0x19_6_3;
+    public short MobileUnk_0xA
+    {
+        get { return objectloaderinfo.MobileUnk_0xA; }
+        set { objectloaderinfo.MobileUnk_0xA = value; }
+    }
+
+    public short MobileUnk_0xB_12_F
+    {
+        get { return objectloaderinfo.MobileUnk_0xB_12_F; }
+        set { objectloaderinfo.MobileUnk_0xB_12_F = value; }
+    }
+
+    public short MobileUnk_0xD_4_FF
+    {
+        get { return objectloaderinfo.MobileUnk_0xD_4_FF; }
+        set { objectloaderinfo.MobileUnk_0xD_4_FF = value; }
+    }
+    public short MobileUnk_0xD_12_1
+    {
+        get { return objectloaderinfo.MobileUnk_0xD_12_1; }
+        set { objectloaderinfo.MobileUnk_0xD_12_1 = value; }
+    }
+    public short MobileUnk_0xF_0_3F
+    {
+        get { return objectloaderinfo.MobileUnk_0xF_0_3F; }
+        set { objectloaderinfo.MobileUnk_0xF_0_3F = value; }
+    }
+    public short MobileUnk_0xF_C_F
+    {
+        get { return objectloaderinfo.MobileUnk_0xF_C_F; }
+        set { objectloaderinfo.MobileUnk_0xF_C_F = value; }
+    }
+    public short MobileUnk_0x11
+    {
+        get { return objectloaderinfo.MobileUnk_0x11; }
+        set { objectloaderinfo.MobileUnk_0x11 = value; }
+    }
+    public short ProjectileSourceID
+    {
+        get { return objectloaderinfo.ProjectileSourceID; }
+        set { objectloaderinfo.ProjectileSourceID = value; }
+    }
+    public short MobileUnk_0x13
+    {
+        get { return objectloaderinfo.MobileUnk_0x13; }
+        set { objectloaderinfo.MobileUnk_0x13 = value; }
+    }
+    public short MobileUnk_0x15_4_1F
+    {
+        get { return objectloaderinfo.MobileUnk_0x15_4_1F; }
+        set { objectloaderinfo.MobileUnk_0x15_4_1F = value; }
+    }
+
+    public short MobileUnk_0x16_0_F
+    {
+        get { return objectloaderinfo.MobileUnk_0x16_0_F; }
+        set { objectloaderinfo.MobileUnk_0x16_0_F = value; }
+    }
+    public short MobileUnk_0x18_5_7
+    {
+        get { return objectloaderinfo.MobileUnk_0x18_5_7; }
+        set { objectloaderinfo.MobileUnk_0x18_5_7 = value; }
+    }
+
+    public short MobileUnk_0x19_6_3
+    {
+        get { return objectloaderinfo.MobileUnk_0x19_6_3; }
+        set { objectloaderinfo.MobileUnk_0x19_6_3 = value; }
+    }
 
     //Projectiles are stored in the mobile object area.
     //The following properties are currently known
-    [Header("Projectile")]
-    public short ProjectileHeadingMajor;
-    public short ProjectileHeadingMinor;
-    public short Projectile_Speed;
-    public short Projectile_Pitch;
-    public short Projectile_Sign;
 
+    public short ProjectileHeading
+    {
+        get { return objectloaderinfo.ProjectileHeading; }
+        set { objectloaderinfo.ProjectileHeading = value; }
+    }
+    //public short ProjectileHeadingMinor
+    //{
+    //    get { return objectloaderinfo.ProjectileHeadingMinor; }
+    //    set { objectloaderinfo.ProjectileHeadingMinor = value; }
+    //}
+    
+    public short Projectile_Speed
+    {
+        get { return objectloaderinfo.Projectile_Speed; }
+        set { objectloaderinfo.Projectile_Speed = value; }
+    }
+    public short Projectile_Pitch
+    {
+        get { return objectloaderinfo.Projectile_Pitch; }
+        set { objectloaderinfo.Projectile_Pitch = value; }
+    }
+    // public short Projectile_Sign;
+    //[Header("Projectile")]
     [Header("Display Settings")]
     /// <summary>
     /// The sprite index number to use when displaying this object in the game world.
@@ -1068,6 +1266,7 @@ public class ObjectInteraction : UWEBase{
           )
     {
         ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
+        objInteract.objectloaderinfo = currObj;
         BoxCollider box = myObj.GetComponent<BoxCollider>();
         if (
                 (box == null)
@@ -1087,11 +1286,11 @@ public class ObjectInteraction : UWEBase{
 
         objInteract.WorldDisplayIndex = objInteract.WorldIndex();// int.Parse(WorldString.Substring (WorldString.Length-3,3));
         objInteract.InvDisplayIndex = objInteract.InventoryIndex();//int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
-        objInteract.item_id = currObj.item_id;//Internal ItemID
-        objInteract.link = currObj.link;
-        objInteract.quality = (short)currObj.quality;
-        objInteract.owner = (short)currObj.owner;
-        objInteract.flags = (short)currObj.flags;
+        //objInteract.item_id = currObj.item_id;//Internal ItemID
+       // objInteract.link = currObj.link;
+        //objInteract.quality = (short)currObj.quality;
+        //objInteract.owner = (short)currObj.owner;
+       // objInteract.flags = (short)currObj.flags;
 
         objInteract.InvDisplayIndex = GameWorldController.instance.objectMaster.objProp[currObj.item_id].InventoryIndex;
         objInteract.WorldDisplayIndex = GameWorldController.instance.objectMaster.objProp[currObj.item_id].WorldIndex;
@@ -1105,8 +1304,8 @@ public class ObjectInteraction : UWEBase{
             FreezeMovement(myObj);
         }
         
-        objInteract.isquant = (short)currObj.is_quant;
-        objInteract.enchantment = (short)currObj.enchantment;
+      //  objInteract.isquant = (short)currObj.is_quant;
+        //objInteract.enchantment = (short)currObj.enchantment;
 
         if ((PlaySoundEffects) && (!ObjectLoader.isTrap(currObj) && (!ObjectLoader.isTrigger(currObj))))
         {
@@ -1545,42 +1744,43 @@ public class ObjectInteraction : UWEBase{
     /// <param name="objI">Object i.</param>
     public static void SetMobileProps(GameObject myObj, ObjectInteraction objInt, ObjectLoaderInfo objI)
     {
-        objInt.npc_whoami = objI.npc_whoami;
-        objInt.npc_voidanim = objI.npc_voidanim;
-        objInt.npc_xhome = objI.npc_xhome;        //  x coord of home tile
-        objInt.npc_yhome = objI.npc_yhome;        //  y coord of home tile
-        objInt.npc_hunger = objI.npc_hunger;
-        objInt.npc_health = objI.npc_health;
-        objInt.npc_hp = objI.npc_hp;
-        objInt.npc_arms = objI.npc_arms;          // (not used in uw1)
-        objInt.npc_power = objI.npc_power;
-        objInt.npc_goal = objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-        objInt.npc_attitude = objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-        objInt.npc_gtarg = objI.npc_gtarg;         //goal target; 1:player
-        objInt.npc_talkedto = objI.npc_talkedto;      // is 1 when player already talked to npc
-        objInt.npc_level = objI.npc_level;
-        objInt.npc_name = objI.npc_name;       //    (not used in uw1)
-        objInt.npc_heading = objI.npc_heading;
-        objInt.Projectile_Speed = objI.Projectile_Speed;
-        objInt.Projectile_Pitch = objI.Projectile_Pitch;
-        objInt.ProjectileHeadingMinor = objI.ProjectileHeadingMinor;
-        objInt.npc_height = objI.npc_height;
+        return;
+        ////////objInt.npc_whoami = objI.npc_whoami;
+        ////////objInt.npc_voidanim = objI.npc_voidanim;
+        ////////objInt.npc_xhome = objI.npc_xhome;        //  x coord of home tile
+        ////////objInt.npc_yhome = objI.npc_yhome;        //  y coord of home tile
+        ////////objInt.npc_hunger = objI.npc_hunger;
+        ////////objInt.npc_health = objI.npc_health;
+        ////////objInt.npc_hp = objI.npc_hp;
+        ////////objInt.npc_arms = objI.npc_arms;          // (not used in uw1)
+        ////////objInt.npc_power = objI.npc_power;
+        ////////objInt.npc_goal = objI.npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+        ////////objInt.npc_attitude = objI.npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+        ////////objInt.npc_gtarg = objI.npc_gtarg;         //goal target; 1:player
+        ////////objInt.npc_talkedto = objI.npc_talkedto;      // is 1 when player already talked to npc
+        ////////objInt.npc_level = objI.npc_level;
+        ////////objInt.npc_name = objI.npc_name;       //    (not used in uw1)
+        ////////objInt.npc_heading = objI.npc_heading;
+        ////////objInt.Projectile_Speed = objI.Projectile_Speed;
+        ////////objInt.Projectile_Pitch = objI.Projectile_Pitch;
+        ////////objInt.ProjectileHeadingMinor = objI.ProjectileHeadingMinor;
+        ////////objInt.npc_height = objI.npc_height;
 
-        objInt.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
-        objInt.MobileUnk_0xA = objI.MobileUnk_0xA;
-        objInt.MobileUnk_0xB_12_F = objI.MobileUnk_0xB_12_F;
-        objInt.MobileUnk_0xD_4_FF = objI.MobileUnk_0xD_4_FF;
-        objInt.MobileUnk_0xD_12_1 = objI.MobileUnk_0xD_12_1;
-        objInt.MobileUnk_0xF_0_3F = objI.MobileUnk_0xF_0_3F;
-        objInt.MobileUnk_0xF_C_F = objI.MobileUnk_0xF_C_F;
-        objInt.MobileUnk_0x11 = objI.MobileUnk_0x11;
-        objInt.ProjectileSourceID = objI.ProjectileSourceID;
-        objInt.MobileUnk_0x13 = objI.MobileUnk_0x13;
-        objInt.Projectile_Sign = objI.Projectile_Sign;
-        objInt.MobileUnk_0x15_4_1F = objI.MobileUnk_0x15_4_1F;
-        objInt.MobileUnk_0x16_0_F = objI.MobileUnk_0x16_0_F;
-        objInt.MobileUnk_0x18_5_7 = objI.MobileUnk_0x18_5_7;
-        objInt.MobileUnk_0x19_6_3 = objI.MobileUnk_0x19_6_3;
+        ////////objInt.ProjectileHeadingMajor = objI.ProjectileHeadingMajor;
+        ////////objInt.MobileUnk_0xA = objI.MobileUnk_0xA;
+        ////////objInt.MobileUnk_0xB_12_F = objI.MobileUnk_0xB_12_F;
+        ////////objInt.MobileUnk_0xD_4_FF = objI.MobileUnk_0xD_4_FF;
+        ////////objInt.MobileUnk_0xD_12_1 = objI.MobileUnk_0xD_12_1;
+        ////////objInt.MobileUnk_0xF_0_3F = objI.MobileUnk_0xF_0_3F;
+        ////////objInt.MobileUnk_0xF_C_F = objI.MobileUnk_0xF_C_F;
+        ////////objInt.MobileUnk_0x11 = objI.MobileUnk_0x11;
+        ////////objInt.ProjectileSourceID = objI.ProjectileSourceID;
+        ////////objInt.MobileUnk_0x13 = objI.MobileUnk_0x13;
+        //////////objInt.Projectile_Sign = objI.Projectile_Sign;
+        ////////objInt.MobileUnk_0x15_4_1F = objI.MobileUnk_0x15_4_1F;
+        ////////objInt.MobileUnk_0x16_0_F = objI.MobileUnk_0x16_0_F;
+        ////////objInt.MobileUnk_0x18_5_7 = objI.MobileUnk_0x18_5_7;
+        ////////objInt.MobileUnk_0x19_6_3 = objI.MobileUnk_0x19_6_3;
 
     }
 
@@ -1681,7 +1881,8 @@ public class ObjectInteraction : UWEBase{
                     break;
             }
 
-            if ((ObjectTileX < TileMap.ObjectStorageTile) && (ObjectTileY < TileMap.ObjectStorageTile))
+            // if ((ObjectTileX < TileMap.ObjectStorageTile) && (ObjectTileY < TileMap.ObjectStorageTile))
+            if ((this.transform.position.x<= 76.8f) && (this.transform.position.y <= 76.8f))//Only update what is in bounds
             {//Update x & y
              //Remove corner
                 float offX = (this.transform.position.x) - ((float)(ObjectTileX * 1.2f));
@@ -1707,7 +1908,10 @@ public class ObjectInteraction : UWEBase{
 
     public static ObjectInteraction CreateNewObject(TileMap tm, ObjectLoaderInfo currObj, ObjectLoaderInfo[] objList, GameObject parent, Vector3 position)
     {//TODO: Make sure all object creation uses this function!
-
+        if (currObj.instance!=null)
+        {//Remove the existing object instance if it already exists in order to create a new instance
+            Destroy(currObj.instance.gameObject);
+        }
         GameObject myObj = new GameObject(ObjectLoader.UniqueObjectName(currObj));
         bool CreateSprite = true;//TODO:restore the following when going live. && (currObj.invis!=1);
         bool skipRotate = false;
@@ -1720,24 +1924,24 @@ public class ObjectInteraction : UWEBase{
         //ObjectMasters objM = GameWorldController.instance.objectMaster;
         ObjectInteraction objInt = CreateObjectInteraction(myObj, 0.5f, 0.5f, 0.5f, currObj);
 
-        objInt.objectloaderinfo = currObj;
+        //objInt.objectloaderinfo = currObj;
         currObj.instance = objInt;
-        objInt.link = currObj.link;
-        objInt.quality = currObj.quality;
-        objInt.enchantment = currObj.enchantment;
-        objInt.doordir = currObj.doordir;
-        objInt.invis = currObj.invis;
+       // objInt.link = currObj.link;
+       // objInt.quality = currObj.quality;
+      //  objInt.enchantment = currObj.enchantment;
+      //  objInt.doordir = currObj.doordir;
+      //  objInt.invis = currObj.invis;
         //objInt.texture=currObj.texture;
-        objInt.zpos = currObj.zpos;
-        objInt.xpos = currObj.xpos;
-        objInt.ypos = currObj.ypos;
-        objInt.heading = currObj.heading;
-        objInt.zpos = currObj.zpos;
-        objInt.owner = currObj.owner;
+      //  objInt.zpos = currObj.zpos;
+      //  objInt.xpos = currObj.xpos;
+      //  objInt.ypos = currObj.ypos;
+      //  objInt.heading = currObj.heading;
+      //  objInt.zpos = currObj.zpos;
+     //   objInt.owner = currObj.owner;
         objInt.ObjectTileX = currObj.ObjectTileX;
         objInt.ObjectTileY = currObj.ObjectTileY;
-        objInt.objectloaderinfo = currObj;//link back to the list directly.
-        objInt.next = currObj.next;
+      //  objInt.objectloaderinfo = currObj;//link back to the list directly.
+     //   objInt.next = currObj.next;
 
         //For now just generic.
         switch (currObj.GetItemType())
@@ -1798,7 +2002,8 @@ public class ObjectInteraction : UWEBase{
                             }
                         default:
                             {
-                                myObj.GetComponent<Container>().items = new ObjectInteraction[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
+                                myObj.GetComponent<Container>().items = new ObjectInteraction[40];
+                                //myObj.GetComponent<Container>().items = new ObjectInteraction[GameWorldController.instance.objDat.containerStats[currObj.item_id - 128].capacity + 1];
                                 //Container cont = 
                                 //myObj.AddComponent<Container>();
                                 //here Container.PopulateContainer(myObj.GetComponent<Container>(), objInt, currObj.parentList);
@@ -2518,7 +2723,7 @@ public class ObjectInteraction : UWEBase{
                             UnFreezeMovement(myObj);
 
                             myObj.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-                            myObj.GetComponent<Rigidbody>().AddForce(150f * object_base.ProjectilePropsToVector(myObj.GetComponent<object_base>()));
+                           // myObj.GetComponent<Rigidbody>().AddForce(150f * object_base.ProjectilePropsToVector(myObj.GetComponent<object_base>()));
                             break;
                     }
                 }

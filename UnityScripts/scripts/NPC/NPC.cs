@@ -116,7 +116,7 @@ public class NPC : MobileObject
     public const int AI_ANIM_ATTACK_SECONDARY = 5000;
 
     private static short[] CompassHeadings = { 0, -1, -2, -3, 4, 3, 2, 1, 0 };//What direction the npc is facing. To adjust it's animation
-
+    
    // [Header("AI Target")]
    /// <summary>
    /// An object representing the npc_gtarg
@@ -574,6 +574,7 @@ public class NPC : MobileObject
     /// Dumps out their inventory.
     void OnDeath()
     {
+        Debug.Log("Killing " + this.name);
         if (SpecialDeathCases())
         {
             return;
@@ -594,58 +595,25 @@ public class NPC : MobileObject
                 }
             }
         }
-        objInt().objectloaderinfo.InUseFlag = 0;
-        objInt().objectloaderinfo.npc_hp = 0;
-        NPC_DEAD = true;//Tells the update to execute the NPC death animation
-        PerformDeathAnim();
-        //Dump npc inventory on the floor.
-        Container cnt = this.GetComponent<Container>();
-        if (cnt != null)
-        {
-            SetupNPCInventory();
+        if ((objInt().ObjectTileX <= 63) || (objInt().ObjectTileY <= 63))
+        {//Only dump container if on map
+            objInt().objectloaderinfo.InUseFlag = 0;
+            objInt().objectloaderinfo.npc_hp = 0;
+            NPC_DEAD = true;//Tells the update to execute the NPC death animation
+            PerformDeathAnim();       
+            //Dump npc inventory on the floor.
+            Container cnt = this.GetComponent<Container>();
+            if (cnt != null)
+            {
+                SetupNPCInventory();
 
-            cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
+                cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
+            }
         }
-        UWCharacter.Instance.AddXP(GameWorldController.instance.objDat.critterStats[item_id - 64].Exp);
 
+        UWCharacter.Instance.AddXP(GameWorldController.instance.objDat.critterStats[item_id - 64].Exp);
         npc_aud.PlayDeathSound();
 
-        ////////Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), 
-        ////////Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages),
-        ////////Flying = 0x02 (Flying critters like bats and imps), 
-        ////////Swimming = 0x03 (Swimming critters like lurkers), 
-        ////////Creeping = 0x04 (Creeping critters like rats and spiders), 
-        ////////Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)),
-        ////////EarthGolem = 0x11 (Only used for the earth golem),
-        ////////Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
-        //////switch ((NPCCategory)GameWorldController.instance.objDat.critterStats[item_id - 64].Category)
-        //////{
-        //////    //case 0x0:
-        //////    //case 0x02:
-        //////    case NPCCategory.ethereal:
-        //////    case NPCCategory.flying:
-        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_3]; break;
-        //////    //case 0x03:
-        //////    case NPCCategory.swimming:
-        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1]; break;
-        //////    //case 0x04:
-        //////    //case 0x05:
-        //////    case NPCCategory.crawling:
-        //////    case NPCCategory.creeping:
-        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_2]; break;
-        //////    //case 0x11:
-        //////    case NPCCategory.golem:
-        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_RUMBLE]; break;
-        //////    //case 0x01:
-        //////    case NPCCategory.human:
-        //////    case NPCCategory.humanoid:
-        //////    default:
-        //////        objInt().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_NPC_DEATH_1]; break;
-        //////}
-        //if (ObjectInteraction.PlaySoundEffects)
-        //{
-        //    objInt().aud.Play();
-        //}
     }
 
     /// <summary>
@@ -653,6 +621,10 @@ public class NPC : MobileObject
     /// </summary>
     public void SetupNPCInventory()
     {
+        if (objInt().ObjectIndex == 239)
+        {
+            Debug.Log("HERE");
+        }
         if (_RES != GAME_UW2)
         {
             if (item_id == 64)
@@ -665,25 +637,31 @@ public class NPC : MobileObject
         {
             if (cnt.CountItems() == 0)
             {
+                if ((item_id>=64) && (item_id <=127))
+                {
                 //Populate the container with a loot list
                 for (int i = 0; i <= GameWorldController.instance.objDat.critterStats[item_id - 64].Loot.GetUpperBound(0); i++)
-                {
-                    if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                     {
-                        int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
-                        ObjectLoaderInfo newobjt = ObjectLoader.newObject(itemid, Random.Range(1, 41), 0, 0, 256);
-                        if (itemid == 16)//Sling stone.
+                        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                         {
-                            newobjt.is_quant = 1;
-                            newobjt.link = Random.Range(1, 10);
-                            newobjt.quality = 40;
+                            int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
+                            ObjectLoaderInfo newobjt = ObjectLoader.newObject(itemid, Random.Range(1, 41), 0, 0, 256);
+                            if (newobjt != null)
+                            {
+                                if (itemid == 16)//Sling stone.
+                                {
+                                    newobjt.is_quant = 1;
+                                    newobjt.link = Random.Range(1, 10);
+                                    newobjt.quality = 40;
+                                }
+                                else
+                                {
+                                    newobjt.is_quant = 0;
+                                }
+                                newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
+                                cnt.AddItemToContainer(newobjt.instance);
+                            }
                         }
-                        else
-                        {
-                            newobjt.is_quant = 0;
-                        }
-                        newobjt.instance = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance._ObjectMarker, GameWorldController.instance.InventoryMarker.transform.position);
-                        cnt.AddItemToContainer(newobjt.instance);
                     }
                 }
             }
@@ -909,7 +887,10 @@ public class NPC : MobileObject
 
         if ((npc_hp <= 0))
         {//Begin death handling.
-            OnDeath();
+            if ((objInt().ObjectTileX <= 63) || (objInt().ObjectTileY <= 63))
+            {//Only kill on map npcs
+                OnDeath();
+            }            
         }
         else
         {
@@ -1197,7 +1178,7 @@ public class NPC : MobileObject
                 {
                     if (TileMap.ValidTile(CurTileX + x, CurTileY + y))
                     {
-                        if (CurrentTileMap().Tiles[CurTileX + x, CurTileY + y].isDoor)
+                        if (CurrentTileMap().Tiles[CurTileX + x, CurTileY + y].IsDoorForNPC)
                         {
                             GameObject door = DoorControl.findDoor(CurTileX + x, CurTileY + y);
                             if (door != null)
@@ -1517,12 +1498,10 @@ public class NPC : MobileObject
     {
         if (!((_RES == GAME_UW1) && (item_id == 124)))
         {//Do not apply damage if attaching the slasher of veils.
-            npc_hp = (short)(npc_hp - damage);
+            short NewHP = (short)(npc_hp - damage);
+            if (NewHP <0 ){ NewHP = 0; }
+            npc_hp = NewHP;
             UWHUD.instance.MonsterEyes.SetTargetFrame(npc_hp, StartingHP);
-        }
-        if (npc_hp < 0)
-        {
-            npc_hp = 0;
         }
         return true;
     }
@@ -1659,6 +1638,7 @@ public class NPC : MobileObject
 
         }
         UWHUD.instance.MessageScroll.Add(output);
+        Debug.Log("My Target is " + gtarg.name + " because my npc_gtarg=" + npc_gtarg);
         return true;
     }
 

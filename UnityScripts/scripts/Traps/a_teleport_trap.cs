@@ -37,8 +37,10 @@ public class a_teleport_trap : trap_base {
         //0=north
         //1=northeast 
         //2=east and so on
-        UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, ((float)heading*45f), 0f);
-        UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
+        
+        //Change character heading
+        //UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, ((float)heading*45f), 0f);
+        //UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
 
         UWCharacter.Instance.JustTeleported=true;	
 		UWCharacter.Instance.teleportedTimer=0f;

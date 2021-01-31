@@ -574,12 +574,12 @@ public class OptionsMenuControl : GuiBase_Draggable
     {
         //if (_RES==GAME_UW2)
         //{
-        //		UWHUD.instance.MessageScroll.Add("Saving only supported in UW1");
-        //		return;
-        //}
+            UWHUD.instance.MessageScroll.Add("Saving Disabled for the moment.");
+            return;
+            //}
 
-        //000~001~159~Impossible, you are between worlds. \n
-        if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
+            //000~001~159~Impossible, you are between worlds. \n
+            if ((_RES == GAME_UW1) && (GameWorldController.instance.LevelNo == 8))
         {
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_impossible_you_are_between_worlds_));
             return;

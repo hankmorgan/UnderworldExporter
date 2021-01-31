@@ -1437,7 +1437,7 @@ public class AutoMap : Loader
         {
             return DisplayTypeIce;
         }
-        else if (t.isDoor)
+        else if (t.IsDoorForNPC)
         {
             switch (_RES)
             {

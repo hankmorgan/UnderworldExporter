@@ -3700,11 +3700,11 @@ public class Magic : UWEBase
     {//Creates the projectile.
         int index;
         //Create an object info
-        CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
-        if (index != -1)
+        //CurrentObjectList().getFreeSlot(100, out index);//Magic projectiles exist in the mobile range.
+        if(CurrentObjectList().GetFreeMobileObject(out index))
         {
             ObjectLoaderInfo oli = CurrentObjectList().objInfo[index];
-            oli.guid = System.Guid.NewGuid();
+            //oli.guid = System.Guid.NewGuid();
             oli.item_id = spellprop.ProjectileItemId;
             oli.invis = 0;
             oli.enchantment = 0;
@@ -3792,58 +3792,62 @@ public class Magic : UWEBase
         if (mgp != null)
         {
             mgp.Projectile_Pitch = 0;
+            //mgp.Projectile_Pitch = (short)((projectilePitchAngle /90f) * 7f);
+
+            mgp.Projectile_Pitch = (short)(((int)(Mathf.Abs(direction.y * 7))) & 0x7);
+
             if (direction.y < 0)
             {
-                mgp.Projectile_Sign = 0;
+                mgp.Projectile_Pitch &= 0x7;  //Clear bit 3
             }
             else
             {
-                mgp.Projectile_Sign = 1;
+                mgp.Projectile_Pitch |= 0x8;  //Set bit 3
             }
 
-            //mgp.Projectile_Pitch = (short)((projectilePitchAngle /90f) * 7f);
-            mgp.Projectile_Pitch = (short)(Mathf.Abs((direction.y * 7)));
-            if ((projectileAngle >= 0) && (projectileAngle < 45))
-            {
-                mgp.ProjectileHeadingMajor = 0;//North
-                mgp.ProjectileHeadingMinor = (short)((projectileAngle / 45) * 32);
-            }
-            else if ((projectileAngle >= 45) && (projectileAngle < 90))
-            {
-                mgp.ProjectileHeadingMajor = 1;//North east
-                mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 45) / 45) * 32);
-            }
-            else if ((projectileAngle >= 90) && (projectileAngle < 135))
-            {
-                mgp.ProjectileHeadingMajor = 2;//east
-                mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 90) / 45) * 32);
-            }
-            else if ((projectileAngle >= 135) && (projectileAngle <= 180))
-            {
-                mgp.ProjectileHeadingMajor = 3;//south east
-                mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 135) / 45) * 32);
-            }
-            //negative angles
-            else if ((projectileAngle < 0) && (projectileAngle >= -45))
-            {
-                mgp.ProjectileHeadingMajor = 7;//North west
-                mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle) / 45) * 32)));
-            }
-            else if ((projectileAngle < -45) && (projectileAngle >= -90))
-            {
-                mgp.ProjectileHeadingMajor = 6;//west
-                mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 45) / 45) * 32)));
-            }
-            else if ((projectileAngle < -90) && (projectileAngle >= -135))
-            {
-                mgp.ProjectileHeadingMajor = 5;//south west
-                mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 90) / 45) * 32)));
-            }
-            else if ((projectileAngle < -135) && (projectileAngle >= -180))
-            {
-                mgp.ProjectileHeadingMajor = 4;//south
-                mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 135) / 45) * 32)));
-            }
+            mgp.ProjectileHeading =  (short)(this.transform.eulerAngles.y * (255f / 360f));
+
+            ////////if ((projectileAngle >= 0) && (projectileAngle < 45))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 0;//North
+            ////////    mgp.ProjectileHeadingMinor = (short)((projectileAngle / 45) * 32);
+            ////////}
+            ////////else if ((projectileAngle >= 45) && (projectileAngle < 90))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 1;//North east
+            ////////    mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 45) / 45) * 32);
+            ////////}
+            ////////else if ((projectileAngle >= 90) && (projectileAngle < 135))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 2;//east
+            ////////    mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 90) / 45) * 32);
+            ////////}
+            ////////else if ((projectileAngle >= 135) && (projectileAngle <= 180))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 3;//south east
+            ////////    mgp.ProjectileHeadingMinor = (short)(((projectileAngle - 135) / 45) * 32);
+            ////////}
+            //////////negative angles
+            ////////else if ((projectileAngle < 0) && (projectileAngle >= -45))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 7;//North west
+            ////////    mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle) / 45) * 32)));
+            ////////}
+            ////////else if ((projectileAngle < -45) && (projectileAngle >= -90))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 6;//west
+            ////////    mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 45) / 45) * 32)));
+            ////////}
+            ////////else if ((projectileAngle < -90) && (projectileAngle >= -135))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 5;//south west
+            ////////    mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 90) / 45) * 32)));
+            ////////}
+            ////////else if ((projectileAngle < -135) && (projectileAngle >= -180))
+            ////////{
+            ////////    mgp.ProjectileHeadingMajor = 4;//south
+            ////////    mgp.ProjectileHeadingMinor = (short)(32 - Mathf.Abs((((-projectileAngle - 135) / 45) * 32)));
+            ////////}
 
         }
 

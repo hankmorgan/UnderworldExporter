@@ -138,42 +138,7 @@ public class TileMapRenderer : Loader
         {
             if (!UpdateOnly)
             {
-                //Ceiling
-                TileInfo tmp = new TileInfo(Level, 0, 0, TILE_OPEN,
-                    0, 0,
-                    0, 0, Level.Tiles[0, 0].shockCeilingTexture,
-                    0, 0, 0, 0);
-                tmp.DimX = TileMap.TileMapSizeX + 1;
-                tmp.DimY = TileMap.TileMapSizeY + 1;
-                tmp.ceilingHeight = 0;
-                tmp.floorTexture = Level.Tiles[0, 0].shockCeilingTexture;
-                tmp.shockCeilingTexture = Level.Tiles[0, 0].shockCeilingTexture;
-                tmp.VisibleFaces[vTOP] = false;
-                tmp.VisibleFaces[vEAST] = false;
-                tmp.VisibleFaces[vBOTTOM] = true;
-                tmp.VisibleFaces[vWEST] = false;
-                tmp.VisibleFaces[vNORTH] = false;
-                tmp.VisibleFaces[vSOUTH] = false;
-                GameWorldController.instance.ceiling = RenderTile(sceneryParent, tmp.tileX, tmp.tileX, tmp, false, false, true, false);
-
-                //And at 99,99 for special stuff.
-                for (short x = TileMap.ObjectStorageTile - 1; x <= TileMap.ObjectStorageTile + 1; x++)
-                {
-                    for (short y = TileMap.ObjectStorageTile - 1; y <= TileMap.ObjectStorageTile + 1; y++)
-                    {
-                        tmp.tileX = x;
-                        tmp.tileY = y;
-                        if ((x != TileMap.ObjectStorageTile) || (y != TileMap.ObjectStorageTile))
-                        {
-                            tmp.tileType = 0;
-                        }
-                        else
-                        {
-                            tmp.tileType = 1;
-                        }
-                        RenderTile(sceneryParent, x, y, tmp, false, false, false, false);
-                    }
-                }
+                GameObject output = RenderCeiling(parent, 0, 0, CEILING_HEIGHT, CEILING_HEIGHT + CEIL_ADJ,Level.UWCeilingTexture, "CEILING");
             }
         }
         if (!UpdateOnly)
@@ -229,6 +194,13 @@ public class TileMapRenderer : Loader
     /// <param name="i"></param>
     public static void RenderDoor(GameObject Parent, TileMap level, ObjectLoader objList, int i)
     {
+        if ((objList.objInfo[i].ObjectTileX>=64) || (objList.objInfo[i].ObjectTileY >= 64))
+        {//door is off map!
+            return; 
+        }
+
+
+
         if (level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].tileType != TILE_SOLID)
         {
             float floorheight = (float)level.Tiles[objList.objInfo[i].ObjectTileX, objList.objInfo[i].ObjectTileY].floorHeight * 0.15f;
@@ -318,7 +290,6 @@ public class TileMapRenderer : Loader
 
         GameObject tile = RenderCuboid(Parent, leftHand, UVs, position, MatsToUse, 1, "rear_leftside_" + ObjectLoader.UniqueObjectName(currDoor));
         tile.transform.Rotate(new Vector3(0f, 0f, -180f));
-
 
         //y0 = +doorthickness /2f;
         //y1 = -doorthickness /2f;
@@ -1537,6 +1508,96 @@ public class TileMapRenderer : Loader
     }
 
 
+
+    /// <summary>
+    /// Renders the a cuboid with no slopes
+    /// </summary>
+    /// <param name="parent">Parent.</param>
+    /// <param name="x">The x coordinate.</param>
+    /// <param name="y">The y coordinate.</param>
+    /// <param name="t">T.</param>
+    /// <param name="Water">If set to <c>true</c> water.</param>
+    /// <param name="Bottom">Bottom.</param>
+    /// <param name="Top">Top.</param>
+    /// <param name="TileName">Tile name.</param>
+    static GameObject RenderCeiling(GameObject parent, int x, int y, int Bottom, int Top, int CeilingTexture, string TileName)
+    {
+
+        //Draw a cube with no slopes.
+        int NumberOfVisibleFaces = 1;
+
+        //Allocate enough verticea and UVs for the faces
+        Vector3[] verts = new Vector3[NumberOfVisibleFaces * 4];
+        Vector2[] uvs = new Vector2[NumberOfVisibleFaces * 4];
+        float floorHeight = (float)(Top * 0.15f);
+        float baseHeight = (float)(Bottom * 0.15f);
+
+        //Now create the mesh
+        GameObject Tile = new GameObject(TileName);
+        Tile.layer = LayerMask.NameToLayer("MapMesh");
+        Tile.transform.parent = parent.transform;
+        Tile.transform.position = new Vector3(x * 1.2f, 0.0f, y * 1.2f);
+
+        Tile.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        MeshFilter mf = Tile.AddComponent<MeshFilter>();
+        MeshRenderer mr = Tile.AddComponent<MeshRenderer>();
+
+        Mesh mesh = new Mesh();
+        mesh.subMeshCount = NumberOfVisibleFaces;//Should be no of visible faces
+
+        Material[] MatsToUse = new Material[NumberOfVisibleFaces];
+        //Now allocate the visible faces to triangles.
+        int FaceCounter = 0;//Tracks which number face we are now on.
+        float PolySize = Top - Bottom;
+        float uv0 = (float)(Bottom * 0.125f);
+        float uv1 = (PolySize / 8.0f) + (uv0);
+       // float offset = 0f;
+
+        //bottom wall vertices
+        MatsToUse[FaceCounter] = GameWorldController.instance.MaterialMasterList[CurrentTileMap().texture_map[CeilingTexture]];
+        verts[0 + (4 * FaceCounter)] = new Vector3(0f, 1.2f * 64, baseHeight);
+        verts[1 + (4 * FaceCounter)] = new Vector3(0f, 0f, baseHeight);
+        verts[2 + (4 * FaceCounter)] = new Vector3(-1.2f * 64, 0f, baseHeight);
+        verts[3 + (4 * FaceCounter)] = new Vector3(-1.2f * 64, 1.2f * 64, baseHeight);
+        //Change default UVs
+        uvs[0 + (4 * FaceCounter)] = new Vector2(0.0f, 0.0f);
+        uvs[1 + (4 * FaceCounter)] = new Vector2(0.0f, 1.0f * 64);
+        uvs[2 + (4 * FaceCounter)] = new Vector2(64, 1.0f * 64);
+        uvs[3 + (4 * FaceCounter)] = new Vector2(64, 0.0f);
+
+
+
+        //Apply the uvs and create my tris
+        mesh.vertices = verts;
+        mesh.uv = uvs;
+        FaceCounter = 0;
+        int[] tris = new int[6];
+        tris[0] = 0 + (4 * FaceCounter);
+        tris[1] = 1 + (4 * FaceCounter);
+        tris[2] = 2 + (4 * FaceCounter);
+        tris[3] = 0 + (4 * FaceCounter);
+        tris[4] = 2 + (4 * FaceCounter);
+        tris[5] = 3 + (4 * FaceCounter);
+        mesh.SetTriangles(tris, FaceCounter);
+        FaceCounter++;
+
+        mr.materials = MatsToUse;//mats;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+        mf.mesh = mesh;
+        if (EnableCollision)
+        {
+            MeshCollider mc = Tile.AddComponent<MeshCollider>();
+            mc.sharedMesh = null;
+            mc.sharedMesh = mesh;
+        }
+        return Tile;
+    }
+
+
+
+
+
     /// <summary>
     /// Renders the cuboid from an arbitary set of vertices and uvs
     /// </summary>
@@ -2187,7 +2248,7 @@ public class TileMapRenderer : Loader
                 {
                     //A floor
                     TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_N, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_N, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2198,7 +2259,7 @@ public class TileMapRenderer : Loader
                 bool visT = t.VisibleFaces[vTOP];
                 t.VisibleFaces[vBOTTOM] = true;
                 t.VisibleFaces[vTOP] = false;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_N, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_N, t.TileSlopeSteepness, 0, TileName);
                 t.VisibleFaces[vBOTTOM] = visB;
                 t.VisibleFaces[vTOP] = visT;
             }
@@ -2226,7 +2287,7 @@ public class TileMapRenderer : Loader
                 {
                     //A floor
                     TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_S, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2237,7 +2298,7 @@ public class TileMapRenderer : Loader
                 bool visT = t.VisibleFaces[vTOP];
                 t.VisibleFaces[vBOTTOM] = true;
                 t.VisibleFaces[vTOP] = false;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_S, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_S, t.TileSlopeSteepness, 0, TileName);
                 t.VisibleFaces[vBOTTOM] = visB;
                 t.VisibleFaces[vTOP] = visT;
             }
@@ -2265,7 +2326,7 @@ public class TileMapRenderer : Loader
                 {
                     //A floor
                     TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_W, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2276,7 +2337,7 @@ public class TileMapRenderer : Loader
                 bool visT = t.VisibleFaces[vTOP];
                 t.VisibleFaces[vBOTTOM] = true;
                 t.VisibleFaces[vTOP] = false;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_W, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_W, t.TileSlopeSteepness, 0, TileName);
                 t.VisibleFaces[vBOTTOM] = visB;
                 t.VisibleFaces[vTOP] = visT;
             }
@@ -2304,7 +2365,7 @@ public class TileMapRenderer : Loader
                 {
                     //A floor
                     TileName = "Tile_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_SLOPE_E, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2315,7 +2376,7 @@ public class TileMapRenderer : Loader
                 bool visT = t.VisibleFaces[vTOP];
                 t.VisibleFaces[vBOTTOM] = true;
                 t.VisibleFaces[vTOP] = false;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_E, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_SLOPE_E, t.TileSlopeSteepness, 0, TileName);
                 t.VisibleFaces[vBOTTOM] = visB;
                 t.VisibleFaces[vTOP] = visT;
             }
@@ -2343,13 +2404,13 @@ public class TileMapRenderer : Loader
             //RenderSlopeWTile( parent , x, y, t, Water, invert);
             //t.tileType = originalTile;
             string TileName = "VNW_" + x.ToString("D2") + "_" + y.ToString("D2");
-            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NW, t.shockSteep, 1, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NW, t.TileSlopeSteepness, 1, TileName);
         }
         else
         {
             string TileName = "VNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
             t.VisibleFaces[vBOTTOM] = true;
-            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SE, t.shockSteep, 0, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SE, t.TileSlopeSteepness, 0, TileName);
         }
         return;
     }
@@ -2375,13 +2436,13 @@ public class TileMapRenderer : Loader
             //t.tileType = originalTile;
             //return;
             string TileName = "VNE_" + x.ToString("D2") + "_" + y.ToString("D2");
-            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NE, t.shockSteep, 1, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_NE, t.TileSlopeSteepness, 1, TileName);
         }
         else
         {
             string TileName = "VNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
             t.VisibleFaces[vBOTTOM] = true;
-            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SW, t.shockSteep, 0, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_SW, t.TileSlopeSteepness, 0, TileName);
         }
     }
 
@@ -2407,14 +2468,14 @@ public class TileMapRenderer : Loader
             //return;
 
             string TileName = "VSW_" + x.ToString("D2") + "_" + y.ToString("D2");
-            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SW, t.shockSteep, 1, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SW, t.TileSlopeSteepness, 1, TileName);
 
         }
         else
         {
             string TileName = "VSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
             t.VisibleFaces[vBOTTOM] = true;
-            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NE, t.shockSteep, 0, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NE, t.TileSlopeSteepness, 0, TileName);
         }
 
     }
@@ -2440,13 +2501,13 @@ public class TileMapRenderer : Loader
             //t.tileType = originalTile;
             //return;	
             string TileName = "VSE_" + x.ToString("D2") + "_" + y.ToString("D2");
-            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SE, t.shockSteep, 1, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_VALLEY_SE, t.TileSlopeSteepness, 1, TileName);
         }
         else
         {
             string TileName = "VSE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
             t.VisibleFaces[vBOTTOM] = true;
-            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NW, t.shockSteep, 0, TileName);
+            RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_RIDGE_NW, t.TileSlopeSteepness, 0, TileName);
 
         }
 
@@ -2474,7 +2535,7 @@ public class TileMapRenderer : Loader
                     //RenderSlopeNTile( parent , x, y, t, Water, invert);
                     //RenderSlopeWTile( parent , x, y, t, Water, invert);
                     string TileName = "TileRNW_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NW, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NW, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2482,7 +2543,7 @@ public class TileMapRenderer : Loader
                 //made of upper slope e and upper slope s
                 string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
                 t.VisibleFaces[vBOTTOM] = true;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SE, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SE, t.TileSlopeSteepness, 0, TileName);
 
                 //RenderSlopeETile( parent , x, y, t, Water, invert);
                 //RenderSlopeSTile( parent , x, y, t, Water, invert);
@@ -2513,7 +2574,7 @@ public class TileMapRenderer : Loader
                     //RenderSlopeNTile( parent , x, y, t, Water, invert);
                     //RenderSlopeETile( parent , x, y, t, Water, invert);
                     string TileName = "TileRNE_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NE, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_NE, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2522,7 +2583,7 @@ public class TileMapRenderer : Loader
              //RenderSlopeWTile( parent , x, y, t, Water, invert);
                 string TileName = "RNE_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
                 t.VisibleFaces[vBOTTOM] = true;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SW, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_SW, t.TileSlopeSteepness, 0, TileName);
 
             }
         }
@@ -2551,7 +2612,7 @@ public class TileMapRenderer : Loader
                         //RenderSlopeSTile( parent , x, y, t, Water, invert);
                         //RenderSlopeWTile( parent , x, y, t, Water, invert);
                         string TileName = "TileRSW_" + x.ToString("D2") + "_" + y.ToString("D2");
-                        RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SW, t.shockSteep, 1, TileName);
+                        RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SW, t.TileSlopeSteepness, 1, TileName);
                     }
                 }
             }
@@ -2562,7 +2623,7 @@ public class TileMapRenderer : Loader
                 //RenderSlopeWTile( parent , x, y, t, Water, invert);
                 string TileName = "RSW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
                 t.VisibleFaces[vBOTTOM] = true;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NE, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NE, t.TileSlopeSteepness, 0, TileName);
 
 
             }
@@ -2592,7 +2653,7 @@ public class TileMapRenderer : Loader
                     //RenderSlopeSTile( parent , x, y, t, Water, invert);
                     //RenderSlopeETile( parent , x, y, t, Water, invert);
                     string TileName = "TileRSE_" + x.ToString("D2") + "_" + y.ToString("D2");
-                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SE, t.shockSteep, 1, TileName);
+                    RenderSlopedCuboid(parent, x, y, t, Water, FLOOR_ADJ, t.floorHeight, TILE_RIDGE_SE, t.TileSlopeSteepness, 1, TileName);
                 }
             }
             else
@@ -2603,7 +2664,7 @@ public class TileMapRenderer : Loader
              //RenderSlopeWTile( parent , x, y, t, Water, invert);
                 string TileName = "RNW_Ceiling_" + x.ToString("D2") + "_" + y.ToString("D2");
                 t.VisibleFaces[vBOTTOM] = true;
-                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NW, t.shockSteep, 0, TileName);
+                RenderSlopedCuboid(parent, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + CEIL_ADJ, TILE_VALLEY_NW, t.TileSlopeSteepness, 0, TileName);
 
 
             }
@@ -4421,7 +4482,7 @@ public class TileMapRenderer : Loader
             case TileMap.TILE_SLOPE_W:
             case TileMap.TILE_SLOPE_N:
             case TileMap.TILE_SLOPE_S:
-                CurrentTileMap().Tiles[TileX, TileY].shockSteep = 1;
+                CurrentTileMap().Tiles[TileX, TileY].TileSlopeSteepness = 1;
                 break;
         }
 

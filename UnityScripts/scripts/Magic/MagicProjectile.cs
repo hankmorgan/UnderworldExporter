@@ -107,7 +107,7 @@ public class MagicProjectile : MobileObject {
 
 		//if (rgd==null)
 		//{//Use the stored values for motion control instead of the applied force.
-			this.transform.Translate (ProjectilePropsToVector(this) * Time.deltaTime);
+		//	this.transform.Translate (ProjectilePropsToVector(this) * Time.deltaTime);
 		//}	
 		if (DetonateNow)
 		{
@@ -166,7 +166,8 @@ public class MagicProjectile : MobileObject {
 	/// </summary>
 	public void BeginHoming()
 	{
-		StartCoroutine (Homing());
+        Debug.Log("Homing missile to reimplement");
+		//StartCoroutine (Homing());
 	}
 
 
@@ -189,76 +190,79 @@ public class MagicProjectile : MobileObject {
 
 			if (target!=null)
 			{
-					//UWHUD.instance.MessageScroll.Add("Tracking " + npc.name);	
-					//steer towards target
-					Vector3 dstPosition = new Vector3(target.transform.position.x,0,target.transform.position.z);
-					Vector3 srcPosition = new Vector3(this.transform.position.x,0,this.transform.position.z);
-					float angle = Mathf.Atan2(dstPosition.z-srcPosition.z, dstPosition.x-srcPosition.x)*180 / Mathf.PI;
-					//Debug.Log("Angle is " + angle);
-						//mgp.Projectile_Pitch = (short)((projectilePitchAngle /90f) * 7f);
-						int targetHeading=0;
-						angle +=180;
 
-						if ((angle >=337.5) || (angle<22.5))
-						{
-							targetHeading = (int)ProjectileHeadings.WEST;								
-						}
-						else if ((angle >=22.5) && (angle<67.5))
-						{
-							targetHeading = (int)ProjectileHeadings.SOUTHWEST;								
-						}
-						else if ((angle >=67.5) && (angle<112.5))
-						{
-							targetHeading = (int)ProjectileHeadings.SOUTH;								
-						}
-						else if ((angle >=112.5) && (angle<157.5))
-						{
-							targetHeading = (int)ProjectileHeadings.SOUTHEAST;								
-						}
-						else if ((angle >=157.5) && (angle<202.5))
-						{
-							targetHeading = (int)ProjectileHeadings.EAST;								
-						}
-						else if ((angle >=202.5) && (angle<247.5))
-						{
-							targetHeading = (int)ProjectileHeadings.NORTHEAST;								
-						}
-						else if ((angle >=247.5) && (angle<292.5))
-						{
-							targetHeading = (int)ProjectileHeadings.NORTH;								
-						}
-						else if ((angle >=292.5) && (angle<337.5))
-						{
-							targetHeading = (int)ProjectileHeadings.NORTHWEST;								
-						}
-						else 
-						{//Should not happen. just hold course.
-								targetHeading = ProjectileHeadingMajor;
-						}
-						//Lookup turning angle.
-						//change projectile heading by turning angle.
+                //Turn towards target?
+
+					////////UWHUD.instance.MessageScroll.Add("Tracking " + npc.name);	
+					////////steer towards target
+					//////Vector3 dstPosition = new Vector3(target.transform.position.x,0,target.transform.position.z);
+					//////Vector3 srcPosition = new Vector3(this.transform.position.x,0,this.transform.position.z);
+					//////float angle = Mathf.Atan2(dstPosition.z-srcPosition.z, dstPosition.x-srcPosition.x)*180 / Mathf.PI;
+					////////Debug.Log("Angle is " + angle);
+					//////	//mgp.Projectile_Pitch = (short)((projectilePitchAngle /90f) * 7f);
+					//////	int targetHeading=0;
+					//////	angle +=180;
+
+					//////	if ((angle >=337.5) || (angle<22.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.WEST;								
+					//////	}
+					//////	else if ((angle >=22.5) && (angle<67.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.SOUTHWEST;								
+					//////	}
+					//////	else if ((angle >=67.5) && (angle<112.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.SOUTH;								
+					//////	}
+					//////	else if ((angle >=112.5) && (angle<157.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.SOUTHEAST;								
+					//////	}
+					//////	else if ((angle >=157.5) && (angle<202.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.EAST;								
+					//////	}
+					//////	else if ((angle >=202.5) && (angle<247.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.NORTHEAST;								
+					//////	}
+					//////	else if ((angle >=247.5) && (angle<292.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.NORTH;								
+					//////	}
+					//////	else if ((angle >=292.5) && (angle<337.5))
+					//////	{
+					//////		targetHeading = (int)ProjectileHeadings.NORTHWEST;								
+					//////	}
+					//////	else 
+					//////	{//Should not happen. just hold course.
+					//////			targetHeading = ProjectileHeading;
+					//////	}
+					//////	//Lookup turning angle.
+					//////	//change projectile heading by turning angle.
 						 
 
-						ProjectileHeadingMajor += (short)turningHeading[ProjectileHeadingMajor,targetHeading ];
-						if (ProjectileHeadingMajor <0)						
-						{
-								ProjectileHeadingMajor = 7;
-						}
-						if (ProjectileHeadingMajor >7)
-						{
-								ProjectileHeadingMajor =0;
-						}
+					//////	ProjectileHeadingMajor += (short)turningHeading[ProjectileHeadingMajor,targetHeading ];
+					//////	if (ProjectileHeadingMajor <0)						
+					//////	{
+					//////			ProjectileHeadingMajor = 7;
+					//////	}
+					//////	if (ProjectileHeadingMajor >7)
+					//////	{
+					//////			ProjectileHeadingMajor =0;
+					//////	}
 
-						if (this.transform.position.y > target.transform.position.y)
-						{//needs to go down
-							Projectile_Pitch=1;
-							Projectile_Sign =0;
-						}
-						else
-						{//needs to go up
-							Projectile_Pitch=1;
-							Projectile_Sign =1;
-						}
+					//////	if (this.transform.position.y > target.transform.position.y)
+					//////	{//needs to go down
+					//////		Projectile_Pitch = 1;
+     //////                      // Projectile_Pitch &= 0x7h;  //  0;
+					//////	}
+					//////	else
+					//////	{//needs to go up
+					//////		Projectile_Pitch=9;
+					//////		//Projectile_Sign =1;
+					//////	}
 
 
 			}

@@ -126,15 +126,41 @@ public class ObjectLoader : DataLoader
     /// </summary>
     public ObjectLoaderInfo[] objInfo;
 
+
+    TileMap map;
+
     /// <summary>
     /// The no of in use mobile objects in the object list.
     /// </summary>
-    public int NoOfFreeMobile;
+    public int NoOfFreeMobile
+    {
+        get
+        {
+          return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c02, 16);//7c02
+        }
+        set
+        {
+            map.lev_ark_block.Data[0x7c02] = (char)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c03] = (char)((value >> 8) & 0xFF);
+        }
+    }
 
     /// <summary>
     /// The no of in use static objects in the object list.
     /// </summary>
-    public int NoOfFreeStatic;
+    public int NoOfFreeStatic
+    {
+        get
+        {
+            return (int)getValAtAddress(map.lev_ark_block.Data, 0x7c04, 16);//7c04
+        }
+        set
+        {
+            map.lev_ark_block.Data[0x7c04] = (char)(value & 0xFF);
+            map.lev_ark_block.Data[0x7c05] = (char)((value >> 8) & 0xFF);
+        }
+    }
+
 
     public int[] FreeMobileList = new int[254];
     public int[] FreeStaticList = new int[768];
@@ -159,9 +185,9 @@ public class ObjectLoader : DataLoader
     /// <param name="game">Game.</param>
     public void LoadObjectList(TileMap tileMap, UWBlock lev_ark)
     {
-
+        map = tileMap;
         objInfo = new ObjectLoaderInfo[1024];
-        BuildObjectListUW(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, tileMap.thisLevelNo);
+        BuildObjectListUW(objInfo, tileMap);
 
         setObjectTileXY(1, tileMap.Tiles, objInfo);
 
@@ -191,33 +217,6 @@ public class ObjectLoader : DataLoader
                 }
             }
     */
-
-    /// <summary>
-    /// Readies the object list. Requires the tilemap to be read in first
-    /// </summary>
-    /// <param name="tileMap">Tile map.</param>
-    /// <param name="lev_ark">Lev ark.</param>
-    /// <param name="game">Game.</param>
-    /// Original version
-    public void LoadObjectList_OLD(TileMap tileMap, char[] lev_ark)
-    {
-        Debug.Log("OLD VERSION OF LOADOBJECT LIST");
-        objInfo = new ObjectLoaderInfo[1024];
-        BuildObjectListUW__OLD(tileMap.Tiles, objInfo, tileMap.texture_map, lev_ark, tileMap.thisLevelNo);
-
-        setObjectTileXY(1, tileMap.Tiles, objInfo);
-
-        setDoorBits(tileMap.Tiles, objInfo);
-        setElevatorBits(tileMap.Tiles, objInfo);
-        setTerrainChangeBits(tileMap.Tiles, objInfo);
-        SetBullFrog(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
-        if (_RES == GAME_UW2)
-        {
-            setQbert(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
-            FindOffMapOscillatorTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
-            SetColourCyclingTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
-        }
-    }
 
 
 
@@ -315,7 +314,7 @@ public class ObjectLoader : DataLoader
         for (i = 0; i <= objList.GetUpperBound(0); i++)
         {
             //To stop later crashes in ascii dumps I set some inital values.
-            objList[i] = new ObjectLoaderInfo();
+            objList[i] = new ObjectLoaderInfo(i);
             objList[i].index = i; objList[i].next = 0; objList[i].item_id = 0; objList[i].link = 0; objList[i].owner = 0;
         }
 
@@ -339,7 +338,7 @@ public class ObjectLoader : DataLoader
             InUseFlag = (short)getValAtAddress(mst_ark.data, mstaddress_pointer, 8);
             objList[MasterIndex].InUseFlag = InUseFlag;
 
-            objList[MasterIndex].levelno = (short)LevelNo;
+            //objList[MasterIndex].levelno = (short)LevelNo;
             objList[MasterIndex].ObjectTileX = xref[xref_ptr].tileX;
             objList[MasterIndex].ObjectTileY = xref[xref_ptr].tileY;
             objList[MasterIndex].next = xref[xref[xref_ptr].next].MstIndex;
@@ -480,120 +479,121 @@ public class ObjectLoader : DataLoader
     /// <param name="texture_map">Texture map.</param>
     /// <param name="lev_ark">Lev ark.</param>
     /// <param name="LevelNo">Level no.</param>
-    void BuildObjectListUW(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, UWBlock lev_ark, int LevelNo)
+    void BuildObjectListUW(ObjectLoaderInfo[] objList, TileMap map)
     {
         long address_pointer = 0;
         long objectsAddress = (64 * 64 * 4);
         for (int x = 0; x < 1024; x++)
         {   //read in master object list
             int[] Vals = new int[4];
+
             //Read in the 4 x int 16s that comprise the static object
             for (int i = 0; i <= Vals.GetUpperBound(0); i++)
             {
-                Vals[i] = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + (i * 2), 16);
+                Vals[i] = (int)getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
             }
-            objList[x] = new ObjectLoaderInfo();
+            objList[x] = new ObjectLoaderInfo(x,map);
+            objList[x].map = map;
             objList[x].parentList = this;
-            objList[x].guid = System.Guid.NewGuid();
+            //objList[x].guid = System.Guid.NewGuid();
             objList[x].index = x;
-            objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-            objList[x].ObjectTileY = TileMap.ObjectStorageTile;
-            objList[x].levelno = (short)LevelNo;
-            objList[x].next = 0;
-            objList[x].address = lev_ark.Address + objectsAddress + address_pointer;
-            objList[x].invis = 0;
-            objList[x].item_id = (int)ExtractBits(Vals[0], 0, 0x1FF);
+           // objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+          //  objList[x].ObjectTileY = TileMap.ObjectStorageTile;
+           // objList[x].levelno = (short)map.thisLevelNo;
+           // objList[x].next = 0;
+            objList[x].address = map.lev_ark_block.Address + objectsAddress + address_pointer;
+            //objList[x].invis = 0;
+            //objList[x].item_id = (int)ExtractBits(Vals[0], 0, 0x1FF);
 
             if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES == GAME_UWDEMO)))//Fixed for bugged out of range items
             {
                 objList[x].item_id = 0;
             }
             
-            objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
-            objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
-            objList[x].doordir = (short)(ExtractBits(Vals[0], 13, 1));
-            objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
-            objList[x].is_quant = (short)(ExtractBits(Vals[0], 15, 1));
+           // objList[x].flags = (short)(ExtractBits(Vals[0], 9, 0x7));
+           // objList[x].enchantment = (short)(ExtractBits(Vals[0], 12, 1));
+            //objList[x].doordir = (short)(ExtractBits(Vals[0], 13, 1));
+           // objList[x].invis = (short)(ExtractBits(Vals[0], 14, 1));
+            //objList[x].is_quant = (short)(ExtractBits(Vals[0], 15, 1));
 
             //position at +2
-            objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
-            objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
-            objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 0x7)); //bits 7-9	//bits 10-12
-            objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 0x7));    //bits 13-15
+           // objList[x].zpos = (short)(ExtractBits(Vals[1], 0, 0x7f));  //bits 0-6 
+           // objList[x].heading = (short)(ExtractBits(Vals[1], 7, 0x7)); //bits 7-9
+            //objList[x].ypos = (short)(ExtractBits(Vals[1], 10, 0x7)); //bits 7-9	//bits 10-12
+            //objList[x].xpos = (short)(ExtractBits(Vals[1], 13, 0x7));    //bits 13-15
 
             //+4
-            objList[x].quality = (short)(ExtractBits(Vals[2], 0, 0x3f));
-            objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
+            //objList[x].quality = (short)(ExtractBits(Vals[2], 0, 0x3f));
+           // objList[x].next = (short)(ExtractBits(Vals[2], 6, 0x3ff));
 
             //+6
-            objList[x].owner = (short)(ExtractBits(Vals[3], 0, 0x3f));//bits 0-5
-            objList[x].link = (short)(ExtractBits(Vals[3], 6, 0x3FF)); //bits 6-15
+            //objList[x].owner = (short)(ExtractBits(Vals[3], 0, 0x3f));//bits 0-5
+            //objList[x].link = (short)(ExtractBits(Vals[3], 6, 0x3FF)); //bits 6-15
 
             HandleMovingDoors(objList, x);
 
-            SetObjectTextureValue(objList, texture_map, x);
+            SetObjectTextureValue(objList, map.texture_map, x);
 
             if (x < 256)
             {
+                //int val = 0;
                 //mobile objects		
-                objList[x].npc_hp = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
+                // objList[x].npc_hp = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x8, 8));
 
-                int val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8);
-                objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
-                objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
+               // int val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x9, 8);
+               // objList[x].ProjectileHeadingMinor = (short)(ExtractBits(val, 0, 0x1F));
+               // objList[x].ProjectileHeadingMajor = (short)(ExtractBits(val, 5, 0x7));
 
-                objList[x].MobileUnk_0xA = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xa, 8));
-                if (objList[x].MobileUnk_0xA > 0)
-                {
-                   // Debug.Log("Usage of UNK 0xA in object no " + x + " value = " + objList[x].MobileUnk_0xA);
-                }
+               // objList[x].MobileUnk_0xA = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xa, 8));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16);
-                objList[x].npc_goal = (short)(ExtractBits(val, 0, 0xF));
-                objList[x].npc_gtarg = (short)(ExtractBits(val, 4, 0xFF));
-                objList[x].MobileUnk_0xB_12_F = (short)(ExtractBits(val, 12, 0xF));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16);
-                objList[x].npc_level = (short)(ExtractBits(val, 0, 0xF));
-                objList[x].MobileUnk_0xD_4_FF = (short)(ExtractBits(val, 4, 0xff));
-                objList[x].MobileUnk_0xD_12_1 = (short)(ExtractBits(val, 12, 1));
-                objList[x].npc_talkedto = (short)(ExtractBits(val, 13, 1));
-                objList[x].npc_attitude = (short)(ExtractBits(val, 14, 0x3));
+                //objList[x].npc_goal = (short)(ExtractBits(val, 0, 0xF));
+                //objList[x].npc_gtarg = (short)(ExtractBits(val, 4, 0xFF));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xf, 16);
-                objList[x].MobileUnk_0xF_0_3F = (short)(ExtractBits(val, 0, 0x3F));
-                //objList[x].npc_height = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 6) & 0x7F);//was this wrong?
-                objList[x].npc_height = (short)(ExtractBits(val, 6, 0x3f));//Double check this!!
-                objList[x].MobileUnk_0xF_C_F = (short)(ExtractBits(val, 0xC, 0xF));//Possibly used as a look up in to NPC charge modifiers?
+
+                //objList[x].MobileUnk_0xB_12_F = (short)(ExtractBits(val, 12, 0xF));
+
+                //val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xd, 16);
+                //objList[x].npc_level = (short)(ExtractBits(val, 0, 0xF));
+                //objList[x].MobileUnk_0xD_4_FF = (short)(ExtractBits(val, 4, 0xff));
+                //objList[x].MobileUnk_0xD_12_1 = (short)(ExtractBits(val, 12, 1));
+                //objList[x].npc_talkedto = (short)(ExtractBits(val, 13, 1));
+                //objList[x].npc_attitude = (short)(ExtractBits(val, 14, 0x3));
+
+                //val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0xf, 16);
+                //objList[x].MobileUnk_0xF_0_3F = (short)(ExtractBits(val, 0, 0x3F));
+                ////objList[x].npc_height = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 8) >> 6) & 0x7F);//was this wrong?
+                //objList[x].npc_height = (short)(ExtractBits(val, 6, 0x3f));//Double check this!!
+                //objList[x].MobileUnk_0xF_C_F = (short)(ExtractBits(val, 0xC, 0xF));//Possibly used as a look up in to NPC charge modifiers?
 
                 //objList[x].MobileUnk07 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x10, 8));
-                objList[x].MobileUnk_0x11 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x11, 8));
-                objList[x].ProjectileSourceID = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x12, 8));
-                objList[x].MobileUnk_0x13 = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x13, 8));
+                //objList[x].MobileUnk_0x11 = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x11, 8));
+                //objList[x].ProjectileSourceID = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x12, 8));
+                //objList[x].MobileUnk_0x13 = (short)(getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x13, 8));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14, 8);
-                objList[x].Projectile_Speed = (short)(ExtractBits(val, 0, 0xF));
-                objList[x].Projectile_Pitch = (short)(ExtractBits(val, 4, 0x7));
-                objList[x].Projectile_Sign = (short)(ExtractBits(val, 7, 1));
+                // val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x14, 8);
+                // objList[x].Projectile_Speed = (short)(ExtractBits(val, 0, 0xF));
+                //objList[x].Projectile_Pitch = (short)(ExtractBits(val, 4, 0xF));
+                //objList[x].Projectile_Sign = (short)(ExtractBits(val, 7, 1));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8);
-                objList[x].npc_voidanim = (short)(ExtractBits(val, 0, 0x7));
-                objList[x].MobileUnk_0x15_4_1F = (short)(ExtractBits(val, 4, 0x1F));
+                // val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x15, 8);
+                // objList[x].npc_voidanim = (short)(ExtractBits(val, 0, 0x7));
+                // objList[x].MobileUnk_0x15_4_1F = (short)(ExtractBits(val, 4, 0x1F));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16);
-                objList[x].MobileUnk_0x16_0_F = (short)(ExtractBits(val, 0, 0xF));
-                objList[x].npc_yhome = (short)(ExtractBits(val, 4, 0x3f));
-                objList[x].npc_xhome = (short)(ExtractBits(val, 10, 0x3f));
+                //val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x16, 16);
+                //objList[x].MobileUnk_0x16_0_F = (short)(ExtractBits(val, 0, 0xF));
+                //objList[x].npc_yhome = (short)(ExtractBits(val, 4, 0x3f));
+                // objList[x].npc_xhome = (short)(ExtractBits(val, 10, 0x3f));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8);
-                objList[x].npc_heading = (short)(ExtractBits(val, 0, 0x1F));
-                objList[x].MobileUnk_0x18_5_7 = (short)(ExtractBits(val, 5, 0x7));
+                //val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x18, 8);
+                //objList[x].npc_heading = (short)(ExtractBits(val, 0, 0x1F));
+                //objList[x].MobileUnk_0x18_5_7 = (short)(ExtractBits(val, 5, 0x7));
 
-                val = (int)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8);
-                objList[x].npc_hunger = (short)(ExtractBits(val, 0, 0x3f));
-                objList[x].MobileUnk_0x19_6_3 = (short)(ExtractBits(val, 6, 0x3));
+                // val = (int)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x19, 8);
+                // objList[x].npc_hunger = (short)(ExtractBits(val, 0, 0x3f));
+                //objList[x].MobileUnk_0x19_6_3 = (short)(ExtractBits(val, 6, 0x3));
 
-                objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+               // objList[x].npc_whoami = (short)getValAtAddress(map.lev_ark_block.Data, objectsAddress + address_pointer + 0x1a, 8);
 
                 address_pointer = address_pointer + 8 + 19;
             }
@@ -605,9 +605,110 @@ public class ObjectLoader : DataLoader
         }
 
 
-        BuildFreeObjectLists(objList, lev_ark, ref address_pointer, ref objectsAddress);
 
 
+       // BuildFreeObjectLists(objList, map.lev_ark_block, ref address_pointer, ref objectsAddress);
+
+    }
+
+
+    /// <summary>
+    /// Gets next available Free Mobile Object Slot
+    /// </summary>
+    /// <param name="AvailableSlot"></param>
+    /// <returns>False if no slot is available</returns>
+    public bool GetFreeMobileObject(out int AvailableSlot)
+    {
+        AvailableSlot = NoOfFreeMobile;
+        if (AvailableSlot >= 2)
+        {
+            NoOfFreeMobile--;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// Gets next available Free Static Object Slot
+    /// </summary>
+    /// <param name="AvailableSlot"></param>
+    /// <returns>False if no slot is available</returns>
+    public bool GetFreeStaticObject(out int AvailableSlot)
+    {
+        AvailableSlot = NoOfFreeStatic;
+        if (AvailableSlot >= 2)
+        {
+            NoOfFreeStatic--;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    /// <summary>
+    /// Releases a free static object from the list.
+    /// Shift all used objects up by one
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public void ReleaseFreeStaticObject(int index)
+    {
+        int Slot = -1;
+        //Find the slot it is currently in.
+        for (int i = 0; i<768;i++)
+        {
+            if (index==GetStaticAtSlot(i))
+            {
+                Slot = i;
+                break;
+            }
+        }
+
+        if (Slot>0)
+        {//Found
+
+            //Shift all values between start of used to object up by one in the list.
+            for (int i = Slot; i>=NoOfFreeStatic; i--)
+            {
+                int ValueToShift = GetStaticAtSlot(i-1);
+                SetStaticAtSlot(i, ValueToShift);
+            }
+
+            //Insert object at top of available list
+            SetStaticAtSlot(NoOfFreeStatic, index);
+            //Increment free object counter.
+            NoOfFreeStatic++;
+        }
+    }
+
+    /// <summary>
+    /// Gets the item index at the specified slot
+    /// </summary>
+    /// <returns></returns>
+    int GetStaticAtSlot(int slot)
+    {
+        ////74fc    0600   free list for static objects (objects 0100 - 03ff, 768 x 2 bytes)
+        int offset = slot * 2;
+        return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+    }
+
+    /// <summary>
+    /// Sets the item index to store at the specified slot
+    /// </summary>
+    /// <param name="slot"></param>
+    /// <param name="itemIndex"></param>
+    void SetStaticAtSlot(int slot, int itemIndex)
+    {
+        int offset = slot * 2;
+        map.lev_ark_block.Data[0x7cf4 + offset] = (char)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x7cf4 + offset+1] = (char)((itemIndex >> 8) & 0xFF);
     }
 
 
@@ -620,8 +721,9 @@ public class ObjectLoader : DataLoader
     /// <param name="objectsAddress">Objects address.</param>
     void BuildFreeObjectLists(ObjectLoaderInfo[] objList, UWBlock lev_ark, ref long address_pointer, ref long objectsAddress)
     {
-        NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
-        NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
+        return;
+        //NoOfFreeMobile = (int)getValAtAddress(lev_ark, 0x7c02, 16);
+       // NoOfFreeStatic = (int)getValAtAddress(lev_ark, 0x7c04, 16);
         //	Debug.Log("This file has " + NoOfFreeMobile + " mobile object slots and " + NoOfFreeStatic + " static objects slots");
         for (int i = 0; i <= objList.GetUpperBound(0); i++)
         {
@@ -700,340 +802,6 @@ public class ObjectLoader : DataLoader
     }
 
 
-
-
-
-
-
-
-
-
-
-    /// <summary>
-    /// Builds the object list for UW games
-    /// </summary>
-    /// <param name="LevelInfo">Level info.</param>
-    /// <param name="objList">Object list.</param>
-    /// <param name="texture_map">Texture map.</param>
-    /// <param name="lev_ark">Lev ark.</param>
-    /// <param name="LevelNo">Level no.</param>
-    /// DO NOT USE!
-    void BuildObjectListUW__OLD(TileInfo[,] LevelInfo, ObjectLoaderInfo[] objList, short[] texture_map, char[] lev_ark, int LevelNo)
-    {
-        Debug.Log("OLD VERSION OF BuildObjectListUW");
-        int NoOfBlocks;
-        long AddressOfBlockStart;
-        long objectsAddress;
-        long address_pointer;
-        //char[] graves;
-
-        //Load in the grave information
-        //ReadStreamFile(Loader.BasePath + "DATA\\GRAVE.DAT", out graves);
-        switch (_RES)
-        {
-            case GAME_UWDEMO:
-                AddressOfBlockStart = 0;
-                objectsAddress = AddressOfBlockStart + (64 * 64 * 4); //+ 1;
-                address_pointer = 0;
-                break;
-
-            case GAME_UW1:  //Underworld 1
-                {
-                    //Get the number of blocks in this file.
-                    NoOfBlocks = (int)getValAtAddress(lev_ark, 0, 32);
-                    //Get the first map block
-                    AddressOfBlockStart = getValAtAddress(lev_ark, (LevelNo * 4) + 2, 32);
-                    objectsAddress = AddressOfBlockStart + (64 * 64 * 4); //+ 1;
-
-                    address_pointer = 0;
-                    break;
-                }
-
-            case GAME_UW2: //underworld 2
-                {
-                    char[] tmp_ark = new char[lev_ark.GetUpperBound(0) + 1];
-                    for (int i = 0; i <= lev_ark.GetUpperBound(0); i++)
-                    {
-                        tmp_ark[i] = lev_ark[i];
-                    }
-                    //address_pointer=6;
-                    NoOfBlocks = (int)getValAtAddress(tmp_ark, 0, 32);
-                    int compressionFlag = (int)getValAtAddress(tmp_ark, 6 + (LevelNo * 4) + (NoOfBlocks * 4), 32);
-                    int isCompressed = (compressionFlag >> 1) & 0x01;
-
-                    //long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
-                    address_pointer = (LevelNo * 4) + 6;
-                    if (getValAtAddress(tmp_ark, address_pointer, 32) == 0)
-                    {
-                        return;
-                    }
-                    if (isCompressed == 1)
-                    {
-                        long datalen = 0;
-                        lev_ark = unpackUW2(tmp_ark, getValAtAddress(tmp_ark, address_pointer, 32), ref datalen);
-                    }
-                    else
-                    {//
-                        int BlockStart = (int)getValAtAddress(tmp_ark, address_pointer, 32);
-                        int j = 0;
-                        AddressOfBlockStart = 0;
-                        lev_ark = new char[0x7c08];
-                        for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
-                        {
-                            lev_ark[j] = tmp_ark[i];
-                            j++;
-                        }
-                    }
-                    address_pointer = address_pointer + 4;
-                    AddressOfBlockStart = 0;    //since this array only contains that particular block
-                    objectsAddress = (64 * 64 * 4);
-                    address_pointer = 0;
-                    break;
-                }
-
-            default:
-                return;
-        }
-        for (int x = 0; x < 1024; x++)
-        {   //read in master object list
-            objList[x] = new ObjectLoaderInfo();
-            objList[x].parentList = this;
-            objList[x].guid = System.Guid.NewGuid();
-            objList[x].index = x;
-            //free objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
-            objList[x].ObjectTileX = TileMap.ObjectStorageTile;   //since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-            objList[x].ObjectTileY = TileMap.ObjectStorageTile;
-            objList[x].levelno = (short)LevelNo;
-            objList[x].next = 0;
-            objList[x].address = objectsAddress + address_pointer;
-
-            objList[x].invis = 0;
-            //objList[x].AlreadyRendered=0;
-
-            objList[x].item_id = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) & 0x1FF;
-            if ((objList[x].item_id >= 464) && ((_RES == GAME_UW1) || (_RES == GAME_UWDEMO)))//Fixed for bugged out of range items
-            {
-                objList[x].item_id = 0;
-            }
-            //printf("Item ID %d %d\n",x, objList[x].item_id);
-            objList[x].flags = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) >> 9) & 0x07);
-            objList[x].enchantment = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) >> 12) & 0x01);
-            objList[x].doordir = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) >> 13) & 0x01);
-            objList[x].invis = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) >> 14) & 0x01);
-            objList[x].is_quant = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16)) >> 15) & 0x01);
-
-            //position at +2
-            objList[x].zpos = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 2, 16)) & 0x7F); //bits 0-6 
-                                                                                                                    //objList[x].heading =  45 * (int)(((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
-            objList[x].heading = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 2, 16)) >> 7) & 0x07); //bits 7-9
-
-            objList[x].ypos = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 2, 16)) >> 10) & 0x07);    //bits 10-12
-            objList[x].xpos = (short)(((getValAtAddress(lev_ark, objectsAddress + address_pointer + 2, 16)) >> 13) & 0x07);    //bits 13-15
-
-            //+4
-            objList[x].quality = (short)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 4, 16)) & 0x3F);
-            objList[x].next = (int)((getValAtAddress(lev_ark, objectsAddress + address_pointer + 4, 16) >> 6) & 0x3FF);
-
-            //+6
-
-            objList[x].owner = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) & 0x3F);//bits 0-5
-
-            objList[x].link = (int)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
-
-            if ((objList[x].GetItemType() == ObjectInteraction.TMAP_SOLID) || (objList[x].GetItemType() == ObjectInteraction.TMAP_CLIP))
-            {
-                objList[x].texture = texture_map[objList[x].owner]; //Sets the texture for tmap objects. I won't have access to the texture map later on.
-            }
-
-            /*if (GameWorldController.instance.objectMaster.type[objList[x].item_id] == ObjectInteraction.DOOR)
-            {
-                switch (_RES)
-                {
-                case GAME_UWDEMO:
-                case GAME_UW1:
-                case GAME_UW2:
-                    if ((objList[x].item_id >= 328) && (objList[x].item_id <= 333))
-                    {//Open doors need to be adjusted down?
-                            //objList[x].zpos-=24;
-                    }
-                    break;
-                }
-            }*/
-            if (objList[x].GetItemType() == ObjectInteraction.A_MOVING_DOOR)
-            {
-                //Moving doors have the following properties. The 320+owner is the door type that it is moving from.
-                //To hack in support for moving doors that load from UW I am just going to convert the moving door to the final state
-                //it should be in
-                objList[x].item_id = 320 + objList[x].owner;
-                switch (objList[x].item_id)
-                {//closed doors
-                    case 320:
-                    case 321:
-                    case 322:
-                    case 323:
-                    case 324:
-                    case 325:
-                    case 327://secret door
-                        objList[x].item_id += 8;
-                        //objList[x].zpos-=24;
-                        objList[x].flags = 5;
-                        objList[x].enchantment = 1;
-                        objList[x].owner = 0;
-                        break;
-
-                    case 326://Portcullis
-                        objList[x].item_id += 8;
-                        //objList[x].zpos-=24;
-                        objList[x].flags = 4;
-                        objList[x].enchantment = 1;
-                        objList[x].owner = 0;
-                        break;
-                    //open doors
-                    case 328:
-                    case 329:
-                    case 330:
-                    case 331:
-                    case 332:
-                    case 333:
-                    case 335://Open secret door
-                    case 334://open portcullis
-                        objList[x].item_id -= 8;
-                        //objList[x].zpos-=24;
-                        objList[x].flags = 0;
-                        objList[x].enchantment = 0;
-                        objList[x].owner = 0;
-                        break;
-                }
-            }
-
-            if (objList[x].GetItemType() == ObjectInteraction.BRIDGE)
-            {
-                if (objList[x].flags >= 2)
-                {//267 + textureIndex;
-                    if (_RES == GAME_UW2)
-                    {
-                        objList[x].texture = texture_map[objList[x].flags - 2]; //Sets the texture for bridge
-                    }
-                    else
-                    {
-                        objList[x].texture = texture_map[objList[x].flags - 2 + 48];    //Sets the texture for bridge
-                    }
-                }
-                else
-                {
-                    objList[x].texture = 267 + (objList[x].flags & 0x3F);//267 is an offset into my own textures config file.
-                }
-            }
-
-            if (objList[x].GetItemType() == ObjectInteraction.BUTTON)
-            {
-                objList[x].texture = objList[x].flags;
-            }
-
-            if (objList[x].GetItemType() == ObjectInteraction.GRAVE)
-            {
-                objList[x].texture = objList[x].flags + 28;
-                //if (objList[x].link >= 512)
-                //{
-                //	objList[x].DeathWatched = (short)getValAtAddress(graves, objList[x].link - 512, 8);
-                //}
-            }
-            if (objList[x].GetItemType() == ObjectInteraction.A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
-            {
-                objList[x].xpos = 4;
-                objList[x].ypos = 4;
-            }
-            if (objList[x].GetItemType() == ObjectInteraction.A_CHANGE_TERRAIN_TRAP)
-            {
-                //bits 1-5 of the quality field is the floor texture.
-                if (_RES == GAME_UW1)
-                {
-                    int textureQuality = (objList[x].quality >> 1) & 0xf;
-                    if (textureQuality == 10)
-                    {
-                        //Weird glitch texture
-                        //textureQuality=-1;
-                        //textureQuality = textureQuality - 10;
-                        objList[x].texture = -1;
-                    }
-                    else if (textureQuality > 10)
-                    {
-                        //textureQuality=8;//Always seems to be this texture.
-                        //textureQuality = -1;//use the texture already there?
-                        objList[x].texture = -1;//texture_map[(textureQuality)+48];//-1 to reuse the existing texture
-                    }
-                    else
-                    {
-                        objList[x].texture = texture_map[(textureQuality) + 48];
-                    }
-                    if (objList[x].zpos > 96)
-                    {
-                        //cap the zpos height at this
-                        objList[x].zpos = 96;
-                    }
-                }
-            }
-            if (x < 256)
-            {
-                //mobile objects		
-                objList[x].npc_hp = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8));
-
-                objList[x].npc_goal = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF);
-                objList[x].npc_gtarg = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
-
-                objList[x].npc_level = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF);
-
-                objList[x].npc_talkedto = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
-                objList[x].npc_attitude = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
-
-                objList[x].npc_voidanim = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x15, 8) & 0x7);
-
-                objList[x].npc_yhome = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
-                objList[x].npc_xhome = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
-
-                objList[x].npc_heading = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 8) & 0x1F);
-                objList[x].npc_hunger = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 8) & 0x3F);
-
-                objList[x].npc_whoami = (short)getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
-
-                objList[x].ProjectileHeadingMinor = (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x9, 8) & 0x1F);
-                //Projectile_Speed
-
-
-
-
-                //int i=0;
-                //for (int z=0x8; z<=0x1a;z++)
-                //	{
-                //switch (z)
-                //{
-                /*case 0xb:
-                case 0xd:
-                case 0xf:
-                case 0x16:
-                    //	objList[x].NPC_DATA[i++]= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 16));
-                    //	break;
-                case 0xb+1:
-                case 0xd+1:
-                case 0xf+1:
-                case 0x16+1:
-                        break;*/
-                //default:
-                //objList[x].NPC_DATA[i++]= (short)(getValAtAddress(lev_ark, objectsAddress + address_pointer + z, 8));
-                //break;								
-                //}
-
-                //}
-                address_pointer = address_pointer + 8 + 19;
-            }
-            else
-            {
-                //Static Objects
-                address_pointer = address_pointer + 8;
-            }
-        }
-    }
-
     static void HandleMovingDoors(ObjectLoaderInfo[] objList, int x)
     {
         if (objList[x].GetItemType() == ObjectInteraction.A_MOVING_DOOR)
@@ -1095,7 +863,6 @@ public class ObjectLoader : DataLoader
     /// <param name="x">The x coordinate.</param>
     static void SetObjectTextureValue(ObjectLoaderInfo[] objList, short[] texture_map, int x)
     {
-
         if ((objList[x].GetItemType() == ObjectInteraction.TMAP_SOLID) || (objList[x].GetItemType() == ObjectInteraction.TMAP_CLIP))
         {
             objList[x].texture = texture_map[objList[x].owner]; //Sets the texture for tmap objects. 
@@ -2102,7 +1869,7 @@ public class ObjectLoader : DataLoader
                 t.gameObject.GetComponent<ObjectInteraction>().OnSaveObjectEvent();
             }
         }
-
+        
         foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
         {
             if (t.gameObject.GetComponent<ObjectInteraction>() != null)
@@ -2111,7 +1878,7 @@ public class ObjectLoader : DataLoader
                 //Copy back the info stored on the object interaction to the lists.
                 if (objInt.objectloaderinfo == null)
                 {
-                    objInt.objectloaderinfo = new ObjectLoaderInfo();
+                    objInt.objectloaderinfo = new ObjectLoaderInfo(objInt.objectloaderinfo.index);
                     objInt.objectloaderinfo.InUseFlag = 0;
                     objInt.objectloaderinfo.ObjectTileX = TileMap.ObjectStorageTile;
                     objInt.objectloaderinfo.ObjectTileY = TileMap.ObjectStorageTile;
@@ -2158,6 +1925,7 @@ public class ObjectLoader : DataLoader
             }
         }
 
+        return;
 
         //Count the number of freeobjects in the mobile and static lists and update these lists as needed			
         currObjList.FreeMobileList = new int[254];
@@ -2509,6 +2277,8 @@ public class ObjectLoader : DataLoader
 
     void CopyDataToList(ObjectInteraction objInt, ref ObjectLoaderInfo info)
     {
+        Debug.Log("copy data to list");
+        return;
         info.item_id = objInt.item_id;
         info.flags = objInt.flags;  //9-12
         info.enchantment = objInt.enchantment;  //12
@@ -2549,9 +2319,9 @@ public class ObjectLoader : DataLoader
             info.npc_health = objInt.npc_height;
             info.Projectile_Pitch = objInt.Projectile_Pitch;
             info.Projectile_Speed = objInt.Projectile_Speed;
-            info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
+            //info.ProjectileHeadingMinor = objInt.ProjectileHeadingMinor;
 
-            info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
+            //info.ProjectileHeadingMajor = objInt.ProjectileHeadingMajor;
             info.MobileUnk_0xA = objInt.MobileUnk_0xA;
             info.MobileUnk_0xB_12_F = objInt.MobileUnk_0xB_12_F;
             info.MobileUnk_0xD_4_FF = objInt.MobileUnk_0xD_4_FF;
@@ -2561,7 +2331,7 @@ public class ObjectLoader : DataLoader
             info.MobileUnk_0x11 = objInt.MobileUnk_0x11;
             info.ProjectileSourceID = objInt.ProjectileSourceID;
             info.MobileUnk_0x13 = objInt.MobileUnk_0x13;
-            info.Projectile_Sign = objInt.Projectile_Sign;
+            //info.Projectile_Sign = objInt.Projectile_Sign;
             info.MobileUnk_0x15_4_1F = objInt.MobileUnk_0x15_4_1F;
             info.MobileUnk_0x16_0_F = objInt.MobileUnk_0x16_0_F;
             info.MobileUnk_0x18_5_7 = objInt.MobileUnk_0x18_5_7;
@@ -2576,7 +2346,7 @@ public class ObjectLoader : DataLoader
 
 
     /// <summary>
-    /// Creates a new object in the static object section of the list.
+    /// Finds and returns the next available free slot.
     /// </summary>
     /// <returns>The object.</returns>
     public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link, int startIndex)
@@ -2584,7 +2354,19 @@ public class ObjectLoader : DataLoader
         int index = 0;
         if (startIndex >= 0)
         {
-            if (CurrentObjectList().getFreeSlot(startIndex, out index))
+            bool SlotAvailable = false;
+            if (startIndex >=256)//Static
+            {
+                SlotAvailable=CurrentObjectList().GetFreeStaticObject(out index);
+                index = CurrentObjectList().GetStaticAtSlot(index);
+            }
+            else
+            {//mobile
+                SlotAvailable = CurrentObjectList().GetFreeMobileObject(out index);
+                //index = CurrentObjectList().GetMobileAtSlot(index);
+            }
+            Debug.Log("Allocating Slot " + index);
+            if (SlotAvailable)
             {
                 CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();
                 CurrentObjectList().objInfo[index].quality = (short)quality;
@@ -2609,8 +2391,9 @@ public class ObjectLoader : DataLoader
         }
         else
         {
-            ObjectLoaderInfo objI = new ObjectLoaderInfo();
-            objI.guid = System.Guid.NewGuid();
+            Debug.Log("New Object created. Shuld not happen!");
+            ObjectLoaderInfo objI = new ObjectLoaderInfo(index);
+            //objI.guid = System.Guid.NewGuid();
             objI.quality = (short)quality;
             objI.flags = 0;
             objI.owner = (short)owner;
@@ -3797,7 +3580,7 @@ shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/
                             //	}
                             //else
                             //	{
-                            LevelInfo[x, y].isDoor = true;
+                            LevelInfo[x, y].IsDoorForNPC = true;
                             //LevelInfo[x,y].DoorIndex = currObj.index;
                             //Put it's lock into use if it exists.
                             //I'm ignoring for the moment but it is here for compatability to vanilla.

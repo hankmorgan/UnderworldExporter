@@ -21,10 +21,13 @@ public class TileContactWater : TileContact {
         if (IsObjectDestroyable(obj))
         {
             GameObject splash = Impact.SpawnHitImpact(453,position, splashanimstart(), splashanimstart()+4);
-            if (ObjectInteraction.PlaySoundEffects)
+            if (splash!=null)
             {
-                splash.GetComponent<ObjectInteraction>().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
-                splash.GetComponent<ObjectInteraction>().aud.Play();
+                if (ObjectInteraction.PlaySoundEffects)
+                {
+                    splash.GetComponent<ObjectInteraction>().aud.clip = MusicController.instance.SoundEffects[MusicController.SOUND_EFFECT_SPLASH_1];
+                    splash.GetComponent<ObjectInteraction>().aud.Play();
+                }
             }
             DestroyObject(obj);
         }

@@ -82,7 +82,7 @@ public class a_change_terrain_trap : trap_base
                     TileMapRenderer.UpdateTile(tileXToChange, tileYToChange, tileTypeToChangeTo, newTileHeight, tileToChange.floorTexture, newWallTexture, false);
                     Destroy(tile);
 
-                    if (tileToChange.isDoor)
+                    if (tileToChange.IsDoorForNPC)
                     {//The door may be rendered
                         GameObject door = DoorControl.findDoor(tileToChange.tileX, tileToChange.tileY);
                         if (door != null)

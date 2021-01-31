@@ -500,7 +500,7 @@ public class IngameEditor : GuiBase_Draggable
                                     {
                                         CurrentTileMap().Tiles[x, y].floorHeight = (short)HeightToSet;
                                     }
-                                    CurrentTileMap().Tiles[x, y].shockSteep = 2;
+                                    CurrentTileMap().Tiles[x, y].TileSlopeSteepness = 2;
 
                                     UpdateTile(x, y, TileTypeSelected, FloorTexture, WallTexture, HeightToSet);
                                 }
@@ -537,7 +537,7 @@ public class IngameEditor : GuiBase_Draggable
                                     {
                                         CurrentTileMap().Tiles[x, y].floorHeight = (short)HeightToSet;
                                     }
-                                    CurrentTileMap().Tiles[x, y].shockSteep = 2;
+                                    CurrentTileMap().Tiles[x, y].TileSlopeSteepness = 2;
                                     UpdateTile(x, y, TileTypeSelected, FloorTexture, WallTexture, HeightToSet);
                                 }
                             }
@@ -574,7 +574,7 @@ public class IngameEditor : GuiBase_Draggable
                                     {
                                         CurrentTileMap().Tiles[x, y].floorHeight = (short)HeightToSet;
                                     }
-                                    CurrentTileMap().Tiles[x, y].shockSteep = 2;
+                                    CurrentTileMap().Tiles[x, y].TileSlopeSteepness = 2;
                                     UpdateTile(x, y, TileTypeSelected, FloorTexture, WallTexture, HeightToSet);
                                 }
                             }
@@ -610,7 +610,7 @@ public class IngameEditor : GuiBase_Draggable
                                     {
                                         CurrentTileMap().Tiles[x, y].floorHeight = (short)HeightToSet;
                                     }
-                                    CurrentTileMap().Tiles[x, y].shockSteep = 2;
+                                    CurrentTileMap().Tiles[x, y].TileSlopeSteepness = 2;
                                     UpdateTile(x, y, TileTypeSelected, FloorTexture, WallTexture, HeightToSet);
                                 }
                             }
@@ -671,7 +671,7 @@ public class IngameEditor : GuiBase_Draggable
                 case TileMap.TILE_SLOPE_W:
                 case TileMap.TILE_SLOPE_N:
                 case TileMap.TILE_SLOPE_S:
-                    CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].shockSteep = 2;
+                    CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].TileSlopeSteepness = 2;
                     break;
             }
             CurrentTileMap().Tiles[tileXtoUpdate, tileYtoUpdate].tileType = (short)TileTypeSelected;

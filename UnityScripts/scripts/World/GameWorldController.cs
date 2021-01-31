@@ -16,8 +16,6 @@ using UnityEngine.UI;
 
 public class GameWorldController : UWEBase
 {
-    //public Texture2D[] allnova;
-
     public bool EnableUnderworldGenerator = false;
     public bool DoCleanUp = true;
     public GameObject ceiling;
@@ -946,22 +944,22 @@ public class GameWorldController : UWEBase
 
                 if (UWEBase._RES != UWEBase.GAME_SHOCK)
                 {
-                    DataLoader.UWBlock lev_ark_block = new DataLoader.UWBlock();//Data containing tilemap.
-                    DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();//Data containing texture map
-                    DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();//Data containing animation overlays
+                    // DataLoader.UWBlock lev_ark_block = new DataLoader.UWBlock();//Data containing tilemap.
+                    //DataLoader.UWBlock tex_ark_block = new DataLoader.UWBlock();//Data containing texture map
+                    //DataLoader.UWBlock ovl_ark_block = new DataLoader.UWBlock();//Data containing animation overlays
 
                     //Load Lev.ark data for the objects and tile map
-                    lev_ark_block = LoadLevArkBlock(newLevelNo);
+                    Tilemaps[newLevelNo].lev_ark_block = LoadLevArkBlock(newLevelNo);
 
                     if (_RES == GAME_UW1)
                     {//Load the overlays.
-                        DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 9, 0x180, out ovl_ark_block);
+                        DataLoader.LoadUWBlock(LevArk.lev_ark_file_data, newLevelNo + 9, 0x180, out Tilemaps[newLevelNo].ovl_ark_block);
                     }
 
                     //Load lev.ark data fror the texture map.
-                    tex_ark_block = LoadTexArkBlock(newLevelNo, tex_ark_block);
+                    Tilemaps[newLevelNo].tex_ark_block = LoadTexArkBlock(newLevelNo, Tilemaps[newLevelNo].tex_ark_block);
 
-                    if ((lev_ark_block.DataLen > 0) && (tex_ark_block.DataLen > 0))
+                    if ((Tilemaps[newLevelNo].lev_ark_block.DataLen > 0) && (Tilemaps[newLevelNo].tex_ark_block.DataLen > 0))
                     {
                         if (EnableUnderworldGenerator)
                         {
@@ -972,12 +970,12 @@ public class GameWorldController : UWEBase
                         }
                         else
                         {
-                            Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, lev_ark_block, tex_ark_block, ovl_ark_block);
+                            Tilemaps[newLevelNo].BuildTileMapUW(newLevelNo, Tilemaps[newLevelNo].lev_ark_block, Tilemaps[newLevelNo].tex_ark_block, Tilemaps[newLevelNo].ovl_ark_block);
                         }
 
                         //Load game objects from the levark data
                         objectList[newLevelNo] = new ObjectLoader();
-                        objectList[newLevelNo].LoadObjectList(Tilemaps[newLevelNo], lev_ark_block);
+                        objectList[newLevelNo].LoadObjectList(Tilemaps[newLevelNo], Tilemaps[newLevelNo].lev_ark_block);
 
                         if (CreateReports)
                         {
@@ -1296,17 +1294,10 @@ public class GameWorldController : UWEBase
     {
         //Add item to a free slot on the item list and point the instance back to this.
         obj.UpdatePosition();
-        //if (obj.transform.parent == GameWorldController.instance.DynamicObjectMarker())
-        //{
-        //		Debug.Log("Moving to world when object is already in world " + obj.name);
-        //}
+
         obj.transform.parent = GameWorldController.instance.DynamicObjectMarker();
         ObjectLoader.AssignObjectToList(ref obj);
-        //	ObjectInteraction.UpdateLinkedList(obj, TileMap.ObjectStorageTile, TileMap.ObjectStorageTile, obj.tileX, obj.tileY);
-        //obj.next=0;
-        //obj.UpdatePosition();
-        //obj.tileX=-1;
-        //obj.tileY=-1;//Force an update to linked list.
+
         obj.GetComponent<object_base>().MoveToWorldEvent();
         if (ConversationVM.InConversation)
         {
@@ -1314,9 +1305,7 @@ public class GameWorldController : UWEBase
             ConversationVM.BuildObjectList();//Reflect changes to object lists
         }
 
-        //obj.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
         return obj;
-        //Not needed???
     }
 
     /// <summary>
@@ -1342,7 +1331,6 @@ public class GameWorldController : UWEBase
             ObjectLoaderInfo.CleanUp(obj.objectloaderinfo);
         }
         obj.GetComponent<object_base>().MoveToInventoryEvent();
-        //ObjectInteraction.UpdateLinkedList(obj, obj.tileX, obj.tileY, TileMap.ObjectStorageTile,TileMap.ObjectStorageTile);
         if (ConversationVM.InConversation)
         {
             ConversationVM.BuildObjectList();//Reflect changes to object lists
@@ -1927,26 +1915,33 @@ public class GameWorldController : UWEBase
         {//mobile info
             writer.WriteLine("\t\t<MobileProperties>");
             writer.WriteLine("\t\t\t<npc_hp>" + objList[o].npc_hp + "</npc_hp>");
-            writer.WriteLine("\t\t\t<ProjectileHeadingMinor>" + objList[o].ProjectileHeadingMinor + "</ProjectileHeadingMinor>");
-            writer.WriteLine("\t\t\t<ProjectileHeadingMajor>" + objList[o].ProjectileHeadingMajor + "</ProjectileHeadingMajor>");
+            writer.WriteLine("\t\t\t<ProjectileHeading>" + objList[o].ProjectileHeading + "</ProjectileHeading>");
             writer.WriteLine("\t\t\t<MobileUnk_0xA>" + objList[o].MobileUnk_0xA + "</MobileUnk_0xA>");
+
             writer.WriteLine("\t\t\t<npc_goal>" + objList[o].npc_goal + "</npc_goal>");
             writer.WriteLine("\t\t\t<npc_gtarg>" + objList[o].npc_gtarg + "</npc_gtarg>");
             writer.WriteLine("\t\t\t<MobileUnk_0xB_12_F>" + objList[o].MobileUnk_0xB_12_F + "</MobileUnk_0xB_12_F>");
+            int OriginX = (objList[o].MobileUnk_0xB_12_F <<12) | (objList[o].npc_gtarg<<4) | objList[o].npc_goal & 0xF;
+            writer.WriteLine("\t\t\t<CoOrdinateX>" + objList[o].CoordinateX + "</CoOrdinateX>");
+
             writer.WriteLine("\t\t\t<npc_level>" + objList[o].npc_level + "</npc_level>");
             writer.WriteLine("\t\t\t<MobileUnk_0xD_4_FF>" + objList[o].MobileUnk_0xD_4_FF + "</MobileUnk_0xD_4_FF>");
             writer.WriteLine("\t\t\t<MobileUnk_0xD_12_1>" + objList[o].MobileUnk_0xD_12_1 + "</MobileUnk_0xD_12_1>");
             writer.WriteLine("\t\t\t<npc_talkedto>" + objList[o].npc_talkedto + "</npc_talkedto>");
             writer.WriteLine("\t\t\t<npc_attitude>" + objList[o].npc_attitude + "</npc_attitude>");
+            //int val = (npc_attitude << 13) | (npc_talkedto << 12) | (MobileUnk_0xD_12_1 << 11) | (MobileUnk_0xD_4_FF << 4) | (npc_level & 0xF);
+            int OriginY = (objList[o].npc_attitude << 13) | (objList[o].npc_talkedto << 12) | (objList[o].MobileUnk_0xD_12_1 << 11) | (objList[o].MobileUnk_0xD_4_FF << 4) | (objList[o].npc_level & 0xF);
+            writer.WriteLine("\t\t\t<CoOrdinateY>" + OriginY + "</CoOrdinateY>");
+
             writer.WriteLine("\t\t\t<MobileUnk_0xF_0_3F>" + objList[o].MobileUnk_0xF_0_3F + "</MobileUnk_0xF_0_3F>");
             writer.WriteLine("\t\t\t<npc_height>" + objList[o].npc_height + "</npc_height>");
-            writer.WriteLine("\t\t\t<MobileUnk_0x11>" + objList[o].MobileUnk_0xF_C_F + "</MobileUnk_0x11>");
+            writer.WriteLine("\t\t\t<MobileUnk_0xF_C_F>" + objList[o].MobileUnk_0xF_C_F + "</MobileUnk_0xF_C_F>");
             writer.WriteLine("\t\t\t<MobileUnk_0x11>" + objList[o].MobileUnk_0x11 + "</MobileUnk_0x11>");
-            writer.WriteLine("\t\t\t<ProjectileSourceID>" + objList[o].ProjectileSourceID + "</MobileUnk08>");
+            writer.WriteLine("\t\t\t<ProjectileSourceID>" + objList[o].ProjectileSourceID + "</ProjectileSourceID>");
             writer.WriteLine("\t\t\t<MobileUnk_0x13>" + objList[o].MobileUnk_0x13 + "</MobileUnk_0x13>");
             writer.WriteLine("\t\t\t<Projectile_Speed>" + objList[o].Projectile_Speed + "</Projectile_Speed>");
             writer.WriteLine("\t\t\t<Projectile_Pitch>" + objList[o].Projectile_Pitch + "</Projectile_Pitch>");
-            writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
+            //writer.WriteLine("\t\t\t<Projectile_Sign>" + objList[o].Projectile_Sign + "</Projectile_Sign>");
             writer.WriteLine("\t\t\t<npc_voidanim>" + objList[o].npc_voidanim + "</npc_voidanim>");
             writer.WriteLine("\t\t\t<MobileUnk_0x15_4_1F>" + objList[o].MobileUnk_0x15_4_1F + "</MobileUnk_0x15_4_1F>");
             writer.WriteLine("\t\t\t<MobileUnk_0x16_0_F>" + objList[o].MobileUnk_0x16_0_F + "</MobileUnk_0x16_0_F>");

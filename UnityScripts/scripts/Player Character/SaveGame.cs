@@ -49,6 +49,11 @@ public class SaveGame : Loader
 
     };
 
+    /// <summary>
+    /// Array for storing inventory data.
+    /// </summary>
+    public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
+
     
     /// <summary>
     /// Ratio of UNITY co-ordinates to Tile co-ordinates
@@ -2565,46 +2570,32 @@ public class SaveGame : Loader
         //Inventory list
         int NoOfItems = (buffer.GetUpperBound(0) - StartOffset) / 8;
 
-        GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems + 2];
+        GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];   //+ 2];
         int x = 1;
+
+        InventoryData = new char[768 * 8];
         if (buffer.GetUpperBound(0) >= StartOffset)
-        {
-            int i = StartOffset;
+        {//Copy the inventory data buffer into memory. Inventory object data will be manipulated here.
+            int i = StartOffset;            
             while (i < buffer.GetUpperBound(0))
             {
-                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo();
-                GameWorldController.instance.inventoryLoader.objInfo[x].index = x;
-                GameWorldController.instance.inventoryLoader.objInfo[x].guid = System.Guid.NewGuid();
+                InventoryData[i - StartOffset] = buffer[i];
+                i++;
+            }
+        }
+
+        ///Initialise as many inventory objects as needed
+        if (buffer.GetUpperBound(0) >= StartOffset)
+        {
+            for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0);x++)
+            {
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x);//Inventory indices start at 1
                 GameWorldController.instance.inventoryLoader.objInfo[x].parentList = GameWorldController.instance.inventoryLoader;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].InUseFlag = 1;
-                GameWorldController.instance.inventoryLoader.objInfo[x].item_id = (int)(DataLoader.getValAtAddress(buffer, i + 0, 16)) & 0x1FF;
-                GameWorldController.instance.inventoryLoader.objInfo[x].flags = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 9) & 0x07);
-                GameWorldController.instance.inventoryLoader.objInfo[x].enchantment = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 12) & 0x01);
-                GameWorldController.instance.inventoryLoader.objInfo[x].doordir = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 13) & 0x01);
-                GameWorldController.instance.inventoryLoader.objInfo[x].invis = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 14) & 0x01);
-                GameWorldController.instance.inventoryLoader.objInfo[x].is_quant = (short)(((DataLoader.getValAtAddress(buffer, i + 0, 16)) >> 15) & 0x01);
-                //position at +2
-                GameWorldController.instance.inventoryLoader.objInfo[x].zpos = (short)((DataLoader.getValAtAddress(buffer, i + 2, 16)) & 0x7F);
-                //bits 0-6 
-                GameWorldController.instance.inventoryLoader.objInfo[x].heading = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 7) & 0x07);
-                //bits 7-9
-                GameWorldController.instance.inventoryLoader.objInfo[x].ypos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 10) & 0x07);
-                //bits 10-12
-                GameWorldController.instance.inventoryLoader.objInfo[x].xpos = (short)(((DataLoader.getValAtAddress(buffer, i + 2, 16)) >> 13) & 0x07);
-                //bits 13-15
-                //+4
-                GameWorldController.instance.inventoryLoader.objInfo[x].quality = (short)((DataLoader.getValAtAddress(buffer, i + 4, 16)) & 0x3F);
-                GameWorldController.instance.inventoryLoader.objInfo[x].next = (int)((DataLoader.getValAtAddress(buffer, i + 4, 16) >> 6) & 0x3FF);
-                //+6
-                GameWorldController.instance.inventoryLoader.objInfo[x].owner = (short)(DataLoader.getValAtAddress(buffer, i + 6, 16) & 0x3F);
-                //bits 0-5
-                GameWorldController.instance.inventoryLoader.objInfo[x].link = (int)(DataLoader.getValAtAddress(buffer, i + 6, 16) >> 6 & 0x3FF);
-                //bits 6-15
-                i = i + 8;
-                x++;
             }
+
             //Create the inventory objects
             ObjectLoader.RenderObjectList(GameWorldController.instance.inventoryLoader, CurrentTileMap(), GameWorldController.instance.InventoryMarker);
             ObjectLoader.LinkObjectListWands(GameWorldController.instance.inventoryLoader);
@@ -2614,16 +2605,13 @@ public class SaveGame : Loader
                 //Apply objects to slots
                 int index = ((int)DataLoader.getValAtAddress(buffer, j, 16) >> 6);
                 ObjectInteraction item; 
-                //string item_name;
                 if (index != 0)
                 {
                     item = GameWorldController.instance.inventoryLoader.objInfo[index].instance;
-                    //item_name = ObjectLoader.UniqueObjectName(objLoader.objInfo[index]);
                 }
                 else
                 {
                     item = null;
-                    //item_name = "";
                 }
 
                 switch ((InventorySlotsOffsets)(j))
@@ -3091,6 +3079,7 @@ public class SaveGame : Loader
         //   z-position
         int z_position = (int)DataLoader.getValAtAddress(buffer, 0x59, 16);
         float heading = (float)DataLoader.getValAtAddress(buffer, 0x5c, 8);
+        Debug.Log("Player heading is " + heading);
         UWCharacter.Instance.transform.eulerAngles = new Vector3(0f, heading * (360f / 255f), 0f);
         UWCharacter.Instance.playerCam.transform.localRotation = Quaternion.identity;
         GameWorldController.instance.startLevel = (short)(DataLoader.getValAtAddress(buffer, 0x5d, 16) - 1);
