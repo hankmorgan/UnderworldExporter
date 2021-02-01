@@ -623,12 +623,27 @@ public class ObjectLoader : DataLoader
         if (AvailableSlot >= 2)
         {
             NoOfFreeMobile--;
+            //Debug.Log("Allocating Static Slot " + AvailableSlot);
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Gets the item index at the specified slot
+    /// </summary>
+    /// <returns></returns>
+    public int GetMobileAtSlot(int slot)
+    {
+        ////   7300    01fc   free list for mobile objects (objects 0002-00ff, 254 x 2 bytes)
+        int offset = slot * 2;
+        int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x7300 + offset, 16);
+       
+        //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+        return val;
     }
 
 
@@ -643,6 +658,7 @@ public class ObjectLoader : DataLoader
         if (AvailableSlot >= 2)
         {
             NoOfFreeStatic--;
+            //Debug.Log("Allocating Static Slot " + AvailableSlot);
             return true;
         }
         else
@@ -650,8 +666,7 @@ public class ObjectLoader : DataLoader
             return false;
         }
     }
-
-
+    
     /// <summary>
     /// Releases a free static object from the list.
     /// Shift all used objects up by one
@@ -688,15 +703,57 @@ public class ObjectLoader : DataLoader
         }
     }
 
+
+
+
+    /// <summary>
+    /// Releases a free mobile object from the list.
+    /// Shift all used objects up by one
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public void ReleaseFreeMobileObject(int index)
+    {
+        int Slot = -1;
+        //Find the slot it is currently in.
+        for (int i = 0; i < 254; i++)
+        {
+            if (index == GetMobileAtSlot(i))
+            {
+                Slot = i;
+                break;
+            }
+        }
+
+        if (Slot > 0)
+        {//Found
+
+            //Shift all values between start of used to object up by one in the list.
+            for (int i = Slot; i >= NoOfFreeMobile; i--)
+            {
+                int ValueToShift = GetMobileAtSlot(i - 1);
+                SetMobileAtSlot(i, ValueToShift);
+            }
+
+            //Insert object at top of available list
+            SetMobileAtSlot(NoOfFreeMobile, index);
+            //Increment free object counter.
+            NoOfFreeStatic++;
+        }
+    }
+
     /// <summary>
     /// Gets the item index at the specified slot
     /// </summary>
     /// <returns></returns>
-    int GetStaticAtSlot(int slot)
+    public int GetStaticAtSlot(int slot)
     {
         ////74fc    0600   free list for static objects (objects 0100 - 03ff, 768 x 2 bytes)
         int offset = slot * 2;
-        return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+        int val = (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+        //Debug.Log("Allocating Static Slot " + val);
+        //return (int)getValAtAddress(map.lev_ark_block.Data, 0x74fc + offset, 16);
+        return val;
     }
 
     /// <summary>
@@ -707,9 +764,25 @@ public class ObjectLoader : DataLoader
     void SetStaticAtSlot(int slot, int itemIndex)
     {
         int offset = slot * 2;
-        map.lev_ark_block.Data[0x7cf4 + offset] = (char)(itemIndex & 0xFF);
-        map.lev_ark_block.Data[0x7cf4 + offset+1] = (char)((itemIndex >> 8) & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset] = (char)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x74fc + offset+1] = (char)((itemIndex >> 8) & 0xFF);
     }
+
+
+    /// <summary>
+    /// Sets the item index to store at the specified slot
+    /// </summary>
+    /// <param name="slot"></param>
+    /// <param name="itemIndex"></param>
+    void SetMobileAtSlot(int slot, int itemIndex)
+    {
+        int offset = slot * 2;
+        map.lev_ark_block.Data[0x7300 + offset] = (char)(itemIndex & 0xFF);
+        map.lev_ark_block.Data[0x7300 + offset + 1] = (char)((itemIndex >> 8) & 0xFF);
+    }
+
+
+
 
 
     /// <summary>
@@ -2346,7 +2419,7 @@ public class ObjectLoader : DataLoader
 
 
     /// <summary>
-    /// Finds and returns the next available free slot.
+    /// Finds and returns the next available free slot for a new object and returns the objectloaderinfo for the found object with initial properties.
     /// </summary>
     /// <returns>The object.</returns>
     public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link, int startIndex)
@@ -2363,9 +2436,9 @@ public class ObjectLoader : DataLoader
             else
             {//mobile
                 SlotAvailable = CurrentObjectList().GetFreeMobileObject(out index);
-                //index = CurrentObjectList().GetMobileAtSlot(index);
+                index = CurrentObjectList().GetMobileAtSlot(index);
             }
-            Debug.Log("Allocating Slot " + index);
+            Debug.Log("Allocating Slot " + index + " for newObject()");
             if (SlotAvailable)
             {
                 CurrentObjectList().objInfo[index].guid = System.Guid.NewGuid();

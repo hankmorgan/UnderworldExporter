@@ -1115,6 +1115,19 @@ public class ObjectInteraction : UWEBase{
             }
             UWCharacter.Instance.playerInventory.Refresh();
             objectloaderinfo.InUseFlag = 0;//Free up the slot
+            if (objectloaderinfo.parentList == CurrentObjectList())
+            {
+                if(objectloaderinfo.IsStatic)
+                {
+                    Debug.Log("Releasing Static Object");
+                    CurrentObjectList().ReleaseFreeStaticObject(objectloaderinfo.index);
+                }
+                else
+                {
+                    Debug.Log("Releasing Mobile Object.");
+                    CurrentObjectList().ReleaseFreeMobileObject(objectloaderinfo.index);
+                }
+            }
             Destroy(this.gameObject);
         }
         else

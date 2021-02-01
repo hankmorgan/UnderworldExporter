@@ -52,7 +52,7 @@ public class SaveGame : Loader
     /// <summary>
     /// Array for storing inventory data.
     /// </summary>
-    public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
+   // public static char[] InventoryData = new char[768 * 8];  //Not sure if this is valid but is the same as the world object static list length
 
     
     /// <summary>
@@ -2573,17 +2573,17 @@ public class SaveGame : Loader
         GameWorldController.instance.inventoryLoader.objInfo = new ObjectLoaderInfo[NoOfItems+2];   //+ 2];
         int x = 1;
 
-        InventoryData = new char[768 * 8];
-        if (buffer.GetUpperBound(0) >= StartOffset)
-        {//Copy the inventory data buffer into memory. Inventory object data will be manipulated here.
-            int i = StartOffset;            
-            while (i < buffer.GetUpperBound(0))
-            {
-                InventoryData[i - StartOffset] = buffer[i];
-                i++;
-            }
-        }
-
+        //InventoryData = new char[768 * 8];
+        //if (buffer.GetUpperBound(0) >= StartOffset)
+        //{//Copy the inventory data buffer into memory. Inventory object data will be manipulated here.
+        //    int i = StartOffset;            
+        //    while (i < buffer.GetUpperBound(0))
+        //    {
+        //        InventoryData[i - StartOffset] = buffer[i];
+        //        i++;
+        //    }
+        //}
+        int Add_ptr = StartOffset;
         ///Initialise as many inventory objects as needed
         if (buffer.GetUpperBound(0) >= StartOffset)
         {
@@ -2594,6 +2594,13 @@ public class SaveGame : Loader
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].InUseFlag = 1;
+
+                GameWorldController.instance.inventoryLoader.objInfo[x].InventoryData = new char[8];
+                for (int i = 0; i<8;i++)
+                {//Copy data into the local objectloader buffer for the inventory object.
+                    GameWorldController.instance.inventoryLoader.objInfo[x].InventoryData[i] = buffer[Add_ptr + i];
+                }
+                Add_ptr += 8;
             }
 
             //Create the inventory objects

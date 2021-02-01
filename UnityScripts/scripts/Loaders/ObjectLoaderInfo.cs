@@ -13,6 +13,9 @@ public class ObjectLoaderInfo : UWClass
     /// </summary>
     public int index;
 
+    //Inventory Data. inventory data is not stored in a block of memory until write back so temp data is used here.
+    public char[] InventoryData;
+
     public bool IsInventory
     {//= false;
         get { return parentList == GameWorldController.instance.inventoryLoader; }
@@ -29,8 +32,13 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsInventory)
             {
+                if (InventoryData==null)
+                {
+                    InventoryData = new char[8]; //8 bytes of static data.
+                }
                 //return a ref to the players inventory buffer
-                return SaveGame.InventoryData;
+                return InventoryData;
+                //SaveGame.InventoryData;
             }
             else
             {
@@ -1075,7 +1083,8 @@ public class ObjectLoaderInfo : UWClass
         {
             if (IsInventory)
             {
-                return (index-1) * 8;
+                return 0;//Always
+                //return (index-1) * 8;
             }
             else
             {

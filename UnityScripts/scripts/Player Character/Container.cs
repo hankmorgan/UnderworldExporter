@@ -426,11 +426,11 @@ public class Container : UWEBase
                     item.transform.parent = Parent;
                     if (Parent == GameWorldController.instance.DynamicObjectMarker())
                     {
-                        GameWorldController.MoveToWorld(item);
+                        //GameWorldController.MoveToWorld(item);
                     }
                     else
                     {
-                        GameWorldController.MoveToInventory(item);
+                        //GameWorldController.MoveToInventory(item);
                     }
                     if (item.GetComponent<Container>() != null)
                     {

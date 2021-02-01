@@ -1286,17 +1286,61 @@ public class GameWorldController : UWEBase
     }
 
     /// <summary>
-    /// Moves to world and assigns it to the world object list.
+    /// Moves to world (from inventory) and assigns it to the world object list.
     /// </summary>
     /// <returns>The to world.</returns>
     /// <param name="obj">Object.</param>
-    public static ObjectInteraction MoveToWorld(ObjectInteraction obj)
+    public static ObjectInteraction MoveToWorld(ObjectInteraction obj, bool staticObject = true)
     {
         //Add item to a free slot on the item list and point the instance back to this.
         obj.UpdatePosition();
 
         obj.transform.parent = GameWorldController.instance.DynamicObjectMarker();
-        ObjectLoader.AssignObjectToList(ref obj);
+        //Find an index for the object.
+        int NewIndex = -1;
+        if (staticObject)
+        {
+            if (!CurrentObjectList().GetFreeStaticObject(out NewIndex))
+            {
+                Debug.Log("Unable to find a free static slot for this object");return null;
+            }
+            NewIndex = CurrentObjectList().GetStaticAtSlot(NewIndex);
+        }
+        else
+        {
+            if (!CurrentObjectList().GetFreeMobileObject(out NewIndex))
+            {
+                Debug.Log("Unable to find a free mobile slot for this object"); return null;
+            }
+            NewIndex = CurrentObjectList().GetMobileAtSlot(NewIndex);
+        }
+
+        CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex,CurrentTileMap());
+        //Copy existing static info from inventory to objectdata
+        for (int i =0; i<8;i++)
+        {
+            CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR+i] = obj.objectloaderinfo.InventoryData[i];
+        }
+        //Link the instances
+        CurrentObjectList().objInfo[NewIndex].instance = obj;
+        obj.objectloaderinfo = CurrentObjectList().objInfo[NewIndex];
+
+        //Rename the instance
+        obj.transform.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
+
+        Container cnt = obj.GetComponent<Container>();
+        if (cnt!=null)
+        {//Object has a container that has objects that need to be moved as well
+            for (int i = 0; i<cnt.items.GetUpperBound(0);i++)
+            {
+                if (cnt.items[i]!=null)
+                {
+                    MoveToWorld(cnt.items[i], true); //Move container objects as static objects into the world. (The parent might be mobile)
+                }              
+            }
+        }
+
+        //ObjectLoader.AssignObjectToList(ref obj);
 
         obj.GetComponent<object_base>().MoveToWorldEvent();
         if (ConversationVM.InConversation)
@@ -1319,17 +1363,55 @@ public class GameWorldController : UWEBase
 
 
     /// <summary>
-    /// Moves an object to inventory and removes it from the world map instance
+    /// Moves an object to inventory and removes it from the world map
     /// </summary>
     /// <param name="obj">Object.</param>
     public static void MoveToInventory(ObjectInteraction obj)
     {//Break the instance back to the object list
+        obj.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+        //Copy loader data to obj.
+        char[] NewinventoryData = new char[8];
+        for (int i=0; i<8;i++)
+        {
+            NewinventoryData[i] = obj.objectloaderinfo.DataBuffer[obj.objectloaderinfo.PTR + i];
+        }
+        ObjectLoaderInfo newObj = new ObjectLoaderInfo(0);
+        newObj.parentList = GameWorldController.instance.inventoryLoader;
+        newObj.InventoryData = NewinventoryData;
+
         obj.objectloaderinfo.InUseFlag = 0;//This frees up the slot to be replaced with another item.	
         obj.objectloaderinfo.instance = null;
         if (_RES == GAME_UW2)//Does this need to be done for uw1 as well.
         {
             ObjectLoaderInfo.CleanUp(obj.objectloaderinfo);
         }
+        
+        if(obj.objectloaderinfo.IsStatic)
+        {
+            CurrentObjectList().ReleaseFreeStaticObject(obj.objectloaderinfo.index);
+        }
+        else
+        {
+            CurrentObjectList().ReleaseFreeMobileObject(obj.objectloaderinfo.index);
+        }
+      
+
+        //Link instances
+        newObj.instance = obj;
+        obj.objectloaderinfo = newObj;
+
+        Container cnt = obj.GetComponent<Container>();
+        if (cnt != null)
+        {//Object has a container that has objects that need to be moved as well
+            for (int i = 0; i < cnt.items.GetUpperBound(0); i++)
+            {
+                if (cnt.items[i] != null)
+                {
+                    MoveToInventory(cnt.items[i]); //Move container objects as static objects into the world. (The parent might be mobile)
+                }
+            }
+        }
+
         obj.GetComponent<object_base>().MoveToInventoryEvent();
         if (ConversationVM.InConversation)
         {
