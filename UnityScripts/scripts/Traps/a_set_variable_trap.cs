@@ -67,7 +67,7 @@ public class a_set_variable_trap : a_variable_trap
                     }
                     else
                     {
-                        Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().objectloaderinfo.index);
+                        Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().BaseObjectData.index);
                     }                    
                     break;
                 default:
@@ -128,7 +128,7 @@ public class a_set_variable_trap : a_variable_trap
                     break;
             }
 
-            Debug.Log(debugname + ": Operation + " + op + " Variable " + index + " was " + OrigValue + " now =" + vars[index] + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().objectloaderinfo.index);
+            Debug.Log(debugname + ": Operation + " + op + " Variable " + index + " was " + OrigValue + " now =" + vars[index] + " using varvalue" + trap.VariableValue() + " trap " + trap.objInt().BaseObjectData.index);
         }
         else
         {//Bitwise operations on bitfield

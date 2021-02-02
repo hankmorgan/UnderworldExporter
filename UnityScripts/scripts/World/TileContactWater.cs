@@ -29,7 +29,7 @@ public class TileContactWater : TileContact {
                     splash.GetComponent<ObjectInteraction>().aud.Play();
                 }
             }
-            DestroyObject(obj);
+            ObjectInteraction.DestroyObjectFromUW(obj);
         }
     }
 

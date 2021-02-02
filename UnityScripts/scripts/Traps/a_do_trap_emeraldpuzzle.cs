@@ -22,7 +22,7 @@ public class a_do_trap_emeraldpuzzle : a_hack_trap {
 
 	private void CreateRuneStone(int ItemID)
 	{
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(ItemID,0,0,1,256);
+		ObjectLoaderInfo newobjt= ObjectLoader.newWorldObject(ItemID,0,0,1,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject,new Vector3(64.5f,4.0f,24.5f)).gameObject;
 		UnFreezeMovement(myObj);
 	}

@@ -488,7 +488,7 @@ public class InventorySlot : GuiBase
                 //split the obj. 
                 ObjectInteraction objI = QuantityObj.GetComponent<ObjectInteraction>();
                 objI.link = objI.link - quant;
-                ObjectLoaderInfo newObj = ObjectLoader.newObject(objI.item_id, objI.quality, objI.owner, quant, -1);
+                ObjectLoaderInfo newObj = ObjectLoader.newWorldObject(objI.item_id, objI.quality, objI.owner, quant, -1);
                 newObj.is_quant = 1;
                 ObjectInteraction NewObjI = ObjectInteraction.CreateNewObject(CurrentTileMap(), newObj, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker, GameWorldController.instance.InventoryMarker.transform.position);
                 GameWorldController.MoveToInventory(NewObjI);

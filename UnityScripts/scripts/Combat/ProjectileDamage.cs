@@ -124,6 +124,7 @@ public class ProjectileDamage : UWEBase {
 	public IEnumerator EndProjectile()
 	{
 		yield return new WaitForSeconds(1.0f);
-		Destroy(this.gameObject);
+        ObjectInteraction.DestroyObjectFromUW(this.GetComponent<ObjectInteraction>());
+		//Destroy(this.gameObject);
 	}
 }

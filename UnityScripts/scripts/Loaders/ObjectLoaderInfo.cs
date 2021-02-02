@@ -1105,18 +1105,26 @@ public class ObjectLoaderInfo : UWClass
     /// </summary>
     /// <param name="index"></param>
     /// <param name="map"></param>
-    public ObjectLoaderInfo(int _index, TileMap _map)
+    public ObjectLoaderInfo(int _index, TileMap _map, bool isWorldObject)
     {
         index = _index;
         map = _map;
         guid=System.Guid.NewGuid();
+        if (isWorldObject)
+        {
+            parentList = GameWorldController.CurrentObjectList();
+        }
+        else
+        {
+            parentList = GameWorldController.instance.inventoryLoader;
+        }
     }
 
-    public ObjectLoaderInfo(int _index)
-    {//for shock to compile but possible crash
-        index = _index;
-        guid = System.Guid.NewGuid();
-    }
+    //public ObjectLoaderInfo(int _index)
+    //{//for shock to compile but possible crash
+    //    index = _index;
+    //    guid = System.Guid.NewGuid();
+    //}
 
     /// <summary>
     /// Gets the type of the item from object masters. UWE object type codes.

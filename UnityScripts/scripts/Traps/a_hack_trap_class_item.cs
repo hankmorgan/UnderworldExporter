@@ -13,7 +13,8 @@ public class a_hack_trap_class_item : a_hack_trap
         {
             return;
         }
-        Destroy(obj.GetComponent<object_base>());
+        Destroy(obj.GetComponent<object_base>());//Remove object base from the existing item so it can be changed further on.
+
         switch (UWCharacter.Instance.CharClass)
         {
             //Gloves

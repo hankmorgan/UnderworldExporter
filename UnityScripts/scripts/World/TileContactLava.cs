@@ -15,9 +15,9 @@ public class TileContactLava : TileContact {
 		{
 			Impact.SpawnHitImpact(456, position, 9, 12);
 			if (IsObjectDestroyable(obj))
-			{			
-				DestroyObject(obj);
-			}	
+			{
+                ObjectInteraction.DestroyObjectFromUW(obj);
+            }	
 		}
 	}
 }

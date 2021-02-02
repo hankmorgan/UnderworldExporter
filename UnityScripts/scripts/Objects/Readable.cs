@@ -133,7 +133,7 @@ public class Readable : object_base
 
                             ObjectInteraction bowlObjectInt = bowl.GetComponent<ObjectInteraction>();
                             bowlObjectInt.ChangeType(283);
-                            Destroy(bowlContainer);
+                            Destroy(bowlContainer);//Remove the container from the object.
                             bowl.gameObject.AddComponent<Food>();
                             bowlObjectInt.isquant = 1;
                             bowlObjectInt.link = 1;

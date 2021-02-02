@@ -36,7 +36,7 @@ public class TileContact : UWEBase
                     260,261,262,263,265,265,266,267,
                     268,269,270,285,191,175,287,290,143,315 };
 
-        if (ObjectLoader.isStatic(obj.objectloaderinfo))
+        if (ObjectLoader.isStatic(obj.BaseObjectData))
         {
             return false;
         }
@@ -78,12 +78,13 @@ public class TileContact : UWEBase
 
 
     /// <summary>
-    /// Destroies the object that has come into contact with this tile.
+    /// Destroys the object that has come into contact with this tile.
     /// </summary>
     /// <param name="obj">Object.</param>
     protected virtual void DestroyObject(ObjectInteraction obj)
     {
-        obj.objectloaderinfo.InUseFlag = 0;//Free up the slot
-        Destroy(obj.gameObject);
+        // obj.BaseObjectData.InUseFlag = 0;//Free up the slot
+        //Destroy(obj.gameObject);
+        ObjectInteraction.DestroyObjectFromUW(obj);
     }
 }

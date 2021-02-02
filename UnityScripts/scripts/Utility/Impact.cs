@@ -60,7 +60,8 @@ public class Impact : object_base {
 			if (StartFrame>=EndFrame)
 			{
 				Active=false;
-				Destroy (this.gameObject);
+                //Destroy (this.gameObject);
+                ObjectInteraction.DestroyObjectFromUW(this.objInt());
 			}
 			else
 			{//Loads the next animation frame
@@ -73,7 +74,7 @@ public class Impact : object_base {
 	{
         try
         {
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(Item_ID, 40, StartFrame, 1, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(Item_ID, 40, StartFrame, 1, 256);
             if (newobjt != null)
             {
                 ObjectInteraction objInt = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ImpactPosition);

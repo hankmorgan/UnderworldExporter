@@ -206,7 +206,7 @@ public class Food : object_base {
 
         if (LeftOverToCreate != -1)
         {
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(LeftOverToCreate, 40, 0, 0, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(LeftOverToCreate, 40, 0, 0, 256);
             newobjt.InUseFlag = 1;
             ObjectInteraction created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
             GameWorldController.MoveToInventory(created.gameObject);
@@ -267,7 +267,7 @@ public class Food : object_base {
 	{
 		int QualityClass= GameWorldController.instance.commonObject.properties[item_id].QualityClass;
 		int QualityType= GameWorldController.instance.commonObject.properties[item_id].QualityType;
-	    Debug.Log ("Food : quality class=" + QualityClass + " quality type=" + QualityType);
+	    Debug.Log (StringController.instance.GetSimpleObjectNameUW(this.item_id) + "  : quality class=" + QualityClass + " quality type=" + QualityType);
 		int BaseStringNo=StringController.str__tasted_putrid_;
 		if (quality == 0)
 			{
@@ -339,9 +339,9 @@ public class Food : object_base {
 		{
 			ChangeType(213);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			objInt().objectloaderinfo.InUseFlag=0;
-			Destroy(this);//Kill me now.
-		}
+			objInt().BaseObjectData.InUseFlag=0;
+            ObjectInteraction.DestroyObjectFromUW(this.objInt());
+        }
 		return true;
 	}
 

@@ -9,7 +9,7 @@ public class SilverSeed : object_base {
 		{
 		if ((objInt().PickedUp==true))
 			{
-                ObjectLoaderInfo newtree = ObjectLoader.newObject(458, 40, 16, 1, 256);
+                ObjectLoaderInfo newtree = ObjectLoader.newWorldObject(458, 40, 16, 1, 256);
                 newtree.is_quant = 1;
                 ObjectInteraction.CreateNewObject
                     (

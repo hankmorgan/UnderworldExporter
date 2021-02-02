@@ -2589,7 +2589,7 @@ public class SaveGame : Loader
         {
             for (x = 1; x <= GameWorldController.instance.inventoryLoader.objInfo.GetUpperBound(0);x++)
             {
-                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x);//Inventory indices start at 1
+                GameWorldController.instance.inventoryLoader.objInfo[x] = new ObjectLoaderInfo(x, GameWorldController.CurrentTileMap(),false);//Inventory indices start at 1
                 GameWorldController.instance.inventoryLoader.objInfo[x].parentList = GameWorldController.instance.inventoryLoader;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileX = TileMap.ObjectStorageTile;
                 GameWorldController.instance.inventoryLoader.objInfo[x].ObjectTileY = TileMap.ObjectStorageTile;

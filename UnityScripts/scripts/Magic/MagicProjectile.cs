@@ -152,12 +152,16 @@ public class MagicProjectile : MobileObject {
 	protected virtual void DestroyProjectile ()
 	{
 		ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction> ();
-		if (objIntThis != null) {
-			objIntThis.objectloaderinfo.InUseFlag = 0;
-			//Free up object slot
-		}
-        Object.Destroy(this.gameObject);
-		//DestroyObject (this.gameObject);
+        //if (objIntThis != null) {
+        //	objIntThis.BaseObjectData.InUseFlag = 0;
+        //	//Free up object slot
+        //}
+        //      Object.Destroy(this.gameObject);
+        //DestroyObject (this.gameObject);
+        if (objIntThis !=null)
+        {
+            ObjectInteraction.DestroyObjectFromUW(objIntThis);
+        }        
 	}
 
 

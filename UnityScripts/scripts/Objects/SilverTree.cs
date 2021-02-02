@@ -39,7 +39,7 @@ public class SilverTree : object_base {
 
     private bool PickUpSeed()
     {
-        ObjectLoaderInfo newseed = ObjectLoader.newObject(290, 40, 16, 1, 256);
+        ObjectLoaderInfo newseed = ObjectLoader.newWorldObject(290, 40, 16, 1, 256);
         newseed.is_quant = 1;
         ObjectInteraction newseedobj = ObjectInteraction.CreateNewObject
             (

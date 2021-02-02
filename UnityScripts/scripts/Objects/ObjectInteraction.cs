@@ -206,7 +206,7 @@ public class ObjectInteraction : UWEBase{
     {
         get
         {
-            return objectloaderinfo.index;
+            return BaseObjectData.index;
         }
     }
 
@@ -215,79 +215,79 @@ public class ObjectInteraction : UWEBase{
     //[Header("UW Static Properties")]
     public int item_id //0-8
     {
-        get { return objectloaderinfo.item_id;   }
-        set { objectloaderinfo.item_id = value;  }
+        get { return BaseObjectData.item_id;   }
+        set { BaseObjectData.item_id = value;  }
     }
 
 
     public short flags//; //9-11
     {
-        get { return objectloaderinfo.flags; }
-        set { objectloaderinfo.flags = value; }
+        get { return BaseObjectData.flags; }
+        set { BaseObjectData.flags = value; }
     }
 
     public short enchantment  //12
     {
-        get { return objectloaderinfo.enchantment;   }
-        set { objectloaderinfo.enchantment = value;  }
+        get { return BaseObjectData.enchantment;   }
+        set { BaseObjectData.enchantment = value;  }
     }
 
     public short doordir   //13index
     {
-        get { return objectloaderinfo.doordir; }
-        set { objectloaderinfo.doordir = value; }
+        get { return BaseObjectData.doordir; }
+        set { BaseObjectData.doordir = value; }
     }
 
     public short invis     //14
     {
-        get { return objectloaderinfo.invis; }
-        set { objectloaderinfo.invis = value; }
+        get { return BaseObjectData.invis; }
+        set { BaseObjectData.invis = value; }
     }
 
 
     public short isquant   //15
     {
-        get { return objectloaderinfo.is_quant; }
-        set { objectloaderinfo.is_quant = value; }
+        get { return BaseObjectData.is_quant; }
+        set { BaseObjectData.is_quant = value; }
     }
 
     public short zpos //;    //  0- 6   7   "zpos"      Object Z position (0-127)
     {
-        get { return objectloaderinfo.zpos; }
-        set { objectloaderinfo.zpos = value; }
+        get { return BaseObjectData.zpos; }
+        set { BaseObjectData.zpos = value; }
     }
 
     public short heading//;   //        7- 9   3   "heading"   Heading (*45 deg)
     {
-        get { return objectloaderinfo.heading; }
-        set { objectloaderinfo.heading = value; }
+        get { return BaseObjectData.heading; }
+        set { BaseObjectData.heading = value; }
     }
 
     public short xpos//; //   10-12   3   "ypos"      Object Y position (0-7)
     {
-        get { return objectloaderinfo.xpos; }
-        set { objectloaderinfo.xpos = value; }
+        get { return BaseObjectData.xpos; }
+        set { BaseObjectData.xpos = value; }
     }
 
 
     public short ypos//; //  13-15   3   "xpos"      Object X position (0-7)
     {
-        get { return objectloaderinfo.ypos; }
-        set { objectloaderinfo.ypos = value; }
+        get { return BaseObjectData.ypos; }
+        set { BaseObjectData.ypos = value; }
     }
 
 
     //0004 quality / chain
     public short quality//;   //;     0- 5   6   "quality"   Quality
     {
-        get { return objectloaderinfo.quality; }
-        set { objectloaderinfo.quality = value; }
+        get { return BaseObjectData.quality; }
+        set { BaseObjectData.quality = value; }
     }
 
     public int next//; //    6-15   10  "next"      Index of next object in chain
     {
-        get { return objectloaderinfo.next; }
-        set { objectloaderinfo.next = value; }
+        get { return BaseObjectData.next; }
+        set { BaseObjectData.next = value; }
     }
 
     //0006 link / special
@@ -295,13 +295,13 @@ public class ObjectInteraction : UWEBase{
     public short owner//; //Also special
                       //     6-15   10  (*)         Quantity / special link / special property
     {
-        get { return objectloaderinfo.owner; }
-        set { objectloaderinfo.owner = value; }
+        get { return BaseObjectData.owner; }
+        set { BaseObjectData.owner = value; }
     }
     public int link//;    //also quantity
     {
-        get { return objectloaderinfo.link; }
-        set { objectloaderinfo.link = value; }
+        get { return BaseObjectData.link; }
+        set { BaseObjectData.link = value; }
     }
 
 
@@ -310,72 +310,72 @@ public class ObjectInteraction : UWEBase{
    // [Header("UW Mobile Properties")]
     public short npc_whoami
     {
-        get { return objectloaderinfo.npc_whoami; }
-        set { objectloaderinfo.npc_whoami = value; }
+        get { return BaseObjectData.npc_whoami; }
+        set { BaseObjectData.npc_whoami = value; }
     }
 
     public short npc_voidanim
     {
-        get { return objectloaderinfo.npc_voidanim; }
-        set { objectloaderinfo.npc_voidanim = value; }
+        get { return BaseObjectData.npc_voidanim; }
+        set { BaseObjectData.npc_voidanim = value; }
     }
     public short npc_xhome        //  x coord of home tile
     {
-        get { return objectloaderinfo.npc_xhome; }
-        set { objectloaderinfo.npc_xhome = value; }
+        get { return BaseObjectData.npc_xhome; }
+        set { BaseObjectData.npc_xhome = value; }
     }
     public short npc_yhome        //  y coord of home tile
     {
-        get { return objectloaderinfo.npc_yhome; }
-        set { objectloaderinfo.npc_yhome = value; }
+        get { return BaseObjectData.npc_yhome; }
+        set { BaseObjectData.npc_yhome = value; }
     }
     public short npc_hunger
     {
-        get { return objectloaderinfo.npc_hunger; }
-        set { objectloaderinfo.npc_hunger = value; }
+        get { return BaseObjectData.npc_hunger; }
+        set { BaseObjectData.npc_hunger = value; }
     }
     public short npc_health;
     public short npc_hp
     {
-        get { return objectloaderinfo.npc_hp; }
-        set { objectloaderinfo.npc_hp = value; }
+        get { return BaseObjectData.npc_hp; }
+        set { BaseObjectData.npc_hp = value; }
     }
     public short npc_arms;          // (not used in uw1)
     public short npc_power;
     public short npc_goal          // goal that NPC has; 5:kill player 6:? 9:?
     {
-        get { return objectloaderinfo.npc_goal; }
-        set { objectloaderinfo.npc_goal= value; }
+        get { return BaseObjectData.npc_goal; }
+        set { BaseObjectData.npc_goal= value; }
     }
 
     public short npc_attitude       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
     {
-        get { return objectloaderinfo.npc_attitude; }
-        set { objectloaderinfo.npc_attitude = value; }
+        get { return BaseObjectData.npc_attitude; }
+        set { BaseObjectData.npc_attitude = value; }
     }
 
     public short npc_gtarg         //goal target; 1:player
     {
-        get { return objectloaderinfo.npc_gtarg; }
-        set { objectloaderinfo.npc_gtarg = value; }
+        get { return BaseObjectData.npc_gtarg; }
+        set { BaseObjectData.npc_gtarg = value; }
     }
 
     public short npc_heading
     {
-        get { return objectloaderinfo.npc_heading; }
-        set { objectloaderinfo.npc_heading = value; }
+        get { return BaseObjectData.npc_heading; }
+        set { BaseObjectData.npc_heading = value; }
     }
 
     public short npc_talkedto      // is 1 when player already talked to npc
     {
-        get { return objectloaderinfo.npc_talkedto; }
-        set { objectloaderinfo.npc_talkedto = value; }
+        get { return BaseObjectData.npc_talkedto; }
+        set { BaseObjectData.npc_talkedto = value; }
     }
 
     public short npc_level
     {
-        get { return objectloaderinfo.npc_level; }
-        set { objectloaderinfo.npc_level = value; }
+        get { return BaseObjectData.npc_level; }
+        set { BaseObjectData.npc_level = value; }
     }
     public short npc_name;       //    (not used in uw1)
     public short npc_height;
@@ -383,72 +383,72 @@ public class ObjectInteraction : UWEBase{
     //Unknown/research
     public short MobileUnk_0xA
     {
-        get { return objectloaderinfo.MobileUnk_0xA; }
-        set { objectloaderinfo.MobileUnk_0xA = value; }
+        get { return BaseObjectData.MobileUnk_0xA; }
+        set { BaseObjectData.MobileUnk_0xA = value; }
     }
 
     public short MobileUnk_0xB_12_F
     {
-        get { return objectloaderinfo.MobileUnk_0xB_12_F; }
-        set { objectloaderinfo.MobileUnk_0xB_12_F = value; }
+        get { return BaseObjectData.MobileUnk_0xB_12_F; }
+        set { BaseObjectData.MobileUnk_0xB_12_F = value; }
     }
 
     public short MobileUnk_0xD_4_FF
     {
-        get { return objectloaderinfo.MobileUnk_0xD_4_FF; }
-        set { objectloaderinfo.MobileUnk_0xD_4_FF = value; }
+        get { return BaseObjectData.MobileUnk_0xD_4_FF; }
+        set { BaseObjectData.MobileUnk_0xD_4_FF = value; }
     }
     public short MobileUnk_0xD_12_1
     {
-        get { return objectloaderinfo.MobileUnk_0xD_12_1; }
-        set { objectloaderinfo.MobileUnk_0xD_12_1 = value; }
+        get { return BaseObjectData.MobileUnk_0xD_12_1; }
+        set { BaseObjectData.MobileUnk_0xD_12_1 = value; }
     }
     public short MobileUnk_0xF_0_3F
     {
-        get { return objectloaderinfo.MobileUnk_0xF_0_3F; }
-        set { objectloaderinfo.MobileUnk_0xF_0_3F = value; }
+        get { return BaseObjectData.MobileUnk_0xF_0_3F; }
+        set { BaseObjectData.MobileUnk_0xF_0_3F = value; }
     }
     public short MobileUnk_0xF_C_F
     {
-        get { return objectloaderinfo.MobileUnk_0xF_C_F; }
-        set { objectloaderinfo.MobileUnk_0xF_C_F = value; }
+        get { return BaseObjectData.MobileUnk_0xF_C_F; }
+        set { BaseObjectData.MobileUnk_0xF_C_F = value; }
     }
     public short MobileUnk_0x11
     {
-        get { return objectloaderinfo.MobileUnk_0x11; }
-        set { objectloaderinfo.MobileUnk_0x11 = value; }
+        get { return BaseObjectData.MobileUnk_0x11; }
+        set { BaseObjectData.MobileUnk_0x11 = value; }
     }
     public short ProjectileSourceID
     {
-        get { return objectloaderinfo.ProjectileSourceID; }
-        set { objectloaderinfo.ProjectileSourceID = value; }
+        get { return BaseObjectData.ProjectileSourceID; }
+        set { BaseObjectData.ProjectileSourceID = value; }
     }
     public short MobileUnk_0x13
     {
-        get { return objectloaderinfo.MobileUnk_0x13; }
-        set { objectloaderinfo.MobileUnk_0x13 = value; }
+        get { return BaseObjectData.MobileUnk_0x13; }
+        set { BaseObjectData.MobileUnk_0x13 = value; }
     }
     public short MobileUnk_0x15_4_1F
     {
-        get { return objectloaderinfo.MobileUnk_0x15_4_1F; }
-        set { objectloaderinfo.MobileUnk_0x15_4_1F = value; }
+        get { return BaseObjectData.MobileUnk_0x15_4_1F; }
+        set { BaseObjectData.MobileUnk_0x15_4_1F = value; }
     }
 
     public short MobileUnk_0x16_0_F
     {
-        get { return objectloaderinfo.MobileUnk_0x16_0_F; }
-        set { objectloaderinfo.MobileUnk_0x16_0_F = value; }
+        get { return BaseObjectData.MobileUnk_0x16_0_F; }
+        set { BaseObjectData.MobileUnk_0x16_0_F = value; }
     }
     public short MobileUnk_0x18_5_7
     {
-        get { return objectloaderinfo.MobileUnk_0x18_5_7; }
-        set { objectloaderinfo.MobileUnk_0x18_5_7 = value; }
+        get { return BaseObjectData.MobileUnk_0x18_5_7; }
+        set { BaseObjectData.MobileUnk_0x18_5_7 = value; }
     }
 
     public short MobileUnk_0x19_6_3
     {
-        get { return objectloaderinfo.MobileUnk_0x19_6_3; }
-        set { objectloaderinfo.MobileUnk_0x19_6_3 = value; }
+        get { return BaseObjectData.MobileUnk_0x19_6_3; }
+        set { BaseObjectData.MobileUnk_0x19_6_3 = value; }
     }
 
     //Projectiles are stored in the mobile object area.
@@ -456,8 +456,8 @@ public class ObjectInteraction : UWEBase{
 
     public short ProjectileHeading
     {
-        get { return objectloaderinfo.ProjectileHeading; }
-        set { objectloaderinfo.ProjectileHeading = value; }
+        get { return BaseObjectData.ProjectileHeading; }
+        set { BaseObjectData.ProjectileHeading = value; }
     }
     //public short ProjectileHeadingMinor
     //{
@@ -467,13 +467,13 @@ public class ObjectInteraction : UWEBase{
     
     public short Projectile_Speed
     {
-        get { return objectloaderinfo.Projectile_Speed; }
-        set { objectloaderinfo.Projectile_Speed = value; }
+        get { return BaseObjectData.Projectile_Speed; }
+        set { BaseObjectData.Projectile_Speed = value; }
     }
     public short Projectile_Pitch
     {
-        get { return objectloaderinfo.Projectile_Pitch; }
-        set { objectloaderinfo.Projectile_Pitch = value; }
+        get { return BaseObjectData.Projectile_Pitch; }
+        set { BaseObjectData.Projectile_Pitch = value; }
     }
     // public short Projectile_Sign;
     //[Header("Projectile")]
@@ -540,7 +540,7 @@ public class ObjectInteraction : UWEBase{
         Identified = 2
     };
 
-    public ObjectLoaderInfo objectloaderinfo;
+    public ObjectLoaderInfo BaseObjectData;
 
     void Start()
     {
@@ -550,6 +550,11 @@ public class ObjectInteraction : UWEBase{
         {
             ObjectSprite.gameObject.SetActive(invis == 0);
         }
+        if ((ObjectTileX > 64) || (ObjectTileY > 64))
+        {
+            FreezeMovement(this.gameObject);
+        }
+
     }
 
     void Update()
@@ -557,6 +562,11 @@ public class ObjectInteraction : UWEBase{
         if ((animationStarted == false) && (UseSprite() == false) && (invis == 0))
         {
             UpdateAnimation();
+        }
+
+        if (!BaseObjectData.IsInventory)
+        {
+            UpdatePosition();
         }
     }
      
@@ -1080,7 +1090,7 @@ public class ObjectInteraction : UWEBase{
                     InputObject2.consumeObject();
                 }
 
-                ObjectLoaderInfo newobjt = ObjectLoader.newObject(lstOutput[i], 40, 0, 0, 256);
+                ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(lstOutput[i], 40, 0, 0, 256);
                 ObjectInteraction Created = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.InventoryMarker.gameObject, GameWorldController.instance.InventoryMarker.transform.position);
                 GameWorldController.MoveToInventory(Created);
                 UWCharacter.InteractionMode = UWCharacter.InteractionModePickup;
@@ -1114,21 +1124,10 @@ public class ObjectInteraction : UWEBase{
                 CurrentObjectInHand = null;//Make sure there is not instance of this object in the players hand	
             }
             UWCharacter.Instance.playerInventory.Refresh();
-            objectloaderinfo.InUseFlag = 0;//Free up the slot
-            if (objectloaderinfo.parentList == CurrentObjectList())
-            {
-                if(objectloaderinfo.IsStatic)
-                {
-                    Debug.Log("Releasing Static Object");
-                    CurrentObjectList().ReleaseFreeStaticObject(objectloaderinfo.index);
-                }
-                else
-                {
-                    Debug.Log("Releasing Mobile Object.");
-                    CurrentObjectList().ReleaseFreeMobileObject(objectloaderinfo.index);
-                }
-            }
-            Destroy(this.gameObject);
+            BaseObjectData.InUseFlag = 0;//Free up the slot
+
+            // Destroy(this.gameObject);
+            ObjectInteraction.DestroyObjectFromUW(this);
         }
         else
         {//just decrement the quantity value;
@@ -1279,7 +1278,7 @@ public class ObjectInteraction : UWEBase{
           )
     {
         ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
-        objInteract.objectloaderinfo = currObj;
+        objInteract.BaseObjectData = currObj;
         BoxCollider box = myObj.GetComponent<BoxCollider>();
         if (
                 (box == null)
@@ -1409,7 +1408,7 @@ public class ObjectInteraction : UWEBase{
         mergingInto.link += mergingFrom.link;
         mergingInto.isquant = 1;
         mergingInto.GetComponent<object_base>().MergeEvent();
-        mergingFrom.objectloaderinfo.InUseFlag = 0;
+        mergingFrom.BaseObjectData.InUseFlag = 0;
         Destroy(mergingFrom.gameObject);
     }
 
@@ -1843,21 +1842,21 @@ public class ObjectInteraction : UWEBase{
         return item.GetImpactGameObject();
     }
 
-
+    
     /// <summary>
     /// Updates the position of the object before writing it back to the lev.ark file
     /// </summary>
     public void UpdatePosition()
     {
-        if (objectloaderinfo == null)
+        if (BaseObjectData == null)
         {
             Debug.Log(this.name + " has no objectloaderinfo");
             return;
         }
-        if (ObjectLoader.isStatic(objectloaderinfo))
-        {
-            return;
-        }
+        //if (ObjectLoader.isStatic(objectloaderinfo))
+        //{
+        //    return;
+        //}
 
         ObjectTileX = (short)Mathf.FloorToInt(this.transform.localPosition.x / 1.2f);
         ObjectTileY = (short)Mathf.FloorToInt(this.transform.localPosition.z / 1.2f);
@@ -1908,13 +1907,93 @@ public class ObjectInteraction : UWEBase{
             heading = (short)Mathf.RoundToInt(this.transform.rotation.eulerAngles.y / 45f);
 
         }
-        objectloaderinfo.heading = heading;
-        objectloaderinfo.xpos = xpos;
-        objectloaderinfo.ypos = ypos;
-        objectloaderinfo.zpos = zpos;
-        objectloaderinfo.ObjectTileX = ObjectTileX;
-        objectloaderinfo.ObjectTileY = ObjectTileY;
+        //objectloaderinfo.heading = heading;
+        //objectloaderinfo.xpos = xpos;
+        //objectloaderinfo.ypos = ypos;
+        //objectloaderinfo.zpos = zpos;
+        if ((BaseObjectData.ObjectTileX!= ObjectTileX) | (BaseObjectData.ObjectTileY != ObjectTileY))
+        {
+            //bool ComingFromOffMap = false;
+            if(BaseObjectData.ObjectTileX>64)
+            {
+                //ComingFromOffMap = true;
+                //if moving from off map make no changes.
+            }
+            else
+            {
+                //Object has moved between map tiles. Update it's next  and remove it from it's previous tile.
+                UnlinkItemFromTileMapChain(this, BaseObjectData.ObjectTileX, BaseObjectData.ObjectTileY);
+            }
+            
+            if ((ObjectTileX<64) && (ObjectTileY<64) && (ObjectTileX>=0) && (ObjectTileY>=0))
+            {//Object has moved on to the map. Link it to the list for that destination tile.
+                LinkItemToTileMapChain(this, ObjectTileX, ObjectTileY);
+            }
+
+            //Change the underlying data.
+            BaseObjectData.ObjectTileX = ObjectTileX;
+            BaseObjectData.ObjectTileY = ObjectTileY;
+        }
+
         startPos = this.transform.position;
+    }
+
+    //removes an object from a tile map chain
+    public static void UnlinkItemFromTileMapChain(ObjectInteraction oI, int x, int y)
+    {
+        if (!TileMap.ValidTile(x,y))
+        {
+            Debug.Log(oI.name + " is attempting to unlink from an offmap tile");
+            return;
+        }
+        TileMap tm = GameWorldController.CurrentTileMap();
+        ObjectLoader objList = GameWorldController.CurrentObjectList();
+        TileInfo ti = tm.Tiles[x, y];
+
+        if (ti.indexObjectList == oI.BaseObjectData.index)
+        {
+            ti.indexObjectList = 0;
+        }
+        else
+        {
+            int safetyCounter = 0;
+            ObjectLoaderInfo currObj = objList.objInfo[ti.indexObjectList];
+            while ( (currObj.index != oI.ObjectIndex) & (currObj.next!=0) )
+            {//Loop through the chain until we find the object or we reach the end of the chain without finding it.
+                currObj = objList.objInfo[currObj.next];
+                safetyCounter++;
+            }
+            currObj.next = oI.BaseObjectData.next;//Link the item that is found with the item that is the next of the item being removed.
+        }
+        oI.next = 0;
+    }
+
+    /// <summary>
+    /// Puts an object at the end of the tile map
+    /// </summary>
+    /// <param name="oI"></param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    public static void LinkItemToTileMapChain(ObjectInteraction oI, int x, int y)
+    {
+        TileMap tm = GameWorldController.CurrentTileMap();
+        ObjectLoader objList = GameWorldController.CurrentObjectList();
+        TileInfo ti = tm.Tiles[x, y];
+
+        if (ti.indexObjectList==0)
+        {//Object is at the head of the chain.
+            ti.indexObjectList = oI.BaseObjectData.index;           
+        }
+        else
+        {
+            ObjectLoaderInfo currObj = objList.objInfo[ti.indexObjectList];
+            while (currObj.next!=0)
+            {
+                currObj = objList.objInfo[currObj.next];
+            }
+            currObj.next = oI.BaseObjectData.index;
+        }
+        oI.next = 0;
     }
 
 
@@ -2993,5 +3072,45 @@ public class ObjectInteraction : UWEBase{
     {
         return GameWorldController.instance.objectMaster.objProp[item_id].desc;
     }
+
+    /// <summary>
+    /// Handles object destruction and removal from the gameworld.
+    /// </summary>
+    /// <param name="objToDestroy"></param>
+    public static void DestroyObjectFromUW(ObjectInteraction objToDestroy)
+    {
+        if (objToDestroy==null)
+        {
+            Debug.Log("Attempt to destroy a null object in DestroyObjectFromUW");
+            return;
+        }
+
+
+        //if inventory
+        //remove from  player inventory containers.
+
+        //if inworld
+        //if on map remove from linked lists.
+
+        //destroy gameobject.
+        //Remove from game world lists.
+        if (objToDestroy.BaseObjectData.parentList == CurrentObjectList())
+        {
+            if (objToDestroy.BaseObjectData.IsStatic)
+            {
+                Debug.Log("Releasing Static Object " + objToDestroy.name );
+                CurrentObjectList().ReleaseFreeStaticObject(objToDestroy.BaseObjectData.index);
+            }
+            else
+            {
+                Debug.Log("Releasing Mobile Object " + objToDestroy.name);
+                CurrentObjectList().ReleaseFreeMobileObject(objToDestroy.BaseObjectData.index);
+            }
+        }
+        
+
+        Destroy(objToDestroy.gameObject);
+    }
+
 
 }

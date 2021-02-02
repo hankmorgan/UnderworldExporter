@@ -24,7 +24,7 @@ Opens the door that is in the targeted tile.
 					if (ObjectLoader.GetItemTypeAt(link)	== ObjectInteraction.LOCK)	
 					{
 						ObjectInteraction lockToCopy = ObjectLoader.getObjectIntAt(link);
-						ObjectLoaderInfo newobjt= ObjectLoader.newObject(lockToCopy.item_id,lockToCopy.quality,lockToCopy.owner,lockToCopy.link,256);
+						ObjectLoaderInfo newobjt= ObjectLoader.newWorldObject(lockToCopy.item_id,lockToCopy.quality,lockToCopy.owner,lockToCopy.link,256);
 						newobjt.flags=lockToCopy.flags;
 						newobjt.doordir=lockToCopy.doordir;
 						newobjt.invis=lockToCopy.invis;
@@ -44,8 +44,9 @@ Opens the door that is in the targeted tile.
 					if (linkedObj!=null)
 					{
 						DC.link= linkedObj.next;
-						linkedObj.objectloaderinfo.InUseFlag=0;
-						Destroy(linkedObj);		
+						linkedObj.BaseObjectData.InUseFlag=0;
+						//Destroy(linkedObj);
+                        ObjectInteraction.DestroyObjectFromUW(linkedObj);
 					}
 				}
 				break;

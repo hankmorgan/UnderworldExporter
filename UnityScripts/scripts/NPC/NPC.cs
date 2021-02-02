@@ -585,7 +585,7 @@ public class NPC : MobileObject
             {
                 for (int i = 0; i <= Quest.instance.ArenaOpponents.GetUpperBound(0); i++)
                 {
-                    if (Quest.instance.ArenaOpponents[i] == objInt().objectloaderinfo.index)
+                    if (Quest.instance.ArenaOpponents[i] == objInt().BaseObjectData.index)
                     {//Update the players win-loss records.
                         Quest.instance.ArenaOpponents[i] = 0;
                         Quest.instance.QuestVariables[129] = Mathf.Min(255, Quest.instance.QuestVariables[129] + 1);
@@ -597,8 +597,8 @@ public class NPC : MobileObject
         }
         if ((objInt().ObjectTileX <= 63) || (objInt().ObjectTileY <= 63))
         {//Only dump container if on map
-            objInt().objectloaderinfo.InUseFlag = 0;
-            objInt().objectloaderinfo.npc_hp = 0;
+            objInt().BaseObjectData.InUseFlag = 0;
+            objInt().BaseObjectData.npc_hp = 0;
             NPC_DEAD = true;//Tells the update to execute the NPC death animation
             PerformDeathAnim();       
             //Dump npc inventory on the floor.
@@ -645,7 +645,7 @@ public class NPC : MobileObject
                         if (GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i] != -1)
                         {
                             int itemid = GameWorldController.instance.objDat.critterStats[item_id - 64].Loot[i];
-                            ObjectLoaderInfo newobjt = ObjectLoader.newObject(itemid, Random.Range(1, 41), 0, 0, 256);
+                            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(itemid, Random.Range(1, 41), 0, 0, 256);
                             if (newobjt != null)
                             {
                                 if (itemid == 16)//Sling stone.
@@ -957,7 +957,7 @@ public class NPC : MobileObject
                     {
                         //XG gtarg = UWCharacter.Instance.LastEnemyToHitMe;
                         npc_goal = (short)npc_goals.npc_goal_attack_5;
-                        npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+                        npc_gtarg = (short)UWCharacter.Instance.LastEnemyToHitMe.GetComponent<ObjectInteraction>().BaseObjectData.index;
                         //gtargName = UWCharacter.Instance.LastEnemyToHitMe.name;
                     }
                 }
@@ -2024,7 +2024,7 @@ public class NPC : MobileObject
         {///Checks No object interferes with the launch
             float force = 100f * Vector3.Distance(TargetingPoint, NPC_Launcher.transform.position);
             int projectiletype = RangedAttackProjectile();
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(projectiletype, 0, 0, 1, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(projectiletype, 0, 0, 1, 256);
             if (newobjt!=null)
             {
                 newobjt.is_quant = 1;
@@ -2373,7 +2373,7 @@ public class NPC : MobileObject
 
         if (bloodstain != -1)
         {
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(bloodstain, 0, 0, 0, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(bloodstain, 0, 0, 0, 256);
             ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position);
             //ObjectInteraction remains = ObjectInteraction.CreateNewObject(bloodstain);						
             //remains.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
@@ -2381,8 +2381,8 @@ public class NPC : MobileObject
             //remains.transform.position=ai.Body.transform.position;
         }
 
-        Destroy(this.gameObject);
-
+        //Destroy(this.gameObject);
+        ObjectInteraction.DestroyObjectFromUW(this.objInt());
     }
 
     public static int findNpcByWhoAmI(int whoami)

@@ -79,7 +79,7 @@ public class AnimationOverlay : UWEBase {
 	// Use this for initialization
 	void Start () {
         TileMap.Overlay[] overlays = CurrentTileMap().Overlays;
-        int thislink = this.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+        int thislink = this.GetComponent<ObjectInteraction>().BaseObjectData.index;
         for (int i=0; i<=overlays.GetUpperBound(0);i++)
         {
             if (overlays[i].link == thislink)
@@ -129,6 +129,7 @@ public class AnimationOverlay : UWEBase {
 		//the count down of the sad butterfly like existance of an impact.
 		while (Active==true)
 		{
+            bool HasEnded = false;
 			yield return new WaitForSeconds(0.2f);
 			if (Active==false)
 			{
@@ -141,6 +142,7 @@ public class AnimationOverlay : UWEBase {
                 if (Duration <= 0)
                 {
                     EndAnimation();
+                    HasEnded = true;                    
                 }
             }  
 			if (FrameNo>=StartFrame+NoOfFrames)
@@ -152,7 +154,10 @@ public class AnimationOverlay : UWEBase {
 				}
 				else
                 {
-                    EndAnimation();
+                    if (!HasEnded)
+                    {
+                        EndAnimation();
+                    }                    
                 }
             }
 			else
@@ -167,8 +172,9 @@ public class AnimationOverlay : UWEBase {
         CurrentTileMap().Overlays[OverlayIndex] = new TileMap.Overlay();//Clear the overlay from the list.
         if (this.GetComponent<ObjectInteraction>() != null)
         {
-            this.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag = 0;//Free up the slot
-            Destroy(this.gameObject);
+            this.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag = 0;//Free up the slot
+            //Destroy(this.gameObject);
+            ObjectInteraction.DestroyObjectFromUW(this.GetComponent<ObjectInteraction>());
         }
     }
 }

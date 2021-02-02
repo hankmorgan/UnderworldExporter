@@ -39,7 +39,7 @@ public class Container : UWEBase
     {
         if (objInt()!=null)
         {
-            PopulateContainer(this, objInt(), objInt().objectloaderinfo.parentList);
+            PopulateContainer(this, objInt(), objInt().BaseObjectData.parentList);
         }        
     }
 
@@ -311,10 +311,10 @@ public class Container : UWEBase
                             break;
                     }
                     objSpilled.zpos = (short)(tm.Tiles[objInt.ObjectTileX, objInt.ObjectTileY].floorHeight * 4);
-                    objSpilled.objectloaderinfo.xpos = objSpilled.xpos;
-                    objSpilled.objectloaderinfo.ypos = objSpilled.ypos;
-                    objSpilled.objectloaderinfo.zpos = objSpilled.zpos;
-                    objSpilled.transform.position = ObjectLoader.CalcObjectXYZ(objSpilled.objectloaderinfo.index, 0);
+                    objSpilled.BaseObjectData.xpos = objSpilled.xpos;
+                    objSpilled.BaseObjectData.ypos = objSpilled.ypos;
+                    objSpilled.BaseObjectData.zpos = objSpilled.zpos;
+                    objSpilled.transform.position = ObjectLoader.CalcObjectXYZ(objSpilled.BaseObjectData.index, 0);
                     RemoveItemFromContainer(i);
                     //FIELD PICKUP Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
                     UnFreezeMovement(objSpilled);

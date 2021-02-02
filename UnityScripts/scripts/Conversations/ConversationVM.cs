@@ -2237,7 +2237,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
                         case 0://Challenge a fighter
                             {
                                 SettingUpFight = true;
-                                Quest.instance.ArenaOpponents[0] = npc.objInt().objectloaderinfo.index;
+                                Quest.instance.ArenaOpponents[0] = npc.objInt().BaseObjectData.index;
                                 Quest.instance.FightingInArena = true;
                                 break;
                             }
@@ -2753,7 +2753,7 @@ n+08   Int16   return type (0x0000=void, 0x0129=int, 0x012B=string)*/
             if (objsGiven[i] != null)
             {
                 GameWorldController.MoveToWorld(objsGiven[i]);
-                stack.Set(start + i, objsGiven[i].GetComponent<ObjectInteraction>().objectloaderinfo.index);//Update the object index in the stack so I keep track of it.
+                stack.Set(start + i, objsGiven[i].GetComponent<ObjectInteraction>().BaseObjectData.index);//Update the object index in the stack so I keep track of it.
             }
         }
         if (SomethingGiven == true)
@@ -3837,7 +3837,7 @@ return value: none
 
                         GameWorldController.MoveToWorld(objGiven);
                         //Split.name = Split.name+"_"+UWCharacter.Instance.summonCount++;
-                        Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().objectloaderinfo);//(objGiven.GetComponent<ObjectInteraction>()
+                        Split.name = ObjectLoader.UniqueObjectName(Split.GetComponent<ObjectInteraction>().BaseObjectData);//(objGiven.GetComponent<ObjectInteraction>()
                         cn.AddItemToContainer(objGiven);
                     }
                     else
@@ -3964,7 +3964,7 @@ return value: none
         ObjectInteraction obj = npc.GetComponent<Container>().GetItemAt((short)pos);
         if (obj != null)
         {
-            return obj.objectloaderinfo.index;
+            return obj.BaseObjectData.index;
         }
         return 0;
     }
@@ -4129,13 +4129,13 @@ return value: 1 when found (?)
         //description:  creates item in npc inventory
         //return value: inventory object list position
 
-        ObjectLoaderInfo newobjt = ObjectLoader.newObject(item_id, 0, 0, 1, 256);
+        ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(item_id, 0, 0, 1, 256);
         newobjt.is_quant = 1;
         ObjectInteraction myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, GameWorldController.instance.InventoryMarker.transform.position);
         //GameWorldController.MoveToWorld(myObj.GetComponent<ObjectInteraction>()); NOT NEEDED THIS OBJECT IS ALREADY IN THE WORLD!!!!
         ConversationVM.BuildObjectList();//reflect update to object list since movetoworld is not called
         npc.GetComponent<Container>().AddItemToContainer(myObj);
-        return myObj.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+        return myObj.GetComponent<ObjectInteraction>().BaseObjectData.index;
 
     }
 
@@ -4411,7 +4411,7 @@ description:  places a generated object in underworld
 
         for (int i = 0; i < NoOfFighters; i++)
         {
-            ObjectLoaderInfo objNew = ObjectLoader.newObject(Random.Range(120, 122), 36, 27, 0, 1);
+            ObjectLoaderInfo objNew = ObjectLoader.newWorldObject(Random.Range(120, 122), 36, 27, 0, 1);
             Vector3 pos = CurrentTileMap().getTileVector(tileX[i], tileY[i]);
             ObjectInteraction objI = ObjectInteraction.CreateNewObject(CurrentTileMap(), objNew, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
             objI.GetComponent<NPC>().npc_attitude = 0;
@@ -4470,7 +4470,7 @@ description:  places a generated object in underworld
 
     public static void BuildObjectList()
     {
-        ObjectLoader.UpdateObjectList(CurrentTileMap(), CurrentObjectList());
+        ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
         int noOfInventoryItems = GameWorldController.instance.InventoryMarker.transform.childCount;
         ObjectMasterList = new string[1024 + noOfInventoryItems + 1];
         ObjectLoaderInfo[] objList = CurrentObjectList().objInfo;

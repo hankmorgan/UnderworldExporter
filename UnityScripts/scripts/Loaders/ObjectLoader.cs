@@ -126,7 +126,9 @@ public class ObjectLoader : DataLoader
     /// </summary>
     public ObjectLoaderInfo[] objInfo;
 
-
+    /// <summary>
+    /// Reference to the tilemap this object list is part of.
+    /// </summary>
     TileMap map;
 
     /// <summary>
@@ -161,7 +163,9 @@ public class ObjectLoader : DataLoader
         }
     }
 
-
+    /// <summary>
+    /// Free lists are used to allocate available object slots.
+    /// </summary>
     public int[] FreeMobileList = new int[254];
     public int[] FreeStaticList = new int[768];
 
@@ -203,22 +207,6 @@ public class ObjectLoader : DataLoader
             SetFloorCollapseTiles(tileMap.Tiles, objInfo, tileMap.thisLevelNo);
         }
     }
-
-
-    /*		/// <summary>
-            /// Flags objects as being in use based on the freelist in the lev.ark file
-            /// </summary>
-            /// <param name="objList">Object list.</param>
-            void setInUseFlag( ObjectLoaderInfo[] objList)
-            {
-                for (int i=2; i<=freeList.GetUpperBound(0);i++)
-                {
-                    objList[i].InUseFlag= freeList[i];
-                }
-            }
-    */
-
-
 
     public void LoadObjectListShock(TileMap tileMap, char[] lev_ark)
     {
@@ -314,7 +302,7 @@ public class ObjectLoader : DataLoader
         for (i = 0; i <= objList.GetUpperBound(0); i++)
         {
             //To stop later crashes in ascii dumps I set some inital values.
-            objList[i] = new ObjectLoaderInfo(i);
+            objList[i] = new ObjectLoaderInfo(i, GameWorldController.CurrentTileMap(), true);
             objList[i].index = i; objList[i].next = 0; objList[i].item_id = 0; objList[i].link = 0; objList[i].owner = 0;
         }
 
@@ -492,7 +480,7 @@ public class ObjectLoader : DataLoader
             {
                 Vals[i] = (int)getValAtAddress(map.lev_ark_block, objectsAddress + address_pointer + (i * 2), 16);
             }
-            objList[x] = new ObjectLoaderInfo(x,map);
+            objList[x] = new ObjectLoaderInfo(x,map,true);
             objList[x].map = map;
             objList[x].parentList = this;
             //objList[x].guid = System.Guid.NewGuid();
@@ -701,6 +689,8 @@ public class ObjectLoader : DataLoader
             //Increment free object counter.
             NoOfFreeStatic++;
         }
+
+        objInfo[index].next = 0;        
     }
 
 
@@ -740,6 +730,7 @@ public class ObjectLoader : DataLoader
             //Increment free object counter.
             NoOfFreeStatic++;
         }
+        objInfo[index].next = 0;
     }
 
     /// <summary>
@@ -1897,43 +1888,43 @@ public class ObjectLoader : DataLoader
     }
 
     /// <summary>
-    /// Creates the new object list with just the items in the object marker.
+    /// Refreshes the data in the object list raw data to correctly store links(to containers/spells) and link container items.
     /// </summary>
-    public static void UpdateObjectList(TileMap currTileMap, ObjectLoader currObjList)
+    public static void RebuildObjectListUW(TileMap currTileMap, ObjectLoader currObjList)
     {
+        Debug.Log("RebuildObjectListUW() This needs to be rewritten");
         if (currObjList == null) { return; }
-        int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
+        //int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
 
         //Update indices to match the array.
         for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
         {
-            currObjList.objInfo[i].index = i;
-            if ((_RES == GAME_UW2) && (currObjList.objInfo[i].InUseFlag == 0) && (i > 2))
+            if ((_RES == GAME_UW2) && (i > 2))
             {
                 ObjectLoaderInfo.CleanUp(currObjList.objInfo[i]);
             }
-            bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
-            if ((OnMap))
-            {//Only clear nexts if the object is not an offmap trigger/trap
-                currObjList.objInfo[i].next = 0;
-                if (currObjList.objInfo[i].instance != null)
-                {
-                    currObjList.objInfo[i].instance.next = 0;
-                }
-            }
+            //bool OnMap = currObjList.objInfo[i].ObjectTileX != TileMap.ObjectStorageTile;
+            //if ((OnMap))
+            //{//Only clear nexts if the object is onmap. Items destroyed will have their nexts cleared at that time.
+            //    currObjList.objInfo[i].next = 0;
+            //    if (currObjList.objInfo[i].instance != null)
+            //    {
+            //        currObjList.objInfo[i].instance.next = 0;
+            //    }
+            //}
         }
 
-        if (currTileMap != null)
-        {
-            //Clear the tilemaps indexobjectlist
-            for (int x = 0; x <= TileMap.TileMapSizeX; x++)
-            {
-                for (int y = 0; y <= TileMap.TileMapSizeY; y++)
-                {
-                    currTileMap.Tiles[x, y].indexObjectList = 0;
-                }
-            }
-        }
+        //if (currTileMap != null)
+        //{
+        //    //Clear the tilemaps indexobjectlist
+        //    for (int x = 0; x <= TileMap.TileMapSizeX; x++)
+        //    {
+        //        for (int y = 0; y <= TileMap.TileMapSizeY; y++)
+        //        {
+        //            currTileMap.Tiles[x, y].indexObjectList = 0;
+        //        }
+        //    }
+        //}
 
         foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
         {
@@ -1943,107 +1934,101 @@ public class ObjectLoader : DataLoader
             }
         }
         
-        foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
-        {
-            if (t.gameObject.GetComponent<ObjectInteraction>() != null)
-            {
-                ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
-                //Copy back the info stored on the object interaction to the lists.
-                if (objInt.objectloaderinfo == null)
-                {
-                    objInt.objectloaderinfo = new ObjectLoaderInfo(objInt.objectloaderinfo.index);
-                    objInt.objectloaderinfo.InUseFlag = 0;
-                    objInt.objectloaderinfo.ObjectTileX = TileMap.ObjectStorageTile;
-                    objInt.objectloaderinfo.ObjectTileY = TileMap.ObjectStorageTile;
-                }
-                objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
-                if (objInt.objectloaderinfo.InUseFlag == 1)
-                {
-                    if ((t.gameObject.GetComponent<Container>() != null))
-                    {//Rebuild container chain. THis seems to break vanilla games. (badobject warning?)
-                        t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
-                        linkContainerContents(t.gameObject.GetComponent<Container>());
-                    }
-                    currObjList.CopyDataToList(objInt, ref objInt.objectloaderinfo);
-                }
-                else
-                {
-                    Debug.Log(objInt.name + " exists but is flagged as not in use");
-                }
+        //foreach (Transform t in GameWorldController.instance.DynamicObjectMarker())
+        //{
+        //    ObjectInteraction objInt = t.gameObject.GetComponent<ObjectInteraction>();
+        //    if (objInt != null)
+        //    {                
+        //        if (objInt.BaseObjectData == null)
+        //        {//Fill in missing object loader instances to avoid null errors
+        //            objInt.BaseObjectData = new ObjectLoaderInfo(objInt.BaseObjectData.index,GameWorldController.CurrentTileMap(),true);
+        //            objInt.BaseObjectData.InUseFlag = 0;
+        //            objInt.BaseObjectData.ObjectTileX = TileMap.ObjectStorageTile;
+        //            objInt.BaseObjectData.ObjectTileY = TileMap.ObjectStorageTile;
+        //        }
+        //        objInt.UpdatePosition(); //Update the coordinates and tile x and y of the object
+        //        if ((t.gameObject.GetComponent<Container>() != null))
+        //        {//Clear container link index. Will repoint later.
+        //            t.gameObject.GetComponent<ObjectInteraction>().link = 0;//TEST 
 
-            }
-        }
+        //        }
+        //    }
+        //}
 
-        //rebuild the linked list
-        for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
-        {
-            int x = currObjList.objInfo[i].ObjectTileX;
-            int y = currObjList.objInfo[i].ObjectTileY;
-            if (currObjList.objInfo[i].InUseFlag == 1)
-            {
-                if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
-                {
-                    if (nexts[x, y] == 0)
-                    {//This object is the first in the chain at this tile
-                        currTileMap.Tiles[x, y].indexObjectList = i;
-                        nexts[x, y] = i;
-                    }
-                    else
-                    {
-                        currObjList.objInfo[nexts[x, y]].next = i;
-                        currObjList.objInfo[nexts[x, y]].instance.next = i;
-                        nexts[x, y] = i;
-                    }
-                }
-            }
-        }
+        ////rebuild the linked list
+        //for (int i = 0; i <= currObjList.objInfo.GetUpperBound(0); i++)
+        //{
+        //    int x = currObjList.objInfo[i].ObjectTileX;
+        //    int y = currObjList.objInfo[i].ObjectTileY;
+        //    if (currObjList.objInfo[i].InUseFlag == 1)
+        //    {
+        //        if ((x != TileMap.ObjectStorageTile) && (y != TileMap.ObjectStorageTile))
+        //        {
+        //            if (nexts[x, y] == 0)
+        //            {//This object is the first in the chain at this tile
+        //                currTileMap.Tiles[x, y].indexObjectList = i;
+        //                nexts[x, y] = i;
+        //            }
+        //            else
+        //            {
+        //                currObjList.objInfo[nexts[x, y]].next = i;
+        //                currObjList.objInfo[nexts[x, y]].instance.next = i;
+        //                nexts[x, y] = i;
+        //            }
+        //        }
+        //    }
+        //}
 
-        return;
+        //Rebuild container chains only!
 
-        //Count the number of freeobjects in the mobile and static lists and update these lists as needed			
-        currObjList.FreeMobileList = new int[254];
-        currObjList.FreeStaticList = new int[768];
-        int newFreeMobileObjectCount = 0;
-        int newFreeStaticObjectCount = 0;
-        for (int o = 2; o < 256; o++)
-        {
-            if (currObjList.objInfo[o].InUseFlag == 0)
-            {//Store that the object slot is free in the array.			
-                currObjList.objInfo[o].instance = null;
-                currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
-            }
-        }
-        for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
-        {
-            if (currObjList.objInfo[o].InUseFlag == 0)
-            {//Store that the object slot is free in the array.	
-                currObjList.objInfo[o].instance = null;
-                currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
-            }
-        }
+        //TODO:
 
-        for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
-        {
-            if (currObjList.objInfo[o].instance != null)
-            {
-                currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
-            }
-        }
+        ////return;
 
-        if (newFreeMobileObjectCount > 0)
-        {
-            newFreeMobileObjectCount--;
-        }
-        if (newFreeStaticObjectCount > 0)
-        {
-            newFreeStaticObjectCount--;
-        }
-        //Debug.Log(
-        //		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
-        //		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
-        //);
-        currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
-        currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
+        //////Count the number of freeobjects in the mobile and static lists and update these lists as needed			
+        ////currObjList.FreeMobileList = new int[254];
+        ////currObjList.FreeStaticList = new int[768];
+        ////int newFreeMobileObjectCount = 0;
+        ////int newFreeStaticObjectCount = 0;
+        ////for (int o = 2; o < 256; o++)
+        ////{
+        ////    if (currObjList.objInfo[o].InUseFlag == 0)
+        ////    {//Store that the object slot is free in the array.			
+        ////        currObjList.objInfo[o].instance = null;
+        ////        currObjList.FreeMobileList[newFreeMobileObjectCount++] = o;
+        ////    }
+        ////}
+        ////for (int o = 256; o <= currObjList.objInfo.GetUpperBound(0); o++)
+        ////{
+        ////    if (currObjList.objInfo[o].InUseFlag == 0)
+        ////    {//Store that the object slot is free in the array.	
+        ////        currObjList.objInfo[o].instance = null;
+        ////        currObjList.FreeStaticList[newFreeStaticObjectCount++] = o;
+        ////    }
+        ////}
+
+        ////for (int o = 2; o < currObjList.objInfo.GetUpperBound(0); o++)
+        ////{
+        ////    if (currObjList.objInfo[o].instance != null)
+        ////    {
+        ////        currObjList.CopyDataToList(currObjList.objInfo[o].instance, ref currObjList.objInfo[o]);
+        ////    }
+        ////}
+
+        ////if (newFreeMobileObjectCount > 0)
+        ////{
+        ////    newFreeMobileObjectCount--;
+        ////}
+        ////if (newFreeStaticObjectCount > 0)
+        ////{
+        ////    newFreeStaticObjectCount--;
+        ////}
+        //////Debug.Log(
+        //////		" Mobile was " + currObjList.NoOfFreeMobile + " now " + newFreeMobileObjectCount +
+        //////		" Static was " + currObjList.NoOfFreeStatic + " now " + newFreeStaticObjectCount 				
+        //////);
+        ////currObjList.NoOfFreeMobile = newFreeMobileObjectCount;
+        ////currObjList.NoOfFreeStatic = newFreeStaticObjectCount;
 
 
 
@@ -2191,7 +2176,7 @@ public class ObjectLoader : DataLoader
         }
         int itemCounter = 0;
         ObjectInteraction cnObjInt = cn.gameObject.GetComponent<ObjectInteraction>();
-        int PrevIndex = cnObjInt.objectloaderinfo.index;
+        int PrevIndex = cnObjInt.BaseObjectData.index;
         if (cn.LockObject != 0)
         {
             ObjectInteraction lockObj = ObjectLoader.getObjectIntAt(cn.LockObject);
@@ -2200,9 +2185,9 @@ public class ObjectLoader : DataLoader
                 if (lockObj.GetItemType() == ObjectInteraction.LOCK)
                 {
                     itemCounter++;
-                    cnObjInt.link = lockObj.objectloaderinfo.index;
-                    cnObjInt.objectloaderinfo.link = lockObj.objectloaderinfo.index;
-                    PrevIndex = lockObj.objectloaderinfo.index;
+                    cnObjInt.link = lockObj.BaseObjectData.index;
+                    cnObjInt.BaseObjectData.link = lockObj.BaseObjectData.index;
+                    PrevIndex = lockObj.BaseObjectData.index;
                 }
             }
         }
@@ -2215,9 +2200,9 @@ public class ObjectLoader : DataLoader
                 //ObjectInteraction itemObjInt = obj.GetComponent<ObjectInteraction>();
                 if (itemCounter == 0)
                 {//First item link to it from the container
-                    cnObjInt.link = itemObjInt.objectloaderinfo.index;
-                    cnObjInt.objectloaderinfo.link = itemObjInt.objectloaderinfo.index;
-                    PrevIndex = itemObjInt.objectloaderinfo.index;
+                    cnObjInt.link = itemObjInt.BaseObjectData.index;
+                    cnObjInt.BaseObjectData.link = itemObjInt.BaseObjectData.index;
+                    PrevIndex = itemObjInt.BaseObjectData.index;
                 }
                 else
                 {//the previous items next becomes this.
@@ -2225,11 +2210,11 @@ public class ObjectLoader : DataLoader
                     {
                         Debug.Log("null object on " + i + " for container " + cn.name);
                     }
-                    ObjectLoader.getObjectIntAt(PrevIndex).next = itemObjInt.objectloaderinfo.index;
-                    ObjectLoader.getObjectIntAt(PrevIndex).objectloaderinfo.next = itemObjInt.objectloaderinfo.index;
+                    ObjectLoader.getObjectIntAt(PrevIndex).next = itemObjInt.BaseObjectData.index;
+                    ObjectLoader.getObjectIntAt(PrevIndex).BaseObjectData.next = itemObjInt.BaseObjectData.index;
                     itemObjInt.next = 0;//end for now.
-                    itemObjInt.objectloaderinfo.next = 0;
-                    PrevIndex = itemObjInt.objectloaderinfo.index;
+                    itemObjInt.BaseObjectData.next = 0;
+                    PrevIndex = itemObjInt.BaseObjectData.index;
                 }
                 itemCounter++;
 
@@ -2277,9 +2262,9 @@ public class ObjectLoader : DataLoader
         if (CurrentObjectList().getFreeSlot(startindex, out index))
         {
             //Assign and return the reference
-            objInt.objectloaderinfo = CurrentObjectList().objInfo[index];
-            objInt.objectloaderinfo.InUseFlag = 1;
-            objInt.objectloaderinfo.index = index;
+            objInt.BaseObjectData = CurrentObjectList().objInfo[index];
+            objInt.BaseObjectData.InUseFlag = 1;
+            objInt.BaseObjectData.index = index;
             //Debug.Log("Assigning "+ objInt.name + " to index " + index);
             if ((objInt.GetComponent<Container>()) || (objInt.GetComponent<NPC>()))
             {//Put the container items back into the list as well
@@ -2296,7 +2281,7 @@ public class ObjectLoader : DataLoader
                         if (itemCounter == 0)
                         {//First object											
                             objInt.link = newlink;
-                            objInt.objectloaderinfo.link = newlink;
+                            objInt.BaseObjectData.link = newlink;
                             prevLink = newlink;
                         }
                         else
@@ -2306,7 +2291,7 @@ public class ObjectLoader : DataLoader
                             prevLink = newlink;
 
                         }
-                        objI.objectloaderinfo.next = 0;//init
+                        objI.BaseObjectData.next = 0;//init
                         objI.next = 0;
                         itemCounter++;
                     }
@@ -2316,7 +2301,7 @@ public class ObjectLoader : DataLoader
                     objInt.link = 0;//No contents
                 }
             }
-            CurrentObjectList().CopyDataToList(objInt, ref objInt.objectloaderinfo);
+            CurrentObjectList().CopyDataToList(objInt, ref objInt.BaseObjectData);
         }
         else
         {
@@ -2414,7 +2399,7 @@ public class ObjectLoader : DataLoader
 
         //Match the two instances
         info.instance = objInt;
-        objInt.objectloaderinfo = info;
+        objInt.BaseObjectData = info;
     }
 
 
@@ -2422,7 +2407,7 @@ public class ObjectLoader : DataLoader
     /// Finds and returns the next available free slot for a new object and returns the objectloaderinfo for the found object with initial properties.
     /// </summary>
     /// <returns>The object.</returns>
-    public static ObjectLoaderInfo newObject(int item_id, int quality, int owner, int link, int startIndex)
+    public static ObjectLoaderInfo newWorldObject(int item_id, int quality, int owner, int link, int startIndex)
     {
         int index = 0;
         if (startIndex >= 0)
@@ -2465,7 +2450,7 @@ public class ObjectLoader : DataLoader
         else
         {
             Debug.Log("New Object created. Shuld not happen!");
-            ObjectLoaderInfo objI = new ObjectLoaderInfo(index);
+            ObjectLoaderInfo objI = new ObjectLoaderInfo(index,GameWorldController.CurrentTileMap(),true);
             //objI.guid = System.Guid.NewGuid();
             objI.quality = (short)quality;
             objI.flags = 0;

@@ -32,13 +32,14 @@ Level 3 removal of TMAP object when searching for the switch leading to the swor
 		GameObject triggerObj = ObjectLoader.getGameObjectAt(link); 
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<ObjectInteraction>().objectloaderinfo.InUseFlag=0;
+			triggerObj.GetComponent<ObjectInteraction>().BaseObjectData.InUseFlag=0;
 			if (triggerObj.GetComponent<map_object>()!=null)
 			{
 				Destroy(triggerObj.GetComponent<map_object>().ModelInstance);	
 			}
-			Debug.Log (this.name + " deleting " + triggerObj.name);
-			Destroy(triggerObj);
-		}
+			Debug.Log (this.name + " deleting in ExecuteTrap() " + triggerObj.name);
+			//Destroy(triggerObj);
+            ObjectInteraction.DestroyObjectFromUW(triggerObj.GetComponent<ObjectInteraction>());
+        }
 	}
 }

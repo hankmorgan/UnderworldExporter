@@ -68,7 +68,7 @@ the left, right, center button combination on Level3.
                                 }
                                 else
                                 {
-                                    Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().objectloaderinfo.index);
+                                    Debug.Log("Ignored Xclock:" + zpos + " at " + objInt().BaseObjectData.index);
                                 }
                                 break;
                             }

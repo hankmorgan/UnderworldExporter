@@ -496,7 +496,7 @@ public class UWCombat : Combat
                 }
                 else
                 {//reduce this quantity by one and create a copy in the world
-                    ObjectLoaderInfo newobjt = ObjectLoader.newObject(currWeaponRanged.AmmoType(), 40, 0, 1, 256);
+                    ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(currWeaponRanged.AmmoType(), 40, 0, 1, 256);
                     launchedItem = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange - 0.1f)).gameObject;
                     currentAmmo.consumeObject();
                 }

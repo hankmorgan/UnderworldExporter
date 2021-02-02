@@ -47,7 +47,7 @@ public class a_bridge_trap : trap_base {
                 //Create a bridge at this tile. Only if no bridge is already there.
                 if (ObjectLoader.findObjectByTypeInTile(CurrentObjectList().objInfo, (short)tileX, (short)tileY, ObjectInteraction.BRIDGE) == -1)
                 {
-                    ObjectLoaderInfo newObj = ObjectLoader.newObject(356, 40, 0, 0, 256);
+                    ObjectLoaderInfo newObj = ObjectLoader.newWorldObject(356, 40, 0, 0, 256);
                     newObj.xpos = 4; newObj.ypos = 4; newObj.zpos = zpos;
                     // bridge texture will be set by  (bridge.enchantment << 3) | bridge.flags & 0x3F;
                     newObj.flags = (short)(owner & 0x7);

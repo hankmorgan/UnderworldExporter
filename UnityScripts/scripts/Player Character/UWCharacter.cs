@@ -1100,7 +1100,7 @@ public class UWCharacter : Character
             {
                 //split the obj.
 
-                ObjectLoaderInfo newobjt = ObjectLoader.newObject(QuantityObj.item_id, QuantityObj.quality, QuantityObj.owner, quant, 256);
+                ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(QuantityObj.item_id, QuantityObj.quality, QuantityObj.owner, quant, 256);
                 newobjt.is_quant = QuantityObj.isquant;
                 newobjt.flags = QuantityObj.flags;
                 newobjt.enchantment = QuantityObj.enchantment;
@@ -1165,7 +1165,7 @@ public class UWCharacter : Character
             {
                 if (EditorMode)
                 {//Select this object in the editor pane
-                    IngameEditor.instance.ObjectSelect.value = objInt.objectloaderinfo.index;
+                    IngameEditor.instance.ObjectSelect.value = objInt.BaseObjectData.index;
                 }
                 objInt.LookDescription();
                 return;

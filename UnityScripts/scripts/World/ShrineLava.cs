@@ -66,7 +66,7 @@ public class ShrineLava : UWEBase
         }
 
         //Spawn a moon gate at the center of the lava
-        ObjectLoaderInfo newobjt = ObjectLoader.newObject(346, 0, 0, 0, 256);
+        ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(346, 0, 0, 0, 256);
         GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),
             newobjt,
             CurrentObjectList().objInfo,

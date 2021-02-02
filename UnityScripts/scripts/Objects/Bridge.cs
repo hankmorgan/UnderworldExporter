@@ -14,7 +14,7 @@ public class Bridge : map_object {
 	{		
         if (invis==0)
         {
-            TileMapRenderer.RenderBridge(GameWorldController.instance.SceneryModel, CurrentTileMap(), CurrentObjectList(), objInt().objectloaderinfo.index);
+            TileMapRenderer.RenderBridge(GameWorldController.instance.SceneryModel, CurrentTileMap(), CurrentObjectList(), objInt().BaseObjectData.index);
         }
 
         base.Start();

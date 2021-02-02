@@ -67,8 +67,8 @@ public class a_hack_trap_button_mover : a_hack_trap {
     void MoveButton(short NewZpos, ObjectInteraction buttonToMove)
     {
         buttonToMove.zpos = NewZpos;
-        buttonToMove.objectloaderinfo.zpos = NewZpos;
-        Vector3 newPos = ObjectLoader.CalcObjectXYZ(buttonToMove.objectloaderinfo.index, 0);
+        buttonToMove.BaseObjectData.zpos = NewZpos;
+        Vector3 newPos = ObjectLoader.CalcObjectXYZ(buttonToMove.BaseObjectData.index, 0);
         buttonToMove.transform.position = newPos;
     }
 

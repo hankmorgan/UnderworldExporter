@@ -102,7 +102,7 @@ public class Potion : enchantment_base
                         if (objList[i].instance != null)
                         {
                             if ((objList[i].link == linked.link) && (objList[i].owner == linked.owner) && (objList[i].quality == linked.quality))
-                            {
+                            {//Point to that instance if found instead.
                                 Destroy(linked.gameObject);
                                 linked = objList[i].instance;
                                 link = i;
@@ -116,7 +116,7 @@ public class Potion : enchantment_base
                 if (!match)
                 {
                     //linkedspell.gameObject.transform.parent=GameWorldController.instance.DynamicObjectMarker();
-                    GameWorldController.MoveToWorld(linked.gameObject);
+                    GameWorldController.MoveToWorld(linked.gameObject);                  
                 }
             }
         }

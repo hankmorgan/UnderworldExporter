@@ -18,7 +18,7 @@ public class a_arrow_trap : trap_base {
 	{
 		int item_index=  (quality << 5) | owner;
 
-		ObjectLoaderInfo newobjt= ObjectLoader.newObject(item_index,0,0,0,256);
+		ObjectLoaderInfo newobjt= ObjectLoader.newWorldObject(item_index,0,0,0,256);
 		GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(),newobjt,CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, this.transform.position).gameObject;
 		if (ObjectTileX == TileMap.ObjectStorageTile)
 		{

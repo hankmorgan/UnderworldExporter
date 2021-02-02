@@ -45,13 +45,13 @@ public class trigger_base : traptrigger_base {
 			{
 				if (src.GetComponent<ObjectInteraction>()!=null)
 				{//Clear the link to the trigger/trap from the source if it is destroyed.
-					if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().objectloaderinfo.index)
+					if (src.GetComponent<ObjectInteraction>().link == this.gameObject.GetComponent<ObjectInteraction>().BaseObjectData.index)
 					{
 						src.GetComponent<ObjectInteraction>().link=0;
 					}
 				}	
 			}
-			objInt().objectloaderinfo.InUseFlag=0;
+			objInt().BaseObjectData.InUseFlag=0;
 			Destroy (this.gameObject);
 		}
 	}

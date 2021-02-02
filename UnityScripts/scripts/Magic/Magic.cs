@@ -1301,14 +1301,6 @@ public class Magic : UWEBase
     /// <param name="EffectID">Effect ID of the spell</param>
     void Cast_AnNox(GameObject caster, int EffectID)
     {//Cure Poison
-     //UWCharacter playerUW = caster.GetComponent<UWCharacter>();
-     //Get all instances of poison effect on the character and destroy them.
-     //SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
-     //for (int i =0; i<= seps.GetUpperBound(0);i++)
-     //{
-     //		seps[i].CancelEffect();
-     //}
-     //UWCharacter.Instance.Poisoned=false;
         UWCharacter.Instance.play_poison = 0;
     }
 
@@ -1423,7 +1415,7 @@ public class Magic : UWEBase
         float dropRange = 1.2f;
         if (!Physics.Raycast(ray, out hit, dropRange))
         {//No object interferes with the spellcast
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(176 + Random.Range(0, 7), 40, 0, 1, 256);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(176 + Random.Range(0, 7), 40, 0, 1, 256);
             newobjt.is_quant = 1;
             newobjt.InUseFlag = 1;
             UnFreezeMovement(GameWorldController.MoveToWorld(ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange))).gameObject);
@@ -1456,7 +1448,7 @@ public class Magic : UWEBase
                 if (target.npc_attitude == 0)
                 {
                     //targetName=target.name;
-                    gtarg = target.GetComponent<ObjectInteraction>().objectloaderinfo.index;
+                    gtarg = target.GetComponent<ObjectInteraction>().BaseObjectData.index;
                 }
             }
 
@@ -1471,7 +1463,7 @@ public class Magic : UWEBase
             SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
             spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster, caster);
 
-            ObjectLoaderInfo newobjt = ObjectLoader.newObject(spKM.RndNPC, 0, 0, 0, 2);
+            ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(spKM.RndNPC, 0, 0, 0, 2);
             GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, ray.GetPoint(dropRange)).gameObject;
             myObj.GetComponent<NPC>().npc_gtarg = (short)gtarg;
             myObj.GetComponent<NPC>().npc_goal = (short)NPC.npc_goals.npc_goal_follow;
@@ -1524,7 +1516,12 @@ public class Magic : UWEBase
             {
                 if (allGameObj[i].transform.parent == null)
                 {//Only deactivate top level items
-                    allGameObj[i].SetActive(false);
+                    //allGameObj[i].SetActive(false);
+                    ObjectInteraction objI = allGameObj[i].GetComponent<ObjectInteraction>();
+                    if (objI!=null)
+                    {
+                        ObjectInteraction.DestroyObjectFromUW(objI);
+                    }
                 }
             }
         }
@@ -2222,7 +2219,7 @@ public class Magic : UWEBase
                                  ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, 386, 386, 386, 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
                                  a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
                                  */
-                ObjectLoaderInfo newobjt = ObjectLoader.newObject(386, 40, 0, 0, 256);
+                ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(386, 40, 0, 0, 256);
                 GameObject myObj = ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos).gameObject;
                 myObj.GetComponent<a_arrow_trap>().ExecuteTrap(myObj.GetComponent<a_arrow_trap>(), 0, 0, 0);
                 newobjt.InUseFlag = 1;
@@ -2590,7 +2587,7 @@ public class Magic : UWEBase
         awt.spellprop=spIJ;
 
 */
-        ObjectLoaderInfo newobjt = ObjectLoader.newObject(393, 40, 0, 0, 256);
+        ObjectLoaderInfo newobjt = ObjectLoader.newWorldObject(393, 40, 0, 0, 256);
         ObjectInteraction.CreateNewObject(CurrentTileMap(), newobjt, CurrentObjectList().objInfo, GameWorldController.instance.DynamicObjectMarker().gameObject, pos);
         newobjt.InUseFlag = 1;
 

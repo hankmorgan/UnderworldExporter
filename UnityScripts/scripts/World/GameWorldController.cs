@@ -1024,7 +1024,7 @@ public class GameWorldController : UWEBase
             {//When changing from a level that has already loaded
                 if (UWEBase.EditorMode == false)
                 {
-                    ObjectLoader.UpdateObjectList(CurrentTileMap(), CurrentObjectList());
+                    ObjectLoader.RebuildObjectListUW(CurrentTileMap(), CurrentObjectList());
                 }
             }
 
@@ -1315,18 +1315,18 @@ public class GameWorldController : UWEBase
             NewIndex = CurrentObjectList().GetMobileAtSlot(NewIndex);
         }
 
-        CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex,CurrentTileMap());
+        CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex,CurrentTileMap(),true);
         //Copy existing static info from inventory to objectdata
         for (int i =0; i<8;i++)
         {
-            CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR+i] = obj.objectloaderinfo.InventoryData[i];
+            CurrentObjectList().objInfo[NewIndex].DataBuffer[CurrentObjectList().objInfo[NewIndex].PTR+i] = obj.BaseObjectData.InventoryData[i];
         }
         //Link the instances
         CurrentObjectList().objInfo[NewIndex].instance = obj;
-        obj.objectloaderinfo = CurrentObjectList().objInfo[NewIndex];
+        obj.BaseObjectData = CurrentObjectList().objInfo[NewIndex];
 
         //Rename the instance
-        obj.transform.name = ObjectLoader.UniqueObjectName(obj.objectloaderinfo);
+        obj.transform.name = ObjectLoader.UniqueObjectName(obj.BaseObjectData);
 
         Container cnt = obj.GetComponent<Container>();
         if (cnt!=null)
@@ -1368,37 +1368,39 @@ public class GameWorldController : UWEBase
     /// <param name="obj">Object.</param>
     public static void MoveToInventory(ObjectInteraction obj)
     {//Break the instance back to the object list
+        ObjectInteraction.UnlinkItemFromTileMapChain(obj, obj.ObjectTileX, obj.ObjectTileY);
+
         obj.transform.parent = GameWorldController.instance.InventoryMarker.transform;
         //Copy loader data to obj.
         char[] NewinventoryData = new char[8];
         for (int i=0; i<8;i++)
         {
-            NewinventoryData[i] = obj.objectloaderinfo.DataBuffer[obj.objectloaderinfo.PTR + i];
+            NewinventoryData[i] = obj.BaseObjectData.DataBuffer[obj.BaseObjectData.PTR + i];
         }
-        ObjectLoaderInfo newObj = new ObjectLoaderInfo(0);
+        ObjectLoaderInfo newObj = new ObjectLoaderInfo(0,GameWorldController.CurrentTileMap(),false);
         newObj.parentList = GameWorldController.instance.inventoryLoader;
         newObj.InventoryData = NewinventoryData;
 
-        obj.objectloaderinfo.InUseFlag = 0;//This frees up the slot to be replaced with another item.	
-        obj.objectloaderinfo.instance = null;
+        obj.BaseObjectData.InUseFlag = 0;//This frees up the slot to be replaced with another item.	
+        obj.BaseObjectData.instance = null;
         if (_RES == GAME_UW2)//Does this need to be done for uw1 as well.
         {
-            ObjectLoaderInfo.CleanUp(obj.objectloaderinfo);
+            ObjectLoaderInfo.CleanUp(obj.BaseObjectData);
         }
         
-        if(obj.objectloaderinfo.IsStatic)
+        if(obj.BaseObjectData.IsStatic)
         {
-            CurrentObjectList().ReleaseFreeStaticObject(obj.objectloaderinfo.index);
+            CurrentObjectList().ReleaseFreeStaticObject(obj.BaseObjectData.index);
         }
         else
         {
-            CurrentObjectList().ReleaseFreeMobileObject(obj.objectloaderinfo.index);
+            CurrentObjectList().ReleaseFreeMobileObject(obj.BaseObjectData.index);
         }
       
 
         //Link instances
         newObj.instance = obj;
-        obj.objectloaderinfo = newObj;
+        obj.BaseObjectData = newObj;
 
         Container cnt = obj.GetComponent<Container>();
         if (cnt != null)
