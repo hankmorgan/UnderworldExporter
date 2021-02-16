@@ -532,7 +532,7 @@ public class Container : UWEBase
 
             if (Valid)
             {
-                if ((CurrentObjectInHand.isQuant == false) || (CurrentObjectInHand.isEnchanted))
+                if ((CurrentObjectInHand.isQuantityBln == false) || (CurrentObjectInHand.isEnchanted))
                 {
                     AddItemToContainer(CurrentObjectInHand);
                 }

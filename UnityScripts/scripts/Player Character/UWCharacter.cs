@@ -1294,7 +1294,7 @@ public class UWCharacter : Character
                         {
                             //right click check for quant.
                             //Pickup if either not a quantity or is a quantity of one.
-                            if ((objPicked.isQuant == false) || ((objPicked.isQuant) && (objPicked.link == 1)) || (objPicked.isEnchanted))
+                            if ((objPicked.isQuantityBln == false) || ((objPicked.isQuantityBln) && (objPicked.link == 1)) || (objPicked.isEnchanted))
                             {
                                 objPicked = Pickup(objPicked, pInv);
                             }
@@ -1483,23 +1483,24 @@ public class UWCharacter : Character
             //000~001~147~You have attained experience level
             UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1, StringController.str_you_have_attained_experience_level_));
             TrainingPoints += 3;
-            UWCharacter.Instance.MaxVIT = UWCharacter.Instance.PlayerSkills.STR * 3;
+            UWCharacter.Instance.MaxVIT = 30 + ((UWCharacter.Instance.PlayerSkills.STR * CharLevel)/5);
+            int defaultMaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
             switch (_RES)
-            {
+            {//TODO:max these properties?
                 case GAME_UW1:
                     if ((GameWorldController.instance.LevelNo == 6) && (!Quest.instance.isOrbDestroyed))
                     {
-                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3; ;
+                        UWCharacter.Instance.PlayerMagic.TrueMaxMana = defaultMaxMana;
                     }
                     else
                     {
-                        UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
+                        UWCharacter.Instance.PlayerMagic.MaxMana = defaultMaxMana;
                         UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                         UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     }
                     break;
                 default:
-                    UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
+                    UWCharacter.Instance.PlayerMagic.MaxMana = defaultMaxMana;
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     break;

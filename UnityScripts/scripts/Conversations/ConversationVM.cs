@@ -3397,7 +3397,7 @@ return value appears to have something to do with if the door is broken or not.
         else
         {
             //obj.link=locals[link]+512;
-            if (obj.isQuant)
+            if (obj.isQuantityBln)
             {
                 obj.link = stack.at(link);
             }
@@ -3821,7 +3821,7 @@ return value: none
              //
                 if (objGiven != null)
                 {
-                    if ((objGiven.isQuant == true)
+                    if ((objGiven.isQuantityBln == true)
                             &&
                             (objGiven.link > 1)
                             &&

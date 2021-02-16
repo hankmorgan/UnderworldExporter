@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class ObjectLoader : DataLoader
 {
-    const int UWDEMO = 0;
-    const int UW1 = 1;
-    const int UW2 = 2;
-    const int SHOCK = 3;
-
 
     //System Shock object classes
     const int GUNS_WEAPONS = 0;

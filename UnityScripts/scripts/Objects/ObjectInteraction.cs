@@ -540,7 +540,12 @@ public class ObjectInteraction : UWEBase{
         Identified = 2
     };
 
+    /// <summary>
+    /// Reference to the object and the data files they are stored in.
+    /// </summary>
     public ObjectLoaderInfo BaseObjectData;
+
+    public long FileDataAddress;
 
     void Start()
     {
@@ -555,6 +560,7 @@ public class ObjectInteraction : UWEBase{
             FreezeMovement(this.gameObject);
         }
 
+        FileDataAddress = BaseObjectData.address;
     }
 
     void Update()
@@ -1110,7 +1116,7 @@ public class ObjectInteraction : UWEBase{
     /// </summary>
     public void consumeObject()
     {
-        if ((isQuant == false) || ((isQuant) && (link == 1)) || (isEnchanted))
+        if ((isQuantityBln == false) || ((isQuantityBln) && (link == 1)) || (isEnchanted))
         {//the last of the item or is not a quantity;
             this.GetComponent<object_base>().DestroyEvent();
             Container cn = UWCharacter.Instance.playerInventory.currentContainer;
@@ -1201,7 +1207,7 @@ public class ObjectInteraction : UWEBase{
         }
         else
         {
-            if (isQuant == true)
+            if (isQuantityBln == true)
             {
                 return link;
             }
@@ -1357,7 +1363,7 @@ public class ObjectInteraction : UWEBase{
     /// <returns><c>true</c> if this instance is stackable; otherwise, <c>false</c>.</returns>
     public bool IsStackable()
     {//An object is stackable if it has the isQuant flag and is not enchanted.
-        return ((isQuant) && (!isEnchanted));
+        return ((isQuantityBln) && (!isEnchanted));
     }
 
     /// <summary>
@@ -2943,7 +2949,7 @@ public class ObjectInteraction : UWEBase{
     //property. If the value is < 512 or 0x0200 it gives the number of stacked
     //items present. Identical objects may be stacked up to 256 objects at a
     //time. The field name "quantity" is used for this.
-    public bool isQuant    
+    public bool isQuantityBln    
     {
         get
         {
@@ -3106,11 +3112,44 @@ public class ObjectInteraction : UWEBase{
                 Debug.Log("Releasing Mobile Object " + objToDestroy.name);
                 CurrentObjectList().ReleaseFreeMobileObject(objToDestroy.BaseObjectData.index);
             }
-        }
-        
+        }       
 
         Destroy(objToDestroy.gameObject);
     }
 
+
+    /// <summary>
+    /// Copy the static properties of an object to another object.
+    /// </summary>
+    /// <param name="Src"></param>
+    /// <param name="Dst"></param>
+    /// <param name="ChangeLink"></param>
+    /// <param name="ChangeNext"></param>
+    public static void CopyStaticProperties(ObjectInteraction Src, ObjectInteraction Dst, bool ChangeLink=true , bool ChangeNext = true)
+    {
+
+        Dst.item_id = Src.item_id;
+        Dst.flags = Src.flags;
+        Dst.enchantment = Src.enchantment;
+        Dst.doordir = Src.doordir;
+        Dst.invis = Src.invis;
+        Dst.isquant = Src.isquant;
+        Dst.xpos = Src.xpos;
+        Dst.ypos = Src.ypos;
+        Dst.zpos = Src.zpos;
+        Dst.heading = Src.heading;
+        Dst.quality = Src.quality;
+        if (ChangeNext)
+        {
+            Dst.next = Src.next;
+        }
+        Dst.owner = Src.owner;
+        if (ChangeLink)
+        {
+            Dst.link = Src.link;
+        }
+       
+
+    }
 
 }

@@ -1314,6 +1314,12 @@ public class GameWorldController : UWEBase
             }
             NewIndex = CurrentObjectList().GetMobileAtSlot(NewIndex);
         }
+        //Destroy the existing object instance at the new slot.
+        if (CurrentObjectList().objInfo[NewIndex].instance !=null)
+        {
+            Destroy(CurrentObjectList().objInfo[NewIndex].instance.gameObject);
+        }
+
 
         CurrentObjectList().objInfo[NewIndex] = new ObjectLoaderInfo(NewIndex,CurrentTileMap(),true);
         //Copy existing static info from inventory to objectdata
@@ -1337,6 +1343,29 @@ public class GameWorldController : UWEBase
                 {
                     MoveToWorld(cnt.items[i], true); //Move container objects as static objects into the world. (The parent might be mobile)
                 }              
+            }
+            
+            //Relink container contents
+            bool isNext = false;//What property should be updated.
+            ObjectInteraction parentItem = cnt.objInt();
+            parentItem.link = 0; //Assume no object in container.
+            for (int i = 0; i < cnt.items.GetUpperBound(0); i++)
+            {
+                if (cnt.items[i] != null)
+                {
+                    //linked or next item found.
+                    if (isNext)
+                    {
+                        parentItem.next = cnt.items[i].ObjectIndex;
+                    }
+                    else
+                    {
+                        parentItem.link = cnt.items[i].ObjectIndex;
+                        isNext = true; //any item after the first linked item must be a next.
+                    }
+                    parentItem = cnt.items[i];//Move to next item.
+                    parentItem.next = 0;//Assume next is going to be no object.                    
+                }
             }
         }
 

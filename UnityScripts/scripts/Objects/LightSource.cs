@@ -144,7 +144,7 @@ public class LightSource : object_base {
 		GetInventorySlotForLightSource (pInv, ref invSlot);
 		if (invSlot != null)
 			{
-			if   ((objInt().isQuant==false) || ((objInt().isQuant) && (link<=1)) || (objInt().isEnchanted))
+			if   ((objInt().isQuantityBln==false) || ((objInt().isQuantityBln) && (link<=1)) || (objInt().isEnchanted))
 			{//Is a quantity of one or not a quantity/
 					PutLightSourceInSlot (pInv, invSlot);
 			}

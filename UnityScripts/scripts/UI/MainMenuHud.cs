@@ -384,8 +384,11 @@ public class MainMenuHud : GuiBase
                 CharInt.text = "Int:   " + UWCharacter.Instance.PlayerSkills.INT.ToString();
                 CharDex.text = "Dex:   " + UWCharacter.Instance.PlayerSkills.DEX.ToString();
                 CharClass.text = getClass(UWCharacter.Instance.CharClass);
-                UWCharacter.Instance.MaxVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
-                UWCharacter.Instance.CurVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
+              // UWCharacter.Instance.MaxVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
+                //UWCharacter.Instance.CurVIT = (UWCharacter.Instance.PlayerSkills.STR * 2);
+                UWCharacter.Instance.MaxVIT = 30 + ((UWCharacter.Instance.PlayerSkills.STR * 1) / 5);
+                UWCharacter.Instance.CurVIT = UWCharacter.Instance.MaxVIT;
+
                 CharVit.text = "Vit:   " + UWCharacter.Instance.MaxVIT.ToString();
                 //todo
                 chargenStage++;
@@ -476,7 +479,8 @@ public class MainMenuHud : GuiBase
                     //Start a new game
                     UWCharacter.Instance.EXP = 50;
                     UWCharacter.Instance.TrainingPoints = 1;
-                    UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
+                    //UWCharacter.Instance.PlayerMagic.MaxMana = UWCharacter.Instance.PlayerSkills.ManaSkill * 3;
+                    UWCharacter.Instance.PlayerMagic.MaxMana = (UWCharacter.Instance.PlayerSkills.INT * UWCharacter.Instance.PlayerSkills.ManaSkill) >> 3;
                     UWCharacter.Instance.PlayerMagic.CurMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     UWCharacter.Instance.PlayerMagic.TrueMaxMana = UWCharacter.Instance.PlayerMagic.MaxMana;
                     GameWorldController.instance.InitBGlobals(0);

@@ -521,7 +521,7 @@ public class object_base : UWEBase
     {
         //CheckReferences();
         UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()) + OwnershipString());
-        if ((link != 0) && (objInt().isQuant == false) && (enchantment == 0))
+        if ((link != 0) && (objInt().isQuantityBln == false) && (enchantment == 0))
         {
             if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.A_LOOK_TRIGGER)
             {
@@ -582,9 +582,9 @@ public class object_base : UWEBase
                 {//Hope this does'nt mess up everything!
                     if (
                         (
-                        (link != 0) && (objInt().isQuant == false) 
+                        (link != 0) && (objInt().isQuantityBln == false) 
                         ||
-                        (link == 1) && (objInt().isQuant)
+                        (link == 1) && (objInt().isQuantityBln)
                         )
                         && 
                         (enchantment == 0)
@@ -657,7 +657,7 @@ public class object_base : UWEBase
     /// If object has a pickup link then the object referenced is activated
     public virtual bool PickupEvent()
     {
-        if ((link != 0) && (objInt().isQuant == false) && (enchantment == 0))
+        if ((link != 0) && (objInt().isQuantityBln == false) && (enchantment == 0))
         {
             if (ObjectLoader.GetItemTypeAt(link) == ObjectInteraction.A_PICK_UP_TRIGGER)
             {
