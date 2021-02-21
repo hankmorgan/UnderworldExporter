@@ -1887,7 +1887,10 @@ public class ObjectLoader : DataLoader
     /// </summary>
     public static void RebuildObjectListUW(TileMap currTileMap, ObjectLoader currObjList)
     {
-        Debug.Log("RebuildObjectListUW() This needs to be rewritten");
+
+        Debug.Log("RebuildObjectListUW() This needs to be rewritten or made obsolete");
+
+        return;
         if (currObjList == null) { return; }
         //int[,] nexts = new int[64, 64]; //What was the last object found at this tile for next assignments.
 

@@ -149,7 +149,7 @@ public class Magic : UWEBase
 
             //2nd Circle
             case "Quas Corp"://Cause Fear
-            case "Wis Mani"://Detect Monster
+            case "Wis Mani"://Detect Monster in UW1 or Study Monster in UW2
             case "Uus Por"://Jump
             case "In Bet Mani"://Lesser Heal
             case "Rel Des Por"://Slow Fall
@@ -458,7 +458,7 @@ public class Magic : UWEBase
                     SetSpellCost(2);
                     if (_RES == GAME_UW2)
                     {
-                        Cast_DetectMonster(caster, SpellEffect.UW2_Spell_Effect_StudyMonster);
+                        Cast_StudyMonster(caster, ready, SpellEffect.UW2_Spell_Effect_StudyMonster);
                     }
                     else
                     {
@@ -1964,6 +1964,39 @@ public class Magic : UWEBase
         Skills.TrackMonsters(caster, (float)mind.BaseDamage, true);
     }
 
+
+    /// <summary>
+    /// Displays monster info.
+    /// </summary>
+    /// <param name="caster">Caster.</param>
+    /// <param name="EffectID">Effect ID of the spell</param>
+    void Cast_StudyMonster(GameObject caster, bool Ready, int EffectID)
+    {
+        if (Ready)
+        {//Ready the spell to be cast.
+            UWCharacter.Instance.PlayerMagic.ReadiedSpell = "Wis Mani";
+            UWHUD.instance.CursorIcon = GameWorldController.instance.grCursors.LoadImageAt(10);
+        }
+        else
+        {
+            if (WindowDetect.CursorInMainWindow)
+            {
+                UWCharacter.Instance.PlayerMagic.ReadiedSpell = "";
+                UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
+                Ray ray = getRay(caster);
+                RaycastHit hit = new RaycastHit();
+                float dropRange = UWCharacter.Instance.GetUseRange();
+                if (Physics.Raycast(ray, out hit, dropRange))
+                {//The spell has hit something
+                    NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+                    if (npc != null)
+                    {
+                        npc.Study();
+                    }
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// Casts name enchantment.

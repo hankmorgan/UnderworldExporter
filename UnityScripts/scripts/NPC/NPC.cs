@@ -9,8 +9,12 @@ using UnityEngine.AI;
 /// Controls AI status, animation, conversations and general properties.
 public class NPC : MobileObject
 {
+    public int spell0;
+    public int spell1;
+    public int spell2;
+    public int UNK2D;
     public string debugname;
-
+    public string studyoutput;
     public CharacterController CharController;
 
     /// <summary>
@@ -404,6 +408,11 @@ public class NPC : MobileObject
         npc_aud = new NPC_Audio(this, audMovement, audCombat,audVoice, objInt().aud);
         StartCoroutine(playfootsteps());
         StartCoroutine(playIdleBarks());
+        spell0 = GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0;
+        spell1 = GameWorldController.instance.objDat.critterStats[item_id - 64].Spell1;
+        spell2 = GameWorldController.instance.objDat.critterStats[item_id - 64].Spell2;
+        UNK2D = GameWorldController.instance.objDat.critterStats[item_id - 64].Unk2D;
+        studyoutput = Study(true);
     }
 
     void AI_INIT()
@@ -621,10 +630,6 @@ public class NPC : MobileObject
     /// </summary>
     public void SetupNPCInventory()
     {
-        if (objInt().ObjectIndex == 239)
-        {
-            Debug.Log("HERE");
-        }
         if (_RES != GAME_UW2)
         {
             if (item_id == 64)
@@ -1620,7 +1625,7 @@ public class NPC : MobileObject
         }
         if ((npc_whoami >= 1) && (npc_whoami < 255))
         {
-            if (npc_whoami == 231)//Tybal
+            if ((npc_whoami == 231)&& (_RES==GAME_UW1))//Tybal
             {
                 output = "You see Tybal";
             }
@@ -1638,9 +1643,123 @@ public class NPC : MobileObject
 
         }
         UWHUD.instance.MessageScroll.Add(output);
-        Debug.Log("My Target is " + gtarg.name + " because my npc_gtarg=" + npc_gtarg);
+        //Debug.Log("My Target is " + gtarg.name + " because my npc_gtarg=" + npc_gtarg);
         return true;
     }
+
+    /// <summary>
+    /// Implements the study spell for NPCS
+    /// </summary>
+    public string Study(bool debug=false)
+    {
+        //Get the power and undead status of the npc
+        ///creature=0
+        ///powerful creature=1
+        ///undead creature=2
+        ///powerful undead creature=3
+        //Bit A at offset 0xD of the mobile data is how powerful the npc is.
+        int PowerAndUndead = objInt().NPC_PowerFlag;
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Remains==0x80)
+        {//Undead have bones. THat is how UW identifies undead monsters!
+            PowerAndUndead |= 2;
+        }
+        string DebugOutput;
+       
+        string Output = StringController.instance.GetString(1, 309 + PowerAndUndead);
+        Output = Output + " a " + NPCMoodDesc() + " " + StringController.instance.GetObjectNounUW(objInt());
+        if (!debug)
+        {
+            UWHUD.instance.MessageScroll.Add(Output);
+        }
+        DebugOutput = Output;
+   
+        Output = StringController.instance.GetString(1, 313) + npc_hp + "\n";
+        if (!debug)
+        {
+            UWHUD.instance.MessageScroll.Add(Output);
+        }
+        DebugOutput = DebugOutput + Output;
+
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Poison>0)
+        {
+            Output = StringController.instance.GetString(1, 316);
+            if (!debug)
+            {
+                UWHUD.instance.MessageScroll.Add(Output);
+            }
+            DebugOutput = DebugOutput + Output;
+        }
+
+        //Spell 1
+        // critter data   
+        //(seg068_6576[0x2A<<2] && (0xF8))>>3
+        // if result > 4 (to check)
+        //add 256 to bits 0-5 from 0x2A 
+        //else 
+        // there are some special cases I need to track down! bx+0x9 = 0xFh
+        //Or with 0xC00 (stringblock)
+
+        //if (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0>=0)
+        //{
+        //   // int Magic1 = (GameWorldController.instance.magiclookup.LookupValues[GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0 << 2] & 0xF8) >> 3;
+        //    int val = GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0 & 0x3F;
+        //    if (val>=0)
+        //    {
+        //        Output = StringController.instance.GetString(6, 256 + val);
+        //        if (!debug)
+        //        {
+        //            UWHUD.instance.MessageScroll.Add(Output);
+        //        }
+        //        DebugOutput = DebugOutput + Output;
+        //    }
+
+        //}
+
+        Output = "";
+
+        //List what spells it can cast.
+        //None of these are implemeted yet to actually cast. 
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0 > 0)
+        {
+            Output = StringController.instance.GetString(6, 256 + (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell0 & 0x3F));
+        }
+
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell1 > 0)
+        {
+            if (Output.Length > 0)
+            {
+                Output = Output + " and ";
+            }
+            Output = Output + StringController.instance.GetString(6, 256 + (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell1 & 0x3F));
+
+        }
+
+        if (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell2 > 0)
+        {
+            if (Output.Length > 0)
+            {
+                Output = Output + " and ";
+            }
+            Output = Output + StringController.instance.GetString(6, 256 + (GameWorldController.instance.objDat.critterStats[item_id - 64].Spell2 & 0x3F));
+        }
+
+        if (Output.Length > 0)
+        {
+            Debug.Log(this.name + " spells " + Output);
+            Output = StringController.instance.GetString(1, 324) + Output;
+            if (!debug)
+            {               
+                UWHUD.instance.MessageScroll.Add(Output);
+            }
+            
+            DebugOutput = DebugOutput + Output;
+        }
+
+        ///TODO:List vulnerabilities
+
+        return DebugOutput;
+    }
+
 
 
     /// <summary>
@@ -1946,7 +2065,7 @@ public class NPC : MobileObject
             return;
         }
         float weaponRange = 1.5f;
-
+        Debug.Log(this.name + " is executing an attack on " + gtarg.name);
 
         Vector3 TargetingPoint;					
         TargetingPoint = gtarg.GetComponent<UWEBase>().GetImpactPoint();//Aims for the objects impact point	                                                                        //}
@@ -2662,5 +2781,6 @@ public class NPC : MobileObject
                 }              
             }
         }
-    }
+    } 
+
 }

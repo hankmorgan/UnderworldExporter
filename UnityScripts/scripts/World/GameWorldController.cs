@@ -271,6 +271,9 @@ public class GameWorldController : UWEBase
     /// </summary>
     public ObjectDatLoader objDat;
 
+
+    public MagicLookupTable magiclookup;
+
     /// <summary>
     /// The common object properties for uw
     /// </summary>
@@ -659,6 +662,7 @@ public class GameWorldController : UWEBase
                 objDat = new ObjectDatLoader();
                 commonObject = new CommonObjectDatLoader();
                 palLoader = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
+                magiclookup = new MagicLookupTable();
                 //Create palette cycles and store them in the palette array
                 PaletteLoader palCycler = new PaletteLoader("DATA" + sep + "PALS.DAT", -1);
 

@@ -96,7 +96,8 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
 13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
 1Ch 	12 	 ?? 	 ?? 	 ??
 28h 	2 	uint16 	Experience 	Experience provided when killed.
-2Ah 	5 	 ?? 	 ?? 	 ??
+2Ah 	5 	 ?? 	 ?? 	 ?? list of speels. Looks like 3 values?
+2Dh     Some sort of value (magic users related)
 2Fh 	1 	uint8 	 ?? 	Always 73.
 */
         public int Level;
@@ -121,6 +122,12 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
         public int[] Loot;  //A list of item ids that the Npc drops on death or uses in bartering
 
         public int Exp;
+
+        //Spells this critter can cast. -1 is no spell.
+        public sbyte Spell0;
+        public sbyte Spell1;
+        public sbyte Spell2;
+        public byte Unk2D;
     };
 
     public struct NutritionData
@@ -245,7 +252,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 critterStats[j].Passive = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xA, 8);//Passiveness
                 critterStats[j].Defence = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8);//Defence
                 critterStats[j].Speed = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xC, 8);//Speed
-                critterStats[j].Poison = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8);//Poison Damage
+                critterStats[j].Poison = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0xF, 8) & 0xF;//Poison Damage
                 critterStats[j].Category = (int)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x10, 8));//& 0x1F);//Category
                 critterStats[j].EquipDamage = (int)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x11, 8);//Equipment damage
 
@@ -293,6 +300,12 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                 {
                     critterStats[j].Loot[3] = (byte1 >> 4);
                 }
+
+                critterStats[j].Spell0 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a, 8);
+                critterStats[j].Spell1 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2b, 8);
+                critterStats[j].Spell2 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2c, 8);
+                critterStats[j].Unk2D = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2d, 8) >> 1);
+
 
                 add_ptr = add_ptr + 48;
                 j++;

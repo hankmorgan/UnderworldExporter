@@ -59,11 +59,16 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x1FF; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR, 16) & 0xFE00;
             val = val | (value & 0x1ff);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
+            if (origItemID != item_id)
+            {
+                Debug.Log("ItemID has changed");
+            }
         }
     }
 
@@ -79,14 +84,15 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x7; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xF1FF;
             val = val | ((value & 0x7) << 9);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (flags != value)
+            if (origItemID != item_id)
             {
-                Debug.Log("flags!=newValue");
+                Debug.Log("ItemID has changed");
             }
         }
     }
@@ -103,14 +109,15 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xEFFF;
             val = val | ((value & 0x1) << 12);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (enchantment != value)
+            if (origItemID != item_id)
             {
-                Debug.Log("enchantment!=newValue");
+                Debug.Log("ItemID has changed");
             }
         }
     }
@@ -125,14 +132,15 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xDFFF;
             val = val | ((value & 0x1) << 13);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (doordir != value)
+            if (origItemID != item_id)
             {
-                Debug.Log("doordir!=newValue");
+                Debug.Log("ItemID has changed");
             }
         }
     }
@@ -140,20 +148,21 @@ public class ObjectLoaderInfo : UWClass
     public short invis     //14
     {//(short)(ExtractBits(Vals[0], 14, 1));
         get
-        {
+        {           
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16);
             return (short)DataLoader.ExtractBits(val, 14, 1);
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xBFFF;
             val = val | ((value & 0x1) << 14);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (invis != value)
+            if (origItemID != item_id)
             {
-                Debug.Log("invis!=newValue");
+                Debug.Log("ItemID has changed");
             }
         }
     }
@@ -167,14 +176,15 @@ public class ObjectLoaderInfo : UWClass
         }
         set
         {
+            int origItemID = item_id;
             value &= 0x1; //Keep value in range;
             int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0x7FFF;
             val = val | ((value & 0x1) << 15);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
-            if (is_quant != value)
+            if (origItemID!=item_id)
             {
-                Debug.Log("is_quant!=newValue");
+                Debug.Log("ItemID has changed");
             }
         }
     }
@@ -574,6 +584,16 @@ public class ObjectLoaderInfo : UWClass
                 DataBuffer[PTR + 0xB] = (char)(val & 0xFF);
                 DataBuffer[PTR + 0xC] = (char)((val >> 8) & 0xFF);
             }
+        }
+    }
+
+    public short NPC_PowerFlag
+    {
+        get
+        {
+            if (IsStatic) { return 0; }
+            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR + 0xd, 16);
+            return (short)(DataLoader.ExtractBits(val, 0xA, 1));
         }
     }
 

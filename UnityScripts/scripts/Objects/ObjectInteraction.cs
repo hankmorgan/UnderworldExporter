@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class ObjectInteraction : UWEBase{
 
+    public static long LinkEventCtr = 0;
+
     public static bool PlaySoundEffects = true;
 
     public const int NPC_TYPE = 0;
@@ -402,6 +404,14 @@ public class ObjectInteraction : UWEBase{
     {
         get { return BaseObjectData.MobileUnk_0xD_12_1; }
         set { BaseObjectData.MobileUnk_0xD_12_1 = value; }
+    }
+
+    /// <summary>
+    /// Flag for wether or not the game considers the npc powerful. Used in Study monster.
+    /// </summary>
+    public short NPC_PowerFlag
+    {
+        get { return BaseObjectData.NPC_PowerFlag; }
     }
     public short MobileUnk_0xF_0_3F
     {
@@ -1859,6 +1869,11 @@ public class ObjectInteraction : UWEBase{
             Debug.Log(this.name + " has no objectloaderinfo");
             return;
         }
+       if (ObjectLoader.isTrap(this.BaseObjectData) || ObjectLoader.isTrigger(this.BaseObjectData))
+        {
+            //do not update position of traps and triggers.
+            return;
+        }
         //if (ObjectLoader.isStatic(objectloaderinfo))
         //{
         //    return;
@@ -1927,12 +1942,14 @@ public class ObjectInteraction : UWEBase{
             }
             else
             {
+                Debug.Log(LinkEventCtr++ + " UNLINK For " + this.ObjectIndex + " moving from tile (" + BaseObjectData.ObjectTileX + "," + BaseObjectData.ObjectTileY + ")");
                 //Object has moved between map tiles. Update it's next  and remove it from it's previous tile.
                 UnlinkItemFromTileMapChain(this, BaseObjectData.ObjectTileX, BaseObjectData.ObjectTileY);
             }
             
             if ((ObjectTileX<64) && (ObjectTileY<64) && (ObjectTileX>=0) && (ObjectTileY>=0))
             {//Object has moved on to the map. Link it to the list for that destination tile.
+                Debug.Log(LinkEventCtr++ + " LINK For " + this.ObjectIndex + " moving to tile  (" + ObjectTileX + ", " + ObjectTileY + ")");
                 LinkItemToTileMapChain(this, ObjectTileX, ObjectTileY);
             }
 
@@ -1949,7 +1966,7 @@ public class ObjectInteraction : UWEBase{
     {
         if (!TileMap.ValidTile(x,y))
         {
-            Debug.Log(oI.name + " is attempting to unlink from an offmap tile");
+            Debug.Log(LinkEventCtr++ + oI.name + " is attempting to unlink from an offmap tile");
             return;
         }
         TileMap tm = GameWorldController.CurrentTileMap();
@@ -1957,21 +1974,28 @@ public class ObjectInteraction : UWEBase{
         TileInfo ti = tm.Tiles[x, y];
 
         if (ti.indexObjectList == oI.BaseObjectData.index)
-        {
-            ti.indexObjectList = 0;
+        {//Object is at indexobjectlist. Just remove.
+            Debug.Log(LinkEventCtr++ + " UNLINK For "+ oI.ObjectIndex +  " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.next);
+            ti.indexObjectList = oI.BaseObjectData.next;
         }
         else
-        {
+        {//Find where the object is in the chain and remove it.
             int safetyCounter = 0;
             ObjectLoaderInfo currObj = objList.objInfo[ti.indexObjectList];
-            while ( (currObj.index != oI.ObjectIndex) & (currObj.next!=0) )
+            while ( (currObj.next != oI.ObjectIndex) && (currObj.next!=0))
             {//Loop through the chain until we find the object or we reach the end of the chain without finding it.
                 currObj = objList.objInfo[currObj.next];
                 safetyCounter++;
+                if (safetyCounter >= 1024)
+                {
+                    Debug.Log(LinkEventCtr++ + "Possible infinite loop for unlinking " + oI.name);
+                    break;
+                }
             }
+            Debug.Log(LinkEventCtr++ + " UNLINK For " + oI.ObjectIndex + " " + oI.BaseObjectData.next + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
             currObj.next = oI.BaseObjectData.next;//Link the item that is found with the item that is the next of the item being removed.
         }
-        oI.next = 0;
+        oI.next = 0;//clear next of the moving object.
     }
 
     /// <summary>
@@ -1987,17 +2011,29 @@ public class ObjectInteraction : UWEBase{
         TileInfo ti = tm.Tiles[x, y];
 
         if (ti.indexObjectList==0)
-        {//Object is at the head of the chain.
+        {//Object is to be at the head of the chain.
+            Debug.Log(LinkEventCtr++ + " LINK For " + oI.ObjectIndex + " tile " + x + "," + y + " indexobjectlist changes from " + ti.indexObjectList + " to " + oI.BaseObjectData.index);
             ti.indexObjectList = oI.BaseObjectData.index;           
         }
         else
         {
+            int safetyCounter = 0;
             ObjectLoaderInfo currObj = objList.objInfo[ti.indexObjectList];
             while (currObj.next!=0)
             {
                 currObj = objList.objInfo[currObj.next];
-            }
-            currObj.next = oI.BaseObjectData.index;
+                safetyCounter++;
+                if (safetyCounter >= 1024)
+                {
+                    Debug.Log(LinkEventCtr++ + "Possible infinite loop for linking " + oI.name);
+                    break;
+                }
+            }            
+            if (currObj.index != oI.BaseObjectData.index)
+            {//Make sure it is not the object linking to itself.
+                Debug.Log(LinkEventCtr++ + " LINK : For " + oI.ObjectIndex + " " + oI.BaseObjectData.index + " becomes the next for " + currObj.index + " prev next was " + currObj.next);
+                currObj.next = oI.BaseObjectData.index;
+            }                        
         }
         oI.next = 0;
     }

@@ -23,7 +23,7 @@ public class ButtonHandler : Decal
         BoxCollider bx = this.GetComponent<BoxCollider>();
         bx.size = new Vector3(0.3f, 0.3f, 0.1f);
         bx.center = new Vector3(0f, 0.16f, 0f);
-        flags = flags;
+
         if (isRotarySwitch() == false)
         {
             //set sprites ids
