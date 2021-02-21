@@ -86,7 +86,7 @@ Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
 Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
 09h 	1 	uint8 	GeneralType 	An index into the strings on page 8, offset 370. This string is the generic name for the creature, like "a creature" for "a goblin" or "a rat" for "a giant rat".
 0Ah 	1 	uint8 	Passiveness 	Relative passiveness. 255 will never take a swing at you, even if you kill them.
-0Bh 	1 	 ?? 	 ?? 	 ??
+0Bh 	1 	magic related to the critter having extra/specific spells.   ?? 	 ?? 	 ??
 0Ch 	1 	uint8 	MovementSpeed 	Speed of movement; 0 is immobile, maxes out at 12 for vampire bat.
 0Dh 	2 	 ?? 	 ?? 	 ??
 0Fh 	1 	uint8 	PoisonDamage 	Amount of poison damage this is capable of on attack.
@@ -124,10 +124,13 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
         public int Exp;
 
         //Spells this critter can cast. -1 is no spell.
-        public sbyte Spell0;
-        public sbyte Spell1;
-        public sbyte Spell2;
+        // public sbyte Spell0;
+        //public sbyte Spell1;
+        //public sbyte Spell2;
+        public sbyte[] Spells;
+
         public byte Unk2D;
+        public byte Unk2E;
     };
 
     public struct NutritionData
@@ -226,7 +229,7 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
             add_ptr = 0xd82;
             j = 0;
             for (int i = 0; i < 16; i++)
-            {//Light sources
+            {//Nutrition stats
                 nutritionStats[j].FoodValue = (int)(sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr, 8);
                 add_ptr = add_ptr + 1;
                 j++;
@@ -301,16 +304,54 @@ Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, W
                     critterStats[j].Loot[3] = (byte1 >> 4);
                 }
 
-                critterStats[j].Spell0 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a, 8);
-                critterStats[j].Spell1 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2b, 8);
-                critterStats[j].Spell2 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2c, 8);
-                critterStats[j].Unk2D = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2d, 8) >> 1);
+
+
+
+                // critterStats[j].Spell0 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a, 8);
+                // critterStats[j].Spell1 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2b, 8);
+                // critterStats[j].Spell2 = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2c, 8);
+                critterStats[j].Unk2D = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2d, 8));
+                critterStats[j].Unk2E = (byte)(DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2e, 8));
+
+
+
+                critterStats[j].Spells = new sbyte[8];
+                // for (int k =0; k<= critterStats[j].Spells.GetUpperBound(0); k++)
+                for (int k = 0; k < 3; k++)
+                {//First 3 spells are stored in the critter data.
+                    critterStats[j].Spells[k] = (sbyte)DataLoader.getValAtAddress(obj_dat, add_ptr + 0x2a + k, 8);
+                }
+                //if (_RES == GAME_UW2)
+                //{//The remainder are retrieved when needded
+                //    int ctr = 3;
+                //    if (critterStats[j].Race == 0x17)//Liche with extra magic
+                //    {
+                //        if (((DataLoader.getValAtAddress(obj_dat, add_ptr + 0xB, 8) >> 7) & 0x1) == 1)
+                //        {
+                //            critterStats[j].Spells[ctr++] = 0x39;
+                //        }
+                //        if(critterStats[j].Unk2E<=0x2D)
+                //        {
+                //            critterStats[j].Spells[ctr++] = 0x23;
+                //        }
+                //        if(ObjectInteraction.ScaleDamage(j+64,1,8)==0)
+                //        {
+                //            critterStats[j].Spells[ctr++] = 0x1C;
+                //        }
+                //        if (((critterStats[j].Unk2D>>1) & 0x7f)< 0x19)
+                //        {
+                //            if (critterStats[j].Level>=9)
+                //            {
+                //                critterStats[j].Spells[ctr++] = 0x3b;
+                //            }
+                //        }
+                //    }
+                //}
 
 
                 add_ptr = add_ptr + 48;
                 j++;
             }
-
         }
     }
 }

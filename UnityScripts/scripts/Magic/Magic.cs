@@ -1991,7 +1991,7 @@ public class Magic : UWEBase
                     NPC npc = hit.transform.gameObject.GetComponent<NPC>();
                     if (npc != null)
                     {
-                        npc.Study();
+                        npc.StudyMonster();
                     }
                 }
             }

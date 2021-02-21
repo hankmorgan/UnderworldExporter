@@ -3163,7 +3163,6 @@ public class ObjectInteraction : UWEBase{
     /// <param name="ChangeNext"></param>
     public static void CopyStaticProperties(ObjectInteraction Src, ObjectInteraction Dst, bool ChangeLink=true , bool ChangeNext = true)
     {
-
         Dst.item_id = Src.item_id;
         Dst.flags = Src.flags;
         Dst.enchantment = Src.enchantment;
@@ -3183,9 +3182,103 @@ public class ObjectInteraction : UWEBase{
         if (ChangeLink)
         {
             Dst.link = Src.link;
-        }
-       
+        }     
 
     }
+
+
+
+    /// <summary>
+    /// Checks what the object is resistant to.
+    /// </summary>
+    /// <param name="ObjItemID"></param>
+    /// <param name="MultiplierToReturn"></param>
+    /// <param name="VulnerabilityFlags"></param>
+    /// <returns></returns>
+    public static int ScaleDamage(int ObjItemID, int MultiplierToReturn, int VulnerabilityFlags)
+    {
+        //Based on disassembly
+        int ScaleValue = GameWorldController.instance.commonObject.properties[ObjItemID].scaleValue & 0xFF;
+
+        if ((VulnerabilityFlags & ScaleValue) != 0)
+        {
+            if ((VulnerabilityFlags & 0x3) != 0)
+            {
+                if (Random.Range(1, 3) < ScaleValue)
+                {
+                    return 0;
+                }
+                else
+                {
+                    goto label4d5;
+                }
+            }
+            else
+            {
+                goto label4dd;
+            }
+        }
+        else
+        {
+            goto label4e9;
+        }
+
+        label4d5:
+        VulnerabilityFlags = VulnerabilityFlags & 0xFC;
+
+        label4dd:
+        if ((ScaleValue & VulnerabilityFlags) == 0)
+        {
+            goto label4e9;
+        }
+        else
+        {
+            return 0;
+        }
+
+        label4e9:
+        if ((VulnerabilityFlags & 8) == 0)
+        {
+            goto label4f5;
+        }
+        else
+        {
+            if ((ScaleValue & 0x20) != 0)
+            {
+                goto label4f5;
+            }
+            else
+            {
+                goto label50e;
+            }
+        }
+        
+        label4f5:
+        if ((VulnerabilityFlags & 0x20) != 0)
+        {
+            if ((ScaleValue & 0x8) == 0)
+            {
+                if (ScaleValue != 0x28)
+                {
+                    goto label50e;
+                }
+            }
+        }
+        return MultiplierToReturn;
+
+
+        label50e:
+        //the 7f code
+        if (MultiplierToReturn < 0x7F)
+        {
+            MultiplierToReturn = MultiplierToReturn << 1;
+        }
+        else
+        {
+            MultiplierToReturn = -1;
+        }
+        return MultiplierToReturn;
+    }
+
 
 }

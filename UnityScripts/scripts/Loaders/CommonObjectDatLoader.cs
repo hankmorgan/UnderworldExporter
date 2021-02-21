@@ -88,7 +88,9 @@ public class CommonObjectDatLoader : Loader {
 
 								properties[i].CanBelongTo=((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 7) & 0x1;
 
-								properties[i].QualityType =(int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
+                                properties[i].scaleValue = (int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 8, 16);
+
+                                properties[i].QualityType =(int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
 
 								properties[i].LookAt= ((int)DataLoader.getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1;
 								addressPtr = addressPtr + 11;
