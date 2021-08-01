@@ -23,7 +23,7 @@ public class Loader: UWClass  {
         Path = Path.Replace("--", sep.ToString());
         if (!File.Exists(Path))
         {
-            UWHUD.instance.ErrorText.text = "File not found " + Path + "\nCheck your paths in config.ini and ensure game files have been extracted. See readme.txt";
+           // UWHUD.instance.ErrorText.text = "File not found " + Path + "\nCheck your paths in config.ini and ensure game files have been extracted. See readme.txt";
             Debug.Log("DataLoader.ReadStreamFile : File not found : " + Path);
             buffer = null;
             return false;

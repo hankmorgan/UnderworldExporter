@@ -61,7 +61,7 @@ public class ObjectLoaderInfo : UWClass
         {
             int origItemID = item_id;
             value &= 0x1FF; //Keep value in range;
-            int val = (int)DataLoader.getValAtAddress(map.lev_ark_block.Data, PTR, 16) & 0xFE00;
+            int val = (int)DataLoader.getValAtAddress(DataBuffer, PTR, 16) & 0xFE00;
             val = val | (value & 0x1ff);
             DataBuffer[PTR] = (char)(val & 0xFF);
             DataBuffer[PTR + 1] = (char)((val >> 8) & 0xFF);
