@@ -1,3 +1,10 @@
+Please note that due to work and education commitments I will be unlikely to resume work on UW until Summer 2022.
+
+thank you for your patience.
+
+
+
+
 UnderworldExporter
 ==================
  
@@ -5,7 +12,6 @@ Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity.
 
 Release 1.09
 
-*On Hiatus until Winter 2019
 
 Contents
 	0 - Notes on this release
