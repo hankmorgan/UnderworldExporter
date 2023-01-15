@@ -1,8 +1,10 @@
-Please note that due to work and education commitments I will be unlikely to resume work on UW until Summer 2022.
 
-thank you for your patience.
+Jan 2023 Status Update
+-After an extended break I have resumed work on Underworld. Main focus is on reverse engineering of the UW2 executable (https://github.com/hankmorgan/UWReverseEngineering) so don't expect anything playable for the forseeable until I have completed work there. Good progress has been made on reverse engineering
 
+If you want something vaguely playable the most recent playable material is the repo for the Unity Scene files (https://github.com/hankmorgan/Underworld-Exporter-Scene). Require the Unity Dev environment to play.
 
+Thanks for your patience!
 
 
 UnderworldExporter
