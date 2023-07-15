@@ -1,18 +1,27 @@
+## July 2023 Status Uodate
+* Current project focus has been on reverse engineering and additions to the editor . I'm hoping to swtich to feature implementation soon but time is limited. Bug fixes may be infrequent as I just want to get features added to UW2 before focusing on polish.
 
-Jan 2023 Status Update
--After an extended break I have resumed work on Underworld. Main focus is on reverse engineering of the UW2 executable (https://github.com/hankmorgan/UWReverseEngineering) so don't expect anything playable for the forseeable until I have completed work there. Good progress has been made on reverse engineering
+* https://github.com/hankmorgan/Underworld-Editor
+* https://github.com/hankmorgan/UWReverseEngineering
 
-If you want something vaguely playable the most recent playable material is the repo for the Unity Scene files (https://github.com/hankmorgan/Underworld-Exporter-Scene). Require the Unity Dev environment to play.
+> Please note I think the best way to play UW is still the Gog.com release of the game in dosbox. If you are looking to get into UW for the first time then start there.
+
+
+## Jan 2023 Status Update
+* After an extended break I have resumed work on Underworld. Main focus is on reverse engineering of the UW2 executable (https://github.com/hankmorgan/UWReverseEngineering) so don't expect anything playable for the forseeable until I have completed work there.
+* Good progress has been made on reverse engineering
+
+* If you want something vaguely playable the most recent playable material is the repo for the Unity Scene files (https://github.com/hankmorgan/Underworld-Exporter-Scene). Require the Unity Dev environment to play.
 
 Thanks for your patience!
 
 
-UnderworldExporter
+# UnderworldExporter
 ==================
  
 Welcome to Underworld Exporter (UWE) -> Ultima Underworld 1 & 2 in Unity. 
 
-Release 1.09
+> Release 1.09
 
 
 Contents
