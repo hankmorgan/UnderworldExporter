@@ -1,3 +1,7 @@
+## Underworld Godot Repository
+
+Please goto [https://github.com/hankmorgan/UnderworldGodot](https://github.com/hankmorgan/UnderworldGodot) for the godot version.
+
 ## January 2024 Status Update
 * Primary focus areas are on Reverse Engineering of UW2 and I have moved code development away from Unity to Godot to ensure the engine and software is more fully open source as well as avoiding risks due to Unity licencing changes. The repository of the Godot version will be made public this Spring. Obviously this version is currently less functiontal but will have benefited for the work on reverse engineering and hopefully be a better vanilla+ experience for Underworld.
 
